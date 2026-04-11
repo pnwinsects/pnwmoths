@@ -1,0 +1,140 @@
+# Requirements: PNW Moths Static Site
+
+**Defined:** 2026-04-11
+**Core Value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
+
+## v1 Requirements
+
+### Data Pipeline
+
+- [ ] **DATA-01**: Species list is stored in a CSV file with fields: genus, species, common_name, noc_id, authority
+- [ ] **DATA-02**: Occurrence records are stored in a CSV file with fields: species_id, record_type, latitude, longitude, state, county, locality, elevation, year, month, day, collector, collection, notes (~100k+ rows, ~15MB uncompressed, ~2–3MB gzipped)
+- [ ] **DATA-03**: A pre-build script loads occurrence CSV into DuckDB for build-time querying and exports per-species Parquet files
+- [ ] **DATA-04**: Eleventy data files query DuckDB at build time (species lists, counts, metadata); per-species occurrence data is NOT embedded inline
+- [ ] **DATA-05**: Build fails with a clear error if CSV data is malformed (encoding issues, missing required fields, invalid values)
+- [ ] **DATA-06**: Per-species occurrence Parquet files are generated at build time and deployed alongside HTML pages; loaded asynchronously client-side via hyparquet
+
+### Species Pages
+
+- [ ] **SPEC-01**: Eleventy generates one HTML page per species (~700 pages) from a single template using pagination
+- [ ] **SPEC-02**: Each species page includes: scientific name, common name, NOC ID, authority, and a prose description from a per-species Markdown file (if present)
+- [ ] **SPEC-03**: Each species page displays photos with photographer credit; image files are tracked in the repository via Git LFS
+- [ ] **SPEC-04**: Each species page shows a list of similar species with links
+- [ ] **SPEC-05**: Species pages use lowercase, hyphenated URL slugs (e.g. `/species/acronicta-americana/`)
+
+### Browse & Navigation
+
+- [ ] **BRWS-01**: A browse page lists all species grouped by family, then genus
+- [ ] **BRWS-02**: Each genus has a listing page showing all its species
+- [ ] **BRWS-03**: Site-wide navigation links to browse, search, glossary, and home
+
+### Interactive Features (Client-side JS via Vite + Lit)
+
+- [ ] **INTV-01**: Each species factsheet renders a Leaflet map of occurrence records loaded asynchronously from the per-species Parquet file via hyparquet
+- [ ] **INTV-02**: Each species factsheet renders a phenology chart (bar chart of records by month) from the same Parquet data
+- [ ] **INTV-03**: Occurrence data on the factsheet can be filtered by state, record type, and year range
+- [ ] **INTV-04**: Species photos display in a slideshow/carousel; clicking opens a larger view
+- [ ] **INTV-05**: All interactive features degrade gracefully when JS is disabled (data remains visible as text)
+- [ ] **INTV-06**: Client-side components (search results, map, chart, slideshow) are implemented as Lit web components
+
+### Search
+
+- [ ] **SRCH-01**: Pagefind indexes all species pages after build
+- [ ] **SRCH-02**: Search returns results for both scientific names and common names
+- [ ] **SRCH-03**: Occurrence data is excluded from the Pagefind index (loaded client-side from Parquet, never in page HTML)
+- [ ] **SRCH-04**: A search page renders results client-side with no server required
+
+### Glossary
+
+- [ ] **GLOS-01**: Glossary terms are stored in a CSV or Markdown file and rendered as a single alphabetized page
+
+### Validation
+
+- [ ] **VALD-01**: A post-build link checker (lychee or similar) runs as part of the build and fails on broken internal links
+- [ ] **VALD-02**: A page weight check script warns when any page exceeds a configured threshold (e.g. 500KB HTML)
+- [ ] **VALD-03**: Data validation script checks for: species referenced in records that don't exist in the species list, invalid state/record_type values, and coordinates outside plausible PNW bounds
+
+### Maintainability
+
+- [ ] **MAINT-01**: A `CONTRIBUTING.md` or `_instructions/` directory contains plain-English LLM instructions for: adding a species, adding occurrence records, editing a species description, adding a photo reference
+- [ ] **MAINT-02**: A GitHub Actions workflow builds and deploys the site on push to main
+- [ ] **MAINT-03**: The build runs in under 5 minutes on a standard GitHub Actions runner
+- [ ] **MAINT-04**: A Dockerfile defines the complete build and maintenance environment; running the build locally produces byte-for-byte identical output to the CI workflow
+
+## v2 Requirements
+
+### Photographic Plates
+
+- **PLAT-01**: A photographic plates page displays multi-species image grids
+- **PLAT-02**: Each species page links to its plate
+
+### Advanced Filtering
+
+- **FILT-01**: Occurrence records on the factsheet can be filtered by collector, collection, elevation range, and date range
+- **FILT-02**: Map and phenology chart update in sync with active filters
+
+### Glossary Integration
+
+- **GLOS-02**: Glossary terms are auto-highlighted in species page prose with tooltip definitions
+
+### SEO / URL Continuity
+
+- **SEO-01**: Old Django URLs redirect to new static URLs (requires Netlify/Cloudflare, not GitHub Pages)
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Admin / editing UI | Editing done in flat files; UX to validate later |
+| Zoomify deep-zoom viewer | Complex legacy feature; replaced by lightbox in v1 |
+| Lucid key integration | External tool, not part of static site pipeline |
+| User submissions / community ID | iNaturalist handles this; adds server infrastructure |
+| Server-side search | No server; Pagefind provides static equivalent |
+| Real-time data | All data is build-time; live observation feeds out of scope |
+| Multi-site support | Original app supported multiple insect sites; this PoC is pnwmoths only |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DATA-04 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Pending |
+| DATA-06 | Phase 1 | Pending |
+| SPEC-01 | Phase 2 | Pending |
+| SPEC-02 | Phase 2 | Pending |
+| SPEC-03 | Phase 2 | Pending |
+| SPEC-04 | Phase 2 | Pending |
+| SPEC-05 | Phase 2 | Pending |
+| BRWS-01 | Phase 2 | Pending |
+| BRWS-02 | Phase 2 | Pending |
+| BRWS-03 | Phase 2 | Pending |
+| INTV-01 | Phase 3 | Pending |
+| INTV-02 | Phase 3 | Pending |
+| INTV-03 | Phase 3 | Pending |
+| INTV-04 | Phase 3 | Pending |
+| INTV-05 | Phase 3 | Pending |
+| INTV-06 | Phase 3 | Pending |
+| SRCH-01 | Phase 4 | Pending |
+| SRCH-02 | Phase 4 | Pending |
+| SRCH-03 | Phase 4 | Pending |
+| SRCH-04 | Phase 4 | Pending |
+| GLOS-01 | Phase 4 | Pending |
+| VALD-01 | Phase 4 | Pending |
+| VALD-02 | Phase 4 | Pending |
+| VALD-03 | Phase 4 | Pending |
+| MAINT-01 | Phase 5 | Pending |
+| MAINT-02 | Phase 5 | Pending |
+| MAINT-03 | Phase 5 | Pending |
+| MAINT-04 | Phase 5 | Pending |
+
+**Coverage:**
+- v1 requirements: 32 total
+- Mapped to phases: 30
+- Unmapped: 0 ✓
+
+---
+*Requirements defined: 2026-04-11*
+*Last updated: 2026-04-11 after initial research synthesis*
