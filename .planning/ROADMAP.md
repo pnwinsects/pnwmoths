@@ -24,7 +24,10 @@
   2. Per-species Parquet files exist in the build output alongside the HTML pages and contain the correct occurrence records for each species.
   3. Introducing a malformed row in `records.csv` (bad encoding, missing required field, out-of-bounds coordinate) causes the build to fail with a specific, actionable error message rather than silently producing wrong output.
   4. The complete build — CSV import, Eleventy render, Parquet export — completes without manual intervention from a clean working directory.
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Project scaffold, CSV schemas, DuckDB import/validation, Parquet export
+- [ ] 01-02-PLAN.md — Eleventy config, species data file, pagination template, full build wiring
 **UI hint**: no
 
 ### Phase 2: Species Factsheet (Static)
@@ -88,7 +91,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Pipeline Foundation | 0/? | Not started | - |
+| 1. Data Pipeline Foundation | 0/2 | Planned | - |
 | 2. Species Factsheet (Static) | 0/? | Not started | - |
 | 3. Client-side Interactivity | 0/? | Not started | - |
 | 4. Search, Glossary, and Validation | 0/? | Not started | - |
