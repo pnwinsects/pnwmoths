@@ -103,11 +103,11 @@
 | DATA-04 | Phase 1 | Pending |
 | DATA-05 | Phase 1 | Pending |
 | DATA-06 | Phase 1 | Pending |
-| SPEC-01 | Phase 2 | Pending |
+| SPEC-01 | Phase 1 | Pending |
+| SPEC-05 | Phase 1 | Pending |
 | SPEC-02 | Phase 2 | Pending |
 | SPEC-03 | Phase 2 | Pending |
 | SPEC-04 | Phase 2 | Pending |
-| SPEC-05 | Phase 2 | Pending |
 | BRWS-01 | Phase 2 | Pending |
 | BRWS-02 | Phase 2 | Pending |
 | BRWS-03 | Phase 2 | Pending |
@@ -132,9 +132,9 @@
 
 **Coverage:**
 - v1 requirements: 32 total
-- Mapped to phases: 30
+- Mapped to phases: 32
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-11*
-*Last updated: 2026-04-11 after initial research synthesis*
+*Last updated: 2026-04-11 after roadmap creation*
