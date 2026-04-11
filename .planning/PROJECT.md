@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV, SQLite, Markdown), and Vite for client-side JavaScript. The goal is to validate whether a static approach can be cheap to host, safe to run, and maintainable by non-technical contributors without a server or database.
+A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The goal is to validate whether a static approach can be cheap to host, safe to run, and maintainable by non-technical contributors without a server or database.
 
 ## Core Value
 
@@ -28,7 +28,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 - Faithful visual reproduction of the original site — this is a tech PoC, not a redesign
 - Admin UI for editing data — editing is done in flat files; UX to be validated later
-- Image assets — too large for GitHub; images are referenced by path but not included
+- Image assets in git history — tracked via Git LFS instead
 - Zoomify deep-zoom viewer — complex legacy feature; stub or replace with lightbox
 - Lucid key — external tool integration, not core to static site validation
 - CMS-managed rich text (django-cms placeholders) — replace with Markdown files per species
@@ -52,7 +52,7 @@ The existing site (pnwmoths.biol.wwu.edu) is a Django + django-cms application t
 ## Constraints
 
 - **Hosting**: Must deploy as pure static files — no server, no database at runtime
-- **Images**: Image assets excluded from repo (too large for GitHub); pipeline must handle missing images gracefully
+- **Images**: Image assets tracked in repo via Git LFS
 - **Maintainability**: Non-technical contributors must be able to edit species data and add records without running a build locally (or with minimal tooling)
 - **Tech stack**: Eleventy (SSG), Vite (JS bundling), flat files for data storage — start here, change only with reason
 
@@ -62,7 +62,12 @@ The existing site (pnwmoths.biol.wwu.edu) is a Django + django-cms application t
 |----------|-----------|---------|
 | Eleventy over Hugo/Astro | Familiar to user, JS ecosystem, flexible data pipelines | — Pending |
 | Flat files over headless CMS | Cheap, Git-native, no external services, LLM-editable | — Pending |
-| Static search (Pagefind or similar) | No server required; runs at build time | — Pending |
+| Pagefind for static search | No server required; runs at build time; handles 700+ pages well | — Pending |
+| DuckDB over SQLite for build-time queries | 100k+ occurrence records; better analytical query performance | — Pending |
+| Parquet + hyparquet for client-side occurrence data | Async loading avoids large inline JSON payloads; columnar compression efficient for this data shape | — Pending |
+| Lit for client-side components | Lightweight web components standard; lower churn than framework alternatives | — Pending |
+| Git LFS for image assets | Keeps images in repo (no missing-file problem) without bloating git history | — Pending |
+| Docker for build environment | Reproducible builds locally and in CI; no "works on my machine" for maintainers | — Pending |
 
 ## Evolution
 
