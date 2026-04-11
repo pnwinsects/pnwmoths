@@ -1,0 +1,11 @@
+species_id,record_type,latitude,longitude,state,county,locality,elevation,year,month,day,collector,collection,notes
+1,specimen,47.6062,-122.3321,WA,King,Seattle,56,2019,6,15,J. Smith,UW Burke Museum,
+1,photograph,45.5152,-122.6784,OR,Multnomah,Portland,15,2020,7,22,A. Jones,iNaturalist,
+2,specimen,46.8523,-121.7603,WA,Pierce,Mt Rainier NP,1650,2018,8,3,B. Wilson,WSU Collection,alpine meadow
+2,literature,48.7519,-122.4787,WA,Whatcom,Bellingham,30,2015,5,10,C. Davis,Published Record,ref: Jones 2015
+3,specimen,42.3265,-122.8756,OR,Jackson,Ashland,580,2021,9,1,D. Lee,OSU Collection,
+3,photograph,47.0379,-122.9007,WA,Thurston,Olympia,45,2020,6,18,E. Park,iNaturalist,at light
+4,specimen,46.0571,-118.3305,WA,Walla Walla,Walla Walla,280,2017,7,30,F. Chen,Private Collection,reared from tomato
+4,field notes,44.0521,-123.0868,OR,Lane,Eugene,130,2022,8,15,G. Brown,Field Notes,observed at dusk
+5,specimen,48.4637,-123.3117,WA,San Juan,Friday Harbor,10,2019,5,25,H. Kim,UW Burke Museum,
+5,photograph,45.3573,-121.6959,OR,Hood River,Mt Hood,1200,2023,7,8,I. Patel,iNaturalist,nectaring on phlox

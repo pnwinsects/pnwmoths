@@ -1,0 +1,19 @@
+{
+  "name": "pnwmoths",
+  "version": "1.0.0",
+  "description": "PNW Moths static site — proof-of-concept reconstruction as a fully static site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:data": "node scripts/build-data.js",
+    "test": "node --test scripts/build-data.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "@duckdb/node-api": "^1.5.1-r.2",
+    "csv-parse": "^6.2.1"
+  }
+}
