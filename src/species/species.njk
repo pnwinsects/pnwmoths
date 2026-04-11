@@ -1,0 +1,22 @@
+---
+pagination:
+  data: species
+  size: 1
+  alias: sp
+permalink: "species/{{ sp.slug }}/index.html"
+eleventyComputed:
+  title: "{{ sp.genus }} {{ sp.species }}"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ sp.genus }} {{ sp.species }} - PNW Moths</title>
+</head>
+<body>
+  <h1><em>{{ sp.genus }} {{ sp.species }}</em></h1>
+  <p>Common name: {{ sp.common_name }}</p>
+  <p>NOC: {{ sp.noc_id }}</p>
+  <p>Authority: {{ sp.authority }}</p>
+</body>
+</html>
