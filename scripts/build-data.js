@@ -194,7 +194,7 @@ export async function main() {
     await conn.run(`
       COPY (SELECT * FROM records WHERE species_id = ${sp.id})
       TO '${outDir}/records.parquet'
-      (FORMAT parquet, COMPRESSION zstd)
+      (FORMAT parquet, COMPRESSION snappy)
     `);
     count++;
   }
