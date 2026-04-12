@@ -1,0 +1,30 @@
+name: Install lychee
+description: Cache and install the lychee link checker binary with checksum verification
+
+inputs:
+  version:
+    description: lychee version to install (without leading v)
+    required: true
+    default: '0.23.0'
+
+runs:
+  using: composite
+  steps:
+    - name: Cache lychee binary
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/bin/lychee
+        key: lychee-${{ inputs.version }}-linux-amd64
+
+    - name: Install lychee if not cached
+      shell: bash
+      run: |
+        if [ ! -f ~/.local/bin/lychee ]; then
+          mkdir -p ~/.local/bin
+          wget -qO /tmp/lychee.tar.gz \
+            "https://github.com/lycheeverse/lychee/releases/download/lychee-v${{ inputs.version }}/lychee-x86_64-unknown-linux-gnu.tar.gz"
+          echo "1fcb6ccf10d04c22b8c5873c5b9cb7be32ee7423e12169d6f1a79a6f1962ef81  /tmp/lychee.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/lychee.tar.gz -C ~/.local/bin
+          chmod +x ~/.local/bin/lychee
+        fi
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
