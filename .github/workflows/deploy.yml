@@ -22,21 +22,9 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - run: npm ci
-      - name: Cache lychee binary
-        uses: actions/cache@v4
+      - uses: ./.github/actions/install-lychee
         with:
-          path: ~/.local/bin/lychee
-          key: lychee-0.23.0-linux-amd64
-      - name: Install lychee if not cached
-        run: |
-          if [ ! -f ~/.local/bin/lychee ]; then
-            mkdir -p ~/.local/bin
-            wget -qO /tmp/lychee.tar.gz \
-              https://github.com/lycheeverse/lychee/releases/download/lychee-v0.23.0/lychee-x86_64-unknown-linux-gnu.tar.gz
-            tar -xzf /tmp/lychee.tar.gz -C ~/.local/bin
-            chmod +x ~/.local/bin/lychee
-          fi
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          version: '0.23.0'
       - name: Cache lychee URL results
         uses: actions/cache@v4
         with:
