@@ -22,22 +22,44 @@ eleventyComputed:
   {% renderFile prosePath %}
 {% endif %}
 
+{# Interactive occurrence data — requires JavaScript (see DATA-04 + INTV-05 reconciliation).
+   Per DATA-04: occurrence rows are NOT embedded in HTML at build time.
+   Per INTV-05: graceful degradation required.
+   Resolution: noscript block explains occurrence data requires JS.
+   Static photos, taxonomy, and prose remain visible without JS. #}
+
+<section>
+  <h2>Occurrence Data</h2>
+  <pnwm-filter-bar slug="{{ sp.slug }}"></pnwm-filter-bar>
+  <pnwm-occurrence-map slug="{{ sp.slug }}"></pnwm-occurrence-map>
+  <pnwm-phenology-chart slug="{{ sp.slug }}"></pnwm-phenology-chart>
+  <noscript>
+    <p>Enable JavaScript to view the interactive map and filters. Occurrence data is available in the table below.</p>
+  </noscript>
+</section>
+
 {% set spImages = images[sp.id] %}
-{% if spImages and spImages.length > 0 %}
-  {% for img in spImages %}
-    <figure>
-      <img src="/images/{{ sp.slug }}/{{ img.filename }}"
-           alt="{{ sp.genus }} {{ sp.species }}">
-      <figcaption>{{ img.photographer }}</figcaption>
-    </figure>
-  {% endfor %}
-{% else %}
-  <figure>
-    <div aria-label="No images available for this species">
-      No photos on file
-    </div>
-  </figure>
-{% endif %}
+<section>
+  <h2>Photos</h2>
+  <pnwm-image-slideshow slug="{{ sp.slug }}">
+    {% if spImages and spImages.length > 0 %}
+      {% for img in spImages %}
+        <figure>
+          <img src="/images/{{ sp.slug }}/{{ img.filename }}"
+               alt="{{ sp.genus }} {{ sp.species }}"
+               data-photographer="{{ img.photographer }}">
+          <figcaption>{{ img.photographer }}</figcaption>
+        </figure>
+      {% endfor %}
+    {% else %}
+      <figure>
+        <div aria-label="No images available for this species">
+          No photos on file for this species.
+        </div>
+      </figure>
+    {% endif %}
+  </pnwm-image-slideshow>
+</section>
 
 {% if sp.similar_slugs and sp.similar_slugs.length > 0 %}
   <section>
@@ -49,3 +71,5 @@ eleventyComputed:
     </ul>
   </section>
 {% endif %}
+
+{# Filter wiring added in Plan 02 #}
