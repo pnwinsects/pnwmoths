@@ -1,7 +1,27 @@
 ---
 layout: base.njk
-title: Search — PNW Moths
+title: "Search -- PNW Moths"
 permalink: /search/index.html
 ---
 <h1>Search</h1>
-<p>Search coming soon. <a href="/browse/">Browse all species</a> in the meantime.</p>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<style>
+  #search {
+    --pagefind-ui-primary: var(--pico-primary);
+    --pagefind-ui-text: var(--pico-color);
+    --pagefind-ui-background: var(--pico-background-color);
+    --pagefind-ui-border: var(--pico-muted-border-color);
+    --pagefind-ui-tag: var(--pico-card-background-color);
+    --pagefind-ui-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+</style>
+<div id="search"></div>
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    new PagefindUI({ element: '#search', showSubResults: false });
+  });
+</script>
+<noscript data-pagefind-ignore>
+  <p>Search requires JavaScript. <a href="/browse/">Browse all species</a> instead.</p>
+</noscript>
