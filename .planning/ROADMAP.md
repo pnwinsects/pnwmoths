@@ -61,8 +61,8 @@ Plans:
   6. Map, chart, slideshow, and search results components are all implemented as Lit custom elements.
 **Plans**: 2 plans
 Plans:
-- [x] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
-- [x] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
+- [ ] 03-01-PLAN.md — Vite + Lit pipeline, core components (parquet-cache, map, chart, filter-bar), template integration
+- [ ] 03-02-PLAN.md — Image slideshow, filter wiring, unit tests, build verification, visual smoke test
 **UI hint**: yes
 
 ### Phase 4: Search, Glossary, and Validation
@@ -77,10 +77,7 @@ Plans:
   4. A post-build link check fails the build when any internal link points to a non-existent page.
   5. The build emits a warning (or failure) when any HTML page exceeds the configured page weight threshold.
   6. The data validator catches species IDs in records that have no matching species, invalid state/record_type values, and coordinates outside plausible PNW bounds.
-**Plans**: 2 plans
-Plans:
-- [x] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
-- [x] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
+**Plans**: [to be planned]
 **UI hint**: yes
 
 ### Phase 5: Maintainability
@@ -93,19 +90,16 @@ Plans:
   2. A push to `main` triggers a GitHub Actions workflow that builds and deploys the site without manual intervention.
   3. The full build — data import, Eleventy, Pagefind, validation — completes in under 5 minutes on a standard GitHub Actions runner.
   4. Running `docker build` followed by the build command produces output identical to the CI workflow; a maintainer can reproduce the production build locally using Docker without installing Node.js or DuckDB manually.
-**Plans**: 2 plans
-Plans:
-- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
-- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
+**Plans**: [to be planned]
 **UI hint**: no
 
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Pipeline Foundation | 0/2 | Planned | - |
-| 2. Species Factsheet (Static) | 0/? | Not started | - |
-| 3. Client-side Interactivity | 0/? | Not started | - |
+| 1. Data Pipeline Foundation | 2/2 | Complete | - |
+| 2. Species Factsheet (Static) | 2/2 | Complete | - |
+| 3. Client-side Interactivity | 0/2 | Planned | - |
 | 4. Search, Glossary, and Validation | 0/? | Not started | - |
 | 5. Maintainability | 0/? | Not started | - |
 
