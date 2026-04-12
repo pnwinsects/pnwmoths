@@ -41,7 +41,10 @@ Plans:
   3. A species page lists similar species as working links to their respective pages.
   4. A browse page lists all species grouped by family then genus, and each genus has its own listing page.
   5. Every page has site-wide navigation linking to browse, search, glossary, and home.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: yes
 
 ### Phase 3: Client-side Interactivity
@@ -56,7 +59,10 @@ Plans:
   4. Species photos cycle in a slideshow; clicking a photo opens a larger view.
   5. With JavaScript disabled, occurrence data remains visible as a plain HTML table and photos are visible as static images — no content is exclusively behind JS.
   6. Map, chart, slideshow, and search results components are all implemented as Lit custom elements.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: yes
 
 ### Phase 4: Search, Glossary, and Validation
@@ -71,7 +77,10 @@ Plans:
   4. A post-build link check fails the build when any internal link points to a non-existent page.
   5. The build emits a warning (or failure) when any HTML page exceeds the configured page weight threshold.
   6. The data validator catches species IDs in records that have no matching species, invalid state/record_type values, and coordinates outside plausible PNW bounds.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: yes
 
 ### Phase 5: Maintainability
@@ -84,7 +93,10 @@ Plans:
   2. A push to `main` triggers a GitHub Actions workflow that builds and deploys the site without manual intervention.
   3. The full build — data import, Eleventy, Pagefind, validation — completes in under 5 minutes on a standard GitHub Actions runner.
   4. Running `docker build` followed by the build command produces output identical to the CI workflow; a maintainer can reproduce the production build locally using Docker without installing Node.js or DuckDB manually.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: no
 
 ## Progress
