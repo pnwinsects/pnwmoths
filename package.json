@@ -7,7 +7,8 @@
   "scripts": {
     "build:data": "node scripts/build-data.js",
     "build:eleventy": "npx @11ty/eleventy",
-    "build": "npm run build:data && npm run build:eleventy",
+    "build:copy-parquet": "node scripts/copy-parquet.js",
+    "build": "npm run build:data && npm run build:eleventy && npm run build:copy-parquet",
     "test": "node --test scripts/build-data.test.js src/components/*.test.js"
   },
   "keywords": [],
