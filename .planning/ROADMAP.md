@@ -26,8 +26,8 @@
   4. The complete build — CSV import, Eleventy render, Parquet export — completes without manual intervention from a clean working directory.
 **Plans:** 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffold, CSV schemas, DuckDB import/validation, Parquet export
-- [ ] 01-02-PLAN.md — Eleventy config, species data file, pagination template, full build wiring
+- [x] 01-01-PLAN.md — Project scaffold, CSV schemas, DuckDB import/validation, Parquet export
+- [x] 01-02-PLAN.md — Eleventy config, species data file, pagination template, full build wiring
 **UI hint**: no
 
 ### Phase 2: Species Factsheet (Static)
