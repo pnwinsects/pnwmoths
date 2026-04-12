@@ -70,7 +70,13 @@ function validateSlugComponent(value, fieldName) {
  */
 export async function main() {
   // --- Pre-flight CSV validation ---
-  validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority']);
+  validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species']);
+  const imageRows = validateCsv('data/images.csv', ['species_id', 'filename', 'photographer', 'weight', 'license']);
+  for (const row of imageRows) {
+    if (!/^[a-zA-Z0-9._-]+$/.test(row.filename)) {
+      throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
+    }
+  }
   validateCsv('data/records.csv', [
     'species_id', 'record_type', 'latitude', 'longitude', 'state', 'county',
     'locality', 'elevation', 'year', 'month', 'day', 'collector', 'collection', 'notes'
@@ -90,7 +96,9 @@ export async function main() {
         'species': 'VARCHAR',
         'common_name': 'VARCHAR',
         'noc_id': 'VARCHAR',
-        'authority': 'VARCHAR'
+        'authority': 'VARCHAR',
+        'family': 'VARCHAR',
+        'similar_species': 'VARCHAR'
       }
     )
   `);

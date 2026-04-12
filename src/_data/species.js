@@ -14,7 +14,9 @@ export default async function () {
         'species': 'VARCHAR',
         'common_name': 'VARCHAR',
         'noc_id': 'VARCHAR',
-        'authority': 'VARCHAR'
+        'authority': 'VARCHAR',
+        'family': 'VARCHAR',
+        'similar_species': 'VARCHAR'
       }
     )
   `);
@@ -27,11 +29,21 @@ export default async function () {
       common_name,
       noc_id,
       authority,
+      family,
+      CASE WHEN similar_species IS NULL OR similar_species = ''
+           THEN []
+           ELSE string_split(similar_species, '|')
+      END AS similar_slugs,
       lower(genus || '-' || species) AS slug
     FROM species
     ORDER BY genus, species
   `);
 
   conn.closeSync();
-  return result.getRowObjectsJS();
+
+  const rows = result.getRowObjectsJS();
+  for (const row of rows) {
+    row.id = String(row.id);
+  }
+  return rows;
 }

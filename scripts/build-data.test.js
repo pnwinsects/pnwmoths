@@ -17,9 +17,16 @@ const ROOT = resolve(__dirname, '..');
 test('validateCsv: species.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/species.csv'),
-    ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority']
+    ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species']
   );
   // If we reach here, no error was thrown — pass
+});
+
+test('validateCsv: images.csv with correct columns does not throw', () => {
+  validateCsv(
+    resolve(ROOT, 'data/images.csv'),
+    ['species_id', 'filename', 'photographer', 'weight', 'license']
+  );
 });
 
 test('validateCsv: missing required column throws with actionable message', () => {
@@ -81,8 +88,9 @@ test('integration: build-data.js with bad CSV data exits non-zero with "Validati
   const tmpDataDir = resolve(tmpDir, 'data');
   mkdirSync(tmpDataDir, { recursive: true });
 
-  // Copy species.csv unchanged, use records-bad.csv as records.csv
+  // Copy species.csv and images.csv unchanged, use records-bad.csv as records.csv
   copyFileSync(resolve(ROOT, 'data/species.csv'), resolve(tmpDataDir, 'species.csv'));
+  copyFileSync(resolve(ROOT, 'data/images.csv'), resolve(tmpDataDir, 'images.csv'));
   copyFileSync(resolve(ROOT, 'data/records-bad.csv'), resolve(tmpDataDir, 'records.csv'));
 
   // Write a wrapper script that sets cwd to tmpDir and runs main()
