@@ -10,7 +10,7 @@
 - [ ] **Phase 2: Species Factsheet (Static)** — Complete static species page template: taxonomy, prose, photos, similar species, browse pages, site navigation. No interactive JS yet.
 - [ ] **Phase 3: Client-side Interactivity** — Vite + Lit integration: hyparquet data loading, Leaflet map, phenology chart, occurrence filters, image slideshow, graceful JS-off degradation.
 - [ ] **Phase 4: Search, Glossary, and Validation** — Pagefind integration, glossary page, post-build link checker, page weight script, data integrity validator.
-- [ ] **Phase 5: Maintainability** — LLM instruction files, GitHub Actions CI/CD, Docker build environment, build performance verification.
+- [x] **Phase 5: Maintainability** — LLM instruction files, GitHub Actions CI/CD, Docker build environment, build performance verification. (completed 2026-04-12)
 
 ## Phase Details
 
@@ -94,10 +94,10 @@ Plans:
   2. A push to `main` triggers a GitHub Actions workflow that builds and deploys the site without manual intervention.
   3. The full build — data import, Eleventy, Pagefind, validation — completes in under 5 minutes on a standard GitHub Actions runner.
   4. Running `docker build` followed by the build command produces output identical to the CI workflow; a maintainer can reproduce the production build locally using Docker without installing Node.js or DuckDB manually.
-**Plans:** 0/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
-- [ ] 05-01-PLAN.md — CI/CD pipeline (GitHub Actions deploy + PR check), Docker build environment, lychee config
-- [ ] 05-02-PLAN.md — LLM-actionable maintainer instruction files (_instructions/)
+- [x] 05-01-PLAN.md — CI/CD pipeline (GitHub Actions deploy + PR check), Docker build environment, lychee config
+- [x] 05-02-PLAN.md — LLM-actionable maintainer instruction files (_instructions/)
 **UI hint**: no
 
 ## Progress
@@ -108,7 +108,7 @@ Plans:
 | 2. Species Factsheet (Static) | 2/2 | Complete | - |
 | 3. Client-side Interactivity | 0/2 | Planned | - |
 | 4. Search, Glossary, and Validation | 0/3 | Planned | - |
-| 5. Maintainability | 0/2 | Planned    |  |
+| 5. Maintainability | 2/2 | Complete   | 2026-04-12 |
 
 ## Requirements Coverage
 
