@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "PNW Moths" }}</title>
+  <link rel="stylesheet" href="/css/pico.min.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/browse/">Browse</a></li>
+      <li><a href="/search/">Search</a></li>
+      <li><a href="/glossary/">Glossary</a></li>
+    </ul>
+  </nav>
+  <main>
+    {{ content | safe }}
+  </main>
+</body>
+</html>
