@@ -1,0 +1,5 @@
+timeout = 20
+max_retries = 3
+cache = true
+accept = ["100..=103", "200..=299", "429"]
+exclude = []
