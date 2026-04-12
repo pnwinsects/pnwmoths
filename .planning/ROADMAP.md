@@ -43,8 +43,8 @@ Plans:
   5. Every page has site-wide navigation linking to browse, search, glossary, and home.
 **Plans**: 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
-- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
+- [x] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [x] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: yes
 
 ### Phase 3: Client-side Interactivity
@@ -61,8 +61,8 @@ Plans:
   6. Map, chart, slideshow, and search results components are all implemented as Lit custom elements.
 **Plans**: 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
-- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
+- [x] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [x] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: yes
 
 ### Phase 4: Search, Glossary, and Validation
@@ -79,8 +79,8 @@ Plans:
   6. The data validator catches species IDs in records that have no matching species, invalid state/record_type values, and coordinates outside plausible PNW bounds.
 **Plans**: 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
-- [ ] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
+- [x] 02-01-PLAN.md — Data model extensions, base layout, species factsheet template
+- [x] 02-02-PLAN.md — Browse pages (all-species and per-genus) with stub pages
 **UI hint**: yes
 
 ### Phase 5: Maintainability
