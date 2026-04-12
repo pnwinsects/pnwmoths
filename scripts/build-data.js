@@ -146,6 +146,15 @@ export async function main() {
       `
     },
     {
+      description: 'invalid state values',
+      query: `
+        SELECT DISTINCT state FROM records
+        WHERE state NOT IN ('WA', 'OR', 'ID', 'BC', 'AB', 'MT')
+          AND state IS NOT NULL
+          AND state != ''
+      `
+    },
+    {
       description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-52.0, lon -125.0 to -110.0)',
       query: `
         SELECT species_id, latitude, longitude FROM records

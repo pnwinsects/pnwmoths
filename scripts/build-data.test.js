@@ -72,6 +72,36 @@ test('validateCsv: non-UTF-8 bytes throw with actionable message', () => {
   }
 });
 
+// --- VALD-03 state validation test ---
+
+test('build-data.js: state validation query catches invalid state values', async () => {
+  const { DuckDBInstance } = await import('@duckdb/node-api');
+  const db = await DuckDBInstance.create(':memory:');
+  const conn = await db.connect();
+
+  // Create a minimal records table with one valid and one invalid state
+  await conn.run(`
+    CREATE TABLE records AS
+    SELECT 'specimen' AS record_type, 47.0 AS latitude, -122.0 AS longitude,
+           'WA' AS state
+    UNION ALL
+    SELECT 'specimen', 47.0, -122.0, 'TX'
+  `);
+
+  const result = await conn.runAndReadAll(`
+    SELECT DISTINCT state FROM records
+    WHERE state NOT IN ('WA', 'OR', 'ID', 'BC', 'AB', 'MT')
+      AND state IS NOT NULL
+      AND state != ''
+  `);
+  const rows = result.getRowObjectsJS();
+
+  assert.strictEqual(rows.length, 1, 'Should catch exactly 1 invalid state');
+  assert.strictEqual(rows[0].state, 'TX', 'Invalid state should be TX');
+
+  conn.closeSync();
+});
+
 // --- Integration tests ---
 
 test('integration: build-data.js with good CSV produces Parquet files', () => {
