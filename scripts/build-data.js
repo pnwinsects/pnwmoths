@@ -77,6 +77,7 @@ export async function main() {
       throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
     }
   }
+  validateCsv('data/glossary.csv', ['term', 'definition', 'image_filename', 'photographer']);
   validateCsv('data/records.csv', [
     'species_id', 'record_type', 'latitude', 'longitude', 'state', 'county',
     'locality', 'elevation', 'year', 'month', 'day', 'collector', 'collection', 'notes'
