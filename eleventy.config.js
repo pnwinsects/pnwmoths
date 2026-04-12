@@ -1,4 +1,5 @@
 import { EleventyRenderPlugin } from "@11ty/eleventy";
+import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -22,6 +23,16 @@ export default function (eleventyConfig) {
 
   // Species images
   eleventyConfig.addPassthroughCopy("images");
+
+  // Passthrough copy for component source files so Vite can find them
+  eleventyConfig.addPassthroughCopy({ "src/components": "components" });
+
+  // Vite plugin: bundles client-side JS components
+  eleventyConfig.addPlugin(EleventyVitePlugin, {
+    viteOptions: {
+      appType: "mpa",
+    }
+  });
 
   return {
     dir: {
