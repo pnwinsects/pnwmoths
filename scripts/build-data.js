@@ -77,7 +77,14 @@ export async function main() {
       throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
     }
   }
-  validateCsv('data/glossary.csv', ['term', 'definition', 'image_filename', 'photographer']);
+  const glossaryRows = validateCsv('data/glossary.csv', ['term', 'definition', 'image_filename', 'photographer']);
+  for (const row of glossaryRows) {
+    if (row.image_filename && !/^[a-zA-Z0-9._-]+$/.test(row.image_filename)) {
+      throw new Error(
+        `Invalid image_filename "${row.image_filename}" in glossary.csv — only alphanumeric, dots, hyphens, and underscores allowed.`
+      );
+    }
+  }
   validateCsv('data/records.csv', [
     'species_id', 'record_type', 'latitude', 'longitude', 'state', 'county',
     'locality', 'elevation', 'year', 'month', 'day', 'collector', 'collection', 'notes'
