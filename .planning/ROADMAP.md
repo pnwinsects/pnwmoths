@@ -94,7 +94,7 @@ Plans:
   2. A push to `main` triggers a GitHub Actions workflow that builds and deploys the site without manual intervention.
   3. The full build — data import, Eleventy, Pagefind, validation — completes in under 5 minutes on a standard GitHub Actions runner.
   4. Running `docker build` followed by the build command produces output identical to the CI workflow; a maintainer can reproduce the production build locally using Docker without installing Node.js or DuckDB manually.
-**Plans:** 2 plans
+**Plans:** 0/2 plans executed
 Plans:
 - [ ] 05-01-PLAN.md — CI/CD pipeline (GitHub Actions deploy + PR check), Docker build environment, lychee config
 - [ ] 05-02-PLAN.md — LLM-actionable maintainer instruction files (_instructions/)
@@ -108,7 +108,7 @@ Plans:
 | 2. Species Factsheet (Static) | 2/2 | Complete | - |
 | 3. Client-side Interactivity | 0/2 | Planned | - |
 | 4. Search, Glossary, and Validation | 0/3 | Planned | - |
-| 5. Maintainability | 0/2 | Planned | - |
+| 5. Maintainability | 0/2 | Planned    |  |
 
 ## Requirements Coverage
 
