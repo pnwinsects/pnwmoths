@@ -31,6 +31,7 @@ export default async function () {
   `);
 
   conn.closeSync();
+  db.closeSync();
 
   // Group terms by first letter for template iteration.
   // Returns { A: [...], F: [...] } instead of flat array.
