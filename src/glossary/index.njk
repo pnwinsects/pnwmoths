@@ -1,7 +1,38 @@
 ---
 layout: base.njk
-title: Glossary — PNW Moths
+title: "Glossary -- PNW Moths"
 permalink: /glossary/index.html
 ---
 <h1>Glossary</h1>
-<p>Glossary coming soon.</p>
+
+<nav aria-label="Alphabetic index">
+  <ul>
+    {% for letter, terms in glossary %}
+      <li><a href="#letter-{{ letter }}">{{ letter }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{% for letter, terms in glossary %}
+  <section id="letter-{{ letter }}">
+    <h2>{{ letter }}</h2>
+    <dl>
+      {% for term in terms %}
+        <dt id="term-{{ term.slug }}">{{ term.term }}</dt>
+        <dd>
+          {{ term.definition }}
+          {% if term.image_filename %}
+            <figure>
+              <img src="/images/glossary/{{ term.image_filename }}"
+                   alt="{{ term.term }}"
+                   width="120">
+              {% if term.photographer %}
+                <figcaption>{{ term.photographer }}</figcaption>
+              {% endif %}
+            </figure>
+          {% endif %}
+        </dd>
+      {% endfor %}
+    </dl>
+  </section>
+{% endfor %}
