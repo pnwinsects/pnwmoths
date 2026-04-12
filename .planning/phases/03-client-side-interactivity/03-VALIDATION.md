@@ -17,17 +17,17 @@ created: 2026-04-11
 
 | Property | Value |
 |----------|-------|
-| **Framework** | vitest |
-| **Config file** | vitest.config.js (Wave 0 installs) |
-| **Quick run command** | `npm test` |
-| **Full suite command** | `npm test && npm run build` |
-| **Estimated runtime** | ~15 seconds |
+| **Framework** | node:test (project standard — already used in scripts/build-data.test.js) |
+| **Config file** | none (direct `node --test` invocation) |
+| **Quick run command** | `node --test src/components/*.test.js` |
+| **Full suite command** | `npm test` (runs build-data + component tests) |
+| **Estimated runtime** | ~10 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `npm test`
+- **After every task commit:** Run `node --test src/components/*.test.js`
 - **After every plan wave:** Run `npm test && npm run build`
 - **Before `/gsd-verify-work`:** Full suite must be green
 - **Max feedback latency:** 30 seconds
@@ -52,11 +52,11 @@ created: 2026-04-11
 
 ## Wave 0 Requirements
 
-- [ ] `tests/components/occurrence-map.test.js` — stubs for INTV-01
-- [ ] `tests/components/phenology-chart.test.js` — stubs for INTV-02
-- [ ] `tests/components/filter-controls.test.js` — stubs for INTV-03
-- [ ] `tests/components/image-slideshow.test.js` — stubs for INTV-04, INTV-06
-- [ ] `vitest.config.js` — configure jsdom environment for Lit components
+- [ ] `src/components/parquet-cache.test.js` — covers INTV-01 (loadParquet, filterRecords, aggregateByMonth — pure functions, no browser needed)
+- [ ] `src/components/phenology.test.js` — covers INTV-02 month aggregation edge cases
+- [ ] `src/components/filters.test.js` — covers INTV-03 filter logic (combined filters, null/undefined handling)
+
+Note: No browser test framework (vitest/Playwright) in this phase. Lit component rendering is verified via visual smoke test (Task 3, Plan 02).
 
 ---
 
