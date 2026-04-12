@@ -27,9 +27,9 @@ decisions:
   - "lychee --offline flag: prevents any network requests during build, only internal links checked (D-10)"
   - "warn-only exit 0 for page weight: D-11 specifies warn-only; build should not fail for large pages"
 metrics:
-  duration: "~15 minutes"
+  duration: "~20 minutes"
   completed: "2026-04-12"
-  tasks_completed: 2
+  tasks_completed: 3
   tasks_total: 3
   files_changed: 7
 ---
@@ -59,6 +59,7 @@ metrics:
 |------|---------|-------------|
 | 1    | bf85351 | feat(04-03): add page weight check script and state validation |
 | 2    | e566c8f | feat(04-03): install pagefind, wire build pipeline, fix broken glossary image ref |
+| 3    | (human-verify) | Browser verification passed — search and glossary confirmed working |
 
 ## Verification
 
@@ -73,6 +74,10 @@ metrics:
   - build:check-weight: all pages under 500KB threshold
 - `_site/pagefind/pagefind-ui.js` and `_site/pagefind/pagefind-ui.css` exist
 - `_site/search/index.html` and `_site/glossary/index.html` exist
+- **Task 3 — Human browser verification (approved 2026-04-12):**
+  - /search/ page: Pagefind widget renders, species name search returns results
+  - /glossary/ page: terms displayed alphabetically with letter headings, navigation works
+  - Observation: /browse/ page genus/family listings appear in search results when searching species names — this is expected behavior (genus names on /browse/ legitimately match species searches)
 
 ## Deviations from Plan
 
@@ -89,7 +94,7 @@ metrics:
 
 None. The build pipeline is fully wired. Pagefind generates a real search index from built HTML. Lychee checks real links. Page weight checks real file sizes. State validation runs against real data.
 
-The search page (Task 3) awaits human browser verification — the Pagefind index is built, but whether search returns correct results requires manual testing.
+The search page (Task 3) was verified by human in browser — search returns species results, glossary renders alphabetically.
 
 ## Threat Surface Scan
 
