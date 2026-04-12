@@ -61,8 +61,8 @@ Plans:
   6. Map, chart, slideshow, and search results components are all implemented as Lit custom elements.
 **Plans**: 2 plans
 Plans:
-- [ ] 03-01-PLAN.md — Vite + Lit pipeline, core components (parquet-cache, map, chart, filter-bar), template integration
-- [ ] 03-02-PLAN.md — Image slideshow, filter wiring, unit tests, build verification, visual smoke test
+- [x] 03-01-PLAN.md — Vite + Lit pipeline, core components (parquet-cache, map, chart, filter-bar), template integration
+- [x] 03-02-PLAN.md — Image slideshow, filter wiring, unit tests, build verification, visual smoke test
 **UI hint**: yes
 
 ### Phase 4: Search, Glossary, and Validation
