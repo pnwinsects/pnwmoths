@@ -1,7 +1,8 @@
 ---
 phase: 4
 slug: search-glossary-and-validation
-status: draft
+status: approved
+reviewed_at: 2026-04-12T00:00:00Z
 shadcn_initialized: false
 preset: none
 created: 2026-04-12
