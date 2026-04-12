@@ -30,10 +30,10 @@ eleventyComputed:
 
 <section>
   <h2>Occurrence Data</h2>
-  <pnwm-filter-bar slug="{{ sp.slug }}"></pnwm-filter-bar>
-  <pnwm-occurrence-map slug="{{ sp.slug }}"></pnwm-occurrence-map>
-  <pnwm-phenology-chart slug="{{ sp.slug }}"></pnwm-phenology-chart>
-  <noscript>
+  <pnwm-filter-bar slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-filter-bar>
+  <pnwm-occurrence-map slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-occurrence-map>
+  <pnwm-phenology-chart slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-phenology-chart>
+  <noscript data-pagefind-ignore>
     <p>Enable JavaScript to view the interactive map and filters. Occurrence data is available in the table below.</p>
   </noscript>
 </section>
@@ -41,7 +41,7 @@ eleventyComputed:
 {% set spImages = images[sp.id] %}
 <section>
   <h2>Photos</h2>
-  <pnwm-image-slideshow slug="{{ sp.slug }}">
+  <pnwm-image-slideshow slug="{{ sp.slug }}" data-pagefind-ignore>
     {% if spImages and spImages.length > 0 %}
       {% for img in spImages %}
         <figure>
