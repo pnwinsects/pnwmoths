@@ -57,12 +57,12 @@ Pico CSS sets these via its default stylesheet. The values below are the Pico de
 |------|------|--------|-------------|
 | Body | 16px | 400 (regular) | 1.5 |
 | Label / metadata | 14px | 400 (regular) | 1.4 |
-| Heading (h2 — section) | 20px | 600 (semibold) | 1.2 |
+| Heading (h2 — section) | 20px | 700 (bold) | 1.2 |
 | Heading (h1 — species name) | 28px | 700 (bold) | 1.2 |
 
 Notes:
 - Species scientific names (`<em>` within `<h1>`) render italic at 28px bold.
-- Family and genus headings on browse pages use h2 (20px semibold).
+- Family and genus headings on browse pages use h2 (20px bold).
 - Photographer credit (`<figcaption>`) uses 14px regular.
 
 ---
