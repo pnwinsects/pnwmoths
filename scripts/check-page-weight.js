@@ -1,7 +1,7 @@
 // scripts/check-page-weight.js
 // Post-build check: warns when any HTML page exceeds the configured threshold.
 // Run via: npm run build:check-weight
-import { readdirSync, statSync } from 'node:fs';
+import { readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const THRESHOLD_BYTES = 500 * 1024; // 500KB per D-11
@@ -23,6 +23,11 @@ function walkHtml(dir) {
       }
     }
   }
+}
+
+if (!existsSync(SITE_DIR)) {
+  console.error(`[page-weight] ERROR: SITE_DIR "${SITE_DIR}" does not exist. Run the build first.`);
+  process.exit(1);
 }
 
 walkHtml(SITE_DIR);
