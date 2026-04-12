@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build:data": "node scripts/build-data.js",
-    "build:eleventy": "npx @11ty/eleventy",
+    "build:eleventy": "eleventy",
     "build:copy-parquet": "node scripts/copy-parquet.js",
     "build:pagefind": "pagefind --site _site",
     "build:validate-links": "lychee --config lychee.toml --root-dir _site '_site/**/*.html'",
