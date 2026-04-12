@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to plan
-stopped_at: Phase 4 context gathered
-last_updated: "2026-04-12T15:54:31.037Z"
+status: Phase 4 complete
+stopped_at: Phase 4 verified — 8/8 must-haves passed
+last_updated: "2026-04-12T00:00:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
-  percent: 100
+  completed_phases: 4
+  total_plans: 14
+  completed_plans: 14
+  percent: 80
 ---
 
 # Project State
@@ -20,22 +20,22 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-12)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 2 — Species Factsheet (Static)
+**Current focus:** Phase 5 — Maintainability
 
 ## Current Status
 
-Phase 1 complete. Ready to plan Phase 2.
+Phase 4 complete. Ready to plan Phase 5.
 
-[████░░░░░░░░░░░░░░░░] 2/2 plans (Phase 1 of 5 complete)
+[████████████████░░░░] 4/5 phases complete
 
 ## Phase Progress
 
 | Phase | Name | Status |
 |-------|------|--------|
 | 1 | Data Pipeline Foundation | Complete (2026-04-12) |
-| 2 | Species Factsheet (Static) | Ready to plan |
-| 3 | Client-side Interactivity | Not started |
-| 4 | Search, Glossary, and Validation | Not started |
+| 2 | Species Factsheet (Static) | Complete (2026-04-12) |
+| 3 | Client-side Interactivity | Complete (2026-04-12) |
+| 4 | Search, Glossary, and Validation | Complete (2026-04-12) |
 | 5 | Maintainability | Not started |
 
 ## Accumulated Context
@@ -46,19 +46,22 @@ Phase 1 complete. Ready to plan Phase 2.
 - Eleventy passthrough copy: `addPassthroughCopy({ "data/parquet": "species" })` routes Parquet files to `_site/species/{slug}/`
 - Slug convention: `(genus + '-' + species).toLowerCase()` — alphanumeric-only validated
 - ESM-first: `package.json type:module`, `import.meta.url` guard for direct execution
+- Pagefind UI widget styled via Pico CSS custom property mappings (no custom CSS file)
+- Glossary keyed by first letter (object, not array) for `for letter, terms in glossary` Nunjucks pattern
+- `/browse/` page genus/family listings appear in search results — expected, genus names legitimately match species queries
 
-### Blockers/Concerns
+### Open Issues (from code review WR-01–WR-04)
 
-- ⚠️ Code review CR-01: `outDir` SQL interpolation in `scripts/build-data.js` — slug validated but not structurally safe
-- ⚠️ Code review CR-02: `sp.id` BigInt stringification may produce invalid SQL (`1n`)
-- ⚠️ HUMAN-UAT: Clean-checkout build not yet confirmed by human
+- ⚠️ WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern
+- ⚠️ WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC)
+- ⚠️ WR-03: DuckDB instance not closed in glossary.js (resource leak)
+- ⚠️ WR-04: Missing ENOENT guard in check-page-weight.js
 
 ## Session Continuity
 
-Last session: 2026-04-12T15:54:31.030Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-search-glossary-and-validation/04-CONTEXT.md
+Last session: 2026-04-12
+Stopped at: Phase 4 verified
 
 ## Next Action
 
-Run `/gsd-discuss-phase 2` to gather context, or `/gsd-plan-phase 2` to plan directly.
+Run `/gsd-plan-phase 5` to plan the Maintainability phase.
