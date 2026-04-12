@@ -63,10 +63,10 @@ All sizes are relative to Pico CSS base (16px at mobile, scaling to 20px at 1280
 
 **Interactive component typography:**
 - Filter control labels: 14px / 400 / 1.4 (same as Label)
-- Chart axis tick labels: 12px / 400 / 1.0 (exception for data density)
-- Chart bar labels (count): 12px / 600 (semibold) / 1.0
-- Map popup species name: 14px / 600 (semibold) / 1.3
-- Map popup metadata: 12px / 400 / 1.4
+- Chart axis tick labels: 14px / 400 / 1.0
+- Chart bar labels (count): 14px / 700 (bold) / 1.0
+- Map popup species name: 14px / 700 (bold) / 1.3
+- Map popup metadata: 14px / 400 / 1.4
 - Loading state text: 14px / 400 / 1.5, muted color
 
 ---
