@@ -72,4 +72,13 @@ eleventyComputed:
   </section>
 {% endif %}
 
-{# Filter wiring added in Plan 02 #}
+<script type="module">
+  // Wire filter-bar events to map and chart components
+  const map = document.querySelector('pnwm-occurrence-map');
+  const chart = document.querySelector('pnwm-phenology-chart');
+
+  document.addEventListener('pnwm-filter-change', (e) => {
+    if (map) map.filters = e.detail;
+    if (chart) chart.filters = e.detail;
+  });
+</script>
