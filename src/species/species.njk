@@ -1,22 +1,51 @@
 ---
+layout: base.njk
 pagination:
   data: species
   size: 1
   alias: sp
 permalink: "species/{{ sp.slug }}/index.html"
 eleventyComputed:
-  title: "{{ sp.genus }} {{ sp.species }}"
+  title: "{{ sp.genus }} {{ sp.species }} — PNW Moths"
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ sp.genus }} {{ sp.species }} - PNW Moths</title>
-</head>
-<body>
-  <h1><em>{{ sp.genus }} {{ sp.species }}</em></h1>
-  <p>Common name: {{ sp.common_name }}</p>
-  <p>NOC: {{ sp.noc_id }}</p>
-  <p>Authority: {{ sp.authority }}</p>
-</body>
-</html>
+<h1><em>{{ sp.genus }} {{ sp.species }}</em></h1>
+
+<dl>
+  <dt>Common name</dt><dd>{{ sp.common_name }}</dd>
+  <dt>NOC ID</dt><dd>{{ sp.noc_id }}</dd>
+  <dt>Authority</dt><dd>{{ sp.authority }}</dd>
+  <dt>Family</dt><dd>{{ sp.family }}</dd>
+</dl>
+
+{% set prosePath = "src/content/species/" + sp.slug + ".md" %}
+{% if prosePath | fileExists %}
+  {% renderFile prosePath %}
+{% endif %}
+
+{% set spImages = images[sp.id] %}
+{% if spImages and spImages.length > 0 %}
+  {% for img in spImages %}
+    <figure>
+      <img src="/images/{{ sp.slug }}/{{ img.filename }}"
+           alt="{{ sp.genus }} {{ sp.species }}">
+      <figcaption>{{ img.photographer }}</figcaption>
+    </figure>
+  {% endfor %}
+{% else %}
+  <figure>
+    <div aria-label="No images available for this species">
+      No photos on file
+    </div>
+  </figure>
+{% endif %}
+
+{% if sp.similar_slugs and sp.similar_slugs.length > 0 %}
+  <section>
+    <h2>Similar species</h2>
+    <ul>
+      {% for slug in sp.similar_slugs %}
+        <li><a href="/species/{{ slug }}/">{{ slug }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
