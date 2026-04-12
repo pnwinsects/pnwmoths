@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 ARG LYCHEE_VERSION=0.23.0
 RUN wget -qO /tmp/lychee.tar.gz \
     "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" \
+    && echo "1fcb6ccf10d04c22b8c5873c5b9cb7be32ee7423e12169d6f1a79a6f1962ef81  /tmp/lychee.tar.gz" | sha256sum -c - \
     && tar -xzf /tmp/lychee.tar.gz -C /usr/local/bin \
     && chmod +x /usr/local/bin/lychee
 
