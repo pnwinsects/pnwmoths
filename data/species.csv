@@ -1,6 +1,6 @@
-id,genus,species,common_name,noc_id,authority
-1,Acronicta,americana,American Dagger Moth,9200,Harris 1841
-2,Autographa,californica,Alfalfa Looper,8914,Speyer 1875
-3,Hyles,lineata,White-lined Sphinx,7894,Fabricius 1775
-4,Manduca,sexta,Carolina Sphinx,7775,Linnaeus 1763
-5,Smerinthus,cerisyi,One-eyed Sphinx,7822,Kirby 1837
+id,genus,species,common_name,noc_id,authority,family,similar_species
+1,Acronicta,americana,American Dagger Moth,9200,Harris 1841,Noctuidae,autographa-californica
+2,Autographa,californica,Alfalfa Looper,8914,Speyer 1875,Noctuidae,acronicta-americana
+3,Hyles,lineata,White-lined Sphinx,7894,Fabricius 1775,Sphingidae,manduca-sexta|smerinthus-cerisyi
+4,Manduca,sexta,Carolina Sphinx,7775,Linnaeus 1763,Sphingidae,hyles-lineata
+5,Smerinthus,cerisyi,One-eyed Sphinx,7822,Kirby 1837,Sphingidae,hyles-lineata|manduca-sexta
