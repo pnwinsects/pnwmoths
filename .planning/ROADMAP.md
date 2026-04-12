@@ -77,7 +77,11 @@ Plans:
   4. A post-build link check fails the build when any internal link points to a non-existent page.
   5. The build emits a warning (or failure) when any HTML page exceeds the configured page weight threshold.
   6. The data validator catches species IDs in records that have no matching species, invalid state/record_type values, and coordinates outside plausible PNW bounds.
-**Plans**: [to be planned]
+**Plans**: 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — Glossary data pipeline (CSV, DuckDB data file, template, validation)
+- [ ] 04-02-PLAN.md — Search page (Pagefind UI widget, data-pagefind-ignore configuration)
+- [ ] 04-03-PLAN.md — Validation scripts and build pipeline wiring (page weight, state validation, Pagefind + lychee install)
 **UI hint**: yes
 
 ### Phase 5: Maintainability
@@ -100,7 +104,7 @@ Plans:
 | 1. Data Pipeline Foundation | 2/2 | Complete | - |
 | 2. Species Factsheet (Static) | 2/2 | Complete | - |
 | 3. Client-side Interactivity | 0/2 | Planned | - |
-| 4. Search, Glossary, and Validation | 0/? | Not started | - |
+| 4. Search, Glossary, and Validation | 0/3 | Planned | - |
 | 5. Maintainability | 0/? | Not started | - |
 
 ## Requirements Coverage
