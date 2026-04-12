@@ -449,22 +449,21 @@ document.querySelector('pnwm-occurrence-map')
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **INTV-05 and occurrence data without JS**
-   - What we know: DATA-04 requires occurrence data NOT be embedded inline. INTV-05 requires data visible without JS.
-   - What's unclear: These two requirements are in tension for occurrence records specifically. They are consistent for photos, taxonomy, and prose.
-   - Recommendation: Confirm with project owner. Research finding is that the `<noscript>` notice ("Occurrence data requires JavaScript") is the correct resolution. Document the decision in CONTEXT.md or a comment in the template.
+1. **INTV-05 and occurrence data without JS** — RESOLVED 2026-04-11
+   - Decision: `<noscript>` notice is the authoritative fallback for occurrence data. DATA-04 takes precedence — occurrence rows are not embedded in HTML at build time.
+   - Photos, taxonomy, and prose remain visible as static HTML without JS; this satisfies INTV-05.
+   - ROADMAP success criterion #5 updated to reflect this resolution.
+   - Source: Project owner confirmation.
 
-2. **Year range filter bounds**
-   - What we know: UI-SPEC says year range slider min=1900, max=current year.
-   - What's unclear: The actual year range in the data. A slider with min=1900 and max=2026 may have sparse distribution; the planner should decide whether to compute actual min/max from each species' Parquet data at load time.
-   - Recommendation: Default to 1900–current year per UI-SPEC; optionally clamp to data range after Parquet load.
+2. **Year range filter bounds** — RESOLVED 2026-04-11
+   - Decision: Hardcode min=1900, max=current year per UI-SPEC. No data-range clamping.
+   - Rationale: Keeps implementation simple; sparse early-year data is acceptable UX for a research tool.
 
-3. **Leaflet tile provider**
-   - What we know: OpenStreetMap is the obvious default.
-   - What's unclear: Are there rate limits or terms-of-service concerns for a publicly hosted static site?
-   - Recommendation: Use OpenStreetMap tiles with proper attribution. For production, consider a hosted tile provider (Mapbox, Stadia, CartoDB) if OSM tile usage becomes an issue. Note it as a deferred concern.
+3. **Leaflet tile provider** — RESOLVED 2026-04-11
+   - Decision: Use OpenStreetMap tiles (`tile.openstreetmap.org`) with standard attribution for v1.
+   - OSM tile policy allows use on public sites with proper attribution (© OpenStreetMap contributors). Deferred concern: if traffic is high, switch to Stadia or CartoDB for production.
 
 ---
 

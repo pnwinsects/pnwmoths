@@ -57,7 +57,7 @@ Plans:
   2. A phenology bar chart (records by month) renders from the same Parquet data on the same page.
   3. Selecting a state, record type, or year range updates both the map and the chart to show only matching records.
   4. Species photos cycle in a slideshow; clicking a photo opens a larger view.
-  5. With JavaScript disabled, occurrence data remains visible as a plain HTML table and photos are visible as static images — no content is exclusively behind JS.
+  5. With JavaScript disabled, photos, taxonomy, and prose are visible as static HTML; a noscript notice explains that occurrence data requires JavaScript (per DATA-04, occurrence rows are not embedded in HTML at build time).
   6. Map, chart, slideshow, and search results components are all implemented as Lit custom elements.
 **Plans**: 2 plans
 Plans:
