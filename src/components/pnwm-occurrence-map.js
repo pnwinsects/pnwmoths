@@ -116,7 +116,7 @@ class PnwmOccurrenceMap extends LitElement {
     }
 
     if (markers.length > 0) {
-      this._map.fitBounds(this._markerGroup.getBounds().pad(0.1));
+      this._map.fitBounds(this._markerGroup.getBounds().pad(0.1), { maxZoom: 10 });
     } else {
       // Show empty state
       const emptyMsg = container.querySelector('.pnwm-map-empty');
