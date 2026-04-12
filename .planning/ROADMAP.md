@@ -79,8 +79,8 @@ Plans:
   6. The data validator catches species IDs in records that have no matching species, invalid state/record_type values, and coordinates outside plausible PNW bounds.
 **Plans**: 3 plans
 Plans:
-- [ ] 04-01-PLAN.md — Glossary data pipeline (CSV, DuckDB data file, template, validation)
-- [ ] 04-02-PLAN.md — Search page (Pagefind UI widget, data-pagefind-ignore configuration)
+- [x] 04-01-PLAN.md — Glossary data pipeline (CSV, DuckDB data file, template, validation)
+- [x] 04-02-PLAN.md — Search page (Pagefind UI widget, data-pagefind-ignore configuration)
 - [ ] 04-03-PLAN.md — Validation scripts and build pipeline wiring (page weight, state validation, Pagefind + lychee install)
 **UI hint**: yes
 
