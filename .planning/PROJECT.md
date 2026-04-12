@@ -21,7 +21,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - [ ] Eleventy scales to ~700 species pages at acceptable speed
 - [ ] Per-species occurrence records (lat/long, date, collector, location, record type) are joined to species pages at build time from CSV/SQLite
 - [ ] Static search (Pagefind or similar) indexes the full species catalog
-- [ ] Vite bundles client-side JS for interactive features (map, chart, image slideshow)
+- [x] Vite bundles client-side JS for interactive features (map, chart, image slideshow) (Validated in Phase 03: client-side-interactivity)
 - [ ] Validation scripts catch broken links, missing images, and excessive page weight before deploy
 - [ ] Site is deployable as pure static files (GitHub Pages or similar, no server required)
 - [ ] LLM instruction files document how to add/edit species, records, and content
@@ -66,8 +66,8 @@ The existing site (pnwmoths.biol.wwu.edu) is a Django + django-cms application t
 | Flat files over headless CMS | Cheap, Git-native, no external services, LLM-editable | — Pending |
 | Pagefind for static search | No server required; runs at build time; handles 700+ pages well | — Pending |
 | DuckDB over SQLite for build-time queries | 100k+ occurrence records; better analytical query performance | Validated Phase 01 — `@duckdb/node-api` works; use `.getRowObjectsJS()` and `closeSync()` |
-| Parquet + hyparquet for client-side occurrence data | Async loading avoids large inline JSON payloads; columnar compression efficient for this data shape | Partially validated Phase 01 — Parquet generation works; client-side loading in Phase 03 |
-| Lit for client-side components | Lightweight web components standard; lower churn than framework alternatives | — Pending |
+| Parquet + hyparquet for client-side occurrence data | Async loading avoids large inline JSON payloads; columnar compression efficient for this data shape | Validated Phase 03 — hyparquet requires Snappy compression (not ZSTD); use `COMPRESSION snappy` in DuckDB export |
+| Lit for client-side components | Lightweight web components standard; lower churn than framework alternatives | Validated Phase 03 — Lit works; light DOM required for Leaflet; CSS custom properties unavailable in Canvas 2D |
 | Git LFS for image assets | Keeps images in repo (no missing-file problem) without bloating git history | — Pending |
 | Docker for build environment | Reproducible builds locally and in CI; no "works on my machine" for maintainers | — Pending |
 
