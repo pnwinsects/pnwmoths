@@ -81,7 +81,7 @@ Plans:
 Plans:
 - [x] 04-01-PLAN.md — Glossary data pipeline (CSV, DuckDB data file, template, validation)
 - [x] 04-02-PLAN.md — Search page (Pagefind UI widget, data-pagefind-ignore configuration)
-- [ ] 04-03-PLAN.md — Validation scripts and build pipeline wiring (page weight, state validation, Pagefind + lychee install)
+- [x] 04-03-PLAN.md — Validation scripts and build pipeline wiring (page weight, state validation, Pagefind + lychee install)
 **UI hint**: yes
 
 ### Phase 5: Maintainability
