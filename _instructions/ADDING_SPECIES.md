@@ -44,7 +44,9 @@
 
 4. If build passes, commit and push:
    ```bash
-   git add data/species.csv content/species/xestia-dolosa.md
+   git add data/species.csv
+   # If you created a description file in step 2, also add it:
+   # git add content/species/xestia-dolosa.md
    git commit -m "Add species: Xestia dolosa"
    git push
    ```
