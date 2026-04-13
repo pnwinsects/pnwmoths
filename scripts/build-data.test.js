@@ -25,7 +25,7 @@ test('validateCsv: species.csv with correct columns does not throw', () => {
 test('validateCsv: images.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/images.csv'),
-    ['species_id', 'filename', 'photographer', 'weight', 'license']
+    ['species_id', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']
   );
 });
 

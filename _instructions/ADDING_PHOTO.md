@@ -13,7 +13,22 @@
 | filename | string | yes | 02.jpg |
 | photographer | string | yes | Jane Doe |
 | weight | integer | yes | 2 (display order; lower = earlier) |
-| license | string | yes | CC BY 4.0 |
+| license | string | yes | CC BY 4.0 (see License conventions below) |
+| view | string | no | dorsal |
+| specimen | string | no | A |
+
+### License conventions
+
+| Situation | license value | Example |
+|-----------|--------------|---------|
+| Creative Commons | The CC license identifier | `CC BY 4.0` |
+| Copyrighted (used with permission) | `(c) Photographer Name` | `(c) Merrill Peterson` |
+| Public domain | `public domain` | `public domain` |
+
+The `view` and `specimen` fields are optional. When importing from the source site, these can be extracted from the original filename (e.g., `B-V-acronicta-americana-01.jpg` where B = specimen, V = ventral).
+
+- `view`: View angle — `dorsal`, `ventral`, `lateral`, or `head`
+- `specimen`: Specimen identifier letter (`A`, `B`, `C`, `D`) when multiple specimens are shown
 
 ## Steps
 
@@ -23,7 +38,7 @@
 
 3. Open `data/images.csv`. Add a row:
    ```csv
-   1,02.jpg,Jane Doe,2,CC BY 4.0
+   1,02.jpg,Jane Doe,2,CC BY 4.0,dorsal,A
    ```
 
 4. **Git LFS steps (required for images):**
