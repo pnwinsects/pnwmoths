@@ -9,3 +9,6 @@ species_id,record_type,latitude,longitude,state,county,locality,elevation,year,m
 4,field notes,44.0521,-123.0868,OR,Lane,Eugene,130,2022,8,15,G. Brown,Field Notes,observed at dusk
 5,specimen,48.4637,-123.3117,WA,San Juan,Friday Harbor,10,2019,5,25,H. Kim,UW Burke Museum,
 5,photograph,45.3573,-121.6959,OR,Hood River,Mt Hood,1200,2023,7,8,I. Patel,iNaturalist,nectaring on phlox
+6,specimen,47.8501,-121.9716,WA,Snohomish,Verlot,430,2018,6,10,R. Westcott,WSDA Collection,at light
+6,specimen,44.5646,-123.2620,OR,Benton,Corvallis,68,2016,5,28,E. Schuh,OSU Systematic Entomology Lab,
+6,literature,46.7298,-117.0000,ID,Latah,Moscow,780,2010,6,1,,,ref: Shepard 2012
