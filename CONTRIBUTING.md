@@ -88,4 +88,4 @@ _instructions/      Plain-English maintainer guides
 ## Known issues
 
 - Dockerfile lychee binary is hardcoded to `x86_64` — wrong binary on ARM hosts, but the CI target is Linux x86_64
-- An orphan page is generated at `_site/content/species/acronicta-americana/` (Eleventy publishes any `.md` file without an explicit `permalink: false`)
+

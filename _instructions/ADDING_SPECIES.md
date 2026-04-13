@@ -18,7 +18,13 @@
 | family | string | yes | Noctuidae |
 | similar_species | string (slug) | no | acronicta-oblinita (pipe-separated for multiple: slug1\|slug2) |
 
+> **Note:** `noc_id` is the Hodges checklist number. It is stored as a string in the database (VARCHAR), so non-numeric values will not cause an import error. In practice the value should always be a plain integer matching the North American checklist; use of non-numeric values is not supported and should be treated as a data error.
+
 **Slug convention:** `(genus + '-' + species).toLowerCase()` — alphanumeric and hyphens only.
+
+## Adding photos and records for the same species
+
+Once you have saved the species and know its `id`, follow `ADDING_PHOTO.md` and `ADDING_RECORDS.md` using that `id` as `species_id`. The build validates referential integrity, so the species row must exist in `data/species.csv` before adding photos or records.
 
 ## Steps
 
