@@ -21,8 +21,7 @@ export default function (eleventyConfig) {
     "node_modules/@picocss/pico/css/pico.min.css": "css/pico.min.css"
   });
 
-  // Species images
-  eleventyConfig.addPassthroughCopy("images");
+  // Species images are copied post-Vite by scripts/copy-images.js
 
   // Passthrough copy for component source files so Vite can find them
   eleventyConfig.addPassthroughCopy({ "src/components": "components" });

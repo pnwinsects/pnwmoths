@@ -159,6 +159,7 @@ class PnwmImageSlideshow extends LitElement {
               src=${current.src}
               alt=${current.alt}
               @click=${this._openLightbox}
+              @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
             >
             ${current.photographer ? html`<p class="photographer">${current.photographer}</p>` : ''}
           </div>
@@ -179,6 +180,7 @@ class PnwmImageSlideshow extends LitElement {
             src=${current.src}
             alt=${current.alt}
             @click=${this._openLightbox}
+            @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
           >
           ${current.photographer ? html`<p class="photographer">${current.photographer}</p>` : ''}
         </div>

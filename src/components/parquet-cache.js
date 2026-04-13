@@ -14,10 +14,15 @@ export async function loadParquet(slug) {
     return cache.get(slug);
   }
   const url = `${import.meta.env.BASE_URL}species/${slug}/records.parquet`;
-  const file = await asyncBufferFromUrl({ url });
-  const records = await parquetReadObjects({ file });
-  cache.set(slug, records);
-  return records;
+  try {
+    const file = await asyncBufferFromUrl({ url });
+    const records = await parquetReadObjects({ file });
+    cache.set(slug, records);
+    return records;
+  } catch (err) {
+    console.error(`[pnwmoths] Failed to load parquet: ${url}`, err);
+    throw err;
+  }
 }
 
 /**
