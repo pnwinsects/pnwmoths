@@ -56,6 +56,12 @@ All decisions and patterns are documented in PROJECT.md (Key Decisions table).
 Last session: 2026-04-12
 Stopped at: v1.0 milestone archived
 
+## Quick Tasks Completed
+
+| ID | Description | Date |
+|----|-------------|------|
+| 260412-qrt | Fix Copilot/AI assistant tooling gaps | 2026-04-13 |
+
 ## Next Action
 
 Run `/gsd-new-milestone` to define v1.1 goals, requirements, and roadmap.

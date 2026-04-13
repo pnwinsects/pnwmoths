@@ -67,13 +67,15 @@ pending: 0
   reason: "User reported: Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@duckdb/node-api' imported from /workspace/scripts/build-data.js"
   severity: blocker
   test: 1
-  artifacts: []
-  missing: []
+  root_cause: "Dockerfile has no npm ci step and docker-compose.yml has no entrypoint that installs packages. Named node_modules volume starts empty on cold start and is never populated. Fix: add COPY package*.json + RUN npm ci to Dockerfile so node_modules is baked into the image layer."
+  artifacts: [Dockerfile, docker-compose.yml]
+  missing: [npm install step in Dockerfile or entrypoint]
 
 - truth: "GitHub Actions workflows use current action versions and read Node.js version from .nvmrc"
   status: failed
   reason: "User reported: actions are out of date, and there are hardcoded nodejs versions rather than reading from .nvmrc"
   severity: major
   test: 2
-  artifacts: []
-  missing: []
+  root_cause: "Both workflow files use actions/setup-node@v4 (current is v6) with hardcoded node-version: '22' instead of node-version-file: '.nvmrc'. Fix: upgrade to actions/setup-node@v6 and switch to node-version-file: '.nvmrc' in both deploy.yml and pr-check.yml."
+  artifacts: [.github/workflows/deploy.yml, .github/workflows/pr-check.yml, .nvmrc]
+  missing: [node-version-file: .nvmrc, actions/setup-node@v6]
