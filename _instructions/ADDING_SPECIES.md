@@ -13,7 +13,7 @@
 | genus | string | yes | Acronicta |
 | species | string | yes | americana |
 | common_name | string | yes | American Dagger Moth |
-| noc_id | integer | yes | 9200 |
+| noc_id | string | yes | 9200 |
 | authority | string | yes | Harris 1841 |
 | family | string | yes | Noctuidae |
 | similar_species | string (slug) | no | acronicta-oblinita (pipe-separated for multiple: slug1\|slug2) |
