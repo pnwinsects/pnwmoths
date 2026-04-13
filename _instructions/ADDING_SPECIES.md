@@ -2,7 +2,7 @@
 
 ## What This Changes
 - `data/species.csv` — new row for the species
-- `content/species/{slug}.md` — (optional) prose description
+- `src/content/species/{slug}.md` — (optional) prose description
 - Build output: new species page at `_site/species/{slug}/`
 
 ## Schema: data/species.csv
@@ -27,7 +27,7 @@
    701,Xestia,dolosa,Greater Black-letter Dart,10942,Franclemont 1980,Noctuidae,xestia-smithii
    ```
 
-2. (Optional) Create a prose description file at `content/species/{slug}.md`:
+2. (Optional) Create a prose description file at `src/content/species/{slug}.md`:
    ```markdown
    ---
    slug: xestia-dolosa
@@ -46,7 +46,7 @@
    ```bash
    git add data/species.csv
    # If you created a description file in step 2, also add it:
-   # git add content/species/xestia-dolosa.md
+   # git add src/content/species/xestia-dolosa.md
    git commit -m "Add species: Xestia dolosa"
    git push
    ```
