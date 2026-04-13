@@ -1,4 +1,4 @@
-import { asyncBufferFromUrl, parquetReadObjects } from 'hyparquet';
+import { parquetReadObjects } from 'hyparquet';
 
 /** Module-level cache keyed by slug */
 const cache = new Map();
@@ -14,8 +14,18 @@ export async function loadParquet(slug) {
     return cache.get(slug);
   }
   const url = `${import.meta.env.BASE_URL}species/${slug}/records.parquet`;
+  // Fetch the whole file rather than using range requests. GitHub Pages CDN
+  // (Fastly) serves gzip-encoded range responses against the compressed bytes,
+  // which breaks hyparquet's range-based footer/metadata reads. The files are
+  // small enough that a single fetch is fine.
   try {
-    const file = await asyncBufferFromUrl({ url });
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`fetch failed ${res.status}`);
+    const arrayBuffer = await res.arrayBuffer();
+    const file = {
+      byteLength: arrayBuffer.byteLength,
+      slice: (start, end) => arrayBuffer.slice(start, end),
+    };
     const records = await parquetReadObjects({ file });
     cache.set(slug, records);
     return records;
