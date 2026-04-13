@@ -149,7 +149,7 @@ export async function main() {
       description: 'invalid record_type values',
       query: `
         SELECT DISTINCT record_type FROM records
-        WHERE record_type NOT IN ('specimen', 'photograph', 'literature', 'field notes')
+        WHERE record_type NOT IN ('specimen', 'photograph', 'literature', 'field notes', 'sight_field_notes')
       `
     },
     {
@@ -162,10 +162,10 @@ export async function main() {
       `
     },
     {
-      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-52.0, lon -125.0 to -110.0)',
+      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-55.0, lon -125.0 to -110.0)',
       query: `
         SELECT species_id, latitude, longitude FROM records
-        WHERE latitude < 42.0 OR latitude > 52.0
+        WHERE latitude < 42.0 OR latitude > 55.0
            OR longitude < -125.0 OR longitude > -110.0
       `
     },
