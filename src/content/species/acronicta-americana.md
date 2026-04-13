@@ -1,4 +1,5 @@
 ---
+slug: acronicta-americana
 permalink: false
 ---
 The American Dagger Moth is a common species found throughout eastern North America. Adults have a wingspan of 50-65mm and are attracted to lights. Larvae are distinctive with yellow-green bodies covered in tufts of yellow, white, and black setae.
