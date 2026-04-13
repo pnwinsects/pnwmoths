@@ -4,6 +4,7 @@
 
 - [Node.js 22](https://nodejs.org/) (or use [nvm](https://github.com/nvm-sh/nvm): `nvm use`)
 - [Git LFS](https://git-lfs.com/) — images are tracked via LFS; run `git lfs install` once
+- [lychee](https://lychee.cli.rs/) — required locally for `npm run build:validate-links` (the Docker path includes it automatically)
 
 Or use Docker to skip local tooling (see below).
 
