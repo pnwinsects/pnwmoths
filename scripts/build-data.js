@@ -71,7 +71,7 @@ function validateSlugComponent(value, fieldName) {
 export async function main() {
   // --- Pre-flight CSV validation ---
   validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species']);
-  const imageRows = validateCsv('data/images.csv', ['species_id', 'filename', 'photographer', 'weight', 'license']);
+  const imageRows = validateCsv('data/images.csv', ['species_id', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']);
   for (const row of imageRows) {
     if (!/^[a-zA-Z0-9._-]+$/.test(row.filename)) {
       throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
