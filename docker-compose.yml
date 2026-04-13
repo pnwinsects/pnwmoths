@@ -3,11 +3,8 @@ services:
     build: .
     volumes:
       - .:/workspace
-      - node_modules:/workspace/node_modules
+      - /workspace/node_modules
     working_dir: /workspace
     command: bash
     stdin_open: true
     tty: true
-
-volumes:
-  node_modules:
