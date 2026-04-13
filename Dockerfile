@@ -17,3 +17,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=lychee-builder /usr/local/bin/lychee /usr/local/bin/lychee
 WORKDIR /workspace
+COPY package*.json ./
+RUN npm ci
