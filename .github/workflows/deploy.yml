@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: nschloe/action-cached-lfs-checkout@v1
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
       - uses: ./.github/actions/install-lychee
