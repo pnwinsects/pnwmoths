@@ -23,7 +23,7 @@ permalink: /glossary/index.html
           {{ term.definition }}
           {% if term.image_filename %}
             <figure>
-              <img src="/images/glossary/{{ term.image_filename }}"
+              <img src="{{ ('/images/glossary/' + term.image_filename) | url }}"
                    alt="{{ term.term }}"
                    width="120">
               {% if term.photographer %}

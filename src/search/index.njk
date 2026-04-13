@@ -16,12 +16,12 @@ pagefindUi: true
   }
 </style>
 <div id="search"></div>
-<script src="/pagefind/pagefind-ui.js"></script>
+<script src="{{ '/pagefind/pagefind-ui.js' | url }}"></script>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     new PagefindUI({ element: '#search', showSubResults: false });
   });
 </script>
 <noscript data-pagefind-ignore>
-  <p>Search requires JavaScript. <a href="/browse/">Browse all species</a> instead.</p>
+  <p>Search requires JavaScript. <a href="{{ '/browse/' | url }}">Browse all species</a> instead.</p>
 </noscript>

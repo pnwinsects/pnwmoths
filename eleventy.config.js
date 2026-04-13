@@ -31,10 +31,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyVitePlugin, {
     viteOptions: {
       appType: "mpa",
+      base: "/pnwmoths/",
     }
   });
 
   return {
+    pathPrefix: "/pnwmoths/",
     dir: {
       input: "src",
       output: "_site",

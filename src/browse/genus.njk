@@ -12,7 +12,7 @@ eleventyComputed:
 <p>Family: {{ genusData.family }}</p>
 <ul>
   {% for sp in genusData.species %}
-    <li><a href="/species/{{ sp.slug }}/">
+    <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
       <em>{{ sp.genus }} {{ sp.species }}</em> — {{ sp.common_name }}
     </a></li>
   {% endfor %}
