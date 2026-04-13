@@ -1,0 +1,16 @@
+{
+  "name": "pnwmoths",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "node",
+  "onCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}
