@@ -1,32 +1,32 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: milestone
-status: Executing Phase 5
-stopped_at: Phase 4 verified
-last_updated: "2026-04-12T17:43:16.384Z"
+milestone_name: MVP
+status: milestone_complete
+stopped_at: v1.0 archived
+last_updated: "2026-04-13T00:00:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 4
-  total_plans: 11
-  completed_plans: 9
-  percent: 82
+  completed_phases: 5
+  total_plans: 12
+  completed_plans: 12
+  percent: 100
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-12)
+See: .planning/PROJECT.md (updated 2026-04-12 after v1.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 5 — Maintainability
+**Current focus:** v1.0 shipped — planning next milestone
 
 ## Current Status
 
-Phase 4 complete. Ready to plan Phase 5.
+✅ v1.0 MVP complete and archived. All 5 phases, 12 plans shipped.
 
-[████████████████░░░░] 4/5 phases complete
+[████████████████████] 5/5 phases complete
 
 ## Phase Progress
 
@@ -36,32 +36,26 @@ Phase 4 complete. Ready to plan Phase 5.
 | 2 | Species Factsheet (Static) | Complete (2026-04-12) |
 | 3 | Client-side Interactivity | Complete (2026-04-12) |
 | 4 | Search, Glossary, and Validation | Complete (2026-04-12) |
-| 5 | Maintainability | Not started |
+| 5 | Maintainability | Complete (2026-04-12) |
 
 ## Accumulated Context
 
-### Decisions
+All decisions and patterns are documented in PROJECT.md (Key Decisions table).
 
-- DuckDB `@duckdb/node-api` API shape: use `.getRowObjectsJS()` not `.rows`, `closeSync()` not `conn.close()`
-- Eleventy passthrough copy: `addPassthroughCopy({ "data/parquet": "species" })` routes Parquet files to `_site/species/{slug}/`
-- Slug convention: `(genus + '-' + species).toLowerCase()` — alphanumeric-only validated
-- ESM-first: `package.json type:module`, `import.meta.url` guard for direct execution
-- Pagefind UI widget styled via Pico CSS custom property mappings (no custom CSS file)
-- Glossary keyed by first letter (object, not array) for `for letter, terms in glossary` Nunjucks pattern
-- `/browse/` page genus/family listings appear in search results — expected, genus names legitimately match species queries
-
-### Open Issues (from code review WR-01–WR-04)
+### Open Tech Debt (carry forward)
 
 - ⚠️ WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern
 - ⚠️ WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC)
 - ⚠️ WR-03: DuckDB instance not closed in glossary.js (resource leak)
 - ⚠️ WR-04: Missing ENOENT guard in check-page-weight.js
+- Orphan page: `_site/content/species/acronicta-americana/` (no layout, not linked)
+- MAINT-03: build time under 5 min unverified — requires live CI observation
 
 ## Session Continuity
 
 Last session: 2026-04-12
-Stopped at: Phase 4 verified
+Stopped at: v1.0 milestone archived
 
 ## Next Action
 
-Run `/gsd-plan-phase 5` to plan the Maintainability phase.
+Run `/gsd-new-milestone` to define v1.1 goals, requirements, and roadmap.
