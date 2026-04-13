@@ -9,9 +9,9 @@
 | Field | Type | Required | Example |
 |-------|------|----------|---------|
 | species_id | integer | yes | 1 (must match an id in species.csv) |
-| record_type | string | yes | specimen, photograph, literature, or field notes |
-| latitude | decimal | yes | 47.6062 (must be within PNW bounds: ~41-54 lat) |
-| longitude | decimal | yes | -122.3321 (must be within PNW bounds: ~-130 to -110 lon) |
+| record_type | string | yes | specimen, photograph, literature, field notes, or sight_field_notes |
+| latitude | decimal | yes | 47.6062 (must be within PNW bounds: ~42-55 lat) |
+| longitude | decimal | yes | -122.3321 (must be within PNW bounds: ~-125 to -110 lon) |
 | state | string | yes | WA, OR, ID, MT, or BC |
 | county | string | no | King |
 | locality | string | no | Seattle |

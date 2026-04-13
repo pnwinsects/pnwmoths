@@ -48,13 +48,12 @@ All decisions and patterns are documented in PROJECT.md (Key Decisions table).
 - ⚠️ WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC)
 - ⚠️ WR-03: DuckDB instance not closed in glossary.js (resource leak)
 - ⚠️ WR-04: Missing ENOENT guard in check-page-weight.js
-- ~~Orphan page: `_site/content/species/acronicta-americana/`~~ — fixed (permalink: false added)
+- Orphan page: `_site/content/species/acronicta-americana/` (no layout, not linked)
 - MAINT-03: build time under 5 min unverified — requires live CI observation
 
 ## Session Continuity
 
-Last session: 2026-04-13
-Last activity: 2026-04-13 - Completed quick task 260412-u06: Address Copilot feedback on species-adding workflow
+Last session: 2026-04-12
 Stopped at: v1.0 milestone archived
 
 ## Quick Tasks Completed
@@ -62,7 +61,6 @@ Stopped at: v1.0 milestone archived
 | ID | Description | Date |
 |----|-------------|------|
 | 260412-qrt | Fix Copilot/AI assistant tooling gaps | 2026-04-13 |
-| 260412-u06 | Address Copilot feedback on species-adding workflow | 2026-04-13 |
 
 ## Next Action
 
