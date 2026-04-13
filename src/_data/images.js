@@ -13,13 +13,15 @@ export default async function () {
         'filename': 'VARCHAR',
         'photographer': 'VARCHAR',
         'weight': 'INTEGER',
-        'license': 'VARCHAR'
+        'license': 'VARCHAR',
+        'view': 'VARCHAR',
+        'specimen': 'VARCHAR'
       }
     )
   `);
 
   const result = await conn.runAndReadAll(`
-    SELECT species_id, filename, photographer, weight, license
+    SELECT species_id, filename, photographer, weight, license, view, specimen
     FROM images
     ORDER BY species_id, weight
   `);

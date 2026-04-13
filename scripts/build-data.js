@@ -71,7 +71,7 @@ function validateSlugComponent(value, fieldName) {
 export async function main() {
   // --- Pre-flight CSV validation ---
   validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species']);
-  const imageRows = validateCsv('data/images.csv', ['species_id', 'filename', 'photographer', 'weight', 'license']);
+  const imageRows = validateCsv('data/images.csv', ['species_id', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']);
   for (const row of imageRows) {
     if (!/^[a-zA-Z0-9._-]+$/.test(row.filename)) {
       throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
@@ -149,7 +149,7 @@ export async function main() {
       description: 'invalid record_type values',
       query: `
         SELECT DISTINCT record_type FROM records
-        WHERE record_type NOT IN ('specimen', 'photograph', 'literature', 'field notes')
+        WHERE record_type NOT IN ('specimen', 'photograph', 'literature', 'field notes', 'sight_field_notes')
       `
     },
     {
@@ -162,10 +162,10 @@ export async function main() {
       `
     },
     {
-      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-52.0, lon -125.0 to -110.0)',
+      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-55.0, lon -125.0 to -110.0)',
       query: `
         SELECT species_id, latitude, longitude FROM records
-        WHERE latitude < 42.0 OR latitude > 52.0
+        WHERE latitude < 42.0 OR latitude > 55.0
            OR longitude < -125.0 OR longitude > -110.0
       `
     },
