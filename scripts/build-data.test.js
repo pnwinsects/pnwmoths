@@ -25,7 +25,7 @@ test('validateCsv: species.csv with correct columns does not throw', () => {
 test('validateCsv: images.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/images.csv'),
-    ['species_id', 'filename', 'photographer', 'weight', 'license']
+    ['species_id', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']
   );
 });
 
@@ -98,6 +98,53 @@ test('build-data.js: state validation query catches invalid state values', async
 
   assert.strictEqual(rows.length, 1, 'Should catch exactly 1 invalid state');
   assert.strictEqual(rows[0].state, 'TX', 'Invalid state should be TX');
+
+  conn.closeSync();
+});
+
+// --- VALD-04 record_type validation test ---
+
+test('build-data.js: sight_field_notes passes record_type validation query', async () => {
+  const { DuckDBInstance } = await import('@duckdb/node-api');
+  const db = await DuckDBInstance.create(':memory:');
+  const conn = await db.connect();
+
+  await conn.run(`
+    CREATE TABLE records AS
+    SELECT 'sight_field_notes' AS record_type
+  `);
+
+  const result = await conn.runAndReadAll(`
+    SELECT DISTINCT record_type FROM records
+    WHERE record_type NOT IN ('specimen', 'photograph', 'literature', 'field notes', 'sight_field_notes')
+  `);
+  const rows = result.getRowObjectsJS();
+
+  assert.strictEqual(rows.length, 0, 'sight_field_notes should pass record_type validation (0 invalid rows)');
+
+  conn.closeSync();
+});
+
+// --- VALD-05 latitude bounds test ---
+
+test('build-data.js: latitude 54.5 (valid BC record) passes coordinate bounds check', async () => {
+  const { DuckDBInstance } = await import('@duckdb/node-api');
+  const db = await DuckDBInstance.create(':memory:');
+  const conn = await db.connect();
+
+  await conn.run(`
+    CREATE TABLE records AS
+    SELECT 1 AS species_id, 54.5 AS latitude, -122.0 AS longitude
+  `);
+
+  const result = await conn.runAndReadAll(`
+    SELECT species_id, latitude, longitude FROM records
+    WHERE latitude < 42.0 OR latitude > 55.0
+       OR longitude < -125.0 OR longitude > -110.0
+  `);
+  const rows = result.getRowObjectsJS();
+
+  assert.strictEqual(rows.length, 0, 'latitude 54.5 should pass bounds check (0 out-of-bounds rows)');
 
   conn.closeSync();
 });
