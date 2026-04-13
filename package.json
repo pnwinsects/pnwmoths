@@ -9,10 +9,9 @@
     "build:eleventy": "eleventy",
     "build:copy-parquet": "node scripts/copy-parquet.js",
     "build:pagefind": "pagefind --site _site",
-    "build:symlink": "rm -f _site/pnwmoths && (cd _site && ln -s . pnwmoths)",
     "build:validate-links": "lychee --config lychee.toml --root-dir _site '_site/**/*.html'",
     "build:check-weight": "node scripts/check-page-weight.js",
-    "build": "npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:pagefind && npm run build:symlink && npm run build:validate-links && npm run build:check-weight",
+    "build": "npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:pagefind && npm run build:validate-links && npm run build:check-weight",
     "test": "node --test scripts/build-data.test.js src/components/*.test.js"
   },
   "keywords": [],

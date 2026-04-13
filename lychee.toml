@@ -2,4 +2,5 @@ timeout = 20
 max_retries = 3
 cache = true
 accept = ["100..=103", "200..=299", "429"]
-exclude = []
+exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$"]
+remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]
