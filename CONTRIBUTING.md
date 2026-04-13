@@ -89,3 +89,8 @@ _instructions/      Plain-English maintainer guides
 
 - Dockerfile lychee binary is hardcoded to `x86_64` — wrong binary on ARM hosts, but the CI target is Linux x86_64
 - An orphan page is generated at `_site/content/species/acronicta-americana/` (Eleventy publishes any `.md` file without an explicit `permalink: false`)
+- The existing `src/content/species/acronicta-americana.md` has no YAML frontmatter, which contradicts the requirement stated in `_instructions/EDITING_DESCRIPTION.md`. The build currently tolerates missing frontmatter; new files should follow the documented format with a `slug` field.
+- `noc_id` is described as `integer` in `_instructions/ADDING_SPECIES.md` but is loaded as `VARCHAR` in `build-data.js`. This means non-numeric values won't be caught at import time. Consider aligning the schema documentation with the actual column type, or add a validation check for numeric-only values.
+- The `species.csv` schema has no `subfamily` column. The pnwmoths.biol.wwu.edu URL hierarchy includes subfamily, but there is nowhere to store it in the current data model.
+- The `_instructions/` guides cover each task (add species, add photo, add records) separately and each instructs the contributor to run the full build for verification. When adding a new species for the first time (species + photo + records together), there is no combined workflow guide. A contributor must read all three documents and perform the steps in the correct order (species first so the `id` is known, then photos and records using that `id`).
+- No tooling exists to pull species metadata, images, or occurrence records directly from the legacy pnwmoths.biol.wwu.edu site. Contributors must copy data manually from that site.

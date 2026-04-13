@@ -4,3 +4,4 @@ id,genus,species,common_name,noc_id,authority,family,similar_species
 3,Hyles,lineata,White-lined Sphinx,7894,Fabricius 1775,Sphingidae,manduca-sexta|smerinthus-cerisyi
 4,Manduca,sexta,Carolina Sphinx,7775,Linnaeus 1763,Sphingidae,hyles-lineata
 5,Smerinthus,cerisyi,One-eyed Sphinx,7822,Kirby 1837,Sphingidae,hyles-lineata|manduca-sexta
+6,Phyllodesma,americana,American Lappet Moth,7670,Harris 1841,Lasiocampidae,
