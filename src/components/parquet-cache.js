@@ -13,7 +13,7 @@ export async function loadParquet(slug) {
   if (cache.has(slug)) {
     return cache.get(slug);
   }
-  const url = `/species/${slug}/records.parquet`;
+  const url = `${import.meta.env.BASE_URL}species/${slug}/records.parquet`;
   const file = await asyncBufferFromUrl({ url });
   const records = await parquetReadObjects({ file });
   cache.set(slug, records);
