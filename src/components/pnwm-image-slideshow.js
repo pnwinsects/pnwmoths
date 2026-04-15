@@ -70,16 +70,17 @@ class PnwmImageSlideshow extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    // Extract image data from light DOM figure children
+    // Extract image data from light DOM figure children (only figures with an img)
     const figures = Array.from(this.querySelectorAll(':scope > figure'));
-    this._images = figures.map(fig => {
+    this._images = figures.flatMap(fig => {
       const img = fig.querySelector('img');
+      if (!img) return [];
       const figcaption = fig.querySelector('figcaption');
-      return {
-        src: img ? img.getAttribute('src') : '',
-        alt: img ? (img.getAttribute('alt') || '') : '',
+      return [{
+        src: img.getAttribute('src') || '',
+        alt: img.getAttribute('alt') || '',
         photographer: figcaption ? figcaption.textContent.trim() : '',
-      };
+      }];
     });
 
     // Hide static figures once JS component takes over
