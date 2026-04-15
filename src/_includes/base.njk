@@ -4,21 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "PNW Moths" }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600&family=Spinnaker&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/pico.min.css">
+  <link rel="stylesheet" href="{{ '/styles/theme.css' | url }}">
   {% if pagefindUi %}<link rel="stylesheet" href="{{ '/pagefind/pagefind-ui.css' | url }}">{% endif %}
 </head>
 <body>
-  <nav data-pagefind-ignore>
-    <ul>
-      <li><a href="{{ '/' | url }}">Home</a></li>
-      <li><a href="{{ '/browse/' | url }}">Browse</a></li>
-      <li><a href="{{ '/search/' | url }}">Search</a></li>
-      <li><a href="{{ '/glossary/' | url }}">Glossary</a></li>
-    </ul>
-  </nav>
+  <header>
+    <img src="{{ '/images/header.png' | url }}"
+         alt="Pacific Northwest moths — a row of specimen photographs on black">
+    <nav data-pagefind-ignore>
+      <ul>
+        <li><a href="{{ '/' | url }}">Home</a></li>
+        <li><a href="{{ '/browse/' | url }}">Browse</a></li>
+        <li><a href="{{ '/search/' | url }}">Search</a></li>
+        <li><a href="{{ '/glossary/' | url }}">Glossary</a></li>
+      </ul>
+    </nav>
+  </header>
   <main>
-    {{ content | safe }}
+    <div class="content-wrapper">
+      {{ content | safe }}
+    </div>
   </main>
+  <footer>
+    <p>Pacific Northwest Moths. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>.</p>
+  </footer>
   <script type="module" src="/components/main.js"></script>
 </body>
 </html>
