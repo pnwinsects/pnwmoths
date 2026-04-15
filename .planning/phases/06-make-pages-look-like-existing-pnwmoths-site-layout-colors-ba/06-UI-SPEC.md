@@ -1,7 +1,8 @@
 ---
 phase: 6
 slug: make-pages-look-like-existing-pnwmoths-site-layout-colors-ba
-status: draft
+status: approved
+reviewed_at: 2026-04-15
 shadcn_initialized: false
 preset: none
 created: 2026-04-15
