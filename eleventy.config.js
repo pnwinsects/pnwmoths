@@ -26,6 +26,10 @@ export default function (eleventyConfig) {
   // Passthrough copy for component source files so Vite can find them
   eleventyConfig.addPassthroughCopy({ "src/components": "components" });
 
+  // Theme CSS and banner image assets
+  eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
+  eleventyConfig.addPassthroughCopy({ "src/images": "images" });
+
   // Vite plugin: bundles client-side JS components
   eleventyConfig.addPlugin(EleventyVitePlugin, {
     viteOptions: {
