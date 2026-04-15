@@ -66,7 +66,11 @@ eleventyComputed:
     <h2>Similar species</h2>
     <ul>
       {% for slug in sp.similar_slugs %}
-        <li><a href="{{ ('/species/' + slug + '/') | url }}">{{ slug }}</a></li>
+        {% for s in species %}
+          {% if s.slug == slug %}
+            <li><a href="{{ ('/species/' + slug + '/') | url }}">{{ s.common_name or (s.genus + ' ' + s.species) }}</a></li>
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     </ul>
   </section>
