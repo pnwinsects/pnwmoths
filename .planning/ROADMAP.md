@@ -30,6 +30,17 @@
 | 4. Search, Glossary, and Validation | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
 
+### Phase 6: Make pages look like existing pnwmoths site — layout, colors, banner image
+
+**Goal:** Apply the visual identity of pnwmoths.biol.wwu.edu to every page: cream background, black header/footer, moth-strip banner image, Google Fonts (Open Sans + Spinnaker), white content wrapper with box-shadow, and updated homepage content.
+**Requirements**: TBD
+**Depends on:** Phase 5
+**Plans:** 2 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Create theme.css, download banner image, add Eleventy passthrough rules
+- [ ] 06-02-PLAN.md — Update base.njk layout and homepage content, visual verification
+
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12*
 
