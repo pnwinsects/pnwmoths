@@ -1,4 +1,4 @@
-species_id,record_type,latitude,longitude,state,county,locality,elevation,year,month,day,collector,collection,notes
+species_id,record_type,latitude,longitude,state,county,locality,elevation_ft,year,month,day,collector,collection,notes
 1,specimen,47.6062,-122.3321,WA,King,Seattle,56,2019,6,15,J. Smith,UW Burke Museum,
 999,specimen,47.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,references non-existent species
 1,invalid_type,47.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,bad record_type

@@ -18,7 +18,7 @@
 | family | string | yes | Noctuidae |
 | similar_species | string (slug) | no | acronicta-oblinita (pipe-separated for multiple: slug1\|slug2) |
 
-> **Note:** `noc_id` is the Hodges checklist number. It is stored as a string in the database (VARCHAR), so non-numeric values will not cause an import error. In practice the value should always be a plain integer matching the North American checklist; use of non-numeric values is not supported and should be treated as a data error.
+> **Note:** `noc_id` is the Hodges/MONA checklist number, stored as a string (VARCHAR). Most values are plain integers (e.g., `9200`). Species added after the original Hodges checklist were assigned MONA supplement numbers in the format `93-XXXX` (e.g., `93-0016`) — these are valid and should be entered as-is.
 
 **Slug convention:** `(genus + '-' + species).toLowerCase()` — alphanumeric and hyphens only.
 
