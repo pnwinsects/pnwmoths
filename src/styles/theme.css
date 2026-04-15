@@ -1,0 +1,96 @@
+/* PNW Moths theme — Pico CSS custom property overrides
+   Loaded AFTER pico.min.css to override design tokens.
+   Colors, fonts, and layout match pnwmoths.biol.wwu.edu. */
+
+/* --- Design tokens (Pico CSS overrides) --- */
+
+:root {
+  /* Page background — warm cream (per UI-SPEC dominant color) */
+  --pico-background-color: #f3e8ba;
+
+  /* Accent color — olive green from legacy site */
+  --pico-primary: #a4ab78;
+  --pico-primary-hover: #7f8956;
+
+  /* Body font — Open Sans (per UI-SPEC typography) */
+  --pico-font-family-sans-serif: 'Open Sans', Verdana, sans-serif;
+  --pico-font-family: var(--pico-font-family-sans-serif);
+}
+
+/* --- Heading font — Spinnaker (per UI-SPEC typography) --- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Spinnaker', 'Open Sans', sans-serif;
+}
+
+/* --- Full-width header and footer (override Pico classless container) --- */
+/* Pico classless mode constrains semantic containers to max-width + margin auto.
+   We need header/footer backgrounds to extend edge-to-edge. */
+
+body > header,
+body > footer {
+  max-width: 100%;
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+/* Footer inner padding */
+body > footer {
+  padding: 16px 24px;
+  font-size: 14px;
+  text-align: center;
+}
+
+body > footer a {
+  color: #ffffff;
+}
+
+/* --- Banner image centering --- */
+
+body > header img {
+  display: block;
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* --- Navigation bar --- */
+
+nav {
+  background-color: #000000;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  list-style: none;
+  display: flex;
+  gap: 0;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+nav a:hover {
+  color: #a4ab78;
+}
+
+/* --- Content wrapper (D-01) --- */
+/* White box with shadow on cream background, uniform across all pages. */
+
+.content-wrapper {
+  background-color: #ffffff;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px;
+  box-shadow: 0 0 15px 5px rgba(50, 50, 50, 0.25);
+}
