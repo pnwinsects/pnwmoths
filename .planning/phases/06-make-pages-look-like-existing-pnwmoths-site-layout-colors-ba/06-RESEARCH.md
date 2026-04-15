@@ -354,17 +354,11 @@ Note: The welcome text in `src/index.njk` already matches D-03 verbatim. The onl
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **`| url` vs hardcoded path for CSS assets**
-   - What we know: `pico.min.css` uses a hardcoded path `/css/pico.min.css` without `| url`; `pagefind-ui.css` uses `| url`.
-   - What's unclear: Whether the hardcoded Pico path works correctly in production with `pathPrefix: "/pnwmoths/"` — it may be a pre-existing bug or the build process may handle it differently.
-   - Recommendation: Use `| url` for all new asset paths. Do not replicate the bare `/css/pico.min.css` pattern.
+1. **`| url` vs hardcoded path for CSS assets** — RESOLVED: Use `| url` filter for all new asset paths (`theme.css`, `header.png`, nav links). Do not replicate the bare `/css/pico.min.css` pattern, which may be a pre-existing bug with `pathPrefix`. Plans 06-01 and 06-02 use `| url` throughout.
 
-2. **`<header>` wrapper structure**
-   - What we know: This is Claude's Discretion per D-05 context. Both patterns (header wraps nav+banner vs. banner sibling to nav) work.
-   - What's unclear: Whether Pico's classless `<header>` styling creates unwanted padding/margin that needs overriding.
-   - Recommendation: Wrap both banner and nav in `<header>` — matches semantic HTML convention and the legacy site structure.
+2. **`<header>` wrapper structure** — RESOLVED: Banner and nav are both wrapped in a single `<header>` element in `base.njk`. This matches semantic HTML convention and the legacy site structure. Pico's classless `<header>` max-width is overridden to `100%` in `theme.css` with inner content constrained to 1140px.
 
 ---
 

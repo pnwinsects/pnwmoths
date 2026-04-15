@@ -2,8 +2,8 @@
 phase: 6
 slug: make-pages-look-like-existing-pnwmoths-site-layout-colors-ba
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-04-15
 ---
 
