@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: MVP
+milestone_name: milestone
 status: milestone_complete
-stopped_at: v1.0 archived
-last_updated: "2026-04-13T00:00:00.000Z"
+stopped_at: Phase 6 CONTEXT.md written
+last_updated: "2026-04-15T18:25:45.255Z"
+last_activity: "2026-04-13 - Completed quick task 260412-u06: Address Copilot feedback on species-adding workflow"
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 12
-  completed_plans: 12
-  percent: 100
+  total_phases: 3
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
@@ -42,6 +42,10 @@ See: .planning/PROJECT.md (updated 2026-04-12 after v1.0 milestone)
 
 All decisions and patterns are documented in PROJECT.md (Key Decisions table).
 
+### Roadmap Evolution
+
+- Phase 6 added: Make pages look like existing pnwmoths site — layout, colors, banner image
+
 ### Open Tech Debt (carry forward)
 
 - ⚠️ WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern
@@ -53,9 +57,9 @@ All decisions and patterns are documented in PROJECT.md (Key Decisions table).
 
 ## Session Continuity
 
-Last session: 2026-04-13
+Last session: 2026-04-15T18:25:45.248Z
 Last activity: 2026-04-13 - Completed quick task 260412-u06: Address Copilot feedback on species-adding workflow
-Stopped at: v1.0 milestone archived
+Stopped at: Phase 6 CONTEXT.md written
 
 ## Quick Tasks Completed
 
