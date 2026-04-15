@@ -87,7 +87,7 @@ export async function main() {
   }
   validateCsv('data/records.csv', [
     'species_id', 'record_type', 'latitude', 'longitude', 'state', 'county',
-    'locality', 'elevation', 'year', 'month', 'day', 'collector', 'collection', 'notes'
+    'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection', 'notes'
   ]);
 
   // --- DuckDB import with explicit schema ---
@@ -123,7 +123,7 @@ export async function main() {
         'state': 'VARCHAR',
         'county': 'VARCHAR',
         'locality': 'VARCHAR',
-        'elevation': 'INTEGER',
+        'elevation_ft': 'INTEGER',
         'year': 'INTEGER',
         'month': 'INTEGER',
         'day': 'INTEGER',

@@ -12,10 +12,10 @@
 | record_type | string | yes | specimen, photograph, literature, field notes, or sight_field_notes |
 | latitude | decimal | yes | 47.6062 (must be within PNW bounds: ~42-55 lat) |
 | longitude | decimal | yes | -122.3321 (must be within PNW bounds: ~-125 to -110 lon) |
-| state | string | yes | WA, OR, ID, MT, or BC |
+| state | string | yes | WA, OR, ID, MT, BC, or AB |
 | county | string | no | King |
 | locality | string | no | Seattle |
-| elevation | integer | no | 56 (meters) |
+| elevation_ft | integer | no | 56 (feet above sea level) |
 | year | integer | no | 2019 |
 | month | integer | no | 6 (1-12) |
 | day | integer | no | 15 (1-31) |

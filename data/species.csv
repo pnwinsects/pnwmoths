@@ -5,3 +5,8 @@ id,genus,species,common_name,noc_id,authority,family,similar_species
 4,Manduca,sexta,Carolina Sphinx,7775,Linnaeus 1763,Sphingidae,hyles-lineata
 5,Smerinthus,cerisyi,One-eyed Sphinx,7822,Kirby 1837,Sphingidae,hyles-lineata|manduca-sexta
 6,Phyllodesma,americana,American Lappet Moth,7687,Harris 1841,Lasiocampidae,
+7,Habrosyne,scripta,Lettered Habrosyne,6235,Gosse,Drepanidae,habrosyne-gloriosa
+8,Antheraea,polyphemus,Polyphemus Moth,7757,Cramer 1776,Saturniidae,
+9,Sphinx,chersis,Great Ash Sphinx,7802,Hübner 1823,Sphingidae,sphinx-perelegans
+10,Notodonta,pacifica,Pacific Prominent Moth,93-0016,Behr 1892,Notodontidae,notodonta-manitou|notodonta-ochreata
+11,Hemileuca,eglanterina,Elegant Sheepmoth,7744,Boisduval 1852,Saturniidae,hemileuca-nuttalli
