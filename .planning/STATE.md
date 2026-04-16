@@ -63,16 +63,17 @@ All decisions and patterns are documented in PROJECT.md (Key Decisions table).
 ## Session Continuity
 
 Last session: 2026-04-15T20:00:00.000Z
-Last activity: 2026-04-15
+Last activity: 2026-04-15 - Completed quick task 260415-nki: Change photo/occurrence CSV species linking from id to slug
 Stopped at: Phase 6 verified and complete
 
 ## Quick Tasks Completed
 
-| ID | Description | Date |
-|----|-------------|------|
+| ID | Description | Date | Commit | Directory |
+|----|-------------|------|--------|-----------|
 | 260412-qrt | Fix Copilot/AI assistant tooling gaps | 2026-04-13 |
 | 260412-u06 | Address Copilot feedback on species-adding workflow | 2026-04-13 |
 | 260412-u07 | Address Copilot feedback — validator, schema, and doc deficiencies | 2026-04-13 |
+| 260415-nki | Change photo/occurrence CSV species linking from id to slug | 2026-04-15 | 5a0c09c | [260415-nki](./quick/260415-nki-currently-photo-and-occurrence-records-a/) |
 
 ## Next Action
 
