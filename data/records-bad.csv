@@ -1,6 +1,6 @@
-species_id,record_type,latitude,longitude,state,county,locality,elevation_ft,year,month,day,collector,collection,notes
-1,specimen,47.6062,-122.3321,WA,King,Seattle,56,2019,6,15,J. Smith,UW Burke Museum,
-999,specimen,47.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,references non-existent species
-1,invalid_type,47.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,bad record_type
-1,specimen,99.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,latitude out of PNW bounds
-1,specimen,47.0,-50.0,WA,King,Unknown,0,2020,1,1,Test,Test,longitude out of PNW bounds
+species_slug,record_type,latitude,longitude,state,county,locality,elevation_ft,year,month,day,collector,collection,notes
+acronicta-americana,specimen,47.6062,-122.3321,WA,King,Seattle,56,2019,6,15,J. Smith,UW Burke Museum,
+nonexistent-species,specimen,47.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,references non-existent species
+acronicta-americana,invalid_type,47.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,bad record_type
+acronicta-americana,specimen,99.0,-122.0,WA,King,Unknown,0,2020,1,1,Test,Test,latitude out of PNW bounds
+acronicta-americana,specimen,47.0,-50.0,WA,King,Unknown,0,2020,1,1,Test,Test,longitude out of PNW bounds
