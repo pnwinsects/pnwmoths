@@ -38,7 +38,7 @@ eleventyComputed:
   </noscript>
 </section>
 
-{% set spImages = images[sp.id] %}
+{% set spImages = images[sp.slug] %}
 <section>
   <h2>Photos</h2>
   <pnwm-image-slideshow slug="{{ sp.slug }}" data-pagefind-ignore>

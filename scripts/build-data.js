@@ -71,7 +71,7 @@ function validateSlugComponent(value, fieldName) {
 export async function main() {
   // --- Pre-flight CSV validation ---
   validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species']);
-  const imageRows = validateCsv('data/images.csv', ['species_id', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']);
+  const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']);
   for (const row of imageRows) {
     if (!/^[a-zA-Z0-9._-]+$/.test(row.filename)) {
       throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
@@ -86,7 +86,7 @@ export async function main() {
     }
   }
   validateCsv('data/records.csv', [
-    'species_id', 'record_type', 'latitude', 'longitude', 'state', 'county',
+    'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
     'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection', 'notes'
   ]);
 
@@ -116,7 +116,7 @@ export async function main() {
     SELECT * FROM read_csv('data/records.csv',
       header = true,
       columns = {
-        'species_id': 'INTEGER',
+        'species_slug': 'VARCHAR',
         'record_type': 'VARCHAR',
         'latitude': 'DOUBLE',
         'longitude': 'DOUBLE',
@@ -137,12 +137,12 @@ export async function main() {
   // --- Post-import validation queries ---
   const validationChecks = [
     {
-      description: 'orphaned records (species_id not in species table)',
+      description: 'orphaned records (species_slug not in species table)',
       query: `
-        SELECT DISTINCT r.species_id
+        SELECT DISTINCT r.species_slug
         FROM records r
-        LEFT JOIN species s ON r.species_id = s.id
-        WHERE s.id IS NULL
+        LEFT JOIN species s ON r.species_slug = lower(s.genus || '-' || s.species)
+        WHERE s.genus IS NULL
       `
     },
     {
@@ -164,7 +164,7 @@ export async function main() {
     {
       description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-55.0, lon -125.0 to -110.0)',
       query: `
-        SELECT species_id, latitude, longitude FROM records
+        SELECT species_slug, latitude, longitude FROM records
         WHERE latitude < 42.0 OR latitude > 55.0
            OR longitude < -125.0 OR longitude > -110.0
       `
@@ -172,8 +172,8 @@ export async function main() {
     {
       description: 'NULL required fields',
       query: `
-        SELECT species_id, latitude, longitude FROM records
-        WHERE species_id IS NULL OR latitude IS NULL OR longitude IS NULL
+        SELECT species_slug, latitude, longitude FROM records
+        WHERE species_slug IS NULL OR latitude IS NULL OR longitude IS NULL
       `
     }
   ];
@@ -209,7 +209,7 @@ export async function main() {
     mkdirSync(outDir, { recursive: true });
 
     await conn.run(`
-      COPY (SELECT * FROM records WHERE species_id = ${sp.id})
+      COPY (SELECT * FROM records WHERE species_slug = '${slug}')
       TO '${outDir}/records.parquet'
       (FORMAT parquet, COMPRESSION snappy)
     `);

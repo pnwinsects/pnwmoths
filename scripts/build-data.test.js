@@ -25,7 +25,7 @@ test('validateCsv: species.csv with correct columns does not throw', () => {
 test('validateCsv: images.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/images.csv'),
-    ['species_id', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']
+    ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']
   );
 });
 
@@ -134,11 +134,11 @@ test('build-data.js: latitude 54.5 (valid BC record) passes coordinate bounds ch
 
   await conn.run(`
     CREATE TABLE records AS
-    SELECT 1 AS species_id, 54.5 AS latitude, -122.0 AS longitude
+    SELECT 'acronicta-americana' AS species_slug, 54.5 AS latitude, -122.0 AS longitude
   `);
 
   const result = await conn.runAndReadAll(`
-    SELECT species_id, latitude, longitude FROM records
+    SELECT species_slug, latitude, longitude FROM records
     WHERE latitude < 42.0 OR latitude > 55.0
        OR longitude < -125.0 OR longitude > -110.0
   `);
