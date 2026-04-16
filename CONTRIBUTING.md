@@ -85,7 +85,3 @@ _instructions/      Plain-English maintainer guides
 - **Parquet path:** `data/parquet/{slug}/records.parquet` → deployed to `_site/species/{slug}/records.parquet`
 - **Prose path:** `src/content/species/{slug}.md` — rendered into the factsheet if present
 
-## Known issues
-
-- Dockerfile lychee binary is hardcoded to `x86_64` — wrong binary on ARM hosts, but the CI target is Linux x86_64
-
