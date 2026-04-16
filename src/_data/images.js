@@ -9,7 +9,7 @@ export default async function () {
     SELECT * FROM read_csv('data/images.csv',
       header = true,
       columns = {
-        'species_id': 'INTEGER',
+        'species_slug': 'VARCHAR',
         'filename': 'VARCHAR',
         'photographer': 'VARCHAR',
         'weight': 'INTEGER',
@@ -21,9 +21,9 @@ export default async function () {
   `);
 
   const result = await conn.runAndReadAll(`
-    SELECT species_id, filename, photographer, weight, license, view, specimen
+    SELECT species_slug, filename, photographer, weight, license, view, specimen
     FROM images
-    ORDER BY species_id, weight
+    ORDER BY species_slug, weight
   `);
 
   conn.closeSync();
@@ -31,9 +31,9 @@ export default async function () {
   const rows = result.getRowObjectsJS();
   const bySpecies = {};
   for (const row of rows) {
-    const id = String(row.species_id);
-    if (!bySpecies[id]) bySpecies[id] = [];
-    bySpecies[id].push(row);
+    const slug = row.species_slug;
+    if (!bySpecies[slug]) bySpecies[slug] = [];
+    bySpecies[slug].push(row);
   }
   return bySpecies;
 }
