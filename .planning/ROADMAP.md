@@ -6,6 +6,7 @@
 ## Milestones
 
 - ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-04-12) — [archive](.planning/milestones/v1.0-ROADMAP.md)
+- ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](.planning/milestones/v1.1-ROADMAP.md)
 
 ## Phases
 
@@ -20,6 +21,13 @@
 
 </details>
 
+<details>
+<summary>✅ v1.1 Visual Identity (Phase 6) — SHIPPED 2026-04-18</summary>
+
+- [x] Phase 6: Make Pages Look Like Existing pnwmoths Site (2/2 plans) — completed 2026-04-15
+
+</details>
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -29,20 +37,10 @@
 | 3. Client-side Interactivity | v1.0 | 2/2 | Complete | 2026-04-12 |
 | 4. Search, Glossary, and Validation | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
-
-### Phase 6: Make pages look like existing pnwmoths site — layout, colors, banner image
-
-**Goal:** Apply the visual identity of pnwmoths.biol.wwu.edu to every page: cream background, black header/footer, moth-strip banner image, Google Fonts (Open Sans + Spinnaker), white content wrapper with box-shadow, and updated homepage content.
-**Requirements**: TBD
-**Depends on:** Phase 5
-**Plans:** 2 plans
-
-Plans:
-- [ ] 06-01-PLAN.md — Create theme.css, download banner image, add Eleventy passthrough rules
-- [ ] 06-02-PLAN.md — Update base.njk layout and homepage content, visual verification
+| 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18*
 
 ## Backlog
 

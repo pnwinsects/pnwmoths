@@ -53,6 +53,51 @@
 
 ---
 
+## Milestone: v1.1 — Visual Identity
+
+**Shipped:** 2026-04-18
+**Phases:** 1 (Phase 6) | **Plans:** 2 | **Quick Tasks:** 3
+
+### What Was Built
+
+- Pico CSS design token overrides (`theme.css`) + moth-strip banner asset pipeline via extended `copy-images.js`
+- `base.njk` rewritten with Google Fonts, banner header, `.content-wrapper`, Creative Commons footer — all ~700 pages updated
+- Homepage simplified: welcome paragraph + single Browse CTA
+- Contributor tooling: devcontainer, `.github/copilot-instructions.md`, fixed stale `_instructions/` paths
+- `species_slug` as foreign key replacing `species_id` in `images.csv` and `records.csv`
+
+### What Worked
+
+- **Single layout entry point** — one `base.njk` change touched all ~700 pages with zero per-template edits
+- **Extending existing patterns** — the post-Vite copy workaround was already in `copy-images.js` for Parquet; extending it for CSS/images was clean and obvious
+- **Quick tasks for post-milestone debt** — the 260412-* tasks closed contributor doc gaps without requiring a full phase
+
+### What Was Inefficient
+
+- **`| url` filter ambiguity** — Vite-processed assets (script tags pointing to Vite entry points) cannot use `| url` but static assets (CSS, images) must. No clear rule existed; required a fix commit after initial implementation.
+- **Visual verification as human checkpoint** — Task 3 of 06-02 was always a manual step. Could be partially automated with a headless browser screenshot comparison in CI.
+
+### Patterns Established
+
+- `src/styles/theme.css` as the single Pico CSS override file — link after `pico.min.css` in `<head>`
+- Post-Vite copy in `scripts/copy-images.js` for any static asset that isn't a Vite entry point
+- `| url` filter on all *static* asset paths in templates; NOT on Vite entry point `<script src>` tags
+- `species_slug` as the canonical foreign key for all CSV files that reference species
+
+### Key Lessons
+
+1. **Vite entry points vs. static assets need different URL handling.** Assets copied post-Vite (CSS, images) need `| url`; assets processed by Vite (JS bundles) must not use `| url` or the pathPrefix gets doubled.
+2. **Human checkpoints are acceptable for visual review** but document the exact URL and comparison target so the step is repeatable.
+3. **Slug-as-foreign-key is the right call for flat files.** Numeric IDs are opaque to contributors; slugs are self-documenting and match the URL structure.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet (execution and planning); quick tasks resolved without subagents
+- Sessions: ~3 days elapsed (2026-04-12 → 2026-04-18), focused work ~1 day
+- Notable: Single-phase milestone completed efficiently; quick task pattern proved lightweight for post-v1.0 debt
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -60,12 +105,14 @@
 | Milestone | Commits | Phases | Key Change |
 |-----------|---------|--------|------------|
 | v1.0 | 109 | 5 | Initial GSD workflow established |
+| v1.1 | 103 | 1 | Quick task pattern for post-milestone debt; single-phase visual milestone |
 
 ### Cumulative Quality
 
 | Milestone | Test Files | Automated Coverage | Nyquist Compliant |
 |-----------|------------|-------------------|-------------------|
 | v1.0 | 2 | Build pipeline unit/integration tests only | 0/5 phases |
+| v1.1 | 2 | No new tests added | 0/1 phases |
 
 ### Top Lessons (Verified Across Milestones)
 
