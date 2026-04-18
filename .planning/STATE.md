@@ -3,11 +3,11 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Tech Debt
 status: In progress
-stopped_at: Defining requirements
+stopped_at: Phase 7 ready for planning
 last_updated: "2026-04-18T00:00:00.000Z"
 last_activity: 2026-04-18
 progress:
-  total_phases: 0
+  total_phases: 1
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -25,30 +25,30 @@ See: .planning/PROJECT.md (updated 2026-04-18 for v1.2 milestone)
 
 ## Current Status
 
-Milestone v1.2 (Tech Debt) started. Defining requirements.
+Milestone v1.2 (Tech Debt) — roadmap created. Phase 7 ready for planning.
 
-[░░░░░░░░░░░░░░░░░░░░] 0/? phases complete
+[░░░░░░░░░░░░░░░░░░░░] 0/1 phases complete
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-04-18 — Milestone v1.2 started
+Phase: 7 — Code Quality Fixes
+Plan: — (not yet planned)
+Status: Not started
+Last activity: 2026-04-18 — Roadmap created for v1.2
 
 ## Accumulated Context
 
 - v1.0 MVP: CSV → DuckDB → Parquet pipeline, ~700 species pages, Lit components, Pagefind search, CI/CD
 - v1.1 Visual Identity: cream/black/moth-strip, slug-based foreign keys, devcontainer, Copilot instructions
-- Tech debt items WR-01–04 deferred from v1.1 — all targeted for v1.2
+- Tech debt items WR-01–04 deferred from v1.1 — all targeted for v1.2, grouped into Phase 7
 
 ## Open Tech Debt (being addressed this milestone)
 
-- ⚠️ WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern
-- ⚠️ WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC)
-- ⚠️ WR-03: DuckDB instance not closed in glossary.js (resource leak)
-- ⚠️ WR-04: Missing ENOENT guard in check-page-weight.js
+- ⚠️ WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern → Phase 7
+- ⚠️ WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC) → Phase 7
+- ⚠️ WR-03: DuckDB instance not closed in glossary.js (resource leak) → Phase 7
+- ⚠️ WR-04: Missing ENOENT guard in check-page-weight.js → Phase 7
 
 ## Next Action
 
-Run `/gsd-plan-phase [N]` after roadmap is created.
+Run `/gsd-plan-phase 7` to plan Phase 7: Code Quality Fixes.
