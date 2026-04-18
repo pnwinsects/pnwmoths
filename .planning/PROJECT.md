@@ -39,14 +39,16 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Site visual identity matches pnwmoths.biol.wwu.edu (cream background, black header/footer, moth-strip banner, Google Fonts) — v1.1
 - ✓ All ~700 generated pages inherit visual identity via single `base.njk` layout — v1.1
 - ✓ Data linking uses species slug as foreign key in images.csv and records.csv — v1.1
+- ✓ `image_filename` in glossary.csv validated against safe-filename pattern at build time — v1.2
+- ✓ Pagefind CSS `<link>` in `<head>` (no FOUC on search page) — v1.2
+- ✓ DuckDB connection closed in glossary.js (no resource leak) — v1.2
+- ✓ ENOENT guard in check-page-weight.js (handles missing files without crash) — v1.2
 
 ### Active
 
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Site deployed to real hosting (GitHub Pages or equivalent) with real species/records data
 - [ ] Real occurrence records and species data loaded (currently ~10 species, ~130 stub records)
-- [ ] Pagefind CSS loaded from `<head>` (WR-02 — FOUC fix)
-- [ ] DuckDB instance closed in glossary.js (WR-03 — resource leak)
 
 ### Out of Scope
 
@@ -66,20 +68,17 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 ## Context
 
-**v1.1 shipped:** 2026-04-18 — 6 phases total, 14 plans, ~3,900 LOC (JS/Nunjucks/CSS)
+**v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
 - Lit web components, Leaflet (map), Pagefind (static search), Pico CSS (base styles)
 - GitHub Actions (CI/CD), Docker (reproducible build environment), lychee (link checker)
 
-**Known tech debt from v1.1:**
-- WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern
-- WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC)
-- WR-03: DuckDB instance not closed in glossary.js (resource leak)
-- WR-04: Missing ENOENT guard in check-page-weight.js
+**Known tech debt (carry forward):**
 - MAINT-03: build time under 5 min unverified — requires live CI observation
 - No automated visual regression tests for the site's visual identity
+- Code review WR-01–03: test cleanup paths could be more robust (warnings, non-blocking)
 
 **Key data entities:**
 - `Species` — genus, species, common name, NOC ID, authority, similar species links
@@ -128,4 +127,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-18 — Milestone v1.2 started*
+*Last updated: 2026-04-18 — Phase 7 complete, v1.2 Tech Debt milestone done*
