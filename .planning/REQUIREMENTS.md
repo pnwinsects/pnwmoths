@@ -7,10 +7,10 @@
 
 ## Code Quality
 
-- [ ] **WR-01**: Build script validates `image_filename` values in glossary.csv against a safe-filename pattern before import, failing the build on invalid values
-- [ ] **WR-02**: Pagefind CSS `<link>` is placed in `<head>` (not body) on the search page, eliminating flash of unstyled content
-- [ ] **WR-03**: DuckDB connection opened in glossary.js is closed after the query completes, eliminating the resource leak
-- [ ] **WR-04**: `check-page-weight.js` handles missing files (ENOENT) without crashing, logging a warning instead
+- [x] **WR-01**: Build script validates `image_filename` values in glossary.csv against a safe-filename pattern before import, failing the build on invalid values
+- [x] **WR-02**: Pagefind CSS `<link>` is placed in `<head>` (not body) on the search page, eliminating flash of unstyled content
+- [x] **WR-03**: DuckDB connection opened in glossary.js is closed after the query completes, eliminating the resource leak
+- [x] **WR-04**: `check-page-weight.js` handles missing files (ENOENT) without crashing, logging a warning instead
 
 ---
 
@@ -34,7 +34,7 @@ _(None identified — this milestone is a focused cleanup sprint)_
 
 | REQ-ID | Phase | Plan |
 |--------|-------|------|
-| WR-01  | 7     | —    |
-| WR-02  | 7     | —    |
-| WR-03  | 7     | —    |
-| WR-04  | 7     | —    |
+| WR-01  | 7     | 07-01 |
+| WR-02  | 7     | 07-01 |
+| WR-03  | 7     | 07-01 |
+| WR-04  | 7     | 07-01 |
