@@ -210,3 +210,53 @@ test('integration: build-data.js with bad CSV data exits non-zero with "Validati
     rmSync(tmpDir, { recursive: true, force: true });
   }
 });
+
+// WR-01: Regression test — invalid image_filename in glossary.csv is rejected
+test('integration: build-data.js rejects invalid image_filename in glossary.csv', () => {
+  const tmpDir = resolve(ROOT, '.tmp-glossary-wr01');
+  const tmpDataDir = resolve(tmpDir, 'data');
+  mkdirSync(tmpDataDir, { recursive: true });
+
+  // Copy valid CSVs unchanged
+  copyFileSync(resolve(ROOT, 'data/species.csv'), resolve(tmpDataDir, 'species.csv'));
+  copyFileSync(resolve(ROOT, 'data/images.csv'), resolve(tmpDataDir, 'images.csv'));
+  copyFileSync(resolve(ROOT, 'data/records.csv'), resolve(tmpDataDir, 'records.csv'));
+
+  // Write a glossary.csv with an invalid image_filename (contains space and !)
+  writeFileSync(resolve(tmpDataDir, 'glossary.csv'), [
+    'term,definition,image_filename,photographer',
+    'alula,A small lobe at the base of a wing,bad file!.jpg,Test Photographer'
+  ].join('\n'));
+
+  // Write a wrapper .mjs that sets cwd to tmpDir and calls main()
+  const scriptPath = resolve(ROOT, 'scripts/build-data.js');
+  const wrapperScript = resolve(tmpDir, 'run-glossary-bad.mjs');
+  writeFileSync(wrapperScript, [
+    `import { main } from '${scriptPath}';`,
+    `process.chdir('${tmpDir}');`,
+    `main().catch(err => { console.error(err.message); process.exit(1); });`
+  ].join('\n'));
+
+  try {
+    let threw = false;
+    let stderrOutput = '';
+    try {
+      execSync(`node ${wrapperScript}`, {
+        cwd: tmpDir,
+        timeout: 30000,
+        stdio: 'pipe'
+      });
+    } catch (err) {
+      threw = true;
+      stderrOutput = err.stderr ? err.stderr.toString() : '';
+    }
+
+    assert.ok(threw, 'build-data.js should exit non-zero for invalid glossary image_filename');
+    assert.ok(
+      stderrOutput.includes('Invalid image_filename'),
+      `stderr should contain "Invalid image_filename", got: ${stderrOutput}`
+    );
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
