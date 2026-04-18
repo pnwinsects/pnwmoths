@@ -29,7 +29,7 @@
 
 </details>
 
-- [ ] **Phase 7: Code Quality Fixes** — Patch all deferred tech debt: filename validation, resource leak, crash guard, FOUC fix
+- [x] **Phase 7: Code Quality Fixes** — Patch all deferred tech debt: filename validation, resource leak, crash guard, FOUC fix
 
 ## Phase Details
 
@@ -45,7 +45,7 @@
 **Plans**: 1 plan
 
 Plans:
-- [ ] 07-01-PLAN.md — Add WR-01/WR-04 regression tests, wire check-page-weight.test.js into npm test, mark all four WR items done
+- [x] 07-01-PLAN.md — Add WR-01/WR-04 regression tests, wire check-page-weight.test.js into npm test, mark all four WR items done
 
 ## Progress
 
@@ -57,7 +57,7 @@ Plans:
 | 4. Search, Glossary, and Validation | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
-| 7. Code Quality Fixes | v1.2 | 0/1 | Not started | - |
+| 7. Code Quality Fixes | v1.2 | 1/1 | Complete | 2026-04-18 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 started: 2026-04-18*

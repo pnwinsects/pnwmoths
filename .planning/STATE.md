@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Tech Debt
-status: Ready to execute
-stopped_at: Phase 7 planned — ready to execute
-last_updated: "2026-04-18T00:00:00.000Z"
+status: Phase complete
+stopped_at: Phase 7 Plan 01 complete — all WR items done
+last_updated: "2026-04-18T17:29:26Z"
 last_activity: 2026-04-18
 progress:
   total_phases: 1
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  completed_phases: 1
+  total_plans: 1
+  completed_plans: 1
+  percent: 100
 ---
 
 # Project State
@@ -21,34 +21,39 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-18 for v1.2 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v1.2 Tech Debt — fix WR-01 through WR-04
+**Current focus:** v1.2 Tech Debt — COMPLETE
 
 ## Current Status
 
-Milestone v1.2 (Tech Debt) — roadmap created. Phase 7 ready for planning.
+Milestone v1.2 (Tech Debt) — Phase 7 complete. All four WR items resolved and tested.
 
-[░░░░░░░░░░░░░░░░░░░░] 0/1 phases complete
+[████████████████████] 1/1 phases complete
 
 ## Current Position
 
 Phase: 7 — Code Quality Fixes
-Plan: — (not yet planned)
-Status: Not started
-Last activity: 2026-04-18 — Roadmap created for v1.2
+Plan: 01 (complete)
+Status: Complete
+Last activity: 2026-04-18 — Phase 7 Plan 01 executed
 
 ## Accumulated Context
 
 - v1.0 MVP: CSV → DuckDB → Parquet pipeline, ~700 species pages, Lit components, Pagefind search, CI/CD
 - v1.1 Visual Identity: cream/black/moth-strip, slug-based foreign keys, devcontainer, Copilot instructions
-- Tech debt items WR-01–04 deferred from v1.1 — all targeted for v1.2, grouped into Phase 7
+- v1.2 Tech Debt: WR-01–04 all fixed (Phase 4) and regression-tested (Phase 7); npm test now covers check-page-weight.js
 
-## Open Tech Debt (being addressed this milestone)
+## Tech Debt Status
 
-- ⚠️ WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern → Phase 7
-- ⚠️ WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC) → Phase 7
-- ⚠️ WR-03: DuckDB instance not closed in glossary.js (resource leak) → Phase 7
-- ⚠️ WR-04: Missing ENOENT guard in check-page-weight.js → Phase 7
+- ✅ WR-01: `image_filename` in glossary.csv validated against safe-filename pattern — fix(04) + test(07-01)
+- ✅ WR-02: Pagefind `<link>` stylesheet moved to `<head>` in base.njk — fix(04) confirmed
+- ✅ WR-03: DuckDB connection closed in glossary.js — fix(04) confirmed
+- ✅ WR-04: ENOENT guard added in check-page-weight.js — fix(04) + test(07-01)
+
+## Decisions
+
+- Use wrapper .mjs pattern for WR-01 glossary integration test (same as existing bad-CSV test) — allows process.chdir isolation
+- Do not assert exit code 0 for WR-04 test — exit 1 for missing SITE_DIR is correct behavior
 
 ## Next Action
 
-Run `/gsd-plan-phase 7` to plan Phase 7: Code Quality Fixes.
+v1.2 milestone complete. Run `/gsd-complete-milestone` to archive and plan v1.3.
