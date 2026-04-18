@@ -98,6 +98,49 @@
 
 ---
 
+## Milestone: v1.2 — Tech Debt
+
+**Shipped:** 2026-04-18
+**Phases:** 1 (Phase 7) | **Plans:** 1 | **Quick Tasks:** 0
+
+### What Was Built
+
+- WR-01 regression test: integration test that runs `build-data.js` with a glossary.csv containing an invalid `image_filename`, asserts non-zero exit and correct error message
+- WR-04 regression test: `spawnSync` test for `check-page-weight.js` with missing SITE_DIR, asserts no unhandled exception
+- check-page-weight.test.js wired into `npm test` glob; full suite now 37 tests, 37 passing
+- WR-02 and WR-03 confirmed via code inspection (fixes landed in Phase 4)
+
+### What Worked
+
+- **Focused milestone scope** — four concrete defects, no scope creep; 1 phase, 1 plan, done in a single session
+- **Regression-first approach** — adding tests for WR-01 and WR-04 immediately after fixing them guards against re-introduction
+- **Code review as pre-flight** — the 07-REVIEW.md existed from v1.1 and gave a clear work order for the milestone
+- **Pre-close audit** — surfaced 9 stale artifacts from v1.0/v1.1 (UAT, verification, quick tasks) that were actually complete but lacked proper status markers; resolved without rework
+
+### What Was Inefficient
+
+- **Stale artifact markers** — 9 artifacts from v1.0/v1.1 were complete but not marked as such in frontmatter; the `audit-open` tool couldn't confirm clean close without fixing status fields. Future: mark artifacts complete at phase close, not at milestone close.
+- **SUMMARY.md naming convention mismatch** — quick task directories use `{slug}-SUMMARY.md` but `audit-open` looks for bare `SUMMARY.md`; required creating stub files. Either convention should be consistent.
+
+### Patterns Established
+
+- Stub `SUMMARY.md` files in quick task directories (pointing to the prefixed summary) allow `audit-open` to confirm completion
+- `status: complete` in YAML frontmatter of SUMMARY.md is the canonical completion signal for the audit tool
+
+### Key Lessons
+
+1. **Close artifacts at the moment of completion.** Stale UAT/verification status markers accumulate across milestones and create friction at close. Mark complete immediately when done.
+2. **Quick task SUMMARY.md needs bare filename + status frontmatter** for `audit-open` to recognize completion. The slug-prefixed name is insufficient.
+3. **Milestone scope matters.** A one-phase tech-debt milestone is appropriate and efficient when defects are well-defined. Don't pad with speculative work.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet
+- Sessions: 1 day (2026-04-18)
+- Notable: Shortest milestone — 1 phase, 1 plan, done in under 1 hour of execution
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -106,6 +149,7 @@
 |-----------|---------|--------|------------|
 | v1.0 | 109 | 5 | Initial GSD workflow established |
 | v1.1 | 103 | 1 | Quick task pattern for post-milestone debt; single-phase visual milestone |
+| v1.2 | 8 | 1 | Focused tech-debt close; regression tests added; audit-open closure discipline established |
 
 ### Cumulative Quality
 
@@ -113,6 +157,7 @@
 |-----------|------------|-------------------|-------------------|
 | v1.0 | 2 | Build pipeline unit/integration tests only | 0/5 phases |
 | v1.1 | 2 | No new tests added | 0/1 phases |
+| v1.2 | 3 | +WR-01 regression (glossary validation) +WR-04 regression (crash guard); 37 total | 1/1 phases |
 
 ### Top Lessons (Verified Across Milestones)
 

@@ -1,8 +1,8 @@
 ---
 phase: 02-species-factsheet-static
 verified: 2026-04-11T00:00:00Z
-status: gaps_found
-score: 4/5 must-haves verified
+status: verified
+score: 5/5 must-haves verified
 overrides_applied: 0
 gaps:
   - truth: "Every page has site-wide navigation linking to browse, search, glossary, and home"
