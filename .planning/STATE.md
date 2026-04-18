@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Tech Debt
-status: In progress
-stopped_at: Phase 7 ready for planning
+status: Ready to execute
+stopped_at: Phase 7 planned — ready to execute
 last_updated: "2026-04-18T00:00:00.000Z"
 last_activity: 2026-04-18
 progress:
