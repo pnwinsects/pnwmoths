@@ -34,7 +34,7 @@ _(None identified — this milestone is a focused cleanup sprint)_
 
 | REQ-ID | Phase | Plan |
 |--------|-------|------|
-| WR-01  | —     | —    |
-| WR-02  | —     | —    |
-| WR-03  | —     | —    |
-| WR-04  | —     | —    |
+| WR-01  | 7     | —    |
+| WR-02  | 7     | —    |
+| WR-03  | 7     | —    |
+| WR-04  | 7     | —    |

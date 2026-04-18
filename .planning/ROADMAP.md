@@ -7,6 +7,7 @@
 
 - ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-04-12) — [archive](.planning/milestones/v1.0-ROADMAP.md)
 - ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](.planning/milestones/v1.1-ROADMAP.md)
+- **v1.2 Tech Debt** — Phase 7 (in progress)
 
 ## Phases
 
@@ -28,6 +29,21 @@
 
 </details>
 
+- [ ] **Phase 7: Code Quality Fixes** — Patch all deferred tech debt: filename validation, resource leak, crash guard, FOUC fix
+
+## Phase Details
+
+### Phase 7: Code Quality Fixes
+**Goal**: All four deferred code-quality defects from v1.1 are resolved — the build is safer, the search page loads without a flash, and validation scripts are robust
+**Depends on**: Phase 6 (v1.1 completed)
+**Requirements**: WR-01, WR-02, WR-03, WR-04
+**Success Criteria** (what must be TRUE):
+  1. Running the build with an invalid `image_filename` value in glossary.csv causes an explicit error before the build proceeds
+  2. The search page loads with Pagefind styles applied from the first paint (no unstyled flash)
+  3. The glossary.js data loader exits cleanly without leaving a DuckDB connection open (no resource warning in build output)
+  4. Running `check-page-weight.js` against a missing file path logs a warning instead of throwing an unhandled exception
+**Plans**: TBD
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -38,9 +54,10 @@
 | 4. Search, Glossary, and Validation | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
+| 7. Code Quality Fixes | v1.2 | 0/? | Not started | - |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 started: 2026-04-18*
 
 ## Backlog
 
