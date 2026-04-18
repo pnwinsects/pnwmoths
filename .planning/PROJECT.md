@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. v1.0 demonstrated that a static approach can be cheap to host, safe to run, and maintainable by non-technical contributors without a server or database.
+A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. v1.1 completed the visual identity: the site now matches pnwmoths.biol.wwu.edu with cream background, black header/footer, moth-strip banner, Google Fonts, and white content wrapper — all ~700 pages inherit the identity from a single `base.njk` layout.
 
 ## Core Value
 
@@ -26,12 +26,17 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ GitHub Actions CI/CD (deploy + PR check); Docker build environment — v1.0
 - ✓ LLM-actionable `_instructions/` files for non-technical maintainers — v1.0
 - ✓ Vite bundles client-side JS for interactive features — v1.0
+- ✓ Site visual identity matches pnwmoths.biol.wwu.edu (cream background, black header/footer, moth-strip banner, Google Fonts) — v1.1
+- ✓ All ~700 generated pages inherit visual identity via single `base.njk` layout — v1.1
+- ✓ Data linking uses species slug as foreign key in images.csv and records.csv — v1.1
 
 ### Active
 
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Site deployed to real hosting (GitHub Pages or equivalent) with real species/records data
-- [ ] Real occurrence records and species data loaded (currently 5 stub species, 10 stub records)
+- [ ] Real occurrence records and species data loaded (currently ~10 species, ~130 stub records)
+- [ ] Pagefind CSS loaded from `<head>` (WR-02 — FOUC fix)
+- [ ] DuckDB instance closed in glossary.js (WR-03 — resource leak)
 
 ### Out of Scope
 
@@ -51,18 +56,20 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 ## Context
 
-**v1.0 shipped:** 2026-04-12 — 5 phases, 12 plans, ~3,800 LOC (JS/Nunjucks/CSS)
+**v1.1 shipped:** 2026-04-18 — 6 phases total, 14 plans, ~3,900 LOC (JS/Nunjucks/CSS)
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
 - Lit web components, Leaflet (map), Pagefind (static search), Pico CSS (base styles)
 - GitHub Actions (CI/CD), Docker (reproducible build environment), lychee (link checker)
 
-**Known tech debt from v1.0:**
-- `content/species/acronicta-americana.md` publishes as an orphan page in `_site/content/species/` (no layout, no nav — not linked from anywhere but pollutes output)
-- `vite.config.js` has a misleading `emptyOutDir: false` comment; plugin uses `emptyOutDir: true` and renames `_site/`
-- Dockerfile lychee binary URL hardcoded to x86_64 (works on Linux CI; wrong binary on ARM hosts)
-- No automated test suites — all 5 VALIDATION.md files are in `draft` status
+**Known tech debt from v1.1:**
+- WR-01: `image_filename` in glossary.csv not validated against safe-filename pattern
+- WR-02: Pagefind `<link>` stylesheet in search page body instead of `<head>` (FOUC)
+- WR-03: DuckDB instance not closed in glossary.js (resource leak)
+- WR-04: Missing ENOENT guard in check-page-weight.js
+- MAINT-03: build time under 5 min unverified — requires live CI observation
+- No automated visual regression tests for the site's visual identity
 
 **Key data entities:**
 - `Species` — genus, species, common name, NOC ID, authority, similar species links
@@ -89,6 +96,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | Lit for client-side components | Lightweight web components standard; lower churn than framework alternatives | ✓ Good — light DOM required for Leaflet; CSS custom properties unavailable in Canvas 2D |
 | Git LFS for image assets | Keeps images in repo without bloating git history | — Pending (not yet deployed with real images) |
 | Docker for build environment | Reproducible builds locally and in CI | ✓ Good — Docker cold-start issue resolved; anonymous volume protects node_modules |
+| Pico CSS design token overrides via theme.css | No Pico source modification; clean separation; one file controls all brand tokens | ✓ Good — applied to all ~700 pages via single base.njk link |
+| Post-Vite asset copy in scripts/copy-images.js | eleventy-plugin-vite wipes _site/ during build; passthrough copies don't survive Vite's output directory rename | ✓ Good — extends existing copy-images.js pattern cleanly |
+| species_slug as foreign key in images.csv and records.csv | Slug is stable, human-readable, and matches URL structure; id is an implementation detail | ✓ Good — slug-keyed CSVs are easier for non-technical contributors to edit |
 
 ## Evolution
 
@@ -108,4 +118,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-12 after v1.0 milestone*
+*Last updated: 2026-04-18 after v1.1 milestone*
