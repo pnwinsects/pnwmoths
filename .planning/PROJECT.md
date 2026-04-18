@@ -2,17 +2,7 @@
 
 ## What This Is
 
-A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. v1.1 completed the visual identity: the site now matches pnwmoths.biol.wwu.edu with cream background, black header/footer, moth-strip banner, Google Fonts, and white content wrapper — all ~700 pages inherit the identity from a single `base.njk` layout.
-
-## Current Milestone: v1.2 Tech Debt
-
-**Goal:** Clear all deferred code-quality issues from v1.1.
-
-**Target fixes:**
-- WR-01: Validate `image_filename` in glossary.csv against safe-filename pattern
-- WR-02: Move Pagefind `<link>` stylesheet from body to `<head>` (fix FOUC)
-- WR-03: Close DuckDB instance in glossary.js (fix resource leak)
-- WR-04: Add ENOENT guard in check-page-weight.js
+A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually (cream background, black header/footer, moth-strip banner, Google Fonts) and has a clean, tested build pipeline with 37 automated tests across the data pipeline and validation scripts.
 
 ## Core Value
 
@@ -127,4 +117,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-18 — Phase 7 complete, v1.2 Tech Debt milestone done*
+*Last updated: 2026-04-18 after v1.2 milestone*

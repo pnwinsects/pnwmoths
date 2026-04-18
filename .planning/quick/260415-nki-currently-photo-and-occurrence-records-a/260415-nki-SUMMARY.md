@@ -1,6 +1,7 @@
 ---
 phase: quick
 plan: 260415-nki
+status: complete
 subsystem: data-pipeline
 tags: [csv, data, slug, refactor]
 dependency_graph:

@@ -25,4 +25,16 @@
 - Fixed stale contributor doc paths, added devcontainer config, added `.github/copilot-instructions.md` for AI coding assistant context
 - Fixed similar species displaying raw slugs instead of display names; fixed `| url` double-prefix on Vite-processed asset paths
 
+## v1.2 Tech Debt (Shipped: 2026-04-18)
+
+**Phases completed:** 1 phase (Phase 7), 1 plan, 2 tasks
+
+**Key accomplishments:**
+
+- `image_filename` in glossary.csv validated against safe-filename pattern at build time; invalid values fail the build with a clear error (WR-01)
+- Pagefind CSS `<link>` confirmed in `<head>` — no flash of unstyled content on search page (WR-02)
+- DuckDB connection closed in glossary.js — no resource leak warning in build output (WR-03)
+- ENOENT guard in check-page-weight.js — missing SITE_DIR logs a warning instead of crashing (WR-04)
+- check-page-weight.test.js wired into npm test suite; 37 tests, 37 passing
+
 ---

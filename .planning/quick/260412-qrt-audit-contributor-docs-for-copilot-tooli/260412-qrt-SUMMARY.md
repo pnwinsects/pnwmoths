@@ -1,3 +1,8 @@
+---
+status: complete
+quick_task: 260412-qrt
+---
+
 # Quick Task 260412-qrt: Audit Contributor Docs for Copilot Tooling — SUMMARY
 
 Status: COMPLETE

@@ -2,6 +2,7 @@
 quick_task: 260412-qrt
 title: Fix Copilot/AI assistant tooling gaps
 type: execute
+status: complete
 autonomous: true
 files_modified:
   - _instructions/EDITING_DESCRIPTION.md
