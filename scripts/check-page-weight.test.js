@@ -51,3 +51,21 @@ test('check-page-weight.js: no warning on pages under threshold', () => {
     rmSync(FAKE_SITE, { recursive: true, force: true });
   }
 });
+
+// WR-04: Regression test — missing SITE_DIR is handled without unhandled exception
+test('check-page-weight.js: handles missing SITE_DIR without unhandled exception', () => {
+  const NONEXISTENT = join(ROOT, '_nonexistent_wr04_dir');
+  const result = spawnSync(
+    'node',
+    [SCRIPT],
+    { cwd: ROOT, encoding: 'utf8', env: { ...process.env, SITE_DIR: NONEXISTENT } }
+  );
+
+  assert.ok(result.error === undefined || result.error === null, 'No spawn error');
+  assert.ok(result.status !== null, 'Process exited (not signal-killed)');
+  assert.ok(
+    (result.stdout + result.stderr).includes('[page-weight]'),
+    `Output should contain "[page-weight]" prefix, got: ${result.stdout + result.stderr}`
+  );
+  // Do NOT assert result.status === 0 — exits 1 for missing SITE_DIR, which is correct per WR-04
+});
