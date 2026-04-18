@@ -42,7 +42,10 @@
   2. The search page loads with Pagefind styles applied from the first paint (no unstyled flash)
   3. The glossary.js data loader exits cleanly without leaving a DuckDB connection open (no resource warning in build output)
   4. Running `check-page-weight.js` against a missing file path logs a warning instead of throwing an unhandled exception
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 07-01-PLAN.md — Add WR-01/WR-04 regression tests, wire check-page-weight.test.js into npm test, mark all four WR items done
 
 ## Progress
 
@@ -54,7 +57,7 @@
 | 4. Search, Glossary, and Validation | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
-| 7. Code Quality Fixes | v1.2 | 0/? | Not started | - |
+| 7. Code Quality Fixes | v1.2 | 0/1 | Not started | - |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 started: 2026-04-18*
