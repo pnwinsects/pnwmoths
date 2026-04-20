@@ -566,7 +566,7 @@ html`<div style=${this._mutedStyle(collectSlugs(family))}> ... </div>`
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Image path convention**
    - What we know: `taxon.js` stores `filename` only (e.g., `'01.jpg'`); existing species
@@ -575,6 +575,7 @@ html`<div style=${this._mutedStyle(collectSlugs(family))}> ... </div>`
    - Recommendation: Check one live species page's `<img>` tag before implementing. The noscript
      block in `browse/index.njk` gives no image URLs to compare against. Check
      `src/_includes/species.njk` or similar.
+   - RESOLVED: Path is `/images/${img.species_slug}/${img.filename}` — verified from `src/species/species.njk` line 48.
 
 2. **`species-states.json` loading state**
    - What we know: D-11 says fetch in `connectedCallback()`; CONTEXT.md leaves UX to discretion.
@@ -582,6 +583,7 @@ html`<div style=${this._mutedStyle(collectSlugs(family))}> ... </div>`
      or silently absent?
    - Recommendation: Disable the `<select>` until loaded (`?disabled=${!this._statesAvailable.length}`);
      this is safer than silently omitting the control.
+   - RESOLVED: Implement `?disabled=${!this._statesAvailable.length}` — select disabled until fetch completes.
 
 ---
 
