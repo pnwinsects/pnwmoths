@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-04-20 for v1.3 milestone)
 ## Current Position
 
 Phase: 11 of 12 (Accordion Component)
-Plan: 01 complete — next: 02
-Status: In progress — 1/3 plans complete
-Last activity: 2026-04-20 — Plan 11-01 complete: test scaffold for buildStateMap, taxonHasState, collectSlugs (RED state confirmed)
+Plan: 02 complete — next: 03
+Status: In progress — 2/3 plans complete
+Last activity: 2026-04-20 — Plan 11-02 complete: pnwm-taxon-browser.js Lit accordion component implemented (GREEN — 13/13 tests pass)
 
-Progress: [█░░░░░░░░░] 10%
+Progress: [██░░░░░░░░] 20%
 
 ## Performance Metrics
 
@@ -45,6 +45,7 @@ Progress: [█░░░░░░░░░] 10%
 |-------|-------|-------|----------|
 | v1.0–v1.2 | 15 | - | - |
 | 11-01 | 1 | 91s | 91s |
+| 11-02 | 1 | 78s | 78s |
 
 **Recent Trend:**
 - v1.3: not started
@@ -86,5 +87,5 @@ Items acknowledged and carried forward from v1.2 close:
 ## Session Continuity
 
 Last session: 2026-04-20
-Stopped at: Completed 11-01-PLAN.md — test scaffold in RED state
-Resume file: .planning/phases/11-accordion-component/11-01-SUMMARY.md
+Stopped at: Completed 11-02-PLAN.md — pnwm-taxon-browser.js implemented (GREEN)
+Resume file: .planning/phases/11-accordion-component/11-02-SUMMARY.md

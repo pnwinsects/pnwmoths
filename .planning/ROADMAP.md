@@ -107,7 +107,7 @@ Plans:
 
 Plans:
 - [x] 11-01-PLAN.md — Test scaffold: unit tests for buildStateMap, taxonHasState, collectSlugs (Wave 0)
-- [ ] 11-02-PLAN.md — Implement pnwm-taxon-browser.js — full Lit accordion component
+- [x] 11-02-PLAN.md — Implement pnwm-taxon-browser.js — full Lit accordion component
 - [ ] 11-03-PLAN.md — Wire component in main.js + build verification
 
 ### Phase 12: Validation
@@ -138,7 +138,7 @@ Plans:
 | 8. Schema Extension | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 9. Build Pipeline Extension | v1.3 | 2/2 | Complete | 2026-04-20 |
 | 10. Browse Shell Page | v1.3 | 1/1 | Complete | 2026-04-20 |
-| 11. Accordion Component | v1.3 | 1/3 | In progress | - |
+| 11. Accordion Component | v1.3 | 2/3 | In progress | - |
 | 12. Validation | v1.3 | 0/? | Not started | - |
 
 ---
