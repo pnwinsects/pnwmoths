@@ -44,7 +44,7 @@
 - [x] **Phase 8: Schema Extension** - Add `subfamily` and `navigational` columns to CSV data model with validation
 - [x] **Phase 9: Build Pipeline Extension** - Emit `taxon.js` data tree and `species-states.json` for accordion and state filter
 - [x] **Phase 10: Browse Shell Page** - Rewrite `/browse/` as single dynamic page; retire per-genus static pages
-- [ ] **Phase 11: Accordion Component** - Implement `<pnwm-taxon-browser>` Lit component with accordion, nav images, and state filter
+- [x] **Phase 11: Accordion Component** - Implement `<pnwm-taxon-browser>` Lit component with accordion, nav images, and state filter
 - [ ] **Phase 12: Validation** - Full build verification; confirm all outputs correct and tests passing
 
 ## Phase Details
@@ -108,7 +108,7 @@ Plans:
 Plans:
 - [x] 11-01-PLAN.md — Test scaffold: unit tests for buildStateMap, taxonHasState, collectSlugs (Wave 0)
 - [x] 11-02-PLAN.md — Implement pnwm-taxon-browser.js — full Lit accordion component
-- [~] 11-03-PLAN.md — Wire component in main.js + build verification (Tasks 1-2 done; checkpoint pending)
+- [x] 11-03-PLAN.md — Wire component in main.js + build verification
 
 ### Phase 12: Validation
 **Goal**: A clean production build with all outputs present and tests passing
@@ -138,7 +138,7 @@ Plans:
 | 8. Schema Extension | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 9. Build Pipeline Extension | v1.3 | 2/2 | Complete | 2026-04-20 |
 | 10. Browse Shell Page | v1.3 | 1/1 | Complete | 2026-04-20 |
-| 11. Accordion Component | v1.3 | 2/3 (+1 partial) | In progress | - |
+| 11. Accordion Component | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 12. Validation | v1.3 | 0/? | Not started | - |
 
 ---
