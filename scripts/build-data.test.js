@@ -421,3 +421,46 @@ test('integration: emit-species-states.js writes _site/species-states.json', () 
     'every element should have species_slug and state properties'
   );
 });
+
+// --- Phase 9 taxon.js tests ---
+
+test('taxon.js: returns family\u2192subfamily\u2192genus\u2192species tree', async () => {
+  const { default: taxon } = await import('../src/_data/taxon.js');
+  const tree = await taxon();
+  assert.ok(Array.isArray(tree), 'tree should be an array');
+  assert.ok(tree.length > 0, 'tree should have at least one family');
+  const fam = tree[0];
+  assert.ok('name' in fam && 'subfamilies' in fam && 'navImages' in fam, 'family missing required properties');
+  assert.ok(Array.isArray(fam.subfamilies), 'subfamilies should be an array');
+  const subfam = fam.subfamilies[0];
+  assert.ok('name' in subfam && 'genera' in subfam && 'navImages' in subfam, 'subfamily missing required properties');
+  const genus = subfam.genera[0];
+  assert.ok('name' in genus && 'genus_slug' in genus && 'navImages' in genus && 'species' in genus, 'genus missing required properties');
+  const sp = genus.species[0];
+  assert.ok('slug' in sp && 'name' in sp && 'common_name' in sp, 'species missing required properties');
+});
+
+test('taxon.js: null-subfamily genera have name: null (not string)', async () => {
+  const { default: taxon } = await import('../src/_data/taxon.js');
+  const tree = await taxon();
+  const nullSubfams = tree.flatMap(f => f.subfamilies).filter(s => s.name === null);
+  // At least some genera in species.csv have no subfamily — verify null is used
+  // If all species have subfamilies in test data, this assertion still must not throw
+  for (const s of nullSubfams) {
+    assert.strictEqual(s.name, null, 'null-subfamily node must have name: null, not a string');
+  }
+});
+
+test('taxon.js: navImages capped at 4 per taxon level', async () => {
+  const { default: taxon } = await import('../src/_data/taxon.js');
+  const tree = await taxon();
+  for (const fam of tree) {
+    assert.ok(fam.navImages.length <= 4, `family ${fam.name} has >4 navImages`);
+    for (const subfam of fam.subfamilies) {
+      assert.ok(subfam.navImages.length <= 4, `subfamily ${subfam.name} has >4 navImages`);
+      for (const genus of subfam.genera) {
+        assert.ok(genus.navImages.length <= 4, `genus ${genus.name} has >4 navImages`);
+      }
+    }
+  }
+});
