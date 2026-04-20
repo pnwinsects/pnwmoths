@@ -1,301 +1,223 @@
 # Pitfalls Research
 
-**Project:** PNW Moths Static Site (pnwmoths.biol.wwu.edu rebuild)
-**Researched:** 2026-04-11
-**Scope:** Pitfalls dimension — migration from Django/django-cms to Eleventy static site
+**Domain:** Eleventy/Lit/Parquet static site — adding accordion browse, navigation images, species-x-state Parquet filter
+**Researched:** 2026-04-18
+**Confidence:** HIGH (grounded in existing codebase + verified against official docs and known issues)
 
 ---
 
-## CMS → Markdown Migration
+## Critical Pitfalls
 
-### Pitfall: django-cms plugin markup has no Markdown equivalent
+### Pitfall 1: Parquet passthrough copy wiped by eleventy-plugin-vite on production build
 
-**What goes wrong:** django-cms stores content in "placeholder" blocks rendered by plugins (text, image, accordion, etc.). The HTML that comes out of djangocms-text (CKEditor) often includes plugin-generated wrapper divs, CSS classes applied inline, shortcode-like structures, and semantic elements (`<figure>`, `<aside>`, `<details>`) that have no Markdown equivalent. Automated HTML→Markdown converters (Turndown, Pandoc) silently drop these or emit raw HTML blocks, so the output looks fine in preview but the converted file is lossy.
+**What goes wrong:**
+The new species-x-state Parquet file (e.g. `data/parquet/species-state.parquet`) will be added to `eleventy.config.js` as a passthrough copy. During a production build, `eleventy-plugin-vite` renames `_site/` to `.11ty-vite`, runs Vite into a fresh `_site/`, then copies back processed assets — but only assets that Vite sees referenced from HTML. Binary files passthrough-copied from outside Vite's processing graph are silently dropped. This is an already-known issue (GitHub issue #42 on eleventy-plugin-vite), confirmed as affecting any passthrough-copied binary.
 
-**Likelihood for this project:** Likely. The existing site has CMS-managed rich text on species factsheets (the "similar species" descriptions and general prose). Even if the content is simple, spot-checking every converted page is mandatory.
+**Why it happens:**
+The project already solved this for per-species Parquet files with `scripts/copy-parquet.js` and an explicit `build:copy-parquet` step. Adding a second cross-cutting Parquet file without extending that same post-build copy script repeats the exact mistake the workaround was designed to prevent.
 
-**Mitigation:**
-- Audit the actual CMS output HTML before writing conversion scripts. Inventory which HTML patterns exist (tables? figures? custom classes?).
-- Use Pandoc with `--wrap=none` and `--markdown-headings=atx` for bulk conversion; it handles tables and most semantic elements better than Turndown for one-off migrations.
-- After conversion, run a diff between rendered-from-Markdown and rendered-from-HTML to catch silent losses.
-- Accept that some pages will need manual cleanup. Budget time for this, especially for any pages with embedded images or tables.
-- Since the PoC explicitly says to replace CMS rich text with Markdown files per species, establish a schema: one file per species, defined front-matter fields, body = free prose only. This constrains scope.
+**How to avoid:**
+Extend `scripts/copy-parquet.js` (or create a companion script) to also copy the species-state Parquet file into `_site/` after Vite finishes. Update the `build` npm script to include this copy step. Do not rely on `eleventyConfig.addPassthroughCopy` alone for any Parquet file.
 
----
+**Warning signs:**
+Build succeeds locally (dev server doesn't run Vite's rename dance), but the browse page fails in CI or after a full production build with a 404 on the Parquet file. The `build:copy-parquet` test in CI is the canary.
 
-### Pitfall: URL structure changes break incoming links and SEO
-
-**What goes wrong:** The existing site has URLs like `/species/Acronicta-americana/`. If the static rebuild uses a different slug strategy (e.g., lowercase, genus-species joined differently), every inbound link from iNaturalist, BAMONA, or research papers breaks silently.
-
-**Likelihood for this project:** Possible. The original Django URL patterns are deterministic from the model, but the static site's slug generation could diverge unless explicitly matched.
-
-**Mitigation:**
-- Extract the full URL list from the live site before migration (or from the nightly static snapshot).
-- Generate slugs in Eleventy using the same algorithm as Django (typically `genus-species`, preserving case as Django does).
-- Configure a `_redirects` file (Netlify) or GitHub Pages equivalent for any URLs that cannot be matched exactly.
+**Phase to address:**
+Phase that adds the species-state Parquet file to the build pipeline.
 
 ---
 
-## Flat Files at Scale
+### Pitfall 2: Accordion in shadow DOM cannot be styled by Pico CSS global rules
 
-### Pitfall: Eleventy loads all data into memory before paginating — 10k occurrence records means a large in-memory dataset
+**What goes wrong:**
+The existing `pnwm-filter-bar` uses shadow DOM (default `LitElement` behavior) with `static get styles()`. If the accordion component (`pnwm-taxon-browser` or similar) uses shadow DOM, Pico CSS rules (`summary`, `details`, `h2`, `h3`, etc.) and the project's `theme.css` custom properties will not apply inside the component. CSS custom properties (`var(--pico-*)`) do pierce shadow DOM — but Pico's element selectors do not. The existing `pnwm-occurrence-map` uses `createRenderRoot() { return this; }` for Leaflet, establishing the pattern that light DOM is the escape hatch when global styles must apply.
 
-**What goes wrong:** Eleventy's data cascade loads all global data files into Node.js memory at startup. A CSV or SQLite query returning 10,000 occurrence records joined to 700 species will be resident in memory for the entire build. This is fine at current scale but will become a build-time bottleneck if the dataset grows. More concretely: if the JS data file does a naive `db.prepare("SELECT * FROM occurrences").all()`, Node holds all ~10k rows plus all species metadata simultaneously.
+**Why it happens:**
+Shadow DOM is the default for `LitElement`. Developers expect `var(--pico-color)` to work (it does), but don't realize `h2 { font-size: ... }` from Pico's stylesheet won't apply to `h2` elements inside a shadow root.
 
-**Likelihood for this project:** Possible now, likely if data grows. 10k rows is well within Node's comfort zone (~50MB), but the pattern matters for sustainability.
+**How to avoid:**
+If the accordion needs Pico's heading/typography/details element styles, use `createRenderRoot() { return this; }` (light DOM mode), as established by `pnwm-occurrence-map`. Accept the trade-off: light DOM components leak their styles and lose slot/encapsulation features. Document this choice explicitly. If shadow DOM is preferred, forward all needed styles via `static styles` with explicit copies of required Pico rules (fragile — will drift as Pico updates) or use only CSS custom properties in the template.
 
-**Mitigation:**
-- In the SQLite data file for species pages, query only the records for each species at page-generation time (use pagination + per-page data), not a full table load.
-- Index `occurrences` on `species_id`. A per-species `WHERE species_id = ?` query costs microseconds.
-- Keep the full occurrence dataset as a single query only if you need it for the map/search index; fetch it once, not per-page.
-- Benchmark build time early in the PoC. Eleventy's `--dryrun` mode and `DEBUG=Eleventy:Benchmark` flag expose per-template timings.
+**Warning signs:**
+Accordion headings look unstyled compared to the rest of the page. `details`/`summary` expansion styling mismatches. Confirmed by inspecting the element in DevTools and seeing the shadow root boundary.
 
----
-
-### Pitfall: CSV files are not a reliable data interchange format
-
-**What goes wrong:** CSV has no schema enforcement. Two contributors saving the same file in Excel on different OS versions will produce: different line endings (CRLF vs LF), different encodings (UTF-8 vs Windows-1252), inconsistent quoting of fields that contain commas, and silently mangled dates (Excel auto-converts "2023-08-15" to "8/15/2023" on save). For a natural history dataset, this is especially dangerous: species authorities often contain parentheses, accented characters (Hübner, Zetterstedt), and em dashes.
-
-**Likelihood for this project:** Likely. Scientists use Excel. This will happen.
-
-**Mitigation:**
-- Prefer SQLite as the authoritative store. CSV is an export/import format, not the source of truth.
-- If CSV is used as source of truth (simpler for maintainers), write a validation script (`validate-csv.js`) that runs at build time and fails loudly on: non-UTF-8 bytes, unexpected column count, empty required fields, date fields that don't parse as ISO 8601, lat/long outside valid ranges.
-- Document the correct workflow for maintainers: "Download → edit in LibreOffice or Google Sheets → export as CSV UTF-8 → commit." Not Excel on Windows.
-- Add a CI check that runs the validation script before any deploy.
+**Phase to address:**
+Phase that creates the accordion Lit component.
 
 ---
 
-### Pitfall: SQLite file checked into git can cause merge conflicts
+### Pitfall 3: species.csv `subfamily` column breaks existing `validateCsv` and `families.js` hard-coded schema
 
-**What goes wrong:** SQLite is a binary format. Two contributors editing the database independently and merging in git will produce a corrupt file or a confusing merge conflict. git's merge strategies cannot resolve binary conflicts.
+**What goes wrong:**
+`scripts/build-data.js` calls `validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species'])` — this list does not include `subfamily`. Adding the column to the CSV silently passes validation (extra columns don't fail). However, `src/_data/families.js` hard-codes the DuckDB `read_csv` schema with explicit `columns = { ... }` — every column must be named. Adding `subfamily` to the CSV without adding it to the `columns` map in `families.js` (and `build-data.js`) causes DuckDB to either throw a schema mismatch error or silently ignore the new column.
 
-**Likelihood for this project:** Possible, especially once non-technical maintainers are involved.
+The existing test in `build-data.test.js` (`validateCsv: species.csv with correct columns does not throw`) will still pass after adding `subfamily`, masking the fact that the new column is not wired up. No test verifies that `subfamily` is correctly read through and available in Eleventy templates.
 
-**Mitigation:**
-- If SQLite is the authoritative store, make it write-once from a canonical CSV or scripts, not hand-edited. The database is regenerated from CSVs at build time via a seed script — git stores CSVs, not the `.db` file.
-- Add `*.db` to `.gitignore` if the DB is derived; commit only the seed data.
-- Alternatively, use SQLite only as a read-only build artifact, with CSV as the committed source.
+**Why it happens:**
+The pattern of explicitly enumerating column types in DuckDB's `read_csv` call is correct for type safety but requires synchronous updates across three locations: the CSV file, `build-data.js`'s schema definition, and `families.js`'s schema definition. Missing any one silently degrades behavior.
 
----
+**How to avoid:**
+When adding `subfamily` to `species.csv`, update all three in the same commit: (1) CSV header, (2) `build-data.js` `read_csv` columns map (add `'subfamily': 'VARCHAR'`), (3) `families.js` `read_csv` columns map. Update the `validateCsv` call to include `subfamily` in required columns only if it's truly required (it's nullable, so requiring it in `validateCsv` is wrong — instead, add it to the columns map but not to required columns). Add a test that verifies `subfamily` appears in the query output from `families.js` data.
 
-## Static Search Limitations
+**Warning signs:**
+`DuckDB: Binder Error: Explicit column types specified, but column "subfamily" was not found` at build time. Or no error but `sp.subfamily` is always `undefined` in Nunjucks templates.
 
-### Pitfall: Pagefind does not support fuzzy matching on prefix typos
-
-**What goes wrong:** Pagefind indexes by word fragments, but its fuzzy matching only works when the correct characters appear in the correct order. If the user types "Acrnoicta" (transposition), Pagefind returns nothing. Pagefind also does not support wildcard searches or regex. Users from a server-side search (Sphinx, Elasticsearch, even basic SQL `LIKE`) will expect typo tolerance.
-
-**Likelihood for this project:** Possible. The species names are long and technical (e.g., "Acronicta americana", "Catocala neogama") — easy to misspell, and the user population includes people looking up names they half-remember.
-
-**Mitigation:**
-- Accept this limitation for the PoC. The goal is to validate static search, not achieve parity with server-side.
-- Mitigate UX impact by ensuring common names are indexed alongside scientific names, so users can search "sweetheart moth" and find "Catocala amatrix."
-- If fuzzy matching is a hard requirement post-PoC, evaluate Fuse.js (client-side fuzzy, higher memory) or a hosted service like Algolia.
-- Document this limitation explicitly in the PoC validation findings.
+**Phase to address:**
+Phase that adds the `subfamily` column to `species.csv`.
 
 ---
 
-### Pitfall: Pagefind index size grows with occurrence data embedded in pages
+### Pitfall 4: Nunjucks `{% if sp.subfamily %}` silently treats empty string as falsy but SQL NULL arrives as `null` in JS
 
-**What goes wrong:** If each species page embeds its full occurrence JSON (lat/long, date, collector, location for hundreds of records), Pagefind will index that structured data as searchable text. Collector names, location strings, and counties will bloat the index and pollute search results (searching "Lane County" returns every species with a Lane County record, not a useful result).
+**What goes wrong:**
+DuckDB returns SQL NULLs as JavaScript `null` in `.getRowObjectsJS()`. In Nunjucks, `{% if sp.subfamily %}` treats both `null` and `""` (empty string) as falsy, which is the correct intended behavior. However, the DuckDB schema must declare `'subfamily': 'VARCHAR'` — not `'subfamily': 'VARCHAR NOT NULL'`. If the column is accidentally cast as NOT NULL at import time, rows with blank `subfamily` cells in the CSV may error or coerce to empty string rather than NULL, causing the Nunjucks condition to evaluate differently than intended.
 
-**Likelihood for this project:** Likely. The PoC requirement explicitly embeds occurrence JSON at build time for the map/chart. Pagefind will index it unless excluded.
+A second problem: the accordion taxonomy tree needs to group species with `subfamily IS NULL` directly under family. If the JS grouping logic uses `sp.subfamily !== null` (strict null check) but DuckDB actually returns `""` for blank CSV cells due to DuckDB's CSV auto-detection, the grouping silently puts all species under a subfamily named `""`.
 
-**Mitigation:**
-- Use `data-pagefind-ignore` attribute on the `<script>` block or element containing the occurrence JSON, or place it in a script tag (which Pagefind skips by default).
-- Alternatively, keep occurrence data out of the HTML entirely: load it from a separate JSON file via client-side fetch. This also reduces page size.
-- Test Pagefind index size with a representative sample before committing to the approach.
+**Why it happens:**
+DuckDB's `read_csv` with explicit `columns` and `VARCHAR` type coerces blank CSV cells to `""` by default — not `NULL`. NULL in CSV (an empty field) becomes `""` unless you add `nullstr = ''` to the `read_csv` call.
 
----
+**How to avoid:**
+Add `nullstr = ''` to the `read_csv` call for `species.csv` in both `build-data.js` and `families.js` when reading the `subfamily` column. This ensures blank CSV cells for `subfamily` arrive as SQL NULL, which then arrives as JS `null`, which Nunjucks `{% if %}` handles correctly. Add a test with a species row where `subfamily` is blank and verify the grouping code puts it directly under family.
 
-### Pitfall: Pagefind search cannot filter by faceted attributes without custom UI work
+**Warning signs:**
+`sp.subfamily` is `""` instead of `null`. All species with no subfamily appear under a taxon level named `""`. Check by logging `.getRowObjectsJS()` output for a species with a blank subfamily cell.
 
-**What goes wrong:** The existing site presumably supports filtering by state, county, or family. Pagefind supports filters (metadata fields) but they require intentional markup (`data-pagefind-filter="state:Oregon"` on each element) and a custom UI — the default Pagefind UI widget has no faceted navigation.
-
-**Likelihood for this project:** Possible for PoC, likely for production. Browse-by-family is a stated feature.
-
-**Mitigation:**
-- For the PoC, treat search as full-text only. Browse-by-family is a separate feature implemented as static index pages, not search filters.
-- If filter search is needed post-PoC, plan for custom Pagefind JavaScript API integration.
+**Phase to address:**
+Phase that adds the `subfamily` column and builds the taxonomy tree data structure.
 
 ---
 
-## Hosting Gotchas
+### Pitfall 5: The species-state Parquet is a full-table JOIN that will grow large with real data
 
-### Pitfall: GitHub Pages 1 GB published site limit
+**What goes wrong:**
+The v1.3 design emits a single species-×-state Parquet from `JOIN species ON records`. At ~130 stub records this is trivial. With 100k+ real occurrence records (the stated scale), the JOIN produces a table of `(species_slug, state, count)` or `(species_slug, state)` pairs. The schema choice matters: if the file is `SELECT DISTINCT species_slug, state FROM records` it's bounded by `species_count × state_count` (e.g., 700 × 6 = 4,200 rows, tiny). If it inadvertently emits one row per record (a debugging mistake), it's 100k rows and will be a multi-MB download that blocks the browse page.
 
-**What goes wrong:** GitHub Pages enforces a recommended 1 GB limit on the published site. For 700 species pages plus occurrence JSON, a search index, and bundled JS, this is unlikely to be hit with text alone — but the moment any image assets are included (even thumbnails), it becomes a real constraint. The limit is described as "soft" but GitHub has been known to disable sites that consistently exceed it.
+A secondary issue: `parquet-cache.js` currently caches per-slug (per-species). The species-state Parquet is a single file loaded once. If it's loaded via the same `loadParquet(slug)` API, the cache key would need to be a sentinel value, not a slug. Using the wrong cache key causes the file to be fetched on every filter interaction.
 
-**Likelihood for this project:** Unlikely while images are excluded, possible if images are ever included.
+**Why it happens:**
+Easy to accidentally write `SELECT * FROM records JOIN species` instead of `SELECT DISTINCT species_slug, state FROM records`. Easy to forget that `loadParquet` in `parquet-cache.js` uses a slug-based URL template (`species/${slug}/records.parquet`) that won't work for a cross-cutting file.
 
-**Mitigation:**
-- Keep images out of the repo (already the stated approach). Reference them by path only.
-- Monitor repo + published site size as part of CI. Add a build check that warns if output exceeds 800 MB.
-- If the site outgrows GitHub Pages, Netlify (free tier: 100 GB bandwidth/month) is the natural fallback with no published site size limit.
+**How to avoid:**
+Schema: emit `SELECT DISTINCT species_slug, state FROM records WHERE state IS NOT NULL` — confirmed bounded size. Test the output row count before publishing. Cache: add a separate `loadSpeciesStateParquet()` function in `parquet-cache.js` with its own URL and cache key, rather than reusing the slug-based `loadParquet`. Add a test for the row count of the exported file with representative data.
 
----
+**Warning signs:**
+Browse page slow to load. Parquet file unexpectedly large in `data/parquet/`. `loadParquet` called with a non-slug key and cache misses on every filter change.
 
-### Pitfall: GitHub Pages has no server-side redirect support; redirect files must be pre-generated
-
-**What goes wrong:** GitHub Pages serves static files only. There is no `_redirects` file support (that's Netlify). To implement redirects on GitHub Pages, you must either: (a) generate HTML redirect stub files at build time, or (b) use a JavaScript meta-refresh trick. Neither is clean. If the original site's URLs need to be preserved, this requires generating stub files for every old URL at build time.
-
-**Likelihood for this project:** Possible. The nightly static snapshot is the current live site, so its URL structure is the baseline. If the static rebuild changes any URL pattern, some form of redirect is needed.
-
-**Mitigation:**
-- Match the original URL structure exactly to avoid needing redirects at all.
-- If redirects are needed, prefer Netlify over GitHub Pages — `_redirects` file is simple and well-documented.
-- For the PoC, declare URL stability a goal and test against the scraped URL list.
+**Phase to address:**
+Phase that adds the build-time species-state Parquet export and the client-side state filter.
 
 ---
 
-### Pitfall: Linux filesystem case sensitivity vs. macOS development
+### Pitfall 6: Retiring `/browse/{genus}/` pages breaks lychee's link validator and existing navigation
 
-**What goes wrong:** macOS filesystems are case-insensitive by default. A file named `Acronicta-Americana.html` and a link to `acronicta-americana.html` work fine locally but produce 404s on GitHub Pages (Linux, case-sensitive). This is a particularly sharp edge for species names because genus names are capitalized and species epithets are lowercase — inconsistent slug generation creates hard-to-find bugs.
+**What goes wrong:**
+The current `browse/index.njk` generates `<a href="{{ ('/browse/' + genus.genus_slug + '/') | url }}">` links to per-genus pages. The current `browse/genus.njk` pagination generates those pages. When genus.njk is deleted and index.njk is rewritten as an accordion page, all the inter-page links in the existing `/browse/` HTML become dangling references — but the Eleventy build will not warn about this. Lychee's post-build link check (`build:validate-links`) will catch broken links only if it runs after a clean build and if the links appear in the final HTML.
 
-**Likelihood for this project:** Likely during development. Species slugs involve capitalized genus names; it's easy to generate `Acronicta-americana` in one place and `acronicta-americana` in another.
+A secondary problem: any external pages or cross-references (e.g., species pages) that link to `/browse/acronicta/` will produce 404s after the retirement. The project's stated decision to defer Django URL redirects (SEO-01) means there's no server-side redirect support — GitHub Pages serves static files only.
 
-**Mitigation:**
-- Standardize all slugs to lowercase at generation time in Eleventy (`.toLowerCase()`).
-- Add a CI linting step that checks for inconsistent case in internal links.
-- Test every deploy on a Linux environment (GitHub Actions, Netlify preview), not just locally.
+**Why it happens:**
+Template deletion removes the output pages, but references to those pages are scattered in templates and could also appear in species pages if any were cross-linked. The build pipeline has no "dead output file reference" detector — lychee finds broken links in HTML but only if the links are still in the emitted HTML. If `browse/index.njk` is rewritten in the same commit as the genus page deletion, no HTML will contain the old `/browse/{genus}/` URLs and lychee won't flag it. But external bookmarks and crawled links will still 404.
 
----
+**How to avoid:**
+Before deleting `genus.njk`, audit all templates for links to `/browse/{genus}/` paths: search for `browse/` in `src/**/*.njk` and `src/**/*.md`. Confirm none of the ~700 species pages link to genus browse pages. For SEO, generate stub HTML redirect pages (one per retired genus URL) that redirect to `#genus-{slug}` on the new accordion browse page, or add a note to the build about accepted 404s. Document in PROJECT.md that `/browse/{genus}/` URLs are retired (not redirected) per SEO-01 deferral.
 
-## Non-technical Maintainers + Flat Files
+**Warning signs:**
+Lychee reports 0 broken links (because old URLs no longer appear in any HTML), but Google Search Console eventually shows 404 spikes. Grep for `browse/` in templates before and after deletion.
 
-### Pitfall: Excel silently corrupts species authority names and dates on save
-
-**What goes wrong:** Excel on Windows auto-formats cells it recognizes as dates. "1923" (a publication year) becomes a date serial. An authority like "(Smith, 1908)" may be left alone, but a cell starting with a number followed by text may be auto-converted. More critically: Excel saves CSV in Windows-1252 encoding by default (not UTF-8) on older versions. Characters like the degree symbol in elevation fields (°), accented authority names (Hübner → HŸbner), and em dashes in locality strings are silently corrupted. This corruption is invisible until build time or user-facing display.
-
-**Likelihood for this project:** Likely. The dataset contains authority names with accented characters (common in Lepidoptera taxonomy), elevation data, and locality strings. Scientists use Excel.
-
-**Mitigation:**
-- Write a `validate-data.js` script that checks for non-UTF-8 bytes and known-bad character sequences before every build.
-- Provide a template CSV with locked headers and data validation rules (date format, lat/long range) that maintainers use when adding records.
-- Prefer Google Sheets for collaborative editing — it handles UTF-8 natively and exports clean UTF-8 CSV.
-- Document in the LLM instruction files: "Always export as CSV UTF-8, not CSV (Windows)."
-- Add a git pre-commit hook that runs the validation script.
+**Phase to address:**
+Phase that retires the genus.njk pagination and rewrites browse/index.njk.
 
 ---
 
-### Pitfall: Maintainers introduce extra columns, rename headers, or reorder columns
+## Technical Debt Patterns
 
-**What goes wrong:** CSV files have no enforced schema. A maintainer adding a new "notes" column, renaming "collector" to "Collector", or inserting a blank column for visual spacing will silently break the build data pipeline. The JavaScript data loader assumes column names and order; unexpected changes cause records to be silently dropped or mapped to wrong fields.
-
-**Likelihood for this project:** Likely over time. Non-technical maintainers treat spreadsheets as flexible.
-
-**Mitigation:**
-- Parse CSVs by column name, not column index. Use a library like `csv-parse` with `columns: true`.
-- The validation script should check that required columns exist with exact names, and warn on unexpected columns (don't fail — the extra column is benign, but the warning surfaces the change).
-- Document column names and their meaning in the LLM instruction file (the maintainer-facing docs).
+| Shortcut | Immediate Benefit | Long-term Cost | When Acceptable |
+|----------|-------------------|----------------|-----------------|
+| Light DOM for accordion (like pnwm-occurrence-map) | Global Pico styles apply automatically | Styles from accordion leak into page; no slot encapsulation | Acceptable for this project — already established pattern |
+| Single species-state Parquet (not partitioned by state) | Simpler build query | Whole file loaded for any state filter; 700×6 rows is fine at current scale | Acceptable until record count reaches 50k+ and file exceeds ~200KB |
+| Inline taxonomy JSON in `<script>` tag vs fetch | No separate HTTP request; simpler | JSON is embedded in HTML, bloating page and potentially Pagefind index | Acceptable if `data-pagefind-ignore` is applied to the script tag |
+| Extending `copy-parquet.js` rather than fixing root cause | Minimal new code | Two copy scripts to maintain; fragile post-Vite build sequence | Acceptable as the upstream plugin issue is not resolved in project's Vite version |
 
 ---
 
-### Pitfall: Bare species names trigger merge conflicts in CSV when two maintainers add records
+## Integration Gotchas
 
-**What goes wrong:** If two contributors add occurrence records to the same CSV file in separate branches, git will attempt a line-level merge. CSVs are text files, so git can merge them — but it produces duplicate header rows, incorrect line orderings, or conflict markers inserted mid-file if the same region was edited. The merge conflict markers break the CSV parser.
-
-**Likelihood for this project:** Possible once more than one person is actively adding records.
-
-**Mitigation:**
-- Use a single-record-per-line format with a stable sort key (species_id + date + collector) to make merges more deterministic.
-- Alternatively, split occurrence records into per-species CSV files (one file per species). Concurrent edits to different species never conflict. This matches the Markdown-per-species pattern already in use for prose.
-- Document the "one record per line, never reorder" norm for contributors.
-
----
-
-## Eleventy + Vite Integration
-
-### Pitfall: eleventy-plugin-vite requires ESM; CommonJS Eleventy configs need a dynamic import workaround
-
-**What goes wrong:** `@11ty/eleventy-plugin-vite` is written as ESM-only. If the project's `.eleventy.js` uses CommonJS (`require()`), adding the plugin requires converting the config to use `async` + `await import()`. This is a non-obvious step that the error message does not explain clearly: the build fails with a `require is not a function` or similar ESM error.
-
-**Likelihood for this project:** Likely if starting from a CommonJS Eleventy config template, which is still common in tutorials.
-
-**Mitigation:**
-- Start with `.eleventy.cjs` or use `"type": "module"` in `package.json` from the start.
-- If converting an existing CommonJS config, the pattern is: `module.exports = async function(eleventyConfig) { const { EleventyVite } = await import("@11ty/eleventy-plugin-vite"); ... }`.
-- Pin to a specific version of the plugin and test before upgrading — the plugin has had breaking changes across Eleventy 2.x versions.
+| Integration | Common Mistake | Correct Approach |
+|-------------|----------------|------------------|
+| DuckDB `read_csv` + nullable VARCHAR column | Blank CSV cells arrive as `""` not NULL | Add `nullstr = ''` parameter to `read_csv` call |
+| hyparquet + whole-file ArrayBuffer | Using `asyncBufferFromUrl` (range requests) fails on GitHub Pages CDN (documented in parquet-cache.js) | Continue existing pattern: fetch whole file, wrap ArrayBuffer manually — already solved for per-species files |
+| Lit + shadow DOM + Pico CSS | Expect global `summary`, `details`, `h3` styles to apply inside component | They don't. Use light DOM or copy required styles into `static get styles()` |
+| Eleventy data cascade + large JSON in `<script>` | Embedded JSON is indexed by Pagefind | Wrap `<script>` in element with `data-pagefind-ignore` or load via client-side fetch |
+| `composed: true` on accordion expand/collapse events | All ancestor listeners hear the event; internal state exposed | Use `composed: false` if event only needs to be heard by the browse page shell; `composed: true` only for cross-component state like filter-change |
+| DuckDB `COPY ... TO ... (FORMAT parquet, COMPRESSION snappy)` | Forgetting `COMPRESSION snappy` — ZSTD is default but breaks hyparquet | Always specify `COMPRESSION snappy` — already documented in PROJECT.md Key Decisions |
 
 ---
 
-### Pitfall: Eleventy output directory conflicts with Vite's input/output expectations
+## Performance Traps
 
-**What goes wrong:** The plugin runs Vite over Eleventy's output directory. If Vite's build output and Eleventy's output directory are not carefully aligned, the final deploy directory can contain double-processed files, missing files, or Vite manifest files that shouldn't be served. A specific known issue: files written to a non-standard output path (e.g., locale-prefixed paths like `_site/en/`) cause "was not in output directory" errors during Vite post-processing.
-
-**Likelihood for this project:** Possible. The PoC has a straightforward URL structure, but if locale or subdirectory paths are introduced later, this bites.
-
-**Mitigation:**
-- Use the default `_site` output directory and don't customize Vite's `outDir` unless necessary.
-- Keep the output directory structure flat: all species pages at `/species/[slug]/`, no locale prefixes for the PoC.
-- Test a production build (`eleventy --serve=false` + Vite build) in CI, not just the dev server. Dev server hides some output directory issues.
+| Trap | Symptoms | Prevention | When It Breaks |
+|------|----------|------------|----------------|
+| Species-state Parquet emits one row per record instead of DISTINCT | Browse page loads slowly; Parquet file MB-sized | Use `SELECT DISTINCT species_slug, state` — verify row count in test | At 10k records (~10k rows vs expected ~700×6=4200) |
+| Accordion expands all nodes simultaneously, each triggering image requests | Browser fires 40+ parallel image fetches on expand-all | Lazy-load images per taxon; only fetch images for expanded nodes | Any number of simultaneous expansions |
+| Taxonomy tree built in Eleventy data file with O(n²) grouping | Build slow; `_data/families.js` takes >5s | DuckDB ORDER BY and GROUP BY are fast; do grouping in SQL not in JS | ~700 species is fine; 7000+ would matter |
+| loadParquet called in `connectedCallback` with no deduplication for the species-state file | Multiple components each trigger separate fetches of the same file | Ensure the species-state file has its own module-level cache entry | Any page with >1 state-filter component |
 
 ---
 
-### Pitfall: Vite dev server and Eleventy dev server can interfere on port conflicts and HMR
+## "Looks Done But Isn't" Checklist
 
-**What goes wrong:** When running both Eleventy's dev server and Vite in watch mode, port assignments and HMR (Hot Module Replacement) websocket connections can conflict or cause double-refresh cycles. The official plugin handles this by running Vite as middleware inside Eleventy's server, but custom configurations that split them can cause confusing behavior where changes don't reflect, or the page reloads twice per save.
-
-**Likelihood for this project:** Possible during development. Using the plugin's integrated mode avoids this.
-
-**Mitigation:**
-- Use `@11ty/eleventy-plugin-vite` in its default integrated mode (Vite as middleware), not as a separate process.
-- Do not run `vite dev` and `eleventy --serve` simultaneously as separate processes.
-- Document the correct dev command in the project README.
-
----
-
-## Image Handling Without a CDN
-
-### Pitfall: Build generates pages with broken `<img>` tags that cause layout shift and accessibility failures
-
-**What goes wrong:** Images are excluded from the repo and referenced by path. When a species page renders with an `<img src="/images/species/12345.jpg">` pointing to a file that does not exist in the build output, the browser shows a broken image icon. On a species page with a slideshow (the PoC requirement), this breaks the entire image component's layout and may cause JS errors in the slideshow initialization code.
-
-**Likelihood for this project:** Certain. Images are explicitly out of scope for the repo. Every species page will have broken image references in the development environment.
-
-**Mitigation:**
-- In the Eleventy data pipeline, distinguish between "image path exists in local checkout" and "image path is known." Render `<img>` tags with the expected path regardless, but wrap the image component in logic that handles a load error gracefully (CSS `img { object-fit: contain; }` + an `onerror` handler that shows a placeholder).
-- Write a validation script that checks which image paths in the data are present in a configured image directory (which may be empty or a local mount), and reports counts. This is not a build failure — it's a warning.
-- In the PoC, stub the image slideshow: if no images are present, show a "no images available" placeholder without throwing errors.
-- Document the expected image directory structure so that anyone with access to the image assets can mount them locally and get a fully-rendered build.
+- [ ] **subfamily column:** Added to CSV header and verified that `families.js` DuckDB schema includes it AND `nullstr = ''` is set — not just added to the CSV
+- [ ] **navigational flag in images.csv:** Added to CSV header AND `validateCsv` required-columns list updated AND `build-data.js` DuckDB schema updated (images table is currently not imported into DuckDB, so a new import may be needed)
+- [ ] **Parquet post-build copy:** Species-state Parquet file copied to `_site/` by post-Vite script, not just by passthrough copy
+- [ ] **Accordion expand/collapse state:** Component state is reactive (causes re-render) — not just a class toggle on a raw DOM element outside Lit's render tree
+- [ ] **State filter hides taxa:** Filter hides the entire taxon row (family/genus) when no species in that taxon have occurrences in the selected state — not just individual species rows
+- [ ] **Retired genus pages:** `build:validate-links` still passes after genus.njk is deleted (no template still links to `/browse/{genus}/`)
+- [ ] **Pagefind exclusion:** Taxonomy JSON injected into browse page shell has `data-pagefind-ignore` on its container
+- [ ] **Snappy compression:** Species-state Parquet export uses `COMPRESSION snappy`
 
 ---
 
-### Pitfall: Image path references in data diverge from filesystem paths over time
+## Recovery Strategies
 
-**What goes wrong:** The existing Django site stores image paths relative to `MEDIA_ROOT`. If the static site uses a different base path or directory structure for images, every image reference in the data is wrong. This is a silent failure — the build succeeds, but every `<img>` is broken in production.
-
-**Likelihood for this project:** Likely during initial migration. The Django `SpeciesImage` model stores paths that assume Django's media serving. A static site will use a different path convention (e.g., `/images/species/` vs. `/media/pnwmoths/species/`).
-
-**Mitigation:**
-- During data extraction from Django, normalize all image paths to the static site's convention and store normalized paths in the flat file data.
-- Write a path normalization function used consistently everywhere an image path is referenced.
-- The validation script should report path prefixes found in image data, making divergence obvious.
-
----
-
-### Pitfall: Git LFS or large file storage for images creates deployment complexity
-
-**What goes wrong:** If the decision is ever made to include images in the repo (e.g., thumbnails only), Git LFS requires specific setup on every contributor's machine and in CI. GitHub Pages does not serve Git LFS files — it only serves the LFS pointer files, resulting in broken images in production.
-
-**Likelihood for this project:** Unlikely as long as the "images excluded" decision holds, but worth flagging if it's reconsidered.
-
-**Mitigation:**
-- Do not use Git LFS for anything that needs to be served directly by GitHub Pages.
-- If thumbnails must be in the repo, store them as regular git objects (< 5 MB total is safe; 100 thumbnails at ~30KB each = ~3 MB).
-- Prefer an external image host (even a simple S3 bucket or the university's web server) over Git LFS for GitHub Pages deployments.
+| Pitfall | Recovery Cost | Recovery Steps |
+|---------|---------------|----------------|
+| Species-state Parquet missing from `_site/` in production | LOW | Add file to `copy-parquet.js` (or companion script), re-run `npm run build:copy-parquet` equivalent |
+| Accordion visually broken due to shadow DOM / Pico mismatch | MEDIUM | Switch to light DOM (`createRenderRoot() { return this; }`), re-test styling and event bubbling |
+| `subfamily` silently ignored (arrived as `""`) | LOW | Add `nullstr = ''` to `read_csv`, re-run data build, re-test grouping logic |
+| Browse page Parquet bloated (row-per-record instead of DISTINCT) | LOW | Fix the DuckDB COPY query, re-run `build-data.js`, re-run post-build copy |
+| Retired genus URLs cause 404s externally | HIGH (SEO damage irreversible short-term) | Generate HTML redirect stubs pointing to `#genus-{slug}` anchor on browse page; accepted risk per SEO-01 deferral |
 
 ---
 
-## Phase-Specific Warnings
+## Pitfall-to-Phase Mapping
 
-| Phase Topic | Likely Pitfall | Mitigation |
-|-------------|---------------|------------|
-| Data extraction from Django | SpeciesImage path normalization wrong | Extract + normalize paths in same script; validate immediately |
-| CSV data pipeline | Excel encoding corruption | Validate UTF-8 at build time before any other processing |
-| Species page build | Occurrence JSON bloating Pagefind index | Use `data-pagefind-ignore` or load JSON via fetch |
-| Search implementation | No fuzzy matching on scientific names | Document limitation; mitigate with common name indexing |
-| Eleventy + Vite setup | ESM/CommonJS mismatch | Start ESM-first |
-| Image slideshow | All images missing in dev | Implement graceful `onerror` fallback before testing slideshow |
-| GitHub Pages deployment | Case sensitivity on species slugs | Normalize all slugs to lowercase; test on Linux CI |
-| Non-technical editor workflow | CSV corruption from Excel | Prefer Google Sheets; validate on every commit |
+| Pitfall | Prevention Phase | Verification |
+|---------|------------------|--------------|
+| Species-state Parquet wiped by Vite | Phase: build-data pipeline extension | Full `npm run build` succeeds; `_site/species-state.parquet` (or equivalent) exists after build |
+| Accordion shadow DOM / Pico CSS mismatch | Phase: accordion Lit component | Visual comparison of accordion in full-build context vs dev server |
+| `subfamily` schema not updated in all 3 locations | Phase: species.csv schema extension | `families.js` data includes `subfamily` field; blank values arrive as `null` not `""` |
+| Blank subfamily becomes `""` not `null` | Phase: species.csv schema extension | Unit test for grouping with blank-subfamily species |
+| Species-state Parquet schema emits too many rows | Phase: build-data pipeline extension | Test asserts row count ≤ `species_count × distinct_state_count` |
+| Retiring genus pages breaks lychee or leaves stale HTML | Phase: browse page retirement | `build:validate-links` passes; grep for `/browse/` in templates shows no dangling references |
+
+---
+
+## Sources
+
+- Existing `eleventy.config.js`, `scripts/copy-parquet.js` — known passthrough-copy workaround pattern
+- `scripts/build-data.js` — DuckDB schema definitions and `validateCsv` column lists
+- `src/_data/families.js` — DuckDB `read_csv` with explicit `columns` map
+- `src/components/pnwm-occurrence-map.js` — light DOM precedent (`createRenderRoot() { return this; }`)
+- `src/components/pnwm-filter-bar.js` — shadow DOM with `static get styles()` precedent
+- eleventy-plugin-vite GitHub Issue #42 — confirmed passthrough binary file wipe in production
+- [Lit Shadow DOM docs](https://lit.dev/docs/components/shadow-dom/) — createRenderRoot light DOM note
+- [Lit Styles docs](https://lit.dev/docs/components/styles/) — CSS custom properties pierce shadow DOM; element selectors do not
+- [composed: true considered harmful](https://dev.to/open-wc/composed-true-considered-harmful-5g59) — event encapsulation guidance
+- [DuckDB NULL Values docs](https://duckdb.org/docs/current/sql/data_types/nulls) — NULL handling in DuckDB queries
+- [hyparquet README](https://github.com/hyparam/hyparquet/blob/master/README.md) — asyncBufferFromUrl, range request behavior
+- PROJECT.md Key Decisions — `COMPRESSION snappy` required; GitHub Pages CDN range-request workaround
+
+---
+*Pitfalls research for: v1.3 Visual Browse — Eleventy/Lit/Parquet static site*
+*Researched: 2026-04-18*
