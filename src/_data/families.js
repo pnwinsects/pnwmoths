@@ -8,6 +8,7 @@ export default async function () {
     CREATE TABLE species AS
     SELECT * FROM read_csv('data/species.csv',
       header = true,
+      nullstr = '',
       columns = {
         'id': 'INTEGER',
         'genus': 'VARCHAR',
@@ -16,17 +17,18 @@ export default async function () {
         'noc_id': 'VARCHAR',
         'authority': 'VARCHAR',
         'family': 'VARCHAR',
-        'similar_species': 'VARCHAR'
+        'similar_species': 'VARCHAR',
+        'subfamily': 'VARCHAR'
       }
     )
   `);
 
-  // For browse/index.njk: distinct genera with family, sorted
+  // For browse/index.njk: distinct genera with family and subfamily, sorted
   const generaResult = await conn.runAndReadAll(`
-    SELECT DISTINCT family, genus,
+    SELECT DISTINCT family, genus, subfamily,
       lower(replace(genus, ' ', '-')) AS genus_slug
     FROM species
-    ORDER BY family, genus
+    ORDER BY family, subfamily NULLS LAST, genus
   `);
 
   // For browse/{genus-slug}/: each genus with its species list
