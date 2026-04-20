@@ -17,7 +17,7 @@ const ROOT = resolve(__dirname, '..');
 test('validateCsv: species.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/species.csv'),
-    ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species']
+    ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily']
   );
   // If we reach here, no error was thrown — pass
 });
@@ -25,7 +25,7 @@ test('validateCsv: species.csv with correct columns does not throw', () => {
 test('validateCsv: images.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/images.csv'),
-    ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']
+    ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']
   );
 });
 
@@ -256,6 +256,93 @@ test('integration: build-data.js rejects invalid image_filename in glossary.csv'
       stderrOutput.includes('Invalid image_filename'),
       `stderr should contain "Invalid image_filename", got: ${stderrOutput}`
     );
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+// --- Null-coercion tests for new Phase 8 columns ---
+
+test('build-data.js: blank subfamily in species CSV arrives as NULL with nullstr', async () => {
+  const tmpDir = resolve(ROOT, '.tmp-nullstr-subfamily');
+  mkdirSync(tmpDir, { recursive: true });
+  const tmpFile = resolve(tmpDir, 'species-nullstr.csv');
+  try {
+    writeFileSync(tmpFile, [
+      'id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily',
+      '1,Acronicta,americana,American Dagger Moth,9200,Harris 1841,Noctuidae,autographa-californica,'
+    ].join('\n'));
+
+    const { DuckDBInstance } = await import('@duckdb/node-api');
+    const db = await DuckDBInstance.create(':memory:');
+    const conn = await db.connect();
+
+    await conn.run(`
+      CREATE TABLE species AS
+      SELECT * FROM read_csv('${tmpFile}',
+        header = true,
+        nullstr = '',
+        columns = {
+          'id': 'INTEGER',
+          'genus': 'VARCHAR',
+          'species': 'VARCHAR',
+          'common_name': 'VARCHAR',
+          'noc_id': 'VARCHAR',
+          'authority': 'VARCHAR',
+          'family': 'VARCHAR',
+          'similar_species': 'VARCHAR',
+          'subfamily': 'VARCHAR'
+        }
+      )
+    `);
+
+    const result = await conn.runAndReadAll('SELECT subfamily FROM species');
+    const rows = result.getRowObjectsJS();
+    conn.closeSync();
+
+    assert.strictEqual(rows[0].subfamily, null, 'blank subfamily cell should be NULL, not empty string');
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('build-data.js: blank navigational in images CSV arrives as NULL with nullstr', async () => {
+  const tmpDir = resolve(ROOT, '.tmp-nullstr-navigational');
+  mkdirSync(tmpDir, { recursive: true });
+  const tmpFile = resolve(tmpDir, 'images-nullstr.csv');
+  try {
+    writeFileSync(tmpFile, [
+      'species_slug,filename,photographer,weight,license,view,specimen,navigational',
+      'acronicta-americana,01.jpg,Jane Doe,1,CC BY 4.0,,,'
+    ].join('\n'));
+
+    const { DuckDBInstance } = await import('@duckdb/node-api');
+    const db = await DuckDBInstance.create(':memory:');
+    const conn = await db.connect();
+
+    await conn.run(`
+      CREATE TABLE images AS
+      SELECT * FROM read_csv('${tmpFile}',
+        header = true,
+        nullstr = '',
+        columns = {
+          'species_slug': 'VARCHAR',
+          'filename': 'VARCHAR',
+          'photographer': 'VARCHAR',
+          'weight': 'INTEGER',
+          'license': 'VARCHAR',
+          'view': 'VARCHAR',
+          'specimen': 'VARCHAR',
+          'navigational': 'VARCHAR'
+        }
+      )
+    `);
+
+    const result = await conn.runAndReadAll('SELECT navigational FROM images');
+    const rows = result.getRowObjectsJS();
+    conn.closeSync();
+
+    assert.strictEqual(rows[0].navigational, null, 'blank navigational cell should be NULL, not empty string');
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
