@@ -8,7 +8,7 @@
 - ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-04-12) — [archive](.planning/milestones/v1.0-ROADMAP.md)
 - ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](.planning/milestones/v1.1-ROADMAP.md)
 - ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](.planning/milestones/v1.2-ROADMAP.md)
-- 🚧 **v1.3 Visual Browse** — Phases 8–12 (in progress)
+- ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20)
 
 ## Phases
 
@@ -37,7 +37,8 @@
 
 </details>
 
-### 🚧 v1.3 Visual Browse (In Progress)
+<details>
+<summary>✅ v1.3 Visual Browse (Phases 8–12) — SHIPPED 2026-04-20</summary>
 
 **Milestone Goal:** Replace static browse pages with an interactive accordion browse page (Family → Subfamily → Genus → Species) with navigation images and client-side state filtering.
 
@@ -45,7 +46,7 @@
 - [x] **Phase 9: Build Pipeline Extension** - Emit `taxon.js` data tree and `species-states.json` for accordion and state filter
 - [x] **Phase 10: Browse Shell Page** - Rewrite `/browse/` as single dynamic page; retire per-genus static pages
 - [x] **Phase 11: Accordion Component** - Implement `<pnwm-taxon-browser>` Lit component with accordion, nav images, and state filter
-- [ ] **Phase 12: Validation** - Full build verification; confirm all outputs correct and tests passing
+- [x] **Phase 12: Validation** - Full build verification; confirm all outputs correct and tests passing
 
 ## Phase Details
 
@@ -122,7 +123,9 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 12-01-PLAN.md — Commit UAT polish, run verification checklist, update planning docs
+- [x] 12-01-PLAN.md — Commit UAT polish, run verification checklist, update planning docs
+
+</details>
 
 ## Progress
 
@@ -139,7 +142,7 @@ Plans:
 | 9. Build Pipeline Extension | v1.3 | 2/2 | Complete | 2026-04-20 |
 | 10. Browse Shell Page | v1.3 | 1/1 | Complete | 2026-04-20 |
 | 11. Accordion Component | v1.3 | 3/3 | Complete | 2026-04-20 |
-| 12. Validation | v1.3 | 0/? | Not started | - |
+| 12. Validation | v1.3 | 1/1 | Complete | 2026-04-20 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 started: 2026-04-20*

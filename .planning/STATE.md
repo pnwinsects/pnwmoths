@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Visual Browse
-status: Ready to execute
+status: Complete
 stopped_at: ~
 last_updated: "2026-04-20T00:02:00Z"
 last_activity: 2026-04-20
 progress:
   total_phases: 5
-  completed_phases: 3
-  total_plans: 10
-  completed_plans: 6
-  percent: 60
+  completed_phases: 5
+  total_plans: 11
+  completed_plans: 11
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-20 for v1.3 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 12 — Validation
+**Current focus:** v1.3 milestone complete
 
 ## Current Position
 
 Phase: 12 of 12 (Validation)
-Plan: not started
-Status: Phase 11 complete — UAT passed (6/8; 1 issue fixed inline, 1 skipped — no subfamily data)
-Last activity: 2026-04-20 — Phase 11 UAT complete; toolbar polish applied
+Plan: complete
+Status: Phase 12 complete — all v1.3 success criteria verified
+Last activity: 2026-04-20 — v1.3 milestone closed
 
-Progress: [███░░░░░░░] 30%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 

@@ -7,24 +7,24 @@
 
 ### Taxonomy Data
 
-- [ ] **TAXON-01**: `subfamily` column added to `species.csv`; genera without a subfamily fall directly under their family in the browse hierarchy
-- [ ] **TAXON-02**: `navigational` boolean flag added to `images.csv`; marks images as candidates for browse navigation thumbnails
-- [ ] **TAXON-03**: Build pipeline validates both new columns; blank `subfamily` treated as null (not empty string); `navigational` defaults to false when absent
+- [x] **TAXON-01**: `subfamily` column added to `species.csv`; genera without a subfamily fall directly under their family in the browse hierarchy
+- [x] **TAXON-02**: `navigational` boolean flag added to `images.csv`; marks images as candidates for browse navigation thumbnails
+- [x] **TAXON-03**: Build pipeline validates both new columns; blank `subfamily` treated as null (not empty string); `navigational` defaults to false when absent
 
 ### Browse Page
 
-- [ ] **BROWSE-01**: `/browse/` replaced by a single dynamic page mounting a `<pnwm-taxon-browser>` Lit component; per-genus static pages (`/browse/{genus}/`) retired
-- [ ] **BROWSE-02**: Accordion lists all families collapsed by default, each with up to 4 navigation images
-- [ ] **BROWSE-03**: Expanding a family reveals its subfamilies (or genera if no subfamily exists for that family) with up to 4 images; parent images hidden while expanded
-- [ ] **BROWSE-04**: Expanding a subfamily reveals its genera with up to 4 images; subfamily images hidden while expanded
-- [ ] **BROWSE-05**: Expanding a genus reveals its species as links to species factsheet pages
-- [ ] **BROWSE-06**: Navigation images fall back to `navigational`-flagged images from member species; further fallback to lowest-weight photos when none flagged
-- [ ] **BROWSE-07**: Show/hide images toggle on by default; `<noscript>` static listing of all taxa visible without JS
+- [x] **BROWSE-01**: `/browse/` replaced by a single dynamic page mounting a `<pnwm-taxon-browser>` Lit component; per-genus static pages (`/browse/{genus}/`) retired
+- [x] **BROWSE-02**: Accordion lists all families collapsed by default, each with up to 4 navigation images
+- [x] **BROWSE-03**: Expanding a family reveals its subfamilies (or genera if no subfamily exists for that family) with up to 4 images; parent images hidden while expanded
+- [x] **BROWSE-04**: Expanding a subfamily reveals its genera with up to 4 images; subfamily images hidden while expanded
+- [x] **BROWSE-05**: Expanding a genus reveals its species as links to species factsheet pages
+- [x] **BROWSE-06**: Navigation images fall back to `navigational`-flagged images from member species; further fallback to lowest-weight photos when none flagged
+- [x] **BROWSE-07**: Show/hide images toggle on by default; `<noscript>` static listing of all taxa visible without JS
 
 ### State Filter
 
-- [ ] **SFILT-01**: Build pipeline emits `species-states.json` (DISTINCT species_slug × state) to `_site/`
-- [ ] **SFILT-02**: Browse page state filter hides taxa with no occurrence records in selected states
+- [x] **SFILT-01**: Build pipeline emits `species-states.json` (DISTINCT species_slug × state) to `_site/`
+- [x] **SFILT-02**: Browse page state filter hides taxa with no occurrence records in selected states
 
 ## Future Requirements
 
@@ -52,18 +52,18 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TAXON-01 | Phase 8 | Pending |
-| TAXON-02 | Phase 8 | Pending |
-| TAXON-03 | Phase 8 | Pending |
+| TAXON-01 | Phase 8 | Complete |
+| TAXON-02 | Phase 8 | Complete |
+| TAXON-03 | Phase 8 | Complete |
 | BROWSE-01 | Phase 10 | Complete |
-| BROWSE-02 | Phase 11 | Pending |
-| BROWSE-03 | Phase 11 | Pending |
-| BROWSE-04 | Phase 11 | Pending |
-| BROWSE-05 | Phase 11 | Pending |
-| BROWSE-06 | Phase 11 | Pending |
-| BROWSE-07 | Phase 10 | Partial (noscript clause complete; toggle deferred to Phase 11) |
-| SFILT-01 | Phase 9 | Pending |
-| SFILT-02 | Phase 11 | Pending |
+| BROWSE-02 | Phase 11 | Complete |
+| BROWSE-03 | Phase 11 | Complete |
+| BROWSE-04 | Phase 11 | Complete |
+| BROWSE-05 | Phase 11 | Complete |
+| BROWSE-06 | Phase 11 | Complete |
+| BROWSE-07 | Phase 10 | Complete |
+| SFILT-01 | Phase 9 | Complete |
+| SFILT-02 | Phase 11 | Complete |
 
 **Coverage:**
 - v1.3 requirements: 12 total
@@ -72,4 +72,4 @@
 
 ---
 *Requirements defined: 2026-04-20*
-*Last updated: 2026-04-20 after roadmap creation*
+*Last updated: 2026-04-20 after Phase 12 close-out*
