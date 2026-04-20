@@ -355,22 +355,25 @@ Note: `build:data` (build-data.js) runs BEFORE Eleventy. If species-states.json 
 
 **If this table is empty:** All claims in this research were verified or cited — no user confirmation needed.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Where does `species-states.json` JSON emission happen: in `build-data.js` or a new script?**
    - What we know: Both approaches work technically. `build-data.js` already has a DuckDB connection for records.csv; a new script keeps separation of concerns.
    - What's unclear: User preference for script organization.
    - Recommendation: Dedicated `scripts/emit-species-states.js` for clarity; planner can override.
+   - **RESOLVED:** Dedicated `scripts/emit-species-states.js` (Plan 09-01 implements this, consistent with `copy-parquet.js` separation-of-concerns pattern).
 
 2. **Should `taxon.js` include navImages at all three taxon levels (family, subfamily, genus) or only genus?**
    - What we know: Success criterion says "up to 4 navigation images per taxon level." Phase 11 BROWSE-02 through BROWSE-06 describe images at each accordion level.
    - What's unclear: Whether Phase 9 should pre-compute family/subfamily-level navImages or leave that to Phase 11.
    - Recommendation: Include navImages at all levels in Phase 9. Phase 11 accordion component will consume them directly. This avoids rewriting `taxon.js` in Phase 11.
+   - **RESOLVED:** navImages included at all three levels — family, subfamily, genus (Plan 09-02 implements this).
 
 3. **Confirm `families.js` retirement timing**
    - What we know: `families.js` is used by existing browse templates (`browse/index.njk`, per-genus pages).
    - What's unclear: Whether Phase 9 should stub out `families.js` (replace with null export) or leave it intact until Phase 10 retires the per-genus pages.
    - Recommendation: Leave `families.js` intact in Phase 9. Phase 10 removes it alongside per-genus pages.
+   - **RESOLVED:** `families.js` left intact in Phase 9; retirement deferred to Phase 10 alongside per-genus page retirement (Plan 09-02 objective explicitly states this).
 
 ## Environment Availability
 
