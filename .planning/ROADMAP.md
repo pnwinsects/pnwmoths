@@ -74,10 +74,11 @@ Plans:
   2. `src/_data/taxon.js` exists and returns a family → subfamily → genus → species tree with up to 4 navigation images per taxon level; `families.js` is retired or superseded
   3. The species-states query uses SELECT DISTINCT so file size stays bounded at full data scale
   4. `npm test` passes; existing pipeline tests remain green
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] TBD
+- [ ] 09-01-PLAN.md — Emit species-states.json (TDD: DISTINCT query + post-Vite file write)
+- [ ] 09-02-PLAN.md — Create taxon.js Eleventy data file (TDD: family→subfamily→genus→species tree with navImages)
 
 ### Phase 10: Browse Shell Page
 **Goal**: `/browse/` is a single Eleventy-generated page with a JS-off static listing; per-genus pages are retired
@@ -135,7 +136,7 @@ Plans:
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
 | 7. Code Quality Fixes | v1.2 | 1/1 | Complete | 2026-04-18 |
 | 8. Schema Extension | v1.3 | 3/3 | Complete | 2026-04-20 |
-| 9. Build Pipeline Extension | v1.3 | 0/? | Not started | - |
+| 9. Build Pipeline Extension | v1.3 | 0/2 | Planned | - |
 | 10. Browse Shell Page | v1.3 | 0/? | Not started | - |
 | 11. Accordion Component | v1.3 | 0/? | Not started | - |
 | 12. Validation | v1.3 | 0/? | Not started | - |
