@@ -12,6 +12,11 @@ export default function (eleventyConfig) {
     return existsSync(resolve(relativePath));
   });
 
+  // JSON serialization filter for embedding data into script elements
+  eleventyConfig.addFilter("tojson", function (value) {
+    return JSON.stringify(value);
+  });
+
   // Passthrough copy: per-species Parquet files from data/parquet/{slug}/ to _site/species/{slug}/
   // data/parquet/acronicta-americana/records.parquet -> _site/species/acronicta-americana/records.parquet
   eleventyConfig.addPassthroughCopy({ "data/parquet": "species" });
