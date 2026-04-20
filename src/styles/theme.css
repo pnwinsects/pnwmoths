@@ -84,6 +84,43 @@ nav a:hover {
   color: #a4ab78;
 }
 
+/* --- Taxon browser disclosure buttons --- */
+/* Strip Pico button appearance; class selectors beat Pico's [type="button"] specificity */
+
+.pnwm-tb-family-row h2 button,
+.pnwm-tb-subfamily-row h3 button,
+.pnwm-tb-genus-row h4 button {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.pnwm-tb-family-row h2 button::before,
+.pnwm-tb-subfamily-row h3 button::before,
+.pnwm-tb-genus-row h4 button::before {
+  content: '▶';
+  font-size: 0.6em;
+  display: inline-block;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.pnwm-tb-family-row h2 button[aria-expanded="true"]::before,
+.pnwm-tb-subfamily-row h3 button[aria-expanded="true"]::before,
+.pnwm-tb-genus-row h4 button[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.pnwm-tb-subfamily-row {
+  padding-left: 1.5rem;
+}
+
+.pnwm-tb-genus-row {
+  padding-left: 1.5rem;
+}
+
 /* --- Content wrapper (D-01) --- */
 /* White box with shadow on cream background, uniform across all pages. */
 

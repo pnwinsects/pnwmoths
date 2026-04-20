@@ -45,7 +45,7 @@ eleventyComputed:
     {% if spImages and spImages.length > 0 %}
       {% for img in spImages %}
         <figure>
-          <img src="{{ ('/images/' + sp.slug + '/' + img.filename) | url }}"
+          <img src="/images/{{ sp.slug }}/{{ img.filename }}"
                alt="{{ sp.genus }} {{ sp.species }}"
                data-photographer="{{ img.photographer }}">
           <figcaption>{{ img.photographer }}</figcaption>

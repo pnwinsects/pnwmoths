@@ -240,7 +240,7 @@ class PnwmTaxonBrowser extends LitElement {
 
   render() {
     return html`
-      <div class="pnwm-tb-toolbar" style="display:flex;gap:1.5rem;align-items:center;padding:8px 16px;flex-wrap:wrap">
+      <div class="pnwm-tb-toolbar" style="display:flex;gap:1.5rem;align-items:baseline;padding:8px 16px;flex-wrap:wrap">
         <label>
           <input
             type="checkbox"
@@ -249,7 +249,7 @@ class PnwmTaxonBrowser extends LitElement {
           >
           Show images
         </label>
-        <div style="display:flex;align-items:center;gap:0.5em">
+        <div style="display:flex;align-items:baseline;gap:0.5em">
           <label for="pnwm-tb-state-filter">Filter by state</label>
           <select
             id="pnwm-tb-state-filter"
