@@ -16,8 +16,8 @@
     "test": "node --test scripts/build-data.test.js scripts/check-page-weight.test.js src/components/*.test.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Peter Abrahamsen <rainhead@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@11ty/eleventy": "^3.1.5",
     "@duckdb/node-api": "^1.5.1-r.2",
