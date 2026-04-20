@@ -1,5 +1,18 @@
 # PNW Moths Static Site
 
+## Current Milestone: v1.3 Visual Browse
+
+**Goal:** Replace the static browse pages with an interactive accordion browse page (Family → Subfamily → Genus → Species) with navigation images and client-side state filtering.
+
+**Target features:**
+- `subfamily` column added to `species.csv` (nullable; genera without one fall directly under family)
+- `navigational` flag on `images.csv` rows marks images as browse candidates; fallback to lowest-weight species photos when none flagged
+- `/browse/` replaced by a single dynamic page: up to 4 nav images per taxon level, images on by default with show/hide toggle
+- Accordion [+]/[-] expand/collapse inline (Lit component); expanding hides parent images and reveals child taxon images
+- Build pipeline emits a species-×-state Parquet file from records.csv
+- Client-side state filter on `/browse/` (hides taxa with no occurrences in selected states)
+- Per-genus static pages (`/browse/{genus}/`) retired — genus drill-down handled inline
+
 ## What This Is
 
 A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually (cream background, black header/footer, moth-strip banner, Google Fonts) and has a clean, tested build pipeline with 37 automated tests across the data pipeline and validation scripts.
@@ -39,6 +52,12 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Site deployed to real hosting (GitHub Pages or equivalent) with real species/records data
 - [ ] Real occurrence records and species data loaded (currently ~10 species, ~130 stub records)
+- [ ] `subfamily` column in `species.csv`; genera without subfamily fall directly under family — v1.3
+- [ ] `navigational` flag in `images.csv`; browse falls back to lowest-weight species photos when none flagged — v1.3
+- [ ] `/browse/` replaced by single dynamic accordion page (Family → Subfamily → Genus → Species) — v1.3
+- [ ] Up to 4 navigation images per taxon level; images on by default with show/hide toggle — v1.3
+- [ ] Build pipeline emits species-×-state Parquet; client-side state filter on browse page — v1.3
+- [ ] Per-genus static pages (`/browse/{genus}/`) retired — v1.3
 
 ### Out of Scope
 

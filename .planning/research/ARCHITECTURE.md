@@ -1,435 +1,357 @@
-# Architecture Research: PNW Moths Static Site
+# Architecture Research: v1.3 Visual Browse Integration
 
-**Domain:** Data-heavy natural history static site (700 species, 10k+ occurrence records)
-**Researched:** 2026-04-11
-**Overall confidence:** HIGH for Eleventy patterns, MEDIUM for SQLite-at-build-time, HIGH for validation tooling
-
----
-
-## Data Layer Design
-
-### Recommended: SQLite as authoritative store, JSON/CSV as human-editable exchange format
-
-**The core data tension:**
-- SQLite is best for build-time queries (joins, filtering, indexing) — synchronous reads via `better-sqlite3` fit Eleventy's data pipeline naturally
-- CSV/Markdown is best for human and LLM editing — flat, diffable, no tooling required
-- JSON is best for embedded page payloads — what the client-side map and phenology chart consume
-
-**Recommended layout:**
-
-```
-data/
-  species.csv            # One row per species — genus, species, common name, NOC ID, authority
-  records.csv            # All occurrence records — species_id, lat, long, date, collector, etc.
-  images.csv             # All image references — species_id, filename, photographer, weight
-  glossary.csv           # Glossary entries
-  db/
-    pnwmoths.sqlite      # Derived from CSVs; regenerated on change; .gitignore optional
-```
-
-**Why SQLite at build, not raw CSV parsing:**
-- 10k+ records across 700 species means per-page filtering of a large array is O(n) per page, 700 times. That is 700 × 10k comparisons — slow.
-- SQLite with `SELECT * FROM records WHERE species_id = ?` is O(log n) with an index, runs in microseconds, and the `better-sqlite3` library is synchronous (no async overhead per page).
-- CSV remains the authoritative human-editable source. A build step (`scripts/csv-to-sqlite.js`) imports CSVs into SQLite before Eleventy runs.
-
-**Why not one CSV per species for records:**
-- 700 files in a directory is workable but creates friction for bulk edits, imports, and LLM context windows
-- Cross-species analysis (e.g., "all records from county X") requires reading all 700 files
-- A single `records.csv` with a `species_id` column is easier to import, export, and validate
-
-**Why not a single JSON blob:**
-- Non-technical contributors editing JSON is error-prone (trailing commas, nesting errors)
-- Large JSON files (10k records) are slow to parse and diff badly in git
-
-**Confidence:** MEDIUM — the SQLite-at-build pattern is not an Eleventy convention but is well-supported by `better-sqlite3`'s synchronous API. No official Eleventy docs cover it directly. The pattern is inferred from JavaScript data file docs + `better-sqlite3` synchronous API characteristics.
+**Domain:** Eleventy + Vite + Lit static site — dynamic browse page milestone
+**Researched:** 2026-04-18
+**Confidence:** HIGH — all integration points verified against existing source files
 
 ---
 
-## Eleventy Content Structure
-
-### Recommended: Data-generated species pages, not one Markdown per species
-
-**The choice:**
-- One `.md` per species (700 files) — familiar, but 700 files with mostly-identical structure is noise
-- Pagination from data (one template, one data source) — generates all 700 pages, cleaner
-
-**Recommended structure:**
+## System Overview
 
 ```
-src/
-  species/
-    species.njk            # Single template → generates /species/[slug]/index.html per species
-    species.11tydata.js    # Directory data file: enriches each page with records + images
-  browse/
-    index.njk              # Family/genus browse list
-  plates/
-    index.njk              # Photographic plates
-  glossary/
-    index.njk
-  _data/
-    species.js             # Returns all species rows from SQLite
-    records.js             # Returns all records indexed by species_id
-    glossary.js            # Returns glossary entries
-  _includes/
-    layouts/
-      base.njk
-      species.njk
-    components/
-      occurrence-map.njk   # Renders map container + embeds JSON payload
-      phenology-chart.njk  # Chart container
+┌──────────────────────────────────────────────────────────────────────┐
+│                         BUILD TIME (Node.js)                         │
+│                                                                      │
+│  data/species.csv ──┐                                                │
+│  data/records.csv ──┤── scripts/build-data.js ──► data/parquet/     │
+│  data/images.csv ───┘   (DuckDB: per-species + new browse.parquet)  │
+│                                                                      │
+│  data/species.csv ──► src/_data/families.js (modified)              │
+│  data/images.csv ──►   → taxonomy tree + nav images → browse/index  │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+         │                             │
+         ▼                             ▼
+┌────────────────────┐    ┌────────────────────────────────────────────┐
+│   Eleventy SSG     │    │   scripts/copy-parquet.js (post-Vite)      │
+│   browse/index.njk │    │   data/parquet/browse.parquet              │
+│   (shell page)     │    │    → _site/browse/browse.parquet           │
+└────────────────────┘    └────────────────────────────────────────────┘
+         │
+         ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                     RUNTIME (Browser)                                │
+│                                                                      │
+│  _site/browse/index.html                                             │
+│    └── <pnwm-taxon-browser> Lit component                           │
+│          ├── taxonomy tree from inline JSON (Eleventy-injected)      │
+│          ├── nav images from inline JSON (Eleventy-injected)         │
+│          ├── fetch _site/browse/browse.parquet (species × state)     │
+│          └── state filter → hide/show taxa with no records           │
+└──────────────────────────────────────────────────────────────────────┘
 ```
-
-**Pagination pattern for species pages:**
-
-```yaml
-# species/species.njk frontmatter
----
-pagination:
-  data: species
-  size: 1
-  alias: sp
-permalink: "species/{{ sp.slug }}/index.html"
----
-```
-
-This is the canonical Eleventy "pages from data" pattern (see: https://www.11ty.dev/docs/pages-from-data/). Each species becomes one page. The `alias: sp` makes the single-item alias work cleanly in templates and permalinks.
-
-**When to use one Markdown per species instead:**
-Use `.md` files if species have substantial unique narrative content (prose descriptions, notes) that contributors will edit directly. Hybrid approach: one `.md` per species for prose content only; occurrence records and images stay in CSV/SQLite. The Markdown file's frontmatter provides the `species_id` to join on.
-
-**Recommendation for this project:** Start with pure data-generation (no per-species Markdown). Add per-species Markdown files only when contributors need to write prose. This keeps the initial build simple and avoids 700 nearly-empty stub files.
 
 ---
 
-## Build-time Data Join Pattern
+## Data Responsibility Split
 
-### Specific pattern: JS data file pre-indexes records; directory data file attaches them per page
+### What Eleventy injects at build time (inline JSON in HTML)
 
-**Step 1: `_data/species.js`** — returns all species as an array (fed to pagination)
+The taxonomy tree is structural data: families, subfamilies, genera, species names and slugs, and navigation images. This is small (700 species × a few fields), never changes without a rebuild anyway, and is needed to render the accordion skeleton before any parquet loads. Inject it as a JSON attribute or `<script type="application/json">` block on the `<pnwm-taxon-browser>` element.
 
-```js
-// src/_data/species.js
-import Database from 'better-sqlite3';
-const db = new Database('./data/db/pnwmoths.sqlite', { readonly: true });
-
-export default function () {
-  return db.prepare(`
-    SELECT id, genus, species, common_name, noc_id, slug
-    FROM species
-    ORDER BY genus, species
-  `).all();
-}
-```
-
-**Step 2: `_data/recordsBySpecies.js`** — returns a Map/object indexed by species_id, loaded once at build start
-
-```js
-// src/_data/recordsBySpecies.js
-import Database from 'better-sqlite3';
-const db = new Database('./data/db/pnwmoths.sqlite', { readonly: true });
-
-export default function () {
-  const rows = db.prepare(`
-    SELECT species_id, lat, lng, date, collector, locality, state, county, record_type
-    FROM records
-  `).all();
-
-  // Group into an object keyed by species_id for O(1) lookup
-  return rows.reduce((acc, r) => {
-    (acc[r.species_id] ??= []).push(r);
-    return acc;
-  }, {});
-}
-```
-
-**Step 3: `species/species.11tydata.js`** — attaches records to each species page via `eleventyComputed`
-
-```js
-// src/species/species.11tydata.js
-export default {
-  eleventyComputed: {
-    occurrences: (data) => data.recordsBySpecies[data.sp?.id] ?? [],
-    occurrencesJson: (data) => JSON.stringify(data.recordsBySpecies[data.sp?.id] ?? []),
-    images: (data) => data.imagesBySpecies[data.sp?.id] ?? [],
-  }
-};
-```
-
-**In the template**, `occurrencesJson` is embedded directly into a `<script>` tag for client-side consumption by the map and phenology chart:
-
-```njk
-<script type="application/json" id="occurrence-data">{{ occurrencesJson | safe }}</script>
-```
-
-**Why this pattern is correct:**
-- `_data/recordsBySpecies.js` runs once at build start and loads all 10k records into memory as a pre-indexed object. Cost: ~1-5ms for the query + in-memory object construction.
-- `eleventyComputed` for each of the 700 pages does a simple `object[id]` lookup — O(1), no repeated DB queries.
-- The JSON payload is serialized once per page, embedded directly in HTML. No separate API calls at runtime.
-- `better-sqlite3` is synchronous, so there is no async/await complexity in data files.
-
-**Alternative considered: per-page SQLite query in `eleventyComputed`**
-This would call `db.prepare(...).all()` 700 times. Each query is fast (~0.1ms), but 700 calls × query overhead adds up and loses the benefit of pre-loading. Not recommended.
-
-**Confidence:** HIGH for the data-cascade pattern (official Eleventy docs). MEDIUM for SQLite-specific integration (inferred from `better-sqlite3` synchronous API + JS data file docs — not an officially documented Eleventy pattern).
-
----
-
-## LLM-friendly Conventions
-
-### File layout conventions that maximize LLM edit accuracy
-
-**Core principle:** LLMs edit most reliably when each logical entity is a single file with a clear, consistent schema. Avoid files that require the LLM to understand surrounding context to edit safely.
-
-**Species data — CSV with explicit headers:**
-
-```csv
-id,genus,species,common_name,noc_id,slug,similar_species_ids
-101,Acronicta,americana,American Dagger,93-0001,acronicta-americana,"102,103"
-```
-
-Single file. Headers on row 1. Every field named. An LLM instruction like "add a new species" maps directly to "append a row to `data/species.csv`" with no ambiguity.
-
-**Occurrence records — CSV with species_id FK, not nested:**
-
-```csv
-id,species_id,lat,lng,date,collector,locality,state,county,elevation,record_type
-1,101,47.6,-122.3,1994-07-15,P. Abrahamsen,Mt. Rainier,WA,Pierce,1200,specimen
-```
-
-One file. The `species_id` foreign key is explicit. LLM instruction: "add an occurrence record for species 101" → "append a row to `data/records.csv`".
-
-**Species prose (when needed) — one Markdown per species:**
-
-```markdown
----
-species_id: 101
----
-The American Dagger is found in riparian zones...
-```
-
-Frontmatter links the file to the data without the LLM needing to know directory structure. File naming convention: `content/species/acronicta-americana.md`.
-
-**LLM instruction files:**
-
-```
-content/
-  _instructions/
-    ADDING_SPECIES.md      # Step-by-step for adding a new species
-    ADDING_RECORDS.md      # Step-by-step for adding occurrence records
-    DATA_SCHEMA.md         # Column definitions for all CSVs
-    BUILD.md               # How to run the build, what scripts do what
-```
-
-These are first-class content files, not README afterthoughts. Each instruction file describes exactly one task. They live in `content/_instructions/` so they are version-controlled alongside the data they describe.
-
-**`llms.txt` at the project root** (per the llmstxt.org convention, introduced 2024):
-
-```
-# PNW Moths
-
-Static natural history site for Pacific Northwest moth species.
-
-## Data files
-- data/species.csv — species list
-- data/records.csv — occurrence records
-- data/images.csv — image references
-
-## Edit instructions
-- content/_instructions/ADDING_SPECIES.md
-- content/_instructions/ADDING_RECORDS.md
-```
-
-This is the 2024 convention for LLM-accessible site manifests. It provides a fast-path summary without requiring the LLM to infer structure from directory listings.
-
-**What to avoid:**
-- Deeply nested JSON or YAML for tabular data — LLMs make subtle syntax errors in nested structures
-- Auto-generated files in the same directory as human-edited files — LLMs may edit generated files by mistake
-- Species content split across multiple files with implicit linkage (e.g., by file path matching) — prefer explicit `species_id` FK
-
----
-
-## Build Performance
-
-### Known bottlenecks and mitigations for 700-page data-heavy Eleventy sites
-
-**Performance data points from community research:**
-- A 770-post blog (2550 total pages) builds in ~2.17s incremental with Eleventy v2/v3
-- A 1500-page site had ~30s builds after v2 upgrade (later resolved)
-- Image processing (eleventy-img) is the most common 7-minute build culprit; a December 2025 case study reduced from 7min to 1.6s by fixing image processing and caching
-
-**For 700 species pages with 10k records, the bottlenecks are:**
-
-1. **Data loading** — mitigated by loading all records once into a pre-indexed object (see Data Join Pattern above). Expect <50ms for 10k SQLite rows.
-
-2. **Template rendering** — 700 Nunjucks renders. Eleventy v3 renders these concurrently. Expect 2-5s for 700 pages with moderate template complexity.
-
-3. **Vite post-processing** — `@11ty/eleventy-plugin-vite` runs Vite over Eleventy's output after the SSG step. For 700 HTML files, Vite's HTML plugin processes each file. This adds 5-15s in production mode. Keep Vite's scope to client-side JS/CSS bundling only; do not use Vite to transform HTML structure.
-
-4. **Missing images** — The project explicitly excludes image assets. Templates must not call `eleventy-img` shortcodes on missing files. Use a conditional check or a stub image path pattern to avoid image-plugin errors that would halt the build.
-
-5. **Incremental builds in development** — Eleventy's `--incremental` flag rebuilds only changed files. With a data-generated site (all 700 pages come from one template + data), changing `records.csv` triggers a full rebuild. This is unavoidable when data is in global data files. Mitigation: keep `--incremental` for template/layout changes during development; accept full rebuilds when data changes.
-
-**Build script ordering:**
+**Payload shape (injected by `families.js` / `browse/index.njk`):**
 
 ```json
-"scripts": {
-  "build:data": "node scripts/csv-to-sqlite.js",
-  "build:site": "eleventy",
-  "build:search": "pagefind --site _site",
-  "build": "npm run build:data && npm run build:site && npm run build:search"
+[
+  {
+    "family": "Noctuidae",
+    "subfamilies": [
+      {
+        "subfamily": "Acronictinae",
+        "genera": [
+          {
+            "genus": "Acronicta",
+            "genus_slug": "acronicta",
+            "nav_images": ["acronicta-americana/01.jpg"],
+            "species": [
+              {
+                "slug": "acronicta-americana",
+                "genus": "Acronicta",
+                "species": "americana",
+                "common_name": "American Dagger Moth",
+                "nav_images": ["acronicta-americana/01.jpg"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+Genera with no subfamily collapse into a synthetic `{"subfamily": null}` entry so the component can use a uniform tree structure.
+
+**Why inline, not a separate JSON fetch:**
+The existing `pnwm-occurrence-map` and `pnwm-filter-bar` load Parquet asynchronously — the user sees a loading state before occurrence data appears. For the taxonomy tree, the accordion must render immediately on page load (no loading flash). Inline JSON in the HTML achieves this without an extra fetch. The payload is ~50–100 KB uncompressed for 700 species (well within budget).
+
+### What the Lit component loads from Parquet at runtime
+
+State-distribution data: which states have records for each species slug. This is the data that drives the state filter — hiding families/genera/subfamilies that have zero occurrences in the selected states.
+
+**Parquet schema (`browse.parquet`):**
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `species_slug` | VARCHAR | FK to species; matches existing slug convention |
+| `state` | VARCHAR | One row per unique (species_slug, state) pair |
+| `record_count` | INTEGER | Aggregate count for the pair |
+
+This is a pre-aggregated table, not a row-per-occurrence export. At 700 species × 6 states, the worst-case row count is 4,200. This is tiny — a few KB as Parquet with Snappy compression. The component loads it once on `connectedCallback`, builds a `Map<slug, Set<state>>` in memory, and uses it to drive visibility.
+
+**Why not embed state data inline too:**
+State data at row-per-occurrence level would be very large with real data (10k+ rows). Pre-aggregating to species × state keeps the Parquet small. This also follows the existing pattern: `pnwm-occurrence-map` loads per-species Parquet asynchronously. The browse Parquet follows the same async-load pattern but loads a single shared file once for the whole page.
+
+**Why Parquet instead of JSON for the browse file:**
+The existing `parquet-cache.js` pattern is established and Parquet with Snappy compression is already validated for this site. More importantly, it maintains consistency with the overall architecture decision to use Parquet for occurrence-derived data. A JSON alternative would work but breaks the pattern with no significant benefit.
+
+---
+
+## Component Boundaries
+
+### Static HTML vs Lit component
+
+`browse/index.njk` renders:
+- The page shell (header, nav, `<h1>`) — static HTML via `base.njk`
+- The `<pnwm-taxon-browser>` element with a `data-taxonomy` attribute containing the inline JSON
+- A `<noscript>` fallback that renders a plain family/genus listing (same as current `index.njk`)
+
+The Lit component (`pnwm-taxon-browser`) owns:
+- Accordion expand/collapse state
+- Nav image display + show/hide toggle
+- State filter UI and visibility logic
+- Loading state while `browse.parquet` fetches
+
+**Boundary rule:** The component never reads from the DOM for taxonomy data. It reads only from its `data-taxonomy` attribute (parsed once in `connectedCallback`). This keeps the component testable in isolation.
+
+**Light DOM vs Shadow DOM:** Use Shadow DOM (Lit default) for `pnwm-taxon-browser`. Unlike `pnwm-occurrence-map` which uses light DOM for Leaflet's direct DOM manipulation, the browser component is purely Lit-rendered HTML. Shadow DOM scopes styles cleanly. The accordion markup is generated entirely by Lit's `html` tag, so there is no external CSS interaction issue.
+
+---
+
+## Files: New vs Modified
+
+### New files
+
+| File | Purpose |
+|------|---------|
+| `src/_data/taxon.js` | Replaces `families.js`: queries `species.csv` (with `subfamily` column) and `images.csv` (with `navigational` flag), builds taxonomy tree with nav images, returns structured data for `browse/index.njk` |
+| `src/components/pnwm-taxon-browser.js` | Lit accordion component; reads taxonomy from attribute, loads `browse.parquet`, manages state filter and expand/collapse |
+| `data/parquet/browse/records.parquet` | Species × state aggregate Parquet (directory mirrors per-species convention); exported by `build-data.js` |
+
+Note on Parquet path: per-species Parquet files live at `data/parquet/{slug}/records.parquet`. The browse Parquet should live at `data/parquet/browse/records.parquet` so `copy-parquet.js`'s `cp('data/parquet', '_site/species', { recursive: true })` copy picks it up at `_site/species/browse/records.parquet`. The component fetches from `${import.meta.env.BASE_URL}species/browse/records.parquet`. This requires no changes to `copy-parquet.js`.
+
+### Modified files
+
+| File | Change |
+|------|--------|
+| `data/species.csv` | Add `subfamily` column (nullable VARCHAR) |
+| `data/images.csv` | Add `navigational` column (BOOLEAN or 0/1 INTEGER) |
+| `src/_data/families.js` | Remove or repurpose — `taxon.js` supersedes it; `genus.njk` pagination also reads from it |
+| `src/browse/index.njk` | Replace static genus listing with shell page that mounts `<pnwm-taxon-browser>` |
+| `src/browse/genus.njk` | Retire: remove file or redirect strategy (see below) |
+| `scripts/build-data.js` | Add: validate `subfamily` in `species.csv`, validate `navigational` in `images.csv`, export `browse.parquet` aggregate |
+| `src/components/main.js` | Add import for `pnwm-taxon-browser.js` |
+
+**Note on `families.js` vs `taxon.js`:** `genus.njk` currently reads `families.genusArray` from `families.js`. If `genus.njk` is being retired (all genus pages gone), `families.js` can be deleted and replaced entirely by `taxon.js`. If genus pages are kept temporarily for redirect purposes, `families.js` must remain until those pages are no longer built. The cleaner approach is to retire genus pages in the same milestone and delete `families.js`.
+
+---
+
+## Build Order and Dependencies
+
+```
+1. data/species.csv + data/images.csv (human edits, add new columns)
+       │
+       ▼
+2. scripts/build-data.js (validation + Parquet export)
+       │
+       ├─► data/parquet/{slug}/records.parquet  (unchanged per-species files)
+       └─► data/parquet/browse/records.parquet  (NEW: species × state aggregate)
+       │
+       ▼
+3. Eleventy build
+       │
+       ├─► src/_data/taxon.js runs → taxonomy tree + nav images in memory
+       ├─► src/browse/index.njk renders shell with inline JSON
+       └─► genus.njk REMOVED → no /browse/{genus}/ pages generated
+       │
+       ▼
+4. @11ty/eleventy-plugin-vite bundles JS
+       │
+       ▼
+5. scripts/copy-parquet.js
+       │
+       ├─► _site/species/{slug}/records.parquet  (unchanged)
+       └─► _site/species/browse/records.parquet  (NEW)
+       │
+       ▼
+6. scripts/copy-images.js (unchanged)
+```
+
+**Critical dependency:** `build-data.js` must run before Eleventy (unchanged — this is already the `npm run build:data && eleventy` order). The new browse Parquet is produced in step 2 and copied in step 5 — no new ordering constraints.
+
+---
+
+## Parquet Export: DuckDB Query
+
+Add to `build-data.js` after the per-species loop:
+
+```js
+await conn.run(`
+  COPY (
+    SELECT
+      r.species_slug,
+      r.state,
+      COUNT(*) AS record_count
+    FROM records r
+    WHERE r.state IS NOT NULL AND r.state != ''
+    GROUP BY r.species_slug, r.state
+  )
+  TO 'data/parquet/browse/records.parquet'
+  (FORMAT parquet, COMPRESSION snappy)
+`);
+```
+
+Add `mkdirSync('data/parquet/browse', { recursive: true })` before the COPY statement.
+
+Also add validation of new CSV columns in `validateCsv` calls:
+- `species.csv`: add `subfamily` to the columns map (`'subfamily': 'VARCHAR'`) — nullable, so no required-value check
+- `images.csv`: add `navigational` (`'navigational': 'INTEGER'`) — 0 or 1
+
+---
+
+## `taxon.js` Eleventy Data File
+
+This replaces `families.js`. It queries species and images at build time to produce the full taxonomy tree including nav images.
+
+**Nav image selection logic (in DuckDB SQL):**
+1. Images with `navigational = 1`, ordered by `weight`, up to 4 per taxon level
+2. Fallback: images with `navigational = 0` (or null), ordered by `weight` ascending, up to 4
+
+The query can use window functions:
+
+```sql
+-- Per-species nav images: navigational=1 first, then fallback to lowest weight
+SELECT
+  species_slug,
+  filename,
+  ROW_NUMBER() OVER (
+    PARTITION BY species_slug
+    ORDER BY navigational DESC NULLS LAST, weight ASC
+  ) AS rn
+FROM images
+```
+
+Then filter `rn <= 4` in the outer query. The Eleventy data file assembles genus and subfamily rollup images from species images by taking the first 4 images from the set of species-level images within each genus/subfamily (ordered by weight).
+
+**Return shape:** The data file returns the full taxonomy array described above (the inline JSON payload). It is used directly in `browse/index.njk` via `JSON.stringify` in the template.
+
+---
+
+## URL Strategy for Retired Genus Pages
+
+**Current URLs:** `/browse/{genus-slug}/` — e.g., `/browse/acronicta/`
+
+**Decision: 404, not redirect.** The PROJECT.md explicitly notes "Django URL redirects — Requires Netlify/Cloudflare; deferred to v2 (SEO-01)". The same constraint applies here: GitHub Pages cannot serve 301 redirects from static files. A meta-refresh HTML file at each genus URL would work but requires generating ~100 stub pages, which is build complexity for marginal SEO benefit (these are internal PNW moth URLs, not widely indexed).
+
+**Implementation:** Remove `genus.njk` from `src/browse/`. The URLs simply return 404 on GitHub Pages. No stub redirect pages needed.
+
+**If redirects become required later:** The v2 SEO-01 item already tracks this. At v2, moving to Netlify or Cloudflare Pages enables `_redirects` file support. At that point, add redirect rules: `/browse/:genus/* → /browse/ 301`.
+
+---
+
+## `parquet-cache.js` Reuse
+
+The existing `loadParquet(slug)` in `parquet-cache.js` fetches from `${BASE_URL}species/${slug}/records.parquet`. The browse Parquet lives at `species/browse/records.parquet`, which is the slug `"browse"`. 
+
+**Recommended:** Do NOT reuse `loadParquet` for the browse file. Its cache key is designed for species slugs; using `"browse"` as a slug is a naming hack. Instead, add a new exported function to `parquet-cache.js`:
+
+```js
+export async function loadBrowseParquet() {
+  const url = `${import.meta.env.BASE_URL}species/browse/records.parquet`;
+  // ... same fetch + hyparquet pattern as loadParquet
 }
 ```
 
-Pagefind runs after Eleventy because it crawls the built HTML. It typically takes 5-15s for 700 pages.
-
-**Confidence:** MEDIUM — performance figures are from community reports, not benchmarks on this specific architecture. The bottleneck analysis is based on known Eleventy behavior, not measured on this project.
+This keeps the cache module coherent and the intent readable.
 
 ---
 
-## Validation Pipeline
-
-### Standard toolchain for static site validation
-
-**Link checking: lychee (Rust, fast)**
-
-lychee checks internal and external links in HTML, Markdown, and plain text. GitHub Action available. A 576-link site takes ~1 minute in CI.
-
-```bash
-lychee --no-progress --format compact _site/**/*.html
-```
-
-For this project, external link checking should be opt-in (many external links will be stable museum/collection URLs that don't need CI validation). Internal link checking should always run.
-
-**HTML structure: htmltest**
-
-htmltest validates internal links, image `src` attributes, and anchor targets within the built `_site/` directory. Written in Go, fast, zero-configuration for basic use. Better for internal consistency than lychee (which focuses on URL reachability).
-
-```bash
-htmltest _site/
-```
-
-Configure via `.htmltest.yml` to skip external URLs and focus on internal cross-references, missing `<img src>` targets, and broken anchor links.
-
-**Page weight: custom Node script (no standard tool)**
-
-There is no widely adopted standard tool for page weight CI checks in static sites. The pattern is a small script that walks `_site/` and asserts:
+## Component API: `pnwm-taxon-browser`
 
 ```js
-// scripts/check-page-weight.js
-// Assert each HTML file is under threshold (e.g., 200KB)
-// Assert each JS bundle is under threshold (e.g., 100KB gzip)
+class PnwmTaxonBrowser extends LitElement {
+  static get properties() {
+    return {
+      // Injected by Eleventy template as JSON attribute
+      taxonomyJson: { type: String, attribute: 'data-taxonomy' },
+      // Internal state
+      _taxonomy: { state: true },       // parsed from taxonomyJson
+      _speciesStates: { state: true },  // Map<slug, Set<state>> from browse.parquet
+      _selectedState: { state: true },  // 'all' | 'WA' | 'OR' | ...
+      _imagesVisible: { state: true },  // boolean, default true
+      _expanded: { state: true },       // Set<string> of expanded taxon keys
+      _loading: { state: true },
+    };
+  }
+}
 ```
 
-Add as a `postbuild` npm script. Thresholds should be documented in `ARCHITECTURE.md` or `.htmltest.yml` so contributors understand why builds fail.
+The component uses Shadow DOM. It registers as `pnwm-taxon-browser`.
 
-**Search index validation: Pagefind build exit code**
+**Template mounts it:**
 
-Pagefind returns non-zero exit code if indexing fails. Add `pagefind --site _site` to the build script; CI catches failures automatically.
-
-**Image reference validation: custom script or htmltest**
-
-Since image assets are excluded from the repo, the build must not error on missing images — but it should warn. A build-time script can read `data/images.csv`, check whether any referenced image paths are expected, and emit warnings.
-
-**Full validation pipeline:**
-
-```
-build:data → build:site → build:search → lint:links → lint:html → lint:weight
+```njk
+<pnwm-taxon-browser
+  data-taxonomy="{{ taxon | dump | escape }}"
+  data-pagefind-ignore
+></pnwm-taxon-browser>
 ```
 
-Run all steps in CI (GitHub Actions). Run `lint:links` (internal only) and `lint:html` locally pre-commit via a git hook.
-
-**Confidence:** HIGH for lychee and htmltest (well-established tools, GitHub Actions integration exists). MEDIUM for page weight tooling (no standard; pattern is custom script).
+Where `taxon` is the array returned by `src/_data/taxon.js`, serialized by Nunjucks `dump` filter (equivalent to `JSON.stringify`) and HTML-escaped.
 
 ---
 
-## Component Map
+## Anti-Patterns to Avoid
 
-### What talks to what, in build order
+### Embedding occurrence row-level data inline
 
-```
-[CSV files]                    ← human/LLM edits
-    |
-    | scripts/csv-to-sqlite.js (build:data)
-    v
-[SQLite database]
-    |
-    | better-sqlite3 (synchronous reads at build start)
-    v
-[Eleventy _data/ files]        ← species.js, recordsBySpecies.js, imagesBySpecies.js
-    |
-    | Eleventy data cascade
-    v
-[species.11tydata.js]          ← eleventyComputed attaches records/images per page
-    |
-    | Nunjucks template rendering (700 × species.njk)
-    v
-[_site/ HTML files]            ← each page contains embedded JSON for client-side map/chart
-    |
-    | @11ty/eleventy-plugin-vite (post-processes HTML, injects Vite asset hashes)
-    v
-[_site/ with hashed JS/CSS]
-    |
-    | pagefind --site _site (build:search)
-    v
-[_site/pagefind/ search index]
-    |
-    | lychee + htmltest (lint:links + lint:html)
-    v
-[CI pass/fail]
-```
+**What people do:** Put the full records array in a `<script>` tag to avoid async loading.
+**Why it's wrong:** With real data (10k+ records), this balloons the HTML page to megabytes. The browse page is the first page many users see.
+**Do this instead:** The pre-aggregated species × state Parquet is the right payload. ~4,200 rows, Snappy-compressed, loads in well under 1 second.
 
-**Client-side components (Vite-bundled):**
+### Querying taxonomy structure client-side from Parquet
 
-```
-src/js/
-  occurrence-map.js    ← reads #occurrence-data JSON, renders Leaflet map
-  phenology-chart.js   ← reads #occurrence-data JSON, renders date histogram
-  slideshow.js         ← image slideshow for species photos
-  search.js            ← Pagefind UI integration
-```
+**What people do:** Export the full species table to Parquet and reconstruct the tree client-side.
+**Why it's wrong:** The taxonomy tree requires a JOIN of species × images with complex window-function logic for nav image selection. This logic belongs in DuckDB at build time, not in browser JS. The browser can't run DuckDB. Reconstructing the tree from flat Parquet in JS is duplicating build logic.
+**Do this instead:** Compute the tree in `taxon.js` at build time. Inject as inline JSON. The Lit component consumes the pre-built structure.
 
-These are entry points for Vite. Vite tree-shakes and bundles; the output is a handful of hashed JS files injected via `<script type="module">` in the base layout.
+### Reusing `pnwm-filter-bar` for the browse state filter
 
-**Component boundary rules:**
-- No server-side code runs at request time — everything is resolved at build time or in the browser
-- SQLite is only open during `npm run build:data` and Eleventy data file execution — never at runtime
-- Client-side JS reads embedded JSON from the page; it never fetches from an API
-- Pagefind's search index is static files; the search UI is a web component loaded client-side
-
-**Suggested build order for phased development:**
-
-1. **Data layer first** — CSV schema + SQLite import script + `_data/` files. Validates the join works before building any UI.
-2. **Species page shell** — pagination template generates 700 pages with just genus/species/name. Validates build performance baseline.
-3. **Occurrence JSON embedding** — add `occurrencesJson` computed data to pages. Validates the critical data join.
-4. **Client-side map** — Vite entry point reads embedded JSON and renders Leaflet map. Validates the Eleventy+Vite pipeline.
-5. **Browse and search** — family/genus browse pages + Pagefind search index.
-6. **Validation pipeline** — lychee + htmltest + page weight checks.
+**What people do:** Drop the existing `pnwm-filter-bar` component into the browse page to get a "free" state filter.
+**Why it's wrong:** `pnwm-filter-bar` is designed for a single species (it reads per-species Parquet by slug). Its state options come from that species' actual records. On the browse page, the state filter needs to affect all taxa simultaneously from a shared dataset.
+**Do this instead:** Build the state selector directly into `pnwm-taxon-browser`. It reads the browse Parquet once, derives available states from the data, and manages filtering internally.
 
 ---
 
-## Gaps and Open Questions
+## Integration Points Summary
 
-- **Eleventy v2 vs v3:** v3 (ESM-native, Node 18+) is the current release as of late 2024. `better-sqlite3` requires native compilation; verify it builds cleanly in the target Node version. **Flag for Phase 1 validation.**
-
-- **`eleventyComputed` with pagination data:** There is a known GitHub issue (#2365) where `eleventyComputed` may not see pagination alias data on the first evaluation pass (it receives stub data). The directory data file pattern (`.11tydata.js`) sidesteps this by accessing `data.sp` which is the pagination alias — verify this works with the actual Eleventy version. **Flag for Phase 1 validation.**
-
-- **Vite MPA mode with 700 pages:** `@11ty/eleventy-plugin-vite` runs Vite in multi-page app mode. Performance with 700 HTML entry points in production mode is unverified. May need to configure Vite to only process a manifest of JS/CSS entry points rather than all HTML files. **Flag for Phase 2 (Vite integration).**
-
-- **SQLite in CI/GitHub Actions:** `better-sqlite3` builds a native addon. Verify it compiles on the GitHub Actions runner without a prebuilt binary cache. **Flag for CI/validation phase.**
+| Boundary | Communication | Notes |
+|----------|---------------|-------|
+| `taxon.js` → `browse/index.njk` | Eleventy data cascade; JSON serialized to `data-taxonomy` attribute | Standard Eleventy JS data file → template pattern |
+| `build-data.js` → `browse.parquet` | DuckDB COPY TO with Snappy compression | Mirrors existing per-species export pattern |
+| `copy-parquet.js` → `_site/` | `cp('data/parquet', '_site/species', recursive)` picks up `browse/` subdirectory automatically | No script change needed |
+| `pnwm-taxon-browser` → `browse.parquet` | `loadBrowseParquet()` in `parquet-cache.js` | New function, same fetch + hyparquet pattern |
+| `pnwm-taxon-browser` → taxonomy tree | Reads `data-taxonomy` attribute, parses JSON in `connectedCallback` | Inline data, no fetch |
+| `browse/index.njk` noscript fallback | Static HTML family/genus listing inside `<noscript>` | Preserves graceful degradation requirement |
 
 ---
 
 ## Sources
 
-- Eleventy Pages from Data: https://www.11ty.dev/docs/pages-from-data/
-- Eleventy Computed Data: https://www.11ty.dev/docs/data-computed/
-- Eleventy JavaScript Data Files: https://www.11ty.dev/docs/data-js/
-- Relational data in Eleventy (Dan Burzo): https://danburzo.ro/eleventy-relational-data/
-- better-sqlite3 (synchronous SQLite for Node): https://github.com/WiseLibs/better-sqlite3
-- @11ty/eleventy-plugin-vite: https://github.com/11ty/eleventy-plugin-vite
-- Pagefind static search: https://pagefind.app/
-- lychee link checker: https://github.com/lycheeverse/lychee
-- htmltest: referenced in https://eklausmeier.goip.de/blog/2024/10-30-testing-static-html-files-with-htmltest
-- llms.txt spec: https://llmstxt.org/
-- Eleventy build performance analysis: https://www.11ty.dev/docs/debug-performance/
-- Build time case study (7min → 1.6s): https://www.adamdjbrett.com/blog/2025-12-16-eleventy-build-times/
+- Existing source files read directly: `src/_data/families.js`, `src/_data/images.js`, `src/components/pnwm-filter-bar.js`, `src/components/parquet-cache.js`, `src/components/pnwm-occurrence-map.js`, `src/browse/index.njk`, `src/browse/genus.njk`, `scripts/build-data.js`, `scripts/copy-parquet.js`, `scripts/copy-images.js`
+- PROJECT.md for constraints and decisions: SEO-01 redirect deferral, Snappy compression requirement, DuckDB `@duckdb/node-api` API patterns
+- Established project patterns: post-Vite copy script, parquet-cache slug convention, `data-pagefind-ignore` for interactive components
+
+---
+*Architecture research for: PNW Moths v1.3 Visual Browse*
+*Researched: 2026-04-18*
