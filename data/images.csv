@@ -1,8 +1,8 @@
-species_slug,filename,photographer,weight,license,view,specimen
-acronicta-americana,01.jpg,Jane Doe,1,CC BY 4.0,,
-acronicta-americana,02.jpg,John Smith,2,CC BY 4.0,,
-hyles-lineata,01.jpg,Alice Johnson,1,CC BY-SA 4.0,,
-phyllodesma-americana,01.jpg,Merrill A. Peterson,1,© Merrill A. Peterson,,
-phyllodesma-americana,02.jpg,Merrill A. Peterson,2,© Merrill A. Peterson,,
-phyllodesma-americana,03.jpg,Merrill A. Peterson,3,© Merrill A. Peterson,,
-phyllodesma-americana,04.jpg,Merrill A. Peterson,4,© Merrill A. Peterson,,
+species_slug,filename,photographer,weight,license,view,specimen,navigational
+acronicta-americana,01.jpg,Jane Doe,1,CC BY 4.0,,,
+acronicta-americana,02.jpg,John Smith,2,CC BY 4.0,,,
+hyles-lineata,01.jpg,Alice Johnson,1,CC BY-SA 4.0,,,
+phyllodesma-americana,01.jpg,Merrill A. Peterson,1,© Merrill A. Peterson,,,
+phyllodesma-americana,02.jpg,Merrill A. Peterson,2,© Merrill A. Peterson,,,
+phyllodesma-americana,03.jpg,Merrill A. Peterson,3,© Merrill A. Peterson,,,
+phyllodesma-americana,04.jpg,Merrill A. Peterson,4,© Merrill A. Peterson,,,
