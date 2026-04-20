@@ -2,7 +2,7 @@
 // Unit and integration tests for the build-data pre-build script.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, writeFileSync, rmSync, copyFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -346,4 +346,78 @@ test('build-data.js: blank navigational in images CSV arrives as NULL with nulls
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
+});
+
+// --- emit-species-states tests ---
+
+test('emit-species-states: SELECT DISTINCT returns correct pair count from synthetic data', async () => {
+  const { DuckDBInstance } = await import('@duckdb/node-api');
+  const db = await DuckDBInstance.create(':memory:');
+  const conn = await db.connect();
+
+  await conn.run(`
+    CREATE TABLE records AS
+    SELECT 'acronicta-americana' AS species_slug, 'OR' AS state
+    UNION ALL
+    SELECT 'acronicta-americana', 'OR'
+    UNION ALL
+    SELECT 'hyles-lineata', 'WA'
+  `);
+
+  const result = await conn.runAndReadAll(`
+    SELECT DISTINCT species_slug, state
+    FROM records
+    WHERE state IS NOT NULL AND state != ''
+    ORDER BY species_slug, state
+  `);
+  const rows = result.getRowObjectsJS();
+
+  assert.strictEqual(rows.length, 2, 'duplicate should be eliminated — 2 distinct pairs');
+  assert.strictEqual(rows[0].species_slug, 'acronicta-americana');
+  assert.strictEqual(rows[0].state, 'OR');
+  assert.strictEqual(rows[1].species_slug, 'hyles-lineata');
+  assert.strictEqual(rows[1].state, 'WA');
+
+  conn.closeSync();
+});
+
+test('emit-species-states: NULL and empty-string states excluded from DISTINCT result', async () => {
+  const { DuckDBInstance } = await import('@duckdb/node-api');
+  const db = await DuckDBInstance.create(':memory:');
+  const conn = await db.connect();
+
+  await conn.run(`
+    CREATE TABLE records AS
+    SELECT 'acronicta-americana' AS species_slug, 'OR' AS state
+    UNION ALL
+    SELECT 'hyles-lineata', NULL
+    UNION ALL
+    SELECT 'catocala-sp', ''
+  `);
+
+  const result = await conn.runAndReadAll(`
+    SELECT DISTINCT species_slug, state
+    FROM records
+    WHERE state IS NOT NULL AND state != ''
+    ORDER BY species_slug, state
+  `);
+  const rows = result.getRowObjectsJS();
+
+  assert.strictEqual(rows.length, 1, 'NULL and empty-string states should be excluded — only 1 row survives');
+
+  conn.closeSync();
+});
+
+test('integration: emit-species-states.js writes _site/species-states.json', () => {
+  execSync('node scripts/emit-species-states.js', { cwd: ROOT, stdio: 'pipe' });
+  assert.ok(
+    existsSync(resolve(ROOT, '_site/species-states.json')),
+    '_site/species-states.json should exist'
+  );
+  const data = JSON.parse(readFileSync(resolve(ROOT, '_site/species-states.json'), 'utf8'));
+  assert.ok(Array.isArray(data), 'species-states.json should be an array');
+  assert.ok(
+    data.every(el => 'species_slug' in el && 'state' in el),
+    'every element should have species_slug and state properties'
+  );
 });
