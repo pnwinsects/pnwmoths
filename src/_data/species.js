@@ -8,6 +8,7 @@ export default async function () {
     CREATE TABLE species AS
     SELECT * FROM read_csv('data/species.csv',
       header = true,
+      nullstr = '',
       columns = {
         'id': 'INTEGER',
         'genus': 'VARCHAR',
@@ -16,7 +17,8 @@ export default async function () {
         'noc_id': 'VARCHAR',
         'authority': 'VARCHAR',
         'family': 'VARCHAR',
-        'similar_species': 'VARCHAR'
+        'similar_species': 'VARCHAR',
+        'subfamily': 'VARCHAR'
       }
     )
   `);

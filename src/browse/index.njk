@@ -4,11 +4,30 @@ title: Browse — PNW Moths
 permalink: /browse/index.html
 ---
 <h1>Browse all species</h1>
-{% set currentFamily = "" %}
-{% for genus in families.genera %}
-  {% if genus.family != currentFamily %}
-    {% set currentFamily = genus.family %}
-    <h2>{{ genus.family }}</h2>
-  {% endif %}
-  <h3><a href="{{ ('/browse/' + genus.genus_slug + '/') | url }}">{{ genus.genus }}</a></h3>
-{% endfor %}
+
+<script type="application/json" id="taxon-data" data-pagefind-ignore>
+  {{ taxon | tojson }}
+</script>
+
+<pnwm-taxon-browser></pnwm-taxon-browser>
+
+<noscript data-pagefind-ignore>
+  {% for family in taxon %}
+    <h2>{{ family.name }}</h2>
+    {% for subfam in family.subfamilies %}
+      {% if subfam.name %}
+        <h3>{{ subfam.name }}</h3>
+      {% endif %}
+      {% for genus in subfam.genera %}
+        <h4>{{ genus.name }}</h4>
+        <ul>
+          {% for sp in genus.species %}
+            <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
+              <em>{{ genus.name }} {{ sp.name }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}
+            </a></li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+</noscript>
