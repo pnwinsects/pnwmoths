@@ -119,10 +119,10 @@ Plans:
   2. The link checker reports zero broken links across the built site
   3. `npm test` passes with all existing and new tests green
   4. Pagefind does not index the taxonomy JSON data attribute (no `data-pagefind-ignore` omission)
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] TBD
+- [ ] 12-01-PLAN.md — Commit UAT polish, run verification checklist, update planning docs
 
 ## Progress
 
