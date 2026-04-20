@@ -61,8 +61,8 @@
 **Plans**: 3 plans
 
 Plans:
-- [ ] 08-01-PLAN.md — Add subfamily and navigational columns to CSV data files
-- [ ] 08-02-PLAN.md — Update build-data.js, families.js, and images.js to recognise new columns
+- [x] 08-01-PLAN.md — Add subfamily and navigational columns to CSV data files
+- [x] 08-02-PLAN.md — Update build-data.js, families.js, and images.js to recognise new columns
 - [ ] 08-03-PLAN.md — Update tests: happy-path assertions and null-coercion tests
 
 ### Phase 9: Build Pipeline Extension
