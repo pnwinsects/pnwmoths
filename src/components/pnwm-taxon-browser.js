@@ -1,5 +1,13 @@
 import { LitElement, html } from 'lit';
 
+const STATE_NAMES = {
+  BC: 'British Columbia',
+  ID: 'Idaho',
+  MT: 'Montana',
+  OR: 'Oregon',
+  WA: 'Washington',
+};
+
 /**
  * Transform flat [{species_slug, state}] array from species-states.json
  * into an object mapping species_slug → Set<state>.
@@ -232,7 +240,7 @@ class PnwmTaxonBrowser extends LitElement {
 
   render() {
     return html`
-      <div class="pnwm-tb-toolbar" style="display:flex;gap:8px;align-items:center;padding:8px 16px;flex-wrap:wrap">
+      <div class="pnwm-tb-toolbar" style="display:flex;gap:1.5rem;align-items:center;padding:8px 16px;flex-wrap:wrap">
         <label>
           <input
             type="checkbox"
@@ -241,18 +249,21 @@ class PnwmTaxonBrowser extends LitElement {
           >
           Show images
         </label>
-        <label for="pnwm-tb-state-filter">Filter by state</label>
-        <select
-          id="pnwm-tb-state-filter"
-          .value=${this._selectedState}
-          ?disabled=${!this._statesAvailable.length}
-          @change=${this._onStateChange}
-        >
-          <option value="">All states</option>
-          ${this._statesAvailable.map(s =>
-            html`<option value=${s} ?selected=${this._selectedState === s}>${s}</option>`
-          )}
-        </select>
+        <div style="display:flex;align-items:center;gap:0.5em">
+          <label for="pnwm-tb-state-filter">Filter by state</label>
+          <select
+            id="pnwm-tb-state-filter"
+            style="width:auto"
+            .value=${this._selectedState}
+            ?disabled=${!this._statesAvailable.length}
+            @change=${this._onStateChange}
+          >
+            <option value="">All states</option>
+            ${this._statesAvailable.map(s =>
+              html`<option value=${s} ?selected=${this._selectedState === s}>${STATE_NAMES[s] || s}</option>`
+            )}
+          </select>
+        </div>
       </div>
       ${this._families.map(f => this._renderFamily(f))}`;
   }
