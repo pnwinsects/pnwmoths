@@ -85,14 +85,13 @@ Plans:
 **Depends on**: Phase 9
 **Requirements**: BROWSE-01, BROWSE-07
 **Success Criteria** (what must be TRUE):
-  1. `/browse/` loads and contains a `<pnwm-taxon-browser>` element with the taxonomy tree in a `data-taxonomy` attribute
+  1. `/browse/` loads and contains a `<pnwm-taxon-browser>` element; taxonomy tree embedded as `<script type="application/json" id="taxon-data">` sibling (per D-01, overrides SC-1 data-taxonomy wording)
   2. With JavaScript disabled, all families, genera, and species are visible as plain HTML in a `<noscript>` block
   3. Per-genus static pages (`/browse/{genus}/`) no longer exist in `_site/`; the link checker reports no broken internal links pointing to them
-**Plans**: TBD
-**UI hint**: yes
+**Plans**: 1 plan
 
 Plans:
-- [ ] TBD
+- [ ] 10-01-PLAN.md — Rewrite browse/index.njk, delete genus.njk and families.js, verify build
 
 ### Phase 11: Accordion Component
 **Goal**: The browser-side accordion is fully interactive — expand/collapse, navigation images, show/hide toggle, and state filter all work
@@ -137,7 +136,7 @@ Plans:
 | 7. Code Quality Fixes | v1.2 | 1/1 | Complete | 2026-04-18 |
 | 8. Schema Extension | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 9. Build Pipeline Extension | v1.3 | 2/2 | Complete | 2026-04-20 |
-| 10. Browse Shell Page | v1.3 | 0/? | Not started | - |
+| 10. Browse Shell Page | v1.3 | 0/1 | Not started | - |
 | 11. Accordion Component | v1.3 | 0/? | Not started | - |
 | 12. Validation | v1.3 | 0/? | Not started | - |
 
