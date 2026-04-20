@@ -1,6 +1,6 @@
 # PNW Moths Static Site
 
-## Current Milestone: v1.3 Visual Browse
+## Current Milestone: v1.3 Visual Browse — SHIPPED 2026-04-20
 
 **Goal:** Replace the static browse pages with an interactive accordion browse page (Family → Subfamily → Genus → Species) with navigation images and client-side state filtering.
 
@@ -55,10 +55,10 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ `subfamily` column in `species.csv`; genera without subfamily fall directly under family — v1.3 Phase 8
 - ✓ `navigational` flag in `images.csv`; browse falls back to lowest-weight species photos when none flagged — v1.3 Phase 8
 - ✓ Build pipeline emits species-×-state JSON (`_site/species-states.json`); `taxon.js` Eleventy data file with family→subfamily→genus→species tree and navImages — v1.3 Phase 9
-- [ ] `/browse/` replaced by single dynamic accordion page (Family → Subfamily → Genus → Species) — v1.3
-- [ ] Up to 4 navigation images per taxon level; images on by default with show/hide toggle — v1.3
-- [ ] Client-side state filter on browse page — v1.3
-- [ ] Per-genus static pages (`/browse/{genus}/`) retired — v1.3
+- ✓ `/browse/` replaced by single dynamic accordion page (Family → Subfamily → Genus → Species) — v1.3 Phase 10–11
+- ✓ Up to 4 navigation images per taxon level; images on by default with show/hide toggle — v1.3 Phase 11
+- ✓ Client-side state filter on browse page — v1.3 Phase 11
+- ✓ Per-genus static pages (`/browse/{genus}/`) retired — v1.3 Phase 10
 
 ### Out of Scope
 
@@ -79,7 +79,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 ## Context
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
-**v1.3 in progress:** Phase 9 complete — `species-states.json` + `taxon.js` delivered; 45 tests passing
+**v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -138,4 +138,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-20 after Phase 9 completion*
+*Last updated: 2026-04-20 after Phase 12 completion — v1.3 milestone closed*
