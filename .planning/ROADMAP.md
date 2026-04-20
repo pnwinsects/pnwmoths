@@ -77,7 +77,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 09-01-PLAN.md — Emit species-states.json (TDD: DISTINCT query + post-Vite file write)
+- [x] 09-01-PLAN.md — Emit species-states.json (TDD: DISTINCT query + post-Vite file write)
 - [ ] 09-02-PLAN.md — Create taxon.js Eleventy data file (TDD: family→subfamily→genus→species tree with navImages)
 
 ### Phase 10: Browse Shell Page
@@ -136,7 +136,7 @@ Plans:
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
 | 7. Code Quality Fixes | v1.2 | 1/1 | Complete | 2026-04-18 |
 | 8. Schema Extension | v1.3 | 3/3 | Complete | 2026-04-20 |
-| 9. Build Pipeline Extension | v1.3 | 0/2 | Planned | - |
+| 9. Build Pipeline Extension | v1.3 | 1/2 | In Progress | - |
 | 10. Browse Shell Page | v1.3 | 0/? | Not started | - |
 | 11. Accordion Component | v1.3 | 0/? | Not started | - |
 | 12. Validation | v1.3 | 0/? | Not started | - |
