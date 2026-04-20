@@ -4,7 +4,7 @@ milestone: v1.3
 milestone_name: Visual Browse
 status: Ready to plan
 stopped_at: ~
-last_updated: "2026-04-20T00:00:00Z"
+last_updated: "2026-04-20T12:00:00Z"
 last_activity: 2026-04-20
 progress:
   total_phases: 5
@@ -85,5 +85,5 @@ Items acknowledged and carried forward from v1.2 close:
 ## Session Continuity
 
 Last session: 2026-04-20
-Stopped at: Roadmap created for v1.3; ready to plan Phase 8
-Resume file: None
+Stopped at: Phase 8 context gathered
+Resume file: .planning/phases/08-schema-extension/08-CONTEXT.md
