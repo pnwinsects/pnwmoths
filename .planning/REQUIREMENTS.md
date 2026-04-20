@@ -55,13 +55,13 @@
 | TAXON-01 | Phase 8 | Pending |
 | TAXON-02 | Phase 8 | Pending |
 | TAXON-03 | Phase 8 | Pending |
-| BROWSE-01 | Phase 10 | Pending |
+| BROWSE-01 | Phase 10 | Complete |
 | BROWSE-02 | Phase 11 | Pending |
 | BROWSE-03 | Phase 11 | Pending |
 | BROWSE-04 | Phase 11 | Pending |
 | BROWSE-05 | Phase 11 | Pending |
 | BROWSE-06 | Phase 11 | Pending |
-| BROWSE-07 | Phase 10 | Pending |
+| BROWSE-07 | Phase 10 | Partial (noscript clause complete; toggle deferred to Phase 11) |
 | SFILT-01 | Phase 9 | Pending |
 | SFILT-02 | Phase 11 | Pending |
 
