@@ -58,10 +58,12 @@
   2. `images.csv` has a `navigational` boolean column; absent values default to false during build
   3. `npm test` passes; new tests cover the blank-subfamily null-coercion and missing-navigational-flag behavior
   4. `build-data.js` and `taxon.js`/`families.js` column maps reference the new fields without error
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD
+- [ ] 08-01-PLAN.md — Add subfamily and navigational columns to CSV data files
+- [ ] 08-02-PLAN.md — Update build-data.js, families.js, and images.js to recognise new columns
+- [ ] 08-03-PLAN.md — Update tests: happy-path assertions and null-coercion tests
 
 ### Phase 9: Build Pipeline Extension
 **Goal**: The build emits a taxonomy tree data file and a species-×-state JSON file that downstream code can consume
@@ -132,7 +134,7 @@ Plans:
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
 | 7. Code Quality Fixes | v1.2 | 1/1 | Complete | 2026-04-18 |
-| 8. Schema Extension | v1.3 | 0/? | Not started | - |
+| 8. Schema Extension | v1.3 | 0/3 | Not started | - |
 | 9. Build Pipeline Extension | v1.3 | 0/? | Not started | - |
 | 10. Browse Shell Page | v1.3 | 0/? | Not started | - |
 | 11. Accordion Component | v1.3 | 0/? | Not started | - |
