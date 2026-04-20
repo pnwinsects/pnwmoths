@@ -43,12 +43,10 @@ export default function (eleventyConfig) {
       base: "/pnwmoths/",
       plugins: [{
         name: "pnwm-copy-images",
-        writeBundle: () => new Promise((res, rej) => {
-          execFile("node", ["scripts/copy-images.js"], (err, stdout) => {
-            if (stdout) process.stdout.write(stdout);
-            if (err) rej(err); else res();
-          });
-        })
+        writeBundle: async () => {
+          await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+          await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+        }
       }]
     }
   });
@@ -56,14 +54,10 @@ export default function (eleventyConfig) {
   // In --serve mode Vite runs as middleware (no build, no writeBundle), so copy on each
   // Eleventy rebuild instead. Images persist between watch rebuilds since Eleventy doesn't
   // wipe _site/ on partial rebuilds.
-  eleventyConfig.on("eleventy.after", ({ runMode }) => {
+  eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode !== "serve") return;
-    return new Promise((res, rej) => {
-      execFile("node", ["scripts/copy-images.js"], (err, stdout) => {
-        if (stdout) process.stdout.write(stdout);
-        if (err) rej(err); else res();
-      });
-    });
+    await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
   });
 
   return {
