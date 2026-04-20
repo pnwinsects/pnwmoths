@@ -30,3 +30,13 @@ const stylesSrc = resolve('src/styles');
 const stylesDest = resolve('_site/styles');
 await cp(stylesSrc, stylesDest, { recursive: true });
 console.log('Copied styles: src/styles/ -> _site/styles/');
+
+// Pico CSS (passthrough copy does not survive eleventy-plugin-vite's _site wipe)
+import { mkdir, copyFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const picoSrc = require.resolve('@picocss/pico/css/pico.min.css');
+const picoDest = resolve('_site/css');
+await mkdir(picoDest, { recursive: true });
+await copyFile(picoSrc, resolve('_site/css/pico.min.css'));
+console.log('Copied Pico CSS: @picocss/pico/css/pico.min.css -> _site/css/pico.min.css');
