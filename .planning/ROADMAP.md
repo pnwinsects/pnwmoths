@@ -41,7 +41,7 @@
 
 **Milestone Goal:** Replace static browse pages with an interactive accordion browse page (Family → Subfamily → Genus → Species) with navigation images and client-side state filtering.
 
-- [ ] **Phase 8: Schema Extension** - Add `subfamily` and `navigational` columns to CSV data model with validation
+- [x] **Phase 8: Schema Extension** - Add `subfamily` and `navigational` columns to CSV data model with validation
 - [ ] **Phase 9: Build Pipeline Extension** - Emit `taxon.js` data tree and `species-states.json` for accordion and state filter
 - [ ] **Phase 10: Browse Shell Page** - Rewrite `/browse/` as single dynamic page; retire per-genus static pages
 - [ ] **Phase 11: Accordion Component** - Implement `<pnwm-taxon-browser>` Lit component with accordion, nav images, and state filter
@@ -134,7 +134,7 @@ Plans:
 | 5. Maintainability | v1.0 | 3/3 | Complete | 2026-04-12 |
 | 6. Make Pages Look Like Existing pnwmoths Site | v1.1 | 2/2 | Complete | 2026-04-15 |
 | 7. Code Quality Fixes | v1.2 | 1/1 | Complete | 2026-04-18 |
-| 8. Schema Extension | v1.3 | 0/3 | Not started | - |
+| 8. Schema Extension | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 9. Build Pipeline Extension | v1.3 | 0/? | Not started | - |
 | 10. Browse Shell Page | v1.3 | 0/? | Not started | - |
 | 11. Accordion Component | v1.3 | 0/? | Not started | - |
