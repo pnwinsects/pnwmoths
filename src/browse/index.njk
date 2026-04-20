@@ -6,7 +6,7 @@ permalink: /browse/index.html
 <h1>Browse all species</h1>
 
 <script type="application/json" id="taxon-data" data-pagefind-ignore>
-  {{ taxon | tojson }}
+  {{ taxon | tojson | safe }}
 </script>
 
 <pnwm-taxon-browser></pnwm-taxon-browser>
