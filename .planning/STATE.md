@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-04-20 for v1.3 milestone)
 ## Current Position
 
 Phase: 11 of 12 (Accordion Component)
-Plan: 02 complete — next: 03
-Status: In progress — 2/3 plans complete
-Last activity: 2026-04-20 — Plan 11-02 complete: pnwm-taxon-browser.js Lit accordion component implemented (GREEN — 13/13 tests pass)
+Plan: 03 in progress — checkpoint:human-verify pending
+Status: In progress — 3/3 plans started; Task 3 checkpoint awaiting manual verification
+Last activity: 2026-04-20 — Plan 11-03 Tasks 1-2 complete: main.js wired, build succeeded 58/58 tests green
 
 Progress: [██░░░░░░░░] 20%
 
@@ -46,6 +46,7 @@ Progress: [██░░░░░░░░] 20%
 | v1.0–v1.2 | 15 | - | - |
 | 11-01 | 1 | 91s | 91s |
 | 11-02 | 1 | 78s | 78s |
+| 11-03 | 2 | 47s | 47s |
 
 **Recent Trend:**
 - v1.3: not started
@@ -87,5 +88,5 @@ Items acknowledged and carried forward from v1.2 close:
 ## Session Continuity
 
 Last session: 2026-04-20
-Stopped at: Completed 11-02-PLAN.md — pnwm-taxon-browser.js implemented (GREEN)
-Resume file: .planning/phases/11-accordion-component/11-02-SUMMARY.md
+Stopped at: 11-03-PLAN.md Tasks 1-2 complete — awaiting checkpoint:human-verify (Task 3)
+Resume file: .planning/phases/11-accordion-component/11-03-SUMMARY.md
