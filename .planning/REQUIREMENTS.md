@@ -52,24 +52,24 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TAXON-01 | TBD | Pending |
-| TAXON-02 | TBD | Pending |
-| TAXON-03 | TBD | Pending |
-| BROWSE-01 | TBD | Pending |
-| BROWSE-02 | TBD | Pending |
-| BROWSE-03 | TBD | Pending |
-| BROWSE-04 | TBD | Pending |
-| BROWSE-05 | TBD | Pending |
-| BROWSE-06 | TBD | Pending |
-| BROWSE-07 | TBD | Pending |
-| SFILT-01 | TBD | Pending |
-| SFILT-02 | TBD | Pending |
+| TAXON-01 | Phase 8 | Pending |
+| TAXON-02 | Phase 8 | Pending |
+| TAXON-03 | Phase 8 | Pending |
+| BROWSE-01 | Phase 10 | Pending |
+| BROWSE-02 | Phase 11 | Pending |
+| BROWSE-03 | Phase 11 | Pending |
+| BROWSE-04 | Phase 11 | Pending |
+| BROWSE-05 | Phase 11 | Pending |
+| BROWSE-06 | Phase 11 | Pending |
+| BROWSE-07 | Phase 10 | Pending |
+| SFILT-01 | Phase 9 | Pending |
+| SFILT-02 | Phase 11 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 12 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 12 ⚠️
+- Mapped to phases: 12 ✓
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-20*
-*Last updated: 2026-04-20 after initial definition*
+*Last updated: 2026-04-20 after roadmap creation*
