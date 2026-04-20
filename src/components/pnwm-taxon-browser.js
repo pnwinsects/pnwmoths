@@ -37,6 +37,7 @@ export function collectSlugs(node) {
 class PnwmTaxonBrowser extends LitElement {
   static get properties() {
     return {
+      'path-prefix':        { type: String },
       _families:            { attribute: false, state: true },
       _stateMap:            { attribute: false, state: true },
       _statesAvailable:     { attribute: false, state: true },
@@ -47,6 +48,8 @@ class PnwmTaxonBrowser extends LitElement {
       _expandedGenera:      { attribute: false, state: true },
     };
   }
+
+  get _prefix() { return this['path-prefix'] || '/'; }
 
   /** Light DOM — Pico CSS must reach selects, headings, links inside this component (D-09) */
   createRenderRoot() { return this; }
@@ -70,7 +73,7 @@ class PnwmTaxonBrowser extends LitElement {
     if (scriptEl) this._families = JSON.parse(scriptEl.textContent);
     // Async: fetch state filter data (D-11)
     try {
-      const res = await fetch('/species-states.json');
+      const res = await fetch(`${this._prefix}species-states.json`);
       const rows = await res.json();
       this._stateMap = buildStateMap(rows);
       this._statesAvailable = [...new Set(rows.map(r => r.state))].sort();
@@ -128,7 +131,7 @@ class PnwmTaxonBrowser extends LitElement {
       <div style="display:inline-flex;flex-direction:row;gap:4px;overflow-x:auto">
         ${navImages.map(img => html`
           <img
-            src="/images/${img.species_slug}/${img.filename}"
+            src="${this._prefix}images/${img.species_slug}/${img.filename}"
             alt=""
             loading="lazy"
             style="height:93px;width:auto;object-fit:cover;flex-shrink:0"
@@ -154,7 +157,7 @@ class PnwmTaxonBrowser extends LitElement {
       <ul>
         ${species.map(sp => html`
           <li>
-            <a href="/species/${sp.slug}/">
+            <a href="${this._prefix}species/${sp.slug}/">
               <em>${genusName} ${sp.name}</em>${sp.common_name ? html` — ${sp.common_name}` : ''}
             </a>
           </li>
