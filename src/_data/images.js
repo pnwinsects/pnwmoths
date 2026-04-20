@@ -8,6 +8,7 @@ export default async function () {
     CREATE TABLE images AS
     SELECT * FROM read_csv('data/images.csv',
       header = true,
+      nullstr = '',
       columns = {
         'species_slug': 'VARCHAR',
         'filename': 'VARCHAR',
@@ -15,13 +16,14 @@ export default async function () {
         'weight': 'INTEGER',
         'license': 'VARCHAR',
         'view': 'VARCHAR',
-        'specimen': 'VARCHAR'
+        'specimen': 'VARCHAR',
+        'navigational': 'VARCHAR'
       }
     )
   `);
 
   const result = await conn.runAndReadAll(`
-    SELECT species_slug, filename, photographer, weight, license, view, specimen
+    SELECT species_slug, filename, photographer, weight, license, view, specimen, navigational
     FROM images
     ORDER BY species_slug, weight
   `);
