@@ -63,7 +63,7 @@
 Plans:
 - [x] 08-01-PLAN.md — Add subfamily and navigational columns to CSV data files
 - [x] 08-02-PLAN.md — Update build-data.js, families.js, and images.js to recognise new columns
-- [ ] 08-03-PLAN.md — Update tests: happy-path assertions and null-coercion tests
+- [x] 08-03-PLAN.md — Update tests: happy-path assertions and null-coercion tests
 
 ### Phase 9: Build Pipeline Extension
 **Goal**: The build emits a taxonomy tree data file and a species-×-state JSON file that downstream code can consume
