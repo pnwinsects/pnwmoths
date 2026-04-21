@@ -4,6 +4,11 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFile } from "node:child_process";
 
+// On GitHub Pages the site lives under /pnwmoths/. actions/configure-pages sets
+// GITHUB_PAGES=true so the build knows to apply the prefix. Locally the dev
+// server serves at root, so we use "/" which makes | url a no-op.
+const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
+
 export default function (eleventyConfig) {
   // Render plugin: enables {% renderFile %} shortcode for rendering .md files in templates
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -40,7 +45,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyVitePlugin, {
     viteOptions: {
       appType: "mpa",
-      base: "/pnwmoths/",
+      base: pathPrefix,
       plugins: [{
         name: "pnwm-copy-images",
         writeBundle: async () => {
@@ -63,7 +68,7 @@ export default function (eleventyConfig) {
   });
 
   return {
-    pathPrefix: "/pnwmoths/",
+    pathPrefix,
     dir: {
       input: "src",
       output: "_site",
