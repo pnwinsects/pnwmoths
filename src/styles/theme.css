@@ -59,11 +59,10 @@ body {
 .pnwm-site-name {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 10px 24px;
+  padding: 0 24px;
   color: #ffffff;
   font-family: 'Spinnaker', 'Open Sans', sans-serif;
-  font-size: 1.4rem;
-  text-align: center;
+  font-size: 3rem;
   letter-spacing: 0.04em;
 }
 
@@ -79,15 +78,14 @@ body > header img {
 /* --- Navigation bar --- */
 
 nav {
+  max-width: 1140px;
+  margin: 0 auto;
   background-color: #000000;
-  padding: 0;
-  margin: 0;
+  padding: 0 24px;
 }
 
 nav ul {
   max-width: 1140px;
-  margin: 0 auto;
-  padding: 8px 8px;
   list-style: none;
   display: flex;
   gap: 0;
@@ -96,7 +94,6 @@ nav ul {
 nav a {
   color: #ffffff;
   text-decoration: none;
-  padding: 8px 16px;
 }
 
 nav a:hover {
