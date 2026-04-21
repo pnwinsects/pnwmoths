@@ -1,0 +1,72 @@
+---
+layout: base.njk
+title: "Photographic Plates — PNW Moths"
+permalink: /plates/index.html
+---
+<h1>Photographic Plates</h1>
+<p id="plates-copyright">Plates copyright: Merrill Peterson, 2021. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>.</p>
+
+{% if plates.length %}
+<ul class="plate-grid">
+  {% for plate in plates %}
+  <li>
+    <a href="{{ ('/plates/' + plate.slug + '/') | url }}">
+      <img
+        src="/plates/{{ plate.slug }}/thumbnail.jpg"
+        alt="{{ plate.title }}"
+        width="240" height="300"
+        loading="lazy">
+      <h2>{{ plate.title | upper }}</h2>
+      {% if plate.description %}<p>{{ plate.description }}</p>{% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No plates available.</p>
+{% endif %}
+
+<style>
+.plate-grid {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 2rem;
+}
+.plate-grid li {
+  width: 240px;
+  list-style: none;
+  text-align: center;
+}
+.plate-grid a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.plate-grid a:hover h2 {
+  text-decoration: underline;
+}
+.plate-grid img {
+  display: block;
+  width: 240px;
+  height: 300px;
+  object-fit: cover;
+  background: #222;
+}
+.plate-grid h2 {
+  font-size: 0.7rem;
+  font-family: var(--pico-font-family-sans-serif);
+  font-weight: 600;
+  margin: 6px 0 2px;
+  line-height: 1.3;
+}
+.plate-grid p {
+  font-size: 0.7rem;
+  margin: 0;
+  color: #555;
+  line-height: 1.3;
+}
+</style>

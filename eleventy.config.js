@@ -45,6 +45,7 @@ export default function (eleventyConfig) {
         name: "pnwm-copy-images",
         writeBundle: async () => {
           await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+          await new Promise((res, rej) => execFile("node", ["scripts/copy-plates.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
           await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
         }
       }]
@@ -57,6 +58,7 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode !== "serve") return;
     await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    await new Promise((res, rej) => execFile("node", ["scripts/copy-plates.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
   });
 

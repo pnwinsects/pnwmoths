@@ -40,3 +40,9 @@ const picoDest = resolve('_site/css');
 await mkdir(picoDest, { recursive: true });
 await copyFile(picoSrc, resolve('_site/css/pico.min.css'));
 console.log('Copied Pico CSS: @picocss/pico/css/pico.min.css -> _site/css/pico.min.css');
+
+// OpenSeadragon nav button images
+const osdImagesSrc = resolve('node_modules/openseadragon/build/openseadragon/images');
+const osdImagesDest = resolve('_site/osd-images');
+await cp(osdImagesSrc, osdImagesDest, { recursive: true });
+console.log('Copied OpenSeadragon images: node_modules/openseadragon/.../images -> _site/osd-images');
