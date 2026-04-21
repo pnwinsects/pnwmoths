@@ -107,16 +107,9 @@ async function main() {
     process.exit(0);
   }
 
-  // --- Step 1: Load species id → slug lookup from data/species.csv ---
-  const speciesCsvRaw = await readFile('data/species.csv');
-  const speciesRows = parse(speciesCsvRaw, { columns: true, skip_empty_lines: true });
-  /** @type {Map<string, string>} id → slug */
-  const idToSlug = new Map();
-  for (const row of speciesRows) {
-    const slug = toSlug(row.genus, row.species);
-    idToSlug.set(String(row.id), slug);
-  }
-  console.log(`[migrate-images] Loaded ${idToSlug.size} species slugs from data/species.csv`);
+  // --- Step 1: (no species ID lookup needed) ---
+  // Slug is derived directly from the image filename in speciesimage CSV,
+  // so data/species.csv is not used for the upload path.
 
   // --- Step 2: Load photographer lookup ---
   let photographerById = new Map();
@@ -155,13 +148,9 @@ async function main() {
     const speciesImageRows = parse(speciesImageRaw, { columns: true, skip_empty_lines: true });
     console.log(`[migrate-images] Loaded ${speciesImageRows.length} species image records`);
 
-    // Group rows by slug
+    // Group rows by slug — derive slug directly from the image filename,
+    // no species_id lookup needed (data/species.csv only has test stubs).
     for (const row of speciesImageRows) {
-      const slug = idToSlug.get(String(row.species_id));
-      if (!slug) {
-        console.warn(`[migrate-images] Unknown species_id ${row.species_id} in speciesimage CSV — skipping`);
-        continue;
-      }
       // Strip "moths/" prefix from image column to get bare filename
       const rawImage = row.image ?? '';
       const fname = rawImage.startsWith('moths/') ? rawImage.slice('moths/'.length) : rawImage;
@@ -169,6 +158,8 @@ async function main() {
 
       const parsed = parseMotFilename(fname);
       if (!parsed) continue; // already warned inside parseMotFilename
+
+      const slug = toSlug(parsed.genus, parsed.species);
 
       const photographer = photographerById.get(String(row.photographer_id)) ?? '';
       const { view, specimen } = parseViewSpecimen(fname);
