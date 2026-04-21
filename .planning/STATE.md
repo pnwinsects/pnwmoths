@@ -21,7 +21,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-20 for v1.3 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v1.3 milestone complete
+**Current focus:** Planning next milestone
 
 ## Current Position
 

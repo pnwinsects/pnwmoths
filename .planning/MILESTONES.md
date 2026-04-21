@@ -37,4 +37,17 @@
 - ENOENT guard in check-page-weight.js — missing SITE_DIR logs a warning instead of crashing (WR-04)
 - check-page-weight.test.js wired into npm test suite; 37 tests, 37 passing
 
+## v1.3 Visual Browse (Shipped: 2026-04-20)
+
+**Phases completed:** 5 phases (Phases 8–12), 10 plans
+**Files changed:** 65 files, +9,156 / -186 LOC
+
+**Key accomplishments:**
+
+- `subfamily` and `navigational` CSV columns added with null-coercion and build-pipeline validation; DuckDB `nullstr = ''` required on both read_csv calls for correct null handling
+- Build pipeline emits `species-states.json` (29 DISTINCT species-state pairs) for client-side state filter; `taxon.js` Eleventy data file produces family→subfamily→genus→species tree with up to 4 nav images per level
+- `/browse/` rewritten as single dynamic Eleventy page with embedded taxonomy JSON and complete `<noscript>` static listing; per-genus static pages retired
+- `<pnwm-taxon-browser>` Lit web component: 4-level accordion expand/collapse with navigation image strips, show/hide images toggle, and state filter that mutes taxa with no records in selected state
+- Full production build verified: 58/58 tests green, 0 link errors (lychee), `data-pagefind-ignore` confirmed on taxonomy JSON element
+
 ---

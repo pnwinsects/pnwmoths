@@ -8,7 +8,7 @@
 - ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-04-12) — [archive](.planning/milestones/v1.0-ROADMAP.md)
 - ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](.planning/milestones/v1.1-ROADMAP.md)
 - ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](.planning/milestones/v1.2-ROADMAP.md)
-- ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20)
+- ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](.planning/milestones/v1.3-ROADMAP.md)
 
 ## Phases
 
