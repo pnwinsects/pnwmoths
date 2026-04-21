@@ -9,6 +9,7 @@
 - ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](.planning/milestones/v1.1-ROADMAP.md)
 - ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](.planning/milestones/v1.2-ROADMAP.md)
 - ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](.planning/milestones/v1.3-ROADMAP.md)
+- 🔧 **v1.4 Image CDN** — Phases 13–16 (active)
 
 ## Phases
 
@@ -47,6 +48,17 @@
 - [x] **Phase 10: Browse Shell Page** - Rewrite `/browse/` as single dynamic page; retire per-genus static pages
 - [x] **Phase 11: Accordion Component** - Implement `<pnwm-taxon-browser>` Lit component with accordion, nav images, and state filter
 - [x] **Phase 12: Validation** - Full build verification; confirm all outputs correct and tests passing
+
+</details>
+
+**v1.4 Image CDN (Phases 13–16):**
+
+**Milestone Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing; remove build-time resize scripts and LFS from the repo.
+
+- [ ] **Phase 13: CDN Provisioning** - Create bunny.net Storage + Pull Zone; upload images; configure Optimizer; wire GitHub secret; document upload workflow
+- [ ] **Phase 14: Template Migration** - Wire `CDN_BASE_URL` into Eleventy; update all templates and `pnwm-taxon-browser.js` to construct CDN URLs
+- [ ] **Phase 15: LFS Removal** - Rewrite git history to purge `images/`; clean `.gitattributes`; replace LFS checkout in CI
+- [ ] **Phase 16: Build Pipeline Cleanup** - Remove species photo copy block from `copy-images.js`; retire build-time image resize scripts
 
 ## Phase Details
 
@@ -125,7 +137,52 @@ Plans:
 Plans:
 - [x] 12-01-PLAN.md — Commit UAT polish, run verification checklist, update planning docs
 
-</details>
+### Phase 13: CDN Provisioning
+**Goal**: Images are served from bunny.net CDN with the Optimizer active; collaborators have a documented workflow to upload originals; GitHub Actions has the CDN secret
+**Depends on**: Nothing (first phase of v1.4)
+**Requirements**: CDN-01, CDN-02, CDN-03, CDN-04
+**Success Criteria** (what must be TRUE):
+  1. A browser request to `{CDN_BASE_URL}/{slug}/{filename}` returns a 200 with `Content-Type: image/webp` and the expected pixel dimensions (Bunny Optimizer active)
+  2. A browser request using an Image Class (glossary portrait crop, nav thumbnail) returns correct dimensions without width/height HTML attributes
+  3. `CDN_BASE_URL` is set as a secret in the GitHub Actions repository settings; the deploy workflow can read it as an environment variable
+  4. `_instructions/` contains a contributor-facing doc covering rclone FTP setup, `rclone copy` (not `sync`) for uploads, `--ignore-times` for replacements, and how to trigger cache invalidation
+**UI hint**: no
+**Plans**: TBD
+
+### Phase 14: Template Migration
+**Goal**: Every image URL in the built site resolves through the CDN; the Eleventy build fails fast when `CDN_BASE_URL` is absent in production
+**Depends on**: Phase 13
+**Requirements**: TMPL-01, TMPL-02, TMPL-03, TMPL-04, TMPL-05, TMPL-06
+**Success Criteria** (what must be TRUE):
+  1. Running `GITHUB_PAGES=true npm run build` without `CDN_BASE_URL` set exits with a clear error message and non-zero exit code
+  2. All species factsheet pages contain `<img src="https://...">` CDN URLs (no `/images/` relative paths) for species photos
+  3. All glossary portrait `<img>` tags use CDN URLs; the `| url` filter is absent from glossary image path expressions
+  4. The `<pnwm-taxon-browser>` element on `/browse/` receives a `cdn-base-url` attribute; image URLs constructed by the component in the browser resolve correctly via CDN
+  5. Species photo and glossary portrait `<img>` tags include a `srcset` with a 2× width descriptor pointing to the CDN
+**UI hint**: yes
+**Plans**: TBD
+
+### Phase 15: LFS Removal
+**Goal**: Git history contains no LFS pointers or `images/` blobs; CI no longer performs an LFS checkout
+**Depends on**: Phase 13
+**Requirements**: LFS-01, LFS-02
+**Success Criteria** (what must be TRUE):
+  1. `git lfs ls-files` returns no tracked files; `.gitattributes` contains no `filter=lfs` lines
+  2. A fresh `git clone` of the repository succeeds without `git lfs pull` and produces a working directory with no `images/` directory
+  3. Both `deploy.yml` and `pr-check.yml` use plain `actions/checkout@v4` with no LFS-related options or steps
+**UI hint**: no
+**Plans**: TBD
+
+### Phase 16: Build Pipeline Cleanup
+**Goal**: The build pipeline contains no image-copy or resize logic for species photos; CI builds cleanly using CDN URLs throughout
+**Depends on**: Phase 14, Phase 15
+**Requirements**: PIPE-01, PIPE-02
+**Success Criteria** (what must be TRUE):
+  1. `scripts/copy-images.js` contains no species photo copy block; the banner, Pico CSS, and OSD asset copies remain and function correctly
+  2. No build-time image resize scripts exist in `scripts/`; `npm run build` completes without executing any image transformation step
+  3. A full GitHub Actions deploy run (using the real `CDN_BASE_URL` secret) completes successfully and the deployed site loads species images from the CDN
+**UI hint**: no
+**Plans**: TBD
 
 ## Progress
 
@@ -143,9 +200,13 @@ Plans:
 | 10. Browse Shell Page | v1.3 | 1/1 | Complete | 2026-04-20 |
 | 11. Accordion Component | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 12. Validation | v1.3 | 1/1 | Complete | 2026-04-20 |
+| 13. CDN Provisioning | v1.4 | 0/? | Not started | - |
+| 14. Template Migration | v1.4 | 0/? | Not started | - |
+| 15. LFS Removal | v1.4 | 0/? | Not started | - |
+| 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 started: 2026-04-20*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 started: 2026-04-21*
 
 ## Backlog
 

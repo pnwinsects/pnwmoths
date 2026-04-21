@@ -53,17 +53,17 @@
 
 | Requirement | Phase | Status | Outcome |
 |-------------|-------|--------|---------|
-| CDN-01 | — | Pending | — |
-| CDN-02 | — | Pending | — |
-| CDN-03 | — | Pending | — |
-| CDN-04 | — | Pending | — |
-| LFS-01 | — | Pending | — |
-| LFS-02 | — | Pending | — |
-| TMPL-01 | — | Pending | — |
-| TMPL-02 | — | Pending | — |
-| TMPL-03 | — | Pending | — |
-| TMPL-04 | — | Pending | — |
-| TMPL-05 | — | Pending | — |
-| TMPL-06 | — | Pending | — |
-| PIPE-01 | — | Pending | — |
-| PIPE-02 | — | Pending | — |
+| CDN-01 | Phase 13 | Pending | — |
+| CDN-02 | Phase 13 | Pending | — |
+| CDN-03 | Phase 13 | Pending | — |
+| CDN-04 | Phase 13 | Pending | — |
+| LFS-01 | Phase 15 | Pending | — |
+| LFS-02 | Phase 15 | Pending | — |
+| TMPL-01 | Phase 14 | Pending | — |
+| TMPL-02 | Phase 14 | Pending | — |
+| TMPL-03 | Phase 14 | Pending | — |
+| TMPL-04 | Phase 14 | Pending | — |
+| TMPL-05 | Phase 14 | Pending | — |
+| TMPL-06 | Phase 14 | Pending | — |
+| PIPE-01 | Phase 16 | Pending | — |
+| PIPE-02 | Phase 16 | Pending | — |

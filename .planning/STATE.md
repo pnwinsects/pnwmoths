@@ -7,7 +7,7 @@ stopped_at: ~
 last_updated: "2026-04-21T00:00:00Z"
 last_activity: 2026-04-21
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -18,24 +18,24 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-20 for v1.3 milestone)
+See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Planning next milestone
+**Current focus:** Roadmap defined; ready to plan Phase 13
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: Not started (roadmap complete)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-04-21 — Milestone v1.4 started
+Status: Ready to plan Phase 13
+Last activity: 2026-04-21 — v1.4 roadmap created (Phases 13–16)
 
-Progress: [██████████] 100%
+Progress: [__________] 0%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15 (across v1.0–v1.2)
+- Total plans completed: 15 (across v1.0–v1.2), 10 (v1.3)
 - Average duration: unknown
 - Total execution time: unknown
 
@@ -49,7 +49,7 @@ Progress: [██████████] 100%
 | 11-03 | 2 | 47s | 47s |
 
 **Recent Trend:**
-- v1.3: in progress
+- v1.3: shipped 2026-04-20
 - Trend: —
 
 *Updated after each plan completion*
@@ -61,11 +61,15 @@ Progress: [██████████] 100%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- v1.3 research: Use JSON (not Parquet) for species-×-state distribution file — at 700 species × ~6 states, ~4,200 pairs fits in ~20–30 KB; hyparquet overhead not justified
-- v1.3 research: Lit accordion must use light DOM (`createRenderRoot() { return this; }`) — Pico CSS element selectors don't penetrate shadow DOM; decide at creation, not retrofit
-- v1.3 research: DuckDB `nullstr = ''` required on both read_csv calls — blank subfamily must arrive as null, not empty string, to avoid silent grouping failures
-- Phase 11 UAT: No subfamily data in species.csv — subfamily column blank for all species; component handles correctly by flattening genera under family
-- Phase 11 UAT: Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix — pattern is to use raw `/images/...` paths and let Vite add base
+- v1.4 research: rclone via FTP is the only viable upload tool — bunny.net S3 compatibility is in closed preview (not GA as of April 2026)
+- v1.4 research: Enable Bunny Optimizer on Pull Zone BEFORE removing build-time resize scripts; verify in browser network tab first
+- v1.4 research: `CDN_BASE_URL` must be the Pull Zone URL (`{zone}.b-cdn.net`), NOT the Storage Zone URL (`storage.bunnycdn.com`)
+- v1.4 research: `| url` filter must be stripped from glossary image path expressions before adopting CDN URLs (filter corrupts absolute URLs)
+- v1.4 research: `pnwm-taxon-browser.js` has multiple image src construction sites — grep for `this._prefix` + `"images/"` before writing replacement
+- v1.4 research: LFS history rewrite requires two steps: `git lfs migrate export --everything` then `git filter-repo --path images/ --invert-paths`
+- v1.4 research: GitHub will not free LFS storage quota until repo is deleted and recreated — accept billing for now (Out of Scope)
+- v1.3 decision (carry): `rclone sync` deletes production bucket files — always use `rclone copy`; `sync` only with mandatory `--dry-run` first
+- v1.3 decision (carry): Raw `/images/...` paths in templates (not `| url` filter) — Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix
 
 ### Pending Todos
 
@@ -73,21 +77,23 @@ None.
 
 ### Blockers/Concerns
 
-- Phase 8: Vite version mismatch — package.json specifies `^8.0.8` but `7.3.2` is installed; resolve with `npm install` before starting Phase 8
-- Phase 12: Confirm link checker tool and invocation before planning
+- LFS-01: Destructive force-push — announce to all collaborators before executing; all must re-clone after
+- PIPE-02: Confirm which scripts constitute "build-time image resize scripts" before planning (may include logic in `scripts/build-data.js` — unconfirmed by research)
+- lychee: CDN image 404s are invisible to CI (lychee excludes image extensions) — add CDN hostname exclusion to `lychee.toml` and manually spot-check image URLs post-deploy
 
 ## Deferred Items
 
-Items acknowledged and carried forward from v1.2 close:
+Items acknowledged and carried forward:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
 | Tech debt | MAINT-03: build time under 5 min unverified | Carry forward | v1.2 |
 | Tech debt | No automated visual regression tests | Carry forward | v1.2 |
 | Tech debt | WR-01–03: test cleanup paths could be more robust | Carry forward | v1.2 |
+| CDN | GitHub LFS storage quota reclaim | Accept billing; out of scope | v1.4 |
 
 ## Session Continuity
 
-Last session: 2026-04-20
-Stopped at: Phase 11 complete — ready to discuss/plan Phase 12
-Resume file: .planning/phases/11-accordion-component/11-UAT.md
+Last session: 2026-04-21
+Stopped at: v1.4 roadmap created — Phases 13–16 defined
+Resume file: .planning/ROADMAP.md
