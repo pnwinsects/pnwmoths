@@ -1,223 +1,299 @@
-# Pitfalls Research
+# Pitfalls: LFS Removal + bunny.net CDN Migration
 
-**Domain:** Eleventy/Lit/Parquet static site — adding accordion browse, navigation images, species-x-state Parquet filter
-**Researched:** 2026-04-18
-**Confidence:** HIGH (grounded in existing codebase + verified against official docs and known issues)
+**Domain:** Eleventy/Vite/GitHub Actions static site — removing Git LFS and migrating images to bunny.net Storage + CDN
+**Researched:** 2026-04-21
+**Confidence:** HIGH (grounded in existing codebase, verified against official docs and known issues)
 
 ---
 
 ## Critical Pitfalls
 
-### Pitfall 1: Parquet passthrough copy wiped by eleventy-plugin-vite on production build
+### Pitfall 1: `git lfs migrate export` rewrites history but GitHub keeps LFS objects forever
 
 **What goes wrong:**
-The new species-x-state Parquet file (e.g. `data/parquet/species-state.parquet`) will be added to `eleventy.config.js` as a passthrough copy. During a production build, `eleventy-plugin-vite` renames `_site/` to `.11ty-vite`, runs Vite into a fresh `_site/`, then copies back processed assets — but only assets that Vite sees referenced from HTML. Binary files passthrough-copied from outside Vite's processing graph are silently dropped. This is an already-known issue (GitHub issue #42 on eleventy-plugin-vite), confirmed as affecting any passthrough-copied binary.
+`git lfs migrate export --everything --include="images/**,plates/**"` rewrites every commit, replacing LFS pointer files with real blobs. After the force-push, collaborators must re-clone — their existing clones reference old SHAs that no longer exist on `origin`. If anyone pushes from a stale clone they will re-introduce LFS pointers for files that are gone.
+
+Additionally: even after removing all LFS pointer commits from history, GitHub does NOT automatically free the LFS storage quota. The LFS objects remain on GitHub's servers and continue counting toward billing until the repository is deleted and re-created. There is no per-object deletion API for regular accounts; GitHub Support can sometimes trigger early cleanup, but this is not guaranteed.
 
 **Why it happens:**
-The project already solved this for per-species Parquet files with `scripts/copy-parquet.js` and an explicit `build:copy-parquet` step. Adding a second cross-cutting Parquet file without extending that same post-build copy script repeats the exact mistake the workaround was designed to prevent.
+GitHub's LFS storage is content-addressed object storage, not directly tied to git history. Rewriting history removes references to the objects but does not delete the objects from GitHub's LFS store.
 
-**How to avoid:**
-Extend `scripts/copy-parquet.js` (or create a companion script) to also copy the species-state Parquet file into `_site/` after Vite finishes. Update the `build` npm script to include this copy step. Do not rely on `eleventyConfig.addPassthroughCopy` alone for any Parquet file.
+**Consequences:**
+- Collaborators with stale clones silently re-pollute history with LFS pointers on their next push
+- Continued LFS storage billing on GitHub even though no new files are added
+- CI that still references `nschloe/action-cached-lfs-checkout` will attempt LFS checkout of an empty LFS dataset, wasting time (not fatal, but wasteful)
 
-**Warning signs:**
-Build succeeds locally (dev server doesn't run Vite's rename dance), but the browse page fails in CI or after a full production build with a 404 on the Parquet file. The `build:copy-parquet` test in CI is the canary.
+**Prevention:**
+1. Coordinate with all collaborators: announce the migration, require re-clones after the force-push
+2. Pin the force-push to a maintenance window — use `--force-with-lease` not `--force`
+3. Remove `nschloe/action-cached-lfs-checkout` from `deploy.yml` and `pr-check.yml` and replace with plain `actions/checkout` in the same PR as the migration
+4. Remove `images/**` and `plates/**` patterns from `.gitattributes` in the same commit that rewrites history
+5. Accept the storage billing situation — it resolves at the next billing cycle naturally if no new LFS pushes occur; or delete+recreate repo if storage cost is a real concern
 
-**Phase to address:**
-Phase that adds the species-state Parquet file to the build pipeline.
+**Phase:** LFS removal phase (the rewrite commit and CI workflow update must be a single coordinated step)
 
 ---
 
-### Pitfall 2: Accordion in shadow DOM cannot be styled by Pico CSS global rules
+### Pitfall 2: `git lfs migrate export` inserts "do not track" entries in `.gitattributes` instead of removing existing entries
 
 **What goes wrong:**
-The existing `pnwm-filter-bar` uses shadow DOM (default `LitElement` behavior) with `static get styles()`. If the accordion component (`pnwm-taxon-browser` or similar) uses shadow DOM, Pico CSS rules (`summary`, `details`, `h2`, `h3`, etc.) and the project's `theme.css` custom properties will not apply inside the component. CSS custom properties (`var(--pico-*)`) do pierce shadow DOM — but Pico's element selectors do not. The existing `pnwm-occurrence-map` uses `createRenderRoot() { return this; }` for Leaflet, establishing the pattern that light DOM is the escape hatch when global styles must apply.
+`git lfs migrate export` adds lines like `images/**/*.jpg !filter !diff !merge` to `.gitattributes` rather than removing the existing `images/**/*.jpg filter=lfs diff=lfs merge=lfs -text` rules. The repo ends up with both the original LFS tracking rules AND the override negation rules. Git treats the first matching pattern as authoritative, so the effective result is correct, but the `.gitattributes` is confusing and could mislead future contributors into thinking LFS is still active.
 
-**Why it happens:**
-Shadow DOM is the default for `LitElement`. Developers expect `var(--pico-color)` to work (it does), but don't realize `h2 { font-size: ... }` from Pico's stylesheet won't apply to `h2` elements inside a shadow root.
+**Prevention:**
+After running `git lfs migrate export`, manually edit `.gitattributes` to remove all `filter=lfs` lines. Commit this cleanup separately before force-pushing. Verify with `git check-attr filter -- images/test.jpg` that the filter attribute is unset.
 
-**How to avoid:**
-If the accordion needs Pico's heading/typography/details element styles, use `createRenderRoot() { return this; }` (light DOM mode), as established by `pnwm-occurrence-map`. Accept the trade-off: light DOM components leak their styles and lose slot/encapsulation features. Document this choice explicitly. If shadow DOM is preferred, forward all needed styles via `static styles` with explicit copies of required Pico rules (fragile — will drift as Pico updates) or use only CSS custom properties in the template.
-
-**Warning signs:**
-Accordion headings look unstyled compared to the rest of the page. `details`/`summary` expansion styling mismatches. Confirmed by inspecting the element in DevTools and seeing the shadow root boundary.
-
-**Phase to address:**
-Phase that creates the accordion Lit component.
+**Phase:** LFS removal phase
 
 ---
 
-### Pitfall 3: species.csv `subfamily` column breaks existing `validateCsv` and `families.js` hard-coded schema
+### Pitfall 3: rclone `sync` deletes files in the bunny.net Storage bucket that exist in the bucket but not locally
 
 **What goes wrong:**
-`scripts/build-data.js` calls `validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species'])` — this list does not include `subfamily`. Adding the column to the CSV silently passes validation (extra columns don't fail). However, `src/_data/families.js` hard-codes the DuckDB `read_csv` schema with explicit `columns = { ... }` — every column must be named. Adding `subfamily` to the CSV without adding it to the `columns` map in `families.js` (and `build-data.js`) causes DuckDB to either throw a schema mismatch error or silently ignore the new column.
+`rclone sync local/ bunny:zone/` makes the destination match the source exactly — it deletes any file in the bucket that is not present locally. If the local `images/` directory is incomplete (e.g., a partial checkout, or a CI runner that only has a subset of species photos), `rclone sync` will silently delete the files that are absent locally from the production bucket.
 
-The existing test in `build-data.test.js` (`validateCsv: species.csv with correct columns does not throw`) will still pass after adding `subfamily`, masking the fact that the new column is not wired up. No test verifies that `subfamily` is correctly read through and available in Eleventy templates.
+This is particularly dangerous in CI workflows where the working directory is freshly cloned and may not have all image source files, or where images are stored in a separate Django app directory that CI does not mount.
 
 **Why it happens:**
-The pattern of explicitly enumerating column types in DuckDB's `read_csv` call is correct for type safety but requires synchronous updates across three locations: the CSV file, `build-data.js`'s schema definition, and `families.js`'s schema definition. Missing any one silently degrades behavior.
+`rclone sync` semantics: destination is updated to match source, including deletion. The `--delete-after` default means files are deleted after the transfer completes, giving no warning before the damage is done.
 
-**How to avoid:**
-When adding `subfamily` to `species.csv`, update all three in the same commit: (1) CSV header, (2) `build-data.js` `read_csv` columns map (add `'subfamily': 'VARCHAR'`), (3) `families.js` `read_csv` columns map. Update the `validateCsv` call to include `subfamily` in required columns only if it's truly required (it's nullable, so requiring it in `validateCsv` is wrong — instead, add it to the columns map but not to required columns). Add a test that verifies `subfamily` appears in the query output from `families.js` data.
+**Consequences:** Production CDN bucket emptied or partially cleared; images 404 on live site.
 
-**Warning signs:**
-`DuckDB: Binder Error: Explicit column types specified, but column "subfamily" was not found` at build time. Or no error but `sp.subfamily` is always `undefined` in Nunjucks templates.
+**Prevention:**
+- Use `rclone copy` (not `rclone sync`) for image upload workflows. `rclone copy` only adds/updates, never deletes.
+- If sync is genuinely needed (e.g., to remove deleted species images), always run `rclone sync --dry-run` first and review the delete list before committing.
+- In `_instructions/` documentation, always show `rclone copy` as the safe default command; explicitly warn that `rclone sync` is destructive.
+- Add `--max-delete=0` or `--immutable` as a safety net if sync is used in automated CI.
 
-**Phase to address:**
-Phase that adds the `subfamily` column to `species.csv`.
+**Phase:** Upload workflow phase (rclone setup and `_instructions/` documentation)
 
 ---
 
-### Pitfall 4: Nunjucks `{% if sp.subfamily %}` silently treats empty string as falsy but SQL NULL arrives as `null` in JS
+### Pitfall 4: rclone modification-time diffing silently skips re-uploaded files when using bunny.net's FTP backend
 
 **What goes wrong:**
-DuckDB returns SQL NULLs as JavaScript `null` in `.getRowObjectsJS()`. In Nunjucks, `{% if sp.subfamily %}` treats both `null` and `""` (empty string) as falsy, which is the correct intended behavior. However, the DuckDB schema must declare `'subfamily': 'VARCHAR'` — not `'subfamily': 'VARCHAR NOT NULL'`. If the column is accidentally cast as NOT NULL at import time, rows with blank `subfamily` cells in the CSV may error or coerce to empty string rather than NULL, causing the Nunjucks condition to evaluate differently than intended.
+Bunny.net's FTP interface does not support setting modification times via the protocol. Rclone uses modification time as the primary change-detection mechanism when checksums are unavailable. Because bunny.net cannot report or accept accurate modification times, rclone may skip uploading a corrected image that replaces a same-named file — it sees the file exists in the destination and the mtime comparison is unreliable, so it skips the transfer.
 
-A second problem: the accordion taxonomy tree needs to group species with `subfamily IS NULL` directly under family. If the JS grouping logic uses `sp.subfamily !== null` (strict null check) but DuckDB actually returns `""` for blank CSV cells due to DuckDB's CSV auto-detection, the grouping silently puts all species under a subfamily named `""`.
+The symptom: you replace a corrupt or outdated image locally, run `rclone copy`, rclone reports "no files to transfer," and the old file remains on the CDN.
 
-**Why it happens:**
-DuckDB's `read_csv` with explicit `columns` and `VARCHAR` type coerces blank CSV cells to `""` by default — not `NULL`. NULL in CSV (an empty field) becomes `""` unless you add `nullstr = ''` to the `read_csv` call.
+**Prevention:**
+- Always use `rclone copy --ignore-times` (or `--checksum` if bunny.net provides ETags) when re-uploading corrected files, rather than relying on rclone's default mtime comparison.
+- After replacing a file, also purge the CDN cache for that URL (see Pitfall 6 on cache invalidation).
+- Document this explicitly in `_instructions/` for contributors.
 
-**How to avoid:**
-Add `nullstr = ''` to the `read_csv` call for `species.csv` in both `build-data.js` and `families.js` when reading the `subfamily` column. This ensures blank CSV cells for `subfamily` arrive as SQL NULL, which then arrives as JS `null`, which Nunjucks `{% if %}` handles correctly. Add a test with a species row where `subfamily` is blank and verify the grouping code puts it directly under family.
-
-**Warning signs:**
-`sp.subfamily` is `""` instead of `null`. All species with no subfamily appear under a taxon level named `""`. Check by logging `.getRowObjectsJS()` output for a species with a blank subfamily cell.
-
-**Phase to address:**
-Phase that adds the `subfamily` column and builds the taxonomy tree data structure.
+**Phase:** Upload workflow phase
 
 ---
 
-### Pitfall 5: The species-state Parquet is a full-table JOIN that will grow large with real data
+### Pitfall 5: Confusing the Storage API endpoint with the CDN Pull Zone hostname
 
 **What goes wrong:**
-The v1.3 design emits a single species-×-state Parquet from `JOIN species ON records`. At ~130 stub records this is trivial. With 100k+ real occurrence records (the stated scale), the JOIN produces a table of `(species_slug, state, count)` or `(species_slug, state)` pairs. The schema choice matters: if the file is `SELECT DISTINCT species_slug, state FROM records` it's bounded by `species_count × state_count` (e.g., 700 × 6 = 4,200 rows, tiny). If it inadvertently emits one row per record (a debugging mistake), it's 100k rows and will be a multi-MB download that blocks the browse page.
+bunny.net has two distinct services with different hostnames:
 
-A secondary issue: `parquet-cache.js` currently caches per-slug (per-species). The species-state Parquet is a single file loaded once. If it's loaded via the same `loadParquet(slug)` API, the cache key would need to be a sentinel value, not a slug. Using the wrong cache key causes the file to be fetched on every filter interaction.
+- **Storage Zone API** (`storage.bunnycdn.com` or regional endpoints): Used for upload/management with an API key. Files are **not** publicly accessible via this endpoint without authentication.
+- **Pull Zone** (`{zonename}.b-cdn.net` or a custom CNAME): The public CDN delivery endpoint. Files are accessible via simple HTTPS GET.
+
+Setting `CDN_BASE_URL=https://storage.bunnycdn.com/zonename/` in Eleventy templates will generate image URLs that require API key authentication — browsers get a 401/403 for every image. The correct value is the Pull Zone hostname.
 
 **Why it happens:**
-Easy to accidentally write `SELECT * FROM records JOIN species` instead of `SELECT DISTINCT species_slug, state FROM records`. Easy to forget that `loadParquet` in `parquet-cache.js` uses a slug-based URL template (`species/${slug}/records.parquet`) that won't work for a cross-cutting file.
+Both endpoints reference the same underlying storage. The dashboard shows both, and the distinction is not obvious until you see 401 responses in the browser.
 
-**How to avoid:**
-Schema: emit `SELECT DISTINCT species_slug, state FROM records WHERE state IS NOT NULL` — confirmed bounded size. Test the output row count before publishing. Cache: add a separate `loadSpeciesStateParquet()` function in `parquet-cache.js` with its own URL and cache key, rather than reusing the slug-based `loadParquet`. Add a test for the row count of the exported file with representative data.
+**Prevention:**
+- Set `CDN_BASE_URL` to the Pull Zone URL (`https://{zonename}.b-cdn.net/`) not the Storage API URL.
+- Verify by opening a CDN image URL in an incognito browser before wiring it into Eleventy.
+- Document the two endpoints explicitly in `_instructions/`.
 
-**Warning signs:**
-Browse page slow to load. Parquet file unexpectedly large in `data/parquet/`. `loadParquet` called with a non-slug key and cache misses on every filter change.
-
-**Phase to address:**
-Phase that adds the build-time species-state Parquet export and the client-side state filter.
+**Phase:** bunny.net configuration phase (before any template changes)
 
 ---
 
-### Pitfall 6: Retiring `/browse/{genus}/` pages breaks lychee's link validator and existing navigation
+### Pitfall 6: Stale CDN cache serves old image after re-uploading with same filename
 
 **What goes wrong:**
-The current `browse/index.njk` generates `<a href="{{ ('/browse/' + genus.genus_slug + '/') | url }}">` links to per-genus pages. The current `browse/genus.njk` pagination generates those pages. When genus.njk is deleted and index.njk is rewritten as an accordion page, all the inter-page links in the existing `/browse/` HTML become dangling references — but the Eleventy build will not warn about this. Lychee's post-build link check (`build:validate-links`) will catch broken links only if it runs after a clean build and if the links appear in the final HTML.
+When an image is uploaded to bunny.net Storage and requested via the CDN Pull Zone, it is cached at edge nodes globally. If the image is subsequently replaced (same filename, different content — e.g., a corrected photo or updated crop), the CDN continues serving the old cached version until the cache TTL expires or the cache is explicitly purged. The default CDN cache TTL can be days or weeks.
 
-A secondary problem: any external pages or cross-references (e.g., species pages) that link to `/browse/acronicta/` will produce 404s after the retirement. The project's stated decision to defer Django URL redirects (SEO-01) means there's no server-side redirect support — GitHub Pages serves static files only.
+For Bunny Optimizer, purging the original also purges all transformed variants (different `?width=` parameters). But the purge must be triggered manually or via the API.
+
+**Prevention:**
+- For images that may be updated, use content-addressed filenames (include a hash or upload date in the filename, e.g., `acronicta-americana-001-v2.jpg`) rather than overwriting the same filename.
+- When overwriting is unavoidable, trigger a CDN cache purge via the bunny.net dashboard or Purge API after re-uploading.
+- Add a note to `_instructions/` explaining this behavior.
+
+**Phase:** Upload workflow phase + bunny.net configuration phase
+
+---
+
+### Pitfall 7: Bunny Optimizer is NOT enabled by default on a new Pull Zone
+
+**What goes wrong:**
+Creating a Pull Zone and linking it to a Storage Zone does not automatically enable the Bunny Optimizer. Image resizing via URL query parameters (`?width=400`) only works when the Optimizer is explicitly turned on under the Pull Zone's "Optimizer" settings. Without it, query parameters are ignored or passed through to the origin — images are served at full original resolution regardless of `?width=` parameter.
+
+If Eleventy templates are changed to append `?width=188` for thumbnails before Optimizer is enabled in the dashboard, the site silently loads full-resolution originals for every thumbnail — correct appearance but catastrophically slow page loads.
+
+**Prevention:**
+- Enable Bunny Optimizer on the Pull Zone as the first configuration step, before deploying any Eleventy templates that use size parameters.
+- Verify with a browser network tab: request an image with `?width=100`, confirm the response is smaller than the original and the `Content-Type` is appropriate.
+- In `_instructions/`, include a setup checklist that lists Optimizer enablement as step 1 of bunny.net configuration.
+
+**Phase:** bunny.net configuration phase (prerequisite to build-time resize script removal)
+
+---
+
+### Pitfall 8: CDN URL construction produces double-slash or missing slash in Nunjucks templates
+
+**What goes wrong:**
+The current templates use hardcoded paths like `/images/{{ sp.slug }}/{{ img.filename }}`. After migration, these become CDN URLs. If `CDN_BASE_URL` is set to `https://pnwmoths.b-cdn.net/` (with trailing slash) and the template constructs `{{ CDN_BASE_URL }}images/{{ sp.slug }}/{{ img.filename }}`, the result is correct. But if `CDN_BASE_URL` lacks the trailing slash (`https://pnwmoths.b-cdn.net`), the result is `https://pnwmoths.b-cdn.netimages/...` — a broken URL that silently produces no image.
+
+The existing codebase also has a Vite base-prefix interaction to watch: the Key Decisions section documents that raw `/images/...` paths (without `| url` filter) are used specifically to avoid Vite double-prefixing. CDN URLs are absolute (`https://...`) so they bypass Vite's base transformation entirely — but a Nunjucks filter applying `| url` to an absolute CDN URL would corrupt it. Verify no templates apply `| url` to CDN-derived paths.
 
 **Why it happens:**
-Template deletion removes the output pages, but references to those pages are scattered in templates and could also appear in species pages if any were cross-linked. The build pipeline has no "dead output file reference" detector — lychee finds broken links in HTML but only if the links are still in the emitted HTML. If `browse/index.njk` is rewritten in the same commit as the genus page deletion, no HTML will contain the old `/browse/{genus}/` URLs and lychee won't flag it. But external bookmarks and crawled links will still 404.
+Slash handling in URL concatenation is error-prone. Eleventy's `| url` filter is designed for relative paths and will break absolute CDN URLs. The glossary template already uses `| url` on image paths (`src="{{ ('/images/glossary/' + term.image_filename) | url }}"`) — this must be changed to CDN URL construction without `| url`.
 
-**How to avoid:**
-Before deleting `genus.njk`, audit all templates for links to `/browse/{genus}/` paths: search for `browse/` in `src/**/*.njk` and `src/**/*.md`. Confirm none of the ~700 species pages link to genus browse pages. For SEO, generate stub HTML redirect pages (one per retired genus URL) that redirect to `#genus-{slug}` on the new accordion browse page, or add a note to the build about accepted 404s. Document in PROJECT.md that `/browse/{genus}/` URLs are retired (not redirected) per SEO-01 deferral.
+**Prevention:**
+- Normalize `CDN_BASE_URL` in `eleventy.config.js` to always end with `/`, regardless of what the env var contains: `const cdnBase = (process.env.CDN_BASE_URL || '').replace(/\/?$/, '/');`
+- Expose as a global data value or shortcode so all templates use the same normalized string.
+- Audit every `| url` filter applied to image paths — remove it from any path that is being converted to a CDN URL.
+- After migrating each template, test locally with `CDN_BASE_URL` set to a known value and inspect the HTML source to verify correct URL construction.
 
-**Warning signs:**
-Lychee reports 0 broken links (because old URLs no longer appear in any HTML), but Google Search Console eventually shows 404 spikes. Grep for `browse/` in templates before and after deletion.
-
-**Phase to address:**
-Phase that retires the genus.njk pagination and rewrites browse/index.njk.
-
----
-
-## Technical Debt Patterns
-
-| Shortcut | Immediate Benefit | Long-term Cost | When Acceptable |
-|----------|-------------------|----------------|-----------------|
-| Light DOM for accordion (like pnwm-occurrence-map) | Global Pico styles apply automatically | Styles from accordion leak into page; no slot encapsulation | Acceptable for this project — already established pattern |
-| Single species-state Parquet (not partitioned by state) | Simpler build query | Whole file loaded for any state filter; 700×6 rows is fine at current scale | Acceptable until record count reaches 50k+ and file exceeds ~200KB |
-| Inline taxonomy JSON in `<script>` tag vs fetch | No separate HTTP request; simpler | JSON is embedded in HTML, bloating page and potentially Pagefind index | Acceptable if `data-pagefind-ignore` is applied to the script tag |
-| Extending `copy-parquet.js` rather than fixing root cause | Minimal new code | Two copy scripts to maintain; fragile post-Vite build sequence | Acceptable as the upstream plugin issue is not resolved in project's Vite version |
+**Phase:** Eleventy template migration phase
 
 ---
 
-## Integration Gotchas
+### Pitfall 9: Missing `CDN_BASE_URL` in local dev causes all species images to 404 silently
+
+**What goes wrong:**
+After removing `scripts/copy-images.js`'s species photo copy step (which currently copies LFS images into `_site/images/`), local development requires `CDN_BASE_URL` to be set in `.env` or the shell. If a contributor runs `npm start` without `CDN_BASE_URL`, all `<img src="...">` tags for species photos produce 404s — the page renders but images are blank.
+
+This is worse than it sounds: the `pnwm-taxon-browser` component constructs image URLs using `this._prefix` + `"images/"` from the `path-prefix` attribute. If `CDN_BASE_URL` is undefined, the Nunjucks template may emit an undefined/empty base, resulting in relative paths that 404 against the local dev server.
+
+**Prevention:**
+- Add a build-time check in `eleventy.config.js`: if `CDN_BASE_URL` is unset, emit a clear warning (not a fatal error — contributors may be building without images intentionally).
+- Provide a `.env.example` file with `CDN_BASE_URL=https://pnwmoths.b-cdn.net/` and document it in `_instructions/`.
+- Consider a development fallback: if `CDN_BASE_URL` is unset in dev mode, fall back to `/images/` (local path) and keep a minimal set of sample images in `src/images/` for development. This preserves the existing dev workflow for new contributors.
+
+**Phase:** Eleventy template migration phase + contributor documentation phase
+
+---
+
+### Pitfall 10: `pnwm-taxon-browser` constructs image URLs via `_prefix + "images/"` — breaks after CDN migration unless component is updated
+
+**What goes wrong:**
+`pnwm-taxon-browser.js` constructs image URLs as:
+```js
+src="${this._prefix}images/${img.species_slug}/${img.filename}"
+```
+where `this._prefix` is the `path-prefix` HTML attribute (e.g., `/pnwmoths/` on GitHub Pages). After migration, images are at `https://pnwmoths.b-cdn.net/images/...` — an absolute CDN URL that is not derivable from the Eleventy path prefix.
+
+If only the Nunjucks templates are updated to CDN URLs but the Lit component's URL construction is not, the browse page will still display broken images even after migration — a bug that only manifests on the browse page, not on species pages.
+
+**Prevention:**
+- Add a `cdn-base` attribute to `pnwm-taxon-browser` to receive the CDN base URL from the template (e.g., `cdn-base="{{ CDN_BASE_URL }}"`), replacing the `path-prefix + "images/"` pattern.
+- The `path-prefix` attribute should remain for page navigation links (`/species/{slug}/`) — only the image URL construction needs to change.
+- Test the browse page specifically in a production build (not dev server) to catch this.
+
+**Phase:** Eleventy template migration phase (must update Lit component alongside template changes)
+
+---
+
+### Pitfall 11: `lychee` link validator excludes image URLs — CDN image 404s are invisible to CI
+
+**What goes wrong:**
+`lychee.toml` currently excludes image file extensions from link checking:
+```
+exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$"]
+```
+After migration, CDN image URLs appear in HTML. If a CDN URL is malformed (wrong hostname, missing path segment), lychee will not detect it. The only way a broken CDN image URL would be caught in CI is by an explicit image-fetch validation step.
+
+**Prevention:**
+- Either update `lychee.toml` to check CDN image URLs (remove the image extension exclusion, or add a targeted CDN-URL check), or add a separate validation step that fetches a sample of CDN image URLs and asserts HTTP 200 responses.
+- At minimum, document that lychee does not validate image URLs and that CDN URL correctness must be verified manually during migration.
+
+**Phase:** CI/validation phase (alongside workflow updates)
+
+---
+
+### Pitfall 12: GitHub Actions still runs LFS checkout after migration — slow and confusing, not fatal
+
+**What goes wrong:**
+`deploy.yml` and `pr-check.yml` both use `nschloe/action-cached-lfs-checkout`. After LFS is removed from the repo, this action will still attempt to download LFS objects (finding none), wasting time and leaving confusing log output. Over time, contributors will not understand why the LFS action is present for a non-LFS repo.
+
+**Prevention:**
+Replace `nschloe/action-cached-lfs-checkout` with plain `actions/checkout` in both workflow files in the same PR as the LFS migration. This is low-risk since LFS files will no longer exist in the repo.
+
+**Phase:** CI/workflow update phase (same as LFS removal)
+
+---
+
+## Moderate Pitfalls
+
+### Pitfall 13: Bunny Optimizer WebP conversion breaks image filename assumptions in templates
+
+**What goes wrong:**
+Bunny Optimizer may rewrite response `Content-Type` to `image/webp` and serve WebP content, but the `src` URL still ends in `.jpg`. This is generally correct browser behavior, but if any JavaScript code (e.g., in `pnwm-image-slideshow.js`) inspects the image filename extension to determine format or alt-text behavior, it will see `.jpg` even when WebP is being delivered.
+
+**Prevention:** Don't use filename extensions for format detection. This is already best practice in the codebase.
+
+**Phase:** bunny.net configuration phase (test Optimizer output)
+
+---
+
+### Pitfall 14: `rclone` uses bunny.net FTP backend — path must include storage zone name
+
+**What goes wrong:**
+When configuring rclone to use bunny.net's FTP interface, the remote path must include the storage zone name as the root directory (e.g., `bunny:pnwmoths/images/`). If the zone name is omitted, rclone either errors out or lists an empty bucket at an unexpected path level.
+
+**Prevention:**
+In `_instructions/`, provide the exact rclone config and command with the zone name explicitly shown. Test with `rclone ls bunny:pnwmoths/` first before running any copy/sync.
+
+**Phase:** Upload workflow phase
+
+---
+
+## Phase-to-Pitfall Mapping
+
+| Phase | Pitfalls to Address | Verification |
+|-------|---------------------|-------------|
+| bunny.net account + zone setup | #5 (Storage vs Pull Zone), #7 (Optimizer not default), #14 (FTP path includes zone name) | Manually request a CDN image URL in incognito; verify Optimizer resizes with `?width=100` |
+| LFS removal (history rewrite + force-push) | #1 (GitHub keeps LFS objects), #2 (.gitattributes cleanup), #12 (CI still runs LFS checkout) | `git check-attr filter -- images/test.jpg` returns unset; `actions/checkout` in both workflows |
+| rclone upload workflow + `_instructions/` | #3 (sync deletes bucket), #4 (mtime diffing skips re-uploads), #6 (CDN cache after reupload) | `rclone copy --dry-run` shows additions only; sample re-upload test |
+| Eleventy template migration | #5 (CDN URL vs Storage URL), #8 (slash construction), #9 (missing CDN_BASE_URL in dev), #10 (Lit component uses path-prefix for images), #11 (lychee misses image 404s) | Full production build; inspect HTML source; browse page images load; `.env.example` committed |
+| Build-time resize script removal | #7 (Optimizer must be live before removal) | Full build succeeds; no resize script references remain; page-weight validator passes |
+| CI/CD finalization | #12 (LFS action), #11 (lychee validation) | `deploy.yml` uses `actions/checkout`; CDN image sample validation step added |
+
+---
+
+## Integration Gotchas Specific to This Stack
 
 | Integration | Common Mistake | Correct Approach |
-|-------------|----------------|------------------|
-| DuckDB `read_csv` + nullable VARCHAR column | Blank CSV cells arrive as `""` not NULL | Add `nullstr = ''` parameter to `read_csv` call |
-| hyparquet + whole-file ArrayBuffer | Using `asyncBufferFromUrl` (range requests) fails on GitHub Pages CDN (documented in parquet-cache.js) | Continue existing pattern: fetch whole file, wrap ArrayBuffer manually — already solved for per-species files |
-| Lit + shadow DOM + Pico CSS | Expect global `summary`, `details`, `h3` styles to apply inside component | They don't. Use light DOM or copy required styles into `static get styles()` |
-| Eleventy data cascade + large JSON in `<script>` | Embedded JSON is indexed by Pagefind | Wrap `<script>` in element with `data-pagefind-ignore` or load via client-side fetch |
-| `composed: true` on accordion expand/collapse events | All ancestor listeners hear the event; internal state exposed | Use `composed: false` if event only needs to be heard by the browse page shell; `composed: true` only for cross-component state like filter-change |
-| DuckDB `COPY ... TO ... (FORMAT parquet, COMPRESSION snappy)` | Forgetting `COMPRESSION snappy` — ZSTD is default but breaks hyparquet | Always specify `COMPRESSION snappy` — already documented in PROJECT.md Key Decisions |
-
----
-
-## Performance Traps
-
-| Trap | Symptoms | Prevention | When It Breaks |
-|------|----------|------------|----------------|
-| Species-state Parquet emits one row per record instead of DISTINCT | Browse page loads slowly; Parquet file MB-sized | Use `SELECT DISTINCT species_slug, state` — verify row count in test | At 10k records (~10k rows vs expected ~700×6=4200) |
-| Accordion expands all nodes simultaneously, each triggering image requests | Browser fires 40+ parallel image fetches on expand-all | Lazy-load images per taxon; only fetch images for expanded nodes | Any number of simultaneous expansions |
-| Taxonomy tree built in Eleventy data file with O(n²) grouping | Build slow; `_data/families.js` takes >5s | DuckDB ORDER BY and GROUP BY are fast; do grouping in SQL not in JS | ~700 species is fine; 7000+ would matter |
-| loadParquet called in `connectedCallback` with no deduplication for the species-state file | Multiple components each trigger separate fetches of the same file | Ensure the species-state file has its own module-level cache entry | Any page with >1 state-filter component |
-
----
-
-## "Looks Done But Isn't" Checklist
-
-- [ ] **subfamily column:** Added to CSV header and verified that `families.js` DuckDB schema includes it AND `nullstr = ''` is set — not just added to the CSV
-- [ ] **navigational flag in images.csv:** Added to CSV header AND `validateCsv` required-columns list updated AND `build-data.js` DuckDB schema updated (images table is currently not imported into DuckDB, so a new import may be needed)
-- [ ] **Parquet post-build copy:** Species-state Parquet file copied to `_site/` by post-Vite script, not just by passthrough copy
-- [ ] **Accordion expand/collapse state:** Component state is reactive (causes re-render) — not just a class toggle on a raw DOM element outside Lit's render tree
-- [ ] **State filter hides taxa:** Filter hides the entire taxon row (family/genus) when no species in that taxon have occurrences in the selected state — not just individual species rows
-- [ ] **Retired genus pages:** `build:validate-links` still passes after genus.njk is deleted (no template still links to `/browse/{genus}/`)
-- [ ] **Pagefind exclusion:** Taxonomy JSON injected into browse page shell has `data-pagefind-ignore` on its container
-- [ ] **Snappy compression:** Species-state Parquet export uses `COMPRESSION snappy`
-
----
-
-## Recovery Strategies
-
-| Pitfall | Recovery Cost | Recovery Steps |
-|---------|---------------|----------------|
-| Species-state Parquet missing from `_site/` in production | LOW | Add file to `copy-parquet.js` (or companion script), re-run `npm run build:copy-parquet` equivalent |
-| Accordion visually broken due to shadow DOM / Pico mismatch | MEDIUM | Switch to light DOM (`createRenderRoot() { return this; }`), re-test styling and event bubbling |
-| `subfamily` silently ignored (arrived as `""`) | LOW | Add `nullstr = ''` to `read_csv`, re-run data build, re-test grouping logic |
-| Browse page Parquet bloated (row-per-record instead of DISTINCT) | LOW | Fix the DuckDB COPY query, re-run `build-data.js`, re-run post-build copy |
-| Retired genus URLs cause 404s externally | HIGH (SEO damage irreversible short-term) | Generate HTML redirect stubs pointing to `#genus-{slug}` anchor on browse page; accepted risk per SEO-01 deferral |
-
----
-
-## Pitfall-to-Phase Mapping
-
-| Pitfall | Prevention Phase | Verification |
-|---------|------------------|--------------|
-| Species-state Parquet wiped by Vite | Phase: build-data pipeline extension | Full `npm run build` succeeds; `_site/species-state.parquet` (or equivalent) exists after build |
-| Accordion shadow DOM / Pico CSS mismatch | Phase: accordion Lit component | Visual comparison of accordion in full-build context vs dev server |
-| `subfamily` schema not updated in all 3 locations | Phase: species.csv schema extension | `families.js` data includes `subfamily` field; blank values arrive as `null` not `""` |
-| Blank subfamily becomes `""` not `null` | Phase: species.csv schema extension | Unit test for grouping with blank-subfamily species |
-| Species-state Parquet schema emits too many rows | Phase: build-data pipeline extension | Test asserts row count ≤ `species_count × distinct_state_count` |
-| Retiring genus pages breaks lychee or leaves stale HTML | Phase: browse page retirement | `build:validate-links` passes; grep for `/browse/` in templates shows no dangling references |
+|-------------|----------------|-----------------|
+| Nunjucks `{{ CDN_BASE_URL }}images/...` | Missing trailing slash on `CDN_BASE_URL` breaks URL construction | Normalize in `eleventy.config.js`: `.replace(/\/?$/, '/')` |
+| Nunjucks `| url` filter on CDN URL | `| url` prepends `pathPrefix` to absolute URL, corrupting it | Never apply `| url` to absolute CDN URLs; audit all templates |
+| `pnwm-taxon-browser` `_prefix + "images/"` | Relative path construction incompatible with absolute CDN base | Add `cdn-base` attribute to component; use it for image URLs only |
+| `rclone copy` vs `rclone sync` | `sync` deletes production files absent from local source | Always use `rclone copy` for image uploads |
+| rclone mtime comparison on bunny.net FTP | Skips re-uploads of same-named replacement files | Use `--ignore-times` flag when replacing existing files |
+| bunny.net Optimizer query params | `?width=400` silently ignored if Optimizer not enabled on Pull Zone | Enable Optimizer first, verify before template changes |
+| GitHub LFS storage post-migration | Storage continues billing even after history rewrite | Accept cost or delete/recreate repo; document the situation |
+| lychee image URL exclusion | CDN image 404s invisible to CI link checker | Add explicit CDN image spot-check to CI or remove image exclusion |
 
 ---
 
 ## Sources
 
-- Existing `eleventy.config.js`, `scripts/copy-parquet.js` — known passthrough-copy workaround pattern
-- `scripts/build-data.js` — DuckDB schema definitions and `validateCsv` column lists
-- `src/_data/families.js` — DuckDB `read_csv` with explicit `columns` map
-- `src/components/pnwm-occurrence-map.js` — light DOM precedent (`createRenderRoot() { return this; }`)
-- `src/components/pnwm-filter-bar.js` — shadow DOM with `static get styles()` precedent
-- eleventy-plugin-vite GitHub Issue #42 — confirmed passthrough binary file wipe in production
-- [Lit Shadow DOM docs](https://lit.dev/docs/components/shadow-dom/) — createRenderRoot light DOM note
-- [Lit Styles docs](https://lit.dev/docs/components/styles/) — CSS custom properties pierce shadow DOM; element selectors do not
-- [composed: true considered harmful](https://dev.to/open-wc/composed-true-considered-harmful-5g59) — event encapsulation guidance
-- [DuckDB NULL Values docs](https://duckdb.org/docs/current/sql/data_types/nulls) — NULL handling in DuckDB queries
-- [hyparquet README](https://github.com/hyparam/hyparquet/blob/master/README.md) — asyncBufferFromUrl, range request behavior
-- PROJECT.md Key Decisions — `COMPRESSION snappy` required; GitHub Pages CDN range-request workaround
+- `/Users/rainhead/dev/pnwmoths/eleventy.config.js` — Vite base/pathPrefix interaction; copy-images.js pattern
+- `/Users/rainhead/dev/pnwmoths/scripts/copy-images.js` — species photo copy from LFS images/ dir
+- `/Users/rainhead/dev/pnwmoths/src/components/pnwm-taxon-browser.js` — `_prefix + "images/"` URL construction
+- `/Users/rainhead/dev/pnwmoths/src/_includes/base.njk`, `src/species/species.njk`, `src/glossary/index.njk` — image URL patterns in templates
+- `/Users/rainhead/dev/pnwmoths/.gitattributes` — LFS filter patterns for images/ and plates/
+- `/Users/rainhead/dev/pnwmoths/.github/workflows/deploy.yml` — `nschloe/action-cached-lfs-checkout` usage
+- `/Users/rainhead/dev/pnwmoths/lychee.toml` — image extension exclusion from link checking
+- [git-lfs-migrate man page](https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-migrate.adoc) — export mode inserts negation entries, does not remove existing rules
+- [GitHub Docs: Removing files from Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/removing-files-from-git-large-file-storage) — storage quota not freed until repo deletion
+- [GitHub LFS Billing Docs](https://docs.github.com/billing/managing-billing-for-git-large-file-storage/about-billing-for-git-large-file-storage) — objects persist post-migration
+- [rclone sync docs](https://rclone.org/commands/rclone_sync/) — deletes destination files absent from source; --dry-run required
+- [rclone bunny.net FTP issue #7607](https://github.com/rclone/rclone/issues/7607) — mtime not settable via bunny FTP API
+- [bunny.net Dynamic Images docs](https://docs.bunny.net/optimizer/dynamic-images/overview) — Optimizer must be explicitly enabled; query param syntax
+- [bunny.net CDN cache purge](https://support.bunny.net/hc/en-us/articles/115003700071-How-to-purge-all-files-from-a-Pull-Zone) — purging original clears all Optimizer variants
+- PROJECT.md Key Decisions — Vite double-prefix problem; raw `/images/...` paths required
 
 ---
-*Pitfalls research for: v1.3 Visual Browse — Eleventy/Lit/Parquet static site*
-*Researched: 2026-04-18*
+*Pitfalls research for: v1.4 Image CDN — LFS removal and bunny.net migration*
+*Researched: 2026-04-21*

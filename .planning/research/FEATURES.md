@@ -1,275 +1,279 @@
-# Feature Research
+# Feature Landscape: bunny.net CDN Image Optimizer
 
-**Domain:** Visual taxonomy browse for natural history static site (v1.3 Visual Browse milestone)
-**Researched:** 2026-04-18
-**Confidence:** HIGH for accordion UX and image selection patterns; MEDIUM for client-side geographic filter specifics
-
----
-
-## Scope
-
-This document covers **new features only** for the v1.3 milestone:
-
-1. Visual accordion browse (Family → Subfamily → Genus → Species)
-2. Navigation images per taxon level (up to 4, show/hide toggle)
-3. `navigational` flag on images + fallback to lowest-weight photos
-4. Client-side state filter (hides taxa with no records in selected states)
-5. Retirement of per-genus static pages (`/browse/{genus}/`)
-
-Previously-built features (species factsheets, map, phenology, filters, Pagefind search, glossary) are out of scope here. The prior FEATURES.md covers them.
+**Domain:** Static site (Eleventy) migrating from build-time image resizing to CDN on-the-fly transformation
+**Researched:** 2026-04-21
+**Confidence:** HIGH (verified against official bunny.net docs at docs.bunny.net)
 
 ---
 
-## Ecosystem Reference
+## bunny.net Image Optimizer: Verified URL Parameter Reference
 
-The original **pnwmoths.biol.wwu.edu** already established the canonical pattern for this feature set and is the primary reference. Key observations from it:
+All parameters are query-string appended to the CDN image URL. Transformations execute in
+this fixed order: crop first, then resize, then rotate/flip, then color/luminosity, then
+filters, and finally format/quality.
 
-- Subfamily-level pages show **4 thumbnail images per genus** in a horizontal row (141×93px cached)
-- Navigation uses multi-level URL paths: `browse/family-{f}/subfamily-{s}/{genus}/{species}/`
-- The taxonomy hierarchy is Family → Subfamily → Genus → Species (exactly the target hierarchy)
-- No client-side state filtering existed on the original — that is new
+### Resize Parameters
 
-**BAMONA (butterfliesandmoths.org):** Text-only taxonomy listing with representative photos only at the bottom of family pages as supplementary content. No inline accordion or geographic filter. Confirms that images-per-genus at browse time is a differentiator even among comparable sites.
+| Parameter | Type | Example | Behavior |
+|-----------|------|---------|----------|
+| `width` | integer (px) | `?width=300` | Resize to width, maintain aspect ratio |
+| `height` | integer (px) | `?height=225` | Resize to height, maintain aspect ratio |
+| `width` + `height` | both set | `?width=188&height=225` | Bunny picks whichever dimension constrains smaller while preserving aspect ratio — NOT a forced exact-dimension result |
 
-**iNaturalist:** Shows species as a grid of thumbnails (most-observed first) when filtered to a place. Uses one curated "taxon photo" per species chosen for diagnostic clarity at small size. Geographic filtering is prominent (place-based). No accordion drill-down — uses separate taxon pages per rank.
+**Critical caveat:** Setting both `width` and `height` does NOT force exact pixel dimensions.
+Bunny selects whichever dimension produces the smaller image while preserving aspect ratio.
+To get exact output dimensions, use crop parameters instead.
 
-**eBird/GBIF:** Server-side, API-driven filtering. Not applicable to static site context.
+### Crop Parameters
+
+| Parameter | Type | Example | Behavior |
+|-----------|------|---------|----------|
+| `crop` | `w,h` | `?crop=188,225` | Center-crop to exact pixel dimensions |
+| `crop` | `w,h,x,y` | `?crop=188,225,50,0` | Pixel-offset crop, x/y is top-left start |
+| `crop_gravity` | string | `?crop=188,225&crop_gravity=north` | Anchor the crop region to a compass direction |
+| `aspect_ratio` | `w:h` | `?aspect_ratio=4:5` | Crop to ratio, maintain center |
+| `focus_crop` | `w,h,x,y` | `?focus_crop=188,225,500,400` | Crop centered on absolute pixel coordinate |
+| `focus_crop` | `w,h,rx,ry` | `?focus_crop=188,225,0.5,0.3` | Crop centered on relative coordinate (0.0-1.0) |
+| `face_crop` | dimensions | `?face_crop=188,225` | Detect faces and crop around them |
+
+`crop_gravity` values: `center` (default), `north`, `south`, `east`, `west`, `northeast`,
+`northwest`, `southeast`, `southwest`.
+
+**Glossary portrait use case (188x225 exact):**
+
+```
+?crop=188,225&crop_gravity=north
+```
+
+This produces exact 188x225px output. North bias keeps the moth's head/body in frame for
+portrait-oriented specimen photos. Since crop executes before resize, this is the complete
+transform needed. The `width`/`height` HTML attributes stay in the `<img>` tag for layout
+reservation (prevents CLS); the CDN delivers the byte dimensions to match.
+
+### Format and Quality Parameters
+
+| Parameter | Type | Values | Default | Notes |
+|-----------|------|--------|---------|-------|
+| `format` | string | `jpeg`, `png`, `webp`, `gif` | original format | Explicit format override |
+| `quality` | integer | 0-100 | 85 | Applies to JPEG and WebP; no effect on PNG |
+| `auto_optimize` | string | `low`, `medium`, `high` | none | Multi-factor optimization bundle; `high` adds auto-sharpen |
+
+**AVIF is not supported.** bunny.net has explicitly declined AVIF support citing encoding
+latency — AVIF encoding ran up to 60 seconds per image and up to 100x slower than WebP in
+their testing. WebP is the modern format ceiling for bunny.net. This is an official position,
+not a temporary gap (confirmed via bunny.net blog post).
+
+**WebP auto-conversion (pull zone setting, not a URL parameter):** When Bunny Optimizer is
+enabled on a pull zone, it transparently serves WebP to any browser sending
+`Accept: image/webp`. The URL stays `photo.jpg`; the response `Content-Type` becomes
+`image/webp`. Browsers without WebP support receive the original format. The optimizer
+automatically enables `Vary: Accept` cache headers so both formats cache correctly at the
+edge. No HTML changes are required.
+
+**Consequence for this project:** A plain `<img src="...photo.jpg">` automatically gets
+WebP delivery to modern browsers once the pull zone has Optimizer enabled. No `<picture>`
+element or `<source type="image/webp">` is needed for format switching.
+
+### Visual Effect Parameters (low priority for this milestone)
+
+| Parameter | Type | Example |
+|-----------|------|---------|
+| `sharpen` | boolean | `?sharpen=true` |
+| `blur` | numeric | `?blur=5` |
+| `brightness` | numeric | `?brightness=10` |
+| `contrast` | numeric | `?contrast=5` |
+| `saturation` | numeric | `?saturation=-20` |
+| `hue` | numeric | `?hue=90` |
+| `gamma` | numeric | `?gamma=2` |
+| `tint` | value | `?tint=...` |
+| `sepia` | numeric | `?sepia=75` |
+| `flip` | boolean | `?flip=true` (horizontal mirror) |
+| `flop` | boolean | `?flop=true` (vertical mirror) |
+| `rotate` | 90-degree steps | `?rotate=90` |
+
+### Image Classes (Named Presets)
+
+A pull-zone dashboard feature that defines reusable named transform presets. After defining
+`glossary-portrait` in the Bunny dashboard, any URL can reference it:
+
+```
+https://yourzone.b-cdn.net/images/glossary/photo.jpg?class=glossary-portrait
+```
+
+The pull zone can optionally be locked to only accept class-based transforms, rejecting
+ad-hoc query parameters. This improves caching predictability and prevents arbitrary
+transforms from being requested via manipulated URLs.
 
 ---
 
-## Table Stakes (Users Expect These)
+## Table Stakes Features
 
-Features users assume exist. Missing these makes the browse feel incomplete.
+Features required for the migration to function. Missing any of these means the milestone
+is incomplete.
 
-| Feature | Why Expected | Complexity | Notes |
+| Feature | Why Required | Complexity | Notes |
 |---------|--------------|------------|-------|
-| Hierarchical accordion: Family → Subfamily → Genus | Original PNW Moths site established this as the navigation pattern; every moth-specialist site groups by family | MEDIUM | 3-4 levels deep; `<details>`/`<summary>` or Lit `pnwm-taxon-accordion` component; inline expand/collapse |
-| Species list inside expanded genus | Users drill down to find and click through to species factsheets | LOW | Static list rendered server-side in Eleventy; no JS required for basic listing |
-| Representative image(s) per taxon | Original site shows 4 thumbnails per genus; iNaturalist shows one taxon photo per entry; absence makes taxa indistinguishable visually | MEDIUM | Up to 4 nav images per taxon level; fallback to lowest-weight species photos when none flagged |
-| Images on by default, show/hide toggle | Images add scanability; power users want text-only for fast scanning | LOW | Single checkbox state; CSS class toggle on parent; no server round-trip needed |
-| Link from genus/species entry to species factsheet | Browse exists to navigate to factsheet; missing links breaks the whole purpose | LOW | Already exists in current text browse; carry forward |
-| Subfamily grouping (where applicable) | Taxonomy is 4-level; flat Family → Genus loses the scientific grouping that experts navigate by | MEDIUM | `subfamily` column added to `species.csv`; genera without subfamily fall directly under family |
-| Graceful JS-off degradation | Existing site requirement; static build should be readable without JS | LOW | Render all taxa as static HTML; JS component enhances with collapse and images |
+| CDN URL construction in templates | All `<img src>` attributes must point to CDN; local `/images/` path will no longer be served | Low | One `CDN_BASE_URL` env var; string concatenation in Nunjucks filter |
+| Width-constrained resize for species photos | Species slideshow and browse nav strip images need appropriate sizes | Low | `?width=N` single parameter |
+| Exact-dimension crop for glossary portraits | Glossary images are 188x225px; `width`+`height` alone produces wrong dimensions | Low-Medium | `?crop=188,225&crop_gravity=north` |
+| WebP auto-delivery | All modern browsers should get WebP | None (pull zone dashboard setting) | Enable Optimizer on pull zone; no template or code changes |
+| Quality baseline | Default quality=85 is fine; explicit `?quality=80` available for thumbnails | Low | Can skip if default is acceptable |
+| Refactor `scripts/copy-images.js` | Currently copies species photos from local `images/` dir; that dir will not exist after LFS removal | Medium | Remove species photo copy block; keep banner image, Pico CSS, and OpenSeadragon copies |
+| `CDN_BASE_URL` env var in CI/CD | GitHub Actions needs this secret; local dev needs a fallback | Low | Set secret in repo settings; fallback to empty string or localhost for dev |
 
----
+## Differentiators
 
-## Differentiators (Competitive Advantage)
-
-Features that create genuine value above what comparable sites offer.
+Features that add value without blocking the milestone. Include if phase scope allows.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| `navigational` flag on images | Allows curators to mark the best diagnostic photos as browse candidates, distinct from the weight-ordered gallery photos; iNaturalist has this concept ("taxon photo" vs observation photos) but not as a simple flag on records | LOW | New boolean column in `images.csv`; fallback logic needed for genera with no flagged images |
-| Fallback to lowest-weight species photo | No dead zones — every genus shows something even before curators flag navigational images; BAMONA shows no images at genus level at all | LOW | Build-time DuckDB query: for each taxon node, UNION flagged images + fallback to weight=1 per species; cap at 4 |
-| Client-side state filter on browse page | Original site had no geographic filter on browse; iNaturalist has place-based filtering but is server-side; letting users hide taxa with no local records focuses a field guide on what they'll actually encounter | HIGH | Requires build-time species-×-state Parquet (from records.csv); Lit component reads Parquet async and toggles visibility of taxon nodes |
-| All taxonomy on a single page | Original site required navigating to separate URL per subfamily/genus level; single-page accordion removes multiple page loads for browsing | MEDIUM | Replaces 700+ static `/browse/{genus}/` pages with one dynamic page; reduces hosting complexity |
-| Images collapse when drilling down | When a genus is expanded to show species, the genus-level nav images hide to make room — the content adapts to the user's current focus | LOW | CSS/JS: when a child section opens, parent images get `hidden` attribute or CSS display:none |
+| `srcset` with width descriptors | Delivers appropriately sized images to HiDPI screens and narrow viewports | Low-Medium | 2-3 CDN URLs per `<img>`; Nunjucks macro reduces repetition; Lit slideshow JS also needs CDN URLs |
+| Image Classes for named presets | Centralize transform definitions in Bunny dashboard; change display sizes without touching templates | Low | Define `nav-thumb`, `glossary-portrait`, `slideshow-full` once; reference by name |
+| `auto_optimize=medium` on thumbnails | Bundle of quality improvements with one extra param on browse nav images | Low | Single extra query param appended to nav image URLs |
+| `loading="lazy"` on non-hero images | Defers off-screen image loads; valuable for browse page with many thumbnails | Low | Pure HTML attribute; no CDN interaction required |
 
----
+## Anti-Features
 
-## Anti-Features (Commonly Requested, Often Problematic)
+Features to explicitly avoid.
 
-| Feature | Why Requested | Why Problematic | Alternative |
-|---------|---------------|-----------------|-------------|
-| Auto-select "best" nav image via algorithm | Saves manual curation time | Image quality for identification is subjective; algorithmic selection (highest resolution, most-observed) often picks photos that are not diagnostically useful — iNaturalist community has explicitly discussed this problem | `navigational` flag lets curators choose; fallback to weight=1 (photographer-ordered) is a reasonable default with low editorial overhead |
-| Expand-all / collapse-all buttons | Seems useful for power users | With 700 species across 10 families, expanding everything produces an overwhelming wall of text and triggers 700+ image loads simultaneously | Show all collapsed on load; let users drill down one level at a time |
-| Infinite scroll or pagination within the browse tree | Familiar from feed-style apps | Taxonomy is not a feed; users navigate the tree spatially; pagination destroys the ability to scan by family | Keep all families visible collapsed; families are ~10, manageable without pagination |
-| Lazy-load images inside collapsed sections | Sounds like a performance win | Browser native `loading="lazy"` does not trigger until the element is visible in the viewport; collapsed content is visually hidden but still in the DOM — images would load on scroll even when collapsed. Custom lazy-load on accordion expand adds JS complexity for marginal gain given images are small (141×93px thumbnails) | Serve thumbnails at appropriate size; `loading="lazy"` on img elements is fine since collapsed content is typically off-screen anyway; don't implement custom intersection-observer logic |
-| Location-based "what's flying near me" auto-filter | Seems like a high-value user feature | Geolocation permission friction; browser location ≠ state boundary; requires client-side coordinate-to-state mapping | State dropdown/checkbox filter is simpler, privacy-friendly, and sufficient for the audience |
-| Deep URL per accordion state (e.g., `?open=Sphingidae`) | Enables shareable links to open states | Accordion state is a browsing convenience, not a canonical resource; the species factsheet is the shareable URL | Each species factsheet already has a canonical URL; link there instead |
-| Search within browse page | Seems redundant to add a search box on browse | Pagefind already handles site-wide search; adding a second client-side search on the browse page duplicates functionality and adds bundle weight | Link to Pagefind search from browse page header |
+| Anti-Feature | Why Avoid | What to Do Instead |
+|--------------|-----------|-------------------|
+| `<picture>` + `<source type="image/webp">` | Redundant: bunny.net pull zone auto-negotiates WebP via Accept header; doubling up adds HTML bloat for no benefit | Enable Optimizer on pull zone; let CDN handle format negotiation |
+| AVIF delivery | Not supported by bunny.net | WebP is the format ceiling; AVIF is out of scope for this CDN |
+| Client-side image resizing or Canvas transforms | Defeats CDN purpose; wastes CPU | Request the right size from CDN via URL params |
+| `eleventy-img` build-time processing | This plugin generates local responsive variants at build time, the opposite of CDN offloading | Use CDN URL params instead |
+| Storing pre-resized image copies in bunny.net Storage | CDN generates and caches transforms on first request; storing variants wastes storage | Upload originals only; let CDN resize on demand |
+| Applying `| url` Eleventy filter to CDN URLs | The `| url` filter prepends `pathPrefix` (`/pnwmoths/` on GitHub Pages); CDN URLs are absolute and must never have pathPrefix added | Use raw CDN URLs; the glossary template currently applies `| url` to image paths and that must be removed |
 
 ---
 
 ## Feature Dependencies
 
 ```
-subfamily column in species.csv
-    └──required by──> Family → Subfamily → Genus accordion rendering
-                          └──required by──> images-per-taxon display
+CDN_BASE_URL env var in Eleventy config
+  -> cdnUrl filter or Nunjucks macro
+    -> species.njk <img> tags (CDN URL + ?width=N)
+    -> glossary/index.njk <img> tags (CDN URL + ?crop=188,225&crop_gravity=north)
+    -> browse/index.njk nav image data passed to Lit component (CDN URLs in JSON)
+    -> pnwm-image-slideshow Lit component JS (CDN URL construction in JS)
 
-navigational flag in images.csv
-    └──required by──> curated nav image selection
-                          └──enhances──> per-taxon image display
+Bunny Optimizer enabled on pull zone (dashboard)
+  -> Automatic WebP delivery (no code changes)
+  -> Image Classes available for use
 
-Fallback (lowest-weight species photos)
-    └──required by──> per-taxon image display (when no navigational flags set)
-
-species-×-state Parquet (build pipeline)
-    └──required by──> client-side state filter Lit component
-
-client-side state filter
-    └──depends on──> species-×-state Parquet
-    └──enhances──> accordion browse (hides taxa with no records in selected states)
-
-Per-genus static pages (/browse/{genus}/)
-    └──conflicts with──> single-page accordion browse (replace, not supplement)
+scripts/copy-images.js refactored
+  -> Species photo copy block removed (images/ dir no longer exists in repo)
+  -> Banner image copy kept (src/images/ -> _site/images/)
+  -> Pico CSS and OpenSeadragon copies kept
 ```
 
-### Dependency Notes
-
-- **`subfamily` column required before accordion rendering:** The build-time Eleventy data pipeline (`families.js`) needs to group genera under subfamilies. The DuckDB query needs this column. Add it first.
-- **Nav image selection requires both `navigational` flag AND fallback logic:** They are two sides of the same feature. Implement the fallback first (it works on existing data), then add `navigational` flag support.
-- **State filter Parquet is a new build artifact:** The pipeline emits a species-×-state cross-reference (species_slug, state, record_count or boolean) from `records.csv`. This is a new DuckDB query in the build pipeline, separate from per-species Parquet files.
-- **Per-genus static pages must be explicitly retired:** Eleventy currently generates `/browse/{genus}/index.html` via pagination. Removing `genus.njk` (or its pagination config) will stop generating these. The accordion browse page replaces all of them.
-
 ---
 
-## MVP Definition
+## What the Nunjucks Templates Need
 
-### Launch With (v1.3)
-
-This is the complete milestone — all items are required to replace the existing browse.
-
-- [ ] `subfamily` column in `species.csv` (nullable) — enables 4-level hierarchy
-- [ ] `navigational` flag in `images.csv` (boolean) — enables curated nav image selection
-- [ ] Build pipeline: nav image query per taxon node (flagged images, fallback to weight=1 per species, cap 4)
-- [ ] Build pipeline: species-×-state Parquet emitted from `records.csv`
-- [ ] Single `/browse/` page: accordion Lit component (Family → Subfamily → Genus → Species)
-- [ ] Images on by default; show/hide checkbox persists per-session (sessionStorage or just checkbox state)
-- [ ] Expanding genus shows species list and hides parent taxon images
-- [ ] Client-side state filter: Lit component reads species-×-state Parquet, filters accordion nodes
-- [ ] Per-genus static pages (`/browse/{genus}/`) retired (remove `genus.njk` pagination)
-- [ ] Graceful JS-off: all taxa and species names visible as static HTML
-
-### Deferred (not in v1.3)
-
-- [ ] Shareable URLs for accordion state — not needed; species factsheets are the canonical URLs
-- [ ] "Expand all" / "Collapse all" — anti-feature; excluded intentionally
-- [ ] Nav image lightbox on browse page — thumbnails link to species factsheet; lightbox is on the factsheet
-- [ ] Geographic filter beyond state level (county, elevation) — deferred to v2 per PROJECT.md
-
----
-
-## Feature Prioritization Matrix
-
-| Feature | User Value | Implementation Cost | Priority |
-|---------|------------|---------------------|----------|
-| Accordion Family → Subfamily → Genus | HIGH | MEDIUM | P1 |
-| Images per taxon (with fallback) | HIGH | MEDIUM | P1 |
-| `navigational` flag on images.csv | MEDIUM | LOW | P1 |
-| `subfamily` column in species.csv | HIGH | LOW | P1 (data dependency) |
-| Species list inside expanded genus | HIGH | LOW | P1 |
-| Show/hide images toggle | MEDIUM | LOW | P1 |
-| Build pipeline: species-×-state Parquet | HIGH | MEDIUM | P1 (filter dependency) |
-| Client-side state filter | HIGH | MEDIUM | P1 |
-| Retire per-genus static pages | LOW user-visible | LOW | P1 (cleanup, correctness) |
-| Images collapse when drilling down | LOW | LOW | P2 |
-| Session-persist show/hide state | LOW | LOW | P2 |
-
-**Priority key:**
-- P1: Required for v1.3 milestone completion
-- P2: Polish; add within v1.3 if time permits, otherwise v1.3.x
-
----
-
-## Competitor Feature Analysis
-
-| Feature | pnwmoths.biol.wwu.edu (original) | BAMONA | iNaturalist | Our Approach |
-|---------|----------------------------------|--------|-------------|--------------|
-| Taxonomy hierarchy | 4-level via URL path navigation (separate pages) | Text list, click to family page | Separate taxon pages per rank | Single-page accordion, all levels inline |
-| Images per taxon in browse | 4 thumbnails per genus at subfamily page | None at genus/family level; photos on species page only | One curated "taxon photo" per entry | Up to 4 per taxon node, flagged or fallback |
-| Geographic filter on browse | None | Regional checklists (separate pages, server-rendered) | Place-based filter (server-side, login optional) | Client-side state checkbox/dropdown, Parquet-backed |
-| Image show/hide | Not present | Not applicable | Not present | Checkbox toggle, images on by default |
-| Inline drill-down | No (separate page per level) | No (separate page per family) | No (separate page per rank) | Yes (accordion, all levels on one page) |
-
----
-
-## Accordion UX Specifics
-
-### Pattern choice: `<details>`/`<summary>` vs. Lit button/`aria-expanded`
-
-**Use `<details>`/`<summary>` for the accordion structure.** Reasons:
-
-- Native browser support; zero JS needed for basic expand/collapse
-- Correct accessibility semantics without manual ARIA
-- Lit can enhance it (e.g., for image toggle behavior, filter visibility) without replacing the semantic base
-- VoiceOver has a known (July 2024) issue where it does not announce state change on `<details>` expand, but does announce current state on focus — acceptable for this use case
-- WAI-ARIA APG accordion pattern (button + `aria-expanded`) is more robust for screenreaders but requires more JS; only needed if `<details>` proves insufficient
-
-**Keyboard interaction (per WAI-ARIA APG):**
-- Enter/Space on `<summary>` = expand/collapse (native)
-- Tab/Shift+Tab = navigate to next interactive element (native)
-- No arrow-key navigation needed for 3–4 level hierarchy; that pattern is for long lists of options, not nested trees
-
-### Multiple open sections
-
-Allow multiple families/genera open simultaneously. Auto-close behavior is an anti-pattern for taxonomy browse because users frequently compare species across genera.
-
-### Expand state on page load
-
-All sections start collapsed. This keeps initial page weight and visual complexity low. Users who want to browse a specific family expand it.
-
----
-
-## Navigation Image Selection Logic
-
-### Build-time query (DuckDB)
-
-For each taxon node (family, subfamily, genus), compute nav images:
-
-1. Select images with `navigational = true` for all species in that taxon, ordered by weight ASC, LIMIT 4
-2. If count < 4, fill remaining slots from images with weight = 1 for species in that taxon that have no flagged navigational image (fallback)
-3. Cap total at 4
-
-This produces a deterministic, predictable set. Fallback ensures no empty thumbnails on launch before curators have flagged images.
-
-### Image quality criteria (from iNaturalist community research)
-
-A good navigation image:
-- Shows diagnostic features clearly at small size (thumbnail ~141×93px)
-- Shows the most common form/sex/season variant first
-- Prefers dorsal forewing view for moths (the standard identification view)
-- Can be "imperfect" — a blurry photo is better than no photo
-
-**Recommendation:** The `navigational` flag is for curator judgment. Do not add algorithmic filtering beyond weight ordering for the fallback. The weight column already encodes photographer preference (weight=1 = their best shot).
-
----
-
-## Client-Side State Filter
-
-### Data shape
-
-Build pipeline emits a single Parquet file (e.g., `species-states.parquet`) with schema:
+### Current pattern (before migration)
 
 ```
-species_slug: VARCHAR
-state: VARCHAR
+species.njk:    src="/images/{{ sp.slug }}/{{ img.filename }}"
+glossary:       src="{{ ('/images/glossary/' + term.image_filename) | url }}"
 ```
 
-One row per (species, state) pair that has at least one record. Alternatively a JSON file since this is much smaller than per-species occurrence Parquet.
+Two problems with the glossary pattern: it builds a local path, and it applies `| url`
+which would prepend `/pnwmoths/` on GitHub Pages — CDN URLs must never have pathPrefix added.
 
-**Recommendation:** JSON is simpler here — the file will be ~700 species × ~10 states = ~7,000 rows, trivially small. Parquet adds hyparquet dependency for a file that doesn't benefit from columnar compression at this scale. Emit as `species-states.json` from DuckDB.
+### Recommended pattern: Eleventy filter
 
-### Filter behavior
+Add a `cdnUrl` filter in `eleventy.config.js`. Filters are available in all templates
+without import, making them lower friction than Nunjucks macros.
 
-- User selects one or more states (checkbox list or multi-select)
-- Lit component reads species-states.json on first state selection (lazy load)
-- Accordion nodes (genus, subfamily, family) are hidden if they have no species with records in selected states
-- Species items within an expanded genus are hidden if not recorded in selected states
-- Clear filter button restores all nodes
+```js
+// eleventy.config.js
+const CDN_BASE = process.env.CDN_BASE_URL?.replace(/\/$/, '') ?? '';
 
-### States for PNW Moths
+eleventyConfig.addFilter('cdnUrl', function(filename, slug, params) {
+  const path = slug ? `${slug}/${filename}` : filename;
+  const url = `${CDN_BASE}/images/${path}`;
+  return params ? `${url}?${params}` : url;
+});
+```
 
-Washington, Oregon, Idaho, Montana, British Columbia — the relevant states/provinces for the PNW region. The filter should show only states/provinces that appear in `records.csv` (derived from data, not hardcoded list).
+**Usage in templates:**
+
+```nunjucks
+{# Species slideshow photo #}
+<img src="{{ img.filename | cdnUrl(sp.slug, 'width=800') }}"
+     alt="{{ sp.genus }} {{ sp.species }}">
+
+{# Glossary portrait — exact 188x225 crop #}
+<img src="{{ term.image_filename | cdnUrl('glossary', 'crop=188,225&crop_gravity=north') }}"
+     alt="{{ term.term }}"
+     width="188" height="225">
+```
+
+The `width`/`height` HTML attributes on glossary images stay to reserve layout space and
+prevent CLS. The CDN delivers bytes that match those dimensions.
+
+### srcset pattern (differentiator)
+
+```nunjucks
+<img src="{{ img.filename | cdnUrl(sp.slug, 'width=800') }}"
+     srcset="{{ img.filename | cdnUrl(sp.slug, 'width=400') }} 400w,
+             {{ img.filename | cdnUrl(sp.slug, 'width=800') }} 800w,
+             {{ img.filename | cdnUrl(sp.slug, 'width=1600') }} 1600w"
+     sizes="(max-width: 600px) 400px, 800px"
+     alt="{{ sp.genus }} {{ sp.species }}">
+```
+
+This is mechanical but works. A Nunjucks macro that accepts a widths array reduces
+repetition if this is added. The Lit `pnwm-image-slideshow` component generates `<img>`
+tags in JavaScript — its component code will also need CDN URL construction. Pass
+`CDN_BASE_URL` as a component attribute or set `window.CDN_BASE_URL` in a `<script>` tag
+in `base.njk`.
+
+### Browse nav images
+
+The `taxon.js` Eleventy data file builds the taxonomy tree with `navImages` arrays. After
+migration, the image paths stored in that JSON must be CDN URLs, not local paths. The
+Eleventy data file builds this at build time using DuckDB queries. The fix is to prepend
+`CDN_BASE_URL` when constructing the `navImages` entries in `taxon.js`.
+
+---
+
+## MVP Recommendation
+
+Required for functional migration (do these):
+1. Wire `CDN_BASE_URL` into `eleventy.config.js`; add `cdnUrl` filter
+2. Update `species.njk` static `<img>` tags to use `cdnUrl` filter with `?width=800` (or display-appropriate width)
+3. Update `glossary/index.njk` to use CDN crop URL; remove `| url` filter from image path
+4. Update `taxon.js` data file to emit CDN URLs for `navImages` arrays
+5. Refactor `scripts/copy-images.js`: remove species photo copy block; keep banner/asset copies
+6. Enable Bunny Optimizer on pull zone in Bunny dashboard (one-time manual step)
+
+Defer if phase scope is tight:
+- `srcset` responsive variants: real user value but not blocking; add in a follow-up
+- Image Classes in Bunny dashboard: useful once display sizes stabilize
+- `auto_optimize=medium` on thumbnails: easy add, not critical
+
+---
+
+## Pricing Context
+
+Bunny Optimizer: $9.50/month per pull zone. Unlimited transformations and requests.
+CDN bandwidth charged separately at standard rates. No free tier documented.
 
 ---
 
 ## Sources
 
-- [PNW Moths original site — subfamily browse page](https://pnwmoths.biol.wwu.edu/browse/family-erebidae/subfamily-hypeninae/)
-- [PNW Moths original site — homepage](https://pnwmoths.biol.wwu.edu/)
-- [BAMONA — Crambidae family taxonomy page](https://www.butterfliesandmoths.org/taxonomy/Crambidae)
-- [BAMONA — taxonomy overview](https://www.butterfliesandmoths.org/taxonomy)
-- [iNaturalist — taxon photo guidelines](https://help.inaturalist.org/en/support/solutions/articles/151000184018-what-guidelines-should-i-follow-when-choosing-taxon-photos-)
-- [iNaturalist — Explore screen (species grid + geographic filter)](https://help.inaturalist.org/en/support/solutions/articles/151000198035-inaturalist-iphone-app-the-explore-screen)
-- [iNaturalist community — species thumbnail design discussion](https://forum.inaturalist.org/t/display-unique-species-thumbnails-in-every-place/71600)
-- [WAI-ARIA Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
-- [Accessible accordions with `<details>` and `<summary>`](https://www.hassellinclusion.com/blog/accessible-accordions-part-2-using-details-summary/)
-- [MDN — `aria-expanded`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-expanded)
-- [web.dev — Browser-level image lazy loading](https://web.dev/articles/browser-level-image-lazy-loading)
+- [Bunny Optimizer Resizing docs](https://docs.bunny.net/docs/resizing) — HIGH confidence
+- [Bunny Optimizer Cropping docs](https://docs.bunny.net/docs/cropping) — HIGH confidence
+- [Bunny Optimizer Formats docs](https://docs.bunny.net/optimizer/dynamic-images/formats.md) — HIGH confidence
+- [Bunny Optimizer Automatic Optimization](https://docs.bunny.net/optimizer/automatic-optimization) — HIGH confidence
+- [Bunny Optimizer Dynamic Images Overview](https://docs.bunny.net/optimizer/dynamic-images/overview.md) — HIGH confidence
+- [Bunny Optimizer Image Classes](https://docs.bunny.net/optimizer/image-classes.md) — HIGH confidence
+- [Bunny Optimizer Pricing](https://docs.bunny.net/optimizer/pricing.md) — HIGH confidence
+- [AVIF support blog post](https://bunny.net/blog/lets-talk-avif-and-why-we-are-not-adding-support-just-yet/) — HIGH confidence (official bunny.net)
+- [BunnyNet-PHP image processing parameter list](https://toshy.github.io/BunnyNet-PHP/image-processing/) — MEDIUM confidence (third-party, cross-referenced with official docs)
 
----
-
-*Feature research for: PNW Moths v1.3 Visual Browse milestone*
-*Researched: 2026-04-18*
+*Feature research for: PNW Moths v1.4 Image CDN milestone*
+*Researched: 2026-04-21*

@@ -1,357 +1,353 @@
-# Architecture Research: v1.3 Visual Browse Integration
+# Architecture: CDN_BASE_URL Integration
 
-**Domain:** Eleventy + Vite + Lit static site — dynamic browse page milestone
-**Researched:** 2026-04-18
+**Milestone:** v1.4 Image CDN
+**Researched:** 2026-04-21
 **Confidence:** HIGH — all integration points verified against existing source files
 
 ---
 
-## System Overview
+## Decision Summary
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│                         BUILD TIME (Node.js)                         │
-│                                                                      │
-│  data/species.csv ──┐                                                │
-│  data/records.csv ──┤── scripts/build-data.js ──► data/parquet/     │
-│  data/images.csv ───┘   (DuckDB: per-species + new browse.parquet)  │
-│                                                                      │
-│  data/species.csv ──► src/_data/families.js (modified)              │
-│  data/images.csv ──►   → taxonomy tree + nav images → browse/index  │
-│                                                                      │
-└──────────────────────────────────────────────────────────────────────┘
-         │                             │
-         ▼                             ▼
-┌────────────────────┐    ┌────────────────────────────────────────────┐
-│   Eleventy SSG     │    │   scripts/copy-parquet.js (post-Vite)      │
-│   browse/index.njk │    │   data/parquet/browse.parquet              │
-│   (shell page)     │    │    → _site/browse/browse.parquet           │
-└────────────────────┘    └────────────────────────────────────────────┘
-         │
-         ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│                     RUNTIME (Browser)                                │
-│                                                                      │
-│  _site/browse/index.html                                             │
-│    └── <pnwm-taxon-browser> Lit component                           │
-│          ├── taxonomy tree from inline JSON (Eleventy-injected)      │
-│          ├── nav images from inline JSON (Eleventy-injected)         │
-│          ├── fetch _site/browse/browse.parquet (species × state)     │
-│          └── state filter → hide/show taxa with no records           │
-└──────────────────────────────────────────────────────────────────────┘
-```
+`CDN_BASE_URL` is read in `eleventy.config.js` alongside `pathPrefix`, exposed as an
+Eleventy global data value, and used directly in templates as a string prefix on image
+filenames. `copy-images.js` loses its species photo copy block (images are no longer in
+the repo). The Vite `base`/`pathPrefix` interaction is unchanged. GitHub Actions
+replaces the LFS checkout with a plain checkout and passes `CDN_BASE_URL` from a
+repository secret.
 
 ---
 
-## Data Responsibility Split
+## 1. Environment Variable Flow
 
-### What Eleventy injects at build time (inline JSON in HTML)
+### Local development
 
-The taxonomy tree is structural data: families, subfamilies, genera, species names and slugs, and navigation images. This is small (700 species × a few fields), never changes without a rebuild anyway, and is needed to render the accordion skeleton before any parquet loads. Inject it as a JSON attribute or `<script type="application/json">` block on the `<pnwm-taxon-browser>` element.
+Create `.env` at the project root (add to `.gitignore`, commit `.env.example`):
 
-**Payload shape (injected by `families.js` / `browse/index.njk`):**
+```
+CDN_BASE_URL=https://your-zone.b-cdn.net
+```
+
+Node 20.6+ supports `--env-file` natively — no dotenv package needed. Add it to the
+`build:eleventy` invocation in `package.json`:
 
 ```json
-[
-  {
-    "family": "Noctuidae",
-    "subfamilies": [
-      {
-        "subfamily": "Acronictinae",
-        "genera": [
-          {
-            "genus": "Acronicta",
-            "genus_slug": "acronicta",
-            "nav_images": ["acronicta-americana/01.jpg"],
-            "species": [
-              {
-                "slug": "acronicta-americana",
-                "genus": "Acronicta",
-                "species": "americana",
-                "common_name": "American Dagger Moth",
-                "nav_images": ["acronicta-americana/01.jpg"]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-]
+"build:eleventy": "node --env-file=.env node_modules/.bin/eleventy"
 ```
 
-Genera with no subfamily collapse into a synthetic `{"subfamily": null}` entry so the component can use a uniform tree structure.
+Alternatively, contributors can `export CDN_BASE_URL=...` in their shell — either
+works because `eleventy.config.js` reads `process.env.CDN_BASE_URL` directly.
+The `--env-file` approach is better for the `_instructions/` contributor workflow
+because it is self-documenting.
 
-**Why inline, not a separate JSON fetch:**
-The existing `pnwm-occurrence-map` and `pnwm-filter-bar` load Parquet asynchronously — the user sees a loading state before occurrence data appears. For the taxonomy tree, the accordion must render immediately on page load (no loading flash). Inline JSON in the HTML achieves this without an extra fetch. The payload is ~50–100 KB uncompressed for 700 species (well within budget).
+### eleventy.config.js
 
-### What the Lit component loads from Parquet at runtime
+Read the variable at module load time, parallel to the existing `pathPrefix` pattern:
 
-State-distribution data: which states have records for each species slug. This is the data that drives the state filter — hiding families/genera/subfamilies that have zero occurrences in the selected states.
+```js
+const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
+const cdnBaseUrl = (process.env.CDN_BASE_URL ?? '').replace(/\/$/, '');
 
-**Parquet schema (`browse.parquet`):**
+// Fail fast in CI so a missing secret is caught at build time, not at runtime.
+if (!cdnBaseUrl && process.env.GITHUB_PAGES) {
+  throw new Error('CDN_BASE_URL must be set when GITHUB_PAGES=true');
+}
+```
 
-| Column | Type | Notes |
-|--------|------|-------|
-| `species_slug` | VARCHAR | FK to species; matches existing slug convention |
-| `state` | VARCHAR | One row per unique (species_slug, state) pair |
-| `record_count` | INTEGER | Aggregate count for the pair |
+The trailing-slash trim is a safety guard: if `CDN_BASE_URL` is set to
+`https://cdn.example.com/`, templates that write `{{ cdnBaseUrl }}/{{ filename }}`
+would produce a double-slash. Trimming at the source is safer than trusting every
+template author to omit the slash.
 
-This is a pre-aggregated table, not a row-per-occurrence export. At 700 species × 6 states, the worst-case row count is 4,200. This is tiny — a few KB as Parquet with Snappy compression. The component loads it once on `connectedCallback`, builds a `Map<slug, Set<state>>` in memory, and uses it to drive visibility.
+Expose as Eleventy global data so every template reads it without imports:
 
-**Why not embed state data inline too:**
-State data at row-per-occurrence level would be very large with real data (10k+ rows). Pre-aggregating to species × state keeps the Parquet small. This also follows the existing pattern: `pnwm-occurrence-map` loads per-species Parquet asynchronously. The browse Parquet follows the same async-load pattern but loads a single shared file once for the whole page.
+```js
+eleventyConfig.addGlobalData('cdnBaseUrl', cdnBaseUrl);
+```
 
-**Why Parquet instead of JSON for the browse file:**
-The existing `parquet-cache.js` pattern is established and Parquet with Snappy compression is already validated for this site. More importantly, it maintains consistency with the overall architecture decision to use Parquet for occurrence-derived data. A JSON alternative would work but breaks the pattern with no significant benefit.
+`addGlobalData` is the correct Eleventy 3.x mechanism: values are available as
+top-level variables in all Nunjucks templates and data files, exactly the same as
+data returned from `src/_data/*.js` files. No plugin required.
 
----
+### Failing gracefully in PR builds
 
-## Component Boundaries
-
-### Static HTML vs Lit component
-
-`browse/index.njk` renders:
-- The page shell (header, nav, `<h1>`) — static HTML via `base.njk`
-- The `<pnwm-taxon-browser>` element with a `data-taxonomy` attribute containing the inline JSON
-- A `<noscript>` fallback that renders a plain family/genus listing (same as current `index.njk`)
-
-The Lit component (`pnwm-taxon-browser`) owns:
-- Accordion expand/collapse state
-- Nav image display + show/hide toggle
-- State filter UI and visibility logic
-- Loading state while `browse.parquet` fetches
-
-**Boundary rule:** The component never reads from the DOM for taxonomy data. It reads only from its `data-taxonomy` attribute (parsed once in `connectedCallback`). This keeps the component testable in isolation.
-
-**Light DOM vs Shadow DOM:** Use Shadow DOM (Lit default) for `pnwm-taxon-browser`. Unlike `pnwm-occurrence-map` which uses light DOM for Leaflet's direct DOM manipulation, the browser component is purely Lit-rendered HTML. Shadow DOM scopes styles cleanly. The accordion markup is generated entirely by Lit's `html` tag, so there is no external CSS interaction issue.
+The `throw` guard fires only when `GITHUB_PAGES=true`. PR builds run without that
+variable, so the empty-string fallback applies. Image `src` attributes in PR builds
+will be malformed (e.g., `src="/slug/file.jpg"`) but pages build successfully. This
+is acceptable for CI link-checking with the CDN domain excluded from lychee.
 
 ---
 
-## Files: New vs Modified
+## 2. Template Usage
 
-### New files
+### Convention
 
-| File | Purpose |
-|------|---------|
-| `src/_data/taxon.js` | Replaces `families.js`: queries `species.csv` (with `subfamily` column) and `images.csv` (with `navigational` flag), builds taxonomy tree with nav images, returns structured data for `browse/index.njk` |
-| `src/components/pnwm-taxon-browser.js` | Lit accordion component; reads taxonomy from attribute, loads `browse.parquet`, manages state filter and expand/collapse |
-| `data/parquet/browse/records.parquet` | Species × state aggregate Parquet (directory mirrors per-species convention); exported by `build-data.js` |
+`CDN_BASE_URL` has no trailing slash (enforced in `eleventy.config.js`). Template paths
+have no leading slash. Image URL construction is always:
 
-Note on Parquet path: per-species Parquet files live at `data/parquet/{slug}/records.parquet`. The browse Parquet should live at `data/parquet/browse/records.parquet` so `copy-parquet.js`'s `cp('data/parquet', '_site/species', { recursive: true })` copy picks it up at `_site/species/browse/records.parquet`. The component fetches from `${import.meta.env.BASE_URL}species/browse/records.parquet`. This requires no changes to `copy-parquet.js`.
+```
+{{ cdnBaseUrl }}/{{ slug }}/{{ filename }}
+```
+
+No `| url` filter. The `| url` filter prepends `pathPrefix` (e.g., `/pnwmoths/`) to
+site-relative paths — it would corrupt an absolute `https://` URL. CDN URLs are
+absolute and must never pass through `| url`.
+
+### species.njk
+
+Replace:
+
+```nunjucks
+<img src="/images/{{ sp.slug }}/{{ img.filename }}"
+     alt="{{ sp.genus }} {{ sp.species }}"
+     data-photographer="{{ img.photographer }}">
+```
+
+With:
+
+```nunjucks
+<img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename }}"
+     alt="{{ sp.genus }} {{ sp.species }}"
+     data-photographer="{{ img.photographer }}">
+```
+
+### glossary/index.njk
+
+Replace:
+
+```nunjucks
+<img src="{{ ('/images/glossary/' + term.image_filename) | url }}"
+     alt="{{ term.term }}"
+     width="188" height="225">
+```
+
+With:
+
+```nunjucks
+<img src="{{ cdnBaseUrl }}/glossary/{{ term.image_filename }}"
+     alt="{{ term.term }}"
+     width="188" height="225">
+```
+
+The `| url` call was there because the path was site-relative. Now it is CDN-absolute.
+
+### base.njk — header banner
+
+The banner image (`src/images/header.png`) is a static site asset, not a species photo.
+It stays at `/images/header.png`, served from `_site/images/`, copied by
+`copy-images.js`. Do NOT add `cdnBaseUrl` to `base.njk`.
+
+### Nunjucks macro (optional, recommended for resize params)
+
+If bunny.net Image Optimizer query parameters (e.g., `?width=800`) are needed,
+define a macro in `src/_includes/macros.njk` rather than duplicating URL construction
+in every template. Without resize params, direct interpolation as shown above is
+sufficient and simpler.
+
+---
+
+## 3. pnwm-taxon-browser.js — Runtime Image URLs
+
+The web component constructs image `src` attributes at runtime using `this._prefix`
+(the `path-prefix` attribute from the template) and filenames from the embedded taxon
+JSON. The component currently writes:
+
+```js
+src="${this._prefix}images/${img.species_slug}/${img.filename}"
+```
+
+After migration, the component must receive the CDN base URL separately from
+`path-prefix` (which controls internal site navigation links, not image CDN URLs).
+
+**Add a `cdn-base-url` attribute to the component.**
+
+In `browse/index.njk`:
+
+```nunjucks
+<pnwm-taxon-browser
+  path-prefix="{{ '/' | url }}"
+  cdn-base-url="{{ cdnBaseUrl }}">
+</pnwm-taxon-browser>
+```
+
+In `pnwm-taxon-browser.js`, add to `static get properties()`:
+
+```js
+'cdn-base-url': { type: String }
+```
+
+Replace all occurrences of `${this._prefix}images/${img.species_slug}/${img.filename}`
+with `${this['cdn-base-url']}/${img.species_slug}/${img.filename}`.
+
+There are two call sites in `_renderImageStrip` and one in `_renderSpecies` (the
+`sp.navImage` path). Check the full component for any additional image src constructions.
+
+---
+
+## 4. Vite / pathPrefix Interaction — No Changes
+
+No changes are needed in the Vite configuration block in `eleventy.config.js`.
+
+The existing architectural rule (from PROJECT.md Key Decisions): "Let Vite add base
+prefix; don't pre-process with `| url`." CDN URLs are absolute (`https://...`). Vite's
+HTML transformer rewrites only relative and root-relative asset references — it ignores
+`https://` hrefs. Therefore:
+
+- Template: `src="{{ cdnBaseUrl }}/slug/file.jpg"` — Vite leaves it untouched. Correct.
+- `base: pathPrefix` continues to apply only to bundled JS imports and internal asset
+  references. No interaction with CDN URLs.
+
+The `pathPrefix` variable and its conditional logic remain identical.
+
+---
+
+## 5. Changes to copy-images.js
+
+### Remove
+
+The species photo copy block is removed entirely — the `images/` repo-root directory
+will no longer exist after LFS removal:
+
+```js
+// DELETE: species photos (managed via Git LFS, stored in repo root images/)
+const speciesSrc = resolve('images');
+const speciesDest = resolve('_site/images');
+await cp(speciesSrc, speciesDest, { recursive: true });
+console.log('Copied images: images/ -> _site/images/');
+```
+
+### Keep unchanged
+
+All remaining copy operations stay:
+
+1. `src/images/ -> _site/images/` — banner image (header.png)
+2. `src/styles/ -> _site/styles/` — theme CSS
+3. `@picocss/pico/css/pico.min.css -> _site/css/pico.min.css`
+4. `node_modules/openseadragon/.../images -> _site/osd-images/`
+
+The `eleventy.config.js` passthrough copy `{ "src/images": "images" }` is NOT removed —
+it copies `src/images/` (which contains `header.png`), not the `images/` repo root
+directory (which held LFS-tracked species photos). The passthrough copy is for the
+banner, which stays.
+
+---
+
+## 6. GitHub Actions CI/CD
+
+### deploy.yml
+
+1. Replace LFS checkout with plain checkout:
+
+   ```yaml
+   # Before:
+   - uses: nschloe/action-cached-lfs-checkout@...
+   
+   # After:
+   - uses: actions/checkout@v4
+   ```
+
+2. Pass `CDN_BASE_URL` from repository secrets to the build step:
+
+   ```yaml
+   - run: npm run build
+     env:
+       CDN_BASE_URL: ${{ secrets.CDN_BASE_URL }}
+   ```
+
+   `GITHUB_PAGES=true` is already set by `actions/configure-pages` (the step that runs
+   before the build). The fail-fast guard in `eleventy.config.js` will catch a missing
+   or unset secret immediately.
+
+### pr-check.yml
+
+Replace the LFS checkout with `actions/checkout@v4`. Do not add `CDN_BASE_URL` to PR
+builds — the empty-string fallback in `eleventy.config.js` handles the missing var
+(no throw because `GITHUB_PAGES` is not set in PR builds). The lychee link checker
+will report broken CDN image URLs; exclude the CDN hostname in `lychee.toml` to
+prevent false failures.
+
+---
+
+## 7. File Inventory: New vs Modified
 
 ### Modified files
 
 | File | Change |
 |------|--------|
-| `data/species.csv` | Add `subfamily` column (nullable VARCHAR) |
-| `data/images.csv` | Add `navigational` column (BOOLEAN or 0/1 INTEGER) |
-| `src/_data/families.js` | Remove or repurpose — `taxon.js` supersedes it; `genus.njk` pagination also reads from it |
-| `src/browse/index.njk` | Replace static genus listing with shell page that mounts `<pnwm-taxon-browser>` |
-| `src/browse/genus.njk` | Retire: remove file or redirect strategy (see below) |
-| `scripts/build-data.js` | Add: validate `subfamily` in `species.csv`, validate `navigational` in `images.csv`, export `browse.parquet` aggregate |
-| `src/components/main.js` | Add import for `pnwm-taxon-browser.js` |
+| `eleventy.config.js` | Read `CDN_BASE_URL`; trim trailing slash; fail-fast guard; `addGlobalData('cdnBaseUrl', ...)` |
+| `scripts/copy-images.js` | Remove species photo copy block (keep banner, styles, Pico, OSD) |
+| `src/species/species.njk` | `src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename }}"` |
+| `src/glossary/index.njk` | `src="{{ cdnBaseUrl }}/glossary/{{ term.image_filename }}"` |
+| `src/browse/index.njk` | Add `cdn-base-url="{{ cdnBaseUrl }}"` attribute to `<pnwm-taxon-browser>` |
+| `src/components/pnwm-taxon-browser.js` | Accept `cdn-base-url` property; use for all image src construction |
+| `.github/workflows/deploy.yml` | Remove LFS action; add `CDN_BASE_URL` env on build step |
+| `.github/workflows/pr-check.yml` | Remove LFS action |
+| `lychee.toml` | Exclude CDN hostname from link checking |
 
-**Note on `families.js` vs `taxon.js`:** `genus.njk` currently reads `families.genusArray` from `families.js`. If `genus.njk` is being retired (all genus pages gone), `families.js` can be deleted and replaced entirely by `taxon.js`. If genus pages are kept temporarily for redirect purposes, `families.js` must remain until those pages are no longer built. The cleaner approach is to retire genus pages in the same milestone and delete `families.js`.
+### New files
+
+| File | Purpose |
+|------|---------|
+| `.env.example` | Documents `CDN_BASE_URL` (and any other required env vars) for contributors |
+
+### .gitignore addition
+
+Add `.env` to `.gitignore`.
+
+### Files with no changes
+
+| File | Reason |
+|------|--------|
+| `vite.config.js` (inline in eleventy.config.js) | CDN URLs bypass Vite's base rewriting |
+| `src/_includes/base.njk` | Banner image stays site-relative |
+| `scripts/copy-plates.js` | Unrelated to species photo CDN migration |
+| `src/_data/images.js` | Returns filenames only; URL construction stays in templates |
+| `src/_data/taxon.js` | Returns filenames only; URL construction in web component |
+| `scripts/emit-species-states.js` | No image URLs |
 
 ---
 
-## Build Order and Dependencies
+## 8. Data Flow: env var to rendered `<img>`
 
 ```
-1. data/species.csv + data/images.csv (human edits, add new columns)
-       │
-       ▼
-2. scripts/build-data.js (validation + Parquet export)
-       │
-       ├─► data/parquet/{slug}/records.parquet  (unchanged per-species files)
-       └─► data/parquet/browse/records.parquet  (NEW: species × state aggregate)
-       │
-       ▼
-3. Eleventy build
-       │
-       ├─► src/_data/taxon.js runs → taxonomy tree + nav images in memory
-       ├─► src/browse/index.njk renders shell with inline JSON
-       └─► genus.njk REMOVED → no /browse/{genus}/ pages generated
-       │
-       ▼
-4. @11ty/eleventy-plugin-vite bundles JS
-       │
-       ▼
-5. scripts/copy-parquet.js
-       │
-       ├─► _site/species/{slug}/records.parquet  (unchanged)
-       └─► _site/species/browse/records.parquet  (NEW)
-       │
-       ▼
-6. scripts/copy-images.js (unchanged)
+CDN_BASE_URL (env var / .env)
+  └─ eleventy.config.js (read at startup; trimmed; fail-fast guard)
+       └─ addGlobalData('cdnBaseUrl', value)
+            ├─ species.njk
+            │    └─ static HTML: <img src="https://cdn.../slug/file.jpg">
+            ├─ glossary/index.njk
+            │    └─ static HTML: <img src="https://cdn.../glossary/file.jpg">
+            └─ browse/index.njk
+                 └─ <pnwm-taxon-browser cdn-base-url="https://cdn...">
+                      └─ runtime JS: img.src = `${this['cdn-base-url']}/${slug}/${file}`
 ```
 
-**Critical dependency:** `build-data.js` must run before Eleventy (unchanged — this is already the `npm run build:data && eleventy` order). The new browse Parquet is produced in step 2 and copied in step 5 — no new ordering constraints.
+Species page and glossary `<img>` srcs are baked into static HTML at build time by
+Nunjucks. Taxon browser `<img>` srcs are constructed at runtime by the Lit component
+from the `cdn-base-url` attribute.
 
 ---
 
-## Parquet Export: DuckDB Query
+## 9. Pitfalls
 
-Add to `build-data.js` after the per-species loop:
+**Double-slash.** Enforced by trimming trailing slash in `eleventy.config.js` and using
+no leading slash in template paths. Establish this as the project convention and document
+it in `.env.example` comments.
 
-```js
-await conn.run(`
-  COPY (
-    SELECT
-      r.species_slug,
-      r.state,
-      COUNT(*) AS record_count
-    FROM records r
-    WHERE r.state IS NOT NULL AND r.state != ''
-    GROUP BY r.species_slug, r.state
-  )
-  TO 'data/parquet/browse/records.parquet'
-  (FORMAT parquet, COMPRESSION snappy)
-`);
-```
+**`| url` filter on CDN URLs.** The filter prepends `pathPrefix` to any string — it
+corrupts `https://` URLs. Never use `| url` on CDN image paths.
 
-Add `mkdirSync('data/parquet/browse', { recursive: true })` before the COPY statement.
+**lychee reporting broken CDN URLs in PR builds.** CDN URLs in PR builds will use an
+empty base (`src="/slug/file.jpg"`). Lychee will try to check these as internal links
+and may report 404s. Exclude the CDN domain in `lychee.toml`, or better, also add a
+lychee exclude pattern for CDN-rooted paths that appear as root-relative during PR
+builds.
 
-Also add validation of new CSV columns in `validateCsv` calls:
-- `species.csv`: add `subfamily` to the columns map (`'subfamily': 'VARCHAR'`) — nullable, so no required-value check
-- `images.csv`: add `navigational` (`'navigational': 'INTEGER'`) — 0 or 1
+**`pnwm-taxon-browser.js` has multiple image src construction sites.** The file
+currently builds img srcs in `_renderImageStrip` (line ~143), in `_renderSpecies`
+(line ~199), and potentially in species card rendering. Audit all `src=` expressions in
+the component before shipping — missing one leaves stale `/images/...` paths.
 
----
-
-## `taxon.js` Eleventy Data File
-
-This replaces `families.js`. It queries species and images at build time to produce the full taxonomy tree including nav images.
-
-**Nav image selection logic (in DuckDB SQL):**
-1. Images with `navigational = 1`, ordered by `weight`, up to 4 per taxon level
-2. Fallback: images with `navigational = 0` (or null), ordered by `weight` ascending, up to 4
-
-The query can use window functions:
-
-```sql
--- Per-species nav images: navigational=1 first, then fallback to lowest weight
-SELECT
-  species_slug,
-  filename,
-  ROW_NUMBER() OVER (
-    PARTITION BY species_slug
-    ORDER BY navigational DESC NULLS LAST, weight ASC
-  ) AS rn
-FROM images
-```
-
-Then filter `rn <= 4` in the outer query. The Eleventy data file assembles genus and subfamily rollup images from species images by taking the first 4 images from the set of species-level images within each genus/subfamily (ordered by weight).
-
-**Return shape:** The data file returns the full taxonomy array described above (the inline JSON payload). It is used directly in `browse/index.njk` via `JSON.stringify` in the template.
-
----
-
-## URL Strategy for Retired Genus Pages
-
-**Current URLs:** `/browse/{genus-slug}/` — e.g., `/browse/acronicta/`
-
-**Decision: 404, not redirect.** The PROJECT.md explicitly notes "Django URL redirects — Requires Netlify/Cloudflare; deferred to v2 (SEO-01)". The same constraint applies here: GitHub Pages cannot serve 301 redirects from static files. A meta-refresh HTML file at each genus URL would work but requires generating ~100 stub pages, which is build complexity for marginal SEO benefit (these are internal PNW moth URLs, not widely indexed).
-
-**Implementation:** Remove `genus.njk` from `src/browse/`. The URLs simply return 404 on GitHub Pages. No stub redirect pages needed.
-
-**If redirects become required later:** The v2 SEO-01 item already tracks this. At v2, moving to Netlify or Cloudflare Pages enables `_redirects` file support. At that point, add redirect rules: `/browse/:genus/* → /browse/ 301`.
-
----
-
-## `parquet-cache.js` Reuse
-
-The existing `loadParquet(slug)` in `parquet-cache.js` fetches from `${BASE_URL}species/${slug}/records.parquet`. The browse Parquet lives at `species/browse/records.parquet`, which is the slug `"browse"`. 
-
-**Recommended:** Do NOT reuse `loadParquet` for the browse file. Its cache key is designed for species slugs; using `"browse"` as a slug is a naming hack. Instead, add a new exported function to `parquet-cache.js`:
-
-```js
-export async function loadBrowseParquet() {
-  const url = `${import.meta.env.BASE_URL}species/browse/records.parquet`;
-  // ... same fetch + hyparquet pattern as loadParquet
-}
-```
-
-This keeps the cache module coherent and the intent readable.
-
----
-
-## Component API: `pnwm-taxon-browser`
-
-```js
-class PnwmTaxonBrowser extends LitElement {
-  static get properties() {
-    return {
-      // Injected by Eleventy template as JSON attribute
-      taxonomyJson: { type: String, attribute: 'data-taxonomy' },
-      // Internal state
-      _taxonomy: { state: true },       // parsed from taxonomyJson
-      _speciesStates: { state: true },  // Map<slug, Set<state>> from browse.parquet
-      _selectedState: { state: true },  // 'all' | 'WA' | 'OR' | ...
-      _imagesVisible: { state: true },  // boolean, default true
-      _expanded: { state: true },       // Set<string> of expanded taxon keys
-      _loading: { state: true },
-    };
-  }
-}
-```
-
-The component uses Shadow DOM. It registers as `pnwm-taxon-browser`.
-
-**Template mounts it:**
-
-```njk
-<pnwm-taxon-browser
-  data-taxonomy="{{ taxon | dump | escape }}"
-  data-pagefind-ignore
-></pnwm-taxon-browser>
-```
-
-Where `taxon` is the array returned by `src/_data/taxon.js`, serialized by Nunjucks `dump` filter (equivalent to `JSON.stringify`) and HTML-escaped.
-
----
-
-## Anti-Patterns to Avoid
-
-### Embedding occurrence row-level data inline
-
-**What people do:** Put the full records array in a `<script>` tag to avoid async loading.
-**Why it's wrong:** With real data (10k+ records), this balloons the HTML page to megabytes. The browse page is the first page many users see.
-**Do this instead:** The pre-aggregated species × state Parquet is the right payload. ~4,200 rows, Snappy-compressed, loads in well under 1 second.
-
-### Querying taxonomy structure client-side from Parquet
-
-**What people do:** Export the full species table to Parquet and reconstruct the tree client-side.
-**Why it's wrong:** The taxonomy tree requires a JOIN of species × images with complex window-function logic for nav image selection. This logic belongs in DuckDB at build time, not in browser JS. The browser can't run DuckDB. Reconstructing the tree from flat Parquet in JS is duplicating build logic.
-**Do this instead:** Compute the tree in `taxon.js` at build time. Inject as inline JSON. The Lit component consumes the pre-built structure.
-
-### Reusing `pnwm-filter-bar` for the browse state filter
-
-**What people do:** Drop the existing `pnwm-filter-bar` component into the browse page to get a "free" state filter.
-**Why it's wrong:** `pnwm-filter-bar` is designed for a single species (it reads per-species Parquet by slug). Its state options come from that species' actual records. On the browse page, the state filter needs to affect all taxa simultaneously from a shared dataset.
-**Do this instead:** Build the state selector directly into `pnwm-taxon-browser`. It reads the browse Parquet once, derives available states from the data, and manages filtering internally.
-
----
-
-## Integration Points Summary
-
-| Boundary | Communication | Notes |
-|----------|---------------|-------|
-| `taxon.js` → `browse/index.njk` | Eleventy data cascade; JSON serialized to `data-taxonomy` attribute | Standard Eleventy JS data file → template pattern |
-| `build-data.js` → `browse.parquet` | DuckDB COPY TO with Snappy compression | Mirrors existing per-species export pattern |
-| `copy-parquet.js` → `_site/` | `cp('data/parquet', '_site/species', recursive)` picks up `browse/` subdirectory automatically | No script change needed |
-| `pnwm-taxon-browser` → `browse.parquet` | `loadBrowseParquet()` in `parquet-cache.js` | New function, same fetch + hyparquet pattern |
-| `pnwm-taxon-browser` → taxonomy tree | Reads `data-taxonomy` attribute, parses JSON in `connectedCallback` | Inline data, no fetch |
-| `browse/index.njk` noscript fallback | Static HTML family/genus listing inside `<noscript>` | Preserves graceful degradation requirement |
-
----
-
-## Sources
-
-- Existing source files read directly: `src/_data/families.js`, `src/_data/images.js`, `src/components/pnwm-filter-bar.js`, `src/components/parquet-cache.js`, `src/components/pnwm-occurrence-map.js`, `src/browse/index.njk`, `src/browse/genus.njk`, `scripts/build-data.js`, `scripts/copy-parquet.js`, `scripts/copy-images.js`
-- PROJECT.md for constraints and decisions: SEO-01 redirect deferral, Snappy compression requirement, DuckDB `@duckdb/node-api` API patterns
-- Established project patterns: post-Vite copy script, parquet-cache slug convention, `data-pagefind-ignore` for interactive components
-
----
-*Architecture research for: PNW Moths v1.3 Visual Browse*
-*Researched: 2026-04-18*
+**LFS history.** Removing LFS from the repo requires `git lfs migrate export` or
+BFG to purge LFS pointers from history. This is a destructive history rewrite and
+requires all collaborators to re-clone. Scope this as an explicit phase step, not a
+casual `git rm`.

@@ -1,257 +1,369 @@
 # Stack Research: PNW Moths Static Site
 
 **Project:** pnwmoths static rebuild
-**Researched:** 2026-04-18 (updated for v1.3 Visual Browse milestone)
-**Mode:** Ecosystem — standard 2025 stack for data-heavy Eleventy static site
+**Researched:** 2026-04-21 (updated for v1.4 Image CDN milestone)
+**Mode:** Feasibility — specific tools and configuration for CDN migration
 
 ---
 
-## v1.3 Milestone Stack Additions
+## v1.4 Milestone Stack: Image CDN Migration
 
-This section focuses on what is **new** for v1.3. The full existing stack (Eleventy 3.1.x, Vite 7.x,
-DuckDB node-api 1.5.x, hyparquet 1.25.x, Lit 3.3.x, Leaflet 1.9.x, Pagefind 1.5.x, Pico CSS 2.1.x)
-is validated and unchanged. Only additions and integration notes for the four new features are
-documented here.
-
-### Feature 1 — Accordion Lit component (`pnwm-taxonomy-browser`)
-
-**No new packages.** Lit 3.3.2 (already installed) provides everything needed.
-
-| Already Available | How It Serves v1.3 |
-|-------------------|--------------------|
-| `lit` 3.3.2 | `LitElement`, `html`, `css`, reactive properties, event system |
-| `lit/directives/class-map.js` | Toggle `.expanded` CSS class on accordion nodes |
-| `lit/directives/repeat.js` | Efficient keyed rendering of large family/genus/species lists |
-| `lit/directives/when.js` | Conditionally render child images only when node is expanded |
-
-**Accordion pattern:** Implement as a single `pnwm-taxonomy-browser` custom element. Static taxonomy
-data (families → subfamilies → genera → species, with image paths) is embedded by Eleventy at build
-time as JSON in a `<script type="application/json">` child element — same pattern as the existing
-species page Parquet data. The component reads the JSON from its light DOM in `connectedCallback`,
-constructs an internal tree, and renders it reactively. No parent-child shadow-DOM split is needed;
-a flat array of node objects with `level` and `parentId` fields is simpler to manage and avoids
-cross-shadow event coordination.
-
-**Show/hide image toggle:** A single boolean `_imagesVisible` reactive property drives CSS
-`display: none` on the image grid. No new dependency.
-
-**Why not `<details>`/`<summary>` HTML elements:** The native elements do not support controlled
-state (only one branch open at a time), emit no bubbling `toggle` event that crosses shadow DOM
-boundaries, and give no hook for the "hide parent images when child is expanded" behavior. Lit's
-reactive model is the right fit here.
-
-**Confidence:** HIGH — verified Lit 3.3.2 installed; `class-map`, `repeat`, `when` directives
-confirmed present in installed package.
+The existing stack (Eleventy 3.1.x, Vite 8.x, DuckDB, hyparquet, Lit, Leaflet, Pagefind, Pico CSS)
+is unchanged. This document covers only the four new capabilities needed for v1.4.
 
 ---
 
-### Feature 2 — Build-time DuckDB export: species × state Parquet
+## Capability 1: bunny.net Storage Upload
 
-**No new packages.** `@duckdb/node-api` 1.5.1-r.2 (already installed) handles the export.
+### Recommended tool: rclone via FTP
 
-Add a new export step to `scripts/build-data.js` after the per-species Parquet loop:
+**Why rclone over alternatives:**
 
-```js
-// After per-species loop, before conn.closeSync()
-mkdirSync('data/parquet/browse', { recursive: true });
-await conn.run(`
-  COPY (
-    SELECT
-      lower(s.genus || '-' || s.species) AS species_slug,
-      r.state,
-      count(*) AS record_count
-    FROM records r
-    JOIN species s ON r.species_slug = lower(s.genus || '-' || s.species)
-    WHERE r.state IS NOT NULL AND r.state != ''
-    GROUP BY species_slug, r.state
-  )
-  TO 'data/parquet/browse/species-by-state.parquet'
-  (FORMAT parquet, COMPRESSION snappy)
-`);
+| Tool | Status | Verdict |
+|------|--------|---------|
+| rclone (FTP backend) | Active, widely used | **Use this** |
+| rclone (S3 backend) | Closed preview as of Q1 2026 — not yet GA | Skip — unavailable without invitation |
+| simplesurance/bunny-cli | Archived Sept 2023, no releases | Skip — abandoned |
+| own3d/bunny-cli | Undocumented, community project | Skip — unvetted |
+| DKFN/bunnycdn-cli | Unofficial, small project | Skip — undocumented maintenance status |
+| bunny.net HTTP API (curl) | Official, always available | Fallback for CI scripting if rclone proves awkward |
+
+bunny.net S3 compatibility is in closed preview as of April 2026 ("Q2 preview" per their blog).
+Do not depend on S3 for this milestone. FTP is the stable, documented, widely-used path.
+
+**rclone version:** Use current stable (1.68.x at time of writing). Install via `brew install rclone`
+(macOS) or the official install script for CI. No specific version pinning needed; rclone FTP is mature.
+
+### rclone FTP configuration for bunny.net
+
+```ini
+[bunny]
+type = ftp
+host = ny.storage.bunnycdn.com
+user = YOUR_STORAGE_ZONE_NAME
+pass = RCLONE_OBSCURED_PASSWORD
+port = 21
 ```
 
-The output file path `data/parquet/browse/species-by-state.parquet` follows the existing
-`data/parquet/{slug}/records.parquet` naming convention. The `copy-parquet.js` script uses
-`cp(src, dest, { recursive: true })` where `src = data/parquet` and `dest = _site/species`, so the
-new file lands at `_site/species/browse/species-by-state.parquet`. The URL exposed to the browser
-will be `/species/browse/species-by-state.parquet` (or with `BASE_URL` prefix, matching the existing
-`parquet-cache.js` pattern).
+**Regional FTP endpoints** (choose the region where your Storage Zone was created):
 
-**Schema:** `species_slug VARCHAR, state VARCHAR, record_count BIGINT`. Three narrow columns;
-with ~11 species × ~6 states the file is tiny but the pattern scales to 700+ species.
+| Region | FTP Host |
+|--------|----------|
+| Falkenstein (default) | `storage.bunnycdn.com` |
+| New York | `ny.storage.bunnycdn.com` |
+| Los Angeles | `la.storage.bunnycdn.com` |
+| Singapore | `sg.storage.bunnycdn.com` |
+| Sydney | `syd.storage.bunnycdn.com` |
 
-**Snappy compression:** Already validated as required for hyparquet compatibility (GitHub Pages
-serves gzip-encoded range responses, which breaks ZSTD; Snappy avoids this). Do not change
-compression algorithm.
+**Authentication:**
+- `user` = Storage Zone name (shown in bunny.net dashboard)
+- `pass` = Storage Zone password (API key). Must be obscured: run `rclone obscure YOUR_PASSWORD`,
+  paste the output into the config. Do NOT paste the raw password.
 
-**Confidence:** HIGH — DuckDB `COPY ... TO ... (FORMAT parquet, COMPRESSION snappy)` pattern
-already used in production in `build-data.js`. `copy-parquet.js` recursive copy confirmed.
+**Generate the config non-interactively:**
+
+```bash
+rclone config create bunny ftp \
+  host=ny.storage.bunnycdn.com \
+  user=YOUR_ZONE_NAME \
+  pass=$(rclone obscure YOUR_PASSWORD) \
+  port=21
+```
+
+**Known FTP quirk:** File modification times are not settable via bunny.net's FTP interface.
+This affects rclone's `--checksum` and time-based sync; use `--size-only` as the transfer
+comparison method when syncing.
+
+### Upload commands
+
+Initial bulk upload (16,000+ files from local `images/` directory):
+
+```bash
+# Upload entire images tree, skip files of same size
+rclone sync images/ bunny:images/ --size-only --progress --transfers=16
+
+# Dry run first
+rclone sync images/ bunny:images/ --size-only --dry-run --progress
+```
+
+For CI (upload new/changed images from a Django media dir):
+
+```bash
+rclone sync /path/to/django/media/images/ bunny:images/ --size-only --transfers=8
+```
+
+**`--inplace` flag:** Add `--inplace` if you encounter partial-file errors on FTP. This writes
+directly to the destination file rather than a temp name, avoiding FTP RNFR/RNTO rename issues
+reported in the rclone community forum for bunny.net FTP.
+
+**Confidence:** HIGH — FTP endpoint URLs confirmed from bunny.net official API docs;
+rclone FTP config pattern confirmed from rclone community forum discussion.
 
 ---
 
-### Feature 3 — Client-side hyparquet filtering of species-by-state Parquet
+## Capability 2: bunny.net Image Optimizer (CDN-native resizing)
 
-**No new packages.** `hyparquet` 1.25.6 (already installed) provides `parquetReadObjects`.
+### Architecture: Storage Zone + Pull Zone
 
-Extend `parquet-cache.js` with a new loader function:
+bunny.net Image Optimizer requires two linked resources:
+
+1. **Storage Zone** — where original images live. Files uploaded via rclone.
+2. **Pull Zone** — CDN delivery layer, linked to the Storage Zone. Optimizer is enabled
+   on the Pull Zone. Pull Zone gets a `*.b-cdn.net` hostname.
+
+The Pull Zone URL becomes `CDN_BASE_URL`. Example:
+```
+https://pnwmoths.b-cdn.net/images/acronicta-americana/01.jpg
+```
+
+### Enabling Image Optimizer
+
+In the bunny.net dashboard: select the Pull Zone → left menu → "Optimizer" → "Turn on Bunny Optimizer".
+Also enable "Dynamic Image API" in the Optimizer settings. This is a separate toggle from basic optimization.
+
+**Cost:** $9.50/month per Pull Zone. Bandwidth is charged separately on top. For a low-traffic
+specimen photography site, bandwidth costs will be negligible (static site, images are the bulk).
+
+### URL parameters for on-the-fly resizing
+
+Append query parameters to any image URL served through the Pull Zone:
+
+```
+# Resize to 400px wide, maintain aspect ratio
+https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400
+
+# Resize to 300px tall, maintain aspect ratio
+https://pnwmoths.b-cdn.net/images/slug/01.jpg?height=300
+
+# Both width and height (may distort unless crop is used)
+https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400&height=300
+
+# WebP conversion + quality
+https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400&format=webp&quality=85
+
+# Crop with gravity
+https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400&height=300&crop=true&crop_gravity=center
+```
+
+**Full parameter list** (confirmed from official docs):
+- Sizing: `width`, `height`, `aspect_ratio`
+- Format/quality: `quality` (1–100), `format` (jpeg, png, webp, gif)
+- Cropping: `crop`, `crop_gravity`, `face_crop`
+- Effects: `blur`, `sharpen`, `brightness`, `contrast`, `saturation`, `hue`, `sepia`, `gamma`
+- Orientation: `flip`, `flop`, `rotate`
+
+**Caching behavior:** The optimizer processes on first request, caches at the edge. All subsequent
+requests for the same URL+parameters are served from cache. Different parameter combinations = different
+cache entries; the original file is stored once.
+
+**Confidence:** HIGH — parameter list confirmed from official bunny.net Dynamic Images documentation.
+Pricing confirmed from bunny.net pricing page ($9.50/month/Pull Zone).
+
+---
+
+## Capability 3: Removing Git LFS from the Repository
+
+### Why: git lfs migrate export (not git filter-repo)
+
+`git lfs migrate export` is the correct tool for this task. It is LFS's own migration command,
+understands pointer files natively, and handles `.gitattributes` cleanup. `git filter-repo` can
+strip blobs but does not understand LFS pointer format and requires custom scripting. Use the built-in tool.
+
+**Important GitHub note:** After LFS removal, the LFS objects remain on GitHub's remote storage
+and still count toward the LFS storage quota. The only way to purge them from GitHub's servers is
+to delete and recreate the repository (or contact GitHub support). Plan for this.
+
+### Complete workflow
+
+**Prerequisites:** Ensure all LFS objects are downloaded locally before rewriting history.
+
+```bash
+# Step 0: Create a full backup (non-negotiable before history rewrite)
+git clone --mirror git@github.com:org/pnwmoths.git pnwmoths-backup.git
+cd pnwmoths-backup.git && git lfs fetch --all
+cd ..
+
+# Step 1: In the working repo — fetch all LFS objects
+git lfs fetch --all
+
+# Step 2: Export — converts all LFS pointers to real file blobs in history
+# --everything rewrites all local and remote refs
+# --include="*" matches all LFS-tracked files
+git lfs migrate export --everything --include="*"
+
+# Step 3: Remove LFS hooks and filters from the local repo
+git lfs uninstall --local
+
+# Step 4: Remove .gitattributes LFS tracking rules
+# Edit .gitattributes and delete all lines containing "filter=lfs"
+# Then:
+git add .gitattributes
+git commit -m "remove Git LFS tracking"
+
+# Step 5: Clean local git objects
+git reflog expire --expire=now --all
+git gc --aggressive --prune=now
+
+# Step 6: Force-push all branches (coordinate with collaborators first)
+git push --force-with-lease --all
+git push --force-with-lease --tags
+```
+
+**Current repo state (observed):**
+- `.gitattributes` tracks: `images/**/*.jpg`, `images/**/*.jpeg`, `images/**/*.png`, `plates/**/*.jpg`
+- `git lfs ls-files` reports 16,191 LFS objects — all will be inlined into git history
+- 16,191 files × average ~200KB/image ≈ several GB of history after conversion
+
+**Post-LFS repo size consideration:** After `git lfs migrate export`, all image blobs become
+regular git objects in history. This will make the repository very large. Options:
+
+1. **Preferred:** After migrating, do a `git filter-repo --path images/ --invert-paths` pass to
+   strip `images/` from history entirely (since images are moving to bunny.net anyway), then add a
+   fresh commit that adds only the non-image files. This keeps the repo small.
+2. **Simpler but large:** Just remove the `images/` passthrough copy from the build and don't
+   commit the directory. History remains large but manageable.
+
+If option 1 (strip from history), install `git-filter-repo`:
+
+```bash
+pip install git-filter-repo
+# or: brew install git-filter-repo
+
+# Remove images/ from all history
+git filter-repo --path images/ --invert-paths
+```
+
+Run `git filter-repo` AFTER `git lfs migrate export` (so there are real blobs to strip,
+not just pointer files), then garbage-collect again.
+
+**Confidence for migrate export command:** HIGH — confirmed from official git-lfs man page
+(`git-lfs-migrate.adoc` in git-lfs repo). Note that `--everything` rewrites only local refs;
+remote refs need force-push separately.
+
+**Confidence for GitHub LFS object purge limitation:** HIGH — confirmed from GitHub Docs
+(docs.github.com/en/repositories/working-with-files/managing-large-files/removing-files-from-git-large-file-storage).
+
+---
+
+## Capability 4: Eleventy env var handling for CDN_BASE_URL
+
+### Pattern: Global data file reads process.env
+
+Eleventy 3.x does not have built-in `.env` file loading. The established pattern for this project
+(already used for `GITHUB_PAGES`) is to read `process.env` directly in `eleventy.config.js`.
+
+**Two places CDN_BASE_URL must be threaded:**
+
+1. **Nunjucks templates** — `img src` attributes in `species.njk`, `glossary/index.njk`,
+   `base.njk` (header image). These need `CDN_BASE_URL` at template render time.
+2. **Client-side JS components** — `parquet-cache.js` already uses `import.meta.env.BASE_URL`
+   for Vite's base prefix; image URLs in Lit components need a CDN prefix.
+
+### Implementation A: Global data file (for templates)
+
+Create `src/_data/env.js`:
 
 ```js
-// parquet-cache.js addition
-let browseStateCache = null;
-
-export async function loadBrowseStateData() {
-  if (browseStateCache) return browseStateCache;
-  const url = `${import.meta.env.BASE_URL}species/browse/species-by-state.parquet`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`fetch failed ${res.status}`);
-  const arrayBuffer = await res.arrayBuffer();
-  const file = {
-    byteLength: arrayBuffer.byteLength,
-    slice: (start, end) => arrayBuffer.slice(start, end),
+// src/_data/env.js
+export default function () {
+  return {
+    cdnBaseUrl: process.env.CDN_BASE_URL || '',
   };
-  browseStateCache = await parquetReadObjects({ file });
-  return browseStateCache;
 }
 ```
 
-This follows the exact same fetch-whole-file pattern as the existing `loadParquet(slug)` function
-(same CDN range-request issue applies). The cache is module-level (not per-key) since there is only
-one browse state file.
+Then in Nunjucks templates, replace hardcoded `/images/` paths:
 
-**Filtering logic in `pnwm-taxonomy-browser`:** On state filter change, build a `Set` of species
-slugs that have records in the selected state by filtering the in-memory `browseStateCache` array.
-Pass this set into the tree render to hide taxa with no matching species. All filtering is pure JS
-over the loaded array — no re-fetch, no streaming, no row-group filtering needed at this data size.
+```nunjucks
+{# Before #}
+<img src="/images/{{ sp.slug }}/{{ img.filename }}">
 
-**hyparquet `filter` option:** The library supports a `filter` option in `parquetRead` for
-pushing predicates down to row-group level. At the expected data size (~66 rows for 11 species × 6
-states; ~4,200 rows at full 700-species scale) this is not worth the complexity. Load the full file
-once; filter in JS.
+{# After #}
+<img src="{{ env.cdnBaseUrl }}/images/{{ sp.slug }}/{{ img.filename }}">
+```
 
-**Confidence:** HIGH — `parquetReadObjects` API confirmed from source; fetch-whole-file pattern
-confirmed working in production.
+The `env.cdnBaseUrl` will be `''` locally (falling back to relative paths, which requires images
+to still be served locally) or `https://pnwmoths.b-cdn.net` in production.
 
----
+**Preferred local dev approach:** Set `CDN_BASE_URL` in a `.env` file and load it in
+`eleventy.config.js` with dotenv. This avoids needing local image copies.
 
-### Feature 4 — `navigational` flag in `images.csv` + `subfamily` column in `species.csv`
+```bash
+npm install dotenv
+```
 
-**No new packages.** Changes are to data files and validation in `build-data.js`.
-
-#### `images.csv` — add `navigational` column
-
-New column: `navigational` (optional boolean, stored as empty string `""` or `"true"`).
-
-Pre-flight validation change in `build-data.js`:
+In `eleventy.config.js` (add at top):
 
 ```js
-// Update validateCsv call for images.csv
-validateCsv('data/images.csv', [
-  'species_slug', 'filename', 'photographer', 'weight',
-  'license', 'view', 'specimen', 'navigational'
-]);
+import 'dotenv/config';
+```
 
-// Add value validation after the filename loop
-for (const row of imageRows) {
-  if (row.navigational !== '' && row.navigational !== 'true' && row.navigational !== 'false') {
-    throw new Error(
-      `Invalid navigational value "${row.navigational}" in images.csv row for ${row.filename} — must be "" or "true".`
-    );
+Then `.env` (gitignored):
+
+```
+CDN_BASE_URL=https://pnwmoths.b-cdn.net
+```
+
+And `.env.example` (committed):
+
+```
+CDN_BASE_URL=https://pnwmoths.b-cdn.net
+```
+
+### Implementation B: Vite define (for client-side components)
+
+To expose `CDN_BASE_URL` to Lit components during Vite bundling, add a `define` to `viteOptions`
+in `eleventy.config.js`:
+
+```js
+eleventyConfig.addPlugin(EleventyVitePlugin, {
+  viteOptions: {
+    // ...existing options...
+    define: {
+      __CDN_BASE_URL__: JSON.stringify(process.env.CDN_BASE_URL || ''),
+    },
   }
-}
+});
 ```
 
-DuckDB schema update in `build-data.js` and `src/_data/images.js`:
+Then in any Lit component or `parquet-cache.js`:
 
 ```js
-columns = {
-  // ... existing columns ...
-  'navigational': 'BOOLEAN'
-}
+// Vite replaces __CDN_BASE_URL__ at bundle time
+const cdnBase = __CDN_BASE_URL__;
+const imgSrc = `${cdnBase}/images/${slug}/${filename}`;
 ```
 
-DuckDB's `read_csv` will coerce `""` → `NULL` and `"true"` → `TRUE` with `BOOLEAN` type, which is
-the desired semantic (absent = not flagged; `"true"` = flagged as navigation candidate).
+### GitHub Actions secret
 
-**Browse fallback logic:** In the Eleventy `_data/images.js` data file, compute per-species
-navigation candidates: `WHERE navigational = TRUE ORDER BY weight LIMIT 4`. Fall back to `ORDER BY
-weight LIMIT 4` when no navigational images exist. This computation happens at build time in the
-DuckDB query, not in the client.
+In the CI workflow (`.github/workflows/deploy.yml`), add:
 
-#### `species.csv` — add `subfamily` column
-
-New column: `subfamily` (optional string, may be empty for genera without one).
-
-Pre-flight validation change in `build-data.js`:
-
-```js
-validateCsv('data/species.csv', [
-  'id', 'genus', 'species', 'common_name', 'noc_id',
-  'authority', 'family', 'subfamily', 'similar_species'
-]);
+```yaml
+env:
+  CDN_BASE_URL: ${{ secrets.CDN_BASE_URL }}
+  GITHUB_PAGES: "true"
 ```
 
-DuckDB schema update — add `'subfamily': 'VARCHAR'` to all `read_csv` calls that import species
-(in `build-data.js` and `src/_data/families.js`).
+And add `CDN_BASE_URL` as a repository secret in GitHub Settings → Secrets and variables →
+Actions. Value: `https://pnwmoths.b-cdn.net` (no trailing slash).
 
-**`families.js` query update:** The existing query must be updated to include `subfamily` in the
-`SELECT DISTINCT` and `GROUP BY` so the accordion component gets the full taxonomy hierarchy:
+### Template migration scope
 
-```sql
-SELECT DISTINCT family, subfamily, genus,
-  lower(replace(genus, ' ', '-')) AS genus_slug
-FROM species
-ORDER BY family, COALESCE(subfamily, ''), genus
-```
+Current hardcoded `/images/` paths that need updating:
 
-`COALESCE(subfamily, '')` in `ORDER BY` puts genera with no subfamily at the top of their family
-group, which is the desired behavior per PROJECT.md ("genera without one fall directly under
-family").
+| File | Path pattern | Note |
+|------|-------------|------|
+| `src/_includes/base.njk:17` | `/images/header.png` | Site banner — static asset, stays in repo |
+| `src/species/species.njk:48` | `/images/{{ sp.slug }}/{{ img.filename }}` | Species photos → CDN |
+| `src/glossary/index.njk:41` | `('/images/glossary/' + term.image_filename) \| url` | Glossary images → CDN |
 
-**Validation:** No additional enumeration check needed for subfamily values — they are free-form
-taxonomy strings. The `validateCsv` column-presence check is sufficient.
+Note: `base.njk` banner image (`/images/header.png`) is a UI asset kept in `src/images/`, not a
+species photo. It stays in the repo and should NOT use `CDN_BASE_URL`. Only species photos and
+glossary images move to bunny.net.
 
-**Confidence:** HIGH — DuckDB BOOLEAN coercion behavior confirmed from existing project patterns;
-COALESCE sort confirmed as standard SQL.
-
----
-
-## Integration Notes
-
-### `copy-parquet.js` — no change needed
-
-The existing `cp(src, dest, { recursive: true })` from `data/parquet/` → `_site/species/` will
-automatically copy `data/parquet/browse/species-by-state.parquet` to
-`_site/species/browse/species-by-state.parquet` without modification.
-
-### `src/_data/families.js` — update required
-
-Must add `subfamily` to the DuckDB schema and SELECT. Also add a new query to return per-taxon
-navigation images (or move that logic to a new `_data/browse.js` file if the query complexity
-warrants it). The accordion component needs:
-
-```
-{ family, subfamily, genus, genus_slug, navImages: [{ src, alt }] }
-```
-
-Recommended: add a second query in `families.js` that joins species to images and returns the top-4
-navigational images per genus. Pass `{ genera, genusArray, navImages }` from the data file.
-Alternatively, consolidate into a new `src/_data/browse.js` that owns all v1.3 browse data —
-cleaner separation of concerns than overloading `families.js`.
-
-### Build order — no change needed
-
-`build:data` (DuckDB export) runs before `build:eleventy` (Eleventy reads `_data/*.js` files which
-also query DuckDB). The new Parquet file is produced by `build:data` and copied by
-`build:copy-parquet` after the Eleventy step. Order remains correct.
-
-### `build-data.test.js` — new tests required
-
-Add tests for:
-- `validateCsv` accepting the new `navigational` column in `images.csv`
-- `validateCsv` accepting the new `subfamily` column in `species.csv`
-- Invalid `navigational` value triggers the new validation error
-- The species-by-state Parquet export (integration test: run `main()`, check file exists and has
-  expected row count)
+**Confidence:** HIGH — `process.env` pattern confirmed from official Eleventy 3.x docs;
+`dotenv` package requirement confirmed (no built-in .env loading in Eleventy 3);
+Vite `define` option confirmed from Vite docs. Template paths confirmed by direct file inspection.
 
 ---
 
@@ -259,41 +371,68 @@ Add tests for:
 
 | Temptation | Why Not |
 |------------|---------|
-| A tree-structure library (e.g. `@blueprintjs/core`, `rc-tree`) | Lit already renders any DOM structure; a React/Angular component library brings incompatible rendering models and large bundles |
-| `parquet-wasm` or Apache Arrow JS | `hyparquet` already handles Parquet reads; a second Parquet library adds bundle weight and complexity with no benefit |
-| `dexie` or IndexedDB caching | The species-by-state file is tiny even at full scale; module-level cache in `parquet-cache.js` is sufficient |
-| DuckDB-WASM for client-side filtering | ~5MB WASM bundle for a 4,200-row filter is extreme overkill; plain JS array filter is the right tool |
-| `@web/test-runner` or Vitest | The project uses Node's built-in `node --test` runner; adding a second test framework creates tooling confusion |
-| `lit/decorators` (TypeScript decorators) | The codebase uses the `static properties = {}` class field syntax (not TypeScript decorators); stay consistent |
+| rclone S3 backend for bunny.net | Closed preview, not GA — unavailable without bunny.net invitation |
+| Any unofficial bunny CLI | All are archived or unmaintained; rclone FTP is the stable path |
+| `sharp` or `jimp` for build-time image processing | Entire point of this milestone is to remove build-time processing and use CDN Optimizer |
+| `@11ty/eleventy-img` plugin | Adds build-time image processing; contradicts CDN-native strategy |
+| Storing images in both git and CDN | Pick one; after migration, images live exclusively on bunny.net |
+| `cross-env` package | Only needed for Windows cross-platform env var setting; this project targets macOS/Linux CI |
 
 ---
 
-## Version Compatibility
+## Integration Notes
 
-| Package | Installed | Status | Notes |
-|---------|-----------|--------|-------|
-| `lit` | 3.3.2 | Current | No changes needed |
-| `hyparquet` | 1.25.6 | Current | No changes needed |
-| `@duckdb/node-api` | 1.5.1-r.2 | 1.5.2-r.1 available | Upgrade optional; not blocking |
-| `vite` | 7.3.2 (actual) | 8.0.9 available | `package.json` specifies `^8.0.8` but 7.3.2 is installed; resolve before this milestone |
+### copy-images.js retirement
 
-Note: `npm outdated` shows `vite` current as 7.3.2 vs wanted 8.0.9. The `^8.0.8` spec in
-`package.json` suggests a Vite 8 upgrade was intended. Run `npm install` to resolve before
-starting v1.3 work to avoid surprises during Vite bundling.
+`scripts/copy-images.js` currently copies `images/` from the repo root to `_site/images/`. After
+CDN migration, species images no longer live in the repo. The script should be updated to:
+
+1. Remove the `images/` → `_site/images/` copy (line 17–20 in current script)
+2. Keep the `src/images/` → `_site/images/` copy (banner image remains in repo)
+3. Keep styles copy and Pico CSS copy (unrelated to images)
+
+The `build:copy-images` npm script and `writeBundle` hook remain; they just do less.
+
+### GitHub Actions LFS checkout
+
+`.github/workflows/deploy.yml` likely has `lfs: true` on the `actions/checkout` step. Remove it
+after LFS is purged. This eliminates the Git LFS bandwidth cost from CI.
+
+### Build pipeline image resize scripts
+
+`scripts/build-data.js` does not currently resize images (confirmed by inspection). Image resizing
+appears to be done elsewhere (or was done to produce the LFS-stored downscaled copies). Verify
+what produces the current LFS images before removing anything.
+
+---
+
+## Version Summary
+
+| Tool | Version | Source |
+|------|---------|--------|
+| rclone | 1.68.x (current stable) | brew install rclone or rclone.org |
+| dotenv | ^16.x (latest) | npm install dotenv |
+| git-lfs (built-in migrate) | installed with git-lfs | git lfs migrate export |
+| git-filter-repo | latest (optional) | pip install git-filter-repo |
+
+No new npm packages are strictly required. `dotenv` is the only likely addition, and only if
+`.env` file loading is desired locally (vs. always setting env vars in shell or CI).
 
 ---
 
 ## Sources
 
-- Lit 3.3.2 installed package — directives confirmed via `ls node_modules/lit/directives/`
-- hyparquet 1.25.6 `src/read.js`, `src/filter.js` — API confirmed via direct source read
-- `@duckdb/node-api` 1.5.1-r.2 — COPY/parquet/snappy pattern confirmed from existing `build-data.js`
-- `scripts/build-data.js`, `scripts/copy-parquet.js` — build pipeline integration points confirmed
-- `src/components/parquet-cache.js` — fetch-whole-file pattern and module-level cache confirmed
-- `data/images.csv`, `data/species.csv`, `data/records.csv` — column schemas confirmed
-- `src/_data/families.js` — DuckDB query pattern and return shape confirmed
-- `npm outdated` output — version currency verified 2026-04-18
+- bunny.net Storage API docs (PUT endpoint, regional hostnames): docs.bunny.net/reference/put_-storagezonename-path-filename
+- bunny.net Storage quickstart (FTP config, S3 status): docs.bunny.net/storage/quickstart
+- bunny.net Dynamic Images API: docs.bunny.net/optimizer/dynamic-images/overview
+- bunny.net Optimizer pricing ($9.50/Pull Zone/month): bunny.net/pricing/optimizer/
+- bunny.net S3 compatibility blog ("Q2 preview", closed access): bunny.net/blog/whats-happening-with-s3-compatibility/
+- rclone FTP `--inplace` flag and bunny.net FTP: forum.rclone.org/t/rclone-problem-with-bunny-cdn/44383
+- git-lfs migrate export man page (--everything, --include): github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-migrate.adoc
+- GitHub Docs on LFS removal limitations: docs.github.com/en/repositories/working-with-files/managing-large-files/removing-files-from-git-large-file-storage
+- Eleventy 3.x environment variables: 11ty.dev/docs/environment-vars/
+- Codebase inspection: eleventy.config.js, src/species/species.njk, src/glossary/index.njk, src/_includes/base.njk, .gitattributes, scripts/copy-images.js
 
 ---
-*Stack research for: pnwmoths v1.3 Visual Browse milestone*
-*Researched: 2026-04-18*
+*Stack research for: pnwmoths v1.4 Image CDN milestone*
+*Researched: 2026-04-21*
