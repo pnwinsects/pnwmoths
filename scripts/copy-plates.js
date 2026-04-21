@@ -8,7 +8,7 @@
  * Override source with PLATES_Z_SOURCE env var.
  */
 
-import { cp, mkdir, copyFile } from 'node:fs/promises';
+import { cp, mkdir, copyFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
@@ -17,7 +17,7 @@ const DEFAULT_SOURCE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/lo
 const DEFAULT_CACHE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates/cache';
 const PLATES_Z_SOURCE = process.env.PLATES_Z_SOURCE ?? DEFAULT_SOURCE;
 const PLATES_CACHE = process.env.PLATES_CACHE ?? DEFAULT_CACHE;
-const DEST = resolve('_site/plates');
+const DEST = resolve('plates');
 
 function parseDirName(dirName) {
   let name = dirName.replace(/^2021\s+/i, '');
@@ -89,8 +89,19 @@ if (existsSync(PLATES_CACHE)) {
   console.warn(`[copy-plates] Cache not found: ${PLATES_CACHE} — thumbnails will use level-0 tile`);
 }
 
+async function readDimensions(dirPath) {
+  const xml = await readFile(join(dirPath, 'ImageProperties.xml'), 'utf8');
+  const wMatch = xml.match(/WIDTH="(\d+)"/);
+  const hMatch = xml.match(/HEIGHT="(\d+)"/);
+  return {
+    width: wMatch ? parseInt(wMatch[1], 10) : 2400,
+    height: hMatch ? parseInt(hMatch[1], 10) : 3000,
+  };
+}
+
 let copied = 0;
 let thumbsCopied = 0;
+const manifest = [];
 for (const [slug, { dirName, number }] of toProcess) {
   const src = join(PLATES_Z_SOURCE, dirName);
   const dest = join(DEST, slug);
@@ -102,7 +113,15 @@ for (const [slug, { dirName, number }] of toProcess) {
     await copyFile(join(PLATES_CACHE, thumb.fname), join(dest, 'thumbnail.jpg'));
     thumbsCopied++;
   }
+
+  const parsed = parseDirName(dirName);
+  const { width, height } = await readDimensions(src);
+  manifest.push({ number, family: parsed.family, slug, width, height });
 }
+
+manifest.sort((a, b) => parseInt(a.number, 10) - parseInt(b.number, 10));
+await writeFile(join(DEST, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
 console.log(`Copied ${copied} plate tile sets: ${PLATES_Z_SOURCE} -> ${DEST}`);
 console.log(`Copied ${thumbsCopied} thumbnails: ${PLATES_CACHE} -> ${DEST}/**/thumbnail.jpg`);
+console.log(`Wrote manifest: ${DEST}/manifest.json`);

@@ -146,8 +146,22 @@ async function readDimensions(dirPath) {
   };
 }
 
+const MANIFEST_PATH = new URL('../../plates/manifest.json', import.meta.url).pathname;
+
 export default async function () {
   if (!existsSync(PLATES_Z_SOURCE)) {
+    if (existsSync(MANIFEST_PATH)) {
+      const raw = JSON.parse(await readFile(MANIFEST_PATH, 'utf8'));
+      return raw.map(({ number, family, slug, width, height }) => ({
+        number,
+        family,
+        title: `Plate ${number}: ${family.replace(/\s*\([^)]*\)\s*$/, '').trim()}`,
+        description: DESCRIPTIONS[number] ?? null,
+        slug,
+        width,
+        height,
+      }));
+    }
     console.warn(`[plates] Source not found: ${PLATES_Z_SOURCE} — skipping plate data`);
     return [];
   }
