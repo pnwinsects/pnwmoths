@@ -5,6 +5,22 @@ permalink: /glossary/index.html
 ---
 <h1>Glossary</h1>
 
+<style>
+figure {
+  float: right;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+dt {
+  clear: both;
+  font-weight: bold;
+}
+section {
+  clear: both;
+  margin-top: 1rem;
+}
+</style>
+
 <nav aria-label="Alphabetic index">
   <ul>
     {% for letter, terms in glossary %}
@@ -20,7 +36,6 @@ permalink: /glossary/index.html
       {% for term in terms %}
         <dt id="term-{{ term.slug }}">{{ term.term }}</dt>
         <dd>
-          {{ term.definition }}
           {% if term.image_filename %}
             <figure>
               <img src="{{ ('/images/glossary/' + term.image_filename) | url }}"
@@ -31,6 +46,7 @@ permalink: /glossary/index.html
               {% endif %}
             </figure>
           {% endif %}
+          {{ term.definition }}
         </dd>
       {% endfor %}
     </dl>
