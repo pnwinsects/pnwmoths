@@ -251,54 +251,42 @@ async function main() {
     }
 
     let uploaded = 0;
-    let failed = 0;
     const total = Array.from(slugToImages.values()).reduce((n, imgs) => n + imgs.length, 0) + glossaryImages.length;
 
     console.log(`[migrate-images] Uploading ${total} files via bunny.net HTTP API...`);
 
     for (const [slug, imgs] of slugToImages) {
       for (const img of imgs) {
-        const remotePath = `${slug}/${img.filename}`;
-        const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${remotePath}`;
-        try {
-          execFileSync('curl', [
-            '-s', '-S', '-f',
-            '-X', 'PUT',
-            '-H', `AccessKey: ${BUNNY_API_KEY}`,
-            '-H', 'Content-Type: application/octet-stream',
-            '--data-binary', `@${join(MOTHS_SOURCE, img.filename)}`,
-            url,
-          ], { stdio: ['pipe', 'pipe', 'inherit'] });
-          uploaded++;
-          if (uploaded % 100 === 0) console.log(`[migrate-images] ${uploaded}/${total} uploaded`);
-        } catch {
-          console.error(`[migrate-images] FAILED: ${remotePath}`);
-          failed++;
-        }
-      }
-    }
-
-    for (const img of glossaryImages) {
-      const remotePath = `glossary/${img.filename}`;
-      const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${remotePath}`;
-      try {
+        const encodedFilename = encodeURIComponent(img.filename);
+        const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${slug}/${encodedFilename}`;
         execFileSync('curl', [
           '-s', '-S', '-f',
           '-X', 'PUT',
           '-H', `AccessKey: ${BUNNY_API_KEY}`,
           '-H', 'Content-Type: application/octet-stream',
-          '--data-binary', `@${join(GLOSSARY_SOURCE, img.filename)}`,
+          '--data-binary', `@${join(MOTHS_SOURCE, img.filename)}`,
           url,
         ], { stdio: ['pipe', 'pipe', 'inherit'] });
         uploaded++;
-      } catch {
-        console.error(`[migrate-images] FAILED: ${remotePath}`);
-        failed++;
+        if (uploaded % 100 === 0) console.log(`[migrate-images] ${uploaded}/${total} uploaded`);
       }
     }
 
-    console.log(`[migrate-images] Done: ${uploaded} uploaded, ${failed} failed`);
-    if (failed > 0) process.exit(1);
+    for (const img of glossaryImages) {
+      const encodedFilename = encodeURIComponent(img.filename);
+      const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/glossary/${encodedFilename}`;
+      execFileSync('curl', [
+        '-s', '-S', '-f',
+        '-X', 'PUT',
+        '-H', `AccessKey: ${BUNNY_API_KEY}`,
+        '-H', 'Content-Type: application/octet-stream',
+        '--data-binary', `@${join(GLOSSARY_SOURCE, img.filename)}`,
+        url,
+      ], { stdio: ['pipe', 'pipe', 'inherit'] });
+      uploaded++;
+    }
+
+    console.log(`[migrate-images] Done: ${uploaded} uploaded`);
   } else {
     console.log('[migrate-images] DRY_RUN=1 — curl commands that would run:');
     for (const [slug, imgs] of slugToImages) {
