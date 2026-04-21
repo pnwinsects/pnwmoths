@@ -9,6 +9,10 @@ import { execFile } from "node:child_process";
 // server serves at root, so we use "/" which makes | url a no-op.
 const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
 
+// bunny.net Pull Zone — public CDN base URL. Not a secret; hard-coded here.
+// To update: log in to bunny.net dashboard, find the Pull Zone hostname, paste here.
+const CDN_BASE_URL = "https://pnwmoths.b-cdn.net";
+
 export default function (eleventyConfig) {
   // Render plugin: enables {% renderFile %} shortcode for rendering .md files in templates
   eleventyConfig.addPlugin(EleventyRenderPlugin);
