@@ -31,10 +31,18 @@ body > header,
 body > footer {
   max-width: 100%;
   width: 100%;
-  background-color: #000000;
-  color: #ffffff;
   padding: 0;
   margin: 0;
+}
+
+nav {
+  overflow: auto;
+}
+
+.site-nav {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 24px
 }
 
 /* Footer inner padding */
@@ -68,6 +76,11 @@ body {
 
 /* --- Banner image centering --- */
 
+.banner {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 body > header img {
   display: block;
   max-width: 1140px;
@@ -77,13 +90,6 @@ body > header img {
 
 /* --- Navigation bar --- */
 
-nav {
-  max-width: 1140px;
-  margin: 0 auto;
-  background-color: #000000;
-  padding: 0 24px;
-}
-
 nav ul {
   max-width: 1140px;
   list-style: none;
@@ -92,7 +98,6 @@ nav ul {
 }
 
 nav a {
-  color: #ffffff;
   text-decoration: none;
 }
 
