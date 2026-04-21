@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
-status: Planning
+status: Ready to execute
 stopped_at: ~
 last_updated: "2026-04-21T00:00:00Z"
 last_activity: 2026-04-21
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
+  total_plans: 4
   completed_plans: 0
   percent: 0
 ---
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Roadmap defined; ready to plan Phase 13
+**Current focus:** Phase 13 planned (4 plans); ready to execute
 
 ## Current Position
 
-Phase: Not started (roadmap complete)
+Phase: 13 — CDN Provisioning
 Plan: —
-Status: Ready to plan Phase 13
-Last activity: 2026-04-21 — v1.4 roadmap created (Phases 13–16)
+Status: Ready to execute Phase 13
+Last activity: 2026-04-21 — Phase 13 planned (4 plans, 3 waves)
 
 Progress: [__________] 0%
 
