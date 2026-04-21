@@ -1,0 +1,25 @@
+---
+layout: base.njk
+pagination:
+  data: plates
+  size: 1
+  alias: plate
+permalink: "plates/{{ plate.slug }}/index.html"
+eleventyComputed:
+  title: "{{ plate.title }} — PNW Moths"
+---
+<h1>{{ plate.title }}</h1>
+
+<pnwm-plate-viewer
+  tiles-url="{{ ('/plates/' + plate.slug + '/') | url }}"
+  prefix-url="{{ '/osd-images/' | url }}"
+  width="{{ plate.width }}"
+  height="{{ plate.height }}"
+  data-pagefind-ignore>
+</pnwm-plate-viewer>
+
+<noscript>
+  <p>Enable JavaScript to view the zoomable plate. <a href="{{ ('/plates/' + plate.slug + '/') | url }}ImageProperties.xml">Image metadata</a>.</p>
+</noscript>
+
+<p><a href="{{ '/plates/' | url }}">&larr; All plates</a></p>
