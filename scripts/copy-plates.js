@@ -12,6 +12,7 @@ import { cp, mkdir, copyFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const DEFAULT_SOURCE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates_z';
 const DEFAULT_CACHE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates/cache';
@@ -26,9 +27,13 @@ if (!existsSync(PLATES_Z_SOURCE)) {
     console.warn('[copy-plates] No tile source found — skipping');
     process.exit(0);
   }
-  await mkdir(SITE_DEST, { recursive: true });
-  await cp(REPO_PLATES, SITE_DEST, { recursive: true });
-  console.log(`Copied plate tiles: ${REPO_PLATES} -> ${SITE_DEST}`);
+  if (existsSync(SITE_DEST)) {
+    console.log('[copy-plates] _site/plates already exists — skipping (delete to force recopy)');
+    process.exit(0);
+  }
+  // Use hardlinks (cp -rl) — same filesystem, no data transfer needed
+  execFileSync('cp', ['-rl', REPO_PLATES, SITE_DEST]);
+  console.log(`Linked plate tiles: ${REPO_PLATES} -> ${SITE_DEST}`);
   process.exit(0);
 }
 
