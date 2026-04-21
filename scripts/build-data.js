@@ -73,15 +73,15 @@ export async function main() {
   validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily']);
   const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']);
   for (const row of imageRows) {
-    if (!/^[a-zA-Z0-9._-]+$/.test(row.filename)) {
-      throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, dots, hyphens, and underscores allowed.`);
+    if (!/^[a-zA-Z0-9 ._-]+$/.test(row.filename)) {
+      throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, spaces, dots, hyphens, and underscores allowed.`);
     }
   }
   const glossaryRows = validateCsv('data/glossary.csv', ['term', 'definition', 'image_filename', 'photographer']);
   for (const row of glossaryRows) {
-    if (row.image_filename && !/^[a-zA-Z0-9._-]+$/.test(row.image_filename)) {
+    if (row.image_filename && !/^[a-zA-Z0-9 ._-]+$/.test(row.image_filename)) {
       throw new Error(
-        `Invalid image_filename "${row.image_filename}" in glossary.csv — only alphanumeric, dots, hyphens, and underscores allowed.`
+        `Invalid image_filename "${row.image_filename}" in glossary.csv — only alphanumeric, spaces, dots, hyphens, and underscores allowed.`
       );
     }
   }
