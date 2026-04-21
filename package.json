@@ -15,6 +15,7 @@
     "build": "npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:validate-links && npm run build:check-weight",
     "build:copy-images": "node scripts/copy-images.js",
     "build:copy-plates": "node scripts/copy-plates.js",
+    "migrate:images": "node scripts/migrate-images.js",
     "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js src/components/*.test.js"
   },
   "keywords": [],
@@ -26,6 +27,7 @@
     "@picocss/pico": "^2.1.1",
     "chart.js": "^4.5.1",
     "csv-parse": "^6.2.1",
+    "csv-stringify": "^6.7.0",
     "hyparquet": "^1.25.6",
     "leaflet": "^1.9.4",
     "lit": "^3.3.2",
