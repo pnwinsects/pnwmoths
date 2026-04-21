@@ -32,8 +32,15 @@ Phase 13 does NOT modify any Eleventy templates or Nunjucks files (that is Phase
 
 ### Image Classes
 
-- **D-10:** Glossary portrait Image Class: 188 × 225 px, north crop (`?width=188&height=225&crop_gravity=north`). Name: `glossary-portrait`.
-- **D-11:** Nav thumbnail Image Class: height 186 px, width auto-proportioned (`?height=186`). 186 = 2× the CSS display height of 93 px. Name: `nav-thumb`. *Claude's discretion on exact dimensions — researcher should validate against the accordion component's responsive layout.*
+- **D-10:** Glossary portrait Image Class: 188 × 225 px, north crop (`?width=188&height=225&crop_gravity=north`). Name: **`glossaryportrait`** (bunny.net does not allow dashes in Image Class names; `glossary-portrait` was rejected).
+- **D-11:** Nav thumbnail Image Class: height 186 px, width auto-proportioned (`?height=186`). 186 = 2× the CSS display height of 93 px. Name: **`navthumb`** (bunny.net does not allow dashes; `nav-thumb` was rejected).
+
+### rclone FTP notes (discovered during Plan 03 execution)
+
+- **D-14:** FTP hostname for the pnwmoths Storage Zone is `la.storage.bunnycdn.com` (LA region), not `ny`.
+- **D-15:** `rclone obscure` output must NOT be pasted at the `rclone config` password prompt — doing so double-obscures the password and breaks auth. Either type the plain password directly at the `rclone config` prompt, or edit `~/.config/rclone/rclone.conf` and set `pass = $(rclone obscure PLAIN_PASSWORD)`.
+- **D-16:** `RCLONE_REMOTE` must be `bunny:` (just the remote name with colon), not `bunny:pnwmoths`. The FTP user `pnwmoths` maps to the root of the pnwmoths Storage Zone, so sub-paths begin directly after the colon: `bunny:slug/`, `bunny:glossary/`.
+- **D-17:** Uploading a whole directory via `rclone copy DIR remote:dest/` causes concurrent partial-file renames that bunny.net FTP rejects with `450 Requested file action not taken`. Fix: upload one file at a time (one `rclone copy FILE remote:dest/` call per file), which serializes the temp-file renames.
 
 ### _instructions/ documentation
 
