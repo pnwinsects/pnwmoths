@@ -35,7 +35,9 @@ const GLOSSARY_SOURCE = process.env.GLOSSARY_SOURCE ?? DEFAULT_GLOSSARY_SOURCE;
 const SPECIESIMAGE_CSV = process.env.SPECIESIMAGE_CSV ?? DEFAULT_SPECIESIMAGE_CSV;
 const PHOTOGRAPHER_CSV = process.env.PHOTOGRAPHER_CSV ?? DEFAULT_PHOTOGRAPHER_CSV;
 const LICENSE = 'CC BY-NC-SA 4.0'; // all content on source site is CC BY-NC-SA 4.0
-const RCLONE_REMOTE = process.env.RCLONE_REMOTE ?? 'bunny:pnwmoths';
+// The rclone remote 'bunny' is configured with user=pnwmoths, so FTP root IS the
+// pnwmoths storage zone. Paths are bunny:slug/ not bunny:pnwmoths/slug/.
+const RCLONE_REMOTE = process.env.RCLONE_REMOTE ?? 'bunny:';
 const DRY_RUN = process.env.DRY_RUN === '1';
 
 const SKIP_SUBDIRS = new Set(['thumbnail', 'medium', 'cache']);
@@ -251,7 +253,7 @@ async function main() {
       for (const img of imgs) {
         execFileSync(
           'rclone',
-          ['copy', '--ignore-times', join(MOTHS_SOURCE, img.filename), `${RCLONE_REMOTE}/${slug}/`],
+          ['copy', '--ignore-times', join(MOTHS_SOURCE, img.filename), `${RCLONE_REMOTE}${slug}/`],
           { stdio: 'inherit' }
         );
       }
@@ -259,21 +261,26 @@ async function main() {
 
     if (glossaryImages.length > 0) {
       console.log('[migrate-images] Uploading glossary images via rclone...');
-      execFileSync(
-        'rclone',
-        ['copy', '--ignore-times', GLOSSARY_SOURCE, `${RCLONE_REMOTE}/glossary/`],
-        { stdio: 'inherit' }
-      );
+      // Upload one file at a time to avoid concurrent FTP rename contention (bunny.net 450 errors)
+      for (const img of glossaryImages) {
+        execFileSync(
+          'rclone',
+          ['copy', '--ignore-times', join(GLOSSARY_SOURCE, img.filename), `${RCLONE_REMOTE}glossary/`],
+          { stdio: 'inherit' }
+        );
+      }
     }
   } else {
     console.log('[migrate-images] DRY_RUN=1 — rclone commands that would run:');
     for (const [slug, imgs] of slugToImages) {
       for (const img of imgs) {
-        console.log(`  rclone copy --ignore-times "${join(MOTHS_SOURCE, img.filename)}" "${RCLONE_REMOTE}/${slug}/"`);
+        console.log(`  rclone copy --ignore-times "${join(MOTHS_SOURCE, img.filename)}" "${RCLONE_REMOTE}${slug}/"`);
       }
     }
     if (glossaryImages.length > 0) {
-      console.log(`  rclone copy --ignore-times "${GLOSSARY_SOURCE}" "${RCLONE_REMOTE}/glossary/"`);
+      for (const img of glossaryImages) {
+        console.log(`  rclone copy --ignore-times "${join(GLOSSARY_SOURCE, img.filename)}" "${RCLONE_REMOTE}glossary/"`);
+      }
     }
   }
 
