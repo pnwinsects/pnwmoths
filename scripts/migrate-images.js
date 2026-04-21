@@ -2,15 +2,16 @@
  * scripts/migrate-images.js
  *
  * One-time migration tool: reads Django species photos from moths/ and glossary images
- * from glossary-images/, derives CDN path slugs, uploads via rclone copy --ignore-times,
+ * from glossary-images/, derives CDN path slugs, uploads via bunny.net HTTP Storage API,
  * and writes data/images.csv with original Django filenames + photographer/license data.
  *
  * Usage:
- *   node scripts/migrate-images.js           # full run (requires rclone configured)
- *   DRY_RUN=1 node scripts/migrate-images.js # dry-run: logs rclone commands, writes images.csv
+ *   DRY_RUN=1 node scripts/migrate-images.js                    # dry-run: no upload, writes images.csv
+ *   BUNNY_API_KEY=xxx node scripts/migrate-images.js            # full run
  *
- * Override source paths via environment:
- *   MOTHS_SOURCE, GLOSSARY_SOURCE, SPECIESIMAGE_CSV, PHOTOGRAPHER_CSV, RCLONE_REMOTE
+ * Override source paths or storage config via environment:
+ *   MOTHS_SOURCE, GLOSSARY_SOURCE, SPECIESIMAGE_CSV, PHOTOGRAPHER_CSV
+ *   BUNNY_API_KEY (required for upload), BUNNY_STORAGE_HOST, BUNNY_ZONE
  */
 
 import { readdir, readFile, writeFile } from 'node:fs/promises';
@@ -35,9 +36,11 @@ const GLOSSARY_SOURCE = process.env.GLOSSARY_SOURCE ?? DEFAULT_GLOSSARY_SOURCE;
 const SPECIESIMAGE_CSV = process.env.SPECIESIMAGE_CSV ?? DEFAULT_SPECIESIMAGE_CSV;
 const PHOTOGRAPHER_CSV = process.env.PHOTOGRAPHER_CSV ?? DEFAULT_PHOTOGRAPHER_CSV;
 const LICENSE = 'CC BY-NC-SA 4.0'; // all content on source site is CC BY-NC-SA 4.0
-// The rclone remote 'bunny' is configured with user=pnwmoths, so FTP root IS the
-// pnwmoths storage zone. Paths are bunny:slug/ not bunny:pnwmoths/slug/.
-const RCLONE_REMOTE = process.env.RCLONE_REMOTE ?? 'bunny:';
+// bunny.net HTTP Storage API — more reliable than FTP (rclone FTP uses temp-file rename
+// which bunny.net FTP does not support). BUNNY_API_KEY is the Storage Zone password.
+const BUNNY_STORAGE_HOST = process.env.BUNNY_STORAGE_HOST ?? 'la.storage.bunnycdn.com';
+const BUNNY_ZONE = process.env.BUNNY_ZONE ?? 'pnwmoths';
+const BUNNY_API_KEY = process.env.BUNNY_API_KEY ?? '';
 const DRY_RUN = process.env.DRY_RUN === '1';
 
 const SKIP_SUBDIRS = new Set(['thumbnail', 'medium', 'cache']);
@@ -246,40 +249,75 @@ async function main() {
     console.warn(`[migrate-images] Glossary source not found (${GLOSSARY_SOURCE}) — skipping glossary images`);
   }
 
-  // --- Step 5: Upload via rclone ---
+  // --- Step 5: Upload via bunny.net HTTP Storage API ---
+  // rclone FTP cannot be used: bunny.net FTP does not support RNFR/RNTO rename,
+  // which rclone requires for its temp-file upload pattern (no config flag disables this).
+  // The HTTP Storage API is a plain PUT — no rename, no partial files.
   if (!DRY_RUN) {
-    console.log('[migrate-images] Uploading species images via rclone...');
+    if (!BUNNY_API_KEY) {
+      console.error('[migrate-images] BUNNY_API_KEY is required for uploads. Set it to your Storage Zone password.');
+      process.exit(1);
+    }
+
+    let uploaded = 0;
+    let failed = 0;
+    const total = Array.from(slugToImages.values()).reduce((n, imgs) => n + imgs.length, 0) + glossaryImages.length;
+
+    console.log(`[migrate-images] Uploading ${total} files via bunny.net HTTP API...`);
+
     for (const [slug, imgs] of slugToImages) {
       for (const img of imgs) {
-        execFileSync(
-          'rclone',
-          ['copy', '--ignore-times', join(MOTHS_SOURCE, img.filename), `${RCLONE_REMOTE}${slug}/`],
-          { stdio: 'inherit' }
-        );
+        const remotePath = `${slug}/${img.filename}`;
+        const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${remotePath}`;
+        try {
+          execFileSync('curl', [
+            '-s', '-S', '-f',
+            '-X', 'PUT',
+            '-H', `AccessKey: ${BUNNY_API_KEY}`,
+            '-H', 'Content-Type: application/octet-stream',
+            '--data-binary', `@${join(MOTHS_SOURCE, img.filename)}`,
+            url,
+          ], { stdio: ['pipe', 'pipe', 'inherit'] });
+          uploaded++;
+          if (uploaded % 100 === 0) console.log(`[migrate-images] ${uploaded}/${total} uploaded`);
+        } catch {
+          console.error(`[migrate-images] FAILED: ${remotePath}`);
+          failed++;
+        }
       }
     }
 
-    if (glossaryImages.length > 0) {
-      console.log('[migrate-images] Uploading glossary images via rclone...');
-      // Upload one file at a time to avoid concurrent FTP rename contention (bunny.net 450 errors)
-      for (const img of glossaryImages) {
-        execFileSync(
-          'rclone',
-          ['copy', '--ignore-times', join(GLOSSARY_SOURCE, img.filename), `${RCLONE_REMOTE}glossary/`],
-          { stdio: 'inherit' }
-        );
+    for (const img of glossaryImages) {
+      const remotePath = `glossary/${img.filename}`;
+      const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${remotePath}`;
+      try {
+        execFileSync('curl', [
+          '-s', '-S', '-f',
+          '-X', 'PUT',
+          '-H', `AccessKey: ${BUNNY_API_KEY}`,
+          '-H', 'Content-Type: application/octet-stream',
+          '--data-binary', `@${join(GLOSSARY_SOURCE, img.filename)}`,
+          url,
+        ], { stdio: ['pipe', 'pipe', 'inherit'] });
+        uploaded++;
+      } catch {
+        console.error(`[migrate-images] FAILED: ${remotePath}`);
+        failed++;
       }
     }
+
+    console.log(`[migrate-images] Done: ${uploaded} uploaded, ${failed} failed`);
+    if (failed > 0) process.exit(1);
   } else {
-    console.log('[migrate-images] DRY_RUN=1 — rclone commands that would run:');
+    console.log('[migrate-images] DRY_RUN=1 — curl commands that would run:');
     for (const [slug, imgs] of slugToImages) {
       for (const img of imgs) {
-        console.log(`  rclone copy --ignore-times "${join(MOTHS_SOURCE, img.filename)}" "${RCLONE_REMOTE}${slug}/"`);
+        console.log(`  curl -X PUT -H "AccessKey: ***" https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${slug}/${img.filename}`);
       }
     }
     if (glossaryImages.length > 0) {
       for (const img of glossaryImages) {
-        console.log(`  rclone copy --ignore-times "${join(GLOSSARY_SOURCE, img.filename)}" "${RCLONE_REMOTE}glossary/"`);
+        console.log(`  curl -X PUT -H "AccessKey: ***" https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/glossary/${img.filename}`);
       }
     }
   }
