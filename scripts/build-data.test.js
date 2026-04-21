@@ -464,3 +464,51 @@ test('taxon.js: navImages capped at 4 per taxon level', async () => {
     }
   }
 });
+
+// --- CDN-03: filename validation regex accepts spaces (Phase 13 plan 01) ---
+
+test('build-data.js: images.csv filename regex accepts Django original filenames with spaces', () => {
+  // The widened regex must accept filenames like "Acronicta americana-A-D.jpg"
+  const re = /^[a-zA-Z0-9 ._-]+$/;
+  assert.ok(re.test('Acronicta americana-A-D.jpg'), 'space in filename should be accepted');
+  assert.ok(re.test('Hyles lineata-B-V.jpg'), 'space in genus-species separator should be accepted');
+  assert.ok(re.test('01.jpg'), 'simple numeric filename still accepted');
+  assert.ok(!re.test('foo/bar.jpg'), 'path traversal slash rejected');
+  assert.ok(!re.test('foo\x00.jpg'), 'null byte rejected');
+  assert.ok(!re.test('foo!bar.jpg'), 'exclamation mark rejected');
+});
+
+test('integration: build-data.js accepts images.csv filename with spaces without throwing', () => {
+  const tmpDir = resolve(ROOT, '.tmp-space-filename');
+  const tmpDataDir = resolve(tmpDir, 'data');
+  mkdirSync(tmpDataDir, { recursive: true });
+
+  copyFileSync(resolve(ROOT, 'data/species.csv'), resolve(tmpDataDir, 'species.csv'));
+  copyFileSync(resolve(ROOT, 'data/glossary.csv'), resolve(tmpDataDir, 'glossary.csv'));
+  copyFileSync(resolve(ROOT, 'data/records.csv'), resolve(tmpDataDir, 'records.csv'));
+
+  // Write an images.csv with a filename containing a space (Django-style original filename)
+  writeFileSync(resolve(tmpDataDir, 'images.csv'), [
+    'species_slug,filename,photographer,weight,license,view,specimen,navigational',
+    'acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,1,CC BY 4.0,dorsal,A,'
+  ].join('\n'));
+
+  const scriptPath = resolve(ROOT, 'scripts/build-data.js');
+  const wrapperScript = resolve(tmpDir, 'run-space.mjs');
+  writeFileSync(wrapperScript, [
+    `import { main } from '${scriptPath}';`,
+    `process.chdir('${tmpDir}');`,
+    `main().catch(err => { console.error(err.message); process.exit(1); });`
+  ].join('\n'));
+
+  try {
+    execSync(`node ${wrapperScript}`, {
+      cwd: tmpDir,
+      timeout: 30000,
+      stdio: 'pipe'
+    });
+    // If we reach here without throwing, the filename with space was accepted
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
