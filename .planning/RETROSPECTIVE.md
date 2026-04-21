@@ -141,6 +141,54 @@
 
 ---
 
+## Milestone: v1.3 — Visual Browse
+
+**Shipped:** 2026-04-20
+**Phases:** 5 (Phases 8–12) | **Plans:** 10 | **Commits:** 79
+
+### What Was Built
+
+- `subfamily` and `navigational` CSV columns with DuckDB null-coercion and build validation
+- `taxon.js` Eleventy data file: family→subfamily→genus→species tree with up to 4 nav images per level
+- `emit-species-states.js` build script: 29 DISTINCT species-state pairs to `_site/species-states.json`
+- `/browse/` rewritten as single Eleventy page with embedded taxonomy JSON and `<noscript>` static listing; per-genus pages retired
+- `<pnwm-taxon-browser>` Lit accordion: 4-level expand/collapse, navigation image strips, show/hide toggle, state filter
+- Full build verified: 58/58 tests, 0 link errors, all 12 requirements confirmed
+
+### What Worked
+
+- **Light DOM decision made early** — knowing to use `createRenderRoot() { return this; }` before writing a line of component code prevented the shadow DOM / Pico CSS mismatch from becoming a refactor
+- **TDD for pure functions first** — building `buildStateMap`, `taxonHasState`, `collectSlugs` as testable pure functions (Phase 11, Plan 01) before the component made the accordion implementation straightforward
+- **Phase 12 as explicit validation phase** — dedicating a phase to running the full verification checklist gave clear milestone close criteria; nothing was left ambiguous
+- **Embedded JSON pattern** — `<script type="application/json" id="taxon-data">` instead of a data attribute avoided HTML entity encoding issues cleanly
+- **nullstr = '' discovery early** — researching the DuckDB null-handling requirement before executing saved a debugging cycle
+
+### What Was Inefficient
+
+- **Multiple `| url` / path-prefix bugs during UAT** — the Vite double-prefix issue for image and fetch URLs, and `| safe` requirement on `tojson`, were caught during UAT not during planning. A build-and-load smoke test earlier in Phase 11 execution would have surfaced these sooner.
+- **species-states.json not emitting in serve mode** — required a post-UAT fix commit; serve-mode hook wasn't planned. The build verification plan should have tested `eleventy --serve` parity, not just `npm run build`.
+
+### Patterns Established
+
+- `<script type="application/json" id="taxon-data" data-pagefind-ignore>` as the pattern for embedding large build-time JSON in Eleventy pages
+- Raw `/images/...` paths in templates for assets that Vite will process; `| url` only for static assets that bypass Vite
+- `nullstr = ''` required on every DuckDB `read_csv` call that reads nullable text columns from CSVs
+- Lit web components use light DOM when Pico CSS element selectors must apply; document this constraint at creation time
+
+### Key Lessons
+
+1. **Path-prefix bugs are predictable for any Vite + Eleventy project.** Add a load test with a non-root `pathPrefix` to the smoke test checklist before UAT starts.
+2. **Serve-mode parity must be tested explicitly.** `npm run build` passing is necessary but not sufficient; `eleventy --serve` has different hook sequencing that can silently drop build outputs.
+3. **TDD for pure logic before component is the right order.** The RED/GREEN test scaffold phase paid for itself in Plan 02 confidence.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet (execution); planning and research phases used Opus
+- Sessions: 1 day (2026-04-20)
+- Notable: 5-phase milestone completed in a single day; clean UAT with only minor inline fixes
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -150,6 +198,7 @@
 | v1.0 | 109 | 5 | Initial GSD workflow established |
 | v1.1 | 103 | 1 | Quick task pattern for post-milestone debt; single-phase visual milestone |
 | v1.2 | 8 | 1 | Focused tech-debt close; regression tests added; audit-open closure discipline established |
+| v1.3 | 79 | 5 | First interactive feature milestone; TDD-first Lit component; light DOM constraint established |
 
 ### Cumulative Quality
 
@@ -158,6 +207,7 @@
 | v1.0 | 2 | Build pipeline unit/integration tests only | 0/5 phases |
 | v1.1 | 2 | No new tests added | 0/1 phases |
 | v1.2 | 3 | +WR-01 regression (glossary validation) +WR-04 regression (crash guard); 37 total | 1/1 phases |
+| v1.3 | 4 | +accordion pure-function unit tests (buildStateMap, taxonHasState, collectSlugs); 58 total | 0/5 phases (VALIDATION.md left as draft) |
 
 ### Top Lessons (Verified Across Milestones)
 

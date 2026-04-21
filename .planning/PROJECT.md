@@ -46,19 +46,19 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Pagefind CSS `<link>` in `<head>` (no FOUC on search page) — v1.2
 - ✓ DuckDB connection closed in glossary.js (no resource leak) — v1.2
 - ✓ ENOENT guard in check-page-weight.js (handles missing files without crash) — v1.2
+- ✓ `subfamily` column in `species.csv`; genera without subfamily fall directly under family — v1.3
+- ✓ `navigational` flag in `images.csv`; browse falls back to lowest-weight species photos when none flagged — v1.3
+- ✓ Build pipeline emits species-×-state JSON (`_site/species-states.json`); `taxon.js` Eleventy data file with family→subfamily→genus→species tree and navImages — v1.3
+- ✓ `/browse/` replaced by single dynamic accordion page (Family → Subfamily → Genus → Species) — v1.3
+- ✓ Up to 4 navigation images per taxon level; images on by default with show/hide toggle — v1.3
+- ✓ Client-side state filter on browse page — v1.3
+- ✓ Per-genus static pages (`/browse/{genus}/`) retired — v1.3
 
 ### Active
 
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Site deployed to real hosting (GitHub Pages or equivalent) with real species/records data
 - [ ] Real occurrence records and species data loaded (currently ~10 species, ~130 stub records)
-- ✓ `subfamily` column in `species.csv`; genera without subfamily fall directly under family — v1.3 Phase 8
-- ✓ `navigational` flag in `images.csv`; browse falls back to lowest-weight species photos when none flagged — v1.3 Phase 8
-- ✓ Build pipeline emits species-×-state JSON (`_site/species-states.json`); `taxon.js` Eleventy data file with family→subfamily→genus→species tree and navImages — v1.3 Phase 9
-- ✓ `/browse/` replaced by single dynamic accordion page (Family → Subfamily → Genus → Species) — v1.3 Phase 10–11
-- ✓ Up to 4 navigation images per taxon level; images on by default with show/hide toggle — v1.3 Phase 11
-- ✓ Client-side state filter on browse page — v1.3 Phase 11
-- ✓ Per-genus static pages (`/browse/{genus}/`) retired — v1.3 Phase 10
 
 ### Out of Scope
 
@@ -80,6 +80,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
+**Current state:** v1.3 complete; no active phases; future work in backlog (999.1, 999.2) and Future Requirements
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -119,6 +120,11 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | Pico CSS design token overrides via theme.css | No Pico source modification; clean separation; one file controls all brand tokens | ✓ Good — applied to all ~700 pages via single base.njk link |
 | Post-Vite asset copy in scripts/copy-images.js | eleventy-plugin-vite wipes _site/ during build; passthrough copies don't survive Vite's output directory rename | ✓ Good — extends existing copy-images.js pattern cleanly |
 | species_slug as foreign key in images.csv and records.csv | Slug is stable, human-readable, and matches URL structure; id is an implementation detail | ✓ Good — slug-keyed CSVs are easier for non-technical contributors to edit |
+| JSON over Parquet for species-states.json | At 700 species × ~6 states (~4,200 pairs, ~20–30 KB), hyparquet overhead not justified | ✓ Good — simple fetch + parse, no extra dependency |
+| Light DOM for Lit accordion (`createRenderRoot() { return this; }`) | Pico CSS element selectors don't penetrate shadow DOM; must decide at creation, not retrofit | ✓ Good — Pico styles apply correctly; CSS custom properties unavailable in Canvas 2D (pre-existing constraint) |
+| DuckDB `nullstr = ''` on read_csv for species.csv | Blank `subfamily` must arrive as null, not empty string, to avoid silent grouping failures | ✓ Good — null-coercion works correctly; required on both read_csv calls |
+| Taxonomy JSON as `<script type="application/json" id="taxon-data">` sibling | `data-taxonomy` attribute causes HTML entity encoding of JSON; separate script tag avoids this | ✓ Good — `| safe` on tojson output also required in template |
+| Raw `/images/...` paths in templates (not `| url` filter) | Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix | ✓ Good — let Vite add base prefix; don't pre-process with `| url` |
 
 ## Evolution
 
@@ -138,4 +144,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-20 after Phase 12 completion — v1.3 milestone closed*
+*Last updated: 2026-04-20 after v1.3 milestone archive*
