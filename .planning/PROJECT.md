@@ -1,17 +1,17 @@
 # PNW Moths Static Site
 
-## Current Milestone: v1.3 Visual Browse — SHIPPED 2026-04-20
+## Current Milestone: v1.4 Image CDN
 
-**Goal:** Replace the static browse pages with an interactive accordion browse page (Family → Subfamily → Genus → Species) with navigation images and client-side state filtering.
+**Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing, removing build-time resize scripts and LFS.
 
 **Target features:**
-- `subfamily` column added to `species.csv` (nullable; genera without one fall directly under family)
-- `navigational` flag on `images.csv` rows marks images as browse candidates; fallback to lowest-weight species photos when none flagged
-- `/browse/` replaced by a single dynamic page: up to 4 nav images per taxon level, images on by default with show/hide toggle
-- Accordion [+]/[-] expand/collapse inline (Lit component); expanding hides parent images and reveals child taxon images
-- Build pipeline emits a species-×-state Parquet file from records.csv
-- Client-side state filter on `/browse/` (hides taxa with no occurrences in selected states)
-- Per-genus static pages (`/browse/{genus}/`) retired — genus drill-down handled inline
+- Upload original images (from pnwinsects-app Django media dir) to bunny.net Storage bucket; discard downsized LFS copies
+- Remove Git LFS from repo; LFS-tracked image files gone from history
+- `CDN_BASE_URL` env var required in all environments; templates always use CDN URLs
+- bunny.net Image Optimizer handles thumbnail sizes previously baked in at build time
+- CLI upload workflow (rclone or bunny CLI) + updated `_instructions/` for contributors
+- Build pipeline: remove image resize scripts; CI/CD drops LFS checkout
+- HTML continues to be served from GitHub Pages
 
 ## What This Is
 
@@ -56,9 +56,14 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 ### Active
 
+- [ ] Images uploaded to bunny.net Storage bucket from original source (pnwinsects-app Django media dir)
+- [ ] Git LFS removed from repo; LFS-tracked image files purged
+- [ ] `CDN_BASE_URL` env var wired into Eleventy build; all image URLs resolve via CDN
+- [ ] bunny.net Image Optimizer configured for on-the-fly resizing; build-time resize scripts removed
+- [ ] CLI upload workflow documented in `_instructions/` for contributors
+- [ ] GitHub Actions CI/CD updated to drop LFS checkout; `CDN_BASE_URL` secret configured
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
-- [ ] Site deployed to real hosting (GitHub Pages or equivalent) with real species/records data
-- [ ] Real occurrence records and species data loaded (currently ~10 species, ~130 stub records)
+- [ ] Site deployed to real hosting (GitHub Pages) with real species/records data
 
 ### Out of Scope
 
@@ -144,4 +149,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-20 after v1.3 milestone archive*
+*Last updated: 2026-04-21 after v1.4 milestone start*
