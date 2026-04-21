@@ -22,9 +22,6 @@ export default function (eleventyConfig) {
   // data/parquet/acronicta-americana/records.parquet -> _site/species/acronicta-americana/records.parquet
   eleventyConfig.addPassthroughCopy({ "data/parquet": "species" });
 
-  // Photographic plate Zoomify tiles (LFS-tracked): plates/{slug}/ -> _site/plates/{slug}/
-  eleventyConfig.addPassthroughCopy({ "plates": "plates" });
-
   // Pico CSS from node_modules
   eleventyConfig.addPassthroughCopy({
     "node_modules/@picocss/pico/css/pico.min.css": "css/pico.min.css"
@@ -48,6 +45,7 @@ export default function (eleventyConfig) {
         name: "pnwm-copy-images",
         writeBundle: async () => {
           await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+          await new Promise((res, rej) => execFile("node", ["scripts/copy-plates.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
           await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
         }
       }]
@@ -60,6 +58,7 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode !== "serve") return;
     await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    await new Promise((res, rej) => execFile("node", ["scripts/copy-plates.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
   });
 

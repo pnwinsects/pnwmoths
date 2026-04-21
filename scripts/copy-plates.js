@@ -1,11 +1,11 @@
 /**
- * Copy Zoomify tile directories from the legacy app into _site/plates/.
+ * Copy Zoomify tile directories into _site/plates/ for serving.
  *
- * Source: plates_z/{dirName}/  (ImageProperties.xml + TileGroup0/)
- * Dest:   _site/plates/{slug}/ (same structure, URL-safe directory name)
+ * Two sources, tried in order:
+ *   1. PLATES_Z_SOURCE (legacy app dir, local dev) — also writes to plates/ and manifest.json
+ *   2. plates/ (LFS-committed repo dir, CI)
  *
- * Reads plate slugs from the same logic as src/_data/plates.js.
- * Override source with PLATES_Z_SOURCE env var.
+ * Override paths with PLATES_Z_SOURCE / PLATES_CACHE env vars.
  */
 
 import { cp, mkdir, copyFile, writeFile } from 'node:fs/promises';
@@ -17,7 +17,22 @@ const DEFAULT_SOURCE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/lo
 const DEFAULT_CACHE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates/cache';
 const PLATES_Z_SOURCE = process.env.PLATES_Z_SOURCE ?? DEFAULT_SOURCE;
 const PLATES_CACHE = process.env.PLATES_CACHE ?? DEFAULT_CACHE;
-const DEST = resolve('plates');
+const REPO_PLATES = resolve('plates');
+const SITE_DEST = resolve('_site/plates');
+
+// --- CI path: committed plates/ dir → _site/plates/ ---
+if (!existsSync(PLATES_Z_SOURCE)) {
+  if (!existsSync(REPO_PLATES)) {
+    console.warn('[copy-plates] No tile source found — skipping');
+    process.exit(0);
+  }
+  await mkdir(SITE_DEST, { recursive: true });
+  await cp(REPO_PLATES, SITE_DEST, { recursive: true });
+  console.log(`Copied plate tiles: ${REPO_PLATES} -> ${SITE_DEST}`);
+  process.exit(0);
+}
+
+// --- Local dev path: legacy source → plates/ (LFS) + _site/plates/ ---
 
 function parseDirName(dirName) {
   let name = dirName.replace(/^2021\s+/i, '');
@@ -37,12 +52,8 @@ function toSlug(number, family) {
   return `plate-${number}-${familySlug}`;
 }
 
-if (!existsSync(PLATES_Z_SOURCE)) {
-  console.warn(`[copy-plates] Source not found: ${PLATES_Z_SOURCE} — skipping`);
-  process.exit(0);
-}
-
-await mkdir(DEST, { recursive: true });
+await mkdir(REPO_PLATES, { recursive: true });
+await mkdir(SITE_DEST, { recursive: true });
 
 const entries = await readdir(PLATES_Z_SOURCE, { withFileTypes: true });
 const dirs = entries.filter(e => e.isDirectory());
@@ -69,7 +80,6 @@ if (existsSync(PLATES_CACHE)) {
   const cacheFiles = await readdir(PLATES_CACHE);
   for (const fname of cacheFiles) {
     if (!fname.endsWith('.240x300_q95.jpg')) continue;
-    // Strip the double extension to get a base name, then extract plate number.
     const base = fname.replace(/\.240x300_q95\.jpg$/, '').replace(/\.jpg$/, '');
     const normalized = base.replace(/_/g, ' ').replace(/^2021\s+/i, '');
     const m = normalized.match(/^PLATE\s+(\d+)\b/i);
@@ -79,7 +89,6 @@ if (existsSync(PLATES_CACHE)) {
     const has2021 = /^2021/i.test(fname);
     const hasVersionSuffix = /_\d+$/.test(base);
     const existing = thumbnailMap.get(num);
-    // Score: prefer 2021+noNEW+noVersion (highest) down to anything (lowest)
     const score = (has2021 ? 4 : 0) + (!isNew ? 2 : 0) + (!hasVersionSuffix ? 1 : 0);
     if (!existing || score > existing.score) {
       thumbnailMap.set(num, { fname, score });
@@ -104,13 +113,17 @@ let thumbsCopied = 0;
 const manifest = [];
 for (const [slug, { dirName, number }] of toProcess) {
   const src = join(PLATES_Z_SOURCE, dirName);
-  const dest = join(DEST, slug);
-  await cp(src, dest, { recursive: true });
+  // Write to both repo dir (LFS) and build output
+  const repoDest = join(REPO_PLATES, slug);
+  const siteDest = join(SITE_DEST, slug);
+  await cp(src, repoDest, { recursive: true });
+  await cp(src, siteDest, { recursive: true });
   copied++;
 
   const thumb = thumbnailMap.get(number);
   if (thumb) {
-    await copyFile(join(PLATES_CACHE, thumb.fname), join(dest, 'thumbnail.jpg'));
+    await copyFile(join(PLATES_CACHE, thumb.fname), join(repoDest, 'thumbnail.jpg'));
+    await copyFile(join(PLATES_CACHE, thumb.fname), join(siteDest, 'thumbnail.jpg'));
     thumbsCopied++;
   }
 
@@ -120,8 +133,8 @@ for (const [slug, { dirName, number }] of toProcess) {
 }
 
 manifest.sort((a, b) => parseInt(a.number, 10) - parseInt(b.number, 10));
-await writeFile(join(DEST, 'manifest.json'), JSON.stringify(manifest, null, 2));
+await writeFile(join(REPO_PLATES, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
-console.log(`Copied ${copied} plate tile sets: ${PLATES_Z_SOURCE} -> ${DEST}`);
-console.log(`Copied ${thumbsCopied} thumbnails: ${PLATES_CACHE} -> ${DEST}/**/thumbnail.jpg`);
-console.log(`Wrote manifest: ${DEST}/manifest.json`);
+console.log(`Copied ${copied} plate tile sets: ${PLATES_Z_SOURCE} -> ${REPO_PLATES} + ${SITE_DEST}`);
+console.log(`Copied ${thumbsCopied} thumbnails`);
+console.log(`Wrote manifest: ${REPO_PLATES}/manifest.json`);
