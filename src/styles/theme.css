@@ -48,6 +48,25 @@ body > footer a {
   color: #ffffff;
 }
 
+/* --- Page background --- */
+
+body {
+  background-color: #f3e8ba;
+}
+
+/* --- Site name --- */
+
+.pnwm-site-name {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  color: #ffffff;
+  font-family: 'Spinnaker', 'Open Sans', sans-serif;
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
 /* --- Banner image centering --- */
 
 body > header img {
