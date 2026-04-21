@@ -150,7 +150,7 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 13-01-PLAN.md — Add CDN_BASE_URL constant to eleventy.config.js; widen build-data.js filename regex
+- [x] 13-01-PLAN.md — Add CDN_BASE_URL constant to eleventy.config.js; widen build-data.js filename regex
 - [ ] 13-02-PLAN.md — Write migrate-images.js migration script; rebuild data/images.csv
 - [ ] 13-03-PLAN.md — bunny.net dashboard setup, Optimizer, Image Classes, image upload (human-assisted)
 - [ ] 13-04-PLAN.md — Write _instructions/UPLOADING_IMAGES.md; CDN delivery spot-check
@@ -206,7 +206,7 @@ Plans:
 | 10. Browse Shell Page | v1.3 | 1/1 | Complete | 2026-04-20 |
 | 11. Accordion Component | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 12. Validation | v1.3 | 1/1 | Complete | 2026-04-20 |
-| 13. CDN Provisioning | v1.4 | 0/4 | Not started | - |
+| 13. CDN Provisioning | v1.4 | 1/4 | In progress | - |
 | 14. Template Migration | v1.4 | 0/? | Not started | - |
 | 15. LFS Removal | v1.4 | 0/? | Not started | - |
 | 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
