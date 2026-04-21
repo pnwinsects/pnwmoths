@@ -107,7 +107,7 @@ export default async function () {
       genusMap[gen] = { name: row.genus, genus_slug: row.genus_slug, navImages: [], species: [] };
     }
 
-    genusMap[gen].species.push({ slug: row.slug, name: row.species, common_name: row.common_name });
+    genusMap[gen].species.push({ slug: row.slug, name: row.species, common_name: row.common_name, navImage: null });
   }
 
   // Convert maps to arrays, assign navImages at each level
@@ -116,6 +116,16 @@ export default async function () {
       const genera = Object.values(subfam.genusMap).map(genus => {
         const slugs = genus.species.map(s => s.slug);
         genus.navImages = pickNavImages(slugs, bySpeciesSlug);
+        genus.species = genus.species.map(sp => {
+          const imgs = (bySpeciesSlug[sp.slug] || []).slice();
+          imgs.sort((a, b) => {
+            const navA = a.navigational === 'true' ? 0 : 1;
+            const navB = b.navigational === 'true' ? 0 : 1;
+            if (navA !== navB) return navA - navB;
+            return (a.weight ?? 999) - (b.weight ?? 999);
+          });
+          return { ...sp, navImage: imgs[0] ?? null };
+        });
         return genus;
       });
 

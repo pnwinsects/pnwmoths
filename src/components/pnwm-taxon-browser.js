@@ -132,20 +132,50 @@ class PnwmTaxonBrowser extends LitElement {
   // D-02: fixed height 93px, width auto
   // D-03: object-fit:cover
   // Image path: /images/{img.species_slug}/{img.filename} (verified from species.njk)
+  // onImageClick: optional (speciesSlug) => void — wraps each image in a button
 
-  _renderImageStrip(navImages) {
+  _renderImageStrip(navImages, onImageClick = null) {
     if (!this._showImages || !navImages?.length) return html``;
     return html`
       <div style="display:inline-flex;flex-direction:row;gap:4px;overflow-x:auto">
-        ${navImages.map(img => html`
-          <img
+        ${navImages.map(img => {
+          const imgEl = html`<img
             src="${this._prefix}images/${img.species_slug}/${img.filename}"
             alt=""
             loading="lazy"
-            style="height:93px;width:auto;object-fit:cover;flex-shrink:0"
-          >
-        `)}
+            style="height:93px;width:auto;object-fit:cover;flex-shrink:0;display:block"
+          >`;
+          if (onImageClick) {
+            return html`<button
+              type="button"
+              style="padding:0;border:none;background:none;cursor:pointer;display:inline-flex"
+              @click=${() => onImageClick(img.species_slug)}
+            >${imgEl}</button>`;
+          }
+          return imgEl;
+        })}
       </div>`;
+  }
+
+  // --- Expand tree to a species' genus ---
+
+  _expandToSpecies(speciesSlug) {
+    for (const family of this._families) {
+      for (const subfam of family.subfamilies) {
+        for (const genus of subfam.genera) {
+          if (!genus.species.some(sp => sp.slug === speciesSlug)) continue;
+          this._expandedFamilies = new Set([...this._expandedFamilies, family.name]);
+          if (subfam.name) {
+            const subfamKey = `${family.name}__${subfam.name}`;
+            this._expandedSubfamilies = new Set([...this._expandedSubfamilies, subfamKey]);
+            this._expandedGenera = new Set([...this._expandedGenera, `${subfamKey}__${genus.genus_slug}`]);
+          } else {
+            this._expandedGenera = new Set([...this._expandedGenera, `${family.name}__${genus.genus_slug}`]);
+          }
+          return;
+        }
+      }
+    }
   }
 
   // --- Muting helper ---
@@ -162,15 +192,20 @@ class PnwmTaxonBrowser extends LitElement {
 
   _renderSpecies(species, genusName) {
     return html`
-      <ul>
+      <div class="pnwm-tb-species-grid">
         ${species.map(sp => html`
-          <li>
-            <a href="${this._prefix}species/${sp.slug}/">
+          <a class="pnwm-tb-species-card" href="${this._prefix}species/${sp.slug}/">
+            ${sp.navImage ? html`<img
+              src="${this._prefix}images/${sp.navImage.species_slug}/${sp.navImage.filename}"
+              alt="${genusName} ${sp.name}"
+              loading="lazy"
+            >` : ''}
+            <div class="pnwm-tb-species-label">
               <em>${genusName} ${sp.name}</em>${sp.common_name ? html` — ${sp.common_name}` : ''}
-            </a>
-          </li>
+            </div>
+          </a>
         `)}
-      </ul>`;
+      </div>`;
   }
 
   _renderGenus(genus, familyKey) {
@@ -212,7 +247,7 @@ class PnwmTaxonBrowser extends LitElement {
             @click=${() => this._toggleSubfamily(key)}
           >${subfam.name}</button>
         </h3>
-        ${!expanded ? this._renderImageStrip(subfam.navImages) : ''}
+        ${!expanded ? this._renderImageStrip(subfam.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
           ${subfam.genera.map(g => this._renderGenus(g, key))}
         </div>
@@ -231,7 +266,7 @@ class PnwmTaxonBrowser extends LitElement {
             @click=${() => this._toggleFamily(family.name)}
           >${family.name}</button>
         </h2>
-        ${!expanded ? this._renderImageStrip(family.navImages) : ''}
+        ${!expanded ? this._renderImageStrip(family.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
           ${family.subfamilies.map(s => this._renderSubfamily(s, family.name))}
         </div>
@@ -240,6 +275,24 @@ class PnwmTaxonBrowser extends LitElement {
 
   render() {
     return html`
+      <style>
+        .pnwm-tb-species-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        @media (min-width: 600px) {
+          .pnwm-tb-species-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .pnwm-tb-species-card { display: block; text-decoration: none; }
+        .pnwm-tb-species-card img {
+          width: 100%;
+          aspect-ratio: 376 / 249;
+          object-fit: cover;
+          display: block;
+        }
+        .pnwm-tb-species-label { padding: 0.25rem 0; }
+      </style>
       <div class="pnwm-tb-toolbar" style="display:flex;gap:1.5rem;align-items:baseline;padding:8px 16px;flex-wrap:wrap">
         <label>
           <input
