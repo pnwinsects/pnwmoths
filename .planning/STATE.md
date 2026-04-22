@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 15 Plan 01 complete — history rewrite done; Plan 02 (CI update) next
-last_updated: "2026-04-22T22:04:00Z"
+stopped_at: Phase 15 complete — both plans done; Phase 16 (Build Pipeline Cleanup) next
+last_updated: "2026-04-22T22:06:05Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 11
-  completed_plans: 8
-  percent: 45
+  completed_plans: 9
+  percent: 55
 ---
 
 # Project State
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 ## Current Position
 
-Phase: 15 — LFS Removal
-Plan: 01 complete — Plan 02 (CI workflow update) next
-Status: Plan 01 complete — history rewritten, force-pushed, working copy reset
-Last activity: 2026-04-22 — Phase 15 Plan 01 complete — LFS history purged (16,191 files → 0), force-pushed, npm test 72/72
+Phase: 15 — LFS Removal (complete)
+Plan: 02 complete — Phase 15 done; Phase 16 (Build Pipeline Cleanup) next
+Status: Phase 15 complete — LFS fully removed from history and CI; all success criteria verified
+Last activity: 2026-04-22 — Phase 15 Plan 02 complete — CI workflows updated to actions/checkout@v4.3.1; fresh clone verified clean; npm test 72/72
 
 Progress: [████______] 40%
 
@@ -99,5 +99,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 15 Plan 01 complete — LFS history rewritten, force-pushed, working copy reset; next: Phase 15 Plan 02 (CI workflow update)
-Resume file: .planning/phases/15-lfs-removal/15-02-PLAN.md
+Stopped at: Phase 15 complete — all LFS removed; next: Phase 16 (Build Pipeline Cleanup)
+Resume file: .planning/phases/16-build-pipeline-cleanup/ (to be planned)

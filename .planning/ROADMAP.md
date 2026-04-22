@@ -187,7 +187,7 @@ Plans:
 
 Plans:
 - [x] 15-01-PLAN.md — History rewrite: filter-repo, .gitattributes delete, .gitignore update, force-push, local cleanup
-- [ ] 15-02-PLAN.md — CI workflow update: replace LFS checkout with actions/checkout@v4.3.1, phase verification
+- [x] 15-02-PLAN.md — CI workflow update: replace LFS checkout with actions/checkout@v4.3.1, phase verification
 
 ### Phase 16: Build Pipeline Cleanup
 **Goal**: The build pipeline contains no image-copy or resize logic for species photos; CI builds cleanly using CDN URLs throughout
@@ -234,7 +234,7 @@ Plans:
 | 12. Validation | v1.3 | 1/1 | Complete | 2026-04-20 |
 | 13. CDN Provisioning | v1.4 | 5/5 | Complete | 2026-04-22 |
 | 14. Template Migration | v1.4 | 2/2 | Complete | 2026-04-22 |
-| 15. LFS Removal | v1.4 | 1/2 | In progress | - |
+| 15. LFS Removal | v1.4 | 2/2 | Complete | 2026-04-22 |
 | 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 
