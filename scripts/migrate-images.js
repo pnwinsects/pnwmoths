@@ -115,24 +115,19 @@ async function main() {
   let photographerById = new Map();
   if (existsSync(PHOTOGRAPHER_CSV)) {
     const photographerRaw = await readFile(PHOTOGRAPHER_CSV);
-    // Use relax_column_count to handle photographer names containing literal commas
-    // (e.g. "Canadian National Collection (Jocelyn Gill, photographer)").
-    // Extra fields beyond column 1 are rejoined with a comma.
+    // Parse without columns:true so csv-parse returns raw arrays — this preserves
+    // photographer names containing literal commas (e.g. "Canadian National Collection
+    // (Jocelyn Gill, photographer)"). Skip header row with from_line: 2.
+    // Row format: [id, name_part1, name_part2?, ...] — join all fields from index 1.
     const photographerRows = parse(photographerRaw, {
-      columns: true,
       skip_empty_lines: true,
       relax_column_count: true,
+      from_line: 2,
     });
     for (const row of photographerRows) {
-      // When relax_column_count is set, extra fields arrive as numeric string keys ("2", "3", ...).
-      // Rejoin them with the `photographer` field to reconstruct the full name.
-      let name = row.photographer ?? '';
-      let i = 2;
-      while (row[String(i)] !== undefined) {
-        name += ',' + row[String(i)];
-        i++;
-      }
-      photographerById.set(String(row.id), name.trim());
+      const id = row[0];
+      const name = row.slice(1).join(',').trim();
+      photographerById.set(String(id), name);
     }
     console.log(`[migrate-images] Loaded ${photographerById.size} photographers`);
   } else {
