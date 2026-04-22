@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 14 Plan 01 complete — urlencode filter + cdnBaseUrl global added; taxon browser image src sites rewritten to CDN URLs
-last_updated: "2026-04-22T20:41:34Z"
+stopped_at: Phase 14 Plan 02 complete — species.njk and glossary/index.njk rewritten to CDN URLs; glossary srcset 2x added; | url filter removed
+last_updated: "2026-04-22T20:46:30Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 9
-  completed_plans: 5
-  percent: 20
+  completed_plans: 6
+  percent: 24
 ---
 
 # Project State
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 ## Current Position
 
 Phase: 14 — Template Migration
-Plan: 14-01
-Status: Plan 14-01 complete — urlencode filter + cdnBaseUrl global wired; taxon browser CDN URLs live
-Last activity: 2026-04-22 — Plan 14-01 executed; 2 tasks, 2 files modified, build green
+Plan: 14-02
+Status: Plan 14-02 complete — species.njk and glossary/index.njk use CDN URLs; glossary has 2x srcset
+Last activity: 2026-04-22 — Plan 14-02 executed; 2 tasks, 2 files modified, build green
 
 Progress: [██________] 20%
 
@@ -99,5 +99,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 14 Plan 01 complete — urlencode filter + cdnBaseUrl global in eleventy.config.js; pnwm-taxon-browser.js image src rewritten to CDN URLs with encodeURIComponent + ?height=186
-Resume file: .planning/phases/14-template-migration/14-02-PLAN.md
+Stopped at: Phase 14 Plan 02 complete — species.njk and glossary/index.njk rewritten to CDN URLs; glossary srcset 2x added; | url filter removed
+Resume file: .planning/phases/14-template-migration/ (next plan TBD — Phase 15 LFS Removal)
