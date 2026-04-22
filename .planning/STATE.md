@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 15 context gathered — decisions locked for LFS removal
-last_updated: "2026-04-22T22:00:00Z"
+stopped_at: Phase 15 planned — 2 plans (wave 1: history rewrite, wave 2: CI update + verify)
+last_updated: "2026-04-22T22:15:00Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 9
+  total_plans: 11
   completed_plans: 7
   percent: 40
 ---
