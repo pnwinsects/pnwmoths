@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
-status: Ready to execute
-stopped_at: Phase 16 Plan 01 complete; Phase 17 already complete; v1.4 nearly done — push to main for CI deploy verification (Task 3 checkpoint)
+status: Executing
+stopped_at: Phase 16 complete — push to main to trigger CI deploy + verify CDN images in browser (final SC); Phase 17 also complete; v1.4 nearly done
 last_updated: "2026-04-22T22:54:02Z"
 last_activity: 2026-04-22
 progress:
