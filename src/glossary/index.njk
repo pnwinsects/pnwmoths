@@ -38,7 +38,8 @@ section {
         <dd>
           {% if term.image_filename %}
             <figure>
-              <img src="{{ ('/images/glossary/' + term.image_filename) | url }}"
+              <img src="{{ cdnBaseUrl }}/glossary/{{ term.image_filename | urlencode }}?width=188&height=225&crop_gravity=north"
+                   srcset="{{ cdnBaseUrl }}/glossary/{{ term.image_filename | urlencode }}?width=376&height=450&crop_gravity=north 2x"
                    alt="{{ term.term }}"
                    width="188" height="225">
               {% if term.photographer %}
