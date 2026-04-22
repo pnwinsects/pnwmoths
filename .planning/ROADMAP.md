@@ -203,9 +203,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 17-01-PLAN.md — Test scaffold: failing smoke tests for species.csv and records.csv output
-- [ ] 17-02-PLAN.md — Write migrate-species.js migration script; run migration
-- [ ] 17-03-PLAN.md — Fix test suite for full dataset; verify npm run build
+- [x] 17-01-PLAN.md — Test scaffold: failing smoke tests for species.csv and records.csv output
+- [x] 17-02-PLAN.md — Write migrate-species.js migration script; run migration
+- [x] 17-03-PLAN.md — Fix test suite for full dataset; verify npm run build
 
 ## Progress
 
@@ -227,7 +227,7 @@ Plans:
 | 14. Template Migration | v1.4 | 0/? | Not started | - |
 | 15. LFS Removal | v1.4 | 0/? | Not started | - |
 | 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
-| 17. Migrate Full Species Data from Legacy Database | v1.4 | 0/3 | Not started | - |
+| 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 started: 2026-04-21*

@@ -4,12 +4,12 @@ milestone: v1.4
 milestone_name: Image CDN
 status: Executing
 stopped_at: ~
-last_updated: "2026-04-21T00:00:00Z"
-last_activity: 2026-04-21
+last_updated: "2026-04-22T00:00:00Z"
+last_activity: 2026-04-22
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 0
-  total_plans: 4
+  total_plans: 7
   completed_plans: 0
   percent: 0
 ---
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Executing Phase 13 (4 plans, 3 waves)
+**Current focus:** Phase 17 complete — full species dataset migrated (1,348 species, 85,933 records)
 
 ## Current Position
 
-Phase: 13 — CDN Provisioning
-Plan: 13-01
-Status: Executing Phase 13 — Wave 1
-Last activity: 2026-04-21 — Phase 13 execution started
+Phase: 17 — Migrate Full Species Data from Legacy Database
+Plan: 17-03
+Status: Phase 17 complete — verified 2026-04-22
+Last activity: 2026-04-22 — Phase 17 execution complete, all 3 plans verified
 
 Progress: [__________] 0%
 
@@ -71,6 +71,10 @@ Recent decisions affecting current work:
 - v1.3 decision (carry): `rclone sync` deletes production bucket files — always use `rclone copy`; `sync` only with mandatory `--dry-run` first
 - v1.3 decision (carry): Raw `/images/...` paths in templates (not `| url` filter) — Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix
 
+### Roadmap Evolution
+
+- Phase 17 added: Migrate Full Species Data from Legacy Database
+
 ### Pending Todos
 
 None.
@@ -94,6 +98,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-04-21
-Stopped at: v1.4 roadmap created — Phases 13–16 defined
+Last session: 2026-04-22
+Stopped at: Phase 17 complete — data/species.csv (1,348 species), data/records.csv (85,933 records), npm test 72/72, npm run build exit 0 (1,360 species pages)
 Resume file: .planning/ROADMAP.md
