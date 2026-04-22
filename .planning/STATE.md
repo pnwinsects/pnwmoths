@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 14 UI-SPEC approved
+stopped_at: Phase 14 planned — 2 plans, ready to execute
 last_updated: "2026-04-22T00:00:00Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 7
+  total_plans: 9
   completed_plans: 5
   percent: 20
 ---
