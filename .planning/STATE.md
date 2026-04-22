@@ -18,7 +18,7 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
+See: .planning/PROJECT.md (updated 2026-04-22 after Phase 15)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 **Current focus:** Phase 15 complete — LFS fully removed from history and CI; ready for Phase 16 (Build Pipeline Cleanup)
@@ -67,6 +67,8 @@ Recent decisions affecting current work:
 - v1.4 research: `| url` filter must be stripped from glossary image path expressions before adopting CDN URLs (filter corrupts absolute URLs)
 - v1.4 research: `pnwm-taxon-browser.js` has multiple image src construction sites — grep for `this._prefix` + `"images/"` before writing replacement
 - v1.4 decision (Phase 15 discuss): LFS history rewrite uses `git filter-repo --invert-paths` ALONE — skip `git lfs migrate export` (would download ~16k images just to delete them; pointer files are 130-byte text, no download needed)
+- v1.4 decision (Phase 15 execution): Clone from LOCAL repo (not GitHub remote) when local commits are ahead — avoids losing unpushed work on force-push
+- v1.4 decision (Phase 15 execution): No `lfs: false` option in actions/checkout — default is already false; adding it is noise
 - v1.4 research: GitHub will not free LFS storage quota until repo is deleted and recreated — accept billing for now (Out of Scope)
 - v1.3 decision (carry): `rclone sync` deletes production bucket files — always use `rclone copy`; `sync` only with mandatory `--dry-run` first
 - v1.3 decision (carry): Raw `/images/...` paths in templates (not `| url` filter) — Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix
@@ -81,9 +83,9 @@ None.
 
 ### Blockers/Concerns
 
-- LFS-01: RESOLVED — force-push complete; fresh clone verified clean
-- PIPE-02: Confirm which scripts constitute "build-time image resize scripts" before planning (may include logic in `scripts/build-data.js` — unconfirmed by research)
+- PIPE-02: Confirm which scripts constitute "build-time image resize scripts" before planning Phase 16 (may include logic in `scripts/build-data.js` — unconfirmed by research)
 - lychee: CDN image 404s are invisible to CI (lychee excludes image extensions) — add CDN hostname exclusion to `lychee.toml` and manually spot-check image URLs post-deploy
+- lychee (code review WR-02/WR-03): lychee gates production deploy on transient link failures; pr-check.yml installs lychee but never runs it — consider /gsd-code-review-fix 15
 
 ## Deferred Items
 
@@ -99,5 +101,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 15 complete — all LFS removed; next: Phase 16 (Build Pipeline Cleanup)
-Resume file: .planning/phases/16-build-pipeline-cleanup/ (to be planned)
+Stopped at: Phase 15 complete — LFS purged (16,191 pointers, 356 commits), CI updated, all success criteria verified; ready for Phase 16
+Resume file: none
