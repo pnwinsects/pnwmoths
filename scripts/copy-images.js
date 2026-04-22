@@ -6,18 +6,13 @@
  * This script runs after the full build to restore them.
  *
  * Copies:
- *   images/{slug}/        -> _site/images/{slug}/   (species photos)
  *   src/images/           -> _site/images/          (banner image)
  *   src/styles/           -> _site/styles/          (theme CSS)
+ *   @picocss/pico         -> _site/css/             (Pico CSS)
+ *   openseadragon images  -> _site/osd-images/      (OSD nav buttons)
  */
 import { cp } from 'node:fs/promises';
 import { resolve } from 'node:path';
-
-// Species photos (managed via Git LFS, stored in repo root images/)
-const speciesSrc = resolve('images');
-const speciesDest = resolve('_site/images');
-await cp(speciesSrc, speciesDest, { recursive: true });
-console.log('Copied images: images/ -> _site/images/');
 
 // Banner image asset
 const bannerSrc = resolve('src/images');
