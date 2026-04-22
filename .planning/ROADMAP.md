@@ -168,7 +168,11 @@ Plans:
   4. The `<pnwm-taxon-browser>` element on `/browse/` receives a `cdn-base-url` attribute; image URLs constructed by the component in the browser resolve correctly via CDN
   5. Species photo and glossary portrait `<img>` tags include a `srcset` with a 2× width descriptor pointing to the CDN
 **UI hint**: yes
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Add urlencode filter + cdnBaseUrl global to eleventy.config.js; add CDN_BASE_URL constant + update image src sites in pnwm-taxon-browser.js
+- [ ] 14-02-PLAN.md — Update species.njk and glossary/index.njk to use CDN URLs with urlencode filter and srcset
 
 ### Phase 15: LFS Removal
 **Goal**: Git history contains no LFS pointers or `images/` blobs; CI no longer performs an LFS checkout
@@ -224,8 +228,8 @@ Plans:
 | 10. Browse Shell Page | v1.3 | 1/1 | Complete | 2026-04-20 |
 | 11. Accordion Component | v1.3 | 3/3 | Complete | 2026-04-20 |
 | 12. Validation | v1.3 | 1/1 | Complete | 2026-04-20 |
-| 13. CDN Provisioning | v1.4 | 1/4 | In progress | - |
-| 14. Template Migration | v1.4 | 0/? | Not started | - |
+| 13. CDN Provisioning | v1.4 | 5/5 | Complete | 2026-04-22 |
+| 14. Template Migration | v1.4 | 0/2 | Not started | - |
 | 15. LFS Removal | v1.4 | 0/? | Not started | - |
 | 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
