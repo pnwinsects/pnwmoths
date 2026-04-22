@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 15 planned — 2 plans (wave 1: history rewrite, wave 2: CI update + verify)
-last_updated: "2026-04-22T22:15:00Z"
+stopped_at: Phase 15 Plan 01 complete — history rewrite done; Plan 02 (CI update) next
+last_updated: "2026-04-22T22:04:00Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 11
-  completed_plans: 7
-  percent: 40
+  completed_plans: 8
+  percent: 45
 ---
 
 # Project State
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 ## Current Position
 
 Phase: 15 — LFS Removal
-Plan: (not started)
-Status: Phase 14 verified and complete; ready for Phase 15
-Last activity: 2026-04-22 — Phase 14 execution complete, all 2 plans done, 3 overrides accepted
+Plan: 01 complete — Plan 02 (CI workflow update) next
+Status: Plan 01 complete — history rewritten, force-pushed, working copy reset
+Last activity: 2026-04-22 — Phase 15 Plan 01 complete — LFS history purged (16,191 files → 0), force-pushed, npm test 72/72
 
 Progress: [████______] 40%
 
@@ -81,7 +81,7 @@ None.
 
 ### Blockers/Concerns
 
-- LFS-01: Destructive force-push — announce to all collaborators before executing; all must re-clone after
+- LFS-01: RESOLVED — force-push complete; fresh clone verified clean
 - PIPE-02: Confirm which scripts constitute "build-time image resize scripts" before planning (may include logic in `scripts/build-data.js` — unconfirmed by research)
 - lychee: CDN image 404s are invisible to CI (lychee excludes image extensions) — add CDN hostname exclusion to `lychee.toml` and manually spot-check image URLs post-deploy
 
@@ -99,5 +99,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 14 complete — CDN URLs in all templates; 3 overrides (O-14-01: hard-coded constant, O-14-02: module-level CDN in taxon browser, O-14-03: species srcset deferred to Phase 16)
-Resume file: .planning/ROADMAP.md — next: Phase 15 LFS Removal
+Stopped at: Phase 15 Plan 01 complete — LFS history rewritten, force-pushed, working copy reset; next: Phase 15 Plan 02 (CI workflow update)
+Resume file: .planning/phases/15-lfs-removal/15-02-PLAN.md
