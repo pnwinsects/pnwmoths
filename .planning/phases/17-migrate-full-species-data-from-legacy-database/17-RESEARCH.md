@@ -547,27 +547,31 @@ const row = {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Species without images or PNW records (397 species)**
    - What we know: They exist in the DB but have no images and no PNW occurrence records.
    - What's unclear: Should they appear in species.csv? The site generates one HTML page per species. Without images or records, the page would be nearly empty (just taxonomy and common name).
    - Recommendation: Exclude them from species.csv (do not generate empty pages). Include a comment in the script noting this filter.
+   - RESOLVED: Exclude species with neither images nor PNW records from species.csv. The migrate-species.js filter requires species_id to appear in species_speciesimage OR in PNW-filtered species_speciesrecord.
 
 2. **Subfamily for Geometridae species**
    - What we know: ~104 species are Geometridae (MONA numbers) with no CMS subfamily.
    - What's unclear: Whether the user wants subfamily populated for these (would require an external reference like MONA, Discover Life, or a hand-curated CSV).
    - Recommendation: Leave subfamily blank for now. The accordion browse will show a flat list under "Geometridae" with no subfamilies. A future phase can add Geometridae subfamilies.
+   - RESOLVED: Leave subfamily blank for all Geometridae species. Family is set to "Geometridae" via inferFamily(noc_id). Subfamily can be added in a future phase.
 
 3. **18 species with factsheet_id not in cms_title**
    - What we know: 18 species have a factsheet_id pointing to a CMS page that doesn't have a `browse/family-...` path (e.g. page IDs like 220, 965, 2423–2474). These are likely recently added species pages that were not yet organized in the family hierarchy.
    - What's unclear: Their actual family classification.
    - Recommendation: Fall back to genus lookup (if another species in the same genus has CMS taxonomy, use that family). If still unresolved, leave family blank and flag in console output.
+   - RESOLVED: Use genus-based fallback lookup for unresolved family. Remaining blanks are acceptable; family field is optional in the build pipeline.
 
 4. **Species added after Feb 2021 dump**
    - What we know: images.csv has 9 species_ids (3349–3360+) that don't exist in the dump. These are species added after the Feb 2021 backup.
    - What's unclear: Their taxonomy, authority, and whether they have PNW records.
    - Recommendation: Skip species_ids that aren't in the dump. They currently have images in images.csv (those image rows will have an orphaned slug after migration). Flag this in console output. A future manual step would add these species to species.csv.
+   - RESOLVED: Skip post-dump species_ids in migrate-species.js. Console warning emitted for each skipped species_id. Adding these species is deferred to a future manual step.
 
 ---
 
