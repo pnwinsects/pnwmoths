@@ -11,6 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+      - name: Detect changed data files
+        id: changed-data
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
+        with:
+          files: |
+            data/images.csv
+            data/glossary.csv
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version-file: '.nvmrc'
@@ -28,3 +37,30 @@ jobs:
       - run: npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:check-weight
       - name: Check links
         run: npm run build:validate-links
+      - name: Check new CDN image URLs
+        if: steps.changed-data.outputs.any_changed == 'true'
+        run: |
+          python3 - <<'PYEOF'
+import csv, subprocess
+from urllib.parse import quote
+CDN_BASE = 'https://pnwmoths.b-cdn.net'
+urls = []
+
+def new_lines(path):
+    r = subprocess.run(['git', 'diff', 'origin/main...HEAD', '--', path], capture_output=True, text=True)
+    return [l[1:] for l in r.stdout.splitlines() if l.startswith('+') and not l.startswith('+++')]
+
+for line in new_lines('data/images.csv'):
+    parts = line.split(',', 2)
+    if len(parts) >= 2 and parts[0] not in ('', 'species_slug') and parts[1]:
+        urls.append(f"{CDN_BASE}/{parts[0]}/{quote(parts[1])}")
+
+for row in csv.reader(new_lines('data/glossary.csv')):
+    if len(row) >= 3 and row[0] != 'term' and row[2]:
+        urls.append(f"{CDN_BASE}/glossary/{quote(row[2])}")
+
+with open('new-image-urls.txt', 'w') as f:
+    f.write('\n'.join(urls))
+print(f"Checking {len(urls)} new image URL(s)")
+PYEOF
+          lychee --timeout 20 --max-retries 3 --accept '100..=103,200..=299,429' new-image-urls.txt
