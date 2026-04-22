@@ -25,4 +25,6 @@ jobs:
           path: .lycheecache
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
-      - run: npm run build
+      - run: npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:check-weight
+      - name: Check links
+        run: npm run build:validate-links
