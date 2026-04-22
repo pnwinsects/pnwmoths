@@ -32,8 +32,9 @@ Phase 13 does NOT modify any Eleventy templates or Nunjucks files (that is Phase
 
 ### Image Classes
 
-- **D-10:** Glossary portrait Image Class: 188 × 225 px, north crop (`?width=188&height=225&crop_gravity=north`). Name: **`glossaryportrait`** (bunny.net does not allow dashes in Image Class names; `glossary-portrait` was rejected).
-- **D-11:** Nav thumbnail Image Class: height 186 px, width auto-proportioned (`?height=186`). 186 = 2× the CSS display height of 93 px. Name: **`navthumb`** (bunny.net does not allow dashes; `nav-thumb` was rejected).
+- **D-10:** Glossary portrait dimensions: 188 × 225 px, north crop. Query params: `?width=188&height=225&crop_gravity=north`. These params work directly on the Optimizer without a named Image Class. The Image Class named `glossaryportrait` was defined during Phase 13 but is now disabled (see D-18). Phase 14 templates MUST use direct query params, NOT the class name.
+- **D-11:** Nav thumbnail dimensions: height 186 px, width auto-proportioned. 186 = 2× the CSS display height of 93 px. Query param: `?height=186`. This works directly on the Optimizer without a named Image Class. The Image Class named `navthumb` was defined during Phase 13 but is now disabled (see D-18). Phase 14 templates MUST use `?height=186` directly in CDN URLs, NOT the class name.
+- **D-18:** bunny.net Image Classes are currently **disabled** on the Pull Zone Optimizer. Root cause: when Image Classes are enabled, bunny.net requires every request to include a valid class name in the URL — requests without a class name receive 403. During Phase 13 execution, all CDN requests were returning 403 because no class name was appended. bunny.net support disabled Image Classes to restore delivery. Resolution: the same resize/crop operations are achieved by passing Optimizer query params directly (`?width=`, `?height=`, `?crop_gravity=`). **Do not re-enable Image Classes** unless Phase 14 templates are simultaneously updated to append class names to every CDN URL — failing to do so will return 403 sitewide.
 
 ### rclone FTP notes (discovered during Plan 03 execution)
 
