@@ -148,13 +148,14 @@ Plans:
   3. `CDN_BASE_URL` is set as a secret in the GitHub Actions repository settings; the deploy workflow can read it as an environment variable
   4. `_instructions/` contains a contributor-facing doc covering rclone FTP setup, `rclone copy` (not `sync`) for uploads, `--ignore-times` for replacements, and how to trigger cache invalidation
 **UI hint**: no
-**Plans**: 4 plans
+**Plans**: 5 plans
 
 Plans:
 - [x] 13-01-PLAN.md — Add CDN_BASE_URL constant to eleventy.config.js; widen build-data.js filename regex
 - [ ] 13-02-PLAN.md — Write migrate-images.js migration script; rebuild data/images.csv
 - [ ] 13-03-PLAN.md — bunny.net dashboard setup, Optimizer, Image Classes, image upload (human-assisted)
-- [ ] 13-04-PLAN.md — Write _instructions/UPLOADING_IMAGES.md; CDN delivery spot-check
+- [ ] 13-04-PLAN.md — Write _instructions/UPLOADING_IMAGES.md; CDN delivery spot-check (task 2 superseded)
+- [ ] 13-05-PLAN.md — Update CONTEXT.md (D-10/D-11/D-18 Image Classes disable), commit outstanding artifacts, CDN spot-check
 
 ### Phase 14: Template Migration
 **Goal**: Every image URL in the built site resolves through the CDN; the Eleventy build fails fast when `CDN_BASE_URL` is absent in production
