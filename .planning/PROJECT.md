@@ -89,7 +89,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
-**v1.4 in progress:** Phase 13 complete 2026-04-22 — CDN provisioned, 3,880 images uploaded, contributor doc written; Phase 14 (template migration) is next
+**v1.4 in progress:** Phase 14 complete 2026-04-22 — all templates migrated to CDN URLs (species.njk, glossary/index.njk, pnwm-taxon-browser.js); Phase 15 (LFS removal) is next
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -153,4 +153,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-21 after v1.4 milestone start*
+*Last updated: 2026-04-22 after Phase 14 complete*
