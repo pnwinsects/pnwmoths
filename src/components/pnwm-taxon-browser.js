@@ -8,6 +8,8 @@ const STATE_NAMES = {
   WA: 'Washington',
 };
 
+const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+
 /**
  * Transform flat [{species_slug, state}] array from species-states.json
  * into an object mapping species_slug → Set<state>.
@@ -140,7 +142,7 @@ class PnwmTaxonBrowser extends LitElement {
       <div style="display:inline-flex;flex-direction:row;gap:4px;overflow-x:auto">
         ${navImages.map(img => {
           const imgEl = html`<img
-            src="${this._prefix}images/${img.species_slug}/${img.filename}"
+            src="${CDN_BASE_URL}/${img.species_slug}/${encodeURIComponent(img.filename)}?height=186"
             alt=""
             loading="lazy"
             style="height:93px;width:auto;object-fit:cover;flex-shrink:0;display:block"
@@ -196,7 +198,7 @@ class PnwmTaxonBrowser extends LitElement {
         ${species.map(sp => html`
           <a class="pnwm-tb-species-card" href="${this._prefix}species/${sp.slug}/">
             ${sp.navImage ? html`<img
-              src="${this._prefix}images/${sp.navImage.species_slug}/${sp.navImage.filename}"
+              src="${CDN_BASE_URL}/${sp.navImage.species_slug}/${encodeURIComponent(sp.navImage.filename)}?height=186"
               alt="${genusName} ${sp.name}"
               loading="lazy"
             >` : ''}
