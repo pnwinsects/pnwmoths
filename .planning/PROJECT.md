@@ -63,6 +63,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - [ ] CLI upload workflow documented in `_instructions/` for contributors
 - [ ] GitHub Actions CI/CD updated to drop LFS checkout; `CDN_BASE_URL` secret configured
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
+- ✓ Full species dataset migrated from legacy MySQL dump: 1,348 species + 85,933 PNW occurrence records in data/species.csv and data/records.csv — v1.4 Phase 17
 - [ ] Site deployed to real hosting (GitHub Pages) with real species/records data
 
 ### Out of Scope
