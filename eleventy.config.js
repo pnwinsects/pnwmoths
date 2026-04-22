@@ -27,6 +27,13 @@ export default function (eleventyConfig) {
     return JSON.stringify(value);
   });
 
+  // URL-encode filter: handles all reserved URL characters in Django filenames
+  // (spaces, parentheses, +, #, etc.). Used in CDN URL construction.
+  eleventyConfig.addFilter("urlencode", v => encodeURIComponent(v));
+
+  // Expose CDN base URL to all Nunjucks templates as {{ cdnBaseUrl }}
+  eleventyConfig.addGlobalData("cdnBaseUrl", CDN_BASE_URL);
+
   // Passthrough copy: per-species Parquet files from data/parquet/{slug}/ to _site/species/{slug}/
   // data/parquet/acronicta-americana/records.parquet -> _site/species/acronicta-americana/records.parquet
   eleventyConfig.addPassthroughCopy({ "data/parquet": "species" });
