@@ -2,5 +2,6 @@ _site/
 data/parquet/
 node_modules/
 .lycheecache
+# CDN assets: downloaded at build time, not committed to git
 images/
 plates/
