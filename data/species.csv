@@ -126,7 +126,6 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1494,Sutyna,privata,,93-2707,"(Walker, 1857)",Noctuidae,fishia-yosemitae|andropolia-diversilineata|xylotype-arcadia,Noctuinae
 1495,Apantesis,behrii,,93-0260,"(Stretch, 1872)",Erebidae,grammia-nevadensis|notarctia-proxima,Arctiinae
 1496,Apamea,spaldingi,Spalding\'s Quaker Moth,93-2317,"(Smith, 1909)",Noctuidae,apamea-unita|apamea-cinefacta,Noctuinae
-1497,Nycteola,frigidana,Frigid Owlet Moth,93-1142,"(Walker, 1863)",Nolidae,nycteola-frigidana|nycteola-columbiana,Nolinae
 1498,Lithophane,contenta,,93-2572,"Grote, 1880",Noctuidae,lithophane-boogeri,Noctuinae
 1499,Acronicta,lepusculina,Cottonwood Dagger Moth,93-1425,"GuenÃ©e, 1852",Noctuidae,acronicta-vulpina,Acronictinae
 1500,Pachysphinx,occidentalis,Western Poplar Sphinx Moth,MONA 7829,"(Hy. Edwards, 1875)",Sphingidae,pachysphinx-modesta,Smerinthinae
@@ -1209,11 +1208,8 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2771,Aseptis,sp No 1,,93-2635.1,,Noctuidae,,
 2766,Schinia,aurantiaca,,93-2072,"(H. Edwards, 1881)",Noctuidae,schinia-edwardsii,Heliothinae
 2767,Apamea,unanimis,Small Clouded Brindle Moth,93-2308,"(HÃ¼bner, [1813])",Noctuidae,apamea-indocilis|mesapamea-secalis,Noctuinae
-2768,Lacinipolia,bucketti,,93-3054,"Selman & Leuschner, 2001",Noctuidae,lacinipolia-quadrilineata|lacinipolia-davena|lacinipolia-olivacea,Noctuinae
-2769,Enargia,infumata,Smoked Sallow Moth,93-2675,"(Grote, 1874)",Noctuidae,enargia-decolor|enargia-fausta,Noctuinae
 2770,Sympistis,sokar,,93-1917,"Troubridge, 2008",Noctuidae,sympistis-youngi|sympistis-extremis,Oncocnemidinae
 2774,Fishia,nigrescens,,93-2693.1,"Hammond & Crabo, 2013",Noctuidae,platypolia-loda|fishia-yosemitae|fishia-connecta,Noctuinae
-2776,Smerinthus,ophthalmica,,MONA 7822.1,"Boisduval, 1855",Sphingidae,smerinthus-jamaicensis,Smerinthinae
 2777,Protoperigea,calientensis,,93-2255,"Mustelin, 2006",Noctuidae,,Noctuinae
 2780,Euxoa,absona,,93-3368,"Lafontaine, 1987",Noctuidae,euxoa-xasta|euxoa-silens|euxoa-idahoensis,Noctuinae
 2781,Orgyia,vetusta,Western Tussock Moth,93-0161,"Boisduval, 1852",Erebidae,orgyia-cana|orgyia-pseudotsugata,Lymantriinae
@@ -1228,7 +1224,6 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2809,Caradrina,atrostriga,,93-2263,"(Barnes & McDunnough, 1912)",Noctuidae,caradrina-multifera|caradrina-meralis|caradrina-camina,Noctuinae
 2811,Abagrotis,striata,,93-3661,"Buckett, 1968",Noctuidae,abagrotis-glenni|abagrotis-mirabilis,Noctuinae
 2850,Euxoa,aurantiaca,,,,Noctuidae,,
-2836,Lacinipolia,rectilinea,,,,Noctuidae,,
 2837,Epidemas,cinerea,,93-2650,"Smith, 1894",Noctuidae,euxoa-cinereopallidus|euxoa-dargo|epidemas-obscurus,Noctuinae
 2838,Syngrapha,surena,Surena Looper,93-1218,"(Grote, 1882)",Noctuidae,syngrapha-epigaea|syngrapha-celsa|syngrapha-interrogationis,Plusiinae
 2844,Xylomoia,chagnoni,,93-2416,"Barnes & McDunnough, 1917",Noctuidae,photedes-didonea|xylomoia-indirecta|hypocoena-inquinata,Noctuinae

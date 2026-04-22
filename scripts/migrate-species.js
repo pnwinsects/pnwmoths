@@ -413,10 +413,37 @@ export async function main() {
 
   // 10. Write species.csv
   const speciesOut = [];
+  const seenSlugs = new Set();  // deduplicate by slug (some species share genus+species in DB)
+  const skippedSpeciesIds = new Set();  // species_ids skipped due to slug deduplication
   for (const sp of allSpecies) {
     if (!includedSpeciesIds.has(sp.id)) continue;
 
-    const slug = slugMap.get(sp.id) ?? `${sp.genus}-${sp.species}`.toLowerCase();
+    // Sanitize species epithet for validateSlugComponent (only [a-zA-Z0-9 ] allowed).
+    // Hyphens (e.g. "v-alba", "c-nigrum"): truncate at first hyphen so slug matches
+    // what slugFromImageField() extracts from the image filename.
+    // Periods, slashes, "?", "nr.", "aff.", "sp." etc: strip all non-alphanumeric-or-space chars.
+    // Must be computed BEFORE deriving the fallback slug so deduplication is consistent.
+    let safeSpecies = sp.species;
+    if (safeSpecies.includes('-')) {
+      safeSpecies = safeSpecies.slice(0, safeSpecies.indexOf('-'));
+    }
+    safeSpecies = safeSpecies.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+    if (!safeSpecies) safeSpecies = 'sp';
+
+    // Slug: prefer image-derived slug (canonical); fall back to sanitized genus-species.
+    // Using safeSpecies ensures the fallback slug matches what appears in the CSV output,
+    // so the seenSlugs deduplication check is consistent.
+    const slug = slugMap.get(sp.id) ?? `${sp.genus}-${safeSpecies}`.toLowerCase();
+
+    // Deduplicate: if two DB species produce the same slug, keep the first (lower ID).
+    // Track skipped IDs so their records are also excluded from records.csv.
+    if (seenSlugs.has(slug)) {
+      console.warn(`[migrate-species] Duplicate slug "${slug}" for species_id=${sp.id} (raw species="${sp.species}") — skipping (earlier entry kept)`);
+      skippedSpeciesIds.add(sp.id);
+      continue;
+    }
+    seenSlugs.add(slug);
+
     const cms = sp.factsheet_id ? cmsMap.get(sp.factsheet_id) : null;
     let family = cms?.family ?? null;
     let subfamily = cms?.subfamily ?? null;
@@ -430,17 +457,6 @@ export async function main() {
     const similarSlugs = similarIds
       .map(tid => slugMap.get(tid) ?? null)
       .filter(Boolean);
-
-    // Sanitize species epithet for validateSlugComponent (only [a-zA-Z0-9 ] allowed).
-    // Hyphens (e.g. "v-alba", "c-nigrum"): truncate at first hyphen so slug matches
-    // what slugFromImageField() extracts from the image filename.
-    // Periods, slashes, "?", "nr.", "aff.", "sp." etc: strip all non-alphanumeric-or-space chars.
-    let safeSpecies = sp.species;
-    if (safeSpecies.includes('-')) {
-      safeSpecies = safeSpecies.slice(0, safeSpecies.indexOf('-'));
-    }
-    safeSpecies = safeSpecies.replace(/[^a-zA-Z0-9 ]/g, '').trim();
-    if (!safeSpecies) safeSpecies = 'sp';
 
     speciesOut.push({
       id: sp.id,
@@ -492,8 +508,10 @@ export async function main() {
       continue;
     }
 
-    // Only include records for species that appear in species.csv
+    // Only include records for species that appear in species.csv.
+    // Also exclude records for species skipped due to slug deduplication.
     if (!includedSpeciesIds.has(rec.species_id)) continue;
+    if (skippedSpeciesIds.has(rec.species_id)) continue;
 
     const stateCode = rec.state_id ? stateMap.get(rec.state_id) : null;
     if (!stateCode) continue;
