@@ -18,7 +18,7 @@
 ### LFS Removal
 
 - [x] **LFS-01**: `git filter-repo --invert-paths` run to purge `images/` and `plates/` from history (no `git lfs migrate export` — pointer files are 130-byte text, no object download needed); `.gitattributes` deleted; force-pushed
-- [ ] **LFS-02**: GitHub Actions LFS checkout action replaced with plain `actions/checkout@v4` in both deploy and PR check workflows
+- [x] **LFS-02**: GitHub Actions LFS checkout action replaced with plain `actions/checkout@v4` in both deploy and PR check workflows
 
 ### Template Migration
 
@@ -58,7 +58,7 @@
 | CDN-03 | Phase 13 | Pending | — |
 | CDN-04 | Phase 13 | Pending | — |
 | LFS-01 | Phase 15 | Complete | filter-repo --invert-paths purged images/ + plates/ from all 356 commits; force-pushed 2026-04-22 |
-| LFS-02 | Phase 15 | Pending | — |
+| LFS-02 | Phase 15 | Complete | nschloe/action-cached-lfs-checkout replaced with actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 in deploy.yml + pr-check.yml 2026-04-22 |
 | TMPL-01 | Phase 14 | Complete | cdnBaseUrl global + urlencode filter live; env var approach overridden (O-14-01) |
 | TMPL-02 | Phase 14 | Complete | urlencode filter; no .env.example needed — CDN URL is public constant (O-14-01) |
 | TMPL-03 | Phase 14 | Complete | species.njk uses {{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename \| urlencode }} |

@@ -21,7 +21,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 14 complete — all image URLs migrated to CDN; templates updated
+**Current focus:** Phase 15 complete — LFS fully removed from history and CI; ready for Phase 16 (Build Pipeline Cleanup)
 
 ## Current Position
 
@@ -30,7 +30,7 @@ Plan: 02 complete — Phase 15 done; Phase 16 (Build Pipeline Cleanup) next
 Status: Phase 15 complete — LFS fully removed from history and CI; all success criteria verified
 Last activity: 2026-04-22 — Phase 15 Plan 02 complete — CI workflows updated to actions/checkout@v4.3.1; fresh clone verified clean; npm test 72/72
 
-Progress: [████______] 40%
+Progress: [██████____] 60%
 
 ## Performance Metrics
 
