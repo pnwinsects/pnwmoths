@@ -198,7 +198,10 @@ Plans:
   2. No build-time image resize scripts exist in `scripts/`; `npm run build` completes without executing any image transformation step
   3. A full GitHub Actions deploy run (using the real `CDN_BASE_URL` secret) completes successfully and the deployed site loads species images from the CDN
 **UI hint**: no
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 16-01-PLAN.md — Remove species photo copy block; verify no resize scripts exist
 
 ### Phase 17: Migrate Full Species Data from Legacy Database
 **Goal**: All species, taxonomy, and occurrence records from the legacy pnwinsects-app MySQL database are loaded into the static site's CSV data files, replacing placeholder data with the full production dataset
