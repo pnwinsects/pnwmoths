@@ -60,9 +60,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ bunny.net Storage Zone + Pull Zone provisioned; Optimizer enabled; resize/crop query params confirmed working — v1.4 Phase 13
 - ✓ CDN_BASE_URL hard-coded constant in eleventy.config.js (public URL, not a secret); Image Classes disabled, direct Optimizer query params used — v1.4 Phase 13
 - ✓ CLI upload workflow documented in `_instructions/UPLOADING_IMAGES.md` for contributors (rclone FTP, --ignore-times, cache invalidation) — v1.4 Phase 13
-- [ ] Git LFS removed from repo; LFS-tracked image files purged
-- [ ] Eleventy templates updated to construct CDN URLs; all image `<img>` tags point to CDN
-- [ ] GitHub Actions CI/CD updated to drop LFS checkout
+- ✓ Git LFS removed from repo; LFS-tracked image files purged from all 356 commits via filter-repo — v1.4 Phase 15
+- ✓ Eleventy templates updated to construct CDN URLs; all image `<img>` tags point to CDN — v1.4 Phase 14
+- ✓ GitHub Actions CI/CD updated to drop LFS checkout (actions/checkout@v4.3.1 SHA-pinned) — v1.4 Phase 15
 - [ ] Build-time resize scripts removed from pipeline
 - Note: WebP conversion not yet active on Optimizer (serving JPEG); resolve before Phase 15
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
@@ -89,7 +89,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
-**v1.4 in progress:** Phase 14 complete 2026-04-22 — all templates migrated to CDN URLs (species.njk, glossary/index.njk, pnwm-taxon-browser.js); Phase 15 (LFS removal) is next
+**v1.4 in progress:** Phase 15 complete 2026-04-22 — LFS fully removed (16,191 pointers purged from 356 commits, CI updated); Phase 16 (Build Pipeline Cleanup) is next
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -110,7 +110,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 ## Constraints
 
 - **Hosting**: Must deploy as pure static files — no server, no database at runtime
-- **Images**: Image assets tracked in repo via Git LFS
+- **Images**: Image assets served from bunny.net CDN; Git LFS removed in v1.4
 - **Maintainability**: Non-technical contributors must be able to edit species data and add records without running a build locally (or with minimal tooling)
 - **Tech stack**: Eleventy (SSG), Vite (JS bundling), flat files for data storage — start here, change only with reason
 
@@ -153,4 +153,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after Phase 14 complete*
+*Last updated: 2026-04-22 after Phase 15 complete*
