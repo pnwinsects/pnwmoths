@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: ~
+stopped_at: Phase 14 context gathered
 last_updated: "2026-04-22T00:00:00Z"
 last_activity: 2026-04-22
 progress:
