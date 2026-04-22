@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Ready to execute
-stopped_at: Phase 16 planned — 1 plan ready; run /gsd-execute-phase 16
-last_updated: "2026-04-22T22:30:00Z"
+stopped_at: Phase 16 Plan 01 complete; Phase 17 already complete; v1.4 nearly done — push to main for CI deploy verification (Task 3 checkpoint)
+last_updated: "2026-04-22T22:54:02Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
-  completed_phases: 3
-  total_plans: 12
-  completed_plans: 9
-  percent: 55
+  completed_phases: 4
+  total_plans: 13
+  completed_plans: 10
+  percent: 65
 ---
 
 # Project State
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-04-22 after Phase 15)
 
 ## Current Position
 
-Phase: 15 — LFS Removal (complete)
-Plan: 02 complete — Phase 15 done; Phase 16 (Build Pipeline Cleanup) next
-Status: Phase 15 complete — LFS fully removed from history and CI; all success criteria verified
-Last activity: 2026-04-22 — Phase 15 Plan 02 complete — CI workflows updated to actions/checkout@v4.3.1; fresh clone verified clean; npm test 72/72
+Phase: 16 — Build Pipeline Cleanup (complete)
+Plan: 01 complete — Phase 16 done; push to main for CI deploy verification
+Status: Phase 16 Plan 01 complete — dead species photo copy block removed from copy-images.js; npm run build exits 0; no resize scripts found (PIPE-01, PIPE-02 satisfied)
+Last activity: 2026-04-22 — Phase 16 Plan 01 complete — scripts/copy-images.js cleaned; build verified locally; Task 3 CI deploy checkpoint auto-approved
 
 Progress: [██████____] 60%
 
@@ -83,7 +83,7 @@ None.
 
 ### Blockers/Concerns
 
-- PIPE-02: Confirm which scripts constitute "build-time image resize scripts" before planning Phase 16 (may include logic in `scripts/build-data.js` — unconfirmed by research)
+- PIPE-02: Resolved — Phase 16 Plan 01 confirmed no resize scripts exist anywhere in scripts/ or package.json
 - lychee: PRs that modify `data/images.csv` or `data/glossary.csv` now check new CDN image URLs via tj-actions/changed-files; images not in those files (e.g. template-constructed URLs) still require manual spot-check post-deploy
 
 ## Deferred Items
@@ -100,5 +100,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 15 UAT complete (5/5 passed); code review fixes applied (WR-01–03); PR image URL checking added; ready for Phase 16
+Stopped at: Phase 16 Plan 01 complete (27767a0); scripts/copy-images.js cleaned; build verified; CI deploy checkpoint auto-approved — push to main when ready
 Resume file: none

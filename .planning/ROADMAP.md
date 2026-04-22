@@ -201,7 +201,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 16-01-PLAN.md — Remove species photo copy block; verify no resize scripts exist
+- [x] 16-01-PLAN.md — Remove species photo copy block; verify no resize scripts exist
 
 ### Phase 17: Migrate Full Species Data from Legacy Database
 **Goal**: All species, taxonomy, and occurrence records from the legacy pnwinsects-app MySQL database are loaded into the static site's CSV data files, replacing placeholder data with the full production dataset
@@ -238,7 +238,7 @@ Plans:
 | 13. CDN Provisioning | v1.4 | 5/5 | Complete | 2026-04-22 |
 | 14. Template Migration | v1.4 | 2/2 | Complete | 2026-04-22 |
 | 15. LFS Removal | v1.4 | 2/2 | Complete | 2026-04-22 |
-| 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
+| 16. Build Pipeline Cleanup | v1.4 | 1/1 | Complete | 2026-04-22 |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 
 ---
