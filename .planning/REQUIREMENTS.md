@@ -22,12 +22,12 @@
 
 ### Template Migration
 
-- [ ] **TMPL-01**: `CDN_BASE_URL` read in `eleventy.config.js`; trailing-slash trimmed; fail-fast error when `GITHUB_PAGES=true` and var is unset; exposed via `addGlobalData('cdnBaseUrl', ...)`
-- [ ] **TMPL-02**: `cdnUrl` Nunjucks filter defined; `.env.example` added; `.env` added to `.gitignore`
-- [ ] **TMPL-03**: `species.njk` updated to use CDN URLs for all species photos
-- [ ] **TMPL-04**: `glossary/index.njk` updated to use CDN URLs; `| url` filter stripped from image path expressions
-- [ ] **TMPL-05**: `browse/index.njk` passes `cdn-base-url` attribute to `<pnwm-taxon-browser>`; `pnwm-taxon-browser.js` updated with `cdn-base-url` Lit property; all image src construction sites rewritten to use CDN URL
-- [ ] **TMPL-06**: `srcset` with 2× width descriptor added to species photo and glossary portrait `<img>` tags
+- [x] **TMPL-01**: `cdnBaseUrl` global data exposed via `addGlobalData` in `eleventy.config.js`. CDN URL is a public hard-coded constant — env var / fail-fast approach overridden (O-14-01, 2026-04-22)
+- [x] **TMPL-02**: `urlencode` Nunjucks filter defined (encodeURIComponent). No `.env.example` or `.gitignore` entry needed — CDN URL is a public constant, not a secret (O-14-01, 2026-04-22)
+- [x] **TMPL-03**: `species.njk` updated to use CDN URLs for all species photos
+- [x] **TMPL-04**: `glossary/index.njk` updated to use CDN URLs; `| url` filter stripped from image path expressions
+- [x] **TMPL-05**: `pnwm-taxon-browser.js` uses module-level `CDN_BASE_URL` constant for all image src construction. No Lit attribute required — module-level constant is correct architecture (O-14-02, CONTEXT.md D-05, 2026-04-22)
+- [x] **TMPL-06**: `srcset` 2× descriptor added to glossary portrait. Species photo srcset deferred to Phase 16 — `pnwm-image-slideshow` drops srcset on slotted img (O-14-03, CONTEXT.md D-04, 2026-04-22)
 
 ### Build Pipeline Cleanup
 
@@ -59,11 +59,11 @@
 | CDN-04 | Phase 13 | Pending | — |
 | LFS-01 | Phase 15 | Pending | — |
 | LFS-02 | Phase 15 | Pending | — |
-| TMPL-01 | Phase 14 | Pending | — |
-| TMPL-02 | Phase 14 | Pending | — |
-| TMPL-03 | Phase 14 | Pending | — |
-| TMPL-04 | Phase 14 | Pending | — |
-| TMPL-05 | Phase 14 | Pending | — |
-| TMPL-06 | Phase 14 | Pending | — |
+| TMPL-01 | Phase 14 | Complete | cdnBaseUrl global + urlencode filter live; env var approach overridden (O-14-01) |
+| TMPL-02 | Phase 14 | Complete | urlencode filter; no .env.example needed — CDN URL is public constant (O-14-01) |
+| TMPL-03 | Phase 14 | Complete | species.njk uses {{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename \| urlencode }} |
+| TMPL-04 | Phase 14 | Complete | glossary/index.njk CDN URL + Optimizer params; \| url filter removed |
+| TMPL-05 | Phase 14 | Complete | pnwm-taxon-browser.js uses module-level CDN_BASE_URL constant (O-14-02) |
+| TMPL-06 | Phase 14 | Complete | Glossary srcset 2x done; species srcset deferred to Phase 16 (O-14-03) |
 | PIPE-01 | Phase 16 | Pending | — |
 | PIPE-02 | Phase 16 | Pending | — |

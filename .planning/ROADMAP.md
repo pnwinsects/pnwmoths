@@ -56,7 +56,7 @@
 **Milestone Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing; remove build-time resize scripts and LFS from the repo.
 
 - [x] **Phase 13: CDN Provisioning** - Create bunny.net Storage + Pull Zone; upload images; configure Optimizer; wire GitHub secret; document upload workflow — completed 2026-04-22
-- [ ] **Phase 14: Template Migration** - Wire `CDN_BASE_URL` into Eleventy; update all templates and `pnwm-taxon-browser.js` to construct CDN URLs
+- [x] **Phase 14: Template Migration** - Wire `CDN_BASE_URL` into Eleventy; update all templates and `pnwm-taxon-browser.js` to construct CDN URLs — completed 2026-04-22
 - [ ] **Phase 15: LFS Removal** - Rewrite git history to purge `images/`; clean `.gitattributes`; replace LFS checkout in CI
 - [ ] **Phase 16: Build Pipeline Cleanup** - Remove species photo copy block from `copy-images.js`; retire build-time image resize scripts
 - [ ] **Phase 17: Migrate Full Species Data from Legacy Database** - Extract species accounts, taxonomy, and occurrence records from legacy pnwinsects-app MySQL database; replace placeholder CSV data with full production dataset

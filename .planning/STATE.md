@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 14 Plan 02 complete — species.njk and glossary/index.njk rewritten to CDN URLs; glossary srcset 2x added; | url filter removed
-last_updated: "2026-04-22T20:46:30Z"
+stopped_at: Phase 14 complete — all templates migrated to CDN URLs; 3 requirement overrides accepted (O-14-01/02/03)
+last_updated: "2026-04-22T21:45:00Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 9
-  completed_plans: 6
-  percent: 24
+  completed_plans: 7
+  percent: 40
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 13 complete — CDN provisioned, images uploaded, contributor doc written
+**Current focus:** Phase 14 complete — all image URLs migrated to CDN; templates updated
 
 ## Current Position
 
-Phase: 14 — Template Migration
-Plan: 14-02
-Status: Plan 14-02 complete — species.njk and glossary/index.njk use CDN URLs; glossary has 2x srcset
-Last activity: 2026-04-22 — Plan 14-02 executed; 2 tasks, 2 files modified, build green
+Phase: 15 — LFS Removal
+Plan: (not started)
+Status: Phase 14 verified and complete; ready for Phase 15
+Last activity: 2026-04-22 — Phase 14 execution complete, all 2 plans done, 3 overrides accepted
 
-Progress: [██________] 20%
+Progress: [████______] 40%
 
 ## Performance Metrics
 
@@ -99,5 +99,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 14 Plan 02 complete — species.njk and glossary/index.njk rewritten to CDN URLs; glossary srcset 2x added; | url filter removed
-Resume file: .planning/phases/14-template-migration/ (next plan TBD — Phase 15 LFS Removal)
+Stopped at: Phase 14 complete — CDN URLs in all templates; 3 overrides (O-14-01: hard-coded constant, O-14-02: module-level CDN in taxon browser, O-14-03: species srcset deferred to Phase 16)
+Resume file: .planning/ROADMAP.md — next: Phase 15 LFS Removal
