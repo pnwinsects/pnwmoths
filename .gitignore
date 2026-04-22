@@ -2,3 +2,5 @@ _site/
 data/parquet/
 node_modules/
 .lycheecache
+images/
+plates/

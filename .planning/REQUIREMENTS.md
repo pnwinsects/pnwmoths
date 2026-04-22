@@ -17,7 +17,7 @@
 
 ### LFS Removal
 
-- [ ] **LFS-01**: `git lfs migrate export` + `git filter-repo` run to purge `images/` from history; `.gitattributes` cleaned; force-pushed; all collaborators re-clone
+- [ ] **LFS-01**: `git filter-repo --invert-paths` run to purge `images/` and `plates/` from history (no `git lfs migrate export` — pointer files are 130-byte text, no object download needed); `.gitattributes` deleted; force-pushed
 - [ ] **LFS-02**: GitHub Actions LFS checkout action replaced with plain `actions/checkout@v4` in both deploy and PR check workflows
 
 ### Template Migration
