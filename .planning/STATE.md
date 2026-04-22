@@ -8,10 +8,10 @@ last_updated: "2026-04-22T00:00:00Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 7
-  completed_plans: 0
-  percent: 0
+  completed_plans: 5
+  percent: 20
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-21 for v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 17 complete — full species dataset migrated (1,348 species, 85,933 records)
+**Current focus:** Phase 13 complete — CDN provisioned, images uploaded, contributor doc written
 
 ## Current Position
 
-Phase: 17 — Migrate Full Species Data from Legacy Database
-Plan: 17-03
-Status: Phase 17 complete — verified 2026-04-22
-Last activity: 2026-04-22 — Phase 17 execution complete, all 3 plans verified
+Phase: 13 — CDN Provisioning
+Plan: 13-05
+Status: Phase 13 complete — verified 2026-04-22
+Last activity: 2026-04-22 — Phase 13 execution complete, all 5 plans done
 
-Progress: [__________] 0%
+Progress: [██________] 20%
 
 ## Performance Metrics
 

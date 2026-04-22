@@ -55,7 +55,7 @@
 
 **Milestone Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing; remove build-time resize scripts and LFS from the repo.
 
-- [ ] **Phase 13: CDN Provisioning** - Create bunny.net Storage + Pull Zone; upload images; configure Optimizer; wire GitHub secret; document upload workflow
+- [x] **Phase 13: CDN Provisioning** - Create bunny.net Storage + Pull Zone; upload images; configure Optimizer; wire GitHub secret; document upload workflow — completed 2026-04-22
 - [ ] **Phase 14: Template Migration** - Wire `CDN_BASE_URL` into Eleventy; update all templates and `pnwm-taxon-browser.js` to construct CDN URLs
 - [ ] **Phase 15: LFS Removal** - Rewrite git history to purge `images/`; clean `.gitattributes`; replace LFS checkout in CI
 - [ ] **Phase 16: Build Pipeline Cleanup** - Remove species photo copy block from `copy-images.js`; retire build-time image resize scripts
@@ -152,10 +152,10 @@ Plans:
 
 Plans:
 - [x] 13-01-PLAN.md — Add CDN_BASE_URL constant to eleventy.config.js; widen build-data.js filename regex
-- [ ] 13-02-PLAN.md — Write migrate-images.js migration script; rebuild data/images.csv
-- [ ] 13-03-PLAN.md — bunny.net dashboard setup, Optimizer, Image Classes, image upload (human-assisted)
-- [ ] 13-04-PLAN.md — Write _instructions/UPLOADING_IMAGES.md; CDN delivery spot-check (task 2 superseded)
-- [ ] 13-05-PLAN.md — Update CONTEXT.md (D-10/D-11/D-18 Image Classes disable), commit outstanding artifacts, CDN spot-check
+- [x] 13-02-PLAN.md — Write migrate-images.js migration script; rebuild data/images.csv
+- [x] 13-03-PLAN.md — bunny.net dashboard setup, Optimizer, Image Classes, image upload (human-assisted)
+- [x] 13-04-PLAN.md — Write _instructions/UPLOADING_IMAGES.md; CDN delivery spot-check (task 2 superseded)
+- [x] 13-05-PLAN.md — Update CONTEXT.md (D-10/D-11/D-18 Image Classes disable), commit outstanding artifacts, CDN spot-check
 
 ### Phase 14: Template Migration
 **Goal**: Every image URL in the built site resolves through the CDN; the Eleventy build fails fast when `CDN_BASE_URL` is absent in production
