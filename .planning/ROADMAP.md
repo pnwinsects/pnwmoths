@@ -59,6 +59,7 @@
 - [ ] **Phase 14: Template Migration** - Wire `CDN_BASE_URL` into Eleventy; update all templates and `pnwm-taxon-browser.js` to construct CDN URLs
 - [ ] **Phase 15: LFS Removal** - Rewrite git history to purge `images/`; clean `.gitattributes`; replace LFS checkout in CI
 - [ ] **Phase 16: Build Pipeline Cleanup** - Remove species photo copy block from `copy-images.js`; retire build-time image resize scripts
+- [ ] **Phase 17: Migrate Full Species Data from Legacy Database** - Extract species accounts, taxonomy, and occurrence records from legacy pnwinsects-app MySQL database; replace placeholder CSV data with full production dataset
 
 ## Phase Details
 
@@ -190,6 +191,22 @@ Plans:
 **UI hint**: no
 **Plans**: TBD
 
+### Phase 17: Migrate Full Species Data from Legacy Database
+**Goal**: All species, taxonomy, and occurrence records from the legacy pnwinsects-app MySQL database are loaded into the static site's CSV data files, replacing placeholder data with the full production dataset
+**Depends on**: Phase 1 (data pipeline)
+**Requirements**: TBD
+**Success Criteria** (what must be TRUE):
+  1. `species.csv` contains all species from the legacy database (not just sample data)
+  2. `records.csv` contains occurrence records with the same filtering applied as the legacy site
+  3. `npm run build` completes without errors with the full dataset
+  4. `npm test` passes
+**Plans**: 3 plans
+
+Plans:
+- [ ] 17-01-PLAN.md — Test scaffold: failing smoke tests for species.csv and records.csv output
+- [ ] 17-02-PLAN.md — Write migrate-species.js migration script; run migration
+- [ ] 17-03-PLAN.md — Fix test suite for full dataset; verify npm run build
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -210,6 +227,7 @@ Plans:
 | 14. Template Migration | v1.4 | 0/? | Not started | - |
 | 15. LFS Removal | v1.4 | 0/? | Not started | - |
 | 16. Build Pipeline Cleanup | v1.4 | 0/? | Not started | - |
+| 17. Migrate Full Species Data from Legacy Database | v1.4 | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 started: 2026-04-21*
