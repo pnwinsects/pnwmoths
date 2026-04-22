@@ -56,12 +56,15 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 ### Active
 
-- [ ] Images uploaded to bunny.net Storage bucket from original source (pnwinsects-app Django media dir)
+- ✓ Images uploaded to bunny.net Storage bucket from original source (pnwinsects-app Django media dir) — 3,880 files via HTTP API — v1.4 Phase 13
+- ✓ bunny.net Storage Zone + Pull Zone provisioned; Optimizer enabled; resize/crop query params confirmed working — v1.4 Phase 13
+- ✓ CDN_BASE_URL hard-coded constant in eleventy.config.js (public URL, not a secret); Image Classes disabled, direct Optimizer query params used — v1.4 Phase 13
+- ✓ CLI upload workflow documented in `_instructions/UPLOADING_IMAGES.md` for contributors (rclone FTP, --ignore-times, cache invalidation) — v1.4 Phase 13
 - [ ] Git LFS removed from repo; LFS-tracked image files purged
-- [ ] `CDN_BASE_URL` env var wired into Eleventy build; all image URLs resolve via CDN
-- [ ] bunny.net Image Optimizer configured for on-the-fly resizing; build-time resize scripts removed
-- [ ] CLI upload workflow documented in `_instructions/` for contributors
-- [ ] GitHub Actions CI/CD updated to drop LFS checkout; `CDN_BASE_URL` secret configured
+- [ ] Eleventy templates updated to construct CDN URLs; all image `<img>` tags point to CDN
+- [ ] GitHub Actions CI/CD updated to drop LFS checkout
+- [ ] Build-time resize scripts removed from pipeline
+- Note: WebP conversion not yet active on Optimizer (serving JPEG); resolve before Phase 15
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - ✓ Full species dataset migrated from legacy MySQL dump: 1,348 species + 85,933 PNW occurrence records in data/species.csv and data/records.csv — v1.4 Phase 17
 - [ ] Site deployed to real hosting (GitHub Pages) with real species/records data
@@ -86,7 +89,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
-**Current state:** v1.3 complete; no active phases; future work in backlog (999.1, 999.2) and Future Requirements
+**v1.4 in progress:** Phase 13 complete 2026-04-22 — CDN provisioned, 3,880 images uploaded, contributor doc written; Phase 14 (template migration) is next
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
