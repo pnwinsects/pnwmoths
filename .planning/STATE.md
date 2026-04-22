@@ -84,8 +84,7 @@ None.
 ### Blockers/Concerns
 
 - PIPE-02: Confirm which scripts constitute "build-time image resize scripts" before planning Phase 16 (may include logic in `scripts/build-data.js` — unconfirmed by research)
-- lychee: CDN image 404s are invisible to CI (lychee excludes image extensions) — add CDN hostname exclusion to `lychee.toml` and manually spot-check image URLs post-deploy
-- lychee (code review WR-02/WR-03): lychee gates production deploy on transient link failures; pr-check.yml installs lychee but never runs it — consider /gsd-code-review-fix 15
+- lychee: PRs that modify `data/images.csv` or `data/glossary.csv` now check new CDN image URLs via tj-actions/changed-files; images not in those files (e.g. template-constructed URLs) still require manual spot-check post-deploy
 
 ## Deferred Items
 
@@ -101,5 +100,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-04-22
-Stopped at: Phase 15 complete — LFS purged (16,191 pointers, 356 commits), CI updated, all success criteria verified; ready for Phase 16
+Stopped at: Phase 15 UAT complete (5/5 passed); code review fixes applied (WR-01–03); PR image URL checking added; ready for Phase 16
 Resume file: none
