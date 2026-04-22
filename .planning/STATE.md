@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
 status: Executing
-stopped_at: Phase 14 complete — all templates migrated to CDN URLs; 3 requirement overrides accepted (O-14-01/02/03)
-last_updated: "2026-04-22T21:45:00Z"
+stopped_at: Phase 15 context gathered — decisions locked for LFS removal
+last_updated: "2026-04-22T22:00:00Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 5
@@ -66,7 +66,7 @@ Recent decisions affecting current work:
 - v1.4 research: `CDN_BASE_URL` must be the Pull Zone URL (`{zone}.b-cdn.net`), NOT the Storage Zone URL (`storage.bunnycdn.com`)
 - v1.4 research: `| url` filter must be stripped from glossary image path expressions before adopting CDN URLs (filter corrupts absolute URLs)
 - v1.4 research: `pnwm-taxon-browser.js` has multiple image src construction sites — grep for `this._prefix` + `"images/"` before writing replacement
-- v1.4 research: LFS history rewrite requires two steps: `git lfs migrate export --everything` then `git filter-repo --path images/ --invert-paths`
+- v1.4 decision (Phase 15 discuss): LFS history rewrite uses `git filter-repo --invert-paths` ALONE — skip `git lfs migrate export` (would download ~16k images just to delete them; pointer files are 130-byte text, no download needed)
 - v1.4 research: GitHub will not free LFS storage quota until repo is deleted and recreated — accept billing for now (Out of Scope)
 - v1.3 decision (carry): `rclone sync` deletes production bucket files — always use `rclone copy`; `sync` only with mandatory `--dry-run` first
 - v1.3 decision (carry): Raw `/images/...` paths in templates (not `| url` filter) — Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix
