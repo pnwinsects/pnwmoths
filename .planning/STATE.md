@@ -2,35 +2,34 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
-status: Executing
-stopped_at: Phase 16 complete — push to main to trigger CI deploy + verify CDN images in browser (final SC); Phase 17 also complete; v1.4 nearly done
-last_updated: "2026-04-22T22:54:02Z"
-last_activity: 2026-04-22
+status: Complete
+stopped_at: v1.4 milestone archived 2026-04-23 — all 5 phases complete, site live on GitHub Pages with full production dataset
+last_updated: "2026-04-23T00:00:00Z"
+last_activity: 2026-04-23
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 13
-  completed_plans: 10
-  percent: 65
+  completed_plans: 13
+  percent: 100
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-22 after Phase 15)
+See: .planning/PROJECT.md (updated 2026-04-23 after v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 15 complete — LFS fully removed from history and CI; ready for Phase 16 (Build Pipeline Cleanup)
+**Current focus:** v1.4 complete — all phases shipped, full production dataset live; ready for /gsd-new-milestone
 
 ## Current Position
 
-Phase: 16 — Build Pipeline Cleanup (complete)
-Plan: 01 complete — Phase 16 done; push to main for CI deploy verification
-Status: Phase 16 Plan 01 complete — dead species photo copy block removed from copy-images.js; npm run build exits 0; no resize scripts found (PIPE-01, PIPE-02 satisfied)
-Last activity: 2026-04-22 — Phase 16 Plan 01 complete — scripts/copy-images.js cleaned; build verified locally; Task 3 CI deploy checkpoint auto-approved
+Milestone: v1.4 Image CDN — COMPLETE
+All 5 phases (13–17) complete; 13/13 plans done; 72/72 tests; 1,364 species pages on GitHub Pages
+Last activity: 2026-04-23 — v1.4 milestone archived
 
-Progress: [██████____] 60%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -96,6 +95,15 @@ Items acknowledged and carried forward:
 | Tech debt | No automated visual regression tests | Carry forward | v1.2 |
 | Tech debt | WR-01–03: test cleanup paths could be more robust | Carry forward | v1.2 |
 | CDN | GitHub LFS storage quota reclaim | Accept billing; out of scope | v1.4 |
+
+Items acknowledged at v1.4 milestone close on 2026-04-23:
+
+| Category | Item | Status |
+|----------|------|--------|
+| uat_gap | Phase 13: 13-HUMAN-UAT.md partial (0 pending scenarios) | acknowledged — human browser spot-check done |
+| verification_gap | Phase 13: 13-VERIFICATION.md human_needed (Optimizer pixel dimensions) | acknowledged — browser checks confirmed |
+| verification_gap | Phase 16: 16-VERIFICATION.md human_needed (CI deploy + CDN in browser) | acknowledged — push to main done, CI green, CDN images verified |
+| quick_task | 260420-a1k-browse-species-cards-and-tree-nav missing | acknowledged — abandoned task, not actioned |
 
 ## Session Continuity
 

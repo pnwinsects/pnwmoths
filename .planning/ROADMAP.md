@@ -5,11 +5,11 @@
 
 ## Milestones
 
-- ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-04-12) — [archive](.planning/milestones/v1.0-ROADMAP.md)
-- ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](.planning/milestones/v1.1-ROADMAP.md)
-- ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](.planning/milestones/v1.2-ROADMAP.md)
-- ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](.planning/milestones/v1.3-ROADMAP.md)
-- 🔧 **v1.4 Image CDN** — Phases 13–16 (active)
+- ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-04-12) — [archive](milestones/v1.0-ROADMAP.md)
+- ✅ **v1.1 Visual Identity** — Phase 6 (shipped 2026-04-18) — [archive](milestones/v1.1-ROADMAP.md)
+- ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](milestones/v1.2-ROADMAP.md)
+- ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](milestones/v1.3-ROADMAP.md)
+- ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
 
 ## Phases
 
@@ -51,173 +51,18 @@
 
 </details>
 
-**v1.4 Image CDN (Phases 13–16):**
+<details>
+<summary>✅ v1.4 Image CDN (Phases 13–17) — SHIPPED 2026-04-22</summary>
 
-**Milestone Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing; remove build-time resize scripts and LFS from the repo.
+**Milestone Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing; remove build-time resize scripts and LFS from the repo; migrate full production dataset.
 
-- [x] **Phase 13: CDN Provisioning** - Create bunny.net Storage + Pull Zone; upload images; configure Optimizer; wire GitHub secret; document upload workflow — completed 2026-04-22
+- [x] **Phase 13: CDN Provisioning** - Create bunny.net Storage + Pull Zone; upload 3,880 images; configure Optimizer; document upload workflow — completed 2026-04-22
 - [x] **Phase 14: Template Migration** - Wire `CDN_BASE_URL` into Eleventy; update all templates and `pnwm-taxon-browser.js` to construct CDN URLs — completed 2026-04-22
-- [x] **Phase 15: LFS Removal** - Rewrite git history to purge `images/`; clean `.gitattributes`; replace LFS checkout in CI — completed 2026-04-22
-- [x] **Phase 16: Build Pipeline Cleanup** - Remove species photo copy block from `copy-images.js`; retire build-time image resize scripts — completed 2026-04-22
-- [ ] **Phase 17: Migrate Full Species Data from Legacy Database** - Extract species accounts, taxonomy, and occurrence records from legacy pnwinsects-app MySQL database; replace placeholder CSV data with full production dataset
+- [x] **Phase 15: LFS Removal** - Rewrite git history to purge `images/` (16,191 files, 356 commits); clean `.gitattributes`; replace LFS checkout in CI — completed 2026-04-22
+- [x] **Phase 16: Build Pipeline Cleanup** - Remove species photo copy block from `copy-images.js`; confirm no image resize scripts exist — completed 2026-04-22
+- [x] **Phase 17: Migrate Full Species Data from Legacy Database** - Stream-parse 634 MB MySQL dump; write 1,348 species + 85,933 PNW occurrence records; 72/72 tests, 1,364 species pages — completed 2026-04-22
 
-## Phase Details
-
-### Phase 8: Schema Extension
-**Goal**: The data model supports subfamily taxonomy and curated navigation images
-**Depends on**: Phase 7
-**Requirements**: TAXON-01, TAXON-02, TAXON-03
-**Success Criteria** (what must be TRUE):
-  1. `species.csv` has a `subfamily` column; genera without subfamily have a blank value treated as null (not empty string) by the build pipeline
-  2. `images.csv` has a `navigational` boolean column; absent values default to false during build
-  3. `npm test` passes; new tests cover the blank-subfamily null-coercion and missing-navigational-flag behavior
-  4. `build-data.js` and `taxon.js`/`families.js` column maps reference the new fields without error
-**Plans**: 3 plans
-
-Plans:
-- [x] 08-01-PLAN.md — Add subfamily and navigational columns to CSV data files
-- [x] 08-02-PLAN.md — Update build-data.js, families.js, and images.js to recognise new columns
-- [x] 08-03-PLAN.md — Update tests: happy-path assertions and null-coercion tests
-
-### Phase 9: Build Pipeline Extension
-**Goal**: The build emits a taxonomy tree data file and a species-×-state JSON file that downstream code can consume
-**Depends on**: Phase 8
-**Requirements**: SFILT-01
-**Success Criteria** (what must be TRUE):
-  1. `npm run build` writes `_site/species-states.json` containing one entry per distinct (species_slug, state) pair from records.csv
-  2. `src/_data/taxon.js` exists and returns a family → subfamily → genus → species tree with up to 4 navigation images per taxon level; `families.js` is retired or superseded
-  3. The species-states query uses SELECT DISTINCT so file size stays bounded at full data scale
-  4. `npm test` passes; existing pipeline tests remain green
-**Plans**: 2 plans
-
-Plans:
-- [x] 09-01-PLAN.md — Emit species-states.json (TDD: DISTINCT query + post-Vite file write)
-- [x] 09-02-PLAN.md — Create taxon.js Eleventy data file (TDD: family→subfamily→genus→species tree with navImages)
-
-### Phase 10: Browse Shell Page
-**Goal**: `/browse/` is a single Eleventy-generated page with a JS-off static listing; per-genus pages are retired
-**Depends on**: Phase 9
-**Requirements**: BROWSE-01, BROWSE-07
-**Success Criteria** (what must be TRUE):
-  1. `/browse/` loads and contains a `<pnwm-taxon-browser>` element; taxonomy tree embedded as `<script type="application/json" id="taxon-data">` sibling (per D-01, overrides SC-1 data-taxonomy wording)
-  2. With JavaScript disabled, all families, genera, and species are visible as plain HTML in a `<noscript>` block
-  3. Per-genus static pages (`/browse/{genus}/`) no longer exist in `_site/`; the link checker reports no broken internal links pointing to them
-**Plans**: 1 plan
-
-Plans:
-- [x] 10-01-PLAN.md — Rewrite browse/index.njk, delete genus.njk and families.js, verify build
-
-### Phase 11: Accordion Component
-**Goal**: The browser-side accordion is fully interactive — expand/collapse, navigation images, show/hide toggle, and state filter all work
-**Depends on**: Phase 10
-**Requirements**: BROWSE-02, BROWSE-03, BROWSE-04, BROWSE-05, BROWSE-06, SFILT-02
-**Success Criteria** (what must be TRUE):
-  1. All families appear collapsed by default; each shows up to 4 navigation images when images are on
-  2. Expanding a family reveals its subfamilies (or genera for families with no subfamily); parent images hide while expanded
-  3. Expanding a subfamily reveals its genera; expanding a genus reveals species as links to factsheet pages
-  4. Navigation images fall back to `navigational`-flagged images, then to lowest-weight photos; no taxon shows a broken image placeholder
-  5. The show/hide images toggle controls image visibility globally; state filter hides taxa with no occurrence records in the selected state
-**Plans**: 3 plans
-
-Plans:
-- [x] 11-01-PLAN.md — Test scaffold: unit tests for buildStateMap, taxonHasState, collectSlugs (Wave 0)
-- [x] 11-02-PLAN.md — Implement pnwm-taxon-browser.js — full Lit accordion component
-- [x] 11-03-PLAN.md — Wire component in main.js + build verification
-
-### Phase 12: Validation
-**Goal**: A clean production build with all outputs present and tests passing
-**Depends on**: Phase 11
-**Requirements**: (none — validation phase)
-**Success Criteria** (what must be TRUE):
-  1. `npm run build` completes without errors; `_site/species-states.json` is present in the output
-  2. The link checker reports zero broken links across the built site
-  3. `npm test` passes with all existing and new tests green
-  4. Pagefind does not index the taxonomy JSON data attribute (no `data-pagefind-ignore` omission)
-**Plans**: 1 plan
-
-Plans:
-- [x] 12-01-PLAN.md — Commit UAT polish, run verification checklist, update planning docs
-
-### Phase 13: CDN Provisioning
-**Goal**: Images are served from bunny.net CDN with the Optimizer active; collaborators have a documented workflow to upload originals; GitHub Actions has the CDN secret
-**Depends on**: Nothing (first phase of v1.4)
-**Requirements**: CDN-01, CDN-02, CDN-03, CDN-04
-**Success Criteria** (what must be TRUE):
-  1. A browser request to `{CDN_BASE_URL}/{slug}/{filename}` returns a 200 with `Content-Type: image/webp` and the expected pixel dimensions (Bunny Optimizer active)
-  2. A browser request using an Image Class (glossary portrait crop, nav thumbnail) returns correct dimensions without width/height HTML attributes
-  3. `CDN_BASE_URL` is set as a secret in the GitHub Actions repository settings; the deploy workflow can read it as an environment variable
-  4. `_instructions/` contains a contributor-facing doc covering rclone FTP setup, `rclone copy` (not `sync`) for uploads, `--ignore-times` for replacements, and how to trigger cache invalidation
-**UI hint**: no
-**Plans**: 5 plans
-
-Plans:
-- [x] 13-01-PLAN.md — Add CDN_BASE_URL constant to eleventy.config.js; widen build-data.js filename regex
-- [x] 13-02-PLAN.md — Write migrate-images.js migration script; rebuild data/images.csv
-- [x] 13-03-PLAN.md — bunny.net dashboard setup, Optimizer, Image Classes, image upload (human-assisted)
-- [x] 13-04-PLAN.md — Write _instructions/UPLOADING_IMAGES.md; CDN delivery spot-check (task 2 superseded)
-- [x] 13-05-PLAN.md — Update CONTEXT.md (D-10/D-11/D-18 Image Classes disable), commit outstanding artifacts, CDN spot-check
-
-### Phase 14: Template Migration
-**Goal**: Every image URL in the built site resolves through the CDN; the Eleventy build fails fast when `CDN_BASE_URL` is absent in production
-**Depends on**: Phase 13
-**Requirements**: TMPL-01, TMPL-02, TMPL-03, TMPL-04, TMPL-05, TMPL-06
-**Success Criteria** (what must be TRUE):
-  1. Running `GITHUB_PAGES=true npm run build` without `CDN_BASE_URL` set exits with a clear error message and non-zero exit code
-  2. All species factsheet pages contain `<img src="https://...">` CDN URLs (no `/images/` relative paths) for species photos
-  3. All glossary portrait `<img>` tags use CDN URLs; the `| url` filter is absent from glossary image path expressions
-  4. The `<pnwm-taxon-browser>` element on `/browse/` receives a `cdn-base-url` attribute; image URLs constructed by the component in the browser resolve correctly via CDN
-  5. Species photo and glossary portrait `<img>` tags include a `srcset` with a 2× width descriptor pointing to the CDN
-**UI hint**: yes
-**Plans**: 2 plans
-
-Plans:
-- [x] 14-01-PLAN.md — Add urlencode filter + cdnBaseUrl global to eleventy.config.js; add CDN_BASE_URL constant + update image src sites in pnwm-taxon-browser.js
-- [x] 14-02-PLAN.md — Update species.njk and glossary/index.njk to use CDN URLs with urlencode filter and srcset
-
-### Phase 15: LFS Removal
-**Goal**: Git history contains no LFS pointers or `images/` blobs; CI no longer performs an LFS checkout
-**Depends on**: Phase 13
-**Requirements**: LFS-01, LFS-02
-**Success Criteria** (what must be TRUE):
-  1. `git lfs ls-files` returns no tracked files; `.gitattributes` contains no `filter=lfs` lines
-  2. A fresh `git clone` of the repository succeeds without `git lfs pull` and produces a working directory with no `images/` directory
-  3. Both `deploy.yml` and `pr-check.yml` use plain `actions/checkout@v4` with no LFS-related options or steps
-**UI hint**: no
-**Plans**: 2 plans
-
-Plans:
-- [x] 15-01-PLAN.md — History rewrite: filter-repo, .gitattributes delete, .gitignore update, force-push, local cleanup
-- [x] 15-02-PLAN.md — CI workflow update: replace LFS checkout with actions/checkout@v4.3.1, phase verification
-
-### Phase 16: Build Pipeline Cleanup
-**Goal**: The build pipeline contains no image-copy or resize logic for species photos; CI builds cleanly using CDN URLs throughout
-**Depends on**: Phase 14, Phase 15
-**Requirements**: PIPE-01, PIPE-02
-**Success Criteria** (what must be TRUE):
-  1. `scripts/copy-images.js` contains no species photo copy block; the banner, Pico CSS, and OSD asset copies remain and function correctly
-  2. No build-time image resize scripts exist in `scripts/`; `npm run build` completes without executing any image transformation step
-  3. A full GitHub Actions deploy run (using the real `CDN_BASE_URL` secret) completes successfully and the deployed site loads species images from the CDN
-**UI hint**: no
-**Plans**: 1 plan
-
-Plans:
-- [x] 16-01-PLAN.md — Remove species photo copy block; verify no resize scripts exist
-
-### Phase 17: Migrate Full Species Data from Legacy Database
-**Goal**: All species, taxonomy, and occurrence records from the legacy pnwinsects-app MySQL database are loaded into the static site's CSV data files, replacing placeholder data with the full production dataset
-**Depends on**: Phase 1 (data pipeline)
-**Requirements**: TBD
-**Success Criteria** (what must be TRUE):
-  1. `species.csv` contains all species from the legacy database (not just sample data)
-  2. `records.csv` contains occurrence records with the same filtering applied as the legacy site
-  3. `npm run build` completes without errors with the full dataset
-  4. `npm test` passes
-**Plans**: 3 plans
-
-Plans:
-- [x] 17-01-PLAN.md — Test scaffold: failing smoke tests for species.csv and records.csv output
-- [x] 17-02-PLAN.md — Write migrate-species.js migration script; run migration
-- [x] 17-03-PLAN.md — Fix test suite for full dataset; verify npm run build
+</details>
 
 ## Progress
 
@@ -242,7 +87,7 @@ Plans:
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 started: 2026-04-21*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23*
 
 ## Backlog
 

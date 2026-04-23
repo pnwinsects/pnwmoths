@@ -50,4 +50,18 @@
 - `<pnwm-taxon-browser>` Lit web component: 4-level accordion expand/collapse with navigation image strips, show/hide images toggle, and state filter that mutes taxa with no records in selected state
 - Full production build verified: 58/58 tests green, 0 link errors (lychee), `data-pagefind-ignore` confirmed on taxonomy JSON element
 
+## v1.4 Image CDN (Shipped: 2026-04-22)
+
+**Phases completed:** 5 phases (Phases 13–17), 13 plans
+**Files changed:** 72 files, +100,275 / -791 LOC
+**Known deferred items at close:** 4 (see STATE.md Deferred Items)
+
+**Key accomplishments:**
+
+- bunny.net Storage Zone + Pull Zone provisioned; 3,880 original Django images uploaded via rclone FTP; Bunny Optimizer active with direct query params for resize/crop; contributor upload workflow documented in `_instructions/UPLOADING_IMAGES.md`
+- All Eleventy templates (species.njk, glossary/index.njk) and `pnwm-taxon-browser.js` Lit component updated to serve images via CDN; urlencode Nunjucks filter handles Django filenames with spaces
+- 16,191 LFS-tracked files purged from all 356 commits via `git filter-repo --invert-paths`; `.gitattributes` deleted; origin/main force-pushed; CI updated to plain `actions/checkout@v4.3.1`
+- Dead species photo copy block removed from `scripts/copy-images.js` (ENOENT risk on fresh clones); confirmed no image resize scripts ever existed; build pipeline clean
+- Full legacy MySQL database migrated: 1,348 species + 85,933 PNW occurrence records loaded via streaming readline SQL dump parser, replacing 11-species placeholder stub data; npm run build produces 1,364 species pages; 72/72 tests passing
+
 ---

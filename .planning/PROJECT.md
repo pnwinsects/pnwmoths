@@ -1,17 +1,8 @@
 # PNW Moths Static Site
 
-## Current Milestone: v1.4 Image CDN
+## Current State: v1.4 Shipped 2026-04-22
 
-**Goal:** Migrate image storage from Git LFS to bunny.net object storage with CDN-native on-the-fly resizing, removing build-time resize scripts and LFS.
-
-**Target features:**
-- Upload original images (from pnwinsects-app Django media dir) to bunny.net Storage bucket; discard downsized LFS copies
-- Remove Git LFS from repo; LFS-tracked image files gone from history
-- `CDN_BASE_URL` env var required in all environments; templates always use CDN URLs
-- bunny.net Image Optimizer handles thumbnail sizes previously baked in at build time
-- CLI upload workflow (rclone or bunny CLI) + updated `_instructions/` for contributors
-- Build pipeline: remove image resize scripts; CI/CD drops LFS checkout
-- HTML continues to be served from GitHub Pages
+All v1.4 goals delivered: images on bunny.net CDN, LFS removed from history, build pipeline clean, full legacy dataset migrated. Site live on GitHub Pages with 1,348 species and 85,933 occurrence records.
 
 ## What This Is
 
@@ -53,21 +44,20 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Up to 4 navigation images per taxon level; images on by default with show/hide toggle — v1.3
 - ✓ Client-side state filter on browse page — v1.3
 - ✓ Per-genus static pages (`/browse/{genus}/`) retired — v1.3
+- ✓ Images uploaded to bunny.net Storage bucket (3,880 originals from pnwinsects-app Django media dir via rclone FTP); Pull Zone + Optimizer active — v1.4 Phase 13
+- ✓ CDN_BASE_URL hard-coded public constant in eleventy.config.js; Image Classes disabled (D-18), direct Optimizer query params used — v1.4 Phase 13
+- ✓ Contributor upload workflow documented in `_instructions/UPLOADING_IMAGES.md` (rclone FTP, --ignore-times, cache invalidation) — v1.4 Phase 13
+- ✓ All Eleventy templates updated to serve images via CDN; urlencode filter handles Django filenames with spaces — v1.4 Phase 14
+- ✓ Git LFS removed: 16,191 tracked files purged from all 356 commits via filter-repo --invert-paths; origin/main force-pushed — v1.4 Phase 15
+- ✓ GitHub Actions CI/CD updated: LFS checkout replaced with actions/checkout@v4.3.1 (SHA-pinned) — v1.4 Phase 15
+- ✓ Dead species photo copy block removed from copy-images.js; no image resize scripts in build pipeline — v1.4 Phase 16
+- ✓ Full legacy dataset migrated: 1,348 species + 85,933 PNW occurrence records from MySQL dump, replacing stub data; 72/72 tests, 1,364 species pages — v1.4 Phase 17
+- ✓ Site live on GitHub Pages with full production data — v1.4
 
 ### Active
 
-- ✓ Images uploaded to bunny.net Storage bucket from original source (pnwinsects-app Django media dir) — 3,880 files via HTTP API — v1.4 Phase 13
-- ✓ bunny.net Storage Zone + Pull Zone provisioned; Optimizer enabled; resize/crop query params confirmed working — v1.4 Phase 13
-- ✓ CDN_BASE_URL hard-coded constant in eleventy.config.js (public URL, not a secret); Image Classes disabled, direct Optimizer query params used — v1.4 Phase 13
-- ✓ CLI upload workflow documented in `_instructions/UPLOADING_IMAGES.md` for contributors (rclone FTP, --ignore-times, cache invalidation) — v1.4 Phase 13
-- ✓ Git LFS removed from repo; LFS-tracked image files purged from all 356 commits via filter-repo — v1.4 Phase 15
-- ✓ Eleventy templates updated to construct CDN URLs; all image `<img>` tags point to CDN — v1.4 Phase 14
-- ✓ GitHub Actions CI/CD updated to drop LFS checkout (actions/checkout@v4.3.1 SHA-pinned) — v1.4 Phase 15
-- [ ] Build-time resize scripts removed from pipeline
-- Note: WebP conversion not yet active on Optimizer (serving JPEG); resolve before Phase 15
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
-- ✓ Full species dataset migrated from legacy MySQL dump: 1,348 species + 85,933 PNW occurrence records in data/species.csv and data/records.csv — v1.4 Phase 17
-- [ ] Site deployed to real hosting (GitHub Pages) with real species/records data
+- [ ] Enable WebP conversion on bunny.net Optimizer (serving JPEG currently; toggle in Pull Zone → Optimizer → WebP conversion)
 
 ### Out of Scope
 
@@ -89,7 +79,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
-**v1.4 in progress:** Phase 15 complete 2026-04-22 — LFS fully removed (16,191 pointers purged from 356 commits, CI updated); Phase 16 (Build Pipeline Cleanup) is next
+**v1.4 shipped:** 2026-04-22 — 17 phases total (Phases 13–17); 72/72 tests passing; 1,364 species pages; images on bunny.net CDN; LFS removed; full production dataset live
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -100,6 +90,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - MAINT-03: build time under 5 min unverified — requires live CI observation
 - No automated visual regression tests for the site's visual identity
 - Code review WR-01–03: test cleanup paths could be more robust (warnings, non-blocking)
+- WR-01 (migrate-species): similar_species links silently dropped for record-only species (slug resolution gap)
+- WR-02 (migrate-species): safeSpecies sanitization logic duplicated in two loops (maintenance hazard)
+- WebP not yet active on bunny.net Optimizer — currently serving JPEG
 
 **Key data entities:**
 - `Species` — genus, species, common name, NOC ID, authority, similar species links
@@ -124,7 +117,12 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | DuckDB over SQLite for build-time queries | 100k+ occurrence records; better analytical query performance | ✓ Good — `@duckdb/node-api` works; use `.getRowObjectsJS()` and `closeSync()` |
 | Parquet + hyparquet for client-side occurrence data | Async loading avoids large inline JSON payloads; columnar compression efficient | ✓ Good — requires Snappy compression (not ZSTD); use `COMPRESSION snappy` in DuckDB export |
 | Lit for client-side components | Lightweight web components standard; lower churn than framework alternatives | ✓ Good — light DOM required for Leaflet; CSS custom properties unavailable in Canvas 2D |
-| Git LFS for image assets | Keeps images in repo without bloating git history | — Pending (not yet deployed with real images) |
+| Git LFS for image assets | Keeps images in repo without bloating git history | ✗ Replaced — bunny.net CDN; LFS purged from all history via filter-repo (v1.4) |
+| CDN_BASE_URL as public constant (not env var) | URL is intentionally public; no secret needed; simpler for non-technical maintainers | ✓ Good — eliminates dotenv machinery; hard-coded in eleventy.config.js (v1.4) |
+| Clone from LOCAL repo for LFS history rewrite | Local working copy had 60+ unpushed commits; cloning from GitHub would have lost Phase 13/14 work | ✓ Good — critical pattern for force-push workflows with ahead-of-remote local commits (v1.4) |
+| Module-level CDN constant in web components (not Lit property) | CDN URL is static; no need for reactive property; simpler and avoids attribute plumbing | ✓ Good — CDN_BASE_URL in pnwm-taxon-browser.js as module-level const (v1.4) |
+| Streaming readline for large SQL dump parsing | 634 MB dump exceeds Node.js 512 MB string-length limit; createReadStream + readline is safe equivalent | ✓ Good — migrate-species.js handles full dump without memory crash (v1.4) |
+| DB genus+species slug for records.csv | Image-derived slugs differ from DB slugs for ~326 reclassified species; build-data.js JOIN uses lower(genus\|\|'-'\|\|species) | ✓ Good — records correctly join to species in full dataset (v1.4) |
 | Docker for build environment | Reproducible builds locally and in CI | ✓ Good — Docker cold-start issue resolved; anonymous volume protects node_modules |
 | Pico CSS design token overrides via theme.css | No Pico source modification; clean separation; one file controls all brand tokens | ✓ Good — applied to all ~700 pages via single base.njk link |
 | Post-Vite asset copy in scripts/copy-images.js | eleventy-plugin-vite wipes _site/ during build; passthrough copies don't survive Vite's output directory rename | ✓ Good — extends existing copy-images.js pattern cleanly |
@@ -153,4 +151,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after Phase 15 complete*
+*Last updated: 2026-04-23 after v1.4 milestone complete*
