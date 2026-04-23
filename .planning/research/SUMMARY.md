@@ -1,100 +1,221 @@
-# Research Summary: PNW Moths v1.4 Image CDN
+# Research Summary: v2.0 Glossary Tooltips
 
-**Synthesized:** 2026-04-21
-**Overall confidence:** HIGH — all four files grounded in official documentation and direct codebase inspection
-
----
+**Project:** pnwmoths — Glossary Tooltips milestone (GLOS-02)
+**Domain:** Build-time HTML annotation with progressive-enhancement tooltip UI
+**Researched:** 2026-04-23
+**Confidence:** HIGH
 
 ## Executive Summary
 
-PNW Moths v1.4 migrates species images out of Git LFS and into bunny.net Storage, served through a CDN Pull Zone with the Bunny Optimizer enabled for on-the-fly resizing and automatic WebP delivery. The existing Eleventy/Vite/Lit stack is unchanged; the migration adds one environment variable (`CDN_BASE_URL`), optionally one npm package (`dotenv`), and one external tool (`rclone` via FTP). The work has three loosely sequential concerns: (1) provisioning bunny.net and uploading images, (2) rewriting git history to remove LFS and updating CI, and (3) updating templates and the `pnwm-taxon-browser` Lit component to construct CDN URLs.
+This milestone adds build-time glossary term highlighting to species prose pages. All 150 glossary terms, definitions, and images already exist in `data/glossary.csv` and are accessible via DuckDB at build time. The core work is an Eleventy `addTransform` that runs after template rendering, walks prose text nodes using `node-html-parser`, wraps first occurrences of glossary terms in `<abbr>` elements carrying `data-definition` and `data-image-url` attributes, and returns the annotated HTML. The tooltip UI uses the browser-native Popover API (Baseline April 2025, no polyfill needed), styled with Pico CSS design tokens, enhanced with ~20 lines of vanilla JS for hover/focus behavior. No external tooltip library is needed.
 
-The recommended approach is to enable Bunny Optimizer on the Pull Zone **before** removing any build-time image handling, then migrate templates to CDN URLs, then retire the species photo copy step in `copy-images.js`. The LFS history rewrite is the highest-coordination task — a destructive force-push requiring all collaborators to re-clone — and should be a distinct, announced step. GitHub will not free the LFS storage quota until the repository is deleted and recreated; this is a known limitation to accept or plan around explicitly.
+The recommended approach is deliberate and conservative: build-time injection (not client-side scanning), `node-html-parser` for safe text-node traversal (not regex on raw HTML), native Popover API (not tippy.js or Floating UI), and `<abbr>` with `data-*` attributes (not inline `<template>` siblings or JSON fetches). This minimizes npm weight, avoids client-side layout shift, and keeps tooltip content out of the Pagefind index. The biggest implementation risks are in the transform itself: regex matching inside HTML attributes corrupts markup silently, shared mutable state between page renders causes silent first-occurrence failures, and terms with regex metacharacters (`1A+2A`, `W-mark`) break match patterns without escaping.
 
----
-
-## Stack Additions
-
-- **rclone via FTP** — only viable upload tool; bunny.net S3 compatibility is in closed preview (not GA as of April 2026). FTP host = regional endpoint (e.g. `ny.storage.bunnycdn.com`); user = Storage Zone name; pass = `rclone obscure` output. Always use `--size-only` or `--ignore-times` (bunny FTP does not support mtime).
-- **Node `--env-file=.env`** (Node 20.6+) or `dotenv` — Eleventy 3.x has no built-in `.env` loading. Either works; `--env-file` avoids a new dependency.
-- **`git lfs migrate export --everything --include="*"`** then **`git filter-repo --path images/ --invert-paths`** — correct two-step LFS removal. `migrate export` replaces pointers; `filter-repo` strips the directory from history entirely.
-
-## Feature Table Stakes
-
-| Feature | Mechanism |
-|---------|-----------|
-| Width-constrained resize (species photos) | `?width=N` |
-| Exact-dimension crop (glossary 188×225) | `?crop=188,225&crop_gravity=north` — NOT `width`+`height` together |
-| WebP auto-delivery | Bunny Optimizer pull-zone setting; no HTML changes needed |
-| AVIF | Not supported (official bunny.net position — encoding too slow) |
-| Image Classes | Named presets in Bunny dashboard; centralise glossary/nav crop params |
-
-## Architecture: CDN_BASE_URL Data Flow
-
-```
-CDN_BASE_URL (env var / .env)
-  → eleventy.config.js: trimmed, fail-fast guard when GITHUB_PAGES=true
-       → addGlobalData('cdnBaseUrl', value)
-            → species.njk: static HTML <img src="https://cdn.../slug/file.jpg">
-            → glossary/index.njk: static HTML (remove | url filter first)
-            → browse/index.njk: cdn-base-url attribute on <pnwm-taxon-browser>
-                 → pnwm-taxon-browser.js: runtime JS img.src construction
-```
-
-**Files that change:** `eleventy.config.js`, `scripts/copy-images.js`, `src/species/species.njk`, `src/glossary/index.njk`, `src/browse/index.njk`, `src/components/pnwm-taxon-browser.js`, `.github/workflows/deploy.yml`, `.github/workflows/pr-check.yml`, `lychee.toml`. New: `.env.example`. Add `.env` to `.gitignore`.
-
-**Files that do NOT change:** `vite.config.js`, `src/_includes/base.njk` (banner stays site-relative), `src/_data/taxon.js`, `src/_data/images.js`.
-
-**Vite:** CDN URLs are absolute (`https://`). Vite's HTML transformer ignores absolute hrefs — no Vite config changes needed.
-
-## Critical Pitfalls
-
-| Pitfall | Prevention | Phase |
-|---------|-----------|-------|
-| LFS purge requires repo recreation to free GitHub storage | Accept billing or plan repo recreation window; document decision | LFS removal |
-| `rclone sync` deletes production bucket files | Always use `rclone copy`; `rclone sync` only with mandatory `--dry-run` first | Upload workflow |
-| Bunny Optimizer must be enabled before removing build-time resize scripts | Enable → verify in browser network tab → then update templates | Provisioning |
-| `\| url` filter corrupts absolute CDN URLs in `glossary/index.njk` | Remove `\| url` from all image path expressions in same commit as CDN URL adoption | Template migration |
-| `pnwm-taxon-browser.js` has multiple image src construction sites | Grep for `this._prefix` + `"images/"` before writing replacement; audit `_renderImageStrip` (~line 143) and `_renderSpecies` (~line 199) | Template migration |
-| rclone mtime skips re-uploads of same-named replacement files | Use `--ignore-times` when replacing existing files | Upload workflow |
-| `CDN_BASE_URL` must be Pull Zone URL, not Storage Zone URL | `CDN_BASE_URL` = `{zone}.b-cdn.net` hostname, NOT `storage.bunnycdn.com` | Provisioning |
-| lychee excludes image extensions — CDN image 404s invisible to CI | Add CDN hostname exclusion to `lychee.toml`; manually spot-check image URLs post-deploy | CI/CD |
-
-## Recommended Phase Order
-
-Hard dependencies: Phase A (bunny.net provisioning) must complete before Phase D (copy-images.js retirement). Phase C (template migration) must also complete before Phase D. Phases B and C can run in parallel after A.
-
-**A — bunny.net provisioning + image upload**
-Create Storage Zone + Pull Zone; enable Optimizer (verify in browser network tab before proceeding); configure rclone; bulk-upload originals from `pnwinsects-app`; set `CDN_BASE_URL` secret in GitHub Actions; document rclone workflow in `_instructions/`.
-
-**B — LFS removal (history rewrite)**
-Announce; backup mirror; `git lfs migrate export --everything`; `git filter-repo --path images/ --invert-paths`; clean `.gitattributes`; force-push. Accept GitHub storage billing or plan repo recreation.
-
-**C — Eleventy template migration**
-`CDN_BASE_URL` → `eleventy.config.js` global data with trailing-slash trim + fail-fast guard; `cdnUrl` Nunjucks filter; update `species.njk`, `glossary/index.njk` (strip `| url`), `browse/index.njk` (add `cdn-base-url` attr); update `pnwm-taxon-browser.js` (new `cdn-base-url` Lit property, replace all src construction sites); add `.env.example`.
-
-**D — `copy-images.js` + CI/CD finalization**
-Remove species photo copy block (keep banner/Pico/OSD copies); replace LFS checkout action with plain `actions/checkout@v4` in both workflow files; add `CDN_BASE_URL` env to deploy build step; update `lychee.toml` to exclude CDN hostname.
+The overall scope is medium complexity. The transform logic is the hard part; the tooltip UI is straightforward. The work is naturally sequenced into three phases: (1) build the transform and verify correctness in isolation, (2) wire in the popover HTML structure and CSS, (3) add JS hover enhancement and glossary images. All three phases use well-documented patterns and can proceed without additional research.
 
 ---
 
-## Verify Before Coding
+## Key Findings
 
-- `grep -n 'src=\|_prefix\|images/' src/components/pnwm-taxon-browser.js` — get exact count and locations of image src construction sites
-- Check whether `scripts/build-data.js` has any image resize logic to retire (unconfirmed by research)
+### Recommended Stack
+
+The existing stack is unchanged. One new npm dependency is needed: `node-html-parser ^7.1.0`, for safe DOM-tree traversal inside the Eleventy transform. It is ~10x faster than JSDOM at build time, has zero native dependencies, and its `childNodes`/`TextNode` API is sufficient for this task. The tooltip UI requires no new npm dependencies: the Popover API is browser-native (Baseline April 2025), CSS uses existing Pico CSS design tokens, and hover behavior is ~20 lines of vanilla JS added to the existing Vite entry point.
+
+Glossary data is loaded by reading `data/glossary.csv` directly via `csv-parse` (already a project dependency) inside `eleventy.config.js` at startup — not through DuckDB — to avoid a second DuckDB lifecycle. The data is shaped into a `Map<lowerTerm, { term, definition, imageUrl }>` and sorted longest-first to prevent partial matches ("forewing" before "wing").
+
+**New dependencies:**
+- `node-html-parser ^7.1.0` — parse rendered HTML string in Eleventy transform; walk text nodes; inject `<abbr>` markup. Cheerio, JSDOM, unified/rehype all rejected as heavier with no meaningful benefit.
+- Popover API (browser-native, no npm) — tooltip show/hide, keyboard Escape, focus management.
+- ~20 lines vanilla JS — wire hover/focus events to `showPopover`/`hidePopover`.
+
+**Explicitly excluded:**
+- Floating UI, tippy.js, Popper.js — unnecessary given native Popover API.
+- `popover="hint"` + `interestfor` — Chrome 142+ only; WebKit objection confirmed; needs JS fallback for Firefox/Safari.
+- CSS Anchor Positioning — safe for `@supports` progressive enhancement but not required for v2.0.
+- Client-side term scanning (`mark.js`) — contradicts build-time requirement.
+
+### Expected Features
+
+**Must have (table stakes):**
+- First-occurrence-only highlighting per page — Wikipedia convention; repeated highlights are visual noise.
+- Popover shows definition text on hover and keyboard focus — the core value.
+- Keyboard accessible (Tab + Escape) — WCAG requirement; Popover API provides this for free.
+- No-JS degradation — `<abbr title="...">` provides native browser tooltip; glossary link as fallback.
+- Popover dismisses on Escape and click outside — `popover="auto"` behavior, no JS needed.
+- Consistent visual treatment — dotted underline matching Pico CSS `<abbr>` defaults.
+- Build-time injection — 1,364 pages; client-side scanning adds JS weight and layout shift.
+
+**Should have (differentiators):**
+- Popover shows glossary image when available — ~50 of 150 terms have images; morphological terms are clearer with diagrams.
+- CSS Anchor Positioning via `@supports` — auto-placement without JS; safe for progressive enhancement.
+- Link-to-glossary as primary trigger — tapping the term on mobile navigates to the full glossary entry.
+- Case-insensitive matching with multi-word support — "Anal angle", "Basal area", "Hair pencils" require longest-first ordering.
+- Exclusion of code/pre/heading/existing-link contexts — prevents structural annotations.
+
+**Defer (v2+):**
+- Animated popover transitions (`@starting-style`, `allow-discrete`) — known to cause pixel-shifting jank in Safari with Popover API.
+- Highlighting in browse page accordion descriptions — out of scope for this milestone.
+- Stemming/plural matching (larva/larvae) — exact case-insensitive is correct for v2.0.
+- `popover="hint"` + `interestfor` — requires JS fallback for Firefox/Safari; marginal UX gain.
+
+**Anti-features (explicitly avoid):**
+- Client-side JavaScript term scanning.
+- Fuzzy/stemming-based matching.
+- Async definition fetch on hover — definitions are static and already in the page.
+- Modal-style definitions — `popover="auto"` auto-dismisses correctly.
+- Regex applied to raw HTML string — corrupts attributes silently.
+- Highlighting every occurrence — first-occurrence convention exists for good reasons.
+- `data-pagefind-ignore` on `<abbr>` elements — that would remove the term from search index.
+
+### Architecture Approach
+
+The transform is the architecturally central piece. It runs as an Eleventy `addTransform` on every HTML output file, guarded first by file extension (`.html` only), second by a fast string scan for a prose-presence marker (`class="species-prose"` on the `{% renderFile %}` container in `species.njk`), and third by path exclusion for the glossary page itself. Only pages passing all three guards incur the `node-html-parser` parse cost. Inside the transform, `querySelectorAll('main p, main li, main h2, main h3')` scopes annotation to prose; `closest('dl')` and `closest('[data-pagefind-ignore]')` checks skip taxonomy and interactive sections. A fresh `Set` initialised per transform invocation (never at module scope) tracks seen terms across elements within a page. Terms are processed longest-first. The regex per term uses `escapeRegex` to handle metacharacters and lookbehind/lookahead instead of `\b` for terms starting or ending with non-word characters.
+
+Tooltip content is embedded in `data-definition` and `data-image-url` attributes on `<abbr>` at build time — no runtime fetch, no inline `<template>`, no JSON blob. The JS hover enhancement reads these attributes at runtime to populate a native `<span popover>` element, which keeps definition text out of the DOM at build time and therefore out of the Pagefind index.
+
+**Major components:**
+
+1. `src/_lib/glossary-transform.js` — pure `applyGlossaryTerms(html, termMap)` function + `escapeRegex`, `escapeHtml` helpers; unit-testable in isolation.
+2. `eleventy.config.js` modification — `async` export; `loadGlossaryTerms()` at startup via `csv-parse`; `addTransform` registration with three guards.
+3. `src/styles/glossary-terms.css` — `.glossary-term` dotted underline, `.gloss-popover` card styling using Pico CSS design tokens.
+4. `src/components/glossary-tooltip.js` — ~20-line vanilla JS hover/focus handler; reads `data-definition` and `data-image-url` from `<abbr>`; creates and manages `<span popover>`.
+5. `src/species/species.njk` — add `class="species-prose"` wrapper to `{% renderFile %}` container (enables fast bail-out guard).
+
+**Data flow:**
+
+```
+data/glossary.csv
+  → loadGlossaryTerms() in eleventy.config.js (csv-parse, at startup)
+      → Map<lowerTerm, {term, definition, imageUrl}> (sorted longest-first)
+          → addTransform closure
+
+species/species.njk + {% renderFile prose.md %}
+  → full page HTML string
+      → addTransform("glossary-terms"):
+          guards → node-html-parser parse → text node walk
+          → <abbr data-definition="..." data-image-url="...">term</abbr>
+          → root.toString()
+              → _site/species/{slug}/index.html
+
+pagefind --site _site
+  → indexes <abbr> text content normally; data-* attributes ignored
+```
+
+### Critical Pitfalls
+
+1. **Regex on raw HTML corrupts attributes** — A naive `content.replace(/\bCosta\b/gi, ...)` will match inside `class="costa-strip"` or `alt="..."` attribute values. Prevention: always use `node-html-parser` to walk text nodes; never apply regex to the full HTML string. This architectural decision must be made before writing any transform code.
+
+2. **Shared mutable state between page renders** — A `Set` declared at module scope persists across all page renders. Eleventy 3.x triggers transforms with potential concurrency. Result: only the first page processed gets glossary links; all others silently get none. Prevention: initialize the `seen` Set inside the transform callback, not in the closure's outer scope.
+
+3. **Transform runs on glossary page, creating recursive self-links** — Without a guard, `/glossary/index.html` gets every definition wrapped in an `<abbr>` pointing back to itself. Prevention: add `path.includes('/glossary/')` exclusion as a second guard; add `class="species-prose"` bail-out as a third guard.
+
+4. **Terms with regex metacharacters produce silent wrong matches** — `1A+2A` in `new RegExp('1A+2A')` means "1A, then one or more A's, then 2A". The glossary has `1A+2A`, `W-mark`, `CuA1`, `M1–M3`. Prevention: always escape via `str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')` before constructing `RegExp`. Unit-test every non-alpha term explicitly.
+
+5. **Pico CSS `data-tooltip` fails on mobile and keyboard** — CSS `:hover` tooltips have no touch equivalent and violate WCAG 1.4.13. Prevention: do not use Pico's CSS-only tooltip mechanism. Use the Popover API with a JS hover/focus handler. The `<abbr title="...">` attribute provides a no-JS fallback that does not introduce accessibility gaps.
+
+6. **JS-rendered tooltip DOM gets indexed by Pagefind** — If tooltip content is rendered as a visible DOM element at build time, Pagefind indexes it and search results show definition fragments. Prevention: use `data-*` attributes on `<abbr>` (Pagefind ignores attributes); only materialize the popover `<span>` at runtime via JS.
+
+---
+
+## Implications for Roadmap
+
+### Phase 1: Build-time transform
+
+**Rationale:** The transform is the structural foundation; everything else depends on its output HTML. Build and validate it in isolation before adding tooltip UI. Starting with single-word terms and deferring multi-word adds a useful incremental checkpoint.
+
+**Delivers:** Species prose pages with `<abbr data-definition="..." data-image-url="...">` wrapping first occurrences of glossary terms. Correct no-JS degradation via `<abbr title="...">`. Pages pass HTML validation. Unit test suite for the transform function.
+
+**Addresses:** First-occurrence-only, build-time injection, case-insensitive matching, exclusion of inappropriate contexts (headings, code, existing links, `<dl>` taxonomy block).
+
+**Avoids:** Pitfalls 1 (regex on raw HTML), 2 (shared state), 3 (glossary page self-links), 7 (regex metacharacters), 9 (outputPath false crash), 10 (script/style nodes), 11 (case mutation), 12 (headings).
+
+**New files:** `src/_lib/glossary-transform.js`, `src/_lib/glossary-transform.test.js`
+**Modified files:** `eleventy.config.js` (async + transform), `src/species/species.njk` (species-prose class), `package.json` (node-html-parser)
+
+### Phase 2: Popover UI — HTML structure and CSS
+
+**Rationale:** Once the transform is verified, add the tooltip UI. HTML structure and CSS can be built and tested without the JS hover enhancement — the Popover API's `popovertarget` on the trigger enables click-to-open natively. This gives a clean accessibility checkpoint before adding hover complexity.
+
+**Delivers:** Fully accessible tooltip popovers (keyboard Tab + Escape, screen reader `role="tooltip"`, click-to-open without JS, mobile tap navigates to glossary page). CSS styled with Pico CSS design tokens. Definition text displayed; no image yet.
+
+**Addresses:** Keyboard accessible, popover dismisses on Escape/click-outside, consistent visual treatment, no-JS degradation.
+
+**Avoids:** Pitfall 4 (Pagefind indexing — popover not in DOM at build time), pitfall 5 (mobile/keyboard — Popover API handles focus and touch), pitfall 6 (overflow clipping — Popover API renders in top layer), pitfall 13 (z-index — same top layer reason), pitfall 15 (Pico attribute conflicts — audit before implementing CSS).
+
+**New files:** `src/styles/glossary-terms.css`
+**Modified files:** `src/_includes/base.njk` (add stylesheet link); transform output HTML updated to emit `<button popovertarget>` + `<span popover role="tooltip">` structure.
+
+### Phase 3: JS hover enhancement and glossary images
+
+**Rationale:** Final progressive enhancement layer. Hover handler and image display are additive — they improve the experience for pointer/keyboard users without blocking earlier phases. Images require verifying CDN URL construction and lazy loading behavior.
+
+**Delivers:** Hover/focus show/hide via `showPopover`/`hidePopover`. Glossary images in popovers for the ~50 terms that have `image_filename`. Full rich tooltip experience on desktop.
+
+**Addresses:** Popover shows glossary image, JS hover enhancement, optional CSS Anchor Positioning with `@supports` fallback.
+
+**New files:** `src/components/glossary-tooltip.js` (~20 lines)
+**Modified files:** Vite entry point or `species.njk` import for the new JS module.
+
+### Phase Ordering Rationale
+
+- The transform must exist before the tooltip UI — you cannot style or script something that is not in the HTML.
+- HTML structure and CSS are validated before JS is added — clean accessibility checkpoint where keyboard and screen reader behavior is confirmed without hover complexity.
+- Images come last: pure enrichment, depend on CDN URL construction verified in earlier phases, and the feature is fully usable without them.
+- Multi-word term matching should be included in Phase 1 (longest-first sort is required regardless); it is not a separate phase.
+
+### Research Flags
+
+No phase needs a dedicated research run — all patterns are well-documented. Flag these for implementation-time validation:
+
+- **Phase 1 — build time baseline:** Run `npm run build` before and after adding the transform to establish a baseline against the MAINT-03 5-minute CI target. If per-page parse cost is problematic, add a pre-parse string scan bail-out for prose-less pages.
+- **Phase 1 — transform concurrency:** Verify per-invocation state isolation with a two-page build before scaling to all species pages.
+- **Phase 2 — Pico CSS attribute conflict audit:** Grep all templates for existing `data-tooltip` or `title` attribute usage before implementing tooltip CSS.
+- **Phase 2 — Pagefind excerpt output:** Run `pagefind --site _site` after Phase 2 build and inspect species page excerpts to confirm definition text does not appear.
 
 ---
 
 ## Confidence Assessment
 
-| Area | Confidence | Basis |
+| Area | Confidence | Notes |
 |------|------------|-------|
-| Stack (rclone FTP, bunny.net, dotenv) | HIGH | Official bunny.net + rclone docs; codebase inspection |
-| Features (Optimizer params, WebP, AVIF) | HIGH | Official bunny.net docs; AVIF via official blog |
-| Architecture (integration points, data flow) | HIGH | Direct source file inspection; file paths and line numbers verified |
-| Pitfalls (LFS, rclone, URL construction) | HIGH | Official docs, rclone issue tracker, git-lfs man page, codebase |
+| Stack | HIGH | `addTransform` API verified against Eleventy 3.x docs and Context7. `node-html-parser` API confirmed from GitHub README. Popover API browser support confirmed from MDN (Baseline April 2025). |
+| Features | HIGH | UX patterns verified against MDN, hidde.blog (W3C contributor), Smashing Magazine. Browser support table cross-checked across multiple sources. |
+| Architecture | HIGH | All integration points verified against existing source files. `csv-parse` already a project dependency. Eleventy 3.x async export supported. |
+| Pitfalls | HIGH | Grounded in existing codebase inspection: actual term list with special characters, actual `theme.css` overflow values, actual `species.njk` structure, Eleventy Issues #653/#897. |
+
+**Overall confidence:** HIGH
+
+### Gaps to Address
+
+- **`this.ctx` data availability in Eleventy 3.x transforms:** Not explicitly documented. Confirmed workaround (direct module import at config startup) is reliable; not a blocker.
+- **Exact performance cost of `node-html-parser` at scale:** Research cites ~2 ms/file from benchmarks, extrapolating to ~2.7 seconds for 1,348 pages. Real-world measurement on this codebase's HTML size may differ. Benchmark in Phase 1 before worrying about optimizations.
+- **CSS Anchor Positioning `@supports` fallback positioning:** When not supported, popover uses browser default positioning. May need a JS fallback for older Safari on positioning; low priority since Anchor Positioning is Baseline 2026.
 
 ---
 
-*Research completed: 2026-04-21*
-*Ready for requirements: yes*
+## Sources
+
+### Primary (HIGH confidence)
+- Eleventy 3.x `addTransform` API — Context7 `/11ty/eleventy`; https://www.11ty.dev/docs/transforms/
+- `node-html-parser` v7.1.0 — npm, GitHub README, Context7 `/taoqf/node-html-parser`
+- MDN Popover API — https://developer.mozilla.org/en-US/docs/Web/API/Popover_API (Baseline April 2025)
+- hidde.blog — Popover accessibility and semantics (W3C contributor)
+- Chrome Developers — Anchor Positioning API
+- Eleventy Issues #653/#897 — `outputPath.endsWith` crash when `permalink: false`
+
+### Secondary (MEDIUM confidence)
+- Frontend Masters — Popover API for HTML Tooltips (hover JS pattern, image in popover)
+- Smashing Magazine — Getting Started With The Popover API (2026-03)
+- dbushell.com — Glossary Web Component (2025-05, independent practitioner)
+- npm-compare — parse5 vs node-html-parser performance benchmarks
+- OddBird — Anchor Positioning polyfill updates
+
+### Project codebase (direct inspection)
+- `eleventy.config.js`, `src/_data/glossary.js`, `src/species/species.njk`, `src/glossary/index.njk`
+- `data/glossary.csv` — 149 terms; special-character terms: `1A+2A`, `W-mark`, `CuA1`, `M1–M3`
+- `src/styles/theme.css` — no `overflow` on `.content-wrapper`; `nav { overflow: auto }`
+- `.planning/PROJECT.md` — MAINT-03 build time target; Pico CSS decision history
+
+---
+*Research completed: 2026-04-23*
+*Ready for roadmap: yes*

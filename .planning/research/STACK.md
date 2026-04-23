@@ -1,369 +1,238 @@
-# Stack Research: PNW Moths Static Site
+# Technology Stack: v2.0 Glossary Tooltips
 
-**Project:** pnwmoths static rebuild
-**Researched:** 2026-04-21 (updated for v1.4 Image CDN milestone)
-**Mode:** Feasibility — specific tools and configuration for CDN migration
-
----
-
-## v1.4 Milestone Stack: Image CDN Migration
-
-The existing stack (Eleventy 3.1.x, Vite 8.x, DuckDB, hyparquet, Lit, Leaflet, Pagefind, Pico CSS)
-is unchanged. This document covers only the four new capabilities needed for v1.4.
+**Project:** pnwmoths — build-time glossary term detection and tooltip rendering
+**Researched:** 2026-04-23
+**Milestone:** v2.0 Glossary Tooltips (GLOS-02)
+**Scope:** Additions/changes only — existing stack (Eleventy 3.x, Vite, DuckDB, Lit, Pagefind) is unchanged.
 
 ---
 
-## Capability 1: bunny.net Storage Upload
+## What Needs to Be Built
 
-### Recommended tool: rclone via FTP
+1. **Build-time transform** — scan compiled species prose HTML, detect first occurrence of each glossary term per page, wrap it with tooltip markup.
+2. **Tooltip presentation** — on hover/focus, show definition text + optional glossary image. Works without JavaScript (graceful degradation).
 
-**Why rclone over alternatives:**
-
-| Tool | Status | Verdict |
-|------|--------|---------|
-| rclone (FTP backend) | Active, widely used | **Use this** |
-| rclone (S3 backend) | Closed preview as of Q1 2026 — not yet GA | Skip — unavailable without invitation |
-| simplesurance/bunny-cli | Archived Sept 2023, no releases | Skip — abandoned |
-| own3d/bunny-cli | Undocumented, community project | Skip — unvetted |
-| DKFN/bunnycdn-cli | Unofficial, small project | Skip — undocumented maintenance status |
-| bunny.net HTTP API (curl) | Official, always available | Fallback for CI scripting if rclone proves awkward |
-
-bunny.net S3 compatibility is in closed preview as of April 2026 ("Q2 preview" per their blog).
-Do not depend on S3 for this milestone. FTP is the stable, documented, widely-used path.
-
-**rclone version:** Use current stable (1.68.x at time of writing). Install via `brew install rclone`
-(macOS) or the official install script for CI. No specific version pinning needed; rclone FTP is mature.
-
-### rclone FTP configuration for bunny.net
-
-```ini
-[bunny]
-type = ftp
-host = ny.storage.bunnycdn.com
-user = YOUR_STORAGE_ZONE_NAME
-pass = RCLONE_OBSCURED_PASSWORD
-port = 21
-```
-
-**Regional FTP endpoints** (choose the region where your Storage Zone was created):
-
-| Region | FTP Host |
-|--------|----------|
-| Falkenstein (default) | `storage.bunnycdn.com` |
-| New York | `ny.storage.bunnycdn.com` |
-| Los Angeles | `la.storage.bunnycdn.com` |
-| Singapore | `sg.storage.bunnycdn.com` |
-| Sydney | `syd.storage.bunnycdn.com` |
-
-**Authentication:**
-- `user` = Storage Zone name (shown in bunny.net dashboard)
-- `pass` = Storage Zone password (API key). Must be obscured: run `rclone obscure YOUR_PASSWORD`,
-  paste the output into the config. Do NOT paste the raw password.
-
-**Generate the config non-interactively:**
-
-```bash
-rclone config create bunny ftp \
-  host=ny.storage.bunnycdn.com \
-  user=YOUR_ZONE_NAME \
-  pass=$(rclone obscure YOUR_PASSWORD) \
-  port=21
-```
-
-**Known FTP quirk:** File modification times are not settable via bunny.net's FTP interface.
-This affects rclone's `--checksum` and time-based sync; use `--size-only` as the transfer
-comparison method when syncing.
-
-### Upload commands
-
-Initial bulk upload (16,000+ files from local `images/` directory):
-
-```bash
-# Upload entire images tree, skip files of same size
-rclone sync images/ bunny:images/ --size-only --progress --transfers=16
-
-# Dry run first
-rclone sync images/ bunny:images/ --size-only --dry-run --progress
-```
-
-For CI (upload new/changed images from a Django media dir):
-
-```bash
-rclone sync /path/to/django/media/images/ bunny:images/ --size-only --transfers=8
-```
-
-**`--inplace` flag:** Add `--inplace` if you encounter partial-file errors on FTP. This writes
-directly to the destination file rather than a temp name, avoiding FTP RNFR/RNTO rename issues
-reported in the rclone community forum for bunny.net FTP.
-
-**Confidence:** HIGH — FTP endpoint URLs confirmed from bunny.net official API docs;
-rclone FTP config pattern confirmed from rclone community forum discussion.
+The existing glossary data pipeline (DuckDB → `src/_data/glossary.js`) already delivers all terms, definitions, and image filenames to the Eleventy data cascade. No data pipeline changes are needed.
 
 ---
 
-## Capability 2: bunny.net Image Optimizer (CDN-native resizing)
+## Integration Point: Eleventy `addTransform`
 
-### Architecture: Storage Zone + Pull Zone
-
-bunny.net Image Optimizer requires two linked resources:
-
-1. **Storage Zone** — where original images live. Files uploaded via rclone.
-2. **Pull Zone** — CDN delivery layer, linked to the Storage Zone. Optimizer is enabled
-   on the Pull Zone. Pull Zone gets a `*.b-cdn.net` hostname.
-
-The Pull Zone URL becomes `CDN_BASE_URL`. Example:
-```
-https://pnwmoths.b-cdn.net/images/acronicta-americana/01.jpg
-```
-
-### Enabling Image Optimizer
-
-In the bunny.net dashboard: select the Pull Zone → left menu → "Optimizer" → "Turn on Bunny Optimizer".
-Also enable "Dynamic Image API" in the Optimizer settings. This is a separate toggle from basic optimization.
-
-**Cost:** $9.50/month per Pull Zone. Bandwidth is charged separately on top. For a low-traffic
-specimen photography site, bandwidth costs will be negligible (static site, images are the bulk).
-
-### URL parameters for on-the-fly resizing
-
-Append query parameters to any image URL served through the Pull Zone:
-
-```
-# Resize to 400px wide, maintain aspect ratio
-https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400
-
-# Resize to 300px tall, maintain aspect ratio
-https://pnwmoths.b-cdn.net/images/slug/01.jpg?height=300
-
-# Both width and height (may distort unless crop is used)
-https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400&height=300
-
-# WebP conversion + quality
-https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400&format=webp&quality=85
-
-# Crop with gravity
-https://pnwmoths.b-cdn.net/images/slug/01.jpg?width=400&height=300&crop=true&crop_gravity=center
-```
-
-**Full parameter list** (confirmed from official docs):
-- Sizing: `width`, `height`, `aspect_ratio`
-- Format/quality: `quality` (1–100), `format` (jpeg, png, webp, gif)
-- Cropping: `crop`, `crop_gravity`, `face_crop`
-- Effects: `blur`, `sharpen`, `brightness`, `contrast`, `saturation`, `hue`, `sepia`, `gamma`
-- Orientation: `flip`, `flop`, `rotate`
-
-**Caching behavior:** The optimizer processes on first request, caches at the edge. All subsequent
-requests for the same URL+parameters are served from cache. Different parameter combinations = different
-cache entries; the original file is stored once.
-
-**Confidence:** HIGH — parameter list confirmed from official bunny.net Dynamic Images documentation.
-Pricing confirmed from bunny.net pricing page ($9.50/month/Pull Zone).
-
----
-
-## Capability 3: Removing Git LFS from the Repository
-
-### Why: git lfs migrate export (not git filter-repo)
-
-`git lfs migrate export` is the correct tool for this task. It is LFS's own migration command,
-understands pointer files natively, and handles `.gitattributes` cleanup. `git filter-repo` can
-strip blobs but does not understand LFS pointer format and requires custom scripting. Use the built-in tool.
-
-**Important GitHub note:** After LFS removal, the LFS objects remain on GitHub's remote storage
-and still count toward the LFS storage quota. The only way to purge them from GitHub's servers is
-to delete and recreate the repository (or contact GitHub support). Plan for this.
-
-### Complete workflow
-
-**Prerequisites:** Ensure all LFS objects are downloaded locally before rewriting history.
-
-```bash
-# Step 0: Create a full backup (non-negotiable before history rewrite)
-git clone --mirror git@github.com:org/pnwmoths.git pnwmoths-backup.git
-cd pnwmoths-backup.git && git lfs fetch --all
-cd ..
-
-# Step 1: In the working repo — fetch all LFS objects
-git lfs fetch --all
-
-# Step 2: Export — converts all LFS pointers to real file blobs in history
-# --everything rewrites all local and remote refs
-# --include="*" matches all LFS-tracked files
-git lfs migrate export --everything --include="*"
-
-# Step 3: Remove LFS hooks and filters from the local repo
-git lfs uninstall --local
-
-# Step 4: Remove .gitattributes LFS tracking rules
-# Edit .gitattributes and delete all lines containing "filter=lfs"
-# Then:
-git add .gitattributes
-git commit -m "remove Git LFS tracking"
-
-# Step 5: Clean local git objects
-git reflog expire --expire=now --all
-git gc --aggressive --prune=now
-
-# Step 6: Force-push all branches (coordinate with collaborators first)
-git push --force-with-lease --all
-git push --force-with-lease --tags
-```
-
-**Current repo state (observed):**
-- `.gitattributes` tracks: `images/**/*.jpg`, `images/**/*.jpeg`, `images/**/*.png`, `plates/**/*.jpg`
-- `git lfs ls-files` reports 16,191 LFS objects — all will be inlined into git history
-- 16,191 files × average ~200KB/image ≈ several GB of history after conversion
-
-**Post-LFS repo size consideration:** After `git lfs migrate export`, all image blobs become
-regular git objects in history. This will make the repository very large. Options:
-
-1. **Preferred:** After migrating, do a `git filter-repo --path images/ --invert-paths` pass to
-   strip `images/` from history entirely (since images are moving to bunny.net anyway), then add a
-   fresh commit that adds only the non-image files. This keeps the repo small.
-2. **Simpler but large:** Just remove the `images/` passthrough copy from the build and don't
-   commit the directory. History remains large but manageable.
-
-If option 1 (strip from history), install `git-filter-repo`:
-
-```bash
-pip install git-filter-repo
-# or: brew install git-filter-repo
-
-# Remove images/ from all history
-git filter-repo --path images/ --invert-paths
-```
-
-Run `git filter-repo` AFTER `git lfs migrate export` (so there are real blobs to strip,
-not just pointer files), then garbage-collect again.
-
-**Confidence for migrate export command:** HIGH — confirmed from official git-lfs man page
-(`git-lfs-migrate.adoc` in git-lfs repo). Note that `--everything` rewrites only local refs;
-remote refs need force-push separately.
-
-**Confidence for GitHub LFS object purge limitation:** HIGH — confirmed from GitHub Docs
-(docs.github.com/en/repositories/working-with-files/managing-large-files/removing-files-from-git-large-file-storage).
-
----
-
-## Capability 4: Eleventy env var handling for CDN_BASE_URL
-
-### Pattern: Global data file reads process.env
-
-Eleventy 3.x does not have built-in `.env` file loading. The established pattern for this project
-(already used for `GITHUB_PAGES`) is to read `process.env` directly in `eleventy.config.js`.
-
-**Two places CDN_BASE_URL must be threaded:**
-
-1. **Nunjucks templates** — `img src` attributes in `species.njk`, `glossary/index.njk`,
-   `base.njk` (header image). These need `CDN_BASE_URL` at template render time.
-2. **Client-side JS components** — `parquet-cache.js` already uses `import.meta.env.BASE_URL`
-   for Vite's base prefix; image URLs in Lit components need a CDN prefix.
-
-### Implementation A: Global data file (for templates)
-
-Create `src/_data/env.js`:
+**Use `eleventyConfig.addTransform` in `eleventy.config.js`.** This is the correct, well-documented hook for post-rendering HTML manipulation in Eleventy 3.x. It runs after every template renders but before files are written to `_site/`.
 
 ```js
-// src/_data/env.js
-export default function () {
-  return {
-    cdnBaseUrl: process.env.CDN_BASE_URL || '',
-  };
-}
-```
-
-Then in Nunjucks templates, replace hardcoded `/images/` paths:
-
-```nunjucks
-{# Before #}
-<img src="/images/{{ sp.slug }}/{{ img.filename }}">
-
-{# After #}
-<img src="{{ env.cdnBaseUrl }}/images/{{ sp.slug }}/{{ img.filename }}">
-```
-
-The `env.cdnBaseUrl` will be `''` locally (falling back to relative paths, which requires images
-to still be served locally) or `https://pnwmoths.b-cdn.net` in production.
-
-**Preferred local dev approach:** Set `CDN_BASE_URL` in a `.env` file and load it in
-`eleventy.config.js` with dotenv. This avoids needing local image copies.
-
-```bash
-npm install dotenv
-```
-
-In `eleventy.config.js` (add at top):
-
-```js
-import 'dotenv/config';
-```
-
-Then `.env` (gitignored):
-
-```
-CDN_BASE_URL=https://pnwmoths.b-cdn.net
-```
-
-And `.env.example` (committed):
-
-```
-CDN_BASE_URL=https://pnwmoths.b-cdn.net
-```
-
-### Implementation B: Vite define (for client-side components)
-
-To expose `CDN_BASE_URL` to Lit components during Vite bundling, add a `define` to `viteOptions`
-in `eleventy.config.js`:
-
-```js
-eleventyConfig.addPlugin(EleventyVitePlugin, {
-  viteOptions: {
-    // ...existing options...
-    define: {
-      __CDN_BASE_URL__: JSON.stringify(process.env.CDN_BASE_URL || ''),
-    },
-  }
+// eleventy.config.js
+eleventyConfig.addTransform("glossary-terms", async function (content) {
+  // `this.page.outputPath` is available; only process .html files
+  if (!this.page.outputPath?.endsWith(".html")) return content;
+  // ... HTML manipulation here
+  return content;
 });
 ```
 
-Then in any Lit component or `parquet-cache.js`:
+The transform receives the full rendered HTML string. The `this` context gives access to `this.page` (url, inputPath, outputPath, date) so the transform can be scoped to species pages only if needed.
+
+**Confidence:** HIGH — confirmed from Eleventy 3.x docs and Context7.
+
+---
+
+## New Dependency: `node-html-parser`
+
+**Version:** `^7.1.0` (current as of 2026-04-23)
+**Install:** `npm install node-html-parser`
+
+### Why this library
+
+The transform receives an HTML string. To detect glossary terms in prose text while correctly skipping tag attribute values, `<code>` blocks, existing links, `<abbr>` elements, and already-wrapped terms, the string must be parsed into a DOM tree. String replacement (regex on the raw HTML string) is fragile — it matches inside attributes, crosses tag boundaries, and cannot enforce first-occurrence-per-page logic across nested elements cleanly.
+
+`node-html-parser` is the right choice over alternatives:
+
+| Option | Verdict | Reason |
+|--------|---------|--------|
+| `node-html-parser` | **Use this** | Fast, zero native deps, full ES module, 7.1.0 stable, childNodes/TextNode API sufficient |
+| `jsdom` | Skip | Full browser simulation — massive dependency (puppeteer-weight) for a build transform |
+| `cheerio` | Skip | jQuery API over html-parser2, heavier than needed; no meaningful benefit over node-html-parser for this task |
+| `linkedom` | Skip | Good but less documentation; node-html-parser has broader community usage and Context7 coverage |
+| Regex on raw HTML | Skip | Cannot correctly scope to text nodes only; matches inside attributes and across tag boundaries |
+| Nunjucks filter | Skip | Runs during template rendering, not on compiled prose — prose is rendered by `{% renderFile %}` which returns HTML, so the filter cannot see compiled Markdown output from child files |
+
+### Key API patterns for this feature
+
+Walk `childNodes` recursively, check `nodeType` to find text nodes (nodeType === 3), and use `replaceWith` (inherited from `Node`) or splice the parent's `set_content` to inject HTML. Practical pattern:
 
 ```js
-// Vite replaces __CDN_BASE_URL__ at bundle time
-const cdnBase = __CDN_BASE_URL__;
-const imgSrc = `${cdnBase}/images/${slug}/${filename}`;
+import { parse } from "node-html-parser";
+
+// In the transform:
+const root = parse(content);
+const seenTerms = new Set(); // first-occurrence tracking per page
+
+function walkTextNodes(node, glossaryTerms) {
+  // Skip elements where term highlighting is inappropriate
+  const skip = ["script", "style", "code", "pre", "a", "abbr"];
+  if (node.tagName && skip.includes(node.tagName.toLowerCase())) return;
+
+  for (const child of [...node.childNodes]) {
+    if (child.nodeType === 3) { // TEXT_NODE
+      // ... detect and replace terms in child.rawText
+    } else {
+      walkTextNodes(child, glossaryTerms);
+    }
+  }
+}
 ```
 
-### GitHub Actions secret
+The `[...node.childNodes]` snapshot avoids mutation-during-iteration issues when replacing nodes.
 
-In the CI workflow (`.github/workflows/deploy.yml`), add:
+**Confidence:** HIGH — API confirmed from Context7 and GitHub README inspection.
 
-```yaml
-env:
-  CDN_BASE_URL: ${{ secrets.CDN_BASE_URL }}
-  GITHUB_PAGES: "true"
+---
+
+## Tooltip Implementation: HTML `popover` attribute + small JS enhancement
+
+### Recommended approach: `popover` attribute (HTML-first) with JS hover enhancement
+
+**No new npm dependencies for the tooltip UI.**
+
+The tooltip markup injected by the transform is self-contained HTML + CSS. A small inline `<script>` (or an addition to the existing Vite-bundled entry point) wires hover behavior. The Popover API is the correct platform primitive here.
+
+#### HTML structure injected per matched term
+
+```html
+<button class="gloss-trigger" popovertarget="gloss-costa">costa</button>
+<span id="gloss-costa" popover role="tooltip" class="gloss-popover">
+  <strong>costa</strong>
+  <img src="https://pnwmoths.b-cdn.net/glossary/costa_jpg.jpg?width=188&height=225&crop_gravity=north"
+       alt="costa" width="188" height="225" loading="lazy">
+  <p>The leading edge of the wing.</p>
+</span>
 ```
 
-And add `CDN_BASE_URL` as a repository secret in GitHub Settings → Secrets and variables →
-Actions. Value: `https://pnwmoths.b-cdn.net` (no trailing slash).
+**Why `<button>` not `<abbr>`:** `<abbr title="...">` is semantically correct for abbreviation expansion but limited: the `title` attribute tooltip is browser-native (not styleable, no image support), and `<abbr>` has no built-in click/focus trigger for a richer popover. `<button popovertarget>` with `role="tooltip"` on the popover gives full keyboard accessibility, is screen-reader-announced, and allows arbitrary rich content (definition + image).
 
-### Template migration scope
+**Why Popover API not a custom Lit component:** The tooltip trigger is injected into prose HTML at build time — the prose is a plain `<div>` rendered by Markdown, not inside a Lit component's template. Injecting a custom element for each glossary term would add significant DOM weight and require the component registry to be loaded before prose renders. The Popover API gives 100% of the needed behavior (show/hide, keyboard Escape, focus management) without component overhead.
 
-Current hardcoded `/images/` paths that need updating:
+**No-JS degradation:** Without JavaScript, `<button popovertarget>` still renders the term text as a button in the prose, but clicking it does nothing (the popover API requires JS to open programmatically when using `popovertarget`). The term itself is still readable in context. This satisfies the "graceful no-JS degradation" requirement — the term is visible, just not interactively highlighted.
 
-| File | Path pattern | Note |
-|------|-------------|------|
-| `src/_includes/base.njk:17` | `/images/header.png` | Site banner — static asset, stays in repo |
-| `src/species/species.njk:48` | `/images/{{ sp.slug }}/{{ img.filename }}` | Species photos → CDN |
-| `src/glossary/index.njk:41` | `('/images/glossary/' + term.image_filename) \| url` | Glossary images → CDN |
+For a cleaner no-JS fallback, the `<button>` can be wrapped in an `<abbr>` with `title` set to the definition (truncated), so keyboard and mouse users without JS still see the native browser tooltip on hover/focus.
 
-Note: `base.njk` banner image (`/images/header.png`) is a UI asset kept in `src/images/`, not a
-species photo. It stays in the repo and should NOT use `CDN_BASE_URL`. Only species photos and
-glossary images move to bunny.net.
+#### Browser support
 
-**Confidence:** HIGH — `process.env` pattern confirmed from official Eleventy 3.x docs;
-`dotenv` package requirement confirmed (no built-in .env loading in Eleventy 3);
-Vite `define` option confirmed from Vite docs. Template paths confirmed by direct file inspection.
+- **Popover API** (basic `popover` attribute + `popovertarget`): Baseline Widely Available since April 2025. Works in Chrome, Firefox, Safari, Edge — no polyfill needed.
+- **`popover="hint"` + `interestfor`** (hover-trigger without JS): Chrome 142+ only as of April 2026; WebKit has objected; not cross-browser. Do not use.
+- **CSS Anchor Positioning** (auto-placement): Chrome/Edge only in 2026; Safari/Firefox support incomplete. Do not use for initial positioning — use a small JS snippet instead.
+
+#### Hover behavior: small JS script
+
+The Popover API `popovertarget` is click-to-toggle. For hover, 15–20 lines of vanilla JS are sufficient:
+
+```js
+// Glossary hover behavior — added to existing JS entry point or inline
+document.querySelectorAll(".gloss-trigger").forEach(btn => {
+  const popover = document.getElementById(btn.getAttribute("popovertarget"));
+  if (!popover) return;
+  btn.addEventListener("mouseenter", () => popover.showPopover());
+  btn.addEventListener("mouseleave", () => popover.hidePopover());
+  btn.addEventListener("focus", () => popover.showPopover());
+  btn.addEventListener("blur", () => popover.hidePopover());
+});
+```
+
+This goes into the existing Vite entry point or a new `src/components/glossary-tooltips.js` module imported from `species.njk`. No npm dependency required — Floating UI is not needed because the popover auto-positions to not clip viewport by default, and for prose tooltips exact anchor positioning is a nice-to-have, not a requirement.
+
+**Confidence for Popover API browser support:** HIGH — confirmed from MDN and multiple 2025 sources.
+**Confidence for `interestfor` exclusion:** HIGH — Chrome 142+ only, WebKit objection confirmed.
+
+---
+
+## CSS: Popover Styling
+
+Add to `src/styles/theme.css` (already passes through to `_site/`). No new file needed.
+
+```css
+/* Glossary term trigger — inline button styled as underlined text */
+.gloss-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* Popover card */
+.gloss-popover {
+  width: 220px;
+  padding: 0.75rem;
+  border: 1px solid var(--pico-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-background-color);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  font-size: 0.875rem;
+}
+
+.gloss-popover img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+```
+
+Pico CSS design tokens (`--pico-border-color`, `--pico-background-color`, etc.) are already available site-wide via `theme.css`. No additional CSS dependency needed.
+
+---
+
+## Data Flow Through the Transform
+
+The transform needs the flat glossary term list (not the grouped-by-letter version used by the glossary page template). The grouped structure in `src/_data/glossary.js` is consumed by Nunjucks templates. For the transform, a flat array sorted by term length (longest first, to prevent "forewing" matching before "wing") is more useful.
+
+**Option A:** Add a second export from `src/_data/glossary.js` — rejected because Eleventy data files export a single value.
+
+**Option B:** Import the DuckDB query result directly inside `eleventy.config.js` — workable but couples config to data pipeline.
+
+**Option C (recommended):** Add `src/_data/glossaryFlat.js` as a companion data file that returns a flat array:
+
+```js
+// src/_data/glossaryFlat.js
+// Flat list of all glossary terms for build-time transform use.
+// Sorted by term length descending (longest first) to prevent partial matches.
+import { DuckDBInstance } from "@duckdb/node-api";
+
+export default async function () {
+  const db = await DuckDBInstance.create(":memory:");
+  const conn = await db.connect();
+  // ... same query as glossary.js but returns flat array, sorted by length desc
+  conn.closeSync();
+  db.closeSync();
+  return terms; // [{ term, definition, image_filename, photographer, slug }, ...]
+}
+```
+
+Then in `eleventy.config.js`, access via the Eleventy data cascade (available to transforms via `eleventyConfig.addGlobalData` or by importing the module directly):
+
+```js
+// Import once at module level (runs before Eleventy starts):
+import { default as loadGlossaryFlat } from "./src/_data/glossaryFlat.js";
+
+export default async function (eleventyConfig) {
+  const glossaryTerms = await loadGlossaryFlat();
+  // Sort longest-first to prevent partial-match priority inversion
+  glossaryTerms.sort((a, b) => b.term.length - a.term.length);
+
+  eleventyConfig.addTransform("glossary-terms", function (content) {
+    if (!this.page.outputPath?.endsWith(".html")) return content;
+    // Only run on species pages
+    if (!this.page.url?.startsWith("/species/")) return content;
+    return injectGlossaryTerms(content, glossaryTerms);
+  });
+}
+```
+
+**Why import directly rather than Eleventy data cascade:** Transforms run during the build phase where template data is not available via `this.ctx`. Importing the module directly is the correct pattern — it runs the DuckDB query once at startup, not per-page.
+
+**Confidence:** MEDIUM — the transform `this.ctx` data availability in Eleventy 3.x is not explicitly documented for transforms; direct import is the safe, verified pattern.
 
 ---
 
@@ -371,68 +240,40 @@ Vite `define` option confirmed from Vite docs. Template paths confirmed by direc
 
 | Temptation | Why Not |
 |------------|---------|
-| rclone S3 backend for bunny.net | Closed preview, not GA — unavailable without bunny.net invitation |
-| Any unofficial bunny CLI | All are archived or unmaintained; rclone FTP is the stable path |
-| `sharp` or `jimp` for build-time image processing | Entire point of this milestone is to remove build-time processing and use CDN Optimizer |
-| `@11ty/eleventy-img` plugin | Adds build-time image processing; contradicts CDN-native strategy |
-| Storing images in both git and CDN | Pick one; after migration, images live exclusively on bunny.net |
-| `cross-env` package | Only needed for Windows cross-platform env var setting; this project targets macOS/Linux CI |
-
----
-
-## Integration Notes
-
-### copy-images.js retirement
-
-`scripts/copy-images.js` currently copies `images/` from the repo root to `_site/images/`. After
-CDN migration, species images no longer live in the repo. The script should be updated to:
-
-1. Remove the `images/` → `_site/images/` copy (line 17–20 in current script)
-2. Keep the `src/images/` → `_site/images/` copy (banner image remains in repo)
-3. Keep styles copy and Pico CSS copy (unrelated to images)
-
-The `build:copy-images` npm script and `writeBundle` hook remain; they just do less.
-
-### GitHub Actions LFS checkout
-
-`.github/workflows/deploy.yml` likely has `lfs: true` on the `actions/checkout` step. Remove it
-after LFS is purged. This eliminates the Git LFS bandwidth cost from CI.
-
-### Build pipeline image resize scripts
-
-`scripts/build-data.js` does not currently resize images (confirmed by inspection). Image resizing
-appears to be done elsewhere (or was done to produce the LFS-stored downscaled copies). Verify
-what produces the current LFS images before removing anything.
+| Floating UI (`@floating-ui/dom`) | Smart repositioning is nice-to-have; 20 lines of JS + native popover auto-positioning is sufficient for v2.0 |
+| `tippy.js` | Third-party tooltip library with its own lifecycle; the Popover API is the platform-native equivalent with better accessibility defaults |
+| `cheerio` | Heavier than node-html-parser; jQuery-style API adds no benefit for this tree-walking task |
+| `jsdom` | Full browser simulation — ~15× heavier than needed for a build-time string transform |
+| `rehype` / unified pipeline | Correct choice for a Markdown-first pipeline, but this project's prose is rendered via `{% renderFile %}` (Eleventy's built-in Markdown engine); adding a parallel unified pipeline would duplicate processing |
+| `mark.js` (client-side) | Runs in the browser, not at build time — requires shipping term list to every page and running regex at page load; contradicts the build-time requirement |
+| Lit web component for each tooltip trigger | Adds component instantiation overhead for every term occurrence; popover + vanilla JS is lighter and correct for inline prose |
+| `popover="hint"` + `interestfor` | Chrome 142+ only; WebKit objection; not cross-browser in 2026 |
+| CSS Anchor Positioning for auto-placement | Incomplete browser support (Chrome/Edge only in 2026) |
+| `abbr` as the only mechanism | `<abbr title>` tooltip is not styleable, cannot contain images, not reliably accessible on touchscreen |
 
 ---
 
 ## Version Summary
 
-| Tool | Version | Source |
-|------|---------|--------|
-| rclone | 1.68.x (current stable) | brew install rclone or rclone.org |
-| dotenv | ^16.x (latest) | npm install dotenv |
-| git-lfs (built-in migrate) | installed with git-lfs | git lfs migrate export |
-| git-filter-repo | latest (optional) | pip install git-filter-repo |
+| Addition | Version | Purpose |
+|----------|---------|---------|
+| `node-html-parser` | `^7.1.0` | Parse rendered HTML string in Eleventy transform; walk text nodes; inject tooltip markup |
+| Popover API (browser-native) | Baseline April 2025 | Tooltip show/hide, keyboard Escape, focus management — no npm dep |
+| ~20-line vanilla JS | — | Wire hover/focus events to `showPopover`/`hidePopover` |
 
-No new npm packages are strictly required. `dotenv` is the only likely addition, and only if
-`.env` file loading is desired locally (vs. always setting env vars in shell or CI).
+**No other npm dependencies are needed.** The existing DuckDB connection pattern, Eleventy transform API, Vite entry point, and Pico CSS token system handle everything else.
 
 ---
 
 ## Sources
 
-- bunny.net Storage API docs (PUT endpoint, regional hostnames): docs.bunny.net/reference/put_-storagezonename-path-filename
-- bunny.net Storage quickstart (FTP config, S3 status): docs.bunny.net/storage/quickstart
-- bunny.net Dynamic Images API: docs.bunny.net/optimizer/dynamic-images/overview
-- bunny.net Optimizer pricing ($9.50/Pull Zone/month): bunny.net/pricing/optimizer/
-- bunny.net S3 compatibility blog ("Q2 preview", closed access): bunny.net/blog/whats-happening-with-s3-compatibility/
-- rclone FTP `--inplace` flag and bunny.net FTP: forum.rclone.org/t/rclone-problem-with-bunny-cdn/44383
-- git-lfs migrate export man page (--everything, --include): github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-migrate.adoc
-- GitHub Docs on LFS removal limitations: docs.github.com/en/repositories/working-with-files/managing-large-files/removing-files-from-git-large-file-storage
-- Eleventy 3.x environment variables: 11ty.dev/docs/environment-vars/
-- Codebase inspection: eleventy.config.js, src/species/species.njk, src/glossary/index.njk, src/_includes/base.njk, .gitattributes, scripts/copy-images.js
+- Eleventy 3.x `addTransform` API: Context7 `/11ty/eleventy`, topic "html transform addTransform" (HIGH confidence)
+- node-html-parser v7.1.0: [npm](https://www.npmjs.com/package/node-html-parser), [GitHub README](https://github.com/taoqf/node-html-parser/blob/main/README.md), Context7 `/taoqf/node-html-parser` (HIGH confidence)
+- Popover API browser support (Baseline April 2025): [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API), [365i Popover API Guide](https://www.365i.co.uk/blog/2025/03/10/popover-api-guide-create-modals-and-tooltips-without-javascript-in-2025/) (HIGH confidence)
+- `popover="hint"` / `interestfor` Chrome-only status: [Chrome for Developers blog](https://developer.chrome.com/blog/popover-hint), [CSS-Tricks Interest Invoker API](https://css-tricks.com/a-first-look-at-the-interest-invoker-api-for-hover-triggered-popovers/), [blink-dev mailing list](https://www.mail-archive.com/blink-dev@chromium.org/msg14657.html) (HIGH confidence — Chrome 142+ only, WebKit objection confirmed)
+- Frontend Masters Popover tooltip article (hover JS pattern, image in popover): [frontendmasters.com](https://frontendmasters.com/blog/using-the-popover-api-for-html-tooltips/) (MEDIUM confidence)
+- Codebase inspection: `eleventy.config.js`, `src/_data/glossary.js`, `src/species/species.njk`, `src/glossary/index.njk`, `data/glossary.csv`, `package.json`
 
 ---
-*Stack research for: pnwmoths v1.4 Image CDN milestone*
-*Researched: 2026-04-21*
+*Stack research for: pnwmoths v2.0 Glossary Tooltips milestone*
+*Researched: 2026-04-23*

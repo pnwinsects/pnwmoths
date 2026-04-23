@@ -1,279 +1,267 @@
-# Feature Landscape: bunny.net CDN Image Optimizer
+# Feature Landscape: Glossary Term Tooltips/Popovers
 
-**Domain:** Static site (Eleventy) migrating from build-time image resizing to CDN on-the-fly transformation
-**Researched:** 2026-04-21
-**Confidence:** HIGH (verified against official bunny.net docs at docs.bunny.net)
-
----
-
-## bunny.net Image Optimizer: Verified URL Parameter Reference
-
-All parameters are query-string appended to the CDN image URL. Transformations execute in
-this fixed order: crop first, then resize, then rotate/flip, then color/luminosity, then
-filters, and finally format/quality.
-
-### Resize Parameters
-
-| Parameter | Type | Example | Behavior |
-|-----------|------|---------|----------|
-| `width` | integer (px) | `?width=300` | Resize to width, maintain aspect ratio |
-| `height` | integer (px) | `?height=225` | Resize to height, maintain aspect ratio |
-| `width` + `height` | both set | `?width=188&height=225` | Bunny picks whichever dimension constrains smaller while preserving aspect ratio — NOT a forced exact-dimension result |
-
-**Critical caveat:** Setting both `width` and `height` does NOT force exact pixel dimensions.
-Bunny selects whichever dimension produces the smaller image while preserving aspect ratio.
-To get exact output dimensions, use crop parameters instead.
-
-### Crop Parameters
-
-| Parameter | Type | Example | Behavior |
-|-----------|------|---------|----------|
-| `crop` | `w,h` | `?crop=188,225` | Center-crop to exact pixel dimensions |
-| `crop` | `w,h,x,y` | `?crop=188,225,50,0` | Pixel-offset crop, x/y is top-left start |
-| `crop_gravity` | string | `?crop=188,225&crop_gravity=north` | Anchor the crop region to a compass direction |
-| `aspect_ratio` | `w:h` | `?aspect_ratio=4:5` | Crop to ratio, maintain center |
-| `focus_crop` | `w,h,x,y` | `?focus_crop=188,225,500,400` | Crop centered on absolute pixel coordinate |
-| `focus_crop` | `w,h,rx,ry` | `?focus_crop=188,225,0.5,0.3` | Crop centered on relative coordinate (0.0-1.0) |
-| `face_crop` | dimensions | `?face_crop=188,225` | Detect faces and crop around them |
-
-`crop_gravity` values: `center` (default), `north`, `south`, `east`, `west`, `northeast`,
-`northwest`, `southeast`, `southwest`.
-
-**Glossary portrait use case (188x225 exact):**
-
-```
-?crop=188,225&crop_gravity=north
-```
-
-This produces exact 188x225px output. North bias keeps the moth's head/body in frame for
-portrait-oriented specimen photos. Since crop executes before resize, this is the complete
-transform needed. The `width`/`height` HTML attributes stay in the `<img>` tag for layout
-reservation (prevents CLS); the CDN delivers the byte dimensions to match.
-
-### Format and Quality Parameters
-
-| Parameter | Type | Values | Default | Notes |
-|-----------|------|--------|---------|-------|
-| `format` | string | `jpeg`, `png`, `webp`, `gif` | original format | Explicit format override |
-| `quality` | integer | 0-100 | 85 | Applies to JPEG and WebP; no effect on PNG |
-| `auto_optimize` | string | `low`, `medium`, `high` | none | Multi-factor optimization bundle; `high` adds auto-sharpen |
-
-**AVIF is not supported.** bunny.net has explicitly declined AVIF support citing encoding
-latency — AVIF encoding ran up to 60 seconds per image and up to 100x slower than WebP in
-their testing. WebP is the modern format ceiling for bunny.net. This is an official position,
-not a temporary gap (confirmed via bunny.net blog post).
-
-**WebP auto-conversion (pull zone setting, not a URL parameter):** When Bunny Optimizer is
-enabled on a pull zone, it transparently serves WebP to any browser sending
-`Accept: image/webp`. The URL stays `photo.jpg`; the response `Content-Type` becomes
-`image/webp`. Browsers without WebP support receive the original format. The optimizer
-automatically enables `Vary: Accept` cache headers so both formats cache correctly at the
-edge. No HTML changes are required.
-
-**Consequence for this project:** A plain `<img src="...photo.jpg">` automatically gets
-WebP delivery to modern browsers once the pull zone has Optimizer enabled. No `<picture>`
-element or `<source type="image/webp">` is needed for format switching.
-
-### Visual Effect Parameters (low priority for this milestone)
-
-| Parameter | Type | Example |
-|-----------|------|---------|
-| `sharpen` | boolean | `?sharpen=true` |
-| `blur` | numeric | `?blur=5` |
-| `brightness` | numeric | `?brightness=10` |
-| `contrast` | numeric | `?contrast=5` |
-| `saturation` | numeric | `?saturation=-20` |
-| `hue` | numeric | `?hue=90` |
-| `gamma` | numeric | `?gamma=2` |
-| `tint` | value | `?tint=...` |
-| `sepia` | numeric | `?sepia=75` |
-| `flip` | boolean | `?flip=true` (horizontal mirror) |
-| `flop` | boolean | `?flop=true` (vertical mirror) |
-| `rotate` | 90-degree steps | `?rotate=90` |
-
-### Image Classes (Named Presets)
-
-A pull-zone dashboard feature that defines reusable named transform presets. After defining
-`glossary-portrait` in the Bunny dashboard, any URL can reference it:
-
-```
-https://yourzone.b-cdn.net/images/glossary/photo.jpg?class=glossary-portrait
-```
-
-The pull zone can optionally be locked to only accept class-based transforms, rejecting
-ad-hoc query parameters. This improves caching predictability and prevents arbitrary
-transforms from being requested via manipulated URLs.
+**Domain:** Inline glossary term highlighting with definition+image popovers in a static site
+**Researched:** 2026-04-23
+**Overall confidence:** HIGH (core UX patterns verified; browser API specifics from MDN and Smashing Magazine)
 
 ---
 
-## Table Stakes Features
+## Context
 
-Features required for the migration to function. Missing any of these means the milestone
-is incomplete.
+This milestone adds build-time glossary term highlighting to species prose pages. The glossary
+already exists (150 terms from `data/glossary.csv`, rendered alphabetically at `/glossary/`).
+Species prose is short Markdown files rendered via Eleventy's `{% renderFile %}`. The stack is
+Eleventy 3.x + Lit web components + Vite. There are currently 11 species with prose, but the
+pipeline must scale to all 1,364 species pages.
 
-| Feature | Why Required | Complexity | Notes |
-|---------|--------------|------------|-------|
-| CDN URL construction in templates | All `<img src>` attributes must point to CDN; local `/images/` path will no longer be served | Low | One `CDN_BASE_URL` env var; string concatenation in Nunjucks filter |
-| Width-constrained resize for species photos | Species slideshow and browse nav strip images need appropriate sizes | Low | `?width=N` single parameter |
-| Exact-dimension crop for glossary portraits | Glossary images are 188x225px; `width`+`height` alone produces wrong dimensions | Low-Medium | `?crop=188,225&crop_gravity=north` |
-| WebP auto-delivery | All modern browsers should get WebP | None (pull zone dashboard setting) | Enable Optimizer on pull zone; no template or code changes |
-| Quality baseline | Default quality=85 is fine; explicit `?quality=80` available for thumbnails | Low | Can skip if default is acceptable |
-| Refactor `scripts/copy-images.js` | Currently copies species photos from local `images/` dir; that dir will not exist after LFS removal | Medium | Remove species photo copy block; keep banner image, Pico CSS, and OpenSeadragon copies |
-| `CDN_BASE_URL` env var in CI/CD | GitHub Actions needs this secret; local dev needs a fallback | Low | Set secret in repo settings; fallback to empty string or localhost for dev |
+---
+
+## UX Pattern Inventory
+
+### Wikipedia style (recommended for this project)
+
+First occurrence of each term per page is underlined/highlighted. Hovering or focusing shows a
+floating card (popover) with the definition and optionally an image. No link; clicking the term
+does nothing (or optionally links to the full glossary entry as a fallback). This is the dominant
+pattern for educational natural history content because:
+
+- Readers are not interrupted unless they choose to hover.
+- The popover disappears when focus/hover moves away (non-modal).
+- Repeat readers are not re-interrupted on every use of a term.
+- The visual cue (dotted underline) is familiar from `<abbr>` styling.
+
+### Wiktionary / inline definition style
+
+Term becomes a link to its full definition page. Simpler, but interrupts reading flow with
+navigation. Works well when full definition pages add substantial value beyond a tooltip
+(e.g., usage examples, etymology). Appropriate as a no-JS fallback; not as the primary UX.
+
+### Wiktionary with hover preview (Wikipedia's Page Previews)
+
+Wiktionary and Wikipedia both use hover-preview popovers over ordinary `<a>` links. Hovering
+on the link fetches the definition asynchronously. This is optimal for large wikis where
+definitions are dynamically authored and updated. For this project, definitions are static,
+so async fetch adds complexity with no benefit.
+
+---
+
+## Table Stakes
+
+Features that users and maintainers will expect. Missing any of these means the feature feels
+broken or incomplete.
+
+| Feature | Why Expected | Complexity | Stack Dependency |
+|---------|--------------|------------|-----------------|
+| First-occurrence-only highlighting per page | Wikipedia convention; repeated highlights create visual noise and confuse "what counts as a glossary term" | Medium — requires tracking seen terms in build transform | Eleventy `addTransform`; `cheerio` or `parse5` for safe text-node traversal |
+| Popover shows definition text on hover/focus | The core value; without it there is no feature | Low — definition text is already in glossary data at build time | HTML `popover` attribute + CSS; or Lit component wrapper |
+| Keyboard accessible (Tab + Escape) | WCAG requirement; moth site has academic audience who may use keyboard navigation | Low-Medium — native Popover API provides this for free if used correctly | HTML `popover` attribute; `popovertarget` on trigger |
+| No-JS degradation: term still visually distinct, definition accessible | JS is already required for occurrence maps but prose should degrade gracefully | Low — use `<a href="/glossary/#term-{slug}">` as the trigger; popover enhances it | Pure HTML; no extra work if trigger is a link |
+| Popover dismisses on Escape and on click outside | Standard popover behavior; users expect it | None — native `popover="auto"` behavior | HTML `popover` attribute |
+| Consistent visual treatment of highlighted terms | Dotted underline under terms must match across light/dark backgrounds and Pico CSS base styles | Low — single CSS rule | `theme.css` override; Pico CSS does not define this by default |
+| Build-time injection (no client-side scanning) | With 1,364 species pages, client-side term detection on DOMContentLoaded adds JS weight and layout shift | High — requires Eleventy transform | `eleventy.config.js` `addTransform`; glossary data available as Eleventy global data |
+
+---
 
 ## Differentiators
 
-Features that add value without blocking the milestone. Include if phase scope allows.
+Features that add value but are not required for the feature to feel complete.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| `srcset` with width descriptors | Delivers appropriately sized images to HiDPI screens and narrow viewports | Low-Medium | 2-3 CDN URLs per `<img>`; Nunjucks macro reduces repetition; Lit slideshow JS also needs CDN URLs |
-| Image Classes for named presets | Centralize transform definitions in Bunny dashboard; change display sizes without touching templates | Low | Define `nav-thumb`, `glossary-portrait`, `slideshow-full` once; reference by name |
-| `auto_optimize=medium` on thumbnails | Bundle of quality improvements with one extra param on browse nav images | Low | Single extra query param appended to nav image URLs |
-| `loading="lazy"` on non-hero images | Defers off-screen image loads; valuable for browse page with many thumbnails | Low | Pure HTML attribute; no CDN interaction required |
+| Popover shows glossary image when available | Morphological terms (costal margin, reniform spot) are much clearer with the reference diagram | Low-Medium — image URL constructed at build time from `image_filename` column | CDN URL pattern already established; ~50 of 150 terms have images |
+| Popover positioned near trigger (CSS Anchor Positioning) | Prevents popover from obscuring surrounding text | Medium — Anchor Positioning is Baseline 2026 (Chrome 125+, Firefox 147+, Safari 26); no polyfill needed at this point | Use `anchor-name` on trigger, `position-anchor` on popover; pure CSS |
+| Link-to-glossary-page as primary trigger fallback | On mobile (no hover), tapping the term navigates to the full glossary entry; this is meaningful rather than nothing | Low — if trigger is `<a href="/glossary/#term-{slug}">`, tap behavior is free | Combine with `interestfor` or JS for hover enhancement |
+| `popover="hint"` + `interestfor` declarative hover | Zero-JavaScript hover trigger for Chromium 135+; clean progressive enhancement | Low — CSS-only where supported; JS fallback elsewhere | `interestfor` is Chromium-only in 2026; needs JS fallback for Firefox/Safari |
+| Case-insensitive term matching with multi-word support | Glossary has multi-word terms like "Anal angle", "Basal area", "Hair pencils"; naive word-boundary regex misses them | Medium — requires careful regex construction with word boundary anchors | See PITFALLS.md; multi-word matching needs longest-first ordering |
+| Exact-match exclusion for code/pre/heading contexts | Terms appearing in headings, code blocks, or figure captions should not be highlighted | Low-Medium — text-node traversal with parent tag exclusion | Cheerio `.not('h1,h2,h3,code,pre,figcaption')` filter |
+
+---
 
 ## Anti-Features
 
-Features to explicitly avoid.
+Features to explicitly avoid in this milestone.
 
 | Anti-Feature | Why Avoid | What to Do Instead |
 |--------------|-----------|-------------------|
-| `<picture>` + `<source type="image/webp">` | Redundant: bunny.net pull zone auto-negotiates WebP via Accept header; doubling up adds HTML bloat for no benefit | Enable Optimizer on pull zone; let CDN handle format negotiation |
-| AVIF delivery | Not supported by bunny.net | WebP is the format ceiling; AVIF is out of scope for this CDN |
-| Client-side image resizing or Canvas transforms | Defeats CDN purpose; wastes CPU | Request the right size from CDN via URL params |
-| `eleventy-img` build-time processing | This plugin generates local responsive variants at build time, the opposite of CDN offloading | Use CDN URL params instead |
-| Storing pre-resized image copies in bunny.net Storage | CDN generates and caches transforms on first request; storing variants wastes storage | Upload originals only; let CDN resize on demand |
-| Applying `| url` Eleventy filter to CDN URLs | The `| url` filter prepends `pathPrefix` (`/pnwmoths/` on GitHub Pages); CDN URLs are absolute and must never have pathPrefix added | Use raw CDN URLs; the glossary template currently applies `| url` to image paths and that must be removed |
+| Client-side JavaScript term scanning | Adds JS weight; causes layout shift as highlights inject after parse; unnecessary since data is available at build time | Build-time Eleventy transform |
+| Floating UI / Popper.js / tippy.js library | These are 10–40 kB positioning libraries suited to dynamic SPA content; the native Popover API + CSS Anchor Positioning handles static tooltip positioning without any extra dependency | Use `popover` attribute + CSS anchor positioning |
+| Highlighting every occurrence | Visual noise; confusing; Wikipedia-style first-occurrence is the established convention for reference content | Track seen-set per page in the transform |
+| Matching inside HTML attributes | Regex applied to serialized HTML will corrupt `href`, `alt`, `src` values if a term matches | Use DOM text-node traversal (Cheerio / parse5), never innerHTML regex |
+| Asynchronous definition fetch (AJAX on hover) | Definitions are static; runtime fetch adds network latency, error handling complexity, and a server/CDN round-trip for data already available in the page | Embed definition inline in the popover element at build time |
+| Fuzzy / stemming-based matching | "Ventral" should not match "dorsoventral"; "larva" should not match "larvae" unless both are glossary terms | Exact case-insensitive whole-term matching only |
+| Custom tooltip `<div>` with JS position calculation | Fragile; breaks at viewport edges; re-invented wheel | Use CSS `popover` + Anchor Positioning |
+| Highlighting in Pagefind-indexed regions | Pagefind indexes the page prose; injecting `<mark>` or custom elements inflates index and may tokenize strangely | Add `data-pagefind-ignore` to all injected popover elements |
+| Modal-style definitions (click-to-open, requires explicit close) | Users reading prose do not want to stop reading to close a panel | `popover="auto"` auto-dismisses; `popover="hint"` never blocks |
 
 ---
 
 ## Feature Dependencies
 
 ```
-CDN_BASE_URL env var in Eleventy config
-  -> cdnUrl filter or Nunjucks macro
-    -> species.njk <img> tags (CDN URL + ?width=N)
-    -> glossary/index.njk <img> tags (CDN URL + ?crop=188,225&crop_gravity=north)
-    -> browse/index.njk nav image data passed to Lit component (CDN URLs in JSON)
-    -> pnwm-image-slideshow Lit component JS (CDN URL construction in JS)
+Glossary data (already exists)
+  glossary.js Eleventy data file → { A: [{term, definition, image_filename, slug}] }
+  glossary.csv (150 terms) → build-time data
 
-Bunny Optimizer enabled on pull zone (dashboard)
-  -> Automatic WebP delivery (no code changes)
-  -> Image Classes available for use
+Build-time transform (new)
+  eleventy.config.js addTransform('glossary-terms', ...)
+    → Receives rendered HTML of species pages
+    → Traverses text nodes in <article> or prose container only
+    → Finds first occurrence of each glossary term (case-insensitive)
+    → Wraps in <a href="/glossary/#term-{slug}" ...> with popover markup
+    → Glossary data must be accessible from within the transform function
+      (pass via closure from the data file or re-read at transform registration time)
 
-scripts/copy-images.js refactored
-  -> Species photo copy block removed (images/ dir no longer exists in repo)
-  -> Banner image copy kept (src/images/ -> _site/images/)
-  -> Pico CSS and OpenSeadragon copies kept
+HTML popover structure (new, injected at build time)
+  <a href="/glossary/#term-{slug}" class="glossary-term"
+     id="term-trigger-{slug}-{pageIndex}"
+     popovertarget="term-popover-{slug}-{pageIndex}">
+    {matched text as found in source}
+  </a>
+  <span id="term-popover-{slug}-{pageIndex}" popover role="tooltip"
+        data-pagefind-ignore>
+    <strong>{term}</strong>
+    {definition text}
+    [optional: <img src="{cdnBaseUrl}/glossary/{image_filename}?width=188" alt="{term}">]
+    <a href="/glossary/#term-{slug}">Full entry →</a>
+  </span>
+
+CSS (new, in theme.css or a new glossary.css)
+  .glossary-term { text-decoration: underline dotted; cursor: help; }
+  [popover][role="tooltip"] { /* popover card styling */ }
+  @supports (anchor-name: --x) {
+    .glossary-term { anchor-name: var(--anchor-id); }
+    [popover][role="tooltip"] { position-anchor: var(--anchor-id); ... }
+  }
+
+CDN image URL (reuses existing pattern)
+  cdnBaseUrl global already available in Eleventy templates
+  Same ?width=188 pattern used in glossary/index.njk
+
+Pagefind integration (no change needed)
+  Popover elements carry data-pagefind-ignore; prose text nodes are unchanged text
+  so search indexing of species prose is unaffected
 ```
 
 ---
 
-## What the Nunjucks Templates Need
+## No-JS Fallback Analysis
 
-### Current pattern (before migration)
+**Current species page behavior without JS:** Taxonomy, prose, and photos render. Occurrence
+maps and interactive components show noscript messages.
 
-```
-species.njk:    src="/images/{{ sp.slug }}/{{ img.filename }}"
-glossary:       src="{{ ('/images/glossary/' + term.image_filename) | url }}"
-```
+**After glossary tooltips — behavior without JS:**
+- The highlighted terms remain as styled `<a>` links (dotted underline).
+- Clicking the link navigates to the full glossary page at `/glossary/#term-{slug}`.
+- The popover element (`<span popover>`) is inert without JS — it stays hidden in the DOM.
+- The `popover` attribute alone (without JS) still enables click-to-open in browsers that
+  support it, via the `popovertarget` button/link, because Popover API is a browser feature
+  not a JS feature. This is a bonus: even with JS disabled, the native popover behavior
+  works in modern browsers if the trigger element has `popovertarget`.
 
-Two problems with the glossary pattern: it builds a local path, and it applies `| url`
-which would prepend `/pnwmoths/` on GitHub Pages — CDN URLs must never have pathPrefix added.
+**Assessment:** The no-JS experience is acceptable — terms are visually distinct and clickable
+to their definitions. This matches the "Graceful no-JS degradation" requirement in PROJECT.md.
 
-### Recommended pattern: Eleventy filter
+---
 
-Add a `cdnUrl` filter in `eleventy.config.js`. Filters are available in all templates
-without import, making them lower friction than Nunjucks macros.
+## Accessibility Considerations
 
-```js
-// eleventy.config.js
-const CDN_BASE = process.env.CDN_BASE_URL?.replace(/\/$/, '') ?? '';
+**Keyboard navigation (HIGH confidence from MDN/hidde.blog):**
+- The `popover` attribute + `popovertarget` on a link gives Tab-key reachability for free.
+- `popover="auto"` dismisses on Escape without JavaScript.
+- Browser reorders tab sequence so popover content follows its trigger even if distant in DOM.
 
-eleventyConfig.addFilter('cdnUrl', function(filename, slug, params) {
-  const path = slug ? `${slug}/${filename}` : filename;
-  const url = `${CDN_BASE}/images/${path}`;
-  return params ? `${url}?${params}` : url;
-});
-```
+**Screen readers:**
+- Use `role="tooltip"` on the popover element so screen readers announce it as a tooltip.
+- Browsers with Popover API create an implicit `aria-details` relationship between trigger
+  and popover; screen readers can navigate to details with JAWS/NVDA keyboard commands.
+- The trigger link's text (the term itself) is the accessible name — no extra `aria-label` needed.
+- Do NOT use `aria-describedby` pointing to the popover ID; this creates redundancy since the
+  Popover API already establishes the relationship via `aria-details`.
 
-**Usage in templates:**
+**Touch devices:**
+- `popover="auto"` opens on tap of the trigger.
+- If trigger is `<a href>`, tap navigates unless JS intercepts (which it should not for primary behavior).
+- Recommendation: allow tap-to-navigate as the primary touch behavior; hover enhancement for
+  pointer devices is a progressive enhancement.
 
-```nunjucks
-{# Species slideshow photo #}
-<img src="{{ img.filename | cdnUrl(sp.slug, 'width=800') }}"
-     alt="{{ sp.genus }} {{ sp.species }}">
+**Color and contrast:**
+- Dotted underline must remain visible on the cream background (`#fdf6e3` per PROJECT.md visual identity).
+- Popover card needs sufficient contrast ratio (WCAG AA: 4.5:1 for text).
 
-{# Glossary portrait — exact 188x225 crop #}
-<img src="{{ term.image_filename | cdnUrl('glossary', 'crop=188,225&crop_gravity=north') }}"
-     alt="{{ term.term }}"
-     width="188" height="225">
-```
+---
 
-The `width`/`height` HTML attributes on glossary images stay to reserve layout space and
-prevent CLS. The CDN delivers bytes that match those dimensions.
+## Browser Support Assessment (as of 2026-04)
 
-### srcset pattern (differentiator)
+| Feature | Chrome | Firefox | Safari | Notes |
+|---------|--------|---------|--------|-------|
+| `popover` attribute | 114+ | 125+ | 17+ | Baseline 2024 — safe to use |
+| `popover="auto"` dismiss behavior | 114+ | 125+ | 17+ | Same as above |
+| `role="tooltip"` | All | All | All | Standard ARIA |
+| CSS Anchor Positioning | 125+ | 147+ | 26+ | Baseline 2026 — safe to use |
+| `popover="hint"` | 135+ | 147+ | 26+ | Newer; hint type allows multiple popovers open simultaneously |
+| `interestfor` (declarative hover) | 135+ | Not yet | Not yet | Chromium-only; needs JS fallback |
 
-```nunjucks
-<img src="{{ img.filename | cdnUrl(sp.slug, 'width=800') }}"
-     srcset="{{ img.filename | cdnUrl(sp.slug, 'width=400') }} 400w,
-             {{ img.filename | cdnUrl(sp.slug, 'width=800') }} 800w,
-             {{ img.filename | cdnUrl(sp.slug, 'width=1600') }} 1600w"
-     sizes="(max-width: 600px) 400px, 800px"
-     alt="{{ sp.genus }} {{ sp.species }}">
-```
+**Recommendation:** Use `popover="auto"` (not `hint`) to avoid `interestfor` dependency.
+Implement hover/focus show/hide with a small JS snippet (mouseover/focus event listeners on
+trigger elements). This is ~10 lines of JS, not a library. CSS Anchor Positioning is safe for
+the popover positioning layer — add a `@supports` block so older browsers get fallback positioning.
 
-This is mechanical but works. A Nunjucks macro that accepts a widths array reduces
-repetition if this is added. The Lit `pnwm-image-slideshow` component generates `<img>`
-tags in JavaScript — its component code will also need CDN URL construction. Pass
-`CDN_BASE_URL` as a component attribute or set `window.CDN_BASE_URL` in a `<script>` tag
-in `base.njk`.
+---
 
-### Browse nav images
+## Complexity Assessment
 
-The `taxon.js` Eleventy data file builds the taxonomy tree with `navImages` arrays. After
-migration, the image paths stored in that JSON must be CDN URLs, not local paths. The
-Eleventy data file builds this at build time using DuckDB queries. The fix is to prepend
-`CDN_BASE_URL` when constructing the `navImages` entries in `taxon.js`.
+| Sub-task | Estimated Complexity | Risk |
+|----------|---------------------|------|
+| Eleventy `addTransform` for term detection | Medium | Multi-word terms, case normalization, DOM-safe traversal |
+| Making glossary data available inside transform | Low | Pass via module-level variable or re-query |
+| HTML structure for popover trigger + panel | Low | Standard markup pattern |
+| Unique IDs per page per term | Low | Counter or slug + page hash |
+| CSS styling (dotted underline, popover card) | Low | 20–30 lines in theme.css |
+| CSS Anchor Positioning for placement | Low-Medium | `@supports` wrapper ensures graceful fallback |
+| JS hover/focus enhancement (mouseover/blur) | Low | ~10 lines in main.js or a Lit component |
+| Excluding non-prose contexts (headings, code) | Low-Medium | Cheerio parent-element filter |
+| Popover image URL construction | Low | Reuse existing `cdnBaseUrl` global |
+| Testing the transform | Medium | Unit test with sample HTML; verify first-occurrence, multi-word, exclusions |
+
+**Overall complexity: Medium.** The hardest part is the build-time transform (safe text-node
+traversal, first-occurrence tracking, multi-word term handling). The popover UI itself is
+straightforward given the native Popover API.
 
 ---
 
 ## MVP Recommendation
 
-Required for functional migration (do these):
-1. Wire `CDN_BASE_URL` into `eleventy.config.js`; add `cdnUrl` filter
-2. Update `species.njk` static `<img>` tags to use `cdnUrl` filter with `?width=800` (or display-appropriate width)
-3. Update `glossary/index.njk` to use CDN crop URL; remove `| url` filter from image path
-4. Update `taxon.js` data file to emit CDN URLs for `navImages` arrays
-5. Refactor `scripts/copy-images.js`: remove species photo copy block; keep banner/asset copies
-6. Enable Bunny Optimizer on pull zone in Bunny dashboard (one-time manual step)
+Build in this order:
 
-Defer if phase scope is tight:
-- `srcset` responsive variants: real user value but not blocking; add in a follow-up
-- Image Classes in Bunny dashboard: useful once display sizes stabilize
-- `auto_optimize=medium` on thumbnails: easy add, not critical
+1. **Build-time transform** — Eleventy `addTransform` that injects `<a class="glossary-term" ...>` wrappers around first occurrences. Start with exact single-word terms only; add multi-word after single-word works.
 
----
+2. **Popover HTML structure** — Inline definition text (no image yet). Validate keyboard and screen reader behavior before adding visual complexity.
 
-## Pricing Context
+3. **CSS styling** — Dotted underline, popover card, Anchor Positioning with `@supports` fallback.
 
-Bunny Optimizer: $9.50/month per pull zone. Unlimited transformations and requests.
-CDN bandwidth charged separately at standard rates. No free tier documented.
+4. **Image in popover** — Add `<img>` to popover for terms that have `image_filename`. Use same CDN URL pattern as glossary page (already working).
+
+5. **JS hover enhancement** — Small event listener to show popover on mouseover/focus and hide on mouseout/blur. Not a library; inline or in `main.js`.
+
+Defer:
+
+- `popover="hint"` + `interestfor`: requires JS fallback for Firefox/Safari and adds complexity for marginal UX improvement.
+- Highlighting in body copy outside species prose (e.g., browse page accordion descriptions): out of scope for this milestone.
+- Animated transitions (`@starting-style`, `allow-discrete`): known to cause "pixel-shifting jank" in Safari when combined with Popover API (confirmed by dbushell.com implementation experience).
 
 ---
 
 ## Sources
 
-- [Bunny Optimizer Resizing docs](https://docs.bunny.net/docs/resizing) — HIGH confidence
-- [Bunny Optimizer Cropping docs](https://docs.bunny.net/docs/cropping) — HIGH confidence
-- [Bunny Optimizer Formats docs](https://docs.bunny.net/optimizer/dynamic-images/formats.md) — HIGH confidence
-- [Bunny Optimizer Automatic Optimization](https://docs.bunny.net/optimizer/automatic-optimization) — HIGH confidence
-- [Bunny Optimizer Dynamic Images Overview](https://docs.bunny.net/optimizer/dynamic-images/overview.md) — HIGH confidence
-- [Bunny Optimizer Image Classes](https://docs.bunny.net/optimizer/image-classes.md) — HIGH confidence
-- [Bunny Optimizer Pricing](https://docs.bunny.net/optimizer/pricing.md) — HIGH confidence
-- [AVIF support blog post](https://bunny.net/blog/lets-talk-avif-and-why-we-are-not-adding-support-just-yet/) — HIGH confidence (official bunny.net)
-- [BunnyNet-PHP image processing parameter list](https://toshy.github.io/BunnyNet-PHP/image-processing/) — MEDIUM confidence (third-party, cross-referenced with official docs)
+- [dbushell.com — Glossary Web Component](https://dbushell.com/2025/05/07/glossary-web-component/) — MEDIUM confidence (independent practitioner, 2025, consistent with other sources)
+- [MDN — Using the Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using) — HIGH confidence
+- [hidde.blog — Popover accessibility](https://hidde.blog/popover-accessibility/) — HIGH confidence (W3C contributor)
+- [hidde.blog — Semantics and the popover attribute](https://hidde.blog/popover-semantics/) — HIGH confidence
+- [Frontend Masters — Popover API for HTML Tooltips](https://frontendmasters.com/blog/using-the-popover-api-for-html-tooltips/) — MEDIUM confidence
+- [Smashing Magazine — Getting Started With The Popover API](https://www.smashingmagazine.com/2026/03/getting-started-popover-api/) — MEDIUM confidence
+- [OddBird — Anchor Positioning polyfill updates](https://www.oddbird.net/2025/05/06/polyfill-updates/) — MEDIUM confidence
+- [Chrome Developers — Anchor Positioning API](https://developer.chrome.com/blog/anchor-positioning-api) — HIGH confidence
+- [bitsofco.de — Making abbr work for touchscreen, keyboard, and mouse](https://bitsofco.de/making-abbr-work-for-touchscreen-keyboard-mouse/) — MEDIUM confidence
 
-*Feature research for: PNW Moths v1.4 Image CDN milestone*
-*Researched: 2026-04-21*
+*Feature research for: PNW Moths v2.0 Glossary Tooltips milestone*
+*Researched: 2026-04-23*
