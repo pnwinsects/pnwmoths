@@ -84,6 +84,8 @@ async function main() {
     await writeFile(PROGRESS_FILE, '');
   }
 
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
   let uploaded = 0;
   let skipped = 0;
   for (const localPath of allFiles) {
@@ -91,14 +93,27 @@ async function main() {
     if (done.has(rel)) { skipped++; continue; }
     const cdnPath = `plates/${rel}`;
     const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
-    execFileSync('curl', [
+    const args = [
       '-s', '-S', '-f',
       '-X', 'PUT',
       '-H', `AccessKey: ${BUNNY_API_KEY}`,
       '-H', 'Content-Type: application/octet-stream',
       '--data-binary', `@${localPath}`,
       url,
-    ], { stdio: ['pipe', 'pipe', 'inherit'] });
+    ];
+    let attempts = 0;
+    while (true) {
+      try {
+        execFileSync('curl', args, { stdio: ['pipe', 'pipe', 'inherit'] });
+        break;
+      } catch (err) {
+        attempts++;
+        if (attempts >= 5) throw err;
+        const delay = attempts * 2000;
+        console.log(`[upload-plates] transient error on ${rel} (attempt ${attempts}/5) — retrying in ${delay / 1000}s`);
+        await sleep(delay);
+      }
+    }
     await appendFile(PROGRESS_FILE, rel + '\n');
     uploaded++;
     if (uploaded % 100 === 0) console.log(`[upload-plates] ${uploaded + skipped}/${total} (${uploaded} new, ${skipped} skipped)`);
