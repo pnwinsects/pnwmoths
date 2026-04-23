@@ -189,6 +189,57 @@
 
 ---
 
+## Milestone: v1.4 — Image CDN
+
+**Shipped:** 2026-04-22
+**Phases:** 5 (Phases 13–17) | **Plans:** 13 | **Files changed:** 72 (+100,275 / -791 LOC)
+
+### What Was Built
+
+- bunny.net CDN provisioned: Storage Zone + Pull Zone + Optimizer; 3,880 Django originals uploaded via rclone FTP; contributor workflow documented
+- All Eleventy templates and `pnwm-taxon-browser.js` updated to serve images from CDN; urlencode filter handles Django filenames with spaces
+- Git LFS purged from all 356 commits via `git filter-repo --invert-paths`; CI updated to plain checkout
+- Dead species photo copy block removed from `copy-images.js`; build pipeline confirmed clean with no resize scripts
+- Full legacy MySQL database migrated: streaming readline parser for 634 MB dump → 1,348 species + 85,933 PNW occurrence records; 72/72 tests; 1,364 species pages
+
+### What Worked
+
+- **Hard-coded public constant over env var** — CDN_BASE_URL as a plain constant in `eleventy.config.js` (not env var, not secret) eliminated dotenv machinery and contributor confusion; validated as the right call
+- **Clone from LOCAL repo for LFS rewrite** — recognizing that local commits were 60+ ahead of GitHub before running filter-repo prevented loss of all Phase 13/14 work; a correct diagnosis under pressure
+- **Streaming readline for large SQL dumps** — avoiding `readFileSync` on a 634 MB file was the right instinct; the readline approach handled latin1 encoding and multi-INSERT concatenation cleanly
+- **Phase 17 TDD scaffold before implementation** — writing failing smoke tests in Plan 01 (RED state) before the migration script existed gave a clear acceptance bar and caught the duplicate-slug bug quickly
+- **Phased migration: CDN first, LFS removal second** — validating CDN delivery before touching git history meant LFS removal was a pure cleanup with no risk to image serving
+
+### What Was Inefficient
+
+- **Image Classes debugging loop** — tried enabling bunny.net Image Classes, hit 403 errors, needed bunny.net support to disable them, then re-tested with direct query params. Could have tested direct params first (simpler approach); Image Classes were speculative complexity.
+- **Duplicate-slug species found in Plan 03** — 5 species with identical genus+species combinations caused Eleventy permalink collisions; discovered only during the full build step in Plan 03. A pre-flight uniqueness check in the migration script test suite (VALIDATION.md) would have caught this in Plan 01.
+- **Orphaned empty directory** — `17-migrate-full-species-data/` (no "from-legacy-database") created as an artifact; existed at milestone close. Minor but worth noting as a cleanup habit.
+- **WebP not enabled** — Optimizer was configured but WebP conversion toggle was not enabled; CDN serving JPEG at close. Should have been on the Phase 13 checklist.
+
+### Patterns Established
+
+- `CDN_BASE_URL` as hard-coded public constant in `eleventy.config.js` (not env var, not secret) — use for any truly-public external service URL
+- `createReadStream(path, { encoding: 'latin1' }) + readline` for streaming large SQL dumps safely in Node.js
+- Clone from LOCAL repo (not remote) when local commits are ahead of remote before any force-push workflow
+- DB-derived slug (`lower(genus||'-'||species)`) for records CSV JOIN compatibility with `build-data.js` — do not use image-filename-derived slugs for join keys
+- Uniqueness pre-flight in migration test scaffold: assert no duplicate normalized slugs before running the full build
+
+### Key Lessons
+
+1. **Simpler CDN setup first.** Direct Optimizer query params are simpler than Image Classes and should be tested before attempting named presets. Image Classes added complexity without benefit here.
+2. **Add uniqueness assertions to migration smoke tests.** The duplicate-slug failure was detectable from the CSV data alone; a `GROUP BY slug HAVING count(*) > 1` check in Plan 01 tests would have surfaced it before the full build.
+3. **Check all Optimizer toggles at setup time.** WebP conversion is a one-click setting in the dashboard; leaving it for "later" means it doesn't get done. Treat each Optimizer setting as a checklist item, not a default.
+4. **LFS history rewrite: always check local vs. remote ahead-of-remote count first.** `git log origin/main..HEAD --oneline | wc -l` before cloning for filter-repo prevents data loss.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet (execution and planning); Opus for research phases
+- Sessions: 1 day (2026-04-21 → 2026-04-22)
+- Notable: Infrastructure + data migration milestone in 2 days; most complexity was in Phase 17 SQL dump parsing and Phase 15 LFS history rewrite — both handled cleanly on first attempt
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -199,6 +250,7 @@
 | v1.1 | 103 | 1 | Quick task pattern for post-milestone debt; single-phase visual milestone |
 | v1.2 | 8 | 1 | Focused tech-debt close; regression tests added; audit-open closure discipline established |
 | v1.3 | 79 | 5 | First interactive feature milestone; TDD-first Lit component; light DOM constraint established |
+| v1.4 | 72 files | 5 | Infrastructure + data migration; CDN, LFS rewrite, full dataset — completed in 2 days |
 
 ### Cumulative Quality
 
@@ -208,8 +260,11 @@
 | v1.1 | 2 | No new tests added | 0/1 phases |
 | v1.2 | 3 | +WR-01 regression (glossary validation) +WR-04 regression (crash guard); 37 total | 1/1 phases |
 | v1.3 | 4 | +accordion pure-function unit tests (buildStateMap, taxonHasState, collectSlugs); 58 total | 0/5 phases (VALIDATION.md left as draft) |
+| v1.4 | 5 | +migrate-species smoke tests (row counts, column headers, PNW states, lat/lon); 72 total | 0/5 phases |
 
 ### Top Lessons (Verified Across Milestones)
 
 1. Verify external API shapes before building on them — research assumptions are often stale
 2. Run validation passes per phase, not just at milestone close
+3. Hard-coded public constants over env-var machinery for truly-public external URLs
+4. Add uniqueness/integrity assertions to data migration test scaffolds before running full builds
