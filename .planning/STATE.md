@@ -81,7 +81,7 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None.
+- Fix close button on the lightbox (`2026-04-23-fix-close-button-on-lightbox.md`)
 
 ### Blockers/Concerns
 
