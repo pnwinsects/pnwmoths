@@ -1,8 +1,14 @@
 # PNW Moths Static Site
 
-## Current State: v1.4 Complete + Phase 18 done 2026-04-23
+## Current Milestone: v2.0 Glossary Tooltips
 
-All v1.4 goals delivered plus Phase 18 regression fix: images on bunny.net CDN, LFS removed from history, build pipeline clean, full legacy dataset migrated, photographic plates restored. Site live on GitHub Pages with 1,348 species, 85,933 occurrence records, and 98 Zoomify plate sets served from CDN.
+**Goal:** Species prose automatically highlights the first occurrence of each glossary term at build time with a tooltip/popover showing the definition and image.
+
+**Target features:**
+- Build-time detection: Eleventy transform wraps first occurrences of glossary terms in species prose HTML
+- Tooltip/popover: definition text + glossary image (if available) shown on hover/focus
+- First-occurrence only per page (Wikipedia style)
+- Graceful no-JS degradation
 
 ## What This Is
 
@@ -58,6 +64,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Enable WebP conversion on bunny.net Optimizer (serving JPEG currently; toggle in Pull Zone → Optimizer → WebP conversion)
+- [ ] Build-time glossary term detection in species prose (first occurrence per page)
+- [ ] Tooltip/popover shows definition + image for matched glossary terms
+- [ ] Graceful no-JS degradation for highlighted terms
 
 ### Out of Scope
 
@@ -151,4 +160,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-23 after v1.4 milestone complete*
+*Last updated: 2026-04-23 after v2.0 milestone started*

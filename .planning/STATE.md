@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.4
-milestone_name: Image CDN
+milestone: v2.0
+milestone_name: Glossary Tooltips
 status: In progress
-stopped_at: Phase 18 complete 2026-04-23 — plates CDN migration done, 98 plates live in production
+stopped_at: ~
 last_updated: "2026-04-23T00:00:00Z"
 last_activity: 2026-04-23
 progress:
-  total_phases: 6
-  completed_phases: 6
-  total_plans: 15
-  completed_plans: 15
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -25,11 +25,12 @@ See: .planning/PROJECT.md (updated 2026-04-23 after v1.4 milestone)
 
 ## Current Position
 
-Milestone: v1.4 Image CDN — COMPLETE
-All 5 phases (13–17) complete; 13/13 plans done; 72/72 tests; 1,364 species pages on GitHub Pages
-Last activity: 2026-04-23 — v1.4 milestone archived
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-23 — Milestone v2.0 started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
