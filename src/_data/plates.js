@@ -146,7 +146,7 @@ async function readDimensions(dirPath) {
   };
 }
 
-const MANIFEST_PATH = new URL('../../plates/manifest.json', import.meta.url).pathname;
+const MANIFEST_PATH = new URL('../../data/plates.json', import.meta.url).pathname;
 
 export default async function () {
   if (!existsSync(PLATES_Z_SOURCE)) {
