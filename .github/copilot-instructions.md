@@ -10,6 +10,7 @@ and constraints for AI-assisted development.
 | `data/species.csv` | Species taxonomy (genus, species, common name, …) |
 | `data/records.csv` | Observation records with coordinates and dates |
 | `data/images.csv` | Image metadata linking photos to species |
+| `data/plates.json` | Photographic plate manifest (98 records: number, family, slug, width, height) |
 
 ## Slug convention
 
