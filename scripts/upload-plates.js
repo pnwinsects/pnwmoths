@@ -108,7 +108,10 @@ async function main() {
         break;
       } catch (err) {
         attempts++;
-        if (attempts >= 5) throw err;
+        if (attempts >= 5) {
+          const safeMsg = err.message.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]');
+          throw new Error(`Upload failed for ${rel} after 5 attempts: ${safeMsg}`);
+        }
         const delay = attempts * 2000;
         console.log(`[upload-plates] transient error on ${rel} (attempt ${attempts}/5) — retrying in ${delay / 1000}s`);
         await sleep(delay);
