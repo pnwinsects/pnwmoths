@@ -92,7 +92,11 @@
   3. Terms containing regex metacharacters (`1A+2A`, `W-mark`, `CuA1`) are matched correctly and do not corrupt surrounding HTML
   4. The `/glossary/` page and browse pages contain no `<abbr class="glossary-term">` elements (transform is scoped to species prose only)
   5. Unit tests cover regex escaping, first-occurrence deduplication, and prose-scope guard; all tests pass
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 19-01-PLAN.md — Install node-html-parser + implement glossary-transform.js (escapeRegex, escapeHtml, buildTermMap, applyGlossaryTerms)
+- [ ] 19-02-PLAN.md — Create unit test suite (QA-01) + add src/_lib/*.test.js to npm test glob
+- [ ] 19-03-PLAN.md — Wire addTransform into eleventy.config.js + integration verification
 
 ### Phase 20: Popover UI — HTML and CSS
 **Goal**: Users can see a styled popover panel with the full definition when they hover, focus, or click a highlighted glossary term; the feature works without JavaScript and does not pollute the Pagefind search index
@@ -141,7 +145,7 @@
 | 16. Build Pipeline Cleanup | v1.4 | 1/1 | Complete | 2026-04-22 |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 | 18. Plates CDN Migration | — | 2/2 | Complete | 2026-04-23 |
-| 19. Build-time Glossary Transform | v2.0 | 0/? | Not started | - |
+| 19. Build-time Glossary Transform | v2.0 | 0/3 | Not started | - |
 | 20. Popover UI — HTML and CSS | v2.0 | 0/? | Not started | - |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/? | Not started | - |
 
