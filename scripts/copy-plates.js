@@ -138,8 +138,8 @@ for (const [slug, { dirName, number }] of toProcess) {
 }
 
 manifest.sort((a, b) => parseInt(a.number, 10) - parseInt(b.number, 10));
-await writeFile(join(REPO_PLATES, 'manifest.json'), JSON.stringify(manifest, null, 2));
+await writeFile(resolve('data/plates.json'), JSON.stringify(manifest, null, 2));
 
 console.log(`Copied ${copied} plate tile sets: ${PLATES_Z_SOURCE} -> ${REPO_PLATES} + ${SITE_DEST}`);
 console.log(`Copied ${thumbsCopied} thumbnails`);
-console.log(`Wrote manifest: ${REPO_PLATES}/manifest.json`);
+console.log(`Wrote manifest: data/plates.json`);

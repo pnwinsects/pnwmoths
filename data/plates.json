@@ -1,0 +1,688 @@
+[
+  {
+    "number": "0",
+    "family": "Commonly Reported Moths 2",
+    "slug": "plate-0-commonly-reported-moths-2",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "00",
+    "family": "Commonly Reported Moths 1",
+    "slug": "plate-00-commonly-reported-moths-1",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "1",
+    "family": "Drepanidae",
+    "slug": "plate-1-drepanidae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "2",
+    "family": "Lasiocampidae",
+    "slug": "plate-2-lasiocampidae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "3",
+    "family": "Saturniidae I",
+    "slug": "plate-3-saturniidae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "4",
+    "family": "Saturniidae II",
+    "slug": "plate-4-saturniidae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "5",
+    "family": "Saturniidae III",
+    "slug": "plate-5-saturniidae-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "6",
+    "family": "Saturniidae IV",
+    "slug": "plate-6-saturniidae-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "7",
+    "family": "Sphingidae I",
+    "slug": "plate-7-sphingidae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "8",
+    "family": "Sphingidae II",
+    "slug": "plate-8-sphingidae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "9",
+    "family": "Sphingidae III",
+    "slug": "plate-9-sphingidae-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "10",
+    "family": "Sphingidae IV",
+    "slug": "plate-10-sphingidae-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "11",
+    "family": "Sphingidae V",
+    "slug": "plate-11-sphingidae-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "12",
+    "family": "Notodontidae I",
+    "slug": "plate-12-notodontidae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "13",
+    "family": "Notodontidae II",
+    "slug": "plate-13-notodontidae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "14",
+    "family": "Erebidae I (Lymantriinae)",
+    "slug": "plate-14-erebidae-i-lymantriinae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "15",
+    "family": "Erebidae II (Arctiinae I)",
+    "slug": "plate-15-erebidae-ii-arctiinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "16",
+    "family": "Erebidae III (Arctiinae II)",
+    "slug": "plate-16-erebidae-iii-arctiinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "17",
+    "family": "Erebidae IV (Arctiinae III)",
+    "slug": "plate-17-erebidae-iv-arctiinae-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "18",
+    "family": "Erebidae V (Arctiinae IV)",
+    "slug": "plate-18-erebidae-v-arctiinae-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "19",
+    "family": "Erebidae VI (Arctiinae V)",
+    "slug": "plate-19-erebidae-vi-arctiinae-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "20",
+    "family": "Erebidae VII (Herminiinae)",
+    "slug": "plate-20-erebidae-vii-herminiinae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "21",
+    "family": "Erebidae VIII (Hypeninae)",
+    "slug": "plate-21-erebidae-viii-hypeninae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "22",
+    "family": "Erebidae IX (Rivulinae etc.)",
+    "slug": "plate-22-erebidae-ix-rivulinae-etc",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "23",
+    "family": "Erebidae X (Erebinae I)",
+    "slug": "plate-23-erebidae-x-erebinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "24",
+    "family": "Erebidae XI (Erebinae II)",
+    "slug": "plate-24-erebidae-xi-erebinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "25",
+    "family": "Erebidae XII (Erebinae III)",
+    "slug": "plate-25-erebidae-xii-erebinae-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "26",
+    "family": "Erebidae XIII (Erebinae IV)",
+    "slug": "plate-26-erebidae-xiii-erebinae-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "27",
+    "family": "Erebidae XIV (Erebinae V)",
+    "slug": "plate-27-erebidae-xiv-erebinae-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "28",
+    "family": "Erebidae XV (Erebinae VI)",
+    "slug": "plate-28-erebidae-xv-erebinae-vi",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "29",
+    "family": "Erebidae XVI (Erebinae VII)",
+    "slug": "plate-29-erebidae-xvi-erebinae-vii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "30",
+    "family": "Euteliidae etc",
+    "slug": "plate-30-euteliidae-etc",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "31",
+    "family": "Noctuidae II (Plusiinae II)",
+    "slug": "plate-31-noctuidae-ii-plusiinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "32",
+    "family": "Noctuidae III (Plusiinae III)",
+    "slug": "plate-32-noctuidae-iii-plusiinae-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "33",
+    "family": "Noctuidae IV (Eustrotiinae and Acontiinae)",
+    "slug": "plate-33-noctuidae-iv-eustrotiinae-and-acontiinae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "34",
+    "family": "Noctuidae V (Pantheinae and Raphiinae)",
+    "slug": "plate-34-noctuidae-v-pantheinae-and-raphiinae",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "35",
+    "family": "Noctuidae VI (Acronictinae I)",
+    "slug": "plate-35-noctuidae-vi-acronictinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "36",
+    "family": "Noctuidae VII (Acronictinae II)",
+    "slug": "plate-36-noctuidae-vii-acronictinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "37",
+    "family": "Noctuidae VIII (Metoponiinae and Cuculiinae I)",
+    "slug": "plate-37-noctuidae-viii-metoponiinae-and-cuculiinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "38",
+    "family": "Noctuidae IX (Cuculiinae II)",
+    "slug": "plate-38-noctuidae-ix-cuculiinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "39",
+    "family": "Noctuidae X (Amphipyrinae I)",
+    "slug": "plate-39-noctuidae-x-amphipyrinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "40",
+    "family": "Noctuidae XI (Amphipyrinae II and Oncocnemidinae I)",
+    "slug": "plate-40-noctuidae-xi-amphipyrinae-ii-and-oncocnemidinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "41",
+    "family": "Noctuidae XII (Oncocnemidinae II)",
+    "slug": "plate-41-noctuidae-xii-oncocnemidinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "42",
+    "family": "Noctuidae XIII (Oncocnemidinae III)",
+    "slug": "plate-42-noctuidae-xiii-oncocnemidinae-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "43",
+    "family": "Noctuidae XIV (Oncocnemidinae IV)",
+    "slug": "plate-43-noctuidae-xiv-oncocnemidinae-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "44",
+    "family": "Noctuidae XV (Heliothinae I)",
+    "slug": "plate-44-noctuidae-xv-heliothinae-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "45",
+    "family": "Noctuidae XVI (Heliothinae II)",
+    "slug": "plate-45-noctuidae-xvi-heliothinae-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "46",
+    "family": "Noctuidae XVII (Bryophilini etc.)",
+    "slug": "plate-46-noctuidae-xvii-bryophilini-etc",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "47",
+    "family": "Noctuidae XVIII (Noctuinae Caradrinini and Actinotiini)",
+    "slug": "plate-47-noctuidae-xviii-noctuinae-caradrinini-and-actinotiini",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "48",
+    "family": "Noctuidae XIX (Noctuinae Apameini I)",
+    "slug": "plate-48-noctuidae-xix-noctuinae-apameini-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "49",
+    "family": "Noctuidae XX ( Noctuinae Apameini II)",
+    "slug": "plate-49-noctuidae-xx-noctuinae-apameini-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "50",
+    "family": "Noctuidae XXI (Noctuinae Apameini III)",
+    "slug": "plate-50-noctuidae-xxi-noctuinae-apameini-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "51",
+    "family": "Noctuidae XXII (Noctuinae Apameini IV)",
+    "slug": "plate-51-noctuidae-xxii-noctuinae-apameini-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "52",
+    "family": "Noctuidae XXIII (Noctuinae Apameini V)",
+    "slug": "plate-52-noctuidae-xxiii-noctuinae-apameini-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "53",
+    "family": "Noctuidae XXIV (Noctuinae Apameini VI)",
+    "slug": "plate-53-noctuidae-xxiv-noctuinae-apameini-vi",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "54",
+    "family": "Noctuidae XXV (Noctuinae Apameini VII and Arzamini)",
+    "slug": "plate-54-noctuidae-xxv-noctuinae-apameini-vii-and-arzamini",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "55",
+    "family": "Noctuidae XXVI (Noctuinae Xylenini I)",
+    "slug": "plate-55-noctuidae-xxvi-noctuinae-xylenini-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "56",
+    "family": "Noctuidae XXVII (Noctuinae Xylenini II)",
+    "slug": "plate-56-noctuidae-xxvii-noctuinae-xylenini-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "57",
+    "family": "Noctuidae XXVIII (Noctuinae Xylenini III)",
+    "slug": "plate-57-noctuidae-xxviii-noctuinae-xylenini-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "58",
+    "family": "Noctuidae XXIX (Noctuinae Xylenini IV)",
+    "slug": "plate-58-noctuidae-xxix-noctuinae-xylenini-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "59",
+    "family": "Noctuidae XXX (Noctuinae Xylenini V)",
+    "slug": "plate-59-noctuidae-xxx-noctuinae-xylenini-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "60",
+    "family": "Noctuidae XXXI (Noctuinae Xylenini VI)",
+    "slug": "plate-60-noctuidae-xxxi-noctuinae-xylenini-vi",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "61",
+    "family": "Noctuidae XXXII (Noctuinae Xylenini VII)",
+    "slug": "plate-61-noctuidae-xxxii-noctuinae-xylenini-vii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "62",
+    "family": "Noctuidae XXXIII (Noctuinae Xylenini VIIII)",
+    "slug": "plate-62-noctuidae-xxxiii-noctuinae-xylenini-viiii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "63",
+    "family": "Noctuidae XXXIV (Noctuinae Xylenini IX and Orthosiini I)",
+    "slug": "plate-63-noctuidae-xxxiv-noctuinae-xylenini-ix-and-orthosiini-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "64",
+    "family": "Noctuidae XXXV (Noctuinae Orthosiini II)",
+    "slug": "plate-64-noctuidae-xxxv-noctuinae-orthosiini-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "65",
+    "family": "Noctuidae XXXVI (Noctuinae Orthosiini III and Tholerini)",
+    "slug": "plate-65-noctuidae-xxxvi-noctuinae-orthosiini-iii-and-tholerini",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "66",
+    "family": "Noctuidae XXXVII (Noctuinae Hadenini I)",
+    "slug": "plate-66-noctuidae-xxxvii-noctuinae-hadenini-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "67",
+    "family": "Noctuidae XXXVIII (Noctuinae Hadenini II)",
+    "slug": "plate-67-noctuidae-xxxviii-noctuinae-hadenini-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "68",
+    "family": "Noctuidae XXXIX (Noctuinae Hadenini III)",
+    "slug": "plate-68-noctuidae-xxxix-noctuinae-hadenini-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "69",
+    "family": "Noctuidae XL (Noctuinae Hadenini IV)",
+    "slug": "plate-69-noctuidae-xl-noctuinae-hadenini-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "70",
+    "family": "Noctuidae XLI (Noctuinae Leucaniini)",
+    "slug": "plate-70-noctuidae-xli-noctuinae-leucaniini",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "71",
+    "family": "Noctuidae XLII (Noctuinae Eriopygini I )",
+    "slug": "plate-71-noctuidae-xlii-noctuinae-eriopygini-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "72",
+    "family": "Noctuidae XLIII (Noctuinae Eriopygini II )",
+    "slug": "plate-72-noctuidae-xliii-noctuinae-eriopygini-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "73",
+    "family": "Noctuidae XLIV (Noctuinae Eriopygini III )",
+    "slug": "plate-73-noctuidae-xliv-noctuinae-eriopygini-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "74",
+    "family": "Noctuidae XLV (Noctuinae Eriopygini IV )",
+    "slug": "plate-74-noctuidae-xlv-noctuinae-eriopygini-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "75",
+    "family": "Noctuidae XLVI (Noctuinae Eriopygini V )",
+    "slug": "plate-75-noctuidae-xlvi-noctuinae-eriopygini-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "76",
+    "family": "Noctuidae XLVII (Noctuinae Noctuini I)",
+    "slug": "plate-76-noctuidae-xlvii-noctuinae-noctuini-i",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "77",
+    "family": "Noctuidae XLVIII (Noctuinae Noctuini II)",
+    "slug": "plate-77-noctuidae-xlviii-noctuinae-noctuini-ii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "78",
+    "family": "Noctuidae XLIX (Noctuinae Noctuini III)",
+    "slug": "plate-78-noctuidae-xlix-noctuinae-noctuini-iii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "79",
+    "family": "Noctuidae L (Noctuinae Noctuini IV)",
+    "slug": "plate-79-noctuidae-l-noctuinae-noctuini-iv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "80",
+    "family": "Noctuidae LI (Noctuinae Noctuini V)",
+    "slug": "plate-80-noctuidae-li-noctuinae-noctuini-v",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "81",
+    "family": "Noctuidae LII (Noctuinae Noctuini VI)",
+    "slug": "plate-81-noctuidae-lii-noctuinae-noctuini-vi",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "82",
+    "family": "Noctuidae LIII (Noctuinae Noctuini VII)",
+    "slug": "plate-82-noctuidae-liii-noctuinae-noctuini-vii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "83",
+    "family": "Noctuidae LIV (Noctuinae Noctuini VIII)",
+    "slug": "plate-83-noctuidae-liv-noctuinae-noctuini-viii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "84",
+    "family": "Noctuidae LV (Noctuinae Noctuini IX)",
+    "slug": "plate-84-noctuidae-lv-noctuinae-noctuini-ix",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "85",
+    "family": "Noctuidae LVI (Noctuinae Noctuini X)",
+    "slug": "plate-85-noctuidae-lvi-noctuinae-noctuini-x",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "86",
+    "family": "Noctuidae LVII (Noctuinae Noctuini XI)",
+    "slug": "plate-86-noctuidae-lvii-noctuinae-noctuini-xi",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "87",
+    "family": "Noctuidae LVIII (Noctuinae Noctuini XII)",
+    "slug": "plate-87-noctuidae-lviii-noctuinae-noctuini-xii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "88",
+    "family": "Noctuidae LIX (Noctuinae Noctuini XIII)",
+    "slug": "plate-88-noctuidae-lix-noctuinae-noctuini-xiii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "89",
+    "family": "Noctuidae LX (Noctuinae Noctuini XIV)",
+    "slug": "plate-89-noctuidae-lx-noctuinae-noctuini-xiv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "90",
+    "family": "Noctuidae LXI (Noctuinae Noctuini XV)",
+    "slug": "plate-90-noctuidae-lxi-noctuinae-noctuini-xv",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "91",
+    "family": "Noctuidae LXII (Noctuinae Noctuini XVI)",
+    "slug": "plate-91-noctuidae-lxii-noctuinae-noctuini-xvi",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "92",
+    "family": "Noctuidae LXIII (Noctuinae Noctuini XVII)",
+    "slug": "plate-92-noctuidae-lxiii-noctuinae-noctuini-xvii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "93",
+    "family": "Noctuidae LXIV (Noctuinae Noctuini XVIII)",
+    "slug": "plate-93-noctuidae-lxiv-noctuinae-noctuini-xviii",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "94",
+    "family": "Noctuidae LXV (Noctuinae Noctuini XIX)",
+    "slug": "plate-94-noctuidae-lxv-noctuinae-noctuini-xix",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "95",
+    "family": "Noctuidae LXVI (Noctuinae Noctuini XX)",
+    "slug": "plate-95-noctuidae-lxvi-noctuinae-noctuini-xx",
+    "width": 2400,
+    "height": 3000
+  },
+  {
+    "number": "96",
+    "family": "Noctuidae LXVII (Noctuinae Noctuini XXI)",
+    "slug": "plate-96-noctuidae-lxvii-noctuinae-noctuini-xxi",
+    "width": 2400,
+    "height": 3000
+  }
+]

@@ -11,7 +11,7 @@ eleventyComputed:
 <h1>{{ plate.title }}</h1>
 
 <pnwm-plate-viewer
-  tiles-url="{{ ('/plates/' + plate.slug + '/') | url }}"
+  tiles-url="{{ cdnBaseUrl }}/plates/{{ plate.slug }}/"
   prefix-url="{{ '/osd-images/' | url }}"
   width="{{ plate.width }}"
   height="{{ plate.height }}"
@@ -19,7 +19,7 @@ eleventyComputed:
 </pnwm-plate-viewer>
 
 <noscript>
-  <p>Enable JavaScript to view the zoomable plate. <a href="{{ ('/plates/' + plate.slug + '/') | url }}ImageProperties.xml">Image metadata</a>.</p>
+  <p>Enable JavaScript to view the zoomable plate. <a href="{{ cdnBaseUrl }}/plates/{{ plate.slug }}/ImageProperties.xml">Image metadata</a>.</p>
 </noscript>
 
 <p><a href="{{ '/plates/' | url }}">&larr; All plates</a></p>
