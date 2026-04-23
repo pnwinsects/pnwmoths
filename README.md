@@ -27,6 +27,7 @@ Plain-English instructions for common maintenance tasks are in [`_instructions/`
 - [`ADDING_RECORDS.md`](_instructions/ADDING_RECORDS.md)
 - [`EDITING_DESCRIPTION.md`](_instructions/EDITING_DESCRIPTION.md)
 - [`ADDING_PHOTO.md`](_instructions/ADDING_PHOTO.md)
+- [`ADDING_PLATE.md`](_instructions/ADDING_PLATE.md)
 
 ## License
 
