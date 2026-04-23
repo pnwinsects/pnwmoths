@@ -1,8 +1,10 @@
 import { EleventyRenderPlugin } from "@11ty/eleventy";
 import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFile } from "node:child_process";
+import { parse as parseCsv } from "csv-parse/sync";
+import { applyGlossaryTerms, buildTermMap } from "./src/_lib/glossary-transform.js";
 
 // On GitHub Pages the site lives under /pnwmoths/. actions/configure-pages sets
 // GITHUB_PAGES=true so the build knows to apply the prefix. Locally the dev
@@ -12,6 +14,15 @@ const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
 // bunny.net Pull Zone — public CDN base URL. Not a secret; hard-coded here.
 // To update: log in to bunny.net dashboard, find the Pull Zone hostname, paste here.
 const CDN_BASE_URL = "https://pnwmoths.b-cdn.net";
+
+// Load glossary terms once at startup. termMap is sorted longest-first and
+// has pre-compiled regexes — shared across all addTransform invocations via closure.
+// csv-parse/sync is synchronous; no async needed here.
+const glossaryRows = parseCsv(readFileSync("data/glossary.csv"), {
+  columns: true,
+  skip_empty_lines: true,
+});
+const termMap = buildTermMap(glossaryRows, CDN_BASE_URL);
 
 export default function (eleventyConfig) {
   // Render plugin: enables {% renderFile %} shortcode for rendering .md files in templates
@@ -30,6 +41,17 @@ export default function (eleventyConfig) {
   // URL-encode filter: handles all reserved URL characters in Django filenames
   // (spaces, parentheses, +, #, etc.). Used in CDN URL construction.
   eleventyConfig.addFilter("urlencode", v => encodeURIComponent(v));
+
+  // Annotate species prose pages at build time: wrap first occurrences of glossary
+  // terms in <abbr class="glossary-term"> elements.
+  // Guard 1: skip non-HTML outputs (outputPath is false for permalink:false pages)
+  // Guard 2: skip non-species pages (glossary, browse, home, etc.)
+  eleventyConfig.addTransform("glossary-terms", function (content) {
+    const outputPath = this.page.outputPath;
+    if (!outputPath || !outputPath.endsWith(".html")) return content;
+    if (!outputPath.includes("/species/")) return content;
+    return applyGlossaryTerms(content, termMap);
+  });
 
   // Expose CDN base URL to all Nunjucks templates as {{ cdnBaseUrl }}
   eleventyConfig.addGlobalData("cdnBaseUrl", CDN_BASE_URL);
