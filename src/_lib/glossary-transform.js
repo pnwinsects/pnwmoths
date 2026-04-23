@@ -85,38 +85,60 @@ export function applyGlossaryTerms(html, termMap) {
 }
 
 /**
- * Replace the first unseen glossary term match in a single text node.
- * Only one substitution per text node per call; the outer loop handles
- * walking all text nodes.
+ * Replace all unseen glossary term matches in a single text node in one pass.
+ * Advances a `pos` cursor through the raw text, finding the positionally-earliest
+ * unseen term at each step and accumulating replacement HTML. One exchangeChild
+ * call replaces the text node with the fully-substituted result.
  *
  * @param {import('node-html-parser').TextNode} textNode
  * @param {ReturnType<typeof buildTermMap>} terms
  * @param {Set<string>} seen - lower-cased terms already wrapped on this page
  */
 function substituteTerms(textNode, terms, seen) {
-  let rawText = textNode.rawText; // rawText preserves existing HTML entities
+  const rawText = textNode.rawText; // rawText preserves existing HTML entities
+  let html = '';
+  let pos = 0;
+  let modified = false;
 
-  for (const entry of terms) {
-    if (seen.has(entry.lower)) continue;
+  while (pos <= rawText.length) {
+    // Find the positionally-earliest unseen term match from current position.
+    let earliest = null; // { entry, match }
 
-    entry.regex.lastIndex = 0; // reset stateful gi regex before each exec
-    const match = entry.regex.exec(rawText);
-    if (!match) continue;
+    for (const entry of terms) {
+      if (seen.has(entry.lower)) continue;
 
-    seen.add(entry.lower);
+      entry.regex.lastIndex = pos; // search from current position
+      const match = entry.regex.exec(rawText);
+      if (!match) continue;
 
-    const before = rawText.slice(0, match.index);
-    const matched = match[0]; // preserves original case from source text
-    const after = rawText.slice(match.index + matched.length);
+      if (earliest === null || match.index < earliest.match.index) {
+        earliest = { entry, match };
+      }
+    }
 
-    const abbr =
+    if (!earliest) {
+      // No more unseen terms — append remaining text and stop
+      html += rawText.slice(pos);
+      break;
+    }
+
+    const { entry, match } = earliest;
+    html += rawText.slice(pos, match.index); // text before the match
+    html +=
       `<abbr class="glossary-term" ` +
       `title="${escapeHtml(entry.definition)}" ` +
       `data-definition="${escapeHtml(entry.definition)}" ` +
       `data-image-url="${escapeHtml(entry.imageUrl)}"` +
-      `>${matched}</abbr>`;
+      `>${match[0]}</abbr>`;
+    seen.add(entry.lower);
+    pos = match.index + match[0].length;
+    modified = true;
 
-    textNode.parentNode.exchangeChild(textNode, parse(before + abbr + after));
-    break; // one substitution per text node per call
+    // Reset all regex lastIndex after each substitution to prevent stale state
+    for (const e of terms) e.regex.lastIndex = 0;
+  }
+
+  if (modified) {
+    textNode.parentNode.exchangeChild(textNode, parse(html));
   }
 }

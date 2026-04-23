@@ -201,4 +201,36 @@ describe('applyGlossaryTerms', () => {
     // abbr may appear inside main>p but not in header>p
     assert.ok(!result.includes('<header><p>The <abbr'), 'forewing in header should not be wrapped');
   });
+
+  it('two distinct terms in the same text node: positionally-first is wrapped, not the longer one', () => {
+    // "forewing" appears at index ~4, "outer margin" appears at index ~22.
+    // longest-first order puts "outer margin" (12 chars) before "forewing" (8 chars).
+    // The fixed substituteTerms() must select "forewing" (min match.index = 4).
+    const multiRows = [
+      { term: 'forewing', definition: 'the front wing', image_filename: '' },
+      { term: 'outer margin', definition: 'the outer edge', image_filename: '' },
+    ];
+    const multiMap = buildTermMap(multiRows, CDN);
+    // Confirm longest-first sort: "outer margin" (12) sorts before "forewing" (8)
+    assert.equal(multiMap[0].term, 'outer margin', 'outer margin should sort first (longest)');
+    assert.equal(multiMap[1].term, 'forewing', 'forewing should sort second (shorter)');
+
+    const html = '<html><body><main><p>The forewing and outer margin are visible.</p></main></body></html>';
+    const result = applyGlossaryTerms(html, multiMap);
+
+    // "forewing" appears at a lower character index than "outer margin",
+    // so it must be wrapped first regardless of the termMap sort order.
+    assert.ok(
+      result.includes('>forewing<'),
+      'forewing must be wrapped (positionally first in the text node)'
+    );
+    // Both terms are in the same text node; the while-loop wraps both in one pass.
+    assert.ok(
+      result.includes('>outer margin<'),
+      'outer margin must also be wrapped (on subsequent element pass)'
+    );
+    // Verify both are wrapped as abbr elements
+    const abbrCount = (result.match(/<abbr/g) || []).length;
+    assert.equal(abbrCount, 2, 'both terms must be wrapped — exactly 2 abbr elements');
+  });
 });
