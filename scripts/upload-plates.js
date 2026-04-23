@@ -13,14 +13,19 @@
  *   BUNNY_API_KEY=xxx node scripts/upload-plates.js
  *   DRY_RUN=1 node scripts/upload-plates.js        # dry-run: prints URLs, no upload
  *
+ * Resume after failure: re-run the same command. Already-uploaded files listed in
+ * .upload-plates-progress are skipped. Delete that file to force a full re-upload.
+ *
  * BUNNY_API_KEY: Storage Zone password from bunny.net dashboard -> pnwmoths Storage Zone.
  * Never commit, log, or hardcode the API key.
  */
 
-import { readdir } from 'node:fs/promises';
+import { readdir, readFile, writeFile, appendFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, resolve, relative } from 'node:path';
 import { execFileSync } from 'node:child_process';
+
+const PROGRESS_FILE = resolve('.upload-plates-progress');
 
 const BUNNY_STORAGE_HOST = process.env.BUNNY_STORAGE_HOST ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE = process.env.BUNNY_ZONE ?? 'pnwmoths';
@@ -69,9 +74,21 @@ async function main() {
     return;
   }
 
+  // Load progress so interrupted uploads can resume
+  const done = new Set();
+  if (existsSync(PROGRESS_FILE)) {
+    const lines = (await readFile(PROGRESS_FILE, 'utf8')).split('\n').filter(Boolean);
+    for (const l of lines) done.add(l);
+    console.log(`[upload-plates] Resuming — ${done.size} files already uploaded, skipping`);
+  } else {
+    await writeFile(PROGRESS_FILE, '');
+  }
+
   let uploaded = 0;
+  let skipped = 0;
   for (const localPath of allFiles) {
     const rel = relative(PLATES_LOCAL, localPath);  // e.g. "plate-1-drepanidae/TileGroup0/0-0-0.jpg"
+    if (done.has(rel)) { skipped++; continue; }
     const cdnPath = `plates/${rel}`;
     const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
     execFileSync('curl', [
@@ -82,11 +99,12 @@ async function main() {
       '--data-binary', `@${localPath}`,
       url,
     ], { stdio: ['pipe', 'pipe', 'inherit'] });
+    await appendFile(PROGRESS_FILE, rel + '\n');
     uploaded++;
-    if (uploaded % 100 === 0) console.log(`[upload-plates] ${uploaded}/${total} uploaded`);
+    if (uploaded % 100 === 0) console.log(`[upload-plates] ${uploaded + skipped}/${total} (${uploaded} new, ${skipped} skipped)`);
   }
 
-  console.log(`[upload-plates] Done: ${uploaded} files uploaded to ${BUNNY_ZONE}/plates/`);
+  console.log(`[upload-plates] Done: ${uploaded} uploaded, ${skipped} skipped — ${BUNNY_ZONE}/plates/`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
