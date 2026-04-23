@@ -1,8 +1,8 @@
 # PNW Moths Static Site
 
-## Current State: v1.4 Shipped 2026-04-22
+## Current State: v1.4 Complete + Phase 18 done 2026-04-23
 
-All v1.4 goals delivered: images on bunny.net CDN, LFS removed from history, build pipeline clean, full legacy dataset migrated. Site live on GitHub Pages with 1,348 species and 85,933 occurrence records.
+All v1.4 goals delivered plus Phase 18 regression fix: images on bunny.net CDN, LFS removed from history, build pipeline clean, full legacy dataset migrated, photographic plates restored. Site live on GitHub Pages with 1,348 species, 85,933 occurrence records, and 98 Zoomify plate sets served from CDN.
 
 ## What This Is
 
