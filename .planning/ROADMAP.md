@@ -101,7 +101,7 @@ Plans:
 | 15. LFS Removal | v1.4 | 2/2 | Complete | 2026-04-22 |
 | 16. Build Pipeline Cleanup | v1.4 | 1/1 | Complete | 2026-04-22 |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
-| 18. Plates CDN Migration | — | 0/2 | In progress | — |
+| 18. Plates CDN Migration | — | 0/2 | Ready to execute | — |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23*

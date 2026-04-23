@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: Image CDN
-status: Complete
-stopped_at: v1.4 milestone archived 2026-04-23 — all 5 phases complete, site live on GitHub Pages with full production dataset
-last_updated: "2026-04-23T00:00:00Z"
-last_activity: 2026-04-23
+status: In progress
+stopped_at: Phase 18 planned 2026-04-22 — 2 plans ready, awaiting execution
+last_updated: "2026-04-22T00:00:00Z"
+last_activity: 2026-04-22
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 5
-  total_plans: 13
+  total_plans: 15
   completed_plans: 13
-  percent: 100
+  percent: 87
 ---
 
 # Project State
@@ -75,6 +75,7 @@ Recent decisions affecting current work:
 ### Roadmap Evolution
 
 - Phase 17 added: Migrate Full Species Data from Legacy Database
+- Phase 18 added: Plates CDN Migration (prod regression fix — plates/ git-ignored after LFS removal, "No plates available" in production)
 
 ### Pending Todos
 
