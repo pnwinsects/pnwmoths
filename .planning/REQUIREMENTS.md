@@ -59,23 +59,23 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GLOS-01 | — | Pending |
-| GLOS-02 | — | Pending |
-| GLOS-03 | — | Pending |
-| GLOS-04 | — | Pending |
-| GLOS-05 | — | Pending |
-| GLOS-06 | — | Pending |
-| TIP-01 | — | Pending |
-| TIP-02 | — | Pending |
-| TIP-03 | — | Pending |
-| QA-01 | — | Pending |
-| QA-02 | — | Pending |
+| GLOS-01 | Phase 19 | Pending |
+| GLOS-02 | Phase 19 | Pending |
+| GLOS-03 | Phase 19 | Pending |
+| GLOS-04 | Phase 19 | Pending |
+| GLOS-05 | Phase 19 | Pending |
+| GLOS-06 | Phase 19 | Pending |
+| TIP-01 | Phase 20 | Pending |
+| TIP-02 | Phase 21 | Pending |
+| TIP-03 | Phase 20 | Pending |
+| QA-01 | Phase 19 | Pending |
+| QA-02 | Phase 20 | Pending |
 
 **Coverage:**
 - v2.0 requirements: 11 total
-- Mapped to phases: 0
-- Unmapped: 11 ⚠️
+- Mapped to phases: 11
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-23*
-*Last updated: 2026-04-23 after initial definition*
+*Last updated: 2026-04-23 after roadmap creation*

@@ -10,6 +10,7 @@
 - ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](milestones/v1.2-ROADMAP.md)
 - ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](milestones/v1.3-ROADMAP.md)
 - ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
+- 🚧 **v2.0 Glossary Tooltips** — Phases 19–21 (in progress)
 
 ## Phases
 
@@ -64,19 +65,57 @@
 
 </details>
 
-## Active Phases
+<details>
+<summary>✅ Phase 18 (between milestones) — Plates CDN Migration — SHIPPED 2026-04-23</summary>
 
-### Phase 18: Plates CDN Migration
+- [x] **Phase 18: Plates CDN Migration** - Restore photographic plates: migrate Zoomify tile data to bunny.net CDN — completed 2026-04-23
 
-**Goal:** Restore the photographic plates feature in production by migrating Zoomify tile data to bunny.net CDN. Phase 15 removed `plates/` from Git LFS and added it to `.gitignore`, leaving production with no tile source and "No plates available" on the plates index.
+</details>
 
-**Depends on:** Phase 13 (CDN Provisioning), Phase 15 (LFS Removal)
+## Active Phases (v2.0 Glossary Tooltips)
 
-**Plans:** 2 plans
+**Milestone Goal:** Species prose automatically highlights the first occurrence of each glossary term at build time with a tooltip/popover showing the definition and image.
 
-Plans:
-- [x] 18-01-PLAN.md — Commit data/plates.json manifest, update plates.js + templates to CDN URLs, write upload-plates.js
-- [x] 18-02-PLAN.md — Run one-time CDN upload, verify tile delivery and browser plate viewer
+- [ ] **Phase 19: Build-time Glossary Transform** - Annotate species prose HTML at build time with `<abbr>` elements for first occurrences of glossary terms
+- [ ] **Phase 20: Popover UI — HTML and CSS** - Add popover HTML structure and CSS so annotated terms show definition text on hover/focus/click without JS
+- [ ] **Phase 21: JS Hover Enhancement and Glossary Images** - Add vanilla JS event wiring and CDN glossary images to the popover
+
+## Phase Details
+
+### Phase 19: Build-time Glossary Transform
+**Goal**: Species prose pages have first occurrences of glossary terms wrapped in `<abbr class="glossary-term">` elements carrying definition and image URL as data attributes, correct no-JS degradation, and a passing unit test suite
+**Depends on**: Phase 18 (build pipeline stable)
+**Requirements**: GLOS-01, GLOS-02, GLOS-03, GLOS-04, GLOS-05, GLOS-06, QA-01
+**Success Criteria** (what must be TRUE):
+  1. A species page rendered by `npm run build` contains `<abbr class="glossary-term" title="..." data-definition="..." data-image-url="...">` wrapping the first occurrence of a matched glossary term, and the same term appearing later on the page is plain text
+  2. Matching is case-insensitive and whole-word: "costal" matches in "the costal margin" but not inside "subcostal"
+  3. Terms containing regex metacharacters (`1A+2A`, `W-mark`, `CuA1`) are matched correctly and do not corrupt surrounding HTML
+  4. The `/glossary/` page and browse pages contain no `<abbr class="glossary-term">` elements (transform is scoped to species prose only)
+  5. Unit tests cover regex escaping, first-occurrence deduplication, and prose-scope guard; all tests pass
+**Plans**: TBD
+
+### Phase 20: Popover UI — HTML and CSS
+**Goal**: Users can see a styled popover panel with the full definition when they hover, focus, or click a highlighted glossary term; the feature works without JavaScript and does not pollute the Pagefind search index
+**Depends on**: Phase 19
+**Requirements**: TIP-01, TIP-03, QA-02
+**Success Criteria** (what must be TRUE):
+  1. Hovering or focusing an `<abbr class="glossary-term">` element opens a popover showing the full definition text, styled consistently with the site's design tokens
+  2. The popover dismisses when the pointer leaves, focus moves away, or the user presses Escape
+  3. With JavaScript disabled, the `<abbr title="...">` native browser tooltip remains available and no layout is broken
+  4. After a production build and `pagefind --site _site`, species page excerpts in search results do not include glossary definition text
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 21: JS Hover Enhancement and Glossary Images
+**Goal**: Popovers for terms that have a glossary image display that image from the CDN, and hover/focus show/hide behavior is driven by a small (~20-line) vanilla JS handler
+**Depends on**: Phase 20
+**Requirements**: TIP-02
+**Success Criteria** (what must be TRUE):
+  1. For a glossary term with an `image_filename` in `glossary.csv`, the popover panel shows the corresponding CDN image alongside the definition text
+  2. For a glossary term without an image, the popover shows definition text only and no broken image placeholder appears
+  3. The JS implementation is ~20 lines of vanilla JS with no external library dependency; hover and keyboard focus both trigger show/hide correctly
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
@@ -102,6 +141,9 @@ Plans:
 | 16. Build Pipeline Cleanup | v1.4 | 1/1 | Complete | 2026-04-22 |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 | 18. Plates CDN Migration | — | 2/2 | Complete | 2026-04-23 |
+| 19. Build-time Glossary Transform | v2.0 | 0/? | Not started | - |
+| 20. Popover UI — HTML and CSS | v2.0 | 0/? | Not started | - |
+| 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/? | Not started | - |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23*
