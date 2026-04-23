@@ -64,6 +64,22 @@
 
 </details>
 
+## Active Phases
+
+### Phase 18: Plates CDN Migration
+
+**Goal:** Restore the photographic plates feature in production by migrating Zoomify tile data to bunny.net CDN. Phase 15 removed `plates/` from Git LFS and added it to `.gitignore`, leaving production with no tile source and "No plates available" on the plates index.
+
+**Depends on:** Phase 13 (CDN Provisioning), Phase 15 (LFS Removal)
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 18-01-PLAN.md — Commit data/plates.json manifest, update plates.js + templates to CDN URLs, write upload-plates.js
+- [ ] 18-02-PLAN.md — Run one-time CDN upload, verify tile delivery and browser plate viewer
+
+---
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -85,6 +101,7 @@
 | 15. LFS Removal | v1.4 | 2/2 | Complete | 2026-04-22 |
 | 16. Build Pipeline Cleanup | v1.4 | 1/1 | Complete | 2026-04-22 |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
+| 18. Plates CDN Migration | — | 0/2 | In progress | — |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23*
