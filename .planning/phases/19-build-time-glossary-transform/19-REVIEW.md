@@ -4,15 +4,15 @@ reviewed: 2026-04-23T00:00:00Z
 depth: standard
 files_reviewed: 4
 files_reviewed_list:
-  - eleventy.config.js
-  - package.json
   - src/_lib/glossary-transform.js
   - src/_lib/glossary-transform.test.js
+  - eleventy.config.js
+  - package.json
 findings:
   critical: 0
-  warning: 3
-  info: 2
-  total: 5
+  warning: 1
+  info: 3
+  total: 4
 status: issues_found
 ---
 
@@ -25,111 +25,88 @@ status: issues_found
 
 ## Summary
 
-Four files were reviewed: the core glossary transform utility, its test suite, the Eleventy config, and package.json. The overall implementation is solid — the per-invocation `seen` Set, longest-first sort, `exchangeChild` workaround for node-html-parser 7.x, and regex escaping are all correctly handled. Three functional issues were identified: (1) text nodes inside inline elements are silently skipped, (2) a text node containing two different glossary terms only gets the first one wrapped, and (3) a test inadvertently passes vacuously. Two minor info-level items round out the report.
+The glossary transform implementation is correct. The `substituteTerms` while-loop correctly wraps all unseen terms in a single text node in one pass, regex `lastIndex` management is sound across all code paths (when `exec()` returns `null` on a `g`-flag regex it automatically resets `lastIndex` to 0, so the no-substitution break path does not leave stale state), and the `seen` Set is properly scoped per-invocation to prevent cross-page contamination. All 25 tests pass.
+
+One warning and three info-level items were found. The warning is a functional gap: terms inside nested inline elements are silently skipped because the transform only collects direct text-node children of matched elements. The three info items cover a test description inaccuracy, a bare `readFileSync` call at module scope with no actionable error, and a path-guard pattern that is broader than its stated intent.
 
 ## Warnings
 
-### WR-01: Text inside inline elements is silently skipped
+### WR-01: Terms inside inline elements are silently skipped
 
 **File:** `src/_lib/glossary-transform.js:79`
-**Issue:** The text node collection uses `[...el.childNodes].filter(n => n.nodeType === 3)`, which only collects *direct* TextNode children of each `p`/`li`/`h2`/`h3`. Any text nested inside inline elements — `<strong>`, `<em>`, `<a>`, `<span>`, etc. — is never visited. For example, `<p>The <strong>forewing</strong> color.</p>` will not annotate "forewing" because it lives inside a `<strong>` child, not as a direct text child of `<p>`.
-
-**Fix:** Recursively collect all descendant text nodes, or use `querySelectorAll` on text-containing leaves. A simple recursive walk:
+**Issue:** `applyGlossaryTerms` collects only direct text-node children of each matched element:
 ```js
-function collectTextNodes(el) {
+const textNodes = [...el.childNodes].filter(n => n.nodeType === 3);
+```
+Any text nested inside inline elements — `<em>`, `<strong>`, `<a>`, `<code>`, etc. — is never passed to `substituteTerms`. Verified experimentally: `<p>The <strong>forewing</strong> is visible.</p>` leaves "forewing" unannotated. Markdown prose that italicises a term on its first occurrence (e.g., `*Habrosyne scripta* is found with *forewing* …`) would silently produce no `<abbr>`. The function's JSDoc does not document this constraint.
+
+**Fix (minimal):** Document the limitation in the JSDoc so future authors know to avoid inline-element formatting around a term's first occurrence:
+```js
+ * NOTE: Only direct text-node children of each matched element are processed.
+ * Terms appearing inside nested inline elements (<em>, <strong>, <a>, etc.)
+ * will not be annotated.
+```
+
+**Fix (full):** Replace the direct childNodes filter with a recursive text-node collector:
+```js
+function collectTextNodes(node) {
   const result = [];
-  for (const child of el.childNodes) {
-    if (child.nodeType === 3) {
-      result.push(child);
-    } else if (child.nodeType === 1) {
-      // Skip abbr elements already inserted by earlier passes
-      if (child.tagName !== 'ABBR') result.push(...collectTextNodes(child));
-    }
+  for (const child of node.childNodes) {
+    if (child.nodeType === 3) result.push(child);
+    else if (child.nodeType === 1 && child.tagName !== 'ABBR')
+      result.push(...collectTextNodes(child));
   }
   return result;
 }
-
-// Replace line 79:
+// line 79:
 const textNodes = collectTextNodes(el);
-```
-
----
-
-### WR-02: Second glossary term in a single text node is silently dropped
-
-**File:** `src/_lib/glossary-transform.js:80-83`
-**Issue:** The outer `for` loop iterates over the original pre-collected text nodes exactly once. `substituteTerms` replaces a text node via `exchangeChild` (creating a new fragment) and then `break`s out. The new fragment's internal text nodes are never queued for processing. If a single text node contains two distinct unseen glossary terms — e.g., "The forewing costa is narrow." where both "forewing" and "costal"/"costa" are glossary terms — only the first (longer) term is wrapped; the second is silently skipped because the original text node was consumed and the resulting fragment is never revisited.
-
-**Fix:** Re-queue newly created text nodes for processing, or restructure `substituteTerms` to loop internally over all terms and rebuild the node split by split. The simplest fix is to collect text nodes after each substitution rather than snapshotting before:
-
-```js
-// Instead of a pre-collected snapshot, walk childNodes dynamically.
-// Or: return the new text nodes from substituteTerms so the outer loop
-// can append them to the work queue.
-function substituteTerms(textNode, terms, seen) {
-  // ... existing logic up to break ...
-  // Return the new fragment's text nodes for further processing
-  const fragment = parse(before + abbr + after);
-  textNode.parentNode.exchangeChild(textNode, fragment);
-  return [...fragment.childNodes].filter(n => n.nodeType === 3);
-  // Caller appends returned nodes to the work list
-}
-```
-
----
-
-### WR-03: Test for "no transform outside main" passes vacuously
-
-**File:** `src/_lib/glossary-transform.test.js:198-204`
-**Issue:** The test uses `<main><p>body</p></main>` — the word "body" matches no glossary term, so no `<abbr>` is produced anywhere. The assertion `!result.includes('<abbr')` passes regardless of whether the code correctly guards `<header>` content. A broken implementation that *only* wraps `<header>` text would still pass this test.
-
-**Fix:** Add a term match inside `<main>` so the test confirms the transform fires for `<main>` content but not for `<header>` content:
-```js
-it('does not transform content outside main (header, footer, nav)', () => {
-  const html = '<html><body>' +
-    '<header><p>The forewing.</p></header>' +
-    '<main><p>The forewing is present.</p></main>' +
-    '</body></html>';
-  const result = applyGlossaryTerms(html, termMap);
-  // abbr appears in main but not in header
-  assert.ok(result.includes('<main><p>The <abbr'), 'forewing in main should be wrapped');
-  assert.ok(!result.includes('<header><p>The <abbr'), 'forewing in header should not be wrapped');
-});
 ```
 
 ---
 
 ## Info
 
-### IN-01: Relative path for glossary CSV is fragile
+### IN-01: Test description says "12 metacharacters" but the array has 14
 
-**File:** `eleventy.config.js:21`
-**Issue:** `readFileSync("data/glossary.csv")` uses a bare relative path. This works when Eleventy is invoked from the project root (the normal case), but will throw an unguarded `ENOENT` if the working directory differs. Other path resolutions in the file use `resolve()` (line 33).
+**File:** `src/_lib/glossary-transform.test.js:26`
+**Issue:** The `it()` name reads `'escapes all 12 metacharacters'` and the inline comment repeats the count. The array literal directly below contains 14 entries: `. * + ? ^ $ { } ( ) | [ ] \`. JavaScript regex metacharacters total 14, not 12.
+**Fix:**
+```js
+it('escapes all 14 metacharacters', () => {
+  // Each metacharacter from /[.*+?^${}()|[\]\\]/
+```
 
+### IN-02: `readFileSync('data/glossary.csv')` at module scope with no actionable error
+
+**File:** `eleventy.config.js:21-24`
+**Issue:** The CSV load runs synchronously at module evaluation time using a bare relative path. If `data/glossary.csv` is absent or Eleventy is invoked from a non-root directory, Node throws a raw `ENOENT` that gives no hint of what went wrong or how to fix it. The `fileExists` filter on line 33 uses `resolve()` for robustness; the glossary load does not.
 **Fix:**
 ```js
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const glossaryRows = parseCsv(
-  readFileSync(resolve(__dirname, "data/glossary.csv")),
-  { columns: true, skip_empty_lines: true }
-);
+
+let glossaryRows;
+try {
+  glossaryRows = parseCsv(
+    readFileSync(resolve(__dirname, "data/glossary.csv")),
+    { columns: true, skip_empty_lines: true }
+  );
+} catch (err) {
+  throw new Error(
+    `glossary-transform: cannot read data/glossary.csv — ` +
+    `ensure the file exists and Eleventy is run from the project root.\n${err.message}`
+  );
+}
 ```
 
----
+### IN-03: Path guard `includes('/species/')` is broader than intended
 
-### IN-02: Only one substitution per text node is documented but not enforced structurally
-
-**File:** `src/_lib/glossary-transform.js:120`
-**Issue:** The `break` on line 120 and the comment "one substitution per text node per call" correctly documents intentional behavior. However, this design is the direct cause of WR-02 above. Consider a brief JSDoc note on `applyGlossaryTerms` acknowledging this limitation, so future maintainers understand it is a known tradeoff (one pass, one match per node) rather than accidentally reaching for a multi-pass fix that could infinite-loop.
-
-**Fix:** Add to the `substituteTerms` JSDoc:
+**File:** `eleventy.config.js:52`
+**Issue:** `outputPath.includes('/species/')` matches any path containing the substring `/species/`, including a hypothetical `/species-guide/index.html` or `/all-species/index.html`. For the current site layout this is harmless, but the stated intent is "only species detail pages."
+**Fix:**
 ```js
- * NOTE: Only the first unseen match per text node is replaced. Text nodes
- * produced by the replacement are not re-processed. A node containing two
- * glossary terms will have only the first wrapped on this pass.
+if (!/\/species\/[^/]+\/index\.html$/.test(outputPath)) return content;
 ```
 
 ---
