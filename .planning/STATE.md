@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-04-23 after v1.4 milestone)
 
 Phase: 20 (Popover UI — HTML and CSS)
 Plan: —
-Status: Ready to plan
-Last activity: 2026-04-23 — Phase 19 complete (4/4 plans, 5/5 must-haves verified)
+Status: Context gathered — ready to plan
+Last activity: 2026-04-23 — Phase 20 context captured (Popover API rewrite, Phase 21 folded in)
 
 Progress: [███░░░░░░░] 33%
 
