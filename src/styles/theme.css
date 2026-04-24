@@ -146,8 +146,9 @@ nav a:hover {
 
 abbr.glossary-term {
   cursor: help;
-  text-decoration: underline dotted;
-  text-underline-offset: 2px;
+  text-decoration: underline dotted 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: #7f8956;
 }
 
 #glossary-tooltip {
