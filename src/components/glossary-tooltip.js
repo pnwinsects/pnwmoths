@@ -19,7 +19,7 @@ terms.forEach((abbr, index) => {
   popover.setAttribute('popover', 'auto');
   popover.setAttribute('role', 'tooltip');
   popover.setAttribute('aria-hidden', 'true');
-  popover.innerHTML = '<img class="gt-img" alt=""><p class="gt-def"></p>';
+  popover.innerHTML = '<img class="gt-img" alt="" hidden><p class="gt-def"></p>';
   document.body.appendChild(popover);
 
   const gtImg = popover.querySelector('.gt-img');
