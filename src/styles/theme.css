@@ -151,20 +151,20 @@ abbr.glossary-term {
   text-decoration-color: #7f8956;
 }
 
-#glossary-tooltip {
-  display: none;
-  position: fixed;
-  z-index: 200;
+.glossary-popover {
+  position: absolute;
+  margin: 0;
+  inset: unset;
   background: #fff;
   border: 1px solid #bbb;
   border-radius: 4px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   max-width: 260px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
   pointer-events: none;
 }
 
-#glossary-tooltip .gt-img {
+.glossary-popover .gt-img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -172,7 +172,7 @@ abbr.glossary-term {
   border-radius: 2px;
 }
 
-#glossary-tooltip .gt-def {
+.glossary-popover .gt-def {
   margin: 0;
   font-size: 0.82rem;
   line-height: 1.45;
