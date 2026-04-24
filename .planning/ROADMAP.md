@@ -76,7 +76,7 @@
 
 **Milestone Goal:** Species prose automatically highlights the first occurrence of each glossary term at build time with a tooltip/popover showing the definition and image.
 
-- [ ] **Phase 19: Build-time Glossary Transform** - Annotate species prose HTML at build time with `<abbr>` elements for first occurrences of glossary terms
+- [x] **Phase 19: Build-time Glossary Transform** - Annotate species prose HTML at build time with `<abbr>` elements for first occurrences of glossary terms — completed 2026-04-23
 - [ ] **Phase 20: Popover UI — HTML and CSS** - Add popover HTML structure and CSS so annotated terms show definition text on hover/focus/click without JS
 - [ ] **Phase 21: JS Hover Enhancement and Glossary Images** - Add vanilla JS event wiring and CDN glossary images to the popover
 
@@ -94,9 +94,10 @@
   5. Unit tests cover regex escaping, first-occurrence deduplication, and prose-scope guard; all tests pass
 **Plans**: 3 plans
 Plans:
-- [ ] 19-01-PLAN.md — Install node-html-parser + implement glossary-transform.js (escapeRegex, escapeHtml, buildTermMap, applyGlossaryTerms)
-- [ ] 19-02-PLAN.md — Create unit test suite (QA-01) + add src/_lib/*.test.js to npm test glob
-- [ ] 19-03-PLAN.md — Wire addTransform into eleventy.config.js + integration verification
+- [x] 19-01-PLAN.md — Install node-html-parser + implement glossary-transform.js (escapeRegex, escapeHtml, buildTermMap, applyGlossaryTerms)
+- [x] 19-02-PLAN.md — Create unit test suite (QA-01) + add src/_lib/*.test.js to npm test glob
+- [x] 19-03-PLAN.md — Wire addTransform into eleventy.config.js + integration verification
+- [x] 19-04-PLAN.md — Fix substituteTerms() to wrap all unseen terms in a text node (gap closure)
 
 ### Phase 20: Popover UI — HTML and CSS
 **Goal**: Users can see a styled popover panel with the full definition when they hover, focus, or click a highlighted glossary term; the feature works without JavaScript and does not pollute the Pagefind search index
@@ -145,7 +146,7 @@ Plans:
 | 16. Build Pipeline Cleanup | v1.4 | 1/1 | Complete | 2026-04-22 |
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 | 18. Plates CDN Migration | — | 2/2 | Complete | 2026-04-23 |
-| 19. Build-time Glossary Transform | v2.0 | 0/3 | Not started | - |
+| 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
 | 20. Popover UI — HTML and CSS | v2.0 | 0/? | Not started | - |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/? | Not started | - |
 

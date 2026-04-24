@@ -8,10 +8,10 @@ last_updated: "2026-04-23T00:00:00Z"
 last_activity: 2026-04-23
 progress:
   total_phases: 3
-  completed_phases: 0
-  total_plans: 3
-  completed_plans: 0
-  percent: 0
+  completed_phases: 1
+  total_plans: 4
+  completed_plans: 4
+  percent: 33
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-23 after v1.4 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v2.0 Glossary Tooltips — Phase 19: Build-time Glossary Transform
+**Current focus:** v2.0 Glossary Tooltips — Phase 20: Popover UI — HTML and CSS
 
 ## Current Position
 
-Phase: 19 (Build-time Glossary Transform)
+Phase: 20 (Popover UI — HTML and CSS)
 Plan: —
-Status: Ready to execute (3 plans)
-Last activity: 2026-04-23 — Phase 19 planned (3 plans, 2 waves)
+Status: Ready to plan
+Last activity: 2026-04-23 — Phase 19 complete (4/4 plans, 5/5 must-haves verified)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
