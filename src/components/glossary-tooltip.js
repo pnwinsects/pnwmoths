@@ -9,9 +9,9 @@
  */
 
 const terms = document.querySelectorAll('abbr.glossary-term');
-let hideTimer;
 
 terms.forEach((abbr, index) => {
+  let hideTimer;
   // Create per-term popover element
   const popover = document.createElement('div');
   popover.id = `gt-popover-${index}`;
