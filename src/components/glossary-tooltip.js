@@ -1,5 +1,5 @@
 /**
- * Glossary term tooltip — shows definition + image on hover/focus.
+ * Glossary term tooltip -- shows definition + image on hover/focus.
  *
  * Reads data-definition and data-image-url from <abbr class="glossary-term">
  * elements inserted by the build-time glossary transform.
@@ -8,84 +8,82 @@
  * the browser's native tooltip from appearing alongside the custom one.
  */
 
-const tooltip = document.createElement('div');
-tooltip.id = 'glossary-tooltip';
-tooltip.setAttribute('role', 'tooltip');
-tooltip.setAttribute('aria-hidden', 'true');
-tooltip.innerHTML = '<img class="gt-img" alt=""><p class="gt-def"></p>';
-document.body.appendChild(tooltip);
-
-const gtImg = tooltip.querySelector('.gt-img');
-const gtDef = tooltip.querySelector('.gt-def');
+const terms = document.querySelectorAll('abbr.glossary-term');
 let hideTimer;
 
-for (const abbr of document.querySelectorAll('abbr.glossary-term')) {
-  // Move title → aria-label so the browser's native tooltip doesn't conflict
+terms.forEach((abbr, index) => {
+  // Create per-term popover element
+  const popover = document.createElement('div');
+  popover.id = `gt-popover-${index}`;
+  popover.className = 'glossary-popover';
+  popover.setAttribute('popover', 'auto');
+  popover.setAttribute('role', 'tooltip');
+  popover.setAttribute('aria-hidden', 'true');
+  popover.innerHTML = '<img class="gt-img" alt=""><p class="gt-def"></p>';
+  document.body.appendChild(popover);
+
+  const gtImg = popover.querySelector('.gt-img');
+  const gtDef = popover.querySelector('.gt-def');
+
+  // Move title -> aria-label (D-09)
   const title = abbr.getAttribute('title');
   if (title) {
     abbr.setAttribute('aria-label', title);
     abbr.removeAttribute('title');
   }
+  // Make keyboard-focusable (D-06)
+  abbr.setAttribute('tabindex', '0');
 
-  abbr.addEventListener('mouseenter', (e) => {
+  abbr.addEventListener('mouseenter', () => {
     clearTimeout(hideTimer);
-    show(abbr, e.clientX, e.clientY);
-  });
-  abbr.addEventListener('mousemove', (e) => {
-    position(e.clientX, e.clientY);
+    show();
   });
   abbr.addEventListener('mouseleave', () => {
-    hideTimer = setTimeout(hide, 80);
+    hideTimer = setTimeout(() => hide(), 80);
   });
-
-  // Keyboard focus support
-  abbr.addEventListener('focus', (e) => {
+  abbr.addEventListener('focus', () => {
     clearTimeout(hideTimer);
-    const r = abbr.getBoundingClientRect();
-    show(abbr, r.left, r.bottom);
+    show();
   });
   abbr.addEventListener('blur', () => {
-    hideTimer = setTimeout(hide, 80);
+    hideTimer = setTimeout(() => hide(), 80);
   });
-}
 
-function show(abbr, x, y) {
-  const imageUrl = abbr.dataset.imageUrl;
-  const definition = abbr.dataset.definition;
+  function show() {
+    const imageUrl = abbr.dataset.imageUrl;
+    const definition = abbr.dataset.definition;
 
-  gtDef.textContent = definition || '';
+    gtDef.textContent = definition || '';
 
-  if (imageUrl) {
-    gtImg.src = imageUrl;
-    gtImg.hidden = false;
-  } else {
-    gtImg.src = '';
-    gtImg.hidden = true;
+    if (imageUrl) {
+      gtImg.src = imageUrl;
+      gtImg.hidden = false;
+    } else {
+      gtImg.src = '';
+      gtImg.hidden = true;
+    }
+
+    // Position below the term (D-04, D-05)
+    const rect = abbr.getBoundingClientRect();
+    let left = rect.left + window.scrollX;
+    const top = rect.bottom + window.scrollY + 6;
+
+    popover.showPopover();
+    popover.removeAttribute('aria-hidden');
+
+    // Viewport edge clamp
+    const popoverWidth = popover.offsetWidth;
+    const viewportWidth = window.innerWidth;
+    if (left + popoverWidth > viewportWidth - 8) {
+      left = viewportWidth - popoverWidth - 8;
+    }
+
+    popover.style.left = left + 'px';
+    popover.style.top = top + 'px';
   }
 
-  tooltip.style.display = 'block';
-  tooltip.removeAttribute('aria-hidden');
-  position(x, y);
-}
-
-function hide() {
-  tooltip.style.display = 'none';
-  tooltip.setAttribute('aria-hidden', 'true');
-}
-
-function position(x, y) {
-  const pad = 12;
-  const tw = tooltip.offsetWidth;
-  const th = tooltip.offsetHeight;
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-
-  let left = x + pad;
-  let top = y + pad;
-
-  if (left + tw > vw - pad) left = Math.max(pad, x - tw - pad);
-  if (top + th > vh - pad) top = Math.max(pad, y - th - pad);
-
-  tooltip.style.left = left + 'px';
-  tooltip.style.top = top + 'px';
-}
+  function hide() {
+    try { popover.hidePopover(); } catch (_) { /* already hidden */ }
+    popover.setAttribute('aria-hidden', 'true');
+  }
+});
