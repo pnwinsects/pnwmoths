@@ -68,6 +68,10 @@ terms.forEach((abbr, index) => {
     let left = rect.left + window.scrollX;
     const top = rect.bottom + window.scrollY + 6;
 
+    // Position off-screen before showing to prevent flash
+    popover.style.left = '-9999px';
+    popover.style.top = '-9999px';
+
     popover.showPopover();
     popover.removeAttribute('aria-hidden');
 
