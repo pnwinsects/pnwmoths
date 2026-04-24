@@ -102,13 +102,15 @@ Plans:
 ### Phase 20: Popover UI — HTML and CSS
 **Goal**: Users can see a styled popover panel with the full definition when they hover, focus, or click a highlighted glossary term; the feature works without JavaScript and does not pollute the Pagefind search index
 **Depends on**: Phase 19
-**Requirements**: TIP-01, TIP-03, QA-02
+**Requirements**: TIP-01, TIP-02, TIP-03, QA-02
 **Success Criteria** (what must be TRUE):
   1. Hovering or focusing an `<abbr class="glossary-term">` element opens a popover showing the full definition text, styled consistently with the site's design tokens
   2. The popover dismisses when the pointer leaves, focus moves away, or the user presses Escape
   3. With JavaScript disabled, the `<abbr title="...">` native browser tooltip remains available and no layout is broken
   4. After a production build and `pagefind --site _site`, species page excerpts in search results do not include glossary definition text
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 20-01-PLAN.md — Rewrite glossary tooltip to Popover API + migrate CSS selectors (TIP-01, TIP-02, TIP-03, QA-02)
 **UI hint**: yes
 
 ### Phase 21: JS Hover Enhancement and Glossary Images
@@ -147,7 +149,7 @@ Plans:
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 | 18. Plates CDN Migration | — | 2/2 | Complete | 2026-04-23 |
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
-| 20. Popover UI — HTML and CSS | v2.0 | 0/? | Not started | - |
+| 20. Popover UI — HTML and CSS | v2.0 | 0/1 | Not started | - |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/? | Not started | - |
 
 ---
