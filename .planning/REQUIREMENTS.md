@@ -18,14 +18,14 @@ Requirements for the Glossary Tooltips milestone. Each maps to roadmap phases.
 
 ### Tooltip / Popover UI
 
-- [ ] **TIP-01**: Hovering or focusing a wrapped glossary term opens a popover panel showing the full definition text
-- [ ] **TIP-02**: Popover panel includes the CDN glossary image when the term has one (image URL from `data-image-url`); image-less terms show definition only
-- [ ] **TIP-03**: Popover is implemented via the native HTML Popover API with a small JS event-listener layer (~20 lines, no external library); it dismisses on mouseout/blur and via Escape
+- [x] **TIP-01**: Hovering or focusing a wrapped glossary term opens a popover panel showing the full definition text
+- [x] **TIP-02**: Popover panel includes the CDN glossary image when the term has one (image URL from `data-image-url`); image-less terms show definition only
+- [x] **TIP-03**: Popover is implemented via the native HTML Popover API with a small JS event-listener layer (~20 lines, no external library); it dismisses on mouseout/blur and via Escape
 
 ### Quality
 
 - [ ] **QA-01**: Automated unit tests cover: regex metacharacter escaping, first-occurrence deduplication per page, and prose-scope guard (glossary and browse pages are not transformed)
-- [ ] **QA-02**: Pagefind index verified to not include definition text (definition lives in `data-*` attributes, which Pagefind does not index)
+- [x] **QA-02**: Pagefind index verified to not include definition text (definition lives in `data-*` attributes, which Pagefind does not index)
 
 ## Future Requirements
 
@@ -65,11 +65,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GLOS-04 | Phase 19 | Pending |
 | GLOS-05 | Phase 19 | Pending |
 | GLOS-06 | Phase 19 | Pending |
-| TIP-01 | Phase 20 | Pending |
-| TIP-02 | Phase 21 | Pending |
-| TIP-03 | Phase 20 | Pending |
+| TIP-01 | Phase 20 | Complete |
+| TIP-02 | Phase 20 | Complete |
+| TIP-03 | Phase 20 | Complete |
 | QA-01 | Phase 19 | Pending |
-| QA-02 | Phase 20 | Pending |
+| QA-02 | Phase 20 | Complete |
 
 **Coverage:**
 - v2.0 requirements: 11 total

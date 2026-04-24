@@ -77,7 +77,7 @@
 **Milestone Goal:** Species prose automatically highlights the first occurrence of each glossary term at build time with a tooltip/popover showing the definition and image.
 
 - [x] **Phase 19: Build-time Glossary Transform** - Annotate species prose HTML at build time with `<abbr>` elements for first occurrences of glossary terms — completed 2026-04-23
-- [ ] **Phase 20: Popover UI — HTML and CSS** - Add popover HTML structure and CSS so annotated terms show definition text on hover/focus/click without JS
+- [x] **Phase 20: Popover UI — HTML and CSS** - Add popover HTML structure and CSS so annotated terms show definition text on hover/focus/click without JS — completed 2026-04-23
 - [ ] **Phase 21: JS Hover Enhancement and Glossary Images** - Add vanilla JS event wiring and CDN glossary images to the popover
 
 ## Phase Details
@@ -110,7 +110,7 @@ Plans:
   4. After a production build and `pagefind --site _site`, species page excerpts in search results do not include glossary definition text
 **Plans**: 1 plan
 Plans:
-- [ ] 20-01-PLAN.md — Rewrite glossary tooltip to Popover API + migrate CSS selectors (TIP-01, TIP-02, TIP-03, QA-02)
+- [x] 20-01-PLAN.md — Rewrite glossary tooltip to Popover API + migrate CSS selectors (TIP-01, TIP-02, TIP-03, QA-02)
 **UI hint**: yes
 
 ### Phase 21: JS Hover Enhancement and Glossary Images
@@ -149,7 +149,7 @@ Plans:
 | 17. Migrate Full Species Data from Legacy Database | v1.4 | 3/3 | Complete | 2026-04-22 |
 | 18. Plates CDN Migration | — | 2/2 | Complete | 2026-04-23 |
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
-| 20. Popover UI — HTML and CSS | v2.0 | 0/1 | Not started | - |
+| 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/? | Not started | - |
 
 ---
