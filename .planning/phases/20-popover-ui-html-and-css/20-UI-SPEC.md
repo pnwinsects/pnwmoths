@@ -1,7 +1,8 @@
 ---
 phase: 20
 slug: popover-ui-html-and-css
-status: draft
+status: approved
+reviewed_at: "2026-04-23"
 shadcn_initialized: false
 preset: none
 created: 2026-04-23
@@ -116,9 +117,7 @@ Carried from site design tokens. Phase 20 uses these values directly in popover 
 | 2xl | 48px | not used inside popover panel |
 | 3xl | 64px | not used inside popover panel |
 
-**Popover internal padding:** 10px top/bottom, 12px left/right. Carried from existing `#glossary-tooltip` CSS. These are not multiples of 4px but are preserved from the existing implementation to avoid visual regression.
-
-Exceptions: 10px vertical padding (existing value, carried forward).
+**Popover internal padding:** 8px top/bottom, 12px left/right (both multiples of 4px).
 
 Source: `src/styles/theme.css` `#glossary-tooltip` block (verified 2026-04-23).
 
@@ -192,14 +191,14 @@ The existing `#glossary-tooltip` ID selector must be replaced with `.glossary-po
 
 The `display: none` / `display: block` toggle from the old implementation is replaced by the Popover API's built-in show/hide (`[popover]` is hidden by default via `:popover-open` pseudo-class control). Remove `display: none` from the `.glossary-popover` rule — the Popover API manages display state.
 
-**Preserved CSS values (unchanged from existing `#glossary-tooltip`):**
+**Preserved CSS values (unchanged from existing `#glossary-tooltip`, except padding corrected to grid-aligned values):**
 
 | Property | Value |
 |----------|-------|
 | `background` | `#fff` |
 | `border` | `1px solid #bbb` |
 | `border-radius` | `4px` |
-| `padding` | `10px 12px` |
+| `padding` | `8px 12px` |
 | `max-width` | `260px` |
 | `box-shadow` | `0 3px 10px rgba(0,0,0,0.18)` |
 | `pointer-events` | `none` |
@@ -283,11 +282,11 @@ The rewrite is pure vanilla JS + CSS using the native Popover API.
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: FLAG (0.82rem carried from existing CSS; Phase 19 declared 14px)
+- [x] Dimension 5 Spacing: FLAG (6px offset, 12px padding carried from existing CSS)
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved 2026-04-23
