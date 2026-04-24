@@ -142,6 +142,42 @@ nav a:hover {
   padding-left: 1.5rem;
 }
 
+/* --- Glossary term tooltip --- */
+
+abbr.glossary-term {
+  cursor: help;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+#glossary-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 10px 12px;
+  max-width: 260px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+#glossary-tooltip .gt-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+#glossary-tooltip .gt-def {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #333;
+}
+
 /* --- Content wrapper (D-01) --- */
 /* White box with shadow on cream background, uniform across all pages. */
 
