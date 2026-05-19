@@ -10,7 +10,7 @@
 - ✅ **v1.2 Tech Debt** — Phase 7 (shipped 2026-04-18) — [archive](milestones/v1.2-ROADMAP.md)
 - ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](milestones/v1.3-ROADMAP.md)
 - ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
-- 🚧 **v2.0 Glossary Tooltips** — Phases 19–21 (in progress)
+- ✅ **v2.0 Glossary Tooltips** — Phases 19–21 (shipped 2026-04-23) — [archive](milestones/v2.0-ROADMAP.md)
 
 ## Phases
 
@@ -72,13 +72,16 @@
 
 </details>
 
-## Active Phases (v2.0 Glossary Tooltips)
+<details>
+<summary>✅ v2.0 Glossary Tooltips (Phases 19–21) — SHIPPED 2026-04-23</summary>
 
 **Milestone Goal:** Species prose automatically highlights the first occurrence of each glossary term at build time with a tooltip/popover showing the definition and image.
 
 - [x] **Phase 19: Build-time Glossary Transform** - Annotate species prose HTML at build time with `<abbr>` elements for first occurrences of glossary terms — completed 2026-04-23
 - [x] **Phase 20: Popover UI — HTML and CSS** - Add popover HTML structure and CSS so annotated terms show definition text on hover/focus/click without JS — completed 2026-04-23
 - [x] **Phase 21: JS Hover Enhancement and Glossary Images** - Add vanilla JS event wiring and CDN glossary images to the popover — folded into Phase 20; completed 2026-04-23
+
+</details>
 
 ## Phase Details
 
@@ -153,7 +156,7 @@ Plans:
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19*
 
 ## Backlog
 

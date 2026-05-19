@@ -231,12 +231,59 @@
 2. **Add uniqueness assertions to migration smoke tests.** The duplicate-slug failure was detectable from the CSV data alone; a `GROUP BY slug HAVING count(*) > 1` check in Plan 01 tests would have surfaced it before the full build.
 3. **Check all Optimizer toggles at setup time.** WebP conversion is a one-click setting in the dashboard; leaving it for "later" means it doesn't get done. Treat each Optimizer setting as a checklist item, not a default.
 4. **LFS history rewrite: always check local vs. remote ahead-of-remote count first.** `git log origin/main..HEAD --oneline | wc -l` before cloning for filter-repo prevents data loss.
+5. **Tick requirements checkboxes at verification time, not milestone close.** Deferred closure creates reconciliation debt.
+6. **Build-time transform shared state is a silent failure mode.** Module-scope sets/maps cause inter-page contamination in Eleventy; always initialize per-transform-invocation.
 
 ### Cost Observations
 
 - Model mix: primarily Sonnet (execution and planning); Opus for research phases
 - Sessions: 1 day (2026-04-21 → 2026-04-22)
 - Notable: Infrastructure + data migration milestone in 2 days; most complexity was in Phase 17 SQL dump parsing and Phase 15 LFS history rewrite — both handled cleanly on first attempt
+
+---
+
+## Milestone: v2.0 — Glossary Tooltips
+
+**Shipped:** 2026-04-23
+**Phases:** 3 (Phases 19–21) | **Plans:** 5 | **Tests:** 97
+
+### What Was Built
+
+- Build-time Eleventy transform using node-html-parser: wraps first occurrences of ~70 glossary terms in `<abbr class="glossary-term">` with definition text and CDN image URL as data attributes; 97 unit tests
+- substituteTerms() while-loop fix: replaced single-substitution-per-call with pos-cursor loop that wraps all unseen terms in one text-node pass; gap found by verification, fixed in 19-04
+- Native HTML Popover API tooltip: per-term `<div popover="auto">` elements, getBoundingClientRect positioning below the `<abbr>`, keyboard/Escape/click-outside dismiss, CDN image conditional, no external library
+- Graceful degradation: `<abbr title="...">` native browser tooltip preserved; Pagefind index clean (definitions in `data-*` attributes, never indexed)
+
+### What Worked
+
+- **Gap found by verification, not UAT** — Phase 19 verification identified the substituteTerms() single-substitution bug with a spot-check on a real species page. The structured verification step paid for itself.
+- **Phase 20 folding Phase 21** — recognizing during CONTEXT discussion that Phase 21's goals (CDN images + JS hover) would be delivered in one pass with Phase 20 saved planning/execution overhead; one phase instead of two
+- **popover="auto" for free behaviors** — choosing `popover="auto"` over `manual` gave Escape dismiss and click-outside-to-close at zero cost; no keydown listener needed
+- **data-* attributes for definition text** — storing definitions in `data-definition` rather than DOM text kept Pagefind index clean without any special exclusion config (QA-02 satisfied by design)
+
+### What Was Inefficient
+
+- **Requirements checkboxes not updated after Phase 19 verification** — GLOS-01 through GLOS-06 and QA-01 remained as `[ ]` until milestone close; should be ticked immediately after verification passes
+- **Phase 21 administrative work at milestone close** — Phase 21 was folded into Phase 20 during CONTEXT but the roadmap entry wasn't updated until the discuss-phase session; left a "Not started" phase in the progress table for several weeks
+
+### Patterns Established
+
+- `seen` Set initialized per-transform-invocation (not module scope) — module-scope state causes silent first-occurrence failures when Eleventy processes multiple pages
+- substituteTerms() while-loop with pos cursor is the correct pattern for multi-term text-node substitution; single-substitution-per-call always has unreachable-fragment risk
+- Verify requirements checkboxes immediately after each phase verification pass — don't defer to milestone close
+
+### Key Lessons
+
+1. **Close requirements checkboxes at phase verification time, not milestone close.** GLOS-01–GLOS-06 passed 19-VERIFICATION.md but the checkboxes weren't ticked; this required inline cleanup at milestone close.
+2. **Module-scope shared state in Eleventy transforms is a silent failure mode.** The `seen` Set initialized at module scope would cause the second page processed to have no glossary annotations. Always initialize per-invocation for stateful transforms.
+3. **Verification spot-checks on real build output are essential for build-time transforms.** The single-substitution bug wasn't caught by the unit tests that existed before 19-04; only a build-and-spot-check on an actual species page revealed it.
+4. **Phase folding mid-discussion is valid and efficient.** When Phase 20 CONTEXT review showed Phase 21 was a subset of Phase 20's work, folding it immediately avoided two rounds of discuss/plan/execute overhead.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet (execution and planning)
+- Sessions: 1 day (2026-04-22 → 2026-04-23)
+- Notable: 3-phase v2.0 milestone executed in ~1 day; gap in Phase 19 (substituteTerms) caught by verification rather than UAT and fixed cleanly in a fourth plan
 
 ---
 
@@ -251,6 +298,7 @@
 | v1.2 | 8 | 1 | Focused tech-debt close; regression tests added; audit-open closure discipline established |
 | v1.3 | 79 | 5 | First interactive feature milestone; TDD-first Lit component; light DOM constraint established |
 | v1.4 | 72 files | 5 | Infrastructure + data migration; CDN, LFS rewrite, full dataset — completed in 2 days |
+| v2.0 | 30+ | 3 | Build-time HTML transform + native Popover API tooltip; gap found by verification (19-04) |
 
 ### Cumulative Quality
 
@@ -261,6 +309,7 @@
 | v1.2 | 3 | +WR-01 regression (glossary validation) +WR-04 regression (crash guard); 37 total | 1/1 phases |
 | v1.3 | 4 | +accordion pure-function unit tests (buildStateMap, taxonHasState, collectSlugs); 58 total | 0/5 phases (VALIDATION.md left as draft) |
 | v1.4 | 5 | +migrate-species smoke tests (row counts, column headers, PNW states, lat/lon); 72 total | 0/5 phases |
+| v2.0 | 6 | +glossary-transform unit tests (escaping, deduplication, scope guard, multi-term text-node); 97 total | 4/3 phases (verification found gap; 19-04 gap-closure plan) |
 
 ### Top Lessons (Verified Across Milestones)
 

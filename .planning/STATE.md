@@ -1,34 +1,34 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.0
-milestone_name: Glossary Tooltips)
-status: planning
-stopped_at: Completed 20-01-PLAN.md (Popover API tooltip rewrite)
-last_updated: "2026-05-19T20:02:50.603Z"
-last_activity: 2026-04-23 — Phase 20 verified and completed (Popover API tooltip)
+milestone_name: Glossary Tooltips
+status: complete
+stopped_at: v2.0 milestone archived — all 3 phases complete
+last_updated: "2026-05-19T00:00:00Z"
+last_activity: 2026-05-19 — v2.0 milestone archived
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 5
   completed_plans: 5
-  percent: 67
+  percent: 100
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-23 after v1.4 milestone)
+See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v2.0 Glossary Tooltips — Phase 21: JS Hover Enhancement and Glossary Images
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 21 (JS Hover Enhancement and Glossary Images)
+Phase: — (milestone complete)
 Plan: —
-Status: Ready to plan
-Last activity: 2026-04-23 — Phase 20 verified and completed (Popover API tooltip)
+Status: v2.0 shipped — planning next milestone
+Last activity: 2026-05-19 — v2.0 Glossary Tooltips archived
 
 Progress: [██████░░░░] 66%
 
@@ -100,6 +100,10 @@ Items acknowledged and carried forward:
 | Tech debt | WR-01–03: test cleanup paths could be more robust | Carry forward | v1.2 |
 | CDN | GitHub LFS storage quota reclaim | Accept billing; out of scope | v1.4 |
 | CDN | WebP not yet active on bunny.net Optimizer (serving JPEG) | Deferred | v1.4 |
+| UAT/Verify | Phase 13 UAT + verification (human_needed) | Acknowledged at v2.0 close — v1.4 shipped | v2.0 |
+| UAT/Verify | Phase 16 verification (human_needed) | Acknowledged at v2.0 close — v1.4 shipped | v2.0 |
+| Todo | Fix close button on lightbox | Carry forward to next milestone | v2.0 |
+| Quick task | species-accounts-migration (untraceable) | Acknowledged — file not found; assumed obsolete | v2.0 |
 
 ## Session Continuity
 

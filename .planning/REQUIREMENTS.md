@@ -9,12 +9,12 @@ Requirements for the Glossary Tooltips milestone. Each maps to roadmap phases.
 
 ### Glossary Transform
 
-- [ ] **GLOS-01**: Build emits species prose HTML with the first occurrence of each glossary term wrapped in `<abbr class="glossary-term">` carrying `title`, `data-definition`, and `data-image-url` attributes
-- [ ] **GLOS-02**: Term matching is case-insensitive and whole-word only (no partial matches inside longer words)
-- [ ] **GLOS-03**: Terms containing regex metacharacters (e.g., `1A+2A`, `W-mark`, `CuA1`) are safely escaped before matching
-- [ ] **GLOS-04**: Only the first occurrence of each term per page is wrapped; subsequent occurrences are left as plain text
-- [ ] **GLOS-05**: Transform runs only on species pages; the `/glossary/` page and browse pages are excluded
-- [ ] **GLOS-06**: `<abbr title="[definition excerpt]">` provides a no-JS degradation path so the definition is accessible without JavaScript
+- [x] **GLOS-01**: Build emits species prose HTML with the first occurrence of each glossary term wrapped in `<abbr class="glossary-term">` carrying `title`, `data-definition`, and `data-image-url` attributes
+- [x] **GLOS-02**: Term matching is case-insensitive and whole-word only (no partial matches inside longer words)
+- [x] **GLOS-03**: Terms containing regex metacharacters (e.g., `1A+2A`, `W-mark`, `CuA1`) are safely escaped before matching
+- [x] **GLOS-04**: Only the first occurrence of each term per page is wrapped; subsequent occurrences are left as plain text
+- [x] **GLOS-05**: Transform runs only on species pages; the `/glossary/` page and browse pages are excluded
+- [x] **GLOS-06**: `<abbr title="[definition excerpt]">` provides a no-JS degradation path so the definition is accessible without JavaScript
 
 ### Tooltip / Popover UI
 
@@ -24,7 +24,7 @@ Requirements for the Glossary Tooltips milestone. Each maps to roadmap phases.
 
 ### Quality
 
-- [ ] **QA-01**: Automated unit tests cover: regex metacharacter escaping, first-occurrence deduplication per page, and prose-scope guard (glossary and browse pages are not transformed)
+- [x] **QA-01**: Automated unit tests cover: regex metacharacter escaping, first-occurrence deduplication per page, and prose-scope guard (glossary and browse pages are not transformed)
 - [x] **QA-02**: Pagefind index verified to not include definition text (definition lives in `data-*` attributes, which Pagefind does not index)
 
 ## Future Requirements
@@ -59,16 +59,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GLOS-01 | Phase 19 | Pending |
-| GLOS-02 | Phase 19 | Pending |
-| GLOS-03 | Phase 19 | Pending |
-| GLOS-04 | Phase 19 | Pending |
-| GLOS-05 | Phase 19 | Pending |
-| GLOS-06 | Phase 19 | Pending |
+| GLOS-01 | Phase 19 | Complete |
+| GLOS-02 | Phase 19 | Complete |
+| GLOS-03 | Phase 19 | Complete |
+| GLOS-04 | Phase 19 | Complete |
+| GLOS-05 | Phase 19 | Complete |
+| GLOS-06 | Phase 19 | Complete |
 | TIP-01 | Phase 20 | Complete |
 | TIP-02 | Phase 20 | Complete |
 | TIP-03 | Phase 20 | Complete |
-| QA-01 | Phase 19 | Pending |
+| QA-01 | Phase 19 | Complete |
 | QA-02 | Phase 20 | Complete |
 
 **Coverage:**
@@ -78,4 +78,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-04-23*
-*Last updated: 2026-04-23 after roadmap creation*
+*Last updated: 2026-05-19 after v2.0 milestone completion*

@@ -64,4 +64,17 @@
 - Dead species photo copy block removed from `scripts/copy-images.js` (ENOENT risk on fresh clones); confirmed no image resize scripts ever existed; build pipeline clean
 - Full legacy MySQL database migrated: 1,348 species + 85,933 PNW occurrence records loaded via streaming readline SQL dump parser, replacing 11-species placeholder stub data; npm run build produces 1,364 species pages; 72/72 tests passing
 
+## v2.0 Glossary Tooltips (Shipped: 2026-04-23)
+
+**Phases completed:** 3 phases (Phases 19–21), 5 plans
+**Known deferred items at close:** 5 (see STATE.md Deferred Items)
+
+**Key accomplishments:**
+
+- Build-time Eleventy transform wraps first occurrences of ~70 glossary terms in `<abbr class="glossary-term">` elements with definition and CDN image URL as data attributes; 97/97 unit tests covering escaping, deduplication, and prose-scope guard
+- Fixed substituteTerms() with while-loop cursor to wrap all unseen terms in a single text-node pass — both "forewing" and "outer margin" in the same node correctly annotated (gap closure in 19-04)
+- Native HTML Popover API (`popover="auto"`) tooltip — per-term popovers with getBoundingClientRect positioning below the term; keyboard/Escape/click-outside dismiss; no external library
+- CDN glossary images displayed in popovers when `image_filename` set in glossary.csv; graceful no-image fallback; definitions in `data-*` attributes keep Pagefind index clean
+- No-JS degradation via `<abbr title="...">` native browser tooltip preserved across all 1,364 species pages
+
 ---

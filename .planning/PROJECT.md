@@ -1,18 +1,8 @@
 # PNW Moths Static Site
 
-## Current Milestone: v2.0 Glossary Tooltips
-
-**Goal:** Species prose automatically highlights the first occurrence of each glossary term at build time with a tooltip/popover showing the definition and image.
-
-**Target features:**
-- Build-time detection: Eleventy transform wraps first occurrences of glossary terms in species prose HTML
-- Tooltip/popover: definition text + glossary image (if available) shown on hover/focus
-- First-occurrence only per page (Wikipedia style)
-- Graceful no-JS degradation
-
 ## What This Is
 
-A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually (cream background, black header/footer, moth-strip banner, Google Fonts) and has a clean, tested build pipeline with 37 automated tests across the data pipeline and validation scripts.
+A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually (cream background, black header/footer, moth-strip banner, Google Fonts) and has a clean, tested build pipeline with 97 automated tests across the data pipeline, validation scripts, and glossary transform. As of v2.0, species prose automatically highlights glossary terms at build time with native Popover API tooltips showing definitions and CDN images.
 
 ## Core Value
 
@@ -59,14 +49,17 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Dead species photo copy block removed from copy-images.js; no image resize scripts in build pipeline — v1.4 Phase 16
 - ✓ Full legacy dataset migrated: 1,348 species + 85,933 PNW occurrence records from MySQL dump, replacing stub data; 72/72 tests, 1,364 species pages — v1.4 Phase 17
 - ✓ Site live on GitHub Pages with full production data — v1.4
+- ✓ Build-time glossary term detection in species prose: Eleventy transform wraps first occurrence of each term in `<abbr class="glossary-term">` with definition and CDN image URL as data attributes — v2.0 Phase 19
+- ✓ Tooltip/popover shows definition + CDN image for matched glossary terms; image-less terms show definition only — v2.0 Phase 20
+- ✓ Graceful no-JS degradation for highlighted terms via `<abbr title="...">` native browser tooltip — v2.0 Phase 19
+- ✓ Glossary tooltip implemented as native HTML Popover API with ~89-line vanilla JS handler; no external library — v2.0 Phase 20
+- ✓ Pagefind search index unaffected by glossary annotations (definitions in `data-*` attributes, never in DOM at build time) — v2.0 Phase 20
 
 ### Active
 
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Enable WebP conversion on bunny.net Optimizer (serving JPEG currently; toggle in Pull Zone → Optimizer → WebP conversion)
-- [ ] Build-time glossary term detection in species prose (first occurrence per page)
-- [ ] Tooltip/popover shows definition + image for matched glossary terms
-- [ ] Graceful no-JS degradation for highlighted terms
+- [ ] Fix close button on lightbox (pending todo from 2026-04-23)
 
 ### Out of Scope
 
@@ -79,26 +72,30 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | Server-side search | No server; Pagefind provides static equivalent |
 | Real-time data | All data is build-time; live observation feeds out of scope |
 | Multi-site support | Original app supported multiple insect sites; this PoC is pnwmoths only |
-| Photographic plates page | Deferred to v2 (PLAT-01, PLAT-02) |
-| Advanced filtering (collector, elevation, date range) | Deferred to v2 (FILT-01, FILT-02) |
-| Glossary term highlighting in prose | Deferred to v2 (GLOS-02) |
-| Django URL redirects | Requires Netlify/Cloudflare; deferred to v2 (SEO-01) |
+| Photographic plates page | Deferred to v3 (PLAT-01, PLAT-02) |
+| Advanced filtering (collector, elevation, date range) | Deferred to v3 (FILT-01, FILT-02) |
+| Django URL redirects | Requires Netlify/Cloudflare; deferred to v3 (SEO-01) |
+| Glossary plural/morphological variant matching (GLOS-07) | Requires stemming or synonym entries; deferred to future milestone |
+| CSS Anchor Positioning for tooltip placement (TIP-04) | Baseline 2026; not yet cross-browser |
+| Client-side glossary term scanning (runtime JS) | Build-time transform is the agreed approach |
+| External tooltip library (Floating UI, Tippy.js) | Native Popover API is sufficient |
 
 ## Context
 
 **v1.2 shipped:** 2026-04-18 — 7 phases total, 15 plans, 37 tests passing
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
 **v1.4 shipped:** 2026-04-22 — 17 phases total (Phases 13–17); 72/72 tests passing; 1,364 species pages; images on bunny.net CDN; LFS removed; full production dataset live
+**v2.0 shipped:** 2026-04-23 — 21 phases total (Phases 19–21); 97/97 tests passing; build-time glossary tooltips with native Popover API; 1,364 species pages with interactive glossary annotations
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
 - Lit web components, Leaflet (map), Pagefind (static search), Pico CSS (base styles)
+- node-html-parser (build-time HTML transform), native Popover API (glossary tooltips)
 - GitHub Actions (CI/CD), Docker (reproducible build environment), lychee (link checker)
 
 **Known tech debt (carry forward):**
 - MAINT-03: build time under 5 min unverified — requires live CI observation
 - No automated visual regression tests for the site's visual identity
-- Code review WR-01–03: test cleanup paths could be more robust (warnings, non-blocking)
 - WR-01 (migrate-species): similar_species links silently dropped for record-only species (slug resolution gap)
 - WR-02 (migrate-species): safeSpecies sanitization logic duplicated in two loops (maintenance hazard)
 - WebP not yet active on bunny.net Optimizer — currently serving JPEG
@@ -107,7 +104,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - `Species` — genus, species, common name, NOC ID, authority, similar species links
 - `SpeciesRecord` — occurrence data: lat/long, state, county, locality, elevation, date, collector, collection, record type
 - `SpeciesImage` — photos per species with photographer credit, ordering weight
-- `GlossaryWord` — glossary with optional images
+- `GlossaryWord` — glossary term with optional `image_filename` for CDN images
 
 ## Constraints
 
@@ -141,6 +138,11 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | DuckDB `nullstr = ''` on read_csv for species.csv | Blank `subfamily` must arrive as null, not empty string, to avoid silent grouping failures | ✓ Good — null-coercion works correctly; required on both read_csv calls |
 | Taxonomy JSON as `<script type="application/json" id="taxon-data">` sibling | `data-taxonomy` attribute causes HTML entity encoding of JSON; separate script tag avoids this | ✓ Good — `| safe` on tojson output also required in template |
 | Raw `/images/...` paths in templates (not `| url` filter) | Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix | ✓ Good — let Vite add base prefix; don't pre-process with `| url` |
+| node-html-parser for build-time text-node transform | ~10x faster than JSDOM/cheerio; zero native dependencies; sufficient text-node walk API | ✓ Good — v2.0; loads glossary.csv at Eleventy startup, not per-transform |
+| `seen` Set initialized per-transform-invocation (not module scope) | Module-scope Set causes silent first-occurrence failures across pages | ✓ Good — v2.0; critical pattern for stateful build-time transforms |
+| substituteTerms() while-loop with pos cursor | Single-substitution-per-call pattern silently dropped positionally-earlier shorter terms in same text node | ✓ Good — v2.0; one exchangeChild call wraps all unseen terms per text node |
+| Native HTML Popover API (`popover="auto"`) over custom tooltip div | Browser-native; Escape + click-outside-to-close for free; no external library dependency | ✓ Good — v2.0; per-term popover elements injected at runtime, positioned via getBoundingClientRect |
+| Definitions in `data-definition` attribute (not DOM text) | Keeps definition text out of Pagefind index; popover content materialized only at runtime | ✓ Good — v2.0; QA-02 verified: Pagefind excerpts contain no definition text |
 
 ## Evolution
 
@@ -160,4 +162,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-23 after v2.0 milestone started*
+*Last updated: 2026-05-19 after v2.0 milestone*
