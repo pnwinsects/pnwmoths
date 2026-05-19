@@ -78,7 +78,7 @@
 
 - [x] **Phase 19: Build-time Glossary Transform** - Annotate species prose HTML at build time with `<abbr>` elements for first occurrences of glossary terms — completed 2026-04-23
 - [x] **Phase 20: Popover UI — HTML and CSS** - Add popover HTML structure and CSS so annotated terms show definition text on hover/focus/click without JS — completed 2026-04-23
-- [ ] **Phase 21: JS Hover Enhancement and Glossary Images** - Add vanilla JS event wiring and CDN glossary images to the popover
+- [x] **Phase 21: JS Hover Enhancement and Glossary Images** - Add vanilla JS event wiring and CDN glossary images to the popover — folded into Phase 20; completed 2026-04-23
 
 ## Phase Details
 
@@ -150,7 +150,7 @@ Plans:
 | 18. Plates CDN Migration | — | 2/2 | Complete | 2026-04-23 |
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
 | 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
-| 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/? | Not started | - |
+| 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23*

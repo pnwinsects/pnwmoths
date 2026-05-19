@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.0
-milestone_name: Glossary Tooltips
-status: In progress
-stopped_at: ~
-last_updated: "2026-04-23T00:00:00Z"
-last_activity: 2026-04-23
+milestone_name: Glossary Tooltips)
+status: planning
+stopped_at: Completed 20-01-PLAN.md (Popover API tooltip rewrite)
+last_updated: "2026-05-19T20:02:50.603Z"
+last_activity: 2026-04-23 — Phase 20 verified and completed (Popover API tooltip)
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 4
+  total_plans: 5
   completed_plans: 5
-  percent: 66
+  percent: 67
 ---
 
 # Project State
@@ -35,6 +35,7 @@ Progress: [██████░░░░] 66%
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 15 (across v1.0–v1.2), 10 (v1.3)
 - Average duration: unknown
 - Total execution time: unknown
@@ -49,6 +50,7 @@ Progress: [██████░░░░] 66%
 | 11-03 | 2 | 47s | 47s |
 
 **Recent Trend:**
+
 - v1.4: shipped 2026-04-22
 - Trend: —
 
