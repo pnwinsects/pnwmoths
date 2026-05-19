@@ -40,7 +40,15 @@ eleventyComputed:
           <figure>
             <img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename | urlencode }}"
                  alt="{{ sp.genus }} {{ sp.species }}"
-                 data-photographer="{{ img.photographer }}">
+                 data-photographer="{{ img.photographer }}"
+                 {% if img.locality %}data-locality="{{ img.locality }}"{% endif %}
+                 {% if img.state %}data-state="{{ img.state }}"{% endif %}
+                 {% if img.elevation_ft %}data-elevation="{{ img.elevation_ft }}"{% endif %}
+                 {% if img.year %}data-year="{{ img.year }}"{% endif %}
+                 {% if img.month %}data-month="{{ img.month }}"{% endif %}
+                 {% if img.day %}data-day="{{ img.day }}"{% endif %}
+                 {% if img.collector %}data-collector="{{ img.collector }}"{% endif %}
+                 {% if img.subspecies %}data-subspecies="{{ img.subspecies }}"{% endif %}>
             <figcaption>{{ img.photographer }}</figcaption>
           </figure>
         {% endfor %}

@@ -48,15 +48,29 @@ export default async function () {
     SELECT * FROM read_csv('data/images.csv',
       header = true,
       nullstr = '',
+      delim = ',',
+      quote = '"',
+      escape = '"',
+      auto_detect = false,
       columns = {
         'species_slug': 'VARCHAR',
         'filename': 'VARCHAR',
         'photographer': 'VARCHAR',
-        'weight': 'INTEGER',
+        'weight': 'VARCHAR',
         'license': 'VARCHAR',
         'view': 'VARCHAR',
         'specimen': 'VARCHAR',
-        'navigational': 'VARCHAR'
+        'navigational': 'VARCHAR',
+        'locality': 'VARCHAR',
+        'state': 'VARCHAR',
+        'latitude': 'VARCHAR',
+        'longitude': 'VARCHAR',
+        'elevation_ft': 'VARCHAR',
+        'year': 'VARCHAR',
+        'month': 'VARCHAR',
+        'day': 'VARCHAR',
+        'collector': 'VARCHAR',
+        'subspecies': 'VARCHAR'
       }
     )
   `);
@@ -70,9 +84,9 @@ export default async function () {
   `);
 
   const imagesResult = await conn.runAndReadAll(`
-    SELECT species_slug, filename, photographer, weight, navigational
+    SELECT species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight, navigational
     FROM images
-    ORDER BY species_slug, weight
+    ORDER BY species_slug, TRY_CAST(weight AS INTEGER)
   `);
 
   conn.closeSync();

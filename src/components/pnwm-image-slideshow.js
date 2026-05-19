@@ -30,6 +30,7 @@ class PnwmImageSlideshow extends LitElement {
     }
     .dot.active { background: var(--pico-primary); }
     .index-label { font-size: 0.875rem; }
+    .caption-line { margin: 2px 0; font-size: 0.8rem; color: var(--pico-muted-color); text-align: center; }
     .lightbox {
       position: fixed;
       inset: 0;
@@ -80,6 +81,14 @@ class PnwmImageSlideshow extends LitElement {
         src: img.getAttribute('src') || '',
         alt: img.getAttribute('alt') || '',
         photographer: figcaption ? figcaption.textContent.trim() : '',
+        locality: img.dataset.locality || '',
+        state: img.dataset.state || '',
+        elevation: img.dataset.elevation || '',
+        year: img.dataset.year || '',
+        month: img.dataset.month || '',
+        day: img.dataset.day || '',
+        collector: img.dataset.collector || '',
+        subspecies: img.dataset.subspecies || '',
       }];
     });
 
@@ -122,6 +131,31 @@ class PnwmImageSlideshow extends LitElement {
     if (main) main.removeAttribute('inert');
   }
 
+  _formatCaption(img) {
+    const parts = [];
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    const locationParts = [];
+    if (img.locality) locationParts.push(img.locality);
+    if (img.state) locationParts.push(img.state);
+    if (img.elevation) locationParts.push(`${img.elevation} ft.`);
+    if (locationParts.length) parts.push(locationParts.join(', '));
+
+    if (img.year) {
+      const month = img.month ? parseInt(img.month) : 0;
+      const day = img.day ? parseInt(img.day) : 0;
+      const dateParts = [img.year];
+      if (month >= 1 && month <= 12) dateParts.unshift(MONTHS[month - 1]);
+      if (day) dateParts.splice(1, 0, day);
+      parts.push(dateParts.join(' '));
+    }
+
+    if (img.collector) parts.push(`Coll. ${img.collector}`);
+    if (img.photographer) parts.push(`Photo © ${img.photographer}`);
+
+    return parts;
+  }
+
   _prev() {
     this._currentIndex = (this._currentIndex - 1 + this._images.length) % this._images.length;
   }
@@ -162,7 +196,7 @@ class PnwmImageSlideshow extends LitElement {
               @click=${this._openLightbox}
               @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
             >
-            ${current.photographer ? html`<p class="photographer">${current.photographer}</p>` : ''}
+            ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
           </div>
         </div>
         ${lightbox}
@@ -183,7 +217,7 @@ class PnwmImageSlideshow extends LitElement {
             @click=${this._openLightbox}
             @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
           >
-          ${current.photographer ? html`<p class="photographer">${current.photographer}</p>` : ''}
+          ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
         </div>
         <div class="controls">
           <button
