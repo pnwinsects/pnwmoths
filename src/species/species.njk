@@ -8,58 +8,70 @@ permalink: "species/{{ sp.slug }}/index.html"
 eleventyComputed:
   title: "{{ sp.genus }} {{ sp.species }} — PNW Moths"
 ---
-<h1><em>{{ sp.genus }} {{ sp.species }}</em></h1>
 
-<dl>
-  <dt>Common name</dt><dd>{{ sp.common_name }}</dd>
-  <dt>NOC ID</dt><dd>{{ sp.noc_id }}</dd>
-  <dt>Authority</dt><dd>{{ sp.authority }}</dd>
-  <dt>Family</dt><dd>{{ sp.family }}</dd>
-</dl>
+<div class="species-header">
+  <div class="species-title">
+    <h1><em>{{ sp.genus }} {{ sp.species }}</em>{% if sp.authority %} {{ sp.authority }}{% endif %}</h1>
+    {% if sp.common_name %}<div class="species-common-name">{{ sp.common_name }}</div>{% endif %}
+  </div>
+  {% if sp.noc_id %}
+  <div class="species-noc">
+    <span class="species-noc-label">NOC</span>
+    <span class="species-noc-id">{{ sp.noc_id }}</span>
+  </div>
+  {% endif %}
+</div>
+
+<nav class="species-breadcrumb" aria-label="Taxonomy">
+  <a href="{{ '/browse/' | url }}">{{ sp.family }}</a>
+  {% if sp.subfamily %}
+  <span aria-hidden="true"> › </span>
+  <a href="{{ '/browse/' | url }}">{{ sp.subfamily }}</a>
+  {% endif %}
+  <span aria-hidden="true"> › </span>
+  <span>{{ sp.genus }}</span>
+</nav>
+
+<div class="species-content">
+  <div class="species-photos">
+    {% set spImages = images[sp.slug] %}
+    <pnwm-image-slideshow slug="{{ sp.slug }}" data-pagefind-ignore>
+      {% if spImages and spImages.length > 0 %}
+        {% for img in spImages %}
+          <figure>
+            <img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename | urlencode }}"
+                 alt="{{ sp.genus }} {{ sp.species }}"
+                 data-photographer="{{ img.photographer }}">
+            <figcaption>{{ img.photographer }}</figcaption>
+          </figure>
+        {% endfor %}
+      {% else %}
+        <figure>
+          <div aria-label="No images available for this species">
+            No photos on file for this species.
+          </div>
+        </figure>
+      {% endif %}
+    </pnwm-image-slideshow>
+  </div>
+
+  <div class="species-data">
+    {# Filter bar drives map and chart via pnwm-filter-change events (see script below) #}
+    <pnwm-filter-bar slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-filter-bar>
+    <pnwm-occurrence-map slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-occurrence-map>
+    <pnwm-phenology-chart slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-phenology-chart>
+    <noscript data-pagefind-ignore>
+      <p>Enable JavaScript to view the interactive map and filters. Occurrence data requires JavaScript.</p>
+    </noscript>
+  </div>
+</div>
 
 {% set prosePath = "src/content/species/" + sp.slug + ".md" %}
 {% if prosePath | fileExists %}
-  {% renderFile prosePath %}
+  <div class="species-prose">
+    {% renderFile prosePath %}
+  </div>
 {% endif %}
-
-{# Interactive occurrence data — requires JavaScript (see DATA-04 + INTV-05 reconciliation).
-   Per DATA-04: occurrence rows are NOT embedded in HTML at build time.
-   Per INTV-05: graceful degradation required.
-   Resolution: noscript block explains occurrence data requires JS.
-   Static photos, taxonomy, and prose remain visible without JS. #}
-
-<section>
-  <h2>Occurrence Data</h2>
-  <pnwm-filter-bar slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-filter-bar>
-  <pnwm-occurrence-map slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-occurrence-map>
-  <pnwm-phenology-chart slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-phenology-chart>
-  <noscript data-pagefind-ignore>
-    <p>Enable JavaScript to view the interactive map and filters. Occurrence data is available in the table below.</p>
-  </noscript>
-</section>
-
-{% set spImages = images[sp.slug] %}
-<section>
-  <h2>Photos</h2>
-  <pnwm-image-slideshow slug="{{ sp.slug }}" data-pagefind-ignore>
-    {% if spImages and spImages.length > 0 %}
-      {% for img in spImages %}
-        <figure>
-          <img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename | urlencode }}"
-               alt="{{ sp.genus }} {{ sp.species }}"
-               data-photographer="{{ img.photographer }}">
-          <figcaption>{{ img.photographer }}</figcaption>
-        </figure>
-      {% endfor %}
-    {% else %}
-      <figure>
-        <div aria-label="No images available for this species">
-          No photos on file for this species.
-        </div>
-      </figure>
-    {% endif %}
-  </pnwm-image-slideshow>
-</section>
 
 {% if sp.similar_slugs and sp.similar_slugs.length > 0 %}
   <section>
@@ -77,7 +89,6 @@ eleventyComputed:
 {% endif %}
 
 <script type="module">
-  // Wire filter-bar events to map and chart components
   const map = document.querySelector('pnwm-occurrence-map');
   const chart = document.querySelector('pnwm-phenology-chart');
 

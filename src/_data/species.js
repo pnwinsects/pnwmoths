@@ -32,6 +32,7 @@ export default async function () {
       noc_id,
       authority,
       family,
+      subfamily,
       CASE WHEN similar_species IS NULL OR similar_species = ''
            THEN []
            ELSE string_split(similar_species, '|')
