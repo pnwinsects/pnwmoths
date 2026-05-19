@@ -9,19 +9,6 @@ eleventyComputed:
   title: "{{ sp.genus }} {{ sp.species }} — PNW Moths"
 ---
 
-<div class="species-header">
-  <div class="species-title">
-    <h1><em>{{ sp.genus }} {{ sp.species }}</em>{% if sp.authority %} {{ sp.authority }}{% endif %}</h1>
-    {% if sp.common_name %}<div class="species-common-name">{{ sp.common_name }}</div>{% endif %}
-  </div>
-  {% if sp.noc_id %}
-  <div class="species-noc">
-    <span class="species-noc-label">NOC</span>
-    <span class="species-noc-id">{{ sp.noc_id }}</span>
-  </div>
-  {% endif %}
-</div>
-
 <nav class="species-breadcrumb" aria-label="Taxonomy">
   <a href="{{ '/browse/' | url }}">{{ sp.family }}</a>
   {% if sp.subfamily %}
@@ -31,6 +18,18 @@ eleventyComputed:
   <span aria-hidden="true"> › </span>
   <span>{{ sp.genus }}</span>
 </nav>
+
+<div class="species-header">
+  <div class="species-title">
+    <h1><em>{{ sp.genus }} {{ sp.species }}</em>{% if sp.authority %} {{ sp.authority }}{% endif %}</h1>
+    {% if sp.common_name %}<div class="species-common-name">{{ sp.common_name }}</div>{% endif %}
+  </div>
+  {% if sp.noc_id %}
+  <div class="species-noc">
+    <span class="species-noc-id">{{ sp.noc_id }}</span>
+  </div>
+  {% endif %}
+</div>
 
 <div class="species-content">
   <div class="species-photos">
@@ -56,10 +55,10 @@ eleventyComputed:
   </div>
 
   <div class="species-data">
-    {# Filter bar drives map and chart via pnwm-filter-change events (see script below) #}
-    <pnwm-filter-bar slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-filter-bar>
     <pnwm-occurrence-map slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-occurrence-map>
     <pnwm-phenology-chart slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-phenology-chart>
+    {# Filter bar drives map and chart via pnwm-filter-change events (see script below) #}
+    <pnwm-filter-bar slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-filter-bar>
     <noscript data-pagefind-ignore>
       <p>Enable JavaScript to view the interactive map and filters. Occurrence data requires JavaScript.</p>
     </noscript>

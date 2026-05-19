@@ -195,7 +195,7 @@ abbr.glossary-term {
 .species-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: baseline;
   gap: 1rem;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
@@ -212,17 +212,8 @@ abbr.glossary-term {
 }
 
 .species-noc {
-  text-align: right;
   white-space: nowrap;
   flex-shrink: 0;
-}
-
-.species-noc-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #777;
-  display: block;
 }
 
 .species-noc-id {
@@ -231,8 +222,9 @@ abbr.glossary-term {
 }
 
 .species-breadcrumb {
+  display: block;
   font-size: 0.9rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.25rem;
   color: #555;
 }
 

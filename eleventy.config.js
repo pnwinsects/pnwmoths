@@ -96,6 +96,9 @@ export default function (eleventyConfig) {
     if (runMode !== "serve") return;
     await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    if (!existsSync("_site/pagefind")) {
+      await new Promise((res, rej) => execFile("./node_modules/.bin/pagefind", ["--site", "_site"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    }
   });
 
   return {
