@@ -36,7 +36,6 @@
   "project_code": null,
   "phase_naming": "sequential",
   "agent_skills": {},
-  "branching_strategy": "none",
   "mode": "interactive",
   "granularity": "standard"
 }
