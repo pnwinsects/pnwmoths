@@ -1,11 +1,12 @@
 import { LitElement, html, css } from 'lit';
 
-class PnwmImageSlideshow extends LitElement {
+export class PnwmImageSlideshow extends LitElement {
   static properties = {
     slug: { type: String },
     _currentIndex: { state: true },
     _lightboxOpen: { state: true },
     _images: { attribute: false, state: true },
+    _stripOverflows: { state: true },
   };
 
   static styles = css`
@@ -21,15 +22,33 @@ class PnwmImageSlideshow extends LitElement {
       margin-top: 8px;
     }
     .controls button { min-width: 44px; min-height: 44px; }
-    .dots { display: flex; gap: 4px; }
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--pico-muted-color);
+    .controls button[hidden] { display: none; }
+    .thumbnail-strip {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      margin-top: 8px;
     }
-    .dot.active { background: var(--pico-primary); }
-    .index-label { font-size: 0.875rem; }
+    .thumbnail-strip::-webkit-scrollbar { display: none; }
+    .thumbnail {
+      flex-shrink: 0;
+      height: 93px;
+      width: auto;
+      border: 2px solid transparent;
+      cursor: pointer;
+      padding: 0;
+      background: none;
+    }
+    .thumbnail[aria-selected="true"] {
+      border-color: var(--pico-primary);
+    }
+    .thumbnail img {
+      height: 93px;
+      width: auto;
+      display: block;
+    }
     .caption-line { margin: 2px 0; font-size: 0.8rem; color: var(--pico-muted-color); text-align: center; }
     .lightbox {
       position: fixed;
@@ -65,6 +84,8 @@ class PnwmImageSlideshow extends LitElement {
     this._currentIndex = 0;
     this._lightboxOpen = false;
     this._images = [];
+    this._stripOverflows = false;
+    this._resizeObserver = null;
     this._handleKeydown = this._handleKeydown.bind(this);
   }
 
@@ -103,9 +124,29 @@ class PnwmImageSlideshow extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('keydown', this._handleKeydown);
+    this._resizeObserver?.disconnect();
     // Restore inert state if component is removed while lightbox is open
     const main = document.querySelector('main');
     if (main) main.removeAttribute('inert');
+  }
+
+  firstUpdated() {
+    const strip = this.shadowRoot.querySelector('.thumbnail-strip');
+    if (!strip) return;
+    this._resizeObserver = new ResizeObserver(() => {
+      const overflows = strip.scrollWidth > strip.clientWidth;
+      if (overflows !== this._stripOverflows) {
+        this._stripOverflows = overflows;
+      }
+    });
+    this._resizeObserver.observe(strip);
+  }
+
+  updated(changedProperties) {
+    if (changedProperties.has('_currentIndex')) {
+      const activeThumb = this.shadowRoot.querySelector('.thumbnail[aria-selected="true"]');
+      activeThumb?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+    }
   }
 
   _handleKeydown(e) {
@@ -156,12 +197,14 @@ class PnwmImageSlideshow extends LitElement {
     return parts;
   }
 
-  _prev() {
-    this._currentIndex = (this._currentIndex - 1 + this._images.length) % this._images.length;
+  _scrollLeft() {
+    const strip = this.shadowRoot.querySelector('.thumbnail-strip');
+    strip?.scrollBy({ left: -(strip.clientWidth / 2), behavior: 'smooth' });
   }
 
-  _next() {
-    this._currentIndex = (this._currentIndex + 1) % this._images.length;
+  _scrollRight() {
+    const strip = this.shadowRoot.querySelector('.thumbnail-strip');
+    strip?.scrollBy({ left: strip.clientWidth / 2, behavior: 'smooth' });
   }
 
   render() {
@@ -193,7 +236,7 @@ class PnwmImageSlideshow extends LitElement {
             <img
               src=${current.src}
               alt=${current.alt}
-              @click=${this._openLightbox}
+              @click=${() => this._openLightbox()}
               @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
             >
             ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
@@ -203,32 +246,39 @@ class PnwmImageSlideshow extends LitElement {
       `;
     }
 
-    // Multiple images — prev/next controls and dots
-    const dots = this._images.map((_, i) => html`
-      <span class="dot ${i === this._currentIndex ? 'active' : ''}"></span>
-    `);
-
+    // Multiple images — thumbnail strip with scroll controls
     return html`
       <div role="region" aria-label="Species photos" class="slideshow">
         <div class="slide">
           <img
             src=${current.src}
             alt=${current.alt}
-            @click=${this._openLightbox}
+            @click=${() => this._openLightbox()}
             @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
           >
           ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
         </div>
+        <div class="thumbnail-strip" role="tablist" aria-label="Photo thumbnails">
+          ${this._images.map((img, i) => html`
+            <button
+              class="thumbnail"
+              role="tab"
+              aria-selected=${i === this._currentIndex ? 'true' : 'false'}
+              aria-label=${`Photo ${i + 1} of ${this._images.length}: ${img.alt}`}
+              @click=${() => { this._currentIndex = i; }}
+            ><img src=${img.src} alt="" height="93"></button>
+          `)}
+        </div>
         <div class="controls">
           <button
-            aria-label="Previous photo"
-            @click=${this._prev}
+            aria-label="Scroll thumbnails left"
+            ?hidden=${!this._stripOverflows}
+            @click=${() => this._scrollLeft()}
           >&#x2039;</button>
-          <div class="dots">${dots}</div>
-          <span class="index-label">${this._currentIndex + 1} of ${this._images.length}</span>
           <button
-            aria-label="Next photo"
-            @click=${this._next}
+            aria-label="Scroll thumbnails right"
+            ?hidden=${!this._stripOverflows}
+            @click=${() => this._scrollRight()}
           >&#x203a;</button>
         </div>
       </div>
