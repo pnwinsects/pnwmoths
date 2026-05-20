@@ -179,7 +179,7 @@ class PnwmImageSlideshow extends LitElement {
             <button
               class="lightbox-close"
               aria-label="Close lightbox"
-              @click=${this._closeLightbox}
+              @click=${() => this._closeLightbox()}
             >&#x2715;</button>
           </div>
         `
