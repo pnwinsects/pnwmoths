@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
-status: Ready for Phase 24
-stopped_at: Phase 24 context gathered
-last_updated: "2026-05-20T20:46:43.962Z"
-last_activity: 2026-05-20 -- Phase 23 complete (thumbnail carousel + lightbox fixes)
+status: executing
+stopped_at: Phase 24 UI-SPEC approved
+last_updated: "2026-05-20T22:45:31.604Z"
+last_activity: 2026-05-20 -- Phase 24 planning complete
 progress:
   total_phases: 7
   completed_phases: 2
-  total_plans: 2
+  total_plans: 4
   completed_plans: 2
   percent: 29
 ---
@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 Phase: 23 — COMPLETE
 Plan: 1 of 1
-Status: Ready for Phase 24
-Last activity: 2026-05-20 -- Phase 23 complete (thumbnail carousel + lightbox fixes)
+Status: Ready to execute
+Last activity: 2026-05-20 -- Phase 24 planning complete
 
 Progress: [██████░░░░] 66% (21/25 phases complete)
 
@@ -110,6 +110,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-20T20:46:43.949Z
-Stopped at: Phase 24 context gathered
-Resume file: .planning/phases/24-county-collection-and-elevation-filters/24-CONTEXT.md
+Last session: 2026-05-20T22:20:41.815Z
+Stopped at: Phase 24 UI-SPEC approved
+Resume file: .planning/phases/24-county-collection-and-elevation-filters/24-UI-SPEC.md
