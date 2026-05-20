@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
-status: planning
+status: executing
 stopped_at: Phase 22 context gathered
-last_updated: "2026-05-20T16:57:30.409Z"
-last_activity: 2026-05-20 — Roadmap created for v2.1 (Phases 22–25)
+last_updated: "2026-05-20T17:14:32.169Z"
+last_activity: 2026-05-20 -- Phase 22 planning complete
 progress:
   total_phases: 7
   completed_phases: 0
-  total_plans: 0
+  total_plans: 1
   completed_plans: 0
   percent: 0
 ---
@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 Phase: 22 — Phenology Chart Improvements (not started)
 Plan: —
-Status: Ready to plan
-Last activity: 2026-05-20 — Roadmap created for v2.1 (Phases 22–25)
+Status: Ready to execute
+Last activity: 2026-05-20 -- Phase 22 planning complete
 
 Progress: [██████░░░░] 66% (21/25 phases complete)
 
