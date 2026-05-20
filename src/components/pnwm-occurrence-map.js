@@ -78,6 +78,17 @@ class PnwmOccurrenceMap extends LitElement {
         attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
         maxZoom: 19,
       }).addTo(this._map);
+      // Shade outside the PNW region boundary (source: pnwinsects-app)
+      L.polygon([
+        [[90, -180], [90, 0], [-90, 0], [-90, -180]], // world mask
+        [[60, -140], [60, -120], [53.8, -120], [45, -109], [39, -109], [39, -125]], // PNW hole
+      ], {
+        color: '#444',
+        weight: 1.5,
+        fillColor: '#000',
+        fillOpacity: 0.12,
+        interactive: false,
+      }).addTo(this._map);
       this._markerGroup = L.featureGroup().addTo(this._map);
     }
 
