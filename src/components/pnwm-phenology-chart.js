@@ -28,7 +28,6 @@ class PnwmPhenologyChart extends LitElement {
     return css`
       :host {
         display: block;
-        min-height: 200px;
       }
       .chart-container {
         position: relative;
@@ -78,11 +77,8 @@ class PnwmPhenologyChart extends LitElement {
     }
 
     const visible = this.filters ? filterRecords(this._records, this.filters) : this._records;
-    if (visible.length === 0) {
-      return html`<p style="color:var(--pico-muted-color)">No records match the current filters.</p>`;
-    }
-
     return html`
+      <p style="color:var(--pico-muted-color)">${visible.length} record${visible.length === 1 ? '' : 's'}</p>
       <div class="chart-container" role="img" aria-label="Phenology chart for ${this.slug}">
         <canvas></canvas>
       </div>
