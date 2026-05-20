@@ -172,7 +172,10 @@ Plans:
   2. A collection dropdown appears in the filter bar; its options are populated from the distinct collections present in the data; selecting a collection updates the map and chart
   3. An elevation range slider (feet) appears in the filter bar; dragging the min or max handle filters records to those within the selected elevation range
   4. All three new filters integrate with the existing `pnwm-filter-change` event bus; the map and phenology chart respond to the same event they already handle
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 24-01-PLAN.md — Extend filterRecords() with county/collection/elevation conditions + add tests (FILT-01, FILT-02, FILT-03)
+- [ ] 24-02-PLAN.md — Extend pnwm-filter-bar.js with county dropdown, collection dropdown, elevation range slider; extend pnwm-filter-change detail; human-verify (FILT-01, FILT-02, FILT-03, FILT-04)
 **UI hint**: yes
 
 ### Phase 25: Similar Species Thumbnails
@@ -215,7 +218,7 @@ Plans:
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
 | 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 24. County, Collection, and Elevation Filters | v2.1 | 0/? | Not started | - |
+| 24. County, Collection, and Elevation Filters | v2.1 | 0/2 | Planned | - |
 | 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
 
 ---
