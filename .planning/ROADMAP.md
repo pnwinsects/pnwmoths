@@ -145,7 +145,9 @@ Plans:
   1. The X-axis of the phenology chart displays the label "Month" and the Y-axis displays the label "# Records"
   2. The Y-axis begins at 0 and its maximum value equals the highest monthly record count for that species (no fixed cap, no negative baseline)
   3. A species with all records in one month shows a chart with one tall bar and all other bars at zero (Y-axis scales to that bar's height)
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 22-01-PLAN.md — Add scales config (axis titles + beginAtZero) to pnwm-phenology-chart.js, full build verification, human visual checkpoint (CHART-01, CHART-02)
 **UI hint**: yes
 
 ### Phase 23: Photo Thumbnail Carousel
@@ -209,7 +211,7 @@ Plans:
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
 | 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
-| 22. Phenology Chart Improvements | v2.1 | 0/? | Not started | - |
+| 22. Phenology Chart Improvements | v2.1 | 0/1 | Not started | - |
 | 23. Photo Thumbnail Carousel | v2.1 | 0/? | Not started | - |
 | 24. County, Collection, and Elevation Filters | v2.1 | 0/? | Not started | - |
 | 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
