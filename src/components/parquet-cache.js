@@ -36,9 +36,10 @@ export async function loadParquet(slug) {
 }
 
 /**
- * Filter records by state, record type, and year range.
+ * Filter records by state, record type, year range, county, collection, and elevation range.
  * @param {Array} records
- * @param {{ state?: string, recordType?: string, yearMin?: number, yearMax?: number }} filters
+ * @param {{ state?: string, recordType?: string, yearMin?: number, yearMax?: number,
+ *           county?: string, collection?: string, elevationMin?: number, elevationMax?: number }} filters
  * @returns {Array} filtered records
  */
 export function filterRecords(records, filters) {
@@ -47,6 +48,10 @@ export function filterRecords(records, filters) {
     if (filters.recordType && filters.recordType !== 'all' && r.record_type !== filters.recordType) return false;
     if (filters.yearMin != null && r.year < filters.yearMin) return false;
     if (filters.yearMax != null && r.year > filters.yearMax) return false;
+    if (filters.county && filters.county !== 'all' && r.county !== filters.county) return false;
+    if (filters.collection && filters.collection !== 'all' && r.collection !== filters.collection) return false;
+    if (filters.elevationMin != null && r.elevation_ft < filters.elevationMin) return false;
+    if (filters.elevationMax != null && r.elevation_ft > filters.elevationMax) return false;
     return true;
   });
 }
