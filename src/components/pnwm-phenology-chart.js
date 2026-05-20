@@ -28,6 +28,7 @@ class PnwmPhenologyChart extends LitElement {
     return css`
       :host {
         display: block;
+        min-height: 200px;
       }
       .chart-container {
         position: relative;
@@ -93,6 +94,9 @@ class PnwmPhenologyChart extends LitElement {
       const canvas = this.shadowRoot && this.shadowRoot.querySelector('canvas');
       if (canvas) {
         this._renderChart(canvas);
+      } else if (this._chart) {
+        this._chart.destroy();
+        this._chart = null;
       }
     }
   }
