@@ -3,6 +3,7 @@ created: 2026-04-23T00:00:00Z
 title: Fix close button on the lightbox
 area: ui
 files: []
+resolves_phase: 23
 ---
 
 ## Problem
