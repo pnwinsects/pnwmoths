@@ -82,6 +82,9 @@ export default function (eleventyConfig) {
       server: {
         hmr: { port: 24679 },
       },
+      build: {
+        sourcemap: true,
+      },
       plugins: [{
         name: "pnwm-copy-images",
         writeBundle: async () => {
