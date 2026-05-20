@@ -223,7 +223,7 @@ class PnwmTaxonBrowser extends LitElement {
             @click=${() => this._toggleGenus(key)}
           >${genus.name}</button>
         </h4>
-        ${!expanded ? this._renderImageStrip(genus.navImages) : ''}
+        ${!expanded ? this._renderImageStrip(genus.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         ${expanded ? this._renderSpecies(genus.species, genus.name) : ''}
       </div>`;
   }
