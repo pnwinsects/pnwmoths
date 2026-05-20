@@ -123,6 +123,21 @@ class PnwmPhenologyChart extends LitElement {
               display: false,
             },
           },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Month',
+              },
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: '# Records',
+              },
+            },
+          },
         },
       });
     }

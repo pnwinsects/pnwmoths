@@ -4,8 +4,8 @@ milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
 status: executing
 stopped_at: Phase 22 context gathered
-last_updated: "2026-05-20T17:14:32.169Z"
-last_activity: 2026-05-20 -- Phase 22 planning complete
+last_updated: "2026-05-20T17:16:26.500Z"
+last_activity: 2026-05-20 -- Phase 22 execution started
 progress:
   total_phases: 7
   completed_phases: 0
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 22 — Phenology Chart Improvements
+**Current focus:** Phase 22 — phenology-chart-improvements
 
 ## Current Position
 
-Phase: 22 — Phenology Chart Improvements (not started)
-Plan: —
-Status: Ready to execute
-Last activity: 2026-05-20 -- Phase 22 planning complete
+Phase: 22 (phenology-chart-improvements) — EXECUTING
+Plan: 1 of 1
+Status: Executing Phase 22
+Last activity: 2026-05-20 -- Phase 22 execution started
 
 Progress: [██████░░░░] 66% (21/25 phases complete)
 
