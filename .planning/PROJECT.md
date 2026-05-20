@@ -8,6 +8,17 @@ A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static sit
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
+## Current Milestone: v2.1 Species Fact Sheet Gaps
+
+**Goal:** Close the remaining UX and feature gaps between pnwmoths and the reference pnwinsects-app on species fact sheet pages.
+
+**Target features:**
+- Phenology chart axis labels (X: Month, Y: # Records)
+- Photo thumbnail carousel replacing dot navigation
+- Additional data filters: county, collection, elevation range
+- Similar species with thumbnail images
+- Fix lightbox close button (carry-forward bug)
+
 ## Requirements
 
 ### Validated
@@ -162,4 +173,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-19 after v2.0 milestone*
+*Last updated: 2026-05-20 — v2.1 Species Fact Sheet Gaps started*

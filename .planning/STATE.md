@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.0
-milestone_name: Glossary Tooltips
-status: complete
-stopped_at: v2.0 milestone archived — all 3 phases complete
-last_updated: "2026-05-19T00:00:00Z"
-last_activity: 2026-05-19 — v2.0 milestone archived
+milestone: v2.1
+milestone_name: Species Fact Sheet Gaps
+status: planning
+stopped_at: —
+last_updated: "2026-05-20T00:00:00Z"
+last_activity: 2026-05-20 — Milestone v2.1 started
 progress:
-  total_phases: 3
-  completed_phases: 3
-  total_plans: 5
-  completed_plans: 5
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 ## Current Position
 
-Phase: — (milestone complete)
+Phase: Not started (defining requirements)
 Plan: —
-Status: v2.0 shipped — planning next milestone
-Last activity: 2026-05-19 — v2.0 Glossary Tooltips archived
+Status: Defining requirements
+Last activity: 2026-05-20 — Milestone v2.1 started
 
 Progress: [██████░░░░] 66%
 
