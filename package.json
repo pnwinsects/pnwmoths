@@ -31,7 +31,7 @@
     "csv-stringify": "^6.7.0",
     "hyparquet": "^1.25.6",
     "leaflet": "^1.9.4",
-    "lit": "^3.3.2",
+    "lit": "^3.3.3",
     "node-html-parser": "^7.1.0",
     "openseadragon": "^6.0.2"
   },
