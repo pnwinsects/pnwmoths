@@ -96,93 +96,130 @@
 ## Phase Details
 
 ### Phase 19: Build-time Glossary Transform
+
 **Goal**: Species prose pages have first occurrences of glossary terms wrapped in `<abbr class="glossary-term">` elements carrying definition and image URL as data attributes, correct no-JS degradation, and a passing unit test suite
 **Depends on**: Phase 18 (build pipeline stable)
 **Requirements**: GLOS-01, GLOS-02, GLOS-03, GLOS-04, GLOS-05, GLOS-06, QA-01
 **Success Criteria** (what must be TRUE):
+
   1. A species page rendered by `npm run build` contains `<abbr class="glossary-term" title="..." data-definition="..." data-image-url="...">` wrapping the first occurrence of a matched glossary term, and the same term appearing later on the page is plain text
   2. Matching is case-insensitive and whole-word: "costal" matches in "the costal margin" but not inside "subcostal"
   3. Terms containing regex metacharacters (`1A+2A`, `W-mark`, `CuA1`) are matched correctly and do not corrupt surrounding HTML
   4. The `/glossary/` page and browse pages contain no `<abbr class="glossary-term">` elements (transform is scoped to species prose only)
   5. Unit tests cover regex escaping, first-occurrence deduplication, and prose-scope guard; all tests pass
+
 **Plans**: 3 plans
 Plans:
+
 - [x] 19-01-PLAN.md — Install node-html-parser + implement glossary-transform.js (escapeRegex, escapeHtml, buildTermMap, applyGlossaryTerms)
 - [x] 19-02-PLAN.md — Create unit test suite (QA-01) + add src/_lib/*.test.js to npm test glob
 - [x] 19-03-PLAN.md — Wire addTransform into eleventy.config.js + integration verification
 - [x] 19-04-PLAN.md — Fix substituteTerms() to wrap all unseen terms in a text node (gap closure)
 
 ### Phase 20: Popover UI — HTML and CSS
+
 **Goal**: Users can see a styled popover panel with the full definition when they hover, focus, or click a highlighted glossary term; the feature works without JavaScript and does not pollute the Pagefind search index
 **Depends on**: Phase 19
 **Requirements**: TIP-01, TIP-02, TIP-03, QA-02
 **Success Criteria** (what must be TRUE):
+
   1. Hovering or focusing an `<abbr class="glossary-term">` element opens a popover showing the full definition text, styled consistently with the site's design tokens
   2. The popover dismisses when the pointer leaves, focus moves away, or the user presses Escape
   3. With JavaScript disabled, the `<abbr title="...">` native browser tooltip remains available and no layout is broken
   4. After a production build and `pagefind --site _site`, species page excerpts in search results do not include glossary definition text
+
 **Plans**: 1 plan
 Plans:
+
 - [x] 20-01-PLAN.md — Rewrite glossary tooltip to Popover API + migrate CSS selectors (TIP-01, TIP-02, TIP-03, QA-02)
+
 **UI hint**: yes
 
 ### Phase 21: JS Hover Enhancement and Glossary Images
+
 **Goal**: Popovers for terms that have a glossary image display that image from the CDN, and hover/focus show/hide behavior is driven by a small (~20-line) vanilla JS handler
 **Depends on**: Phase 20
 **Requirements**: TIP-02
 **Success Criteria** (what must be TRUE):
+
   1. For a glossary term with an `image_filename` in `glossary.csv`, the popover panel shows the corresponding CDN image alongside the definition text
   2. For a glossary term without an image, the popover shows definition text only and no broken image placeholder appears
   3. The JS implementation is ~20 lines of vanilla JS with no external library dependency; hover and keyboard focus both trigger show/hide correctly
+
 **Plans**: TBD
 **UI hint**: yes
 
 ### Phase 22: Phenology Chart Improvements
+
 **Goal**: Users see correctly labeled and scaled phenology charts on every species fact sheet
 **Depends on**: Phase 21 (v2.0 complete)
 **Requirements**: CHART-01, CHART-02
 **Success Criteria** (what must be TRUE):
+
   1. The X-axis of the phenology chart displays the label "Month" and the Y-axis displays the label "# Records"
   2. The Y-axis begins at 0 and its maximum value equals the highest monthly record count for that species (no fixed cap, no negative baseline)
   3. A species with all records in one month shows a chart with one tall bar and all other bars at zero (Y-axis scales to that bar's height)
+
 **Plans**: 1 plan
 Plans:
+
 - [x] 22-01-PLAN.md — Add scales config (axis titles + beginAtZero) to pnwm-phenology-chart.js, full build verification, human visual checkpoint (CHART-01, CHART-02)
+
 **UI hint**: yes
 
 ### Phase 23: Photo Thumbnail Carousel
+
 **Goal**: Users can navigate species photos via a thumbnail strip and close the lightbox via its close button
 **Depends on**: Phase 22
 **Requirements**: PHOTO-01, PHOTO-02, PHOTO-03
 **Success Criteria** (what must be TRUE):
+
   1. For a species with multiple photos, a horizontal thumbnail strip is visible below the main image; clicking any thumbnail swaps it into the main image position
   2. The dot navigation control is absent; only the thumbnail strip provides photo navigation
   3. Opening the lightbox and clicking the close button (or pressing Escape) dismisses the lightbox without a page reload
+
 **Plans**: 1 plan
 Plans:
+
 - [x] 23-01-PLAN.md — Replace dot navigation with thumbnail strip (ResizeObserver overflow detection, scrollIntoView on index change) + fix lightbox close button binding (PHOTO-01, PHOTO-02, PHOTO-03)
+
 **UI hint**: yes
 
 ### Phase 24: County, Collection, and Elevation Filters
+
 **Goal**: Users can narrow occurrence records on a species page by county, collection, and elevation range, with the map and phenology chart updating in real time
 **Depends on**: Phase 23
 **Requirements**: FILT-01, FILT-02, FILT-03, FILT-04
 **Success Criteria** (what must be TRUE):
+
   1. A county dropdown appears in the filter bar; its options are populated from the distinct counties present in the species' Parquet data; selecting a county filters map pins and phenology bars to matching records
   2. A collection dropdown appears in the filter bar; its options are populated from the distinct collections present in the data; selecting a collection updates the map and chart
   3. An elevation range slider (feet) appears in the filter bar; dragging the min or max handle filters records to those within the selected elevation range
   4. All three new filters integrate with the existing `pnwm-filter-change` event bus; the map and phenology chart respond to the same event they already handle
-**Plans**: TBD
+
+**Plans**: 2 plans
+Plans:
+**Wave 1**
+
+- [ ] 24-01-PLAN.md — Extend filterRecords() with county/collection/elevation conditions + add tests (FILT-01, FILT-02, FILT-03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 24-02-PLAN.md — Extend pnwm-filter-bar.js with county dropdown, collection dropdown, elevation range slider; extend pnwm-filter-change detail; human-verify (FILT-01, FILT-02, FILT-03, FILT-04)
+
 **UI hint**: yes
 
 ### Phase 25: Similar Species Thumbnails
+
 **Goal**: Users can see a thumbnail image and follow a link for each similar species listed on a species fact sheet
 **Depends on**: Phase 24
 **Requirements**: SIM-01, SIM-02
 **Success Criteria** (what must be TRUE):
+
   1. Each entry in the similar species section displays a thumbnail image loaded from the CDN; species with no available image show a placeholder or are omitted gracefully
   2. Each similar species entry is a clickable link that navigates to that species' fact sheet page
   3. The similar species section renders correctly in the static HTML (no-JS degradation preserved)
+
 **Plans**: TBD
 **UI hint**: yes
 
@@ -215,7 +252,7 @@ Plans:
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
 | 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 24. County, Collection, and Elevation Filters | v2.1 | 0/? | Not started | - |
+| 24. County, Collection, and Elevation Filters | v2.1 | 0/2 | Planned | - |
 | 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
 
 ---
