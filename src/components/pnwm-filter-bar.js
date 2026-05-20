@@ -109,6 +109,10 @@ class PnwmFilterBar extends LitElement {
         recordType: this._recordType,
         yearMin: this._yearMin,
         yearMax: this._yearMax,
+        county: this._county,
+        collection: this._collection,
+        elevationMin: this._elevationMin,
+        elevationMax: this._elevationMax,
       },
     }));
   }
@@ -135,12 +139,38 @@ class PnwmFilterBar extends LitElement {
     this._dispatchFilterChange();
   }
 
+  _onCountyChange(e) {
+    this._county = e.target.value;
+    this._dispatchFilterChange();
+  }
+
+  _onCollectionChange(e) {
+    this._collection = e.target.value;
+    this._dispatchFilterChange();
+  }
+
+  _onElevationMinChange(e) {
+    const val = Number(e.target.value);
+    this._elevationMin = Math.min(val, this._elevationMax);
+    this._dispatchFilterChange();
+  }
+
+  _onElevationMaxChange(e) {
+    const val = Number(e.target.value);
+    this._elevationMax = Math.max(val, this._elevationMin);
+    this._dispatchFilterChange();
+  }
+
   _onClearFilters(e) {
     e.preventDefault();
     this._state = 'all';
     this._recordType = 'all';
     this._yearMin = 1900;
     this._yearMax = CURRENT_YEAR;
+    this._county = 'all';
+    this._collection = 'all';
+    this._elevationMin = 0;
+    this._elevationMax = 15000;
     this._dispatchFilterChange();
   }
 
@@ -171,6 +201,30 @@ class PnwmFilterBar extends LitElement {
           </select>
         </div>
 
+        <div class="filter-group">
+          <label for="filter-county-${this.slug}">County</label>
+          <select
+            id="filter-county-${this.slug}"
+            .value=${this._county}
+            @change=${this._onCountyChange}
+          >
+            <option value="all">All counties</option>
+            ${this._counties.map(c => html`<option value=${c} ?selected=${this._county === c}>${c}</option>`)}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-collection-${this.slug}">Collection</label>
+          <select
+            id="filter-collection-${this.slug}"
+            .value=${this._collection}
+            @change=${this._onCollectionChange}
+          >
+            <option value="all">All collections</option>
+            ${this._collections.map(c => html`<option value=${c} ?selected=${this._collection === c}>${c}</option>`)}
+          </select>
+        </div>
+
         <div class="filter-group year-range">
           <label>Year range: ${this._yearMin} &ndash; ${this._yearMax}</label>
           <div class="year-range-inputs">
@@ -193,6 +247,32 @@ class PnwmFilterBar extends LitElement {
               step="1"
               .value=${String(this._yearMax)}
               @input=${this._onYearMaxChange}
+            >
+          </div>
+        </div>
+
+        <div class="filter-group year-range">
+          <label>Elevation: ${this._elevationMin} &ndash; ${this._elevationMax} ft</label>
+          <div class="year-range-inputs">
+            <label for="filter-elevation-min-${this.slug}" class="sr-only">Minimum elevation in feet</label>
+            <input
+              type="range"
+              id="filter-elevation-min-${this.slug}"
+              min="0"
+              max="15000"
+              step="100"
+              .value=${String(this._elevationMin)}
+              @input=${this._onElevationMinChange}
+            >
+            <label for="filter-elevation-max-${this.slug}" class="sr-only">Maximum elevation in feet</label>
+            <input
+              type="range"
+              id="filter-elevation-max-${this.slug}"
+              min="0"
+              max="15000"
+              step="100"
+              .value=${String(this._elevationMax)}
+              @input=${this._onElevationMaxChange}
             >
           </div>
         </div>
