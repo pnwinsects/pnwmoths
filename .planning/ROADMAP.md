@@ -88,7 +88,7 @@
 
 **Milestone Goal:** Close the remaining UX and feature gaps between pnwmoths and the reference pnwinsects-app on species fact sheet pages.
 
-- [ ] **Phase 22: Phenology Chart Improvements** - Axis labels and corrected Y-scale on the phenology chart
+- [x] **Phase 22: Phenology Chart Improvements** - Axis labels and corrected Y-scale on the phenology chart (completed 2026-05-20)
 - [ ] **Phase 23: Photo Thumbnail Carousel** - Thumbnail strip navigation and lightbox close button fix
 - [ ] **Phase 24: County, Collection, and Elevation Filters** - Three new occurrence filters wired to the filter event bus
 - [ ] **Phase 25: Similar Species Thumbnails** - CDN thumbnails and clickable links in the similar species section
@@ -147,7 +147,7 @@ Plans:
   3. A species with all records in one month shows a chart with one tall bar and all other bars at zero (Y-axis scales to that bar's height)
 **Plans**: 1 plan
 Plans:
-- [ ] 22-01-PLAN.md — Add scales config (axis titles + beginAtZero) to pnwm-phenology-chart.js, full build verification, human visual checkpoint (CHART-01, CHART-02)
+- [x] 22-01-PLAN.md — Add scales config (axis titles + beginAtZero) to pnwm-phenology-chart.js, full build verification, human visual checkpoint (CHART-01, CHART-02)
 **UI hint**: yes
 
 ### Phase 23: Photo Thumbnail Carousel
@@ -211,7 +211,7 @@ Plans:
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
 | 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
-| 22. Phenology Chart Improvements | v2.1 | 0/1 | Not started | - |
+| 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
 | 23. Photo Thumbnail Carousel | v2.1 | 0/? | Not started | - |
 | 24. County, Collection, and Elevation Filters | v2.1 | 0/? | Not started | - |
 | 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
