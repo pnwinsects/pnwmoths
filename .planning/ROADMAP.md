@@ -11,6 +11,7 @@
 - ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](milestones/v1.3-ROADMAP.md)
 - ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
 - ✅ **v2.0 Glossary Tooltips** — Phases 19–21 (shipped 2026-04-23) — [archive](milestones/v2.0-ROADMAP.md)
+- 🔄 **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (in progress)
 
 ## Phases
 
@@ -83,6 +84,15 @@
 
 </details>
 
+### v2.1 Species Fact Sheet Gaps (Phases 22–25)
+
+**Milestone Goal:** Close the remaining UX and feature gaps between pnwmoths and the reference pnwinsects-app on species fact sheet pages.
+
+- [ ] **Phase 22: Phenology Chart Improvements** - Axis labels and corrected Y-scale on the phenology chart
+- [ ] **Phase 23: Photo Thumbnail Carousel** - Thumbnail strip navigation and lightbox close button fix
+- [ ] **Phase 24: County, Collection, and Elevation Filters** - Three new occurrence filters wired to the filter event bus
+- [ ] **Phase 25: Similar Species Thumbnails** - CDN thumbnails and clickable links in the similar species section
+
 ## Phase Details
 
 ### Phase 19: Build-time Glossary Transform
@@ -127,6 +137,51 @@ Plans:
 **Plans**: TBD
 **UI hint**: yes
 
+### Phase 22: Phenology Chart Improvements
+**Goal**: Users see correctly labeled and scaled phenology charts on every species fact sheet
+**Depends on**: Phase 21 (v2.0 complete)
+**Requirements**: CHART-01, CHART-02
+**Success Criteria** (what must be TRUE):
+  1. The X-axis of the phenology chart displays the label "Month" and the Y-axis displays the label "# Records"
+  2. The Y-axis begins at 0 and its maximum value equals the highest monthly record count for that species (no fixed cap, no negative baseline)
+  3. A species with all records in one month shows a chart with one tall bar and all other bars at zero (Y-axis scales to that bar's height)
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 23: Photo Thumbnail Carousel
+**Goal**: Users can navigate species photos via a thumbnail strip and close the lightbox via its close button
+**Depends on**: Phase 22
+**Requirements**: PHOTO-01, PHOTO-02, PHOTO-03
+**Success Criteria** (what must be TRUE):
+  1. For a species with multiple photos, a horizontal thumbnail strip is visible below the main image; clicking any thumbnail swaps it into the main image position
+  2. The dot navigation control is absent; only the thumbnail strip provides photo navigation
+  3. Opening the lightbox and clicking the close button (or pressing Escape) dismisses the lightbox without a page reload
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 24: County, Collection, and Elevation Filters
+**Goal**: Users can narrow occurrence records on a species page by county, collection, and elevation range, with the map and phenology chart updating in real time
+**Depends on**: Phase 23
+**Requirements**: FILT-01, FILT-02, FILT-03, FILT-04
+**Success Criteria** (what must be TRUE):
+  1. A county dropdown appears in the filter bar; its options are populated from the distinct counties present in the species' Parquet data; selecting a county filters map pins and phenology bars to matching records
+  2. A collection dropdown appears in the filter bar; its options are populated from the distinct collections present in the data; selecting a collection updates the map and chart
+  3. An elevation range slider (feet) appears in the filter bar; dragging the min or max handle filters records to those within the selected elevation range
+  4. All three new filters integrate with the existing `pnwm-filter-change` event bus; the map and phenology chart respond to the same event they already handle
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 25: Similar Species Thumbnails
+**Goal**: Users can see a thumbnail image and follow a link for each similar species listed on a species fact sheet
+**Depends on**: Phase 24
+**Requirements**: SIM-01, SIM-02
+**Success Criteria** (what must be TRUE):
+  1. Each entry in the similar species section displays a thumbnail image loaded from the CDN; species with no available image show a placeholder or are omitted gracefully
+  2. Each similar species entry is a clickable link that navigates to that species' fact sheet page
+  3. The similar species section renders correctly in the static HTML (no-JS degradation preserved)
+**Plans**: TBD
+**UI hint**: yes
+
 ---
 
 ## Progress
@@ -154,6 +209,10 @@ Plans:
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
 | 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
+| 22. Phenology Chart Improvements | v2.1 | 0/? | Not started | - |
+| 23. Photo Thumbnail Carousel | v2.1 | 0/? | Not started | - |
+| 24. County, Collection, and Elevation Filters | v2.1 | 0/? | Not started | - |
+| 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19*

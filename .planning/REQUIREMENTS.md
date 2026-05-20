@@ -51,7 +51,7 @@
 
 | Phase | Requirements |
 |-------|-------------|
-| TBD   | CHART-01, CHART-02 |
-| TBD   | PHOTO-01, PHOTO-02, PHOTO-03 |
-| TBD   | FILT-01, FILT-02, FILT-03, FILT-04 |
-| TBD   | SIM-01, SIM-02 |
+| Phase 22 — Phenology Chart Improvements | CHART-01, CHART-02 |
+| Phase 23 — Photo Thumbnail Carousel | PHOTO-01, PHOTO-02, PHOTO-03 |
+| Phase 24 — County, Collection, and Elevation Filters | FILT-01, FILT-02, FILT-03, FILT-04 |
+| Phase 25 — Similar Species Thumbnails | SIM-01, SIM-02 |

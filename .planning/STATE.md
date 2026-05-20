@@ -5,9 +5,9 @@ milestone_name: Species Fact Sheet Gaps
 status: planning
 stopped_at: —
 last_updated: "2026-05-20T00:00:00Z"
-last_activity: 2026-05-20 — Milestone v2.1 started
+last_activity: 2026-05-20 — Roadmap created for v2.1 (Phases 22–25)
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Planning next milestone
+**Current focus:** Phase 22 — Phenology Chart Improvements
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 22 — Phenology Chart Improvements (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-05-20 — Milestone v2.1 started
+Status: Ready to plan
+Last activity: 2026-05-20 — Roadmap created for v2.1 (Phases 22–25)
 
-Progress: [██████░░░░] 66%
+Progress: [██████░░░░] 66% (21/25 phases complete)
 
 ## Performance Metrics
 
@@ -80,10 +80,14 @@ Recent decisions affecting current work:
 - Phase 19 added: Build-time Glossary Transform (v2.0)
 - Phase 20 added: Popover UI — HTML and CSS (v2.0)
 - Phase 21 added: JS Hover Enhancement and Glossary Images (v2.0)
+- Phase 22 added: Phenology Chart Improvements (v2.1)
+- Phase 23 added: Photo Thumbnail Carousel (v2.1)
+- Phase 24 added: County, Collection, and Elevation Filters (v2.1)
+- Phase 25 added: Similar Species Thumbnails (v2.1)
 
 ### Pending Todos
 
-- Fix close button on the lightbox (`2026-04-23-fix-close-button-on-lightbox.md`)
+- Fix close button on the lightbox — addressed in Phase 23 (PHOTO-03)
 
 ### Blockers/Concerns
 
@@ -102,11 +106,10 @@ Items acknowledged and carried forward:
 | CDN | WebP not yet active on bunny.net Optimizer (serving JPEG) | Deferred | v1.4 |
 | UAT/Verify | Phase 13 UAT + verification (human_needed) | Acknowledged at v2.0 close — v1.4 shipped | v2.0 |
 | UAT/Verify | Phase 16 verification (human_needed) | Acknowledged at v2.0 close — v1.4 shipped | v2.0 |
-| Todo | Fix close button on lightbox | Carry forward to next milestone | v2.0 |
 | Quick task | species-accounts-migration (untraceable) | Acknowledged — file not found; assumed obsolete | v2.0 |
 
 ## Session Continuity
 
-Last session: 2026-04-23
-Stopped at: Completed 20-01-PLAN.md (Popover API tooltip rewrite)
+Last session: 2026-05-20
+Stopped at: Roadmap created — ready to plan Phase 22
 Resume file: none
