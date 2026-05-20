@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
-status: completed
-stopped_at: Phase 23 context gathered
-last_updated: "2026-05-20T17:47:41.548Z"
-last_activity: 2026-05-20 -- Phase 22 marked complete
+status: executing
+stopped_at: Phase 23 UI-SPEC approved
+last_updated: "2026-05-20T19:56:12.430Z"
+last_activity: 2026-05-20 -- Phase 23 planning complete
 progress:
   total_phases: 7
   completed_phases: 1
-  total_plans: 1
+  total_plans: 2
   completed_plans: 1
   percent: 14
 ---
@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 Phase: 22 — COMPLETE
 Plan: 1 of 1
-Status: Phase 22 complete
-Last activity: 2026-05-20 -- Phase 22 marked complete
+Status: Ready to execute
+Last activity: 2026-05-20 -- Phase 23 planning complete
 
 Progress: [██████░░░░] 66% (21/25 phases complete)
 
@@ -110,6 +110,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-20T17:47:41.541Z
-Stopped at: Phase 23 context gathered
-Resume file: .planning/phases/23-photo-thumbnail-carousel/23-CONTEXT.md
+Last session: 2026-05-20T17:53:53.947Z
+Stopped at: Phase 23 UI-SPEC approved
+Resume file: .planning/phases/23-photo-thumbnail-carousel/23-UI-SPEC.md

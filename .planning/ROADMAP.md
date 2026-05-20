@@ -158,7 +158,9 @@ Plans:
   1. For a species with multiple photos, a horizontal thumbnail strip is visible below the main image; clicking any thumbnail swaps it into the main image position
   2. The dot navigation control is absent; only the thumbnail strip provides photo navigation
   3. Opening the lightbox and clicking the close button (or pressing Escape) dismisses the lightbox without a page reload
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 23-01-PLAN.md — Replace dot navigation with thumbnail strip (ResizeObserver overflow detection, scrollIntoView on index change) + fix lightbox close button binding (PHOTO-01, PHOTO-02, PHOTO-03)
 **UI hint**: yes
 
 ### Phase 24: County, Collection, and Elevation Filters
@@ -212,7 +214,7 @@ Plans:
 | 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
 | 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
-| 23. Photo Thumbnail Carousel | v2.1 | 0/? | Not started | - |
+| 23. Photo Thumbnail Carousel | v2.1 | 0/1 | Planned | - |
 | 24. County, Collection, and Elevation Filters | v2.1 | 0/? | Not started | - |
 | 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
 
