@@ -13,6 +13,12 @@ class PnwmFilterBar extends LitElement {
       _yearMax: { type: Number, state: true },
       _states: { attribute: false, state: true },
       _recordTypes: { attribute: false, state: true },
+      _county: { type: String, state: true },
+      _collection: { type: String, state: true },
+      _elevationMin: { type: Number, state: true },
+      _elevationMax: { type: Number, state: true },
+      _counties: { attribute: false, state: true },
+      _collections: { attribute: false, state: true },
     };
   }
 
@@ -61,6 +67,12 @@ class PnwmFilterBar extends LitElement {
     this._yearMax = CURRENT_YEAR;
     this._states = [];
     this._recordTypes = [];
+    this._county = 'all';
+    this._collection = 'all';
+    this._elevationMin = 0;
+    this._elevationMax = 15000;
+    this._counties = [];
+    this._collections = [];
   }
 
   async connectedCallback() {
@@ -70,12 +82,18 @@ class PnwmFilterBar extends LitElement {
         const records = await loadParquet(this.slug);
         const statesSet = new Set();
         const typesSet = new Set();
+        const countiesSet = new Set();
+        const collectionsSet = new Set();
         for (const r of records) {
           if (r.state) statesSet.add(r.state);
           if (r.record_type) typesSet.add(r.record_type);
+          if (r.county) countiesSet.add(r.county);
+          if (r.collection) collectionsSet.add(r.collection);
         }
         this._states = [...statesSet].sort();
         this._recordTypes = [...typesSet].sort();
+        this._counties = [...countiesSet].sort();
+        this._collections = [...collectionsSet].sort();
       } catch (err) {
         // Leave empty on error — controls still render with "All" options
       }
