@@ -79,6 +79,9 @@ export default function (eleventyConfig) {
     viteOptions: {
       appType: "mpa",
       base: pathPrefix,
+      server: {
+        hmr: { port: 24679 },
+      },
       plugins: [{
         name: "pnwm-copy-images",
         writeBundle: async () => {
