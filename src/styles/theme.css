@@ -244,6 +244,11 @@ abbr.glossary-term {
   margin-bottom: 1.5rem;
 }
 
+.species-photos,
+.species-data {
+  min-width: 0;
+}
+
 @media (max-width: 768px) {
   .species-content {
     grid-template-columns: 1fr;

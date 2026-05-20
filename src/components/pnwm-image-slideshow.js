@@ -86,6 +86,7 @@ export class PnwmImageSlideshow extends LitElement {
     this._images = [];
     this._stripOverflows = false;
     this._resizeObserver = null;
+    this._inertedElements = [];
     this._handleKeydown = this._handleKeydown.bind(this);
   }
 
@@ -125,9 +126,8 @@ export class PnwmImageSlideshow extends LitElement {
     super.disconnectedCallback();
     document.removeEventListener('keydown', this._handleKeydown);
     this._resizeObserver?.disconnect();
-    // Restore inert state if component is removed while lightbox is open
-    const main = document.querySelector('main');
-    if (main) main.removeAttribute('inert');
+    this._inertedElements.forEach(el => el.removeAttribute('inert'));
+    this._inertedElements = [];
   }
 
   firstUpdated() {
@@ -157,9 +157,18 @@ export class PnwmImageSlideshow extends LitElement {
 
   _openLightbox() {
     this._lightboxOpen = true;
-    const main = document.querySelector('main');
-    if (main) main.setAttribute('inert', '');
-    // Focus close button after render
+    // Inert all siblings up the ancestor chain (not the host itself) so keyboard
+    // focus is trapped in the lightbox without inerting our own shadow DOM.
+    let node = this;
+    while (node.parentElement && node.parentElement.tagName !== 'BODY') {
+      Array.from(node.parentElement.children).forEach(sibling => {
+        if (sibling !== node && !sibling.hasAttribute('inert')) {
+          sibling.setAttribute('inert', '');
+          this._inertedElements.push(sibling);
+        }
+      });
+      node = node.parentElement;
+    }
     this.updateComplete.then(() => {
       const closeBtn = this.shadowRoot.querySelector('.lightbox-close');
       if (closeBtn) closeBtn.focus();
@@ -168,8 +177,8 @@ export class PnwmImageSlideshow extends LitElement {
 
   _closeLightbox() {
     this._lightboxOpen = false;
-    const main = document.querySelector('main');
-    if (main) main.removeAttribute('inert');
+    this._inertedElements.forEach(el => el.removeAttribute('inert'));
+    this._inertedElements = [];
   }
 
   _formatCaption(img) {
