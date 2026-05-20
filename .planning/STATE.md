@@ -2,16 +2,15 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
-status: executing
-stopped_at: Phase 24 UI-SPEC approved
-last_updated: "2026-05-20T22:45:31.604Z"
-last_activity: 2026-05-20 -- Phase 24 planning complete
+status: completed
+stopped_at: Phase 25 context gathered
+last_updated: "2026-05-20T23:56:56.548Z"
 progress:
   total_phases: 7
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 4
-  completed_plans: 2
-  percent: 29
+  completed_plans: 4
+  percent: 43
 ---
 
 # Project State
@@ -21,16 +20,15 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 22 — phenology-chart-improvements
+**Current focus:** Phase 25 — similar-species-thumbnails
 
 ## Current Position
 
-Phase: 23 — COMPLETE
-Plan: 1 of 1
-Status: Ready to execute
-Last activity: 2026-05-20 -- Phase 24 planning complete
+Phase: 24 — COMPLETE
+Next: Phase 25 — similar-species-thumbnails
+Status: Phase 24 complete
 
-Progress: [██████░░░░] 66% (21/25 phases complete)
+Progress: [████████░░] 80% (22/25 phases complete)
 
 ## Performance Metrics
 
@@ -74,6 +72,8 @@ Recent decisions affecting current work:
 - v1.4 research: rclone via FTP is the only viable upload tool — bunny.net S3 compatibility is in closed preview (not GA as of April 2026)
 - v1.4 research: `CDN_BASE_URL` must be the Pull Zone URL (`{zone}.b-cdn.net`), NOT the Storage Zone URL (`storage.bunnycdn.com`)
 - v1.3 decision (carry): Raw `/images/...` paths in templates (not `| url` filter) — Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix
+- v2.1 Phase 24: Phenology chart always stays in the DOM with zero-height bars rather than being conditionally removed — avoids stale Chart.js instance on detached canvas
+- v2.1 Phase 24: Elevation slider uses String() coercion on .value binding — required to prevent Lit from treating Number as a Lit property and losing reactive sync with the range input
 
 ### Roadmap Evolution
 
@@ -87,7 +87,7 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-- Fix close button on the lightbox — addressed in Phase 23 (PHOTO-03)
+None.
 
 ### Blockers/Concerns
 
@@ -110,6 +110,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-20T22:20:41.815Z
-Stopped at: Phase 24 UI-SPEC approved
-Resume file: .planning/phases/24-county-collection-and-elevation-filters/24-UI-SPEC.md
+Last session: 2026-05-20T23:56:56.540Z
+Stopped at: Phase 25 context gathered
+Resume file: .planning/phases/25-similar-species-thumbnails/25-CONTEXT.md
