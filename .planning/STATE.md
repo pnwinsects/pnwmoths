@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.1
-milestone_name: Species Fact Sheet Gaps
-status: complete
-stopped_at: Phase 25 complete — human sign-off received
-last_updated: "2026-05-20T17:40:00Z"
+milestone: v2.2
+milestone_name: High-resolution species photos
+status: planning
+last_updated: "2026-05-21T15:33:06.862Z"
+last_activity: 2026-05-21
 progress:
-  total_phases: 7
-  completed_phases: 4
-  total_plans: 5
-  completed_plans: 5
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -24,11 +24,10 @@ See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 ## Current Position
 
-Phase: 25 — COMPLETE
-Next: (milestone v2.1 complete — no further phases planned)
-Status: Complete
-
-Progress: [████████░░] 80% (22/25 phases complete)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-21 — Milestone v2.2 started
 
 ## Performance Metrics
 

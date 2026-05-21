@@ -8,9 +8,28 @@ A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static sit
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
-## Current State: v2.1 shipped — planning next milestone
+## Current State: v2.2 in flight — High-resolution species photos
 
 **v2.1 shipped:** 2026-05-20 — Species Fact Sheet Gaps closed (4 phases, 5 plans, 64 commits)
+
+## Current Milestone: v2.2 High-resolution species photos
+
+**Goal:** Replace existing low-res species photos with OpenSeadragon deep-zoom high-res photos sourced from a ~200GB Dropbox folder, via a resumable server-side processing pipeline.
+
+**Target features:**
+- Dropbox ingest + filename parser + local manifest as source of truth
+- Synonym curation pass (`data/species-synonyms.csv`) before bulk processing
+- libvips DZI tile generation on a datacenter server (~1 TB output)
+- Bulk upload to bunny.net (extends Phase 13 HTTP PUT pattern)
+- `data/species-photos.json` Eleventy data file with per-species `high_res_available` flag
+- OpenSeadragon viewer replaces the Phase 23 lightbox when high-res is available; carousel unchanged
+
+**Key decisions locked by exploration + Spike 001 (2026-05-20/21):**
+- Local manifest (SQLite/JSON) is source of truth — survives restarts; carries `specimen_id` (OSAC/WWUC), `view` (D/V), `binomial_raw`, `binomial_resolved`, `match_bucket`
+- Dropbox is a superset; replace existing photos on match; investigate unmatched (~22% of files cluster on ~30–80 unique binomials)
+- Folder layout: flat with encoded filenames `Genus species-{specimen}-{view}.{ext}` — same convention as Phase 13 photos
+- Viewer UX: OSD replaces lightbox host; carousel untouched
+- 100% TIFF source; ~1 TB tile output expected (~5× DZI overhead) — validate bunny.net pricing before Phase B
 
 ## Requirements
 
@@ -73,7 +92,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | Feature | Reason |
 |---------|--------|
 | Admin / editing UI | Editing done in flat files; UX to validate later |
-| Zoomify deep-zoom viewer | Complex legacy feature; replaced by lightbox in v1 |
+| ~~Zoomify deep-zoom viewer~~ | ~~Complex legacy feature; replaced by lightbox in v1~~ — inverted in v2.2: OSD/DZI deep-zoom for species photos; lightbox hosts the OSD instance |
 | Lucid key integration | External tool, not part of static site pipeline |
 | User submissions / community ID | iNaturalist handles this; adds server infrastructure |
 | Server-side search | No server; Pagefind provides static equivalent |
@@ -178,4 +197,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-20 — after v2.1 milestone*
+*Last updated: 2026-05-21 — milestone v2.2 started (High-resolution species photos)*
