@@ -259,3 +259,61 @@ abbr.glossary-term {
   border-top: 1px solid #ddd;
   padding-top: 1.5rem;
 }
+
+/* --- Similar species thumbnail row (Phase 25) --- */
+
+.similar-species-row {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.similar-species-row::-webkit-scrollbar {
+  display: none;
+}
+
+.similar-species-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.similar-species-entry:hover .similar-species-thumb img,
+.similar-species-entry:hover .similar-species-placeholder {
+  outline: 2px solid var(--pico-primary);
+}
+
+.similar-species-thumb {
+  height: 93px;
+  display: flex;
+  align-items: center;
+}
+
+.similar-species-thumb img {
+  height: 93px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.similar-species-placeholder {
+  height: 93px;
+  width: 60px;
+  background: #d6d0bc;
+  border-radius: 2px;
+}
+
+.similar-species-name {
+  font-size: 14px;
+  color: var(--pico-color);
+  text-align: center;
+  margin-top: 8px;
+  max-width: 80px;
+  overflow-wrap: break-word;
+  line-height: 1.3;
+}
