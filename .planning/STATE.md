@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
-status: executing
-stopped_at: Phase 25 UI-SPEC approved
-last_updated: "2026-05-21T00:23:42.007Z"
+status: complete
+stopped_at: Phase 25 complete — human sign-off received
+last_updated: "2026-05-20T17:40:00Z"
 progress:
   total_phases: 7
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 5
-  completed_plans: 4
-  percent: 43
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -20,13 +20,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 25 — similar-species-thumbnails
+**Current focus:** Milestone v2.1 COMPLETE — all phases done
 
 ## Current Position
 
-Phase: 24 — COMPLETE
-Next: Phase 25 — similar-species-thumbnails
-Status: Ready to execute
+Phase: 25 — COMPLETE
+Next: (milestone v2.1 complete — no further phases planned)
+Status: Complete
 
 Progress: [████████░░] 80% (22/25 phases complete)
 
@@ -110,6 +110,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-21T00:09:29.367Z
-Stopped at: Phase 25 UI-SPEC approved
-Resume file: .planning/phases/25-similar-species-thumbnails/25-UI-SPEC.md
+Last session: 2026-05-20T17:40:00Z
+Stopped at: Phase 25 plan 01 complete — human sign-off received
+Resume file: .planning/phases/25-similar-species-thumbnails/25-01-SUMMARY.md
