@@ -90,7 +90,7 @@
 
 - [x] **Phase 22: Phenology Chart Improvements** - Axis labels and corrected Y-scale on the phenology chart (completed 2026-05-20)
 - [x] **Phase 23: Photo Thumbnail Carousel** - Thumbnail strip navigation and lightbox close button fix (completed 2026-05-20)
-- [ ] **Phase 24: County, Collection, and Elevation Filters** - Three new occurrence filters wired to the filter event bus
+- [x] **Phase 24: County, Collection, and Elevation Filters** - Three new occurrence filters wired to the filter event bus (completed 2026-05-20)
 - [ ] **Phase 25: Similar Species Thumbnails** - CDN thumbnails and clickable links in the similar species section
 
 ## Phase Details
@@ -201,11 +201,11 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 24-01-PLAN.md — Extend filterRecords() with county/collection/elevation conditions + add tests (FILT-01, FILT-02, FILT-03)
+- [x] 24-01-PLAN.md — Extend filterRecords() with county/collection/elevation conditions + add tests (FILT-01, FILT-02, FILT-03)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 24-02-PLAN.md — Extend pnwm-filter-bar.js with county dropdown, collection dropdown, elevation range slider; extend pnwm-filter-change detail; human-verify (FILT-01, FILT-02, FILT-03, FILT-04)
+- [x] 24-02-PLAN.md — Extend pnwm-filter-bar.js with county dropdown, collection dropdown, elevation range slider; extend pnwm-filter-change detail; human-verify (FILT-01, FILT-02, FILT-03, FILT-04)
 
 **UI hint**: yes
 
@@ -220,7 +220,11 @@ Plans:
   2. Each similar species entry is a clickable link that navigates to that species' fact sheet page
   3. The similar species section renders correctly in the static HTML (no-JS degradation preserved)
 
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+
+- [ ] 25-01-PLAN.md — Replace similar species &lt;ul&gt; with horizontal CDN thumbnail row in species.njk + append .similar-species-* CSS rules to theme.css; human visual verification (SIM-01, SIM-02)
+
 **UI hint**: yes
 
 ---
@@ -252,8 +256,8 @@ Plans:
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
 | 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 24. County, Collection, and Elevation Filters | v2.1 | 0/2 | Planned | - |
-| 25. Similar Species Thumbnails | v2.1 | 0/? | Not started | - |
+| 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
+| 25. Similar Species Thumbnails | v2.1 | 0/1 | Not started | - |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19*

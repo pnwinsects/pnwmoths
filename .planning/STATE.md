@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Species Fact Sheet Gaps
-status: completed
-stopped_at: Phase 25 context gathered
-last_updated: "2026-05-20T23:56:56.548Z"
+status: executing
+stopped_at: Phase 25 UI-SPEC approved
+last_updated: "2026-05-21T00:23:42.007Z"
 progress:
   total_phases: 7
   completed_phases: 3
-  total_plans: 4
+  total_plans: 5
   completed_plans: 4
   percent: 43
 ---
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
 
 Phase: 24 — COMPLETE
 Next: Phase 25 — similar-species-thumbnails
-Status: Phase 24 complete
+Status: Ready to execute
 
 Progress: [████████░░] 80% (22/25 phases complete)
 
@@ -110,6 +110,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-20T23:56:56.540Z
-Stopped at: Phase 25 context gathered
-Resume file: .planning/phases/25-similar-species-thumbnails/25-CONTEXT.md
+Last session: 2026-05-21T00:09:29.367Z
+Stopped at: Phase 25 UI-SPEC approved
+Resume file: .planning/phases/25-similar-species-thumbnails/25-UI-SPEC.md
