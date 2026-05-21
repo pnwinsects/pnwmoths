@@ -1,0 +1,536 @@
+{
+  "listed_at": "2026-05-21T06:32:12.516Z",
+  "total_entries": 5001,
+  "folders": 1,
+  "files": 5000,
+  "total_bytes": 219698569164,
+  "total_bytes_gb": "204.61",
+  "by_extension": {
+    "tif": 5000
+  },
+  "bucket_counts": {
+    "clean-match": 3875,
+    "slug-match": 0,
+    "genus-only": 621,
+    "likely-synonym": 484,
+    "unparseable": 20,
+    "non-image": 0,
+    "folder": 1
+  },
+  "bucket_pct": {
+    "clean-match": "77.5%",
+    "slug-match": "0.0%",
+    "genus-only": "12.4%",
+    "likely-synonym": "9.7%",
+    "unparseable": "0.4%",
+    "non-image": "0.0%",
+    "folder": "0.0%"
+  },
+  "species_data": {
+    "total_records": 1348,
+    "matched": 1257,
+    "unmatched": 323,
+    "match_rate_pct": "93.2"
+  },
+  "photos_per_species": {
+    "n_species": 1257,
+    "min": 2,
+    "median": 2,
+    "mean": "3.08",
+    "max": 16,
+    "sum": 3875
+  },
+  "top_species_by_photos": [
+    [
+      "virbia ferruginosa",
+      16
+    ],
+    [
+      "agrochola purpurea",
+      14
+    ],
+    [
+      "tetracis cervinaria",
+      14
+    ],
+    [
+      "agrotis vancouverensis",
+      12
+    ],
+    [
+      "euxoa comosa",
+      12
+    ],
+    [
+      "euxoa infausta",
+      12
+    ],
+    [
+      "agrotis vetusta",
+      10
+    ],
+    [
+      "alypia langtoni",
+      10
+    ],
+    [
+      "cryphia cuerva",
+      10
+    ],
+    [
+      "enypia venata",
+      10
+    ],
+    [
+      "euxoa difformis",
+      10
+    ],
+    [
+      "noctua pronuba",
+      10
+    ],
+    [
+      "panthea acronyctoides",
+      10
+    ],
+    [
+      "pero mizon",
+      10
+    ],
+    [
+      "plataea trilinearia",
+      10
+    ],
+    [
+      "spilosoma vagans",
+      10
+    ],
+    [
+      "tetracis jubararia",
+      10
+    ],
+    [
+      "tolype distincta",
+      10
+    ],
+    [
+      "antepirrhoe semiatrata",
+      9
+    ],
+    [
+      "antheraea polyphemus",
+      9
+    ]
+  ],
+  "top_unmatched_binomials": [
+    [
+      "smerinthus ophthalmica",
+      32
+    ],
+    [
+      "grammia nevadensis",
+      10
+    ],
+    [
+      "sericosema wilsonensis",
+      9
+    ],
+    [
+      "dasyfidonia avuncularia",
+      8
+    ],
+    [
+      "digrammia muscariata",
+      8
+    ],
+    [
+      "drepanulatrix bifilata",
+      8
+    ],
+    [
+      "drepanulatrix hulstii",
+      8
+    ],
+    [
+      "dysstroma hersiliata",
+      8
+    ],
+    [
+      "hydriomena irata",
+      8
+    ],
+    [
+      "iridopsis emasculatum",
+      8
+    ],
+    [
+      "macaria signaria",
+      8
+    ],
+    [
+      "pero occidentalis",
+      8
+    ],
+    [
+      "pheosia rimosa",
+      8
+    ],
+    [
+      "abagrotis alampeta",
+      6
+    ],
+    [
+      "acronicta dactylina",
+      6
+    ],
+    [
+      "anticlea basaliata",
+      6
+    ],
+    [
+      "caradrina multifera",
+      6
+    ],
+    [
+      "clostera brucei",
+      6
+    ],
+    [
+      "drepanulatrix unicalcaria",
+      6
+    ],
+    [
+      "dysstroma walkerata",
+      6
+    ],
+    [
+      "enargia infumata",
+      6
+    ],
+    [
+      "eudrepanulatrix rectifascia",
+      6
+    ],
+    [
+      "eulithis xylena",
+      6
+    ],
+    [
+      "eupithecia lariciata",
+      6
+    ],
+    [
+      "grammia elongata",
+      6
+    ],
+    [
+      "grammia ornata",
+      6
+    ],
+    [
+      "heliothis virescens",
+      6
+    ],
+    [
+      "holoarctia sordida",
+      6
+    ],
+    [
+      "hydraecia pallescens",
+      6
+    ],
+    [
+      "hydriomena marinata",
+      6
+    ]
+  ],
+  "top_unknown_genera": [
+    [
+      "grammia",
+      58
+    ],
+    [
+      "eupithecia",
+      52
+    ],
+    [
+      "sericosema",
+      17
+    ],
+    [
+      "iridopsis",
+      14
+    ],
+    [
+      "aspitates",
+      12
+    ],
+    [
+      "neoterpes",
+      10
+    ],
+    [
+      "pherne",
+      10
+    ],
+    [
+      "sabulodes",
+      10
+    ],
+    [
+      "glena",
+      9
+    ],
+    [
+      "prochoerodes",
+      9
+    ],
+    [
+      "anticlea",
+      8
+    ],
+    [
+      "dasyfidonia",
+      8
+    ],
+    [
+      "nemoria",
+      8
+    ],
+    [
+      "notarctia",
+      8
+    ],
+    [
+      "pheosia",
+      8
+    ],
+    [
+      "plagodis",
+      8
+    ],
+    [
+      "stenoporpia",
+      8
+    ],
+    [
+      "synchlora",
+      8
+    ],
+    [
+      "thallophaga",
+      8
+    ],
+    [
+      "eudrepanulatrix",
+      6
+    ],
+    [
+      "fernaldella",
+      6
+    ],
+    [
+      "thera",
+      6
+    ],
+    [
+      "aethalura",
+      4
+    ],
+    [
+      "apodrepanulatrix",
+      4
+    ],
+    [
+      "besma",
+      4
+    ],
+    [
+      "carphoides",
+      4
+    ],
+    [
+      "chlorochlamys",
+      4
+    ],
+    [
+      "chlorosea",
+      4
+    ],
+    [
+      "coryphista",
+      4
+    ],
+    [
+      "dichorda",
+      4
+    ]
+  ],
+  "samples": {
+    "clean-match": [
+      {
+        "name": "Abagrotis apposita-A-D.tif",
+        "binomial": "abagrotis apposita"
+      },
+      {
+        "name": "Anicla exuberans-A-D.tif",
+        "binomial": "anicla exuberans"
+      },
+      {
+        "name": "Ceranemota improvisa-A-V.tif",
+        "binomial": "ceranemota improvisa"
+      },
+      {
+        "name": "Egira variabilis-A-D.tif",
+        "binomial": "egira variabilis"
+      },
+      {
+        "name": "Euxoa mimallonis-B-D.tif",
+        "binomial": "euxoa mimallonis"
+      },
+      {
+        "name": "Hyalophora euryalus-WWUC000000083-D.tif",
+        "binomial": "hyalophora euryalus"
+      },
+      {
+        "name": "Malacosoma californicum-B-D.tif",
+        "binomial": "malacosoma californicum"
+      },
+      {
+        "name": "Paraseptis-adnixa-B-D.tif",
+        "binomial": "paraseptis adnixa"
+      },
+      {
+        "name": "Schinia jaguarina-B-D.tif",
+        "binomial": "schinia jaguarina"
+      },
+      {
+        "name": "Sympistis perscripta-A-V.tif",
+        "binomial": "sympistis perscripta"
+      }
+    ],
+    "slug-match": [],
+    "genus-only": [
+      {
+        "name": "Abagrotis alampeta-A-D.tif",
+        "binomial": "abagrotis alampeta"
+      },
+      {
+        "name": "Caradrina atristriga-A-V.tif",
+        "binomial": "caradrina atristriga"
+      },
+      {
+        "name": "Digrammia modocata-B-V.tif",
+        "binomial": "digrammia modocata"
+      },
+      {
+        "name": "Drepanulatrix monicaria-A-D.tif",
+        "binomial": "drepanulatrix monicaria"
+      },
+      {
+        "name": "Enargia-infumata-C-D.tif",
+        "binomial": "enargia infumata"
+      },
+      {
+        "name": "Hemeroplanis finitima-A-V.tif",
+        "binomial": "hemeroplanis finitima"
+      },
+      {
+        "name": "Lacinipolia vittula-B-V.tif",
+        "binomial": "lacinipolia vittula"
+      },
+      {
+        "name": "Macaria unipunctaria-A-V.tif",
+        "binomial": "macaria unipunctaria"
+      },
+      {
+        "name": "Schinia cupes-A-V.tif",
+        "binomial": "schinia cupes"
+      },
+      {
+        "name": "Speranza marcescaria-OSAC_0000899797-V.tif",
+        "binomial": "speranza marcescaria"
+      }
+    ],
+    "likely-synonym": [
+      {
+        "name": "Aethaloida packardaria-A-D.tif",
+        "binomial": "aethaloida packardaria"
+      },
+      {
+        "name": "Chlorochlamys appellaria-OSAC_0001081322-D.tif",
+        "binomial": "chlorochlamys appellaria"
+      },
+      {
+        "name": "Eupithecia bivittata-OSAC_0001081334-D.tif",
+        "binomial": "eupithecia bivittata"
+      },
+      {
+        "name": "Eupithecia tripunctaria-OSAC_0001081335-D.tif",
+        "binomial": "eupithecia tripunctaria"
+      },
+      {
+        "name": "Grammia edwardsii-B-V.tif",
+        "binomial": "grammia edwardsii"
+      },
+      {
+        "name": "Holarctia obliterata-A-V.tif",
+        "binomial": "holarctia obliterata"
+      },
+      {
+        "name": "Nacophoria mexicanaria-A-V.tif",
+        "binomial": "nacophoria mexicanaria"
+      },
+      {
+        "name": "Pheosia rimosa-A-D.tif",
+        "binomial": "pheosia rimosa"
+      },
+      {
+        "name": "Probole amicaria-OSAC_0000997164-V.tif",
+        "binomial": "probole amicaria"
+      },
+      {
+        "name": "Simyra insularis-B-D.tif",
+        "binomial": "simyra insularis"
+      }
+    ],
+    "unparseable": [
+      {
+        "name": "Autographa v-alba-A-D.tif"
+      },
+      {
+        "name": "Eupithecia nr harrisonata-OSAC_0001081342-D.tif"
+      },
+      {
+        "name": "Lasionycta Carolynae-A-D.tif"
+      },
+      {
+        "name": "Monostoecha n sp-A-D.tif"
+      },
+      {
+        "name": "Monostoecha n sp-B-D.tif"
+      },
+      {
+        "name": "Plataea sp-A-D.tif"
+      },
+      {
+        "name": "Rachiplusia ou-A-D.tif"
+      },
+      {
+        "name": "Trichoplusia ni-A-D.tif"
+      },
+      {
+        "name": "Xestia c-nigrum-A-D.tif"
+      },
+      {
+        "name": "Xestia c-nigrum-B-D.tif"
+      }
+    ],
+    "non-image": [],
+    "folder": [
+      {
+        "name": "*custom"
+      }
+    ]
+  }
+}
