@@ -2,11 +2,12 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: planning
-last_updated: "2026-05-21T16:00:00.000Z"
-last_activity: 2026-05-21
+status: "Roadmap defined; Phase 26 awaiting `/gsd:plan-phase 26`"
+stopped_at: Phase 26 context gathered
+last_updated: "2026-05-21T16:11:43.714Z"
+last_activity: 2026-05-21 — v2.2 roadmap created (6 phases, 24 requirements mapped)
 progress:
-  total_phases: 6
+  total_phases: 13
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -113,6 +114,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-21T16:00:00Z
-Stopped at: v2.2 roadmap created — 6 phases defined (26–31), all 24 requirements mapped, ready for `/gsd:plan-phase 26`
-Resume file: .planning/ROADMAP.md (Phase 26 Details section)
+Last session: 2026-05-21T16:11:43.690Z
+Stopped at: Phase 26 context gathered
+Resume file: .planning/phases/26-dropbox-ingest-filename-parser-and-manifest/26-CONTEXT.md
