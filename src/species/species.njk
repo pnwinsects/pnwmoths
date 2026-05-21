@@ -60,6 +60,34 @@ eleventyComputed:
         </figure>
       {% endif %}
     </pnwm-image-slideshow>
+
+    {% if sp.similar_slugs and sp.similar_slugs.length > 0 %}
+      <section class="similar-species">
+        <h2>Similar species</h2>
+        <div class="similar-species-row">
+          {% for slug in sp.similar_slugs %}
+            {% for s in species %}
+              {% if s.slug == slug %}
+                {% set simImages = images[slug] %}
+                <a class="similar-species-entry" href="{{ ('/species/' + slug + '/') | url }}">
+                  <div class="similar-species-thumb">
+                    {% if simImages and simImages.length > 0 %}
+                      <img src="{{ cdnBaseUrl }}/{{ slug }}/{{ simImages[0].filename | urlencode }}"
+                           alt="{{ s.genus }} {{ s.species }}"
+                           height="93"
+                           loading="lazy">
+                    {% else %}
+                      <div class="similar-species-placeholder" aria-hidden="true"></div>
+                    {% endif %}
+                  </div>
+                  <span class="similar-species-name"><em>{{ s.genus }} {{ s.species }}</em></span>
+                </a>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
   </div>
 
   <div class="species-data">
@@ -78,34 +106,6 @@ eleventyComputed:
   <div class="species-prose">
     {% renderFile prosePath %}
   </div>
-{% endif %}
-
-{% if sp.similar_slugs and sp.similar_slugs.length > 0 %}
-  <section class="similar-species">
-    <h2>Similar species</h2>
-    <div class="similar-species-row">
-      {% for slug in sp.similar_slugs %}
-        {% for s in species %}
-          {% if s.slug == slug %}
-            {% set simImages = images[slug] %}
-            <a class="similar-species-entry" href="{{ ('/species/' + slug + '/') | url }}">
-              <div class="similar-species-thumb">
-                {% if simImages and simImages.length > 0 %}
-                  <img src="{{ cdnBaseUrl }}/{{ slug }}/{{ simImages[0].filename | urlencode }}"
-                       alt="{{ s.genus }} {{ s.species }}"
-                       height="93"
-                       loading="lazy">
-                {% else %}
-                  <div class="similar-species-placeholder" aria-hidden="true"></div>
-                {% endif %}
-              </div>
-              <span class="similar-species-name">{{ s.common_name or (s.genus + ' ' + s.species) }}</span>
-            </a>
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-    </div>
-  </section>
 {% endif %}
 
 <script type="module">
