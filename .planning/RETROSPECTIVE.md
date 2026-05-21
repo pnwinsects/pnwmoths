@@ -287,6 +287,55 @@
 
 ---
 
+## Milestone: v2.1 — Species Fact Sheet Gaps
+
+**Shipped:** 2026-05-20
+**Phases:** 4 (Phases 22–25) | **Plans:** 5 | **Commits:** 64 | **Files:** 61 (+19,241 / -8,632 LOC)
+
+### What Was Built
+
+- Phenology chart axis labels ("Month", "# Records") with `beginAtZero` Y-floor via Chart.js `scales` block — no new imports
+- 93px horizontal thumbnail strip replacing dot navigation; sibling-walk `inert` fixed lightbox close; z-index 9000 clears Leaflet; `min-width: 0` on grid cells
+- `filterRecords()` extended with county, collection, and elevation dimensions; 10 TDD tests; null elevation passthrough via JS `null < N === false`
+- County/collection dropdowns and dual-handle elevation slider in filter bar; phenology chart stays in DOM with zero-height bars on filter-returns-empty
+- Similar species horizontal thumbnail row (CDN thumbnails at 93px, gray placeholder, clickable links, scientific-name labels) inside `.species-photos` div
+
+### What Worked
+
+- **TDD before implementation (Phase 24)** — 10 failing tests written before any implementation; the behavioral contract (including null-elevation passthrough) was locked before a line of production code was changed. No unexpected failures during implementation.
+- **Human checkpoint as the primary UAT gate** — three unexpected issues (inert self-blocking, z-index conflict, CSS grid overflow) were all caught at the human checkpoint in Phase 23, not in automated tests. The checkpoint format worked as intended for UI phases.
+- **Chart.js scales block simplicity** — axis titles in v4 require no additional plugin import; just a `scales` key in the options object. Research surfaced this before implementation.
+- **Similar species as static HTML** — moving the similar species section to inside `.species-photos` and making it pure static HTML (no web component, no JS) was the right scope decision for a content feature.
+
+### What Was Inefficient
+
+- **Three unplanned gap-closure commits in Phase 23** — the sibling-walk inert fix, z-index, and min-width: 0 were all found at UAT, not during planning. Root cause: the plan's PHOTO-03 diagnosis (unbound `@click`) was correct but incomplete — `main.inert` was a second independent failure mode not surfaced during planning.
+- **Phase 25 required two post-task corrections** — the label (common name vs scientific) and placement (after prose vs inside photos div) were not locked during CONTEXT/DISCUSS. Two round trips to the user at UAT; could have been resolved in one planning discussion.
+- **ROADMAP.md Phase 25 progress table not updated before milestone close** — showed "Not started" / 0/1 at close; required a fix during archival. Phase completion should update ROADMAP.md immediately.
+
+### Patterns Established
+
+- Sibling-walk inert: walk from Lit host to `<body>`, inert all siblings at each level, leave ancestor chain interactive — use whenever a Lit web component needs to trap focus
+- ResizeObserver guard: gate the reactive property update on `if (newValue !== this._property)` to prevent Lit's infinite re-render loop
+- `String()` coercion on Lit `.value` binding when syncing with native range inputs — prevents Lit from treating Number as a Lit property type
+- Phenology chart stays in DOM with zero-height bars (never removed) when occurrence filter returns zero results — avoids stale Chart.js instance on detached canvas
+- `min-width: 0` on CSS grid `1fr` children is mandatory for correct containment — add to any grid layout rule that has overflow risk
+
+### Key Lessons
+
+1. **Plan the complete failure taxonomy for Lit lightbox features.** The `@click` binding fix and the `main.inert` self-block were two independent failure modes; planning caught one but not the other. For Lit shadow DOM focus-trap features, document all three failure modes (binding, inert scope, z-index) in the plan.
+2. **Lock label content and section placement in CONTEXT, not at UAT.** The similar species label and placement decisions were obvious design choices that should have been locked in 25-CONTEXT.md; instead they surfaced as corrections during human review.
+3. **Update ROADMAP.md progress table at phase completion, not milestone close.** The "Not started" entry for Phase 25 survived until archival; updating it at phase complete would eliminate this cleanup step.
+4. **Null-value passthrough must be TDD-tested before implementation.** The `null < N === false` JS behavior was not obvious; adding it to the test scaffold before implementation locked the contract and prevented a misimplementation.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet (execution and planning); Opus used for research and complex discussion phases
+- Sessions: ~3 weeks elapsed (2026-04-27 → 2026-05-20), focused work spread across multiple sessions
+- Notable: 4 UI phases required human checkpoints; 3 of 4 checkpoints surfaced unexpected gaps. This is a normal ratio for complex UI phases — plan for it, don't treat it as failure.
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -299,6 +348,7 @@
 | v1.3 | 79 | 5 | First interactive feature milestone; TDD-first Lit component; light DOM constraint established |
 | v1.4 | 72 files | 5 | Infrastructure + data migration; CDN, LFS rewrite, full dataset — completed in 2 days |
 | v2.0 | 30+ | 3 | Build-time HTML transform + native Popover API tooltip; gap found by verification (19-04) |
+| v2.1 | 64 | 4 | UI-heavy fact-sheet milestone; sibling-walk inert, ResizeObserver guard, TDD filter data layer |
 
 ### Cumulative Quality
 
@@ -310,6 +360,7 @@
 | v1.3 | 4 | +accordion pure-function unit tests (buildStateMap, taxonHasState, collectSlugs); 58 total | 0/5 phases (VALIDATION.md left as draft) |
 | v1.4 | 5 | +migrate-species smoke tests (row counts, column headers, PNW states, lat/lon); 72 total | 0/5 phases |
 | v2.0 | 6 | +glossary-transform unit tests (escaping, deduplication, scope guard, multi-term text-node); 97 total | 4/3 phases (verification found gap; 19-04 gap-closure plan) |
+| v2.1 | 6 | +filterRecords TDD suite (10 new cases, county/collection/elevation + null passthrough); 97 total (no new test files) | 0/4 phases (no validation passes run for UI phases) |
 
 ### Top Lessons (Verified Across Milestones)
 

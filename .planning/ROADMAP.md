@@ -11,7 +11,7 @@
 - ✅ **v1.3 Visual Browse** — Phases 8–12 (shipped 2026-04-20) — [archive](milestones/v1.3-ROADMAP.md)
 - ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
 - ✅ **v2.0 Glossary Tooltips** — Phases 19–21 (shipped 2026-04-23) — [archive](milestones/v2.0-ROADMAP.md)
-- 🔄 **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (in progress)
+- ✅ **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (shipped 2026-05-20) — [archive](milestones/v2.1-ROADMAP.md)
 
 ## Phases
 
@@ -84,14 +84,17 @@
 
 </details>
 
-### v2.1 Species Fact Sheet Gaps (Phases 22–25)
+<details>
+<summary>✅ v2.1 Species Fact Sheet Gaps (Phases 22–25) — SHIPPED 2026-05-20</summary>
 
 **Milestone Goal:** Close the remaining UX and feature gaps between pnwmoths and the reference pnwinsects-app on species fact sheet pages.
 
 - [x] **Phase 22: Phenology Chart Improvements** - Axis labels and corrected Y-scale on the phenology chart (completed 2026-05-20)
 - [x] **Phase 23: Photo Thumbnail Carousel** - Thumbnail strip navigation and lightbox close button fix (completed 2026-05-20)
 - [x] **Phase 24: County, Collection, and Elevation Filters** - Three new occurrence filters wired to the filter event bus (completed 2026-05-20)
-- [ ] **Phase 25: Similar Species Thumbnails** - CDN thumbnails and clickable links in the similar species section
+- [x] **Phase 25: Similar Species Thumbnails** - CDN thumbnails and clickable links in the similar species section (completed 2026-05-20)
+
+</details>
 
 ## Phase Details
 
@@ -257,10 +260,10 @@ Plans:
 | 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
-| 25. Similar Species Thumbnails | v2.1 | 0/1 | Not started | - |
+| 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20*
 
 ## Backlog
 

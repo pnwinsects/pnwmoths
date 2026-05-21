@@ -77,4 +77,18 @@
 - CDN glossary images displayed in popovers when `image_filename` set in glossary.csv; graceful no-image fallback; definitions in `data-*` attributes keep Pagefind index clean
 - No-JS degradation via `<abbr title="...">` native browser tooltip preserved across all 1,364 species pages
 
+## v2.1 Species Fact Sheet Gaps (Shipped: 2026-05-20)
+
+**Phases completed:** 4 phases (Phases 22–25), 5 plans, 64 commits
+**Files changed:** 61 files, +19,241 / -8,632 LOC
+**Timeline:** 2026-04-27 → 2026-05-20 (23 days)
+
+**Key accomplishments:**
+
+- Phenology chart axis labels ("Month" X, "# Records" Y) with `beginAtZero` Y-floor — Chart.js `scales` block, no new imports (CHART-01, CHART-02)
+- 93px horizontal thumbnail strip replacing dot navigation; lightbox close fixed via sibling-walk `inert` pattern; lightbox z-index raised above Leaflet controls; `min-width: 0` on CSS grid children (PHOTO-01, PHOTO-02, PHOTO-03)
+- `filterRecords()` extended with county, collection, and elevation dimensions; 10 new TDD tests locked behavioral contract including null-elevation passthrough (FILT-01, FILT-02, FILT-03)
+- County/collection dropdowns and dual-handle elevation range slider in filter bar, wired to `pnwm-filter-change` event bus; phenology chart stays in DOM with zero-height bars on filter-returns-empty (FILT-04)
+- Horizontal scrollable similar-species thumbnail row (CDN thumbnails at 93px, gray `#d6d0bc` placeholder fallback, clickable links) inside `.species-photos` div below carousel — pure static HTML, scientific-name labels (SIM-01, SIM-02)
+
 ---

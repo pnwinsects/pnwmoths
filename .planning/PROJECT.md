@@ -2,22 +2,15 @@
 
 ## What This Is
 
-A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually (cream background, black header/footer, moth-strip banner, Google Fonts) and has a clean, tested build pipeline with 97 automated tests across the data pipeline, validation scripts, and glossary transform. As of v2.0, species prose automatically highlights glossary terms at build time with native Popover API tooltips showing definitions and CDN images.
+A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually and has a clean, tested build pipeline with 97 automated tests. Species fact sheets include a photo thumbnail carousel, phenology chart with axis labels, occurrence map with county/collection/elevation filters, and a similar species thumbnail row — all as Lit web components loading Parquet asynchronously, with full no-JS static degradation.
 
 ## Core Value
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
-## Current Milestone: v2.1 Species Fact Sheet Gaps
+## Current State: v2.1 shipped — planning next milestone
 
-**Goal:** Close the remaining UX and feature gaps between pnwmoths and the reference pnwinsects-app on species fact sheet pages.
-
-**Target features:**
-- Phenology chart axis labels (X: Month, Y: # Records)
-- Photo thumbnail carousel replacing dot navigation
-- Additional data filters: county, collection, elevation range
-- Similar species with thumbnail images
-- Fix lightbox close button (carry-forward bug)
+**v2.1 shipped:** 2026-05-20 — Species Fact Sheet Gaps closed (4 phases, 5 plans, 64 commits)
 
 ## Requirements
 
@@ -65,12 +58,15 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Graceful no-JS degradation for highlighted terms via `<abbr title="...">` native browser tooltip — v2.0 Phase 19
 - ✓ Glossary tooltip implemented as native HTML Popover API with ~89-line vanilla JS handler; no external library — v2.0 Phase 20
 - ✓ Pagefind search index unaffected by glossary annotations (definitions in `data-*` attributes, never in DOM at build time) — v2.0 Phase 20
+- ✓ Phenology chart X-axis "Month" and Y-axis "# Records" labels; Y-axis begins at 0 and scales to max monthly count — v2.1 Phase 22
+- ✓ Photo thumbnail strip (93px) replacing dot navigation; lightbox close button fixed; lightbox z-index above Leaflet controls — v2.1 Phase 23
+- ✓ County, collection, and elevation range filters wired to `pnwm-filter-change` event bus; map and phenology chart update in real time — v2.1 Phase 24
+- ✓ Similar species horizontal thumbnail row: CDN thumbnails (93px), gray placeholder fallback, clickable links, pure static HTML, placed below photo carousel — v2.1 Phase 25
 
 ### Active
 
 - [ ] Eleventy build time verified under 5 minutes on GitHub Actions (MAINT-03 — requires live CI observation)
 - [ ] Enable WebP conversion on bunny.net Optimizer (serving JPEG currently; toggle in Pull Zone → Optimizer → WebP conversion)
-- [ ] Fix close button on lightbox (pending todo from 2026-04-23)
 
 ### Out of Scope
 
@@ -97,6 +93,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 **v1.3 shipped:** 2026-04-20 — 12 phases total (Phases 8–12), all 12 requirements verified; 58 tests passing
 **v1.4 shipped:** 2026-04-22 — 17 phases total (Phases 13–17); 72/72 tests passing; 1,364 species pages; images on bunny.net CDN; LFS removed; full production dataset live
 **v2.0 shipped:** 2026-04-23 — 21 phases total (Phases 19–21); 97/97 tests passing; build-time glossary tooltips with native Popover API; 1,364 species pages with interactive glossary annotations
+**v2.1 shipped:** 2026-05-20 — 25 phases total (Phases 22–25); phenology chart axis labels + Y-floor; photo thumbnail carousel; county/collection/elevation filters; similar species thumbnail row; 61 files, +19,241 / -8,632 LOC
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -154,6 +151,14 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | substituteTerms() while-loop with pos cursor | Single-substitution-per-call pattern silently dropped positionally-earlier shorter terms in same text node | ✓ Good — v2.0; one exchangeChild call wraps all unseen terms per text node |
 | Native HTML Popover API (`popover="auto"`) over custom tooltip div | Browser-native; Escape + click-outside-to-close for free; no external library dependency | ✓ Good — v2.0; per-term popover elements injected at runtime, positioned via getBoundingClientRect |
 | Definitions in `data-definition` attribute (not DOM text) | Keeps definition text out of Pagefind index; popover content materialized only at runtime | ✓ Good — v2.0; QA-02 verified: Pagefind excerpts contain no definition text |
+| Chart.js v4 axis titles via `scales.{x,y}.title.{display,text}` | No Title plugin import needed; built into CategoryScale/LinearScale | ✓ Good — v2.1 Phase 22; `beginAtZero: true` preferred over `min: 0` for semantic clarity |
+| Sibling-walk `inert` for lightbox focus trap | `main.inert` self-blocks the Lit shadow DOM — walk from host to `<body>`, inert siblings at each level, leave ancestor chain interactive | ✓ Good — v2.1 Phase 23; also requires z-index 9000 to clear Leaflet controls at z-index 1000 |
+| `min-width: 0` on CSS grid `1fr` children | Without it, `1fr` cells expand past allocation to fit content (overflow into adjacent column) | ✓ Good — v2.1 Phase 23; applied to `.species-photos` and `.species-data` |
+| ResizeObserver guard: only update state when value changes | Setting reactive Lit property unconditionally inside ResizeObserver callback causes infinite re-render loop | ✓ Good — v2.1 Phase 23; guard pattern: `if (overflows !== this._stripOverflows) this._stripOverflows = overflows` |
+| Null elevation passthrough: no null guard on `r.elevation_ft` | `null < N` evaluates false in JS; null records pass through at default bounds (0, 15000) without an explicit guard | ✓ Good — v2.1 Phase 24; behavior explicitly tested in TDD suite |
+| Phenology chart stays in DOM with zero-height bars on filter-returns-empty | Removing the canvas destroys the Chart.js instance; re-inserting a detached canvas causes stale renderer errors | ✓ Good — v2.1 Phase 24 |
+| Elevation slider uses `String()` coercion on Lit `.value` binding | Lit treats `Number` type as a Lit property and loses reactive sync with the native range input | ✓ Good — v2.1 Phase 24 |
+| Similar species section inside `.species-photos` div under carousel | Visually adjacent to photos (user-directed); `.species-photos` div now contains both carousel and similar-species row | ✓ Good — v2.1 Phase 25; future phases must be aware of this combined structure |
 
 ## Evolution
 
@@ -173,4 +178,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-20 — v2.1 Species Fact Sheet Gaps started*
+*Last updated: 2026-05-20 — after v2.1 milestone*
