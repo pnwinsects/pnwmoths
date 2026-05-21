@@ -257,7 +257,20 @@ Plans:
   6. Transient failures (Dropbox API 429/5xx, network drops) retry with exponential backoff; permanent failures mark the manifest row `status: failed` with an error reason and the job continues — it does not crash
   7. The running job emits per-stage progress logs (counts, elapsed, ETA) suitable for tailing during a multi-hour run; the same log pattern is reusable by Phases 28 and 29
 
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+**Wave 1** (parallel)
+
+- [ ] 26-01-PLAN.md — Port spike parser into scripts/lib/parse-photo-filename.js with the three D-14 fixes (FIX #1 ≥2-char epithets, FIX #2 hyphenated epithets, FIX #3 provisional bucket) + unit tests covering every audit edge case (INGEST-02, INGEST-03)
+- [ ] 26-02-PLAN.md — Port spike list-dropbox.mjs into scripts/lib/dropbox-list.js as async generator; create scripts/lib/manifest.js with D-05 COLUMNS + readManifest/writeManifest/sortForInvestigation + tests (INGEST-01, INGEST-04, INGEST-05)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 26-03-PLAN.md — Build scripts/ingest-photos.js CLI composing the three libraries; classification cascade against data/species.csv; withRetry exponential backoff with DROPBOX_TOKEN redaction; logStage helper; resumability via content_hash Set; add npm aliases photos:ingest + photos:investigate (INGEST-01, INGEST-05, OPS-01, OPS-02, OPS-03)
+
+**Wave 3** *(blocked on Wave 2 completion; contains the human-verify checkpoint)*
+
+- [ ] 26-04-PLAN.md — Author _instructions/INGESTING_HIGH_RES_PHOTOS.md operator runbook; human-verify checkpoint runs real Dropbox ingest and commits data/species-photos-manifest.csv; verify bucket distribution within ±3% of spike audit (INGEST-01..05, OPS-01..03)
 
 ### Phase 27: Synonym Curation Pass
 
