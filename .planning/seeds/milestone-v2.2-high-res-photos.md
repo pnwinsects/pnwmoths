@@ -1,12 +1,21 @@
 ---
 title: Milestone v2.2 — High-resolution species photos
 planted_date: 2026-05-20
-trigger_condition: Dropbox audit spike report completed and reviewed (`.planning/spikes/dropbox-photo-audit/REPORT.md`); v2.1 milestone shipped or far enough along to not crowd planning capacity
-status: seed
+scope_confirmed_date: 2026-05-21
+trigger_condition: v2.1 milestone shipped (user explicitly chose 2026-05-21 to complete v2.1 phases 24 + 25 before starting v2.2)
+status: scope-confirmed-awaiting-v2.1-ship
 related:
   - note: high-res-species-photos-exploration
-  - spike: dropbox-photo-audit (pending)
+  - spike: 001-dropbox-photo-audit (VALIDATED)
+  - skill: spike-findings-pnwmoths
 ---
+
+## User-confirmed scope (2026-05-21)
+
+The v2.2 scope below was presented during `/gsd-new-milestone` and confirmed by the user. The user then chose to complete v2.1 (phases 24 + 25) before formally starting v2.2 to keep milestone history clean. When v2.1 ships, re-invoke `/gsd-new-milestone v2.2` and use this seed + the spike REPORT + the `spike-findings-pnwmoths` skill as the brief.
+
+**Project-level decision to update during v2.2 scoping:** The PROJECT.md Out of Scope table currently lists "Zoomify deep-zoom viewer — replaced by lightbox in v1". v2.2 inverts that for species pages. Move it out of the Out of Scope table at the start of v2.2.
+
 
 # Milestone v2.2 — High-resolution species photos
 
