@@ -82,31 +82,34 @@ These were considered for v2.2 but are deferred to later milestones:
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| INGEST-01 | — | (assigned by roadmapper) |
-| INGEST-02 | — | (assigned by roadmapper) |
-| INGEST-03 | — | (assigned by roadmapper) |
-| INGEST-04 | — | (assigned by roadmapper) |
-| INGEST-05 | — | (assigned by roadmapper) |
-| CURATE-01 | — | (assigned by roadmapper) |
-| CURATE-02 | — | (assigned by roadmapper) |
-| CURATE-03 | — | (assigned by roadmapper) |
-| TILE-01 | — | (assigned by roadmapper) |
-| TILE-02 | — | (assigned by roadmapper) |
-| TILE-03 | — | (assigned by roadmapper) |
-| UPLOAD-01 | — | (assigned by roadmapper) |
-| UPLOAD-02 | — | (assigned by roadmapper) |
-| UPLOAD-03 | — | (assigned by roadmapper) |
-| DATA-01 | — | (assigned by roadmapper) |
-| DATA-02 | — | (assigned by roadmapper) |
-| DATA-03 | — | (assigned by roadmapper) |
-| VIEWER-01 | — | (assigned by roadmapper) |
-| VIEWER-02 | — | (assigned by roadmapper) |
-| VIEWER-03 | — | (assigned by roadmapper) |
-| VIEWER-04 | — | (assigned by roadmapper) |
-| OPS-01 | — | (assigned by roadmapper) |
-| OPS-02 | — | (assigned by roadmapper) |
-| OPS-03 | — | (assigned by roadmapper) |
+| INGEST-01 | Phase 26 | Pending |
+| INGEST-02 | Phase 26 | Pending |
+| INGEST-03 | Phase 26 | Pending |
+| INGEST-04 | Phase 26 | Pending |
+| INGEST-05 | Phase 26 | Pending |
+| CURATE-01 | Phase 27 | Pending |
+| CURATE-02 | Phase 27 | Pending |
+| CURATE-03 | Phase 27 | Pending |
+| TILE-01 | Phase 28 | Pending |
+| TILE-02 | Phase 28 | Pending |
+| TILE-03 | Phase 28 | Pending |
+| UPLOAD-01 | Phase 29 | Pending |
+| UPLOAD-02 | Phase 29 | Pending |
+| UPLOAD-03 | Phase 29 | Pending |
+| DATA-01 | Phase 30 | Pending |
+| DATA-02 | Phase 30 | Pending |
+| DATA-03 | Phase 30 | Pending |
+| VIEWER-01 | Phase 31 | Pending |
+| VIEWER-02 | Phase 31 | Pending |
+| VIEWER-03 | Phase 31 | Pending |
+| VIEWER-04 | Phase 31 | Pending |
+| OPS-01 | Phase 26 | Pending |
+| OPS-02 | Phase 26 | Pending |
+| OPS-03 | Phase 26 | Pending |
+
+**Coverage:** 24/24 requirements mapped to phases ✓
 
 ---
 
 *Defined: 2026-05-21 — milestone v2.2 start, derived from seed + spike 001 report.*
+*Traceability filled: 2026-05-21 — roadmap created (Phases 26–31).*

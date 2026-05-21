@@ -12,6 +12,7 @@
 - ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
 - ✅ **v2.0 Glossary Tooltips** — Phases 19–21 (shipped 2026-04-23) — [archive](milestones/v2.0-ROADMAP.md)
 - ✅ **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (shipped 2026-05-20) — [archive](milestones/v2.1-ROADMAP.md)
+- 🚧 **v2.2 High-resolution species photos** — Phases 26–31 (in flight)
 
 ## Phases
 
@@ -95,6 +96,17 @@
 - [x] **Phase 25: Similar Species Thumbnails** - CDN thumbnails and clickable links in the similar species section (completed 2026-05-20)
 
 </details>
+
+### v2.2 High-resolution species photos (Phases 26–31) — IN FLIGHT
+
+**Milestone Goal:** Replace existing low-res species photos with OpenSeadragon deep-zoom high-res photos sourced from a ~200 GB Dropbox folder, via a resumable server-side processing pipeline.
+
+- [ ] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs)
+- [ ] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first
+- [ ] **Phase 28: DZI Tile Generation Pipeline** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config
+- [ ] **Phase 29: bunny.net Upload of Tile Pyramids** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit
+- [ ] **Phase 30: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements
+- [ ] **Phase 31: OpenSeadragon Viewer in Lightbox** - Phase 23 lightbox swaps in an OSD instance when `high_res_available` is true; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
 
 ## Phase Details
 
@@ -230,6 +242,95 @@ Plans:
 
 **UI hint**: yes
 
+### Phase 26: Dropbox Ingest, Filename Parser, and Manifest
+
+**Goal**: An operator can run a single command on the processing server that pulls high-res photos from the Dropbox shared folder, parses their filenames, persists each image's state in a durable manifest, and can be killed and restarted at any time without losing or re-downloading work
+**Depends on**: Phase 25 (v2.1 complete)
+**Requirements**: INGEST-01, INGEST-02, INGEST-03, INGEST-04, INGEST-05, OPS-01, OPS-02, OPS-03
+**Success Criteria** (what must be TRUE):
+
+  1. With a Dropbox token in the environment, the ingest job streams files from the v2.2 shared-folder URL via the Dropbox API (`shared_link` param on the `scl/fo` rlkey URL) one at a time — the operator never downloads the folder locally first
+  2. After the job processes the audit corpus, the manifest contains one row per file with at minimum `dropbox_path`, `content_hash`, `size`, `server_modified`, `filename_raw`, `binomial_raw`, `specimen_id`, `view` (D|V), `binomial_resolved`, `species_slug`, `match_bucket`, and `status`; the rows reproduce the audit's classification distribution (clean-match ≈ 77.5%, genus-only, likely-synonym, provisional, unparseable)
+  3. The parser cleanly handles every edge case surfaced by Spike 001: hyphenated `Genus-species` form, 2-character species epithets (`ni`, `ou`), hyphenated epithets (`v-alba`, `c-nigrum`), single-letter specimens and institutional accessions (`OSAC_*`, `WWUC*`), and dorsal/ventral views (`D`/`V`)
+  4. Provisional IDs (`n sp`, `sp`, `nr <species>`) parse successfully but land in a `provisional` bucket — they are never auto-promoted to `clean-match`
+  5. Killing the job mid-run and re-running it skips files whose `dropbox_path` + `content_hash` already exist in the manifest (no re-download, no duplicate rows), and resumes from the next unprocessed file without manual reconciliation
+  6. Transient failures (Dropbox API 429/5xx, network drops) retry with exponential backoff; permanent failures mark the manifest row `status: failed` with an error reason and the job continues — it does not crash
+  7. The running job emits per-stage progress logs (counts, elapsed, ETA) suitable for tailing during a multi-hour run; the same log pattern is reusable by Phases 28 and 29
+
+**Plans**: TBD
+
+### Phase 27: Synonym Curation Pass
+
+**Goal**: A curator can convert the spike's bounded "needs investigation" workload (~30–80 unique unresolved binomials) into committed `data/species-synonyms.csv` decisions and rerun classification on the existing manifest to reclassify affected rows without re-downloading any source files
+**Depends on**: Phase 26
+**Requirements**: CURATE-01, CURATE-02, CURATE-03
+**Success Criteria** (what must be TRUE):
+
+  1. A flat `data/species-synonyms.csv` file (committed to the repo) maps outdated binomials to current species slugs — e.g. `Grammia nevadensis → Apantesis nevadensis` — and is editable by a non-technical curator following the `_instructions/` pattern
+  2. Re-running classification against an updated `species-synonyms.csv` reclassifies affected manifest rows from `genus-only` / `likely-synonym` to `resolved-via-synonym`, updates `binomial_resolved` and `species_slug`, and does not redownload the source TIFFs
+  3. The manifest exposes a readable "needs investigation" view (rows in `genus-only`, `likely-synonym`, `provisional`, or `unparseable` buckets) sorted by frequency — the curator opens it and immediately sees the highest-impact unresolved binomials at the top (matching the spike's top-unmatched list: `Grammia`, `Eupithecia`, `Smerinthus ophthalmica`, etc.)
+  4. After one curation pass against the audit residue, the clean-or-resolved match rate measurably rises (target ≥ 95%, up from the 77.5% baseline) and the count of rows still flagged for investigation falls
+
+**Plans**: TBD
+
+### Phase 28: DZI Tile Generation Pipeline
+
+**Goal**: For each manifest row in `status: downloaded`, the pipeline produces a DZI tile pyramid on the datacenter server using `libvips`, advances the row to `status: tiled`, and reruns are idempotent — tiles are reproducible from a committed configuration
+**Depends on**: Phase 27
+**Requirements**: TILE-01, TILE-02, TILE-03
+**Success Criteria** (what must be TRUE):
+
+  1. For each manifest row with `status: downloaded`, `vips dzsave` produces a DZI tile pyramid from the source TIFF on the datacenter server; the resulting directory layout is the standard DZI `{prefix}_files/{level}/{col}_{row}.{fmt}` plus `{prefix}.dzi` descriptor
+  2. The tile job is idempotent per image: rerunning over an already-tiled row leaves the manifest unchanged and does not retile (status guard checked before invoking `vips`)
+  3. Tile parameters (tile size, overlap, output format, JPEG quality) live in a single committed pipeline-config file; changing them and rerunning regenerates tiles deterministically — two runs with the same config produce byte-identical or semantically-equivalent output
+  4. Successful tiling advances the manifest row from `downloaded` to `tiled` with no other state changes; tile-stage progress logs follow the Phase 26 pattern
+
+**Plans**: TBD
+
+### Phase 29: bunny.net Upload of Tile Pyramids
+
+**Goal**: For each manifest row in `status: tiled`, the pipeline uploads its tile directory to bunny.net Storage at the agreed URL convention, advances the row to `status: uploaded`, and bulk-upload is preceded by an explicit storage-footprint sanity check against bunny.net pricing
+**Depends on**: Phase 28
+**Requirements**: UPLOAD-01, UPLOAD-02, UPLOAD-03
+**Success Criteria** (what must be TRUE):
+
+  1. For each manifest row with `status: tiled`, the pipeline uploads the entire tile directory (`.dzi` descriptor + `{prefix}_files/`) to bunny.net Storage via the Phase 13 HTTP PUT pattern (`BUNNY_API_KEY` env), under the path convention `species-tiles/{species-slug}/{specimen_id}-{view}/`
+  2. The upload step is idempotent per image: rerunning skips already-uploaded rows (`status: uploaded`); partial uploads recover on rerun without manual cleanup
+  3. Before the first bulk run, an operator-runnable check produces a measured/projected bunny.net storage footprint (expected ~1 TB on ~204 GB source — roughly 5× DZI overhead) and the operator records the pricing sanity-check outcome in the milestone log
+  4. Successful upload advances the manifest row from `tiled` to `uploaded`; upload-stage logs follow the Phase 26 progress/retry pattern; tile URLs verifiably resolve through the Pull Zone (`{{ cdnBaseUrl }}/species-tiles/...`)
+
+**Plans**: TBD
+
+### Phase 30: `data/species-photos.json` Build Integration
+
+**Goal**: At Eleventy build time, the manifest's `uploaded` rows materialize into a committed-or-built `data/species-photos.json` that templates can consume per species; species with high-res photos render only their high-res entries (legacy low-res rows from `images.csv` are deprecated for those species)
+**Depends on**: Phase 29
+**Requirements**: DATA-01, DATA-02, DATA-03
+**Success Criteria** (what must be TRUE):
+
+  1. The build pipeline derives `data/species-photos.json` from the manifest's `uploaded` rows; each species entry carries CDN tile path (`species-tiles/{species-slug}/{specimen_id}-{view}/`), `specimen_id`, `view`, and the metadata needed by the OSD viewer — following the `data/plates.json` committed-manifest pattern from Phase 18
+  2. Each species record in the Eleventy data tree (the data file the species template iterates) carries a `high_res_available` boolean so templates branch viewer choice in a single conditional without re-querying the manifest
+  3. For a species where `high_res_available` is true, the build does not render the legacy low-res entries from `images.csv` for that species — there is no double rendering of low-res alongside high-res
+  4. `npm run build` produces the same page count it did at the end of v2.1 (1,364 species pages), now with high-res photo entries available on species that have them
+
+**Plans**: TBD
+
+### Phase 31: OpenSeadragon Viewer in Lightbox
+
+**Goal**: When a species has high-res photos available, opening its photo lightbox launches an OpenSeadragon pan/zoom viewer (with specimen/view metadata visible inline); species without high-res still get the existing static-image lightbox, with no regression to the Phase 23 carousel
+**Depends on**: Phase 30
+**Requirements**: VIEWER-01, VIEWER-02, VIEWER-03, VIEWER-04
+**Success Criteria** (what must be TRUE):
+
+  1. On a species page with `high_res_available: true`, clicking a thumbnail in the Phase 23 carousel opens the lightbox hosting an OpenSeadragon instance that loads the matching photo's DZI tiles from the CDN; pan, zoom, and home-reset work
+  2. On a species page with `high_res_available: false`, clicking a thumbnail opens the existing Phase 23 lightbox with the static `<img>` render — no OSD instance is attached and no regression appears
+  3. The thumbnail carousel (hover, click, keyboard, touch, ResizeObserver overflow detection) is unchanged across both code paths — OSD swaps only into the lightbox layer, not the carousel
+  4. When a species has multiple high-res photos, the OSD viewer surfaces the current photo's `specimen_id` and `view` (D/V) inline so a visitor or curator can tell which physical specimen is being viewed
+
+**Plans**: TBD
+
+**UI hint**: yes
+
 ---
 
 ## Progress
@@ -261,9 +362,15 @@ Plans:
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
+| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 0/0 | Not started | — |
+| 27. Synonym Curation Pass | v2.2 | 0/0 | Not started | — |
+| 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
+| 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
+| 30. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
+| 31. OpenSeadragon Viewer in Lightbox | v2.2 | 0/0 | Not started | — |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21*
 
 ## Backlog
 

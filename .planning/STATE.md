@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: planning
-last_updated: "2026-05-21T15:33:06.862Z"
+last_updated: "2026-05-21T16:00:00.000Z"
 last_activity: 2026-05-21
 progress:
-  total_phases: 0
+  total_phases: 6
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -17,39 +17,41 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-19 after v2.0 milestone)
+See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Milestone v2.1 COMPLETE — all phases done
+**Current focus:** Milestone v2.2 — High-resolution species photos. Roadmap defined (Phases 26–31); awaiting Phase 26 planning.
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 26 — Dropbox Ingest, Filename Parser, and Manifest (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-05-21 — Milestone v2.2 started
+Status: Roadmap defined; Phase 26 awaiting `/gsd:plan-phase 26`
+Last activity: 2026-05-21 — v2.2 roadmap created (6 phases, 24 requirements mapped)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 15 (across v1.0–v1.2), 10 (v1.3)
+- Total plans completed: 15 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1) = 48 total
 - Average duration: unknown
 - Total execution time: unknown
 
-**By Phase:**
+**By Milestone:**
 
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| v1.0–v1.2 | 15 | - | - |
-| 11-01 | 1 | 91s | 91s |
-| 11-02 | 1 | 78s | 78s |
-| 11-03 | 2 | 47s | 47s |
+| Milestone | Phases | Plans | Shipped |
+|-----------|--------|-------|---------|
+| v1.0–v1.2 | 7 | 15 | 2026-04-18 |
+| v1.3 | 5 | 10 | 2026-04-20 |
+| v1.4 | 5 | 13 | 2026-04-22 |
+| v2.0 | 3 | 5 | 2026-04-23 |
+| v2.1 | 4 | 5 | 2026-05-20 |
+| v2.2 | 6 (planned) | TBD | in flight |
 
 **Recent Trend:**
 
-- v1.4: shipped 2026-04-22
-- Trend: —
+- v2.1: shipped 2026-05-20 (4 phases, 5 plans, 64 commits, 23 days)
+- v2.2: kicked off 2026-05-21 (6 phases planned, server-side pipeline + viewer work)
 
 *Updated after each plan completion*
 
@@ -60,19 +62,15 @@ Last activity: 2026-05-21 — Milestone v2.2 started
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- v2.0 research: Use `node-html-parser` (not JSDOM/cheerio) for build-time text-node traversal — ~10x faster, zero native dependencies, sufficient API
-- v2.0 research: Load glossary.csv via `csv-parse` (already a project dependency) at Eleventy startup — not via DuckDB, to avoid a second DuckDB lifecycle
-- v2.0 research: Initialize `seen` Set inside the transform callback per invocation, never at module scope — shared state causes silent first-occurrence failures across pages
-- v2.0 research: Use `node-html-parser` querySelectorAll + text-node walk, never regex on raw HTML string — regex on raw HTML corrupts attributes silently
-- v2.0 research: Sort glossary terms longest-first before matching — prevents partial matches ("forewing" consumed before "wing")
-- v2.0 research: Use `escapeRegex` on all terms before constructing RegExp — terms like `1A+2A`, `W-mark`, `CuA1` break match patterns without escaping
-- v2.0 research: Use Popover API (browser-native, Baseline April 2025) — no external tooltip library needed
-- v2.0 research: Definition text lives in `data-definition` attribute on `<abbr>`, not in DOM — keeps it out of Pagefind index; popover `<span>` materialized only at runtime via JS
-- v1.4 research: rclone via FTP is the only viable upload tool — bunny.net S3 compatibility is in closed preview (not GA as of April 2026)
-- v1.4 research: `CDN_BASE_URL` must be the Pull Zone URL (`{zone}.b-cdn.net`), NOT the Storage Zone URL (`storage.bunnycdn.com`)
-- v1.3 decision (carry): Raw `/images/...` paths in templates (not `| url` filter) — Vite HTML transformer double-prefixes asset URLs when Eleventy `| url` filter has already added pathPrefix
-- v2.1 Phase 24: Phenology chart always stays in the DOM with zero-height bars rather than being conditionally removed — avoids stale Chart.js instance on detached canvas
-- v2.1 Phase 24: Elevation slider uses String() coercion on .value binding — required to prevent Lit from treating Number as a Lit property and losing reactive sync with the range input
+- v2.2 locked (exploration): Local manifest (SQLite/JSON) is source of truth — durable per-image status; survives restarts; seeds `data/species-photos.json`
+- v2.2 locked (exploration): Dropbox is a superset; match → replace existing low-res; unmatched → manual investigation (no auto-drop)
+- v2.2 locked (exploration): Folder layout flat with encoded filenames — convention `Genus species-{specimen}-{view}.{ext}` (same as Phase 13 photos)
+- v2.2 locked (exploration): OpenSeadragon replaces the Phase 23 lightbox host when high-res is available; carousel unchanged
+- v2.2 spike 001 (VALIDATED): 5,000 TIFFs / 204.6 GB; 77.5% clean match; 93.2% species coverage; ~30–80 unique unresolved binomials need curation; 100% TIFF source; ~1 TB tile output expected
+- v2.2 spike 001: Parser extensions required — 2-char epithets (`ni`, `ou`), hyphenated epithets (`v-alba`, `c-nigrum`), `Genus-species` hyphen, `OSAC_*`/`WWUC*` accession IDs, provisional bucket for `n sp`/`sp`/`nr` patterns
+- v2.2 spike 001: Manifest carries `specimen_id`, `view` (D/V), `binomial_raw`, `binomial_resolved`, `match_bucket`, `species_slug`, `dropbox_path`, `content_hash`, `size`, `server_modified`, `status`
+- v2.1 Phase 24 (carry): Phenology chart always stays in the DOM with zero-height bars rather than being conditionally removed
+- v2.1 Phase 24 (carry): Elevation slider uses String() coercion on .value binding to prevent Lit from treating Number as a Lit property
 
 ### Roadmap Evolution
 
@@ -83,10 +81,17 @@ Recent decisions affecting current work:
 - Phase 23 added: Photo Thumbnail Carousel (v2.1)
 - Phase 24 added: County, Collection, and Elevation Filters (v2.1)
 - Phase 25 added: Similar Species Thumbnails (v2.1)
+- Phase 26 added: Dropbox Ingest, Filename Parser, and Manifest (v2.2)
+- Phase 27 added: Synonym Curation Pass (v2.2)
+- Phase 28 added: DZI Tile Generation Pipeline (v2.2)
+- Phase 29 added: bunny.net Upload of Tile Pyramids (v2.2)
+- Phase 30 added: `data/species-photos.json` Build Integration (v2.2)
+- Phase 31 added: OpenSeadragon Viewer in Lightbox (v2.2)
 
 ### Pending Todos
 
-None.
+- PROJECT.md Out of Scope: remove the "Zoomify deep-zoom viewer — replaced by lightbox in v1" line (or replace its strike-through with an explicit v2.2 inversion note) before Phase 26 planning
+- Phases 26–31 all need plans drafted via `/gsd:plan-phase`
 
 ### Blockers/Concerns
 
@@ -98,17 +103,16 @@ Items acknowledged and carried forward:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| Tech debt | MAINT-03: build time under 5 min unverified | Carry forward — Phase 19 should benchmark transform cost against this target | v1.2 |
+| Tech debt | MAINT-03: build time under 5 min unverified | Carry forward — Phase 30 build adds species-photos.json materialization; check against target | v1.2 |
 | Tech debt | No automated visual regression tests | Carry forward | v1.2 |
 | Tech debt | WR-01–03: test cleanup paths could be more robust | Carry forward | v1.2 |
 | CDN | GitHub LFS storage quota reclaim | Accept billing; out of scope | v1.4 |
 | CDN | WebP not yet active on bunny.net Optimizer (serving JPEG) | Deferred | v1.4 |
-| UAT/Verify | Phase 13 UAT + verification (human_needed) | Acknowledged at v2.0 close — v1.4 shipped | v2.0 |
-| UAT/Verify | Phase 16 verification (human_needed) | Acknowledged at v2.0 close — v1.4 shipped | v2.0 |
-| Quick task | species-accounts-migration (untraceable) | Acknowledged — file not found; assumed obsolete | v2.0 |
+| v2.2 | `*custom` Dropbox sub-folder | Deferred until contents understood — out of scope for v2.2 | v2.2 |
+| v2.2 | External taxonomic API (GBIF/ITIS) synonym auto-resolution | Manual `species-synonyms.csv` is faster for ~30–80 decisions; revisit if residue stays large | v2.2 |
 
 ## Session Continuity
 
-Last session: 2026-05-20T17:40:00Z
-Stopped at: Phase 25 plan 01 complete — human sign-off received
-Resume file: .planning/phases/25-similar-species-thumbnails/25-01-SUMMARY.md
+Last session: 2026-05-21T16:00:00Z
+Stopped at: v2.2 roadmap created — 6 phases defined (26–31), all 24 requirements mapped, ready for `/gsd:plan-phase 26`
+Resume file: .planning/ROADMAP.md (Phase 26 Details section)
