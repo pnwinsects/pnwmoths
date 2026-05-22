@@ -4,8 +4,8 @@ milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
 stopped_at: Phase 26 context gathered
-last_updated: "2026-05-22T03:41:26.378Z"
-last_activity: 2026-05-22 -- Phase 26 planning complete
+last_updated: "2026-05-22T03:45:59.935Z"
+last_activity: 2026-05-22 -- Phase 26 execution started
 progress:
   total_phases: 13
   completed_phases: 0
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Milestone v2.2 — High-resolution species photos. Roadmap defined (Phases 26–31); awaiting Phase 26 planning.
+**Current focus:** Phase 26 — dropbox-ingest-filename-parser-and-manifest
 
 ## Current Position
 
-Phase: 26 — Dropbox Ingest, Filename Parser, and Manifest (not started)
-Plan: —
-Status: Ready to execute
-Last activity: 2026-05-22 -- Phase 26 planning complete
+Phase: 26 (dropbox-ingest-filename-parser-and-manifest) — EXECUTING
+Plan: 1 of 4
+Status: Executing Phase 26
+Last activity: 2026-05-22 -- Phase 26 execution started
 
 ## Performance Metrics
 

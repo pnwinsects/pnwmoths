@@ -261,8 +261,8 @@ Plans:
 Plans:
 **Wave 1** (parallel)
 
-- [ ] 26-01-PLAN.md — Port spike parser into scripts/lib/parse-photo-filename.js with the three D-14 fixes (FIX #1 ≥2-char epithets, FIX #2 hyphenated epithets, FIX #3 provisional bucket) + unit tests covering every audit edge case (INGEST-02, INGEST-03)
-- [ ] 26-02-PLAN.md — Port spike list-dropbox.mjs into scripts/lib/dropbox-list.js as async generator; create scripts/lib/manifest.js with D-05 COLUMNS + readManifest/writeManifest/sortForInvestigation + tests (INGEST-01, INGEST-04, INGEST-05)
+- [x] 26-01-PLAN.md — Port spike parser into scripts/lib/parse-photo-filename.js with the three D-14 fixes (FIX #1 ≥2-char epithets, FIX #2 hyphenated epithets, FIX #3 provisional bucket) + unit tests covering every audit edge case (INGEST-02, INGEST-03)
+- [x] 26-02-PLAN.md — Port spike list-dropbox.mjs into scripts/lib/dropbox-list.js as async generator; create scripts/lib/manifest.js with D-05 COLUMNS + readManifest/writeManifest/sortForInvestigation + tests (INGEST-01, INGEST-04, INGEST-05)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -375,7 +375,7 @@ Plans:
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 0/0 | Not started | — |
+| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 2/4 | In Progress|  |
 | 27. Synonym Curation Pass | v2.2 | 0/0 | Not started | — |
 | 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
 | 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
