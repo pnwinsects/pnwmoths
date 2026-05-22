@@ -33,7 +33,7 @@ Out of scope for Phase 26: downloading TIFF bytes, tile generation, bunny.net up
   Phase 26 populates everything except `last_error` (which only fills in on retry failures). `status` for every Phase 26 row is `discovered`.
 
 ### Cache lifecycle (cross-phase decision, locked here)
-- **D-06:** Pipeline-wide cache strategy is **stream**: download → tile → upload → delete original AND delete tile dir, per-image. There is no other choice — this server has 48 GB free disk, the source is 204 GB, the tile output is ~1 TB.
+- **D-06 [informational, cross-phase]:** Pipeline-wide cache strategy is **stream**: download → tile → upload → delete original AND delete tile dir, per-image. There is no other choice — this server has 48 GB free disk, the source is 204 GB, the tile output is ~1 TB. *(Phase 26 does not download bytes; this decision binds Phase 28/29 — see D-07.)*
 - **D-07:** Phase 26 itself is **metadata-only**. It does not touch the Dropbox `/2/files/download` endpoint at all; only `/2/files/list_folder` + `/2/files/list_folder/continue`. The `files.metadata.read` scope is sufficient for the whole phase; `sharing.read` / `files.content.read` scopes are a Phase 28 concern.
 - **D-08:** Target server is **this machine** (`maderas.amandrai.net`): Ubuntu, 79 GB total disk / 48 GB free, 3.8 GiB RAM, 2 cores, Node v24.12.0 (matches `.nvmrc`), `libvips` NOT yet installed. The exploration note's "datacenter server" framing was a placeholder; the real constraints belong here.
 - **D-09:** Run shape is **multi-day continuous in tmux**. The pipeline (whole milestone, not just Phase 26) is built to be killed and restarted; manifest is the recovery state. No `--max-images` or `--genus X` flags in v2.2.
