@@ -22,6 +22,7 @@
 
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 
 import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/parse-photo-filename.js';
@@ -35,6 +36,7 @@ import { readManifest, writeManifest, sortForInvestigation } from './lib/manifes
 
 const MANIFEST_PATH = resolve('data/species-photos-manifest.csv');
 const SPECIES_CSV = resolve('data/species.csv');
+const SYNONYMS_CSV = resolve('data/species-synonyms.csv');
 
 const DROPBOX_TOKEN = process.env.DROPBOX_TOKEN ?? '';
 const DROPBOX_SHARE_URL = process.env.DROPBOX_SHARE_URL
@@ -144,6 +146,45 @@ async function loadSpecies(csvPath) {
 }
 
 /**
+ * Load `data/species-synonyms.csv` and build the synonym lookup used by
+ * classify()'s pre-pass (Phase 27, D-04, D-09). First-run safe: returns an
+ * empty Map when the file does not exist — matching the readManifest pattern
+ * in scripts/lib/manifest.js:73-77 (existsSync guard, empty-collection default).
+ *
+ * Each row is resolved at load time so the pre-pass is a single Map.get() per
+ * row at classification time. Rows whose `to_species_slug` is not present in
+ * species.bySlug are dropped and a `synonym-warn` line is logged once (D-04) —
+ * NOT once per manifest row.
+ *
+ * @param {string} csvPath  Absolute path to species-synonyms.csv.
+ * @param {{ bySlug: Map }} species  Species fixture from loadSpecies().
+ * @returns {Promise<Map<string, { binomial_resolved: string, species_slug: string }>>}
+ *   Map keyed by from_binomial (lowercased, space-separated) to resolved target info.
+ */
+export async function loadSynonyms(csvPath, species) {
+  if (!existsSync(csvPath)) return new Map();
+  const raw = await readFile(csvPath);
+  const records = parse(raw, { columns: true, skip_empty_lines: true });
+  const synonyms = new Map();
+  for (const r of records) {
+    const from = (r.from_binomial || '').trim().toLowerCase();
+    const to = (r.to_species_slug || '').trim().toLowerCase();
+    if (!from || !to) continue;
+    const target = species.bySlug.get(to);
+    if (!target) {
+      // D-04: emit one warn line at load time; drop the orphan row from the map.
+      logStage('', 'synonym-warn', 'target-not-in-species-csv', `${from} → ${to}`);
+      continue;
+    }
+    // Reconstruct the resolved binomial from species.csv so it matches the
+    // lowercase "genus species" form Phase 26 emits for clean-match rows.
+    const resolvedBinomial = `${(target.genus || '').toLowerCase()} ${(target.species || '').toLowerCase()}`.trim();
+    synonyms.set(from, { binomial_resolved: resolvedBinomial, species_slug: to });
+  }
+  return synonyms;
+}
+
+/**
  * Return the lowercased file extension (without the dot) from a filename,
  * or '' if there is no dot. Ported from spike parse-classify.mjs:129-132.
  */
@@ -154,8 +195,12 @@ function fileExt(name) {
 
 /**
  * Match cascade. Order (locked by the spike-findings skill reference
- * §"Match cascade", with the D-14 FIX #3 provisional short-circuit prepended):
+ * §"Match cascade", with the D-14 FIX #3 provisional short-circuit prepended,
+ * and the Phase 27 synonym pre-pass inserted before both):
  *
+ *  −1. resolved-via-synonym — synonyms.has(binomialFromParser)  (Phase 27, D-04,
+ *                      D-06; runs BEFORE provisional/unparseable so any non-empty
+ *                      binomial can be re-routed by a curator synonyms.csv entry)
  *   0. provisional   — bucketHintFromParser === 'provisional'  (FIX #3, MUST NOT
  *                      be auto-promoted; CONTEXT.md success criterion #4)
  *   1. clean-match   — binomial in byBinomial
@@ -170,7 +215,20 @@ function fileExt(name) {
  *
  * Returns: { match_bucket, binomial_resolved, species_slug }
  */
-function classify({ binomialFromParser, bucketHintFromParser }, species) {
+export function classify({ binomialFromParser, bucketHintFromParser }, species, synonyms) {
+  // −1. Synonym pre-pass (Phase 27, D-04, D-06). Applies BEFORE the provisional
+  //     and unparseable short-circuits so a curator can re-route any row with
+  //     a non-empty binomial_raw — including provisional and unparseable rows.
+  //     The lookup key is binomialFromParser (already-normalized lowercase
+  //     'genus species' from the parser, or the row's binomial_raw on the
+  //     RESORT_ONLY path). D-06 widens the routable buckets: provisional and
+  //     unparseable rows with a non-empty binomial are eligible for synonym
+  //     promotion.
+  if (synonyms && binomialFromParser && synonyms.has(binomialFromParser)) {
+    const { binomial_resolved, species_slug } = synonyms.get(binomialFromParser);
+    return { match_bucket: 'resolved-via-synonym', binomial_resolved, species_slug };
+  }
+
   // 0. Provisional short-circuit — FIX #3. The parser's bucketHint must not be
   //    overridden even if a binomial-like substring would otherwise match.
   if (bucketHintFromParser === 'provisional') {
@@ -265,12 +323,37 @@ async function* listSharedFolderWithRetry(shareUrl, token) {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  // --- RESORT_ONLY: re-sort the existing manifest in place; no Dropbox calls. ---
+  // --- RESORT_ONLY: re-classify against current synonyms.csv + re-sort; no Dropbox calls. ---
+  // D-05: photos:investigate is the curator's daily-use command — edit synonyms.csv,
+  // run this, manifest reclassified + re-sorted. No source TIFFs are downloaded.
   if (RESORT_ONLY) {
+    const species = await loadSpecies(SPECIES_CSV);
+    const synonyms = await loadSynonyms(SYNONYMS_CSV, species);
     const existing = await readManifest(MANIFEST_PATH);
+
+    // Re-classify each row using its existing binomial_raw (not the parser).
+    // D-06: any non-empty binomial_raw is routable through synonyms.csv.
+    let promoted = 0;
+    for (const row of existing) {
+      const binomial = (row.binomial_raw || '').toLowerCase();
+      if (binomial && synonyms.has(binomial)) {
+        const { binomial_resolved, species_slug } = synonyms.get(binomial);
+        // Idempotency guard: only count and log an actual change.
+        if (row.match_bucket !== 'resolved-via-synonym' || row.species_slug !== species_slug) {
+          row.match_bucket = 'resolved-via-synonym';
+          row.binomial_resolved = binomial_resolved;
+          row.species_slug = species_slug;
+          promoted++;
+          logStage(row.content_hash, 'reclassify', 'resolved-via-synonym', `${binomial} → ${species_slug}`);
+        }
+      }
+    }
+
+    // L-03: sortForInvestigation is unchanged — resolved-via-synonym rows trail
+    // with clean-match rows in the "not-needs-investigation" partition.
     const sorted = sortForInvestigation(existing);
     await writeManifest(MANIFEST_PATH, sorted);
-    console.log(`[ingest-photos] re-sorted manifest; ${sorted.length} rows`);
+    console.log(`[ingest-photos] re-sorted manifest; ${sorted.length} rows; ${promoted} promoted to resolved-via-synonym`);
     return;
   }
 
@@ -307,6 +390,8 @@ async function main() {
   // --- Full run ---
   const species = await loadSpecies(SPECIES_CSV);
   console.log(`[ingest-photos] loaded ${species.byBinomial.size} species records from ${SPECIES_CSV}`);
+  const synonyms = await loadSynonyms(SYNONYMS_CSV, species);
+  console.log(`[ingest-photos] loaded ${synonyms.size} synonyms from ${SYNONYMS_CSV}`);
 
   const existing = await readManifest(MANIFEST_PATH);
   const seen = new Set(existing.map((r) => r.content_hash));
@@ -374,13 +459,14 @@ async function main() {
         const parsed = extractBinomial(entry.name);
         const parsedSV = parseSpecimenAndView(entry.name);
 
-        // Classify against species.csv (with FIX #3 provisional short-circuit).
+        // Classify against species.csv (with Phase 27 synonym pre-pass + FIX #3 provisional short-circuit).
         const { match_bucket, binomial_resolved, species_slug } = classify(
           {
             binomialFromParser: parsed.binomial,
             bucketHintFromParser: parsed.bucketHint,
           },
-          species
+          species,
+          synonyms,
         );
 
         const row = {
