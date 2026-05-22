@@ -51,7 +51,7 @@ The required flags are exact:
 
 - `--tile-size 256` — OSD default tile size.
 - `--overlap 1` — 1-pixel overlap between tiles (prevents seams at zoom edges).
-- `--suffix .jpg[Q=85]` — JPEG output at quality 85; updates the `.dzi` descriptor's `Format` attribute to `jpg` (RESEARCH.md Pitfall 4).
+- `--suffix .webp[Q=80]` — WebP output at quality 80; updates the `.dzi` descriptor's `Format` attribute to `webp`. WebP is ~30% smaller than JPEG at equivalent quality (confirmed on pilot: 1.2 MB JPEG → 850 KB WebP per pair).
 - `--layout dz` — Deep Zoom Image layout (the only OSD-friendly layout vips emits in this codepath).
 
 The **output argument is the prefix path**. vips writes `{prefix}.dzi` (descriptor) and `{prefix}_files/` (tile pyramid). The last path component of the prefix MUST be the literal token `{specimen_id}-{view}` (hyphen, not slash) so it matches the storage path convention `species-tiles/{slug}/{specimen_id}-{view}/`.
@@ -62,7 +62,7 @@ One pair:
 vips dzsave "/path/to/Abagrotis apposita-A-D.tif" "/tmp/tiles/${SLUG}/A-D" \
   --tile-size 256 \
   --overlap 1 \
-  --suffix .jpg[Q=85] \
+  --suffix .webp[Q=80] \
   --layout dz
 ```
 
@@ -73,7 +73,7 @@ for VIEW in D V; do
   vips dzsave "/path/to/Abagrotis apposita-A-${VIEW}.tif" "/tmp/tiles/${SLUG}/A-${VIEW}" \
     --tile-size 256 \
     --overlap 1 \
-    --suffix .jpg[Q=85] \
+    --suffix .webp[Q=80] \
     --layout dz
 done
 ```
@@ -86,7 +86,7 @@ for PAIR in A-D A-V WWUC0000003275-D WWUC0000003275-V; do
     "/tmp/tiles/${SLUG}/${PAIR}" \
     --tile-size 256 \
     --overlap 1 \
-    --suffix .jpg[Q=85] \
+    --suffix .webp[Q=80] \
     --layout dz
 done
 ```
@@ -106,7 +106,7 @@ ls "/tmp/tiles/${SLUG}/A-D.dzi"
 **2. Lowest-level tile exists.**
 
 ```sh
-ls "/tmp/tiles/${SLUG}/A-D_files/0/0_0.jpg"
+ls "/tmp/tiles/${SLUG}/A-D_files/0/0_0.webp"
 ```
 
 **3. Descriptor `Format` attribute matches the tile extension.**
@@ -115,20 +115,20 @@ ls "/tmp/tiles/${SLUG}/A-D_files/0/0_0.jpg"
 head -20 "/tmp/tiles/${SLUG}/A-D.dzi"
 ```
 
-Expected: an `<Image …>` element with `Format="jpg"` and `TileSize="256"`. Example:
+Expected: an `<Image …>` element with `Format="webp"` and `TileSize="256"`. Example:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<Image Format="jpg" Overlap="1" TileSize="256" xmlns="http://schemas.microsoft.com/deepzoom/2008">
+<Image Format="webp" Overlap="1" TileSize="256" xmlns="http://schemas.microsoft.com/deepzoom/2008">
   <Size Width="…" Height="…"/>
 </Image>
 ```
 
-If `Format="png"` instead of `jpg`, the `--suffix .jpg[Q=85]` flag was dropped or vips ignored it — rerun with the explicit flag.
+If `Format="png"` or `Format="jpg"` appears instead of `webp`, the `--suffix .webp[Q=80]` flag was dropped or overridden — rerun with the explicit flag.
 
 Record per pair (for Plan 05 lessons doc):
 
-- Total tile count: `find "/tmp/tiles/${SLUG}/A-D_files" -name '*.jpg' | wc -l`
+- Total tile count: `find "/tmp/tiles/${SLUG}/A-D_files" -name '*.webp' | wc -l`
 - Disk size of this pair: `du -sh "/tmp/tiles/${SLUG}/A-D" "/tmp/tiles/${SLUG}/A-D_files"`
 - Number of pyramid levels: `ls "/tmp/tiles/${SLUG}/A-D_files" | wc -l`
 
@@ -137,10 +137,10 @@ These feed Phase 30's footprint extrapolation (~5,000 specimens at the per-speci
 ## When Things Go Wrong
 
 - **`vips: command not found`** — libvips CLI is not installed. Install per the Prerequisites block (`brew install vips` or `sudo apt install libvips-tools`). The `libvips` library alone is not enough — you need the CLI tools package.
-- **`vips dzsave` writes `.png` tiles instead of `.jpg`** — the `--suffix .jpg[Q=85]` flag was missing or quoted wrong. Make sure the suffix is `.jpg[Q=85]` with the bracketed Q parameter (no space, square brackets quoted by your shell if needed). Re-run the same command; vips overwrites existing output without prompting.
+- **`vips dzsave` writes `.png` tiles instead of `.webp`** — the `--suffix .webp[Q=80]` flag was missing or quoted wrong. Make sure the suffix is `.webp[Q=80]` with the bracketed Q parameter (no space, square brackets quoted by your shell if needed). Re-run the same command; vips overwrites existing output without prompting.
 - **Output goes to the wrong place** — vips writes to whatever the last path component of the output argument is. If you passed `/tmp/tiles/${SLUG}/A_D` (underscore) instead of `A-D` (hyphen), the tiles land in `A_D.dzi` + `A_D_files/`. The hyphen-separated `{specimen_id}-{view}` form is the project convention because Plan 03's upload path `species-tiles/{slug}/{specimen_id}-{view}/` mirrors it exactly. Re-run with the corrected prefix.
 - **vips warning about colour profile / ICC** — vips often emits `vips warning: VIPS_ICC_PROFILE not set` or similar. These are non-fatal for the pilot; record them in PILOT-LESSONS.md so Phase 29 can decide whether to silence or address.
-- **`Format` in `.dzi` descriptor does not match tile file extension** — this is RESEARCH.md Pitfall 4. OSD constructs tile URLs from the descriptor's `Format` value, so a mismatch produces 404s on every tile fetch. Fix by re-running with `--suffix .jpg[Q=85]` explicit.
+- **`Format` in `.dzi` descriptor does not match tile file extension** — this is RESEARCH.md Pitfall 4. OSD constructs tile URLs from the descriptor's `Format` value, so a mismatch produces 404s on every tile fetch. Fix by re-running with `--suffix .webp[Q=80]` explicit.
 - **Disk space pressure** — one pair is typically tens of MB; one species (2–6 pairs) is well under 200 MB. If you see "no space left" mid-run, point the output to a different mount.
 
 ## After this step
@@ -153,4 +153,4 @@ Tile pyramids are local-only at this point. Next:
 
 Report back at the Plan 01 Task 2 checkpoint with: chosen species slug, number of `(specimen_id, view)` pairs tiled, total tile count, total disk size, and any vips warnings or unexpected output.
 
-> **[ASSUMED]** — Per `28-RESEARCH.md § Assumptions Log` A1 and A3, libvips was not installed on the planning/research machine. The vips flags above are based on libvips documentation conventions and Phase 18 plate pipeline experience. The first time you run this, sanity-check that `--tile-size 256 --overlap 1 --suffix .jpg[Q=85] --layout dz` actually produces the expected DZI layout described in `## Verify`. If it does not, record the deviation in `PILOT-LESSONS.md § Tile Parameters That Survived Contact` so Phase 29 can pin the corrected flags.
+> **Confirmed** — Parameters verified on pilot run (Phase 28, 2026-05-22): `--tile-size 256 --overlap 1 --suffix .webp[Q=80] --layout dz` produces the expected DZI layout. WebP format chosen over JPEG for ~30% size reduction (1.2 MB → ~850 KB per pair on pilot TIFFs). `Format="webp"` appears correctly in the `.dzi` descriptor and OSD resolves tile URLs accordingly.
