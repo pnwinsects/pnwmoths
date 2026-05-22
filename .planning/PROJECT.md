@@ -12,6 +12,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 **v2.1 shipped:** 2026-05-20 — Species Fact Sheet Gaps closed (4 phases, 5 plans, 64 commits)
 **Phase 26 complete:** 2026-05-22 — Dropbox ingest, filename parser, and manifest; 4,935-row `data/species-photos-manifest.csv` committed (clean-match 77.3% / genus-only 14.1% / likely-synonym 8.2% / unparseable 0.3% / provisional 0.2%)
+**Phase 27 complete:** 2026-05-22 — Synonym curation pass shipped: header-only `data/species-synonyms.csv`, `loadSynonyms` + classify pre-pass + `photos:investigate` RESORT_ONLY re-classification, curator runbook `_instructions/CURATING_SPECIES_SYNONYMS.md`. Mechanism in place; first curator pass not yet performed.
 
 ## Current Milestone: v2.2 High-resolution species photos
 
@@ -198,4 +199,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-22 — Phase 26 complete (Dropbox ingest, filename parser, manifest)*
+*Last updated: 2026-05-22 — Phase 27 complete (synonym curation pass — mechanism)*
