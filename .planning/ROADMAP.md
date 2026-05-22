@@ -101,7 +101,7 @@
 
 **Milestone Goal:** Replace existing low-res species photos with OpenSeadragon deep-zoom high-res photos sourced from a ~200 GB Dropbox folder, via a resumable server-side processing pipeline.
 
-- [ ] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs)
+- [x] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs) (completed 2026-05-22)
 - [ ] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first
 - [ ] **Phase 28: DZI Tile Generation Pipeline** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config
 - [ ] **Phase 29: bunny.net Upload of Tile Pyramids** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit
@@ -270,7 +270,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion; contains the human-verify checkpoint)*
 
-- [ ] 26-04-PLAN.md — Author _instructions/INGESTING_HIGH_RES_PHOTOS.md operator runbook; human-verify checkpoint runs real Dropbox ingest and commits data/species-photos-manifest.csv; verify bucket distribution within ±3% of spike audit (INGEST-01..05, OPS-01..03)
+- [x] 26-04-PLAN.md — Author _instructions/INGESTING_HIGH_RES_PHOTOS.md operator runbook; human-verify checkpoint runs real Dropbox ingest and commits data/species-photos-manifest.csv; verify bucket distribution within ±3% of spike audit (INGEST-01..05, OPS-01..03)
 
 ### Phase 27: Synonym Curation Pass
 
@@ -375,7 +375,7 @@ Plans:
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 3/4 | In Progress|  |
+| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete   | 2026-05-22 |
 | 27. Synonym Curation Pass | v2.2 | 0/0 | Not started | — |
 | 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
 | 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
