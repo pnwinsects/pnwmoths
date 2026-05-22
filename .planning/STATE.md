@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: ready_to_plan
-stopped_at: Phase 27 complete (3/3) — ready to discuss Phase 28
+stopped_at: Phase 27 complete (3/3); v2.2 roadmap restructured (pilot inserted as Phase 28; old 28–31 renumbered to 29–32) — ready to discuss Phase 28 pilot
 last_updated: 2026-05-22T17:43:42.901Z
 last_activity: 2026-05-22 -- Phase 27 execution started
 progress:
-  total_phases: 13
-  completed_phases: 1
+  total_phases: 14
+  completed_phases: 2
   total_plans: 7
   completed_plans: 7
-  percent: 8
+  percent: 14
 ---
 
 # Project State
@@ -21,7 +21,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 28 — dzi tile generation pipeline
+**Current focus:** Phase 28 — end-to-end vertical-slice pilot (one species)
 
 ## Current Position
 
@@ -84,10 +84,11 @@ Recent decisions affecting current work:
 - Phase 25 added: Similar Species Thumbnails (v2.1)
 - Phase 26 added: Dropbox Ingest, Filename Parser, and Manifest (v2.2)
 - Phase 27 added: Synonym Curation Pass (v2.2)
-- Phase 28 added: DZI Tile Generation Pipeline (v2.2)
-- Phase 29 added: bunny.net Upload of Tile Pyramids (v2.2)
-- Phase 30 added: `data/species-photos.json` Build Integration (v2.2)
-- Phase 31 added: OpenSeadragon Viewer in Lightbox (v2.2)
+- Phase 28 added: DZI Tile Generation Pipeline (v2.2) — renumbered to 29 on 2026-05-22 when the pilot was inserted
+- Phase 29 added: bunny.net Upload of Tile Pyramids (v2.2) — renumbered to 30 on 2026-05-22
+- Phase 30 added: `data/species-photos.json` Build Integration (v2.2) — renumbered to 31 on 2026-05-22
+- Phase 31 added: OpenSeadragon Viewer in Lightbox (v2.2) — renumbered to 32 on 2026-05-22
+- **Phase 28 inserted 2026-05-22 (current): End-to-End Vertical-Slice Pilot — One Species** — surface cross-phase integration risk on one species (local tiling, hand-edited JSON, production-CDN-served, production-lightbox-rendered) before the bulk tile/upload/build/viewer phases. Existing 28–31 renumbered to 29–32.
 
 ### Pending Todos
 

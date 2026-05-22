@@ -97,16 +97,17 @@
 
 </details>
 
-### v2.2 High-resolution species photos (Phases 26–31) — IN FLIGHT
+### v2.2 High-resolution species photos (Phases 26–32) — IN FLIGHT
 
 **Milestone Goal:** Replace existing low-res species photos with OpenSeadragon deep-zoom high-res photos sourced from a ~200 GB Dropbox folder, via a resumable server-side processing pipeline.
 
 - [x] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs) (completed 2026-05-22)
 - [x] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first (completed 2026-05-22)
-- [ ] **Phase 28: DZI Tile Generation Pipeline** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config
-- [ ] **Phase 29: bunny.net Upload of Tile Pyramids** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit
-- [ ] **Phase 30: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements
-- [ ] **Phase 31: OpenSeadragon Viewer in Lightbox** - Phase 23 lightbox swaps in an OSD instance when `high_res_available` is true; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
+- [ ] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit
+- [ ] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config
+- [ ] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit
+- [ ] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows
+- [ ] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
 
 ## Phase Details
 
@@ -296,10 +297,32 @@ Plans:
 
 - [x] 27-03-PLAN.md — Curator runbook _instructions/CURATING_SPECIES_SYNONYMS.md (D-01, D-02, D-07, D-08, L-04, L-05) (CURATE-01, CURATE-03)
 
-### Phase 28: DZI Tile Generation Pipeline
+### Phase 28: End-to-End Vertical-Slice Pilot — One Species
 
-**Goal**: For each manifest row in `status: downloaded`, the pipeline produces a DZI tile pyramid on the datacenter server using `libvips`, advances the row to `status: tiled`, and reruns are idempotent — tiles are reproducible from a committed configuration
+**Goal**: Prove the entire downstream pipeline (tile → upload → species-photos.json → OpenSeadragon in production lightbox) works on a single hand-picked species, surfacing cross-phase integration risks (URL conventions, manifest shape, viewer wiring, CDN config, build determinism, OSD aesthetics) before committing ~1 TB of tiles and ~5,000 specimen uploads to bunny.net
 **Depends on**: Phase 27
+**Requirements**: PILOT-01
+**Success Criteria** (what must be TRUE):
+
+  1. One hand-picked species (clean-match, 1–3 specimens, both D and V views) is fully visible on its production species page: opening the lightbox launches OpenSeadragon loading DZI tiles from the bunny.net CDN; pan, zoom, and home-reset work
+  2. The tile pyramid for that species lives at the production URL convention `{{ cdnBaseUrl }}/species-tiles/{species-slug}/{specimen_id}-{view}/`
+  3. `data/species-photos.json` carries a real, hand-edited entry for that species (full manifest derivation is Phase 31's job)
+  4. A documented "tiles produced locally via `vips`" recipe exists, sufficient for the operator (the datacenter-server harness is Phase 29's job)
+  5. Pilot lessons are recorded — at minimum: tile-parameter choices that survived contact, URL/path conventions that need adjusting before bulk, any OSD configuration surprises — and inform Phase 29's committed config
+  6. No regressions to existing species pages: species without high-res still render Phase 23's static lightbox + carousel unchanged
+
+**Locked sub-decisions** (2026-05-22): tile production happens locally on operator hardware; `species-photos.json` is hand-edited for the pilot; pilot species is operator's choice subject to the clean-match / both-views constraint above.
+
+**Out of scope** (deferred to phases 29–32): bulk tiling of all manifest rows (Phase 29), datacenter-server `vips` harness (Phase 29), bulk upload + storage-footprint sanity check (Phase 30), manifest-derived `species-photos.json` build integration (Phase 31), general OSD viewer wiring across all `high_res_available: true` species (Phase 32).
+
+**Plans**: TBD
+
+**UI hint**: yes
+
+### Phase 29: DZI Tile Generation Pipeline (bulk)
+
+**Goal**: For each manifest row in `status: downloaded`, the pipeline produces a DZI tile pyramid on the datacenter server using `libvips`, advances the row to `status: tiled`, and reruns are idempotent — tiles are reproducible from a committed configuration. Pilot-derived tile params (Phase 28) seed the committed config.
+**Depends on**: Phase 28
 **Requirements**: TILE-01, TILE-02, TILE-03
 **Success Criteria** (what must be TRUE):
 
@@ -310,10 +333,10 @@ Plans:
 
 **Plans**: TBD
 
-### Phase 29: bunny.net Upload of Tile Pyramids
+### Phase 30: bunny.net Upload of Tile Pyramids (bulk)
 
 **Goal**: For each manifest row in `status: tiled`, the pipeline uploads its tile directory to bunny.net Storage at the agreed URL convention, advances the row to `status: uploaded`, and bulk-upload is preceded by an explicit storage-footprint sanity check against bunny.net pricing
-**Depends on**: Phase 28
+**Depends on**: Phase 29
 **Requirements**: UPLOAD-01, UPLOAD-02, UPLOAD-03
 **Success Criteria** (what must be TRUE):
 
@@ -324,10 +347,10 @@ Plans:
 
 **Plans**: TBD
 
-### Phase 30: `data/species-photos.json` Build Integration
+### Phase 31: `data/species-photos.json` Build Integration
 
-**Goal**: At Eleventy build time, the manifest's `uploaded` rows materialize into a committed-or-built `data/species-photos.json` that templates can consume per species; species with high-res photos render only their high-res entries (legacy low-res rows from `images.csv` are deprecated for those species)
-**Depends on**: Phase 29
+**Goal**: At Eleventy build time, the manifest's `uploaded` rows materialize into a committed-or-built `data/species-photos.json` that templates can consume per species; species with high-res photos render only their high-res entries (legacy low-res rows from `images.csv` are deprecated for those species). Replaces the pilot's hand-edited entry (Phase 28) with manifest-derived rows.
+**Depends on**: Phase 30
 **Requirements**: DATA-01, DATA-02, DATA-03
 **Success Criteria** (what must be TRUE):
 
@@ -335,20 +358,22 @@ Plans:
   2. Each species record in the Eleventy data tree (the data file the species template iterates) carries a `high_res_available` boolean so templates branch viewer choice in a single conditional without re-querying the manifest
   3. For a species where `high_res_available` is true, the build does not render the legacy low-res entries from `images.csv` for that species — there is no double rendering of low-res alongside high-res
   4. `npm run build` produces the same page count it did at the end of v2.1 (1,364 species pages), now with high-res photo entries available on species that have them
+  5. The pilot's hand-edited species entry (Phase 28) is replaced by a manifest-derived entry with no user-visible change to that species' lightbox behavior
 
 **Plans**: TBD
 
-### Phase 31: OpenSeadragon Viewer in Lightbox
+### Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)
 
-**Goal**: When a species has high-res photos available, opening its photo lightbox launches an OpenSeadragon pan/zoom viewer (with specimen/view metadata visible inline); species without high-res still get the existing static-image lightbox, with no regression to the Phase 23 carousel
-**Depends on**: Phase 30
+**Goal**: Generalize the pilot's species-scoped OSD wiring (Phase 28) so that every species with `high_res_available: true` opens an OpenSeadragon pan/zoom viewer in its lightbox; species without high-res still get the existing static-image lightbox, with no regression to the Phase 23 carousel
+**Depends on**: Phase 31
 **Requirements**: VIEWER-01, VIEWER-02, VIEWER-03, VIEWER-04
 **Success Criteria** (what must be TRUE):
 
-  1. On a species page with `high_res_available: true`, clicking a thumbnail in the Phase 23 carousel opens the lightbox hosting an OpenSeadragon instance that loads the matching photo's DZI tiles from the CDN; pan, zoom, and home-reset work
+  1. On any species page with `high_res_available: true`, clicking a thumbnail in the Phase 23 carousel opens the lightbox hosting an OpenSeadragon instance that loads the matching photo's DZI tiles from the CDN; pan, zoom, and home-reset work
   2. On a species page with `high_res_available: false`, clicking a thumbnail opens the existing Phase 23 lightbox with the static `<img>` render — no OSD instance is attached and no regression appears
   3. The thumbnail carousel (hover, click, keyboard, touch, ResizeObserver overflow detection) is unchanged across both code paths — OSD swaps only into the lightbox layer, not the carousel
   4. When a species has multiple high-res photos, the OSD viewer surfaces the current photo's `specimen_id` and `view` (D/V) inline so a visitor or curator can tell which physical specimen is being viewed
+  5. The pilot's species filter (if any was used to scope OSD wiring to one species) is removed; OSD coverage tracks `high_res_available` directly from the data file
 
 **Plans**: TBD
 
@@ -387,10 +412,11 @@ Plans:
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
-| 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
-| 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
-| 30. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
-| 31. OpenSeadragon Viewer in Lightbox | v2.2 | 0/0 | Not started | — |
+| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/0 | Not started | — |
+| 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 0/0 | Not started | — |
+| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 0/0 | Not started | — |
+| 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
+| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21*

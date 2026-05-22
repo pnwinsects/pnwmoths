@@ -22,6 +22,10 @@
 - [x] **CURATE-02**: Re-running classification against an updated `species-synonyms.csv` reclassifies affected manifest rows from `genus-only` / `likely-synonym` to `resolved-via-synonym` without re-downloading source files
 - [x] **CURATE-03**: Manifest exposes a readable "needs investigation" view (rows in `genus-only`, `likely-synonym`, `provisional`, or `unparseable` buckets) sorted by frequency so a curator can work through the highest-impact decisions first
 
+### PILOT — End-to-end vertical-slice pilot
+
+- [ ] **PILOT-01**: One hand-picked clean-match species (1–3 specimens, both D and V views) is fully rendered on its production species page via OpenSeadragon loading DZI tiles from the bunny.net CDN; tile pyramid lives at the production URL convention; `data/species-photos.json` carries a real hand-edited entry; the local-`vips` tile recipe is documented; pilot lessons (tile params, URL/path conventions, OSD config surprises) are recorded to inform Phase 29's committed config — surfacing cross-phase integration risks before bulk commit
+
 ### TILE — DZI tile generation pipeline
 
 - [ ] **TILE-01**: System generates DZI tiles from each downloaded TIFF using `libvips` (`vips dzsave`) on the datacenter server
@@ -90,19 +94,20 @@ These were considered for v2.2 but are deferred to later milestones:
 | CURATE-01 | Phase 27 | Complete |
 | CURATE-02 | Phase 27 | Complete |
 | CURATE-03 | Phase 27 | Complete |
-| TILE-01 | Phase 28 | Pending |
-| TILE-02 | Phase 28 | Pending |
-| TILE-03 | Phase 28 | Pending |
-| UPLOAD-01 | Phase 29 | Pending |
-| UPLOAD-02 | Phase 29 | Pending |
-| UPLOAD-03 | Phase 29 | Pending |
-| DATA-01 | Phase 30 | Pending |
-| DATA-02 | Phase 30 | Pending |
-| DATA-03 | Phase 30 | Pending |
-| VIEWER-01 | Phase 31 | Pending |
-| VIEWER-02 | Phase 31 | Pending |
-| VIEWER-03 | Phase 31 | Pending |
-| VIEWER-04 | Phase 31 | Pending |
+| PILOT-01 | Phase 28 | Pending |
+| TILE-01 | Phase 29 | Pending |
+| TILE-02 | Phase 29 | Pending |
+| TILE-03 | Phase 29 | Pending |
+| UPLOAD-01 | Phase 30 | Pending |
+| UPLOAD-02 | Phase 30 | Pending |
+| UPLOAD-03 | Phase 30 | Pending |
+| DATA-01 | Phase 31 | Pending |
+| DATA-02 | Phase 31 | Pending |
+| DATA-03 | Phase 31 | Pending |
+| VIEWER-01 | Phase 32 | Pending |
+| VIEWER-02 | Phase 32 | Pending |
+| VIEWER-03 | Phase 32 | Pending |
+| VIEWER-04 | Phase 32 | Pending |
 | OPS-01 | Phase 26 | Complete |
 | OPS-02 | Phase 26 | Complete |
 | OPS-03 | Phase 26 | Complete |

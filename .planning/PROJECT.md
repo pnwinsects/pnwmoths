@@ -21,6 +21,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 **Target features:**
 - Dropbox ingest + filename parser + local manifest as source of truth
 - Synonym curation pass (`data/species-synonyms.csv`) before bulk processing
+- **End-to-end vertical-slice pilot on one species** (tile locally + upload + hand-edit JSON + OSD in lightbox) — surfaces cross-phase integration risk before bulk commit
 - libvips DZI tile generation on a datacenter server (~1 TB output)
 - Bulk upload to bunny.net (extends Phase 13 HTTP PUT pattern)
 - `data/species-photos.json` Eleventy data file with per-species `high_res_available` flag
@@ -199,4 +200,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-22 — Phase 27 complete (synonym curation pass — mechanism)*
+*Last updated: 2026-05-22 — Phase 27 complete; v2.2 roadmap restructured (vertical-slice pilot inserted as Phase 28; old 28–31 renumbered to 29–32)*
