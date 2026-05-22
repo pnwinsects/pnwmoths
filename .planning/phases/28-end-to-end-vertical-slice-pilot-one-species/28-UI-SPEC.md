@@ -1,10 +1,11 @@
 ---
 phase: 28
 slug: end-to-end-vertical-slice-pilot-one-species
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-05-22
+reviewed_at: 2026-05-22
 ---
 
 # Phase 28 — UI Design Contract
