@@ -17,6 +17,8 @@
     "dev": "npm run build:data && eleventy --serve",
     "migrate:images": "node scripts/migrate-images.js",
     "migrate:species": "node scripts/migrate-species.js",
+    "photos:ingest": "node scripts/ingest-photos.js",
+    "photos:investigate": "RESORT_ONLY=1 node scripts/ingest-photos.js",
     "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/migrate-species.test.js scripts/lib/*.test.js src/components/*.test.js src/_lib/*.test.js"
   },
   "keywords": [],
