@@ -19,7 +19,7 @@
     "migrate:species": "node scripts/migrate-species.js",
     "photos:ingest": "node scripts/ingest-photos.js",
     "photos:investigate": "RESORT_ONLY=1 node scripts/ingest-photos.js",
-    "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/migrate-species.test.js scripts/lib/*.test.js src/components/*.test.js src/_lib/*.test.js"
+    "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/ingest-photos.test.js scripts/migrate-species.test.js scripts/lib/*.test.js src/components/*.test.js src/_lib/*.test.js"
   },
   "keywords": [],
   "author": "Peter Abrahamsen <rainhead@gmail.com>",

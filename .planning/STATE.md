@@ -4,8 +4,8 @@ milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
 stopped_at: Phase 27 context gathered
-last_updated: "2026-05-22T16:45:25.842Z"
-last_activity: 2026-05-22 -- Phase 27 planning complete
+last_updated: "2026-05-22T17:05:42.911Z"
+last_activity: 2026-05-22 -- Phase 27 execution started
 progress:
   total_phases: 13
   completed_phases: 1
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 27 — synonym curation pass
+**Current focus:** Phase 27 — synonym-curation-pass
 
 ## Current Position
 
-Phase: 27
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-22 -- Phase 27 planning complete
+Phase: 27 (synonym-curation-pass) — EXECUTING
+Plan: 1 of 3
+Status: Executing Phase 27
+Last activity: 2026-05-22 -- Phase 27 execution started
 
 ## Performance Metrics
 
