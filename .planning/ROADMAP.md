@@ -287,8 +287,13 @@ Plans:
 **Plans**: 3 plans
 Plans:
 
+**Wave 1**
+
 - [ ] 27-01-PLAN.md — Seed data/species-synonyms.csv (D-01 two-column schema, D-08 header-only) (CURATE-01)
 - [ ] 27-02-PLAN.md — RED+GREEN: loadSynonyms helper + classify() pre-pass + RESORT_ONLY synonym-aware re-classification; export classify/loadSynonyms (D-03, D-04, D-05, D-06, D-09, D-10, L-02, L-03) (CURATE-02, CURATE-03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 27-03-PLAN.md — Curator runbook _instructions/CURATING_SPECIES_SYNONYMS.md (D-01, D-02, D-07, D-08, L-04, L-05) (CURATE-01, CURATE-03)
 
 ### Phase 28: DZI Tile Generation Pipeline
