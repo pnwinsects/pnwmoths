@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: ready_to_plan
-stopped_at: Phase 26 complete (4/4) — ready to discuss Phase 27
-last_updated: 2026-05-22T16:06:36.418Z
-last_activity: 2026-05-22 -- Phase 26 execution started
+status: planning
+stopped_at: Phase 27 context gathered
+last_updated: "2026-05-22T16:19:23.531Z"
+last_activity: 2026-05-22
 progress:
   total_phases: 13
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 4
   completed_plans: 4
-  percent: 0
+  percent: 8
 ---
 
 # Project State
@@ -114,6 +114,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-21T16:11:43.690Z
-Stopped at: Phase 26 context gathered
-Resume file: .planning/phases/26-dropbox-ingest-filename-parser-and-manifest/26-CONTEXT.md
+Last session: 2026-05-22T16:19:23.503Z
+Stopped at: Phase 27 context gathered
+Resume file: .planning/phases/27-synonym-curation-pass/27-CONTEXT.md
