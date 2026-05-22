@@ -284,7 +284,12 @@ Plans:
   3. The manifest exposes a readable "needs investigation" view (rows in `genus-only`, `likely-synonym`, `provisional`, or `unparseable` buckets) sorted by frequency — the curator opens it and immediately sees the highest-impact unresolved binomials at the top (matching the spike's top-unmatched list: `Grammia`, `Eupithecia`, `Smerinthus ophthalmica`, etc.)
   4. After one curation pass against the audit residue, the clean-or-resolved match rate measurably rises (target ≥ 95%, up from the 77.5% baseline) and the count of rows still flagged for investigation falls
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+
+- [ ] 27-01-PLAN.md — Seed data/species-synonyms.csv (D-01 two-column schema, D-08 header-only) (CURATE-01)
+- [ ] 27-02-PLAN.md — RED+GREEN: loadSynonyms helper + classify() pre-pass + RESORT_ONLY synonym-aware re-classification; export classify/loadSynonyms (D-03, D-04, D-05, D-06, D-09, D-10, L-02, L-03) (CURATE-02, CURATE-03)
+- [ ] 27-03-PLAN.md — Curator runbook _instructions/CURATING_SPECIES_SYNONYMS.md (D-01, D-02, D-07, D-08, L-04, L-05) (CURATE-01, CURATE-03)
 
 ### Phase 28: DZI Tile Generation Pipeline
 
@@ -376,7 +381,7 @@ Plans:
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
-| 27. Synonym Curation Pass | v2.2 | 0/0 | Not started | — |
+| 27. Synonym Curation Pass | v2.2 | 0/3 | Planned | — |
 | 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
 | 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
 | 30. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
