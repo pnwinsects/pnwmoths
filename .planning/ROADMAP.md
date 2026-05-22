@@ -289,8 +289,8 @@ Plans:
 
 **Wave 1**
 
-- [ ] 27-01-PLAN.md — Seed data/species-synonyms.csv (D-01 two-column schema, D-08 header-only) (CURATE-01)
-- [ ] 27-02-PLAN.md — RED+GREEN: loadSynonyms helper + classify() pre-pass + RESORT_ONLY synonym-aware re-classification; export classify/loadSynonyms (D-03, D-04, D-05, D-06, D-09, D-10, L-02, L-03) (CURATE-02, CURATE-03)
+- [x] 27-01-PLAN.md — Seed data/species-synonyms.csv (D-01 two-column schema, D-08 header-only) (CURATE-01)
+- [x] 27-02-PLAN.md — RED+GREEN: loadSynonyms helper + classify() pre-pass + RESORT_ONLY synonym-aware re-classification; export classify/loadSynonyms (D-03, D-04, D-05, D-06, D-09, D-10, L-02, L-03) (CURATE-02, CURATE-03)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -386,7 +386,7 @@ Plans:
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
-| 27. Synonym Curation Pass | v2.2 | 0/3 | Planned | — |
+| 27. Synonym Curation Pass | v2.2 | 2/3 | In Progress|  |
 | 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
 | 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
 | 30. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
