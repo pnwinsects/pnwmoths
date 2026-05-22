@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: ready_to_plan
-stopped_at: Phase 27 complete (3/3); v2.2 roadmap restructured (pilot inserted as Phase 28; old 28–31 renumbered to 29–32) — ready to discuss Phase 28 pilot
-last_updated: 2026-05-22T17:43:42.901Z
-last_activity: 2026-05-22 -- Phase 27 execution started
+status: executing
+stopped_at: Phase 28 UI-SPEC approved
+last_updated: "2026-05-22T21:17:31.827Z"
+last_activity: 2026-05-22 -- Phase 28 planning complete
 progress:
   total_phases: 14
   completed_phases: 2
-  total_plans: 7
+  total_plans: 12
   completed_plans: 7
   percent: 14
 ---
@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 Phase: 28
 Plan: Not started
-Status: Ready to plan
-Last activity: 2026-05-22
+Status: Ready to execute
+Last activity: 2026-05-22 -- Phase 28 planning complete
 
 ## Performance Metrics
 
@@ -115,6 +115,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-22T16:19:23.503Z
-Stopped at: Phase 27 context gathered
-Resume file: .planning/phases/27-synonym-curation-pass/27-CONTEXT.md
+Last session: 2026-05-22T20:45:02.223Z
+Stopped at: Phase 28 UI-SPEC approved
+Resume file: .planning/phases/28-end-to-end-vertical-slice-pilot-one-species/28-UI-SPEC.md
