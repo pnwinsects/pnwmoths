@@ -18,9 +18,9 @@
 
 ### CURATE — Synonym resolution and investigation queue
 
-- [ ] **CURATE-01**: Maintainer can author a flat `data/species-synonyms.csv` (committed to the repo) that maps outdated binomials to current species slugs (e.g. `Grammia nevadensis → Apantesis nevadensis`)
-- [ ] **CURATE-02**: Re-running classification against an updated `species-synonyms.csv` reclassifies affected manifest rows from `genus-only` / `likely-synonym` to `resolved-via-synonym` without re-downloading source files
-- [ ] **CURATE-03**: Manifest exposes a readable "needs investigation" view (rows in `genus-only`, `likely-synonym`, `provisional`, or `unparseable` buckets) sorted by frequency so a curator can work through the highest-impact decisions first
+- [x] **CURATE-01**: Maintainer can author a flat `data/species-synonyms.csv` (committed to the repo) that maps outdated binomials to current species slugs (e.g. `Grammia nevadensis → Apantesis nevadensis`)
+- [x] **CURATE-02**: Re-running classification against an updated `species-synonyms.csv` reclassifies affected manifest rows from `genus-only` / `likely-synonym` to `resolved-via-synonym` without re-downloading source files
+- [x] **CURATE-03**: Manifest exposes a readable "needs investigation" view (rows in `genus-only`, `likely-synonym`, `provisional`, or `unparseable` buckets) sorted by frequency so a curator can work through the highest-impact decisions first
 
 ### TILE — DZI tile generation pipeline
 
@@ -87,9 +87,9 @@ These were considered for v2.2 but are deferred to later milestones:
 | INGEST-03 | Phase 26 | Complete |
 | INGEST-04 | Phase 26 | Complete |
 | INGEST-05 | Phase 26 | Complete |
-| CURATE-01 | Phase 27 | Pending |
-| CURATE-02 | Phase 27 | Pending |
-| CURATE-03 | Phase 27 | Pending |
+| CURATE-01 | Phase 27 | Complete |
+| CURATE-02 | Phase 27 | Complete |
+| CURATE-03 | Phase 27 | Complete |
 | TILE-01 | Phase 28 | Pending |
 | TILE-02 | Phase 28 | Pending |
 | TILE-03 | Phase 28 | Pending |

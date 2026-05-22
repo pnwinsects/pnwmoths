@@ -3,7 +3,7 @@ status: partial
 phase: 27-synonym-curation-pass
 source: [27-VERIFICATION.md]
 started: 2026-05-22T18:20:00Z
-updated: 2026-05-22T18:20:00Z
+updated: 2026-05-22T18:45:00Z
 ---
 
 ## Current Test
@@ -18,14 +18,14 @@ result: [pending]
 
 ### 2. BOM silent-drop on Windows curator hardware (WR-02)
 expected: Save `data/species-synonyms.csv` with a UTF-8 BOM using Notepad or Excel on Windows, then run `npm run photos:investigate` with a synonym row present. `csv-parse` without `bom: true` silently drops all rows whose first column becomes `<U+FEFF>from_binomial`. Human assesses likelihood of curator using Notepad/Excel on Windows and decides whether to add `bom: true` to `loadSynonyms`.
-result: [pending]
+result: resolved — `bom: true` added to `loadSynonyms` in commit fd3a3da; regression test ('strips a UTF-8 BOM...') asserts the same writeFileSync path the bug report described.
 
 ## Summary
 
 total: 2
-passed: 0
+passed: 1
 issues: 0
-pending: 2
+pending: 1
 skipped: 0
 blocked: 0
 
