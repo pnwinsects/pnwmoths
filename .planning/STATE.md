@@ -4,8 +4,8 @@ milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
 stopped_at: Phase 28 UI-SPEC approved
-last_updated: "2026-05-22T21:17:31.827Z"
-last_activity: 2026-05-22 -- Phase 28 planning complete
+last_updated: "2026-05-22T21:28:01.806Z"
+last_activity: 2026-05-22 -- Phase 28 execution started
 progress:
   total_phases: 14
   completed_phases: 2
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 28 — end-to-end vertical-slice pilot (one species)
+**Current focus:** Phase 28 — end-to-end-vertical-slice-pilot-one-species
 
 ## Current Position
 
-Phase: 28
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-22 -- Phase 28 planning complete
+Phase: 28 (end-to-end-vertical-slice-pilot-one-species) — EXECUTING
+Plan: 1 of 5
+Status: Executing Phase 28
+Last activity: 2026-05-22 -- Phase 28 execution started
 
 ## Performance Metrics
 
