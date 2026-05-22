@@ -46,10 +46,18 @@ Declared values (must be multiples of 4). Source: `theme.css` explicit values + 
 | 2xl | 48px | Major section breaks |
 | 3xl | 64px | Page-level spacing |
 
-Exceptions:
-- Touch targets: minimum 44×44px — already established in `pnwm-image-slideshow.js` (`.controls button { min-width: 44px; min-height: 44px; }`). The OSD lightbox close button is 44×44px (existing contract; do not reduce).
+### Grid-aligned exceptions
+
+These values are multiples of 4 and are part of the spacing system:
+
+- Touch targets: minimum 44×44px — already established in `pnwm-image-slideshow.js` (`.controls button { min-width: 44px; min-height: 44px; }`). The OSD lightbox close button is 44×44px (existing contract; do not reduce). 44 is a multiple of 4.
 - OSD viewer height: 70vh (min 400px) — matches the existing `pnwm-plate-viewer` contract; use the same value for the species lightbox OSD container.
-- Thumbnail height: 93px — established in Phase 23; do not change.
+
+### Frozen legacy dimensions (outside the 4px grid rule)
+
+These values are not spacing tokens and must not be treated as such. They exist solely to preserve Phase 23 contracts and are frozen.
+
+- Thumbnail height: **93px** — established in Phase 23; not a spacing token; not a multiple of 4 (93 / 4 = 23.25); frozen by prior phase contract; do not change; do not apply the 4px grid rule to this value.
 
 ---
 
@@ -60,13 +68,12 @@ Source: `theme.css` + Pico CSS defaults.
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
 | Body | 16px (1rem Pico default) | 400 | 1.5 |
-| Label / caption | 0.8rem (~13px) | 400 | 1.45 |
+| Label / caption | 14px (0.875rem) | 400 | 1.4 |
 | Heading (h1–h6) | Pico scale (h1 ≈ 2rem, h2 ≈ 1.75rem, etc.) | 700 | 1.2 |
-| Specimen metadata inline | 14px | 400 | 1.4 |
 
-The specimen metadata label (specimen_id + view) rendered inside the OSD lightbox uses the existing `.caption-line` style: `font-size: 0.8rem; color: var(--pico-muted-color)`.
+The specimen metadata bar (specimen_id + view) rendered inside the OSD lightbox and all other caption-style text both use **14px / 0.875rem** (weight 400). This consolidates the former `0.8rem (~13px)` caption size and the `14px` specimen-metadata size — a one-pixel difference that produces no hierarchy benefit. The existing `.caption-line` CSS uses `font-size: 0.8rem`; the executor must update that rule to `font-size: 0.875rem` as part of this phase to align with the 14px token. If that change conflicts with existing CSS specificity, document the conflict in PILOT-LESSONS.md and revert to `0.8rem` only for the affected rule — but do not introduce a third size.
 
-No new font sizes or weights are introduced in this phase.
+No new font weights are introduced in this phase. Two weights in use: 400 (body, captions) and 700 (headings).
 
 ---
 
@@ -134,6 +141,8 @@ If either condition is false, the existing static `<img>` lightbox renders exact
 | Error — CORS on `.dzi` | Same as above; error surfaced in browser console; pilot will check this explicitly |
 | Lightbox closing | Close button (×) at top-right (44×44px, existing contract); Escape key; click outside OSD canvas on overlay; OSD `.destroy()` called on close to prevent WebGL/listener leaks |
 
+The OSD canvas is the primary focal point within the lightbox overlay; all other elements (metadata bar, close button, navigator minimap) are secondary and must not visually compete with the canvas. OSD built-in icon controls (home, zoom in, zoom out) provide their own `title` attributes per the OSD library — this is the intended accessibility path for those controls; do not add redundant custom `aria-label` attributes to the OSD-managed buttons.
+
 ### OSD Configuration (pilot defaults)
 
 ```
@@ -169,7 +178,7 @@ Specimen {specimen_id} · {view label}
 
 where `view label` is "Dorsal" when `view === 'D'` and "Ventral" when `view === 'V'`.
 
-Style: `.caption-line` (existing class) — `font-size: 0.8rem; color: var(--pico-muted-color); text-align: center`.
+Style: `.caption-line` (existing class) — `font-size: 0.875rem; color: var(--pico-muted-color); text-align: center`. See Typography section for the consolidation from `0.8rem` to `0.875rem`.
 
 When a species has multiple specimens, the metadata bar updates to reflect the currently displayed specimen. Pilot species has 1–3 specimens; the carousel thumbnail strip (unchanged) controls which specimen the OSD opens to.
 
