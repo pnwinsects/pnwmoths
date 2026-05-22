@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Phase 28 UI-SPEC approved
-last_updated: "2026-05-22T21:28:01.806Z"
-last_activity: 2026-05-22 -- Phase 28 execution started
+stopped_at: Phase 28 Wave 1 mid-flight — 3 commits across plans 28-01 + 28-02; no SUMMARY.md written; uncommitted package-lock.json + untracked .11ty-vite/
+last_updated: "2026-05-22T22:00:00.000Z"
+last_activity: 2026-05-22 -- Phase 28 execution stalled mid-Wave-1 (resume detected)
 progress:
   total_phases: 14
   completed_phases: 2
@@ -25,10 +25,20 @@ See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 ## Current Position
 
-Phase: 28 (end-to-end-vertical-slice-pilot-one-species) — EXECUTING
-Plan: 1 of 5
-Status: Executing Phase 28
-Last activity: 2026-05-22 -- Phase 28 execution started
+Phase: 28 (end-to-end-vertical-slice-pilot-one-species) — EXECUTING (stalled mid-Wave-1)
+Plan: 28-01 + 28-02 partially complete (Wave 1, no SUMMARY.md for either)
+Status: Wave 1 stalled — 3 commits landed, then execution stopped before SUMMARY.md or human checkpoint
+Last activity: 2026-05-22 -- session resumed; mid-flight execution detected, no HANDOFF.json
+
+Committed mid-flight (no SUMMARY yet):
+- 28-01 Task 1: TILE-RECIPE.md authored (ac1e355)
+- 28-02 Task 1: data/species-photos.json (dd06097)
+- 28-02 Task 2: src/_data/species-photos.js (f4aa7d0)
+
+Unfinished within Wave 1:
+- 28-01 Task 2: operator runs `vips dzsave` locally → human checkpoint (blocking)
+- 28-02 Task 3: build verification (`npm run build:eleventy`, count = 1364) → never recorded
+- Working tree dirty: `M package-lock.json`, untracked `.11ty-vite/` (likely residue from interrupted build)
 
 ## Performance Metrics
 
@@ -115,6 +125,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-22T20:45:02.223Z
-Stopped at: Phase 28 UI-SPEC approved
-Resume file: .planning/phases/28-end-to-end-vertical-slice-pilot-one-species/28-UI-SPEC.md
+Last session: 2026-05-22T22:00:00.000Z
+Stopped at: Phase 28 Wave 1 mid-flight — execution started, 3 commits landed across plans 28-01 + 28-02, then halted before any SUMMARY.md or the operator human-checkpoint. No HANDOFF.json was written → unclean termination, not a graceful pause.
+Resume file: .planning/phases/28-end-to-end-vertical-slice-pilot-one-species/28-01-PLAN.md (Task 2 — human checkpoint) + 28-02-PLAN.md (Task 3 — build verification)
+Resume notes: Before re-running `/gsd:execute-phase 28`, decide whether to keep or discard the `M package-lock.json` and `.11ty-vite/` untracked artifacts. Phase 27 also has 2 outstanding human_needed UAT items (BOM check, RESORT_ONLY runbook wording).
