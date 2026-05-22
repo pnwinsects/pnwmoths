@@ -315,7 +315,21 @@ Plans:
 
 **Out of scope** (deferred to phases 29–32): bulk tiling of all manifest rows (Phase 29), datacenter-server `vips` harness (Phase 29), bulk upload + storage-footprint sanity check (Phase 30), manifest-derived `species-photos.json` build integration (Phase 31), general OSD viewer wiring across all `high_res_available: true` species (Phase 32).
 
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+**Wave 1** (parallel)
+
+- [ ] 28-01-PLAN.md — Author TILE-RECIPE.md operator runbook; operator selects pilot species and produces DZI tile pyramids locally via `vips dzsave --tile-size 256 --overlap 1 --suffix .jpg[Q=85] --layout dz` (PILOT-01 SC-4)
+- [ ] 28-02-PLAN.md — Create data/species-photos.json ({}) + src/_data/species-photos.js loader; verify build still produces 1,364 species pages (PILOT-01 data-layer plumbing, no-regression gate)
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 28-03-PLAN.md — Author UPLOAD-RECIPE.md (mirrors scripts/upload-plates.js curl PUT pattern); operator uploads pilot tile pyramids to bunny.net at `species-tiles/{slug}/{specimen_id}-{view}/`; CDN reachability + CORS header status verified (PILOT-01 SC-2 + RESEARCH.md Open Question #1)
+- [ ] 28-04-PLAN.md — Wire OSD into pnwm-image-slideshow lightbox (gated on highResAvailable + _highResSpecimens?.length); add _buildDziUrl helper + test; extend species.njk with conditional high-res-* attribute block; build still 1,364 pages and zero pages emit high-res-available with empty JSON (PILOT-01 SC-6 no-regression + autonomous code path)
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 28-05-PLAN.md — Operator hand-edits data/species-photos.json with real pilot entry; visual browser verification of OSD pan/zoom/home against live CDN + no-regression smoke on two non-pilot species; author PILOT-LESSONS.md (tile params, CORS status, OSD surprises, URL adjustments, recommendations for Phases 29/30/32) (PILOT-01 SC-1, SC-3, SC-5, SC-6)
 
 **UI hint**: yes
 
@@ -412,14 +426,14 @@ Plans:
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
-| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/0 | Not started | — |
+| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 0/0 | Not started | — |
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 0/0 | Not started | — |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21 | Phase 28 plans drafted: 2026-05-22*
 
 ## Backlog
 
