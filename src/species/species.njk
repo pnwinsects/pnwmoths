@@ -34,7 +34,16 @@ eleventyComputed:
 <div class="species-content">
   <div class="species-photos">
     {% set spImages = images[sp.slug] %}
-    <pnwm-image-slideshow slug="{{ sp.slug }}" data-pagefind-ignore>
+    {% set highResEntry = speciesPhotos[sp.slug] %}
+    <pnwm-image-slideshow
+      slug="{{ sp.slug }}"
+      {% if highResEntry and highResEntry.high_res_available %}
+      high-res-available
+      high-res-specimens="{{ highResEntry.specimens | tojson | escape }}"
+      cdn-base-url="{{ cdnBaseUrl }}"
+      prefix-url="{{ '/osd-images/' | url }}"
+      {% endif %}
+      data-pagefind-ignore>
       {% if spImages and spImages.length > 0 %}
         {% for img in spImages %}
           <figure>

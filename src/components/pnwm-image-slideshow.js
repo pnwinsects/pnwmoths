@@ -54,7 +54,13 @@ export class PnwmImageSlideshow extends LitElement {
       width: auto;
       display: block;
     }
-    .caption-line { margin: 2px 0; font-size: 0.8rem; color: var(--pico-muted-color); text-align: center; }
+    .caption-line { margin: 2px 0; font-size: 0.875rem; color: var(--pico-muted-color); text-align: center; }
+    .osd-viewer {
+      width: 90vw;
+      height: 70vh;
+      min-height: 400px;
+      background: #111;
+    }
     .lightbox {
       position: fixed;
       inset: 0;
@@ -170,7 +176,7 @@ export class PnwmImageSlideshow extends LitElement {
     }
   }
 
-  _openLightbox() {
+  async _openLightbox() {
     this._lightboxOpen = true;
     // Inert all siblings up the ancestor chain (not the host itself) so keyboard
     // focus is trapped in the lightbox without inerting our own shadow DOM.
@@ -184,13 +190,32 @@ export class PnwmImageSlideshow extends LitElement {
       });
       node = node.parentElement;
     }
-    this.updateComplete.then(() => {
-      const closeBtn = this.shadowRoot.querySelector('.lightbox-close');
-      if (closeBtn) closeBtn.focus();
-    });
+    await this.updateComplete;
+    const closeBtn = this.shadowRoot.querySelector('.lightbox-close');
+    if (closeBtn) closeBtn.focus();
+
+    if (this.highResAvailable && this._highResSpecimens?.length) {
+      const viewerEl = this.shadowRoot.querySelector('#osd-viewer');
+      if (viewerEl && !this._osdViewer) {
+        const { default: OpenSeadragon } = await import('openseadragon');
+        const current = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0];
+        this._osdViewer = OpenSeadragon({
+          element: viewerEl,
+          prefixUrl: this.prefixUrl,
+          tileSources: this._buildDziUrl(current),
+          visibilityRatio: 1.0,
+          minZoomLevel: 0.5,
+          defaultZoomLevel: 0,
+          showNavigator: true,
+          showRotationControl: false,
+        });
+      }
+    }
   }
 
   _closeLightbox() {
+    this._osdViewer?.destroy();
+    this._osdViewer = null;
     this._lightboxOpen = false;
     this._inertedElements.forEach(el => el.removeAttribute('inert'));
     this._inertedElements = [];
@@ -243,10 +268,23 @@ export class PnwmImageSlideshow extends LitElement {
 
     const current = this._images[this._currentIndex];
 
+    const useOsd = this.highResAvailable && this._highResSpecimens?.length > 0;
+    const currentSpecimen = useOsd
+      ? (this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0])
+      : null;
+
     const lightbox = this._lightboxOpen
       ? html`
           <div class="lightbox" @click=${(e) => { if (e.target === e.currentTarget) this._closeLightbox(); }}>
-            <img src=${current.src} alt=${current.alt}>
+            ${useOsd
+              ? html`
+                  <div id="osd-viewer" class="osd-viewer"></div>
+                  <p class="caption-line">
+                    Specimen ${currentSpecimen.specimen_id} &middot;
+                    ${currentSpecimen.view === 'D' ? 'Dorsal' : 'Ventral'}
+                  </p>
+                `
+              : html`<img src=${current.src} alt=${current.alt}>`}
             <button
               class="lightbox-close"
               aria-label="Close lightbox"
