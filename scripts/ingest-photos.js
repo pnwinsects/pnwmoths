@@ -164,7 +164,9 @@ async function loadSpecies(csvPath) {
 export async function loadSynonyms(csvPath, species) {
   if (!existsSync(csvPath)) return new Map();
   const raw = await readFile(csvPath);
-  const records = parse(raw, { columns: true, skip_empty_lines: true });
+  // bom: true — Notepad/Excel on Windows prepend a UTF-8 BOM, which without
+  // stripping becomes part of the first column header and silently drops every row.
+  const records = parse(raw, { columns: true, skip_empty_lines: true, bom: true });
   const synonyms = new Map();
   for (const r of records) {
     const from = (r.from_binomial || '').trim().toLowerCase();

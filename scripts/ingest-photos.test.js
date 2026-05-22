@@ -143,4 +143,18 @@ describe('loadSynonyms', () => {
       rmSync(dir, { recursive: true, force: true });
     }
   });
+
+  it('strips a UTF-8 BOM so rows still parse when a curator saves via Notepad/Excel', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'syn-bom-'));
+    const path = join(dir, 's.csv');
+    try {
+      // ﻿ is the UTF-8 BOM that Windows Notepad and Excel prepend on save.
+      writeFileSync(path, '﻿from_binomial,to_species_slug\ngrammia nevadensis,apantesis-nevadensis\n');
+      const result = await loadSynonyms(path, species);
+      assert.equal(result.size, 1);
+      assert.equal(result.get('grammia nevadensis').species_slug, 'apantesis-nevadensis');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });
