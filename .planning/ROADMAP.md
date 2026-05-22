@@ -266,7 +266,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 26-03-PLAN.md — Build scripts/ingest-photos.js CLI composing the three libraries; classification cascade against data/species.csv; withRetry exponential backoff with DROPBOX_TOKEN redaction; logStage helper; resumability via content_hash Set; add npm aliases photos:ingest + photos:investigate (INGEST-01, INGEST-05, OPS-01, OPS-02, OPS-03)
+- [x] 26-03-PLAN.md — Build scripts/ingest-photos.js CLI composing the three libraries; classification cascade against data/species.csv; withRetry exponential backoff with DROPBOX_TOKEN redaction; logStage helper; resumability via content_hash Set; add npm aliases photos:ingest + photos:investigate (INGEST-01, INGEST-05, OPS-01, OPS-02, OPS-03)
 
 **Wave 3** *(blocked on Wave 2 completion; contains the human-verify checkpoint)*
 
@@ -375,7 +375,7 @@ Plans:
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 2/4 | In Progress|  |
+| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 3/4 | In Progress|  |
 | 27. Synonym Curation Pass | v2.2 | 0/0 | Not started | — |
 | 28. DZI Tile Generation Pipeline | v2.2 | 0/0 | Not started | — |
 | 29. bunny.net Upload of Tile Pyramids | v2.2 | 0/0 | Not started | — |
