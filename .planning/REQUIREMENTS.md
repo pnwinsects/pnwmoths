@@ -10,11 +10,11 @@
 
 ### INGEST — Dropbox fetch, filename parser, manifest schema
 
-- [ ] **INGEST-01**: System ingests files from the v2.2 Dropbox shared folder one at a time via the Dropbox API (`shared_link` parameter for the `scl/fo` rlkey URL); ingest does not require the user to download the folder locally first
-- [ ] **INGEST-02**: Filename parser handles the convention `Genus species-{specimen}-{view}.{ext}` including: hyphenated genus-species form (`Genus-species`), 2-character species epithets (`ni`, `ou`), hyphenated species epithets (`v-alba`, `c-nigrum`), and specimen IDs that are either a single letter or an institutional accession (`OSAC_*`, `WWUC*`)
-- [ ] **INGEST-03**: Parser routes provisional IDs (`n sp`, `sp`, `nr <species>`) to a separate `provisional` manifest bucket — they parse successfully but are not auto-published; curator decides whether to publish each
-- [ ] **INGEST-04**: Local manifest (SQLite or JSON on the processing server) persists per-image rows with at minimum: `dropbox_path`, `content_hash`, `size`, `server_modified`, `filename_raw`, `binomial_raw`, `specimen_id`, `view` (D|V), `binomial_resolved`, `species_slug`, `match_bucket`, `status`
-- [ ] **INGEST-05**: Ingest is resumable — re-running skips files whose `dropbox_path` + `content_hash` already exist in the manifest without re-downloading
+- [x] **INGEST-01**: System ingests files from the v2.2 Dropbox shared folder one at a time via the Dropbox API (`shared_link` parameter for the `scl/fo` rlkey URL); ingest does not require the user to download the folder locally first
+- [x] **INGEST-02**: Filename parser handles the convention `Genus species-{specimen}-{view}.{ext}` including: hyphenated genus-species form (`Genus-species`), 2-character species epithets (`ni`, `ou`), hyphenated species epithets (`v-alba`, `c-nigrum`), and specimen IDs that are either a single letter or an institutional accession (`OSAC_*`, `WWUC*`)
+- [x] **INGEST-03**: Parser routes provisional IDs (`n sp`, `sp`, `nr <species>`) to a separate `provisional` manifest bucket — they parse successfully but are not auto-published; curator decides whether to publish each
+- [x] **INGEST-04**: Local manifest (SQLite or JSON on the processing server) persists per-image rows with at minimum: `dropbox_path`, `content_hash`, `size`, `server_modified`, `filename_raw`, `binomial_raw`, `specimen_id`, `view` (D|V), `binomial_resolved`, `species_slug`, `match_bucket`, `status`
+- [x] **INGEST-05**: Ingest is resumable — re-running skips files whose `dropbox_path` + `content_hash` already exist in the manifest without re-downloading
 
 ### CURATE — Synonym resolution and investigation queue
 
@@ -49,9 +49,9 @@
 
 ### OPS — Operability of long-running pipeline jobs
 
-- [ ] **OPS-01**: Ingest/tile/upload jobs emit per-stage progress logs (counts, elapsed, ETA) suitable for tailing during a multi-hour run
-- [ ] **OPS-02**: Jobs retry on transient failures (Dropbox API rate limits, bunny.net 5xx, network drops) with exponential backoff; permanent failures mark the row `status: failed` with an error reason in the manifest, not a process crash
-- [ ] **OPS-03**: Jobs can resume from arbitrary interruption (signal, crash, network drop) using the manifest as recovery state — no manual reconciliation step required
+- [x] **OPS-01**: Ingest/tile/upload jobs emit per-stage progress logs (counts, elapsed, ETA) suitable for tailing during a multi-hour run
+- [x] **OPS-02**: Jobs retry on transient failures (Dropbox API rate limits, bunny.net 5xx, network drops) with exponential backoff; permanent failures mark the row `status: failed` with an error reason in the manifest, not a process crash
+- [x] **OPS-03**: Jobs can resume from arbitrary interruption (signal, crash, network drop) using the manifest as recovery state — no manual reconciliation step required
 
 ---
 
@@ -82,11 +82,11 @@ These were considered for v2.2 but are deferred to later milestones:
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| INGEST-01 | Phase 26 | Pending |
-| INGEST-02 | Phase 26 | Pending |
-| INGEST-03 | Phase 26 | Pending |
-| INGEST-04 | Phase 26 | Pending |
-| INGEST-05 | Phase 26 | Pending |
+| INGEST-01 | Phase 26 | Complete |
+| INGEST-02 | Phase 26 | Complete |
+| INGEST-03 | Phase 26 | Complete |
+| INGEST-04 | Phase 26 | Complete |
+| INGEST-05 | Phase 26 | Complete |
 | CURATE-01 | Phase 27 | Pending |
 | CURATE-02 | Phase 27 | Pending |
 | CURATE-03 | Phase 27 | Pending |
@@ -103,9 +103,9 @@ These were considered for v2.2 but are deferred to later milestones:
 | VIEWER-02 | Phase 31 | Pending |
 | VIEWER-03 | Phase 31 | Pending |
 | VIEWER-04 | Phase 31 | Pending |
-| OPS-01 | Phase 26 | Pending |
-| OPS-02 | Phase 26 | Pending |
-| OPS-03 | Phase 26 | Pending |
+| OPS-01 | Phase 26 | Complete |
+| OPS-02 | Phase 26 | Complete |
+| OPS-03 | Phase 26 | Complete |
 
 **Coverage:** 24/24 requirements mapped to phases ✓
 

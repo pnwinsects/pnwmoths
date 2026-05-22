@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: executing
-stopped_at: Phase 26 context gathered
-last_updated: "2026-05-22T03:45:59.935Z"
+status: ready_to_plan
+stopped_at: Phase 26 complete (4/4) — ready to discuss Phase 27
+last_updated: 2026-05-22T16:06:36.418Z
 last_activity: 2026-05-22 -- Phase 26 execution started
 progress:
   total_phases: 13
   completed_phases: 0
   total_plans: 4
-  completed_plans: 0
+  completed_plans: 4
   percent: 0
 ---
 
@@ -21,20 +21,20 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 26 — dropbox-ingest-filename-parser-and-manifest
+**Current focus:** Phase 27 — synonym curation pass
 
 ## Current Position
 
-Phase: 26 (dropbox-ingest-filename-parser-and-manifest) — EXECUTING
-Plan: 1 of 4
-Status: Executing Phase 26
-Last activity: 2026-05-22 -- Phase 26 execution started
+Phase: 27
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-05-22
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 15 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1) = 48 total
+- Total plans completed: 19 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1) = 48 total
 - Average duration: unknown
 - Total execution time: unknown
 
