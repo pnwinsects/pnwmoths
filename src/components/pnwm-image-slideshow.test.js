@@ -42,3 +42,19 @@ describe('_formatCaption', () => {
     assert.deepEqual(result, []);
   });
 });
+
+describe('_buildDziUrl', () => {
+  it('constructs DZI URL from cdnBaseUrl + tiles_path + specimen_id + view', () => {
+    const ctx = { cdnBaseUrl: 'https://pnwmoths.b-cdn.net' };
+    const specimen = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
+    const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, specimen);
+    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/A-D.dzi');
+  });
+
+  it('handles institutional accession specimen_id', () => {
+    const ctx = { cdnBaseUrl: 'https://pnwmoths.b-cdn.net' };
+    const specimen = { specimen_id: 'WWUC0000003275', view: 'V', tiles_path: 'species-tiles/feltia-herilis/WWUC0000003275-V' };
+    const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, specimen);
+    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/feltia-herilis/WWUC0000003275-V/WWUC0000003275-V.dzi');
+  });
+});

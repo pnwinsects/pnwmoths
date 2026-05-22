@@ -7,6 +7,11 @@ export class PnwmImageSlideshow extends LitElement {
     _lightboxOpen: { state: true },
     _images: { attribute: false, state: true },
     _stripOverflows: { state: true },
+    highResAvailable: { type: Boolean, attribute: 'high-res-available' },
+    highResSpecimens: { attribute: 'high-res-specimens' },
+    cdnBaseUrl: { type: String, attribute: 'cdn-base-url' },
+    prefixUrl: { type: String, attribute: 'prefix-url' },
+    _highResSpecimens: { state: true },
   };
 
   static styles = css`
@@ -87,6 +92,7 @@ export class PnwmImageSlideshow extends LitElement {
     this._stripOverflows = false;
     this._resizeObserver = null;
     this._inertedElements = [];
+    this._osdViewer = null;
     this._handleKeydown = this._handleKeydown.bind(this);
   }
 
@@ -117,6 +123,15 @@ export class PnwmImageSlideshow extends LitElement {
     // Hide static figures once JS component takes over
     if (this._images.length > 0) {
       figures.forEach(f => { f.style.display = 'none'; });
+    }
+
+    if (this.getAttribute('high-res-specimens')) {
+      try {
+        this._highResSpecimens = JSON.parse(this.getAttribute('high-res-specimens'));
+      } catch (e) {
+        console.error('[pnwmoths] Failed to parse high-res-specimens attribute', e);
+        this._highResSpecimens = [];
+      }
     }
 
     document.addEventListener('keydown', this._handleKeydown);
@@ -204,6 +219,10 @@ export class PnwmImageSlideshow extends LitElement {
     if (img.photographer) parts.push(`Photo © ${img.photographer}`);
 
     return parts;
+  }
+
+  _buildDziUrl(specimen) {
+    return `${this.cdnBaseUrl}/${specimen.tiles_path}/${specimen.specimen_id}-${specimen.view}.dzi`;
   }
 
   _scrollLeft() {
