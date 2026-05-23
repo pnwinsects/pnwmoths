@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Completed 29-02-PLAN.md — tile-photos.js bulk DZI pipeline, 16 tests, photos:tile alias
-last_updated: "2026-05-23T05:54:23Z"
-last_activity: 2026-05-23 -- Phase 29 Plan 02 complete (tile-photos.js, tile-photos.test.js, package.json)
+stopped_at: Phase 29 complete — DZI tile generation pipeline verified end-to-end
+last_updated: "2026-05-23T15:41:00Z"
+last_activity: 2026-05-23 -- Phase 29 all 3 plans complete; 182/182 tests; verification passed locally
 progress:
   total_phases: 14
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 20
-  completed_plans: 13
-  percent: 22
+  completed_plans: 16
+  percent: 29
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 29 — DZI tile generation pipeline (bulk), Plan 02 next
+**Current focus:** Phase 30 — bunny.net upload of tile pyramids (bulk)
 
 ## Current Position
 
-Phase: 29 (dzi-tile-generation-pipeline) — IN PROGRESS (Plans 01-02 complete; Plan 03 remaining)
-Status: 29-02 shipped — tile-photos.js bulk DZI pipeline, tile-photos.test.js (16 tests), photos:tile alias
-Last activity: 2026-05-23 -- 29-02-PLAN.md executed; 3 tasks committed; npm test 181/181
+Phase: 29 (dzi-tile-generation-pipeline) — COMPLETE (all 3 plans done; verified locally)
+Status: Phase 29 shipped — tile-config.json, dropbox-download.js, tile-photos.js, runbook, 182/182 tests
+Last activity: 2026-05-23 -- 29-03 verified; dropbox_path backfilled; non-retriable 4xx fix committed
 
 ## Performance Metrics
 
@@ -68,6 +68,9 @@ Recent decisions affecting current work:
 - Phase 29 Plan 02: Export tilePrefix/tiffCachePath/isAlreadyTiled/isTileable for testability without network or vips
 - Phase 29 Plan 02: Filesystem idempotency (isAlreadyTiled) layered on manifest idempotency (status=tiled) to recover from interrupted runs
 - Phase 29 Plan 02: species_slug lowercased unconditionally in tilePrefix per Phase 28 mixed-case lesson
+- Phase 29 fix: Dropbox shared_link API does not return path_display — use '/' + entry.name as fallback; manifest backfilled
+- Phase 29 fix: downloadSharedFile marks 4xx (non-429) errors as err.retriable=false; withRetry bails immediately on these
+- Phase 29 fix: DROPBOX_TOKEN requires sharing.read + files.content.read scopes (not just files.metadata.read) for tile downloads
 - v2.2 locked (exploration): Local manifest (SQLite/JSON) is source of truth — durable per-image status; survives restarts; seeds `data/species-photos.json`
 - v2.2 locked (exploration): Dropbox is a superset; match → replace existing low-res; unmatched → manual investigation (no auto-drop)
 - v2.2 locked (exploration): Folder layout flat with encoded filenames — convention `Genus species-{specimen}-{view}.{ext}` (same as Phase 13 photos)

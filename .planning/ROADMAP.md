@@ -104,7 +104,7 @@
 - [x] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs) (completed 2026-05-22)
 - [x] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first (completed 2026-05-22)
 - [ ] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit
-- [ ] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config
+- [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
 - [ ] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit
 - [ ] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows
 - [ ] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
@@ -354,11 +354,11 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 29-02-PLAN.md — Build scripts/tile-photos.js CLI composing config + dropbox-download + vips dzsave; per-row idempotency via status + on-disk .dzi guards; redact+withRetry+logStage helpers; npm alias photos:tile (TILE-01, TILE-02, TILE-03)
+- [x] 29-02-PLAN.md — Build scripts/tile-photos.js CLI composing config + dropbox-download + vips dzsave; per-row idempotency via status + on-disk .dzi guards; redact+withRetry+logStage helpers; npm alias photos:tile (TILE-01, TILE-02, TILE-03)
 
 **Wave 3** *(blocked on Wave 2; contains the human-verify checkpoint)*
 
-- [ ] 29-03-PLAN.md — Author _instructions/TILING_HIGH_RES_PHOTOS.md operator runbook; human-verify checkpoint runs DRY_RUN + idempotency proof + .dzi Format check + npm test on the datacenter server (TILE-01, TILE-02, TILE-03)
+- [x] 29-03-PLAN.md — Author _instructions/TILING_HIGH_RES_PHOTOS.md operator runbook; human-verify checkpoint runs DRY_RUN + idempotency proof + .dzi Format check + npm test locally (TILE-01, TILE-02, TILE-03)
 
 ### Phase 30: bunny.net Upload of Tile Pyramids (bulk)
 
