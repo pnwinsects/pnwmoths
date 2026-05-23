@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: Phase 29 shipped — tile-config.json, dropbox-download.js, tile-photos.js, runbook, 182/182 tests
+status: executing
 stopped_at: Phase 30 context gathered
-last_updated: "2026-05-23T16:37:46.150Z"
-last_activity: 2026-05-23 -- 29-03 verified; dropbox_path backfilled; non-retriable 4xx fix committed
+last_updated: "2026-05-23T18:29:59.693Z"
+last_activity: 2026-05-23 -- Phase 30 planning complete
 progress:
   total_phases: 14
   completed_phases: 3
-  total_plans: 15
+  total_plans: 17
   completed_plans: 14
   percent: 21
 ---
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 ## Current Position
 
 Phase: 29 (dzi-tile-generation-pipeline) — COMPLETE (all 3 plans done; verified locally)
-Status: Phase 29 shipped — tile-config.json, dropbox-download.js, tile-photos.js, runbook, 182/182 tests
-Last activity: 2026-05-23 -- 29-03 verified; dropbox_path backfilled; non-retriable 4xx fix committed
+Status: Ready to execute
+Last activity: 2026-05-23 -- Phase 30 planning complete
 
 ## Performance Metrics
 
