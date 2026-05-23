@@ -1,6 +1,7 @@
 _site/
 data/parquet/
 node_modules/
+var/
 .lycheecache
 # Former Git LFS directories: images are now served from CDN, not stored in this repo
 images/
