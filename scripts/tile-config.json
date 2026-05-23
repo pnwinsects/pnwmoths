@@ -1,0 +1,9 @@
+{
+  "tileSize": 256,
+  "overlap": 1,
+  "suffix": ".webp[Q=80]",
+  "layout": "dz",
+  "tileOutputDir": "/var/lib/pnwmoths/tiles",
+  "tiffCacheDir": "/var/lib/pnwmoths/tiffs",
+  "dropboxShareUrl": "https://www.dropbox.com/scl/fo/uf3sg1efxau1fug4f6ibe/AARZETfHfpzlvILrd6KLWlc?rlkey=7m1pm3z0rnasb9i01a5ht0ppf&st=emehj9n2&dl=0"
+}
