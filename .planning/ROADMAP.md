@@ -396,7 +396,12 @@ Plans:
   4. `npm run build` produces the same page count it did at the end of v2.1 (1,364 species pages), now with high-res photo entries available on species that have them
   5. The pilot's hand-edited species entry (Phase 28) is replaced by a manifest-derived entry with no user-visible change to that species' lightbox behavior
 
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+**Wave 1** (parallel)
+
+- [ ] 31-01-PLAN.md — Build scripts/generate-species-photos.js (readManifest -> filter uploaded -> group by slug -> sort specimens -> write JSON with locked pilot shape) + unit tests + photos:materialize npm alias (DATA-01, DATA-02)
+- [ ] 31-02-PLAN.md — Add DATA-03 guard at src/species/species.njk line 47 (suppresses low-res figures when high_res_available is true); human-verify against abagrotis-apposita and a non-high-res species (DATA-03)
 
 ### Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)
 
@@ -450,8 +455,8 @@ Plans:
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
-| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete   | 2026-05-23 |
-| 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
+| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
+| 31. `data/species-photos.json` Build Integration | v2.2 | 0/2 | Planned | — |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 
 ---

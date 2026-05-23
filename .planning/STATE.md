@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: planning
-stopped_at: Phase 31 context gathered
-last_updated: "2026-05-23T23:31:21.801Z"
-last_activity: 2026-05-23
+status: executing
+stopped_at: Phase 31 UI-SPEC approved
+last_updated: "2026-05-23T23:58:01.125Z"
+last_activity: 2026-05-23 -- Phase 31 planning complete
 progress:
   total_phases: 14
   completed_phases: 4
-  total_plans: 17
+  total_plans: 19
   completed_plans: 16
   percent: 29
 ---
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-05-23 after Phase 30)
 ## Current Position
 
 Phase: 31
-Status: Ready to plan
-Last activity: 2026-05-23
+Status: Ready to execute
+Last activity: 2026-05-23 -- Phase 31 planning complete
 
 ## Performance Metrics
 
@@ -128,6 +128,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-23T23:31:21.788Z
-Stopped at: Phase 31 context gathered
-Resume file: .planning/phases/31-data-species-photos-json-build-integration/31-CONTEXT.md
+Last session: 2026-05-23T23:43:14.959Z
+Stopped at: Phase 31 UI-SPEC approved
+Resume file: .planning/phases/31-data-species-photos-json-build-integration/31-UI-SPEC.md
