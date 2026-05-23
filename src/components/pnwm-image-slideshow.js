@@ -206,7 +206,7 @@ export class PnwmImageSlideshow extends LitElement {
           visibilityRatio: 1.0,
           minZoomLevel: 0.5,
           defaultZoomLevel: 0,
-          showNavigator: true,
+          showNavigator: false,
           showRotationControl: false,
         });
       }
