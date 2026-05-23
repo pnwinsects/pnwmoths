@@ -377,7 +377,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 30-01-PLAN.md — Build scripts/upload-tiles.js (manifest loop + curl PUT + pre-flight footprint + tile deletion) + unit tests + photos:upload npm alias (UPLOAD-01, UPLOAD-02, UPLOAD-03)
+- [x] 30-01-PLAN.md — Build scripts/upload-tiles.js (manifest loop + curl PUT + pre-flight footprint + tile deletion) + unit tests + photos:upload npm alias (UPLOAD-01, UPLOAD-02, UPLOAD-03)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -450,7 +450,7 @@ Plans:
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
-| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 0/2 | Planned | — |
+| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 1/2 | In Progress|  |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 

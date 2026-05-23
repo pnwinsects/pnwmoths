@@ -34,9 +34,9 @@
 
 ### UPLOAD — bunny.net upload and manifest finalization
 
-- [ ] **UPLOAD-01**: System uploads each image's tile directory to bunny.net Storage using the Phase 13 HTTP PUT pattern; URL convention `{{ cdnBaseUrl }}/species-tiles/{species-slug}/{specimen_id}-{view}/`
-- [ ] **UPLOAD-02**: Manifest tracks upload status (`status: tiled → uploaded`); reruns skip already-uploaded images
-- [ ] **UPLOAD-03**: bunny.net storage footprint is sanity-checked against pricing before bulk upload commits (expected ~1 TB; ~5× DZI overhead on 204 GB source)
+- [x] **UPLOAD-01**: System uploads each image's tile directory to bunny.net Storage using the Phase 13 HTTP PUT pattern; URL convention `{{ cdnBaseUrl }}/species-tiles/{species-slug}/{specimen_id}-{view}/`
+- [x] **UPLOAD-02**: Manifest tracks upload status (`status: tiled → uploaded`); reruns skip already-uploaded images
+- [x] **UPLOAD-03**: bunny.net storage footprint is sanity-checked against pricing before bulk upload commits (expected ~1 TB; ~5× DZI overhead on 204 GB source)
 
 ### DATA — `data/species-photos.json` build integration
 
@@ -98,9 +98,9 @@ These were considered for v2.2 but are deferred to later milestones:
 | TILE-01 | Phase 29 | Pending |
 | TILE-02 | Phase 29 | Pending |
 | TILE-03 | Phase 29 | Pending |
-| UPLOAD-01 | Phase 30 | Pending |
-| UPLOAD-02 | Phase 30 | Pending |
-| UPLOAD-03 | Phase 30 | Pending |
+| UPLOAD-01 | Phase 30 | Complete |
+| UPLOAD-02 | Phase 30 | Complete |
+| UPLOAD-03 | Phase 30 | Complete |
 | DATA-01 | Phase 31 | Pending |
 | DATA-02 | Phase 31 | Pending |
 | DATA-03 | Phase 31 | Pending |
