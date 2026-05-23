@@ -221,7 +221,7 @@ export function isTileable(row) {
 function runVipsDzsave(sourceTiff, prefix, config) {
   execFileSync('vips', [
     'dzsave',
-    sourceTiff,
+    sourceTiff + '[unlimited]',
     prefix,
     '--tile-size', String(config.tileSize),
     '--overlap', String(config.overlap),
