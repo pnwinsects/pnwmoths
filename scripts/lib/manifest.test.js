@@ -8,6 +8,7 @@ import {
   readManifest,
   writeManifest,
   sortForInvestigation,
+  advanceStatus,
 } from './manifest.js';
 
 // ---------------------------------------------------------------------------
@@ -244,5 +245,99 @@ describe('sortForInvestigation', () => {
     // Most frequent investigation group (empty-string × 2) comes first.
     assert.deepEqual(out.slice(0, 2).map(r => r._id), ['u1', 'u2']);
     assert.equal(out[2]._id, 'z');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// advanceStatus — in-place status transition helper (Phase 29 TILE-03)
+// ---------------------------------------------------------------------------
+describe('advanceStatus', () => {
+  // Helper to build a fully-populated row using every COLUMN.
+  function makeRow(overrides = {}) {
+    return {
+      content_hash:      'aaa1111111111111111111111111111111111111111111111111111111111111',
+      dropbox_path:      '/Abagrotis apposita-A-D.tif',
+      size_bytes:        '40000000',
+      server_modified:   '2026-05-21T10:00:00Z',
+      filename_raw:      'Abagrotis apposita-A-D.tif',
+      binomial_raw:      'abagrotis apposita',
+      specimen_id:       'A',
+      view:              'D',
+      binomial_resolved: 'abagrotis apposita',
+      species_slug:      'abagrotis-apposita',
+      match_bucket:      'clean-match',
+      status:            'discovered',
+      last_error:        '',
+      ...overrides,
+    };
+  }
+
+  it("setting 'downloaded' clears last_error and preserves all other columns", () => {
+    const row = makeRow({ status: 'discovered', last_error: 'previous failure' });
+    // Snapshot every column value before the call.
+    const before = { ...row };
+
+    const result = advanceStatus(row, 'downloaded');
+
+    // Returns the same reference.
+    assert.equal(result, row);
+    // Status advanced.
+    assert.equal(row.status, 'downloaded');
+    // last_error cleared.
+    assert.equal(row.last_error, '');
+    // Every other column is byte-identical to its prior value.
+    for (const col of COLUMNS) {
+      if (col === 'status' || col === 'last_error') continue;
+      assert.equal(
+        row[col],
+        before[col],
+        `column '${col}' must be preserved; was '${before[col]}', now '${row[col]}'`,
+      );
+    }
+    // Verify the per-column loop actually checked the key columns.
+    assert.equal(row.content_hash, before.content_hash);
+    assert.equal(row.dropbox_path, before.dropbox_path);
+    assert.equal(row.binomial_raw, before.binomial_raw);
+    assert.equal(row.species_slug, before.species_slug);
+    assert.equal(row.match_bucket, before.match_bucket);
+  });
+
+  it("setting 'failed' records last_error from extra.last_error and preserves other columns", () => {
+    const row = makeRow({ status: 'downloaded', last_error: '' });
+    const before = { ...row };
+
+    advanceStatus(row, 'failed', { last_error: 'vips: cannot open input' });
+
+    assert.equal(row.status, 'failed');
+    assert.equal(row.last_error, 'vips: cannot open input');
+    // Every other column preserved.
+    for (const col of COLUMNS) {
+      if (col === 'status' || col === 'last_error') continue;
+      assert.equal(
+        row[col],
+        before[col],
+        `column '${col}' must be preserved; was '${before[col]}', now '${row[col]}'`,
+      );
+    }
+    // Named spot-checks.
+    assert.equal(row.content_hash, before.content_hash);
+    assert.equal(row.dropbox_path, before.dropbox_path);
+    assert.equal(row.binomial_raw, before.binomial_raw);
+    assert.equal(row.species_slug, before.species_slug);
+    assert.equal(row.match_bucket, before.match_bucket);
+  });
+
+  it('throws TypeError on empty nextStatus', () => {
+    assert.throws(
+      () => advanceStatus({}, ''),
+      (err) => {
+        assert.ok(err instanceof TypeError, `expected TypeError, got ${err.constructor.name}`);
+        assert.ok(
+          err.message.includes('nextStatus must be a non-empty string'),
+          `unexpected message: ${err.message}`,
+        );
+        return true;
+      },
+    );
   });
 });

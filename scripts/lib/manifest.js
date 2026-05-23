@@ -96,6 +96,40 @@ export async function writeManifest(path, rows) {
 }
 
 /**
+ * Advance a manifest row to a new status, updating `status` and `last_error`
+ * in-place while leaving all other columns untouched.
+ *
+ * Convention mirrors the in-place mutation in ingest-photos.js RESORT_ONLY
+ * path (scripts/ingest-photos.js:344-350): row properties are set directly on
+ * the object reference passed in, not on a copy.
+ *
+ * Called by Plan 02's scripts/tile-photos.js to advance rows from
+ * `downloaded` → `tiled` and to record `failed` with a reason string.
+ *
+ * @param {object} row         - Manifest row object (must not be null/undefined)
+ * @param {string} nextStatus  - New status value; must be a non-empty string
+ * @param {object} [extra={}]  - Optional extra fields:
+ *                               `extra.last_error` (string) stored when nextStatus === 'failed'
+ * @returns {object}           - The same `row` reference (for optional chaining)
+ * @throws {TypeError} If `row` is null/undefined or `nextStatus` is not a non-empty string
+ */
+export function advanceStatus(row, nextStatus, extra = {}) {
+  if (row == null) {
+    throw new TypeError('advanceStatus: row required');
+  }
+  if (typeof nextStatus !== 'string' || nextStatus.length === 0) {
+    throw new TypeError('advanceStatus: nextStatus must be a non-empty string');
+  }
+  row.status = nextStatus;
+  if (nextStatus === 'failed') {
+    row.last_error = String(extra.last_error ?? '');
+  } else {
+    row.last_error = '';
+  }
+  return row;
+}
+
+/**
  * Return a NEW array (input unmodified) re-ordered so the four investigation
  * buckets (genus-only, likely-synonym, provisional, unparseable) appear FIRST,
  * grouped by binomial_raw with the most-frequent group first. Within the same
