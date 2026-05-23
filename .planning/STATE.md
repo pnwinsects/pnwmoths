@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: executing
-stopped_at: Phase 29 complete — DZI tile generation pipeline verified end-to-end
-last_updated: "2026-05-23T15:41:00Z"
-last_activity: 2026-05-23 -- Phase 29 all 3 plans complete; 182/182 tests; verification passed locally
+status: Phase 29 shipped — tile-config.json, dropbox-download.js, tile-photos.js, runbook, 182/182 tests
+stopped_at: Phase 30 context gathered
+last_updated: "2026-05-23T16:37:46.150Z"
+last_activity: 2026-05-23 -- 29-03 verified; dropbox_path backfilled; non-retriable 4xx fix committed
 progress:
   total_phases: 14
-  completed_phases: 4
-  total_plans: 20
-  completed_plans: 16
-  percent: 29
+  completed_phases: 3
+  total_plans: 15
+  completed_plans: 14
+  percent: 21
 ---
 
 # Project State
@@ -123,7 +123,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-23T05:54:23Z
-Stopped at: Completed 29-02-PLAN.md — tile-photos.js bulk DZI pipeline, 16 tests, photos:tile alias
-Resume file: None
+Last session: 2026-05-23T16:37:46.138Z
+Stopped at: Phase 30 context gathered
+Resume file: .planning/phases/30-bunny-net-upload-of-tile-pyramids-bulk/30-CONTEXT.md
 Resume notes: Ready for Phase 29 Plan 03 (upload-tiles to bunny.net).
