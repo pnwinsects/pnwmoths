@@ -1,8 +1,8 @@
 # Phase 30: bunny.net Upload of Tile Pyramids (bulk) - Research
 
 **Researched:** 2026-05-23
-**Domain:** bunny.net Storage HTTP PUT, Node.js manifest pipeline, DZI tile upload
-**Confidence:** HIGH — every design decision is locked in CONTEXT.md with explicit decisions; all implementation patterns are extracted directly from the repo's existing scripts.
+**Domain:** Node.js CLI script, bunny.net Storage HTTP PUT, manifest-driven pipeline
+**Confidence:** HIGH
 
 ---
 
@@ -11,46 +11,33 @@
 
 ### Locked Decisions
 
-**D-01 (serial uploads):** `upload-tiles.js` uploads files one at a time using `execFileSync('curl', ...)` — same pattern as `scripts/upload-plates.js`. No concurrent PUT pool.
-
-**D-02 (whole-directory granularity on recovery):** If the script crashes mid-directory, the manifest row stays `status: tiled`. On restart, the script re-uploads the entire directory. bunny.net PUT is idempotent.
-
-**D-03 (immediate, unconditional deletion):** After advancing a manifest row to `status: uploaded`, the script immediately deletes the local `_files/` directory and `.dzi` file. No flag to skip deletion.
-
-**D-04 (always-on pre-flight, size only):** At startup, before any upload, the script walks tile output directories for all `status: tiled` rows, prints total bytes in GB. No cost projection. Operator reviews and Ctrl-C if needed.
-
-**L-01:** Script name is `scripts/upload-tiles.js`.
-
-**L-02:** `BUNNY_API_KEY` is the only required env var at invocation; `TILE_OUTPUT_DIR` overrides tile output dir (default from `scripts/tile-config.json`).
-
-**L-03:** `DRY_RUN=1` prints first 5 tile directory upload plans (CDN URL + file count) without uploading or modifying the manifest.
-
-**L-04:** `BUNNY_API_KEY` is redacted in all error messages (`msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')`).
-
-**L-05:** `withRetry` (5 attempts, 2s/4s/8s/16s/32s delays) wraps each individual file PUT. Non-retriable 4xx errors (`err.retriable = false`) bail immediately.
-
-**L-06:** `logStage(content_hash, action, outcome, extra)` for every per-row transition. Progress summary printed every 25 rows.
-
-**L-07:** Manifest written every 25 rows.
-
-**L-08:** URL convention is `species-tiles/{species_slug}/{specimen_id}-{view}/` with `species_slug` lowercased unconditionally.
-
-**Cross-phase locked (Phase 26):** D-06 streaming-delete model, D-10 env-vars-at-invocation, D-13 one-script-per-stage, D-15 logStage + withRetry shape.
+- **D-01 (serial uploads):** `upload-tiles.js` uploads files one at a time using `execFileSync('curl', ...)` — same pattern as `scripts/upload-plates.js`. No concurrent PUT pool.
+- **D-02 (whole-directory granularity on recovery):** If the script crashes mid-directory, the manifest row stays `status: tiled`. On restart, the script re-uploads the entire directory. bunny.net PUT is idempotent — already-uploaded files are overwritten safely.
+- **D-03 (immediate, unconditional deletion):** After advancing a manifest row to `status: uploaded`, the script immediately deletes `{tileOutputDir}/{slug}/{specimen_id}-{view}_files/` and `{tileOutputDir}/{slug}/{specimen_id}-{view}.dzi`.
+- **D-04 (always-on pre-flight, size only):** At startup, before any upload, `upload-tiles.js` walks the tile output directory for all `status: tiled` rows and prints total bytes (in GB). No cost projection.
+- **L-01:** Script name is `scripts/upload-tiles.js`.
+- **L-02:** `BUNNY_API_KEY` is the only required env var; `TILE_OUTPUT_DIR` overrides the tile output dir (default from `scripts/tile-config.json`).
+- **L-03:** `DRY_RUN=1` prints first 5 tile directory upload plans (CDN URL + file count) without uploading or modifying the manifest.
+- **L-04:** `BUNNY_API_KEY` is redacted in all error messages.
+- **L-05:** `withRetry` (5 attempts, 2s/4s/8s/16s/32s delays) wraps each individual file PUT. Non-retriable 4xx errors bail immediately.
+- **L-06:** `logStage(content_hash, action, outcome, extra)` for every per-row transition; progress summary printed every 25 rows.
+- **L-07:** Manifest written every 25 rows to bound data loss on crash.
+- **L-08:** URL convention is `species-tiles/{species_slug}/{specimen_id}-{view}/` with `species_slug` lowercased unconditionally.
 
 ### Claude's Discretion
 
 - **npm alias:** `photos:upload` (following `photos:ingest` / `photos:tile` naming convention).
-- **BUNNY_STORAGE_HOST / BUNNY_ZONE env vars:** Default to `la.storage.bunnycdn.com` and `pnwmoths` respectively (same defaults as `upload-plates.js`).
-- **Eligible rows filter:** Rows with `status: tiled` only. Rows with `status: uploaded` are skipped (manifest-level idempotency). Rows with other statuses are ignored.
+- **BUNNY_STORAGE_HOST / BUNNY_ZONE env vars:** Default to `la.storage.bunnycdn.com` and `pnwmoths` respectively.
+- **Eligible rows filter:** Rows with `status: tiled` only. Rows with `status: uploaded` are skipped. Other statuses are ignored.
 - **Manifest commit:** Script writes the CSV but does not git-commit. Operator runs `git add data/species-photos-manifest.csv && git commit` after the run.
 
 ### Deferred Ideas (OUT OF SCOPE)
 
-- DELETE_TILES=1 flag — rejected (D-03)
-- Concurrent file PUTs — rejected (D-01)
-- Per-file progress sidecar — rejected (D-02)
-- Cost projection in footprint check — rejected (D-04)
-- Separate `check-storage-footprint.js` script — rejected in favour of always-on pre-flight
+- DELETE_TILES=1 flag
+- Concurrent file PUTs
+- Per-file progress sidecar
+- Cost projection in footprint check
+- Separate `check-storage-footprint.js` script
 </user_constraints>
 
 ---
@@ -60,24 +47,24 @@
 
 | ID | Description | Research Support |
 |----|-------------|------------------|
-| UPLOAD-01 | System uploads each image's tile directory to bunny.net Storage using the Phase 13 HTTP PUT pattern; URL convention `species-tiles/{species-slug}/{specimen_id}-{view}/` | `scripts/upload-plates.js` provides the exact `execFileSync('curl', args)` template; curl args array confirmed correct for bunny.net Storage API. Storage path convention confirmed in 28-03-SUMMARY.md. |
-| UPLOAD-02 | Manifest tracks upload status (`status: tiled → uploaded`); reruns skip already-uploaded images | `scripts/lib/manifest.js` `advanceStatus` + `readManifest`/`writeManifest` are the standard pattern. Filter on `status === 'tiled'` at startup gives manifest-level idempotency. |
-| UPLOAD-03 | bunny.net storage footprint is sanity-checked against pricing before bulk upload commits | Pre-flight walk of all `status: tiled` tile directories using `statSync`/`readdirSync` recursively; sum bytes; print GB before first upload. Operator Ctrl-C to abort. |
+| UPLOAD-01 | System uploads each image's tile directory to bunny.net Storage using the Phase 13 HTTP PUT pattern; URL convention `{cdnBaseUrl}/species-tiles/{species-slug}/{specimen_id}-{view}/` | `scripts/upload-plates.js` provides the verbatim curl PUT pattern. `tilePrefix()` in `tile-photos.js` confirms the on-disk layout (`{tileOutputDir}/{slug}/{specimen_id}-{view}.dzi` + `{specimen_id}-{view}_files/`). CDN_BASE_URL = `https://pnwmoths.b-cdn.net`. |
+| UPLOAD-02 | Manifest tracks upload status (`status: tiled → uploaded`); reruns skip already-uploaded images | `scripts/lib/manifest.js` `advanceStatus` + `readManifest`/`writeManifest` provide the mechanics. Filter on `status === 'tiled'`; skip `status === 'uploaded'`. |
+| UPLOAD-03 | bunny.net storage footprint sanity-checked before bulk upload (expected ~1 TB; ~5× DZI overhead on 204 GB source) | Pre-flight walk of `tileOutputDir` for all `status: tiled` rows; sum bytes; print GB. Currently 3,510 tiled rows = 447,723 files = 3.2 GB on local disk (partial corpus; full ~3,808 rows after Phase 29 completes). |
 </phase_requirements>
 
 ---
 
 ## Summary
 
-Phase 30 is a well-defined implementation of a manifest-driven bulk upload script. The codebase already contains a direct template (`scripts/upload-plates.js`) and all three shared helpers (`withRetry`, `redact`, `logStage`) in the already-verified `scripts/tile-photos.js`. The manifest library is stable and battle-tested across Phases 26–29.
+Phase 30 is a manifest-driven upload script (`scripts/upload-tiles.js`) that is structurally a direct descendant of two existing scripts: `scripts/upload-plates.js` (the HTTP PUT + curl pattern) and `scripts/tile-photos.js` (the manifest loop, `withRetry`, `logStage`, `redact`, and periodic flush). There are no new npm packages to install and no new architectural patterns to discover — the phase is an integration of already-proven pieces.
 
-The primary implementation challenge is accurately mapping the on-disk tile directory layout to the CDN storage path. The disk layout is `{tileOutputDir}/{slug}/{specimen_id}-{view}.dzi` + `{tileOutputDir}/{slug}/{specimen_id}-{view}_files/`, and the CDN path is `species-tiles/{slug}/{specimen_id}-{view}/{specimen_id}-{view}.dzi` and `species-tiles/{slug}/{specimen_id}-{view}/{specimen_id}-{view}_files/...`. The `tilePrefix()` function exported from `tile-photos.js` is the canonical computation; Phase 30 needs an equivalent `uploadPrefix()` or can call `tilePrefix()` directly if imported.
+The current state of the local machine: `var/tiles/` has 3,547 DZI pairs across 1,153 species directories, totaling 3.2 GB and 447,723 files. The manifest shows 3,510 rows with `status: tiled` (1,450 rows remain at `status: discovered` pending Phase 29 completion). The full run will upload roughly 3,808 rows to bunny.net Storage Zone `pnwmoths` at path `species-tiles/{slug}/{specimen_id}-{view}/`. At ~92 files per tile directory × 3,808 rows = ~350,000 file PUTs plus 3,808 `.dzi` descriptor PUTs.
 
-A subtlety discovered during investigation: vips also writes `vips-properties.xml` files inside `_files/` subdirectories (confirmed in local tile output at `var/tiles/`). The `walk()` function from `upload-plates.js` will pick these up automatically and they should be uploaded alongside the webp tiles — they are valid DZI payload files.
+All execution happens on this laptop. Default tile output dir is `var/tiles` (relative to repo root, per `scripts/tile-config.json`). The `TILE_OUTPUT_DIR` env var overrides this for non-default locations.
 
-The deletion step (D-03) must delete `{prefix}.dzi` AND `{prefix}_files/` recursively after each successful row. Node.js `fs.rm(path, { recursive: true })` (Node 14.14+) or `fs.rmSync` is the right tool.
+The key implementation decisions are all locked (D-01 through D-04, L-01 through L-08). The planner's job is to lay out three deliverables: the upload script, the storage footprint pre-flight logic (built into the main script), and the operator runbook `_instructions/UPLOADING_TILES.md`.
 
-**Primary recommendation:** Implement `scripts/upload-tiles.js` as a direct adaptation of `scripts/upload-plates.js`, replacing progress-file tracking with manifest status tracking, adding pre-flight footprint walk, and using `tilePrefix()` (from `tile-photos.js` exports) to resolve disk paths. Copy `withRetry`, `redact`, and `logStage` verbatim from `tile-photos.js`.
+**Primary recommendation:** Implement `scripts/upload-tiles.js` by compositing the walk/PUT/retry loop from `upload-plates.js` with the manifest filter/flush/logStage/redact pattern from `tile-photos.js`. Mirror the `BUNNY_STORAGE_HOST`/`BUNNY_ZONE`/`BUNNY_API_KEY` env shape. Add pre-flight footprint walk before the upload loop. Add tile deletion after advancing status. Wire `photos:upload` npm alias. Write the runbook.
 
 ---
 
@@ -85,44 +72,42 @@ The deletion step (D-03) must delete `{prefix}.dzi` AND `{prefix}_files/` recurs
 
 | Capability | Primary Tier | Secondary Tier | Rationale |
 |------------|-------------|----------------|-----------|
-| Manifest state management | Operator scripts | — | Flat CSV; `scripts/lib/manifest.js` owns read/write; no server tier exists |
-| HTTP PUT to bunny.net Storage | Operator scripts (Node) | — | `execFileSync('curl', ...)` pattern; sync, serial; runs on datacenter server |
-| Storage footprint pre-flight | Operator scripts (Node) | — | Local filesystem walk before any network calls |
-| CDN path construction | Operator scripts | — | Deterministic from `species_slug`, `specimen_id`, `view`; locked to `tilePrefix()` logic |
-| Tile file enumeration | Operator scripts (Node) | — | Recursive `walk()` of `{prefix}_files/` + the `.dzi` file |
-| Local tile deletion | Operator scripts (Node) | — | `fs.rm({ recursive: true })` after successful row upload |
-| Pull Zone CDN serving | bunny.net (external) | — | Already configured with CORS; no Phase 30 CDN config changes needed |
+| Tile upload (HTTP PUT) | Pipeline script (Node.js CLI) | bunny.net Storage API | The script is the active agent; bunny.net is the passive receiver |
+| Manifest state management | Pipeline script | CSV on disk | `lib/manifest.js` handles all I/O; script calls `advanceStatus` |
+| Storage footprint measurement | Pipeline script (startup) | — | Walk is local filesystem; no external call needed |
+| Tile directory deletion | Pipeline script (post-upload) | OS filesystem | Immediately after row advances to `uploaded` (D-03) |
+| CDN path derivation | Pipeline script | — | `tilePrefix()` convention already established in Phase 29; reuse the same `.toLowerCase()` logic |
+| URL verification (runbook spot-check) | Operator (manual) | CDN Pull Zone | Script does not auto-check; runbook documents `curl -I` step per ROADMAP SC-4 |
 
 ---
 
 ## Standard Stack
 
-### Core (no new packages needed)
+### Core (all already in package.json or Node.js built-ins)
 
-All libraries required for Phase 30 are already installed in the project.
+| Library | Version | Purpose | Why Standard |
+|---------|---------|---------|--------------|
+| `node:fs/promises` (built-in) | Node 24 | `readdir`, `unlink`, `rm`, `stat` | Used in upload-plates.js and tile-photos.js [VERIFIED: codebase] |
+| `node:fs` (built-in) | Node 24 | `existsSync` | Used throughout the pipeline [VERIFIED: codebase] |
+| `node:path` (built-in) | Node 24 | `join`, `resolve`, `relative`, `dirname` | Used throughout the pipeline [VERIFIED: codebase] |
+| `node:child_process` (built-in) | Node 24 | `execFileSync('curl', args)` | Phase 13 + Phase 18 locked pattern for bunny.net PUT [VERIFIED: codebase] |
+| `csv-parse` (existing dep) | ^6.2.1 | Manifest CSV parsing (via `lib/manifest.js`) | Already in package.json; Phase 26 locked [VERIFIED: package.json] |
+| `csv-stringify` (existing dep) | ^6.x | Manifest CSV writing (via `lib/manifest.js`) | Already in package.json; Phase 26 locked [VERIFIED: package.json] |
 
-| Library | Version | Purpose | Source |
-|---------|---------|---------|--------|
-| Node.js built-ins | 24.15.0 (`.nvmrc`) | `fs`, `path`, `child_process` — all I/O and exec | [VERIFIED: .nvmrc] |
-| `csv-parse` | ^6.2.1 (installed) | `readManifest` in `lib/manifest.js` | [VERIFIED: package.json] |
-| `csv-stringify` | ^6.7.0 (installed) | `writeManifest` in `lib/manifest.js` | [VERIFIED: package.json] |
-| `curl` CLI | system (verified via upload-plates.js) | HTTP PUT to bunny.net Storage | [VERIFIED: scripts/upload-plates.js pattern confirmed in Phase 28 pilot] |
+**No new packages are required.** [VERIFIED: codebase grep] The script imports only Node.js built-ins and `scripts/lib/manifest.js`.
 
-**No new npm installs required for Phase 30.**
+### Supporting Tools (environment, not npm)
 
-### Reused Project Modules
-
-| Module | Path | What Phase 30 Uses |
-|--------|------|--------------------|
-| `manifest.js` | `scripts/lib/manifest.js` | `readManifest`, `writeManifest`, `advanceStatus` — verbatim reuse |
-| `tile-photos.js` | `scripts/tile-photos.js` | `tilePrefix()` export — disk path computation; `withRetry`, `redact`, `logStage` — copy verbatim |
-| `tile-config.json` | `scripts/tile-config.json` | `tileOutputDir` default path |
+| Tool | Version | Purpose | Availability |
+|------|---------|---------|-------------|
+| `curl` | 8.7.1 | HTTP PUT to bunny.net Storage | Available [VERIFIED: `curl --version`] |
+| `node` | v24.15.0 | Script runtime | Available, matches `.nvmrc` [VERIFIED: `node --version`] |
 
 ---
 
 ## Package Legitimacy Audit
 
-No new packages are being installed. All libraries are already in `package.json`. This section is not applicable.
+Phase 30 installs **no new npm packages**. All dependencies are either Node.js built-ins or already present in `package.json` from prior phases. This section is not applicable.
 
 ---
 
@@ -131,62 +116,65 @@ No new packages are being installed. All libraries are already in `package.json`
 ### System Architecture Diagram
 
 ```
-Manifest CSV (status=tiled rows)
-    │
-    ▼
-[Pre-flight Walk]
-    │ walks {tileOutputDir}/{slug}/{specimen_id}-{view}.dzi
-    │ and {tileOutputDir}/{slug}/{specimen_id}-{view}_files/
-    │ for ALL status=tiled rows → prints total GB
-    ▼
-DRY_RUN? → [Print first 5 CDN URL plans] → exit
-    │
-    ▼
-[Per-row loop: filter status=tiled]
-    │
-    ├─ walk() on {prefix}.dzi + {prefix}_files/**
-    │       │
-    │       ▼
-    │  [For each file: execFileSync('curl', PUT args)]
-    │       │ withRetry wraps each PUT
-    │       │ 4xx non-retriable → throw immediately
-    │       │ 5xx/network → 5 attempts with backoff
-    │       ▼
-    │  logStage(content_hash, 'upload', 'ok', ...)
-    │       │
-    │       ▼
-    │  advanceStatus(row, 'uploaded')
-    │       │
-    │       ▼
-    │  fs.rmSync({prefix}_files/, { recursive: true })
-    │  fs.unlinkSync({prefix}.dzi)
-    │       │
-    │       ▼
-    │  rowsProcessed++ % 25 === 0 → writeManifest()
-    │
-    ▼
-[Final writeManifest()]
-[Summary: uploaded N, skipped K, failed F]
+  Manifest CSV (data/species-photos-manifest.csv)
+          │
+          ▼
+    Filter rows where status === 'tiled'
+          │
+          ▼ (tiledRows)
+    Pre-flight walk:
+      For each row → walk {tileOutputDir}/{slug}/{id}-{view}_files/
+                       + stat {tileOutputDir}/{slug}/{id}-{view}.dzi
+                       → sum bytes → print GB to stdout
+          │
+          ▼ (continues unconditionally; operator may Ctrl-C after pre-flight)
+    For each row in tiledRows:
+          │
+          ├──► walk {slug}/{id}-{view}_files/**  → file list
+          ├──► PUT {slug}/{id}-{view}.dzi         ─┐
+          ├──► PUT each file in _files/**          ┘ via execFileSync('curl', argsArray)
+          │         wrapped in withRetry (5 attempts, 2s/4s/8s/16s/32s)
+          │         non-retriable 4xx → bail immediately (L-05)
+          │
+          ├──► advanceStatus(row, 'uploaded')
+          ├──► logStage(content_hash, 'upload', 'ok', ...)
+          ├──► rm -rf {tileOutputDir}/{slug}/{id}-{view}_files/
+          ├──► unlink {tileOutputDir}/{slug}/{id}-{view}.dzi
+          │
+          └──► Every 25 rows: writeManifest(MANIFEST_PATH, rows)
+               Finally: writeManifest always (try/finally)
+
+  Storage Zone target (bunny.net):
+    PUT https://la.storage.bunnycdn.com/pnwmoths/species-tiles/{slug}/{id}-{view}.dzi
+    PUT https://la.storage.bunnycdn.com/pnwmoths/species-tiles/{slug}/{id}-{view}_files/{level}/{col}-{row}.webp
+
+  CDN Pull Zone (verification — read-only):
+    GET https://pnwmoths.b-cdn.net/species-tiles/{slug}/{id}-{view}.dzi
 ```
 
 ### Recommended Project Structure
 
-No new directories. One new file:
-
 ```
 scripts/
-├── upload-tiles.js     # NEW — Phase 30 main script
-└── upload-plates.js    # Reference template (Phase 18)
+├── upload-tiles.js          # Phase 30 deliverable (new)
+├── upload-plates.js         # Prior art template (Phase 18)
+├── tile-photos.js           # withRetry / logStage / redact source (Phase 29)
+├── tile-config.json         # tileOutputDir default (var/tiles)
+└── lib/
+    └── manifest.js          # readManifest / writeManifest / advanceStatus
+_instructions/
+├── UPLOADING_TILES.md       # Phase 30 operator runbook (new)
+└── UPLOADING_IMAGES.md      # Phase 13 runbook (section structure to mirror)
 ```
 
----
+### Pattern 1: curl PUT via execFileSync (Phase 13/18 locked pattern)
 
-### Pattern 1: execFileSync curl PUT (canonical)
+**What:** Individual file upload to bunny.net Storage using curl as a subprocess. Arguments passed as an array — never a shell string.
 
-From `scripts/upload-plates.js` (the direct template):
+**When to use:** Every file PUT in the upload loop.
 
 ```javascript
-// Source: scripts/upload-plates.js:96-107
+// Source: scripts/upload-plates.js (Phase 18)
 const args = [
   '-s', '-S', '-f',
   '-X', 'PUT',
@@ -198,14 +186,32 @@ const args = [
 execFileSync('curl', args, { stdio: ['pipe', 'pipe', 'inherit'] });
 ```
 
-The `-f` flag makes curl exit non-zero on HTTP 4xx/5xx, which triggers the retry logic. `stdio: ['pipe', 'pipe', 'inherit']` suppresses curl's stdout noise while preserving stderr for error visibility.
+**URL construction for upload-tiles.js:**
+```javascript
+// Storage Zone PUT URL (not Pull Zone)
+const slug = row.species_slug.toLowerCase();  // L-08: unconditional lowercase
+const pairSegment = `${row.specimen_id}-${row.view}`;
+// For .dzi file:
+const dziStorageUrl = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/${slug}/${pairSegment}.dzi`;
+// For tile files (rel is relative path within _files/ dir):
+const tileStorageUrl = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/${slug}/${pairSegment}_files/${rel}`;
+```
 
-**Phase 30 variation:** wrap in `withRetry()`. For 4xx errors, set `err.retriable = false` so `withRetry` bails immediately (same pattern as `downloadSharedFile` in Phase 29 fix).
+**Critical flags:**
+- `-f` causes curl to exit non-zero on HTTP errors, triggering withRetry
+- `-s -S` suppresses progress but shows errors on stderr
+- Array args: handles any special characters in file paths correctly
 
-### Pattern 2: withRetry (from tile-photos.js)
+### Pattern 2: withRetry (Phase 26/29 locked pattern — use this version, not upload-plates.js)
+
+**What:** Five-attempt exponential backoff. Non-retriable 4xx errors short-circuit immediately (Phase 29 fix). Use the `tile-photos.js` version, not the linear-backoff version in `upload-plates.js`.
+
+**When to use:** Wrap every `execFileSync('curl', ...)` call.
 
 ```javascript
-// Source: scripts/tile-photos.js:85-107 — copy verbatim
+// Source: scripts/tile-photos.js (Phase 29) — copy verbatim
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 async function withRetry(fn, label) {
   const delays = [2000, 4000, 8000, 16000, 32000];
   for (let attempt = 0; attempt < delays.length; attempt++) {
@@ -219,17 +225,38 @@ async function withRetry(fn, label) {
       if (attempt === delays.length - 1) {
         throw new Error(`${label} failed after ${delays.length} attempts: ${safeMsg}`);
       }
-      console.log(`[upload-tiles] transient error on ${label} (attempt ${attempt + 1}/${delays.length}) — retrying in ${delays[attempt] / 1000}s: ${safeMsg}`);
+      console.log(
+        `[upload-tiles] transient error on ${label} (attempt ${attempt + 1}/${delays.length}) — retrying in ${delays[attempt] / 1000}s: ${safeMsg}`
+      );
       await sleep(delays[attempt]);
     }
   }
 }
 ```
 
-### Pattern 3: logStage (from tile-photos.js)
+**Important:** `execFileSync` is synchronous. To use with `withRetry`, wrap it: `await withRetry(() => execFileSync('curl', args, opts), label)`. `withRetry` expects an async-compatible function that throws on failure.
+
+### Pattern 3: redact (Phase 13/26/29 mandatory pattern)
+
+**What:** Replace BUNNY_API_KEY in error messages before logging or throwing.
 
 ```javascript
-// Source: scripts/tile-photos.js:115-121 — copy verbatim
+// Source: scripts/tile-photos.js (adapted from ingest-photos.js) — copy verbatim
+function redact(msg) {
+  return BUNNY_API_KEY
+    ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')
+    : msg;
+}
+```
+
+**Mandatory edge case guard:** When BUNNY_API_KEY is empty string, `new RegExp('', 'g')` matches every position and corrupts the message. The ternary guard `BUNNY_API_KEY ? ... : msg` is required.
+
+### Pattern 4: logStage (Phase 26/29 locked pattern)
+
+**What:** Structured per-row log line with ISO timestamp, 12-char content_hash prefix (padded), 16-char action field, outcome, optional extra context.
+
+```javascript
+// Source: scripts/tile-photos.js — copy verbatim
 function logStage(content_hash, action, outcome, extra = '') {
   const hashPrefix = (content_hash ?? '').slice(0, 12).padEnd(12);
   const actionField = String(action).padEnd(16);
@@ -239,52 +266,68 @@ function logStage(content_hash, action, outcome, extra = '') {
 }
 ```
 
-### Pattern 4: redact (adapted for BUNNY_API_KEY)
+**For upload-tiles.js:** action = `'upload'`; outcomes: `'ok'` / `'failed'`.
+
+### Pattern 5: Pre-flight footprint walk
+
+**What:** Walk `tileOutputDir` for all `status: tiled` rows before the first upload. Sum file sizes. Print total GB and an extrapolated full-run estimate when not all tiles are on disk yet.
+
+**When to use:** At startup, before any upload attempt. Always runs (D-04).
 
 ```javascript
-// Adapted from scripts/tile-photos.js:70-74
-// IMPORTANT: guard against empty key — new RegExp('', 'g') corrupts all messages
-function redact(msg) {
-  return BUNNY_API_KEY
-    ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')
-    : msg;
+// Measure total on-disk bytes for all tiled rows
+let totalBytes = 0;
+let measuredRows = 0;
+for (const row of tiledRows) {
+  const prefix = join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);
+  // .dzi descriptor
+  if (existsSync(`${prefix}.dzi`)) {
+    totalBytes += statSync(`${prefix}.dzi`).size;
+  }
+  // _files/ directory tree
+  const filesDir = `${prefix}_files`;
+  if (existsSync(filesDir)) {
+    for (const f of walkSync(filesDir)) {  // synchronous recursive walk
+      totalBytes += statSync(f).size;
+    }
+    measuredRows++;
+  }
 }
-```
-
-### Pattern 5: Tile Prefix / CDN Path Construction
-
-The `tilePrefix(tileOutputDir, row)` export from `tile-photos.js` computes the disk path:
-
-```javascript
-// Source: scripts/tile-photos.js:141-143
-export function tilePrefix(tileOutputDir, row) {
-  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);
+const avgBytesPerRow = measuredRows > 0 ? totalBytes / measuredRows : 0;
+console.log(`[upload-tiles] Pre-flight footprint check:`);
+console.log(`  ${tiledRows.length} rows with status=tiled`);
+console.log(`  Tile output dir: ${tileOutputDir}`);
+console.log(`  Total on-disk size: ${(totalBytes / 1e9).toFixed(1)} GB (measured)`);
+if (measuredRows < tiledRows.length) {
+  const estimated = avgBytesPerRow * tiledRows.length;
+  console.log(`  Estimated full-run size (extrapolated): ~${(estimated / 1e9).toFixed(1)} GB (${tiledRows.length} rows × avg ${(avgBytesPerRow / 1e6).toFixed(0)} MB/dir)`);
 }
+console.log(`Proceeding with upload...`);
 ```
 
-The CDN storage path for a given file is:
+**Performance note:** Walking ~447k files with `statSync` per file will take 30–90 seconds on macOS APFS. This is acceptable for an always-on pre-flight (once per run). No optimization needed for Phase 30.
 
-```
-species-tiles/{slug}/{specimen_id}-{view}/{filename_relative_to_slug_dir}
-```
+### Pattern 6: Tile deletion after successful upload (D-03)
 
-Concretely, for `{tileOutputDir}/abagrotis-apposita/A-D.dzi`:
-- Local path: `{tileOutputDir}/abagrotis-apposita/A-D.dzi`
-- CDN path: `species-tiles/abagrotis-apposita/A-D/A-D.dzi`
-
-For `{tileOutputDir}/abagrotis-apposita/A-D_files/12/0_0.webp`:
-- CDN path: `species-tiles/abagrotis-apposita/A-D/A-D_files/12/0_0.webp`
-
-The `relative()` function (from `node:path`) computing `relative(join(tileOutputDir, slug), localFile)` gives the path segment after the slug directory, which maps directly to the CDN subpath under `species-tiles/{slug}/`.
-
-**Phase 28 pilot confirmed** (28-03-SUMMARY.md): storage path is `species-tiles/{slug}/{specimen_id}-{view}/{pair}.dzi + {pair}_files/{level}/{col}_{row}.webp` — no leading slash, no zone prefix. [VERIFIED: 28-03-SUMMARY.md]
-
-### Pattern 6: walk() helper
-
-From `scripts/upload-plates.js`:
+**What:** After `advanceStatus(row, 'uploaded')`, delete the tile directory and `.dzi` descriptor. Use `fs/promises.rm` with `{ recursive: true, force: true }` for the directory; `fs/promises.unlink` for the `.dzi` file.
 
 ```javascript
-// Source: scripts/upload-plates.js:37-49
+// D-03: unconditional, immediate deletion after status advance
+const prefix = join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);
+await rm(`${prefix}_files`, { recursive: true, force: true });
+await unlink(`${prefix}.dzi`);
+```
+
+**Order within a row:** upload all files → `advanceStatus(row, 'uploaded')` → delete tiles. The deletion comes after the status advance. The periodic manifest write (every 25 rows) then persists the `uploaded` status so a restart will skip this row.
+
+**`force: true` rationale:** If the `_files/` directory was already partially deleted in a prior crash, `{ force: true }` prevents ENOENT from crashing the cleanup step.
+
+### Pattern 7: walk() helper
+
+**What:** Recursive directory walk returning all file paths as an array. Already in `upload-plates.js` (async). Phase 30 reuses the async version for the upload loop; a synchronous version is needed for the pre-flight statSync walk.
+
+```javascript
+// Source: scripts/upload-plates.js — copy verbatim for async upload loop
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
@@ -300,75 +343,17 @@ async function walk(dir) {
 }
 ```
 
-Phase 30 calls `walk(prefix + '_files/')` and then prepends the `.dzi` file to get all files for one pair. Note: vips also writes `vips-properties.xml` inside `_files/` directories — the `walk()` picks these up automatically and they are uploaded too (confirmed in local `var/tiles/`).
-
-### Pattern 7: Pre-flight Footprint Walk
-
-Walk every `status: tiled` row's tile directory using `statSync` to sum bytes:
-
-```javascript
-// Pseudocode — implement with statSync recursive walk
-let totalBytes = 0;
-for (const row of tiledRows) {
-  const prefix = tilePrefix(tileOutputDir, row);
-  const dziPath = prefix + '.dzi';
-  const filesDir = prefix + '_files';
-  // Sum .dzi size
-  if (existsSync(dziPath)) totalBytes += statSync(dziPath).size;
-  // Sum _files/ recursively
-  if (existsSync(filesDir)) {
-    for (const f of walkSync(filesDir)) totalBytes += statSync(f).size;
-  }
-}
-```
-
-Print format (from CONTEXT.md `<specifics>`):
-```
-[upload-tiles] Pre-flight footprint check:
-  {N} rows with status=tiled
-  Tile output dir: {tileOutputDir}
-  Total on-disk size: {X.X} GB (measured)
-  Estimated full-run size (extrapolated): ~{Y.Y} TB ({N} rows × avg {Z.Z} GB/dir)
-Proceeding with upload...
-```
-
-The extrapolation line is useful when only a partial Phase 29 run has completed (streaming model: Phase 30 can run in parallel with Phase 29). Average bytes/dir = totalBytes / rowsWithTilesOnDisk.
-
-### Pattern 8: Per-row Upload + Delete Sequence
-
-```javascript
-// Per row:
-const prefix = tilePrefix(tileOutputDir, row);
-const dziFile = prefix + '.dzi';
-const filesDir = prefix + '_files';
-
-// 1. Walk all files for this pair
-const allFiles = [dziFile, ...(await walk(filesDir))];
-
-// 2. Upload each file
-for (const localPath of allFiles) {
-  const rel = relative(join(tileOutputDir, row.species_slug.toLowerCase()), localPath);
-  const cdnPath = `species-tiles/${row.species_slug.toLowerCase()}/${rel}`;
-  const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
-  await withRetry(async () => { ... curl PUT ... }, `upload ${rel}`);
-}
-
-// 3. Advance manifest
-advanceStatus(row, 'uploaded');
-logStage(row.content_hash, 'upload', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view} (${allFiles.length} files)`);
-
-// 4. Delete local tiles (D-03)
-await rm(filesDir, { recursive: true, force: true });
-await unlink(dziFile);
-```
+For the pre-flight synchronous walk, use `readdirSync` with the same recursive pattern, or use the async `walk()` with a top-level `await` since `main()` is already async.
 
 ### Anti-Patterns to Avoid
 
-- **Shell string to curl:** Never `execFileSync('curl', urlString)` — always pass an args array. (Required for correctness; no spaces-in-path issues.)
-- **Redacting an empty key:** Guard with `if (BUNNY_API_KEY)` before the `.replace()`. An empty `RegExp('')` corrupts every error message.
-- **Deleting before uploading:** Deletion is the last step per row, after `advanceStatus`. Wrong order would leave the manifest in `tiled` with no tiles to upload on retry.
-- **Using `path.relative()` from the wrong base:** The relative path for CDN must be computed from `join(tileOutputDir, slug)` (i.e., the species slug directory), not from `tileOutputDir` itself, to produce `A-D/A-D.dzi` rather than `abagrotis-apposita/A-D/A-D.dzi`.
-- **Importing withRetry/redact/logStage from tile-photos.js:** The project pattern is self-contained per-script files. Copy these three helpers verbatim; do not import across scripts.
+- **Shell string in execFileSync:** `execFileSync('curl ' + url)` — never. Always pass argv array. The array form handles any path characters correctly and prevents shell injection.
+- **Logging BUNNY_API_KEY in error messages:** Always apply `redact()` before any `console.error`, `throw new Error(...)`, or `logStage(..., 'failed', msg)`. Never build a log string with BUNNY_API_KEY concatenated in.
+- **Deleting tiles before upload is confirmed:** Tile deletion happens inside the per-row success path only — never inside the `withRetry` loop, and never before `advanceStatus`.
+- **Using Pull Zone URL for PUT:** `https://pnwmoths.b-cdn.net/...` is a read-only CDN. PUTs must go to `https://la.storage.bunnycdn.com/pnwmoths/...` (Storage Zone).
+- **Mixed-case slugs in storage path:** `row.species_slug.toLowerCase()` is mandatory on every path join. Failing this breaks Phase 31's CDN URL construction which always lowercases.
+- **DRY_RUN=1 that writes manifest or deletes tiles:** DRY_RUN must exit after printing upload plans — no curl calls, no manifest writes, no deletions.
+- **Importing helpers from tile-photos.js:** The project pattern is self-contained per-script files. Copy `withRetry`, `redact`, and `logStage` verbatim into `upload-tiles.js`. Do not `import` them from `tile-photos.js`.
 
 ---
 
@@ -376,127 +361,103 @@ await unlink(dziFile);
 
 | Problem | Don't Build | Use Instead | Why |
 |---------|-------------|-------------|-----|
-| CSV read/write | Custom parser | `scripts/lib/manifest.js` `readManifest`/`writeManifest` | Already battle-tested; handles quoting, column order, advanceStatus mutation pattern |
-| HTTP PUT to bunny.net | Custom HTTP client | `execFileSync('curl', args)` | Proven in Phase 13, 18, and 28 pilot; handles auth, binary body, and error codes reliably |
-| Retry logic | Custom retry loop | Copy `withRetry` from `tile-photos.js` | Five-attempt backoff with non-retriable bail already handles bunny.net 4xx/5xx patterns |
-| API key redaction | `JSON.stringify` filtering | `redact(msg)` helper | Regex-based ensures redaction in all error message paths including stack traces |
-| Recursive directory delete | Manual unlink loop | `fs.rm(dir, { recursive: true, force: true })` | Node.js 14.14+ built-in; handles non-empty trees atomically |
+| CSV manifest I/O | Custom CSV parser | `scripts/lib/manifest.js` `readManifest`/`writeManifest` | Phase 26 locked; handles column ordering and CSV quoting edge cases |
+| Status advancement | Direct `row.status = 'uploaded'` | `advanceStatus(row, 'uploaded')` | Clears `last_error` correctly; type-checked; Phase 26 locked |
+| HTTP PUT retry | Custom retry loop | `withRetry` copied from `tile-photos.js` | Non-retriable 4xx support already implemented in Phase 29 fix |
+| Secret redaction | Ad-hoc `.replace` | `redact()` copied from `tile-photos.js` | Empty-string guard required; Phase 13 mandatory pattern |
+| Recursive file walk | `readdirSync` loops | `walk()` from `upload-plates.js` | Handles deep DZI subdirectory trees correctly; async for upload, sync for pre-flight |
 
-**Key insight:** Phase 30 is fundamentally a manifest-aware port of `upload-plates.js`. Nothing should be built from scratch that `upload-plates.js` already validates.
-
----
-
-## Runtime State Inventory
-
-Phase 30 is not a rename/refactor/migration phase. However, it does interact with live CDN state.
-
-| Category | Items Found | Action Required |
-|----------|-------------|-----------------|
-| Stored data | `data/species-photos-manifest.csv` — 2685 rows currently at `status: tiled` (verified via `grep -c ',tiled,'`); ~3808 at full Phase 29 completion | Phase 30 advances `tiled` → `uploaded` rows |
-| Live service config | bunny.net Pull Zone CORS — already enabled with `access-control-allow-origin: *` and `dzi` in extension list (Phase 28 confirmed) | None — no CDN config changes needed |
-| OS-registered state | None | None |
-| Secrets/env vars | `BUNNY_API_KEY` — Storage Zone password; never committed; passed at invocation | Operator provides at invocation; same credential as Phase 18 |
-| Build artifacts | Local tiles at `var/tiles/` (development) and `/var/lib/pnwmoths/tiles/` (datacenter) — deleted after successful upload (D-03) | No cleanup needed; deletion is part of the script |
+**Key insight:** This phase assembles existing, tested components. Every non-trivial operation has a prior-art implementation in the codebase. The planner should never propose building something from scratch that exists in `upload-plates.js` or `tile-photos.js`.
 
 ---
 
 ## Common Pitfalls
 
-### Pitfall 1: CDN Path Relative Base
+### Pitfall 1: Tile deletion before manifest flush commits the `uploaded` status
+**What goes wrong:** Script uploads a directory, calls `advanceStatus(row, 'uploaded')`, immediately deletes the tile directory, then crashes before the next periodic manifest write (every 25 rows). On restart, the row is still `status: tiled` (in-memory advance was not flushed) but the tile directory is gone. The script tries to upload a missing directory.
+**Why it happens:** The flush interval (25 rows) creates a window where in-memory state diverges from disk state.
+**How to avoid:** The upload-then-delete ordering is correct per D-03. Accept the small window for rows between flushes. On restart, the script will detect missing tile directories and fail that row gracefully (ENOENT caught by withRetry, marked `status: failed`). The operator can re-tile those rows with Phase 29 before re-running Phase 30. This is the correct tradeoff per D-02/D-03.
+**Warning signs:** After a crash, `status: failed` rows with ENOENT errors in `last_error` column of the manifest.
 
-**What goes wrong:** `path.relative(tileOutputDir, localFile)` gives `abagrotis-apposita/A-D/A-D.dzi`, but the correct CDN path under `species-tiles/{slug}/` should be `A-D/A-D.dzi`. Using the wrong base produces a double-slug CDN path like `species-tiles/abagrotis-apposita/abagrotis-apposita/A-D/A-D.dzi`.
+### Pitfall 2: Mixed-case slug in CDN storage path
+**What goes wrong:** Tiles uploaded to `species-tiles/Abagrotis-apposita/A-D/` (mixed case) instead of `species-tiles/abagrotis-apposita/A-D/`. Phase 31 and the OSD viewer will construct lowercase URLs — the tiles 404.
+**Why it happens:** Forgetting `.toLowerCase()` on `row.species_slug` when constructing the storage path.
+**How to avoid:** L-08 requires unconditional lowercase. Use `row.species_slug.toLowerCase()` in every path join, matching `tilePrefix()` in `tile-photos.js`.
+**Warning signs:** DRY_RUN output shows uppercase letters in species slug segment of the CDN URL.
 
-**Why it happens:** The CDN path prefix is `species-tiles/{slug}/`, so the relative path must be computed from `{tileOutputDir}/{slug}/` (the species slug directory), not from `tileOutputDir`.
+### Pitfall 3: Uploading to Pull Zone URL instead of Storage Zone URL
+**What goes wrong:** PUT request goes to `https://pnwmoths.b-cdn.net/...` (Pull Zone) instead of `https://la.storage.bunnycdn.com/pnwmoths/...` (Storage Zone). bunny.net returns a 4xx or 405 error.
+**Why it happens:** Copy-paste error from a CDN verification URL.
+**How to avoid:** `BUNNY_STORAGE_HOST` defaults to `la.storage.bunnycdn.com`; `BUNNY_ZONE` defaults to `pnwmoths`. Build the storage URL as `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/...`. The Pull Zone URL (`https://pnwmoths.b-cdn.net/...`) is only for the runbook's post-upload verification step.
+**Warning signs:** Every PUT fails immediately with 4xx; no files visible in bunny.net Storage dashboard.
 
-**How to avoid:** Use `relative(join(tileOutputDir, row.species_slug.toLowerCase()), localPath)` as the relative portion.
+### Pitfall 4: DRY_RUN printing Storage URLs instead of Pull Zone URLs
+**What goes wrong:** DRY_RUN output shows Storage Zone URLs, making it hard for the operator to manually verify tile resolution by copy-pasting URLs into a browser.
+**Why it happens:** Using `BUNNY_STORAGE_HOST` in DRY_RUN output.
+**How to avoid:** Per `code_context` note in CONTEXT.md — DRY_RUN prints Pull Zone URLs (`https://pnwmoths.b-cdn.net/species-tiles/...`). The actual upload loop uses Storage Zone URLs. These are different code paths.
 
-**Warning signs:** A `.dzi` URL in DRY_RUN output contains the slug twice.
+### Pitfall 5: pre-flight walk timing on large corpus
+**What goes wrong:** Pre-flight walk of 447k files with `statSync` per file takes 90+ seconds, and the operator thinks the script is hung.
+**Why it happens:** macOS APFS metadata reads for large directory trees are slow.
+**How to avoid:** Log a message before starting the pre-flight walk: `[upload-tiles] Pre-flight: measuring tile corpus size (this may take 30–90s)...`. The operator knows to wait.
+**Warning signs:** No output for over 1 minute after script start.
 
-### Pitfall 2: Forgetting vips-properties.xml in Walk
-
-**What goes wrong:** Filtering the `walk()` output to only `*.webp` and `*.dzi` silently omits `vips-properties.xml` files inside `_files/` subdirectories. The CDN path becomes inconsistent with what vips produced.
-
-**Why it happens:** These files are not mentioned in the DZI spec but are present in the actual output (confirmed in `var/tiles/condica-albolabes/A-D_files/vips-properties.xml`).
-
-**How to avoid:** Upload all files returned by `walk()` without extension filtering.
-
-**Warning signs:** `find var/tiles/ -type f ! -name "*.webp" ! -name "*.dzi"` returns results.
-
-### Pitfall 3: Delete Before Advance
-
-**What goes wrong:** Deleting tiles before calling `advanceStatus(row, 'uploaded')` leaves the manifest at `tiled` with no local tiles. On the next run, the script tries to upload the pair again but finds no files on disk — crashing or silently skipping.
-
-**Why it happens:** Natural code ordering mistake.
-
-**How to avoid:** Strict ordering: (1) upload all files, (2) `advanceStatus`, (3) `logStage`, (4) `writeManifest` checkpoint, (5) `rm/unlink`.
-
-**Warning signs:** Rows stuck at `status: tiled` with missing local directories.
-
-### Pitfall 4: BUNNY_API_KEY Empty String in RegExp
-
-**What goes wrong:** `new RegExp('', 'g')` matches every position in the string, replacing every character boundary with `[REDACTED]`, producing output like `[REDACTED][REDACTED][REDACTED]...`.
-
-**Why it happens:** `BUNNY_API_KEY` is initialized to `''` when the env var is absent (DRY_RUN path).
-
-**How to avoid:** Guard: `return BUNNY_API_KEY ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]') : msg;`
-
-**Warning signs:** Error messages are garbled with repeated `[REDACTED]` strings.
-
-### Pitfall 5: Per-File PUT vs. Per-Row Recovery Granularity
-
-**What goes wrong:** `withRetry` wraps each individual file PUT (L-05) — correct. But the manifest row recovery granularity is whole-directory (D-02). If the script crashes after uploading 300 of 500 files in a directory, on restart it re-uploads all 500 files for that row. This is intentional and safe (bunny.net PUT is idempotent) — but the code must not try to track per-file progress in the manifest.
-
-**Why it happens:** Confusion between the per-file retry semantics (withRetry) and the per-row recovery semantics (manifest status).
-
-**How to avoid:** `withRetry` lives inside the per-file loop; `advanceStatus` + manifest write live outside the per-file loop (once all files for a row succeed).
+### Pitfall 6: BUNNY_API_KEY guard missing from DRY_RUN path
+**What goes wrong:** Script exits with an error about missing BUNNY_API_KEY even when running `DRY_RUN=1` to preview what would be uploaded.
+**Why it happens:** The API key guard runs before the DRY_RUN check.
+**How to avoid:** Put the DRY_RUN early-exit path before the `if (!DRY_RUN && !BUNNY_API_KEY)` guard — same pattern as `upload-plates.js` and `tile-photos.js`.
 
 ---
 
 ## Code Examples
 
-### Module-level env constants (established project pattern)
-
-```javascript
-// Source: scripts/upload-plates.js:30-33 and scripts/tile-photos.js:41-44
-const BUNNY_STORAGE_HOST = process.env.BUNNY_STORAGE_HOST ?? 'la.storage.bunnycdn.com';
-const BUNNY_ZONE = process.env.BUNNY_ZONE ?? 'pnwmoths';
-const BUNNY_API_KEY = process.env.BUNNY_API_KEY ?? '';
-const TILE_OUTPUT_DIR_OVERRIDE = process.env.TILE_OUTPUT_DIR ?? '';
-const DRY_RUN = process.env.DRY_RUN === '1';
+### DRY_RUN output format (L-03 and CONTEXT.md specifics)
+```
+[upload-tiles] DRY_RUN=1 — printing first 5 upload plans, not uploading
+  slug: abagrotis-apposita  pair: A-D
+    CDN URL: https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/
+    Files to upload: 87 (86 tiles + 1 .dzi)
+  slug: abagrotis-apposita  pair: A-V
+    CDN URL: https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V/
+    Files to upload: 87 (86 tiles + 1 .dzi)
+  ... (3806 more)
 ```
 
-### Self-invocation guard (verbatim from all scripts/)
-
-```javascript
-// Source: scripts/tile-photos.js:382-384
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(err => { console.error(redact(err.message)); process.exit(1); });
-}
+### Pre-flight output format (D-04 and CONTEXT.md specifics)
+```
+[upload-tiles] Pre-flight: measuring tile corpus size (this may take 30-90s)...
+[upload-tiles] Pre-flight footprint check:
+  3808 rows with status=tiled
+  Tile output dir: /Users/rainhead/dev/pnwmoths/var/tiles
+  Total on-disk size: 3.2 GB (measured)
+  Estimated full-run size (extrapolated): ~1.1 TB (3808 rows x avg 0.28 GB/dir)
+Proceeding with upload...
 ```
 
-### Non-retriable 4xx curl error (Phase 29 pattern)
-
-```javascript
-// Adapted from Phase 29 fix — downloadSharedFile sets err.retriable = false for 4xx non-429
-execFileSync('curl', args, { stdio: ['pipe', 'pipe', 'pipe'] });
-// curl -f exits non-zero on 4xx/5xx; parse exit code or stderr if you need to distinguish
-// For bunny.net: 401 = wrong API key (non-retriable); 5xx = server error (retriable)
-// Simplest approach: catch SpawnError; if curl stderr contains "401" set err.retriable = false
+### logStage output for upload phase
+```
+2026-05-23T18:00:00.000Z e6f226797116 upload           ok  abagrotis-apposita/A-D  87 files
+2026-05-23T18:00:05.000Z f7a337898227 upload           failed  abagrotis-apposita/A-V  PUT failed after 5 attempts: ...
 ```
 
-### Tile path → CDN path mapping
+### Progress summary (every 25 rows, and at end)
+```
+[upload-tiles] 25/3808
+[upload-tiles] 50/3808
+...
+[upload-tiles] summary:
+  uploaded (new):              3750
+  skipped (already uploaded):    58
+  failed (per-row errors):        0
+  total eligible rows:          3808
+[upload-tiles] wrote data/species-photos-manifest.csv
+```
 
-```javascript
-// Source: derived from 28-03-SUMMARY.md path convention + tilePrefix() from tile-photos.js
-import { tilePrefix } from './tile-photos.js';
-// ...
-const prefix = tilePrefix(tileOutputDir, row);
-const slugDir = join(tileOutputDir, row.species_slug.toLowerCase());
-// For each file found by walk():
-const rel = relative(slugDir, localFile);
-// rel = "A-D/A-D.dzi" or "A-D/A-D_files/12/0_0.webp"
-const cdnPath = `species-tiles/${row.species_slug.toLowerCase()}/${rel}`;
-const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
+### CDN spot-check command (from runbook, ROADMAP SC-4)
+```bash
+# After first 5 rows upload, verify tile resolution via Pull Zone
+curl -I https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D.dzi
+# Expected: HTTP/2 200, Content-Type: application/xml or text/xml
 ```
 
 ---
@@ -505,33 +466,27 @@ const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
 
 | Old Approach | Current Approach | When Changed | Impact |
 |--------------|------------------|--------------|--------|
-| `.upload-plates-progress` file for resume | Manifest CSV status column | Phase 26 onward | Manifest is single source of truth; no separate progress sidecar |
-| JPEG tiles | WebP tiles (Q=80) | Phase 28 pilot | ~30% smaller; OSD handles correctly; `vips-properties.xml` now also present in `_files/` |
-| FTP/rclone upload (Phase 13) | HTTP PUT via curl | Phase 13 onwards | curl PUT is simpler, stateless, and idempotent |
+| `upload-plates.js` progress file (`.upload-plates-progress`) | Manifest CSV as pipeline state | Phase 26 (v2.2) | Manifest is the single source of truth for all pipeline stages |
+| Upload-plates linear retry (`attempts * 2000ms`) | `withRetry` exponential (2s/4s/8s/16s/32s) + non-retriable 4xx bail | Phase 29 fix | Permanent 4xx errors no longer waste 5 × retry budget; immediate bail on bad API key |
+| Mixed-case CDN paths | Unconditional `.toLowerCase()` on species_slug | Phase 28 pilot lesson | Phase 28 discovered mixed-case slug in TIFF filenames; fixed in `tilePrefix()` (Phase 29); Phase 30 replicates this pattern |
+
+**Deprecated patterns for Phase 30:**
+- `.upload-plates-progress` sidecar file: Phase 30 uses manifest `status: uploaded`, not a sidecar
+- Linear retry backoff from `upload-plates.js`: Use the Phase 29 `withRetry` exponential pattern (non-retriable 4xx support is required by L-05)
 
 ---
 
-## Assumptions Log
+## Runtime State Inventory
 
-| # | Claim | Section | Risk if Wrong |
-|---|-------|---------|---------------|
-| A1 | The `tilePrefix()` function import from `tile-photos.js` is safe (no side-effects on import) | Architecture Patterns | If importing tile-photos.js triggers side effects, use a local copy of the function instead |
-| A2 | bunny.net Storage PUT returns a 4xx immediately for a wrong API key (not a 5xx) | Common Pitfalls | If 401 is retried, the 27h run would fail much later; test with a bad key before starting bulk run |
-| A3 | `vips-properties.xml` files in `_files/` subdirectories are safe to upload (don't cause CDN errors) | Architecture Patterns | If bunny.net rejects XML Content-Type, walk output needs extension filtering |
+> Not a rename/refactor/migration phase. Included because Phase 30 reads local filesystem state (`var/tiles/`) and writes to an external service.
 
----
-
-## Open Questions
-
-1. **Import of `tilePrefix` from `tile-photos.js`**
-   - What we know: `tilePrefix`, `tiffCachePath`, `isAlreadyTiled`, and `isTileable` are exported from `tile-photos.js`
-   - What's unclear: The project pattern states "do not import helpers across scripts — the pattern is self-contained per-script files" (from CONTEXT.md `<code_context>`)
-   - Recommendation: Copy the `tilePrefix` logic (one line) directly into `upload-tiles.js` as a local `tilePrefix` function rather than importing, consistent with how `withRetry`/`redact`/`logStage` are copied
-
-2. **Non-retriable error detection from curl exit**
-   - What we know: `execFileSync` throws on non-zero curl exit; `err.retriable = false` pattern is established in Phase 29 for Dropbox HTTP 4xx
-   - What's unclear: curl with `-f` exits non-zero for ALL 4xx/5xx; the stderr message format for bunny.net 401 vs. 5xx is not documented in this repo
-   - Recommendation: Parse `err.stderr?.toString()` or `err.message` for `"401"` to detect bad API key; set `err.retriable = false` when found; all other failures are retriable
+| Category | Items Found | Action Required |
+|----------|-------------|------------------|
+| Stored data | `data/species-photos-manifest.csv`: 3,510 rows `status: tiled`, 1,450 rows `status: discovered` [VERIFIED: grep + awk] | Script reads and updates this file in place; no pre-run edit needed |
+| Live service config | bunny.net Storage Zone `pnwmoths` at `la.storage.bunnycdn.com` — `species-tiles/` prefix is new (Phase 28 pilot may have written one species; no conflict) [ASSUMED] | No config change needed; operator retrieves Storage Zone password (BUNNY_API_KEY) from bunny.net dashboard |
+| OS-registered state | None | — |
+| Secrets/env vars | `BUNNY_API_KEY` — Storage Zone password from bunny.net dashboard. Not in `.env`, not in git. Passed at invocation. | Operator obtains before run; same credential used in Phase 18 `upload-plates.js` |
+| Build artifacts | `var/tiles/` — 3,547 DZI pairs, 447,723 files, 3.2 GB. Gitignored (`var/` in `.gitignore` [VERIFIED]). Script deletes each pair after successful upload (D-03). | Script handles deletion; no manual cleanup before run |
 
 ---
 
@@ -539,18 +494,14 @@ const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
 
 | Dependency | Required By | Available | Version | Fallback |
 |------------|------------|-----------|---------|----------|
-| Node.js | `upload-tiles.js` runtime | Yes (local) | v24.15.0 | — |
-| `curl` CLI | HTTP PUT uploads | Yes (macOS/Linux standard) | system | — |
-| `data/species-photos-manifest.csv` | Manifest read | Yes | 4935 rows, 2685 `tiled` | — |
-| `scripts/tile-config.json` | Default `tileOutputDir` | Yes | `var/tiles` (local), overrideable via `TILE_OUTPUT_DIR` | — |
-| Local tiles at `var/tiles/` | Pre-flight walk + upload | Yes (local, 2.6 GB, 2741 pairs) | — | Full run requires datacenter server |
-| `BUNNY_API_KEY` env var | Any non-DRY_RUN operation | Not in environment (operator provides) | — | `DRY_RUN=1` works without key |
+| `curl` | HTTP PUT to bunny.net | ✓ | 8.7.1 | — |
+| `node` | Script runtime | ✓ | v24.15.0 (matches `.nvmrc: 24`) | — |
+| `var/tiles/` tile corpus | Upload source | ✓ | 3.2 GB / 447k files | Run Phase 29 first |
+| `data/species-photos-manifest.csv` | Row enumeration | ✓ | 4,935 rows | — |
+| `BUNNY_API_KEY` env var | bunny.net auth | Must be provided at invocation | — | Obtain from bunny.net dashboard → Storage Zone → Password |
+| bunny.net Storage Zone `pnwmoths` | Upload target | [ASSUMED] exists from Phase 13 | — | — |
 
-**Missing dependencies with no fallback:**
-- None — DRY_RUN path is fully functional without BUNNY_API_KEY.
-
-**Missing dependencies with fallback:**
-- Full tile set (3808 pairs) is on datacenter server (`maderas.amandrai.net`), not local machine. Local `var/tiles/` has 2741 pairs and suffices for testing; production run requires `TILE_OUTPUT_DIR=/var/lib/pnwmoths/tiles` on the server.
+**Missing dependencies with no fallback:** None — all verified as available or known to be operator-provided at invocation.
 
 ---
 
@@ -560,85 +511,145 @@ const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${cdnPath}`;
 
 | Property | Value |
 |----------|-------|
-| Framework | Node.js built-in test runner (`node:test`) |
-| Config file | None — test files listed explicitly in `package.json` `scripts.test` |
+| Framework | Node.js built-in test runner (`node:test` + `node:assert/strict`) |
+| Config file | None — test files enumerated in `package.json` `"test"` script |
 | Quick run command | `node --test scripts/upload-tiles.test.js` |
-| Full suite command | `npm test` (runs all 182 existing tests + new upload-tiles tests) |
+| Full suite command | `npm test` |
+
+Current test baseline: 182/182 passing [VERIFIED: `npm test` output].
 
 ### Phase Requirements → Test Map
 
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
 |--------|----------|-----------|-------------------|-------------|
-| UPLOAD-01 | `buildCdnPath(tileOutputDir, row, localFile)` constructs correct CDN path | unit | `node --test scripts/upload-tiles.test.js` | No — Wave 0 |
-| UPLOAD-01 | DRY_RUN=1 prints CDN URLs without uploading or writing manifest | unit | `node --test scripts/upload-tiles.test.js` | No — Wave 0 |
-| UPLOAD-02 | Rows with `status: uploaded` are skipped (manifest idempotency) | unit | `node --test scripts/upload-tiles.test.js` | No — Wave 0 |
-| UPLOAD-02 | Rows with non-`tiled` status are excluded from eligible set | unit | `node --test scripts/upload-tiles.test.js` | No — Wave 0 |
-| UPLOAD-03 | Pre-flight walk sums bytes and prints GB before first upload | unit | `node --test scripts/upload-tiles.test.js` | No — Wave 0 |
+| UPLOAD-01 | `tileUploadPath(tileOutputDir, row)` returns correct Storage Zone path with lowercase slug | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| UPLOAD-01 | `tilePullZoneUrl(row)` returns correct Pull Zone URL for DRY_RUN output | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| UPLOAD-01 | Mixed-case `species_slug` is lowercased unconditionally in path output | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| UPLOAD-01 | Accession specimen IDs (`WWUC0000003275`) are preserved in pair segment | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| UPLOAD-02 | `isUploadable(row)` returns `true` for `status: tiled` | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| UPLOAD-02 | `isUploadable(row)` returns `false` for `status: uploaded` (idempotency) | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| UPLOAD-02 | `isUploadable(row)` returns `false` for `status: discovered` / `failed` / other | unit | `node --test scripts/upload-tiles.test.js` | ❌ Wave 0 |
+| DRY_RUN (L-03) | DRY_RUN=1 prints plans using Pull Zone URLs, not Storage URLs | manual | `DRY_RUN=1 npm run photos:upload` | — |
+| L-04 | API key redacted in all error messages | manual + code review | inspect `redact()` usage | — |
+| Runbook | `_instructions/UPLOADING_TILES.md` covers all required sections | manual | open and read | — |
 
-**Manual-only tests:**
-- Actual bunny.net upload (requires BUNNY_API_KEY + live CDN) — verified by operator after script run via `curl -I` spot-check
+**What is NOT automatically testable:**
+- Actual bunny.net upload (requires live BUNNY_API_KEY and network)
+- Tile deletion after upload (requires live run or complex filesystem mock)
+- Pre-flight footprint accuracy (requires `var/tiles/` corpus)
+- CDN Pull Zone tile resolution (requires uploaded tiles)
+
+### Exported functions for testability
+
+Following the `tilePrefix` / `isAlreadyTiled` / `isTileable` export pattern from `tile-photos.js`, `upload-tiles.js` must export at module level (not inside `main()`):
+
+- `tileUploadPath(tileOutputDir, row)` → the on-disk prefix path, same as `tilePrefix()` in tile-photos.js
+- `tilePullZoneUrl(row)` → the Pull Zone URL for DRY_RUN output (uses `CDN_BASE_URL = 'https://pnwmoths.b-cdn.net'`)
+- `isUploadable(row)` → `boolean`: `row.status === 'tiled'`
+
+These three exports + the row factory pattern from `tile-photos.test.js` provide complete testability of the path construction and eligibility logic without network calls.
 
 ### Sampling Rate
+
 - **Per task commit:** `node --test scripts/upload-tiles.test.js`
-- **Per wave merge:** `npm test` (full suite, must remain at 182+N passing)
+- **Per wave merge:** `npm test` (full 182+ suite)
 - **Phase gate:** Full suite green before `/gsd:verify-work`
 
 ### Wave 0 Gaps
 
-- `scripts/upload-tiles.test.js` — covers UPLOAD-01, UPLOAD-02, UPLOAD-03 (new file; mirrors `scripts/tile-photos.test.js` structure)
+- [ ] `scripts/upload-tiles.test.js` — covers UPLOAD-01, UPLOAD-02, slug lowercasing, `isUploadable` filter; model on `scripts/tile-photos.test.js`
+- [ ] `scripts/upload-tiles.js` must export `tileUploadPath`, `tilePullZoneUrl`, `isUploadable` at module level
+
+*(No new test infrastructure needed — existing `node:test` + `node:assert/strict` pattern is established)*
 
 ---
 
 ## Security Domain
 
-BUNNY_API_KEY handling is the only security concern.
+### Applicable ASVS Categories
 
 | ASVS Category | Applies | Standard Control |
 |---------------|---------|-----------------|
-| V2 Authentication | No | No user auth |
-| V3 Session Management | No | No sessions |
-| V4 Access Control | No | No access control layer |
-| V5 Input Validation | Minimal | `species_slug`, `specimen_id`, `view` are manifest-derived; used in CDN path construction but never in shell strings |
-| V6 Cryptography | No | No crypto |
-| Secrets | Yes | `BUNNY_API_KEY` never committed; redacted in all error messages via `redact()` guard; empty-key guard required |
+| V2 Authentication | No | — |
+| V3 Session Management | No | — |
+| V4 Access Control | No | — |
+| V5 Input Validation | Yes (indirect) | `species_slug.toLowerCase()` applied to CDN paths; `execFileSync` array args prevent shell injection |
+| V6 Cryptography | No | — |
+
+### Known Threat Patterns
 
 | Pattern | STRIDE | Standard Mitigation |
 |---------|--------|---------------------|
-| API key in error log | Information Disclosure | `redact()` wrapper on all error messages before print/throw |
-| Shell injection via filenames | Tampering | `execFileSync('curl', argsArray)` — args array form, never shell string; confirmed correct |
-| API key in shell history | Information Disclosure | Pass as env var at invocation (`BUNNY_API_KEY=xxx node ...`); same pattern as Phase 13 |
+| API key leakage in logs | Information Disclosure | `redact()` applied to all error messages before any log/throw; BUNNY_API_KEY never concatenated directly into log strings |
+| Shell injection via file path in curl args | Tampering | `execFileSync('curl', argsArray)` — array form prevents shell expansion; project-established mandatory pattern |
+| Path traversal via species_slug in CDN path | Tampering | `.toLowerCase()` applied; `species_slug` is machine-generated in Phase 26 ingest (no user-supplied input) |
+
+---
+
+## Open Questions
+
+1. **bunny.net `species-tiles/` prefix — implicit creation or pre-creation needed?**
+   - What we know: Phase 18 uploaded to `plates/` path without pre-creating it. bunny.net Storage is object-storage-style.
+   - What's unclear: Whether PUTting to a new prefix on the first upload is sufficient, or whether a placeholder object or directory must be created first.
+   - Recommendation: S3-compatible object stores create paths implicitly on first PUT. [ASSUMED] The runbook should note that the operator verifies the first upload appears correctly in the bunny.net dashboard before proceeding with the full bulk run.
+
+2. **Non-retriable 4xx detection from curl exit status**
+   - What we know: `tile-photos.js withRetry` checks `err.retriable === false`. For Dropbox, `downloadSharedFile` sets this flag on non-429 4xx responses. For bunny.net via `execFileSync('curl', ...)`, the exit code is non-zero on any HTTP error (curl's `-f` flag) but the exact HTTP status is not available in the Error object.
+   - What's unclear: Whether the implementation should parse curl stderr for HTTP status codes to enable non-retriable 4xx bail, or accept that a bad API key will exhaust all 5 retry attempts (62 seconds total) before failing the first row.
+   - Recommendation: For Phase 30, accept that 4xx errors exhaust retries. A bad API key will be caught immediately after the first row fails with 5 × retry delays — the operator will see the failure within 62 seconds and can stop the run. More sophisticated detection can be added later. [ASSUMED]
+
+3. **Concurrent Phase 29 tiling and Phase 30 uploading**
+   - What we know: 1,450 rows remain at `status: discovered` (pending Phase 29). Phase 29 must run first to produce tiles. Disk: `var/tiles/` is gitignored on this laptop with sufficient free space (3.2 GB used currently).
+   - What's unclear: Whether the operator will run Phase 29 to completion before starting Phase 30, or in a streaming interleaved manner.
+   - Recommendation: The runbook should recommend completing Phase 29 first, then running Phase 30. The streaming model is theoretically supported (Phase 29 writes tiles while Phase 30 uploads and deletes them) but adds operational complexity. Sequential is simpler and safer for a first bulk run. [ASSUMED]
+
+---
+
+## Assumptions Log
+
+| # | Claim | Section | Risk if Wrong |
+|---|-------|---------|---------------|
+| A1 | bunny.net Storage Zone `pnwmoths` exists and the Phase 18 BUNNY_API_KEY credential works for the `species-tiles/` prefix | Environment Availability | Upload loop fails on first PUT; operator must re-provision credentials |
+| A2 | bunny.net PUT to a new path prefix creates it implicitly (no pre-creation step needed) | Open Questions | First PUT returns 404 or 403; operator must create prefix in bunny.net dashboard or contact support |
+| A3 | 4xx curl failures will exhaust all 5 retries (62s total) when they occur; immediate 4xx bail not required for Phase 30 | Open Questions | Bad API key wastes 62s before failing first row; acceptable for a one-time bulk run |
+| A4 | Phase 28 pilot may have left one species under `species-tiles/` in the Storage Zone; this does not cause conflicts | Runtime State Inventory | Minor: one species has duplicate tiles after Phase 30; no functional impact |
+| A5 | Running Phase 29 to completion before Phase 30 is the recommended operator workflow | Open Questions | Operator starts Phase 30 while Phase 29 is in progress; script processes only `status: tiled` rows so partial corpus is fine — but concurrent disk writes and deletes add risk |
+
+**If this table is empty:** All claims were verified. It is not empty — A1 through A5 require user confirmation before the bulk run.
 
 ---
 
 ## Sources
 
 ### Primary (HIGH confidence)
-
-- `scripts/upload-plates.js` — canonical template for HTTP PUT pattern, curl args shape, API key redaction, walk(), DRY_RUN behavior
-- `scripts/tile-photos.js` — `withRetry`, `redact`, `logStage`, `tilePrefix()` definitions; `isTileable()` filter pattern
-- `scripts/lib/manifest.js` — `readManifest`, `writeManifest`, `advanceStatus`, `COLUMNS`
-- `.planning/phases/28-end-to-end-vertical-slice-pilot-one-species/28-03-SUMMARY.md` — CDN storage path convention confirmed empirically; CORS already configured
-- `.planning/phases/28-end-to-end-vertical-slice-pilot-one-species/PILOT-LESSONS.md` — tile counts (108 files/pair at pilot size), storage footprint estimates, CORS status
-- `.planning/phases/29-dzi-tile-generation-pipeline-bulk/29-03-SUMMARY.md` — Phase 30 handoff notes; 3808 eligible rows; DRY_RUN output confirming lowercase slug + path format
-- `var/tiles/` (local) — verified tile directory structure including `vips-properties.xml` presence
+- `scripts/upload-plates.js` — curl PUT pattern, walk helper, DRY_RUN guard, BUNNY env vars [VERIFIED: codebase read]
+- `scripts/tile-photos.js` — withRetry, redact, logStage, manifest loop, periodic flush, isTileable pattern [VERIFIED: codebase read]
+- `scripts/lib/manifest.js` — readManifest, writeManifest, advanceStatus, COLUMNS [VERIFIED: codebase read]
+- `scripts/tile-config.json` — tileOutputDir default (`var/tiles`) [VERIFIED: codebase read]
+- `eleventy.config.js` — CDN_BASE_URL = `https://pnwmoths.b-cdn.net` [VERIFIED: grep]
+- `data/species-photos-manifest.csv` — 4,935 rows; 3,510 `status: tiled`; 1,450 `status: discovered` [VERIFIED: grep + awk]
+- `var/tiles/` filesystem — 3,547 DZI pairs, 447,723 files, 3.2 GB, 1,153 species dirs [VERIFIED: find + du]
+- `scripts/tile-photos.test.js` — test pattern: describe/it blocks, row factory, exported function tests [VERIFIED: codebase read]
+- `.planning/phases/29-dzi-tile-generation-pipeline-bulk/29-03-SUMMARY.md` — Phase 29 handoff, dry-run output, slug lowercasing confirmation [VERIFIED: file read]
+- `_instructions/TILING_HIGH_RES_PHOTOS.md` — runbook structure and tone to mirror [VERIFIED: file read]
+- `_instructions/UPLOADING_IMAGES.md` — Phase 13 runbook structure [VERIFIED: file read]
+- `.planning/phases/30-bunny-net-upload-of-tile-pyramids-bulk/30-CONTEXT.md` — all locked decisions D-01 through L-08, Claude's Discretion, Deferred Ideas [VERIFIED: file read]
+- `package.json` — existing `photos:ingest`/`photos:tile` npm alias pattern; existing test command structure [VERIFIED: grep]
+- `.gitignore` — `var/` confirmed gitignored [VERIFIED: grep]
 
 ### Secondary (MEDIUM confidence)
-
-- CONTEXT.md `<specifics>` — pre-flight output format, CDN spot-check curl command
-- CONTEXT.md `<decisions>` — all locked decisions D-01 through L-08
-
-### Tertiary (LOW confidence)
-
-- None
+- bunny.net Storage Zone HTTP PUT behavior (idempotent, path-creates-implicitly) — [ASSUMED] consistent with Phase 13/18 behavior and S3-compatible object store conventions; not re-verified against current bunny.net docs
 
 ---
 
 ## Metadata
 
 **Confidence breakdown:**
-- Standard stack: HIGH — no new packages; all existing
-- Architecture: HIGH — derived directly from existing scripts and Phase 28 pilot empirical data
-- Pitfalls: HIGH — most discovered during Phases 28-29 and documented in SUMMARY/LESSONS files
+- Standard stack: HIGH — no new packages; all dependencies verified in codebase
+- Architecture: HIGH — two prior-art scripts provide exact implementation patterns; confirmed by Phase 29 dry-run output
+- Pitfalls: HIGH — derived from actual Phase 28/29 lessons documented in 29-03-SUMMARY.md and CONTEXT.md
+- Validation: HIGH — follows established node:test pattern from tile-photos.test.js
+- bunny.net API behavior: MEDIUM — consistent with prior phases but not re-verified against current bunny.net documentation
 
 **Research date:** 2026-05-23
-**Valid until:** 2026-06-23 (stable domain; bunny.net Storage API is stable; Node.js fs/child_process APIs do not change)
+**Valid until:** 2026-07-23 (stable domain; bunny.net API patterns from Phase 13/18 are well-established)
