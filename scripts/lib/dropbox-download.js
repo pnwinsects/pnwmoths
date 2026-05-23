@@ -67,7 +67,10 @@ export async function downloadSharedFile({ shareUrl, dropboxPath, token, destPat
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`/2/sharing/get_shared_link_file → ${res.status}: ${text}`);
+    const err = new Error(`/2/sharing/get_shared_link_file → ${res.status}: ${text}`);
+    // 4xx errors (except 429 rate-limit) are permanent client errors; retrying won't help.
+    err.retriable = res.status === 429;
+    throw err;
   }
 
   // Create the parent directory if it does not exist (mirrors mkdir -p).

@@ -50,6 +50,33 @@ describe('downloadSharedFile', () => {
             !err.message.includes('sl.SECRET'),
             `error message must not contain the token value "sl.SECRET": ${err.message}`,
           );
+          assert.strictEqual(err.retriable, false, 'non-retriable 401 must set err.retriable = false');
+          return true;
+        },
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('marks 429 errors as retriable', async () => {
+    const originalFetch = globalThis.fetch;
+    try {
+      globalThis.fetch = async () => ({
+        ok: false,
+        status: 429,
+        text: async () => 'too_many_requests',
+      });
+
+      await assert.rejects(
+        () => downloadSharedFile({
+          shareUrl: 'https://www.dropbox.com/scl/fo/example',
+          dropboxPath: '/test.tif',
+          token: 'sl.TOKEN',
+          destPath: '/tmp/test.tif',
+        }),
+        (err) => {
+          assert.strictEqual(err.retriable, true, '429 must set err.retriable = true');
           return true;
         },
       );

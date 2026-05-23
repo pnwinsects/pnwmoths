@@ -89,6 +89,11 @@ async function withRetry(fn, label) {
       return await fn();
     } catch (err) {
       const safeMsg = redact(err.message ?? String(err));
+      // Non-retriable errors (e.g. 4xx client errors) must not be retried —
+      // they indicate a permanent configuration problem (wrong scope, bad token).
+      if (err.retriable === false) {
+        throw new Error(`${label} failed (non-retriable): ${safeMsg}`);
+      }
       if (attempt === delays.length - 1) {
         throw new Error(`${label} failed after ${delays.length} attempts: ${safeMsg}`);
       }

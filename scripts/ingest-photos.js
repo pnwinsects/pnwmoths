@@ -436,7 +436,7 @@ async function main() {
         if (!IMAGE_EXTS.has(ext)) {
           const row = {
             content_hash: entry.content_hash,
-            dropbox_path: entry.path_display ?? '',
+            dropbox_path: entry.path_display || ('/' + entry.name),
             size_bytes: String(entry.size ?? ''),
             server_modified: entry.server_modified ?? '',
             filename_raw: entry.name ?? '',
@@ -473,7 +473,7 @@ async function main() {
 
         const row = {
           content_hash: entry.content_hash,
-          dropbox_path: entry.path_display ?? '',
+          dropbox_path: entry.path_display || ('/' + entry.name),
           size_bytes: String(entry.size ?? ''),
           server_modified: entry.server_modified ?? '',
           filename_raw: entry.name ?? '',
@@ -496,7 +496,7 @@ async function main() {
         const safeMsg = redact(perFileErr.message ?? String(perFileErr));
         const row = {
           content_hash: entry.content_hash ?? '',
-          dropbox_path: entry.path_display ?? '',
+          dropbox_path: entry.path_display || ('/' + (entry.name ?? '')),
           size_bytes: String(entry.size ?? ''),
           server_modified: entry.server_modified ?? '',
           filename_raw: entry.name ?? '',
