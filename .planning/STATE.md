@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Completed 29-01-PLAN.md — tile-config.json, dropbox-download.js, advanceStatus helper
-last_updated: "2026-05-23T05:47:38Z"
-last_activity: 2026-05-23 -- Phase 29 Plan 01 complete (tile-config, dropbox-download, advanceStatus)
+stopped_at: Completed 29-02-PLAN.md — tile-photos.js bulk DZI pipeline, 16 tests, photos:tile alias
+last_updated: "2026-05-23T05:54:23Z"
+last_activity: 2026-05-23 -- Phase 29 Plan 02 complete (tile-photos.js, tile-photos.test.js, package.json)
 progress:
   total_phases: 14
   completed_phases: 3
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 ## Current Position
 
-Phase: 29 (dzi-tile-generation-pipeline) — IN PROGRESS (Plan 01 complete; Plans 02–03 remaining)
-Status: 29-01 shipped — tile-config.json, dropbox-download.js, advanceStatus in manifest.js
-Last activity: 2026-05-23 -- 29-01-PLAN.md executed; 3 tasks committed; npm test 165/165
+Phase: 29 (dzi-tile-generation-pipeline) — IN PROGRESS (Plans 01-02 complete; Plan 03 remaining)
+Status: 29-02 shipped — tile-photos.js bulk DZI pipeline, tile-photos.test.js (16 tests), photos:tile alias
+Last activity: 2026-05-23 -- 29-02-PLAN.md executed; 3 tasks committed; npm test 181/181
 
 ## Performance Metrics
 
@@ -65,6 +65,9 @@ Recent decisions affecting current work:
 - Phase 29 Plan 01: WebP (.webp[Q=80]) pinned in tile-config.json — pilot confirmed ~30% smaller than JPEG, OSD handles webp DZI format correctly
 - Phase 29 Plan 01: downloadSharedFile has no retry — callers own withRetry (matches dropbox-list.js convention)
 - Phase 29 Plan 01: advanceStatus mutates row in-place — consistent with RESORT_ONLY pattern in ingest-photos.js
+- Phase 29 Plan 02: Export tilePrefix/tiffCachePath/isAlreadyTiled/isTileable for testability without network or vips
+- Phase 29 Plan 02: Filesystem idempotency (isAlreadyTiled) layered on manifest idempotency (status=tiled) to recover from interrupted runs
+- Phase 29 Plan 02: species_slug lowercased unconditionally in tilePrefix per Phase 28 mixed-case lesson
 - v2.2 locked (exploration): Local manifest (SQLite/JSON) is source of truth — durable per-image status; survives restarts; seeds `data/species-photos.json`
 - v2.2 locked (exploration): Dropbox is a superset; match → replace existing low-res; unmatched → manual investigation (no auto-drop)
 - v2.2 locked (exploration): Folder layout flat with encoded filenames — convention `Genus species-{specimen}-{view}.{ext}` (same as Phase 13 photos)
@@ -117,7 +120,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-23T05:47:38Z
-Stopped at: Completed 29-01-PLAN.md — tile-config.json, dropbox-download.js, advanceStatus helper
+Last session: 2026-05-23T05:54:23Z
+Stopped at: Completed 29-02-PLAN.md — tile-photos.js bulk DZI pipeline, 16 tests, photos:tile alias
 Resume file: None
-Resume notes: Ready for Phase 29 Plan 02 (scripts/tile-photos.js CLI).
+Resume notes: Ready for Phase 29 Plan 03 (upload-tiles to bunny.net).
