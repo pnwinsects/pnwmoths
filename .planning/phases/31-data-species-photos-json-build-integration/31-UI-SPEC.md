@@ -1,7 +1,8 @@
 ---
 phase: 31
 slug: data-species-photos-json-build-integration
-status: draft
+status: approved
+reviewed_at: 2026-05-23
 shadcn_initialized: false
 preset: none
 created: 2026-05-23
