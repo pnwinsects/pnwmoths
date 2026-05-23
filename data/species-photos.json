@@ -1,1 +1,9 @@
-{}
+{
+  "abagrotis-apposita": {
+    "high_res_available": true,
+    "specimens": [
+      { "specimen_id": "A", "view": "D", "tiles_path": "species-tiles/abagrotis-apposita/A-D" },
+      { "specimen_id": "A", "view": "V", "tiles_path": "species-tiles/abagrotis-apposita/A-V" }
+    ]
+  }
+}
