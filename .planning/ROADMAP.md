@@ -345,7 +345,20 @@ Plans:
   3. Tile parameters (tile size, overlap, output format, JPEG quality) live in a single committed pipeline-config file; changing them and rerunning regenerates tiles deterministically — two runs with the same config produce byte-identical or semantically-equivalent output
   4. Successful tiling advances the manifest row from `downloaded` to `tiled` with no other state changes; tile-stage progress logs follow the Phase 26 pattern
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+
+**Wave 1**
+
+- [ ] 29-01-PLAN.md — Commit scripts/tile-config.json + scripts/lib/dropbox-download.js + advanceStatus helper in manifest.js (TILE-03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 29-02-PLAN.md — Build scripts/tile-photos.js CLI composing config + dropbox-download + vips dzsave; per-row idempotency via status + on-disk .dzi guards; redact+withRetry+logStage helpers; npm alias photos:tile (TILE-01, TILE-02, TILE-03)
+
+**Wave 3** *(blocked on Wave 2; contains the human-verify checkpoint)*
+
+- [ ] 29-03-PLAN.md — Author _instructions/TILING_HIGH_RES_PHOTOS.md operator runbook; human-verify checkpoint runs DRY_RUN + idempotency proof + .dzi Format check + npm test on the datacenter server (TILE-01, TILE-02, TILE-03)
 
 ### Phase 30: bunny.net Upload of Tile Pyramids (bulk)
 
