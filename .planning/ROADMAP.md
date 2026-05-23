@@ -105,7 +105,7 @@
 - [x] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first (completed 2026-05-22)
 - [ ] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit
 - [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
-- [ ] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit
+- [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
 - [ ] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows
 - [ ] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
 
@@ -381,7 +381,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 30-02-PLAN.md — Author _instructions/UPLOADING_TILES.md operator runbook covering DRY_RUN preview, full pipeline, resume after interruption, troubleshooting, Pull Zone verification (UPLOAD-01, UPLOAD-02, UPLOAD-03)
+- [x] 30-02-PLAN.md — Author _instructions/UPLOADING_TILES.md operator runbook covering DRY_RUN preview, full pipeline, resume after interruption, troubleshooting, Pull Zone verification (UPLOAD-01, UPLOAD-02, UPLOAD-03)
 
 ### Phase 31: `data/species-photos.json` Build Integration
 
@@ -450,7 +450,7 @@ Plans:
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
-| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 1/2 | In Progress|  |
+| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete   | 2026-05-23 |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 

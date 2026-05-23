@@ -4,14 +4,14 @@ milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
 stopped_at: Phase 30 context gathered
-last_updated: "2026-05-23T18:49:58.770Z"
+last_updated: "2026-05-23T18:54:35.577Z"
 last_activity: 2026-05-23 -- Phase 30 planning complete
 progress:
   total_phases: 14
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 17
-  completed_plans: 15
-  percent: 21
+  completed_plans: 16
+  percent: 29
 ---
 
 # Project State
@@ -54,6 +54,7 @@ Last activity: 2026-05-23 -- Phase 30 planning complete
 - v2.2: kicked off 2026-05-21 (6 phases planned, server-side pipeline + viewer work)
 
 *Updated after each plan completion*
+| Phase 30 P02 | 3min | - tasks | - files |
 
 ## Accumulated Context
 
@@ -123,7 +124,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-23T18:49:58.763Z
+Last session: 2026-05-23T18:54:32.646Z
 Stopped at: Phase 30 context gathered
 Resume file: None
 Resume notes: Ready for Phase 29 Plan 03 (upload-tiles to bunny.net).
