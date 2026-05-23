@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Phase 28 Wave 1 mid-flight — 3 commits across plans 28-01 + 28-02; no SUMMARY.md written; uncommitted package-lock.json + untracked .11ty-vite/
-last_updated: "2026-05-22T22:00:00.000Z"
-last_activity: 2026-05-22 -- Phase 28 execution stalled mid-Wave-1 (resume detected)
+stopped_at: Phase 28 complete — all 5 plans shipped; ready for Phase 29 (bulk tiling)
+last_updated: "2026-05-22T23:30:00.000Z"
+last_activity: 2026-05-22 -- Phase 28 complete; OSD pilot verified end-to-end
 progress:
   total_phases: 14
-  completed_phases: 2
-  total_plans: 12
-  completed_plans: 7
-  percent: 14
+  completed_phases: 3
+  total_plans: 17
+  completed_plans: 12
+  percent: 21
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 28 — end-to-end-vertical-slice-pilot-one-species
+**Current focus:** Phase 29 — DZI tile generation pipeline (bulk)
 
 ## Current Position
 
-Phase: 28 (end-to-end-vertical-slice-pilot-one-species) — EXECUTING (stalled mid-Wave-1)
-Plan: 28-01 + 28-02 partially complete (Wave 1, no SUMMARY.md for either)
-Status: Wave 1 stalled — 3 commits landed, then execution stopped before SUMMARY.md or human checkpoint
+Phase: 28 (end-to-end-vertical-slice-pilot-one-species) — COMPLETE
+Phase: 29 (dzi-tile-generation-pipeline) — NOT STARTED (needs plan)
+Status: Phase 28 fully shipped; all 5 plans have SUMMARYs; PILOT-LESSONS.md committed
 Last activity: 2026-05-22 -- session resumed; mid-flight execution detected, no HANDOFF.json
 
 Committed mid-flight (no SUMMARY yet):
