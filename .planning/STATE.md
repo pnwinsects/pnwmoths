@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: ready_to_plan
-stopped_at: Phase 30 complete (2/2) — ready to discuss Phase 31
-last_updated: 2026-05-23T23:11:21.542Z
-last_activity: 2026-05-23 -- Phase 30 planning complete
+status: planning
+stopped_at: Phase 31 context gathered
+last_updated: "2026-05-23T23:31:21.801Z"
+last_activity: 2026-05-23
 progress:
   total_phases: 14
   completed_phases: 4
@@ -128,6 +128,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-23
-Stopped at: Phase 30 complete — UAT passed (4/4), ready to discuss Phase 31
-Resume file: None
+Last session: 2026-05-23T23:31:21.788Z
+Stopped at: Phase 31 context gathered
+Resume file: .planning/phases/31-data-species-photos-json-build-integration/31-CONTEXT.md
