@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Phase 28 complete — all 5 plans shipped; ready for Phase 29 (bulk tiling)
-last_updated: "2026-05-22T23:30:00.000Z"
-last_activity: 2026-05-22 -- Phase 28 complete; OSD pilot verified end-to-end
+stopped_at: Phase 29 planned — 3 plans in 3 waves; ready for execute-phase 29
+last_updated: "2026-05-22T23:45:00.000Z"
+last_activity: 2026-05-22 -- Phase 29 planned (DZI tile generation pipeline, bulk)
 progress:
   total_phases: 14
   completed_phases: 3
-  total_plans: 17
+  total_plans: 20
   completed_plans: 12
   percent: 21
 ---
