@@ -350,7 +350,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 29-01-PLAN.md — Commit scripts/tile-config.json + scripts/lib/dropbox-download.js + advanceStatus helper in manifest.js (TILE-03)
+- [x] 29-01-PLAN.md — Commit scripts/tile-config.json + scripts/lib/dropbox-download.js + advanceStatus helper in manifest.js (TILE-03)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -440,7 +440,7 @@ Plans:
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
-| 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 0/3 | Planned | — |
+| 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 0/0 | Not started | — |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |

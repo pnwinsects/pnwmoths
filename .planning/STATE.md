@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Phase 29 planned — 3 plans in 3 waves; ready for execute-phase 29
-last_updated: "2026-05-22T23:45:00.000Z"
-last_activity: 2026-05-22 -- Phase 29 planned (DZI tile generation pipeline, bulk)
+stopped_at: Completed 29-01-PLAN.md — tile-config.json, dropbox-download.js, advanceStatus helper
+last_updated: "2026-05-23T05:47:38Z"
+last_activity: 2026-05-23 -- Phase 29 Plan 01 complete (tile-config, dropbox-download, advanceStatus)
 progress:
   total_phases: 14
   completed_phases: 3
   total_plans: 20
-  completed_plans: 12
-  percent: 21
+  completed_plans: 13
+  percent: 22
 ---
 
 # Project State
@@ -21,24 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 29 — DZI tile generation pipeline (bulk)
+**Current focus:** Phase 29 — DZI tile generation pipeline (bulk), Plan 02 next
 
 ## Current Position
 
-Phase: 28 (end-to-end-vertical-slice-pilot-one-species) — COMPLETE
-Phase: 29 (dzi-tile-generation-pipeline) — NOT STARTED (needs plan)
-Status: Phase 28 fully shipped; all 5 plans have SUMMARYs; PILOT-LESSONS.md committed
-Last activity: 2026-05-22 -- session resumed; mid-flight execution detected, no HANDOFF.json
-
-Committed mid-flight (no SUMMARY yet):
-- 28-01 Task 1: TILE-RECIPE.md authored (ac1e355)
-- 28-02 Task 1: data/species-photos.json (dd06097)
-- 28-02 Task 2: src/_data/species-photos.js (f4aa7d0)
-
-Unfinished within Wave 1:
-- 28-01 Task 2: operator runs `vips dzsave` locally → human checkpoint (blocking)
-- 28-02 Task 3: build verification (`npm run build:eleventy`, count = 1364) → never recorded
-- Working tree dirty: `M package-lock.json`, untracked `.11ty-vite/` (likely residue from interrupted build)
+Phase: 29 (dzi-tile-generation-pipeline) — IN PROGRESS (Plan 01 complete; Plans 02–03 remaining)
+Status: 29-01 shipped — tile-config.json, dropbox-download.js, advanceStatus in manifest.js
+Last activity: 2026-05-23 -- 29-01-PLAN.md executed; 3 tasks committed; npm test 165/165
 
 ## Performance Metrics
 
@@ -73,6 +62,9 @@ Unfinished within Wave 1:
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
+- Phase 29 Plan 01: WebP (.webp[Q=80]) pinned in tile-config.json — pilot confirmed ~30% smaller than JPEG, OSD handles webp DZI format correctly
+- Phase 29 Plan 01: downloadSharedFile has no retry — callers own withRetry (matches dropbox-list.js convention)
+- Phase 29 Plan 01: advanceStatus mutates row in-place — consistent with RESORT_ONLY pattern in ingest-photos.js
 - v2.2 locked (exploration): Local manifest (SQLite/JSON) is source of truth — durable per-image status; survives restarts; seeds `data/species-photos.json`
 - v2.2 locked (exploration): Dropbox is a superset; match → replace existing low-res; unmatched → manual investigation (no auto-drop)
 - v2.2 locked (exploration): Folder layout flat with encoded filenames — convention `Genus species-{specimen}-{view}.{ext}` (same as Phase 13 photos)
@@ -125,7 +117,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-22T22:00:00.000Z
-Stopped at: Phase 28 Wave 1 mid-flight — execution started, 3 commits landed across plans 28-01 + 28-02, then halted before any SUMMARY.md or the operator human-checkpoint. No HANDOFF.json was written → unclean termination, not a graceful pause.
-Resume file: .planning/phases/28-end-to-end-vertical-slice-pilot-one-species/28-01-PLAN.md (Task 2 — human checkpoint) + 28-02-PLAN.md (Task 3 — build verification)
-Resume notes: Before re-running `/gsd:execute-phase 28`, decide whether to keep or discard the `M package-lock.json` and `.11ty-vite/` untracked artifacts. Phase 27 also has 2 outstanding human_needed UAT items (BOM check, RESORT_ONLY runbook wording).
+Last session: 2026-05-23T05:47:38Z
+Stopped at: Completed 29-01-PLAN.md — tile-config.json, dropbox-download.js, advanceStatus helper
+Resume file: None
+Resume notes: Ready for Phase 29 Plan 02 (scripts/tile-photos.js CLI).
