@@ -25,7 +25,7 @@
  */
 
 import { resolve, join, dirname } from 'node:path';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, unlink } from 'node:fs/promises';
 import { existsSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.js';
@@ -339,6 +339,7 @@ async function main() {
         const prefix = tilePrefix(tileOutputDir, row);
         await mkdir(dirname(prefix), { recursive: true });
         runVipsDzsave(cachePath, prefix, config);
+        await unlink(cachePath);
         advanceStatus(row, 'tiled');
         logStage(row.content_hash, 'tile', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
         stats.tiled++;

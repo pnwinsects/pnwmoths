@@ -31,9 +31,9 @@ You will need all of the following on the datacenter server before running the s
   Tokens start with `sl.`. Never commit the token, paste it into chat, or store it in a
   file on disk.
 - **Disk headroom**: approximately 9 GB for the full tile corpus (~850 KB per pair ×
-  ~10,000 pairs, per PILOT-LESSONS.md extrapolation). The TIFF cache adds ~204 GB if
-  every source TIFF is downloaded; operator may delete cached TIFFs incrementally after
-  confirming the corresponding tiles are successfully uploaded in Phase 30.
+  ~10,000 pairs, per PILOT-LESSONS.md extrapolation). Each source TIFF is deleted
+  immediately after its tiles are written, so peak TIFF disk usage is one file at a time
+  (~20–250 MB). No large TIFF staging area is needed.
 
 ## Configuration
 
@@ -162,7 +162,9 @@ On the next `npm run photos:tile`, three idempotency checks gate work for each r
    catches the window between a successful vips invocation and the next manifest write
    (the "kill between vips and manifest-write" scenario).
 3. **TIFF cache guard:** rows whose TIFF is already present in `tiffCacheDir` skip the
-   Dropbox download step entirely and proceed directly to the tile stage.
+   Dropbox download step entirely and proceed directly to the tile stage. (TIFFs are
+   deleted immediately after tiling, so a cached file at this point means the previous
+   run was interrupted between download and tile.)
 
 The manifest is checkpoint-written to disk every 25 rows. In a kill -9 scenario, at most
 24 rows of in-memory status transitions are lost and must be re-processed on the next run.
@@ -202,11 +204,10 @@ idempotency means successfully tiled rows are not repeated.
 
 **vips dzsave fails on a specific TIFF**
 The vips error is captured into the row's `last_error` field and the row is marked
-`status: failed`. Inspect the cached TIFF at `{tiffCacheDir}/{content_hash}-{filename_raw}`.
-If the file is corrupt (truncated, zero bytes, or vips reports a load error), re-download it
-from the Dropbox shared folder via the web UI, replace the cached file at the expected path,
-and re-run — the download guard will see the replacement and proceed directly to the tile
-stage.
+`status: failed`. The TIFF is not deleted on a failed tile (only successful tiles trigger
+deletion). To retry, simply re-run — the cached TIFF will be picked up and vips attempted
+again. If the file is corrupt, delete it from `{tiffCacheDir}/{content_hash}-{filename_raw}`
+and re-run; the script will re-download it from Dropbox.
 
 **Disk full in `tileOutputDir` or `tiffCacheDir`**
 Free space and re-run. Idempotency preserves all previously tiled rows; only the rows that
@@ -267,5 +268,6 @@ Phase 30 (`UPLOAD-01`) reads `data/species-photos-manifest.csv`, selects rows wi
 `status: tiled`, and uploads the tile directories to bunny.net Storage at the path
 `species-tiles/{slug}/{specimen_id}-{view}/`.
 
-Do not delete tiles from `tileOutputDir` or TIFFs from `tiffCacheDir` until Phase 30 has
-completed successfully and the uploaded tiles have been verified against the live CDN.
+Do not delete tiles from `tileOutputDir` until Phase 30 has completed successfully and
+the uploaded tiles have been verified against the live CDN. Source TIFFs are deleted
+automatically after each successful tile — no manual TIFF cleanup is needed.
