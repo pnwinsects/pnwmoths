@@ -13,6 +13,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 **v2.1 shipped:** 2026-05-20 — Species Fact Sheet Gaps closed (4 phases, 5 plans, 64 commits)
 **Phase 26 complete:** 2026-05-22 — Dropbox ingest, filename parser, and manifest; 4,935-row `data/species-photos-manifest.csv` committed (clean-match 77.3% / genus-only 14.1% / likely-synonym 8.2% / unparseable 0.3% / provisional 0.2%)
 **Phase 27 complete:** 2026-05-22 — Synonym curation pass shipped: header-only `data/species-synonyms.csv`, `loadSynonyms` + classify pre-pass + `photos:investigate` RESORT_ONLY re-classification, curator runbook `_instructions/CURATING_SPECIES_SYNONYMS.md`. Mechanism in place; first curator pass not yet performed.
+**Phase 28 complete:** 2026-05-22 — End-to-end vertical-slice pilot validated: one species tiled locally (libvips DZI/WebP), uploaded to bunny.net, hand-edited into data JSON, and rendered in OpenSeadragon lightbox. Cross-phase integration confirmed before bulk phases.
+**Phase 29 complete:** 2026-05-22 — DZI tile generation pipeline bulk: `scripts/tile-photos.js` manifest-driven pipeline tiles all `status=downloaded` rows via libvips, advances to `status=tiled`, deletes source TIFFs. 182 tests.
+**Phase 30 complete:** 2026-05-23 — bunny.net tile upload bulk: `scripts/upload-tiles.js` manifest-driven CLI uploads each `status=tiled` DZI pyramid to bunny.net Storage Zone, advances to `status=uploaded`, deletes local tiles. 191 tests. Operator runbook at `_instructions/UPLOADING_TILES.md`.
 
 ## Current Milestone: v2.2 High-resolution species photos
 
@@ -181,6 +184,10 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | Phenology chart stays in DOM with zero-height bars on filter-returns-empty | Removing the canvas destroys the Chart.js instance; re-inserting a detached canvas causes stale renderer errors | ✓ Good — v2.1 Phase 24 |
 | Elevation slider uses `String()` coercion on Lit `.value` binding | Lit treats `Number` type as a Lit property and loses reactive sync with the native range input | ✓ Good — v2.1 Phase 24 |
 | Similar species section inside `.species-photos` div under carousel | Visually adjacent to photos (user-directed); `.species-photos` div now contains both carousel and similar-species row | ✓ Good — v2.1 Phase 25; future phases must be aware of this combined structure |
+| DRY_RUN guard before BUNNY_API_KEY guard in upload-tiles.js | Enables `DRY_RUN=1 npm run photos:upload` without needing a real API key — useful for pre-flight inspection before committing to a multi-hour run | ✓ Good — v2.2 Phase 30; pattern should be applied to any future upload scripts |
+| `advanceStatus(row, 'uploaded')` before `rm`/`unlink` deletion | Status must be committed to the in-memory row before tile files are deleted — if deletion fails, row is still marked uploaded and next run skips it safely | ✓ Good — v2.2 Phase 30; D-03 ordering invariant: status advance always precedes file deletion |
+| Self-contained per-script helpers (redact, withRetry, logStage, walk) | Project convention: helpers copied verbatim into each script rather than imported from a shared module — avoids cross-script coupling, keeps each script independently executable | ✓ Good — v2.2 Phase 30; same pattern used in tile-photos.js, upload-plates.js, upload-tiles.js |
+| Pre-flight footprint walk uses synchronous readdirSync/statSync | One-time startup cost (30–90s for ~447k files) is acceptable; avoids async complexity in a function that runs once before the main event loop | ✓ Good — v2.2 Phase 30; print the measuring message BEFORE starting the walk so operator knows to wait |
 
 ## Evolution
 
@@ -200,4 +207,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-22 — Phase 27 complete; v2.2 roadmap restructured (vertical-slice pilot inserted as Phase 28; old 28–31 renumbered to 29–32)*
+*Last updated: 2026-05-23 after Phase 30 — bunny.net tile upload pipeline complete; Phase 31 (`data/species-photos.json` build integration) is next*

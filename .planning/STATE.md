@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: executing
-stopped_at: Phase 30 context gathered
-last_updated: "2026-05-23T18:54:35.577Z"
+status: ready_to_plan
+stopped_at: Phase 30 complete (2/2) — ready to discuss Phase 31
+last_updated: 2026-05-23T23:11:21.542Z
 last_activity: 2026-05-23 -- Phase 30 planning complete
 progress:
   total_phases: 14
@@ -18,22 +18,22 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-21 — milestone v2.2 started)
+See: .planning/PROJECT.md (updated 2026-05-23 after Phase 30)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 30 — bunny.net upload of tile pyramids (bulk)
+**Current focus:** Phase 31 — `data/species photos.json` build integration
 
 ## Current Position
 
-Phase: 29 (dzi-tile-generation-pipeline) — COMPLETE (all 3 plans done; verified locally)
-Status: Ready to execute
-Last activity: 2026-05-23 -- Phase 30 planning complete
+Phase: 31
+Status: Ready to plan
+Last activity: 2026-05-23
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 22 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1) = 48 total
+- Total plans completed: 24 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1) = 48 total
 - Average duration: unknown
 - Total execution time: unknown
 
@@ -69,6 +69,10 @@ Recent decisions affecting current work:
 - Phase 29 Plan 02: Export tilePrefix/tiffCachePath/isAlreadyTiled/isTileable for testability without network or vips
 - Phase 29 Plan 02: Filesystem idempotency (isAlreadyTiled) layered on manifest idempotency (status=tiled) to recover from interrupted runs
 - Phase 29 Plan 02: species_slug lowercased unconditionally in tilePrefix per Phase 28 mixed-case lesson
+- Phase 30 Plan 01: DRY_RUN guard before BUNNY_API_KEY guard — enables dry-run inspection without a real API key
+- Phase 30 Plan 01: advanceStatus(row, 'uploaded') before rm/unlink — status committed before deletion (D-03 ordering)
+- Phase 30 Plan 01: isUploadable checks status === 'tiled' only — all other statuses filtered at loop entry
+- Phase 30 Plan 01: pre-flight footprint walk uses synchronous readdirSync/statSync — one-time startup cost, print measuring message before walking
 - Phase 29 fix: Dropbox shared_link API does not return path_display — use '/' + entry.name as fallback; manifest backfilled
 - Phase 29 fix: downloadSharedFile marks 4xx (non-429) errors as err.retriable=false; withRetry bails immediately on these
 - Phase 29 fix: DROPBOX_TOKEN requires sharing.read + files.content.read scopes (not just files.metadata.read) for tile downloads
@@ -124,7 +128,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-23T18:54:32.646Z
-Stopped at: Phase 30 context gathered
+Last session: 2026-05-23
+Stopped at: Phase 30 complete — UAT passed (4/4), ready to discuss Phase 31
 Resume file: None
-Resume notes: Ready for Phase 29 Plan 03 (upload-tiles to bunny.net).
