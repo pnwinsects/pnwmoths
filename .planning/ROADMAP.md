@@ -372,7 +372,16 @@ Plans:
   3. Before the first bulk run, an operator-runnable check produces a measured/projected bunny.net storage footprint (expected ~1 TB on ~204 GB source — roughly 5× DZI overhead) and the operator records the pricing sanity-check outcome in the milestone log
   4. Successful upload advances the manifest row from `tiled` to `uploaded`; upload-stage logs follow the Phase 26 progress/retry pattern; tile URLs verifiably resolve through the Pull Zone (`{{ cdnBaseUrl }}/species-tiles/...`)
 
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+
+**Wave 1**
+
+- [ ] 30-01-PLAN.md — Build scripts/upload-tiles.js (manifest loop + curl PUT + pre-flight footprint + tile deletion) + unit tests + photos:upload npm alias (UPLOAD-01, UPLOAD-02, UPLOAD-03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 30-02-PLAN.md — Author _instructions/UPLOADING_TILES.md operator runbook covering DRY_RUN preview, full pipeline, resume after interruption, troubleshooting, Pull Zone verification (UPLOAD-01, UPLOAD-02, UPLOAD-03)
 
 ### Phase 31: `data/species-photos.json` Build Integration
 
@@ -441,7 +450,7 @@ Plans:
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
-| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 0/0 | Not started | — |
+| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 0/2 | Planned | — |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 0/0 | Not started | — |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 
