@@ -61,7 +61,16 @@ eleventyComputed:
             <figcaption>{{ img.photographer }}</figcaption>
           </figure>
         {% endfor %}
-      {% elif not (highResEntry and highResEntry.high_res_available) %}
+      {% elif highResEntry and highResEntry.high_res_available %}
+        {% for specimen in highResEntry.specimens %}
+          <figure>
+            <img src="{{ cdnBaseUrl }}/{{ specimen.tiles_path }}/{{ specimen.specimen_id }}-{{ specimen.view }}_files/0/0_0.webp"
+                 alt="{{ sp.genus }} {{ sp.species }}"
+                 onerror="this.style.background='#ddd'">
+            <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>
+          </figure>
+        {% endfor %}
+      {% else %}
         <figure>
           <div aria-label="No images available for this species">
             No photos on file for this species.
