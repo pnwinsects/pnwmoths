@@ -107,7 +107,7 @@
 - [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
 - [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
 - [x] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows (completed 2026-05-24)
-- [ ] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
+- [x] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline (completed 2026-05-24)
 
 ## Phase Details
 
@@ -319,17 +319,17 @@ Plans:
 Plans:
 **Wave 1** (parallel)
 
-- [ ] 28-01-PLAN.md — Author TILE-RECIPE.md operator runbook; operator selects pilot species and produces DZI tile pyramids locally via `vips dzsave --tile-size 256 --overlap 1 --suffix .jpg[Q=85] --layout dz` (PILOT-01 SC-4)
-- [ ] 28-02-PLAN.md — Create data/species-photos.json ({}) + src/_data/species-photos.js loader; verify build still produces 1,364 species pages (PILOT-01 data-layer plumbing, no-regression gate)
+- [x] 28-01-PLAN.md — Author TILE-RECIPE.md operator runbook; operator selects pilot species and produces DZI tile pyramids locally via `vips dzsave --tile-size 256 --overlap 1 --suffix .jpg[Q=85] --layout dz` (PILOT-01 SC-4)
+- [x] 28-02-PLAN.md — Create data/species-photos.json ({}) + src/_data/species-photos.js loader; verify build still produces 1,364 species pages (PILOT-01 data-layer plumbing, no-regression gate)
 
 **Wave 2** *(blocked on Wave 1)*
 
-- [ ] 28-03-PLAN.md — Author UPLOAD-RECIPE.md (mirrors scripts/upload-plates.js curl PUT pattern); operator uploads pilot tile pyramids to bunny.net at `species-tiles/{slug}/{specimen_id}-{view}/`; CDN reachability + CORS header status verified (PILOT-01 SC-2 + RESEARCH.md Open Question #1)
-- [ ] 28-04-PLAN.md — Wire OSD into pnwm-image-slideshow lightbox (gated on highResAvailable + _highResSpecimens?.length); add _buildDziUrl helper + test; extend species.njk with conditional high-res-* attribute block; build still 1,364 pages and zero pages emit high-res-available with empty JSON (PILOT-01 SC-6 no-regression + autonomous code path)
+- [x] 28-03-PLAN.md — Author UPLOAD-RECIPE.md (mirrors scripts/upload-plates.js curl PUT pattern); operator uploads pilot tile pyramids to bunny.net at `species-tiles/{slug}/{specimen_id}-{view}/`; CDN reachability + CORS header status verified (PILOT-01 SC-2 + RESEARCH.md Open Question #1)
+- [x] 28-04-PLAN.md — Wire OSD into pnwm-image-slideshow lightbox (gated on highResAvailable + _highResSpecimens?.length); add _buildDziUrl helper + test; extend species.njk with conditional high-res-* attribute block; build still 1,364 pages and zero pages emit high-res-available with empty JSON (PILOT-01 SC-6 no-regression + autonomous code path)
 
 **Wave 3** *(blocked on Wave 2)*
 
-- [ ] 28-05-PLAN.md — Operator hand-edits data/species-photos.json with real pilot entry; visual browser verification of OSD pan/zoom/home against live CDN + no-regression smoke on two non-pilot species; author PILOT-LESSONS.md (tile params, CORS status, OSD surprises, URL adjustments, recommendations for Phases 29/30/32) (PILOT-01 SC-1, SC-3, SC-5, SC-6)
+- [x] 28-05-PLAN.md — Operator hand-edits data/species-photos.json with real pilot entry; visual browser verification of OSD pan/zoom/home against live CDN + no-regression smoke on two non-pilot species; author PILOT-LESSONS.md (tile params, CORS status, OSD surprises, URL adjustments, recommendations for Phases 29/30/32) (PILOT-01 SC-1, SC-3, SC-5, SC-6)
 
 **UI hint**: yes
 
@@ -425,7 +425,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion; contains the human-verify checkpoint)*
 
-- [ ] 32-03-PLAN.md — Full `npm test` + `npm run build`; assert pilot species `_site/species/abagrotis-apposita/index.html` shape (two figures, Dorsal-before-Ventral order, level-0 tile srcs, DATA-03 preserved); regression-grep a non-high-res control species; human-verify checkpoint exercises OSD pan/zoom/prev/next/close on pilot + control species in a live browser (VIEWER-01..04)
+- [x] 32-03-PLAN.md — Full `npm test` + `npm run build`; assert pilot species `_site/species/abagrotis-apposita/index.html` shape (two figures, Dorsal-before-Ventral order, level-0 tile srcs, DATA-03 preserved); regression-grep a non-high-res control species; human-verify checkpoint exercises OSD pan/zoom/prev/next/close on pilot + control species in a live browser (VIEWER-01..04)
 
 **UI hint**: yes
 
@@ -462,11 +462,11 @@ Plans:
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
-| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
+| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 5/5 | Complete | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
-| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 2/3 | In Progress|  |
+| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21 | Phase 28 plans drafted: 2026-05-22*
