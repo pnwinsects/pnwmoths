@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
-stopped_at: Phase 32 context gathered
-last_updated: "2026-05-24T01:32:25.081Z"
-last_activity: 2026-05-23 -- Phase 31 planning complete
+stopped_at: Phase 32 UI-SPEC approved
+last_updated: "2026-05-24T03:32:21.547Z"
+last_activity: 2026-05-24 -- Phase 32 planning complete
 progress:
   total_phases: 14
   completed_phases: 5
-  total_plans: 19
+  total_plans: 22
   completed_plans: 18
   percent: 36
 ---
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-05-23 after Phase 30)
 
 Phase: 31
 Status: Ready to execute
-Last activity: 2026-05-23 -- Phase 31 planning complete
+Last activity: 2026-05-24 -- Phase 32 planning complete
 
 ## Performance Metrics
 
@@ -128,6 +128,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-24T01:32:25.073Z
-Stopped at: Phase 32 context gathered
-Resume file: .planning/phases/32-openseadragon-viewer-in-lightbox-generalize-pilot/32-CONTEXT.md
+Last session: 2026-05-24T02:58:19.326Z
+Stopped at: Phase 32 UI-SPEC approved
+Resume file: .planning/phases/32-openseadragon-viewer-in-lightbox-generalize-pilot/32-UI-SPEC.md

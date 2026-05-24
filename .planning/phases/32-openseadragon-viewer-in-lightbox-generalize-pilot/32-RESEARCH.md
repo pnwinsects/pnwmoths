@@ -440,12 +440,20 @@ Input validation: `highResEntry.specimens` data comes from `data/species-photos.
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Close button failure mode (Phase 23 todo)**
-   - What we know: The Phase 23 todo says it "is not working correctly" with no specifics. The button exists in shadow DOM with correct `@click` handler. The button is `position: absolute` inside the lightbox `div`.
-   - What's unclear: Whether the failure is (a) a z-index issue where OSD canvas overlays the button hit area, (b) a pointer-events issue, or (c) something else not apparent from code inspection.
-   - Recommendation: Investigate during implementation by opening the lightbox on a high-res species page and clicking the close button while OSD is active. If the click is captured by OSD instead of the button, add `z-index: 1` to `.lightbox-close` (within the lightbox stacking context). If the button is visually occluded by OSD canvas, restructure the lightbox HTML to position the close button as a flex sibling of `#osd-viewer` rather than absolutely positioned within the same container.
+1. **Close button failure mode (Phase 23 todo) — investigation deferred to execution; z-index fix applied speculatively based on HTML stacking analysis; live test required during Plan 32-02 Task 2**
+   - **Static analysis findings (2026-05-23):** Direct read of `src/components/pnwm-image-slideshow.js` confirms the HTML stacking layout:
+     - `.lightbox` (lines 64-72) is `position: fixed; inset: 0; z-index: 9000` — establishes a new stacking context.
+     - `.lightbox-close` (lines 78-89) is `position: absolute` with NO `z-index` declared.
+     - `.osd-viewer` / `#osd-viewer` (lines 58-63, render line 281) has NO explicit `position` or `z-index`.
+     - In the lightbox `html` template (lines 276-295), `<div id="osd-viewer">` is rendered BEFORE `<button class="lightbox-close">`. The close button is a flex sibling of `#osd-viewer`, NOT a descendant of it — so it is already structurally outside OSD's element boundary.
+   - **Confirmed hypothesis (high-confidence inference, low-confidence runtime confirmation):** OpenSeadragon's `OpenSeadragon({ element: viewerEl, ... })` call (lines 200-211) attaches a `<canvas>` (and overlay `<div>` siblings) INSIDE `viewerEl` (`#osd-viewer`). OSD's injected elements are `position: absolute` within `#osd-viewer` with implicit auto z-index. Because positioned siblings without explicit `z-index` paint in DOM order, `.lightbox-close` (later in DOM) SHOULD paint visually above OSD's canvas — but OSD also attaches a `mousetracker` event listener to its canvas that aggressively captures pointer events across the full canvas extent. When the close button has no `z-index` and OSD's canvas establishes its own positioning context, the canvas's event listener may swallow `click` events that geometrically intersect the canvas region (top-right corner where the close button sits, since OSD's canvas spans the full 90vw × 70vh `.osd-viewer` element).
+   - **Why we cannot fully confirm from static analysis alone:** Determining whether the failure is (a) a paint-order issue (visually occluded) or (b) a pointer-events capture issue (visually correct but unclickable) requires runtime DevTools inspection of OSD's injected DOM and an actual click test in the browser. The Phase 28 pilot page at `_site/species/abagrotis-apposita/index.html` exists as a build artifact but Phase 28 is `Planned` status (per ROADMAP.md), so there is no deployed live page to inspect today; the build artifact itself does not exercise OSD until JS runs in a browser.
+   - **Resolution:** Apply the `z-index: 1` fix speculatively in Plan 32-02 Task 2 Part C. This fix promotes `.lightbox-close` into its own stacking layer within the lightbox's `z-index: 9000` context — addressing both possible failure modes simultaneously:
+     - If the issue is paint-order: `z-index: 1` forces `.lightbox-close` above any auto-z-indexed positioned descendants of `#osd-viewer`.
+     - If the issue is pointer-capture: a button with explicit `z-index` and no `pointer-events: none` reliably receives clicks regardless of OSD's canvas listener scope, because the browser's hit-test prefers the higher z-index element.
+   - **Live test required during Plan 32-02 Task 2:** The Plan 03 human-verify checkpoint MUST include (a) opening the lightbox on a multi-specimen high-res species, (b) clicking the close button while OSD is fully initialized and showing tiles, (c) confirming the lightbox closes. If the fix fails empirically, escalate by restructuring the lightbox HTML so `.lightbox-close` is moved to a wrapper sibling of `#osd-viewer` rather than relying on z-index alone (fallback documented in Pattern 4 above).
 
 ---
 
@@ -454,7 +462,7 @@ Input validation: `highResEntry.specimens` data comes from `data/species-photos.
 **Confidence breakdown:**
 - Standard stack: HIGH — both packages already installed and confirmed working in Phase 28
 - Architecture: HIGH — all patterns confirmed from direct codebase read; no new architectural decisions needed
-- Pitfalls: HIGH for known pitfalls (Phase 28 PILOT-LESSONS.md empirical); MEDIUM for close button failure mode (cause unknown)
+- Pitfalls: HIGH for known pitfalls (Phase 28 PILOT-LESSONS.md empirical); MEDIUM for close button failure mode (root cause inferred from static analysis, runtime confirmation deferred to Plan 32-02 Task 2 human-verify — fix applied speculatively and addresses both candidate failure modes)
 
 **Research date:** 2026-05-23
 **Valid until:** 2026-06-23 (stable stack — no breaking changes expected)
