@@ -44,7 +44,6 @@ Declared values (must be multiples of 4):
 
 Exceptions:
 - Touch targets: 44px minimum (`min-width: 44px; min-height: 44px` on all buttons) — source: existing `.controls button` rule
-- Thumbnail height: 93px (existing pattern from Phase 23, not on the 8-point scale — do not change)
 - OSD viewer: `width: 90vw; height: 70vh; min-height: 400px` — fluid, not token-based
 
 Source: `src/components/pnwm-image-slideshow.js` static styles (confirmed)
@@ -58,7 +57,9 @@ Source: `src/components/pnwm-image-slideshow.js` static styles (confirmed)
 | Body | 16px (1rem) | 400 (regular) | 1.5 (Pico default) |
 | Label / caption | 14px (0.875rem) | 400 (regular) | 1.3 |
 | Heading | 20px (1.25rem) | 600 (semibold) | 1.2 |
-| Small annotation | 13px (0.82rem) | 400 (regular) | 1.45 |
+| Small annotation | 14px (0.875rem) | 400 (regular) | 1.45 |
+
+Note: Small annotation and label/caption share 14px. The 13px (0.82rem) value found in the codebase is scoped to `.glossary-popover .gt-def` — a different component not involved in this phase. No distinct 13px size is used in `pnwm-image-slideshow.js`.
 
 Specimen caption in lightbox: 14px (0.875rem), color `var(--pico-muted-color)`, center-aligned.
 Source: `.caption-line` rule in `pnwm-image-slideshow.js` static styles (confirmed).
@@ -99,6 +100,9 @@ Components modified in this phase:
 | In-lightbox prev button | `.lightbox-prev` | default, hover, focus | Only rendered when `useOsd && _highResSpecimens.length > 1` |
 | In-lightbox next button | `.lightbox-next` | default, hover, focus | Only rendered when `useOsd && _highResSpecimens.length > 1` |
 | Specimen caption | `.caption-line` (existing) | updates reactively on `_currentIndex` change | "Specimen {id} · Dorsal/Ventral" |
+
+**Thumbnail strip — existing constraint:**
+The thumbnail strip uses `height: 93px` (inherited from Phase 23). This value is not on the 8-point spacing scale and must not be changed — it is an existing implementation constraint, not a spacing token. Do not normalize to a nearby multiple of 4.
 
 **Prev/next button specification:**
 - Size: 44px × 44px minimum (touch target rule)
