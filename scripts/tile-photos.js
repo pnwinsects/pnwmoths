@@ -230,6 +230,28 @@ function runVipsDzsave(sourceTiff, prefix, config) {
   ], { stdio: ['pipe', 'pipe', 'pipe'] });
 }
 
+/**
+ * Invoke `vips thumbnail` synchronously to produce a single-file WebP thumbnail.
+ *
+ * The [unlimited] flag is required for large TIFFs (matches the dzsave pattern
+ * above). vips thumbnail auto-computes height to preserve aspect ratio.
+ *
+ * Output file: `{prefix}_thumbnail.webp`
+ *
+ * @param {string} sourceTiff   - Absolute path to the source TIFF
+ * @param {string} prefix       - Same prefix used for dzsave (no extension)
+ * @param {object} config       - Parsed tile-config.json (must have thumbnailWidth)
+ * @throws {Error}              - On non-zero vips exit (caught by per-row try/catch in main)
+ */
+function runVipsThumbnail(sourceTiff, prefix, config) {
+  execFileSync('vips', [
+    'thumbnail',
+    sourceTiff + '[unlimited]',
+    `${prefix}_thumbnail.webp`,
+    String(config.thumbnailWidth),
+  ], { stdio: ['pipe', 'pipe', 'pipe'] });
+}
+
 // ---------------------------------------------------------------------------
 // main()
 // ---------------------------------------------------------------------------
@@ -339,6 +361,7 @@ async function main() {
         const prefix = tilePrefix(tileOutputDir, row);
         await mkdir(dirname(prefix), { recursive: true });
         runVipsDzsave(cachePath, prefix, config);
+        runVipsThumbnail(cachePath, prefix, config);
         await unlink(cachePath);
         advanceStatus(row, 'tiled');
         logStage(row.content_hash, 'tile', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
