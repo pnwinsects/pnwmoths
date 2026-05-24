@@ -1,7 +1,8 @@
 ---
 phase: 32
 slug: openseadragon-viewer-in-lightbox-generalize-pilot
-status: draft
+status: approved
+reviewed_at: 2026-05-23
 shadcn_initialized: false
 preset: none
 created: 2026-05-23
