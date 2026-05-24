@@ -4,8 +4,8 @@ milestone: v2.2
 milestone_name: High-resolution species photos
 status: executing
 stopped_at: Phase 32 UI-SPEC approved
-last_updated: "2026-05-24T03:32:21.547Z"
-last_activity: 2026-05-24 -- Phase 32 planning complete
+last_updated: "2026-05-24T03:57:53.493Z"
+last_activity: 2026-05-24 -- Phase 32 execution started
 progress:
   total_phases: 14
   completed_phases: 5
@@ -21,13 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-23 after Phase 30)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 31 — `data/species photos.json` build integration
+**Current focus:** Phase 32 — openseadragon-viewer-in-lightbox-generalize-pilot
 
 ## Current Position
 
-Phase: 31
-Status: Ready to execute
-Last activity: 2026-05-24 -- Phase 32 planning complete
+Phase: 32 (openseadragon-viewer-in-lightbox-generalize-pilot) — EXECUTING
+Plan: 1 of 3
+Status: Executing Phase 32
+Last activity: 2026-05-24 -- Phase 32 execution started
 
 ## Performance Metrics
 
