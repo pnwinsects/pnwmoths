@@ -416,7 +416,16 @@ Plans:
   4. When a species has multiple high-res photos, the OSD viewer surfaces the current photo's `specimen_id` and `view` (D/V) inline so a visitor or curator can tell which physical specimen is being viewed
   5. The pilot's species filter (if any was used to scope OSD wiring to one species) is removed; OSD coverage tracks `high_res_available` directly from the data file
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+**Wave 1** (parallel)
+
+- [ ] 32-01-PLAN.md — Add `{% elif highRes %}` branch to `src/species/species.njk` rendering one `<figure>` per specimen (level-0 DZI tile + "Specimen {id} · Dorsal/Ventral" caption) so the Lit component sees the high-res figures via its existing `querySelectorAll(':scope > figure')` (VIEWER-01, VIEWER-03; D-01, D-02, D-03)
+- [ ] 32-02-PLAN.md — Add `_prevSpecimen`/`_nextSpecimen` + in-lightbox prev/next buttons (rendered only when `useOsd && _highResSpecimens.length > 1`) using `viewer.open()` to swap tile sources; CSS for prev/next per UI-SPEC; fold Phase 23 close-button fix via `z-index: 1` on `.lightbox-close`; add 7 unit tests (wrap-around in both directions, null-viewer safety, `useOsd` false path, view→label mapping) (VIEWER-01, VIEWER-02, VIEWER-03, VIEWER-04; D-07, D-08, D-09)
+
+**Wave 2** *(blocked on Wave 1 completion; contains the human-verify checkpoint)*
+
+- [ ] 32-03-PLAN.md — Full `npm test` + `npm run build`; assert pilot species `_site/species/abagrotis-apposita/index.html` shape (two figures, Dorsal-before-Ventral order, level-0 tile srcs, DATA-03 preserved); regression-grep a non-high-res control species; human-verify checkpoint exercises OSD pan/zoom/prev/next/close on pilot + control species in a live browser (VIEWER-01..04)
 
 **UI hint**: yes
 
@@ -457,7 +466,7 @@ Plans:
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
-| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
+| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/3 | Planned | — |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21 | Phase 28 plans drafted: 2026-05-22*
