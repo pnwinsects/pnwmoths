@@ -86,6 +86,27 @@ export class PnwmImageSlideshow extends LitElement {
       color: white;
       font-size: 24px;
       cursor: pointer;
+      z-index: 1;
+    }
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1;
+    }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+    .lightbox-prev:hover, .lightbox-next:hover,
+    .lightbox-prev:focus, .lightbox-next:focus {
+      background: rgba(0, 0, 0, 0.7);
+      outline: 2px solid var(--pico-primary);
     }
   `;
 
@@ -295,6 +316,10 @@ export class PnwmImageSlideshow extends LitElement {
                   </p>
                 `
               : html`<img src=${current.src} alt=${current.alt}>`}
+            ${useOsd && this._highResSpecimens.length > 1 ? html`
+              <button class="lightbox-prev" aria-label="Previous specimen" @click=${() => this._prevSpecimen()}>&#x276E;</button>
+              <button class="lightbox-next" aria-label="Next specimen" @click=${() => this._nextSpecimen()}>&#x276F;</button>
+            ` : ''}
             <button
               class="lightbox-close"
               aria-label="Close lightbox"
