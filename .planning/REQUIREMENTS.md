@@ -40,8 +40,8 @@
 
 ### DATA — `data/species-photos.json` build integration
 
-- [ ] **DATA-01**: Build pipeline derives `data/species-photos.json` from the manifest with per-species entries containing CDN tile path, `specimen_id`, `view`, and any metadata needed by the OSD viewer
-- [ ] **DATA-02**: Each species record (in the Eleventy data tree) carries a `high_res_available` boolean so templates can branch viewer choice without re-querying the manifest
+- [x] **DATA-01**: Build pipeline derives `data/species-photos.json` from the manifest with per-species entries containing CDN tile path, `specimen_id`, `view`, and any metadata needed by the OSD viewer
+- [x] **DATA-02**: Each species record (in the Eleventy data tree) carries a `high_res_available` boolean so templates can branch viewer choice without re-querying the manifest
 - [x] **DATA-03**: When a species has high-res photos, the legacy low-res entries from `images.csv` for that species are deprecated in the build (templates render only high-res — no double rendering)
 
 ### VIEWER — OpenSeadragon integration with Phase 23 lightbox
@@ -101,8 +101,8 @@ These were considered for v2.2 but are deferred to later milestones:
 | UPLOAD-01 | Phase 30 | Complete |
 | UPLOAD-02 | Phase 30 | Complete |
 | UPLOAD-03 | Phase 30 | Complete |
-| DATA-01 | Phase 31 | Pending |
-| DATA-02 | Phase 31 | Pending |
+| DATA-01 | Phase 31 | Complete |
+| DATA-02 | Phase 31 | Complete |
 | DATA-03 | Phase 31 | Complete |
 | VIEWER-01 | Phase 32 | Pending |
 | VIEWER-02 | Phase 32 | Pending |

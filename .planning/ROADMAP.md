@@ -106,7 +106,7 @@
 - [ ] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit
 - [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
 - [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
-- [ ] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows
+- [x] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows (completed 2026-05-24)
 - [ ] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline
 
 ## Phase Details
@@ -400,7 +400,7 @@ Plans:
 Plans:
 **Wave 1** (parallel)
 
-- [ ] 31-01-PLAN.md — Build scripts/generate-species-photos.js (readManifest -> filter uploaded -> group by slug -> sort specimens -> write JSON with locked pilot shape) + unit tests + photos:materialize npm alias (DATA-01, DATA-02)
+- [x] 31-01-PLAN.md — Build scripts/generate-species-photos.js (readManifest -> filter uploaded -> group by slug -> sort specimens -> write JSON with locked pilot shape) + unit tests + photos:materialize npm alias (DATA-01, DATA-02)
 - [x] 31-02-PLAN.md — Add DATA-03 guard at src/species/species.njk line 47 (suppresses low-res figures when high_res_available is true); human-verify against abagrotis-apposita and a non-high-res species (DATA-03)
 
 ### Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)
@@ -456,7 +456,7 @@ Plans:
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 0/5 | Planned | — |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
-| 31. `data/species-photos.json` Build Integration | v2.2 | 1/2 | In Progress|  |
+| 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 0/0 | Not started | — |
 
 ---
