@@ -64,7 +64,7 @@ eleventyComputed:
       {% elif highResEntry and highResEntry.high_res_available %}
         {% for specimen in highResEntry.specimens %}
           <figure>
-            <img src="{{ cdnBaseUrl }}/{{ specimen.tiles_path }}_thumbnail.webp"
+            <img src="{{ cdnBaseUrl }}/{{ specimen.tiles_path }}_thumbnail.webp?width=376"
                  alt="{{ sp.genus }} {{ sp.species }}"
                  onerror="this.style.background='#ddd'">
             <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>
