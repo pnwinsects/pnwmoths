@@ -58,3 +58,114 @@ describe('_buildDziUrl', () => {
     assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/feltia-herilis/WWUC0000003275-V/WWUC0000003275-V.dzi');
   });
 });
+
+describe('_nextSpecimen', () => {
+  const specimenA = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
+  const specimenB = { specimen_id: 'A', view: 'V', tiles_path: 'species-tiles/abagrotis-apposita/A-V' };
+
+  it('advances _currentIndex from 0 to 1 and calls open with correct URL', () => {
+    let openedWith = null;
+    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const ctx = {
+      _currentIndex: 0,
+      _highResSpecimens: [specimenA, specimenB],
+      _osdViewer,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      cdnBaseUrl: 'https://pnwmoths.b-cdn.net',
+    };
+    PnwmImageSlideshow.prototype._nextSpecimen.call(ctx);
+    assert.equal(ctx._currentIndex, 1);
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V/A-V.dzi');
+  });
+
+  it('wraps from last index back to 0 and calls open with first specimen URL', () => {
+    let openedWith = null;
+    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const ctx = {
+      _currentIndex: 1,
+      _highResSpecimens: [specimenA, specimenB],
+      _osdViewer,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      cdnBaseUrl: 'https://pnwmoths.b-cdn.net',
+    };
+    PnwmImageSlideshow.prototype._nextSpecimen.call(ctx);
+    assert.equal(ctx._currentIndex, 0);
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/A-D.dzi');
+  });
+
+  it('does not throw when _osdViewer is null; _currentIndex still advances', () => {
+    const ctx = {
+      _currentIndex: 0,
+      _highResSpecimens: [specimenA, specimenB],
+      _osdViewer: null,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      cdnBaseUrl: 'https://pnwmoths.b-cdn.net',
+    };
+    assert.doesNotThrow(() => PnwmImageSlideshow.prototype._nextSpecimen.call(ctx));
+    assert.equal(ctx._currentIndex, 1);
+  });
+});
+
+describe('_prevSpecimen', () => {
+  const specimenA = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
+  const specimenB = { specimen_id: 'A', view: 'V', tiles_path: 'species-tiles/abagrotis-apposita/A-V' };
+
+  it('wraps from index 0 to last index and calls open with last specimen URL', () => {
+    let openedWith = null;
+    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const ctx = {
+      _currentIndex: 0,
+      _highResSpecimens: [specimenA, specimenB],
+      _osdViewer,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      cdnBaseUrl: 'https://pnwmoths.b-cdn.net',
+    };
+    PnwmImageSlideshow.prototype._prevSpecimen.call(ctx);
+    assert.equal(ctx._currentIndex, 1);
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V/A-V.dzi');
+  });
+
+  it('retreats from index 1 to 0 and calls open with first specimen URL', () => {
+    let openedWith = null;
+    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const ctx = {
+      _currentIndex: 1,
+      _highResSpecimens: [specimenA, specimenB],
+      _osdViewer,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      cdnBaseUrl: 'https://pnwmoths.b-cdn.net',
+    };
+    PnwmImageSlideshow.prototype._prevSpecimen.call(ctx);
+    assert.equal(ctx._currentIndex, 0);
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/A-D.dzi');
+  });
+});
+
+describe('useOsd derivation', () => {
+  const useOsd = (ctx) => ctx.highResAvailable && ctx._highResSpecimens?.length > 0;
+
+  it('is false when highResAvailable is false and _highResSpecimens is undefined', () => {
+    assert.equal(useOsd({ highResAvailable: false, _highResSpecimens: undefined }), false);
+  });
+
+  it('is false when highResAvailable is true but _highResSpecimens is empty', () => {
+    assert.equal(useOsd({ highResAvailable: true, _highResSpecimens: [] }), false);
+  });
+
+  it('is true when highResAvailable is true and _highResSpecimens has at least one entry', () => {
+    const specimen = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
+    assert.equal(useOsd({ highResAvailable: true, _highResSpecimens: [specimen] }), true);
+  });
+});
+
+describe('view-to-label mapping', () => {
+  const label = (view) => view === 'D' ? 'Dorsal' : 'Ventral';
+
+  it('maps D to Dorsal', () => {
+    assert.equal(label('D'), 'Dorsal');
+  });
+
+  it('maps V to Ventral', () => {
+    assert.equal(label('V'), 'Ventral');
+  });
+});
