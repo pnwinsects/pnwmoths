@@ -250,6 +250,16 @@ export class PnwmImageSlideshow extends LitElement {
     return `${this.cdnBaseUrl}/${specimen.tiles_path}/${specimen.specimen_id}-${specimen.view}.dzi`;
   }
 
+  _prevSpecimen() {
+    this._currentIndex = (this._currentIndex - 1 + this._highResSpecimens.length) % this._highResSpecimens.length;
+    this._osdViewer?.open(this._buildDziUrl(this._highResSpecimens[this._currentIndex]));
+  }
+
+  _nextSpecimen() {
+    this._currentIndex = (this._currentIndex + 1) % this._highResSpecimens.length;
+    this._osdViewer?.open(this._buildDziUrl(this._highResSpecimens[this._currentIndex]));
+  }
+
   _scrollLeft() {
     const strip = this.shadowRoot.querySelector('.thumbnail-strip');
     strip?.scrollBy({ left: -(strip.clientWidth / 2), behavior: 'smooth' });
