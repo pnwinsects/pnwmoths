@@ -44,7 +44,7 @@ eleventyComputed:
       prefix-url="{{ '/osd-images/' | url }}"
       {% endif %}
       data-pagefind-ignore>
-      {% if spImages and spImages.length > 0 %}
+      {% if (not (highResEntry and highResEntry.high_res_available)) and spImages and spImages.length > 0 %}
         {% for img in spImages %}
           <figure>
             <img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename | urlencode }}"
