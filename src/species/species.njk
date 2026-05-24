@@ -63,8 +63,11 @@ eleventyComputed:
         {% endfor %}
       {% elif highResEntry and highResEntry.high_res_available %}
         {% for specimen in highResEntry.specimens %}
+          {% set thumbBase = cdnBaseUrl + "/" + specimen.tiles_path + "_thumbnail.webp" %}
           <figure>
-            <img src="{{ cdnBaseUrl }}/{{ specimen.tiles_path }}_thumbnail.webp?width=376"
+            <img src="{{ thumbBase }}?width=530"
+                 srcset="{{ thumbBase }}?width=530 530w, {{ thumbBase }}?width=1060 1060w, {{ thumbBase }}?width=1500 1500w"
+                 sizes="530px"
                  alt="{{ sp.genus }} {{ sp.species }}"
                  onerror="this.style.background='#ddd'">
             <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>

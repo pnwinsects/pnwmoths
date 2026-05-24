@@ -194,10 +194,12 @@ export class PnwmImageSlideshow extends LitElement {
   _handleKeydown(e) {
     if (e.key === 'Escape' && this._lightboxOpen) {
       this._closeLightbox();
-    } else if (e.key === 'ArrowLeft' && this._lightboxOpen && this._highResSpecimens?.length > 1) {
-      this._prevSpecimen();
-    } else if (e.key === 'ArrowRight' && this._lightboxOpen && this._highResSpecimens?.length > 1) {
-      this._nextSpecimen();
+    } else if (e.key === 'ArrowLeft' && this._lightboxOpen) {
+      if (this._highResSpecimens?.length > 1) this._prevSpecimen();
+      else if (this._images.length > 1) this._currentIndex = (this._currentIndex - 1 + this._images.length) % this._images.length;
+    } else if (e.key === 'ArrowRight' && this._lightboxOpen) {
+      if (this._highResSpecimens?.length > 1) this._nextSpecimen();
+      else if (this._images.length > 1) this._currentIndex = (this._currentIndex + 1) % this._images.length;
     }
   }
 
