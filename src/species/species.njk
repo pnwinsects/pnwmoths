@@ -61,7 +61,7 @@ eleventyComputed:
             <figcaption>{{ img.photographer }}</figcaption>
           </figure>
         {% endfor %}
-      {% else %}
+      {% elif not (highResEntry and highResEntry.high_res_available) %}
         <figure>
           <div aria-label="No images available for this species">
             No photos on file for this species.
