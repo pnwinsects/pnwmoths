@@ -337,6 +337,24 @@ async function main() {
           );
         }
 
+        // --- Upload thumbnail ---
+        const thumbnailLocalPath = `${localPrefix}_thumbnail.webp`;
+        const thumbnailUrl = `${storageBase}_thumbnail.webp`;
+        if (existsSync(thumbnailLocalPath)) {
+          const thumbArgs = [
+            '-s', '-S', '-f',
+            '-X', 'PUT',
+            '-H', `AccessKey: ${BUNNY_API_KEY}`,
+            '-H', 'Content-Type: image/webp',
+            '--data-binary', `@${thumbnailLocalPath}`,
+            thumbnailUrl,
+          ];
+          await withRetry(
+            () => execFileSync('curl', thumbArgs, { stdio: ['pipe', 'pipe', 'inherit'] }),
+            `upload ${pair}/_thumbnail`
+          );
+        }
+
         // --- Upload .dzi descriptor. ---
         const dziUrl = `${storageBase}.dzi`;
         const dziArgs = [
@@ -357,9 +375,10 @@ async function main() {
         logStage(row.content_hash, 'upload', 'ok', `${slug}/${pair}  ${tileFiles.length + 1} files`);
         stats.uploaded++;
 
-        // --- Delete local tile directory and .dzi (D-03: unconditional, post-status-advance). ---
+        // --- Delete local tile directory, .dzi, and thumbnail (D-03: unconditional, post-status-advance). ---
         await rm(filesLocalDir, { recursive: true, force: true });
         if (existsSync(dziLocalPath)) await unlink(dziLocalPath);
+        if (existsSync(thumbnailLocalPath)) await unlink(thumbnailLocalPath);
 
       } catch (err) {
         const safeMsg = redact(err.message ?? String(err));
