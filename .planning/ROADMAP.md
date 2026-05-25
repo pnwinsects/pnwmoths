@@ -12,7 +12,7 @@
 - ✅ **v1.4 Image CDN** — Phases 13–17 (shipped 2026-04-22) — [archive](milestones/v1.4-ROADMAP.md)
 - ✅ **v2.0 Glossary Tooltips** — Phases 19–21 (shipped 2026-04-23) — [archive](milestones/v2.0-ROADMAP.md)
 - ✅ **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (shipped 2026-05-20) — [archive](milestones/v2.1-ROADMAP.md)
-- 🚧 **v2.2 High-resolution species photos** — Phases 26–31 (in flight)
+- ✅ **v2.2 High-resolution species photos** — Phases 26–32 (shipped 2026-05-24) — [archive](milestones/v2.2-ROADMAP.md)
 
 ## Phases
 
@@ -97,17 +97,20 @@
 
 </details>
 
-### v2.2 High-resolution species photos (Phases 26–32) — IN FLIGHT
+<details>
+<summary>✅ v2.2 High-resolution species photos (Phases 26–32) — SHIPPED 2026-05-24</summary>
 
 **Milestone Goal:** Replace existing low-res species photos with OpenSeadragon deep-zoom high-res photos sourced from a ~200 GB Dropbox folder, via a resumable server-side processing pipeline.
 
 - [x] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs) (completed 2026-05-22)
 - [x] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first (completed 2026-05-22)
-- [x] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit (completed 2026-05-25)
+- [x] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit (completed 2026-05-24)
 - [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
 - [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
 - [x] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows (completed 2026-05-24)
 - [x] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline (completed 2026-05-24)
+
+</details>
 
 ## Phase Details
 
@@ -463,13 +466,13 @@ Plans:
 | 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
 | 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
 | 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 5/5 | Complete    | 2026-05-25 |
-| 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 1/3 | In Progress | — |
+| 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 3/3 | Complete | 2026-05-23 |
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 phases added: 2026-05-21 | Phase 28 plans drafted: 2026-05-22*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24*
 
 ## Backlog
 

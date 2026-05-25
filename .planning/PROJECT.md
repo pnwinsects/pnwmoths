@@ -2,40 +2,20 @@
 
 ## What This Is
 
-A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually and has a clean, tested build pipeline with 97 automated tests. Species fact sheets include a photo thumbnail carousel, phenology chart with axis labels, occurrence map with county/collection/elevation filters, and a similar species thumbnail row — all as Lit web components loading Parquet asynchronously, with full no-JS static degradation.
+A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static site. Built with Eleventy, flat files (CSV + DuckDB/Parquet, Markdown), Vite for client-side JavaScript, and Lit web components. The site matches pnwmoths.biol.wwu.edu visually and has a clean, tested build pipeline with 191 automated tests. Species fact sheets include an OpenSeadragon deep-zoom viewer (for species with high-res TIFF photos from Dropbox), photo thumbnail carousel, phenology chart with axis labels, occurrence map with county/collection/elevation filters, and a similar species thumbnail row — all as Lit web components loading Parquet asynchronously, with full no-JS static degradation.
 
 ## Core Value
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
-## Current State: v2.2 in flight — High-resolution species photos
+## Current State: v2.2 shipped — High-resolution species photos
 
-**v2.1 shipped:** 2026-05-20 — Species Fact Sheet Gaps closed (4 phases, 5 plans, 64 commits)
-**Phase 26 complete:** 2026-05-22 — Dropbox ingest, filename parser, and manifest; 4,935-row `data/species-photos-manifest.csv` committed (clean-match 77.3% / genus-only 14.1% / likely-synonym 8.2% / unparseable 0.3% / provisional 0.2%)
-**Phase 27 complete:** 2026-05-22 — Synonym curation pass shipped: header-only `data/species-synonyms.csv`, `loadSynonyms` + classify pre-pass + `photos:investigate` RESORT_ONLY re-classification, curator runbook `_instructions/CURATING_SPECIES_SYNONYMS.md`. Mechanism in place; first curator pass not yet performed.
-**Phase 28 complete:** 2026-05-22 — End-to-end vertical-slice pilot validated: one species tiled locally (libvips DZI/WebP), uploaded to bunny.net, hand-edited into data JSON, and rendered in OpenSeadragon lightbox. Cross-phase integration confirmed before bulk phases.
-**Phase 29 complete:** 2026-05-22 — DZI tile generation pipeline bulk: `scripts/tile-photos.js` manifest-driven pipeline tiles all `status=downloaded` rows via libvips, advances to `status=tiled`, deletes source TIFFs. 182 tests.
-**Phase 30 complete:** 2026-05-23 — bunny.net tile upload bulk: `scripts/upload-tiles.js` manifest-driven CLI uploads each `status=tiled` DZI pyramid to bunny.net Storage Zone, advances to `status=uploaded`, deletes local tiles. 191 tests. Operator runbook at `_instructions/UPLOADING_TILES.md`.
-
-## Current Milestone: v2.2 High-resolution species photos
-
-**Goal:** Replace existing low-res species photos with OpenSeadragon deep-zoom high-res photos sourced from a ~200GB Dropbox folder, via a resumable server-side processing pipeline.
-
-**Target features:**
-- Dropbox ingest + filename parser + local manifest as source of truth
-- Synonym curation pass (`data/species-synonyms.csv`) before bulk processing
-- **End-to-end vertical-slice pilot on one species** (tile locally + upload + hand-edit JSON + OSD in lightbox) — surfaces cross-phase integration risk before bulk commit
-- libvips DZI tile generation on a datacenter server (~1 TB output)
-- Bulk upload to bunny.net (extends Phase 13 HTTP PUT pattern)
+**v2.2 shipped:** 2026-05-24 — 7 phases (Phases 26–32), 23 plans, 159 commits, 349 files changed
+- Resumable Dropbox ingest: 4,935 TIFFs catalogued with durable manifest (`data/species-photos-manifest.csv`)
+- Synonym curation tooling in place; first curator pass not yet performed (~30–80 unresolved binomials)
+- libvips DZI tile generation + bunny.net bulk upload pipeline (idempotent, resumable, WebP format)
 - `data/species-photos.json` Eleventy data file with per-species `high_res_available` flag
-- OpenSeadragon viewer replaces the Phase 23 lightbox when high-res is available; carousel unchanged
-
-**Key decisions locked by exploration + Spike 001 (2026-05-20/21):**
-- Local manifest (SQLite/JSON) is source of truth — survives restarts; carries `specimen_id` (OSAC/WWUC), `view` (D/V), `binomial_raw`, `binomial_resolved`, `match_bucket`
-- Dropbox is a superset; replace existing photos on match; investigate unmatched (~22% of files cluster on ~30–80 unique binomials)
-- Folder layout: flat with encoded filenames `Genus species-{specimen}-{view}.{ext}` — same convention as Phase 13 photos
-- Viewer UX: OSD replaces lightbox host; carousel untouched
-- 100% TIFF source; ~1 TB tile output expected (~5× DZI overhead) — validate bunny.net pricing before Phase B
+- OpenSeadragon viewer in species lightbox for all `high_res_available: true` species; prev/next specimen navigation; Phase 23 carousel unchanged
 
 ## Requirements
 
@@ -87,6 +67,13 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Photo thumbnail strip (93px) replacing dot navigation; lightbox close button fixed; lightbox z-index above Leaflet controls — v2.1 Phase 23
 - ✓ County, collection, and elevation range filters wired to `pnwm-filter-change` event bus; map and phenology chart update in real time — v2.1 Phase 24
 - ✓ Similar species horizontal thumbnail row: CDN thumbnails (93px), gray placeholder fallback, clickable links, pure static HTML, placed below photo carousel — v2.1 Phase 25
+- ✓ Resumable Dropbox ingest pipeline: API-based one-at-a-time file fetch; filename parser covering all edge cases (hyphenated, 2-char epithets, institutional accessions, provisional bucket); durable `data/species-photos-manifest.csv` with per-row status, content-hash resumability, exponential-backoff retry — v2.2 Phases 26
+- ✓ Synonym curation tooling: `data/species-synonyms.csv` maps outdated binomials to current slugs; RESORT_ONLY reclassification without re-downloading; `photos:investigate` surfaces highest-impact decisions first — v2.2 Phase 27
+- ✓ End-to-end vertical-slice pilot: one species fully rendered via OSD from bunny.net CDN; PILOT-LESSONS.md seeds tile config for bulk phases — v2.2 Phase 28
+- ✓ libvips DZI tile generation pipeline: `scripts/tile-photos.js` manifest-driven, idempotent via status + on-disk .dzi guard, WebP format, tile params committed in `tile-config.json` — v2.2 Phase 29
+- ✓ Bulk bunny.net tile upload: `scripts/upload-tiles.js` with pre-flight footprint walk, DRY_RUN guard, idempotent rerun, advanceStatus before file deletion — v2.2 Phase 30
+- ✓ `data/species-photos.json` build integration: manifest-derived at build time via `scripts/generate-species-photos.js`; `high_res_available` boolean in Eleventy data tree; legacy low-res entries suppressed for high-res species — v2.2 Phase 31
+- ✓ OpenSeadragon viewer in species lightbox for all `high_res_available: true` species; prev/next specimen navigation (viewer.open() to swap DZI sources); specimen_id + D/V view displayed inline; Phase 23 carousel unchanged — v2.2 Phase 32
 
 ### Active
 
@@ -119,6 +106,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 **v1.4 shipped:** 2026-04-22 — 17 phases total (Phases 13–17); 72/72 tests passing; 1,364 species pages; images on bunny.net CDN; LFS removed; full production dataset live
 **v2.0 shipped:** 2026-04-23 — 21 phases total (Phases 19–21); 97/97 tests passing; build-time glossary tooltips with native Popover API; 1,364 species pages with interactive glossary annotations
 **v2.1 shipped:** 2026-05-20 — 25 phases total (Phases 22–25); phenology chart axis labels + Y-floor; photo thumbnail carousel; county/collection/elevation filters; similar species thumbnail row; 61 files, +19,241 / -8,632 LOC
+**v2.2 shipped:** 2026-05-24 — 32 phases total (Phases 26–32); Dropbox ingest pipeline; synonym curation tooling; libvips DZI tile generation; bunny.net bulk upload; data/species-photos.json build integration; OpenSeadragon viewer for high-res species; 349 files, +30,984 / -41,247 LOC; 191 tests
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -188,6 +176,11 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | `advanceStatus(row, 'uploaded')` before `rm`/`unlink` deletion | Status must be committed to the in-memory row before tile files are deleted — if deletion fails, row is still marked uploaded and next run skips it safely | ✓ Good — v2.2 Phase 30; D-03 ordering invariant: status advance always precedes file deletion |
 | Self-contained per-script helpers (redact, withRetry, logStage, walk) | Project convention: helpers copied verbatim into each script rather than imported from a shared module — avoids cross-script coupling, keeps each script independently executable | ✓ Good — v2.2 Phase 30; same pattern used in tile-photos.js, upload-plates.js, upload-tiles.js |
 | Pre-flight footprint walk uses synchronous readdirSync/statSync | One-time startup cost (30–90s for ~447k files) is acceptable; avoids async complexity in a function that runs once before the main event loop | ✓ Good — v2.2 Phase 30; print the measuring message BEFORE starting the walk so operator knows to wait |
+| Vertical-slice pilot phase before bulk phases | Insert a one-species E2E pilot phase (Phase 28) before committing ~1 TB of tiles — surfaces URL conventions, CORS config, OSD aesthetics, and CDN reachability at zero bulk cost | ✓ Good — v2.2 Phase 28; PILOT-LESSONS.md revealed WebP format preference and DROPBOX_TOKEN scope requirements before bulk run |
+| WebP (.webp[Q=80]) for DZI tile output | Pilot confirmed ~30% smaller than JPEG; OSD handles WebP DZI format correctly; config in committed tile-config.json | ✓ Good — v2.2 Phase 28/29; WebP is now the locked tile format |
+| `species_slug` lowercased unconditionally in tilePrefix | Mixed-case slugs in the manifest (from Phase 28 pilot) caused CDN path mismatches; lowercase-always prevents case collisions regardless of manifest source | ✓ Good — v2.2 Phase 29; applied unconditionally, not conditionally |
+| Dropbox shared_link path_display fallback to '/' + entry.name | shared_link API does not return path_display for some entries; '/' + entry.name is a safe fallback that preserves manifest resumability via content_hash | ✓ Good — v2.2 Phase 29 fix; manifest backfilled after discovery |
+| `viewer.open()` to swap DZI tile sources between specimens | Reuses the existing OSD instance rather than destroying/recreating it for each prev/next navigation — avoids flash and re-initialization cost | ✓ Good — v2.2 Phase 32; pattern for any multi-image OSD viewer |
 
 ## Evolution
 
@@ -207,4 +200,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-23 after Phase 30 — bunny.net tile upload pipeline complete; Phase 31 (`data/species-photos.json` build integration) is next*
+*Last updated: 2026-05-24 after v2.2 milestone — OpenSeadragon high-res species photo viewer complete; planning next milestone*

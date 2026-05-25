@@ -2,33 +2,33 @@
 gsd_state_version: 1.0
 milestone: v2.2
 milestone_name: High-resolution species photos
-status: ready_to_plan
-stopped_at: Phase 28 complete (5/5) — ready to discuss Phase 29
-last_updated: 2026-05-25T01:00:46.189Z
-last_activity: 2026-05-24 -- Phase 32 execution started
+status: milestone_complete
+stopped_at: v2.2 archived — all 32 phases complete through Phase 32
+last_updated: 2026-05-24T00:00:00.000Z
+last_activity: 2026-05-24 -- v2.2 milestone archived
 progress:
-  total_phases: 14
-  completed_phases: 5
+  total_phases: 32
+  completed_phases: 32
   total_plans: 23
   completed_plans: 23
-  percent: 36
+  percent: 100
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-23 after Phase 30)
+See: .planning/PROJECT.md (updated 2026-05-24 after v2.2 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 29 — dzi tile generation pipeline bulk
+**Current focus:** Planning next milestone (v2.3 or v3.0)
 
 ## Current Position
 
-Phase: 29
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-05-25
+Phase: 32 (complete — milestone closed)
+Plan: All complete
+Status: Milestone archived — ready for /gsd:new-milestone
+Last activity: 2026-05-24
 
 ## Performance Metrics
 

@@ -336,6 +336,59 @@
 
 ---
 
+## Milestone: v2.2 — High-resolution species photos
+
+**Shipped:** 2026-05-24
+**Phases:** 7 (Phases 26–32) | **Plans:** 23 | **Commits:** 159 | **Files:** 349 (+30,984 / -41,247 LOC)
+**Timeline:** 4 days (2026-05-20 → 2026-05-24)
+
+### What Was Built
+
+- Resumable Dropbox ingest: 4,935 TIFFs catalogued with filename parser (77.3% clean-match) and durable manifest with per-row status tracking, exponential-backoff retry, and content-hash resumability
+- Synonym curation tooling: `data/species-synonyms.csv` + RESORT_ONLY reclassification + investigation queue; mechanism validated, first curator pass not yet done
+- End-to-end vertical-slice pilot on _abagrotis-apposita_ before bulk commit; PILOT-LESSONS.md seeded tile config for bulk phases; CORS and CDN reachability confirmed
+- libvips DZI tile generation pipeline: `scripts/tile-photos.js`, WebP format, committed `tile-config.json`, idempotent per-row via status + on-disk .dzi guard
+- Bulk bunny.net tile upload: `scripts/upload-tiles.js` with pre-flight footprint walk, DRY_RUN guard, advanceStatus before deletion
+- `data/species-photos.json` build integration: manifest-derived via `generate-species-photos.js`; `high_res_available` boolean; DATA-03 template guard suppresses legacy low-res
+- OSD viewer generalized to all `high_res_available: true` species with `viewer.open()` prev/next specimen navigation
+
+### What Worked
+
+- **Vertical-slice pilot before bulk** — Phase 28 insertion surfaced real integration issues (DROPBOX_TOKEN scope requirements, path_display API gap, mixed-case slug collisions) at zero bulk cost. This pattern should be standard for any multi-phase pipeline milestone.
+- **Committed pipeline config (`tile-config.json`)** — separating tile parameters from the script into a committed config file made the pipeline reproducible and reviewable; no guesswork about what settings produced the current tiles.
+- **DRY_RUN guard pattern** — placing the DRY_RUN check before the API key check allows pre-flight inspection without credentials; adopted into all three pipeline scripts consistently.
+- **Per-script self-contained helpers** — copying redact/withRetry/logStage/walk verbatim into each script rather than sharing a module kept each script independently executable and prevented coupling bugs.
+- **advanceStatus before file deletion** — the D-03 ordering invariant (status committed before tile files deleted) means an interrupted deletion is always recoverable on rerun.
+
+### What Was Inefficient
+
+- **Requirements bookkeeping drift** — TILE-01/02/03 and VIEWER-01/02/03/04 remained as "Pending" in REQUIREMENTS.md even after their phases completed; required cleanup at milestone close. Root cause: the phased execution happened without updating the traceability table. Fix: update traceability at plan verification time, not milestone close.
+- **STATE.md progress counter not updated** — STATE.md showed `completed_phases: 5` and `percent: 36` at milestone close even though all 7 phases were done. The STATE.md progress field requires manual updates; automate or add to phase-close checklist.
+- **ROADMAP progress table staleness** — Phase 29 showed "1/3 In Progress" in the progress table at milestone close; required a fix during archival. Same pattern as v2.1; update at plan completion, not milestone close.
+- **Synonym curation first pass not done** — the curation mechanism shipped but the actual first-pass decisions (Grammia, Eupithecia, Smerinthus residue) weren't made. This was acceptable as a deferral but means the manifest's 22.7% non-clean-match rows remain uninvestigated for the next milestone.
+
+### Patterns Established
+
+- **Vertical-slice pilot phase** is now standard before any multi-phase pipeline milestone: insert it before the bulk phases, use a hand-picked example to validate all cross-phase conventions, and record lessons in PILOT-LESSONS.md
+- **Pipeline script structure**: DRY_RUN guard → API key guard → pre-flight walk → manifest loop → advanceStatus → operation → log; self-contained helpers
+- `advanceStatus(row, newStatus)` before file deletion is the mandatory ordering in all manifest-mutating scripts
+- `species_slug` lowercased unconditionally in tilePrefix — mixed-case is a latent bug source
+
+### Key Lessons
+
+1. **Update traceability + requirements checkboxes at phase verification time.** Seven requirements were stale at milestone close; this is now the third milestone with this pattern. Add to per-phase close checklist.
+2. **Vertical-slice pilot phases pay for themselves.** Phase 28 was ~5 plans but prevented ~3 rounds of debugging after bulk commit. The pattern is especially valuable for pipelines where re-running means hours of compute time.
+3. **Per-script self-contained helpers over shared modules** — the project convention (copy verbatim, not import) has proven correct: each of the three pipeline scripts can be run, debugged, and tested independently.
+4. **Deferred curator actions need tracking.** The synonym first-pass deferred from Phase 27 carried into v2.3 without a tracked item. Add deferred human actions to the STATE.md Deferred Items table at the moment of deferral.
+
+### Cost Observations
+
+- Model mix: primarily Sonnet (execution and planning); Opus for research and UI-SPEC
+- Sessions: 4 days elapsed, focused work across multiple sessions
+- Notable: 7-phase pipeline-heavy milestone in 4 days; no blocking integration failures after the pilot phase caught them early
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -349,6 +402,7 @@
 | v1.4 | 72 files | 5 | Infrastructure + data migration; CDN, LFS rewrite, full dataset — completed in 2 days |
 | v2.0 | 30+ | 3 | Build-time HTML transform + native Popover API tooltip; gap found by verification (19-04) |
 | v2.1 | 64 | 4 | UI-heavy fact-sheet milestone; sibling-walk inert, ResizeObserver guard, TDD filter data layer |
+| v2.2 | 159 | 7 | Pipeline-heavy milestone; vertical-slice pilot pattern established; 3 pipeline scripts + OSD viewer |
 
 ### Cumulative Quality
 
@@ -361,6 +415,7 @@
 | v1.4 | 5 | +migrate-species smoke tests (row counts, column headers, PNW states, lat/lon); 72 total | 0/5 phases |
 | v2.0 | 6 | +glossary-transform unit tests (escaping, deduplication, scope guard, multi-term text-node); 97 total | 4/3 phases (verification found gap; 19-04 gap-closure plan) |
 | v2.1 | 6 | +filterRecords TDD suite (10 new cases, county/collection/elevation + null passthrough); 97 total (no new test files) | 0/4 phases (no validation passes run for UI phases) |
+| v2.2 | 9 | +manifest/parse-photo-filename/dropbox-download/tile-photos/upload-tiles/generate-species-photos unit tests; 191 total | 0/7 phases (pipeline scripts unit-tested but no Nyquist validation passes run) |
 
 ### Top Lessons (Verified Across Milestones)
 

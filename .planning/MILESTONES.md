@@ -91,4 +91,20 @@
 - County/collection dropdowns and dual-handle elevation range slider in filter bar, wired to `pnwm-filter-change` event bus; phenology chart stays in DOM with zero-height bars on filter-returns-empty (FILT-04)
 - Horizontal scrollable similar-species thumbnail row (CDN thumbnails at 93px, gray `#d6d0bc` placeholder fallback, clickable links) inside `.species-photos` div below carousel — pure static HTML, scientific-name labels (SIM-01, SIM-02)
 
+## v2.2 High-resolution species photos (Shipped: 2026-05-24)
+
+**Phases completed:** 7 phases (Phases 26–32), 23 plans, 159 commits
+**Files changed:** 349 (+30,984 / −41,247 LOC)
+**Timeline:** 2026-05-20 → 2026-05-24 (4 days)
+
+**Key accomplishments:**
+
+- Resumable Dropbox ingest pipeline: 4,935 TIFFs catalogued with filename parser (77.3% clean-match, 14.1% genus-only, 8.2% likely-synonym); durable `data/species-photos-manifest.csv` as source of truth with per-row status tracking and exponential-backoff retry
+- Synonym curation tooling: `data/species-synonyms.csv` + `loadSynonyms`/`classify()` pre-pass + `photos:investigate` RESORT_ONLY reclassification + curator runbook `_instructions/CURATING_SPECIES_SYNONYMS.md`
+- End-to-end vertical-slice pilot on one species (_abagrotis-apposita_): DZI tiles locally via libvips, uploaded to bunny.net, hand-edited into data JSON, rendered in OpenSeadragon lightbox — surfaces integration risks before bulk commit; PILOT-LESSONS.md seeds Phase 29 committed config
+- libvips DZI tile generation pipeline: `scripts/tile-photos.js` manifest-driven, idempotent per-row via status + on-disk .dzi guards, WebP format pinned in committed `tile-config.json`; operator runbook `_instructions/TILING_HIGH_RES_PHOTOS.md`
+- Bulk bunny.net tile upload: `scripts/upload-tiles.js` with pre-flight footprint walk, DRY_RUN guard, idempotent rerun, `advanceStatus` before file deletion (D-03 ordering invariant); operator runbook `_instructions/UPLOADING_TILES.md`
+- `data/species-photos.json` build integration: `scripts/generate-species-photos.js` materializes manifest `uploaded` rows to JSON; `high_res_available` boolean in Eleventy data tree; DATA-03 template guard suppresses legacy low-res entries for high-res species
+- OpenSeadragon viewer generalized to all `high_res_available: true` species: `_prevSpecimen`/`_nextSpecimen` in-lightbox prev/next buttons, `viewer.open()` to swap DZI tile sources, specimen metadata (id + D/V) displayed inline; Phase 23 carousel unchanged
+
 ---
