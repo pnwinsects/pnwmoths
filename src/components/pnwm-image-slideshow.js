@@ -135,7 +135,8 @@ export class PnwmImageSlideshow extends LitElement {
       return [{
         src: img.getAttribute('src') || '',
         alt: img.getAttribute('alt') || '',
-        photographer: figcaption ? figcaption.textContent.trim() : '',
+        photographer: img.dataset.photographer || (figcaption ? figcaption.textContent.trim() : ''),
+        license: img.dataset.license || '',
         locality: img.dataset.locality || '',
         state: img.dataset.state || '',
         elevation: img.dataset.elevation || '',
@@ -268,7 +269,10 @@ export class PnwmImageSlideshow extends LitElement {
     }
 
     if (img.collector) parts.push(`Coll. ${img.collector}`);
-    if (img.photographer) parts.push(`Photo © ${img.photographer}`);
+    if (img.photographer) {
+      const credit = img.license ? `Photo © ${img.photographer} · ${img.license}` : `Photo © ${img.photographer}`;
+      parts.push(credit);
+    }
 
     return parts;
   }
@@ -319,6 +323,7 @@ export class PnwmImageSlideshow extends LitElement {
                   <p class="caption-line">
                     Specimen ${currentSpecimen.specimen_id} &middot;
                     ${currentSpecimen.view === 'D' ? 'Dorsal' : 'Ventral'}
+                    ${current.photographer ? html` &middot; &copy; ${current.photographer}${current.license ? html` &middot; ${current.license}` : ''}` : ''}
                   </p>
                 `
               : html`<img src=${current.src} alt=${current.alt}>`}

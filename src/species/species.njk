@@ -69,6 +69,8 @@ eleventyComputed:
                  srcset="{{ thumbBase }}?width=530 530w, {{ thumbBase }}?width=1060 1060w, {{ thumbBase }}?width=1500 1500w"
                  sizes="530px"
                  alt="{{ sp.genus }} {{ sp.species }}"
+                 {% if highResEntry.photographer %}data-photographer="{{ highResEntry.photographer }}"{% endif %}
+                 {% if highResEntry.license %}data-license="{{ highResEntry.license }}"{% endif %}
                  onerror="this.style.background='#ddd'">
             <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>
           </figure>
