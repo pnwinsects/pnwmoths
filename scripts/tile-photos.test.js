@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdtempSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
-import { tilePrefix, tiffCachePath, isAlreadyTiled, isTileable } from './tile-photos.js';
+import { tilePrefix, tiffCachePath, isAlreadyTiled, isTileable, isMissingThumbnail } from './tile-photos.js';
 
 // ---------------------------------------------------------------------------
 // Row factory — supplies all 13 COLUMNS values so tests don't accidentally
@@ -139,5 +139,41 @@ describe('isTileable', () => {
 
   it('returns false when dropbox_path is empty (download step would fail)', () => {
     assert.equal(isTileable(row({ dropbox_path: '' })), false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Suite 5: isMissingThumbnail
+// ---------------------------------------------------------------------------
+
+describe('isMissingThumbnail', () => {
+  it('returns true for a complete clean-match row with status uploaded', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'uploaded' })), true);
+  });
+
+  it('returns true for match_bucket resolved-via-synonym', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'uploaded', match_bucket: 'resolved-via-synonym' })), true);
+  });
+
+  it('returns true for match_bucket slug-match', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'uploaded', match_bucket: 'slug-match' })), true);
+  });
+
+  it('returns false when status is not uploaded', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'tiled' })), false);
+    assert.equal(isMissingThumbnail(row({ status: 'discovered' })), false);
+    assert.equal(isMissingThumbnail(row({ status: 'failed' })), false);
+  });
+
+  it('returns false for match_bucket genus-only (needs curation)', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'uploaded', match_bucket: 'genus-only' })), false);
+  });
+
+  it('returns false when specimen_id is empty', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'uploaded', specimen_id: '' })), false);
+  });
+
+  it('returns false when dropbox_path is empty', () => {
+    assert.equal(isMissingThumbnail(row({ status: 'uploaded', dropbox_path: '' })), false);
   });
 });

@@ -11,6 +11,15 @@
  *   DRY_RUN=1 node scripts/tile-photos.js                       # prints first 5 eligible rows, no fetch, no vips, no manifest write
  *   TILE_OUTPUT_DIR=/mnt/tiles TIFF_CACHE_DIR=/mnt/tiffs node scripts/tile-photos.js
  *
+ * THUMBNAIL_ONLY mode — backfill missing thumbnails for already-uploaded rows:
+ *   DROPBOX_TOKEN=sl.... BUNNY_API_KEY=... THUMBNAIL_ONLY=1 node scripts/tile-photos.js
+ *   DRY_RUN=1 THUMBNAIL_ONLY=1 node scripts/tile-photos.js      # dry-run thumbnail backfill
+ *
+ * In THUMBNAIL_ONLY mode the script targets rows with status=uploaded, downloads
+ * each TIFF, generates only the thumbnail (no dzsave), uploads it to the CDN,
+ * then deletes the TIFF. Manifest status is not changed. CDN PUT is idempotent
+ * so the run can be safely re-run from the beginning after an interruption.
+ *
  * Resume after interruption: re-run the same command. Rows with status=tiled
  * are skipped; rows whose TIFF is already cached skip the download stage.
  * The manifest is written every 25 rows so a kill -9 loses at most 24 rows
@@ -42,6 +51,10 @@ const DROPBOX_TOKEN = process.env.DROPBOX_TOKEN ?? '';
 const DRY_RUN = process.env.DRY_RUN === '1';
 const TILE_OUTPUT_DIR_OVERRIDE = process.env.TILE_OUTPUT_DIR ?? '';
 const TIFF_CACHE_DIR_OVERRIDE = process.env.TIFF_CACHE_DIR ?? '';
+const THUMBNAIL_ONLY = process.env.THUMBNAIL_ONLY === '1';
+const BUNNY_API_KEY = process.env.BUNNY_API_KEY ?? '';
+const BUNNY_STORAGE_HOST = process.env.BUNNY_STORAGE_HOST ?? 'la.storage.bunnycdn.com';
+const BUNNY_ZONE = process.env.BUNNY_ZONE ?? 'pnwmoths';
 
 /**
  * The three match_bucket values for which a row is a tiling candidate.
@@ -68,9 +81,9 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
  * original message is returned unchanged.
  */
 function redact(msg) {
-  return DROPBOX_TOKEN
-    ? msg.replace(new RegExp(DROPBOX_TOKEN, 'g'), '[REDACTED]')
-    : msg;
+  let out = DROPBOX_TOKEN ? msg.replace(new RegExp(DROPBOX_TOKEN, 'g'), '[REDACTED]') : msg;
+  out = BUNNY_API_KEY ? out.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]') : out;
+  return out;
 }
 
 /**
@@ -196,6 +209,30 @@ export function isTileable(row) {
   );
 }
 
+/**
+ * Returns true if the row needs a thumbnail backfill (THUMBNAIL_ONLY mode).
+ *
+ * Targets rows that are fully uploaded (tiles on CDN) but whose thumbnail was
+ * never generated — this happens when runVipsThumbnail was added to the script
+ * after the bulk tile run had already advanced all rows to status=uploaded.
+ *
+ * Same field requirements as isTileable since the same download + vips steps
+ * apply; status=uploaded is the only difference.
+ *
+ * @param {object} row  - Manifest row
+ * @returns {boolean}
+ */
+export function isMissingThumbnail(row) {
+  return (
+    row.status === 'uploaded' &&
+    TILEABLE_BUCKETS.has(row.match_bucket) &&
+    Boolean(row.specimen_id) &&
+    Boolean(row.view) &&
+    Boolean(row.species_slug) &&
+    Boolean(row.dropbox_path)
+  );
+}
+
 // ---------------------------------------------------------------------------
 // vips invocation
 // ---------------------------------------------------------------------------
@@ -252,6 +289,30 @@ function runVipsThumbnail(sourceTiff, prefix, config) {
   ], { stdio: ['pipe', 'pipe', 'pipe'] });
 }
 
+/**
+ * PUT a single thumbnail file to the bunny.net Storage Zone.
+ *
+ * Mirrors the thumbnail upload block in upload-tiles.js verbatim (project
+ * convention: self-contained scripts). Throws on non-zero curl exit so the
+ * caller's withRetry handles transient failures.
+ *
+ * @param {string} localPath  - Absolute path to the local _thumbnail.webp file
+ * @param {object} row        - Manifest row (species_slug, specimen_id, view)
+ */
+function uploadThumbnailToCdn(localPath, row) {
+  const slug = row.species_slug.toLowerCase();
+  const pair = `${row.specimen_id}-${row.view}`;
+  const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/${slug}/${pair}_thumbnail.webp`;
+  execFileSync('curl', [
+    '-s', '-S', '-f',
+    '-X', 'PUT',
+    '-H', `AccessKey: ${BUNNY_API_KEY}`,
+    '-H', 'Content-Type: image/webp',
+    '--data-binary', `@${localPath}`,
+    url,
+  ], { stdio: ['pipe', 'pipe', 'inherit'] });
+}
+
 // ---------------------------------------------------------------------------
 // main()
 // ---------------------------------------------------------------------------
@@ -266,6 +327,12 @@ async function main() {
 
   // --- Read manifest. ---
   const rows = await readManifest(MANIFEST_PATH);
+
+  // --- THUMBNAIL_ONLY mode: backfill thumbnails for already-uploaded rows. ---
+  if (THUMBNAIL_ONLY) {
+    await mainThumbnailOnly(rows, config, tileOutputDir, tiffCacheDir);
+    return;
+  }
 
   // --- Filter eligible rows. ---
   const eligible = rows.filter(isTileable);
@@ -394,6 +461,103 @@ async function main() {
   console.log(`  failed (per-row errors):      ${stats.failed}`);
   console.log(`  total eligible rows:          ${eligible.length}`);
   console.log(`[tile-photos] wrote ${MANIFEST_PATH}`);
+
+  if (fatal) process.exit(1);
+}
+
+// ---------------------------------------------------------------------------
+// THUMBNAIL_ONLY mode — download TIFF → generate thumbnail → upload → delete
+// ---------------------------------------------------------------------------
+
+async function mainThumbnailOnly(rows, config, tileOutputDir, tiffCacheDir) {
+  const eligible = rows.filter(isMissingThumbnail);
+
+  console.log(
+    `[tile-photos] THUMBNAIL_ONLY=1 — manifest: ${rows.length} rows total; ${eligible.length} eligible (status=uploaded)`
+  );
+
+  if (DRY_RUN) {
+    console.log('[tile-photos] DRY_RUN=1 — printing first 5 eligible rows, not invoking fetch, vips, or upload');
+    for (const row of eligible.slice(0, 5)) {
+      const cachePath = tiffCachePath(tiffCacheDir, row);
+      console.log(`  -> ${row.species_slug}/${row.specimen_id}-${row.view}`);
+      console.log(`     tiff cache  : ${cachePath}`);
+      console.log(`     dropbox_path: ${row.dropbox_path}`);
+    }
+    if (eligible.length > 5) console.log(`  ... (${eligible.length - 5} more)`);
+    return;
+  }
+
+  if (!DROPBOX_TOKEN) {
+    console.error('[tile-photos] DROPBOX_TOKEN is required for THUMBNAIL_ONLY mode.');
+    process.exit(1);
+  }
+  if (!BUNNY_API_KEY) {
+    console.error('[tile-photos] BUNNY_API_KEY is required for THUMBNAIL_ONLY mode.');
+    process.exit(1);
+  }
+
+  await mkdir(tiffCacheDir, { recursive: true });
+
+  const stats = { thumbnailed: 0, failed: 0 };
+  let fatal = null;
+
+  try {
+    for (const row of eligible) {
+      const cachePath = tiffCachePath(tiffCacheDir, row);
+      const prefix = tilePrefix(tileOutputDir, row);
+      const thumbnailPath = `${prefix}_thumbnail.webp`;
+
+      try {
+        // --- Download stage ---
+        if (!existsSync(cachePath)) {
+          await withRetry(
+            () => downloadSharedFile({
+              shareUrl: config.dropboxShareUrl,
+              dropboxPath: row.dropbox_path,
+              token: DROPBOX_TOKEN,
+              destPath: cachePath,
+            }),
+            `download ${row.content_hash.slice(0, 12)}`
+          );
+          logStage(row.content_hash, 'download', 'ok', `${row.size_bytes} bytes`);
+        } else {
+          logStage(row.content_hash, 'download', 'cache-hit');
+        }
+
+        // --- Thumbnail stage ---
+        await mkdir(dirname(prefix), { recursive: true });
+        runVipsThumbnail(cachePath, prefix, config);
+        await unlink(cachePath);
+        logStage(row.content_hash, 'thumbnail', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+
+        // --- Upload stage ---
+        await withRetry(
+          () => uploadThumbnailToCdn(thumbnailPath, row),
+          `upload ${row.specimen_id}-${row.view}/_thumbnail`
+        );
+        await unlink(thumbnailPath);
+        logStage(row.content_hash, 'upload', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+
+        stats.thumbnailed++;
+      } catch (err) {
+        const safeMsg = redact(err.message ?? String(err));
+        stats.failed++;
+        logStage(row.content_hash, 'thumbnail', 'failed', safeMsg);
+        if (existsSync(cachePath)) await unlink(cachePath);
+        if (existsSync(thumbnailPath)) await unlink(thumbnailPath);
+      }
+    }
+  } catch (fatalErr) {
+    fatal = fatalErr;
+    console.error(`[tile-photos] fatal error: ${redact(fatalErr.message ?? String(fatalErr))}`);
+  }
+
+  console.log('');
+  console.log('[tile-photos] thumbnail-only summary:');
+  console.log(`  thumbnailed (new):   ${stats.thumbnailed}`);
+  console.log(`  failed:              ${stats.failed}`);
+  console.log(`  total eligible rows: ${eligible.length}`);
 
   if (fatal) process.exit(1);
 }
