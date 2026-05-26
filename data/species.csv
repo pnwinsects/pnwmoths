@@ -42,7 +42,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1407,Apantesis,complicata,,93-0273,"(Walker, 1865)",Erebidae,grammia-ornata,Arctiinae
 1408,Lophocampa,argentata,Silver-spotted Tiger Moth,93-0368,"(Packard, 1864)",Erebidae,lophocampa-maculata,Arctiinae
 1409,Euxoa,lewisi,,93-3336,"(Grote, 1873)",Noctuidae,euxoa-divergens|euxoa-trifasciata|euxoa-excogita,Noctuinae
-1410,Zale,minerea,Colorful Zale Moth,93-1032,"GuenÃ©e, 1852",Erebidae,zale-lunata,Erebinae
+1410,Zale,minerea,Colorful Zale Moth,93-1032,"Guenée, 1852",Erebidae,zale-lunata,Erebinae
 1411,Hyppa,indistincta,,93-2668,"Smith, 1894",Noctuidae,hyppa-brunneicrista|hyppa-contrasta,Noctuinae
 1412,Euxoa,manitobana,,93-3478,"McDunnough, 1925",Noctuidae,euxoa-perolivalis|euxoa-ridingsiana|euxoa-aberrans,Noctuinae
 1413,Euxoa,aberrans,,93-3475,"McDunnough, 1932",Noctuidae,euxoa-manitobana|euxoa-tessellata|euxoa-pleuritica|euxoa-pestula,Noctuinae
@@ -50,7 +50,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1415,Sunira,verberata,Battered Sallow Moth,93-2618,"(Smith, 1904)",Noctuidae,agrochola-purpurea|sunira-bicolorago|anathix-puta,Noctuinae
 1416,Apantesis,parthenice,Parthenice Tiger Moth,93-0246,"(Wm. Kirby, 1837)",Erebidae,grammia-doris|grammia-virgo,Arctiinae
 1417,Richia,parentalis,,93-3264,"(Grote, 1879)",Noctuidae,anicla-exuberans,Noctuinae
-1418,Idia,aemula,Common Idia Moth,93-0471,"(HÃ¼bner, 1814)",Erebidae,idia-americalis|idia-suffusalis|idia-concisa,Herminiinae
+1418,Idia,aemula,Common Idia Moth,93-0471,"(Hübner, 1814)",Erebidae,idia-americalis|idia-suffusalis|idia-concisa,Herminiinae
 1419,Ceratomia,amyntor,Elm Sphinx Moth,MONA 7786,"(Geter, 1835)",Sphingidae,ceratomia-undulosa,Sphinginae
 1420,Apamea,cinefacta,,93-2318,"(Grote, 1881)",Noctuidae,anarta-crotchii|apamea-commoda|anarta-fusculenta|apamea-spaldingi,Noctuinae
 1421,Parabagrotis,exsertistigma,,93-3646,"(Morrison, 1874)",Noctuidae,parabagrotis-formalis,Noctuinae
@@ -59,9 +59,9 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1424,Anhimella,perbrunnea,,93-3085,"(Grote, 1879)",Noctuidae,pseudorthodes-irrorata|anhimella-contrahens,Noctuinae
 1425,Syngrapha,abstrusa,,93-1224,"Eichlin & Cunningham, 1978",Noctuidae,syngrapha-angulidens|syngrapha-alias|syngrapha-octoscripta,Plusiinae
 1426,Hypocoena,basistriga,,93-2428,"(McDunnough, 1933)",Noctuidae,hypocoena-rufostrigata|hypocoena-inquinata,Noctuinae
-1427,Aplectoides,condita,,93-3567,"(GuenÃ©e, 1852)",Noctuidae,xestia-speciosa|xestia-homogena|anaplectoides-pressus,Noctuinae
+1427,Aplectoides,condita,,93-3567,"(Guenée, 1852)",Noctuidae,xestia-speciosa|xestia-homogena|anaplectoides-pressus,Noctuinae
 1428,Hada,sutrina,Sutrina Moth,93-2897,"(Grote, 1881)",Noctuidae,hadena-caelestis|hadena-ectrapela|lasionycta-mutilata|lacinipolia-cuneata|lacinipolia-anguina,Noctuinae
-1429,Melanchra,adjuncta,Hitched Arches Moth,93-2874,"(GuenÃ©e, 1852)",Noctuidae,papestra-cristifera|papestra-biren|mamestra-configurata,Noctuinae
+1429,Melanchra,adjuncta,Hitched Arches Moth,93-2874,"(Guenée, 1852)",Noctuidae,papestra-cristifera|papestra-biren|mamestra-configurata,Noctuinae
 1430,Cucullia,serraticornis,,93-1534,"Lintner, 1874",Noctuidae,cucullia-strigata,Cuculliinae
 1431,Eremobina,claudens,Dark-winged Quaker Moth,93-2372,"(Walker, 1857)",Noctuidae,eremobina-unicincta|psammopolia-arietis|lasionycta-fergusoni|cosmia-elisae,Noctuinae
 1432,Copablepharon,mutans,,93-3273,"Crabo & Lafontaine, 2004",Noctuidae,copablepharon-columbia,Noctuinae
@@ -72,7 +72,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1437,Euxoa,idahoensis,,93-3435,"(Grote, 1878)",Noctuidae,euxoa-furtivus|euxoa-castanea|euxoa-costata,Noctuinae
 1438,Euthyatira,lorata,,MONA 6239,(Grote),Geometridae,euthyatira-pudens,
 1439,Heliolonche,modicella,,93-2184,"Grote, 1873",Noctuidae,heliolonche-pictipennis,Heliothinae
-1440,Acronicta,innotata,Unmarked Dagger Moth,93-1428,"GuenÃ©e, 1852",Noctuidae,acronicta-vulpina,Acronictinae
+1440,Acronicta,innotata,Unmarked Dagger Moth,93-1428,"Guenée, 1852",Noctuidae,acronicta-vulpina,Acronictinae
 1441,Sphinx,perelegans,Elegant Sphinx Moth,MONA 7805,"Hy. Edwards, 1874",Sphingidae,sphinx-vashti|sphinx-chersis,Sphinginae
 1442,Melipotis,jucunda,Merry Melipotis Moth,93-0878,"Walker, [1858]",Erebidae,drasteria-pallescens,Erebinae
 1443,Lasionycta,impingens,,93-3010,"(Walker, 1857)",Noctuidae,lasionycta-leucocycla,Noctuinae
@@ -93,7 +93,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1460,Mycterophora,longipalpata,Long-palped Mycterophora Moth,93-0676,"(Walker, [1863])",Erebidae,mycterophora-inexplicata|mycterophora-rubricans|mycterophora-monticola,Boletobiinae
 1461,Resapamea,venosa,,93-2366,"(Smith, 1903)",Noctuidae,resapamea-passer,Noctuinae
 1462,Acronicta,funeralis,Funerary Dagger Moth,93-1438,"Grote & Robinson, 1866",Noctuidae,acronicta-parallela|raphia-frater,Acronictinae
-1463,Nycteola,cinereana,,93-1144," NeumÃ¶gen & Dyar, 1893",Nolidae,nycteola-frigidana|nycteola-columbiana,Nolinae
+1463,Nycteola,cinereana,,93-1144," Neumögen & Dyar, 1893",Nolidae,nycteola-frigidana|nycteola-columbiana,Nolinae
 1464,Malacosoma,californicum,Western Tent Caterpillar Moth,MONA 7702,"(Packard, 1864)",Lasiocampidae,malacosoma-constrictum|malacosoma-disstria,Lasiocampinae
 1465,Acronicta,impressa,Impressed Dagger Moth,93-1477,"Walker, 1856",Noctuidae,acronicta-lupini|acronicta-perdita|acronicta-impleta,Acronictinae
 1466,Acronicta,lupini,,93-1489,"Grote, 1873",Noctuidae,acronicta-impressa,Acronictinae
@@ -109,10 +109,10 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1476,Schinia,villosa,,93-2104,"(Grote, 1864)",Noctuidae,schinia-honesta|schinia-vacciniae|schinia-persimilis,Heliothinae
 1477,Abagrotis,variata,,93-3678,"(Grote, 1876)",Noctuidae,abagrotis-petalama|abagrotis-nefascia,Noctuinae
 1478,Chelis,brucei,,93-0236,"(Hy. Edwards, 1888)",Erebidae,pararctia-yarrowii,Arctiinae
-1479,Spiramater,lutra,Otter Spiramater Moth,93-2883,"(GuenÃ©e, 1852)",Noctuidae,papestra-cristifera|papestra-brenda|mamestra-curialis,Noctuinae
+1479,Spiramater,lutra,Otter Spiramater Moth,93-2883,"(Guenée, 1852)",Noctuidae,papestra-cristifera|papestra-brenda|mamestra-curialis,Noctuinae
 1480,Drasteria,mirifica,,93-0888,"(Hy. Edwards, 1878)",Erebidae,drasteria-hastingsii,Erebinae
 1481,Cucullia,basipuncta,,93-1531,"(Barnes & McDunnough, 1918)",Noctuidae,cucullia-mcdunnoughi,Cuculliinae
-1483,Cisseps,fulvicollis,Yellow-collared Scape Moth,93-0440,"(HÃ¼bner, 1818)",Erebidae,ctenucha-rubroscapus,Arctiinae
+1483,Cisseps,fulvicollis,Yellow-collared Scape Moth,93-0440,"(Hübner, 1818)",Erebidae,ctenucha-rubroscapus,Arctiinae
 1484,Xylena,cineritia,Gray Swordgrass Moth,93-2522,"(Grote, 1875)",Noctuidae,xylena-curvimacula|xylena-thoracica,Noctuinae
 1485,Agrochola,purpurea,,93-2613,"(Grote, 1874)",Noctuidae,sunira-verberata|anathix-puta,Noctuinae
 1486,Sympistis,parvacana,,93-1809,"(Troubridge & Crabo, (1999))",Noctuidae,sympistis-satanella,Oncocnemidinae
@@ -127,7 +127,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1495,Apantesis,behrii,,93-0260,"(Stretch, 1872)",Erebidae,grammia-nevadensis|notarctia-proxima,Arctiinae
 1496,Apamea,spaldingi,Spalding\'s Quaker Moth,93-2317,"(Smith, 1909)",Noctuidae,apamea-unita|apamea-cinefacta,Noctuinae
 1498,Lithophane,contenta,,93-2572,"Grote, 1880",Noctuidae,lithophane-boogeri,Noctuinae
-1499,Acronicta,lepusculina,Cottonwood Dagger Moth,93-1425,"GuenÃ©e, 1852",Noctuidae,acronicta-vulpina,Acronictinae
+1499,Acronicta,lepusculina,Cottonwood Dagger Moth,93-1425,"Guenée, 1852",Noctuidae,acronicta-vulpina,Acronictinae
 1500,Pachysphinx,occidentalis,Western Poplar Sphinx Moth,MONA 7829,"(Hy. Edwards, 1875)",Sphingidae,pachysphinx-modesta,Smerinthinae
 1501,Apamea,burgessi,,93-2339,"(Morrison, 1874)",Noctuidae,apamea-longula|fishia-connecta|lacanobia-subjuncta|fishia-discors,Noctuinae
 1502,Sympistis,major,,93-1878,"(Grote, 1881)",Noctuidae,sympistis-poliochroa|catabena-lineolata|sympistis-astrigata,Oncocnemidinae
@@ -174,11 +174,11 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1543,Dolocucullia,dentilinea,,93-1540,"(Smith, 1899)",Noctuidae,cucullia-florea|cucullia-intermedia|dolocucullia-poolei,Cuculliinae
 1544,Parabagrotis,insularis,,93-3644,"(Grote, 1876)",Noctuidae,abagrotis-duanca,Noctuinae
 1545,Drasteria,petricola,Little Arches Moth,93-0905,"(Walker, 1858)",Erebidae,drasteria-hudsonica|drasteria-adumbrata,Erebinae
-1546,Xestia,xanthographa,Square-spot Rustic Moth,93-3571,"([Denis & SchiffermÃ¼ller], 1775)",Noctuidae,diarsia-rosaria,Noctuinae
+1546,Xestia,xanthographa,Square-spot Rustic Moth,93-3571,"([Denis & Schiffermüller], 1775)",Noctuidae,diarsia-rosaria,Noctuinae
 1547,Euxoa,nevada,,93-3471,"(Smith, 1900)",Noctuidae,euxoa-atristrigata|euxoa-hollemani,Noctuinae
 1548,Sympistis,sagittata,,93-1938,"(Barnes & McDunnough, 1916)",Noctuidae,sympistis-saxatilis,Oncocnemidinae
 1549,Heliothis,oregonica,Oregon Gem Moth,93-2050,"(H. Edwards, 1875)",Noctuidae,heliothis-ononis,Heliothinae
-1550,Ponometia,candefacta,Olive-shaded Bird-dropping Moth,93-1314,"(HÃ¼bner, [1831])",Noctuidae,ponometia-binocula|ponometia-elegantula,Acontiinae
+1550,Ponometia,candefacta,Olive-shaded Bird-dropping Moth,93-1314,"(Hübner, [1831])",Noctuidae,ponometia-binocula|ponometia-elegantula,Acontiinae
 1551,Autographa,v,White Y Mark Moth,93-1197,"Ottolengui, 1902",Noctuidae,autographa-speciosa,Plusiinae
 1552,Hyles,lineata,White-lined Sphinx Moth,MONA 7894,"(Fabricius, 1775)",Sphingidae,hyles-gallii,Macroglossinae
 1553,Hydraecia,obliqua,,93-2456,"Harvey, 1876",Noctuidae,hydraecia-pallescens,Noctuinae
@@ -195,7 +195,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1564,Drasteria,sabulosa,,93-0896,"(Hy. Edwards, 1881)",Erebidae,bulia-deducta|drasteria-inepta,Erebinae
 1565,Anhimella,pacifica,,93-3087,"McDunnough, 1943",Noctuidae,anhimella-contrahens,Noctuinae
 1566,Sympistis,orbicularis,,93-1925,"(Barnes & McDunnough, 1912)",Noctuidae,catabena-lineolata|sympistis-meadiana,Oncocnemidinae
-1567,Feltia,jaculifera,Dingy Cutworm Moth,93-3498,"(GuenÃ©e, 1852)",Noctuidae,prognorisma-substrigata|feltia-subgothica,Noctuinae
+1567,Feltia,jaculifera,Dingy Cutworm Moth,93-3498,"(Guenée, 1852)",Noctuidae,prognorisma-substrigata|feltia-subgothica,Noctuinae
 1568,Sympistis,iricolor,,93-1831,"(Smith, 1888)",Noctuidae,sympistis-tartarea,Oncocnemidinae
 1569,Euxoa,trifasciata,,93-3335,"(Smith, [1888])",Noctuidae,euxoa-lewisi|euxoa-comosa,Noctuinae
 1570,Smerinthus,jamaicensis,Twin-spotted Sphinx Moth,MONA 7821,"(Drury, 1773)",Sphingidae,smerinthus-cerisyi,Smerinthinae
@@ -218,14 +218,14 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1587,Tarache,knowltoni,,93-1346,"(McDunnough, 1940)",Noctuidae,,Acontiinae
 1589,Apamea,occidens,Western Apamea Moth,93-2332,"(Grote, 1878)",Noctuidae,papestra-invalida|apamea-unita,Noctuinae
 1590,Cerastis,enigmatica,Enigmatic Dart Moth,93-3540,"Lafontaine & Crabo, 1997",Noctuidae,cerastis-gloriosa,Noctuinae
-1591,Schinia,arcigera,Arcigera Flower Moth,93-2134,"(GuenÃ©e, 1852)",Noctuidae,schinia-mortua|schinia-rivulosa,Heliothinae
+1591,Schinia,arcigera,Arcigera Flower Moth,93-2134,"(Guenée, 1852)",Noctuidae,schinia-mortua|schinia-rivulosa,Heliothinae
 1592,Proxenus,miranda,Miranda Moth,93-2266,"(Grote, 1873)",Noctuidae,proxenus-mindara|hypoprepia-inculta|proxenus-mendosa,Noctuinae
 1593,Gnophaela,vermiculata,Police Car Moth,93-0356,"(Grote, 1864)",Erebidae,gnophaela-latipennis,Arctiinae
 1594,Lithophane,itata,,93-2565,"(Smith, 1899)",Noctuidae,lithophane-fagina|lithophane-boogeri,Noctuinae
 1595,Sympistis,figurata,,93-1946,"(Harvey, 1875)",Noctuidae,sympistis-semicollaris|sympistis-pallidior|sympistis-greyi,Oncocnemidinae
-1596,Euthyatira,pudens,Dogwood Thyatirid Moth,MONA 6240,(GuenÃ©e),Drepanidae,eosphoropteryx-thyatyroides|euthyatira-lorata,Thyatirinae
+1596,Euthyatira,pudens,Dogwood Thyatirid Moth,MONA 6240,(Guenée),Drepanidae,eosphoropteryx-thyatyroides|euthyatira-lorata,Thyatirinae
 1597,Pseudobryomima,muscosa,Mossy Pseudobryomima Moth ,93-2730,"(Hampson, 1906)",Noctuidae,viridiseptis-marina|hecatera-dysodea,Noctuinae
-1598,Idia,americalis,American Idia Moth,93-0469,"(GuenÃ©e, 1854)",Erebidae,idia-aemula|idia-suffusalis|idia-concisa,Herminiinae
+1598,Idia,americalis,American Idia Moth,93-0469,"(Guenée, 1854)",Erebidae,idia-aemula|idia-suffusalis|idia-concisa,Herminiinae
 1599,Aseptis,fanatica,,93-2631,"Mustelin, 2006",Noctuidae,hillia-maida|melanapamea-mixta|aseptis-fumosa,Noctuinae
 1600,Polia,piniae,Polia Moth,93-2866,"Buckett & Bauer, 1967",Noctuidae,acronicta-dactylina|polia-discalis|polia-nimbosa,Noctuinae
 1601,Apantesis,quenseli,Labrador Tiger Moth,93-0250,"(Paykull, 1793)",Erebidae,holoarctia-sordida|grammia-speciosa,Arctiinae
@@ -247,7 +247,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1617,Aseptis,fumosa,,93-2626,"(Grote, 1879)",Noctuidae,aseptis-fannatica|condica-albolabes,Noctuinae
 2778,Sympistis,utahensis,,93-1856,"(Barnes & Benjamin, 1924)",Noctuidae,,Oncocnemidinae
 1619,Homorthodes,carneola,,93-3097,"McDunnough, 1943",Noctuidae,homorthodes-discreta,Noctuinae
-1620,Cucullia,postera,,93-1509,"GuenÃ©e, 1852",Noctuidae,cucullia-omissa|cucullia-florea|cucullia-similaris,Cuculliinae
+1620,Cucullia,postera,,93-1509,"Guenée, 1852",Noctuidae,cucullia-omissa|cucullia-florea|cucullia-similaris,Cuculliinae
 1621,Lasionycta,promulsa,,93-3005,"(Morrison, 1875)",Noctuidae,lasionycta-macleani|lasionycta-silacea|lasionycta-pulverea|lasionycta-brunnea,Noctuinae
 1622,Lithomoia,germana,,93-2524,"(Morrison, 1875)",Noctuidae,lithophane-georgii,Noctuinae
 1623,Lasionycta,quadrilunata,,93-2995,"(Grote, 1874)",Noctuidae,lasionycta-carolynae|lasionycta-lagganata,Noctuinae
@@ -277,7 +277,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1649,Amphipoea,americana,American Ear Moth,93-2447,"(Speyer, 1875)",Noctuidae,amphipoea-pacifica|lacinipolia-lorea|amphipoea-interoceanica,Noctuinae
 1650,Cryptocala,acadiensis,Catocaline Dart Moth,93-3553,"(Bethune, 1870)",Noctuidae,noctua-comes|noctua-pronuba,Noctuinae
 1651,Malacosoma,constrictum,Pacific Tent Caterpillar Moth,MONA 7699,(H. Edwards),Lasiocampidae,malacosoma-californicum|malacosoma-disstria,Lasiocampinae
-1652,Resapamea,passer,Dock Rustic Moth,93-2368,"(GuenÃ©e, 1852)",Noctuidae,resapamea-venosa|macronoctua-onusta|graphiphora-augur|nephelodes-minians|resapamea-innota|resapamea-enargia,Noctuinae
+1652,Resapamea,passer,Dock Rustic Moth,93-2368,"(Guenée, 1852)",Noctuidae,resapamea-venosa|macronoctua-onusta|graphiphora-augur|nephelodes-minians|resapamea-innota|resapamea-enargia,Noctuinae
 1653,Hypena,atomaria,,93-0573,"(Smith, 1903)",Erebidae,tetanolita-palligera|chytolita-petrealis,Hypeninae
 1655,Orthosia,revicta,Subdued Quaker Moth,93-2773,"(Morrison, 1876)",Noctuidae,orthosia-hibisci|orthosia-segregata,Noctuinae
 1656,Euxoa,perolivalis,,93-3480,"(Smith, 1905)",Noctuidae,euxoa-manitobana|euxoa-dargo|euxoa-ridingsiana|euxoa-cicatricosa|euxoa-flavicollis,Noctuinae
@@ -290,7 +290,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1663,Scotogramma,yakima,,93-2856,"(Smith, 1900)",Noctuidae,anarta-ptilodonta|scotogramma-orida,Noctuinae
 1664,Homoglaea,dives,,93-2528,"Smith, 1907",Noctuidae,homoglaea-carbonaria,Noctuinae
 1665,Autographa,speciosa,,93-1198,"Ottolengui, 1902",Noctuidae,autographa-v,Plusiinae
-1666,Schinia,jaguarina,Jaguar Flower Moth,93-2073,"(GuenÃ©e, 1852)",Noctuidae,schinia-mortua,Heliothinae
+1666,Schinia,jaguarina,Jaguar Flower Moth,93-2073,"(Guenée, 1852)",Noctuidae,schinia-mortua,Heliothinae
 1667,Sunira,decipiens,,93-2617,"(Grote, 1881)",Noctuidae,sunira-bicolorago|anathix-aggressa,Noctuinae
 1668,Autographa,californica,Alfalfa Looper Moth,93-1193,"(Speyer, 1875)",Noctuidae,syngrapha-celsa|autographa-buraetica|rachiplusia-ou|autographa-pseudogamma,Plusiinae
 1669,Lithophane,fagina,Hoary Pinion Moth,93-2548,"Morrison, 1874",Noctuidae,lithophane-itata|lithophane-boogeri,Noctuinae
@@ -309,11 +309,11 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1682,Nudorthodes,texana,,93-3116,"(Smith, 1900)",Noctuidae,protorthodes-alfkenii,Noctuinae
 1683,Nycteola,columbiana,,93-1143,"(H. Edwards, 1873)",Nolidae,nycteola-frigidana|nycteola-frigidana,Nolinae
 1684,Syngrapha,alticola,,93-1232,"(Walker, [1858])",Noctuidae,syngrapha-microgamma|syngrapha-ignea,Plusiinae
-1685,Sphinx,chersis,Great Ash Sphinx Moth,MONA 7802,"(HÃ¼bner, 1823)",Sphingidae,sphinx-perelegans,Sphinginae
+1685,Sphinx,chersis,Great Ash Sphinx Moth,MONA 7802,"(Hübner, 1823)",Sphingidae,sphinx-perelegans,Sphinginae
 1686,Sympistis,goedeni,,93-1834,"(Troubridge & Crabo, (1999))",Noctuidae,protorthodes-alfkenii,Oncocnemidinae
 1687,Tarache,areli,,93-1356,"(Strecker, 1898)",Noctuidae,tarache-toddi|schinia-tertia,Acontiinae
 1688,Dasychira,grisefacta,Grizzled Tussock Moth,93-0158,"(Dyar, 1911)",Erebidae,dasychira-vagans|dasychira-plagiata,Lymantriinae
-1689,Nephelodes,minians,Bronzed Cutworm Moth,93-2810,"GuenÃ©e, 1852",Noctuidae,nephelodes-demaculata|resapamea-passer,Noctuinae
+1689,Nephelodes,minians,Bronzed Cutworm Moth,93-2810,"Guenée, 1852",Noctuidae,nephelodes-demaculata|resapamea-passer,Noctuinae
 1690,Noctua,pronuba,Large Yellow Underwing Moth,93-3551,"(Linnaeus, 1758)",Noctuidae,noctua-comes|cryptocala-acadiensis,Noctuinae
 1691,Orgyia,cana,,93-0163,"H. Edwards, 1881",Erebidae,orgyia-pseudotsugata,Lymantriinae
 1692,Euxoa,auripennis,,93-3441,"Lafontaine, 1974",Noctuidae,euxoa-servitus,Noctuinae
@@ -322,9 +322,9 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1695,Protoschinia,nuchalis,,93-2061,"(Grote, 1878)",Noctuidae,schinia-crotchii|schinia-deserticola,Heliothinae
 1696,Euxoa,taura,,93-3482,"Smith, 1905",Noctuidae,euxoa-latro,Noctuinae
 1697,Euxoa,mitis,,93-3473,"(Smith, 1894)",Noctuidae,euxoa-moerens|euxoa-difformis|euxoa-misturata|euxoa-cona,Noctuinae
-1698,Xestia,tecta,,93-3602,"(HÃ¼bner, [1808])",Noctuidae,xestia-okakensis,Noctuinae
+1698,Xestia,tecta,,93-3602,"(Hübner, [1808])",Noctuidae,xestia-okakensis,Noctuinae
 1699,Cerastis,salicarum,Willow Dart Moth,93-3542,"(Walker, 1857)",Noctuidae,agrotis-vancouverensis,Noctuinae
-1700,Rivula,propinqualis,Spotted Grass Moth,93-0592,"GuenÃ©e, 1854",Erebidae,phalaenostola-metonalis,Rivulinae
+1700,Rivula,propinqualis,Spotted Grass Moth,93-0592,"Guenée, 1854",Erebidae,phalaenostola-metonalis,Rivulinae
 1701,Lasionycta,pulverea,,93-3007,"Crabo & Lafontaine, 2009",Noctuidae,lasionycta-macleani|lasionycta-promulsa,Noctuinae
 1702,Euxoa,excogita,,93-3416,"(Smith, 1900)",Noctuidae,euxoa-brunneigera|euxoa-perpolita|euxoa-comosa|apamea-cogitata|euxoa-ochrogaster|euxoa-lewisi,Noctuinae
 1703,Catocala,allusa,,93-0801,"Hulst, 1884",Erebidae,catocala-californica|catocala-briseis|catocala-faustina,Erebinae
@@ -337,7 +337,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1710,Pseudeva,palligera,,93-1185,"(Grote, 1881)",Noctuidae,pseudeva-purpurigera,Plusiinae
 1711,Euxoa,infausta,,93-3412,"(Walker, 1865)",Noctuidae,euxoa-permixta|euxoa-faulkneri|euxoa-bifasciata|euxoa-brunneigera|euxoa-satis,Noctuinae
 1712,Condica,discistriga,,93-1991,"(Smith, 1894)",Noctuidae,rhizagrotis-modesta|euxoa-pluralis,Condicinae
-1713,Rachiplusia,ou,Gray Looper Moth,93-1176,"(GuenÃ©e, 1852)",Noctuidae,autographa-californica,Plusiinae
+1713,Rachiplusia,ou,Gray Looper Moth,93-1176,"(Guenée, 1852)",Noctuidae,autographa-californica,Plusiinae
 1714,Sympistis,saxatilis,,93-1940,"(Troubridge & Crabo, (1999))",Noctuidae,sympistis-sagittata,Oncocnemidinae
 1715,Sympistis,incubus,,93-1844,"Troubridge, 2008",Noctuidae,sympistis-seth|sympistis-simplex|sympistis-sesmu,Oncocnemidinae
 1716,Rhizagrotis,cloanthoides,,93-2686,"(Grote, 1881)",Noctuidae,protogygia-comstocki|protogygia-postera,Noctuinae
@@ -346,7 +346,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1719,Polia,nugatis,,93-2873,"(Smith, 1898)",Noctuidae,andropolia-diversilineata,Noctuinae
 1720,Apamea,devastator,Glassy Cutworm Moth,93-2350,"(Brace, 1819)",Noctuidae,polia-imbrifera|apamea-longula|apamea-indocilis,Noctuinae
 1721,Globia,subflava,Subflava Sedge Borer Moth,93-2439,"(Grote, 1882)",Noctuidae,capsula-oblonga|capsula-alameda,Noctuinae
-1722,Malacosoma,disstria,Forest Tent Caterpillar Moth,MONA 7698,"(HÃ¼bner, 1820)",Lasiocampidae,malacosoma-constrictum|malacosoma-californicum,Lasiocampinae
+1722,Malacosoma,disstria,Forest Tent Caterpillar Moth,MONA 7698,"(Hübner, 1820)",Lasiocampidae,malacosoma-constrictum|malacosoma-californicum,Lasiocampinae
 1723,Drasteria,inepta,Inept Drasteria Moth,93-0895,"Hy. Edwards, 1881",Erebidae,drasteria-scrupulosa|drasteria-sabulosa,Erebinae
 1724,Sympistis,lapponica,,93-1929,"(Thunberg, 1791)",Noctuidae,sympistis-wilsoni,Oncocnemidinae
 1725,Sphinx,vashti,Vashti Sphinx Moth,MONA 7803,"Strecker, 1878",Sphingidae,sphinx-perelegans,Sphinginae
@@ -377,7 +377,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1751,Orthodes,detracta,Disparaged Arches Moth,93-3146,"(Walker, 1857)",Noctuidae,orthodes-delecta|orthodes-goodelli,Noctuinae
 1752,Autographa,buraetica,,93-1195,"(Staudinger, 1892)",Noctuidae,autographa-californica|autographa-pseudogamma,Plusiinae
 1753,Protogygia,postera,,93-3294,"Fauske & Lafontaine, 2004",Noctuidae,euxoa-atristrigata|rhizagrotis-cloanthoides|protogygia-lagena,Noctuinae
-1754,Lacanobia,grandis,Grand Arches Moth,93-2882,"(GuenÃ©e, 1852)",Noctuidae,lacanobia-subjuncta|trichordestra-tacoma|lacanobia-nevadae|papestra-quadrata,Noctuinae
+1754,Lacanobia,grandis,Grand Arches Moth,93-2882,"(Guenée, 1852)",Noctuidae,lacanobia-subjuncta|trichordestra-tacoma|lacanobia-nevadae|papestra-quadrata,Noctuinae
 1755,Tristyla,alboplagiata,,93-1732,"Smith, 1893",Noctuidae,triocnemis-saporis,Amphipyrinae
 1756,Eurois,astricta,,93-3561,"Morrison, 1874",Noctuidae,eurois-nigra|apamea-amputatrix|polia-rogenhoferi,Noctuinae
 1757,Homoglaea,carbonaria,,93-2526,"(Harvey, 1876)",Noctuidae,homoglaea-dives|homoglaea-californica|homoglaea-hircina,Noctuinae
@@ -426,7 +426,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1800,Xanthia,tatago,Pink-banded Sallow Moth,93-2622,"Lafontaine & Mikkola, 2003",Noctuidae,,Noctuinae
 1802,Hypocoena,rufostrigata,,93-2429,"(Packard, 1867)",Noctuidae,hypocoena-inquinata|photedes-defecta|hypocoena-basistriga,Noctuinae
 1803,Pseudeva,purpurigera,Straight-lined Looper Moth,93-1184,"(Walker, 1858)",Noctuidae,pseudeva-palligera,Plusiinae
-1804,Chytolita,morbidalis,Morbid Owlet Moth,93-0502,"(GuenÃ©e, 1852)",Erebidae,hypena-atomaria|phalaenostola-metonalis|zanclognatha-lutalba|phalaenophana-pyramusalis,Herminiinae
+1804,Chytolita,morbidalis,Morbid Owlet Moth,93-0502,"(Guenée, 1852)",Erebidae,hypena-atomaria|phalaenostola-metonalis|zanclognatha-lutalba|phalaenophana-pyramusalis,Herminiinae
 1805,Apamea,lutosa,,93-2348,"(Andrews, 1877)",Noctuidae,anarta-trifolii|apamea-inficita,Noctuinae
 1806,Perigonica,pectinata,,93-2754,"(Smith, [1888])",Noctuidae,perigonica-angulata|perigonica-tertia,Noctuinae
 1807,Heliolonche,pictipennis,,93-2187,"(Grote, 1875)",Noctuidae,heliolonche-modicella,Heliothinae
@@ -436,7 +436,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1811,Sympistis,ragani,,93-1951,"(Barnes, 1928)",Noctuidae,sympistis-greyi|sympistis-semicollaris,Oncocnemidinae
 1813,Mesapamea,fractilinea,Broken-lined Brocade Moth,93-2370,"(Grote, 1874)",Noctuidae,oligia-tusa|lateroligia-ophiogramma|xylomoia-indirecta,Noctuinae
 1814,Lasionycta,illima,,93-2984,"Crabo & Lafontaine, 2009",Noctuidae,lasionycta-leucocycla|lasionycta-poca|lasionycta-secedens|lasionycta-staudingeri|lasionycta-frigida,Noctuinae
-1815,Notodonta,torva,Northern Finned Prominent Moth,93-0017,"(HÃ¼bner, 1803)",Notodontidae,heterocampa-lunata,Notodontinae
+1815,Notodonta,torva,Northern Finned Prominent Moth,93-0017,"(Hübner, 1803)",Notodontidae,heterocampa-lunata,Notodontinae
 1816,Zale,rubi,,93-1046,"(H. Edwards, 1881)",Erebidae,zale-lunata|zale-termina,Erebinae
 1817,Cryphia,olivacea,,93-2195,"(Smith, 1891)",Noctuidae,cryphia-cuerva,Bryophilinae
 1818,Euxoa,catenula,,93-3404,"(Grote, 1879)",Noctuidae,agrotis-vetusta|euxoa-tronellus,Noctuinae
@@ -454,13 +454,13 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1831,Euxoa,campestris,,93-3379,"(Grote, 1875)",Noctuidae,euxoa-rockburnei|euxoa-infracta|euxoa-declarata,Noctuinae
 1832,Sympistis,parvanigra,,93-1808,"(Blackmore, 1923)",Noctuidae,copanarta-sexpunctata|sympistis-tenuifascia|sympistis-aterrima,Oncocnemidinae
 1833,Apamea,tahoeensis,,93-2328,"Mikkola & Lafontaine, 2009",Noctuidae,apamea-aurianticolor|apamea-antennata,Noctuinae
-1834,Xestia,speciosa,,93-3596,"(HÃ¼bner, [1813])",Noctuidae,aplectoides-condita|xestia-lupa|anaplectoides-pressus|xestia-mixta|xestia-perquiritata|xestia-homogena,Noctuinae
+1834,Xestia,speciosa,,93-3596,"(Hübner, [1813])",Noctuidae,aplectoides-condita|xestia-lupa|anaplectoides-pressus|xestia-mixta|xestia-perquiritata|xestia-homogena,Noctuinae
 1835,Ipimorpha,nanaimo,,93-2677,"Barnes, 1905",Noctuidae,ipimorpha-pleonectusa|ipimorpha-viridipallida|cosmia-calami,Noctuinae
 1836,Actebia,fennica,Finland Dart Moth,93-3229,"(Tauscher, 1806)",Noctuidae,euxoa-ochrogaster|euxoa-perexcellens,Noctuinae
 1837,Hypena,palparia,Mottled Bomolocha Moth,93-0565,"(Walker, 1861)",Erebidae,hypena-abalienalis,Hypeninae
 1838,Properigea,albimacula,White-spotted Properigea Moth,93-2719,"(Barnes & McDunnough, 1912)",Noctuidae,condica-albolabes,Noctuinae
 1839,Benjaminiola,colorada,,93-2433,"(Smith, 1900)",Noctuidae,leucania-farcta|simyra-insularis|mythimna-oxygala,Noctuinae
-1840,Euxoa,ochrogaster,,93-3424,"(GuenÃ©e, 1852)",Noctuidae,euxoa-nostra|actebia-fennica|euxoa-adumbrata|euxoa-perexcellens|euxoa-mimallonis|euxoa-excogita,Noctuinae
+1840,Euxoa,ochrogaster,,93-3424,"(Guenée, 1852)",Noctuidae,euxoa-nostra|actebia-fennica|euxoa-adumbrata|euxoa-perexcellens|euxoa-mimallonis|euxoa-excogita,Noctuinae
 1841,Xylomoia,indirecta,Oblique Brocade Moth,93-2417,"(Grote, 1875)",Noctuidae,apamea-indocilis|photedes-didonea|mesapamea-fractilinea|lateroligia-ophiogramma|xylomoia-chagnoni|mesapamea-secalis,Noctuinae
 1842,Protorthodes,rufula,Rufous Quaker Moth,93-3115.3,"(Grote, 1874)",Noctuidae,protorthodes-oviduca|homorthodes-furfurata|protorthodes-curtica,Noctuinae
 1843,Feltia,nigrita,,93-3489,"(Graeser, 1892)",Noctuidae,xestia-ursae,Noctuinae
@@ -471,26 +471,26 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1849,Apamea,sora,,93-2327,"(Smith, 1903)",Noctuidae,apamea-aurianticolor|apamea-antennata,Noctuinae
 1850,Brachylomia,thula,,93-2662,"(Strecker, 1898)",Noctuidae,brachylomia-sierra|parastichtis-suspecta|brachylomia-algens,Noctuinae
 1851,Euxoa,pluralis,,93-3372,"(Grote, 1878)",Noctuidae,condica-discistriga|euxoa-nostra,Noctuinae
-1852,Eublemma,minima,Everlasting Bud Moth,93-0693,"(GuenÃ©e, 1852)",Erebidae,nola-cilicoides,Boletobiinae
-1853,Syngrapha,microgamma,,93-1230,"(HÃ¼bner, 1823)",Noctuidae,syngrapha-alticola,Plusiinae
+1852,Eublemma,minima,Everlasting Bud Moth,93-0693,"(Guenée, 1852)",Erebidae,nola-cilicoides,Boletobiinae
+1853,Syngrapha,microgamma,,93-1230,"(Hübner, 1823)",Noctuidae,syngrapha-alticola,Plusiinae
 1855,Oligia,divesta,,93-2386,"(Grote, 1874)",Noctuidae,fishia-connecta|oligia-tusa|hyppa-contrasta,Noctuinae
-1856,Apamea,lignicolora,Wood-colored Apamea Moth,93-2319,"(GuenÃ©e, 1852)",Noctuidae,apamea-antennata|apamea-cuculliformis,Noctuinae
+1856,Apamea,lignicolora,Wood-colored Apamea Moth,93-2319,"(Guenée, 1852)",Noctuidae,apamea-antennata|apamea-cuculliformis,Noctuinae
 1857,Lacanobia,subjuncta,Speckled Cutworm Moth,93-2881,"(Grote & Robinson, 1868)",Noctuidae,apamea-longula|orthosia-segregata|lacanobia-atlantica|lacanobia-grandis|apamea-burgessi|apamea-unita,Noctuinae
 1858,Caradrina,meralis,Rare Sand Quaker Moth,93-2257,"(Morrison, 1875)",Noctuidae,caradrina-multifera,Noctuinae
 1859,Drasteria,scrupulosa,,93-0894,"Hy. Edwards, 1878",Erebidae,bulia-deducta|drasteria-inepta,Erebinae
 1860,Mycterophora,monticola,,93-0675,"Hulst, 1896",Erebidae,mycterophora-rubricans|mycterophora-longipalpata,Boletobiinae
 1861,Lasionycta,haida,,93-2976,"Crabo & Lafontaine, 2009",Noctuidae,lasionycta-mutilata,Noctuinae
-1862,Feralia,jocosa,Joker Moth,93-1561,"(GuenÃ©e, 1852)",Noctuidae,feralia-deceptiva|feralia-comstocki,Amphipyrinae
+1862,Feralia,jocosa,Joker Moth,93-1561,"(Guenée, 1852)",Noctuidae,feralia-deceptiva|feralia-comstocki,Amphipyrinae
 1863,Orthosia,mys,,93-2766,"(Dyar, 1903)",Noctuidae,mesogona-rubra,Noctuinae
 1864,Xestia,infimatis,,93-3581,"(Grote, 1880)",Noctuidae,xestia-verniloides|xestia-finatimis,Noctuinae
 1865,Trichocerapoda,oblita,,93-3083,"(Grote, 1877)",Noctuidae,trichocerapoda-strigata,Noctuinae
-1866,Leucania,commoides,,93-2947,"GuenÃ©e, 1852",Noctuidae,leucania-multilinea,Noctuinae
+1866,Leucania,commoides,,93-2947,"Guenée, 1852",Noctuidae,leucania-multilinea,Noctuinae
 1867,Euxoa,citricolor,,93-3445,"(Grote, 1880)",Noctuidae,euxoa-tronellus,Noctuinae
 1868,Idia,occidentalis,,93-0483,"(Smith, 1884)",Erebidae,idia-immaculalis|idia-lubricalis|metalectra-bigallis,Herminiinae
 1869,Lithophane,dilatocula,,93-2546,"(Smith, 1900)",Noctuidae,lithophane-pexata,Noctuinae
 1870,Anarta,decepta,,93-2845,"(Grote, 1883)",Noctuidae,tridepia-nova|anarta-trifolii|scotogramma-submarina,Noctuinae
 1872,Eurois,occulta,Great Brocade Moth,93-3560,"(Linnaeus, 1758)",Noctuidae,polia-propodea,Noctuinae
-1873,Schinia,rivulosa,Ragweed Flower Moth,93-2091,"(GuenÃ©e, 1852)",Noctuidae,schinia-arcigera,Heliothinae
+1873,Schinia,rivulosa,Ragweed Flower Moth,93-2091,"(Guenée, 1852)",Noctuidae,schinia-arcigera,Heliothinae
 1874,Cucullia,dorsalis,,93-1518,"Smith, 1892",Noctuidae,cucullia-speyeri,Cuculliinae
 1875,Cycnia,oregonensis,Oregon Cycnia Moth,93-0405,"(Stretch, 1873)",Erebidae,cycnia-tenera,Arctiinae
 1876,Neoligia,invenusta,,93-2399,"Troubridge & Lafontaine, 2002",Noctuidae,neoligia-subjuncta|neoligia-tonsa,Noctuinae
@@ -498,16 +498,16 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1878,Lacanobia,nevadae,Nevada Arches Moth,93-2878,"(Grote, 1876)",Noctuidae,lacanobia-grandis|lacanobia-atlantica,Noctuinae
 1879,Leucania,dia,,93-2949,"(Grote, 1879)",Noctuidae,leucania-commoides|photedes-defecta,Noctuinae
 1880,Lacanobia,atlantica,Atlantic Arches Moth,93-2879,"(Grote, 1874)",Noctuidae,lacanobia-subjuncta|lacanobia-nevadae,Noctuinae
-1881,Acronicta,fragilis,Fragile Dagger Moth,93-1458,"(GuenÃ©e, 1852)",Noctuidae,xestia-mixta|xestia-lupa,Acronictinae
+1881,Acronicta,fragilis,Fragile Dagger Moth,93-1458,"(Guenée, 1852)",Noctuidae,xestia-mixta|xestia-lupa,Acronictinae
 1882,Ponometia,nigra,,93-1328,"(Mustelin, 2006)",Noctuidae,ponometia-tortricina|axenus-amplus,Acontiinae
-1883,Hypocoena,inquinata,,93-2426,"(GuenÃ©e, 1852)",Noctuidae,hypocoena-basistriga|photedes-defecta|hypocoena-rufostrigata|mythimna-oxygala|xylomoia-chagnoni,Noctuinae
+1883,Hypocoena,inquinata,,93-2426,"(Guenée, 1852)",Noctuidae,hypocoena-basistriga|photedes-defecta|hypocoena-rufostrigata|mythimna-oxygala|xylomoia-chagnoni,Noctuinae
 1884,Tarache,arida,,93-1360,"(Smith, 1900)",Noctuidae,ponometia-binocula,Acontiinae
 1885,Lacinipolia,rectilinea,,93-3063,"(Smith, [1888])",Noctuidae,lacinipolia-longiclava|lacinipolia-comis|lacinipolia-olivacea|viridiseptis-marina,Noctuinae
 1886,Papestra,biren,,93-2893,"(Goeze, 1781)",Noctuidae,papestra-cristifera|melanchra-adjuncta,Noctuinae
 1887,Amphipoea,lunata,,93-2452,"(Smith, 1891)",Noctuidae,lacinipolia-stricta,Noctuinae
 1888,Anarta,fusculenta,,93-2839,"(Smith, 1891)",Noctuidae,euxoa-edictalis|apamea-cinefacta|anarta-crotchii,Noctuinae
 1889,Abagrotis,petalama,,93-3674,"Lafontaine, 1998",Noctuidae,abagrotis-variata,Noctuinae
-1890,Noctua,comes,Lesser Yellow Underwing Moth,93-3552,"HÃ¼bner, [1813]",Noctuidae,noctua-pronuba|cryptocala-acadiensis,Noctuinae
+1890,Noctua,comes,Lesser Yellow Underwing Moth,93-3552,"Hübner, [1813]",Noctuidae,noctua-pronuba|cryptocala-acadiensis,Noctuinae
 1891,Euxoa,melura,,93-3460,"McDunnough, 1932",Noctuidae,euxoa-olivalis|euxoa-hardwicki|euxoa-furtivus,Noctuinae
 1892,Afotella,cylindrica,,93-2821,"(Grote, 1880)",Noctuidae,escaria-clauda|hadenella-pergentilis,Noctuinae
 1893,Euxoa,lillooet,,93-3430,"McDunnough, 1927",Noctuidae,euxoa-albipennis|euxoa-rockburnei,Noctuinae
@@ -515,7 +515,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1895,Parabagrotis,cupidissima,,93-3645,"(Grote, 1875)",Noctuidae,abagrotis-baueri|parabagrotis-formalis,Noctuinae
 1896,Abagrotis,placida,,93-3672,"(Grote, 1876)",Noctuidae,abagrotis-reedi|abagrotis-dodi|abagrotis-dickeli|abagrotis-turbulenta|protolampra-brunneicollis,Noctuinae
 1897,Chersotis,juncta,,93-3550,"(Grote, 1878)",Noctuidae,pseudohermonassa-tenuicula,Noctuinae
-1898,Polia,nimbosa,Stormy Arches Moth,93-2867,"(GuenÃ©e, 1852)",Noctuidae,polia-piniae|polia-imbrifera,Noctuinae
+1898,Polia,nimbosa,Stormy Arches Moth,93-2867,"(Guenée, 1852)",Noctuidae,polia-piniae|polia-imbrifera,Noctuinae
 1899,Neoligia,lillooet,,93-2403,"Troubridge & Lafontaine, 2002",Noctuidae,neoligia-tonsa|neoligia-lancea|neoligia-albirena,Noctuinae
 1900,Coenophila,opacifrons,Blueberry Dart Moth,93-3624,"(Grote, 1878)",Noctuidae,xestia-praevia|setagrotis-pallidicollis,Noctuinae
 1901,Anarta,oregonica,,93-2831,"(Grote, 1881)",Noctuidae,anarta-columbica|anarta-montanica|sympistis-acheron|anarta-alta|sympistis-glennyi,Noctuinae
@@ -585,12 +585,12 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1966,Euxoa,laetificans,,93-3454,"(Smith, 1894)",Noctuidae,euxoa-olivia|euxoa-quadridentata,Noctuinae
 1967,Annaphila,danistica,,93-1734,"Grote, 1873",Noctuidae,annaphila-mera|annaphila-arvalis,Amphipyrinae
 1968,Apantesis,obliterata,,93-0239,"(Stretch, 1885)",Erebidae,grammia-virguncula|grammia-margo|grammia-blakei,Arctiinae
-1969,Acronicta,hasta,Speared Dagger Moth,93-1445,"GuenÃ©e, 1852",Noctuidae,acronicta-quadrata|acronicta-strigulata,Acronictinae
+1969,Acronicta,hasta,Speared Dagger Moth,93-1445,"Guenée, 1852",Noctuidae,acronicta-quadrata|acronicta-strigulata,Acronictinae
 1970,Trichordestra,lilacina,Aster Cutworm Moth,93-2889,"(Harvey, 1874)",Noctuidae,trichordestra-liquida|apamea-alia,Noctuinae
 1971,Andropolia,contacta,Canadian Giant Moth,93-2681,"(Walker, 1856)",Noctuidae,andropolia-aedon|polia-propodea,
 1972,Lasionycta,mutilata,,93-2975,"(Smith, 1898)",Noctuidae,hada-sutrina|lasionycta-haida|lasionycta-taigata,Noctuinae
 1973,Leucoma,salicis,Satin Moth,93-0170,"(Linnaeus, 1758)",Erebidae,hyphantria-cunea|spilosoma-virginica,Lymantriinae
-1974,Apamea,impulsa,,93-2311,"(GuenÃ©e, 1852)",Noctuidae,melanchra-assimilis|melanapamea-mixta,Noctuinae
+1974,Apamea,impulsa,,93-2311,"(Guenée, 1852)",Noctuidae,melanchra-assimilis|melanapamea-mixta,Noctuinae
 1975,Diarsia,calgary,,93-3531,"(Smith, 1898)",Noctuidae,hillia-iris|diarsia-esurialis,Noctuinae
 1976,Euxoa,extranea,,93-3341,"(Smith, [1888])",Noctuidae,sympistis-glennyi|euxoa-altens|euxoa-simulata,Noctuinae
 1977,Cucullia,similaris,,93-1506,"Smith, 1892",Noctuidae,cucullia-florea|cucullia-postera|cucullia-montanae,Cuculliinae
@@ -608,7 +608,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1989,Ceranemota,fasciata,,MONA 6243,(Barnes & McDunnough),Drepanidae,ceranemota-tearlei,Thyatirinae
 1990,Hemaris,thysbe,Hummingbird Clearwing Moth,MONA 7853,"(Fabricius, 1775)",Sphingidae,hemaris-thetis,Macroglossinae
 1991,Hypena,humuli,Hop Vine Moth,93-0584,"Harris, 1841",Erebidae,hypena-modestoides|hypena-californica|hypena-decorata,Hypeninae
-1992,Peridroma,saucia,Variegated Cutworm Moth,93-3211,"(HÃ¼bner, [1808])",Noctuidae,agrotis-ipsilon,Noctuinae
+1992,Peridroma,saucia,Variegated Cutworm Moth,93-3211,"(Hübner, [1808])",Noctuidae,agrotis-ipsilon,Noctuinae
 1993,Sympistis,fifia,,93-1822,"(Dyar, 1904)",Noctuidae,sympistis-dinalda,Oncocnemidinae
 1994,Apamea,zeta,,93-2351,"(Treitschke, 1825)",Noctuidae,polia-rogenhoferi,Noctuinae
 1995,Sideridis,fuscolutea,,93-2902,"(Smith, 1892)",Noctuidae,anarta-mutata,Noctuinae
@@ -621,12 +621,12 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2003,Nedra,stewarti,,93-2284,(Grote. 1875),Noctuidae,nedra-hoeffleri,Noctuinae
 2004,Lasionycta,gelida,,93-3002,"Crabo & Lafontaine, 2009",Noctuidae,lasionycta-caesia,Noctuinae
 2005,Xestia,homogena,,93-3608,"(McDunnough, 1921)",Noctuidae,xestia-speciosa|anaplectoides-pressus|aplectoides-condita|xestia-fabulosa,Noctuinae
-2006,Orthosia,hibisci,Speckled Green Fruitworm Moth,93-2778,"(GuenÃ©e, 1852)",Noctuidae,orthosia-revicta|orthosia-pacifica,Noctuinae
+2006,Orthosia,hibisci,Speckled Green Fruitworm Moth,93-2778,"(Guenée, 1852)",Noctuidae,orthosia-revicta|orthosia-pacifica,Noctuinae
 2007,Abagrotis,dickeli,,93-3671,"Lafontaine, 1998",Noctuidae,abagrotis-cupida|abagrotis-placida,Noctuinae
 2008,Hyles,euphorbiae,Leafy Spurge Hawk Moth,MONA 7892,"(Linnaeus, 1758)",Sphingidae,hyles-gallii,Macroglossinae
 2009,Catocala,ilia,Ilia Underwing Moth,93-0792,"(Cramer, [1775])",Erebidae,catocala-aholibah,Erebinae
 2010,Feltia,subgothica,Subgothic Dart Moth,93-3501,"(Haworth, 1809)",Noctuidae,striacosta-albicosta|feltia-herilis|feltia-jaculifera,Noctuinae
-2011,Apantesis,speciosa,,93-0248,"(MÃ¶schler, 1864)",Erebidae,grammia-quenseli|grammia-virguncula,Arctiinae
+2011,Apantesis,speciosa,,93-0248,"(Möschler, 1864)",Erebidae,grammia-quenseli|grammia-virguncula,Arctiinae
 2012,Acronicta,perdita,,93-1482,"Grote, 1874",Noctuidae,acronicta-impressa,Acronictinae
 2013,Eupsilia,tristigmata,Three-Spotted Sallow Moth,93-2590,"(Grote, 1877)",Noctuidae,,Noctuinae
 2014,Tolype,distincta,,MONA 7677,"French, 1890",Lasiocampidae,tolype-laricis,Macromphaliinae
@@ -648,7 +648,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2030,Ceranemota,tearlei,,MONA 6246,"(Hy. Edwards, 1886)",Drepanidae,ceranemota-improvisa|ceranemota-fasciata,Thyatirinae
 2032,Euxoa,perpolita,Polished Dart Moth,93-3481,"(Morrison, 1876)",Noctuidae,euxoa-punctigera|euxoa-excogita,Noctuinae
 2033,Euxoa,latro,,93-3450,"(Barnes & Benjamin, 1927)",Noctuidae,euxoa-taura|euxoa-moerens,Noctuinae
-2034,Protorthodes,oviduca,Ruddy Quaker Moth,93-3113,"(GuenÃ©e, 1852)",Noctuidae,protorthodes-perforata,Noctuinae
+2034,Protorthodes,oviduca,Ruddy Quaker Moth,93-3113,"(Guenée, 1852)",Noctuidae,protorthodes-perforata,Noctuinae
 2035,Trichordestra,tacoma,,93-2885,"(Strecker, 1900)",Noctuidae,trichordestra-liquida|lacanobia-grandis,Noctuinae
 2036,Euxoa,vallus,,93-3331,"(Smith, 1900)",Noctuidae,euxoa-macleani|euxoa-quebecensis|euxoa-comosa,Noctuinae
 2037,Euxoa,recula,,93-3463,"(Harvey, 1876)",Noctuidae,euxoa-cicatricosa,Noctuinae
@@ -659,8 +659,8 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2043,Abagrotis,nefascia,,93-3663,"(Smith, 1908)",Noctuidae,abagrotis-variata,Noctuinae
 2044,Tolype,laricis,Larch Tolype Moth,MONA 7673,"(Fitch, 1856)",Lasiocampidae,tolype-distincta,Macromphaliinae
 2045,Euxoa,difformis,,93-3448,"(Smith, 1900)",Noctuidae,euxoa-intrita|euxoa-aequalis|protorthodes-curtica|agrotis-orthogonia|euxoa-mitis|euxoa-moerens,Noctuinae
-2046,Schinia,florida,Primrose Moth,93-2082,"(GuenÃ©e, 1852)",Noctuidae,schinia-lynda,Heliothinae
-2047,Cycnia,tenera,Delicate Cycnia Moth,93-0404,"HÃ¼bner, 1818",Erebidae,cycnia-oregonensis,Arctiinae
+2046,Schinia,florida,Primrose Moth,93-2082,"(Guenée, 1852)",Noctuidae,schinia-lynda,Heliothinae
+2047,Cycnia,tenera,Delicate Cycnia Moth,93-0404,"Hübner, 1818",Erebidae,cycnia-oregonensis,Arctiinae
 2048,Catabena,lineolata,Fine-lined Sallow Moth,93-1765,"Walker, 1865",Noctuidae,sympistis-major|sympistis-orbicularis|sympistis-lacticollis,Oncocnemidinae
 2049,Sympistis,satanella,,93-1803,"(Troubridge & Crabo, (1999))",Noctuidae,sympistis-parvacana|sympistis-apep,Oncocnemidinae
 2050,Sympistis,simplex,,93-1832,"(Smith, 1888)",Noctuidae,sympistis-sesmu|sympistis-seth|sympistis-incubus,Oncocnemidinae
@@ -669,7 +669,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2053,Amphipoea,keiferi,,93-2451,"(Benjamin, 1935)",Noctuidae,nephelodes-demaculata,Noctuinae
 2054,Euxoa,simona,,93-3349,"McDunnough, 1932",Noctuidae,euxoa-auxiliaris|euxoa-septentrionalis|euxoa-pleuritica|euxoa-pestula,Noctuinae
 2055,Euxoa,annulipes,,93-3361,"(Smith, 1890)",Noctuidae,euxoa-setonia|euxoa-lineifrons|euxoa-emma|euxoa-pallidimacula,Noctuinae
-2056,Polia,rogenhoferi,,93-2869,"(MÃ¶schler, 1870)",Noctuidae,polia-imbrifera|eurois-astricta|polia-propodea|apamea-zeta,Noctuinae
+2056,Polia,rogenhoferi,,93-2869,"(Möschler, 1870)",Noctuidae,polia-imbrifera|eurois-astricta|polia-propodea|apamea-zeta,Noctuinae
 2057,Lithophane,ponderosa,,93-2560,"Troubridge & Lafontaine, 2003",Noctuidae,lithophane-thaxteri|lithophane-atara|lithophane-jefferyi,Noctuinae
 2058,Melanapamea,mixta,,93-2362,"(Grote, 1881)",Noctuidae,aseptis-fannatica|apamea-impulsa|melanchra-pulverulenta|apamea-plutonia,Noctuinae
 2059,Alypia,ridingsii,Ridings\' Forester Moth,93-1982,"Grote, 1865",Noctuidae,androloma-maccullochii,Agaristinae
@@ -697,7 +697,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2081,Prognorisma,substrigata,,93-3625,"(Smith, 1895)",Noctuidae,feltia-jaculifera,Noctuinae
 2082,Catocala,briseis,Briseis Underwing Moth,93-0804,"Edwards, 1864",Erebidae,catocala-californica|catocala-allusa|catocala-grotiana|catocala-semirelicta,Erebinae
 2083,Lacinipolia,meditata,Thinker Moth,93-3016,"(Grote, 1873)",Noctuidae,protorthodes-curtica,Noctuinae
-2084,Acronicta,insularis,Marsh Dagger,93-1493,"(Herrich-SchÃ¤ffer, 1868)",Noctuidae,benjaminiola-colorada|leucania-anteoclara,Acronictinae
+2084,Acronicta,insularis,Marsh Dagger,93-1493,"(Herrich-Schäffer, 1868)",Noctuidae,benjaminiola-colorada|leucania-anteoclara,Acronictinae
 2085,Cucullia,speyeri,Speyer\'s Hooded Owlet Moth,93-1516,"Lintner, 1874",Noctuidae,cucullia-dorsalis,Cuculliinae
 2087,Anarta,mutata,Mutant Moth,93-2827,"(Dod, 1913)",Noctuidae,anarta-trifolii|anarta-hadeniformis|sideridis-fuscolutea|tridepia-nova,Noctuinae
 2088,Xestia,finatimis,,93-3582,"Lafontaine, 1998",Noctuidae,xestia-verniloides|xestia-infimatis|xestia-vernilis,Noctuinae
@@ -739,19 +739,19 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2124,Agrotis,orthogonia,,93-3512,"Morrison, 1876",Noctuidae,euxoa-cona|euxoa-difformis,Noctuinae
 2125,Sympistis,semicollaris,,93-1952,"(Smith, 1909)",Noctuidae,sympistis-ragani|sympistis-figurata|sympistis-pallidior|sympistis-greyi|sympistis-astrigata,Oncocnemidinae
 2126,Catocala,irene,,93-0799,"Behr, 1870",Erebidae,catocala-faustina,Erebinae
-2127,Sunira,bicolorago,Bicolored Sallow Moth,93-2616,"(GuenÃ©e, 1852)",Noctuidae,sunira-verberata|sunira-decipiens,Noctuinae
+2127,Sunira,bicolorago,Bicolored Sallow Moth,93-2616,"(Guenée, 1852)",Noctuidae,sunira-verberata|sunira-decipiens,Noctuinae
 2128,Syngrapha,interrogationis,,93-1216,"(Linnaeus, 1758)",Noctuidae,syngrapha-celsa|syngrapha-alias|syngrapha-angulidens|syngrapha-octoscripta,Plusiinae
 2129,Sympistis,anweileri,,93-1912,"Troubridge & Lafontaine, 2008",Noctuidae,sympistis-dentata|sympistis-californiae,Oncocnemidinae
-2130,Notodonta,manitou,,93-0015.1," NeumÃ¶gen & Dyar, 1893",Notodontidae,notodonta-pacifica,Notodontinae
+2130,Notodonta,manitou,,93-0015.1," Neumögen & Dyar, 1893",Notodontidae,notodonta-pacifica,Notodontinae
 2131,Euxoa,messoria,Reaper Dart Moth,93-3319,"(Harris, 1841)",Noctuidae,euxoa-terrenus|euxoa-olivia|euxoa-septentrionalis,Noctuinae
 2132,Homorthodes,discreta,,93-3092,"(Barnes & McDunnough, 1916)",Noctuidae,homorthodes-carneola|protoperigea-anotha|anhimella-contrahens,Noctuinae
 2133,Catocala,unijuga,Once-married Underwing Moth,93-0797,"Walker, 1858",Erebidae,catocala-semirelicta|catocala-meskei,Erebinae
 2134,Anarta,nigrolunata,,93-2823,"Packard, 1867",Noctuidae,sympistis-heliophila|sympistis-nigrita,Noctuinae
 2136,Schinia,argentifascia,,93-2163,"Barnes & McDunnough, 1912",Noctuidae,schinia-walsinghami,Heliothinae
-2137,Bleptina,caradrinalis,Bent-winged Owlet Moth,93-0520,"GuenÃ©e, 1854",Erebidae,hemeroplanis-finitima|tetanolita-palligera|phalaenophana-pyramusalis,Herminiinae
+2137,Bleptina,caradrinalis,Bent-winged Owlet Moth,93-0520,"Guenée, 1854",Erebidae,hemeroplanis-finitima|tetanolita-palligera|phalaenophana-pyramusalis,Herminiinae
 2138,Papestra,brenda,,93-2895,"(Barnes & McDunnough, 1916)",Noctuidae,eurois-nigra|papestra-cristifera|papestra-invalida|spiramater-lutra,Noctuinae
 2139,Apantesis,virgo,Virgin Tiger Moth,93-0244,"(Linnaeus, 1758)",Erebidae,grammia-doris|grammia-parthenice,Arctiinae
-2141,Euclidia,cuspidea,Toothed Somberwing Moth,93-0929,HÃ¼bner,Erebidae,euclidia-ardita,Erebinae
+2141,Euclidia,cuspidea,Toothed Somberwing Moth,93-0929,Hübner,Erebidae,euclidia-ardita,Erebinae
 2142,Xestia,perquiritata,,93-3606,"(Morrison, 1874)",Noctuidae,xestia-mixta|xestia-speciosa|xestia-lupa|cosmia-elisae,Noctuinae
 2143,Neoligia,subjuncta,,93-2392,"(Smith, 1898)",Noctuidae,neoligia-invenusta,Noctuinae
 2144,Acronicta,lanceolaria,,93-1488,"(Grote, 1875)",Noctuidae,acronicta-cyanescens|acronicta-oblinita,Acronictinae
@@ -761,7 +761,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2148,Mniotype,ducta,,93-2705,"(Grote, 1878)",Noctuidae,mniotype-ducta|apamea-longula,Noctuinae
 2149,Estigmene,acrea,Salt Marsh Moth,93-0317,"(Drury, 1773)",Erebidae,hypercompe-permaculata|spilosoma-virginica,Arctiinae
 2150,Cucullia,omissa,Omitted Hooded Owlet Moth,93-1507,"Dod, 1916",Noctuidae,cucullia-postera,Cuculliinae
-2151,Polia,imbrifera,Cloudy Arches Moth,93-2868,"(GuenÃ©e, 1852)",Noctuidae,polia-nimbosa|polia-propodea|apamea-devastator|polia-rogenhoferi,Noctuinae
+2151,Polia,imbrifera,Cloudy Arches Moth,93-2868,"(Guenée, 1852)",Noctuidae,polia-nimbosa|polia-propodea|apamea-devastator|polia-rogenhoferi,Noctuinae
 2152,Cissusa,indiscreta,Indiscrete Cissusa Moth,93-0866,"(Hy. Edwards, 1886)",Erebidae,orthosia-behrensiana|orthosia-pacifica,Erebinae
 2153,Cucullia,montanae,Mountain Hooded Owlet Moth,93-1505,"Grote, 1882",Noctuidae,cucullia-similaris,Cuculliinae
 2154,Stretchia,plusiaeformis,,93-2756,"H. Edwards, 1874",Noctuidae,stretchia-muricina|stretchia-prima|stretchia-pictipennis,Noctuinae
@@ -785,7 +785,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2173,Euxoa,dodi,,93-3452,"McDunnough, 1923",Noctuidae,euxoa-infracta|euxoa-moerens|euxoa-simulata|euxoa-declarata,Noctuinae
 2174,Apamea,centralis,,93-2330,"(Smith, 1891)",Noctuidae,apamea-commoda,Noctuinae
 2175,Lasionycta,leucocycla,,93-2978,"(Staudinger, 1857)",Noctuidae,lasionycta-illima|lasionycta-impingens|lasionycta-secedens|lasionycta-poca|lasionycta-frigida,Noctuinae
-2176,Apamea,alia,,93-2307,"(GuenÃ©e, 1852)",Noctuidae,apamea-acera|trichordestra-lilacina,Noctuinae
+2176,Apamea,alia,,93-2307,"(Guenée, 1852)",Noctuidae,apamea-acera|trichordestra-lilacina,Noctuinae
 2177,Autographa,metallica,,93-1203,"(Grote, 1875)",Noctuidae,plusia-nichollae|plusia-putnami|autographa-bimaculata,Plusiinae
 2178,Fishia,yosemitae,Dark Grey Fishia,93-2693,"(Grote, 1873)",Noctuidae,andropolia-diversilineata|sutyna-privata,Noctuinae
 2179,Nephelodes,demaculata,,93-2811,"Barnes & McDunnough, 1918",Noctuidae,apamea-niveivenosa|amphipoea-senilis|nephelodes-minians,Noctuinae
@@ -794,16 +794,16 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2182,Euxoa,nostra,,93-3425,"(Smith, 1890)",Noctuidae,euxoa-ochrogaster|euxoa-tocoyae|euxoa-pluralis|euxoa-ustulata,Noctuinae
 2183,Hyppa,brunneicrista,,93-2667,"Smith, 1902",Noctuidae,hyppa-indistincta|hyppa-contrasta,Noctuinae
 2184,Schinia,vacciniae,,93-2100,"(H. Edwards, 1875)",Noctuidae,schinia-villosa,Heliothinae
-2185,Pyrrhia,cilisca,Bordered Sallow Moth,93-2040,"(GuenÃ©e, 1852)",Noctuidae,pyrrhia-exprimens|helicoverpa-zea,Heliothinae
+2185,Pyrrhia,cilisca,Bordered Sallow Moth,93-2040,"(Guenée, 1852)",Noctuidae,pyrrhia-exprimens|helicoverpa-zea,Heliothinae
 2186,Lasionycta,uniformis,,93-2999,"(Smith, 1893)",Noctuidae,lasionycta-caesia|lasionycta-brunnea|lasionycta-luteola,Noctuinae
-2187,Sideridis,maryx,Maroonwing Moth,93-2908,"(GuenÃ©e, 1852)",Noctuidae,orthosia-pulchella|orthosia-transparens|melanchra-picta,Noctuinae
+2187,Sideridis,maryx,Maroonwing Moth,93-2908,"(Guenée, 1852)",Noctuidae,orthosia-pulchella|orthosia-transparens|melanchra-picta,Noctuinae
 2188,Lasionycta,perplexella,,93-2989,"Crabo & Lafontaine, 2009",Noctuidae,lasionycta-subfuscula|lasionycta-perplexa|lasionycta-sasquatch,Noctuinae
 2189,Euxoa,declarata,Clear Dart Moth,93-3378,"(Walker, 1865)",Noctuidae,euxoa-dodi|euxoa-rockburnei|euxoa-campestris|euxoa-albipennis,Noctuinae
 2190,Ipimorpha,pleonectusa,Even-lined Sallow Moth,93-2679,"Grote, 1873",Noctuidae,ipimorpha-nanaimo|ipimorpha-viridipallida,Noctuinae
 2191,Cosmia,calami,American Dun-bar Moth,93-2672,"(Harvey, 1876)",Noctuidae,ipimorpha-nanaimo,Noctuinae
 2192,Hypena,californica,,93-0585,"Behr, 1870",Erebidae,hypena-decorata|hypena-modestoides|hypena-humuli,Hypeninae
 2193,Apamea,albina,,93-2335,"(Grote, 1874)",Noctuidae,apamea-amputatrix,Noctuinae
-2194,Parastichtis,suspecta,,93-2625,"(HÃ¼bner, [1817])",Noctuidae,hillia-iris|brachylomia-thula|diarsia-dislocata,Noctuinae
+2194,Parastichtis,suspecta,,93-2625,"(Hübner, [1817])",Noctuidae,hillia-iris|brachylomia-thula|diarsia-dislocata,Noctuinae
 2195,Mycterophora,rubricans,,93-0678,"Barnes & McDunnough, 1918",Erebidae,mycterophora-longipalpata|mycterophora-monticola,Boletobiinae
 2196,Brachylomia,populi,,93-2653,"Strecker,  1898",Noctuidae,raphia-frater|brachylomia-elda,Noctuinae
 2197,Schinia,mortua,,93-2126,"(Grote, 1865)",Noctuidae,schinia-jaguarina|schinia-arcigera,Heliothinae
@@ -813,7 +813,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2202,Homoglaea,hircina,Goat Sallow Moth,93-2527,"Morrison, 1876",Noctuidae,homoglaea-californica|homoglaea-carbonaria,Noctuinae
 2203,Catocala,californica,,93-0803,"(Edwards, 1864)",Erebidae,catocala-briseis|catocala-faustina|catocala-junctura|catocala-semirelicta|catocala-allusa,Erebinae
 2204,Anaplectoides,pressus,Dappled Dart Moth,93-3565,"(Grote, 1874)",Noctuidae,xestia-speciosa|aplectoides-condita|xestia-homogena,Noctuinae
-2205,Eosphoropteryx,thyatyroides,Pink-patched Looper Moth,93-1187,"(GuenÃ©e, 1852)",Noctuidae,euthyatira-pudens,Plusiinae
+2205,Eosphoropteryx,thyatyroides,Pink-patched Looper Moth,93-1187,"(Guenée, 1852)",Noctuidae,euthyatira-pudens,Plusiinae
 2206,Euxoa,rockburnei,,93-3380,"Hardwick, 1973",Noctuidae,euxoa-albipennis|euxoa-campestris|euxoa-lillooet|euxoa-declarata,Noctuinae
 2207,Eurois,nigra,,93-3562,"(Smith, 1892)",Noctuidae,eurois-astricta|papestra-invalida|papestra-brenda,Noctuinae
 2208,Hemileuca,juno,Juno Buck Moth,MONA 7735,"Packard, 1872",Saturniidae,,Hemileucinae
@@ -891,8 +891,8 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2281,Sympistis,meadiana,,93-1924,"(Morrison, 1875)",Noctuidae,sympistis-orbicularis|sympistis-definita|sympistis-dunbari,Oncocnemidinae
 2282,Apamea,sordens,Bordered Apamea Moth,93-2314,"(Hufnagel, 1766)",Noctuidae,apamea-digitula,Noctuinae
 2283,Xestia,cinerascens,,93-3576,"(Smith, 1891)",Noctuidae,abagrotis-turbulenta|abagrotis-erratica,Noctuinae
-2284,Cucullia,florea,Gray-hooded Owlet Moth,93-1508,"GuenÃ©e, 1852",Noctuidae,dolocucullia-dentilinea|cucullia-intermedia|cucullia-postera|cucullia-similaris,Cuculliinae
-2285,Ctenucha,rubroscapus,Red-shouldered Ctenucha Moth,93-0437,"(MÃ©nÃ©triÃ©s, 1857)",Erebidae,ctenucha-virginica|cisseps-fulvicollis,Arctiinae
+2284,Cucullia,florea,Gray-hooded Owlet Moth,93-1508,"Guenée, 1852",Noctuidae,dolocucullia-dentilinea|cucullia-intermedia|cucullia-postera|cucullia-similaris,Cuculliinae
+2285,Ctenucha,rubroscapus,Red-shouldered Ctenucha Moth,93-0437,"(Ménétriés, 1857)",Erebidae,ctenucha-virginica|cisseps-fulvicollis,Arctiinae
 2286,Mesogona,subcuprea,,93-2612,"Crabo & Hammond, [1998]",Noctuidae,mesogona-rubra|mesogona-olivata,Noctuinae
 2287,Apantesis,margo,,93-0251,"Schmidt, 2009",Erebidae,holarctia-obliterata|grammia-williamsii|grammia-yukona,Arctiinae
 2288,Euxoa,costata,,93-3432,"(Grote, 1876)",Noctuidae,euxoa-castanea|euxoa-idahoensis,Noctuinae
@@ -915,7 +915,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2306,Meganola,minuscula,Confused Meganola Moth,93-1121,"(Zeller, 1872)",Nolidae,nola-minna|clemensia-albata,Nolinae
 2307,Lithophane,baileyi,Bailey\'s Pinion Moth,93-2549,"Grote, 1877",Noctuidae,lithophane-pexata|lithophane-pertorrida,Noctuinae
 2308,Cucullia,strigata,Streaked Hooded Owlet Moth,93-1536,"(Smith, 1892)",Noctuidae,cucullia-serraticornis|cucullia-intermedia,Cuculliinae
-2309,Agnorisma,bugrai,Collared Dart Moth,93-3627,"(KoÃ§ak, 1983)",Noctuidae,eueretagrotis-perattentus|pseudohermonassa-tenuicula,Noctuinae
+2309,Agnorisma,bugrai,Collared Dart Moth,93-3627,"(Koçak, 1983)",Noctuidae,eueretagrotis-perattentus|pseudohermonassa-tenuicula,Noctuinae
 2310,Sympistis,youngi,,93-1898,"(McDunnough, 1922)",Noctuidae,sympistis-chorda,Oncocnemidinae
 2311,Gluphisia,septentrionis,Common Gluphisia Moth,93-0019,"Walker, 1855",Notodontidae,gluphisia-avimacula|gluphisia-severa,Notodontinae
 2312,Platypolia,loda,,93-2698,"(Strecker, 1898)",Noctuidae,papestra-invalida|platypolia-contadina,Noctuinae
@@ -930,7 +930,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2321,Neoligia,lancea,,93-2402,"Troubridge & Lafontaine, 2002",Noctuidae,neoligia-albirena|neoligia-lillooet|neoligia-tonsa,Noctuinae
 2322,Homorthodes,fractura,,93-3091,"(Smith, 1906)",Noctuidae,homorthodes-communis,Noctuinae
 2323,Xestia,plebeia,,93-3577,"(Smith, 1898)",Noctuidae,caradrina-morpheus,Noctuinae
-2324,Leucania,insueta,,93-2948,"GuenÃ©e, 1852",Noctuidae,,Noctuinae
+2324,Leucania,insueta,,93-2948,"Guenée, 1852",Noctuidae,,Noctuinae
 2325,Sympistis,wilsoni,,93-1928,"Barnes & Benjamin, 1924",Noctuidae,sympistis-lapponica,Oncocnemidinae
 2327,Homoglaea,californica,,93-2526,"(Smith, 1891)",Noctuidae,homoglaea-hircina|homoglaea-carbonaria,Noctuinae
 2328,Aseptis,ethnica,,93-2630,"(Smith, 1899)",Noctuidae,condica-albolabes|amphipyra-tragopoginis|aseptis-fumosa|aseptis-fannatica,Noctuinae
@@ -942,15 +942,15 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2334,Ascalapha,odorata,Black Witch Moth,93-0759,"(Linnaeus, 1758)",Erebidae,,Erebinae
 2335,Sideridis,rosea,Rosewing Moth,93-2906,"(Harvey, 1874)",Noctuidae,,Noctuinae
 2336,Leptarctia,californiae,,93-0336,"(Walker, 1855)",Erebidae,,Arctiinae
-2337,Pseudothyatira,cymatophoroides,Tufted Thyatirid Moth,MONA 6237,GuenÃ©e,Drepanidae,,Thyatirinae
+2337,Pseudothyatira,cymatophoroides,Tufted Thyatirid Moth,MONA 6237,Guenée,Drepanidae,,Thyatirinae
 2338,Spodoptera,praefica,Western Yellowstriped Armyworm Moth,93-2217,"(Grote, 1875)",Noctuidae,,Noctuinae
-2339,Polychrysia,esmeralda,,93-1182,"(OberthÃ¼r, 1880)",Noctuidae,,Plusiinae
+2339,Polychrysia,esmeralda,,93-1182,"(Oberthür, 1880)",Noctuidae,,Plusiinae
 2340,Ectypia,clio,Clio Tiger Moth,93-0422,"(Packard, 1864)",Erebidae,,Arctiinae
 2341,Schinia,cumatilis,,93-2177,"(Grote, 1865)",Noctuidae,,Heliothinae
 2342,Proserpinus,clarkiae,Clark\'s Day Sphinx Moth,MONA 7876,"(Boisduval, 1852)",Sphingidae,,Macroglossinae
 2344,Mamestra,configurata,,93-2898,"Walker, 1856",Noctuidae,melanchra-adjuncta|mamestra-curialis,Noctuinae
 2345,Setagrotis,pallidicollis,,93-3633,"(Grote, 1880)",Noctuidae,protolampra-rufipectus|coenophila-opacifrons,Noctuinae
-2346,Spodoptera,exigua,Beet Armyworm Moth,93-2215,"(HÃ¼bner, [1808])",Noctuidae,,Noctuinae
+2346,Spodoptera,exigua,Beet Armyworm Moth,93-2215,"(Hübner, [1808])",Noctuidae,,Noctuinae
 2347,Euxoa,westermanni,,93-3323,"(Staudinger, 1857)",Noctuidae,,Noctuinae
 2348,Euplexia,benesimilis,American Angle Shades Moth,93-2290,"McDunnough, 1922",Noctuidae,,Noctuinae
 2350,Orthosia,ferrigera,,93-2767,"(Smith, 1894)",Noctuidae,,Noctuinae
@@ -961,7 +961,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2355,Andropolia,theodori,,93-2685,"(Grote, 1878)",Noctuidae,andropolia-diversilineata,Noctuinae
 2356,Euxoa,henrietta,,93-3398,"(Smith, 1900)",Noctuidae,,Noctuinae
 2357,Abagrotis,brunneipennis,,93-3683,"(Grote, 1875)",Noctuidae,,Noctuinae
-2358,Anaplectoides,prasina,Green Arches Moth,93-3564,"([Denis & SchiffermÃ¼ller], 1775)",Noctuidae,,Noctuinae
+2358,Anaplectoides,prasina,Green Arches Moth,93-3564,"([Denis & Schiffermüller], 1775)",Noctuidae,,Noctuinae
 2359,Abagrotis,pulchrata,,93-3662,"(Blackmore, 1925)",Noctuidae,,Noctuinae
 2360,Euxoa,bicollaris,,93-3417,"(Grote, 1878)",Noctuidae,,Noctuinae
 2361,Dargida,procinctus,Olive Green Cutworm Moth,93-2925,"(Grote, 1873)",Noctuidae,,Noctuinae
@@ -997,7 +997,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2392,Drasteria,edwardsii,,93-0899,"(Behr, 1870)",Erebidae,,Erebinae
 2393,Egira,hiemalis,,93-2788,"(Grote, 1874)",Noctuidae,,Noctuinae
 2394,Euxoa,choris,,93-3427,"(Harvey, 1876)",Noctuidae,,Noctuinae
-2395,Lacinipolia,lorea,Bridled Arches Moth,93-3052,"(GuenÃ©e, 1852)",Noctuidae,amphipoea-americana,Noctuinae
+2395,Lacinipolia,lorea,Bridled Arches Moth,93-3052,"(Guenée, 1852)",Noctuidae,amphipoea-americana,Noctuinae
 2396,Virbia,ferruginosa,Rusty Holomelina Moth,93-0298,"(Walker, 1854)",Erebidae,,Arctiinae
 2397,Euxoa,atomaris,,93-3345,"(Smith, 1890)",Noctuidae,euxoa-punctigera|euxoa-misturata|euxoa-satiens,Noctuinae
 2398,Catocala,neogama,Bride Underwing Moth,93-0790,"(J.E. Smith, 1797)",Erebidae,,Erebinae
@@ -1012,9 +1012,9 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2409,Orthosia,praeses,,93-2765,"(Grote, 1879)",Noctuidae,,Noctuinae
 2410,Euchalcia,albavitta,,93-1180,"(Ottolengui, 1902)",Noctuidae,,Plusiinae
 2411,Abagrotis,discoidalis,,93-3667,"(Grote, 1876)",Noctuidae,,Noctuinae
-2412,Chytonix,palliatricula,Cloaked Marvel Moth,93-2249.5,"(GuenÃ©e, 1852)",Noctuidae,,Noctuinae
+2412,Chytonix,palliatricula,Cloaked Marvel Moth,93-2249.5,"(Guenée, 1852)",Noctuidae,,Noctuinae
 2413,Chloridea,virescens,Tobacco Budworm Moth,93-2054,"(Fabricius, 1777)",Noctuidae,zotheca-tranquilla,Heliothinae
-2414,Euxoa,obeliscoides,Obelisk Dart Moth,93-3428,"(GuenÃ©e, 1852)",Noctuidae,,Noctuinae
+2414,Euxoa,obeliscoides,Obelisk Dart Moth,93-3428,"(Guenée, 1852)",Noctuidae,,Noctuinae
 2415,Protoperigea,anotha,,93-2250,"(Dyar, 1904)",Noctuidae,homorthodes-discreta|caradrina-morpheus,Noctuinae
 2416,Copablepharon,viridisparsa,,93-3289,"Dod, 1916",Noctuidae,,Noctuinae
 2417,Egira,curialis,,93-2794,"(Grote, 1873)",Noctuidae,,Noctuinae
@@ -1027,7 +1027,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2424,Schinia,edwardsii,,93-2121,"(Smith, 1906)",Noctuidae,,Heliothinae
 2425,Catocala,relicta,White Underwing Moth,93-0795,"Walker, [1858]",Erebidae,,Erebinae
 2426,Sympistis,fortis,,93-1904,"(Grote, 1880)",Noctuidae,,Oncocnemidinae
-2427,Catocala,amatrix,Sweetheart Underwing Moth,93-0815,"(HÃ¼bner, [1813])",Erebidae,,Erebinae
+2427,Catocala,amatrix,Sweetheart Underwing Moth,93-0815,"(Hübner, [1813])",Erebidae,,Erebinae
 2428,Zale,duplicata,Pine False Looper Moth,93-1038,"(Bethune, 1865)",Erebidae,,Erebinae
 2429,Calophasia,lunula,Toadflax Brocade Moth,93-1771,"(Hufnagel, 1766)",Noctuidae,,Oncocnemidinae
 2430,Sphinx,poecila,Northern Apple Sphinx Moth,MONA 7810.1,"Stephens, 1828",Sphingidae,,Sphinginae
@@ -1036,32 +1036,32 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2433,Darapsa,choerilus,Azalea Sphinx Moth,MONA 7886,"(Cramer, [1780])",Sphingidae,,Macroglossinae
 2434,Hillia,iris,Iris Rover Moth,93-2624,"(Zetterstedt, 1839)",Noctuidae,diarsia-calgary|parastichtis-suspecta,Noctuinae
 2435,Apamea,maxima,,93-2336,"(Dyar, 1904)",Noctuidae,,Noctuinae
-2436,Phlogophora,periculosa,Brown Angle Shades Moth,93-2292,"GuenÃ©e, 1852",Noctuidae,,Noctuinae
+2436,Phlogophora,periculosa,Brown Angle Shades Moth,93-2292,"Guenée, 1852",Noctuidae,,Noctuinae
 2437,Cucullia,luna,,93-1533,"Morrison, 1875",Noctuidae,,Cuculliinae
 2438,Euxoa,nomas,,93-3476,"(Erschov, 1874)",Noctuidae,,Noctuinae
 2439,Adelphagrotis,indeterminata,,93-3641,"(Walker, 1865)",Noctuidae,,Noctuinae
 2440,Photedes,didonea,,93-2423,"(Smith, 1894)",Noctuidae,xylomoia-indirecta|xylomoia-chagnoni,Noctuinae
 2441,Schinia,suetus,,93-2075,"(Grote, 1873)",Noctuidae,,Heliothinae
-2442,Xestia,imperita,,93-3598,"(HÃ¼bner, [1831])",Noctuidae,,Noctuinae
+2442,Xestia,imperita,,93-3598,"(Hübner, [1831])",Noctuidae,,Noctuinae
 2443,Deilephila,elpenor,Elephant Hawk Moth,MONA 7894.1,"(Linnaeus, 1758)",Sphingidae,,Macroglossinae
-2444,Amphipyra,pyramidoides,Copper Underwing Moth,93-1544,"GuenÃ©e, 1852",Noctuidae,,Amphipyrinae
+2444,Amphipyra,pyramidoides,Copper Underwing Moth,93-1544,"Guenée, 1852",Noctuidae,,Amphipyrinae
 2445,Sympistis,occata,Harrow Moth,93-1801,"(Grote, 1875)",Noctuidae,,Oncocnemidinae
 2447,Sympistis,corusca,,93-1795,"(Smith, 1899)",Noctuidae,pseudanarta-crocea,Oncocnemidinae
 2448,Sympistis,stabilis,,93-1817,"(Smith, 1895)",Noctuidae,,Oncocnemidinae
-2449,Platypolia,mactata,Adorable Brocade Moth,93-2699,"(GuenÃ©e, 1852)",Noctuidae,,Noctuinae
+2449,Platypolia,mactata,Adorable Brocade Moth,93-2699,"(Guenée, 1852)",Noctuidae,,Noctuinae
 2450,Proserpinus,flavofasciata,Yellow-banded Day Sphinx Moth,MONA 7877,"(Walker, 1856)",Sphingidae,,Macroglossinae
-2451,Protodeltote,albidula,Pale Glyph Moth,93-1291,"(GuenÃ©e, 1852)",Noctuidae,,Eustrotiinae
+2451,Protodeltote,albidula,Pale Glyph Moth,93-1291,"(Guenée, 1852)",Noctuidae,,Eustrotiinae
 2452,Eucoptocnemis,canescens,,93-3262,"Lafontaine, 2004",Noctuidae,,Noctuinae
 2453,Ulolonche,dilecta,,93-3123,"(H. Edwards, 1885)",Noctuidae,ulolonche-disticha,Noctuinae
 2454,Egira,rubrica,,93-2796,"(Harvey, 1878)",Noctuidae,,Noctuinae
 2455,Megalographa,biloba,Bilobed Looper Moth,93-1209,"(Stephens, 1830)",Noctuidae,,Plusiinae
 2456,Apamea,vultuosa,Airy Apamea Moth,93-2303,(Grote. 1875),Noctuidae,,Noctuinae
-2457,Trichoplusia,ni,Cabbage Looper Moth,93-1168,"(HÃ¼bner, [1803])",Noctuidae,chrysodeixis-eriosoma|chrysodeixis-includens,Plusiinae
+2457,Trichoplusia,ni,Cabbage Looper Moth,93-1168,"(Hübner, [1803])",Noctuidae,chrysodeixis-eriosoma|chrysodeixis-includens,Plusiinae
 2458,Schizura,ipomaeae,Morning-glory Prominent Moth,93-0098,"Doubleday, 1841",Notodontidae,,Heterocampinae
 2459,Acronicta,cyanescens,,93-1426,"Hampson, 1909",Noctuidae,acronicta-lanceolaria,Acronictinae
 2460,Sympistis,saundersiana,Saunders\' Sallow Moth,93-1800,"(Grote, 1876)",Noctuidae,,Oncocnemidinae
 2461,Agrochola,pulchella,,93-2614,"(Smith, 1900)",Noctuidae,,Noctuinae
-2462,Hadena,capsularis,Capsule Moth,93-2911,"(GuenÃ©e, 1852)",Noctuidae,hadena-ectrapela,Noctuinae
+2462,Hadena,capsularis,Capsule Moth,93-2911,"(Guenée, 1852)",Noctuidae,hadena-ectrapela,Noctuinae
 2463,Phryganidia,californica,California Oak Moth,93-0138,"Packard, 1864",Notodontidae,,Dioptinae
 2464,Fishia,sp,,,,Noctuidae,,
 2465,Heliothis,proruptus,,93-2051,"Grote, 1875",Noctuidae,,Heliothinae
@@ -1072,12 +1072,12 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2470,Cisthene,barnesii,,93-0191,"(Dyar, 1904)",Erebidae,,Arctiinae
 2472,Xestia,lyngei,,93-3615,"(Rebel, 1923)",Noctuidae,,Noctuinae
 2473,Annaphila,arvalis,,93-1738,"H. Edwards, 1875",Noctuidae,annaphila-danistica,Amphipyrinae
-2474,Eucirroedia,pampina,Scalloped Sallow Moth,93-2609,"(GuenÃ©e, 1852)",Noctuidae,,Noctuinae
+2474,Eucirroedia,pampina,Scalloped Sallow Moth,93-2609,"(Guenée, 1852)",Noctuidae,,Noctuinae
 2475,Pseudohemihyalea,edwardsii,Edwards\' Glassy-wing Moth,93-0381,"(Packard, 1864)",Erebidae,,Arctiinae
 2476,Bellura,obliqua,Cattail Borer Moth,93-2517,"(Walker, 1865)",Noctuidae,,Noctuinae
-2477,Galgula,partita,Wedgling Moth,93-2249,"GuenÃ©e, 1852",Noctuidae,,Noctuinae
+2477,Galgula,partita,Wedgling Moth,93-2249,"Guenée, 1852",Noctuidae,,Noctuinae
 2478,Autographa,corusca,Caramel Looper,93-1201,"(Strecker, 1885)",Noctuidae,,Plusiinae
-2479,Hecatera,dysodea,Small Ranunculus Moth,93-2909,"([Denis & SchiffermÃ¼ller], 1775)",Noctuidae,pseudobryomima-muscosa|lacinipolia-strigicollis,Noctuinae
+2479,Hecatera,dysodea,Small Ranunculus Moth,93-2909,"([Denis & Schiffermüller], 1775)",Noctuidae,pseudobryomima-muscosa|lacinipolia-strigicollis,Noctuinae
 2481,Catocala,ophelia,,93-0840,"H. Edwards, 1881",Erebidae,catocala-aholibah,Erebinae
 2482,Schinia,gaurae,Clouded Crimson Moth,93-2083,"(J.E. Smith, 1797)",Noctuidae,,Heliothinae
 2483,Calosaturnia,mendocino,,MONA 7751,"(Behrens, 1876)",Saturniidae,,Saturniinae
@@ -1094,14 +1094,14 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2494,Copablepharon,fuscum,Sand-verbena Moth,93-3287,"Troubridge & Crabo, 1996",Noctuidae,,Noctuinae
 2495,Euxoa,medialis,Median-banded Dart Moth,93-3354,"(Smith, [1888])",Noctuidae,,Noctuinae
 2497,Pyrrharctia,isabella,Isabella Tiger Moth,93-0335,"(J.E. Smith, 1797)",Erebidae,,Arctiinae
-2498,Ponometia,semiflava,Half-yellow Moth,93-1308,"(GuenÃ©e, 1852)",Noctuidae,,Acontiinae
+2498,Ponometia,semiflava,Half-yellow Moth,93-1308,"(Guenée, 1852)",Noctuidae,,Acontiinae
 2499,Coloradia,pandora,Pandora Pinemoth,MONA 7724,"Blake, 1863",Saturniidae,coloradia-doris,Hemileucinae
 2500,Heliothis,belladonna,,93-2052,"(H. Edwards, 1881)",Noctuidae,,Heliothinae
 2501,Sympistis,chalybdis,,93-1908,"(Troubridge & Crabo, (1999))",Noctuidae,sympistis-funebris,Oncocnemidinae
-2502,Deltote,bellicula,Bog Lithacodia Moth,93-1289,"(HÃ¼bner, 1818)",Noctuidae,,Eustrotiinae
+2502,Deltote,bellicula,Bog Lithacodia Moth,93-1289,"(Hübner, 1818)",Noctuidae,,Eustrotiinae
 2503,Euthyatira,semicircularis,,MONA 6241,(Grote),Drepanidae,,Thyatirinae
 2504,Eumorpha,achemon,Achemon Sphinx Moth,MONA 7861,"(Drury, 1773)",Sphingidae,,Macroglossinae
-2505,Sympistis,perscripta,Scribbled Sallow Moth,93-1797,"(GuenÃ©e, 1852)",Noctuidae,,Oncocnemidinae
+2505,Sympistis,perscripta,Scribbled Sallow Moth,93-1797,"(Guenée, 1852)",Noctuidae,,Oncocnemidinae
 2506,Stiria,rugifrons,Yellow Sunflower Moth,93-1668,"Grote, 1874",Noctuidae,,Amphipyrinae
 2508,Anicla,tepperi,,93-3223,"(Smith, [1888])",Noctuidae,,Noctuinae
 2509,Lacinipolia,renigera,Bristly Cutworm Moth,93-3044,"(Stephens, 1829)",Noctuidae,,Noctuinae
@@ -1109,11 +1109,11 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2511,Habrosyne,scripta,Lettered Habrosyne,MONA 6235,(Gosse),Drepanidae,,Thyatirinae
 2512,Apamea,inordinata,,93-2316,"(Morrison, 1875)",Noctuidae,,Noctuinae
 2513,Pheosidea,elegans,Elegant Prominent Moth,93-0013,"(Strecker, 1885)",Notodontidae,,Notodontinae
-2514,Syngrapha,parilis,,93-1233,"(HÃ¼bner, [1809])",Noctuidae,,Plusiinae
+2514,Syngrapha,parilis,,93-1233,"(Hübner, [1809])",Noctuidae,,Plusiinae
 2515,Dodia,albertae,,93-0337,"Dyar, 1901",Erebidae,,Arctiinae
 2516,Xestia,intermedia,,93-3609,"(Kononenko, 1981)",Noctuidae,protolampra-rufipectus,Noctuinae
 2517,Erinnyis,ello,Ello Sphinx Moth,MONA 7834,"(Linnaeus, 1758)",Sphingidae,,Macroglossinae
-2518,Catocala,ultronia,Ultronia Underwing Moth,93-0841,"(HÃ¼bner, 1823)",Erebidae,,Erebinae
+2518,Catocala,ultronia,Ultronia Underwing Moth,93-0841,"(Hübner, 1823)",Erebidae,,Erebinae
 2519,Lithophane,gausapata,,93-2564,"Grote, 1883",Noctuidae,,Noctuinae
 2520,Hypoprepia,miniata,Scarlet-winged Lichen Moth,93-0204,"(Wm. Kirby, 1837)",Erebidae,,Arctiinae
 2521,Marathyssa,inficita,Dark Marathyssa Moth,93-1103,"(Walker, 1865)",Euteliidae,,Euteliinae
@@ -1129,10 +1129,10 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2534,Brachylomia,discinigra,,93-2656,"(Walker, 1856)",Noctuidae,,Noctuinae
 2535,Xylena,nupera,American Swordgrass Moth,93-2519,"(Lintner, 1874)",Noctuidae,xylena-curvimacula,Noctuinae
 2536,Schinia,luxa,,93-2066,"(Grote, 1881)",Noctuidae,,Heliothinae
-2539,Abrostola,urentis,Spectacled Nettle Moth,93-1162,"GuenÃ©e, 1852",Noctuidae,,Plusiinae
+2539,Abrostola,urentis,Spectacled Nettle Moth,93-1162,"Guenée, 1852",Noctuidae,,Plusiinae
 2540,Callizzia,amorata,Gray Scoopwing Moth,MONA 7650,"Packard, 1876",Uraniidae,,Epipleminae
 2541,Proserpinus,lucidus,Bear Sphinx Moth,MONA 7872,"(Boisduval, 1852)",Sphingidae,,Macroglossinae
-2542,Sympistis,funebris,,93-1910,"(HÃ¼bner, [1809])",Noctuidae,sympistis-chalybdis,Oncocnemidinae
+2542,Sympistis,funebris,,93-1910,"(Hübner, [1809])",Noctuidae,sympistis-chalybdis,Oncocnemidinae
 2543,Orthosia,arthrolita,,93-2772,"(Harvey, 1875)",Noctuidae,,Noctuinae
 2544,Crambidia,casta,Pearly-winged Lichen Moth,93-0225,"(Packard, 1869)",Erebidae,,Arctiinae
 2545,Sympistis,umbrifascia,,93-1802,"(Smith, 1894)",Noctuidae,,Oncocnemidinae
@@ -1153,7 +1153,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2561,Lophocampa,roseata,,93-0365,"(Walker, 1866)",Erebidae,,Arctiinae
 2562,Paradiarsia,littoralis,,93-3544,"(Packard, 1867)",Noctuidae,,Noctuinae
 2563,Manulea,bicolor,Bicolored Moth,93-0217,"(Grote, 1864)",Erebidae,,Arctiinae
-2564,Tyta,luctuosa,,93-1503,"([Denis & SchiffermÃ¼ller], 1775)",Noctuidae,,Metoponiinae
+2564,Tyta,luctuosa,,93-1503,"([Denis & Schiffermüller], 1775)",Noctuidae,,Metoponiinae
 2565,Lasionycta,fergusoni,,93-2974,"Crabo & Lafontaine, 2009",Noctuidae,eremobina-claudens,Noctuinae
 2566,Anarta,antica,,93-2844,"(Smith, 1891)",Noctuidae,,Noctuinae
 2567,Melipotis,indomita,Indomitable Melipotis Moth,93-0871,"(Walker, [1858])",Erebidae,,Erebinae
@@ -1173,7 +1173,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2582,Schinia,unimacula,Rabbitbush Flower Moth,93-2168,"Smith, 1891",Noctuidae,,Heliothinae
 2583,Escaria,clauda,,93-2815,"Grote, 1883",Noctuidae,hadenella-pergentilis|afotella-cylindrica,Noctuinae
 2584,Xestia,oblata,Rosy Dart Moth,93-3575,"(Morrison, 1875)",Noctuidae,,Noctuinae
-2585,Palthis,angulalis,Dark-spotted Palthis Moth,93-0551,"(HÃ¼bner, 1796)",Erebidae,,Herminiinae
+2585,Palthis,angulalis,Dark-spotted Palthis Moth,93-0551,"(Hübner, 1796)",Erebidae,,Herminiinae
 2764,Ponometia,fumata,,93-1327,"(Smith, 1905)",Noctuidae,ponometia-tortricina|ponometia-nigra,Acontiinae
 2765,Annaphila,lithosina,,93-1748,"H. Edwards, 1875",Noctuidae,annaphila-miona,Amphipyrinae
 2631,Xylophanes,nr libya,,,,,,
@@ -1189,7 +1189,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2708,Axenus,arvalis,,93-1733,"Grote, 1873",Noctuidae,ponometia-nigra,Amphipyrinae
 2709,Scotogramma,fervida,,93-2848,"Barnes & McDunnough, 1912",Noctuidae,anarta-fulgora|scotogramma-stretchii,Noctuinae
 2710,Pseudanarta,sp,,,,Noctuidae,,
-2713,Eudeilinia,herminiata,Northern Eudeilinea Moth,MONA 6253,"(GuenÃ©e, [1858])",Drepanidae,,Drepaninae
+2713,Eudeilinia,herminiata,Northern Eudeilinea Moth,MONA 6253,"(Guenée, [1858])",Drepanidae,,Drepaninae
 2718,Mniotype,aff tenera,,,,Noctuidae,,
 2723,Ulolonche,orbiculata,,93-3125,"(Smith, 1891)",Noctuidae,,Noctuinae
 2732,Scotogramma,ptilodonta,,93-2853,"(Grote, 1883)",Noctuidae,scotogramma-orida|scotogramma-yakima|anarta-fulgora,Noctuinae
@@ -1207,7 +1207,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2759,Tricholita,chipeta,,93-3199,"Barnes, 1904",Noctuidae,eucoptocnemis-canescens,Noctuinae
 2771,Aseptis,sp No 1,,93-2635.1,,Noctuidae,,
 2766,Schinia,aurantiaca,,93-2072,"(H. Edwards, 1881)",Noctuidae,schinia-edwardsii,Heliothinae
-2767,Apamea,unanimis,Small Clouded Brindle Moth,93-2308,"(HÃ¼bner, [1813])",Noctuidae,apamea-indocilis|mesapamea-secalis,Noctuinae
+2767,Apamea,unanimis,Small Clouded Brindle Moth,93-2308,"(Hübner, [1813])",Noctuidae,apamea-indocilis|mesapamea-secalis,Noctuinae
 2770,Sympistis,sokar,,93-1917,"Troubridge, 2008",Noctuidae,sympistis-youngi|sympistis-extremis,Oncocnemidinae
 2774,Fishia,nigrescens,,93-2693.1,"Hammond & Crabo, 2013",Noctuidae,platypolia-loda|fishia-yosemitae|fishia-connecta,Noctuinae
 2777,Protoperigea,calientensis,,93-2255,"Mustelin, 2006",Noctuidae,,Noctuinae
@@ -1231,9 +1231,9 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2846,Sympistis,chandleri,,93-1857,"(Grote, 1873)",Noctuidae,sympistis-poliochroa|sympistis-major,Oncocnemidinae
 2847,Protorthodes,eureka,,93-3104,"(Barnes & Benjamin, 1927)",Noctuidae,protorthodes-curtica,Noctuinae
 2849,Resapamea,diluvius,,93-2368.1,"Crabo, 2013",Noctuidae,resapamea-passer,Noctuinae
-2880,Anticlea,vasiliata,,MONA 7329,"GuenÃ©e, 1858",Geometridae,,
+2880,Anticlea,vasiliata,,MONA 7329,"Guenée, 1858",Geometridae,,
 2883,Mesoleuca,gratulata,,MONA 7308,"(Walker, 1862) ",Geometridae,,
-2889,Spargania,luctuata,,MONA 7313,"([Denis & SchiffermÃ¼ller], 1775)",Geometridae,,
+2889,Spargania,luctuata,,MONA 7313,"([Denis & Schiffermüller], 1775)",Geometridae,,
 2893,Hydriomena,perfracta,,MONA 7229,"Swett, 1910",Geometridae,,
 2895,Hydriomena,edenata,,MONA 7232,"Swett, 1909",Geometridae,,
 2903,Cladara,limitaria,,MONA 7637,"(Walker, 1860)",,,
@@ -1246,9 +1246,9 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2965,Stamnoctenis,pearsalli,,MONA 7357,"(Swett, 1914)",Geometridae,,
 2971,Stamnodes,topazata,,MONA 7349,"(Strecker, 1899)",Geometridae,,
 2980,Antepirrhoe,semiatrata,,MONA 7210,"(Hulst, 1881) ",Geometridae,,
-2985,Eulithis,destinata,,MONA 7204,"(MÃ¶schler, 1860)",Geometridae,,
+2985,Eulithis,destinata,,MONA 7204,"(Möschler, 1860)",Geometridae,,
 2987,Eulithis,xylina,,MONA 7207,"(Hulst, 1896) ",Geometridae,,
-2988,Ecliptopera,silaceata,,MONA 7213,"([Denis & SchiffermÃ¼ller], 1775)",Geometridae,,
+2988,Ecliptopera,silaceata,,MONA 7213,"([Denis & Schiffermüller], 1775)",Geometridae,,
 2989,Dysstroma,citrata,,MONA 7182,"(Linnaeus, 1761)",Geometridae,,
 2990,Dysstroma,sobria,,MONA 7184,"Swett, 1917",Geometridae,,
 2992,Dysstroma,truncata,,MONA 7187,"(Hufnagel, 1767)",Geometridae,,
@@ -1256,21 +1256,21 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3002,Ceratodalia,gueneata,,MONA 7221,"Packard, 1876",Geometridae,,
 3009,Epirrita,pulchraria,,MONA 7435,"(Taylor, 1907)",Geometridae,,
 3016,Venusia,pearsalli,,MONA 7429,"(Dyar, 1906) ",Geometridae,,
-3017,Trichodezia,albovittata,,MONA 7430,"(GuenÃ©e, [1858])",Geometridae,,
+3017,Trichodezia,albovittata,,MONA 7430,"(Guenée, [1858])",Geometridae,,
 3019,Rheumaptera,hastata,,MONA 7293,"(Linnaeus, 1758)",Geometridae,,
 3021,Hydria,undulata,,MONA 7291,"(Linnaeus, 1758)",Geometridae,,
-3022,Triphosa,haesitata,,MONA 7285,"(GuenÃ©e, 1858)",Geometridae,,
+3022,Triphosa,haesitata,,MONA 7285,"(Guenée, 1858)",Geometridae,,
 3305,Annaphila,miona,,93-1749,"Smith, 1908",Noctuidae,,Amphipyrinae
 3062,Idaea,dimidiata,,MONA 7126,"(Hufnagel, 1767)",Geometridae,,
 3085,Nemoria,darwiniata,,MONA 7035,"(Dyar, 1904 )",Geometridae,,
-3095,Hemithea,aestivaria,,MONA 7083,"(HÃ¼bner, 1799)",Geometridae,,
-3097,Archiearis,infans,,MONA 6256,"(MÃ¶schler, 1862)",Geometridae,,
+3095,Hemithea,aestivaria,,MONA 7083,"(Hübner, 1799)",Geometridae,,
+3097,Archiearis,infans,,MONA 6256,"(Möschler, 1862)",Geometridae,,
 3098,Leucobrephos,brephoides,,MONA 6257,"(Walker, 1857)",Geometridae,,
 3099,Alsophila,pometaria,,MONA 6258,"(Harris, 1841)",Geometridae,,
-3100,Nematocampa,resistaria,,MONA 7010,"(Herrich-SchÃ¤ffer, [1855])",Geometridae,,
+3100,Nematocampa,resistaria,,MONA 7010,"(Herrich-Schäffer, [1855])",Geometridae,,
 3102,Protitame,virginalis,,MONA 6270,"(Hulst, 1900) ",Geometridae,,
 3103,Protitame,subalbaria,,MONA 6266,"(Packard, 1873) ",Geometridae,,
-3104,Eumacaria,madopata,,MONA 6272,"(GuenÃ©e, [1858])",Geometridae,,
+3104,Eumacaria,madopata,,MONA 6272,"(Guenée, [1858])",Geometridae,,
 3106,Macaria,brunneata,,MONA 6286,"(Thunberg, 1784) ",Geometridae,,
 3107,Macaria,amboflava,,MONA 6284,"(Ferguson, 1953)",Geometridae,,
 3109,Macaria,boreata,,MONA 6287.1,"(Ferguson, 2008)",Geometridae,,
@@ -1282,7 +1282,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3117,Speranza,andersoni,,MONA 6280,"(Swett, 1916) ",Geometridae,,
 3118,Macaria,helena,,MONA 6277,"(Cassino, 1928)",Geometridae,,
 3120,Macaria,simplex,,MONA 6281,"(Dyar, 1907)",Geometridae,,
-3121,Macaria,lorquinaria,,MONA 6324,"(GuenÃ©e, [1858])",Geometridae,,
+3121,Macaria,lorquinaria,,MONA 6324,"(Guenée, [1858])",Geometridae,,
 3122,Macaria,loricaria,,MONA 6290,"(Eversmann, 1837)",Geometridae,,
 3123,Macaria,plumosata,,MONA 6296,"(Barnes & McDunnough, 1917)",Geometridae,,
 3124,Macaria,quadrilinearia,,MONA 6288,"(Packard, 1873) ",Geometridae,,
@@ -1295,24 +1295,24 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3143,Digrammia,nubiculata,,MONA 6371,"(Packard, 1876)",Geometridae,,
 3163,Hesperumia,sulphuraria,,MONA 6431,"Packard, 1873",Geometridae,,
 3166,Neoalcis,californiaria,,MONA 6435,"(Packard, 1871) ",Geometridae,,
-3186,Anavitrinella,pampinaria,,MONA 6590,"(GuenÃ©e, [1858])",Geometridae,,
-3190,Protoboarmia,porcelaria,,MONA 6598,"(GuenÃ©e, [1858])",Geometridae,,
+3186,Anavitrinella,pampinaria,,MONA 6590,"(Guenée, [1858])",Geometridae,,
+3190,Protoboarmia,porcelaria,,MONA 6598,"(Guenée, [1858])",Geometridae,,
 3191,Melanolophia,imitata,,MONA 6618,"(Walker, 1860)",Geometridae,,
 3194,Biston,betularia,,MONA 6640,"(Linnaeus, 1758 )",Geometridae,,
 3201,Phigalia,plumogeraria,,MONA 6661,"(Hulst, 1888)",Geometridae,,
-3213,Drepanulatrix,unicalcararia,,MONA 6682,"(GuenÃ©e, [1858])",Geometridae,,
+3213,Drepanulatrix,unicalcararia,,MONA 6682,"(Guenée, [1858])",Geometridae,,
 3216,Drepanulatrix,quadraria,,MONA 6685,"(Grote, 1882)",Geometridae,,
-3218,Drepanulatrix,foeminaria,,MONA 6686,"(GuenÃ©e, [1858])",Geometridae,,
+3218,Drepanulatrix,foeminaria,,MONA 6686,"(Guenée, [1858])",Geometridae,,
 3219,Drepanulatrix,carnearia,,MONA 6688,"(Hulst, 1888)",Geometridae,,
 3221,Drepanulatrix,secundaria,,MONA 6690,"Barnes & McDunnough, 1916",Geometridae,,
 3229,Euchlaena,johnsonaria,,MONA 6729,"(Fitch, 1869)",Geometridae,,
 3230,Euchlaena,madusaria,,MONA 6731,"(Walker, 1860)",Geometridae,,
-3232,Euchlaena,tigrinaria,,MONA 6737,"(GuenÃ©e, 1858)",Geometridae,,
+3232,Euchlaena,tigrinaria,,MONA 6737,"(Guenée, 1858)",Geometridae,,
 3238,Pero,mizon,,MONA 6757,"(Rindge, 1955)",Geometridae,,
 3239,Pero,behrensaria,,MONA 6760,"(Packard, 1871) ",Geometridae,,
 3242,Phaeoura,mexicanaria,,MONA 6766,"(Grote, 1883)",Geometridae,,
 3244,Gabriola,dyari,,MONA 6781,"Taylor, 1904",Geometridae,,
-3246,Campaea,perlata,,MONA 6796,"(GuenÃ©e, 1858)",Geometridae,,
+3246,Campaea,perlata,,MONA 6796,"(Guenée, 1858)",Geometridae,,
 3248,Ennomos,alniaria,,MONA 6797.1,"(Linnaeus, 1758 )",Geometridae,,
 3250,Enypia,packardata,,7007,"Taylor, 1906",Geometridae,,
 3253,Enypia,venata,,7005,"(Grote, 1883)",Geometridae,,
@@ -1331,8 +1331,8 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3278,Nepytia,umbrosaria,,6899,"(Packard, 1873) ",Geometridae,,
 3283,Caripeta,angustiorata,,6867,"Walker, 1863",Geometridae,,
 3284,Caripeta,aequaliaria,,6865,"Grote, 1883",Geometridae,,
-3289,Plagodis,phlogosaria,,6842,"(GuenÃ©e, 1858)",Geometridae,,
-3296,Metanema,inatomaria,,6819,"GuenÃ©e, 1858",Geometridae,,
+3289,Plagodis,phlogosaria,,6842,"(Guenée, 1858)",Geometridae,,
+3296,Metanema,inatomaria,,6819,"Guenée, 1858",Geometridae,,
 3303,Hypenodes,fractilinea,Broken-line Hypenodes Moth,93-0662,"(Smith, 1908)",Erebidae,hypenodes-sobria,
 3304,Hypenodes,sombrus,,93-0662,"(Smith, 1908)",Erebidae,hypenodes-fractilinea,
 3342,Arctia,brachyptera,,93-0292,"Troubridge & Lafontaine, 2000",Erebidae,arctia-opulenta,Arctiinae
@@ -1374,8 +1374,8 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3361,Sideridis,artesta,,93-2905,"(Smith, 1903)",Noctuidae,,
 3362,Hadena,circumvadis,,93-2916,"(Smith, 1902)",Noctuidae,,
 3364,Lacinipolia ,naevia,,93-3029,"(Smith, 1898)",,,
-3365,Leucania,phragmitidicola,,93-2943,"GuenÃ©e, 1852",Noctuidae,,
+3365,Leucania,phragmitidicola,,93-2943,"Guenée, 1852",Noctuidae,,
 3366,Anarta,obesula,,93-2836,"(Smith, 1904)",Noctuidae,,
-3368,Pseudeustrotia,carneola,Pink-barred Pseudeustrotia,93-2205,"(GuenÃ©e, 1852)",,,
+3368,Pseudeustrotia,carneola,Pink-barred Pseudeustrotia,93-2205,"(Guenée, 1852)",,,
 3369,Macrochilo,bivittata,Two-striped Owlet,93-0506,"(Grote, 1876)",,,
 3370,Copablepharon,longipenne,Dusky Dune Moth,93-3268,"Grote, 1882",Noctuidae,,
