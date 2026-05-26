@@ -17,6 +17,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { parse } from 'csv-parse/sync';
+import { Buffer } from 'node:buffer';
 
 const BUNNY_STORAGE_HOST = process.env.BUNNY_STORAGE_HOST ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE = process.env.BUNNY_ZONE ?? 'pnwmoths';
@@ -69,8 +70,9 @@ if (DRY_RUN) {
   }
   if (toCopy.length > 10) console.log(`  ... and ${toCopy.length - 10} more`);
 } else {
+  await (async () => {
   // bunny.net Storage API doesn't have a native copy endpoint.
-  // Strategy: download from old path, upload to new path.
+  // Strategy: download from old path, upload to new path using fetch.
   let copied = 0;
   let failed = 0;
 
@@ -81,20 +83,20 @@ if (DRY_RUN) {
 
     try {
       // Download from CDN pull zone
-      const data = execFileSync('curl', [
-        '-s', '-S', '-f', '-L',
-        downloadUrl,
-      ], { maxBuffer: 50 * 1024 * 1024 });
+      const dlResp = await fetch(downloadUrl);
+      if (!dlResp.ok) throw new Error(`Download failed: ${dlResp.status} ${dlResp.statusText}`);
+      const data = Buffer.from(await dlResp.arrayBuffer());
 
       // Upload to new location via Storage API
-      execFileSync('curl', [
-        '-s', '-S', '-f',
-        '-X', 'PUT',
-        '-H', `AccessKey: ${BUNNY_API_KEY}`,
-        '-H', 'Content-Type: application/octet-stream',
-        '--data-binary', '@-',
-        uploadUrl,
-      ], { input: data, maxBuffer: 50 * 1024 * 1024 });
+      const ulResp = await fetch(uploadUrl, {
+        method: 'PUT',
+        headers: {
+          'AccessKey': BUNNY_API_KEY,
+          'Content-Type': 'application/octet-stream',
+        },
+        body: data,
+      });
+      if (!ulResp.ok) throw new Error(`Upload failed: ${ulResp.status} ${ulResp.statusText}`);
 
       copied++;
       if (copied % 50 === 0) console.log(`[cdn-copy] ${copied}/${toCopy.length} copied`);
@@ -105,6 +107,7 @@ if (DRY_RUN) {
   }
 
   console.log(`[cdn-copy] Done: ${copied} copied, ${failed} failed`);
+  })();
 }
 
 // --- Write old locations file for future cleanup ---
