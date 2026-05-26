@@ -44,18 +44,18 @@ describe('_formatCaption', () => {
 });
 
 describe('_buildDziUrl', () => {
-  it('constructs DZI URL from cdnBaseUrl + tiles_path + specimen_id + view', () => {
+  it('constructs DZI URL from cdnBaseUrl + tiles_path + .dzi extension', () => {
     const ctx = { cdnBaseUrl: 'https://pnwmoths.b-cdn.net' };
     const specimen = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
     const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, specimen);
-    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/A-D.dzi');
+    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D.dzi');
   });
 
   it('handles institutional accession specimen_id', () => {
     const ctx = { cdnBaseUrl: 'https://pnwmoths.b-cdn.net' };
     const specimen = { specimen_id: 'WWUC0000003275', view: 'V', tiles_path: 'species-tiles/feltia-herilis/WWUC0000003275-V' };
     const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, specimen);
-    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/feltia-herilis/WWUC0000003275-V/WWUC0000003275-V.dzi');
+    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/feltia-herilis/WWUC0000003275-V.dzi');
   });
 });
 
@@ -75,7 +75,7 @@ describe('_nextSpecimen', () => {
     };
     PnwmImageSlideshow.prototype._nextSpecimen.call(ctx);
     assert.equal(ctx._currentIndex, 1);
-    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V/A-V.dzi');
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V.dzi');
   });
 
   it('wraps from last index back to 0 and calls open with first specimen URL', () => {
@@ -90,7 +90,7 @@ describe('_nextSpecimen', () => {
     };
     PnwmImageSlideshow.prototype._nextSpecimen.call(ctx);
     assert.equal(ctx._currentIndex, 0);
-    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/A-D.dzi');
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D.dzi');
   });
 
   it('does not throw when _osdViewer is null; _currentIndex still advances', () => {
@@ -122,7 +122,7 @@ describe('_prevSpecimen', () => {
     };
     PnwmImageSlideshow.prototype._prevSpecimen.call(ctx);
     assert.equal(ctx._currentIndex, 1);
-    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V/A-V.dzi');
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V.dzi');
   });
 
   it('retreats from index 1 to 0 and calls open with first specimen URL', () => {
@@ -137,7 +137,7 @@ describe('_prevSpecimen', () => {
     };
     PnwmImageSlideshow.prototype._prevSpecimen.call(ctx);
     assert.equal(ctx._currentIndex, 0);
-    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/A-D.dzi');
+    assert.equal(openedWith, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D.dzi');
   });
 });
 

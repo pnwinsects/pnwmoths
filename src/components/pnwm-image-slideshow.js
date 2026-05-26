@@ -274,7 +274,7 @@ export class PnwmImageSlideshow extends LitElement {
   }
 
   _buildDziUrl(specimen) {
-    return `${this.cdnBaseUrl}/${specimen.tiles_path}/${specimen.specimen_id}-${specimen.view}.dzi`;
+    return `${this.cdnBaseUrl}/${specimen.tiles_path}.dzi`;
   }
 
   _prevSpecimen() {
