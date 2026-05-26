@@ -15,11 +15,15 @@
  */
 
 import { readdir, readFile, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
+import { join, extname, resolve, dirname } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '..');
 
 // --- Constants (overridable via env for testing) ---
 const DEFAULT_MOTHS_SOURCE =
@@ -55,14 +59,17 @@ const VIEW_MAP = {
 
 /**
  * Parse a Django moth filename to extract genus and species.
- * Expected pattern: "{Genus} {species}-..." (e.g. "Acronicta americana-A-D.jpg")
+ * Expected patterns:
+ *   "{Genus} {species}-..." (e.g. "Acronicta americana-A-D.jpg")
+ *   "{Genus}_{species}-..." (e.g. "Smerinthus_ophthalmica-A-D.jpg")
+ *   "{Genus}-{species}-..." (e.g. "Abagrotis-hermina-B-D.jpg")
  * Returns { genus, species } or null for non-matching filenames (e.g. numeric IDs).
  *
  * @param {string} fname - Bare filename (not a path)
  * @returns {{ genus: string, species: string } | null}
  */
 function parseMotFilename(fname) {
-  const match = fname.match(/^([A-Z][a-z]+) ([a-z]+)-/);
+  const match = fname.match(/^([A-Z][a-z]+)[ _-]([a-z]+)\s*-/);
   if (!match) {
     console.warn(`[migrate-images] Skipping unparseable filename: ${fname}`);
     return null;
@@ -107,9 +114,21 @@ async function main() {
     process.exit(0);
   }
 
-  // --- Step 1: (no species ID lookup needed) ---
-  // Slug is derived directly from the image filename in speciesimage CSV,
-  // so data/species.csv is not used for the upload path.
+  // --- Step 1: Load species_id → canonical slug from data/species.csv ---
+  // This ensures image slugs match species.csv even when genus was reclassified.
+  const speciesCsvPath = resolve(ROOT, 'data/species.csv');
+  const speciesIdToSlug = new Map();
+  if (existsSync(speciesCsvPath)) {
+    const speciesRaw = readFileSync(speciesCsvPath, 'utf8');
+    const speciesRows = parse(speciesRaw, { columns: true, skip_empty_lines: true });
+    for (const row of speciesRows) {
+      const slug = `${row.genus}-${row.species}`.toLowerCase();
+      speciesIdToSlug.set(String(row.id), slug);
+    }
+    console.log(`[migrate-images] Loaded ${speciesIdToSlug.size} species slugs from species.csv`);
+  } else {
+    console.warn('[migrate-images] data/species.csv not found — will derive slugs from filenames');
+  }
 
   // --- Step 2: Load photographer lookup ---
   let photographerById = new Map();
@@ -143,18 +162,21 @@ async function main() {
     const speciesImageRows = parse(speciesImageRaw, { columns: true, skip_empty_lines: true });
     console.log(`[migrate-images] Loaded ${speciesImageRows.length} species image records`);
 
-    // Group rows by slug — derive slug directly from the image filename,
-    // no species_id lookup needed (data/species.csv only has test stubs).
+    // Group rows by slug — prefer species_id lookup (canonical), fall back to filename parsing.
     for (const row of speciesImageRows) {
       // Strip "moths/" prefix from image column to get bare filename
       const rawImage = row.image ?? '';
       const fname = rawImage.startsWith('moths/') ? rawImage.slice('moths/'.length) : rawImage;
       if (!fname) continue;
 
-      const parsed = parseMotFilename(fname);
-      if (!parsed) continue; // already warned inside parseMotFilename
-
-      const slug = toSlug(parsed.genus, parsed.species);
+      // Determine slug: prefer species_id lookup from species.csv (handles reclassification)
+      let slug = speciesIdToSlug.get(String(row.species_id)) ?? null;
+      if (!slug) {
+        // Fall back to filename parsing for species not in species.csv
+        const parsed = parseMotFilename(fname);
+        if (!parsed) continue;
+        slug = toSlug(parsed.genus, parsed.species);
+      }
 
       const photographer = photographerById.get(String(row.photographer_id)) ?? '';
       const { view, specimen } = parseViewSpecimen(fname);
