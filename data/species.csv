@@ -1330,7 +1330,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3303,Hypenodes,fractilinea,Broken-line Hypenodes Moth,93-0662,"(Smith, 1908)",Erebidae,hypenodes-sombrus,
 3304,Hypenodes,sombrus,,93-0662,"(Smith, 1908)",Erebidae,hypenodes-fractilinea,
 3342,Arctia,brachyptera,,93-0292,"Troubridge & Lafontaine, 2000",Erebidae,,
-3310,Caripeta ,divisata,,,,,,
+3310,Caripeta,divisata,,,,,,
 3311,Catocala,piatrix,Penitent Underwing Moth,93-0762,"Grote, 1864",Erebidae,catocala-neogama,Erebinae
 3312,Tarache,acerba,,93-1368,"(H. Edwards, 1881)",Noctuidae,,Acontiinae
 3313,Lasionycta,staudingeri,,93-2693.1,"(Aurivillius, 1891)",Noctuidae,,Noctuinae
@@ -1387,7 +1387,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3356,Apantesis,carlotta,Carlotta\'s Tiger Moth,93-0281,"Ferguson, 1985",Erebidae,,Arctiinae
 3361,Sideridis,artesta,,93-2905,"(Smith, 1903)",Noctuidae,,
 3362,Hadena,circumvadis,,93-2916,"(Smith, 1902)",Noctuidae,,
-3364,Lacinipolia ,naevia,,93-3029,"(Smith, 1898)",,,
+3364,Lacinipolia,naevia,,93-3029,"(Smith, 1898)",,,
 3365,Leucania,phragmitidicola,,93-2943,"Guenée, 1852",Noctuidae,,
 3366,Anarta,obesula,,93-2836,"(Smith, 1904)",Noctuidae,,
 3368,Pseudeustrotia,carneola,Pink-barred Pseudeustrotia,93-2205,"(Guenée, 1852)",,,

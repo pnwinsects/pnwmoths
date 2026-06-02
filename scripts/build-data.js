@@ -143,7 +143,7 @@ export async function main() {
       query: `
         SELECT DISTINCT r.species_slug
         FROM records r
-        LEFT JOIN species s ON r.species_slug = lower(s.genus || '-' || s.species)
+        LEFT JOIN species s ON r.species_slug = regexp_replace(lower(trim(s.genus) || '-' || trim(s.species)), '\\s+', '-', 'g')
         WHERE s.genus IS NULL
       `
     },
