@@ -6,3 +6,5 @@ var/
 # Former Git LFS directories: images are now served from CDN, not stored in this repo
 images/
 plates/
+cdn-old-locations.txt
+cdn-bad-slug-old-locations.txt

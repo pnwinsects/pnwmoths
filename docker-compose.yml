@@ -2,6 +2,8 @@ services:
   dev:
     platform: linux/amd64
     build: .
+    ports:
+      - "8080:8080"
     volumes:
       - .:/workspace
       - /workspace/node_modules
