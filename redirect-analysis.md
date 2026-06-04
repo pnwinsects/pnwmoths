@@ -1,6 +1,10 @@
 # Redirect Analysis Reports
 
-## 11 True Misses (old WWU species with no new equivalent)
+## ~~11 True Misses~~ ✅ Resolved (PR #32)
+
+All 11 species have been added to the new site. Redirects now resolve correctly.
+
+Previously these old WWU species had no new equivalent:
 
 | Old WWU URL | Species slug |
 |---|---|
