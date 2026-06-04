@@ -205,13 +205,14 @@ function inferFamily(nocId) {
 
 /**
  * Derive slug from a species image field (e.g. "moths/Acronicta americana-A-D.jpg").
+ * Handles space, underscore, or hyphen between genus and species.
  *
  * @param {string} imageField
  * @returns {string | null}
  */
 function slugFromImageField(imageField) {
   const fname = imageField.startsWith('moths/') ? imageField.slice(6) : imageField;
-  const match = fname.match(/^([A-Z][a-z]+) ([a-z]+)-/);
+  const match = fname.match(/^([A-Z][a-z]+)[ _-]([a-z]+)-/);
   if (!match) return null;
   return `${match[1]}-${match[2]}`.toLowerCase();
 }
@@ -229,7 +230,7 @@ function slugFromImageField(imageField) {
 function parseSpeciesSpecies(line) {
   const rows = [];
   // common_name may be NULL or '' (empty string) or 'string'
-  const re = /\((\d+),'([^'\\]*)','([^'\\]*)',(?:'((?:[^'\\]|\\.)*)'|NULL),(?:(\d+)|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),(?:(\d+)|NULL)/g;
+  const re = /\((\d+),'((?:[^'\\]|\\.)*)','((?:[^'\\]|\\.)*)',(?:'((?:[^'\\]|\\.)*)'|NULL),(?:(\d+)|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),(?:(\d+)|NULL)/g;
   for (const m of line.matchAll(re)) {
     rows.push({
       id: m[1],
@@ -264,7 +265,7 @@ function parseSpeciesRecord(line) {
   // 14=males(skip), 15=females(skip), 16=notes, 17=date_added(skip), 18=date_modified(skip),
   // 19=record_type, 20=csv_file(skip), 21=type_status(skip), 22=subspecies(skip), 23=linked_photo
   // Note: males/females fields use -?\d+ because the dump contains sentinel values like -999999 and -2
-  const re = /\((?:(\d+)|NULL),(?:(\d+)|NULL),(?:([-\d.]+)|NULL),(?:([-\d.]+)|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:-?\d+|NULL),(?:-?\d+|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),(?:'[^']*'|NULL),(?:'[^']*'|NULL),'(specimen|photograph|literature)',(?:'[^']*'|NULL),(?:'[^']*'|NULL),(?:'[^']*'|NULL),([01])\)/g;
+  const re = /\((?:(\d+)|NULL),(?:(\d+)|NULL),(?:([-\d.]+)|NULL),(?:([-\d.]+)|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:(\d+)|NULL),(?:-?\d+|NULL),(?:-?\d+|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),(?:'[^']*'|NULL),(?:'[^']*'|NULL),'(specimen|photograph|literature|sight_field_notes)',(?:'[^']*'|NULL),(?:'[^']*'|NULL),(?:'[^']*'|NULL),([01])\)/g;
   for (const m of line.matchAll(re)) {
     rows.push({
       id: m[1],
@@ -394,7 +395,19 @@ export async function main() {
   const allRecords = parseSpeciesRecord(recordsLine);
   console.log(`[migrate-species] Parsed ${allRecords.length} records from dump`);
 
-  // 8. Determine which species_ids have images or PNW records
+  // 8. Build canonical species_id → slug map from DB genus+species (the source of truth).
+  // This replaces the old approach of using image-filename-derived slugs for identity.
+  const canonicalSlugMap = new Map(); // species_id → slug
+  for (const sp of allSpecies) {
+    let safeSpecies = sp.species;
+    if (safeSpecies.includes('-')) safeSpecies = safeSpecies.slice(0, safeSpecies.indexOf('-'));
+    safeSpecies = safeSpecies.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+    if (!safeSpecies) safeSpecies = 'sp';
+    const slug = `${sp.genus}-${safeSpecies}`.toLowerCase();
+    canonicalSlugMap.set(sp.id, slug);
+  }
+
+  // 8b. Determine which species_ids have images or PNW records
   const speciesWithImages = new Set(slugMap.keys());
   const pnwRecords = allRecords.filter(
     r => r.linked_photo === '0' && r.state_id && PNW_STATE_IDS.has(r.state_id)
@@ -418,11 +431,9 @@ export async function main() {
   for (const sp of allSpecies) {
     if (!includedSpeciesIds.has(sp.id)) continue;
 
-    // Sanitize species epithet for validateSlugComponent (only [a-zA-Z0-9 ] allowed).
-    // Hyphens (e.g. "v-alba", "c-nigrum"): truncate at first hyphen so slug matches
-    // what slugFromImageField() extracts from the image filename.
-    // Periods, slashes, "?", "nr.", "aff.", "sp." etc: strip all non-alphanumeric-or-space chars.
-    // Must be computed BEFORE deriving the fallback slug so deduplication is consistent.
+    // Sanitize species epithet for slug safety (only [a-zA-Z0-9 ] allowed).
+    // Hyphens (e.g. "v-alba", "c-nigrum"): truncate at first hyphen.
+    // Periods, slashes, "?", "nr.", "aff.", "sp." etc: strip non-alphanumeric-or-space chars.
     let safeSpecies = sp.species;
     if (safeSpecies.includes('-')) {
       safeSpecies = safeSpecies.slice(0, safeSpecies.indexOf('-'));
@@ -430,10 +441,9 @@ export async function main() {
     safeSpecies = safeSpecies.replace(/[^a-zA-Z0-9 ]/g, '').trim();
     if (!safeSpecies) safeSpecies = 'sp';
 
-    // Slug: prefer image-derived slug (canonical); fall back to sanitized genus-species.
-    // Using safeSpecies ensures the fallback slug matches what appears in the CSV output,
-    // so the seenSlugs deduplication check is consistent.
-    const slug = slugMap.get(sp.id) ?? `${sp.genus}-${safeSpecies}`.toLowerCase();
+    // Slug: always use DB-derived canonical slug (genus + sanitized species).
+    // This ensures species.csv slug matches what build-data.js computes at runtime.
+    const slug = `${sp.genus}-${safeSpecies}`.toLowerCase();
 
     // Deduplicate: if two DB species produce the same slug, keep the first (lower ID).
     // Track skipped IDs so their records are also excluded from records.csv.
@@ -452,10 +462,15 @@ export async function main() {
       family = inferFamily(sp.noc_id) ?? genusFamilyFallback.get(sp.genus) ?? null;
     }
 
-    // Build similar_species: pipe-joined slugs
+    // Build similar_species: pipe-joined slugs using canonical DB-derived slugs.
+    // Only include targets that are themselves included in the output.
     const similarIds = similarMap.get(sp.id) ?? [];
     const similarSlugs = similarIds
-      .map(tid => slugMap.get(tid) ?? null)
+      .map(tid => {
+        if (!includedSpeciesIds.has(tid)) return null;
+        if (skippedSpeciesIds.has(tid)) return null;
+        return canonicalSlugMap.get(tid) ?? null;
+      })
       .filter(Boolean);
 
     speciesOut.push({
@@ -471,24 +486,30 @@ export async function main() {
     });
   }
 
-  const speciesCsv = stringify(speciesOut, { header: true, columns: SPECIES_COLUMNS });
-  writeFileSync(resolve(ROOT, 'data/species.csv'), speciesCsv, 'utf8');
-  console.log(`[migrate-species] Wrote ${speciesOut.length} rows to data/species.csv`);
-
-  // 11. Build species_id → genus+species slug for records join.
-  // build-data.js validates: lower(genus || '-' || species) matches species_slug in records.
-  // Image-derived slugs (slugMap) may differ from DB genus+species due to reclassification.
-  // Records must use the same slug as species.csv (genus + safeSpecies) to pass the join.
-  const speciesDbSlugMap = new Map(); // species_id → lower(genus+'-'+safeSpecies)
-  for (const sp of allSpecies) {
-    let safeSpecies = sp.species;
-    if (safeSpecies.includes('-')) safeSpecies = safeSpecies.slice(0, safeSpecies.indexOf('-'));
-    safeSpecies = safeSpecies.replace(/[^a-zA-Z0-9 ]/g, '').trim();
-    if (!safeSpecies) safeSpecies = 'sp';
-    speciesDbSlugMap.set(sp.id, `${sp.genus}-${safeSpecies}`.toLowerCase());
+  // 10b. Merge: preserve species from existing species.csv whose IDs aren't in the dump.
+  // These are post-dump additions or species included via external data sources.
+  const speciesCsvPath = resolve(ROOT, 'data/species.csv');
+  if (existsSync(speciesCsvPath)) {
+    const existingRaw = readFileSync(speciesCsvPath, 'utf8');
+    const existingRows = parse(existingRaw, { columns: true, skip_empty_lines: true });
+    const newIds = new Set(speciesOut.map(r => r.id));
+    let preserved = 0;
+    for (const row of existingRows) {
+      if (!newIds.has(row.id)) {
+        speciesOut.push(row);
+        preserved++;
+      }
+    }
+    if (preserved > 0) {
+      console.log(`[migrate-species] Preserved ${preserved} species from existing CSV (not in dump)`);
+    }
   }
 
-  // PNW coordinate bounds from build-data.js validation query
+  const speciesCsv = stringify(speciesOut, { header: true, columns: SPECIES_COLUMNS });
+  writeFileSync(speciesCsvPath, speciesCsv, 'utf8');
+  console.log(`[migrate-species] Wrote ${speciesOut.length} rows to data/species.csv`);
+
+  // 11. PNW coordinate bounds from build-data.js validation query
   const LAT_MIN = 42.0, LAT_MAX = 55.0;
   const LON_MIN = -125.0, LON_MAX = -110.0;
 
@@ -502,7 +523,7 @@ export async function main() {
     if (lat < LAT_MIN || lat > LAT_MAX || lon < LON_MIN || lon > LON_MAX) continue;  // out of PNW bounds
 
     // Use DB-derived slug (genus+species) so records join matches species.csv in build-data.js
-    const slug = speciesDbSlugMap.get(rec.species_id) ?? null;
+    const slug = canonicalSlugMap.get(rec.species_id) ?? null;
     if (!slug) {
       console.warn(`[migrate-species] No species for record species_id=${rec.species_id} — skipping`);
       continue;
@@ -534,9 +555,27 @@ export async function main() {
     });
   }
 
-  const recordsCsv = stringify(recordsOut, { header: true, columns: RECORDS_COLUMNS });
-  writeFileSync(resolve(ROOT, 'data/records.csv'), recordsCsv, 'utf8');
-  console.log(`[migrate-species] Wrote ${recordsOut.length} rows to data/records.csv`);
+  // Merge: keep ALL existing records, and ADD new records from the dump only for
+  // species not already represented. This preserves post-migration curation.
+  const recordsCsvPath = resolve(ROOT, 'data/records.csv');
+  if (existsSync(recordsCsvPath)) {
+    const existingRaw = readFileSync(recordsCsvPath, 'utf8');
+    const existingRecords = parse(existingRaw, { columns: true, skip_empty_lines: true });
+    const existingSlugs = new Set(existingRecords.map(r => r.species_slug));
+
+    // Only add dump records for species NOT already in existing CSV
+    const newRecords = recordsOut.filter(r => !existingSlugs.has(r.species_slug));
+    const finalRecords = [...existingRecords, ...newRecords];
+    console.log(`[migrate-species] Kept ${existingRecords.length} existing records, added ${newRecords.length} for new species`);
+
+    const recordsCsv = stringify(finalRecords, { header: true, columns: RECORDS_COLUMNS });
+    writeFileSync(recordsCsvPath, recordsCsv, 'utf8');
+    console.log(`[migrate-species] Wrote ${finalRecords.length} rows to data/records.csv`);
+  } else {
+    const recordsCsv = stringify(recordsOut, { header: true, columns: RECORDS_COLUMNS });
+    writeFileSync(recordsCsvPath, recordsCsv, 'utf8');
+    console.log(`[migrate-species] Wrote ${recordsOut.length} rows to data/records.csv`);
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
