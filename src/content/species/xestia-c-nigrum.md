@@ -10,16 +10,15 @@ Both sexes of this species are easily identified by the pale V-shaped mark forme
 
 ##### Larvae
 
-Larva is smooth, mottled pale brown with darker dorsal-lateral chevrons and a wavy black lateral line.  It is illustrated by Lafontaine (1998).
+Larva is smooth, mottled pale brown with darker dorsal-lateral chevrons and a wavy black lateral line. It is illustrated by Lafontaine (1998).
 
 ## Habitat
 
-This species is widely distributed in open, disturbed habitats throughout much of Eurasia and North America.  Adults are highly vagile and disperse widely between disturbed areas of habitat.  In the Pacific Northwest, it is often common in moist grassland and forest habitats, particularly in riparian zones along creeks and rivers at low to middle elevations both west and east of the Cascades.  However, it is most common to abundant in disturbed agricultural and urban habitats, and may cause serious damage to crops during epidemic outbreaks.
+This species is widely distributed in open, disturbed habitats throughout much of Eurasia and North America. Adults are highly vagile and disperse widely between disturbed areas of habitat. In the Pacific Northwest, it is often common in moist grassland and forest habitats, particularly in riparian zones along creeks and rivers at low to middle elevations both west and east of the Cascades. However, it is most common to abundant in disturbed agricultural and urban habitats, and may cause serious damage to crops during epidemic outbreaks.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia c-nigrum* is found throughout most of the Pacific Northwest, although it is uncommonly collected in the dry interior of south-eastern Oregon and southern Idaho.
 
@@ -27,8 +26,7 @@ This species is widely distributed in open, disturbed habitats throughout much o
 
 This species has a Holarctic distribution and occurs widely through the Old World and New World. In North America it occurs from the subarctic to central America, although it is absent from the Deep South, Great Plains south of Nebraska, and much of the Great Basin.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -40,10 +38,10 @@ This species is double-brooded. The spring brood flies from late April through J
 
 ## Economic Importance
 
-This species frequently causes serious damage to agricultural crops during epidemic outbreaks.  In the Pacific Northwest, it is particularly a pest in herbaceous crops of peppermint and alfalfa.
+This species frequently causes serious damage to agricultural crops during epidemic outbreaks. In the Pacific Northwest, it is particularly a pest in herbaceous crops of peppermint and alfalfa.
 
 ## Literature
 
-Lafontaine (1998)
-
 Miller & Hammond (2003)
+
+Moth Photographers Group

@@ -1421,3 +1421,14 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 3306,Digrammia,cinereola,,MONA 6363.2,,,,
 3307,Digrammia,napensis,,MONA 6366,,,,
 3338,Apantesis,bolanderi,,93-0263,,,,
+3371,Ianassa,pallida,Pale Prominent Moth,93-0107,"(Strecker, 1899)",Notodontidae,oedemasia-semirufescens,Heterocampinae
+3372,Coelodasys,unicornis,Unicorn Caterpillar Moth,93-0100,"(J.E. Smith, 1797)",Notodontidae,coelodasys-conspecta,Heterocampinae
+3373,Coelodasys,conspecta,,93-0100.1,"(Edwards, 1874)",Notodontidae,coelodasys-unicornis,Heterocampinae
+3374,Oedemasia,semirufescens,Red-washed Prominent Moth,93-0105,"(Walker, 1865)",Notodontidae,oedemasia-salicis|ianassa-pallida,Heterocampinae
+3375,Oedemasia,salicis,Red-humped Caterpillar Moth,93-0103,"(J.E. Smith, 1797)",Notodontidae,oedemasia-semirufescens,Heterocampinae
+3376,Cecrita,lunata,,93-0085,"Hy. Edwards, 1884",Notodontidae,notodonta-torva,Heterocampinae
+3377,Calosaturnia,mendocino,,,"(Behrens, 1876)",Saturniidae,,Saturniinae
+3378,Drasteria,maculosa,,93-0907,"(Behr, 1870)",Erebidae,drasteria-hudsonica,Erebinae
+3379,Manulea,bicolor,Bicolored Moth,93-0217,"(Grote, 1864)",Erebidae,,Arctiinae
+3380,Autographa,v-alba,White Y Mark Moth,93-1197,"Ottolengui, 1902",Noctuidae,autographa-speciosa,Plusiinae
+3381,Xestia,c-nigrum,Lesser Black-letter Dart Moth,93-3588,"(Linnaeus, 1758)",Noctuidae,,Noctuinae

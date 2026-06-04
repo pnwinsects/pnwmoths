@@ -8,7 +8,7 @@ This species can usually be readily identified by its gray and black forewing wi
 
 ## Habitat
 
-This species is found in the mountains of western North America where it flies in subalpine forests.  It is usually uncommon to moderately common on dry ridges at higher elevations, but is rare in mixed hardwood-conifer forests and in open ponderosa pine forests at middle elevations.
+This species is found in the mountains of western North America where it flies in subalpine forests. It is usually uncommon to moderately common on dry ridges at higher elevations, but is rare in mixed hardwood-conifer forests and in open ponderosa pine forests at middle elevations.
 
 ## Distribution
 
@@ -24,18 +24,14 @@ The northern range of this species includes Alberta. The range extends south thr
 
 ##### Larvae
 
-No information is presently available regarding larval foodplants for 
-this species, but it probably feeds on herbaceous plants like related 
-species.
+No information is presently available regarding larval foodplants for this species, but it probably feeds on herbaceous plants like related species.
 
 ##### Adults
 
 The flight period of *A. v-alba* is summer, usually July. It is nocturnal and comes to lights.
 
-## Economic Importance
-
-None.
-
 ## Literature
 
 Lafontaine & Poole (1991)
+
+Moth Photographers Group

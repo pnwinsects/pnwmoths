@@ -55,12 +55,12 @@ export function validateCsv(filePath, requiredColumns) {
  *
  * @param {string} value - The genus or species string to validate
  * @param {string} fieldName - Field name for error messages
- * @throws {Error} If value contains characters outside [a-zA-Z0-9 ]
+ * @throws {Error} If value contains characters outside [a-zA-Z0-9 -]
  */
 function validateSlugComponent(value, fieldName) {
-  if (!/^[a-zA-Z0-9 ]+$/.test(value)) {
+  if (!/^[a-zA-Z0-9 -]+$/.test(value)) {
     throw new Error(
-      `Invalid ${fieldName} value "${value}" — only alphanumeric characters and spaces are allowed.`
+      `Invalid ${fieldName} value "${value}" — only alphanumeric characters, spaces, and hyphens are allowed.`
     );
   }
 }
