@@ -1,0 +1,232 @@
+---
+layout: false
+permalink: /redirect.html
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting… | PNW Moths</title>
+  <meta name="robots" content="noindex">
+  <style>
+    body {
+      font-family: 'Open Sans', system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+    .redirect-box {
+      text-align: center;
+      padding: 2rem;
+      max-width: 480px;
+    }
+    .redirect-box h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .redirect-box p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    .redirect-box a {
+      color: #2e7d32;
+      text-decoration: underline;
+    }
+    .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #e0e0e0;
+      border-top-color: #2e7d32;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="redirect-box">
+    <div class="spinner" id="spinner"></div>
+    <h1>Redirecting…</h1>
+    <p id="message">Finding the right page for you.</p>
+    <p id="fallback" style="display:none;">
+      We couldn't find an exact match. Try <a href="/browse/">browsing all species</a>
+      or <a href="/search/">searching</a>.
+    </p>
+  </div>
+  <script>
+    /**
+     * PNW Moths redirect handler.
+     *
+     * Accepts: /redirect.html?from=/old/path/on/wwu/site
+     * Maps old pnwmoths.biol.wwu.edu URL patterns to new site URLs.
+     */
+    (function () {
+      'use strict';
+
+      // --- Species slug lookup (generated from data/species.csv) ---
+      const SPECIES_SLUGS = new Set({{ speciesSlugs | dump | safe }});
+
+      // --- Static page mappings ---
+      const STATIC_MAP = {
+        '/about-moths/glossary/': '/glossary/',
+        '/about-moths/faqs/': '/faqs/',
+        '/about-moths/moth-facts/': '/',
+        '/about-moths/moth-collecting-photography/': '/',
+        '/about-moths/references/': '/',
+        '/about-us/the-project/': '/',
+        '/about-us/related-sites/': '/',
+        '/about-us/site-credits/': '/',
+        '/about-us/contact/': '/',
+        '/explore-data/about-data/': '/',
+        '/explore-data/about-key/': '/',
+        '/explore-data/about-images/': '/',
+        '/gsearch/': '/search/',
+        '/identify/': '/',
+        '/browse/': '/browse/',
+        '/browse-all/': '/browse/',
+        '/photographic-plates/': '/plates/',
+      };
+
+      // --- Synonym map for reclassified species (old slug -> new slug) ---
+      const SYNONYMS = {
+        'globia-alameda': 'capsula-alameda',
+        'globia-oblonga': 'capsula-oblonga',
+        'globia-subflava': 'capsula-subflava',
+      };
+
+      /**
+       * Resolve an old WWU path to a new site path.
+       * Returns { target: string, matched: boolean }
+       */
+      function resolve(fromPath) {
+        // Normalize: ensure leading slash, trailing slash, lowercase
+        let path = fromPath.trim();
+        if (!path.startsWith('/')) path = '/' + path;
+        if (!path.endsWith('/')) path += '/';
+
+        // 1. Check static map
+        if (STATIC_MAP[path]) {
+          return { target: STATIC_MAP[path], matched: true };
+        }
+
+        // 2. /browse/ paths — extract species slug from last segment
+        if (path.startsWith('/browse/')) {
+          const segments = path.split('/').filter(Boolean);
+          const last = segments[segments.length - 1];
+
+          // Skip structural segments (family-*, subfamily-*, tribe-*, or bare genus names)
+          if (last.startsWith('family-') || last.startsWith('subfamily-') || last.startsWith('tribe-')) {
+            return { target: '/browse/', matched: true };
+          }
+
+          // Check if it's a known species slug
+          if (SPECIES_SLUGS.has(last)) {
+            return { target: '/species/' + last + '/', matched: true };
+          }
+
+          // Normalize spaces/underscores and try again
+          const normalized = last.replace(/[_\s]+/g, '-').toLowerCase();
+          if (SPECIES_SLUGS.has(normalized)) {
+            return { target: '/species/' + normalized + '/', matched: true };
+          }
+
+          // Check synonym map (reclassified species)
+          const synonym = SYNONYMS[last] || SYNONYMS[normalized];
+          if (synonym && SPECIES_SLUGS.has(synonym)) {
+            return { target: '/species/' + synonym + '/', matched: true };
+          }
+
+          // Bare genus name (no hyphen) — send to browse
+          if (!last.includes('-')) {
+            return { target: '/browse/', matched: true };
+          }
+
+          // Unknown species slug — send to browse with logged miss
+          return { target: '/browse/', matched: false };
+        }
+
+        // 3. /photographic-plates/{id}/ → /plates/
+        if (path.startsWith('/photographic-plates/')) {
+          return { target: '/plates/', matched: true };
+        }
+
+        // 4. Homepage
+        if (path === '/') {
+          return { target: '/', matched: true };
+        }
+
+        // 5. Backstop
+        return { target: '/', matched: false };
+      }
+
+      /**
+       * Log a redirect event for analytics/debugging.
+       * Uses sendBeacon if available for reliability during navigation.
+       */
+      function logRedirect(fromPath, target, matched) {
+        const payload = {
+          ts: new Date().toISOString(),
+          from: fromPath,
+          to: target,
+          matched: matched,
+          referrer: document.referrer || null,
+        };
+
+        // Log to console for debugging
+        if (!matched) {
+          console.warn('[pnwmoths-redirect] No exact match:', payload);
+        }
+
+        // If a logging endpoint is configured, send it
+        const LOGGING_ENDPOINT = window.__PNWMOTHS_REDIRECT_LOG_URL;
+        if (LOGGING_ENDPOINT && navigator.sendBeacon) {
+          navigator.sendBeacon(LOGGING_ENDPOINT, JSON.stringify(payload));
+        }
+
+        // Google Analytics event (if gtag is loaded)
+        if (typeof gtag === 'function') {
+          gtag('event', 'redirect', {
+            event_category: matched ? 'redirect_matched' : 'redirect_missed',
+            event_label: fromPath,
+            value: matched ? 1 : 0,
+          });
+        }
+      }
+
+      // --- Main ---
+      const params = new URLSearchParams(window.location.search);
+      const fromPath = params.get('from');
+
+      if (!fromPath) {
+        // No ?from= parameter — redirect home
+        window.location.replace('/');
+        return;
+      }
+
+      const { target, matched } = resolve(fromPath);
+      logRedirect(fromPath, target, matched);
+
+      if (!matched) {
+        // Show fallback message briefly before redirecting
+        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('message').textContent =
+          'This page has moved. Redirecting to the best match…';
+        document.getElementById('fallback').style.display = 'block';
+        setTimeout(function () {
+          window.location.replace(target);
+        }, 3000);
+      } else {
+        window.location.replace(target);
+      }
+    })();
+  </script>
+</body>
+</html>
