@@ -29,7 +29,7 @@
   "author": "Peter Abrahamsen <rainhead@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy": "^3.1.6",
     "@duckdb/node-api": "^1.5.1-r.2",
     "@picocss/pico": "^2.1.1",
     "chart.js": "^4.5.1",
