@@ -3,9 +3,9 @@ import { LitElement, html } from 'lit';
 /**
  * Popup body for a single occurrence marker on a species map.
  *
- * Renders into light DOM so Leaflet can measure the <p> children directly
- * when auto-sizing the popup — a shadow-host with no intrinsic width
- * collapses to its narrowest non-breakable word.
+ * Renders into light DOM so Leaflet's popup auto-sizing measures the
+ * <p> children directly. Forces display:block on the host because unknown
+ * elements default to inline, which makes Leaflet measure ~one word wide.
  */
 class PnwmOccurrencePopup extends LitElement {
   static properties = {
@@ -17,6 +17,11 @@ class PnwmOccurrencePopup extends LitElement {
   constructor() {
     super();
     this.record = null;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.style.display = 'block';
   }
 
   render() {
