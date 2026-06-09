@@ -455,7 +455,15 @@ Plans:
   4. Every schema has been profiled against the full production dataset (85,933 records, 1,348 species) before finalization: all nullable columns use `.nullable()` and no schema rejects any real row from the current production data
   5. Both `isolatedModules: true` and `useDefineForClassFields: false` (browser tsconfig) are set; a grep for `\benum\b` in all source directories returns empty; the existing `.js` build still produces `_site/` with 1,364 species pages unchanged
 
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+**Wave 1**
+
+- [ ] 33-01-PLAN.md — Repair the slopcheck dependency install (devDependencies, @types/node@^24, drop @types/openseadragon) + create 3 tsconfigs + Eleventy type-shim + typecheck script (TS-01, TS-02, TS-03, TS-04, TS-05)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 33-02-PLAN.md — Author 7-entity Zod schema module + z.infer<> types + SCHEMA-03 acceptance harness against full production data + DATA-PROFILE.md + no-enum/1,364-page no-regression gate (SCHEMA-01, SCHEMA-02, SCHEMA-03)
 
 ### Phase 34: scripts/lib & src/_lib Migration
 
