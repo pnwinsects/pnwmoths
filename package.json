@@ -23,7 +23,8 @@
     "photos:upload": "node scripts/upload-tiles.js",
     "photos:materialize": "node scripts/generate-species-photos.js",
     "photos:rethumbnail": "THUMBNAIL_ONLY=1 node scripts/tile-photos.js",
-    "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/ingest-photos.test.js scripts/migrate-species.test.js scripts/tile-photos.test.js scripts/upload-tiles.test.js scripts/generate-species-photos.test.js scripts/lib/*.test.js src/components/*.test.js src/_lib/*.test.js"
+    "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/ingest-photos.test.js scripts/migrate-species.test.js scripts/tile-photos.test.js scripts/upload-tiles.test.js scripts/generate-species-photos.test.js scripts/lib/*.test.js src/components/*.test.js src/_lib/*.test.js",
+    "typecheck": "tsc -p tsconfig.browser.json --noEmit && tsc -p tsconfig.node.json --noEmit"
   },
   "keywords": [],
   "author": "Peter Abrahamsen <rainhead@gmail.com>",
@@ -39,11 +40,15 @@
     "leaflet": "^1.9.4",
     "lit": "^3.3.2",
     "node-html-parser": "^7.1.0",
-    "openseadragon": "^6.0.2"
+    "openseadragon": "^6.0.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@11ty/eleventy-plugin-vite": "^8.0.0",
+    "@types/leaflet": "^1.9.21",
+    "@types/node": "^24.13.1",
     "pagefind": "^1.5.2",
+    "typescript": "^6.0.3",
     "vite": "^8.0.8"
   }
 }
