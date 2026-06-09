@@ -1,5 +1,5 @@
 /**
- * scripts/lib/parse-photo-filename.js
+ * scripts/lib/parse-photo-filename.ts
  *
  * Phase 26 (v2.2 high-res photos): pure-function filename parser for the
  * Dropbox ingest manifest. No I/O — exports three helpers consumed by
@@ -36,7 +36,7 @@ const TAIL_STRIP_RE = /-[A-Z0-9_]+-[DV]$/;
 // Provisional triggers — any single-token match returns provisional immediately.
 // The consecutive ['n', 'sp'] pair is handled separately because 'n' alone is
 // just a token; only when followed by 'sp' is it a provisional new-species marker.
-const PROVISIONAL_SINGLE_TOKENS = new Set(['sp', 'nr']);
+const PROVISIONAL_SINGLE_TOKENS = new Set<string>(['sp', 'nr']);
 
 // Per-token shape tests used in the clean-binomial walk.
 const GENUS_RE = /^[A-Z][a-z]+$/;
@@ -44,13 +44,20 @@ const GENUS_RE = /^[A-Z][a-z]+$/;
 // by a single hyphen ('v-alba', 'c-nigrum').
 const EPITHET_RE = /^[a-z]+(-[a-z]+)?$/;
 
+export interface ExtractBinomialResult {
+  binomial: string | null;
+  bucketHint: 'provisional' | null;
+}
+
+export interface ParseSpecimenAndViewResult {
+  specimen: string;
+  view: 'D' | 'V' | '';
+}
+
 /**
  * Extract a binomial from a filename, or route to the provisional bucket.
- *
- * @param {string} filename
- * @returns {{ binomial: string | null, bucketHint: 'provisional' | null }}
  */
-export function extractBinomial(filename) {
+export function extractBinomial(filename: string): ExtractBinomialResult {
   if (typeof filename !== 'string' || !filename) {
     return { binomial: null, bucketHint: null };
   }
@@ -70,15 +77,20 @@ export function extractBinomial(filename) {
   //    epithet, so the cost of over-tokenizing is zero.
   const provisionalTokens = binomialPart.split(/[\s\-_.]+/).filter(Boolean);
   for (let i = 0; i < provisionalTokens.length; i++) {
-    const lower = provisionalTokens[i].toLowerCase();
+    const token = provisionalTokens[i];
+    // noUncheckedIndexedAccess: guard on provisionalTokens[i]
+    if (!token) continue;
+    const lower = token.toLowerCase();
     if (PROVISIONAL_SINGLE_TOKENS.has(lower)) {
       return { binomial: null, bucketHint: 'provisional' };
     }
     // Consecutive ['n', 'sp'] pair (case-insensitive on the 'n').
+    const nextToken = provisionalTokens[i + 1];
     if (
       lower === 'n' &&
       i + 1 < provisionalTokens.length &&
-      provisionalTokens[i + 1].toLowerCase() === 'sp'
+      nextToken !== undefined &&
+      nextToken.toLowerCase() === 'sp'
     ) {
       return { binomial: null, bucketHint: 'provisional' };
     }
@@ -97,6 +109,8 @@ export function extractBinomial(filename) {
     for (let i = 0; i < tokens.length - 1; i++) {
       const a = tokens[i];
       const b = tokens[i + 1];
+      // noUncheckedIndexedAccess: guard on tokens[i] and tokens[i+1]
+      if (!a || !b) continue;
       // FIX #1: b.length >= 2 (was >= 3 in spike) — admits 'ni', 'ou'.
       // FIX #2: EPITHET_RE allows a single hyphenated epithet.
       if (GENUS_RE.test(a) && EPITHET_RE.test(b) && b.length >= 2) {
@@ -134,11 +148,8 @@ export function extractBinomial(filename) {
  * an institutional accession ID (OSAC_0001081322, WWUC000000083). The view
  * is always exactly D (dorsal) or V (ventral), case-sensitive, immediately
  * before the extension.
- *
- * @param {string} filename
- * @returns {{ specimen: string, view: 'D' | 'V' | '' }}
  */
-export function parseSpecimenAndView(filename) {
+export function parseSpecimenAndView(filename: string): ParseSpecimenAndViewResult {
   if (typeof filename !== 'string' || !filename) {
     return { specimen: '', view: '' };
   }
@@ -146,7 +157,9 @@ export function parseSpecimenAndView(filename) {
   // digits in the specimen token, and pins view to D|V only (per D-05 schema).
   const match = filename.match(TAIL_RE);
   if (!match) return { specimen: '', view: '' };
-  return { specimen: match[1], view: match[2] };
+  // noUncheckedIndexedAccess: destructure capture groups; guard with ?? ''
+  const [, specimenRaw, viewRaw] = match;
+  return { specimen: specimenRaw ?? '', view: (viewRaw ?? '') as 'D' | 'V' | '' };
 }
 
 /**
@@ -155,11 +168,8 @@ export function parseSpecimenAndView(filename) {
  *
  * Mirrors the slug rule in scripts/migrate-species.js (lower(genus || '-' || species))
  * and in the spike's parse-classify.mjs:95.
- *
- * @param {string} binomial
- * @returns {string}
  */
-export function toSpeciesSlug(binomial) {
+export function toSpeciesSlug(binomial: string): string {
   if (typeof binomial !== 'string' || !binomial) return '';
   return binomial.toLowerCase().trim().replace(/\s+/g, '-');
 }

@@ -1,5 +1,5 @@
 /**
- * scripts/lib/dropbox-list.js
+ * scripts/lib/dropbox-list.ts
  *
  * Phase 26 (v2.2 high-res photos): paginated Dropbox shared-link listing helper.
  *
@@ -23,6 +23,30 @@
  * has fetch natively; see 26-PATTERNS.md "What to avoid").
  */
 
+// D-01 consumed-field interface for a file/folder entry
+export interface DropboxEntry {
+  '.tag': string;
+  name: string;
+  path_display?: string;
+  size?: number;
+  server_modified?: string;
+  content_hash?: string;
+}
+
+// D-01 consumed-field interface for list_folder / list_folder/continue response
+interface DropboxListPage {
+  entries: DropboxEntry[];
+  has_more: boolean;
+  cursor: string;
+}
+
+// D-03 guard: validates only consumed fields; extra fields ignored
+function isDropboxListPage(data: unknown): data is DropboxListPage {
+  if (typeof data !== 'object' || data === null) return false;
+  const d = data as Record<string, unknown>;
+  return Array.isArray(d['entries']) && typeof d['has_more'] === 'boolean';
+}
+
 /**
  * Make a single Dropbox API call. Throws an Error with shape
  * `${endpoint} → ${status}: ${text}` on non-2xx responses; returns parsed
@@ -30,12 +54,9 @@
  * header into error response bodies, so the token never leaks via this
  * error path (T-26.02-01 mitigation).
  *
- * @param {string} endpoint - Path beginning with `/`, e.g. `/2/files/list_folder`
- * @param {object} body     - JSON-serializable body
- * @param {string} token    - Dropbox OAuth bearer token
- * @returns {Promise<any>}  - Parsed JSON response
+ * Return type is `Promise<unknown>` — callers narrow via the guard (D-01/D-03).
  */
-export async function dbxCall(endpoint, body, token) {
+export async function dbxCall(endpoint: string, body: unknown, token: string): Promise<unknown> {
   const res = await fetch(`https://api.dropboxapi.com${endpoint}`, {
     method: 'POST',
     headers: {
@@ -60,19 +81,20 @@ export async function dbxCall(endpoint, body, token) {
  * Per-page progress is written to process.stderr so callers that pipe
  * stdout to a file do not get progress noise.
  *
- * @param {object} params
- * @param {string} params.shareUrl - The Dropbox shared-folder URL (scl/fo/.../?rlkey=...)
- * @param {string} params.token    - Dropbox OAuth bearer token
- * @yields {object} A Dropbox entry object: `{ '.tag', name, path_display, size, server_modified, content_hash, ... }`
+ * Each dbxCall result is narrowed with isDropboxListPage guard (D-01/D-03).
+ * The while(true)+break shape satisfies noImplicitReturns (RESEARCH).
  */
-export async function* listSharedFolder({ shareUrl, token }) {
+export async function* listSharedFolder(
+  params: { shareUrl: string; token: string },
+): AsyncGenerator<DropboxEntry, void, undefined> {
+  const { shareUrl, token } = params;
   let firstPage = true;
-  let cursor = null;
+  let cursor = '';
   let pages = 0;
 
   while (true) {
     pages++;
-    const data = firstPage
+    const raw = firstPage
       ? await dbxCall('/2/files/list_folder', {
           path: '',
           shared_link: { url: shareUrl },
@@ -86,11 +108,15 @@ export async function* listSharedFolder({ shareUrl, token }) {
         }, token)
       : await dbxCall('/2/files/list_folder/continue', { cursor }, token);
 
-    for (const e of data.entries) yield e;
-    process.stderr.write(`[dropbox-list] page ${pages}: +${data.entries.length} entries\n`);
+    if (!isDropboxListPage(raw)) {
+      throw new Error(`[dropbox-list] unexpected response shape from Dropbox API`);
+    }
 
-    if (!data.has_more) break;
-    cursor = data.cursor;
+    for (const e of raw.entries) yield e;
+    process.stderr.write(`[dropbox-list] page ${pages}: +${raw.entries.length} entries\n`);
+
+    if (!raw.has_more) break;
+    cursor = raw.cursor;
     firstPage = false;
   }
 }

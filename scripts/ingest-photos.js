@@ -25,8 +25,8 @@ import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 
-import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/parse-photo-filename.js';
-import { dbxCall } from './lib/dropbox-list.js';
+import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/parse-photo-filename.ts';
+import { dbxCall } from './lib/dropbox-list.ts';
 import { readManifest, writeManifest, sortForInvestigation } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------

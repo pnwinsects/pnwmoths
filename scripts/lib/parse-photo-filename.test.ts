@@ -4,7 +4,7 @@ import {
   extractBinomial,
   parseSpecimenAndView,
   toSpeciesSlug,
-} from './parse-photo-filename.js';
+} from './parse-photo-filename.ts';
 
 // ---------------------------------------------------------------------------
 // extractBinomial — returns { binomial, bucketHint }
@@ -143,10 +143,10 @@ describe('toSpeciesSlug', () => {
   });
 
   it('returns "" for null (defensive default; no throw)', () => {
-    assert.equal(toSpeciesSlug(null), '');
+    assert.equal(toSpeciesSlug(null as unknown as string), '');
   });
 
   it('returns "" for undefined (defensive default; no throw)', () => {
-    assert.equal(toSpeciesSlug(undefined), '');
+    assert.equal(toSpeciesSlug(undefined as unknown as string), '');
   });
 });
