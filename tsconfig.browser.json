@@ -15,6 +15,7 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "types": ["vite/client"],
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "noEmit": true
   },
