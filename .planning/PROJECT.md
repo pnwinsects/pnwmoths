@@ -16,7 +16,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - Full JS→TS conversion of `src/` (Lit components + Eleventy data/lib files) and all `scripts/` (build/data pipeline), big-bang per area; all `node --test` test files migrated
 - `strict` tsconfig + `tsc --noEmit` wired into the build pipeline and GitHub Actions PR check (type errors fail the build)
 - Schema-as-source-of-truth for data row shapes (Zod suggested, not mandatory) deriving TS types from one definition
-- Build-time verification of all data contracts: per-species Parquet rows, fetched JSON data files (`species-photos.json`, taxon tree, `species-states.json`), and source CSVs as input guards
+- Validation of all data contracts crossing the build→client boundary, by trust-via-immutability: static TS for build-locked data (CSV→DuckDB→HTML, baked-in JSON); load-time structure validation (not per-row, O(columns)) for the only dynamically-fetched artifacts — `records.parquet` and `species-states.json`; source CSVs guarded at build by DuckDB typed reads + integrity SQL
 - `eleventy.config.js` and Vite tooling TS-compatible; tests green throughout
 
 ## Current State: v2.2 shipped — High-resolution species photos

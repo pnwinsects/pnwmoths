@@ -2,7 +2,9 @@
 
 **Defined:** 2026-06-09
 **Core Value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Milestone Goal:** Convert the entire codebase from JavaScript to strict TypeScript and enforce build-time validation of every data contract crossing the build→client boundary, so the project is safer to maintain and refactor. (Issue #36 — no user-facing behavior change.)
+**Milestone Goal:** Convert the entire codebase from JavaScript to strict TypeScript and enforce validation of every data contract crossing the build→client boundary — at build time for build-locked data, at load time for data fetched dynamically from the CDN — so the project is safer to maintain and refactor. (Issue #36 — no user-facing behavior change.)
+
+**Validation principle (decided in Phase 33 discussion — trust by immutability):** Data generated inside the build or pinned to a content hash cannot disagree with the code that uses it → static TypeScript types only, zero runtime cost. Data fetched dynamically from a mutable CDN URL crosses a real trust boundary → runtime validation, but of **structure/schema, not per-row** (O(columns), independent of dataset size). The only dynamically-fetched artifacts are per-species `records.parquet` and `species-states.json`; everything else is build-locked. See [33-CONTEXT.md](phases/33-toolchain-schema-scaffolding/33-CONTEXT.md).
 
 ## v1 Requirements
 
@@ -21,10 +23,11 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 - [ ] **SCHEMA-01**: A shared `src/types/` schema module defines one schema per data entity (occurrence record, species, glossary word, species image, species photo, species-state, taxon node), importable by both Node build scripts and browser components
 - [ ] **SCHEMA-02**: TypeScript row/record types are derived from the schemas (single source of truth) rather than maintained separately
 - [ ] **SCHEMA-03**: Schemas are profiled against the full production dataset (per-column nullability) before finalization so they accept all real data without false rejections
-- [ ] **SCHEMA-04**: The build fails with a clear error when generated per-species Parquet does not conform to its schema (build-time round-trip verification)
-- [ ] **SCHEMA-05**: The build fails when emitted JSON data files (`species-photos.json`, taxon tree, `species-states.json`) do not conform to their schemas
-- [ ] **SCHEMA-06**: Source CSV inputs are validated against schemas at build time, failing fast on malformed input data
-- [ ] **SCHEMA-07**: `npm run verify:parquet` validates every species' Parquet against the schema across the full dataset, runnable on demand without slowing the default build
+- [ ] **SCHEMA-04**: Build-generated Parquet is trusted (build-locked); the build keeps only a cheap one-sample sanity check (read one species' Parquet back, validate its schema) to catch write-path bugs before deploy. The primary Parquet guard is load-time (see SCHEMA-08), not a full build-time round-trip
+- [ ] **SCHEMA-05**: Build-locked JSON (taxon tree, `species-photos.json` — baked into HTML) is covered by static TS types at authoring; the dynamically-fetched `species-states.json` is validated at load time (see SCHEMA-08)
+- [ ] **SCHEMA-06**: Source CSV input correctness is enforced at build by DuckDB's typed `read_csv` (fails on bad coercion) plus the existing integrity SQL; TS types describe the post-read shape. No separate per-row Zod parsing of CSVs in the hot path
+- [ ] **SCHEMA-07**: `npm run verify:parquet` validates every species' Parquet against the schema across the full dataset, runnable on demand without slowing the default build (scaling with dataset size is acceptable here — it is the explicit offline thorough check)
+- [ ] **SCHEMA-08**: Data fetched dynamically from the CDN is validated at load time against its schema by **structure, not per-row** — O(columns), independent of dataset size: `records.parquet` via its hyparquet column metadata, `species-states.json` by top-level + element shape. Runs in production at negligible cost using `zod/mini` or a hand-rolled guard
 
 ### MIG — JavaScript → TypeScript Migration
 
@@ -38,7 +41,7 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 ### CI — Enforcement & Regression Safety
 
 - [ ] **CI-01**: `tsc --noEmit` runs as a gate in the GitHub Actions PR-check and deploy workflows; type errors fail CI
-- [ ] **CI-02**: Each migration area is verified to produce byte-identical `_site/` output versus the pre-migration baseline (mechanical proof of no behavior change)
+- [ ] **CI-02**: Each build-side migration area (Phases 34–36) produces byte-identical `_site/` output versus the pre-migration baseline. From the client-bundle migration (Phase 37) onward, build-generated data files (Parquet/JSON) stay byte-identical and rendered HTML stays identical except for content-hashed asset filenames; interactive-behavior equivalence is proven by the full test suite (literal byte-identity of re-hashed JS bundles is not expected)
 - [ ] **CI-03**: `npm run build:data` stays within budget after validation is added (<60s locally), keeping the under-5-minute CI build target intact (addresses MAINT-03)
 
 ## Future Requirements
@@ -82,6 +85,7 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | SCHEMA-05 | Phase 35 | Pending |
 | SCHEMA-06 | Phase 35 | Pending |
 | SCHEMA-07 | Phase 35 | Pending |
+| SCHEMA-08 | Phase 37 | Pending |
 | MIG-01 | Phase 34 | Pending |
 | MIG-02 | Phase 35 | Pending |
 | MIG-03 | Phase 36 | Pending |
@@ -93,10 +97,10 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | CI-03 | Phase 38 | Pending |
 
 **Coverage:**
-- v1 requirements: 21 total
-- Mapped to phases: 21 ✓
+- v1 requirements: 22 total
+- Mapped to phases: 22 ✓
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-06-09*
-*Last updated: 2026-06-09 — traceability filled by roadmapper*
+*Last updated: 2026-06-09 — SCHEMA-04/05/06 re-scoped, SCHEMA-08 added, CI-02 refined after Phase 33 discussion (trust-by-immutability validation architecture)*

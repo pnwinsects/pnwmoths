@@ -479,10 +479,10 @@ Plans:
 **Success Criteria** (what must be TRUE):
 
   1. All `.js` files in `scripts/` are converted to `.ts`; all test files for the area are converted to `.ts` and pass via `node --test`; zero `tsc --noEmit` errors; no `@ts-ignore` or `allowJs`
-  2. `build-data.ts` validates source CSV inputs against the `Species`, `SpeciesImage`, and `OccurrenceRecord` schemas at import time — a deliberately malformed row in a source CSV causes the build to fail with a clear Zod error before any Parquet is written (SCHEMA-06)
-  3. After Parquet generation, `build-data.ts` reads back a sample Parquet file (one species, all rows) via DuckDB and validates every row against `OccurrenceRecordSchema` — a schema mismatch causes the build to fail (SCHEMA-04); emitted JSON files (`species-photos.json`, taxon tree, `species-states.json`) are validated against their schemas post-emit (SCHEMA-05)
-  4. `npm run verify:parquet` exists as a standalone script that reads every species' Parquet file with hyparquet and validates all rows against `OccurrenceRecordSchema`; it runs independently of `npm run build` and completes on the full dataset without crashing (SCHEMA-07)
-  5. `time npm run build:data` completes in under 60 seconds locally; `_site/` output is byte-identical to the pre-migration baseline
+  2. Source CSV input correctness is enforced at build by DuckDB's typed `read_csv` (a bad value that won't coerce fails the build) plus the existing integrity SQL; TS types describe the post-read shape. No separate per-row Zod parsing of CSVs in the hot path (SCHEMA-06)
+  3. After Parquet generation, `build-data.ts` reads back **one** species' Parquet via DuckDB/hyparquet and validates its **column schema** (a cheap write-path sanity check, not a full per-row pass) — a schema mismatch fails the build (SCHEMA-04). Build-locked JSON (taxon tree, `species-photos.json`, baked into HTML) is covered by static TS types; `species-states.json` is validated at load time in Phase 37, not here (SCHEMA-05)
+  4. `npm run verify:parquet` exists as a standalone script that reads every species' Parquet file with hyparquet and validates all rows against `OccurrenceRecordSchema`; it runs independently of `npm run build` and completes on the full dataset without crashing — scaling with dataset size is acceptable here as the explicit offline thorough check (SCHEMA-07)
+  5. `time npm run build:data` completes in under 60 seconds locally; `_site/` output is byte-identical to the pre-migration baseline (Phase 35 is build-side only — no client-bundle change)
 
 **Plans**: TBD
 
@@ -502,15 +502,16 @@ Plans:
 
 ### Phase 37: Lit Web Components Migration
 
-**Goal**: All Lit web components in `src/components/` are converted to TypeScript (the consumer side), the `pnwm-filter-change` event is typed via a shared `FilterChangeDetail` interface, and the production Vite bundle contains no Zod runtime code
+**Goal**: All Lit web components in `src/components/` are converted to TypeScript (the consumer side), the `pnwm-filter-change` event is typed via a shared `FilterChangeDetail` interface, and dynamically-fetched data is validated at load time by structure (not per-row) — with only a minimal validator (`zod/mini` or hand-rolled) in the client bundle, never full Zod
 **Depends on**: Phase 36
-**Requirements**: MIG-04
+**Requirements**: MIG-04, SCHEMA-08
 **Success Criteria** (what must be TRUE):
 
   1. All `.js` files in `src/components/` are converted to `.ts`; all test files for the area are converted to `.ts` and pass via `node --test`; zero `tsc --noEmit` errors; no `@ts-ignore` or `allowJs`
   2. A `FilterChangeDetail` interface is defined in `src/types/` and used as the generic type argument for `CustomEvent<FilterChangeDetail>` at both dispatch and listener sites; an `HTMLElementEventMap` declaration merge ensures `addEventListener('pnwm-filter-change', ...)` callbacks are typed without casting
-  3. The Vite production bundle (`_site/assets/main-*.js`) is non-empty and contains no `ZodError` or `ZodType` strings — Zod is absent from the client bundle (tree-shaken or never imported in production paths)
-  4. `_site/` output is byte-identical to the pre-migration baseline; interactive features (map, phenology chart, filter bar, OSD lightbox, taxon browser) remain functionally unchanged as verified by the full test suite
+  3. Load-time validation runs at the two dynamic CDN boundaries (SCHEMA-08): `loadParquet()` validates `records.parquet`'s **column schema** from hyparquet metadata, and the `species-states.json` fetch validates top-level + element structure — both O(columns), independent of dataset size, in production
+  4. The Vite production bundle contains **no full-Zod** runtime (no `ZodError`/`ZodType` from the full build); only `zod/mini` (or a hand-rolled guard) appears, and its measured gzipped delta over the pre-migration bundle is small and recorded
+  5. Build-generated data files (Parquet/JSON) are byte-identical to the pre-migration baseline and rendered HTML is identical except for content-hashed asset filenames; interactive features (map, phenology chart, filter bar, OSD lightbox, taxon browser) remain functionally unchanged as verified by the full test suite
 
 **Plans**: TBD
 **UI hint**: yes
@@ -524,7 +525,7 @@ Plans:
 
   1. The GitHub Actions `pr-check.yml` and `deploy.yml` workflows include a `tsc --noEmit` step that runs across both tsconfigs; a PR introducing a type error fails CI before merge (CI-01)
   2. All ~191 tests pass via `node --test` in CI (all test files converted to `.ts`); `node --test` uses Node 24 native type-stripping with no additional loader (MIG-05)
-  3. A CI step compares the `_site/` output hash against a committed pre-migration baseline snapshot and fails if any byte differs — proving no behavior change was introduced during the migration (CI-02)
+  3. A CI step compares the **stable** parts of `_site/` against a committed pre-migration baseline — build-generated data files (Parquet/JSON) byte-identical, and rendered HTML identical modulo content-hashed asset filenames — and fails on any unexpected difference; behavior equivalence of the re-hashed JS bundle is covered by the full test suite (CI-02)
   4. `npm run build:data` completes in under 60 seconds in CI, confirming the under-5-minute total build budget remains intact after all validation gates are added (CI-03)
   5. A final grep confirms zero `.js` source files remain in `scripts/`, `scripts/lib/`, `src/_lib/`, `src/_data/`, and `src/components/`; zero `allowJs` entries in any tsconfig; zero `@ts-ignore` comments; zero unguarded `as unknown as T` double-casts (MIG-06)
 
