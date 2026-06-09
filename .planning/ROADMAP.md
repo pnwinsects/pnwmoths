@@ -453,7 +453,7 @@ Plans:
   2. `typescript`, `zod`, `@types/node`, and `@types/leaflet` are installed as devDependencies; a local `src/types/eleventy.d.ts` shim (~30 lines) covers every Eleventy API method called in the codebase
   3. `src/types/schemas.ts` (or per-entity files under `src/types/`) defines Zod schemas for all seven data entities: `OccurrenceRecord`, `Species`, `GlossaryWord`, `SpeciesImage`, `SpeciesPhoto`, `SpeciesState`, and the taxon tree node; TypeScript types are derived from each schema via `z.infer<>`
   4. Every schema has been profiled against the full production dataset (85,933 records, 1,348 species) before finalization: all nullable columns use `.nullable()` and no schema rejects any real row from the current production data
-  5. Both `isolatedModules: true` and `useDefineForClassFields: false` (browser tsconfig) are set; a grep for `\benum\b` in all source directories returns empty; the existing `.js` build still produces `_site/` with 1,364 species pages unchanged
+  5. Both `isolatedModules: true` and `useDefineForClassFields: false` (browser tsconfig) are set; a grep for `\benum\b` in all source directories returns empty; the existing `.js` build still produces `_site/` with 1,433 species pages unchanged (1,364 was the stale Phase 17 figure; current data is 1,433 as of 2026-06-09)
 
 **Plans**: 2 plans
 Plans:
@@ -475,7 +475,7 @@ Plans:
   1. All `.js` files in `scripts/lib/` (`dropbox-download`, `dropbox-list`, `manifest`, `parse-photo-filename`) and `src/_lib/` (`glossary-transform`) are renamed to `.ts` with full strict type annotations; no `.js` source files remain in either directory
   2. All test files for these areas are converted to `.ts` and run successfully via `node --test` with Node 24 native type-stripping; zero type errors from `tsc --noEmit` on these files
   3. No `@ts-ignore`, no `allowJs`, and no unguarded `as unknown as T` double-casts appear in any converted file
-  4. `npm run build` still produces 1,364 species pages with `_site/` output byte-identical to the pre-migration baseline (no behavior change)
+  4. `npm run build` still produces the pre-migration species-page count (1,433 species pages as of 2026-06-09 — the count is data-determined and may grow) with `_site/` output byte-identical to the pre-migration baseline (no behavior change)
 
 **Plans**: TBD
 
