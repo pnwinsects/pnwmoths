@@ -127,6 +127,12 @@ Items acknowledged and carried forward:
 | v2.2 | `*custom` Dropbox sub-folder | Deferred until contents understood — out of scope for v2.2 | v2.2 |
 | v2.2 | External taxonomic API (GBIF/ITIS) synonym auto-resolution | Manual `species-synonyms.csv` is faster for ~30–80 decisions; revisit if residue stays large | v2.2 |
 
+## Quick Tasks Completed
+
+| Quick ID | Description | Date | Status |
+|----------|-------------|------|--------|
+| 260609-e2b | Factor occurrence popup into its own Lit component (`pnwm-occurrence-popup`) | 2026-06-09 | complete ✓ |
+
 ## Session Continuity
 
 Last session: 2026-05-24T02:58:19.326Z
