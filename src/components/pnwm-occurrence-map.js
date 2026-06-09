@@ -98,7 +98,7 @@ class PnwmOccurrenceMap extends LitElement {
     for (const r of visible) {
       if (r.latitude != null && r.longitude != null) {
         const marker = L.circleMarker([r.latitude, r.longitude], {
-          radius: 6,
+          radius: 3,
           color: '#0172ad',
           fillOpacity: 0.7,
         });
