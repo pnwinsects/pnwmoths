@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
-status: executing
-stopped_at: Phase 33 Plan 01 complete
-last_updated: "2026-06-09T22:07:00Z"
-last_activity: 2026-06-09 -- Phase 33 Plan 01 executed (tsconfig layout + typecheck)
+status: verifying
+stopped_at: Phase 33 context gathered
+last_updated: "2026-06-09T22:13:22.324Z"
+last_activity: 2026-06-09
 progress:
   total_phases: 20
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 0
+  completed_plans: 2
+  percent: 5
 ---
 
 # Project State
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 ## Current Position
 
-Phase: 33 (toolchain-schema-scaffolding) — EXECUTING
-Plan: 2 of 2 (Plan 01 complete)
-Status: Executing Phase 33
-Last activity: 2026-06-09 -- Phase 33 execution started
+Phase: 33 (toolchain-schema-scaffolding) — COMPLETE
+Plan: 2 of 2 (Plan 02 complete)
+Status: Phase complete — ready for verification
+Last activity: 2026-06-09
 
 ```
 v3.0 Progress: [··········] 0/6 phases (0%)
@@ -84,6 +84,9 @@ Recent decisions affecting current work:
 - Phase 33 Plan 01: `allowImportingTsExtensions:true` (not `rewriteRelativeImportExtensions`) in tsconfig.node.json — semantically correct for Node 24 type-stripping + noEmit workflow
 - Phase 33 Plan 01: typecheck script invokes each sub-config explicitly (no tsc --build/composite) — tsc does not follow references in plain --noEmit mode
 - Phase 33 Plan 01: zod kept in dependencies (not devDeps) — consumed by build scripts at build time
+- Phase 33 Plan 02: z.nullable() (not z.optional()) for all profiled-null columns — hyparquet writes null not undefined; county 100% null would reject all records
+- Phase 33 Plan 02: allowImportingTsExtensions:true added to tsconfig.browser.json — required for .ts extension imports in src/types/ under the browser config
+- Phase 33 Plan 02: types:[node] added to tsconfig.node.json — TypeScript 6 strict NodeNext does not auto-include @types/node globals without explicit types field
 
 ### Roadmap Evolution
 
@@ -147,6 +150,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-09T20:15:15.311Z
+Last session: 2026-06-09T22:13:22.317Z
 Stopped at: Phase 33 context gathered
-Resume file: .planning/phases/33-toolchain-schema-scaffolding/33-CONTEXT.md
+Resume file: None

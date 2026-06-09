@@ -115,7 +115,7 @@
 
 **v3.0 TypeScript Frontend & Build-Time Data Validation (Phases 33–38)**
 
-- [ ] **Phase 33: Toolchain & Schema Scaffolding** - Three tsconfigs, Zod schemas + derived types for all data entities, mandatory data-profile spike, `npm run typecheck` green
+- [x] **Phase 33: Toolchain & Schema Scaffolding** - Three tsconfigs, Zod schemas + derived types for all data entities, mandatory data-profile spike, `npm run typecheck` green (completed 2026-06-09)
 - [ ] **Phase 34: scripts/lib & src/_lib Migration** - Smallest areas converted first; proves Node 24 native type-stripping path end-to-end
 - [ ] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed
 - [ ] **Phase 36: Eleventy Data Files & Config Migration** - Middle layer: `src/_data/` and `eleventy.config.ts` converted with GITHUB_PAGES conditional preserved
@@ -459,11 +459,11 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 33-01-PLAN.md — Repair the slopcheck dependency install (devDependencies, @types/node@^24, drop @types/openseadragon) + create 3 tsconfigs + Eleventy type-shim + typecheck script (TS-01, TS-02, TS-03, TS-04, TS-05)
+- [x] 33-01-PLAN.md — Repair the slopcheck dependency install (devDependencies, @types/node@^24, drop @types/openseadragon) + create 3 tsconfigs + Eleventy type-shim + typecheck script (TS-01, TS-02, TS-03, TS-04, TS-05)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 33-02-PLAN.md — Author 7-entity Zod schema module + z.infer<> types + SCHEMA-03 acceptance harness against full production data + DATA-PROFILE.md + no-enum/1,364-page no-regression gate (SCHEMA-01, SCHEMA-02, SCHEMA-03)
+- [x] 33-02-PLAN.md — Author 7-entity Zod schema module + z.infer<> types + SCHEMA-03 acceptance harness against full production data + DATA-PROFILE.md + no-enum/1,364-page no-regression gate (SCHEMA-01, SCHEMA-02, SCHEMA-03)
 
 ### Phase 34: scripts/lib & src/_lib Migration
 
@@ -577,7 +577,7 @@ Plans:
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
-| 33. Toolchain & Schema Scaffolding | v3.0 | 0/TBD | Not started | - |
+| 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete   | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 0/TBD | Not started | - |
 | 35. Build Pipeline Scripts Migration | v3.0 | 0/TBD | Not started | - |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
