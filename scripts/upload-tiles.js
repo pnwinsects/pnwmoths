@@ -36,7 +36,7 @@ import { resolve, join, relative } from 'node:path';
 import { rm, unlink, readdir } from 'node:fs/promises';
 import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { readManifest, writeManifest, advanceStatus } from './lib/manifest.js';
+import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-plates.js

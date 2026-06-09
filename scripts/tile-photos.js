@@ -37,7 +37,7 @@ import { resolve, join, dirname } from 'node:path';
 import { mkdir, unlink } from 'node:fs/promises';
 import { existsSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { readManifest, writeManifest, advanceStatus } from './lib/manifest.js';
+import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
 import { downloadSharedFile } from './lib/dropbox-download.js';
 
 // ---------------------------------------------------------------------------

@@ -27,7 +27,7 @@ import { parse } from 'csv-parse/sync';
 
 import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/parse-photo-filename.js';
 import { dbxCall } from './lib/dropbox-list.js';
-import { readManifest, writeManifest, sortForInvestigation } from './lib/manifest.js';
+import { readManifest, writeManifest, sortForInvestigation } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; D-10 env-vars-at-invocation;

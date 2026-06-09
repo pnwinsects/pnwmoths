@@ -9,7 +9,18 @@ import {
   writeManifest,
   sortForInvestigation,
   advanceStatus,
-} from './manifest.js';
+} from './manifest.ts';
+import type { ManifestRow, ManifestStatus } from './manifest.ts';
+
+// Helper to build a ManifestRow with defaults for fields not under test.
+function makeTestRow(partial: Partial<ManifestRow> & { binomial_raw?: string; match_bucket?: string; _id?: string }): ManifestRow {
+  return {
+    content_hash: '', dropbox_path: '', size_bytes: '', server_modified: '',
+    filename_raw: '', binomial_raw: '', specimen_id: '', view: '',
+    binomial_resolved: '', species_slug: '', match_bucket: '', status: '', last_error: '',
+    ...partial,
+  };
+}
 
 // ---------------------------------------------------------------------------
 // COLUMNS — pins the D-05 manifest schema and column order
@@ -38,11 +49,13 @@ describe('COLUMNS', () => {
   });
 
   it('uses content_hash as the row-identity column (D-04)', () => {
-    assert.equal(COLUMNS[0], 'content_hash');
+    const firstCol = COLUMNS[0];
+    assert.equal(firstCol, 'content_hash');
   });
 
   it('terminates with last_error', () => {
-    assert.equal(COLUMNS[COLUMNS.length - 1], 'last_error');
+    const lastCol = COLUMNS[COLUMNS.length - 1];
+    assert.equal(lastCol, 'last_error');
   });
 });
 
@@ -122,8 +135,11 @@ describe('writeManifest → readManifest round-trip', () => {
       assert.equal(out.length, 3);
       // Field-by-field comparison; readManifest returns strings for all fields.
       for (let i = 0; i < input.length; i++) {
+        const outRow = out[i];
+        const inRow = input[i];
+        if (!outRow || !inRow) continue;
         for (const col of COLUMNS) {
-          assert.equal(out[i][col], input[i][col], `row ${i} column ${col} survived round-trip`);
+          assert.equal(outRow[col], inRow[col], `row ${i} column ${col} survived round-trip`);
         }
       }
     } finally {
@@ -151,15 +167,15 @@ describe('writeManifest → readManifest round-trip', () => {
     try {
       // Row only sets a couple of fields; the rest should be empty strings,
       // but column ORDER must still match D-05.
-      const rows = [{ content_hash: 'hhh', match_bucket: 'clean-match' }];
+      const rows = [makeTestRow({ content_hash: 'hhh', match_bucket: 'clean-match' })];
       await writeManifest(path, rows);
       const out = await readManifest(path);
       assert.equal(out.length, 1);
-      assert.equal(out[0].content_hash, 'hhh');
-      assert.equal(out[0].match_bucket, 'clean-match');
+      assert.equal(out[0]?.content_hash, 'hhh');
+      assert.equal(out[0]?.match_bucket, 'clean-match');
       // Missing fields read back as the empty string.
-      assert.equal(out[0].dropbox_path, '');
-      assert.equal(out[0].last_error, '');
+      assert.equal(out[0]?.dropbox_path, '');
+      assert.equal(out[0]?.last_error, '');
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
@@ -176,7 +192,7 @@ describe('sortForInvestigation', () => {
   });
 
   it('returns a single-row array unchanged for a one-row input', () => {
-    const rows = [{ binomial_raw: 'x', match_bucket: 'clean-match' }];
+    const rows = [makeTestRow({ binomial_raw: 'x', match_bucket: 'clean-match' })];
     assert.deepEqual(sortForInvestigation(rows), rows);
   });
 
@@ -184,15 +200,20 @@ describe('sortForInvestigation', () => {
     // Six rows; investigation buckets in INVESTIGATION_BUCKETS (genus-only,
     // likely-synonym, provisional, unparseable) should rise to the top,
     // grouped by binomial_raw, with the most-frequent group first.
-    const grammia1 = { binomial_raw: 'grammia nevadensis', match_bucket: 'genus-only',     _id: 'g1' };
-    const grammia2 = { binomial_raw: 'grammia nevadensis', match_bucket: 'genus-only',     _id: 'g2' };
-    const smerinthus = { binomial_raw: 'smerinthus ophthalmica', match_bucket: 'likely-synonym', _id: 's1' };
-    const monostoecha = { binomial_raw: 'monostoecha n sp',  match_bucket: 'provisional',  _id: 'p1' };
-    const clean1 = { binomial_raw: 'abagrotis apposita',     match_bucket: 'clean-match',  _id: 'c1' };
-    const clean2 = { binomial_raw: 'abagrotis apposita',     match_bucket: 'clean-match',  _id: 'c2' };
+    // _id is an extra field used only to identify rows in assertions.
+    type RowWithId = ManifestRow & { _id: string };
+    const row = (partial: Partial<ManifestRow> & { _id: string }): RowWithId =>
+      makeTestRow(partial) as RowWithId;
+
+    const grammia1 = row({ binomial_raw: 'grammia nevadensis', match_bucket: 'genus-only',     _id: 'g1' });
+    const grammia2 = row({ binomial_raw: 'grammia nevadensis', match_bucket: 'genus-only',     _id: 'g2' });
+    const smerinthus = row({ binomial_raw: 'smerinthus ophthalmica', match_bucket: 'likely-synonym', _id: 's1' });
+    const monostoecha = row({ binomial_raw: 'monostoecha n sp',  match_bucket: 'provisional',  _id: 'p1' });
+    const clean1 = row({ binomial_raw: 'abagrotis apposita',     match_bucket: 'clean-match',  _id: 'c1' });
+    const clean2 = row({ binomial_raw: 'abagrotis apposita',     match_bucket: 'clean-match',  _id: 'c2' });
 
     const input = [clean1, grammia1, smerinthus, clean2, monostoecha, grammia2];
-    const out = sortForInvestigation(input);
+    const out = sortForInvestigation(input) as RowWithId[];
 
     assert.equal(out.length, 6);
     // First two are the highest-frequency investigation binomial (grammia, 2 rows),
@@ -201,17 +222,20 @@ describe('sortForInvestigation', () => {
     // Next come the two single-count investigation rows. The two singletons
     // both have count 1, so ties break by original index — smerinthus (idx 2)
     // before monostoecha (idx 4).
-    assert.equal(out[2]._id, 's1');
-    assert.equal(out[3]._id, 'p1');
+    assert.equal(out[2]?._id, 's1');
+    assert.equal(out[3]?._id, 'p1');
     // Clean-match rows trail in original order.
     assert.deepEqual(out.slice(4, 6).map(r => r._id), ['c1', 'c2']);
   });
 
   it('does not mutate the input array', () => {
+    type RowWithId = ManifestRow & { _id: string };
     const rows = [
-      { binomial_raw: 'foo', match_bucket: 'genus-only', _id: 'a' },
-      { binomial_raw: 'bar', match_bucket: 'clean-match', _id: 'b' },
+      makeTestRow({ binomial_raw: 'foo', match_bucket: 'genus-only' }) as RowWithId,
+      makeTestRow({ binomial_raw: 'bar', match_bucket: 'clean-match' }) as RowWithId,
     ];
+    (rows[0] as RowWithId)._id = 'a';
+    (rows[1] as RowWithId)._id = 'b';
     const lengthBefore = rows.length;
     const snapshot = rows.map(r => r._id);
     sortForInvestigation(rows);
@@ -220,31 +244,33 @@ describe('sortForInvestigation', () => {
   });
 
   it('treats likely-synonym, provisional, and unparseable as investigation buckets', () => {
-    const rows = [
-      { binomial_raw: 'a', match_bucket: 'clean-match', _id: 'clean' },
-      { binomial_raw: 'b', match_bucket: 'likely-synonym', _id: 'ls' },
-      { binomial_raw: 'c', match_bucket: 'provisional', _id: 'pv' },
-      { binomial_raw: '',  match_bucket: 'unparseable', _id: 'up' },
+    type RowWithId = ManifestRow & { _id: string };
+    const rows: RowWithId[] = [
+      Object.assign(makeTestRow({ binomial_raw: 'a', match_bucket: 'clean-match' }), { _id: 'clean' }),
+      Object.assign(makeTestRow({ binomial_raw: 'b', match_bucket: 'likely-synonym' }), { _id: 'ls' }),
+      Object.assign(makeTestRow({ binomial_raw: 'c', match_bucket: 'provisional' }), { _id: 'pv' }),
+      Object.assign(makeTestRow({ binomial_raw: '',  match_bucket: 'unparseable' }), { _id: 'up' }),
     ];
-    const out = sortForInvestigation(rows);
+    const out = sortForInvestigation(rows) as RowWithId[];
     // All three investigation buckets rise to the top.
     assert.deepEqual(out.slice(0, 3).map(r => r.match_bucket).sort(), ['likely-synonym', 'provisional', 'unparseable']);
-    assert.equal(out[3]._id, 'clean');
+    assert.equal(out[3]?._id, 'clean');
   });
 
   it('groups empty-string binomial_raw values (unparseables) as their own bucket', () => {
     // Two unparseables share binomial_raw === '', so they form a group of 2
     // and should sit above the single-count genus-only row even though
     // the genus-only row appears first in the input.
-    const rows = [
-      { binomial_raw: 'zeta', match_bucket: 'genus-only', _id: 'z' },
-      { binomial_raw: '',     match_bucket: 'unparseable', _id: 'u1' },
-      { binomial_raw: '',     match_bucket: 'unparseable', _id: 'u2' },
+    type RowWithId = ManifestRow & { _id: string };
+    const rows: RowWithId[] = [
+      Object.assign(makeTestRow({ binomial_raw: 'zeta', match_bucket: 'genus-only' }), { _id: 'z' }),
+      Object.assign(makeTestRow({ binomial_raw: '',     match_bucket: 'unparseable' }), { _id: 'u1' }),
+      Object.assign(makeTestRow({ binomial_raw: '',     match_bucket: 'unparseable' }), { _id: 'u2' }),
     ];
-    const out = sortForInvestigation(rows);
+    const out = sortForInvestigation(rows) as RowWithId[];
     // Most frequent investigation group (empty-string × 2) comes first.
     assert.deepEqual(out.slice(0, 2).map(r => r._id), ['u1', 'u2']);
-    assert.equal(out[2]._id, 'z');
+    assert.equal(out[2]?._id, 'z');
   });
 });
 
@@ -253,7 +279,7 @@ describe('sortForInvestigation', () => {
 // ---------------------------------------------------------------------------
 describe('advanceStatus', () => {
   // Helper to build a fully-populated row using every COLUMN.
-  function makeRow(overrides = {}) {
+  function makeRow(overrides: Partial<ManifestRow> = {}): ManifestRow {
     return {
       content_hash:      'aaa1111111111111111111111111111111111111111111111111111111111111',
       dropbox_path:      '/Abagrotis apposita-A-D.tif',
@@ -329,12 +355,12 @@ describe('advanceStatus', () => {
 
   it('throws TypeError on empty nextStatus', () => {
     assert.throws(
-      () => advanceStatus({}, ''),
-      (err) => {
-        assert.ok(err instanceof TypeError, `expected TypeError, got ${err.constructor.name}`);
+      () => advanceStatus({} as ManifestRow, '' as ManifestStatus),
+      (err: unknown) => {
+        assert.ok(err instanceof TypeError, `expected TypeError, got ${(err as Error).constructor.name}`);
         assert.ok(
-          err.message.includes('nextStatus must be a non-empty string'),
-          `unexpected message: ${err.message}`,
+          (err as TypeError).message.includes('nextStatus must be a non-empty string'),
+          `unexpected message: ${(err as TypeError).message}`,
         );
         return true;
       },

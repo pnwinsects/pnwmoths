@@ -17,7 +17,7 @@
 
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
-import { readManifest } from './lib/manifest.js';
+import { readManifest } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention).
