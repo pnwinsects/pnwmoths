@@ -131,7 +131,7 @@ Items acknowledged and carried forward:
 
 | Quick ID | Description | Date | Status |
 |----------|-------------|------|--------|
-| 260609-e2b | Factor occurrence popup into its own Lit component (`pnwm-occurrence-popup`) | 2026-06-09 | complete ✓ |
+| 260609-e2b | Factor occurrence popup into its own Lit component (`pnwm-occurrence-popup`) — closes #22 | 2026-06-09 | complete ✓ |
 
 ## Session Continuity
 
