@@ -60,12 +60,26 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 function formatPlace(r) {
   const parts = [r.locality, r.county && `${r.county} Co.`, r.state].filter(Boolean);
-  let s = parts.join(', ');
-  if (r.elevation_ft != null) {
-    const elev = `${r.elevation_ft.toLocaleString('en-US')} ft`;
-    s = s ? `${s} · ${elev}` : elev;
+  const tail = [];
+  if (r.elevation_ft != null) tail.push(`${r.elevation_ft.toLocaleString('en-US')} ft`);
+  if (r.latitude != null && r.longitude != null) {
+    tail.push(`${formatCoord(r.latitude)}, ${formatCoord(r.longitude)}`);
   }
-  return s || null;
+  const head = parts.join(', ');
+  const all = [head, ...tail].filter(Boolean);
+  return all.length ? all.join(' · ') : null;
+}
+
+/**
+ * Preserve source decimal precision (`String(n)` round-trips to the shortest
+ * decimal that produces the same double). Cap at 6 decimals (~10cm) to
+ * suppress the rare float-representation garbage that escapes from upstream.
+ */
+function formatCoord(n) {
+  const s = String(n);
+  const dot = s.indexOf('.');
+  if (dot < 0 || s.length - dot - 1 <= 6) return s;
+  return n.toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
 }
 
 function formatDateLine(r) {
