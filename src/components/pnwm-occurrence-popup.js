@@ -36,20 +36,80 @@ class PnwmOccurrencePopup extends LitElement {
     const r = this.record;
     if (!r) return html``;
 
-    const fields = [
-      { label: 'Locality', value: r.locality },
-      { label: 'State', value: r.state },
-      { label: 'County', value: r.county },
-      { label: 'Year', value: r.year },
-      { label: 'Month', value: r.month },
-      { label: 'Collector', value: r.collector },
-      { label: 'Type', value: r.record_type },
-    ].filter(({ value }) => value);
+    const place = formatPlace(r);
+    const dateLine = formatDateLine(r);
+    const attribution = formatAttribution(r);
+    const noteItems = formatNotes(r.notes);
 
-    return html`${fields.map(
-      ({ label, value }) => html`<p>${label}: ${value}</p>`
-    )}`;
+    return html`
+      ${place ? html`<p>${place}</p>` : null}
+      ${dateLine ? html`<p>${dateLine}</p>` : null}
+      ${attribution ? html`<p>${attribution}</p>` : null}
+      ${noteItems.map(
+        (parts) => html`<p class="pnwm-occ-note">${parts.map(
+          (p) => p.url
+            ? html`<a href=${p.url} target="_blank" rel="noopener noreferrer">${p.url}</a>`
+            : p.text
+        )}</p>`
+      )}
+    `;
   }
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function formatPlace(r) {
+  const parts = [r.locality, r.county && `${r.county} Co.`, r.state].filter(Boolean);
+  let s = parts.join(', ');
+  if (r.elevation_ft != null) {
+    const elev = `${r.elevation_ft.toLocaleString('en-US')} ft`;
+    s = s ? `${s} · ${elev}` : elev;
+  }
+  return s || null;
+}
+
+function formatDateLine(r) {
+  let date = null;
+  if (r.year && r.month && r.day) date = `${r.day} ${MONTHS[r.month - 1]} ${r.year}`;
+  else if (r.year && r.month) date = `${MONTHS[r.month - 1]} ${r.year}`;
+  else if (r.year) date = String(r.year);
+
+  if (date && r.record_type) return `${date} · ${r.record_type}`;
+  return date || r.record_type || null;
+}
+
+function formatAttribution(r) {
+  if (r.collector && r.collection) return `${r.collector} (${r.collection})`;
+  return r.collector || r.collection || null;
+}
+
+/**
+ * Split notes on `;`, trim each item, and tokenize URLs so the template can
+ * render real <a> elements. Lit's html template still escapes both attr values
+ * and text nodes, so this stays XSS-safe.
+ */
+function formatNotes(notes) {
+  if (!notes) return [];
+  const URL_RE = /https?:\/\/[^\s)]+/g;
+  return notes
+    .split(';')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((item) => {
+      const parts = [];
+      let last = 0;
+      let m;
+      while ((m = URL_RE.exec(item)) !== null) {
+        if (m.index > last) parts.push({ text: item.slice(last, m.index) });
+        // Strip trailing punctuation that's likely sentence-end, not URL.
+        const url = m[0].replace(/[.,;:!?)]+$/, '');
+        parts.push({ url });
+        last = m.index + url.length;
+      }
+      if (last < item.length) parts.push({ text: item.slice(last) });
+      URL_RE.lastIndex = 0;
+      return parts;
+    });
 }
 
 customElements.define('pnwm-occurrence-popup', PnwmOccurrencePopup);
