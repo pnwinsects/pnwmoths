@@ -116,7 +116,7 @@
 **v3.0 TypeScript Frontend & Build-Time Data Validation (Phases 33–38)**
 
 - [x] **Phase 33: Toolchain & Schema Scaffolding** - Three tsconfigs, Zod schemas + derived types for all data entities, mandatory data-profile spike, `npm run typecheck` green (completed 2026-06-09)
-- [ ] **Phase 34: scripts/lib & src/_lib Migration** - Smallest areas converted first; proves Node 24 native type-stripping path end-to-end
+- [x] **Phase 34: scripts/lib & src/_lib Migration** - Smallest areas converted first; proves Node 24 native type-stripping path end-to-end (completed 2026-06-09)
 - [ ] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed
 - [ ] **Phase 36: Eleventy Data Files & Config Migration** - Middle layer: `src/_data/` and `eleventy.config.ts` converted with GITHUB_PAGES conditional preserved
 - [ ] **Phase 37: Lit Web Components Migration** - Consumer side: `src/components/` fully typed, `FilterChangeDetail` event interface, Vite bundle verified Zod-free in production
