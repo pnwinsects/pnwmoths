@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
-import { applyGlossaryTerms, buildTermMap } from "./src/_lib/glossary-transform.js";
+import { applyGlossaryTerms, buildTermMap } from "./src/_lib/glossary-transform.ts";
 
 // On GitHub Pages the site lives under /pnwmoths/. actions/configure-pages sets
 // GITHUB_PAGES=true so the build knows to apply the prefix. Locally the dev

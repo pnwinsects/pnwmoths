@@ -1,12 +1,25 @@
 import { parse } from 'node-html-parser';
+import type { TextNode } from 'node-html-parser';
+
+export interface TermMapEntry {
+  term: string;
+  lower: string;
+  definition: string;
+  imageUrl: string;
+  regex: RegExp;
+}
+
+export type GlossaryRow = {
+  term: string;
+  definition: string;
+  image_filename?: string | null;
+};
 
 /**
  * Escape all regex metacharacters in a term string.
  * Required for terms like '1A+2A', 'W-mark', 'CuA1'.
- * @param {string} str
- * @returns {string}
  */
-export function escapeRegex(str) {
+export function escapeRegex(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
@@ -15,10 +28,8 @@ export function escapeRegex(str) {
  * Seven definitions in glossary.csv contain double quotes (Anterior, Patagium,
  * Posterior, Quadrifid, Scale, Subreniform spot, Trifid) — must escape before
  * embedding in title="..." or data-definition="...".
- * @param {string} str
- * @returns {string}
  */
-export function escapeHtml(str) {
+export function escapeHtml(str: string): string {
   return str
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
@@ -33,12 +44,8 @@ export function escapeHtml(str) {
  *
  * Uses lookbehind/lookahead instead of \b because \b fails for terms containing
  * metacharacters adjacent to word chars (e.g. '1A+2A').
- *
- * @param {Array<{term: string, definition: string, image_filename: string}>} rows
- * @param {string} cdnBaseUrl - CDN base URL (e.g. 'https://pnwmoths.b-cdn.net')
- * @returns {Array<{term: string, lower: string, definition: string, imageUrl: string, regex: RegExp}>}
  */
-export function buildTermMap(rows, cdnBaseUrl) {
+export function buildTermMap(rows: GlossaryRow[], cdnBaseUrl: string): TermMapEntry[] {
   const sorted = [...rows].sort((a, b) => b.term.length - a.term.length);
   return sorted.map(row => ({
     term: row.term,
@@ -61,14 +68,10 @@ export function buildTermMap(rows, cdnBaseUrl) {
  *
  * IMPORTANT: seen Set is initialized here (not at module scope) — prevents
  * cross-page state pollution when Eleventy calls this for 1,348 species pages.
- *
- * @param {string} html - Full rendered HTML string for one page
- * @param {ReturnType<typeof buildTermMap>} termMap - Pre-built term map
- * @returns {string} Modified HTML string
  */
-export function applyGlossaryTerms(html, termMap) {
+export function applyGlossaryTerms(html: string, termMap: TermMapEntry[]): string {
   const root = parse(html);
-  const seen = new Set(); // per-invocation — NEVER at module scope
+  const seen = new Set<string>(); // per-invocation — NEVER at module scope
 
   const elements = root.querySelectorAll('main p, main li, main h2, main h3');
   for (const el of elements) {
@@ -78,7 +81,7 @@ export function applyGlossaryTerms(html, termMap) {
     // Collect text nodes before iterating (mutation invalidates live NodeList)
     const textNodes = [...el.childNodes].filter(n => n.nodeType === 3);
     for (const textNode of textNodes) {
-      substituteTerms(textNode, termMap, seen);
+      substituteTerms(textNode as TextNode, termMap, seen);
     }
   }
   return root.toString();
@@ -89,12 +92,8 @@ export function applyGlossaryTerms(html, termMap) {
  * Advances a `pos` cursor through the raw text, finding the positionally-earliest
  * unseen term at each step and accumulating replacement HTML. One exchangeChild
  * call replaces the text node with the fully-substituted result.
- *
- * @param {import('node-html-parser').TextNode} textNode
- * @param {ReturnType<typeof buildTermMap>} terms
- * @param {Set<string>} seen - lower-cased terms already wrapped on this page
  */
-function substituteTerms(textNode, terms, seen) {
+function substituteTerms(textNode: TextNode, terms: TermMapEntry[], seen: Set<string>): void {
   const rawText = textNode.rawText; // rawText preserves existing HTML entities
   let html = '';
   let pos = 0;
@@ -102,7 +101,7 @@ function substituteTerms(textNode, terms, seen) {
 
   while (pos <= rawText.length) {
     // Find the positionally-earliest unseen term match from current position.
-    let earliest = null; // { entry, match }
+    let earliest: { entry: TermMapEntry; match: RegExpExecArray } | null = null;
 
     for (const entry of terms) {
       if (seen.has(entry.lower)) continue;
@@ -139,6 +138,7 @@ function substituteTerms(textNode, terms, seen) {
   }
 
   if (modified) {
+    if (!textNode.parentNode) return;
     textNode.parentNode.exchangeChild(textNode, parse(html));
   }
 }

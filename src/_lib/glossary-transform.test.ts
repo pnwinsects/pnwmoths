@@ -5,7 +5,7 @@ import {
   escapeHtml,
   buildTermMap,
   applyGlossaryTerms,
-} from './glossary-transform.js';
+} from './glossary-transform.ts';
 
 // ---------------------------------------------------------------------------
 // escapeRegex
@@ -70,49 +70,55 @@ describe('buildTermMap', () => {
       { term: 'wing', definition: 'a wing', image_filename: '' },
       { term: 'forewing', definition: 'the front wing', image_filename: '' },
     ];
-    const map = buildTermMap(rows, CDN);
-    assert.equal(map[0].term, 'forewing');
-    assert.equal(map[1].term, 'wing');
+    const [first, second] = buildTermMap(rows, CDN);
+    assert.equal(first?.term, 'forewing');
+    assert.equal(second?.term, 'wing');
   });
 
   it('builds imageUrl from cdnBaseUrl and image_filename', () => {
     const rows = [{ term: 'costa', definition: 'leading edge', image_filename: 'costa.jpg' }];
-    const map = buildTermMap(rows, CDN);
-    assert.equal(map[0].imageUrl, 'https://cdn.example/glossary/costa.jpg');
+    const [entry] = buildTermMap(rows, CDN);
+    assert.equal(entry?.imageUrl, 'https://cdn.example/glossary/costa.jpg');
   });
 
   it('sets imageUrl to empty string when image_filename is empty', () => {
     const rows = [{ term: 'costa', definition: 'leading edge', image_filename: '' }];
-    const map = buildTermMap(rows, CDN);
-    assert.equal(map[0].imageUrl, '');
+    const [entry] = buildTermMap(rows, CDN);
+    assert.equal(entry?.imageUrl, '');
   });
 
   it('pre-compiles regex with case-insensitive flag', () => {
     const rows = [{ term: 'Forewing', definition: 'front wing', image_filename: '' }];
-    const map = buildTermMap(rows, CDN);
-    assert.ok(map[0].regex.flags.includes('i'), 'regex should have i flag');
-    map[0].regex.lastIndex = 0;
-    assert.ok(map[0].regex.test('forewing'), 'should match lowercase');
-    map[0].regex.lastIndex = 0;
-    assert.ok(map[0].regex.test('FOREWING'), 'should match uppercase');
+    const [entry] = buildTermMap(rows, CDN);
+    assert.ok(entry?.regex.flags.includes('i'), 'regex should have i flag');
+    if (entry) {
+      entry.regex.lastIndex = 0;
+      assert.ok(entry.regex.test('forewing'), 'should match lowercase');
+      entry.regex.lastIndex = 0;
+      assert.ok(entry.regex.test('FOREWING'), 'should match uppercase');
+    }
   });
 
   it('regex does not match partial words (subcostal should not match costal)', () => {
     const rows = [{ term: 'costal', definition: 'of the costa', image_filename: '' }];
-    const map = buildTermMap(rows, CDN);
-    map[0].regex.lastIndex = 0;
-    assert.ok(!map[0].regex.test('subcostal'), 'costal should not match inside subcostal');
-    map[0].regex.lastIndex = 0;
-    assert.ok(map[0].regex.test('the costal margin'), 'costal should match as a standalone word');
+    const [entry] = buildTermMap(rows, CDN);
+    if (entry) {
+      entry.regex.lastIndex = 0;
+      assert.ok(!entry.regex.test('subcostal'), 'costal should not match inside subcostal');
+      entry.regex.lastIndex = 0;
+      assert.ok(entry.regex.test('the costal margin'), 'costal should match as a standalone word');
+    }
   });
 
   it('regex handles metacharacter term 1A+2A', () => {
     const rows = [{ term: '1A+2A', definition: 'fused anal vein', image_filename: '' }];
-    const map = buildTermMap(rows, CDN);
-    map[0].regex.lastIndex = 0;
-    assert.ok(map[0].regex.test('1A+2A'), '1A+2A regex should match literal 1A+2A');
-    map[0].regex.lastIndex = 0;
-    assert.ok(!map[0].regex.test('1AAAA2A'), 'regex should not match unintended pattern');
+    const [entry] = buildTermMap(rows, CDN);
+    if (entry) {
+      entry.regex.lastIndex = 0;
+      assert.ok(entry.regex.test('1A+2A'), '1A+2A regex should match literal 1A+2A');
+      entry.regex.lastIndex = 0;
+      assert.ok(!entry.regex.test('1AAAA2A'), 'regex should not match unintended pattern');
+    }
   });
 });
 
@@ -211,9 +217,10 @@ describe('applyGlossaryTerms', () => {
       { term: 'outer margin', definition: 'the outer edge', image_filename: '' },
     ];
     const multiMap = buildTermMap(multiRows, CDN);
+    const [multiFirst, multiSecond] = multiMap;
     // Confirm longest-first sort: "outer margin" (12) sorts before "forewing" (8)
-    assert.equal(multiMap[0].term, 'outer margin', 'outer margin should sort first (longest)');
-    assert.equal(multiMap[1].term, 'forewing', 'forewing should sort second (shorter)');
+    assert.equal(multiFirst?.term, 'outer margin', 'outer margin should sort first (longest)');
+    assert.equal(multiSecond?.term, 'forewing', 'forewing should sort second (shorter)');
 
     const html = '<html><body><main><p>The forewing and outer margin are visible.</p></main></body></html>';
     const result = applyGlossaryTerms(html, multiMap);
