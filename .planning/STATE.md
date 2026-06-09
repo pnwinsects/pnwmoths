@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
 status: executing
-stopped_at: Phase 33 context gathered
-last_updated: "2026-06-09T21:56:52.422Z"
-last_activity: 2026-06-09 -- Phase 33 planning complete
+stopped_at: Phase 33 Plan 01 complete
+last_updated: "2026-06-09T22:07:00Z"
+last_activity: 2026-06-09 -- Phase 33 Plan 01 executed (tsconfig layout + typecheck)
 progress:
   total_phases: 20
   completed_phases: 0
   total_plans: 2
-  completed_plans: 0
+  completed_plans: 1
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v3.0 — TypeScript Frontend & Build-Time Data Validation (Issue #36)
+**Current focus:** Phase 33 — toolchain-schema-scaffolding
 
 ## Current Position
 
-Phase: 33 — Toolchain & Schema Scaffolding
-Plan: —
-Status: Ready to execute
-Last activity: 2026-06-09 -- Phase 33 planning complete
+Phase: 33 (toolchain-schema-scaffolding) — EXECUTING
+Plan: 2 of 2 (Plan 01 complete)
+Status: Executing Phase 33
+Last activity: 2026-06-09 -- Phase 33 execution started
 
 ```
 v3.0 Progress: [··········] 0/6 phases (0%)
@@ -81,6 +81,9 @@ Recent decisions affecting current work:
 - Phase 29 fix: Dropbox shared_link API does not return path_display — use '/' + entry.name as fallback; manifest backfilled
 - Phase 30 Plan 01: DRY_RUN guard before BUNNY_API_KEY guard — enables dry-run inspection without a real API key
 - Phase 30 Plan 01: advanceStatus(row, 'uploaded') before rm/unlink — status committed before deletion (D-03 ordering)
+- Phase 33 Plan 01: `allowImportingTsExtensions:true` (not `rewriteRelativeImportExtensions`) in tsconfig.node.json — semantically correct for Node 24 type-stripping + noEmit workflow
+- Phase 33 Plan 01: typecheck script invokes each sub-config explicitly (no tsc --build/composite) — tsc does not follow references in plain --noEmit mode
+- Phase 33 Plan 01: zod kept in dependencies (not devDeps) — consumed by build scripts at build time
 
 ### Roadmap Evolution
 
