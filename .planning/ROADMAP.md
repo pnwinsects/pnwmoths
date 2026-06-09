@@ -13,6 +13,7 @@
 - ✅ **v2.0 Glossary Tooltips** — Phases 19–21 (shipped 2026-04-23) — [archive](milestones/v2.0-ROADMAP.md)
 - ✅ **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (shipped 2026-05-20) — [archive](milestones/v2.1-ROADMAP.md)
 - ✅ **v2.2 High-resolution species photos** — Phases 26–32 (shipped 2026-05-24) — [archive](milestones/v2.2-ROADMAP.md)
+- 🔄 **v3.0 TypeScript Frontend & Build-Time Data Validation** — Phases 33–38 (in progress)
 
 ## Phases
 
@@ -104,13 +105,22 @@
 
 - [x] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs) (completed 2026-05-22)
 - [x] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first (completed 2026-05-22)
-- [x] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, JSON entry hand-edited; surfaces cross-phase integration risks before bulk commit (completed 2026-05-24)
+- [x] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, hand-edited into data JSON, rendered in OpenSeadragon lightbox — surfaces integration risks before bulk commit; PILOT-LESSONS.md seeds Phase 29 committed config (completed 2026-05-24)
 - [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
-- [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to `species-tiles/{species-slug}/{specimen_id}-{view}/` using the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
+- [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to bunny.net Storage via the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
 - [x] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows (completed 2026-05-24)
 - [x] **Phase 32: OpenSeadragon Viewer in Lightbox (generalize pilot)** - Pilot's species-scoped OSD wiring generalized to every `high_res_available: true` species; static `<img>` fallback otherwise; carousel behavior unchanged; specimen/view metadata surfaced inline (completed 2026-05-24)
 
 </details>
+
+**v3.0 TypeScript Frontend & Build-Time Data Validation (Phases 33–38)**
+
+- [ ] **Phase 33: Toolchain & Schema Scaffolding** - Three tsconfigs, Zod schemas + derived types for all data entities, mandatory data-profile spike, `npm run typecheck` green
+- [ ] **Phase 34: scripts/lib & src/_lib Migration** - Smallest areas converted first; proves Node 24 native type-stripping path end-to-end
+- [ ] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed
+- [ ] **Phase 36: Eleventy Data Files & Config Migration** - Middle layer: `src/_data/` and `eleventy.config.ts` converted with GITHUB_PAGES conditional preserved
+- [ ] **Phase 37: Lit Web Components Migration** - Consumer side: `src/components/` fully typed, `FilterChangeDetail` event interface, Vite bundle verified Zod-free in production
+- [ ] **Phase 38: CI Gate & Full Verification** - `tsc --noEmit` in GitHub Actions PR check + deploy; byte-identical `_site/` diff guard; full 191-test suite green; `npm run verify:parquet`
 
 ## Phase Details
 
@@ -432,6 +442,94 @@ Plans:
 
 **UI hint**: yes
 
+### Phase 33: Toolchain & Schema Scaffolding
+
+**Goal**: The TypeScript toolchain is installed and configured, Zod schemas for all data entities are defined from profiled production data, and `npm run typecheck` reports zero errors — before any source file is converted
+**Depends on**: Phase 32 (v2.2 complete)
+**Requirements**: TS-01, TS-02, TS-03, TS-04, TS-05, SCHEMA-01, SCHEMA-02, SCHEMA-03
+**Success Criteria** (what must be TRUE):
+
+  1. Three tsconfig files exist (`tsconfig.node.json` with `module: nodenext`, `tsconfig.browser.json` with `module: bundler`, `useDefineForClassFields: false`, and `experimentalDecorators: true`, and a root `tsconfig.json` that includes both); `npm run typecheck` runs `tsc --noEmit` across both configs and exits zero with no source files yet converted
+  2. `typescript`, `zod`, `@types/node`, and `@types/leaflet` are installed as devDependencies; a local `src/types/eleventy.d.ts` shim (~30 lines) covers every Eleventy API method called in the codebase
+  3. `src/types/schemas.ts` (or per-entity files under `src/types/`) defines Zod schemas for all seven data entities: `OccurrenceRecord`, `Species`, `GlossaryWord`, `SpeciesImage`, `SpeciesPhoto`, `SpeciesState`, and the taxon tree node; TypeScript types are derived from each schema via `z.infer<>`
+  4. Every schema has been profiled against the full production dataset (85,933 records, 1,348 species) before finalization: all nullable columns use `.nullable()` and no schema rejects any real row from the current production data
+  5. Both `isolatedModules: true` and `useDefineForClassFields: false` (browser tsconfig) are set; a grep for `\benum\b` in all source directories returns empty; the existing `.js` build still produces `_site/` with 1,364 species pages unchanged
+
+**Plans**: TBD
+
+### Phase 34: scripts/lib & src/_lib Migration
+
+**Goal**: The shared utility libraries — `scripts/lib/` and `src/_lib/` — are fully converted to TypeScript, proving that Node 24 native type-stripping works end-to-end with `node --test`, and unblocking all downstream migration phases
+**Depends on**: Phase 33
+**Requirements**: MIG-01
+**Success Criteria** (what must be TRUE):
+
+  1. All `.js` files in `scripts/lib/` (`dropbox-download`, `dropbox-list`, `manifest`, `parse-photo-filename`) and `src/_lib/` (`glossary-transform`) are renamed to `.ts` with full strict type annotations; no `.js` source files remain in either directory
+  2. All test files for these areas are converted to `.ts` and run successfully via `node --test` with Node 24 native type-stripping; zero type errors from `tsc --noEmit` on these files
+  3. No `@ts-ignore`, no `allowJs`, and no unguarded `as unknown as T` double-casts appear in any converted file
+  4. `npm run build` still produces 1,364 species pages with `_site/` output byte-identical to the pre-migration baseline (no behavior change)
+
+**Plans**: TBD
+
+### Phase 35: Build Pipeline Scripts Migration
+
+**Goal**: All scripts in `scripts/` are converted to TypeScript (the producer side of the data pipeline), with Zod validation gates wired at the CSV input boundary, Parquet round-trip verification, and JSON output verification — and `npm run build:data` finishes within 60 seconds
+**Depends on**: Phase 34
+**Requirements**: MIG-02, SCHEMA-04, SCHEMA-05, SCHEMA-06, SCHEMA-07
+**Success Criteria** (what must be TRUE):
+
+  1. All `.js` files in `scripts/` are converted to `.ts`; all test files for the area are converted to `.ts` and pass via `node --test`; zero `tsc --noEmit` errors; no `@ts-ignore` or `allowJs`
+  2. `build-data.ts` validates source CSV inputs against the `Species`, `SpeciesImage`, and `OccurrenceRecord` schemas at import time — a deliberately malformed row in a source CSV causes the build to fail with a clear Zod error before any Parquet is written (SCHEMA-06)
+  3. After Parquet generation, `build-data.ts` reads back a sample Parquet file (one species, all rows) via DuckDB and validates every row against `OccurrenceRecordSchema` — a schema mismatch causes the build to fail (SCHEMA-04); emitted JSON files (`species-photos.json`, taxon tree, `species-states.json`) are validated against their schemas post-emit (SCHEMA-05)
+  4. `npm run verify:parquet` exists as a standalone script that reads every species' Parquet file with hyparquet and validates all rows against `OccurrenceRecordSchema`; it runs independently of `npm run build` and completes on the full dataset without crashing (SCHEMA-07)
+  5. `time npm run build:data` completes in under 60 seconds locally; `_site/` output is byte-identical to the pre-migration baseline
+
+**Plans**: TBD
+
+### Phase 36: Eleventy Data Files & Config Migration
+
+**Goal**: The Eleventy data files (`src/_data/`) and `eleventy.config` are converted to TypeScript, the `process.env.GITHUB_PAGES`-conditional `pathPrefix` is preserved and test-asserted, and the full Eleventy build produces byte-identical output
+**Depends on**: Phase 35
+**Requirements**: MIG-03
+**Success Criteria** (what must be TRUE):
+
+  1. All `.js` files in `src/_data/` and `eleventy.config.js` are converted to `.ts`; all test files for the area are converted to `.ts` and pass via `node --test`; zero `tsc --noEmit` errors; no `@ts-ignore` or `allowJs`
+  2. `eleventy.config.ts` still contains the `process.env.GITHUB_PAGES ? "/pnwmoths/" : "/"` conditional; the existing config test (now `.ts`) asserts this conditional is present and the test passes
+  3. `npm run build` and `npm run dev` both work correctly: the GitHub Pages build uses `/pnwmoths/` as `pathPrefix` (set via `GITHUB_PAGES=1`) and the local dev build uses `/`; no double-prefix on Vite-processed asset paths
+  4. `_site/` output is byte-identical to the pre-migration baseline after a full `npm run build`
+
+**Plans**: TBD
+
+### Phase 37: Lit Web Components Migration
+
+**Goal**: All Lit web components in `src/components/` are converted to TypeScript (the consumer side), the `pnwm-filter-change` event is typed via a shared `FilterChangeDetail` interface, and the production Vite bundle contains no Zod runtime code
+**Depends on**: Phase 36
+**Requirements**: MIG-04
+**Success Criteria** (what must be TRUE):
+
+  1. All `.js` files in `src/components/` are converted to `.ts`; all test files for the area are converted to `.ts` and pass via `node --test`; zero `tsc --noEmit` errors; no `@ts-ignore` or `allowJs`
+  2. A `FilterChangeDetail` interface is defined in `src/types/` and used as the generic type argument for `CustomEvent<FilterChangeDetail>` at both dispatch and listener sites; an `HTMLElementEventMap` declaration merge ensures `addEventListener('pnwm-filter-change', ...)` callbacks are typed without casting
+  3. The Vite production bundle (`_site/assets/main-*.js`) is non-empty and contains no `ZodError` or `ZodType` strings — Zod is absent from the client bundle (tree-shaken or never imported in production paths)
+  4. `_site/` output is byte-identical to the pre-migration baseline; interactive features (map, phenology chart, filter bar, OSD lightbox, taxon browser) remain functionally unchanged as verified by the full test suite
+
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 38: CI Gate & Full Verification
+
+**Goal**: `tsc --noEmit` runs as a required gate in GitHub Actions PR checks and deploys, the complete ~191-test suite passes via `node --test`, `_site/` output is verified byte-identical to the pre-migration baseline in CI, and the milestone is declared complete with zero `allowJs`, `@ts-ignore`, or `.js` source files remaining in any converted area
+**Depends on**: Phase 37
+**Requirements**: MIG-05, MIG-06, CI-01, CI-02, CI-03
+**Success Criteria** (what must be TRUE):
+
+  1. The GitHub Actions `pr-check.yml` and `deploy.yml` workflows include a `tsc --noEmit` step that runs across both tsconfigs; a PR introducing a type error fails CI before merge (CI-01)
+  2. All ~191 tests pass via `node --test` in CI (all test files converted to `.ts`); `node --test` uses Node 24 native type-stripping with no additional loader (MIG-05)
+  3. A CI step compares the `_site/` output hash against a committed pre-migration baseline snapshot and fails if any byte differs — proving no behavior change was introduced during the migration (CI-02)
+  4. `npm run build:data` completes in under 60 seconds in CI, confirming the under-5-minute total build budget remains intact after all validation gates are added (CI-03)
+  5. A final grep confirms zero `.js` source files remain in `scripts/`, `scripts/lib/`, `src/_lib/`, `src/_data/`, and `src/components/`; zero `allowJs` entries in any tsconfig; zero `@ts-ignore` comments; zero unguarded `as unknown as T` double-casts (MIG-06)
+
+**Plans**: TBD
+
 ---
 
 ## Progress
@@ -470,9 +568,15 @@ Plans:
 | 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
+| 33. Toolchain & Schema Scaffolding | v3.0 | 0/TBD | Not started | - |
+| 34. scripts/lib & src/_lib Migration | v3.0 | 0/TBD | Not started | - |
+| 35. Build Pipeline Scripts Migration | v3.0 | 0/TBD | Not started | - |
+| 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
+| 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
+| 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 started: 2026-06-09*
 
 ## Backlog
 

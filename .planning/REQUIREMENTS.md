@@ -70,33 +70,33 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TS-01 | TBD | Pending |
-| TS-02 | TBD | Pending |
-| TS-03 | TBD | Pending |
-| TS-04 | TBD | Pending |
-| TS-05 | TBD | Pending |
-| SCHEMA-01 | TBD | Pending |
-| SCHEMA-02 | TBD | Pending |
-| SCHEMA-03 | TBD | Pending |
-| SCHEMA-04 | TBD | Pending |
-| SCHEMA-05 | TBD | Pending |
-| SCHEMA-06 | TBD | Pending |
-| SCHEMA-07 | TBD | Pending |
-| MIG-01 | TBD | Pending |
-| MIG-02 | TBD | Pending |
-| MIG-03 | TBD | Pending |
-| MIG-04 | TBD | Pending |
-| MIG-05 | TBD | Pending |
-| MIG-06 | TBD | Pending |
-| CI-01 | TBD | Pending |
-| CI-02 | TBD | Pending |
-| CI-03 | TBD | Pending |
+| TS-01 | Phase 33 | Pending |
+| TS-02 | Phase 33 | Pending |
+| TS-03 | Phase 33 | Pending |
+| TS-04 | Phase 33 | Pending |
+| TS-05 | Phase 33 | Pending |
+| SCHEMA-01 | Phase 33 | Pending |
+| SCHEMA-02 | Phase 33 | Pending |
+| SCHEMA-03 | Phase 33 | Pending |
+| SCHEMA-04 | Phase 35 | Pending |
+| SCHEMA-05 | Phase 35 | Pending |
+| SCHEMA-06 | Phase 35 | Pending |
+| SCHEMA-07 | Phase 35 | Pending |
+| MIG-01 | Phase 34 | Pending |
+| MIG-02 | Phase 35 | Pending |
+| MIG-03 | Phase 36 | Pending |
+| MIG-04 | Phase 37 | Pending |
+| MIG-05 | Phase 38 | Pending |
+| MIG-06 | Phase 38 | Pending |
+| CI-01 | Phase 38 | Pending |
+| CI-02 | Phase 38 | Pending |
+| CI-03 | Phase 38 | Pending |
 
 **Coverage:**
 - v1 requirements: 21 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 21 ⚠️ (resolved by roadmapper)
+- Mapped to phases: 21 ✓
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-06-09*
-*Last updated: 2026-06-09 after initial v3.0 definition*
+*Last updated: 2026-06-09 — traceability filled by roadmapper*
