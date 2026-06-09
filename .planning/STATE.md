@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
 status: executing
-stopped_at: Phase 34 Plan 01 completed
-last_updated: "2026-06-09T23:50:00.000Z"
-last_activity: 2026-06-09 -- Phase 34 Plan 01 executed
+stopped_at: Phase 34 Plan 02 completed
+last_updated: "2026-06-09T23:45:20.000Z"
+last_activity: 2026-06-09 -- Phase 34 Plan 02 executed
 progress:
   total_phases: 20
   completed_phases: 1
   total_plans: 5
-  completed_plans: 3
+  completed_plans: 4
   percent: 5
 ---
 
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 ## Current Position
 
 Phase: 34 (scripts-lib-src-lib-migration) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-06-09
 
@@ -89,6 +89,11 @@ Recent decisions affecting current work:
 - Phase 33 Plan 02: types:[node] added to tsconfig.node.json — TypeScript 6 strict NodeNext does not auto-include @types/node globals without explicit types field
 - Phase 34 Plan 01: _site_baseline/ gitignored (not committed) — working-tree snapshot for SC-4 byte-identity gate; 1,433 species pages
 - Phase 34 Plan 01: package.json test globs broadened to `*.test.{js,ts}` for scripts/lib and src/_lib; Node 24 brace expansion; 224/224 tests pass
+- Phase 34 Plan 02: ManifestRow = Record<typeof COLUMNS[number], string> — mapped type over 13-key union; row.status is string (not string|undefined) even under noUncheckedIndexedAccess
+- Phase 34 Plan 02: ManifestStatus union uses exactly 5 values; no enum (TS-03 prohibition)
+- Phase 34 Plan 02: dbxCall return typed as Promise<unknown>; callers narrow via isDropboxListPage guard (D-01/D-03; Open Question 2)
+- Phase 34 Plan 02: [...COLUMNS] spread in writeManifest avoids as-cast to satisfy csv-stringify string[] type (Pitfall 2)
+- Phase 34 Plan 02: DropboxError = new Error(...) as DropboxError pattern; single widening cast of own-constructed value — not unguarded double-cast (T-34-02)
 
 ### Roadmap Evolution
 
@@ -153,5 +158,5 @@ Items acknowledged and carried forward:
 ## Session Continuity
 
 Last session: 2026-06-09T23:50:00.000Z
-Stopped at: Phase 34 Plan 01 completed — ready for Plan 02
-Resume file: .planning/phases/34-scripts-lib-src-lib-migration/34-02-PLAN.md
+Stopped at: Phase 34 Plan 02 completed — ready for Plan 03
+Resume file: .planning/phases/34-scripts-lib-src-lib-migration/34-03-PLAN.md
