@@ -1,44 +1,18 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 
 /**
  * Popup body for a single occurrence marker on a species map.
  *
- * Usage (from JS — the popup is created and attached imperatively by
- * `pnwm-occurrence-map.js`, then handed to Leaflet via `marker.bindPopup(el)`):
- *
- *   const el = document.createElement('pnwm-occurrence-popup');
- *   el.record = r;
- *   marker.bindPopup(el);
- *
- * The component renders the same seven fields the map previously built
- * imperatively (Locality, State, County, Year, Month, Collector, Type),
- * preserving order and omitting falsy values. Values are interpolated
- * via Lit's `html` tagged template, which auto-escapes — this is the
- * T-03-01 XSS mitigation that the imperative `textContent` code used to
- * provide.
- *
- * Uses shadow DOM (Lit's default) so Pico CSS global `<p>` styles do not
- * fight Leaflet's popup chrome.
+ * Renders into light DOM so Leaflet can measure the <p> children directly
+ * when auto-sizing the popup — a shadow-host with no intrinsic width
+ * collapses to its narrowest non-breakable word.
  */
 class PnwmOccurrencePopup extends LitElement {
   static properties = {
-    // record is a JS object set via property assignment, never as an HTML
-    // attribute — `attribute: false` keeps Lit from trying to serialize it.
     record: { attribute: false },
   };
 
-  static styles = css`
-    :host {
-      display: block;
-    }
-    p {
-      margin: 0 0 0.25rem 0;
-      line-height: 1.3;
-    }
-    p:last-child {
-      margin-bottom: 0;
-    }
-  `;
+  createRenderRoot() { return this; }
 
   constructor() {
     super();
