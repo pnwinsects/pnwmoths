@@ -8,6 +8,17 @@ A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static sit
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
+## Current Milestone: v3.0 TypeScript Frontend & Build-Time Data Validation
+
+**Goal:** Convert the entire codebase from JavaScript to strict TypeScript and enforce build-time validation of every data contract crossing the build→client boundary, so the project is safer to maintain and refactor. (Issue #36 — maintainability; no user-facing behavior change.)
+
+**Target features:**
+- Full JS→TS conversion of `src/` (Lit components + Eleventy data/lib files) and all `scripts/` (build/data pipeline), big-bang per area; all `node --test` test files migrated
+- `strict` tsconfig + `tsc --noEmit` wired into the build pipeline and GitHub Actions PR check (type errors fail the build)
+- Schema-as-source-of-truth for data row shapes (Zod suggested, not mandatory) deriving TS types from one definition
+- Build-time verification of all data contracts: per-species Parquet rows, fetched JSON data files (`species-photos.json`, taxon tree, `species-states.json`), and source CSVs as input guards
+- `eleventy.config.js` and Vite tooling TS-compatible; tests green throughout
+
 ## Current State: v2.2 shipped — High-resolution species photos
 
 **v2.2 shipped:** 2026-05-24 — 7 phases (Phases 26–32), 23 plans, 159 commits, 349 files changed
@@ -91,9 +102,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 | Server-side search | No server; Pagefind provides static equivalent |
 | Real-time data | All data is build-time; live observation feeds out of scope |
 | Multi-site support | Original app supported multiple insect sites; this PoC is pnwmoths only |
-| Photographic plates page | Deferred to v3 (PLAT-01, PLAT-02) |
-| Advanced filtering (collector, elevation, date range) | Deferred to v3 (FILT-01, FILT-02) |
-| Django URL redirects | Requires Netlify/Cloudflare; deferred to v3 (SEO-01) |
+| Photographic plates page | Deferred to a future feature milestone (PLAT-01, PLAT-02) — not the v3.0 TS rewrite |
+| Advanced filtering (collector, elevation, date range) | Deferred to a future feature milestone (FILT-01, FILT-02) — not the v3.0 TS rewrite |
+| Django URL redirects | Requires Netlify/Cloudflare; deferred to a future feature milestone (SEO-01) |
 | Glossary plural/morphological variant matching (GLOS-07) | Requires stemming or synonym entries; deferred to future milestone |
 | CSS Anchor Positioning for tooltip placement (TIP-04) | Baseline 2026; not yet cross-browser |
 | Client-side glossary term scanning (runtime JS) | Build-time transform is the agreed approach |
@@ -200,4 +211,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-24 after v2.2 milestone — OpenSeadragon high-res species photo viewer complete; planning next milestone*
+*Last updated: 2026-06-09 — v3.0 TypeScript Frontend & Build-Time Data Validation milestone started (Issue #36)*

@@ -1,17 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.2
-milestone_name: High-resolution species photos
-status: milestone_complete
-stopped_at: v2.2 archived — all 32 phases complete through Phase 32
-last_updated: 2026-05-24T00:00:00.000Z
-last_activity: 2026-05-24 -- v2.2 milestone archived
+milestone: v3.0
+milestone_name: TypeScript Frontend & Build-Time Data Validation
+status: planning
+last_updated: "2026-06-09T18:39:32.324Z"
+last_activity: 2026-06-09
 progress:
-  total_phases: 32
-  completed_phases: 32
-  total_plans: 23
-  completed_plans: 23
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -25,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-05-24 after v2.2 milestone)
 
 ## Current Position
 
-Phase: 32 (complete — milestone closed)
-Plan: All complete
-Status: Milestone archived — ready for /gsd:new-milestone
-Last activity: 2026-05-24
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-06-09 — Milestone v3.0 started
 
 ## Performance Metrics
 
