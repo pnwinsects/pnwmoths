@@ -102,24 +102,9 @@ class PnwmOccurrenceMap extends LitElement {
           color: '#0172ad',
           fillOpacity: 0.7,
         });
-        // Use Lit html tag is not available here; build popup content manually
-        // All values are rendered via Leaflet's popup (text only) — XSS safe via textContent approach
-        const parts = [
-          r.locality && `Locality: ${r.locality}`,
-          r.state && `State: ${r.state}`,
-          r.county && `County: ${r.county}`,
-          r.year && `Year: ${r.year}`,
-          r.month && `Month: ${r.month}`,
-          r.collector && `Collector: ${r.collector}`,
-          r.record_type && `Type: ${r.record_type}`,
-        ].filter(Boolean);
-        // Create popup element using DOM text nodes to prevent XSS (T-03-01 mitigation)
-        const popupEl = document.createElement('div');
-        for (const part of parts) {
-          const p = document.createElement('p');
-          p.textContent = part;
-          popupEl.appendChild(p);
-        }
+        // Delegate popup rendering to <pnwm-occurrence-popup> — Lit's html template handles XSS escaping (T-03-01 mitigation preserved)
+        const popupEl = document.createElement('pnwm-occurrence-popup');
+        popupEl.record = r;
         marker.bindPopup(popupEl);
         markers.push(marker);
         this._markerGroup.addLayer(marker);
