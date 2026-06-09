@@ -12,17 +12,17 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 
 ### TS — TypeScript Toolchain & Configuration
 
-- [ ] **TS-01**: Separate strict tsconfigs exist for the Node target (`module: nodenext`) and the browser/Vite target (`moduleResolution: bundler`), plus a root config that type-checks both via a single command
-- [ ] **TS-02**: Browser tsconfig sets `useDefineForClassFields: false` and `experimentalDecorators: true` so Lit reactive properties keep working
-- [ ] **TS-03**: Both tsconfigs set `isolatedModules: true` and erasable-syntax constraints so every `.ts` file runs under Node 24 native type-stripping (no `enum`, `namespace`, or parameter properties anywhere)
-- [ ] **TS-04**: `typescript` and `zod` are installed, along with required type packages (`@types/node`, `@types/leaflet`) and a local Eleventy type-shim declaration
-- [ ] **TS-05**: `npm run typecheck` runs `tsc --noEmit` across both tsconfigs and reports zero errors
+- [x] **TS-01**: Separate strict tsconfigs exist for the Node target (`module: nodenext`) and the browser/Vite target (`moduleResolution: bundler`), plus a root config that type-checks both via a single command
+- [x] **TS-02**: Browser tsconfig sets `useDefineForClassFields: false` and `experimentalDecorators: true` so Lit reactive properties keep working
+- [x] **TS-03**: Both tsconfigs set `isolatedModules: true` and erasable-syntax constraints so every `.ts` file runs under Node 24 native type-stripping (no `enum`, `namespace`, or parameter properties anywhere)
+- [x] **TS-04**: `typescript` and `zod` are installed, along with required type packages (`@types/node`, `@types/leaflet`) and a local Eleventy type-shim declaration
+- [x] **TS-05**: `npm run typecheck` runs `tsc --noEmit` across both tsconfigs and reports zero errors
 
 ### SCHEMA — Data Contracts & Build-Time Validation
 
-- [ ] **SCHEMA-01**: A shared `src/types/` schema module defines one schema per data entity (occurrence record, species, glossary word, species image, species photo, species-state, taxon node), importable by both Node build scripts and browser components
-- [ ] **SCHEMA-02**: TypeScript row/record types are derived from the schemas (single source of truth) rather than maintained separately
-- [ ] **SCHEMA-03**: Schemas are profiled against the full production dataset (per-column nullability) before finalization so they accept all real data without false rejections
+- [x] **SCHEMA-01**: A shared `src/types/` schema module defines one schema per data entity (occurrence record, species, glossary word, species image, species photo, species-state, taxon node), importable by both Node build scripts and browser components
+- [x] **SCHEMA-02**: TypeScript row/record types are derived from the schemas (single source of truth) rather than maintained separately
+- [x] **SCHEMA-03**: Schemas are profiled against the full production dataset (per-column nullability) before finalization so they accept all real data without false rejections
 - [ ] **SCHEMA-04**: Build-generated Parquet is trusted (build-locked); the build keeps only a cheap one-sample sanity check (read one species' Parquet back, validate its schema) to catch write-path bugs before deploy. The primary Parquet guard is load-time (see SCHEMA-08), not a full build-time round-trip
 - [ ] **SCHEMA-05**: Build-locked JSON (taxon tree, `species-photos.json` — baked into HTML) is covered by static TS types at authoring; the dynamically-fetched `species-states.json` is validated at load time (see SCHEMA-08)
 - [ ] **SCHEMA-06**: Source CSV input correctness is enforced at build by DuckDB's typed `read_csv` (fails on bad coercion) plus the existing integrity SQL; TS types describe the post-read shape. No separate per-row Zod parsing of CSVs in the hot path
@@ -73,14 +73,14 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TS-01 | Phase 33 | Pending |
-| TS-02 | Phase 33 | Pending |
-| TS-03 | Phase 33 | Pending |
-| TS-04 | Phase 33 | Pending |
-| TS-05 | Phase 33 | Pending |
-| SCHEMA-01 | Phase 33 | Pending |
-| SCHEMA-02 | Phase 33 | Pending |
-| SCHEMA-03 | Phase 33 | Pending |
+| TS-01 | Phase 33 | Complete |
+| TS-02 | Phase 33 | Complete |
+| TS-03 | Phase 33 | Complete |
+| TS-04 | Phase 33 | Complete |
+| TS-05 | Phase 33 | Complete |
+| SCHEMA-01 | Phase 33 | Complete |
+| SCHEMA-02 | Phase 33 | Complete |
+| SCHEMA-03 | Phase 33 | Complete |
 | SCHEMA-04 | Phase 35 | Pending |
 | SCHEMA-05 | Phase 35 | Pending |
 | SCHEMA-06 | Phase 35 | Pending |
