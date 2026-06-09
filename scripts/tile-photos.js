@@ -38,7 +38,7 @@ import { mkdir, unlink } from 'node:fs/promises';
 import { existsSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
-import { downloadSharedFile } from './lib/dropbox-download.js';
+import { downloadSharedFile } from './lib/dropbox-download.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; D-10 env-vars-at-invocation;

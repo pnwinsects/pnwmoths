@@ -1,6 +1,11 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { downloadSharedFile } from './dropbox-download.js';
+import { downloadSharedFile } from './dropbox-download.ts';
+
+// Local type for error assertions — matches the internal DropboxError shape.
+interface TestDropboxError extends Error {
+  retriable: boolean;
+}
 
 // ---------------------------------------------------------------------------
 // downloadSharedFile — input validation and error-message shape
@@ -9,16 +14,17 @@ describe('downloadSharedFile', () => {
   it('throws when token is missing — error contains "missing required param: token" but not the token value', async () => {
     await assert.rejects(
       () => downloadSharedFile({ shareUrl: 'https://example.com', dropboxPath: '/a.tif', token: '', destPath: '/tmp/a.tif' }),
-      (err) => {
+      (err: unknown) => {
+        const e = err as Error;
         assert.ok(
-          err.message.includes('missing required param: token'),
-          `expected "missing required param: token" in: ${err.message}`,
+          e.message.includes('missing required param: token'),
+          `expected "missing required param: token" in: ${e.message}`,
         );
         // The token value here is empty string so nothing to leak, but verify
         // the function does not reconstruct a token-like string in the message.
         assert.ok(
-          !err.message.includes('sl.'),
-          `error message must not contain token-like substring: ${err.message}`,
+          !e.message.includes('sl.'),
+          `error message must not contain token-like substring: ${e.message}`,
         );
         return true;
       },
@@ -32,7 +38,7 @@ describe('downloadSharedFile', () => {
         ok: false,
         status: 401,
         text: async () => 'invalid_access_token',
-      });
+      }) as unknown as Response;
 
       await assert.rejects(
         () => downloadSharedFile({
@@ -41,16 +47,17 @@ describe('downloadSharedFile', () => {
           token: 'sl.SECRET',
           destPath: '/tmp/test.tif',
         }),
-        (err) => {
+        (err: unknown) => {
+          const e = err as TestDropboxError;
           assert.ok(
-            err.message.startsWith('/2/sharing/get_shared_link_file → 401:'),
-            `expected message to start with "/2/sharing/get_shared_link_file → 401:" but got: ${err.message}`,
+            e.message.startsWith('/2/sharing/get_shared_link_file → 401:'),
+            `expected message to start with "/2/sharing/get_shared_link_file → 401:" but got: ${e.message}`,
           );
           assert.ok(
-            !err.message.includes('sl.SECRET'),
-            `error message must not contain the token value "sl.SECRET": ${err.message}`,
+            !e.message.includes('sl.SECRET'),
+            `error message must not contain the token value "sl.SECRET": ${e.message}`,
           );
-          assert.strictEqual(err.retriable, false, 'non-retriable 401 must set err.retriable = false');
+          assert.strictEqual(e.retriable, false, 'non-retriable 401 must set err.retriable = false');
           return true;
         },
       );
@@ -66,7 +73,7 @@ describe('downloadSharedFile', () => {
         ok: false,
         status: 429,
         text: async () => 'too_many_requests',
-      });
+      }) as unknown as Response;
 
       await assert.rejects(
         () => downloadSharedFile({
@@ -75,8 +82,9 @@ describe('downloadSharedFile', () => {
           token: 'sl.TOKEN',
           destPath: '/tmp/test.tif',
         }),
-        (err) => {
-          assert.strictEqual(err.retriable, true, '429 must set err.retriable = true');
+        (err: unknown) => {
+          const e = err as TestDropboxError;
+          assert.strictEqual(e.retriable, true, '429 must set err.retriable = true');
           return true;
         },
       );
