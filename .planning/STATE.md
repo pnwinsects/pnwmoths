@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
 status: executing
-stopped_at: Phase 34 context gathered
-last_updated: "2026-06-09T23:15:47.463Z"
-last_activity: 2026-06-09 -- Phase 34 planning complete
+stopped_at: Phase 34 Plan 01 completed
+last_updated: "2026-06-09T23:50:00.000Z"
+last_activity: 2026-06-09 -- Phase 34 Plan 01 executed
 progress:
   total_phases: 20
   completed_phases: 1
   total_plans: 5
-  completed_plans: 2
+  completed_plans: 3
   percent: 5
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 34 — scripts/lib & src/_lib migration
+**Current focus:** Phase 34 — scripts-lib-src-lib-migration
 
 ## Current Position
 
-Phase: 34
-Plan: Not started
+Phase: 34 (scripts-lib-src-lib-migration) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-06-09 -- Phase 34 planning complete
+Last activity: 2026-06-09
 
 ```
 v3.0 Progress: [··········] 0/6 phases (0%)
@@ -87,6 +87,8 @@ Recent decisions affecting current work:
 - Phase 33 Plan 02: z.nullable() (not z.optional()) for all profiled-null columns — hyparquet writes null not undefined; county 100% null would reject all records
 - Phase 33 Plan 02: allowImportingTsExtensions:true added to tsconfig.browser.json — required for .ts extension imports in src/types/ under the browser config
 - Phase 33 Plan 02: types:[node] added to tsconfig.node.json — TypeScript 6 strict NodeNext does not auto-include @types/node globals without explicit types field
+- Phase 34 Plan 01: _site_baseline/ gitignored (not committed) — working-tree snapshot for SC-4 byte-identity gate; 1,433 species pages
+- Phase 34 Plan 01: package.json test globs broadened to `*.test.{js,ts}` for scripts/lib and src/_lib; Node 24 brace expansion; 224/224 tests pass
 
 ### Roadmap Evolution
 
@@ -150,6 +152,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-09T22:50:05.781Z
-Stopped at: Phase 34 context gathered
-Resume file: .planning/phases/34-scripts-lib-src-lib-migration/34-CONTEXT.md
+Last session: 2026-06-09T23:50:00.000Z
+Stopped at: Phase 34 Plan 01 completed — ready for Plan 02
+Resume file: .planning/phases/34-scripts-lib-src-lib-migration/34-02-PLAN.md

@@ -31,7 +31,7 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 
 ### MIG — JavaScript → TypeScript Migration
 
-- [ ] **MIG-01**: `scripts/lib/` and `src/_lib/` are fully converted to TypeScript
+- [x] **MIG-01**: `scripts/lib/` and `src/_lib/` are fully converted to TypeScript
 - [ ] **MIG-02**: All build/data pipeline scripts in `scripts/` are fully converted to TypeScript
 - [ ] **MIG-03**: Eleventy data files (`src/_data/`) and `eleventy.config` are converted to TypeScript, preserving the `process.env.GITHUB_PAGES`-conditional `pathPrefix`
 - [ ] **MIG-04**: All Lit web components in `src/components/` are converted to TypeScript, with the `pnwm-filter-change` event typed via a shared detail interface
@@ -86,7 +86,7 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | SCHEMA-06 | Phase 35 | Pending |
 | SCHEMA-07 | Phase 35 | Pending |
 | SCHEMA-08 | Phase 37 | Pending |
-| MIG-01 | Phase 34 | Pending |
+| MIG-01 | Phase 34 | Complete |
 | MIG-02 | Phase 35 | Pending |
 | MIG-03 | Phase 36 | Pending |
 | MIG-04 | Phase 37 | Pending |

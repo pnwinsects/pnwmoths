@@ -481,7 +481,7 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 34-01-PLAN.md — Capture pre-migration `_site/` baseline + broaden package.json test globs to `*.test.{js,ts}` (MIG-01 setup)
+- [x] 34-01-PLAN.md — Capture pre-migration `_site/` baseline + broaden package.json test globs to `*.test.{js,ts}` (MIG-01 setup)
 
 **Wave 2** *(parallel; blocked on Wave 1)*
 
@@ -587,7 +587,7 @@ Plans:
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
-| 34. scripts/lib & src/_lib Migration | v3.0 | 0/TBD | Not started | - |
+| 34. scripts/lib & src/_lib Migration | v3.0 | 1/3 | In Progress|  |
 | 35. Build Pipeline Scripts Migration | v3.0 | 0/TBD | Not started | - |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
