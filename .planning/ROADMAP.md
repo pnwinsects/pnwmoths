@@ -477,7 +477,16 @@ Plans:
   3. No `@ts-ignore`, no `allowJs`, and no unguarded `as unknown as T` double-casts appear in any converted file
   4. `npm run build` still produces the pre-migration species-page count (1,433 species pages as of 2026-06-09 — the count is data-determined and may grow) with `_site/` output byte-identical to the pre-migration baseline (no behavior change)
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+**Wave 1**
+
+- [ ] 34-01-PLAN.md — Capture pre-migration `_site/` baseline + broaden package.json test globs to `*.test.{js,ts}` (MIG-01 setup)
+
+**Wave 2** *(parallel; blocked on Wave 1)*
+
+- [ ] 34-02-PLAN.md — Convert all four `scripts/lib/*.js` (manifest first: COLUMNS-derived ManifestRow + ManifestStatus union; Dropbox/csv-parse consumed-field interfaces + guards) with atomic `.ts`-specifier updates to the 4 consumer scripts + 3 lib tests (MIG-01; D-01..D-06)
+- [ ] 34-03-PLAN.md — Convert `src/_lib/glossary-transform.js` + atomic eleventy.config.js specifier update + byte-identity build gate vs baseline (MIG-01)
 
 ### Phase 35: Build Pipeline Scripts Migration
 
