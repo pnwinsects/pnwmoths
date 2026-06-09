@@ -143,10 +143,10 @@ describe('toSpeciesSlug', () => {
   });
 
   it('returns "" for null (defensive default; no throw)', () => {
-    assert.equal(toSpeciesSlug(null as unknown as string), '');
+    assert.equal(toSpeciesSlug(null), '');
   });
 
   it('returns "" for undefined (defensive default; no throw)', () => {
-    assert.equal(toSpeciesSlug(undefined as unknown as string), '');
+    assert.equal(toSpeciesSlug(undefined), '');
   });
 });

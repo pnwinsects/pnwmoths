@@ -169,7 +169,7 @@ export function parseSpecimenAndView(filename: string): ParseSpecimenAndViewResu
  * Mirrors the slug rule in scripts/migrate-species.js (lower(genus || '-' || species))
  * and in the spike's parse-classify.mjs:95.
  */
-export function toSpeciesSlug(binomial: string): string {
+export function toSpeciesSlug(binomial: string | null | undefined): string {
   if (typeof binomial !== 'string' || !binomial) return '';
   return binomial.toLowerCase().trim().replace(/\s+/g, '-');
 }

@@ -38,7 +38,7 @@ describe('downloadSharedFile', () => {
         ok: false,
         status: 401,
         text: async () => 'invalid_access_token',
-      }) as unknown as Response;
+      }) as Response;
 
       await assert.rejects(
         () => downloadSharedFile({
@@ -73,7 +73,7 @@ describe('downloadSharedFile', () => {
         ok: false,
         status: 429,
         text: async () => 'too_many_requests',
-      }) as unknown as Response;
+      }) as Response;
 
       await assert.rejects(
         () => downloadSharedFile({
