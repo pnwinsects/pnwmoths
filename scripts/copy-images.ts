@@ -30,7 +30,7 @@ console.log('Copied styles: src/styles/ -> _site/styles/');
 import { mkdir, copyFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const picoSrc = require.resolve('@picocss/pico/css/pico.min.css');
+const picoSrc = require.resolve('@picocss/pico/css/pico.min.css') as string;
 const picoDest = resolve('_site/css');
 await mkdir(picoDest, { recursive: true });
 await copyFile(picoSrc, resolve('_site/css/pico.min.css'));

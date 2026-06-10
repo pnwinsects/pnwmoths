@@ -1,11 +1,11 @@
-// scripts/emit-species-states.js
+// scripts/emit-species-states.ts
 // Post-Vite build step: query records.csv via DuckDB, write _site/species-states.json
 // Run via: npm run build:species-states
 import { DuckDBInstance } from '@duckdb/node-api';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-export async function main() {
+export async function main(): Promise<void> {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
@@ -38,7 +38,7 @@ export async function main() {
     WHERE state IS NOT NULL AND state != ''
     ORDER BY species_slug, state
   `);
-  const rows = result.getRowObjectsJS();
+  const rows = result.getRowObjectsJS() as Record<string, unknown>[];
 
   conn.closeSync();
 
@@ -50,7 +50,7 @@ export async function main() {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   main().catch(err => {
-    console.error(err.message);
+    console.error((err as Error).message);
     process.exit(1);
   });
 }
