@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { classify, loadSynonyms } from './ingest-photos.js';
+import { classify, loadSynonyms } from './ingest-photos.ts';
 
 // ---------------------------------------------------------------------------
 // classify (with synonyms pre-pass) — D-04, D-06
@@ -96,7 +96,7 @@ describe('loadSynonyms', () => {
     bySlug: new Map([
       ['apantesis-nevadensis', { genus: 'Apantesis', species: 'nevadensis' }],
     ]),
-    genera: new Set(),
+    genera: new Set<string>(),
   };
 
   it('returns an empty Map when the file does not exist (first-run safe)', async () => {
@@ -125,6 +125,7 @@ describe('loadSynonyms', () => {
       const result = await loadSynonyms(path, species);
       assert.equal(result.size, 1);
       const entry = result.get('grammia nevadensis');
+      assert.ok(entry !== undefined);
       assert.equal(entry.binomial_resolved, 'apantesis nevadensis');
       assert.equal(entry.species_slug, 'apantesis-nevadensis');
     } finally {
@@ -152,7 +153,9 @@ describe('loadSynonyms', () => {
       writeFileSync(path, '﻿from_binomial,to_species_slug\ngrammia nevadensis,apantesis-nevadensis\n');
       const result = await loadSynonyms(path, species);
       assert.equal(result.size, 1);
-      assert.equal(result.get('grammia nevadensis').species_slug, 'apantesis-nevadensis');
+      const entry = result.get('grammia nevadensis');
+      assert.ok(entry !== undefined);
+      assert.equal(entry.species_slug, 'apantesis-nevadensis');
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

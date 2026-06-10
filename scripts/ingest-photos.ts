@@ -1,5 +1,5 @@
 /**
- * scripts/ingest-photos.js
+ * scripts/ingest-photos.ts
  *
  * Phase 26 (v2.2 high-res photos): list the Dropbox shared-link folder
  * via /2/files/list_folder, parse each filename into binomial + specimen + view,
@@ -8,9 +8,9 @@
  * Metadata-only — no file bytes are downloaded.
  *
  * Usage:
- *   DROPBOX_TOKEN=sl.... node scripts/ingest-photos.js
- *   DRY_RUN=1 DROPBOX_TOKEN=sl.... node scripts/ingest-photos.js   # prints first 5 entries, no manifest write
- *   RESORT_ONLY=1 node scripts/ingest-photos.js                    # re-sort existing manifest; no Dropbox calls
+ *   DROPBOX_TOKEN=sl.... node scripts/ingest-photos.ts
+ *   DRY_RUN=1 DROPBOX_TOKEN=sl.... node scripts/ingest-photos.ts   # prints first 5 entries, no manifest write
+ *   RESORT_ONLY=1 node scripts/ingest-photos.ts                    # re-sort existing manifest; no Dropbox calls
  *
  * Resume after interruption: re-run the same command. The manifest itself is the
  * recovery state — rows whose content_hash is already in the manifest are skipped
@@ -25,9 +25,11 @@ import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 
+import type { MatchBucket, ParseSpecimenAndViewResult } from './lib/parse-photo-filename.ts';
 import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/parse-photo-filename.ts';
 import { dbxCall } from './lib/dropbox-list.ts';
 import { readManifest, writeManifest, sortForInvestigation } from './lib/manifest.ts';
+import type { ManifestRow } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; D-10 env-vars-at-invocation;
@@ -38,25 +40,87 @@ const MANIFEST_PATH = resolve('data/species-photos-manifest.csv');
 const SPECIES_CSV = resolve('data/species.csv');
 const SYNONYMS_CSV = resolve('data/species-synonyms.csv');
 
-const DROPBOX_TOKEN = process.env.DROPBOX_TOKEN ?? '';
-const DROPBOX_SHARE_URL = process.env.DROPBOX_SHARE_URL
+const DROPBOX_TOKEN: string = process.env['DROPBOX_TOKEN'] ?? '';
+const DROPBOX_SHARE_URL: string = process.env['DROPBOX_SHARE_URL']
   ?? 'https://www.dropbox.com/scl/fo/uf3sg1efxau1fug4f6ibe/AARZETfHfpzlvILrd6KLWlc?rlkey=7m1pm3z0rnasb9i01a5ht0ppf&st=emehj9n2&dl=0';
-const DRY_RUN = process.env.DRY_RUN === '1';
-const RESORT_ONLY = process.env.RESORT_ONLY === '1';
+const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
+const RESORT_ONLY: boolean = process.env['RESORT_ONLY'] === '1';
 
 // Image extension allow-list, ported from spike parse-classify.mjs:23. Used to
 // short-circuit non-image entries (in practice 0% in the spike audit, but D-15
 // requires that no file path crash the run).
-const IMAGE_EXTS = new Set([
+const IMAGE_EXTS = new Set<string>([
   'jpg', 'jpeg', 'tif', 'tiff', 'png', 'heic', 'heif',
   'cr2', 'nef', 'arw', 'dng', 'raw',
 ]);
 
 // ---------------------------------------------------------------------------
+// D-10 Boundary: csv-parse output for data/species.csv
+// Minimal consumed-field interface + runtime guard (Phase 34 template).
+// ---------------------------------------------------------------------------
+
+interface SpeciesCsvRow {
+  genus: string;
+  species: string;
+}
+
+function isSpeciesCsvRow(obj: unknown): obj is SpeciesCsvRow {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const r = obj as Record<string, unknown>;
+  return typeof r['genus'] === 'string' && typeof r['species'] === 'string';
+}
+
+// ---------------------------------------------------------------------------
+// D-10 Boundary: csv-parse output for data/species-synonyms.csv
+// Minimal consumed-field interface + runtime guard (Phase 34 template).
+// ---------------------------------------------------------------------------
+
+interface SynonymsCsvRow {
+  from_binomial: string;
+  to_species_slug: string;
+}
+
+function isSynonymsCsvRow(obj: unknown): obj is SynonymsCsvRow {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const r = obj as Record<string, unknown>;
+  return typeof r['from_binomial'] === 'string' && typeof r['to_species_slug'] === 'string';
+}
+
+// ---------------------------------------------------------------------------
+// D-10 Boundary: Dropbox API JSON response (list_folder / list_folder/continue)
+// Minimal consumed-field interface + runtime guard (mirrors dropbox-list.ts).
+// ---------------------------------------------------------------------------
+
+interface DropboxListPage {
+  entries: DropboxEntry[];
+  has_more: boolean;
+  cursor: string;
+}
+
+interface DropboxEntry {
+  '.tag': string;
+  name?: string;
+  path_display?: string;
+  size?: number;
+  server_modified?: string;
+  content_hash?: string;
+}
+
+function isDropboxListPage(data: unknown): data is DropboxListPage {
+  if (typeof data !== 'object' || data === null) return false;
+  const d = data as Record<string, unknown>;
+  return (
+    Array.isArray(d['entries']) &&
+    typeof d['has_more'] === 'boolean' &&
+    typeof d['cursor'] === 'string'
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /**
  * Redact DROPBOX_TOKEN from an error message. Mirrors scripts/upload-plates.js:112
@@ -68,7 +132,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
  * "[REDACTED]" markers. When the token is empty (DRY_RUN path, etc.), the
  * original message is returned unchanged.
  */
-function redact(msg) {
+function redact(msg: string): string {
   return DROPBOX_TOKEN
     ? msg.replace(new RegExp(DROPBOX_TOKEN, 'g'), '[REDACTED]')
     : msg;
@@ -83,23 +147,24 @@ function redact(msg) {
  * The final throw surfaces a redacted Error so the caller (main()) can record
  * status=failed and move on without crashing the run (OPS-02).
  */
-async function withRetry(fn, label) {
+async function withRetry<T>(fn: () => Promise<T>, label: string): Promise<T> {
   const delays = [2000, 4000, 8000, 16000, 32000];
   for (let attempt = 0; attempt < delays.length; attempt++) {
     try {
       return await fn();
     } catch (err) {
-      const safeMsg = redact(err.message ?? String(err));
+      const safeMsg = redact((err as Error).message ?? String(err));
       if (attempt === delays.length - 1) {
         throw new Error(`${label} failed after ${delays.length} attempts: ${safeMsg}`);
       }
       console.log(
-        `[ingest-photos] transient error on ${label} (attempt ${attempt + 1}/${delays.length}) — retrying in ${delays[attempt] / 1000}s: ${safeMsg}`
+        `[ingest-photos] transient error on ${label} (attempt ${attempt + 1}/${delays.length}) — retrying in ${delays[attempt]! / 1000}s: ${safeMsg}`
       );
-      await sleep(delays[attempt]);
+      await sleep(delays[attempt]!);
     }
   }
   // Unreachable — the loop either returns from `fn()` or throws on the final attempt.
+  throw new Error(`${label}: unreachable`);
 }
 
 /**
@@ -108,12 +173,21 @@ async function withRetry(fn, label) {
  * Written to stdout so tmux tail-following sees it interleaved with retry
  * messages.
  */
-function logStage(content_hash, action, outcome, extra = '') {
+function logStage(content_hash: string, action: string, outcome: string, extra = ''): void {
   const hashPrefix = (content_hash ?? '').slice(0, 12).padEnd(12);
   const actionField = String(action).padEnd(16);
   console.log(
     `${new Date().toISOString()} ${hashPrefix} ${actionField} ${outcome}${extra ? '  ' + extra : ''}`
   );
+}
+
+/**
+ * Species lookup structures built from data/species.csv.
+ */
+interface SpeciesLookup {
+  byBinomial: Map<string, SpeciesCsvRow>;
+  bySlug: Map<string, SpeciesCsvRow>;
+  genera: Set<string>;
 }
 
 /**
@@ -126,13 +200,14 @@ function logStage(content_hash, action, outcome, extra = '') {
  * Ported from spike parse-classify.mjs:84-101 with the hand-rolled CSV parser
  * replaced by csv-parse/sync (same library Phase 13 uses).
  */
-async function loadSpecies(csvPath) {
+async function loadSpecies(csvPath: string): Promise<SpeciesLookup> {
   const raw = await readFile(csvPath);
-  const records = parse(raw, { columns: true, skip_empty_lines: true });
-  const byBinomial = new Map();
-  const bySlug = new Map();
-  const genera = new Set();
+  const records = parse(raw, { columns: true, skip_empty_lines: true }) as unknown[];
+  const byBinomial = new Map<string, SpeciesCsvRow>();
+  const bySlug = new Map<string, SpeciesCsvRow>();
+  const genera = new Set<string>();
   for (const r of records) {
+    if (!isSpeciesCsvRow(r)) continue;
     const genus = (r.genus || '').trim();
     const species = (r.species || '').trim();
     if (!genus || !species) continue;
@@ -143,6 +218,11 @@ async function loadSpecies(csvPath) {
     genera.add(genus.toLowerCase());
   }
   return { byBinomial, bySlug, genera };
+}
+
+interface SynonymEntry {
+  binomial_resolved: string;
+  species_slug: string;
 }
 
 /**
@@ -156,19 +236,22 @@ async function loadSpecies(csvPath) {
  * species.bySlug are dropped and a `synonym-warn` line is logged once (D-04) —
  * NOT once per manifest row.
  *
- * @param {string} csvPath  Absolute path to species-synonyms.csv.
- * @param {{ bySlug: Map }} species  Species fixture from loadSpecies().
- * @returns {Promise<Map<string, { binomial_resolved: string, species_slug: string }>>}
- *   Map keyed by from_binomial (lowercased, space-separated) to resolved target info.
+ * @param csvPath  Absolute path to species-synonyms.csv.
+ * @param species  Species fixture from loadSpecies().
+ * @returns Map keyed by from_binomial (lowercased, space-separated) to resolved target info.
  */
-export async function loadSynonyms(csvPath, species) {
+export async function loadSynonyms(
+  csvPath: string,
+  species: SpeciesLookup,
+): Promise<Map<string, SynonymEntry>> {
   if (!existsSync(csvPath)) return new Map();
   const raw = await readFile(csvPath);
   // bom: true — Notepad/Excel on Windows prepend a UTF-8 BOM, which without
   // stripping becomes part of the first column header and silently drops every row.
-  const records = parse(raw, { columns: true, skip_empty_lines: true, bom: true });
-  const synonyms = new Map();
+  const records = parse(raw, { columns: true, skip_empty_lines: true, bom: true }) as unknown[];
+  const synonyms = new Map<string, SynonymEntry>();
   for (const r of records) {
+    if (!isSynonymsCsvRow(r)) continue;
     const from = (r.from_binomial || '').trim().toLowerCase();
     const to = (r.to_species_slug || '').trim().toLowerCase();
     if (!from || !to) continue;
@@ -190,9 +273,18 @@ export async function loadSynonyms(csvPath, species) {
  * Return the lowercased file extension (without the dot) from a filename,
  * or '' if there is no dot. Ported from spike parse-classify.mjs:129-132.
  */
-function fileExt(name) {
+function fileExt(name: string): string {
   const m = (name || '').match(/\.([^.]+)$/);
-  return m ? m[1].toLowerCase() : '';
+  return m ? (m[1] ?? '').toLowerCase() : '';
+}
+
+/**
+ * Classify result returned by classify().
+ */
+interface ClassifyResult {
+  match_bucket: MatchBucket;
+  binomial_resolved: string;
+  species_slug: string;
 }
 
 /**
@@ -217,7 +309,14 @@ function fileExt(name) {
  *
  * Returns: { match_bucket, binomial_resolved, species_slug }
  */
-export function classify({ binomialFromParser, bucketHintFromParser }, species, synonyms) {
+export function classify(
+  { binomialFromParser, bucketHintFromParser }: {
+    binomialFromParser: string | null;
+    bucketHintFromParser: 'provisional' | null;
+  },
+  species: SpeciesLookup,
+  synonyms: Map<string, SynonymEntry>,
+): ClassifyResult {
   // −1. Synonym pre-pass (Phase 27, D-04, D-06). Applies BEFORE the provisional
   //     and unparseable short-circuits so a curator can re-route any row with
   //     a non-empty binomial_raw — including provisional and unparseable rows.
@@ -227,7 +326,8 @@ export function classify({ binomialFromParser, bucketHintFromParser }, species, 
   //     unparseable rows with a non-empty binomial are eligible for synonym
   //     promotion.
   if (synonyms && binomialFromParser && synonyms.has(binomialFromParser)) {
-    const { binomial_resolved, species_slug } = synonyms.get(binomialFromParser);
+    const entry = synonyms.get(binomialFromParser)!;
+    const { binomial_resolved, species_slug } = entry;
     return { match_bucket: 'resolved-via-synonym', binomial_resolved, species_slug };
   }
 
@@ -263,8 +363,8 @@ export function classify({ binomialFromParser, bucketHintFromParser }, species, 
   }
 
   // 3. Genus-only.
-  const genus = binomialFromParser.split(' ')[0];
-  if (species.genera.has(genus)) {
+  const genus = binomialFromParser.split(' ')[0] ?? '';
+  if (genus && species.genera.has(genus)) {
     return { match_bucket: 'genus-only', binomial_resolved: '', species_slug: '' };
   }
 
@@ -294,14 +394,18 @@ const LIST_FOLDER_BODY = {
   include_non_downloadable_files: true,
 };
 
-async function* listSharedFolderWithRetry(shareUrl, token) {
+async function* listSharedFolderWithRetry(
+  shareUrl: string,
+  token: string,
+): AsyncGenerator<DropboxEntry, void, undefined> {
   let firstPage = true;
-  let cursor = null;
+  let cursor: string | null = null;
   let pages = 0;
 
   while (true) {
     pages++;
-    const data = firstPage
+    // D-10 boundary: dbxCall returns unknown; narrow with isDropboxListPage guard.
+    const rawData: unknown = firstPage
       ? await withRetry(
           () => dbxCall('/2/files/list_folder', { ...LIST_FOLDER_BODY, shared_link: { url: shareUrl } }, token),
           `list_folder page ${pages}`
@@ -311,11 +415,15 @@ async function* listSharedFolderWithRetry(shareUrl, token) {
           `list_folder/continue page ${pages}`
         );
 
-    process.stderr.write(`[ingest-photos] page ${pages}: +${data.entries.length} entries\n`);
-    for (const e of data.entries) yield e;
+    if (!isDropboxListPage(rawData)) {
+      throw new Error('[ingest-photos] unexpected Dropbox API response shape');
+    }
 
-    if (!data.has_more) break;
-    cursor = data.cursor;
+    process.stderr.write(`[ingest-photos] page ${pages}: +${rawData.entries.length} entries\n`);
+    for (const e of rawData.entries) yield e;
+
+    if (!rawData.has_more) break;
+    cursor = rawData.cursor;
     firstPage = false;
   }
 }
@@ -324,7 +432,7 @@ async function* listSharedFolderWithRetry(shareUrl, token) {
 // main()
 // ---------------------------------------------------------------------------
 
-async function main() {
+async function main(): Promise<void> {
   // --- RESORT_ONLY: re-classify against current synonyms.csv + re-sort; no Dropbox calls. ---
   // D-05: photos:investigate is the curator's daily-use command — edit synonyms.csv,
   // run this, manifest reclassified + re-sorted. No source TIFFs are downloaded.
@@ -339,7 +447,8 @@ async function main() {
     for (const row of existing) {
       const binomial = (row.binomial_raw || '').toLowerCase();
       if (binomial && synonyms.has(binomial)) {
-        const { binomial_resolved, species_slug } = synonyms.get(binomial);
+        const entry = synonyms.get(binomial)!;
+        const { binomial_resolved, species_slug } = entry;
         // Idempotency guard: only count and log an actual change.
         if (row.match_bucket !== 'resolved-via-synonym' || row.species_slug !== species_slug) {
           row.match_bucket = 'resolved-via-synonym';
@@ -383,7 +492,7 @@ async function main() {
       }
       console.log('  ...');
     } catch (err) {
-      console.error(`[ingest-photos] DRY_RUN failed: ${redact(err.message ?? String(err))}`);
+      console.error(`[ingest-photos] DRY_RUN failed: ${redact((err as Error).message ?? String(err))}`);
       process.exit(1);
     }
     return;
@@ -396,12 +505,18 @@ async function main() {
   console.log(`[ingest-photos] loaded ${synonyms.size} synonyms from ${SYNONYMS_CSV}`);
 
   const existing = await readManifest(MANIFEST_PATH);
-  const seen = new Set(existing.map((r) => r.content_hash));
+  const seen = new Set<string>(existing.map((r) => r.content_hash));
   console.log(`[ingest-photos] existing manifest has ${existing.length} rows (${seen.size} unique content_hashes)`);
 
-  const rows = [...existing]; // preserve existing rows verbatim (Phase 27 edits them)
+  const rows: ManifestRow[] = [...existing]; // preserve existing rows verbatim (Phase 27 edits them)
 
-  const stats = {
+  const stats: {
+    discovered: number;
+    skipped: number;
+    failed: number;
+    folders: number;
+    buckets: Record<string, number>;
+  } = {
     discovered: 0,
     skipped: 0,
     failed: 0,
@@ -409,7 +524,7 @@ async function main() {
     buckets: {},
   };
 
-  let fatal = null;
+  let fatal: Error | null = null;
   try {
     for await (const entry of listSharedFolderWithRetry(DROPBOX_SHARE_URL, DROPBOX_TOKEN)) {
       // Folder entries — log + skip. D-11: *custom/ stays untouched. Non-recursive
@@ -423,7 +538,7 @@ async function main() {
       if (entry['.tag'] !== 'file') continue;
 
       // Resumability: skip files whose content_hash is already in the manifest.
-      if (seen.has(entry.content_hash)) {
+      if (entry.content_hash && seen.has(entry.content_hash)) {
         stats.skipped++;
         logStage(entry.content_hash, 'skip', 'already-in-manifest');
         continue;
@@ -432,11 +547,11 @@ async function main() {
       try {
         // Non-image extension → unparseable bucket with last_error explaining why
         // (per plan; Phase 26's D-05 status set has no 'non-image' bucket).
-        const ext = fileExt(entry.name);
+        const ext = fileExt(entry.name ?? '');
         if (!IMAGE_EXTS.has(ext)) {
-          const row = {
-            content_hash: entry.content_hash,
-            dropbox_path: entry.path_display || ('/' + entry.name),
+          const row: ManifestRow = {
+            content_hash: entry.content_hash ?? '',
+            dropbox_path: entry.path_display || ('/' + (entry.name ?? '')),
             size_bytes: String(entry.size ?? ''),
             server_modified: entry.server_modified ?? '',
             filename_raw: entry.name ?? '',
@@ -450,16 +565,16 @@ async function main() {
             last_error: 'non-image extension',
           };
           rows.push(row);
-          seen.add(entry.content_hash);
+          if (entry.content_hash) seen.add(entry.content_hash);
           stats.discovered++;
-          stats.buckets.unparseable = (stats.buckets.unparseable ?? 0) + 1;
-          logStage(entry.content_hash, 'classify', 'unparseable', `non-image (${ext})`);
+          stats.buckets['unparseable'] = (stats.buckets['unparseable'] ?? 0) + 1;
+          logStage(entry.content_hash ?? '', 'classify', 'unparseable', `non-image (${ext})`);
           continue;
         }
 
         // Parse filename → binomial + bucket hint, specimen + view.
-        const parsed = extractBinomial(entry.name);
-        const parsedSV = parseSpecimenAndView(entry.name);
+        const parsed = extractBinomial(entry.name ?? '');
+        const parsedSV: ParseSpecimenAndViewResult = parseSpecimenAndView(entry.name ?? '');
 
         // Classify against species.csv (with Phase 27 synonym pre-pass + FIX #3 provisional short-circuit).
         const { match_bucket, binomial_resolved, species_slug } = classify(
@@ -471,9 +586,9 @@ async function main() {
           synonyms,
         );
 
-        const row = {
-          content_hash: entry.content_hash,
-          dropbox_path: entry.path_display || ('/' + entry.name),
+        const row: ManifestRow = {
+          content_hash: entry.content_hash ?? '',
+          dropbox_path: entry.path_display || ('/' + (entry.name ?? '')),
           size_bytes: String(entry.size ?? ''),
           server_modified: entry.server_modified ?? '',
           filename_raw: entry.name ?? '',
@@ -487,14 +602,14 @@ async function main() {
           last_error: '',
         };
         rows.push(row);
-        seen.add(entry.content_hash);
+        if (entry.content_hash) seen.add(entry.content_hash);
         stats.discovered++;
         stats.buckets[match_bucket] = (stats.buckets[match_bucket] ?? 0) + 1;
-        logStage(entry.content_hash, 'classify', match_bucket, row.binomial_raw);
+        logStage(entry.content_hash ?? '', 'classify', match_bucket, row.binomial_raw);
       } catch (perFileErr) {
         // NEVER crash on a single file (OPS-02). Mark status=failed + last_error.
-        const safeMsg = redact(perFileErr.message ?? String(perFileErr));
-        const row = {
+        const safeMsg = redact((perFileErr as Error).message ?? String(perFileErr));
+        const row: ManifestRow = {
           content_hash: entry.content_hash ?? '',
           dropbox_path: entry.path_display || ('/' + (entry.name ?? '')),
           size_bytes: String(entry.size ?? ''),
@@ -512,14 +627,14 @@ async function main() {
         rows.push(row);
         if (entry.content_hash) seen.add(entry.content_hash);
         stats.failed++;
-        logStage(entry.content_hash, 'classify', 'failed', safeMsg);
+        logStage(entry.content_hash ?? '', 'classify', 'failed', safeMsg);
       }
     }
   } catch (pageErr) {
     // withRetry-exhausted pagination error. Preserve work-so-far for resumption
     // (OPS-03): write the manifest with whatever rows accumulated, then exit 1.
-    fatal = pageErr;
-    console.error(`[ingest-photos] fatal pagination error: ${redact(pageErr.message ?? String(pageErr))}`);
+    fatal = pageErr as Error;
+    console.error(`[ingest-photos] fatal pagination error: ${redact((pageErr as Error).message ?? String(pageErr))}`);
   }
 
   // Always sort + write before exiting (success OR fatal page error).
@@ -549,7 +664,7 @@ async function main() {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   main().catch((err) => {
-    console.error(redact(err.message ?? String(err)));
+    console.error(redact((err as Error).message ?? String(err)));
     process.exit(1);
   });
 }
