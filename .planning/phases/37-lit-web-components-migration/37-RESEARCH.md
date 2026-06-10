@@ -646,7 +646,9 @@ Change `src/components/*.test.js` → `src/components/*.test.ts` (no brace expan
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> Both questions below were resolved during planning — see `37-ARTIFACTS.md` (§ Resolved open questions) and Plan 04 (Q1: hard-fail `SchemaValidationError`) / Plan 01 Task 3 (Q2: fresh baseline).
 
 1. **D-05 throw behavior in `pnwm-taxon-browser` connectedCallback**
    - What we know: `loadParquet()` throws and callers handle it. `pnwm-taxon-browser.connectedCallback` has a `try { ... } catch (_e) { /* leave empty */ }` that currently swallows errors silently.
