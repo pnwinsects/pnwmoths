@@ -438,11 +438,11 @@ test('integration: emit-species-states.ts writes _site/species-states.json', () 
   );
 });
 
-// --- Phase 9 taxon.js tests ---
-// taxon.js is an Eleventy data file; typed via src/_data/taxon.d.ts
+// --- Phase 9 taxon.ts tests ---
+// taxon.ts is an Eleventy data file (converted from taxon.js in phase 36-02)
 
-test('taxon.js: returns family→subfamily→genus→species tree', async () => {
-  const { default: taxon } = await import('../src/_data/taxon.js');
+test('taxon.ts: returns family→subfamily→genus→species tree', async () => {
+  const { default: taxon } = await import('../src/_data/taxon.ts');
   const tree = await taxon();
   assert.ok(Array.isArray(tree), 'tree should be an array');
   assert.ok(tree.length > 0, 'tree should have at least one family');
@@ -464,8 +464,8 @@ test('taxon.js: returns family→subfamily→genus→species tree', async () => 
   assert.ok('slug' in sp && 'name' in sp && 'common_name' in sp, 'species missing required properties');
 });
 
-test('taxon.js: null-subfamily genera have name: null (not string)', async () => {
-  const { default: taxon } = await import('../src/_data/taxon.js');
+test('taxon.ts: null-subfamily genera have name: null (not string)', async () => {
+  const { default: taxon } = await import('../src/_data/taxon.ts');
   const tree = await taxon();
   const allFamilies = tree as Array<{ subfamilies: Array<{ name: string | null }> }>;
   const nullSubfams = allFamilies.flatMap(f => f.subfamilies).filter(s => s.name === null);
@@ -476,8 +476,8 @@ test('taxon.js: null-subfamily genera have name: null (not string)', async () =>
   }
 });
 
-test('taxon.js: navImages capped at 4 per taxon level', async () => {
-  const { default: taxon } = await import('../src/_data/taxon.js');
+test('taxon.ts: navImages capped at 4 per taxon level', async () => {
+  const { default: taxon } = await import('../src/_data/taxon.ts');
   const tree = await taxon();
   const allFamilies = tree as Array<{ name: string; navImages: unknown[]; subfamilies: Array<{ name: string | null; navImages: unknown[]; genera: Array<{ name: string; navImages: unknown[] }> }> }>;
   for (const fam of allFamilies) {
