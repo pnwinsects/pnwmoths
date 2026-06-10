@@ -529,7 +529,20 @@ Plans:
   3. `npm run build` and `npm run dev` both work correctly: the GitHub Pages build uses `/pnwmoths/` as `pathPrefix` (set via `GITHUB_PAGES=1`) and the local dev build uses `/`; no double-prefix on Vite-processed asset paths
   4. `_site/` output is byte-identical to the pre-migration baseline after a full `npm run build`
 
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+**Wave 1** (config keystone)
+
+- [ ] 36-01-PLAN.md — Convert eleventy.config.js→.ts: addDataExtension("ts") + --config flag wiring + execFile repoint + GITHUB_PAGES-conditional test (.ts) + tsconfig/test-glob fixes (MIG-03; D-01, D-02, D-14)
+
+**Wave 2** *(parallel; blocked on Wave 1)*
+
+- [ ] 36-02-PLAN.md — Convert DuckDB-boundary data files species/glossary/taxon to .ts with D-03 interface+guard; delete taxon.d.ts (MIG-03; D-03, D-04)
+- [ ] 36-03-PLAN.md — Convert file-I/O data files images/plates/speciesPhotos to .ts with typed emitted-shape interfaces (MIG-03; D-03)
+
+**Wave 3** *(blocked on Waves 1–2; contains the human-verify checkpoint)*
+
+- [ ] 36-04-PLAN.md — Phase gate: typecheck + full npm test + byte-identical build (SC-1/2/4) + human-verify local-dev `/` pathPrefix (SC-3) (MIG-03; SC-1..SC-4)
 
 ### Phase 37: Lit Web Components Migration
 
@@ -603,7 +616,7 @@ Plans:
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
+| 36. Eleventy Data Files & Config Migration | v3.0 | 0/4 | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
