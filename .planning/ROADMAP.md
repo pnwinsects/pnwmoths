@@ -566,7 +566,7 @@ Plans:
 **Wave 2** *(blocked on Wave 1 completion)*
 
 - [x] 37-02-PLAN.md — parquet-cache.ts + O(columns) Parquet validator (SCHEMA-08) + pnwm-filter-bar dispatch (D-09) + 3 test renames
-- [ ] 37-03-PLAN.md — Standalone components: pnwm-image-slideshow (+test), pnwm-occurrence-popup, pnwm-plate-viewer, glossary-tooltip
+- [x] 37-03-PLAN.md — Standalone components: pnwm-image-slideshow (+test), pnwm-occurrence-popup, pnwm-plate-viewer, glossary-tooltip
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -635,7 +635,7 @@ Plans:
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete    | 2026-06-10 |
-| 37. Lit Web Components Migration | v3.0 | 2/5 | In Progress|  |
+| 37. Lit Web Components Migration | v3.0 | 3/5 | In Progress|  |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
 ---
