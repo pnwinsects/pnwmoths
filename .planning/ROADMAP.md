@@ -570,7 +570,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 37-04-PLAN.md — parquet-cache consumers (map, phenology) + pnwm-taxon-browser O(1) species-states validator (SCHEMA-08, D-05 hard-fail) + test
+- [x] 37-04-PLAN.md — parquet-cache consumers (map, phenology) + pnwm-taxon-browser O(1) species-states validator (SCHEMA-08, D-05 hard-fail) + test
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
@@ -635,7 +635,7 @@ Plans:
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete    | 2026-06-10 |
-| 37. Lit Web Components Migration | v3.0 | 3/5 | In Progress|  |
+| 37. Lit Web Components Migration | v3.0 | 4/5 | In Progress|  |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
 ---
