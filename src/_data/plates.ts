@@ -17,7 +17,18 @@ import { join } from 'node:path';
 const DEFAULT_SOURCE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates_z';
 const PLATES_Z_SOURCE = process.env.PLATES_Z_SOURCE ?? DEFAULT_SOURCE;
 
-function parseDirName(dirName) {
+// Local interface covering all consumed/returned fields (both code paths)
+interface PlateEntry {
+  number: string;
+  family: string;
+  title: string;
+  description: string | null;
+  slug: string;
+  width: number;
+  height: number;
+}
+
+function parseDirName(dirName: string): { number: string; family: string } | null {
   // Strip leading year prefix ("2021 ")
   let name = dirName.replace(/^2021\s+/i, '');
   // Strip trailing "NEW" annotation (with or without preceding space/paren)
@@ -25,10 +36,10 @@ function parseDirName(dirName) {
 
   const match = name.match(/^PLATE\s+(\d+)\s+(.+)$/i);
   if (!match) return null;
-  return { number: match[1], family: match[2].trim() };
+  return { number: match[1] as string, family: (match[2] as string).trim() };
 }
 
-function toSlug(number, family) {
+function toSlug(number: string, family: string): string {
   const familySlug = family
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, ' ')
@@ -39,7 +50,7 @@ function toSlug(number, family) {
 }
 
 // Subfamily/tribe descriptions from the original pnwmoths.biol.wwu.edu plate index.
-const DESCRIPTIONS = {
+const DESCRIPTIONS: Record<string, string> = {
   "3":  "Hemileucinae",
   "4":  "Saturniinae I",
   "5":  "Saturniinae II",
@@ -136,22 +147,22 @@ const DESCRIPTIONS = {
   "96": "Noctuinae LI: Noctuini XXI",
 };
 
-async function readDimensions(dirPath) {
+async function readDimensions(dirPath: string): Promise<{ width: number; height: number }> {
   const xml = await readFile(join(dirPath, 'ImageProperties.xml'), 'utf8');
   const wMatch = xml.match(/WIDTH="(\d+)"/);
   const hMatch = xml.match(/HEIGHT="(\d+)"/);
   return {
-    width: wMatch ? parseInt(wMatch[1], 10) : 2400,
-    height: hMatch ? parseInt(hMatch[1], 10) : 3000,
+    width: wMatch ? parseInt(wMatch[1] as string, 10) : 2400,
+    height: hMatch ? parseInt(hMatch[1] as string, 10) : 3000,
   };
 }
 
 const MANIFEST_PATH = new URL('../../data/plates.json', import.meta.url).pathname;
 
-export default async function () {
+export default async function (): Promise<PlateEntry[]> {
   if (!existsSync(PLATES_Z_SOURCE)) {
     if (existsSync(MANIFEST_PATH)) {
-      const raw = JSON.parse(await readFile(MANIFEST_PATH, 'utf8'));
+      const raw = JSON.parse(await readFile(MANIFEST_PATH, 'utf8')) as PlateEntry[];
       return raw.map(({ number, family, slug, width, height }) => ({
         number,
         family,
@@ -171,7 +182,7 @@ export default async function () {
 
   // Collect all plates; when two dirs map to the same slug, prefer the "NEW" one
   // (e.g. "PLATE 49 ... NEW" supersedes "2021 PLATE 49 ...").
-  const bySlug = new Map();
+  const bySlug = new Map<string, PlateEntry & { dirName: string }>();
   for (const dir of dirs) {
     const parsed = parseDirName(dir.name);
     if (!parsed) {
