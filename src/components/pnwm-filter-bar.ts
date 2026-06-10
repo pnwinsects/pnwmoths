@@ -1,10 +1,12 @@
-import { LitElement, html, css } from 'lit';
-import { loadParquet } from './parquet-cache.js';
+import { LitElement, html, css, type PropertyDeclarations, type CSSResult, type TemplateResult } from 'lit';
+import { loadParquet } from './parquet-cache.ts';
+import type { OccurrenceRecord } from '../types/index.ts';
+import type { FilterChangeDetail } from '../types/index.ts';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 class PnwmFilterBar extends LitElement {
-  static get properties() {
+  static get properties(): PropertyDeclarations {
     return {
       slug: { type: String },
       _state: { type: String, state: true },
@@ -22,7 +24,7 @@ class PnwmFilterBar extends LitElement {
     };
   }
 
-  static get styles() {
+  static get styles(): CSSResult {
     return css`
       :host {
         display: block;
@@ -58,6 +60,23 @@ class PnwmFilterBar extends LitElement {
     `;
   }
 
+  // Instance fields — declared above constructor, assigned in constructor
+  // (useDefineForClassFields: false means these become constructor assignments,
+  // which is compatible with Lit reactive property descriptors — D-08 / Pitfall 1)
+  slug: string;
+  _state: string;
+  _recordType: string;
+  _yearMin: number;
+  _yearMax: number;
+  _states: string[];
+  _recordTypes: string[];
+  _county: string;
+  _collection: string;
+  _elevationMin: number;
+  _elevationMax: number;
+  _counties: string[];
+  _collections: string[];
+
   constructor() {
     super();
     this.slug = '';
@@ -75,15 +94,15 @@ class PnwmFilterBar extends LitElement {
     this._collections = [];
   }
 
-  async connectedCallback() {
+  async connectedCallback(): Promise<void> {
     super.connectedCallback();
     if (this.slug) {
       try {
-        const records = await loadParquet(this.slug);
-        const statesSet = new Set();
-        const typesSet = new Set();
-        const countiesSet = new Set();
-        const collectionsSet = new Set();
+        const records: OccurrenceRecord[] = await loadParquet(this.slug);
+        const statesSet = new Set<string>();
+        const typesSet = new Set<string>();
+        const countiesSet = new Set<string>();
+        const collectionsSet = new Set<string>();
         for (const r of records) {
           if (r.state) statesSet.add(r.state);
           if (r.record_type) typesSet.add(r.record_type);
@@ -94,14 +113,14 @@ class PnwmFilterBar extends LitElement {
         this._recordTypes = [...typesSet].sort();
         this._counties = [...countiesSet].sort();
         this._collections = [...collectionsSet].sort();
-      } catch (err) {
+      } catch (_err) {
         // Leave empty on error — controls still render with "All" options
       }
     }
   }
 
-  _dispatchFilterChange() {
-    this.dispatchEvent(new CustomEvent('pnwm-filter-change', {
+  _dispatchFilterChange(): void {
+    this.dispatchEvent(new CustomEvent<FilterChangeDetail>('pnwm-filter-change', {
       bubbles: true,
       composed: true,
       detail: {
@@ -117,51 +136,51 @@ class PnwmFilterBar extends LitElement {
     }));
   }
 
-  _onStateChange(e) {
-    this._state = e.target.value;
+  _onStateChange(e: Event): void {
+    this._state = (e.target as HTMLSelectElement).value;
     this._dispatchFilterChange();
   }
 
-  _onRecordTypeChange(e) {
-    this._recordType = e.target.value;
+  _onRecordTypeChange(e: Event): void {
+    this._recordType = (e.target as HTMLSelectElement).value;
     this._dispatchFilterChange();
   }
 
-  _onYearMinChange(e) {
-    const val = Number(e.target.value);
+  _onYearMinChange(e: Event): void {
+    const val = Number((e.target as HTMLInputElement).value);
     this._yearMin = Math.min(val, this._yearMax);
     this._dispatchFilterChange();
   }
 
-  _onYearMaxChange(e) {
-    const val = Number(e.target.value);
+  _onYearMaxChange(e: Event): void {
+    const val = Number((e.target as HTMLInputElement).value);
     this._yearMax = Math.max(val, this._yearMin);
     this._dispatchFilterChange();
   }
 
-  _onCountyChange(e) {
-    this._county = e.target.value;
+  _onCountyChange(e: Event): void {
+    this._county = (e.target as HTMLSelectElement).value;
     this._dispatchFilterChange();
   }
 
-  _onCollectionChange(e) {
-    this._collection = e.target.value;
+  _onCollectionChange(e: Event): void {
+    this._collection = (e.target as HTMLSelectElement).value;
     this._dispatchFilterChange();
   }
 
-  _onElevationMinChange(e) {
-    const val = Number(e.target.value);
+  _onElevationMinChange(e: Event): void {
+    const val = Number((e.target as HTMLInputElement).value);
     this._elevationMin = Math.min(val, this._elevationMax);
     this._dispatchFilterChange();
   }
 
-  _onElevationMaxChange(e) {
-    const val = Number(e.target.value);
+  _onElevationMaxChange(e: Event): void {
+    const val = Number((e.target as HTMLInputElement).value);
     this._elevationMax = Math.max(val, this._elevationMin);
     this._dispatchFilterChange();
   }
 
-  _onClearFilters(e) {
+  _onClearFilters(e: Event): void {
     e.preventDefault();
     this._state = 'all';
     this._recordType = 'all';
@@ -174,7 +193,7 @@ class PnwmFilterBar extends LitElement {
     this._dispatchFilterChange();
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <div class="filter-controls">
         <div class="filter-group">
