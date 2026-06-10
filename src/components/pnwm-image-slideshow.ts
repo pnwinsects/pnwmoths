@@ -1,7 +1,8 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyDeclarations, type CSSResult, type TemplateResult, type PropertyValues } from 'lit';
+import type { Specimen } from '../types/index.ts';
 
 export class PnwmImageSlideshow extends LitElement {
-  static properties = {
+  static properties: PropertyDeclarations = {
     slug: { type: String },
     _currentIndex: { state: true },
     _lightboxOpen: { state: true },
@@ -14,7 +15,7 @@ export class PnwmImageSlideshow extends LitElement {
     _highResSpecimens: { state: true },
   };
 
-  static styles = css`
+  static styles: CSSResult = css`
     :host { display: block; }
     .slideshow { position: relative; }
     .slide { text-align: center; }
@@ -110,6 +111,35 @@ export class PnwmImageSlideshow extends LitElement {
     }
   `;
 
+  slug: string;
+  _currentIndex: number;
+  _lightboxOpen: boolean;
+  _images: Array<{
+    src: string;
+    alt: string;
+    photographer: string;
+    license: string;
+    locality: string;
+    state: string;
+    elevation: string;
+    year: string;
+    month: string;
+    day: string;
+    collector: string;
+    subspecies: string;
+  }>;
+  _stripOverflows: boolean;
+  highResAvailable: boolean;
+  highResSpecimens: string;
+  cdnBaseUrl: string;
+  prefixUrl: string;
+  _highResSpecimens: Specimen[];
+  _osdViewer: import('openseadragon').Viewer | null;
+  _resizeObserver: ResizeObserver | null;
+  _inertedElements: Element[];
+  // Bound keydown listener stored as instance field for symmetric add/remove
+  _boundHandleKeydown: (e: KeyboardEvent) => void;
+
   constructor() {
     super();
     this.slug = '';
@@ -120,10 +150,15 @@ export class PnwmImageSlideshow extends LitElement {
     this._resizeObserver = null;
     this._inertedElements = [];
     this._osdViewer = null;
-    this._handleKeydown = this._handleKeydown.bind(this);
+    this._highResSpecimens = [];
+    this.highResAvailable = false;
+    this.highResSpecimens = '';
+    this.cdnBaseUrl = '';
+    this.prefixUrl = '';
+    this._boundHandleKeydown = this._handleKeydown.bind(this);
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback();
 
     // Extract image data from light DOM figure children (only figures with an img)
@@ -135,7 +170,7 @@ export class PnwmImageSlideshow extends LitElement {
       return [{
         src: img.getAttribute('src') || '',
         alt: img.getAttribute('alt') || '',
-        photographer: img.dataset.photographer || (figcaption ? figcaption.textContent.trim() : ''),
+        photographer: img.dataset.photographer || (figcaption ? figcaption.textContent?.trim() ?? '' : ''),
         license: img.dataset.license || '',
         locality: img.dataset.locality || '',
         state: img.dataset.state || '',
@@ -150,31 +185,31 @@ export class PnwmImageSlideshow extends LitElement {
 
     // Hide static figures once JS component takes over
     if (this._images.length > 0) {
-      figures.forEach(f => { f.style.display = 'none'; });
+      figures.forEach(f => { (f as HTMLElement).style.display = 'none'; });
     }
 
     if (this.getAttribute('high-res-specimens')) {
       try {
-        this._highResSpecimens = JSON.parse(this.getAttribute('high-res-specimens'));
+        this._highResSpecimens = JSON.parse(this.getAttribute('high-res-specimens') ?? '[]') as Specimen[];
       } catch (e) {
         console.error('[pnwmoths] Failed to parse high-res-specimens attribute', e);
         this._highResSpecimens = [];
       }
     }
 
-    document.addEventListener('keydown', this._handleKeydown);
+    document.addEventListener('keydown', this._boundHandleKeydown);
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     super.disconnectedCallback();
-    document.removeEventListener('keydown', this._handleKeydown);
+    document.removeEventListener('keydown', this._boundHandleKeydown);
     this._resizeObserver?.disconnect();
     this._inertedElements.forEach(el => el.removeAttribute('inert'));
     this._inertedElements = [];
   }
 
-  firstUpdated() {
-    const strip = this.shadowRoot.querySelector('.thumbnail-strip');
+  firstUpdated(): void {
+    const strip = this.shadowRoot?.querySelector('.thumbnail-strip');
     if (!strip) return;
     this._resizeObserver = new ResizeObserver(() => {
       const overflows = strip.scrollWidth > strip.clientWidth;
@@ -185,14 +220,14 @@ export class PnwmImageSlideshow extends LitElement {
     this._resizeObserver.observe(strip);
   }
 
-  updated(changedProperties) {
+  updated(changedProperties: PropertyValues): void {
     if (changedProperties.has('_currentIndex')) {
-      const activeThumb = this.shadowRoot.querySelector('.thumbnail[aria-selected="true"]');
+      const activeThumb = this.shadowRoot?.querySelector('.thumbnail[aria-selected="true"]');
       activeThumb?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
     }
   }
 
-  _handleKeydown(e) {
+  _handleKeydown(e: KeyboardEvent): void {
     if (e.key === 'Escape' && this._lightboxOpen) {
       this._closeLightbox();
     } else if (e.key === 'ArrowLeft' && this._lightboxOpen) {
@@ -204,11 +239,11 @@ export class PnwmImageSlideshow extends LitElement {
     }
   }
 
-  async _openLightbox() {
+  async _openLightbox(): Promise<void> {
     this._lightboxOpen = true;
     // Inert all siblings up the ancestor chain (not the host itself) so keyboard
     // focus is trapped in the lightbox without inerting our own shadow DOM.
-    let node = this;
+    let node: Element = this;
     while (node.parentElement && node.parentElement.tagName !== 'BODY') {
       Array.from(node.parentElement.children).forEach(sibling => {
         if (sibling !== node && !sibling.hasAttribute('inert')) {
@@ -219,14 +254,15 @@ export class PnwmImageSlideshow extends LitElement {
       node = node.parentElement;
     }
     await this.updateComplete;
-    const closeBtn = this.shadowRoot.querySelector('.lightbox-close');
+    const closeBtn = this.shadowRoot?.querySelector('.lightbox-close') as HTMLElement | null;
     if (closeBtn) closeBtn.focus();
 
     if (this.highResAvailable && this._highResSpecimens?.length) {
-      const viewerEl = this.shadowRoot.querySelector('#osd-viewer');
+      const viewerEl = this.shadowRoot?.querySelector('#osd-viewer') as HTMLElement | null;
       if (viewerEl && !this._osdViewer) {
         const { default: OpenSeadragon } = await import('openseadragon');
-        const current = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0];
+        // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
+        const current = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
         this._osdViewer = OpenSeadragon({
           element: viewerEl,
           prefixUrl: this.prefixUrl,
@@ -241,7 +277,7 @@ export class PnwmImageSlideshow extends LitElement {
     }
   }
 
-  _closeLightbox() {
+  _closeLightbox(): void {
     this._osdViewer?.destroy();
     this._osdViewer = null;
     this._lightboxOpen = false;
@@ -249,11 +285,21 @@ export class PnwmImageSlideshow extends LitElement {
     this._inertedElements = [];
   }
 
-  _formatCaption(img) {
-    const parts = [];
+  _formatCaption(img: {
+    locality?: string;
+    state?: string;
+    elevation?: string;
+    year?: string;
+    month?: string;
+    day?: string;
+    collector?: string;
+    photographer?: string;
+    license?: string;
+  }): string[] {
+    const parts: string[] = [];
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-    const locationParts = [];
+    const locationParts: string[] = [];
     if (img.locality) locationParts.push(img.locality);
     if (img.state) locationParts.push(img.state);
     if (img.elevation) locationParts.push(`${img.elevation} ft.`);
@@ -262,8 +308,10 @@ export class PnwmImageSlideshow extends LitElement {
     if (img.year) {
       const month = img.month ? parseInt(img.month) : 0;
       const day = img.day ? parseInt(img.day) : 0;
-      const dateParts = [img.year];
-      if (month >= 1 && month <= 12) dateParts.unshift(MONTHS[month - 1]);
+      const dateParts: (string | number)[] = [img.year];
+      // noUncheckedIndexedAccess: MONTHS[month - 1] returns string | undefined; non-null assertion
+      // safe because month is already range-checked (1..12) in the condition above
+      if (month >= 1 && month <= 12) dateParts.unshift(MONTHS[month - 1]!);
       if (day) dateParts.splice(1, 0, day);
       parts.push(dateParts.join(' '));
     }
@@ -277,52 +325,60 @@ export class PnwmImageSlideshow extends LitElement {
     return parts;
   }
 
-  _buildDziUrl(specimen) {
+  _buildDziUrl(specimen: Specimen): string {
     return `${this.cdnBaseUrl}/${specimen.tiles_path}.dzi`;
   }
 
-  _prevSpecimen() {
+  _prevSpecimen(): void {
     this._currentIndex = (this._currentIndex - 1 + this._highResSpecimens.length) % this._highResSpecimens.length;
-    this._osdViewer?.open(this._buildDziUrl(this._highResSpecimens[this._currentIndex]));
+    // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
+    const spec = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
+    // OSD open() runtime accepts DZI URL strings; cast satisfies strict types without behavior change
+    this._osdViewer?.open(this._buildDziUrl(spec) as unknown as import('openseadragon').TileSourceSpecifier);
   }
 
-  _nextSpecimen() {
+  _nextSpecimen(): void {
     this._currentIndex = (this._currentIndex + 1) % this._highResSpecimens.length;
-    this._osdViewer?.open(this._buildDziUrl(this._highResSpecimens[this._currentIndex]));
+    // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
+    const spec = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
+    // OSD open() runtime accepts DZI URL strings; cast satisfies strict types without behavior change
+    this._osdViewer?.open(this._buildDziUrl(spec) as unknown as import('openseadragon').TileSourceSpecifier);
   }
 
-  _scrollLeft() {
-    const strip = this.shadowRoot.querySelector('.thumbnail-strip');
+  _scrollLeft(): void {
+    const strip = this.shadowRoot?.querySelector('.thumbnail-strip') as HTMLElement | null;
     strip?.scrollBy({ left: -(strip.clientWidth / 2), behavior: 'smooth' });
   }
 
-  _scrollRight() {
-    const strip = this.shadowRoot.querySelector('.thumbnail-strip');
+  _scrollRight(): void {
+    const strip = this.shadowRoot?.querySelector('.thumbnail-strip') as HTMLElement | null;
     strip?.scrollBy({ left: strip.clientWidth / 2, behavior: 'smooth' });
   }
 
-  render() {
+  render(): TemplateResult {
     // No images parsed from light DOM — fall back to slotted content
     if (this._images.length === 0) {
       return html`<slot></slot>`;
     }
 
-    const current = this._images[this._currentIndex];
+    // noUncheckedIndexedAccess: _images[_currentIndex] returns T | undefined; fallback to [0]
+    const current = this._images[this._currentIndex] ?? this._images[0]!;
 
     const useOsd = this.highResAvailable && this._highResSpecimens?.length > 0;
+    // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
     const currentSpecimen = useOsd
-      ? (this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0])
+      ? (this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!)
       : null;
 
     const lightbox = this._lightboxOpen
       ? html`
-          <div class="lightbox" @click=${(e) => { if (e.target === e.currentTarget) this._closeLightbox(); }}>
+          <div class="lightbox" @click=${(e: MouseEvent) => { if (e.target === e.currentTarget) this._closeLightbox(); }}>
             ${useOsd
               ? html`
                   <div id="osd-viewer" class="osd-viewer"></div>
                   <p class="caption-line">
-                    Specimen ${currentSpecimen.specimen_id} &middot;
-                    ${currentSpecimen.view === 'D' ? 'Dorsal' : 'Ventral'}
+                    Specimen ${currentSpecimen!.specimen_id} &middot;
+                    ${currentSpecimen!.view === 'D' ? 'Dorsal' : 'Ventral'}
                     ${current.photographer ? html` &middot; &copy; ${current.photographer}${current.license ? html` &middot; ${current.license}` : ''}` : ''}
                   </p>
                 `
@@ -349,7 +405,7 @@ export class PnwmImageSlideshow extends LitElement {
               src=${current.src}
               alt=${current.alt}
               @click=${() => this._openLightbox()}
-              @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
+              @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
             >
             ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
           </div>
@@ -366,7 +422,7 @@ export class PnwmImageSlideshow extends LitElement {
             src=${current.src}
             alt=${current.alt}
             @click=${() => this._openLightbox()}
-            @error=${(e) => console.error(`[pnwmoths] Image failed to load: ${e.target.src}`)}
+            @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
           >
           ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
         </div>

@@ -65,7 +65,7 @@ describe('_nextSpecimen', () => {
 
   it('advances _currentIndex from 0 to 1 and calls open with correct URL', () => {
     let openedWith = null;
-    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const _osdViewer = { open: (url: string) => { openedWith = url; } };
     const ctx = {
       _currentIndex: 0,
       _highResSpecimens: [specimenA, specimenB],
@@ -80,7 +80,7 @@ describe('_nextSpecimen', () => {
 
   it('wraps from last index back to 0 and calls open with first specimen URL', () => {
     let openedWith = null;
-    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const _osdViewer = { open: (url: string) => { openedWith = url; } };
     const ctx = {
       _currentIndex: 1,
       _highResSpecimens: [specimenA, specimenB],
@@ -112,7 +112,7 @@ describe('_prevSpecimen', () => {
 
   it('wraps from index 0 to last index and calls open with last specimen URL', () => {
     let openedWith = null;
-    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const _osdViewer = { open: (url: string) => { openedWith = url; } };
     const ctx = {
       _currentIndex: 0,
       _highResSpecimens: [specimenA, specimenB],
@@ -127,7 +127,7 @@ describe('_prevSpecimen', () => {
 
   it('retreats from index 1 to 0 and calls open with first specimen URL', () => {
     let openedWith = null;
-    const _osdViewer = { open: (url) => { openedWith = url; } };
+    const _osdViewer = { open: (url: string) => { openedWith = url; } };
     const ctx = {
       _currentIndex: 1,
       _highResSpecimens: [specimenA, specimenB],
@@ -142,7 +142,8 @@ describe('_prevSpecimen', () => {
 });
 
 describe('useOsd derivation', () => {
-  const useOsd = (ctx) => ctx.highResAvailable && ctx._highResSpecimens?.length > 0;
+  const useOsd = (ctx: { highResAvailable: boolean; _highResSpecimens?: unknown[] }) =>
+    ctx.highResAvailable && (ctx._highResSpecimens?.length ?? 0) > 0;
 
   it('is false when highResAvailable is false and _highResSpecimens is undefined', () => {
     assert.equal(useOsd({ highResAvailable: false, _highResSpecimens: undefined }), false);
@@ -159,7 +160,7 @@ describe('useOsd derivation', () => {
 });
 
 describe('view-to-label mapping', () => {
-  const label = (view) => view === 'D' ? 'Dorsal' : 'Ventral';
+  const label = (view: string) => view === 'D' ? 'Dorsal' : 'Ventral';
 
   it('maps D to Dorsal', () => {
     assert.equal(label('D'), 'Dorsal');
