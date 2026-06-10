@@ -1,8 +1,9 @@
 // Source: profiled against production data 2026-06-09
-// See DATA-PROFILE.md for the null-distribution tables that justify each .nullable()
-// Rule: use z.nullable() (not z.optional()) — hyparquet writes null, not undefined
+// See DATA-PROFILE.md for the null-distribution tables that justify each nullable field
+// Rule: use z.nullable(z.string()) (not z.optional()) — hyparquet writes null, not undefined
 // Rule: no enum, no namespace, no parameter-properties (TS-03 / Node 24 type-stripping)
-import { z } from 'zod';
+// Source: verified against node_modules/zod/v4/mini/schemas.js
+import * as z from 'zod/mini';
 
 // --- OccurrenceRecord ---
 // Describes what hyparquet produces from records.parquet
@@ -14,15 +15,15 @@ export const OccurrenceRecordSchema = z.object({
   latitude:      z.number(),
   longitude:     z.number(),
   state:         z.string(),        // 'WA' | 'OR' | 'BC' | 'ID' | 'AB' | 'MT'
-  county:        z.string().nullable(),   // 100% null in current production data
-  locality:      z.string().nullable(),
-  elevation_ft:  z.number().int().nullable(),
-  year:          z.number().int().nullable(),
-  month:         z.number().int().nullable(),
-  day:           z.number().int().nullable(),
-  collector:     z.string().nullable(),
-  collection:    z.string().nullable(),
-  notes:         z.string().nullable(),
+  county:        z.nullable(z.string()),   // 100% null in current production data
+  locality:      z.nullable(z.string()),
+  elevation_ft:  z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
+  year:          z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
+  month:         z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
+  day:           z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
+  collector:     z.nullable(z.string()),
+  collection:    z.nullable(z.string()),
+  notes:         z.nullable(z.string()),
 });
 export type OccurrenceRecord = z.infer<typeof OccurrenceRecordSchema>;
 
@@ -30,15 +31,15 @@ export type OccurrenceRecord = z.infer<typeof OccurrenceRecordSchema>;
 // Describes a row from DuckDB read of species.csv (with nullstr='')
 // id comes back as number from DuckDB INTEGER
 export const SpeciesSchema = z.object({
-  id:              z.number().int(),       // DuckDB INTEGER
+  id:              z.number(),             // DuckDB INTEGER; int constraint dropped (not in zod/mini); enforced by DuckDB
   genus:           z.string(),
   species:         z.string(),
-  common_name:     z.string().nullable(),  // 68% null
-  noc_id:          z.string().nullable(),  // 1.8% null
-  authority:       z.string().nullable(),  // 3.5% null
-  family:          z.string().nullable(),  // 2.8% null (logically required but data has nulls)
-  similar_species: z.string().nullable(),  // 26.9% null; pipe-delimited slugs when present
-  subfamily:       z.string().nullable(),  // 12.4% null
+  common_name:     z.nullable(z.string()),  // 68% null
+  noc_id:          z.nullable(z.string()),  // 1.8% null
+  authority:       z.nullable(z.string()),  // 3.5% null
+  family:          z.nullable(z.string()),  // 2.8% null (logically required but data has nulls)
+  similar_species: z.nullable(z.string()),  // 26.9% null; pipe-delimited slugs when present
+  subfamily:       z.nullable(z.string()),  // 12.4% null
 });
 export type Species = z.infer<typeof SpeciesSchema>;
 
@@ -47,8 +48,8 @@ export type Species = z.infer<typeof SpeciesSchema>;
 export const GlossaryWordSchema = z.object({
   term:           z.string(),
   definition:     z.string(),
-  image_filename: z.string().nullable(),   // 69.1% empty → null
-  photographer:   z.string().nullable(),   // 100% empty → null
+  image_filename: z.nullable(z.string()),   // 69.1% empty → null
+  photographer:   z.nullable(z.string()),   // 100% empty → null
 });
 export type GlossaryWord = z.infer<typeof GlossaryWordSchema>;
 
@@ -62,19 +63,19 @@ export const SpeciesImageSchema = z.object({
   photographer:  z.string(),
   weight:        z.string(),            // VARCHAR; coerced to number in taxon.js via TRY_CAST
   license:       z.string(),
-  view:          z.string().nullable(),
-  specimen:      z.string().nullable(),
-  navigational:  z.string().nullable(), // 100% empty; compared as string: navigational === 'true'
-  locality:      z.string().nullable(),
-  state:         z.string().nullable(),
-  latitude:      z.string().nullable(), // VARCHAR, not DOUBLE (images.csv all-VARCHAR)
-  longitude:     z.string().nullable(),
-  elevation_ft:  z.string().nullable(),
-  year:          z.string().nullable(),
-  month:         z.string().nullable(),
-  day:           z.string().nullable(),
-  collector:     z.string().nullable(),
-  subspecies:    z.string().nullable(), // 100% empty
+  view:          z.nullable(z.string()),
+  specimen:      z.nullable(z.string()),
+  navigational:  z.nullable(z.string()), // 100% empty; compared as string: navigational === 'true'
+  locality:      z.nullable(z.string()),
+  state:         z.nullable(z.string()),
+  latitude:      z.nullable(z.string()), // VARCHAR, not DOUBLE (images.csv all-VARCHAR)
+  longitude:     z.nullable(z.string()),
+  elevation_ft:  z.nullable(z.string()),
+  year:          z.nullable(z.string()),
+  month:         z.nullable(z.string()),
+  day:           z.nullable(z.string()),
+  collector:     z.nullable(z.string()),
+  subspecies:    z.nullable(z.string()), // 100% empty
 });
 export type SpeciesImage = z.infer<typeof SpeciesImageSchema>;
 
@@ -114,8 +115,8 @@ export type SpeciesState = z.infer<typeof SpeciesStateSchema>;
 export const NavImageSchema = z.object({
   filename:     z.string(),
   photographer: z.string(),
-  weight:       z.number().int().nullable(),
-  navigational: z.string().nullable(),
+  weight:       z.nullable(z.number()),    // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
+  navigational: z.nullable(z.string()),
   species_slug: z.string(),
 });
 export type NavImage = z.infer<typeof NavImageSchema>;
@@ -123,8 +124,8 @@ export type NavImage = z.infer<typeof NavImageSchema>;
 export const TaxonSpeciesSchema = z.object({
   slug:        z.string(),
   name:        z.string(),
-  common_name: z.string().nullable(),
-  navImage:    NavImageSchema.nullable(),
+  common_name: z.nullable(z.string()),
+  navImage:    z.nullable(NavImageSchema),
 });
 export type TaxonSpecies = z.infer<typeof TaxonSpeciesSchema>;
 
@@ -137,7 +138,7 @@ export const TaxonGenusSchema = z.object({
 export type TaxonGenus = z.infer<typeof TaxonGenusSchema>;
 
 export const TaxonSubfamilySchema = z.object({
-  name:      z.string().nullable(),   // null when no subfamily grouping
+  name:      z.nullable(z.string()),   // null when no subfamily grouping
   navImages: z.array(NavImageSchema),
   genera:    z.array(TaxonGenusSchema),
 });

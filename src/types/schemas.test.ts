@@ -56,8 +56,9 @@ describe('OccurrenceRecordSchema', () => {
     assert.ok(!result.success);
     assert.ok(Array.isArray(result.error.issues), 'Expected issues array');
     assert.ok(result.error.issues.length > 0, 'Expected at least one issue');
-    const issue = result.error.issues[0];
-    assert.ok(typeof issue.message === 'string', 'Expected string message');
+    const [firstIssue] = result.error.issues;
+    assert.ok(firstIssue !== undefined, 'Expected at least one issue');
+    assert.ok(typeof firstIssue.message === 'string', 'Expected string message');
   });
 });
 
