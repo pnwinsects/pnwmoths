@@ -83,7 +83,8 @@ const INVESTIGATION_BUCKETS = new Set<string>([
  */
 function isManifestRow(obj: unknown): obj is ManifestRow {
   if (typeof obj !== 'object' || obj === null) return false;
-  return COLUMNS.every(col => col in (obj as Record<string, unknown>));
+  const rec = obj as Record<string, unknown>;
+  return COLUMNS.every(col => typeof rec[col] === 'string');
 }
 
 /**

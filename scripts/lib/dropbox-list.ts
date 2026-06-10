@@ -44,7 +44,11 @@ interface DropboxListPage {
 function isDropboxListPage(data: unknown): data is DropboxListPage {
   if (typeof data !== 'object' || data === null) return false;
   const d = data as Record<string, unknown>;
-  return Array.isArray(d['entries']) && typeof d['has_more'] === 'boolean';
+  return (
+    Array.isArray(d['entries']) &&
+    typeof d['has_more'] === 'boolean' &&
+    typeof d['cursor'] === 'string'
+  );
 }
 
 /**
