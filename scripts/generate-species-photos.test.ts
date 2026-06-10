@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSpeciesPhotos, isMaterializable, toTilesPath } from './generate-species-photos.js';
+import { buildSpeciesPhotos, isMaterializable, toTilesPath } from './generate-species-photos.ts';
+import type { ManifestRow } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Row factory — supplies all 13 COLUMNS values so tests don't accidentally
@@ -8,7 +9,7 @@ import { buildSpeciesPhotos, isMaterializable, toTilesPath } from './generate-sp
 // Default status is 'uploaded' (Phase 31 eligible status).
 // ---------------------------------------------------------------------------
 
-function row(overrides) {
+function row(overrides: Partial<ManifestRow>): ManifestRow {
   return {
     content_hash: 'h'.repeat(64),
     dropbox_path: '/folder/a.tif',
@@ -63,7 +64,7 @@ describe('isMaterializable', () => {
 
 describe('toTilesPath', () => {
   it('returns species-tiles/abagrotis-apposita/A-D for default row (no trailing slash)', () => {
-    const result = toTilesPath(row());
+    const result = toTilesPath(row({}));
     assert.equal(result, 'species-tiles/abagrotis-apposita/A-D');
   });
 
@@ -93,9 +94,13 @@ describe('buildSpeciesPhotos', () => {
       row({ status: 'uploaded', specimen_id: 'A' }),
     ];
     const result = buildSpeciesPhotos(rows);
-    const specimens = result['abagrotis-apposita'].specimens;
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    const { specimens } = entry;
     assert.equal(specimens.length, 1);
-    assert.equal(specimens[0].specimen_id, 'A');
+    const [firstSpecimen] = specimens;
+    assert.ok(firstSpecimen !== undefined);
+    assert.equal(firstSpecimen.specimen_id, 'A');
   });
 
   it('groups two specimens of one species under one slug key with high_res_available: true', () => {
@@ -105,8 +110,10 @@ describe('buildSpeciesPhotos', () => {
     ];
     const result = buildSpeciesPhotos(rows);
     assert.ok('abagrotis-apposita' in result);
-    assert.equal(result['abagrotis-apposita'].high_res_available, true);
-    assert.equal(result['abagrotis-apposita'].specimens.length, 2);
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    assert.equal(entry.high_res_available, true);
+    assert.equal(entry.specimens.length, 2);
   });
 
   it('groups two species into two top-level keys', () => {
@@ -127,15 +134,22 @@ describe('buildSpeciesPhotos', () => {
       row({ specimen_id: 'B', view: 'D' }),
     ];
     const result = buildSpeciesPhotos(rows);
-    const specimens = result['abagrotis-apposita'].specimens;
-    assert.equal(specimens[0].specimen_id, 'A');
-    assert.equal(specimens[0].view, 'D');
-    assert.equal(specimens[1].specimen_id, 'A');
-    assert.equal(specimens[1].view, 'V');
-    assert.equal(specimens[2].specimen_id, 'B');
-    assert.equal(specimens[2].view, 'D');
-    assert.equal(specimens[3].specimen_id, 'B');
-    assert.equal(specimens[3].view, 'V');
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    const { specimens } = entry;
+    const [s0, s1, s2, s3] = specimens;
+    assert.ok(s0 !== undefined);
+    assert.ok(s1 !== undefined);
+    assert.ok(s2 !== undefined);
+    assert.ok(s3 !== undefined);
+    assert.equal(s0.specimen_id, 'A');
+    assert.equal(s0.view, 'D');
+    assert.equal(s1.specimen_id, 'A');
+    assert.equal(s1.view, 'V');
+    assert.equal(s2.specimen_id, 'B');
+    assert.equal(s2.view, 'D');
+    assert.equal(s3.specimen_id, 'B');
+    assert.equal(s3.view, 'V');
   });
 
   it('matches pilot JSON shape for abagrotis-apposita exactly', () => {
@@ -161,6 +175,10 @@ describe('buildSpeciesPhotos', () => {
     ];
     const result = buildSpeciesPhotos(rows);
     assert.ok('abagrotis-apposita' in result);
-    assert.equal(result['abagrotis-apposita'].specimens[0].tiles_path, 'species-tiles/abagrotis-apposita/A-D');
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    const [firstSpecimen] = entry.specimens;
+    assert.ok(firstSpecimen !== undefined);
+    assert.equal(firstSpecimen.tiles_path, 'species-tiles/abagrotis-apposita/A-D');
   });
 });
