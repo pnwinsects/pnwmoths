@@ -511,7 +511,7 @@ Plans:
 **Wave 2** *(parallel; blocked on Wave 1)*
 
 - [x] 35-03-PLAN.md — Convert build-data (+SCHEMA-04 DESCRIBE check), copy-parquet, copy-images, emit-species-states, check-page-weight (+2 tests); DuckDB CSV gate preserved (MIG-02, SCHEMA-04, SCHEMA-06; D-06..D-08, D-12)
-- [ ] 35-04-PLAN.md — Convert ingest/tile/upload/generate photo-pipeline scripts (+4 tests); thread View/MatchBucket unions + D-10 boundary guards; SCHEMA-05 output typing on generate (MIG-02, SCHEMA-05; D-09, D-10, D-13)
+- [x] 35-04-PLAN.md — Convert ingest/tile/upload/generate photo-pipeline scripts (+4 tests); thread View/MatchBucket unions + D-10 boundary guards; SCHEMA-05 output typing on generate (MIG-02, SCHEMA-05; D-09, D-10, D-13)
 
 **Wave 3** *(blocked on Waves 1-2; contains the human-verify checkpoint)*
 
@@ -602,7 +602,7 @@ Plans:
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
-| 35. Build Pipeline Scripts Migration | v3.0 | 3/5 | In Progress|  |
+| 35. Build Pipeline Scripts Migration | v3.0 | 4/5 | In Progress|  |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |

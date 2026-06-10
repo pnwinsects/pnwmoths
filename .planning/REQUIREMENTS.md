@@ -24,7 +24,7 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 - [x] **SCHEMA-02**: TypeScript row/record types are derived from the schemas (single source of truth) rather than maintained separately
 - [x] **SCHEMA-03**: Schemas are profiled against the full production dataset (per-column nullability) before finalization so they accept all real data without false rejections
 - [x] **SCHEMA-04**: Build-generated Parquet is trusted (build-locked); the build keeps only a cheap one-sample sanity check (read one species' Parquet back, validate its schema) to catch write-path bugs before deploy. The primary Parquet guard is load-time (see SCHEMA-08), not a full build-time round-trip
-- [ ] **SCHEMA-05**: Build-locked JSON (taxon tree, `species-photos.json` — baked into HTML) is covered by static TS types at authoring; the dynamically-fetched `species-states.json` is validated at load time (see SCHEMA-08)
+- [x] **SCHEMA-05**: Build-locked JSON (taxon tree, `species-photos.json` — baked into HTML) is covered by static TS types at authoring; the dynamically-fetched `species-states.json` is validated at load time (see SCHEMA-08)
 - [x] **SCHEMA-06**: Source CSV input correctness is enforced at build by DuckDB's typed `read_csv` (fails on bad coercion) plus the existing integrity SQL; TS types describe the post-read shape. No separate per-row Zod parsing of CSVs in the hot path
 - [x] **SCHEMA-07**: `npm run verify:parquet` validates every species' Parquet against the schema across the full dataset, runnable on demand without slowing the default build (scaling with dataset size is acceptable here — it is the explicit offline thorough check)
 - [ ] **SCHEMA-08**: Data fetched dynamically from the CDN is validated at load time against its schema by **structure, not per-row** — O(columns), independent of dataset size: `records.parquet` via its hyparquet column metadata, `species-states.json` by top-level + element shape. Runs in production at negligible cost using `zod/mini` or a hand-rolled guard
@@ -82,7 +82,7 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | SCHEMA-02 | Phase 33 | Complete |
 | SCHEMA-03 | Phase 33 | Complete |
 | SCHEMA-04 | Phase 35 | Complete |
-| SCHEMA-05 | Phase 35 | Pending |
+| SCHEMA-05 | Phase 35 | Complete |
 | SCHEMA-06 | Phase 35 | Complete |
 | SCHEMA-07 | Phase 35 | Complete |
 | SCHEMA-08 | Phase 37 | Pending |
