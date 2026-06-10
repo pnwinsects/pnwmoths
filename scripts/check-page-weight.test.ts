@@ -1,4 +1,4 @@
-// scripts/check-page-weight.test.js
+// scripts/check-page-weight.test.ts
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -7,9 +7,9 @@ import { join } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const FAKE_SITE = join(ROOT, '_site_test_weight');
-const SCRIPT = join(ROOT, 'scripts/check-page-weight.js');
+const SCRIPT = join(ROOT, 'scripts/check-page-weight.ts');
 
-test('check-page-weight.js: warns on page exceeding 500KB', () => {
+test('check-page-weight.ts: warns on page exceeding 500KB', () => {
   mkdirSync(FAKE_SITE, { recursive: true });
   const bigHtml = 'x'.repeat(600 * 1024); // 600KB
   writeFileSync(join(FAKE_SITE, 'big.html'), bigHtml);
@@ -31,7 +31,7 @@ test('check-page-weight.js: warns on page exceeding 500KB', () => {
   }
 });
 
-test('check-page-weight.js: no warning on pages under threshold', () => {
+test('check-page-weight.ts: no warning on pages under threshold', () => {
   mkdirSync(FAKE_SITE, { recursive: true });
   writeFileSync(join(FAKE_SITE, 'small.html'), '<html>small</html>');
 
@@ -53,7 +53,7 @@ test('check-page-weight.js: no warning on pages under threshold', () => {
 });
 
 // WR-04: Regression test — missing SITE_DIR is handled without unhandled exception
-test('check-page-weight.js: handles missing SITE_DIR without unhandled exception', () => {
+test('check-page-weight.ts: handles missing SITE_DIR without unhandled exception', () => {
   const NONEXISTENT = join(ROOT, '_nonexistent_wr04_dir');
   const result = spawnSync(
     'node',

@@ -1,15 +1,15 @@
-// scripts/check-page-weight.js
+// scripts/check-page-weight.ts
 // Post-build check: warns when any HTML page exceeds the configured threshold.
 // Run via: npm run build:check-weight
 import { readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const THRESHOLD_BYTES = 500 * 1024; // 500KB per D-11
-const SITE_DIR = process.env.SITE_DIR || '_site';
+const SITE_DIR = process.env['SITE_DIR'] ?? '_site';
 
 let warnCount = 0;
 
-function walkHtml(dir) {
+function walkHtml(dir: string): void {
   const entries = readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
