@@ -1,25 +1,27 @@
-// scripts/build-data.js
+// scripts/build-data.ts
 // Pre-build script: validates CSV input, imports into DuckDB, exports per-species Parquet files.
 // Run via: npm run build:data
 import { DuckDBInstance } from '@duckdb/node-api';
+import type { DuckDBConnection } from '@duckdb/node-api';
 import { readFileSync, mkdirSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
+import { OccurrenceRecordSchema } from '../src/types/schemas.ts';
 
 /**
  * Pre-flight CSV validation (before DuckDB import).
  * Checks UTF-8 encoding and required column presence.
  *
- * @param {string} filePath - Absolute or relative path to the CSV file
- * @param {string[]} requiredColumns - Column names that must be present
- * @returns {object[]} Parsed rows (array of objects)
+ * @param filePath - Absolute or relative path to the CSV file
+ * @param requiredColumns - Column names that must be present
+ * @returns Parsed rows (array of objects)
  * @throws {Error} If encoding is invalid or required column is missing
  */
-export function validateCsv(filePath, requiredColumns) {
-  let raw;
+export function validateCsv(filePath: string, requiredColumns: string[]): Record<string, string>[] {
+  let raw: Buffer;
   try {
     raw = readFileSync(filePath);
   } catch (e) {
-    throw new Error(`Cannot read ${filePath}: ${e.message}`);
+    throw new Error(`Cannot read ${filePath}: ${(e as Error).message}`);
   }
 
   // Verify UTF-8 encoding — fatal: true rejects invalid byte sequences
@@ -31,13 +33,15 @@ export function validateCsv(filePath, requiredColumns) {
     );
   }
 
-  const rows = parse(raw, { columns: true, skip_empty_lines: true });
+  const rows: Record<string, string>[] = parse(raw, { columns: true, skip_empty_lines: true });
 
   if (rows.length === 0) {
     throw new Error(`${filePath} is empty or has no data rows.`);
   }
 
-  const headers = Object.keys(rows[0]);
+  const [firstRow] = rows;
+  if (!firstRow) throw new Error(`${filePath} is empty or has no data rows.`);
+  const headers = Object.keys(firstRow);
   for (const col of requiredColumns) {
     if (!headers.includes(col)) {
       throw new Error(
@@ -51,13 +55,14 @@ export function validateCsv(filePath, requiredColumns) {
 
 /**
  * Validate that a slug component (genus or species) contains only safe characters.
- * Prevents path traversal via species names from CSV (T-01-02).
+ * Prevents path traversal via species names from CSV (T-01-02 / T-35P3-01).
+ * COPY TO parquet cannot be parameterized — this regex guard is the correct mitigation.
  *
- * @param {string} value - The genus or species string to validate
- * @param {string} fieldName - Field name for error messages
+ * @param value - The genus or species string to validate
+ * @param fieldName - Field name for error messages
  * @throws {Error} If value contains characters outside [a-zA-Z0-9 -]
  */
-function validateSlugComponent(value, fieldName) {
+function validateSlugComponent(value: string, fieldName: string): void {
   if (!/^[a-zA-Z0-9 -]+$/.test(value)) {
     throw new Error(
       `Invalid ${fieldName} value "${value}" — only alphanumeric characters, spaces, and hyphens are allowed.`
@@ -66,22 +71,53 @@ function validateSlugComponent(value, fieldName) {
 }
 
 /**
+ * SCHEMA-04: After Parquet generation, read back one species' Parquet (first alphabetically)
+ * via DuckDB DESCRIBE and compare column names to OccurrenceRecordSchema.shape.
+ * Throws if any column is missing or extra, failing the build.
+ * O(columns) cost — not per-row.
+ *
+ * @param conn - Already-open DuckDB connection (D-08: reuse existing connection)
+ * @param firstSlug - Slug of the first species (deterministic alphabetical order, D-07)
+ */
+async function verifySampleParquetSchema(conn: DuckDBConnection, firstSlug: string): Promise<void> {
+  const parquetPath = `data/parquet/${firstSlug}/records.parquet`;
+  const result = await conn.runAndReadAll(
+    `DESCRIBE SELECT * FROM read_parquet('${parquetPath}')`
+  );
+  const actualCols: string[] = (result.getRowObjectsJS() as Array<{ column_name: string }>)
+    .map(r => r.column_name);
+  const expectedCols: string[] = Object.keys(OccurrenceRecordSchema.shape);
+  const missing = expectedCols.filter(c => !actualCols.includes(c));
+  const extra = actualCols.filter(c => !expectedCols.includes(c));
+  if (missing.length > 0 || extra.length > 0) {
+    throw new Error(
+      `Parquet column schema mismatch on ${firstSlug}.\n` +
+      `  Missing: ${missing.join(', ') || 'none'}\n` +
+      `  Extra:   ${extra.join(', ') || 'none'}`
+    );
+  }
+  console.log(`Parquet schema OK: ${actualCols.length} columns match OccurrenceRecordSchema`);
+}
+
+/**
  * Main pipeline: validate CSVs, import into DuckDB, run quality checks, export Parquet files.
  */
-export async function main() {
+export async function main(): Promise<void> {
   // --- Pre-flight CSV validation ---
   validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily']);
   const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']);
   for (const row of imageRows) {
-    if (!/^[a-zA-Z0-9 ._-]+$/.test(row.filename)) {
-      throw new Error(`Invalid image filename "${row.filename}" in images.csv — only alphanumeric, spaces, dots, hyphens, and underscores allowed.`);
+    const filename = row['filename'];
+    if (filename !== undefined && !/^[a-zA-Z0-9 ._-]+$/.test(filename)) {
+      throw new Error(`Invalid image filename "${filename}" in images.csv — only alphanumeric, spaces, dots, hyphens, and underscores allowed.`);
     }
   }
   const glossaryRows = validateCsv('data/glossary.csv', ['term', 'definition', 'image_filename', 'photographer']);
   for (const row of glossaryRows) {
-    if (row.image_filename && !/^[a-zA-Z0-9 ._-]+$/.test(row.image_filename)) {
+    const imageFilename = row['image_filename'];
+    if (imageFilename && !/^[a-zA-Z0-9 ._-]+$/.test(imageFilename)) {
       throw new Error(
-        `Invalid image_filename "${row.image_filename}" in glossary.csv — only alphanumeric, spaces, dots, hyphens, and underscores allowed.`
+        `Invalid image_filename "${imageFilename}" in glossary.csv — only alphanumeric, spaces, dots, hyphens, and underscores allowed.`
       );
     }
   }
@@ -94,6 +130,7 @@ export async function main() {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
+  // species.csv — WITH nullstr='' (empty strings become NULL, e.g. common_name, subfamily)
   await conn.run(`
     CREATE TABLE species AS
     SELECT * FROM read_csv('data/species.csv',
@@ -113,6 +150,7 @@ export async function main() {
     )
   `);
 
+  // records.csv — WITHOUT nullstr='' (blank cells become NULL, especially county 100% null)
   await conn.run(`
     CREATE TABLE records AS
     SELECT * FROM read_csv('data/records.csv',
@@ -137,7 +175,7 @@ export async function main() {
   `);
 
   // --- Post-import validation queries ---
-  const validationChecks = [
+  const validationChecks: { description: string; query: string }[] = [
     {
       description: 'orphaned records (species_slug not in species table)',
       query: `
@@ -183,7 +221,7 @@ export async function main() {
   let validationFailed = false;
   for (const check of validationChecks) {
     const result = await conn.runAndReadAll(check.query);
-    const rows = result.getRowObjectsJS();
+    const rows = result.getRowObjectsJS() as Record<string, unknown>[];
     if (rows.length > 0) {
       console.error(`Validation failed — ${check.description}:`);
       console.error(rows);
@@ -198,11 +236,12 @@ export async function main() {
 
   // --- Parquet export (per-species files) ---
   const speciesResult = await conn.runAndReadAll('SELECT id, genus, species FROM species');
-  const speciesRows = speciesResult.getRowObjectsJS();
+  const speciesRows = speciesResult.getRowObjectsJS() as Array<{ id: number; genus: string; species: string }>;
 
   let count = 0;
   for (const sp of speciesRows) {
-    // Validate slug components to prevent path traversal (T-01-02)
+    // Validate slug components to prevent path traversal (T-35P3-01)
+    // COPY TO parquet does not support parameterized file paths — validateSlugComponent is the correct mitigation
     validateSlugComponent(sp.genus, 'genus');
     validateSlugComponent(sp.species, 'species');
 
@@ -210,6 +249,8 @@ export async function main() {
     const outDir = `data/parquet/${slug}`;
     mkdirSync(outDir, { recursive: true });
 
+    // String interpolation is intentional here — COPY TO parquet cannot use parameterized paths.
+    // validateSlugComponent above ensures no path traversal is possible (T-35P3-01).
     await conn.run(`
       COPY (SELECT * FROM records WHERE species_slug = '${slug}')
       TO '${outDir}/records.parquet'
@@ -220,6 +261,16 @@ export async function main() {
 
   console.log(`Exported Parquet for ${count} species to data/parquet/`);
 
+  // --- SCHEMA-04: Verify sample Parquet column schema (D-06, D-07, D-08, D-11) ---
+  // Sort speciesRows to get deterministic first slug (alphabetical by genus+species, D-07)
+  const sortedSpecies = [...speciesRows].sort((a, b) =>
+    (a.genus + a.species).toLowerCase().localeCompare((b.genus + b.species).toLowerCase())
+  );
+  const [firstSp] = sortedSpecies;
+  if (!firstSp) throw new Error('No species rows found — cannot verify Parquet schema');
+  const firstSlug = `${firstSp.genus}-${firstSp.species}`.toLowerCase().replace(/\s+/g, '-');
+  await verifySampleParquetSchema(conn, firstSlug);
+
   // --- Cleanup ---
   conn.closeSync();
 }
@@ -227,7 +278,7 @@ export async function main() {
 // Only run when executed directly (not when imported by tests)
 if (import.meta.url === `file://${process.argv[1]}`) {
   main().catch(err => {
-    console.error(err.message);
+    console.error((err as Error).message);
     process.exit(1);
   });
 }

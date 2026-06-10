@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:data": "node scripts/build-data.js",
+    "build:data": "node scripts/build-data.ts",
     "build:eleventy": "eleventy",
     "build:copy-parquet": "node scripts/copy-parquet.js",
     "build:pagefind": "pagefind --site _site",
@@ -21,7 +21,7 @@
     "photos:upload": "node scripts/upload-tiles.js",
     "photos:materialize": "node scripts/generate-species-photos.js",
     "photos:rethumbnail": "THUMBNAIL_ONLY=1 node scripts/tile-photos.js",
-    "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/ingest-photos.test.js scripts/tile-photos.test.js scripts/upload-tiles.test.js scripts/generate-species-photos.test.js 'scripts/lib/*.test.{js,ts}' src/components/*.test.js 'src/_lib/*.test.{js,ts}'",
+    "test": "node --test eleventy.config.test.js scripts/build-data.test.ts scripts/check-page-weight.test.ts scripts/ingest-photos.test.js scripts/tile-photos.test.js scripts/upload-tiles.test.js scripts/generate-species-photos.test.js 'scripts/lib/*.test.{js,ts}' src/components/*.test.js 'src/_lib/*.test.{js,ts}'",
     "typecheck": "tsc -p tsconfig.browser.json --noEmit && tsc -p tsconfig.node.json --noEmit",
     "verify:parquet": "node scripts/verify-parquet.ts"
   },

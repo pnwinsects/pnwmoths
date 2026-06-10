@@ -1,4 +1,4 @@
-// scripts/build-data.test.js
+// scripts/build-data.test.ts
 // Unit and integration tests for the build-data pre-build script.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -7,7 +7,7 @@ import { execSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { validateCsv } from '../scripts/build-data.js';
+import { validateCsv } from './build-data.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -42,7 +42,8 @@ test('validateCsv: missing required column throws with actionable message', () =
       resolve(ROOT, 'data/species.csv'),
       ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'MISSING_COL']
     ),
-    (err) => {
+    (err: unknown) => {
+      assert.ok(err instanceof Error);
       assert.match(err.message, /missing required column.*MISSING_COL/i);
       return true;
     }
@@ -62,7 +63,8 @@ test('validateCsv: non-UTF-8 bytes throw with actionable message', () => {
 
     assert.throws(
       () => validateCsv(tmpFile, ['id', 'name']),
-      (err) => {
+      (err: unknown) => {
+        assert.ok(err instanceof Error);
         assert.match(err.message, /non-UTF-8/i);
         return true;
       }
@@ -74,7 +76,7 @@ test('validateCsv: non-UTF-8 bytes throw with actionable message', () => {
 
 // --- VALD-03 state validation test ---
 
-test('build-data.js: state validation query catches invalid state values', async () => {
+test('build-data.ts: state validation query catches invalid state values', async () => {
   const { DuckDBInstance } = await import('@duckdb/node-api');
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
@@ -94,17 +96,19 @@ test('build-data.js: state validation query catches invalid state values', async
       AND state IS NOT NULL
       AND state != ''
   `);
-  const rows = result.getRowObjectsJS();
+  const rows = result.getRowObjectsJS() as Array<{ state: string }>;
 
   assert.strictEqual(rows.length, 1, 'Should catch exactly 1 invalid state');
-  assert.strictEqual(rows[0].state, 'TX', 'Invalid state should be TX');
+  const [firstRow] = rows;
+  assert.ok(firstRow !== undefined);
+  assert.strictEqual(firstRow.state, 'TX', 'Invalid state should be TX');
 
   conn.closeSync();
 });
 
 // --- VALD-04 record_type validation test ---
 
-test('build-data.js: sight_field_notes passes record_type validation query', async () => {
+test('build-data.ts: sight_field_notes passes record_type validation query', async () => {
   const { DuckDBInstance } = await import('@duckdb/node-api');
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
@@ -127,7 +131,7 @@ test('build-data.js: sight_field_notes passes record_type validation query', asy
 
 // --- VALD-05 latitude bounds test ---
 
-test('build-data.js: latitude 54.5 (valid BC record) passes coordinate bounds check', async () => {
+test('build-data.ts: latitude 54.5 (valid BC record) passes coordinate bounds check', async () => {
   const { DuckDBInstance } = await import('@duckdb/node-api');
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
@@ -151,9 +155,9 @@ test('build-data.js: latitude 54.5 (valid BC record) passes coordinate bounds ch
 
 // --- Integration tests ---
 
-test('integration: build-data.js with good CSV produces Parquet files', () => {
+test('integration: build-data.ts with good CSV produces Parquet files', () => {
   // Run the full build script
-  execSync('node scripts/build-data.js', { cwd: ROOT, stdio: 'pipe' });
+  execSync('node scripts/build-data.ts', { cwd: ROOT, stdio: 'pipe' });
 
   // Check that per-species Parquet files were created
   assert.ok(
@@ -166,7 +170,7 @@ test('integration: build-data.js with good CSV produces Parquet files', () => {
   );
 });
 
-test('integration: build-data.js with bad CSV data exits non-zero with "Validation failed"', () => {
+test('integration: build-data.ts with bad CSV data exits non-zero with "Validation failed"', () => {
   // Create a temp directory that mirrors the project structure but with bad records.csv
   const tmpDir = resolve(ROOT, '.tmp-bad-test');
   const tmpDataDir = resolve(tmpDir, 'data');
@@ -179,7 +183,7 @@ test('integration: build-data.js with bad CSV data exits non-zero with "Validati
   copyFileSync(resolve(ROOT, 'data/records-bad.csv'), resolve(tmpDataDir, 'records.csv'));
 
   // Write a wrapper script that sets cwd to tmpDir and runs main()
-  const scriptPath = resolve(ROOT, 'scripts/build-data.js');
+  const scriptPath = resolve(ROOT, 'scripts/build-data.ts');
   const wrapperScript = resolve(tmpDir, 'run-bad.mjs');
   writeFileSync(wrapperScript, [
     `import { main } from '${scriptPath}';`,
@@ -198,10 +202,11 @@ test('integration: build-data.js with bad CSV data exits non-zero with "Validati
       });
     } catch (err) {
       threw = true;
-      stderrOutput = err.stderr ? err.stderr.toString() : '';
+      const e = err as { stderr?: Buffer };
+      stderrOutput = e.stderr ? e.stderr.toString() : '';
     }
 
-    assert.ok(threw, 'build-data.js should exit non-zero for bad data');
+    assert.ok(threw, 'build-data.ts should exit non-zero for bad data');
     assert.ok(
       stderrOutput.includes('Validation failed'),
       `stderr should contain "Validation failed", got: ${stderrOutput}`
@@ -212,7 +217,7 @@ test('integration: build-data.js with bad CSV data exits non-zero with "Validati
 });
 
 // WR-01: Regression test — invalid image_filename in glossary.csv is rejected
-test('integration: build-data.js rejects invalid image_filename in glossary.csv', () => {
+test('integration: build-data.ts rejects invalid image_filename in glossary.csv', () => {
   const tmpDir = resolve(ROOT, '.tmp-glossary-wr01');
   const tmpDataDir = resolve(tmpDir, 'data');
   mkdirSync(tmpDataDir, { recursive: true });
@@ -229,7 +234,7 @@ test('integration: build-data.js rejects invalid image_filename in glossary.csv'
   ].join('\n'));
 
   // Write a wrapper .mjs that sets cwd to tmpDir and calls main()
-  const scriptPath = resolve(ROOT, 'scripts/build-data.js');
+  const scriptPath = resolve(ROOT, 'scripts/build-data.ts');
   const wrapperScript = resolve(tmpDir, 'run-glossary-bad.mjs');
   writeFileSync(wrapperScript, [
     `import { main } from '${scriptPath}';`,
@@ -248,10 +253,11 @@ test('integration: build-data.js rejects invalid image_filename in glossary.csv'
       });
     } catch (err) {
       threw = true;
-      stderrOutput = err.stderr ? err.stderr.toString() : '';
+      const e = err as { stderr?: Buffer };
+      stderrOutput = e.stderr ? e.stderr.toString() : '';
     }
 
-    assert.ok(threw, 'build-data.js should exit non-zero for invalid glossary image_filename');
+    assert.ok(threw, 'build-data.ts should exit non-zero for invalid glossary image_filename');
     assert.ok(
       stderrOutput.includes('Invalid image_filename'),
       `stderr should contain "Invalid image_filename", got: ${stderrOutput}`
@@ -263,7 +269,7 @@ test('integration: build-data.js rejects invalid image_filename in glossary.csv'
 
 // --- Null-coercion tests for new Phase 8 columns ---
 
-test('build-data.js: blank subfamily in species CSV arrives as NULL with nullstr', async () => {
+test('build-data.ts: blank subfamily in species CSV arrives as NULL with nullstr', async () => {
   const tmpDir = resolve(ROOT, '.tmp-nullstr-subfamily');
   mkdirSync(tmpDir, { recursive: true });
   const tmpFile = resolve(tmpDir, 'species-nullstr.csv');
@@ -297,16 +303,18 @@ test('build-data.js: blank subfamily in species CSV arrives as NULL with nullstr
     `);
 
     const result = await conn.runAndReadAll('SELECT subfamily FROM species');
-    const rows = result.getRowObjectsJS();
+    const rows = result.getRowObjectsJS() as Array<{ subfamily: string | null }>;
     conn.closeSync();
 
-    assert.strictEqual(rows[0].subfamily, null, 'blank subfamily cell should be NULL, not empty string');
+    const [firstRow] = rows;
+    assert.ok(firstRow !== undefined);
+    assert.strictEqual(firstRow.subfamily, null, 'blank subfamily cell should be NULL, not empty string');
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
 });
 
-test('build-data.js: blank navigational in images CSV arrives as NULL with nullstr', async () => {
+test('build-data.ts: blank navigational in images CSV arrives as NULL with nullstr', async () => {
   const tmpDir = resolve(ROOT, '.tmp-nullstr-navigational');
   mkdirSync(tmpDir, { recursive: true });
   const tmpFile = resolve(tmpDir, 'images-nullstr.csv');
@@ -339,10 +347,12 @@ test('build-data.js: blank navigational in images CSV arrives as NULL with nulls
     `);
 
     const result = await conn.runAndReadAll('SELECT navigational FROM images');
-    const rows = result.getRowObjectsJS();
+    const rows = result.getRowObjectsJS() as Array<{ navigational: string | null }>;
     conn.closeSync();
 
-    assert.strictEqual(rows[0].navigational, null, 'blank navigational cell should be NULL, not empty string');
+    const [firstRow] = rows;
+    assert.ok(firstRow !== undefined);
+    assert.strictEqual(firstRow.navigational, null, 'blank navigational cell should be NULL, not empty string');
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
@@ -370,13 +380,16 @@ test('emit-species-states: SELECT DISTINCT returns correct pair count from synth
     WHERE state IS NOT NULL AND state != ''
     ORDER BY species_slug, state
   `);
-  const rows = result.getRowObjectsJS();
+  const rows = result.getRowObjectsJS() as Array<{ species_slug: string; state: string }>;
 
   assert.strictEqual(rows.length, 2, 'duplicate should be eliminated — 2 distinct pairs');
-  assert.strictEqual(rows[0].species_slug, 'acronicta-americana');
-  assert.strictEqual(rows[0].state, 'OR');
-  assert.strictEqual(rows[1].species_slug, 'hyles-lineata');
-  assert.strictEqual(rows[1].state, 'WA');
+  const [row0, row1] = rows;
+  assert.ok(row0 !== undefined);
+  assert.ok(row1 !== undefined);
+  assert.strictEqual(row0.species_slug, 'acronicta-americana');
+  assert.strictEqual(row0.state, 'OR');
+  assert.strictEqual(row1.species_slug, 'hyles-lineata');
+  assert.strictEqual(row1.state, 'WA');
 
   conn.closeSync();
 });
@@ -408,42 +421,54 @@ test('emit-species-states: NULL and empty-string states excluded from DISTINCT r
   conn.closeSync();
 });
 
-test('integration: emit-species-states.js writes _site/species-states.json', () => {
-  execSync('node scripts/emit-species-states.js', { cwd: ROOT, stdio: 'pipe' });
+test('integration: emit-species-states.ts writes _site/species-states.json', () => {
+  execSync('node scripts/emit-species-states.ts', { cwd: ROOT, stdio: 'pipe' });
   assert.ok(
     existsSync(resolve(ROOT, '_site/species-states.json')),
     '_site/species-states.json should exist'
   );
-  const data = JSON.parse(readFileSync(resolve(ROOT, '_site/species-states.json'), 'utf8'));
+  const data: unknown = JSON.parse(readFileSync(resolve(ROOT, '_site/species-states.json'), 'utf8'));
   assert.ok(Array.isArray(data), 'species-states.json should be an array');
   assert.ok(
-    data.every(el => 'species_slug' in el && 'state' in el),
+    (data as unknown[]).every(el => {
+      const obj = el as Record<string, unknown>;
+      return 'species_slug' in obj && 'state' in obj;
+    }),
     'every element should have species_slug and state properties'
   );
 });
 
 // --- Phase 9 taxon.js tests ---
+// taxon.js is an Eleventy data file; typed via src/_data/taxon.d.ts
 
-test('taxon.js: returns family\u2192subfamily\u2192genus\u2192species tree', async () => {
+test('taxon.js: returns family→subfamily→genus→species tree', async () => {
   const { default: taxon } = await import('../src/_data/taxon.js');
   const tree = await taxon();
   assert.ok(Array.isArray(tree), 'tree should be an array');
   assert.ok(tree.length > 0, 'tree should have at least one family');
-  const fam = tree[0];
+  const [fam] = tree as Array<Record<string, unknown>>;
+  assert.ok(fam !== undefined);
   assert.ok('name' in fam && 'subfamilies' in fam && 'navImages' in fam, 'family missing required properties');
-  assert.ok(Array.isArray(fam.subfamilies), 'subfamilies should be an array');
-  const subfam = fam.subfamilies[0];
+  const subfamilies = fam['subfamilies'] as unknown[];
+  assert.ok(Array.isArray(subfamilies), 'subfamilies should be an array');
+  const [subfam] = subfamilies as Array<Record<string, unknown>>;
+  assert.ok(subfam !== undefined);
   assert.ok('name' in subfam && 'genera' in subfam && 'navImages' in subfam, 'subfamily missing required properties');
-  const genus = subfam.genera[0];
+  const genera = subfam['genera'] as unknown[];
+  const [genus] = genera as Array<Record<string, unknown>>;
+  assert.ok(genus !== undefined);
   assert.ok('name' in genus && 'genus_slug' in genus && 'navImages' in genus && 'species' in genus, 'genus missing required properties');
-  const sp = genus.species[0];
+  const speciesList = genus['species'] as unknown[];
+  const [sp] = speciesList as Array<Record<string, unknown>>;
+  assert.ok(sp !== undefined);
   assert.ok('slug' in sp && 'name' in sp && 'common_name' in sp, 'species missing required properties');
 });
 
 test('taxon.js: null-subfamily genera have name: null (not string)', async () => {
   const { default: taxon } = await import('../src/_data/taxon.js');
   const tree = await taxon();
-  const nullSubfams = tree.flatMap(f => f.subfamilies).filter(s => s.name === null);
+  const allFamilies = tree as Array<{ subfamilies: Array<{ name: string | null }> }>;
+  const nullSubfams = allFamilies.flatMap(f => f.subfamilies).filter(s => s.name === null);
   // At least some genera in species.csv have no subfamily — verify null is used
   // If all species have subfamilies in test data, this assertion still must not throw
   for (const s of nullSubfams) {
@@ -454,7 +479,8 @@ test('taxon.js: null-subfamily genera have name: null (not string)', async () =>
 test('taxon.js: navImages capped at 4 per taxon level', async () => {
   const { default: taxon } = await import('../src/_data/taxon.js');
   const tree = await taxon();
-  for (const fam of tree) {
+  const allFamilies = tree as Array<{ name: string; navImages: unknown[]; subfamilies: Array<{ name: string | null; navImages: unknown[]; genera: Array<{ name: string; navImages: unknown[] }> }> }>;
+  for (const fam of allFamilies) {
     assert.ok(fam.navImages.length <= 4, `family ${fam.name} has >4 navImages`);
     for (const subfam of fam.subfamilies) {
       assert.ok(subfam.navImages.length <= 4, `subfamily ${subfam.name} has >4 navImages`);
@@ -467,7 +493,7 @@ test('taxon.js: navImages capped at 4 per taxon level', async () => {
 
 // --- CDN-03: filename validation regex accepts spaces (Phase 13 plan 01) ---
 
-test('build-data.js: images.csv filename regex accepts Django original filenames with spaces', () => {
+test('build-data.ts: images.csv filename regex accepts Django original filenames with spaces', () => {
   // The widened regex must accept filenames like "Acronicta americana-A-D.jpg"
   const re = /^[a-zA-Z0-9 ._-]+$/;
   assert.ok(re.test('Acronicta americana-A-D.jpg'), 'space in filename should be accepted');
@@ -478,7 +504,7 @@ test('build-data.js: images.csv filename regex accepts Django original filenames
   assert.ok(!re.test('foo!bar.jpg'), 'exclamation mark rejected');
 });
 
-test('integration: build-data.js accepts images.csv filename with spaces without throwing', () => {
+test('integration: build-data.ts accepts images.csv filename with spaces without throwing', () => {
   const tmpDir = resolve(ROOT, '.tmp-space-filename');
   const tmpDataDir = resolve(tmpDir, 'data');
   mkdirSync(tmpDataDir, { recursive: true });
@@ -493,7 +519,7 @@ test('integration: build-data.js accepts images.csv filename with spaces without
     'acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,1,CC BY 4.0,dorsal,A,'
   ].join('\n'));
 
-  const scriptPath = resolve(ROOT, 'scripts/build-data.js');
+  const scriptPath = resolve(ROOT, 'scripts/build-data.ts');
   const wrapperScript = resolve(tmpDir, 'run-space.mjs');
   writeFileSync(wrapperScript, [
     `import { main } from '${scriptPath}';`,
