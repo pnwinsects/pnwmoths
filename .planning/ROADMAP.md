@@ -587,7 +587,7 @@ Plans:
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
-| 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete   | 2026-06-10 |
+| 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 0/TBD | Not started | - |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
