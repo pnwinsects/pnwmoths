@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyDeclarations, type CSSResult, type TemplateResult, type PropertyValues } from 'lit';
 import {
   Chart,
   BarController,
@@ -6,8 +6,10 @@ import {
   CategoryScale,
   LinearScale,
   Tooltip,
+  type ChartConfiguration,
 } from 'chart.js';
-import { loadParquet, filterRecords, aggregateByMonth } from './parquet-cache.js';
+import { loadParquet, filterRecords, aggregateByMonth } from './parquet-cache.ts';
+import type { OccurrenceRecord, FilterChangeDetail } from '../types/index.ts';
 
 // Register only what's needed (tree-shakeable pattern)
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
@@ -15,7 +17,7 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 class PnwmPhenologyChart extends LitElement {
-  static get properties() {
+  static get properties(): PropertyDeclarations {
     return {
       slug: { type: String },
       filters: { attribute: false },
@@ -24,7 +26,7 @@ class PnwmPhenologyChart extends LitElement {
     };
   }
 
-  static get styles() {
+  static get styles(): CSSResult {
     return css`
       :host {
         display: block;
@@ -39,6 +41,12 @@ class PnwmPhenologyChart extends LitElement {
     `;
   }
 
+  slug: string;
+  filters: Partial<FilterChangeDetail> | null;
+  _records: OccurrenceRecord[];
+  _loading: boolean;
+  _chart: Chart | null;
+
   constructor() {
     super();
     this.slug = '';
@@ -48,14 +56,14 @@ class PnwmPhenologyChart extends LitElement {
     this._chart = null;
   }
 
-  async connectedCallback() {
+  async connectedCallback(): Promise<void> {
     super.connectedCallback();
     if (this.slug) {
       try {
         const records = await loadParquet(this.slug);
         this._records = records;
         this._loading = false;
-      } catch (err) {
+      } catch (_err) {
         this._records = [];
         this._loading = false;
       }
@@ -64,7 +72,7 @@ class PnwmPhenologyChart extends LitElement {
     }
   }
 
-  render() {
+  render(): TemplateResult {
     if (this._loading) {
       // Skeleton: 12 muted placeholder bars, no animation (per UI-SPEC)
       return html`
@@ -85,7 +93,7 @@ class PnwmPhenologyChart extends LitElement {
     `;
   }
 
-  updated(changed) {
+  updated(changed: PropertyValues): void {
     if (changed.has('_records') || changed.has('filters')) {
       const canvas = this.shadowRoot && this.shadowRoot.querySelector('canvas');
       if (canvas) {
@@ -97,15 +105,18 @@ class PnwmPhenologyChart extends LitElement {
     }
   }
 
-  _renderChart(canvas) {
+  _renderChart(canvas: HTMLCanvasElement): void {
     const visible = this.filters ? filterRecords(this._records, this.filters) : this._records;
     const counts = aggregateByMonth(visible);
 
     if (this._chart) {
-      this._chart.data.datasets[0].data = counts;
+      const dataset = this._chart.data.datasets[0];
+      if (dataset) {
+        dataset.data = counts;
+      }
       this._chart.update();
     } else {
-      this._chart = new Chart(canvas, {
+      const config: ChartConfiguration<'bar', number[], string> = {
         type: 'bar',
         data: {
           labels: MONTHS,
@@ -139,11 +150,12 @@ class PnwmPhenologyChart extends LitElement {
             },
           },
         },
-      });
+      };
+      this._chart = new Chart(canvas, config);
     }
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     if (this._chart) {
       this._chart.destroy();
       this._chart = null;

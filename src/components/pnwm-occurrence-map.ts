@@ -1,10 +1,11 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, type PropertyDeclarations, type TemplateResult, type PropertyValues } from 'lit';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { loadParquet, filterRecords } from './parquet-cache.js';
+import { loadParquet, filterRecords } from './parquet-cache.ts';
+import type { OccurrenceRecord, FilterChangeDetail } from '../types/index.ts';
 
 class PnwmOccurrenceMap extends LitElement {
-  static get properties() {
+  static get properties(): PropertyDeclarations {
     return {
       slug: { type: String },
       filters: { attribute: false },
@@ -13,6 +14,14 @@ class PnwmOccurrenceMap extends LitElement {
       _error: { attribute: false, state: true },
     };
   }
+
+  slug: string;
+  filters: Partial<FilterChangeDetail> | null;
+  _records: OccurrenceRecord[];
+  _loading: boolean;
+  _error: unknown;
+  _map: L.Map | null;
+  _markerGroup: L.FeatureGroup | null;
 
   constructor() {
     super();
@@ -26,11 +35,11 @@ class PnwmOccurrenceMap extends LitElement {
   }
 
   /** Use light DOM so Leaflet can interact with the container directly */
-  createRenderRoot() {
+  createRenderRoot(): this {
     return this;
   }
 
-  async connectedCallback() {
+  async connectedCallback(): Promise<void> {
     super.connectedCallback();
     if (this.slug) {
       try {
@@ -46,7 +55,7 @@ class PnwmOccurrenceMap extends LitElement {
     }
   }
 
-  render() {
+  render(): TemplateResult {
     if (this._loading) {
       return html`<div style="min-height:320px;display:flex;align-items:center;justify-content:center"><p style="color:var(--pico-muted-color)">Loading occurrence data...</p></div>`;
     }
@@ -56,15 +65,15 @@ class PnwmOccurrenceMap extends LitElement {
     return html`<div id="map-${this.slug}" style="min-height:320px" role="application" aria-label="Occurrence map for ${this.slug}"></div>`;
   }
 
-  updated(changed) {
+  updated(changed: PropertyValues): void {
     if ((changed.has('_records') || changed.has('filters')) && !this._loading) {
       this._renderMap();
     }
   }
 
-  _renderMap() {
+  _renderMap(): void {
     const visible = this.filters ? filterRecords(this._records, this.filters) : this._records;
-    const container = this.querySelector('[id^="map-"]');
+    const container = this.querySelector('[id^="map-"]') as HTMLElement | null;
     if (!container) return;
 
     if (this._map) {
@@ -92,9 +101,9 @@ class PnwmOccurrenceMap extends LitElement {
       this._markerGroup = L.featureGroup().addTo(this._map);
     }
 
-    this._markerGroup.clearLayers();
+    this._markerGroup!.clearLayers();
 
-    const markers = [];
+    const markers: L.CircleMarker[] = [];
     for (const r of visible) {
       if (r.latitude != null && r.longitude != null) {
         const marker = L.circleMarker([r.latitude, r.longitude], {
@@ -103,16 +112,16 @@ class PnwmOccurrenceMap extends LitElement {
           fillOpacity: 0.7,
         });
         // Delegate popup rendering to <pnwm-occurrence-popup> — Lit's html template handles XSS escaping (T-03-01 mitigation preserved)
-        const popupEl = document.createElement('pnwm-occurrence-popup');
+        const popupEl = document.createElement('pnwm-occurrence-popup') as HTMLElement & { record: OccurrenceRecord };
         popupEl.record = r;
         marker.bindPopup(popupEl);
         markers.push(marker);
-        this._markerGroup.addLayer(marker);
+        this._markerGroup!.addLayer(marker);
       }
     }
 
     if (markers.length > 0) {
-      this._map.fitBounds(this._markerGroup.getBounds().pad(0.1), { maxZoom: 10 });
+      this._map!.fitBounds(this._markerGroup!.getBounds().pad(0.1), { maxZoom: 10 });
     } else {
       // Show empty state
       const emptyMsg = container.querySelector('.pnwm-map-empty');
@@ -126,10 +135,10 @@ class PnwmOccurrenceMap extends LitElement {
       }
     }
 
-    this._map.invalidateSize();
+    this._map!.invalidateSize();
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     if (this._map) {
       this._map.remove();
       this._map = null;
