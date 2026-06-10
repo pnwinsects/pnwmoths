@@ -4,13 +4,13 @@ milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
 status: executing
 stopped_at: Phase 36 context gathered
-last_updated: "2026-06-10T04:38:45.979Z"
-last_activity: 2026-06-10 -- Phase 36 planning complete
+last_updated: "2026-06-10T04:52:16.319Z"
+last_activity: 2026-06-10
 progress:
   total_phases: 20
   completed_phases: 3
   total_plans: 14
-  completed_plans: 10
+  completed_plans: 11
   percent: 15
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 36 — eleventy data files & config migration
+**Current focus:** Phase 36 — Eleventy Data Files & Config Migration
 
 ## Current Position
 
-Phase: 36
-Plan: Not started
+Phase: 36 (Eleventy Data Files & Config Migration) — EXECUTING
+Plan: 2 of 4
 Status: Ready to execute
-Last activity: 2026-06-10 -- Phase 36 planning complete
+Last activity: 2026-06-10
 
 ```
 v3.0 Progress: [··········] 0/6 phases (0%)
@@ -62,6 +62,7 @@ v3.0 Progress: [··········] 0/6 phases (0%)
 *Updated after each plan completion*
 | Phase 35 P04 | 797 | 3 tasks | 17 files |
 | Phase 35 P05 | 45 | 3 tasks | 1 files |
+| Phase 36 P01 | 585 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -161,6 +162,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-10T03:35:17.987Z
+Last session: 2026-06-10T04:52:16.311Z
 Stopped at: Phase 36 context gathered
-Resume file: .planning/phases/36-eleventy-data-files-config-migration/36-CONTEXT.md
+Resume file: None

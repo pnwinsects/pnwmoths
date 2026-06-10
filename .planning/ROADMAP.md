@@ -533,7 +533,7 @@ Plans:
 Plans:
 **Wave 1** (config keystone)
 
-- [ ] 36-01-PLAN.md — Convert eleventy.config.js→.ts: addDataExtension("ts") + --config flag wiring + execFile repoint + GITHUB_PAGES-conditional test (.ts) + tsconfig/test-glob fixes (MIG-03; D-01, D-02, D-14)
+- [x] 36-01-PLAN.md — Convert eleventy.config.js→.ts: addDataExtension("ts") + --config flag wiring + execFile repoint + GITHUB_PAGES-conditional test (.ts) + tsconfig/test-glob fixes (MIG-03; D-01, D-02, D-14)
 
 **Wave 2** *(parallel; blocked on Wave 1)*
 
@@ -616,7 +616,7 @@ Plans:
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 36. Eleventy Data Files & Config Migration | v3.0 | 0/4 | Not started | - |
+| 36. Eleventy Data Files & Config Migration | v3.0 | 1/4 | In Progress|  |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
