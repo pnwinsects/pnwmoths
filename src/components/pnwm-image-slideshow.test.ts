@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { PnwmImageSlideshow } from './pnwm-image-slideshow.js';
+import { PnwmImageSlideshow } from './pnwm-image-slideshow.ts';
 
 describe('_formatCaption', () => {
   it('returns location line with locality, state, and elevation', () => {
