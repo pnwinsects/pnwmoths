@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
-status: complete
-stopped_at: Completed 37-05 - SC-5 approved; Phase 37 fully complete
-last_updated: "2026-06-10T20:00:00.000Z"
+status: ready_to_plan
+stopped_at: Phase 37 complete (5/5) — ready to discuss Phase 38
+last_updated: 2026-06-10T20:39:32.541Z
 last_activity: 2026-06-10
 progress:
   total_phases: 20
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 37 — lit-web-components-migration
+**Current focus:** Phase 38 — ci gate & full verification
 
 ## Current Position
 
-Phase: 37 (lit-web-components-migration) — EXECUTING
-Plan: 5 of 5
-Status: Phase 37 fully complete (SC-5 approved)
+Phase: 38
+Plan: Not started
+Status: Ready to plan
 Last activity: 2026-06-10
 
 ```
@@ -38,7 +38,7 @@ v3.0 Progress: [··········] 0/6 phases (0%)
 
 **Velocity:**
 
-- Total plans completed: 43 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2) = 85 total across all milestones
+- Total plans completed: 48 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2) = 85 total across all milestones
 - Average duration: unknown
 - Total execution time: unknown
 
