@@ -117,7 +117,7 @@
 
 - [x] **Phase 33: Toolchain & Schema Scaffolding** - Three tsconfigs, Zod schemas + derived types for all data entities, mandatory data-profile spike, `npm run typecheck` green (completed 2026-06-09)
 - [x] **Phase 34: scripts/lib & src/_lib Migration** - Smallest areas converted first; proves Node 24 native type-stripping path end-to-end (completed 2026-06-09)
-- [ ] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed
+- [x] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed (completed 2026-06-10)
 - [ ] **Phase 36: Eleventy Data Files & Config Migration** - Middle layer: `src/_data/` and `eleventy.config.ts` converted with GITHUB_PAGES conditional preserved
 - [ ] **Phase 37: Lit Web Components Migration** - Consumer side: `src/components/` fully typed, `FilterChangeDetail` event interface, Vite bundle verified Zod-free in production
 - [ ] **Phase 38: CI Gate & Full Verification** - `tsc --noEmit` in GitHub Actions PR check + deploy; byte-identical `_site/` diff guard; full 191-test suite green; `npm run verify:parquet`
@@ -515,7 +515,7 @@ Plans:
 
 **Wave 3** *(blocked on Waves 1-2; contains the human-verify checkpoint)*
 
-- [ ] 35-05-PLAN.md — Phase gate: typecheck + full npm test + build:data <60s + verify:parquet over full dataset + byte-identical _site/ diff; human-verify ADDING_PLATE.md workflow (all reqs; SC-1..SC-5)
+- [x] 35-05-PLAN.md — Phase gate: typecheck + full npm test + build:data <60s + verify:parquet over full dataset + byte-identical _site/ diff; human-verify ADDING_PLATE.md workflow (all reqs; SC-1..SC-5)
 
 ### Phase 36: Eleventy Data Files & Config Migration
 
@@ -602,7 +602,7 @@ Plans:
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
-| 35. Build Pipeline Scripts Migration | v3.0 | 4/5 | In Progress|  |
+| 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete   | 2026-06-10 |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
