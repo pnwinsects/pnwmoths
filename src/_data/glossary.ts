@@ -1,6 +1,25 @@
 import { DuckDBInstance } from '@duckdb/node-api';
+import type { GlossaryWord } from '../types/index.ts';
 
-export default async function () {
+// GlossaryWord from src/types/schemas.ts has: term, definition, image_filename, photographer
+// Extended with letter and slug derived by the query
+interface GlossaryEntry extends GlossaryWord {
+  letter: string;
+  slug: string;
+}
+
+function isGlossaryEntry(obj: unknown): obj is GlossaryEntry {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const r = obj as Record<string, unknown>;
+  return (
+    typeof r['term'] === 'string' &&
+    typeof r['definition'] === 'string' &&
+    typeof r['letter'] === 'string' &&
+    typeof r['slug'] === 'string'
+  );
+}
+
+export default async function (): Promise<Record<string, GlossaryEntry[]>> {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
@@ -37,10 +56,11 @@ export default async function () {
   // Returns { A: [...], F: [...] } instead of flat array.
   // This avoids Nunjucks array mutation issues (research assumption A2).
   const rows = result.getRowObjectsJS();
-  const grouped = {};
+  const grouped: Record<string, GlossaryEntry[]> = {};
   for (const row of rows) {
+    if (!isGlossaryEntry(row)) continue;
     if (!grouped[row.letter]) grouped[row.letter] = [];
-    grouped[row.letter].push(row);
+    grouped[row.letter]!.push(row);
   }
   return grouped;
 }
