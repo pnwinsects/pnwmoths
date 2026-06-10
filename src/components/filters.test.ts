@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { filterRecords } from './parquet-cache.js';
+import { filterRecords } from './parquet-cache.ts';
+import type { OccurrenceRecord } from '../types/index.ts';
 
 describe('filterRecords edge cases', () => {
   const records = [
@@ -11,7 +12,7 @@ describe('filterRecords edge cases', () => {
     { state: 'WA', record_type: 'specimen', year: 2025 },
     { state: 'OR', record_type: 'specimen', year: null },
     { state: 'WA', record_type: 'literature', year: undefined },
-  ];
+  ] as unknown as OccurrenceRecord[];
 
   it('applies combined filters (state + recordType + year range simultaneously)', () => {
     const result = filterRecords(records, {
@@ -21,7 +22,8 @@ describe('filterRecords edge cases', () => {
       yearMax: 2020,
     });
     assert.equal(result.length, 1);
-    assert.equal(result[0].year, 2010);
+    const [first] = result;
+    assert.equal(first?.year, 2010);
   });
 
   it('handles records with null year when yearMin is set', () => {
@@ -48,7 +50,8 @@ describe('filterRecords edge cases', () => {
   it('state + recordType combined, no year filter', () => {
     const result = filterRecords(records, { state: 'OR', recordType: 'photograph' });
     assert.equal(result.length, 1);
-    assert.equal(result[0].year, 2005);
+    const [first] = result;
+    assert.equal(first?.year, 2005);
   });
 
   it('recordType "all" returns records of any type', () => {
@@ -58,13 +61,15 @@ describe('filterRecords edge cases', () => {
 
   it('yearMin only filter', () => {
     const result = filterRecords(records, { yearMin: 2010 });
-    assert.ok(result.every(r => r.year === undefined || r.year >= 2010));
+    assert.ok(result.every(r => r.year === undefined || (r.year != null && r.year >= 2010)));
   });
 
   it('yearMax only filter', () => {
     const result = filterRecords(records, { yearMax: 2010 });
-    // null < 2010 is true so null gets filtered; 2010 passes; 2005 passes; 1999 passes
-    assert.ok(result.every(r => r.year === undefined || r.year <= 2010));
+    // null year: (null as number) > 2010 => 0 > 2010 => false => NOT filtered out
+    // undefined year: (undefined as number) > 2010 => NaN > 2010 => false => NOT filtered out
+    // Non-null years > 2010 are filtered out
+    assert.ok(result.every(r => r.year == null || r.year <= 2010));
   });
 });
 
@@ -75,7 +80,7 @@ describe('filterRecords — geo and elevation dimensions', () => {
     { county: 'King',    collection: 'UW',  elevation_ft: 2000 },
     { county: null,      collection: null,  elevation_ft: null },
     { county: 'Whatcom', collection: 'UW',  elevation_ft: 5000 },
-  ];
+  ] as unknown as OccurrenceRecord[];
 
   it('filters by county', () => {
     const result = filterRecords(geoRecords, { county: 'King' });
@@ -105,20 +110,20 @@ describe('filterRecords — geo and elevation dimensions', () => {
   it('filters by elevationMin', () => {
     // 500, 2000, 5000 pass; 100 excluded; null coerces to 0 so 0 < 500 → excluded
     const result = filterRecords(geoRecords, { elevationMin: 500 });
-    assert.ok(result.every(r => r.elevation_ft === null || r.elevation_ft >= 500));
+    assert.ok(result.every(r => r.elevation_ft === null || (r.elevation_ft != null && r.elevation_ft >= 500)));
   });
 
   it('filters by elevationMax', () => {
     // 100, 500 pass; 2000, 5000 excluded; null coerces to 0 so 0 <= 1000 → included
     const result = filterRecords(geoRecords, { elevationMax: 1000 });
-    assert.ok(result.every(r => r.elevation_ft === null || r.elevation_ft <= 1000));
+    assert.ok(result.every(r => r.elevation_ft === null || (r.elevation_ft != null && r.elevation_ft <= 1000)));
   });
 
   it('elevation range excludes out-of-range', () => {
     const result = filterRecords(geoRecords, { elevationMin: 200, elevationMax: 3000 });
     // 500 and 2000 pass; 100 and 5000 excluded; null excluded (0 < 200)
     assert.equal(result.length, 2);
-    assert.ok(result.every(r => r.elevation_ft >= 200 && r.elevation_ft <= 3000));
+    assert.ok(result.every(r => r.elevation_ft != null && r.elevation_ft >= 200 && r.elevation_ft <= 3000));
   });
 
   it('null elevation_ft passes through at default bounds (0, 15000)', () => {
@@ -132,6 +137,7 @@ describe('filterRecords — geo and elevation dimensions', () => {
       county: 'King', collection: 'UW', elevationMin: 0, elevationMax: 500,
     });
     assert.equal(result.length, 1);
-    assert.equal(result[0].elevation_ft, 100);
+    const [first] = result;
+    assert.equal(first?.elevation_ft, 100);
   });
 });
