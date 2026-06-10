@@ -39,16 +39,25 @@ Width and height are the pixel dimensions from `ImageProperties.xml` (`WIDTH` an
 
 **4. Upload the new tiles to CDN.**
 
-```sh
-BUNNY_API_KEY="your-key" node scripts/upload-plates.js
-```
-
-The script tracks already-uploaded files in `.upload-plates-progress`. If that file exists from a previous run, delete it first so the new plate is included in the scan:
+The original plate-upload script was a one-time migration tool and has been removed. Upload the plate files manually using `curl` with the bunny.net Storage Zone HTTP PUT API (same pattern as `_instructions/UPLOADING_TILES.md`):
 
 ```sh
-rm -f .upload-plates-progress
-BUNNY_API_KEY="your-key" node scripts/upload-plates.js
+# Set your Storage Zone password from bunny.net → Storage → pnwmoths → FTP & API Access
+BUNNY_API_KEY="your-key"
+PLATE_SLUG="plate-NN-familyname"
+
+# Upload each file in the tile directory (ImageProperties.xml, thumbnail.jpg, TileGroup0/*, etc.)
+find "plates/${PLATE_SLUG}" -type f | while read -r file; do
+  dest_path="${file#plates/}"   # strip local 'plates/' prefix
+  curl -s -X PUT \
+    -H "AccessKey: ${BUNNY_API_KEY}" \
+    -T "${file}" \
+    "https://la.storage.bunnycdn.com/pnwmoths/${dest_path}"
+  echo "Uploaded: ${dest_path}"
+done
 ```
+
+Verify each upload with the CDN Pull Zone before moving on.
 
 **5. Verify CDN delivery.**
 
