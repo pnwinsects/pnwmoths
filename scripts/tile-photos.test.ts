@@ -3,14 +3,15 @@ import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdtempSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
-import { tilePrefix, tiffCachePath, isAlreadyTiled, isTileable, isMissingThumbnail } from './tile-photos.js';
+import { tilePrefix, tiffCachePath, isAlreadyTiled, isTileable, isMissingThumbnail } from './tile-photos.ts';
+import type { ManifestRow } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Row factory — supplies all 13 COLUMNS values so tests don't accidentally
 // pass because a property was absent rather than falsy.
 // ---------------------------------------------------------------------------
 
-function row(overrides) {
+function row(overrides: Partial<ManifestRow>): ManifestRow {
   return {
     content_hash: 'h'.repeat(64),
     dropbox_path: '/folder/a.tif',
@@ -65,10 +66,8 @@ describe('tiffCachePath', () => {
 // ---------------------------------------------------------------------------
 
 describe('isAlreadyTiled', () => {
-  let tmpDir;
-
   it('returns true when the .dzi file exists at the computed prefix', () => {
-    tmpDir = mkdtempSync(join(tmpdir(), 'tile-test-'));
+    const tmpDir = mkdtempSync(join(tmpdir(), 'tile-test-'));
     try {
       // Create the directory tree and write a dummy .dzi file.
       const slugDir = join(tmpDir, 'abagrotis-apposita');
@@ -98,7 +97,7 @@ describe('isAlreadyTiled', () => {
 
 describe('isTileable', () => {
   it('returns true for a complete clean-match row with status discovered', () => {
-    assert.equal(isTileable(row()), true);
+    assert.equal(isTileable(row({})), true);
   });
 
   it('returns true for match_bucket resolved-via-synonym', () => {

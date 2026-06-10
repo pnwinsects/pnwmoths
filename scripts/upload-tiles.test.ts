@@ -1,9 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { mkdtempSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
-import { tileUploadPath, tilePullZoneUrl, isUploadable } from './upload-tiles.js';
+import { tileUploadPath, tilePullZoneUrl, isUploadable } from './upload-tiles.ts';
+import type { ManifestRow } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
 // Row factory — supplies all 13 COLUMNS values so tests don't accidentally
@@ -11,7 +9,7 @@ import { tileUploadPath, tilePullZoneUrl, isUploadable } from './upload-tiles.js
 // Default status is 'tiled' (Phase 30 eligible status, not 'discovered').
 // ---------------------------------------------------------------------------
 
-function row(overrides) {
+function row(overrides: Partial<ManifestRow>): ManifestRow {
   return {
     content_hash: 'h'.repeat(64),
     dropbox_path: '/folder/a.tif',

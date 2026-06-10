@@ -1,5 +1,5 @@
 /**
- * scripts/upload-tiles.js
+ * scripts/upload-tiles.ts
  *
  * Phase 30 (v2.2 high-res photos): manifest-driven DZI tile upload pipeline.
  * Reads data/species-photos-manifest.csv, filters rows with status=tiled,
@@ -12,9 +12,9 @@
  * tile directory and .dzi descriptor to reclaim disk space (D-03).
  *
  * Usage:
- *   BUNNY_API_KEY=... node scripts/upload-tiles.js
- *   DRY_RUN=1 node scripts/upload-tiles.js         # prints first 5 upload plans; no uploads, no manifest write
- *   TILE_OUTPUT_DIR=/mnt/tiles BUNNY_API_KEY=... node scripts/upload-tiles.js
+ *   BUNNY_API_KEY=... node scripts/upload-tiles.ts
+ *   DRY_RUN=1 node scripts/upload-tiles.ts         # prints first 5 upload plans; no uploads, no manifest write
+ *   TILE_OUTPUT_DIR=/mnt/tiles BUNNY_API_KEY=... node scripts/upload-tiles.ts
  *
  * Resume after interruption: re-run the same command. Rows with status=uploaded
  * are skipped at the filter stage. Rows that crashed mid-directory remain at
@@ -36,31 +36,33 @@ import { resolve, join, relative } from 'node:path';
 import { rm, unlink, readdir } from 'node:fs/promises';
 import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
+import type { View } from './lib/parse-photo-filename.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-plates.js
-// and tile-photos.js).
+// and tile-photos.ts).
 // ---------------------------------------------------------------------------
 
-const MANIFEST_PATH = resolve('data/species-photos-manifest.csv');
-const TILE_CONFIG_PATH = resolve('scripts/tile-config.json');
+const MANIFEST_PATH: string = resolve('data/species-photos-manifest.csv');
+const TILE_CONFIG_PATH: string = resolve('scripts/tile-config.json');
 const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
-const DRY_RUN = process.env.DRY_RUN === '1';
-const TILE_OUTPUT_DIR_OVERRIDE = process.env.TILE_OUTPUT_DIR ?? '';
-const BUNNY_STORAGE_HOST = process.env.BUNNY_STORAGE_HOST ?? 'la.storage.bunnycdn.com';
-const BUNNY_ZONE = process.env.BUNNY_ZONE ?? 'pnwmoths';
-const BUNNY_API_KEY = process.env.BUNNY_API_KEY ?? '';
+const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
+const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
+const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
+const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
+const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
 
 // ---------------------------------------------------------------------------
-// Helpers — copied/adapted from tile-photos.js (exponential backoff) and
+// Helpers — copied/adapted from tile-photos.ts (exponential backoff) and
 // upload-plates.js (curl PUT, walk). Project convention: self-contained files.
 // ---------------------------------------------------------------------------
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /**
- * Redact BUNNY_API_KEY from an error message. Mirrors tile-photos.js verbatim
+ * Redact BUNNY_API_KEY from an error message. Mirrors tile-photos.ts verbatim
  * (adapted variable name) — this is the project-wide secret-redaction idiom.
  *
  * Guard against the empty-key edge case: `new RegExp('', 'g')` matches every
@@ -68,7 +70,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
  * "[REDACTED]" markers. When the key is empty (DRY_RUN path, etc.), the
  * original message is returned unchanged.
  */
-function redact(msg) {
+function redact(msg: string): string {
   return BUNNY_API_KEY
     ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')
     : msg;
@@ -77,36 +79,37 @@ function redact(msg) {
 /**
  * Five-attempt exponential backoff (2s/4s/8s/16s/32s). Non-retriable 4xx
  * errors (err.retriable === false) bail immediately. Adapted verbatim from
- * tile-photos.js — use this version, not the linear-backoff in upload-plates.js.
+ * tile-photos.ts — use this version, not the linear-backoff in upload-plates.js.
  */
-async function withRetry(fn, label) {
+async function withRetry<T>(fn: () => T | Promise<T>, label: string): Promise<T> {
   const delays = [2000, 4000, 8000, 16000, 32000];
   for (let attempt = 0; attempt < delays.length; attempt++) {
     try {
       return await fn();
     } catch (err) {
-      const safeMsg = redact(err.message ?? String(err));
-      if (err.retriable === false) {
+      const safeMsg = redact((err as Error).message ?? String(err));
+      if ((err as { retriable?: boolean }).retriable === false) {
         throw new Error(`${label} failed (non-retriable): ${safeMsg}`);
       }
       if (attempt === delays.length - 1) {
         throw new Error(`${label} failed after ${delays.length} attempts: ${safeMsg}`);
       }
       console.log(
-        `[upload-tiles] transient error on ${label} (attempt ${attempt + 1}/${delays.length}) — retrying in ${delays[attempt] / 1000}s: ${safeMsg}`
+        `[upload-tiles] transient error on ${label} (attempt ${attempt + 1}/${delays.length}) — retrying in ${delays[attempt]! / 1000}s: ${safeMsg}`
       );
-      await sleep(delays[attempt]);
+      await sleep(delays[attempt]!);
     }
   }
   // Unreachable — the loop either returns from fn() or throws on the final attempt.
+  throw new Error(`${label}: unreachable`);
 }
 
 /**
  * Per-stage log line: ISO timestamp, content_hash prefix (12 chars, padded),
  * action (16-char field), outcome, optional extra context.
- * Copied verbatim from tile-photos.js.
+ * Copied verbatim from tile-photos.ts.
  */
-function logStage(content_hash, action, outcome, extra = '') {
+function logStage(content_hash: string, action: string, outcome: string, extra = ''): void {
   const hashPrefix = (content_hash ?? '').slice(0, 12).padEnd(12);
   const actionField = String(action).padEnd(16);
   console.log(
@@ -118,9 +121,9 @@ function logStage(content_hash, action, outcome, extra = '') {
  * Async recursive directory walk — copied verbatim from upload-plates.js.
  * Returns all file paths (not directories) under dir as an array.
  */
-async function walk(dir) {
+async function walk(dir: string): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true });
-  const files = [];
+  const files: string[] = [];
   for (const entry of entries) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) {
@@ -134,7 +137,7 @@ async function walk(dir) {
 
 // ---------------------------------------------------------------------------
 // Exported helpers (exported at module level for unit tests — mirrors the
-// tilePrefix / isAlreadyTiled / isTileable pattern from tile-photos.js).
+// tilePrefix / isAlreadyTiled / isTileable pattern from tile-photos.ts).
 // ---------------------------------------------------------------------------
 
 /**
@@ -144,12 +147,13 @@ async function walk(dir) {
  * vips writes `{prefix}.dzi` (descriptor) and `{prefix}_files/` (tile pyramid).
  * species_slug is lowercased unconditionally (L-08; Phase 28 lesson).
  *
- * @param {string} tileOutputDir  - Root of the tile output directory
- * @param {object} row            - Manifest row
- * @returns {string}              - Prefix path (no extension)
+ * `row.view` is typed as View union here to satisfy D-09; ManifestRow stores
+ * all fields as string but at the point of path construction we use the value
+ * as-is (the D-10 boundary guard in readManifest already validates the CSV).
  */
-export function tileUploadPath(tileOutputDir, row) {
-  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);
+export function tileUploadPath(tileOutputDir: string, row: ManifestRow): string {
+  const _view: View = row.view as View; // D-09: view is 'D' | 'V' | '' at this boundary
+  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${_view}`);
 }
 
 /**
@@ -158,11 +162,8 @@ export function tileUploadPath(tileOutputDir, row) {
  * Used in DRY_RUN output so the operator can paste the URL into a browser
  * after the upload to verify tile resolution. Note: PUT requests go to the
  * Storage Zone URL (BUNNY_STORAGE_HOST), not this Pull Zone URL.
- *
- * @param {object} row  - Manifest row
- * @returns {string}    - Pull Zone URL with trailing slash
  */
-export function tilePullZoneUrl(row) {
+export function tilePullZoneUrl(row: ManifestRow): string {
   const slug = row.species_slug.toLowerCase();
   return `${CDN_BASE_URL}/species-tiles/${slug}/${row.specimen_id}-${row.view}/`;
 }
@@ -172,11 +173,8 @@ export function tilePullZoneUrl(row) {
  *
  * Only rows with status=tiled are uploaded. Rows with status=uploaded are
  * skipped at the filter stage (manifest-level idempotency, UPLOAD-02).
- *
- * @param {object} row  - Manifest row
- * @returns {boolean}
  */
-export function isUploadable(row) {
+export function isUploadable(row: ManifestRow): boolean {
   return row.status === 'tiled';
 }
 
@@ -191,20 +189,17 @@ export function isUploadable(row) {
  *
  * Uses synchronous fs calls (statSync, readdirSync) since this is a
  * one-time startup check and main() is already async.
- *
- * @param {string} tileOutputDir   - Root of the tile output directory
- * @param {Array}  tiledRows       - Rows filtered to status=tiled
  */
-function preflightFootprint(tileOutputDir, tiledRows) {
+function preflightFootprint(tileOutputDir: string, tiledRows: ManifestRow[]): void {
   console.log('[upload-tiles] Pre-flight: measuring tile corpus size (this may take 30-90s)...');
 
   let totalBytes = 0;
   let measuredRows = 0;
 
   // Synchronous recursive walk for pre-flight measurement.
-  function walkSync(dir) {
+  function walkSync(dir: string): string[] {
     const entries = readdirSync(dir, { withFileTypes: true });
-    const files = [];
+    const files: string[] = [];
     for (const entry of entries) {
       const full = join(dir, entry.name);
       if (entry.isDirectory()) {
@@ -252,15 +247,15 @@ function preflightFootprint(tileOutputDir, tiledRows) {
 // main()
 // ---------------------------------------------------------------------------
 
-async function main() {
+async function main(): Promise<void> {
   // --- Load config (tileOutputDir default from tile-config.json). ---
-  const config = JSON.parse(readFileSync(TILE_CONFIG_PATH, 'utf8'));
+  const config = JSON.parse(readFileSync(TILE_CONFIG_PATH, 'utf8')) as { tileOutputDir: string };
 
   // --- Resolve runtime dirs: env override takes precedence over config file. ---
-  const tileOutputDir = TILE_OUTPUT_DIR_OVERRIDE || config.tileOutputDir;
+  const tileOutputDir: string = TILE_OUTPUT_DIR_OVERRIDE || config.tileOutputDir;
 
   // --- Read manifest. ---
-  const rows = await readManifest(MANIFEST_PATH);
+  const rows: ManifestRow[] = await readManifest(MANIFEST_PATH);
 
   // --- Filter eligible rows. ---
   const tiledRows = rows.filter(isUploadable);
@@ -306,7 +301,7 @@ async function main() {
   };
 
   let rowsProcessed = 0;
-  let fatal = null;
+  let fatal: Error | null = null;
 
   try {
     for (const row of tiledRows) {
@@ -381,8 +376,8 @@ async function main() {
         if (existsSync(thumbnailLocalPath)) await unlink(thumbnailLocalPath);
 
       } catch (err) {
-        const safeMsg = redact(err.message ?? String(err));
-        advanceStatus(row, 'failed', { last_error: safeMsg });
+        const safeMsg = redact((err as Error).message ?? String(err));
+        advanceStatus(row, 'failed' as ManifestStatus, { last_error: safeMsg });
         stats.failed++;
         logStage(row.content_hash, 'upload', 'failed', safeMsg);
       }
@@ -395,10 +390,10 @@ async function main() {
       }
     }
   } catch (fatalErr) {
-    fatal = fatalErr;
-    console.error(`[upload-tiles] fatal error: ${redact(fatalErr.message ?? String(fatalErr))}`);
+    fatal = fatalErr as Error;
+    console.error(`[upload-tiles] fatal error: ${redact((fatalErr as Error).message ?? String(fatalErr))}`);
   } finally {
-    // Always write manifest on exit — success or fatal error (mirrors tile-photos.js).
+    // Always write manifest on exit — success or fatal error (mirrors tile-photos.ts).
     await writeManifest(MANIFEST_PATH, rows);
   }
 
@@ -415,10 +410,10 @@ async function main() {
 }
 
 // ---------------------------------------------------------------------------
-// Self-invocation guard — verbatim from tile-photos.js.
+// Self-invocation guard — verbatim from tile-photos.ts.
 // Prevents main() from running when the test file imports the exports above.
 // ---------------------------------------------------------------------------
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(err => { console.error(redact(err.message)); process.exit(1); });
+  main().catch(err => { console.error(redact((err as Error).message)); process.exit(1); });
 }
