@@ -1,10 +1,10 @@
 ---
 gsd_state_version: 1.0
 milestone: v3.0
-milestone_name: TypeScript Frontend & Build-Time Data Validation
-status: ready_to_plan
-stopped_at: Phase 35 complete (5/5) — ready to discuss Phase 36
-last_updated: 2026-06-10T03:25:10.767Z
+milestone_name: milestone
+status: planning
+stopped_at: Phase 36 context gathered
+last_updated: "2026-06-10T03:35:17.997Z"
 last_activity: 2026-06-10
 progress:
   total_phases: 20
@@ -161,6 +161,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-10T03:11:47.600Z
-Stopped at: Phase 35 context gathered
-Resume file: None
+Last session: 2026-06-10T03:35:17.987Z
+Stopped at: Phase 36 context gathered
+Resume file: .planning/phases/36-eleventy-data-files-config-migration/36-CONTEXT.md
