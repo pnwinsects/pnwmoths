@@ -39,7 +39,7 @@ Width and height are the pixel dimensions from `ImageProperties.xml` (`WIDTH` an
 
 **4. Upload the new tiles to CDN.**
 
-The original plate-upload script was a one-time migration tool and has been removed. Upload the plate files manually using `curl` with the bunny.net Storage Zone HTTP PUT API (same pattern as `_instructions/UPLOADING_TILES.md`):
+Upload the plate files using `curl` with the bunny.net Storage Zone HTTP PUT API (same pattern as `_instructions/UPLOADING_TILES.md`):
 
 ```sh
 # Set your Storage Zone password from bunny.net → Storage → pnwmoths → FTP & API Access
