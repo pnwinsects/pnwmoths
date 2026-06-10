@@ -13,7 +13,7 @@ dependency_graph:
     - package.json (test glob updated to *.test.ts)
     - SC-1 closed: zero .js source in src/components/; full typecheck + 225/225 tests green
     - SC-4 measured: gzipped bundle +3,346 bytes; only zod/mini in bundle (ZodMiniType confirmed)
-    - SC-5 automated diff: data byte-identical; HTML differs only in content-hashed asset filenames (PENDING human approval)
+    - SC-5 verified: data byte-identical; HTML differs only in content-hashed asset filenames (APPROVED 2026-06-10)
   affects:
     - Phase 38 CI Gate (can now verify full phase success criteria)
 tech_stack:
@@ -30,11 +30,11 @@ key_files:
 decisions:
   - "Rule 3 auto-fix: added eleventyConfig.addPassthroughCopy({ 'src/types': 'types' }) — Vite stages components in .11ty-vite/components/ but src/types/ was absent; pnwm-taxon-browser.ts's value import (SpeciesStateSchema) caused UNRESOLVED_IMPORT at bundle time"
   - "SC-4 grep methodology note: zod v4 uses $ZodError/$ZodType as internal symbols (not public API); grep pattern 'ZodError|ZodType' matches $-prefixed variants; correct verification is ZodMiniType present + no non-$-prefixed ZodError/ZodType"
-  - "SC-5 automated evidence captured: data files byte-identical; all 1537 HTML diffs are content-hashed asset filename references only; human approval pending"
+  - "SC-5 approved 2026-06-10: data files byte-identical; all 1537 HTML diffs are content-hashed asset filename references only; SC-4 gzip delta +3,346 B / +2.7% (121,833 → 125,179 bytes gzipped)"
 metrics:
   duration: 1096s
   completed: "2026-06-10"
-  tasks: 2 automated (Task 3 pending human approval)
+  tasks: 3 (all complete; SC-5 approved 2026-06-10)
   files: 3
 ---
 
@@ -88,7 +88,7 @@ Updated `package.json` test glob from `src/components/*.test.js` → `src/compon
 
 **Note on zod v4 grep methodology:** The RESEARCH.md's SC-4 grep command (`grep -c "ZodError\|ZodType"`) was designed for zod v3 where `ZodError` and `ZodType` were the public export names. In zod v4, these are `$ZodError` and `$ZodType` — internal implementation symbols used by both `zod/mini` and classic zod. The correct check is: `ZodMiniType` present = zod/mini shipped; `grep -oP '(?<!\$)ZodError|(?<!\$)ZodType'` = 0 means no full classic Zod. Both conditions satisfied.
 
-### Task 3: SC-5 byte-identical verification (PENDING human approval)
+### Task 3: SC-5 byte-identical verification (APPROVED)
 
 Automated diff against `_site_baseline/` (pre-Phase-37 snapshot from Plan 01):
 
@@ -122,7 +122,7 @@ Per the Phase 34 Plan 03 decision (in STATE.md): "Vite content-hash filename cha
 
 **No prose, markup, or data content changed.** The `diff -rq | grep -v '/assets/'` output contains only the HTML files whose asset-filename `<script>` and `<link>` tags changed.
 
-**Human approval required:** The human must confirm the SC-5 diff is clean (asset-hash-only differences, no prose/data content changed).
+**Human approval received 2026-06-10:** Confirmed SC-5 diff is clean — data files byte-identical, all HTML differences confined to content-hashed asset filenames, zero prose/markup regressions. SC-4 gzip delta +3,346 B / +2.7% accepted.
 
 ## Deviations from Plan
 
@@ -151,7 +151,7 @@ No new network endpoints, auth paths, or file access patterns introduced. The Vi
 | Threat | Status |
 |--------|--------|
 | T-37-08 (full-Zod in bundle) | MITIGATED: ZodMiniType present; no non-$-prefixed ZodError/ZodType |
-| T-37-09 (unintended build-output drift) | SC-5 automated evidence captured (PENDING human approval) |
+| T-37-09 (unintended build-output drift) | MITIGATED: SC-5 approved 2026-06-10 — data byte-identical, HTML asset-hash-only changes |
 
 ## Self-Check
 
@@ -178,6 +178,6 @@ No new network endpoints, auth paths, or file access patterns introduced. The Vi
 ### SC-5 Automated Evidence
 - [x] `diff -rq _site_baseline/ _site/ | grep -E '\.(parquet|json)$'` — no output (data byte-identical)
 - [x] All 1,537 HTML diffs are content-hashed asset filename changes only
-- [ ] Human approval pending
+- [x] Human approval received 2026-06-10 — data byte-identical; HTML asset-hash-only changes confirmed clean
 
-## Self-Check: PASSED (automated tasks complete; SC-5 human approval pending)
+## Self-Check: PASSED
