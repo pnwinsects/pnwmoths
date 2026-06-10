@@ -333,16 +333,16 @@ export class PnwmImageSlideshow extends LitElement {
     this._currentIndex = (this._currentIndex - 1 + this._highResSpecimens.length) % this._highResSpecimens.length;
     // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
     const spec = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
-    // OSD open() runtime accepts DZI URL strings; cast satisfies strict types without behavior change
-    this._osdViewer?.open(this._buildDziUrl(spec) as unknown as import('openseadragon').TileSourceSpecifier);
+    // OSD open() accepts a DZI URL string at runtime; the string overload is declared in src/types/openseadragon.d.ts
+    this._osdViewer?.open(this._buildDziUrl(spec));
   }
 
   _nextSpecimen(): void {
     this._currentIndex = (this._currentIndex + 1) % this._highResSpecimens.length;
     // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
     const spec = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
-    // OSD open() runtime accepts DZI URL strings; cast satisfies strict types without behavior change
-    this._osdViewer?.open(this._buildDziUrl(spec) as unknown as import('openseadragon').TileSourceSpecifier);
+    // OSD open() accepts a DZI URL string at runtime; the string overload is declared in src/types/openseadragon.d.ts
+    this._osdViewer?.open(this._buildDziUrl(spec));
   }
 
   _scrollLeft(): void {
