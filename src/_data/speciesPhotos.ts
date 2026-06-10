@@ -9,13 +9,14 @@
 
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import type { SpeciesPhoto } from '../types/index.ts';
 
 const MANIFEST_PATH = new URL('../../data/species-photos.json', import.meta.url).pathname;
 
-export default async function () {
+export default async function (): Promise<Record<string, SpeciesPhoto>> {
   if (!existsSync(MANIFEST_PATH)) {
     console.warn(`[species-photos] Manifest not found: ${MANIFEST_PATH} — no high-res species`);
     return {};
   }
-  return JSON.parse(await readFile(MANIFEST_PATH, 'utf8'));
+  return JSON.parse(await readFile(MANIFEST_PATH, 'utf8')) as Record<string, SpeciesPhoto>;
 }
