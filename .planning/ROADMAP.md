@@ -485,8 +485,8 @@ Plans:
 
 **Wave 2** *(parallel; blocked on Wave 1)*
 
-- [ ] 34-02-PLAN.md — Convert all four `scripts/lib/*.js` (manifest first: COLUMNS-derived ManifestRow + ManifestStatus union; Dropbox/csv-parse consumed-field interfaces + guards) with atomic `.ts`-specifier updates to the 4 consumer scripts + 3 lib tests (MIG-01; D-01..D-06)
-- [ ] 34-03-PLAN.md — Convert `src/_lib/glossary-transform.js` + atomic eleventy.config.js specifier update + byte-identity build gate vs baseline (MIG-01)
+- [x] 34-02-PLAN.md — Convert all four `scripts/lib/*.js` (manifest first: COLUMNS-derived ManifestRow + ManifestStatus union; Dropbox/csv-parse consumed-field interfaces + guards) with atomic `.ts`-specifier updates to the 4 consumer scripts + 3 lib tests (MIG-01; D-01..D-06)
+- [x] 34-03-PLAN.md — Convert `src/_lib/glossary-transform.js` + atomic eleventy.config.js specifier update + byte-identity build gate vs baseline (MIG-01)
 
 ### Phase 35: Build Pipeline Scripts Migration
 
@@ -587,7 +587,7 @@ Plans:
 | 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
-| 34. scripts/lib & src/_lib Migration | v3.0 | 1/3 | In Progress|  |
+| 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete   | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 0/TBD | Not started | - |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
