@@ -537,7 +537,7 @@ Plans:
 
 **Wave 2** *(parallel; blocked on Wave 1)*
 
-- [ ] 36-02-PLAN.md — Convert DuckDB-boundary data files species/glossary/taxon to .ts with D-03 interface+guard; delete taxon.d.ts (MIG-03; D-03, D-04)
+- [x] 36-02-PLAN.md — Convert DuckDB-boundary data files species/glossary/taxon to .ts with D-03 interface+guard; delete taxon.d.ts (MIG-03; D-03, D-04)
 - [ ] 36-03-PLAN.md — Convert file-I/O data files images/plates/speciesPhotos to .ts with typed emitted-shape interfaces (MIG-03; D-03)
 
 **Wave 3** *(blocked on Waves 1–2; contains the human-verify checkpoint)*
@@ -616,7 +616,7 @@ Plans:
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 36. Eleventy Data Files & Config Migration | v3.0 | 1/4 | In Progress|  |
+| 36. Eleventy Data Files & Config Migration | v3.0 | 2/4 | In Progress|  |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
