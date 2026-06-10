@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, type PropertyDeclarations, type TemplateResult } from 'lit';
+import { SpeciesStateSchema, type SpeciesState, type TaxonFamily, type TaxonSubfamily, type TaxonGenus, type NavImage } from '../types/index.ts';
 
-const STATE_NAMES = {
+const STATE_NAMES: Record<string, string> = {
   BC: 'British Columbia',
   ID: 'Idaho',
   MT: 'Montana',
@@ -11,14 +12,48 @@ const STATE_NAMES = {
 const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
 
 /**
+ * Discriminant error class for species-states.json schema validation failures.
+ * Allows the connectedCallback catch block to distinguish schema errors (hard-fail)
+ * from network/fetch errors (soft degradation, per resolved D-05 decision).
+ */
+export class SchemaValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'SchemaValidationError';
+  }
+}
+
+/**
+ * Validate that rows is a well-formed species-states.json payload.
+ * O(1): checks top-level is Array + probes a single representative element shape.
+ * Anti-pattern: do NOT parse the full array with Zod — that is O(rows) (D-03). Probe rows[0] only.
+ *
+ * @param rows - the unknown value returned by res.json()
+ * @throws SchemaValidationError on non-array top level or bad element shape
+ */
+export function validateSpeciesStates(rows: unknown): asserts rows is SpeciesState[] {
+  if (!Array.isArray(rows)) {
+    throw new SchemaValidationError('species-states.json: expected array at top level');
+  }
+  if (rows.length > 0) {
+    const probe = SpeciesStateSchema.safeParse(rows[0]);
+    if (!probe.success) {
+      throw new SchemaValidationError(
+        `species-states.json: element shape mismatch: ${probe.error.issues.map((i: { message: string }) => i.message).join('; ')}`
+      );
+    }
+  }
+}
+
+/**
  * Transform flat [{species_slug, state}] array from species-states.json
  * into an object mapping species_slug → Set<state>.
  */
-export function buildStateMap(rows) {
-  const map = {};
+export function buildStateMap(rows: SpeciesState[]): Record<string, Set<string>> {
+  const map: Record<string, Set<string>> = {};
   for (const { species_slug, state } of rows) {
     if (!map[species_slug]) map[species_slug] = new Set();
-    map[species_slug].add(state);
+    map[species_slug]!.add(state);
   }
   return map;
 }
@@ -27,7 +62,7 @@ export function buildStateMap(rows) {
  * Returns true if any slug in `slugs` has `selectedState` in stateMap,
  * or if selectedState is empty string (no filter active).
  */
-export function taxonHasState(slugs, stateMap, selectedState) {
+export function taxonHasState(slugs: string[], stateMap: Record<string, Set<string>>, selectedState: string): boolean {
   if (!selectedState) return true;
   return slugs.some(slug => stateMap[slug]?.has(selectedState));
 }
@@ -36,16 +71,16 @@ export function taxonHasState(slugs, stateMap, selectedState) {
  * Recursively collect all species slugs from any taxon tree node.
  * Handles family ({subfamilies:[]}), subfamily ({genera:[]}), genus ({species:[]}).
  */
-export function collectSlugs(node) {
-  if (node.species) return node.species.map(s => s.slug);
-  const children = node.subfamilies || node.genera || [];
-  const slugs = [];
+export function collectSlugs(node: TaxonFamily | TaxonSubfamily | TaxonGenus): string[] {
+  if ('species' in node) return node.species.map(s => s.slug);
+  const children = ('subfamilies' in node ? node.subfamilies : null) || ('genera' in node ? node.genera : null) || [];
+  const slugs: string[] = [];
   for (const child of children) slugs.push(...collectSlugs(child));
   return slugs;
 }
 
 class PnwmTaxonBrowser extends LitElement {
-  static get properties() {
+  static get properties(): PropertyDeclarations {
     return {
       'path-prefix':        { type: String },
       _families:            { attribute: false, state: true },
@@ -59,10 +94,19 @@ class PnwmTaxonBrowser extends LitElement {
     };
   }
 
-  get _prefix() { return this['path-prefix'] || '/'; }
+  _families: TaxonFamily[];
+  _stateMap: Record<string, Set<string>>;
+  _statesAvailable: string[];
+  _selectedState: string;
+  _showImages: boolean;
+  _expandedFamilies: Set<string>;
+  _expandedSubfamilies: Set<string>;
+  _expandedGenera: Set<string>;
+
+  get _prefix(): string { return (this as unknown as Record<string, string>)['path-prefix'] ?? '/'; }
 
   /** Light DOM — Pico CSS must reach selects, headings, links inside this component (D-09) */
-  createRenderRoot() { return this; }
+  createRenderRoot(): this { return this; }
 
   constructor() {
     super();
@@ -76,36 +120,44 @@ class PnwmTaxonBrowser extends LitElement {
     this._expandedGenera = new Set();
   }
 
-  async connectedCallback() {
+  async connectedCallback(): Promise<void> {
     super.connectedCallback();
     // Sync: read taxonomy JSON embedded by index.njk (D-10)
     const scriptEl = document.getElementById('taxon-data');
-    if (scriptEl) this._families = JSON.parse(scriptEl.textContent);
+    if (scriptEl) this._families = JSON.parse(scriptEl.textContent ?? '[]') as TaxonFamily[];
     // Async: fetch state filter data (D-11)
     try {
       const res = await fetch(`${this._prefix}species-states.json`);
-      const rows = await res.json();
+      const rows: unknown = await res.json();
+      // O(1) shape validator — D-03: check top-level + one representative element only
+      // Throws SchemaValidationError on schema mismatch (SCHEMA-08 hard-fail per D-05)
+      validateSpeciesStates(rows);
       this._stateMap = buildStateMap(rows);
       this._statesAvailable = [...new Set(rows.map(r => r.state))].sort();
-    } catch (_e) {
-      // Leave stateMap empty on error — select stays disabled (graceful degradation)
+    } catch (err) {
+      if (err instanceof SchemaValidationError) {
+        // D-05 hard-fail: schema mismatch surfaces the error (no silently-wrong data)
+        // re-throw so callers see the schema problem
+        throw err;
+      }
+      // Network/fetch errors: soft degradation — leave stateMap empty, select stays disabled
     }
   }
 
   // --- Toggle handlers ---
 
-  _onToggleImages(e) {
-    this._showImages = e.target.checked;
+  _onToggleImages(e: Event): void {
+    this._showImages = (e.target as HTMLInputElement).checked;
   }
 
-  _onStateChange(e) {
-    this._selectedState = e.target.value;
+  _onStateChange(e: Event): void {
+    this._selectedState = (e.target as HTMLSelectElement).value;
   }
 
   // --- Expand/collapse handlers ---
   // CRITICAL: Use new Set (not .add()) — Lit detects change by object identity (Pitfall 6)
 
-  _toggleFamily(name) {
+  _toggleFamily(name: string): void {
     if (this._expandedFamilies.has(name)) {
       this._expandedFamilies = new Set([...this._expandedFamilies].filter(n => n !== name));
     } else {
@@ -113,7 +165,7 @@ class PnwmTaxonBrowser extends LitElement {
     }
   }
 
-  _toggleSubfamily(key) {
+  _toggleSubfamily(key: string): void {
     if (this._expandedSubfamilies.has(key)) {
       this._expandedSubfamilies = new Set([...this._expandedSubfamilies].filter(k => k !== key));
     } else {
@@ -121,7 +173,7 @@ class PnwmTaxonBrowser extends LitElement {
     }
   }
 
-  _toggleGenus(slug) {
+  _toggleGenus(slug: string): void {
     if (this._expandedGenera.has(slug)) {
       this._expandedGenera = new Set([...this._expandedGenera].filter(s => s !== slug));
     } else {
@@ -136,7 +188,7 @@ class PnwmTaxonBrowser extends LitElement {
   // Image path: /images/{img.species_slug}/{img.filename} (verified from species.njk)
   // onImageClick: optional (speciesSlug) => void — wraps each image in a button
 
-  _renderImageStrip(navImages, onImageClick = null) {
+  _renderImageStrip(navImages: NavImage[] | null | undefined, onImageClick: ((slug: string) => void) | null = null): TemplateResult {
     if (!this._showImages || !navImages?.length) return html``;
     return html`
       <div style="display:inline-flex;flex-direction:row;gap:4px;overflow-x:auto">
@@ -161,7 +213,7 @@ class PnwmTaxonBrowser extends LitElement {
 
   // --- Expand tree to a species' genus ---
 
-  _expandToSpecies(speciesSlug) {
+  _expandToSpecies(speciesSlug: string): void {
     for (const family of this._families) {
       for (const subfam of family.subfamilies) {
         for (const genus of subfam.genera) {
@@ -183,7 +235,7 @@ class PnwmTaxonBrowser extends LitElement {
   // --- Muting helper ---
   // D-06: opacity:0.35 on taxa with no records in selected state; never display:none
 
-  _mutedStyle(slugs) {
+  _mutedStyle(slugs: string[]): string {
     if (!this._selectedState) return '';
     return taxonHasState(slugs, this._stateMap, this._selectedState)
       ? ''
@@ -192,7 +244,7 @@ class PnwmTaxonBrowser extends LitElement {
 
   // --- Level renderers ---
 
-  _renderSpecies(species, genusName) {
+  _renderSpecies(species: TaxonGenus['species'], genusName: string): TemplateResult {
     return html`
       <div class="pnwm-tb-species-grid">
         ${species.map(sp => html`
@@ -210,7 +262,7 @@ class PnwmTaxonBrowser extends LitElement {
       </div>`;
   }
 
-  _renderGenus(genus, familyKey) {
+  _renderGenus(genus: TaxonGenus, familyKey: string): TemplateResult {
     const key = `${familyKey}__${genus.genus_slug}`;
     const expanded = this._expandedGenera.has(key);
     const slugs = genus.species.map(s => s.slug);
@@ -228,7 +280,7 @@ class PnwmTaxonBrowser extends LitElement {
       </div>`;
   }
 
-  _renderSubfamily(subfam, familyName) {
+  _renderSubfamily(subfam: TaxonSubfamily, familyName: string): TemplateResult {
     // subfam.name === null means no real subfamily — render genera directly (Pitfall 2)
     const key = `${familyName}__${subfam.name ?? '__none__'}`;
     const expanded = this._expandedSubfamilies.has(key);
@@ -256,7 +308,7 @@ class PnwmTaxonBrowser extends LitElement {
       </div>`;
   }
 
-  _renderFamily(family) {
+  _renderFamily(family: TaxonFamily): TemplateResult {
     const expanded = this._expandedFamilies.has(family.name);
     const slugs = collectSlugs(family);
     return html`
@@ -275,7 +327,7 @@ class PnwmTaxonBrowser extends LitElement {
       </div>`;
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <style>
         .pnwm-tb-species-grid {
@@ -315,7 +367,7 @@ class PnwmTaxonBrowser extends LitElement {
           >
             <option value="">All states</option>
             ${this._statesAvailable.map(s =>
-              html`<option value=${s} ?selected=${this._selectedState === s}>${STATE_NAMES[s] || s}</option>`
+              html`<option value=${s} ?selected=${this._selectedState === s}>${STATE_NAMES[s] ?? s}</option>`
             )}
           </select>
         </div>
