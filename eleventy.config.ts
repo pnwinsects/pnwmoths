@@ -83,6 +83,7 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
 
   // Passthrough copy for component source files so Vite can find them
   eleventyConfig.addPassthroughCopy({ "src/components": "components" });
+  eleventyConfig.addPassthroughCopy({ "src/types": "types" });
 
   // Theme CSS and banner image assets
   eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
