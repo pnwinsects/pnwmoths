@@ -501,7 +501,21 @@ Plans:
   4. `npm run verify:parquet` exists as a standalone script that reads every species' Parquet file with hyparquet and validates all rows against `OccurrenceRecordSchema`; it runs independently of `npm run build` and completes on the full dataset without crashing — scaling with dataset size is acceptable here as the explicit offline thorough check (SCHEMA-07)
   5. `time npm run build:data` completes in under 60 seconds locally; `_site/` output is byte-identical to the pre-migration baseline (Phase 35 is build-side only — no client-bundle change)
 
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+**Wave 1** (parallel)
+
+- [ ] 35-01-PLAN.md — Delete 8 spent one-off scripts + remove migrate:* npm scripts + create verify-parquet.ts (SCHEMA-07) + update upload-plates docs (D-01, D-02, D-03, D-04, D-05)
+- [ ] 35-02-PLAN.md — Lift view/match_bucket to exported string-literal unions in parse-photo-filename.ts (D-09)
+
+**Wave 2** *(parallel; blocked on Wave 1)*
+
+- [ ] 35-03-PLAN.md — Convert build-data (+SCHEMA-04 DESCRIBE check), copy-parquet, copy-images, emit-species-states, check-page-weight (+2 tests); DuckDB CSV gate preserved (MIG-02, SCHEMA-04, SCHEMA-06; D-06..D-08, D-12)
+- [ ] 35-04-PLAN.md — Convert ingest/tile/upload/generate photo-pipeline scripts (+4 tests); thread View/MatchBucket unions + D-10 boundary guards; SCHEMA-05 output typing on generate (MIG-02, SCHEMA-05; D-09, D-10, D-13)
+
+**Wave 3** *(blocked on Waves 1-2; contains the human-verify checkpoint)*
+
+- [ ] 35-05-PLAN.md — Phase gate: typecheck + full npm test + build:data <60s + verify:parquet over full dataset + byte-identical _site/ diff; human-verify ADDING_PLATE.md workflow (all reqs; SC-1..SC-5)
 
 ### Phase 36: Eleventy Data Files & Config Migration
 
