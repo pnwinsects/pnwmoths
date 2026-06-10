@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
-status: executing
-stopped_at: Completed 37-03 - display components converted to TypeScript
-last_updated: "2026-06-10T19:19:20.046Z"
+status: verifying
+stopped_at: Completed 37-05 automated tasks - SC-5 human gate pending
+last_updated: "2026-06-10T19:40:49.167Z"
 last_activity: 2026-06-10
 progress:
   total_phases: 20
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 19
-  completed_plans: 18
-  percent: 20
+  completed_plans: 19
+  percent: 25
 ---
 
 # Project State
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 Phase: 37 (lit-web-components-migration) — EXECUTING
 Plan: 5 of 5
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-10
 
 ```
@@ -68,6 +68,7 @@ v3.0 Progress: [··········] 0/6 phases (0%)
 | Phase 37 P02 | 420 | 3 tasks | 5 files |
 | Phase 37 P03 | 548 | 3 tasks | 5 files |
 | Phase 37 P04 | 324 | 3 tasks | 4 files |
+| Phase 37 P05 | 1096 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -105,6 +106,8 @@ Recent decisions affecting current work:
 - Phase 34 Plan 03: Vite content-hash filename changes between builds are non-deterministic (sourceMappingURL self-reference); byte-identity gate assesses HTML prose content, not asset filenames
 - Phase 34 Plan 03: noUncheckedIndexedAccess in test files fixed via destructuring (const [first, second] = buildTermMap(...)) rather than bare index access
 - [Phase ?]: D-06/D-07 preserved in Plan 03: static properties = {} class-field form, no decorators, customElements.define kept
+- Phase 37 Plan 05: eleventy.config.ts needs src/types passthrough copy for Vite staging — pnwm-taxon-browser.ts's value import (SpeciesStateSchema) fails at bundle time without it; all prior type-only imports were erased at transpile time
+- Phase 37 Plan 05: zod v4 SC-4 grep — internal $ZodError/$ZodType are zod/mini implementation symbols; correct check is ZodMiniType present + no non-$-prefixed ZodError/ZodType (grep -oP '(?<!\$)ZodError|...' = 0)
 
 ### Roadmap Evolution
 
@@ -168,6 +171,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-10T19:19:20.038Z
+Last session: 2026-06-10T19:40:49.159Z
 Stopped at: Completed 37-03 - display components converted to TypeScript
 Resume file: None

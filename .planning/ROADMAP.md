@@ -119,7 +119,7 @@
 - [x] **Phase 34: scripts/lib & src/_lib Migration** - Smallest areas converted first; proves Node 24 native type-stripping path end-to-end (completed 2026-06-09)
 - [x] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed (completed 2026-06-10)
 - [x] **Phase 36: Eleventy Data Files & Config Migration** - Middle layer: `src/_data/` and `eleventy.config.ts` converted with GITHUB_PAGES conditional preserved (completed 2026-06-10)
-- [ ] **Phase 37: Lit Web Components Migration** - Consumer side: `src/components/` fully typed, `FilterChangeDetail` event interface, Vite bundle verified Zod-free in production
+- [x] **Phase 37: Lit Web Components Migration** - Consumer side: `src/components/` fully typed, `FilterChangeDetail` event interface, Vite bundle verified Zod-free in production (completed 2026-06-10)
 - [ ] **Phase 38: CI Gate & Full Verification** - `tsc --noEmit` in GitHub Actions PR check + deploy; byte-identical `_site/` diff guard; full 191-test suite green; `npm run verify:parquet`
 
 ## Phase Details
@@ -574,7 +574,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 37-05-PLAN.md — main.ts + package.json test glob; SC-1 full suite; SC-4 bundle grep + gzip delta; SC-5 byte-identical checkpoint
+- [x] 37-05-PLAN.md — main.ts + package.json test glob; SC-1 full suite; SC-4 bundle grep + gzip delta; SC-5 byte-identical checkpoint
 
 **UI hint**: yes
 
@@ -635,7 +635,7 @@ Plans:
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete    | 2026-06-10 |
-| 37. Lit Web Components Migration | v3.0 | 4/5 | In Progress|  |
+| 37. Lit Web Components Migration | v3.0 | 5/5 | Complete   | 2026-06-10 |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
 
 ---
