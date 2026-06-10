@@ -505,7 +505,7 @@ Plans:
 Plans:
 **Wave 1** (parallel)
 
-- [ ] 35-01-PLAN.md — Delete 8 spent one-off scripts + remove migrate:* npm scripts + create verify-parquet.ts (SCHEMA-07) + update upload-plates docs (D-01, D-02, D-03, D-04, D-05)
+- [x] 35-01-PLAN.md — Delete 8 spent one-off scripts + remove migrate:* npm scripts + create verify-parquet.ts (SCHEMA-07) + update upload-plates docs (D-01, D-02, D-03, D-04, D-05)
 - [ ] 35-02-PLAN.md — Lift view/match_bucket to exported string-literal unions in parse-photo-filename.ts (D-09)
 
 **Wave 2** *(parallel; blocked on Wave 1)*
@@ -602,7 +602,7 @@ Plans:
 | 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
 | 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
 | 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
-| 35. Build Pipeline Scripts Migration | v3.0 | 0/TBD | Not started | - |
+| 35. Build Pipeline Scripts Migration | v3.0 | 1/5 | In Progress|  |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 0/TBD | Not started | - |
 | 37. Lit Web Components Migration | v3.0 | 0/TBD | Not started | - |
 | 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |

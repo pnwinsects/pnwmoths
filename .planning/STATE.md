@@ -4,13 +4,13 @@ milestone: v3.0
 milestone_name: TypeScript Frontend & Build-Time Data Validation
 status: executing
 stopped_at: Phase 35 context gathered
-last_updated: "2026-06-10T01:34:50.993Z"
-last_activity: 2026-06-10 -- Phase 35 planning complete
+last_updated: "2026-06-10T01:42:17.178Z"
+last_activity: 2026-06-10
 progress:
   total_phases: 20
   completed_phases: 2
   total_plans: 10
-  completed_plans: 5
+  completed_plans: 6
   percent: 10
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 35 — build pipeline scripts migration
+**Current focus:** Phase 35 — build-pipeline-scripts-migration
 
 ## Current Position
 
-Phase: 35
-Plan: Not started
+Phase: 35 (build-pipeline-scripts-migration) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-06-10 -- Phase 35 planning complete
+Last activity: 2026-06-10
 
 ```
 v3.0 Progress: [··········] 0/6 phases (0%)
@@ -159,6 +159,6 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-10T00:45:55.443Z
+Last session: 2026-06-10T01:42:17.170Z
 Stopped at: Phase 35 context gathered
-Resume file: .planning/phases/35-build-pipeline-scripts-migration/35-CONTEXT.md
+Resume file: None

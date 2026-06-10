@@ -26,13 +26,13 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 - [ ] **SCHEMA-04**: Build-generated Parquet is trusted (build-locked); the build keeps only a cheap one-sample sanity check (read one species' Parquet back, validate its schema) to catch write-path bugs before deploy. The primary Parquet guard is load-time (see SCHEMA-08), not a full build-time round-trip
 - [ ] **SCHEMA-05**: Build-locked JSON (taxon tree, `species-photos.json` — baked into HTML) is covered by static TS types at authoring; the dynamically-fetched `species-states.json` is validated at load time (see SCHEMA-08)
 - [ ] **SCHEMA-06**: Source CSV input correctness is enforced at build by DuckDB's typed `read_csv` (fails on bad coercion) plus the existing integrity SQL; TS types describe the post-read shape. No separate per-row Zod parsing of CSVs in the hot path
-- [ ] **SCHEMA-07**: `npm run verify:parquet` validates every species' Parquet against the schema across the full dataset, runnable on demand without slowing the default build (scaling with dataset size is acceptable here — it is the explicit offline thorough check)
+- [x] **SCHEMA-07**: `npm run verify:parquet` validates every species' Parquet against the schema across the full dataset, runnable on demand without slowing the default build (scaling with dataset size is acceptable here — it is the explicit offline thorough check)
 - [ ] **SCHEMA-08**: Data fetched dynamically from the CDN is validated at load time against its schema by **structure, not per-row** — O(columns), independent of dataset size: `records.parquet` via its hyparquet column metadata, `species-states.json` by top-level + element shape. Runs in production at negligible cost using `zod/mini` or a hand-rolled guard
 
 ### MIG — JavaScript → TypeScript Migration
 
 - [x] **MIG-01**: `scripts/lib/` and `src/_lib/` are fully converted to TypeScript
-- [ ] **MIG-02**: All build/data pipeline scripts in `scripts/` are fully converted to TypeScript
+- [x] **MIG-02**: All build/data pipeline scripts in `scripts/` are fully converted to TypeScript
 - [ ] **MIG-03**: Eleventy data files (`src/_data/`) and `eleventy.config` are converted to TypeScript, preserving the `process.env.GITHUB_PAGES`-conditional `pathPrefix`
 - [ ] **MIG-04**: All Lit web components in `src/components/` are converted to TypeScript, with the `pnwm-filter-change` event typed via a shared detail interface
 - [ ] **MIG-05**: All test files are converted to TypeScript and still run via `node --test`, with the full suite (~191 tests) passing
@@ -84,10 +84,10 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | SCHEMA-04 | Phase 35 | Pending |
 | SCHEMA-05 | Phase 35 | Pending |
 | SCHEMA-06 | Phase 35 | Pending |
-| SCHEMA-07 | Phase 35 | Pending |
+| SCHEMA-07 | Phase 35 | Complete |
 | SCHEMA-08 | Phase 37 | Pending |
 | MIG-01 | Phase 34 | Complete |
-| MIG-02 | Phase 35 | Pending |
+| MIG-02 | Phase 35 | Complete |
 | MIG-03 | Phase 36 | Pending |
 | MIG-04 | Phase 37 | Pending |
 | MIG-05 | Phase 38 | Pending |
