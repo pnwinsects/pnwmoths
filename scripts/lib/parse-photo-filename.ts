@@ -44,6 +44,26 @@ const GENUS_RE = /^[A-Z][a-z]+$/;
 // by a single hyphen ('v-alba', 'c-nigrum').
 const EPITHET_RE = /^[a-z]+(-[a-z]+)?$/;
 
+/**
+ * Dorsal / ventral / parse-failed view code (D-09).
+ * Source of truth: ParseSpecimenAndViewResult.view; consumed by all photo-pipeline scripts.
+ */
+export type View = 'D' | 'V' | '';
+
+/**
+ * Classification bucket for a photo filename (D-09).
+ * Exactly 7 values — derived from classify() in scripts/ingest-photos.js.
+ * Do NOT add or remove values; ingest-photos.js is the source of truth.
+ */
+export type MatchBucket =
+  | 'resolved-via-synonym'  // Phase 27 synonym pre-pass matched a known synonym
+  | 'provisional'           // FIX #3: n sp, sp, nr <epithet> — undescribed/provisional ID
+  | 'unparseable'           // null binomial, null bucketHint — filename not parseable
+  | 'clean-match'           // binomial found directly in byBinomial lookup
+  | 'slug-match'            // slug found in bySlug (safety net; 0% in audit)
+  | 'genus-only'            // genus token found but no species match
+  | 'likely-synonym';       // neither genus nor species in current data
+
 export interface ExtractBinomialResult {
   binomial: string | null;
   bucketHint: 'provisional' | null;
@@ -51,7 +71,7 @@ export interface ExtractBinomialResult {
 
 export interface ParseSpecimenAndViewResult {
   specimen: string;
-  view: 'D' | 'V' | '';
+  view: View;
 }
 
 /**
@@ -159,7 +179,7 @@ export function parseSpecimenAndView(filename: string): ParseSpecimenAndViewResu
   if (!match) return { specimen: '', view: '' };
   // noUncheckedIndexedAccess: destructure capture groups; guard with ?? ''
   const [, specimenRaw, viewRaw] = match;
-  return { specimen: specimenRaw ?? '', view: (viewRaw ?? '') as 'D' | 'V' | '' };
+  return { specimen: specimenRaw ?? '', view: (viewRaw ?? '') as View };
 }
 
 /**
