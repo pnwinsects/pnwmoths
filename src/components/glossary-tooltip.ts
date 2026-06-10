@@ -8,10 +8,10 @@
  * the browser's native tooltip from appearing alongside the custom one.
  */
 
-const terms = document.querySelectorAll('abbr.glossary-term');
+const terms = document.querySelectorAll<HTMLElement>('abbr.glossary-term');
 
-terms.forEach((abbr, index) => {
-  let hideTimer;
+terms.forEach((abbr: HTMLElement, index: number) => {
+  let hideTimer: ReturnType<typeof setTimeout> | undefined;
   // Create per-term popover element
   const popover = document.createElement('div');
   popover.id = `gt-popover-${index}`;
@@ -22,8 +22,9 @@ terms.forEach((abbr, index) => {
   popover.innerHTML = '<img class="gt-img" alt="" hidden><p class="gt-def"></p>';
   document.body.appendChild(popover);
 
-  const gtImg = popover.querySelector('.gt-img');
-  const gtDef = popover.querySelector('.gt-def');
+  // Non-null assertions justified: elements are authored at build time via innerHTML above
+  const gtImg = popover.querySelector<HTMLImageElement>('.gt-img')!;
+  const gtDef = popover.querySelector<HTMLParagraphElement>('.gt-def')!;
 
   // Move title -> aria-label (D-09)
   const title = abbr.getAttribute('title');
@@ -49,7 +50,7 @@ terms.forEach((abbr, index) => {
     hideTimer = setTimeout(() => hide(), 80);
   });
 
-  function show() {
+  function show(): void {
     const imageUrl = abbr.dataset.imageUrl;
     const definition = abbr.dataset.definition;
 
@@ -86,7 +87,7 @@ terms.forEach((abbr, index) => {
     popover.style.top = top + 'px';
   }
 
-  function hide() {
+  function hide(): void {
     try { popover.hidePopover(); } catch (_) { /* already hidden */ }
     popover.setAttribute('aria-hidden', 'true');
   }
