@@ -22,7 +22,8 @@
     "photos:materialize": "node scripts/generate-species-photos.js",
     "photos:rethumbnail": "THUMBNAIL_ONLY=1 node scripts/tile-photos.js",
     "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/ingest-photos.test.js scripts/tile-photos.test.js scripts/upload-tiles.test.js scripts/generate-species-photos.test.js 'scripts/lib/*.test.{js,ts}' src/components/*.test.js 'src/_lib/*.test.{js,ts}'",
-    "typecheck": "tsc -p tsconfig.browser.json --noEmit && tsc -p tsconfig.node.json --noEmit"
+    "typecheck": "tsc -p tsconfig.browser.json --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "verify:parquet": "node scripts/verify-parquet.ts"
   },
   "keywords": [],
   "author": "Peter Abrahamsen <rainhead@gmail.com>",
