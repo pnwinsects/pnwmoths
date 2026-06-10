@@ -557,7 +557,13 @@ Plans:
   4. The Vite production bundle contains **no full-Zod** runtime (no `ZodError`/`ZodType` from the full build); only `zod/mini` (or a hand-rolled guard) appears, and its measured gzipped delta over the pre-migration bundle is small and recorded
   5. Build-generated data files (Parquet/JSON) are byte-identical to the pre-migration baseline and rendered HTML is identical except for content-hashed asset filenames; interactive features (map, phenology chart, filter bar, OSD lightbox, taxon browser) remain functionally unchanged as verified by the full test suite
 
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 37-01-PLAN.md — Types foundation: schemas.ts → zod/mini (D-02), events.ts FilterChangeDetail + HTMLElementEventMap merge (D-09), fresh SC-5 baseline
+- [ ] 37-02-PLAN.md — parquet-cache.ts + O(columns) Parquet validator (SCHEMA-08) + pnwm-filter-bar dispatch (D-09) + 3 test renames
+- [ ] 37-03-PLAN.md — Standalone components: pnwm-image-slideshow (+test), pnwm-occurrence-popup, pnwm-plate-viewer, glossary-tooltip
+- [ ] 37-04-PLAN.md — parquet-cache consumers (map, phenology) + pnwm-taxon-browser O(1) species-states validator (SCHEMA-08, D-05 hard-fail) + test
+- [ ] 37-05-PLAN.md — main.ts + package.json test glob; SC-1 full suite; SC-4 bundle grep + gzip delta; SC-5 byte-identical checkpoint
 **UI hint**: yes
 
 ### Phase 38: CI Gate & Full Verification
