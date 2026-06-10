@@ -1,10 +1,10 @@
 import { EleventyRenderPlugin } from "@11ty/eleventy";
 import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
 import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { resolve, isAbsolute } from "node:path";
 import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
-import { applyGlossaryTerms, buildTermMap } from "./src/_lib/glossary-transform.ts";
+import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
 
 // On GitHub Pages the site lives under /pnwmoths/. actions/configure-pages sets
 // GITHUB_PAGES=true so the build knows to apply the prefix. Locally the dev
@@ -21,16 +21,32 @@ const CDN_BASE_URL = "https://pnwmoths.b-cdn.net";
 const glossaryRows = parseCsv(readFileSync("data/glossary.csv"), {
   columns: true,
   skip_empty_lines: true,
-});
+}) as GlossaryRow[];
 const termMap = buildTermMap(glossaryRows, CDN_BASE_URL);
 
-export default function (eleventyConfig) {
+export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; dir: { input: string; output: string; data: string } } {
+  // Register .ts data extension so Eleventy discovers src/_data/*.ts files.
+  // Eleventy does not auto-discover .ts files (getGlobalDataExtensionPriorities returns
+  // only ["json","mjs","cjs","js"]). With read:false, Eleventy calls parser(filePath)
+  // instead of reading file content. The parser must invoke the default export function
+  // itself — Eleventy only does that automatically for built-in .js data files.
+  eleventyConfig.addDataExtension("ts", {
+    read: false,
+    parser: async (filePath: string) => {
+      // Defensive: ensure absolute path for import() — Eleventy may pass project-relative
+      const absolutePath = isAbsolute(filePath) ? filePath : resolve(process.cwd(), filePath);
+      const m = await import(absolutePath) as { default: unknown };
+      const exported = m.default;
+      return typeof exported === "function" ? exported() : exported;
+    },
+  });
+
   // Render plugin: enables {% renderFile %} shortcode for rendering .md files in templates
   eleventyConfig.addPlugin(EleventyRenderPlugin);
 
   // Filter to check if a file exists relative to the project root
   eleventyConfig.addFilter("fileExists", function (relativePath) {
-    return existsSync(resolve(relativePath));
+    return existsSync(resolve(relativePath as string));
   });
 
   // JSON serialization filter for embedding data into script elements
@@ -40,7 +56,7 @@ export default function (eleventyConfig) {
 
   // URL-encode filter: handles all reserved URL characters in Django filenames
   // (spaces, parentheses, +, #, etc.). Used in CDN URL construction.
-  eleventyConfig.addFilter("urlencode", v => encodeURIComponent(v));
+  eleventyConfig.addFilter("urlencode", v => encodeURIComponent(v as string));
 
   // Annotate species prose pages at build time: wrap first occurrences of glossary
   // terms in <abbr class="glossary-term"> elements.
@@ -88,8 +104,8 @@ export default function (eleventyConfig) {
       plugins: [{
         name: "pnwm-copy-images",
         writeBundle: async () => {
-          await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
-          await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+          await new Promise<void>((res, rej) => execFile("node", ["scripts/copy-images.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+          await new Promise<void>((res, rej) => execFile("node", ["scripts/emit-species-states.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
         }
       }]
     }
@@ -100,10 +116,10 @@ export default function (eleventyConfig) {
   // wipe _site/ on partial rebuilds.
   eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode !== "serve") return;
-    await new Promise((res, rej) => execFile("node", ["scripts/copy-images.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
-    await new Promise((res, rej) => execFile("node", ["scripts/emit-species-states.js"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    await new Promise<void>((res, rej) => execFile("node", ["scripts/copy-images.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    await new Promise<void>((res, rej) => execFile("node", ["scripts/emit-species-states.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     if (!existsSync("_site/pagefind")) {
-      await new Promise((res, rej) => execFile("./node_modules/.bin/pagefind", ["--site", "_site"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+      await new Promise<void>((res, rej) => execFile("./node_modules/.bin/pagefind", ["--site", "_site"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     }
   });
 

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build:data": "node scripts/build-data.ts",
-    "build:eleventy": "eleventy",
+    "build:eleventy": "eleventy --config=eleventy.config.ts",
     "build:copy-parquet": "node scripts/copy-parquet.ts",
     "build:pagefind": "pagefind --site _site",
     "build:validate-links": "lychee --config lychee.toml --root-dir _site '_site/**/*.html'",
@@ -14,7 +14,7 @@
     "build:species-states": "node scripts/emit-species-states.ts",
     "build": "npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:validate-links && npm run build:check-weight",
     "build:copy-images": "node scripts/copy-images.ts",
-    "dev": "npm run build:data && eleventy --serve",
+    "dev": "npm run build:data && eleventy --serve --config=eleventy.config.ts",
     "photos:ingest": "node scripts/ingest-photos.ts",
     "photos:investigate": "RESORT_ONLY=1 node scripts/ingest-photos.ts",
     "photos:tile": "node scripts/tile-photos.ts",
