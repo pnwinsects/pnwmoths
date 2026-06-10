@@ -1,9 +1,9 @@
 ---
-status: partial
+status: complete
 phase: 36-eleventy-data-files-config-migration
 source: [36-VERIFICATION.md]
 started: 2026-06-09
-updated: 2026-06-09
+updated: 2026-06-10
 ---
 
 # Phase 36 — Human UAT
@@ -29,14 +29,14 @@ is byte-identical to the local-built `_site_baseline/`. This UAT item covers onl
 `eleventy --serve` runtime path (the `eleventy.after` serve-mode `execFile` hook), which the
 static build gate does not exercise.
 
-result: [pending]
+result: pass (verified via /gsd-verify-work 2026-06-10 — npm run dev serves species pages with `/` pathPrefix, no double-prefix, no first-party 404s)
 
 ## Summary
 
 total: 1
-passed: 0
+passed: 1
 issues: 0
-pending: 1
+pending: 0
 skipped: 0
 blocked: 0
 

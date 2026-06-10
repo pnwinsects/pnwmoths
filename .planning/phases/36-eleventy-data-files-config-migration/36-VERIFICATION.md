@@ -1,8 +1,8 @@
 ---
 phase: 36-eleventy-data-files-config-migration
-verified: 2026-06-09T00:00:00Z
-status: human_needed
-score: 4/4 must-haves verified (automated); SC-3 local-dev branch awaiting human check
+verified: 2026-06-10T00:00:00Z
+status: passed
+score: 4/4 must-haves verified (automated + human); SC-3 local-dev branch confirmed via /gsd-verify-work 2026-06-10
 overrides_applied: 0
 human_verification:
   - test: "Run npm run dev, open http://localhost:8080/species/abagrotis-apposita/ in a browser. View source or open DevTools Network tab."
