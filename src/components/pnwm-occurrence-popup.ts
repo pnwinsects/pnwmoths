@@ -1,4 +1,5 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, type PropertyDeclarations, type TemplateResult } from 'lit';
+import type { OccurrenceRecord } from '../types/index.ts';
 
 /**
  * Popup body for a single occurrence marker on a species map.
@@ -15,24 +16,26 @@ import { LitElement, html } from 'lit';
  *      populated the host.
  */
 class PnwmOccurrencePopup extends LitElement {
-  static properties = {
+  static properties: PropertyDeclarations = {
     record: { attribute: false },
   };
 
-  createRenderRoot() { return this; }
+  record: OccurrenceRecord | null;
+
+  createRenderRoot(): this { return this; }
 
   constructor() {
     super();
     this.record = null;
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback();
     this.style.display = 'block';
     this.performUpdate();
   }
 
-  render() {
+  render(): TemplateResult {
     const r = this.record;
     if (!r) return html``;
 
@@ -58,9 +61,9 @@ class PnwmOccurrencePopup extends LitElement {
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function formatPlace(r) {
+function formatPlace(r: OccurrenceRecord): string | null {
   const parts = [r.locality, r.county && `${r.county} Co.`, r.state].filter(Boolean);
-  const tail = [];
+  const tail: string[] = [];
   if (r.elevation_ft != null) tail.push(`${r.elevation_ft.toLocaleString('en-US')} ft`);
   if (r.latitude != null && r.longitude != null) {
     tail.push(`${formatCoord(r.latitude)}, ${formatCoord(r.longitude)}`);
@@ -75,24 +78,26 @@ function formatPlace(r) {
  * decimal that produces the same double). Cap at 6 decimals (~10cm) to
  * suppress the rare float-representation garbage that escapes from upstream.
  */
-function formatCoord(n) {
+function formatCoord(n: number): string {
   const s = String(n);
   const dot = s.indexOf('.');
   if (dot < 0 || s.length - dot - 1 <= 6) return s;
   return n.toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
 }
 
-function formatDateLine(r) {
-  let date = null;
-  if (r.year && r.month && r.day) date = `${r.day} ${MONTHS[r.month - 1]} ${r.year}`;
-  else if (r.year && r.month) date = `${MONTHS[r.month - 1]} ${r.year}`;
+function formatDateLine(r: OccurrenceRecord): string | null {
+  let date: string | null = null;
+  // noUncheckedIndexedAccess: MONTHS[r.month - 1] returns string | undefined; non-null assertion
+  // safe because r.month is truthy (checked above) and we use it as a month index
+  if (r.year && r.month && r.day) date = `${r.day} ${MONTHS[r.month - 1]!} ${r.year}`;
+  else if (r.year && r.month) date = `${MONTHS[r.month - 1]!} ${r.year}`;
   else if (r.year) date = String(r.year);
 
   if (date && r.record_type) return `${date} · ${r.record_type}`;
   return date || r.record_type || null;
 }
 
-function formatAttribution(r) {
+function formatAttribution(r: OccurrenceRecord): string | null {
   if (r.collector && r.collection) return `${r.collector} (${r.collection})`;
   return r.collector || r.collection || null;
 }
@@ -102,7 +107,7 @@ function formatAttribution(r) {
  * render real <a> elements. Lit's html template still escapes both attr values
  * and text nodes, so this stays XSS-safe.
  */
-function formatNotes(notes) {
+function formatNotes(notes: string | null): Array<Array<{ text?: string; url?: string }>> {
   if (!notes) return [];
   const URL_RE = /https?:\/\/[^\s)]+/g;
   return notes
@@ -110,9 +115,9 @@ function formatNotes(notes) {
     .map((s) => s.trim())
     .filter(Boolean)
     .map((item) => {
-      const parts = [];
+      const parts: Array<{ text?: string; url?: string }> = [];
       let last = 0;
-      let m;
+      let m: RegExpExecArray | null;
       while ((m = URL_RE.exec(item)) !== null) {
         if (m.index > last) parts.push({ text: item.slice(last, m.index) });
         // Strip trailing punctuation that's likely sentence-end, not URL.
