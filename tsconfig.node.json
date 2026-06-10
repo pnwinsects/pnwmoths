@@ -24,6 +24,7 @@
     "src/_lib/**/*.ts",
     "src/types/**/*.ts",
     "eleventy.config.ts",
+    "eleventy.config.test.ts",
     "scripts/**/*.test.ts",
     "src/_data/**/*.test.ts",
     "src/_lib/**/*.test.ts"

@@ -21,7 +21,7 @@
     "photos:upload": "node scripts/upload-tiles.ts",
     "photos:materialize": "node scripts/generate-species-photos.ts",
     "photos:rethumbnail": "THUMBNAIL_ONLY=1 node scripts/tile-photos.ts",
-    "test": "node --test eleventy.config.test.js scripts/build-data.test.ts scripts/check-page-weight.test.ts scripts/ingest-photos.test.ts scripts/tile-photos.test.ts scripts/upload-tiles.test.ts scripts/generate-species-photos.test.ts 'scripts/lib/*.test.{js,ts}' src/components/*.test.js 'src/_lib/*.test.{js,ts}'",
+    "test": "node --test eleventy.config.test.ts scripts/build-data.test.ts scripts/check-page-weight.test.ts scripts/ingest-photos.test.ts scripts/tile-photos.test.ts scripts/upload-tiles.test.ts scripts/generate-species-photos.test.ts 'scripts/lib/*.test.{js,ts}' src/components/*.test.js 'src/_lib/*.test.{js,ts}'",
     "typecheck": "tsc -p tsconfig.browser.json --noEmit && tsc -p tsconfig.node.json --noEmit",
     "verify:parquet": "node scripts/verify-parquet.ts"
   },

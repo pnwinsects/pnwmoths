@@ -1,5 +1,5 @@
-// eleventy.config.test.js
-// Tests for CDN_BASE_URL constant in eleventy.config.js
+// eleventy.config.test.ts
+// Tests for CDN_BASE_URL constant and pathPrefix conditional in eleventy.config.ts
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -8,30 +8,30 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '.');
-const configSource = readFileSync(resolve(ROOT, 'eleventy.config.js'), 'utf8');
+const configSource = readFileSync(resolve(ROOT, 'eleventy.config.ts'), 'utf8');
 
-test('eleventy.config.js: CDN_BASE_URL constant is defined with exact value', () => {
+test('eleventy.config.ts: CDN_BASE_URL constant is defined with exact value', () => {
   assert.ok(
     configSource.includes('const CDN_BASE_URL = "https://pnwmoths.b-cdn.net"'),
     'CDN_BASE_URL must be declared as const with exact value "https://pnwmoths.b-cdn.net"'
   );
 });
 
-test('eleventy.config.js: CDN_BASE_URL does not use process.env', () => {
+test('eleventy.config.ts: CDN_BASE_URL does not use process.env', () => {
   assert.ok(
     !configSource.includes('process.env.CDN'),
     'CDN_BASE_URL must not use process.env — it is a hard-coded public constant'
   );
 });
 
-test('eleventy.config.js: CDN_BASE_URL does not use dotenv', () => {
+test('eleventy.config.ts: CDN_BASE_URL does not use dotenv', () => {
   assert.ok(
     !configSource.includes('dotenv'),
-    'eleventy.config.js must not import or use dotenv'
+    'eleventy.config.ts must not import or use dotenv'
   );
 });
 
-test('eleventy.config.js: CDN_BASE_URL appears after pathPrefix declaration', () => {
+test('eleventy.config.ts: CDN_BASE_URL appears after pathPrefix declaration', () => {
   const pathPrefixIdx = configSource.indexOf('const pathPrefix');
   const cdnBaseIdx = configSource.indexOf('const CDN_BASE_URL');
   assert.ok(pathPrefixIdx !== -1, 'pathPrefix must be declared');
@@ -42,7 +42,7 @@ test('eleventy.config.js: CDN_BASE_URL appears after pathPrefix declaration', ()
   );
 });
 
-test('eleventy.config.js: CDN_BASE_URL appears before export default function', () => {
+test('eleventy.config.ts: CDN_BASE_URL appears before export default function', () => {
   const cdnBaseIdx = configSource.indexOf('const CDN_BASE_URL');
   const exportIdx = configSource.indexOf('export default function');
   assert.ok(cdnBaseIdx !== -1, 'CDN_BASE_URL must be declared');
@@ -50,5 +50,12 @@ test('eleventy.config.js: CDN_BASE_URL appears before export default function', 
   assert.ok(
     cdnBaseIdx < exportIdx,
     'CDN_BASE_URL must appear before export default function'
+  );
+});
+
+test('eleventy.config.ts: GITHUB_PAGES pathPrefix conditional is present', () => {
+  assert.ok(
+    configSource.includes('process.env.GITHUB_PAGES ? "/pnwmoths/" : "/"'),
+    'pathPrefix must use process.env.GITHUB_PAGES ? "/pnwmoths/" : "/" (exact literal required)'
   );
 });
