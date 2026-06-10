@@ -85,6 +85,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Bulk bunny.net tile upload: `scripts/upload-tiles.js` with pre-flight footprint walk, DRY_RUN guard, idempotent rerun, advanceStatus before file deletion — v2.2 Phase 30
 - ✓ `data/species-photos.json` build integration: manifest-derived at build time via `scripts/generate-species-photos.js`; `high_res_available` boolean in Eleventy data tree; legacy low-res entries suppressed for high-res species — v2.2 Phase 31
 - ✓ OpenSeadragon viewer in species lightbox for all `high_res_available: true` species; prev/next specimen navigation (viewer.open() to swap DZI sources); specimen_id + D/V view displayed inline; Phase 23 carousel unchanged — v2.2 Phase 32
+- ✓ All `src/components/` Lit web components migrated to strict TypeScript (no decorators, `static get properties()` preserved, tests via `node --test` native type-stripping); `pnwm-filter-change` typed via shared `FilterChangeDetail` + global `HTMLElementEventMap` merge; two O(columns/shape) load-time validators (`assertParquetColumns`, `validateSpeciesStates`) at the dynamic CDN boundaries; `src/types/schemas.ts` on `zod/mini` (no full Zod in bundle, +2.7% gzip); build output byte-identical (MIG-04, SCHEMA-08) — v3.0 Phase 37
 
 ### Active
 
@@ -211,4 +212,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-09 — v3.0 TypeScript Frontend & Build-Time Data Validation milestone started (Issue #36)*
+*Last updated: 2026-06-10 — Phase 37 complete: `src/components/` Lit components migrated to strict TypeScript with load-time CDN validators (v3.0 TypeScript Frontend & Build-Time Data Validation milestone)*
