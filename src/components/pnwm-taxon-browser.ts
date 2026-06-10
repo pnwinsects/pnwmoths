@@ -103,7 +103,7 @@ class PnwmTaxonBrowser extends LitElement {
   _expandedSubfamilies: Set<string>;
   _expandedGenera: Set<string>;
 
-  get _prefix(): string { return (this as unknown as Record<string, string>)['path-prefix'] ?? '/'; }
+  get _prefix(): string { return (this as { 'path-prefix'?: string })['path-prefix'] || '/'; }
 
   /** Light DOM — Pico CSS must reach selects, headings, links inside this component (D-09) */
   createRenderRoot(): this { return this; }

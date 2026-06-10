@@ -1,7 +1,6 @@
 import { LitElement, html, css, type PropertyDeclarations, type CSSResult, type TemplateResult } from 'lit';
 import { loadParquet } from './parquet-cache.ts';
-import type { OccurrenceRecord } from '../types/index.ts';
-import type { FilterChangeDetail } from '../types/index.ts';
+import type { OccurrenceRecord, FilterChangeDetail } from '../types/index.ts';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
