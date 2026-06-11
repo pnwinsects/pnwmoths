@@ -35,13 +35,13 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 - [x] **MIG-02**: All build/data pipeline scripts in `scripts/` are fully converted to TypeScript
 - [x] **MIG-03**: Eleventy data files (`src/_data/`) and `eleventy.config` are converted to TypeScript, preserving the `process.env.GITHUB_PAGES`-conditional `pathPrefix`
 - [x] **MIG-04**: All Lit web components in `src/components/` are converted to TypeScript, with the `pnwm-filter-change` event typed via a shared detail interface
-- [ ] **MIG-05**: All test files are converted to TypeScript and still run via `node --test`, with the full suite (~191 tests) passing
-- [ ] **MIG-06**: No `allowJs`, no `@ts-ignore`, and no unguarded double-casts remain; no `.js` source files remain in any converted area
+- [x] **MIG-05**: All test files are converted to TypeScript and still run via `node --test`, with the full suite (~191 tests) passing
+- [x] **MIG-06**: No `allowJs`, no `@ts-ignore`, and no unguarded double-casts remain; no `.js` source files remain in any converted area
 
 ### CI — Enforcement & Regression Safety
 
 - [ ] **CI-01**: `tsc --noEmit` runs as a gate in the GitHub Actions PR-check and deploy workflows; type errors fail CI
-- [ ] **CI-02**: Each build-side migration area (Phases 34–36) produces byte-identical `_site/` output versus the pre-migration baseline. From the client-bundle migration (Phase 37) onward, build-generated data files (Parquet/JSON) stay byte-identical and rendered HTML stays identical except for content-hashed asset filenames; interactive-behavior equivalence is proven by the full test suite (literal byte-identity of re-hashed JS bundles is not expected)
+- [x] **CI-02**: Each build-side migration area (Phases 34–36) produces byte-identical `_site/` output versus the pre-migration baseline. From the client-bundle migration (Phase 37) onward, build-generated data files (Parquet/JSON) stay byte-identical and rendered HTML stays identical except for content-hashed asset filenames; interactive-behavior equivalence is proven by the full test suite (literal byte-identity of re-hashed JS bundles is not expected)
 - [ ] **CI-03**: `npm run build:data` stays within budget after validation is added (<60s locally), keeping the under-5-minute CI build target intact (addresses MAINT-03)
 
 ## Future Requirements
@@ -90,10 +90,10 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | MIG-02 | Phase 35 | Complete |
 | MIG-03 | Phase 36 | Complete |
 | MIG-04 | Phase 37 | Complete |
-| MIG-05 | Phase 38 | Pending |
-| MIG-06 | Phase 38 | Pending |
+| MIG-05 | Phase 38 | Complete |
+| MIG-06 | Phase 38 | Complete |
 | CI-01 | Phase 38 | Pending |
-| CI-02 | Phase 38 | Pending |
+| CI-02 | Phase 38 | Complete |
 | CI-03 | Phase 38 | Pending |
 
 **Coverage:**

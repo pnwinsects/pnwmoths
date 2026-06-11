@@ -594,7 +594,7 @@ Plans:
 **Plans**: 3 plans
 **Wave 1**
 
-- [ ] 38-01-PLAN.md — Create the MIG-06 guard script, the D-03 byte-identical proof helper, and clean up package.json test globs
+- [x] 38-01-PLAN.md — Create the MIG-06 guard script, the D-03 byte-identical proof helper, and clean up package.json test globs
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -647,7 +647,7 @@ Plans:
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete    | 2026-06-10 |
 | 37. Lit Web Components Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 38. CI Gate & Full Verification | v3.0 | 0/TBD | Not started | - |
+| 38. CI Gate & Full Verification | v3.0 | 1/3 | In Progress|  |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 started: 2026-06-09*
