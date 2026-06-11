@@ -6,7 +6,15 @@
 set -e
 
 echo "=== Bucket A: Data files byte-for-byte ==="
-diff -r _site/species/ _site_baseline/species/ --include="*.parquet" && \
+DIFFERING=$(find _site/species/ -name "*.parquet" | sort | while read f; do
+  rel="${f#_site/}"
+  diff "$f" "_site_baseline/$rel" > /dev/null 2>&1 || echo "$rel"
+done)
+if [ -n "$DIFFERING" ]; then
+  echo "FAIL: Parquet files differ:"
+  echo "$DIFFERING"
+  exit 1
+fi
 diff _site/species-states.json _site_baseline/species-states.json && \
 echo "DATA: byte-identical"
 
