@@ -6,22 +6,26 @@ pagefindUi: true
 ---
 <h1>Search</h1>
 <style>
+  /* Pagefind Component UI theming — map --pf-* variables to Pico tokens */
   #search {
-    --pagefind-ui-primary: var(--pico-primary);
-    --pagefind-ui-text: var(--pico-color);
-    --pagefind-ui-background: var(--pico-background-color);
-    --pagefind-ui-border: var(--pico-muted-border-color);
-    --pagefind-ui-tag: var(--pico-card-background-color);
-    --pagefind-ui-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --pf-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --pf-text: var(--pico-color);
+    --pf-text-secondary: var(--pico-muted-color);
+    --pf-text-muted: var(--pico-muted-color);
+    --pf-background: var(--pico-background-color);
+    --pf-border: var(--pico-muted-border-color);
+    --pf-border-focus: var(--pico-primary);
   }
 </style>
-<div id="search"></div>
-<script src="{{ '/pagefind/pagefind-ui.js' | url }}"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    new PagefindUI({ element: '#search', showSubResults: false });
-  });
-</script>
+<div id="search">
+  <pagefind-config
+    bundle-path="{{ '/pagefind/' | url }}"
+    base-url="{{ '/' | url }}"></pagefind-config>
+  <pagefind-input placeholder="Search species and glossary…"></pagefind-input>
+  <pagefind-summary></pagefind-summary>
+  <pagefind-results hide-sub-results></pagefind-results>
+</div>
+<script type="module" src="{{ '/pagefind/pagefind-component-ui.js' | url }}"></script>
 <noscript data-pagefind-ignore>
   <p>Search requires JavaScript. <a href="{{ '/browse/' | url }}">Browse all species</a> instead.</p>
 </noscript>
