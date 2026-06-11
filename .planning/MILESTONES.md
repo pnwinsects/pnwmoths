@@ -1,5 +1,20 @@
 # Milestones
 
+## v3.0 TypeScript Frontend & Build-Time Data Validation (Shipped: 2026-06-10)
+
+**Phases completed:** 6 phases, 22 plans, 36 tasks
+
+**Key accomplishments:**
+
+- Migrated the entire codebase to strict TypeScript — build/data pipeline scripts, `scripts/lib` + `src/_lib`, Eleventy data files + `eleventy.config`, and all Lit web components — with zero behavior change to the rendered site (MIG-01–MIG-04).
+- Established a shared type foundation (`src/types/` Zod schemas + derived types and events) that flows across every layer; the `pnwm-filter-change` event is typed via a shared `FilterChangeDetail` interface and a global `HTMLElementEventMap` augmentation.
+- Added build-time and load-time data validation (Parquet column-schema verification, `verify:parquet`) under a trust-by-immutability architecture, keeping `build:data` at ~3s (well under the <60s / 5-minute budget — CI-03).
+- Wired four CI gates into GitHub Actions (typecheck, full `node --test` suite, permanent TS-only invariant guard, Parquet schema verify); type errors and stray JS now fail the PR check (CI-01).
+- Enforced the migration invariant permanently: zero `.js` source, `allowJs`, `@ts-ignore`, or unguarded double-casts remain in any converted area (MIG-06), guarded by `scripts/check-ts-only.sh`.
+- Proved `_site/` output byte-identical to the pre-migration baseline (data files byte-for-byte; HTML identical modulo content-hashed asset names — CI-02), recorded in `MILESTONE-EVIDENCE.md`.
+
+---
+
 ## v1.0 MVP (Shipped: 2026-04-13)
 
 **Phases completed:** 5 phases, 12 plans, 7 tasks

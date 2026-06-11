@@ -88,6 +88,15 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ `data/species-photos.json` build integration: manifest-derived at build time via `scripts/generate-species-photos.js`; `high_res_available` boolean in Eleventy data tree; legacy low-res entries suppressed for high-res species — v2.2 Phase 31
 - ✓ OpenSeadragon viewer in species lightbox for all `high_res_available: true` species; prev/next specimen navigation (viewer.open() to swap DZI sources); specimen_id + D/V view displayed inline; Phase 23 carousel unchanged — v2.2 Phase 32
 - ✓ All `src/components/` Lit web components migrated to strict TypeScript (no decorators, `static get properties()` preserved, tests via `node --test` native type-stripping); `pnwm-filter-change` typed via shared `FilterChangeDetail` + global `HTMLElementEventMap` merge; two O(columns/shape) load-time validators (`assertParquetColumns`, `validateSpeciesStates`) at the dynamic CDN boundaries; `src/types/schemas.ts` on `zod/mini` (no full Zod in bundle, +2.7% gzip); build output byte-identical (MIG-04, SCHEMA-08) — v3.0 Phase 37
+- ✓ TS toolchain scaffolded: three tsconfigs (browser/node/base), Zod schemas + derived types for all data entities, `npm run typecheck` green — v3.0 Phase 33
+- ✓ `scripts/lib/` and `src/_lib/` fully converted to TypeScript, proving the Node 24 native type-stripping path end-to-end (MIG-01) — v3.0 Phase 34
+- ✓ All build/data pipeline scripts in `scripts/` converted to TypeScript with Zod validation gates and build-time Parquet/JSON/CSV verification; `build:data` budget confirmed (MIG-02) — v3.0 Phase 35
+- ✓ Eleventy data files (`src/_data/`) and `eleventy.config` converted to TypeScript, preserving the `process.env.GITHUB_PAGES`-conditional `pathPrefix` (MIG-03) — v3.0 Phase 36
+- ✓ All test files converted to TypeScript and still run via `node --test`; full suite green (MIG-05) — v3.0 Phase 38
+- ✓ No `allowJs`, `@ts-ignore`, or unguarded double-casts, and no `.js` source files in any converted area — enforced permanently by `scripts/check-ts-only.sh` (MIG-06) — v3.0 Phase 38
+- ✓ `tsc --noEmit` gates the GitHub Actions PR-check and deploy workflows; type errors fail CI (CI-01) — v3.0 Phase 38
+- ✓ `_site/` output proven byte-identical to the pre-migration baseline — data files byte-for-byte, HTML identical modulo content-hashed asset names (CI-02) — v3.0 Phase 38
+- ✓ `npm run build:data` stays within budget (~3s locally, <60s target) after validation gates added (CI-03) — v3.0 Phase 38
 
 ### Active
 
@@ -121,6 +130,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 **v2.0 shipped:** 2026-04-23 — 21 phases total (Phases 19–21); 97/97 tests passing; build-time glossary tooltips with native Popover API; 1,364 species pages with interactive glossary annotations
 **v2.1 shipped:** 2026-05-20 — 25 phases total (Phases 22–25); phenology chart axis labels + Y-floor; photo thumbnail carousel; county/collection/elevation filters; similar species thumbnail row; 61 files, +19,241 / -8,632 LOC
 **v2.2 shipped:** 2026-05-24 — 32 phases total (Phases 26–32); Dropbox ingest pipeline; synonym curation tooling; libvips DZI tile generation; bunny.net bulk upload; data/species-photos.json build integration; OpenSeadragon viewer for high-res species; 349 files, +30,984 / -41,247 LOC; 191 tests
+**v3.0 shipped:** 2026-06-10 — 6 phases (Phases 33–38), 22 plans; full TypeScript migration (pipeline scripts, Eleventy data/config, Lit components) with build-time + load-time data validation; four CI gates (typecheck, 225-test suite, TS-only invariant guard, Parquet verify) wired into PR check + deploy; `_site/` proven byte-identical to pre-migration baseline; zero `.js`/`allowJs`/`@ts-ignore`/unguarded double-casts remain; 229 tests
 
 **Tech stack:**
 - Eleventy 3.x (SSG), Vite (JS bundling), DuckDB (build-time queries), Parquet + hyparquet (client-side occurrence data)
@@ -134,6 +144,10 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - WR-01 (migrate-species): similar_species links silently dropped for record-only species (slug resolution gap)
 - WR-02 (migrate-species): safeSpecies sanitization logic duplicated in two loops (maintenance hazard)
 - WebP not yet active on bunny.net Optimizer — currently serving JPEG
+- v3.0 CI-02: byte-identical `_site/` proof is a one-shot local check (`compare-sites.sh`), deliberately not wired into CI (D-01); CI catches type/test failures but not byte-level data regressions
+- v3.0 CI-03: `build:data` timing met empirically (~3s) but not enforced by a CI timeout/assertion (D-07)
+- v3.0: `deploy.yml` runs only typecheck (not test/guard/parquet) per D-04/D-05 — relies on PR-check gate + branch protection (follow-up task spawned to harden, WR-01/WR-02 of phase 38 review)
+- v3.0 MIG-04: `filterRecords` (parquet-cache.ts) uses an inline structural type instead of importing `FilterChangeDetail` — no compile-time link if the interface gains a field
 
 **Key data entities:**
 - `Species` — genus, species, common name, NOC ID, authority, similar species links
@@ -214,4 +228,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-10 — Phase 38 complete: CI gates (typecheck, full test suite, TS-only guard, Parquet verify) wired into PR check + deploy; byte-identical `_site/` proof recorded. v3.0 TypeScript Frontend & Build-Time Data Validation milestone COMPLETE.*
+*Last updated: 2026-06-10 — after v3.0 TypeScript Frontend & Build-Time Data Validation milestone (Phases 33–38). All 9 requirements validated; CI gates live; site fully migrated to strict TypeScript with byte-identical output.*
