@@ -25,6 +25,12 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Test
+        run: npm test
+      - name: TS-only invariant guard
+        run: bash scripts/check-ts-only.sh
       - uses: ./.github/actions/install-lychee
         with:
           version: '0.23.0'
@@ -35,6 +41,8 @@ jobs:
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
       - run: npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:check-weight
+      - name: Verify Parquet schema
+        run: npm run verify:parquet
       - name: Check links
         run: npm run build:validate-links
       - name: Check new CDN image URLs
