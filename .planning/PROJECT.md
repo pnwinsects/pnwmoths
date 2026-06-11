@@ -19,7 +19,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - Validation of all data contracts crossing the build→client boundary, by trust-via-immutability: static TS for build-locked data (CSV→DuckDB→HTML, baked-in JSON); load-time structure validation (not per-row, O(columns)) for the only dynamically-fetched artifacts — `records.parquet` and `species-states.json`; source CSVs guarded at build by DuckDB typed reads + integrity SQL
 - `eleventy.config.js` and Vite tooling TS-compatible; tests green throughout
 
-## Current State: v2.2 shipped — High-resolution species photos
+## Current State: v3.0 complete — TypeScript frontend & build-time data validation
+
+**v3.0 complete:** 2026-06-10 — 6 phases (Phases 33–38). Full TypeScript migration of the build pipeline, Eleventy data/config, and Lit web components, with build-time + load-time data validation. CI now gates every PR and deploy on `tsc --noEmit` (both tsconfigs), the 225-test `node --test` suite, a permanent TS-only invariant guard (zero `.js` sources / `allowJs` / `@ts-ignore` / unguarded double-casts), and Parquet schema verification. `_site/` output proven byte-identical to the pre-migration baseline (one-shot proof, MILESTONE-EVIDENCE.md); `build:data` stays at ~3s, well under the 5-minute budget.
 
 **v2.2 shipped:** 2026-05-24 — 7 phases (Phases 26–32), 23 plans, 159 commits, 349 files changed
 - Resumable Dropbox ingest: 4,935 TIFFs catalogued with durable manifest (`data/species-photos-manifest.csv`)
@@ -212,4 +214,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-10 — Phase 37 complete: `src/components/` Lit components migrated to strict TypeScript with load-time CDN validators (v3.0 TypeScript Frontend & Build-Time Data Validation milestone)*
+*Last updated: 2026-06-10 — Phase 38 complete: CI gates (typecheck, full test suite, TS-only guard, Parquet verify) wired into PR check + deploy; byte-identical `_site/` proof recorded. v3.0 TypeScript Frontend & Build-Time Data Validation milestone COMPLETE.*
