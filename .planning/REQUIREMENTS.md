@@ -42,7 +42,7 @@ Committed scope for milestone v3.0. Each maps to a roadmap phase.
 
 - [x] **CI-01**: `tsc --noEmit` runs as a gate in the GitHub Actions PR-check and deploy workflows; type errors fail CI
 - [x] **CI-02**: Each build-side migration area (Phases 34–36) produces byte-identical `_site/` output versus the pre-migration baseline. From the client-bundle migration (Phase 37) onward, build-generated data files (Parquet/JSON) stay byte-identical and rendered HTML stays identical except for content-hashed asset filenames; interactive-behavior equivalence is proven by the full test suite (literal byte-identity of re-hashed JS bundles is not expected)
-- [ ] **CI-03**: `npm run build:data` stays within budget after validation is added (<60s locally), keeping the under-5-minute CI build target intact (addresses MAINT-03)
+- [x] **CI-03**: `npm run build:data` stays within budget after validation is added (<60s locally), keeping the under-5-minute CI build target intact (addresses MAINT-03)
 
 ## Future Requirements
 
@@ -94,7 +94,7 @@ Populated during roadmap creation. Each requirement maps to exactly one phase.
 | MIG-06 | Phase 38 | Complete |
 | CI-01 | Phase 38 | Complete |
 | CI-02 | Phase 38 | Complete |
-| CI-03 | Phase 38 | Pending |
+| CI-03 | Phase 38 | Complete |
 
 **Coverage:**
 - v1 requirements: 22 total

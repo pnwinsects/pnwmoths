@@ -120,7 +120,7 @@
 - [x] **Phase 35: Build Pipeline Scripts Migration** - Producer side: `scripts/` fully converted with Zod validation gates and build-time Parquet/JSON/CSV verification; build:data budget confirmed (completed 2026-06-10)
 - [x] **Phase 36: Eleventy Data Files & Config Migration** - Middle layer: `src/_data/` and `eleventy.config.ts` converted with GITHUB_PAGES conditional preserved (completed 2026-06-10)
 - [x] **Phase 37: Lit Web Components Migration** - Consumer side: `src/components/` fully typed, `FilterChangeDetail` event interface, Vite bundle verified Zod-free in production (completed 2026-06-10)
-- [ ] **Phase 38: CI Gate & Full Verification** - `tsc --noEmit` in GitHub Actions PR check + deploy; byte-identical `_site/` diff guard; full 191-test suite green; `npm run verify:parquet`
+- [x] **Phase 38: CI Gate & Full Verification** - `tsc --noEmit` in GitHub Actions PR check + deploy; byte-identical `_site/` diff guard; full 225-test suite green; `npm run verify:parquet` (completed 2026-06-10)
 
 ## Phase Details
 
@@ -602,7 +602,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 38-03-PLAN.md — Run the two one-shot proofs locally, record MILESTONE-EVIDENCE.md, and declare v3.0 complete
+- [x] 38-03-PLAN.md — Run the two one-shot proofs locally, record MILESTONE-EVIDENCE.md, and declare v3.0 complete
 
 ---
 
@@ -647,7 +647,7 @@ Plans:
 | 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
 | 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete    | 2026-06-10 |
 | 37. Lit Web Components Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 38. CI Gate & Full Verification | v3.0 | 2/3 | In Progress|  |
+| 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete | 2026-06-10 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 started: 2026-06-09*
