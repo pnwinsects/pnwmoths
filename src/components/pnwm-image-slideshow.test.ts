@@ -170,3 +170,55 @@ describe('view-to-label mapping', () => {
     assert.equal(label('V'), 'Ventral');
   });
 });
+
+describe('_closeLightbox', () => {
+  it('closes the lightbox, tears down the OSD viewer, and removes inert from trapped elements', () => {
+    let destroyed = false;
+    const removed: string[] = [];
+    const makeEl = (id: string) => ({ removeAttribute: (attr: string) => { if (attr === 'inert') removed.push(id); } });
+    const ctx = {
+      _osdViewer: { destroy: () => { destroyed = true; } },
+      _lightboxOpen: true,
+      _inertedElements: [makeEl('a'), makeEl('b'), makeEl('c')],
+    };
+
+    PnwmImageSlideshow.prototype._closeLightbox.call(ctx);
+
+    assert.equal(ctx._lightboxOpen, false, 'lightbox should be marked closed');
+    assert.equal(ctx._osdViewer, null, 'OSD viewer reference should be cleared');
+    assert.deepEqual(removed, ['a', 'b', 'c'], 'inert should be removed from every trapped element');
+    assert.deepEqual(ctx._inertedElements, [], 'inerted-elements list should be emptied');
+    assert.equal(destroyed, true, 'OSD viewer destroy() should be called');
+  });
+
+  it('does not throw when there is no OSD viewer and nothing was inerted', () => {
+    const ctx = { _osdViewer: null, _lightboxOpen: true, _inertedElements: [] };
+    assert.doesNotThrow(() => PnwmImageSlideshow.prototype._closeLightbox.call(ctx));
+    assert.equal(ctx._lightboxOpen, false);
+  });
+});
+
+describe('_handleKeydown', () => {
+  const makeCtx = (open: boolean) => {
+    let closed = false;
+    const ctx = {
+      _lightboxOpen: open,
+      _highResSpecimens: [],
+      _images: [],
+      _closeLightbox() { closed = true; },
+    };
+    return { ctx, wasClosed: () => closed };
+  };
+
+  it('closes the lightbox when Escape is pressed and the lightbox is open', () => {
+    const { ctx, wasClosed } = makeCtx(true);
+    PnwmImageSlideshow.prototype._handleKeydown.call(ctx, { key: 'Escape' } as KeyboardEvent);
+    assert.equal(wasClosed(), true);
+  });
+
+  it('ignores Escape when the lightbox is closed', () => {
+    const { ctx, wasClosed } = makeCtx(false);
+    PnwmImageSlideshow.prototype._handleKeydown.call(ctx, { key: 'Escape' } as KeyboardEvent);
+    assert.equal(wasClosed(), false);
+  });
+});
