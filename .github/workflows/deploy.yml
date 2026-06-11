@@ -22,6 +22,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
       - uses: ./.github/actions/install-lychee
         with:
           version: '0.23.0'
