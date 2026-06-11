@@ -18,10 +18,10 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-09 after v3.0 milestone started)
+See: .planning/PROJECT.md (updated 2026-06-10 after v3.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Milestone complete
+**Current focus:** v3.0 shipped — planning next milestone
 
 ## Current Position
 
@@ -34,7 +34,7 @@ Last activity: 2026-06-11 — Milestone v3.0 completed and archived
 
 **Velocity:**
 
-- Total plans completed: 51 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2) = 85 total across all milestones
+- Total plans completed: 51 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2), 22 (v3.0) = 107 total across all milestones
 - Average duration: unknown
 - Total execution time: unknown
 
