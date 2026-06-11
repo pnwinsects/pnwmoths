@@ -389,6 +389,55 @@
 
 ---
 
+## Milestone: v3.0 — TypeScript Frontend & Build-Time Data Validation
+
+**Shipped:** 2026-06-10
+**Phases:** 6 (Phases 33–38) | **Plans:** 22 | **Commits:** ~120
+**Timeline:** 2 days (2026-06-09 → 2026-06-10)
+
+### What Was Built
+
+- Full migration of the codebase to strict TypeScript in dependency order: toolchain + Zod schemas (P33) → leaf libraries `scripts/lib` + `src/_lib` (P34) → build/data pipeline scripts (P35) → Eleventy data files + `eleventy.config` (P36) → Lit web components (P37) → CI gates + verification (P38)
+- Shared type foundation in `src/types/` (Zod-derived schemas + a typed `FilterChangeDetail` event with a global `HTMLElementEventMap` augmentation) used consistently across pipeline, data, and component layers
+- Build-time + load-time data validation (Parquet column-schema verification under a trust-by-immutability architecture)
+- Four CI gates wired into GitHub Actions (typecheck, full `node --test` suite, permanent TS-only invariant guard, `verify:parquet`); a permanent `check-ts-only.sh` guard enforces zero `.js`/`allowJs`/`@ts-ignore`/unguarded double-casts
+- Byte-identical `_site/` proof versus the pre-migration baseline (data files byte-for-byte; HTML identical modulo content-hashed asset names)
+
+### What Worked
+
+- **Leaf-first, dependency-ordered migration.** Converting the smallest, least-depended-on areas first (P34) proved the Node 24 native type-stripping path end-to-end before touching the producer→data→consumer chain. Each phase built on a verified-green predecessor.
+- **Byte-identical baseline as the safety net.** A committed pre-migration `_site_baseline/` plus a two-bucket comparison (data byte-for-byte, HTML modulo content-hash) gave an objective, behavior-preserving check that no template/data output drifted during a large refactor — far stronger than test coverage alone for a migration.
+- **Node 24 native type-stripping, no loader.** `node --test *.ts` with zero build step kept the test loop fast and the toolchain minimal.
+- **Permanent invariant guard.** `check-ts-only.sh` turns "the migration is done" into a continuously-enforced invariant in CI, not a one-time state.
+
+### What Was Inefficient
+
+- **Headless verification has a 0×0 viewport.** Both the lightbox hit-test and the Pagefind result-card hydration came back empty under the preview browser because nothing is ever "visible" to an IntersectionObserver in a zero-area viewport. Cost two debugging detours; the reliable path was the JS data API (Pagefind) and direct event dispatch (lightbox), not pixel/visibility checks.
+- **Quick-task SUMMARY naming mismatch surfaced at milestone close.** The audit scanner reads a plain `SUMMARY.md`, but two quick tasks only had the prefixed `<id>-SUMMARY.md`, so they showed as `missing` false-positives. PLAN status fields were also stale (`in-progress` / absent) despite complete SUMMARYs.
+- **CI-02 / CI-03 enforcement deferred by design.** The byte-identical proof and the build-time budget are one-shot/empirical, not standing CI checks (D-01, D-07) — accepted, but CI won't catch a future byte-level data regression or a build:data slowdown.
+
+### Patterns Established
+
+- **Dependency-ordered, leaf-first migration** for any large refactor: prove the mechanism on the smallest area, then move producer → middle → consumer, verifying green at each boundary.
+- **Pre-migration baseline + byte-identical comparison** as the acceptance gate for behavior-preserving work; fail closed (`if ! diff … exit 1`, never `diff … && echo ok` under `set -e`).
+- **Permanent invariant guard script** wired into CI to keep a migration from silently regressing.
+- **Shared type module at boundaries** (`src/types/`) imported by every layer rather than re-declared, so a contract change is a single edit (note: `filterRecords` is the one place this wasn't done — tracked as debt).
+
+### Key Lessons
+
+1. **A byte-identical baseline is the highest-value safety net for a behavior-preserving migration** — it catches output drift that unit tests can't, and it's cheap to produce once.
+2. **Verify UI behavior through the data/event layer, not a headless viewport.** The preview browser reports 0×0; rely on the JS API and dispatched events for assertions, and reserve screenshots for layout only.
+3. **Sync PLAN status and completion-pointer files at phase/quick-task close**, not at milestone close — the same traceability-drift pattern flagged in v2.1/v2.2 recurred here as audit false-positives.
+4. **Migrating fast is fine when each step is gated.** Six phases in two days held together because every phase had a passing VERIFICATION.md and the byte-identical proof bounded the blast radius.
+
+### Cost Observations
+
+- Model mix: Opus orchestration (execute-phase, milestone close); Sonnet executors and verifiers
+- Sessions: 2 days elapsed
+- Notable: a whole-codebase TS migration in 2 days with zero behavior change, carried by leaf-first ordering and the byte-identical gate
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -416,6 +465,7 @@
 | v2.0 | 6 | +glossary-transform unit tests (escaping, deduplication, scope guard, multi-term text-node); 97 total | 4/3 phases (verification found gap; 19-04 gap-closure plan) |
 | v2.1 | 6 | +filterRecords TDD suite (10 new cases, county/collection/elevation + null passthrough); 97 total (no new test files) | 0/4 phases (no validation passes run for UI phases) |
 | v2.2 | 9 | +manifest/parse-photo-filename/dropbox-download/tile-photos/upload-tiles/generate-species-photos unit tests; 191 total | 0/7 phases (pipeline scripts unit-tested but no Nyquist validation passes run) |
+| v3.0 | 17 | all test files migrated to `.ts` (node --test type-stripping); +lightbox close-behavior regression tests; 229 total; CI gates: typecheck + suite + TS-only guard + verify:parquet | 3/6 phases (33, 36, 37 compliant; 34, 35, 38 partial) |
 
 ### Top Lessons (Verified Across Milestones)
 
