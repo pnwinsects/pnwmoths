@@ -522,17 +522,19 @@ Only typecheck goes in deploy.yml per D-04/D-05. No `npm test`, no verify:parque
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Exact placement of typecheck in deploy.yml relative to `actions/configure-pages`**
+1. **Exact placement of typecheck in deploy.yml relative to `actions/configure-pages`** — RESOLVED
    - What we know: deploy.yml has `actions/configure-pages` between `npm ci` and the build step; typecheck doesn't need it
    - What's unclear: whether there's any convention reason to order typecheck after `configure-pages`
    - Recommendation: place typecheck between `npm ci` and `configure-pages` — it has no dependency on either
+   - RESOLVED: implemented in plan 38-02 (typecheck wired between `npm ci` and `configure-pages` in deploy.yml)
 
-2. **Whether the `{js,ts}` test glob in package.json should be cleaned up as part of MIG-05**
+2. **Whether the `{js,ts}` test glob in package.json should be cleaned up as part of MIG-05** — RESOLVED
    - What we know: no `.js` test files remain; `'scripts/lib/*.test.{js,ts}'` is purely permissive
    - What's unclear: whether ROADMAP SC-2 requires the glob to be updated or just confirms tests pass
    - Recommendation: clean up to `'scripts/lib/*.test.ts'` as part of the MIG-05 task; it removes the ambiguity and documents the completed migration
+   - RESOLVED: implemented in plan 38-01 (test globs narrowed to `.ts`-only)
 
 ---
 

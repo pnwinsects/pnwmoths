@@ -592,8 +592,16 @@ Plans:
   5. A final grep confirms zero `.js` source files remain in `scripts/`, `scripts/lib/`, `src/_lib/`, `src/_data/`, and `src/components/`; zero `allowJs` entries in any tsconfig; zero `@ts-ignore` comments; zero unguarded `as unknown as T` double-casts (MIG-06)
 
 **Plans**: 3 plans
+**Wave 1**
+
 - [ ] 38-01-PLAN.md — Create the MIG-06 guard script, the D-03 byte-identical proof helper, and clean up package.json test globs
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 38-02-PLAN.md — Wire typecheck/test/guard/verify:parquet gates into pr-check.yml and typecheck into deploy.yml
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 38-03-PLAN.md — Run the two one-shot proofs locally, record MILESTONE-EVIDENCE.md, and declare v3.0 complete
 
 ---
