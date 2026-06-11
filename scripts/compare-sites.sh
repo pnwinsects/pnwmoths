@@ -15,7 +15,10 @@ if [ -n "$DIFFERING" ]; then
   echo "$DIFFERING"
   exit 1
 fi
-diff _site/species-states.json _site_baseline/species-states.json && \
+if ! diff _site/species-states.json _site_baseline/species-states.json; then
+  echo "FAIL: species-states.json differs"
+  exit 1
+fi
 echo "DATA: byte-identical"
 
 echo ""
@@ -27,7 +30,12 @@ find _site -name "*.html" | while read f; do
   perl -pe 's{(-[A-Za-z0-9_-]{8})(\.(js|css|png))}{-HASH$2}g' "$f" > "$TMPDIR/curr/$rel"
   perl -pe 's{(-[A-Za-z0-9_-]{8})(\.(js|css|png))}{-HASH$2}g' "_site_baseline/$rel" > "$TMPDIR/base/$rel"
 done
-diff -r "$TMPDIR/curr/" "$TMPDIR/base/" && echo "HTML: identical modulo content-hash"
+if ! diff -r "$TMPDIR/curr/" "$TMPDIR/base/"; then
+  echo "FAIL: HTML differs after content-hash normalization"
+  rm -rf "$TMPDIR"
+  exit 1
+fi
+echo "HTML: identical modulo content-hash"
 rm -rf "$TMPDIR"
 
 echo ""
