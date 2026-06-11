@@ -1,40 +1,40 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.2
-milestone_name: High-resolution species photos
-status: milestone_complete
-stopped_at: v2.2 archived — all 32 phases complete through Phase 32
-last_updated: 2026-05-24T00:00:00.000Z
-last_activity: 2026-05-24 -- v2.2 milestone archived
+milestone: v3.0
+milestone_name: TypeScript Frontend & Build-Time Data Validation
+status: Awaiting next milestone
+stopped_at: Completed Phase 38 Plan 03 — v3.0 milestone complete
+last_updated: "2026-06-11T03:57:12.968Z"
+last_activity: 2026-06-11 — Milestone v3.0 completed and archived
 progress:
-  total_phases: 32
-  completed_phases: 32
-  total_plans: 23
-  completed_plans: 23
-  percent: 100
+  total_phases: 20
+  completed_phases: 6
+  total_plans: 22
+  completed_plans: 22
+  percent: 30
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-24 after v2.2 milestone)
+See: .planning/PROJECT.md (updated 2026-06-10 after v3.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Planning next milestone (v2.3 or v3.0)
+**Current focus:** v3.0 shipped — planning next milestone
 
 ## Current Position
 
-Phase: 32 (complete — milestone closed)
-Plan: All complete
-Status: Milestone archived — ready for /gsd:new-milestone
-Last activity: 2026-05-24
+Phase: Milestone v3.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-06-11 — Milestone v3.0 completed and archived
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 29 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1) = 48 total
+- Total plans completed: 51 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2), 22 (v3.0) = 107 total across all milestones
 - Average duration: unknown
 - Total execution time: unknown
 
@@ -47,15 +47,27 @@ Last activity: 2026-05-24
 | v1.4 | 5 | 13 | 2026-04-22 |
 | v2.0 | 3 | 5 | 2026-04-23 |
 | v2.1 | 4 | 5 | 2026-05-20 |
-| v2.2 | 6 (planned) | TBD | in flight |
+| v2.2 | 7 | 23 | 2026-05-24 |
+| v3.0 | 6 (planned) | TBD | in flight |
 
 **Recent Trend:**
 
-- v2.1: shipped 2026-05-20 (4 phases, 5 plans, 64 commits, 23 days)
-- v2.2: kicked off 2026-05-21 (6 phases planned, server-side pipeline + viewer work)
+- v2.2: shipped 2026-05-24 (7 phases, 23 plans, 159 commits, 4 days)
+- v3.0: kicked off 2026-06-09 (6 phases planned, full JS→TS migration + data validation)
 
 *Updated after each plan completion*
-| Phase 30 P02 | 3min | - tasks | - files |
+| Phase 35 P04 | 797 | 3 tasks | 17 files |
+| Phase 35 P05 | 45 | 3 tasks | 1 files |
+| Phase 36 P01 | 585 | 3 tasks | 7 files |
+| Phase 36 P02 | 833 | 3 tasks | 6 files |
+| Phase 36 P03 | 365 | 2 tasks | 7 files |
+| Phase 37 P02 | 420 | 3 tasks | 5 files |
+| Phase 37 P03 | 548 | 3 tasks | 5 files |
+| Phase 37 P04 | 324 | 3 tasks | 4 files |
+| Phase 37 P05 | 1096 | 2 tasks | 3 files |
+| Phase 38-ci-gate-full-verification P01 | 274 | 3 tasks | 3 files |
+| Phase 38-ci-gate-full-verification P02 | 143 | 3 tasks | 2 files |
+| Phase 38-ci-gate-full-verification P03 | 900 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -64,28 +76,40 @@ Last activity: 2026-05-24
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- Phase 29 Plan 01: WebP (.webp[Q=80]) pinned in tile-config.json — pilot confirmed ~30% smaller than JPEG, OSD handles webp DZI format correctly
-- Phase 29 Plan 01: downloadSharedFile has no retry — callers own withRetry (matches dropbox-list.js convention)
-- Phase 29 Plan 01: advanceStatus mutates row in-place — consistent with RESORT_ONLY pattern in ingest-photos.js
-- Phase 29 Plan 02: Export tilePrefix/tiffCachePath/isAlreadyTiled/isTileable for testability without network or vips
-- Phase 29 Plan 02: Filesystem idempotency (isAlreadyTiled) layered on manifest idempotency (status=tiled) to recover from interrupted runs
-- Phase 29 Plan 02: species_slug lowercased unconditionally in tilePrefix per Phase 28 mixed-case lesson
+- v3.0 toolchain: Node 24 native type-stripping (`--strip-types`) runs `.ts` scripts and tests with no transpiler; `tsc --noEmit` is a separate CI gate only
+- v3.0 toolchain: Three separate tsconfigs — `tsconfig.node.json` (nodenext), `tsconfig.browser.json` (bundler, useDefineForClassFields:false), root `tsconfig.json` (includes both); NOT project references
+- v3.0 toolchain: `tsc --noEmit` kept OUT of `npm run build` hot path; CI gate only (per SUMMARY.md cross-doc resolution)
+- v3.0 schemas: Zod 4 (`zod@^4`, import from `'zod'` not `'zod/v4'`); schemas in `src/types/` importable by both Node scripts and browser components
+- v3.0 schemas: Profile null distribution per column BEFORE writing any schema (Pitfall 2 — over-strict schema hard-blocks 85,933-record build)
+- v3.0 migration order: A(schema) → B(scripts/lib) → C(src/_lib) → D(scripts/) → E(src/_data+config) → F(src/components/) — producer before consumer
+- v3.0 client bundle: Zod absent from production client bundle; DEV-gated or minimal type guards only in parquet-cache.ts
+- v3.0 Lit: `useDefineForClassFields: false` MUST be set in browser tsconfig BEFORE any Lit component is touched (Pitfall 1)
+- v3.0 tests: All test files migrate to `.ts`; run via `node --test` with no extra flags (Node 24 strips types natively); MIG-05 success criterion = full ~191-test suite green
+- v3.0 CI-02: byte-identical `_site/` diff guard after each migration area (diff -r _site_before/ _site_after/)
+- Phase 29 fix: Dropbox shared_link API does not return path_display — use '/' + entry.name as fallback; manifest backfilled
 - Phase 30 Plan 01: DRY_RUN guard before BUNNY_API_KEY guard — enables dry-run inspection without a real API key
 - Phase 30 Plan 01: advanceStatus(row, 'uploaded') before rm/unlink — status committed before deletion (D-03 ordering)
-- Phase 30 Plan 01: isUploadable checks status === 'tiled' only — all other statuses filtered at loop entry
-- Phase 30 Plan 01: pre-flight footprint walk uses synchronous readdirSync/statSync — one-time startup cost, print measuring message before walking
-- Phase 29 fix: Dropbox shared_link API does not return path_display — use '/' + entry.name as fallback; manifest backfilled
-- Phase 29 fix: downloadSharedFile marks 4xx (non-429) errors as err.retriable=false; withRetry bails immediately on these
-- Phase 29 fix: DROPBOX_TOKEN requires sharing.read + files.content.read scopes (not just files.metadata.read) for tile downloads
-- v2.2 locked (exploration): Local manifest (SQLite/JSON) is source of truth — durable per-image status; survives restarts; seeds `data/species-photos.json`
-- v2.2 locked (exploration): Dropbox is a superset; match → replace existing low-res; unmatched → manual investigation (no auto-drop)
-- v2.2 locked (exploration): Folder layout flat with encoded filenames — convention `Genus species-{specimen}-{view}.{ext}` (same as Phase 13 photos)
-- v2.2 locked (exploration): OpenSeadragon replaces the Phase 23 lightbox host when high-res is available; carousel unchanged
-- v2.2 spike 001 (VALIDATED): 5,000 TIFFs / 204.6 GB; 77.5% clean match; 93.2% species coverage; ~30–80 unique unresolved binomials need curation; 100% TIFF source; ~1 TB tile output expected
-- v2.2 spike 001: Parser extensions required — 2-char epithets (`ni`, `ou`), hyphenated epithets (`v-alba`, `c-nigrum`), `Genus-species` hyphen, `OSAC_*`/`WWUC*` accession IDs, provisional bucket for `n sp`/`sp`/`nr` patterns
-- v2.2 spike 001: Manifest carries `specimen_id`, `view` (D/V), `binomial_raw`, `binomial_resolved`, `match_bucket`, `species_slug`, `dropbox_path`, `content_hash`, `size`, `server_modified`, `status`
-- v2.1 Phase 24 (carry): Phenology chart always stays in the DOM with zero-height bars rather than being conditionally removed
-- v2.1 Phase 24 (carry): Elevation slider uses String() coercion on .value binding to prevent Lit from treating Number as a Lit property
+- Phase 33 Plan 01: `allowImportingTsExtensions:true` (not `rewriteRelativeImportExtensions`) in tsconfig.node.json — semantically correct for Node 24 type-stripping + noEmit workflow
+- Phase 33 Plan 01: typecheck script invokes each sub-config explicitly (no tsc --build/composite) — tsc does not follow references in plain --noEmit mode
+- Phase 33 Plan 01: zod kept in dependencies (not devDeps) — consumed by build scripts at build time
+- Phase 33 Plan 02: z.nullable() (not z.optional()) for all profiled-null columns — hyparquet writes null not undefined; county 100% null would reject all records
+- Phase 33 Plan 02: allowImportingTsExtensions:true added to tsconfig.browser.json — required for .ts extension imports in src/types/ under the browser config
+- Phase 33 Plan 02: types:[node] added to tsconfig.node.json — TypeScript 6 strict NodeNext does not auto-include @types/node globals without explicit types field
+- Phase 34 Plan 01: _site_baseline/ gitignored (not committed) — working-tree snapshot for SC-4 byte-identity gate; 1,433 species pages
+- Phase 34 Plan 01: package.json test globs broadened to `*.test.{js,ts}` for scripts/lib and src/_lib; Node 24 brace expansion; 224/224 tests pass
+- Phase 34 Plan 02: ManifestRow = Record<typeof COLUMNS[number], string> — mapped type over 13-key union; row.status is string (not string|undefined) even under noUncheckedIndexedAccess
+- Phase 34 Plan 02: ManifestStatus union uses exactly 5 values; no enum (TS-03 prohibition)
+- Phase 34 Plan 02: dbxCall return typed as Promise<unknown>; callers narrow via isDropboxListPage guard (D-01/D-03; Open Question 2)
+- Phase 34 Plan 02: [...COLUMNS] spread in writeManifest avoids as-cast to satisfy csv-stringify string[] type (Pitfall 2)
+- Phase 34 Plan 02: DropboxError = new Error(...) as DropboxError pattern; single widening cast of own-constructed value — not unguarded double-cast (T-34-02)
+- Phase 34 Plan 03: Vite content-hash filename changes between builds are non-deterministic (sourceMappingURL self-reference); byte-identity gate assesses HTML prose content, not asset filenames
+- Phase 34 Plan 03: noUncheckedIndexedAccess in test files fixed via destructuring (const [first, second] = buildTermMap(...)) rather than bare index access
+- [Phase ?]: D-06/D-07 preserved in Plan 03: static properties = {} class-field form, no decorators, customElements.define kept
+- Phase 37 Plan 05: eleventy.config.ts needs src/types passthrough copy for Vite staging — pnwm-taxon-browser.ts's value import (SpeciesStateSchema) fails at bundle time without it; all prior type-only imports were erased at transpile time
+- Phase 37 Plan 05: zod v4 SC-4 grep — internal $ZodError/$ZodType are zod/mini implementation symbols; correct check is ZodMiniType present + no non-$-prefixed ZodError/ZodType (grep -oP '(?<!\$)ZodError|...' = 0)
+- Phase 37 Plan 05 SC-5: byte-identical gate passed — data files byte-identical; HTML differences confined to content-hashed asset filenames; SC-4 gzip delta +3,346 B / +2.7% accepted (approved 2026-06-10)
+- [Phase ?]: compare-sites.sh Bucket A: GNU diff 3.12 lacks --include; replaced with find+diff loop (Rule 1 auto-fix)
+- [Phase ?]: CI-02 D-01: one-shot local proof, not recurring CI step; permanent gate is MIG-06 guard in pr-check.yml
 
 ### Roadmap Evolution
 
@@ -98,16 +122,25 @@ Recent decisions affecting current work:
 - Phase 25 added: Similar Species Thumbnails (v2.1)
 - Phase 26 added: Dropbox Ingest, Filename Parser, and Manifest (v2.2)
 - Phase 27 added: Synonym Curation Pass (v2.2)
-- Phase 28 added: DZI Tile Generation Pipeline (v2.2) — renumbered to 29 on 2026-05-22 when the pilot was inserted
-- Phase 29 added: bunny.net Upload of Tile Pyramids (v2.2) — renumbered to 30 on 2026-05-22
-- Phase 30 added: `data/species-photos.json` Build Integration (v2.2) — renumbered to 31 on 2026-05-22
-- Phase 31 added: OpenSeadragon Viewer in Lightbox (v2.2) — renumbered to 32 on 2026-05-22
-- **Phase 28 inserted 2026-05-22 (current): End-to-End Vertical-Slice Pilot — One Species** — surface cross-phase integration risk on one species (local tiling, hand-edited JSON, production-CDN-served, production-lightbox-rendered) before the bulk tile/upload/build/viewer phases. Existing 28–31 renumbered to 29–32.
+- Phase 28 inserted 2026-05-22: End-to-End Vertical-Slice Pilot — One Species (v2.2)
+- Phase 29 added: DZI Tile Generation Pipeline, bulk (v2.2) — renumbered from 28
+- Phase 30 added: bunny.net Upload of Tile Pyramids, bulk (v2.2) — renumbered from 29
+- Phase 31 added: data/species-photos.json Build Integration (v2.2) — renumbered from 30
+- Phase 32 added: OpenSeadragon Viewer in Lightbox, generalize pilot (v2.2) — renumbered from 31
+- **Phase 33 added 2026-06-09: Toolchain & Schema Scaffolding (v3.0)**
+- **Phase 34 added 2026-06-09: scripts/lib & src/_lib Migration (v3.0)**
+- **Phase 35 added 2026-06-09: Build Pipeline Scripts Migration (v3.0)**
+- **Phase 36 added 2026-06-09: Eleventy Data Files & Config Migration (v3.0)**
+- **Phase 37 added 2026-06-09: Lit Web Components Migration (v3.0)**
+- **Phase 38 added 2026-06-09: CI Gate & Full Verification (v3.0)**
 
 ### Pending Todos
 
-- PROJECT.md Out of Scope: remove the "Zoomify deep-zoom viewer — replaced by lightbox in v1" line (or replace its strike-through with an explicit v2.2 inversion note) before Phase 26 planning
-- Phases 26–31 all need plans drafted via `/gsd:plan-phase`
+- Phase 33: Run null-distribution data profile (`COUNT(*) FILTER (WHERE col IS NULL)` per column) against full 85,933 records BEFORE writing any Zod schema — this is the mandatory SCHEMA-03 spike (Pitfall 2)
+- Phase 33: Resolve tsconfig `allowImportingTsExtensions` vs `rewriteRelativeImportExtensions` flag choice (SUMMARY.md research flag — verify in Phase 33 spike)
+- Phase 33: Verify `execFile("node", ["...ts"])` child-process type-stripping behavior (SUMMARY.md research flag)
+- Phase 35: Benchmark `time npm run build:data` after adding Zod validation gates; must stay under 60s (CI-03)
+- Phase 37: grep production bundle for `ZodError`/`ZodType` to confirm tree-shaking (SUMMARY.md research flag)
 
 ### Blockers/Concerns
 
@@ -119,13 +152,18 @@ Items acknowledged and carried forward:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| Tech debt | MAINT-03: build time under 5 min unverified | Carry forward — Phase 30 build adds species-photos.json materialization; check against target | v1.2 |
+| Tech debt | MAINT-03: build time under 5 min unverified | Addressed in v3.0 CI-03 (build:data <60s budget) | v1.2 |
 | Tech debt | No automated visual regression tests | Carry forward | v1.2 |
-| Tech debt | WR-01–03: test cleanup paths could be more robust | Carry forward | v1.2 |
+| Tech debt | WR-01 (migrate-species): similar_species links silently dropped for record-only species | Carry forward | v1.4 |
+| Tech debt | WR-02 (migrate-species): safeSpecies sanitization logic duplicated in two loops | Carry forward | v1.4 |
 | CDN | GitHub LFS storage quota reclaim | Accept billing; out of scope | v1.4 |
 | CDN | WebP not yet active on bunny.net Optimizer (serving JPEG) | Deferred | v1.4 |
-| v2.2 | `*custom` Dropbox sub-folder | Deferred until contents understood — out of scope for v2.2 | v2.2 |
-| v2.2 | External taxonomic API (GBIF/ITIS) synonym auto-resolution | Manual `species-synonyms.csv` is faster for ~30–80 decisions; revisit if residue stays large | v2.2 |
+| v2.2 | `*custom` Dropbox sub-folder | Deferred until contents understood | v2.2 |
+| v2.2 | External taxonomic API (GBIF/ITIS) synonym auto-resolution | Manual species-synonyms.csv sufficient for now | v2.2 |
+| v3.0-future | TSF-01: Lit TC39 decorator adoption (`accessor` keyword) | Deferred post-migration | v3.0 |
+| v3.0-future | TSF-02: TypeScript 6.0 upgrade | Deferred until migration settled | v3.0 |
+| v3.0-future | TSF-03: Vitest evaluation | Deferred; keep node --test for now | v3.0 |
+| v3.0-future | filterRecords null-coercion behavior fix | Document with TODO(v3.1); do not fix during type migration | v3.0 |
 
 ## Quick Tasks Completed
 
@@ -135,6 +173,10 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-05-24T02:58:19.326Z
-Stopped at: Phase 32 UI-SPEC approved
-Resume file: .planning/phases/32-openseadragon-viewer-in-lightbox-generalize-pilot/32-UI-SPEC.md
+Last session: 2026-06-11T01:22:41.835Z
+Stopped at: Completed Phase 38 Plan 03 — v3.0 milestone complete
+Resume file: None
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

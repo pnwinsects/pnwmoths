@@ -5,25 +5,25 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:data": "node scripts/build-data.js",
-    "build:eleventy": "eleventy",
-    "build:copy-parquet": "node scripts/copy-parquet.js",
+    "build:data": "node scripts/build-data.ts",
+    "build:eleventy": "eleventy --config=eleventy.config.ts",
+    "build:copy-parquet": "node scripts/copy-parquet.ts",
     "build:pagefind": "pagefind --site _site",
     "build:validate-links": "lychee --config lychee.toml --root-dir _site '_site/**/*.html'",
-    "build:check-weight": "node scripts/check-page-weight.js",
-    "build:species-states": "node scripts/emit-species-states.js",
+    "build:check-weight": "node scripts/check-page-weight.ts",
+    "build:species-states": "node scripts/emit-species-states.ts",
     "build": "npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:validate-links && npm run build:check-weight",
-    "build:copy-images": "node scripts/copy-images.js",
-    "dev": "npm run build:data && eleventy --serve",
-    "migrate:images": "node scripts/migrate-images.js",
-    "migrate:species": "node scripts/migrate-species.js",
-    "photos:ingest": "node scripts/ingest-photos.js",
-    "photos:investigate": "RESORT_ONLY=1 node scripts/ingest-photos.js",
-    "photos:tile": "node scripts/tile-photos.js",
-    "photos:upload": "node scripts/upload-tiles.js",
-    "photos:materialize": "node scripts/generate-species-photos.js",
-    "photos:rethumbnail": "THUMBNAIL_ONLY=1 node scripts/tile-photos.js",
-    "test": "node --test eleventy.config.test.js scripts/build-data.test.js scripts/check-page-weight.test.js scripts/ingest-photos.test.js scripts/migrate-species.test.js scripts/tile-photos.test.js scripts/upload-tiles.test.js scripts/generate-species-photos.test.js scripts/lib/*.test.js src/components/*.test.js src/_lib/*.test.js"
+    "build:copy-images": "node scripts/copy-images.ts",
+    "dev": "npm run build:data && eleventy --serve --config=eleventy.config.ts",
+    "photos:ingest": "node scripts/ingest-photos.ts",
+    "photos:investigate": "RESORT_ONLY=1 node scripts/ingest-photos.ts",
+    "photos:tile": "node scripts/tile-photos.ts",
+    "photos:upload": "node scripts/upload-tiles.ts",
+    "photos:materialize": "node scripts/generate-species-photos.ts",
+    "photos:rethumbnail": "THUMBNAIL_ONLY=1 node scripts/tile-photos.ts",
+    "test": "node --test eleventy.config.test.ts scripts/build-data.test.ts scripts/check-page-weight.test.ts scripts/ingest-photos.test.ts scripts/tile-photos.test.ts scripts/upload-tiles.test.ts scripts/generate-species-photos.test.ts 'scripts/lib/*.test.ts' src/components/*.test.ts 'src/_lib/*.test.ts'",
+    "typecheck": "tsc -p tsconfig.browser.json --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "verify:parquet": "node scripts/verify-parquet.ts"
   },
   "keywords": [],
   "author": "Peter Abrahamsen <rainhead@gmail.com>",
@@ -39,11 +39,15 @@
     "leaflet": "^1.9.4",
     "lit": "^3.3.2",
     "node-html-parser": "^7.1.0",
-    "openseadragon": "^6.0.2"
+    "openseadragon": "^6.0.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@11ty/eleventy-plugin-vite": "^8.0.0",
+    "@types/leaflet": "^1.9.21",
+    "@types/node": "^24.13.1",
     "pagefind": "^1.5.2",
+    "typescript": "^6.0.3",
     "vite": "^8.0.8"
   }
 }

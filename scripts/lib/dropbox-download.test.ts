@@ -1,0 +1,95 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { downloadSharedFile } from './dropbox-download.ts';
+
+// Local type for error assertions — matches the internal DropboxError shape.
+interface TestDropboxError extends Error {
+  retriable: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// downloadSharedFile — input validation and error-message shape
+// ---------------------------------------------------------------------------
+describe('downloadSharedFile', () => {
+  it('throws when token is missing — error contains "missing required param: token" but not the token value', async () => {
+    await assert.rejects(
+      () => downloadSharedFile({ shareUrl: 'https://example.com', dropboxPath: '/a.tif', token: '', destPath: '/tmp/a.tif' }),
+      (err: unknown) => {
+        const e = err as Error;
+        assert.ok(
+          e.message.includes('missing required param: token'),
+          `expected "missing required param: token" in: ${e.message}`,
+        );
+        // The token value here is empty string so nothing to leak, but verify
+        // the function does not reconstruct a token-like string in the message.
+        assert.ok(
+          !e.message.includes('sl.'),
+          `error message must not contain token-like substring: ${e.message}`,
+        );
+        return true;
+      },
+    );
+  });
+
+  it('throws a shaped error when fetch returns 401 — message starts with endpoint path, does not contain token value', async () => {
+    const originalFetch = globalThis.fetch;
+    try {
+      globalThis.fetch = async () => ({
+        ok: false,
+        status: 401,
+        text: async () => 'invalid_access_token',
+      }) as Response;
+
+      await assert.rejects(
+        () => downloadSharedFile({
+          shareUrl: 'https://www.dropbox.com/scl/fo/example',
+          dropboxPath: '/test.tif',
+          token: 'sl.SECRET',
+          destPath: '/tmp/test.tif',
+        }),
+        (err: unknown) => {
+          const e = err as TestDropboxError;
+          assert.ok(
+            e.message.startsWith('/2/sharing/get_shared_link_file → 401:'),
+            `expected message to start with "/2/sharing/get_shared_link_file → 401:" but got: ${e.message}`,
+          );
+          assert.ok(
+            !e.message.includes('sl.SECRET'),
+            `error message must not contain the token value "sl.SECRET": ${e.message}`,
+          );
+          assert.strictEqual(e.retriable, false, 'non-retriable 401 must set err.retriable = false');
+          return true;
+        },
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('marks 429 errors as retriable', async () => {
+    const originalFetch = globalThis.fetch;
+    try {
+      globalThis.fetch = async () => ({
+        ok: false,
+        status: 429,
+        text: async () => 'too_many_requests',
+      }) as Response;
+
+      await assert.rejects(
+        () => downloadSharedFile({
+          shareUrl: 'https://www.dropbox.com/scl/fo/example',
+          dropboxPath: '/test.tif',
+          token: 'sl.TOKEN',
+          destPath: '/tmp/test.tif',
+        }),
+        (err: unknown) => {
+          const e = err as TestDropboxError;
+          assert.strictEqual(e.retriable, true, '429 must set err.retriable = true');
+          return true;
+        },
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});

@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "scripts/**/*.ts",
+    "src/_data/**/*.ts",
+    "src/_lib/**/*.ts",
+    "src/types/**/*.ts",
+    "eleventy.config.ts",
+    "eleventy.config.test.ts",
+    "scripts/**/*.test.ts",
+    "src/_data/**/*.test.ts",
+    "src/_lib/**/*.test.ts"
+  ]
+}

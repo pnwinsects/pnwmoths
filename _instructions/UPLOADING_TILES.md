@@ -38,8 +38,7 @@ You will need all of the following on this laptop before running the script:
   from this laptop.
 - **`BUNNY_API_KEY`** — the Storage Zone password from the bunny.net dashboard. Go to
   bunny.net → Storage → `pnwmoths` Storage Zone → FTP & API Access → copy the
-  Password field. This is the same credential used by Phase 18's
-  `scripts/upload-plates.js`. Never commit the key, paste it into chat, write it to
+  Password field. Never commit the key, paste it into chat, write it to
   disk, or hardcode it into any file.
 - **Disk headroom:** at least 50 GB free recommended. Each row's tile directory is
   deleted immediately after successful upload (D-03), so steady-state disk usage

@@ -1,480 +1,548 @@
-# Architecture: Build-Time Glossary Term Detection
+# Architecture Research: TypeScript + Shared Validation Layer (v3.0)
 
-**Milestone:** v2.0 Glossary Tooltips
-**Researched:** 2026-04-23
-**Confidence:** HIGH — all integration points verified against existing source files and
-Eleventy 3.x documentation
-
----
-
-## Decision Summary
-
-Use an **Eleventy HTML transform** (`eleventyConfig.addTransform`) that runs after all
-templates (including `{% renderFile %}`) have been rendered. The transform receives the
-complete page HTML as a string, uses a lightweight DOM manipulation library (or regex
-against `<p>` and `<li>` text nodes) to wrap first occurrences of glossary terms in
-`<abbr>` elements carrying `data-*` tooltip attributes, and returns the modified string.
-Glossary data is loaded once at config startup via `eleventyConfig.addGlobalData` (the
-same mechanism already used for `cdnBaseUrl`) and closed over by the transform function.
+**Domain:** Strict TypeScript migration + build-time data validation for Eleventy+Vite+Lit+DuckDB static site
+**Researched:** 2026-06-09
+**Confidence:** HIGH — all integration points verified against existing source files, installed package type definitions, and official Node/Vite/Zod documentation
 
 ---
 
-## 1. Why a Transform, Not a Nunjucks Filter or markdown-it Plugin
+## System Overview: Two Compilation Targets
 
-### Option A — Nunjucks filter on `content`
+The repo has two distinct runtime environments with different module resolution requirements:
 
-Species prose is rendered by `{% renderFile prosePath %}` inside `species.njk`. The
-`renderFile` shortcode outputs rendered HTML as a block into the page. There is no
-Nunjucks-accessible variable that holds only the prose HTML at filter-application time —
-the prose is emitted directly into the output stream. A filter would have to be applied
-to the entire page content (`{{ content | safe }}`), but `content` in `base.njk` is the
-already-serialised page body including the `<dl>` taxonomy block, occurrence section,
-and photos section. Filtering `content` would require wrapping every use of the filter
-everywhere the layout is used, which is fragile and incomplete.
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  BUILD TARGET (Node 24, native type-stripping, "module": "module")  │
+│                                                                       │
+│  scripts/*.ts          src/_data/*.ts        src/_lib/*.ts           │
+│  ├─ build-data.ts      ├─ species.ts         ├─ glossary-transform.ts│
+│  ├─ emit-species-states.ts                   └─ (shared lib)         │
+│  ├─ copy-parquet.ts    ├─ taxon.ts                                    │
+│  └─ (etc.)             └─ (etc.)                                      │
+│                                                                       │
+│  eleventy.config.ts  (Node-executed, NOT Vite-bundled)               │
+│  *.test.ts           (node --test, Node-executed)                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  SHARED SCHEMA LAYER (pure types + Zod schemas, no Node/DOM APIs)   │
+│                                                                       │
+│  src/types/                                                           │
+│  ├─ schemas.ts   ← Zod schemas → TS types via z.infer<>             │
+│  └─ index.ts     ← re-exports                                        │
+├─────────────────────────────────────────────────────────────────────┤
+│  BROWSER TARGET (Vite/Oxc transform, "module": "ESNext", DOM)       │
+│                                                                       │
+│  src/components/*.ts   (Lit web components, Vite-bundled)            │
+│  ├─ parquet-cache.ts   ← imports src/types/ schemas for validation  │
+│  ├─ pnwm-occurrence-map.ts                                           │
+│  └─ (etc.)                                                           │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
-**Verdict: not suitable.** Nunjucks filters operate on strings at template render time,
-not on the final composed page. The render plugin deliberately streams output, so the
-prose is not available as a discrete string variable for filtering.
-
-### Option B — markdown-it plugin
-
-A custom markdown-it plugin could intercept text tokens during Markdown parsing and wrap
-glossary terms inline. This runs before Nunjucks template rendering and therefore before
-the surrounding page structure is assembled.
-
-Problems:
-1. The markdown-it instance is configured once globally (`eleventyConfig.setLibrary` or
-   `eleventyConfig.amendLibrary`). Making glossary data available to the plugin requires
-   either a module-level variable (fragile singleton) or re-constructing the library for
-   each page (expensive at 1,364 species pages).
-2. "First occurrence per page" is impossible to enforce within the markdown-it plugin
-   because the plugin processes only the prose fragment, not the full page. The same
-   term in the taxonomy `<dl>` or in navigation would never be seen by the plugin, so
-   "first on the page" correctly collapses to "first in prose," but the constraint cannot
-   be verified without page context.
-3. The prose files are currently rendered with `{% renderFile prosePath %}` using the
-   `EleventyRenderPlugin`. The markdown-it plugin fires inside that shortcode's
-   compilation step. Testing this interaction is harder than testing a standalone
-   transform.
-
-**Verdict: possible but overfit.** The transform approach handles all three issues
-without the singleton or per-page library rebuild.
-
-### Option C — Eleventy HTML transform (RECOMMENDED)
-
-`eleventyConfig.addTransform("glossary-terms", async function(content) { ... })` runs
-after Eleventy has fully rendered each output file (template → layout → content
-assembled). At this point:
-- `content` is the complete HTML string for the page.
-- `this.page.outputPath` identifies whether this is an HTML file.
-- `this.page.inputPath` can distinguish species pages from glossary/browse pages if
-  scope-limiting is needed.
-
-The transform runs on every HTML output file. A guard (`if
-(!outputPath.endsWith('.html')) return content`) restricts processing to HTML pages.
-An additional guard targeting only species pages (checking `this.page.inputPath` for
-`species/species.njk`) is optional but recommended for performance: there are 1,364
-species pages and applying term detection to browse, glossary, and search pages is
-unnecessary.
-
-**Verdict: correct integration point.** Transform fires after all rendering, has access
-to complete page HTML, can enforce first-occurrence-per-page naturally (scan the HTML
-once, mark terms seen), and is testable in isolation with a string input.
+The schema module at `src/types/` is the critical shared layer. It must be importable by both environments without environment-specific code.
 
 ---
 
-## 2. Build Order: What Must Be Ready Before the Transform
+## Question 1: Where Does the Shared Schema Layer Live, and How Are Imports Resolved?
 
+### Physical location: `src/types/`
+
+Place the shared schema module at `src/types/schemas.ts` (re-exported via `src/types/index.ts`). Do not use `src/_schema/` — Eleventy treats `_`-prefixed directories under `src/` as data/layout directories and they are subject to special handling in the copy pipeline. `src/types/` is outside that convention.
+
+### Import path in Node-executed files (scripts/, src/_data/, eleventy.config.ts)
+
+Node 24 type-stripping requires **explicit `.ts` extensions** in import statements — bare specifiers and `.js` extension rewrites do not work. Node ignores `tsconfig.json` paths aliases entirely.
+
+```typescript
+// scripts/build-data.ts
+import { SpeciesRecordSchema } from '../src/types/index.ts';
 ```
-npm run build:data          ← generates data/parquet/; validates glossary.csv
-  └─ glossary.csv validated for safe filename characters
-npm run build:eleventy      ← Eleventy + Vite pipeline
-  ├─ Eleventy starts; loads src/_data/*.js (including glossary.js → DuckDB query)
-  │    └─ glossary data (term, definition, image_filename) available at config time
-  ├─ eleventy.config.js addGlobalData("glossaryTerms", ...) closure ready
-  ├─ Template rendering: species.njk + {% renderFile %} prose → raw HTML
-  ├─ Layout: base.njk wraps rendered content
-  └─ Transform: "glossary-terms" fires on completed HTML string
-       └─ term detection + <abbr> wrapping → final HTML written to _site/
-npm run build:pagefind      ← indexes _site/ HTML (after transform output)
+
+```typescript
+// src/_data/species.ts
+import { SpeciesRowSchema } from '../types/index.ts';
+// (relative path from src/_data/ to src/types/ is ../types/)
 ```
 
-Glossary data must be loaded before the transform is registered. Loading it
-synchronously inside `addGlobalData` (which already accepts async functions) ensures the
-data is resolved before Eleventy begins template processing.
+```typescript
+// eleventy.config.ts
+import { GlossaryRowSchema } from './src/types/index.ts';
+```
 
-There is no conflict with the Vite plugin: `eleventyPlugin-vite` fires `writeBundle`
-after Eleventy writes `_site/` files. The HTML transform runs before Vite sees the
-files, so the annotated `<abbr>` markup will be present in whatever Vite processes.
-Vite's HTML transformer rewrites asset URLs and module imports — it does not touch
-arbitrary element attributes, so the `data-*` attributes survive Vite's pass intact.
+The `rewriteRelativeImportExtensions: true` tsconfig option makes `tsc --noEmit` accept `.ts` extensions in import paths (which would otherwise be flagged as non-standard). This must be set in the Node tsconfig.
 
-Pagefind runs after `build:eleventy` and indexes the already-transformed HTML. The
-`<abbr>` wrappers appear as inline text content within paragraphs; Pagefind will index
-the term text normally. Tooltip metadata in `data-definition` and `data-image-url`
-attributes is not indexed by Pagefind (attributes are not indexed, only text content).
-No `data-pagefind-ignore` is needed on the `<abbr>` elements themselves.
+### Import path in Vite-bundled files (src/components/)
+
+Vite uses Oxc for TypeScript transpilation. Vite resolves modules with `moduleResolution: "bundler"`, which accepts both `.ts` extensions and extension-less imports. Both of the following work in Vite:
+
+```typescript
+// src/components/parquet-cache.ts — both forms work with Vite
+import { OccurrenceRecordSchema } from '../types/index.ts';  // explicit .ts — preferred
+import { OccurrenceRecordSchema } from '../types/index';     // extension-less — also works
+```
+
+Use explicit `.ts` extensions uniformly across both targets. This is consistent with Node's requirement and is unambiguous.
+
+### Key constraint: no tsconfig `paths` aliases
+
+Node 24 ignores `compilerOptions.paths`. Path aliases like `@types/*` cannot be used in Node-executed files. Use only relative import paths. This is not a significant burden given the small number of cross-boundary imports.
 
 ---
 
-## 3. Glossary Data: Loading and Making It Available to the Transform
+## Question 2: Validation Insertion Points
 
-The existing `src/_data/glossary.js` returns data grouped by first letter (for the
-glossary index template). The transform needs a flat structure indexed for fast lookup:
-a `Map<normalizedTerm, { term, definition, imageUrl }>`.
+### Data flow with validation gates
 
-Do not modify the existing `src/_data/glossary.js` — it is shaped for the template.
-Instead, load glossary data a second time inside `eleventy.config.js` using
-`addGlobalData` with a separate key, or — better — load it once in `eleventy.config.js`
-at startup and use `addGlobalData` for the transform-time closure.
-
-**Recommended pattern:**
-
-```js
-// eleventy.config.js (top-level, outside the export default function)
-import { DuckDBInstance } from '@duckdb/node-api';
-import { readFileSync } from 'node:fs';
-import { parse } from 'csv-parse/sync';
-
-async function loadGlossaryTerms() {
-  // Lightweight: read CSV directly without DuckDB to avoid a second DB lifecycle.
-  // glossary.csv is already validated by build:data before build:eleventy runs.
-  const raw = readFileSync('data/glossary.csv');
-  const rows = parse(raw, { columns: true, skip_empty_lines: true });
-  const map = new Map();
-  for (const row of rows) {
-    if (!row.definition) continue;
-    const imageUrl = row.image_filename
-      ? `${CDN_BASE_URL}/glossary/${encodeURIComponent(row.image_filename)}?width=188&height=225&crop_gravity=north`
-      : null;
-    map.set(row.term.toLowerCase(), {
-      term: row.term,
-      definition: row.definition,
-      imageUrl,
-    });
-  }
-  return map;
-}
+```
+data/species.csv
+data/records.csv        ← SOURCE CSVs (upstream input)
+data/images.csv
+data/glossary.csv
+       │
+       ▼
+scripts/build-data.ts
+  validateCsv() ← GATE 1: CSV input validation (build-time, fail-fast)
+       │          Zod: CsvSpeciesRow, CsvRecordRow, etc.
+       │          Validates column presence + value constraints
+       │          Throws on failure → build exits 1
+       ▼
+DuckDB: COPY TO data/parquet/{slug}/records.parquet
+       │
+       ▼
+  parquet verification ← GATE 2: Parquet round-trip check (build-time spot-check)
+       │                  Read back a sample with hyparquet; parse with OccurrenceRecordSchema.safeParse()
+       │                  Fails build if column types diverge from schema
+       ▼
+scripts/emit-species-states.ts
+  → writes _site/species-states.json ← GATE 3: JSON output validation (build-time)
+       │                                 JSON.parse() result validated with SpeciesStateSchema
+       │                                 Fails build if shape wrong
+       ▼
+src/_data/*.ts (Eleventy data cascade)
+  → data objects ← GATE 4: Eleventy data validation (build-time, optional but recommended)
+       │            z.array(SpeciesRowSchema).parse(rows) in species.ts, taxon.ts
+       │            Catches DuckDB → getRowObjectsJS() shape drift early
+       ▼
+                 ← (deployment boundary) →
+       ▼
+Browser: src/components/parquet-cache.ts
+  hyparquet: parquetReadObjects() ← GATE 5: Client-side validation (dev-mode only)
+       │                             OccurrenceRecordSchema.safeParse(record) in development builds
+       │                             Logs warnings; never throws (graceful degradation required)
+       ▼
+Browser: fetch('/species-states.json')
+  ← GATE 6: Client-side JSON fetch validation (dev-mode only)
+       │     SpeciesStateSchema.array().safeParse(data); log on mismatch
 ```
 
-The map is keyed on `term.toLowerCase()` for case-insensitive matching. The transform
-uses this map. `csv-parse` is already a project dependency.
+### Which validations are build-time gates vs. optional dev checks
 
-Load the map before registering the transform:
+| Gate | Location | Mode | Action on failure |
+|------|----------|------|-------------------|
+| 1: CSV input | `scripts/build-data.ts` | Always | `process.exit(1)` — hard failure |
+| 2: Parquet round-trip | `scripts/build-data.ts` (post-COPY) | Always | `process.exit(1)` — hard failure |
+| 3: JSON emit | `scripts/emit-species-states.ts` | Always | `process.exit(1)` — hard failure |
+| 4: Eleventy data | `src/_data/*.ts` | Always | Throws — propagates as Eleventy build error |
+| 5: Client Parquet | `src/components/parquet-cache.ts` | Dev builds only | `console.warn()` — never throws |
+| 6: Client JSON | fetch handlers in components | Dev builds only | `console.warn()` — never throws |
 
-```js
-export default async function(eleventyConfig) {
-  // ... existing plugins and filters ...
+Gates 5 and 6 use `import.meta.env.DEV` (Vite-provided) to gate validation at the call site. The Zod parse calls are tree-shaken from production builds when the `if (import.meta.env.DEV)` branch is statically false. This ensures zero runtime cost in production.
 
-  const glossaryTerms = await loadGlossaryTerms();  // ~149 terms, instant
-
-  eleventyConfig.addTransform("glossary-terms", function(content) {
-    if (!(this.page.outputPath || "").endsWith(".html")) return content;
-    if (!this.page.inputPath.includes("species/species.njk")) return content;
-    return applyGlossaryTerms(content, glossaryTerms);
-  });
-}
-```
-
-Note: `eleventy.config.js` exports an async default function. The existing code does
-not use `async` on the export function, but Eleventy 3.x supports it. Adding `async`
-here is safe and necessary to `await loadGlossaryTerms()`.
-
-Alternatively, `loadGlossaryTerms()` can be called at module top level (outside the
-export function) and awaited via a top-level await since the file is an ES module
-(`"type": "module"` in package.json). Either approach works; the `async` export function
-is slightly cleaner as it keeps all config setup inside the function boundary.
+Gates 1–4 must fail the build loudly — they are the authoritative data validation checks.
 
 ---
 
-## 4. Term Detection and Wrapping Algorithm
+## Question 3: The DuckDB-Write vs. hyparquet-Read Type Asymmetry
 
-### Scope: where to apply
+### Concrete type mappings for this repo's Parquet columns
 
-Apply only to paragraph-level text within the prose block. The complete page HTML
-contains:
+The records.parquet file is written by DuckDB with these SQL column types, which map to these Parquet physical types and these hyparquet JS values:
 
-1. Taxonomy `<dl>` block — term text here (e.g., "Family: Noctuidae") should not be
-   highlighted.
-2. Species prose from `{% renderFile %}` — the target: `<p>`, `<h2>`, `<h3>` elements
-   within a `<section>` or directly inside `<main>`.
-3. Occurrence section (Lit web components with `data-pagefind-ignore`).
-4. Photos section.
-5. Similar species list.
-6. Navigation and footer.
+| SQL Type | Parquet physical | hyparquet output (non-NULL) | hyparquet output (NULL) |
+|----------|------------------|-----------------------------|-------------------------|
+| `VARCHAR` | BYTE_ARRAY + STRING logical | `string` | `null` |
+| `DOUBLE` | DOUBLE | `number` | `null` |
+| `INTEGER` | INT32 | `number` (from Int32Array) | `null` (when nullable, from `any[]`) |
+| `BOOLEAN` | BOOLEAN | `boolean` | `null` |
 
-Use a DOM library to scope the transform to the prose paragraphs only. The prose
-rendered by `{% renderFile %}` produces vanilla `<p>`, `<h2>`, `<ul>`, `<li>` elements
-with no wrapper element distinguishing it from the taxonomy `<dl>`. The safest scope
-strategy is to process only `<p>` and `<li>` elements that are descendants of `<main>`
-and not inside a `<dl>`, `<section class="occurrence">`, or any element with
-`data-pagefind-ignore`.
+**Critical behavior for nullable columns:** hyparquet detects nullability from the Parquet schema `repetition_type`. When a column is OPTIONAL (nullable), hyparquet allocates a plain `any[]` array instead of a typed array (e.g., `Int32Array`), and inserts `null` for null values. Individual values in the array are still plain JS `number` for non-null INTEGER rows. There is no `bigint` in this data — DuckDB's `INTEGER` (INT32) and `DOUBLE` are safe as `number`.
 
-**Recommended library: `node-html-parser`** (fast, zero native deps, no JSDOM overhead).
-At 1,364 pages, JSDOM would add meaningful build time; node-html-parser is ~10× faster
-for this use case. It supports querySelector and text manipulation.
+**No BIGINT exposure:** The records.csv schema uses `INTEGER` for year/month/day/elevation_ft and `DOUBLE` for lat/lon. DuckDB writes these as INT32 and DOUBLE respectively. hyparquet produces `number` for both. The `bigint` type only appears if DuckDB writes `BIGINT` (INT64) columns, which does not occur in this repo's data.
 
-If build-time performance proves acceptable, JSDOM is fine and provides a more complete
-DOM API. Decide after profiling with a representative run.
+**No DATE or TIMESTAMP columns:** The CSV schema has separate year/month/day INTEGER columns. No Parquet DATE or TIMESTAMP conversion applies.
 
-### First-occurrence-per-page enforcement
+### The write-type vs. read-type schema asymmetry
 
-Use a `Set<string>` of already-matched terms, initialised fresh for each page call.
-When a term is matched, add it to the set. On subsequent text nodes, skip any term
-already in the set.
+The Zod schema for occurrence records must model what hyparquet produces, not what DuckDB writes. This distinction matters for nullable fields:
 
-### Matching strategy
+```typescript
+// src/types/schemas.ts
 
-Sort terms longest-first before iterating, so multi-word terms ("Reniform spot",
-"Anal angle") are matched before their component words ("Anal", "angle"). Apply a
-case-insensitive whole-word regex for each term.
+import { z } from 'zod';
 
-Pattern per term: `\b(term)\b` with the `i` flag, where `term` is regex-escaped.
-"Whole word" is needed to avoid matching "larvae" when the term is "larva". Note that
-entomological terms often have plural forms that differ (larva/larvae, pupa/pupae) —
-matching only the exact term (singular) is fine for a first pass; stemming can be added
-later if needed.
+// What hyparquet produces when reading records.parquet
+// All optional/nullable fields use z.nullable() to match hyparquet's null values
+export const OccurrenceRecordSchema = z.object({
+  species_slug:  z.string(),
+  record_type:   z.string().nullable(),
+  latitude:      z.number(),
+  longitude:     z.number(),
+  state:         z.string().nullable(),
+  county:        z.string().nullable(),
+  locality:      z.string().nullable(),
+  elevation_ft:  z.number().int().nullable(),  // INTEGER → number (nullable → null, not undefined)
+  year:          z.number().int().nullable(),
+  month:         z.number().int().nullable(),
+  day:           z.number().int().nullable(),
+  collector:     z.string().nullable(),
+  collection:    z.string().nullable(),
+  notes:         z.string().nullable(),
+});
 
-Do not use a single giant alternation regex across all 149 terms — it becomes
-unmaintainable. Instead, iterate terms in longest-first order and apply each regex to
-the current text content.
-
-### Pseudo-code
-
-```js
-function applyGlossaryTerms(html, glossaryTerms) {
-  const root = parse(html);  // node-html-parser
-  const seen = new Set();
-
-  // Process only text-bearing elements in <main>, not in <dl> or data-pagefind-ignore
-  const paragraphs = root.querySelectorAll('main p, main li, main h2, main h3');
-
-  // Sort terms longest-first for multi-word priority
-  const sortedTerms = [...glossaryTerms.values()].sort(
-    (a, b) => b.term.length - a.term.length
-  );
-
-  for (const el of paragraphs) {
-    // Skip if inside a <dl> (taxonomy block) or marked pagefind-ignore
-    if (el.closest('dl') || el.closest('[data-pagefind-ignore]')) continue;
-
-    for (const { term, definition, imageUrl } of sortedTerms) {
-      if (seen.has(term.toLowerCase())) continue;
-      const pattern = new RegExp(`\\b(${escapeRegex(term)})\\b`, 'i');
-      const text = el.innerHTML;
-      if (pattern.test(text)) {
-        el.innerHTML = text.replace(pattern, (match) => {
-          seen.add(term.toLowerCase());
-          const attrs = [
-            `class="glossary-term"`,
-            `data-definition="${escapeHtml(definition)}"`,
-            imageUrl ? `data-image-url="${imageUrl}"` : '',
-          ].filter(Boolean).join(' ');
-          return `<abbr ${attrs}>${match}</abbr>`;
-        });
-        // Only replace first occurrence globally; move to next term after match
-      }
-    }
-  }
-
-  return root.toString();
-}
+export type OccurrenceRecord = z.infer<typeof OccurrenceRecordSchema>;
 ```
 
-Note: `el.innerHTML` replacement using `String.replace` with a regex will replace only
-the first match because the regex has no `g` flag. This enforces first-occurrence-per-
-element. The `seen` Set enforces first-occurrence-per-page across elements.
+**Do not use `z.optional()` for nullable Parquet fields.** hyparquet writes `null`, not `undefined`. `z.nullable()` is the correct choice. The existing `parquet-cache.ts` code already checks `r.elevation_ft < N` (null < N is false), which is consistent with null values being present.
+
+### For CSV input validation (build-time)
+
+CSV rows from csv-parse arrive as `Record<string, string>` — all values are strings. The CSV schema is distinct from the hyparquet output schema:
+
+```typescript
+// CSV row schema: all fields are strings (csv-parse returns strings)
+export const CsvRecordRowSchema = z.object({
+  species_slug:  z.string().min(1),
+  record_type:   z.string(),
+  latitude:      z.string().regex(/^-?\d+\.?\d*$/),
+  longitude:     z.string().regex(/^-?\d+\.?\d*$/),
+  // ... etc
+});
+```
+
+The CSV schemas are build-side only — they do not need to be imported by browser components.
 
 ---
 
-## 5. Tooltip Content Embedding Strategy
+## Question 4: Build-Order and Dependency Graph Changes
 
-**Embed tooltip content in `data-*` attributes on the `<abbr>` element.**
-
-| Approach | Assessment |
-|----------|------------|
-| `data-definition` + `data-image-url` on `<abbr>` | Recommended. All content baked into HTML at build time. No JS fetch. Works with no-JS (see degradation below). Pagefind ignores attributes. |
-| Inline `<template>` sibling element | Heavier DOM; tooltip JS must navigate siblings. More markup per term. |
-| Separate JSON fetch at runtime | Requires a network request per page load. Defeats the static-site model. Unnecessary — glossary has only 149 terms at ~50 KB total. |
-| Embedded JSON `<script>` block per page | Single fetch per page. Adds ~50 KB to every species page. Wasteful when only a handful of terms appear per page. |
-
-**`data-definition` + `data-image-url` is the correct choice.** The definition strings
-are prose (~50–200 chars each). The image URL is a CDN URL constructed at build time
-using the same `CDN_BASE_URL` pattern already in use. No additional data needs to be
-available at runtime.
-
-### CDN image URL construction
-
-Glossary images live at `{CDN_BASE_URL}/glossary/{filename}`. The URL with Optimizer
-parameters matches the existing glossary template:
+### Current build sequence
 
 ```
-https://pnwmoths.b-cdn.net/glossary/{filename}?width=188&height=225&crop_gravity=north
+build:data → build:eleventy → build:copy-parquet → build:copy-images
+           → build:species-states → build:pagefind → build:validate-links
+           → build:check-weight
 ```
 
-`filename` must be URL-encoded (`encodeURIComponent`). The `urlencode` Nunjucks filter
-already handles this in the glossary template; the transform must do the same in JS.
+### After v3.0: typecheck steps
 
-### HTML attribute escaping
+Typecheck is orthogonal to the data pipeline — it validates source code types, not data. It should run as a **separate step that does not block the data pipeline** in development but **blocks CI**.
 
-`definition` text contains commas, apostrophes, and double-quoted examples (e.g., the
-"head" end). Embed definitions in double-quoted attributes and HTML-entity-escape
-internal double quotes: `"` → `&quot;`. A minimal `escapeHtml` function:
-
-```js
-function escapeHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
 ```
+npm run typecheck          ← new: tsc --noEmit (both tsconfigs, all files)
+npm run build:data         ← as before, but now .ts files
+npm run build:eleventy     ← as before
+npm run build:copy-parquet ← as before
+npm run build:copy-images  ← as before
+npm run build:species-states ← as before
+npm run build:pagefind     ← as before
+npm run build:validate-links ← as before
+npm run build:check-weight ← as before
+```
+
+The `typecheck` script does NOT join `npm run build` for the main production build. Rationale: `tsc --noEmit` with a large project can add 5–15 seconds to the build. The data pipeline doesn't depend on type correctness to produce correct output. Instead, typecheck is a CI gate in `.github/workflows/pr-check.yml` added as a separate step before `npm run build:data`.
+
+For `npm run build`, optionally add typecheck as a prefix:
+```
+"build": "npm run typecheck && npm run build:data && ..."
+```
+This is a policy choice — document which approach is chosen in the roadmap.
+
+### Parquet verification as a separate script
+
+Add `npm run build:verify-parquet` that reads back a sample of Parquet files and validates them against the schema. This runs after `build:data` in both CI and local builds:
+
+```
+"build:verify-parquet": "node scripts/verify-parquet.ts"
+"build": "npm run build:data && npm run build:verify-parquet && npm run build:eleventy && ..."
+```
+
+Alternatively, embed the verification inside `build-data.ts` as a post-COPY step. Inline is simpler; a separate script is independently runnable for debugging. Recommend inline for the initial implementation, promoted to a separate script if it grows complex.
 
 ---
 
-## 6. Graceful No-JS Degradation
-
-`<abbr>` is a semantic HTML element with no interactive behaviour by default. In a
-no-JS environment it renders as underlined text (or with a dotted underline per browser
-default). The native `title` attribute on `<abbr>` provides a browser-rendered tooltip
-on hover (text only, no image) without any JavaScript:
-
-```html
-<abbr class="glossary-term"
-      data-definition="..."
-      data-image-url="..."
-      title="...short definition...">Larva</abbr>
-```
-
-Set `title` to the first sentence of the definition (up to ~80 chars) truncated at a
-word boundary. This gives meaningful no-JS behaviour. The JS component (a Lit element
-or plain custom event handler) replaces the `title` tooltip with the rich popover.
-
-This matches the existing no-JS degradation model: the species page's taxonomy, prose,
-and photos are visible without JS; only interactive components (map, chart, slideshow)
-require it.
-
----
-
-## 7. Pagefind Compatibility
-
-Pagefind indexes text content of HTML elements. `<abbr>` is inline and its text content
-("Larva") flows naturally into the surrounding paragraph text. Pagefind indexes this
-correctly — the term word is still present in the prose, just wrapped in `<abbr>`.
-
-`data-*` attributes are not indexed by Pagefind. The definition text in
-`data-definition` is not indexed (which is correct — the definition belongs to the
-glossary page, not the species page).
-
-No `data-pagefind-ignore` is needed on `<abbr>` elements. Adding it would exclude the
-term word from the species page index, which is wrong — "larva" should be searchable.
-
-If Pagefind produces redundant excerpts that include the `<abbr>` markup visually, the
-CSS for `.glossary-term` in search result snippets can be set to display normally.
-
----
-
-## 8. File Inventory: New vs Modified
+## Question 5: New Files, Modified Files, and Directory Layout
 
 ### New files
 
 | File | Purpose |
 |------|---------|
-| `src/_lib/glossary-transform.js` | `applyGlossaryTerms(html, termMap)` pure function + helpers |
-| `src/_lib/glossary-transform.test.js` | Unit tests for the transform function |
-| `src/styles/glossary-terms.css` | CSS for `.glossary-term` underline style and tooltip popover |
-| `src/components/glossary-tooltip.js` | JS (Lit or plain) for the rich tooltip popover |
+| `src/types/schemas.ts` | Zod schemas and derived TS types for all data contracts |
+| `src/types/index.ts` | Re-exports from schemas.ts |
+| `tsconfig.json` | Root tsconfig: `references` to node + browser configs; used by `tsc --noEmit` |
+| `tsconfig.node.json` | Node 24 target: `module: "nodenext"`, `moduleResolution: "nodenext"`, `rewriteRelativeImportExtensions: true`, `erasableSyntaxOnly: true`, covers `scripts/`, `src/_data/`, `src/_lib/`, `eleventy.config.ts`, `*.test.ts` |
+| `tsconfig.browser.json` | Vite/browser target: `module: "ESNext"`, `moduleResolution: "bundler"`, `lib: ["ES2022","DOM","DOM.Iterable"]`, `isolatedModules: true`, covers `src/components/` |
+| `scripts/verify-parquet.ts` | (optional) Standalone Parquet round-trip verifier; reads sample files, validates against OccurrenceRecordSchema |
 
 ### Modified files
 
 | File | Change |
 |------|--------|
-| `eleventy.config.js` | `async` on export function; `loadGlossaryTerms()` call; `addTransform("glossary-terms", ...)` |
-| `src/_includes/base.njk` | Add `<link rel="stylesheet" href="/styles/glossary-terms.css">` |
-| `package.json` | Add `node-html-parser` to `dependencies` |
+| `scripts/build-data.js` → `.ts` | Add Zod CSV input validation at Gate 1; add inline Parquet spot-check at Gate 2; add TS types |
+| `scripts/emit-species-states.js` → `.ts` | Add SpeciesStateSchema validation of output before writeFileSync (Gate 3) |
+| `src/_data/species.js` → `.ts` | Add SpeciesRowSchema.array().parse() on DuckDB result rows (Gate 4) |
+| `src/_data/taxon.js` → `.ts` | Add TaxonFamilySchema validation (Gate 4) |
+| `src/_data/images.js` → `.ts` | Add SpeciesImageSchema validation (Gate 4) |
+| `src/_data/glossary.js` → `.ts` | Add GlossaryRowSchema validation (Gate 4) |
+| `src/_data/speciesPhotos.js` → `.ts` | Add SpeciesPhotosSchema validation (Gate 4) |
+| `src/_lib/glossary-transform.js` → `.ts` | Type the termMap parameter and return types |
+| `src/components/parquet-cache.js` → `.ts` | Type records array as `OccurrenceRecord[]`; add dev-only Gate 5 validation |
+| `src/components/pnwm-occurrence-map.js` → `.ts` | Type Lit properties |
+| `src/components/pnwm-phenology-chart.js` → `.ts` | Type records array |
+| `src/components/pnwm-filter-bar.js` → `.ts` | Type filter state |
+| `src/components/pnwm-image-slideshow.js` → `.ts` | Type image data |
+| `src/components/pnwm-taxon-browser.js` → `.ts` | Type taxon tree |
+| `src/components/pnwm-occurrence-popup.js` → `.ts` | Type occurrence record |
+| `src/components/glossary-tooltip.js` → `.ts` | Type event handlers |
+| `eleventy.config.js` → `.ts` | Type the config function; keep glossary loading pattern |
+| `eleventy.config.test.js` → `.ts` | Migrate tests |
+| `package.json` | Add `typescript`, `zod` deps; add `"typecheck"` and `"build:verify-parquet"` scripts; update test glob to `**/*.test.ts` |
+| `.github/workflows/pr-check.yml` | Add `npm run typecheck` step before `npm run build:data` |
+| `.github/workflows/deploy.yml` | Add `npm run typecheck` step before build |
 
-### Files with no changes
-
-| File | Reason |
-|------|---------|
-| `src/_data/glossary.js` | Still serves the grouped-by-letter data for the glossary index page; not modified |
-| `src/species/species.njk` | Prose rendering via `{% renderFile %}` is unchanged; transform runs post-render |
-| `data/glossary.csv` | Source data unchanged; already validated |
-| `scripts/build-data.js` | Already validates `image_filename`; no changes needed |
-
----
-
-## 9. Data Flow: glossary.csv → transform → HTML output
+### Directory layout after migration
 
 ```
-data/glossary.csv
-  └─ scripts/build-data.js (validation: safe filenames, required columns)
-       └─ [build:data succeeds]
-            └─ eleventy.config.js startup
-                 └─ loadGlossaryTerms() reads glossary.csv via csv-parse
-                      └─ Map<lowerTerm, { term, definition, imageUrl }>
-                           └─ glossaryTerms (closure over transform fn)
-
-Template rendering (species/species.njk):
-  {% renderFile src/content/species/{slug}.md %}
-    → markdown-it parses prose → <p>...</p> HTML fragment
-    → injected into species.njk body
-  base.njk layout wraps everything
-  → full page HTML string (content)
-       └─ addTransform("glossary-terms", fn):
-            ├─ guard: .html output only
-            ├─ guard: species/species.njk input only
-            ├─ node-html-parser: parse content
-            ├─ for each <p>, <li> in <main> not in <dl>:
-            │    for each term (longest-first):
-            │      if not seen: regex match → replace with <abbr data-definition="..." data-image-url="...">
-            └─ root.toString() → final HTML written to _site/species/{slug}/index.html
-
-pagefind --site _site
-  └─ indexes <abbr> text content normally (attributes ignored)
+pnwmoths/
+├── src/
+│   ├── types/                     ← NEW: shared schema module
+│   │   ├── schemas.ts             ← Zod schemas + z.infer<> types
+│   │   └── index.ts               ← re-exports
+│   ├── _data/                     ← .js → .ts (Eleventy data cascade, Node-executed)
+│   ├── _lib/                      ← .js → .ts (build-side lib)
+│   └── components/                ← .js → .ts (Vite-bundled browser components)
+├── scripts/                       ← .js → .ts (Node-executed build scripts)
+├── tsconfig.json                  ← NEW: root, references node + browser
+├── tsconfig.node.json             ← NEW: Node 24 target
+├── tsconfig.browser.json          ← NEW: Vite/browser target
+└── package.json                   ← add typescript, zod; add typecheck script
 ```
 
 ---
 
-## 10. Pitfalls
+## Question 6: Recommended Build Order for the Migration
 
-**Double-replacement.** If `innerHTML` is mutated and then the outer loop re-processes
-the same element, a term already wrapped in `<abbr>` could be matched again. Prevent
-this by tracking `seen` terms in the Set before replacing, and using the regex without
-the `g` flag (replaces first match only per element). After replacing in an element,
-mark the term seen so it is skipped in subsequent elements.
+### Migration phases ordered by integration risk
 
-**Regex matching inside HTML tags.** A naive regex on `innerHTML` can match text inside
-attribute values or tag names (e.g., the term "Costa" in `class="costa-strip"`). Use
-a negative-lookahead to avoid matching inside tags:
-`\b(term)\b(?![^<]*>)` — this is a common pattern and sufficient for simple prose HTML.
-For production robustness, match only on text nodes via the DOM library rather than raw
-HTML string manipulation.
+**Phase ordering rationale:** Start with zero-runtime-impact changes (tsconfigs, schema module in isolation), then migrate the producer side (build scripts) before the consumer side (components), because the schema types flow producer→consumer. Eleventy data files are the middle layer and should come after scripts but before components, since they consume from scripts and feed into templates.
 
-**Terms with special regex characters.** Terms like "1A+2A" and "M1" contain `+` and
-digits that are safe in regex, but the `+` needs escaping. `escapeRegex` must cover:
-`. * + ? ^ $ { } [ ] | ( ) \`.
+```
+Phase A: Scaffolding (zero risk)
+  1. Install typescript + zod (devDependencies)
+  2. Create tsconfig.json (root with references)
+  3. Create tsconfig.node.json
+  4. Create tsconfig.browser.json
+  5. Create src/types/schemas.ts with all schemas defined
+  6. Run tsc --noEmit — expect type errors; this is the baseline
+  7. Add "typecheck" script; CI passes (typecheck not yet in CI gate)
 
-**Multi-word terms vs. their component words.** "Anal angle" must match before "Anal"
-and "angle" individually. Longest-first sort handles this, but requires that the loop
-processes terms in that sorted order for each element, not just globally.
+Phase B: Schema module verification
+  8. src/types/schemas.ts is importable from a .ts test file under scripts/
+  9. src/types/schemas.ts is importable from a .ts test file in src/components/
+  10. Confirm both import paths resolve correctly: ../src/types/index.ts (scripts)
+      and ../types/index.ts (components)
 
-**Prose files with no glossary terms.** The transform must return content unchanged
-efficiently (no DOM parse if no terms match). Consider a fast pre-check: if none of the
-~149 term strings appear anywhere in `content`, skip the DOM parse entirely.
+Phase C: Build scripts migration (scripts/ → .ts)
+  11. Migrate scripts/build-data.js → .ts; add Gate 1 + Gate 2 validation
+  12. Migrate scripts/emit-species-states.js → .ts; add Gate 3 validation
+  13. Migrate remaining scripts/ files .js → .ts (copy-parquet, copy-images, etc.)
+  14. Migrate scripts/lib/*.js → .ts
+  15. Run node --test to confirm all scripts tests pass
+  16. Run npm run build:data to confirm build works
 
-**eleventy.config.js becoming async.** The current export is synchronous. Adding
-`async` is supported in Eleventy 3.x but must be tested. If `loadGlossaryTerms` fails
-(e.g., missing CSV), Eleventy will surface the async rejection as a build error — which
-is correct fail-fast behaviour.
+Phase D: Eleventy data files migration (src/_data/ → .ts)
+  17. Migrate src/_data/species.js → .ts; add Gate 4 validation
+  18. Migrate src/_data/taxon.js → .ts; add Gate 4 validation
+  19. Migrate remaining src/_data/*.js → .ts
+  20. Run npm run build:eleventy to confirm Eleventy still builds
 
-**Tooltip popover vs. Pagefind excerpt.** Pagefind generates text excerpts for search
-results. If a matching term appears in an excerpt, Pagefind will render the `<abbr>`
-element markup. This is safe — `<abbr>` renders as plain underlined text in Pagefind
-UI's excerpt display — but verify the output looks acceptable.
+Phase E: Build-side lib migration (src/_lib/ → .ts)
+  21. Migrate src/_lib/glossary-transform.js → .ts
+  22. Migrate eleventy.config.js → .ts (imports from src/_lib/)
+  23. Run full build to confirm no regressions
 
-**`node-html-parser` vs JSDOM performance.** At 1,364 pages, even 10 ms per page adds
-~14 seconds to the build. Benchmark before committing to a library. If performance is
-unacceptable, fall back to a careful regex-on-text-nodes approach without a full DOM
-parse.
+Phase F: Browser components migration (src/components/ → .ts)
+  24. Migrate parquet-cache.js → .ts first (most imported, lowest component complexity)
+  25. Add Gate 5 dev-only validation to parquet-cache.ts
+  26. Migrate remaining src/components/*.js → .ts one by one
+  27. Run Vite build to confirm component bundle builds
+  28. Run full build + verify _site output is equivalent
+
+Phase G: CI gate
+  29. Add typecheck step to pr-check.yml and deploy.yml
+  30. tsc --noEmit must pass with zero errors before merge
+```
+
+### Key dependency invariant
+
+`src/types/schemas.ts` must be written before any migration in Phase C–F. Once schemas.ts exists, each migration step can immediately import and use schemas rather than waiting for a later phase. Do not defer schema definitions to match each migration phase.
+
+---
+
+## tsconfig Architecture: Two Targets, One Root
+
+### tsconfig.json (root — drives `tsc --noEmit`)
+
+```json
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.browser.json" }
+  ]
+}
+```
+
+### tsconfig.node.json
+
+```json
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "composite": true,
+    "tsBuildInfoFile": ".tsbuildinfo/node"
+  },
+  "include": [
+    "scripts/**/*.ts",
+    "src/_data/**/*.ts",
+    "src/_lib/**/*.ts",
+    "src/types/**/*.ts",
+    "eleventy.config.ts",
+    "**/*.test.ts"
+  ]
+}
+```
+
+### tsconfig.browser.json
+
+```json
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "types": ["vite/client"],
+    "composite": true,
+    "tsBuildInfoFile": ".tsbuildinfo/browser"
+  },
+  "include": [
+    "src/components/**/*.ts",
+    "src/types/**/*.ts"
+  ]
+}
+```
+
+**Why two configs:**
+- `module: "nodenext"` requires explicit `.ts` extensions and validates ESM semantics per Node's resolver. Using it for browser code would flag missing `.ts` extensions on npm package imports (e.g., `import { LitElement } from 'lit'` has no `.ts` extension — correct for node_modules, invalid under nodenext rules for relative imports).
+- `module: "ESNext"` with `moduleResolution: "bundler"` is the correct Vite target — it understands Vite's enhanced module resolution including bare specifiers without extension enforcement on relative imports.
+- `src/types/` appears in both configs' `include` arrays. This means the shared schema module is type-checked under both targets. If it accidentally imports a Node API or DOM API, tsc will catch it under the wrong tsconfig.
+
+**`isolatedModules: true` for browser target** is required because Vite's Oxc transpiler processes each file in isolation without type information. This means `const enum` and `namespace` with runtime values are forbidden in browser code (same restriction as Node's type-stripping).
+
+---
+
+## Zod Integration: Version and Import Path
+
+Use **Zod v4** (`import { z } from 'zod'`) with the standard import path. Do not use `import { z } from 'zod/v4'` — the versioned subpath triggers a Vite bundler resolution error (missing `./v4/core` specifier, Issue #4907). The standard `'zod'` import resolves to Zod v4 when zod@4.x is installed.
+
+Zod v4 is browser-compatible ESM with zero external dependencies. Bundle impact with Vite tree-shaking: approximately 3–7 KB gzipped for the schemas used in browser components (Zod Mini achieves 1.9 KB but requires a different API surface — defer to a later optimization pass). For a static site where the Parquet file fetch is the dominant load, this is negligible.
+
+**TypeScript version required:** Zod v4 benefits from TypeScript 5.5+. Node 24's bundled type-stripping is compatible with TypeScript 5.8+ syntax. Install TypeScript 5.8.x or later as a devDependency.
+
+---
+
+## Anti-Patterns to Avoid
+
+### Anti-Pattern 1: Using `import type` aliases in tsconfig `paths` for cross-boundary imports
+
+Node 24 ignores `compilerOptions.paths`. Any `@types/*` alias that resolves via tsconfig paths will cause a runtime `ERR_MODULE_NOT_FOUND` when Node executes `scripts/*.ts`. Use only relative `.ts` imports for Node-executed files.
+
+**Do not:**
+```typescript
+// tsconfig.node.json paths: { "@types/*": ["./src/types/*"] }
+import { OccurrenceRecord } from '@types/schemas.ts';  // fails at runtime
+```
+
+**Do:**
+```typescript
+import { OccurrenceRecord } from '../src/types/schemas.ts';  // works
+```
+
+### Anti-Pattern 2: Putting environment-specific code in src/types/schemas.ts
+
+The schema module is imported by both Node and browser. Do not import `node:fs`, `node:path`, DuckDB, or any DOM API from `src/types/`. It must be pure TypeScript types and Zod schemas with no side effects. If a schema utility needs Node or DOM access, it belongs in the relevant target directory, not in `src/types/`.
+
+### Anti-Pattern 3: Using z.optional() for nullable Parquet fields
+
+hyparquet writes `null` for NULL Parquet values, not `undefined`. `z.optional()` accepts `undefined` but rejects `null`. Use `z.nullable()`. Misuse will cause parse failures on every record with a null elevation or month field.
+
+### Anti-Pattern 4: Running tsc --noEmit inside npm run build for the main pipeline
+
+`tsc --noEmit` on a full repo with strict settings takes 5–15 seconds. The build pipeline (eleventy + Vite) runs on CI on every push. Adding typecheck to the hot path of `npm run build` punishes every local development iteration. Keep typecheck as a separate `npm run typecheck` script that is invoked in CI and in `npm run build` only if the latency is acceptable.
+
+### Anti-Pattern 5: Validating Parquet rows in production browser builds
+
+Zod parse calls in the browser add CPU cost on the first render of species pages. Production deployments must not validate every Parquet record. Gate all client-side validation behind `if (import.meta.env.DEV)`. Vite's dead-code elimination removes these branches from the production bundle.
+
+---
+
+## Scaling Considerations
+
+This is a build-time static site with no server. Scaling concerns are build performance and maintainability, not user traffic.
+
+| Scale | Architecture Adjustments |
+|-------|--------------------------|
+| Current (1,364 species, 85,933 records) | Single tsc --noEmit pass on full repo; inline Parquet verification in build-data.ts |
+| 5,000+ species | tsc --noEmit with `--incremental` flag using `.tsbuildinfo` files; verify-parquet as separate script with sampling |
+| Schema changes | Any change to OccurrenceRecordSchema must be verified against existing Parquet files before deploy — add to CI as a schema drift check |
+
+---
+
+## Integration Points Summary
+
+| Boundary | Integration Point | File(s) | Validation Type |
+|----------|------------------|---------|-----------------|
+| CSV → DuckDB | validateCsv() + Zod CsvRowSchema | `scripts/build-data.ts` | Build-time gate |
+| DuckDB COPY → Parquet | Inline spot-check after COPY | `scripts/build-data.ts` | Build-time gate |
+| DuckDB query → JSON | Zod schema on JSON.stringify input | `scripts/emit-species-states.ts` | Build-time gate |
+| DuckDB query → Eleventy data | Zod schema on getRowObjectsJS() | `src/_data/*.ts` | Build-time gate |
+| Parquet → Browser JS | Zod schema on parquetReadObjects() result | `src/components/parquet-cache.ts` | Dev-only check |
+| JSON fetch → Browser JS | Zod schema on fetch() JSON | `src/components/*.ts` | Dev-only check |
+| Node src/types/ ← scripts | Relative `.ts` import, no aliases | `scripts/*.ts` | Static type-check |
+| Node src/types/ ← eleventy config | Relative `.ts` import | `eleventy.config.ts` | Static type-check |
+| Vite src/types/ ← components | Relative `.ts` import | `src/components/*.ts` | Static type-check + bundle |
+
+---
+
+## Sources
+
+- [Node.js v24 TypeScript documentation](https://nodejs.org/docs/latest-v24.x/api/typescript.html) — type-stripping requirements, tsconfig restrictions, extension requirements
+- [Vite Features: TypeScript](https://vite.dev/guide/features) — Oxc transpilation, isolatedModules requirement
+- hyparquet type definitions: `/node_modules/hyparquet/src/types.d.ts`, `/node_modules/hyparquet/src/convert.js` — nullable column handling, DecodedArray types
+- [Zod v4 release notes](https://zod.dev/v4) — ESM compatibility, bundle size
+- [Zod v4 + Vite bundling issue](https://github.com/colinhacks/zod/issues/4907) — use `'zod'` not `'zod/v4'` import path
+- [Vite multiple tsconfig discussion](https://github.com/vitejs/vite/discussions/20149) — rationale for split configs
+
+---
+*Architecture research for: TypeScript + shared validation layer, pnwmoths v3.0*
+*Researched: 2026-06-09*
