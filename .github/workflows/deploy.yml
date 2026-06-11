@@ -24,6 +24,10 @@ jobs:
       - run: npm ci
       - name: Typecheck
         run: npm run typecheck
+      - name: Test
+        run: npm test
+      - name: TS-only invariant guard
+        run: bash scripts/check-ts-only.sh
       - uses: ./.github/actions/install-lychee
         with:
           version: '0.23.0'
@@ -35,6 +39,8 @@ jobs:
           restore-keys: lychee-cache-
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - run: npm run build:data && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:check-weight
+      - name: Verify Parquet schema
+        run: npm run verify:parquet
       - name: Check links (non-blocking)
         run: npm run build:validate-links
         continue-on-error: true
