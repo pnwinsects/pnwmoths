@@ -626,15 +626,20 @@ Plans:
 **Depends on**: Phase 38 (v3.0 complete)
 **Requirements**: KEY-01, KEY-02, KEY-03, KEY-04, KEY-05, MATCH-01, MATCH-02, MATCH-03 (MATCH-* pulled into this phase per 39-CONTEXT.md D-02)
 **Success Criteria** (what must be TRUE — see 39-CONTEXT.md D-04/D-06 which override SC1/SC3 wording below):
+
   1. Running `npm run build` produces `data/key-matrix.json` containing `characters` (237 entries with the full `category / subcategory / question / state` hierarchy), `species` (matched-only, slug + nav image), and `matrix` (237 per-character-state base64 `Uint8Array` bitsets over matched species — per D-04, NOT 237 × N binary rows)
   2. `npm run build:key` completes in under 5 seconds; the build step is wired into the full `npm run build` sequence after `build:data` and before `build:eleventy`
   3. A Zod schema validates the artifact shape at build time; a post-build check asserts `_site/key-matrix.json` stays within a 50 KB gzip byte budget (per D-06, gzip transfer size — not 100 KB raw); a bloated artifact or schema violation fails the build
   4. `data/key-coverage-report.json` is emitted listing all unmatched key binomials, and new tests cover CSV parse, whitespace normalization (double-space binomials), and matrix shape
 
 **Plans**: 2 plans
-
 Plans:
+**Wave 1**
+
 - [ ] 39-01-PLAN.md — Data pipeline: commit source CSV + synonyms, Zod schemas, slug resolution + DuckDB nav join + bitset emit, load-time guard, tests (KEY-01/02/03, MATCH-01/02/03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 39-02-PLAN.md — Build wiring: post-Eleventy copy, gzip ≤ 50 KB byte-budget gate, package.json + both CI workflows, end-to-end verification (KEY-04/05, MATCH-03)
 
 ### Phase 40: Filter Logic TDD Contract
@@ -643,6 +648,7 @@ Plans:
 **Depends on**: Phase 39
 **Requirements**: MATCH-01, MATCH-02, MATCH-03, IDENT-04
 **Success Criteria** (what must be TRUE):
+
   1. `build-key.ts` resolves all 1,228 key binomials to site slugs (direct lowercase-hyphen + `data/species-synonyms.csv` fallback), tolerating double-space and trailing-space whitespace anomalies; the initial Grammia→Apantesis synonym entries are committed to `data/species-synonyms.csv`
   2. `data/key-coverage-report.json` lists every unmatched binomial; matched species include their CDN nav thumbnail path for use in the results grid; unmatched species are excluded from the emitted matrix
   3. `src/_lib/key-filter.ts` exports `buildQuestionGroups()` and `computeMatching()` as pure functions; `src/_lib/key-filter.test.ts` passes on these named TDD cases: single-question single-state narrows, single-question two-states widens (OR), two-question AND narrows, and a species with `0,0` on a question pair is NOT eliminated (the "0 = unscored" correctness invariant)
@@ -656,6 +662,7 @@ Plans:
 **Depends on**: Phase 40
 **Requirements**: IDENT-01, IDENT-02, IDENT-03, IDENT-05, IDENT-06
 **Success Criteria** (what must be TRUE):
+
   1. Navigating to `/identify/` in a browser (JS on) renders a page with 8 collapsible category sections (default-collapsed); opening a category reveals questions and their state checkboxes; selecting and deselecting states is visually reflected in real time
   2. The site navigation header includes a link to `/identify/`
   3. A "Clear all" button is visible when any character state is selected; clicking it deselects every state and the button disappears
@@ -670,6 +677,7 @@ Plans:
 **Depends on**: Phase 41
 **Requirements**: GRID-01, GRID-02, GRID-03, GRID-04
 **Success Criteria** (what must be TRUE):
+
   1. Selecting any character state updates a "N species match" count above the grid in real time; with no states selected the count reads "Showing all N species"
   2. The results grid renders CDN thumbnail cards (photo + binomial + common name, each linking to the species page) with `loading="lazy"`; selecting and deselecting states updates the grid without a full page reload
   3. Species with no nav image show a gray placeholder block consistent with the v2.1 similar-species row; no broken `<img>` tags appear in the grid
@@ -684,6 +692,7 @@ Plans:
 **Depends on**: Phase 42
 **Requirements**: CIMG-01, CIMG-02, CIMG-03
 **Success Criteria** (what must be TRUE):
+
   1. Running `npm run key:upload-images DRY_RUN=1` prints a pre-flight list of images to upload without making any API calls; a full run uploads character images to bunny.net under `key-images/` idempotently — rerunning with all images already uploaded produces zero new API calls
   2. A committed `data/key-character-images.csv` (initially sparse or empty) maps character IDs to CDN image filenames; the build warns on any `char_id` out of range and soft-skips if the file is absent
   3. For each character state in the filter panel that has a mapped `image_filename`, a `<details>/<summary>` expander appears beside the question label; opening it shows the CDN image; character states without a mapping render no expander and the page is fully functional

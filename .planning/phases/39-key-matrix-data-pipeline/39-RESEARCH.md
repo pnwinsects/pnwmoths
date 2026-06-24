@@ -57,7 +57,7 @@ Phase 39 converts the legacy `may 6 2015 key.csv` (237 character-state rows × 1
 
 The implementation mirrors existing patterns precisely: `scripts/build-key.ts` follows the shape of `emit-species-states.ts` (JSON emit) and `build-data.ts` (DuckDB query + `validateCsv` reuse). The artifact uses per-character-state base64-encoded `Uint8Array` bitsets — confirmed at 36.7 KB gzip (well inside the 50 KB budget). Slug resolution uses the same `from_binomial → to_species_slug` lookup that `ingest-photos.ts` already uses against `data/species-synonyms.csv`. The post-Eleventy copy (`copy-key-matrix.ts`) is a three-line clone of `copy-parquet.ts`. The byte-budget check uses Node built-in `gzipSync` (no new dependency).
 
-The two largest concrete tasks are: (1) copying and committing `data/key-characters.csv` from `~/Downloads/`, and (2) adding 16 confirmed Grammia→Apantesis synonym entries to `data/species-synonyms.csv` (one Grammia species, `Grammia  blakei`, has a double-space in the key — the synonym `Grammia blakei → apantesis-blakei` handles it after whitespace normalization).
+The two largest concrete tasks are: (1) copying and committing `data/key-characters.csv` from `~/Downloads/`, and (2) adding 17 confirmed Grammia→Apantesis synonym entries to `data/species-synonyms.csv` (one Grammia species, `Grammia  blakei`, has a double-space in the key — its synonym row uses the normalized form `Grammia blakei → apantesis-blakei`, like the other 16).
 
 **Primary recommendation:** Implement `build-key.ts` as a four-phase script: (1) `validateCsv` pre-flight on `data/key-characters.csv`; (2) csv-parse header into species list + rows into character label + binary values; (3) slug resolution loop building the `species[]` array and `matrix[]` bitsets simultaneously; (4) DuckDB query for nav images and final JSON emit. No new npm packages required.
 
@@ -127,7 +127,7 @@ data/
 ├── key-characters.csv       # NEW — committed copy of Lucid export (629 KB)
 ├── key-matrix.json          # NEW — committed artifact (145 KB raw, 37 KB gzip)
 ├── key-coverage-report.json # NEW — committed coverage report (~53 unmatched)
-└── species-synonyms.csv     # MODIFIED — add 16 Grammia→Apantesis entries
+└── species-synonyms.csv     # MODIFIED — add 17 Grammia→Apantesis entries
 
 scripts/
 ├── build-key.ts             # NEW — main build script (mirrors emit-species-states.ts)
@@ -413,7 +413,7 @@ interface KeyCoverageReport {
 
 ### Pattern 12: Initial species-synonyms.csv Entries (Grammia → Apantesis)
 
-16 confirmed Grammia→Apantesis mappings where the Apantesis slug exists in `data/species.csv` [VERIFIED: direct comparison of key.csv header vs site species.csv]:
+17 confirmed Grammia→Apantesis mappings where the Apantesis slug exists in `data/species.csv` [VERIFIED: direct comparison of key.csv header vs site species.csv]. All 17 Grammia binomials need an explicit synonym row — direct lowercase-hyphen resolution (`grammia-*`) matches none of them:
 
 ```csv
 from_binomial,to_species_slug
@@ -644,16 +644,18 @@ import { KeyMatrixSchema } from '../src/types/schemas.ts';
 - ROADMAP Phase 39 SC3 "100 KB byte budget (raw)": overridden by CONTEXT.md D-06 (50 KB gzip).
 - ARCHITECTURE.md `matrix: number[][]` shape: overridden by SUMMARY.md + CONTEXT.md D-04 (base64 bitsets).
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> All three questions are resolved; the recommendations below are implemented verbatim by the Phase 39 plans (39-01 / 39-02).
 
 1. **`validateCsv` reuse for key-characters.csv**: `validateCsv` in `build-data.ts` calls `parse()` with `{ columns: true }` which works when the first row IS column headers. For `key-characters.csv`, the first row contains species names as values (col 0 is empty, cols 1–1228 are binomials). `validateCsv` with `requiredColumns: []` would still succeed (no required columns to check), but the row count check and UTF-8 check would pass, making it useful for those guards. The returned rows would be keyed by species binomials (bizarre but harmless for a pre-flight check). Alternative: call `validateCsv` only for the UTF-8 + file-exists checks, then do a separate `parse(raw, { columns: false })` for the actual data.
-   - **Recommendation:** Use `validateCsv` for UTF-8 + existence pre-flight with `requiredColumns: []`, then immediately re-parse with `columns: false`. The double-parse is negligible on a 629 KB file.
+   - **RESOLVED:** Use `validateCsv` for UTF-8 + existence pre-flight with `requiredColumns: []`, then immediately re-parse with `columns: false`. The double-parse is negligible on a 629 KB file.
 
 2. **DuckDB SQL injection guard for nav-image query**: Three options — (a) JS-side resolution using a `Map<slug, filename>` built from `SELECT * FROM images`, (b) slug allowlist validation before interpolation, (c) parameterized `IN` clause. Option (a) is simplest (load all images into memory, no interpolation at all).
-   - **Recommendation:** Use option (a) — load all image rows into a `Map<slug, string>` and resolve nav images in TypeScript. The images dataset is small enough.
+   - **RESOLVED:** Use option (a) — load all image rows into a `Map<slug, string>` and resolve nav images in TypeScript. The images dataset is small enough.
 
 3. **`zod/mini` `.parse()` at build time**: `schemas.ts` imports from `zod/mini`. Full Zod's `.parse()` throws on validation failure; `zod/mini`'s `.parse()` also throws. The APIs are compatible for this use case.
-   - **Recommendation:** No special handling needed — `KeyMatrixSchema.parse(artifact)` works in both environments.
+   - **RESOLVED:** No special handling needed — `KeyMatrixSchema.parse(artifact)` works in both environments.
 
 ## Environment Availability
 
@@ -758,14 +760,14 @@ The security surface of this phase is minimal — it is a local build script pro
 ### Secondary (MEDIUM confidence)
 
 - Python measurement of key.csv bitset encoding: 36.7 KB gzip for full artifact with hierarchy + species + matrix (measured in this session using actual source file)
-- Grammia→Apantesis mapping: 16 confirmed entries via direct comparison of key.csv header vs `data/species.csv` (17 Grammia in key; 1 has double-space and normalizes correctly)
+- Grammia→Apantesis mapping: 17 confirmed entries via direct comparison of key.csv header vs `data/species.csv` (17 Grammia in key, all need explicit synonym rows; 1 has a double-space committed in normalized form)
 
 ## Assumptions Log
 
 | # | Claim | Section | Risk if Wrong |
 |---|-------|---------|---------------|
 | A1 | `zod/mini` schemas defined with `z.object()` etc. have a `.parse()` method compatible with the build-time invocation in `build-key.ts` | Standard Stack / Code Examples | If wrong: import full `zod` in build-key.ts and skip `zod/mini` type inference — trivial fix |
-| A2 | The 53 unmatched binomials after adding 16 Grammia→Apantesis synonyms will be ~37 (53 - 16 = 37) | Open Questions | Actual number may differ if some Grammia synonyms already existed or site slugs differ; coverage report will show the truth on first run |
+| A2 | The 53 unmatched binomials after adding 17 Grammia→Apantesis synonyms will be ~36 (53 - 17 = 36) | Open Questions | Actual number may differ if some Grammia synonyms already existed or site slugs differ; coverage report will show the truth on first run |
 
 **All other key claims (CSV structure, slug counts, gzip sizes, script patterns) are VERIFIED from direct file inspection in this session.**
 

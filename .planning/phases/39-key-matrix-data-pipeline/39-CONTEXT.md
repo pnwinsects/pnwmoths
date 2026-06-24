@@ -53,8 +53,9 @@ later v4.0 phase (40–43) depends on.
   Rationale: Phase 39's goal is a *stable data contract*; the artifact's `species` entries
   must carry real slugs + nav images, which is impossible without full slug resolution.
   Splitting matching out would force two phases to both rewrite `key-matrix.json`.
-- **D-03:** Phase 40 shrinks to the **pure filter-logic TDD contract only**
-  (`key-filter.ts` functions, filter schemas, event type) — no data-pipeline work.
+- **D-03 [informational]:** Phase 40 shrinks to the **pure filter-logic TDD contract only**
+  (`key-filter.ts` functions, filter schemas, event type) — no data-pipeline work. (Forward-looking
+  boundary note about Phase 40; not a Phase 39 deliverable — tracked here so the 39/40 split is explicit.)
 - **⚠ ROADMAP edit flag:** ROADMAP Phase 40 SC1/SC2 (slug resolution + coverage report)
   duplicate Phase 39 and should be moved into Phase 39's success criteria. The roadmap and
   research SUMMARY already place this work in Phase 39 / research-Phase-1.
