@@ -2,5 +2,8 @@ timeout = 20
 max_retries = 3
 cache = true
 accept = ["100..=103", "200..=299", "429"]
-exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$"]
+# External reference hosts (BugGuide, Moth Photographers Group) are linked per
+# species from data/species-links.csv (~2000 links). Excluded from validation to
+# keep the link check fast and non-flaky — these third-party hosts rate-limit.
+exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]
