@@ -19,6 +19,13 @@ describe('parseTsv', () => {
     ]);
   });
 
+  it('accepts the bamona site value', () => {
+    const out = parseTsv('abagrotis-apposita\tbamona\thttps://www.butterfliesandmoths.org/species/Abagrotis-apposita\n');
+    assert.deepEqual(out, [
+      { species_slug: 'abagrotis-apposita', site: 'bamona', url: 'https://www.butterfliesandmoths.org/species/Abagrotis-apposita' },
+    ]);
+  });
+
   it('ignores blank trailing lines', () => {
     const out = parseTsv('a-b\tbugguide\thttps://bugguide.net/node/view/1\n\n');
     assert.equal(out.length, 1);

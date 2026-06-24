@@ -1,6 +1,7 @@
-// Eleventy 11ty-data loader for per-species external resource links
-// (BugGuide and Moth Photographers Group), extracted from the legacy reference
-// database into data/species-links.csv by scripts/extract-reference-links.ts.
+// Eleventy 11ty-data loader for per-species external resource links (BugGuide,
+// Moth Photographers Group, and Butterflies and Moths of North America),
+// extracted from the legacy reference database into data/species-links.csv by
+// scripts/extract-reference-links.ts.
 //
 // Returns an object keyed by species slug; consumed by src/species/species.njk
 // as `speciesLinks[sp.slug]` to render the "External resources" section. A
@@ -16,6 +17,7 @@ const CSV_PATH = new URL('../../data/species-links.csv', import.meta.url).pathna
 export interface SpeciesLinks {
   bugguide: string[];
   mpg: string[];
+  bamona: string[];
 }
 
 /**
@@ -40,9 +42,10 @@ export function parseLinksCsv(text: string): Record<string, SpeciesLinks> {
     const slug = line.slice(0, c1);
     const site = line.slice(c1 + 1, c2);
     const url = unquote(line.slice(c2 + 1));
-    const entry = (map[slug] ??= { bugguide: [], mpg: [] });
+    const entry = (map[slug] ??= { bugguide: [], mpg: [], bamona: [] });
     if (site === 'bugguide') entry.bugguide.push(url);
     else if (site === 'mpg') entry.mpg.push(url);
+    else if (site === 'bamona') entry.bamona.push(url);
   }
   return map;
 }

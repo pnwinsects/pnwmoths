@@ -77,7 +77,7 @@ erDiagram
 
     species_links {
         string  species_slug   FK
-        string  site           "bugguide | mpg"
+        string  site           "bugguide | mpg | bamona"
         string  url
     }
 
@@ -97,7 +97,7 @@ erDiagram
 | `records-bad.csv` | varies | Records that failed validation — same schema as `records.csv`. |
 | `images.csv` | ~5 000 | Photo metadata. Images are hosted on the CDN; `filename` is the CDN asset key. |
 | `glossary.csv` | ~150 | Wing-anatomy and taxonomy terms injected into species fact sheets at build time. |
-| `species-links.csv` | ~2 200 | Per-species external links (BugGuide, Moth Photographers Group). Long format: one row per link (`species_slug,site,url`); a species may have several. Extracted from the legacy reference MySQL DB by [`scripts/extract-reference-links.ts`](../scripts/extract-reference-links.ts) (`npm run links:materialize`). |
+| `species-links.csv` | ~2 400 | Per-species external links (BugGuide, Moth Photographers Group, Butterflies and Moths of North America). Long format: one row per link (`species_slug,site,url`); a species may have several. Extracted from the legacy reference MySQL DB by [`scripts/extract-reference-links.ts`](../scripts/extract-reference-links.ts) (`npm run links:materialize`). |
 | `plates.json` | ~50 | Reference plate metadata (legacy moth-guide plates). Width/height used for CDN image sizing. |
 | `parquet/<slug>/records.parquet` | varies | Per-species records, materialized by `scripts/build-data.js` for fast DuckDB queries at build time. |
 

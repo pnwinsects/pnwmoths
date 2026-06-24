@@ -1,9 +1,15 @@
 /**
  * scripts/extract-reference-links.ts
  *
- * Issue #35 (Restore links to other sites): extract per-species BugGuide and
- * Moth Photographers Group (MPG) links from the legacy reference MySQL database
- * and materialize them into data/species-links.csv.
+ * Issue #35 (Restore links to other sites): extract per-species BugGuide, Moth
+ * Photographers Group (MPG), and Butterflies and Moths of North America (BAMONA)
+ * links from the legacy reference MySQL database and materialize them into
+ * data/species-links.csv.
+ *
+ * These three are the only reference sites with broad, still-live per-species
+ * coverage. The legacy DB also holds a long tail of one-off links to mostly
+ * defunct hosts (nearctica.com, silkmoths.bizland.com, cbif.gc.ca, …); those are
+ * intentionally not extracted. See issue #35 for the rationale.
  *
  * The links are NOT structured columns in the reference DB. They are django-cms
  * LinkPlugin rows (cmsplugin_link) embedded in each species factsheet page,
@@ -59,7 +65,11 @@ const PASSWORD: string = process.env['MYSQL_PASSWORD'] ?? 'pnwmoths';
 const SQL: string = `
 SELECT DISTINCT
   s.slug AS species_slug,
-  CASE WHEN l.url LIKE '%bugguide%' THEN 'bugguide' ELSE 'mpg' END AS site,
+  CASE
+    WHEN l.url LIKE '%bugguide%'                THEN 'bugguide'
+    WHEN l.url LIKE '%butterfliesandmoths.org%' THEN 'bamona'
+    ELSE 'mpg'
+  END AS site,
   l.url AS url
 FROM (
   SELECT LOWER(CONCAT(genus, '-', species)) AS slug FROM species_species
@@ -68,7 +78,9 @@ JOIN cms_title t              ON t.slug = s.slug
 JOIN cms_page_placeholders pp ON pp.page_id = t.page_id
 JOIN cms_cmsplugin cp         ON cp.placeholder_id = pp.placeholder_id
 JOIN cmsplugin_link l         ON l.cmsplugin_ptr_id = cp.id
-WHERE l.url LIKE '%bugguide%' OR l.url LIKE '%mothphotographers%'
+WHERE l.url LIKE '%bugguide%'
+   OR l.url LIKE '%mothphotographers%'
+   OR l.url LIKE '%butterfliesandmoths.org%'
 ORDER BY species_slug, site, url
 `.trim();
 
@@ -76,7 +88,7 @@ ORDER BY species_slug, site, url
 // Types
 // ---------------------------------------------------------------------------
 
-export type LinkSite = 'bugguide' | 'mpg';
+export type LinkSite = 'bugguide' | 'mpg' | 'bamona';
 
 export interface SpeciesLink {
   species_slug: string;
@@ -101,7 +113,7 @@ export function parseTsv(stdout: string): SpeciesLink[] {
     if (!species_slug || !site || !url) {
       throw new Error(`[extract-reference-links] malformed row: ${JSON.stringify(line)}`);
     }
-    if (site !== 'bugguide' && site !== 'mpg') {
+    if (site !== 'bugguide' && site !== 'mpg' && site !== 'bamona') {
       throw new Error(`[extract-reference-links] unexpected site '${site}' in row: ${line}`);
     }
     links.push({ species_slug, site, url });
@@ -192,12 +204,13 @@ async function main(): Promise<void> {
 
   const bugguide = kept.filter(l => l.site === 'bugguide').length;
   const mpg = kept.filter(l => l.site === 'mpg').length;
+  const bamona = kept.filter(l => l.site === 'bamona').length;
   const speciesWithLinks = new Set(kept.map(l => l.species_slug)).size;
 
   console.log('[extract-reference-links] summary:');
   console.log(`  links in reference DB:    ${allLinks.length}`);
   console.log(`  dropped (species not in codebase): ${dropped}`);
-  console.log(`  kept:                     ${kept.length}  (bugguide ${bugguide}, mpg ${mpg})`);
+  console.log(`  kept:                     ${kept.length}  (bugguide ${bugguide}, mpg ${mpg}, bamona ${bamona})`);
   console.log(`  species with >=1 link:    ${speciesWithLinks} / ${codebaseSlugs.size}`);
 
   const csv = toCsv(kept);
