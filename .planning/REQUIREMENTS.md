@@ -81,33 +81,33 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| KEY-01 | TBD | Pending |
-| KEY-02 | TBD | Pending |
-| KEY-03 | TBD | Pending |
-| KEY-04 | TBD | Pending |
-| KEY-05 | TBD | Pending |
-| MATCH-01 | TBD | Pending |
-| MATCH-02 | TBD | Pending |
-| MATCH-03 | TBD | Pending |
-| IDENT-01 | TBD | Pending |
-| IDENT-02 | TBD | Pending |
-| IDENT-03 | TBD | Pending |
-| IDENT-04 | TBD | Pending |
-| IDENT-05 | TBD | Pending |
-| IDENT-06 | TBD | Pending |
-| GRID-01 | TBD | Pending |
-| GRID-02 | TBD | Pending |
-| GRID-03 | TBD | Pending |
-| GRID-04 | TBD | Pending |
-| CIMG-01 | TBD | Pending |
-| CIMG-02 | TBD | Pending |
-| CIMG-03 | TBD | Pending |
+| KEY-01 | Phase 39 | Pending |
+| KEY-02 | Phase 39 | Pending |
+| KEY-03 | Phase 39 | Pending |
+| KEY-04 | Phase 39 | Pending |
+| KEY-05 | Phase 39 | Pending |
+| MATCH-01 | Phase 40 | Pending |
+| MATCH-02 | Phase 40 | Pending |
+| MATCH-03 | Phase 40 | Pending |
+| IDENT-01 | Phase 41 | Pending |
+| IDENT-02 | Phase 41 | Pending |
+| IDENT-03 | Phase 41 | Pending |
+| IDENT-04 | Phase 40 | Pending |
+| IDENT-05 | Phase 41 | Pending |
+| IDENT-06 | Phase 41 | Pending |
+| GRID-01 | Phase 42 | Pending |
+| GRID-02 | Phase 42 | Pending |
+| GRID-03 | Phase 42 | Pending |
+| GRID-04 | Phase 42 | Pending |
+| CIMG-01 | Phase 43 | Pending |
+| CIMG-02 | Phase 43 | Pending |
+| CIMG-03 | Phase 43 | Pending |
 
 **Coverage:**
 - v1 requirements: 21 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 21 ⚠️
+- Mapped to phases: 21 (100%)
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-06-24*
-*Last updated: 2026-06-24 after initial definition*
+*Last updated: 2026-06-24 — traceability table populated after roadmap creation*
