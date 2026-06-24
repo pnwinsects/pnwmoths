@@ -131,6 +131,24 @@ eleventyComputed:
   </div>
 {% endif %}
 
+{% set links = speciesLinks[sp.slug] %}
+{% if links and (links.bugguide.length > 0 or links.mpg.length > 0 or links.bamona.length > 0) %}
+  <section class="species-links" data-pagefind-ignore>
+    <h2>External resources</h2>
+    <ul>
+      {% for url in links.bugguide %}
+        <li><a href="{{ url }}" rel="external noopener" target="_blank">BugGuide</a></li>
+      {% endfor %}
+      {% for url in links.mpg %}
+        <li><a href="{{ url }}" rel="external noopener" target="_blank">Moth Photographers Group</a></li>
+      {% endfor %}
+      {% for url in links.bamona %}
+        <li><a href="{{ url }}" rel="external noopener" target="_blank">Butterflies and Moths of North America</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
+
 <script type="module">
   const map = document.querySelector('pnwm-occurrence-map');
   const chart = document.querySelector('pnwm-phenology-chart');
