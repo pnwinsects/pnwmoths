@@ -1,9 +1,16 @@
 // TDD RED: behavioral tests for schemas.ts zod/mini migration
 // These tests verify OccurrenceRecordSchema and SpeciesStateSchema behavior
 // is preserved after the zod/mini functional API migration (D-02).
+// Phase 39: CharacterSchema, KeySpeciesSchema, KeyMatrixSchema added.
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { OccurrenceRecordSchema, SpeciesStateSchema } from './schemas.ts';
+import {
+  OccurrenceRecordSchema,
+  SpeciesStateSchema,
+  CharacterSchema,
+  KeySpeciesSchema,
+  KeyMatrixSchema,
+} from './schemas.ts';
 
 describe('OccurrenceRecordSchema', () => {
   const validRecord = {
@@ -71,5 +78,119 @@ describe('SpeciesStateSchema', () => {
   it('rejects { species_slug } missing state', () => {
     const result = SpeciesStateSchema.safeParse({ species_slug: 's' });
     assert.ok(!result.success, 'Expected failure for missing state');
+  });
+});
+
+describe('CharacterSchema', () => {
+  const validCharacter = {
+    id: 0,
+    category: 'Distribution',
+    subcategory: null,
+    question: 'In which State/Province was the moth found?',
+    state: 'Washington',
+    image_filename: null,
+  };
+
+  it('accepts a valid character with null subcategory and null image_filename', () => {
+    const result = CharacterSchema.safeParse(validCharacter);
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('accepts a character with a subcategory string', () => {
+    const result = CharacterSchema.safeParse({ ...validCharacter, subcategory: 'Wing pattern' });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('accepts a character with image_filename set', () => {
+    const result = CharacterSchema.safeParse({ ...validCharacter, image_filename: 'wing_base.jpg' });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('rejects when category is missing', () => {
+    const { category: _, ...withoutCategory } = validCharacter;
+    const result = CharacterSchema.safeParse(withoutCategory);
+    assert.ok(!result.success, 'Expected failure for missing category');
+  });
+
+  it('rejects when question is missing', () => {
+    const { question: _, ...withoutQuestion } = validCharacter;
+    const result = CharacterSchema.safeParse(withoutQuestion);
+    assert.ok(!result.success, 'Expected failure for missing question');
+  });
+
+  it('rejects when state is missing', () => {
+    const { state: _, ...withoutState } = validCharacter;
+    const result = CharacterSchema.safeParse(withoutState);
+    assert.ok(!result.success, 'Expected failure for missing state field');
+  });
+});
+
+describe('KeySpeciesSchema', () => {
+  const validSpecies = {
+    slug: 'tolype-laricis',
+    genus: 'Tolype',
+    epithet: 'laricis',
+    common_name: null,
+    nav_image: null,
+  };
+
+  it('accepts a valid species with null common_name and nav_image', () => {
+    const result = KeySpeciesSchema.safeParse(validSpecies);
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('accepts species with common_name and nav_image set', () => {
+    const result = KeySpeciesSchema.safeParse({
+      ...validSpecies,
+      common_name: 'Larch Tolype',
+      nav_image: 'tolype-laricis-1.jpg',
+    });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('rejects when slug is missing', () => {
+    const { slug: _, ...withoutSlug } = validSpecies;
+    const result = KeySpeciesSchema.safeParse(withoutSlug);
+    assert.ok(!result.success, 'Expected failure for missing slug');
+  });
+
+  it('rejects when genus is missing', () => {
+    const { genus: _, ...withoutGenus } = validSpecies;
+    const result = KeySpeciesSchema.safeParse(withoutGenus);
+    assert.ok(!result.success, 'Expected failure for missing genus');
+  });
+});
+
+describe('KeyMatrixSchema', () => {
+  const validArtifact = {
+    characters: [],
+    species: [],
+    matrix: [],
+  };
+
+  it('accepts an empty artifact {characters:[], species:[], matrix:[]}', () => {
+    const result = KeyMatrixSchema.safeParse(validArtifact);
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('accepts artifact with base64 strings in matrix', () => {
+    const result = KeyMatrixSchema.safeParse({ ...validArtifact, matrix: ['AAAA', 'Ag=='] });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('rejects when matrix is not an array', () => {
+    const result = KeyMatrixSchema.safeParse({ ...validArtifact, matrix: 'notanarray' });
+    assert.ok(!result.success, 'Expected failure for non-array matrix');
+  });
+
+  it('rejects when matrix contains non-string elements', () => {
+    const result = KeyMatrixSchema.safeParse({ ...validArtifact, matrix: [1, 2] });
+    assert.ok(!result.success, 'Expected failure for numeric matrix elements');
+  });
+
+  it('rejects when characters is missing', () => {
+    const { characters: _, ...withoutChars } = validArtifact;
+    const result = KeyMatrixSchema.safeParse(withoutChars);
+    assert.ok(!result.success, 'Expected failure for missing characters');
   });
 });

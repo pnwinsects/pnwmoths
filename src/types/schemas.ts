@@ -151,3 +151,33 @@ export const TaxonFamilySchema = z.object({
 });
 // TaxonFamily is the root node; the taxon tree is a TaxonFamily[]
 export type TaxonFamily = z.infer<typeof TaxonFamilySchema>;
+
+// --- Key Matrix (Phase 39) ---
+// Validated at build time by KeyMatrixSchema.parse(); guarded at browser load by validateKeyMatrix.
+export const CharacterSchema = z.object({
+  id:             z.number(),
+  category:       z.string(),
+  subcategory:    z.nullable(z.string()),   // null for 3-part (2-colon) labels
+  question:       z.string(),
+  state:          z.string(),
+  image_filename: z.nullable(z.string()),   // null until Phase 43 curator pass
+});
+export type Character = z.infer<typeof CharacterSchema>;
+
+export const KeySpeciesSchema = z.object({
+  slug:        z.string(),
+  genus:       z.string(),
+  epithet:     z.string(),
+  common_name: z.nullable(z.string()),
+  nav_image:   z.nullable(z.string()),
+});
+export type KeySpecies = z.infer<typeof KeySpeciesSchema>;
+
+// matrix: 237 base64 strings, each encoding a Uint8Array bitset over matched species (LSB-first)
+// length === characters.length; each string is base64; bit i set iff species[i] scores 1
+export const KeyMatrixSchema = z.object({
+  characters: z.array(CharacterSchema),
+  species:    z.array(KeySpeciesSchema),
+  matrix:     z.array(z.string()),    // 237 base64 strings; length === characters.length
+});
+export type KeyMatrix = z.infer<typeof KeyMatrixSchema>;
