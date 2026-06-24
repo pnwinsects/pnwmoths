@@ -1,17 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v3.0
-milestone_name: TypeScript Frontend & Build-Time Data Validation
-status: Awaiting next milestone
-stopped_at: Completed Phase 38 Plan 03 — v3.0 milestone complete
-last_updated: "2026-06-11T03:57:12.968Z"
-last_activity: 2026-06-11 — Milestone v3.0 completed and archived
+milestone: v4.0
+milestone_name: Key Characters — Visual Identification
+status: planning
+last_updated: "2026-06-24T21:52:04.776Z"
+last_activity: 2026-06-24
 progress:
-  total_phases: 20
-  completed_phases: 6
-  total_plans: 22
-  completed_plans: 22
-  percent: 30
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -25,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-06-10 after v3.0 milestone)
 
 ## Current Position
 
-Phase: Milestone v3.0 complete
+Phase: Not started (defining requirements)
 Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-06-11 — Milestone v3.0 completed and archived
+Status: Defining requirements
+Last activity: 2026-06-24 — Milestone v4.0 started
 
 ## Performance Metrics
 
