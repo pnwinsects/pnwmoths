@@ -624,14 +624,18 @@ Plans:
 
 **Goal**: The `key.csv` character matrix is ingested into a stable, validated, client-loadable JSON artifact that all subsequent phases can depend on
 **Depends on**: Phase 38 (v3.0 complete)
-**Requirements**: KEY-01, KEY-02, KEY-03, KEY-04, KEY-05
-**Success Criteria** (what must be TRUE):
-  1. Running `npm run build` produces `data/key-matrix.json` containing `characters` (237 entries with the full `category / subcategory / question / state` hierarchy), `species` (metadata-only, slug + nav image), and `matrix` (237 × N binary rows)
+**Requirements**: KEY-01, KEY-02, KEY-03, KEY-04, KEY-05, MATCH-01, MATCH-02, MATCH-03 (MATCH-* pulled into this phase per 39-CONTEXT.md D-02)
+**Success Criteria** (what must be TRUE — see 39-CONTEXT.md D-04/D-06 which override SC1/SC3 wording below):
+  1. Running `npm run build` produces `data/key-matrix.json` containing `characters` (237 entries with the full `category / subcategory / question / state` hierarchy), `species` (matched-only, slug + nav image), and `matrix` (237 per-character-state base64 `Uint8Array` bitsets over matched species — per D-04, NOT 237 × N binary rows)
   2. `npm run build:key` completes in under 5 seconds; the build step is wired into the full `npm run build` sequence after `build:data` and before `build:eleventy`
-  3. A Zod schema validates the artifact shape at build time; a post-build check asserts `_site/key-matrix.json` stays within a 100 KB byte budget; a bloated artifact or schema violation fails the build
+  3. A Zod schema validates the artifact shape at build time; a post-build check asserts `_site/key-matrix.json` stays within a 50 KB gzip byte budget (per D-06, gzip transfer size — not 100 KB raw); a bloated artifact or schema violation fails the build
   4. `data/key-coverage-report.json` is emitted listing all unmatched key binomials, and new tests cover CSV parse, whitespace normalization (double-space binomials), and matrix shape
 
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 39-01-PLAN.md — Data pipeline: commit source CSV + synonyms, Zod schemas, slug resolution + DuckDB nav join + bitset emit, load-time guard, tests (KEY-01/02/03, MATCH-01/02/03)
+- [ ] 39-02-PLAN.md — Build wiring: post-Eleventy copy, gzip ≤ 50 KB byte-budget gate, package.json + both CI workflows, end-to-end verification (KEY-04/05, MATCH-03)
 
 ### Phase 40: Filter Logic TDD Contract
 
