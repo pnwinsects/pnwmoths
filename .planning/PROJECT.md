@@ -20,7 +20,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - **Character illustration images** — process and upload the ~2,000 character/help images to bunny.net CDN; shown on demand (tooltip/expandable) beside each character so users see what the character means
 - All TypeScript + Lit, consistent with the v3.0 toolchain and validation gates
 
-## Current State: planning v4.0 — Key Characters visual identification
+## Current State: building v4.0 — Key Characters visual identification
+
+**v4.0 in progress:** Phase 39 (key-matrix data pipeline) and Phase 40 (filter-logic TDD contract) complete. `data/key-matrix.json` ships 1,192 matched species × 237 character-states as base64 bitsets with a `meta` block; `src/_lib/key-filter.ts` exports the pure `buildQuestionGroups()` + `computeMatching()` functions implementing the locked OR-within / AND-across / "0 = unscored" semantics (10 TDD cases green). Next: Phase 41 — `/identify/` page scaffold + filter panel.
 
 **v3.0 complete:** 2026-06-10 — 6 phases (Phases 33–38). Full TypeScript migration of the build pipeline, Eleventy data/config, and Lit web components, with build-time + load-time data validation. CI now gates every PR and deploy on `tsc --noEmit` (both tsconfigs), the 225-test `node --test` suite, a permanent TS-only invariant guard (zero `.js` sources / `allowJs` / `@ts-ignore` / unguarded double-casts), and Parquet schema verification. `_site/` output proven byte-identical to the pre-migration baseline (one-shot proof, MILESTONE-EVIDENCE.md); `build:data` stays at ~3s, well under the 5-minute budget.
 
@@ -229,4 +231,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-24 — v4.0 Key Characters milestone started (Issue #19). New dedicated Identify page with full-key (237-state) character filters, character images on bunny.net CDN, best-effort species↔key matching. Requirements being defined.*
+*Last updated: 2026-06-25 — v4.0 Key Characters milestone (Issue #19): Phases 39–40 complete (data pipeline + filter-logic TDD contract). Remaining: Identify page scaffold + filter panel (41), results grid (42), character illustration images (43).*
