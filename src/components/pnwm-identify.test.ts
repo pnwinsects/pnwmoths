@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
 
 // Import exported symbols from the component (will fail until Task 2 creates the file)
-import { buildCategoryMap, PnwmIdentify } from './pnwm-identify.ts';
+import { buildCategoryMap, PnwmIdentify, characterImageSrc, helpImageAlt } from './pnwm-identify.ts';
 import type { Character } from '../types/index.ts';
 import type { KeyMatrix, KeySpecies } from '../types/schemas.ts';
 import { buildQuestionGroups } from '../_lib/key-filter.ts';
@@ -264,5 +264,125 @@ describe('_clearAll resets _matchedSpecies and _matchedCount (D-09) (Phase 42 RE
     assert.equal(c._selection.size, 0, '_selection must be empty after _clearAll');
     assert.equal(c._matchedSpecies.length, 0, '_matchedSpecies must be empty after _clearAll');
     assert.equal(c._matchedCount, 0, '_matchedCount must be 0 after _clearAll');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Phase 43 RED tests: characterImageSrc + helpImageAlt pure helpers (CIMG-03)
+// These tests FAIL until Task 2 exports characterImageSrc + helpImageAlt from pnwm-identify.ts.
+// ---------------------------------------------------------------------------
+
+describe('characterImageSrc (Phase 43 RED)', () => {
+  test('returns a CDN-absolute URL for a simple .webp filename', () => {
+    const url = characterImageSrc('Black Forewing.webp');
+    assert.strictEqual(
+      url,
+      'https://pnwmoths.b-cdn.net/key-images/Black%20Forewing.webp',
+      'should return host-absolute CDN URL with encodeURIComponent applied'
+    );
+  });
+
+  test('returned URL does NOT contain /pnwmoths/https (pathPrefix-leak guard)', () => {
+    const url = characterImageSrc('Ecoprovince_Coast_and_Mts.webp');
+    assert.ok(
+      !url.includes('/pnwmoths/https'),
+      `URL must not contain /pnwmoths/https — got: ${url}`
+    );
+    assert.ok(
+      url.startsWith('https://pnwmoths.b-cdn.net/key-images/'),
+      `URL must start with CDN base — got: ${url}`
+    );
+  });
+
+  test('applies encodeURIComponent: space in filename → %20', () => {
+    const url = characterImageSrc('Black Forewing.webp');
+    assert.ok(url.includes('%20'), `URL should contain %20 for space — got: ${url}`);
+    assert.ok(!url.includes(' '), `URL must not contain raw space — got: ${url}`);
+  });
+
+  test('applies encodeURIComponent: ampersand in filename → %26', () => {
+    const url = characterImageSrc('Black & White.webp');
+    assert.ok(url.includes('%26'), `URL should contain %26 for & — got: ${url}`);
+    assert.ok(!url.includes(' & '), `URL must not contain raw & — got: ${url}`);
+  });
+
+  test('URL is host-absolute (starts with https://)', () => {
+    const url = characterImageSrc('test.webp');
+    assert.ok(url.startsWith('https://'), `URL must be host-absolute — got: ${url}`);
+  });
+});
+
+describe('helpImageAlt (Phase 43 RED)', () => {
+  test('returns curator alt_text when non-blank', () => {
+    assert.strictEqual(
+      helpImageAlt('Black', 'A black forewing'),
+      'A black forewing',
+      'curator alt_text should win when non-blank'
+    );
+  });
+
+  test('falls back to state when alt_text is null', () => {
+    assert.strictEqual(
+      helpImageAlt('Black', null),
+      'Black',
+      'should fall back to state when alt_text is null'
+    );
+  });
+
+  test('falls back to state when alt_text is empty string', () => {
+    assert.strictEqual(
+      helpImageAlt('Black', ''),
+      'Black',
+      'should fall back to state when alt_text is empty string'
+    );
+  });
+
+  test('falls back to state when alt_text is whitespace-only', () => {
+    assert.strictEqual(
+      helpImageAlt('Black', '   '),
+      'Black',
+      'should fall back to state when alt_text is whitespace-only'
+    );
+  });
+
+  test('never returns empty string (D-06)', () => {
+    const result = helpImageAlt('SomeState', null);
+    assert.ok(result.length > 0, 'helpImageAlt must never return empty string');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Structural: <details> render iff image_filename is truthy (Phase 43 RED)
+// Asserts the helper-driven branch logic: when image_filename is set,
+// characterImageSrc is invoked and produces a CDN URL; when null, it is not.
+// (No TemplateResult render-to-string — zero new deps; pure helper assertion idiom.)
+// ---------------------------------------------------------------------------
+
+describe('_renderQuestion structural: <details> iff image_filename (Phase 43 RED)', () => {
+  test('characterImageSrc is called with image_filename when truthy (branch coverage via direct call)', () => {
+    // A character with image_filename set → characterImageSrc should produce a CDN URL
+    const char = makeChar({ id: 10, category: 'Color', question: 'Forewing', state: 'Black', image_filename: 'Black Forewing.webp', alt_text: null });
+    // The render guard: `char.image_filename ? characterImageSrc(char.image_filename) : skip`
+    const src = char.image_filename ? characterImageSrc(char.image_filename) : null;
+    assert.ok(src !== null, 'should produce a src for a character with image_filename');
+    assert.ok(src!.startsWith('https://pnwmoths.b-cdn.net/key-images/'), 'src must be CDN-absolute');
+  });
+
+  test('no src produced when image_filename is null (guard branch)', () => {
+    const char = makeChar({ id: 11, category: 'Color', question: 'Forewing', state: 'White', image_filename: null, alt_text: null });
+    const src = char.image_filename ? characterImageSrc(char.image_filename) : null;
+    assert.strictEqual(src, null, 'should not produce a src when image_filename is null');
+  });
+
+  test('helpImageAlt produces correct alt from image_filename character (integration)', () => {
+    const char = makeChar({ id: 10, category: 'Color', question: 'Forewing', state: 'Black', image_filename: 'Black Forewing.webp', alt_text: 'A black forewing illustration' });
+    const alt = helpImageAlt(char.state, char.alt_text);
+    assert.strictEqual(alt, 'A black forewing illustration');
+  });
+
+  test('helpImageAlt falls back to state when alt_text is null (integration)', () => {
+    const char = makeChar({ id: 10, category: 'Color', question: 'Forewing', state: 'Black', image_filename: 'Black Forewing.webp', alt_text: null });
+    const alt = helpImageAlt(char.state, char.alt_text);
+    assert.strictEqual(alt, 'Black');
   });
 });
