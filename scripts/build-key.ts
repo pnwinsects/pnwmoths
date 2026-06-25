@@ -3,7 +3,7 @@
 // Run via: npm run build:key
 // Mirrors emit-species-states.ts (JSON emit pattern) + build-data.ts (DuckDB + validateCsv)
 import { DuckDBInstance } from '@duckdb/node-api';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 // Note: validateCsv from build-data.ts is not used here because key-characters.csv
@@ -231,12 +231,40 @@ export async function main(): Promise<void> {
   const navImages = await queryNavImages(db);
 
   // 6. Build characters[], species[], matrix[]
-  const characters = dataRows.map((row, idx) => ({
-    id: idx,
-    ...parseCharacterLabel(row[0] ?? ''),
-    image_filename: null,
-    alt_text: null,
-  }));
+  // 6a. Load character image map from CSV (CIMG-02, D-08 soft-skip)
+  // Allow KEY_CHAR_IMAGES_CSV env var to redirect path for testing.
+  const csvPath = process.env['KEY_CHAR_IMAGES_CSV'] ?? resolve('data/key-character-images.csv');
+  const imageMap = new Map<number, { image_filename: string; alt_text: string | null }>();
+  if (existsSync(csvPath)) {
+    const imageRows = parse(
+      readFileSync(csvPath),
+      { columns: true, skip_empty_lines: true, bom: true }
+    ) as Array<{ char_id: string; image_filename: string; alt_text: string }>;
+    for (const r of imageRows) {
+      const id = Number(r.char_id);
+      if (!Number.isInteger(id) || id < 0 || id >= dataRows.length) {
+        console.warn(
+          `build-key: key-character-images.csv char_id ${r.char_id} out of range [0, ${dataRows.length}) — skipping`
+        );
+        continue;
+      }
+      if (r.image_filename) {
+        imageMap.set(id, { image_filename: r.image_filename, alt_text: r.alt_text || null });
+      }
+    }
+  } else {
+    console.warn('build-key: data/key-character-images.csv absent — no character help images (soft-skip)');
+  }
+
+  const characters = dataRows.map((row, idx) => {
+    const m = imageMap.get(idx);
+    return {
+      id: idx,
+      ...parseCharacterLabel(row[0] ?? ''),
+      image_filename: m?.image_filename ?? null,
+      alt_text: m?.alt_text ?? null,
+    };
+  });
 
   // Build slug → accepted-name lookup so synonym-resolved species display the accepted name
   const slugToName = new Map(
