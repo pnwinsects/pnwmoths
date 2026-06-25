@@ -1,8 +1,8 @@
 ---
 phase: 42-results-grid
 verified: 2026-06-25T20:00:00Z
-status: human_needed
-score: 8/8 must-haves verified (automated); 4 behaviors require browser UAT
+status: passed
+score: 8/8 must-haves verified (automated) + 5/5 browser UAT items passed (see 42-HUMAN-UAT.md)
 overrides_applied: 0
 human_verification:
   - test: "At rest, count reads 'Showing all 1,192 species' and prompt 'Select characters to narrow the 1,192 key species' appears; no thumbnail flood"

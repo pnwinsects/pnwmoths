@@ -1,5 +1,5 @@
 ---
-status: partial
+status: passed
 phase: 42-results-grid
 source: [42-VERIFICATION.md]
 started: 2026-06-25
@@ -36,19 +36,18 @@ result: PASS — desktop (1280px): `.pnwm-identify-panel` `position: sticky`, la
 
 total: 5
 passed: 5
-issues: 1
+issues: 0
 pending: 0
 skipped: 0
 blocked: 0
 
 ## Gaps
 
-- **Broken thumbnails for ~35 species (upstream data, not the grid).** 35 of 1,190
-  `nav_image` values in `data/key-matrix.json` use an underscore filename convention
-  (and sometimes a different genus spelling, e.g. slug `eudeilinia-herminiata` →
-  `Eudeilinea_herminiata-A-D.jpg`) that 404s on the CDN, so those cards render a broken
-  `<img>`. The grid component is correct — it renders an `<img>` because `nav_image` is
-  non-null. Fix belongs in the key-matrix data pipeline (`build-key.ts`, Phase 39):
-  normalize `nav_image` to the CDN's actual filenames. Captured as a todo. Optionally,
-  the grid could add an `<img onerror>` → placeholder fallback to satisfy SC3 literally
-  and harden against any future bad `nav_image`. Awaiting decision.
+- **RESOLVED (grid hardening):** the grid now degrades a failed thumbnail to the gray
+  placeholder via an `<img @error>` handler (commit 03512064), so SC3 ("no broken `<img>`
+  tags") holds even with bad `nav_image` data. Re-verified in-browser: 0 broken images.
+- **TRACKED (upstream data fix):** ~35 of 1,190 `nav_image` values in `data/key-matrix.json`
+  still 404 on the CDN (underscore filenames / genus-spelling mismatch, e.g. slug
+  `eudeilinia-herminiata` → `Eudeilinea_herminiata-A-D.jpg`). Those species now show the
+  placeholder instead of their photo. The real fix is in the key-matrix pipeline
+  (`build-key.ts`) — captured as a todo and filed as a GitHub issue.
