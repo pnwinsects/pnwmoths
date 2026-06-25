@@ -11,7 +11,7 @@ permalink: /identify/index.html
   {{ { characters: keyMatrix.characters, species: keyMatrix.species } | tojson | safe }}
 </script>
 
-<pnwm-identify></pnwm-identify>
+<pnwm-identify path-prefix="{{ '/' | url }}"></pnwm-identify>
 
 <noscript data-pagefind-ignore>
   <h2>Characters (JavaScript required to filter)</h2>

@@ -2,10 +2,15 @@
 // Reads the inlined #key-char-data script, renders 8 default-collapsed
 // collapsible categories, tracks selection state, shows per-category count
 // badges, provides a sticky "Clear all" reset, and dispatches
-// pnwm-key-filter-change on every change. Phase 41: placeholder slugs only.
+// pnwm-key-filter-change on every change.
+// Phase 41: placeholder slugs only.
+// Phase 42: async matrix fetch, computeMatching wiring, two-column layout, mounts key-results-grid.
 import { LitElement, html, type TemplateResult, type PropertyDeclarations } from 'lit';
 import type { Character } from '../types/index.ts';
 import type { KeyFilterChangeDetail } from '../types/index.ts';
+import type { KeyMatrix, KeySpecies } from '../types/schemas.ts';
+import { validateKeyMatrix } from './key-matrix-cache.ts';
+import { computeMatching, buildQuestionGroups, type QuestionGroups } from '../_lib/key-filter.ts';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -46,9 +51,14 @@ const KEY_DATA_CATEGORIES = new Set(['Distribution', 'Seasonality']);
 export class PnwmIdentify extends LitElement {
   static get properties(): PropertyDeclarations {
     return {
-      _categoryMap:        { attribute: false, state: true },
-      _expandedCategories: { attribute: false, state: true },
-      _selection:          { attribute: false, state: true },
+      'path-prefix':      { type: String },
+      _categoryMap:       { attribute: false, state: true },
+      _expandedCategories:{ attribute: false, state: true },
+      _selection:         { attribute: false, state: true },
+      _keyMatrix:         { attribute: false, state: true },
+      _questionGroups:    { attribute: false, state: true },
+      _matchedSpecies:    { attribute: false, state: true },
+      _matchedCount:      { state: true },
     };
   }
 
@@ -56,6 +66,10 @@ export class PnwmIdentify extends LitElement {
   _expandedCategories: Set<string>;
   /** Selection: Map<questionText, Set<characterId>> */
   _selection: Map<string, Set<number>>;
+  _keyMatrix: KeyMatrix | null;
+  _questionGroups: QuestionGroups | null;
+  _matchedSpecies: KeySpecies[];
+  _matchedCount: number;
 
   /** Light DOM — Pico CSS must reach checkboxes, fieldsets, labels (D-03, PATTERNS.md) */
   createRenderRoot(): this { return this; }
@@ -65,14 +79,34 @@ export class PnwmIdentify extends LitElement {
     this._categoryMap = new Map();
     this._expandedCategories = new Set();
     this._selection = new Map();
+    this._keyMatrix = null;
+    this._questionGroups = null;
+    this._matchedSpecies = [];
+    this._matchedCount = 0;
   }
 
-  connectedCallback(): void {
+  /** Mirror pnwm-taxon-browser.ts line 106 */
+  get _prefix(): string {
+    return (this as { 'path-prefix'?: string })['path-prefix'] || '/';
+  }
+
+  async connectedCallback(): Promise<void> {
     super.connectedCallback();
     const el = document.getElementById('key-char-data');
     if (!el) return;
     const data = JSON.parse(el.textContent ?? '{}') as { characters: Character[] };
     this._categoryMap = buildCategoryMap(data.characters);
+    // Async: fetch full matrix (bitsets) for computeMatching
+    try {
+      const res = await fetch(`${this._prefix}key-matrix.json`);
+      const raw: unknown = await res.json();
+      validateKeyMatrix(raw);
+      this._keyMatrix = raw;
+      this._questionGroups = buildQuestionGroups(raw.characters);
+    } catch (err) {
+      // soft degradation: grid stays in "prompt" state; panel still interactive
+      console.error('[pnwm-identify] matrix fetch failed:', err);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -101,6 +135,8 @@ export class PnwmIdentify extends LitElement {
 
   _clearAll(): void {
     this._selection = new Map();
+    this._matchedSpecies = [];
+    this._matchedCount = 0;
     this._dispatchFilterChange();
   }
 
@@ -138,14 +174,23 @@ export class PnwmIdentify extends LitElement {
   // ---------------------------------------------------------------------------
 
   _dispatchFilterChange(): void {
-    const detail: KeyFilterChangeDetail = {
-      matchedSlugs: [],  // Phase 42 will compute; placeholder in Phase 41
-      count: 0,
-      hasSelection: this._hasSelection(),
-    };
+    if (!this._keyMatrix || !this._questionGroups) {
+      // matrix not yet loaded — dispatch placeholder (Phase 41 behavior preserved)
+      this.dispatchEvent(new CustomEvent<KeyFilterChangeDetail>('pnwm-key-filter-change', {
+        bubbles: true,
+        detail: { matchedSlugs: [], count: 0, hasSelection: this._hasSelection() },
+      }));
+      return;
+    }
+    const { matchedSlugs, count } = computeMatching(
+      this._keyMatrix, this._selection, this._questionGroups
+    );
+    const matchedSlugSet = new Set(matchedSlugs);
+    this._matchedSpecies = this._keyMatrix.species.filter(s => matchedSlugSet.has(s.slug));
+    this._matchedCount = count;
     this.dispatchEvent(new CustomEvent<KeyFilterChangeDetail>('pnwm-key-filter-change', {
       bubbles: true,
-      detail,
+      detail: { matchedSlugs, count, hasSelection: this._hasSelection() },
     }));
   }
 
@@ -194,13 +239,27 @@ export class PnwmIdentify extends LitElement {
 
   render(): TemplateResult {
     return html`
-      ${this._hasSelection() ? html`
-        <div class="pnwm-kfp-sticky">
-          <button type="button" @click=${() => this._clearAll()}>Clear all</button>
-        </div>` : ''}
-      ${[...this._categoryMap.entries()].map(([catName, questions]) =>
-        this._renderCategory(catName, questions)
-      )}`;
+      <div class="pnwm-identify-layout">
+        <aside class="pnwm-identify-panel">
+          ${this._hasSelection() ? html`
+            <div class="pnwm-kfp-sticky">
+              <button type="button" @click=${() => this._clearAll()}>Clear all</button>
+            </div>` : ''}
+          ${[...this._categoryMap.entries()].map(([catName, questions]) =>
+            this._renderCategory(catName, questions)
+          )}
+        </aside>
+        <div class="pnwm-identify-grid-area">
+          <key-results-grid
+            .matchedSpecies=${this._matchedSpecies}
+            .hasSelection=${this._hasSelection()}
+            .matchedCount=${this._matchedCount}
+            .totalCount=${this._keyMatrix?.meta.matchedSpecies ?? 1192}
+            .pathPrefix=${this._prefix}
+            @pnwm-key-clear-all=${() => this._clearAll()}
+          ></key-results-grid>
+        </div>
+      </div>`;
   }
 }
 
