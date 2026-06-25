@@ -725,7 +725,20 @@ Plans:
   2. A committed `data/key-character-images.csv` (initially sparse or empty) maps character IDs to CDN image filenames; the build warns on any `char_id` out of range and soft-skips if the file is absent
   3. For each character state in the filter panel that has a mapped `image_filename`, a `<details>/<summary>` expander appears beside the question label; opening it shows the CDN image; character states without a mapping render no expander and the page is fully functional
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+**Wave 0**
+
+- [ ] 43-01-PLAN.md — Add alt_text to CharacterSchema (+ test) and register the new uploader/matcher test files + key:upload-images npm script (CIMG-02, CIMG-03)
+
+**Wave 1** *(blocked on Wave 0)*
+
+- [ ] 43-02-PLAN.md — Idempotent vips→WebP→curl-PUT uploader to key-images/ (DRY_RUN, HEAD/list idempotency) + one-off normalized matcher → committed draft data/key-character-images.csv + live-upload checkpoint (CIMG-01, CIMG-02)
+
+**Wave 2** *(blocked on Waves 0-1)*
+
+- [ ] 43-03-PLAN.md — Populate Character.image_filename/alt_text in build-key (soft-skip + out-of-range warn) + per-state <details> expander in pnwm-identify (host-absolute CDN src) + .pnwm-kfp-help CSS + UAT (CIMG-02, CIMG-03)
+
 **UI hint**: yes
 
 ---
@@ -776,7 +789,7 @@ Plans:
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 42. Results Grid | v4.0 | 2/2 | Complete    | 2026-06-25 |
-| 43. Character Illustration Images | v4.0 | 0/TBD | Not started | - |
+| 43. Character Illustration Images | v4.0 | 0/3 | Planned | - |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24*
