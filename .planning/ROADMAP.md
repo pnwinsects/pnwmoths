@@ -756,7 +756,7 @@ Plans:
 | 37. Lit Web Components Migration | v3.0 | 5/5 | Complete | 2026-06-10 |
 | 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete | 2026-06-11 |
 | 39. Key Matrix Data Pipeline | v4.0 | 2/2 | Complete    | 2026-06-25 |
-| 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete   | 2026-06-25 |
+| 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 0/TBD | Not started | - |
 | 42. Results Grid | v4.0 | 0/TBD | Not started | - |
 | 43. Character Illustration Images | v4.0 | 0/TBD | Not started | - |
