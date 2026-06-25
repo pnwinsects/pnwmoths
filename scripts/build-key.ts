@@ -209,7 +209,9 @@ export async function main(): Promise<void> {
     readFileSync(resolve('data/species-synonyms.csv')),
     { columns: true, skip_empty_lines: true, bom: true }
   ) as Array<{ from_binomial: string; to_species_slug: string }>;
-  const synonymMap = new Map(synonymRows.map(r => [r.from_binomial, r.to_species_slug]));
+  const synonymMap = new Map(
+    synonymRows.map(r => [normalizeBinomial(r.from_binomial), r.to_species_slug])
+  );
 
   // 4. Resolve species slugs
   const resolvedSlugs: Array<string | null> = speciesBinomials.map(b =>
