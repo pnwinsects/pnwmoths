@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
 status: executing
-stopped_at: Phase 40 context gathered
-last_updated: "2026-06-25T02:02:20.031Z"
-last_activity: 2026-06-25 -- Phase 40 planning complete
+stopped_at: Completed Phase 40 Plan 01
+last_updated: "2026-06-25T02:07:54.630Z"
+last_activity: 2026-06-25 -- Phase 40 execution started
 progress:
   total_phases: 25
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 5
+  completed_plans: 3
   percent: 4
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 39 — key-matrix-data-pipeline
+**Current focus:** Phase 40 — filter-logic-tdd-contract
 
 ## Current Position
 
-Phase: 40
-Plan: Not started
+Phase: 40 (filter-logic-tdd-contract) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-06-25 -- Phase 40 planning complete
+Last activity: 2026-06-25 -- Phase 40 execution started
 
 ```
 Progress: [----------] 0% (0/5 phases)
@@ -61,6 +61,7 @@ Progress: [----------] 0% (0/5 phases)
 - v4.0: kicked off 2026-06-24 (5 phases planned, Identify page with key character filter)
 
 | Phase 39 P01 | 15 minutes | 3 tasks | 10 files |
+| Phase 40 P01 | 12 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,8 @@ Recent decisions affecting current work:
 - v4.0 no-JS degradation: `<noscript>` block shows character group headings as readable text + full species list as links; no pre-filtered static HTML (impractical for 237 states)
 - v4.0 `build:key` runs unconditionally (reads `species-synonyms.csv` + `key-character-images.csv` + `images.csv`, all of which can change independently of `key.csv`)
 - [Phase ?]: Phase 39-01: Lucid CSV parsing quirk discovered
+- [Phase ?]: event-bus isolation: KeyFilterChangeDetail is fully separate from FilterChangeDetail
+- [Phase ?]: build-key.ts meta emission done in Plan 01 (not 02) because KeyMatrixSchema.parse() fails without it
 
 ### Roadmap Evolution
 
@@ -134,9 +137,9 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-25T01:40:32.199Z
-Stopped at: Phase 40 context gathered
-Resume file: .planning/phases/40-filter-logic-tdd-contract/40-CONTEXT.md
+Last session: 2026-06-25T02:07:54.626Z
+Stopped at: Completed Phase 40 Plan 01
+Resume file: .planning/phases/40-filter-logic-tdd-contract/40-01-SUMMARY.md
 
 ## Operator Next Steps
 
