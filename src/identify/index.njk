@@ -1,0 +1,42 @@
+---
+layout: base.njk
+title: Identify a moth — PNW Moths
+permalink: /identify/index.html
+---
+<h1>Identify a moth</h1>
+
+<p>Select morphological characters to narrow the list of matching PNW moths.</p>
+
+<script type="application/json" id="key-char-data" data-pagefind-ignore>
+  {{ { characters: keyMatrix.characters, species: keyMatrix.species } | tojson | safe }}
+</script>
+
+<pnwm-identify></pnwm-identify>
+
+<noscript data-pagefind-ignore>
+  <h2>Characters (JavaScript required to filter)</h2>
+  {%- set prevCategory = "" -%}
+  {%- for char in keyMatrix.characters -%}
+    {%- if char.category !== prevCategory -%}
+      {%- if not loop.first %}</ul>{% endif %}
+      <h3>{{ char.category }}</h3>
+      <ul>
+      {%- set prevCategory = char.category -%}
+    {%- endif -%}
+    <li>{{ char.question }}: {{ char.state }}</li>
+  {%- endfor -%}
+  </ul>
+
+  <h2>All matched key species (1,192)</h2>
+  {%- for group in keyMatrix.familyGroups -%}
+    <h3>{{ group.family or "(no family)" }}</h3>
+    {%- for genusGroup in group.genera -%}
+      <h4>{{ genusGroup.genus }}</h4>
+      <ul>
+        {%- for sp in genusGroup.species -%}
+          <li><a href="{{ ('/species/' + sp.slug + '/') | url }}"><em>{{ sp.genus }} {{ sp.epithet }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  {%- endfor -%}
+</noscript>
