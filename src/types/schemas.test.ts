@@ -123,6 +123,22 @@ describe('CharacterSchema', () => {
     const result = CharacterSchema.safeParse(withoutState);
     assert.ok(!result.success, 'Expected failure for missing state field');
   });
+
+  it('accepts a character with alt_text set to a non-empty string', () => {
+    const result = CharacterSchema.safeParse({ ...validCharacter, alt_text: 'A black forewing' });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('accepts a character with alt_text: null', () => {
+    const result = CharacterSchema.safeParse({ ...validCharacter, alt_text: null });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('rejects a character missing alt_text', () => {
+    const { alt_text: _, ...withoutAltText } = { ...validCharacter, alt_text: null };
+    const result = CharacterSchema.safeParse(withoutAltText);
+    assert.ok(!result.success, 'Expected failure for missing alt_text');
+  });
 });
 
 describe('KeySpeciesSchema', () => {
