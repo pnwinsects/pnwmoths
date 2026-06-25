@@ -84,6 +84,8 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   // Passthrough copy for component source files so Vite can find them
   eleventyConfig.addPassthroughCopy({ "src/components": "components" });
   eleventyConfig.addPassthroughCopy({ "src/types": "types" });
+  // _lib shared utilities needed by pnwm-identify (key-filter, computeMatching)
+  eleventyConfig.addPassthroughCopy({ "src/_lib": "_lib" });
 
   // Theme CSS and banner image assets
   eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
