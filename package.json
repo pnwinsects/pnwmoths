@@ -51,6 +51,7 @@
     "@types/leaflet": "^1.9.21",
     "@types/node": "^24.13.1",
     "pagefind": "^1.5.2",
+    "playwright-core": "^1.61.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.8"
   }
