@@ -7,3 +7,4 @@ import './pnwm-taxon-browser.ts';
 import './pnwm-plate-viewer.ts';
 import './glossary-tooltip.ts';
 import './pnwm-identify.ts';
+import './key-results-grid.ts';
