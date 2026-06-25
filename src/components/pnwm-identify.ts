@@ -20,6 +20,42 @@ import { computeMatching, buildQuestionGroups, type QuestionGroups } from '../_l
 export type CategoryMap = Map<string, Map<string, Character[]>>;
 
 // ---------------------------------------------------------------------------
+// CDN constant (mirrors key-results-grid.ts:9 verbatim — MUST NOT use this._prefix)
+// ---------------------------------------------------------------------------
+
+const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+
+// ---------------------------------------------------------------------------
+// Pure helpers — exported for testability (CIMG-03)
+// ---------------------------------------------------------------------------
+
+/**
+ * Construct a host-absolute CDN URL for a character illustration.
+ * Single home for the CDN base URL, encodeURIComponent, and the pathPrefix-guard
+ * (RESEARCH Pitfall 1: MUST NOT be wrapped in this._prefix — that would yield
+ * /pnwmoths/https://... and 404 on GitHub Pages).
+ *
+ * @param image_filename - bare .webp filename (e.g. 'Black Forewing.webp')
+ * @returns host-absolute CDN URL (e.g. 'https://pnwmoths.b-cdn.net/key-images/Black%20Forewing.webp')
+ */
+export function characterImageSrc(image_filename: string): string {
+  return `${CDN_BASE_URL}/key-images/${encodeURIComponent(image_filename)}`;
+}
+
+/**
+ * Derive the <img alt> text for a character illustration.
+ * Returns curator alt_text when non-blank, else the state name verbatim.
+ * Never returns an empty string (UI-SPEC Copywriting / D-06).
+ *
+ * @param state - the character state label (e.g. 'Black')
+ * @param alt_text - curator-provided alt text from data/key-character-images.csv (may be null/blank)
+ * @returns non-empty alt string
+ */
+export function helpImageAlt(state: string, alt_text: string | null): string {
+  return alt_text && alt_text.trim() ? alt_text : state;
+}
+
+// ---------------------------------------------------------------------------
 // Pure helper — exported for testability
 // ---------------------------------------------------------------------------
 
@@ -204,6 +240,7 @@ export class PnwmIdentify extends LitElement {
         <legend>${question}</legend>
         ${chars.map(char => {
           const selected = this._selection.get(question)?.has(char.id) ?? false;
+          const img = char.image_filename;
           return html`<label>
             <input
               type="checkbox"
@@ -211,7 +248,16 @@ export class PnwmIdentify extends LitElement {
               @change=${(e: Event) => this._onCheckboxChange(question, char.id, (e.target as HTMLInputElement).checked)}
             >
             ${char.state}
-          </label>`;
+          </label>
+          ${img ? html`<details class="pnwm-kfp-help">
+            <summary>ⓘ illustration</summary>
+            <img
+              src="${characterImageSrc(img)}"
+              alt="${helpImageAlt(char.state, char.alt_text)}"
+              loading="lazy"
+              decoding="async"
+            >
+          </details>` : ''}`;
         })}
       </fieldset>`;
   }
