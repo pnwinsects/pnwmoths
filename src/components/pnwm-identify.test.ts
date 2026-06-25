@@ -74,8 +74,8 @@ describe('buildCategoryMap', () => {
     const map = buildCategoryMap(FIXTURE);
     const forew = map.get('Color')!.get('Forewing color')!;
     assert.equal(forew.length, 2);
-    assert.equal(forew[0].id, 1);
-    assert.equal(forew[1].id, 2);
+    assert.equal(forew[0]!.id, 1);
+    assert.equal(forew[1]!.id, 2);
   });
 
   // Real-data gate — locks the Plan 01 stray-quote fix end-to-end.

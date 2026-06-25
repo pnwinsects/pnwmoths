@@ -49,7 +49,7 @@ export class KeyResultsGrid extends LitElement {
       hasSelection:   { type: Boolean },
       matchedCount:   { type: Number },
       totalCount:     { type: Number },
-      'path-prefix':  { type: String },
+      pathPrefix:     { type: String, attribute: 'path-prefix' },
     };
   }
 
@@ -57,13 +57,14 @@ export class KeyResultsGrid extends LitElement {
   hasSelection = false;
   matchedCount = 0;
   totalCount = 1192;
+  pathPrefix = '';
 
   /** Light DOM — theme.css .similar-species-placeholder must reach card internals */
   createRenderRoot(): this { return this; }
 
   /** Mirror pnwm-taxon-browser.ts line 106 */
   get _prefix(): string {
-    return (this as { 'path-prefix'?: string })['path-prefix'] || '/';
+    return this.pathPrefix || '/';
   }
 
   _renderCard(sp: KeySpecies): TemplateResult {

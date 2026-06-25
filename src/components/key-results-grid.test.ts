@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
 
-import { buildCardUrl, buildCountText } from './key-results-grid.ts';
+import { buildCardUrl, buildCountText, KeyResultsGrid } from './key-results-grid.ts';
 import type { KeySpecies } from '../types/schemas.ts';
 
 // ---------------------------------------------------------------------------
@@ -181,5 +181,30 @@ describe('GRID-04 empty-state condition', () => {
       true,
       'hasSelection && matchedSpecies.length === 0 must select the empty state'
     );
+  });
+});
+
+// GRID-02 / pathPrefix wiring — regression guard for CR-01: pnwm-identify binds the
+// camelCase JS property `.pathPrefix`, so the grid MUST expose `pathPrefix` (attribute
+// 'path-prefix'), not a kebab-only property. A mismatch silently 404s every card link on
+// GitHub Pages (dev prefix '/' masks it). See project memory: pathPrefix is a recurring hazard.
+describe('pathPrefix wiring (CR-01 regression)', () => {
+  test('_prefix reflects the pathPrefix property set via Lit .pathPrefix binding', () => {
+    const grid = new KeyResultsGrid();
+    grid.pathPrefix = '/pnwmoths/';
+    assert.equal(grid._prefix, '/pnwmoths/');
+  });
+
+  test('_prefix defaults to "/" when pathPrefix is unset (local dev)', () => {
+    const grid = new KeyResultsGrid();
+    assert.equal(grid._prefix, '/');
+  });
+
+  test('card href is prefixed (no bare /species/ link on GitHub Pages)', () => {
+    const grid = new KeyResultsGrid();
+    grid.pathPrefix = '/pnwmoths/';
+    // _renderCard builds href as `${this._prefix}species/${slug}/`
+    const href = `${grid._prefix}species/habrosyne-scripta/`;
+    assert.equal(href, '/pnwmoths/species/habrosyne-scripta/');
   });
 });
