@@ -89,6 +89,7 @@ describe('CharacterSchema', () => {
     question: 'In which State/Province was the moth found?',
     state: 'Washington',
     image_filename: null,
+    alt_text: null,
   };
 
   it('accepts a valid character with null subcategory and null image_filename', () => {

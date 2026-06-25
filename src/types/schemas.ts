@@ -161,6 +161,7 @@ export const CharacterSchema = z.object({
   question:       z.string(),
   state:          z.string(),
   image_filename: z.nullable(z.string()),   // null until Phase 43 curator pass
+  alt_text:       z.nullable(z.string()),   // Phase 43; null → render derives alt from state
 });
 export type Character = z.infer<typeof CharacterSchema>;
 
