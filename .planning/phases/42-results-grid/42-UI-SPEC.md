@@ -179,6 +179,8 @@ CSS for the count line:
 
 ## Grid Anatomy
 
+**Primary visual anchor:** the thumbnail card grid is the dominant element of the results column — the 160px-tall photo thumbnails are what the eye lands on first and what communicates the filtered result set at a glance. The count line above it is intentionally subordinate (14px, muted), and the panel is a secondary control surface. Everything below describes that anchor.
+
 ### Grid container
 
 ```css
@@ -253,7 +255,7 @@ CSS:
   font-style: normal;
   display: block;
   line-height: 1.4;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 ```
 
