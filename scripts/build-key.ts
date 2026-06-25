@@ -97,6 +97,9 @@ export function buildBitset(speciesCount: number, matchingIndices: number[]): st
   const nBytes = Math.ceil(speciesCount / 8);
   const bits = new Uint8Array(nBytes);
   for (const i of matchingIndices) {
+    if (i < 0 || i >= speciesCount) {
+      throw new RangeError(`buildBitset: index ${i} is out of range [0, ${speciesCount})`);
+    }
     bits[i >> 3]! |= 1 << (i & 7); // LSB-first
   }
   return Buffer.from(bits).toString('base64');

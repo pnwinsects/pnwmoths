@@ -138,6 +138,27 @@ describe('buildBitset', () => {
     const expectedLen = Math.ceil(Math.ceil(speciesCount / 8) / 3) * 4;
     assert.strictEqual(b64.length, expectedLen);
   });
+
+  test('throws RangeError for index equal to speciesCount', () => {
+    assert.throws(
+      () => buildBitset(8, [8]),
+      (err: unknown) => err instanceof RangeError && /out of range/.test((err as Error).message)
+    );
+  });
+
+  test('throws RangeError for index greater than speciesCount', () => {
+    assert.throws(
+      () => buildBitset(8, [0, 9]),
+      (err: unknown) => err instanceof RangeError && /out of range/.test((err as Error).message)
+    );
+  });
+
+  test('throws RangeError for negative index', () => {
+    assert.throws(
+      () => buildBitset(8, [-1]),
+      (err: unknown) => err instanceof RangeError && /out of range/.test((err as Error).message)
+    );
+  });
 });
 
 describe('main (integration)', () => {
