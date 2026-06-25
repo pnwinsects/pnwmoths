@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
 status: executing
-stopped_at: Phase 43 UI-SPEC approved
-last_updated: "2026-06-25T22:02:00.698Z"
-last_activity: 2026-06-25 -- Phase 43 execution started
+stopped_at: "Phase 43 Plan 02 — Task 3 checkpoint: awaiting operator BUNNY_API_KEY for live upload"
+last_updated: "2026-06-25T23:00:00.000Z"
+last_activity: "2026-06-25 -- Phase 43 Plan 02 Tasks 1+2 complete; checkpoint before live upload"
 progress:
   total_phases: 25
   completed_phases: 4
