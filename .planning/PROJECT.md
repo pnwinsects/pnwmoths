@@ -231,4 +231,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-25 — v4.0 Key Characters milestone (Issue #19): Phases 39–40 complete (data pipeline + filter-logic TDD contract). Remaining: Identify page scaffold + filter panel (41), results grid (42), character illustration images (43).*
+*Last updated: 2026-06-25 — v4.0 Key Characters milestone (Issue #19): Phases 39–41 complete (data pipeline + filter-logic TDD contract + identify page scaffold/filter panel). Remaining: results grid (42), character illustration images (43).*
