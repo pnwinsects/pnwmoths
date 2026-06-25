@@ -59,6 +59,11 @@ export class KeyResultsGrid extends LitElement {
   totalCount = 1192;
   pathPrefix = '';
 
+  /** Slugs whose CDN thumbnail failed to load — rendered as the gray placeholder
+   *  instead of a broken <img> (GRID-03/SC3: "no broken <img> tags appear in the grid").
+   *  Guards against bad/missing nav_image data (e.g. CDN 404s). */
+  _failedImages = new Set<string>();
+
   /** Light DOM — theme.css .similar-species-placeholder must reach card internals */
   createRenderRoot(): this { return this; }
 
@@ -67,15 +72,27 @@ export class KeyResultsGrid extends LitElement {
     return this.pathPrefix || '/';
   }
 
+  /** Gray placeholder block shared by no-photo species and load-failed thumbnails. */
+  _renderPlaceholder(): TemplateResult {
+    return html`<div class="pnwm-krg-placeholder-wrap"><div class="similar-species-placeholder" aria-hidden="true"></div></div>`;
+  }
+
+  _onImageError(slug: string): void {
+    if (this._failedImages.has(slug)) return;
+    this._failedImages.add(slug);
+    this.requestUpdate();
+  }
+
   _renderCard(sp: KeySpecies): TemplateResult {
     return html`
       <a class="pnwm-krg-card" href="${this._prefix}species/${sp.slug}/">
-        ${sp.nav_image
+        ${sp.nav_image && !this._failedImages.has(sp.slug)
           ? html`<img
               src="${buildCardUrl(sp.slug, sp.nav_image, 320)}"
               alt="${sp.genus} ${sp.epithet}"
-              loading="lazy">`
-          : html`<div class="pnwm-krg-placeholder-wrap"><div class="similar-species-placeholder" aria-hidden="true"></div></div>`
+              loading="lazy"
+              @error=${() => this._onImageError(sp.slug)}>`
+          : this._renderPlaceholder()
         }
         <div class="pnwm-krg-label">
           <em>${sp.genus} ${sp.epithet}</em>${sp.common_name ? html`<br><span class="pnwm-krg-common">${sp.common_name}</span>` : ''}

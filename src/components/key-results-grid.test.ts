@@ -208,3 +208,21 @@ describe('pathPrefix wiring (CR-01 regression)', () => {
     assert.equal(href, '/pnwmoths/species/habrosyne-scripta/');
   });
 });
+
+// GRID-03 hardening — a non-null nav_image that fails to load (e.g. CDN 404 from bad
+// nav_image data) must degrade to the gray placeholder, not a broken <img> (SC3).
+describe('image load-failure fallback (GRID-03 hardening)', () => {
+  test('_onImageError records the slug and triggers a re-render', () => {
+    const grid = new KeyResultsGrid();
+    assert.equal(grid._failedImages.has('sphinx-luscitiosa'), false);
+    grid._onImageError('sphinx-luscitiosa');
+    assert.equal(grid._failedImages.has('sphinx-luscitiosa'), true);
+  });
+
+  test('_onImageError is idempotent (no duplicate work on repeated errors)', () => {
+    const grid = new KeyResultsGrid();
+    grid._onImageError('x');
+    grid._onImageError('x');
+    assert.equal(grid._failedImages.size, 1);
+  });
+});
