@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
 status: executing
-stopped_at: Phase 41 Plan 01 complete
-last_updated: "2026-06-25T04:50:36Z"
+stopped_at: Phase 41 Plan 02 complete
+last_updated: "2026-06-25T04:58:44.575Z"
 last_activity: 2026-06-25 -- Phase 41 Plan 01 complete (stray-quote fix + 8-category key-matrix.json)
 progress:
   total_phases: 25
   completed_phases: 2
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
   percent: 8
 ---
 
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 ## Current Position
 
 Phase: 41 (identify-page-scaffold-filter-panel) — EXECUTING
-Plan: 2 of 3
-Status: Executing Phase 41 (Plan 01 complete)
+Plan: 3 of 3
+Status: Ready to execute
 Last activity: 2026-06-25 -- Phase 41 Plan 01 complete (stray-quote fix + 8-category key-matrix.json)
 
 ```
@@ -63,6 +63,7 @@ Progress: [----------] 0% (0/5 phases)
 | Phase 39 P01 | 15 minutes | 3 tasks | 10 files |
 | Phase 40 P01 | 12 | 3 tasks | 4 files |
 | Phase 40 P03 | 274 | 3 tasks | 4 files |
+| Phase 41 P02 | 15 minutes | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,8 @@ Recent decisions affecting current work:
 - [Phase ?]: build-key.ts meta emission done in Plan 01 (not 02) because KeyMatrixSchema.parse() fails without it
 - [Phase ?]: verified against real matrix
 - [Phase ?]: correct bitset expression locks IDENT-04 contract
+- [Phase ?]: Inline only { characters, species } in #key-char-data (not familyGroups) — familyGroups duplicates species data causing 410 KB JSON; template iterates keyMatrix.familyGroups directly in noscript
+- [Phase ?]: keyMatrix.ts is synchronous (no DuckDB) — data/key-matrix.json is already clean JSON from Plan 41-01; familyGroups pre-grouped in loader to avoid Nunjucks set-inside-for persistence trap
 
 ### Roadmap Evolution
 
@@ -141,9 +144,9 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-25T04:50:36Z
-Stopped at: Phase 41 Plan 01 complete
-Resume file: .planning/phases/41-identify-page-scaffold-filter-panel/41-02-PLAN.md
+Last session: 2026-06-25T04:58:44.570Z
+Stopped at: Phase 41 Plan 02 complete
+Resume file: .planning/phases/41-identify-page-scaffold-filter-panel/41-03-PLAN.md
 
 ## Operator Next Steps
 
