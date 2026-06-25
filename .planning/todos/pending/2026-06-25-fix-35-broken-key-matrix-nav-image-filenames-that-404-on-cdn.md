@@ -43,3 +43,7 @@ TBD. Two layers:
    `src/components/key-results-grid.ts`, so a bad/missing CDN file degrades to the
    placeholder instead of a broken image icon. Defensive; the Browse page
    (`pnwm-taxon-browser.ts`) does not currently do this either.
+
+## Tracking
+
+GitHub issue: https://github.com/pnwinsects/pnwmoths/issues/43
