@@ -4,13 +4,13 @@ milestone: v4.0
 milestone_name: Key Characters — Visual Identification
 status: executing
 stopped_at: Phase 43 UI-SPEC approved
-last_updated: "2026-06-25T21:57:14.387Z"
-last_activity: 2026-06-25 -- Phase 43 planning complete
+last_updated: "2026-06-25T22:02:00.698Z"
+last_activity: 2026-06-25 -- Phase 43 execution started
 progress:
   total_phases: 25
   completed_phases: 4
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 13
+  completed_plans: 11
   percent: 16
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 42 — results-grid
+**Current focus:** Phase 43 — Character Illustration Images
 
 ## Current Position
 
-Phase: 43
-Plan: Not started
+Phase: 43 (Character Illustration Images) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-06-25 -- Phase 43 planning complete
+Last activity: 2026-06-25 -- Phase 43 execution started
 
 ```
 Progress: [----------] 0% (0/5 phases)
@@ -66,6 +66,7 @@ Progress: [----------] 0% (0/5 phases)
 | Phase 41 P02 | 15 minutes | 2 tasks | 3 files |
 | Phase 42 P01 | 3 minutes | 2 tasks | 3 files |
 | Phase 42-results-grid P02 | 30m | 2 tasks | 6 files |
+| Phase 43 P01 | 10 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -149,7 +150,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-25T21:35:00.636Z
+Last session: 2026-06-25T22:02:00.680Z
 Stopped at: Phase 43 UI-SPEC approved
 Resume file: .planning/phases/43-character-illustration-images/43-UI-SPEC.md
 

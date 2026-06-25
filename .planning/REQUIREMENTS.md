@@ -41,8 +41,8 @@ Requirements for this milestone (v4.0). Each maps to exactly one roadmap phase.
 ### Character Illustration Images (`CIMG`)
 
 - [ ] **CIMG-01**: The character illustration images are uploaded to the bunny.net CDN via an idempotent script (reusing the `upload-tiles.ts` curl-PUT / DRY_RUN / retry pattern), resized appropriately for the help panel
-- [ ] **CIMG-02**: A curated mapping (`data/key-character-images.csv`) links characters/questions to their illustration filename(s); coverage is best-effort, since the Lucid export did not include this mapping
-- [ ] **CIMG-03**: Character help images are shown on demand beside each question/state via inline `<details>/<summary>` expansion; characters with no mapped image simply render no expander (the page is fully functional before image coverage is complete)
+- [x] **CIMG-02**: A curated mapping (`data/key-character-images.csv`) links characters/questions to their illustration filename(s); coverage is best-effort, since the Lucid export did not include this mapping
+- [x] **CIMG-03**: Character help images are shown on demand beside each question/state via inline `<details>/<summary>` expansion; characters with no mapped image simply render no expander (the page is fully functional before image coverage is complete)
 
 ## Future Requirements
 
@@ -100,8 +100,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | GRID-03 | Phase 42 | Complete |
 | GRID-04 | Phase 42 | Complete |
 | CIMG-01 | Phase 43 | Pending |
-| CIMG-02 | Phase 43 | Pending |
-| CIMG-03 | Phase 43 | Pending |
+| CIMG-02 | Phase 43 | Complete |
+| CIMG-03 | Phase 43 | Complete |
 
 **Coverage:**
 
