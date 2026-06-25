@@ -707,7 +707,11 @@ Plans:
   3. Species with no nav image show a gray placeholder block consistent with the v2.1 similar-species row; no broken `<img>` tags appear in the grid
   4. When the active filter combination matches zero species, the grid area shows a message ("No species match the selected characters") with a "Clear all" call-to-action
 
-**Plans**: TBD
+**Plans**: 2 plansPlans:
+
+- [ ] 42-01-PLAN.md — Wave 0: RED test scaffolds (key-results-grid.test.ts pure-helper unit tests for GRID-01..04 + pnwm-identify.test.ts matched-state/Clear-all extensions)
+- [ ] 42-02-PLAN.md — Wave 1: build KeyResultsGrid component + wire pnwm-identify (matrix fetch, computeMatching, path-prefix, two-column layout) + HUMAN-UAT
+
 **UI hint**: yes
 
 ### Phase 43: Character Illustration Images
