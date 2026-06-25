@@ -341,3 +341,53 @@ pnwm-occurrence-popup .pnwm-occ-note {
   color: var(--pico-muted-color);
   overflow-wrap: anywhere;
 }
+
+/* --- Identify page filter panel (.pnwm-kfp-*) --- */
+/* Mirrors .pnwm-tb-* accordion pattern; see src/components/pnwm-identify.ts */
+
+.pnwm-kfp-category h2 button {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.pnwm-kfp-category h2 button::before {
+  content: '▶';
+  font-size: 0.6em;
+  display: inline-block;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.pnwm-kfp-category h2 button[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.pnwm-kfp-category > div {
+  padding-left: 1.5rem;
+}
+
+.pnwm-kfp-badge {
+  background: #a4ab78;
+  color: #fff;
+  border-radius: 1em;
+  padding: 0 0.4em;
+  font-size: 0.75em;
+  vertical-align: middle;
+}
+
+.pnwm-kfp-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #ffffff;
+  padding: 8px 0;
+}
+
+.pnwm-kfp-question {
+  margin: 0 0 0.75rem 0;
+  border: 0;
+  padding: 0;
+}
