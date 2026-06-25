@@ -133,7 +133,7 @@
 - [x] **Phase 39: Key Matrix Data Pipeline** - Ingest `key.csv` into a compact client-loadable JSON artifact; Zod schema, byte-budget check, build integration (completed 2026-06-25)
 - [x] **Phase 40: Filter Logic TDD Contract** - Species↔key slug matching + coverage report; OR-within/AND-across filter semantics locked as tested pure functions before any UI is written (completed 2026-06-25)
 - [x] **Phase 41: Identify Page Scaffold & Filter Panel** - Eleventy route, inline JSON strategy, `pnwm-identify` root component, `character-filter-panel` Lit component, collapsible 8-category UI, "Clear all" reset, no-JS degradation (completed 2026-06-25)
-- [ ] **Phase 42: Results Grid** - `key-results-grid` Lit component: live "N species match" count, thumbnail grid, gray placeholder, "0 results" empty state
+- [x] **Phase 42: Results Grid** - `key-results-grid` Lit component: live "N species match" count, thumbnail grid, gray placeholder, "0 results" empty state (completed 2026-06-25)
 - [ ] **Phase 43: Character Illustration Images** - Manifest-driven CDN upload of character images; curator `data/key-character-images.csv`; inline `<details>/<summary>` help expansion in the filter panel
 
 ## Phase Details
@@ -710,7 +710,7 @@ Plans:
 **Plans**: 2 plansPlans:
 
 - [x] 42-01-PLAN.md — Wave 0: RED test scaffolds (key-results-grid.test.ts pure-helper unit tests for GRID-01..04 + pnwm-identify.test.ts matched-state/Clear-all extensions)
-- [ ] 42-02-PLAN.md — Wave 1: build KeyResultsGrid component + wire pnwm-identify (matrix fetch, computeMatching, path-prefix, two-column layout) + HUMAN-UAT
+- [x] 42-02-PLAN.md — Wave 1: build KeyResultsGrid component + wire pnwm-identify (matrix fetch, computeMatching, path-prefix, two-column layout) + HUMAN-UAT
 
 **UI hint**: yes
 
@@ -775,7 +775,7 @@ Plans:
 | 39. Key Matrix Data Pipeline | v4.0 | 2/2 | Complete    | 2026-06-25 |
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
-| 42. Results Grid | v4.0 | 1/2 | In Progress|  |
+| 42. Results Grid | v4.0 | 2/2 | Complete   | 2026-06-25 |
 | 43. Character Illustration Images | v4.0 | 0/TBD | Not started | - |
 
 ---
