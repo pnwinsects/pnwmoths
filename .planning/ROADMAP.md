@@ -679,7 +679,20 @@ Plans:
   3. A "Clear all" button is visible when any character state is selected; clicking it deselects every state and the button disappears
   4. With JavaScript disabled, the full character hierarchy is readable as plain HTML text and the full list of key species appears as static links; no JS errors appear in the browser console on JS-enabled load; `npm run build` page-weight check passes for `_site/identify/index.html`
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+**Wave 1**
+
+- [ ] 41-01-PLAN.md — Fix the "Abdomen and thorax" stray-quote artifact in build-key.ts (parseCharacterLabel), lock it with tests, and regenerate the 8-category data/key-matrix.json (data prerequisite)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 41-02-PLAN.md — Create the /identify/ route + src/_data/keyMatrix.ts loader (inline #key-char-data, Family→Genus no-JS species list) + base.njk nav link (IDENT-01, IDENT-06)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 41-03-PLAN.md — Build the pnwm-identify Light-DOM component (8-category accordion, badges, fieldset/legend questions, sticky "Clear all", pnwm-key-filter-change dispatch) + .pnwm-kfp-* styles + TDD unit suite (IDENT-02, IDENT-03, IDENT-05)
+
 **UI hint**: yes
 
 ### Phase 42: Results Grid
