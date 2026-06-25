@@ -28,7 +28,8 @@ describe('norm', () => {
   });
 
   it('replaces non-alphanumeric non-space chars with spaces and collapses', () => {
-    assert.equal(norm('forewing basal dash, no.jpg'), 'forewing basal dash  no');
+    // Comma becomes a space, then whitespace is collapsed — result has single spaces
+    assert.equal(norm('forewing basal dash, no.jpg'), 'forewing basal dash no');
   });
 
   it('trims leading/trailing whitespace', () => {
