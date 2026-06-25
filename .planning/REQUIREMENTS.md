@@ -10,17 +10,17 @@ Requirements for this milestone (v4.0). Each maps to exactly one roadmap phase.
 
 ### Key Data Pipeline (`KEY`)
 
-- [ ] **KEY-01**: Build step ingests `key.csv` (237 character-states × 1,228 species binary matrix) into a compact client-loadable artifact (per-character-state base64 bitset JSON, target ~30 KB gzip)
-- [ ] **KEY-02**: Character metadata — the `Category : [Subcategory :] Question : State` hierarchy (8 categories / ~55 questions / 237 states), with both 2- and 3-level depths — is emitted as structured data driving panel grouping and the OR-within/AND-across question boundaries
-- [ ] **KEY-03**: A Zod schema validates the artifact shape at build time (O(states + species), not per-cell) and a load-time structural check guards the client boundary, consistent with the v3.0 `assertParquetColumns`/`validateSpeciesStates` pattern
+- [x] **KEY-01**: Build step ingests `key.csv` (237 character-states × 1,228 species binary matrix) into a compact client-loadable artifact (per-character-state base64 bitset JSON, target ~30 KB gzip)
+- [x] **KEY-02**: Character metadata — the `Category : [Subcategory :] Question : State` hierarchy (8 categories / ~55 questions / 237 states), with both 2- and 3-level depths — is emitted as structured data driving panel grouping and the OR-within/AND-across question boundaries
+- [x] **KEY-03**: A Zod schema validates the artifact shape at build time (O(states + species), not per-cell) and a load-time structural check guards the client boundary, consistent with the v3.0 `assertParquetColumns`/`validateSpeciesStates` pattern
 - [ ] **KEY-04**: A post-build check asserts the key matrix artifact stays within a defined byte budget (the existing page-weight validator only inspects HTML, so artifact bloat is otherwise invisible)
 - [ ] **KEY-05**: The `build:key` step runs within the build-time budget (target <5 s, consistent with `build:data`) and is wired into `npm run build` and the GitHub Actions gates
 
 ### Species ↔ Key Matching (`MATCH`)
 
-- [ ] **MATCH-01**: Build step resolves the 1,228 key binomials to site species slugs (direct lowercase-hyphen transform + `data/species-synonyms.csv`), tolerating whitespace artifacts in source binomials (e.g. double-spaced `Tolype  laricis`)
-- [ ] **MATCH-02**: Build emits a coverage report listing every unmatched key binomial (the ~53 reclassified/absent taxa, e.g. `Grammia`→`Apantesis`) for later manual synonym curation
-- [ ] **MATCH-03**: Matched species join to their CDN photo thumbnail for the results grid; key species that resolve to no site slug are excluded from results and counted in the coverage report
+- [x] **MATCH-01**: Build step resolves the 1,228 key binomials to site species slugs (direct lowercase-hyphen transform + `data/species-synonyms.csv`), tolerating whitespace artifacts in source binomials (e.g. double-spaced `Tolype  laricis`)
+- [x] **MATCH-02**: Build emits a coverage report listing every unmatched key binomial (the ~53 reclassified/absent taxa, e.g. `Grammia`→`Apantesis`) for later manual synonym curation
+- [x] **MATCH-03**: Matched species join to their CDN photo thumbnail for the results grid; key species that resolve to no site slug are excluded from results and counted in the coverage report
 
 ### Identify Page & Filter Panel (`IDENT`)
 
@@ -81,14 +81,14 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| KEY-01 | Phase 39 | Pending |
-| KEY-02 | Phase 39 | Pending |
-| KEY-03 | Phase 39 | Pending |
+| KEY-01 | Phase 39 | Complete |
+| KEY-02 | Phase 39 | Complete |
+| KEY-03 | Phase 39 | Complete |
 | KEY-04 | Phase 39 | Pending |
 | KEY-05 | Phase 39 | Pending |
-| MATCH-01 | Phase 40 | Pending |
-| MATCH-02 | Phase 40 | Pending |
-| MATCH-03 | Phase 40 | Pending |
+| MATCH-01 | Phase 40 | Complete |
+| MATCH-02 | Phase 40 | Complete |
+| MATCH-03 | Phase 40 | Complete |
 | IDENT-01 | Phase 41 | Pending |
 | IDENT-02 | Phase 41 | Pending |
 | IDENT-03 | Phase 41 | Pending |
@@ -104,6 +104,7 @@ Which phases cover which requirements. Populated during roadmap creation.
 | CIMG-03 | Phase 43 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 21 total
 - Mapped to phases: 21 (100%)
 - Unmapped: 0 ✓

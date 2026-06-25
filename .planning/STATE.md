@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
-status: planning
+status: executing
 stopped_at: Phase 39 context gathered
-last_updated: "2026-06-24T23:53:36.021Z"
-last_activity: 2026-06-24 — Roadmap created for v4.0
+last_updated: "2026-06-25T00:05:47.197Z"
+last_activity: 2026-06-24 -- Phase 39 execution started
 progress:
   total_phases: 25
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 2
+  completed_plans: 1
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v4.0 — Key Characters visual identification page (Issue #19)
+**Current focus:** Phase 39 — key-matrix-data-pipeline
 
 ## Current Position
 
-Phase: 39 — Key Matrix Data Pipeline
-Plan: —
-Status: Roadmap complete; ready to plan Phase 39
-Last activity: 2026-06-24 — Roadmap created for v4.0
+Phase: 39 (key-matrix-data-pipeline) — EXECUTING
+Plan: 2 of 2
+Status: Ready to execute
+Last activity: 2026-06-24 -- Phase 39 execution started
 
 ```
 Progress: [----------] 0% (0/5 phases)
@@ -60,6 +60,8 @@ Progress: [----------] 0% (0/5 phases)
 - v3.0: shipped 2026-06-10 (6 phases, 22 plans, full JS→TS migration + data validation)
 - v4.0: kicked off 2026-06-24 (5 phases planned, Identify page with key character filter)
 
+| Phase 39 P01 | 15 minutes | 3 tasks | 10 files |
+
 ## Accumulated Context
 
 ### Decisions
@@ -79,6 +81,7 @@ Recent decisions affecting current work:
 - v4.0 copy pattern: `scripts/copy-key-matrix.ts` runs post-eleventy (same reason as `copy-parquet.ts` — Vite wipes `_site/` during build)
 - v4.0 no-JS degradation: `<noscript>` block shows character group headings as readable text + full species list as links; no pre-filtered static HTML (impractical for 237 states)
 - v4.0 `build:key` runs unconditionally (reads `species-synonyms.csv` + `key-character-images.csv` + `images.csv`, all of which can change independently of `key.csv`)
+- [Phase ?]: Phase 39-01: Lucid CSV parsing quirk discovered
 
 ### Roadmap Evolution
 
@@ -131,7 +134,7 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-24T23:21:32.378Z
+Last session: 2026-06-25T00:05:43.840Z
 Stopped at: Phase 39 context gathered
 Resume file: .planning/phases/39-key-matrix-data-pipeline/39-CONTEXT.md
 

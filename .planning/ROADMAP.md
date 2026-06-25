@@ -636,7 +636,7 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 39-01-PLAN.md — Data pipeline: commit source CSV + synonyms, Zod schemas, slug resolution + DuckDB nav join + bitset emit, load-time guard, tests (KEY-01/02/03, MATCH-01/02/03)
+- [x] 39-01-PLAN.md — Data pipeline: commit source CSV + synonyms, Zod schemas, slug resolution + DuckDB nav join + bitset emit, load-time guard, tests (KEY-01/02/03, MATCH-01/02/03)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -744,7 +744,7 @@ Plans:
 | 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete | 2026-06-10 |
 | 37. Lit Web Components Migration | v3.0 | 5/5 | Complete | 2026-06-10 |
 | 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete | 2026-06-11 |
-| 39. Key Matrix Data Pipeline | v4.0 | 0/TBD | Not started | - |
+| 39. Key Matrix Data Pipeline | v4.0 | 1/2 | In Progress|  |
 | 40. Filter Logic TDD Contract | v4.0 | 0/TBD | Not started | - |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 0/TBD | Not started | - |
 | 42. Results Grid | v4.0 | 0/TBD | Not started | - |
