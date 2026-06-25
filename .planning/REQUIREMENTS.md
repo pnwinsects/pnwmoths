@@ -13,8 +13,8 @@ Requirements for this milestone (v4.0). Each maps to exactly one roadmap phase.
 - [x] **KEY-01**: Build step ingests `key.csv` (237 character-states × 1,228 species binary matrix) into a compact client-loadable artifact (per-character-state base64 bitset JSON, target ~30 KB gzip)
 - [x] **KEY-02**: Character metadata — the `Category : [Subcategory :] Question : State` hierarchy (8 categories / ~55 questions / 237 states), with both 2- and 3-level depths — is emitted as structured data driving panel grouping and the OR-within/AND-across question boundaries
 - [x] **KEY-03**: A Zod schema validates the artifact shape at build time (O(states + species), not per-cell) and a load-time structural check guards the client boundary, consistent with the v3.0 `assertParquetColumns`/`validateSpeciesStates` pattern
-- [ ] **KEY-04**: A post-build check asserts the key matrix artifact stays within a defined byte budget (the existing page-weight validator only inspects HTML, so artifact bloat is otherwise invisible)
-- [ ] **KEY-05**: The `build:key` step runs within the build-time budget (target <5 s, consistent with `build:data`) and is wired into `npm run build` and the GitHub Actions gates
+- [x] **KEY-04**: A post-build check asserts the key matrix artifact stays within a defined byte budget (the existing page-weight validator only inspects HTML, so artifact bloat is otherwise invisible)
+- [x] **KEY-05**: The `build:key` step runs within the build-time budget (target <5 s, consistent with `build:data`) and is wired into `npm run build` and the GitHub Actions gates
 
 ### Species ↔ Key Matching (`MATCH`)
 
@@ -84,8 +84,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | KEY-01 | Phase 39 | Complete |
 | KEY-02 | Phase 39 | Complete |
 | KEY-03 | Phase 39 | Complete |
-| KEY-04 | Phase 39 | Pending |
-| KEY-05 | Phase 39 | Pending |
+| KEY-04 | Phase 39 | Complete |
+| KEY-05 | Phase 39 | Complete |
 | MATCH-01 | Phase 40 | Complete |
 | MATCH-02 | Phase 40 | Complete |
 | MATCH-03 | Phase 40 | Complete |
