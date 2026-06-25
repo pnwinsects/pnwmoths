@@ -131,7 +131,7 @@
 **Milestone Goal:** A dedicated `/identify/` page where users select from 237 character-states across 8 categories to narrow a 1,228-species matrix to a live thumbnail grid of matching moths.
 
 - [x] **Phase 39: Key Matrix Data Pipeline** - Ingest `key.csv` into a compact client-loadable JSON artifact; Zod schema, byte-budget check, build integration (completed 2026-06-25)
-- [ ] **Phase 40: Filter Logic TDD Contract** - Species↔key slug matching + coverage report; OR-within/AND-across filter semantics locked as tested pure functions before any UI is written
+- [x] **Phase 40: Filter Logic TDD Contract** - Species↔key slug matching + coverage report; OR-within/AND-across filter semantics locked as tested pure functions before any UI is written (completed 2026-06-25)
 - [ ] **Phase 41: Identify Page Scaffold & Filter Panel** - Eleventy route, inline JSON strategy, `pnwm-identify` root component, `character-filter-panel` Lit component, collapsible 8-category UI, "Clear all" reset, no-JS degradation
 - [ ] **Phase 42: Results Grid** - `key-results-grid` Lit component: live "N species match" count, thumbnail grid, gray placeholder, "0 results" empty state
 - [ ] **Phase 43: Character Illustration Images** - Manifest-driven CDN upload of character images; curator `data/key-character-images.csv`; inline `<details>/<summary>` help expansion in the filter panel
@@ -665,7 +665,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 40-03-PLAN.md — TDD: key-filter.ts (buildQuestionGroups + computeMatching, D-01..D-04) + key-filter.test.ts (TC-1..TC-8)
+- [x] 40-03-PLAN.md — TDD: key-filter.ts (buildQuestionGroups + computeMatching, D-01..D-04) + key-filter.test.ts (TC-1..TC-8)
 
 ### Phase 41: Identify Page Scaffold & Filter Panel
 
@@ -756,7 +756,7 @@ Plans:
 | 37. Lit Web Components Migration | v3.0 | 5/5 | Complete | 2026-06-10 |
 | 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete | 2026-06-11 |
 | 39. Key Matrix Data Pipeline | v4.0 | 2/2 | Complete    | 2026-06-25 |
-| 40. Filter Logic TDD Contract | v4.0 | 2/3 | In Progress|  |
+| 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete   | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 0/TBD | Not started | - |
 | 42. Results Grid | v4.0 | 0/TBD | Not started | - |
 | 43. Character Illustration Images | v4.0 | 0/TBD | Not started | - |
