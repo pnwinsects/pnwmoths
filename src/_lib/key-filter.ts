@@ -60,6 +60,22 @@ export function buildQuestionGroups(characters: Character[]): QuestionGroups {
 }
 
 // ---------------------------------------------------------------------------
+// base64ToBytes — isomorphic base64 → Uint8Array decode
+// ---------------------------------------------------------------------------
+
+/**
+ * Decode a base64 string to a Uint8Array using `atob`, which is available in
+ * both browsers and Node 16+. Buffer is deliberately avoided so this module
+ * stays importable by the Phase 41 browser component (no Node globals).
+ */
+function base64ToBytes(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+// ---------------------------------------------------------------------------
 // computeMatching
 // ---------------------------------------------------------------------------
 
@@ -115,7 +131,7 @@ export function computeMatching(
     for (const id of selectedIds) {
       const b64 = matrix.matrix[id];
       if (b64 === undefined) continue;
-      const bits = Buffer.from(b64, 'base64');
+      const bits = base64ToBytes(b64);
       for (let i = 0; i < nBytes; i++) selectedUnion[i]! |= bits[i]!;
     }
 
@@ -124,7 +140,7 @@ export function computeMatching(
     for (const id of opposingIds) {
       const b64 = matrix.matrix[id];
       if (b64 === undefined) continue;
-      const bits = Buffer.from(b64, 'base64');
+      const bits = base64ToBytes(b64);
       for (let i = 0; i < nBytes; i++) opposingUnion[i]! |= bits[i]!;
     }
 
