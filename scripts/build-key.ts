@@ -274,7 +274,17 @@ export async function main(): Promise<void> {
   });
 
   // 7. Zod build-time validation (KEY-03)
-  const artifact = KeyMatrixSchema.parse({ characters, species, matrix });
+  const artifact = KeyMatrixSchema.parse({
+    meta: {
+      totalKeySpecies:  speciesBinomials.length,    // 1,228 (all key.csv binomials incl. unmatched)
+      matchedSpecies:   matchedSlugs.length,         // 1,192 (resolved to site slugs)
+      unmatchedSpecies: unmatchedBinomials.length,   // 36
+      generatedAt:      new Date().toISOString(),
+    },
+    characters,
+    species,
+    matrix,
+  });
 
   // 8. Post-Zod structural invariants (T-39-02 mitigation)
   const nBytes = Math.ceil(artifact.species.length / 8);
