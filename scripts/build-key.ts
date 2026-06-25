@@ -65,7 +65,10 @@ export function parseCharacterLabel(label: string): {
   question: string;
   state: string;
 } {
-  const parts = label.split(':');
+  // Strip leading/trailing double-quotes produced by csv-parse relax_quotes on embedded-quote fields.
+  // e.g. '"Abdomen and thorax:...:Yes"' → 'Abdomen and thorax:...:Yes'
+  const cleaned = label.replace(/^"|"$/g, '');
+  const parts = cleaned.split(':');
   if (parts.length === 3) {
     const [category, question, state] = parts as [string, string, string];
     return {
