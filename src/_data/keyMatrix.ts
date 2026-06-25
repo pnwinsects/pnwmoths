@@ -50,7 +50,7 @@ export default function (): KeyMatrixData {
   const familyBySlug = new Map<string, string | null>(
     speciesRows.map((r) => [
       `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`,
-      r.family ?? null,
+      r.family?.trim() || null,
     ])
   );
 
