@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
 status: executing
-stopped_at: Phase 42 UI-SPEC approved
-last_updated: "2026-06-25T18:41:43.310Z"
-last_activity: 2026-06-25 -- Phase 42 planning complete
+stopped_at: Completed 42-01-PLAN.md
+last_updated: "2026-06-25T18:47:33.162Z"
+last_activity: 2026-06-25 -- Phase 42 execution started
 progress:
   total_phases: 25
   completed_phases: 3
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 10
+  completed_plans: 9
   percent: 12
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 41 — identify-page-scaffold-filter-panel
+**Current focus:** Phase 42 — results-grid
 
 ## Current Position
 
-Phase: 42
-Plan: Not started
+Phase: 42 (results-grid) — EXECUTING
+Plan: 2 of 2
 Status: Ready to execute
-Last activity: 2026-06-25 -- Phase 42 planning complete
+Last activity: 2026-06-25 -- Phase 42 execution started
 
 ```
 Progress: [----------] 0% (0/5 phases)
@@ -64,6 +64,7 @@ Progress: [----------] 0% (0/5 phases)
 | Phase 40 P01 | 12 | 3 tasks | 4 files |
 | Phase 40 P03 | 274 | 3 tasks | 4 files |
 | Phase 41 P02 | 15 minutes | 2 tasks | 3 files |
+| Phase 42 P01 | 3 minutes | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,7 @@ Recent decisions affecting current work:
 - [Phase ?]: correct bitset expression locks IDENT-04 contract
 - [Phase ?]: Inline only { characters, species } in #key-char-data (not familyGroups) — familyGroups duplicates species data causing 410 KB JSON; template iterates keyMatrix.familyGroups directly in noscript
 - [Phase ?]: keyMatrix.ts is synchronous (no DuckDB) — data/key-matrix.json is already clean JSON from Plan 41-01; familyGroups pre-grouped in loader to avoid Nunjucks set-inside-for persistence trap
+- [Phase ?]: buildCardUrl and buildCountText exported as pure helpers so Plan 42-02 can reuse them inside the component render without duplication
 
 ### Roadmap Evolution
 
@@ -144,9 +146,9 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-25T18:26:45.491Z
-Stopped at: Phase 42 UI-SPEC approved
-Resume file: .planning/phases/42-results-grid/42-UI-SPEC.md
+Last session: 2026-06-25T18:47:33.158Z
+Stopped at: Completed 42-01-PLAN.md
+Resume file: None
 
 ## Operator Next Steps
 

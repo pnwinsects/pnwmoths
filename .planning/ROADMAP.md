@@ -709,7 +709,7 @@ Plans:
 
 **Plans**: 2 plansPlans:
 
-- [ ] 42-01-PLAN.md — Wave 0: RED test scaffolds (key-results-grid.test.ts pure-helper unit tests for GRID-01..04 + pnwm-identify.test.ts matched-state/Clear-all extensions)
+- [x] 42-01-PLAN.md — Wave 0: RED test scaffolds (key-results-grid.test.ts pure-helper unit tests for GRID-01..04 + pnwm-identify.test.ts matched-state/Clear-all extensions)
 - [ ] 42-02-PLAN.md — Wave 1: build KeyResultsGrid component + wire pnwm-identify (matrix fetch, computeMatching, path-prefix, two-column layout) + HUMAN-UAT
 
 **UI hint**: yes
@@ -775,7 +775,7 @@ Plans:
 | 39. Key Matrix Data Pipeline | v4.0 | 2/2 | Complete    | 2026-06-25 |
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
-| 42. Results Grid | v4.0 | 0/TBD | Not started | - |
+| 42. Results Grid | v4.0 | 1/2 | In Progress|  |
 | 43. Character Illustration Images | v4.0 | 0/TBD | Not started | - |
 
 ---

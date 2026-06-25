@@ -33,10 +33,10 @@ Requirements for this milestone (v4.0). Each maps to exactly one roadmap phase.
 
 ### Results Grid (`GRID`)
 
-- [ ] **GRID-01**: A live "N species match" count updates on every selection change
-- [ ] **GRID-02**: A flat thumbnail grid of matching species (CDN thumbnail + binomial + common name, each linking to the species page) renders with `loading="lazy"`, reusing the browse-page species-card pattern
-- [ ] **GRID-03**: Matching species without a photo show a gray placeholder, consistent with the v2.1 similar-species row
-- [ ] **GRID-04**: A "0 species match" dead-end state shows a clear empty-state message with a "Clear all" call-to-action
+- [x] **GRID-01**: A live "N species match" count updates on every selection change
+- [x] **GRID-02**: A flat thumbnail grid of matching species (CDN thumbnail + binomial + common name, each linking to the species page) renders with `loading="lazy"`, reusing the browse-page species-card pattern
+- [x] **GRID-03**: Matching species without a photo show a gray placeholder, consistent with the v2.1 similar-species row
+- [x] **GRID-04**: A "0 species match" dead-end state shows a clear empty-state message with a "Clear all" call-to-action
 
 ### Character Illustration Images (`CIMG`)
 
@@ -95,10 +95,10 @@ Which phases cover which requirements. Populated during roadmap creation.
 | IDENT-04 | Phase 40 | Complete |
 | IDENT-05 | Phase 41 | Complete |
 | IDENT-06 | Phase 41 | Complete |
-| GRID-01 | Phase 42 | Pending |
-| GRID-02 | Phase 42 | Pending |
-| GRID-03 | Phase 42 | Pending |
-| GRID-04 | Phase 42 | Pending |
+| GRID-01 | Phase 42 | Complete |
+| GRID-02 | Phase 42 | Complete |
+| GRID-03 | Phase 42 | Complete |
+| GRID-04 | Phase 42 | Complete |
 | CIMG-01 | Phase 43 | Pending |
 | CIMG-02 | Phase 43 | Pending |
 | CIMG-03 | Phase 43 | Pending |
