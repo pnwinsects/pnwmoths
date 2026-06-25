@@ -24,12 +24,12 @@ Requirements for this milestone (v4.0). Each maps to exactly one roadmap phase.
 
 ### Identify Page & Filter Panel (`IDENT`)
 
-- [ ] **IDENT-01**: New dedicated `/identify/` page (Eleventy route), linked from the site navigation
-- [ ] **IDENT-02**: Character filter panel renders all 8 categories as collapsible groups (default-collapsed), nesting subcategory → question → state, reusing the `aria-expanded` toggle pattern from `pnwm-taxon-browser`
-- [ ] **IDENT-03**: User can select and deselect individual character states (checkbox toggle), in any order
+- [x] **IDENT-01**: New dedicated `/identify/` page (Eleventy route), linked from the site navigation
+- [x] **IDENT-02**: Character filter panel renders all 8 categories as collapsible groups (default-collapsed), nesting subcategory → question → state, reusing the `aria-expanded` toggle pattern from `pnwm-taxon-browser`
+- [x] **IDENT-03**: User can select and deselect individual character states (checkbox toggle), in any order
 - [x] **IDENT-04**: Filter semantics are OR within a question and AND across questions, with the "0 = unscored, not absent" trap handled correctly — a species is eliminated only when it scores `1` for an *opposing* state in the same question; a raw `0`/blank never excludes a species (verified by TDD before the component is built)
-- [ ] **IDENT-05**: "Clear all" reset clears every selection and restores the full result set
-- [ ] **IDENT-06**: No-JS static degradation — the full character list and the full species list are visible as static HTML without JavaScript, consistent with the browse page
+- [x] **IDENT-05**: "Clear all" reset clears every selection and restores the full result set
+- [x] **IDENT-06**: No-JS static degradation — the full character list and the full species list are visible as static HTML without JavaScript, consistent with the browse page
 
 ### Results Grid (`GRID`)
 
@@ -89,12 +89,12 @@ Which phases cover which requirements. Populated during roadmap creation.
 | MATCH-01 | Phase 40 | Complete |
 | MATCH-02 | Phase 40 | Complete |
 | MATCH-03 | Phase 40 | Complete |
-| IDENT-01 | Phase 41 | Pending |
-| IDENT-02 | Phase 41 | Pending |
-| IDENT-03 | Phase 41 | Pending |
+| IDENT-01 | Phase 41 | Complete |
+| IDENT-02 | Phase 41 | Complete |
+| IDENT-03 | Phase 41 | Complete |
 | IDENT-04 | Phase 40 | Complete |
-| IDENT-05 | Phase 41 | Pending |
-| IDENT-06 | Phase 41 | Pending |
+| IDENT-05 | Phase 41 | Complete |
+| IDENT-06 | Phase 41 | Complete |
 | GRID-01 | Phase 42 | Pending |
 | GRID-02 | Phase 42 | Pending |
 | GRID-03 | Phase 42 | Pending |
