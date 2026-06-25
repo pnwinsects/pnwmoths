@@ -654,7 +654,12 @@ Plans:
   3. `src/_lib/key-filter.ts` exports `buildQuestionGroups()` and `computeMatching()` as pure functions; `src/_lib/key-filter.test.ts` passes on these named TDD cases: single-question single-state narrows, single-question two-states widens (OR), two-question AND narrows, and a species with `0,0` on a question pair is NOT eliminated (the "0 = unscored" correctness invariant)
   4. New Zod schemas (`CharacterSchema`, `KeySpeciesSchema`, `KeyMatrixSchema`, `KeyMatrixMetaSchema`) are added to `src/types/schemas.ts`; the `pnwm-key-filter-change` event detail type is added to `src/types/events.ts`; `npm run typecheck` passes with zero errors
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+
+- [ ] 40-01-PLAN.md — Add KeyMatrixMetaSchema + meta field (schemas.ts) and KeyFilterChangeDetail event type (events.ts); confirm MATCH-01/02/03 stay green
+- [ ] 40-02-PLAN.md — Emit meta block from build-key.ts and regenerate data/key-matrix.json
+- [ ] 40-03-PLAN.md — TDD: key-filter.ts (buildQuestionGroups + computeMatching, D-01..D-04) + key-filter.test.ts (TC-1..TC-8)
 
 ### Phase 41: Identify Page Scaffold & Filter Panel
 
