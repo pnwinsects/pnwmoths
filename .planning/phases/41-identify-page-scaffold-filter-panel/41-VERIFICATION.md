@@ -1,9 +1,10 @@
 ---
 phase: 41-identify-page-scaffold-filter-panel
 verified: 2026-06-25T05:17:29Z
-status: human_needed
-score: 7/8 must-haves verified
+status: passed
+score: 8/8 must-haves verified
 overrides_applied: 0
+human_verification_resolved: 2026-06-25 — all 4 items PASS via automated browser run (playwright-core + system Chrome); see 41-HUMAN-UAT.md. CR-01 fixed (commit 20e3dcc1). Only console noise is a pre-existing site-wide /favicon.ico 404.
 human_verification:
   - test: "Open /identify/ in a browser with JavaScript enabled. Expand each of the 8 category sections one by one."
     expected: "Each click expands the section revealing question fieldsets and per-state checkboxes; aria-expanded toggles; the triangle glyph rotates."
