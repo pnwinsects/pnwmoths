@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
 status: executing
-stopped_at: Phase 41 UI-SPEC approved
-last_updated: "2026-06-25T04:19:45.847Z"
-last_activity: 2026-06-25 -- Phase 41 planning complete
+stopped_at: Phase 41 Plan 01 complete
+last_updated: "2026-06-25T04:50:36Z"
+last_activity: 2026-06-25 -- Phase 41 Plan 01 complete (stray-quote fix + 8-category key-matrix.json)
 progress:
   total_phases: 25
   completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 8
+  completed_plans: 6
   percent: 8
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 40 — filter-logic-tdd-contract
+**Current focus:** Phase 41 — identify-page-scaffold-filter-panel
 
 ## Current Position
 
-Phase: 41
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-06-25 -- Phase 41 planning complete
+Phase: 41 (identify-page-scaffold-filter-panel) — EXECUTING
+Plan: 2 of 3
+Status: Executing Phase 41 (Plan 01 complete)
+Last activity: 2026-06-25 -- Phase 41 Plan 01 complete (stray-quote fix + 8-category key-matrix.json)
 
 ```
 Progress: [----------] 0% (0/5 phases)
@@ -83,6 +83,7 @@ Recent decisions affecting current work:
 - v4.0 copy pattern: `scripts/copy-key-matrix.ts` runs post-eleventy (same reason as `copy-parquet.ts` — Vite wipes `_site/` during build)
 - v4.0 no-JS degradation: `<noscript>` block shows character group headings as readable text + full species list as links; no pre-filtered static HTML (impractical for 237 states)
 - v4.0 `build:key` runs unconditionally (reads `species-synonyms.csv` + `key-character-images.csv` + `images.csv`, all of which can change independently of `key.csv`)
+- v4.0 stray-quote fix: `parseCharacterLabel` strips `/^"|"$/g` before `split(':')` — one-line fix, no signature change; eliminates 9th spurious category from key-matrix.json
 - [Phase ?]: Phase 39-01: Lucid CSV parsing quirk discovered
 - [Phase ?]: event-bus isolation: KeyFilterChangeDetail is fully separate from FilterChangeDetail
 - [Phase ?]: build-key.ts meta emission done in Plan 01 (not 02) because KeyMatrixSchema.parse() fails without it
@@ -140,9 +141,9 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-25T03:53:29.769Z
-Stopped at: Phase 41 UI-SPEC approved
-Resume file: .planning/phases/41-identify-page-scaffold-filter-panel/41-UI-SPEC.md
+Last session: 2026-06-25T04:50:36Z
+Stopped at: Phase 41 Plan 01 complete
+Resume file: .planning/phases/41-identify-page-scaffold-filter-panel/41-02-PLAN.md
 
 ## Operator Next Steps
 

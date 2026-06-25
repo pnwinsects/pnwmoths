@@ -683,7 +683,7 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 41-01-PLAN.md — Fix the "Abdomen and thorax" stray-quote artifact in build-key.ts (parseCharacterLabel), lock it with tests, and regenerate the 8-category data/key-matrix.json (data prerequisite)
+- [x] 41-01-PLAN.md — Fix the "Abdomen and thorax" stray-quote artifact in build-key.ts (parseCharacterLabel), lock it with tests, and regenerate the 8-category data/key-matrix.json (data prerequisite)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -770,7 +770,7 @@ Plans:
 | 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete | 2026-06-11 |
 | 39. Key Matrix Data Pipeline | v4.0 | 2/2 | Complete    | 2026-06-25 |
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
-| 41. Identify Page Scaffold & Filter Panel | v4.0 | 0/TBD | Not started | - |
+| 41. Identify Page Scaffold & Filter Panel | v4.0 | 1/3 | In progress | - |
 | 42. Results Grid | v4.0 | 0/TBD | Not started | - |
 | 43. Character Illustration Images | v4.0 | 0/TBD | Not started | - |
 
