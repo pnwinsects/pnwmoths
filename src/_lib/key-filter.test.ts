@@ -52,6 +52,7 @@ function makeMatrix(
         question: qDef.question,
         state: sDef.state,
         image_filename: null,
+        alt_text: null,
       });
       matrix.push(encodeBitset(slugs.length, sDef.ones));
       charId++;
@@ -78,9 +79,9 @@ describe('buildQuestionGroups', () => {
   it('TC-8a: groups fixture characters by question string', () => {
     // 3 characters: 2 states under Q1, 1 state under Q2
     const chars: Character[] = [
-      { id: 0, category: 'Cat', subcategory: null, question: 'Q1', state: 'S1', image_filename: null },
-      { id: 1, category: 'Cat', subcategory: null, question: 'Q1', state: 'S2', image_filename: null },
-      { id: 2, category: 'Cat', subcategory: null, question: 'Q2', state: 'S1', image_filename: null },
+      { id: 0, category: 'Cat', subcategory: null, question: 'Q1', state: 'S1', image_filename: null, alt_text: null },
+      { id: 1, category: 'Cat', subcategory: null, question: 'Q1', state: 'S2', image_filename: null, alt_text: null },
+      { id: 2, category: 'Cat', subcategory: null, question: 'Q2', state: 'S1', image_filename: null, alt_text: null },
     ];
     const groups = buildQuestionGroups(chars);
     assert.strictEqual(groups.size, 2, 'should have 2 question groups');

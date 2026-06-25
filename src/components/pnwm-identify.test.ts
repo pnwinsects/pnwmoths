@@ -25,6 +25,7 @@ function makeChar(overrides: Partial<Character> & { id: number; category: string
   return {
     subcategory: null,
     image_filename: null,
+    alt_text: null,
     ...overrides,
   };
 }
@@ -210,8 +211,8 @@ const MATRIX_FIXTURE: KeyMatrix = {
     generatedAt: '2026-01-01T00:00:00.000Z',
   },
   characters: [
-    { id: 0, category: 'Color', subcategory: null, question: 'Wing color', state: 'Brown', image_filename: null },
-    { id: 1, category: 'Color', subcategory: null, question: 'Wing color', state: 'White', image_filename: null },
+    { id: 0, category: 'Color', subcategory: null, question: 'Wing color', state: 'Brown', image_filename: null, alt_text: null },
+    { id: 1, category: 'Color', subcategory: null, question: 'Wing color', state: 'White', image_filename: null, alt_text: null },
   ],
   species: [
     { slug: 'habrosyne-scripta', genus: 'Habrosyne', epithet: 'scripta', common_name: null, nav_image: 'img.jpg' },
