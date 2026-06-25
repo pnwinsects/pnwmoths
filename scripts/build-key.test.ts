@@ -3,7 +3,7 @@
 // Phase 39, Task 1: scaffold RED tests.
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -103,6 +103,24 @@ describe('parseCharacterLabel', () => {
   test('throws on unexpected colon depth (5 parts)', () => {
     assert.throws(() => parseCharacterLabel('A:B:C:D:E'), /unexpected.*depth/i);
   });
+
+  test('strips leading double-quote from stray-quote label (csv-parse relax_quotes artifact)', () => {
+    // The raw label csv-parse returns for the "dipped" embedded-quote field:
+    // '"Abdomen and thorax:Abdomen:Does it appear as if the tip of the abdomen was '
+    // (leading " is the relax_quotes artifact; trailing " on the state is stripped too)
+    const raw = '"Abdomen and thorax:Abdomen:Does it appear as if the tip of the abdomen was dipped in a different color?:Yes"';
+    const result = parseCharacterLabel(raw);
+    assert.strictEqual(result.category, 'Abdomen and thorax');
+    assert.strictEqual(result.state, 'Yes');
+  });
+
+  test('leaves clean label unchanged (regression guard)', () => {
+    const result = parseCharacterLabel('Abdomen and thorax:Abdomen:Some question:No');
+    assert.strictEqual(result.category, 'Abdomen and thorax');
+    assert.strictEqual(result.subcategory, 'Abdomen');
+    assert.strictEqual(result.question, 'Some question');
+    assert.strictEqual(result.state, 'No');
+  });
 });
 
 describe('buildBitset', () => {
@@ -168,6 +186,19 @@ describe('main (integration)', () => {
     assert.ok(
       existsSync(resolve(ROOT, 'data/key-coverage-report.json')),
       'key-coverage-report.json must exist'
+    );
+  });
+
+  test('emits exactly 8 distinct categories with no stray-quote artifact', () => {
+    execSync('node scripts/build-key.ts', { cwd: ROOT, stdio: 'pipe' });
+    const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
+      characters: Array<{ category: string }>;
+    };
+    const cats = new Set(matrix.characters.map(c => c.category));
+    assert.strictEqual(cats.size, 8, `expected 8 distinct categories, got ${cats.size}: ${[...cats].join(', ')}`);
+    assert.ok(
+      [...cats].every(c => !c.startsWith('"')),
+      `some category strings begin with a stray double-quote: ${[...cats].filter(c => c.startsWith('"')).join(', ')}`
     );
   });
 });
