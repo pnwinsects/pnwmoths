@@ -733,7 +733,7 @@ Plans:
 
 **Wave 1** *(blocked on Wave 0)*
 
-- [ ] 43-02-PLAN.md — Idempotent vips→WebP→curl-PUT uploader to key-images/ (DRY_RUN, HEAD/list idempotency) + one-off normalized matcher → committed draft data/key-character-images.csv + live-upload checkpoint (CIMG-01, CIMG-02)
+- [x] 43-02-PLAN.md — Idempotent vips→WebP→curl-PUT uploader to key-images/ (DRY_RUN, HEAD/list idempotency) + one-off normalized matcher → committed draft data/key-character-images.csv + live-upload checkpoint (CIMG-01, CIMG-02)
 
 **Wave 2** *(blocked on Waves 0-1)*
 
@@ -789,7 +789,7 @@ Plans:
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 42. Results Grid | v4.0 | 2/2 | Complete    | 2026-06-25 |
-| 43. Character Illustration Images | v4.0 | 1/3 | In Progress|  |
+| 43. Character Illustration Images | v4.0 | 2/3 | In Progress|  |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24*
