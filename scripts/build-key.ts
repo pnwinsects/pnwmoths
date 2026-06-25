@@ -234,16 +234,28 @@ export async function main(): Promise<void> {
     image_filename: null,
   }));
 
+  // Build slug → accepted-name lookup so synonym-resolved species display the accepted name
+  const slugToName = new Map(
+    speciesRows.map(r => [
+      `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`,
+      { genus: r.genus, epithet: r.species },
+    ])
+  );
+
   const matchedSlugs = matchedIndices.map(i => resolvedSlugs[i]!);
   const species = matchedSlugs.map((slug, spIdx) => {
     const origIdx = matchedIndices[spIdx]!;
     const binomial = speciesBinomials[origIdx] ?? '';
     const normalized = normalizeBinomial(binomial);
     const parts = normalized.split(' ');
+    // Use accepted name from species.csv when available (covers synonym-resolved species);
+    // fall back to key-CSV binomial parts only when slug has no species row (should not
+    // occur for matched slugs, but avoids a crash if data drifts).
+    const accepted = slugToName.get(slug);
     return {
       slug,
-      genus: parts[0] ?? '',
-      epithet: parts[1] ?? '',
+      genus: accepted?.genus ?? parts[0] ?? '',
+      epithet: accepted?.epithet ?? parts[1] ?? '',
       common_name: null,
       nav_image: navImages.get(slug) ?? null,
     };
