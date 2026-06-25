@@ -41,5 +41,5 @@ blocked: 0
 
 ### CR-01: no-JS species list "(no family)" group sorts to top (PARTIAL)
 *Acopa perpallida* has `family === ''` in `species.csv`. `src/_data/keyMatrix.ts:53` uses `r.family ?? null` — nullish coalescing does not convert `''` to `null` — so the empty-string family sorts alphabetically before all real families, rendering a "(no family)" group at the top of the no-JS species list instead of the bottom (or omitted). Affects IDENT-06 "correct no-JS static degradation."
-fix: `r.family?.trim() || null` in keyMatrix.ts (one-liner). Tracked in 41-REVIEW.md CR-01.
-status: open
+fix: applied `r.family?.trim() || null` in keyMatrix.ts (commit 20e3dcc1). Verified: '(no family)' now sorts last (index 11/12) in the rebuilt no-JS species list; tsc clean, 324/324 tests pass.
+status: resolved
