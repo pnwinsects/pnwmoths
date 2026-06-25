@@ -5,8 +5,16 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { gzipSync } from 'zlib';
 
-const BUDGET_BYTES = process.env['KEY_BUDGET_BYTES']
-  ? parseInt(process.env['KEY_BUDGET_BYTES'], 10)
+const rawBudget = process.env['KEY_BUDGET_BYTES'];
+const BUDGET_BYTES = rawBudget !== undefined
+  ? (() => {
+      const n = parseInt(rawBudget, 10);
+      if (!Number.isFinite(n) || n < 0) {
+        console.error(`[key-weight] ERROR: KEY_BUDGET_BYTES="${rawBudget}" is not a valid non-negative integer`);
+        process.exit(1);
+      }
+      return n;
+    })()
   : 50 * 1024;
 const ARTIFACT = process.env['KEY_MATRIX_PATH'] ?? '_site/key-matrix.json';
 
