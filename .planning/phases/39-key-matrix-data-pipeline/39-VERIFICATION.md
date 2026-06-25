@@ -1,10 +1,11 @@
 ---
 phase: 39-key-matrix-data-pipeline
 verified: 2026-06-24T00:00:00Z
-status: human_needed
+status: passed
 score: 11/11 must-haves verified
 overrides_applied: 0
-re_verification: false
+re_verification: true
+human_verification_resolved: "2026-06-24 — maintainer reviewed the 36 unmatched binomials (spot-checked Protorthodes texana: ITIS-valid, Noctuidae). Confirmed legitimate absent taxa, correctly excluded; data preserved in committed key-characters.csv. See 39-HUMAN-UAT.md and issue #19 comment 4794832893."
 human_verification:
   - test: "Inspect data/key-coverage-report.json unmatched_binomials list"
     expected: "~36 entries representing plausibly reclassified or absent taxa (e.g. Grammia species not yet synonymised, historical names), not parse artefacts or whitespace failures"
