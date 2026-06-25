@@ -25,6 +25,7 @@ function makeValidArtifact(
     question: 'In which State/Province?',
     state: 'Washington',
     image_filename: null,
+    alt_text: null,
   };
 
   const speciesEntry = {
@@ -95,8 +96,8 @@ describe('validateKeyMatrix', () => {
         validateKeyMatrix({
           meta: { totalKeySpecies: 1, matchedSpecies: 1, unmatchedSpecies: 0, generatedAt: '2026-01-01T00:00:00.000Z' },
           characters: [
-            { id: 0, category: 'A', subcategory: null, question: 'Q', state: 'S', image_filename: null },
-            { id: 1, category: 'A', subcategory: null, question: 'Q', state: 'T', image_filename: null },
+            { id: 0, category: 'A', subcategory: null, question: 'Q', state: 'S', image_filename: null, alt_text: null },
+            { id: 1, category: 'A', subcategory: null, question: 'Q', state: 'T', image_filename: null, alt_text: null },
           ],
           species: [{ slug: 's', genus: 'G', epithet: 'e', common_name: null, nav_image: null }],
           matrix: [bitset], // only 1 entry for 2 characters
@@ -122,7 +123,7 @@ describe('validateKeyMatrix', () => {
         validateKeyMatrix({
           meta: { totalKeySpecies: 25, matchedSpecies: 25, unmatchedSpecies: 0, generatedAt: '2026-01-01T00:00:00.000Z' },
           characters: [
-            { id: 0, category: 'A', subcategory: null, question: 'Q', state: 'S', image_filename: null },
+            { id: 0, category: 'A', subcategory: null, question: 'Q', state: 'S', image_filename: null, alt_text: null },
           ],
           species: Array.from({ length: 25 }, (_, i) => ({
             slug: `s-${i}`,

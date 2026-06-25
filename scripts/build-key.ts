@@ -235,6 +235,7 @@ export async function main(): Promise<void> {
     id: idx,
     ...parseCharacterLabel(row[0] ?? ''),
     image_filename: null,
+    alt_text: null,
   }));
 
   // Build slug → accepted-name lookup so synonym-resolved species display the accepted name
