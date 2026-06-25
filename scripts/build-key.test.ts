@@ -12,13 +12,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
 // Import pure functions from build-key.ts (will fail until Task 2 creates the file)
+// Note: main() is tested via execSync integration test (not imported directly)
 import {
   normalizeBinomial,
   binomialToSlug,
   resolveSlug,
   parseCharacterLabel,
   buildBitset,
-  main,
 } from './build-key.ts';
 
 describe('normalizeBinomial', () => {
