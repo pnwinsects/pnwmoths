@@ -134,7 +134,7 @@
 - [x] **Phase 40: Filter Logic TDD Contract** - Species↔key slug matching + coverage report; OR-within/AND-across filter semantics locked as tested pure functions before any UI is written (completed 2026-06-25)
 - [x] **Phase 41: Identify Page Scaffold & Filter Panel** - Eleventy route, inline JSON strategy, `pnwm-identify` root component, `character-filter-panel` Lit component, collapsible 8-category UI, "Clear all" reset, no-JS degradation (completed 2026-06-25)
 - [x] **Phase 42: Results Grid** - `key-results-grid` Lit component: live "N species match" count, thumbnail grid, gray placeholder, "0 results" empty state (completed 2026-06-25)
-- [ ] **Phase 43: Character Illustration Images** - Manifest-driven CDN upload of character images; curator `data/key-character-images.csv`; inline `<details>/<summary>` help expansion in the filter panel
+- [x] **Phase 43: Character Illustration Images** - Manifest-driven CDN upload of character images; curator `data/key-character-images.csv`; inline `<details>/<summary>` help expansion in the filter panel (completed 2026-06-26)
 
 ## Phase Details
 
@@ -737,7 +737,7 @@ Plans:
 
 **Wave 2** *(blocked on Waves 0-1)*
 
-- [ ] 43-03-PLAN.md — Populate Character.image_filename/alt_text in build-key (soft-skip + out-of-range warn) + per-state <details> expander in pnwm-identify (host-absolute CDN src) + .pnwm-kfp-help CSS + UAT (CIMG-02, CIMG-03)
+- [x] 43-03-PLAN.md — Populate Character.image_filename/alt_text in build-key (soft-skip + out-of-range warn) + per-state <details> expander in pnwm-identify (host-absolute CDN src) + .pnwm-kfp-help CSS + UAT (CIMG-02, CIMG-03)
 
 **UI hint**: yes
 
@@ -789,7 +789,7 @@ Plans:
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 42. Results Grid | v4.0 | 2/2 | Complete    | 2026-06-25 |
-| 43. Character Illustration Images | v4.0 | 2/3 | In Progress|  |
+| 43. Character Illustration Images | v4.0 | 3/3 | Complete   | 2026-06-26 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24*
