@@ -112,13 +112,22 @@ None — no external service configuration required for code tasks. Task 4 (UAT)
 
 ## Next Phase Readiness
 
-**Task 4 (UAT) pending:** Browser verification that:
-1. The `ⓘ illustration` expander appears beside mapped states in the `/identify/` panel
-2. Opening it loads the CDN WebP (non-prefixed `https://pnwmoths.b-cdn.net/key-images/...` src)
-3. Unmapped states show no expander; panel remains fully functional
-4. Keyboard: Tab to `<summary>`, Enter/Space toggles; focus outline is olive 2px
+**Task 4 (UAT): PASSED (operator-verified 2026-06-26).** The owner confirmed the
+`ⓘ illustration` expander works well in the browser: it appears beside mapped
+states, opening it loads the CDN WebP via the non-prefixed
+`https://pnwmoths.b-cdn.net/key-images/...` src, unmapped states show no expander,
+the panel stays fully functional, and keyboard toggle works.
 
-All automated success criteria are green. The plan is blocked at the human-verify UAT checkpoint.
+Follow-ups captured (deferred, non-blocking):
+- **Disclosure-marker affordance:** the native right-pointing caret (▶) reads as a
+  navigation link rather than an expand triangle next to `ⓘ illustration`. Deferred
+  to the planned Identify-page UI-polish round —
+  `.planning/todos/pending/2026-06-26-identify-help-expander-disclosure-marker-reads-as-nav-link.md`.
+- **CSV curator pass:** 12 color-name collisions in the draft `data/key-character-images.csv`
+  (e.g. `Black copy.jpg` vs `Black.jpg`) need curator resolution; ~160/237 states remain
+  unmapped (best-effort coverage by design).
+
+All automated success criteria are green and UAT is approved.
 
 ## Self-Check
 
