@@ -30,7 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 ##### Adults
 
-This species has only been collected twice, once in late July and the other time in mid-August. The males are nocturnal and come to lights. The females are unknown and might fly during the day or not at all. The 1987 collecting trip during which most of the type series of this species was collected is recounted by Nancy duPre´ Clarke (1991).
+This species has only been collected twice, once in late July and the other time in mid-August. The males are nocturnal and come to lights. The females are unknown and might fly during the day or not at all. The 1987 collecting trip during which most of the type series of this species was collected is recounted by Nancy duPré Clarke (1991).
 
 ## Economic Importance
 

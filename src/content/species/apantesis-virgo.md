@@ -18,7 +18,7 @@ This is a relatively common eastern species that barely enters the Pacific North
 
 ### Global
 
-This species is common and widespread in temperate eastern North America where it occurs from the Gaspe Peninsula of Quebec south to northern Florida. The range extends west in a roughly triangular distribution to Alberta where it occurs widely except in the far northern part of the province.
+This species is common and widespread in temperate eastern North America where it occurs from the Gaspé Peninsula of Quebec south to northern Florida. The range extends west in a roughly triangular distribution to Alberta where it occurs widely except in the far northern part of the province.
 
 ## Life History
 
