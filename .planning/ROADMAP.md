@@ -789,7 +789,7 @@ Plans:
 | 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 42. Results Grid | v4.0 | 2/2 | Complete    | 2026-06-25 |
-| 43. Character Illustration Images | v4.0 | 3/3 | Complete   | 2026-06-26 |
+| 43. Character Illustration Images | v4.0 | 3/3 | Complete    | 2026-06-26 |
 
 ---
 *Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24*
