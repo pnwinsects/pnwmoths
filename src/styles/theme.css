@@ -500,3 +500,38 @@ pnwm-occurrence-popup .pnwm-occ-note {
   color: var(--pico-muted-color);
   margin: 16px 0;
 }
+
+/* --- Character illustration help expander (Phase 43) --- */
+.pnwm-kfp-help {
+  margin: 4px 0 8px 1.5em;
+}
+.pnwm-kfp-help > summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+  padding: 4px 0;
+  list-style: none;
+}
+.pnwm-kfp-help > summary:hover,
+.pnwm-kfp-help > summary:focus-visible {
+  color: var(--pico-primary);
+}
+.pnwm-kfp-help > summary:focus-visible {
+  outline: 2px solid var(--pico-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.pnwm-kfp-help[open] > summary {
+  margin-bottom: 4px;
+}
+.pnwm-kfp-help img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  margin-top: 8px;
+  background: #f0ece0;
+  border-radius: 2px;
+}
