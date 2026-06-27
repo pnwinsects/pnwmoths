@@ -40,3 +40,10 @@ TBD during the Identify-page UI polish pass. Candidates:
 - Only ~77/237 states are mapped in the initial draft CSV, so the marker appears
   mainly under Forewing/Hindwing color + Distribution.
 </content>
+
+## Also: no way to view the illustration larger (UAT 2026-06-27)
+
+Phase 43 UAT (test 3): the illustration loads in the expander but is small
+(capped at `max-height: 320px`, UI-SPEC §3) with no affordance to enlarge it.
+Add a "view larger" interaction (lightbox / click-to-zoom) in the same
+Identify-page UI-polish pass. Files: src/components/pnwm-identify.ts, src/styles/theme.css.
