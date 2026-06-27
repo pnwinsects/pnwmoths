@@ -76,13 +76,17 @@ async function withRetry<T>(fn: () => T | Promise<T>, label: string): Promise<T>
 // ---------------------------------------------------------------------------
 
 /**
- * Canonical CDN name for a legacy photo: underscores → spaces. The backup files
- * keep the old-site underscore names (e.g. 'Xestia_atrata-A-D.jpg'); the CDN and
- * data/images.csv use the space convention ('Xestia atrata-A-D.jpg'). Idempotent.
- * Exported for unit tests.
+ * Canonical CDN name for a legacy photo. The backup files use the old-site
+ * separators between genus and species — underscore ('Xestia_atrata-A-D.jpg') OR
+ * hyphen ('Tarache-flavipennis-A-D.jpg') — while the CDN and data/images.csv use
+ * the space convention ('Xestia atrata-A-D.jpg'). Normalizes both:
+ *   1. every underscore → space (handles Genus_species and irregular Genus_species_D)
+ *   2. the leading genus↔species hyphen → space, while preserving the uppercase
+ *      view-code hyphens (-A-D) via the lowercase lookahead.
+ * Idempotent. Exported for unit tests.
  */
 export function normalizePhotoName(filename: string): string {
-  return filename.replace(/_/g, ' ');
+  return filename.replace(/_/g, ' ').replace(/^([A-Z][a-z]+)-(?=[a-z])/, '$1 ');
 }
 
 /** Storage-zone PUT URL for a legacy photo. Filename is URL-encoded (spaces/commas). */

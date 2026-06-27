@@ -9,8 +9,13 @@ describe('normalizePhotoName', () => {
   it('converts every underscore (irregular old-site names)', () => {
     assert.equal(normalizePhotoName('Apantesis_bolanderi_D.jpg'), 'Apantesis bolanderi D.jpg');
   });
-  it('is idempotent on already-normalized names', () => {
+  it('converts the genus↔species hyphen to a space, keeping view-code hyphens', () => {
+    assert.equal(normalizePhotoName('Tarache-flavipennis-A-D.jpg'), 'Tarache flavipennis-A-D.jpg');
+    assert.equal(normalizePhotoName('Anarta-antica-B-D.jpg'), 'Anarta antica-B-D.jpg');
+  });
+  it('leaves an already-spaced binomial untouched (idempotent)', () => {
     assert.equal(normalizePhotoName('Xestia atrata-A-D.jpg'), 'Xestia atrata-A-D.jpg');
+    assert.equal(normalizePhotoName('Resapamea aff passer-B-D.jpg'), 'Resapamea aff passer-B-D.jpg');
   });
 });
 
