@@ -512,6 +512,23 @@ pnwm-occurrence-popup .pnwm-occ-note {
   padding: 4px 0;
   list-style: none;
 }
+/* Pico styles every bare <summary> with a right-floated ::after chevron that reads
+   as a navigation affordance (pico.css "details summary::after"); suppress it and
+   reuse the panel's own rotating ▶ disclosure idiom (see .pnwm-kfp-category) so the
+   row clearly reads as expand/collapse. */
+.pnwm-kfp-help > summary::after {
+  display: none;
+}
+.pnwm-kfp-help > summary::before {
+  content: '▶';
+  font-size: 0.6em;
+  display: inline-block;
+  margin-right: 0.4em;
+  transition: transform 0.15s;
+}
+.pnwm-kfp-help[open] > summary::before {
+  transform: rotate(90deg);
+}
 .pnwm-kfp-help > summary:hover,
 .pnwm-kfp-help > summary:focus-visible {
   color: var(--pico-primary);
@@ -524,6 +541,11 @@ pnwm-occurrence-popup .pnwm-occ-note {
 .pnwm-kfp-help[open] > summary {
   margin-bottom: 4px;
 }
+.pnwm-kfp-help-zoom {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+}
 .pnwm-kfp-help img {
   display: block;
   max-width: 100%;
@@ -531,7 +553,22 @@ pnwm-occurrence-popup .pnwm-occ-note {
   height: auto;
   max-height: 320px;
   object-fit: contain;
-  margin-top: 8px;
   background: #f0ece0;
+  border-radius: 2px;
+}
+.pnwm-kfp-help-zoom-hint {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  color: var(--pico-muted-color);
+}
+.pnwm-kfp-help-zoom:hover .pnwm-kfp-help-zoom-hint,
+.pnwm-kfp-help-zoom:focus-visible .pnwm-kfp-help-zoom-hint {
+  color: var(--pico-primary);
+  text-decoration: underline;
+}
+.pnwm-kfp-help-zoom:focus-visible {
+  outline: 2px solid var(--pico-primary);
+  outline-offset: 2px;
   border-radius: 2px;
 }

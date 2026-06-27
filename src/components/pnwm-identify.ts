@@ -251,12 +251,21 @@ export class PnwmIdentify extends LitElement {
           </label>
           ${img ? html`<details class="pnwm-kfp-help">
             <summary>ⓘ illustration</summary>
-            <img
-              src="${characterImageSrc(img)}"
-              alt="${helpImageAlt(char.state, char.alt_text)}"
-              loading="lazy"
-              decoding="async"
+            <a
+              class="pnwm-kfp-help-zoom"
+              href="${characterImageSrc(img)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View full-size illustration of ${char.state}"
             >
+              <img
+                src="${characterImageSrc(img)}"
+                alt="${helpImageAlt(char.state, char.alt_text)}"
+                loading="lazy"
+                decoding="async"
+              >
+              <span class="pnwm-kfp-help-zoom-hint">View full size ↗</span>
+            </a>
           </details>` : ''}`;
         })}
       </fieldset>`;

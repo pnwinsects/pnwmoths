@@ -47,3 +47,18 @@ Phase 43 UAT (test 3): the illustration loads in the expander but is small
 (capped at `max-height: 320px`, UI-SPEC §3) with no affordance to enlarge it.
 Add a "view larger" interaction (lightbox / click-to-zoom) in the same
 Identify-page UI-polish pass. Files: src/components/pnwm-identify.ts, src/styles/theme.css.
+
+## Resolution (2026-06-27)
+
+Both items fixed and browser-verified on `/identify/`.
+
+- **Disclosure marker:** root cause was misdiagnosed in the original report. It was
+  NOT the native `<details>` caret — it was **Pico CSS's `details summary::after`**
+  right-floated chevron layering onto our bare `<details>`. Fix: suppress it
+  (`.pnwm-kfp-help > summary::after { display: none }`) and reuse the panel's own
+  rotating `▶` `::before` idiom (matches `.pnwm-kfp-category` headers). Avoided a
+  secondary trap where `display:flex` on a `<summary>` makes Chrome re-add the
+  native marker as a flex item. See memory `feedback_pico_defaults_bite`.
+- **View larger:** illustration wrapped in an `<a>` to the full-res CDN image
+  (new tab, `rel="noopener noreferrer"`, `aria-label`) with a visible
+  "View full size ↗" hint. No-JS, keyboard-accessible; no new lightbox machinery.
