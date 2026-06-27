@@ -33,6 +33,9 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   eleventyConfig.addDataExtension("ts", {
     read: false,
     parser: async (filePath: string) => {
+      // Skip test files (*.test.ts) — they have no default export and would run
+      // test assertions as a side effect if imported during the Eleventy build.
+      if (filePath.endsWith(".test.ts")) return undefined;
       // Defensive: ensure absolute path for import() — Eleventy may pass project-relative
       const absolutePath = isAbsolute(filePath) ? filePath : resolve(process.cwd(), filePath);
       const m = await import(absolutePath) as { default: unknown };
