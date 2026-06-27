@@ -299,4 +299,28 @@ describe('CIMG-02: CSV population of image_filename + alt_text', () => {
       rmSync(tmp, { recursive: true, force: true });
     }
   });
+
+  test('blank char_id is skipped, not coerced to character 0 (Number("") === 0 guard)', () => {
+    // A row with an empty char_id must NOT attach its image to the first character.
+    const tmp = mkdtempSync(join(tmpdir(), 'pnwm-cimg02-'));
+    const fixturePath = join(tmp, 'fixture.csv');
+    try {
+      nodeWriteFileSync(fixturePath, 'char_id,image_filename,alt_text\n,BlankId.webp,should be skipped\n');
+      execSync(
+        `KEY_CHAR_IMAGES_CSV=${fixturePath} node scripts/build-key.ts`,
+        { cwd: ROOT, stdio: 'pipe' }
+      );
+      const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
+        characters: Array<{ id: number; image_filename: string | null }>;
+      };
+      const char0 = matrix.characters.find(c => c.id === 0);
+      assert.ok(char0, 'character with id=0 must exist');
+      assert.strictEqual(
+        char0!.image_filename, null,
+        'blank char_id must not be coerced to 0 and attached to the first character'
+      );
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
 });

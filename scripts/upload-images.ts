@@ -98,10 +98,16 @@ async function withRetry<T>(fn: () => T | Promise<T>, label: string): Promise<T>
  * The specimen-photo exclusion regex. Matches the canonical binomial-prefix pattern
  * `Genus species.*-ViewCode-ViewCode.jpg` used for specimen photos in the Lucid export.
  * Combined with EXTRA_EXCLUDES below this forms the complete D-02 layered filter.
- * (RESEARCH Pitfall 4: case-insensitive to catch .JPG; pattern matches the
- * strict -A-D suffix.)
+ * (RESEARCH Pitfall 4: matches the strict capitalized-Genus / lowercase-species /
+ * uppercase -A-D view-code suffix.)
+ *
+ * The stem is case-SENSITIVE on purpose: a blanket /i flag also made `[A-Z][a-z]+`
+ * and `-[A-Z]-[A-Z]` case-insensitive, which would wrongly exclude a genuine
+ * character illustration named like `forewing dash-a-b.jpg`. Only the file
+ * extension is matched case-insensitively (so `.JPG`/`.JPEG` specimen photos are
+ * still caught).
  */
-const SPECIMEN_RE = /^[A-Z][a-z]+[ -][a-z]+.*-[A-Z]-[A-Z]\.jpe?g$/i;
+const SPECIMEN_RE = /^[A-Z][a-z]+[ -][a-z]+.*-[A-Z]-[A-Z]\.[jJ][pP][eE]?[gG]$/;
 
 /**
  * Explicit exclude set for the 6 enumerated binomial-prefixed specimen photos that
@@ -268,17 +274,24 @@ async function main(): Promise<void> {
           alreadyPresent = existingNames.has(webpName);
         } else {
           // Fallback path: per-file HEAD check (acceptable — SC1 counts PUTs, not HEADs).
-          try {
-            execFileSync('curl', [
-              '-s', '-S', '-f', '-I',
+          // Capture the HTTP status explicitly (no -f) so a transient 5xx / network
+          // failure is retried rather than mistaken for a 404 — otherwise a degraded
+          // run would re-PUT files that already exist, breaking SC1.
+          const code = await withRetry(() => {
+            const out = execFileSync('curl', [
+              '-s', '-S', '-o', '/dev/null', '-w', '%{http_code}', '-I',
               '-H', `AccessKey: ${BUNNY_API_KEY}`,
               storageUrl,
-            ], { stdio: ['pipe', 'pipe', 'pipe'] });
-            alreadyPresent = true;
-          } catch {
-            // HEAD returned 4xx (404 = not present); proceed with upload.
-            alreadyPresent = false;
-          }
+            ], { stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
+            const status = Number(out);
+            // 000 = no HTTP response (network failure); 5xx = server hiccup — both retriable.
+            if (status === 0 || (status >= 500 && status < 600)) {
+              throw new Error(`HEAD got transient status ${out}`);
+            }
+            return status;
+          }, `HEAD ${webpName}`);
+          // 2xx → present (skip); 404/4xx → absent (upload).
+          alreadyPresent = code >= 200 && code < 300;
         }
 
         if (alreadyPresent) {

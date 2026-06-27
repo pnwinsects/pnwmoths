@@ -238,17 +238,28 @@ export async function main(): Promise<void> {
   if (existsSync(csvPath)) {
     const imageRows = parse(
       readFileSync(csvPath),
-      { columns: true, skip_empty_lines: true, bom: true }
+      // relax_quotes: curator alt_text is free text and may contain an unescaped
+      // double-quote — same reason the key-characters.csv parse above sets it.
+      // Without it a single stray quote aborts the whole key build (defeats D-08 soft-skip).
+      { columns: true, skip_empty_lines: true, bom: true, relax_quotes: true }
     ) as Array<{ char_id: string; image_filename: string; alt_text: string }>;
     for (const r of imageRows) {
-      const id = Number(r.char_id);
-      if (!Number.isInteger(id) || id < 0 || id >= dataRows.length) {
+      const raw = (r.char_id ?? '').trim();
+      const id = Number(raw);
+      // Require an explicit non-negative integer. `/^\d+$/` rejects blank/whitespace
+      // (Number('') === 0 would otherwise silently attach the image to character 0).
+      if (!/^\d+$/.test(raw) || id >= dataRows.length) {
         console.warn(
-          `build-key: key-character-images.csv char_id ${r.char_id} out of range [0, ${dataRows.length}) — skipping`
+          `build-key: key-character-images.csv char_id ${JSON.stringify(r.char_id)} invalid or out of range [0, ${dataRows.length}) — skipping`
         );
         continue;
       }
       if (r.image_filename) {
+        if (imageMap.has(id)) {
+          console.warn(
+            `build-key: key-character-images.csv duplicate char_id ${id} — overwriting previous row (last-wins)`
+          );
+        }
         imageMap.set(id, { image_filename: r.image_filename, alt_text: r.alt_text || null });
       }
     }
