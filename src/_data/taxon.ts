@@ -1,5 +1,6 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import type { TaxonFamily, TaxonGenus, TaxonSubfamily, NavImage } from '../types/index.ts';
+import { loadWithheldFamilies, isWithheld } from '../_lib/withheld-families.ts';
 
 // Narrow projection interfaces for the two DuckDB queries
 
@@ -85,6 +86,7 @@ function pickNavImages(speciesSlugs: string[], bySpeciesSlug: Record<string, Nav
 }
 
 export default async function (): Promise<TaxonFamily[]> {
+  const withheld = loadWithheldFamilies();
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
@@ -158,7 +160,7 @@ export default async function (): Promise<TaxonFamily[]> {
   const speciesRowsRaw = speciesResult.getRowObjectsJS();
   const speciesRows: TaxonSpeciesDbRow[] = [];
   for (const row of speciesRowsRaw) {
-    if (isTaxonSpeciesDbRow(row)) speciesRows.push(row);
+    if (isTaxonSpeciesDbRow(row) && !isWithheld(row.family, withheld)) speciesRows.push(row);
   }
 
   const imageRowsRaw = imagesResult.getRowObjectsJS();

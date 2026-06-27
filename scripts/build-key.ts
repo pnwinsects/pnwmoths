@@ -10,6 +10,7 @@ import { parse } from 'csv-parse/sync';
 // contains embedded unescaped double-quotes in character labels (Lucid export artifact)
 // that trip csv-parse without relax_quotes. We do the UTF-8 + file-exists preflight inline.
 import { KeyMatrixSchema } from '../src/types/schemas.ts';
+import { loadWithheldFamilies, isWithheld } from '../src/_lib/withheld-families.ts';
 
 /**
  * Normalize a species binomial: trim whitespace and collapse multiple spaces to one.
@@ -203,10 +204,14 @@ export async function main(): Promise<void> {
   const speciesBinomials = (headerRow ?? []).slice(1); // 1,228 entries (col 0 is the label column)
 
   // 3. Load slug resolution resources
-  const speciesRows = parse(
+  const withheld = loadWithheldFamilies();
+  const allSpeciesRows = parse(
     readFileSync(resolve('data/species.csv')),
     { columns: true, skip_empty_lines: true }
-  ) as Array<{ genus: string; species: string }>;
+  ) as Array<{ genus: string; species: string; family: string }>;
+  // Filter withheld families so their binomials resolve to null in resolveSlug
+  // and land in unmatchedBinomials → excluded from key-matrix.json (ISSUE-48).
+  const speciesRows = allSpeciesRows.filter(r => !isWithheld(r.family, withheld));
   const siteSlugSet = new Set(
     speciesRows.map(r => `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`)
   );
