@@ -151,3 +151,44 @@ export const TaxonFamilySchema = z.object({
 });
 // TaxonFamily is the root node; the taxon tree is a TaxonFamily[]
 export type TaxonFamily = z.infer<typeof TaxonFamilySchema>;
+
+// --- Key Matrix (Phase 39 + 40) ---
+// Validated at build time by KeyMatrixSchema.parse(); guarded at browser load by validateKeyMatrix.
+export const CharacterSchema = z.object({
+  id:             z.number(),
+  category:       z.string(),
+  subcategory:    z.nullable(z.string()),   // null for 3-part (2-colon) labels
+  question:       z.string(),
+  state:          z.string(),
+  image_filename: z.nullable(z.string()),   // null until Phase 43 curator pass
+  alt_text:       z.nullable(z.string()),   // Phase 43; null → render derives alt from state
+});
+export type Character = z.infer<typeof CharacterSchema>;
+
+export const KeySpeciesSchema = z.object({
+  slug:        z.string(),
+  genus:       z.string(),
+  epithet:     z.string(),
+  common_name: z.nullable(z.string()),
+  nav_image:   z.nullable(z.string()),
+});
+export type KeySpecies = z.infer<typeof KeySpeciesSchema>;
+
+// KeyMatrixMetaSchema (Phase 40) — build provenance; also enables "showing N of 1,228" UI affordance
+export const KeyMatrixMetaSchema = z.object({
+  totalKeySpecies:  z.number(),    // 1,228 — all species in key.csv including unmatched
+  matchedSpecies:   z.number(),    // 1,192 — species resolved to site slugs (in matrix)
+  unmatchedSpecies: z.number(),    // 36 = 1,228 − 1,192
+  generatedAt:      z.string(),    // ISO 8601 timestamp from build-key.ts
+});
+export type KeyMatrixMeta = z.infer<typeof KeyMatrixMetaSchema>;
+
+// matrix: 237 base64 strings, each encoding a Uint8Array bitset over matched species (LSB-first)
+// length === characters.length; each string is base64; bit i set iff species[i] scores 1
+export const KeyMatrixSchema = z.object({
+  meta:       KeyMatrixMetaSchema,             // NEW Phase 40 — build provenance + species counts
+  characters: z.array(CharacterSchema),
+  species:    z.array(KeySpeciesSchema),
+  matrix:     z.array(z.string()),    // 237 base64 strings; length === characters.length
+});
+export type KeyMatrix = z.infer<typeof KeyMatrixSchema>;

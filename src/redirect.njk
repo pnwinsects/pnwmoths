@@ -57,8 +57,8 @@ eleventyExcludeFromCollections: true
     <h1>Redirecting…</h1>
     <p id="message">Finding the right page for you.</p>
     <p id="fallback" style="display:none;">
-      We couldn't find an exact match. Try <a href="/browse/">browsing all species</a>
-      or <a href="/search/">searching</a>.
+      We couldn't find an exact match. Try <a href="{{ '/browse/index.html' | url }}">browsing all species</a>
+      or <a href="{{ '/search/index.html' | url }}">searching</a>.
     </p>
   </div>
   <script>
@@ -71,28 +71,34 @@ eleventyExcludeFromCollections: true
     (function () {
       'use strict';
 
+      // pathPrefix-aware base: "/" locally, "/pnwmoths/" on GitHub Pages.
+      // Targets below are site-relative and name index.html explicitly (no reliance
+      // on the host's implicit directory-index resolution); BASE is prepended at
+      // navigation time so every redirect resolves correctly in prod.
+      const BASE = '{{ "/" | url }}';
+
       // --- Species slug lookup (generated from data/species.csv) ---
       const SPECIES_SLUGS = new Set({{ speciesSlugs | dump | safe }});
 
-      // --- Static page mappings ---
+      // --- Static page mappings (old WWU path -> site-relative target) ---
       const STATIC_MAP = {
-        '/about-moths/glossary/': '/glossary/',
-        '/about-moths/faqs/': '/faqs/',
-        '/about-moths/moth-facts/': '/',
-        '/about-moths/moth-collecting-photography/': '/',
-        '/about-moths/references/': '/',
-        '/about-us/the-project/': '/',
-        '/about-us/related-sites/': '/',
-        '/about-us/site-credits/': '/',
-        '/about-us/contact/': '/',
-        '/explore-data/about-data/': '/',
-        '/explore-data/about-key/': '/',
-        '/explore-data/about-images/': '/',
-        '/gsearch/': '/search/',
-        '/identify/': '/',
-        '/browse/': '/browse/',
-        '/browse-all/': '/browse/',
-        '/photographic-plates/': '/plates/',
+        '/about-moths/glossary/': 'glossary/index.html',
+        '/about-moths/faqs/': 'faqs/index.html',
+        '/about-moths/moth-facts/': 'index.html',
+        '/about-moths/moth-collecting-photography/': 'index.html',
+        '/about-moths/references/': 'index.html',
+        '/about-us/the-project/': 'index.html',
+        '/about-us/related-sites/': 'index.html',
+        '/about-us/site-credits/': 'index.html',
+        '/about-us/contact/': 'index.html',
+        '/explore-data/about-data/': 'index.html',
+        '/explore-data/about-key/': 'index.html',
+        '/explore-data/about-images/': 'index.html',
+        '/gsearch/': 'search/index.html',
+        '/identify/': 'identify/index.html',
+        '/browse/': 'browse/index.html',
+        '/browse-all/': 'browse/index.html',
+        '/photographic-plates/': 'plates/index.html',
       };
 
       // --- Synonym map for reclassified species (old slug -> new slug) ---
@@ -124,47 +130,47 @@ eleventyExcludeFromCollections: true
 
           // Skip structural segments (family-*, subfamily-*, tribe-*, or bare genus names)
           if (last.startsWith('family-') || last.startsWith('subfamily-') || last.startsWith('tribe-')) {
-            return { target: '/browse/', matched: true };
+            return { target: 'browse/index.html', matched: true };
           }
 
           // Check if it's a known species slug
           if (SPECIES_SLUGS.has(last)) {
-            return { target: '/species/' + last + '/', matched: true };
+            return { target: 'species/' + last + '/index.html', matched: true };
           }
 
           // Normalize spaces/underscores and try again
           const normalized = last.replace(/[_\s]+/g, '-').toLowerCase();
           if (SPECIES_SLUGS.has(normalized)) {
-            return { target: '/species/' + normalized + '/', matched: true };
+            return { target: 'species/' + normalized + '/index.html', matched: true };
           }
 
           // Check synonym map (reclassified species)
           const synonym = SYNONYMS[last] || SYNONYMS[normalized];
           if (synonym && SPECIES_SLUGS.has(synonym)) {
-            return { target: '/species/' + synonym + '/', matched: true };
+            return { target: 'species/' + synonym + '/index.html', matched: true };
           }
 
           // Bare genus name (no hyphen) — send to browse
           if (!last.includes('-')) {
-            return { target: '/browse/', matched: true };
+            return { target: 'browse/index.html', matched: true };
           }
 
           // Unknown species slug — send to browse with logged miss
-          return { target: '/browse/', matched: false };
+          return { target: 'browse/index.html', matched: false };
         }
 
         // 3. /photographic-plates/{id}/ → /plates/
         if (path.startsWith('/photographic-plates/')) {
-          return { target: '/plates/', matched: true };
+          return { target: 'plates/index.html', matched: true };
         }
 
         // 4. Homepage
         if (path === '/') {
-          return { target: '/', matched: true };
+          return { target: 'index.html', matched: true };
         }
 
         // 5. Backstop
-        return { target: '/', matched: false };
+        return { target: 'index.html', matched: false };
       }
 
       /**
@@ -207,12 +213,12 @@ eleventyExcludeFromCollections: true
 
       if (!fromPath) {
         // No ?from= parameter — redirect home
-        window.location.replace('/');
+        window.location.replace(BASE + 'index.html');
         return;
       }
 
       const { target, matched } = resolve(fromPath);
-      logRedirect(fromPath, target, matched);
+      logRedirect(fromPath, BASE + target, matched);
 
       if (!matched) {
         // Show fallback message briefly before redirecting
@@ -221,10 +227,10 @@ eleventyExcludeFromCollections: true
           'This page has moved. Redirecting to the best match…';
         document.getElementById('fallback').style.display = 'block';
         setTimeout(function () {
-          window.location.replace(target);
+          window.location.replace(BASE + target);
         }, 3000);
       } else {
-        window.location.replace(target);
+        window.location.replace(BASE + target);
       }
     })();
   </script>

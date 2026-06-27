@@ -14,6 +14,7 @@
 - ✅ **v2.1 Species Fact Sheet Gaps** — Phases 22–25 (shipped 2026-05-20) — [archive](milestones/v2.1-ROADMAP.md)
 - ✅ **v2.2 High-resolution species photos** — Phases 26–32 (shipped 2026-05-24) — [archive](milestones/v2.2-ROADMAP.md)
 - ✅ **v3.0 TypeScript Frontend & Build-Time Data Validation** — Phases 33–38 (shipped 2026-06-10) — [archive](milestones/v3.0-ROADMAP.md)
+- 🔄 **v4.0 Key Characters — Visual Identification** — Phases 39–43 (in progress)
 
 ## Phases
 
@@ -105,7 +106,7 @@
 
 - [x] **Phase 26: Dropbox Ingest, Filename Parser, and Manifest** - One-file-at-a-time Dropbox API fetch; filename parser covering audit edge cases; durable manifest as source of truth and recovery state; operability harness (progress logs, exponential-backoff retries, resumable jobs) (completed 2026-05-22)
 - [x] **Phase 27: Synonym Curation Pass** - `data/species-synonyms.csv` maps outdated binomials to current species; reclassification rerun without re-downloading; investigation queue surfaces highest-impact unresolved binomials first (completed 2026-05-22)
-- [x] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked clean-match species rendered via OpenSeadragon in its production lightbox, tiles served from bunny.net CDN, hand-edited into data JSON, rendered in OpenSeadragon lightbox — surfaces integration risks before bulk commit; PILOT-LESSONS.md seeds Phase 29 committed config (completed 2026-05-24)
+- [x] **Phase 28: End-to-End Vertical-Slice Pilot — One Species** - One hand-picked species rendered via OSD from bunny.net CDN; PILOT-LESSONS.md seeds tile config for bulk phases (completed 2026-05-24)
 - [x] **Phase 29: DZI Tile Generation Pipeline (bulk)** - `vips dzsave` produces DZI tiles per downloaded TIFF on the datacenter server; idempotent per image; tile parameters reproducible from committed config; pilot-derived tile params seed the committed config (completed 2026-05-23)
 - [x] **Phase 30: bunny.net Upload of Tile Pyramids (bulk)** - Upload each image's tile directory to bunny.net Storage via the Phase 13 HTTP PUT pattern; idempotent rerun; storage footprint sanity-checked against pricing before bulk commit (completed 2026-05-23)
 - [x] **Phase 31: `data/species-photos.json` Build Integration** - Eleventy data file derived from manifest; per-species `high_res_available` flag; legacy low-res entries in `images.csv` deprecated for species with high-res replacements; replaces the pilot's hand-edited entry with manifest-derived rows (completed 2026-05-24)
@@ -124,6 +125,16 @@
 - [x] **Phase 38: CI Gate & Full Verification** - `tsc --noEmit` in GitHub Actions PR check + deploy; byte-identical `_site/` diff guard; full 225-test suite green; `npm run verify:parquet` (completed 2026-06-10)
 
 </details>
+
+### v4.0 Key Characters — Visual Identification (Phases 39–43)
+
+**Milestone Goal:** A dedicated `/identify/` page where users select from 237 character-states across 8 categories to narrow a 1,228-species matrix to a live thumbnail grid of matching moths.
+
+- [x] **Phase 39: Key Matrix Data Pipeline** - Ingest `key.csv` into a compact client-loadable JSON artifact; Zod schema, byte-budget check, build integration (completed 2026-06-25)
+- [x] **Phase 40: Filter Logic TDD Contract** - Species↔key slug matching + coverage report; OR-within/AND-across filter semantics locked as tested pure functions before any UI is written (completed 2026-06-25)
+- [x] **Phase 41: Identify Page Scaffold & Filter Panel** - Eleventy route, inline JSON strategy, `pnwm-identify` root component, `character-filter-panel` Lit component, collapsible 8-category UI, "Clear all" reset, no-JS degradation (completed 2026-06-25)
+- [x] **Phase 42: Results Grid** - `key-results-grid` Lit component: live "N species match" count, thumbnail grid, gray placeholder, "0 results" empty state (completed 2026-06-25)
+- [x] **Phase 43: Character Illustration Images** - Manifest-driven CDN upload of character images; curator `data/key-character-images.csv`; inline `<details>/<summary>` help expansion in the filter panel (completed 2026-06-26)
 
 ## Phase Details
 
@@ -609,6 +620,129 @@ Plans:
 
 ---
 
+### Phase 39: Key Matrix Data Pipeline
+
+**Goal**: The `key.csv` character matrix is ingested into a stable, validated, client-loadable JSON artifact that all subsequent phases can depend on
+**Depends on**: Phase 38 (v3.0 complete)
+**Requirements**: KEY-01, KEY-02, KEY-03, KEY-04, KEY-05, MATCH-01, MATCH-02, MATCH-03 (MATCH-* pulled into this phase per 39-CONTEXT.md D-02)
+**Success Criteria** (what must be TRUE — see 39-CONTEXT.md D-04/D-06 which override SC1/SC3 wording below):
+
+  1. Running `npm run build` produces `data/key-matrix.json` containing `characters` (237 entries with the full `category / subcategory / question / state` hierarchy), `species` (matched-only, slug + nav image), and `matrix` (237 per-character-state base64 `Uint8Array` bitsets over matched species — per D-04, NOT 237 × N binary rows)
+  2. `npm run build:key` completes in under 5 seconds; the build step is wired into the full `npm run build` sequence after `build:data` and before `build:eleventy`
+  3. A Zod schema validates the artifact shape at build time; a post-build check asserts `_site/key-matrix.json` stays within a 50 KB gzip byte budget (per D-06, gzip transfer size — not 100 KB raw); a bloated artifact or schema violation fails the build
+  4. `data/key-coverage-report.json` is emitted listing all unmatched key binomials, and new tests cover CSV parse, whitespace normalization (double-space binomials), and matrix shape
+
+**Plans**: 2 plans
+Plans:
+**Wave 1**
+
+- [x] 39-01-PLAN.md — Data pipeline: commit source CSV + synonyms, Zod schemas, slug resolution + DuckDB nav join + bitset emit, load-time guard, tests (KEY-01/02/03, MATCH-01/02/03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [x] 39-02-PLAN.md — Build wiring: post-Eleventy copy, gzip ≤ 50 KB byte-budget gate, package.json + both CI workflows, end-to-end verification (KEY-04/05, MATCH-03)
+
+### Phase 40: Filter Logic TDD Contract
+
+**Goal**: Species↔key slug matching is established with a coverage report, and the OR-within-question / AND-across-question filter semantics (including the "0 = unscored, not absent" rule) are locked as tested pure TypeScript functions before any Lit component renders
+**Depends on**: Phase 39
+**Requirements**: MATCH-01, MATCH-02, MATCH-03, IDENT-04
+**Success Criteria** (what must be TRUE):
+
+  1. `build-key.ts` resolves all 1,228 key binomials to site slugs (direct lowercase-hyphen + `data/species-synonyms.csv` fallback), tolerating double-space and trailing-space whitespace anomalies; the initial Grammia→Apantesis synonym entries are committed to `data/species-synonyms.csv`
+  2. `data/key-coverage-report.json` lists every unmatched binomial; matched species include their CDN nav thumbnail path for use in the results grid; unmatched species are excluded from the emitted matrix
+  3. `src/_lib/key-filter.ts` exports `buildQuestionGroups()` and `computeMatching()` as pure functions; `src/_lib/key-filter.test.ts` passes on these named TDD cases: single-question single-state narrows, single-question two-states widens (OR), two-question AND narrows, and a species with `0,0` on a question pair is NOT eliminated (the "0 = unscored" correctness invariant)
+  4. New Zod schemas (`CharacterSchema`, `KeySpeciesSchema`, `KeyMatrixSchema`, `KeyMatrixMetaSchema`) are added to `src/types/schemas.ts`; the `pnwm-key-filter-change` event detail type is added to `src/types/events.ts`; `npm run typecheck` passes with zero errors
+
+**Plans**: 3 plansPlans:
+**Wave 1**
+
+- [x] 40-01-PLAN.md — Add KeyMatrixMetaSchema + meta field (schemas.ts) and KeyFilterChangeDetail event type (events.ts); confirm MATCH-01/02/03 stay green
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [x] 40-02-PLAN.md — Emit meta block from build-key.ts and regenerate data/key-matrix.json
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [x] 40-03-PLAN.md — TDD: key-filter.ts (buildQuestionGroups + computeMatching, D-01..D-04) + key-filter.test.ts (TC-1..TC-8)
+
+### Phase 41: Identify Page Scaffold & Filter Panel
+
+**Goal**: A navigable `/identify/` page exists with a fully functional 237-state character filter panel, "Clear all" reset, and correct no-JS static degradation — before any results grid is wired in
+**Depends on**: Phase 40
+**Requirements**: IDENT-01, IDENT-02, IDENT-03, IDENT-05, IDENT-06
+**Success Criteria** (what must be TRUE):
+
+  1. Navigating to `/identify/` in a browser (JS on) renders a page with 8 collapsible category sections (default-collapsed); opening a category reveals questions and their state checkboxes; selecting and deselecting states is visually reflected in real time
+  2. The site navigation header includes a link to `/identify/`
+  3. A "Clear all" button is visible when any character state is selected; clicking it deselects every state and the button disappears
+  4. With JavaScript disabled, the full character hierarchy is readable as plain HTML text and the full list of key species appears as static links; no JS errors appear in the browser console on JS-enabled load; `npm run build` page-weight check passes for `_site/identify/index.html`
+
+**Plans**: 3 plans
+Plans:
+**Wave 1**
+
+- [x] 41-01-PLAN.md — Fix the "Abdomen and thorax" stray-quote artifact in build-key.ts (parseCharacterLabel), lock it with tests, and regenerate the 8-category data/key-matrix.json (data prerequisite)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [x] 41-02-PLAN.md — Create the /identify/ route + src/_data/keyMatrix.ts loader (inline #key-char-data, Family→Genus no-JS species list) + base.njk nav link (IDENT-01, IDENT-06)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [x] 41-03-PLAN.md — Build the pnwm-identify Light-DOM component (8-category accordion, badges, fieldset/legend questions, sticky "Clear all", pnwm-key-filter-change dispatch) + .pnwm-kfp-* styles + TDD unit suite (IDENT-02, IDENT-03, IDENT-05)
+
+**UI hint**: yes
+
+### Phase 42: Results Grid
+
+**Goal**: The filter panel drives a live thumbnail grid of matching species, with a running count, gray placeholders for species without photos, and a clear empty-state when no species match
+**Depends on**: Phase 41
+**Requirements**: GRID-01, GRID-02, GRID-03, GRID-04
+**Success Criteria** (what must be TRUE):
+
+  1. Selecting any character state updates a "N species match" count above the grid in real time; with no states selected the count reads "Showing all N species"
+  2. The results grid renders CDN thumbnail cards (photo + binomial + common name, each linking to the species page) with `loading="lazy"`; selecting and deselecting states updates the grid without a full page reload
+  3. Species with no nav image show a gray placeholder block consistent with the v2.1 similar-species row; no broken `<img>` tags appear in the grid
+  4. When the active filter combination matches zero species, the grid area shows a message ("No species match the selected characters") with a "Clear all" call-to-action
+
+**Plans**: 2 plansPlans:
+
+- [x] 42-01-PLAN.md — Wave 0: RED test scaffolds (key-results-grid.test.ts pure-helper unit tests for GRID-01..04 + pnwm-identify.test.ts matched-state/Clear-all extensions)
+- [x] 42-02-PLAN.md — Wave 1: build KeyResultsGrid component + wire pnwm-identify (matrix fetch, computeMatching, path-prefix, two-column layout) + HUMAN-UAT
+
+**UI hint**: yes
+
+### Phase 43: Character Illustration Images
+
+**Goal**: Character illustration images are uploaded to the CDN, a curator-maintained mapping links them to panel characters, and the filter panel shows expandable help images on demand beside mapped questions
+**Depends on**: Phase 42
+**Requirements**: CIMG-01, CIMG-02, CIMG-03
+**Success Criteria** (what must be TRUE):
+
+  1. Running `npm run key:upload-images DRY_RUN=1` prints a pre-flight list of images to upload without making any API calls; a full run uploads character images to bunny.net under `key-images/` idempotently — rerunning with all images already uploaded produces zero new API calls
+  2. A committed `data/key-character-images.csv` (initially sparse or empty) maps character IDs to CDN image filenames; the build warns on any `char_id` out of range and soft-skips if the file is absent
+  3. For each character state in the filter panel that has a mapped `image_filename`, a `<details>/<summary>` expander appears beside the question label; opening it shows the CDN image; character states without a mapping render no expander and the page is fully functional
+
+**Plans**: 3 plans
+Plans:
+**Wave 0**
+
+- [x] 43-01-PLAN.md — Add alt_text to CharacterSchema (+ test) and register the new uploader/matcher test files + key:upload-images npm script (CIMG-02, CIMG-03)
+
+**Wave 1** *(blocked on Wave 0)*
+
+- [x] 43-02-PLAN.md — Idempotent vips→WebP→curl-PUT uploader to key-images/ (DRY_RUN, HEAD/list idempotency) + one-off normalized matcher → committed draft data/key-character-images.csv + live-upload checkpoint (CIMG-01, CIMG-02)
+
+**Wave 2** *(blocked on Waves 0-1)*
+
+- [x] 43-03-PLAN.md — Populate Character.image_filename/alt_text in build-key (soft-skip + out-of-range warn) + per-state <details> expander in pnwm-identify (host-absolute CDN src) + .pnwm-kfp-help CSS + UAT (CIMG-02, CIMG-03)
+
+**UI hint**: yes
+
+---
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -634,26 +768,31 @@ Plans:
 | 19. Build-time Glossary Transform | v2.0 | 4/4 | Complete | 2026-04-23 |
 | 20. Popover UI — HTML and CSS | v2.0 | 1/1 | Complete | 2026-04-23 |
 | 21. JS Hover Enhancement and Glossary Images | v2.0 | 0/0 | Complete (folded into Phase 20) | 2026-04-23 |
-| 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete   | 2026-05-20 |
+| 22. Phenology Chart Improvements | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 23. Photo Thumbnail Carousel | v2.1 | 1/1 | Complete | 2026-05-20 |
 | 24. County, Collection, and Elevation Filters | v2.1 | 2/2 | Complete | 2026-05-20 |
 | 25. Similar Species Thumbnails | v2.1 | 1/1 | Complete | 2026-05-20 |
-| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete    | 2026-05-22 |
-| 27. Synonym Curation Pass | v2.2 | 3/3 | Complete    | 2026-05-22 |
-| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 5/5 | Complete    | 2026-05-25 |
+| 26. Dropbox Ingest, Filename Parser, and Manifest | v2.2 | 4/4 | Complete | 2026-05-22 |
+| 27. Synonym Curation Pass | v2.2 | 3/3 | Complete | 2026-05-22 |
+| 28. End-to-End Vertical-Slice Pilot — One Species | v2.2 | 5/5 | Complete | 2026-05-25 |
 | 29. DZI Tile Generation Pipeline (bulk) | v2.2 | 3/3 | Complete | 2026-05-23 |
-| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete    | 2026-05-23 |
-| 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete   | 2026-05-24 |
-| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete   | 2026-05-24 |
-| 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete    | 2026-06-09 |
-| 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete    | 2026-06-10 |
-| 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete    | 2026-06-10 |
-| 37. Lit Web Components Migration | v3.0 | 5/5 | Complete    | 2026-06-10 |
-| 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete    | 2026-06-11 |
+| 30. bunny.net Upload of Tile Pyramids (bulk) | v2.2 | 2/2 | Complete | 2026-05-23 |
+| 31. `data/species-photos.json` Build Integration | v2.2 | 2/2 | Complete | 2026-05-24 |
+| 32. OpenSeadragon Viewer in Lightbox (generalize pilot) | v2.2 | 4/4 | Complete | 2026-05-24 |
+| 33. Toolchain & Schema Scaffolding | v3.0 | 2/2 | Complete | 2026-06-09 |
+| 34. scripts/lib & src/_lib Migration | v3.0 | 3/3 | Complete | 2026-06-10 |
+| 35. Build Pipeline Scripts Migration | v3.0 | 5/5 | Complete | 2026-06-10 |
+| 36. Eleventy Data Files & Config Migration | v3.0 | 4/4 | Complete | 2026-06-10 |
+| 37. Lit Web Components Migration | v3.0 | 5/5 | Complete | 2026-06-10 |
+| 38. CI Gate & Full Verification | v3.0 | 3/3 | Complete | 2026-06-11 |
+| 39. Key Matrix Data Pipeline | v4.0 | 2/2 | Complete    | 2026-06-25 |
+| 40. Filter Logic TDD Contract | v4.0 | 3/3 | Complete    | 2026-06-25 |
+| 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
+| 42. Results Grid | v4.0 | 2/2 | Complete    | 2026-06-25 |
+| 43. Character Illustration Images | v4.0 | 3/3 | Complete    | 2026-06-26 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24*
 
 ## Backlog
 

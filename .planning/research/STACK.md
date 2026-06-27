@@ -1,356 +1,277 @@
 # Stack Research
 
-**Domain:** JS→TS migration — static site with Node build pipeline + Vite-bundled browser components
-**Researched:** 2026-06-09
-**Confidence:** HIGH (verified via Node.js v24 API docs, Lit docs, Vite 8 announcement, Eleventy 3 TypeScript docs, Zod versioning page, TypeScript 5.8/6.0 release notes)
+**Domain:** v4.0 Key Characters — Identify page additions to the existing Eleventy/Vite/Lit static site
+**Researched:** 2026-06-24
+**Confidence:** HIGH (based on direct inspection of source data files + verified against existing codebase patterns)
 
 ---
 
-## Recommended Stack
+## What This Document Covers
 
-### Core Technologies
-
-| Technology | Version | Purpose | Why Recommended |
-|------------|---------|---------|-----------------|
-| TypeScript | `^5.8` | Type checker + declaration generator | 5.8 is stable floor; 5.9 (Aug 2025) and 6.0 (Apr 2025) also viable — see version note |
-| Zod | `^4` | Schema-as-source-of-truth for all data contracts | Stable as `zod@4` since July 2025; build-only use makes bundle size irrelevant; deepest ecosystem for deriving TS types |
-
-**TypeScript version note:** TypeScript 5.9 (released August 2025) and 6.0 (released April 2025) are both stable. TypeScript 6.0 deprecates `target: es5`, `--baseUrl`, `moduleResolution: node/node10`, and makes `strict: true` the default. Starting at 5.8 avoids any 6.0 migration surprises during an already-large JS→TS conversion; upgrading to 6.0 afterward is a one-step bump. The tsconfig baselines below are written to be compatible with both 5.8 and 6.0.
+The v3.0 STACK.md documented the TS migration toolchain. This document supersedes it for v4.0 and covers **only the new stack decisions** required for the Identify page: the character matrix artifact format, the build-time ingestion approach, and the image processing/upload approach. The existing validated stack (Eleventy 3, Vite 8, Lit 3, DuckDB, hyparquet, Zod 4, bunny.net CDN, curl-based upload scripts) is reused as-is.
 
 ---
 
-## tsconfig Strategy: Two Flat Configs, No Project References
+## Key Data Facts (Measured from Source Files)
 
-**Use two flat tsconfig files, NOT TypeScript project references.**
+These numbers are derived directly from the source files before any decisions are made.
 
-The project has two distinct compilation contexts:
+| Fact | Value | Source |
+|------|-------|--------|
+| Matrix dimensions | 237 character-states × 1,228 species | Direct inspection of `may 6 2015 key.csv` |
+| Matrix density (fraction of cells = 1) | 30.2% | Counted from CSV |
+| Average species matching per character-state | 370.8 | Computed |
+| Raw CSV file size | 629 KB | `wc -c` |
+| Images in `/Images/` directory | 2,003 total | `ls \| wc -l` |
+| Character illustration images (non-species) | ~236 | Filenames not matching `Genus species-` pattern |
+| Species specimen photos in the key media | ~1,767 | Filenames matching `Genus species-` pattern |
+| Image size range | 17 KB – 1.2 MB, median ~144 KB, avg 144 KB | `os.path.getsize` over all files |
+| Total image directory size | 280.8 MB | Computed |
+| Pre-built thumbnails (Thumbs/) | 1,980 files, 70×46px, avg 4 KB | Direct inspection |
+| taxa.txt / taxa.dat | 1,228 lines each, identical species lists (Windows CR/LF) | Inspected |
+| No Lucid key XML or media-mapping file | Only taxa.txt, taxa.dat, key.csv exist | Directory walk |
 
-- **Node context:** `scripts/`, `src/_data/`, `src/_lib/`, `*.test.ts`, `eleventy.config.ts` — Node 24 ESM, no DOM, module = `NodeNext`
-- **Browser context:** `src/components/` — bundled by Vite 8 (Rolldown/Oxc), needs DOM lib, module = `bundler`
-
-Project references are the right tool for monorepos with many interdependent packages and incremental `tsc --build` caching across them. For a ~54-file single-package repo, project references add complexity (composite flags, per-sub-project `.tsbuildinfo`, `tsc --build` vs `tsc --noEmit` semantic differences) that is not justified. `tsc --build --noEmit` also has subtly different semantics from two sequential `tsc --noEmit` calls, complicating the CI gate.
-
-**Layout:**
-
-```
-tsconfig.json          ← browser: src/components + eleventy.config.ts
-tsconfig.node.json     ← Node: scripts/, src/_data/, src/_lib/, *.test.ts
-```
-
-**CI gate runs both:**
-
-```bash
-tsc --noEmit && tsc -p tsconfig.node.json --noEmit
-```
+**Critical finding on illustration filenames:** The 236 character illustration files are named descriptively (e.g., `Abdomen striped.jpg`, `Forewing Discal Spot Present, yes.jpg`) but do NOT match the character-state labels in `key.csv` by exact string match. Only 13 of 237 state labels match a filename case-insensitively. The illustration→character-state mapping was embedded in the Lucid application and is not present in the exported files. A curator-maintained `data/key-images.csv` mapping file is required before images can be linked to character-states in the pipeline.
 
 ---
 
-## Exact tsconfig Baselines
+## Recommendation 1: Character Matrix Artifact Format
 
-### `tsconfig.json` — browser (Vite 8 + Lit 3 components)
+### Decision: Per-character-state base64 bitsets in a single JSON file
 
+**Artifact:** `_site/key-matrix.json`
+
+**Format:**
 ```json
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "skipLibCheck": true,
-    "noEmit": true
-  },
-  "include": [
-    "src/components/**/*.ts",
-    "eleventy.config.ts"
+  "species": ["Habrosyne scripta", "Pseudothyatira cymatophoroides", ...],
+  "states": [
+    {
+      "label": "Distribution:In which State/Province was the moth found?:Washington",
+      "bits": "base64-encoded Uint8Array, 154 bytes (1228 bits), LSB-first"
+    },
+    ...
   ]
 }
 ```
 
-**`isolatedModules: true`** — Required. Vite 8 uses Oxc transformer, which processes files independently without type information. `isolatedModules` makes tsc warn against constructs Oxc cannot handle (const enum, implicit type-only re-exports).
+- `species` array: 1,228 binomial strings in the same order as the key.csv header. The client resolves these to site slugs via `toLowerCase().replace(' ', '-')`.
+- `states` array: 237 entries, one per row of key.csv. `bits` is base64-encoded little-endian packed bits — bit `i` is set if `species[i]` matches this state.
 
-**`experimentalDecorators: true` + `useDefineForClassFields: false`** — Required for Lit 3. See Lit + Decorators section below.
+**Size (measured from actual data):**
 
-**`moduleResolution: bundler`** — Vite/Rolldown resolves imports, not Node's resolver. Allows extensionless imports (the current convention in components) and aligns with how Vite actually resolves modules.
+| Format | Uncompressed | Gzip |
+|--------|-------------|------|
+| Per-character-state base64 bitsets (recommended) | 96 KB | **29 KB** |
+| Per-species base64 bitsets (alternative orientation) | 114 KB | 34 KB |
+| Sparse index arrays (species indices per state) | 343 KB | 120 KB |
+| Full flat 0/1 JSON matrix | 568 KB | 28 KB |
+| Parquet with 237 boolean columns | ~47 KB | (Snappy, not gzip) |
 
-**`verbatimModuleSyntax: true`** — Ensures `import type` is used where needed, preventing Oxc from accidentally treating a type import as a value import at runtime.
+For comparison, the existing `species-states.json` (1,348 species × ~6 states, long format) is 205 KB uncompressed — the key matrix at 96 KB / 29 KB gzip is lighter.
 
-**`noEmit: true`** — Vite handles its own emit. tsc is type-check only for browser files.
+### Why per-character-state bitsets, not Parquet
 
----
+**Parquet rejected.** Adding a 237-column Parquet file would require hyparquet to read 237 column chunks and materialize them into a per-species structure. The existing `records.parquet` pattern works because each file is small (per-species) and the column count is fixed at 14. A 237-column Parquet file adds complexity with no size benefit over the bitset JSON (47 KB Snappy vs 29 KB gzip, comparable). More importantly, the filter logic in the browser client is clearest when each character-state is a typed `Uint8Array` — loading Parquet into that structure requires an extra transformation step that the JSON approach skips entirely.
 
-### `tsconfig.node.json` — Node 24 (scripts, data files, lib, tests)
+**Sparse index arrays rejected.** 343 KB / 120 KB gzip is 4× larger than the bitset approach. Set intersection logic for AND-across-characters is slower and more complex to implement than bitwise AND on typed arrays.
 
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "noEmit": true
-  },
-  "include": [
-    "scripts/**/*.ts",
-    "src/_data/**/*.ts",
-    "src/_lib/**/*.ts",
-    "eleventy.config.test.ts"
-  ]
-}
-```
+**Per-species bitsets (alternative orientation) rejected.** Loading the matrix as per-species means the client must iterate over all 1,228 species for every filter change, performing a bitmask check per species. This is O(species × states_checked) per filter event. The per-character-state orientation allows the filter to AND together only the selected states' bitsets, producing a result bitset in one pass — O(states_selected × 154 bytes). The AND result bitset directly encodes which species pass; iterating it to collect matching species indices is an O(species/32) scan, the same cost in both orientations but with no per-species inner loop during the AND.
 
-**`module: NodeNext` + `moduleResolution: NodeNext`** — Node 24 ESM requires explicit extensions in import specifiers. `NodeNext` mode enforces that tsc agrees with actual Node resolution behavior.
-
-**`allowImportingTsExtensions: true`** — Node 24 native type stripping requires explicit `.ts` extensions in relative imports (e.g., `import './lib/manifest.ts'`). This option allows tsc to accept those specifiers without error. It requires `noEmit: true` (tsc cannot rewrite extensions when this flag is set).
-
-**No `paths` aliases** — Do not add. Node 24 runtime ignores `tsconfig.json` entirely. `paths` remapping works for tsc type-checking but the aliases are NOT rewritten at runtime — Node throws module-not-found. Use relative imports throughout (already the project convention). Node's `#` subpath imports in `package.json` are the Node-native alternative but not needed at this scale.
-
----
-
-## Running Tests: Node 24 Native Type Stripping
-
-**Verdict: Native type stripping is sufficient. No tsx, no ts-node, no build step needed.**
-
-Node 24 makes type stripping the default for `.ts` files — no flag required. The existing `node --test` command works once test files are renamed `.ts`.
-
-### What node 24 handles natively (erasable syntax):
-
-- Type annotations, interfaces, type aliases
-- `import type` statements
-- Generic type parameters
-- Non-instantiated namespaces (type-only content)
-
-### What requires `--experimental-transform-types` or is unsupported:
-
-| Feature | Status | Implication for this project |
-|---------|--------|------------------------------|
-| `enum` | Requires `--experimental-transform-types` | **Do not use enums.** Use `const` objects + `as const` instead. This is the better choice anyway — `as const` is tree-shakeable and enums are not. |
-| `namespace` with runtime code | Same — requires transform-types | Not needed; avoid |
-| Legacy `experimentalDecorators` | **Not supported by native stripper at all** | Test files must not use Lit decorators directly. The existing test pattern already tests components as DOM elements via `document.createElement`, not as class instances, so this constraint is already met. |
-| tsconfig `paths` aliases | Not supported — runtime ignores tsconfig | Use relative imports |
-| Importing `.ts` with explicit extension | Supported and **required** | All relative imports in `.ts` files must use `.ts` extension: `import './lib/manifest.ts'` |
-
-**The test command after migration:**
-
-```json
-"test": "node --test eleventy.config.test.ts scripts/build-data.test.ts scripts/check-page-weight.test.ts ..."
-```
-
-The `--experimental-transform-types` flag is available but should not be needed if enums are avoided. Do not enable it globally — it signals that the codebase relies on non-erasable TypeScript constructs, which creates a harder dependency on a non-standard Node flag.
-
----
-
-## Eleventy 3 + TypeScript
-
-**`eleventy.config.ts`** — Supported natively in Eleventy 3.1+. Rename `eleventy.config.js` → `eleventy.config.ts`. On Node 24, `npx @11ty/eleventy` invokes it via native type stripping automatically. No `--experimental-strip-types` flag needed (it is the default on Node 24).
-
-**`src/_data/*.ts` files** — Supported. Eleventy 3 uses Node type stripping for data files with `.ts` extensions on Node 22.6+/24. The project's `"type": "module"` in `package.json` is already present. No `eleventyConfig.addExtension()` call is needed for data files — Eleventy recognizes `.ts` for data files natively.
-
-**`src/_lib/*.ts` files** — Plain Node modules imported by `eleventy.config.ts`. Work via native type stripping. `glossary-transform.ts` is imported at module load time — no changes to the import pattern needed beyond the `.ts` extension.
-
-**Template files (`.11ty.ts`)** — Not applicable. This project uses Nunjucks templates, not `.11ty.js` templates. No action needed.
-
-**`eleventy-plugin-vite`** — The plugin only reads the object passed to `addPlugin()`. It does not care whether `eleventy.config` is JS or TS. No changes needed.
-
-**Child process scripts in `eleventy.config.ts`** — The `execFile("node", ["scripts/copy-images.js"])` calls in `eleventy.config.ts` will need updating to `.ts` extensions once scripts are migrated. On Node 24, child processes launched via `execFile("node", [...])` handle `.ts` files natively because default type stripping applies per-process, not inherited from parent `NODE_OPTIONS`. Verify this assumption during migration Phase 1.
-
----
-
-## Vite 8 + Lit 3 + TypeScript: Decorators
-
-**The exact tsconfig combination Lit 3 requires for this project:**
-
-```json
-{
-  "experimentalDecorators": true,
-  "useDefineForClassFields": false
-}
-```
-
-Lit 3's own documentation (verified 2025) states: "We recommend that TypeScript developers use experimental decorators for now for optimal compiler output."
-
-**Why not standard TC39 decorators for this migration:** Standard decorators require the `accessor` keyword on every `@property()`, `@state()`, `@query()`, `@queryAll()`, and `@queryAssignedElements()` field. With 15 Lit components, that is dozens of field declarations that must each be touched. The compiler output for standard decorators is "unfortunately large" per Lit docs due to accessor generation and private storage objects. The v3.0 milestone is a maintainability refactor — introducing standard decorators simultaneously would add scope and risk. Migrate to standard decorators in a separate future phase after the JS→TS conversion is complete and green.
-
-**Critical interaction — `useDefineForClassFields: false` is mandatory:**
-
-When `target` is ES2022+, TypeScript defaults `useDefineForClassFields` to `true` (matching the ES2022 class fields spec). For Lit, this MUST be overridden to `false`. Without it, class field declarations overwrite the reactive property descriptors that Lit's `@property()` decorator installs. Components compile and type-check without errors but silently stop being reactive at runtime. This is the most common Lit + TypeScript footgun. It must be set explicitly in `tsconfig.json`.
-
-**Vite 8 specific:** Vite 8 added built-in `emitDecoratorMetadata` support and tsconfig paths support (`resolve.tsconfigPaths: true`). The `experimentalDecorators: true` setting is correctly picked up by Vite 8's Oxc transformer. No additional Vite plugin is needed for decorator transpilation.
-
----
-
-## Data Contract Validation: Zod 4
-
-**Recommendation: Zod 4 (`zod@^4`)**
-
-### Comparison
-
-| Criterion | Zod 4 | Valibot 1.x | ArkType 2.x |
-|-----------|-------|-------------|-------------|
-| Bundle size (tree-shaken) | ~12KB full / 1.88KB Zod Mini gzip | ~1.4KB | ~40KB |
-| Bundle concern for THIS project | **None — all validation is build-only** | None | None |
-| DX / API | Method chaining: `z.object({}).pick()` | Functional pipes: `v.pipe()` | String syntax: `'string'` |
-| Type inference | `z.infer<typeof Schema>` | `v.InferOutput<typeof Schema>` | `typeof schema.infer` |
-| Ecosystem integrations | 50+ (tRPC, Drizzle, React Hook Form) | ~15 | ~5 |
-| Object parse performance vs Zod 3 | 6.5x faster | — | 3-4x faster than Zod 4 |
-| TS compiler instantiations vs Zod 3 | ~100x fewer | Excellent | Excellent |
-| Stability | Stable `zod@4` since July 2025 | Stable | Stable |
-
-**Why bundle size is irrelevant here:** Every schema in this project is build-time only. Zod is used in `scripts/*.ts`, `src/_data/*.ts`, and `src/_lib/*.ts` — none of which ship to the browser. Vite bundles only `src/components/`. As long as no Zod import is added to a component file, zero Zod code reaches the browser bundle. The `verbatimModuleSyntax` tsconfig flag makes accidental Zod imports in component files obvious at type-check time.
-
-**Why Zod 4 over Valibot:** Valibot offers no meaningful advantage when bundle size is off the table. Zod's method chaining API is simpler for the object schemas with nullable fields this project needs. `z.infer<typeof Schema>` is the idiomatic "schema as source of truth" pattern — more familiar to any future maintainer than `v.InferOutput`. Zod 4's 6.5x faster object parsing matters for build loops over 85k+ occurrence records. Zod has 50+ ecosystem integrations vs Valibot's ~15; if the project ever adds tRPC or Drizzle ORM, schemas reuse automatically.
-
-**Why Zod 4 over ArkType:** ArkType's 40KB bundle matters for browser-shipped code; it has no advantage for build-only use. Its string-based type syntax has a steeper learning curve and a nascent ecosystem.
-
-**Install:**
-
-```bash
-npm install zod@^4
-```
-
-**Pattern — schema as source of truth:**
+### Client-side filter algorithm
 
 ```typescript
-// src/_lib/schemas.ts
-import { z } from "zod";
+// Pseudocode — exact implementation for a later phase plan
+function filterSpecies(
+  matrix: KeyMatrix,                      // the loaded artifact
+  selectedStates: Map<string, string[]>,  // character → selected state labels (OR within)
+): number[] {                             // indices into matrix.species
+  // Start with all species matching (all-ones bitset)
+  const nBytes = Math.ceil(matrix.species.length / 8);
+  let result = new Uint8Array(nBytes).fill(0xFF);
 
-export const SpeciesRecordSchema = z.object({
-  species_slug: z.string(),
-  lat: z.number().nullable(),
-  lon: z.number().nullable(),
-  state: z.string().nullable(),
-  county: z.string().nullable(),
-  elevation_ft: z.number().nullable(),
-  date: z.string().nullable(),
-  collector: z.string().nullable(),
-  collection: z.string().nullable(),
-  record_type: z.string().nullable(),
+  // AND across characters
+  for (const [_char, stateLabels] of selectedStates) {
+    // OR within character: union of all selected states' bitsets
+    const charUnion = new Uint8Array(nBytes);
+    for (const label of stateLabels) {
+      const stateEntry = matrix.states.find(s => s.label === label);
+      if (!stateEntry) continue;
+      const bits = base64ToUint8Array(stateEntry.bits);
+      for (let i = 0; i < nBytes; i++) charUnion[i] |= bits[i];
+    }
+    // AND into running result
+    for (let i = 0; i < nBytes; i++) result[i] &= charUnion[i];
+  }
+
+  // Collect matching species indices
+  const matches: number[] = [];
+  for (let i = 0; i < matrix.species.length; i++) {
+    if (result[i >> 3]! & (1 << (i & 7))) matches.push(i);
+  }
+  return matches;
+}
+```
+
+**Filter cost for 10 selected character-states (worst case):** 10 × 154 byte-OR operations + 154 byte-AND operations = ~1,700 byte operations → microseconds in a Uint8Array loop. Well under any perceptible latency threshold for 1,228 species.
+
+---
+
+## Recommendation 2: Build-time CSV Ingestion
+
+### Decision: Plain CSV parse via csv-parse (already in repo), not DuckDB
+
+**Rationale:** DuckDB `read_csv` is the right tool when you need to import into a typed columnar store and run analytical queries. For the key matrix, the build step is: read 237 × 1,228 cells, pack them into bitsets, emit JSON. This is a straightforward streaming transform — no JOINs, no aggregations, no type coercions. `csv-parse/sync` (already a dependency) handles it cleanly. Adding DuckDB for this step would add complexity (connection lifecycle, typed column spec) with no benefit over a 20-line parse loop.
+
+**Script:** `scripts/emit-key-matrix.ts` — mirrors `scripts/emit-species-states.ts` in structure. Reads `data/key.csv`, parses with `csv-parse/sync`, emits `_site/key-matrix.json`.
+
+**Existing `validateCsv()` from `scripts/build-data.ts`** handles UTF-8 check and column-presence check and should be reused.
+
+### Zod schema validation approach (O(columns), not per-row)
+
+The character matrix has an unusual shape: the "columns" are species (1,228 of them), and the rows are character-states. Standard row-by-row Zod parsing (`z.object({...}).parse(row)`) is not applicable here because the column count is variable and each data column is a `"0"` or `"1"` string.
+
+**What to validate with Zod (O(shape) at artifact emit time):**
+
+```typescript
+// src/types/schemas.ts — add:
+
+// Artifact shape validated at build time before write
+export const KeyMatrixStateSchema = z.object({
+  label: z.string().min(1),
+  bits: z.string().regex(/^[A-Za-z0-9+/]+=*$/, 'must be base64'),
 });
 
-export type SpeciesRecord = z.infer<typeof SpeciesRecordSchema>;
-
-// In build-data.ts — validate DuckDB row output:
-const rows = conn.getRowObjectsJS() as unknown[];
-const parsed = rows.map(row => SpeciesRecordSchema.parse(row));
-// parsed is SpeciesRecord[] — fully typed, validated at build time
+export const KeyMatrixSchema = z.object({
+  species: z.array(z.string()).min(1),
+  states:  z.array(KeyMatrixStateSchema).min(1),
+});
+export type KeyMatrix = z.infer<typeof KeyMatrixSchema>;
 ```
 
-Note: `@duckdb/node-api`'s `.getRowObjectsJS()` likely returns `any[]`. Feeding those rows through `SpeciesRecordSchema.parse()` is where Zod adds the most value — it catches schema drift between the DuckDB query and the TypeScript type at build time.
+Parse the emitted artifact object with `KeyMatrixSchema.parse(artifact)` before `writeFileSync` — this gates the build on correct shape without iterating 291,000 cells. Mirrors the existing pattern in `build-data.ts` where `OccurrenceRecordSchema` validates the DuckDB output shape.
+
+**Additional structural invariants (assert at emit time, not via Zod):**
+- All state `bits` strings decode to exactly `ceil(species.length / 8)` bytes
+- `states.length === 237` (exact row count)
+- `species.length === 1228` (exact column count)
+
+These are one-line `if (x !== expected) throw` guards after the Zod parse, not Zod refinements. Mirrors `assertParquetColumns()` in `parquet-cache.ts`.
+
+**Browser-side load-time validation:** The same `KeyMatrixSchema` is exported from `src/types/schemas.ts` and used by the Lit component to validate the fetched artifact at load time — exactly as `validateSpeciesStates()` validates the `species-states.json` load. Use `zod/mini` for the browser import since the full Zod bundle must not reach the client (existing constraint).
+
+### Species name → site slug resolution
+
+The key.csv header contains quoted binomial strings (e.g., `"Habrosyne scripta"`). The site uses `genus.toLowerCase() + '-' + species.toLowerCase()` as slugs. The two-word binomial directly maps: `"Habrosyne scripta"` → `habrosyne-scripta`.
+
+Two edge cases from inspection:
+- `'Idia "concisa"'` (taxa.txt) vs `'Idia concisa'` (key.csv) — quoted subspecies designation; handle by stripping embedded quotes
+- `'Tyta luctuosa '` (key.csv) — trailing space; `.trim()` on all header values
+
+The slug derivation is deterministic and does not need `species-synonyms.csv` at artifact-emit time. Unmatched species (key binomials not found in `data/species.csv`) should be logged as a coverage report, not cause a build failure. This is the same best-effort strategy as the photo-manifest synonym curation in v2.2.
 
 ---
 
-## CI Gate: `tsc --noEmit`
+## Recommendation 3: Image Processing and Upload
 
-**Add to `package.json`:**
+### Decision: Resize originals to 800px max-width with sharp (already in repo), then upload; do NOT use Thumbs/ pre-built thumbnails
 
+**Rationale for resizing before upload:**
+
+The `/Images/` directory contains 2,003 files with a median width of 800px and mean size of 144 KB. Of these, 102 files exceed 800px width (up to 2,662px) and 27 exceed 1,200px. Character illustrations are shown at small sizes in the UI (tooltip/expandable panel beside filter checkboxes). Uploading the 280 MB raw originals at up to 1.2 MB each to bunny.net and relying on the Optimizer to resize every request wastes CDN bandwidth per-request (Optimizer charges per optimization). A one-time resize pass produces stable file sizes and predictable costs.
+
+**Resize spec:** `sharp` resize to 800px max-width, quality 85 JPEG, `fit: 'inside'` (preserve aspect ratio, never upscale). This is the same approach as the existing photo thumbnail pipeline. Images already ≤ 800px pass through `sharp` without upscaling (`withoutEnlargement: true`).
+
+**Do NOT use the Thumbs/ pre-built thumbnails.** The existing thumbnails are 70×46px (4 KB each) — sized for the Lucid key's list thumbnail, not for the Identify page's character illustration panels. At 70px wide, the character diagrams (forewing patterns, wing shapes, color swatches) would be unreadable. Generate at 800px and let the CSS constrain display size; bunny.net Optimizer handles delivery-time WebP conversion and any further display-size resize.
+
+**Image upload target path:** `key-media/` in the bunny.net Storage Zone, parallel to the existing `species-tiles/` and `images/` directories. CDN URL pattern: `https://pnwmoths.b-cdn.net/key-media/{filename}`.
+
+### Upload script pattern: new `scripts/upload-key-images.ts`
+
+Reuse the established patterns from `upload-tiles.ts` verbatim:
+- `DRY_RUN=1` guard before `BUNNY_API_KEY` guard
+- `curl` for PUT (no Node HTTP library — existing project convention)
+- `withRetry()` exponential backoff (5 attempts: 2s/4s/8s/16s/32s)
+- `redact()` to strip API key from error messages
+- Idempotent rerun: check remote existence via HEAD before uploading (or rely on bunny.net PUT idempotency — same as tile upload)
+- `DRY_RUN` prints upload plan, no actual writes
+- Self-contained helpers (no imports from other scripts — project convention)
+
+**No manifest needed for key images.** The species-photos pipeline requires a manifest because it is resumable across thousands of multi-gigabyte TIFF downloads. For 2,003 JPEG files totalling 280 MB (post-resize ~70–120 MB), a single upload run completes in minutes. A simple `Set` of already-uploaded filenames (fetched via bunny.net Storage API list) suffices for idempotency.
+
+**Script added to `package.json`:**
 ```json
-"typecheck": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit"
+"key:upload": "node scripts/upload-key-images.ts"
 ```
-
-**Add to `.github/workflows/pr-check.yml`** — after `npm ci`, before the build steps:
-
-```yaml
-- name: Type check
-  run: npm run typecheck
-```
-
-A type error should block the CI run immediately, not waste 4+ minutes on data generation.
-
-**Performance on ~54 files:** Negligible. TypeScript 5.8 on 54 files with no inter-package boundaries runs in under 5 seconds cold. The existing CI build already takes several minutes. The typecheck step adds 3–8 seconds. No incremental compilation, project references, or `.tsbuildinfo` caching is needed at this scale.
-
-**Do NOT add `tsc --noEmit` to the `build` script.** Type errors should fail fast as a dedicated CI step, not be buried in a long build pipeline. Developers run `npm run typecheck` locally when needed.
 
 ---
 
-## Supporting Libraries (Type Declarations)
+## New Dependencies Required
 
-| Library | Version | Purpose | Notes |
-|---------|---------|---------|-------|
-| `@types/node` | `^24` | Node built-in declarations | `fs`, `path`, `child_process`, `readline` etc. in scripts + config |
-| `@types/leaflet` | latest | Leaflet 1.9 types | Used in `pnwm-occurrence-map.ts` |
-| `@types/openseadragon` | latest | OSD 6 types | Verify availability on npm; if absent, write a local `src/types/openseadragon.d.ts` stub |
-| `@types/chart.js` — skip | — | Chart.js 4 ships its own declarations | No `@types/` package needed |
-| `@types/pagefind` — verify | — | Pagefind 1.5 may ship its own | Check before adding |
+**None required for the matrix artifact or upload.** All necessary tools exist:
 
-**`@duckdb/node-api`** ships its own TypeScript declarations. No `@types/` package needed. The return type of `.getRowObjectsJS()` is likely `any[]` or `Record<string, unknown>[]` — this is where Zod schema parsing adds the most value.
+| Need | Existing dep | Version |
+|------|-------------|---------|
+| CSV parsing | `csv-parse` | `^6.2.1` |
+| Image resize | `sharp` (via libvips) | Already in scripts |
+| Bunny upload | `curl` CLI (not a Node dep) | Already used |
+| Schema validation | `zod` / `zod/mini` | `^4.4.3` |
+| JSON write | Node built-in `fs` | — |
 
-**Install:**
-
-```bash
-# Schema validation (build-only — not a devDependency; used in production build scripts)
-npm install zod@^4
-
-# Type checker + declarations
-npm install -D typescript@^5.8 @types/node@^24 @types/leaflet @types/openseadragon
-```
+**Wait** — `sharp` must be verified as a direct project dependency vs. available via PATH. Let the implementation phase confirm; if sharp is not in package.json as a dependency but only installed for the tile pipeline, it needs to be added as a dependency (not devDependency) since build scripts run in CI.
 
 ---
 
 ## What NOT to Add
 
-| Avoid | Why | Use Instead |
-|-------|-----|-------------|
-| `tsx` or `ts-node` | Node 24 native type stripping handles all .ts execution without a loader | Native Node 24 (default) |
-| TypeScript project references | Complexity not justified for 54 files in a single package | Two flat tsconfig files |
-| `vite-plugin-checker` | Adds type-checking to Vite's dev server loop; redundant with `tsc --noEmit` in CI and slow in watch mode | `npm run typecheck` in CI |
-| `enum` declarations anywhere | Not supported by Node 24 native type stripping; requires `--experimental-transform-types` flag | `const` objects with `as const` |
-| tsconfig `paths` aliases | Node 24 runtime ignores tsconfig; aliases pass tsc but throw at runtime | Relative imports (already the project convention) |
-| Standard TC39 decorators (this milestone) | Requires adding `accessor` keyword to every reactive Lit property in 15 components; large compiler output | `experimentalDecorators: true` — migrate to standard decorators in a separate future phase |
-| ArkType | 40KB bundle; performance advantage irrelevant for build-only; nascent ecosystem | Zod 4 |
-| Valibot | No advantage when bundle size is irrelevant; less familiar API | Zod 4 |
-| `@types/lit` — does not exist | Lit ships its own declarations | No action needed |
-| Zod in `src/components/` | Would ship Zod to the browser bundle (12KB+); components don't need runtime validation | Keep Zod in `scripts/` and `src/_data/` only |
+| Do Not Add | Why |
+|-----------|-----|
+| New Parquet file for the key matrix | hyparquet adds a transformation step with no size benefit; JSON bitsets serve the same function more directly |
+| SQLite or any client-side database (sql.js, wa-sqlite) | The bitset AND approach handles 237 × 1,228 in microseconds; a full query engine is architectural overkill |
+| fuse.js or similar fuzzy search for character labels | Character labels are fixed and enumerable; exact string matching on a 237-item list is sufficient |
+| Any new client-side framework or state management library | The existing Lit component pattern is sufficient |
+| DuckDB for key.csv ingestion | No analytical queries needed; csv-parse handles the simple row→bitset transform |
+| Thumbs/ directory pre-built thumbnails | 70×46px is too small for character illustrations; resize to 800px instead |
+| A Lucid key XML parser | No XML file was exported; the three available files (key.csv, taxa.txt, taxa.dat) contain all needed data |
+| Automatic illustration→character-state label matching | The filenames do not match labels reliably (13/237 exact matches). A human-curated `data/key-images.csv` mapping is required |
 
 ---
 
-## Version Compatibility Matrix
+## New Data Files Required
 
-| Package | Compatible With | Notes |
-|---------|-----------------|-------|
-| TypeScript 5.8.x | Vite 8.0.x | Requires `isolatedModules: true` in tsconfig.json for Oxc compatibility |
-| TypeScript 5.8.x | Lit 3.3.x | Requires `experimentalDecorators: true` + `useDefineForClassFields: false` |
-| TypeScript 5.8.x | Node 24 native type stripping | No decorators in Node-executed .ts files; no enums without transform-types flag |
-| Zod 4.x | TypeScript 5.8.x | ~100x fewer TS compiler instantiations vs Zod 3; stable as `zod@4` |
-| `@duckdb/node-api` 1.5 | TypeScript 5.8.x | Ships own declarations; `skipLibCheck: true` recommended |
-| Eleventy 3.1.5 | Node 24 type stripping | `eleventy.config.ts` and `src/_data/*.ts` work natively; no extra flags |
-| Vite 8.0.x | TypeScript 5.8.x + Lit 3.3.x | `experimentalDecorators: true` in tsconfig picked up by Oxc transformer |
+| File | Format | Content |
+|------|--------|---------|
+| `data/key.csv` | Copy of source CSV | The 237 × 1,228 binary matrix |
+| `data/key-images.csv` | New, curator-maintained | Mapping: `state_label,image_filename` — links each character-state to its illustration JPG. Must be human-curated since automated filename-to-label matching fails. |
+| `_site/key-matrix.json` | Generated at build time | The bitset artifact (96 KB / 29 KB gzip) |
+
+---
+
+## Integration With Existing Patterns
+
+| Pattern | How v4.0 Reuses It |
+|---------|-------------------|
+| `emit-species-states.ts` → `_site/species-states.json` | `emit-key-matrix.ts` → `_site/key-matrix.json` — same script shape: DuckDB or csv-parse, writeFileSync, logged row count |
+| `validateCsv()` from `build-data.ts` | Reuse for UTF-8 + required-columns pre-flight on `key.csv` |
+| `KeyMatrixSchema.parse(artifact)` at emit | Mirrors OccurrenceRecordSchema DuckDB output validation |
+| `assertParquetColumns()` O(columns) shape guard | Mirrors `assert(states.length === 237)` structural guard after Zod parse |
+| `loadParquet()` / `species-states.json` fetch in Lit | New `loadKeyMatrix()` function in `src/_lib/` or as a module-level import — same `fetch` + `arrayBuffer` + schema-validate pattern |
+| `pnwm-filter-bar` dispatching `pnwm-filter-change` | New `pnwm-identify-filters` component dispatches a new typed event `pnwm-key-filter-change` with selected states map; add to `src/types/events.ts` |
+| `upload-tiles.ts` curl PUT pattern | `upload-key-images.ts` reuses the same curl PUT, withRetry, redact, DRY_RUN patterns verbatim |
+| `CDN_BASE_URL` module-level constant | `key-media/` path appended: `${CDN_BASE_URL}/key-media/${filename}` |
 
 ---
 
 ## Sources
 
-- [Node.js v24 TypeScript API docs](https://nodejs.org/docs/latest-v24.x/api/typescript.html) — type stripping limitations, explicit extension requirement, decorator incompatibility (HIGH confidence)
-- [Lit decorators documentation](https://lit.dev/docs/components/decorators/) — exact tsconfig combo for Lit 3, standard vs experimental decorator tradeoffs (HIGH confidence)
-- [Vite 8 announcement](https://vite.dev/blog/announcing-vite8) — Rolldown/Oxc, `isolatedModules` requirement, built-in `emitDecoratorMetadata` support (HIGH confidence)
-- [Eleventy TypeScript docs](https://www.11ty.dev/docs/languages/typescript/) — Node 22.6+ native stripping, data file support, `eleventy.config.ts` (HIGH confidence)
-- [Zod versioning page](https://zod.dev/v4/versioning) — `zod@4` stable since July 8, 2025; current version 4.4.3 (HIGH confidence)
-- [TypeScript 6.0 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/) — deprecations, `strict: true` default, ES2015 minimum target (HIGH confidence)
-- [TypeScript 5.9 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-5-9/) — released August 2025 (HIGH confidence)
-- WebSearch: Zod 4 vs Valibot vs ArkType bundle size comparison 2026 — multiple sources agree on size figures (MEDIUM confidence for exact numbers; HIGH for recommendation direction)
-- WebSearch: Node 24 type stripping enums/decorators limitations — consistent with official docs (HIGH confidence)
-- WebSearch: Vite 8 Oxc transformer `isolatedModules` requirement — confirmed by Vite features page (HIGH confidence)
+- Direct inspection of `/Users/rainhead/Downloads/may 6 2015 key files/` — key.csv dimensions, image counts/sizes, taxa file formats (HIGH confidence)
+- `/Users/rainhead/dev/pnwmoths/src/components/parquet-cache.ts` — existing fetch + validate pattern (HIGH confidence)
+- `/Users/rainhead/dev/pnwmoths/scripts/upload-tiles.ts` — established upload pattern (HIGH confidence)
+- `/Users/rainhead/dev/pnwmoths/src/types/schemas.ts` — Zod mini constraint, build-only validation approach (HIGH confidence)
+- `/Users/rainhead/dev/pnwmoths/scripts/emit-species-states.ts` — emit script template (HIGH confidence)
+- `/Users/rainhead/dev/pnwmoths/.planning/PROJECT.md` — key decisions log confirming: JSON over Parquet for species-states (same reasoning applies here), curl upload pattern, DRY_RUN ordering invariant (HIGH confidence)
 
 ---
 
-*Stack research for: pnwmoths v3.0 TypeScript migration toolchain*
-*Researched: 2026-06-09*
+*Stack research for: pnwmoths v4.0 Key Characters — Identify page*
+*Researched: 2026-06-24*

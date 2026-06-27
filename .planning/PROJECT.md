@@ -8,18 +8,21 @@ A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static sit
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
-## Current Milestone: v3.0 TypeScript Frontend & Build-Time Data Validation
+## Current Milestone: v4.0 Key Characters — Visual Identification
 
-**Goal:** Convert the entire codebase from JavaScript to strict TypeScript and enforce build-time validation of every data contract crossing the build→client boundary, so the project is safer to maintain and refactor. (Issue #36 — maintainability; no user-facing behavior change.)
+**Goal:** Add a dedicated "Identify" page where users narrow the key-scored PNW moth species by selecting morphological and distributional characters from the legacy Lucid key, with character illustrations and a live thumbnail grid of matching species. (Issue #19.)
 
 **Target features:**
-- Full JS→TS conversion of `src/` (Lit components + Eleventy data/lib files) and all `scripts/` (build/data pipeline), big-bang per area; all `node --test` test files migrated
-- `strict` tsconfig + `tsc --noEmit` wired into the build pipeline and GitHub Actions PR check (type errors fail the build)
-- Schema-as-source-of-truth for data row shapes (Zod suggested, not mandatory) deriving TS types from one definition
-- Validation of all data contracts crossing the build→client boundary, by trust-via-immutability: static TS for build-locked data (CSV→DuckDB→HTML, baked-in JSON); load-time structure validation (not per-row, O(columns)) for the only dynamically-fetched artifacts — `records.parquet` and `species-states.json`; source CSVs guarded at build by DuckDB typed reads + integrity SQL
-- `eleventy.config.js` and Vite tooling TS-compatible; tests green throughout
+- New **Identify page** — free-form filter panel covering all 8 character categories (237 character-states), grouped/collapsible by the key's `Category : [Subcategory :] Question : State` hierarchy; characters selectable in any order; no-JS static degradation
+- **Live results** — flat thumbnail grid (species photo + name, linking to the species page) with a running "N species match" count; multi-select within a character OR's, across characters AND's
+- **Character data pipeline** — ingest `key.csv` (237 × 1,228 scoring matrix) into a compact client-loadable artifact, build-time validated like other data contracts (typed reads + schema); loaded client-side like `records.parquet`
+- **Species↔key matching** — resolve the 1,228 key binomials to site slugs via `species-synonyms.csv`, best-effort; emit a coverage report of unmatched names for later manual curation
+- **Character illustration images** — process and upload the ~2,000 character/help images to bunny.net CDN; shown on demand (tooltip/expandable) beside each character so users see what the character means
+- All TypeScript + Lit, consistent with the v3.0 toolchain and validation gates
 
-## Current State: v3.0 complete — TypeScript frontend & build-time data validation
+## Current State: building v4.0 — Key Characters visual identification
+
+**v4.0 in progress:** Phases 39 (key-matrix data pipeline), 40 (filter-logic TDD contract), and 41 (`/identify/` page scaffold + filter panel) complete. `data/key-matrix.json` ships 1,192 matched species × 237 character-states as base64 bitsets with a `meta` block (now exactly 8 clean categories after the stray-quote source fix); `src/_lib/key-filter.ts` exports the pure `buildQuestionGroups()` + `computeMatching()` functions implementing the locked OR-within / AND-across / "0 = unscored" semantics (10 TDD cases green). The `/identify/` Eleventy route is live with the `pnwm-identify` Light-DOM Lit filter panel (8 default-collapsed accordion categories, per-category count badges, sticky "Clear all", `pnwm-key-filter-change` event) plus a complete no-JS degradation (character text + 1,192 Family→Genus links). Next: Phase 42 — results grid wired to the filter event. Outstanding: 41-HUMAN-UAT.md browser checks (accordion/badges/clear-all/no-JS) await manual verification.
 
 **v3.0 complete:** 2026-06-10 — 6 phases (Phases 33–38). Full TypeScript migration of the build pipeline, Eleventy data/config, and Lit web components, with build-time + load-time data validation. CI now gates every PR and deploy on `tsc --noEmit` (both tsconfigs), the 225-test `node --test` suite, a permanent TS-only invariant guard (zero `.js` sources / `allowJs` / `@ts-ignore` / unguarded double-casts), and Parquet schema verification. `_site/` output proven byte-identical to the pre-migration baseline (one-shot proof, MILESTONE-EVIDENCE.md); `build:data` stays at ~3s, well under the 5-minute budget.
 
@@ -109,7 +112,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 |---------|--------|
 | Admin / editing UI | Editing done in flat files; UX to validate later |
 | ~~Zoomify deep-zoom viewer~~ | ~~Complex legacy feature; replaced by lightbox in v1~~ — inverted in v2.2: OSD/DZI deep-zoom for species photos; lightbox hosts the OSD instance |
-| Lucid key integration | External tool, not part of static site pipeline |
+| ~~Lucid key integration~~ | ~~External tool, not part of static site pipeline~~ — partially inverted in v4.0: the Lucid key's *exported data* (`key.csv` character matrix + character images) is reimplemented as a static, client-side character-filter Identify page; the external Lucid applet itself is still not embedded |
 | User submissions / community ID | iNaturalist handles this; adds server infrastructure |
 | Server-side search | No server; Pagefind provides static equivalent |
 | Real-time data | All data is build-time; live observation feeds out of scope |
@@ -228,4 +231,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-10 — after v3.0 TypeScript Frontend & Build-Time Data Validation milestone (Phases 33–38). All 9 requirements validated; CI gates live; site fully migrated to strict TypeScript with byte-identical output.*
+*Last updated: 2026-06-25 — v4.0 Key Characters milestone (Issue #19): Phases 39–41 complete (data pipeline + filter-logic TDD contract + identify page scaffold/filter panel). Remaining: results grid (42), character illustration images (43).*

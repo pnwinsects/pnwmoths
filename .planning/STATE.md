@@ -1,40 +1,44 @@
 ---
 gsd_state_version: 1.0
-milestone: v3.0
-milestone_name: TypeScript Frontend & Build-Time Data Validation
-status: Awaiting next milestone
-stopped_at: Completed Phase 38 Plan 03 — v3.0 milestone complete
-last_updated: "2026-06-11T03:57:12.968Z"
-last_activity: 2026-06-11 — Milestone v3.0 completed and archived
+milestone: v4.0
+milestone_name: Key Characters — Visual Identification
+status: verifying
+stopped_at: Phase 43 UI-SPEC approved
+last_updated: "2026-06-26T18:26:11.926Z"
+last_activity: 2026-06-26
 progress:
-  total_phases: 20
-  completed_phases: 6
-  total_plans: 22
-  completed_plans: 22
-  percent: 30
+  total_phases: 25
+  completed_phases: 5
+  total_plans: 13
+  completed_plans: 13
+  percent: 20
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-10 after v3.0 milestone)
+See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** v3.0 shipped — planning next milestone
+**Current focus:** Phase 43 — Character Illustration Images
 
 ## Current Position
 
-Phase: Milestone v3.0 complete
-Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-06-11 — Milestone v3.0 completed and archived
+Phase: 43
+Plan: Not started
+Status: Phase complete — ready for verification
+Last activity: 2026-06-26
+
+```
+Progress: [----------] 0% (0/5 phases)
+```
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 51 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2), 22 (v3.0) = 107 total across all milestones
+- Total plans completed: 64 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2), 22 (v3.0) = 129 total across all milestones
 - Average duration: unknown
 - Total execution time: unknown
 
@@ -48,26 +52,22 @@ Last activity: 2026-06-11 — Milestone v3.0 completed and archived
 | v2.0 | 3 | 5 | 2026-04-23 |
 | v2.1 | 4 | 5 | 2026-05-20 |
 | v2.2 | 7 | 23 | 2026-05-24 |
-| v3.0 | 6 (planned) | TBD | in flight |
+| v3.0 | 6 | 22 | 2026-06-10 |
+| v4.0 | 5 (planned) | TBD | in flight |
 
 **Recent Trend:**
 
-- v2.2: shipped 2026-05-24 (7 phases, 23 plans, 159 commits, 4 days)
-- v3.0: kicked off 2026-06-09 (6 phases planned, full JS→TS migration + data validation)
+- v3.0: shipped 2026-06-10 (6 phases, 22 plans, full JS→TS migration + data validation)
+- v4.0: kicked off 2026-06-24 (5 phases planned, Identify page with key character filter)
 
-*Updated after each plan completion*
-| Phase 35 P04 | 797 | 3 tasks | 17 files |
-| Phase 35 P05 | 45 | 3 tasks | 1 files |
-| Phase 36 P01 | 585 | 3 tasks | 7 files |
-| Phase 36 P02 | 833 | 3 tasks | 6 files |
-| Phase 36 P03 | 365 | 2 tasks | 7 files |
-| Phase 37 P02 | 420 | 3 tasks | 5 files |
-| Phase 37 P03 | 548 | 3 tasks | 5 files |
-| Phase 37 P04 | 324 | 3 tasks | 4 files |
-| Phase 37 P05 | 1096 | 2 tasks | 3 files |
-| Phase 38-ci-gate-full-verification P01 | 274 | 3 tasks | 3 files |
-| Phase 38-ci-gate-full-verification P02 | 143 | 3 tasks | 2 files |
-| Phase 38-ci-gate-full-verification P03 | 900 | 3 tasks | 4 files |
+| Phase 39 P01 | 15 minutes | 3 tasks | 10 files |
+| Phase 40 P01 | 12 | 3 tasks | 4 files |
+| Phase 40 P03 | 274 | 3 tasks | 4 files |
+| Phase 41 P02 | 15 minutes | 2 tasks | 3 files |
+| Phase 42 P01 | 3 minutes | 2 tasks | 3 files |
+| Phase 42-results-grid P02 | 30m | 2 tasks | 6 files |
+| Phase 43 P01 | 10 | 3 tasks | 5 files |
+| Phase 43 P02 | operator-gated | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -77,70 +77,43 @@ Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
 - v3.0 toolchain: Node 24 native type-stripping (`--strip-types`) runs `.ts` scripts and tests with no transpiler; `tsc --noEmit` is a separate CI gate only
-- v3.0 toolchain: Three separate tsconfigs — `tsconfig.node.json` (nodenext), `tsconfig.browser.json` (bundler, useDefineForClassFields:false), root `tsconfig.json` (includes both); NOT project references
-- v3.0 toolchain: `tsc --noEmit` kept OUT of `npm run build` hot path; CI gate only (per SUMMARY.md cross-doc resolution)
+- v3.0 toolchain: Three separate tsconfigs — `tsconfig.node.json` (nodenext), `tsconfig.browser.json` (bundler, useDefineForClassFields:false), root `tsconfig.json` (includes both)
 - v3.0 schemas: Zod 4 (`zod@^4`, import from `'zod'` not `'zod/v4'`); schemas in `src/types/` importable by both Node scripts and browser components
-- v3.0 schemas: Profile null distribution per column BEFORE writing any schema (Pitfall 2 — over-strict schema hard-blocks 85,933-record build)
-- v3.0 migration order: A(schema) → B(scripts/lib) → C(src/_lib) → D(scripts/) → E(src/_data+config) → F(src/components/) — producer before consumer
-- v3.0 client bundle: Zod absent from production client bundle; DEV-gated or minimal type guards only in parquet-cache.ts
-- v3.0 Lit: `useDefineForClassFields: false` MUST be set in browser tsconfig BEFORE any Lit component is touched (Pitfall 1)
-- v3.0 tests: All test files migrate to `.ts`; run via `node --test` with no extra flags (Node 24 strips types natively); MIG-05 success criterion = full ~191-test suite green
-- v3.0 CI-02: byte-identical `_site/` diff guard after each migration area (diff -r _site_before/ _site_after/)
-- Phase 29 fix: Dropbox shared_link API does not return path_display — use '/' + entry.name as fallback; manifest backfilled
-- Phase 30 Plan 01: DRY_RUN guard before BUNNY_API_KEY guard — enables dry-run inspection without a real API key
-- Phase 30 Plan 01: advanceStatus(row, 'uploaded') before rm/unlink — status committed before deletion (D-03 ordering)
-- Phase 33 Plan 01: `allowImportingTsExtensions:true` (not `rewriteRelativeImportExtensions`) in tsconfig.node.json — semantically correct for Node 24 type-stripping + noEmit workflow
-- Phase 33 Plan 01: typecheck script invokes each sub-config explicitly (no tsc --build/composite) — tsc does not follow references in plain --noEmit mode
-- Phase 33 Plan 01: zod kept in dependencies (not devDeps) — consumed by build scripts at build time
-- Phase 33 Plan 02: z.nullable() (not z.optional()) for all profiled-null columns — hyparquet writes null not undefined; county 100% null would reject all records
-- Phase 33 Plan 02: allowImportingTsExtensions:true added to tsconfig.browser.json — required for .ts extension imports in src/types/ under the browser config
-- Phase 33 Plan 02: types:[node] added to tsconfig.node.json — TypeScript 6 strict NodeNext does not auto-include @types/node globals without explicit types field
-- Phase 34 Plan 01: _site_baseline/ gitignored (not committed) — working-tree snapshot for SC-4 byte-identity gate; 1,433 species pages
-- Phase 34 Plan 01: package.json test globs broadened to `*.test.{js,ts}` for scripts/lib and src/_lib; Node 24 brace expansion; 224/224 tests pass
-- Phase 34 Plan 02: ManifestRow = Record<typeof COLUMNS[number], string> — mapped type over 13-key union; row.status is string (not string|undefined) even under noUncheckedIndexedAccess
-- Phase 34 Plan 02: ManifestStatus union uses exactly 5 values; no enum (TS-03 prohibition)
-- Phase 34 Plan 02: dbxCall return typed as Promise<unknown>; callers narrow via isDropboxListPage guard (D-01/D-03; Open Question 2)
-- Phase 34 Plan 02: [...COLUMNS] spread in writeManifest avoids as-cast to satisfy csv-stringify string[] type (Pitfall 2)
-- Phase 34 Plan 02: DropboxError = new Error(...) as DropboxError pattern; single widening cast of own-constructed value — not unguarded double-cast (T-34-02)
-- Phase 34 Plan 03: Vite content-hash filename changes between builds are non-deterministic (sourceMappingURL self-reference); byte-identity gate assesses HTML prose content, not asset filenames
-- Phase 34 Plan 03: noUncheckedIndexedAccess in test files fixed via destructuring (const [first, second] = buildTermMap(...)) rather than bare index access
-- [Phase ?]: D-06/D-07 preserved in Plan 03: static properties = {} class-field form, no decorators, customElements.define kept
-- Phase 37 Plan 05: eleventy.config.ts needs src/types passthrough copy for Vite staging — pnwm-taxon-browser.ts's value import (SpeciesStateSchema) fails at bundle time without it; all prior type-only imports were erased at transpile time
-- Phase 37 Plan 05: zod v4 SC-4 grep — internal $ZodError/$ZodType are zod/mini implementation symbols; correct check is ZodMiniType present + no non-$-prefixed ZodError/ZodType (grep -oP '(?<!\$)ZodError|...' = 0)
-- Phase 37 Plan 05 SC-5: byte-identical gate passed — data files byte-identical; HTML differences confined to content-hashed asset filenames; SC-4 gzip delta +3,346 B / +2.7% accepted (approved 2026-06-10)
-- [Phase ?]: compare-sites.sh Bucket A: GNU diff 3.12 lacks --include; replaced with find+diff loop (Rule 1 auto-fix)
-- [Phase ?]: CI-02 D-01: one-shot local proof, not recurring CI step; permanent gate is MIG-06 guard in pr-check.yml
+- v4.0 artifact format: bitset JSON (per-character-state base64 `Uint8Array`, ~29 KB gzip) — NOT nested-array JSON (170 KB gzip); SUMMARY.md resolved the STACK.md vs ARCHITECTURE.md divergence in favor of bitsets
+- v4.0 filter bus: `pnwm-identify` is self-contained; filter state lives in Lit reactive properties; `FilterChangeDetail` is NOT extended; `pnwm-key-filter-change` is a distinct event type scoped to parent→child communication within `pnwm-identify`
+- v4.0 filter semantics: "0 = unscored, not absent" — a species is eliminated only if it scores `1` for an opposing state in the same question; raw `0`/blank NEVER excludes; this must be locked by TDD before any component is written (IDENT-04)
+- v4.0 Distribution/Seasonality: all 8 categories included in the filter panel (locked product decision); UI must label Distribution/Seasonality data as "Key data (2015)" to distinguish from occurrence-record-based filters
+- v4.0 character images: automated heuristic filename→character mapping rejected; `data/key-character-images.csv` is curator-maintained; ships empty (all `image_filename: null`); page is fully functional before any image coverage
+- v4.0 results grid: species without nav image use gray placeholder (same pattern as v2.1 similar-species row); `<img>` only emitted for confirmed-nav-image species; never points to unconfirmed CDN paths
+- v4.0 copy pattern: `scripts/copy-key-matrix.ts` runs post-eleventy (same reason as `copy-parquet.ts` — Vite wipes `_site/` during build)
+- v4.0 no-JS degradation: `<noscript>` block shows character group headings as readable text + full species list as links; no pre-filtered static HTML (impractical for 237 states)
+- v4.0 `build:key` runs unconditionally (reads `species-synonyms.csv` + `key-character-images.csv` + `images.csv`, all of which can change independently of `key.csv`)
+- v4.0 stray-quote fix: `parseCharacterLabel` strips `/^"|"$/g` before `split(':')` — one-line fix, no signature change; eliminates 9th spurious category from key-matrix.json
+- [Phase ?]: Phase 39-01: Lucid CSV parsing quirk discovered
+- [Phase ?]: event-bus isolation: KeyFilterChangeDetail is fully separate from FilterChangeDetail
+- [Phase ?]: build-key.ts meta emission done in Plan 01 (not 02) because KeyMatrixSchema.parse() fails without it
+- [Phase ?]: verified against real matrix
+- [Phase ?]: correct bitset expression locks IDENT-04 contract
+- [Phase ?]: Inline only { characters, species } in #key-char-data (not familyGroups) — familyGroups duplicates species data causing 410 KB JSON; template iterates keyMatrix.familyGroups directly in noscript
+- [Phase ?]: keyMatrix.ts is synchronous (no DuckDB) — data/key-matrix.json is already clean JSON from Plan 41-01; familyGroups pre-grouped in loader to avoid Nunjucks set-inside-for persistence trap
+- [Phase ?]: buildCardUrl and buildCountText exported as pure helpers so Plan 42-02 can reuse them inside the component render without duplication
+- [Phase ?]: _hasSelection kept as a METHOD in pnwm-identify to avoid name collision with Lit reactive props
+- [Phase ?]: eleventy.config.ts requires src/_lib passthrough copy for Vite module resolution (Rule 3 auto-fix)
 
 ### Roadmap Evolution
 
-- Phase 19 added: Build-time Glossary Transform (v2.0)
-- Phase 20 added: Popover UI — HTML and CSS (v2.0)
-- Phase 21 added: JS Hover Enhancement and Glossary Images (v2.0)
-- Phase 22 added: Phenology Chart Improvements (v2.1)
-- Phase 23 added: Photo Thumbnail Carousel (v2.1)
-- Phase 24 added: County, Collection, and Elevation Filters (v2.1)
-- Phase 25 added: Similar Species Thumbnails (v2.1)
-- Phase 26 added: Dropbox Ingest, Filename Parser, and Manifest (v2.2)
-- Phase 27 added: Synonym Curation Pass (v2.2)
-- Phase 28 inserted 2026-05-22: End-to-End Vertical-Slice Pilot — One Species (v2.2)
-- Phase 29 added: DZI Tile Generation Pipeline, bulk (v2.2) — renumbered from 28
-- Phase 30 added: bunny.net Upload of Tile Pyramids, bulk (v2.2) — renumbered from 29
-- Phase 31 added: data/species-photos.json Build Integration (v2.2) — renumbered from 30
-- Phase 32 added: OpenSeadragon Viewer in Lightbox, generalize pilot (v2.2) — renumbered from 31
-- **Phase 33 added 2026-06-09: Toolchain & Schema Scaffolding (v3.0)**
-- **Phase 34 added 2026-06-09: scripts/lib & src/_lib Migration (v3.0)**
-- **Phase 35 added 2026-06-09: Build Pipeline Scripts Migration (v3.0)**
-- **Phase 36 added 2026-06-09: Eleventy Data Files & Config Migration (v3.0)**
-- **Phase 37 added 2026-06-09: Lit Web Components Migration (v3.0)**
-- **Phase 38 added 2026-06-09: CI Gate & Full Verification (v3.0)**
+- Phase 39 added 2026-06-24: Key Matrix Data Pipeline (v4.0)
+- Phase 40 added 2026-06-24: Filter Logic TDD Contract (v4.0)
+- Phase 41 added 2026-06-24: Identify Page Scaffold & Filter Panel (v4.0)
+- Phase 42 added 2026-06-24: Results Grid (v4.0)
+- Phase 43 added 2026-06-24: Character Illustration Images (v4.0)
 
 ### Pending Todos
 
-- Phase 33: Run null-distribution data profile (`COUNT(*) FILTER (WHERE col IS NULL)` per column) against full 85,933 records BEFORE writing any Zod schema — this is the mandatory SCHEMA-03 spike (Pitfall 2)
-- Phase 33: Resolve tsconfig `allowImportingTsExtensions` vs `rewriteRelativeImportExtensions` flag choice (SUMMARY.md research flag — verify in Phase 33 spike)
-- Phase 33: Verify `execFile("node", ["...ts"])` child-process type-stripping behavior (SUMMARY.md research flag)
-- Phase 35: Benchmark `time npm run build:data` after adding Zod validation gates; must stay under 60s (CI-03)
-- Phase 37: grep production bundle for `ZodError`/`ZodType` to confirm tree-shaking (SUMMARY.md research flag)
+- Phase 39: Verify `sharp` is in `package.json` dependencies (not just PATH-available); add if absent (needed for CIMG-01 image resize)
+- Phase 39: Confirm build sequence position — `build:key` runs after `build:data` and before `build:eleventy`; `build:copy-key-matrix` runs after `build:eleventy` in the post-eleventy copy group
+- Phase 40: Write concrete matrix fixture tests for the "0,0 pair passes through" invariant BEFORE writing any Lit component code
+- Phase 43: Curator session needed to assess realistic effort for `data/key-character-images.csv` population — image count (~196 non-specimen images) is confirmed; filename→character mapping effort is uncertain
 
 ### Blockers/Concerns
 
@@ -164,6 +137,11 @@ Items acknowledged and carried forward:
 | v3.0-future | TSF-02: TypeScript 6.0 upgrade | Deferred until migration settled | v3.0 |
 | v3.0-future | TSF-03: Vitest evaluation | Deferred; keep node --test for now | v3.0 |
 | v3.0-future | filterRecords null-coercion behavior fix | Document with TODO(v3.1); do not fix during type migration | v3.0 |
+| v3.0-future | MIG-04 debt: filterRecords (parquet-cache.ts) uses inline structural type instead of importing FilterChangeDetail | Carry forward | v3.0 |
+| v4.x | IDENT-07: "Characters used" removable chip strip above results | Deferred to v4.x | v4.0 |
+| v4.x | IDENT-08: URL query-param state persistence for shareable identification sessions | Deferred to v4.x | v4.0 |
+| v4.x | IDENT-09: Ecoregion-to-state dependency hint | Deferred to v4.x | v4.0 |
+| v4.x | SIZE-01: Approximate/precise size question coupling | Deferred to v4.x | v4.0 |
 
 ## Quick Tasks Completed
 
@@ -173,10 +151,10 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-11T01:22:41.835Z
-Stopped at: Completed Phase 38 Plan 03 — v3.0 milestone complete
-Resume file: None
+Last session: 2026-06-26T00:03:37.574Z
+Stopped at: Phase 43 UI-SPEC approved
+Resume file: .planning/phases/43-character-illustration-images/43-UI-SPEC.md
 
 ## Operator Next Steps
 
-- Start the next milestone with /gsd-new-milestone
+- Start Phase 39: `/gsd-plan-phase 39`
