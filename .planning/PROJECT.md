@@ -20,9 +20,9 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - **Character illustration images** — process and upload the ~2,000 character/help images to bunny.net CDN; shown on demand (tooltip/expandable) beside each character so users see what the character means
 - All TypeScript + Lit, consistent with the v3.0 toolchain and validation gates
 
-## Current State: building v4.0 — Key Characters visual identification
+## Current State: v4.0 shipped — Key Characters visual identification
 
-**v4.0 in progress:** Phases 39 (key-matrix data pipeline), 40 (filter-logic TDD contract), and 41 (`/identify/` page scaffold + filter panel) complete. `data/key-matrix.json` ships 1,192 matched species × 237 character-states as base64 bitsets with a `meta` block (now exactly 8 clean categories after the stray-quote source fix); `src/_lib/key-filter.ts` exports the pure `buildQuestionGroups()` + `computeMatching()` functions implementing the locked OR-within / AND-across / "0 = unscored" semantics (10 TDD cases green). The `/identify/` Eleventy route is live with the `pnwm-identify` Light-DOM Lit filter panel (8 default-collapsed accordion categories, per-category count badges, sticky "Clear all", `pnwm-key-filter-change` event) plus a complete no-JS degradation (character text + 1,192 Family→Genus links). Next: Phase 42 — results grid wired to the filter event. Outstanding: 41-HUMAN-UAT.md browser checks (accordion/badges/clear-all/no-JS) await manual verification.
+**v4.0 shipped:** 2026-06-27 — 5 phases (39–43), all 43 requirements validated, Phase 43 UAT 5/5. The `/identify/` page lets users narrow 1,228 key-scored species by selecting from 237 character-states across 8 collapsible categories, with a live "N species match" thumbnail grid (OR-within / AND-across / "0 = unscored" semantics, TDD-locked). `data/key-matrix.json` ships matched species × character-states as base64 bitsets with a `meta` block. Character illustrations are bound **authoritatively from the original Lucid3 key data** (`data/key.data` → 180/237 characters; Size & Seasonality have no source art) and shown in a per-state `<details>` CDN expander. A separate **backup→bunny migration** recovered legacy species photos that were never migrated to the CDN — ~150 species across three filename variants (underscore / space-misnamed / hyphen binomial) — closing the grid-thumbnail 404 gaps (#43). Deferred: Identify UI polish (disclosure marker + view-larger), curator alt-text pass, Geometridae release (#48).
 
 **v3.0 complete:** 2026-06-10 — 6 phases (Phases 33–38). Full TypeScript migration of the build pipeline, Eleventy data/config, and Lit web components, with build-time + load-time data validation. CI now gates every PR and deploy on `tsc --noEmit` (both tsconfigs), the 225-test `node --test` suite, a permanent TS-only invariant guard (zero `.js` sources / `allowJs` / `@ts-ignore` / unguarded double-casts), and Parquet schema verification. `_site/` output proven byte-identical to the pre-migration baseline (one-shot proof, MILESTONE-EVIDENCE.md); `build:data` stays at ~3s, well under the 5-minute budget.
 
@@ -100,6 +100,11 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ `tsc --noEmit` gates the GitHub Actions PR-check and deploy workflows; type errors fail CI (CI-01) — v3.0 Phase 38
 - ✓ `_site/` output proven byte-identical to the pre-migration baseline — data files byte-for-byte, HTML identical modulo content-hashed asset names (CI-02) — v3.0 Phase 38
 - ✓ `npm run build:data` stays within budget (~3s locally, <60s target) after validation gates added (CI-03) — v3.0 Phase 38
+- ✓ `/identify/` page: free-form filter over 237 character-states in 8 collapsible categories; multi-select OR-within / AND-across; "0 = unscored" never excludes; "Clear all"; no-JS degradation — v4.0 Phases 39–41
+- ✓ Compact client-loadable key matrix: `key.csv` (237 × 1,228) → `data/key-matrix.json` base64 bitsets with schema + byte-budget gate; species↔key slug matching + coverage report — v4.0 Phases 39–40
+- ✓ Live results grid: "N species match" count, thumbnail grid with gray placeholder + load-failure degradation, "0 results" empty state — v4.0 Phase 42
+- ✓ Character illustrations bound authoritatively from the original Lucid3 key data (180/237); per-state `<details>` CDN expander; alt-text state-name fallback — v4.0 Phase 43
+- ✓ Legacy species-photo CDN 404 gaps recovered from the `pnwmoths_https` backup across three filename variants (underscore / space / hyphen binomial) — v4.0 follow-up (#43)
 
 ### Active
 
@@ -231,4 +236,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-25 — v4.0 Key Characters milestone (Issue #19): Phases 39–41 complete (data pipeline + filter-logic TDD contract + identify page scaffold/filter panel). Remaining: results grid (42), character illustration images (43).*
+*Last updated: 2026-06-27 — v4.0 Key Characters (Issue #19) SHIPPED: all 5 phases (39–43), 43/43 requirements, Identify page live with character illustrations + legacy-photo CDN recovery. Next: planning next milestone.*

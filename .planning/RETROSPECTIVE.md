@@ -438,6 +438,29 @@
 
 ---
 
+## Milestone: v4.0 — Key Characters Visual Identification
+
+**Shipped:** 2026-06-27 | **Phases:** 5 (39–43) | **Plans:** 13
+
+### What Was Built
+A `/identify/` page filtering 1,228 species by 237 character-states (8 categories), live thumbnail grid, character-illustration `<details>` expanders, and an authoritative Lucid3 key-data extraction for character→image binding.
+
+### What Worked
+- TDD-locking the filter semantics ("0 = unscored", OR-within/AND-across) before any UI prevented downstream ambiguity.
+- Recovering the **original Lucid3 key.data** from the server backup turned a fuzzy filename-matcher (77/237, ~38 mis-bound) into an exact extractor (180/237) — the authoritative source beat heuristics decisively.
+
+### What Was Inefficient
+- The character-image and species-photo work uncovered a multi-variant CDN-naming mess (underscore / space / hyphen / " - " separators) discovered one variant at a time during UAT rather than via an upfront full CDN audit. A comprehensive nav_image audit (run late) would have scoped it in one pass.
+- The committed `key-matrix.json` drifted stale (0 char images) because it's regenerated at build; confusing during debugging.
+
+### Patterns Established
+- **Backup→bunny migration** (`scripts/migrate-legacy-photos.ts`): idempotent, DRY_RUN, separator-normalizing uploader recovering legacy media never migrated to the CDN.
+- Authoritative-source-over-heuristic: extract bindings from original tool data when recoverable.
+
+### Key Lessons
+- When images 404, distinguish "wrong filename" from "never uploaded" early — the fix differs (catalog edit vs migration).
+- Audit the whole surface (all nav_images) before declaring a data-coverage problem fixed.
+
 ## Cross-Milestone Trends
 
 ### Process Evolution

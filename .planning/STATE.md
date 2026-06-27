@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v4.0
 milestone_name: Key Characters — Visual Identification
-status: verifying
+status: Awaiting next milestone
 stopped_at: Phase 43 UI-SPEC approved
-last_updated: "2026-06-26T18:26:11.926Z"
-last_activity: 2026-06-26
+last_updated: "2026-06-27T20:58:29.660Z"
+last_activity: 2026-06-27 — Milestone v4.0 completed and archived
 progress:
   total_phases: 25
   completed_phases: 5
@@ -25,14 +25,10 @@ See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 
 ## Current Position
 
-Phase: 43
-Plan: Not started
-Status: Phase complete — ready for verification
-Last activity: 2026-06-26
-
-```
-Progress: [----------] 0% (0/5 phases)
-```
+Phase: Milestone v4.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-06-27 — Milestone v4.0 completed and archived
 
 ## Performance Metrics
 
@@ -157,4 +153,4 @@ Resume file: .planning/phases/43-character-illustration-images/43-UI-SPEC.md
 
 ## Operator Next Steps
 
-- Start Phase 39: `/gsd-plan-phase 39`
+- Start the next milestone with /gsd-new-milestone

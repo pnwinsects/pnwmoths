@@ -1,5 +1,24 @@
 # Milestones
 
+## v4.0 Key Characters — Visual Identification (Shipped: 2026-06-27)
+
+**Phases completed:** 5 phases, 13 plans, 28 tasks
+
+**Key accomplishments:**
+
+- 1. [Rule 1 - Bug] Replaced validateCsv() call with inline preflight
+- `build:key` + `copy-key-matrix.ts` + gzip gate wired into `npm run build` and both GitHub Actions workflows; artifact ships at 41.1 KB gzip (< 50 KB), pipeline runs in 236ms (< 5s), `npm test` 291/291 green.
+- KeyMatrixMetaSchema, KeyFilterChangeDetail, and meta-emitting build-key.ts — the type contracts consumed by Plans 02-03 and Phases 41-42
+- meta block emitted by build-key.ts at the KeyMatrixSchema.parse() callsite; data/key-matrix.json regenerated with totalKeySpecies/matchedSpecies/unmatchedSpecies/generatedAt
+- TDD contract for Identify filter: `buildQuestionGroups` + `computeMatching` with D-03 `result &= (selectedUnion | ~opposingUnion)` keepMask, 10 passing test cases, full suite green.
+- 1. [Rule 1 - Bug] keyMatrix inline JSON size exceeded 500 KB page-weight threshold
+- 1. [Rule 3 - Blocking] Missing `_lib` passthrough copy in `eleventy.config.ts`
+- CharacterSchema widened with required-but-nullable `alt_text` field + Phase 43 test files registered in npm test script.
+- Idempotent vips→WebP→curl-PUT uploader for ~191 character illustrations + 77-row normalized-match draft CSV; live upload operator-verified (zero new PUTs on rerun, image/webp CDN Content-Type confirmed)
+- CSV-driven image_filename/alt_text population in build-key.ts + exported characterImageSrc/helpImageAlt helpers + per-state <details> CDN expander in the identify panel with UI-SPEC §5 CSS
+
+---
+
 ## v3.0 TypeScript Frontend & Build-Time Data Validation (Shipped: 2026-06-10)
 
 **Phases completed:** 6 phases, 22 plans, 36 tasks
