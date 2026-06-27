@@ -1,6 +1,9 @@
 timeout = 20
 max_retries = 3
 cache = true
+# Treat cached URL results as fresh for a week (default is 1d) — cuts re-checks
+# of stable internal links and reduces flakiness against rate-limited hosts.
+max_cache_age = "7d"
 accept = ["100..=103", "200..=299", "429"]
 # External reference hosts (BugGuide, Moth Photographers Group, BAMONA) are
 # linked per species from data/species-links.csv (~2400 links). Excluded from
