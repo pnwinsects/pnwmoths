@@ -32,7 +32,7 @@ describe('cdnReadUrl', () => {
   it('builds the public CDN URL (space → %20)', () => {
     assert.equal(
       cdnReadUrl('xestia-atrata', 'Xestia atrata-A-D.jpg'),
-      'https://pnwmoths.b-cdn.net/xestia-atrata/Xestia%20atrata-A-D.jpg',
+      'https://moths.pnwinsects.org/xestia-atrata/Xestia%20atrata-A-D.jpg',
     );
   });
 });

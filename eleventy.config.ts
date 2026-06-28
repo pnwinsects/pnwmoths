@@ -13,7 +13,7 @@ const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
 
 // bunny.net Pull Zone — public CDN base URL. Not a secret; hard-coded here.
 // To update: log in to bunny.net dashboard, find the Pull Zone hostname, paste here.
-const CDN_BASE_URL = "https://pnwmoths.b-cdn.net";
+const CDN_BASE_URL = "https://moths.pnwinsects.org";
 
 // Load glossary terms once at startup. termMap is sorted longest-first and
 // has pre-compiled regexes — shared across all addTransform invocations via closure.

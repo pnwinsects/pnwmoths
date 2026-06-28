@@ -23,7 +23,7 @@ export type CategoryMap = Map<string, Map<string, Character[]>>;
 // CDN constant (mirrors key-results-grid.ts:9 verbatim — MUST NOT use this._prefix)
 // ---------------------------------------------------------------------------
 
-const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 
 // ---------------------------------------------------------------------------
 // Pure helpers — exported for testability (CIMG-03)
@@ -36,7 +36,7 @@ const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
  * /pnwmoths/https://... and 404 on GitHub Pages).
  *
  * @param image_filename - bare .webp filename (e.g. 'Black Forewing.webp')
- * @returns host-absolute CDN URL (e.g. 'https://pnwmoths.b-cdn.net/key-images/Black%20Forewing.webp')
+ * @returns host-absolute CDN URL (e.g. 'https://moths.pnwinsects.org/key-images/Black%20Forewing.webp')
  */
 export function characterImageSrc(image_filename: string): string {
   return `${CDN_BASE_URL}/key-images/${encodeURIComponent(image_filename)}`;

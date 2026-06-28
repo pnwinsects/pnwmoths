@@ -21,7 +21,7 @@ describe('buildCardUrl', () => {
   test('constructs CDN URL with encodeURIComponent and ?height=', () => {
     assert.equal(
       buildCardUrl('habrosyne-scripta', 'Habrosyne scripta-A-D.jpg', 320),
-      'https://pnwmoths.b-cdn.net/habrosyne-scripta/Habrosyne%20scripta-A-D.jpg?height=320',
+      'https://moths.pnwinsects.org/habrosyne-scripta/Habrosyne%20scripta-A-D.jpg?height=320',
       'encodeURIComponent must encode the space; ?height=320 per UI-SPEC'
     );
   });
@@ -29,7 +29,7 @@ describe('buildCardUrl', () => {
   test('uses the correct CDN base URL', () => {
     const url = buildCardUrl('test-slug', 'image.jpg', 320);
     assert.ok(
-      url.startsWith('https://pnwmoths.b-cdn.net/'),
+      url.startsWith('https://moths.pnwinsects.org/'),
       `expected URL to start with CDN base, got: ${url}`
     );
   });

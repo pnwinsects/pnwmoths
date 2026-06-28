@@ -12,8 +12,8 @@ const configSource = readFileSync(resolve(ROOT, 'eleventy.config.ts'), 'utf8');
 
 test('eleventy.config.ts: CDN_BASE_URL constant is defined with exact value', () => {
   assert.ok(
-    configSource.includes('const CDN_BASE_URL = "https://pnwmoths.b-cdn.net"'),
-    'CDN_BASE_URL must be declared as const with exact value "https://pnwmoths.b-cdn.net"'
+    configSource.includes('const CDN_BASE_URL = "https://moths.pnwinsects.org"'),
+    'CDN_BASE_URL must be declared as const with exact value "https://moths.pnwinsects.org"'
   );
 });
 

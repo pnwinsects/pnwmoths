@@ -62,7 +62,7 @@ Verify each upload with the CDN Pull Zone before moving on.
 **5. Verify CDN delivery.**
 
 ```sh
-curl -sI "https://pnwmoths.b-cdn.net/plates/plate-NN-familyname/thumbnail.jpg" | grep HTTP
+curl -sI "https://moths.pnwinsects.org/plates/plate-NN-familyname/thumbnail.jpg" | grep HTTP
 # Expected: HTTP/2 200
 ```
 
