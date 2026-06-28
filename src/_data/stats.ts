@@ -1,6 +1,20 @@
 import { DuckDBInstance } from '@duckdb/node-api';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { loadWithheldFamilies } from '../_lib/withheld-families.ts';
+
+/** Directory of per-species narrative markdown files; the basename is the slug. */
+const NARRATIVE_DIR = resolve('src/content/species');
+
+/** Slugs that have a written species account (narrative), e.g. `hemileuca-hera`. */
+function loadNarrativeSlugs(): Set<string> {
+  if (!existsSync(NARRATIVE_DIR)) return new Set<string>();
+  return new Set(
+    readdirSync(NARRATIVE_DIR)
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => f.slice(0, -'.md'.length)),
+  );
+}
 
 /**
  * Home-page "vanity" metrics, computed at build time from the same data the site
@@ -9,7 +23,7 @@ import { loadWithheldFamilies } from '../_lib/withheld-families.ts';
  * withheld families (e.g. Geometridae) are excluded from every count.
  */
 export interface SiteStats {
-  species: number; // species profiles (pages)
+  species: number; // species with a written account (narrative)
   records: number; // specimen occurrence records
   images: number; // specimen images
 }
@@ -42,7 +56,14 @@ export default async function (): Promise<SiteStats> {
     return Number(rows[0]?.[0] ?? 0);
   };
 
-  const species = await scalar(`SELECT count(*) FROM shown`);
+  // Species profiles = shown species that have a written narrative account.
+  // (Not every shown species has prose; those without are excluded from this count.)
+  const narrativeSlugs = loadNarrativeSlugs();
+  const shownSlugsReader = await conn.runAndReadAll(`SELECT slug FROM shown`);
+  const species = shownSlugsReader
+    .getRows()
+    .filter((r) => narrativeSlugs.has(String(r[0])))
+    .length;
   const records = await scalar(`
     SELECT count(*) FROM read_csv_auto('data/records.csv', header = true)
     WHERE species_slug IN (SELECT slug FROM shown)

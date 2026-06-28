@@ -202,11 +202,11 @@ export async function main(): Promise<void> {
       `
     },
     {
-      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-55.0, lon -125.0 to -110.0)',
+      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-60.0, lon -139.0 to -110.0)',
       query: `
         SELECT species_slug, latitude, longitude FROM records
-        WHERE latitude < 42.0 OR latitude > 55.0
-           OR longitude < -125.0 OR longitude > -110.0
+        WHERE latitude < 42.0 OR latitude > 60.0
+           OR longitude < -139.0 OR longitude > -110.0
       `
     },
     {
