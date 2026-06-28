@@ -13,7 +13,7 @@ permalink: /browse/index.html
 
 <noscript data-pagefind-ignore>
   {% for family in taxon %}
-    <h2>{{ family.name }}</h2>
+    <h2 id="family-{{ family.name | lower }}">{{ family.name }}</h2>
     {% for subfam in family.subfamilies %}
       {% if subfam.name %}
         <h3>{{ subfam.name }}</h3>
