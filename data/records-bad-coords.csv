@@ -1,0 +1,187 @@
+species_id,species_slug,record_type,latitude,longitude,state,county,locality,elevation_ft,year,month,day,collector,collection,notes
+2695,lacinipolia-stenotis,specimen,-117.047,46.339,WA,Asotin,Asotin,,1963,9,15,R. E. Miller,?,Miller cards; Shepard notes
+2695,lacinipolia-stenotis,specimen,-119.348,47.605,WA,Grant,Dry Falls,,1945,9,11,E. C. Johnston,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-118.352,46.065,WA,Walla Walla,Walla Walla,,1960,9,19,W. C. Cook,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-118.904,46.086,WA,Walla Walla,Wallula,,1948,9,21,W. C. Cook,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-120.433,46.217,WA,Yakima,Satus Cr.,,1949,9,19,E. C. Johnston,CNC,Crabo notes
+1834,xestia-speciosa,photograph,39.75,-105.22,BC,,Golden,1732,2008,7,25,R. or L. Avis photo,,Crabo ID
+1900,coenophila-opacifrons,specimen,50.135,50.135,BC,East Kootenay,Engstrom's Pond,3727,2013,8,10,W. D. Nicholson,RBCM,
+2695,lacinipolia-stenotis,specimen,-119.55,49.3,BC,Okanagan-Similkameen,"Okanagan Falls, 5kmSE",,1990,9,16,J. Troubridge,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-119.549,49.183,BC,Okanagan-Similkameen,Oliver,,1953,9,11,,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-119.549,49.183,BC,Okanagan-Similkameen,Oliver,,1953,9,15,,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-119.549,49.183,BC,Okanagan-Similkameen,Oliver,,1953,9,18,,CNC,Crabo notes
+1772,euxoa-olivalis,specimen,50.693,-109.282,AB,,South Saskatchewan R. @ Hwy.41,2100,1999,7,13,Crabo/Troubridge,WSU,
+2274,hemileuca-hera,specimen,41.944,-114.686,ID,Twin Falls,Shoshone Cr.,5125,1987,8,19,D. V. McCorkle,DVM,
+1720,apamea-devastator,specimen,46.73,-109.75,MT,Sweet Grass,"Greycliff RS, 2.5mSE",3921,1988,7,24,Crabo/Morrell,WSU,
+1443,lasionycta-impingens,specimen,45.05,-109.47,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,LGCC,
+2274,hemileuca-hera,specimen,48.59,-109.231,MT,Blaine,Chinook,2428,1928,9,10,L. A. Klein,WSU,V. L. Calkins coll.
+1943,catocala-hermia,specimen,45.732,-107.612,MT,Big Horn,"Hardin,",2906,1950,8,5,R. O. Yeatts,WSU,
+1922,acronicta-insita,specimen,45.56,-109.99,MT,Sweet Grass,7 mi N Big Timber,6510,,,,,USNM,
+2776,smerinthus-ophthalmica,specimen,45.834,-109.955,MT,Sweet Grass,Big Timber,4095,1981,7,10,H. E. Rice,OSAC,
+1593,gnophaela-vermiculata,specimen,45.16,-109.39,MT,Carbon,W Fk Rock Cr,6915,1988,7,25,L. G. Crabo,LGCC,
+1720,apamea-devastator,specimen,45.083,-109.783,MT,Carbon,Hellroaring L.,10000,1988,7,25,Crabo/Morrell,WSU,
+1726,hemaris-thetis,specimen,45.017,-109.934,MT,Park,Cooke City,7572,1981,7,8,H. E. Rice,OSAC,
+2776,smerinthus-ophthalmica,specimen,48.59,-109.231,MT,Blaine,Chinook,2428,1928,9,10,L. A. Klien,WSU,Calkins coll.
+2571,polia-purpurissata,specimen,46.73,-109.75,MT,Sweet Grass,"Greycliff RS, 2.5mSE",3921,1988,7,24,Crabo/Morrell,WSU,
+1720,apamea-devastator,specimen,45.083,-109.783,MT,Carbon,Hellroaring L.,10000,1988,7,26,Crabo/Morrell,WSU,
+2175,lasionycta-leucocycla,specimen,45.05,-109.47,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,LGCC,
+1668,autographa-californica,specimen,45.083,-109.783,MT,Carbon,Hellroaring L.,10000,1988,7,26,Crabo/Morrell,WSU,
+1912,chelis-beanii,specimen,45.05,-109.44,MT,Carbon,Hell Roaring Lakes Rd.,8769,1988,7,25,L. G. Crabo,LGCC,
+2776,smerinthus-ophthalmica,specimen,48.977,-109.135,MT,Blaine,Hydro,2771,1953,,,Betty Pope,OSAC,
+1483,cisseps-fulvicollis,specimen,48.59,-109.231,MT,Blaine,Chinook,2428,1955,7,11,J. R. Anderson,EMUS,
+1666,schinia-jaguarina,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW",3750,1998,7,5,Chuck Harp,WFBM,
+1593,gnophaela-vermiculata,specimen,45.05,-109.44,MT,Carbon,Hell Roaring Lakes Rd.,8769,1988,7,25,L. G. Crabo,LGCC,
+1749,apamea-antennata,specimen,45.083,-109.783,MT,Carbon,Hellroaring L.,10000,1988,7,25,Crabo/Morrell,WSU,
+1473,apamea-inficita,specimen,45.083,-109.783,MT,Carbon,Hellroaring L.,10000,1988,7,26,Crabo/Morrell,WSU,
+1705,acronicta-grisea,specimen,45.56,-109.99,MT,Sweet Grass,7 mi N Big Timber,6510,,,,,USNM,
+1473,apamea-inficita,specimen,45.083,-109.783,MT,Carbon,Hellroaring L.,10000,1988,7,25,Crabo/Morrell,WSU,
+1964,euxoa-pallipennis,specimen,48.554,-109.679,MT,Hill,Havre,2535,1922,8,19,,WFBM,
+1818,euxoa-catenula,specimen,48.554,-109.679,MT,Hill,Havre,2535,1922,8,20,,WFBM,
+1464,malacosoma-californicum,literature,45.082,-109.375,MT,Carbon,Richel Lodge,5902,,,,,?,"Stehr & Cook, 1968"
+1464,malacosoma-californicum,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Stehr & Cook, 1968"
+1688,dasychira-grisefacta,specimen,47.55,-109.367,MT,Fergus,Winifred,3242,,,,,OSAC,"em. ex. Ponderosa pine; July 31, 1963"
+1705,acronicta-grisea,specimen,45.185,-109.246,MT,Carbon,Red Lodge,5577,,,,,USNM,Schmidt File
+1912,chelis-beanii,literature,45.082,-109.375,MT,Carbon,Richel Lodge,5902,1941,8,11,,?,Entomography 3:215
+2470,cisthene-barnesii,specimen,46.09,-107.63,MT,Yellowstone,"Custer, 5.5mWSW, I-94",2878,1998,7,2,C. E. Harp,CEH,SS-98
+2520,hypoprepia-miniata,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,15,Chuck Harp,CEH,
+1416,apantesis-parthenice,specimen,45.458,-109.067,MT,Carbon,"Boyd, 2mS",4000,1997,8,12,C. E. Harp,CEH,SS-97
+1416,apantesis-parthenice,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,8,28,C. E. Harp,CEH,SS-98
+1416,apantesis-parthenice,specimen,45.77,-108.61,MT,Yellowstone,"Billings, W side",3290,1997,8,21,C. E. Harp,CEH,SS-97
+1393,apantesis-nevadensis,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,8,28,C. E. Harp,CEH,SS-98
+1393,apantesis-nevadensis,specimen,45.77,-108.61,MT,Yellowstone,"Billings, W side",3290,1997,8,29,C. E. Harp,CEH,SS-97
+2101,apantesis-williamsii,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96
+2304,apantesis-blakei,specimen,45.77,-108.61,MT,Yellowstone,"Billings, W side",3290,1997,8,21,C. E. Harp,CEH,SS-97
+1760,apantesis-ornata,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96
+2510,arctia-plantaginis,specimen,45.214,-108.554,MT,Carbon,Sage Cr. CG,6800,1997,7,7,C. E. Harp,CEH,SS
+1376,arctia-virginalis,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1997,6,3,C. & C. Harp,CEH,SS-97
+1388,spilosoma-vagans,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96
+1388,spilosoma-vagans,specimen,45.214,-108.554,MT,Carbon,Sage Cr. CG,6800,1997,7,7,C. E. Harp,CEH,SS-97
+2149,estigmene-acrea,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,5,C. E. Harp,CEH,SS-97
+2149,estigmene-acrea,specimen,45.76,-109.79,MT,Sweet Grass,"Greycliff, 4mE-Mkr 381 I-90",4500,1998,7,5,Chuck Harp,CEH,
+2149,estigmene-acrea,specimen,45.783,-108.501,MT,Yellowstone,"Billings, W - Broadwater Ave. ",3100,1998,6,7,Chuck Harp,CEH,
+1978,hypercompe-permaculata,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96
+1978,hypercompe-permaculata,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,5,C. E. Harp,CEH,SS-98
+2497,pyrrharctia-isabella,specimen,45.44,-109.215,MT,Carbon,Cooney Res. SP,4267,1997,5,31,C. E. Harp,CEH,SS-97
+2233,lophocampa-maculata,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96
+1875,cycnia-oregonensis,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96
+2340,ectypia-clio,specimen,46.09,-107.63,MT,Yellowstone,"Custer, 5.5mWSW I-90",2878,1998,8,6,C. E. Harp,CEH,SS-98
+1483,cisseps-fulvicollis,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,15,Chuck Harp,CEH,
+1483,cisseps-fulvicollis,specimen,45.77,-108.61,MT,Yellowstone,"Billings, W side",3290,1997,8,29,C. E. Harp,CEH,SS-97; submitted as C. packardii
+1393,apantesis-nevadensis,specimen,48.55,-109.684,MT,Hill,"Havre, Northern MT substation",2535,1922,8,18,?,MSU,
+1393,apantesis-nevadensis,specimen,48.55,-109.684,MT,Hill,"Havre, Northern MT substation",2535,1922,9,6,?,MSU,
+2101,apantesis-williamsii,specimen,45.732,-107.612,MT,Big Horn,"Hardin,",2907,1932,8,,?,MSU,
+2101,apantesis-williamsii,specimen,45.732,-107.612,MT,Big Horn,"Hardin,",2907,1954,6,23,J.P. Morris,MSU,
+2101,apantesis-williamsii,specimen,47.003,-108.352,MT,Petroleum,"Winnett, 3mNE",2900,1971,5,25,N.E. Nees,MSU,
+2101,apantesis-williamsii,specimen,47.003,-108.352,MT,Petroleum,"Winnett, 5mWSW",2900,1971,5,25,N.E. Nees,MSU,
+2225,arctia-caja,specimen,47.053,-109.91,MT,Judith Basin,Moccasin,4182,1979,8,2,?,MSU,
+2340,ectypia-clio,specimen,45.899,-108.301,MT,Yellowstone,Huntley,3014,1989,8,22,Wendell Morrill,MSU,
+2698,lycomorpha-grotei,specimen,45.25,-108.65,MT,Big Horn,"Sage Cr., Pryor Mts.",3829,1997,7,20,C. E. Harp,SS,
+1935,arctia-parthenos,specimen,45.007,-109.99,MT,Park,Silver Gate,7390,2000,7,12,Bransky/Ballard,BFC,SS-00
+2101,apantesis-williamsii,specimen,47.003,-108.352,MT,Petroleum,"Winnett, 3mNE",2900,1971,5,25,N.E. Nees,MSU,
+2101,apantesis-williamsii,specimen,47.003,-108.352,MT,Petroleum,"Winnett, 5mWSW",2900,1971,5,25,N.E. Nees,MSU,
+2225,arctia-caja,specimen,47.053,-109.91,MT,Judith Basin,Moccasin,4182,1979,8,2,?,MSU,
+1552,hyles-lineata,specimen,46.291,-107.097,MT,Treasure,Sanders,2602,1979,8,31,A. G. Guppy,JHS,
+1943,catocala-hermia,specimen,45.737,-108.526,MT,Yellowstone,Billings; Riverfront Park,3141,1998,9,2,Chris Harp,UASM,Strickland website
+2116,catocala-junctura,specimen,45.737,-108.526,MT,Yellowstone,Billings; Riverfront Park,3141,1997,9,8,Chris Harp,UASM,Strickland website
+2834,catocala-meskei,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,8,15,Chuck Harper,UASM,Strickland website 
+2834,catocala-meskei,specimen,45.737,-108.526,MT,Yellowstone,Billings; Riverfront Park,3141,1998,9,7,Chuck Harper,UASM,Strickland website
+1598,idia-americalis,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+2114,idia-immaculalis,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+2137,bleptina-caradrinalis,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+1991,hypena-humuli,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+2334,ascalapha-odorata,literature,47.561,-109.375,MT,Fergus,Winifred,3235,1926,4,,,?,"Cook, 1931; Shepard notes; "
+1943,catocala-hermia,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; det. C. verecunda diantha; McDunnough; Shepard notes"
+2270,drasteria-hudsonica,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; as C. heathi; det. McDunnough; Shepard notes"
+1740,caenurgina-crassiuscula,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+1606,caenurgina-erechtea,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+1761,euclidia-ardita,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,"Cook, 1931; Shepard notes; "
+1942,syngrapha-ignea,specimen,45.061,-109.569,MT,Carbon,Beartooth Plateau,9500,1982,7,22,J. & S. Shepard,JHS,
+1776,cucullia-intermedia,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes. 
+2437,cucullia-luna,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes. 
+2354,sympistis-albifasciata,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes. 
+2445,sympistis-occata,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes. 
+2448,sympistis-stabilis,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes. 
+2528,sympistis-cibalis,literature,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes. 
+1421,parabagrotis-exsertistigma,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+2020,euxoa-auxiliaris,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+2074,euxoa-divergens,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+1409,euxoa-lewisi,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+2054,euxoa-simona,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+1640,euxoa-rufula,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+1732,euxoa-comosa,specimen,45.083,-109.783,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,WSU,
+2216,euxoa-castanea,specimen,45.16,-109.39,MT,Carbon,W Fork Rock Cr.,6800,1988,7,25,Crabo/Morrell,WSU,
+1501,apamea-burgessi,specimen,45.433,-109.15,MT,Carbon,"Joliet, 5mW",4100,1964,9,3,D. F. Hardwick,CNC,"Mikkola, et al., 2009, Shepard notes,"
+1994,apamea-zeta,specimen,45.061,-109.569,MT,Carbon,Beartooth Plateau,10662,1988,7,8,J. Reichel,CNC,"Mikkola, et al., 2009, Shepard notes,"
+2260,apamea-indocilis,specimen,45.576,-109.333,MT,Stillwater,Whitebird Cr. @ Stillwater R.,3763,1993,7,6,J. & S. Shepard,JHS,
+1856,apamea-lignicolora,specimen,45.576,-108.333,MT,Stillwater,Whitebird Cr. @ Stillwater R.,3763,1993,7,6,J. & S. Shepard,JHS,
+1558,apamea-commoda,specimen,45.576,-109.333,MT,Stillwater,Whitebird Cr. @ Stillwater R.,3763,1993,7,6,J. & S. Shepard,JHS,
+2218,apamea-cogitata,specimen,45.576,-109.333,MT,Stillwater,Whitebird Cr. @ Stillwater R.,3763,1993,7,6,J. & S. Shepard,JHS,
+2176,apamea-alia,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+2512,apamea-inordinata,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1496,apamea-spaldingi,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1420,apamea-cinefacta,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1403,apamea-scoparia,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+2218,apamea-cogitata,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1720,apamea-devastator,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1540,apamea-niveivenosa,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1652,resapamea-passer,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+1813,mesapamea-fractilinea,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,MSU,"Cook, 1931, det. McDunnough, Shepard notes, "
+2424,schinia-edwardsii,specimen,46.757,-109.159,MT,Fergus,Little Snowy Mts.,6013,1987,5,22,,CNC,"Hardwick, 1996; Shepard notes;  "
+2098,hemileuca-eglanterina,specimen,45.364,-109.807,MT,Stillwater,"Benbow Mine; Nye, 5.4 mi S, S30,31 T5SR16E",8300,1979,7,5,B. Vogel,UWBM,
+1485,agrochola-purpurea,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+1657,anathix-aggressa,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+2013,eupsilia-tristigmata,specimen,48.554,-109.679,MT,Hill,Havre,2535,,9,,,?,Cook list; Shepard notes; 
+2022,fishia-discors,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+2178,fishia-yosemitae,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+1757,homoglaea-carbonaria,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+2069,lithophane-disposita,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+1669,lithophane-fagina,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+1625,lithophane-georgii,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
+2535,xylena-nupera,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,W. C. Cook,?,Cook list; Shepard notes; 
+2101,apantesis-williamsii,specimen,45.017,-109.934,MT,Park,Cooke City,7570,1959,7,27,"F., P. & B. Rindge",AMNH,Crabo notes; 
+3350,papaipema-unimoda,specimen,46.693,-144.044,MT,Missoula,"MPG Ranch, Bitterroot R",3166,2022,9,5,M. Seidensticker,CSU,
+2486,tholera-americana,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+1689,nephelodes-minians,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2253,anarta-trifolii,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2087,anarta-mutata,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+1901,anarta-oregonica,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2558,anarta-farnhami,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2041,anarta-crotchii,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2571,polia-purpurissata,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+1719,polia-nugatis,specimen,45.485,-108.97,MT,Carbon,Joliet,,1964,9,3,D. F. Hardwick,CNC,"McCabe, 1980; Shepard notes; "
+1719,polia-nugatis,specimen,45.082,-109.375,MT,Carbon,Richel Lodge,,,8,8,J. Sperry,AMNH,"McCabe, 1980; Shepard notes; "
+1719,polia-nugatis,specimen,45.082,-109.375,MT,Carbon,Richel Lodge,,,8,30,J. Sperry,AMNH,"McCabe, 1980; Shepard notes; "
+1719,polia-nugatis,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2387,melanchra-picta,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+1857,lacanobia-subjuncta,specimen,48.554,-109.679,MT,Hill,Havre,,1922,,,,?,Cooke list; Shepard notes; 
+1940,trichordestra-dodii,specimen,45.762,-109.79,MT,Sweet Grass,"Greycliff, 3.4mSE",,,,,G. Godfrey,Cornell,"McCabe, 1980; reared; Shepard notes; ;
+October 30, 1967"
+1970,trichordestra-lilacina,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+1372,papestra-quadrata,specimen,45.017,-109.934,MT,Park,Cooke City,,1959,7,27,F. Rindge,AMNH,"McCabe, 1980; Shepard notes; "
+2344,mamestra-configurata,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+3361,sideridis-artesta,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2335,sideridis-rosea,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2361,dargida-procinctus,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2267,dargida-diffusa,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2385,mythimna-unipuncta,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+1866,leucania-commoides,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2324,leucania-insueta,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2096,lacinipolia-pensilis,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2509,lacinipolia-renigera,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2395,lacinipolia-lorea,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2061,lacinipolia-olivacea,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; ssp. petita
+1787,anhimella-contrahens,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2303,protorthodes-incincta,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; [utahensis]
+2453,ulolonche-dilecta,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; as melanopis; 
+2723,ulolonche-orbiculata,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
+2098,hemileuca-eglanterina,specimen,41.013,-121.601,OR,Klamath,"Merill, 4mS",4000,1983,9,6,"S. G. Jewett, Jr.",OSAC,shastaensis
+2098,hemileuca-eglanterina,specimen,41.013,-121.601,OR,Klamath,"Merill, 4mS",4000,1983,9,2,"S. G. Jewett, Jr.",OSAC,shastaensis
+2662,hemileuca-nuteglan,specimen,41.013,-121.601,OR,Klamath,"Merill, 4mS",4000,1983,9,6,Melvin Parker,OSAC,uniformis/nuttalli
+2274,hemileuca-hera,specimen,41.013,-121.601,OR,Klamath,"Merill, 4mS",4000,1983,9,2,,OSAC,marcata
+2422,alypia-langtoni,specimen,41.947,-120.419,OR,Lake,Goose L.,4705,1973,5,1,"S. Jewett, Jr.",OSAC,
+1760,apantesis-ornata,specimen,41.967,-117.743,OR,Malheur,McDermitt Cr.,4415,2002,6,23,D. N. Ross,DNR,
+2695,lacinipolia-stenotis,specimen,-118.899,42.889,OR,Harney,"Frenchglen, 5mN",,1961,9,13,D. F. Hardwick,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-118.866,42.976,OR,Harney,"Frenchglen, 9mN",,1961,9,13,W. C. Cook,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-121.274,44.564,OR,Jefferson,Cove Palisades SP,,1962,9,2,W. C. Cook,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-121.17,44.5,OR,Jefferson,"Madras, 10mSW",,1970,9,11,D. F. Hardwick,CNC,Crabo notes
+2695,lacinipolia-stenotis,specimen,-118.204,43.049,OR,Malheur,"Follyfarm, 5mSE",,1961,9,15,D. F. Hardwick,CNC,Crabo notes
