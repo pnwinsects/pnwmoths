@@ -111,10 +111,21 @@ export function buildBitset(speciesCount: number, matchingIndices: number[]): st
 
 /**
  * Query data/images.csv for navigational-priority images per species slug.
- * Returns a Map<slug, filename> built entirely in TypeScript — no slug interpolation into SQL
+ *
+ * Returns:
+ *   - navImages:  Map<slug, filename> — the single nav-priority image per slug
+ *   - imagePairs: Set<`${slug} ${filename}`> — EVERY (slug, filename) pair in
+ *                 images.csv. Used by the post-emit guard to assert each emitted
+ *                 nav_image is a real catalogued image (so it resolves on the CDN
+ *                 at https://pnwmoths.b-cdn.net/<slug>/<filename>) rather than a
+ *                 synthesized key filename (ISSUE-43 regression guard).
+ *
+ * Both are built entirely in TypeScript — no slug interpolation into SQL
  * (T-39-01 mitigation: avoids SQL injection from malformed slug values).
  */
-async function queryNavImages(db: Awaited<ReturnType<typeof DuckDBInstance.create>>): Promise<Map<string, string>> {
+async function queryNavImages(
+  db: Awaited<ReturnType<typeof DuckDBInstance.create>>
+): Promise<{ navImages: Map<string, string>; imagePairs: Set<string> }> {
   const conn = await db.connect();
   try {
     await conn.run(`
@@ -160,17 +171,22 @@ async function queryNavImages(db: Awaited<ReturnType<typeof DuckDBInstance.creat
     `);
 
     // Build Map<slug, filename> in TypeScript — first row per slug wins (lowest weight / navigational priority)
+    // Simultaneously collect the full set of valid (slug, filename) pairs for the ISSUE-43 guard.
     const navImages = new Map<string, string>();
+    const imagePairs = new Set<string>();
     type ImagesRow = { species_slug: unknown; filename: unknown };
     const rows = imagesResult.getRowObjectsJS() as ImagesRow[];
     for (const row of rows) {
       const slug = String(row.species_slug ?? '');
       const filename = String(row.filename ?? '');
-      if (slug && filename && !navImages.has(slug)) {
-        navImages.set(slug, filename);
+      if (slug && filename) {
+        imagePairs.add(`${slug} ${filename}`);
+        if (!navImages.has(slug)) {
+          navImages.set(slug, filename);
+        }
       }
     }
-    return navImages;
+    return { navImages, imagePairs };
   } finally {
     conn.closeSync();
   }
@@ -233,7 +249,7 @@ export async function main(): Promise<void> {
 
   // 5. DuckDB nav-image join — query ALL images, resolve per slug in TypeScript (no SQL interpolation)
   const db = await DuckDBInstance.create(':memory:');
-  const navImages = await queryNavImages(db);
+  const { navImages, imagePairs } = await queryNavImages(db);
 
   // 6. Build characters[], species[], matrix[]
   // 6a. Load character image map from CSV (CIMG-02, D-08 soft-skip)
@@ -349,6 +365,23 @@ export async function main(): Promise<void> {
         `bitset length mismatch at index ${i}: expected ${expectedB64Len}, got ${b64.length}`
       );
     }
+  }
+
+  // 8b. ISSUE-43 regression guard: every emitted nav_image must be a real
+  // catalogued image in data/images.csv for that slug, so it resolves on the CDN
+  // (https://pnwmoths.b-cdn.net/<slug>/<nav_image>). The original bug emitted
+  // key-derived underscore filenames (e.g. 'Sphinx_luscitiosa-A-D.jpg') that had
+  // no images.csv row and 404'd. A null nav_image is allowed (the /identify grid
+  // degrades it to the gray placeholder); only non-null values are checked.
+  const unbackedNavImages = artifact.species
+    .filter(s => s.nav_image !== null && !imagePairs.has(`${s.slug} ${s.nav_image}`))
+    .map(s => `${s.slug} → ${s.nav_image}`);
+  if (unbackedNavImages.length > 0) {
+    throw new Error(
+      `build-key: ${unbackedNavImages.length} emitted nav_image(s) are not backed by a ` +
+        `data/images.csv row and would 404 on the CDN (ISSUE-43):\n  ` +
+        unbackedNavImages.join('\n  ')
+    );
   }
 
   // 9. Write artifacts (D-07: commit both)

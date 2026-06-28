@@ -7,6 +7,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'csv-parse/sync';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -199,6 +200,28 @@ describe('main (integration)', () => {
     assert.ok(
       [...cats].every(c => !c.startsWith('"')),
       `some category strings begin with a stray double-quote: ${[...cats].filter(c => c.startsWith('"')).join(', ')}`
+    );
+  });
+
+  // ISSUE-43 regression guard: every non-null nav_image must be a real catalogued
+  // image in data/images.csv for that slug, so it resolves on the CDN. The original
+  // bug emitted key-derived underscore filenames that had no images.csv row and 404'd.
+  test('every emitted nav_image is backed by a data/images.csv row (ISSUE-43)', () => {
+    execSync('node scripts/build-key.ts', { cwd: ROOT, stdio: 'pipe' });
+    const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
+      species: Array<{ slug: string; nav_image: string | null }>;
+    };
+    const imageRows = parse(readFileSync(resolve(ROOT, 'data/images.csv')), {
+      columns: true,
+      skip_empty_lines: true,
+    }) as Array<{ species_slug: string; filename: string }>;
+    const imagePairs = new Set(imageRows.map(r => `${r.species_slug} ${r.filename}`));
+    const unbacked = matrix.species
+      .filter(s => s.nav_image !== null && !imagePairs.has(`${s.slug} ${s.nav_image}`))
+      .map(s => `${s.slug} → ${s.nav_image}`);
+    assert.strictEqual(
+      unbacked.length, 0,
+      `nav_image(s) without a data/images.csv row (would 404 on CDN):\n  ${unbacked.join('\n  ')}`
     );
   });
 });
