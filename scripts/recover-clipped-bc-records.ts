@@ -84,7 +84,7 @@ function queryContainer(): Record<string, string>[] {
     { input: SQL, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
   );
   const lines = out.replace(/\n$/, '').split('\n');
-  const header = lines[0].split('\t');
+  const header = (lines[0] ?? '').split('\t');
   return lines.slice(1).map((line) => {
     const cells = line.split('\t').map(unescapeBatch);
     return Object.fromEntries(header.map((h, i) => [h, cells[i] ?? '']));
@@ -101,7 +101,7 @@ function main(): void {
   const speciesRows = parse(readFileSync(speciesCsvPath), { columns: true, skip_empty_lines: true }) as Array<Record<string, string>>;
   const slugById = new Map<string, string>();
   for (const r of speciesRows) {
-    slugById.set(r.id, `${r.genus}-${r.species}`.toLowerCase());
+    slugById.set(r.id ?? '', `${r.genus ?? ''}-${r.species ?? ''}`.toLowerCase());
   }
 
   const rows = queryContainer();
@@ -111,44 +111,33 @@ function main(): void {
   let skippedNoSpecies = 0;
 
   for (const r of rows) {
-    const lat = parseFloat(r.latitude);
-    const lon = parseFloat(r.longitude);
-    const slug = slugById.get(r.species_id) ?? '';
+    const get = (k: string): string => r[k] ?? '';
+    const lat = parseFloat(get('latitude'));
+    const lon = parseFloat(get('longitude'));
+    const slug = slugById.get(get('species_id')) ?? '';
+
+    // Fields common to both outputs, in records.csv column order.
+    const fields = {
+      record_type: get('record_type'),
+      latitude: get('latitude'),
+      longitude: get('longitude'),
+      state: get('state'),
+      county: get('county'),
+      locality: get('locality'),
+      elevation_ft: get('elevation_ft'),
+      year: get('year'), month: get('month'), day: get('day'),
+      collector: get('collector'),
+      collection: get('collection'),
+      notes: get('notes'),
+    };
 
     if (inBox(lat, lon, NEW_LAT_MIN, NEW_LAT_MAX, NEW_LON_MIN, NEW_LON_MAX)) {
       // Recovered, in-bounds record. Append only if its species is in species.csv.
       if (!slug) { skippedNoSpecies++; continue; }
-      bandToAppend.push({
-        species_slug: slug,
-        record_type: r.record_type,
-        latitude: r.latitude,
-        longitude: r.longitude,
-        state: r.state,
-        county: r.county,
-        locality: r.locality,
-        elevation_ft: r.elevation_ft,
-        year: r.year, month: r.month, day: r.day,
-        collector: r.collector,
-        collection: r.collection,
-        notes: r.notes,
-      });
+      bandToAppend.push({ species_slug: slug, ...fields });
     } else {
       // Outside even the widened box: bad coordinates (e.g. swapped lat/lon).
-      badCoords.push({
-        species_id: r.species_id,
-        species_slug: slug,
-        record_type: r.record_type,
-        latitude: r.latitude,
-        longitude: r.longitude,
-        state: r.state,
-        county: r.county,
-        locality: r.locality,
-        elevation_ft: r.elevation_ft,
-        year: r.year, month: r.month, day: r.day,
-        collector: r.collector,
-        collection: r.collection,
-        notes: r.notes,
-      });
+      badCoords.push({ species_id: get('species_id'), species_slug: slug, ...fields });
     }
   }
 
