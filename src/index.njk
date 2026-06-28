@@ -4,7 +4,17 @@ title: PNW Moths
 permalink: /index.html
 ---
 <h1>PNW Moths</h1>
+<figure class="home-range-map" data-pagefind-ignore>
+  <img src="{{ '/images/pnw-range.svg' | url }}" width="384" height="400"
+       alt="Map of the Pacific Northwest region covered by this site — Washington, Oregon, Idaho, and adjacent parts of British Columbia, Montana, and northern California">
+  <figcaption>This site covers the moths of the Pacific Northwest.</figcaption>
+</figure>
 <p>Pacific Northwest Moths is a comprehensive source of information about more than 1,200 species of moths.</p>
 <p>Drawing from the knowledge of moth experts and specimen records from the region’s major insect collections, this site features <a href="{{ '/browse/' | url }}">detailed species accounts</a>, <a href="{{ '/plates/' | url }}">high resolution photographs</a>, and an <a href="{{ '/identify/' | url }}">interactive identification key</a> for every Pacific Northwest moth species within the families <a href="{{ '/browse/' | url }}#family-drepanidae">Drepanidae</a>, <a href="{{ '/browse/' | url }}#family-uraniidae">Uraniidae</a>, <a href="{{ '/browse/' | url }}#family-lasiocampidae">Lasiocampidae</a>, <a href="{{ '/browse/' | url }}#family-saturniidae">Saturniidae</a>, <a href="{{ '/browse/' | url }}#family-sphingidae">Sphingidae</a>, <a href="{{ '/browse/' | url }}#family-notodontidae">Notodontidae</a>, <a href="{{ '/browse/' | url }}#family-erebidae">Erebidae</a>, <a href="{{ '/browse/' | url }}#family-euteliidae">Euteliidae</a>, <a href="{{ '/browse/' | url }}#family-nolidae">Nolidae</a>, and <a href="{{ '/browse/' | url }}#family-noctuidae">Noctuidae</a>.</p>
 <p>Explore this site to identify a moth that you have found, or to learn about the amazingly diverse moths of our region. Because the site also works on mobile devices, it serves as an electronic field guide to the region's moths!</p>
+<dl class="home-stats" data-pagefind-ignore>
+  <div><dt>{{ stats.species | number }}</dt><dd>Species profiles</dd></div>
+  <div><dt>{{ stats.records | number }}</dt><dd>Specimen records</dd></div>
+  <div><dt>{{ stats.images | number }}</dt><dd>Specimen images</dd></div>
+</dl>
 <a href="{{ '/browse/' | url }}">Browse all species</a>

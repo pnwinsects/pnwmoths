@@ -145,6 +145,7 @@ Items acknowledged and carried forward:
 |----------|-------------|------|--------|
 | 260609-e2b | Factor occurrence popup into its own Lit component (`pnwm-occurrence-popup`) — closes #22 | 2026-06-09 | complete ✓ |
 | 260627-kdt | Data-driven family-withholding gate (`data/withheld-families.csv`) — holds Geometridae from pages/Browse/Identify/search + build-time leak gate; release = delete one line — #48 | 2026-06-27 | complete ✓ |
+| 260627-oe1 | Home-page static target-range SVG map (generated from shared `PNW_REGION_RING`) + build-time species/record/image stats (`stats.ts`, gate-aware) | 2026-06-27 | complete ✓ |
 
 ## Session Continuity
 

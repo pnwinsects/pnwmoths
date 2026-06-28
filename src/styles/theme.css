@@ -58,7 +58,7 @@ body > footer a {
 
 /* --- Page background --- */
 
-body {
+html, body {
   background-color: #f3e8ba;
 }
 
@@ -198,6 +198,65 @@ abbr.glossary-term {
   margin: 0 auto;
   padding: 24px;
   box-shadow: 0 0 15px 5px rgba(50, 50, 50, 0.25);
+}
+
+/* --- Home page --- */
+
+.home-range-map {
+  float: right;
+  width: clamp(200px, 32%, 280px);
+  margin: 0.25rem 0 1rem 1.5rem;
+}
+
+.home-range-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+}
+
+.home-range-map figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--pico-muted-color);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .home-range-map {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.25rem 0;
+  }
+}
+
+.home-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  clear: both;
+  margin: 2rem 0 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+
+.home-stats > div {
+  flex: 1 1 8rem;
+  text-align: center;
+}
+
+.home-stats dt {
+  font-family: 'Spinnaker', 'Open Sans', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.1;
+  color: var(--pico-primary);
+}
+
+.home-stats dd {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--pico-muted-color);
 }
 
 /* --- Species detail page --- */

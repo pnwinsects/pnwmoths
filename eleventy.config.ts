@@ -61,6 +61,9 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   // (spaces, parentheses, +, #, etc.). Used in CDN URL construction.
   eleventyConfig.addFilter("urlencode", v => encodeURIComponent(v as string));
 
+  // Thousands-separated integer, e.g. 92446 -> "92,446". Used for home-page stats.
+  eleventyConfig.addFilter("number", v => Number(v).toLocaleString("en-US"));
+
   // Annotate species prose pages at build time: wrap first occurrences of glossary
   // terms in <abbr class="glossary-term"> elements.
   // Guard 1: skip non-HTML outputs (outputPath is false for permalink:false pages)
