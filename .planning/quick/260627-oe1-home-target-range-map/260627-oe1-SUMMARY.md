@@ -59,8 +59,27 @@ region. The Leaflet component was removed in favor of a generated static SVG.
 - SVG rasterized (`rsvg-convert`) and eyeballed — recognizable PNW with state
   borders and the range highlighted.
 
+## Addendum — home-page stats
+
+Followed up by adding three "vanity" metrics to the home page (mirroring the
+reference site's *Species Profiles / Specimen Records / Specimen Images*), but
+computed from **our** data:
+
+- `src/_data/stats.ts` — DuckDB build-time module returning `{ species, records,
+  images }`. All three respect the family-withholding gate (same predicate as
+  `species.ts`), so they match what visitors can browse. Current values:
+  **1,334 species · 92,446 records · 3,788 images** (vs the reference site's
+  1,253 / 99,387 / 4,256 — ours differ because the data differs and Geometridae
+  is withheld).
+- `src/_data/stats.test.ts` — asserts counts are real, `stats.species` equals the
+  species-collection length, and withheld families are excluded.
+- `<dl class="home-stats">` in `index.njk` + `.home-stats` in `theme.css`,
+  formatted with a new `number` Nunjucks filter (thousands separators). Stat
+  numbers use `var(--pico-primary)`, matching the site's link accent.
+
 ## Follow-ups
 
 - Branch `quick/260627-oe1-home-target-range-map` is ready; not pushed/merged
   (user hasn't asked).
-- To regenerate after a range change: `npm run generate:range-map`.
+- To regenerate the map after a range change: `npm run generate:range-map`.
+- Stat counts refresh automatically on every build (no manual step).
