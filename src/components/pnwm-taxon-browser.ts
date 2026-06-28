@@ -124,7 +124,13 @@ class PnwmTaxonBrowser extends LitElement {
     super.connectedCallback();
     // Sync: read taxonomy JSON embedded by index.njk (D-10)
     const scriptEl = document.getElementById('taxon-data');
-    if (scriptEl) this._families = JSON.parse(scriptEl.textContent ?? '[]') as TaxonFamily[];
+    if (scriptEl) {
+      this._families = JSON.parse(scriptEl.textContent ?? '[]') as TaxonFamily[];
+      // The component renders async, so the browser's initial scroll to a
+      // #family-<name> deep link (e.g. from the homepage intro) misses. After
+      // the first render, expand the targeted family and scroll it into view.
+      void this.updateComplete.then(() => this._scrollToHashFamily());
+    }
     // Async: fetch state filter data (D-11)
     try {
       const res = await fetch(`${this._prefix}species-states.json`);
@@ -142,6 +148,22 @@ class PnwmTaxonBrowser extends LitElement {
       }
       // Network/fetch errors: soft degradation — leave stateMap empty, select stays disabled
     }
+  }
+
+  /**
+   * Handle a #family-<name> deep link: expand the matching family and scroll
+   * its row into view. No-op when the hash is absent or matches no family.
+   */
+  _scrollToHashFamily(): void {
+    const hash = window.location.hash;
+    if (!hash.startsWith('#family-')) return;
+    const target = decodeURIComponent(hash.slice('#family-'.length)).toLowerCase();
+    const family = this._families.find(f => (f.name ?? '').toLowerCase() === target);
+    if (!family?.name) return;
+    this._expandedFamilies = new Set([...this._expandedFamilies, family.name]);
+    void this.updateComplete.then(() => {
+      this.querySelector(`[id="family-${target}"]`)?.scrollIntoView();
+    });
   }
 
   // --- Toggle handlers ---
@@ -312,7 +334,7 @@ class PnwmTaxonBrowser extends LitElement {
     const expanded = this._expandedFamilies.has(family.name);
     const slugs = collectSlugs(family);
     return html`
-      <div class="pnwm-tb-family-row" style="${this._mutedStyle(slugs)}">
+      <div class="pnwm-tb-family-row" id="family-${(family.name ?? '').toLowerCase()}" style="${this._mutedStyle(slugs)}">
         <h2>
           <button
             type="button"
