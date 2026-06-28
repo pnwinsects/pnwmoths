@@ -1,19 +1,17 @@
-name: Deploy to GitHub Pages
+name: Deploy to Production (Bunny)
 on:
   push:
     branches: [main]
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: production-deploy
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -37,23 +35,13 @@ jobs:
           path: .lycheecache
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
-      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - run: npm run build:data && npm run build:key && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-key-matrix && npm run build:check-key-weight && npm run build:copy-images && npm run build:species-states && npm run build:pagefind && npm run build:check-weight
       - name: Verify Parquet schema
         run: npm run verify:parquet
       - name: Check links (non-blocking)
         run: npm run build:validate-links
         continue-on-error: true
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: _site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
-        id: deployment
+      - name: Upload _site to Bunny
+        run: npm run site:upload
+        env:
+          BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
