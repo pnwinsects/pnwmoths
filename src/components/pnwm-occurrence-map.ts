@@ -2,6 +2,7 @@ import { LitElement, html, type PropertyDeclarations, type TemplateResult, type 
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { loadParquet, filterRecords } from './parquet-cache.ts';
+import { PNW_REGION_RING } from './pnw-region.ts';
 import type { OccurrenceRecord, FilterChangeDetail } from '../types/index.ts';
 
 class PnwmOccurrenceMap extends LitElement {
@@ -87,10 +88,10 @@ class PnwmOccurrenceMap extends LitElement {
         attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
         maxZoom: 19,
       }).addTo(this._map);
-      // Shade outside the PNW region boundary (source: pnwinsects-app)
+      // Shade outside the PNW region boundary (PNW_REGION_RING is the shared source of truth)
       L.polygon([
         [[90, -180], [90, 0], [-90, 0], [-90, -180]], // world mask
-        [[60, -140], [60, -120], [53.8, -120], [45, -109], [39, -109], [39, -125]], // PNW hole
+        PNW_REGION_RING, // PNW hole
       ], {
         color: '#444',
         weight: 1.5,
