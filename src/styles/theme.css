@@ -58,7 +58,7 @@ body > footer a {
 
 /* --- Page background --- */
 
-body {
+html, body {
   background-color: #f3e8ba;
 }
 
@@ -229,6 +229,34 @@ abbr.glossary-term {
     width: 100%;
     margin: 0 0 1.25rem 0;
   }
+}
+
+.home-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  clear: both;
+  margin: 2rem 0 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+
+.home-stats > div {
+  flex: 1 1 8rem;
+  text-align: center;
+}
+
+.home-stats dt {
+  font-family: 'Spinnaker', 'Open Sans', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.1;
+  color: var(--pico-primary);
+}
+
+.home-stats dd {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--pico-muted-color);
 }
 
 /* --- Species detail page --- */
