@@ -17,7 +17,11 @@ The site is built with [Eleventy](https://www.11ty.dev/) (HTML generation), [Vit
 
 ## Deployment
 
-A push to `main` triggers GitHub Actions: build → index → validate → deploy to GitHub Pages. The full build runs in Docker for local reproducibility. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup instructions.
+A push to `main` triggers the production workflow ([`.github/workflows/production.yml`](.github/workflows/production.yml)): it runs CI (typecheck, tests, build at root `/`) and then uploads the built `_site` **additively** to the Bunny Storage Zone — the same CDN/zone that holds the images — serving production at <https://moths.pnwinsects.org/>. The upload is additive only: no purge, no deletes.
+
+GitHub Pages remains as a manual **staging** target ([`.github/workflows/staging.yml`](.github/workflows/staging.yml)): run the "Deploy to Staging" workflow via `workflow_dispatch` to publish a build under `/pnwmoths/` at the default `*.github.io/pnwmoths/` URL.
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup instructions and the required deploy secret.
 
 ## Adding content
 
