@@ -50,3 +50,31 @@ export function loadWithheldFamilies(csvPath: string = DEFAULT_CSV_PATH): Set<st
 export function isWithheld(family: string | null | undefined, withheld: Set<string>): boolean {
   return family != null && withheld.has(family.trim().toLowerCase());
 }
+
+/**
+ * Return true when `family` is missing or blank (null/undefined/whitespace).
+ *
+ * An unclassified species can belong to any family — including an embargoed
+ * one — so we cannot know it is safe to show. A blank family is also what
+ * produced the empty "" Browse heading (ISSUE-62). Callers treat
+ * unclassified species as fail-closed (withheld) at the user-facing choke
+ * points via {@link isWithheldOrUnclassified}.
+ */
+export function isUnclassifiedFamily(family: string | null | undefined): boolean {
+  return family == null || family.trim().length === 0;
+}
+
+/**
+ * Fail-closed gate combining the explicit embargo with unclassified-family
+ * protection. True when `family` is embargoed OR unclassified.
+ *
+ * Use this at the three user-facing choke points (species.ts, taxon.ts,
+ * build-key.ts) so a species with a blank family can never silently leak —
+ * e.g. a Geometridae whose `family` cell was left empty in species.csv.
+ */
+export function isWithheldOrUnclassified(
+  family: string | null | undefined,
+  withheld: Set<string>,
+): boolean {
+  return isUnclassifiedFamily(family) || isWithheld(family, withheld);
+}
