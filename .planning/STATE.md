@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 Phase: Milestone v4.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-28 — Completed quick task 260628-jtl: switch production to custom domain moths.pnwinsects.org via Bunny; GitHub Pages demoted to manual staging
+Last activity: 2026-06-29 — Completed quick task 260629-geq: exclude larvae/reared specimens from phenology graphs (closes #59)
 
 ## Performance Metrics
 
@@ -147,6 +147,7 @@ Items acknowledged and carried forward:
 | 260627-kdt | Data-driven family-withholding gate (`data/withheld-families.csv`) — holds Geometridae from pages/Browse/Identify/search + build-time leak gate; release = delete one line — #48 | 2026-06-27 | complete ✓ |
 | 260627-oe1 | Home-page static target-range SVG map (generated from shared `PNW_REGION_RING`) + build-time species/record/image stats (`stats.ts`, gate-aware) | 2026-06-27 | complete ✓ |
 | 260628-jtl | Switch production to custom domain (moths.pnwinsects.org) via Bunny; demote GitHub Pages to manual staging — additive Storage upload, image CDN host moved to custom domain, split deploy into `production.yml`/`staging.yml` | 2026-06-28 | complete ✓ |
+| 260629-geq | Exclude larvae/reared specimens from phenology graphs — `REARED_TERMS` + `isRearedRecord` keyword scan on `notes` only, applied in `aggregateByMonth` (map/popup untouched) — closes #59 | 2026-06-29 | complete ✓ |
 
 ## Session Continuity
 

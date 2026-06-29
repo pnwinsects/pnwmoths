@@ -102,12 +102,45 @@ export function filterRecords(
 }
 
 /**
+ * Keyword list flagging a record as reared/immature (larvae, pupae, eggs, etc.).
+ * Verbatim replica of the legacy Django site's `species/models.py` REARED_TERMS,
+ * which excluded reared specimens from phenology graphs by nulling their month at
+ * data-entry time. Replicated here so post-2011 stragglers with populated months
+ * (and any future ones) are excluded durably from the phenology bars (ISSUE-59).
+ */
+export const REARED_TERMS = [
+  'reared', 'larva', 'em.', 'pupa', 'Rubus', 'immature', 'broadleaf',
+  'Taraxacum', 'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
+];
+
+/**
+ * Whether a record is a reared/immature specimen, per the legacy keyword scan.
+ *
+ * Performs a case-insensitive substring match of any REARED_TERM against the
+ * `notes` field ONLY — never any other column, since short tokens like "em."
+ * would false-match locality/collector text. Records with null or empty-string
+ * notes are not reared.
+ *
+ * @param record - occurrence record to test
+ * @returns true if any REARED_TERM appears in the record's notes
+ */
+export function isRearedRecord(record: OccurrenceRecord): boolean {
+  if (!record.notes) return false;
+  const lowered = record.notes.toLowerCase();
+  return REARED_TERMS.some(term => lowered.includes(term.toLowerCase()));
+}
+
+/**
  * Aggregate records into a 12-element monthly count array.
  * Index 0 = January, Index 11 = December.
+ * Reared/immature records (per isRearedRecord) are excluded — they are not
+ * meaningful phenology observations (ISSUE-59). They remain on the distribution
+ * map, which reads filterRecords, not this function.
  */
 export function aggregateByMonth(records: OccurrenceRecord[]): number[] {
   const counts = new Array(12).fill(0) as number[];
   for (const r of records) {
+    if (isRearedRecord(r)) continue;
     if (r.month != null && r.month >= 1 && r.month <= 12) {
       const idx = r.month - 1;
       counts[idx] = (counts[idx] ?? 0) + 1;

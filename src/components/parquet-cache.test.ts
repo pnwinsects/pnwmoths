@@ -1,7 +1,28 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { filterRecords, aggregateByMonth, loadParquet, assertParquetColumns } from './parquet-cache.ts';
+import { filterRecords, aggregateByMonth, loadParquet, assertParquetColumns, isRearedRecord, REARED_TERMS } from './parquet-cache.ts';
 import type { OccurrenceRecord } from '../types/index.ts';
+
+/** Build a valid OccurrenceRecord with overridable notes/month for fixtures. */
+function makeRecord(overrides: Partial<OccurrenceRecord> = {}): OccurrenceRecord {
+  return {
+    species_slug: 'acronicta-americana',
+    record_type: 'specimen',
+    latitude: 47.6,
+    longitude: -122.3,
+    state: 'WA',
+    county: null,
+    locality: null,
+    elevation_ft: null,
+    year: null,
+    month: null,
+    day: null,
+    collector: null,
+    collection: null,
+    notes: null,
+    ...overrides,
+  };
+}
 
 describe('filterRecords', () => {
   const records = [
@@ -84,6 +105,71 @@ describe('loadParquet', () => {
     assert.ok(result instanceof Promise, 'loadParquet should return a Promise');
     // Prevent unhandled rejection by catching
     result.catch(() => {});
+  });
+});
+
+describe('REARED_TERMS', () => {
+  it('preserves the exact legacy keyword list (order + casing)', () => {
+    assert.deepEqual(REARED_TERMS, [
+      'reared', 'larva', 'em.', 'pupa', 'Rubus', 'immature', 'broadleaf',
+      'Taraxacum', 'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
+    ]);
+  });
+});
+
+describe('isRearedRecord', () => {
+  it('returns true for a "reared ex pupa" note (matches reared, pupa)', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'reared ex pupa, collected late April 2014' })), true);
+  });
+
+  it('returns true for a "larva on limestone ridge" note', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'larva on limestone ridge; Jul. 29, 2011' })), true);
+  });
+
+  it('returns true for "Larva" (case-insensitive match of larva)', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'Larva' })), true);
+  });
+
+  it('returns true for "ex. larva on Lactuca serriola; August 13, 2009"', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'ex. larva on Lactuca serriola; August 13, 2009' })), true);
+  });
+
+  it('returns true for a note containing "em."', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'em. ex pupa' })), true);
+  });
+
+  it('returns false for notes = null', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: null })), false);
+  });
+
+  it('returns false for notes = "" (empty string)', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: '' })), false);
+  });
+
+  it('returns false for a non-reared note', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'At UV light trap, MV lamp' })), false);
+  });
+});
+
+describe('aggregateByMonth reared exclusion', () => {
+  it('counts only the clean record when two reared + one clean share month 6', () => {
+    const records = [
+      makeRecord({ month: 6, notes: 'reared ex pupa' }),
+      makeRecord({ month: 6, notes: 'Larva' }),
+      makeRecord({ month: 6, notes: 'At UV light trap' }),
+    ];
+    const counts = aggregateByMonth(records);
+    assert.equal(counts[5], 1);
+  });
+
+  it('does not increment any bucket for a reared record with a populated month', () => {
+    const counts = aggregateByMonth([makeRecord({ month: 6, notes: 'reared ex pupa' })]);
+    assert.deepEqual(counts, new Array(12).fill(0));
+  });
+
+  it('preserves existing behavior: a clean record with month=null contributes 0', () => {
+    const counts = aggregateByMonth([makeRecord({ month: null, notes: 'At UV light trap' })]);
+    assert.deepEqual(counts, new Array(12).fill(0));
   });
 });
 
