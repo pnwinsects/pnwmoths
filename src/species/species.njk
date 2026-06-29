@@ -148,13 +148,3 @@ eleventyComputed:
     </ul>
   </section>
 {% endif %}
-
-<script type="module">
-  const map = document.querySelector('pnwm-occurrence-map');
-  const chart = document.querySelector('pnwm-phenology-chart');
-
-  document.addEventListener('pnwm-filter-change', (e) => {
-    if (map) map.filters = e.detail;
-    if (chart) chart.filters = e.detail;
-  });
-</script>
