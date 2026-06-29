@@ -79,10 +79,10 @@ Expected output:
 [upload-tiles] manifest: 4935 rows total; 3808 eligible (status=tiled)
 [upload-tiles] DRY_RUN=1 — printing first 5 upload plans, not uploading
   slug: abagrotis-apposita  pair: A-D
-    CDN URL: https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/
+    CDN URL: https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-D/
     Files to upload: 88 (87 tiles + 1 .dzi)
   slug: abagrotis-apposita  pair: A-V
-    CDN URL: https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-V/
+    CDN URL: https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-V/
     Files to upload: 88 (87 tiles + 1 .dzi)
   ... (3803 more)
 ```
@@ -92,7 +92,7 @@ rows have completed by the time you run this.
 
 Operator checklist before proceeding:
 
-- CDN URLs use the Pull Zone host `pnwmoths.b-cdn.net` (the read-only verification
+- CDN URLs use the Pull Zone host `moths.pnwinsects.org` (the read-only verification
   endpoint), not the Storage Zone host `la.storage.bunnycdn.com`
 - Every slug in the output is lowercase (even if the source TIFF had a mixed-case
   genus — the script calls `.toLowerCase()` unconditionally per L-08)
@@ -230,7 +230,7 @@ Pass it on the invocation line: `BUNNY_API_KEY=xxxxx npm run photos:upload`.
 Two common causes: (a) `BUNNY_API_KEY` is wrong — verify against the bunny.net
 dashboard as above. (b) The PUT is going to the wrong host — confirm that
 `BUNNY_STORAGE_HOST` defaults to `la.storage.bunnycdn.com` (the Storage Zone, which
-accepts writes) and not `pnwmoths.b-cdn.net` (the Pull Zone, which is read-only).
+accepts writes) and not `moths.pnwinsects.org` (the Pull Zone, which is read-only).
 The script's `withRetry` will waste up to 62 seconds (2 + 4 + 8 + 16 + 32 s) before
 the first row fails on a bad API key. Press `Ctrl-C` after the first failure, fix the
 env var, and restart.
@@ -269,7 +269,7 @@ After the run completes, run the following checks before committing the manifest
 Pick three random `status: uploaded` rows from the manifest and run:
 
 ```bash
-curl -I https://pnwmoths.b-cdn.net/species-tiles/{slug}/{specimen_id}-{view}.dzi
+curl -I https://moths.pnwinsects.org/species-tiles/{slug}/{specimen_id}-{view}.dzi
 ```
 
 Expected response: `HTTP/2 200`, `content-type: application/xml` or `text/xml`. A
@@ -279,7 +279,7 @@ dashboard) or the Pull Zone cache has not refreshed yet (wait 1–2 minutes and 
 **2. A representative tile file resolves through the Pull Zone.**
 
 ```bash
-curl -I https://pnwmoths.b-cdn.net/species-tiles/{slug}/{specimen_id}-{view}_files/0/0_0.webp
+curl -I https://moths.pnwinsects.org/species-tiles/{slug}/{specimen_id}-{view}_files/0/0_0.webp
 ```
 
 Expected: `HTTP/2 200`, `content-type: image/webp`. Adjust the `0/0_0.webp` segment
@@ -340,7 +340,7 @@ from `data/species-photos-manifest.csv` and materializes them into the Eleventy 
 tree. The CDN tile path convention is:
 
 ```
-https://pnwmoths.b-cdn.net/species-tiles/{slug-lowercase}/{specimen_id}-{view}/
+https://moths.pnwinsects.org/species-tiles/{slug-lowercase}/{specimen_id}-{view}/
 ```
 
 This is the URL format Phase 31 will use to construct OpenSeadragon viewer entries.

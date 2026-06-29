@@ -40,7 +40,7 @@ import { parse } from 'csv-parse/sync';
 // ---------------------------------------------------------------------------
 
 const SOURCE_DIR: string = process.env['LEGACY_PHOTOS_SRC'] ?? '';
-const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';

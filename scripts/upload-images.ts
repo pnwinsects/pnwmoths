@@ -39,7 +39,7 @@ import { tmpdir } from 'node:os';
 const SOURCE_DIR: string =
   process.env['KEY_IMAGES_SRC'] ??
   '/Users/rainhead/Downloads/may 6 2015 key files/may 6 2015 key media/Images';
-const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';

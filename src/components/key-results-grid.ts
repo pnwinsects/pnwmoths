@@ -6,7 +6,7 @@ import { LitElement, html, type TemplateResult, type PropertyDeclarations } from
 import { repeat } from 'lit/directives/repeat.js';
 import type { KeySpecies } from '../types/schemas.ts';
 
-const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 
 /**
  * Construct a CDN thumbnail URL for a species image.

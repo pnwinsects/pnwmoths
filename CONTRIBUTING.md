@@ -51,12 +51,13 @@ Tests cover the data pipeline (`scripts/build-data.test.js`) and Lit components 
 
 ## CI
 
-Two workflows run on GitHub Actions:
+Three workflows run on GitHub Actions:
 
-- **`deploy.yml`** — builds and deploys to GitHub Pages on push to `main`
-- **`pr-check.yml`** — runs the full build on pull requests
+- **`production.yml`** — on push to `main`, builds the site at root `/` and uploads `_site` additively to the Bunny Storage Zone (production, <https://moths.pnwinsects.org/>)
+- **`staging.yml`** — manual (`workflow_dispatch`) GitHub Pages staging deploy, builds under `/pnwmoths/`
+- **`pr-check.yml`** — full build + link check on pull requests
 
-Both use the same Docker image for reproducibility.
+**Required secret:** the production deploy needs the repository secret `BUNNY_STORAGE_PASSWORD` (the Bunny `pnwmoths` Storage Zone password), set at GitHub → Settings → Secrets and variables → Actions. Until it exists, the upload step fails (the rest of CI still runs).
 
 ## Project structure
 

@@ -9,7 +9,7 @@ const STATE_NAMES: Record<string, string> = {
   WA: 'Washington',
 };
 
-const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 
 /**
  * Discriminant error class for species-states.json schema validation failures.

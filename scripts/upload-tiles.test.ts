@@ -54,13 +54,13 @@ describe('tilePullZoneUrl', () => {
   it('returns Pull Zone URL with trailing slash', () => {
     const r = row({ species_slug: 'abagrotis-apposita', specimen_id: 'A', view: 'D' });
     const result = tilePullZoneUrl(r);
-    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/');
+    assert.equal(result, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-D/');
   });
 
   it('lowercases a mixed-case species_slug in the Pull Zone URL', () => {
     const r = row({ species_slug: 'Abagrotis-Apposita', specimen_id: 'A', view: 'D' });
     const result = tilePullZoneUrl(r);
-    assert.equal(result, 'https://pnwmoths.b-cdn.net/species-tiles/abagrotis-apposita/A-D/');
+    assert.equal(result, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-D/');
   });
 });
 

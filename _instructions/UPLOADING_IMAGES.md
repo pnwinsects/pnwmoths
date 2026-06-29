@@ -85,7 +85,7 @@ When replacing an image that was already served by the CDN, the cached version m
 ```bash
 # URL-encode spaces as %20 in the filename
 curl -X POST \
-  "https://api.bunny.net/purge?url=https://pnwmoths.b-cdn.net/acronicta-americana/Acronicta%20americana-A-D.jpg" \
+  "https://api.bunny.net/purge?url=https://moths.pnwinsects.org/acronicta-americana/Acronicta%20americana-A-D.jpg" \
   -H "AccessKey: YOUR_ACCOUNT_API_KEY"
 ```
 
@@ -101,7 +101,7 @@ rclone ls bunny:acronicta-americana/ | grep "Acronicta americana"
 npm run build:data
 ```
 
-Then open `https://pnwmoths.b-cdn.net/{slug}/{url-encoded-filename}` in a browser — the image should load.
+Then open `https://moths.pnwinsects.org/{slug}/{url-encoded-filename}` in a browser — the image should load.
 
 ## WARNING: Never Use rclone sync
 

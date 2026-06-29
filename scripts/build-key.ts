@@ -117,7 +117,7 @@ export function buildBitset(speciesCount: number, matchingIndices: number[]): st
  *   - imagePairs: Set<`${slug} ${filename}`> — EVERY (slug, filename) pair in
  *                 images.csv. Used by the post-emit guard to assert each emitted
  *                 nav_image is a real catalogued image (so it resolves on the CDN
- *                 at https://pnwmoths.b-cdn.net/<slug>/<filename>) rather than a
+ *                 at https://moths.pnwinsects.org/<slug>/<filename>) rather than a
  *                 synthesized key filename (ISSUE-43 regression guard).
  *
  * Both are built entirely in TypeScript — no slug interpolation into SQL
@@ -369,7 +369,7 @@ export async function main(): Promise<void> {
 
   // 8b. ISSUE-43 regression guard: every emitted nav_image must be a real
   // catalogued image in data/images.csv for that slug, so it resolves on the CDN
-  // (https://pnwmoths.b-cdn.net/<slug>/<nav_image>). The original bug emitted
+  // (https://moths.pnwinsects.org/<slug>/<nav_image>). The original bug emitted
   // key-derived underscore filenames (e.g. 'Sphinx_luscitiosa-A-D.jpg') that had
   // no images.csv row and 404'd. A null nav_image is allowed (the /identify grid
   // degrades it to the gray placeholder); only non-null values are checked.

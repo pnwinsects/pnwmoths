@@ -277,7 +277,7 @@ describe('characterImageSrc (Phase 43 RED)', () => {
     const url = characterImageSrc('Black Forewing.webp');
     assert.strictEqual(
       url,
-      'https://pnwmoths.b-cdn.net/key-images/Black%20Forewing.webp',
+      'https://moths.pnwinsects.org/key-images/Black%20Forewing.webp',
       'should return host-absolute CDN URL with encodeURIComponent applied'
     );
   });
@@ -289,7 +289,7 @@ describe('characterImageSrc (Phase 43 RED)', () => {
       `URL must not contain /pnwmoths/https — got: ${url}`
     );
     assert.ok(
-      url.startsWith('https://pnwmoths.b-cdn.net/key-images/'),
+      url.startsWith('https://moths.pnwinsects.org/key-images/'),
       `URL must start with CDN base — got: ${url}`
     );
   });
@@ -365,7 +365,7 @@ describe('_renderQuestion structural: <details> iff image_filename (Phase 43 RED
     // The render guard: `char.image_filename ? characterImageSrc(char.image_filename) : skip`
     const src = char.image_filename ? characterImageSrc(char.image_filename) : null;
     assert.ok(src !== null, 'should produce a src for a character with image_filename');
-    assert.ok(src!.startsWith('https://pnwmoths.b-cdn.net/key-images/'), 'src must be CDN-absolute');
+    assert.ok(src!.startsWith('https://moths.pnwinsects.org/key-images/'), 'src must be CDN-absolute');
   });
 
   test('no src produced when image_filename is null (guard branch)', () => {

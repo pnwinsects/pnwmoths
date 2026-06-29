@@ -47,7 +47,7 @@ import type { View } from './lib/parse-photo-filename.ts';
 
 const MANIFEST_PATH: string = resolve('data/species-photos-manifest.csv');
 const TILE_CONFIG_PATH: string = resolve('scripts/tile-config.json');
-const CDN_BASE_URL = 'https://pnwmoths.b-cdn.net';
+const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';

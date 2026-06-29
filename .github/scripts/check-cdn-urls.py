@@ -6,7 +6,7 @@ import csv
 import subprocess
 from urllib.parse import quote
 
-CDN_BASE = 'https://pnwmoths.b-cdn.net'
+CDN_BASE = 'https://moths.pnwinsects.org'
 urls = []
 
 
