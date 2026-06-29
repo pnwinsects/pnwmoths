@@ -1,5 +1,5 @@
 import { DuckDBInstance } from '@duckdb/node-api';
-import { loadWithheldFamilies, isWithheld } from '../_lib/withheld-families.ts';
+import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 
 // Local interface covering the post-query DuckDB shape (id as number)
 interface SpeciesDbRow {
@@ -81,7 +81,7 @@ export default async function (): Promise<SpeciesRow[]> {
   const result_rows: SpeciesRow[] = [];
   for (const row of rows) {
     if (!isSpeciesDbRow(row)) continue;
-    if (isWithheld(row.family, withheld)) continue;
+    if (isWithheldOrUnclassified(row.family, withheld)) continue;
     result_rows.push({
       id: String(row.id),
       genus: row.genus,

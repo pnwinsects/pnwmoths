@@ -1,12 +1,12 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import type { TaxonFamily, TaxonGenus, TaxonSubfamily, NavImage } from '../types/index.ts';
-import { loadWithheldFamilies, isWithheld } from '../_lib/withheld-families.ts';
+import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 
 // Narrow projection interfaces for the two DuckDB queries
 
 // Species query projects: family, subfamily, genus, species, common_name, slug, genus_slug
 interface TaxonSpeciesDbRow {
-  family: string | null;  // 2.8% null in production data; null becomes 'null' key in familyMap
+  family: string | null;  // null = unclassified; filtered out by isWithheldOrUnclassified before grouping
   subfamily: string | null;
   genus: string;
   species: string;
@@ -160,7 +160,7 @@ export default async function (): Promise<TaxonFamily[]> {
   const speciesRowsRaw = speciesResult.getRowObjectsJS();
   const speciesRows: TaxonSpeciesDbRow[] = [];
   for (const row of speciesRowsRaw) {
-    if (isTaxonSpeciesDbRow(row) && !isWithheld(row.family, withheld)) speciesRows.push(row);
+    if (isTaxonSpeciesDbRow(row) && !isWithheldOrUnclassified(row.family, withheld)) speciesRows.push(row);
   }
 
   const imageRowsRaw = imagesResult.getRowObjectsJS();
@@ -181,10 +181,14 @@ export default async function (): Promise<TaxonFamily[]> {
   const familyMap: Record<string, TaxonFamilyBuild> = {};
 
   for (const row of speciesRows) {
-    // Use String(row.family) as key to replicate JS's null→'null' coercion for null-family species
-    const famKey = String(row.family);
+    // Unclassified (blank-family) species are filtered out upstream by
+    // isWithheldOrUnclassified, so row.family should be non-null here. The
+    // ?? 'Unclassified' coalesce is defense-in-depth: if the embargo gate is
+    // ever lifted, a blank family renders as a labelled "Unclassified" group
+    // rather than an empty heading (ISSUE-62).
+    const famKey = row.family ?? 'Unclassified';
     if (!familyMap[famKey]) {
-      familyMap[famKey] = { name: row.family, navImages: [], subfamilies: [], subfamilyMap: {} };
+      familyMap[famKey] = { name: famKey, navImages: [], subfamilies: [], subfamilyMap: {} };
     }
 
     const subfamKey = row.subfamily ?? '__none__';

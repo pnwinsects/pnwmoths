@@ -3,11 +3,17 @@
 // Run via: node --test src/_lib/withheld-families.test.ts
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
+import { parse } from 'csv-parse/sync';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { loadWithheldFamilies, isWithheld } from './withheld-families.ts';
+import {
+  loadWithheldFamilies,
+  isWithheld,
+  isUnclassifiedFamily,
+  isWithheldOrUnclassified,
+} from './withheld-families.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
@@ -107,4 +113,61 @@ test('isWithheld: empty string returns false', () => {
 test('isWithheld: empty withheld set always returns false', () => {
   const withheld = new Set<string>();
   assert.ok(!isWithheld('Geometridae', withheld), 'empty withheld set: any family should return false');
+});
+
+// ---------------------------------------------------------------------------
+// isUnclassifiedFamily
+// ---------------------------------------------------------------------------
+
+test('isUnclassifiedFamily: null / undefined / empty / whitespace are unclassified', () => {
+  assert.ok(isUnclassifiedFamily(null), 'null');
+  assert.ok(isUnclassifiedFamily(undefined), 'undefined');
+  assert.ok(isUnclassifiedFamily(''), 'empty string');
+  assert.ok(isUnclassifiedFamily('   '), 'whitespace-only');
+});
+
+test('isUnclassifiedFamily: a real family name is classified', () => {
+  assert.ok(!isUnclassifiedFamily('Geometridae'), 'named family should not be unclassified');
+  assert.ok(!isUnclassifiedFamily(' Noctuidae '), 'padded named family should not be unclassified');
+});
+
+// ---------------------------------------------------------------------------
+// isWithheldOrUnclassified — fail-closed gate
+// ---------------------------------------------------------------------------
+
+test('isWithheldOrUnclassified: explicitly embargoed family is hidden', () => {
+  const withheld = loadWithheldFamilies(resolve(ROOT, 'data/withheld-families.csv'));
+  assert.ok(isWithheldOrUnclassified('Geometridae', withheld), 'embargoed family should be hidden');
+});
+
+test('isWithheldOrUnclassified: blank family is hidden even when not in the embargo set', () => {
+  const withheld = new Set<string>(); // embargo lifted
+  assert.ok(isWithheldOrUnclassified(null, withheld), 'null family should be hidden (fail-closed)');
+  assert.ok(isWithheldOrUnclassified('', withheld), 'empty family should be hidden (fail-closed)');
+  assert.ok(isWithheldOrUnclassified('  ', withheld), 'whitespace family should be hidden (fail-closed)');
+});
+
+test('isWithheldOrUnclassified: a classified, non-embargoed family is shown', () => {
+  const withheld = loadWithheldFamilies(resolve(ROOT, 'data/withheld-families.csv'));
+  assert.ok(!isWithheldOrUnclassified('Noctuidae', withheld), 'classified non-embargoed family should be shown');
+});
+
+// ---------------------------------------------------------------------------
+// Data integrity — every species in data/species.csv has a family (ISSUE-62)
+// A blank family produced the empty "" Browse heading and an embargo leak.
+// ---------------------------------------------------------------------------
+
+test('data/species.csv: every species row has a non-blank family', () => {
+  const rows = parse(readFileSync(resolve(ROOT, 'data/species.csv')), {
+    columns: true,
+    skip_empty_lines: true,
+  }) as Array<{ genus: string; species: string; family: string }>;
+  const blanks = rows.filter(r => isUnclassifiedFamily(r.family));
+  assert.equal(
+    blanks.length,
+    0,
+    `unclassified species (would form a blank Browse heading / bypass the embargo): ${blanks
+      .map(r => `${r.genus} ${r.species}`)
+      .join(', ')}`,
+  );
 });
