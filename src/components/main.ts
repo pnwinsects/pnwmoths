@@ -8,6 +8,7 @@ import './pnwm-plate-viewer.ts';
 import './glossary-tooltip.ts';
 import './pnwm-identify.ts';
 import './key-results-grid.ts';
+import './pnwm-analytics-dashboard.ts';
 import type { FilterChangeDetail } from '../types/index.ts';
 
 // Species-page wiring: forward filter-bar changes to the map and phenology chart.
