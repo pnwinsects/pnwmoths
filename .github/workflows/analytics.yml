@@ -32,7 +32,7 @@ jobs:
       - name: Fetch analytics
         run: node scripts/fetch-analytics.ts
         env:
-          BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY }}
+          BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY || secrets.BUNNY_API_KEY }}
           ANALYTICS_DATE: ${{ inputs.date || '' }}
 
       - name: Commit analytics data
