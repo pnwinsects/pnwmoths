@@ -88,42 +88,34 @@ describe('GRID-03 placeholder condition (real-data gate)', () => {
     species: KeySpecies[];
   }
 
-  test('exactly 2 species have nav_image === null in real data/key-matrix.json', () => {
+  test('no key species has nav_image === null in real data/key-matrix.json', () => {
+    // Drift gate: every matched key species must resolve to a catalogued nav image.
+    // Until #71 the two hyphenated species (autographa-v-alba, xestia-c-nigrum) were
+    // the sole exceptions — their photos were mis-keyed to the hyphen-truncated slugs
+    // (autographa-v, xestia-c), so build:key found no image for the full slug and
+    // emitted nav_image: null. #71 consolidated the data onto the full slugs, so the
+    // null set is now empty. A regression here means an image row lost its slug key.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     const nullNavImageSpecies = raw.species.filter((s: KeySpecies) => s.nav_image === null);
     assert.equal(
       nullNavImageSpecies.length,
-      2,
-      `expected exactly 2 null nav_image species, got ${nullNavImageSpecies.length}: ` +
+      0,
+      `expected no null nav_image species, got ${nullNavImageSpecies.length}: ` +
         nullNavImageSpecies.map((s: KeySpecies) => s.slug).join(', ')
-    );
-  });
-
-  test('null-nav-image species are autographa-v-alba and xestia-c-nigrum', () => {
-    const raw = JSON.parse(
-      readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
-    ) as KeyMatrixData;
-    const slugs = raw.species
-      .filter((s: KeySpecies) => s.nav_image === null)
-      .map((s: KeySpecies) => s.slug)
-      .sort();
-    assert.deepEqual(
-      slugs,
-      ['autographa-v-alba', 'xestia-c-nigrum'],
-      'exactly these two slugs must have null nav_image'
     );
   });
 
   test('placeholder predicate: nav_image === null means no <img>', () => {
     // Lock the predicate itself — render-side proof is HUMAN-UAT in Plan 42-02.
+    // Synthetic fixtures only: no real species currently has a null nav_image (see above).
     const speciesWithImage: KeySpecies = {
       slug: 'habrosyne-scripta', genus: 'Habrosyne', epithet: 'scripta',
       common_name: null, nav_image: 'Habrosyne scripta-A-D.jpg',
     };
     const speciesWithoutImage: KeySpecies = {
-      slug: 'autographa-v-alba', genus: 'Autographa', epithet: 'v-alba',
+      slug: 'synthetic-no-image', genus: 'Synthetica', epithet: 'imageless',
       common_name: null, nav_image: null,
     };
     assert.equal(speciesWithImage.nav_image === null, false, 'species with nav_image should NOT use placeholder');
