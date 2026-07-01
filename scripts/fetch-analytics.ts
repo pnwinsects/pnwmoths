@@ -46,6 +46,13 @@ const ASSET_PREFIXES = [
 // Types
 // ---------------------------------------------------------------------------
 
+interface PullZoneListResponse {
+  Items: Array<{ Id: number; Name: string }>;
+  CurrentPage: number;
+  TotalItems: number;
+  HasMoreItems: boolean;
+}
+
 interface LogEntry {
   timestamp: string;
   statusCode: number;
@@ -213,7 +220,8 @@ async function resolvePullZoneId(): Promise<number> {
     `https://api.bunny.net/pullzone?search=${encodeURIComponent(PULLZONE_NAME)}`,
     'pullzone-lookup',
   );
-  const zones = (await res.json()) as Array<{ Id: number; Name: string }>;
+  const body = (await res.json()) as PullZoneListResponse;
+  const zones = body.Items;
   const match = zones.find((z) => z.Name === PULLZONE_NAME);
   if (!match) throw new Error(`Pull zone "${PULLZONE_NAME}" not found. Available: ${zones.map((z) => z.Name).join(', ')}`);
   console.log(`  Found pull zone ID: ${match.Id}`);
