@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 Phase: Milestone v4.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-29 — Completed quick task 260629-geq: exclude larvae/reared specimens from phenology graphs (closes #59)
+Last activity: 2026-07-01 — Quick task 260630-pjq: fixed hyphenated species names split into two pages (#71); Task 1 (data consolidation) done, Task 2 (CDN photo re-upload) awaits operator
 
 ## Performance Metrics
 
@@ -148,6 +148,7 @@ Items acknowledged and carried forward:
 | 260627-oe1 | Home-page static target-range SVG map (generated from shared `PNW_REGION_RING`) + build-time species/record/image stats (`stats.ts`, gate-aware) | 2026-06-27 | complete ✓ |
 | 260628-jtl | Switch production to custom domain (moths.pnwinsects.org) via Bunny; demote GitHub Pages to manual staging — additive Storage upload, image CDN host moved to custom domain, split deploy into `production.yml`/`staging.yml` | 2026-06-28 | complete ✓ |
 | 260629-geq | Exclude larvae/reared specimens from phenology graphs — `REARED_TERMS` + `isRearedRecord` keyword scan on `notes` only, applied in `aggregateByMonth` (map/popup untouched) — closes #59 | 2026-06-29 | complete ✓ |
+| 260630-pjq | Fix hyphenated species split into two pages (#71) — root cause was duplicate hyphen-truncated migration rows in `species.csv`; consolidated `Xestia c`→`Xestia c-nigrum` and `Autographa v`→`Autographa v-alba` by deleting truncated rows, re-keying 510 records + 6 images, repointing similar_species link, pruning redirect allow-list | 2026-07-01 | Task 1 complete ✓; Task 2 (additive CDN photo re-upload) awaits operator |
 
 ## Session Continuity
 
