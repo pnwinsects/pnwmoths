@@ -23,7 +23,7 @@ decisions:
 metrics:
   duration_minutes: 10
   completed_date: "2026-06-30"
-  tasks_completed: 1
+  tasks_completed: 2
   tasks_total: 2
   files_changed: 4
 ---
@@ -66,17 +66,21 @@ None — plan executed exactly as written. All sed substitutions were anchored c
 |------|--------|-------|
 | Task 1: Consolidate split species onto canonical slugs | `105efe02` | data/species.csv, data/records.csv, data/images.csv, src/_data/speciesSlugs.json |
 
-## Task 2: Awaiting Human Operator (CDN Photo Upload)
+## Task 2: CDN Photo Upload — COMPLETE ✓
 
-**Status:** Not started — gate requires Bunny storage credentials.
+**Status:** Done (2026-07-01). Operator supplied Bunny credentials and ran the additive upload.
 
-The 6 legacy photos are re-keyed in `data/images.csv` but the CDN objects currently exist only under the old folders (`xestia-c/`, `autographa-v/`). Without an additive re-upload, the fixed pages would show broken images. See Task 2 in the PLAN.md for exact steps:
+The 6 legacy photos were extracted from `pnwmoths_https.tar.xz` (canonical `.../static/media/moths_bak/` copy, the earliest complete set in the archive) into `/tmp/legacy-moths-71`, then uploaded to the full-slug CDN folders via `migrate:legacy-photos` (additive/idempotent — HEAD-checks then PUTs only missing objects, never deletes originals).
 
-1. Preview: `DRY_RUN=1 LEGACY_PHOTOS_SRC=<media dir> npm run migrate:legacy-photos`
-2. Upload: `BUNNY_API_KEY=<password> LEGACY_PHOTOS_SRC=<same dir> npm run migrate:legacy-photos`
-3. Verify all 6 URLs return HTTP 200 under the new full-slug CDN folders
+Steps run:
+1. Extract 6 members with `tar --fast-read --strip-components=10 -T members.txt` (real 800×533 JPEGs confirmed via `file`).
+2. `DRY_RUN=1 LEGACY_PHOTOS_SRC=/tmp/legacy-moths-71 npx tsx scripts/migrate-legacy-photos.ts` → 6 matched, 0 already on CDN.
+3. Operator ran the real PUT with `BUNNY_API_KEY` (in-session `!`, key kept out of assistant context).
+4. Verification — all 6 URLs return **HTTP 200** under the full-slug folders:
+   - `xestia-c-nigrum/Xestia c-nigrum-{A-D,A-v,B-D,B-V}.jpg` → 200
+   - `autographa-v-alba/Autographa v-alba-{A-D,A-V}.jpg` → 200
 
-Resume signal: type "approved" once the 6 URLs return 200.
+Both `/species/xestia-c-nigrum/` and `/species/autographa-v-alba/` now render as single complete pages with prose, occurrence map, phenology, and photos. Issue #71 fully resolved.
 
 ## Known Stubs
 
