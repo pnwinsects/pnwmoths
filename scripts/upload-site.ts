@@ -161,6 +161,7 @@ export function contentTypeFor(filename: string): string {
     gif: 'image/gif',
     ico: 'image/x-icon',
     txt: 'text/plain; charset=utf-8',
+    csv: 'text/csv; charset=utf-8',
     wasm: 'application/wasm',
     woff: 'font/woff',
     woff2: 'font/woff2',
