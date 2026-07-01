@@ -59,6 +59,10 @@ describe('contentTypeFor', () => {
     assert.equal(contentTypeFor('style.css'), 'text/css; charset=utf-8');
   });
 
+  it('maps .csv to text/csv; charset=utf-8', () => {
+    assert.equal(contentTypeFor('species-audit.csv'), 'text/csv; charset=utf-8');
+  });
+
   it('maps .parquet to a generic binary type', () => {
     assert.match(contentTypeFor('data.parquet'), /application\/(octet-stream|vnd\.apache\.parquet)/);
   });
