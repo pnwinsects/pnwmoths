@@ -1,0 +1,56 @@
+---
+layout: base.njk
+title: Site Analytics — PNW Moths
+permalink: /analytics/index.html
+eleventyExcludeFromCollections: true
+---
+
+<h1>Site Analytics</h1>
+
+{% if analytics.days.length === 0 %}
+<p>No analytics data yet. Data is collected nightly from CDN access logs.</p>
+{% else %}
+
+<p>Showing {{ analytics.days.length }} day{{ "s" if analytics.days.length !== 1 }} of data.
+Rolling 30-day totals: <strong>{{ analytics.rolling30.total_pageviews | number }}</strong> pageviews
+from <strong>{{ analytics.rolling30.total_requests | number }}</strong> total requests.</p>
+
+<script type="application/json" id="analytics-data" data-pagefind-ignore>
+  {{ analytics | tojson | safe }}
+</script>
+
+<pnwm-analytics-dashboard></pnwm-analytics-dashboard>
+
+<noscript>
+  <h2>Top Pages (Last 30 Days)</h2>
+  <table>
+    <thead><tr><th>Page</th><th>Views</th></tr></thead>
+    <tbody>
+      {% for page in analytics.rolling30.top_pages.slice(0, 20) %}
+      <tr><td>{{ page.path }}</td><td>{{ page.count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Top Referrers</h2>
+  <table>
+    <thead><tr><th>Domain</th><th>Hits</th></tr></thead>
+    <tbody>
+      {% for ref in analytics.rolling30.top_referrers.slice(0, 10) %}
+      <tr><td>{{ ref.domain }}</td><td>{{ ref.count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Top Countries</h2>
+  <table>
+    <thead><tr><th>Country</th><th>Hits</th></tr></thead>
+    <tbody>
+      {% for c in analytics.rolling30.top_countries.slice(0, 10) %}
+      <tr><td>{{ c.code }}</td><td>{{ c.count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</noscript>
+
+{% endif %}

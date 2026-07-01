@@ -1,0 +1,48 @@
+name: Nightly Analytics
+
+on:
+  schedule:
+    # 8 AM UTC = midnight PST — yesterday's logs are complete
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to fetch (YYYY-MM-DD). Defaults to yesterday.'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analytics
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+
+      - name: Fetch analytics
+        run: node scripts/fetch-analytics.ts
+        env:
+          BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY }}
+          ANALYTICS_DATE: ${{ inputs.date || '' }}
+
+      - name: Commit analytics data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/analytics/
+          if git diff --cached --quiet; then
+            echo "No new analytics data to commit."
+          else
+            git commit -m "data: add analytics for $(ls -t data/analytics/*.json | head -1 | xargs basename .json)"
+            git push
+          fi
