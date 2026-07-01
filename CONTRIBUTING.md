@@ -27,6 +27,8 @@ The build runs these steps in order:
 
 Output lands in `_site/`.
 
+The full step ordering lives in [`package.json`](package.json), not in the CI workflows — the workflows just call a script. `build:site` produces and verifies `_site/` (data → HTML → gates → copies → search index → `verify:parquet`); `build` is `build:site` plus a blocking link check, for local and PR use. Deploys run `build:site` and then the link check as a separate, non-blocking step.
+
 ## Docker build
 
 Reproduces the CI environment exactly — no local Node.js or lychee needed.

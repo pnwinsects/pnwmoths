@@ -37,12 +37,10 @@ jobs:
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-      - name: Build (staging — site under /pnwmoths/)
-        run: npm run build:data && npm run build:key && npm run build:eleventy && npm run build:copy-parquet && npm run build:copy-key-matrix && npm run build:check-key-weight && npm run build:copy-images && npm run build:species-states && npm run build:species-audit && npm run build:pagefind && npm run build:check-weight
+      - name: Build site (staging — under /pnwmoths/)
+        run: npm run build:site
         env:
           GITHUB_PAGES: "true"
-      - name: Verify Parquet schema
-        run: npm run verify:parquet
       - name: Check links (non-blocking)
         run: npm run build:validate-links
         continue-on-error: true
