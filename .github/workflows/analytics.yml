@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: analytics
@@ -37,6 +38,8 @@ jobs:
           ANALYTICS_DATE: ${{ inputs.date || '' }}
 
       - name: Commit analytics data
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -44,6 +47,10 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new analytics data to commit."
           else
-            git commit -m "data: add analytics for $(ls -t data/analytics/*.json | head -1 | xargs basename .json)"
+            latest="$(basename "$(ls -t data/analytics/*.json | head -1)" .json)"
+            git commit -m "data: add analytics for ${latest}"
             git push
+            # A push made with GITHUB_TOKEN does not trigger the production
+            # deploy workflow, so dispatch it explicitly to publish the new data.
+            gh workflow run production.yml --ref main
           fi
