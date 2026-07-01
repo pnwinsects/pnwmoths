@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "date": "2026-06-29",
+  "generated_at": "2026-07-01T15:14:45.048Z",
+  "source_window": {
+    "from": "2026-06-29T00:00:00Z",
+    "to": "2026-06-29T23:59:59.999Z"
+  },
+  "log_rows_processed": 67815,
+  "total_requests": 67815,
+  "total_pageviews": 57,
+  "total_bytes": 4177962388,
+  "pageviews": [
+    {
+      "path": "/",
+      "count": 23
+    },
+    {
+      "path": "/browse/",
+      "count": 15
+    },
+    {
+      "path": "/identify/",
+      "count": 6
+    },
+    {
+      "path": "/plates/",
+      "count": 4
+    },
+    {
+      "path": "/species/aseptis-binotata/",
+      "count": 2
+    },
+    {
+      "path": "/species/darapsa-choerilus/",
+      "count": 1
+    },
+    {
+      "path": "/search/",
+      "count": 1
+    },
+    {
+      "path": "/faqs/",
+      "count": 1
+    },
+    {
+      "path": "/glossary/",
+      "count": 1
+    },
+    {
+      "path": "/species/acopa-perpallida/",
+      "count": 1
+    },
+    {
+      "path": "/species/drepana-arcuata/",
+      "count": 1
+    },
+    {
+      "path": "/species/drepana-bilineata/",
+      "count": 1
+    }
+  ],
+  "requests_by_hour": [
+    14,
+    2,
+    3,
+    2,
+    11057,
+    29,
+    1,
+    3,
+    2,
+    12,
+    4,
+    0,
+    25,
+    1,
+    1268,
+    2,
+    21961,
+    21920,
+    11178,
+    68,
+    114,
+    140,
+    9,
+    0
+  ],
+  "referrers": [
+    {
+      "domain": "pnwmoths.b-cdn.net",
+      "count": 134
+    },
+    {
+      "domain": "github.com",
+      "count": 2
+    }
+  ],
+  "countries": [
+    {
+      "code": "US",
+      "count": 66433
+    },
+    {
+      "code": "NL",
+      "count": 1305
+    },
+    {
+      "code": "CH",
+      "count": 44
+    },
+    {
+      "code": "DE",
+      "count": 15
+    },
+    {
+      "code": "SG",
+      "count": 10
+    },
+    {
+      "code": "JP",
+      "count": 2
+    },
+    {
+      "code": "BG",
+      "count": 2
+    },
+    {
+      "code": "BE",
+      "count": 1
+    },
+    {
+      "code": "DZ",
+      "count": 1
+    },
+    {
+      "code": "GB",
+      "count": 1
+    },
+    {
+      "code": "LU",
+      "count": 1
+    }
+  ],
+  "status_codes": [
+    {
+      "status": 200,
+      "count": 66321
+    },
+    {
+      "status": 404,
+      "count": 1491
+    },
+    {
+      "status": 304,
+      "count": 3
+    }
+  ],
+  "cache_statuses": [
+    {
+      "status": "MISS",
+      "count": 66857
+    },
+    {
+      "status": "HIT",
+      "count": 958
+    }
+  ]
+}
