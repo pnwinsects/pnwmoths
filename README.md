@@ -15,6 +15,10 @@ At build time, a DuckDB script joins the CSVs, validates integrity, and exports 
 
 The site is built with [Eleventy](https://www.11ty.dev/) (HTML generation), [Vite](https://vite.dev/) (JS bundling), and [Lit](https://lit.dev/) web components for the interactive factsheet features (map, chart, filters, slideshow). Search is powered by [Pagefind](https://pagefind.app/), which indexes the site at build time.
 
+## Coverage audit
+
+Every build emits an unlinked diagnostic file, `_site/species-audit.csv` (live at <https://moths.pnwinsects.org/species-audit.csv>) — one row per species in `species.csv`, flagging whether it has occurrence records, is visible on the site, and appears in the identification key. It's a maintainer tool for spotting gaps (e.g. a species with records but no page); nothing on the site links to it. See [`scripts/emit-species-audit.ts`](scripts/emit-species-audit.ts) for the exact columns and how each flag is derived.
+
 ## Deployment
 
 A push to `main` triggers the production workflow ([`.github/workflows/production.yml`](.github/workflows/production.yml)): it runs CI (typecheck, tests, build at root `/`) and then uploads the built `_site` **additively** to the Bunny Storage Zone — the same CDN/zone that holds the images — serving production at <https://moths.pnwinsects.org/>. The upload is additive only: no purge, no deletes.
