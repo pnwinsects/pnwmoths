@@ -181,7 +181,6 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1548,Sympistis,sagittata,,93-1938,"(Barnes & McDunnough, 1916)",Noctuidae,sympistis-saxatilis,Oncocnemidinae
 1549,Heliothis,oregonica,Oregon Gem Moth,93-2050,"(H. Edwards, 1875)",Noctuidae,heliothis-ononis,Heliothinae
 1550,Ponometia,candefacta,Olive-shaded Bird-dropping Moth,93-1314,"(Hübner, [1831])",Noctuidae,ponometia-binocula|ponometia-elegantula,Acontiinae
-1551,Autographa,v,White Y Mark Moth,93-1197,"Ottolengui, 1902",Noctuidae,autographa-speciosa,Plusiinae
 1552,Hyles,lineata,White-lined Sphinx Moth,MONA 7894,"(Fabricius, 1775)",Sphingidae,hyles-gallii,Macroglossinae
 1553,Hydraecia,obliqua,,93-2456,"Harvey, 1876",Noctuidae,hydraecia-medialis,Noctuinae
 1554,Euxoa,ustulata,,93-3358,"Lafontaine, 1976",Noctuidae,euxoa-intermontana|euxoa-nostra|euxoa-shasta,Noctuinae
@@ -292,7 +291,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 1662,Lasionycta,taigata,,93-2969,"Lafontaine, 1988",Noctuidae,polia-propodea|lasionycta-mutilata|lasionycta-secedens,Noctuinae
 1663,Scotogramma,yakima,,93-2856,"(Smith, 1900)",Noctuidae,scotogramma-ptilodonta|scotogramma-orida,Noctuinae
 1664,Homoglaea,dives,,93-2528,"Smith, 1907",Noctuidae,homoglaea-carbonaria,Noctuinae
-1665,Autographa,speciosa,,93-1198,"Ottolengui, 1902",Noctuidae,autographa-v,Plusiinae
+1665,Autographa,speciosa,,93-1198,"Ottolengui, 1902",Noctuidae,autographa-v-alba,Plusiinae
 1666,Schinia,jaguarina,Jaguar Flower Moth,93-2073,"(Guenée, 1852)",Noctuidae,schinia-mortua,Heliothinae
 1667,Sunira,decipiens,,93-2617,"(Grote, 1881)",Noctuidae,sunira-bicolorago|anathix-aggressa,Noctuinae
 1668,Autographa,californica,Alfalfa Looper Moth,93-1193,"(Speyer, 1875)",Noctuidae,syngrapha-celsa|autographa-buraetica|rachiplusia-ou|autographa-pseudogamma,Plusiinae
@@ -1188,7 +1187,6 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily
 2662,Hemileuca,nuteglan,,,,Saturniidae,,Hemileucinae
 2666,Crambidia,cephalica,Yellow-headed Lichen Moth,93-0227,"(Grote & Robinson, 1870)",Erebidae,crambidia-casta,Arctiinae
 2675,Catocala,verrilliana,,93-0838,"Grote, 1875",Erebidae,catocala-ophelia,Erebinae
-2676,Xestia,c,Lesser Black-letter Dart Moth,93-3588,"(Linnaeus, 1758)",Noctuidae,,Noctuinae
 2690,Escaria,homogena,,93-2816,"McDunnough, 1922",Noctuidae,hadenella-pergentilis|afotella-cylindrica|escaria-clauda,Noctuinae
 2695,Lacinipolia,stenotis,,93-3030,"(Hampson, 1905)",Noctuidae,,Noctuinae
 2698,Lycomorpha,grotei,,93-0197,"(Packard, 1864)",Erebidae,,Arctiinae
