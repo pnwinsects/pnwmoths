@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "date": "2026-06-30",
+  "generated_at": "2026-07-01T15:53:19.625Z",
+  "source_window": {
+    "from": "2026-06-30T00:00:00Z",
+    "to": "2026-06-30T23:59:59.999Z"
+  },
+  "log_rows_processed": 1311,
+  "total_requests": 1311,
+  "total_pageviews": 74,
+  "total_bytes": 46117761,
+  "pageviews": [
+    {
+      "path": "/",
+      "count": 19
+    },
+    {
+      "path": "/redirect.html",
+      "count": 7
+    },
+    {
+      "path": "/identify/",
+      "count": 4
+    },
+    {
+      "path": "/plates/",
+      "count": 3
+    },
+    {
+      "path": "/browse/",
+      "count": 3
+    },
+    {
+      "path": "/species/anarta-obesula/",
+      "count": 2
+    },
+    {
+      "path": "/species/chrysodeixis-includens/",
+      "count": 2
+    },
+    {
+      "path": "/species/acopa-perpallida/",
+      "count": 2
+    },
+    {
+      "path": "/species/apantesis-bolanderi/",
+      "count": 2
+    },
+    {
+      "path": "/species/dodia-tarandus/",
+      "count": 2
+    },
+    {
+      "path": "/species/apantesis-carlotta/",
+      "count": 2
+    },
+    {
+      "path": "/species/acronicta-americana/index.html",
+      "count": 2
+    },
+    {
+      "path": "/glossary/index.html",
+      "count": 2
+    },
+    {
+      "path": "/species/capsula-oblonga/index.html",
+      "count": 2
+    },
+    {
+      "path": "/species/lacinipolia-pensilis/",
+      "count": 1
+    },
+    {
+      "path": "/species/autographa-v/",
+      "count": 1
+    },
+    {
+      "path": "/species/autographa-v-alba/",
+      "count": 1
+    },
+    {
+      "path": "/species/andropolia-contacta/",
+      "count": 1
+    },
+    {
+      "path": "/species/euxoa-pestula/",
+      "count": 1
+    },
+    {
+      "path": "/species/euxoa-pimensis/",
+      "count": 1
+    },
+    {
+      "path": "/species/lacinipolia-sareta/",
+      "count": 1
+    },
+    {
+      "path": "/species/lasionycta-frigida/",
+      "count": 1
+    },
+    {
+      "path": "/species/arctia-brachyptera/",
+      "count": 1
+    },
+    {
+      "path": "/species/hypenodes-fractilinea/",
+      "count": 1
+    },
+    {
+      "path": "/species/hypenodes-sombrus/",
+      "count": 1
+    },
+    {
+      "path": "/species/phalaenophana-pyramusalis/",
+      "count": 1
+    },
+    {
+      "path": "/species/meganola-fuscula/",
+      "count": 1
+    },
+    {
+      "path": "/species/apantesis-behrii/",
+      "count": 1
+    },
+    {
+      "path": "/species/apantesis-arizoniensis/",
+      "count": 1
+    },
+    {
+      "path": "/species/apantesis-blakei/",
+      "count": 1
+    },
+    {
+      "path": "/search/",
+      "count": 1
+    },
+    {
+      "path": "/glossary/",
+      "count": 1
+    },
+    {
+      "path": "/faqs/",
+      "count": 1
+    },
+    {
+      "path": "/search/index.html",
+      "count": 1
+    }
+  ],
+  "requests_by_hour": [
+    443,
+    579,
+    208,
+    7,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    14,
+    0,
+    59,
+    0
+  ],
+  "referrers": [],
+  "countries": [
+    {
+      "code": "US",
+      "count": 1287
+    },
+    {
+      "code": "NL",
+      "count": 21
+    },
+    {
+      "code": "FI",
+      "count": 1
+    },
+    {
+      "code": "GB",
+      "count": 1
+    },
+    {
+      "code": "BG",
+      "count": 1
+    }
+  ],
+  "status_codes": [
+    {
+      "status": 200,
+      "count": 1254
+    },
+    {
+      "status": 404,
+      "count": 56
+    },
+    {
+      "status": 499,
+      "count": 1
+    }
+  ],
+  "cache_statuses": [
+    {
+      "status": "MISS",
+      "count": 1179
+    },
+    {
+      "status": "HIT",
+      "count": 131
+    },
+    {
+      "status": "-",
+      "count": 1
+    }
+  ]
+}
