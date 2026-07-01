@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
 Phase: Milestone v4.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-07-01 — Completed quick task 260630-pjq: fixed hyphenated species names split into two pages (#71); data consolidated + 6 legacy photos re-uploaded to full-slug CDN folders
+Last activity: 2026-07-01 — Completed quick task 260630-u5n: hide provisional/undescribed species (#80) via data-driven deny-list gate
 
 ## Performance Metrics
 
@@ -149,6 +149,7 @@ Items acknowledged and carried forward:
 | 260628-jtl | Switch production to custom domain (moths.pnwinsects.org) via Bunny; demote GitHub Pages to manual staging — additive Storage upload, image CDN host moved to custom domain, split deploy into `production.yml`/`staging.yml` | 2026-06-28 | complete ✓ |
 | 260629-geq | Exclude larvae/reared specimens from phenology graphs — `REARED_TERMS` + `isRearedRecord` keyword scan on `notes` only, applied in `aggregateByMonth` (map/popup untouched) — closes #59 | 2026-06-29 | complete ✓ |
 | 260630-pjq | Fix hyphenated species split into two pages (#71) — root cause was duplicate hyphen-truncated migration rows in `species.csv`; consolidated `Xestia c`→`Xestia c-nigrum` and `Autographa v`→`Autographa v-alba` by deleting truncated rows, re-keying 510 records + 6 images, repointing similar_species link, pruning redirect allow-list; 6 legacy photos additively re-uploaded to full-slug CDN folders (all 200) | 2026-07-01 | complete ✓ |
+| 260630-u5n | Hide provisional/undescribed species (#80) — data-driven `data/unpublished-species.csv` deny-list (20 `sp`/`n sp`/`aff`/`nr` morphospecies) wired into the 4 withheld-families choke points (pages, Browse, Pagefind, Identify) + `stats.ts`, with `check-unpublished` build gate; records/images/parquet/Lucid preserved, reversible by deleting a line. Investigation: reference site publishes only browse-tree species; 60 of ours unmatched → 20 hide, 27 genus-renames, 13 judgment (in #80) | 2026-07-01 | complete ✓ |
 
 ## Session Continuity
 

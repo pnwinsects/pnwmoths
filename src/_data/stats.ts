@@ -2,6 +2,7 @@ import { DuckDBInstance } from '@duckdb/node-api';
 import { existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadWithheldFamilies } from '../_lib/withheld-families.ts';
+import { loadUnpublishedSpecies } from '../_lib/unpublished-species.ts';
 
 /** Directory of per-species narrative markdown files; the basename is the slug. */
 const NARRATIVE_DIR = resolve('src/content/species');
@@ -30,14 +31,21 @@ export interface SiteStats {
 
 export default async function (): Promise<SiteStats> {
   const withheld = [...loadWithheldFamilies()]; // lowercased family names
+  const unpublishedArr = [...loadUnpublishedSpecies()]; // hyphenated, lowercased slugs
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
-  // Shown species: every species.csv row whose family is not withheld. This is the
-  // same predicate species.ts applies to decide which species get pages.
+  // Shown species: every species.csv row whose family is not withheld AND whose
+  // normalized slug is not in the unpublished deny-list. This is the same predicate
+  // species.ts applies to decide which species get pages.
   const withheldList = withheld.length
     ? withheld.map((f) => `'${f.replace(/'/g, "''")}'`).join(', ')
     : "''"; // no families withheld → match nothing
+  // T-80-01: single-quote-escape each deny-list value before interpolation.
+  // Empty list falls back to the empty-string literal (no slug is '', so no rows excluded).
+  const unpublishedList = unpublishedArr.length
+    ? unpublishedArr.map((s) => `'${s.replace(/'/g, "''")}'`).join(', ')
+    : "''"; // no unpublished → match nothing
   await conn.run(`
     CREATE TABLE shown AS
     SELECT lower(genus || '-' || species) AS slug
@@ -47,7 +55,8 @@ export default async function (): Promise<SiteStats> {
         'common_name': 'VARCHAR', 'noc_id': 'VARCHAR', 'authority': 'VARCHAR',
         'family': 'VARCHAR', 'similar_species': 'VARCHAR', 'subfamily': 'VARCHAR'
       })
-    WHERE family IS NULL OR lower(trim(family)) NOT IN (${withheldList})
+    WHERE (family IS NULL OR lower(trim(family)) NOT IN (${withheldList}))
+      AND replace(lower(genus || '-' || species), ' ', '-') NOT IN (${unpublishedList})
   `);
 
   const scalar = async (sql: string): Promise<number> => {

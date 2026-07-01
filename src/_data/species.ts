@@ -1,5 +1,6 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
+import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
 
 // Local interface covering the post-query DuckDB shape (id as number)
 interface SpeciesDbRow {
@@ -34,6 +35,7 @@ export interface SpeciesRow extends Omit<SpeciesDbRow, 'id'> {
 
 export default async function (): Promise<SpeciesRow[]> {
   const withheld = loadWithheldFamilies();
+  const unpublished = loadUnpublishedSpecies();
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
@@ -82,6 +84,7 @@ export default async function (): Promise<SpeciesRow[]> {
   for (const row of rows) {
     if (!isSpeciesDbRow(row)) continue;
     if (isWithheldOrUnclassified(row.family, withheld)) continue;
+    if (isUnpublished(row.slug, unpublished)) continue;
     result_rows.push({
       id: String(row.id),
       genus: row.genus,

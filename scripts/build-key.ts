@@ -11,6 +11,7 @@ import { parse } from 'csv-parse/sync';
 // that trip csv-parse without relax_quotes. We do the UTF-8 + file-exists preflight inline.
 import { KeyMatrixSchema } from '../src/types/schemas.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
+import { loadUnpublishedSpecies, isUnpublished } from '../src/_lib/unpublished-species.ts';
 
 /**
  * Normalize a species binomial: trim whitespace and collapse multiple spaces to one.
@@ -221,13 +222,18 @@ export async function main(): Promise<void> {
 
   // 3. Load slug resolution resources
   const withheld = loadWithheldFamilies();
+  const unpublished = loadUnpublishedSpecies();
   const allSpeciesRows = parse(
     readFileSync(resolve('data/species.csv')),
     { columns: true, skip_empty_lines: true }
   ) as Array<{ genus: string; species: string; family: string }>;
-  // Filter withheld families so their binomials resolve to null in resolveSlug
-  // and land in unmatchedBinomials → excluded from key-matrix.json (ISSUE-48).
-  const speciesRows = allSpeciesRows.filter(r => !isWithheldOrUnclassified(r.family, withheld));
+  // Filter withheld families and unpublished provisional species so their binomials
+  // resolve to null in resolveSlug and land in unmatchedBinomials → excluded from
+  // key-matrix.json (ISSUE-48 / ISSUE-80).
+  const speciesRows = allSpeciesRows.filter(
+    r => !isWithheldOrUnclassified(r.family, withheld) &&
+         !isUnpublished(`${r.genus.toLowerCase()}-${r.species.toLowerCase()}`, unpublished)
+  );
   const siteSlugSet = new Set(
     speciesRows.map(r => `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`)
   );
