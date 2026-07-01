@@ -200,7 +200,19 @@ async function bunnyFetch(url: string, label: string): Promise<Response> {
     }
 
     if (!res.ok) {
-      throw new Error(redact(`Bunny API error on ${label}: ${res.status} ${res.statusText}`));
+      let detail = '';
+      try {
+        const errText = await res.text();
+        const parsed = JSON.parse(errText) as { error?: { message?: string; details?: string[] } };
+        if (parsed.error?.details?.length) {
+          detail = ` — ${parsed.error.details.join('; ')}`;
+        } else if (parsed.error?.message) {
+          detail = ` — ${parsed.error.message}`;
+        } else if (errText) {
+          detail = ` — ${errText.slice(0, 200)}`;
+        }
+      } catch { /* ignore body parse errors */ }
+      throw new Error(redact(`Bunny API error on ${label}: ${res.status} ${res.statusText}${detail}`));
     }
 
     return res;
