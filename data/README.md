@@ -16,6 +16,7 @@ erDiagram
         string  family
         string  subfamily
         string  similar_species   "pipe-delimited slugs"
+        string  epithet_quoted    "1 = display epithet in quotes"
     }
 
     records {
@@ -92,7 +93,7 @@ erDiagram
 
 | File | Rows (approx) | Description |
 |------|--------------|-------------|
-| `species.csv` | ~900 | One row per species. Primary key is `id`; slug is derived as `genus.lower()-species.lower()`. |
+| `species.csv` | ~900 | One row per species. Primary key is `id`; slug is derived as `genus.lower()-species.lower()`. `epithet_quoted` (`1` or blank) marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); it drives display only — the slug and foreign keys always use the clean epithet. See [`src/_lib/format-epithet.ts`](../src/_lib/format-epithet.ts). |
 | `records.csv` | ~30 000 | Geo-referenced occurrence records (specimens, literature, observations). |
 | `records-bad.csv` | varies | Records that failed validation — same schema as `records.csv`. |
 | `records-bad-coords.csv` | varies | Records dropped for coordinates outside the PNW bounds (lat 42–60, lon −139 to −110) — typically swapped lat/lon. Kept for curation; not built into the site. Produced by [`scripts/recover-clipped-bc-records.ts`](../scripts/recover-clipped-bc-records.ts). |

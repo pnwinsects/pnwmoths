@@ -53,7 +53,8 @@ export default async function (): Promise<SiteStats> {
       columns = {
         'id': 'INTEGER', 'genus': 'VARCHAR', 'species': 'VARCHAR',
         'common_name': 'VARCHAR', 'noc_id': 'VARCHAR', 'authority': 'VARCHAR',
-        'family': 'VARCHAR', 'similar_species': 'VARCHAR', 'subfamily': 'VARCHAR'
+        'family': 'VARCHAR', 'similar_species': 'VARCHAR', 'subfamily': 'VARCHAR',
+        'epithet_quoted': 'VARCHAR'
       })
     WHERE (family IS NULL OR lower(trim(family)) NOT IN (${withheldList}))
       AND replace(lower(genus || '-' || species), ' ', '-') NOT IN (${unpublishedList})

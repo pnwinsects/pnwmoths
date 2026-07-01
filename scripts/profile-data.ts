@@ -63,7 +63,8 @@ async function main(): Promise<void> {
         'authority': 'VARCHAR',
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
-        'subfamily': 'VARCHAR'
+        'subfamily': 'VARCHAR',
+        'epithet_quoted': 'VARCHAR'
       }
     )
   `);

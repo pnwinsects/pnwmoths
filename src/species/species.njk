@@ -6,7 +6,9 @@ pagination:
   alias: sp
 permalink: "species/{{ sp.slug }}/index.html"
 eleventyComputed:
-  title: "{{ sp.genus }} {{ sp.species }} — PNW Moths"
+  # species_display may contain quotes (issue #85); `safe` keeps the value raw through
+  # eleventyComputed so base.njk escapes it exactly once (avoids &amp;quot; in <title>).
+  title: "{{ sp.genus }} {{ sp.species_display | safe }} — PNW Moths"
 ---
 
 <nav class="species-breadcrumb" aria-label="Taxonomy">
@@ -21,7 +23,7 @@ eleventyComputed:
 
 <div class="species-header">
   <div class="species-title">
-    <h1><em>{{ sp.genus }} {{ sp.species }}</em>{% if sp.authority %} {{ sp.authority }}{% endif %}</h1>
+    <h1><em>{{ sp.genus }} {{ sp.species_display }}</em>{% if sp.authority %} {{ sp.authority }}{% endif %}</h1>
     {% if sp.common_name %}<div class="species-common-name">{{ sp.common_name }}</div>{% endif %}
   </div>
   {% if sp.noc_id %}
@@ -48,7 +50,7 @@ eleventyComputed:
         {% for img in spImages %}
           <figure>
             <img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename | urlencode }}"
-                 alt="{{ sp.genus }} {{ sp.species }}"
+                 alt="{{ sp.genus }} {{ sp.species_display }}"
                  data-photographer="{{ img.photographer }}"
                  {% if img.locality %}data-locality="{{ img.locality }}"{% endif %}
                  {% if img.state %}data-state="{{ img.state }}"{% endif %}
@@ -68,7 +70,7 @@ eleventyComputed:
             <img src="{{ thumbBase }}?width=530"
                  srcset="{{ thumbBase }}?width=530 530w, {{ thumbBase }}?width=1060 1060w, {{ thumbBase }}?width=1500 1500w"
                  sizes="530px"
-                 alt="{{ sp.genus }} {{ sp.species }}"
+                 alt="{{ sp.genus }} {{ sp.species_display }}"
                  {% if highResEntry.photographer %}data-photographer="{{ highResEntry.photographer }}"{% endif %}
                  {% if highResEntry.license %}data-license="{{ highResEntry.license }}"{% endif %}
                  onerror="this.style.background='#ddd'">
@@ -96,14 +98,14 @@ eleventyComputed:
                   <div class="similar-species-thumb">
                     {% if simImages and simImages.length > 0 %}
                       <img src="{{ cdnBaseUrl }}/{{ slug }}/{{ simImages[0].filename | urlencode }}"
-                           alt="{{ s.genus }} {{ s.species }}"
+                           alt="{{ s.genus }} {{ s.species_display }}"
                            height="93"
                            loading="lazy">
                     {% else %}
                       <div class="similar-species-placeholder" aria-hidden="true"></div>
                     {% endif %}
                   </div>
-                  <span class="similar-species-name"><em>{{ s.genus }} {{ s.species }}</em></span>
+                  <span class="similar-species-name"><em>{{ s.genus }} {{ s.species_display }}</em></span>
                 </a>
               {% endif %}
             {% endfor %}
