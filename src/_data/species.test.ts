@@ -65,6 +65,28 @@ test('species: deny-listed genus keeps its legitimate sibling species (ISSUE-80)
   );
 });
 
+// ---------------------------------------------------------------------------
+// Quoted-epithet display (issue #85)
+// ---------------------------------------------------------------------------
+
+test('species: quoted epithets render in species_display but stay clean in species/slug', async () => {
+  const { default: getSpecies } = await import('./species.ts');
+  const rows = await getSpecies();
+  const clostera = rows.find(r => r.slug === 'clostera-apicalis');
+  assert.ok(clostera, 'clostera-apicalis should be emitted');
+  assert.strictEqual(clostera.species, 'apicalis', 'species stays clean (drives slug + FKs)');
+  assert.strictEqual(clostera.species_display, '"apicalis"', 'species_display carries the quotes');
+  assert.strictEqual(clostera.slug, 'clostera-apicalis', 'slug is unaffected by quotes');
+});
+
+test('species: an unquoted species has species_display === species', async () => {
+  const { default: getSpecies } = await import('./species.ts');
+  const rows = await getSpecies();
+  const sample = rows.find(r => r.slug === 'nadata-gibbosa');
+  assert.ok(sample, 'nadata-gibbosa should be emitted');
+  assert.strictEqual(sample.species_display, sample.species);
+});
+
 test('species: no emitted slug belongs to a Geometridae genus (spot-check via species.csv)', async () => {
   // Load species.csv to find all Geometridae slugs (source of truth — data is NOT deleted)
   const allRows = parse(

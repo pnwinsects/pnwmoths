@@ -12,6 +12,7 @@ import { parse } from 'csv-parse/sync';
 import { KeyMatrixSchema } from '../src/types/schemas.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../src/_lib/unpublished-species.ts';
+import { formatEpithet, isEpithetQuoted } from '../src/_lib/format-epithet.ts';
 
 /**
  * Normalize a species binomial: trim whitespace and collapse multiple spaces to one.
@@ -226,7 +227,7 @@ export async function main(): Promise<void> {
   const allSpeciesRows = parse(
     readFileSync(resolve('data/species.csv')),
     { columns: true, skip_empty_lines: true }
-  ) as Array<{ genus: string; species: string; family: string }>;
+  ) as Array<{ genus: string; species: string; family: string; epithet_quoted: string }>;
   // Filter withheld families and unpublished provisional species so their binomials
   // resolve to null in resolveSlug and land in unmatchedBinomials → excluded from
   // key-matrix.json (ISSUE-48 / ISSUE-80).
@@ -304,11 +305,13 @@ export async function main(): Promise<void> {
     };
   });
 
-  // Build slug → accepted-name lookup so synonym-resolved species display the accepted name
+  // Build slug → accepted-name lookup so synonym-resolved species display the accepted name.
+  // epithet is the display form — quoted for provisional names, e.g. Clostera "apicalis"
+  // (issue #85). The slug is derived separately, so quotes never leak into identity.
   const slugToName = new Map(
     speciesRows.map(r => [
       `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`,
-      { genus: r.genus, epithet: r.species },
+      { genus: r.genus, epithet: formatEpithet(r.species, isEpithetQuoted(r.epithet_quoted)) },
     ])
   );
 

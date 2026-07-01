@@ -1,12 +1,14 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
+import { formatEpithet, isEpithetQuoted } from '../_lib/format-epithet.ts';
 
 // Local interface covering the post-query DuckDB shape (id as number)
 interface SpeciesDbRow {
   id: number;
   genus: string;
   species: string;
+  epithet_quoted: string | null;
   common_name: string | null;
   noc_id: string | null;
   authority: string | null;
@@ -28,9 +30,13 @@ function isSpeciesDbRow(obj: unknown): obj is SpeciesDbRow {
   );
 }
 
-// Emitted return type: id has been mutated to string post-query
-export interface SpeciesRow extends Omit<SpeciesDbRow, 'id'> {
+// Emitted return type: id has been mutated to string post-query.
+// species_display is the epithet formatted for display — quoted for provisional names
+// (e.g. `"apicalis"`), otherwise identical to `species`. Templates render this; `species`
+// stays clean so the derived slug and foreign keys are unaffected (issue #85).
+export interface SpeciesRow extends Omit<SpeciesDbRow, 'id' | 'epithet_quoted'> {
   id: string;
+  species_display: string;
 }
 
 export default async function (): Promise<SpeciesRow[]> {
@@ -53,7 +59,8 @@ export default async function (): Promise<SpeciesRow[]> {
         'authority': 'VARCHAR',
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
-        'subfamily': 'VARCHAR'
+        'subfamily': 'VARCHAR',
+        'epithet_quoted': 'VARCHAR'
       }
     )
   `);
@@ -63,6 +70,7 @@ export default async function (): Promise<SpeciesRow[]> {
       id,
       genus,
       species,
+      epithet_quoted,
       common_name,
       noc_id,
       authority,
@@ -89,6 +97,7 @@ export default async function (): Promise<SpeciesRow[]> {
       id: String(row.id),
       genus: row.genus,
       species: row.species,
+      species_display: formatEpithet(row.species, isEpithetQuoted(row.epithet_quoted)),
       common_name: row.common_name,
       noc_id: row.noc_id,
       authority: row.authority,

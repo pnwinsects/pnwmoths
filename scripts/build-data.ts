@@ -104,7 +104,7 @@ async function verifySampleParquetSchema(conn: DuckDBConnection, firstSlug: stri
  */
 export async function main(): Promise<void> {
   // --- Pre-flight CSV validation ---
-  validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily']);
+  validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily', 'epithet_quoted']);
   const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']);
   for (const row of imageRows) {
     const filename = row['filename'];
@@ -145,7 +145,8 @@ export async function main(): Promise<void> {
         'authority': 'VARCHAR',
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
-        'subfamily': 'VARCHAR'
+        'subfamily': 'VARCHAR',
+        'epithet_quoted': 'VARCHAR'
       }
     )
   `);

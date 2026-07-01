@@ -2,6 +2,7 @@ import { DuckDBInstance } from '@duckdb/node-api';
 import type { TaxonFamily, TaxonGenus, TaxonSubfamily, NavImage } from '../types/index.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
+import { formatEpithet, isEpithetQuoted } from '../_lib/format-epithet.ts';
 
 // Narrow projection interfaces for the two DuckDB queries
 
@@ -11,6 +12,7 @@ interface TaxonSpeciesDbRow {
   subfamily: string | null;
   genus: string;
   species: string;
+  epithet_quoted: string | null;
   common_name: string | null;
   slug: string;
   genus_slug: string;
@@ -106,7 +108,8 @@ export default async function (): Promise<TaxonFamily[]> {
         'authority': 'VARCHAR',
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
-        'subfamily': 'VARCHAR'
+        'subfamily': 'VARCHAR',
+        'epithet_quoted': 'VARCHAR'
       }
     )
   `);
@@ -144,7 +147,7 @@ export default async function (): Promise<TaxonFamily[]> {
   `);
 
   const speciesResult = await conn.runAndReadAll(`
-    SELECT family, subfamily, genus, species, common_name,
+    SELECT family, subfamily, genus, species, epithet_quoted, common_name,
       lower(genus || '-' || species) AS slug,
       lower(replace(genus, ' ', '-')) AS genus_slug
     FROM species
@@ -209,7 +212,10 @@ export default async function (): Promise<TaxonFamily[]> {
       genusMap[gen] = { name: row.genus, genus_slug: row.genus_slug, navImages: [], species: [] };
     }
 
-    genusMap[gen]!.species.push({ slug: row.slug, name: row.species, common_name: row.common_name, navImage: null });
+    // name is display-only (URLs use slug), so it carries the quoted epithet for
+    // provisional names, e.g. Clostera "apicalis" (issue #85).
+    const displayName = formatEpithet(row.species, isEpithetQuoted(row.epithet_quoted));
+    genusMap[gen]!.species.push({ slug: row.slug, name: displayName, common_name: row.common_name, navImage: null });
   }
 
   // Convert maps to arrays, assign navImages at each level
