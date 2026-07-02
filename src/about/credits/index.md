@@ -48,6 +48,10 @@ Northwest Moths possible.
 - Forrest Henry
 - Nathan Tate
 
+**Site redesign and migration**
+- [Peter Abrahamsen](https://github.com/rainhead)
+- [Jason Williams](https://github.com/WilliamsJason)
+
 ### Designer
 - [Jennifer Anderson](https://www.linkedin.com/in/jenniferandersondesigns)
 
