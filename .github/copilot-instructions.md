@@ -22,7 +22,9 @@ Example: genus=Acronicta, species=americana → `acronicta-americana`
 ## Prose descriptions
 
 Optional per-species Markdown files live at `src/content/species/{slug}.md`.
-Each file requires YAML frontmatter with a `slug` field matching the filename.
+The file is matched to its species by filename (the `{slug}`) and rendered into
+the factsheet via `renderFile`; it contains body Markdown only, with no YAML
+frontmatter (`species.11tydata.json` sets `permalink: false`).
 If the file is absent, the factsheet renders without a prose section.
 
 ## Build pipeline
