@@ -95,6 +95,7 @@ body > footer a {
 .partners-logos li {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .partners-logos a {
