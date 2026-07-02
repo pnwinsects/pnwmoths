@@ -40,10 +40,10 @@ test('normalizeSlug: already-hyphenated slug unchanged modulo case', () => {
 // loadUnpublishedSpecies
 // ---------------------------------------------------------------------------
 
-test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 20 entries', () => {
+test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 22 entries', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished instanceof Set, 'result should be a Set');
-  assert.strictEqual(unpublished.size, 20, `expected 20 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+  assert.strictEqual(unpublished.size, 22, `expected 22 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
 });
 
 test('loadUnpublishedSpecies: real CSV contains "aseptis-sp-no-1"', () => {

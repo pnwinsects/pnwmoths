@@ -258,13 +258,13 @@ describe('computeMatching', () => {
     // They must appear in computeMatching results for any selection (no opposing 1s → D-03 never eliminates).
     //
     // Real-artifact regression counts (see RESEARCH.md "Concrete expected values"):
-    //   WA state selected (char id=0):     861 matched (post-Geometridae-withholding)
+    //   WA state selected (char id=0):     862 matched (euthyatira-lorata reclassified to Drepanidae, #73)
     //   WA OR OR selected (ids 0+2):     1,011 matched
     //   WA AND eyespot=Yes (ids 0, eyespot): 8 matched
     //   eyespot=Yes only:                   10 matched
     //   forewing-yellow only:               75 matched
     //   yellow OR orange:                  173 matched
-    //   empty selection:                 1,191 matched (post-Geometridae-withholding)
+    //   empty selection:                 1,192 matched (euthyatira-lorata reclassified to Drepanidae, #73)
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
 
@@ -284,17 +284,17 @@ describe('computeMatching', () => {
       result.matchedSlugs.includes('xestia-normanianus'),
       'xestia-normanianus (all-zero) must appear in WA-filtered results (D-04)',
     );
-    // Regression check: WA selection should yield 861 matched species
-    // (was 862 before Geometridae withholding removed euthyatira-lorata from key-matrix.json)
-    assert.strictEqual(result.count, 861, 'WA selection must match 861 species (real-artifact regression)');
+    // Regression check: WA selection should yield 862 matched species
+    // (euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoins the key)
+    assert.strictEqual(result.count, 862, 'WA selection must match 862 species (real-artifact regression)');
   });
 
-  it('TC-7b: empty selection returns all 1,191 species (real artifact)', async () => {
+  it('TC-7b: empty selection returns all 1,192 species (real artifact)', async () => {
     // Empty selection → D-03 base case: no constrained questions → all species pass.
-    // (was 1,192 before Geometridae withholding removed euthyatira-lorata from key-matrix.json)
+    // (euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoins the key)
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
     const result = computeMatching(realMatrix as KeyMatrix, new Map(), realGroups);
-    assert.strictEqual(result.count, 1191, 'empty selection must return all 1,191 species');
+    assert.strictEqual(result.count, 1192, 'empty selection must return all 1,192 species');
   });
 });
