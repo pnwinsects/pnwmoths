@@ -20,6 +20,7 @@ function entry(overrides: Record<string, unknown> = {}): {
   countryCode: string | null;
   referer: string | null;
   userAgent: string | null;
+  remoteAddress: string | null;
   cacheStatus: string;
   bytesSent: number;
   scheme: string;
@@ -33,6 +34,7 @@ function entry(overrides: Record<string, unknown> = {}): {
     countryCode: 'US',
     referer: null,
     userAgent: 'Mozilla/5.0',
+    remoteAddress: '192.168.1.1',
     cacheStatus: 'HIT',
     bytesSent: 5000,
     scheme: 'https',
@@ -177,7 +179,7 @@ describe('aggregate', () => {
 
   it('produces correct schema_version', () => {
     const result = aggregate([], date, from, to);
-    assert.equal(result.schema_version, 1);
+    assert.equal(result.schema_version, 2);
   });
 
   it('counts total requests', () => {
@@ -276,5 +278,35 @@ describe('aggregate', () => {
     assert.equal(result.pageviews.length, 1);
     assert.equal(result.pageviews[0]!.path, '/species/foo/');
     assert.equal(result.pageviews[0]!.count, 2);
+  });
+
+  it('counts unique visitors by IP address', () => {
+    const entries = [
+      entry({ remoteAddress: '1.2.3.4' }),
+      entry({ remoteAddress: '1.2.3.4' }),
+      entry({ remoteAddress: '5.6.7.8' }),
+      entry({ remoteAddress: '9.10.11.12' }),
+    ];
+    const result = aggregate(entries, date, from, to);
+    assert.equal(result.total_unique_visitors, 3);
+  });
+
+  it('handles null remoteAddress gracefully', () => {
+    const entries = [
+      entry({ remoteAddress: null }),
+      entry({ remoteAddress: '1.2.3.4' }),
+      entry({ remoteAddress: null }),
+    ];
+    const result = aggregate(entries, date, from, to);
+    assert.equal(result.total_unique_visitors, 1);
+  });
+
+  it('returns zero unique visitors when no IPs present', () => {
+    const entries = [
+      entry({ remoteAddress: null }),
+      entry({ remoteAddress: null }),
+    ];
+    const result = aggregate(entries, date, from, to);
+    assert.equal(result.total_unique_visitors, 0);
   });
 });

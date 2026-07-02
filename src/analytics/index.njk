@@ -11,9 +11,10 @@ eleventyExcludeFromCollections: true
 <p>No analytics data yet. Data is collected nightly from CDN access logs.</p>
 {% else %}
 
-<p>Showing {{ analytics.days.length }} day{{ "s" if analytics.days.length !== 1 }} of data.
-Rolling 30-day totals: <strong>{{ analytics.rolling30.total_pageviews | number }}</strong> pageviews
-from <strong>{{ analytics.rolling30.total_requests | number }}</strong> total requests.</p>
+<p>Tracking data since <strong>{{ analytics.cumulative.first_date }}</strong>.
+All-time totals: <strong>{{ analytics.cumulative.total_pageviews | number }}</strong> pageviews{% if analytics.cumulative.total_unique_visitors > 0 %},
+<strong>{{ analytics.cumulative.total_unique_visitors | number }}</strong> unique visitors{% endif %}.
+Use the time filter below to view stats for a specific year.</p>
 
 <script type="application/json" id="analytics-data" data-pagefind-ignore>
   {{ analytics | tojson | safe }}

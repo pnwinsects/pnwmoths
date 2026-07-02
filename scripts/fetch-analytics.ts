@@ -61,6 +61,7 @@ interface LogEntry {
   countryCode: string | null;
   referer: string | null;
   userAgent: string | null;
+  remoteAddress: string | null;
   cacheStatus: string;
   bytesSent: number;
   scheme: string;
@@ -87,6 +88,7 @@ export interface DailyAnalytics {
   log_rows_processed: number;
   total_requests: number;
   total_pageviews: number;
+  total_unique_visitors: number;
   total_bytes: number;
   pageviews: Array<{ path: string; count: number }>;
   requests_by_hour: number[];
@@ -282,6 +284,7 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
   const countryCounts = new Map<string, number>();
   const statusCounts = new Map<number, number>();
   const cacheCounts = new Map<string, number>();
+  const uniqueIPs = new Set<string>();
   let totalPageviews = 0;
   let totalBytes = 0;
 
@@ -290,6 +293,11 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
 
   for (const entry of entries) {
     totalBytes += entry.bytesSent;
+
+    // Track unique visitors by IP
+    if (entry.remoteAddress) {
+      uniqueIPs.add(entry.remoteAddress);
+    }
 
     // Hour bucket
     const hour = new Date(entry.timestamp).getUTCHours();
@@ -328,13 +336,14 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
       .slice(0, limit);
 
   return {
-    schema_version: 1,
+    schema_version: 2,
     date,
     generated_at: new Date().toISOString(),
     source_window: { from: `${date}T00:00:00Z`, to: `${date}T23:59:59.999Z` },
     log_rows_processed: entries.length,
     total_requests: entries.length,
     total_pageviews: totalPageviews,
+    total_unique_visitors: uniqueIPs.size,
     total_bytes: totalBytes,
     pageviews: sortedTop(pathCounts, TOP_PAGES).map(([path, count]) => ({ path: path as string, count })),
     requests_by_hour: hourCounts,
