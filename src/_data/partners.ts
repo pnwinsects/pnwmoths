@@ -29,7 +29,7 @@ const collaborators: Partner[] = [
 
 const funders: Partner[] = [
   { name: 'National Science Foundation', url: 'https://www.nsf.gov/', logo: 'nsf.png' },
-  { name: 'American Recovery and Reinvestment Act', url: 'https://www.recovery.gov/', logo: 'recovery.png' },
+  { name: 'American Recovery and Reinvestment Act', url: 'https://www.nsf.gov/funding/opportunities/academic-research-infrastructure-program-recovery/503380/nsf09-562', logo: 'recovery.png' },
 ];
 
 export default function (): Partners {
