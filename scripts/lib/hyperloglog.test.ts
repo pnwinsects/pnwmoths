@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { HyperLogLog } from './lib/hyperloglog.ts';
+import { HyperLogLog } from './hyperloglog.ts';
 
 describe('HyperLogLog', () => {
   it('estimates cardinality within expected error range', () => {

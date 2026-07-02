@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { HyperLogLog } from '../scripts/lib/hyperloglog.ts';
+import { HyperLogLog } from '../../scripts/lib/hyperloglog.ts';
 
 const ANALYTICS_DIR = resolve('data/analytics');
 
