@@ -25,6 +25,10 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          # Push below authenticates with an explicit token instead of the
+          # persisted credential, so keep the token out of .git/config.
+          persist-credentials: false
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version-file: '.nvmrc'
@@ -49,7 +53,7 @@ jobs:
           else
             latest="$(basename "$(ls -t data/analytics/*.json | head -1)" .json)"
             git commit -m "data: add analytics for ${latest}"
-            git push
+            git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
             # A push made with GITHUB_TOKEN does not trigger the production
             # deploy workflow, so dispatch it explicitly to publish the new data.
             gh workflow run production.yml --ref main
