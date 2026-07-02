@@ -1,0 +1,49 @@
+name: Claude Code
+
+# Responds when someone writes "@claude" in an issue, an issue comment, or a
+# PR review comment. Claude edits files and opens a pull request; it never
+# merges. Every change lands as a reviewable diff on a branch.
+#
+# Auth: uses a Claude Max/Pro subscription via the CLAUDE_CODE_OAUTH_TOKEN
+# secret (generated with `claude setup-token`), so there is no per-token
+# Anthropic charge — usage draws from the subscription's normal quota.
+#
+# This repo is public. The action only responds to users with write access to
+# the repo, so random visitors cannot trigger runs against the subscription.
+# Give trusted content maintainers (e.g. Merrill) the Write collaborator role,
+# or trigger it yourself by commenting "@claude" on their issue.
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@6c0083bb7289c31716797a039b6367b3079cc46e # v1.0.162
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
