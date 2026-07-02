@@ -451,6 +451,37 @@ pnwm-occurrence-popup .pnwm-occ-note {
   padding: 0;
 }
 
+/* Collapsible sub-character-group heading (mirrors category h2 button) */
+.pnwm-kfp-question legend {
+  padding: 0;
+  width: 100%;
+}
+
+.pnwm-kfp-question legend button {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-weight: 600;
+}
+
+.pnwm-kfp-question legend button::before {
+  content: '▶';
+  font-size: 0.6em;
+  display: inline-block;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.pnwm-kfp-question legend button[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.pnwm-kfp-question > div {
+  padding-left: 1rem;
+}
+
 /* Two-column layout for /identify/ — desktop (Phase 42) */
 .pnwm-identify-layout {
   display: grid;

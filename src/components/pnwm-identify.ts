@@ -91,6 +91,7 @@ export class PnwmIdentify extends LitElement {
       'path-prefix':      { type: String },
       _categoryMap:       { attribute: false, state: true },
       _expandedCategories:{ attribute: false, state: true },
+      _expandedQuestions: { attribute: false, state: true },
       _selection:         { attribute: false, state: true },
       _keyMatrix:         { attribute: false, state: true },
       _questionGroups:    { attribute: false, state: true },
@@ -101,6 +102,8 @@ export class PnwmIdentify extends LitElement {
 
   _categoryMap: CategoryMap;
   _expandedCategories: Set<string>;
+  /** Questions (sub-character-groups) currently expanded. Empty = all collapsed. */
+  _expandedQuestions: Set<string>;
   /** Selection: Map<questionText, Set<characterId>> */
   _selection: Map<string, Set<number>>;
   _keyMatrix: KeyMatrix | null;
@@ -115,6 +118,7 @@ export class PnwmIdentify extends LitElement {
     super();
     this._categoryMap = new Map();
     this._expandedCategories = new Set();
+    this._expandedQuestions = new Set();
     this._selection = new Map();
     this._keyMatrix = null;
     this._questionGroups = null;
@@ -160,6 +164,14 @@ export class PnwmIdentify extends LitElement {
       this._expandedCategories = new Set([...this._expandedCategories].filter(n => n !== name));
     } else {
       this._expandedCategories = new Set([...this._expandedCategories, name]);
+    }
+  }
+
+  _toggleQuestion(question: string): void {
+    if (this._expandedQuestions.has(question)) {
+      this._expandedQuestions = new Set([...this._expandedQuestions].filter(q => q !== question));
+    } else {
+      this._expandedQuestions = new Set([...this._expandedQuestions, question]);
     }
   }
 
@@ -217,6 +229,17 @@ export class PnwmIdentify extends LitElement {
     return count;
   }
 
+  /** Count how many character states are selected within a single question. */
+  _selectionCountForQuestion(question: string, chars: Character[]): number {
+    const ids = this._selection.get(question);
+    if (!ids) return 0;
+    let count = 0;
+    for (const char of chars) {
+      if (ids.has(char.id)) count++;
+    }
+    return count;
+  }
+
   // ---------------------------------------------------------------------------
   // Event dispatch
   // ---------------------------------------------------------------------------
@@ -247,9 +270,18 @@ export class PnwmIdentify extends LitElement {
   // ---------------------------------------------------------------------------
 
   _renderQuestion(question: string, chars: Character[]): TemplateResult {
+    const expanded = this._expandedQuestions.has(question);
+    const selCount = this._selectionCountForQuestion(question, chars);
     return html`
       <fieldset class="pnwm-kfp-question">
-        <legend>${question}</legend>
+        <legend>
+          <button
+            type="button"
+            aria-expanded="${expanded}"
+            @click=${() => this._toggleQuestion(question)}
+          >${question}${selCount > 0 ? html` <span class="pnwm-kfp-badge">(${selCount})</span>` : ''}</button>
+        </legend>
+        <div ?hidden=${!expanded}>
         ${chars.map(char => {
           const selected = this._selection.get(question)?.has(char.id) ?? false;
           const img = char.image_filename;
@@ -280,6 +312,7 @@ export class PnwmIdentify extends LitElement {
             </a>
           </details>` : ''}`;
         })}
+        </div>
       </fieldset>`;
   }
 
