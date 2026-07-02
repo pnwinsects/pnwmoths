@@ -1,5 +1,7 @@
 import { DuckDBInstance } from '@duckdb/node-api';
-import type { TaxonFamily, TaxonGenus, TaxonSubfamily, NavImage } from '../types/index.ts';
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import type { TaxonFamily, TaxonGenus, TaxonSubfamily, NavImage, SpeciesPhoto } from '../types/index.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../_lib/format-epithet.ts';
@@ -37,6 +39,35 @@ interface NavImageDbRow {
   photographer: string;
   weight: number | null;
   navigational: string | null;
+  thumb_url?: string;
+}
+
+/**
+ * Load data/species-photos.json (the high-res photo manifest) as a slug→entry
+ * map. Missing file soft-fails to `{}`, mirroring src/_data/speciesPhotos.ts.
+ */
+function loadHighResPhotos(): Record<string, SpeciesPhoto> {
+  const path = resolve('data/species-photos.json');
+  if (!existsSync(path)) return {};
+  return JSON.parse(readFileSync(path, 'utf8')) as Record<string, SpeciesPhoto>;
+}
+
+/**
+ * Build a synthetic navImage from a high-res manifest entry for a species that
+ * has no images.csv row, so it still gets a browse thumbnail. Prefers a dorsal
+ * ('D') specimen. Returns null if the entry has no usable specimen.
+ */
+function highResNavImage(slug: string, entry: SpeciesPhoto | undefined): NavImageDbRow | null {
+  if (!entry?.high_res_available || !entry.specimens?.length) return null;
+  const specimen = entry.specimens.find((s) => s.view === 'D') ?? entry.specimens[0]!;
+  return {
+    species_slug: slug,
+    filename: '',
+    photographer: entry.photographer ?? '',
+    weight: null,
+    navigational: null,
+    thumb_url: `${specimen.tiles_path}_thumbnail.webp`,
+  };
 }
 
 function isNavImageDbRow(obj: unknown): obj is NavImageDbRow {
@@ -73,8 +104,9 @@ function pickNavImages(speciesSlugs: string[], bySpeciesSlug: Record<string, Nav
   const candidates: NavImage[] = [];
   for (const slug of speciesSlugs) {
     for (const img of (bySpeciesSlug[slug] ?? [])) {
-      if (!seen.has(img.filename)) {
-        seen.add(img.filename);
+      const key = img.thumb_url ?? img.filename;
+      if (!seen.has(key)) {
+        seen.add(key);
         candidates.push({ ...img, species_slug: slug });
       }
     }
@@ -184,6 +216,16 @@ export default async function (): Promise<TaxonFamily[]> {
     const slug = img.species_slug;
     if (!bySpeciesSlug[slug]) bySpeciesSlug[slug] = [];
     bySpeciesSlug[slug]!.push(img);
+  }
+
+  // Fallback: species with only high-res pipeline photos (in species-photos.json)
+  // and no images.csv row get a synthetic navImage so they still show a browse
+  // thumbnail (issue #84). images.csv rows always win when both exist.
+  const highResPhotos = loadHighResPhotos();
+  for (const row of speciesRows) {
+    if (bySpeciesSlug[row.slug]?.length) continue;
+    const navImg = highResNavImage(row.slug, highResPhotos[row.slug]);
+    if (navImg) bySpeciesSlug[row.slug] = [navImg];
   }
 
   // Build four-level tree: family → subfamily → genus → species

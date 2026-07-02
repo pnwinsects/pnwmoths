@@ -118,6 +118,10 @@ export const NavImageSchema = z.object({
   weight:       z.nullable(z.number()),    // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
   navigational: z.nullable(z.string()),
   species_slug: z.string(),
+  // CDN-relative path (no leading slash, no query) to a prebuilt thumbnail, used
+  // for species that have only high-res pipeline photos and no images.csv row.
+  // When present, the browser uses it verbatim instead of `${species_slug}/${filename}`.
+  thumb_url:    z.optional(z.string()),
 });
 export type NavImage = z.infer<typeof NavImageSchema>;
 
