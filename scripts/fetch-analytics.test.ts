@@ -309,4 +309,17 @@ describe('aggregate', () => {
     const result = aggregate(entries, date, from, to);
     assert.equal(result.total_unique_visitors, 0);
   });
+
+  it('includes a visitor_hll sketch in output', () => {
+    const entries = [
+      entry({ remoteAddress: '1.2.3.4' }),
+      entry({ remoteAddress: '5.6.7.8' }),
+    ];
+    const result = aggregate(entries, date, from, to);
+    assert.ok(result.visitor_hll, 'visitor_hll should be present');
+    assert.ok(result.visitor_hll.length > 0, 'visitor_hll should be non-empty base64');
+    // Verify it's valid base64 that decodes to 16384 bytes (p=14)
+    const decoded = Buffer.from(result.visitor_hll, 'base64');
+    assert.equal(decoded.length, 16384);
+  });
 });

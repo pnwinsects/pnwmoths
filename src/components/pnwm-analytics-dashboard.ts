@@ -42,6 +42,7 @@ interface AnalyticsData {
     first_date: string;
     last_date: string;
   };
+  yearly_unique_visitors: Record<string, number>;
   rolling30: {
     total_requests: number;
     total_pageviews: number;
@@ -200,7 +201,7 @@ class PnwmAnalyticsDashboard extends LitElement {
         </div>
         <div class="summary-card">
           <div class="value">${cum.total_unique_visitors.toLocaleString()}</div>
-          <div class="label">Total Unique Visitors (All Time)</div>
+          <div class="label">Unique Visitors (All Time)</div>
         </div>
         ${isFiltered ? html`
           <div class="summary-card">
@@ -208,8 +209,8 @@ class PnwmAnalyticsDashboard extends LitElement {
             <div class="label">Pageviews (${this._selectedYear})</div>
           </div>
           <div class="summary-card">
-            <div class="value">${stats.visitors.toLocaleString()}</div>
-            <div class="label">Visitors (${this._selectedYear})</div>
+            <div class="value">${(this._data!.yearly_unique_visitors[this._selectedYear] ?? stats.visitors).toLocaleString()}</div>
+            <div class="label">Unique Visitors (${this._selectedYear})</div>
           </div>
         ` : ''}
       </div>
@@ -223,7 +224,9 @@ class PnwmAnalyticsDashboard extends LitElement {
         <span class="filter-info">
           Showing ${filteredDays.length} day${filteredDays.length !== 1 ? 's' : ''}
           · ${stats.pageviews.toLocaleString()} pageviews
-          ${stats.visitors > 0 ? html`· ${stats.visitors.toLocaleString()} visitors` : ''}
+          ${isFiltered && this._data!.yearly_unique_visitors[this._selectedYear]
+            ? html`· ${this._data!.yearly_unique_visitors[this._selectedYear]!.toLocaleString()} unique visitors`
+            : stats.visitors > 0 ? html`· ${stats.visitors.toLocaleString()} visitors` : ''}
         </span>
       </div>
 

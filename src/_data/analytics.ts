@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { HyperLogLog } from '../scripts/lib/hyperloglog.ts';
 
 const ANALYTICS_DIR = resolve('data/analytics');
 
@@ -14,6 +15,7 @@ interface DaySummary {
   total_pageviews: number;
   total_unique_visitors: number;
   total_bytes: number;
+  visitor_hll: string | null;
   pageviews: DayEntry[];
   requests_by_hour: number[];
   referrers: Array<{ domain: string; count: number }>;
@@ -30,6 +32,8 @@ export interface AnalyticsData {
     first_date: string;
     last_date: string;
   };
+  /** Pre-computed unique visitors per year using HLL merging. */
+  yearly_unique_visitors: Record<string, number>;
   rolling30: {
     total_requests: number;
     total_pageviews: number;
@@ -60,6 +64,7 @@ export default function (): AnalyticsData {
       total_pageviews: raw.total_pageviews,
       total_unique_visitors: raw.total_unique_visitors ?? 0,
       total_bytes: raw.total_bytes,
+      visitor_hll: raw.visitor_hll ?? null,
       pageviews: raw.pageviews,
       requests_by_hour: raw.requests_by_hour,
       referrers: raw.referrers,
@@ -69,12 +74,18 @@ export default function (): AnalyticsData {
   });
 
   // Cumulative totals across all days
+  // Use HLL sketch merging for accurate cross-day unique visitor counts
   let cumPageviews = 0;
-  let cumVisitors = 0;
   let cumRequests = 0;
+  const hllSketches = days
+    .map((d) => d.visitor_hll)
+    .filter((s): s is string => s !== null);
+  const cumVisitors = hllSketches.length > 0
+    ? HyperLogLog.union(hllSketches).count()
+    : days.reduce((sum, d) => sum + d.total_unique_visitors, 0);
+
   for (const day of days) {
     cumPageviews += day.total_pageviews;
-    cumVisitors += day.total_unique_visitors;
     cumRequests += day.total_requests;
   }
 
@@ -113,6 +124,25 @@ export default function (): AnalyticsData {
       .sort((a, b) => b[1] - a[1])
       .slice(0, limit);
 
+  // Compute per-year unique visitors by merging HLL sketches within each year
+  const yearlyUniqueVisitors: Record<string, number> = {};
+  const yearGroups = new Map<string, string[]>();
+  for (const day of days) {
+    const year = day.date.slice(0, 4);
+    if (!yearGroups.has(year)) yearGroups.set(year, []);
+    if (day.visitor_hll) yearGroups.get(year)!.push(day.visitor_hll);
+  }
+  for (const [year, sketches] of yearGroups) {
+    yearlyUniqueVisitors[year] = sketches.length > 0
+      ? HyperLogLog.union(sketches).count()
+      : 0;
+  }
+
+  // Strip HLL sketches from days before sending to client (saves ~12KB/day)
+  for (const day of days) {
+    day.visitor_hll = null;
+  }
+
   return {
     days,
     cumulative: {
@@ -122,6 +152,7 @@ export default function (): AnalyticsData {
       first_date: days[days.length - 1]!.date,
       last_date: days[0]!.date,
     },
+    yearly_unique_visitors: yearlyUniqueVisitors,
     rolling30: {
       total_requests: totalReqs,
       total_pageviews: totalPvs,
@@ -145,6 +176,7 @@ function emptyData(): AnalyticsData {
       first_date: '',
       last_date: '',
     },
+    yearly_unique_visitors: {},
     rolling30: {
       total_requests: 0,
       total_pageviews: 0,

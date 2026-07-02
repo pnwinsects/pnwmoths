@@ -16,6 +16,7 @@
 
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { HyperLogLog } from './lib/hyperloglog.ts';
 
 // ---------------------------------------------------------------------------
 // Constants & env
@@ -90,6 +91,8 @@ export interface DailyAnalytics {
   total_pageviews: number;
   total_unique_visitors: number;
   total_bytes: number;
+  /** Base64-encoded HyperLogLog sketch for cross-day unique visitor merging. */
+  visitor_hll: string;
   pageviews: Array<{ path: string; count: number }>;
   requests_by_hour: number[];
   referrers: Array<{ domain: string; count: number }>;
@@ -285,6 +288,7 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
   const statusCounts = new Map<number, number>();
   const cacheCounts = new Map<string, number>();
   const uniqueIPs = new Set<string>();
+  const visitorHll = new HyperLogLog(14);
   let totalPageviews = 0;
   let totalBytes = 0;
 
@@ -297,6 +301,7 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
     // Track unique visitors by IP
     if (entry.remoteAddress) {
       uniqueIPs.add(entry.remoteAddress);
+      visitorHll.add(entry.remoteAddress);
     }
 
     // Hour bucket
@@ -345,6 +350,7 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
     total_pageviews: totalPageviews,
     total_unique_visitors: uniqueIPs.size,
     total_bytes: totalBytes,
+    visitor_hll: visitorHll.serialize(),
     pageviews: sortedTop(pathCounts, TOP_PAGES).map(([path, count]) => ({ path: path as string, count })),
     requests_by_hour: hourCounts,
     referrers: sortedTop(refererCounts, TOP_REFERRERS).map(([domain, count]) => ({ domain: domain as string, count })),
