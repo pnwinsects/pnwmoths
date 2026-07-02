@@ -11,6 +11,7 @@ import type { KeyFilterChangeDetail } from '../types/index.ts';
 import type { KeyMatrix, KeySpecies } from '../types/schemas.ts';
 import { validateKeyMatrix } from './key-matrix-cache.ts';
 import { computeMatching, buildQuestionGroups, type QuestionGroups } from '../_lib/key-filter.ts';
+import { isQuestionVisible, pruneHiddenSelections } from '../_lib/key-dependencies.ts';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -132,6 +133,11 @@ export class PnwmIdentify extends LitElement {
     if (!el) return;
     const data = JSON.parse(el.textContent ?? '{}') as { characters: Character[] };
     this._categoryMap = buildCategoryMap(data.characters);
+    // Build question groups from the inlined data so contingent-reveal visibility
+    // (isQuestionVisible) is resolvable immediately — before the async matrix
+    // fetch below resolves. Reassigned to the matrix's groups on fetch success
+    // (identical character set).
+    this._questionGroups = buildQuestionGroups(data.characters);
     // Async: fetch full matrix (bitsets) for computeMatching
     try {
       const res = await fetch(`${this._prefix}key-matrix.json`);
@@ -165,7 +171,13 @@ export class PnwmIdentify extends LitElement {
     } else {
       next.delete(charId);
     }
-    this._selection = new Map(this._selection).set(question, next);
+    const updated = new Map(this._selection).set(question, next);
+    // Deselecting a parent trigger hides its dependent questions; drop any
+    // orphaned child selections so they cannot silently constrain results
+    // (issue #97). No-op until _questionGroups is available.
+    this._selection = this._questionGroups
+      ? pruneHiddenSelections(updated, this._questionGroups)
+      : updated;
     this._dispatchFilterChange();
   }
 
@@ -287,7 +299,10 @@ export class PnwmIdentify extends LitElement {
         </h2>
         ${isKeyData ? html`<small>(Key data, 2015)</small>` : ''}
         <div ?hidden=${!expanded}>
-          ${[...questions.entries()].map(([q, chars]) => this._renderQuestion(q, chars))}
+          ${[...questions.entries()]
+            .filter(([q]) => !this._questionGroups
+              || isQuestionVisible(q, this._selection, this._questionGroups))
+            .map(([q, chars]) => this._renderQuestion(q, chars))}
         </div>
       </div>`;
   }

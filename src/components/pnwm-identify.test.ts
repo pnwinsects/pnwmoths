@@ -272,6 +272,55 @@ describe('_clearAll resets _matchedSpecies and _matchedCount (D-09) (Phase 42 RE
 // These tests FAIL until Task 2 exports characterImageSrc + helpImageAlt from pnwm-identify.ts.
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Issue #97: contingent character reveal — prune orphaned child selections
+// on parent deselect, keyed via real dependency question strings.
+// ---------------------------------------------------------------------------
+
+const DEP_FIXTURE: Character[] = [
+  makeChar({ id: 1, category: 'Forewing color and pattern', question: 'Does the forewing have a stigma?', state: 'Yes' }),
+  makeChar({ id: 2, category: 'Forewing color and pattern', question: 'Does the forewing have a stigma?', state: 'No' }),
+  makeChar({ id: 3, category: 'Forewing color and pattern', question: 'Is the stigma very large?', state: 'Yes' }),
+  makeChar({ id: 4, category: 'Forewing color and pattern', question: 'Is the stigma very large?', state: 'No' }),
+];
+
+function makeDepComponent(): PnwmIdentify {
+  const c = new PnwmIdentify();
+  c._categoryMap = buildCategoryMap(DEP_FIXTURE);
+  c._questionGroups = buildQuestionGroups(DEP_FIXTURE);
+  c._dispatchFilterChange = () => {}; // isolate selection mutation from the matrix/DOM
+  return c;
+}
+
+describe('contingent reveal: _onCheckboxChange prunes hidden child selections (#97)', () => {
+  test('child selection survives while the parent trigger is set', () => {
+    const c = makeDepComponent();
+    c._onCheckboxChange('Does the forewing have a stigma?', 1, true); // parent = Yes
+    c._onCheckboxChange('Is the stigma very large?', 3, true);        // child selected
+    assert.equal(c._selection.get('Is the stigma very large?')?.has(3), true);
+  });
+
+  test('deselecting the parent trigger drops the orphaned child selection', () => {
+    const c = makeDepComponent();
+    c._onCheckboxChange('Does the forewing have a stigma?', 1, true);
+    c._onCheckboxChange('Is the stigma very large?', 3, true);
+    c._onCheckboxChange('Does the forewing have a stigma?', 1, false); // parent unchecked
+    assert.equal(c._selection.has('Is the stigma very large?'), false);
+    assert.equal(c._selectionCountForCategory('Forewing color and pattern'), 0);
+  });
+
+  test('switching parent from Yes to No hides and clears the child', () => {
+    const c = makeDepComponent();
+    c._onCheckboxChange('Does the forewing have a stigma?', 1, true); // Yes
+    c._onCheckboxChange('Is the stigma very large?', 3, true);
+    c._onCheckboxChange('Does the forewing have a stigma?', 1, false);
+    c._onCheckboxChange('Does the forewing have a stigma?', 2, true); // No
+    assert.equal(c._selection.has('Is the stigma very large?'), false);
+    // parent "No" selection remains
+    assert.equal(c._selection.get('Does the forewing have a stigma?')?.has(2), true);
+  });
+});
+
 describe('characterImageSrc (Phase 43 RED)', () => {
   test('returns a CDN-absolute URL for a simple .webp filename', () => {
     const url = characterImageSrc('Black Forewing.webp');
