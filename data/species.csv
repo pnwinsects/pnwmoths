@@ -70,7 +70,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 1435,Lithophane,pexata,Plush-naped Pinion Moth,93-2545,"Grote, 1874",Noctuidae,lithophane-baileyi|lithophane-dilatocula,Noctuinae,
 1436,Andropolia,diversilineata,,93-2680,"(Grote, 1877)",Noctuidae,andropolia-theodori|polia-nugatis|fishia-yosemitae|sutyna-privata|rhizagrotis-stylata|rhizagrotis-albalis,Noctuinae,
 1437,Euxoa,idahoensis,,93-3435,"(Grote, 1878)",Noctuidae,euxoa-furtivus|euxoa-castanea|euxoa-costata|euxoa-absona,Noctuinae,
-1438,Euthyatira,lorata,,MONA 6239,(Grote),Geometridae,euthyatira-pudens,,
+1438,Euthyatira,lorata,,MONA 6239,(Grote),Drepanidae,euthyatira-pudens,Thyatirinae,
 1439,Heliolonche,modicella,,93-2184,"Grote, 1873",Noctuidae,heliolonche-pictipennis,Heliothinae,
 1440,Acronicta,innotata,Unmarked Dagger Moth,93-1428,"Guenée, 1852",Noctuidae,acronicta-vulpina,Acronictinae,
 1441,Sphinx,perelegans,Elegant Sphinx Moth,MONA 7805,"Hy. Edwards, 1874",Sphingidae,sphinx-vashti|sphinx-chersis,Sphinginae,

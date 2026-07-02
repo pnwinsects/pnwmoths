@@ -133,15 +133,15 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1191 in real data/key-matrix.json', () => {
-    // Was 1192 before Geometridae withholding removed euthyatira-lorata from the matrix.
+  test('meta.matchedSpecies === 1192 in real data/key-matrix.json', () => {
+    // euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoins the matrix.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1191,
-      `expected meta.matchedSpecies to be 1191 (post-Geometridae-withholding), got ${raw.meta.matchedSpecies}`
+      1192,
+      `expected meta.matchedSpecies to be 1192, got ${raw.meta.matchedSpecies}`
     );
   });
 });

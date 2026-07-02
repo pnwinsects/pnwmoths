@@ -64,21 +64,25 @@ test('stats: withheld families (Geometridae) are excluded from the species count
     skip_empty_lines: true,
   }) as Array<{ genus: string; species: string; family: string }>;
 
-  const narratives = narrativeSlugs();
-  const geometridaeWithNarrative = allRows.filter(
-    (r) =>
-      (r.family ?? '').trim().toLowerCase() === 'geometridae' &&
-      narratives.has(`${r.genus}-${r.species}`.toLowerCase()),
+  // The withholding gate must drop every Geometridae species from the shown set, so
+  // none can contribute to the narrative-based species count. This holds structurally
+  // even though no Geometridae currently has a narrative (Euthyatira lorata — formerly
+  // the only one — was reclassified to Drepanidae in #73).
+  const geometridae = allRows.filter(
+    (r) => (r.family ?? '').trim().toLowerCase() === 'geometridae',
   );
-  assert.ok(
-    geometridaeWithNarrative.length > 0,
-    'Expected at least one Geometridae narrative to make this test meaningful',
+  assert.ok(geometridae.length > 0, 'Expected Geometridae rows in species.csv');
+  const shownSlugs = new Set(shownSpecies().map((sp) => sp.slug));
+  const leaked = geometridae.filter((r) =>
+    shownSlugs.has(`${r.genus}-${r.species}`.toLowerCase()),
   );
+  assert.strictEqual(leaked.length, 0, 'No Geometridae species may appear in the shown set');
 
   const { default: getStats } = await import('./stats.ts');
   const s = await getStats();
 
   // Counting Geometridae narratives would inflate the species count; the gate must drop them.
+  const narratives = narrativeSlugs();
   const expected = shownSpecies().filter((sp) => narratives.has(sp.slug)).length;
   assert.strictEqual(s.species, expected);
 });
