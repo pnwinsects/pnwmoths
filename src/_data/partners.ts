@@ -1,0 +1,37 @@
+// Site-wide collaborators and funders shown in the footer banner (issue #64).
+// Authoritative source: https://pnwmoths.biol.wwu.edu/about-us/site-credits/
+// Logo PNGs live in src/images/logos/ (passthrough-copied to /images/logos/).
+
+export interface Partner {
+  name: string;
+  url: string;
+  logo: string;
+}
+
+export interface Partners {
+  collaborators: Partner[];
+  funders: Partner[];
+}
+
+const collaborators: Partner[] = [
+  { name: 'Western Washington University', url: 'https://www.biol.wwu.edu/biology/', logo: 'western.png' },
+  { name: 'M.T. James Entomological Collection, Washington State University', url: 'https://entomology.wsu.edu/outreach/m-t-james-museum/', logo: 'wsu.png' },
+  { name: 'Oregon State Arthropod Collection', url: 'https://osac.science.oregonstate.edu/', logo: 'osu.png' },
+  { name: 'University of Idaho Entomology', url: 'https://www.uidaho.edu/cals/pses/entomology', logo: 'vandals.png' },
+  { name: 'Orma J. Smith Museum of Natural History, College of Idaho', url: 'https://www.collegeofidaho.edu/cultural-institutions/orma-j-smith-museum-natural-history', logo: 'CI.png' },
+  { name: 'Canadian National Collection of Insects, Arachnids and Nematodes', url: 'https://www.canacoll.org/', logo: 'canacoll.png' },
+  { name: 'Oregon Department of Agriculture', url: 'https://www.oregon.gov/oda', logo: 'orAg.png' },
+  { name: 'Royal British Columbia Museum', url: 'https://www.royalbcmuseum.bc.ca/', logo: 'RBCM.png' },
+  { name: 'Washington State Department of Agriculture', url: 'https://agr.wa.gov/', logo: 'wsda.png' },
+  { name: 'Lucid', url: 'https://www.lucidcentral.com/', logo: 'lucid.png' },
+  { name: 'Beaty Biodiversity Museum, University of British Columbia', url: 'https://www.beatymuseum.ubc.ca/', logo: 'ubc.png' },
+];
+
+const funders: Partner[] = [
+  { name: 'National Science Foundation', url: 'https://www.nsf.gov/', logo: 'nsf.png' },
+  { name: 'American Recovery and Reinvestment Act', url: 'https://www.recovery.gov/', logo: 'recovery.png' },
+];
+
+export default function (): Partners {
+  return { collaborators, funders };
+}

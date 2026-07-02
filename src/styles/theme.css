@@ -56,6 +56,76 @@ body > footer a {
   color: #888888;
 }
 
+/* --- Partners banner (collaborators + funders, issue #64) --- */
+
+.partners-banner {
+  border-top: 1px solid #d9cf9e;
+  background-color: #ece0ab;
+  padding: 24px;
+}
+
+.partners-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.partners-group + .partners-group {
+  margin-top: 20px;
+}
+
+.partners-heading {
+  font-family: 'Spinnaker', 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 0 0 12px;
+  color: #4a4a2f;
+}
+
+.partners-logos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px 28px;
+}
+
+.partners-logos li {
+  margin: 0;
+  padding: 0;
+}
+
+.partners-logos a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.partners-logos img {
+  display: block;
+  height: 48px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  transition: opacity 0.15s ease;
+}
+
+.partners-logos a:hover img {
+  opacity: 0.75;
+}
+
+@media (max-width: 600px) {
+  .partners-logos {
+    gap: 16px 20px;
+  }
+
+  .partners-logos img {
+    height: 36px;
+    max-width: 120px;
+  }
+}
+
 /* --- Page background --- */
 
 html, body {
