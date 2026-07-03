@@ -181,8 +181,8 @@ export type KeySpecies = z.infer<typeof KeySpeciesSchema>;
 // KeyMatrixMetaSchema (Phase 40) — build provenance; also enables "showing N of 1,228" UI affordance
 export const KeyMatrixMetaSchema = z.object({
   totalKeySpecies:  z.number(),    // 1,228 — all species in key.csv including unmatched
-  matchedSpecies:   z.number(),    // 1,192 — species resolved to site slugs (in matrix)
-  unmatchedSpecies: z.number(),    // 36 = 1,228 − 1,192
+  matchedSpecies:   z.number(),    // 1,193 — species resolved to site slugs (in matrix)
+  unmatchedSpecies: z.number(),    // 35 = 1,228 − 1,193
   generatedAt:      z.string(),    // ISO 8601 timestamp from build-key.ts
 });
 export type KeyMatrixMeta = z.infer<typeof KeyMatrixMetaSchema>;
