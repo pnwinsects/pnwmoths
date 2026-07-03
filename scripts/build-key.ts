@@ -350,7 +350,7 @@ export async function main(): Promise<void> {
   const artifact = KeyMatrixSchema.parse({
     meta: {
       totalKeySpecies:  speciesBinomials.length,    // 1,228 (all key.csv binomials incl. unmatched)
-      matchedSpecies:   matchedSlugs.length,         // 1,192 (resolved to site slugs)
+      matchedSpecies:   matchedSlugs.length,         // 1,193 (resolved to site slugs)
       unmatchedSpecies: unmatchedBinomials.length,   // 36
       generatedAt:      new Date().toISOString(),
     },

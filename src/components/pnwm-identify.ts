@@ -357,7 +357,7 @@ export class PnwmIdentify extends LitElement {
             .matchedSpecies=${this._matchedSpecies}
             .hasSelection=${this._hasSelection()}
             .matchedCount=${this._matchedCount}
-            .totalCount=${this._keyMatrix?.meta.matchedSpecies ?? 1192}
+            .totalCount=${this._keyMatrix?.meta.matchedSpecies ?? 1193}
             .pathPrefix=${this._prefix}
             @pnwm-key-clear-all=${() => this._clearAll()}
           ></key-results-grid>
