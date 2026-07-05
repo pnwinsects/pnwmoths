@@ -1,6 +1,7 @@
 _site/
 _site_baseline/
 data/parquet/
+data/analytics/*.json
 node_modules/
 var/
 .lycheecache
