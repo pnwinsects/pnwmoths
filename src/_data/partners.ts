@@ -15,11 +15,11 @@ export interface Partners {
 
 const collaborators: Partner[] = [
   { name: 'Western Washington University', url: 'https://www.biol.wwu.edu/biology/', logo: 'western.png' },
-  { name: 'M.T. James Entomological Collection, Washington State University', url: 'https://entomology.wsu.edu/outreach/m-t-james-museum/', logo: 'wsu.png' },
-  { name: 'Oregon State Arthropod Collection', url: 'https://osac.science.oregonstate.edu/', logo: 'osu.png' },
-  { name: 'University of Idaho Entomology', url: 'https://www.uidaho.edu/cals/pses/entomology', logo: 'vandals.png' },
-  { name: 'Orma J. Smith Museum of Natural History, College of Idaho', url: 'https://www.collegeofidaho.edu/cultural-institutions/orma-j-smith-museum-natural-history', logo: 'CI.png' },
-  { name: 'Canadian National Collection of Insects, Arachnids and Nematodes', url: 'https://www.canacoll.org/', logo: 'canacoll.png' },
+  { name: 'M.T. James Entomological Collection, Washington State University', url: 'https://museum.entomology.wsu.edu/', logo: 'wsu.png' },
+  { name: 'Oregon State Arthropod Collection', url: 'https://osac.oregonstate.edu/', logo: 'osu.png' },
+  { name: 'University of Idaho Entomology', url: 'https://www.uidaho.edu/agricultural-life-sciences/research-extension/entomology-museum', logo: 'vandals.png' },
+  { name: 'Orma J. Smith Museum of Natural History, College of Idaho', url: 'https://collegeofidaho.edu/academics/museum/', logo: 'CI.png' },
+  { name: 'Canadian National Collection of Insects, Arachnids and Nematodes', url: 'https://agriculture.canada.ca/en/science/collections/canadian-national-collection-insects-arachnids-and-nematodes', logo: 'canacoll.png' },
   { name: 'Oregon Department of Agriculture', url: 'https://www.oregon.gov/oda', logo: 'orAg.png' },
   { name: 'Royal British Columbia Museum', url: 'https://www.royalbcmuseum.bc.ca/', logo: 'RBCM.png' },
   { name: 'Washington State Department of Agriculture', url: 'https://agr.wa.gov/', logo: 'wsda.png' },
