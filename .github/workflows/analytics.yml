@@ -59,12 +59,23 @@ jobs:
             git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${branch}"
             # Branch protection prevents direct pushes to main; open a PR
             # instead and enable auto-merge so it lands once "build" passes.
-            if ! gh pr view "${branch}" --json number -q '.number' 2>/dev/null | grep -q .; then
-              gh pr create \
+            pr_number="$(gh pr view "${branch}" --json number -q '.number' 2>/dev/null || true)"
+            if [ -z "${pr_number}" ]; then
+              if ! pr_number="$(gh pr create \
                 --title "data: add analytics for ${latest}" \
                 --body "Automated nightly analytics data update." \
                 --head "${branch}" \
-                --base main
+                --base main \
+                --json number \
+                -q '.number' 2>&1)"; then
+                if printf '%s\n' "${pr_number}" | grep -Fq "GitHub Actions is not permitted to create or approve pull requests"; then
+                  echo "::warning::Pushed ${branch}, but GITHUB_TOKEN cannot open pull requests in this repository. Create one manually or enable 'Allow GitHub Actions to create and approve pull requests'."
+                  echo "Compare URL: https://github.com/${GITHUB_REPOSITORY}/compare/main...${branch}?expand=1"
+                  exit 0
+                fi
+                printf '%s\n' "${pr_number}" >&2
+                exit 1
+              fi
             fi
-            gh pr merge --auto --squash "${branch}"
+            gh pr merge --auto --squash "${pr_number}"
           fi
