@@ -63,10 +63,10 @@ such as this label:
 ![Example specimen label](images/label-example.jpg)
 
 The principal sources to obtain coordinates for these records were official
-Government websites
-([USGS](https://geonames.usgs.gov/pls/gnispublic/f?p=132:1:2715376012909158)
+Government websites (the
+[USGS GNIS Domestic Names Search](https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names)
 and the
-[Geographic Names Board of Canada](https://www.nrcan.gc.ca/earth-sciences/geography-boundary/geographical-name/11680)).
+[Government of Canada place names search](https://geonames.nrcan.gc.ca/search-place-names/search)).
 For localities such as Corvallis, Moscow, Portland, Pullman, Seattle, Vancouver,
 or Victoria and any label that was within 3 miles of these towns, the **official
 latitude/longitude of the town was used**. Most of these data were for older

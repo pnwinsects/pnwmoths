@@ -2,6 +2,7 @@ import { EleventyRenderPlugin } from "@11ty/eleventy";
 import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve, isAbsolute } from "node:path";
+import { pathToFileURL } from "node:url";
 import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
@@ -38,7 +39,7 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
       if (filePath.endsWith(".test.ts")) return undefined;
       // Defensive: ensure absolute path for import() — Eleventy may pass project-relative
       const absolutePath = isAbsolute(filePath) ? filePath : resolve(process.cwd(), filePath);
-      const m = await import(absolutePath) as { default: unknown };
+      const m = await import(pathToFileURL(absolutePath).href) as { default: unknown };
       const exported = m.default;
       return typeof exported === "function" ? exported() : exported;
     },
