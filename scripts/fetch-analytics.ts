@@ -113,6 +113,19 @@ function redact(msg: string): string {
     : msg;
 }
 
+/** Bunny keeps CDN logs for this many hours (3 days). */
+const RETENTION_HOURS = 72;
+
+/**
+ * Return true when the given date's midnight-UTC start falls within
+ * Bunny's rolling log-retention window.
+ */
+export function isWithinRetentionWindow(date: string, now: Date = new Date()): boolean {
+  const from = new Date(`${date}T00:00:00Z`);
+  const hoursAgo = (now.getTime() - from.getTime()) / (1000 * 60 * 60);
+  return hoursAgo <= RETENTION_HOURS;
+}
+
 /**
  * Compute yesterday's date in UTC, or parse ANALYTICS_DATE override.
  */
@@ -372,6 +385,11 @@ async function main(): Promise<void> {
 
   const date = resolveDate(process.env['ANALYTICS_DATE']);
   console.log(`📊 Fetching analytics for ${date}…`);
+
+  if (!isWithinRetentionWindow(date)) {
+    console.warn(`⚠️  ${date} is outside Bunny's ${RETENTION_HOURS / 24}-day log retention window. No logs available — skipping.`);
+    process.exit(0);
+  }
 
   const pullZoneId = await resolvePullZoneId();
   console.log(`  Pull zone: ${pullZoneId}`);

@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   resolveDate,
+  isWithinRetentionWindow,
   isPageview,
   stripQueryString,
   extractRefererDomain,
@@ -42,6 +43,34 @@ function entry(overrides: Record<string, unknown> = {}): {
     ...overrides,
   };
 }
+
+// ---------------------------------------------------------------------------
+// isWithinRetentionWindow
+// ---------------------------------------------------------------------------
+
+describe('isWithinRetentionWindow', () => {
+  it('returns true for yesterday', () => {
+    const now = new Date('2026-07-05T08:00:00Z');
+    assert.equal(isWithinRetentionWindow('2026-07-04', now), true);
+  });
+
+  it('returns true for exactly 72 hours ago (boundary is inclusive)', () => {
+    // now = 2026-07-05T00:00:00Z, from = 2026-07-02T00:00:00Z → exactly 72h
+    const now = new Date('2026-07-05T00:00:00Z');
+    assert.equal(isWithinRetentionWindow('2026-07-02', now), true);
+  });
+
+  it('returns false for a date whose midnight-start is more than 72 hours ago', () => {
+    // now = 2026-07-05T08:00:00Z, from = 2026-07-02T00:00:00Z → 80h ago
+    const now = new Date('2026-07-05T08:00:00Z');
+    assert.equal(isWithinRetentionWindow('2026-07-02', now), false);
+  });
+
+  it('returns false for a date 4 days ago', () => {
+    const now = new Date('2026-07-05T08:00:00Z');
+    assert.equal(isWithinRetentionWindow('2026-07-01', now), false);
+  });
+});
 
 // ---------------------------------------------------------------------------
 // resolveDate
