@@ -12,23 +12,20 @@ on:
         type: string
 
 permissions:
-  contents: write
+  contents: read
   actions: write
-  pull-requests: write
 
 concurrency:
   group: analytics
   cancel-in-progress: false
 
 jobs:
-  fetch:
+  fetch-and-upload:
     runs-on: ubuntu-latest
     environment: production
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
-          # Push below authenticates with an explicit token instead of the
-          # persisted credential, so keep the token out of .git/config.
           persist-credentials: false
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
@@ -42,34 +39,13 @@ jobs:
           BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY }}
           ANALYTICS_DATE: ${{ inputs.date || '' }}
 
-      - name: Commit analytics data
+      - name: Upload analytics to Bunny Storage
+        run: node scripts/upload-analytics.ts
         env:
-          # Use a PAT (if configured) so PR create/merge works even when
-          # repository policy blocks pull-request writes for GITHUB_TOKEN.
-          GH_TOKEN: ${{ secrets.ANALYTICS_PR_TOKEN || secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/analytics/
-          if git diff --cached --quiet; then
-            echo "No new analytics data to commit."
-          else
-            latest="$(basename "$(ls -t data/analytics/*.json | head -1)" .json)"
-            branch="data/analytics-${latest}"
-            git checkout -b "${branch}"
-            git commit -m "data: add analytics for ${latest}"
-            git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${branch}"
-            # Branch protection prevents direct pushes to main; open a PR
-            # instead and enable auto-merge so it lands once "build" passes.
-            pr_number="$(gh pr view "${branch}" --json number -q '.number' 2>/dev/null || true)"
-            if [ -z "${pr_number}" ]; then
-              pr_number="$(gh pr create \
-                --title "data: add analytics for ${latest}" \
-                --body "Automated nightly analytics data update." \
-                --head "${branch}" \
-                --base main \
-                --json number \
-                -q '.number')"
-            fi
-            gh pr merge --auto --squash "${pr_number}"
-          fi
+          BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
+          ANALYTICS_DATE: ${{ inputs.date || '' }}
+
+      - name: Trigger production deploy
+        run: gh workflow run production.yml
+        env:
+          GH_TOKEN: ${{ github.token }}

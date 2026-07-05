@@ -3,13 +3,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # GITHUB_TOKEN merges do not trigger the push event above, so we also
-  # listen for the nightly analytics PR being merged.
-  pull_request:
-    types: [closed]
-    branches: [main]
-    paths:
-      - 'data/analytics/**'
 
 permissions:
   contents: read
@@ -20,7 +13,6 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -47,6 +39,10 @@ jobs:
           path: .lycheecache
           key: lychee-cache-${{ github.run_id }}
           restore-keys: lychee-cache-
+      - name: Download analytics from Bunny Storage
+        run: node scripts/download-analytics.ts
+        env:
+          BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
       - name: Build site
         run: npm run build:site
       - name: Check links (non-blocking)
