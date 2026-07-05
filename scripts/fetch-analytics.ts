@@ -62,7 +62,7 @@ interface LogEntry {
   countryCode: string | null;
   referer: string | null;
   userAgent: string | null;
-  remoteAddress: string | null;
+  remoteIp: string | null;
   cacheStatus: string;
   bytesSent: number;
   scheme: string;
@@ -312,9 +312,9 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
     totalBytes += entry.bytesSent;
 
     // Track unique visitors by IP
-    if (entry.remoteAddress) {
-      uniqueIPs.add(entry.remoteAddress);
-      visitorHll.add(entry.remoteAddress);
+    if (entry.remoteIp) {
+      uniqueIPs.add(entry.remoteIp);
+      visitorHll.add(entry.remoteIp);
     }
 
     // Hour bucket
