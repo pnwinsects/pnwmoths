@@ -42,7 +42,7 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 function redact(msg: string): string {
   return BUNNY_STORAGE_PASSWORD
-    ? msg.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]')
+    ? msg.split(BUNNY_STORAGE_PASSWORD).join('[REDACTED]')
     : msg;
 }
 
@@ -70,14 +70,24 @@ export function listLocalFiles(dir: string): string[] {
 async function putFile(filename: string, body: Uint8Array): Promise<void> {
   const delays = [2000, 4000, 8000, 16000, 32000];
   for (let attempt = 0; attempt <= delays.length; attempt++) {
-    const res = await fetch(analyticsStorageUrl(filename), {
-      method: 'PUT',
-      headers: {
-        AccessKey: BUNNY_STORAGE_PASSWORD,
-        'Content-Type': 'application/json',
-      },
-      body,
-    });
+    let res: Response;
+    try {
+      res = await fetch(analyticsStorageUrl(filename), {
+        method: 'PUT',
+        headers: {
+          AccessKey: BUNNY_STORAGE_PASSWORD,
+          'Content-Type': 'application/json',
+        },
+        body,
+        signal: AbortSignal.timeout(30_000),
+      });
+    } catch (err) {
+      if (attempt >= delays.length) throw err;
+      const waitMs = delays[attempt]!;
+      console.warn(`  ⏳ Network error on ${filename}, retrying in ${waitMs / 1000}s`);
+      await sleep(waitMs);
+      continue;
+    }
 
     if (res.status === 429 || res.status >= 500) {
       if (attempt >= delays.length) {

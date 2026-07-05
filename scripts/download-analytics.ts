@@ -39,7 +39,7 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 function redact(msg: string): string {
   return BUNNY_STORAGE_PASSWORD
-    ? msg.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]')
+    ? msg.split(BUNNY_STORAGE_PASSWORD).join('[REDACTED]')
     : msg;
 }
 
@@ -72,9 +72,17 @@ interface StorageObject {
 async function fetchWithRetry(url: string, label: string): Promise<Response> {
   const delays = [2000, 4000, 8000, 16000];
   for (let attempt = 0; attempt <= delays.length; attempt++) {
-    const res = await fetch(url, {
-      headers: { AccessKey: BUNNY_STORAGE_PASSWORD, Accept: 'application/json' },
-    });
+    let res: Response;
+    try {
+      res = await fetch(url, {
+        headers: { AccessKey: BUNNY_STORAGE_PASSWORD, Accept: 'application/json' },
+        signal: AbortSignal.timeout(30_000),
+      });
+    } catch (err) {
+      if (attempt >= delays.length) throw err;
+      await sleep(delays[attempt]!);
+      continue;
+    }
 
     if (res.status === 429 || res.status >= 500) {
       if (attempt >= delays.length) {
