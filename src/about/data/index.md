@@ -66,7 +66,7 @@ The principal sources to obtain coordinates for these records were official
 Government websites (the
 [USGS GNIS Domestic Names Search](https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names)
 and the
-[Government of Canada place names search](https://geonames.nrcan.gc.ca/search-place-names/search)).
+[Geographical Names Board of Canada place names search](https://geonames.nrcan.gc.ca/search-place-names/search)).
 For localities such as Corvallis, Moscow, Portland, Pullman, Seattle, Vancouver,
 or Victoria and any label that was within 3 miles of these towns, the **official
 latitude/longitude of the town was used**. Most of these data were for older
@@ -108,7 +108,7 @@ The available filters include:
    for examining whether species have had recent changes in their distribution,
    or to see the effect of elevation on seasonality.
 
-To view the **data for a particular specimen record**, simply click on a dot on
+To view the **data for a particular record**, simply click on a dot on
 the map. That will open an information popup in which you can view information
 about the site where the specimen was found, the date of collection, the
 collector, and the collection in which the specimen can be found, along with any
