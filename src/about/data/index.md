@@ -121,3 +121,23 @@ the collection manager and/or curator of the collection for which you would like
 data. Although these collections gave us permission to use their data to populate
 our distribution maps, we are not free to distribute large data files of specific
 collection records in spreadsheet format.
+
+## Data Quality and Limitations
+
+- Records outside the PNW coordinate bounds (approximately 42–60° N latitude,
+  110–139° W longitude) are excluded — often caused by swapped lat/lon values.
+- Records missing a valid species identification, coordinates, or state/province
+  are excluded from the site.
+- Some families (currently Geometridae) have their occurrence records withheld
+  while editorial review is in progress.
+- Geographic coverage is uneven — areas near research institutions tend to be
+  better-represented.
+- Coordinate precision varies: some points are exact trap sites, others represent
+  the center of a town.
+
+## How Visualizations Are Derived
+
+- **Distribution maps** plot each record's georeferenced coordinates directly on
+  the map — no spatial aggregation or smoothing is applied.
+- **Phenology charts** show the count of records per calendar month across all
+  years combined, illustrating when adults are most frequently encountered.
