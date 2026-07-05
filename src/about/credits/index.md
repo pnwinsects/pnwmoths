@@ -53,7 +53,7 @@ Northwest Moths possible.
 - [Jason Williams](https://github.com/WilliamsJason)
 
 ### Designer
-- [Jennifer Anderson](https://www.linkedin.com/in/jenniferandersondesigns)
+- Jennifer Anderson
 
 ### System Administrators
 - Todd Epps
@@ -65,7 +65,7 @@ Northwest Moths possible.
 - [John Huddleston](https://github.com/huddlej)
 
 ## Design Team
-- [Jennifer Anderson](https://www.linkedin.com/in/jenniferandersondesigns)
+- Jennifer Anderson
 - [Philip Bjorge](https://www.philipbjorge.com)
 - Lars Crabo
 - Merrill Peterson
@@ -193,21 +193,21 @@ institutions for providing access to their collections and/or databases
 &gt;5,000 records):
 
 - [American Museum of Natural History](https://research.amnh.org/iz/collections/lepidoptera) (AMNH)
-- \*[Canadian National Collection](https://canacoll.org/) (CNC)
-- \*\*[M.T. James Entomological Collection](https://public.wsu.edu/~zack/JEM.html) (WSU)
-- [McChord Air Force Base](https://www.lewis-mcchord.army.mil/jblm/) (JBLM)
-- \*[Montana Department of Agriculture](https://agr.mt.gov/agr/Programs/PestMgt/) (MDA)
+- \*[Canadian National Collection](https://agriculture.canada.ca/en/science/collections/canadian-national-collection-insects-arachnids-and-nematodes) (CNC)
+- \*\*[M.T. James Entomological Collection](https://museum.entomology.wsu.edu/) (WSU)
+- [McChord Air Force Base](https://home.army.mil/lewis-mcchord/) (JBLM)
+- \*[Montana Department of Agriculture](https://agr.mt.gov/Pests) (MDA)
 - \*[Oregon Department of Agriculture](https://www.oregon.gov/ODA/PLANT/IPPM/oda_museum_home.shtml) (ODAC)
-- \*\*[Oregon State Arthropod Collection](https://osac.science.oregonstate.edu/) (OSAC)
-- [O.J. Smith Museum of Natural History](https://www.collegeofidaho.edu/museum) (CID)
+- \*\*[Oregon State Arthropod Collection](https://osac.oregonstate.edu/) (OSAC)
+- [O.J. Smith Museum of Natural History](https://collegeofidaho.edu/academics/museum/) (CID)
 - \*[Royal British Columbia Museum](https://www.royalbcmuseum.bc.ca/Natural_History/Insects-and-Relatives.aspx) (RBCM)
-- [Strickland Museum, University of Alberta](https://www.biology.ualberta.ca/uasm/) (UASM)
-- [United States National Museum](https://entomology.si.edu/) (USNM)
-- \*\*[University of British Columbia](https://www.beatymuseum.ubc.ca/collections/entomological) (UBC)
+- [Strickland Museum, University of Alberta](https://www.ualberta.ca/en/museums/museum-collections/eh-strickland-entomological-museum.html) (UASM)
+- [United States National Museum](https://naturalhistory.si.edu/research/entomology/collections-overview/lepidoptera) (USNM)
+- \*\*[University of British Columbia](https://beatymuseum.ubc.ca/research-2/collections/spencer-entomological-collection/) (UBC)
 - [Utah State University](https://www.biology.usu.edu/htm/research/insect-collection/) (EMUS)
-- [Washington State Department of Agriculture](https://agr.wa.gov/AboutWSDA/Divisions/PlantProtection.aspx) (WSDA)
+- [Washington State Department of Agriculture](https://agr.wa.gov/departments/insects-pests-and-weeds) (WSDA)
 - \*[Western Washington University](https://www.biol.wwu.edu/biology/) (WWU)
-- \*\*[William F. Barr Museum, University of Idaho](https://www.uidaho.edu/cals/pses/entomology) (WFBM)
+- \*\*[William F. Barr Museum, University of Idaho](https://www.uidaho.edu/agricultural-life-sciences/research-extension/entomology-museum) (WFBM)
 
 In addition, the following individuals have generously provided data from and/or
 access to their private collections of specimens and/or photographs:
