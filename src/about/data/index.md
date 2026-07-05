@@ -95,7 +95,7 @@ the criteria you have used for filtering the data, as well as the phenological
 
 The available filters include:
 
-![Filter panel on a species account page](images/filter-panel.jpg)
+![Filter panel on a species account page](images/filter-panel.png)
 
 1. The **State** and **County** filters let you see the data from a particular
    geographic area.
@@ -114,7 +114,7 @@ about the site where the specimen was found, the date of collection, the
 collector, and the collection in which the specimen can be found, along with any
 notes accompanying that specimen.
 
-![Example record popup on the map](images/record-popup.jpg)
+![Example record popup on the map](images/record-popup.png)
 
 **If you are interested in accessing a large amount of data**, please contact
 the collection manager and/or curator of the collection for which you would like
