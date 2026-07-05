@@ -21,7 +21,7 @@ function entry(overrides: Record<string, unknown> = {}): {
   countryCode: string | null;
   referer: string | null;
   userAgent: string | null;
-  remoteAddress: string | null;
+  remoteIp: string | null;
   cacheStatus: string;
   bytesSent: number;
   scheme: string;
@@ -35,7 +35,7 @@ function entry(overrides: Record<string, unknown> = {}): {
     countryCode: 'US',
     referer: null,
     userAgent: 'Mozilla/5.0',
-    remoteAddress: '192.168.1.1',
+    remoteIp: '192.168.1.1',
     cacheStatus: 'HIT',
     bytesSent: 5000,
     scheme: 'https',
@@ -311,20 +311,20 @@ describe('aggregate', () => {
 
   it('counts unique visitors by IP address', () => {
     const entries = [
-      entry({ remoteAddress: '1.2.3.4' }),
-      entry({ remoteAddress: '1.2.3.4' }),
-      entry({ remoteAddress: '5.6.7.8' }),
-      entry({ remoteAddress: '9.10.11.12' }),
+      entry({ remoteIp: '1.2.3.4' }),
+      entry({ remoteIp: '1.2.3.4' }),
+      entry({ remoteIp: '5.6.7.8' }),
+      entry({ remoteIp: '9.10.11.12' }),
     ];
     const result = aggregate(entries, date, from, to);
     assert.equal(result.total_unique_visitors, 3);
   });
 
-  it('handles null remoteAddress gracefully', () => {
+  it('handles null remoteIp gracefully', () => {
     const entries = [
-      entry({ remoteAddress: null }),
-      entry({ remoteAddress: '1.2.3.4' }),
-      entry({ remoteAddress: null }),
+      entry({ remoteIp: null }),
+      entry({ remoteIp: '1.2.3.4' }),
+      entry({ remoteIp: null }),
     ];
     const result = aggregate(entries, date, from, to);
     assert.equal(result.total_unique_visitors, 1);
@@ -332,8 +332,8 @@ describe('aggregate', () => {
 
   it('returns zero unique visitors when no IPs present', () => {
     const entries = [
-      entry({ remoteAddress: null }),
-      entry({ remoteAddress: null }),
+      entry({ remoteIp: null }),
+      entry({ remoteIp: null }),
     ];
     const result = aggregate(entries, date, from, to);
     assert.equal(result.total_unique_visitors, 0);
@@ -341,8 +341,8 @@ describe('aggregate', () => {
 
   it('includes a visitor_hll sketch in output', () => {
     const entries = [
-      entry({ remoteAddress: '1.2.3.4' }),
-      entry({ remoteAddress: '5.6.7.8' }),
+      entry({ remoteIp: '1.2.3.4' }),
+      entry({ remoteIp: '5.6.7.8' }),
     ];
     const result = aggregate(entries, date, from, to);
     assert.ok(result.visitor_hll, 'visitor_hll should be present');
@@ -352,3 +352,4 @@ describe('aggregate', () => {
     assert.equal(decoded.length, 16384);
   });
 });
+
