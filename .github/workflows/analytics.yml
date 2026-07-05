@@ -44,7 +44,9 @@ jobs:
 
       - name: Commit analytics data
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Use a PAT (if configured) so PR create/merge works even when
+          # repository policy blocks pull-request writes for GITHUB_TOKEN.
+          GH_TOKEN: ${{ secrets.ANALYTICS_PR_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -59,12 +61,15 @@ jobs:
             git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${branch}"
             # Branch protection prevents direct pushes to main; open a PR
             # instead and enable auto-merge so it lands once "build" passes.
-            if ! gh pr view "${branch}" --json number -q '.number' 2>/dev/null | grep -q .; then
-              gh pr create \
+            pr_number="$(gh pr view "${branch}" --json number -q '.number' 2>/dev/null || true)"
+            if [ -z "${pr_number}" ]; then
+              pr_number="$(gh pr create \
                 --title "data: add analytics for ${latest}" \
                 --body "Automated nightly analytics data update." \
                 --head "${branch}" \
-                --base main
+                --base main \
+                --json number \
+                -q '.number')"
             fi
-            gh pr merge --auto --squash "${branch}"
+            gh pr merge --auto --squash "${pr_number}"
           fi
