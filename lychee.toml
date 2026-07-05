@@ -9,5 +9,10 @@ accept = ["100..=103", "200..=299", "429"]
 # linked per species from data/species-links.csv (~2400 links). Excluded from
 # validation to keep the link check fast and non-flaky — these third-party hosts
 # rate-limit.
-exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org"]
+#
+# Institution hosts on the Site Credits page (Smithsonian, AMNH, U. Alberta,
+# JBLM/.mil) sit behind WAF/bot-protection that intermittently returns 403 to
+# automated checkers while serving 200 to browsers. Excluded to keep the link
+# check non-flaky; these URLs are verified to load in a browser.
+exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]
