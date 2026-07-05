@@ -57,7 +57,11 @@ Township, Range, and Section were provided on labels, with no locality name. In
 such cases, that was used as the locality name in our database.
 
 The majority of the specimens we databased for this project had neither
-latitude/longitude nor Township, Range, and Section information on their labels.
+latitude/longitude nor Township, Range, and Section information on their labels,
+such as this label:
+
+![Example specimen label](images/label-example.jpg)
+
 The principal sources to obtain coordinates for these records were official
 Government websites
 ([USGS](https://geonames.usgs.gov/pls/gnispublic/f?p=132:1:2715376012909158)
@@ -91,6 +95,8 @@ the criteria you have used for filtering the data, as well as the phenological
 
 The available filters include:
 
+![Filter panel on a species account page](images/filter-panel.jpg)
+
 1. The **State** and **County** filters let you see the data from a particular
    geographic area.
 2. The **Collection** filter allows you to see the data from a specific moth
@@ -107,6 +113,8 @@ the map. That will open an information popup in which you can view information
 about the site where the specimen was found, the date of collection, the
 collector, and the collection in which the specimen can be found, along with any
 notes accompanying that specimen.
+
+![Example record popup on the map](images/record-popup.jpg)
 
 **If you are interested in accessing a large amount of data**, please contact
 the collection manager and/or curator of the collection for which you would like
