@@ -98,6 +98,9 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
 
+  // About page images (label examples, screenshots)
+  eleventyConfig.addPassthroughCopy("src/about/data/images");
+
   // Vite plugin: bundles client-side JS components
   // The writeBundle hook fires after Vite finishes writing to _site/, so images copied here
   // are not wiped (unlike eleventy.after, which fires in parallel with Vite).
