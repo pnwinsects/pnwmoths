@@ -3,6 +3,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # GITHUB_TOKEN merges do not trigger the push event above, so we also
+  # listen for the nightly analytics PR being merged.
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths:
+      - 'data/analytics/**'
 
 permissions:
   contents: read
@@ -13,6 +20,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: production
     steps:

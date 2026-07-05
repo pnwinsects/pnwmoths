@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write
   actions: write
+  pull-requests: write
 
 concurrency:
   group: analytics
@@ -52,9 +53,18 @@ jobs:
             echo "No new analytics data to commit."
           else
             latest="$(basename "$(ls -t data/analytics/*.json | head -1)" .json)"
+            branch="data/analytics-${latest}"
+            git checkout -b "${branch}"
             git commit -m "data: add analytics for ${latest}"
-            git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
-            # A push made with GITHUB_TOKEN does not trigger the production
-            # deploy workflow, so dispatch it explicitly to publish the new data.
-            gh workflow run production.yml --ref main
+            git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${branch}"
+            # Branch protection prevents direct pushes to main; open a PR
+            # instead and enable auto-merge so it lands once "build" passes.
+            if ! gh pr view "${branch}" --json number -q '.number' 2>/dev/null | grep -q .; then
+              gh pr create \
+                --title "data: add analytics for ${latest}" \
+                --body "Automated nightly analytics data update." \
+                --head "${branch}" \
+                --base main
+            fi
+            gh pr merge --auto --squash "${branch}"
           fi
