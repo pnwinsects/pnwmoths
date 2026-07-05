@@ -36,6 +36,34 @@
       {{ content | safe }}
     </div>
   </main>
+  <section class="partners-banner" data-pagefind-ignore>
+    <div class="partners-inner">
+      <div class="partners-group">
+        <h2 class="partners-heading">An Institutional Partnership Between</h2>
+        <ul class="partners-logos">
+          {% for partner in partners.collaborators %}
+          <li>
+            <a href="{{ partner.url }}" title="{{ partner.name }}" target="_blank" rel="noopener">
+              <img src="{{ ('/images/logos/' + partner.logo) | url }}" alt="{{ partner.name }}" loading="lazy">
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="partners-group">
+        <h2 class="partners-heading">Funding</h2>
+        <ul class="partners-logos">
+          {% for partner in partners.funders %}
+          <li>
+            <a href="{{ partner.url }}" title="{{ partner.name }}" target="_blank" rel="noopener">
+              <img src="{{ ('/images/logos/' + partner.logo) | url }}" alt="{{ partner.name }}" loading="lazy">
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
   <footer>
     <p><a href="{{ '/contact/' | url }}">Contact us</a></p>
     <p>Pacific Northwest Moths. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>.</p>
