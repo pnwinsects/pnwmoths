@@ -100,6 +100,7 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
 
   // About page images (label examples, screenshots)
   eleventyConfig.addPassthroughCopy("src/about/data/images");
+  eleventyConfig.addPassthroughCopy("src/about/images/images");
 
   // Vite plugin: bundles client-side JS components
   // The writeBundle hook fires after Vite finishes writing to _site/, so images copied here
