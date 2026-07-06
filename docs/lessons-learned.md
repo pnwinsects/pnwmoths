@@ -86,6 +86,25 @@ cost a debugging cycle to discover.
 - **Reuse one OpenSeadragon instance across images** via `viewer.open()` to swap DZI
   sources — recreating the viewer per navigation flashes and re-initializes.
 
+## Theming (Pico CSS overrides)
+
+- **Override Pico color tokens under `:root:not([data-theme=dark])`, not a bare `:root`.**
+  Pico scopes `--pico-primary` (and its other theme colors) to
+  `:host(:not([data-theme=dark])), :root:not([data-theme=dark]), [data-theme=light]`
+  — specificity (0,2,0). A `theme.css` override under plain `:root` (0,1,0) *loses
+  regardless of load order*, silently, so the brand color never reaches links, nav, or
+  stats and they fall back to Pico's default blue. This went unnoticed because the page
+  background is set as a direct `html, body { background-color }` property (which does
+  win) while the *token* override quietly did not. Verify color changes against
+  `getComputedStyle`, not the value you typed in the stylesheet.
+
+- **Pico links inherit `--pico-primary` via `:where(a)` (specificity 0,0,0).** Any
+  element-level color you set (`.footer a { color: … }`, ≥0,0,3) wins over it — so
+  per-context link colors are easy, but the global link color must be changed through the
+  token at winning specificity (above). Ensure the chosen olive clears WCAG AA on *both*
+  white content (#fff, ≥4.5:1) and the cream nav (#f3e8ba, ≥4.5:1); the legacy light olive
+  `#a4ab78` is only ~2.4:1 and is safe for decorative fills/borders only, never text.
+
 ## Build-time HTML transforms
 
 - **Initialize the `seen` Set per transform invocation, never at module scope.** Module

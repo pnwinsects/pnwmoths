@@ -19,7 +19,21 @@ export class PnwmImageSlideshow extends LitElement {
     :host { display: block; }
     .slideshow { position: relative; }
     .slide { text-align: center; }
-    .slide img { max-width: 100%; height: auto; cursor: pointer; }
+    /* The main image is a real button so it is keyboard-operable (Enter/Space
+       open the lightbox), not a bare <img> with a click handler. */
+    .slide-trigger {
+      display: inline-block;
+      max-width: 100%;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .slide-trigger img { max-width: 100%; height: auto; display: block; }
+    .slide-trigger:focus-visible {
+      outline: 2px solid var(--pico-primary);
+      outline-offset: 2px;
+    }
     .controls {
       display: flex;
       justify-content: center;
@@ -47,7 +61,7 @@ export class PnwmImageSlideshow extends LitElement {
       padding: 0;
       background: none;
     }
-    .thumbnail[aria-selected="true"] {
+    .thumbnail[aria-current="true"] {
       border-color: var(--pico-primary);
     }
     .thumbnail img {
@@ -108,6 +122,10 @@ export class PnwmImageSlideshow extends LitElement {
     .lightbox-prev:focus, .lightbox-next:focus {
       background: rgba(0, 0, 0, 0.7);
       outline: 2px solid var(--pico-primary);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .thumbnail-strip { scroll-behavior: auto; }
+      .thumbnail { transition: none; }
     }
   `;
 
@@ -220,10 +238,14 @@ export class PnwmImageSlideshow extends LitElement {
     this._resizeObserver.observe(strip);
   }
 
+  _scrollBehavior(): ScrollBehavior {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  }
+
   updated(changedProperties: PropertyValues): void {
     if (changedProperties.has('_currentIndex')) {
-      const activeThumb = this.shadowRoot?.querySelector('.thumbnail[aria-selected="true"]');
-      activeThumb?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+      const activeThumb = this.shadowRoot?.querySelector('.thumbnail[aria-current="true"]');
+      activeThumb?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: this._scrollBehavior() });
     }
   }
 
@@ -347,12 +369,12 @@ export class PnwmImageSlideshow extends LitElement {
 
   _scrollLeft(): void {
     const strip = this.shadowRoot?.querySelector('.thumbnail-strip') as HTMLElement | null;
-    strip?.scrollBy({ left: -(strip.clientWidth / 2), behavior: 'smooth' });
+    strip?.scrollBy({ left: -(strip.clientWidth / 2), behavior: this._scrollBehavior() });
   }
 
   _scrollRight(): void {
     const strip = this.shadowRoot?.querySelector('.thumbnail-strip') as HTMLElement | null;
-    strip?.scrollBy({ left: strip.clientWidth / 2, behavior: 'smooth' });
+    strip?.scrollBy({ left: strip.clientWidth / 2, behavior: this._scrollBehavior() });
   }
 
   render(): TemplateResult {
@@ -401,12 +423,17 @@ export class PnwmImageSlideshow extends LitElement {
       return html`
         <div role="region" aria-label="Species photos" class="slideshow">
           <div class="slide">
-            <img
-              src=${current.src}
-              alt=${current.alt}
+            <button
+              class="slide-trigger"
+              aria-label="View full-size photo"
               @click=${() => this._openLightbox()}
-              @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
             >
+              <img
+                src=${current.src}
+                alt=${current.alt}
+                @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
+              >
+            </button>
             ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
           </div>
         </div>
@@ -418,20 +445,24 @@ export class PnwmImageSlideshow extends LitElement {
     return html`
       <div role="region" aria-label="Species photos" class="slideshow">
         <div class="slide">
-          <img
-            src=${current.src}
-            alt=${current.alt}
+          <button
+            class="slide-trigger"
+            aria-label="View full-size photo"
             @click=${() => this._openLightbox()}
-            @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
           >
+            <img
+              src=${current.src}
+              alt=${current.alt}
+              @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
+            >
+          </button>
           ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
         </div>
-        <div class="thumbnail-strip" role="tablist" aria-label="Photo thumbnails">
+        <div class="thumbnail-strip" role="group" aria-label="Photo thumbnails">
           ${this._images.map((img, i) => html`
             <button
               class="thumbnail"
-              role="tab"
-              aria-selected=${i === this._currentIndex ? 'true' : 'false'}
+              aria-current=${i === this._currentIndex ? 'true' : 'false'}
               aria-label=${`Photo ${i + 1} of ${this._images.length}: ${img.alt}`}
               @click=${() => { this._currentIndex = i; }}
             ><img src=${img.src} alt="" height="93"></button>
