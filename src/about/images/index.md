@@ -46,9 +46,8 @@ and/or blurriness from vibrations that occur with slow shutter speeds.
 
 The moth images on this site can be viewed in high resolution on the individual
 species account pages. For example, here is what you will see at the page for
-[*Grammia ornata*](/species/grammia-ornata/):
+[*Apantesis ornata*](/species/apantesis-ornata/):
 
-<!-- TODO: Screenshot needed — species page for Grammia ornata showing the image carousel -->
 ![Species page showing moth images](images/species-page-overview.png)
 
 The large image is one of a series of images of this species. **To see other
@@ -56,21 +55,18 @@ images of the featured species in large format**, use the arrow to the right of
 the small thumbnail images below the large image, and click on the image you
 wish to see. Note that clicking the images under Similar Species will cause a
 new window to open, featuring the Species Account for that similar species.
-**To see a portion of the featured image in higher detail**, use the zoom
-controls in the image viewer:
 
-<!-- TODO: Screenshot needed — species page showing the zoom controls -->
-![Zoom controls on the image viewer](images/zoom-controls.png)
+For species with high-resolution imagery available, **clicking the main image
+opens an interactive deep-zoom viewer** (shown below for
+[*Coloradia doris*](/species/coloradia-doris/)). The toolbar in the upper-left
+provides pan, zoom-out, home (reset), and full-screen controls:
 
-You can then use the directional controls to scroll across the image, or grab
-and move the selection region to change the part of the image you are examining.
-The most stunning way to view the images on this site is to **view the images in
-full screen format**. There, you can see the images in large size, with the
-ability to zoom in further to see portions of the wings or body in incredibly
-high resolution. To select this option, click the full-screen button:
+![Deep-zoom viewer with toolbar controls](images/zoom-controls.png)
 
-<!-- TODO: Screenshot needed — species page showing the full-screen toggle button -->
-![Full-screen toggle button](images/fullscreen-toggle.png)
+You can pan by dragging the image, zoom with the scroll wheel or toolbar
+buttons, and enter **full-screen mode** using the rightmost toolbar button to
+see the image at maximum size with the ability to zoom in further — revealing
+incredible detail in wing scales and body structures.
 
 ## A Guide to Making Photographic Plates {#plates}
 
