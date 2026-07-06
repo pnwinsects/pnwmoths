@@ -26,7 +26,7 @@ of the new copyright status, should you want to use any of our images.
 
 Virtually all of the images that appear in the species accounts and
 photographic plates on this website were taken using the
-[Visionary Digital BK Plus Imaging System](https://www.visionarydigital.com/IntegratedSystems1.html),
+Visionary Digital BK Plus Imaging System,
 illustrated below:
 
 ![The Visionary Digital BK Plus Imaging System](images/imaging-system.jpg)
