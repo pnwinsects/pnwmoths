@@ -80,7 +80,8 @@
 
       let pagefind;
       try {
-        pagefind = await import('{{ '/pagefind/pagefind.js' | url }}');
+        const pagefindUrl = '{{ '/pagefind/pagefind.js' | url }}';
+        pagefind = await import(/* @vite-ignore */ pagefindUrl);
         await pagefind.options({ baseUrl: '{{ '/' | url }}' });
       } catch {
         return; // Pagefind not available (dev mode)
