@@ -21,11 +21,9 @@ Every build emits an unlinked diagnostic file, `_site/species-audit.csv` (live a
 
 ## Deployment
 
-A push to `main` triggers the production workflow ([`.github/workflows/production.yml`](.github/workflows/production.yml)): it runs CI (typecheck, tests, build at root `/`) and then uploads the built `_site` **additively** to the Bunny Storage Zone — the same CDN/zone that holds the images — serving production at <https://moths.pnwinsects.org/>. The upload is additive only: no purge, no deletes.
+A push to `main` deploys production: the built `_site` is uploaded **additively** (no purge, no deletes) to the Bunny Storage Zone that also serves the images, at <https://moths.pnwinsects.org/>. GitHub Pages is a manual `workflow_dispatch` **staging** target under `/pnwmoths/`.
 
-GitHub Pages remains as a manual **staging** target ([`.github/workflows/staging.yml`](.github/workflows/staging.yml)): run the "Deploy to Staging" workflow via `workflow_dispatch` to publish a build under `/pnwmoths/` at the default `*.github.io/pnwmoths/` URL.
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup instructions and the required deploy secret.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the CI workflows and the required deploy secret, and [ADR 0008](docs/adr/0008-deploy-bunny-additive.md) for the rationale.
 
 ## Adding content
 

@@ -1,7 +1,12 @@
 # Copilot Instructions — PNW Moths
 
-See CONTRIBUTING.md for the full contributor guide. This file captures conventions
-and constraints for AI-assisted development.
+**Canonical context lives in [`AGENTS.md`](../AGENTS.md)** (a symlink to `CLAUDE.md`), with
+the domain glossary in [`CONTEXT.md`](../CONTEXT.md), product scope in [`PRODUCT.md`](../PRODUCT.md),
+and the decisions behind the architecture in [`docs/adr/`](../docs/adr/). Read those first;
+they are the shared source of truth for every tool. Work is tracked in **GitHub Issues** (`gh`).
+
+See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for the full contributor guide. This file captures
+the conventions and constraints most useful during AI-assisted development.
 
 ## Key data files
 
@@ -14,10 +19,9 @@ and constraints for AI-assisted development.
 
 ## Slug convention
 
-Species slugs are computed as `(genus + '-' + species).toLowerCase()`.
-Slugs contain alphanumeric characters and hyphens only.
-
-Example: genus=Acronicta, species=americana → `acronicta-americana`
+Species slug = `(genus + '-' + species).toLowerCase()`, alphanumerics and hyphens only
+(e.g. `acronicta-americana`) — the foreign key across CSVs and the URL segment. See
+[`CONTEXT.md`](../CONTEXT.md) and [ADR 0010](../docs/adr/0010-slug-foreign-key.md).
 
 ## Prose descriptions
 
@@ -29,16 +33,11 @@ If the file is absent, the factsheet renders without a prose section.
 
 ## Build pipeline
 
-Run `npm run build`. Steps in order:
-
-1. `build:data` — validates CSVs, imports to DuckDB, exports per-species Parquet files
-2. `build:eleventy` — generates ~700 species pages plus browse/search/glossary pages
-3. `build:copy-parquet` — copies Parquet files into `_site/` after Vite rewrites output dir
-4. `build:pagefind` — indexes all pages for client-side search
-5. `build:validate-links` — fails on broken internal links (requires lychee locally)
-6. `build:check-weight` — warns when any page exceeds the size threshold
-
-Output directory: `_site/` (gitignored).
+Run `npm run build`. It runs ~16 ordered steps: data → Identify key → HTML → content-gating
+gates → asset/Parquet copies → build-time emitters (species-states/districts/audit) → search
+index → weight/schema checks → link check. The authoritative order lives in
+[`package.json`](../package.json) (`build:site`); [`CONTRIBUTING.md`](../CONTRIBUTING.md) has the
+stage-by-stage table. Output lands in `_site/` (gitignored).
 
 ## Tests
 
@@ -46,8 +45,8 @@ Output directory: `_site/` (gitignored).
 npm test
 ```
 
-Covers the data pipeline (`scripts/build-data.test.js`) and Lit components
-(`src/components/*.test.js`).
+Covers the data pipeline (`scripts/build-data.test.ts`) and Lit components
+(`src/components/*.test.ts`).
 
 ## Node version
 
@@ -59,6 +58,6 @@ Valid state/province codes: `WA`, `OR`, `ID`, `MT`, `BC`.
 
 Coordinate bounds for records:
 - Latitude: approximately 42–55 N
-- Longitude: approximately −125 to −110 W
+- Longitude: approximately −125 to −103 W (extends east to cover full Montana)
 
 Records outside these bounds are likely data errors.
