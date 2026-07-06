@@ -8,19 +8,24 @@ A proof-of-concept reconstruction of pnwmoths.biol.wwu.edu as a fully static sit
 
 Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
 
-## Current Milestone: v4.0 Key Characters — Visual Identification
+## Current Milestone: v5.0 Administrative Districts — County Assignment & Browse Filter
 
-**Goal:** Add a dedicated "Identify" page where users narrow the key-scored PNW moth species by selecting morphological and distributional characters from the legacy Lucid key, with character illustrations and a live thumbnail grid of matching species. (Issue #19.)
+**Goal:** Give every occurrence record an accurate county / regional-district — re-joining the curated legacy assignments, deriving from coordinates to fill gaps and catch data-entry errors — and add a county/regional-district filter to the Browse page scoped to the PNW region. (Issues #25, #96.)
 
 **Target features:**
-- New **Identify page** — free-form filter panel covering all 8 character categories (237 character-states), grouped/collapsible by the key's `Category : [Subcategory :] Question : State` hierarchy; characters selectable in any order; no-JS static degradation
-- **Live results** — flat thumbnail grid (species photo + name, linking to the species page) with a running "N species match" count; multi-select within a character OR's, across characters AND's
-- **Character data pipeline** — ingest `key.csv` (237 × 1,228 scoring matrix) into a compact client-loadable artifact, build-time validated like other data contracts (typed reads + schema); loaded client-side like `records.parquet`
-- **Species↔key matching** — resolve the 1,228 key binomials to site slugs via `species-synonyms.csv`, best-effort; emit a coverage report of unmatched names for later manual curation
-- **Character illustration images** — process and upload the ~2,000 character/help images to bunny.net CDN; shown on demand (tooltip/expandable) beside each character so users see what the character means
-- All TypeScript + Lit, consistent with the v3.0 toolchain and validation gates
+- **Re-join legacy district data** — restore the `county_id → species_county.name` mapping the original migration dropped (`records.csv` currently 2.8% filled vs ~96% available in the reference DB); BC records carry **regional districts**, US records carry **counties**
+- **Coordinate → district assignment** (#25) — point-in-polygon against boundary shapefiles (US Census counties + BC/Canada regional districts) to fill the remaining ~4% and assign a district to any record on future local upload
+- **QC mismatch report** (#25) — non-blocking committed CSV flagging records where the stated county ≠ the coordinate-derived district, or whose coordinates fall outside all known boundaries; curator-reviewable, mirroring the `species-audit.csv` pattern
+- **Browse county filter** (#96) — client-side filter on `/browse/` restricted to BC, WA, OR, ID, and western-MT districts (explicit western-MT county list; Alberta and eastern-MT excluded from the dropdown but records keep their assigned district); consistent with the existing state filter and no-JS degradation
+- Terminology adapts per jurisdiction ("regional district" for BC, "county" for US states); all TypeScript + Lit, consistent with the v3.0 toolchain and validation gates
 
-## Current State: v4.0 shipped — Key Characters visual identification
+## Current State: v5.0 in progress — Administrative Districts
+
+**v5.0 kicked off:** 2026-07-04 — County/regional-district assignment (#25) + Browse county filter (#96). Re-join the curated legacy district data (dropped in the original migration; ~96% coverage available), fill the ~4% gaps by coordinate point-in-polygon, emit a non-blocking QC mismatch report, and add a PNW-scoped (BC/WA/OR/ID/W MT) county filter to `/browse/`.
+
+**Phase 44 complete:** 2026-07-05 — Legacy County Re-join (DIST-01, DIST-02 validated). `scripts/backfill-legacy-county.ts` re-joins the reference DB's curated county/regional-district onto `data/records.csv` via a committed, curator-reviewable name→stable-ID crosswalk (`data/district-crosswalk.csv`, 188 rows covering every distinct legacy name incl. 3 BC renames), raising `county` fill from 2.79% to 96.94% — additive-only, idempotent, fail-fast on any unmapped name. A new prefixed `district_id` column (`US:<GEOID>` / `CA:<CDUID>`, zero-padded strings) is threaded through the four DuckDB read_csv maps + Zod schema + parquet-cache; a committed `data/legacy-rejoin-report.csv` records per-row outcomes. Open follow-up for Phase 46: 2,660 pre-existing BC rows have a county name but no `district_id` (additive-only skipped them). Code review: 0 critical, 6 advisory warnings.
+
+**Phase 46 complete:** 2026-07-05 — Coordinate → District Assignment (DIST-04, DIST-05, DIST-06 validated). A shared, DB-free guard/gate module (`scripts/lib/district-assignment.ts`: mandatory axis-order guard → `PNW_BOUNDS` bounds gate → containment/fallback classifier, reused by Phase 47) plus a maintainer-run fill script (`scripts/fill-district-from-coords.ts`: DuckDB `ST_Contains` containment + planar `ST_Distance` ~2 km nearest-boundary fallback, both with deterministic tie-breaks) derive `district_id` from coordinates for the blank-`district_id` records against Phase 45's committed `data/boundaries/pnw-districts.geojson` — strictly additive, idempotent, fail-soft on bad rows. Filled 3,231/5,580 blank cells; committed per-row provenance in `data/coord-fill-report.csv`; runbook `_instructions/ASSIGNING_DISTRICTS.md` documents the combined re-join + fill maintainer step. **Known gap (accepted):** SC#4's ≥99% valid-coord fill is met per-state (99.58% excluding Alberta) but not overall (57.90%) — the entire shortfall is Alberta, whose boundary geometry Phase 45 only partially acquired (`AB_CDUID='4804'`, 1 of ~19 census divisions); Phase 48's Browse filter already excludes Alberta, so no feature is blocked. Alberta boundary expansion is a deferred follow-up. Code review: 0 critical, 4 advisory (WR-01 tie-break + WR-03 connection-close fixed; WR-02/WR-04 documented).
 
 **v4.0 shipped:** 2026-06-27 — 5 phases (39–43), all 43 requirements validated, Phase 43 UAT 5/5. The `/identify/` page lets users narrow 1,228 key-scored species by selecting from 237 character-states across 8 collapsible categories, with a live "N species match" thumbnail grid (OR-within / AND-across / "0 = unscored" semantics, TDD-locked). `data/key-matrix.json` ships matched species × character-states as base64 bitsets with a `meta` block. Character illustrations are bound **authoritatively from the original Lucid3 key data** (`data/key.data` → 180/237 characters; Size & Seasonality have no source art) and shown in a per-state `<details>` CDN expander. A separate **backup→bunny migration** recovered legacy species photos that were never migrated to the CDN — ~150 species across three filename variants (underscore / space-misnamed / hyphen binomial) — closing the grid-thumbnail 404 gaps (#43). Deferred: Identify UI polish (disclosure marker + view-larger), curator alt-text pass, Geometridae release (#48).
 
@@ -105,6 +110,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 - ✓ Live results grid: "N species match" count, thumbnail grid with gray placeholder + load-failure degradation, "0 results" empty state — v4.0 Phase 42
 - ✓ Character illustrations bound authoritatively from the original Lucid3 key data (180/237); per-state `<details>` CDN expander; alt-text state-name fallback — v4.0 Phase 43
 - ✓ Legacy species-photo CDN 404 gaps recovered from the `pnwmoths_https` backup across three filename variants (underscore / space / hyphen binomial) — v4.0 follow-up (#43)
+- ✓ PNW-scoped county / regional-district Browse filter: build-time `_site/species-districts.json` (compound `${state}:${county}` key, Alberta-dropped, western-MT capped via committed `data/mt-county-allowlist.csv`); cascading single-select district `<select>` on `/browse/` (disabled-until-state, reset-on-change, mute-not-hide, dynamic County/Regional-District label); Alberta dropped from the state filter; no-JS static listing intact — v5.0 Phase 48 (BFILT-01…05, #96)
 
 ### Active
 
@@ -236,4 +242,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-27 — v4.0 Key Characters (Issue #19) SHIPPED: all 5 phases (39–43), 43/43 requirements, Identify page live with character illustrations + legacy-photo CDN recovery. Next: planning next milestone.*
+*Last updated: 2026-07-06 — v5.0 Administrative Districts (Issues #25, #96) COMPLETE: Phases 44–48 shipped. Phase 48 Browse District Filter validated (BFILT-01…05), human UAT approved.*

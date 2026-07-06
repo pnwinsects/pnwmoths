@@ -20,6 +20,7 @@ function makeRecord(overrides: Partial<OccurrenceRecord> = {}): OccurrenceRecord
     collector: null,
     collection: null,
     notes: null,
+    district_id: null,
     ...overrides,
   };
 }
@@ -175,18 +176,18 @@ describe('aggregateByMonth reared exclusion', () => {
 
 describe('Parquet column validator', () => {
   // The root group element at schema[0] is named 'duckdb_schema' (no type/logicalType).
-  // schema.slice(1) gives the 14 leaf column elements, each with .name.
-  const ALL_14_COLUMNS = [
+  // schema.slice(1) gives the 15 leaf column elements, each with .name.
+  const ALL_15_COLUMNS = [
     'species_slug', 'record_type', 'latitude', 'longitude', 'state',
     'county', 'locality', 'elevation_ft', 'year', 'month', 'day',
-    'collector', 'collection', 'notes',
+    'collector', 'collection', 'notes', 'district_id',
   ];
 
   it('passes for a complete column set', () => {
     const goodMeta = {
       schema: [
         { name: 'duckdb_schema' },
-        ...ALL_14_COLUMNS.map(name => ({ name })),
+        ...ALL_15_COLUMNS.map(name => ({ name })),
       ],
     };
     // Should not throw
@@ -194,7 +195,7 @@ describe('Parquet column validator', () => {
   });
 
   it('throws when a required column is missing', () => {
-    const missingCollection = ALL_14_COLUMNS.filter(c => c !== 'collection');
+    const missingCollection = ALL_15_COLUMNS.filter(c => c !== 'collection');
     const badMeta = {
       schema: [
         { name: 'duckdb_schema' },

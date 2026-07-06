@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import {
   OccurrenceRecordSchema,
   SpeciesStateSchema,
+  SpeciesDistrictSchema,
   CharacterSchema,
   KeySpeciesSchema,
   KeyMatrixSchema,
@@ -28,6 +29,7 @@ describe('OccurrenceRecordSchema', () => {
     collector: null,
     collection: null,
     notes: null,
+    district_id: null,
   };
 
   it('accepts a valid record with all nullable fields null', () => {
@@ -47,6 +49,7 @@ describe('OccurrenceRecordSchema', () => {
       collector: 'J. Smith',
       collection: 'UWBM',
       notes: 'Some note',
+      district_id: 'US:53033',
     };
     const result = OccurrenceRecordSchema.safeParse(record);
     assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
@@ -78,6 +81,18 @@ describe('SpeciesStateSchema', () => {
   it('rejects { species_slug } missing state', () => {
     const result = SpeciesStateSchema.safeParse({ species_slug: 's' });
     assert.ok(!result.success, 'Expected failure for missing state');
+  });
+});
+
+describe('SpeciesDistrictSchema', () => {
+  it('accepts { species_slug, state, county }', () => {
+    const result = SpeciesDistrictSchema.safeParse({ species_slug: 's', state: 'WA', county: 'Lincoln' });
+    assert.ok(result.success, `Expected success but got: ${JSON.stringify(result)}`);
+  });
+
+  it('rejects { species_slug, state } missing county', () => {
+    const result = SpeciesDistrictSchema.safeParse({ species_slug: 's', state: 'WA' });
+    assert.ok(!result.success, 'Expected failure for missing county');
   });
 });
 

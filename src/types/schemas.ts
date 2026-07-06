@@ -8,14 +8,16 @@ import * as z from 'zod/mini';
 // --- OccurrenceRecord ---
 // Describes what hyparquet produces from records.parquet
 // records.csv read WITHOUT nullstr='' in build-data.js — DuckDB treats blank cells as NULL
-// county is 100% null in production data (county enrichment not yet present)
+// county and district_id are populated for ~96%+ of records following the Phase 44
+// legacy-county re-join (see data/legacy-rejoin-report.csv); the remainder is blank,
+// pending Phase 46's coordinate-based fill
 export const OccurrenceRecordSchema = z.object({
   species_slug:  z.string(),
   record_type:   z.string(),        // 'specimen' | 'photograph' | 'literature' | 'sight_field_notes'
   latitude:      z.number(),
   longitude:     z.number(),
   state:         z.string(),        // 'WA' | 'OR' | 'BC' | 'ID' | 'AB' | 'MT'
-  county:        z.nullable(z.string()),   // 100% null in current production data
+  county:        z.nullable(z.string()),   // ~96%+ filled following the Phase 44 legacy re-join
   locality:      z.nullable(z.string()),
   elevation_ft:  z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
   year:          z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
@@ -24,6 +26,9 @@ export const OccurrenceRecordSchema = z.object({
   collector:     z.nullable(z.string()),
   collection:    z.nullable(z.string()),
   notes:         z.nullable(z.string()),
+  // Stable district ID (US Census GEOID / BC StatCan CDUID), prefixed "US:"/"CA:", zero-padded.
+  // Never z.number() — leading zeros (e.g. US:05003) must survive intact (D-02/T-44-09).
+  district_id:   z.nullable(z.string()),
 });
 export type OccurrenceRecord = z.infer<typeof OccurrenceRecordSchema>;
 
@@ -105,6 +110,16 @@ export const SpeciesStateSchema = z.object({
   state:        z.string(),
 });
 export type SpeciesState = z.infer<typeof SpeciesStateSchema>;
+
+// --- SpeciesDistrict ---
+// One element of the species-districts.json flat array
+// Validated at browser load time (Phase 48) as an array of these
+export const SpeciesDistrictSchema = z.object({
+  species_slug: z.string(),
+  state:        z.string(),
+  county:       z.string(),
+});
+export type SpeciesDistrict = z.infer<typeof SpeciesDistrictSchema>;
 
 // --- TaxonNode ---
 // Describes the taxon tree built by src/_data/taxon.js

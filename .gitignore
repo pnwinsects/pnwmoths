@@ -5,6 +5,7 @@ data/analytics/*.json
 node_modules/
 var/
 .lycheecache
+.boundaries-scratch/
 # Former Git LFS directories: images are now served from CDN, not stored in this repo
 images/
 !src/**/images/

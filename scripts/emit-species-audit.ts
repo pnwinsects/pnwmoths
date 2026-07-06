@@ -149,7 +149,8 @@ async function loadRecordSlugs(): Promise<Set<string>> {
         'day': 'INTEGER',
         'collector': 'VARCHAR',
         'collection': 'VARCHAR',
-        'notes': 'VARCHAR'
+        'notes': 'VARCHAR',
+        'district_id': 'VARCHAR'
       })
     WHERE species_slug IS NOT NULL AND species_slug != ''
   `);

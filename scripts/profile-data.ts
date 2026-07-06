@@ -43,7 +43,8 @@ async function main(): Promise<void> {
         'day': 'INTEGER',
         'collector': 'VARCHAR',
         'collection': 'VARCHAR',
-        'notes': 'VARCHAR'
+        'notes': 'VARCHAR',
+        'district_id': 'VARCHAR'
       }
     )
   `);

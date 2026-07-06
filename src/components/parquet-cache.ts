@@ -5,13 +5,13 @@ import type { OccurrenceRecord } from '../types/index.ts';
 const cache = new Map<string, OccurrenceRecord[]>();
 
 /**
- * The 14 expected column names in records.parquet.
+ * The 15 expected column names in records.parquet.
  * Used by assertParquetColumns for O(columns) schema validation.
  */
 const EXPECTED_PARQUET_COLUMNS = new Set([
   'species_slug', 'record_type', 'latitude', 'longitude', 'state',
   'county', 'locality', 'elevation_ft', 'year', 'month', 'day',
-  'collector', 'collection', 'notes',
+  'collector', 'collection', 'notes', 'district_id',
 ]);
 
 /**
