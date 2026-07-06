@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600&family=Spinnaker&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/pico.min.css">
   <link rel="stylesheet" href="/styles/theme.css">
-  {% if pagefindUi %}<link rel="stylesheet" href="{{ '/pagefind/pagefind-component-ui.css' | url }}">{% endif %}
 </head>
 <body>
   <header>
@@ -23,13 +22,16 @@
         <li><a href="{{ '/' | url }}">Home</a></li>
         <li><a href="{{ '/browse/' | url }}">Browse</a></li>
         <li><a href="{{ '/identify/' | url }}">Identify</a></li>
-        <li><a href="{{ '/search/' | url }}">Search</a></li>
         <li><a href="{{ '/glossary/' | url }}">Glossary</a></li>
         <li><a href="{{ '/faqs/' | url }}">FAQs</a></li>
         <li><a href="{{ '/plates/' | url }}">Plates</a></li>
         <li><a href="{{ '/about/' | url }}">About</a></li>
         <li><a href="{{ '/contact/' | url }}">Contact</a></li>
       </ul>
+      <div class="site-search" id="site-search">
+        <input type="search" class="site-search-input" placeholder="Search…" aria-label="Search site">
+        <div class="site-search-results" id="site-search-results" role="listbox" aria-live="polite" hidden></div>
+      </div>
     </nav>
   </header>
   <main>
@@ -70,5 +72,65 @@
     <p>Pacific Northwest Moths. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>.</p>
   </footer>
   <script type="module" src="/components/main.js"></script>
+  <script type="module">
+    (async () => {
+      const input = document.querySelector('.site-search-input');
+      const resultsEl = document.getElementById('site-search-results');
+      if (!input || !resultsEl) return;
+
+      let pagefind;
+      try {
+        const pagefindUrl = '{{ '/pagefind/pagefind.js' | url }}';
+        pagefind = await import(/* @vite-ignore */ pagefindUrl);
+        await pagefind.options({ baseUrl: '{{ '/' | url }}' });
+      } catch {
+        return; // Pagefind not available (dev mode)
+      }
+
+      let debounceTimer;
+      input.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => doSearch(), 200);
+      });
+
+      // Close results on click outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.site-search')) {
+          resultsEl.hidden = true;
+        }
+      });
+
+      // Reopen on focus if there's a query
+      input.addEventListener('focus', () => {
+        if (input.value.trim() && resultsEl.innerHTML) {
+          resultsEl.hidden = false;
+        }
+      });
+
+      function esc(s) {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      async function doSearch() {
+        const query = input.value.trim();
+        if (!query) { resultsEl.hidden = true; resultsEl.innerHTML = ''; return; }
+        const search = await pagefind.search(query);
+        const results = await Promise.all(search.results.slice(0, 8).map(r => r.data()));
+        if (!results.length) {
+          resultsEl.innerHTML = '<p class="site-search-empty">No results found.</p>';
+        } else {
+          resultsEl.innerHTML = results.map(r =>
+            `<a class="site-search-result" href="${esc(r.url)}">
+              <span class="site-search-result-title">${esc(r.meta?.title || r.url)}</span>
+              <span class="site-search-result-excerpt">${r.excerpt}</span>
+            </a>`
+          ).join('');
+        }
+        resultsEl.hidden = false;
+      }
+    })();
+  </script>
 </body>
 </html>
