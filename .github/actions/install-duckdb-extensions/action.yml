@@ -1,0 +1,41 @@
+name: Install DuckDB extensions
+description: >-
+  Pre-fetch the DuckDB spatial + httpfs extensions into the local extension
+  cache so tests never download them at query time. Fixes CI runs failing with
+  "Failed to install remote extension 'httpfs'": DuckDB's own installer trips on
+  the extensions.duckdb.org http->https 302 during the httpfs bootstrap, whereas
+  curl -L follows it. Once the files are in ~/.duckdb/extensions/<ver>/linux_amd64/,
+  the scripts' `INSTALL spatial; LOAD spatial;` short-circuit and skip the network.
+  MUST run after `npm ci` (needs @duckdb/node-api to resolve the engine version).
+
+runs:
+  using: composite
+  steps:
+    - name: Resolve DuckDB engine version
+      id: duckdb
+      shell: bash
+      run: |
+        ver=$(node -e "const{DuckDBInstance}=require('@duckdb/node-api');DuckDBInstance.create(':memory:').then(d=>d.connect()).then(c=>c.runAndReadAll('SELECT version() AS v')).then(r=>process.stdout.write(r.getRowObjectsJS()[0].v))")
+        echo "version=$ver" >> "$GITHUB_OUTPUT"
+        echo "DuckDB engine version: $ver"
+
+    - name: Cache DuckDB extensions
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      with:
+        path: ~/.duckdb/extensions
+        key: duckdb-ext-${{ runner.os }}-${{ steps.duckdb.outputs.version }}
+
+    - name: Pre-fetch spatial + httpfs (linux_amd64)
+      shell: bash
+      run: |
+        ver='${{ steps.duckdb.outputs.version }}'
+        dest="$HOME/.duckdb/extensions/${ver}/linux_amd64"
+        mkdir -p "$dest"
+        for ext in httpfs spatial; do
+          if [ ! -f "$dest/$ext.duckdb_extension" ]; then
+            echo "Fetching $ext for DuckDB $ver…"
+            curl -fSL "https://extensions.duckdb.org/${ver}/linux_amd64/$ext.duckdb_extension.gz" \
+              | gunzip > "$dest/$ext.duckdb_extension"
+          fi
+        done
+        ls -la "$dest"

@@ -26,6 +26,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
+      - name: Install DuckDB extensions (spatial, httpfs)
+        uses: ./.github/actions/install-duckdb-extensions
       - name: Typecheck
         run: npm run typecheck
       - name: Test
