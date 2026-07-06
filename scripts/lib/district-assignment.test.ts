@@ -4,10 +4,47 @@ import {
   classifyCoordinate,
   isAxisOrderSuspect,
   isWithinAssignmentBounds,
+  parseCoordinate,
   FALLBACK_DEGREE_THRESHOLD,
   FALLBACK_KM,
   KM_PER_DEGREE_LAT,
 } from './district-assignment.ts';
+
+// ---------------------------------------------------------------------------
+// parseCoordinate — strict numeric parsing (rejects parseFloat's trailing junk)
+// ---------------------------------------------------------------------------
+
+describe('parseCoordinate', () => {
+  it('parses a clean numeric string', () => {
+    assert.equal(parseCoordinate('47.6'), 47.6);
+    assert.equal(parseCoordinate('-117.047'), -117.047);
+  });
+
+  it('trims surrounding whitespace', () => {
+    assert.equal(parseCoordinate('  46.339  '), 46.339);
+  });
+
+  it('rejects trailing junk that parseFloat would accept', () => {
+    // parseFloat('47.6xyz') === 47.6 — parseCoordinate must reject it
+    assert.ok(Number.isNaN(parseCoordinate('47.6xyz')));
+  });
+
+  it('rejects blank / empty / whitespace-only cells', () => {
+    assert.ok(Number.isNaN(parseCoordinate('')));
+    assert.ok(Number.isNaN(parseCoordinate('   ')));
+    assert.ok(Number.isNaN(parseCoordinate(null)));
+    assert.ok(Number.isNaN(parseCoordinate(undefined)));
+  });
+
+  it('rejects non-finite values (Infinity, NaN text)', () => {
+    assert.ok(Number.isNaN(parseCoordinate('Infinity')));
+    assert.ok(Number.isNaN(parseCoordinate('NaN')));
+  });
+
+  it('accepts a number input directly', () => {
+    assert.equal(parseCoordinate(46.339), 46.339);
+  });
+});
 
 // ---------------------------------------------------------------------------
 // classifyCoordinate — axis-order guard (DIST-04, SC#1)

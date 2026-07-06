@@ -33,7 +33,7 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
-import { classifyCoordinate, FALLBACK_DEGREE_THRESHOLD, KM_PER_DEGREE_LAT } from './lib/district-assignment.ts';
+import { classifyCoordinate, parseCoordinate, FALLBACK_DEGREE_THRESHOLD, KM_PER_DEGREE_LAT } from './lib/district-assignment.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -328,8 +328,8 @@ export async function main(): Promise<void> {
   rows.forEach((row, index) => {
     if (row.district_id !== '') return;
 
-    const lat = parseFloat(row.latitude);
-    const lon = parseFloat(row.longitude);
+    const lat = parseCoordinate(row.latitude);
+    const lon = parseCoordinate(row.longitude);
 
     if (Number.isNaN(lat) || Number.isNaN(lon)) {
       // Skip + report, never mutate, never hard-fail (D-07).

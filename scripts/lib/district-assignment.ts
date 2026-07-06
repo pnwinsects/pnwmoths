@@ -89,3 +89,17 @@ export function classifyCoordinate(latitude: number, longitude: number): Coordin
   if (!isWithinAssignmentBounds(latitude, longitude)) return 'out-of-bounds';
   return 'ok';
 }
+
+/**
+ * Strictly parse a coordinate cell into a finite number, or NaN when it isn't
+ * a clean numeric value. Unlike `parseFloat` — which accepts trailing junk
+ * ("47.6xyz" -> 47.6) and could let a corrupted cell reach the DuckDB SQL —
+ * this trims and requires the ENTIRE cell to be finite, returning NaN for
+ * blank/garbage/±Infinity input. Callers treat NaN as "no usable coordinate".
+ */
+export function parseCoordinate(value: unknown): number {
+  const s = String(value ?? '').trim();
+  if (s === '') return NaN;
+  const n = Number(s);
+  return Number.isFinite(n) ? n : NaN;
+}

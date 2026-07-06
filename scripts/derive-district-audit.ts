@@ -30,7 +30,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
-import { classifyCoordinate } from './lib/district-assignment.ts';
+import { classifyCoordinate, parseCoordinate } from './lib/district-assignment.ts';
 import {
   resolveByCoordinates,
   type CoordCandidate,
@@ -112,8 +112,8 @@ export function classifyRecordsForDerivation(rows: RecordCsvRow[]): {
   const preClassified = new Map<number, DerivedResolution>();
 
   rows.forEach((row, index) => {
-    const lat = parseFloat(row.latitude);
-    const lon = parseFloat(row.longitude);
+    const lat = parseCoordinate(row.latitude);
+    const lon = parseCoordinate(row.longitude);
 
     if (Number.isNaN(lat) || Number.isNaN(lon)) {
       preClassified.set(index, {
