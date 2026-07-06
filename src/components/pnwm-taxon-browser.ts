@@ -228,49 +228,48 @@ class PnwmTaxonBrowser extends LitElement {
       // the first render, expand the targeted family and scroll it into view.
       void this.updateComplete.then(() => this._scrollToHashFamily());
     }
-    // Async: fetch state filter data (D-11)
-    try {
-      const res = await fetch(`${this._prefix}species-states.json`);
-      const rows: unknown = await res.json();
-      // O(1) shape validator — D-03: check top-level + one representative element only
-      // Throws SchemaValidationError on schema mismatch (SCHEMA-08 hard-fail per D-05)
+    // species-states.json and species-districts.json are independent payloads —
+    // fetch them concurrently so neither dropdown waits on the other's round-trip.
+    // allSettled attaches handlers to both immediately (no unhandled rejection) and
+    // isolates a network failure of one payload from the other. Validation runs
+    // AFTER, still OUTSIDE the fulfilled branch's guard, so a SchemaValidationError
+    // propagates out of connectedCallback (D-05 hard-fail) while a rejected fetch
+    // soft-degrades (map left empty, that select stays disabled).
+    const [statesResult, districtsResult] = await Promise.allSettled([
+      fetch(`${this._prefix}species-states.json`).then(r => r.json()),
+      fetch(`${this._prefix}species-districts.json`).then(r => r.json()),
+    ]);
+
+    // State filter data (D-11)
+    if (statesResult.status === 'fulfilled') {
+      const rows: unknown = statesResult.value;
+      // O(1) shape validator — D-03: check top-level + one representative element only.
+      // Throws SchemaValidationError on schema mismatch (SCHEMA-08 hard-fail per D-05).
       validateSpeciesStates(rows);
       this._stateMap = buildStateMap(rows);
       // Pitfall 1 fix (D-05): intersect with STATE_NAMES' keys so Alberta (which has no
       // STATE_NAMES entry) is excluded from the dropdown, not merely unlabeled.
       this._statesAvailable = deriveStatesAvailable(rows);
-    } catch (err) {
-      if (err instanceof SchemaValidationError) {
-        // D-05 hard-fail: schema mismatch surfaces the error (no silently-wrong data)
-        // re-throw so callers see the schema problem
-        throw err;
-      }
-      // Network/fetch errors: soft degradation — leave stateMap empty, select stays disabled
     }
-    // Async: fetch district filter data (BFILT-02/BFILT-03)
-    try {
-      const res = await fetch(`${this._prefix}species-districts.json`);
-      const rows: unknown = await res.json();
-      // O(1) shape validator — same probe-one-element pattern as species-states (T-48-01)
+    // Network/fetch errors (rejected): soft degradation — stateMap empty, select disabled.
+
+    // District filter data (BFILT-02/BFILT-03)
+    if (districtsResult.status === 'fulfilled') {
+      const rows: unknown = districtsResult.value;
+      // O(1) shape validator — same probe-one-element pattern as species-states (T-48-01).
       validateSpeciesDistricts(rows);
-      // Keep raw rows so districtsForState() can recompute options on every state change
+      // Keep raw rows so districtsForState() can recompute options on every state change.
       this._districtRows = rows;
       this._districtMap = buildDistrictMap(rows);
       // WR-01: if the user selected a state before this payload resolved,
       // _districtsAvailable was computed against an empty _districtRows ([]) and
       // never recovers on its own (it is only recomputed in _onStateChange).
       // Recompute it now so the county dropdown populates without a re-select.
-      // Mirror the reactive-recompute pattern of _onStateChange.
       if (this._selectedState) {
         this._districtsAvailable = districtsForState(this._districtRows, this._selectedState);
       }
-    } catch (err) {
-      if (err instanceof SchemaValidationError) {
-        // Hard-fail: schema mismatch surfaces the error (no silently-wrong muting)
-        throw err;
-      }
-      // Network/fetch errors: soft degradation — leave districtMap empty, select stays disabled
     }
+    // Network/fetch errors (rejected): soft degradation — districtMap empty, select disabled.
   }
 
   /**
