@@ -513,6 +513,12 @@ abbr.glossary-term {
   text-decoration: underline;
 }
 
+/* Even gaps around the › separators. The template emits no whitespace between crumb
+   elements, so this margin is the sole source of spacing (see species.njk). */
+.species-breadcrumb [aria-hidden="true"] {
+  margin: 0 0.55em;
+}
+
 .species-content {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -11,15 +11,17 @@ eleventyComputed:
   title: "{{ sp.genus }} {{ sp.species_display | safe }} — PNW Moths"
 ---
 
-<nav class="species-breadcrumb" aria-label="Taxonomy">
-  <a href="{{ '/browse/' | url }}">{{ sp.family }}</a>
-  {% if sp.subfamily %}
-  <span aria-hidden="true"> › </span>
-  <a href="{{ '/browse/' | url }}">{{ sp.subfamily }}</a>
-  {% endif %}
-  <span aria-hidden="true"> › </span>
-  <span>{{ sp.genus }}</span>
-</nav>
+{#- Separators carry no literal spaces and there is no whitespace between the inline
+   elements, so gap width comes only from the .species-breadcrumb [aria-hidden] margin
+   in theme.css — otherwise collapsible template whitespace renders unevenly (the space
+   before the genus was collapsing to zero). The `</a\n  >` breaks keep it readable. -#}
+<nav class="species-breadcrumb" aria-label="Taxonomy"
+  ><a href="{{ '/browse/' | url }}">{{ sp.family }}</a
+  >{% if sp.subfamily %}<span aria-hidden="true">›</span
+  ><a href="{{ '/browse/' | url }}">{{ sp.subfamily }}</a
+  >{% endif %}<span aria-hidden="true">›</span
+  ><span>{{ sp.genus }}</span
+></nav>
 
 <div class="species-header">
   <div class="species-title">
