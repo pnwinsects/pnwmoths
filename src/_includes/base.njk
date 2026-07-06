@@ -30,7 +30,7 @@
       </ul>
       <div class="site-search" id="site-search">
         <input type="search" class="site-search-input" placeholder="Search…" aria-label="Search site">
-        <div class="site-search-results" id="site-search-results"></div>
+        <div class="site-search-results" id="site-search-results" role="listbox" aria-live="polite" hidden></div>
       </div>
     </nav>
   </header>
@@ -107,6 +107,12 @@
         }
       });
 
+      function esc(s) {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
       async function doSearch() {
         const query = input.value.trim();
         if (!query) { resultsEl.hidden = true; resultsEl.innerHTML = ''; return; }
@@ -116,8 +122,8 @@
           resultsEl.innerHTML = '<p class="site-search-empty">No results found.</p>';
         } else {
           resultsEl.innerHTML = results.map(r =>
-            `<a class="site-search-result" href="${r.url}">
-              <span class="site-search-result-title">${r.meta?.title || r.url}</span>
+            `<a class="site-search-result" href="${esc(r.url)}">
+              <span class="site-search-result-title">${esc(r.meta?.title || r.url)}</span>
               <span class="site-search-result-excerpt">${r.excerpt}</span>
             </a>`
           ).join('');
