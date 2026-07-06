@@ -187,8 +187,10 @@ nav ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  row-gap: 4px;
-  gap: 0;
+  /* row 4px (spacing between wrapped rows), column 0 (items butt together;
+     horizontal spacing comes from .site-nav ul a padding). A bare `gap: 0`
+     here would reset the row-gap. */
+  gap: 4px 0;
 }
 
 nav a {
@@ -535,6 +537,13 @@ abbr.glossary-term {
 .species-photos,
 .species-data {
   min-width: 0;
+}
+
+/* Failed-load fallback for the static (no-JS / pre-hydration) specimen images.
+   Replaces the removed inline onerror with a CSS-only neutral placeholder tint
+   (matches .pnwm-krg-placeholder-wrap); only visible if the image fails to paint. */
+.species-photos figure img {
+  background: #f0ece0;
 }
 
 @media (max-width: 768px) {
