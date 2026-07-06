@@ -193,8 +193,14 @@ nav ul {
 
 nav a {
   text-decoration: none;
+}
+
+/* Header (site) nav links: wrap + ~44px tall tap target on narrow viewports.
+   Scoped to .site-nav so it does NOT hit the breadcrumb (also a <nav>) or the
+   glossary alphabet index — a broad `nav a` padding gave breadcrumb links 12px
+   side padding that the plain genus <span> lacked, breaking separator spacing. */
+.site-nav ul a {
   display: inline-block;
-  /* ~44px tall tap target without disturbing the horizontal rhythm on desktop */
   padding: 10px 12px;
 }
 
