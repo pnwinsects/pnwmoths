@@ -14,7 +14,7 @@ npm install
 npm run build
 ```
 
-The build runs these steps in order:
+The build runs ~16 steps; the main stages (the full, authoritative order lives in [`package.json`](package.json)):
 
 | Step | Command | What it does |
 |------|---------|--------------|
@@ -49,7 +49,7 @@ The `node_modules` directory is isolated inside the container via an anonymous v
 npm test
 ```
 
-Tests cover the data pipeline (`scripts/build-data.test.js`) and Lit components (`src/components/*.test.js`).
+Tests cover the data pipeline (`scripts/build-data.test.ts`) and Lit components (`src/components/*.test.ts`).
 
 ## CI
 
@@ -66,7 +66,7 @@ Three workflows run on GitHub Actions:
 ```
 data/               CSV source data (species, records, glossary) + plates.json manifest
 data/parquet/       Generated per-species Parquet files (build output, gitignored)
-scripts/            Build pipeline scripts (build-data.js, copy-parquet.js, etc.)
+scripts/            Build pipeline scripts (build-data.ts, copy-parquet.ts, etc.)
 src/
   _data/            Eleventy data files (query DuckDB at build time)
   _includes/        Nunjucks layouts and partials
@@ -82,7 +82,7 @@ _instructions/      Plain-English maintainer guides
 
 ## Data conventions
 
-- **Species slug:** `(genus + '-' + species).toLowerCase()` — alphanumeric and hyphens only
+- **Species slug:** `(genus + '-' + species).toLowerCase()`, alphanumeric and hyphens only — the canonical key across CSVs and URLs; see [`CONTEXT.md`](CONTEXT.md) / [ADR 0010](docs/adr/0010-slug-foreign-key.md)
 - **Parquet path:** `data/parquet/{slug}/records.parquet` → deployed to `_site/species/{slug}/records.parquet`
 - **Prose path:** `src/content/species/{slug}.md` — rendered into the factsheet if present
 

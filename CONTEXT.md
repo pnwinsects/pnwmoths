@@ -1,0 +1,55 @@
+# CONTEXT.md — Domain Language
+
+Shared vocabulary for PNW Moths. Use these terms as defined here, in code, commits, and conversation. Update this file whenever a term is coined, sharpened, or deprecated.
+
+This project is a fully static rebuild of [pnwmoths.biol.wwu.edu](https://pnwmoths.biol.wwu.edu) — a natural-history catalog of Pacific Northwest moths. All data is flat files (CSV + Markdown), transformed at build time; there is no server or database at runtime.
+
+## Taxonomy
+
+- **Species** — the unit of the catalog: a genus + specific epithet, plus common name, author/**authority**, and NOC ID. One row in `data/species.csv`; one factsheet page. ~1,430 species, ~700+ with pages.
+- **NOC ID** — the stable species identifier carried from the legacy dataset (the moth-checklist number). Present in `species.csv`; not used as a foreign key (the **slug** is).
+- **Taxonomic hierarchy** — `Family → Subfamily → (Tribe) → Genus → Species`. Browse presents this as a 4-level tree. Genera without a subfamily fall directly under family.
+- **Subfamily** — a species' subfamily is **not** a `species.csv` column in the legacy data; it is encoded in the original CMS browse-URL paths and parsed from there. See [docs/reference/data-provenance.md](docs/reference/data-provenance.md).
+- **Epithet** — the specific epithet (second half of the binomial). Normally rendered plain; three species intentionally display a **quoted epithet** (e.g. *Clostera "apicalis"*), modeled via an `epithet_quoted` flag in `species.csv` and `format-epithet.ts`. Quoting is **display-only** — it never appears in the slug.
+- **Synonym** — an outdated binomial mapped to a current species. `data/species-synonyms.csv` maps synonyms to current slugs so legacy photo/record filenames still resolve.
+- **Morphospecies / provisional / undescribed** — informal names (`sp`, `n sp`, `aff`, `nr`). Listed in `data/unpublished-species.csv` and **hidden** from the public site (see *Content gating*); their records/images/key data are preserved.
+
+## Data entities
+
+- **slug** — the canonical species key: `(genus + '-' + species).toLowerCase()`, alphanumeric and hyphens only. It is both the URL segment (`/species/{slug}/`) and the foreign key across every CSV that references a species. Slugs are self-documenting for non-technical contributors; numeric IDs are avoided.
+- **SpeciesRecord** (occurrence) — one observation in `data/records.csv`: latitude/longitude, state/province, county/district, locality, elevation, date, collector, collection, record type, notes. ~86k–100k records.
+- **SpeciesImage** — a photo in `data/images.csv`: keyed to a species by slug, with photographer credit and an ordering weight. The **navigational** flag marks images used as browse-tree thumbnails.
+- **GlossaryWord** — an illustrated glossary term in `data/glossary.csv`, with an optional `image_filename` for a CDN illustration.
+- **Plate** — a photographic plate in `data/plates.json` (number, family, slug, dimensions). A separate deep-zoom asset from species photos.
+
+## Geography (administrative districts)
+
+- **District** — the administrative unit a record falls in. Terminology adapts per jurisdiction: **county** for US states, **regional district** for BC. Displayed dynamically ("County" vs "Regional District").
+- **`district_id`** — a prefixed VARCHAR, `US:<GEOID>` (US Census county) or `CA:<CDUID>` (StatCan census division). Never an integer — the prefix disambiguates namespaces and the string preserves zero-padding.
+- **In-scope states/provinces** — `WA`, `OR`, `ID`, `MT`, `BC`. Records for **Alberta** and eastern Montana exist and keep their values, but are excluded from the Browse district dropdown (out of PNW scope). Valid coordinate bounds: lat ≈ 42–55 N, lon ≈ −125 to −103 W.
+- **Crosswalk** — `data/district-crosswalk.csv` maps legacy district names to stable `district_id`s (absorbing renames like *Skeena-Queen Charlotte → North Coast*). Joins go through the crosswalk, never raw name-matching.
+- **Boundaries** — `data/boundaries/pnw-districts.geojson`: simplified, WGS84 county + regional-district polygons used for point-in-polygon district assignment.
+
+## Site features
+
+- **Factsheet** — a species page: taxonomy, prose description, photo carousel, occurrence **map** (Leaflet), **phenology chart** (Chart.js), similar-species row, and — for high-res species — an **OpenSeadragon** deep-zoom viewer. All interactive parts are **Lit web components** that load Parquet asynchronously, with full **no-JS degradation** (taxonomy, prose, photos remain visible as static HTML).
+- **Browse** — a single dynamic accordion page (`/browse/`) over the `Family → Subfamily → Genus → Species` tree, with navigation-image strips, a state filter, and a cascading county/regional-district filter.
+- **Identify** — the character-key page (`/identify/`): narrows species by selecting **character-states** across 8 collapsible categories, with a live "N species match" thumbnail grid. Backed by the **key matrix**.
+- **key matrix** — `data/key-matrix.json`: a 237-character-state × 1,228-species bitset (base64 `Uint8Array` per state) reimplementing the exported Lucid3 key as static client-side data. Filter semantics: OR **within** a question, AND **across** questions, and **"0 = unscored, never absent"** (a raw `0`/blank never eliminates a species).
+- **Glossary tooltips** — first occurrence of each glossary term in species prose is wrapped at build time in `<abbr>` and shown via the native Popover API (definition + optional CDN image); degrades to the native `title` tooltip with JS off.
+- **`species-audit.csv`** — an unlinked build diagnostic (`_site/species-audit.csv`) flagging per-species coverage gaps (`has_records` / `visible` / `in_key`); a maintainer tool, nothing on the site links to it. Columns and live URL in the [README](README.md#coverage-audit).
+- **`high_res_available`** — a per-species boolean (from the photo manifest) marking species with DZI deep-zoom tiles on the CDN; gates the OpenSeadragon viewer.
+
+## Content gating
+
+Two data-driven deny-lists suppress content from the public site without deleting the underlying data (both reversible by deleting one line):
+
+- **Withheld family** — `data/withheld-families.csv`. Holds an entire family out of pages, Browse, Identify, and search, with a build-time leak gate. Used for the **Geometridae** public embargo (GitHub issue #48), pending curator content.
+- **Unpublished species** — `data/unpublished-species.csv`. A per-species deny-list for provisional/undescribed morphospecies.
+- **`shown` / visible predicate** — the single source of truth (`stats.ts`) for whether a species appears publicly, applied consistently across all choke points.
+
+## Infrastructure & roles
+
+- **CDN** — [Bunny](https://bunny.net): a Storage Zone + Pull Zone + Optimizer holds all image assets. `CDN_BASE_URL` is a hard-coded **public** constant (not a secret, not an env var).
+- **Production** — <https://moths.pnwinsects.org/>, served from Bunny; a push to `main` triggers an additive `_site` upload. **Staging** — GitHub Pages, a manual `workflow_dispatch` deploy under `/pnwmoths/`.
+- **Maintainer / curator** — a (typically non-technical) person who edits flat-file data and adds records/photos, following the guides in [`_instructions/`](_instructions/). **Contributor** — anyone submitting data or code changes; see [CONTRIBUTING.md](CONTRIBUTING.md).
