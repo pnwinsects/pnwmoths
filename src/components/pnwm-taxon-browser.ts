@@ -1,5 +1,5 @@
 import { LitElement, html, type PropertyDeclarations, type TemplateResult } from 'lit';
-import { SpeciesStateSchema, type SpeciesState, type TaxonFamily, type TaxonSubfamily, type TaxonGenus, type NavImage } from '../types/index.ts';
+import { SpeciesStateSchema, SpeciesDistrictSchema, type SpeciesState, type SpeciesDistrict, type TaxonFamily, type TaxonSubfamily, type TaxonGenus, type NavImage } from '../types/index.ts';
 
 const STATE_NAMES: Record<string, string> = {
   BC: 'British Columbia',
@@ -68,6 +68,91 @@ export function taxonHasState(slugs: string[], stateMap: Record<string, Set<stri
 }
 
 /**
+ * Derive the sorted, deduped list of selectable states from species-states.json rows,
+ * intersected with STATE_NAMES' keys so Alberta (which has no STATE_NAMES entry) is
+ * EXCLUDED from the dropdown entirely, not merely unlabeled (Pitfall 1 / D-05).
+ */
+export function deriveStatesAvailable(rows: SpeciesState[]): string[] {
+  return [...new Set(rows.map(r => r.state))]
+    .filter(s => s in STATE_NAMES)
+    .sort();
+}
+
+/**
+ * Validate that rows is a well-formed species-districts.json payload.
+ * O(1): checks top-level is Array + probes a single representative element shape.
+ * Same probe-one-element/reuse-SchemaValidationError pattern as validateSpeciesStates
+ * (BFILT-02, T-48-01).
+ *
+ * @param rows - the unknown value returned by res.json()
+ * @throws SchemaValidationError on non-array top level or bad element shape
+ */
+export function validateSpeciesDistricts(rows: unknown): asserts rows is SpeciesDistrict[] {
+  if (!Array.isArray(rows)) {
+    throw new SchemaValidationError('species-districts.json: expected array at top level');
+  }
+  if (rows.length > 0) {
+    const probe = SpeciesDistrictSchema.safeParse(rows[0]);
+    if (!probe.success) {
+      throw new SchemaValidationError(
+        `species-districts.json: element shape mismatch: ${probe.error.issues.map((i: { message: string }) => i.message).join('; ')}`
+      );
+    }
+  }
+}
+
+/**
+ * Transform flat [{species_slug, state, county}] array from species-districts.json
+ * into an object mapping species_slug → Set<`${state}:${county}`>.
+ * Pitfall 3: the key is ALWAYS the compound `${state}:${county}` string, never a bare
+ * county name — cross-state county-name collisions (e.g. WA Lincoln vs MT Lincoln) are
+ * real and numerous in this dataset.
+ */
+export function buildDistrictMap(rows: SpeciesDistrict[]): Record<string, Set<string>> {
+  const map: Record<string, Set<string>> = {};
+  for (const { species_slug, state, county } of rows) {
+    if (!map[species_slug]) map[species_slug] = new Set();
+    map[species_slug]!.add(`${state}:${county}`);
+  }
+  return map;
+}
+
+/**
+ * Returns true if any slug in `slugs` has the compound `${selectedState}:${selectedCounty}`
+ * key in districtMap, or if selectedCounty is empty string (no district filter active,
+ * D-02's "All counties" reset state).
+ */
+export function taxonHasDistrict(
+  slugs: string[],
+  districtMap: Record<string, Set<string>>,
+  selectedState: string,
+  selectedCounty: string,
+): boolean {
+  if (!selectedCounty) return true;
+  const key = `${selectedState}:${selectedCounty}`;
+  return slugs.some(slug => districtMap[slug]?.has(key));
+}
+
+/**
+ * State-scoped, deduped, alphabetical list of districts (D-03/D-04). The
+ * species-districts.json aggregate is already allow-list-filtered and DISTINCT at
+ * build time (MT capped to the western-MT allow-list, AB excluded entirely), so this
+ * needs no allow-list knowledge of its own — only filter by state and dedupe.
+ */
+export function districtsForState(rows: SpeciesDistrict[], state: string): string[] {
+  const set = new Set(rows.filter(r => r.state === state).map(r => r.county));
+  return [...set].sort();
+}
+
+/**
+ * Dynamic jurisdiction label (BFILT-04): "Regional District" for BC, "County" for the
+ * US states (and the neutral/disabled no-state-selected case).
+ */
+export function districtLabel(selectedState: string): string {
+  return selectedState === 'BC' ? 'Regional District' : 'County';
+}
+
+/**
  * Recursively collect all species slugs from any taxon tree node.
  * Handles family ({subfamilies:[]}), subfamily ({genera:[]}), genus ({species:[]}).
  */
@@ -87,6 +172,10 @@ class PnwmTaxonBrowser extends LitElement {
       _stateMap:            { attribute: false, state: true },
       _statesAvailable:     { attribute: false, state: true },
       _selectedState:       { type: String,  state: true },
+      _selectedDistrict:    { type: String,  state: true },
+      _districtMap:         { attribute: false, state: true },
+      _districtRows:        { attribute: false, state: true },
+      _districtsAvailable:  { attribute: false, state: true },
       _showImages:          { type: Boolean, state: true },
       _expandedFamilies:    { attribute: false, state: true },
       _expandedSubfamilies: { attribute: false, state: true },
@@ -98,6 +187,10 @@ class PnwmTaxonBrowser extends LitElement {
   _stateMap: Record<string, Set<string>>;
   _statesAvailable: string[];
   _selectedState: string;
+  _selectedDistrict: string;
+  _districtMap: Record<string, Set<string>>;
+  _districtRows: SpeciesDistrict[];
+  _districtsAvailable: string[];
   _showImages: boolean;
   _expandedFamilies: Set<string>;
   _expandedSubfamilies: Set<string>;
@@ -114,6 +207,10 @@ class PnwmTaxonBrowser extends LitElement {
     this._stateMap = {};
     this._statesAvailable = [];
     this._selectedState = '';
+    this._selectedDistrict = '';
+    this._districtMap = {};
+    this._districtRows = [];
+    this._districtsAvailable = [];
     this._showImages = true;
     this._expandedFamilies = new Set();
     this._expandedSubfamilies = new Set();
@@ -131,23 +228,48 @@ class PnwmTaxonBrowser extends LitElement {
       // the first render, expand the targeted family and scroll it into view.
       void this.updateComplete.then(() => this._scrollToHashFamily());
     }
-    // Async: fetch state filter data (D-11)
-    try {
-      const res = await fetch(`${this._prefix}species-states.json`);
-      const rows: unknown = await res.json();
-      // O(1) shape validator — D-03: check top-level + one representative element only
-      // Throws SchemaValidationError on schema mismatch (SCHEMA-08 hard-fail per D-05)
+    // species-states.json and species-districts.json are independent payloads —
+    // fetch them concurrently so neither dropdown waits on the other's round-trip.
+    // allSettled attaches handlers to both immediately (no unhandled rejection) and
+    // isolates a network failure of one payload from the other. Validation runs
+    // AFTER, still OUTSIDE the fulfilled branch's guard, so a SchemaValidationError
+    // propagates out of connectedCallback (D-05 hard-fail) while a rejected fetch
+    // soft-degrades (map left empty, that select stays disabled).
+    const [statesResult, districtsResult] = await Promise.allSettled([
+      fetch(`${this._prefix}species-states.json`).then(r => r.json()),
+      fetch(`${this._prefix}species-districts.json`).then(r => r.json()),
+    ]);
+
+    // State filter data (D-11)
+    if (statesResult.status === 'fulfilled') {
+      const rows: unknown = statesResult.value;
+      // O(1) shape validator — D-03: check top-level + one representative element only.
+      // Throws SchemaValidationError on schema mismatch (SCHEMA-08 hard-fail per D-05).
       validateSpeciesStates(rows);
       this._stateMap = buildStateMap(rows);
-      this._statesAvailable = [...new Set(rows.map(r => r.state))].sort();
-    } catch (err) {
-      if (err instanceof SchemaValidationError) {
-        // D-05 hard-fail: schema mismatch surfaces the error (no silently-wrong data)
-        // re-throw so callers see the schema problem
-        throw err;
-      }
-      // Network/fetch errors: soft degradation — leave stateMap empty, select stays disabled
+      // Pitfall 1 fix (D-05): intersect with STATE_NAMES' keys so Alberta (which has no
+      // STATE_NAMES entry) is excluded from the dropdown, not merely unlabeled.
+      this._statesAvailable = deriveStatesAvailable(rows);
     }
+    // Network/fetch errors (rejected): soft degradation — stateMap empty, select disabled.
+
+    // District filter data (BFILT-02/BFILT-03)
+    if (districtsResult.status === 'fulfilled') {
+      const rows: unknown = districtsResult.value;
+      // O(1) shape validator — same probe-one-element pattern as species-states (T-48-01).
+      validateSpeciesDistricts(rows);
+      // Keep raw rows so districtsForState() can recompute options on every state change.
+      this._districtRows = rows;
+      this._districtMap = buildDistrictMap(rows);
+      // WR-01: if the user selected a state before this payload resolved,
+      // _districtsAvailable was computed against an empty _districtRows ([]) and
+      // never recovers on its own (it is only recomputed in _onStateChange).
+      // Recompute it now so the county dropdown populates without a re-select.
+      if (this._selectedState) {
+        this._districtsAvailable = districtsForState(this._districtRows, this._selectedState);
+      }
+    }
+    // Network/fetch errors (rejected): soft degradation — districtMap empty, select disabled.
   }
 
   /**
@@ -162,7 +284,12 @@ class PnwmTaxonBrowser extends LitElement {
     if (!family?.name) return;
     this._expandedFamilies = new Set([...this._expandedFamilies, family.name]);
     void this.updateComplete.then(() => {
-      this.querySelector(`[id="family-${target}"]`)?.scrollIntoView();
+      // WR-02: `target` comes from window.location.hash (attacker-supplyable via a
+      // crafted deep link). Interpolating it raw into an attribute selector lets a
+      // hash containing selector metacharacters (e.g. `#family-a"]`) throw a
+      // DOMException. `target` is already lowercased to match the generated id, so
+      // getElementById sidesteps selector parsing entirely.
+      document.getElementById(`family-${target}`)?.scrollIntoView();
     });
   }
 
@@ -173,7 +300,17 @@ class PnwmTaxonBrowser extends LitElement {
   }
 
   _onStateChange(e: Event): void {
-    this._selectedState = (e.target as HTMLSelectElement).value;
+    // Pitfall 5 / D-02: reset the district selection AND recompute its options in the
+    // same handler invocation — otherwise a stale district value from the old state
+    // could linger while _districtsAvailable no longer contains it.
+    const value = (e.target as HTMLSelectElement).value;
+    this._selectedState = value;
+    this._selectedDistrict = '';
+    this._districtsAvailable = districtsForState(this._districtRows, value);
+  }
+
+  _onDistrictChange(e: Event): void {
+    this._selectedDistrict = (e.target as HTMLSelectElement).value;
   }
 
   // --- Expand/collapse handlers ---
@@ -258,6 +395,11 @@ class PnwmTaxonBrowser extends LitElement {
   // D-06: opacity:0.35 on taxa with no records in selected state; never display:none
 
   _mutedStyle(slugs: string[]): string {
+    if (this._selectedDistrict) {
+      return taxonHasDistrict(slugs, this._districtMap, this._selectedState, this._selectedDistrict)
+        ? ''
+        : 'opacity:0.35';
+    }
     if (!this._selectedState) return '';
     return taxonHasState(slugs, this._stateMap, this._selectedState)
       ? ''
@@ -369,7 +511,7 @@ class PnwmTaxonBrowser extends LitElement {
         }
         .pnwm-tb-species-label { padding: 0.25rem 0; }
       </style>
-      <div class="pnwm-tb-toolbar" style="display:flex;gap:1.5rem;align-items:baseline;padding:8px 16px;flex-wrap:wrap">
+      <div class="pnwm-tb-toolbar" style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-start;padding:8px 16px">
         <label>
           <input
             type="checkbox"
@@ -378,11 +520,11 @@ class PnwmTaxonBrowser extends LitElement {
           >
           Show images
         </label>
-        <div style="display:flex;align-items:baseline;gap:0.5em">
-          <label for="pnwm-tb-state-filter">Filter by state</label>
+        <div style="display:flex;align-items:center;gap:0.5em">
+          <label for="pnwm-tb-state-filter" style="white-space:nowrap">Filter by state</label>
           <select
             id="pnwm-tb-state-filter"
-            style="width:auto"
+            style="width:auto;margin:0"
             .value=${this._selectedState}
             ?disabled=${!this._statesAvailable.length}
             @change=${this._onStateChange}
@@ -390,6 +532,21 @@ class PnwmTaxonBrowser extends LitElement {
             <option value="">All states</option>
             ${this._statesAvailable.map(s =>
               html`<option value=${s} ?selected=${this._selectedState === s}>${STATE_NAMES[s] ?? s}</option>`
+            )}
+          </select>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.5em">
+          <label for="pnwm-tb-district-filter" style="white-space:nowrap">Filter by ${districtLabel(this._selectedState)}</label>
+          <select
+            id="pnwm-tb-district-filter"
+            style="width:auto;margin:0"
+            .value=${this._selectedDistrict}
+            ?disabled=${!this._selectedState}
+            @change=${this._onDistrictChange}
+          >
+            <option value="">${this._selectedState === 'BC' ? 'All regional districts' : this._selectedState ? 'All counties' : 'Select a state first'}</option>
+            ${this._districtsAvailable.map(d =>
+              html`<option value=${d} ?selected=${this._selectedDistrict === d}>${d}</option>`
             )}
           </select>
         </div>

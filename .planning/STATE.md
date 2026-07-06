@@ -1,40 +1,42 @@
 ---
 gsd_state_version: 1.0
-milestone: v4.0
-milestone_name: Key Characters — Visual Identification
-status: Awaiting next milestone
-stopped_at: Phase 43 UI-SPEC approved
-last_updated: "2026-06-27T20:58:29.660Z"
-last_activity: 2026-06-27 — Milestone v4.0 completed and archived
+milestone: v5.0
+milestone_name: Administrative Districts — County Assignment & Browse Filter
+status: verifying
+stopped_at: Completed 48-02-PLAN.md
+last_updated: "2026-07-06T03:20:22.425Z"
+last_activity: 2026-07-06
 progress:
-  total_phases: 25
+  total_phases: 30
   completed_phases: 5
-  total_plans: 13
-  completed_plans: 13
-  percent: 20
+  total_plans: 16
+  completed_plans: 16
+  percent: 17
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-24 for v4.0 milestone)
+See: .planning/PROJECT.md (updated 2026-07-04 for v5.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 43 — Character Illustration Images
+**Current focus:** Phase 48 — browse-district-filter
 
 ## Current Position
 
-Phase: Milestone v4.0 complete
-Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-07-01 — Completed quick task 260701-ddi: unlinked per-species audit CSV (records/visible/in-key flags) emitted to _site/species-audit.csv
+Phase: 48
+Plan: Not started
+Status: Phase complete — ready for verification
+Last activity: 2026-07-06
+
+Progress: [█████████░] 94%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 64 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2), 22 (v3.0) = 129 total across all milestones
+- Total plans completed: 73 (across v1.0–v1.2), 10 (v1.3), 13 (v1.4), 5 (v2.0), 5 (v2.1), 23 (v2.2), 22 (v3.0) = 129 total across all milestones
 - Average duration: unknown
 - Total execution time: unknown
 
@@ -49,12 +51,14 @@ Last activity: 2026-07-01 — Completed quick task 260701-ddi: unlinked per-spec
 | v2.1 | 4 | 5 | 2026-05-20 |
 | v2.2 | 7 | 23 | 2026-05-24 |
 | v3.0 | 6 | 22 | 2026-06-10 |
-| v4.0 | 5 (planned) | TBD | in flight |
+| v4.0 | 5 | 13 | 2026-06-27 |
+| v5.0 | 5 (planned) | TBD | in flight |
 
 **Recent Trend:**
 
 - v3.0: shipped 2026-06-10 (6 phases, 22 plans, full JS→TS migration + data validation)
-- v4.0: kicked off 2026-06-24 (5 phases planned, Identify page with key character filter)
+- v4.0: shipped 2026-06-27 (5 phases, 13 plans, Identify page with key character filter)
+- v5.0: roadmap created 2026-07-04 (5 phases planned: 44 Legacy County Re-join, 45 Boundary Data Acquisition, 46 Coordinate → District Assignment, 47 QC Mismatch Report, 48 Browse District Filter)
 
 | Phase 39 P01 | 15 minutes | 3 tasks | 10 files |
 | Phase 40 P01 | 12 | 3 tasks | 4 files |
@@ -64,6 +68,22 @@ Last activity: 2026-07-01 — Completed quick task 260701-ddi: unlinked per-spec
 | Phase 42-results-grid P02 | 30m | 2 tasks | 6 files |
 | Phase 43 P01 | 10 | 3 tasks | 5 files |
 | Phase 43 P02 | operator-gated | 3 tasks | 5 files |
+| Phase 44 P01 | 1min | 2 tasks | 1 files |
+| Phase 44 P02 | 35 minutes | 2 tasks | 2 files |
+| Phase 44 P03 | ~20 minutes | 1 task + checkpoint | 2 files |
+| Phase 44 P04 | ~25min | 2 tasks | 9 files |
+| Phase 45 P01 | 6min | 2 tasks | 3 files |
+| Phase 45 P02 | 35min | 2 tasks | 6 files |
+| Phase 46 P01 | 5min | 2 tasks | 2 files |
+| Phase 46 P02 | 15min | 2 tasks | 3 files |
+| Phase 46 P03 | ~25min | 2 tasks | 3 files |
+| Phase 47 P01 | 10min | 3 tasks | 4 files |
+| Phase 47 P02 | 15min | 2 tasks | 3 files |
+| Phase 47 P03 | ~20min | 2 tasks | 3 files |
+| Phase 47 P04 | 20min | 2 tasks | 2 files |
+| Phase 47 P05 | ~10min | 2 tasks | 1 files |
+| Phase 48 P01 | 20min | 3 tasks | 6 files |
+| Phase 48 P02 | 15min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -95,6 +115,39 @@ Recent decisions affecting current work:
 - [Phase ?]: buildCardUrl and buildCountText exported as pure helpers so Plan 42-02 can reuse them inside the component render without duplication
 - [Phase ?]: _hasSelection kept as a METHOD in pnwm-identify to avoid name collision with Lit reactive props
 - [Phase ?]: eleventy.config.ts requires src/_lib passthrough copy for Vite module resolution (Rule 3 auto-fix)
+- [Phase ?]: district-crosswalk.csv BC/AB CDUIDs verified live against the StatCan CR2016Geo REST API (cpt=59/48), upgrading ~25 codes from MEDIUM (statoids.com) to HIGH confidence
+- [Phase ?]: district-crosswalk.csv WA/Lake anomaly corrected to US:41037 (Lake County, OR per the downloaded Census file); RESEARCH.md's prose example (US:41031) was a transcription slip
+- [Phase 44]: 44-02: JoinCsvRow carries a pre-resolved species_id (string|null) rather than a raw records.csv column, keeping joinNaturalKey decoupled from species-slug resolution
+- [Phase 44]: 44-02: added species_unresolved outcome + 8th test beyond RESEARCH.md's 7-item Test Map, since the report outcome enum requires it
+- [Phase 44]: 44-03: live re-join filled records.csv county 2.79%→96.94% (89,817 filled, 0 conflict_unresolved), district_id all matching ^(US:\d{5}|CA:\d{4})$, additive (0 overwrites), idempotent (byte-identical re-run); committed the informative first-run report (not the second run's all-`already_had_value` report)
+- [Phase 44]: 44-03: OPEN ITEM — 2,660 pre-existing BC rows have a county name but no district_id (additive-only skipped them); fix is a straight crosswalk name-lookup pass, deferred to Phase 46/quick-task, not this plan
+- [Phase 44]: 44-03: DuckDB read_csv(columns={...}) requires exact column count — the new 15th column (district_id) breaks build-data/emit-species-states until 44-04 threads it through (expected transient break)
+- [Phase 44]: district_id typed VARCHAR/z.nullable(z.string()) everywhere in Plan 44-04 — never INTEGER/z.number() — preserving zero-padded US:/CA: prefixed stable IDs
+- [Phase 44]: Fixed 4 test fixtures broken by adding district_id to OccurrenceRecordSchema/EXPECTED_PARQUET_COLUMNS (Rule 1 auto-fix), restoring npm test to 579/579 green
+- [Phase ?]: Deferred ROOT (import.meta.url) path resolution to Plan 45-02 to avoid an unused-local typecheck failure in this I/O-free validators-only plan
+- [Phase ?]: Fixed PNW_BOUNDS.lonMax (-109 -> -103, Plan 45-01 placeholder) to actually cover full-Montana (D-05, real extent reaches -104.04 lon)
+- [Phase ?]: district name populated verbatim from source (US NAME, StatCan CDNAME); two known-stale StatCan names documented for a future Phase 48 display override, not renamed here
+- [Phase ?]: Scripted both boundary source downloads into gitignored .boundaries-scratch/ (idempotent re-run) rather than a manual pre-download step
+- [Phase ?]: Phase 46: Imported PNW_BOUNDS from build-boundaries.ts for the bounds gate instead of re-declaring a fifth inconsistent bounds box (RESEARCH.md Pitfall 2)
+- [Phase ?]: Phase 46: Axis-order guard fires before the bounds gate in classifyCoordinate() — a swapped-axis pair must never reach the bounds check or a DuckDB query
+- [Phase 46]: Phase 46: fill CLI interpolates only numeric-parsed coordinates into DuckDB SQL (candidates INSERT + ST_Point/ST_Distance), never a raw records.csv string cell
+- [Phase 46]: Phase 46: fallback distance query ranks candidates via QUALIFY ROW_NUMBER() OVER (PARTITION BY row_id ORDER BY deg_dist ASC) = 1 for deterministic single-nearest-match selection
+- [Phase 46]: Phase 46: fallback-boundary test uses a purpose-built synthetic single-polygon GeoJSON fixture (mkdtempSync scratch dir) rather than a real coastal point, for full determinism
+- [Phase 46]: Phase 46-03: SC#4 overall fill rate (57.90%) accepted as documented, not fixed in-plan — root cause is Phase 45's Alberta boundary-acquisition scope (only CA:4804 acquired), not a fallback-tolerance issue; excluding AB, fill rate is 99.58%
+- [Phase 46]: Phase 46-03: committed the FIRST run's data/coord-fill-report.csv (5,580 rows), not the second idempotency-check run's report, per the Phase 44 convention
+- [Phase 47]: assignTier's D-02 name-fallback mismatch defaults to far-mismatch (Pitfall 3's conservative default) — pinned as a test case
+- [Phase 47]: toCsv's per-tier summary preamble is hash-prefixed and must precede AUDIT_HEADER — pinned by requiring every preamble line to start with '#'
+- [Phase 47]: buildRecordsDistrictAuditRows joins strictly by row_index (never content) — test fixture deliberately duplicates content across two row_index values to prove positional join correctness
+- [Phase 47]: 47-02: DerivedResolution.districtId typed string|null (not string) to match the 47-01 RED test contract over the plan's prose paraphrase
+- [Phase 47]: 47-02: widenResolution() converts CoordResolution's '' districtId sentinel to null so the widened resolution matches DerivedResolution's null-based no-district convention
+- [Phase 47]: build-district-adjacency.ts wraps ST_DWithin operands in ST_Boundary() — this DuckDB spatial build's ST_Distance/ST_DWithin silently returns 0/true for raw Polygon-Polygon pairs regardless of separation; ST_Touches is unaffected
+- [Phase 47]: 22 of 535 district-adjacency pairs are ST_DWithin-only near-misses, concentrated along the US/CA international border — confirms RESEARCH.md Pitfall 2's simplification-seam prediction
+- [Phase ?]: 47-04: zero name-fallback rows observed against real data — district-crosswalk.csv now covers every distinct (state,county) pair in records.csv; D-02's textual-fallback path is fully implemented/tested but dormant, not an active contributor to far-mismatch counts
+- [Phase ?]: 47-04: buildRecordsDistrictAuditRows joins records.csv to records-derived-district.csv strictly by row_index (positional file-order index), never by content tuple, since (species_slug, lat, lon, state, county) is empirically non-unique
+- [Phase 47]: Tier-summary counts for the QC audit CSV moved from a '#'-commented preamble into a JSON sidecar (_site/records-district-audit-summary.json) — Curator-legibility checkpoint found the preamble broke RFC-4180 validity (header must be line 1); sidecar preserves at-a-glance tier counts without corrupting the CSV
+- [Phase 48]: 48-01: Compound key material uses human-readable county name (not district_id), per RESEARCH's verified fill-rate evidence
+- [Phase 48]: 48-01: MT allow-list filtering happens once at build time in the emitter; the browser never re-filters or re-derives it
+- [Phase 48]: 48-02: Extracted deriveStatesAvailable() as an exported pure helper (not inline in connectedCallback) so the AB-exclusion behavior (Pitfall 1/D-05) is directly unit-testable
 
 ### Roadmap Evolution
 
@@ -103,6 +156,11 @@ Recent decisions affecting current work:
 - Phase 41 added 2026-06-24: Identify Page Scaffold & Filter Panel (v4.0)
 - Phase 42 added 2026-06-24: Results Grid (v4.0)
 - Phase 43 added 2026-06-24: Character Illustration Images (v4.0)
+- Phase 44 added 2026-07-04: Legacy County Re-join (v5.0) — DIST-01, DIST-02
+- Phase 45 added 2026-07-04: Boundary Data Acquisition (v5.0) — DIST-03
+- Phase 46 added 2026-07-04: Coordinate → District Assignment (v5.0) — DIST-04, DIST-05, DIST-06
+- Phase 47 added 2026-07-04: QC Mismatch Report (v5.0) — QC-01, QC-02, QC-03
+- Phase 48 added 2026-07-04: Browse District Filter (v5.0) — BFILT-01..05
 
 ### Pending Todos
 
@@ -155,10 +213,11 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-06-26T00:03:37.574Z
-Stopped at: Phase 43 UI-SPEC approved
-Resume file: .planning/phases/43-character-illustration-images/43-UI-SPEC.md
+Last session: 2026-07-06T01:30:25.286Z
+Stopped at: Completed 48-02-PLAN.md
+Resume file: None
 
 ## Operator Next Steps
 
-- Start the next milestone with /gsd-new-milestone
+- Review .planning/ROADMAP.md Phase 44–48 details and approve
+- Begin phase planning with /gsd-plan-phase 44

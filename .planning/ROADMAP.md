@@ -15,6 +15,7 @@
 - ✅ **v2.2 High-resolution species photos** — Phases 26–32 (shipped 2026-05-24) — [archive](milestones/v2.2-ROADMAP.md)
 - ✅ **v3.0 TypeScript Frontend & Build-Time Data Validation** — Phases 33–38 (shipped 2026-06-10) — [archive](milestones/v3.0-ROADMAP.md)
 - ✅ **v4.0 Key Characters — Visual Identification** — Phases 39–43 (shipped 2026-06-27) — [archive](milestones/v4.0-ROADMAP.md)
+- 🚧 **v5.0 Administrative Districts** — Phases 44–48 (in progress)
 
 ## Phases
 
@@ -138,6 +139,16 @@
 - [x] **Phase 43: Character Illustration Images** - Manifest-driven CDN upload of character images; curator `data/key-character-images.csv`; inline `<details>/<summary>` help expansion in the filter panel (completed 2026-06-26)
 
 </details>
+
+### 🚧 v5.0 Administrative Districts — County Assignment & Browse Filter (Phases 44–48) — IN PROGRESS
+
+**Milestone Goal:** Give every occurrence record an accurate county / regional-district — re-joining the curated legacy assignments, deriving from coordinates to fill gaps and catch data-entry errors — and add a county/regional-district filter to the Browse page scoped to the PNW region. (Issues #25, #96.)
+
+- [x] **Phase 44: Legacy County Re-join** - Re-join the reference DB's curated county/regional-district data onto `records.csv` via a committed name→stable-ID crosswalk, additive-only (completed 2026-07-05)
+- [x] **Phase 45: Boundary Data Acquisition** - Acquire, simplify, and commit WGS84 US county (WA/OR/ID/MT) + BC regional-district boundary GeoJSON (completed 2026-07-05)
+- [x] **Phase 46: Coordinate → District Assignment** - Shared point-in-polygon module with axis-order/bounds guard; additive coordinate fill of the remaining gap; maintainer runbook (completed 2026-07-05)
+- [x] **Phase 47: QC Mismatch Report** - Non-blocking, tiered stated-vs-derived district mismatch report mirroring `species-audit.csv` (completed 2026-07-05)
+- [x] **Phase 48: Browse District Filter** - PNW-scoped county/regional-district filter on `/browse/`, cascading against the existing state filter (completed 2026-07-06)
 
 ## Phase Details
 
@@ -744,6 +755,138 @@ Plans:
 
 **UI hint**: yes
 
+### Phase 44: Legacy County Re-join
+
+**Goal**: `data/records.csv` carries the reference database's curated county / regional-district assignment for nearly every record that had one, restored via a stable-ID crosswalk rather than fragile name matching
+**Depends on**: Phase 43 (v4.0 complete)
+**Requirements**: DIST-01, DIST-02
+**Success Criteria** (what must be TRUE):
+
+  1. After running the re-join script once, `data/records.csv` county/regional-district fill rate rises from ~2.8% to ≥96%, measured by a before/after count of non-blank values
+  2. A committed, curator-reviewable name→stable-ID crosswalk (`data/`) resolves every distinct legacy county/regional-district name found in the reference DB — including renamed districts such as "Skeena-Queen Charlotte" → "North Coast" — to a current US GEOID or BC CDUID; no name is matched by ad hoc string comparison at join time
+  3. Re-running the script against an already-enriched `records.csv` changes nothing: no record with an existing non-blank stated county/district is overwritten
+  4. Every one of the ~15 distinct legacy BC regional-district values observed in the reference data resolves to a current CDUID in the crosswalk (no silently-dropped BC rows)
+
+**Plans**: 4 plans in 3 waves
+Plans:
+**Wave 1** (parallel)
+
+- [x] 44-01-PLAN.md — Build data/district-crosswalk.csv: name→stable-ID crosswalk (US GEOID / BC CDUID) covering every distinct legacy name incl. 3 BC renames + anomalies (DIST-02)
+- [x] 44-02-PLAN.md — Author scripts/backfill-legacy-county.ts (resolveDbSpeciesId + joinNaturalKey pure core + main() CLI) + tests/fixtures + package.json test entry (DIST-01, DIST-02)
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [x] 44-03-PLAN.md — Run the re-join against the live DB (fill 2.79%→96.94% + district_id column, idempotent) + emit legacy-rejoin-report.csv + curator review checkpoint (DIST-01, DIST-02)
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [x] 44-04-PLAN.md — Thread district_id through 4 DuckDB column maps + OccurrenceRecordSchema + EXPECTED_PARQUET_COLUMNS (DIST-01)
+
+### Phase 45: Boundary Data Acquisition
+
+**Goal**: US county and BC regional-district boundary polygons for the PNW footprint are committed to the repo as small, WGS84-reprojected GeoJSON, ready for offline point-in-polygon use
+**Depends on**: Phase 44
+**Requirements**: DIST-03
+**Success Criteria** (what must be TRUE):
+
+  1. `data/boundaries/` contains committed GeoJSON covering US counties for WA, OR, ID, and MT, and BC regional districts — and nothing outside that footprint (not a nationwide county file)
+  2. Every polygon in the committed GeoJSON is in WGS84 (EPSG:4326); spot-checking a known reference point (e.g. a WA county centroid) against its polygon confirms correct coordinates with no CRS mismatch
+  3. The committed boundary files are simplified to a small, git-friendly size (hundreds of KB, not tens of MB) while still resolving real occurrence points correctly
+  4. The one-time acquisition/conversion process (source URLs, mapshaper filter/simplify/reproject commands) is documented so a maintainer can re-run it if source boundaries are updated
+
+**Plans**: 2 plans
+Plans:
+**Wave 1**
+
+- [x] 45-01-PLAN.md — Testable conversion core: exported pure validators (isInFootprint / featureWithinBounds / checkCrosswalkCoverage) + node --test coverage + test-glob registration (DIST-03)
+
+**Wave 2** *(blocked on Wave 1; contains the mapshaper package-legitimacy checkpoint)*
+
+- [x] 45-02-PLAN.md — main() downloads + npx mapshaper@0.7.37 filter/reproject/simplify/merge → committed data/boundaries/pnw-districts.geojson; DuckDB ST_Contains spot-check + _instructions/REFRESHING_BOUNDARIES.md (DIST-03)
+
+### Phase 46: Coordinate → District Assignment
+
+**Goal**: Every georeferenced record without a stated district gets one derived from its coordinates, using a shared, guarded point-in-polygon module, and the whole assignment workflow is documented as a repeatable maintainer step
+**Depends on**: Phase 45
+**Requirements**: DIST-04, DIST-05, DIST-06
+**Success Criteria** (what must be TRUE):
+
+  1. A shared point-in-polygon module rejects or flags any coordinate pair outside the bounds sanity gate (lat ∈ [41, 61], lon ∈ [−140, −109]) before attempting district assignment, and applies a mandatory lon/lat axis-order check first — verified against the project's own known-bad rows in `data/records-bad-coords.csv`
+  2. Running the coordinate-fill script assigns a district to previously-blank, georeferenced records using only their coordinates, additively — no record with an existing non-blank stated county/district is overwritten
+  3. A record whose coordinates fall just outside all known polygons (coastal/near-water) is assigned via a nearest-boundary-within-tolerance fallback rather than left unassigned
+  4. After Phase 44 + this phase, `data/records.csv` district fill rate for records with valid coordinates reaches ≥99%
+  5. A maintainer-facing runbook under `_instructions/` documents running the legacy re-join and coordinate fill as a repeatable, additive step after adding new records — mirroring the existing `_instructions/` pattern
+
+**Plans**: 3 plans in 3 waves
+**Wave 1**
+
+- [x] 46-01-PLAN.md — Shared DB-free axis-order/bounds guard module + unit tests (DIST-04)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [x] 46-02-PLAN.md — Coordinate-fill CLI: DuckDB containment + nearest-boundary fallback, additive write, report; tests (DIST-04, DIST-05)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [x] 46-03-PLAN.md — Run fill on real records.csv (≥99% valid-coord fill), commit coord-fill-report.csv, author DIST-06 runbook (DIST-05, DIST-06)
+
+### Phase 47: QC Mismatch Report
+
+**Goal**: Curators can see, in a non-blocking build artifact, every record whose stated district disagrees with its coordinate-derived district (or whose coordinates fall outside all known boundaries), tiered by severity so the report stays reviewable rather than becoming noise
+**Depends on**: Phase 46 (derived district values must exist to compare against)
+**Requirements**: QC-01, QC-02, QC-03
+**Success Criteria** (what must be TRUE):
+
+  1. `npm run build` emits `_site/records-district-audit.csv` on every run, and the build succeeds whether or not mismatches are found — no mismatch ever fails the build
+  2. Every flagged row is bucketed into one confidence tier (same / adjacent-and-close / far-mismatch / outside-all-boundaries), the report is sorted by severity, and summary counts per tier appear at the top
+  3. A record with missing/null coordinates passes through the report with no district assigned and is never flagged as a mismatch
+  4. The audit CSV is not linked from any page — reachable only by direct URL, mirroring `species-audit.csv`
+
+**Plans**: 5 plans
+
+Plans:
+**Wave 0**
+
+- [x] 47-01-PLAN.md — RED test scaffolds for the three new scripts + package.json test registration
+
+**Wave 1** *(blocked on Wave 0)*
+
+- [x] 47-02-PLAN.md — Full-coverage derivation (derive-district-audit.ts) + committed records-derived-district.csv + ASSIGNING_DISTRICTS.md
+- [x] 47-03-PLAN.md — District-adjacency (build-district-adjacency.ts) + committed district-adjacency.csv + REFRESHING_BOUNDARIES.md
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [x] 47-04-PLAN.md — Build-time emit step (emit-records-district-audit.ts, pure joins + tiering + D-07 coverage gate) + build:site wiring
+
+**Wave 3** *(blocked on Wave 2; contains the human-verify checkpoint)*
+
+- [x] 47-05-PLAN.md — Phase gate: full suite + full build + unlinked assertion + curator-legibility human-verify
+
+### Phase 48: Browse District Filter
+
+**Goal**: Users on `/browse/` can filter the taxon tree by county / regional district, scoped to the PNW region, with terminology that matches the selected jurisdiction, and the page still works with JavaScript disabled
+**Depends on**: Phase 44, Phase 46 (near-complete district coverage; a filter over sparse data mutes nearly every taxon)
+**Requirements**: BFILT-01, BFILT-02, BFILT-03, BFILT-04, BFILT-05
+**Success Criteria** (what must be TRUE):
+
+  1. A build-time `_site/species-districts.json` aggregate, compound-keyed `${state}:${district}`, is emitted alongside `species-states.json`
+  2. A single-select district `<select>` on `/browse/` is state-scoped/cascading against the existing state filter, and selecting a district mutes (not hides) taxa with no records in that district — consistent with the existing state-filter behavior
+  3. The district dropdown's options are restricted to BC, WA, OR, ID, and the explicit, committed western-MT county allow-list (Flathead, Granite, Lake, Lincoln, Mineral, Missoula, Powell, Ravalli, Sanders, Silver Bow); Alberta and eastern-MT districts never appear as selectable options, though records in those districts keep their assigned value
+  4. The filter's option/group labels read "Regional District" when a BC province/state is selected and "County" when a US state is selected, switching dynamically
+  5. With JavaScript disabled, `/browse/` still renders its complete static species listing; no broken or partially-rendered filter control appears in the no-JS view
+
+**Plans**: 2 plans
+Plans:
+**Wave 1**
+
+- [x] 48-01-PLAN.md — Data/build layer: species-districts.json emitter + western-MT allow-list CSV + SpeciesDistrictSchema + build wiring (BFILT-01, BFILT-03)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [x] 48-02-PLAN.md — Browse component: district <select> cascade/reset/mute + dynamic County/Regional-District label + Alberta dropped from the state filter (BFILT-02, BFILT-03, BFILT-04, BFILT-05)
+
+**UI hint**: yes
+
 ---
 
 ## Progress
@@ -793,9 +936,14 @@ Plans:
 | 41. Identify Page Scaffold & Filter Panel | v4.0 | 3/3 | Complete    | 2026-06-25 |
 | 42. Results Grid | v4.0 | 2/2 | Complete    | 2026-06-25 |
 | 43. Character Illustration Images | v4.0 | 3/3 | Complete    | 2026-06-26 |
+| 44. Legacy County Re-join | v5.0 | 4/4 | Complete    | 2026-07-05 |
+| 45. Boundary Data Acquisition | v5.0 | 2/2 | Complete   | 2026-07-05 |
+| 46. Coordinate → District Assignment | v5.0 | 3/3 | Complete    | 2026-07-05 |
+| 47. QC Mismatch Report | v5.0 | 5/5 | Complete   | 2026-07-05 |
+| 48. Browse District Filter | v5.0 | 2/2 | Complete    | 2026-07-06 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24 | v5.0 started: 2026-07-04*
 
 ## Backlog
 

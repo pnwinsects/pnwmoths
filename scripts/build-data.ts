@@ -123,7 +123,8 @@ export async function main(): Promise<void> {
   }
   validateCsv('data/records.csv', [
     'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
-    'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection', 'notes'
+    'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection', 'notes',
+    'district_id'
   ]);
 
   // --- DuckDB import with explicit schema ---
@@ -151,7 +152,8 @@ export async function main(): Promise<void> {
     )
   `);
 
-  // records.csv — WITHOUT nullstr='' (blank cells become NULL, especially county 100% null)
+  // records.csv — WITHOUT nullstr='' (blank cells become NULL; county/district_id are
+  // now populated for ~96%+ of rows following the Phase 44 legacy re-join)
   await conn.run(`
     CREATE TABLE records AS
     SELECT * FROM read_csv('data/records.csv',
@@ -170,7 +172,8 @@ export async function main(): Promise<void> {
         'day': 'INTEGER',
         'collector': 'VARCHAR',
         'collection': 'VARCHAR',
-        'notes': 'VARCHAR'
+        'notes': 'VARCHAR',
+        'district_id': 'VARCHAR'
       }
     )
   `);
