@@ -51,7 +51,7 @@ Covers the data pipeline (`scripts/build-data.test.js`) and Lit components
 
 ## Node version
 
-22 — see `.nvmrc`. If using nvm: `nvm use`.
+24 — see `.nvmrc`. If using nvm: `nvm use`.
 
 ## Geographic constraints
 

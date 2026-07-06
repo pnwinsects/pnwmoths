@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Node.js 22](https://nodejs.org/) (or use [nvm](https://github.com/nvm-sh/nvm): `nvm use`)
+- [Node.js 24](https://nodejs.org/) (or use [nvm](https://github.com/nvm-sh/nvm): `nvm use`)
 - [lychee](https://lychee.cli.rs/) — required locally for `npm run build:validate-links` (the Docker path includes it automatically)
 
 Or use Docker to skip local tooling (see below).
