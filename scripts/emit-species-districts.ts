@@ -121,7 +121,16 @@ export async function main(): Promise<void> {
       AND county IS NOT NULL AND county != ''
     ORDER BY species_slug, state, county
   `);
-  const rows = result.getRowObjectsJS() as unknown as SpeciesDistrictRow[];
+  // Single cast to the generic DuckDB row shape (matches emit-species-states.ts),
+  // then build typed rows explicitly. The DISTINCT query selects exactly these
+  // three non-null/non-empty columns, so String() coercion is total and safe —
+  // and this stays within the single-cast rule enforced by check-ts-only.sh.
+  const rawRows = result.getRowObjectsJS() as Record<string, unknown>[];
+  const rows: SpeciesDistrictRow[] = rawRows.map(r => ({
+    species_slug: String(r.species_slug),
+    state: String(r.state),
+    county: String(r.county),
+  }));
 
   conn.closeSync();
 
