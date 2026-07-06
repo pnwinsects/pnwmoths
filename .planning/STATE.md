@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v5.0
 milestone_name: Administrative Districts — County Assignment & Browse Filter
-status: verifying
-stopped_at: Completed 48-02-PLAN.md
-last_updated: "2026-07-06T03:20:22.425Z"
+status: milestone_complete
+stopped_at: v5.0 archived; awaiting /gsd-new-milestone
+last_updated: "2026-07-06T00:00:00.000Z"
 last_activity: 2026-07-06
 progress:
   total_phases: 30
@@ -18,19 +18,19 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-07-04 for v5.0 milestone)
+See: .planning/PROJECT.md (updated 2026-07-06 after v5.0 milestone)
 
 **Core value:** Prove that a static build pipeline can replace a Django/CMS stack for a data-heavy natural history site — and that non-technical maintainers can keep it running.
-**Current focus:** Phase 48 — browse-district-filter
+**Current focus:** Planning next milestone — run `/gsd-new-milestone`.
 
 ## Current Position
 
-Phase: 48
-Plan: Not started
-Status: Phase complete — ready for verification
+Milestone: v5.0 Administrative Districts — ✅ SHIPPED 2026-07-06 (Phases 44–48, 16 plans, 14/14 requirements; merged via PR #122; closes #25, #96)
+Archived: milestones/v5.0-ROADMAP.md, milestones/v5.0-REQUIREMENTS.md; tag v5.0
+Status: Milestone complete — awaiting next milestone definition
 Last activity: 2026-07-06
 
-Progress: [█████████░] 94%
+Progress: [██████████] 100% (v5.0)
 
 ## Performance Metrics
 
@@ -175,6 +175,8 @@ None.
 
 ## Deferred Items
 
+**v5.0 close (2026-07-06):** the pre-close open-artifact audit surfaced 6 items, all verified already-resolved and acknowledged: Phase 42 UAT (status `passed`, 0 pending scenarios — a v4.0 phase) and 5 quick tasks (`260628-jtl`, `260629-geq`, `260630-pjq`, `260630-u5n`, `260701-ddi`) that the CLI read as `unknown` but are all recorded `complete ✓` in "Quick Tasks Completed" below. No genuine deferrals from v5.0 beyond the tech-debt items tracked in PROJECT.md (Alberta boundary coverage; 2,660 BC rows without `district_id`; stale StatCan names; Phase 45 artifacts) and the v5.x future requirements (QCX-01/02, BFILT-06/07).
+
 Items acknowledged and carried forward:
 
 | Category | Item | Status | Deferred At |
@@ -213,11 +215,11 @@ Items acknowledged and carried forward:
 
 ## Session Continuity
 
-Last session: 2026-07-06T01:30:25.286Z
-Stopped at: Completed 48-02-PLAN.md
+Last session: 2026-07-06 — v5.0 milestone completed and archived
+Stopped at: v5.0 archived (MILESTONES.md, PROJECT.md, ROADMAP.md, archives, tag v5.0)
 Resume file: None
 
 ## Operator Next Steps
 
-- Review .planning/ROADMAP.md Phase 44–48 details and approve
-- Begin phase planning with /gsd-plan-phase 44
+- Start the next milestone: `/clear` then `/gsd-new-milestone` (questioning → research → requirements → roadmap)
+- Optional cleanup: `/gsd-cleanup` to archive lingering v4.0/v5.0 phase directories under `.planning/phases/`

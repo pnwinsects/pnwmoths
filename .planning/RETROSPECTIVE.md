@@ -461,6 +461,37 @@ A `/identify/` page filtering 1,228 species by 237 character-states (8 categorie
 - When images 404, distinguish "wrong filename" from "never uploaded" early — the fix differs (catalog edit vs migration).
 - Audit the whole surface (all nav_images) before declaring a data-coverage problem fixed.
 
+## Milestone: v5.0 — Administrative Districts
+
+**Shipped:** 2026-07-06 | **Phases:** 5 (44–48) | **Plans:** 16 | **Requirements:** 14/14 | **Issues:** #25, #96
+
+### What Was Built
+Offline, maintainer-run district assignment for every occurrence record: a legacy re-join (county fill 2.79%→96.94% via a committed name→stable-ID crosswalk), coordinate point-in-polygon fill with a nearest-boundary fallback against committed WGS84 boundary GeoJSON, a non-blocking tiered QC mismatch report, and a PNW-scoped cascading county/regional-district filter on `/browse/`.
+
+### What Worked
+- **Stable-ID crosswalk over name matching** made the legacy re-join deterministic and curator-reviewable, and absorbed real-world renames (Skeena-Queen Charlotte → North Coast) without join-time string fuzz.
+- **A shared, DB-free guard/gate module** (axis-order → bounds gate → classifier) reused across the fill script (Phase 46) and the audit derivation (Phase 47) kept the geospatial invariants in one tested place instead of re-derived per script.
+- **Additive-only + idempotent by construction** across both re-join and coord-fill: re-runs were byte-identical, so the "assign on upload" maintainer story is safe to repeat.
+- **Curator-legibility checkpoint** caught that a `#`-commented tier-summary preamble broke RFC-4180; moving counts to a JSON sidecar preserved both the at-a-glance summary and a valid CSV.
+
+### What Was Inefficient
+- **Boundary acquisition (Phase 45) under-scoped Alberta** — only 1 of ~19 census divisions acquired — which capped the overall coord-fill headline (57.90% vs 99.58% ex-AB). The requirement's ≥99% target was framed per-state; the acquisition scope didn't match, and it surfaced only at fill time in Phase 46.
+- **Phase 45's PLAN/SUMMARY artifacts weren't retained**, so this milestone's archive for that phase had to be reconstructed from STATE.md + git — a reminder that execution artifacts are the archive's source of truth.
+- The **2,660 BC-rows-without-district_id** gap (additive-only skipped rows that already had a county name) was spotted in Phase 44 but carried forward rather than closed inline.
+
+### Patterns Established
+- **Offline write-back assignment** (`scripts/backfill-legacy-county.ts`, `scripts/fill-district-from-coords.ts`): network-free, idempotent scripts that mutate committed `records.csv` — the static-site equivalent of an on-upload spatial join, keeping `npm run build` deterministic.
+- **Positional `row_index` joins** for record-derived artifacts where the natural key `(species_slug, lat, lon, state, county)` is empirically non-unique.
+- **`ST_Boundary()`-wrapped ST_DWithin/ST_Distance** as a required idiom for this DuckDB spatial build (raw Polygon-Polygon distance silently returns 0).
+
+### Key Lessons
+- Match acquisition scope to the requirement's measurement basis — a per-state target needs per-state coverage, or the headline metric will mislead.
+- Treat "additive-only skipped it" gaps as first-class follow-ups at the phase that discovers them, not deferred debt.
+- Validate report artifacts against their format spec (RFC-4180) as part of the human-legibility gate, not just visually.
+
+### Cost Observations
+- Fast, well-scoped milestone (~2 days, 2026-07-04→07-06); most phases 5–35 min per plan per STATE metrics. Heavy reliance on TDD RED-scaffold-first (Phase 47) and pure-helper extraction (`deriveStatesAvailable`) kept components unit-testable.
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -475,6 +506,9 @@ A `/identify/` page filtering 1,228 species by 237 character-states (8 categorie
 | v2.0 | 30+ | 3 | Build-time HTML transform + native Popover API tooltip; gap found by verification (19-04) |
 | v2.1 | 64 | 4 | UI-heavy fact-sheet milestone; sibling-walk inert, ResizeObserver guard, TDD filter data layer |
 | v2.2 | 159 | 7 | Pipeline-heavy milestone; vertical-slice pilot pattern established; 3 pipeline scripts + OSD viewer |
+| v3.0 | 22 plans | 6 | Full TS migration; four CI gates (typecheck, suite, TS-only guard, parquet verify); byte-identical output proof |
+| v4.0 | 13 plans | 5 | Character-filter Identify page over a bitset key matrix; authoritative-source-over-heuristic; backup→bunny migration |
+| v5.0 | 16 plans | 5 | Offline write-back district assignment; DuckDB spatial PIP; stable-ID crosswalk; advisory tiered QC report; ~2 days |
 
 ### Cumulative Quality
 
@@ -489,6 +523,8 @@ A `/identify/` page filtering 1,228 species by 237 character-states (8 categorie
 | v2.1 | 6 | +filterRecords TDD suite (10 new cases, county/collection/elevation + null passthrough); 97 total (no new test files) | 0/4 phases (no validation passes run for UI phases) |
 | v2.2 | 9 | +manifest/parse-photo-filename/dropbox-download/tile-photos/upload-tiles/generate-species-photos unit tests; 191 total | 0/7 phases (pipeline scripts unit-tested but no Nyquist validation passes run) |
 | v3.0 | 17 | all test files migrated to `.ts` (node --test type-stripping); +lightbox close-behavior regression tests; 229 total; CI gates: typecheck + suite + TS-only guard + verify:parquet | 3/6 phases (33, 36, 37 compliant; 34, 35, 38 partial) |
+| v4.0 | — | +key-matrix build/filter-semantics TDD (OR-within/AND-across, "0=unscored"); Lucid3 extraction tests | filter contract TDD-locked before UI |
+| v5.0 | — | +crosswalk/join, axis-order/bounds guard, coord-fill classifier, tiering + adjacency, `deriveStatesAvailable` unit tests; RED-scaffold-first (Phase 47) | geospatial invariants centralized + tested; report validated against RFC-4180 |
 
 ### Top Lessons (Verified Across Milestones)
 

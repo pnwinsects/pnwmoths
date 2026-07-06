@@ -1,5 +1,23 @@
 # Milestones
 
+## v5.0 Administrative Districts — County Assignment & Browse Filter (Shipped: 2026-07-06)
+
+**Phases completed:** 5 phases (Phases 44–48), 16 plans, ~33 tasks
+**Timeline:** 2026-07-04 → 2026-07-06 · merged to `main` via PR #122
+**Requirements:** 14/14 delivered (DIST-01…06, QC-01…03, BFILT-01…05) · closes #25, #96
+
+**Key accomplishments:**
+
+- Legacy county re-join raised `data/records.csv` county/regional-district fill from 2.79% → 96.94% (89,817 records) via a committed name→stable-ID crosswalk (US GEOID / BC CDUID, incl. 3 BC renames like "Skeena-Queen Charlotte" → "North Coast"); additive-only (0 overwrites) and idempotent (byte-identical re-run), with `district_id` threaded through 4 DuckDB column maps + OccurrenceRecordSchema + EXPECTED_PARQUET_COLUMNS as prefixed VARCHAR stable IDs (`US:`/`CA:`).
+- Acquired, simplified (mapshaper), and reprojected to WGS84 the WA/OR/ID/MT county + BC regional-district boundary polygons, committed as small GeoJSON under `data/boundaries/pnw-districts.geojson`, with a `_instructions/REFRESHING_BOUNDARIES.md` refresh runbook.
+- Shared point-in-polygon module with a mandatory lon/lat axis-order guard + bounds sanity gate (lat ∈ [41,61], lon ∈ [−140,−109]) firing before any DuckDB `ST_Contains` query; nearest-boundary-within-tolerance fallback assigns coastal/near-water points; valid-coordinate fill reaches 99.58% (excluding partially-covered Alberta).
+- Non-blocking `_site/records-district-audit.csv` emitted every build, bucketing each stated-vs-derived mismatch into a confidence tier (same / adjacent-and-close / far-mismatch / outside-all-boundaries) with per-tier counts in a JSON sidecar (keeping the CSV RFC-4180 valid); missing-coordinate rows pass through unflagged; unlinked, mirroring `species-audit.csv`.
+- PNW-scoped Browse district filter: build-time `species-districts.json` (compound-keyed `${state}:${district}`), single-select cascading `<select>` on `/browse/` that mutes (not hides) taxa, restricted to a committed allow-list (BC/WA/OR/ID + 10 western-MT counties; Alberta/eastern-MT excluded), dynamic "County"/"Regional District" labels, no-JS static listing intact.
+
+**Known deferred / open items at close:** Alberta boundary coverage partial (caps overall coord-fill); 2,660 pre-existing BC rows with a county name but no `district_id`; two known-stale StatCan names carried verbatim; Phase 45 PLAN/SUMMARY artifacts not retained. Deferred to v5.x: QCX-01, QCX-02, BFILT-06, BFILT-07.
+
+---
+
 ## v4.0 Key Characters — Visual Identification (Shipped: 2026-06-27)
 
 **Phases completed:** 5 phases, 13 plans, 28 tasks

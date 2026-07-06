@@ -15,7 +15,7 @@
 - ✅ **v2.2 High-resolution species photos** — Phases 26–32 (shipped 2026-05-24) — [archive](milestones/v2.2-ROADMAP.md)
 - ✅ **v3.0 TypeScript Frontend & Build-Time Data Validation** — Phases 33–38 (shipped 2026-06-10) — [archive](milestones/v3.0-ROADMAP.md)
 - ✅ **v4.0 Key Characters — Visual Identification** — Phases 39–43 (shipped 2026-06-27) — [archive](milestones/v4.0-ROADMAP.md)
-- 🚧 **v5.0 Administrative Districts** — Phases 44–48 (in progress)
+- ✅ **v5.0 Administrative Districts** — Phases 44–48 (shipped 2026-07-06) — [archive](milestones/v5.0-ROADMAP.md)
 
 ## Phases
 
@@ -140,7 +140,8 @@
 
 </details>
 
-### 🚧 v5.0 Administrative Districts — County Assignment & Browse Filter (Phases 44–48) — IN PROGRESS
+<details>
+<summary>✅ v5.0 Administrative Districts — County Assignment & Browse Filter (Phases 44–48) — SHIPPED 2026-07-06</summary>
 
 **Milestone Goal:** Give every occurrence record an accurate county / regional-district — re-joining the curated legacy assignments, deriving from coordinates to fill gaps and catch data-entry errors — and add a county/regional-district filter to the Browse page scoped to the PNW region. (Issues #25, #96.)
 
@@ -149,6 +150,8 @@
 - [x] **Phase 46: Coordinate → District Assignment** - Shared point-in-polygon module with axis-order/bounds guard; additive coordinate fill of the remaining gap; maintainer runbook (completed 2026-07-05)
 - [x] **Phase 47: QC Mismatch Report** - Non-blocking, tiered stated-vs-derived district mismatch report mirroring `species-audit.csv` (completed 2026-07-05)
 - [x] **Phase 48: Browse District Filter** - PNW-scoped county/regional-district filter on `/browse/`, cascading against the existing state filter (completed 2026-07-06)
+
+</details>
 
 ## Phase Details
 
@@ -943,7 +946,7 @@ Plans:
 | 48. Browse District Filter | v5.0 | 2/2 | Complete    | 2026-07-06 |
 
 ---
-*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 started: 2026-06-24 | v5.0 started: 2026-07-04*
+*Roadmap created: 2026-04-11 | v1.0 archived: 2026-04-12 | v1.1 archived: 2026-04-18 | v1.2 archived: 2026-04-18 | v1.3 archived: 2026-04-20 | v1.4 archived: 2026-04-23 | v2.0 archived: 2026-05-19 | v2.1 archived: 2026-05-20 | v2.2 archived: 2026-05-24 | v3.0 archived: 2026-06-10 | v4.0 archived: 2026-06-27 | v5.0 started: 2026-07-04 | v5.0 archived: 2026-07-06*
 
 ## Backlog
 
