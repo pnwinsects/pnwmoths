@@ -80,8 +80,8 @@
 
       let pagefind;
       try {
-        pagefind = await import('/pagefind/pagefind.js');
-        await pagefind.options({ baseUrl: '/' });
+        pagefind = await import('{{ '/pagefind/pagefind.js' | url }}');
+        await pagefind.options({ baseUrl: '{{ '/' | url }}' });
       } catch {
         return; // Pagefind not available (dev mode)
       }
