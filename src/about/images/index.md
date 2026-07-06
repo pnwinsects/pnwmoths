@@ -6,7 +6,7 @@ permalink: /about/images/index.html
 
 # About the Images
 
-## Image Copyright {#copyright}
+## Image Copyright
 
 We have decided to update the copyright status of the images on this site to a
 Creative Commons license,
@@ -22,7 +22,7 @@ this statement is intended to supersede any previous copyright status of the
 images. We encourage you to save a screenshot of this statement as documentation
 of the new copyright status, should you want to use any of our images.
 
-## Individual Moth Photographs {#photography}
+## Individual Moth Photographs
 
 Virtually all of the images that appear in the species accounts and
 photographic plates on this website were taken using the
@@ -42,7 +42,7 @@ in general. We have found it difficult to obtain similar results using other
 setups, largely due to limitations in lighting, resulting in poor depth of field
 and/or blurriness from vibrations that occur with slow shutter speeds.
 
-## Viewing the Images in High Resolution {#viewing}
+## Viewing the Images in High Resolution
 
 The moth images on this site can be viewed in high resolution on the individual
 species account pages. For example, here is what you will see at the page for
@@ -68,7 +68,7 @@ buttons, and enter **full-screen mode** using the rightmost toolbar button to
 see the image at maximum size with the ability to zoom in further — revealing
 incredible detail in wing scales and body structures.
 
-## A Guide to Making Photographic Plates {#plates}
+## A Guide to Making Photographic Plates
 
 *The methods we use for producing photographic plates are adapted from methods
 developed by Jocelyn Gill, of the Canadian National Collection. Special thanks
