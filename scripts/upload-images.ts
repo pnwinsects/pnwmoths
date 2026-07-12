@@ -18,9 +18,9 @@
  *
  * Usage:
  *   DRY_RUN=1 node scripts/upload-images.ts               # print plan, zero API calls
- *   BUNNY_API_KEY=... node scripts/upload-images.ts        # real upload run
+ *   BUNNY_STORAGE_PASSWORD=... node scripts/upload-images.ts        # real upload run
  *
- * BUNNY_API_KEY: Storage Zone password from bunny.net dashboard → pnwmoths
+ * BUNNY_STORAGE_PASSWORD: Storage Zone password from bunny.net dashboard → pnwmoths
  * Storage Zone → FTP & API Access → Password. Never commit, log, or hardcode.
  *
  * Requires: curl CLI, vips CLI (brew install vips).
@@ -43,7 +43,7 @@ const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
-const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
+const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 
 // ---------------------------------------------------------------------------
 // Helpers — verbatim copies from upload-tiles.ts (project convention).
@@ -52,13 +52,13 @@ const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /**
- * Redact BUNNY_API_KEY from an error message. Verbatim from upload-tiles.ts:73-77.
+ * Redact BUNNY_STORAGE_PASSWORD from an error message. Verbatim from upload-tiles.ts:73-77.
  * Guard against the empty-key edge case: new RegExp('', 'g') matches every
  * position and would corrupt error text. When key is empty, returns original message.
  */
 function redact(msg: string): string {
-  return BUNNY_API_KEY
-    ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')
+  return BUNNY_STORAGE_PASSWORD
+    ? msg.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]')
     : msg;
 }
 
@@ -190,7 +190,7 @@ async function main(): Promise<void> {
   );
 
   // --- DRY_RUN path: print upload plan and return — ZERO API calls (SC1, D-04). ---
-  // Must come BEFORE the !BUNNY_API_KEY guard so DRY_RUN=1 works without a key.
+  // Must come BEFORE the !BUNNY_STORAGE_PASSWORD guard so DRY_RUN=1 works without a key.
   if (DRY_RUN) {
     console.log('[upload-images] DRY_RUN=1 — printing upload plan; no curl/vips calls.');
     console.log('[upload-images] A real run will skip any file already present on the CDN (SC1: zero new PUTs on rerun).');
@@ -207,9 +207,9 @@ async function main(): Promise<void> {
   }
 
   // --- Missing-secret guard. ---
-  if (!BUNNY_API_KEY) {
+  if (!BUNNY_STORAGE_PASSWORD) {
     console.error(
-      '[upload-images] BUNNY_API_KEY is required. Set it to your bunny.net Storage Zone password.'
+      '[upload-images] BUNNY_STORAGE_PASSWORD is required. Set it to your bunny.net Storage Zone password.'
     );
     console.error('[upload-images] bunny.net dashboard → Storage → pnwmoths zone → FTP & API Access → Password');
     process.exit(1);
@@ -224,7 +224,7 @@ async function main(): Promise<void> {
   try {
     const listOutput = execFileSync('curl', [
       '-s', '-S', '-f',
-      '-H', `AccessKey: ${BUNNY_API_KEY}`,
+      '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
       listingUrl,
     ], { stdio: ['pipe', 'pipe', 'pipe'] });
 
@@ -280,7 +280,7 @@ async function main(): Promise<void> {
           const code = await withRetry(() => {
             const out = execFileSync('curl', [
               '-s', '-S', '-o', '/dev/null', '-w', '%{http_code}', '-I',
-              '-H', `AccessKey: ${BUNNY_API_KEY}`,
+              '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
               storageUrl,
             ], { stdio: ['pipe', 'pipe', 'pipe'] }).toString().trim();
             const status = Number(out);
@@ -313,7 +313,7 @@ async function main(): Promise<void> {
           () => execFileSync('curl', [
             '-s', '-S', '-f',
             '-X', 'PUT',
-            '-H', `AccessKey: ${BUNNY_API_KEY}`,
+            '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
             '-H', 'Content-Type: image/webp',
             '--data-binary', `@${tmpWebpPath}`,
             storageUrl,

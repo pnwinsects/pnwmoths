@@ -12,9 +12,9 @@
  * tile directory and .dzi descriptor to reclaim disk space (D-03).
  *
  * Usage:
- *   BUNNY_API_KEY=... node scripts/upload-tiles.ts
+ *   BUNNY_STORAGE_PASSWORD=... node scripts/upload-tiles.ts
  *   DRY_RUN=1 node scripts/upload-tiles.ts         # prints first 5 upload plans; no uploads, no manifest write
- *   TILE_OUTPUT_DIR=/mnt/tiles BUNNY_API_KEY=... node scripts/upload-tiles.ts
+ *   TILE_OUTPUT_DIR=/mnt/tiles BUNNY_STORAGE_PASSWORD=... node scripts/upload-tiles.ts
  *
  * Resume after interruption: re-run the same command. Rows with status=uploaded
  * are skipped at the filter stage. Rows that crashed mid-directory remain at
@@ -26,7 +26,7 @@
  * env var is the only override path mechanism. This script does NOT reference
  * any remote-server-specific paths.
  *
- * BUNNY_API_KEY: Storage Zone password from bunny.net dashboard → pnwmoths
+ * BUNNY_STORAGE_PASSWORD: Storage Zone password from bunny.net dashboard → pnwmoths
  * Storage Zone. Never commit, log, or hardcode.
  *
  * Requires: curl CLI. Confirm with `curl --version`.
@@ -52,7 +52,7 @@ const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
-const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
+const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 
 // ---------------------------------------------------------------------------
 // Helpers — copied/adapted from tile-photos.ts (exponential backoff) and
@@ -62,7 +62,7 @@ const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /**
- * Redact BUNNY_API_KEY from an error message. Mirrors tile-photos.ts verbatim
+ * Redact BUNNY_STORAGE_PASSWORD from an error message. Mirrors tile-photos.ts verbatim
  * (adapted variable name) — this is the project-wide secret-redaction idiom.
  *
  * Guard against the empty-key edge case: `new RegExp('', 'g')` matches every
@@ -71,8 +71,8 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
  * original message is returned unchanged.
  */
 function redact(msg: string): string {
-  return BUNNY_API_KEY
-    ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')
+  return BUNNY_STORAGE_PASSWORD
+    ? msg.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]')
     : msg;
 }
 
@@ -265,7 +265,7 @@ async function main(): Promise<void> {
   );
 
   // --- DRY_RUN path: print first 5 upload plans; exit without side-effects. ---
-  // Must come BEFORE the !BUNNY_API_KEY guard so DRY_RUN=1 works without an API key (pitfall 6).
+  // Must come BEFORE the !BUNNY_STORAGE_PASSWORD guard so DRY_RUN=1 works without an API key (pitfall 6).
   if (DRY_RUN) {
     console.log('[upload-tiles] DRY_RUN=1 — printing first 5 upload plans, not uploading');
     for (const row of tiledRows.slice(0, 5)) {
@@ -283,9 +283,9 @@ async function main(): Promise<void> {
   }
 
   // --- Missing-secret guard. ---
-  if (!BUNNY_API_KEY) {
+  if (!BUNNY_STORAGE_PASSWORD) {
     console.error(
-      '[upload-tiles] BUNNY_API_KEY is required. Set it to your bunny.net Storage Zone password.'
+      '[upload-tiles] BUNNY_STORAGE_PASSWORD is required. Set it to your bunny.net Storage Zone password.'
     );
     process.exit(1);
   }
@@ -321,7 +321,7 @@ async function main(): Promise<void> {
           const args = [
             '-s', '-S', '-f',
             '-X', 'PUT',
-            '-H', `AccessKey: ${BUNNY_API_KEY}`,
+            '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
             '-H', 'Content-Type: application/octet-stream',
             '--data-binary', `@${tileFile}`,
             url,
@@ -339,7 +339,7 @@ async function main(): Promise<void> {
           const thumbArgs = [
             '-s', '-S', '-f',
             '-X', 'PUT',
-            '-H', `AccessKey: ${BUNNY_API_KEY}`,
+            '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
             '-H', 'Content-Type: image/webp',
             '--data-binary', `@${thumbnailLocalPath}`,
             thumbnailUrl,
@@ -355,7 +355,7 @@ async function main(): Promise<void> {
         const dziArgs = [
           '-s', '-S', '-f',
           '-X', 'PUT',
-          '-H', `AccessKey: ${BUNNY_API_KEY}`,
+          '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
           '-H', 'Content-Type: application/octet-stream',
           '--data-binary', `@${dziLocalPath}`,
           dziUrl,

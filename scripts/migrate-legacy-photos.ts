@@ -23,9 +23,9 @@
  *
  * Usage:
  *   DRY_RUN=1 LEGACY_PHOTOS_SRC=/tmp/legacy-moths/.../media/moths node scripts/migrate-legacy-photos.ts
- *   BUNNY_API_KEY=... LEGACY_PHOTOS_SRC=... node scripts/migrate-legacy-photos.ts
+ *   BUNNY_STORAGE_PASSWORD=... LEGACY_PHOTOS_SRC=... node scripts/migrate-legacy-photos.ts
  *
- * BUNNY_API_KEY: Storage Zone password (bunny.net → pnwmoths zone → FTP & API
+ * BUNNY_STORAGE_PASSWORD: Storage Zone password (bunny.net → pnwmoths zone → FTP & API
  * Access → Password). Only the real PUT needs it; DRY_RUN runs read-only.
  * Requires: curl CLI.
  */
@@ -44,13 +44,13 @@ const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
-const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
+const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
-/** Redact BUNNY_API_KEY from an error message. Verbatim from upload-images.ts. */
+/** Redact BUNNY_STORAGE_PASSWORD from an error message. Verbatim from upload-images.ts. */
 function redact(msg: string): string {
-  return BUNNY_API_KEY ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]') : msg;
+  return BUNNY_STORAGE_PASSWORD ? msg.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]') : msg;
 }
 
 /** Five-attempt exponential backoff (2/4/8/16/32s). Verbatim from upload-images.ts. */
@@ -145,8 +145,8 @@ async function main(): Promise<void> {
   console.log(`[migrate-legacy-photos] source: ${SOURCE_DIR}`);
   console.log(`[migrate-legacy-photos] ${work.length} source files matched to a catalogued slug`);
 
-  if (!DRY_RUN && !BUNNY_API_KEY) {
-    console.error('[migrate-legacy-photos] BUNNY_API_KEY required for a real run (bunny.net → pnwmoths zone → FTP & API Access → Password).');
+  if (!DRY_RUN && !BUNNY_STORAGE_PASSWORD) {
+    console.error('[migrate-legacy-photos] BUNNY_STORAGE_PASSWORD required for a real run (bunny.net → pnwmoths zone → FTP & API Access → Password).');
     console.error('[migrate-legacy-photos] Use DRY_RUN=1 to preview without a key.');
     process.exit(1);
   }
@@ -173,7 +173,7 @@ async function main(): Promise<void> {
         () => execFileSync('curl', [
           '-s', '-S', '-f',
           '-X', 'PUT',
-          '-H', `AccessKey: ${BUNNY_API_KEY}`,
+          '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
           '-H', 'Content-Type: image/jpeg',
           '--data-binary', `@${srcPath}`,
           legacyPhotoStorageUrl(slug, targetName),

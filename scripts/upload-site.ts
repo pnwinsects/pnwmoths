@@ -48,9 +48,8 @@
  *   FORCE_FULL=1 BUNNY_STORAGE_PASSWORD=... node scripts/upload-site.ts
  *
  * BUNNY_STORAGE_PASSWORD: Storage Zone password from bunny.net dashboard →
- * pnwmoths Storage Zone → FTP & API Access → Password. Falls back to
- * BUNNY_API_KEY (the image-uploader key — same value) for local convenience.
- * Never commit, log, or hardcode it.
+ * pnwmoths Storage Zone → FTP & API Access → Password. The same credential the
+ * local image-upload scripts use. Never commit, log, or hardcode it.
  */
 
 import { join, posix, sep } from 'node:path';
@@ -63,8 +62,7 @@ import { createHash } from 'node:crypto';
 
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
-const BUNNY_STORAGE_PASSWORD: string =
-  process.env['BUNNY_STORAGE_PASSWORD'] ?? process.env['BUNNY_API_KEY'] ?? '';
+const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 const SITE_DIR: string = process.env['SITE_DIR'] ?? '_site';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const FORCE_FULL: boolean = process.env['FORCE_FULL'] === '1';

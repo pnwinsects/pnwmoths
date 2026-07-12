@@ -9,7 +9,7 @@
  * the public site content in the same zone.
  *
  * Environment variables:
- *   BUNNY_STORAGE_PASSWORD — Storage Zone password (required; falls back to BUNNY_API_KEY)
+ *   BUNNY_STORAGE_PASSWORD — Storage Zone password (required)
  *   BUNNY_STORAGE_HOST     — Storage hostname (default: la.storage.bunnycdn.com)
  *   BUNNY_ZONE             — Zone name (default: pnwmoths)
  *   ANALYTICS_DIR          — Local directory to upload from (default: data/analytics)
@@ -26,8 +26,7 @@ import { resolve, join } from 'node:path';
 
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
-const BUNNY_STORAGE_PASSWORD: string =
-  process.env['BUNNY_STORAGE_PASSWORD'] ?? process.env['BUNNY_API_KEY'] ?? '';
+const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 const ANALYTICS_DIR: string = process.env['ANALYTICS_DIR'] ?? 'data/analytics';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 
