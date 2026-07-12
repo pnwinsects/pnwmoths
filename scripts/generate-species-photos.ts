@@ -29,7 +29,7 @@ import type { Specimen } from '../src/types/index.ts';
 const MANIFEST_PATH: string = resolve('data/species-photos-manifest.csv');
 const OUTPUT_PATH: string = resolve('data/species-photos.json');
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
-const BUNNY_API_KEY: string = '';
+const BUNNY_STORAGE_PASSWORD: string = '';
 
 // ---------------------------------------------------------------------------
 // SCHEMA-05 output type annotation
@@ -58,7 +58,7 @@ type SpeciesPhotoEntry = {
 // ---------------------------------------------------------------------------
 
 /**
- * Redact BUNNY_API_KEY from an error message. Mirrors tile-photos.ts verbatim
+ * Redact BUNNY_STORAGE_PASSWORD from an error message. Mirrors tile-photos.ts verbatim
  * (adapted variable name) — this is the project-wide secret-redaction idiom.
  *
  * Guard against the empty-key edge case: `new RegExp('', 'g')` matches every
@@ -67,8 +67,8 @@ type SpeciesPhotoEntry = {
  * original message is returned unchanged.
  */
 function redact(msg: string): string {
-  return BUNNY_API_KEY
-    ? msg.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]')
+  return BUNNY_STORAGE_PASSWORD
+    ? msg.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]')
     : msg;
 }
 

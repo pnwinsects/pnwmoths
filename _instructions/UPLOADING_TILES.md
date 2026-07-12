@@ -36,7 +36,7 @@ You will need all of the following on this laptop before running the script:
   have this. Confirm: `ls var/tiles/ | head -5` should list species directories.
 - **Outbound HTTPS** to `https://la.storage.bunnycdn.com` (the Storage Zone endpoint)
   from this laptop.
-- **`BUNNY_API_KEY`** — the Storage Zone password from the bunny.net dashboard. Go to
+- **`BUNNY_STORAGE_PASSWORD`** — the Storage Zone password from the bunny.net dashboard. Go to
   bunny.net → Storage → `pnwmoths` Storage Zone → FTP & API Access → copy the
   Password field. Never commit the key, paste it into chat, write it to
   disk, or hardcode it into any file.
@@ -50,7 +50,7 @@ The script reads one config file and several environment variables:
 
 | Variable | Default | Notes |
 |---|---|---|
-| `BUNNY_API_KEY` | _(required)_ | Storage Zone password; the script exits with `[upload-tiles] BUNNY_API_KEY is required. Set it to your bunny.net Storage Zone password.` if missing |
+| `BUNNY_STORAGE_PASSWORD` | _(required)_ | Storage Zone password; the script exits with `[upload-tiles] BUNNY_STORAGE_PASSWORD is required. Set it to your bunny.net Storage Zone password.` if missing |
 | `BUNNY_STORAGE_HOST` | `la.storage.bunnycdn.com` | Storage Zone host; rarely overridden (only if bunny.net adds a new region or you are testing against a different zone) |
 | `BUNNY_ZONE` | `pnwmoths` | Storage Zone name; forms the path prefix on every PUT URL |
 | `TILE_OUTPUT_DIR` | `var/tiles` (from `scripts/tile-config.json`) | Local directory the script reads tiles from; override only if your tiles live somewhere other than the default |
@@ -70,7 +70,7 @@ compute upload paths correctly:
 DRY_RUN=1 npm run photos:upload
 ```
 
-`DRY_RUN=1` does not require `BUNNY_API_KEY` — the key guard runs after the dry-run
+`DRY_RUN=1` does not require `BUNNY_STORAGE_PASSWORD` — the key guard runs after the dry-run
 early exit. No uploads are made, no manifest is written, no tiles are deleted.
 
 Expected output:
@@ -107,7 +107,7 @@ terminal closure. Log all output to a dated file for post-run auditing:
 
 ```bash
 tmux new -s upload
-BUNNY_API_KEY=xxxxx npm run photos:upload 2>&1 | tee upload-run-$(date +%F-%H%M).log
+BUNNY_STORAGE_PASSWORD=xxxxx npm run photos:upload 2>&1 | tee upload-run-$(date +%F-%H%M).log
 ```
 
 Detach with `Ctrl-b d`. Reattach with `tmux attach -t upload`.
@@ -221,13 +221,13 @@ entry), wait until the run completes or stop the script first.
 
 ## When Things Go Wrong
 
-**`[upload-tiles] BUNNY_API_KEY is required. Set it to your bunny.net Storage Zone password.`**
-The `BUNNY_API_KEY` env var was not set on the invocation line. Confirm the credential
+**`[upload-tiles] BUNNY_STORAGE_PASSWORD is required. Set it to your bunny.net Storage Zone password.`**
+The `BUNNY_STORAGE_PASSWORD` env var was not set on the invocation line. Confirm the credential
 at bunny.net → Storage → `pnwmoths` Storage Zone → FTP & API Access → Password field.
-Pass it on the invocation line: `BUNNY_API_KEY=xxxxx npm run photos:upload`.
+Pass it on the invocation line: `BUNNY_STORAGE_PASSWORD=xxxxx npm run photos:upload`.
 
 **Every PUT fails immediately with HTTP 4xx**
-Two common causes: (a) `BUNNY_API_KEY` is wrong — verify against the bunny.net
+Two common causes: (a) `BUNNY_STORAGE_PASSWORD` is wrong — verify against the bunny.net
 dashboard as above. (b) The PUT is going to the wrong host — confirm that
 `BUNNY_STORAGE_HOST` defaults to `la.storage.bunnycdn.com` (the Storage Zone, which
 accepts writes) and not `moths.pnwinsects.org` (the Pull Zone, which is read-only).

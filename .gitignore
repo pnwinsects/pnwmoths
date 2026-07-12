@@ -14,3 +14,5 @@ cdn-old-locations.txt
 cdn-bad-slug-old-locations.txt
 
 wwu-urls.txt
+.env
+.env.age

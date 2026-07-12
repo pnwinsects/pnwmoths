@@ -12,7 +12,7 @@
  *   TILE_OUTPUT_DIR=/mnt/tiles TIFF_CACHE_DIR=/mnt/tiffs node scripts/tile-photos.ts
  *
  * THUMBNAIL_ONLY mode — backfill missing thumbnails for already-uploaded rows:
- *   DROPBOX_TOKEN=sl.... BUNNY_API_KEY=... THUMBNAIL_ONLY=1 node scripts/tile-photos.ts
+ *   DROPBOX_TOKEN=sl.... BUNNY_STORAGE_PASSWORD=... THUMBNAIL_ONLY=1 node scripts/tile-photos.ts
  *   DRY_RUN=1 THUMBNAIL_ONLY=1 node scripts/tile-photos.ts      # dry-run thumbnail backfill
  *
  * In THUMBNAIL_ONLY mode the script targets rows with status=uploaded, downloads
@@ -54,7 +54,7 @@ const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
 const TIFF_CACHE_DIR_OVERRIDE: string = process.env['TIFF_CACHE_DIR'] ?? '';
 const THUMBNAIL_ONLY: boolean = process.env['THUMBNAIL_ONLY'] === '1';
-const BUNNY_API_KEY: string = process.env['BUNNY_API_KEY'] ?? '';
+const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
 
@@ -90,7 +90,7 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
  */
 function redact(msg: string): string {
   let out = DROPBOX_TOKEN ? msg.replace(new RegExp(DROPBOX_TOKEN, 'g'), '[REDACTED]') : msg;
-  out = BUNNY_API_KEY ? out.replace(new RegExp(BUNNY_API_KEY, 'g'), '[REDACTED]') : out;
+  out = BUNNY_STORAGE_PASSWORD ? out.replace(new RegExp(BUNNY_STORAGE_PASSWORD, 'g'), '[REDACTED]') : out;
   return out;
 }
 
@@ -295,7 +295,7 @@ function uploadThumbnailToCdn(localPath: string, row: ManifestRow): void {
   execFileSync('curl', [
     '-s', '-S', '-f',
     '-X', 'PUT',
-    '-H', `AccessKey: ${BUNNY_API_KEY}`,
+    '-H', `AccessKey: ${BUNNY_STORAGE_PASSWORD}`,
     '-H', 'Content-Type: image/webp',
     '--data-binary', `@${localPath}`,
     url,
@@ -486,8 +486,8 @@ async function mainThumbnailOnly(
     console.error('[tile-photos] DROPBOX_TOKEN is required for THUMBNAIL_ONLY mode.');
     process.exit(1);
   }
-  if (!BUNNY_API_KEY) {
-    console.error('[tile-photos] BUNNY_API_KEY is required for THUMBNAIL_ONLY mode.');
+  if (!BUNNY_STORAGE_PASSWORD) {
+    console.error('[tile-photos] BUNNY_STORAGE_PASSWORD is required for THUMBNAIL_ONLY mode.');
     process.exit(1);
   }
 

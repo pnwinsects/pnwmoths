@@ -14,7 +14,7 @@ Photographic plates are zoomable reference images served via the [OpenSeadragon]
     ImageProperties.xml
     thumbnail.jpg
   ```
-- `BUNNY_API_KEY` — the Storage Zone password from bunny.net dashboard → Storage → pnwmoths → FTP & API Access
+- `BUNNY_STORAGE_PASSWORD` — the Storage Zone password from bunny.net dashboard → Storage → pnwmoths → FTP & API Access
 
 ## Steps
 
@@ -43,14 +43,14 @@ Upload the plate files using `curl` with the bunny.net Storage Zone HTTP PUT API
 
 ```sh
 # Set your Storage Zone password from bunny.net → Storage → pnwmoths → FTP & API Access
-BUNNY_API_KEY="your-key"
+BUNNY_STORAGE_PASSWORD="your-key"
 PLATE_SLUG="plate-NN-familyname"
 
 # Upload each file in the tile directory (ImageProperties.xml, thumbnail.jpg, TileGroup0/*, etc.)
 find "plates/${PLATE_SLUG}" -type f | while read -r file; do
   dest_path="${file#plates/}"   # strip local 'plates/' prefix
   curl -s -X PUT \
-    -H "AccessKey: ${BUNNY_API_KEY}" \
+    -H "AccessKey: ${BUNNY_STORAGE_PASSWORD}" \
     -T "${file}" \
     "https://la.storage.bunnycdn.com/pnwmoths/${dest_path}"
   echo "Uploaded: ${dest_path}"
