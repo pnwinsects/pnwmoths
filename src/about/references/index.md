@@ -54,7 +54,7 @@ Crumb SE. 1956. The larvae of the Phalaenidae. *U.S. Department of Agriculture, 
 
 Dyar HG. 1904. The Lepidoptera of the Kootenai District of British Columbia. *U.S. National Museum Proceedings* 27(1376): 770-938.
 
-EH Strickland Entomological Museum, University of Alberta (website): <https://www.biology.ualberta.ca/uasm/>
+EH Strickland Entomological Museum, University of Alberta (website): <https://www.ualberta.ca/en/museums/museum-collections/eh-strickland-entomological-museum.html>
 
 Eichlin TD, Cunningham HB. 1978. The Plusiinae (Lepidoptera: Noctuidae) of America north of Mexico, emphasizing genitalic and larval morphology. *U.S. Department of Agriculture, Technical Bulletin* 1567: [i]-vi, 1-122.
 
