@@ -31,7 +31,6 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import { listSiteFiles, hashBytes } from './upload-site.ts';
 
 // ---------------------------------------------------------------------------
