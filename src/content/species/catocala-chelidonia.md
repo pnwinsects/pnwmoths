@@ -20,8 +20,7 @@ This is our only *Catocala* with a light yellow-orange hindwing. It should only 
 
 This species is found in western California to the border with Mexico. The range extends east through Arizona and southern Utah to central New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This species is probably a foodplant specialist feeding on oaks (Fagaceae).
 
 Adults are on the wing in late summer. They are nocturnal and come to light and sugar baits.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

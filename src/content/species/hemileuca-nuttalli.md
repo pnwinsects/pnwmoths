@@ -24,7 +24,7 @@ This species is widely distributed in juniper woodlands and upper sagebrush rang
 
 ### Global
 
-*Hemileuca nuttalli *occurs in the Rocky Mountains and Intermountain Region from British Columbia to northern New Mexico, northern Arizona, and southeastern California. It appears to be absent from central Nevada.
+*Hemileuca nuttalli* occurs in the Rocky Mountains and Intermountain Region from British Columbia to northern New Mexico, northern Arizona, and southeastern California. It appears to be absent from central Nevada.
 
 ## Life History
 
@@ -34,7 +34,7 @@ This species feeds primarily on bitterbrush (*Purshia tridentata*) in the Rosace
 
 ##### Adults
 
-Adults of *H. nuttalli *are diurnal and do not feed similar to other *Hemileuca* species.  They have been found from late July to mid-September in the Pacific Northwest.  Males fly rapidly while searching for females and are fairly difficult to catch on the wing.
+Adults of *H. nuttalli* are diurnal and do not feed similar to other *Hemileuca* species.  They have been found from late July to mid-September in the Pacific Northwest.  Males fly rapidly while searching for females and are fairly difficult to catch on the wing.
 
 ## Economic Importance
 

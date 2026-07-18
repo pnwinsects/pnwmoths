@@ -12,8 +12,7 @@ This species is widely distributed across Canada, and may extend westward to the
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Brachylomia algens* is only known from eastern and far northern parts of British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada, and may extend westward to the
 
 The range of this species extends from Yukon Territory and all of Alberta and Saskatchewan east to New Brunswick through southern Canada and the northern United States. The southern limit of its distribution is in Ohio in the East. It is also found in the Rocky Mountains in southern Wyoming and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

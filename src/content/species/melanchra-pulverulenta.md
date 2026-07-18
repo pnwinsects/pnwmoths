@@ -10,21 +10,19 @@ This species exhibits geographic variation in our region. Specimens from norther
 
 ## Habitat
 
-This species is widely distributed across Canada and throughout the Rocky Mountains in spruce-fir and mixed hardwood-conifer forests at middle to high elevations.  West of the Cascades, it occupies coastal rainforests in the Coast Range and along the west slope of the Cascades at low to middle elevations. It is usually a very rare species in most of the Northwest.* Melanchra pulverulenta *is considered to be management sensitive, and benefits from disturbed areas and small clear-cuts in the forest.
+This species is widely distributed across Canada and throughout the Rocky Mountains in spruce-fir and mixed hardwood-conifer forests at middle to high elevations.  West of the Cascades, it occupies coastal rainforests in the Coast Range and along the west slope of the Cascades at low to middle elevations. It is usually a very rare species in most of the Northwest. *Melanchra pulverulenta* is considered to be management sensitive, and benefits from disturbed areas and small clear-cuts in the forest.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Melanchra pulverulenta *is found in moist forests throughout our region, including west of the Coast and Cascade Ranges. It is most common at mid-elevations in the mountains. It has not been found in isolated mountains in the Basin and Range Province of southern Oregon and Idaho.
+*Melanchra pulverulenta* is found in moist forests throughout our region, including west of the Coast and Cascade Ranges. It is most common at mid-elevations in the mountains. It has not been found in isolated mountains in the Basin and Range Province of southern Oregon and Idaho.
 
 ### Global
 
 This species is widely distributed across boreal North America. It occurs from Alaska to Newfoundland in the North. The southern limits are New York in the East, Minnesota in the Midwest, Colorado in the Rocky Mountains, and California along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

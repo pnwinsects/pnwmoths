@@ -14,8 +14,7 @@ This species appears to be locally endemic to dry sand dunes at low elevations n
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is found near the Columbia River in the Columbia Basin. It has been collected most frequently in south-central Washington but also occurs in northern Oregon.
 
@@ -23,8 +22,7 @@ This species is found near the Columbia River in the Columbia Basin. It has been
 
 This species is a Pacific Northwest endemic and has not been found elsewhere.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

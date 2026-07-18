@@ -14,8 +14,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia imperita* has been collected in the extreme northern and southern portions of British Columbia. It has not yet been found in Washington, although it is likely that it occurs there in the northern Cascade Range.
 
@@ -23,8 +22,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 This species has a broad distribution across arctic, subarctic, and boreal North America and in the Rocky Mountains. The northern distribution extends from southern Yukon Territory and Northwest Territory to Labrador and northern New England. The range extends to southern British Columbia and southern Colorado in the mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

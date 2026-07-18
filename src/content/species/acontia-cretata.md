@@ -12,8 +12,7 @@ This species has been found at the steppe-juniper ecotone in the Central Basin a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been found in southeastern Idaho near the town of Snowville, Utah. It might be more widespread in southern Idaho and southeastern Oregon than this single record suggests.
 
@@ -21,8 +20,7 @@ This species has only been found in southeastern Idaho near the town of Snowvill
 
 *Acontia cretata* is found predominantly in the Southwest United States and adjacent Mexico. It occurs from southern California to southern Texas and as far north as northern Colorado and southern Idaho. An isolated record from southeastern Saskatchewan is shown in Poole (nearctica.com).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

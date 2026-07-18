@@ -12,8 +12,7 @@ This species is common and widely distributed in moist forest habitats and ripar
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Behrensia conchiformis* is found in forests throughout the Northwest as far north as Armstrong in south-central British Columbia.  It occurs in the Idaho Panhandle, but has not been collected further south in the state.  It is absent from dry steppe and very high elevations.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in moist forest habitats and ripar
 
 This species is found on the West Coast of North America from southern British Columbia to Baja California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

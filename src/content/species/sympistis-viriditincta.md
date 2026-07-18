@@ -36,8 +36,7 @@ This species is found in a narrow north-south distribution in southern Canada an
 
 
 
-## Life
-History
+## Life History
 
 
 
@@ -53,8 +52,7 @@ Adults fly in the fall, reportedly in September and October (Forbes 1954). It is
 
 
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

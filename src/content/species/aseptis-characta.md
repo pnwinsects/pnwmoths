@@ -7,7 +7,7 @@
 
 This is the last smallest and most narrow-winged *Aseptis* in the Pacific Northwest. It is similar to several distantly-related moths, but can usually be recognized by the mottled gray forewing with tan or olive tints, pale-rimmed black spots, large claviform spot, and the characteristic "*Aseptis*" notch in the lateral margin of the hindwing. It is most likely to be confused with *Lacinipolia pensilis* in the tribe Eriopygini. It usually has a smaller claviform spot and lacks the hindwing notch. Like other members of its tribe it has fine hairs on the surface of the eyes. Several summer-flying *Euxoa* species, especially the variable species *Euxoa tessellata*, resemble *A. characta*. It has a smaller claviform spot and less toothed postmedial line than *A. characta*, and its hindwing is paler at the base and lacks the notch. *Euxoa plagigera* has a more elongate orbicular spot and streakier distal wing than *A. characta*, and also lacks the notch in the hindwing.
 
-*Aseptis characta* is geographically, appearing slightly different in each region.  A number of names are available for those wishing to recognize subspecies; however, the variation appears to be clinal and is therefore best considered as regional forms. "Form" *erica *(Smith) (Utah) is paler gray with a smoky hindwing, "form" *luteocinerea* (Smith) Colorado, Montana, and Utah) is more tan, and "form" *pluraloides* (McDunnough) (Montana, Wyoming) is brown with a dark hindwing.
+*Aseptis characta* is geographically, appearing slightly different in each region.  A number of names are available for those wishing to recognize subspecies; however, the variation appears to be clinal and is therefore best considered as regional forms. "Form" *erica* (Smith) (Utah) is paler gray with a smoky hindwing, "form" *luteocinerea* (Smith) Colorado, Montana, and Utah) is more tan, and "form" *pluraloides* (McDunnough) (Montana, Wyoming) is brown with a dark hindwing.
 
 ## Habitat
 
@@ -15,17 +15,15 @@ This species is widely distributed throughout much of western North America in d
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Aseptis characta *is widespread east of the Cascade summits in our region, occurring as far north as south-central British Columbia. It is found across the southern parts of Oregon and Idaho.
+*Aseptis characta* is widespread east of the Cascade summits in our region, occurring as far north as south-central British Columbia. It is found across the southern parts of Oregon and Idaho.
 
 ### Global
 
 This species occurs from the western Great Plains to the Pacific Northwest and California. It has been collected in southern Alberta, western Saskatchewan to central Colorado at the eastern limit of its range. It is found through the Intermountain region to eastern and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

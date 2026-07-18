@@ -12,8 +12,7 @@ This rarely collected species can be identified by the strongly streaked pattern
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been found at a few sites in southern British Columbia and in the Columbia Basin. It occurs west of the Cascades in the Lower Fraser Valley, British Columbia. East of the mountains it has been found in south-central British Columbia and near Moses Lake, Washington.
 
@@ -21,8 +20,7 @@ This species has only been found at a few sites in southern British Columbia and
 
 This species is found in a relatively narrow north-south distribution to the East Coast. It has been found in central Alberta, the upper Midwest, and in a narrow distribution near the the border between Canada and the United States to the Atlantic. It has been found from New Brunswick to Maryland along the Eastern Seaboard.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,7 +14,7 @@ This species is found near beaches and coastal marshes where its foodplants grow
 
 ### Pacific Northwest
 
-As of 2013,* Apamea unanimis* has been collected on Vancouver Island and in Vancouver in southwestern British Columbia. It is likely that it will spread rapidly along the Pacific Coast.
+As of 2013, *Apamea unanimis* has been collected on Vancouver Island and in Vancouver in southwestern British Columbia. It is likely that it will spread rapidly along the Pacific Coast.
 
 ### Global
 
@@ -24,7 +24,7 @@ This species is native to Eurasia and was first introduced into North America in
 
 ##### Larvae
 
-The larva lives on beach grasses such as *Phragmites*, *Phalaris*, and *Glyceria *(Poaceae) (Mikkola et al. 2009). It ties several grasses together to produce an enclosure (Mikkola & Jalas 1979).
+The larva lives on beach grasses such as *Phragmites*, *Phalaris*, and *Glyceria* (Poaceae) (Mikkola et al. 2009). It ties several grasses together to produce an enclosure (Mikkola & Jalas 1979).
 
 ##### Adults
 

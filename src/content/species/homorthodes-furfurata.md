@@ -12,8 +12,7 @@ This species is widely distributed in forest habitats throughout much of North A
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homorthodes furfurata* is widely distributed in forests in the Pacific Northwest. It is generally distributed east of the Cascade and Coast Mountains. The distribution west of these mountains is more restricted. It is common in the rain shadow of the Olympic Mountains in the Gulf of Georgia region and more generally in western Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in forest habitats throughout much of North A
 
 This species is found across North America to southeastern Canada, Massachusetts, New York, and Mississippi. In the West it occurs south to California, Arizona, New Mexico, and Texas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

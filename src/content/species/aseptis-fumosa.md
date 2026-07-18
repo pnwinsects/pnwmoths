@@ -21,8 +21,7 @@ This species is common and widely distributed in dry forests and brushlands east
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Aseptis fumosa* is widespread east of the Cascades as far north as southern British Columbia. The range extends east to the western Panhandle in northern Idaho and to the border with Wyoming in the southern part of the state. It is limited to southwestern Oregon west of the Cascade Mountains.
 
@@ -31,8 +30,7 @@ This species is common and widely distributed in dry forests and brushlands east
 This moth is known
 from western North America, mostly west of the Rocky Mountains. It has been found throughout California and in the Intermountain region to the south of the Northwest. It occurs in Colorado in the Rocky Mountains, and the range extends east to Nebraska on the Great Plains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

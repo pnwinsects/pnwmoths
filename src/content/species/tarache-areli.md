@@ -12,8 +12,7 @@ This species is common and widely distributed in open pinyon pine, juniper, oak,
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Tarache areli* has been collected seldom in our area. It is known from scattered locations in southeastern British Columbia, southeastern Washington, southeastern Oregon, and from southeastern Idaho near the Utah border.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in open pinyon pine, juniper, oak,
 
 This species is most common in the Four Corners States and adjacent west Texas, southern California, and eastern Nevada. It occurs north to northeastern Nevada and northern Utah just south of the border with Idaho (Ferris & Lafontaine 2009).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

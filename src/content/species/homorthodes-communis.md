@@ -14,8 +14,7 @@ This species is widely distributed in moist forest habitats throughout much of w
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homorthodes communis* is widely distributed in low-elevation forested habitats in our region, including west of the Cascade and Coast Mountains. It is absent from the driest steppe habitats but occurs in riparian settings in the foothills of adjacent mountain ranges.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moist forest habitats throughout much of w
 
 This species is found throughout the American West as far south as the southern parts of California, Arizona, and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

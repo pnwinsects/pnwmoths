@@ -12,8 +12,7 @@ This moth is mostly restricted to boggy meadows or the riparian zone along creek
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hypocoena inquinata* has been found in a few isolated localities in our region. It occurs in northeastern Washington, along the east slope of the Cascades in northern Oregon, in the Cariboo and Peace River regions of British Columbia, and in central and southeastern Idaho. It is likely to be more widespread than these records suggest because mid-elevation wet meadows where they might occur have been poorly sampled.
 
@@ -21,8 +20,7 @@ This moth is mostly restricted to boggy meadows or the riparian zone along creek
 
 This species is widespread across boreal North America. It is widespread in the Canadian Prairie Provinces, occurring as far north as Churchill, Manitoba. The range extends east to the island of Newfoundland and as far south as Connecticut and West Virginia. It is cited as occurring in Colorado in Forbes (1954). A single record from northern California near the Oregon border is shown on the Moth Photographers Group website.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -20,8 +20,7 @@ This species is close in appearance to *Drasteria hudsonica*, a northern species
 
 This species occurs in the deserts of southwestern North America.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ The foodplant of this species is unknown.
 
 The only Pacific Northwest records of this species are from July and early August. It is nocturnal and comes to light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

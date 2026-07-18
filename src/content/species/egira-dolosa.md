@@ -12,8 +12,7 @@ This species is widely distributed across Canada in moist forest and riparian ha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira dolosa* is widespread in southern and central British Columbia. Further south it is most common in the foothills surrounding the Columbia Basin and also occurs in eastern Oregon. It is uncommon west of the Cascades.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in moist forest and riparian ha
 
 This species is found across the Continent in boreal forests. It is widespread in Canada, occurring from Northwest Territories to the Maritime Provinces. The range extends south to Ohio in the East and to Colorado in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

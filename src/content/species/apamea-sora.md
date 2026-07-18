@@ -14,7 +14,7 @@ This species is common in high-elevation conifer forests of spruce and fir, and 
 
 ### Pacific Northwest
 
-*Apamea sora* is found in mountains and boreal forests of the Washington Cascade Mountains, the Blue Mountains of northeastern Oregon, and central Idaho. The range extends to the northern border of British Columbia. This moth is replaced by the similar species *A. tahoeensis *in the Cascade Mountains of Oregon. The ranges of these moths approach each other where the Ochoco Mountains abut the Cascades, and there might be a zone of overlap in central Oregon.
+*Apamea sora* is found in mountains and boreal forests of the Washington Cascade Mountains, the Blue Mountains of northeastern Oregon, and central Idaho. The range extends to the northern border of British Columbia. This moth is replaced by the similar species *A. tahoeensis* in the Cascade Mountains of Oregon. The ranges of these moths approach each other where the Ochoco Mountains abut the Cascades, and there might be a zone of overlap in central Oregon.
 
 ### Global
 

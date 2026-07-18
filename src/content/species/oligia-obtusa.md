@@ -12,8 +12,7 @@ This species is mostly restricted to northeastern North America, and appears to 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Oligia obtusa* is only known from Chelan County and the lower Fraser Valley (Moth Photographers Group) in our area. It is not known whether this species occurs naturally in the Northwest or if it was introduced from the East.
 
@@ -21,8 +20,7 @@ This species is mostly restricted to northeastern North America, and appears to 
 
 *Oligia obtusa* is found in the eastern part of North America where it occurs in southern Canada and the adjacent United States from the Midwest to the St. Lawrence River. It has also been recorded from northern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

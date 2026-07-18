@@ -4,7 +4,7 @@
 
 *Apantesis behrii* is an attractive fall-flying tiger moth from southwestern Oregon. It is a medium-sized moth (FW length 15–17 mm), slightly larger than *A. nevadensis*. The light markings on the forewing are light ochre yellow and the basal and antemedial lines are relatively wide, especially compared to the transverse lines on the distal forewing. The hindwing is orange-red with reduced size and number of spots and a thin marginal band. The antennae, head, and dorsal thorax are black. The abdomen matches the hindwings with several longitudinal black stripes typical of the genus.
 
-This species can be recognized by its southwest Oregon locality, fall flight, light yellow and black forewing, and spotted orange-red hindwing. It is most similar to *Apantesis nevadensis, *which also flies in the fall. The yellow forewing with wide antemedial line is diagnostic of *A. behrii*. The ranges of these species approach each other without clear overlap in the Pacific Northwest.
+This species can be recognized by its southwest Oregon locality, fall flight, light yellow and black forewing, and spotted orange-red hindwing. It is most similar to *Apantesis nevadensis,* which also flies in the fall. The yellow forewing with wide antemedial line is diagnostic of *A. behrii*. The ranges of these species approach each other without clear overlap in the Pacific Northwest.
 
 ## Habitat
 

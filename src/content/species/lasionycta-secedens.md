@@ -14,8 +14,7 @@ This species is widely distributed across both northern Eurasia and North Americ
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta secedens* is widely distributed in northern and central British Columbia. It has been collected as far south as the vicinity of Green Lake north of Clinton.
 
@@ -23,8 +22,7 @@ This species is widely distributed across both northern Eurasia and North Americ
 
 *Lasionycta secedens* is nearly exclusively a Canadian species in North America. It occurs in nearly the entire forested portion of the country from central Yukon Territory to Labrador and Newfoundland. The only known localities in the United States are from northern Minnesota where it has been collected by Kyle Johnson.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

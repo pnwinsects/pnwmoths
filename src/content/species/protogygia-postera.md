@@ -14,8 +14,7 @@ This species is widely distributed in dry desert habitats throughout much of wes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protogygia postera* is found in the dry interior steppes of Washington and Oregon. It has been found as far north as Grant County, Washington. Most of our records are from southeastern Oregon.
 
@@ -23,8 +22,7 @@ This species is widely distributed in dry desert habitats throughout much of wes
 
 This species reaches its northwestern limit in the Pacific Northwest. It is found further south in the Intermountain region from eastern California to south-western Wyoming and northern New Mexico. Further north it has been collected on the plains of southern Alberta and Saskatchewan.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -32,7 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 ##### Adults
 
-This species flies during July and August, occasionally as late as September, later in the summer than the other similar *Protogygia *species in our region.
+This species flies during July and August, occasionally as late as September, later in the summer than the other similar *Protogygia* species in our region.
 
 ## Economic Importance
 

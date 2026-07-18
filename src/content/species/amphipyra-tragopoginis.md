@@ -12,8 +12,7 @@ This species is widely distributed across Canada and the Pacific Northwest in mo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipyra tragopoginis* is found in a variety of habitats across our region as far north as the southern third of British Columbia. It is most common in forests and occurs on both sides of the Cascades. It is less common in dry steppe but has been found in developed and riparian areas in the Columbia Basin.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada and the Pacific Northwest in mo
 
 This species has a Holarctic distribution and might have been introduced into North America from Europe (Forbes 1954). In North America is occurs in the East from southern Canada to Pennsylvania and West Virginia west to the Mississippi. In the West it has been found in the southern halves of Alberta and British Columbia south to northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

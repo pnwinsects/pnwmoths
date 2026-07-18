@@ -30,7 +30,7 @@ This species occurs across boreal North America from coast to coast. In the eas
 
 ##### Larvae
 
-This species is a foodplant specialist feeding on various alders (*Alnu*s spp.) and birches (*Betula *spp.) in the Betulaceae.
+This species is a foodplant specialist feeding on various alders (*Alnu*s spp.) and birches (*Betula* spp.) in the Betulaceae.
 
 ##### Adults
 

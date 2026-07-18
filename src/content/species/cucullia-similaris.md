@@ -12,8 +12,7 @@ This species is widely distributed in drier habitats at low to middle elevations
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia similaris* is found in the mountains of south-central British Columbia, in the Blue Mountains of southeastern Washington, and in the southern parts of Idaho and Oregon. It appears to be absent from higher elevations in the Cascade Range, but occurs in juniper woodlands along the east slope of the Cascades.
 
@@ -21,8 +20,7 @@ This species is widely distributed in drier habitats at low to middle elevations
 
 The range of this species includes northern California, northern Nevada, and the Four Corners States to the south of our region. It has a limited distribution further east, with a few scattered records from central Alberta, western Montana, and southern Wyoming.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

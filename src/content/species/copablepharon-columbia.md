@@ -14,8 +14,7 @@ This species is only known from sand dunes at low elevations in the Columbia Bas
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Copablepharon columbia* has an extremely limited range. It has only been found on a few sand dunes near the southwest shore of Moses Lake (Moses Lake dune complex). Most of the known specimens have been collected on a single dune despite more extensive sampling in the vicinity.
 
@@ -23,8 +22,7 @@ This species is only known from sand dunes at low elevations in the Columbia Bas
 
 This species is endemic to the central Columbia Basin.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

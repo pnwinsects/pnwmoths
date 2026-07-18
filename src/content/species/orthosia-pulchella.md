@@ -18,8 +18,7 @@ This species is common to abundant in dry forests and brushlands along the West 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia pulchella* is found in forests throughout the western portion of the Pacific Northwest as far north as southern British Columbia. The range extends east in the southern part of the province, extending as far as the Idaho Panhandle.
 
@@ -27,8 +26,7 @@ This species is common to abundant in dry forests and brushlands along the West 
 
 The range of *O. pulchella* extends south through California to near the border with Mexico. It occurs in the Sierra Nevada as well as along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

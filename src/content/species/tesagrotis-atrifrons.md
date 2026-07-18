@@ -12,8 +12,7 @@ This species is widely distributed in dry forests and woodlands throughout much 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Tesagrotis atrifrons* occurs in association with bitterbrush from southern British Columbia through much of eastern Washington, the Idaho Panhandle, and western Montana. Its range extends south through the Cascade Range in Oregon. There is a single record for southern Idaho in Lafontaine (1998).
 
@@ -21,8 +20,7 @@ This species is widely distributed in dry forests and woodlands throughout much 
 
 This species is most commonly collected outside the Northwest in the southern Rocky Mountain region from southern Wyoming to northern Arizona and southern New Mexico. It also occurs in southern Nevada and eastern and southwestern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

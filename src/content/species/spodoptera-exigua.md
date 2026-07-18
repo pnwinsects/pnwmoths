@@ -20,8 +20,7 @@ This species is much less common in the Pacific Northwest than in many parts of 
 
 This species was introduced into North America in the late 1800's and was first discovered in Oregon (Powell and Opler  2009). It has since become widespread across the Continent. It is most common in the southern half of the United States, ranging to southern Ontario and New England in the East, to Nebraska in the Great Plains, and to the Pacific Northwest along the West Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This species is a generalist feeding on many kinds of herbaceous vegetation, and
 
 Adults occur most commonly in late summer and fall in our region. It is likely that it is unable to overwinter in our area. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 This is a major pest species feeding on many agricultural crops across the southern United States, but is of little economic importance in the Pacific Northwest.
 

@@ -12,8 +12,7 @@ This species is found in moist forest habitats along the West Coast.  In the Pa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia patalis* is restricted to the western part of the Northwest as far north as southwestern British Columbia. It has not been collected east of the Cascade Mountains.
 
@@ -21,8 +20,7 @@ This species is found in moist forest habitats along the West Coast.  In the Pa
 
 The distribution of *L. patalis* is near the Pacific Coast. The range extends south to near the border with Mexico through coastal California. It also occurs in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

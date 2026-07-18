@@ -20,8 +20,7 @@ This species has been found in dry transition zone conifer forest in southwester
 
 This species occurs across the width of the Continent and is most widespread in the East. The range extends eastward through the southern Prairie Provinces of Canada. The range in eastern North America extends from Newfoundland and adjacent Quebec south to North Carolina is the Appalachian Mountains
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 *Elaphria alapallida* is single-brooded and flies during the summer.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

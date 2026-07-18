@@ -12,8 +12,7 @@ This species is narrowly endemic to dry short-grass prairie on the northern Grea
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The distribution of this species includes two sites in the interior of British Columbia (Lafontaine 1998).
 
@@ -21,8 +20,7 @@ The distribution of this species includes two sites in the interior of British C
 
 *Prognorisma substrigata* has a relatively small range in western Canada and the Rocky Mountains. Most records are from southern Alberta and adjacent Saskatchewan and British Columbia, with a single disjunct locality in southern Northwest Territory. The species also occurs in central Colorado and northern New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

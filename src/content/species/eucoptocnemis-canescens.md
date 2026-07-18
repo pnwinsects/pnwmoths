@@ -16,8 +16,7 @@ This species is found in steppe habitats in the Great Basin and  the Mojave Des
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eucoptocnemis canescens* has only been found in southeastern Oregon and southern Idaho in our region.
 
@@ -25,8 +24,7 @@ This species is found in steppe habitats in the Great Basin and  the Mojave Des
 
 This species reaches its northern limit in our area. It is more widely distributed in Nevada and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

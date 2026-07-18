@@ -14,8 +14,7 @@ This species is common and widely distributed throughout much of North America i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Bellura obliqua* is found throughout much of our area south of southern British Columbia, including on both sides of the Cascade Range.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed throughout much of North America i
 
 This species occurs across North America from coast to coast. It is most widespread in the East where it occurs from Nova Scotia to Florida along the coast and from Manitoba to Texas at mid-Continent. This species is widespread in the Prairie Provinces of Canada. The distribution is limited to the Pacific Coast in California, extending south to the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

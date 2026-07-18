@@ -14,8 +14,7 @@ In the Pacific Northwest this species is found in forests at mid elevations.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Dolocucullia dentilinea* occurs in the interior of the Pacific Northwest and has been collected in the Blue Mountains in Oregon as well as in eastern Idaho.
 
@@ -23,8 +22,7 @@ In the Pacific Northwest this species is found in forests at mid elevations.
 
 *Dolocucullia dentilinea* is a species of the Rocky Mountain region south of southern Idaho. Its range extends into Mexico at least as far south as Mexico City.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

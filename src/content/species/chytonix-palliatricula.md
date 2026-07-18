@@ -12,8 +12,7 @@ This species is common and widely distributed in moist forests throughout much o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Chytonix palliatricula* occurs in the Peace River region of northeastern British Columbia.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in moist forests throughout much o
 
 This is a predominantly eastern North America species that is found from southern Canada to the Gulf Coast. The range extends westward into the Great Plains to Nebraska and Oklahoma in the south and Alberta and British Columbia in the north.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

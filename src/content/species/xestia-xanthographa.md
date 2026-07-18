@@ -16,8 +16,7 @@ This exotic species is widely distributed across Eurasia, and was accidentally i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia xanthographa* is common in the western portions of Oregon, Washington, and southwestern British Columbia. The range extends east near the Columbia and Snake Rivers to western Idaho.
 
@@ -25,8 +24,7 @@ This exotic species is widely distributed across Eurasia, and was accidentally i
 
 This species is introduced from Eurasia, apparently several times to various parts of North America (Lafontaine 1998). It is only established permanently in the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

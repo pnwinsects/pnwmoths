@@ -12,8 +12,7 @@ This species is widely distributed in open habitats and forests throughout most 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia renigera* has been found in eastern British Columbia and along the east slope of the Cascades in Washington in the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open habitats and forests throughout most 
 
 This species is widely distributed in North America. It occurs as far north as Northwest Territories and Nova Scotia. The southern limits of its range are California, Arizona, Texas and Georgia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

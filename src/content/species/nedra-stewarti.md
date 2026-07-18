@@ -6,9 +6,9 @@
 
 This species is double brooded in some parts of its range. The spring brood of the western populations is smaller and darker than the summer brood.
 
-*Nedra stewarti* can only be confused with *Nedra hoeffleri *in the Pacific Northwest. *Nedra hoeffleri* is closely similar to the small dark spring brood from west of the Cascades. It flies only at moderate to high altitudes in the Northern Rockies Ecoregion to the north of the known populations of *N. stewarti *and can therefore be separated from it by locality and habitat.
+*Nedra stewarti* can only be confused with *Nedra hoeffleri* in the Pacific Northwest. *Nedra hoeffleri* is closely similar to the small dark spring brood from west of the Cascades. It flies only at moderate to high altitudes in the Northern Rockies Ecoregion to the north of the known populations of *N. stewarti* and can therefore be separated from it by locality and habitat.
 
-The* Nedra* populations from western Oregon and Washington are smaller and darker than those from farther inland in and near Idaho. In fact, these populations were considered to be distinct species when this site was first created. We used the name *N. stewarti* for the eastern populations and *N. dora* for the western ones, noting that the correct use of these names was uncertain at the time. Lafontaine & Schmidt (2015) placed the name *Nedra dora* Clarke, 1940, type locality California, Eldorado County, Grizzly Flats, as a synonym of *Nedra stewarti*, type locality California, noting lack of consistent differences in appearance, structure, and DNA barcodes. *Nedra hoeffleri *Clarke has a similar barcode and will probably also be shown eventually to be a dark montane form of the same species.
+The *Nedra* populations from western Oregon and Washington are smaller and darker than those from farther inland in and near Idaho. In fact, these populations were considered to be distinct species when this site was first created. We used the name *N. stewarti* for the eastern populations and *N. dora* for the western ones, noting that the correct use of these names was uncertain at the time. Lafontaine & Schmidt (2015) placed the name *Nedra dora* Clarke, 1940, type locality California, Eldorado County, Grizzly Flats, as a synonym of *Nedra stewarti*, type locality California, noting lack of consistent differences in appearance, structure, and DNA barcodes. *Nedra hoeffleri* Clarke has a similar barcode and will probably also be shown eventually to be a dark montane form of the same species.
 
 ## Habitat
 
@@ -16,8 +16,7 @@ This species flies in dry open forest and grassland habitats.  In the Pacific N
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The western populations of *N. stewarti* occur in a narrow band from the southern Puget Lowland Ecoregion through the Willamette Valley to the Klamath Mountains Ecoregion. The eastern populations of this moth is common in a relatively small region that encompasses eastern Washington, the Blue Mountains of northeastern Oregon, and adjacent northwestern Idaho. It has also been found in south-central Idaho suggesting that it might be more widespread in central Idaho, an area that has been collected seldomly.
 
@@ -25,8 +24,7 @@ The western populations of *N. stewarti* occur in a narrow band from the souther
 
 The range of this species includes northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -6,7 +6,7 @@
 
 This species can be identified by its dark red and multicolored forewing in combination with the off-white hindwing. *Oligia violacea* is nearly identical except for a white hindwings. The forewing of *O. rampartensis* is slightly darker with a more yellow tint that is only apparent when specimens of these species are compared side-by-side.
 
-The type locality of the synonym* Oligia violacea *var.* columbia* McDunnough is British Columbia, Seton Lake.
+The type locality of the synonym *Oligia violacea* var. *columbia* McDunnough is British Columbia, Seton Lake.
 
 ## Habitat
 
@@ -14,8 +14,7 @@ This species is widely distributed throughout much of western North America in l
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Oligia rampartensis* is widespread with widely scattered records from both sides of the Cascade Mountains as far north as southern British Columbia. It reaches as far north as Lillooet in the southwestern part of the province and just north of the border in the southeast corner. It is most commonly collected in mountains near arid lands in much of our area.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of western North America in l
 
 This species is more widely distributed in the West than its sister species *O. violacea*. It ranges from central Alaska and southern Alberta to Colorado and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

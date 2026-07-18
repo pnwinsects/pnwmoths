@@ -6,7 +6,7 @@
 
 This species can be recognized by its yellow or light orange color lacking gray suffusion, pattern of orange-brown lines and spots, and a light yellow hindwing. It is similar to *Sunira verberata *and* Sunira bicolorago*. The former species has extensive gray shading on both wings. *Sunira bicolorago* is more similar but is restricted to southeastern British Columbia in the West. It usually has some gray on both wings, especially in the subterminal area of the forewing and on the submarginal hindwing. *Anathix aggres*sa is a pale yellow moth that flies in steppe and riparian forests with cottonwoods. It has a smooth subterminal line, unlike *S. decipiens*.
 
-The type locality of* Orthosia acta* Smith is Washington, Pullman. This name is considered at present to be a synonym of *Orthosia decipiens *Grote, type locality Northern Indiana. As pointed out by J. G. Franclemont in Forbes (1954) the correct name for this western species is most likely *Sunira acta* since its range does not approach Indiana.
+The type locality of *Orthosia acta* Smith is Washington, Pullman. This name is considered at present to be a synonym of *Orthosia decipiens* Grote, type locality Northern Indiana. As pointed out by J. G. Franclemont in Forbes (1954) the correct name for this western species is most likely *Sunira acta* since its range does not approach Indiana.
 
 ## Habitat
 
@@ -14,8 +14,7 @@ This species replaces *S. bicolorago* in most areas west of the Rocky Mountains
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sunira decipiens* is widely distributed in forests throughout our region as far north as southern British Columbia. It occurs on both sides of the Cascades Range and has been found most commonly west of the crest. The range extends east to the southeastern corner of British Columbia, the Idaho Panhandle, the Blue Mountains, and Steens Mountain in southeastern Oregon.
 
@@ -23,8 +22,7 @@ This species replaces *S. bicolorago* in most areas west of the Rocky Mountains
 
 This species is found near the Pacific Coast from southern British Columbia to central California. Isolated records from Nevada and southern California are shown on the Moth Photographers Group website.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

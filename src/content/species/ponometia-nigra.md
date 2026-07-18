@@ -14,8 +14,7 @@ In southern California, this species has been found in coastal chaparral, by roa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The range of this species as described in the original description includes Oregon and Idaho.
 
@@ -24,8 +23,7 @@ The range of this species as described in the original description includes Oreg
 Known
 from Idaho, Wyoming, Utah, Arizona, Nevada, Oregon, and California based on the original description. Poole (nearctica.com) gives the range as southern and central California based on material in the USNM.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

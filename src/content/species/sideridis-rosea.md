@@ -12,8 +12,7 @@ This species is widely distributed in moist forest and riparian habitats along c
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sideridis rosea* occurs throughout most of our region south of southern British Columbia. It has been found throughout the Columbia Basin and adjacent foothills, including along the east slope of the Cascades and in the Blue Mountains in Washington and northeastern Oregon. It occurs west of the Cascades, widely in western Oregon but with a restricted distribution in the southern Puget Sound in Washington. It appears to be absent from southeastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest and riparian habitats along c
 
 The range of this species extends east to the Atlantic where it is found from Nova Scotia to New Jersey. Its distribution in the West extends south to northern California, Nevada, Utah, and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

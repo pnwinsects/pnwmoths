@@ -16,8 +16,7 @@ This species is widely distributed in moist hardwood forests throughout much of 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Ochropleura implecta* is predominantly found in forests of western Oregon and Washington and southern British Columbia. The range extends as far south as west-central Oregon. It is uncommonly found in mesic habitats in the Columbia Basin.
 
@@ -25,8 +24,7 @@ This species is widely distributed in moist hardwood forests throughout much of 
 
 The range of this species includes a large part of North America, with most of the records from east of the Mississippi River and in the Northwest. The records for the East extend from southern Labrador to South Carolina and eastern Texas. The range spans the Continent through Canada's Prairie Provinces, with scattered records south in the Great Plains and Rocky Mountain States to New Mexico and eastern Arizona. It does not occur in other parts of the Southwest or in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

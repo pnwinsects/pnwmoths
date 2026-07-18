@@ -6,7 +6,7 @@
 
 This species can be recognized by its small size, shiny yellow-tan wings, pale-filled orbicular and reniform spots that contrast with the surrounding darker areas, and blackish shade preceding the subterminal line. It is unlikely to be confused with other fall-flying moths in our area.
 
-This moth was placed in the genus *Protorthodes *until 2014. Members of the genus *Nudorthodes *are unique in the tribe Eriopygini in that they lack hairs on the surface of the eyes.
+This moth was placed in the genus *Protorthodes* until 2014. Members of the genus *Nudorthodes* are unique in the tribe Eriopygini in that they lack hairs on the surface of the eyes.
 
 ## Habitat
 
@@ -14,8 +14,7 @@ This species is widely distributed in sage steppe regions in the Northwest. It i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Nudorthodes texana* is found in dry steppe regions in the Northwest, and has been collected most often in the western part of the Columbia Basin in Washington and in eastern Oregon. The northern limit of its range is in Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed in sage steppe regions in the Northwest. It i
 
 The range of *N. texana* includes the Southwest and the central and southern parts of California to the south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species appears to be very rare and sporadic on dry sagebrush steppe at low
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliolonche modicella* has been collected in the eastern portion of the Columbia Basin in Washington. It is reported as occurring in Oregon, presumably in the eastern portion, in Hardwick (1996).
 
@@ -21,8 +20,7 @@ This species appears to be very rare and sporadic on dry sagebrush steppe at low
 
 The range of this species includes most of California south or our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

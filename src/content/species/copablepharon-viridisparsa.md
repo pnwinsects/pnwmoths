@@ -20,8 +20,7 @@ This species is widely distributed in dry prairie and rangeland habitats through
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 Subspecies *C. v. hopfingeri* is found along the Columbia River from Trail, British Columbia to Wenatchee, Washington. The only recent records are from Bridgeport State Park, Okanogan County, Washington and Ft. Spokane State Park, Lincoln County, Washington.
 
@@ -31,8 +30,7 @@ Subspecies *C. v. gilvum* is found at intermediate to high elevations in the Was
 
 This species is widespread in Western North America outside the Pacific Northwest. Subspecies *C. v. viridisparsa* flies in the Great Plains from northern Colorado to the northern limit of the Plains in Canada's Prairie Provinces. *C. v. gilvum* is found in the Intermountain region in Utah and northern Nevada as well as throughout most of eastern California. Subspecies *C. v. ravum* is restricted to Mt. Shasta in northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

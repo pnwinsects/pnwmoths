@@ -12,8 +12,7 @@ This species is widely distributed in moist forest habitats throughout much of t
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sunira verberata* is found in forests throughout much of the Pacific Northwest as far north as west-central British Columbia. It has been found as far east as the southeastern corners of British Columbia and Idaho. It has not yet been recorded from southwestern Oregon, although it is likely that it occurs there based on its distribution in California.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest habitats throughout much of t
 
 This species is predominantly a Pacific Northwest moth, although it also occurs in central and southern Alberta and in northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

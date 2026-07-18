@@ -14,8 +14,7 @@ This species is found in dry forests from sea level to middle elevations in the 
 
 ## **Distribution**
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis semicollaris* is widespread in dry forests throughout our region. Its range is most restricted west of the Cascade Range where it is found near the Gulf of Georgia in southwestern British Columbia and northwestern Washington.  The northern limit is in central British Columbia near Williams Lake.
 
@@ -23,8 +22,7 @@ This species is found in dry forests from sea level to middle elevations in the 
 
 The range of this species extends to California and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

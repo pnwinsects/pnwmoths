@@ -14,8 +14,7 @@ This is a very rare species known from only a few specimens collected along the 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The single Oregon specimen was collected in the Coast Range in Douglas County by Ken Goeden.
 
@@ -23,8 +22,7 @@ The single Oregon specimen was collected in the Coast Range in Douglas County by
 
 This species is known from five California specimens collected near San Francisco outside the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

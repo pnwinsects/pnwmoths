@@ -12,8 +12,7 @@ This species is widely distributed in open dry habitats throughout much of North
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis perscripta* occurs on the Snake River plain in southern Idaho, and low valley areas in western Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open dry habitats throughout much of North
 
 This species is found across the southern half of North America. The range extends north to southern New England in the East and Michigan in the Midwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

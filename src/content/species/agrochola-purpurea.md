@@ -12,8 +12,7 @@ This species is common and widely distributed throughout much of western North A
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrochola purpurea* is widely distributed in the Pacific Northwest, occurring north to southern British Columbia on both sides of the Cascade Range. The range extends east to western Montana. This moth is most common east of the mountains toward the northern part of its range. Its distribution is more limited west of the Cascades north of Oregon. It has been found near the Gulf of Georgia in southwestern British Columbia and northwestern Washington and near Puget Sound in west-central Washington.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed throughout much of western North A
 
 This moth occurs in California and in the Intermountain region outside of the Pacific Northwest. It has been recorded from near the border with Mexico in California and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

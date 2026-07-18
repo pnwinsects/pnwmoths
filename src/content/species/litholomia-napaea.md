@@ -4,7 +4,7 @@
 
 *Litholomia napaea* is a small, glossy gray moth (FW length 13â€“15 mm)Â that flies in forests during late fall and spring. Its forewing hasÂ a busy pattern that includes a pale-filled kidney-shaped orbicular spot and a straight, dark median line. The forewing apex is nearly square and the outer margin is finely scalloped. The color is shiny steel gray, sometimes paler silvery gray, mottled with darker gray in the subterminal and terminal areas. The lines are dark gray, double filled with the ground color. The basal and antemedial lines are oriented transversely and the latter line is slightly wavy. The median line is usually very dark gray, sometimes with red-brown along the outer side below the reniform spot, oriented transversely and slightly S-shaped with a concave-basad segment anteriorly and convex-lateral segment posteriorly. The postmedial line has strong scalloped inner and weak diffuse outer components, is angular with bends near both margins and a concave-medial segment lateral to the reniform spot. The subterminal line is pale gray, diffuse and slightly irregular. It is preceded by dark gray, strongest on the costa. The terminal line is dark gray. The fringe is the ground color, weakly checkered. The orbicular spot is outlined in dark gray, is filled with whitish gray uniformly or with a slightly darker center, and is kidney-shaped. The reniform spot is a larger kidney shape, is outlined in dark gray and is filled with light gray peripherally and the ground color or slightly darker gray centrally. The claviform spot is very weak or absent. The hindwing is pale gray with slightly darker discal spot, veins, and terminal line. The hindwing fringe is whitish. The head and thorax are gray with slightly lighter collar with a thin dark line near the edge. The anterior thorax has a slight median ridge. The male antenna is biserrate.
 
-This moth can usually be identified by its late fall or early spring flight, the glossy gray color, and pattern of kidney-shaped orbicular spot and blackish median line. Late spring stragglers are most likely to be confused with *Lacinipolia anguina*, a species that is found in southern British Columbia, northeastern Washington, and northern Idaho. Its orbicular spot is round, it usually lacks a dark median line, and it has a black and pale mark near the anal angle of the forewing that is lacking in* L. napaea*. *Brachylomia rectifascia* has a similar black median line, but it flies during the summer and is likely to occur with *L. napaea*.
+This moth can usually be identified by its late fall or early spring flight, the glossy gray color, and pattern of kidney-shaped orbicular spot and blackish median line. Late spring stragglers are most likely to be confused with *Lacinipolia anguina*, a species that is found in southern British Columbia, northeastern Washington, and northern Idaho. Its orbicular spot is round, it usually lacks a dark median line, and it has a black and pale mark near the anal angle of the forewing that is lacking in *L. napaea*. *Brachylomia rectifascia* has a similar black median line, but it flies during the summer and is likely to occur with *L. napaea*.
 
 ## Habitat
 
@@ -12,8 +12,7 @@ This species is widely distributed in boreal and montane moist forest habitats.Â
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Litholomia napaea* is widely distributed in the Northwest, occurring at least as far north as west-central British Columbia. It occurs southward in the Cascades and along the Pacific Coast to southern Oregon. It is also widely distributed east of the Columbia Basin, including in boreal forest, the Cordillera, and in the isolated mountains of the Basin and Range region.
 
@@ -21,8 +20,7 @@ This species is widely distributed in boreal and montane moist forest habitats.Â
 
 The range of this species extends across North America from coast to coast. It is most widely distributed in the West where it occurs from central British Columbia and Alberta to southern California, northern Arizona and Colorado. It extends eastward to the Maritime Provinces and New England in a very narrow north-south band near the Canada-United States border.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

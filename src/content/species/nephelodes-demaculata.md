@@ -12,8 +12,7 @@ This moth is probably only a subspecies of *N. minians* that is endemic to centr
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Nephelodes demaculata* is found in eastern Oregon from the Blue Mountains south. It might occur in southern Idaho but has not been found in Washington or British Columbia and is unlikely to occur there.
 
@@ -21,8 +20,7 @@ This moth is probably only a subspecies of *N. minians* that is endemic to centr
 
 The range of this species extends south through eastern California to the southern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is narrowly endemic to alpine tundra or subalpine meadows near timb
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta brunnea* is found in the mountains of eastern British Columbia and extreme northwestern Washington (Salmo Lookout, Pend Oreille County). The northern limit of its range is Pink Mountain, British Columbia.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to alpine tundra or subalpine meadows near timb
 
 This species also occurs in the Rocky Mountains of Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is common to abundant in disturbed agricultural habitats throughout
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Chloridea virescens* occurs sporadically in agricultural areas in southwestern British Columbia, western Washington, and western Oregon. It has also been found in the Yakima Valley in south-central Washington.
 
@@ -21,8 +20,7 @@ This species is common to abundant in disturbed agricultural habitats throughout
 
 *Chloridea virescens* is widespread in the New World where it occurs in South America as well as in North America. This species is common in the southern half of the continental United States. It migrates northward to southern Canada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

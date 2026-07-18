@@ -14,8 +14,7 @@ This species is common and widely distributed in moist hardwood forests througho
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Polia nimbosa* is found in forests in southwestern British Columbia and western Washington, including on Vancouver Island. The range extends east through British Columbia, northern Washington, and northern Idaho.
 
@@ -23,12 +22,11 @@ This species is common and widely distributed in moist hardwood forests througho
 
 The range of this species extends across the boreal zone of southern Canada and the northern United States to the Atlantic Coast. The southern limits of its range are North Dakota and Wisconsin in the Great Plains and Midwest, and North Carolina in the East. It ranges to northern California along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
-This species is a generalist feeding on many hardwoods.  In eastern North America, it feeds on alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, huckleberries (*Vaccinium* spp.) in the Ericaceae, and currants (*Ribes* spp.) in the Grossulariaceae.  However, the subspecies *P. nimbosa mysticoides *may be more of a foodplant specialist in coastal rainforests, feeding mostly on red alder (*A. rubra*).
+This species is a generalist feeding on many hardwoods.  In eastern North America, it feeds on alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, huckleberries (*Vaccinium* spp.) in the Ericaceae, and currants (*Ribes* spp.) in the Grossulariaceae.  However, the subspecies *P. nimbosa mysticoides* may be more of a foodplant specialist in coastal rainforests, feeding mostly on red alder (*A. rubra*).
 
 ##### Adults
 

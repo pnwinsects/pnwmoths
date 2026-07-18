@@ -12,8 +12,7 @@ This species has been found in a number of lowland sites in the Lower Mainland o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found in a number of lowland sites in the Lower Mainland of British Columbia, southern Vancouver island and adjacent islands, and Whatcom County, Washington. It was first detected in the Pacific Northwest near Vancouver in 2018. It appears to be spreading in southwestern British Columbia and adjacent Washington, having reached Bellingham, Washington in 2022.
 
@@ -21,8 +20,7 @@ This species has been found in a number of lowland sites in the Lower Mainland o
 
 This species is introduced to North America from Eurasia, most likely Europe. It was established in the Northeast prior to being discovered in Vancouver, British Columbia, suggesting that the Pacific Northwest moths were introduced here from eastern North America through human transport as there is no evidence for contiguous spread across the continent (unlike for some other introduced species like *Noctua pronuba*). *Agrochola lota* is widespread in the Old World, occurring in most of Europe to the Altai Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

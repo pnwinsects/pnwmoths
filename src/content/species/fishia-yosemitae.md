@@ -8,7 +8,7 @@ This moth can be identified by its medium-gray color lacking brown tints, the ba
 
 This species is geographically variable across North America. It is pale throughout the West but becomes darker along the east slope of the Rocky Mountains. Boreal populations from the East are very dark brown-black on the forewing. These forms were considered to be different species until recently (Pohl et al. 2010).
 
-Two synonyms of this species were described from the Pacific Northwest. The type locality of* Hadena tortilis* Grote is Washington Territory. *Fishia exhilarata* Smith was described from Washington, Pullman.
+Two synonyms of this species were described from the Pacific Northwest. The type locality of *Hadena tortilis* Grote is Washington Territory. *Fishia exhilarata* Smith was described from Washington, Pullman.
 
 ## Habitat
 
@@ -16,17 +16,15 @@ This species is widely distributed in dry open habitats. In the Pacific Northwes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Fishia yosemitae *is widespread east of the Coast and Cascade Ranges as far north as south-central British Columbia. It occurs in the southeastern part of the province. It is widespread in the Columbia Basin and in southern Oregon but has not been collected in southern Idaho.
+*Fishia yosemitae* is widespread east of the Coast and Cascade Ranges as far north as south-central British Columbia. It occurs in the southeastern part of the province. It is widespread in the Columbia Basin and in southern Oregon but has not been collected in southern Idaho.
 
 ### Global
 
 This species is found throughout most of the American West. It occurs from central Alberta to Colorado in the Rocky Mountain and Great Plains regions. It is found in eastern, central, and southern California as well as in the Intermountain region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

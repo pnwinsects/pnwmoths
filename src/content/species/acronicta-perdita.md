@@ -26,8 +26,7 @@ This species is fairly common in dry forests and woodlands throughout much of we
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is widely distributed in our region as far north as southern British Columbia. It is most common at mid-elevations in foothills surrounding the dry interior steppes. It is rare in western Washington but occurs in the Willamette Valley and Siskiyou Mountains of western Oregon. The range in Idaho includes the Panhandle, but it has not been collected further south.
 
@@ -39,8 +38,7 @@ This species is limited to California south of the Northwest. It occurs south to
 
 
 
-## Life
-History
+## Life History
 
 
 

@@ -12,13 +12,11 @@ This species is most commonly collected on dry ridges at middle to high elevatio
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-This species has been collected in Washington and Oregon in our region. It is found on ridges in the Cascade Range and in the Blue Mountains. Specimens with summer dates from low-elevations west of the mountains might be reared specimens of *U. satyricus *rather than this species.
+This species has been collected in Washington and Oregon in our region. It is found on ridges in the Cascade Range and in the Blue Mountains. Specimens with summer dates from low-elevations west of the mountains might be reared specimens of *U. satyricus* rather than this species.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

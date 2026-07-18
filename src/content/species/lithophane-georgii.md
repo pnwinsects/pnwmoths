@@ -6,7 +6,7 @@
 
 This species can usually be recognized by its blue-gray forewing with pale base and figure-eight-shaped orbicular spot. It is most similar to *Lithophane pertorrida* with which it occurs east of the Cascades. It has extensive red-brown filling of the reniform spot unlike *L. georgii*, often has a black claviform spot, and warm yellow and reddish colors on the wing base that are lacking in *L. georgii*.
 
-Two synonyms of* Lithophane georgii* Grote were described from the Pacific Northwest. *Xylina holocinerea* Smith was described from [British Columbia], Vancouver and *Xylina vertina* Smith was described from Oregon, Corvallis.
+Two synonyms of *Lithophane georgii* Grote were described from the Pacific Northwest. *Xylina holocinerea* Smith was described from [British Columbia], Vancouver and *Xylina vertina* Smith was described from Oregon, Corvallis.
 
 ##### Larvae
 
@@ -18,8 +18,7 @@ This species is common and widely distributed in moist forests throughout much o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane georgii* is widespread in our region as far north as the southern third of British Columbia. It occurs on both sides of the Cascade Mountains.
 
@@ -27,8 +26,7 @@ This species is common and widely distributed in moist forests throughout much o
 
 This species is widely distributed in North America. The range extends east from British Columbia and northern Alberta to Newfoundland. The southern limits of its distribution are southern California on the West Coast, Colorado in the Rocky Mountain region, and North Carolina in the East.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

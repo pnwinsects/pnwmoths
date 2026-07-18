@@ -14,8 +14,7 @@ This species is narrowly endemic to the West Coast in moist forest habitats.  I
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Diarsia esurialis* is found near the Pacific Coast throughout the Pacific Northwest. Its range extends inland to near the crest of the Cascade Range.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to the West Coast in moist forest habitats.  I
 
 This species occurs on the West Coast of North America from the Alaska Peninsula to the vicinity of San Francisco, California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

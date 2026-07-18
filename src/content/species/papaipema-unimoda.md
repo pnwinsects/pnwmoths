@@ -12,8 +12,7 @@ The only site for this moth in the Pacific Northwest is riparian forest along th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Papaipema unimoda* is at the most northwesterly part of its range in western Montana. It has only been found at one locality in the Bitterroot Valley south of Missoula in our region. It is likely to be more widespread in western Montana and could potentially occur in eastern Idaho.
 
@@ -21,8 +20,7 @@ The only site for this moth in the Pacific Northwest is riparian forest along th
 
 This moth is widespread in eastern and central North America. It occurs from Alberta and Colorado in the west and from North Carolina to southern Canada in the East.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -2,7 +2,7 @@
 
 ##### Adults
 
-*Scotogramma stretchii *is a small (FW length 13 - 14 mm), powdery, gray-brown noctuid moth that flies in sage steppe habitats during the spring. Its forewing has a busy pattern that lacks dominant features and a slightly pointed shape but appears short nonetheless. The ground color is powdery, medium-dark, gray-brown, slightly darker and grayer near the outer margin. The basal, antemedial, and postmedial lines are gray, double, and filled with slightly lighter brown. The basal and antemedial lines are similar, irregular, and transverse across the wing. The postmedial line is dentate, but faint. The pale subterminal line is also irregular. It is usually preceded by thin dark chevrons that span the width of the subterminal area opposite the cell. The terminal line is a series of gray triangles between the veins. The fringe is weakly checkered brown and gray. The forewing spots are indistinct; only the gray filling of the reniform spot is evident in most specimens. The hindwing is gray-brown with darker gray toward the margin, discal spot, and scalloped postmedial line. The hindwing fringe is two-toned gray-brown. The head and thorax are uniform gray-brown, matching the forewing. The eye is covered with fine hairs. The male antenna is filiform.
+*Scotogramma stretchii* is a small (FW length 13 - 14 mm), powdery, gray-brown noctuid moth that flies in sage steppe habitats during the spring. Its forewing has a busy pattern that lacks dominant features and a slightly pointed shape but appears short nonetheless. The ground color is powdery, medium-dark, gray-brown, slightly darker and grayer near the outer margin. The basal, antemedial, and postmedial lines are gray, double, and filled with slightly lighter brown. The basal and antemedial lines are similar, irregular, and transverse across the wing. The postmedial line is dentate, but faint. The pale subterminal line is also irregular. It is usually preceded by thin dark chevrons that span the width of the subterminal area opposite the cell. The terminal line is a series of gray triangles between the veins. The fringe is weakly checkered brown and gray. The forewing spots are indistinct; only the gray filling of the reniform spot is evident in most specimens. The hindwing is gray-brown with darker gray toward the margin, discal spot, and scalloped postmedial line. The hindwing fringe is two-toned gray-brown. The head and thorax are uniform gray-brown, matching the forewing. The eye is covered with fine hairs. The male antenna is filiform.
 
 This species can usually be identified correctly despite its drab appearance due to its small size and early flight season. It could potentially be confused with *Anarta columbica*, but this species has a more distinct black-rimmed forewing spots and is larger with less acute wing-shape. Similarly, *Scotogramma fervida*, a species that flies in southeastern Oregon in the spring, has a large gray-filled reniform spot that *S. stretchii* lacks.
 
@@ -12,8 +12,7 @@ This species is widely distributed on very dry sagebrush steppe at low elevation
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Scotogramma stretchii* is found in the dry interior steppe regions of the Pacific Northwest. It is most common near the Columbia River in the Columbia Basin. It has also been collected in eastern Oregon and in the Snake River Plain of southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed on very dry sagebrush steppe at low elevation
 
 The range of this species is poorly known to us outside of the Northwest. It has been collected near Lee Vining in eastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

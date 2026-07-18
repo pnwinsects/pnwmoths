@@ -12,8 +12,7 @@ This species is widely distributed but relatively rare in arctic-alpine tundra a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta illima* is a rarely collected species with only a handful of records across its range. It has been collected at Pink Mountain. It also occurs within several miles of the British Columbia border near Carcross, Yukon Territory (Andre Langois, personal communication 2010).
 
@@ -21,8 +20,7 @@ This species is widely distributed but relatively rare in arctic-alpine tundra a
 
 The range of this species extends to central Alaska through southern Yukon Territory.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

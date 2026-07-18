@@ -12,8 +12,7 @@ This species is widely distributed in dry ponderosa pine forests, juniper woodla
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 Anarta crotchii is found in the dry interior of the Pacific Northwest from southern British Columbia south.
 
@@ -21,8 +20,7 @@ Anarta crotchii is found in the dry interior of the Pacific Northwest from south
 
 The global range extends from British Columbia and Saskatchewan south to California and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

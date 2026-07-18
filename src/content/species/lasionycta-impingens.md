@@ -14,8 +14,7 @@ This species is common and widely distributed at high elevations throughout the 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta impingens* is found in the mountains of eastern and central British Columbia. It has been found as far south and west as Pavilion Mountain near Clinton (J. Troubridge, personal communication).
 
@@ -23,8 +22,7 @@ This species is common and widely distributed at high elevations throughout the 
 
 The range of this species extends north to central Yukon Territory from the Pacific Northwest. It also occurs in the Rocky Mountains in western Alberta, southern Montana, Wyoming, and Colorado. A seemingly isolated population is found at Churchill, Manitoba.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

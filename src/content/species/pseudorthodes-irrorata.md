@@ -16,8 +16,7 @@ This species is narrowly endemic to moist forest habitats along the West Coast.Â
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pseudorthodes irrorata* is found west of the crests of the Coast Range and Cascade Mountains as far north as west-central British Columbia. A few records from the east slope of the Cascades exist from Chelan and Kittitas Counties in Washington.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to moist forest habitats along the West Coast.Â
 
 The range of this species extends south through western California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

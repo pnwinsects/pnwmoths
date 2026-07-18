@@ -14,8 +14,7 @@ This species is widely distributed across Canada in moist conifer forests, and i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Feralia jocosa* reaches its western range limit in eastern and central British Columbia. It has also been found in Whitman County in eastern Washington. It is likely that it occurs in western Montana and in Idaho north of the Snake River plain.
 
@@ -23,8 +22,7 @@ This species is widely distributed across Canada in moist conifer forests, and i
 
 The range of this species extends to the East Coast across southern Canada and the northern United States. It is found from Nova Scotia to Pennsylvania along the Atlantic, but reaches northern Georgia in the Appalachian Mountains. It does not occur in the Rocky Mountains south of Alberta and British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

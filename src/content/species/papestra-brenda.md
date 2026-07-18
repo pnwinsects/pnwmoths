@@ -14,8 +14,7 @@ This species is widely distributed in montane forests throughout much of western
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Papestra brenda* is found at middle to high elevations throughout the Pacific Northwest. It has been most commonly collected in the Cascade Mountains of Oregon and Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed in montane forests throughout much of western
 
 The range of *P. brenda* extends through the mountains of western North America. Outside of the Pacific Northwest, it is known from Alberta, Wyoming, Utah, and Colorado in the Rocky Mountains, in northern Nevada, and in eastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

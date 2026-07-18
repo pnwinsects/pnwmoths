@@ -12,8 +12,7 @@ Little information is currently available regarding the habitat preference of th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Papaipema sauzalitae* has been found near the Pacific Coast in Oregon and Washington to near the border with Canada.
 
@@ -21,8 +20,7 @@ Little information is currently available regarding the habitat preference of th
 
 The main distribution of this moth is in coastal California, although it also occurs in the Central Valley. It occurs south to the vicinity of Los Angeles.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

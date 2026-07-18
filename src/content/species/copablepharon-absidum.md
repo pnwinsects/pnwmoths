@@ -14,8 +14,7 @@ This species is endemic to sand dunes and sandy river sediments at low elevation
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Copablepharon absidum* is most common in the Columbia Basin. It has been recorded from near Osoyoos in southern British Columbia, but is not known to occur there at present. It is also found in south-eastern Oregon and southern Idaho.
 
@@ -23,8 +22,7 @@ This species is endemic to sand dunes and sandy river sediments at low elevation
 
 This species is a Pacific Northwest endemic and has not been found outside of this region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

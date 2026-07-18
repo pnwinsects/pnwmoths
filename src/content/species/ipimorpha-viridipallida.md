@@ -12,8 +12,7 @@ This species occurs in mixed hardwood-conifer forests at higher elevations in th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Ipimorpha viridipallida* has been found along rivers that run through the east slope of the Cascades near the Columbia Basin, and in the Blue Mountains of northeastern Oregon.
 
@@ -21,8 +20,7 @@ This species occurs in mixed hardwood-conifer forests at higher elevations in th
 
 This species has been found in northern and central California to the south of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

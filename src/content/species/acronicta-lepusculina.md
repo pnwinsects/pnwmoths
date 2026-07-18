@@ -14,8 +14,7 @@ This species is widely distributed throughout much of North America in riparian 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is found in forests in southern British Columbia and along rivers and streams in the dry interior of the Northwest. It is rare west of the Cascades but has been found occasionally in western Washington and Oregon.
 
@@ -23,8 +22,7 @@ This species is found in forests in southern British Columbia and along rivers a
 
 The range of *A. lepusculina* extends across North America from Coast to Coast. The distribution in the East extend in a narrow north-south band near the Canada-United States border. It is more widely distributed in the mid-Continent and in the West where it occurs from north-central Alberta to Texas, Colorado, Utah, and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

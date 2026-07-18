@@ -12,8 +12,7 @@ This species is common and widely distributed in low-elevation moist forest habi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sunira bicolorago* has been reported from eastern British Columbia, but we have not examined any specimens of this species from the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in low-elevation moist forest habi
 
 This moth is widely distributed east of the Rocky Mountains, especially east of the 100th Meridian. It occurs from southern Canada to the Gulf Coast. It is less commonly collected further West, but has been taken in Alberta, Montana, and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

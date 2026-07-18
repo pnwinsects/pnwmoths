@@ -14,8 +14,7 @@ This species is common and widely distributed on prairies, disturbed open grassl
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Stiria rugifrons* has only been collected in southern Idaho in the Northwest part of its range.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed on prairies, disturbed open grassl
 
 This species has one of the largest North American distributions of any species in the tribe Stiriini. It occurs from southern Alberta and Saskatchewan to Utah and Arizona in the west, and east to southern Ohio, the western Piedmont, and the Florida Panhandle in the East.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

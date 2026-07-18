@@ -24,7 +24,7 @@ This species as a Holarctic distribution, occurring in Japan and Siberia in the 
 
 ##### Larvae
 
-This species feeds on low vegetation in arctic-alpine tundra including *Dryas* (Rosaceae), *Salix *(Salicaceae), and *Saxifraga *(Saxifragaceae).
+This species feeds on low vegetation in arctic-alpine tundra including *Dryas* (Rosaceae), *Salix* (Salicaceae), and *Saxifraga* (Saxifragaceae).
 
 ##### Adults
 

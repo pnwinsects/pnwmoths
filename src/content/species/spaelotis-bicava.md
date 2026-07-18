@@ -12,8 +12,7 @@ This species is widely distributed in dry forests, grasslands, and rangelands th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Spaelotis  bicava* is widespread in the Pacific Northwest east of the summit of the Coast and Cascade Mountains, occurring as far north as south-central British Columbia. There is a single record of this moth from northwestern British Columbia in the moths of North America fascicle (Lafontaine 1998).
 
@@ -21,8 +20,7 @@ This species is widely distributed in dry forests, grasslands, and rangelands th
 
 This is the second most widespread member of the genus after *S. clandestina*. *Spaelotis bicava* is found in most of the western United States and adjacent southern Canada. The eastern limit of its distribution is eastern Colorado, western Kansas and Nebraska, and southwestern Saskatchewan.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

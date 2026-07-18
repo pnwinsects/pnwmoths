@@ -14,8 +14,7 @@ This species is widely distributed in dry forest and woodland habitats.  In the
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Setagrotis pallidicollis* is widely distributed throughout much of the Pacific Northwest, especially east of the Cascade Range, as far north as southern British Columbia and east to western Montana. It is not generally found in sage steppe away from trees. West of the Cascades it is found in the rain shadow near the Strait of Georgia, both in British Columbia and Washington. It also occurs in the Siskiyou Mountains of south-western Oregon.
 
@@ -23,8 +22,7 @@ This species is widely distributed in dry forest and woodland habitats.  In the
 
 The range of this species extends south from our region through much of California to the Transverse Ranges north of Los Angeles.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

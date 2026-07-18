@@ -12,8 +12,7 @@ This species is widely distributed across Canada in moist forests with quaking a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homoglaea hircina* has been found in central and southeastern British Columbia and barely enters the region defined as the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in moist forests with quaking a
 
 The range of this species extends east to the Atlantic in a relatively narrow band from central Alberta to the northern United States and southern Canada through the Great Lakes region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

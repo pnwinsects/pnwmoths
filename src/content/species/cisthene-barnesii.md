@@ -28,7 +28,7 @@ No information is presently available for this species.
 
 ##### Adults
 
-*Cisthene barnesii *has been found from mid-July to late August in Idaho. It is nocturnal and comes to light.
+*Cisthene barnesii* has been found from mid-July to late August in Idaho. It is nocturnal and comes to light.
 
 ## Economic Importance
 

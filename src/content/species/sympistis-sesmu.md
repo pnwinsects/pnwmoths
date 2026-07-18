@@ -14,8 +14,7 @@ This species is widely distributed in juniper woodlands and sagebrush steppe at 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis sesmu* is widely distributed in eastern Washington and Oregon and southern Idaho. It is found as far north as the northwestern part of the Columbia Basin in Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed in juniper woodlands and sagebrush steppe at 
 
 We are unaware of records of this species from outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

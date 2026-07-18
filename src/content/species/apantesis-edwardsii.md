@@ -22,8 +22,7 @@ A single male specimen assigned to this species by Chris Schmidt (2009) is known
 
 This species is only known from San Francisco, California outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -35,8 +34,7 @@ The single male specimen from Klamath County was collected July 23.
 
 Adults of *Apantesis edwardsii* are likely to be diurnal because of their reduced eye-size.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

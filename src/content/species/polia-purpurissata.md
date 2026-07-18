@@ -14,8 +14,7 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Polia purpurissata* occurs in forests throughout our region, including west of the Coast Range and Cascade Mountains. It is absent from dry steppe habitats where it is replaced by *Polia nugatis*.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of North America in moist for
 
 This species is widely distributed across the boreal zone of southern Canada and the northern United States as well as in the mountains of the West. It occurs across Canada to Nova Scotia and south to Minnesota and New York. In the West, it reaches New Mexico and Utah in the Rocky Mountain region and the Sierra Nevada of California along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

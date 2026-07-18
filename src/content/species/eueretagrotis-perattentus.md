@@ -12,8 +12,7 @@ This species is widely distributed across Canada and through the Rocky Mountains
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eueretagrotis perattentus* is found in forested habitats in southern British Columbia and the Blue Mountains of northeastern Oregon in our region. It is undoubtedly more widely distributed in northern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada and through the Rocky Mountains
 
 This species is found in boreal forests across North America on both sides of the Canada-United States border from Newfoundland and Pennsylvania to the Pacific Northwest. It ranges further south in the Appalachian Mountains to North Carolina in the East and in the Rocky Mountains to east-central Arizona in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

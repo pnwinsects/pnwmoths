@@ -14,8 +14,7 @@ No information is presently available regarding habitat preferences for this spe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Axenus arvalis* has been found in southwestern Oregon in the Northwest.
 
@@ -23,8 +22,7 @@ No information is presently available regarding habitat preferences for this spe
 
 The range of this species is limited to California outside of the Northwest. It occurs as far south as the Mexico border.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

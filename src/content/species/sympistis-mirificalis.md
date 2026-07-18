@@ -12,8 +12,7 @@ This species appears to be rare and sporadic east of the Cascades, and is found 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis mirificalis* has been found in the central portion of the Columbia Basin in Washington, and at middle to low elevations along the east slope of the Cascades east through central Oregon to near the Blue Mountains in the Northwest.  It has only been collected once in Idaho near rocky outcrops in the Black Pine Mountains near the border with Utah.
 
@@ -21,8 +20,7 @@ This species appears to be rare and sporadic east of the Cascades, and is found 
 
 The range of this species includes Colorado and eastern and southern California outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

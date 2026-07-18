@@ -20,8 +20,7 @@ This species appears to favor dry open ponderosa pine forests, but is very rare 
 
 The range of this species is California, barely extending to southern Oregon.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species is single brooded with adults on the wing in late summer and early fall. It has been collected in August and September in our region. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

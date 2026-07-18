@@ -14,8 +14,7 @@ This species is widely distributed in grasslands, oak woodlands, and mixed hardw
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Leucania oregona* is distributed west of the Cascade Mountain crest from southwestern British Columbia to southern Oregon. It appears to be restricted to the vicinity of the Gulf of Georgia in British Columbia and northern Washington. It is more widely distributed in the Columbia Gorge region and in western Oregon.
 
@@ -23,8 +22,7 @@ This species is widely distributed in grasslands, oak woodlands, and mixed hardw
 
 The range of this species extends south through California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

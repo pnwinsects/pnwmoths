@@ -12,17 +12,15 @@ This species flies in mid-elevation to high elevation forests with quaking aspen
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Enargia infumata *is widely distributed in our region. It occurs in the central and southern part of British Columbia, including west of the Cascade Range. The distribution appears to continue south through Washington and Oregon, although the identity of specimens in this area is still in need of confirmation by dissection.
+*Enargia infumata* is widely distributed in our region. It occurs in the central and southern part of British Columbia, including west of the Cascade Range. The distribution appears to continue south through Washington and Oregon, although the identity of specimens in this area is still in need of confirmation by dissection.
 
 ### Global
 
 This species is widely distributed in boreal and montane North America. It is found from Alaska to New Brunswick and New York across the northern part of the Continent. The range extends south to California and to Arizona through the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

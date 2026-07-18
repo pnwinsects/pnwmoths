@@ -12,8 +12,7 @@ This species is widely distributed in dry desert habitats throughout much of wes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protogygia lagena* is found in dry steppe in central Washington, eastern Oregon, and southern Idaho. Washington records are restricted to the eastern part of the Columbia Basin near the Columbia River. The range of this species is more extensive further south in our area.
 
@@ -21,8 +20,7 @@ This species is widely distributed in dry desert habitats throughout much of wes
 
 This species reaches its northern limit in the Pacific Northwest. It is more widely distributed in California and the Southwest, ranging from eastern and southwestern California to northern Colorado and northern New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

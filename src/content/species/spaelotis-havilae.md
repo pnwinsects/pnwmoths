@@ -12,8 +12,7 @@ This species is endemic to the Great Basin region, and is moderately common in d
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Spaelotis havilae* is found in most of east-central and south-eastern Oregon and adjacent western Idaho south of the Blue Mountains. The most northerly record is from Wallowa County in the north-eastern part of the state.
 
@@ -21,8 +20,7 @@ This species is endemic to the Great Basin region, and is moderately common in d
 
 This species has one of the more restricted distributions of any North American *Spaelotis* species and approximately half of its distribution is in the Pacific Northwest. It occurs in northern California and northern Nevada to the south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

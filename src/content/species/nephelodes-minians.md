@@ -12,8 +12,7 @@ This species is common to abundant in moist forests and grasslands throughout mu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Nephelodes minians* is widespread in the Pacific Northwest, occuring at least as far north as central British Columbia. It occurs on both sides of the Cascades in southwestern British Columbia and Washington, but has only been found east of the Cascade crest in Oregon. This species occurs in forests and steppe habitat but is most commonly collected in forests.
 
@@ -21,8 +20,7 @@ This species is common to abundant in moist forests and grasslands throughout mu
 
 The range of this species extends across North America to the East Coast. The northern limits are central Alberta and central Manitoba at mid-Continent and the island of Newfoundland in the East. The range stretches south to Georgia, New Mexico, and Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

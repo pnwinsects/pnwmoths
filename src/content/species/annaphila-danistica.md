@@ -12,8 +12,7 @@ This species is widely distributed in juniper woodlands and on sagebrush steppe 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been collected in southeastern British Columbia, in the Columbia Basin, in southern Idaho, and in southwestern Oregon. It has been found most often around the margins of the Columbia Basin in Washington.
 
@@ -21,8 +20,7 @@ This species has been collected in southeastern British Columbia, in the Columbi
 
 This species is found in California and in the Intermountain Region. Specimens have been examined from California, Nevada, and Utah.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

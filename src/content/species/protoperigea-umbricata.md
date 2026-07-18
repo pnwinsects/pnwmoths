@@ -20,8 +20,7 @@ This species is widely distributed throughout the Pacific Northwest in a wide va
 
 The range of this species extends at least as far south as central California. Its distribution is poorly known, in part due to the fact that this species was only described in 2006.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies during the fall and has been collected from late July until early October in the Pacific Northwest. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

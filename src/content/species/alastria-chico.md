@@ -12,8 +12,7 @@ This species is narrowly endemic to moist grasslands and forests at low to middl
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Alastria chico* is found in the western portion of the Pacific Northwest as far north as the Fraser River Valley in southwestern British Columbia. It has been collected south of Puget Sound in western Washington and in the Willamette Valley and on the west slope of the Cascade Mountains in Oregon.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to moist grasslands and forests at low to middl
 
 The range of this species extends south along the Pacific Coast to Marin County north of San Francisco Bay. It also occurs in the northern foothills of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

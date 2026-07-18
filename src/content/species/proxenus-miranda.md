@@ -12,8 +12,7 @@ This species is common and widely distributed throughout much of North America i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Proxenus miranda* is found in the wet forests west of the Cascade Mountains in Washington and Oregon. It does not occur along the east slope of the Cascades but is found in forests further north in southern British Columbia and northern Washington, and also in northern Idaho and in the Blue Mountains of Oregon and Washington.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed throughout much of North America i
 
 This species is widely distributed in North America. The western North American populations extend south through California to Arizona and in the Rocky Mountains to Colorado. The range extends east from our area across southern Canada. In the East it is found from southern Canada to South Carolina, Tennessee, and Texas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

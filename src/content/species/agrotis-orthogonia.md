@@ -16,8 +16,7 @@ This species is widely distributed on arid grasslands and rangelands throughout 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis orthogonia* is found in the dry portions of south-eastern Oregon and southern Idaho in our region.
 
@@ -25,8 +24,7 @@ This species is widely distributed on arid grasslands and rangelands throughout 
 
 This species is widely distributed in western North America. It occurs on the Great Plains from southern Alberta, north-central Saskatchewan, and southwestern Manitoba to the Texas Panhandle. Its range extends through the Southwest to the eastern and southwestern portions of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

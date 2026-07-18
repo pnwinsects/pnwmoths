@@ -10,12 +10,11 @@ The type locality of *Anarta macleani* McDunnough is Mt. McLean, British Columbi
 
 ## Habitat
 
-The exact location in which the only known specimen of this species was collected is unknown. It was probably found in a subalpine meadow or over alpine tundra because it was collected with a series of *Lasionycta luteola, *which is an alpine species.
+The exact location in which the only known specimen of this species was collected is unknown. It was probably found in a subalpine meadow or over alpine tundra because it was collected with a series of *Lasionycta luteola,* which is an alpine species.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta macleani* is only known from Mt. McLean near Lillooet, British Columbia. It was most likely collected on the east side of this mountain and has not been found on the more accessible west side.
 
@@ -23,8 +22,7 @@ The exact location in which the only known specimen of this species was collecte
 
 This species is restricted to British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

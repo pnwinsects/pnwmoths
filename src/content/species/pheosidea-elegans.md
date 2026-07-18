@@ -8,7 +8,7 @@ This species can be identified by the shape and color of its forewing.  The com
 
 ##### Larvae
 
-The larva is smooth gray-brown with thoracic and caudal humps.  It is illustrated by Powell & Opler (2009) and Miller *et al. *(2018)
+The larva is smooth gray-brown with thoracic and caudal humps.  It is illustrated by Powell & Opler (2009) and Miller *et al.* (2018)
 
 ## Habitat
 
@@ -28,7 +28,7 @@ This species is found in boreal forests across the Continent.  It occurs from s
 
 ##### Larvae
 
-This species is a foodplant specialist on Salicaceae including both willows (*Salix *spp.) and cottonwoods (*Populus* spp.).  It particularly seems to prefer quaking aspen (*P. tremuloides*).
+This species is a foodplant specialist on Salicaceae including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.).  It particularly seems to prefer quaking aspen (*P. tremuloides*).
 
 ##### Adults
 

@@ -18,8 +18,7 @@ This species is common to abundant in moist forest, riparian, agricultural, and 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is generally distributed throughout all of the Pacific Northwest except in the driest of desert habitats east of the Cascades.
 
@@ -27,8 +26,7 @@ This species is generally distributed throughout all of the Pacific Northwest ex
 
 This species is generally distributed throughout most of North America except in desert regions.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

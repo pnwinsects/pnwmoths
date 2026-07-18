@@ -12,8 +12,7 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Enargia decolor* occurs along the periphery of the Columbia Basin in eastern Washington and northern Oregon. It is also found in the Steens Mountains of southeastern Oregon. The range extends north to north-central British Columbia. It occurs less frequently west of the Cascades where it appears to be limited to the vicinity of the Gulf of Georgia in Washington.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of North America in moist for
 
 This species has a wide range in North America, occurring from Coast to Coast. The eastern range is relatively narrow near the Canada-United States border. The western range is more extensive, extending from northern Alberta south to Colorado, northern Arizona, and south-central California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

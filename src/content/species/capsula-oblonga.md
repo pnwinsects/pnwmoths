@@ -22,8 +22,7 @@ This species is common and widely distributed throughout much of North America i
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Capsula oblonga* is widespread in the Pacific Northwest as far north as southern British Columbia. It is found on both sides of the Cascades. In the interior it occurs in wetlands in the dry basins. West of the mountains it has been found near the Pacific Coast.
 
@@ -35,8 +34,7 @@ This species is widespread in North America. It occurs south through California,
 
 
 
-## Life
-History
+## Life History
 
 
 

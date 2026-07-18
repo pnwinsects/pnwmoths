@@ -14,8 +14,7 @@ This species is widely distributed in moist forests across Canada and throughout
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Trichordestra tacoma* is found in conifer forests throughout our region except in the mountains of the Basin and Range province of southern Oregon and Idaho. It occurs on both sides of the Coast Range and Cascade Mountains.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moist forests across Canada and throughout
 
 The range of *T. tacoma* extends across southern Canada and the northern United States to Newfoundland, New England, and New York along the Atlantic Coast. The range extends south to North Dakota in the Great Plains and Colorado in the Rocky Mountains. It is also listed as occurring in California in McCabe (1980).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

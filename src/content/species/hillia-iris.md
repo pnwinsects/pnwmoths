@@ -12,8 +12,7 @@ This species is widely distributed across Canada in cool, wet forest and bog hab
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This moth has been found in south-central British Columbia. It likely also occurs in the far northern part of the province. In Idaho, a single record exists for the extreme southeastern part of the state at Montpelier.
 
@@ -21,8 +20,7 @@ This moth has been found in south-central British Columbia. It likely also occur
 
 *Hillia iris* is a Holarctic species that is found across the northern Hemisphere to Scandinavia. It is widespread in northern North America, ranging south to British Columbia, Alberta, and southern Wyoming in the West. It is found south to the northern United States in the East, reaching the Great Lakes region, New England, and northern New York
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

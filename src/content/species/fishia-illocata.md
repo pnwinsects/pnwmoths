@@ -16,8 +16,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Fishia illocata* is widespread in moist forests in the Northwest. It occurs west of the Cascades as far north as Vancouver Island, including on the immediate coast. It is found in southern British Columbia at least as far north as the central interior of the Province, and in adjoining northeastern Washington and northern Idaho. It also flies in the Blue Mountains of southeastern Washington.
 
@@ -25,16 +24,15 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 This species is widespread in North America. It does not occur south of Oregon along the West Coast, but ranges east through the Canadian Prairie Provinces to Nova Scotia. It occurs south to New Jersey along the Atlantic Coast and northern Georgia in the Appalachian Mountains. It also occurs in Colorado and northern New Mexico, but it is not clear whether this is by direct extension across the Great Plains, a disjunct population, or by extension south through the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
-This species is a foodplant generalist feeding on many kinds of hardwoods such as alders (*Alnus *spp.) and birches (*Betula *spp.) in the Betulaceae, and willows (*Salix *spp.) in the Salicaceae.  In coastal rainforests, it is particularly common on red alder (*A. rubra*), rhododendron (*Rhododendron macrophyllum*), and red huckleberry (*Vaccinium parvifolium*) in the Ericaceae.
+This species is a foodplant generalist feeding on many kinds of hardwoods such as alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, and willows (*Salix* spp.) in the Salicaceae.  In coastal rainforests, it is particularly common on red alder (*A. rubra*), rhododendron (*Rhododendron macrophyllum*), and red huckleberry (*Vaccinium parvifolium*) in the Ericaceae.
 
 ##### Adults
 
-The flight season of *F. illocata *begins in late August and lasts through September. It is a nocturnal moth that comes to lights.
+The flight season of *F. illocata* begins in late August and lasts through September. It is a nocturnal moth that comes to lights.
 
 ## Economic Importance
 

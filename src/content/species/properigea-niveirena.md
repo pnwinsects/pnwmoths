@@ -12,8 +12,7 @@ This species is found sporadically in a number of different habitats, most often
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Properigea niveirena* is found predominantly in the Cascade Range and lowland of western British Columbia, Washington, and Oregon and is known from as far north as Vancouver Island. It is only known from a few sites east of the Cascade summit, including in the Methow Valley of north-central Washington and the Blue Mountains in southeastern Washington.
 
@@ -21,8 +20,7 @@ This species is found sporadically in a number of different habitats, most often
 
 The range of this species extends south through California to the border with Mexico, then east to New Mexico through southern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

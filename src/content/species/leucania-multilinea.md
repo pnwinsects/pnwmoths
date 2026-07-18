@@ -12,8 +12,7 @@ This species is widely distributed in wet grasslands and marshes throughout much
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is found most commonly in southern British Columbia and adjacent northern Washington, from the Gulf of Georgia across the width of the Province. Only a single population is known in Oregon at the Klamath Marsh National Wildlife Refuge along the east slope of the Cascades at relatively high elevations. A large population exists in this marsh.
 
@@ -21,8 +20,7 @@ This species is found most commonly in southern British Columbia and adjacent no
 
 *Leucania multilinea* has a relatively narrow north-south distribution near the Canada-United States border from the Northwest to the Northeast. The range along the Atlantic Coast is Pennsylvania to Nova Scotia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

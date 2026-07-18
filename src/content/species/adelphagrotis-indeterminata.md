@@ -14,8 +14,7 @@ This species is widely distributed in forest habitats.  It is most common in oa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Adelphagrotis indeterminata* is found throughout much of our region north to southern British Columbia and east to the Idaho Panhandle and adjacent northwestern Montana. It is most common west of the Cascade Range and has not been collected in eastern Oregon south of the Blue Mountains or in most of Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed in forest habitats.  It is most common in oa
 
 The range of this species extends south through California to just north of the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

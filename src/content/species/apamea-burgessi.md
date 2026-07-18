@@ -14,7 +14,7 @@ This species flies on the dry short-grass prairies of the Great Plains, extendin
 
 ### Pacific Northwest
 
-*Apamea burgessi *occurs in southeastern Oregon and the Snake River Plain of southern Idaho in our area.
+*Apamea burgessi* occurs in southeastern Oregon and the Snake River Plain of southern Idaho in our area.
 
 ### Global
 

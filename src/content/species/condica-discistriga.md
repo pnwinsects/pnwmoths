@@ -12,8 +12,7 @@ This species is moderately common on dry, open sagebrush steppes and in juniper 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Condica discistriga* is found in the dry interior of the Pacific Northwest as far north as south-central British Columbia. It is widespread in the Columbia Basin in Washington and in the southern parts of Oregon and Idaho.
 
@@ -21,8 +20,7 @@ This species is moderately common on dry, open sagebrush steppes and in juniper 
 
 The range of *C. discistriga* includes much of western North America from the Rocky Mountains west to the Pacific. Most records from outside of our region are from Colorado, Utah, and the northern portions of Arizona and New Mexico. It has also been collected in southwestern Saskatchewan, and northwestern Nevada. It is limited to the extreme eastern and southwestern parts of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

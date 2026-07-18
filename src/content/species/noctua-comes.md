@@ -12,8 +12,7 @@ This exotic species is widely distributed across Eurasia.  It was accidentally 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Noctua comes* is predominantly found west of the Cascade Mountains from southwestern British Columbia to north-western Oregon. It has also been found in southern Washington as far east as the Tri-Cities.
 
@@ -21,8 +20,7 @@ This exotic species is widely distributed across Eurasia.  It was accidentally 
 
 This is a Eurasian species. It is only known from the Pacific Northwest in North America.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

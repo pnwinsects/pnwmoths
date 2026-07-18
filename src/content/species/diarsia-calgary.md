@@ -12,8 +12,7 @@ This is a relatively rare species of the Rocky Mountains that appears to occur i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Diarsia calgary* is known from two sites in British Columbia: the Fraser Canyon between Lytton and Lillooet, and the extreme Northwest near the Yukon border. It is probably more widely distributed in the eastern and northern portions of the Province and might also occur in eastern Idaho.
 
@@ -21,8 +20,7 @@ This is a relatively rare species of the Rocky Mountains that appears to occur i
 
 This species is predominantly distributed in the Rocky Mountain region. Most records are from western Alberta, with scattered records in Montana, Wyoming, Colorado, and Utah. Isolated records in western Saskatchewan and eastern California are shown in Lafontaine (1998).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

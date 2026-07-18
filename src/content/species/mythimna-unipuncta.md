@@ -12,8 +12,7 @@ Adults of this species can be identified by the speckled tan color with orange-r
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species reaches its northern limit along the West Coast in southern British Columbia. It is found west of the Cascade Mountains from southwestern British Columbia to southern Oregon. East of the Cascades it is commonly collected in the Columbia Basin. It appears to the less common in southeastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species reaches its northern limit along the West Coast in southern British
 
 The North American range of this species includes most of Central America, the United States, and southern Canada from Coast to Coast. It ranges furthest north in Saskatchewan and Alberta, although vagrants are collected even further north from time to time. It also occurs in northern South America and western Eurasia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

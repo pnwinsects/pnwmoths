@@ -12,8 +12,7 @@ This species is widely distributed in moist forests across Canada and the mounta
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacanobia nevadae* is found in mountains of southern British Columbia, northern Washington and Idaho, the Blue Mountains in south-eastern Washington and Oregon, and the Cascade Range of Washington and Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests across Canada and the mounta
 
 This species has a boreal forest and western mountain distribution. The range extends east through a narrow north-south zone near the Canada-United States border to Maine and Nova Scotia. It occurs in the Rocky Mountain region from central Alberta to Utah and Colorado. It has also been found in the northern Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

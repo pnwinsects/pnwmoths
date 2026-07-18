@@ -12,8 +12,7 @@ This species is widely distributed throughout much of western North America on o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pseudanarta caeca* is found east of the Cascades as far north as the Okanogan River Valley in north-central Washington. It is also found in southeastern Oregon, southern Idaho, and southwestern Montana.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of western North America on o
 
 The range of this moth extends south through eastern and southern California to the border with Mexico. The range extends east into Arizona and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

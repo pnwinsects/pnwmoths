@@ -18,8 +18,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is widely distributed in forests throughout the Pacific Northwest. The known range encompasses northern British Columbia.
 
@@ -27,8 +26,7 @@ This species is widely distributed in forests throughout the Pacific Northwest. 
 
 This is another widely distributed moth in North America. The range extends from Alaska to Newfoundland across the north. The southern limits of its range are southern California, Arizona, New Mexico, Missouri, and North Carolina.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

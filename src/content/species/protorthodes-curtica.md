@@ -14,8 +14,7 @@ This species is widely distributed in dry habitats.  In the Pacific Northwest, 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protorthodes curtica* is widespread east of the Cascades in southern British Columbia, Washington, and Oregon as well as in western Idaho. It occurs west of the Cascades in the Siskiyou Mountain region of southwestern Oregon.
 
@@ -23,8 +22,7 @@ This species is widely distributed in dry habitats.  In the Pacific Northwest, 
 
 The range of *P. curtica* includes most of California and the Southwest outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

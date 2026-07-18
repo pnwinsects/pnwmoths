@@ -38,4 +38,4 @@ None.
 
 Miller & Hammond (2003)
 
-Miller *et al. *(2018)
+Miller *et al.* (2018)

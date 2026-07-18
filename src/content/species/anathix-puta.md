@@ -6,7 +6,7 @@
 
 This moth can be recognized by its short and broad wing shape, the tan to orange-tan color with dirty gray suffusion on the forewing, smooth postmedial and subterminal lines, and pale hindwing with gray suffusion. The most similar species in our area is *Anathix aggressa*. Pacific populations of this moth are pale yellow-tan. A few specimens of *A. puta* have a similar color but can be distinguished by the gray shading of the dorsal hindwing, lacking in *A. aggressa. Agrochola purpurea* is a slightly larger moth that is otherwise similar to *A. puta* in color. It has a black mark on the distal costa that *A. puta* lacks. *Sunira* species can also be similar to *A. puta* but have irregular subterminal lines.
 
-A specimen of *Anathix ralla *bearing a label from Gott Peak in the British Coast Range exists in the Strickland Museum at the University of Alberta. This is a golden yellow moth with gray lines, filling of the lower reniform spot, and spotted distal wing. Its range is eastern North America. This specimen was labelled by Jim Troubridge at the time that he was exchanging specimens with a collector from New Brunswick. This specimen is almost certainly mislabeled and we do not believe that *A. ralla* occurs in the Northwest.
+A specimen of *Anathix ralla* bearing a label from Gott Peak in the British Coast Range exists in the Strickland Museum at the University of Alberta. This is a golden yellow moth with gray lines, filling of the lower reniform spot, and spotted distal wing. Its range is eastern North America. This specimen was labelled by Jim Troubridge at the time that he was exchanging specimens with a collector from New Brunswick. This specimen is almost certainly mislabeled and we do not believe that *A. ralla* occurs in the Northwest.
 
 ## Habitat
 
@@ -14,8 +14,7 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anathix puta* is widespread in forest and aspen groves of the Pacific Northwest although records are relatively widely scattered south of British Canada and the Idaho Panhandle. It has been found along the east slope of the Cascades in Oregon and Washington, in the Blue Mountains, on Steens Mountain in southeastern Oregon, and in the Wasatch Mountains of southeastern Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of North America in moist for
 
 The range of this species extends east across the boreal forest and parklands of southern Canada to the near the Atlantic Coast. It occurs in the adjacent northern United States as far south as Wisconsin, West Virginia, and northern New England. This moth is found further south in the Rocky Mountains where it reaches northern New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is common and widely distributed in hardwood forests of eastern Nor
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pyrrhia cilisca* has been collected twice in the central portion of western Oregon near the Douglas-Lane County line. This represents a highly disjunct population.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in hardwood forests of eastern Nor
 
 The range of this species is eastern North America aside from the isolated Oregon records. The range extends from the island of Newfoundland to South Carolina along the Atlantic and westward to Manitoba, Colorado, and Texas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

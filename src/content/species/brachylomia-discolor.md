@@ -12,8 +12,7 @@ This species is found in mid-elevation to high elevation forests with quaking as
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Brachylomia discolor* is found from southern Idaho west to the Warner Mountains of south-central Oregon in the Northwest. This is the northern limit of its distribution.
 
@@ -21,8 +20,7 @@ This species is found in mid-elevation to high elevation forests with quaking as
 
 The range of *B. discolor* is centered in the Great Basin and southern Rocky Mountains. It is found east to southeastern Wyoming and central Colorado, south to eastern Arizona, and west to the Sierra Nevada where it has only been found in the vicinity of Tioga Pass.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -44,6 +44,6 @@ None.
 
 Forbes (1948)
 
-Miller *et al. *(2018)
+Miller *et al.* (2018)
 
 Powell & Opler (2009)

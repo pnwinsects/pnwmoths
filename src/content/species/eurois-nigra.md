@@ -12,8 +12,7 @@ This species is widely distributed throughout the mountains of western North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eurois nigra* is found in mountains throughout the Pacific Northwest, particularly east of the Cascade Mountain crest.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout the mountains of western North Ame
 
 This species has a more limited range than our two other *Eurois* species. It is found in the mountains of western North America, including and to the west of the Rocky Mountains. Its range extends north to central Yukon Territory and south to Arizona and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

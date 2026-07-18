@@ -12,8 +12,7 @@ This species is widely distributed across Canada in moist forest and riparian ha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Brachylomia discinigra* occurs in central and south-central British Columbia. It might also occur in western Montana based on its distribution in adjacent southwestern Alberta.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in moist forest and riparian ha
 
 The range of this species extends east from central and southern Alberta. It is found in southern Canada and the northern United States to the St. Lawrence River mouth, New England, and New York. It also occurs in southwestern Wyoming and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

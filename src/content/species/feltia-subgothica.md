@@ -12,8 +12,7 @@ This species is widely distributed in forest and grassland habitats throughout m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 Pacific Northwest records of *Feltia subgothica* are limited to Idaho where it has been found in the Panhandle and Snake River Plain (Lafontaine 2004).
 
@@ -21,8 +20,7 @@ Pacific Northwest records of *Feltia subgothica* are limited to Idaho where it h
 
 *Feltia subgothica* occurs primarily in eastern and central North America, ranging as far west as Idaho, Utah, and central Arizona. The northern limit to the range is southern Quebec near the St. Lawrence River and southern Saskatchewan.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

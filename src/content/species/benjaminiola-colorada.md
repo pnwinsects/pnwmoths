@@ -12,8 +12,7 @@ This species is common and widely distributed in wetland habitats at low elevati
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Benjaminiola colorada* is found in the dry interior deserts of the Pacific Northwest as far north as northern Washington. It has only been collected in the extreme western and southeastern parts of Idaho, but might be more widespread in the dry interior part of that state.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in wetland habitats at low elevati
 
 The range of this species encompasses the West Coast. It is found to southern California south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

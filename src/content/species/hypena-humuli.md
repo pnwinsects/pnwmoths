@@ -12,7 +12,7 @@ This species is widely distributed in a variety of habitats throughout much of N
 
 ### Pacific Northwest
 
-*Hypena humuli *is found in most of our region as far north as south-central British Columbia. It occurs on both sides of the Cascade Range and is found in forested and around the periphery of the interior steppe regions.
+*Hypena humuli* is found in most of our region as far north as south-central British Columbia. It occurs on both sides of the Cascade Range and is found in forested and around the periphery of the interior steppe regions.
 
 ### Global
 

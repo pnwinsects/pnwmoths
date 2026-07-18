@@ -12,8 +12,7 @@ This species is common and widely distributed in wetland habitats with permanent
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Capsula subflava* is most commonly found in wetlands in the dry steppe interiors of our region. It is common in the Columbia Basin and has also been found in southern Idaho and Oregon. It also occurs in central and southeastern British Columbia.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in wetland habitats with permanent
 
 This species occurs across the Continent from central Alberta and Nebraska to southern Quebec and New Jersey. It is also known from northern California and Utah, although the relationship to *C. alameda* is unclear in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

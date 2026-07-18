@@ -12,8 +12,7 @@ This species is widely distributed in coniferous forests throughout much of west
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis antica* is as far north as south-central British Columbia. Washington records are mostly from the east side of the Cascades, while the species occurs on both sides of the Cascade Mountains in Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in coniferous forests throughout much of west
 
 This species is found in the central and southern Rocky Mountains and in northern and eastern California outside of the Pacific Northwest. The southern limit of the range is in eastern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

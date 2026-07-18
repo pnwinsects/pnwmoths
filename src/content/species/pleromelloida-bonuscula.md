@@ -12,8 +12,7 @@ This species is found in foothill canyonland and riparian habitats along creeks 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pleromelloida bonuscula* is found in the peripheral portions of the Columbia Basin where it has been collected most commonly along the east slope of the Cascades and in the southeast corner of the state. It is widespread in southern British Columbia as far north as the vicinity of Williams Lake.  Only isolated records exist for the Panhandle in Idaho and Lakeview in southern Oregon.
 
@@ -21,8 +20,7 @@ This species is found in foothill canyonland and riparian habitats along creeks 
 
 This species is found in western North America. It occurs throughout most of California south of our region and has also been recorded from Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

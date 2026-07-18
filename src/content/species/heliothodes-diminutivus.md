@@ -14,8 +14,7 @@ This species is widely distributed on dry grasslands at low elevations.  In wes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothodes diminutivus* is found around the periphery of the Columbia Basin in Washington and north-central Oregon. It occurs west of the Cascades in Oregon's Willamette Valley as well as in the southwestern part of the state.
 
@@ -23,8 +22,7 @@ This species is widely distributed on dry grasslands at low elevations.  In wes
 
 The range of this species extends to Baja California through most of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

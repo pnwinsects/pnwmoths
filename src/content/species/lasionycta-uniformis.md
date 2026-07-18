@@ -20,8 +20,7 @@ This species is common and widely distributed in high elevation montane habitats
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta uniformis* is found throughout the Cascade Range in Washington. It is more widespread in British Columbia. Subspecies *L. u. uniformis* has been found throughout the eastern part of the province, while *L. u. multicolor* is widespread in the west.
 
@@ -29,8 +28,7 @@ This species is common and widely distributed in high elevation montane habitats
 
 This species occurs to southern Yukon Territory just north of the border with British Columbia. The range extends south through the Rocky Mountains in Alberta. Central Rocky Mountain populations are found from the Beartooth Plateau on the Montana-Wyoming border to Colorado and northern Utah. Isolated populations are found on Mt. Shasta in northern California and on Mt. Albert on the Gaspe´ Peninsula, Quebec.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

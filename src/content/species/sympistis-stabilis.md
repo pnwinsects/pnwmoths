@@ -20,8 +20,7 @@ This species is most commonly found in the eastern part of the Northwest, usuall
 
 *Sympistis stabilis* is most common in the northern Great Plains region, occurring furthest north in central Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This is a foodplant specialist feeding on snowberry (*Symphoricarpos* spp.) in t
 
 This species flies during the summer, with Northwest records from June to late August. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

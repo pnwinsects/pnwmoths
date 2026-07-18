@@ -18,8 +18,7 @@ This species is narrowly endemic to drier forest habitats along the east slope o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protogygia milleri* is found along the east slope of the Cascade Mountains and in the adjacent Ochoco and Klamath Mountains in central and southern Oregon. The most northerly record is from Santiam Pass in Jefferson County, Oregon.
 
@@ -27,8 +26,7 @@ This species is narrowly endemic to drier forest habitats along the east slope o
 
 The range of this species extends south along the Sierra Nevada to southern California. It is also found in the Transverse Ranges north of the Los Angeles Basin.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

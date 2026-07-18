@@ -12,8 +12,7 @@ This species is widely distributed on dry, open sagebrush steppe at low elevatio
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Pacific Northwest distribution of this species extends north to the southern part of British Columbia. It is widely distributed in the sage steppe of the Columbia Basin in Washington, the deserts of eastern and southeastern Oregon, and southern Idaho.
 
@@ -21,8 +20,7 @@ The Pacific Northwest distribution of this species extends north to the southern
 
 The global range of this species is poorly known to us.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

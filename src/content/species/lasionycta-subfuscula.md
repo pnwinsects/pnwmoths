@@ -16,8 +16,7 @@ This species is common and widely distributed in montane forests throughout much
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta subfuscula* is found in forests throughout the Pacific Northwest as far north as Perkins Peak near Kleena Kleene, British Columbia. It occurs west of the Cascades Range and in the isolated ranges in the Basin and Range province.
 
@@ -25,8 +24,7 @@ This species is common and widely distributed in montane forests throughout much
 
 The range of this species includes southwestern Alberta, but it is not generally distributed in the Canadian Rocky Mountains unlike *L. perplexa* and *L. perplexella*. *Lasionycta subfuscula* is also found in the central Rocky Mountains from Wyoming to the southern portions of Utah and Colorado. It has not been collected in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

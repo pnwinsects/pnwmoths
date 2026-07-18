@@ -18,7 +18,7 @@ This species is relatively rare.  It occurs in low-elevation moist meadows and 
 
 ### Global
 
-The North American range of* D. aereoides* is fairly large. It occurs across southern Canada to Nova Scotia, reaching central Alberta and north-central Manitoba. The range extends south to North Carolina and Tennessee in the Appalachian Mountains, Colorado in the Rocky Mountains, and northern California in the West.
+The North American range of *D. aereoides* is fairly large. It occurs across southern Canada to Nova Scotia, reaching central Alberta and north-central Manitoba. The range extends south to North Carolina and Tennessee in the Appalachian Mountains, Colorado in the Rocky Mountains, and northern California in the West.
 
 ## Life History
 

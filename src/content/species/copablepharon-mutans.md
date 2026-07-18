@@ -14,8 +14,7 @@ This species is only known from sand dunes at low elevations in the Columbia Bas
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Copablepharon mutans* has a very limited distribution in dunes along the Columbia River in Washington. It is known from the Sand Hollow, Wanapum, and Hanford Central dune systems (dune system names from "Conservation Strategy for Washington State Inland Sand Dunes," by Hallock LA, Haugo, RD, and Crawford R, Natural Heritage Report 2007-005).
 
@@ -23,8 +22,7 @@ This species is only known from sand dunes at low elevations in the Columbia Bas
 
 This species is restricted to Washington.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia lorea* is found in the Rocky Mountain region and is absent from the western portion of the Pacific Northwest. Records from Washington and Oregon are from the eastern parts of both states. It is more widely distributed in eastern and central British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 This species is widely distributed across North America to the East Coast. It occurs across southern Canada to the island of Newfoundland and south to Utah, Colorado, Missouri, and Virginia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

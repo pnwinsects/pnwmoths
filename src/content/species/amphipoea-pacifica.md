@@ -12,8 +12,7 @@ This species replaces the closely related *A. americana* west of the Cascades in
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipoea pacifica* occurs in western Oregon except on the immediate Pacific Coast. It is most common along the west slope of the Cascades, but also occurs through the Willamette Valley and in the Siskiyou Mountains.
 
@@ -21,8 +20,7 @@ This species replaces the closely related *A. americana* west of the Cascades in
 
 This species probably occurs in northern California but has not been recorded from there on the Moth Photographers Group web site.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

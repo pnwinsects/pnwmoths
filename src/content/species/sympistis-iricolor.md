@@ -12,8 +12,7 @@ This species is widely distributed in western North America on the dry short-gra
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis iricolor* is found in the western portion of the Columbia Basin in Washington, in far eastern portion Oregon, and on the Snake River Plain in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed in western North America on the dry short-gra
 
 The range of this species extends from the dry steppes of the Great Basin eastward to the short-grass prairies of the Great Plains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

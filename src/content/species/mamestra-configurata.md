@@ -12,8 +12,7 @@ This species is widely distributed in moist open habitats throughout much of wes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Mamestra configurata* is widely distributed in low to mid elevation habitats south of south-central British Columbia. It is most common at low elevations, paricularly in the Columbia Basin, but also occurs on dry ridges in the Cascade Mountains. It has been found in northern Idaho. It is less common in western Washington but occurs there in the San Juan Islands and Seattle.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist open habitats throughout much of wes
 
 This species is widely distributed in western North America. Outside of the Pacific Northwest it occurs east to Saskatchewan and south to central California, Texas, and Mexico (Powell and Opler 2009).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

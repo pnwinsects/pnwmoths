@@ -2,7 +2,7 @@
 
 ##### Adults
 
-*Mycterophora* *inexplicata *is a small (FW length 11 mm), rare northern species that resembles an inchworm moth more than most members of the superfamily Noctuoidea. Both wings are dull brownish gray, hindwings slightly lighter than the forewings, with weakly scalloped edges. The costa of the forewing is nearly unmarked dull yellow, except dark gray at the apex. The postmedial lines of both wings are dark, evident mostly as dark crescents between veins. The forewing subterminal line is pale. A faint hindwing marginal band is also strongest between the veins. The palpi are long. The male antenna is broadly bipectinate while that of the female is simple.
+*Mycterophora* *inexplicata* is a small (FW length 11 mm), rare northern species that resembles an inchworm moth more than most members of the superfamily Noctuoidea. Both wings are dull brownish gray, hindwings slightly lighter than the forewings, with weakly scalloped edges. The costa of the forewing is nearly unmarked dull yellow, except dark gray at the apex. The postmedial lines of both wings are dark, evident mostly as dark crescents between veins. The forewing subterminal line is pale. A faint hindwing marginal band is also strongest between the veins. The palpi are long. The male antenna is broadly bipectinate while that of the female is simple.
 
 This species is most similar to *Mycterophora longipalpata*, a more common and widespread species in our region. However, *M. longipalpata* lacks the yellow costa of *M. inexplicata*, its lines are not interrupted by the veins, and it has dark discal spots on both wings that are lacking in *M. inexplicata*.
 

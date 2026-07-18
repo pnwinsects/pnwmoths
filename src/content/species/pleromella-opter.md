@@ -12,8 +12,7 @@ This species is widely distributed in dry brushlands and forests with manzanita 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Northwest range of this species appears to be limited to the Siskiyou Mountains of southwestern Oregon and the Cascade Range north to southern British Columbia.
 
@@ -21,8 +20,7 @@ The Northwest range of this species appears to be limited to the Siskiyou Mounta
 
 *Pleromella opter* is also found in California to near the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

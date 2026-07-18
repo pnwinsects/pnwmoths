@@ -12,8 +12,7 @@ This species is narrowly endemic to dry Jeffrey pine forests growing on serpenti
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane jeffreyi* is restricted to the Siskiyou Mountains in southwestern Oregon in the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to dry Jeffrey pine forests growing on serpenti
 
 The range of this species extends south to the northern Sierra Nevada in California and western Nevada as well as the mountains of southwestern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

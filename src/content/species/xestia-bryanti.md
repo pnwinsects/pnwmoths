@@ -14,8 +14,7 @@ This species flies over dry arctic and alpine tundra.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia bryanti* is only known from Pink Mountain in north-eastern British Columbia where it has been collected on several occasions. It is likely more widespread in northern British Columbia but has not been found due to its inaccessible habitat.
 
@@ -23,8 +22,7 @@ This species flies over dry arctic and alpine tundra.
 
 This species is more widespread in Alaska, Yukon Territory, and Northwest Territory near the Mackenzie River Delta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

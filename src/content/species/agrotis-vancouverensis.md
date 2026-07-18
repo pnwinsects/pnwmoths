@@ -20,8 +20,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis vancouverensis* is common west of the Cascade Mountains south of south-western British Columbia. It also occurs further east in southern British Columbia, northern Idaho, and scattered localities at high elevations in the mountains of eastern Washington and Oregon. It is probably found in northern British Columbia, at least in the western portion, as there is a record from south-western Yukon Territory.
 
@@ -29,8 +28,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 This species is most commonly collected along the Pacific Coast from southwestern Yukon Territory to southwestern California. The range extends across southern British Columbia to the Rocky Mountains where it is found south to southern Utah and eastern Arizona. This species appears to be absent from the drier interior Intermountain Region in southeastern Oregon, southern Idaho, and Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

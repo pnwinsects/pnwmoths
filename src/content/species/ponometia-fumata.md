@@ -12,17 +12,15 @@ The exact habitat of this species is unknown. It most likely occurs in dry grass
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Ponometia fumata *is found in southern Oregon and southern Idaho in the Pacific Northwest. In Oregon it has been recorded from the Siskiyou Mountains in Jackson County as well as in the southeast near the border with Idaho. It is recorded from the Snake River Plain in Idaho.
+*Ponometia fumata* is found in southern Oregon and southern Idaho in the Pacific Northwest. In Oregon it has been recorded from the Siskiyou Mountains in Jackson County as well as in the southeast near the border with Idaho. It is recorded from the Snake River Plain in Idaho.
 
 ### Global
 
 The range of this species is western North America. It is recorded from California, northern Utah, and Wyoming outside of the Northwest (Nearctica.com).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

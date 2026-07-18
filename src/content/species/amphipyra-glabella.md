@@ -22,8 +22,7 @@ This species is widely distributed throughout much of eastern North America, ext
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipyra glabella* barely enters our area in eastern British Columbia.
 
@@ -35,8 +34,7 @@ The range of this species includes the eastern and central portions of North Ame
 
 
 
-## Life
-History
+## Life History
 
 
 

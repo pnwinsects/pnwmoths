@@ -14,17 +14,15 @@ This species occurs at high elevations.  In the Pacific Northwest, it is restri
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hadena caelestis* is found in the Cascade Range in southern British Columbia and Washington, and in the Siskiyou Mountains of southwestern Oregon. Further east it has been collected in the Selkirk Mountains in northeastern Washington and in the Wallowa Mountains in northeastern Oregon.
 
 ### Global
 
-This species is only known from the high Sierra Nevada in eastern California outside of the Pacific Northwest. It is replaced by the similar species *Hadena gabrieli *in the Transverse Ranges of southern California.
+This species is only known from the high Sierra Nevada in eastern California outside of the Pacific Northwest. It is replaced by the similar species *Hadena gabrieli* in the Transverse Ranges of southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -20,8 +20,7 @@ This is a rare species found at low to middle elevations in the Great Basin regi
 
 This species has been recorded from northern California and Utah outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

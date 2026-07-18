@@ -19,7 +19,7 @@ with rounded lateral corners, while that of *M*.
 *fractilinea* is angular,
 broadly M-shaped, and has a median notch and pointed corners.
 
-*Mesapamea* *secalis *resembles several other Apameini species in our region. *Apamea unanimis* is
+*Mesapamea* *secalis* resembles several other Apameini species in our region. *Apamea unanimis* is
 larger than *M*. *secalis* (FW 14–16 mm) and differs in having a prominent forewing black
 basal dash and a large ventral hindwing discal spot. *Apamea cogitata* is also larger than *M*. *secalis*,
 forewing longer than 16 mm, and is more uniform rich dark red brown.

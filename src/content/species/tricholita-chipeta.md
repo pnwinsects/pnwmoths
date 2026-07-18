@@ -12,8 +12,7 @@ This species can be identified by its tan wing and characteristically shaped whi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This moth has only been found in our area. It was collected along the south slope of the Black Pine Mountains in southeastern Idaho near the border with Utah.
 
@@ -21,12 +20,11 @@ This moth has only been found in our area. It was collected along the south slop
 
 This species is found from southern California to west Texas across the Southwest. The range extends north to southern Idaho and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
-The foodplant is reported to be *Gutierrezia wrightii *in the Asteraceae (Powell & Opler 2009).
+The foodplant is reported to be *Gutierrezia wrightii* in the Asteraceae (Powell & Opler 2009).
 
 ##### Adults
 

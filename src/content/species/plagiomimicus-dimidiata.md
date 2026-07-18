@@ -12,8 +12,7 @@ This species is widely distributed in the Southwest and southern Rocky Mountain 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Plagiomimicus dimidiata* is restricted to the mountains of southeastern Idaho where it has been collected in the Wasatch range.
 
@@ -21,8 +20,7 @@ This species is widely distributed in the Southwest and southern Rocky Mountain 
 
 This species is found throughout the Four Corner States and in adjacent western Wyoming, southwestern Idaho, and western Texas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -22,8 +22,7 @@ This species is widely distributed in moist coniferous forests throughout much o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cosmia praeacuta* is widespread in conifer forests throughout our region, occurring as far north as southern British Columbia. It is widespread west of the Cascade Mountains.
 
@@ -31,8 +30,7 @@ This species is widely distributed in moist coniferous forests throughout much o
 
 This species occurs from western Alberta and the Pacific Northwest south to Colorado, Arizona, and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

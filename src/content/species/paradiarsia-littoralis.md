@@ -12,8 +12,7 @@ This species is widely distributed across Canada and throughout the Rocky Mounta
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Paradiarsia littoralis* is found in boreal forest and mountain habitats in British Columbia, northern Washington, and eastern Oregon. It is probably more widely distributed in the mountains of Idaho. This species has not been found south of the Methow Valley in the Cascade Range.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada and throughout the Rocky Mounta
 
 This species occurs across the boreal North American Continent from eastern Alaska to Labrador. The range extends south to Pennsylvania in the east, central Wisconsin in the Midwest, northern New Mexico in the Rocky Mountains, and extreme north-eastern California in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

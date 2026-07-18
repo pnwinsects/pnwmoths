@@ -14,8 +14,7 @@ Darker and light specimens of this species have previously been treated as diffe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Caradrina montana* is common and widespread as far north as the southern third of British Columbia, but also occurs as far north as southern Yukon Territory. It is most commonly collected in the Columbia Basin in Washington, southeastern Oregon, and in southern Idaho. In western Washington it is most common in the Olympic Mountain rain shadow near the Gulf of Georgia and in the Willamette Valley of western Oregon. In northern British Columbia it occurs most commonly east of the Continental Divide.
 
@@ -23,8 +22,7 @@ Darker and light specimens of this species have previously been treated as diffe
 
 *Caradrina montana* is a Holarctic species. In North America it is widespread in the American West where it occurs from Yukon Territory, north-central Alberta, and southern Saskatchewan to New Mexico, Arizona, and southern California. The range extends east to Manitoba and Ontario where it overlaps the range of *C. multifera*. Isolated populations are found in several large cities farther east (J. D. Lafontaine personal communication 2012).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

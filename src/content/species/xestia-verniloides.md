@@ -16,8 +16,7 @@ This species is narrowly endemic to forest habitats in southwestern British Colu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia verniloides* has a very small range in southwestern British Columbia and northwestern Washington. It is found near the Gulf of Georgia although it occurs in forests rather than littoral habitats.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to forest habitats in southwestern British Colu
 
 This species does not occur outside our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

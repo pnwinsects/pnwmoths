@@ -12,8 +12,7 @@ This species is widely distributed in moist forest habitats throughout much of e
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia anguina* is found in northeastern Washington and central British Columbia in our region.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest habitats throughout much of e
 
 The range of this species extends east across southern Canada to the Atlantic and south in the Rocky Mountains to Colorado and Arizona. The range in the East extends from north-central Quebec and the island of Newfoundland south to Maryland on the coast and northern Georgia in the mountains. It occurs further south to Kentucky, Arkansas, and Nebraska in the middle of the Continent.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

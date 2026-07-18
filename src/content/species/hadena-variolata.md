@@ -6,9 +6,9 @@
 
 This species can be identified by its olive-gray to olive-brown color and contrasting white pattern, especially the white lining of the round orbicular spot and reniform spot. Other *Hadena* and *Lasionycta* species with similar pattern are dark gray without olive or brown color.
 
-The North American populations of this species are geographically variable and are divided into two subspecies. The nominate subspecies which has extensive white and yellow markings on the forewing is only found in southwestern British Columbia and in the southern Puget Trough near Olympia and Tenino, Washington. The subspecies* H. v. dealbata* (Staudinger), which has less white markings and lacks yellow patches, is found elsewhere.
+The North American populations of this species are geographically variable and are divided into two subspecies. The nominate subspecies which has extensive white and yellow markings on the forewing is only found in southwestern British Columbia and in the southern Puget Trough near Olympia and Tenino, Washington. The subspecies *H. v. dealbata* (Staudinger), which has less white markings and lacks yellow patches, is found elsewhere.
 
-The type locality of* Mamestra variolata* Smith is Washington Territory, likely near Olympia, Washington based on similarity of the holotype to populations from this area.
+The type locality of *Mamestra variolata* Smith is Washington Territory, likely near Olympia, Washington based on similarity of the holotype to populations from this area.
 
 ## Habitat
 
@@ -16,17 +16,15 @@ This species is widely distributed in dry habitats in the Northern Hemisphere. 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Hadena variolata *is found in dry forests, most commonly east of the Coast Range and Cascade Mountains as far north as southern British Columbia. It has also been found in remnant prairie mosaic habitats near Victoria, British Columbia and Olympia, Washington.
+*Hadena variolata* is found in dry forests, most commonly east of the Coast Range and Cascade Mountains as far north as southern British Columbia. It has also been found in remnant prairie mosaic habitats near Victoria, British Columbia and Olympia, Washington.
 
 ### Global
 
 This species has a Holarctic distribution. It is widely distributed in western North America. It is found from southern British Columbia and adjacent southwestern Alberta to Arizona and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

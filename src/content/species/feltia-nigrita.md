@@ -16,8 +16,7 @@ This species is widely distributed in boreal spruce-fir or pine forests in north
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Feltia nigrita* has only been found at Pink Mountain in north-eastern British Columbia in our region. It is undoubtedly more widely distributed in the northern Rocky Mountains in northern British Columbia.
 
@@ -25,8 +24,7 @@ This species is widely distributed in boreal spruce-fir or pine forests in north
 
 This species is found in subarctic and montane north-western North America from northern Manitoba and the Alberta Rocky Mountains to the Brooks Range in northern Alaska.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

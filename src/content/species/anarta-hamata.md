@@ -12,8 +12,7 @@ This species is moderately common in juniper woodlands and open sagebrush steppe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anarta hamata* is found in the dry interior steppes and juniper parkland from southern British Columbia through Washington and Oregon. It likely also occurs in Idaho.
 
@@ -21,8 +20,7 @@ This species is moderately common in juniper woodlands and open sagebrush steppe
 
 The range of this species extends to southwestern California and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

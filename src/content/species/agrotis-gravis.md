@@ -12,8 +12,7 @@ This species is narrowly endemic to sand dunes adjacent to the Pacific Ocean tha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis gravis* is found on the immediate Pacific Coast as far north as south-western British Columbia.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to sand dunes adjacent to the Pacific Ocean tha
 
 The northern limits of this species is reached in our region. Further south it occurs in coastal California north of the Transverse Ranges.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

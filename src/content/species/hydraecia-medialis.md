@@ -12,8 +12,7 @@ This moth is very common in open ponderosa pine forests along the east slope of 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hydraecia medialis* is widespread in our area east of the Cascades, occurring as far north as the Cariboo region in south-central British Columbia.
 

@@ -12,8 +12,7 @@ This species is widely distributed on dry prairies and deserts at low elevations
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia montanae* occurs in two separate areas in the Northwest. A west-side population is most closely associated with beaches in the Puget Sound and Gulf of Georgia as well as Vancouver Island. Inland populations are found in eastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed on dry prairies and deserts at low elevations
 
 *Cucullia montanae* is fairly widespread in western and central United States and adjacent southern Canada. It is most closely associated with the Great Plains and the southern Rocky Mountain region. The northern limit of its distribution is southwestern Manitoba to southwestern Alberta. Near the border with Mexico it is found from western Texas to southeastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

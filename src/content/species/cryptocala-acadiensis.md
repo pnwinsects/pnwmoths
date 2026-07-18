@@ -12,8 +12,7 @@ This species is widely distributed across Canada extending westward to the north
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Pacific Northwest range of this species is limited to southeastern British Columbia and the Blue Mountains of southeastern Washington.
 
@@ -21,8 +20,7 @@ The Pacific Northwest range of this species is limited to southeastern British C
 
 *Cryptocala acadiensis* is found across boreal North America, predominantly across southern Canada. The range extends as far south as Connecticut and Ohio in the East and Montana and Washington in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

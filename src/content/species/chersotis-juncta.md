@@ -12,8 +12,7 @@ This species is widely distributed across Canada and throughout the mountains of
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Chersotis juncta* is fairly widely distributed in the Pacific Northwest. It is most common in dry forest habitats east of the Cascade crest, especially on high ridges. Most records are from Washington and Oregon, with scattered locations in British Columbia as far north as southern Yukon Territory.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada and throughout the mountains of
 
 This species occurs in North America where it is found across the northern Continent from southern Greenland and Labrador to Yukon Territory. It ranges south to Nova Scotia in the east. The range extends further south in the mountains of the West, reaching Colorado and Utah in the Rocky Mountains and the northern Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

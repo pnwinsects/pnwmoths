@@ -12,8 +12,7 @@ This species is widely distributed on arctic shrub tundra in boreal regions of E
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found on Montana Mountain in southern Yukon Territory.  This locality is just north of British Columbia.
 
@@ -21,12 +20,11 @@ This species has been found on Montana Mountain in southern Yukon Territory.  T
 
 This species has a Holarctic distribution, occurring across northern Eurasia to Scandinavia. In North America it is found in the High Arctic and subarctic regions from Yukon Territory to Labrador, Baffin Island, and Greenland.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
-This species is a foodplant specialist feeding on dwarf huckleberries (*Vaccinium* spp.) in the Ericaceae. It has also been reported on dwarf birch (*Betula nana) *in the Betulaceae.
+This species is a foodplant specialist feeding on dwarf huckleberries (*Vaccinium* spp.) in the Ericaceae. It has also been reported on dwarf birch (*Betula nana)* in the Betulaceae.
 
 ##### Adults
 

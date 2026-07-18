@@ -18,7 +18,7 @@ This species is narrowly endemic to serpentine soils in southwestern Oregon.  I
 
 ### Pacific Northwest
 
-*Euxoa faulkneri *has only been collected in the Siskiyou Mountain region of southwestern Oregon where it reaches the northern limit of its range.
+*Euxoa faulkneri* has only been collected in the Siskiyou Mountain region of southwestern Oregon where it reaches the northern limit of its range.
 
 ### Global
 

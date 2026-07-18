@@ -12,8 +12,7 @@ This species can be identified in its restricted habitat by the even dark brown 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has a restricted range in western Oregon in the Northwest. It has been collected in the central Cascade Range and in the Siskiyou Mountains.
 
@@ -21,8 +20,7 @@ This species has a restricted range in western Oregon in the Northwest. It has b
 
 The center of distribution of *C. albolabes* is the Southwest. It is most commonly collected in southern Arizona and western and central Texas. It also occurs further north in New Mexico and Colorado, extending west to California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

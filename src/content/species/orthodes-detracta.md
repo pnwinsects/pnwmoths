@@ -12,8 +12,7 @@ This species is widely distributed throughout much of eastern North America in m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthodes detracta* occurs in eastern and central British Columbia and in southeastern Idaho in the Northwest. The most southerly occurrence in British Columbia is from the Cariboo Region north of Clinton.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of eastern North America in m
 
 The range of this species extends to the Atlantic from our area. It occurs from central Alberta to northern New Mexico in the West and southern Quebec and Nova Scotia to North Carolina and northern Mississippi in the East.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

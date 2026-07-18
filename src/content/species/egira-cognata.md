@@ -12,8 +12,7 @@ This species is endemic to moist forests at low elevations west of the Cascades.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira cognata* is found west of the Cascades from southwestern British Columbia to southern Oregon.
 
@@ -21,8 +20,7 @@ This species is endemic to moist forests at low elevations west of the Cascades.
 
 The range of this species extends south through western California to Baja California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

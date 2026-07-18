@@ -6,7 +6,7 @@
 
 This species can be identified by its warm brown color and thick gold stigma. Other species of Plusiinae with brown wings and gold-colored stigmas have a different shape to the stigma.
 
-The type locality of the synonym *Plusia scapularis* Hy. Edwards is Washington Territory, USA and that of the synonym *Phytometra metallica ab. kasloensis *Strand is Kaslo, British Columbia, Canada.
+The type locality of the synonym *Plusia scapularis* Hy. Edwards is Washington Territory, USA and that of the synonym *Phytometra metallica ab. kasloensis* Strand is Kaslo, British Columbia, Canada.
 
 ## Habitat
 
@@ -18,8 +18,7 @@ This species is usually very rare, and found as sporadic individuals at both low
 
 *Autographa metallica* is found in forests throughout our region as far north as southern British Columbia. It is absent from the most xeric habitats.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -29,8 +28,7 @@ No information is currently available regarding larval foodplants, but it probab
 
 This species has a single brood that flies during the summer from early June through August. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -24,7 +24,7 @@ This is a species of the intermountain west. Its range includes western Colorado
 
 ##### Larvae
 
-No information is presently available regarding larval foodplants for this species, but it probably feeds on general herbaceous vegetation like the closely related* A. picta*, particularly legumes such as lupines (*Lupinus* spp.).
+No information is presently available regarding larval foodplants for this species, but it probably feeds on general herbaceous vegetation like the closely related *A. picta*, particularly legumes such as lupines (*Lupinus* spp.).
 
 ##### Adults
 

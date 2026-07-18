@@ -12,8 +12,7 @@ This species is common and widely distributed in moist hardwood forests througho
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacanobia grandis* is found in southern British Columbia, northern Idaho, and western Oregon and Washington in the Pacific Northwest, but appears to be local because it is rarely collected.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in moist hardwood forests througho
 
 The range of this species extends east to the Atlantic across southern Canada and the northern United States. The distribution extends from Nova Scotia to Virginia along the East Coast. The southern limit of the range is Illinois and North Dakota in the Heartland. Its range extends to Colorado in the Rocky Mountains. It does not occur in the Great Basin or California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

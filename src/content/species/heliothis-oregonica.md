@@ -12,8 +12,7 @@ This species is widely distributed in open mountain meadows at middle to high el
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothis oregonica* is widely distributed in the southern third of British Columbia. It is also found in the Idaho Panhandle, and throughout most of the eastern parts of Washington and Oregon
 
@@ -21,8 +20,7 @@ This species is widely distributed in open mountain meadows at middle to high el
 
 This species has a wide distribution in western North America outside of the Northwest. It occurs throughout the southern half of Alberta south through the Rocky Mountains to northeastern Arizona. It is also found in northeastern California. A disjunct eastern population is found in northern Quebec.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

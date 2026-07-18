@@ -14,8 +14,7 @@ This species is widely distributed throughout most of North America in drier, re
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia vicina* is widespread east of the Cascade Mountains in our region. It occurs as far north as south-central British Columbia and as far east as southeastern Idaho. Its range is restricted to western Oregon west of the Cascades. It is often absent from open steppe habitats, although it occurs commonly around the edges of our interior basins.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout most of North America in drier, re
 
 The range of this species extends east to the Atlantic Coast. It is most common and widespread in the West where it occurs from the southern Canadian Prairie Provinces and British Columbia to southern New Mexico, Arizona, and California. In the east it occurs from southern Canada about as far south as the Ohio River.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

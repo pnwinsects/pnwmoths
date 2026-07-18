@@ -12,8 +12,7 @@ This species is frequent in coastal rainforests and mixed hardwood forests at lo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pseudobryomima muscosa* is found west of the crests of the Cascade and British Columbia Coast Range Mountains as far north as south-western British Columbia near Lillooet.
 
@@ -21,8 +20,7 @@ This species is frequent in coastal rainforests and mixed hardwood forests at lo
 
 The range of this species includes northern and central California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -16,17 +16,15 @@ This species is widely distributed on wet arctic shrub tundra across the norther
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia ursae* has only been found on Pink Mountain in north-eastern British Columbia. It likely has a much wider distribution in northern British Columbia since it is known from south-western Yukon Territory.
 
 ### Global
 
-This species has a Holarctic distribution. It occurs in eastern Eurasia as far west as Lake Baikal. In North America,* X. ursae* is found from Yukon Territory to the west shore of Hudson Bay, and as far south as northern British Columbia.
+This species has a Holarctic distribution. It occurs in eastern Eurasia as far west as Lake Baikal. In North America, *X. ursae* is found from Yukon Territory to the west shore of Hudson Bay, and as far south as northern British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

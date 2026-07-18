@@ -14,8 +14,7 @@ This species is found on arctic and alpine shrub tundra.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia okakensis* is a northerly species that has been found at Pink Mountain, British Columbia. It likely occurs more widely in northern British Columbia since it is also known from southwestern Yukon Territory.
 
@@ -23,8 +22,7 @@ This species is found on arctic and alpine shrub tundra.
 
 This species has a Holarctic distribution like many other species in the subgenus *Pachnobia*. The range in Eurasia is limited to eastern Siberia. In North America it occurs in arctic and subarctic habitats from Alaska to Labrador. Relict mountain populations exist on Mount Albert on Quebec's Gaspee Peninsula and on Mount Washington, New Hampshire. It does not occur south of Pink Mountain in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

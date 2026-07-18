@@ -12,8 +12,7 @@ This species is found in forests along the West Coast west of the Cascades.  It
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homorthodes hanhami* is almost exclusively found west of the Cascade Mountains. The range extends as far north as Vancouver Island in southwestern British Columbia.
 
@@ -21,8 +20,7 @@ This species is found in forests along the West Coast west of the Cascades.  It
 
 The range of this species extends south through California. A few records are shown from further east in Arizona on the Moth Photographers Group web site.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

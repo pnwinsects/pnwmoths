@@ -12,8 +12,7 @@ This species is widely distributed in moist forest and riparian habitats through
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species appears to occur in two different separate areas in our region. A western population occurs in the southern Coast Range and west of the Cascades from south-eastern British Columbia to west-central Oregon. The eastern populations have been collected in the Idaho Panhandle and adjacent British Columbia.
 
@@ -21,8 +20,7 @@ This species appears to occur in two different separate areas in our region. A w
 
 This species is widely distributed across boreal North America from Alaska to the island of Newfoundland. The southern limits of its range are Oregon on the West Coast, Colorado in the Rocky Mountain region, Wisconsin in the Midwest, and Pennsylvania in the East.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

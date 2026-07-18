@@ -16,8 +16,7 @@ This species is common and widely distributed in hardwood forests throughout muc
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Northwest range of *A. impleta* includes forests throughout most of our region as far north as southern British Columbia. It is common on the west side of the Cascade Mountains. It occurs in forests in northern Washington as well as on the east slope of the Cascades in that state, but is nearly absent from the eastern Cascades and Blue Mountains in Oregon.
 
@@ -25,8 +24,7 @@ The Northwest range of *A. impleta* includes forests throughout most of our regi
 
 The range of this species, like many other species of *Acronicta*, extends coast to coast in North America. It occurs from southern Canada to Florida and Texas in the East. In the West it has been collected in Alberta, Colorado, and California outside of the Pacific Northwest Region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

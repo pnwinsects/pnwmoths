@@ -14,8 +14,7 @@ This species appears to be rare and sporadic in and near rocky alpine tundra in 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species occurs in the mountains of southern British Columbia and northern Washington. The southern limit is the northern Cascade Range in Okanogan County, Washington.
 
@@ -23,8 +22,7 @@ This species occurs in the mountains of southern British Columbia and northern W
 
 This species has been found in the Rocky Mountains of western Alberta outside of our area.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

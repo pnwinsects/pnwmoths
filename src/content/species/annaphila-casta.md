@@ -12,8 +12,7 @@ This species is rare in open wet forest and riparian habitats at low elevations 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Annaphila casta* has only been collected in the Willamette Valley in western Oregon in our region.
 
@@ -21,8 +20,7 @@ This species is rare in open wet forest and riparian habitats at low elevations 
 
 The range of *A. casta* includes northwestern California outside of the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

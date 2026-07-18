@@ -12,17 +12,15 @@ This is a desert species.  It barely enters the Pacific Northwest in very dry, 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Escaria clauda* is limited to south-central Oregon in the Pacific Northwest.
 
 ### Global
 
-*Escaria clauda *occurs in the Great Basin as well as in southern California outside of our region.
+*Escaria clauda* occurs in the Great Basin as well as in southern California outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -8,7 +8,7 @@ This species can be identified by its dull gray forewing color, bar-like dark ce
 
 ##### Larvae
 
-The larva is smooth, brown with white stripe along the side, and has prominent fin-like thoracic humps and a caudal hump. It is depicted by Miller* et al.* (2018).
+The larva is smooth, brown with white stripe along the side, and has prominent fin-like thoracic humps and a caudal hump. It is depicted by Miller *et al.* (2018).
 
 ## Habitat
 

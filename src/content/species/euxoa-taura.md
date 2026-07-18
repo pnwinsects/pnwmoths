@@ -28,7 +28,7 @@ This species is narrowly endemic to the short-grass prairies of the Great Plains
 
 ### Pacific Northwest
 
-*Euxoa taura *has only been collected along the eastern edge of the Coast Range in British Columbia. It is likely to be more widespread in British Columbia, especially near the Alberta border. It has also been found at one locality in east-central Idaho and in western Montana.
+*Euxoa taura* has only been collected along the eastern edge of the Coast Range in British Columbia. It is likely to be more widespread in British Columbia, especially near the Alberta border. It has also been found at one locality in east-central Idaho and in western Montana.
 
 ### Global
 

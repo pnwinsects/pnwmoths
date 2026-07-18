@@ -12,8 +12,7 @@ This species is widely distributed in eastern North America within moist forest 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Pacific Northwest distribution of this species is limited to the Rocky Mountain Trench in eastern British Columbia.
 
@@ -21,8 +20,7 @@ The Pacific Northwest distribution of this species is limited to the Rocky Mount
 
 The range of this species extends in a relatively narrow band across boreal North America from Newfoundland and West Virginia west to south-eastern British Columbia. Scattered records from Colorado and Montana are present in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

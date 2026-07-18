@@ -12,17 +12,15 @@ This species is endemic to desert regions of the Great Basin.  It is most commo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Rhizagrotis modesta *is only known from southeastern Oregon in our region.
+*Rhizagrotis modesta* is only known from southeastern Oregon in our region.
 
 ### Global
 
 The range of this moth extends south to Baja California through Nevada and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

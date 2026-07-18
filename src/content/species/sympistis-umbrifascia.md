@@ -20,8 +20,7 @@ This species is widely distributed in relatively dry, open grassland habitats, o
 
 The range of this species includes most of California south of our area. It has also been found in Nevada, Utah, and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This species is a foodplant specialist feeding on penstemons (*Penstemon* spp.) 
 
 This species flies during the summer in our area. It has been collected from late June to mid-September. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -20,8 +20,7 @@ This species is found in juniper woodlands and on open sagebrush steppe at low t
 
 This species is found in California and the Southwest outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 Adults of this species fly during the fall, most commonly from mid-September. It is a nocturnal species that come to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -14,8 +14,7 @@ This species is moderately common on dry, open sagebrush steppe and in juniper w
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species occurs in dry rangeland and forest habitats east of the Cascades from southern British Columbia south through Oregon to southern Idaho and northern Nevada.
 
@@ -23,8 +22,7 @@ This species occurs in dry rangeland and forest habitats east of the Cascades fr
 
 *Condica mersa* has only been found at a few sites outside of the Northwest. It is recorded from northeastern California, western Nevada, and southern California on nearctica.com and The Moth Photographers Group web site.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

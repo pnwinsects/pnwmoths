@@ -14,8 +14,7 @@ This species occurs in grasslands and oak woodlands.  In western Oregon it is c
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Parabagrotis cupidissima* is found along the Pacific Coast states from southern Vancouver Island to southern California in the vicinity of Los Angeles. The distribution in western Washington is restricted to the Puget Trough south of Olympia and the Columbia River Gorge. It is more widespread in western Oregon west of the high Cascades.
 
@@ -23,8 +22,7 @@ This species occurs in grasslands and oak woodlands.  In western Oregon it is c
 
 The range of this species resembles those of other *Parabagrotis* species in that it extends south through California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

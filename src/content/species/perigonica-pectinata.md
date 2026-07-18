@@ -4,7 +4,7 @@
 
 *Perigonica pectinata* is a speckled gray-brown medium sized moth (FW length 15 - 16 mm) that flies in western Oregon and the southern Cascade Mountains in Washington during early spring. Its forewings have a J-shaped yellow-orange mark formed by the outer and inferior portions of the reniform spot. The apex of the forewing is slightly pointed, and there is a slight angulation on vein CuA1 near the anal angle. The ground color is gray-brown, usually heavily speckled with dark scales to produce a salt-and-pepper effect but occasionally smooth. This speckling is strong medial to the subterminal line and at the fringe in some individuals. The basal, antemedial, and postmedial lines are very faint except at the costa, although the veins distal to the postmedial line are marked with dark gray lines or spots. The terminal line is a similar series of spots between the veins. The median line is usually dark gray at the costa. The reniform spot is upright and bar-like, but only the lateral and inferior portions are evident. These are ochre yellow or slightly orange toward the inside of the spot and rusty orange on the outside forming a warm-colored J-shape. The orbicular and claviform spots are obsolete. The hindwing is brown-gray with a strong suffusion of medium gray, a dark discal spot, and a scalloped margin with a dark terminal line. The fringe is variable light whitish gray, light orange, or slightly reddish. The head and thorax are mouse gray, matching the ground color of the forewings. The eye is covered with fine hairs. The male antenna is strongly bipectinate.
 
-*Perigonica pectinata *is the only one of our three *Perigonica* species that is gray. The color and shape of the reniform spot are unique in our moth fauna.
+*Perigonica pectinata* is the only one of our three *Perigonica* species that is gray. The color and shape of the reniform spot are unique in our moth fauna.
 
 ##### Larvae
 
@@ -16,8 +16,7 @@ This species is narrowly endemic to the West Coast in forest habitats with everg
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Perigonica pectinata* is widespread in western Oregon where it most common in the Cascade and Siskiyou Mountains. It has only been found once in southern Washington at one of two sites in the state where chinquapin oak grows.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to the West Coast in forest habitats with everg
 
 The range of *P. pectinata* extends south through California, both along the Pacific Coast and along the west slope of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is mostly found on the dry short-grass prairies of the southern Gre
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Dichagyris grotei* has only been found in or near the Snake River Canyon at the Oregon-Idaho border and in the Wasatch Range of south-eastern Idaho in our region.
 
@@ -21,8 +20,7 @@ This species is mostly found on the dry short-grass prairies of the southern Gre
 
 This species has a wide range across North America. It is found from Pennsylvania and the Florida Panhandle in the East to northern Wyoming, Utah, Arizona, and the Pacific Northwest in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

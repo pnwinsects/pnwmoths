@@ -22,8 +22,7 @@ This is a rare species of the northern Rocky Mountain region, extending to coast
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta vulpina* is most common in southern British Columbia in our region. It is also found in the Panhandle and southeastern part of Idaho, the Blue Mountains in southwestern Washington, and near the Columbia River Gorge in Washington and Oregon.
 
@@ -35,8 +34,7 @@ The range of this species extends east to Newfoundland in a relatively narrow ba
 
 
 
-## Life
-History
+## Life History
 
 
 

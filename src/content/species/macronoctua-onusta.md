@@ -12,8 +12,7 @@ This species is widely distributed in eastern North America in wetlands and urba
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Macronoctua onusta* has been found in Langley, British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed in eastern North America in wetlands and urba
 
 This species is found in eastern North America from southern Canada to South Carolina and Georgia. The western limit of its range is in the North-Central States near the Mississippi River.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is rare and sporadic in the Northwest.  Although the habitat is no
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eupsilia fringata* has been found at widely scattered localities east of the Cascade Crest, including the east slope of the Cascades, southeastern British Columbia and adjacent northeastern Washington and Idaho Panhandle, and in the Blue Mountains of southeastern Washington.
 
@@ -21,8 +20,7 @@ This species is rare and sporadic in the Northwest.  Although the habitat is no
 
 This species has been found in California and Utah to the south of the Northwest region. Most of the California records are from the Sierra Nevada and the southern part of the state.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

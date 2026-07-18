@@ -18,8 +18,7 @@ This species is widely distributed throughout much of Eurasia and North America 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Graphiphora augur* is widespread in forest and moist open habitats throughout most of the Pacific Northwest. It is rare in the dry interiors of Washington, Oregon, and Idaho.
 
@@ -27,8 +26,7 @@ This species is widely distributed throughout much of Eurasia and North America 
 
 This species has a Holarctic distribution. In North America it occurs across boreal and subarctic zones from Alaska to the island of Newfoundland. The range extends to Ohio in the East, South Dakota in the Great Plains, Arizona in the Rocky Mountains, and the San Francisco Bay area along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

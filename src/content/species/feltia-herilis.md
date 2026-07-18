@@ -16,8 +16,7 @@ This species is widely distributed in moist forest habitats throughout eastern N
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Feltia herilis* is found throughout the western part of the Pacific Northwest from south-western British Columbia to Lane County in west-central Oregon. It has a more limited range east of the mountains, primarily in southern British Columbia and southern Washington, and appears to be absent from much of eastern Oregon. Scattered Idaho records are from the Panhandle and Snake River Plain.
 
@@ -25,8 +24,7 @@ This species is widely distributed in moist forest habitats throughout eastern N
 
 This species is broadly distributed in North America from the East Coast to central Texas west to the Pacific Northwest. The northern range limits are Newfoundland, central Manitoba, northern Alberta, and southern British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

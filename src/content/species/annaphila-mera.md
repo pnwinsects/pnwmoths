@@ -22,8 +22,7 @@ This species appears to be very rare and sporadically distributed in moist ripar
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Northwest range of *A. mera* is limited to western Oregon.
 
@@ -35,8 +34,7 @@ This species occurs in California where it has been found along the coast, in th
 
 
 
-## Life
-History
+## Life History
 
 
 

@@ -6,7 +6,7 @@
 
 This species is unmistakable due to its distinctively patterned forewing and bright yellow hindwing.
 
-The Idaho and Utah populations of this moth were recently recognized as subspecies* E. b. bonneville* Shepard & Crabo. It differs from the nominate subspecies from western California in having narrower dark margins and smaller discal spots on both wings, resembling superficially the eastern North American *Eudryas unio* Guenée. The structure of the male and female genitalia of subspecies *bonneville* confirm its relationship to other populations of *E. brevipennis*.
+The Idaho and Utah populations of this moth were recently recognized as subspecies *E. b. bonneville* Shepard & Crabo. It differs from the nominate subspecies from western California in having narrower dark margins and smaller discal spots on both wings, resembling superficially the eastern North American *Eudryas unio* Guenée. The structure of the male and female genitalia of subspecies *bonneville* confirm its relationship to other populations of *E. brevipennis*.
 
 ## Habitat
 
@@ -14,8 +14,7 @@ The Idaho and Utah populations of this moth were recently recognized as subspeci
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been found in southern Idaho near the Snake River in our region.
 
@@ -23,8 +22,7 @@ This species has only been found in southern Idaho near the Snake River in our r
 
 The North American range of *E. brevipennis* is limited to Utah and California outside of Idaho. The California populations, *E. b. brevipennis*,are found near San Francisco Bay, the adjacent Central Valley, and near Los Angeles.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

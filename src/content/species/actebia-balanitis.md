@@ -14,8 +14,7 @@ This species is widely distributed on the dry short-grass prairies of the northe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Actebia balanitis* has been collected in south-central British Columbia, northern and central Washington, and southern Idaho in our region. It likely occurs in northern British Columbia as it has been found in Yukon Territory and Alaska. It is most common in boreal forest and montane habitats.
 
@@ -23,8 +22,7 @@ This species is widely distributed on the dry short-grass prairies of the northe
 
 This species is found in northwestern North America from northern Colorado, North Dakota, and eastern Saskatchewan to Alaska.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ In the Pacific Northwest, *C. florea* is often moderately common in subalpine me
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia florea* is found in  forests in southern British Columbia, northern Washington, and the Idaho Panhandle. The range extends south along the east slope of the Cascade Mountains. It has also been found along the Pacific Coast and in the Blue Mountains in Washington.
 
@@ -23,8 +22,7 @@ In the Pacific Northwest, *C. florea* is often moderately common in subalpine me
 
 This species occurs across the boreal zone of North America in a relatively narrow zone near the Canada-United States border. The range extends southward in the Appalachian Mountains to northern Georgia. The western distribution is wider, extending south through the Rocky Mountains to Arizona and New Mexico. It also occurs in the Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

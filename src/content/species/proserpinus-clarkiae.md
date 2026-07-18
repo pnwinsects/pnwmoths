@@ -6,7 +6,7 @@
 
 This species can be identified definitively by the combination of green forewing and yellow hindwing. No other moth shares these features in our area, although similar species of *Proserpinus* are found elsewhere in North America.
 
-The synonym* Lepisesia victoria* Grote was described from British Columbia.
+The synonym *Lepisesia victoria* Grote was described from British Columbia.
 
 ##### Larvae
 
@@ -30,7 +30,7 @@ The range of this species extends south through western Nevada and California to
 
 ##### Larvae
 
-The larva of *P. clarkiae* is a foodplant specialist that feeds on members of the evening primrose family Onagraceae, including species of *Clarkia *and *Oenothera.*
+The larva of *P. clarkiae* is a foodplant specialist that feeds on members of the evening primrose family Onagraceae, including species of *Clarkia* and *Oenothera.*
 
 ##### Adults
 

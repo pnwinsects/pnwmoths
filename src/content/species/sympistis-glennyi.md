@@ -22,8 +22,7 @@ This species is found in higher elevation conifer forests or high mountain meado
 
 This species is found in the North American West. It occurs from southwestern Alberta to Colorado in the Rocky Mountains, in the mountains of Utah and California, and in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies in late summer and fall, with records from mid-July to mid-September. It is nocturnal and comes to light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

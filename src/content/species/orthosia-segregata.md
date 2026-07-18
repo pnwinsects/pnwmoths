@@ -12,8 +12,7 @@ This species is widely distributed across Canada in moist forest habitats, exten
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia segregata* is found across southern and central British Columbia as far west as the Skagit River Valley south of Hope. It is found in northeastern Washington as well as in the Blue Mountains. It is limited to the Blue Mountains in eastern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in moist forest habitats, exten
 
 This species ranges across the boreal part of North America as far east as Ottawa, Ontario.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

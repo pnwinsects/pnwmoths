@@ -12,8 +12,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Aplectoides condita* is found in southern British Columbia, northeastern Washington, and the Blue Mountains of Oregon and the adjacent Cascades. It occurs rarely in the Cascade Mountains of Washington, but has been found near Snoqualmie Pass and slightly north of the Columbia River Gorge.  It is more common in the Oregon Cascades.
 
@@ -21,8 +20,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 *Aplectoides condita* is found in a relatively narrow north-south distribution across the Continent. It is found near the Canada-United States border as far north as central Saskatchewan in the West, Lake Nipigon, Ontario in the Midwest, and the southern island of Newfoundland along the Atlantic Seaboard. There are a few records from the Appalachian Mountains south to North Carolina.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

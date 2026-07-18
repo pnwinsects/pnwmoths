@@ -12,8 +12,7 @@ The habitat of this species is dry, open juniper forests in southern Idaho.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Neleucania praegracilis* has only been found in southeastern Idaho in the Northwest.
 
@@ -21,8 +20,7 @@ The habitat of this species is dry, open juniper forests in southern Idaho.
 
 This species is found on the Great Plains and in the Southwest. The range extends from California to western Texas across Arizona and New Mexico. The range extends north to southern Alberta through Colorado and Montana.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

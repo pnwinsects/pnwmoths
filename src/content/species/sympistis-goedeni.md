@@ -22,8 +22,7 @@ This species is locally endemic to dry grasslands and oak savanna at low elevati
 
 The range of this species extends south to the vicinity of Los Angeles through coastal California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 The flight period of *S. goedeni* is late August and the month of September. It is nocturnal and comes to light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -16,8 +16,7 @@ This species is common to abundant along the West Coast in forests with evergree
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Perigonica angulata* is found in the Cascade Range as far north as Skamania County, Washington where it is associated with one of the two known stands of chinquapin oak in the state. It is more widespread in western Oregon where it occurs in the Siskiyou Mountains and southern Willamette Valley as well as in the Cascade Mountains.
 
@@ -25,8 +24,7 @@ This species is common to abundant along the West Coast in forests with evergree
 
 The range of this species extends south through California and east in the Southwest to New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

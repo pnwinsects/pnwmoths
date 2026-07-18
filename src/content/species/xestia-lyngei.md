@@ -18,8 +18,7 @@ This species is widely distributed on dry, rocky mountain tundra across northern
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is likely in northern British Columbia because it has been collected very close to the border at Montana Mountain in southern Yukon Territory.
 
@@ -27,8 +26,7 @@ This species is likely in northern British Columbia because it has been collecte
 
 *Xestia lyngei* is found in northern Alaska and in mountains throughout most of Yukon Territory to near the British Columbia border. It also occurs in northern Eurasia from Scandinavia to eastern Siberia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

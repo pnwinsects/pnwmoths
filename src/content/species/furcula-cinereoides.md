@@ -32,7 +32,7 @@ This species is a foodplant specialist on Salicaceae, including both willows (*S
 
 ##### Adults
 
-Adults of* F. cinereoides* have a fairly long flight in the Pacific Northwest, with records from mid-April through August.  It is nocturnal and comes to light.  The adults do not feed.
+Adults of *F. cinereoides* have a fairly long flight in the Pacific Northwest, with records from mid-April through August.  It is nocturnal and comes to light.  The adults do not feed.
 
 ## Economic Importance
 

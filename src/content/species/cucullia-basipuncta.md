@@ -12,8 +12,7 @@ This species lives in low elevation deserts and has been found in a canyon in sa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia basipuncta* reaches its northern limit in southeastern Oregon where it has been collected in the Pueblo Mountains in Harney County.
 
@@ -21,8 +20,7 @@ This species lives in low elevation deserts and has been found in a canyon in sa
 
 This species is predominantly distributed well to the south of the Northwest in southern California, Arizona, New Mexico, and the southern parts of Nevada and Utah.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

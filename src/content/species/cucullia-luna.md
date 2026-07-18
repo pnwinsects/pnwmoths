@@ -12,8 +12,7 @@ This species is widely distributed on the short-grass and mixed-grass prairies o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia luna* occurs on the Snake River Plain in southern Idaho in the Northwest.
 
@@ -21,8 +20,7 @@ This species is widely distributed on the short-grass and mixed-grass prairies o
 
 The range of this species includes the Great Plains and the Great Basin. It occurs from central Alberta, Saskatchewan, and southern Manitoba south to South Dakota, Colorado, northern Arizona, and Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

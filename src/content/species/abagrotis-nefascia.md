@@ -6,7 +6,7 @@
 
 This species can be identified by its distinctive forewing color and is unlikely to be confused with other moths in our region. Fresh specimens of this species are very attractive.
 
-The type locality of *Abagrotis crumbi *Franclemont, a synonym, is White Swan, Washington.
+The type locality of *Abagrotis crumbi* Franclemont, a synonym, is White Swan, Washington.
 
 ## Habitat
 

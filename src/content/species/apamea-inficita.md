@@ -14,7 +14,7 @@ This species is widely distributed across Canada and southward through the Rocky
 
 ### Pacific Northwest
 
-*Apamea inficita *is found in forests throughout our region, mostly at higher elevations south of British Columbia. It occurs in the Cascades to southern Washington. In Oregon it is limited to Steens Mountain in Harney County. This species is found in the Rocky Mountains in Idaho and Montana. The range of *A. inficita* extends north into Yukon Territory.
+*Apamea inficita* is found in forests throughout our region, mostly at higher elevations south of British Columbia. It occurs in the Cascades to southern Washington. In Oregon it is limited to Steens Mountain in Harney County. This species is found in the Rocky Mountains in Idaho and Montana. The range of *A. inficita* extends north into Yukon Territory.
 
 ### Global
 

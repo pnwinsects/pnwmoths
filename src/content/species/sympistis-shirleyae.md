@@ -12,8 +12,7 @@ No information is presently available regarding habitats of this species in the 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been found once at Grants Pass in southwestern Oregon. It is rarely collected and is only known from a total of three specimens.
 
@@ -21,8 +20,7 @@ This species has only been found once at Grants Pass in southwestern Oregon. It 
 
 The only other known site where this species has been found is the type locality in Plumas County, California in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -16,8 +16,7 @@ This species is narrowly endemic to the West Coast.  In the Oregon, it is commo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Feralia februalis* is limited to western Oregon in our region. Its range extends north to the Columbia River but it has yet to be found in adjacent Washington.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to the West Coast.  In the Oregon, it is commo
 
 The range extends south through California where it occurs in the western part of the state to the Mexican border. It is also present in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

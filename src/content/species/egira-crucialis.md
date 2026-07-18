@@ -18,8 +18,7 @@ This species is widely distributed throughout much of western North America in m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This moth is widespread in the Northwest as far north as southern British Columbia where it occurs on both sides of the Cascade Mountains. The eastern limits of its range are southeastern British Columbia and the Idaho Panhandle. It is found commonly west of the mountains to southern Oregon. East of the mountains it is common around the periphery of the Columbia Basin and in the Blue Mountains of Oregon. It does not appear to be found further south in the Basin and Range or Snake River Plain regions.
 
@@ -27,8 +26,7 @@ This moth is widespread in the Northwest as far north as southern British Columb
 
 *Egira crucialis* is found throughout most of western and central California. The range extends eastward to the Rocky Mountains through Arizona and New Mexico, thence northward through Colorado, western Wyoming, and western Montana. Only a few records are shown from outside the Northwest and California on the Moth Photographers Group website suggesting that this species is uncommon except in this region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

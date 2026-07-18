@@ -12,8 +12,7 @@ In the Pacific Northwest, *P. invalida* is moderately common in mixed hardwood-c
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Papestra invalida* is found along the east slope of the Cascades in Oregon, Washington, and southern British Columbia. It has been found less frequently in northern Washington and the Idaho Panhandle. The range also includes the Blue Mountains and Siskiyou Mountains in Oregon.
 
@@ -21,8 +20,7 @@ In the Pacific Northwest, *P. invalida* is moderately common in mixed hardwood-c
 
 This species has the most restricted distribution of any *Papestra* in North America. It is only found in California outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -30,7 +28,7 @@ This species is known to feed on various hardwoods including currants (*Ribes* s
 
 ##### Adults
 
-Adults of *P. invalida *are single brooded and fly in late spring and summer. Records from our region extend from early May to early August. It is nocturnal and comes to lights.
+Adults of *P. invalida* are single brooded and fly in late spring and summer. Records from our region extend from early May to early August. It is nocturnal and comes to lights.
 
 ## Economic Importance
 

@@ -12,8 +12,7 @@ This species is widely distributed in open habitats across Canada, extending thr
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Androloma maccullochii* is widely distributed in British Columbia, although most of the records are from the southern province. It occurs in mountains further south, including in the Olympic Mountains, Cascades, and the western Cordillera.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open habitats across Canada, extending thr
 
 This species occurs across northern North America from Alaska to eastern Ontario, flying to the northern limits of trees. Its range extends south through the mountains of western North America, reaching southern Colorado in the Rocky Mountains, northern Nevada in the Basin and Range, and the southern Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

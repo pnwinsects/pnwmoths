@@ -14,8 +14,7 @@ This species is widely distributed in moist forests across Canada and in the mou
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Andropolia contacta* is found in boreal and montane forests throughout most of British Columbia. It is also found in the Rocky Mountains and on the higher peaks in the Basin and Range province in southern Idaho and Oregon. It occurs in the Cascades of Oregon and Washington, but is rare in this part of the Northwest.
 
@@ -23,12 +22,11 @@ This species is widely distributed in moist forests across Canada and in the mou
 
 This boreal forest species is found across North America from Alaska to Hudson Bay, Newfoundland, and the northern United States. The range extends south to Colorado, Utah, and Nevada in the mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
-In eastern North America, this species is reported to feed on both alders (*Alnus *spp.) and birches (*Betula* spp.) in the Betulaceae, and on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae.  However in the Pacific Northwest, it might be a specialist on quaking aspen (*P. tremuloides*) based on its habitat preference.
+In eastern North America, this species is reported to feed on both alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, and on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae.  However in the Pacific Northwest, it might be a specialist on quaking aspen (*P. tremuloides*) based on its habitat preference.
 
 ##### Adults
 

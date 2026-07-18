@@ -14,8 +14,7 @@ This species occurs in moist forests along the West Coast.  In the Pacific Nort
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Adelphagrotis stellaris* is restricted to the western portions of our region south of Lillooet, British Columbia. It is found west of the Cascade Range crest in Oregon and Washington.
 
@@ -23,8 +22,7 @@ This species occurs in moist forests along the West Coast.  In the Pacific Nort
 
 This species is found in western California to Monterey Bay south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

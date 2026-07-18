@@ -12,8 +12,7 @@ This species is widely distributed across Canada in boreal spruce-fir forests, e
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Papestra cristifera* is found in conifer forests throughout most of the Pacific Northwest as far north as southern British Columbia. It has been most commonly collected in the Cascade Mountains, but also occurs in forests across southern British Columbia and adjacent Washington and Idaho, in the Blue Mountains of southeastern Washington and northeastern Oregon, and in the Oregon Coast Range.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in boreal spruce-fir forests, e
 
 The range of this species includes much of boreal North America. It is found across the Continent to the island of Newfoundland. The range extends south in the Rocky Mountains to Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

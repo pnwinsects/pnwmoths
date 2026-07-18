@@ -12,8 +12,7 @@ This species is common and widely distributed on dry, open sagebrush steppe and 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Polia nugatis* is found in dry interior habitats from southern British Columbia south through the Columbia Basin to the southern parts of Oregon and Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed on dry, open sagebrush steppe and 
 
 The range of this species extends from southern Montana, Wyoming, and Colorado west through Utah and Nevada to eastern and central California outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

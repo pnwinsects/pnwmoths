@@ -20,8 +20,7 @@ This species is widely distributed in forests of eastern North America and throu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Spaelotis clandestina* has a wide range in the Pacific Northwest, predominantly east of the Cascade Range crest in Washington and British Columbia. It is limited to the Blue Mountains in Oregon. Most British Columbia records are for the southern province, but a record from the Atlin area is from the far north.
 
@@ -29,8 +28,7 @@ This species is widely distributed in forests of eastern North America and throu
 
 *Spaelotis clandestina* has the largest range of any North American *Spaelotis* species. It extends from Alaska to the island of Newfoundland in the North, North Carolina in the Appalachian Mountains, Nebraska in the Great Plains, southern Arizona in the Rocky Mountains, and east-central California in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

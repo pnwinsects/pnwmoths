@@ -12,8 +12,7 @@ This species is found in moist forest habitats at low elevations west of the Cas
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anhimella perbrunnea* is predominantly distributed west of the Cascade Mountain divide in our area. A few records exist for further east in northern Idaho.
 
@@ -21,8 +20,7 @@ This species is found in moist forest habitats at low elevations west of the Cas
 
 The range of *A. perbrunnea* is almost exclusively near the Pacific Coast. It occurs in California, very near the coast except in the northern part of the state.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

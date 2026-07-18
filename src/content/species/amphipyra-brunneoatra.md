@@ -12,8 +12,7 @@ This species is widely distributed in the Southwest.  In the Pacific Northwest,
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipyra brunneoatra* is limited to southwestern Oregon in our region.
 
@@ -21,8 +20,7 @@ This species is widely distributed in the Southwest.  In the Pacific Northwest,
 
 The range of this species includes most of California west of the Sierra Nevada. It probably occurs in the southwest, possibly as far east as Colorado, but the eastern limits seems uncertain due to possible confusion with *A. glabella*.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

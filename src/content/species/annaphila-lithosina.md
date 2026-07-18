@@ -17,8 +17,7 @@ This species flies along streams in mixed forests. It is most common in canyons 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Annaphila lithosina* is distributed along the west slope of the Oregon Cascades  in the Pacific Northwest.
 
@@ -26,8 +25,7 @@ This species flies along streams in mixed forests. It is most common in canyons 
 
 This species occurs in northern and western California outside of the Northwest. It is predominantly found west of the Sierra Nevada but also flies in the northern part of this range.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

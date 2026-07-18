@@ -12,8 +12,7 @@ This species is narrowly endemic to dry forest and desert habitats in California
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Spaelotis unicava* has been found in Lake and Harney Counties in south-eastern Oregon.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to dry forest and desert habitats in California
 
 This species reaches its northern distribution limit in southern Oregon. It has been most commonly collected in eastern and southern California, with a few records from the adjacent western portions of Nevada and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is narrowly limited to oak woodlands, mixed hardwood-conifer forest
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia arthrolita* is confined to the forests of the Siskiyou Mountains in southwestern Oregon in the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is narrowly limited to oak woodlands, mixed hardwood-conifer forest
 
 The range of *O. arthrolita* extends south through California to near the border with Mexico. It is found along the east slope of the Sierra Nevada as well as along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

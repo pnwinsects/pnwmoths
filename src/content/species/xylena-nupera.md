@@ -12,8 +12,7 @@ This species is common across much of North America in moist forest, riparian, a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xylena nupera* is widely distributed on both sides of the Cascade Mountains, occurring north to Vancouver Island west of the mountains and to south-central British Columbia on the east side. It ranges from the Pacific Shore to arid interior steppe regions further south in Washington and Oregon. It has only been found in the northern part of Idaho.
 
@@ -21,8 +20,7 @@ This species is common across much of North America in moist forest, riparian, a
 
 This species is widespread in North America. It occurs in California and Nevada near the West Coast, and from central Alberta to Utah and Colorado in the Rocky Mountain and western Great Plains regions. The range extends east to the Atlantic in the boreal forest region of  Canada and the northern United States. The range extends from Hudson Bay to Minnesota in the mid-Continent and from Nova Scotia to the District of Columbia near the Atlantic Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

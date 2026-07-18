@@ -14,8 +14,7 @@ This species is endemic to dry low-elevation grasslands in California. The habit
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia serraticornis* has been found in Josephine County in southwestern Oregon. Similar specimens are also known from Grant County in east-central Oregon.
 
@@ -23,8 +22,7 @@ This species is endemic to dry low-elevation grasslands in California. The habit
 
 *Cucullia serraticornis* is found in California where it has been collected most commonly in the southwestern part of the state and near San Francisco Bay. It is also found in central and southeastern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

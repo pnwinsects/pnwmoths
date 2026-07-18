@@ -24,8 +24,7 @@ This species is widely distributed throughout eastern North America, extending w
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 Forbes (1954) states that this species has been reported from British Columbia. We have not examined any specimens from our region and its occurrence in the province needs verification.
 
@@ -37,8 +36,7 @@ Forbes (1954) states that this species has been reported from British Columbia. 
 
 
 
-## Life
-History
+## Life History
 
 
 

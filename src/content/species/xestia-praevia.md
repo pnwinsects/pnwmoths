@@ -18,8 +18,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia praevia* occurs in central and south-central British Columbia in the Northwest. It has not been found south of Canada in our region.
 
@@ -27,8 +26,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 This species occurs in a narrow north-south distribution from the Northwest to the Atlantic near the Canada-United States border. The distribution is limited to Canada except in the upper Midwest, New England, and in the Appalachian Mountains from West Virginia to North Carolina.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

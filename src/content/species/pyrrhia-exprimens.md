@@ -12,8 +12,7 @@ This species is widely distributed in moist forests and mountain meadows through
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pyrrhia exprimens* is widely distributed in forests throughout the Northwest but is never common. It has been found most commonly in a distribution from southeastern British Columbia to southeastern Washington. It occurs sporadically in the Cascade Mountains and the forests west of the mountains.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests and mountain meadows through
 
 *Pyrrhia exprimens* is found across northern Asia to eastern Europe as well as in North America. The North American range extends from coast to coast. It has a broad boreal forest range across the Continent from central British Columbia to the island of Newfoundland. The range extends to New Jersey along the Atlantic Coast and to northern Georgia in the Appalachian Mountains. The range extends south in the mountains of the West, reaching Colorado, northern Arizona, and the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

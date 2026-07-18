@@ -14,8 +14,7 @@ This species is widely distributed in the Pacific Northwest, but appears to be v
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Stretchia prima* is found in eastern and southwestern Oregon in our region.
 
@@ -23,8 +22,7 @@ This species is widely distributed in the Pacific Northwest, but appears to be v
 
 This species is also found in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

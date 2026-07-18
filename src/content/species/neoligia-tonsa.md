@@ -12,8 +12,7 @@ This species is common and widely distributed in all types of habitats at low to
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Neoligia tonsa* is found east of the Cascade Mountains and Coast Range crests as far north as south-central British Columbia near Lillooet. It appears to be restricted to the Willamette Valley in Oregon west of the Cascades. It is particularly common in southeastern Oregon in our region.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in all types of habitats at low to
 
 The range of this species is the American West, from southern Alberta and British Columbia to northern New Mexico, northern Arizona, and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

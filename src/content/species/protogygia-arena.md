@@ -14,8 +14,7 @@ This species is narrowly endemic to sand dunes or sandy river sediments across s
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protogygia arena* is only known from south-central and south-eastern Oregon and southern Idaho in our region.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to sand dunes or sandy river sediments across s
 
 This species has a restricted range. The only known locality outside of Oregon is in Inyo County in eastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

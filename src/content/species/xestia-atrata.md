@@ -16,8 +16,7 @@ This species is occurs in arctic tundra and boreal spruce-fir forests, extending
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The range of *Xestia atrata* is limited to south-eastern British Columbia. However, it is likely that it also occurs in the northern part of the province (Lafontaine 1998).
 
@@ -25,8 +24,7 @@ The range of *Xestia atrata* is limited to south-eastern British Columbia. Howev
 
 *Xestia atrata* has a Holarctic distribution. It occurs in eastern Siberia in the Old World. In North America it has been found from eastern Alaska to Labrador south to Lake Superior and northern New England in the East. The range extends south through the Rocky Mountains to northern Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

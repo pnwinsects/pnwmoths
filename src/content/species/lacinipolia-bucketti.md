@@ -12,8 +12,7 @@ This species is narrowly endemic to coastal habitats along the West Coast near t
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia* *bucketti* is closely tied to the immediate Pacific Coast. It has been found in southern and central Oregon as far north as Grays Harbor County, Washington.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to coastal habitats along the West Coast near t
 
 The range of this moth includes the coast of northern California, Oregon, and Washington.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

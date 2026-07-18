@@ -14,8 +14,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Melanchra adjuncta* occurs in forests from southern British Columbia south throughout our region, including west of the Coast and Cascade Ranges. It is absent from dry steppe habitats.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 This species has a wide range in North America. In the East it ranges from Nova Scotia and Manitoba to North Carolina and Nebraska. The range extends south to Utah in the Intermountain Region. It is not listed as occurring in California in McCabe (1980).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,17 +14,15 @@ This species is common and widely distributed west of the Cascades at low to mid
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Hydraecia obliqua* is found on Pacific beaches as far north as Vancouver Island, British Columbia. Isolated northern records exists from the vicinity of Terrace, British Columbia. It occurs inland near the southern Puget Sound in Washington but is more widespread in western Oregon. This species and *H. medialis *might hybridize along the east slope of the Cascade Mountains in Jefferson County, Oregon.
+*Hydraecia obliqua* is found on Pacific beaches as far north as Vancouver Island, British Columbia. Isolated northern records exists from the vicinity of Terrace, British Columbia. It occurs inland near the southern Puget Sound in Washington but is more widespread in western Oregon. This species and *H. medialis* might hybridize along the east slope of the Cascade Mountains in Jefferson County, Oregon.
 
 ### Global
 
 The range of this species extends to the vicinity of Los Angeles in southern California. Most California populations appear to be restricted to ocean beaches, although it occurs inland near Los Angeles.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

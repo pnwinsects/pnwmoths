@@ -16,8 +16,7 @@ This species is widely distributed in open habitats throughout most of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis venerabilis* is common and widely distributed in the dry interior regions of the Pacific Northwest from central and north-eastern British Columbia south.
 
@@ -25,8 +24,7 @@ This species is widely distributed in open habitats throughout most of North Ame
 
 This species is widely distributed throughout most of North America south of southern Canada. The northern limit of its range is in northern Alberta, while the southern limits are the Florida Panhandle and the southern portions of Texas, Arizona, and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

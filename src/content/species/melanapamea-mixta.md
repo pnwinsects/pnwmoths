@@ -12,8 +12,7 @@ This species is widely distributed in moist forests of eastern North America, bu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Melanapamea mixta* has been found in Douglas, Josephine, and Curry Counties in southwestern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests of eastern North America, bu
 
 This species has also been found in extreme northwestern California on the West Coast. The rest of its distribution is in eastern North America where it occurs from southern Canada to North Carolina and northern Georgia. The type locality of *Hadena impulsa* var. *mixta* Grote is Texas - although there are no recent records of this moth from that state - and there is a single record from New Mexico suggesting that the disjunct West Coast populations are the remnants of a transcontinental distribution across the southern United States.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

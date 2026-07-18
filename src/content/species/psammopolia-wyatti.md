@@ -14,8 +14,7 @@ This species is narrowly endemic to sand dunes along the beach of the Pacific Oc
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Psammopolia wyatti* is restricted to Pacific Beaches in the Pacific Northwest. Its range extends from southern Oregon to the Queen Charlotte Islands. Unlike *P. arietis,* it is found in protected inland waters such as those along the Gulf of Georgia in southwestern British Columbia and northwestern Washington.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to sand dunes along the beach of the Pacific Oc
 
 This species is not known from outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

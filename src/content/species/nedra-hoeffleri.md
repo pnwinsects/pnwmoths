@@ -12,8 +12,7 @@ This species has only been found on a high mountain in the Rocky Mountain region
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Nedra hoeffleri* has only been collected in the mountains of extreme northeastern Washington in sight of British Columbia and Idaho.
 
@@ -21,8 +20,7 @@ This species has only been found on a high mountain in the Rocky Mountain region
 
 This species was described from Glacier National Park, Montana and has to our knowledge not been found elsewhere except for the single Washington specimen. Sampling in the appropriate habitat has probably been very limited and it is likely that this moth is more common than these data suggest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is narrowly endemic to oak forests and oak woodlands along the West
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia ferrigera* is found throughout western Oregon in association with oak forests. The range extends east through the Columbia Gorge and then north along the east slope of the Cascades to Kittitas County, Washington. It has been found on Vancouver Island but has not been collected in western Washington.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to oak forests and oak woodlands along the West
 
 The range of *O. ferrigera* extends south through California to the vicinity of Los Angeles. It is predominantly found along the coast but occurs in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

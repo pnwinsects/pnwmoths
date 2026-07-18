@@ -12,8 +12,7 @@ This species is widely distributed in very dry desert habitats of the Mojave and
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protogygia comstocki* has a limited distribution in our region. It has been found near the Columbia River in south-central Washington. It also occurs in south-central Oregon. It is local, but can be common in the proper habitat.
 
@@ -21,8 +20,7 @@ This species is widely distributed in very dry desert habitats of the Mojave and
 
 *Protogygia comstocki* reaches its northern limit in our region. Further south it is found in eastern and southern California and Utah.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -22,8 +22,7 @@ This species is widely distributed throughout much of western North America in v
 
 The range of this species is from California east to Utah and Colorado to the south of the Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ This species is a foodplant specialist feeding on snowberry (*Symphoricarpos* sp
 
 *Sympistis fifia* flies during the early and mid-summer, with capture dates from early June to early August in the Pacific Northwest. It is a nocturnal species that comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -16,8 +16,7 @@ This species is widely distributed in dry forest habitats throughout much of the
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta cyanescens* is widely distributed in forests throughout our region but is most common east of the Cascade Mountain crest. It has been found rarely west of the Cascades.
 
@@ -25,8 +24,7 @@ This species is widely distributed in dry forest habitats throughout much of the
 
 This species is found in the Rocky Mountains at least as far south as Colorado, the Sierra Nevada of eastern California, and extreme southwestern Alberta outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -34,7 +32,7 @@ This species appears to be a foodplant specialist feeding on *Ceanothus* species
 
 ##### Adults
 
-*Acronicta cyanescens *has a fairly long flight season during the summer. The records from our region span May to August but are most numerous in late June and July. It is nocturnal and comes to lights.
+*Acronicta cyanescens* has a fairly long flight season during the summer. The records from our region span May to August but are most numerous in late June and July. It is nocturnal and comes to lights.
 
 ## Economic Importance
 

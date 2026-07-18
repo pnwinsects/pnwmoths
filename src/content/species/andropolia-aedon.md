@@ -16,8 +16,7 @@ This species is widely distributed in moist forests throughout the Pacific North
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Andropolia aedon* is widespread in forests from the Cascade Mountains to the Pacific Coast as far north as Vancouver Island. Its range extends east to the Idaho Panhandle through southern British Columbia and northern Washington. It is also found in the Blue Mountains in southeastern Washington.
 
@@ -25,8 +24,7 @@ This species is widely distributed in moist forests throughout the Pacific North
 
 The range extends south to central California, both along the coast and in the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

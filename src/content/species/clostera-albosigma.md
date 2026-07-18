@@ -2,9 +2,9 @@
 
 ##### Adults
 
-*Clostera albosigma *is a small to medium-sized brown moth (FW length 14–16 mm.) that flies in forests during the spring and summer.  It has an S-shaped white mark on the costa near the forewing apex.  The forewing has a slightly concave costal margin and a rounded apex.  It is medium-dark to dark gray-brown.  The transverse lines proximal to the discal spot have light tan inner and dark outer components and are nearly straight across the forewing.  The postmedial line is similar but sinuous except at the costa where is forms a white "S."  The anterior half of the forewing distal to this mark is brick red and dark purplish brown.  The hindwing is nearly even dark brown-gray.  The top of the head, collar, and central thorax are smooth dark brown, contrasting with the lighter brown rest of the body.  Like other *Clostera* species the antennae are bipectinate.  The tip of the male abdomen is tufted.
+*Clostera albosigma* is a small to medium-sized brown moth (FW length 14–16 mm.) that flies in forests during the spring and summer.  It has an S-shaped white mark on the costa near the forewing apex.  The forewing has a slightly concave costal margin and a rounded apex.  It is medium-dark to dark gray-brown.  The transverse lines proximal to the discal spot have light tan inner and dark outer components and are nearly straight across the forewing.  The postmedial line is similar but sinuous except at the costa where is forms a white "S."  The anterior half of the forewing distal to this mark is brick red and dark purplish brown.  The hindwing is nearly even dark brown-gray.  The top of the head, collar, and central thorax are smooth dark brown, contrasting with the lighter brown rest of the body.  Like other *Clostera* species the antennae are bipectinate.  The tip of the male abdomen is tufted.
 
-This moth can be identified by its brown forewing with straight pale lines and the characteristic white, brick-red, and dark brown apical markings.  The other *Clostera *species in the Northwest are gray.
+This moth can be identified by its brown forewing with straight pale lines and the characteristic white, brick-red, and dark brown apical markings.  The other *Clostera* species in the Northwest are gray.
 
 ##### Larvae
 

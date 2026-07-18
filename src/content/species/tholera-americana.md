@@ -12,8 +12,7 @@ This species is widely distributed on dry short-grass prairies of the Great Plai
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Tholera americana* is found in the dry interior of the Pacific Northwest as far north as southern British Columbia. It is common in the Columbia Basin and surrounding foothills, and also occurs in southeastern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed on dry short-grass prairies of the Great Plai
 
 This species occurs in northern California and in the Great Plains outside of our region. The global range is not well known to us.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

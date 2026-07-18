@@ -14,8 +14,7 @@ This species occurs in stream-side riparian habitats in dry forests of pine and 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Brachylomia sierra* is found in the Warner Mountains in Lake County, Oregon.
 
@@ -23,8 +22,7 @@ This species occurs in stream-side riparian habitats in dry forests of pine and 
 
 This species is also known from the northern Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

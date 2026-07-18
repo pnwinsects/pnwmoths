@@ -14,8 +14,7 @@ This species is widely distributed on dry, arctic tundra across both Eurasia and
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta leucocycla* is found on the mountains of northern British Columbia in our region. It might also occur in southeastern British Columbia and in western Montana because it occurs in adjacent Alberta and on the Beartooth Plateau on the Montana-Wyoming border.
 
@@ -23,8 +22,7 @@ This species is widely distributed on dry, arctic tundra across both Eurasia and
 
 This species has a Holarctic distribution. The Palaearctic populations occur from Fennoscandia to Far Eastern Russia. In North America it occurs across the high arctic from northern Alaska to Greenland. The southernmost limits of its range are the Beartooth Plateau in northern Wyoming in the Rocky Mountains, James Bay of Hudson Bay in Ontario, and Labrador. A relict population is also found on Mt. Washington in the White Mountains of New Hampshire.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

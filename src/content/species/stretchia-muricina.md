@@ -16,8 +16,7 @@ This species is found in moist forests throughout much of western North America.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Stretchia muricina* is found in forested habitats throughout most of our region as far north as southern British Columbia. It is most common and widespread west of the Cascade Mountains. It is also found in forests at low to middle elevations elsewhere, including in southeastern British Columbia and in the Blue Mountains.
 
@@ -25,8 +24,7 @@ This species is found in moist forests throughout much of western North America.
 
 The range of this species extends east to Saskatchewan and south to Colorado and California. The California populations are limited to the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

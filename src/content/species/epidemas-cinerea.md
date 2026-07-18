@@ -14,8 +14,7 @@ This moth flies in sage steppe habitats.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 Epidemas cinerea occurs in south-central British Columbia and in the dry interior steppe regions of the Columbia Basin, south-eastern Oregon, and southern Idaho.
 
@@ -23,8 +22,7 @@ Epidemas cinerea occurs in south-central British Columbia and in the dry interio
 
 The range of this moth extends south to southern California near the Pacific Coast. It also occurs on the western Great Plains as far north as south-central Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is widely distributed in low to high elevation forests, but is most
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis poliochroa* is widely distributed east of the Cascade Mountains as far north as the vicinity of Williams Lake in south-central British Columbia. It is commonly collected along the east slope of the Cascades in Oregon and Washington, but it also occurs in southeastern British Columbia and southern Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed in low to high elevation forests, but is most
 
 The range of this species includes the southern half of Alberta, the Rocky Mountains from Alberta to Colorado, and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

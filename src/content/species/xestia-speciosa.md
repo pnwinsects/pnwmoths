@@ -18,8 +18,7 @@ This species is widely distributed in boreal spruce-fir forests, extending westw
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia speciosa* has been collected in the mountains of southern British Columbia and in the Cascade Range in Washington. The southern limit of the distribution is near Yakima, Washington.
 
@@ -27,8 +26,7 @@ This species is widely distributed in boreal spruce-fir forests, extending westw
 
 This species has a Holarctic distribution and occurs across most of the Northern Hemisphere from Scandinavia to Japan and Alaska to the west coast of Hudson Bay. In North America the range extends south to southern Colorado in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

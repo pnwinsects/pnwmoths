@@ -12,8 +12,7 @@ This species is found in forest habitats.  In the Pacific Northwest, it is mode
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protolampra rufipectus* is found in forests throughout the Pacific Northwest, including west of the Cascades. It does not occur in xeric steppe but is found in higher mountains of southern Oregon and Idaho.
 
@@ -21,8 +20,7 @@ This species is found in forest habitats.  In the Pacific Northwest, it is mode
 
 This species is widely distributed in western North America. It occurs from Alaska south to the Sierra Nevada in California and Arizona and New Mexico in the Rocky Mountains. The range extends east in boreal forest in a narrow north-south distribution near the Canada-United States border. It occurs from the island of Newfoundland to New Jersey along the Atlantic Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

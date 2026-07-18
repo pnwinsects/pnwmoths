@@ -14,8 +14,7 @@ This species is narrowly endemic to sand dunes at low elevations in the Great Ba
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Copablepharon atrinotum* is only known from dunes in the south-central part of Oregon in our region.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to sand dunes at low elevations in the Great Ba
 
 The limited range of this species extends south through northern Nevada to the vicinity of Mono Lake, Mono County, California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

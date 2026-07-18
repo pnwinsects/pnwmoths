@@ -12,8 +12,7 @@ This species is widely distributed and relatively common on dry sagebrush steppe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis lacticollis* is found in the dry interior steppes of eastern Oregon and Washington. It also occurs in southwestern British Columbia and in southwestern Oregon.  The records from the Columbia Plateua of Washington are curiously clustered in the northwestern part of this region despite sampling from other parts of the region during the appropriate time of year.  Records from elsewhere are more widely distributed.
 
@@ -21,8 +20,7 @@ This species is widely distributed and relatively common on dry sagebrush steppe
 
 The range of this species extends south through California, reaching the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

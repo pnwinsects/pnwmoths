@@ -14,8 +14,7 @@ This species is common and widely distributed in moist forests throughout much o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eupsilia tristigmata* is found in forests throughout much of the Northwest region, at least as far north as central British Columbia. It is commonly found in the western parts of the region as far north as Vancouver Island. It is also common in southern British Columbia, the Idaho Panhandle, and in the Blue Mountains. It has not been found further south in the Rocky Mountains nor in the Basin and Range region.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed in moist forests throughout much o
 
 The range of this moth includes northern California and Alberta in the West. It is more widespread in the East where it occurs from southern Canada to Illinois, northern Georgia, and South Carolina.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

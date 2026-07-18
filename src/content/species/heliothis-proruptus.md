@@ -14,8 +14,7 @@ This species flies over lithosol on ridgetops in south-central Washington.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothis proruptus* has been collected in Yakima and Klickitat Counties in south-central Washington and in Klamath County in south-central Oregon.
 
@@ -23,8 +22,7 @@ This species flies over lithosol on ridgetops in south-central Washington.
 
 This species is found in California outside of our region. Most records are from the coast, but it has been found on the Modoc Plateau in the northeastern part of the state and along the west slope of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

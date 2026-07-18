@@ -12,8 +12,7 @@ This species is widely distributed in arid desert regions of western North Ameri
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Tarache toddi*is found in eastern Oregon and southern Idaho in our area.
 
@@ -21,8 +20,7 @@ This species is widely distributed in arid desert regions of western North Ameri
 
 *Tarache toddi* is predominantly a species of the Intermountain Region and the Southwest. It has been collected in the central and southern portions of Nevada and Utah, southern California, most of Arizona, southern New Mexico, and west Texas. Isolated records from the Great Plains are shown for Montana and Wyoming in the species description (Ferris & Lafontaine 2009).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

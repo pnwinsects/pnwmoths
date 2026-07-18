@@ -19,7 +19,7 @@ margin and a thin dark terminal line. A faint gray discal spot and postmedial li
 white. The head and thorax match the forewing color. The eye is covered 
 with fine hairs. The male antenna is bead-like.
 
-This species can usually be recognized, despite the variation in color and degree of mottling, by the small size, dull-color, toothed lines with pale filling and smooth courses across the wing, and pale spots with dark filling. It is most likely to be confused with *Anhimella pacifica* in the Pacific Northwest. *Anhimella pacifica* is more likely to have a pale area at and below the apex separating darker gray areas in the anterior subterminal and mid-terminal areas. It also has smoother lines without strong teeth or dark lines on the veins. These species have similar genitalia according to McDunnough's original description of *Anhimella pacifica* and it is possible that it represents a form of *A. contrahens* rather than a different species. Both of these moths are distinguished from *Anhimella perbrunnea*, a species that flies west of  the mountains, by color. It is orange-brown rather than gray-brown. The dark form of *A. contrahens* is similar to *Protorthodes alfkenii*, a common fall-flying moth across southern Oregon. It has a darker hindwing than *A. contrahens *or *A. pacifica*, a better-defined irregular subterminal line, and an oval orbicular spot with a dark outline, light gray peripheral filling, and a dark ocellus.
+This species can usually be recognized, despite the variation in color and degree of mottling, by the small size, dull-color, toothed lines with pale filling and smooth courses across the wing, and pale spots with dark filling. It is most likely to be confused with *Anhimella pacifica* in the Pacific Northwest. *Anhimella pacifica* is more likely to have a pale area at and below the apex separating darker gray areas in the anterior subterminal and mid-terminal areas. It also has smoother lines without strong teeth or dark lines on the veins. These species have similar genitalia according to McDunnough's original description of *Anhimella pacifica* and it is possible that it represents a form of *A. contrahens* rather than a different species. Both of these moths are distinguished from *Anhimella perbrunnea*, a species that flies west of  the mountains, by color. It is orange-brown rather than gray-brown. The dark form of *A. contrahens* is similar to *Protorthodes alfkenii*, a common fall-flying moth across southern Oregon. It has a darker hindwing than *A. contrahens* or *A. pacifica*, a better-defined irregular subterminal line, and an oval orbicular spot with a dark outline, light gray peripheral filling, and a dark ocellus.
 
 ## Habitat
 
@@ -27,8 +27,7 @@ This species is widely distributed in forest and riparian habitats throughout mu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anhimella contrahens* is found in dry regions east of the Cascade Crest as far north as the southern interior of British Columbia. It is found west of the Cascades in Oregon, but not in Washington or British Columbia. Records from southern Idaho are from the Snake River Plain.
 
@@ -36,8 +35,7 @@ This species is widely distributed in forest and riparian habitats throughout mu
 
 *Anhimella contrahens* is widely distributed across North America. It occurs from Northwest Territories to Nova Scotia in the north to California, Arizona, Colorado and New Jersey.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
