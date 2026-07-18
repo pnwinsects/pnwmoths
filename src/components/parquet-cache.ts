@@ -72,6 +72,15 @@ export async function loadParquet(slug: string): Promise<OccurrenceRecord[]> {
 
 /**
  * Filter records by state, record type, year range, county, collection, and elevation range.
+ *
+ * `filters.county` accepts two forms (ISSUE-133): a bare county/district name
+ * (`"Lincoln"`), matched against `r.county` alone as before; or a compound
+ * `${state}:${county}` key (`"MT:Lincoln"`, matching pnwm-taxon-browser's convention),
+ * matched against `r.state` AND `r.county` together. The compound form disambiguates
+ * same-named counties/regional districts in different states/provinces (e.g. WA
+ * Lincoln vs MT Lincoln) so selecting one no longer aggregates the other's records.
+ * A bare county name can never itself contain a colon, so detecting the compound
+ * form via `indexOf(':')` is unambiguous.
  */
 export function filterRecords(
   records: OccurrenceRecord[],
@@ -93,7 +102,16 @@ export function filterRecords(
     // (matching the .js behavior and its tests). TypeScript requires an explicit cast here.
     if (filters.yearMin != null && (r.year as number) < filters.yearMin) return false;
     if (filters.yearMax != null && (r.year as number) > filters.yearMax) return false;
-    if (filters.county && filters.county !== 'all' && r.county !== filters.county) return false;
+    if (filters.county && filters.county !== 'all') {
+      const sep = filters.county.indexOf(':');
+      if (sep === -1) {
+        if (r.county !== filters.county) return false;
+      } else {
+        const st = filters.county.slice(0, sep);
+        const co = filters.county.slice(sep + 1);
+        if (r.state !== st || r.county !== co) return false;
+      }
+    }
     if (filters.collection && filters.collection !== 'all' && r.collection !== filters.collection) return false;
     if (filters.elevationMin != null && (r.elevation_ft as number) < filters.elevationMin) return false;
     if (filters.elevationMax != null && (r.elevation_ft as number) > filters.elevationMax) return false;
