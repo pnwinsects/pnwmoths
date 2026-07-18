@@ -86,6 +86,24 @@ therefore missed all Geometridae subfamilies; recovering them requires parsing
 the browse paths instead. The parsing lives in
 [`scripts/build-data.ts`](../../scripts/build-data.ts).
 
+## Tribe encoding (not a DB column)
+
+**Tribe** sits between subfamily and genus and, like subfamily, is not a DB
+column — it is the `tribe-<name>` segment of the same browse-URL paths
+(`browse/family-…/subfamily-…/tribe-…/<genus>/<species>`). Tribe is a
+**genus-level** property (every species of a genus shares it), and the paths map
+each genus to exactly one tribe with no conflicts. Only ~36 tribes exist and many
+genera have none (their subfamily has no tribal subdivision, or the genus was
+added after the 2021 migration and is absent from the legacy hierarchy).
+
+Unlike subfamily, tribe uses a single canonical path scheme (all tribe paths are
+`browse/family-…/subfamily-…/tribe-…/…`; Geometridae has no tribes). The genus →
+tribe map is materialised into a `tribe` column in `data/species.csv` by
+[`scripts/backfill-tribe.ts`](../../scripts/backfill-tribe.ts) (additive-only and
+idempotent; container must be running). That committed column — not the DB — is
+the runtime source of truth; re-run the backfill only when the reference data
+changes. See [ADR 0016](../adr/0016-tribe-hierarchy-level.md).
+
 ## Lucid3 identification key (authoritative character→image bindings)
 
 The character illustrations on the `/identify/` page (see [CONTEXT.md](../../CONTEXT.md)) are

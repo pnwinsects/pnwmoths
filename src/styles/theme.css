@@ -321,11 +321,15 @@ nav a:hover {
 }
 
 /* --- Taxon browser disclosure buttons --- */
-/* Strip Pico button appearance; class selectors beat Pico's [type="button"] specificity */
+/* Strip Pico button appearance; class selectors beat Pico's [type="button"] specificity.
+   Keyed on the row class + the row's own heading (a direct child, any level h2–h6, so
+   the treatment follows the row regardless of the semantic heading depth — which shifts
+   when an optional subfamily/tribe level is absent), never a descendant row's heading. */
 
-.pnwm-tb-family-row h2 button,
-.pnwm-tb-subfamily-row h3 button,
-.pnwm-tb-genus-row h4 button {
+.pnwm-tb-family-row > :is(h2, h3, h4, h5, h6) > button,
+.pnwm-tb-subfamily-row > :is(h2, h3, h4, h5, h6) > button,
+.pnwm-tb-tribe-row > :is(h2, h3, h4, h5, h6) > button,
+.pnwm-tb-genus-row > :is(h2, h3, h4, h5, h6) > button {
   all: unset;
   cursor: pointer;
   display: inline-flex;
@@ -333,9 +337,10 @@ nav a:hover {
   gap: 0.35em;
 }
 
-.pnwm-tb-family-row h2 button::before,
-.pnwm-tb-subfamily-row h3 button::before,
-.pnwm-tb-genus-row h4 button::before {
+.pnwm-tb-family-row > :is(h2, h3, h4, h5, h6) > button::before,
+.pnwm-tb-subfamily-row > :is(h2, h3, h4, h5, h6) > button::before,
+.pnwm-tb-tribe-row > :is(h2, h3, h4, h5, h6) > button::before,
+.pnwm-tb-genus-row > :is(h2, h3, h4, h5, h6) > button::before {
   content: '▶';
   font-size: 0.6em;
   display: inline-block;
@@ -343,13 +348,18 @@ nav a:hover {
   flex-shrink: 0;
 }
 
-.pnwm-tb-family-row h2 button[aria-expanded="true"]::before,
-.pnwm-tb-subfamily-row h3 button[aria-expanded="true"]::before,
-.pnwm-tb-genus-row h4 button[aria-expanded="true"]::before {
+.pnwm-tb-family-row > :is(h2, h3, h4, h5, h6) > button[aria-expanded="true"]::before,
+.pnwm-tb-subfamily-row > :is(h2, h3, h4, h5, h6) > button[aria-expanded="true"]::before,
+.pnwm-tb-tribe-row > :is(h2, h3, h4, h5, h6) > button[aria-expanded="true"]::before,
+.pnwm-tb-genus-row > :is(h2, h3, h4, h5, h6) > button[aria-expanded="true"]::before {
   transform: rotate(90deg);
 }
 
 .pnwm-tb-subfamily-row {
+  padding-left: 1.5rem;
+}
+
+.pnwm-tb-tribe-row {
   padding-left: 1.5rem;
 }
 

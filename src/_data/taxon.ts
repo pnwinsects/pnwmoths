@@ -1,17 +1,18 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { TaxonFamily, TaxonGenus, TaxonSubfamily, NavImage, SpeciesPhoto } from '../types/index.ts';
+import type { TaxonFamily, TaxonGenus, TaxonSubfamily, TaxonTribe, NavImage, SpeciesPhoto } from '../types/index.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../_lib/format-epithet.ts';
 
 // Narrow projection interfaces for the two DuckDB queries
 
-// Species query projects: family, subfamily, genus, species, common_name, slug, genus_slug
+// Species query projects: family, subfamily, tribe, genus, species, common_name, slug, genus_slug
 interface TaxonSpeciesDbRow {
   family: string | null;  // null = unclassified; filtered out by isWithheldOrUnclassified before grouping
   subfamily: string | null;
+  tribe: string | null;   // null when the subfamily has no tribal subdivision
   genus: string;
   species: string;
   epithet_quoted: string | null;
@@ -87,9 +88,14 @@ interface TaxonGenusBuild extends TaxonGenus {
   // no extra fields beyond TaxonGenus
 }
 
-interface TaxonSubfamilyBuild extends TaxonSubfamily {
+interface TaxonTribeBuild extends TaxonTribe {
   genera: TaxonGenusBuild[];
   genusMap?: Record<string, TaxonGenusBuild>;
+}
+
+interface TaxonSubfamilyBuild extends TaxonSubfamily {
+  tribes: TaxonTribeBuild[];
+  tribeMap?: Record<string, TaxonTribeBuild>;
 }
 
 interface TaxonFamilyBuild {
@@ -141,7 +147,8 @@ export default async function (): Promise<TaxonFamily[]> {
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
         'subfamily': 'VARCHAR',
-        'epithet_quoted': 'VARCHAR'
+        'epithet_quoted': 'VARCHAR',
+        'tribe': 'VARCHAR'
       }
     )
   `);
@@ -179,11 +186,11 @@ export default async function (): Promise<TaxonFamily[]> {
   `);
 
   const speciesResult = await conn.runAndReadAll(`
-    SELECT family, subfamily, genus, species, epithet_quoted, common_name,
+    SELECT family, subfamily, tribe, genus, species, epithet_quoted, common_name,
       lower(genus || '-' || species) AS slug,
       lower(replace(genus, ' ', '-')) AS genus_slug
     FROM species
-    ORDER BY family, subfamily NULLS LAST, genus, species
+    ORDER BY family, subfamily NULLS LAST, tribe NULLS LAST, genus, species
   `);
 
   const imagesResult = await conn.runAndReadAll(`
@@ -228,7 +235,10 @@ export default async function (): Promise<TaxonFamily[]> {
     if (navImg) bySpeciesSlug[row.slug] = [navImg];
   }
 
-  // Build four-level tree: family → subfamily → genus → species
+  // Build five-level tree: family → subfamily → tribe → genus → species.
+  // The tribe level is conditional: species with no tribe are grouped under a
+  // single name === null tribe node whose genera render directly under the
+  // subfamily (mirrors the name === null "no subfamily" convention).
   const familyMap: Record<string, TaxonFamilyBuild> = {};
 
   for (const row of speciesRows) {
@@ -245,11 +255,17 @@ export default async function (): Promise<TaxonFamily[]> {
     const subfamKey = row.subfamily ?? '__none__';
     const subfamMap = familyMap[famKey]!.subfamilyMap!;
     if (!subfamMap[subfamKey]) {
-      subfamMap[subfamKey] = { name: row.subfamily ?? null, navImages: [], genera: [], genusMap: {} };
+      subfamMap[subfamKey] = { name: row.subfamily ?? null, navImages: [], tribes: [], tribeMap: {} };
+    }
+
+    const tribeKey = row.tribe ?? '__none__';
+    const tribeMap = subfamMap[subfamKey]!.tribeMap!;
+    if (!tribeMap[tribeKey]) {
+      tribeMap[tribeKey] = { name: row.tribe ?? null, navImages: [], genera: [], genusMap: {} };
     }
 
     const gen = row.genus_slug;
-    const genusMap = subfamMap[subfamKey]!.genusMap!;
+    const genusMap = tribeMap[tribeKey]!.genusMap!;
     if (!genusMap[gen]) {
       genusMap[gen] = { name: row.genus, genus_slug: row.genus_slug, navImages: [], species: [] };
     }
@@ -260,52 +276,55 @@ export default async function (): Promise<TaxonFamily[]> {
     genusMap[gen]!.species.push({ slug: row.slug, name: displayName, common_name: row.common_name, navImage: null });
   }
 
+  // Collect the first navImage from each genus in order until 4 total. Shared by
+  // the tribe, subfamily, and family aggregations (they differ only in the genus
+  // stream they walk).
+  function firstFourNavImages(genera: TaxonGenusBuild[]): NavImage[] {
+    const images: NavImage[] = [];
+    for (const genus of genera) {
+      if (images.length >= 4) break;
+      if (genus.navImages.length > 0) images.push(genus.navImages[0]!);
+    }
+    return images.slice(0, 4);
+  }
+
   // Convert maps to arrays, assign navImages at each level
   const families = Object.values(familyMap).map(fam => {
     const subfamilies = Object.values(fam.subfamilyMap!).map(subfam => {
-      const genera = Object.values(subfam.genusMap!).map(genus => {
-        const slugs = genus.species.map(s => s.slug);
-        genus.navImages = pickNavImages(slugs, bySpeciesSlug);
-        genus.species = genus.species.map(sp => {
-          const imgs = (bySpeciesSlug[sp.slug] ?? []).slice();
-          imgs.sort((a, b) => {
-            const navA = a.navigational === 'true' ? 0 : 1;
-            const navB = b.navigational === 'true' ? 0 : 1;
-            if (navA !== navB) return navA - navB;
-            return (a.weight ?? 999) - (b.weight ?? 999);
+      const tribes = Object.values(subfam.tribeMap!).map(tribe => {
+        const genera = Object.values(tribe.genusMap!).map(genus => {
+          const slugs = genus.species.map(s => s.slug);
+          genus.navImages = pickNavImages(slugs, bySpeciesSlug);
+          genus.species = genus.species.map(sp => {
+            const imgs = (bySpeciesSlug[sp.slug] ?? []).slice();
+            imgs.sort((a, b) => {
+              const navA = a.navigational === 'true' ? 0 : 1;
+              const navB = b.navigational === 'true' ? 0 : 1;
+              if (navA !== navB) return navA - navB;
+              return (a.weight ?? 999) - (b.weight ?? 999);
+            });
+            const navImage = imgs[0] ?? null;
+            return { ...sp, navImage };
           });
-          const navImage = imgs[0] ?? null;
-          return { ...sp, navImage };
+          return genus;
         });
-        return genus;
+
+        // Tribe navImages: first image from each genus in order until 4 total
+        tribe.navImages = firstFourNavImages(genera);
+        tribe.genera = genera;
+        delete tribe.genusMap;
+        return tribe;
       });
 
-      // Subfamily navImages: first image from each genus in order until 4 total
-      const subfamImages: NavImage[] = [];
-      for (const genus of genera) {
-        if (subfamImages.length >= 4) break;
-        if (genus.navImages.length > 0) {
-          subfamImages.push(genus.navImages[0]!);
-        }
-      }
-      subfam.navImages = subfamImages.slice(0, 4);
-      subfam.genera = genera;
-      delete subfam.genusMap;
+      // Subfamily navImages: first image from each genus (across all tribes) until 4 total
+      subfam.navImages = firstFourNavImages(tribes.flatMap(t => t.genera));
+      subfam.tribes = tribes;
+      delete subfam.tribeMap;
       return subfam;
     });
 
     // Family navImages: first image from each genus across all subfamilies until 4 total
-    const famImages: NavImage[] = [];
-    for (const subfam of subfamilies) {
-      for (const genus of subfam.genera) {
-        if (famImages.length >= 4) break;
-        if (genus.navImages.length > 0) {
-          famImages.push(genus.navImages[0]!);
-        }
-      }
-      if (famImages.length >= 4) break;
-    }
-    fam.navImages = famImages.slice(0, 4);
+    fam.navImages = firstFourNavImages(subfamilies.flatMap(s => s.tribes.flatMap(t => t.genera)));
     fam.subfamilies = subfamilies;
     delete fam.subfamilyMap;
     return fam;

@@ -441,7 +441,7 @@ test('integration: emit-species-states.ts writes _site/species-states.json', () 
 // --- Phase 9 taxon.ts tests ---
 // taxon.ts is an Eleventy data file (converted from taxon.js in phase 36-02)
 
-test('taxon.ts: returns family→subfamily→genus→species tree', async () => {
+test('taxon.ts: returns family→subfamily→tribe→genus→species tree', async () => {
   const { default: taxon } = await import('../src/_data/taxon.ts');
   const tree = await taxon();
   assert.ok(Array.isArray(tree), 'tree should be an array');
@@ -453,8 +453,13 @@ test('taxon.ts: returns family→subfamily→genus→species tree', async () => 
   assert.ok(Array.isArray(subfamilies), 'subfamilies should be an array');
   const [subfam] = subfamilies as Array<Record<string, unknown>>;
   assert.ok(subfam !== undefined);
-  assert.ok('name' in subfam && 'genera' in subfam && 'navImages' in subfam, 'subfamily missing required properties');
-  const genera = subfam['genera'] as unknown[];
+  assert.ok('name' in subfam && 'tribes' in subfam && 'navImages' in subfam, 'subfamily missing required properties');
+  const tribes = subfam['tribes'] as unknown[];
+  assert.ok(Array.isArray(tribes), 'tribes should be an array');
+  const [tribe] = tribes as Array<Record<string, unknown>>;
+  assert.ok(tribe !== undefined);
+  assert.ok('name' in tribe && 'genera' in tribe && 'navImages' in tribe, 'tribe missing required properties');
+  const genera = tribe['genera'] as unknown[];
   const [genus] = genera as Array<Record<string, unknown>>;
   assert.ok(genus !== undefined);
   assert.ok('name' in genus && 'genus_slug' in genus && 'navImages' in genus && 'species' in genus, 'genus missing required properties');
@@ -479,13 +484,16 @@ test('taxon.ts: null-subfamily genera have name: null (not string)', async () =>
 test('taxon.ts: navImages capped at 4 per taxon level', async () => {
   const { default: taxon } = await import('../src/_data/taxon.ts');
   const tree = await taxon();
-  const allFamilies = tree as Array<{ name: string; navImages: unknown[]; subfamilies: Array<{ name: string | null; navImages: unknown[]; genera: Array<{ name: string; navImages: unknown[] }> }> }>;
+  const allFamilies = tree as Array<{ name: string; navImages: unknown[]; subfamilies: Array<{ name: string | null; navImages: unknown[]; tribes: Array<{ name: string | null; navImages: unknown[]; genera: Array<{ name: string; navImages: unknown[] }> }> }> }>;
   for (const fam of allFamilies) {
     assert.ok(fam.navImages.length <= 4, `family ${fam.name} has >4 navImages`);
     for (const subfam of fam.subfamilies) {
       assert.ok(subfam.navImages.length <= 4, `subfamily ${subfam.name} has >4 navImages`);
-      for (const genus of subfam.genera) {
-        assert.ok(genus.navImages.length <= 4, `genus ${genus.name} has >4 navImages`);
+      for (const tribe of subfam.tribes) {
+        assert.ok(tribe.navImages.length <= 4, `tribe ${tribe.name} has >4 navImages`);
+        for (const genus of tribe.genera) {
+          assert.ok(genus.navImages.length <= 4, `genus ${genus.name} has >4 navImages`);
+        }
       }
     }
   }

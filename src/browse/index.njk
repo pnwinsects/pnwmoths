@@ -15,18 +15,27 @@ permalink: /browse/index.html
   {% for family in taxon %}
     <h2 id="family-{{ family.name | lower }}">{{ family.name }}</h2>
     {% for subfam in family.subfamilies %}
+      {# Heading levels track effective depth: a null subfamily/tribe flattens its
+         children up a level so the outline (h2 family → … → genus) never skips. #}
       {% if subfam.name %}
         <h3>{{ subfam.name }}</h3>
       {% endif %}
-      {% for genus in subfam.genera %}
-        <h4>{{ genus.name }}</h4>
-        <ul>
-          {% for sp in genus.species %}
-            <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
-              <em>{{ genus.name }} {{ sp.name }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}
-            </a></li>
-          {% endfor %}
-        </ul>
+      {% set tribeLevel = 4 if subfam.name else 3 %}
+      {% for tribe in subfam.tribes %}
+        {% if tribe.name %}
+          <h{{ tribeLevel }}>{{ tribe.name }}</h{{ tribeLevel }}>
+        {% endif %}
+        {% set genusLevel = (tribeLevel + 1) if tribe.name else tribeLevel %}
+        {% for genus in tribe.genera %}
+          <h{{ genusLevel }}>{{ genus.name }}</h{{ genusLevel }}>
+          <ul>
+            {% for sp in genus.species %}
+              <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
+                <em>{{ genus.name }} {{ sp.name }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}
+              </a></li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
       {% endfor %}
     {% endfor %}
   {% endfor %}

@@ -104,7 +104,7 @@ async function verifySampleParquetSchema(conn: DuckDBConnection, firstSlug: stri
  */
 export async function main(): Promise<void> {
   // --- Pre-flight CSV validation ---
-  validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily', 'epithet_quoted']);
+  validateCsv('data/species.csv', ['id', 'genus', 'species', 'common_name', 'noc_id', 'authority', 'family', 'similar_species', 'subfamily', 'epithet_quoted', 'tribe']);
   const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']);
   for (const row of imageRows) {
     const filename = row['filename'];
@@ -131,7 +131,7 @@ export async function main(): Promise<void> {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
-  // species.csv — WITH nullstr='' (empty strings become NULL, e.g. common_name, subfamily)
+  // species.csv — WITH nullstr='' (empty strings become NULL, e.g. common_name, subfamily, tribe)
   await conn.run(`
     CREATE TABLE species AS
     SELECT * FROM read_csv('data/species.csv',
@@ -147,7 +147,8 @@ export async function main(): Promise<void> {
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
         'subfamily': 'VARCHAR',
-        'epithet_quoted': 'VARCHAR'
+        'epithet_quoted': 'VARCHAR',
+        'tribe': 'VARCHAR'
       }
     )
   `);
