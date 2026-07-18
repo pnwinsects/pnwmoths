@@ -22,8 +22,7 @@ The Northwest distribution of *S. hayesi* is southeastern Oregon and southern Id
 
 *Sympistis hayesi* is found in the Southwest and central and southern California ouside of our region. The range of *S. regina* includes the Great Plains to southern Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies in the fall, like many other arid-land *Sympistis* species, usually from late August through September. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

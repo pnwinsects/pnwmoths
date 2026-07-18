@@ -12,8 +12,7 @@ This species occurs at high elevations on alpine tundra near timberline.  It is
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta luteola* is found from the northern Cascade Mountains in Washington north through British Columbia to southwestern Yukon Territory. It occurs east to the Alberta border.
 
@@ -21,8 +20,7 @@ This species occurs at high elevations on alpine tundra near timberline.  It is
 
 Most of this species' range is encompassed by the province of British Columbia. It also occurs in the Rocky Mountains of western Alberta and in southern Yukon Territory.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

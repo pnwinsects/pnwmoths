@@ -14,8 +14,7 @@ This species occurs in moist forest or riparian habitats in the mountains of sou
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Brachylomia obscurifascia* is found in central and east-central Oregon.
 
@@ -23,8 +22,7 @@ This species occurs in moist forest or riparian habitats in the mountains of sou
 
 This species is only found in northeastern California outside of Oregon.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

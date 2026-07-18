@@ -12,8 +12,7 @@ This species is widely distributed throughout much of western North America in d
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Copablepharon grandis* is found in the drier parts of south-eastern Oregon and southern Idaho in the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of western North America in d
 
 This species has one of the widest distributions of any *Copablepharon* species. It is most commonly collected in the Southwest where it occurs from south-western California to the Texas Panhandle north to our region and central Wyoming. It is also found in the Great Plains region north to Alberta, Saskatchewan, and Manitoba.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

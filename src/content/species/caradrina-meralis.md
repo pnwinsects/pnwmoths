@@ -12,8 +12,7 @@ This species is common to abundant in moist, open grasslands and oak woodlands a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Caradrina meralis* occurs most commonly in the foothill regions between mountains and open steppe in the Pacific Northwest, such as the periphery of the Columbia Basin in Washington. It also occurs in south-central British Columbia, across southern Oregon, and in southern Idaho. Its range is more limited west of the Cascades than to the east. It has been found in the Olympic Mountain rain shadow in the Gulf of Georgia in Washington and southwestern British Columbia. It is also widespread in western Oregon from the Willamette Valley south to the Siskiyou Mountains.
 
@@ -21,8 +20,7 @@ This species is common to abundant in moist, open grasslands and oak woodlands a
 
 The range of *Caradrina meralis* extends east to New England where it is rare and associated with sandy soils. It is much more widespread in the West where it occurs from Alberta and British Columbia south to Colorado, Arizona, and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

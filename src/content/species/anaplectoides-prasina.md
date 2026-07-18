@@ -16,8 +16,7 @@ This species is widely distributed in moist hardwood forests and conifer forests
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anaplectoides prasina* is widely distributed in forests throughout our region and is found as far south as Lane County west of the Cascade Range. It does not occur in the dry interior of Washington, Oregon, or southern Idaho.
 
@@ -25,8 +24,7 @@ This species is widely distributed in moist hardwood forests and conifer forests
 
 This species has a Holarctic distribution. It is found across boreal North America from coast to coast. The range extends as far north as southern Northwest Territory, but there are no records from central or northern British Columbia shown by Lafonatine (1998). The southern limit is southern Oregon along the Pacific Coast, southern New Mexico in the Rocky Mountains, and North Carolina in the Appalachian Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

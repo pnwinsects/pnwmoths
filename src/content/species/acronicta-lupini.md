@@ -22,8 +22,7 @@ In the Pacific Northwest, it occurs in open meadows at middle to high elevations
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta lupini* is widespread in the mountains of the Pacific Northwest, including the Cascade Range, the Warner Mountains of southern Oregon, the Blue Mountains, and in the Rocky Mountains. It has been found at lower elevations in the Willamette Valley of western Oregon and more generally further north in central British Columbia. This species occurs at least as far north as southern Yukon Territory.
 
@@ -35,8 +34,7 @@ The range of this species extends south to Colorado in the Rocky Mountains, the 
 
 
 
-## Life
-History
+## Life History
 
 
 

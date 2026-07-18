@@ -24,8 +24,7 @@ This species is widely distributed in hardwood forests throughout much of North 
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta fragilis* is found in forests throughout our region. It is most common in southern British Columbia and the ranges associated with the western Rocky Mountains, including the Blue Mountains of southeastern Washington and northeastern Oregon and the Wasatch Mountains of southeastern Idaho. The most northerly records are from the vicinity of Hazelton, British Columbia. It also occurs near the Pacific Coast from Vancouver Island to northeastern Oregon.
 
@@ -37,8 +36,7 @@ The range of this species extends across Canada and the adjacent northern United
 
 
 
-## Life
-History
+## Life History
 
 
 

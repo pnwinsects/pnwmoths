@@ -14,8 +14,7 @@ This species is widely distributed on the dry short-grass prairies of the Great 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Scotogramma submarina* has only been found at the base of the Pueblo Mountains in southern Harney County, Oregon in our region.
 
@@ -23,8 +22,7 @@ This species is widely distributed on the dry short-grass prairies of the Great 
 
 This species is found on the Great Plains and the Intermountain region. The range extends from the Prairie Provinces of Canada to Colorado, Utah, and eastern and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

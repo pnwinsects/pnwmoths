@@ -14,8 +14,7 @@ This species is narrowly endemic to the Pacific Northwest, and is usually rare a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia cinerascens* is widely distributed but uncommon in the interior steppe of the Columbia Basin, eastern Oregon, and Snake River Plain. It also occurs west of the Cascade Range crest in the Willamette Valley and Siskiyou Mountains of Oregon. It has not been collected in western Washington or in British Columbia.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to the Pacific Northwest, and is usually rare a
 
 This species has a fairly small range in the North American West. The only records from outside of the Pacific Northwest are from California, where it occurs as far south as Sacramento.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

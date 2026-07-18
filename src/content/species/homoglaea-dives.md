@@ -12,8 +12,7 @@ This species is moderately common in moist forest and riparian habitats along cr
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homoglaea dives* is found as far north as southern British Columbia on both sides of the Cascades. The range extends east to southeastern British Columbia, the Idaho Panhandle, and northeastern Oregon. It has not been found in southeastern Oregon or in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is moderately common in moist forest and riparian habitats along cr
 
 This species is found throughout much of California to the south of our region. It has also been recorded from southern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

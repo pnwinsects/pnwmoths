@@ -20,7 +20,7 @@ This species is common and widely distributed in both forests and arid rangeland
 
 ### Pacific Northwest
 
-*Hyalophora euryalus* is found in forests and higher rangelands throughout most of the Pacific Northwest. The range extends north to south-central British Columbia to the latitude of Quesnel and east to western Montana. This species is replaced by *H. gloveri *in the far eastern and southeastern parts of the Northwest.
+*Hyalophora euryalus* is found in forests and higher rangelands throughout most of the Pacific Northwest. The range extends north to south-central British Columbia to the latitude of Quesnel and east to western Montana. This species is replaced by *H. gloveri* in the far eastern and southeastern parts of the Northwest.
 
 ### Global
 
@@ -34,7 +34,7 @@ The larva of *H. euryalus* is a generalist feeder on a wide diversity of woody s
 
 ##### Adults
 
-The adults of *H. euryalus *are on the wing from late spring to mid-summer.  Pacific Northwest specimens have been collected from April to early August, with most records from May and June.  It is nocturnal and comes readily to light.  The moth rests with the wings folded over its back like most butterflies.  Like other giant silkworm moths they do not feed as adults.
+The adults of *H. euryalus* are on the wing from late spring to mid-summer.  Pacific Northwest specimens have been collected from April to early August, with most records from May and June.  It is nocturnal and comes readily to light.  The moth rests with the wings folded over its back like most butterflies.  Like other giant silkworm moths they do not feed as adults.
 
 ## Economic Importance
 

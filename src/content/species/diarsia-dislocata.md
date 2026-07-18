@@ -12,8 +12,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada an
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Diarsia dislocata* occurs in British Columbia and the Cascade Mountains of northern Washington in our region.
 
@@ -21,8 +20,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada an
 
 This species is found in boreal, subarctic, and montane habitats across northern North America from Labrador to Alaska. The range extends south to Maine, the south Ontario border near Minnesota, and northern Washington. A single record from Colorado is also shown in Lafontaine (1998).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

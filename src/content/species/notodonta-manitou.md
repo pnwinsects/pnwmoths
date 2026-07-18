@@ -2,7 +2,7 @@
 
 ##### Adults
 
-*Notodonta manitou* is a predominantly eastern North American moth that barely enters northeastern British Columbia. It is a medium-sized to large moth (17–20 mm) with a gray and orange-brown forewing that has a flange along the posterior margin.  It resembles closely *Notodonta pacifica *in color and pattern.  In general, the forewing of *N. scitipennis* is smoother gray with less whitish gray in the anterior median area, the brown areas on the forewing are warmer colored with more orange, and the hindwing veins are lighter gray.
+*Notodonta manitou* is a predominantly eastern North American moth that barely enters northeastern British Columbia. It is a medium-sized to large moth (17–20 mm) with a gray and orange-brown forewing that has a flange along the posterior margin.  It resembles closely *Notodonta pacifica* in color and pattern.  In general, the forewing of *N. scitipennis* is smoother gray with less whitish gray in the anterior median area, the brown areas on the forewing are warmer colored with more orange, and the hindwing veins are lighter gray.
 
 This species and *N. pacifica* are best separated by locality.  *Notodonta manitou* occurs only in northeastern British Columbia while *N. pacifica* flies from southern British Columbia to California. *N. manitou* was recently recognized as being distinct from *N. scitipennis*, an eastern North American species that does not occur in our region. The specimen depicted on this site is of *N. scitipennis*.
 
@@ -42,4 +42,4 @@ None.
 
 Forbes (1948)
 
-Miller *et al. *(2018)
+Miller *et al.* (2018)

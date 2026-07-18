@@ -12,8 +12,7 @@ This species is widely distributed in moist open forests throughout northeastern
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacanobia atlantica* has an unusual distribution in the Pacific Northwest. It is found in grassland and open forest habitats in southern British Columbia but also occurs in salt marshes along the Gulf of Georgia on the coasts of British Columbia and Washington.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist open forests throughout northeastern
 
 The range of this species extends to the Atlantic Coast in a narrow north-south distribution near the Canada-United States border, reaching Massachusetts to Nova Scotia. The range extends south to the northern portions of Colorado and Utah in the Rocky Mountain region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

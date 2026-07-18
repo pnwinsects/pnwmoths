@@ -20,8 +20,7 @@ This species is found in wet forests in the western part of the Pacific Northwes
 
 This species has a wide distribution in wet forests throughout North America as far north as southern Canada in the East and again in British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This species is a foodplant specialist feeding on wood-sorrels (*Oxalis* spp.) i
 
 This species is known to fly throughout the year in southern portions of its range. In the Pacific Northwest it has been collected in the spring and fall. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

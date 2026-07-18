@@ -18,8 +18,7 @@ This species is widely distributed on wet arctic shrub tundra across the norther
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia tecta* is limited to northern British Columbia in our region. It has been found at Pink Mountain but likely occurs on other mountains since it is known from adjacent southwestern Yukon Territory.
 
@@ -27,8 +26,7 @@ This species is widely distributed on wet arctic shrub tundra across the norther
 
 This species has a large Holarctic distribution. It occurs across the subarctic Northern Hemisphere from Scandinavia to Labrador. The southern limit of its range in North America is northern British Columbia and James Bay of Hudson Bay.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

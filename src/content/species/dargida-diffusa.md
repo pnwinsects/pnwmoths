@@ -16,17 +16,15 @@ This species is common and widely distributed in moist grasslands of riparian ar
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Dargida diffusa* occurs in low dry basins and dry valleys west of the Cascade-Sierra axis in our region. It has not been found in central British Columbia, but occur in the Peace River valley in the north-east part of the province.
 
 ### Global
 
-Western populations of *D. diffusa *extend south into eastern California and Nevada.  It is widely distributed in most of eastern North America as far north as southern Canada but excluding the deep south from east Texas to Florida. The range extends further north to Northwest Territories through the western Prairie Provinces. It is also found commonly in the southern Rocky Mountain region, with numerous records in Colorado, New Mexico, and southern Arizona.
+Western populations of *D. diffusa* extend south into eastern California and Nevada.  It is widely distributed in most of eastern North America as far north as southern Canada but excluding the deep south from east Texas to Florida. The range extends further north to Northwest Territories through the western Prairie Provinces. It is also found commonly in the southern Rocky Mountain region, with numerous records in Colorado, New Mexico, and southern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

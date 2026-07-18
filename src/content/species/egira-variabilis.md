@@ -12,8 +12,7 @@ This species is widely distributed in coniferous forests of western North Americ
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira variabilis* has a spotty distribution in our region. It has been found most consistently in the Selkirk Mountains in southeastern British Columbia and in the Idaho Panhandle, as well as in the Siskiyou Mountains in southwestern Oregon. Isolated records in the Cascade Region include the Upper Skagit River Valley in British Columbia, Seattle's Magnolia neighborhood, and Yakima County, Washington.
 
@@ -21,8 +20,7 @@ This species is widely distributed in coniferous forests of western North Americ
 
 This species is found in California, the Southwest, and the southern Rocky Mountains outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

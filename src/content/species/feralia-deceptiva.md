@@ -16,17 +16,15 @@ This species is endemic to the West Coast where it is common in coastal rainfore
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Feralia deceptiva* occurs in the western part of the Northwest from southwestern British Columbia to southern Oregon, predominantly west of the Cascade crest. It is less common to the east, but is found along the east slope of the Cascades and British Columbia Coast Ranges. Scattered records of this species from farther east have now been confirmed to be *F. jocosa *(Chris Schmidt personal communication 2015).
+*Feralia deceptiva* occurs in the western part of the Northwest from southwestern British Columbia to southern Oregon, predominantly west of the Cascade crest. It is less common to the east, but is found along the east slope of the Cascades and British Columbia Coast Ranges. Scattered records of this species from farther east have now been confirmed to be *F. jocosa* (Chris Schmidt personal communication 2015).
 
 ### Global
 
 The range of *F. deceptiva* extends south to the San Francisco Bay region in California. The range includes the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -6,7 +6,7 @@
 
 This species can be easily identified by the even black band across the steel gray forewing. The most similar species, *Sympistis barnesii*, has a gray median area instead of black and has a light gray hindwing with a less distinct marginal band.
 
-The type locality of *Oncocnemis chalybdis *Troubrige and Crabo is USA, Washington, Columbia County, Table Rock, 46° 01' N 117° 54' W.
+The type locality of *Oncocnemis chalybdis* Troubrige and Crabo is USA, Washington, Columbia County, Table Rock, 46° 01' N 117° 54' W.
 
 ##### Larvae
 
@@ -20,17 +20,17 @@ This species is rare and sporadic at middle to high elevations in the Cascades a
 
 ### Pacific Northwest
 
-*Sympistis chalybdis *is widely distributed in forests of the Pacific Northwest but is only known from a few localities in each Province or State. It has been collected across southern British Columbia, in the Cascade Range of Oregon and Washington, and in the Blue Mountains in southeastern Washington.
+*Sympistis chalybdis* is widely distributed in forests of the Pacific Northwest but is only known from a few localities in each Province or State. It has been collected across southern British Columbia, in the Cascade Range of Oregon and Washington, and in the Blue Mountains in southeastern Washington.
 
 ### Global
 
-This species is found in western Alberta outside of the Pacific Northwest. The range is reported to extend east to Manitoba in Powell and Opler (2009), but the eastern taxon *Sympistis piffardi *extends through the Prairie Provinces to eastern Alberta. The relationship of these two taxa warrants further examination where the ranges approach in Alberta
+This species is found in western Alberta outside of the Pacific Northwest. The range is reported to extend east to Manitoba in Powell and Opler (2009), but the eastern taxon *Sympistis piffardi* extends through the Prairie Provinces to eastern Alberta. The relationship of these two taxa warrants further examination where the ranges approach in Alberta
 
 ## Life History
 
 ##### Larvae
 
-This species is only known to feed on Douglas spiraea (*Spiraea douglasii*) in the Rosaceae, although it may feed on other hardwood shrubs in bogs such as huckleberries (*Vaccinium* spp.) in the Ericaceae. The shrubs *Spiraea densiflora* and *Spiraea stevenii *are common in the locales where *S. chalybdis* occurs (Troubridge and Crabo 1998).
+This species is only known to feed on Douglas spiraea (*Spiraea douglasii*) in the Rosaceae, although it may feed on other hardwood shrubs in bogs such as huckleberries (*Vaccinium* spp.) in the Ericaceae. The shrubs *Spiraea densiflora* and *Spiraea stevenii* are common in the locales where *S. chalybdis* occurs (Troubridge and Crabo 1998).
 
 ##### Adults
 

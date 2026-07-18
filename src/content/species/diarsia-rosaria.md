@@ -12,8 +12,7 @@ This species is widely distributed in moist forest and grassland habitats across
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Diarsia rosaria* is abundant throughout much of the Pacific Northwest where it occurs on both east and west sides of the Cascade Mountains. It has been collected most frequently from southern British Columbia south, but records for northern British Columbia are shown by Lafontaine (1998). The are no records for Idaho south of the Panhandle, but it occurs in western Montana.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest and grassland habitats across
 
 This species occurs to the south of our region in California to the central Coast and Mono Lake region, and in the Rocky Mountains to northern New Mexico. Elsewhere, it has been collected across the Continent in a relatively narrow north-south band from central Yukon Territory eastward near the Canada-United States border to northern Wisconsin, southern Labrador and Nova Scotia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

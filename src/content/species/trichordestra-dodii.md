@@ -12,8 +12,7 @@ This species is narrowly endemic to moist spruce-fir forests and quaking aspen f
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Trichordestra dodii* has only been collected at Kaslo in south-eastern British Columbia and along the Peace River in the north-eastern part of the province. It likely also occurs in western Montana and eastern Idaho.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to moist spruce-fir forests and quaking aspen f
 
 This species is predominantly found in the Rocky Mountain region from southern Alberta and British Columbia to Utah, Colorado, and northern New Mexico. It also occurs in western Saskatchewan.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

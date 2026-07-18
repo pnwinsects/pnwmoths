@@ -14,8 +14,7 @@ This species occurs in boreal and montane spruce-fir forests. It is most common 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia lupa* has only been found in extreme northwestern British Columbia near Atlin. It likely occurs elsewhere in the northern and north-eastern portion of the province.
 
@@ -23,8 +22,7 @@ This species occurs in boreal and montane spruce-fir forests. It is most common 
 
 This species occurs across subarctic North America from Alaska to Labrador as far south as north-central Manitoba. It is also known from the Rocky Mountains in Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

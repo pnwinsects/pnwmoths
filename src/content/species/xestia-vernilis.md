@@ -14,8 +14,7 @@ This species is widely distributed throughout the Rocky Mountains in coniferous 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia vernilis* has a Rocky Mountain distribution and as such is found in the far eastern portion of the Northwest. Records extend from south-eastern British Columbia, western Montana, and central and south-eastern Idaho. The occurrence of this species in the Blue Mountains of Oregon needs verification.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout the Rocky Mountains in coniferous 
 
 This species is found in the Rocky Mountains from west-central Alberta to south-western Utah, eastern Arizona, and northern New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

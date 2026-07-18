@@ -4,7 +4,7 @@
 
 *Apantesis virgo* is a relatively large (FW length 20–27 mm), white, black, and red moth that is restricted to the eastern parts of our region. The forewing is black with prominent off-white veins and postmedial and subterminal region transverse lines. The hindwing is bright orange-red with pale rimmed black spots medial to the discal spot in addition to in the marginal region. A patchy marginal band is also present. As in other *Apantesis* species the fringe is pale, the thorax appears longitudinaly streaked black and white, and the abdomen is lined red and black.  The male antenna is black, bipectinate.
 
-*Apantesis virgo* is closest in appearance to *Apantesis parthenice*, a slightly smaller species. *Apantesis parthenice* lacks the hindwing spot medial to the discal spot that is found in *A. virgo* and has a pale transverse line across the cell that is lacking in *A. virgo*. *Apantesis virgo* also resembles *Apantesis doris*, but this species has an extra pale line in the cell that *A. virgo *lacks and its hindwing is pink.
+*Apantesis virgo* is closest in appearance to *Apantesis parthenice*, a slightly smaller species. *Apantesis parthenice* lacks the hindwing spot medial to the discal spot that is found in *A. virgo* and has a pale transverse line across the cell that is lacking in *A. virgo*. *Apantesis virgo* also resembles *Apantesis doris*, but this species has an extra pale line in the cell that *A. virgo* lacks and its hindwing is pink.
 
 ## Habitat
 

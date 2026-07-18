@@ -28,7 +28,7 @@ This species is a generalist feeding on a variety of herbaceous vegetation.
 
 ##### Adults
 
-Adults of* L. californiae* are diurnal and are usually collected by hand netting. They are usually found in spring, occurring later in the summer at higher altitude. They do not visit flowers.
+Adults of *L. californiae* are diurnal and are usually collected by hand netting. They are usually found in spring, occurring later in the summer at higher altitude. They do not visit flowers.
 
 ## Literature
 

@@ -12,8 +12,7 @@ This species is narrowly endemic to dry oak woodlands and mixed hardwood forests
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Viridiseptis marina* is only found in southwestern Oregon in the Northwest. It has been collected from the Siskiyou Mountain region north to Douglas County, and along the Klamath River in Klamath County.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to dry oak woodlands and mixed hardwood forests
 
 This species if found throughout California to the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

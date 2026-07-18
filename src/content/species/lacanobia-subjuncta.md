@@ -6,7 +6,7 @@
 
 A paler form of this moth occurs in dry habitats. It is more uniform lighter tan-gray and lacks red-brown color. The lines and spots are similar as in the typical form.
 
-*Lacanobia subjuncta* can usually be recognized by the gray-brown and red-brown forewing with large spots, black basal and median dashes, white filling of the posterior postmedial line, and a very strong "W" mark associated with black dashes. The round, pale orbicular spot without an ocellus is fairly characteristic. However, it resembles several other *Lacanobia* species as well as several *Apamea* species from the tribe Apameini. It can be told from* L. nevadae, *a high-elevation moth, by the absence of light orange-brown patches anterior to the basal dash at the wing base and similar filling of the reniform spot. *Lacanobia grandis*, found in forests, has a blue-gray band across the distal wing that *L. subjuncta *lacks. Several *Apamea* species, particularly* Apamea longula*, resemble the pale interior form of *L. subjuncta* but lack hair on the surface of the eye. *Orthosia segregata*, an early spring species found in forests in the northern and eastern parts of our region, is also similar but usually dark gray rather than brown and lacks the prominent "W" formed by the subterminal line in *Lacanobia* species.
+*Lacanobia subjuncta* can usually be recognized by the gray-brown and red-brown forewing with large spots, black basal and median dashes, white filling of the posterior postmedial line, and a very strong "W" mark associated with black dashes. The round, pale orbicular spot without an ocellus is fairly characteristic. However, it resembles several other *Lacanobia* species as well as several *Apamea* species from the tribe Apameini. It can be told from *L. nevadae,* a high-elevation moth, by the absence of light orange-brown patches anterior to the basal dash at the wing base and similar filling of the reniform spot. *Lacanobia grandis*, found in forests, has a blue-gray band across the distal wing that *L. subjuncta *lacks. Several *Apamea* species, particularly* Apamea longula*, resemble the pale interior form of *L. subjuncta* but lack hair on the surface of the eye. *Orthosia segregata*, an early spring species found in forests in the northern and eastern parts of our region, is also similar but usually dark gray rather than brown and lacks the prominent "W" formed by the subterminal line in *Lacanobia* species.
 
 The name *L. s. eleanora* (Barnes and McDunnough) was proposed for western populations of this species, but the range of variation and habitat forms suggests that the use of subspecies is not warranted.
 
@@ -16,8 +16,7 @@ This species is common in moist forest habitats throughout much of North America
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacanobia subjuncta* is found at low to middle elevations throughout the Pacific Northwest, including in dry interior steppe habitats and areas west of the Coast Range and Cascade Mountains.
 
@@ -25,8 +24,7 @@ This species is common in moist forest habitats throughout much of North America
 
 This species is widely distributed in North America. The distribution in the East extends from Nova Scotia to Virginia, Missouri, and North Dakota. The list of states where it occurs in the West suggests that it is widely distributed, with records as far south as New Mexico, Arizona, and California (McCabe 1980).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

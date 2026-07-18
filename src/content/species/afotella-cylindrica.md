@@ -12,8 +12,7 @@ This species is narrowly restricted to desert habitats in the Great Basin region
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Afotella cylindrica* is found in the driest habitats in the Columbia Basin, southeastern Oregon, and southern Idaho. The range appears to be limited to near the east bank of the Columbia River in central Washington. Its distribution is much greater in southeastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is narrowly restricted to desert habitats in the Great Basin region
 
 The range of this species extends south from the Pacific Northwest and Alberta to eastern California. The southern limits in the Great Plains and Rocky Mountain region are poorly known to us.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -30,7 +28,7 @@ No information is presently available regarding larval foodplants of this specie
 
 ##### Adults
 
-*Afotella cylindrica *has a long flight season from spring to fall. The records from our region extend from mid-April to October, although it is most commonly collected in June and July. It is nocturnal and comes to lights.
+*Afotella cylindrica* has a long flight season from spring to fall. The records from our region extend from mid-April to October, although it is most commonly collected in June and July. It is nocturnal and comes to lights.
 
 ## Economic Importance
 

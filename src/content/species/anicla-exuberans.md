@@ -12,8 +12,7 @@ This species is widely distributed in open grasslands and open ponderosa pine fo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anicla exuberans* is found in dry forests in southern British Columbia as well as in extreme southeastern Idaho. It is also recorded from western Montana in Lafontaine (2004). It has not been found in Oregon or Washington.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open grasslands and open ponderosa pine fo
 
 This species is found from the Pacific Northwest and southern Alberta through the Rocky Mountains and adjacent Intermountain region to central Mexico. The western limit of the range in the Southwest is eastern Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

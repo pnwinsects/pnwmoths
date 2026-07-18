@@ -24,8 +24,7 @@ No information is presently available regarding the habitat of this species.
 
 This species occurs in western North America. The limits of the range outside our area is poorly known.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -35,8 +34,7 @@ The life history of this species is unknown.
 
 Adults are single brooded and fly in July. They are nocturnal and come to light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

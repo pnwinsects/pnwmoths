@@ -18,8 +18,7 @@ This species is widely distributed in forest and brushland habitats throughout m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is widespread in the Northwest on both sides of the Cascades. The range extends north to Vancouver Island and south-central British Columbia and east to northern Idaho. It occurs south to the Blue Mountains in northeastern Oregon east of the Cascades, but does not appear to occur further south in southeastern Oregon or southern Idaho.
 
@@ -27,8 +26,7 @@ This species is widespread in the Northwest on both sides of the Cascades. The r
 
 *Egira perlubens* is common throughout California. There are a few records from further east in Nevada and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

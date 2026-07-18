@@ -20,8 +20,7 @@ This species has only been found along the Peace River in the Pacific Northwest.
 
 This species is more widely distributed in eastern North America. The range extends from the island of Newfoundland to Virginia in the east. Its distribution extends westward across the Prairie Provinces of Canada and the adjacent northern states to British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

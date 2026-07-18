@@ -12,8 +12,7 @@ This species is widely distributed along the West Coast in moist forest habitats
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrochola puchella* is found throughout the western part of the Northwest as far north as Vancouver Island, British Columbia. It is also widespread in forested habitats east of the mountains from central Oregon to southern British Columbia. Its eastern limit is in the Idaho Panhandle.
 
@@ -21,8 +20,7 @@ This species is widely distributed along the West Coast in moist forest habitats
 
 This species is found predominantly near the Pacific Coast. It occurs in western California to the vicinity of San Francisco Bay as well as in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

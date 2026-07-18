@@ -4,7 +4,7 @@
 
 *Idia americalis* is our most common and widespread member of the *Idia* genus. It is a small moth (FW length 9 - 14 mm). The forewings are dull, medium-gray and reddish-brown to dark brown, darkest toward the outer margin. Occasional melanic specimens are dark gray and brown. The irregular basal, antemedial, and postmedial lines are darkest at the costa, producing a series of dark bars across the anterior wing margin, and have a light component that is most evident in dark individuals. The widened postmedial line is fused with the median shade at the costa. A dark terminal line is present at the base of the weakly checkered fringe. The subterminal line is pale, but is preceded by dark shading that is wide and black at the costa. The reniform spot is very light gray, but is filled and surrounded by ochre yellow and light red-brown. The hindwing is lighter gray than the forewing with several dark and light lines. The male antennae is biciliate; that of the female is simple.
 
-This species can be told from our other* Idia* species by the row of rectangular black spots at the transverse lines along the anterior forewing.
+This species can be told from our other *Idia* species by the row of rectangular black spots at the transverse lines along the anterior forewing.
 
 Most specimens from west of the Cascade Mountains are smaller, paler, and more reddish brown than those from elsewhere in North America. Occasional typical specimens are found west of the mountains. This suggests that more than one species could be present in our region. No genitalic differences have been found between these morphs (Jim Troubridge, personal communication) and we treat them as forms of the same species.
 

@@ -14,8 +14,7 @@ This species is found on barren, rocky ridgetops at high elevations in the mount
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 In the Northwest this moth is most common near the Cascade Mountains. It has been found west of the mountains in Oregon and along the east slope in Washington.  There are only a few scattered records from further east, including in southeastern British Columbia, southeastern Washington, and west-central Idaho.
 
@@ -23,12 +22,11 @@ In the Northwest this moth is most common near the Cascade Mountains. It has bee
 
 This species is found throughout much of California south of the Northwest. It also occurs in the Rocky Mountains, with records from southwestern Alberta to Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
-No information is presently available regarding larval foodplants for this species, but it is suspected to feed on prostrate rock penstemons (*Penstemon *spp.) in the Scrophulariaceae based upon the habitat.
+No information is presently available regarding larval foodplants for this species, but it is suspected to feed on prostrate rock penstemons (*Penstemon* spp.) in the Scrophulariaceae based upon the habitat.
 
 ##### Adults
 

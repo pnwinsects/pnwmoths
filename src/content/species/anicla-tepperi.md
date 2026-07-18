@@ -12,8 +12,7 @@ This species is widely distributed on the dry short-grass prairies of the Great 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anicla tepperi* is found near the Continental Divide in western Montana.
 
@@ -21,8 +20,7 @@ This species is widely distributed on the dry short-grass prairies of the Great 
 
 This species is found on the Great Plains and in the Rocky Mountains from southern Alberta and Manitoba to southern Colorado and northern Utah.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

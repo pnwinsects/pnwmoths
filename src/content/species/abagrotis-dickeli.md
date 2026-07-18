@@ -20,8 +20,7 @@ This species has only been found at one location in the southern Okanagan of Bri
 
 *Abagrotis dickeli* is known from five widely scattered localities. It has been found in western Manitoba, western Saskatchewan, Wyoming, and at the type locality in Colorado. It is probably more common than is suggested by these few records but goes unrecognized because of its superficial similarity to *A. placida*.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 Adults are single brooded and occur during the summer. The Pacific Northwest records are from mid-July and early August. This species is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

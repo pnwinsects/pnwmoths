@@ -12,8 +12,7 @@ This species is narrowly endemic to dry oak savanna, oak woodlands, and mixed ha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia terminata* is limited to the Siskiyou Mountain region of southwestern Oregon in our area.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to dry oak savanna, oak woodlands, and mixed ha
 
 The range of *O. terminata* extends south through California to near the border with Mexico. It is most commonly found along the Pacific Coast but also occurs in the northern part of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

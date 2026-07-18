@@ -6,9 +6,9 @@
 
 This species can be identified by its powdery dark green-gray forewing with light-filled reniform spot and scalloped lines. It is unlikely to be confused with any other moth in its alpine habitat.
 
-Some central Rocky Mountain populations of *A. zeta*, including in the Uinta Mountains of northern Utah, are smoother brick-red and gray rather than greenish. Specimens resembling these could potentially occur in eastern Idaho. This species is highly variable elsewhere in North America with five recognized subspecies. Of these, only* A. z. nichollae* occurs in our area.
+Some central Rocky Mountain populations of *A. zeta*, including in the Uinta Mountains of northern Utah, are smoother brick-red and gray rather than greenish. Specimens resembling these could potentially occur in eastern Idaho. This species is highly variable elsewhere in North America with five recognized subspecies. Of these, only *A. z. nichollae* occurs in our area.
 
-The type locality of the synonym* Protagrotis nichollae* Hampson, currently considered to be a subspecies of *A. zeta*, is Simpson River, British Columbia, Canada.
+The type locality of the synonym *Protagrotis nichollae* Hampson, currently considered to be a subspecies of *A. zeta*, is Simpson River, British Columbia, Canada.
 
 ## Habitat
 

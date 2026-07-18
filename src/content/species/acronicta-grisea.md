@@ -16,8 +16,7 @@ This species is common and widely distributed in hardwood forests throughout muc
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta grisea* is common and widely distributed in forests throughout the Pacific Northwest, including on both sides of the Cascade Range. It is not found in drier steppe regions.
 
@@ -25,8 +24,7 @@ This species is common and widely distributed in hardwood forests throughout muc
 
 The range of *A. grisea* extends across the boreal zone of North America from coast to coast. The range extends south to the mountains of New England and New York in the East. It occurs in northern California to the northern Sierra Nevada south of the Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -6,7 +6,7 @@
 
 This the smallest and grayest *Leucania* species in the Northwest and is generally recognizable based on these features. *Leucania insueta*, a species that is restricted to eastern British Columbia in the Northwest, is closely similar in pattern to *L. dia* but is redder on the forewing and lighter in color on both wings. The base of its hindwing is pale gray with a darker band at the margin. *Photedes defecta*, an uncommon moth that flies in wetlands, bears some resemblance to *L. dia* because of its similar size and streaked yellow-brown forewing pattern. It lacks the pale cubital vein and dotted black postmedial line of *L. dia*, and lacks fine hairs on its eyes like other members of the tribe Apameini.
 
-This species was until recently confused with *Leucania insueta*, including in the Northwest. Schmidt and Anweiler (2010) recognized that *L. dia*, a predominantly western species, and *L. insueta*, mostly eastern, are distinct with a zone of overlap in Alberta. The data points from the zone of potential overlap toward the eastern edge of the Northwest might not be entirely correct because some of the material on which the data was derived was sorted prior to the recognition that *L. insueta *and *L. dia* were both found in our area (L. Crabo July, 2012)
+This species was until recently confused with *Leucania insueta*, including in the Northwest. Schmidt and Anweiler (2010) recognized that *L. dia*, a predominantly western species, and *L. insueta*, mostly eastern, are distinct with a zone of overlap in Alberta. The data points from the zone of potential overlap toward the eastern edge of the Northwest might not be entirely correct because some of the material on which the data was derived was sorted prior to the recognition that *L. insueta* and *L. dia* were both found in our area (L. Crabo July, 2012)
 
 The type locality of the synonym *Leucania megadia* Smith is Oregon.
 
@@ -23,8 +23,7 @@ Great Basin region.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Leucania dia* is widespread in forests and open grasslands throughout most of our region. It is absent from low-elevation steppe, although it occurs in isolated mountains in the Basin and Range Ecoregions.
 
@@ -32,8 +31,7 @@ Great Basin region.
 
 The global range of *L. dia* is not well known due to confusion with *L. insueta*. It occurs widely in the West, including in Alberta, the Rocky Mountains, and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

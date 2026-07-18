@@ -12,8 +12,7 @@ Little information is presently available regarding habitats of this species in 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The only known occurrence of *N. spaldingi* in our area is from extreme southeastern Oregon near the border with Nevada.
 
@@ -21,8 +20,7 @@ The only known occurrence of *N. spaldingi* in our area is from extreme southeas
 
 *Neogrotella spaldingi* is found in the Southwest region. South of the Pacific Northwest it occurs in southern California, Nevada, Utah, Arizona, and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

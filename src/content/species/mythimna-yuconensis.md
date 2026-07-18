@@ -14,8 +14,7 @@ The habitat of this species in Atlin, British Columbia is wetlands at low elevat
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is known from Atlin in far northern British Columbia.  It might be more widespread near the border with Yukon Territory.
 
@@ -23,8 +22,7 @@ This species is known from Atlin in far northern British Columbia.  It might be
 
 As expected from the name, this species occurs in Yukon Territory.  It is also known from Alaska.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

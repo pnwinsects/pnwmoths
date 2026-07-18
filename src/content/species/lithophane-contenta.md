@@ -16,8 +16,7 @@ This species occurs in oak forests.  In the Pacific Northwest, it is common in 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane contenta* is found in association with oaks in the western portion of the Pacific Northwest as far north as Vancouver Island, British Columbia. It is predominantly found west of the Cascades, but occurs in the Columbia Gorge and along the east slope of the Cascades as far north as Kittitas County, Washington.
 
@@ -25,8 +24,7 @@ This species occurs in oak forests.  In the Pacific Northwest, it is common in 
 
 The range of this species extends south into California from our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

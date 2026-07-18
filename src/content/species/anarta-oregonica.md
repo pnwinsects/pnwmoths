@@ -12,8 +12,7 @@ This species is widely distributed throughout much of western North America in c
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anarta oregonica* is widely distributed in montane forests throughout our region.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of western North America in c
 
 The range of this species extends south through the mountains to California, Utah, and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -30,7 +28,7 @@ No information is presently available regarding larval foodplants of this specie
 
 ##### Adults
 
-*Anarta oregonica *is single-brooded and flies during the summer. It has been collected from mid-June through August in our region. This species is nocturnal and comes readily to lights.
+*Anarta oregonica* is single-brooded and flies during the summer. It has been collected from mid-June through August in our region. This species is nocturnal and comes readily to lights.
 
 ## Economic Importance
 

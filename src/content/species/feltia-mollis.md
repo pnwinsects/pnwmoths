@@ -12,8 +12,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada. I
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This boreal species has been found as far south as southern British Columbia in the Pacific Northwest. It  likely occurs farther south, especially near the Rocky Mountians.
 
@@ -21,8 +20,7 @@ This boreal species has been found as far south as southern British Columbia in 
 
 This species occurs in boreal habitats across North America from Yukon Territory, Northwest Territory and southern Labrador to the northern parts of New York, Michigan, and Minnesota. It ranges south to northern New Mexico in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

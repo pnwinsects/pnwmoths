@@ -12,8 +12,7 @@ This species is endemic to oak forests along the West Coast.  In the Pacific No
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Perigonica tertia* is closely associated with oaks in the Pacfic Northwest. It is common and widespread in western Oregon, in the Columbia Gorge, and along the east slope of the Cascades from Wasco County, Oregon to Klickitat County, Washington. It is less commonly found in western Washington and southwestern British Columbia but occurs as far north as Vancouver Island.
 
@@ -21,8 +20,7 @@ This species is endemic to oak forests along the West Coast.  In the Pacific No
 
 The range of *P. tertia* extends south to the Mexican border through California. It is most common along the Pacific Coast but also occurs in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

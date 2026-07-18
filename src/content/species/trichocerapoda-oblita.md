@@ -12,8 +12,7 @@ This species is widely distributed throughout much of western North America in d
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Trichocerapoda oblita* is found throughout the sage steppe regions of the Pacific Northwest from southern British Columbia to southern Idaho and Oregon. The northern limit is southern British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of western North America in d
 
 This species is found in the American West. The range extends to California, Colorado and New Mexico, and the southern Canadian Prairie Provinces from the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

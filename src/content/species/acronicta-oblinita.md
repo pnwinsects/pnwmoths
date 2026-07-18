@@ -16,8 +16,7 @@ This species occupies bogs, marshes, and wetlands.  In the Pacific Northwest, i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta oblinita* is found across inland southern British Columbia and near the Pacific Ocean from southwestern British Columbia to southern Oregon. It has not been collected in the interior portions of Oregon or Washington or in Idaho.
 
@@ -25,8 +24,7 @@ This species occupies bogs, marshes, and wetlands.  In the Pacific Northwest, i
 
 This species is most widespread in the East where it occurs from southern Canada to southern Florida, the Gulf Coast States, and east Texas. There are also multiple records of this species from central Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

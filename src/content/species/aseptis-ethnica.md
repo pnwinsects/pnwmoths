@@ -18,17 +18,15 @@ This species is found in West Coast dry forests and brushlands with manzanitas.�
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-The range of this species is incompletely known due to confusion with *Aseptis fanatica *and appears to have a more limited range in our region.  It is most common in the Siskiyou Mountains and Cascades of Oregon, reaching the southern Washington Cascades.
+The range of this species is incompletely known due to confusion with *Aseptis fanatica* and appears to have a more limited range in our region.  It is most common in the Siskiyou Mountains and Cascades of Oregon, reaching the southern Washington Cascades.
 
 ### Global
 
 This moth is restricted to California outside of the Pacific Northwest, reaching as far south as the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Euplexia benesimilis* is in forests throughout the Pacific Northwest at least as far north as north-central British Columbia. It has been most commonly collected in western Oregon and Washington as well as in southern Canada and northeastern Washington near the international border. Although there are not many records from Idaho this species is likely to occur widely north of the Snake River Plain.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of North America in moist for
 
 *Euplexia benesimilis* is widely distributed in North America. The range extends south through the western parts of California to the central part of the state. It occurs south to Colorado in the Rocky Mountains. In the East it is found from the island of Newfoundland in the north to Tennessee and western North Carolina in the south.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

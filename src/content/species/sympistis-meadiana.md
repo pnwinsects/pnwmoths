@@ -12,8 +12,7 @@ This species is narrowly restricted to barren, rocky ridgetops and open lava fie
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis meadiana* is west of the Cascade Mountain summits from southwestern British Columbia to southern Oregon. It is most common along the east slope of the Cascades in Washington. It is found on the west slope of the Cascades and in the Siskiyou Mountains in Oregon. An isolated record from the South Hills exists for southern Idaho.
 
@@ -21,8 +20,7 @@ This species is narrowly restricted to barren, rocky ridgetops and open lava fie
 
 The range of this species extends south through most of California south of the Pacific Northwest. It is also known from Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

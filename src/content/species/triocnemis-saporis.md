@@ -12,8 +12,7 @@ This species is widely distributed in juniper woodlands and dry sagebrush steppe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Triocnemis saporis* is found in the dry interior steppe regions of the Northwest, including the Columbia Basin, the Snake River Plain, and the Northern Basin and Range Ecoregion of southeastern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in juniper woodlands and dry sagebrush steppe
 
 This species is predominantly found in the Southwest outside of our area. The range includes most of California east to western Texas and north to Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -18,8 +18,7 @@ This species is widely distributed in forest and brushland habitats throughout m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira curialis* is widely distributed in the Pacific Northwest. It is most common and widespread east of the Cascades where it occurs to south-central British Columbia. It is most common in western Oregon west of the Cascades, becoming more sporadic further north. Isolated populations occur in the south Puget Prairies, in the San Juan and Gulf Islands near the Gulf of Georgia, and on Vancouver Island.
 
@@ -27,8 +26,7 @@ This species is widely distributed in forest and brushland habitats throughout m
 
 This species is found in western North America. It is common throughout most of California and occurs east to Colorado and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

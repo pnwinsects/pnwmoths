@@ -16,8 +16,7 @@ This species is endemic to the West Coast in moist to dry forests with madrone a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia mys* is found west of the Cascades as far north as Vancouver Island in our area. It is most common along the immediate coast in the northern portion of its range, but is widespread in western Oregon. It also occurs along the east slope of the Cascades in Oregon.
 
@@ -25,8 +24,7 @@ This species is endemic to the West Coast in moist to dry forests with madrone a
 
 This species occurs throughout most of California. A single record from southeastern Arizona is shown on The Moth Photographers web site.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

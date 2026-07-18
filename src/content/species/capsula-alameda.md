@@ -22,8 +22,7 @@ This species is very narrowly restricted to marshes with permanent water at low 
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Capsula alameda* is restricted to southeastern Oregon and southern Idaho in our region.
 
@@ -35,8 +34,7 @@ This species is found in California south of our region. It has been collected m
 
 
 
-## Life
-History
+## Life History
 
 
 

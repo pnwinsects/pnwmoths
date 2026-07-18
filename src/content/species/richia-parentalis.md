@@ -14,8 +14,7 @@ This species is widely distributed in ponderosa pine forests and quaking aspen f
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Richia parentalis* has only been found in western Montana in the Pacific Northwest.
 
@@ -23,8 +22,7 @@ This species is widely distributed in ponderosa pine forests and quaking aspen f
 
 This species is common in the Intermountain West where it occurs from east-central California and southern Arizona to north-central Colorado and northern Mexico near the border with eastern New Mexico. Further north it is found from central Nebraska and southwestern North Dakota to western Montana.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

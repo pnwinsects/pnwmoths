@@ -12,8 +12,7 @@ This species is common and widely distributed throughout much of North America i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Helotropha reniformis* is widespread in the Northwest, occurring on both sides of the Cascade Mountains. The range extends as to the Alaska Panhandle near the coast and central interior further inland. It is mostly absent from the dry interior, but has been found in wetlands in parts of the Columbia Basin in Washington and along the Snake River in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed throughout much of North America i
 
 This is a widespread species in North America and is found from the Pacific to the Atlantic. In the West it occurs throughout most of California and has also been recorded from Colorado. It occurs across the Canadian Prairie Provinces and upper Midwest to New Brunswick, ranging south to near the Ohio River and Virginia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

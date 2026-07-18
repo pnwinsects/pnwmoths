@@ -12,8 +12,7 @@ This species is very narrowly endemic to coastal marshes and wetlands at the edg
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Oligia tusa* is found along the Pacific shore as far north as the Gulf of Georgia in southwestern British Columbia. It is also known from further inland in the Willamette Valley of Oregon.
 
@@ -21,8 +20,7 @@ This species is very narrowly endemic to coastal marshes and wetlands at the edg
 
 The range extends south in coastal California to the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

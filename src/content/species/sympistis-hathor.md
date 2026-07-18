@@ -22,8 +22,7 @@ This species appears to be very rare and sporadic near basalt cliffs and rimrock
 
 This species is not known to us from outside of Oregon.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies from late August to mid-September. It is nocturnal and comes to light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

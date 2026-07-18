@@ -12,8 +12,7 @@ This species flies in grasslands in the northern Great Plains. The habitat in th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia lustralis* is restricted to British Columbia in our region. It has been recorded from the central Province, but it is likely to also occur near the eastern border.
 
@@ -21,8 +20,7 @@ This species flies in grasslands in the northern Great Plains. The habitat in th
 
 The range of *L. lustralis* extends east to the island of Newfoundland and south to Arizona, Colorado, and Virginia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

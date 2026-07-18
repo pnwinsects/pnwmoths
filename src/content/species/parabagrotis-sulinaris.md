@@ -14,8 +14,7 @@ This species occurs in grassland and forest habitats.  It is common to abundant
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Parabagrotis sulinaris* is found from southern British Columbia to southern Oregon from the Pacific Coast east to eastern Montana. It occurs on both sides of the Cascade Mountains but has a spotty distribution east of the mountains where it is predominantly limited to mountains and is not found in low-elevation steppe habitats.
 
@@ -23,8 +22,7 @@ This species occurs in grassland and forest habitats.  It is common to abundant
 
 The range of this species is almost exclusively limited to the Pacific Northwest. It also occurs in extreme northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

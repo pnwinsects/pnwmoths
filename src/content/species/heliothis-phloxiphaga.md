@@ -16,8 +16,7 @@ This species is common and widely distributed in moist, open grasslands througho
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothis phloxiphaga* is found throughout most of the Pacific Northwest as far north as southern British Columbia. It is most common east of the Cascade and Coast Range crests, especially in low elevation basins. It is less widely distributed west of the mountains. It has been found most frequently near the Gulf of Georgia in northwestern Washington and adjacent British Columbia.
 
@@ -25,8 +24,7 @@ This species is common and widely distributed in moist, open grasslands througho
 
 This species is widely distributed in North America from southern Canada to central Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is widely distributed at high elevations in the northern Rocky Moun
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta poca* occurs widely in the southern half of British Columbia. It is most commonly collected in the Coast and Cascade Ranges, but it also occurs in the Rocky Mountains near the border with Alberta. It is restricted to the northern Cascade Mountains in Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed at high elevations in the northern Rocky Moun
 
 This species occurs in the Rocky Mountains of Alberta outside of the Pacific Northwest. There is a single record from southwestern Yukon Territory.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -6,7 +6,7 @@
 
 This species and its close relative *Smerinthus cerisyi* can be distinguished from other Pacific Northwest sphinx moths with hindwing eyespots by the solid round black pupil in the blue portion of the "eye." The central of eyespots of other similar species are either double (*Smerinthus jamaicensis*) or pale (*Paonias* species). *Smerinthus cerisyi*, found in central and eastern British Columbia in our region, is quite similar to *S. ophthalmica*. Compared to it, males of *S. ophthalmica* have narrower antennal pectinations, smoother forewing outer margin, more sharply angled antemedial line, smoother postmedial line, less contrasting paler veins, and a less conspicuous subterminal line. As a result *S. ophthalmica* appears smoother. Brown morphs do not exist in *S. cerisyi*. Females of these two species cannot be reliably distinguish without DNA sequencing and are best identified when associated with the males.
 
-The most cogent argument for recognizing this species as distinct from the more eastern *S. cerisyi *was recently put forth by Schmidt & Anweiler (2010), although they note that they were not the first to make this assertion. Their argument is based on observations across a broad zone of contact of these moths in Alberta, noting consistent differences in the superficial appearances of the moths, the presence of brown forms in *S. ophthalmica* but not in *S. cerisyi*, slight structural differences in the wing margins and antennae, and a 3.5% difference in the sequence of the *cox1 *gene of their mitochondrial DNA.
+The most cogent argument for recognizing this species as distinct from the more eastern *S. cerisyi* was recently put forth by Schmidt & Anweiler (2010), although they note that they were not the first to make this assertion. Their argument is based on observations across a broad zone of contact of these moths in Alberta, noting consistent differences in the superficial appearances of the moths, the presence of brown forms in *S. ophthalmica* but not in *S. cerisyi*, slight structural differences in the wing margins and antennae, and a 3.5% difference in the sequence of the *cox1* gene of their mitochondrial DNA.
 
 *Smerinthus vancouveriensis* Butler (type locality: Vancouver Island, British Columbia) is a synonym of *Smerinthus ophthalmica*.
 
@@ -32,7 +32,7 @@ This species is common to abundant in all forest and riparian habitats throughou
 
 ##### Larvae
 
-This species is a foodplant specialist feeding on Salicaceae including willows (*Salix *spp.), cottonwoods (*Populus* spp.), and quaking aspen (*P. tremuloides*).
+This species is a foodplant specialist feeding on Salicaceae including willows (*Salix* spp.), cottonwoods (*Populus* spp.), and quaking aspen (*P. tremuloides*).
 
 ##### Adults
 

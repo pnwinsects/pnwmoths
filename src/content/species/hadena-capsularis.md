@@ -12,8 +12,7 @@ In the Pacific Northwest, *H. capsularis* is rare and sporadic and has been foun
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hadena capsularis* is only known from a few locations in the Pacific Northwest. It has been found in the southern Okanagan region in British Columbia and at several locations near the border of Idaho with Washington and Oregon in the Blue and Wallowa Mountains. It might be more widespread in the Snake River Plain of southern Idaho.
 
@@ -21,8 +20,7 @@ In the Pacific Northwest, *H. capsularis* is rare and sporadic and has been foun
 
 This species is widely distributed throughout much of eastern North America, extending westward throughout the Rocky Mountains to British Columbia and Arizona.  The range in eastern North America spans New England to Florida along the Atlantic Coast and Minnesota to Texas further west.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is widely distributed in boreal spruce-fir or quaking aspen forests
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis obliqua* is widely distributed at higher elevations throughout the Pacific Northwest at least as far north as southern British Columbia. A single record exists from Pink Mountain in north-eastern British Columbia.
 
@@ -23,8 +22,7 @@ This species is widely distributed in boreal spruce-fir or quaking aspen forests
 
 This species is found in the mountains of the West, including the Sierra Nevada of California and the Rocky Mountains to Arizona. The range extends east in boreal habitats to Labrador and Nova Scotia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is widely distributed in open dry habitats throughout much of weste
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Alypia ridingsii* is widespread in the dry interior steppe regions of the Pacific Northwest and is found as far north as southern British Columbia. It has been collected in the Columbia Basin where it is most common in the treeless hills at the periphery of the Basin, in southeastern Oregon, and in southern Idaho. It is uncommon west of the Cascades but has been found on southern Vancouver Island, Washington's Olympic Peninsula, and in western Oregon.
 
@@ -23,8 +22,7 @@ This species is widely distributed in open dry habitats throughout much of weste
 
 This species is widely distributed in the American West, predominantly west of the Continental Divide. It is found throughout California and east to central Colorado and southern Arizona south of the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

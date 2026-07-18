@@ -16,8 +16,7 @@ This species is widely distributed in hardwood forests throughout much of North 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta impressa* is widely distributed in forests throughout the Pacific Northwest. It is not found in dry steppe regions except in southern Idaho.
 
@@ -25,8 +24,7 @@ This species is widely distributed in hardwood forests throughout much of North 
 
 *Acronicta impressa* has a wide distribution in North America and occurs from coast to coast. It occurs across boreal Canada to the Quebec-Labrador border and New Brunswick. The range extends south in the mountains to the Carolinas. In the west it is found to central California along the Pacific Coast and New Mexico in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

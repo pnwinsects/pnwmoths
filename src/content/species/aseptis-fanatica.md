@@ -4,7 +4,7 @@
 
 *Aseptis fanatica* is a broad-winged, medium-sized to large moth (FW length 18–19 mm) that flies in southwestern Oregon and the Cascades during the summer. Its blackish-brown forewings are broadly triangular and each has a faint, pale, yellow subterminal line. It is nearly uniform dull brownish black. A few luteous spots are present along the costa, likely the remnants of the transverse lines. The dark postmedial line is barely evident in some specimens. The subterminal line is irregular and light ochre, powdery or limited to a few scales. The fringe is concolorous with tiny luteous spots in the base at the tips of the veins. The orbicular and reniform spots are weakly outlined in black, barely evident. The orbicular spot is round, filled with the ground color or slightly lighter gray in a few specimens. The reniform and claviform spots are barely evident. The hindwing has slightly concave segment posterior to M1, although less prominent than in many other *Aseptis* species. It is uniform dark gray-brown with a dark terminal line and a tan base of the fringe. The head and thorax are uniform brownish-black. The male antenna is bead-like.
 
-This species and *Aseptis ethnica *can be recognized by their dull very dark forewings with nearly absent markings and a dark gray hindwing, but are difficult to distinguish in the Northwest. *Aseptis fanatica* tends to be the slightly smaller and more narrow-winged of the two, and is more uniform and dark. It lacks mottling in the cell near the spots and at the subterminal line that is often present in *A. ethnica*. The differences in superficial appearance are less evident in the Northwest than in most of California where *A. ethnica* is paler. Some specimens of *A. ethnica* have red-brown in the cell near the spots; this portion of the wing is similar to the rest of the wing in *A. fanatica*. Differences in the male genitalia of these species are described below. Other dark moths which fly with *A. fanatica* have at least some other pale elements, usually in the spots.
+This species and *Aseptis ethnica* can be recognized by their dull very dark forewings with nearly absent markings and a dark gray hindwing, but are difficult to distinguish in the Northwest. *Aseptis fanatica* tends to be the slightly smaller and more narrow-winged of the two, and is more uniform and dark. It lacks mottling in the cell near the spots and at the subterminal line that is often present in *A. ethnica*. The differences in superficial appearance are less evident in the Northwest than in most of California where *A. ethnica* is paler. Some specimens of *A. ethnica* have red-brown in the cell near the spots; this portion of the wing is similar to the rest of the wing in *A. fanatica*. Differences in the male genitalia of these species are described below. Other dark moths which fly with *A. fanatica* have at least some other pale elements, usually in the spots.
 
 This
 species was for a long time thought to represent the southern California form
@@ -25,8 +25,7 @@ This species is common in dry forest and brushland habitats with either madrones
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Aseptis fanatica* is found in the Siskiyou Mountains and in the Cascade Range as far north as Okanogan County, Washington.
 
@@ -34,8 +33,7 @@ This species is common in dry forest and brushland habitats with either madrones
 
 This species is found along the West Coast. The range extends south to Baja California Norte, Mexico through most of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is relatively common at middle to high elevations in the Cascades a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia intermedia* is found in forests in much of our region east of the crests of the Coast and Cascade Ranges at least as far north as central British Columbia. It is restricted to relict prairies near Puget Sound and in the Willamette Valley west of the Cascades.
 
@@ -21,8 +20,7 @@ This species is relatively common at middle to high elevations in the Cascades a
 
 Like many other forest moths, this species has a relatively narrow distribution in the East, occurring from southern Canada to Pennsylvania and Ohio. It is more widely distributed in the West, where it is found from northern Alberta and central British Columbia to southern Arizona and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

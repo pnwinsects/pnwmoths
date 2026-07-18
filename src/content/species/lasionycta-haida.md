@@ -12,8 +12,7 @@ This species is endemic to high elevations above timberline on rocky alpine tund
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been found on Graham Island, Queen Charlotte Islands, British Columbia.
 
@@ -21,8 +20,7 @@ This species has only been found on Graham Island, Queen Charlotte Islands, Brit
 
 This species is not known to occur outside of British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

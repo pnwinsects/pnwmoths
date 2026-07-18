@@ -16,8 +16,7 @@ This species is common and widely distributed in dry woodlands throughout much o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Andropolia diversilineata* is widespread east of the Cascade summit as far north as southern British Columbia and as far east as the Idaho Panhandle. It appear to be absent from the Basin and Range province in southeastern Oregon and southern Idaho.
 
@@ -25,8 +24,7 @@ This species is common and widely distributed in dry woodlands throughout much o
 
 This species is found predominantly in the southwestern part of the United States from California to Colorado south of our region. It occurs in southern California, but not in southern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is narrowly endemic to high elevation spruce-fir forests in the nor
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta perplexella* is found in the Cascade Range of Washington and the mountains of British Columbia. It has been collected in the Coast and Cascade Ranges in the southwestern province, the Purcell Mountains in the southeast, and in the extreme northwestern province near the border with Yukon Territory.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to high elevation spruce-fir forests in the nor
 
 The range of this species includes the Rocky Mountains of western Alberta as well as the mountains of southern Yukon Territory.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

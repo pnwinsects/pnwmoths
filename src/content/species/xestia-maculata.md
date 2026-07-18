@@ -14,8 +14,7 @@ This species flies over rocky alpine tundra at high elevations in the mountains 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia maculata* occurs in the Coast Range in British Columbia and northern Cascade Mountains in Washington. It probably has a much greater distribution in the mountains of British Columbia since it occurs in Alberta and Yukon Territory.
 
@@ -23,8 +22,7 @@ This species flies over rocky alpine tundra at high elevations in the mountains 
 
 This species has been found in southwestern Yukon Territory, and in the Rocky Mountains in Alberta and on the Beartooth Plateau on the Montana-Wyoming border.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

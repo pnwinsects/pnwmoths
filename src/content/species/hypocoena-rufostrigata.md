@@ -12,8 +12,7 @@ This species is found in wetlands and moist prairies in much of North America. 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hypocoena rufostrigata* is found in the dry interior regions of the Pacific Northwest, including in the Columbia Basin, southeastern Oregon, and the Snake River Plain of southern Idaho. It is also found in south-central British Columbia.
 
@@ -21,8 +20,7 @@ This species is found in wetlands and moist prairies in much of North America. 
 
 This species is widespread in North America, although the distribution in the East is relatively restricted. It is found from Alaska to southern Labrador across the north. The range extends south to New Brunswick and Quebec in the East. It is more widespread in the West, especially in the northern and western Great Plains. West of the Rocky Mountains it occurs in northern California outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

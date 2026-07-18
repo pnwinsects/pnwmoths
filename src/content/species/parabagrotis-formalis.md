@@ -12,8 +12,7 @@ This species occurs in dry forests, grasslands, and steppe habitats.  In the Pa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Parabagrotis formalis* is a common moth in large parts of Oregon and Washington but is not known from interior British Columbia or further east in Idaho or Montana. In Washington it predominantly occurs east of the Cascade Range crest as far north as the Methow Valley in Okanogan County. The eastern limit of its known distribution is the Blue Mountains. Its range west of the Cascades is limited to the rain shadow of the Gulf of Georgia, including southern Vancouver Island and the adjacent Gulf and San Juan Island groups. Unlike further north, the distribution in Oregon includes the western part of the state but it is rare or absent from the Basin and Range province in the south-east.
 
@@ -21,8 +20,7 @@ This species occurs in dry forests, grasslands, and steppe habitats.  In the Pa
 
 This species also occurs throughout most of California south to the Los Angeles Basin.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

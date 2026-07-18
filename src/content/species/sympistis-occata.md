@@ -12,8 +12,7 @@ This species is endemic to dry, open grasslands at low elevations east of the Ca
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is found in the dry interior portions of the Northwest as far north as the southern Okanagan region of British Columbia.  Curiously, most of the records are from near major rivers in the Northwest.
 
@@ -21,8 +20,7 @@ This species is found in the dry interior portions of the Northwest as far north
 
 This species is widely distributed on the western Great Plains, in the southern Rocky Mountain states, and in the Southwest to southern California. It occurs from Texas to southern Alberta on the Plains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

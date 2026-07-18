@@ -18,8 +18,7 @@ This species is widely distributed in dry forests and woodlands throughout much 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is most commonly found along the east slope of the Cascade Mountains from southern British Columbia to southern Oregon. It has also been collected in the Blue Mountains in south-eastern Washington and in southern Idaho.
 
@@ -27,8 +26,7 @@ This species is most commonly found along the east slope of the Cascade Mountain
 
 This species is found in eastern California, northern Nevada, Utah, southern Wyoming, western Colorado, and southeastern Arizona outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is common and widely distributed in moist open meadows and grasslan
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is widely established in the Pacific Northwest and is most common west of the Cascade Range from southwestern British Columbia to southern Oregon. It also occurs in southern British Columbia, in forests in eastern Washington, and in agricultural areas in the Columbia Basin.
 
@@ -21,8 +20,7 @@ This species is widely established in the Pacific Northwest and is most common w
 
 This species is introduced from Eurasia. It is has also been found in Alberta and southeastern Canada in North America.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

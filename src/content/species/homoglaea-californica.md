@@ -12,8 +12,7 @@ This species is endemic to the West Coast.  It is restricted to cottonwood fore
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homoglaea californica* is found in the western part of our region as far north as extreme southern British Columbia. The range extends east of the Cascades in southern Washington, northeastern Oregon, the Idaho Panhandle, and southeastern British Columbia.
 
@@ -21,8 +20,7 @@ This species is endemic to the West Coast.  It is restricted to cottonwood fore
 
 The range of this moth is restricted to California outside of the Northwest. It occurs south to near the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

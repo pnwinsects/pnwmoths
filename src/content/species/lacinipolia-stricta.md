@@ -16,8 +16,7 @@ This species is common in a variety of Pacific Northwest low to middle-elevation
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia stricta* is widespread in the Northwest, occurring on both sides of the Cascade and Coast Ranges, as far north as south-central British Columbia.
 
@@ -25,8 +24,7 @@ This species is common in a variety of Pacific Northwest low to middle-elevation
 
 The distribution of this species is predominantly along the West Coast where it is found throughout California to the border with Mexico. It is also found in the northern Great Plains from Alberta to Wyoming.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

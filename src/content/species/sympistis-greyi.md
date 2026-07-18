@@ -20,8 +20,7 @@ This species is common throughout the Pacific Northwest in moist forest and ripa
 
 This species probably occurs in northern California outside of our area.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This species is a foodplant specialist feeding on snowberry (*Symphoricarpos* sp
 
 Adults fly in the summer, most commonly in late June and July. It has been collected as early as late May in the Northwest. It is a nocturnal species and is readily collected at light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

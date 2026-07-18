@@ -12,8 +12,7 @@ This species is widely distributed in open grassy habitats throughout much of we
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Dargida procinctus* is common at low to middle elevations throughout the Pacific Northwest except in the driest portions of the interior. It is found on both sides of the Coast and Cascade Mountains and is commonly found in urban areas.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open grassy habitats throughout much of we
 
 This species occurs in the American West. Outside of the Pacific Northwest it occurs from Saskatchewan to Colorado and west through Utah and Nevada to California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

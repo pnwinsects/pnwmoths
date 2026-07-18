@@ -14,8 +14,7 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane baileyi* is limited to forests west of the Cascades and southern British Columbia in our region.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of North America in moist for
 
 This species is found in northern California along the West Coast. It is most widely distributed in the East where it occurs in southern Canada and the adjacent northern United States as well as in the southern Appalachian Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

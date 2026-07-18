@@ -12,8 +12,7 @@ This is a relatively rare and sporadic species found in wetlands at low elevatio
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Photedes didonea* is found in the dry interior basins of our region. It has been found in Moses Coulee in the Columbia Basin, Washington, and at a few desert localities in southeastern Oregon.
 
@@ -21,8 +20,7 @@ This is a relatively rare and sporadic species found in wetlands at low elevatio
 
 This species is found in western North America, but appears to be rare across its range. It has been found in southern Alberta, Wyoming, Utah, Nevada, and eastern California outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

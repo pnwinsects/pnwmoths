@@ -12,17 +12,15 @@ This species is widely distributed across Canada and the eastern United States i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Eupsilia devia* has been found in central and southeastern British Columbia. It is replaced by* E. fringata* further south.
+*Eupsilia devia* has been found in central and southeastern British Columbia. It is replaced by *E. fringata* further south.
 
 ### Global
 
 This species is found predominantly in eastern North America where it occurs from southern Canada to the Ohio River Valley, and slightly further south in the Appalachian Mountains. The range extends west to the boreal parts of Alberta and reaches its western limit in British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -30,7 +28,7 @@ This species mostly feeds on asters (*Aster* spp.) and goldenrod (*Solidago* spp
 
 ##### Adults
 
-The adults of* E. devia* eclose in the fall and enter hibernation without much activity. They re-emerge in the spring to mate and lay eggs. Most of the specimens from our area have been collected from late February to mid-April. This species is nocturnal and comes to lights.
+The adults of *E. devia* eclose in the fall and enter hibernation without much activity. They re-emerge in the spring to mate and lay eggs. Most of the specimens from our area have been collected from late February to mid-April. This species is nocturnal and comes to lights.
 
 ## Economic Importance
 

@@ -12,8 +12,7 @@ This species can be identified by its two-toned orange-brown forewing with strai
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found in the dry interior of the Northwest as far north as the southern Okanagan region of British Columbia. It occurs in the Columbia Basin of Washington, in far-eastern Oregon, and on the Snake River Plain in southern Idaho.
 
@@ -21,8 +20,7 @@ This species has been found in the dry interior of the Northwest as far north as
 
 *Hydraecia perobliqua* flies on the Great Plains from central Alberta to Colorado and Minnesota. It has also been found in southwestern Ontario near Lake Nipigon. It does not occur south of our region west of the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

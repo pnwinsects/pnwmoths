@@ -12,8 +12,7 @@ This species is widely distributed in moist forest habitats throughout much of w
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Zosteropoda hiritpes* is widely distributed in forests in the Pacific Northwest, including west of the Coast and Cascade Ranges. It does not occur in open steppe habitats and is therefore not found in the Columbia Basin, or in low elevation habitats in south-eastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest habitats throughout much of w
 
 The range of this species extends south from our region to southern California along the Pacific Coast and to Colorado in the Rocky Mountains. It has been collected in extreme southwestern Alberta near the British Columbia border.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

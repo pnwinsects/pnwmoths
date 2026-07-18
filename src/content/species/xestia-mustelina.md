@@ -20,8 +20,7 @@ This species is endemic to moist forests throughout the Pacific Northwest.  It 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia mustelina* is found in forests throughout most of the Northwest north to south-central British Columbia near Lillooet. It has been most commonly collected west of the Cascade Range crest, but also occurs in forests in northern Washington, the Blue Mountains of south-eastern Washington and Oregon, northern Idaho, and western Montana.
 
@@ -29,8 +28,7 @@ This species is endemic to moist forests throughout the Pacific Northwest.  It 
 
 The range of this species is limited outside of the Northwest. It ranges south in California to the southern Sierra Nevada and Monterey Bay.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

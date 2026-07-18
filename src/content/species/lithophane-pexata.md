@@ -14,8 +14,7 @@ This species is widely distributed across Canada in moist forest and riparian ha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This moth is found in the northern parts of the Pacific Northwest in southern British Columbia and northern Washington. It is found west of the Cascades in southwestern British Columbia, including on Vancouver Island. The range extends at least as far north as Smithers, British Columbia.
 
@@ -23,8 +22,7 @@ This moth is found in the northern parts of the Pacific Northwest in southern Br
 
 *Lithophane pexata* is found in central Alberta and western Montana near the Pacific Northwest. The range extends east near the Canada-United States border to Nova Scotia and Washington, D. C.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

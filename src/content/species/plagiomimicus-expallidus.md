@@ -22,8 +22,7 @@ This species is widely distributed on dry short-grass prairies and disturbed ope
 
 
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Plagiomimicus expallidus* occurs near the Snake River in southern Idaho to near the Oregon border. It reaches its western range limit in our area.
 
@@ -35,8 +34,7 @@ This is a species of the Great Plains. It occurs from southern Alberta, North Da
 
 
 
-## Life
-History
+## Life History
 
 
 

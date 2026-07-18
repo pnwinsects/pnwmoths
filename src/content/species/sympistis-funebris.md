@@ -22,8 +22,7 @@ This species is found in the mountains of British Columbia, likely throughout mo
 
 *Sympistis funebris* is Holarctic, occurring across northern Eurasia to Scandinavia. In North America it occurs in the subarctic as far east as Labrador. The range extends south to our region in Northwest and Wyoming in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species is exclusively diurnal and visits flowers. The flight period is July and August in the Pacific Northwest, slightly earlier in late June and July further north.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

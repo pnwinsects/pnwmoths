@@ -16,8 +16,7 @@ This species is widely distributed throughout much of western North America in m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Oligia divesta* is widespread in the Northwest, occurring on both sides of the Cascade and Coast Ranges. The range extends north at least to south-central British Columbia. It also occurs in the mountains of southeastern Idaho but appears to be absent from the dry southern parts of eastern Oregon and Idaho.
 
@@ -25,8 +24,7 @@ This species is widely distributed throughout much of western North America in m
 
 This species is found near the West Coast of North America. It is widespread in California to the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

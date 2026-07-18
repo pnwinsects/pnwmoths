@@ -12,8 +12,7 @@ This species is distributed across central Canada, extending to the northern Roc
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta quadrata* is limited to eastern British Columbia in the northwest. It has been collected near the Peace River in the northeastern part of the province as well as in the Rocky Mountain Trench in the southeast.
 
@@ -21,8 +20,7 @@ This species is distributed across central Canada, extending to the northern Roc
 
 This species is found in a narrow north-south distribution across southern Canada and the Upper Midwest from British Columbia and Alberta to southern Quebec.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

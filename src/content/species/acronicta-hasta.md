@@ -12,8 +12,7 @@ This species is widely distributed in hardwood forests of eastern North America,
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta hasta* occurs in the eastern part of the Northwest, from the Okanagan region in southern British Columbia, eastern Washington, and northeastern Oregon across Idaho. A record from the northern Willamette Valley in Oregon is an isolated record of uncertain significance.
 
@@ -21,8 +20,7 @@ This species is widely distributed in hardwood forests of eastern North America,
 
 The range of *A. hasta* extends east through Montana and the Canadian Prairie Provinces to the East where it is widely distributed. The range in the eastern half of the Continent extends from Minnesota and New Brunswick to Oklahoma and northern Florida.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

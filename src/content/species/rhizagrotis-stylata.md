@@ -12,8 +12,7 @@ This species flies in desert regions of the Great Basin and is mostly found on v
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Rhizagrotis stylata* is found in southern Oregon to the south of the Blue Mountains and in southern Idaho in the Northwest.
 
@@ -21,8 +20,7 @@ This species flies in desert regions of the Great Basin and is mostly found on v
 
 This moth is found predominantly in the American Southwest from California to Colorado. It also occurs on the western Great Plains as far north as southern Canada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

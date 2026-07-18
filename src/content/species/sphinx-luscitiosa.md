@@ -28,7 +28,7 @@ The larvae feed on a number of woody trees and shrubs (Tuttle 2007) but appear t
 
 ##### Adults
 
-The flight period of this moth across most of its northern distribution is June and early July. A record from Utah is from mid-May. The males are diurnal and crepuscular and are rarely taken at light, while females are crepuscular and nocturnal and can be collected at lights. Tuttle (2009) cites a number of nectar sources, including honeysuckle (*Lonicera* spp.), ornamental lilac (*Syringa* ssp.), and dandelion (*Taraxacum *spp.). Ferguson (1971) notes that this species has been attracted to bright clothing.
+The flight period of this moth across most of its northern distribution is June and early July. A record from Utah is from mid-May. The males are diurnal and crepuscular and are rarely taken at light, while females are crepuscular and nocturnal and can be collected at lights. Tuttle (2009) cites a number of nectar sources, including honeysuckle (*Lonicera* spp.), ornamental lilac (*Syringa* ssp.), and dandelion (*Taraxacum* spp.). Ferguson (1971) notes that this species has been attracted to bright clothing.
 
 ## Economic Importance
 

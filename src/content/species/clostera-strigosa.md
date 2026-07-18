@@ -8,7 +8,7 @@ This species can be told from *Clostera "apicalis"* (a complex composed of two 
 
 ##### Larvae
 
-The larva is gray with black stripes and short, yellow scoli or tubercles. It is illustrated by Miller *et al. *(2018).
+The larva is gray with black stripes and short, yellow scoli or tubercles. It is illustrated by Miller *et al.* (2018).
 
 ## Habitat
 
@@ -42,4 +42,4 @@ None.
 
 Forbes (1948)
 
-Miller *et al. *(2018)
+Miller *et al.* (2018)

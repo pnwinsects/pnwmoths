@@ -20,8 +20,7 @@ This species is primarily limited to open, barren rocky ridgetops and lava field
 
 This species also occurs in the Rocky Mountains in western Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species is single brooded and the adults fly during the summer. It has most commonly been collected in July in our area. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

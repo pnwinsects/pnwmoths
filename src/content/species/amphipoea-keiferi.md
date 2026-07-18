@@ -14,8 +14,7 @@ This species is found in wet meadows or within the riparian zones along creeks a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipoea keiferi* is found in the dry interior of the Pacific Northwest as far north as the northern Columbia Basin in Washington. It occurs as far east as the Snake River Plain in southern Idaho.
 
@@ -23,8 +22,7 @@ This species is found in wet meadows or within the riparian zones along creeks a
 
 The range of this species includes northern and eastern California, although it is likely that it is more widespread in the northern Great Basin. The range is poorly known since the relationship of this species and *A. senilis*, found in the Southwest, was only recently elucidated.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

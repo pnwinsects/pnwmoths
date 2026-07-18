@@ -6,7 +6,7 @@
 
 This species can be identified by the combination of a mottled brown forewing, pale "false reniform spot," and a long black basal dash. *Aseptis binotata* is similar and is the only other moth that has a similar pale patch distal to the true reniform spot. It is smoother brown, lacks black in the posterior subterminal area, and lacks a long basal dash.
 
-Populations of this species from east of the Cascades in Klamath and Lake Counties, Oregon are grayer than Pacific Northwest *P. adnixa *from west of the Cascades. This isolated Oregon population resembles California populations of *P. adnixa*.
+Populations of this species from east of the Cascades in Klamath and Lake Counties, Oregon are grayer than Pacific Northwest *P. adnixa* from west of the Cascades. This isolated Oregon population resembles California populations of *P. adnixa*.
 
 ## Habitat
 
@@ -14,17 +14,15 @@ This species is common in moist forest habitats along the West Coast.  In the P
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Paraseptis adnixa *occurs from the Cascade Mountains to the Pacific Coast as far north as Vancouver Island. It is also found east of the Cascade and Coast Range Mountains but is not as widespread there; it has been found in southwestern British Columbia near Lillooet, eastern Washington and the adjacent Idaho Panhandle, and Oregon in the Blue Mountains and near the Klamath River.
+*Paraseptis adnixa* occurs from the Cascade Mountains to the Pacific Coast as far north as Vancouver Island. It is also found east of the Cascade and Coast Range Mountains but is not as widespread there; it has been found in southwestern British Columbia near Lillooet, eastern Washington and the adjacent Idaho Panhandle, and Oregon in the Blue Mountains and near the Klamath River.
 
 ### Global
 
 This is a West Coast species. It occurs throughout California and in Baja California, Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

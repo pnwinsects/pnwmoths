@@ -14,8 +14,7 @@ This species is widely distributed in boreal spruce-fir forests or hardwood fore
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eurois astricta* is widely distributed in forests of the Pacific Northwest. It is most common at middle elevations in the mountains. It is not found in xeric steppe habitats.
 
@@ -23,8 +22,7 @@ This species is widely distributed in boreal spruce-fir forests or hardwood fore
 
 *Eurois astricta* is widely distributed in the boreal and montane portions of North America. The range extends from Alaska to Labrador in the north. The southern limit is southern New York in the East, southern Wisconsin in the Midwest, northern New Mexico in the Rocky Mountains, and southern Oregon on the West Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

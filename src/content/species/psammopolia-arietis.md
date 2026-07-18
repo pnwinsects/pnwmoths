@@ -12,8 +12,7 @@ This species is narrowly endemic to sand dunes along the beach of the Pacific Oc
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Psammopolia arietis* is found on Pacific Ocean beaches throughout our region. In Washington and British Columbia, it occurs along the unprotected western coastline and has not been found in more protected areas such as Puget Sound or the Gulf of Georgia.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to sand dunes along the beach of the Pacific Oc
 
 This species has a large distribution along the Pacific Coast of North America, from southwestern Alaska to central California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

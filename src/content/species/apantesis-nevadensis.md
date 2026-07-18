@@ -2,7 +2,7 @@
 
 ##### Adults
 
-*Apantesis nevadensis *is a widespread, common, late summer and fall-flying *Apantesis* with pale pink to red hindwings. It is medium-sized (FW length 15–18 mm). The forewing appears black with off - white transverse banding - all of the pale transverse marks are present and only the cubital vein is pale. The hindwing color varies regionally. It is red in populations from mesic mountain and northern locations and paler in those from desert environments. It is variably marked with black spots and a marginal band, with more spots in populations from the north and west part of the range (see below). The head and thorax are variable, either black or striped black and white like most other *Apantesis* species, while the abdomen is slightly darker than the hindwing ground color striped with black.
+*Apantesis nevadensis* is a widespread, common, late summer and fall-flying *Apantesis* with pale pink to red hindwings. It is medium-sized (FW length 15–18 mm). The forewing appears black with off - white transverse banding - all of the pale transverse marks are present and only the cubital vein is pale. The hindwing color varies regionally. It is red in populations from mesic mountain and northern locations and paler in those from desert environments. It is variably marked with black spots and a marginal band, with more spots in populations from the north and west part of the range (see below). The head and thorax are variable, either black or striped black and white like most other *Apantesis* species, while the abdomen is slightly darker than the hindwing ground color striped with black.
 
 This species is most similar to *Apantesis eureka* found in Utah and southern Idaho. *Apantesis eureka* has small eyes, unlike the nocturnal *A. nevadensis*. The two species can also be separated temporally because *A. eureka* flies in spring, likely during the day, and *A. nevadensis* is a late-season nocturnal species. *Apantesis behrii*, found in southwestern Oregon, has more yellow light markings, wider forewing lines, and less strongly marked hindwings than *A. nevadensis*. The smaller species *Apantesis blakei*, only known from southeastern British Columbia in the Pacific Northwest, is similarly patterned to *A. nevadensis,* but its hindwings are light orange rather than red, it has a pale antenna, and it occurs earlier in the year than *A. nevadensis*.
 
@@ -20,7 +20,7 @@ This species is common to abundant in desert habitats at low elevations east of 
 
 ### Pacific Northwest
 
-This species is widely distributed in the Pacific Northwest. In British Columbia it occurs commonly in the central Interior, the Rocky Mountain Trench, and along the Peace River. It occurs widely in the dry interior of Idaho, Oregon, and Washington.* Apantesis nevadensis* is only found in a few locations west of the Cascade Mountain crest, including on Vancouver Island, the south Puget Sound, and coastal Oregon.
+This species is widely distributed in the Pacific Northwest. In British Columbia it occurs commonly in the central Interior, the Rocky Mountain Trench, and along the Peace River. It occurs widely in the dry interior of Idaho, Oregon, and Washington. *Apantesis nevadensis* is only found in a few locations west of the Cascade Mountain crest, including on Vancouver Island, the south Puget Sound, and coastal Oregon.
 
 ### Global
 

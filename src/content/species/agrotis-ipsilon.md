@@ -16,8 +16,7 @@ This species is migratory and distributed throughout most of the world.  In Nor
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis ipsilon* is found throughout our region as far north as southern British Columbia.
 
@@ -25,8 +24,7 @@ This species is migratory and distributed throughout most of the world.  In Nor
 
 This species is found throughout most of the world except in the arctic and subarctic zones of the Northern Hemisphere and Antarctica.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

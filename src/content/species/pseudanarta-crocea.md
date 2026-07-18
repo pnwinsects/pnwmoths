@@ -12,17 +12,15 @@ This species is widely distributed in many types of open habitat throughout much
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Pseudanarta crocea *is widespread east of the Coast and Cascade Ranges as far north as south-central British Columbia. It is common in the Columbia Basin, in southern Oregon, and on the Snake River Plain in southern Idaho. It is less common west of the Cascades where it is found in southwestern Oregon and in the Willamette Valley.
+*Pseudanarta crocea* is widespread east of the Coast and Cascade Ranges as far north as south-central British Columbia. It is common in the Columbia Basin, in southern Oregon, and on the Snake River Plain in southern Idaho. It is less common west of the Cascades where it is found in southwestern Oregon and in the Willamette Valley.
 
 ### Global
 
 This moth is widespread in the American West as far north as southwestern Canada at the border of Alberta and Saskatchewan. It is found in the Rocky Mountain region and western Great Plains as far south as Colorado and New Mexico. It is also widespread in the Intermountain region and throughout all but the northwestern parts of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species has only been found in hanging bogs within open serpentine barren h
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Euros osticollis* is a Siskiyou Mountain endemic species.
 
@@ -21,8 +20,7 @@ This species has only been found in hanging bogs within open serpentine barren h
 
 This species has not been found outside the Pacific Northwest but is likely to occur in similar habitats in northwestern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

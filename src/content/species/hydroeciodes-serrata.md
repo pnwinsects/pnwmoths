@@ -12,8 +12,7 @@ This moth is strikingly similar to several species of *Papaipema* in the tribe A
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is restricted to southeastern Idaho in the Northwest where it has been collected in the Wasatch Mountains.
 
@@ -21,8 +20,7 @@ This species is restricted to southeastern Idaho in the Northwest where it has b
 
 *Hydroeciodes serrata* is found in the Rocky Mountain and western Great Plains regions from southern Alberta and Montana to Colorado, New Mexico and Texas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

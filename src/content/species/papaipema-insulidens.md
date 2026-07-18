@@ -6,7 +6,7 @@
 
 *Papaipema insulidens* (Bird), originally described in the genus *Hydroecia*, is described from Vancouver Island. Its synonym *Papaipema pertincta* (Dyar) has a type locality of Forest Grove, Oregon. These names were both given species status until they were placed in synonymy by Lafontaine & Schmidt (2015).
 
-This species flies with two other similar *Papaipema* species, *Papaipema sauzalitae* west of the Cascades and *Papaipema limata* east of the mountains. *Papaipema insulidens* can be distinguished from *P. sauzalitae* by its less conspicuous and more evenly excurved postmedial line, straighter and darker in *P. sauzalitae *after a sharp bend near the costa. Also, the hindwing of western *P. insulidens* specimens is usually mostly gray without much of a pattern; that of *P. sauzalitae *is lighter with a net-like pattern of dark veins and transverse lines. *Papaipema limata* differs from eastern specimens of *P. insulidens* in being lighter yellow, in having a white-filled orbicular spot lacking a dark central dot, and in having a smoother subterminal line. *Hydroeciodes serrata* is a *Papaipema*-like member of the tribe Eriopygini that flies in the Wasatch Mountains of southeastern Idaho in our region. It is remarkably similar to *P. insulidens *in color and pattern, but differs structurally in having small hairs on the surface of the eyes that are visible under magnification. Males are easily distinguished from those of *P. pertincta *by the wide bipectinate antennae. It flies in forests whereas *P. insulidens *occurs in low-elevation wetlands.
+This species flies with two other similar *Papaipema* species, *Papaipema sauzalitae* west of the Cascades and *Papaipema limata* east of the mountains. *Papaipema insulidens* can be distinguished from *P. sauzalitae* by its less conspicuous and more evenly excurved postmedial line, straighter and darker in *P. sauzalitae* after a sharp bend near the costa. Also, the hindwing of western *P. insulidens* specimens is usually mostly gray without much of a pattern; that of *P. sauzalitae* is lighter with a net-like pattern of dark veins and transverse lines. *Papaipema limata* differs from eastern specimens of *P. insulidens* in being lighter yellow, in having a white-filled orbicular spot lacking a dark central dot, and in having a smoother subterminal line. *Hydroeciodes serrata* is a *Papaipema*-like member of the tribe Eriopygini that flies in the Wasatch Mountains of southeastern Idaho in our region. It is remarkably similar to *P. insulidens* in color and pattern, but differs structurally in having small hairs on the surface of the eyes that are visible under magnification. Males are easily distinguished from those of *P. pertincta* by the wide bipectinate antennae. It flies in forests whereas *P. insulidens* occurs in low-elevation wetlands.
 
 ## Habitat
 
@@ -14,8 +14,7 @@ This species occurs in a variety of low to middle elevation habitats west of the
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species occurs on both sides of the Cascade Range. The northern limit is southern British Columbia on both sides of the mountains.
 
@@ -23,8 +22,7 @@ This species occurs on both sides of the Cascade Range. The northern limit is so
 
 *Papaipema insulidens* has been recorded from northern California along the West Coast. *Papaipema insulidens* occurs from southern Canada to the Ohio River Valley and northern Georgia in the East, with western records from Alberta, and eastern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

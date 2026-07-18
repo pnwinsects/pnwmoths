@@ -12,8 +12,7 @@ This species appears to be widely distributed in foothill canyon and riparian ha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Annaphila arvalis* has been found in southeastern British Columbia, eastern Washington, and northcentral Oregon in the Northwest. It is most commonly found in the foothills surrounding the Columbia Basin.
 
@@ -21,8 +20,7 @@ This species appears to be widely distributed in foothill canyon and riparian ha
 
 The range of this species extends to southern California west of the crest of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

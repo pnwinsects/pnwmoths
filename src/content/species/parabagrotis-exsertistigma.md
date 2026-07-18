@@ -12,8 +12,7 @@ This species is widely distributed in dry forests and rangelands throughout much
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is widely distributed throughout the entire Pacific Northwest as far north as southern British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout the entire Pacific Northwest as fa
 
 *Parabagrotis exertistigma* is widely distributed throughout much of the western United States, extending east to the Black Hills in South Dakota, the southern Rocky Mountains of Colorado, and south to northern Arizona and central California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -20,8 +20,7 @@ This species is common to abundant in all types of forest habitats throughout mu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Aseptis binotata* is widespread in the Northwest, occurring on both sides of the Cascades as far north as Vancouver Island near the coast and south-central British Columbia inland. The range extends east to southeastern British Columbia, western Montana, and Wyoming. This species is least common in extreme southeastern Oregon and southern Idaho where it has a spotty distribution in isolated mountains.
 
@@ -30,8 +29,7 @@ This species is common to abundant in all types of forest habitats throughout mu
 This species is widespread in California as far south as San Diego County. It is most common near the Pacific Coast but has been collected in the Rocky Mountain region from southern Alberta to Colorado. It was originally described from Mendocino County,
 California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

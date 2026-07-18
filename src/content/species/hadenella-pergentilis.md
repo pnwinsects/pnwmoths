@@ -12,8 +12,7 @@ This species is narrowly restricted to desert habitats.  It is often abundant o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hadenella pergentilis* is distributed in the dry central interior of the region from southern British Columbia through eastern Oregon, eastern Washington, and southern Idaho. The range is most restricted in Washington where it occurs only in the western portion of the central Columbia Basin not far from the Columbia River.
 
@@ -21,8 +20,7 @@ This species is narrowly restricted to desert habitats.  It is often abundant o
 
 This species extends from the Pacific Northwest and Alberta south at least to Utah and Colorado in the Rocky Mountain region and southern California along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

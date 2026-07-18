@@ -16,8 +16,7 @@ This species is found in subalpine spruce-fir forests.  It is moderately common
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta mutilata* is widespread in montane forests in our region. It occurs near the Pacific Coast from northwestern British Columbia to southern Oregon. The range extends east across southern British Columbia and Washington as far as the Alberta border and the Blue Mountains. It has not been collected in Idaho or in eastern Oregon.
 
@@ -25,8 +24,7 @@ This species is found in subalpine spruce-fir forests.  It is moderately common
 
 This species is found near British Columbia at Ketchikan, Alaska, and throughout the Rocky Mountains of Alberta. Seemingly isolated records from western Wyoming include the Wind River Mountains and Yellowstone National Park.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

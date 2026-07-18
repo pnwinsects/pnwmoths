@@ -12,8 +12,7 @@ This species is widely distributed in dry grasslands across much of Eurasia.  I
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Calophasia lunula* is found most commonly along the east slope of the Cascade Range and the forests north of the Columbia Basin in southern British Columbia and northeastern Washington. It also occurs in the vicinity of Hells Canyon in northeastern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in dry grasslands across much of Eurasia.  I
 
 This species is a native of Eurasia and was introduced deliberately as a biocontrol agent for toadflax (*Linaria* spp.). It is found in the Northwest and in the East from the Midwest to New Brunswick and south to West Virginia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

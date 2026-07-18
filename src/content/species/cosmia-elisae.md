@@ -14,8 +14,7 @@ This species is widely distributed in moist low-elevation to high-elevation coni
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cosmia elisae* is found in conifer forests throughout the Pacific Northwest to the east of the summits of the Coast and Cascade Ranges. The range extends north to west-central British Columbia.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moist low-elevation to high-elevation coni
 
 The range of this species extends south from the Pacific Northwest and adjacent western Alberta to northern California near the Pacific Coast and to Arizona, and New Mexico in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

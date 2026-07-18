@@ -14,8 +14,7 @@ This species is widely distributed throughout much of western North America in f
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira hiemalis* is widespread on both sides of the Cascade Range as far north as southern British Columbia. The range extends as far east as the Idaho Panhandle. A single record exists for south-central Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of western North America in f
 
 This is a West Coast moth. It is found commonly in California except in the far eastern part of the state. A single record is shown for Arizona on the Moth Photographers Group website.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is widely distributed on dry grasslands and in desert areas of the 
 
 ## **Distribution**
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliocheilus paradoxus* is found in the dry interior of our region as far north as the southern Okanagan region in British Columbia. It has been found most consistently in the southern parts of eastern Oregon and Idaho. Hardwick (1996) speculates that northern records of this species might represent migrants, and this might be the case in the Northwest.
 
@@ -21,8 +20,7 @@ This species is widely distributed on dry grasslands and in desert areas of the 
 
 This species is found across the southern United States. The northern limits of its range outside of our region are Minnesota, southern Ontario, and Massachusetts. It appears to be most common in the Southwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

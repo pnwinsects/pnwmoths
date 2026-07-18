@@ -16,7 +16,7 @@ The early stages are unknown.
 
 ### Pacific Northwest
 
-*Admetovis icarus *is rare in our area. It has been found in the central and northern Cascade range in Washington, mountains of south-central and south-east British Columbia, the Wallowa Range of northeastern Oregon, and in the Rocky Mountains of eastern Idaho.
+*Admetovis icarus* is rare in our area. It has been found in the central and northern Cascade range in Washington, mountains of south-central and south-east British Columbia, the Wallowa Range of northeastern Oregon, and in the Rocky Mountains of eastern Idaho.
 
 ### Global
 
@@ -26,7 +26,7 @@ Life History
 
 ## Larvae
 
-The early stages of *A*. *icarus *are unknown. It might feed externally on woody shrubs based on the known foodplant of *A*.*oxymorus*.
+The early stages of *A*. *icarus* are unknown. It might feed externally on woody shrubs based on the known foodplant of *A*.*oxymorus*.
 
 ##### Adults
 

@@ -12,8 +12,7 @@ This species is narrowly endemic to the Rocky Mountains of Alberta in subalpine 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has not been collected in the Pacific Northwest. It is likely to be found in the vicinity of Crowsnest Pass, British Columbia or in the mountains of western Montana or eastern Idaho.
 
@@ -21,8 +20,7 @@ This species has not been collected in the Pacific Northwest. It is likely to be
 
 *Lasionycta pulverea* is only known from the Rocky Mountain region of southwestern Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is widely distributed in drier, open habitats throughout much of th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anarta trifolii* is distributed in a variety of lowland habitats in the Pacific Northwest. It is most common in the interior, especially in the Columbia Basin, southeastern Oregon, and the Snake River Plain. Populations in British Columbia and Washington west of the Cascade Mountains are found near the Ocean, especially on beaches.
 
@@ -21,8 +20,7 @@ This species is widely distributed in drier, open habitats throughout much of th
 
 This species is found in Eurasia as well as in North America. It is widespread in North America, occurring from Alaska to Labrador in the north, south to California, Mexico, and Virginia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

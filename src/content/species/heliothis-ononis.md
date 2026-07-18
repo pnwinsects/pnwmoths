@@ -12,8 +12,7 @@ No information is presently available regarding habitat preferences of this spec
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothis ononis* has been found in the Rocky Mountain Trench of eastern British Columbia.
 
@@ -21,8 +20,7 @@ No information is presently available regarding habitat preferences of this spec
 
 This species flies in the northern Great Plains region from Colorado through the Canadian Prairie Provinces to Northwest Territories. Most of the records appear to be from Alberta, Saskatchewan, and Montana.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

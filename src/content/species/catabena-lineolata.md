@@ -12,8 +12,7 @@ This species is widely distributed throughout much of North America in dry, open
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Catabena lineolata* is found east of the Cascade Mountains as far north as southern British Columbia. It has been most commonly encountered near the Columbia and Snake Rivers in Washington.  The distribution is spottier in Oregon where it occurs in the southwest corner and eastern parts of the state.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of North America in dry, open
 
 This species is found across North America. It appears to be most common in California and the southwest, with additional western records from Alberta and Texas. The eastern populations are restricted to a narrow north-south distribution in the Midwest, Pennsylvania to Maine, and adjacent southern Canada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

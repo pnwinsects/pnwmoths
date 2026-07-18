@@ -24,7 +24,7 @@ This species is widely distributed in moist forests of northeastern North Americ
 
 ##### Larvae
 
-This species is a foodplant specialist on Salicaceae including both willows (*Salix *spp.) and cottonwoods (*Populus* spp.), and it may prefer quaking aspen (*P. tremuloides*) in the Rocky Mountain region.
+This species is a foodplant specialist on Salicaceae including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.), and it may prefer quaking aspen (*P. tremuloides*) in the Rocky Mountain region.
 
 ##### Adults
 

@@ -24,8 +24,7 @@ The exact habitat of *A. buraetica* is unknown in British Columbia, but it is li
 
 This species occurs in the northern and eastern Palaearctic in addition to Northwestern North America, from eastern Russia and Japan to Scandinavia. The New World range includes western Northwest Territories, Yukon Territory, and Alaska in addition to the British Columbia record.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -35,8 +34,7 @@ The early stages of *A. buraetica* are unknown.
 
 This species flies in July.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -14,8 +14,7 @@ This species is widely distributed throughout much of western North America in o
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eutricopis nexilis* is found in the mountains from southern British Columbia to southern Idaho and Oregon. It is most commonly collected in the high Cascade Range and Coast Range of southwestern British Columbia and western Washington. It has not been found in the Olympic Mountains of Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout much of western North America in o
 
 The range of this species extends east to the Atlantic Provinces and New England through southern Canada. It occurs further south in the mountains of the West, reaching Colorado and the Sierra Nevada and White Mountains in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

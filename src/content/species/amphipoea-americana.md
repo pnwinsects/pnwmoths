@@ -14,8 +14,7 @@ This species is common and widely distributed in moist forest and grassland habi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipoea americana* is found in southern British Columbia, northern Washington, and in the Blue Mountains of northeastern Oregon east of the Cascades. Further west it occurs near the Pacific Ocean in Oregon and southwestern Washington, with records clustering near the mouth of the Columbia River. It appears to be replaced by the similar moth *Amphipoea pacifica* in inland localities west of the Cascades.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed in moist forest and grassland habi
 
 This moth is widely distributed in eastern North America where it is found from Nova Scotia to northern Georgia in the Appalachian Mountains. The range extends from central Alberta to the northern parts of New Mexico and Arizona in the Rocky Mountains. The range on the West Coast extends to south of Monterey Bay through northern and central California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

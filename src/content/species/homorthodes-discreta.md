@@ -12,8 +12,7 @@ This species is widely distributed in dry habitats throughout much of the Pacifi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Homorthodes discreta* flies in steppe and dry forest environments east of the Coast and Cascade divides as far north as south-central British Columbia. A few specimens have been collected further west, predominantly in southwestern Oregon. It is most common around the periphery of the driest basins in our area.
 
@@ -21,8 +20,7 @@ This species is widely distributed in dry habitats throughout much of the Pacifi
 
 The range of this species is centered near the Pacific Coast. It is widespread in California south of the Northwest and has also been found in Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -30,7 +28,7 @@ No information is presently available regarding larval foodplants of this specie
 
 ##### Adults
 
-The flight period of* H. discreta* begins in mid-July and lasts to mid-September in our area. It is nocturnal and comes to lights.
+The flight period of *H. discreta* begins in mid-July and lasts to mid-September in our area. It is nocturnal and comes to lights.
 
 ## Economic Importance
 

@@ -12,8 +12,7 @@ This species is widely distributed across Canada in moist hardwood-conifer fores
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cerastis salicarum* is known from central and southern British Columbia in our area, extending south to northern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in moist hardwood-conifer fores
 
 This species is found in boreal forest habitats across North America from Alaska to the Atlantic. It has been found from Labrador and central Quebec to Ohio and West Virginia in the East. The range extends through the Prairie Provinces west to southern Montana, British Columbia, and southern Alaska in the West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

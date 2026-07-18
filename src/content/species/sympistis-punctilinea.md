@@ -12,8 +12,7 @@ This species is widely distributed in riparian habitats at low elevations across
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis punctilinea* has been collected in south-central Idaho in the Northwest.
 
@@ -21,8 +20,7 @@ This species is widely distributed in riparian habitats at low elevations across
 
 The range of this species includes California and the Intermountain West. It has been collected in Utah, Nevada, and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

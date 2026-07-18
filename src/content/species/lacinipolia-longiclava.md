@@ -12,8 +12,7 @@ No information is presently available regarding habitats of this species in the 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia longiclava* has been recorded from western Montana. It is not known from other parts of the Pacific Northwest.
 
@@ -21,8 +20,7 @@ No information is presently available regarding habitats of this species in the 
 
 This species is found in the western Great Plains. It has been recorded from east-central Alberta and Saskatchewan to Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

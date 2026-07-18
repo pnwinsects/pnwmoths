@@ -12,8 +12,7 @@ This species is common and widely distributed across North America in moist fore
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xylena cineritia* is found predominantly east of the Cascade and Coast Ranges, with the range extending north to central British Columbia. It is collected most commonly in the foothill regions surrounding the dry interior steppes such as the Columbia Basin and at higher elevations in the Cascades and Rocky Mountain regions. The distribution west of the Cascades is spottier: the northern Cascade Range and Vancouver Island in southwestern British Columbia, the south Puget Sound region in Washington, and the southern Willamette Valley and the Siskiyou Mountains in Oregon. *Xylena cineritia* has only been found in the Panhandle and near the border with Washington in Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed across North America in moist fore
 
 This species ranges across the Continent but is most widely distributed in the West. It is found in the northern half of California near the West Coast, and from central Alberta to Colorado in the Rocky Mountain region. The range extends east through southern Canada and the adjacent northern United States to Nova Scotia and New Jersey.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

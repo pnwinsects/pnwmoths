@@ -18,8 +18,7 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Phlogophora periculosa* is found in forests throughout the Pacific Northwest. It occurs west of the Cascade and Coast Range Mountains from the California-Oregon border at least as far north as Vancouver Island. The range extends east and north into central and southern British Columbia, northeastern Washington, and northern Idaho.
 
@@ -27,8 +26,7 @@ This species is widely distributed throughout much of North America in moist for
 
 The range of this species extends south into coastal northern California but does not reach the San Francisco Bay region. It extends east across the boreal zone of southern Canada and the northern United States to the Atlantic. The limits of the range are Labrador, Georgia, and Mississippi in the East. This species does not appear to be found in the Rocky Mountains south of northern Idaho.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

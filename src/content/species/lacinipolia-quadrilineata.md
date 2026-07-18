@@ -12,8 +12,7 @@ This species is endemic to the West Coast in moderately dry grassland and forest
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia quadrilineata* flies in western Oregon in our region. Its northern limit appears to be the Columbia River.
 
@@ -21,8 +20,7 @@ This species is endemic to the West Coast in moderately dry grassland and forest
 
 The range of this species extends to Baja California through most of California. It is also found further east in Arizona and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

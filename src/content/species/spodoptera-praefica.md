@@ -38,8 +38,7 @@ This species is native to the American West. It occurs from our area and souther
 
 
 
-## Life
-History
+## Life History
 
 
 
@@ -55,8 +54,7 @@ This species has a very long flight season in our area, first appearing in early
 
 
 
-## Economic
-Importance
+## Economic Importance
 
 This species is often a major agricultural pest in various herbaceous crops throughout western North America.
 

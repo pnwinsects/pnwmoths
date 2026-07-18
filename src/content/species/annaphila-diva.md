@@ -12,8 +12,7 @@ This species is common and widely distributed in moist riparian habitats along c
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Annaphila diva* is found in the western part of the Pacific Northwest as far north as southwestern British Columbia. It also occurs in northern Idaho, southeastern Washington, and northeastern Oregon.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in moist riparian habitats along c
 
 The range of *A. diva* extends to southern California west of the crest of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

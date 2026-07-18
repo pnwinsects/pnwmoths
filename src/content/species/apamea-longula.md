@@ -28,7 +28,7 @@ No information is presently available regarding the larval biology of this speci
 
 ##### Adults
 
-*Apamea longula *has a flight season that extends from early July to September in the Northwest. It is nocturnal and comes readily to lights.
+*Apamea longula* has a flight season that extends from early July to September in the Northwest. It is nocturnal and comes readily to lights.
 
 ## Economic Importance
 

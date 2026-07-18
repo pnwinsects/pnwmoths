@@ -18,8 +18,7 @@ This species is widely distributed in boreal spruce-fir forests.  In the Pacifi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia perquiritata* is found in mountains in central and southern British Columbia, the Cascade Range south to Douglas County, Oregon, north-eastern Washington and the adjacent Idaho Panhandle, and western Montana. A large dark population of this species is found in Sitka spruce forest along the immediate Pacific Coast of Oregon and Washington from Newport, Oregon to Neah Bay, Washington.
 
@@ -27,8 +26,7 @@ This species is widely distributed in boreal spruce-fir forests.  In the Pacifi
 
 This species is found in subarctic and boreal zone forest across Canada and the northern United States. It occurs from Yukon Territory to northern Quebec and Labrador in the north, and northern New England, Lake Superior, and southern Oregon in the south. The range extends further south in the Rocky Mountains to Colorado. An apparently disjunct record from eastern North Carolina is shown by Lafontaine (1998).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

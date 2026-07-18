@@ -12,8 +12,7 @@ The habitat of this species in Idaho is unknown. It is most likely associated wi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliolonche pictipennis* has only been found in southern Idaho in our region.
 
@@ -21,8 +20,7 @@ The habitat of this species in Idaho is unknown. It is most likely associated wi
 
 This species is distributed through California and the Great Basin. It has been found in Arizona, Nevada, and Utah outside of the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ The large, mottled form of this species is usually very rare and sporadic, but i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Resapamea enargia*, as applied herein, has been found along the Snake River in eastern Oregon at low elevations, and in the Siskiyou Mountains of southwestern Oregon at middle elevations.
 
@@ -23,8 +22,7 @@ The large, mottled form of this species is usually very rare and sporadic, but i
 
 The range of this taxon is poorly understood. Specimens referable to this taxon have been examined from central Utah, and are particularly common in the Rocky Mountains of Colorado at high elevations.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

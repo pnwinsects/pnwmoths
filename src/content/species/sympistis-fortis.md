@@ -20,8 +20,7 @@ This species is narrowly restricted to western Oregon in the Northwest.
 
 *Sympistis fortis* occurs throughout most of western California to Baja California.The range extends east to Colorado through southern Nevada and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ This species is a foodplant specialist feeding on Oregon ash (*Fraxinus latifoli
 
 The flight period for this species in Oregon and California is late summer and fall, usually late August and September. It also flies during the winter in Arizona according to Powell and Opler (2009).
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

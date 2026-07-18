@@ -12,8 +12,7 @@ This species is narrowly endemic to the West Coast.  It is common and widely di
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia behrensiana* is restricted to southwestern Oregon in our region.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to the West Coast.  It is common and widely di
 
 The range of *O. behrensiana* includes most of California south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

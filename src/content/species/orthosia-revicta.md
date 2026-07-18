@@ -14,8 +14,7 @@ This species is widely distributed in moist forests across Canada and throughout
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia revicta* is widespread in forests in our region, but is most commonly found west of the Cascade Mountains as far south as northwestern California. It occurs in the Rocky Mountain region and has been collected in western Montana and south-eastern Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moist forests across Canada and throughout
 
 This species occurs across northern North America to the East Coast. It occurs from the island of Newfoundland to Kentucky and North Carolina near the Atlantic. The range extends south to Colorado in the Rocky Mountains. The southern extent of the range along the Pacific might be in northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

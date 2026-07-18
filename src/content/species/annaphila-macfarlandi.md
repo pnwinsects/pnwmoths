@@ -14,8 +14,7 @@ This species is sporadically distributed in moist riparian zones along creeks at
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is found in western Oregon and on the east slope of the Cascades in Oregon and in the Columbia Gorge in Washington.
 
@@ -23,8 +22,7 @@ This species is found in western Oregon and on the east slope of the Cascades in
 
 This species is a Pacific Northwest endemic.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -18,8 +18,7 @@ This species occurs in low-elevation deserts throughout much of western North Am
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia pulla* is found in the dry interior of the Pacific Northwest as far north as southern British Columbia. It is most common in the western parts of the Columbia Basin and eastern Oregon.
 
@@ -27,8 +26,7 @@ This species occurs in low-elevation deserts throughout much of western North Am
 
 This species is found in Utah, western Colorado, Arizona, and the northern and southern parts of California outside of the Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

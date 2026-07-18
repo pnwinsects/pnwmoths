@@ -12,8 +12,7 @@ This species is widely distributed in juniper woodlands and in dry, open sagebru
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia stenotis* is found in the dry interior of Washington and Oregon in our region. It probably occurs in southern Idaho, at least in the western part.
 
@@ -21,8 +20,7 @@ This species is widely distributed in juniper woodlands and in dry, open sagebru
 
 This species is found in California and in the Intermountain region to the south of the Northwest. It is replaced by the similar species *Lacinipolia vittula* further east on the southern Great Plains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

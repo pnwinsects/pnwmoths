@@ -24,7 +24,7 @@ This species ranges across boreal North America from Nova Scotia to British Colu
 
 ##### Larvae
 
-This species is a foodplant specialist feeding on various conifers such as larch (*Larix *spp.) in the Pinaceae.
+This species is a foodplant specialist feeding on various conifers such as larch (*Larix* spp.) in the Pinaceae.
 
 ##### Adults
 

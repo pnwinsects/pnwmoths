@@ -16,8 +16,7 @@ This species is widely distributed across Canada in boreal peat bogs, extending 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Coenophila opacifrons* is only known from a single locality in east-central British Columbia in our region (Lafontaine 1998).
 
@@ -25,8 +24,7 @@ This species is widely distributed across Canada in boreal peat bogs, extending 
 
 The British Columbia record is the western-most in North America. Its range extends through the boreal zone east to the Atlantic where it occurs from the island of Newfoundland to southern New Jersey. There is a seemingly isolated record from south-western Montana (Lafontaine 1998).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

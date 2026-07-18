@@ -12,8 +12,7 @@ This species is mostly limited to coastal rainforests and mixed hardwood forests
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The range of *H. fractura* is predominantly west of the Cascade and Coast Mountains as far north as south-western British Columbia. It is rare south of west-central Oregon. A few records exist for the  east slope of the Cascades in Washington and east of the Coast Range in west-central British Columbia.
 
@@ -21,8 +20,7 @@ The range of *H. fractura* is predominantly west of the Cascade and Coast Mounta
 
 This is a West Coast species that occurs south to Baja California. Isolated records are shown for Arizona and southwestern New Mexico on the Moth Photographers Group site.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

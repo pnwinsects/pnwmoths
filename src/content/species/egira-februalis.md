@@ -16,8 +16,7 @@ This species is narrowly endemic to oak forests along the West Coast.  In the P
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira februalis* is restricted to the western part of the Northwest, predominantly western Oregon but also the Columbia Gorge in southern Washington. The range extends to the east side of the Cascades near the Gorge.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to oak forests along the West Coast.  In the P
 
 The range of this species is limited to the West Coast of North America. It is found in western California as far south as the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -6,7 +6,7 @@
 
 The male genitalia of *Rhabdorthodes* are unique in the a long curved rod extends from the juxta and the uncus is disproportionately small. Also, the male clasper is thick and sculpted, somewhat molarlike. Females have sculpted concave sides on the sternites of the last large segment (A7), shallow in the case of *R*. *pattersoni* but more elaborate in two Mexican species in the genus.
 
-This moth resembles other nondescript brown Eriopygini such as *Homorthodes *and *Protorthodes* species, but is most similar to "*Orthosia*" *noverca*. Most "*O*." *noverca* have thicker and more prominent black forewing pattern elements than *R. pattersoni*. *Rhabdorthodes* can be identified without dissection by observing the ends of the valves for the chunky claspers in males and the concave sides of the seventh sternite in females. In addition, males of *Rhabdorthodes* have wide, biserrate antennae, unlike the simple antennae in lookalikes other than *Protorthodes*.
+This moth resembles other nondescript brown Eriopygini such as *Homorthodes* and *Protorthodes* species, but is most similar to "*Orthosia*" *noverca*. Most "*O*." *noverca* have thicker and more prominent black forewing pattern elements than *R. pattersoni*. *Rhabdorthodes* can be identified without dissection by observing the ends of the valves for the chunky claspers in males and the concave sides of the seventh sternite in females. In addition, males of *Rhabdorthodes* have wide, biserrate antennae, unlike the simple antennae in lookalikes other than *Protorthodes*.
 
 This moth is named in honor of Bob Patterson for his contribution to the study and enjoyment of North American moths. Bob created and maintained the Moth Photographers Group website for many years.
 
@@ -16,7 +16,7 @@ The early stages are unknown.
 
 ## Habitat
 
-*Rhabdorthodes pattersoni *flies in forests at mid to high elevations, usually mixed conifers and aspen.
+*Rhabdorthodes pattersoni* flies in forests at mid to high elevations, usually mixed conifers and aspen.
 
 ## Distribution
 

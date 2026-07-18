@@ -14,8 +14,7 @@ This species is widely distributed in drier forests of western North America.  
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Platypolia loda* has been collected most frequently in the eastern part of the Northwest, from southeastern British Columbia, northern Idaho, and the Blue Mountains of Washington and Oregon. It has been found less frequently along the east slope of the Cascades and in south-central British Columbia. It is also infrequent west of the Cascades on Vancouver Island and in southwestern Oregon. The type locality is Seattle, Washington, but we are not aware of other records from Seattle or nearby suggesting that the type specimen might have been mislabeled.
 
@@ -23,8 +22,7 @@ This species is widely distributed in drier forests of western North America.  
 
 This species occurs in western North America. It has been collected in western Montana and northern and central California outside of the Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

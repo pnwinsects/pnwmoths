@@ -14,8 +14,7 @@ This species is uncommon and sporadic on dry sagebrush steppe at low elevations 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis seth* is found in the deserts of southeastern Oregon as far north as the south slope of the Blue Mountains.
 
@@ -23,8 +22,7 @@ This species is uncommon and sporadic on dry sagebrush steppe at low elevations 
 
 The range extends south into the Great Basin from our area where it is known from dunes near Winnemucca, Nevada. The range is undoubtedly more extensive in the Intermountain Region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

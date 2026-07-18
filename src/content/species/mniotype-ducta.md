@@ -12,8 +12,7 @@ This species is widely distributed in spruce-fir and montane forests across Cana
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Mniotype ducta* is found in the mountains of southern British Columbia and in the Cascades south through Oregon. It also occurs in northern Idaho and in the Blue Mountains of Washington and Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in spruce-fir and montane forests across Cana
 
 This species is widespread in boreal forests of Canada and the northeastern United States as far south as New England and northern New York. It also occurs in the Sierra Nevada and Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

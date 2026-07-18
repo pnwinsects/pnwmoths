@@ -19,8 +19,7 @@ woodlands at low elevations.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthodes noverca* is widespread east of the Cascade Mountains as far north as southern British Columbia. It is most common in the mountains and foothills but also flies in dry steppe. Its range is less extensive west of the mountains where it has been found near the Gulf of Georgia in Washington and British Columbia and in Oregon in the Willamette Valley and Siskiyou Mountains.
 
@@ -28,8 +27,7 @@ woodlands at low elevations.
 
 *Orthodes noverca* is a species of western North America. Based on limited information it has been collected in California, Utah, and Colorado outside of the Pacific Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

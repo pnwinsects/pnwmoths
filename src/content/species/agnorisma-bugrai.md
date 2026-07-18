@@ -12,8 +12,7 @@ This species is widely distributed in forest habitats across much of central Nor
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agnorisma bugrai* records are scattered in southern British Columbia, north-central Washington, and the Blue Mountains of Oregon. An apparently isolated population is found south of Olympia in the Puget Trough of western Washington.
 
@@ -21,8 +20,7 @@ This species is widely distributed in forest habitats across much of central Nor
 
 This species has a transcontinental range. It is found in Canada from Newfoundland and southern Ontario to southern Northwest Territories to central British Columbia. The southern limits are Maryland in the East, Wisconsin in the Midwest, and Utah and Colorado in the West. It has not been found in Nevada or California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -22,8 +22,7 @@ This species is found in forests of western Oregon and Washington, and eastern W
 
 This species was described from Vancouver Island. It probably has a similar West Coast range as that of *H. californica*.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ The larva is unknown, although it is likely that it feeds on nettle (*Urtica* sp
 
 Adults have been collected in spring and August suggesting the presence of spring and summer broods. It is a nocturnal species and comes to light.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -20,8 +20,7 @@ This species occurs in dry, open grasslands at low to high elevations in Califor
 
 The range of *T. flavipennis* is restricted to California outside of the Northwest. Records from the USNM (nearctica.com) show the distribution to include most of northern California as well as the Sierra Nevada. It is replaced by *Tarache lagunae* in southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

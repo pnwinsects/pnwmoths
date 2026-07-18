@@ -12,8 +12,7 @@ This species is widely distributed on dry, open sagebrush steppe at low to high 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothis belladonna* is found in the Columbia Basin in Washington and the Snake River Plain in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed on dry, open sagebrush steppe at low to high 
 
 The range of this species extends from central Wyoming, Utah, and Arizona to southern and eastern California south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

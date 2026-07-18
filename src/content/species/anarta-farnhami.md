@@ -12,8 +12,7 @@ This species is usually found at high elevations where it occurs in spruce-fir f
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anarta farnhami* is widely distributed in forests and mountains throughout British Columbia. The range barely extends into the northern Cascade Mountains in Washington. It also occurs in the Idaho Panhandle.
 
@@ -21,8 +20,7 @@ This species is usually found at high elevations where it occurs in spruce-fir f
 
 The range of this species extends from Yukon Territory, northern Manitoba, and much of Alberta south in the Rocky Mountains to Utah, Colorado, and northern New Mexico. A seemingly isolated population flies in the high Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

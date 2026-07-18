@@ -12,8 +12,7 @@ This species occurs in dry ponderosa pine forests and open sagebrush steppe at m
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anarta columbica* is found in central British Columbia, the Columbia Basin in Washington, and the deserts of southeastern Oregon in our region.
 
@@ -21,8 +20,7 @@ This species occurs in dry ponderosa pine forests and open sagebrush steppe at m
 
 This species is distributed south into eastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

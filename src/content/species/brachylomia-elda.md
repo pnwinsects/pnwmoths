@@ -12,8 +12,7 @@ This species is widely distributed and can be locally common in riparian habitat
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Brachylomia elda* has been found in western Montana, the east slope of the Cascade Range in Oregon and Washington, and in eastern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed and can be locally common in riparian habitat
 
 The distribution of this species is predominantly west of the Rocky Mountains with the exception of a record from near the border of Colorado and Wyoming. It has also been found in northern Utah, Nevada, and California outside of the Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

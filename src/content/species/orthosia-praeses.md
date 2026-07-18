@@ -14,8 +14,7 @@ This species is narrowly endemic to the West Coast in moist to dry forest habita
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia praeses* is distributed west of the Cascade Mountains from southwestern British Columbia to southern Oregon.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to the West Coast in moist to dry forest habita
 
 The range of this species extends south through western California to the border with Mexico. It is found most commonly along the Pacific Coast but also occurs on the west slope of the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

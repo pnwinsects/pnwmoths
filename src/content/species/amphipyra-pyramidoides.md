@@ -16,8 +16,7 @@ This species is found in moist hardwood forests throughout most of North America
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipyra pyramidoides* occurs in forests throughout most of our region as far north as south-central British Columbia. It is found on both sides of the Cascades, but does not occur in dry sage steppe or juniper forests east of the mountains.
 
@@ -25,8 +24,7 @@ This species is found in moist hardwood forests throughout most of North America
 
 This species is widespread in North America. It is most common in the East where it is found from southern Canada to northern Florida and central Texas. The species is common along the Pacific Coast to central California. There are scattered records from the southern Rocky Mountain region but the species appears to be absent from most of the arid Basin and Range Ecoregions.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

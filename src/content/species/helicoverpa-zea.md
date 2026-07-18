@@ -16,8 +16,7 @@ This species is common to abundant throughout most of North America in open, dis
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is most common in low-elevation agricultural areas on both sides of the Cascades, particularly in the Columbia Basin in Washington, the Willamette Valley in western Oregon, and the Snake River Plain in southern Idaho. It is occasionally collected elsewhere as far north as southern British Columbia. This species probably arrives as a migrant from the south each year.
 
@@ -25,8 +24,7 @@ This species is most common in low-elevation agricultural areas on both sides of
 
 *Helicoverpa zea* is widely distributed in the New World from southern Canada to southern South America. It has also been introduced in Hawaii. In North America it is most common south of southern Canada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -18,7 +18,7 @@ This species is widely distributed in moist temperate hardwood forests of easter
 
 ### Global
 
-This moth is found across boreal Canada to eastern North America. The range extends north to northern Alberta, northern Manitoba, and Newfoundland.* Oreta rosea* occurs widely east of the Great Plains as far south as Florida and east Texas.
+This moth is found across boreal Canada to eastern North America. The range extends north to northern Alberta, northern Manitoba, and Newfoundland. *Oreta rosea* occurs widely east of the Great Plains as far south as Florida and east Texas.
 
 ## Life History
 

@@ -16,8 +16,7 @@ This species is widely distributed in moist forest and riparian habitats.  In t
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia plebeia* is most common in the western part of our region from southwestern British Columbia south to southern Oregon. It also occurs east of the Cascade Range in southern British Columbia, most of Washington, northern Idaho, and western Montana. It has not been found in eastern Oregon or southern Idaho.
 
@@ -25,8 +24,7 @@ This species is widely distributed in moist forest and riparian habitats.  In t
 
 The range of this species is limited outside of the Pacific Northwest. Single records are shown for Utah and Colorado in Lafontaine (1998). It also occurs in California as far south as the central Sierra Nevada and the San Francisco Bay.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

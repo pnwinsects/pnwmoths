@@ -12,8 +12,7 @@ This species is found in riparian habitats along creeks and rivers at low elevat
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta strigulata* is found east of the Cascade and Coast Mountains as far north as south-central British Columbia. It has been commonly collected in the foothill region along the northern Columbia Basin in Washington, but also occurs in southern Oregon and Idaho.
 
@@ -21,8 +20,7 @@ This species is found in riparian habitats along creeks and rivers at low elevat
 
 This species is found in western North America. The range extends from Colorado and New Mexico to coastal California south of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

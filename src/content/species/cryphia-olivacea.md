@@ -12,8 +12,7 @@ This species is sporadically distributed through the Rocky Mountain and Cascade 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The distribution appears to be scattered in montane forest in southern British Columbia and northern Idaho. It occurs in the Cascade Range in Washington and Oregon but is rarely collected there. Records from the dry Columbia Basin and Snake River Plain might be misidentified specimens of *C. cuerva*.
 
@@ -21,8 +20,7 @@ The distribution appears to be scattered in montane forest in southern British C
 
 This species has been collected in western Montana, Colorado, northern and southern Utah, Arizona, and California outside of the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is narrowly endemic to moist forest habitats along the West Coast.Â
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This rarely collected species is found near the Pacific Coast from the vicinity of Grays Harbor, Washington to southern Oregon. It also occurs rarely in forest in the Cascade Range as far north as Skamania County, Washington.
 
@@ -23,8 +22,7 @@ This rarely collected species is found near the Pacific Coast from the vicinity 
 
 The range of this species includes coastal California as far south as Monterey County.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

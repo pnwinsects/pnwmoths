@@ -14,8 +14,7 @@ This species is widely distributed across Canada in boreal spruce-fir forests, e
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia mixta* barely enters British Columbia near the border with Alberta.
 
@@ -23,8 +22,7 @@ This species is widely distributed across Canada in boreal spruce-fir forests, e
 
 This species replaces *X. speciosa* in much of the eastern North American subarctic. The range extends west to the Rocky Mountains of Alberta where the ranges of these two species overlap.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,7 +14,7 @@ This species occurs in alpine to subalpine meadows at high elevations in the Roc
 
 ### Pacific Northwest
 
-*Chelis brucei *is found in the north Cascade Mountains, southern British Columbia Coast Range, and the mountains of Vancouver Island  in the Pacific Northwest. The most southerly records are from the vicinity of Lake Chelan, Chelan County, Washington.
+*Chelis brucei* is found in the north Cascade Mountains, southern British Columbia Coast Range, and the mountains of Vancouver Island  in the Pacific Northwest. The most southerly records are from the vicinity of Lake Chelan, Chelan County, Washington.
 
 ### Global
 

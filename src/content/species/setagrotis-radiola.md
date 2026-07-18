@@ -12,8 +12,7 @@ This species is widely distributed on arid rangelands.  In the Pacific Northwes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Setagrotis radiola* is found east of the Cascade Range in much of the interior of Washington, Oregon, and Idaho as well as in western Montana. It has not been recorded from British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed on arid rangelands.  In the Pacific Northwes
 
 The range of this species extends east to western North Dakota, western Nebraska, and northern New Mexico. To the south it occurs continuously through eastern California, Nevada, and Utah to northern Arizona and New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

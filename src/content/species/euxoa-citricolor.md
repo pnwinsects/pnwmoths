@@ -21,7 +21,7 @@ important in helping to narrow the possibilities.
 
 ## Habitat
 
-*Euxoa citricolor *is widely distributed on eroded, dry, short-grass prairie on the Great Plains and on barren rangelands west of the Rocky Mountains.  In the Pacific Northwest, it is most common on barren, low-elevation rangelands. It is most often found on alkali flats with saltbrush (*Atriplex* spp.) that are wet in the spring or at the edges of wetlands such as marshes or riparian zones, in eroded badlands, and in habitats with bare sandy soil.  It is usually not found in dry upland sagebrush steppe.
+*Euxoa citricolor* is widely distributed on eroded, dry, short-grass prairie on the Great Plains and on barren rangelands west of the Rocky Mountains.  In the Pacific Northwest, it is most common on barren, low-elevation rangelands. It is most often found on alkali flats with saltbrush (*Atriplex* spp.) that are wet in the spring or at the edges of wetlands such as marshes or riparian zones, in eroded badlands, and in habitats with bare sandy soil.  It is usually not found in dry upland sagebrush steppe.
 
 ## Distribution
 

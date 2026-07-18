@@ -16,8 +16,7 @@ The habitat is alpine fine shale scree slopes with sparse vegetation above timbe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been collected at one site in the Purcell Mountains of southeastern British Columbia.
 
@@ -25,8 +24,7 @@ This species has only been collected at one site in the Purcell Mountains of sou
 
 *Lasionycta lagganata* is found in the Rocky Mountains of Alberta outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

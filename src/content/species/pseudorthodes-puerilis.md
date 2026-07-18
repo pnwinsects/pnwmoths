@@ -12,8 +12,7 @@ This species is very narrowly endemic to coastal forests and woodlands immediate
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pseudorthodes puerilis* has been found on the Pacific Coastline as far north as Lane County, Oregon.
 
@@ -21,8 +20,7 @@ This species is very narrowly endemic to coastal forests and woodlands immediate
 
 The range of this species extends south along the coast to just north of Los Angeles, California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

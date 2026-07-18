@@ -12,8 +12,7 @@ This moth flies in dry low-elevation sage steppe. It is uncommon.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia dorsalis* is found in the dry interior of Washington, eastern Oregon, and southern Idaho.
 
@@ -21,8 +20,7 @@ This moth flies in dry low-elevation sage steppe. It is uncommon.
 
 The range of *C. dorsalis* includes the Rocky Mountains region from southern Alberta to Colorado and New Mexico. It extends west through the Great Basin to include most of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

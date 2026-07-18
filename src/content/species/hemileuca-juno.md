@@ -12,8 +12,7 @@ This species is endemic to the lower Sonoran desert in the Southwest where it fl
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hemileuca juno* was reported from Idaho by Comstock and Dammers (1939). No other occurrences of this moth from near our region are known.
 
@@ -21,8 +20,7 @@ This species is endemic to the lower Sonoran desert in the Southwest where it fl
 
 This is a species of the desert Southwest. It occurs from eastern California to New Mexico, reaching northern Mexico in the south and Idaho in the north.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

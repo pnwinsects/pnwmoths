@@ -12,8 +12,7 @@ This species appears to be very rare and sporadic on open sagebrush steppe and i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is known from the Great Basin region of east-central Oregon in our region where it has been found as far north as Deschutes County.
 
@@ -21,8 +20,7 @@ This species is known from the Great Basin region of east-central Oregon in our 
 
 This species appears to be endemic to the Great Basin region of the western United States.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

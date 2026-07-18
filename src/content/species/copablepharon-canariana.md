@@ -12,8 +12,7 @@ This species is widely distributed throughout much of western North America in s
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Copablepharon canariana* is found in central and southern Oregon and southern Idaho in our region. It has been most commonly found along the south slope of the Blue Mountains in central Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of western North America in s
 
 This species range includes much of the Intermountain and Great Basin parts of the American West.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

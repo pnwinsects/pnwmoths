@@ -14,8 +14,7 @@ This species is found mostly in the Mojave and Sonoran deserts of the Southwest.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Protogygia album* is found in the Columbia Basin of Washington and northern Oregon in our region.  It has not been found in similar habitats in southern Oregon but has been collected once in the Snake River Plain of southern Idaho Idaho.
 
@@ -23,8 +22,7 @@ This species is found mostly in the Mojave and Sonoran deserts of the Southwest.
 
 The range of this species extends south through California to northern Mexico. There are a few records from southern Nevada, southern Utah, and Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

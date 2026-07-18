@@ -14,8 +14,7 @@ This species is rare and sporadic in dry meadows, sagebrush steppe, canyonlands,
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis saxatilis* is found in central portions of Idaho, Oregon, and Washington. Most records are from the Blue Mountains of Oregon and Washington and the adjacent Idaho Central Batholith.
 
@@ -23,8 +22,7 @@ This species is rare and sporadic in dry meadows, sagebrush steppe, canyonlands,
 
 No records of this species from outside the Pacific Northwest are known to us.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

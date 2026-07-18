@@ -16,8 +16,7 @@ This species is highly vagile and migratory, and is widely distributed throughou
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Peridroma saucia* has been found throughout our region as far north as central British Columbia. A few records are from farther north in west-central British Columbia.
 
@@ -25,8 +24,7 @@ This species is highly vagile and migratory, and is widely distributed throughou
 
 This species is widely distributed in the Old World and New World. In North America it has been found across the entire continent to southern Canada, with strays recorded further north.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

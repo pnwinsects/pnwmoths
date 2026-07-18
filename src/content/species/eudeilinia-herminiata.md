@@ -12,8 +12,7 @@ This species is found in moist boreal forests with dogwoods (*Cornus* spp.). Dav
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *E. herminiata* is known from British Columbia in the Pacific Northwest. It has been collected at Oliver in the southern Okanagan region, along the Coquihalla highway in the Cascade Mountains, and in the Peace River District.  Based on these records, it is likely to be more widespread in the central and eastern parts of the Province.
 
@@ -21,8 +20,7 @@ This species is found in moist boreal forests with dogwoods (*Cornus* spp.). Dav
 
 This is a predominantly eastern North American species. It is widely distributed east of the Mississippi River except in the far north and deep south. The range extends west to the Pacific Northwest across the Canadian Prairie Provinces through eastern and north-central Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -6,7 +6,7 @@
 
 This is the only *Hemileuca* with entirely white mostly white forewings and hindwings in our region. Consequently, it can be recognized easily by its large size, white color, and thick black markings. It is unlikely to be confused with any other species. *Hemileuca nuttalli* has a white forewing and is patterned with black; however, it has a bright yellow hindwing.
 
-Populations of *H. hera* are divided into three subspecies by Ferguson (1971).  Most of the Pacific Northwest has the nominate subspecies *H. h. hera*. The distinctive *Hemileuca hera marcata* (not illustrated) was described from Ft. Klamath, Klamath County, Oregon as *Pseudohazis hera* var. *marcata *Neumoegen*.  *This subspecies might be more widely distributed in Oregon and northern California.  It is larger and has more pointed wings than *H. h. hera*, and the black markings are reduced on the hindwings.
+Populations of *H. hera* are divided into three subspecies by Ferguson (1971).  Most of the Pacific Northwest has the nominate subspecies *H. h. hera*. The distinctive *Hemileuca hera marcata* (not illustrated) was described from Ft. Klamath, Klamath County, Oregon as *Pseudohazis hera* var. *marcata* Neumoegen.  This subspecies might be more widely distributed in Oregon and northern California.  It is larger and has more pointed wings than *H. h. hera*, and the black markings are reduced on the hindwings.
 
 ##### Larvae
 

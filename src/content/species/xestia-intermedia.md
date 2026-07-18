@@ -14,8 +14,7 @@ This species occurs in open arctic tundra habitat on dry mountain slopes.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia intermedia* has been found near Summit Lake, British Columbia by Chris Schmidt.
 
@@ -23,8 +22,7 @@ This species occurs in open arctic tundra habitat on dry mountain slopes.
 
 This species is found in eastern Siberia as well as in arctic and subarctic North America. Prior to its discovery in British Columbia it was only known from a few localities in Alaska and northern and central Yukon Territory.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

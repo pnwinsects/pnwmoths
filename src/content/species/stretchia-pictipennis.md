@@ -10,8 +10,7 @@ This species occurs in oak woodlands at low elevations and in mixed hardwood-con
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Pacific Northwest distribution of this moth is limited to the Siskiyou Mountains of southwestern Oregon.
 
@@ -19,8 +18,7 @@ The Pacific Northwest distribution of this moth is limited to the Siskiyou Mount
 
 The range of *S. pictipennis* extends south through California where it is most commonly collected in the Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

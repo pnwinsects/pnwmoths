@@ -2,7 +2,7 @@
 
 ##### Adults
 
-*Lophocampa roseata *is a true gem because it is both beautiful and rare. It is a small to medium-sized (FW length 14 - 15 mm) moth found predominantly in the vicinity of the Salish Sea in our region. The ground color of the forewing is light yellow, the transverse lines are brown, and the veins are colored bright orange-red, giving the impression of a bright orange wing spotted with light yellow. The hindwing is translucent light yellow without marks. The head and collar are orange brown, while the dorsal thorax is longitudinally striped with orange brown and grayish yellow. The abdomen is light orange brown, similar to the bipectinate antennae.
+*Lophocampa roseata* is a true gem because it is both beautiful and rare. It is a small to medium-sized (FW length 14 - 15 mm) moth found predominantly in the vicinity of the Salish Sea in our region. The ground color of the forewing is light yellow, the transverse lines are brown, and the veins are colored bright orange-red, giving the impression of a bright orange wing spotted with light yellow. The hindwing is translucent light yellow without marks. The head and collar are orange brown, while the dorsal thorax is longitudinally striped with orange brown and grayish yellow. The abdomen is light orange brown, similar to the bipectinate antennae.
 
 *L. roseata* is unlikely to be confused with any other moth in our region.
 

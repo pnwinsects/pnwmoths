@@ -20,7 +20,7 @@ This species is widely distributed across Canada in boreal spruce-fir forests an
 
 ### Pacific Northwest
 
-*Syngrapha microgamma *has been collected in northern and south-central British Columbia in the Northwest.
+*Syngrapha microgamma* has been collected in northern and south-central British Columbia in the Northwest.
 
 ### Global
 

@@ -27,8 +27,7 @@ important in helping to narrow the possibilities.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found at Gott Peak and Mt. McLean in the Coast Range of southwestern British Columbia.
 
@@ -36,8 +35,7 @@ This species has been found at Gott Peak and Mt. McLean in the Coast Range of so
 
 This species is endemic to southwestern British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

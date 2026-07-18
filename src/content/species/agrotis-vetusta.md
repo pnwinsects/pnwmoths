@@ -14,8 +14,7 @@ This species is widely distributed in open habitats throughout much of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis vetusta* is widely distributed in dry interior habitats from southern and eastern British Columbia south in our region. It has a very restricted distribution west of the Cascades. It has only been found there on the north-eastern part of the Olympic Peninsula and on the northern Oregon coast.
 
@@ -23,8 +22,7 @@ This species is widely distributed in open habitats throughout much of North Ame
 
 This species is found from coast to coast in North America but is most widely distributed in the West. The eastern distribution is predominantly near the Atlantic Seaboard and near the Great Lakes. Western records extend from central Manitoba and Alberta to Texas and the southern Baja Peninsula in Mexico. Disjunct northern records extend from southern Northwest Territory across southern Yukon Territory to south-central Alaska.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

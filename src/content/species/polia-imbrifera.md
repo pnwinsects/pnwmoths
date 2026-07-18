@@ -12,8 +12,7 @@ This species is common in moist forests across Canada, extending westward to the
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Polia imbrifera* has only been found in British Columbia in our region, where there are records from the southeastern province and the Peace River region in the northeast.
 
@@ -21,8 +20,7 @@ This species is common in moist forests across Canada, extending westward to the
 
 The range of this species extends across boreal North America from the island of Newfoundland and New England to British Columbia. It occurs further south in the Appalachian Mountains to North Carolina and in the Rocky Mountains to Colorado, New Mexico, and Utah.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

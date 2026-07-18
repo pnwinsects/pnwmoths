@@ -14,8 +14,7 @@ This species is widely distributed in sandy soil areas of the Great Plains, as i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis daedalus* has yet to found in the Northwest, although it occurs near the southern border of our region in Nevada.
 
@@ -23,8 +22,7 @@ This species is widely distributed in sandy soil areas of the Great Plains, as i
 
 The range of this species includes the western Great Plains from Alberta and Saskatchewan to New Mexico and Texas.  It also occurs in the Intermountain region in northern Arizona, southern Utah, and northern Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

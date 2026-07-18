@@ -18,8 +18,7 @@ This species is common and widely distributed throughout much of North America i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Trichordestra lilacina* is found in a variety of habitats throughout our region. It occurs on both sides of the Coast Range and Cascade Mountains. In western Washington it is particularly common in grasslands in the San Juan Islands and on glacial outwash prairies in the southern Puget Sound region. It also occurs on Pacific Coast beaches.
 
@@ -27,8 +26,7 @@ This species is common and widely distributed throughout much of North America i
 
 This species is found across northern North America but is more common and widespread in the West than in the East (McCabe 1980). In the east it occurs from Nova Scotia to New Hampshire. The western populations occur in the northern Great Plains as far south as South Dakota, and in the Rocky Mountain region to Colorado, New Mexico, and Utah. It is also found in California south our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

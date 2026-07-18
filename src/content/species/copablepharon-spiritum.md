@@ -20,8 +20,7 @@ This species is widely distributed throughout much of western North America at l
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The nominate subspecies is found in the Columbia Basin of Washington and northern Oregon. It has not been found in Canada. Subspecies *C. s. lutescens* occurs in central and south-eastern Oregon.
 
@@ -29,8 +28,7 @@ The nominate subspecies is found in the Columbia Basin of Washington and norther
 
 This species occurs in Southwestern North America outside of the Pacific Northwest. The range extends from southern Wyoming and northwestern New Mexico in the east to eastern and southern California and adjacent northern Mexico in the west.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

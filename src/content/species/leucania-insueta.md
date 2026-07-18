@@ -12,8 +12,7 @@ This species can be identified by its red-brown-, tan-, and light gray-streaked 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found in scattered localities in eastern British Columbia, including the Peace River District, the Rocky Mountain Trench, and near Nelson.
 
@@ -21,8 +20,7 @@ This species has been found in scattered localities in eastern British Columbia,
 
 The range of *L. insueta* extends east to the Atlantic from our region. It occurs from Newfoundland to Washington, D. C. along the Coast and as far south as Oklahoma on the Great Plains. The western limits of its range are not well known due to confusion with *Leucania dia*.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

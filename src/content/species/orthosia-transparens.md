@@ -18,8 +18,7 @@ This species is narrowly endemic to the West Coast in moist to dry forest habita
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia transparens* is found throughout the western part of our region as far north as southwestern British Columbia. It does not occur east of the Cascade Mountain crest.
 
@@ -27,8 +26,7 @@ This species is narrowly endemic to the West Coast in moist to dry forest habita
 
 This species is limited to California outside of the Pacific Northwest. The range extends south to the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

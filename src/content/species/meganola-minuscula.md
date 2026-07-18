@@ -24,7 +24,7 @@ This species is most widespread in the East where it is found from southern Cana
 
 ##### Larvae
 
-This species is reported to feed on both oaks (*Quercus* spp.) in the Fagaceae and willows (*Salix *spp.) in the Salicaceae in eastern North America.  However in the Pacific Northwest, it appears to be largely restricted to feeding on Oregon white oak (*Q. garryana*).
+This species is reported to feed on both oaks (*Quercus* spp.) in the Fagaceae and willows (*Salix* spp.) in the Salicaceae in eastern North America.  However in the Pacific Northwest, it appears to be largely restricted to feeding on Oregon white oak (*Q. garryana*).
 
 ##### Adults
 

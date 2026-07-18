@@ -12,8 +12,7 @@ This species is widely distributed in dry forests and woodlands.  In the Pacifi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Tesagrotis piscipellis* is most commonly found along the east slope of the Cascade Range in eastern Washington and Oregon, but occurs further east in the Blue Mountains of Oregon and Washington. It has also been found in south-eastern British Columbia and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed in dry forests and woodlands.  In the Pacifi
 
 This species is widely distributed in the southern Rocky Mountain region, particularly throughout the Four Corner States. It also occurs in the Great Basin and in eastern and southwestern California and in the Black Hills of South Dakota and Wyoming.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -28,7 +28,7 @@ The early stages of *P. eureka* are unknown.
 
 ##### Adults
 
-Adults of* P. eureka* fly during late summer and fall, with records from August and September in most of its range. The Idaho and Montana (Moth Photographers Group accessed 2/2013) specimens were collected during September. It is nocturnal and comes to lights.
+Adults of *P. eureka* fly during late summer and fall, with records from August and September in most of its range. The Idaho and Montana (Moth Photographers Group accessed 2/2013) specimens were collected during September. It is nocturnal and comes to lights.
 
 ## Economic Importance
 

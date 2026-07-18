@@ -6,7 +6,7 @@ Species in the genus *Chytolita* have several structural modifications, includin
 
 This species can be told from other similar size moths in the subfamily Herminiinae by its powdery clay color, smooth antemedial and postmedial lines, and broken wedge-like subterminal line.
 
-Pacific Northwest populations of this species have been called* Chytolita petrealis* in the past; however, this name is now considered to be a synonym of *C. morbidalis *(Crabo et al. 2013).
+Pacific Northwest populations of this species have been called *Chytolita petrealis* in the past; however, this name is now considered to be a synonym of *C. morbidalis* (Crabo et al. 2013).
 
 ## Habitat
 

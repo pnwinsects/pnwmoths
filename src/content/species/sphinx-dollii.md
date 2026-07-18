@@ -14,8 +14,7 @@ This species is common and widely distributed in dry juniper and pinyon pine woo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sphinx dollii* has only been found in south-eastern Idaho in the Pacific Northwest. It can be common in its limited range.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed in dry juniper and pinyon pine woo
 
 This sphinx moth occurs in southwestern United States and adjacent Mexico. Its range extends from west Texas and western Colorado to western Nevada and southeastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

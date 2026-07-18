@@ -12,8 +12,7 @@ This species is widely distributed in moist forests across Canada and throughout
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacanobia radix* has a widespread distribution in forests throughout the Pacific Northwest. It occurs at least as far north as the Peace River region in north-eastern British Columbia and has been found on both sides of the Coast and Cascade Ranges.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests across Canada and throughout
 
 The range of this species extends east in a narrow north-south band near the Canada-United States border, reaching New England, northern New York, and New Brunswick. In the West it has been found in the Black Hills of South Dakota and Wyoming, eastern Utah, northern Nevada, and the northern Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

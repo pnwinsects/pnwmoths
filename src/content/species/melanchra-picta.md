@@ -12,8 +12,7 @@ This species is widely distributed in open habitats throughout much of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Melanchra picta* is found from southern British Columbia throughout the drier interior portions of Washington, Idaho, and Oregon. It has also been found in the San Juan Islands of northwestern Washington and along Oregon's Pacific Coast.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open habitats throughout much of North Ame
 
 *Melanchra picta* is widely distributed in North America. It occurs across southern Canada from Coast to Coast. The range extends south to Virginia in the East, to the Texas Panhandle in the Great Plains, Colorado, Utah and Nevada in the Rocky Mountain and Great Basin regions, and California along the Pacific Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

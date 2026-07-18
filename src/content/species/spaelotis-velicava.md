@@ -12,8 +12,7 @@ This species is endemic to the Great Basin in desert and dry forest habitats.  
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Spaelotis velicava* is found in southern Idaho in our region.
 
@@ -21,8 +20,7 @@ This species is endemic to the Great Basin in desert and dry forest habitats.  
 
 This species' range lies slightly to the east of that of *Spaelotis havilae*, although the two overlap in eastern California near Mono Lake and in northern Nevada. *Spaelotis velicava* is also found throughout most of Utah into western and southern Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

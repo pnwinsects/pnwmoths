@@ -16,8 +16,7 @@ This species is widely distributed across both Eurasia and North America in bore
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eurois occulta* is widely distributed in forests throughout most of the Pacific Northwest. It is not found in the dry interior steppe regions.
 
@@ -25,8 +24,7 @@ This species is widely distributed across both Eurasia and North America in bore
 
 *Eurois occulta* is widespread in the Northern Hemisphere and occurs on Greenland and throughout a large portion of Eurasia. On the North American Continent, it is found throughout the boreal and subarctic zones from Alaska to Labrador. The range extends south to Maryland in the East, southern Wisconsin in the Midwest, eastern Arizona in the Rocky Mountains, and southern Oregon on the West Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

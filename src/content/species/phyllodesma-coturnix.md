@@ -6,7 +6,7 @@
 
 This species can be recognized as a *Phyllodesma* by the reddish color of both fore- and hindwings and the prominent concavity at the anal angle of the forewing. The distinction between *P. coturnix *and* P. americana* appear to be small and no recent reference gives a foolproof diagnostic character for separating them. Franclemont (1973) states that *P. coturnix* tends to be smaller and has smaller male genitalia. He suggested that someone should rear *P. coturnix*, likely in hopes that differences could be discovered in the larvae or possibly because he had a suspicion that the taxa might not be distinct. Powell & Opler (2009) state that the species can only be distinguished by the male genitalia. In general, all California *Phyllodesma* are duller orange, lighter in color, and more powdery than those from the Pacific Northwest. However, Tomas Mustelin believes that there are two taxa involved based on collecting in southern California.
 
-Based on limited samples, the cox1 mitochondrial DNA sequence of *P. coturnix* is sufficiently distinct from that of Pacific Northwest *P. americana *to suggest that they are distinct species. Sampling of California *Phyllodesma* by this technique has been very limited to date and might shed further light on this situation.
+Based on limited samples, the cox1 mitochondrial DNA sequence of *P. coturnix* is sufficiently distinct from that of Pacific Northwest *P. americana* to suggest that they are distinct species. Sampling of California *Phyllodesma* by this technique has been very limited to date and might shed further light on this situation.
 
 **Larvae**
 
@@ -18,8 +18,7 @@ This species is narrowly endemic to woodlands and brushlands in California, exte
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Phyllodesma coturnix* is presumed to occur in southwestern Oregon based on its distribution in California. Specimens from our area have been referred to as this species, although no confirmed specimens were examined in the course of preparing this site. *Phyllodesma coturnix* is most likely to be found in the Siskiyou Mountain region and possibly also in southern Klamath County.
 
@@ -27,8 +26,7 @@ This species is narrowly endemic to woodlands and brushlands in California, exte
 
 This moth is found in California as far north as Siskiyou County and as far south as the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

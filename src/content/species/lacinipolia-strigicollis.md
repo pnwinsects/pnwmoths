@@ -14,8 +14,7 @@ This species is widely distributed in moderately dry habitats throughout much of
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia strigicollis* is widespread in the dry interior of the Northwest as far north as south-central British Columbia. It is less common west of the Cascade Mountains, although it is fairly widespread in western Oregon. Further north it is found near the Gulf of Georgia in the rain shadow of the coastal mountains.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moderately dry habitats throughout much of
 
 This species is widespread in the American West. It occurs from southern Alberta and western Montana to Texas and New Mexico. It is recorded from numerous localities in California and the Intermountain region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

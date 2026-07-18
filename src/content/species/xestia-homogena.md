@@ -14,8 +14,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, a
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia homogena* occurs in the Coast Range of southwestern British Columbia, the Cascade Range in Washington as far south as east of Yakima, the Selkirk Range in north-eastern Washington, and the Rocky Mountains of eastern British Columbia.
 
@@ -23,8 +22,7 @@ This species is widely distributed in boreal spruce-fir forests across Canada, a
 
 This species occurs across the North American Continent from Alaska to Labrador and northern New England. Its range extends south in the Rocky Mountains in Alberta and adjacent British Columbia, Montana, and Colorado as well as in the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

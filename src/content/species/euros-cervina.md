@@ -12,8 +12,7 @@ This species appears to be very rare and sporadic, and has only been found in mi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Euros cervina* is restricted to western Oregon in the Northwest. It has been found along the Pacific Coast and on the east slope of the Cascade Mountains.
 
@@ -21,8 +20,7 @@ This species appears to be very rare and sporadic, and has only been found in mi
 
 This species also occurs in northern California at the type locality on Mt. Shasta. It appears to be rare throughout its range, although this might be due to limited sampling of the appropriate habitat.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

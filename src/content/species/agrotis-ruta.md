@@ -12,8 +12,7 @@ This species is widely distributed in the arctic and subarctic regions of Eurasi
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Agrotis ruta* has been found in northwestern British Columbia. It occurs near British Columbia in the mountains of western Alberta and in southern Yukon Territory.
 
@@ -21,8 +20,7 @@ This species is widely distributed in the arctic and subarctic regions of Eurasi
 
 This species occurs in eastern Asia as well as in most of subarctic North America. The North American records are from Labrador and northern Quebec and northern Manitoba to Alaska. The southern limit of the range is the Rocky Mountains of Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

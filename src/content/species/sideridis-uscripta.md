@@ -12,8 +12,7 @@ This species is widely distributed throughout much of western North America in d
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sideridis u-scripta* is found in the central Columbia Basin near Potholes Reservoir. In Oregon, it occurs in the south-east in the Northern Basin and Range biome as well as in the Blue Mountains and along the east slope of the Cascade Range. It appears to be extremely local, and is likely tied to sand substrate or a particular foodplant.
 
@@ -21,8 +20,7 @@ This species is widely distributed throughout much of western North America in d
 
 This species is found in western North America. The range extends from the southern Prairie Provinces of central Canada to Colorado, southern Arizona, and the Sierra Nevada and northern Cascade Mountains of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

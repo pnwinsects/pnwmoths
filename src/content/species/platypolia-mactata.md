@@ -12,8 +12,7 @@ This species is widely distributed across Canada in moist forests.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Platypolia mactata* reaches the western limit of its range in the Northwest. It is found in much of British Columbia as well as in adjacent north-eastern Washington and northern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in moist forests.
 
 This species is widely distributed in North America. It occurs throughout central and southern Alberta and across southern Canada to Nova Scotia. It is found south to Ohio and Maryland in the East, slightly further south to northern Georgia in the Appalachian Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

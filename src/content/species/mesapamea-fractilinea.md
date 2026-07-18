@@ -12,8 +12,7 @@ This species is common and widely distributed throughout eastern North America, 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Mesapamea fractilinea* is restricted to the eastern part of the Pacific Northwest. It has been found in the Snake River Plain of southern Idaho and in western Montana.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed throughout eastern North America, 
 
 This species is found predominantly in the eastern and central portions of North America as far north as Maine, southern Ontario, and south-central Alberta. The southern limits are Florida and the southern Southwest from California to New Mexico. It occurs in Wyoming, Colorado, and Utah in the central Rocky Mountain region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

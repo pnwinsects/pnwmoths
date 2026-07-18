@@ -2,7 +2,7 @@
 
 ##### Adults
 
-*Bulia deducta *is a very rare migrant in the Pacific Northwest. It is a medium-sized species (FW length 16 mm). The forewing is medium gray with a variable complex pattern of light gray, black, and red-brown. The most prominent marks are a pale transverse area between the antemedial and medial lines, and a similar pale area between the reniform spot and the postmedial line which is ballooned laterally like the margin of a giant reniform spot. The distinctive hindwing is pale yellowish white, with a dark gray marginal band that envelops an orange and black eyespot and white fringe.
+*Bulia deducta* is a very rare migrant in the Pacific Northwest. It is a medium-sized species (FW length 16 mm). The forewing is medium gray with a variable complex pattern of light gray, black, and red-brown. The most prominent marks are a pale transverse area between the antemedial and medial lines, and a similar pale area between the reniform spot and the postmedial line which is ballooned laterally like the margin of a giant reniform spot. The distinctive hindwing is pale yellowish white, with a dark gray marginal band that envelops an orange and black eyespot and white fringe.
 
 This species can be identified from similar *Drasteria* species by the unique orange and black mark at the hindwing margin.
 

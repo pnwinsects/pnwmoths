@@ -12,8 +12,7 @@ This species is mostly found in disturbed agricultural habitats of the Southwest
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has only been found in southern Idaho in the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species has only been found in southern Idaho in the Pacific Northwest.
 
 *Striacosta albicosta* reaches its northwestern limit in Idaho. It is found from Iowa, Nebraska, and Idaho to northern South America.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

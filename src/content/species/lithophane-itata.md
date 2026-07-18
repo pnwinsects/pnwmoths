@@ -12,8 +12,7 @@
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found in south-central British Columbia and the Idaho Panhandle. It should be sought in other locations where its foodplant grows, including in northern Washington.
 
@@ -21,8 +20,7 @@ This species has been found in south-central British Columbia and the Idaho Panh
 
 The distribution of this species is poorly known because of the similarity of many of the species in the *Lithophane lemmeri* species-group. It probably occurs in the Rocky Mountains to the south of the Pacific Northwest region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

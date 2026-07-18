@@ -20,8 +20,7 @@ This species is widely distributed in dry forests throughout much of western Nor
 
 The range of this species extends south and east of our region to south-western California, eastern Arizona, northern New Mexico, and central Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 Adults of *Pronoctua typica* are on the wing from late June to September in our region. They are nocturnal and come to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

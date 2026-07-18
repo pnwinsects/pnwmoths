@@ -22,8 +22,7 @@ This species flies at middle to high elevations in the mountains, favoring open 
 
 This species flies in the Rocky Mountains at least as far south as Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 Adults are on the wing during the summer from late July to early September. This species is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

@@ -10,7 +10,7 @@ The relationship of *C. strigata* to *Cucullia albida*, a lighter colored but ot
 
 Similarly, *Cucullia serraticornis*, a species that resembles *C. strigata* and is characterized by sexual dimorphism in the color of the hindwing color  - white in males and dark in females - approaches the Oregon border in northern California. Some males of *C. strigata* have pale hindwings, and this character is most prominent in southern Oregon. We suspect that *C. strigata* and *C. serraticornis* could also be the same species. Alternatively, these taxa could be distinct, but the records of *C. serraticornis* from northern California could be misidentifications of males of *C. strigata*. This situation is also worthy of further study in Oregon and California. The most likely place to find *C. serraticornis* in Oregon is at low elevations in the Siskiyou Mountains.
 
-The type locality of *Rancora strigata *Smith is British Columbia, Victoria.
+The type locality of *Rancora strigata* Smith is British Columbia, Victoria.
 
 ## Habitat
 
@@ -18,8 +18,7 @@ This species is widely distributed in dry open grasslands at low elevations thro
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia strigata* is widespread on sage steppes in the interior of the Pacific Northwest as far north as the southern part of British Columbia. It occurs uncommonly on remnant prairies in the southern Puget Sound and Vancouver Island, as well as in the Willamette Valley in western Oregon. Alpine populations are known from northern Washington and in the Coast Range of southwestern British Columbia.
 
@@ -27,8 +26,7 @@ This species is widely distributed in dry open grasslands at low elevations thro
 
 *Cucullia strigata* is found in central Alberta, southern Rocky Mountain region, and western Nevada to the south of the Pacific Northwest. Northern California records are shown on the Moth Photographers Group website but not in Poole (1995).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

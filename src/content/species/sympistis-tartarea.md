@@ -22,8 +22,7 @@ This species is restricted to low hills on the western edge of the Snake River P
 
 This species is not known to us from outside of the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies in mid-September to early October. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

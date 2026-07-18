@@ -12,8 +12,7 @@ This species is rare and narrowly endemic to forests and scrublands along the Pa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Egira vanduzeei* has been found on the Pacific Coast in Curry County in southern Oregon in the Pacific Northwest.
 
@@ -21,8 +20,7 @@ This species is rare and narrowly endemic to forests and scrublands along the Pa
 
 This is an exclusively coastal species. It is found from our area to the central California Coast.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is narrowly endemic to rocky alpine tundra above timberline in the 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta caesia* occurs in the high mountains near the Pacific Coast from northern Washington to north-western British Columbia.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to rocky alpine tundra above timberline in the 
 
 *Lasionycta caesia* is a Pacific Northwest endemic and is not known from outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

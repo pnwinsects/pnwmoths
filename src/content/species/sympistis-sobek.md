@@ -22,8 +22,7 @@ This species is found on barren, rocky, serpentine ridgetops at moderate to high
 
 This species has been found on Mt. Shasta in the Cascade Range of northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies in the fall, from mid-August to mid-September. It is nocturnal and comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

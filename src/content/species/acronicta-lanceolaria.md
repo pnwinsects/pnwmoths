@@ -12,8 +12,7 @@ The habitat of this species is not known in the Pacific Northwest, but may inclu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta lanceolaria* has only been found at three locations in the Pacific Northwest, one in southeastern British Columbia, one in northern Idaho, and one in southeastern Washington.
 
@@ -21,8 +20,7 @@ The habitat of this species is not known in the Pacific Northwest, but may inclu
 
 The range of this species extends to the East Coast from our region. It has been collected in Alberta. The range in the East is from Massachusetts to New Jersey west to Manitoba and Kansas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

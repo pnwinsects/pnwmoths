@@ -14,8 +14,7 @@ This species is widely distributed throughout the Rocky Mountains at high elevat
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta promulsa* is limited to British Columbia in the Pacific Northwest where it has been collected in the southern third of the province and on Pink Mountain in the northeast. It is likely to be more widespread than these records suggest because it occurs in southern Yukon Territory and in western Alberta.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout the Rocky Mountains at high elevat
 
 This species is found near the British Columbia border in southwestern Yukon Territory and in western Alberta. It also occurs in the central and southern Rocky Mountains in Utah, Colorado, and southern New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

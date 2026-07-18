@@ -14,8 +14,7 @@ This species is established in agricultural areas where it was introduced a deca
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Tyta luctuosa* was first known in the Pacific Northwest from the Willamette Valley in western Oregon. It has now been found in south-eastern Washington.
 
@@ -23,8 +22,7 @@ This species is established in agricultural areas where it was introduced a deca
 
 This species is native to the Old World where it occurs from central and southern Europe and northern Africa to central Asia (Goater et al. 2003). Attempts to introduce this species have been made at several locations in North America, including on the East Coast and Great Plains.
 
-## Life
-History
+## Life History
 
 ##### Adults
 

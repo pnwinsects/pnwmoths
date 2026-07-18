@@ -22,8 +22,7 @@ This species is found in subalpine parkland at high elevations in the mountains,
 
 This species also occurs in the mountains of western Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -33,8 +32,7 @@ No information is presently available regarding larval foodplants of this specie
 
 Adults fly during the day and visit flowers. They are on the wing during July and August.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

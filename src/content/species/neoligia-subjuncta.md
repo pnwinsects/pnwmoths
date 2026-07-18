@@ -14,8 +14,7 @@ This species flies in forests and meadow habitats from low elevations to high el
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Neoligia subjuncta* is found throughout British Columbia, including on Vancouver Island, as far north as the Peace River region. South of Canada it occurs in northeastern Washington, northern and southeastern Idaho, and in the Blue Mountains of eastern Oregon.
 
@@ -23,8 +22,7 @@ This species flies in forests and meadow habitats from low elevations to high el
 
 The range of *N. subjuncta* extends across northern North America from Alaska to Nova Scotia and Maine. Its range extends south to Colorado and northern Arizona in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

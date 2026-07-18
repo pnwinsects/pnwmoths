@@ -12,8 +12,7 @@ This species occurs in moist forest and riparian habitats.  It is rarely collec
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane disposita* has been collected in the Blue Mountains of southeastern Washington. It probably occurs further east in Idaho.
 
@@ -21,8 +20,7 @@ This species occurs in moist forest and riparian habitats.  It is rarely collec
 
 This moth is a predominantly eastern North American species. It occurs from southern Canada, Illinois, and Iowa to northern Georgia in the hardwood forest region. The range extends west to Alberta and the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

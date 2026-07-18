@@ -14,8 +14,7 @@ This species is widely distributed in drier habitats throughout much of western 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis major* is widely distributed in our area. It occurs as far north as the Peace River in northeastern British Columbia and also occurs in the central and southern parts of the province. The range extends south through Washington, Idaho, and Oregon east of the Cascade divide. It is absent from xeric steppe habitats in the central portion of our interior basins.
 
@@ -23,8 +22,7 @@ This species is widely distributed in drier habitats throughout much of western 
 
 This species is widely distributed in the American West, occurring south through California and the Intermountain region. It also occurs in the western Great Plains and Rocky Mountain region, at least as far south as Colorado, southern Arizona, and the Texas Panhandle. *Sympistis riparia* is found further east, reaching the Atlantic via the Prairie Provinces, upper Midwest, and southeastern Canada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

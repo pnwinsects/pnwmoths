@@ -16,8 +16,7 @@ This species is common and widely distributed in cool, moist forest habitats.  
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta insita* is nearly ubiquitous in forests in our region, including on both sides of the Cascade Range.
 
@@ -25,8 +24,7 @@ This species is common and widely distributed in cool, moist forest habitats.  
 
 This species is found in northern California and across boreal North America to the Atlantic. It is most commonly found near the Canada-United States border across most of its range, but it is found from Newfoundland to Georgia near the Atlantic Coast. It has been found to central Alberta and Manitoba in central Canada and as far south as western Wyoming in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is widely distributed in moist forests across Canada, extending wes
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Mniotype tenera* is found along the Pacific Coast, including on Haida Gwaii (Queen Charlotte Islands). It also flies in the mountains and boreal forests of interior British Columbia, in the Cascades of Oregon and Washington, and in the Rocky Mountain region. It has been found in the Basin and Range province in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests across Canada, extending wes
 
 The range extends north along the Pacific Coast through the Alaska Panhandle (the type locality of *Hadena tenera* Smith is Kukak Bay, Alaska at the base of the Alaska Peninsula). It is widespread in boreal Canada from Alberta east to Newfoundland and Labrador, south to New England and New York in the East. It is also found in the Sierra Nevada, California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

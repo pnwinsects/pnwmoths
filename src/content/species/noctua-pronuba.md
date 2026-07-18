@@ -12,8 +12,7 @@ This exotic species is widely distributed across Eurasia.  It was accidentally 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Noctua pronuba* has now spread to the entire Pacific Northwest (2011) and is common in most habitats. It has yet to be collected at high elevations in the Coast Range in southeastern British Columbia but will probably reach this region eventually because it occurs at high elevations in the northern Cascade Mountains in Washington.
 
@@ -21,8 +20,7 @@ This exotic species is widely distributed across Eurasia.  It was accidentally 
 
 This species is native to Eurasia. It was accidentally introduced to eastern Canada and has since spread to most of North America south of southern Canada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

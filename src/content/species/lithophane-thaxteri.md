@@ -20,8 +20,7 @@ This species is widely distributed in boreal and montane wet forests and bogs. 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane thaxteri* is found along the West Coast and in the boreal forest zone of southern Canada and northeastern Washington, extending south to the Blue Mountains and through the Cascades of Oregon. The range likely extends to northern British Columbia.
 
@@ -29,8 +28,7 @@ This species is widely distributed in boreal and montane wet forests and bogs. 
 
 This species is widely distributed in northern North America. It occurs from Alaska to New Brunswick, south to Oregon, the northern Great Lakes region, and southern New England.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

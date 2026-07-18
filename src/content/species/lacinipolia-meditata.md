@@ -14,8 +14,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia meditata* is restricted to the eastern part of the Northwest. It has been found in southeastern British Columbia and eastern Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed in moist forest and grassland habitats throug
 
 The range of this species extends east to the Atlantic Coast. It is found along the east slope of the Rocky Mountains from central Alberta to Colorado, then east to Nova Scotia to northern Florida.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

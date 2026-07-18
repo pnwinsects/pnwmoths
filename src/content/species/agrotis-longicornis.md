@@ -14,8 +14,7 @@ This species is narrowly endemic to sand dunes or dry, open areas with loose, sa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found in south-central and south-eastern Oregon in our region.
 
@@ -23,8 +22,7 @@ This species has been found in south-central and south-eastern Oregon in our reg
 
 *Agrotis longicornis* has a limited range in western North America. South of our region it is known from Modoc County in north-eastern California, central Nevada, and the central valley of California near Bakersfield.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

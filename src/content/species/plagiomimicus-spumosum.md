@@ -12,8 +12,7 @@ This species is common and widely distributed on dry prairies, open disturbed gr
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Plagiomimicus spumosum* is found in the dry interior steppe of the Northwest. It is most widely distributed in the Columbia Basin but also occurs near the Snake River in eastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed on dry prairies, open disturbed gr
 
 The distribution of *P. spumosum* is most extensive in the Great Plains region but reaches both coasts. The range extends from central and southern California and the Pacific Northwest north to Alberta and North Dakota, south to southern Texas and northern Florida, and east to South Carolina.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

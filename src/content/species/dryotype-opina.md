@@ -16,8 +16,7 @@ This species is narrowly endemic to the West Coast.  It occurs in open grasslan
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Dryotype opina* is found in the western part of the Pacific Northwest from southwestern British Columbia to southern Oregon.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to the West Coast.  It occurs in open grasslan
 
 The range of this species extends to southern California west of the summit of the Sierra Nevada. It does not occur further east.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

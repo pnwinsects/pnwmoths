@@ -16,8 +16,7 @@ This species is found in forests and brushlands.  In the Pacific Northwest, it 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pleromelloida cinerea* is found throughout the Pacific Northwest as far north as south-central British Columbia. It is less common west of the Cascades in Washington, but is more common in western Oregon. This species is not found in open steppe habitats.  It has been rarely collected in southern Idaho, possibly due to limited sampling during the fall.
 
@@ -25,8 +24,7 @@ This species is found in forests and brushlands.  In the Pacific Northwest, it 
 
 *Pleromelloida cinerea* is found in California south of the Pacific Northwest, reaching the border with Mexico. It is also found in extreme southwestern Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

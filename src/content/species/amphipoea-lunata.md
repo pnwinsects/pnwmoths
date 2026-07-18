@@ -12,8 +12,7 @@ This species is narrowly endemic to dry oak woodlands, oak savanna, and mixed ha
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Amphipoea lunata* has been collected in southwestern Oregon on both sides of the Cascade Mountains. The most northerly records are in Douglas County.
 
@@ -21,8 +20,7 @@ This species is narrowly endemic to dry oak woodlands, oak savanna, and mixed ha
 
 The range of this moth extends south through most of California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -8,7 +8,7 @@ This species is similar to red-orange and dark forms of *Spilosoma vagans*. *Spi
 
 *Phragmatobia fuliginosa* is also small dark and reddish. It is easily told from *S. pteridis* by its hindwing base.
 
-Specimens of *Spilosoma *from northern British Columbia are smaller, duller, and darker than most *S. pteridis* from elsewhere in the Pacific Northwest. Based on limited material, females of the northern population are more similar to the males than in the populations from farther south.
+Specimens of *Spilosoma* from northern British Columbia are smaller, duller, and darker than most *S. pteridis* from elsewhere in the Pacific Northwest. Based on limited material, females of the northern population are more similar to the males than in the populations from farther south.
 
 ## Habitat
 

@@ -12,8 +12,7 @@ This species is common and widely distributed across Canada in moist forest and 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Ipimorpha* *pleonectusa* is uncommon in the Northwest, with scattered records from southern British Columbia, central Washington, and southeastern Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed across Canada in moist forest and 
 
 The range of this species extends across North America to the Atlantic Coast. The northern limit is southern Canada, furthest north in central Alberta. The southern limit is Virginia along the East Coast, Oklahoma on the Great Plains, and southern California in the West. Relatively few records are shown for the west on the Moth Photographers Group web site suggesting that it is rare in this region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

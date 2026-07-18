@@ -12,8 +12,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Spiramater lutra* is widely distributed in forests throughout our region, including west of the Coast and Cascade Mountains. It is absent from dry pine forests and steppe habitats.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 This species is widely distributed in the Canadian and Upper Austral Life Zones across the Continent. It ranges east across southern Canada to Newfoundland. The southern limits of the range are North Carolina in the East, South Dakota and Wisconsin in the central Continent, Colorado in the Rocky Mountains, and California along the Pacific Coast. It does not occur in the Great Basin region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is common and widely distributed in montane forest habitats through
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta perplexa* is widely distributed in the forests of our region from the crests of the Coast and Cascade Ranges and east. It has not been found in the isolated mountain ranges in the Basin and Range province of southeastern Oregon or southern Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in montane forest habitats through
 
 This species is predominantly distributed in the mountains of western North America, with a disjunct occurrence along the east shore of Hudson Bay in Quebec. It is found as far north as the vicinity of Anchorage, Alaska and extends south to New Mexico in the Rocky Mountains and the Sierra Nevada in California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

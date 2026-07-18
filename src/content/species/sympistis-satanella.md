@@ -14,8 +14,7 @@ This species is endemic to very dry sagebrush steppe on sand soils. It is not cl
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis satanella* is found in southeastern Oregon in our region. It is known from three localities, one in Lake County, two in northern Malheur County, and one near Denio, Nevada, in southern Harney County.
 
@@ -23,8 +22,7 @@ This species is endemic to very dry sagebrush steppe on sand soils. It is not cl
 
 This species extends southward into the Great Basin region of Nevada, and has also been found in western Wyoming near the eastern end of the Snake River Plain.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

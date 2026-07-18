@@ -14,8 +14,7 @@ No specific information is available regarding habitat preferences for this spec
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Ulolonche dilecta* has been found in Klamath County, Oregon in the Northwest.
 
@@ -23,8 +22,7 @@ No specific information is available regarding habitat preferences for this spec
 
 This species occurs in Nevada and California outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is common and widely distributed along the West Coast in moist fore
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane pertorrida* is found west of the Cascades in Oregon, and in the interior of our region from central British Columbia through eastern Washington and Oregon. It is most commonly collected at low elevations in forests and is absent from dry open steppe habitats.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed along the West Coast in moist fore
 
 The range of this species extends south through California from the Northwest, reaching the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

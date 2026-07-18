@@ -12,8 +12,7 @@ This species is widely distributed in moist forests across North America.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Platypolia anceps* is found in British Columbia, likely north to the Yukon border. It has also been collected in the Cascade Range of northern Oregon.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests across North America.
 
 This moth is widespread across boreal North America, mostly across Canada but ranging south to the northern parts of the Great Lakes States and New England. It occurs further south to North Carolina and Colorado in the mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

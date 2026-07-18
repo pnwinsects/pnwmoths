@@ -6,7 +6,7 @@ This is our only member of a genus with several morphological peculiarities, inc
 
 This species can be told from similar size and color moths in the family Erebidae by the straight pale subterminal line on the forewing.
 
-This moth has been known previously as *Z. lutalba *(Smith)and* Z. bryanti *Barnesin the West. These names are now used as subspecies of *Z. jacchusalis*, following Lafontaine and Honey (2009) and Lafontaine and Schmidt (2013). Subspecies *Z. j. lutalba* is dull gray brown. It occurs in eastern and central British Columbia in our region. The other PNW subspecies, *Z. j. bryanti*, is warmer brown and its terminal forwing is slightly darker in most individuals.
+This moth has been known previously as *Z. lutalba* (Smith) and *Z. bryanti* Barnes in the West. These names are now used as subspecies of *Z. jacchusalis*, following Lafontaine and Honey (2009) and Lafontaine and Schmidt (2013). Subspecies *Z. j. lutalba* is dull gray brown. It occurs in eastern and central British Columbia in our region. The other PNW subspecies, *Z. j. bryanti*, is warmer brown and its terminal forwing is slightly darker in most individuals.
 
 ## Habitat
 

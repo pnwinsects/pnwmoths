@@ -18,8 +18,7 @@ This species is widely distributed across Canada and in the Rocky Mountains in b
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia fabulosa* occurs in the Coast Range in southwestern British Columbia, the northern Cascade Range in Washington, and in the Selkirk Range in extreme north-eastern Washington. It is likely more widespread in British Columbia and northern Idaho.
 
@@ -27,8 +26,7 @@ This species is widely distributed across Canada and in the Rocky Mountains in b
 
 Outside of the Northwest this species occurs across boreal and subarctic North America from central Yukon to Labrador and northern New England. It is also found in the Rocky Mountains in Alberta and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

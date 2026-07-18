@@ -8,7 +8,7 @@ This rare species can be confused with the more common species *Drasteria howlan
 
 ## Habitat
 
-*Drasteria stretchii *is a rare species found in dry, rocky canyons at low to middle elevations within the Snake River drainage.
+*Drasteria stretchii* is a rare species found in dry, rocky canyons at low to middle elevations within the Snake River drainage.
 
 ## Distribution
 

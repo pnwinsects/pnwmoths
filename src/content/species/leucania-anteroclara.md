@@ -14,8 +14,7 @@ This species is widely distributed at low elevations east of the Cascades in wet
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Leucania anteroclara* is a species of the interior basins. It is found in the Columbia Basin in Washington, southeastern Oregon, and southern Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed at low elevations east of the Cascades in wet
 
 According to Poole (nearctica.com) *L. anteroclara* is a species of the Rocky Mountain region where it occurs from Alberta to New Mexico. It has also been recorded from Nebraska, southern Nevada, and southeastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

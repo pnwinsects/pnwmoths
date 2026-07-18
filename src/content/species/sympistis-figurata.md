@@ -20,8 +20,7 @@ This species is widely distributed in forests throughout much of western North A
 
 This species has the widest distribution of any member of its species group. It is found throughout most of California, and from there across the Intermountain Region to Colorado, New Mexico, and Texas. The range extends at least to Montana in the Rocky Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 The flight period of *S. figurata* is summer, with records from late May to early August. It is most common in late June and early July. It is a nocturnal species that comes to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

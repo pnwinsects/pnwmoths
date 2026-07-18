@@ -16,8 +16,7 @@ In the Pacific Northwest, it is found at middle elevations in the Coast Range, t
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Alypia langtoni* is found in mid-elevation forests throughout the Pacific Northwest. It also occurs at low elevations to the west of the Cascade Mountains.
 
@@ -25,8 +24,7 @@ In the Pacific Northwest, it is found at middle elevations in the Coast Range, t
 
 This species is very widely distributed in the boreal and montane portions of North America. It is found from Alaska and the northern portions of Yukon Territory and Nunavut south to southern California and Arizona. The range is more restricted in the East where it occurs in a narrow north-south band through southern Canada and the northern United States.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

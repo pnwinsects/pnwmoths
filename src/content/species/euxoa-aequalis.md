@@ -33,7 +33,7 @@ This species is widely distributed in coniferous forests.  It is found in a var
 
 ### Global
 
-This species has a large range in western North America, occurring from Manitoba and western Nebraska west to British Columbia, northern New Mexico and Arizona, and southern California. A disjunct subspecies, *E. a. yukonensis, *occurs in southern Yukon Territory just north of the border with British Columbia.
+This species has a large range in western North America, occurring from Manitoba and western Nebraska west to British Columbia, northern New Mexico and Arizona, and southern California. A disjunct subspecies, *E. a. yukonensis,* occurs in southern Yukon Territory just north of the border with British Columbia.
 
 ## Life History
 

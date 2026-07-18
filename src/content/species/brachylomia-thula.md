@@ -18,7 +18,7 @@ This species is very common in riparian habitats along creeks, rivers, and coas
 
 ### Global
 
-This moth has been recorded from northwestern California to the south of the Northwest region. *Brachylomia thula* is replaced by the similar species* B. sierra* is south-central Oregon and in the Sierra Nevada.
+This moth has been recorded from northwestern California to the south of the Northwest region. *Brachylomia thula* is replaced by the similar species *B. sierra* is south-central Oregon and in the Sierra Nevada.
 
 ## Life History
 

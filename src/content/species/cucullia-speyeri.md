@@ -12,8 +12,7 @@ This species is widely distributed in open meadows, dry grasslands, and native p
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia speyeri* has a limited distribution in our area, in a narrow band that includes southern British Columbia and eastern Washington. It appears to be replaced by *C. dorsalis* in other steppe regions further south.
 
@@ -21,8 +20,7 @@ This species is widely distributed in open meadows, dry grasslands, and native p
 
 This species is found south of the boreal forest and north of the deep South from Alberta and Montana to the Atlantic Coast from New Hampshire to Virigina.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

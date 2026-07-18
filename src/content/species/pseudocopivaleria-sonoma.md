@@ -12,8 +12,7 @@ This species is at its northern range limit in Oregon.  It is usually very rare
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pseudocopivaleria sonoma* is restricted to low elevation forests in western Oregon in the Northwest.
 
@@ -21,8 +20,7 @@ This species is at its northern range limit in Oregon.  It is usually very rare
 
 The range extends south through western California to the vicinity of Los Angeles. It is also found in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

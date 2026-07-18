@@ -14,8 +14,7 @@ This species is common and widely distributed in moist forests.  In the Pacific
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Hyppa contrasta* is found from central British Columbia and Haida Gwai (Queen Charlotte Islands) south through the low and middle elevation forests of our region, including those west of the Cascade and Coast Ranges. This is the only one of our three *Hyppa* species that is commonly collected at low elevations.
 
@@ -23,8 +22,7 @@ This species is common and widely distributed in moist forests.  In the Pacific
 
 This species is fairly widely distributed in North America. The range extends east from the Pacific Northwest to Newfoundland. It occurs south to Georgia in the Appalachian Mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

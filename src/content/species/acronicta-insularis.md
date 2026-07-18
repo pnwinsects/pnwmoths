@@ -12,8 +12,7 @@ This species is widely distributed in marshes.  In the Pacific Northwest, it is
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta insularis* is found in the dry interior steppe regions of eastern Washington, southeastern Oregon, and southern Idaho. It has also been collected in southeastern British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed in marshes.  In the Pacific Northwest, it is
 
 The range of *A. insularis* extends across the United States from Coast to Coast. The northern limits are in southern Canada, reaching furthest north in central Alberta. It occurs from Peninsular Florida to coastal southern California across Texas and southern Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

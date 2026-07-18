@@ -12,8 +12,7 @@ This is a relatively rare species endemic to dry forests of mixed hardwoods and 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane gausapata* occurs in the Cascade Range and Siskiyou Mountains of western Oregon in association with incense cedar.
 
@@ -21,8 +20,7 @@ This is a relatively rare species endemic to dry forests of mixed hardwoods and 
 
 The range of this species extends south into California where it occurs in the northern Cascades, Sierra Nevada, and mountains of the southwestern part of the state.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -16,8 +16,7 @@ This species is narrowly endemic to the West Coast.  It is common in oak savann
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Orthosia pacifica* is found in the western portion of the Pacific Northwest from southwestern British Columbia to southern Oregon. Unlike most species that have a western distribution, *O. pacifica* occurs along the east slope of the Cascade Mountains in Oregon and Washington.
 
@@ -25,8 +24,7 @@ This species is narrowly endemic to the West Coast.  It is common in oak savann
 
 The distribution of *O. pacifica* extends south to near the border with Mexico through California. It is most widespread along the Pacific Coast but also occurs in the northern Sierra Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

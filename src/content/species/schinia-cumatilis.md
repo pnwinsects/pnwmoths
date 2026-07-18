@@ -24,7 +24,7 @@ This species occurs widely on the western Great Plains from central Alberta and 
 
 ##### Larvae
 
-Hardwick reports seeing a female oviposit on *Artemisia frigida *(Asteraceae) in Alberta, but the use of this foodplant has not been confirmed.
+Hardwick reports seeing a female oviposit on *Artemisia frigida* (Asteraceae) in Alberta, but the use of this foodplant has not been confirmed.
 
 ##### Adults
 

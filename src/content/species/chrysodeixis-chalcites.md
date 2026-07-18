@@ -6,7 +6,7 @@
 
 This species should not be expected in the Northwest except as a pest associated with greenhouses. It can be identified by the large oval spot of the lateral stigma on a mottled warm brown and gray-brown forewing. Males are easily identified by the buff long scales on the sides of the abdomen as well as the black distal tuft. Only *Trichoplusia ni* has similar scales on the lateral abdomen, but this moth is mottled dull gray, the tufts are reddish brown, and the black distal tufts are also missing.
 
-The British Columbia infestation of this moth was referred to as *Chrysodeixis eriosoma* (Doubleday) until 2013 when it was realized that the correct identity was *C. chalcites *(Lafontaine & Schmidt 2013). These very similar species are agricultural pests, but *C. eriosoma* is more common in eastern Asia and *C. chalcites* in Africa and western Eurasia (Lafontaine & Schmidt op. cit.). The specimen illustrated on this site is *C. eriosoma*.
+The British Columbia infestation of this moth was referred to as *Chrysodeixis eriosoma* (Doubleday) until 2013 when it was realized that the correct identity was *C. chalcites* (Lafontaine & Schmidt 2013). These very similar species are agricultural pests, but *C. eriosoma* is more common in eastern Asia and *C. chalcites* in Africa and western Eurasia (Lafontaine & Schmidt op. cit.). The specimen illustrated on this site is *C. eriosoma*.
 
 ## Habitat
 
@@ -22,8 +22,7 @@ This species occupies disturbed agricultural and urban habitats thoughout the tr
 
 This species is widespread in Africa and western Eurasia, appearing elsewhere in the world as an introduced pest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

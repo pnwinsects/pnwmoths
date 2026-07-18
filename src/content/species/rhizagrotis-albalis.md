@@ -12,8 +12,7 @@ This species is widely distributed on dry prairies and in juniper woodlands.  I
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Rhizagrotis albalis* is found in the dry interior of our region. It is found in the Columbia Basin in Washington, most commonly in the western part. It is more widespread in southeastern Oregon and in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is widely distributed on dry prairies and in juniper woodlands.  I
 
 This moth is widely distributed to the south of the Northwest region. It is found from Colorado and the Texas Panhandle to eastern and southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

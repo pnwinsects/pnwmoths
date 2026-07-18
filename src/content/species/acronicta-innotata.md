@@ -12,8 +12,7 @@ This species is widely distributed in hardwood forests of eastern North America,
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta innotata* has an interesting distribution in the Northwest. It is found across the southern third of British Columbia and extends into the adjacent parts of northern Washington on both sides of the Cascades. It is absent from most of western Washington and the rest of the Cascades, but occurs in northwestern Oregon. It is also found in northern Idaho and in the Blue Mountains of Oregon and Washington.
 
@@ -21,8 +20,7 @@ This species is widely distributed in hardwood forests of eastern North America,
 
 The range of this species extends to the East Coast. It is not found south of the Pacific Northwest in western North America. The range extends to northern Alberta and then extends to the island of Newfoundland in a narrow north-south band near the Canada-United States border. Apparently, isolated records are found in the southern Appalachian Mountains to northern Georgia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

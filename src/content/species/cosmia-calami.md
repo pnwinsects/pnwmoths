@@ -16,8 +16,7 @@ This species is common in oak forests and oak woodlands throughout much of North
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cosmia calami* occurs most commonly west of the Cascade Mountains as far north as southwestern British Columbia. It has a more limited distribution east of the Cascades where it has been collected in Klamath County in Oregon and from Klickitat County to Kittitas County in south-central Washington.
 
@@ -25,8 +24,7 @@ This species is common in oak forests and oak woodlands throughout much of North
 
 This species is widely distributed in North America. It occurs from Nova Scotia across the Continent wherever oaks are found. The southern limits of its range are northern Florida, Texas, Arizona, and southern California and the northern limit is Manitoba.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

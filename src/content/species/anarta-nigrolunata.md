@@ -14,8 +14,7 @@ This species is widely distributed at high elevations throughout the Rocky Mount
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anarta nigrolunata* is found at high elevations throughout British Columbia. The range extends south in the Washington Cascades at least as far south as Mt. Adams. It is also found in the Olympic Mountains.
 
@@ -23,8 +22,7 @@ This species is widely distributed at high elevations throughout the Rocky Mount
 
 This species is widely distributed in the northern parts of North America from Alaska to Labrador. The range extends south to New Mexico, Utah, and Colorado in the Rocky Mountains. An isolated glacial relict population of this species flies on Mt. Washington in the White Mountains of New Hampshire.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

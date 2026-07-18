@@ -14,8 +14,7 @@ This species is widely distributed in open mountain meadows or on rocky ridgetop
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species is found across the southern third of British Columbia and in adjacent northeastern Washington. It occurs in the Cascade Range, most commonly along the east side of the crest, as far south as central Oregon.
 
@@ -23,8 +22,7 @@ This species is found across the southern third of British Columbia and in adjac
 
 The range of this species might be limited to the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

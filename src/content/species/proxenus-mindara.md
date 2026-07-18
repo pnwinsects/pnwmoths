@@ -12,8 +12,7 @@ This species is usually found in dry, open grasslands and agricultural areas at 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Proxenus mindara* is found in the dry interior of the Northwest, including southern British Columbia, Washington's Columbia Basin, southeastern Oregon, and the Snake River Plain of southern Idaho.
 
@@ -21,8 +20,7 @@ This species is usually found in dry, open grasslands and agricultural areas at 
 
 The range of this species extends south to southern California from the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

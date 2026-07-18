@@ -40,4 +40,4 @@ None.
 
 ## Literature
 
-Miller *et al. *(2018)
+Miller *et al.* (2018)

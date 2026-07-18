@@ -12,8 +12,7 @@ This species is mostly restricted to meadows and bogs at higher elevations in th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Northwest distribution of *E. unicincta* is the east slope of the Cascades of and Warner Mountains of Oregon.
 
@@ -21,8 +20,7 @@ The Northwest distribution of *E. unicincta* is the east slope of the Cascades o
 
 This is a West-Coast moth with a relatively small distribution. The range extends south to central California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

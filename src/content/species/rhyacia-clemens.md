@@ -12,8 +12,7 @@ This species is widely distributed on arid rangelands throughout much of western
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Rhyacia clemens* is widespread in the arid interior of Washington and Oregon. It does not occur west of the Cascade Range except in southwestern Oregon. A few records exist for south-central British Columbia.
 
@@ -21,8 +20,7 @@ This species is widely distributed on arid rangelands throughout much of western
 
 The Pacific Northwest is near the center of this species' distribution. The limits of the range are southern Yukon Territory, southern Alberta and Saskatchewan, eastern Nebraska, south-central Utah, and the Mono Lake region of eastern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ The small dark form of this species is found in wet meadows at middle to high el
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Resapamea innota* is found in eastern Washington and Oregon, and across central and southern Idaho.
 
@@ -23,8 +22,7 @@ The small dark form of this species is found in wet meadows at middle to high el
 
 This species occurs in the American west. It has been taken in the Rocky Mountains, the Basin and Range province, and northern and eastern California outside of the Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

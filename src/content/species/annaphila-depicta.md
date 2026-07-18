@@ -12,17 +12,15 @@ This species has been found in dry canyonlands with an herbaceous plant communit
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
-*Annaphila depicta* has only been found in Klickitat County in south-central Washington. This area resembles many areas in northern California where *A. depicta *occurs. It is possible that the reported occurrence of this species in the Northwest represents a misidentification of *A. macfarlandi*. However, the range of *A. depicta *extends to near the California-Oregon border and this species should be sought in southwestern Oregon.
+*Annaphila depicta* has only been found in Klickitat County in south-central Washington. This area resembles many areas in northern California where *A. depicta* occurs. It is possible that the reported occurrence of this species in the Northwest represents a misidentification of *A. macfarlandi*. However, the range of *A. depicta* extends to near the California-Oregon border and this species should be sought in southwestern Oregon.
 
 ### Global
 
 The range of *A. depicta* includes most of California west of the Sierra Nevada crest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is narrowly endemic to coastal rainforests in the Pacific Northwest
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pseudohermonassa flavotincta* is endemic to the north Pacific Coast of North America where it occurs between the Alaska Panhandle and central Oregon.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to coastal rainforests in the Pacific Northwest
 
 This species does not occur outside of our region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

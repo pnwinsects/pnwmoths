@@ -12,8 +12,7 @@ This species is widely distributed in moist forest habitats throughout eastern N
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Eucirroedia pampina* is found in eastern British Columbia, extreme north-eastern Washington, the Idaho panhandle, and western Montana in the Pacific Northwest. It has been collected most commonly in the southeast corner of British Columbia. It is probably more widespread in the eastern parts of Washington, Idaho, and Montana than the isolated records suggest since this part of the region has been collected rarely during the fall.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forest habitats throughout eastern N
 
 This species is found across southern Canada to eastern North America. The range in the East extends from Nova Scotia to Florida and Mississippi.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

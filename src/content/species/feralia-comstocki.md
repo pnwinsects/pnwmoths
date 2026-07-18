@@ -12,8 +12,7 @@ This species is widely distributed in moist conifer forests.  Habitats include 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Feralia comstocki* is found in moist conifer forests throughout most of the Pacific Northwest. It is more common in the northern part of our region than in the south. The southern limit appears to be the Blue Mountains in eastern Oregon, and possibly northern California along the West Coast. This species is probably more widespread in northern and central Idaho than current records suggest since this is a poorly sampled area.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist conifer forests.  Habitats include 
 
 The range of *F. comstocki* extends east to the Atlantic in the boreal forest region. Most records are from a narrow north-south zone near the Canada-United States border. The limits of the distribution are northern Newfoundland and New York along the Atlantic Coast, but the range extends south to northern Georgia in the Appalachian Mountains. It does not occur in the Rocky Mountains south of Idaho.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

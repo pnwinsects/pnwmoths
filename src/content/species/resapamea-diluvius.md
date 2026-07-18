@@ -8,7 +8,7 @@ This moth is most likely to be confused with *Resapamea passer*, a much more com
 
 ## Habitat
 
-*Resapamea diluvius *flies over sandy soils in the dry interior of the Pacific Northwest and is most commonly found in dunes.
+*Resapamea diluvius* flies over sandy soils in the dry interior of the Pacific Northwest and is most commonly found in dunes.
 
 ## Distribution
 

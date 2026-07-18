@@ -14,8 +14,7 @@ This species is rather uncommon and narrowly restricted to moist riparian habita
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lacinipolia rectilinea* is found in southwestern British Columbia, the Willamette Valley of western Oregon, and in the Columbia Basin.
 
@@ -23,8 +22,7 @@ This species is rather uncommon and narrowly restricted to moist riparian habita
 
 This species is recorded from western California as far south as the vicinity of San Luis Obispo County on the Moth Photographers Group web site.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

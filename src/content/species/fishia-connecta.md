@@ -12,8 +12,7 @@ This species flies in low to mid-elevation dry, open sagebrush steppe and open j
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Fishia connecta* has been found in south-central Oregon in our region.
 
@@ -21,8 +20,7 @@ This species flies in low to mid-elevation dry, open sagebrush steppe and open j
 
 This species is rare across its range. The few records shown on the Moth Photographers Group web site are from California and southern Arizona. It is probably widespread in the Intermountain region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

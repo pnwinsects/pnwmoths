@@ -14,8 +14,7 @@ This species is found in western North American riparian forests with cottonwood
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Anathix aggressa* is found in the dry interior of our region as far north as the northwestern Columbia Basin in Washington. It occurs in far eastern Oregon as well as on the Snake River Plain in southern Idaho.
 
@@ -23,8 +22,7 @@ This species is found in western North American riparian forests with cottonwood
 
 This species is found on the Great Plains from central Alberta and Saskatchewan to Missouri, Oklahoma, and Colorado. It also occurs in the Intermountain region and in southern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

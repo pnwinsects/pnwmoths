@@ -12,8 +12,7 @@ This species is common and widely distributed throughout the Pacific Northwest i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cryphia cuerva* is commonly encountered east of the Cascades and Coast Mountains as far north as south-central British Columbia. It occurs uncommonly west of the Cascades but has been collected in the San Juan Islands in Washington and in the Siskiyou Mountains in southwestern Oregon.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed throughout the Pacific Northwest i
 
 This is a West Coast species. It occurs widely in northern California, and along the coast to the southwestern part of the state. It has also been collected in extreme southwestern Alberta.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

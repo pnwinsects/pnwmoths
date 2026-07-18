@@ -6,7 +6,7 @@
 
 The moth figured above is a specimen of *Schinia cupes*, a species that does not occur in our area. This species and *S. crotchii* are superficially identical but differ structurally in that the abdomen of *S. cupes* has hair pencils that *S. crotchii* lack and by differences in the number of coils in the male vesica (4 in *S. cupes* and 3 in *S. crotchii*).
 
-*Schinia crotchii* is similar to *Schinia deserticola* but is much darker on both wings. The ground color of *S. deserticola* is described as "dirty white" by Pogue and Harp (2003). *Schinia crotchii* bears some resemblance to *Schinia nuchalis*. This species is larger and has an even pale subterminal line, not irregular as in *S. crotchii*. Some species of *Anarta *in the tribe Hadenini of the subfamily Noctuinae bear a superficial resemblance to *S. crotchii*. They have a prominent claviform spots and have hairs on the surface of the eye, both features absent in *S. crotchii*.
+*Schinia crotchii* is similar to *Schinia deserticola* but is much darker on both wings. The ground color of *S. deserticola* is described as "dirty white" by Pogue and Harp (2003). *Schinia crotchii* bears some resemblance to *Schinia nuchalis*. This species is larger and has an even pale subterminal line, not irregular as in *S. crotchii*. Some species of *Anarta* in the tribe Hadenini of the subfamily Noctuinae bear a superficial resemblance to *S. crotchii*. They have a prominent claviform spots and have hairs on the surface of the eye, both features absent in *S. crotchii*.
 
 ## Habitat
 

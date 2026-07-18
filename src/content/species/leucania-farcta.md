@@ -14,8 +14,7 @@ This species is widely distributed throughout western North America in moist for
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Leucania farcta* is widely distributed in the Northwest as far north as south-central British Columbia. It is found both on the east and west sides of the Cascade and Coast Ranges.
 
@@ -23,8 +22,7 @@ This species is widely distributed throughout western North America in moist for
 
 The range of *L. farcta* extends from the Rocky Mountains to the Pacific Ocean. The northern limit is southwestern Alberta and southern British Columbia. The range extends to the border with Mexico in Arizona and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

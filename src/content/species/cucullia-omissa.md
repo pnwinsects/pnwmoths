@@ -12,8 +12,7 @@ This species is widely distributed across Canada in open areas of cool, moist fo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia omissa* is found in forests on both sides of the Cascade Range as far north as southern British Columbia in our region. It appears to be more common in British Columbia and forests in the eastern part of the region than in the Cascades or further west.
 
@@ -21,8 +20,7 @@ This species is widely distributed across Canada in open areas of cool, moist fo
 
 This species has a transcontinental range, occurring in a relatively narrow north-south distribution near the Canada-United States border to New England and Newfoundland. The range extends south to Kentucky in the Appalachian Mountains and Colorado, Utah, and northeastern Nevada in the Rocky Mountains. It also occurs in northern California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

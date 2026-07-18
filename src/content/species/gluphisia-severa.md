@@ -8,7 +8,7 @@ This species can be identified by its spring flight period, hoary dark gray colo
 
 ##### Larvae
 
-The larva is smooth, slender, and bluish-green, with a very thin yellow stripe along each side and many small yellow spots. It is depicted by Miller* et al. *(2018).
+The larva is smooth, slender, and bluish-green, with a very thin yellow stripe along each side and many small yellow spots. It is depicted by Miller *et al.* (2018).
 
 ## Habitat
 

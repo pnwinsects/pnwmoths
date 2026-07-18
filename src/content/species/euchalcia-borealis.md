@@ -14,8 +14,7 @@ This species has been collected in boreal forest and alpine tundra.
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found at two sites in northern British Columbia, the type locality in the northwestern part of the province and the top of Pink Mountain near the Alaska Highway.
 
@@ -23,8 +22,7 @@ This species has been found at two sites in northern British Columbia, the type 
 
 This species has not been collected outside of British Columbia.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

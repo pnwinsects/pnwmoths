@@ -24,7 +24,7 @@ important in helping to narrow the possibilities.
 
 ## Habitat
 
-This species is found in dry conifer forests along the West Coast.  In the Pacific Northwest, it is common in middle-elevation dry ponderosa pine forests along the east slope of the Cascades and in the Blue Mountains. It is rarer in higher elevation dry meadows.  It is replaced by *E. castanea *in the northern and eastern parts of our region.
+This species is found in dry conifer forests along the West Coast.  In the Pacific Northwest, it is common in middle-elevation dry ponderosa pine forests along the east slope of the Cascades and in the Blue Mountains. It is rarer in higher elevation dry meadows.  It is replaced by *E. castanea* in the northern and eastern parts of our region.
 
 ## Distribution
 

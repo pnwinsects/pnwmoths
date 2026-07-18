@@ -16,8 +16,7 @@ This species replaces *X. vernilis* along the West Coast.  It is moderately com
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The Northwest distribution of *X. finatimis* is similar to that of *X. infimatis*. It occurs across southern British Columbia, Washington, northern Idaho, and western Montana from the Pacific to the west slope of the Rocky Mountains. It is found throughout Oregon, including mountains in the Great Basin region of the southeast, but it has not been found in southern Idaho.
 
@@ -25,8 +24,7 @@ The Northwest distribution of *X. finatimis* is similar to that of *X. infimatis
 
 This species is only found in California outside the Northwest. The range extends to near the border with Mexico in the western part of the state.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

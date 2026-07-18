@@ -12,8 +12,7 @@ This species is widely distributed on dry sagebrush steppe at low elevations eas
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sideridis fuscolutea* is found in the dry interior of the Pacific Northwest as far north as southern British Columbia. It has been most frequently collected in the Columbia Basin of Washington and appears to be found elsewhere uncommonly.
 
@@ -21,8 +20,7 @@ This species is widely distributed on dry sagebrush steppe at low elevations eas
 
 This species is found in the American West. The range outside of the Pacific Northwest is poorly known to us, but there are records from the Great Plains in Alberta and Wyoming and in the Great Basin in northern Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

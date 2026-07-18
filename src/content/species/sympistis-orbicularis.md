@@ -12,8 +12,7 @@ This species is usually very rare and sporadic on dry sagebrush steppe near basa
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis orbicularis* is only known from the Great Basin region of central and eastern Oregon.
 
@@ -21,8 +20,7 @@ This species is usually very rare and sporadic on dry sagebrush steppe near basa
 
 The range of *S. orbicularis* extends south through Utah, Nevada, and California.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

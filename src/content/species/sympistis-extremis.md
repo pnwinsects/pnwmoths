@@ -20,8 +20,7 @@ This species is primarily found at high elevations in the Cascades on open ridge
 
 This species is also known from northern California and Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
@@ -31,8 +30,7 @@ No information is presently available regarding larval foodplants of this specie
 
 This species flies during the late summer and fall, slightly earlier in the season than *S. chorda*. It has been collected from mid-July to early September in our area. It is nocturnal and comes readily to lights.
 
-## Economic
-Importance
+## Economic Importance
 
 None.
 

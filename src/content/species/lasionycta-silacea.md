@@ -14,8 +14,7 @@ This species is narrowly endemic to high elevations in the northern Cascades and
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta silacea* has a fairly small range that is nearly limited to the Pacific Northwest. It occurs in the mountains near the Pacific Coast from the southern Cascade Range in Washington to the British Columbia Coast Range near Kleena Kleene west of Williams Lake. The range extends east just north of the Canada-United States border to extreme southwestern Alberta.
 
@@ -23,8 +22,7 @@ This species is narrowly endemic to high elevations in the northern Cascades and
 
 This species is only known from the vicinity of Waterton Provincial Park in southwestern Alberta outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

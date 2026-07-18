@@ -11,7 +11,7 @@ orbicular and reniform spots are inconspicuous, black filled
  with a light shade of the ground color. The oval orbicular spot usually contains a dark ocellus. The claviform spot is a black smudge. The hindwing is velvety black, including the fringe. The 
 head and thorax are powdery, similar to the forewing. The male antenna is filiform.
 
-This species can be identified by its small size, a dark gray forewing with white bands across the subterminal areas, and a black hindwing. It is most similar to two species of *Sympistis*: *S. aterrima *and *S. parvanigra*. These moths have pale band-like areas on the dorsal hindwing that are lacking in *S. groteana*.  In addition, they are found further to the west in the Cascade and Siskiyou Mountains of British Columbia, Washington, and Oregon.
+This species can be identified by its small size, a dark gray forewing with white bands across the subterminal areas, and a black hindwing. It is most similar to two species of *Sympistis*: *S. aterrima* and *S. parvanigra*. These moths have pale band-like areas on the dorsal hindwing that are lacking in *S. groteana*.  In addition, they are found further to the west in the Cascade and Siskiyou Mountains of British Columbia, Washington, and Oregon.
 
 ##### Larvae
 
@@ -23,8 +23,7 @@ The habitat for this species in southern Idaho is bunchgrass in open juniper for
 
 ## **Distribution**
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This moth has been collected twice at the same locality in southeastern Idaho.
 
@@ -32,8 +31,7 @@ This moth has been collected twice at the same locality in southeastern Idaho.
 
 The *Stylopoda groteana* is found in the southern Rocky Mountain region, central Arizona, and southern California.
 
-## **Life
-History**
+## Life History
 
 ##### Larvae
 

@@ -16,8 +16,7 @@ This species is endemic to oak forests along the West Coast.  In the Pacific No
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 The distribution of *A. marmorata* closely parallels the distribution of oak trees in the Northwest. It is predominantly found west of the Cascades from southern Vancouver Island to southwestern Oregon. It occurs through the Columbia Gorge to the east slope of the Cascades where oaks occur from Wasco County, Oregon north to Kittitas County, Washington.
 
@@ -25,8 +24,7 @@ The distribution of *A. marmorata* closely parallels the distribution of oak tre
 
 The range of this species is limited to California outside of our region. It has been commonly found from west of the Sierra Nevada crest to the Pacific Ocean, and south to the border with Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -12,8 +12,7 @@ This species is endemic to dry grasslands or sagebrush steppe at low elevations 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Heliothis acesias* is known from far eastern Oregon and the Snake River Plain in southern Idaho.
 
@@ -21,8 +20,7 @@ This species is endemic to dry grasslands or sagebrush steppe at low elevations 
 
 The range of this species extends east across the northern Great Plains. Midwestern and eastern populations are found in the Great Lakes Region and along the St. Lawrence River, respectively. It has also been found in northeastern Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

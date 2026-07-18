@@ -6,7 +6,7 @@
 
 Males of this species can be identified by their southeast Idaho distribution, gray color, and very wide antennae. The forewings are similar to those of *Notodonta torva*, which is found in British Columbia, but *C. lunata* lacks a posterior flange on the posterior margin of the forewing and a pale halo around the discal spot that are present in this species.
 
-This species is placed in the genus *Cecrita* Walker in a check list of New World prominents (Becker 2014), having previously been placed in the genus *Heterocampa *Doubleday.
+This species is placed in the genus *Cecrita* Walker in a check list of New World prominents (Becker 2014), having previously been placed in the genus *Heterocampa* Doubleday.
 
 ## Habitat
 

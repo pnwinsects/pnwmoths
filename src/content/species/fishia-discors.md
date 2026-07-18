@@ -18,8 +18,7 @@ This species is widely distributed in forest and woodland habitats throughout mu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Fishia discors* is widespread and common in the Pacific Northwest as far north as central British Columbia. It is most common and widespread east of the Cascades and occurs as far east as the Idaho Panhandle and adjacent southeastern British Columbia. It appears to be absent from southern Idaho. This moth is less common west of the Cascades, especially north of the Columbia River.
 
@@ -27,8 +26,7 @@ This species is widely distributed in forest and woodland habitats throughout mu
 
 This species is widespread in the American West from the western Great Plains to the Pacific Coast. It occurs throughout California and in the Intermountain Region south of the Pacific Northwest. On the Plains it is found from western Manitoba and central Alberta south to southern New Mexico.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

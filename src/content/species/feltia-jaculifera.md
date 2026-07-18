@@ -18,8 +18,7 @@ This species is widely distributed in open grassland and prairie habitats throug
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Feltia jaculifera* is found throughout much of our region south of south-central and eastern British Columbia. It is most widely distributed in dry habitats east of the Cascade Mountains.  It is less widely distributed west of the Cascades, although it is common in the Olympic Mountain rain shadow in southwestern British Columbia and northwestern Washington and in the Willamette Valley of western Oregon.
 
@@ -27,8 +26,7 @@ This species is widely distributed in open grassland and prairie habitats throug
 
 This species is common across large parts of North America from coast to coast. The northern limits of its range are the St. Lawrence Seaway in Quebec, Ontario near Lake Superior, south-central Northwest Territory, and central Alaska. It is found south to the Florida Panhandle and northwestern Mexico although it has not been found in southern Nevada or California south of the San Francisco Bay region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

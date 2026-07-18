@@ -12,8 +12,7 @@ This species is common in forest and brushland habitats.  In the Pacific Northw
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Pleromelloida conserta* is widely distributed in forests throughout the Pacific Northwest, at least as far north as central interior British Columbia. It occurs in riparian zones of arid areas but is absent from open steppe regions such as the central Columbia Basin.
 
@@ -21,8 +20,7 @@ This species is common in forest and brushland habitats.  In the Pacific Northw
 
 This species is found along the west Coast from the Pacific Northwest to southern California. East of our region it is known from Alberta and the Rocky Mountain states to Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

@@ -14,8 +14,7 @@ This species is widely distributed in dry low-elevation grasslands throughout mu
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia eulepis* is found in the dry interior regions of the Pacific Northwest, most commonly in the Columbia Basin and southeastern Oregon. It has also been collected in southern Idaho. The northern limit is in west-central British Columbia near Lillooet.
 
@@ -23,8 +22,7 @@ This species is widely distributed in dry low-elevation grasslands throughout mu
 
 The range includes most of California, Nevada, and western Arizona south of our region. It also occurs in Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

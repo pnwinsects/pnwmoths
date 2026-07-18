@@ -14,8 +14,7 @@ This species is found in relatively dry forest and rangeland habitats east of th
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 This species has been found east of the Cascades and Coast Ranges in southern British Columbia, on the east slope of the Cascades and the Blue Mountains in Washington, in the Blue Mountains in central Oregon, and in south-central Idaho. It has not been found in the Cascade Range in Oregon nor in the southeastern part of this state.
 
@@ -23,8 +22,7 @@ This species has been found east of the Cascades and Coast Ranges in southern Br
 
 The range of *N. albirena* extends to northern California, Wyoming, Utah, Nevada, and Colorado outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

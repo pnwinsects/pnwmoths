@@ -12,8 +12,7 @@ This species is widely distributed at high elevations in subalpine spruce-fir fo
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lasionycta fergusoni* is found at middle to high elevations in southern and eastern British Columbia, northern Idaho, and northern Washington.
 
@@ -23,8 +22,7 @@ The similar species *Lasionycta conjugata* flies in the Rocky Mountains of Color
 
 *Lasionycta fergusoni* is found in the Rocky Mountains of western Alberta and in southern Yukon Territory outside of the Pacific Northwest.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

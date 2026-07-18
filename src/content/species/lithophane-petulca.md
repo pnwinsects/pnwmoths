@@ -12,8 +12,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lithophane petulca* is widely distributed in forests throughout much of the Pacific Northwest. It occurs widely west of the Cascades. East of the Cascades it is found in boreal forests of central and southern British Columbia, northeastern Washington, and the Idaho Panhandle.
 
@@ -21,8 +20,7 @@ This species is widely distributed in moist forests throughout much of North Ame
 
 This species is widely distributed in North America. It occurs in northern California along the West Coast. The range extends eastward across the Canadian Prairie Provinces. It is found from southern Canada to Illinois and South Carolina in the East.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

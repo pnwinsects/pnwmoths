@@ -12,8 +12,7 @@ This species replaces *I. pleonectusa* and *I. viridipallida* west of the Casca
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Ipimopha nanaimo* is found west of the Cascade Mountains from southern Oregon to west-central British Columbia.
 
@@ -21,8 +20,7 @@ This species replaces *I. pleonectusa* and *I. viridipallida* west of the Casca
 
 This species is found in the West Coast states. It is found in western California as far south as the vicinity of Los Angeles.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

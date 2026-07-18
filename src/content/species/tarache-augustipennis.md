@@ -16,7 +16,7 @@ This species is common and widely distributed on arid grasslands and rangelands 
 
 ### Pacific Northwest
 
-*Tarache augustipennis *has been collected in south-eastern Idaho near the border with Utah in our region. Single records for south-eastern British Columbia and south-central Oregon exist in the USNM (nearctica.com).
+*Tarache augustipennis* has been collected in south-eastern Idaho near the border with Utah in our region. Single records for south-eastern British Columbia and south-central Oregon exist in the USNM (nearctica.com).
 
 ### Global
 

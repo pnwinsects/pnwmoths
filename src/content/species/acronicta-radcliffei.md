@@ -12,8 +12,7 @@ This species is common and widely distributed in hardwood forests throughout muc
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Acronicta radcliffei* is widely distributed in forests of the Pacific Northwest. It appears to be absent from western Washington but is found west of the Cascade Mountains in Oregon. It has not been found in the mountains of the Basin and Range province in southeastern Oregon and southern Idaho.
 
@@ -21,8 +20,7 @@ This species is common and widely distributed in hardwood forests throughout muc
 
 This species is found in Alberta, northern California, and the central Rocky Mountain states of Colorado and Utah in the West outside of the Northwest. It is widely distributed in the East where it has a more southerly distribution than *A. grisea*, ranging from Newfoundland, southern Quebec, and New England to Georgia, Illinois, and Kansas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

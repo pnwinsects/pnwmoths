@@ -12,8 +12,7 @@ This species is common at low to middle elevations in the Siskiyou Mountains and
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Sympistis ragani* is found in southwestern Oregon, both along the west slope of the Cascades and in the Siskiyou Mountains.  Its northern limit appears to be in the vicinity of Roseburg in Douglas County.
 
@@ -21,8 +20,7 @@ This species is common at low to middle elevations in the Siskiyou Mountains and
 
 The range of this species extends to the Mexico border through California west of the Sierra Nevada crest. It also occurs in Arizona.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

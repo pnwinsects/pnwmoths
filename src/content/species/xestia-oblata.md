@@ -14,8 +14,7 @@ This species is widely distributed across Canada and throughout the mountains of
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia oblata* is common in forests throughout the Northwest. It does not occur in the dry steppe, but is found in higher mountains in the interior of Oregon and southern Idaho.
 
@@ -23,8 +22,7 @@ This species is widely distributed across Canada and throughout the mountains of
 
 This species is found across North America but is most widely distributed in the West where it occurs from southern Yukon Territory to the northern Sierra Nevada in California and southern Utah and northern New Mexico in the Rocky Mountains. The range goes east in a narrow north-south distribution near the Canada-United States border to the Atlantic from southern Labrador to northern New England.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

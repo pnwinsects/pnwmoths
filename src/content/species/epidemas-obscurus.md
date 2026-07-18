@@ -14,8 +14,7 @@ This species is widely distributed in dry, open habitats.  In the Pacific North
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Epidemas obscurus* is widespread east of the Cascades as far north as south-central British Columbia. It is found throughout eastern Washington, eastern Oregon, and western and southern Idaho. The range west of the Cascades is more limited. It is only found near the Gulf of Georgia in the western parts of British Columbia and Washington.
 
@@ -23,8 +22,7 @@ This species is widely distributed in dry, open habitats.  In the Pacific North
 
 This moth is found in California and Nevada south of the Northwest region. The range extends east at least as far as western Colorado.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

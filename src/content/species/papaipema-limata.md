@@ -14,8 +14,7 @@ This species flies in low-elevation wetland habitats of riparian zones in steppe
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Papaipema limata* has been found in the dry interiors of our region. It is found in the northern and eastern part of the Columbia Basin in Washington, eastern Oregon, and southern Idaho.
 
@@ -23,8 +22,7 @@ This species flies in low-elevation wetland habitats of riparian zones in steppe
 
 This range of this species is poorly known. It occurs in Utah as well as in our region and might be widespread in the Intermountain region.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

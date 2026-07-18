@@ -16,8 +16,7 @@ This species is widely distributed in moist hardwood forests throughout much of 
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Lycophotia phyllophora* has only been found in the Peace River Region of north-eastern British Columbia in our area.
 
@@ -25,8 +24,7 @@ This species is widely distributed in moist hardwood forests throughout much of 
 
 This species occurs in eastern North America where it is found from the northern island of Newfoundland and north-western Ontario south to North Carolina in the Appalachian Mountains. The British Columbia record is significantly west of the range shown in Lafontaine (1998).
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

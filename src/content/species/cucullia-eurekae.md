@@ -14,8 +14,7 @@ This species appears to be rare and sporadic in the southern part of the Great B
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Cucullia eurekae* occurs in central Oregon.
 
@@ -23,8 +22,7 @@ This species appears to be rare and sporadic in the southern part of the Great B
 
 This species has been collected at several sites in the Great Basin, including the type locality in central Utah, the adjacent parts of southwestern Utah and northwestern Arizona, and central Nevada.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

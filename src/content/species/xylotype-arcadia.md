@@ -14,8 +14,7 @@ This species is widely distributed in coniferous forests across Canada, extendin
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xylotype arcadia* is found west of the Cascades in Washington, along the Pacific Coast, on the Kitsap Peninsula, and along the west slope of the Cascades. It is more widespread in British Columbia where it is found at least as far north as the north-central part of the province. It also occurs in northeastern Washington and in western Montana.
 
@@ -23,8 +22,7 @@ This species is widely distributed in coniferous forests across Canada, extendin
 
 This moth is widespread in boreal North America. It occurs west across boreal Canada and the Great Lakes region of the northern United States to Nova Scotia. The range does not extend south in the mountains.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

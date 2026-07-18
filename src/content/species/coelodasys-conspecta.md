@@ -6,7 +6,7 @@
 
 This species can be recognized by its gray forewing with a transverse black discal spot, pale base, and streaked terminal area. It resembles *Coelodasys unicornis*. The pale area of the forewing distal to the cell is red-brown in *C. unicornis*, but pale ochre white in *C. conspecta*. Also, most of the male hindwing margin is gray in *C. unicornis, *while the dark portion of the hindwing is restricted to the anal angle and adjacent anal veins in *C. conspecta*. *Coelodasys** conspecta* is darker gray and streakier appearing than *Oedemasia salicis*, and has much less red-brown color on the forewing than this species.
 
-*Coelodasys** conspecta* has until now been considered to be a western subspecies of *C. unicornis *(Hodges et al. 1983; Lafontaine & Schmidt 2010). We treat it as a distinct species because of consistent differences in appearance and ecological preferences between these moths in the Pacific Northwest.
+*Coelodasys conspecta* has until now been considered to be a western subspecies of *C. unicornis* (Hodges et al. 1983; Lafontaine & Schmidt 2010). We treat it as a distinct species because of consistent differences in appearance and ecological preferences between these moths in the Pacific Northwest.
 
 This taxon is placed in the genus *Coelodasys* Packard in a recent check list of the New World Notodontidae by Becker (2014), having formerly been placed in the genus *Schizura* Doubleday.
 
@@ -18,11 +18,11 @@ This species is widely distributed in moist canyons and riparian zones east of t
 
 ### Pacific Northwest
 
-*Coelodasys** conspecta* is found along the western margin of the Columbia Basin in Washington. In Oregon it has been found in the eastern and southern portion of the state.
+*Coelodasys conspecta* is found along the western margin of the Columbia Basin in Washington. In Oregon it has been found in the eastern and southern portion of the state.
 
 ### Global
 
-The global range of this species is uncertain due to confusion with *Coelodasys** unicornis*. Its type locality is Yosemite Park, California.
+The global range of this species is uncertain due to confusion with *Coelodasys unicornis*. Its type locality is Yosemite Park, California.
 
 ## Life History
 

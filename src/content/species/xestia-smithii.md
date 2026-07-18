@@ -18,8 +18,7 @@ This species is widely distributed in moist forest habitats throughout most of N
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Xestia smithii* is widely distributed in mesic forest habitats throughout the Pacific Northwest. It does not occur in the dry interior parts of Washington, Oregon, and Idaho.
 
@@ -27,8 +26,7 @@ This species is widely distributed in moist forest habitats throughout most of N
 
 This species is found across all of boreal North America, with the range extending south in the mountains. It occurs from central Alaska to the island of Newfoundland in the north. The southern limits are North Carolina in the Appalachian Mountains, east-central Arizona in the Rocky Mountains, and the central Sierra Nevada in California. It does not occur in the Great Plains south of North Dakota nor in the Great Basin.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

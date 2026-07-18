@@ -14,17 +14,15 @@ This species is rare and sporadic in very dry low-elevation sagebrush habitats i
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Plagiomimicus yakama* flies on the Columbia Plateau in the Northwest and has been found in Oregon and Washington. In Washington it is most common near the Columbia River.
 
 ### Global
 
-This species is found in two separate areas in the American West. The nominate subspecies is from the Pacific Northwest. Subspecies *P*. *yakama* *mojave* occurs in southern Utah, Nevada, northeastern Arizona, and southern California. *Plagiomimicus* *yakama* was until recently considered to be conspecific with *Plagiomimiucs* *tepperi *a species that occurs in from central Arizona to Colorado and Texas.
+This species is found in two separate areas in the American West. The nominate subspecies is from the Pacific Northwest. Subspecies *P*. *yakama* *mojave* occurs in southern Utah, Nevada, northeastern Arizona, and southern California. *Plagiomimicus* *yakama* was until recently considered to be conspecific with *Plagiomimiucs* *tepperi* a species that occurs in from central Arizona to Colorado and Texas.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 

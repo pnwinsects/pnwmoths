@@ -12,8 +12,7 @@ This species has been collected in desert canyonlands at low elevations in Orego
 
 ## Distribution
 
-### Pacific
- Northwest
+### Pacific Northwest
 
 *Schinia argentifascia* has only been collected in southern Oregon in the Northwest.
 
@@ -21,8 +20,7 @@ This species has been collected in desert canyonlands at low elevations in Orego
 
 This is predominantly a species of the American Southwest. It occurs from western Texas to southern California, extending north to Utah, Nevada, and southern Oregon.
 
-## Life
-History
+## Life History
 
 ##### Larvae
 
