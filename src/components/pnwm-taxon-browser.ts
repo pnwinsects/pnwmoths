@@ -450,9 +450,23 @@ class PnwmTaxonBrowser extends LitElement {
       </div>`;
   }
 
-  // headingLevel is 4 when the genus sits directly under a subfamily (no tribe)
-  // and 5 when it sits under a named tribe, keeping heading nesting monotonic.
-  _renderGenus(genus: TaxonGenus, parentKey: string, headingLevel: 4 | 5 = 4): TemplateResult {
+  // Render a disclosure heading (h3–h5) whose level tracks the node's effective
+  // depth. When an optional level (subfamily or tribe) is absent, its children
+  // flatten upward and inherit its level, so the document outline never skips a
+  // step. Visual treatment is identical at every level — theme.css styles these
+  // by row class, not by tag — so the level is purely semantic/a11y.
+  _disclosureHeading(level: number, inner: TemplateResult): TemplateResult {
+    switch (level) {
+      case 3:  return html`<h3>${inner}</h3>`;
+      case 4:  return html`<h4>${inner}</h4>`;
+      case 5:  return html`<h5>${inner}</h5>`;
+      default: return html`<h6>${inner}</h6>`;
+    }
+  }
+
+  // level is the heading depth for this genus: one shallower when its subfamily
+  // and/or tribe are absent and it flattens upward (see _renderSubfamily/_renderTribe).
+  _renderGenus(genus: TaxonGenus, parentKey: string, level: number): TemplateResult {
     const key = `${parentKey}__${genus.genus_slug}`;
     const expanded = this._expandedGenera.has(key);
     const slugs = genus.species.map(s => s.slug);
@@ -463,37 +477,36 @@ class PnwmTaxonBrowser extends LitElement {
     >${genus.name}</button>`;
     return html`
       <div class="pnwm-tb-genus-row" style="${this._mutedStyle(slugs)}">
-        ${headingLevel === 5 ? html`<h5>${heading}</h5>` : html`<h4>${heading}</h4>`}
+        ${this._disclosureHeading(level, heading)}
         ${!expanded ? this._renderImageStrip(genus.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         ${expanded ? this._renderSpecies(genus.species, genus.name) : ''}
       </div>`;
   }
 
   // subfamKey is the parent subfamily's expand key (or the family name when the
-  // subfamily is null — see _renderSubfamily).
-  _renderTribe(tribe: TaxonTribe, subfamKey: string): TemplateResult {
+  // subfamily is null — see _renderSubfamily). level is the tribe's heading depth.
+  _renderTribe(tribe: TaxonTribe, subfamKey: string, level: number): TemplateResult {
     // tribe.name === null means the subfamily has no tribal subdivision — render
-    // its genera directly under the subfamily (no h4, no expand button), the same
-    // way a null subfamily flattens its genera under the family.
+    // its genera directly under the subfamily (no heading, no expand button), at
+    // the tribe's own level, the same way a null subfamily flattens its genera.
     if (!tribe.name) {
-      return html`${tribe.genera.map(g => this._renderGenus(g, subfamKey, 4))}`;
+      return html`${tribe.genera.map(g => this._renderGenus(g, subfamKey, level))}`;
     }
 
     const key = `${subfamKey}__${tribe.name}`;
     const expanded = this._expandedTribes.has(key);
     const slugs = collectSlugs(tribe);
+    const heading = html`<button
+      type="button"
+      aria-expanded="${expanded}"
+      @click=${() => this._toggleTribe(key)}
+    >${tribe.name}</button>`;
     return html`
       <div class="pnwm-tb-tribe-row" style="${this._mutedStyle(slugs)}">
-        <h4>
-          <button
-            type="button"
-            aria-expanded="${expanded}"
-            @click=${() => this._toggleTribe(key)}
-          >${tribe.name}</button>
-        </h4>
+        ${this._disclosureHeading(level, heading)}
         ${!expanded ? this._renderImageStrip(tribe.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
-          ${tribe.genera.map(g => this._renderGenus(g, key, 5))}
+          ${tribe.genera.map(g => this._renderGenus(g, key, level + 1))}
         </div>
       </div>`;
   }
@@ -505,23 +518,23 @@ class PnwmTaxonBrowser extends LitElement {
     const slugs = collectSlugs(subfam);
 
     if (!subfam.name) {
-      // No-subfamily case: flatten tribes/genera directly under family (no h3, no expand button)
+      // No-subfamily case: flatten tribes/genera directly under family (no heading,
+      // no expand button); they take the subfamily's own level (3).
       return html`
-        ${subfam.tribes.map(t => this._renderTribe(t, familyName))}`;
+        ${subfam.tribes.map(t => this._renderTribe(t, familyName, 3))}`;
     }
 
+    const heading = html`<button
+      type="button"
+      aria-expanded="${expanded}"
+      @click=${() => this._toggleSubfamily(key)}
+    >${subfam.name}</button>`;
     return html`
       <div class="pnwm-tb-subfamily-row" style="${this._mutedStyle(slugs)}">
-        <h3>
-          <button
-            type="button"
-            aria-expanded="${expanded}"
-            @click=${() => this._toggleSubfamily(key)}
-          >${subfam.name}</button>
-        </h3>
+        ${this._disclosureHeading(3, heading)}
         ${!expanded ? this._renderImageStrip(subfam.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
-          ${subfam.tribes.map(t => this._renderTribe(t, key))}
+          ${subfam.tribes.map(t => this._renderTribe(t, key, 4))}
         </div>
       </div>`;
   }

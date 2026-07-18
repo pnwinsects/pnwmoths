@@ -15,15 +15,19 @@ permalink: /browse/index.html
   {% for family in taxon %}
     <h2 id="family-{{ family.name | lower }}">{{ family.name }}</h2>
     {% for subfam in family.subfamilies %}
+      {# Heading levels track effective depth: a null subfamily/tribe flattens its
+         children up a level so the outline (h2 family → … → genus) never skips. #}
       {% if subfam.name %}
         <h3>{{ subfam.name }}</h3>
       {% endif %}
+      {% set tribeLevel = 4 if subfam.name else 3 %}
       {% for tribe in subfam.tribes %}
         {% if tribe.name %}
-          <h4>{{ tribe.name }}</h4>
+          <h{{ tribeLevel }}>{{ tribe.name }}</h{{ tribeLevel }}>
         {% endif %}
+        {% set genusLevel = (tribeLevel + 1) if tribe.name else tribeLevel %}
         {% for genus in tribe.genera %}
-          {% if tribe.name %}<h5>{{ genus.name }}</h5>{% else %}<h4>{{ genus.name }}</h4>{% endif %}
+          <h{{ genusLevel }}>{{ genus.name }}</h{{ genusLevel }}>
           <ul>
             {% for sp in genus.species %}
               <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
