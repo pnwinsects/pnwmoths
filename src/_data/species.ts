@@ -83,7 +83,7 @@ export default async function (): Promise<SpeciesRow[]> {
            THEN []
            ELSE string_split(similar_species, '|')
       END AS similar_slugs,
-      lower(genus || '-' || species) AS slug
+      replace(lower(genus || '-' || species), ' ', '-') AS slug
     FROM species
     ORDER BY genus, species
   `);

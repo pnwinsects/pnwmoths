@@ -48,7 +48,7 @@ export default async function (): Promise<SiteStats> {
     : "''"; // no unpublished → match nothing
   await conn.run(`
     CREATE TABLE shown AS
-    SELECT lower(genus || '-' || species) AS slug
+    SELECT replace(lower(genus || '-' || species), ' ', '-') AS slug
     FROM read_csv('data/species.csv', header = true, nullstr = '',
       columns = {
         'id': 'INTEGER', 'genus': 'VARCHAR', 'species': 'VARCHAR',
