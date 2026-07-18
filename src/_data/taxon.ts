@@ -193,9 +193,13 @@ export default async function (): Promise<TaxonFamily[]> {
     ORDER BY family, subfamily NULLS LAST, tribe NULLS LAST, genus, species
   `);
 
+  // Browse shows navigational thumbnails only; ventral (underside) shots belong
+  // on species-account pages, not in the tree (issue #107). Rows with a null view
+  // are kept — they are unclassified, not confirmed ventral.
   const imagesResult = await conn.runAndReadAll(`
     SELECT species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight, navigational
     FROM images
+    WHERE view IS DISTINCT FROM 'ventral'
     ORDER BY species_slug, TRY_CAST(weight AS INTEGER)
   `);
 
