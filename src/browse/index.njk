@@ -18,15 +18,20 @@ permalink: /browse/index.html
       {% if subfam.name %}
         <h3>{{ subfam.name }}</h3>
       {% endif %}
-      {% for genus in subfam.genera %}
-        <h4>{{ genus.name }}</h4>
-        <ul>
-          {% for sp in genus.species %}
-            <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
-              <em>{{ genus.name }} {{ sp.name }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}
-            </a></li>
-          {% endfor %}
-        </ul>
+      {% for tribe in subfam.tribes %}
+        {% if tribe.name %}
+          <h4>{{ tribe.name }}</h4>
+        {% endif %}
+        {% for genus in tribe.genera %}
+          {% if tribe.name %}<h5>{{ genus.name }}</h5>{% else %}<h4>{{ genus.name }}</h4>{% endif %}
+          <ul>
+            {% for sp in genus.species %}
+              <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">
+                <em>{{ genus.name }} {{ sp.name }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}
+              </a></li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
       {% endfor %}
     {% endfor %}
   {% endfor %}

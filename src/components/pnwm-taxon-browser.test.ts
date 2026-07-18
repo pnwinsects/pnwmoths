@@ -13,7 +13,7 @@ import {
   validateSpeciesDistricts,
   deriveStatesAvailable,
 } from './pnwm-taxon-browser.ts';
-import type { TaxonFamily, TaxonSubfamily, TaxonGenus } from '../types/index.ts';
+import type { TaxonFamily, TaxonSubfamily, TaxonTribe, TaxonGenus } from '../types/index.ts';
 
 describe('buildStateMap', () => {
   it('returns empty object for empty input', () => {
@@ -84,11 +84,21 @@ describe('collectSlugs', () => {
     assert.deepEqual(collectSlugs(genus), ['a', 'b']);
   });
 
-  it('collects slugs from a subfamily node', () => {
-    const subfam = {
+  it('collects slugs from a tribe node', () => {
+    const tribe = {
       genera: [
         { species: [{ slug: 'c' }] },
         { species: [{ slug: 'd' }] },
+      ],
+    } as unknown as TaxonTribe;
+    assert.deepEqual(collectSlugs(tribe), ['c', 'd']);
+  });
+
+  it('collects slugs from a subfamily node through its tribes', () => {
+    const subfam = {
+      tribes: [
+        { genera: [{ species: [{ slug: 'c' }] }] },
+        { genera: [{ species: [{ slug: 'd' }] }] },
       ],
     } as unknown as TaxonSubfamily;
     assert.deepEqual(collectSlugs(subfam), ['c', 'd']);
@@ -98,14 +108,10 @@ describe('collectSlugs', () => {
     const family = {
       subfamilies: [
         {
-          genera: [
-            { species: [{ slug: 'e' }] },
-          ],
+          tribes: [{ genera: [{ species: [{ slug: 'e' }] }] }],
         },
         {
-          genera: [
-            { species: [{ slug: 'f' }, { slug: 'g' }] },
-          ],
+          tribes: [{ genera: [{ species: [{ slug: 'f' }, { slug: 'g' }] }] }],
         },
       ],
     } as unknown as TaxonFamily;

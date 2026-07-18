@@ -14,6 +14,7 @@ interface SpeciesDbRow {
   authority: string | null;
   family: string | null;
   subfamily: string | null;
+  tribe: string | null;
   similar_slugs: string[];
   slug: string;
 }
@@ -60,7 +61,8 @@ export default async function (): Promise<SpeciesRow[]> {
         'family': 'VARCHAR',
         'similar_species': 'VARCHAR',
         'subfamily': 'VARCHAR',
-        'epithet_quoted': 'VARCHAR'
+        'epithet_quoted': 'VARCHAR',
+        'tribe': 'VARCHAR'
       }
     )
   `);
@@ -76,6 +78,7 @@ export default async function (): Promise<SpeciesRow[]> {
       authority,
       family,
       subfamily,
+      tribe,
       CASE WHEN similar_species IS NULL OR similar_species = ''
            THEN []
            ELSE string_split(similar_species, '|')
@@ -103,6 +106,7 @@ export default async function (): Promise<SpeciesRow[]> {
       authority: row.authority,
       family: row.family,
       subfamily: row.subfamily,
+      tribe: row.tribe,
       similar_slugs: row.similar_slugs,
       slug: row.slug,
     });

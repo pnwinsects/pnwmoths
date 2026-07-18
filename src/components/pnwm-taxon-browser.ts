@@ -1,5 +1,5 @@
 import { LitElement, html, type PropertyDeclarations, type TemplateResult } from 'lit';
-import { SpeciesStateSchema, SpeciesDistrictSchema, type SpeciesState, type SpeciesDistrict, type TaxonFamily, type TaxonSubfamily, type TaxonGenus, type NavImage } from '../types/index.ts';
+import { SpeciesStateSchema, SpeciesDistrictSchema, type SpeciesState, type SpeciesDistrict, type TaxonFamily, type TaxonSubfamily, type TaxonTribe, type TaxonGenus, type NavImage } from '../types/index.ts';
 
 const STATE_NAMES: Record<string, string> = {
   BC: 'British Columbia',
@@ -154,11 +154,16 @@ export function districtLabel(selectedState: string): string {
 
 /**
  * Recursively collect all species slugs from any taxon tree node.
- * Handles family ({subfamilies:[]}), subfamily ({genera:[]}), genus ({species:[]}).
+ * Handles family ({subfamilies:[]}), subfamily ({tribes:[]}), tribe ({genera:[]}),
+ * genus ({species:[]}).
  */
-export function collectSlugs(node: TaxonFamily | TaxonSubfamily | TaxonGenus): string[] {
+export function collectSlugs(node: TaxonFamily | TaxonSubfamily | TaxonTribe | TaxonGenus): string[] {
   if ('species' in node) return node.species.map(s => s.slug);
-  const children = ('subfamilies' in node ? node.subfamilies : null) || ('genera' in node ? node.genera : null) || [];
+  const children =
+    ('subfamilies' in node ? node.subfamilies : null) ||
+    ('tribes' in node ? node.tribes : null) ||
+    ('genera' in node ? node.genera : null) ||
+    [];
   const slugs: string[] = [];
   for (const child of children) slugs.push(...collectSlugs(child));
   return slugs;
@@ -179,6 +184,7 @@ class PnwmTaxonBrowser extends LitElement {
       _showImages:          { type: Boolean, state: true },
       _expandedFamilies:    { attribute: false, state: true },
       _expandedSubfamilies: { attribute: false, state: true },
+      _expandedTribes:      { attribute: false, state: true },
       _expandedGenera:      { attribute: false, state: true },
     };
   }
@@ -194,6 +200,7 @@ class PnwmTaxonBrowser extends LitElement {
   _showImages: boolean;
   _expandedFamilies: Set<string>;
   _expandedSubfamilies: Set<string>;
+  _expandedTribes: Set<string>;
   _expandedGenera: Set<string>;
 
   get _prefix(): string { return (this as { 'path-prefix'?: string })['path-prefix'] || '/'; }
@@ -214,6 +221,7 @@ class PnwmTaxonBrowser extends LitElement {
     this._showImages = true;
     this._expandedFamilies = new Set();
     this._expandedSubfamilies = new Set();
+    this._expandedTribes = new Set();
     this._expandedGenera = new Set();
   }
 
@@ -332,6 +340,14 @@ class PnwmTaxonBrowser extends LitElement {
     }
   }
 
+  _toggleTribe(key: string): void {
+    if (this._expandedTribes.has(key)) {
+      this._expandedTribes = new Set([...this._expandedTribes].filter(k => k !== key));
+    } else {
+      this._expandedTribes = new Set([...this._expandedTribes, key]);
+    }
+  }
+
   _toggleGenus(slug: string): void {
     if (this._expandedGenera.has(slug)) {
       this._expandedGenera = new Set([...this._expandedGenera].filter(s => s !== slug));
@@ -375,17 +391,25 @@ class PnwmTaxonBrowser extends LitElement {
   _expandToSpecies(speciesSlug: string): void {
     for (const family of this._families) {
       for (const subfam of family.subfamilies) {
-        for (const genus of subfam.genera) {
-          if (!genus.species.some(sp => sp.slug === speciesSlug)) continue;
-          this._expandedFamilies = new Set([...this._expandedFamilies, family.name]);
-          if (subfam.name) {
-            const subfamKey = `${family.name}__${subfam.name}`;
-            this._expandedSubfamilies = new Set([...this._expandedSubfamilies, subfamKey]);
-            this._expandedGenera = new Set([...this._expandedGenera, `${subfamKey}__${genus.genus_slug}`]);
-          } else {
-            this._expandedGenera = new Set([...this._expandedGenera, `${family.name}__${genus.genus_slug}`]);
+        // subfamKey mirrors _renderSubfamily's key; a null subfamily renders its
+        // tribes/genera flat under the family, so its genus keys omit the subfamily.
+        const subfamKey = subfam.name ? `${family.name}__${subfam.name}` : family.name;
+        for (const tribe of subfam.tribes) {
+          for (const genus of tribe.genera) {
+            if (!genus.species.some(sp => sp.slug === speciesSlug)) continue;
+            this._expandedFamilies = new Set([...this._expandedFamilies, family.name]);
+            if (subfam.name) {
+              this._expandedSubfamilies = new Set([...this._expandedSubfamilies, subfamKey]);
+            }
+            // A null tribe renders its genera flat under the subfamily, so its
+            // genus keys are rooted at the subfamily; a named tribe adds a level.
+            const tribeKey = tribe.name ? `${subfamKey}__${tribe.name}` : subfamKey;
+            if (tribe.name) {
+              this._expandedTribes = new Set([...this._expandedTribes, tribeKey]);
+            }
+            this._expandedGenera = new Set([...this._expandedGenera, `${tribeKey}__${genus.genus_slug}`]);
+            return;
           }
-          return;
         }
       }
     }
@@ -426,34 +450,64 @@ class PnwmTaxonBrowser extends LitElement {
       </div>`;
   }
 
-  _renderGenus(genus: TaxonGenus, familyKey: string): TemplateResult {
-    const key = `${familyKey}__${genus.genus_slug}`;
+  // headingLevel is 4 when the genus sits directly under a subfamily (no tribe)
+  // and 5 when it sits under a named tribe, keeping heading nesting monotonic.
+  _renderGenus(genus: TaxonGenus, parentKey: string, headingLevel: 4 | 5 = 4): TemplateResult {
+    const key = `${parentKey}__${genus.genus_slug}`;
     const expanded = this._expandedGenera.has(key);
     const slugs = genus.species.map(s => s.slug);
+    const heading = html`<button
+      type="button"
+      aria-expanded="${expanded}"
+      @click=${() => this._toggleGenus(key)}
+    >${genus.name}</button>`;
     return html`
       <div class="pnwm-tb-genus-row" style="${this._mutedStyle(slugs)}">
-        <h4>
-          <button
-            type="button"
-            aria-expanded="${expanded}"
-            @click=${() => this._toggleGenus(key)}
-          >${genus.name}</button>
-        </h4>
+        ${headingLevel === 5 ? html`<h5>${heading}</h5>` : html`<h4>${heading}</h4>`}
         ${!expanded ? this._renderImageStrip(genus.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         ${expanded ? this._renderSpecies(genus.species, genus.name) : ''}
       </div>`;
   }
 
+  // subfamKey is the parent subfamily's expand key (or the family name when the
+  // subfamily is null — see _renderSubfamily).
+  _renderTribe(tribe: TaxonTribe, subfamKey: string): TemplateResult {
+    // tribe.name === null means the subfamily has no tribal subdivision — render
+    // its genera directly under the subfamily (no h4, no expand button), the same
+    // way a null subfamily flattens its genera under the family.
+    if (!tribe.name) {
+      return html`${tribe.genera.map(g => this._renderGenus(g, subfamKey, 4))}`;
+    }
+
+    const key = `${subfamKey}__${tribe.name}`;
+    const expanded = this._expandedTribes.has(key);
+    const slugs = collectSlugs(tribe);
+    return html`
+      <div class="pnwm-tb-tribe-row" style="${this._mutedStyle(slugs)}">
+        <h4>
+          <button
+            type="button"
+            aria-expanded="${expanded}"
+            @click=${() => this._toggleTribe(key)}
+          >${tribe.name}</button>
+        </h4>
+        ${!expanded ? this._renderImageStrip(tribe.navImages, (slug) => this._expandToSpecies(slug)) : ''}
+        <div ?hidden=${!expanded}>
+          ${tribe.genera.map(g => this._renderGenus(g, key, 5))}
+        </div>
+      </div>`;
+  }
+
   _renderSubfamily(subfam: TaxonSubfamily, familyName: string): TemplateResult {
-    // subfam.name === null means no real subfamily — render genera directly (Pitfall 2)
+    // subfam.name === null means no real subfamily — render tribes/genera directly (Pitfall 2)
     const key = `${familyName}__${subfam.name ?? '__none__'}`;
     const expanded = this._expandedSubfamilies.has(key);
     const slugs = collectSlugs(subfam);
 
     if (!subfam.name) {
-      // No-subfamily case: flatten genera directly under family (no h3, no expand button)
+      // No-subfamily case: flatten tribes/genera directly under family (no h3, no expand button)
       return html`
-        ${subfam.genera.map(g => this._renderGenus(g, familyName))}`;
+        ${subfam.tribes.map(t => this._renderTribe(t, familyName))}`;
     }
 
     return html`
@@ -467,7 +521,7 @@ class PnwmTaxonBrowser extends LitElement {
         </h3>
         ${!expanded ? this._renderImageStrip(subfam.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
-          ${subfam.genera.map(g => this._renderGenus(g, key))}
+          ${subfam.tribes.map(t => this._renderTribe(t, key))}
         </div>
       </div>`;
   }

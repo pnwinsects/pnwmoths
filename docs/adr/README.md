@@ -24,3 +24,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0013](0013-highres-osd-dzi.md) | High-res photos as OpenSeadragon DZI/WebP tiles on the CDN via a resumable local pipeline | Accepted |
 | [0014](0014-districts-offline-writeback.md) | Administrative districts by additive-only offline write-back with a non-blocking QC report | Accepted |
 | [0015](0015-data-driven-gating.md) | Public-visibility gating via data-driven deny-lists and a single `shown` predicate | Accepted |
+| [0016](0016-tribe-hierarchy-level.md) | Tribe as a conditional level (family → subfamily → tribe? → genus → species), backfilled from the reference DB | Accepted |

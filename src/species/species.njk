@@ -19,6 +19,8 @@ eleventyComputed:
   ><a href="{{ '/browse/' | url }}">{{ sp.family }}</a
   >{% if sp.subfamily %}<span aria-hidden="true">›</span
   ><a href="{{ '/browse/' | url }}">{{ sp.subfamily }}</a
+  >{% endif %}{% if sp.tribe %}<span aria-hidden="true">›</span
+  ><a href="{{ '/browse/' | url }}">{{ sp.tribe }}</a
   >{% endif %}<span aria-hidden="true">›</span
   ><span>{{ sp.genus }}</span
 ></nav>

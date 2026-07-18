@@ -123,7 +123,10 @@ export type SpeciesDistrict = z.infer<typeof SpeciesDistrictSchema>;
 
 // --- TaxonNode ---
 // Describes the taxon tree built by src/_data/taxon.js
-// Four-level tree: family → subfamilies → genera → species
+// Five-level tree: family → subfamilies → tribes → genera → species. The tribe
+// level is conditional: a subfamily with no tribal subdivision holds a single
+// tribe node with name === null, whose genera render directly under the
+// subfamily (mirrors the name === null "no subfamily grouping" convention).
 // NavImage columns from taxon.js images query:
 //   species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight, navigational
 // weight comes back as number|null (TRY_CAST returns null on failure); navigational as string|null
@@ -156,10 +159,17 @@ export const TaxonGenusSchema = z.object({
 });
 export type TaxonGenus = z.infer<typeof TaxonGenusSchema>;
 
+export const TaxonTribeSchema = z.object({
+  name:      z.nullable(z.string()),   // null when the subfamily has no tribal subdivision
+  navImages: z.array(NavImageSchema),
+  genera:    z.array(TaxonGenusSchema),
+});
+export type TaxonTribe = z.infer<typeof TaxonTribeSchema>;
+
 export const TaxonSubfamilySchema = z.object({
   name:      z.nullable(z.string()),   // null when no subfamily grouping
   navImages: z.array(NavImageSchema),
-  genera:    z.array(TaxonGenusSchema),
+  tribes:    z.array(TaxonTribeSchema),
 });
 export type TaxonSubfamily = z.infer<typeof TaxonSubfamilySchema>;
 

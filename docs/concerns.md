@@ -25,6 +25,7 @@ should know are imperfect right now. Each item is tagged:
 | Byte-identical `_site/` proof is local-only | The proof that `_site/` output is byte-identical to baseline is a one-shot local check, deliberately not wired into CI. CI catches type/test failures but **not** byte-level data regressions. | `compare-sites.sh` | ACCEPTED (D-01) |
 | Production deploy runs only typecheck | The `deploy`/production workflow runs `tsc --noEmit` only — not the full test / TS-guard / parquet gate. It relies on the PR-check gate + branch protection to have already run those. | `.github/workflows/` (production workflow) | ACCEPTED (relies on PR gate) |
 | No visual-regression tests | There are no automated visual-regression tests guarding the site's visual identity; visual breakage would only be caught by eye. | — | ACCEPTED |
+| Browse page over the weight threshold | `/browse/` inlines the entire taxon tree as JSON (D-10), so it exceeds the advisory 500KB `check-page-weight` threshold (~768KB; was ~725KB before the tribe level was added). The check only warns, and no-JS/first-paint still work, but the payload grows with the catalog. A fix would fetch the tree as a separate cached JSON instead of inlining it. | `src/browse/index.njk`, `scripts/check-page-weight.ts` | ACCEPTED (advisory; inlining per D-10) |
 | WebP not enabled on Bunny Optimizer | The Optimizer is serving JPEG; WebP conversion (~30% smaller) is not yet toggled on. One-click dashboard change: Pull Zone → Optimizer → WebP conversion. | Bunny dashboard | ACTIONABLE |
 
 ## Code debt

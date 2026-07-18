@@ -17,6 +17,7 @@ erDiagram
         string  subfamily
         string  similar_species   "pipe-delimited slugs"
         string  epithet_quoted    "1 = display epithet in quotes"
+        string  tribe             "optional; genus-level, blank where none"
     }
 
     records {
@@ -103,9 +104,11 @@ erDiagram
 | `plates.json` | ~50 | Reference plate metadata (legacy moth-guide plates). Width/height used for CDN image sizing. |
 | `parquet/<slug>/records.parquet` | varies | Per-species records, materialized by `scripts/build-data.js` for fast DuckDB queries at build time. |
 
-## Taxonomy provenance (`family` / `subfamily`)
+## Taxonomy provenance (`family` / `subfamily` / `tribe`)
 
-There is **no structured taxonomy table** in the legacy reference site. `family` and `subfamily` are reverse-engineered from the reference site's CMS browse-page URL hierarchy (`browse/family-…/subfamily-…/[tribe-…/]genus/species`), captured when `species.csv` was first migrated. `subfamily` is a **genus-level** property — every species of a genus shares it — so it can be backfilled for a blank row by looking up any already-classified species of the same genus.
+There is **no structured taxonomy table** in the legacy reference site. `family`, `subfamily`, and `tribe` are reverse-engineered from the reference site's CMS browse-page URL hierarchy (`browse/family-…/subfamily-…/[tribe-…/]genus/species`), captured when `species.csv` was first migrated. `subfamily` and `tribe` are both **genus-level** properties — every species of a genus shares them — so they can be backfilled for a blank row by looking up any already-classified species of the same genus.
+
+`tribe` is optional (blank where the subfamily has no tribal subdivision, or the genus post-dates the legacy hierarchy) and was materialized by [`scripts/backfill-tribe.ts`](../scripts/backfill-tribe.ts) from the reference DB's browse paths — additive-only and idempotent. See [ADR 0016](../docs/adr/0016-tribe-hierarchy-level.md) and [data-provenance](../docs/reference/data-provenance.md).
 
 Two things trip up anyone re-deriving this data:
 
