@@ -187,7 +187,7 @@ export default async function (): Promise<TaxonFamily[]> {
 
   const speciesResult = await conn.runAndReadAll(`
     SELECT family, subfamily, tribe, genus, species, epithet_quoted, common_name,
-      lower(genus || '-' || species) AS slug,
+      replace(lower(genus || '-' || species), ' ', '-') AS slug,
       lower(replace(genus, ' ', '-')) AS genus_slug
     FROM species
     ORDER BY family, subfamily NULLS LAST, tribe NULLS LAST, genus, species
