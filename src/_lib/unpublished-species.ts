@@ -37,8 +37,8 @@ export function normalizeSlug(raw: string): string {
  * Load the set of unpublished (provisional/undescribed) species slugs from a CSV file.
  *
  * Reads `data/unpublished-species.csv` (or the supplied path) and returns a Set
- * of normalized slugs (hyphenated, lowercased). With the initial file the set
- * contains 20 entries including "aseptis-sp-no-1".
+ * of normalized slugs (hyphenated, lowercased); e.g. the set
+ * contains "aseptis-sp-no-1".
  *
  * Defensive behaviors:
  * - Missing file: warns and returns an empty Set (removing the file is a no-op).
