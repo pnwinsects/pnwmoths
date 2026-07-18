@@ -54,3 +54,5 @@ jobs:
         run: npm run site:upload
         env:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
+      - name: CDN smoke check
+        run: npm run deploy:smoke
