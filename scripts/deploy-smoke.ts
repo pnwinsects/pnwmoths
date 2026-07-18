@@ -122,6 +122,7 @@ export async function checkUrl(
     const res = await fetch(url, {
       headers: { 'User-Agent': 'pnwmoths-deploy-smoke/1.0' },
       redirect: 'follow',
+      signal: AbortSignal.timeout(15_000),
     });
 
     if (!res.ok) {
@@ -195,10 +196,12 @@ async function main(): Promise<void> {
 
   // Hash the local files
   const localHashes: Record<string, string> = {};
+  let localFailures = 0;
   for (const relPath of urls) {
     const localPath = join(SITE_DIR, ...relPath.split('/'));
     if (!existsSync(localPath)) {
       console.error(`  ✗ ${relPath} — local file not found in ${SITE_DIR}`);
+      localFailures++;
       continue;
     }
     localHashes[relPath] = hashBytes(readFileSync(localPath));
@@ -215,10 +218,10 @@ async function main(): Promise<void> {
 
   // Summary
   const passed = results.filter((r) => r.ok).length;
-  const failed = results.filter((r) => !r.ok).length;
+  const failed = results.filter((r) => !r.ok).length + localFailures;
 
   console.log('');
-  console.log(`[deploy-smoke] ${passed} passed, ${failed} failed out of ${results.length} checked`);
+  console.log(`[deploy-smoke] ${passed} passed, ${failed} failed out of ${results.length + localFailures} checked`);
 
   if (failed > 0) {
     console.error('[deploy-smoke] stale content detected — consider a pull-zone purge (bunny.net dashboard → Pull Zone → Purge Cache).');
