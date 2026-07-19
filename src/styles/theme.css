@@ -522,6 +522,12 @@ abbr.glossary-term {
   margin-top: 0.25rem;
 }
 
+.species-plate-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
 .species-noc {
   white-space: nowrap;
   flex-shrink: 0;
