@@ -141,3 +141,50 @@ describe('filterRecords — geo and elevation dimensions', () => {
     assert.equal(first?.elevation_ft, 100);
   });
 });
+
+describe('filterRecords — compound state:county keys (ISSUE-133)', () => {
+  // Same-named county in two different states — the exact scenario the bug allowed
+  // to silently aggregate: selecting "Lincoln" used to return both states' records.
+  const crossStateRecords = [
+    { county: 'Lincoln', state: 'WA', collection: 'UW' },
+    { county: 'Lincoln', state: 'MT', collection: 'UM' },
+    { county: 'Lincoln', state: 'OR', collection: 'OSU' },
+    { county: 'Whatcom', state: 'WA', collection: 'UW' },
+  ] as unknown as OccurrenceRecord[];
+
+  it('a bare county name still matches every state (back-compat / unambiguous case)', () => {
+    const result = filterRecords(crossStateRecords, { county: 'Lincoln' });
+    assert.equal(result.length, 3);
+    assert.ok(result.every(r => r.county === 'Lincoln'));
+  });
+
+  it('a compound state:county key matches only that state\'s records', () => {
+    const result = filterRecords(crossStateRecords, { county: 'MT:Lincoln' });
+    assert.equal(result.length, 1);
+    assert.equal(result[0]?.state, 'MT');
+    assert.equal(result[0]?.collection, 'UM');
+  });
+
+  it('a compound key for a different state excludes the others sharing the name', () => {
+    const result = filterRecords(crossStateRecords, { county: 'WA:Lincoln' });
+    assert.equal(result.length, 1);
+    assert.equal(result[0]?.state, 'WA');
+  });
+
+  it('a compound key does not match records with the same county in a state it does not name', () => {
+    const result = filterRecords(crossStateRecords, { county: 'OR:Lincoln' });
+    assert.ok(result.every(r => r.state === 'OR'));
+    assert.equal(result.length, 1);
+  });
+
+  it('a compound key for an unambiguous county still works', () => {
+    const result = filterRecords(crossStateRecords, { county: 'WA:Whatcom' });
+    assert.equal(result.length, 1);
+    assert.equal(result[0]?.county, 'Whatcom');
+  });
+
+  it('a compound key naming a state/county pair with no matching records returns empty', () => {
+    const result = filterRecords(crossStateRecords, { county: 'ID:Lincoln' });
+    assert.equal(result.length, 0);
+  });
+});

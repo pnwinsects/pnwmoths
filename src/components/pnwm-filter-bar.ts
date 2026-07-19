@@ -4,6 +4,52 @@ import type { OccurrenceRecord, FilterChangeDetail } from '../types/index.ts';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
+export interface CountyOption {
+  value: string;
+  label: string;
+}
+
+/**
+ * Build the County dropdown options from a species' own occurrence records.
+ *
+ * ISSUE-133: same-named counties/regional districts in different states/provinces
+ * (e.g. WA Lincoln vs MT Lincoln, OR/WA Benton, ID/OR Washington) would otherwise
+ * collapse into one ambiguous entry whose filter silently aggregates records from
+ * every matching state. When a raw county name maps to more than one state within
+ * this species' records, each state's occurrence gets its own option keyed
+ * `${state}:${county}` (the same compound-key convention pnwm-taxon-browser uses
+ * for Browse's district filter) and labeled `${county} (${state})`. Unambiguous
+ * names — the common case — keep a bare `county` value/label, matching the
+ * legacy site's un-annotated county list and prior behavior here.
+ *
+ * Ambiguity is determined per-species (not globally across the whole database):
+ * a species whose "Lincoln" records all fall in one state is never ambiguous for
+ * its own dropdown, and filtering by the bare name can't mix in another state's
+ * records because none exist in this record set.
+ */
+export function buildCountyOptions(
+  records: Pick<OccurrenceRecord, 'county' | 'state'>[]
+): CountyOption[] {
+  const statesByCounty = new Map<string, Set<string>>();
+  for (const r of records) {
+    if (!r.county) continue;
+    if (!statesByCounty.has(r.county)) statesByCounty.set(r.county, new Set());
+    if (r.state) statesByCounty.get(r.county)!.add(r.state);
+  }
+  const options: CountyOption[] = [];
+  for (const [county, states] of statesByCounty) {
+    if (states.size > 1) {
+      for (const state of [...states].sort()) {
+        options.push({ value: `${state}:${county}`, label: `${county} (${state})` });
+      }
+    } else {
+      options.push({ value: county, label: county });
+    }
+  }
+  options.sort((a, b) => a.label.localeCompare(b.label));
+  return options;
+}
+
 class PnwmFilterBar extends LitElement {
   static get properties(): PropertyDeclarations {
     return {
@@ -73,7 +119,7 @@ class PnwmFilterBar extends LitElement {
   _collection: string;
   _elevationMin: number;
   _elevationMax: number;
-  _counties: string[];
+  _counties: CountyOption[];
   _collections: string[];
 
   constructor() {
@@ -100,17 +146,15 @@ class PnwmFilterBar extends LitElement {
         const records: OccurrenceRecord[] = await loadParquet(this.slug);
         const statesSet = new Set<string>();
         const typesSet = new Set<string>();
-        const countiesSet = new Set<string>();
         const collectionsSet = new Set<string>();
         for (const r of records) {
           if (r.state) statesSet.add(r.state);
           if (r.record_type) typesSet.add(r.record_type);
-          if (r.county) countiesSet.add(r.county);
           if (r.collection) collectionsSet.add(r.collection);
         }
         this._states = [...statesSet].sort();
         this._recordTypes = [...typesSet].sort();
-        this._counties = [...countiesSet].sort();
+        this._counties = buildCountyOptions(records);
         this._collections = [...collectionsSet].sort();
       } catch (_err) {
         // Leave empty on error — controls still render with "All" options
@@ -227,7 +271,7 @@ class PnwmFilterBar extends LitElement {
             @change=${this._onCountyChange}
           >
             <option value="all">All counties</option>
-            ${this._counties.map(c => html`<option value=${c} ?selected=${this._county === c}>${c}</option>`)}
+            ${this._counties.map(c => html`<option value=${c.value} ?selected=${this._county === c.value}>${c.label}</option>`)}
           </select>
         </div>
 
