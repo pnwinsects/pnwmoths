@@ -133,16 +133,15 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1193 in real data/key-matrix.json', () => {
-    // euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoined the matrix.
-    // clostera-brucei gained a site page in #110 (was an unmatched key species), adding one more: 1192 -> 1193.
+  test('meta.matchedSpecies === 1189 in real data/key-matrix.json', () => {
+    // Issue #84 deny-lists unpublished species, excluding four formerly matched key species.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1193,
-      `expected meta.matchedSpecies to be 1193, got ${raw.meta.matchedSpecies}`
+      1189,
+      `expected meta.matchedSpecies to be 1189, got ${raw.meta.matchedSpecies}`
     );
   });
 });

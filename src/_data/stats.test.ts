@@ -22,15 +22,22 @@ function narrativeSlugs(): Set<string> {
   );
 }
 
-/** Shown (non-withheld) species slugs from species.csv. */
+/** Shown (non-withheld, non-unpublished) species slugs from species.csv. */
 function shownSpecies(): Array<{ slug: string; family: string }> {
   const rows = parse(readFileSync(resolve(ROOT, 'data/species.csv')), {
     columns: true,
     skip_empty_lines: true,
   }) as Array<{ genus: string; species: string; family: string }>;
+  const unpublished = new Set(
+    (parse(readFileSync(resolve(ROOT, 'data/unpublished-species.csv')), {
+      columns: true,
+      skip_empty_lines: true,
+    }) as Array<{ slug: string }>).map((r) => (r.slug ?? '').trim().toLowerCase().replace(/\s+/g, '-')),
+  );
   return rows
     .filter((r) => (r.family ?? '').trim().toLowerCase() !== 'geometridae')
-    .map((r) => ({ slug: `${r.genus}-${r.species}`.toLowerCase(), family: r.family }));
+    .map((r) => ({ slug: `${r.genus}-${r.species}`.toLowerCase().replace(/\s+/g, '-'), family: r.family }))
+    .filter((sp) => !unpublished.has(sp.slug));
 }
 
 test('stats: all three counts are positive integers', async () => {
