@@ -60,6 +60,12 @@ when the reference data changes):
 
 - [`scripts/extract-reference-links.ts`](../../scripts/extract-reference-links.ts)
   → `data/species-links.csv` (BugGuide / MPG external links).
+- [`scripts/extract-species-plates.ts`](../../scripts/extract-species-plates.ts)
+  → `data/species-plates.csv` (species → photographic-plate assignment, issue
+  #53). Reads the `species_plateimage` / `species_plateimage_member_species`
+  join tables — the species-to-plate assignment is a curatorial layout
+  decision (which numbered plate a genus landed on) and is not derivable from
+  `family`/`subfamily`/`tribe` alone.
 - [`scripts/backfill-legacy-county.ts`](../../scripts/backfill-legacy-county.ts)
   → legacy county backfill.
 - [`scripts/recover-clipped-bc-records.ts`](../../scripts/recover-clipped-bc-records.ts)

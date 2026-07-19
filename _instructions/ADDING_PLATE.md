@@ -75,3 +75,23 @@ git push
 ```
 
 CI will build the new plate page automatically from the updated `data/plates.json`.
+
+## Linking species to the new plate
+
+Each species page shows a "View Photographic Plate" link when it has an entry
+in `data/species-plates.csv` (`species_slug,plate_slug`), consumed by
+[`src/_data/speciesPlates.ts`](../src/_data/speciesPlates.ts). Add a row for
+every species that appears on the new plate:
+
+```csv
+some-species-slug,plate-NN-familyname
+```
+
+This mapping is curated (which species land on which plate is a layout
+decision, not derivable from taxonomy), so there's no way to auto-generate it
+from `data/species.csv` alone. If the reference database has been updated
+with the new plate's membership, re-run
+[`scripts/extract-species-plates.ts`](../scripts/extract-species-plates.ts)
+(`npm run plates:materialize`) to regenerate the whole CSV instead of editing
+it by hand.
+

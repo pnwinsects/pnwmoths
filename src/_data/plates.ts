@@ -13,6 +13,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const DEFAULT_SOURCE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates_z';
 const PLATES_Z_SOURCE = process.env.PLATES_Z_SOURCE ?? DEFAULT_SOURCE;
@@ -157,7 +158,7 @@ async function readDimensions(dirPath: string): Promise<{ width: number; height:
   };
 }
 
-const MANIFEST_PATH = new URL('../../data/plates.json', import.meta.url).pathname;
+const MANIFEST_PATH = fileURLToPath(new URL('../../data/plates.json', import.meta.url));
 
 export default async function (): Promise<PlateEntry[]> {
   if (!existsSync(PLATES_Z_SOURCE)) {

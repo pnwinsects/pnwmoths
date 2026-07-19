@@ -29,6 +29,14 @@ eleventyComputed:
   <div class="species-title">
     <h1><em>{{ sp.genus }} {{ sp.species_display }}</em>{% if sp.authority %} {{ sp.authority }}{% endif %}</h1>
     {% if sp.common_name %}<div class="species-common-name">{{ sp.common_name }}</div>{% endif %}
+    {% set platePlateSlug = speciesPlates[sp.slug] %}
+    {% if platePlateSlug %}
+      {% for p in plates %}
+        {% if p.slug == platePlateSlug %}
+          <a class="species-plate-link" href="{{ ('/plates/' + p.slug + '/') | url }}">View Photographic Plate</a>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   </div>
   {% if sp.noc_id %}
   <div class="species-noc">
