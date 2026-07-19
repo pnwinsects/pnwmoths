@@ -456,6 +456,23 @@ abbr.glossary-term {
   }
 }
 
+.home-announcement {
+  margin: 1.5rem 0;
+  padding: 0.85rem 1.25rem;
+  background: var(--pnwm-cream);
+  border: 1px solid var(--pico-muted-border-color);
+  border-left: 4px solid var(--pico-primary);
+  border-radius: var(--pico-border-radius);
+}
+
+.home-announcement > :first-child {
+  margin-top: 0;
+}
+
+.home-announcement > :last-child {
+  margin-bottom: 0;
+}
+
 .home-stats {
   display: flex;
   flex-wrap: wrap;
