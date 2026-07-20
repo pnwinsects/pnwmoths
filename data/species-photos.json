@@ -47,6 +47,31 @@
     "high_res_available": true,
     "specimens": [
       {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/abagrotis-brunneipennis/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/abagrotis-brunneipennis/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/abagrotis-brunneipennis/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/abagrotis-brunneipennis/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/abagrotis-brunneipennis/C-D"
+      },
+      {
         "specimen_id": "C",
         "view": "V",
         "tiles_path": "species-tiles/abagrotis-brunneipennis/C-V"
@@ -949,6 +974,18 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/acronicta-innotata/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "acronicta-insita": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/acronicta-insita/C-D"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -23431,6 +23468,18 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "speranza-guenearia": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-guenearia/A-D"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "sphinx-chersis": {
     "high_res_available": true,
     "specimens": [
@@ -26845,6 +26894,18 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/xestia-bryanti/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "xestia-c-nigrum": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/xestia-c-nigrum/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
