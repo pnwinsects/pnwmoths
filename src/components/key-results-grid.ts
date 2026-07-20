@@ -56,7 +56,7 @@ export class KeyResultsGrid extends LitElement {
   matchedSpecies: KeySpecies[] = [];
   hasSelection = false;
   matchedCount = 0;
-  totalCount = 1189;
+  totalCount = 1190;
   pathPrefix = '';
 
   /** Slugs whose CDN thumbnail failed to load — rendered as the gray placeholder
@@ -101,7 +101,7 @@ export class KeyResultsGrid extends LitElement {
   }
 
   render(): TemplateResult {
-    const total = this.totalCount ?? 1189;
+    const total = this.totalCount ?? 1190;
     const count = this.matchedCount ?? 0;
     const countLine = html`<p class="pnwm-krg-count" aria-live="polite" aria-atomic="true">${buildCountText(this.hasSelection, count, total)}</p>`;
 
