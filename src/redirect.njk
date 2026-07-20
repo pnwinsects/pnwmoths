@@ -101,12 +101,10 @@ eleventyExcludeFromCollections: true
         '/photographic-plates/': 'plates/index.html',
       };
 
-      // --- Synonym map for reclassified species (old slug -> new slug) ---
-      const SYNONYMS = {
-        'globia-alameda': 'capsula-alameda',
-        'globia-oblonga': 'capsula-oblonga',
-        'globia-subflava': 'capsula-subflava',
-      };
+      // --- Synonym map for reclassified species (old WWU slug -> new site slug) ---
+      // Globia (subflava/oblonga/alameda) is the current genus and now matches the
+      // new site slug directly, so no synonym mapping is needed for it (#146).
+      const SYNONYMS = {};
 
       /**
        * Resolve an old WWU path to a new site path.
