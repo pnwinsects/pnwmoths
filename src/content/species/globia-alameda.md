@@ -6,7 +6,7 @@
 
 *Globia alameda* is a dark brown medium-sized moth (FW length 15 mm; females larger but not measured) that flies in wetlands in southeastern Oregon and southern Idaho during late summer. The forewing is uniform dark brown, sometimes with dark spots on the veins at the positions of the antemedial and postmedial lines but lacking all other markings. The hindwing is gray-tan suffused with darker gray toward the outer margin, with a gray fringe. The head and thorax match the forewing color. The abdomen is relatively long for the size of the wings. The male antenna is bead-like.
 
-This species can be identified by its uniform dark brown forewing and gray hindwing. It is only likely to be found near permanent bodies of water in southeastern Oregon in the Northwest. *Globia subflava* is similar in size to *G. alameda* but is dark orange-brown in males, straw-colored in females, with gray veins and lines of black spots on the veins. The relationships of these taxa warrants further evaluation.
+This species can be identified by its uniform dark brown forewing and gray hindwing. It is only likely to be found near permanent bodies of water in southeastern Oregon in the Northwest. *Globia subflava* is similar in size to *G. alameda* but is dark orange-brown in males, straw-colored in females, with gray veins and lines of black spots on the veins. The relationships of these taxa warrant further evaluation.
 
 
 
