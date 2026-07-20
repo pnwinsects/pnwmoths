@@ -1,5 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   buildStateMap,
   taxonHasState,
@@ -12,6 +13,9 @@ import {
   districtLabel,
   validateSpeciesDistricts,
   deriveStatesAvailable,
+  parseTaxonHash,
+  resolveTaxonHash,
+  taxonFragment,
 } from './pnwm-taxon-browser.ts';
 import type { TaxonFamily, TaxonSubfamily, TaxonTribe, TaxonGenus } from '../types/index.ts';
 
@@ -303,5 +307,153 @@ describe('deriveStatesAvailable', () => {
       { species_slug: 'c', state: 'ID' },
     ];
     assert.deepEqual(deriveStatesAvailable(rows), ['ID', 'WA']);
+  });
+});
+
+const TAXON_FIXTURE: TaxonFamily[] = [
+  {
+    name: 'Notodontidae',
+    navImages: [],
+    subfamilies: [
+      {
+        name: 'Pygaerinae',
+        navImages: [],
+        tribes: [
+          {
+            name: null,
+            navImages: [],
+            genera: [
+              {
+                name: 'Clostera',
+                genus_slug: 'clostera',
+                navImages: [],
+                species: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Notodontinae',
+        navImages: [],
+        tribes: [
+          {
+            name: 'Dicranurini',
+            navImages: [],
+            genera: [
+              {
+                name: 'Furcula',
+                genus_slug: 'furcula',
+                navImages: [],
+                species: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Erebidae',
+    navImages: [],
+    subfamilies: [
+      {
+        name: null,
+        navImages: [],
+        tribes: [
+          {
+            name: null,
+            navImages: [],
+            genera: [
+              {
+                name: 'Hypena',
+                genus_slug: 'hypena',
+                navImages: [],
+                species: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
+describe('taxonomy Browse fragments', () => {
+  it('preserves the existing family fragment and qualifies deeper ranks by ancestry', () => {
+    assert.equal(taxonFragment({ family: 'Notodontidae' }), 'family-notodontidae');
+    assert.equal(
+      taxonFragment({ family: 'Notodontidae', subfamily: 'Pygaerinae' }),
+      'family-notodontidae--subfamily-pygaerinae'
+    );
+    assert.equal(
+      taxonFragment({
+        family: 'Notodontidae',
+        subfamily: 'Notodontinae',
+        tribe: 'Dicranurini',
+      }),
+      'family-notodontidae--subfamily-notodontinae--tribe-dicranurini'
+    );
+  });
+
+  it('parses valid hierarchy fragments and rejects malformed or out-of-order fragments', () => {
+    assert.deepEqual(
+      parseTaxonHash('#family-notodontidae--subfamily-pygaerinae'),
+      { family: 'notodontidae', subfamily: 'pygaerinae' }
+    );
+    assert.equal(parseTaxonHash('#subfamily-pygaerinae--family-notodontidae'), null);
+    assert.equal(parseTaxonHash('#family-%E0%A4%A'), null);
+    assert.equal(parseTaxonHash('#unknown-notodontidae'), null);
+  });
+
+  it('resolves a subfamily target with the ancestors needed to reveal it', () => {
+    const target = resolveTaxonHash(
+      TAXON_FIXTURE,
+      '#family-notodontidae--subfamily-pygaerinae'
+    );
+    assert.equal(target?.family.name, 'Notodontidae');
+    assert.equal(target?.subfamily?.name, 'Pygaerinae');
+    assert.equal(target?.fragment, 'family-notodontidae--subfamily-pygaerinae');
+  });
+
+  it('resolves a named tribe and its family and subfamily ancestors', () => {
+    const target = resolveTaxonHash(
+      TAXON_FIXTURE,
+      '#family-notodontidae--subfamily-notodontinae--tribe-dicranurini'
+    );
+    assert.equal(target?.family.name, 'Notodontidae');
+    assert.equal(target?.subfamily?.name, 'Notodontinae');
+    assert.equal(target?.tribe?.name, 'Dicranurini');
+  });
+
+  it('resolves a genus when optional subfamily and tribe levels are absent', () => {
+    const target = resolveTaxonHash(TAXON_FIXTURE, '#family-erebidae--genus-hypena');
+    assert.equal(target?.subfamily?.name, null);
+    assert.equal(target?.tribe?.name, null);
+    assert.equal(target?.genus?.name, 'Hypena');
+    assert.equal(target?.fragment, 'family-erebidae--genus-hypena');
+  });
+
+  it('returns null for a stale or unknown target', () => {
+    assert.equal(
+      resolveTaxonHash(
+        TAXON_FIXTURE,
+        '#family-notodontidae--subfamily-does-not-exist'
+      ),
+      null
+    );
+  });
+
+  it('generates hierarchy-qualified species breadcrumb links', () => {
+    const template = readFileSync(new URL('../species/species.njk', import.meta.url), 'utf8');
+    assert.ok(template.includes(
+      `href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}"`
+    ));
+    assert.ok(template.includes(
+      `#family-{{ sp.family | lower }}--subfamily-{{ sp.subfamily | lower }}"`
+    ));
+    assert.ok(template.includes(
+      `--tribe-{{ sp.tribe | lower }}"`
+    ));
   });
 });
