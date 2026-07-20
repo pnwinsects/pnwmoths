@@ -16,11 +16,11 @@ eleventyComputed:
    in theme.css — otherwise collapsible template whitespace renders unevenly (the space
    before the genus was collapsing to zero). The `</a\n  >` breaks keep it readable. -#}
 <nav class="species-breadcrumb" aria-label="Taxonomy"
-  ><a href="{{ '/browse/' | url }}">{{ sp.family }}</a
+  ><a href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}">{{ sp.family }}</a
   >{% if sp.subfamily %}<span aria-hidden="true">›</span
-  ><a href="{{ '/browse/' | url }}">{{ sp.subfamily }}</a
+  ><a href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}--subfamily-{{ sp.subfamily | lower }}">{{ sp.subfamily }}</a
   >{% endif %}{% if sp.tribe %}<span aria-hidden="true">›</span
-  ><a href="{{ '/browse/' | url }}">{{ sp.tribe }}</a
+  ><a href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}{% if sp.subfamily %}--subfamily-{{ sp.subfamily | lower }}{% endif %}--tribe-{{ sp.tribe | lower }}">{{ sp.tribe }}</a
   >{% endif %}<span aria-hidden="true">›</span
   ><span>{{ sp.genus }}</span
 ></nav>

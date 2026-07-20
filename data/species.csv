@@ -32,7 +32,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 1396,Heliothis,acesias,,93-2047,"Felder & Rogenhofer, 1875",Noctuidae,heliothis-phloxiphaga,Heliothinae,,
 1397,Plagiomimicus,spumosum,Frothy Moth,93-1651,"(Grote, 1874)",Noctuidae,plagiomimicus-expallidus|zotheca-tranquilla|selicanis-cinereola,Amphipyrinae,,Stiriini
 1398,Sympistis,glennyi,,93-1835,"(Grote, 1873)",Noctuidae,sympistis-acheron|anarta-oregonica|euxoa-extranea,Oncocnemidinae,,
-1399,Capsula,alameda,,93-2440,"(Smith, 1903)",Noctuidae,capsula-subflava,Noctuinae,,
+1399,Globia,alameda,,93-2440,"(Smith, 1903)",Noctuidae,globia-subflava,Noctuinae,,
 1400,Ufeus,satyricus,Grote\'s Satyr Moth,93-2709,"Grote, 1873",Noctuidae,ufeus-hulstii,Noctuinae,,Xylenini
 1401,Apantesis,doris,Doris Tiger Moth,93-0241,"(Boisduval, 1869)",Erebidae,apantesis-virgo|apantesis-parthenice,Arctiinae,,Arctiini
 1403,Apamea,scoparia,,93-2343,"Mikkola, Mustelin & Lafontaine, 2000",Noctuidae,euxoa-shasta|apamea-cogitata,Noctuinae,,Apameini
@@ -347,7 +347,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 1718,Euxoa,edictalis,,93-3322,"(Smith, 1893)",Noctuidae,anarta-fusculenta,Noctuinae,,Noctuini
 1719,Polia,nugatis,,93-2873,"(Smith, 1898)",Noctuidae,andropolia-diversilineata,Noctuinae,,Hadenini
 1720,Apamea,devastator,Glassy Cutworm Moth,93-2350,"(Brace, 1819)",Noctuidae,polia-imbrifera|apamea-longula|apamea-indocilis,Noctuinae,,Apameini
-1721,Capsula,subflava,Subflava Sedge Borer Moth,93-2439,"(Grote, 1882)",Noctuidae,capsula-oblonga|capsula-alameda,Noctuinae,,
+1721,Globia,subflava,Subflava Sedge Borer Moth,93-2439,"(Grote, 1882)",Noctuidae,globia-oblonga|globia-alameda,Noctuinae,,
 1722,Malacosoma,disstria,Forest Tent Caterpillar Moth,MONA 7698,"(Hübner, 1820)",Lasiocampidae,malacosoma-constrictum|malacosoma-californicum,Lasiocampinae,,
 1723,Drasteria,inepta,Inept Drasteria Moth,93-0895,"Hy. Edwards, 1881",Erebidae,drasteria-scrupulosa|drasteria-sabulosa,Erebinae,,Melipotini
 1724,Sympistis,lapponica,,93-1929,"(Thunberg, 1791)",Noctuidae,sympistis-wilsoni,Oncocnemidinae,,
@@ -725,7 +725,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2107,Egira,simplex,,93-2789,"(Walker, 1865)",Noctuidae,egira-crucialis,Noctuinae,,Orthosiini
 2108,Schinia,tertia,,93-2158,"(Grote, 1874)",Noctuidae,schinia-albafascia|tarache-areli,Heliothinae,,
 2109,Diarsia,rosaria,,93-3535,"(Grote, 1878)",Noctuidae,lycophotia-phyllophora|abagrotis-apposita|xestia-xanthographa|diarsia-rubifera,Noctuinae,,Noctuini
-2110,Capsula,oblonga,Oblong Sedge Borer Moth,93-2438,"(Grote, 1882)",Noctuidae,capsula-subflava,Noctuinae,,
+2110,Globia,oblonga,Oblong Sedge Borer Moth,93-2438,"(Grote, 1882)",Noctuidae,globia-subflava,Noctuinae,,
 2111,Euxoa,flavicollis,,93-3483,"(Smith, [1888])",Noctuidae,euxoa-ridingsiana|euxoa-perolivalis,Noctuinae,,Noctuini
 2112,Tesagrotis,atrifrons,,93-3636,"(Grote, 1873)",Noctuidae,tesagrotis-corrodera|tesagrotis-amia|tesagrotis-piscipellis,Noctuinae,,Noctuini
 2113,Xestia,mixta,,93-3597,"(Walker, 1856)",Noctuidae,acronicta-fragilis|xestia-speciosa|xestia-perquiritata,Noctuinae,,Noctuini

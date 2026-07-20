@@ -2,6 +2,17 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { PnwmImageSlideshow } from './pnwm-image-slideshow.ts';
 
+describe('lightbox layout', () => {
+  it('stacks the image and credit vertically while centering them', () => {
+    const styles = PnwmImageSlideshow.styles.cssText;
+
+    assert.match(
+      styles,
+      /\.lightbox\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*align-items:\s*center;[^}]*justify-content:\s*center;/s,
+    );
+  });
+});
+
 describe('_formatCaption', () => {
   it('returns location line with locality, state, and elevation', () => {
     const img = { locality: 'Snoqualmie Pass', state: 'WA', elevation: '3000' };

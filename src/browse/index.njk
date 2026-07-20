@@ -18,16 +18,16 @@ permalink: /browse/index.html
       {# Heading levels track effective depth: a null subfamily/tribe flattens its
          children up a level so the outline (h2 family → … → genus) never skips. #}
       {% if subfam.name %}
-        <h3>{{ subfam.name }}</h3>
+        <h3 id="family-{{ family.name | lower }}--subfamily-{{ subfam.name | lower }}">{{ subfam.name }}</h3>
       {% endif %}
       {% set tribeLevel = 4 if subfam.name else 3 %}
       {% for tribe in subfam.tribes %}
         {% if tribe.name %}
-          <h{{ tribeLevel }}>{{ tribe.name }}</h{{ tribeLevel }}>
+          <h{{ tribeLevel }} id="family-{{ family.name | lower }}{% if subfam.name %}--subfamily-{{ subfam.name | lower }}{% endif %}--tribe-{{ tribe.name | lower }}">{{ tribe.name }}</h{{ tribeLevel }}>
         {% endif %}
         {% set genusLevel = (tribeLevel + 1) if tribe.name else tribeLevel %}
         {% for genus in tribe.genera %}
-          <h{{ genusLevel }}>{{ genus.name }}</h{{ genusLevel }}>
+          <h{{ genusLevel }} id="family-{{ family.name | lower }}{% if subfam.name %}--subfamily-{{ subfam.name | lower }}{% endif %}{% if tribe.name %}--tribe-{{ tribe.name | lower }}{% endif %}--genus-{{ genus.genus_slug }}">{{ genus.name }}</h{{ genusLevel }}>
           <ul>
             {% for sp in genus.species %}
               <li><a href="{{ ('/species/' + sp.slug + '/') | url }}">

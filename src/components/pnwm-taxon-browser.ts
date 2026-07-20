@@ -169,6 +169,108 @@ export function collectSlugs(node: TaxonFamily | TaxonSubfamily | TaxonTribe | T
   return slugs;
 }
 
+export interface TaxonBrowseTarget {
+  family: string;
+  subfamily?: string;
+  tribe?: string;
+  genus?: string;
+}
+
+export interface ResolvedTaxonBrowseTarget {
+  family: TaxonFamily;
+  subfamily?: TaxonSubfamily;
+  tribe?: TaxonTribe;
+  genus?: TaxonGenus;
+  fragment: string;
+}
+
+const TAXON_RANKS = ['family', 'subfamily', 'tribe', 'genus'] as const;
+type TaxonRank = typeof TAXON_RANKS[number];
+
+function normalizedTaxonName(name: string): string {
+  return name.trim().toLowerCase();
+}
+
+export function taxonFragment(target: TaxonBrowseTarget): string {
+  return TAXON_RANKS
+    .flatMap(rank => target[rank] ? [`${rank}-${encodeURIComponent(normalizedTaxonName(target[rank]))}`] : [])
+    .join('--');
+}
+
+export function parseTaxonHash(hash: string): TaxonBrowseTarget | null {
+  if (!hash.startsWith('#')) return null;
+  const parts = hash.slice(1).split('--');
+  if (!parts.length) return null;
+
+  const target: Partial<TaxonBrowseTarget> = {};
+  let previousRank = -1;
+  for (const part of parts) {
+    const separator = part.indexOf('-');
+    if (separator < 1 || separator === part.length - 1) return null;
+    const rank = part.slice(0, separator) as TaxonRank;
+    const rankIndex = TAXON_RANKS.indexOf(rank);
+    if (rankIndex <= previousRank) return null;
+    previousRank = rankIndex;
+
+    let name: string;
+    try {
+      name = decodeURIComponent(part.slice(separator + 1));
+    } catch {
+      return null;
+    }
+    if (!name.trim()) return null;
+    target[rank] = normalizedTaxonName(name);
+  }
+
+  return target.family ? target as TaxonBrowseTarget : null;
+}
+
+function namesMatch(actual: string | null, requested: string | undefined): boolean {
+  return requested !== undefined && actual !== null && normalizedTaxonName(actual) === requested;
+}
+
+export function resolveTaxonHash(families: TaxonFamily[], hash: string): ResolvedTaxonBrowseTarget | null {
+  const requested = parseTaxonHash(hash);
+  if (!requested) return null;
+
+  const family = families.find(node => namesMatch(node.name, requested.family));
+  if (!family) return null;
+  if (!requested.subfamily && !requested.tribe && !requested.genus) {
+    return { family, fragment: taxonFragment({ family: family.name }) };
+  }
+
+  const subfamily = family.subfamilies.find(node => {
+    if (requested.subfamily) return namesMatch(node.name, requested.subfamily);
+    if (requested.tribe) return node.tribes.some(tribe => namesMatch(tribe.name, requested.tribe));
+    return node.tribes.some(tribe =>
+      tribe.genera.some(genus => namesMatch(genus.genus_slug, requested.genus))
+    );
+  });
+  if (!subfamily) return null;
+
+  const resolvedNames: TaxonBrowseTarget = { family: family.name };
+  if (subfamily.name) resolvedNames.subfamily = subfamily.name;
+  if (!requested.tribe && !requested.genus) {
+    return { family, subfamily, fragment: taxonFragment(resolvedNames) };
+  }
+
+  const tribe = subfamily.tribes.find(node => {
+    if (requested.tribe) return namesMatch(node.name, requested.tribe);
+    return node.genera.some(genus => namesMatch(genus.genus_slug, requested.genus));
+  });
+  if (!tribe) return null;
+
+  if (tribe.name) resolvedNames.tribe = tribe.name;
+  if (!requested.genus) {
+    return { family, subfamily, tribe, fragment: taxonFragment(resolvedNames) };
+  }
+
+  const genus = tribe.genera.find(node => namesMatch(node.genus_slug, requested.genus));
+  if (!genus) return null;
+  resolvedNames.genus = genus.genus_slug;
+  return { family, subfamily, tribe, genus, fragment: taxonFragment(resolvedNames) };
+}
+
 class PnwmTaxonBrowser extends LitElement {
   static get properties(): PropertyDeclarations {
     return {
@@ -231,10 +333,10 @@ class PnwmTaxonBrowser extends LitElement {
     const scriptEl = document.getElementById('taxon-data');
     if (scriptEl) {
       this._families = JSON.parse(scriptEl.textContent ?? '[]') as TaxonFamily[];
-      // The component renders async, so the browser's initial scroll to a
-      // #family-<name> deep link (e.g. from the homepage intro) misses. After
-      // the first render, expand the targeted family and scroll it into view.
-      void this.updateComplete.then(() => this._scrollToHashFamily());
+      // The component renders async, so the browser's initial fragment scroll
+      // misses. Expand the target's ancestors after the first render, then
+      // position and focus the exact disclosure after the expansion render.
+      void this.updateComplete.then(() => this._openHashTaxon());
     }
     // species-states.json and species-districts.json are independent payloads —
     // fetch them concurrently so neither dropdown waits on the other's round-trip.
@@ -280,24 +382,31 @@ class PnwmTaxonBrowser extends LitElement {
     // Network/fetch errors (rejected): soft degradation — districtMap empty, select disabled.
   }
 
-  /**
-   * Handle a #family-<name> deep link: expand the matching family and scroll
-   * its row into view. No-op when the hash is absent or matches no family.
-   */
-  _scrollToHashFamily(): void {
-    const hash = window.location.hash;
-    if (!hash.startsWith('#family-')) return;
-    const target = decodeURIComponent(hash.slice('#family-'.length)).toLowerCase();
-    const family = this._families.find(f => (f.name ?? '').toLowerCase() === target);
-    if (!family?.name) return;
-    this._expandedFamilies = new Set([...this._expandedFamilies, family.name]);
+  _openHashTaxon(): void {
+    const target = resolveTaxonHash(this._families, window.location.hash);
+    if (!target) return;
+
+    this._expandedFamilies = new Set([...this._expandedFamilies, target.family.name]);
+    let parentKey = target.family.name;
+    if (target.subfamily?.name) {
+      parentKey = `${parentKey}__${target.subfamily.name}`;
+      this._expandedSubfamilies = new Set([...this._expandedSubfamilies, parentKey]);
+    }
+    if (target.tribe?.name) {
+      parentKey = `${parentKey}__${target.tribe.name}`;
+      this._expandedTribes = new Set([...this._expandedTribes, parentKey]);
+    }
+    if (target.genus) {
+      this._expandedGenera = new Set([
+        ...this._expandedGenera,
+        `${parentKey}__${target.genus.genus_slug}`,
+      ]);
+    }
+
     void this.updateComplete.then(() => {
-      // WR-02: `target` comes from window.location.hash (attacker-supplyable via a
-      // crafted deep link). Interpolating it raw into an attribute selector lets a
-      // hash containing selector metacharacters (e.g. `#family-a"]`) throw a
-      // DOMException. `target` is already lowercased to match the generated id, so
-      // getElementById sidesteps selector parsing entirely.
-      document.getElementById(`family-${target}`)?.scrollIntoView();
+      const row = document.getElementById(target.fragment);
+      row?.scrollIntoView({ block: 'center' });
+      row?.querySelector('button')?.focus({ preventScroll: true });
     });
   }
 
@@ -466,17 +575,23 @@ class PnwmTaxonBrowser extends LitElement {
 
   // level is the heading depth for this genus: one shallower when its subfamily
   // and/or tribe are absent and it flattens upward (see _renderSubfamily/_renderTribe).
-  _renderGenus(genus: TaxonGenus, parentKey: string, level: number): TemplateResult {
+  _renderGenus(
+    genus: TaxonGenus,
+    parentKey: string,
+    level: number,
+    parentTarget: TaxonBrowseTarget,
+  ): TemplateResult {
     const key = `${parentKey}__${genus.genus_slug}`;
     const expanded = this._expandedGenera.has(key);
     const slugs = genus.species.map(s => s.slug);
+    const target = { ...parentTarget, genus: genus.genus_slug };
     const heading = html`<button
       type="button"
       aria-expanded="${expanded}"
       @click=${() => this._toggleGenus(key)}
     >${genus.name}</button>`;
     return html`
-      <div class="pnwm-tb-genus-row" style="${this._mutedStyle(slugs)}">
+      <div class="pnwm-tb-genus-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
         ${this._disclosureHeading(level, heading)}
         ${!expanded ? this._renderImageStrip(genus.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         ${expanded ? this._renderSpecies(genus.species, genus.name) : ''}
@@ -485,28 +600,34 @@ class PnwmTaxonBrowser extends LitElement {
 
   // subfamKey is the parent subfamily's expand key (or the family name when the
   // subfamily is null — see _renderSubfamily). level is the tribe's heading depth.
-  _renderTribe(tribe: TaxonTribe, subfamKey: string, level: number): TemplateResult {
+  _renderTribe(
+    tribe: TaxonTribe,
+    subfamKey: string,
+    level: number,
+    parentTarget: TaxonBrowseTarget,
+  ): TemplateResult {
     // tribe.name === null means the subfamily has no tribal subdivision — render
     // its genera directly under the subfamily (no heading, no expand button), at
     // the tribe's own level, the same way a null subfamily flattens its genera.
     if (!tribe.name) {
-      return html`${tribe.genera.map(g => this._renderGenus(g, subfamKey, level))}`;
+      return html`${tribe.genera.map(g => this._renderGenus(g, subfamKey, level, parentTarget))}`;
     }
 
     const key = `${subfamKey}__${tribe.name}`;
     const expanded = this._expandedTribes.has(key);
     const slugs = collectSlugs(tribe);
+    const target = { ...parentTarget, tribe: tribe.name };
     const heading = html`<button
       type="button"
       aria-expanded="${expanded}"
       @click=${() => this._toggleTribe(key)}
     >${tribe.name}</button>`;
     return html`
-      <div class="pnwm-tb-tribe-row" style="${this._mutedStyle(slugs)}">
+      <div class="pnwm-tb-tribe-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
         ${this._disclosureHeading(level, heading)}
         ${!expanded ? this._renderImageStrip(tribe.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
-          ${tribe.genera.map(g => this._renderGenus(g, key, level + 1))}
+          ${tribe.genera.map(g => this._renderGenus(g, key, level + 1, target))}
         </div>
       </div>`;
   }
@@ -516,25 +637,27 @@ class PnwmTaxonBrowser extends LitElement {
     const key = `${familyName}__${subfam.name ?? '__none__'}`;
     const expanded = this._expandedSubfamilies.has(key);
     const slugs = collectSlugs(subfam);
+    const familyTarget = { family: familyName };
 
     if (!subfam.name) {
       // No-subfamily case: flatten tribes/genera directly under family (no heading,
       // no expand button); they take the subfamily's own level (3).
       return html`
-        ${subfam.tribes.map(t => this._renderTribe(t, familyName, 3))}`;
+        ${subfam.tribes.map(t => this._renderTribe(t, familyName, 3, familyTarget))}`;
     }
 
+    const target = { ...familyTarget, subfamily: subfam.name };
     const heading = html`<button
       type="button"
       aria-expanded="${expanded}"
       @click=${() => this._toggleSubfamily(key)}
     >${subfam.name}</button>`;
     return html`
-      <div class="pnwm-tb-subfamily-row" style="${this._mutedStyle(slugs)}">
+      <div class="pnwm-tb-subfamily-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
         ${this._disclosureHeading(3, heading)}
         ${!expanded ? this._renderImageStrip(subfam.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
-          ${subfam.tribes.map(t => this._renderTribe(t, key, 4))}
+          ${subfam.tribes.map(t => this._renderTribe(t, key, 4, target))}
         </div>
       </div>`;
   }
@@ -542,8 +665,9 @@ class PnwmTaxonBrowser extends LitElement {
   _renderFamily(family: TaxonFamily): TemplateResult {
     const expanded = this._expandedFamilies.has(family.name);
     const slugs = collectSlugs(family);
+    const target = { family: family.name };
     return html`
-      <div class="pnwm-tb-family-row" id="family-${(family.name ?? '').toLowerCase()}" style="${this._mutedStyle(slugs)}">
+      <div class="pnwm-tb-family-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
         <h2>
           <button
             type="button"
