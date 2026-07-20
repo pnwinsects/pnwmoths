@@ -47,31 +47,6 @@
     "high_res_available": true,
     "specimens": [
       {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/abagrotis-brunneipennis/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/abagrotis-brunneipennis/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/abagrotis-brunneipennis/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/abagrotis-brunneipennis/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/abagrotis-brunneipennis/C-D"
-      },
-      {
         "specimen_id": "C",
         "view": "V",
         "tiles_path": "species-tiles/abagrotis-brunneipennis/C-V"
