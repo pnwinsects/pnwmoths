@@ -26,6 +26,6 @@ eleventyExcludeFromCollections: true
     This species account has moved.
     <a href="{{ ('/species/' + r.newSlug + '/') | url }}">Continue to the current page</a>.
   </p>
-  <script>window.location.replace({{ ('/species/' + r.newSlug + '/') | dump | safe }});</script>
+  <script>window.location.replace({{ ('/species/' + r.newSlug + '/') | url | dump | safe }});</script>
 </body>
 </html>
