@@ -211,3 +211,29 @@ cost a debugging cycle to discover.
 - **Close a data-coverage or "additive-only skipped it" gap at the phase that discovers
   it**, as a tracked follow-up — not vague deferred debt. And when images 404, distinguish
   "wrong filename" from "never uploaded" early: the fix differs (catalog edit vs migration).
+
+- **Settle a major-version bump by parsing real data with both versions, not by reading the
+  changelog.** Dependabot surfaced six breaking changes for csv-parse 7.0.0; all six actually
+  landed in 6.0.0, which we were already past, and upstream's own changelog says 7.0.0 "was
+  published by mistake, there is no breaking changes" and that its notes wrongly included
+  6.0.0's commits. Release notes are prose written by humans and can be wrong in either
+  direction. Installing both versions side by side (`npm install pkg@X --prefix ./vX`) and
+  diffing the parsed output of every project CSV took minutes and answered the question
+  definitively — 101,287 rows, byte-identical. Check the *patch* line too: 7.0.0 shipped a
+  broken CJS export fixed in 7.0.1, so the "obvious" `^7.0.0` was the wrong pin.
+
+- **A test that hardcodes a library's output can't detect that library changing.** The sole
+  guard on csv-parse's `relax_quotes` behavior asserted against a hand-written string that
+  didn't match what csv-parse actually returned, and checked only the two fields that were
+  identical either way — so it could not fail for the reason it existed (ISSUE-165). If a test
+  exists to catch upstream drift, it must round-trip real input through the real library.
+  Mutation-test the guard afterwards: reintroduce the bug and confirm it goes red. A guard you
+  haven't watched fail is a guess.
+
+- **Never let a script write outputs to a fixed path when its inputs are redirectable.**
+  `build-key.ts` honored `KEY_CHAR_IMAGES_CSV` for input but hardcoded its `data/` output
+  paths, so tests pointing at fixtures overwrote the committed artifacts on every `npm test`
+  (ISSUE-163). Input and output overrides come in pairs. See
+  [ADR 0017](adr/0017-reproducible-committed-artifacts.md) for the related rule that committed
+  artifacts embed no timestamp — the churn from that timestamp is what hid this bug for
+  months, and "the file always shows as modified" is a warning sign, not a fact of life.

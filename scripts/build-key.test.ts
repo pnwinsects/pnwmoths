@@ -258,6 +258,28 @@ describe('main (integration)', () => {
     });
   });
 
+  test('artifacts are byte-reproducible across runs (ADR 0017)', () => {
+    // Both artifacts are committed, so identical inputs must produce identical bytes.
+    // They previously embedded a build timestamp, which made every regeneration diff
+    // and let real content drift hide in the churn — that is how ISSUE-163 went
+    // unnoticed. Two consecutive builds must agree exactly.
+    const read = (outDir: string) => ({
+      matrix: readFileSync(join(outDir, 'key-matrix.json'), 'utf-8'),
+      coverage: readFileSync(join(outDir, 'key-coverage-report.json'), 'utf-8'),
+    });
+    const first = withKeyBuild({}, read);
+    const second = withKeyBuild({}, read);
+    assert.strictEqual(first.matrix, second.matrix, 'key-matrix.json must be byte-identical across runs');
+    assert.strictEqual(
+      first.coverage, second.coverage,
+      'key-coverage-report.json must be byte-identical across runs'
+    );
+    assert.ok(
+      !first.matrix.includes('generatedAt') && !first.coverage.includes('"generated"'),
+      'artifacts must not embed a build timestamp'
+    );
+  });
+
   test('emits exactly 8 distinct categories with no stray-quote artifact', () => {
     const matrix = buildKeyMatrix();
     const cats = new Set(matrix.characters.map(c => c.category));

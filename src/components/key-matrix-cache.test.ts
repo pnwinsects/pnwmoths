@@ -42,7 +42,6 @@ function makeValidArtifact(
       totalKeySpecies: numSpecies,
       matchedSpecies: numSpecies,
       unmatchedSpecies: 0,
-      generatedAt: '2026-01-01T00:00:00.000Z',
     },
     characters: Array.from({ length: numCharacters }, (_, i) => ({ ...character, id: i })),
     species: Array.from({ length: numSpecies }, (_, i) => ({
@@ -94,7 +93,7 @@ describe('validateKeyMatrix', () => {
     assert.throws(
       () =>
         validateKeyMatrix({
-          meta: { totalKeySpecies: 1, matchedSpecies: 1, unmatchedSpecies: 0, generatedAt: '2026-01-01T00:00:00.000Z' },
+          meta: { totalKeySpecies: 1, matchedSpecies: 1, unmatchedSpecies: 0 },
           characters: [
             { id: 0, category: 'A', subcategory: null, question: 'Q', state: 'S', image_filename: null, alt_text: null },
             { id: 1, category: 'A', subcategory: null, question: 'Q', state: 'T', image_filename: null, alt_text: null },
@@ -121,7 +120,7 @@ describe('validateKeyMatrix', () => {
     assert.throws(
       () =>
         validateKeyMatrix({
-          meta: { totalKeySpecies: 25, matchedSpecies: 25, unmatchedSpecies: 0, generatedAt: '2026-01-01T00:00:00.000Z' },
+          meta: { totalKeySpecies: 25, matchedSpecies: 25, unmatchedSpecies: 0 },
           characters: [
             { id: 0, category: 'A', subcategory: null, question: 'Q', state: 'S', image_filename: null, alt_text: null },
           ],

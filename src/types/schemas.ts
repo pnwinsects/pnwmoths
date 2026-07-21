@@ -203,12 +203,13 @@ export const KeySpeciesSchema = z.object({
 });
 export type KeySpecies = z.infer<typeof KeySpeciesSchema>;
 
-// KeyMatrixMetaSchema (Phase 40) — build provenance; also enables "showing N of 1,228" UI affordance
+// KeyMatrixMetaSchema (Phase 40) — species counts; enables "showing N of 1,228" UI affordance
+// Deliberately carries no build timestamp: the artifact is committed, so it must be
+// reproducible or every regeneration diffs and real drift hides in the churn (ADR 0017).
 export const KeyMatrixMetaSchema = z.object({
   totalKeySpecies:  z.number(),    // 1,228 — all species in key.csv including unmatched
   matchedSpecies:   z.number(),    // 1,189 — species resolved to site slugs (in matrix)
   unmatchedSpecies: z.number(),    // 39 = 1,228 − 1,189
-  generatedAt:      z.string(),    // ISO 8601 timestamp from build-key.ts
 });
 export type KeyMatrixMeta = z.infer<typeof KeyMatrixMetaSchema>;
 
