@@ -199,7 +199,6 @@ describe('KeyMatrixSchema', () => {
     totalKeySpecies: 0,
     matchedSpecies: 0,
     unmatchedSpecies: 0,
-    generatedAt: '2026-01-01T00:00:00.000Z',
   };
   const validArtifact = {
     meta: validMeta,

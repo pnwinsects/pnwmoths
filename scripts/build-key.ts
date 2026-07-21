@@ -352,7 +352,6 @@ export async function main(): Promise<void> {
       totalKeySpecies:  speciesBinomials.length,    // 1,228 (all key.csv binomials incl. unmatched)
       matchedSpecies:   matchedSlugs.length,         // 1,189 (resolved to site slugs)
       unmatchedSpecies: unmatchedBinomials.length,   // 39
-      generatedAt:      new Date().toISOString(),
     },
     characters,
     species,
@@ -401,8 +400,9 @@ export async function main(): Promise<void> {
   const outDir = process.env['KEY_OUT_DIR'] ?? resolve('data');
   writeFileSync(join(outDir, 'key-matrix.json'), JSON.stringify(artifact));
 
+  // No timestamp: both artifacts are committed, so they must be byte-reproducible
+  // from the same inputs (ADR 0017). `git log` already records when they changed.
   const coverageReport = {
-    generated: new Date().toISOString(),
     matched: matchedSlugs.length,
     unmatched: unmatchedBinomials.length,
     unmatched_binomials: unmatchedBinomials.map(b => ({

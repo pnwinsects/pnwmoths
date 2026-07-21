@@ -208,7 +208,6 @@ const MATRIX_FIXTURE: KeyMatrix = {
     totalKeySpecies: 2,
     matchedSpecies: 2,
     unmatchedSpecies: 0,
-    generatedAt: '2026-01-01T00:00:00.000Z',
   },
   characters: [
     { id: 0, category: 'Color', subcategory: null, question: 'Wing color', state: 'Brown', image_filename: null, alt_text: null },
