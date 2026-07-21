@@ -544,6 +544,73 @@ test('real data/images.csv has no duplicate (species_slug, filename) rows for he
   assert.equal(seen.size, 4, 'expected exactly 4 distinct hemieuxoa-rudens image rows (A-D, A-V, B-D, B-V)');
 });
 
+// --- Real-data gate: drasteria-nubicola -> drasteria-maculosa image reassignment (#156) ---
+// Merrill Peterson confirmed the two legacy images catalogued under drasteria-nubicola
+// (the legacy CMS's own drasteria-maculosa factsheet links these exact two files as its
+// featured photos) genuinely depict Drasteria maculosa. The rows must be reassigned
+// (not duplicated) to the canonical drasteria-maculosa slug with renamed filenames,
+// preserving every other metadata field (photographer/license/view/specimen/locality/
+// coordinates/date/collector) verbatim.
+test('real data/images.csv: drasteria-nubicola images are reassigned to drasteria-maculosa (#156)', async () => {
+  const { parse } = await import('csv-parse/sync');
+  const raw = readFileSync(resolve(ROOT, 'data/images.csv'));
+  const rows = parse(raw, { columns: true, skip_empty_lines: true }) as Array<{
+    species_slug: string;
+    filename: string;
+    photographer: string;
+    weight: string;
+    license: string;
+    view: string;
+    specimen: string;
+    locality: string;
+    state: string;
+    latitude: string;
+    longitude: string;
+    elevation_ft: string;
+    year: string;
+    month: string;
+    day: string;
+    collector: string;
+  }>;
+
+  const nubicolaRows = rows.filter((r) => r.species_slug === 'drasteria-nubicola');
+  assert.deepEqual(nubicolaRows, [], 'drasteria-nubicola should have zero images.csv rows after reassignment');
+
+  const maculosaRows = rows.filter((r) => r.species_slug === 'drasteria-maculosa');
+  assert.equal(maculosaRows.length, 2, 'expected exactly 2 drasteria-maculosa image rows (A-D, A-V)');
+
+  const byView = new Map(maculosaRows.map((r) => [r.view, r]));
+  const dorsal = byView.get('dorsal');
+  const ventral = byView.get('ventral');
+  assert.ok(dorsal, 'expected a dorsal drasteria-maculosa row');
+  assert.ok(ventral, 'expected a ventral drasteria-maculosa row');
+  assert.equal(dorsal!.filename, 'Drasteria maculosa-A-D.jpg');
+  assert.equal(ventral!.filename, 'Drasteria maculosa-A-V.jpg');
+
+  for (const row of [dorsal!, ventral!]) {
+    assert.equal(row.specimen, 'A');
+    assert.equal(row.photographer, 'Merrill A. Peterson');
+    assert.equal(row.license, 'CC BY-NC-SA 4.0');
+    assert.equal(row.locality, 'Mono Valley, Hwy 167 N of Mono L. Salt flat at springs');
+    assert.equal(row.state, 'CA');
+    assert.equal(row.latitude, '38.09');
+    assert.equal(row.longitude, '-118.99');
+    assert.equal(row.elevation_ft, '6460');
+    assert.equal(row.year, '1995');
+    assert.equal(row.month, '8');
+    assert.equal(row.day, '1');
+    assert.equal(row.collector, 'J. Troubridge & LG Crabo');
+  }
+});
+
+// --- Real-data gate: euxoa-aurantiaca is on the unpublished deny-list (#156) ---
+test('real data/unpublished-species.csv contains euxoa-aurantiaca (#156 curator omission)', () => {
+  const raw = readFileSync(resolve(ROOT, 'data/unpublished-species.csv'), 'utf8');
+  const lines = raw.split('\n').filter((l) => l.trim().length > 0);
+  const found = lines.some((l) => l.split(',')[0]?.trim().toLowerCase() === 'euxoa-aurantiaca');
+  assert.ok(found, 'expected euxoa-aurantiaca as a slug in data/unpublished-species.csv');
+});
+
 test('integration: build-data.ts accepts images.csv filename with spaces without throwing', () => {
   const tmpDir = resolve(ROOT, '.tmp-space-filename');
   const tmpDataDir = resolve(tmpDir, 'data');
