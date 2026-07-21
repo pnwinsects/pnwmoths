@@ -82,3 +82,16 @@ test('real data/species-redirects.csv: every new_slug resolves to a live species
   const dangling = rows.filter(r => !liveSlugs.has(r.newSlug)).map(r => r.newSlug);
   assert.deepEqual(dangling, [], 'every redirect target must be a currently-published species');
 });
+
+test('real data/species-redirects.csv: no new_slug is in the unpublished-species deny-list (would send the redirect to a page that never gets emitted, i.e. a 404)', async () => {
+  const { loadUnpublishedSpecies } = await import('../_lib/unpublished-species.ts');
+  const unpublished = loadUnpublishedSpecies();
+  const rows = parseRedirectsCsv(readFileSync(resolve('data/species-redirects.csv'), 'utf8'));
+  const gated = rows.filter(r => unpublished.has(r.newSlug)).map(r => `${r.oldSlug} -> ${r.newSlug}`);
+  assert.deepEqual(
+    gated,
+    [],
+    'a redirect canonical target must never be a gated/unpublished species — the target page would not be emitted, ' +
+      'so the redirect (meta refresh, canonical link, JS fallback) would resolve to a 404',
+  );
+});

@@ -40,10 +40,10 @@ test('normalizeSlug: already-hyphenated slug unchanged modulo case', () => {
 // loadUnpublishedSpecies
 // ---------------------------------------------------------------------------
 
-test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 46 entries', () => {
+test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 45 entries', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished instanceof Set, 'result should be a Set');
-  assert.strictEqual(unpublished.size, 46, `expected 46 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+  assert.strictEqual(unpublished.size, 45, `expected 45 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
 });
 
 test('loadUnpublishedSpecies: real CSV contains "aseptis-sp-no-1"', () => {
@@ -61,9 +61,20 @@ test('loadUnpublishedSpecies: real CSV contains "lycomorpha-grotei" (ISSUE-157 c
   assert.ok(unpublished.has('lycomorpha-grotei'), 'should contain lycomorpha-grotei');
 });
 
-test('loadUnpublishedSpecies: real CSV contains "schizura-ipomaeae" (ISSUE-157 curator hide)', () => {
+test('loadUnpublishedSpecies: real CSV does NOT contain "oedemasia-salicis" — the migrated canonical target must be visible, not carry forward schizura-concinna\'s #84 hide', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
-  assert.ok(unpublished.has('schizura-ipomaeae'), 'should contain schizura-ipomaeae');
+  assert.ok(
+    !unpublished.has('oedemasia-salicis'),
+    'oedemasia-salicis is the canonical current-genus target of the schizura-concinna redirect (#155/#156) and per M. Peterson should show its page/images; it must not be gated',
+  );
+});
+
+test('loadUnpublishedSpecies: real CSV contains "schizura-ipomaeae" (the actual species the #84 CMS-exclusion applies to, also independently hidden per ISSUE-157)', () => {
+  const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
+  assert.ok(
+    unpublished.has('schizura-ipomaeae'),
+    'the #84 legacy-CMS exclusion belongs to Schizura ipomaeae, a distinct current species, not to the migrated Oedemasia salicis',
+  );
 });
 
 test('loadUnpublishedSpecies: header-only CSV (no data rows) yields an empty set (deny-list lifted)', () => {
