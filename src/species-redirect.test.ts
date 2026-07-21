@@ -7,7 +7,7 @@
 // throws EISDIR at build time. See src/species-redirect.njk for the full explanation.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, mkdtempSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, rmSync, mkdirSync, writeFileSync, realpathSync } from 'node:fs';
 import { resolve, isAbsolute, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { pathToFileURL } from 'node:url';
@@ -143,7 +143,13 @@ test('species-redirect output survives a real Vite MPA build (EISDIR regression 
   // and asserts it does not throw.
   const pages = await renderRedirectPages('/');
   const expected = getSpeciesRedirects();
-  const dir = mkdtempSync(join(tmpdir(), 'pnwm-vite-eisdir-'));
+  // realpathSync is required on macOS: os.tmpdir() returns /var/folders/... which is a
+  // symlink to /private/var/folders/.... Vite resolves `root` to the real path, so without
+  // this the emitted asset names come out as long ../../.. traversals and rolldown rejects
+  // them ("must be strings that are neither absolute nor relative paths") before the build
+  // can exercise the EISDIR condition at all — the test errored for an unrelated reason
+  // rather than guarding anything (ISSUE-168). Linux CI has no such indirection.
+  const dir = realpathSync(mkdtempSync(join(tmpdir(), 'pnwm-vite-eisdir-')));
   try {
     const input: Record<string, string> = {};
     for (const page of pages) {
