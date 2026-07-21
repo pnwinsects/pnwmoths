@@ -105,14 +105,34 @@ describe('parseCharacterLabel', () => {
     assert.throws(() => parseCharacterLabel('A:B:C:D:E'), /unexpected.*depth/i);
   });
 
-  test('strips leading double-quote from stray-quote label (csv-parse relax_quotes artifact)', () => {
-    // The raw label csv-parse returns for the "dipped" embedded-quote field:
-    // '"Abdomen and thorax:Abdomen:Does it appear as if the tip of the abdomen was '
-    // (leading " is the relax_quotes artifact; trailing " on the state is stripped too)
-    const raw = '"Abdomen and thorax:Abdomen:Does it appear as if the tip of the abdomen was dipped in a different color?:Yes"';
-    const result = parseCharacterLabel(raw);
+  test('strips outer double-quotes from stray-quote label (real csv-parse relax_quotes output)', () => {
+    // Round-trips the real CSV rather than a hand-written fixture: the point of this
+    // test is to catch a change in csv-parse's relax_quotes handling, which a
+    // hardcoded string cannot do (ISSUE-165). Reads the embedded-quote "dipped"
+    // label straight out of data/key-characters.csv with build-key.ts's own options.
+    const rows = parse(readFileSync(resolve(ROOT, 'data/key-characters.csv')), {
+      columns: false,
+      skip_empty_lines: true,
+      relax_quotes: true,
+    }) as string[][];
+
+    const raw = rows.map(r => r[0]).find(c => typeof c === 'string' && c.includes('dipped'));
+    assert.ok(raw, 'expected a character label containing "dipped" in data/key-characters.csv');
+
+    // relax_quotes wraps the whole field in quotes and leaves the inner pair around
+    // `dipped` intact. Assert that shape explicitly — if csv-parse ever stops
+    // producing it, this fails here rather than silently changing the parsed key.
+    assert.match(raw!, /^".*"dipped".*"$/, 'expected outer quotes plus preserved inner quotes');
+
+    const result = parseCharacterLabel(raw!);
     assert.strictEqual(result.category, 'Abdomen and thorax');
-    assert.strictEqual(result.state, 'Yes');
+    assert.strictEqual(result.subcategory, 'Abdomen');
+    assert.strictEqual(
+      result.question,
+      'Does it appear as if the tip of the abdomen was "dipped" in a different color?',
+      'only the outer quote pair is stripped; the inner quotes are part of the question'
+    );
+    assert.match(result.state, /^(Yes|No)$/);
   });
 
   test('leaves clean label unchanged (regression guard)', () => {
@@ -180,21 +200,66 @@ describe('buildBitset', () => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// Integration helpers. Every test that runs build-key.ts MUST route its output
+// through KEY_OUT_DIR: the script otherwise writes data/key-matrix.json and
+// data/key-coverage-report.json in place, so the suite overwrote the committed
+// artifacts on every `npm test` — with fixture data when the input was also
+// overridden, leaving a key matrix with every image_filename nulled (ISSUE-163).
+// ---------------------------------------------------------------------------
+
+import { mkdtempSync, writeFileSync as nodeWriteFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+type KeyMatrix = {
+  characters: Array<{
+    id: number;
+    category: string;
+    image_filename: string | null;
+    alt_text: string | null;
+  }>;
+  species: Array<{ slug: string; nav_image: string | null }>;
+};
+
+/**
+ * Run build-key.ts with its artifacts redirected to a throwaway directory, then
+ * hand that directory to `fn`. `env` supplies any additional overrides (e.g.
+ * KEY_CHAR_IMAGES_CSV); the temp dir is always removed afterwards.
+ */
+function withKeyBuild<T>(env: Record<string, string>, fn: (outDir: string) => T): T {
+  const outDir = mkdtempSync(join(tmpdir(), 'pnwm-keyout-'));
+  try {
+    const assignments = Object.entries({ ...env, KEY_OUT_DIR: outDir })
+      .map(([k, v]) => `${k}=${JSON.stringify(v)}`)
+      .join(' ');
+    execSync(`${assignments} node scripts/build-key.ts`, { cwd: ROOT, stdio: 'pipe' });
+    return fn(outDir);
+  } finally {
+    rmSync(outDir, { recursive: true, force: true });
+  }
+}
+
+/** Run build-key.ts into a temp dir and return the parsed key matrix. */
+function buildKeyMatrix(env: Record<string, string> = {}): KeyMatrix {
+  return withKeyBuild(env, outDir =>
+    JSON.parse(readFileSync(join(outDir, 'key-matrix.json'), 'utf-8')) as KeyMatrix
+  );
+}
+
 describe('main (integration)', () => {
-  test('emits data/key-matrix.json and data/key-coverage-report.json', () => {
-    execSync('node scripts/build-key.ts', { cwd: ROOT, stdio: 'pipe' });
-    assert.ok(existsSync(resolve(ROOT, 'data/key-matrix.json')), 'key-matrix.json must exist');
-    assert.ok(
-      existsSync(resolve(ROOT, 'data/key-coverage-report.json')),
-      'key-coverage-report.json must exist'
-    );
+  test('emits key-matrix.json and key-coverage-report.json', () => {
+    withKeyBuild({}, outDir => {
+      assert.ok(existsSync(join(outDir, 'key-matrix.json')), 'key-matrix.json must exist');
+      assert.ok(
+        existsSync(join(outDir, 'key-coverage-report.json')),
+        'key-coverage-report.json must exist'
+      );
+    });
   });
 
   test('emits exactly 8 distinct categories with no stray-quote artifact', () => {
-    execSync('node scripts/build-key.ts', { cwd: ROOT, stdio: 'pipe' });
-    const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-      characters: Array<{ category: string }>;
-    };
+    const matrix = buildKeyMatrix();
     const cats = new Set(matrix.characters.map(c => c.category));
     assert.strictEqual(cats.size, 8, `expected 8 distinct categories, got ${cats.size}: ${[...cats].join(', ')}`);
     assert.ok(
@@ -207,10 +272,7 @@ describe('main (integration)', () => {
   // image in data/images.csv for that slug, so it resolves on the CDN. The original
   // bug emitted key-derived underscore filenames that had no images.csv row and 404'd.
   test('every emitted nav_image is backed by a data/images.csv row (ISSUE-43)', () => {
-    execSync('node scripts/build-key.ts', { cwd: ROOT, stdio: 'pipe' });
-    const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-      species: Array<{ slug: string; nav_image: string | null }>;
-    };
+    const matrix = buildKeyMatrix();
     const imageRows = parse(readFileSync(resolve(ROOT, 'data/images.csv')), {
       columns: true,
       skip_empty_lines: true,
@@ -231,38 +293,35 @@ describe('main (integration)', () => {
 // Tests use KEY_CHAR_IMAGES_CSV env var to point at temp fixture CSVs.
 // ---------------------------------------------------------------------------
 
-import { mkdtempSync, writeFileSync as nodeWriteFileSync, rmSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-
 describe('CIMG-02: CSV population of image_filename + alt_text', () => {
+  test('build-key.ts does not write to the committed artifacts when KEY_OUT_DIR is set', () => {
+    // Regression guard for ISSUE-163: the suite must not mutate data/key-matrix.json.
+    const committed = resolve(ROOT, 'data/key-matrix.json');
+    const before = readFileSync(committed, 'utf-8');
+    buildKeyMatrix({
+      KEY_CHAR_IMAGES_CSV: join(mkdtempSync(join(tmpdir(), 'pnwm-absent-')), 'nope.csv'),
+    });
+    assert.strictEqual(
+      readFileSync(committed, 'utf-8'), before,
+      'running build-key.ts with KEY_OUT_DIR must leave data/key-matrix.json untouched'
+    );
+  });
+
   test('absent CSV: build succeeds with all characters having image_filename: null', () => {
     // Point at a guaranteed-nonexistent path
     const missingPath = resolve(ROOT, 'data/key-character-images-NONEXISTENT-FIXTURE.csv');
-    const result = execSync(
-      `KEY_CHAR_IMAGES_CSV=${missingPath} node scripts/build-key.ts`,
-      { cwd: ROOT, stdio: ['pipe', 'pipe', 'pipe'] }
-    );
-    const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-      characters: Array<{ image_filename: string | null }>;
-    };
+    const matrix = buildKeyMatrix({ KEY_CHAR_IMAGES_CSV: missingPath });
     assert.ok(
       matrix.characters.every(c => c.image_filename === null),
       'all characters should have image_filename: null when CSV is absent'
     );
-    void result; // build succeeded (no throw)
   });
 
   test('absent CSV: build emits a console.warn soft-skip (non-fatal)', () => {
     const missingPath = resolve(ROOT, 'data/key-character-images-NONEXISTENT-FIXTURE.csv');
-    const { stderr } = execSync(
-      `KEY_CHAR_IMAGES_CSV=${missingPath} node scripts/build-key.ts`,
-      { cwd: ROOT, stdio: ['pipe', 'pipe', 'pipe'], encoding: 'utf-8' }
-    ) as unknown as { stderr: string };
-    // The build outputs to stderr via console.warn
-    // We can't easily capture stderr separately with execSync returning Buffer,
-    // so we just verify the build doesn't throw (above test). This is acceptable.
-    void stderr;
+    // The build outputs to stderr via console.warn. We can't easily capture stderr
+    // separately here, so we just verify the build doesn't throw (above test).
+    assert.doesNotThrow(() => buildKeyMatrix({ KEY_CHAR_IMAGES_CSV: missingPath }));
   });
 
   test('out-of-range char_id: build succeeds without throwing (D-08)', () => {
@@ -272,13 +331,7 @@ describe('CIMG-02: CSV population of image_filename + alt_text', () => {
     try {
       nodeWriteFileSync(fixturePath, 'char_id,image_filename,alt_text\n9999,test.webp,test alt\n');
       // Should not throw
-      execSync(
-        `KEY_CHAR_IMAGES_CSV=${fixturePath} node scripts/build-key.ts`,
-        { cwd: ROOT, stdio: 'pipe' }
-      );
-      const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-        characters: Array<{ image_filename: string | null }>;
-      };
+      const matrix = buildKeyMatrix({ KEY_CHAR_IMAGES_CSV: fixturePath });
       // Out-of-range char_id=9999 should be skipped; no character should have 'test.webp'
       assert.ok(
         matrix.characters.every(c => c.image_filename !== 'test.webp'),
@@ -292,10 +345,7 @@ describe('CIMG-02: CSV population of image_filename + alt_text', () => {
   test('valid CSV row: sets image_filename and alt_text for matching character', () => {
     // Use a known char_id from the committed CSV (char_id=5 → 'US_Coast Range.webp')
     // Just verify the real CSV produces a non-null image_filename for char_id=5
-    execSync('node scripts/build-key.ts', { cwd: ROOT, stdio: 'pipe' });
-    const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-      characters: Array<{ id: number; image_filename: string | null; alt_text: string | null }>;
-    };
+    const matrix = buildKeyMatrix();
     const char5 = matrix.characters.find(c => c.id === 5);
     assert.ok(char5, 'character with id=5 must exist');
     assert.strictEqual(char5!.image_filename, 'US_Coast Range.webp', 'char_id=5 image_filename should be US_Coast Range.webp');
@@ -307,13 +357,7 @@ describe('CIMG-02: CSV population of image_filename + alt_text', () => {
     const fixturePath = join(tmp, 'fixture.csv');
     try {
       nodeWriteFileSync(fixturePath, 'char_id,image_filename,alt_text\n0,TestImage.webp,A test alt text\n');
-      execSync(
-        `KEY_CHAR_IMAGES_CSV=${fixturePath} node scripts/build-key.ts`,
-        { cwd: ROOT, stdio: 'pipe' }
-      );
-      const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-        characters: Array<{ id: number; image_filename: string | null; alt_text: string | null }>;
-      };
+      const matrix = buildKeyMatrix({ KEY_CHAR_IMAGES_CSV: fixturePath });
       const char0 = matrix.characters.find(c => c.id === 0);
       assert.ok(char0, 'character with id=0 must exist');
       assert.strictEqual(char0!.image_filename, 'TestImage.webp', 'image_filename should be set from fixture CSV');
@@ -329,13 +373,7 @@ describe('CIMG-02: CSV population of image_filename + alt_text', () => {
     const fixturePath = join(tmp, 'fixture.csv');
     try {
       nodeWriteFileSync(fixturePath, 'char_id,image_filename,alt_text\n,BlankId.webp,should be skipped\n');
-      execSync(
-        `KEY_CHAR_IMAGES_CSV=${fixturePath} node scripts/build-key.ts`,
-        { cwd: ROOT, stdio: 'pipe' }
-      );
-      const matrix = JSON.parse(readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')) as {
-        characters: Array<{ id: number; image_filename: string | null }>;
-      };
+      const matrix = buildKeyMatrix({ KEY_CHAR_IMAGES_CSV: fixturePath });
       const char0 = matrix.characters.find(c => c.id === 0);
       assert.ok(char0, 'character with id=0 must exist');
       assert.strictEqual(
