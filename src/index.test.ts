@@ -57,10 +57,9 @@ test('theme.css: defines .home-announcement styling', () => {
   );
 });
 
-test('src/content/home-announcement.md is absent by default (no announcement to show yet)', () => {
-  // Mirrors species prose: when the file doesn't exist, the homepage renders
-  // without an announcement box. Maintainers add this file when they have
-  // something to post — see _instructions/EDITING_HOME_ANNOUNCEMENT.md.
+test('src/content/home-announcement.md is non-empty when present', () => {
+  // Mirrors species prose: maintainers can add or remove this optional file,
+  // but committing an empty announcement would render a blank callout.
   const path = resolve(ROOT, 'src', 'content', 'home-announcement.md');
   assert.ok(
     !existsSync(path) || readFileSync(path, 'utf8').trim().length > 0,
