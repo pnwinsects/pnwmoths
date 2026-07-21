@@ -152,15 +152,19 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1190 in real data/key-matrix.json', () => {
-    // Issue #84 deny-lists unpublished species, excluding four formerly matched key species.
+  test('meta.matchedSpecies === 1191 in real data/key-matrix.json', () => {
+    // Issue #84 deny-lists unpublished species, excluding formerly matched key species.
+    // oedemasia-salicis was un-gated (Merrill's guidance: it's the canonical current
+    // placement and should show its page/images); schizura-ipomaeae was newly gated
+    // instead (the #84 CMS-exclusion actually belongs to it, not to oedemasia-salicis).
+    // schizura-ipomaeae was not itself a matched key species, so the swap is a net +1.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1190,
-      `expected meta.matchedSpecies to be 1190, got ${raw.meta.matchedSpecies}`
+      1191,
+      `expected meta.matchedSpecies to be 1191, got ${raw.meta.matchedSpecies}`
     );
   });
 });
