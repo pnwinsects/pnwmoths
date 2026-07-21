@@ -4,7 +4,7 @@
 // Mirrors emit-species-states.ts (JSON emit pattern) + build-data.ts (DuckDB + validateCsv)
 import { DuckDBInstance } from '@duckdb/node-api';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, join } from 'node:path';
 import { parse } from 'csv-parse/sync';
 // Note: validateCsv from build-data.ts is not used here because key-characters.csv
 // contains embedded unescaped double-quotes in character labels (Lucid export artifact)
@@ -394,7 +394,12 @@ export async function main(): Promise<void> {
   }
 
   // 9. Write artifacts (D-07: commit both)
-  writeFileSync(resolve('data/key-matrix.json'), JSON.stringify(artifact));
+  // KEY_OUT_DIR redirects output for testing, mirroring KEY_CHAR_IMAGES_CSV for input.
+  // Tests that override the input MUST also override the output: without this the
+  // suite writes fixture-derived data over the committed artifacts, and a later
+  // `git commit -a` ships a key matrix with every image_filename nulled (ISSUE-163).
+  const outDir = process.env['KEY_OUT_DIR'] ?? resolve('data');
+  writeFileSync(join(outDir, 'key-matrix.json'), JSON.stringify(artifact));
 
   const coverageReport = {
     generated: new Date().toISOString(),
@@ -406,7 +411,7 @@ export async function main(): Promise<void> {
       reason: 'no direct match, no synonym' as const,
     })),
   };
-  writeFileSync(resolve('data/key-coverage-report.json'), JSON.stringify(coverageReport));
+  writeFileSync(join(outDir, 'key-coverage-report.json'), JSON.stringify(coverageReport));
 
   console.log(
     `build-key: ${matchedSlugs.length} matched, ${unmatchedBinomials.length} unmatched of ${speciesBinomials.length} total`
