@@ -1,0 +1,9 @@
+old_slug,new_slug,reason
+eilema-bicolor,manulea-bicolor,eilema-bicolor->manulea-bicolor canonical genus migration (#155)
+heterocampa-lunata,cecrita-lunata,heterocampa-lunata->cecrita-lunata canonical genus migration (#155)
+schizura-conspecta,coelodasys-conspecta,schizura-conspecta->coelodasys-conspecta canonical genus migration (#155)
+schizura-unicornis,coelodasys-unicornis,schizura-unicornis->coelodasys-unicornis canonical genus migration (#155)
+oligocentria-pallida,ianassa-pallida,oligocentria-pallida->ianassa-pallida canonical genus migration (#155)
+oligocentria-semirufescens,oedemasia-semirufescens,oligocentria-semirufescens->oedemasia-semirufescens canonical genus migration (#155)
+schizura-concinna,oedemasia-salicis,schizura-concinna->oedemasia-salicis canonical genus migration (#155)
+saturnia-mendocino,calosaturnia-mendocino,Saturnia->Calosaturnia consolidation (#156)
