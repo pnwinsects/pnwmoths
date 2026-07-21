@@ -26,3 +26,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0015](0015-data-driven-gating.md) | Public-visibility gating via data-driven deny-lists and a single `shown` predicate | Accepted |
 | [0016](0016-tribe-hierarchy-level.md) | Tribe as a conditional level (family → subfamily → tribe? → genus → species), backfilled from the reference DB | Accepted |
 | [0017](0017-reproducible-committed-artifacts.md) | Committed build artifacts carry no build timestamp and must be byte-reproducible | Accepted |
+| [0018](0018-phenology-reared-exclusion.md) | Phenology graphs exclude reared/immature records via a notes keyword scan (no foodplant terms) | Accepted |

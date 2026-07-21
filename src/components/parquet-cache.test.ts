@@ -110,11 +110,17 @@ describe('loadParquet', () => {
 });
 
 describe('REARED_TERMS', () => {
-  it('preserves the exact legacy keyword list (order + casing)', () => {
+  it('preserves the legacy keyword list minus foodplant terms (order + casing)', () => {
     assert.deepEqual(REARED_TERMS, [
-      'reared', 'larva', 'em.', 'pupa', 'Rubus', 'immature', 'broadleaf',
-      'Taraxacum', 'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
+      'reared', 'larva', 'em.', 'pupa', 'immature',
+      'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
     ]);
+  });
+
+  it('carries no foodplant genus terms', () => {
+    for (const plant of ['Rubus', 'Taraxacum', 'broadleaf']) {
+      assert.ok(!REARED_TERMS.includes(plant), `${plant} should not flag a record as reared`);
+    }
   });
 });
 
@@ -149,6 +155,14 @@ describe('isRearedRecord', () => {
 
   it('returns false for a non-reared note', () => {
     assert.equal(isRearedRecord(makeRecord({ notes: 'At UV light trap, MV lamp' })), false);
+  });
+
+  it('returns false for an adult nectaring on a foodplant genus', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'nectaring on Taraxacum; May 24, 2009' })), false);
+  });
+
+  it('returns true for a larva on a foodplant (the larva term still matches)', () => {
+    assert.equal(isRearedRecord(makeRecord({ notes: 'larva on Rubus spectabilis' })), true);
   });
 });
 
