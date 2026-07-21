@@ -121,14 +121,19 @@ export function filterRecords(
 
 /**
  * Keyword list flagging a record as reared/immature (larvae, pupae, eggs, etc.).
- * Verbatim replica of the legacy Django site's `species/models.py` REARED_TERMS,
- * which excluded reared specimens from phenology graphs by nulling their month at
+ * Derived from the legacy Django site's `species/models.py` REARED_TERMS, which
+ * excluded reared specimens from phenology graphs by nulling their month at
  * data-entry time. Replicated here so post-2011 stragglers with populated months
  * (and any future ones) are excluded durably from the phenology bars (ISSUE-59).
+ *
+ * The legacy list also carried the foodplant terms `Rubus`, `Taraxacum`, and
+ * `broadleaf`. Those are deliberately omitted: notes record the plants adults
+ * were visiting as well as larval foodplants, so a nectaring adult would be
+ * dropped from the flight-season data it belongs in (per curator, ISSUE-59).
  */
 export const REARED_TERMS = [
-  'reared', 'larva', 'em.', 'pupa', 'Rubus', 'immature', 'broadleaf',
-  'Taraxacum', 'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
+  'reared', 'larva', 'em.', 'pupa', 'immature',
+  'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
 ];
 
 /**
