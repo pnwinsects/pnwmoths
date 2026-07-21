@@ -95,21 +95,40 @@ describe('GRID-03 placeholder condition (real-data gate)', () => {
     // (autographa-v, xestia-c), so build:key found no image for the full slug and
     // emitted nav_image: null. #71 consolidated the data onto the full slugs, so the
     // null set is now empty. A regression here means an image row lost its slug key.
+    //
+    // #156 reintroduced exactly one deliberate exception: `clostera-brucei`'s only
+    // catalogued photos (A/B specimens) were misidentified and have been reassigned
+    // to clostera-multnoma (curator-confirmed). Clostera brucei's narrow-sense C
+    // specimens exist only in the curator's high-res source set (not yet
+    // downloaded/tiled/uploaded), so clostera-brucei legitimately has zero
+    // CDN-backed photos right now and degrades to the gray placeholder. Remove this
+    // exception once the C specimens are ingested and clostera-brucei has a real
+    // nav_image again.
+    const EXPECTED_NULL_NAV_IMAGE_SLUGS = new Set(['clostera-brucei']);
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     const nullNavImageSpecies = raw.species.filter((s: KeySpecies) => s.nav_image === null);
+    const unexpectedNullNavImageSpecies = nullNavImageSpecies.filter(
+      (s: KeySpecies) => !EXPECTED_NULL_NAV_IMAGE_SLUGS.has(s.slug)
+    );
     assert.equal(
-      nullNavImageSpecies.length,
+      unexpectedNullNavImageSpecies.length,
       0,
-      `expected no null nav_image species, got ${nullNavImageSpecies.length}: ` +
-        nullNavImageSpecies.map((s: KeySpecies) => s.slug).join(', ')
+      `expected no unanticipated null nav_image species, got ${unexpectedNullNavImageSpecies.length}: ` +
+        unexpectedNullNavImageSpecies.map((s: KeySpecies) => s.slug).join(', ')
+    );
+    assert.deepEqual(
+      new Set(nullNavImageSpecies.map((s: KeySpecies) => s.slug)),
+      EXPECTED_NULL_NAV_IMAGE_SLUGS,
+      'expected the null nav_image set to be exactly the known clostera-brucei exception (#156)'
     );
   });
 
   test('placeholder predicate: nav_image === null means no <img>', () => {
     // Lock the predicate itself — render-side proof is HUMAN-UAT in Plan 42-02.
-    // Synthetic fixtures only: no real species currently has a null nav_image (see above).
+    // Synthetic fixtures only: clostera-brucei is the sole real species with a null
+    // nav_image right now (see above), a temporary state pending curator photo ingest.
     const speciesWithImage: KeySpecies = {
       slug: 'habrosyne-scripta', genus: 'Habrosyne', epithet: 'scripta',
       common_name: null, nav_image: 'Habrosyne scripta-A-D.jpg',
