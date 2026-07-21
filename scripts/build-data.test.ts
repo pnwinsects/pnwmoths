@@ -512,6 +512,38 @@ test('build-data.ts: images.csv filename regex accepts Django original filenames
   assert.ok(!re.test('foo!bar.jpg'), 'exclamation mark rejected');
 });
 
+// --- Real-data gate: no duplicate (species_slug, filename) rows for hemieuxoa-rudens ---
+// #156 found `hemieuxoa-rudens,Hemieuxoa rudens-B-V.jpg` catalogued twice (weights 1
+// and 5), which would render the same ventral thumbnail twice in the species-page
+// carousel. This locks the fix in place. (Note: a handful of *other* species have
+// their own pre-existing duplicate/cleanup rows tracked by separate issues — e.g.
+// hecatera-dysodea's live-moth rows in #157 — which are intentionally out of scope
+// here and not asserted against.)
+test('real data/images.csv has no duplicate (species_slug, filename) rows for hemieuxoa-rudens', async () => {
+  const { parse } = await import('csv-parse/sync');
+  const raw = readFileSync(resolve(ROOT, 'data/images.csv'));
+  const rows = parse(raw, { columns: true, skip_empty_lines: true }) as Array<{
+    species_slug: string;
+    filename: string;
+  }>;
+
+  const seen = new Map<string, number>();
+  for (const row of rows) {
+    if (row.species_slug !== 'hemieuxoa-rudens') continue;
+    const key = `${row.species_slug} ${row.filename}`;
+    seen.set(key, (seen.get(key) ?? 0) + 1);
+  }
+  const duplicates = [...seen.entries()].filter(([, count]) => count > 1);
+  assert.deepEqual(
+    duplicates,
+    [],
+    `expected no duplicate hemieuxoa-rudens rows, found: ${duplicates
+      .map(([key, count]) => `${key} x${count}`)
+      .join(', ')}`
+  );
+  assert.equal(seen.size, 4, 'expected exactly 4 distinct hemieuxoa-rudens image rows (A-D, A-V, B-D, B-V)');
+});
+
 test('integration: build-data.ts accepts images.csv filename with spaces without throwing', () => {
   const tmpDir = resolve(ROOT, '.tmp-space-filename');
   const tmpDataDir = resolve(tmpDir, 'data');
@@ -652,3 +684,37 @@ test('build-data.ts: hecatera-dysodea keeps only its A dorsal/ventral specimen p
     assert.strictEqual(row.specimen, 'A', `expected specimen "A", got "${row.specimen}"`);
   }
 });
+
+// --- #156: Clostera brucei -> multnoma photo misidentification correction ---
+// Merrill Peterson confirmed the catalogued A/B specimens were misidentified: they
+// are C. multnoma, not C. brucei. The narrow-sense C. brucei specimens (C-D/C-V)
+// exist only in the curator's high-res source set (not yet downloaded/tiled/
+// uploaded), so clostera-brucei has zero images.csv rows until they're ingested.
+test('real data/images.csv: clostera-brucei A/B specimens are reassigned to clostera-multnoma', async () => {
+  const { parse } = await import('csv-parse/sync');
+  const raw = readFileSync(resolve(ROOT, 'data/images.csv'));
+  const rows = parse(raw, { columns: true, skip_empty_lines: true }) as Array<{
+    species_slug: string;
+    filename: string;
+    specimen: string;
+  }>;
+
+  const bruceiRows = rows.filter(r => r.species_slug === 'clostera-brucei');
+  assert.deepEqual(
+    bruceiRows,
+    [],
+    'clostera-brucei should have no images.csv rows until narrow-sense C specimens are ingested'
+  );
+
+  const multnomaBrucieFilenameRows = rows.filter(
+    r => r.species_slug === 'clostera-multnoma' && r.filename.startsWith('Clostera brucei-')
+  );
+  assert.equal(
+    multnomaBrucieFilenameRows.length,
+    4,
+    'expected the 4 reassigned A/B specimen rows (still using their original CDN filenames) under clostera-multnoma'
+  );
+  const specimens = multnomaBrucieFilenameRows.map(r => r.specimen).sort();
+  assert.deepEqual(specimens, ['A', 'A', 'B', 'B'], 'expected both A and B specimen pairs (dorsal + ventral)');
+});
+
