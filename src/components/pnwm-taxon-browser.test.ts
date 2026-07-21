@@ -434,6 +434,52 @@ describe('taxonomy Browse fragments', () => {
     assert.equal(target?.fragment, 'family-erebidae--genus-hypena');
   });
 
+  it('resolves a genus with a subfamily but no tribe (Clostera)', () => {
+    const target = resolveTaxonHash(TAXON_FIXTURE, '#family-notodontidae--subfamily-pygaerinae--genus-clostera');
+    assert.equal(target?.family.name, 'Notodontidae');
+    assert.equal(target?.subfamily?.name, 'Pygaerinae');
+    assert.equal(target?.tribe?.name, null);
+    assert.equal(target?.genus?.name, 'Clostera');
+    assert.equal(target?.fragment, 'family-notodontidae--subfamily-pygaerinae--genus-clostera');
+  });
+
+  it('resolves a genus qualified by family, subfamily, and tribe (Furcula)', () => {
+    const target = resolveTaxonHash(
+      TAXON_FIXTURE,
+      '#family-notodontidae--subfamily-notodontinae--tribe-dicranurini--genus-furcula'
+    );
+    assert.equal(target?.family.name, 'Notodontidae');
+    assert.equal(target?.subfamily?.name, 'Notodontinae');
+    assert.equal(target?.tribe?.name, 'Dicranurini');
+    assert.equal(target?.genus?.name, 'Furcula');
+    assert.equal(
+      target?.fragment,
+      'family-notodontidae--subfamily-notodontinae--tribe-dicranurini--genus-furcula'
+    );
+  });
+
+  it('returns null when a genus is requested but does not exist under the resolved ancestry', () => {
+    assert.equal(
+      resolveTaxonHash(TAXON_FIXTURE, '#family-erebidae--genus-does-not-exist'),
+      null
+    );
+  });
+
+  it('normalizes and encodes genus names in taxonFragment (case, whitespace)', () => {
+    assert.equal(
+      taxonFragment({ family: 'Erebidae', genus: 'HYPENA' }),
+      'family-erebidae--genus-hypena'
+    );
+    assert.equal(
+      taxonFragment({ family: 'Erebidae', genus: '  Hypena  ' }),
+      'family-erebidae--genus-hypena'
+    );
+    assert.equal(
+      taxonFragment({ family: 'Erebidae', genus: 'My Genus' }),
+      'family-erebidae--genus-my%20genus'
+    );
+  });
+
   it('returns null for a stale or unknown target', () => {
     assert.equal(
       resolveTaxonHash(
@@ -444,7 +490,7 @@ describe('taxonomy Browse fragments', () => {
     );
   });
 
-  it('generates hierarchy-qualified species breadcrumb links', () => {
+  it('generates hierarchy-qualified species breadcrumb links, including a linked genus', () => {
     const template = readFileSync(new URL('../species/species.njk', import.meta.url), 'utf8');
     assert.ok(template.includes(
       `href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}"`
@@ -454,6 +500,13 @@ describe('taxonomy Browse fragments', () => {
     ));
     assert.ok(template.includes(
       `--tribe-{{ sp.tribe | lower }}"`
+    ));
+    // The genus breadcrumb must be an <a>, not a plain <span>, and its href must
+    // qualify by whichever ancestor ranks (subfamily/tribe) the species actually has,
+    // ending in --genus-{{ sp.genus_slug }} — the same fragment Browse renders/resolves.
+    assert.ok(!template.includes('><span>{{ sp.genus }}</span'));
+    assert.ok(template.includes(
+      `{% if sp.subfamily %}--subfamily-{{ sp.subfamily | lower }}{% endif %}{% if sp.tribe %}--tribe-{{ sp.tribe | lower }}{% endif %}--genus-{{ sp.genus_slug }}">{{ sp.genus }}</a`
     ));
   });
 });

@@ -17,6 +17,7 @@ interface SpeciesDbRow {
   tribe: string | null;
   similar_slugs: string[];
   slug: string;
+  genus_slug: string;
 }
 
 function isSpeciesDbRow(obj: unknown): obj is SpeciesDbRow {
@@ -27,7 +28,8 @@ function isSpeciesDbRow(obj: unknown): obj is SpeciesDbRow {
     typeof r['genus'] === 'string' &&
     typeof r['species'] === 'string' &&
     Array.isArray(r['similar_slugs']) &&
-    typeof r['slug'] === 'string'
+    typeof r['slug'] === 'string' &&
+    typeof r['genus_slug'] === 'string'
   );
 }
 
@@ -83,7 +85,8 @@ export default async function (): Promise<SpeciesRow[]> {
            THEN []
            ELSE string_split(similar_species, '|')
       END AS similar_slugs,
-      replace(lower(genus || '-' || species), ' ', '-') AS slug
+      replace(lower(genus || '-' || species), ' ', '-') AS slug,
+      lower(replace(genus, ' ', '-')) AS genus_slug
     FROM species
     ORDER BY genus, species
   `);
@@ -109,6 +112,7 @@ export default async function (): Promise<SpeciesRow[]> {
       tribe: row.tribe,
       similar_slugs: row.similar_slugs,
       slug: row.slug,
+      genus_slug: row.genus_slug,
     });
   }
   return result_rows;

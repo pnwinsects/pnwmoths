@@ -87,6 +87,64 @@ test('species: an unquoted species has species_display === species', async () =>
   assert.strictEqual(sample.species_display, sample.species);
 });
 
+// ---------------------------------------------------------------------------
+// genus_slug (issue #161: link factsheet genus breadcrumb to Browse)
+// ---------------------------------------------------------------------------
+
+test('species: genus_slug is the lowercased, space-hyphenated genus for a full family/subfamily/tribe hierarchy', async () => {
+  const { default: getSpecies } = await import('./species.ts');
+  const rows = await getSpecies();
+  // Apantesis arizoniensis: Erebidae / Arctiinae / Arctiini
+  const row = rows.find(r => r.slug === 'apantesis-arizoniensis');
+  assert.ok(row, 'apantesis-arizoniensis should be emitted');
+  assert.equal(row.family, 'Erebidae');
+  assert.equal(row.subfamily, 'Arctiinae');
+  assert.equal(row.tribe, 'Arctiini');
+  assert.equal(row.genus_slug, 'apantesis');
+});
+
+test('species: genus_slug resolves for a species with no subfamily or tribe', async () => {
+  // No currently-published row has a null subfamily (see species.csv: rows with a blank
+  // subfamily are all deny-listed / unpublished morphospecies), so this exercises the
+  // genus_slug transform directly against a raw CSV row with that hierarchy shape rather
+  // than through getSpecies()'s publish gate.
+  const allRows = parse(
+    readFileSync(resolve(ROOT, 'data/species.csv')),
+    { columns: true, skip_empty_lines: true },
+  ) as Array<{ genus: string; species: string; family: string; subfamily: string; tribe: string }>;
+  const row = allRows.find(r => r.genus === 'Macrochilo' && r.species === 'bivittata');
+  assert.ok(row, 'Macrochilo bivittata should exist in species.csv');
+  assert.equal(row.subfamily, '');
+  assert.equal(row.tribe, '');
+  const genusSlug = row.genus.toLowerCase().replace(/ /g, '-');
+  assert.equal(genusSlug, 'macrochilo');
+});
+
+test('species: genus_slug resolves for a species with a subfamily but no tribe', async () => {
+  const { default: getSpecies } = await import('./species.ts');
+  const rows = await getSpecies();
+  // Sympistis heliophila: Noctuidae / Oncocnemidinae, no tribe.
+  const row = rows.find(r => r.slug === 'sympistis-heliophila');
+  assert.ok(row, 'sympistis-heliophila should be emitted');
+  assert.equal(row.subfamily, 'Oncocnemidinae');
+  assert.equal(row.tribe, null);
+  assert.equal(row.genus_slug, 'sympistis');
+});
+
+test('species: genus_slug matches lower(replace(genus, " ", "-")) for every emitted row (mirrors taxon.ts)', async () => {
+  const { default: getSpecies } = await import('./species.ts');
+  const rows = await getSpecies();
+  assert.ok(rows.length > 0, 'expected at least one emitted species row');
+  for (const row of rows) {
+    const expected = row.genus.toLowerCase().replace(/ /g, '-');
+    assert.equal(
+      row.genus_slug,
+      expected,
+      `genus_slug mismatch for ${row.slug}: expected "${expected}", got "${row.genus_slug}"`,
+    );
+  }
+});
+
 test('species: no emitted slug belongs to a Geometridae genus (spot-check via species.csv)', async () => {
   // Load species.csv to find all Geometridae slugs (source of truth — data is NOT deleted)
   const allRows = parse(
