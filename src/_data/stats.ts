@@ -67,7 +67,7 @@ export default async function (): Promise<SiteStats> {
   };
 
   // Species profiles = shown species that have a written narrative account.
-  // (Not every shown species has prose; those without are excluded from this count.)
+  // Shown species without prose, when any exist, are excluded from this count.
   const narrativeSlugs = loadNarrativeSlugs();
   const shownSlugsReader = await conn.runAndReadAll(`SELECT slug FROM shown`);
   const species = shownSlugsReader

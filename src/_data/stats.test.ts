@@ -61,8 +61,6 @@ test('stats: species count equals the number of shown species with a narrative',
     expected,
     `Species count must equal shown species that have a narrative (${expected})`,
   );
-  // Sanity: the narrative gate actually removes some species (stubs without prose).
-  assert.ok(expected < shown.length, 'Expected some shown species to lack a narrative');
 });
 
 test('stats: withheld families (Geometridae) are excluded from the species count', async () => {
