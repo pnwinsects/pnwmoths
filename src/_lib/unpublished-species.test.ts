@@ -40,10 +40,10 @@ test('normalizeSlug: already-hyphenated slug unchanged modulo case', () => {
 // loadUnpublishedSpecies
 // ---------------------------------------------------------------------------
 
-test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 44 entries', () => {
+test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 46 entries', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished instanceof Set, 'result should be a Set');
-  assert.strictEqual(unpublished.size, 44, `expected 44 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+  assert.strictEqual(unpublished.size, 46, `expected 46 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
 });
 
 test('loadUnpublishedSpecies: real CSV contains "aseptis-sp-no-1"', () => {
@@ -54,6 +54,16 @@ test('loadUnpublishedSpecies: real CSV contains "aseptis-sp-no-1"', () => {
 test('loadUnpublishedSpecies: real CSV contains "xylophanes-nr-libya"', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished.has('xylophanes-nr-libya'), 'should contain xylophanes-nr-libya');
+});
+
+test('loadUnpublishedSpecies: real CSV contains "lycomorpha-grotei" (ISSUE-157 curator hide)', () => {
+  const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
+  assert.ok(unpublished.has('lycomorpha-grotei'), 'should contain lycomorpha-grotei');
+});
+
+test('loadUnpublishedSpecies: real CSV contains "schizura-ipomaeae" (ISSUE-157 curator hide)', () => {
+  const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
+  assert.ok(unpublished.has('schizura-ipomaeae'), 'should contain schizura-ipomaeae');
 });
 
 test('loadUnpublishedSpecies: header-only CSV (no data rows) yields an empty set (deny-list lifted)', () => {

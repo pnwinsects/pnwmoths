@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { validateCsv } from './build-data.ts';
 
@@ -544,5 +544,111 @@ test('integration: build-data.ts accepts images.csv filename with spaces without
     // If we reach here without throwing, the filename with space was accepted
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+// --- ISSUE-157: reject legacy backslash-escaped apostrophes in common_name ---
+
+test('build-data.ts: real data/species.csv has no literal backslash before an apostrophe in common_name', () => {
+  const rows = validateCsv(
+    resolve(ROOT, 'data/species.csv'),
+    ['id', 'genus', 'species', 'common_name']
+  );
+  const offenders = rows.filter(r => (r.common_name ?? '').includes("\\'"));
+  assert.deepStrictEqual(
+    offenders.map(r => r.common_name),
+    [],
+    `Expected no common_name with a literal backslash before an apostrophe, found: ${offenders.map(r => r.common_name).join(', ')}`
+  );
+});
+
+test('integration: build-data.ts rejects a literal backslash-apostrophe in species.csv common_name', () => {
+  const tmpDir = resolve(ROOT, '.tmp-species-backslash-apostrophe');
+  const tmpDataDir = resolve(tmpDir, 'data');
+  mkdirSync(tmpDataDir, { recursive: true });
+
+  copyFileSync(resolve(ROOT, 'data/images.csv'), resolve(tmpDataDir, 'images.csv'));
+  copyFileSync(resolve(ROOT, 'data/glossary.csv'), resolve(tmpDataDir, 'glossary.csv'));
+  copyFileSync(resolve(ROOT, 'data/records.csv'), resolve(tmpDataDir, 'records.csv'));
+
+  // Write a species.csv row with the legacy escaping bug reintroduced.
+  writeFileSync(resolve(tmpDataDir, 'species.csv'), [
+    'id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,epithet_quoted,tribe',
+    "1,Alypia,ridingsii,Ridings\\'s Forester Moth,93-1982,\"Grote, 1865\",Noctuidae,,Agaristinae,,"
+  ].join('\n'));
+
+  // Use pathToFileURL so the import specifier is a valid file:// URL on Windows
+  // (a bare Windows absolute path like "C:\\..." is rejected by the ESM loader), and
+  // JSON.stringify so embedded backslashes (Windows paths) survive as JS string literals.
+  const scriptUrl = pathToFileURL(resolve(ROOT, 'scripts/build-data.ts')).href;
+  const wrapperScript = resolve(tmpDir, 'run-backslash-apostrophe.mjs');
+  writeFileSync(wrapperScript, [
+    `import { main } from ${JSON.stringify(scriptUrl)};`,
+    `process.chdir(${JSON.stringify(tmpDir)});`,
+    `main().catch(err => { console.error(err.message); process.exit(1); });`
+  ].join('\n'));
+
+  try {
+    let threw = false;
+    let stderrOutput = '';
+    try {
+      execSync(`node ${wrapperScript}`, {
+        cwd: tmpDir,
+        timeout: 30000,
+        stdio: 'pipe'
+      });
+    } catch (err) {
+      threw = true;
+      const e = err as { stderr?: Buffer };
+      stderrOutput = e.stderr ? e.stderr.toString() : '';
+    }
+
+    assert.ok(threw, 'build-data.ts should exit non-zero for a literal backslash-apostrophe in common_name');
+    assert.ok(
+      stderrOutput.includes('Invalid common_name'),
+      `stderr should contain "Invalid common_name", got: ${stderrOutput}`
+    );
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+// --- ISSUE-157: remaining launch-cleanup regressions on real data ---
+
+test('build-data.ts: all three Globia species carry tribe "Apameini" in real data/species.csv', () => {
+  const rows = validateCsv(
+    resolve(ROOT, 'data/species.csv'),
+    ['id', 'genus', 'species', 'tribe']
+  );
+  const globia = rows.filter(r => r.genus === 'Globia');
+  assert.strictEqual(globia.length, 3, `expected 3 Globia rows, got ${globia.length}`);
+  for (const row of globia) {
+    assert.strictEqual(
+      row.tribe,
+      'Apameini',
+      `Globia ${row.species} expected tribe "Apameini", got "${row.tribe}"`
+    );
+  }
+});
+
+test('build-data.ts: Lymantria dispar common_name is "Spongy Moth" (not "Gypsy Moth") in real data/species.csv', () => {
+  const rows = validateCsv(
+    resolve(ROOT, 'data/species.csv'),
+    ['id', 'genus', 'species', 'common_name']
+  );
+  const dispar = rows.find(r => r.genus === 'Lymantria' && r.species === 'dispar');
+  assert.ok(dispar, 'expected a Lymantria dispar row in species.csv');
+  assert.strictEqual(dispar!.common_name, 'Spongy Moth');
+});
+
+test('build-data.ts: hecatera-dysodea keeps only its A dorsal/ventral specimen pair in real data/images.csv', () => {
+  const rows = validateCsv(
+    resolve(ROOT, 'data/images.csv'),
+    ['species_slug', 'filename', 'weight', 'view', 'specimen']
+  );
+  const hecatera = rows.filter(r => r.species_slug === 'hecatera-dysodea');
+  assert.strictEqual(hecatera.length, 2, `expected 2 hecatera-dysodea image rows, got ${hecatera.length}`);
+  for (const row of hecatera) {
+    assert.strictEqual(row.specimen, 'A', `expected specimen "A", got "${row.specimen}"`);
   }
 });
