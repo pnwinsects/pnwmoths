@@ -22,7 +22,7 @@ eleventyComputed:
   >{% endif %}{% if sp.tribe %}<span aria-hidden="true">›</span
   ><a href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}{% if sp.subfamily %}--subfamily-{{ sp.subfamily | lower }}{% endif %}--tribe-{{ sp.tribe | lower }}">{{ sp.tribe }}</a
   >{% endif %}<span aria-hidden="true">›</span
-  ><span>{{ sp.genus }}</span
+  ><a href="{{ '/browse/' | url }}#family-{{ sp.family | lower }}{% if sp.subfamily %}--subfamily-{{ sp.subfamily | lower }}{% endif %}{% if sp.tribe %}--tribe-{{ sp.tribe | lower }}{% endif %}--genus-{{ sp.genus_slug }}">{{ sp.genus }}</a
 ></nav>
 
 <div class="species-header">
