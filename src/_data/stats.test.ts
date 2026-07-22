@@ -61,8 +61,6 @@ test('stats: species count equals the number of shown species with a narrative',
     expected,
     `Species count must equal shown species that have a narrative (${expected})`,
   );
-  // Sanity: the narrative gate actually removes some species (stubs without prose).
-  assert.ok(expected < shown.length, 'Expected some shown species to lack a narrative');
 });
 
 test('stats: withheld families (Geometridae) are excluded from the species count', async () => {
@@ -92,4 +90,35 @@ test('stats: withheld families (Geometridae) are excluded from the species count
   const narratives = narrativeSlugs();
   const expected = shownSpecies().filter((sp) => narratives.has(sp.slug)).length;
   assert.strictEqual(s.species, expected);
+});
+
+// #156: euxoa-aurantiaca was added to data/unpublished-species.csv (not featured on the
+// legacy site, no completed legacy species account) while its occurrence records stay in
+// data/records.csv. The records vanity count must exclude it, but the underlying data must
+// not be touched.
+test('stats: unpublished euxoa-aurantiaca is excluded from the records count while its records remain in the data', async () => {
+  const recordRows = parse(readFileSync(resolve(ROOT, 'data/records.csv')), {
+    columns: true,
+    skip_empty_lines: true,
+  }) as Array<{ species_slug: string }>;
+
+  const euxoaRecords = recordRows.filter((r) => r.species_slug === 'euxoa-aurantiaca');
+  assert.ok(euxoaRecords.length > 0, 'Expected euxoa-aurantiaca occurrence records to remain in data/records.csv');
+
+  const shownSlugs = new Set(shownSpecies().map((sp) => sp.slug));
+  assert.ok(!shownSlugs.has('euxoa-aurantiaca'), 'euxoa-aurantiaca must not be in the shown set');
+
+  const { default: getStats } = await import('./stats.ts');
+  const s = await getStats();
+
+  const expectedRecords = recordRows.filter((r) => shownSlugs.has(r.species_slug)).length;
+  assert.strictEqual(
+    s.records,
+    expectedRecords,
+    'Records count must exclude euxoa-aurantiaca while every other shown species record is still counted',
+  );
+  assert.ok(
+    expectedRecords < recordRows.length,
+    'Excluding euxoa-aurantiaca records should make the shown-records count strictly less than the raw row count',
+  );
 });

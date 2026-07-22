@@ -1422,5 +1422,5 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 3379,Manulea,bicolor,Bicolored Moth,93-0217,"(Grote, 1864)",Erebidae,,Arctiinae,,Lithosiini
 3380,Autographa,v-alba,White Y Mark Moth,93-1197,"Ottolengui, 1902",Noctuidae,autographa-speciosa,Plusiinae,,Plusiini
 3381,Xestia,c-nigrum,Lesser Black-letter Dart Moth,93-3588,"(Linnaeus, 1758)",Noctuidae,,Noctuinae,,Noctuini
-3382,Callopistria,floridensis,,93-2190,"(Guenée, 1852)",Noctuidae,,Eriopinae,,
+3382,Callopistria,floridensis,Florida Fern Moth,93-2190,"(Guenée, 1852)",Noctuidae,,Eriopinae,,
 3383,Clostera,brucei,,93-0008,"(Hy. Edwards, 1885)",Notodontidae,clostera-apicalis|clostera-paraphora|clostera-multnoma,Pygaerinae,,
