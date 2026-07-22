@@ -611,6 +611,97 @@ test('real data/unpublished-species.csv contains euxoa-aurantiaca (#156 curator 
   assert.ok(found, 'expected euxoa-aurantiaca as a slug in data/unpublished-species.csv');
 });
 
+// --- Real-data gate: callopistria-floridensis common name + legacy photo ingest (#156) ---
+// The legacy WWU factsheet (family-noctuidae/subfamily-eriopinae/callopistria/
+// callopistria-floridensis/) carries a common name ("Florida Fern Moth") that was never
+// migrated into data/species.csv, and its curator-confirmed specimen-A photos (dorsal +
+// ventral) were never ingested into data/images.csv. Both are now sourced directly from
+// the still-live legacy site.
+test('real data/species.csv: callopistria-floridensis has its legacy common name', async () => {
+  const { parse } = await import('csv-parse/sync');
+  const rows = parse(readFileSync(resolve(ROOT, 'data/species.csv')), {
+    columns: true, skip_empty_lines: true,
+  }) as Array<{ genus: string; species: string; common_name: string }>;
+  const row = rows.find((r) => r.genus === 'Callopistria' && r.species === 'floridensis');
+  assert.ok(row, 'expected a Callopistria floridensis row in data/species.csv');
+  assert.equal(row!.common_name, 'Florida Fern Moth');
+});
+
+test('real data/images.csv: callopistria-floridensis has its legacy specimen-A photos (#156)', async () => {
+  const { parse } = await import('csv-parse/sync');
+  const rows = parse(readFileSync(resolve(ROOT, 'data/images.csv')), { columns: true, skip_empty_lines: true }) as Array<{
+    species_slug: string; filename: string; view: string; specimen: string; photographer: string;
+    license: string; locality: string; state: string; latitude: string; longitude: string;
+    elevation_ft: string; year: string; month: string; day: string; collector: string;
+  }>;
+
+  const rowsForSlug = rows.filter((r) => r.species_slug === 'callopistria-floridensis');
+  assert.equal(rowsForSlug.length, 2, 'expected exactly 2 callopistria-floridensis image rows (A-D, A-V)');
+
+  const byView = new Map(rowsForSlug.map((r) => [r.view, r]));
+  const dorsal = byView.get('dorsal');
+  const ventral = byView.get('ventral');
+  assert.ok(dorsal, 'expected a dorsal callopistria-floridensis row');
+  assert.ok(ventral, 'expected a ventral callopistria-floridensis row');
+  assert.equal(dorsal!.filename, 'Callopistria floridensis-A-D.jpg');
+  assert.equal(ventral!.filename, 'Callopistria floridensis-A-V.jpg');
+
+  for (const row of [dorsal!, ventral!]) {
+    assert.equal(row.specimen, 'A');
+    assert.equal(row.photographer, 'Merrill A. Peterson');
+    assert.equal(row.license, 'CC BY-NC-SA 4.0');
+    assert.equal(row.locality, 'Bull Creek Wildlife Mgt Area; unnamed cypress pond 4.6 mi due W of Deer Park');
+    assert.equal(row.state, 'FL');
+    assert.equal(row.latitude, '28.10');
+    assert.equal(row.longitude, '-80.97');
+    assert.equal(row.elevation_ft, '65');
+    assert.equal(row.year, '1992');
+    assert.equal(row.month, '5');
+    assert.equal(row.day, '12');
+    assert.equal(row.collector, 'LG Crabo');
+  }
+});
+
+// --- Real-data gate: clostera-brucei narrow-sense specimen-C legacy photo ingest (#156) ---
+// #159 reassigned the A/B specimen pairs to clostera-multnoma, leaving clostera-brucei with
+// zero images.csv rows; the narrow-sense C specimen was confirmed only in the curator's
+// high-res Dropbox source (still `discovered`, not uploaded). This ingests the same C
+// specimen's low-res photos directly from the still-live legacy site.
+test('real data/images.csv: clostera-brucei has only its narrow-sense specimen-C photos (#156)', async () => {
+  const { parse } = await import('csv-parse/sync');
+  const rows = parse(readFileSync(resolve(ROOT, 'data/images.csv')), { columns: true, skip_empty_lines: true }) as Array<{
+    species_slug: string; filename: string; view: string; specimen: string; photographer: string;
+    license: string; locality: string; state: string; elevation_ft: string; year: string;
+    month: string; day: string; collector: string;
+  }>;
+
+  const rowsForSlug = rows.filter((r) => r.species_slug === 'clostera-brucei');
+  assert.equal(rowsForSlug.length, 2, 'expected exactly 2 clostera-brucei image rows (C-D, C-V)');
+  for (const row of rowsForSlug) {
+    assert.equal(row.specimen, 'C', 'clostera-brucei must only catalogue the narrow-sense C specimen');
+  }
+
+  const byView = new Map(rowsForSlug.map((r) => [r.view, r]));
+  const dorsal = byView.get('dorsal');
+  const ventral = byView.get('ventral');
+  assert.ok(dorsal, 'expected a dorsal clostera-brucei row');
+  assert.ok(ventral, 'expected a ventral clostera-brucei row');
+  assert.equal(dorsal!.filename, 'Clostera brucei-C-D.jpg');
+  assert.equal(ventral!.filename, 'Clostera brucei-C-V.jpg');
+
+  for (const row of [dorsal!, ventral!]) {
+    assert.equal(row.photographer, 'Merrill A. Peterson');
+    assert.equal(row.license, 'CC BY-NC-SA 4.0');
+    assert.equal(row.locality, 'Doolittle Ranch, Mt. Evans');
+    assert.equal(row.state, 'CO');
+    assert.equal(row.elevation_ft, '9800');
+    assert.equal(row.year, '1961');
+    assert.equal(row.month, '7');
+    assert.equal(row.day, '11');
+    assert.equal(row.collector, 'EW Rockburne');
+  }
+});
+
 test('integration: build-data.ts accepts images.csv filename with spaces without throwing', () => {
   const tmpDir = resolve(ROOT, '.tmp-space-filename');
   const tmpDataDir = resolve(tmpDir, 'data');
@@ -755,8 +846,9 @@ test('build-data.ts: hecatera-dysodea keeps only its A dorsal/ventral specimen p
 // --- #156: Clostera brucei -> multnoma photo misidentification correction ---
 // Merrill Peterson confirmed the catalogued A/B specimens were misidentified: they
 // are C. multnoma, not C. brucei. The narrow-sense C. brucei specimens (C-D/C-V)
-// exist only in the curator's high-res source set (not yet downloaded/tiled/
-// uploaded), so clostera-brucei has zero images.csv rows until they're ingested.
+// were ingested directly from the legacy WWU site's live low-res photos (#156);
+// the same pair also exists in the curator's high-res Dropbox source for a later
+// upgrade (still `discovered` in data/species-photos-manifest.csv).
 test('real data/images.csv: clostera-brucei A/B specimens are reassigned to clostera-multnoma', async () => {
   const { parse } = await import('csv-parse/sync');
   const raw = readFileSync(resolve(ROOT, 'data/images.csv'));
@@ -767,10 +859,11 @@ test('real data/images.csv: clostera-brucei A/B specimens are reassigned to clos
   }>;
 
   const bruceiRows = rows.filter(r => r.species_slug === 'clostera-brucei');
+  const bruceiSpecimens = bruceiRows.map(r => r.specimen).sort();
   assert.deepEqual(
-    bruceiRows,
-    [],
-    'clostera-brucei should have no images.csv rows until narrow-sense C specimens are ingested'
+    bruceiSpecimens,
+    ['C', 'C'],
+    'clostera-brucei should catalogue only the narrow-sense C specimen (dorsal + ventral)'
   );
 
   const multnomaBrucieFilenameRows = rows.filter(
