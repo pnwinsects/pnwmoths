@@ -40,6 +40,22 @@ export const DERIVED_COLUMNS = ['district_id'];
 
 export type RecordRow = Record<string, string>;
 
+/**
+ * Two collapsed duplicates carried DIFFERENT non-empty values in a derived
+ * column. Derived columns are assigned deterministically from other fields, so
+ * identical records should derive the same value; a divergence means the
+ * artifact is stale or the deriving logic changed. Reported as an advisory (the
+ * first value is kept) rather than failing the purge — see the additive/
+ * idempotent, advisory-not-fatal data invariant in CLAUDE.md.
+ */
+export interface DerivedConflict {
+  column: string;
+  kept: string;
+  discarded: string;
+  /** The shared identity key (JSON array of curator-entered column values). */
+  identity: string;
+}
+
 export interface DedupeResult {
   /** Rows retained, in original order (first occurrence of each record). */
   kept: RecordRow[];
@@ -47,6 +63,8 @@ export interface DedupeResult {
   removedCount: number;
   /** Number of distinct records that had at least one duplicate. */
   duplicateGroups: number;
+  /** Derived-value disagreements between collapsed duplicates (advisory). */
+  conflicts: DerivedConflict[];
 }
 
 /**
@@ -66,6 +84,7 @@ export function dedupeRecords(rows: RecordRow[], columns: string[]): DedupeResul
   const positionByKey = new Map<string, number>();
   const duplicated = new Set<string>();
   const kept: RecordRow[] = [];
+  const conflicts: DerivedConflict[] = [];
   let removedCount = 0;
 
   for (const row of rows) {
@@ -78,21 +97,51 @@ export function dedupeRecords(rows: RecordRow[], columns: string[]): DedupeResul
     }
     removedCount++;
     duplicated.add(key);
-    // Preserve any derived value the first occurrence was missing.
     const retained = kept[seenAt];
     if (retained) {
       for (const c of DERIVED_COLUMNS) {
-        if (!retained[c] && row[c]) retained[c] = row[c];
+        const have = retained[c];
+        const incoming = row[c];
+        if (!have && incoming) {
+          retained[c] = incoming; // fill a derived value the first occurrence lacked
+        } else if (have && incoming && have !== incoming) {
+          conflicts.push({ column: c, kept: have, discarded: incoming, identity: key });
+        }
       }
     }
   }
 
-  return { kept, removedCount, duplicateGroups: duplicated.size };
+  return { kept, removedCount, duplicateGroups: duplicated.size, conflicts };
 }
 
 /**
- * Parse a records CSV, remove duplicate records, and re-serialise. The output
- * is byte-faithful to the input apart from the removed lines.
+ * True when `rewritten` is `original` with zero or more whole physical lines
+ * deleted and nothing else changed — i.e. every line of `rewritten` occurs in
+ * `original`, in order. A re-serialisation that normalises line endings (CRLF ->
+ * LF), re-quotes a field, or drops a blank line breaks this, because the
+ * affected lines no longer match byte-for-byte.
+ */
+function isLineDeletionOnly(original: string, rewritten: string): boolean {
+  const from = original.split('\n');
+  let i = 0;
+  for (const line of rewritten.split('\n')) {
+    while (i < from.length && from[i] !== line) i++;
+    if (i === from.length) return false;
+    i++;
+  }
+  return true;
+}
+
+/**
+ * Parse a records CSV, remove duplicate records, and re-serialise.
+ *
+ * The parse -> stringify round-trip is byte-faithful for records.csv (LF line
+ * endings, RFC-4180 quoting, no blank lines), so the output is the input with
+ * only the duplicate lines removed. That guarantee is not universal, so it is
+ * enforced: if the round-trip would alter any retained bytes (e.g. a CRLF or
+ * blank-line input), this throws rather than silently rewriting the file.
+ *
+ * @throws {Error} If deletion-only, byte-faithful output cannot be guaranteed.
  */
 export function dedupeCsv(raw: string): { output: string; result: DedupeResult } {
   const rows: RecordRow[] = parse(raw, { columns: true, skip_empty_lines: true });
@@ -100,14 +149,29 @@ export function dedupeCsv(raw: string): { output: string; result: DedupeResult }
   const columns = first ? Object.keys(first) : [];
   const result = dedupeRecords(rows, columns);
   const output = stringify(result.kept, { header: true, columns });
+  if (!isLineDeletionOnly(raw, output)) {
+    throw new Error(
+      'Refusing to rewrite records.csv: the parse/stringify round-trip is not ' +
+        'byte-faithful (the input may use CRLF line endings or contain blank ' +
+        'lines). Re-save the file as UTF-8 with Unix (LF) line endings and no ' +
+        'blank lines, then re-run.'
+    );
+  }
   return { output, result };
 }
 
 function main(): void {
   const raw = readFileSync(RECORDS_PATH, 'utf8');
   const { output, result } = dedupeCsv(raw);
-  const { removedCount, duplicateGroups, kept } = result;
+  const { removedCount, duplicateGroups, kept, conflicts } = result;
   const total = kept.length + removedCount;
+
+  for (const c of conflicts) {
+    console.warn(
+      `[advisory] conflicting ${c.column}: kept "${c.kept}", discarded "${c.discarded}" ` +
+        `for record ${c.identity}. Regenerate the derived artifact to resolve.`
+    );
+  }
 
   if (removedCount === 0) {
     console.log(`No duplicate records found in ${total} rows — nothing to purge.`);
@@ -118,7 +182,8 @@ function main(): void {
   console.log(
     `Purged ${removedCount} duplicate record${removedCount === 1 ? '' : 's'} ` +
       `across ${duplicateGroups} group${duplicateGroups === 1 ? '' : 's'}: ` +
-      `${total} -> ${kept.length} rows.`
+      `${total} -> ${kept.length} rows.` +
+      (conflicts.length > 0 ? ` (${conflicts.length} derived-value conflict advisory)` : '')
   );
 }
 

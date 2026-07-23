@@ -67,9 +67,22 @@ describe('dedupeRecords', () => {
   it('retains a district_id from a duplicate when the first occurrence lacks one', () => {
     const first = row({ district_id: '' });
     const later = row({ district_id: 'US:16031' });
-    const { kept } = dedupeRecords([first, later], COLUMNS);
+    const { kept, conflicts } = dedupeRecords([first, later], COLUMNS);
     assert.equal(kept.length, 1);
     assert.equal(kept[0]?.district_id, 'US:16031');
+    assert.equal(conflicts.length, 0); // filling a blank is not a conflict
+  });
+
+  it('reports a conflict (keeping the first) when two non-empty district_ids differ', () => {
+    const first = row({ district_id: 'US:16031' });
+    const later = row({ district_id: 'US:99999' });
+    const { kept, conflicts } = dedupeRecords([first, later], COLUMNS);
+    assert.equal(kept[0]?.district_id, 'US:16031'); // first value kept, not overwritten
+    assert.equal(conflicts.length, 1);
+    assert.deepEqual(
+      { column: conflicts[0]?.column, kept: conflicts[0]?.kept, discarded: conflicts[0]?.discarded },
+      { column: 'district_id', kept: 'US:16031', discarded: 'US:99999' }
+    );
   });
 
   it('is idempotent — a second pass removes nothing', () => {
@@ -107,5 +120,10 @@ describe('dedupeCsv', () => {
     const { output, result } = dedupeCsv(raw);
     assert.equal(result.removedCount, 1);
     assert.equal(output, header + line + other);
+  });
+
+  it('refuses to rewrite when the input uses CRLF line endings', () => {
+    const raw = (header + line + line + other).replaceAll('\n', '\r\n');
+    assert.throws(() => dedupeCsv(raw), /byte-faithful|CRLF/);
   });
 });
