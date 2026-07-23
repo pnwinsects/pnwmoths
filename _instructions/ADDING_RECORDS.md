@@ -51,6 +51,23 @@
 - Failure: "species_id not found" means the ID does not exist in species.csv.
 - Failure: "coordinates outside PNW bounds" means latitude/longitude values are out of range.
 
+## Purging Duplicate Records
+
+Batch CSV appends can accidentally insert the same occurrence twice. To remove
+rows that are identical in every column (keeping one copy):
+
+```bash
+node scripts/dedup-records.ts
+```
+
+It rewrites `data/records.csv` in place, touching only the duplicate lines, and
+prints how many rows it removed. It is idempotent — safe to re-run — and never
+merges rows that differ in a curator-entered field (e.g. a blank vs. filled
+locality). Two rows that agree on every curator field but differ only in the
+derived `district_id` *are* treated as the same record, since `district_id` is
+assigned by the build, not entered by hand; the copy carrying a `district_id` is
+kept. Review the git diff, then commit.
+
 ## Docker Alternative
 ```bash
 docker compose run --rm dev npm run build
