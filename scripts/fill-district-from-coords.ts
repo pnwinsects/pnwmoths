@@ -51,6 +51,12 @@ const REPORT_COLUMNS = [
   'district_id_before', 'district_id_after', 'distance_km', 'notes',
 ];
 
+// Rows per INSERT statement in resolveByCoordinates. The audit caller
+// (derive-district-audit.ts) passes every records.csv row (~95k), and a
+// single INSERT ... VALUES with that many tuples builds a multi-megabyte SQL
+// string; chunking bounds the size of each generated statement (#128).
+export const INSERT_CHUNK_SIZE = 2000;
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -225,9 +231,16 @@ export async function resolveByCoordinates(
 
     await conn.run('CREATE TABLE candidates (row_id INTEGER, lon DOUBLE, lat DOUBLE);');
     // Only numeric coordinate values are interpolated here — never a raw
-    // records.csv string cell (RESEARCH.md Security Domain V5).
-    const valuesSql = candidates.map((c) => `(${c.index}, ${c.lon}, ${c.lat})`).join(', ');
-    await conn.run(`INSERT INTO candidates VALUES ${valuesSql};`);
+    // records.csv string cell (RESEARCH.md Security Domain V5). Inserted in
+    // INSERT_CHUNK_SIZE batches so the full-coverage audit caller (~95k
+    // candidates) never builds one multi-megabyte statement (#128).
+    for (let i = 0; i < candidates.length; i += INSERT_CHUNK_SIZE) {
+      const valuesSql = candidates
+        .slice(i, i + INSERT_CHUNK_SIZE)
+        .map((c) => `(${c.index}, ${c.lon}, ${c.lat})`)
+        .join(', ');
+      await conn.run(`INSERT INTO candidates VALUES ${valuesSql};`);
+    }
 
     // Containment — ST_Point(lon, lat) matches ST_Contains's (x, y) = (lon,
     // lat) convention, the same convention used throughout this module.
@@ -236,12 +249,16 @@ export async function resolveByCoordinates(
     // polygons — real cross-border polygon pairs exist in the committed
     // boundary file — always resolves to the same district_id across runs
     // (RESEARCH.md Pitfall 4 — determinism), mirroring the fallback query.
-    const containedResult = await conn.run(`
+    // Materialized as a table so the fallback query can exclude contained
+    // rows via a subquery instead of a giant interpolated id list (#128).
+    await conn.run(`
+      CREATE TABLE contained AS
       SELECT c.row_id AS row_id, d.district_id AS district_id
       FROM candidates c
       JOIN districts d ON ST_Contains(d.geom, ST_Point(c.lon, c.lat))
       QUALIFY ROW_NUMBER() OVER (PARTITION BY c.row_id ORDER BY d.district_id ASC) = 1
     `);
+    const containedResult = await conn.run('SELECT row_id, district_id FROM contained;');
     const containedRows = (await containedResult.getRowObjectsJS()) as Array<{
       row_id: number;
       district_id: string;
@@ -261,7 +278,6 @@ export async function resolveByCoordinates(
 
     const unmatched = candidates.filter((c) => !containedIds.has(c.index));
     if (unmatched.length > 0) {
-      const excludeList = containedIds.size > 0 ? Array.from(containedIds).join(',') : '-1';
       // Fallback — PLANAR ST_Distance keeps the same [lon, lat] convention as
       // ST_Point/ST_Contains above (RESEARCH.md Pitfall 1: never
       // ST_Distance_Sphere/_Spheroid/_DWithin_Spheroid — those require
@@ -274,7 +290,7 @@ export async function resolveByCoordinates(
         FROM candidates c
         JOIN districts d
           ON ST_Distance(d.geom, ST_Point(c.lon, c.lat)) < ${FALLBACK_DEGREE_THRESHOLD}
-        WHERE c.row_id NOT IN (${excludeList})
+        WHERE c.row_id NOT IN (SELECT row_id FROM contained)
         QUALIFY ROW_NUMBER() OVER (PARTITION BY c.row_id ORDER BY deg_dist ASC) = 1
       `);
       const fallbackRows = (await fallbackResult.getRowObjectsJS()) as Array<{

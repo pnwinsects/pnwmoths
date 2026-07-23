@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import {
   applyDistrictAssignments,
   resolveByCoordinates,
+  INSERT_CHUNK_SIZE,
   type RecordCsvRow,
   type CoordResolution,
   type FillOutcome,
@@ -218,5 +219,28 @@ describe('resolveByCoordinates — fallback boundary (synthetic single-square-po
     const second = await resolveByCoordinates(candidates, syntheticGeojsonPath);
     assert.equal(first.get(0)?.districtId, second.get(0)?.districtId);
     assert.equal(first.get(0)?.outcome, second.get(0)?.outcome);
+  });
+
+  it('resolves every candidate in a batch larger than INSERT_CHUNK_SIZE (#128 chunked insert)', async () => {
+    // A grid of in-square points one larger than the chunk size, so the
+    // insert spans a chunk boundary; plus one beyond-tolerance point so the
+    // fallback query's contained-table exclusion runs against a chunked
+    // candidate set too.
+    const gridSide = Math.ceil(Math.sqrt(INSERT_CHUNK_SIZE + 1));
+    const step = 0.018 / gridSide;
+    const candidates = Array.from({ length: INSERT_CHUNK_SIZE + 1 }, (_, i) => ({
+      index: i,
+      lat: 47.001 + (i % gridSide) * step,
+      lon: -120.009 + Math.floor(i / gridSide) * step,
+    }));
+    candidates.push({ index: INSERT_CHUNK_SIZE + 1, lat: 47.01, lon: -119.96 });
+
+    const result = await resolveByCoordinates(candidates, syntheticGeojsonPath);
+    assert.equal(result.size, candidates.length);
+    for (let i = 0; i <= INSERT_CHUNK_SIZE; i++) {
+      assert.equal(result.get(i)?.outcome, 'assigned-contained');
+      assert.equal(result.get(i)?.districtId, 'TEST:0001');
+    }
+    assert.equal(result.get(INSERT_CHUNK_SIZE + 1)?.outcome, 'unassigned');
   });
 });
