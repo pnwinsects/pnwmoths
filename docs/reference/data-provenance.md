@@ -110,6 +110,25 @@ idempotent; container must be running). That committed column — not the DB —
 the runtime source of truth; re-run the backfill only when the reference data
 changes. See [ADR 0016](../adr/0016-tribe-hierarchy-level.md).
 
+## Favicon (borrowed from the legacy site)
+
+`src/favicon.ico` is the original WWU site's own favicon, retrieved verbatim from
+<https://pnwmoths.biol.wwu.edu/favicon.ico> on 2026-07-25 (1406 bytes, sha256
+`07a77f8fab62915488fbed9293ee1bf683d3b2552d3f943a6e07d2433ebb3ae1`). It is a
+valid single-image ICO containing a small orange-and-brown moth on a transparent
+background — this project's own legacy asset, reused because this site is the
+static successor to that one (issue #183).
+
+It is **16×16 only**: no high-DPI, SVG, or touch-icon variant exists. Upscaling a
+16×16 source looks bad, so a redrawn higher-resolution icon is separate future
+work; do not synthesise one from this file.
+
+It is copied to the site root by an `addPassthroughCopy` in
+[`eleventy.config.ts`](../../eleventy.config.ts) and declared in
+[`src/_includes/base.njk`](../../src/_includes/base.njk). It must live at the
+origin root (`/favicon.ico`) — browsers request that path automatically — so it
+cannot be served from the CDN image paths like the species photo corpus.
+
 ## Lucid3 identification key (authoritative character→image bindings)
 
 The character illustrations on the `/identify/` page (see [CONTEXT.md](../../CONTEXT.md)) are
