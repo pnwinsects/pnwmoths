@@ -6,6 +6,8 @@ import {
   isPageview,
   stripQueryString,
   extractRefererDomain,
+  extractRedirectFrom,
+  loadSpeciesSlugs,
   aggregate,
 } from './fetch-analytics.ts';
 
@@ -208,7 +210,7 @@ describe('aggregate', () => {
 
   it('produces correct schema_version', () => {
     const result = aggregate([], date, from, to);
-    assert.equal(result.schema_version, 2);
+    assert.equal(result.schema_version, 3);
   });
 
   it('counts total requests', () => {
@@ -350,6 +352,160 @@ describe('aggregate', () => {
     // Verify it's valid base64 that decodes to 16384 bytes (p=14)
     const decoded = Buffer.from(result.visitor_hll, 'base64');
     assert.equal(decoded.length, 16384);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// extractRedirectFrom (#181)
+// ---------------------------------------------------------------------------
+
+describe('extractRedirectFrom', () => {
+  it('extracts a URL-encoded legacy path', () => {
+    assert.equal(
+      extractRedirectFrom('/redirect.html?from=%2Fbrowse%2Facronicta-americana%2F'),
+      '/browse/acronicta-americana/',
+    );
+  });
+
+  it('extracts an unencoded legacy path', () => {
+    assert.equal(extractRedirectFrom('/redirect.html?from=/browse/foo/'), '/browse/foo/');
+  });
+
+  it('ignores other query parameters', () => {
+    assert.equal(extractRedirectFrom('/redirect.html?utm_source=x&from=/browse/foo/'), '/browse/foo/');
+  });
+
+  it('returns null for the redirect page without a ?from=', () => {
+    assert.equal(extractRedirectFrom('/redirect.html'), null);
+    assert.equal(extractRedirectFrom('/redirect.html?from='), null);
+  });
+
+  it('returns null for any other path', () => {
+    assert.equal(extractRedirectFrom('/species/foo/?from=/browse/bar/'), null);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// loadSpeciesSlugs (#181)
+// ---------------------------------------------------------------------------
+
+describe('loadSpeciesSlugs', () => {
+  it('loads the real committed slug list', () => {
+    const slugs = loadSpeciesSlugs();
+    assert.ok(slugs.size > 100, 'expected the committed species slug list to be populated');
+  });
+
+  it('soft-fails to an empty set when the file is missing (never crashes the nightly job)', () => {
+    assert.equal(loadSpeciesSlugs('does/not/exist.json').size, 0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// aggregate: legacy redirect + 404 tracking (#181)
+// ---------------------------------------------------------------------------
+
+describe('aggregate: legacy link tracking', () => {
+  const date = '2026-06-29';
+  const from = `${date}T00:00:00Z`;
+  const to = `${date}T23:59:59.999Z`;
+  const slugs = new Set(['acronicta-americana']);
+
+  const redirectEntry = (legacyPath: string, overrides: Record<string, unknown> = {}) =>
+    entry({ path: `/redirect.html?from=${encodeURIComponent(legacyPath)}`, ...overrides });
+
+  it('reports zero redirect hits when none occurred', () => {
+    const result = aggregate([entry()], date, from, to, slugs);
+    assert.deepEqual(result.redirect_hits, { total: 0, matched: 0, missed: 0 });
+    assert.deepEqual(result.redirect_misses, []);
+  });
+
+  it('counts a resolvable legacy URL as matched and does not report it', () => {
+    const result = aggregate([redirectEntry('/browse/acronicta-americana/')], date, from, to, slugs);
+    assert.deepEqual(result.redirect_hits, { total: 1, matched: 1, missed: 0 });
+    assert.deepEqual(result.redirect_misses, []);
+  });
+
+  it('reports an unresolvable legacy URL as a miss', () => {
+    const result = aggregate([redirectEntry('/browse/xestia-unknown/')], date, from, to, slugs);
+    assert.deepEqual(result.redirect_hits, { total: 1, matched: 0, missed: 1 });
+    assert.equal(result.redirect_misses[0]!.from, '/browse/xestia-unknown/');
+    assert.equal(result.redirect_misses[0]!.count, 1);
+  });
+
+  it('groups misses by normalized path so tracking params do not fragment the list', () => {
+    const result = aggregate(
+      [
+        redirectEntry('/browse/xestia-unknown'),
+        redirectEntry('/browse/xestia-unknown/'),
+        redirectEntry('/browse/xestia-unknown/?utm_source=newsletter'),
+      ],
+      date, from, to, slugs,
+    );
+    assert.equal(result.redirect_misses.length, 1);
+    assert.equal(result.redirect_misses[0]!.from, '/browse/xestia-unknown/');
+    assert.equal(result.redirect_misses[0]!.count, 3);
+  });
+
+  it('sorts misses by hit count', () => {
+    const result = aggregate(
+      [
+        redirectEntry('/browse/rare-miss/'),
+        redirectEntry('/browse/common-miss/'),
+        redirectEntry('/browse/common-miss/'),
+      ],
+      date, from, to, slugs,
+    );
+    assert.equal(result.redirect_misses[0]!.from, '/browse/common-miss/');
+    assert.equal(result.redirect_misses[0]!.count, 2);
+  });
+
+  it('records the most frequent external referrer for a miss', () => {
+    const result = aggregate(
+      [
+        redirectEntry('/browse/miss-target/', { referer: 'https://bugguide.net/node/1' }),
+        redirectEntry('/browse/miss-target/', { referer: 'https://bugguide.net/node/2' }),
+        redirectEntry('/browse/miss-target/', { referer: 'https://example.org/links' }),
+      ],
+      date, from, to, slugs,
+    );
+    assert.equal(result.redirect_misses[0]!.referrer, 'bugguide.net');
+  });
+
+  it('reports a null referrer when the legacy hit carried none', () => {
+    const result = aggregate([redirectEntry('/browse/miss-target/')], date, from, to, slugs);
+    assert.equal(result.redirect_misses[0]!.referrer, null);
+  });
+
+  it('caps the miss list at 50 entries', () => {
+    const entries = Array.from({ length: 80 }, (_, i) => redirectEntry(`/browse/miss-${i}-x/`));
+    const result = aggregate(entries, date, from, to, slugs);
+    assert.equal(result.redirect_misses.length, 50);
+    assert.equal(result.redirect_hits.missed, 80);
+  });
+
+  it('aggregates 404 paths, which never reach the redirect handler at all', () => {
+    const result = aggregate(
+      [
+        entry({ path: '/old-django-view/', statusCode: 404 }),
+        entry({ path: '/old-django-view/', statusCode: 404 }),
+        entry({ path: '/other-missing/', statusCode: 404 }),
+        entry({ path: '/species/foo/', statusCode: 200 }),
+      ],
+      date, from, to, slugs,
+    );
+    assert.deepEqual(result.not_found[0], { path: '/old-django-view/', count: 2 });
+    assert.equal(result.not_found.length, 2);
+  });
+
+  it('strips query strings from 404 paths', () => {
+    const result = aggregate(
+      [
+        entry({ path: '/missing/?a=1', statusCode: 404 }),
+        entry({ path: '/missing/?a=2', statusCode: 404 }),
+      ],
+      date, from, to, slugs,
+    );
+    assert.deepEqual(result.not_found, [{ path: '/missing/', count: 2 }]);
   });
 });
 

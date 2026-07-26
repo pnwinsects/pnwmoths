@@ -4,6 +4,11 @@
  * Fetches CDN access logs from Bunny's Logging API v2, aggregates them into a
  * daily summary, and writes the result to data/analytics/YYYY-MM-DD.json.
  *
+ * Besides traffic totals this also classifies "/redirect.html?from=…" requests against
+ * the shared legacy-URL resolver and records unmatched 404 paths, so old inbound links
+ * that still need a mapping surface on /analytics/ (#181). The access log is the only
+ * source for that — a static site has nowhere to POST a client-side beacon.
+ *
  * Designed to run nightly in a GitHub Action. The aggregated JSON is committed
  * to the repo so the Eleventy build can render an analytics dashboard.
  *
@@ -14,9 +19,15 @@
  *   DRY_RUN                — "1" to print the plan without writing files
  */
 
-import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { HyperLogLog } from './lib/hyperloglog.ts';
+import {
+  resolveLegacyPath,
+  normalizeLegacyPath,
+  REDIRECT_PAGE_PATH,
+  REDIRECT_FROM_PARAM,
+} from '../src/_lib/legacy-redirects.ts';
 
 // ---------------------------------------------------------------------------
 // Constants & env
@@ -81,6 +92,15 @@ interface LogResponse {
   pagination: PaginationInfo;
 }
 
+/** A legacy URL that reached /redirect.html but resolved to no specific page (#181). */
+export interface RedirectMiss {
+  /** Normalized legacy path from the ?from= parameter, e.g. "/browse/some-old-slug/". */
+  from: string;
+  count: number;
+  /** Most frequent external referrer for this miss, when one was sent. */
+  referrer: string | null;
+}
+
 export interface DailyAnalytics {
   schema_version: number;
   date: string;
@@ -99,6 +119,12 @@ export interface DailyAnalytics {
   countries: Array<{ code: string; count: number }>;
   status_codes: Array<{ status: number; count: number }>;
   cache_statuses: Array<{ status: string; count: number }>;
+  /** Hits on /redirect.html, split by whether a specific target was found (#181). */
+  redirect_hits: { total: number; matched: number; missed: number };
+  /** Legacy URLs that landed on a generic fallback page — the mapping backlog (#181). */
+  redirect_misses: RedirectMiss[];
+  /** Top 404 paths — legacy links that never reached /redirect.html at all (#181). */
+  not_found: Array<{ path: string; count: number }>;
 }
 
 // ---------------------------------------------------------------------------
@@ -191,9 +217,42 @@ export function extractRefererDomain(referer: string | null, siteHost: string): 
   }
 }
 
-// ---------------------------------------------------------------------------
-// API interaction
-// ---------------------------------------------------------------------------
+/**
+ * Extract and decode the ?from= legacy path from a /redirect.html request path.
+ * Returns null when the entry is not a redirect-page request or carries no ?from=.
+ */
+export function extractRedirectFrom(path: string): string | null {
+  if (stripQueryString(path) !== REDIRECT_PAGE_PATH) return null;
+  const qIndex = path.indexOf('?');
+  if (qIndex === -1) return null;
+  const params = new URLSearchParams(path.slice(qIndex + 1));
+  const from = params.get(REDIRECT_FROM_PARAM);
+  if (from === null || from.trim() === '') return null;
+  return from;
+}
+
+const SPECIES_SLUGS_PATH = resolve('src/_data/speciesSlugs.json');
+
+let cachedSlugs: Set<string> | null = null;
+
+/**
+ * Load the published species slugs used to classify redirect hits. Soft-fails to an
+ * empty set: a missing file must not fail the nightly job — worst case every /browse/
+ * legacy URL is reported as a miss, which is visible and self-correcting, whereas a
+ * crash would lose the day's logs entirely (Bunny keeps them only 72h).
+ */
+export function loadSpeciesSlugs(path: string = SPECIES_SLUGS_PATH): Set<string> {
+  if (path === SPECIES_SLUGS_PATH && cachedSlugs) return cachedSlugs;
+  if (!existsSync(path)) {
+    console.warn(`⚠️  ${path} not found — redirect hits cannot be classified against species slugs.`);
+    return new Set();
+  }
+  const slugs = new Set(JSON.parse(readFileSync(path, 'utf8')) as string[]);
+  if (path === SPECIES_SLUGS_PATH) cachedSlugs = slugs;
+  return slugs;
+}
+
+
 
 async function bunnyFetch(url: string, label: string): Promise<Response> {
   const delays = [1000, 2000, 4000, 8000, 16000];
@@ -292,18 +351,31 @@ async function fetchDayLogs(pullZoneId: number, date: string): Promise<LogEntry[
 const TOP_PAGES = 100;
 const TOP_REFERRERS = 50;
 const TOP_COUNTRIES = 50;
+const TOP_REDIRECT_MISSES = 50;
+const TOP_NOT_FOUND = 50;
 
-export function aggregate(entries: LogEntry[], date: string, _from: string, _to: string): DailyAnalytics {
+export function aggregate(
+  entries: LogEntry[],
+  date: string,
+  _from: string,
+  _to: string,
+  speciesSlugs: ReadonlySet<string> = loadSpeciesSlugs(),
+): DailyAnalytics {
   const hourCounts = new Array<number>(24).fill(0);
   const pathCounts = new Map<string, number>();
   const refererCounts = new Map<string, number>();
   const countryCounts = new Map<string, number>();
   const statusCounts = new Map<number, number>();
   const cacheCounts = new Map<string, number>();
+  const notFoundCounts = new Map<string, number>();
+  const missCounts = new Map<string, number>();
+  const missReferrers = new Map<string, Map<string, number>>();
   const uniqueIPs = new Set<string>();
   const visitorHll = new HyperLogLog(14);
   let totalPageviews = 0;
   let totalBytes = 0;
+  let redirectTotal = 0;
+  let redirectMatched = 0;
 
   // Site host for self-referral filtering
   const siteHost = 'moths.pnwinsects.org';
@@ -346,6 +418,33 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
     if (domain) {
       refererCounts.set(domain, (refererCounts.get(domain) ?? 0) + 1);
     }
+
+    // 404s — legacy links that never reached the redirect page at all (#181)
+    if (entry.statusCode === 404) {
+      const cleanPath = stripQueryString(entry.path);
+      notFoundCounts.set(cleanPath, (notFoundCounts.get(cleanPath) ?? 0) + 1);
+    }
+
+    // Legacy-URL redirects: replay the browser's own resolution over the log so that
+    // misses are recoverable without any client beacon or logging endpoint (#181).
+    const fromPath = extractRedirectFrom(entry.path);
+    if (fromPath !== null) {
+      redirectTotal++;
+      const { matched } = resolveLegacyPath(fromPath, speciesSlugs);
+      if (matched) {
+        redirectMatched++;
+      } else {
+        // Group by normalized path so one legacy page isn't split across every
+        // tracking-parameter variant of its URL.
+        const key = normalizeLegacyPath(fromPath);
+        missCounts.set(key, (missCounts.get(key) ?? 0) + 1);
+        if (domain) {
+          const perMiss = missReferrers.get(key) ?? new Map<string, number>();
+          perMiss.set(domain, (perMiss.get(domain) ?? 0) + 1);
+          missReferrers.set(key, perMiss);
+        }
+      }
+    }
   }
 
   const sortedTop = <T extends string | number>(map: Map<T, number>, limit: number) =>
@@ -354,7 +453,7 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
       .slice(0, limit);
 
   return {
-    schema_version: 2,
+    schema_version: 3,
     date,
     generated_at: new Date().toISOString(),
     source_window: { from: `${date}T00:00:00Z`, to: `${date}T23:59:59.999Z` },
@@ -370,7 +469,24 @@ export function aggregate(entries: LogEntry[], date: string, _from: string, _to:
     countries: sortedTop(countryCounts, TOP_COUNTRIES).map(([code, count]) => ({ code: code as string, count })),
     status_codes: sortedTop(statusCounts, 20).map(([status, count]) => ({ status: status as number, count })),
     cache_statuses: sortedTop(cacheCounts, 10).map(([status, count]) => ({ status: status as string, count })),
+    redirect_hits: {
+      total: redirectTotal,
+      matched: redirectMatched,
+      missed: redirectTotal - redirectMatched,
+    },
+    redirect_misses: sortedTop(missCounts, TOP_REDIRECT_MISSES).map(([from, count]) => ({
+      from: from as string,
+      count,
+      referrer: topKey(missReferrers.get(from as string)),
+    })),
+    not_found: sortedTop(notFoundCounts, TOP_NOT_FOUND).map(([path, count]) => ({ path: path as string, count })),
   };
+}
+
+/** Most frequent key in a count map, or null when the map is empty/absent. */
+function topKey(counts: Map<string, number> | undefined): string | null {
+  if (!counts || counts.size === 0) return null;
+  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]![0];
 }
 
 // ---------------------------------------------------------------------------
@@ -400,6 +516,10 @@ async function main(): Promise<void> {
   const analytics = aggregate(entries, date, `${date}T00:00:00Z`, `${date}T23:59:59.999Z`);
   console.log(`  Pageviews: ${analytics.total_pageviews} / ${analytics.total_requests} requests`);
   console.log(`  Top page: ${analytics.pageviews[0]?.path ?? '(none)'} (${analytics.pageviews[0]?.count ?? 0} hits)`);
+  console.log(
+    `  Legacy redirects: ${analytics.redirect_hits.total} hits, ${analytics.redirect_hits.missed} unmatched`
+    + ` (${analytics.redirect_misses.length} distinct paths); ${analytics.not_found.length} distinct 404 paths`,
+  );
 
   if (DRY_RUN) {
     console.log('\n🏜️  DRY_RUN — would write:');

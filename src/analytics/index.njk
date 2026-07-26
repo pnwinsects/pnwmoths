@@ -52,6 +52,32 @@ Use the time filter below to view stats for a specific year.</p>
       {% endfor %}
     </tbody>
   </table>
+
+  {% if analytics.rolling30.top_redirect_misses.length > 0 %}
+  <h2>Unmapped Legacy Links (Last 30 Days)</h2>
+  <p>{{ analytics.rolling30.redirect_hits.missed | number }} of
+    {{ analytics.rolling30.redirect_hits.total | number }} old-site links found no specific page.</p>
+  <table>
+    <thead><tr><th>Old URL</th><th>Linked from</th><th>Hits</th></tr></thead>
+    <tbody>
+      {% for miss in analytics.rolling30.top_redirect_misses.slice(0, 10) %}
+      <tr><td>{{ miss.from }}</td><td>{{ miss.referrer or "—" }}</td><td>{{ miss.count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if analytics.rolling30.top_not_found.length > 0 %}
+  <h2>Top 404s (Last 30 Days)</h2>
+  <table>
+    <thead><tr><th>Path</th><th>Hits</th></tr></thead>
+    <tbody>
+      {% for nf in analytics.rolling30.top_not_found.slice(0, 10) %}
+      <tr><td>{{ nf.path }}</td><td>{{ nf.count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 </noscript>
 
 {% endif %}
