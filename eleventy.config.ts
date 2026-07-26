@@ -98,6 +98,10 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
 
+  // Favicon must land at the site root: browsers request bare /favicon.ico at the
+  // origin regardless of any <link rel="icon"> declaration.
+  eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
+
   // About page images (label examples, screenshots)
   eleventyConfig.addPassthroughCopy("src/about/data/images");
   eleventyConfig.addPassthroughCopy("src/about/images/images");
