@@ -237,9 +237,10 @@ let cachedSlugs: Set<string> | null = null;
 
 /**
  * Load the published species slugs used to classify redirect hits. Soft-fails to an
- * empty set: a missing file must not fail the nightly job — worst case every /browse/
- * legacy URL is reported as a miss, which is visible and self-correcting, whereas a
- * crash would lose the day's logs entirely (Bunny keeps them only 72h).
+ * empty set: a missing or unreadable/malformed file must not fail the nightly job —
+ * worst case every /browse/ legacy URL is reported as a miss, which is visible and
+ * self-correcting, whereas a crash would lose the day's logs entirely (Bunny keeps
+ * them only 72h).
  */
 export function loadSpeciesSlugs(path: string = SPECIES_SLUGS_PATH): Set<string> {
   if (path === SPECIES_SLUGS_PATH && cachedSlugs) return cachedSlugs;
@@ -247,7 +248,18 @@ export function loadSpeciesSlugs(path: string = SPECIES_SLUGS_PATH): Set<string>
     console.warn(`⚠️  ${path} not found — redirect hits cannot be classified against species slugs.`);
     return new Set();
   }
-  const slugs = new Set(JSON.parse(readFileSync(path, 'utf8')) as string[]);
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(readFileSync(path, 'utf8'));
+  } catch (err) {
+    console.warn(`⚠️  ${path} could not be read or parsed (${(err as Error).message}) — redirect hits cannot be classified against species slugs.`);
+    return new Set();
+  }
+  if (!Array.isArray(parsed)) {
+    console.warn(`⚠️  ${path} is not an array — redirect hits cannot be classified against species slugs.`);
+    return new Set();
+  }
+  const slugs = new Set(parsed as string[]);
   if (path === SPECIES_SLUGS_PATH) cachedSlugs = slugs;
   return slugs;
 }

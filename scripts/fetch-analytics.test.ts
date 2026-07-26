@@ -1,5 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { resolve as resolvePath } from 'node:path';
 import {
   resolveDate,
   isWithinRetentionWindow,
@@ -389,6 +391,19 @@ describe('extractRedirectFrom', () => {
 // loadSpeciesSlugs (#181)
 // ---------------------------------------------------------------------------
 
+const SLUG_FIXTURE_DIR = resolvePath('.tmp-fetch-analytics-slugs');
+
+function writeSlugFixture(filename: string, contents: string): string {
+  mkdirSync(SLUG_FIXTURE_DIR, { recursive: true });
+  const path = resolvePath(SLUG_FIXTURE_DIR, filename);
+  writeFileSync(path, contents);
+  return path;
+}
+
+function removeSlugFixtures(): void {
+  rmSync(SLUG_FIXTURE_DIR, { recursive: true, force: true });
+}
+
 describe('loadSpeciesSlugs', () => {
   it('loads the real committed slug list', () => {
     const slugs = loadSpeciesSlugs();
@@ -397,6 +412,26 @@ describe('loadSpeciesSlugs', () => {
 
   it('soft-fails to an empty set when the file is missing (never crashes the nightly job)', () => {
     assert.equal(loadSpeciesSlugs('does/not/exist.json').size, 0);
+  });
+
+  it('soft-fails to an empty set when the slug file contains malformed JSON', () => {
+    const path = writeSlugFixture('malformed.json', '["acronicta-americana",');
+    try {
+      assert.equal(loadSpeciesSlugs(path).size, 0);
+    } finally {
+      removeSlugFixtures();
+    }
+  });
+
+  it('soft-fails to an empty set when the slug file does not contain an array', () => {
+    const objectPath = writeSlugFixture('object.json', '{"slug":"acronicta-americana"}');
+    const stringPath = writeSlugFixture('string.json', '"acronicta-americana"');
+    try {
+      assert.equal(loadSpeciesSlugs(objectPath).size, 0);
+      assert.equal(loadSpeciesSlugs(stringPath).size, 0);
+    } finally {
+      removeSlugFixtures();
+    }
   });
 });
 
@@ -508,4 +543,3 @@ describe('aggregate: legacy link tracking', () => {
     assert.deepEqual(result.not_found, [{ path: '/missing/', count: 2 }]);
   });
 });
-

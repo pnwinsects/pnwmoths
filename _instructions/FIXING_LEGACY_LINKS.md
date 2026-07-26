@@ -33,7 +33,7 @@ Open https://moths.pnwinsects.org/analytics/ and scroll to **Unmapped Legacy Lin
 |---|---|
 | Old URL | The address on the old site that people are asking for |
 | Linked from | The site still sending people there, when it told us (blank means it didn't) |
-| Hits | How many times it was requested in the period selected at the top of the page |
+| Hits | How many times it was requested in the rolling 30-day window |
 
 Work top-down: the highest hit count is the most people helped per edit.
 
@@ -100,14 +100,15 @@ The tests in `src/_lib/legacy-redirects.test.ts` cover the mapping table. If you
 `data/species-redirects.csv`, `src/_data/speciesRedirects.test.ts` also checks that the old slug
 isn't a live species and isn't already listed.
 
-Then commit and push as usual. The change goes live with the next deploy, and the entry should
-disappear from the analytics list within a day or two.
+Then commit and push as usual. The change goes live with the next deploy. New visits to that old
+URL should stop adding misses after deploy, but old hits can stay visible until they age out of the
+rolling 30-day window.
 
 ## Notes
 
-- The list only covers the last few days at a time — the CDN keeps its logs for 72 hours, and the
-  nightly job is what preserves them. Misses from before this was set up cannot be recovered.
+- The list covers a rolling 30-day window. Bunny keeps raw logs for 72 hours, so the nightly job
+  must preserve each day; misses from before this was set up cannot be recovered.
 - A miss doesn't mean the visitor saw an error page. They were sent to Browse, which is a poor
   answer but not a broken one.
-- One address may appear in the list for a day or two after you fix it, until the older days scroll
-  out of the selected period.
+- One address may appear in the list after you fix it, until the older hits scroll out of the
+  rolling 30-day window.
