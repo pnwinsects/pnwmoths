@@ -13,11 +13,27 @@ cost a debugging cycle to discover.
   passthrough copy alone does not survive. The `emptyOutDir: false` comment in the Vite
   config is misleading; don't rely on it.
 
-- **`| url` filter rule: static assets yes, Vite entry points no.** Assets copied in
-  post-Vite (CSS, images) need `| url` to pick up `pathPrefix`. Assets Vite processes
-  (JS bundle `<script src>` tags, and `/images/...` paths Vite rewrites) must *not* use
-  `| url`, or the prefix gets applied twice and URLs 404. Same rule bites `fetch()` URLs
-  and `tojson` output (`| safe` also required there).
+- **`| url` filter rule: static assets yes, Vite entry points and `public/` no.** Assets
+  copied in post-Vite (CSS) need `| url` to pick up `pathPrefix`. Assets Vite processes
+  (JS bundle `<script src>` tags) and anything under `public/` must *not* use `| url` —
+  Vite applies `base` (which is `pathPrefix`) to them itself, so the prefix would get
+  applied twice and URLs 404. Same rule bites `fetch()` URLs and `tojson` output
+  (`| safe` also required there).
+
+- **Site-wide images must live in `public/` (Vite's `publicDir`), never be Vite assets.**
+  `vite:build-html` resolves every `<img src>` / `<link href>` in every page through
+  `fileToBuiltUrl`, which does `await fs.readFile(...)` and only *then* populates its
+  asset cache — so a shared layout produces one concurrent read per page per asset, all
+  missing the cache. With ~1,300 species pages and 15 assets in `base.njk` (favicon,
+  banner, 13 partner logos) that is ~20,000 simultaneous `open()` calls: `EMFILE: too
+  many open files`, first on Windows (512-descriptor CRT default) and eventually
+  everywhere, growing with every species added (issue #187). Files under `publicDir` are
+  short-circuited by `checkPublicFile` before any read and rewritten by string
+  substitution, so the cost is zero regardless of page count. Two constraints keep this
+  working: the directory must be top-level `public/` (eleventy-plugin-vite
+  passthrough-copies `publicDir` as a *project-relative* path, while Vite resolves it
+  against `root` = the `.11ty-vite/` copy of the output — only `"public"` satisfies
+  both), and references to it must be plain root-absolute paths with no `| url`.
 
 - **`pathPrefix` must stay conditional on `process.env.GITHUB_PAGES`.** Never hardcode
   `/pnwmoths/`. Local/production builds serve from `/`; GitHub Pages staging serves from

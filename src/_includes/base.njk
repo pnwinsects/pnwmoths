@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "PNW Moths" }}</title>
-  <link rel="icon" href="{{ '/favicon.ico' | url }}" sizes="16x16" type="image/x-icon">
+  <!-- Assets under public/ (Vite publicDir) are referenced with a plain
+       root-absolute path and NO `| url` filter: Vite rewrites them with `base`,
+       which is the same pathPrefix. Applying `| url` here would both double the
+       prefix source-of-truth and defeat Vite's public-file short-circuit,
+       reintroducing a per-page fs.readFile. Page links below still use `| url`. -->
+  <link rel="icon" href="/favicon.ico" sizes="16x16" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600&family=Spinnaker&display=swap" rel="stylesheet">
@@ -48,7 +53,7 @@
           {% for partner in partners.collaborators %}
           <li>
             <a href="{{ partner.url }}" title="{{ partner.name }}" target="_blank" rel="noopener">
-              <img src="{{ ('/images/logos/' + partner.logo) | url }}" alt="{{ partner.name }}" loading="lazy">
+              <img src="/images/logos/{{ partner.logo }}" alt="{{ partner.name }}" loading="lazy">
             </a>
           </li>
           {% endfor %}
@@ -60,7 +65,7 @@
           {% for partner in partners.funders %}
           <li>
             <a href="{{ partner.url }}" title="{{ partner.name }}" target="_blank" rel="noopener">
-              <img src="{{ ('/images/logos/' + partner.logo) | url }}" alt="{{ partner.name }}" loading="lazy">
+              <img src="/images/logos/{{ partner.logo }}" alt="{{ partner.name }}" loading="lazy">
             </a>
           </li>
           {% endfor %}

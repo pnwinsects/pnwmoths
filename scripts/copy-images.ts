@@ -6,19 +6,23 @@
  * This script runs after the full build to restore them.
  *
  * Copies:
- *   src/images/           -> _site/images/          (banner image)
+ *   public/           -> _site/                  (banner image, partner logos, favicon)
  *   src/styles/           -> _site/styles/          (theme CSS)
  *   @picocss/pico         -> _site/css/             (Pico CSS)
  *   openseadragon images  -> _site/osd-images/      (OSD nav buttons)
+ *
+ * public/ is also Vite's publicDir, so a full `build:eleventy` already copies it
+ * into _site/. Repeating it here is idempotent and keeps `--serve` and the standalone
+ * `build:copy-images` step working.
  */
 import { cp } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-// Banner image asset
-const bannerSrc = resolve('src/images');
-const bannerDest = resolve('_site/images');
-await cp(bannerSrc, bannerDest, { recursive: true });
-console.log('Copied banner: src/images/ -> _site/images/');
+// Public assets (banner image, partner logos, favicon)
+const publicSrc = resolve('public');
+const publicDest = resolve('_site');
+await cp(publicSrc, publicDest, { recursive: true });
+console.log('Copied public assets: public/ -> _site/');
 
 // Theme CSS
 const stylesSrc = resolve('src/styles');
