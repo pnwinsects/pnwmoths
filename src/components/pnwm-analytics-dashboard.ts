@@ -22,6 +22,8 @@ Chart.register(
 );
 
 interface DayEntry { path: string; count: number }
+interface RedirectMiss { from: string; count: number; referrer: string | null }
+interface RedirectHits { total: number; matched: number; missed: number }
 interface DaySummary {
   date: string;
   total_requests: number;
@@ -52,6 +54,9 @@ interface AnalyticsData {
     top_referrers: Array<{ domain: string; count: number }>;
     top_countries: Array<{ code: string; count: number }>;
     requests_by_hour: number[];
+    redirect_hits?: RedirectHits;
+    top_redirect_misses?: RedirectMiss[];
+    top_not_found?: DayEntry[];
   };
 }
 
@@ -129,10 +134,17 @@ class PnwmAnalyticsDashboard extends LitElement {
         padding: 1rem;
       }
       .chart-card h3 { margin-top: 0; font-size: 1rem; }
+      .card-note {
+        font-size: 0.85rem;
+        color: var(--pico-muted-color, #666);
+        margin: 0 0 0.75rem;
+      }
       canvas { max-width: 100%; }
       table { width: 100%; font-size: 0.9rem; }
       th { text-align: left; }
       td:last-child, th:last-child { text-align: right; }
+      /* Legacy-link tables carry a middle "linked from" column that should stay left-aligned. */
+      td:first-child { word-break: break-all; }
     `;
   }
 
@@ -255,7 +267,66 @@ class PnwmAnalyticsDashboard extends LitElement {
           <h3>Top Pages</h3>
           ${this._renderFilteredTable(filteredDays, 'pageviews', 'Path', 'path', 20)}
         </div>
+        ${this._renderLegacyLinkCards()}
       </div>
+    `;
+  }
+
+  /**
+   * Legacy-link maintenance cards (#181): unmapped old-site URLs that landed visitors on
+   * a generic fallback, and the paths returning 404. Both are work queues — each row is
+   * a mapping to add to src/_lib/legacy-redirects.ts or data/species-redirects.csv.
+   *
+   * Deliberately not affected by the year filter: this is the current backlog, and only
+   * the rolling 30-day aggregate is shipped to the client (per-day detail would grow the
+   * inlined payload without answering a question anyone asks). Rendered only when there
+   * is something to show, so the dashboard stays quiet when the redirect table is doing
+   * its job.
+   */
+  _renderLegacyLinkCards(): TemplateResult {
+    const rolling = this._data?.rolling30;
+    const misses = rolling?.top_redirect_misses ?? [];
+    const notFound = rolling?.top_not_found ?? [];
+    const hits = rolling?.redirect_hits ?? { total: 0, matched: 0, missed: 0 };
+
+    if (misses.length === 0 && notFound.length === 0) return html``;
+
+    return html`
+      ${misses.length > 0 ? html`
+        <div class="chart-card">
+          <h3>Unmapped Legacy Links (Last 30 Days)</h3>
+          <p class="card-note">
+            ${hits.missed.toLocaleString()} of ${hits.total.toLocaleString()} old-site links
+            found no specific page and fell back to Browse or the home page.
+          </p>
+          <table>
+            <thead><tr><th>Old URL</th><th>Linked from</th><th>Hits</th></tr></thead>
+            <tbody>
+              ${misses.map((miss) => html`
+                <tr>
+                  <td>${miss.from}</td>
+                  <td>${miss.referrer ?? '—'}</td>
+                  <td>${miss.count.toLocaleString()}</td>
+                </tr>
+              `)}
+            </tbody>
+          </table>
+        </div>
+      ` : ''}
+      ${notFound.length > 0 ? html`
+        <div class="chart-card">
+          <h3>Top 404s (Last 30 Days)</h3>
+          <p class="card-note">Requested paths that do not exist and never reached the redirect handler.</p>
+          <table>
+            <thead><tr><th>Path</th><th>Hits</th></tr></thead>
+            <tbody>
+              ${notFound.map((nf) => html`
+                <tr><td>${nf.path}</td><td>${nf.count.toLocaleString()}</td></tr>
+              `)}
+            </tbody>
+          </table>
+        </div>
+      ` : ''}
     `;
   }
 

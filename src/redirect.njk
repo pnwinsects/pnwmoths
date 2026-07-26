@@ -61,161 +61,69 @@ eleventyExcludeFromCollections: true
       or <a href="{{ '/search/index.html' | url }}">searching</a>.
     </p>
   </div>
-  <script>
+  <script type="module">
     /**
      * PNW Moths redirect handler.
      *
      * Accepts: /redirect.html?from=/old/path/on/wwu/site
      * Maps old pnwmoths.biol.wwu.edu URL patterns to new site URLs.
+     *
+     * The resolution table and algorithm live in src/_lib/legacy-redirects.ts, which
+     * scripts/fetch-analytics.ts imports as well: the nightly CDN-log job replays this
+     * exact resolution over "/redirect.html?from=…" requests so unmatched legacy URLs
+     * show up on /analytics/ as a list of mappings still to be written (#181). Keeping
+     * one implementation is what makes that report trustworthy — a copy pasted in here
+     * would drift and the report would describe a resolver nobody is running.
+     *
+     * _lib is passthrough-copied to _site/_lib, so this relative import resolves during
+     * the Vite MPA build (same arrangement as pnwm-identify -> _lib/key-filter.ts).
      */
-    (function () {
-      'use strict';
+    import { resolveLegacyPath, REDIRECT_FROM_PARAM } from './_lib/legacy-redirects.ts';
 
-      // pathPrefix-aware base: "/" locally, "/pnwmoths/" on GitHub Pages.
-      // Targets below are site-relative and name index.html explicitly (no reliance
-      // on the host's implicit directory-index resolution); BASE is prepended at
-      // navigation time so every redirect resolves correctly in prod.
-      const BASE = '{{ "/" | url }}';
+    // pathPrefix-aware base: "/" locally, "/pnwmoths/" on GitHub Pages.
+    // Targets from resolveLegacyPath are site-relative and name index.html explicitly (no
+    // reliance on the host's implicit directory-index resolution); BASE is prepended at
+    // navigation time so every redirect resolves correctly in prod.
+    const BASE = '{{ "/" | url }}';
 
-      // --- Species slug lookup (generated from data/species.csv) ---
-      const SPECIES_SLUGS = new Set({{ speciesSlugs | dump | safe }});
+    // Species slug lookup (generated from data/species.csv)
+    const SPECIES_SLUGS = new Set({{ speciesSlugs | dump | safe }});
 
-      // --- Static page mappings (old WWU path -> site-relative target) ---
-      const STATIC_MAP = {
-        '/about-moths/glossary/': 'glossary/index.html',
-        '/about-moths/faqs/': 'faqs/index.html',
-        '/about-moths/moth-facts/': 'index.html',
-        '/about-moths/moth-collecting-photography/': 'index.html',
-        '/about-moths/references/': 'index.html',
-        '/about-us/the-project/': 'index.html',
-        '/about-us/related-sites/': 'about/related-sites/index.html',
-        '/about-us/site-credits/': 'about/credits/index.html',
-        '/about-us/contact/': 'contact/index.html',
-        '/explore-data/about-data/': 'index.html',
-        '/explore-data/about-key/': 'index.html',
-        '/explore-data/about-images/': 'index.html',
-        '/gsearch/': 'search/index.html',
-        '/identify/': 'identify/index.html',
-        '/browse/': 'browse/index.html',
-        '/browse-all/': 'browse/index.html',
-        '/photographic-plates/': 'plates/index.html',
-      };
-
-      // --- Synonym map for reclassified species (old WWU slug -> new site slug) ---
-      // Globia (subflava/oblonga/alameda) is the current genus and now matches the
-      // new site slug directly, so no synonym mapping is needed for it (#146).
-      const SYNONYMS = {};
-
-      /**
-       * Resolve an old WWU path to a new site path.
-       * Returns { target: string, matched: boolean }
-       */
-      function resolve(fromPath) {
-        // Normalize: ensure leading slash, trailing slash, lowercase
-        let path = fromPath.trim();
-        if (!path.startsWith('/')) path = '/' + path;
-        if (!path.endsWith('/')) path += '/';
-
-        // 1. Check static map
-        if (STATIC_MAP[path]) {
-          return { target: STATIC_MAP[path], matched: true };
-        }
-
-        // 2. /browse/ paths — extract species slug from last segment
-        if (path.startsWith('/browse/')) {
-          const segments = path.split('/').filter(Boolean);
-          const last = segments[segments.length - 1];
-
-          // Skip structural segments (family-*, subfamily-*, tribe-*, or bare genus names)
-          if (last.startsWith('family-') || last.startsWith('subfamily-') || last.startsWith('tribe-')) {
-            return { target: 'browse/index.html', matched: true };
-          }
-
-          // Check if it's a known species slug
-          if (SPECIES_SLUGS.has(last)) {
-            return { target: 'species/' + last + '/index.html', matched: true };
-          }
-
-          // Normalize spaces/underscores and try again
-          const normalized = last.replace(/[_\s]+/g, '-').toLowerCase();
-          if (SPECIES_SLUGS.has(normalized)) {
-            return { target: 'species/' + normalized + '/index.html', matched: true };
-          }
-
-          // Check synonym map (reclassified species)
-          const synonym = SYNONYMS[last] || SYNONYMS[normalized];
-          if (synonym && SPECIES_SLUGS.has(synonym)) {
-            return { target: 'species/' + synonym + '/index.html', matched: true };
-          }
-
-          // Bare genus name (no hyphen) — send to browse
-          if (!last.includes('-')) {
-            return { target: 'browse/index.html', matched: true };
-          }
-
-          // Unknown species slug — send to browse with logged miss
-          return { target: 'browse/index.html', matched: false };
-        }
-
-        // 3. /photographic-plates/{id}/ → /plates/
-        if (path.startsWith('/photographic-plates/')) {
-          return { target: 'plates/index.html', matched: true };
-        }
-
-        // 4. Homepage
-        if (path === '/') {
-          return { target: 'index.html', matched: true };
-        }
-
-        // 5. Backstop
-        return { target: 'index.html', matched: false };
-      }
-
-      /**
-       * Log a redirect event for analytics/debugging.
-       * Uses sendBeacon if available for reliability during navigation.
-       */
-      function logRedirect(fromPath, target, matched) {
-        const payload = {
+    /**
+     * Log a redirect event for debugging. Misses are *not* beaconed anywhere: the request
+     * for this page already carries ?from= into the Bunny access log, and the nightly
+     * analytics job classifies it there. No endpoint means nothing to keep running.
+     */
+    function logRedirect(fromPath, target, matched) {
+      if (!matched) {
+        console.warn('[pnwmoths-redirect] No exact match:', {
           ts: new Date().toISOString(),
           from: fromPath,
           to: target,
           matched: matched,
           referrer: document.referrer || null,
-        };
-
-        // Log to console for debugging
-        if (!matched) {
-          console.warn('[pnwmoths-redirect] No exact match:', payload);
-        }
-
-        // If a logging endpoint is configured, send it
-        const LOGGING_ENDPOINT = window.__PNWMOTHS_REDIRECT_LOG_URL;
-        if (LOGGING_ENDPOINT && navigator.sendBeacon) {
-          navigator.sendBeacon(LOGGING_ENDPOINT, JSON.stringify(payload));
-        }
-
-        // Google Analytics event (if gtag is loaded)
-        if (typeof gtag === 'function') {
-          gtag('event', 'redirect', {
-            event_category: matched ? 'redirect_matched' : 'redirect_missed',
-            event_label: fromPath,
-            value: matched ? 1 : 0,
-          });
-        }
+        });
       }
 
-      // --- Main ---
-      const params = new URLSearchParams(window.location.search);
-      const fromPath = params.get('from');
-
-      if (!fromPath) {
-        // No ?from= parameter — redirect home
-        window.location.replace(BASE + 'index.html');
-        return;
+      // Google Analytics event (if gtag is loaded)
+      if (typeof gtag === 'function') {
+        gtag('event', 'redirect', {
+          event_category: matched ? 'redirect_matched' : 'redirect_missed',
+          event_label: fromPath,
+          value: matched ? 1 : 0,
+        });
       }
+    }
 
-      const { target, matched } = resolve(fromPath);
+    // --- Main ---
+    const params = new URLSearchParams(window.location.search);
+    const fromPath = params.get(REDIRECT_FROM_PARAM);
+
+    if (!fromPath) {
+      // No ?from= parameter — redirect home
+      window.location.replace(BASE + 'index.html');
+    } else {
+      const { target, matched } = resolveLegacyPath(fromPath, SPECIES_SLUGS);
       logRedirect(fromPath, BASE + target, matched);
 
       if (!matched) {
@@ -230,7 +138,7 @@ eleventyExcludeFromCollections: true
       } else {
         window.location.replace(BASE + target);
       }
-    })();
+    }
   </script>
 </body>
 </html>

@@ -28,6 +28,32 @@ cost a debugging cycle to discover.
   does not guarantee `eleventy --serve` works — build outputs (e.g. emitted JSON) can
   silently drop under serve. Test both explicitly.
 
+- **An inline `<script type="module">` in a page is a Vite entry.** That's the supported
+  way for a standalone page (e.g. `src/redirect.njk`) to import from `src/_lib` — the
+  passthrough copy of `_lib` is what makes the relative import resolve in `_site/`. The
+  cost is one hashed chunk per such page, which is why per-species inline modules are
+  banned in favour of `components/main.ts` (see the comment there). Guard the arrangement
+  with a test that runs a real `vite.build()` over just that page and asserts the imported
+  code lands in the bundle: a broken import leaves a page that renders and does nothing.
+
+## Analytics from CDN logs
+
+- **The Bunny access log already contains query strings.** `entry.path` is the full
+  request target, which is why `stripQueryString()` exists in
+  `scripts/fetch-analytics.ts`. Anything a static page can encode into a URL it requests
+  is therefore recoverable server-side with no endpoint, no beacon and no third party —
+  that is how missed legacy redirects are counted ([ADR 0019](adr/0019-legacy-link-telemetry-from-logs.md)).
+  Before reaching for client-side telemetry on this site, check whether the URL already
+  carries the answer.
+
+- **Logs expire in 72 hours.** Anything the nightly job doesn't aggregate is gone for
+  good. Aggregation code must soft-fail (missing input file → empty set, not a throw):
+  crashing the job to protect data quality costs an entire irrecoverable day of logs.
+
+- **Daily analytics JSON is inlined into `/analytics/index.html`.** Every new per-day array
+  multiplies by the number of days retained, so cap list lengths in both the producer
+  (`scripts/fetch-analytics.ts`) and the loader (`src/_data/analytics.ts`).
+
 ## DuckDB at build time
 
 - **`nullstr = ''` on every `read_csv` that reads nullable text.** Without it, a blank

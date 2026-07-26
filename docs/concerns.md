@@ -47,5 +47,5 @@ Accepted as out-of-scope for now; revisit in a future feature milestone.
 | QC report extensions | QCX-01, QCX-02 — additional QC-mismatch report capabilities. | — | ACCEPTED (deferred to v5.x) |
 | Browse filter extensions | BFILT-06, BFILT-07 — additional Browse district-filter capabilities. | — | ACCEPTED (deferred to v5.x) |
 | Glossary morphological matching | GLOS-07 — plural / morphological variant matching for glossary terms; needs stemming or synonym entries. | — | ACCEPTED (deferred) |
-| Django URL redirects | SEO-01 — legacy Django URL redirects; requires Netlify/Cloudflare edge rules. | — | ACCEPTED (deferred) |
+| Django URL redirects | SEO-01 — legacy Django URL redirects; requires Netlify/Cloudflare edge rules to route old paths into `/redirect.html`. Until they exist, old links 404 rather than reaching the handler — visible now as the Top 404s table on `/analytics/` ([0019](adr/0019-legacy-link-telemetry-from-logs.md)). | issue #181, `src/_lib/legacy-redirects.ts` | ACCEPTED (deferred) |
 | Photographic plates page | PLAT-01, PLAT-02 — a photographic plates page. | — | ACCEPTED (deferred) |

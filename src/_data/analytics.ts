@@ -9,6 +9,25 @@ interface DayEntry {
   count: number;
 }
 
+/** A legacy URL that reached /redirect.html but resolved to no specific page (#181). */
+interface RedirectMiss {
+  from: string;
+  count: number;
+  referrer: string | null;
+}
+
+interface RedirectHits {
+  total: number;
+  matched: number;
+  missed: number;
+}
+
+/**
+ * Per-day legacy-link detail is dropped from the client payload after the rolling window
+ * is computed — the whole analytics JSON is inlined into /analytics/index.html and this
+ * data grows with every day retained. The backlog is a "what is broken lately" list, not
+ * a historical series, so only the rolling aggregate is shipped (#181).
+ */
 interface DaySummary {
   date: string;
   total_requests: number;
@@ -21,6 +40,9 @@ interface DaySummary {
   referrers: Array<{ domain: string; count: number }>;
   countries: Array<{ code: string; count: number }>;
   status_codes: Array<{ status: number; count: number }>;
+  redirect_hits: RedirectHits;
+  redirect_misses: RedirectMiss[];
+  not_found: DayEntry[];
 }
 
 export interface AnalyticsData {
@@ -43,6 +65,12 @@ export interface AnalyticsData {
     top_referrers: Array<{ domain: string; count: number }>;
     top_countries: Array<{ code: string; count: number }>;
     requests_by_hour: number[];
+    /** Legacy-URL redirect outcomes over the window (#181). */
+    redirect_hits: RedirectHits;
+    /** Unmapped legacy URLs, most-hit first — the mapping backlog (#181). */
+    top_redirect_misses: RedirectMiss[];
+    /** Most-requested missing paths over the window (#181). */
+    top_not_found: DayEntry[];
   };
 }
 
@@ -56,8 +84,34 @@ export default function (): AnalyticsData {
 
   if (files.length === 0) return emptyData();
 
-  const days: DaySummary[] = files.map((f) => {
-    const raw = JSON.parse(readFileSync(resolve(ANALYTICS_DIR, f), 'utf-8'));
+  return aggregateDays(
+    files.map((f) => JSON.parse(readFileSync(resolve(ANALYTICS_DIR, f), 'utf-8')) as RawDay),
+  );
+}
+
+/** A daily file as written by scripts/fetch-analytics.ts, any schema_version. */
+export interface RawDay {
+  date: string;
+  total_requests: number;
+  total_pageviews: number;
+  total_unique_visitors?: number;
+  total_bytes: number;
+  visitor_hll?: string;
+  pageviews: DayEntry[];
+  requests_by_hour: number[];
+  referrers: Array<{ domain: string; count: number }>;
+  countries: Array<{ code: string; count: number }>;
+  status_codes: Array<{ status: number; count: number }>;
+  redirect_hits?: RedirectHits;
+  redirect_misses?: RedirectMiss[];
+  not_found?: DayEntry[];
+}
+
+/** Roll daily files (newest first) into the shape the analytics page consumes. */
+export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
+  if (rawDays.length === 0) return emptyData();
+
+  const days: DaySummary[] = rawDays.map((raw) => {
     return {
       date: raw.date,
       total_requests: raw.total_requests,
@@ -70,6 +124,11 @@ export default function (): AnalyticsData {
       referrers: raw.referrers,
       countries: raw.countries,
       status_codes: raw.status_codes,
+      // schema_version < 3 files predate legacy-link tracking (#181) — treat as empty
+      // rather than crashing the build on the analytics archive already on Bunny.
+      redirect_hits: raw.redirect_hits ?? { total: 0, matched: 0, missed: 0 },
+      redirect_misses: raw.redirect_misses ?? [],
+      not_found: raw.not_found ?? [],
     };
   });
 
@@ -94,11 +153,15 @@ export default function (): AnalyticsData {
   const pathCounts = new Map<string, number>();
   const refCounts = new Map<string, number>();
   const countryCounts = new Map<string, number>();
+  const missCounts = new Map<string, number>();
+  const missReferrers = new Map<string, string | null>();
+  const notFoundCounts = new Map<string, number>();
   const hourCounts = new Array<number>(24).fill(0);
   let totalReqs = 0;
   let totalPvs = 0;
   let totalVisitors = 0;
   let totalBytes = 0;
+  const redirectHits: RedirectHits = { total: 0, matched: 0, missed: 0 };
 
   for (const day of recent) {
     totalReqs += day.total_requests;
@@ -116,6 +179,18 @@ export default function (): AnalyticsData {
     }
     for (let h = 0; h < 24; h++) {
       hourCounts[h]! += day.requests_by_hour[h] ?? 0;
+    }
+    redirectHits.total += day.redirect_hits.total;
+    redirectHits.matched += day.redirect_hits.matched;
+    redirectHits.missed += day.redirect_hits.missed;
+    for (const miss of day.redirect_misses) {
+      missCounts.set(miss.from, (missCounts.get(miss.from) ?? 0) + miss.count);
+      // Keep the first referrer seen (days are newest-first) purely as a hint about
+      // who is still linking the dead URL.
+      if (miss.referrer && !missReferrers.get(miss.from)) missReferrers.set(miss.from, miss.referrer);
+    }
+    for (const nf of day.not_found) {
+      notFoundCounts.set(nf.path, (notFoundCounts.get(nf.path) ?? 0) + nf.count);
     }
   }
 
@@ -141,6 +216,9 @@ export default function (): AnalyticsData {
   // Strip HLL sketches from days before sending to client (saves ~12KB/day)
   for (const day of days) {
     day.visitor_hll = null;
+    // Legacy-link detail is carried only by rolling30 (#181) — see the note above.
+    day.redirect_misses = [];
+    day.not_found = [];
   }
 
   return {
@@ -162,6 +240,13 @@ export default function (): AnalyticsData {
       top_referrers: topN(refCounts, 25).map(([domain, count]) => ({ domain: domain as string, count })),
       top_countries: topN(countryCounts, 25).map(([code, count]) => ({ code: code as string, count })),
       requests_by_hour: hourCounts,
+      redirect_hits: redirectHits,
+      top_redirect_misses: topN(missCounts, 25).map(([from, count]) => ({
+        from: from as string,
+        count,
+        referrer: missReferrers.get(from as string) ?? null,
+      })),
+      top_not_found: topN(notFoundCounts, 25).map(([path, count]) => ({ path: path as string, count })),
     },
   };
 }
@@ -186,6 +271,9 @@ function emptyData(): AnalyticsData {
       top_referrers: [],
       top_countries: [],
       requests_by_hour: new Array(24).fill(0),
+      redirect_hits: { total: 0, matched: 0, missed: 0 },
+      top_redirect_misses: [],
+      top_not_found: [],
     },
   };
 }
