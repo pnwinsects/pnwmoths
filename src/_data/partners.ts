@@ -1,6 +1,6 @@
 // Site-wide collaborators and funders shown in the footer banner (issue #64).
 // Authoritative source: https://pnwmoths.biol.wwu.edu/about-us/site-credits/
-// Logo PNGs live in src/images/logos/ (passthrough-copied to /images/logos/).
+// Logo PNGs live in public/images/logos/ (Vite publicDir -> /images/logos/).
 
 export interface Partner {
   name: string;

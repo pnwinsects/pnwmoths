@@ -94,13 +94,12 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   // _lib shared utilities needed by pnwm-identify (key-filter, computeMatching)
   eleventyConfig.addPassthroughCopy({ "src/_lib": "_lib" });
 
-  // Theme CSS and banner image assets
+  // Theme CSS
   eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
-  eleventyConfig.addPassthroughCopy({ "src/images": "images" });
 
-  // Favicon must land at the site root: browsers request bare /favicon.ico at the
-  // origin regardless of any <link rel="icon"> declaration.
-  eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
+  // NOTE: public/ (banner image, partner logos, favicon) is deliberately NOT
+  // passthrough-copied here — eleventy-plugin-vite adds that automatically for
+  // Vite's publicDir. See the publicDir option below.
 
   // About page images (label examples, screenshots)
   eleventyConfig.addPassthroughCopy("src/about/data/images");
@@ -113,6 +112,22 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
     viteOptions: {
       appType: "mpa",
       base: pathPrefix,
+      // Vite's public directory. Everything under it is copied verbatim into _site/
+      // and — critically — root-absolute references to it in HTML are rewritten by
+      // string substitution alone (checkPublicFile short-circuits before any read).
+      //
+      // Without this, vite:build-html calls fs.readFile for every asset referenced in
+      // every page. The shared layout puts the favicon, the banner and 13 partner
+      // logos on all ~1,300 pages, and Vite populates its asset cache only *after*
+      // the read resolves, so the concurrent first wave all misses the cache: tens of
+      // thousands of simultaneous open() calls and a hard EMFILE build failure that
+      // gets worse with every species added. See docs/lessons-learned.md.
+      //
+      // Must stay a project-root-relative "public": eleventy-plugin-vite passthrough-
+      // copies this path (project-relative) into _site/, which it then renames to
+      // .11ty-vite/ and hands to Vite as `root` — and Vite resolves a relative
+      // publicDir against that root. Only a top-level "public" makes both agree.
+      publicDir: "public",
       server: {
         hmr: { port: 24679 },
       },

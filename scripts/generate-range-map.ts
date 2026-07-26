@@ -1,5 +1,5 @@
 /**
- * Generate the static home-page range map (src/images/pnw-range.svg).
+ * Generate the static home-page range map (public/images/pnw-range.svg).
  *
  * Renders US state + Canadian province outlines as a light basemap with the
  * site's target range (PNW_REGION_RING) highlighted on top. The output is a
@@ -21,7 +21,7 @@ import { PNW_REGION_RING } from '../src/components/pnw-region.ts';
 
 const NE_URL =
   'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_1_states_provinces.geojson';
-const OUT_PATH = 'src/images/pnw-range.svg';
+const OUT_PATH = 'public/images/pnw-range.svg';
 const HEIGHT = 400; // px; width is derived to preserve geographic aspect ratio
 
 type Lon = number;
