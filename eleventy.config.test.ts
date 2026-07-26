@@ -126,6 +126,40 @@ test('base.njk: per-page image URLs do not use the url filter', () => {
   );
 });
 
+// The home page is the one template outside base.njk that PR #188 converted to a
+// bare public-asset reference. A single page can't cause EMFILE, but the same
+// contract still applies: the range map must be a plain root-absolute path that
+// resolves inside public/ so Vite rewrites it via checkPublicFile. If it grew a
+// `| url` filter the URL would arrive pre-prefixed and 404 on GitHub Pages; if the
+// generator drifted out of public/ the image would silently go missing.
+test('index.njk: range map is a plain root-absolute public asset', () => {
+  const index = readFileSync(resolve(ROOT, 'src/index.njk'), 'utf8');
+  assert.ok(
+    index.includes('<img src="/images/pnw-range.svg"'),
+    'index.njk must reference the range map as a plain root-absolute path so Vite rewrites ' +
+      'it via checkPublicFile (issue #187); pre-applying `| url` would double-prefix it'
+  );
+  assert.ok(
+    existsSync(resolve(ROOT, 'public/images/pnw-range.svg')),
+    'the range map must live in public/ — a generator-path drift would 404 the home page image'
+  );
+  // Targeted, not a whole-file check: index.njk legitimately uses `| url` on page
+  // links (/browse/, /plates/, …); only <img>/<link> asset URLs must drop the filter.
+  assert.ok(
+    !/<(?:img|link)[^>]*?(?:src|href)="\{\{[^"]*\|\s*url\s*\}\}"/.test(index),
+    'public assets must be plain root-absolute paths: Vite applies `base` (= pathPrefix), ' +
+      'so an already-prefixed asset URL misses checkPublicFile and gets probed once per page'
+  );
+});
+
+test('generate-range-map.ts: writes the range map into public/', () => {
+  const generatorSource = readFileSync(resolve(ROOT, 'scripts/generate-range-map.ts'), 'utf8');
+  assert.ok(
+    /OUT_PATH\s*=\s*['"]public\/images\/pnw-range\.svg['"]/.test(generatorSource),
+    'the generator must emit into public/ so the home page asset stays under Vite publicDir (issue #187)'
+  );
+});
+
 test('partner logos: every declared logo file exists in public/images/logos/', () => {
   const logos = [...partnersSource.matchAll(/logo:\s*['"]([^'"]+)['"]/g)].map(m => m[1] as string);
   assert.ok(logos.length > 0, 'expected partner logos to be declared');
