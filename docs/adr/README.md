@@ -28,3 +28,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0017](0017-reproducible-committed-artifacts.md) | Committed build artifacts carry no build timestamp and must be byte-reproducible | Accepted |
 | [0018](0018-phenology-reared-exclusion.md) | Phenology graphs exclude reared/immature records via a notes keyword scan (no foodplant terms) | Accepted |
 | [0019](0019-legacy-link-telemetry-from-logs.md) | Missed legacy redirects are recovered from CDN access logs via a shared resolver, not a client beacon | Accepted |
+| [0020](0020-inert-modal-focus-containment.md) | Modal focus is contained with `inert` (through `<body>`'s children) rather than a keydown focus trap | Accepted |
