@@ -472,6 +472,16 @@ class PnwmTaxonBrowser extends LitElement {
   // Image path: /images/{img.species_slug}/{img.filename} (verified from species.njk)
   // onImageClick: optional (speciesSlug) => void — wraps each image in a button
 
+  // When onImageClick is supplied each thumbnail becomes a real button, so it needs
+  // a name: the <img> is decorative (alt="") and the button would otherwise be
+  // announced as a bare "button" — /browse/ rendered ~1,050 such stops (axe
+  // button-name, WCAG 4.1.2). The slug is the only species identity available here,
+  // so it is de-slugified into a binomial for the label.
+  _imageButtonLabel(speciesSlug: string): string {
+    const name = speciesSlug.split('-').join(' ');
+    return `Show ${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+  }
+
   _renderImageStrip(navImages: NavImage[] | null | undefined, onImageClick: ((slug: string) => void) | null = null): TemplateResult {
     if (!this._showImages || !navImages?.length) return html``;
     return html`
@@ -486,6 +496,7 @@ class PnwmTaxonBrowser extends LitElement {
           if (onImageClick) {
             return html`<button
               type="button"
+              aria-label=${this._imageButtonLabel(img.species_slug)}
               style="padding:0;border:none;background:none;cursor:pointer;display:inline-flex"
               @click=${() => onImageClick(img.species_slug)}
             >${imgEl}</button>`;

@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="/styles/theme.css">
 </head>
 <body>
+  {#- Bypass block (WCAG 2.4.1): the banner, eight nav links and the search field
+     are nine tab stops repeated on every page. The link is visually hidden until
+     focused; see .skip-link in theme.css. -#}
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <div class="banner">
       <img src="/images/header.png"
@@ -36,16 +40,27 @@
       </ul>
       <div class="site-search" id="site-search">
         <input type="search" class="site-search-input" placeholder="Search…" aria-label="Search site">
-        <div class="site-search-results" id="site-search-results" role="listbox" aria-live="polite" hidden></div>
+        {#- No role="listbox": the results are plain <a> elements, and a listbox
+           whose children are not role="option" is invalid ARIA (axe
+           aria-required-children). Left as a labelled live region so the result
+           count / "No results found." is announced. A real combobox (roving
+           aria-activedescendant, ArrowDown into the list) is tracked separately. -#}
+        <div class="site-search-results" id="site-search-results" aria-label="Search results" aria-live="polite" hidden></div>
       </div>
     </nav>
   </header>
-  <main>
+  {#- tabindex="-1" makes <main> a valid target for the skip link: without it the
+     browser moves the scroll position but leaves focus on <body>, so the next Tab
+     returns to the top of the nav. -#}
+  <main id="main-content" tabindex="-1">
     <div class="content-wrapper">
       {{ content | safe }}
     </div>
   </main>
-  <section class="partners-banner" data-pagefind-ignore>
+  {#- Named so it forms a `region` landmark: this block sits between <main> and
+     <footer>, and an unlabelled <section> leaves its content outside every
+     landmark (axe `region`). -#}
+  <section class="partners-banner" aria-label="Partner institutions and funders" data-pagefind-ignore>
     <div class="partners-inner">
       <div class="partners-group">
         <h2 class="partners-heading">An Institutional Partnership Between</h2>

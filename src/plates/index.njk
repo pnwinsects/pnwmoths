@@ -11,9 +11,11 @@ permalink: /plates/index.html
   {% for plate in plates %}
   <li>
     <a href="{{ ('/plates/' + plate.slug + '/') | url }}">
+      {# Decorative: the <h2> inside this link already carries the plate title, so
+         repeating it in alt made each card announce the title twice. #}
       <img
         src="{{ cdnBaseUrl }}/plates/{{ plate.slug }}/thumbnail.jpg"
-        alt="{{ plate.title }}"
+        alt=""
         width="240" height="300"
         loading="lazy">
       <h2>{{ plate.title | upper }}</h2>

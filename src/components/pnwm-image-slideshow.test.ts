@@ -191,6 +191,10 @@ describe('_closeLightbox', () => {
       _osdViewer: { destroy: () => { destroyed = true; } },
       _lightboxOpen: true,
       _inertedElements: [makeEl('a'), makeEl('b'), makeEl('c')],
+      // Focus restore is deferred to the next render (the opener is inside the
+      // still-inert .slideshow), so the context needs Lit's updateComplete.
+      _lightboxOpener: null,
+      updateComplete: Promise.resolve(true),
     };
 
     PnwmImageSlideshow.prototype._closeLightbox.call(ctx);
@@ -203,9 +207,50 @@ describe('_closeLightbox', () => {
   });
 
   it('does not throw when there is no OSD viewer and nothing was inerted', () => {
-    const ctx = { _osdViewer: null, _lightboxOpen: true, _inertedElements: [] };
+    const ctx = {
+      _osdViewer: null,
+      _lightboxOpen: true,
+      _inertedElements: [],
+      _lightboxOpener: null,
+      updateComplete: Promise.resolve(true),
+    };
     assert.doesNotThrow(() => PnwmImageSlideshow.prototype._closeLightbox.call(ctx));
     assert.equal(ctx._lightboxOpen, false);
+  });
+
+  it('restores focus to the opener once the re-render has cleared inert', async () => {
+    let focused = false;
+    const ctx = {
+      _osdViewer: null,
+      _lightboxOpen: true,
+      _inertedElements: [],
+      _lightboxOpener: { isConnected: true, focus: () => { focused = true; } },
+      updateComplete: Promise.resolve(true),
+    };
+
+    PnwmImageSlideshow.prototype._closeLightbox.call(ctx);
+
+    assert.equal(focused, false, 'focus must not be restored before the render flushes');
+    assert.equal(ctx._lightboxOpener, null, 'opener reference should be released synchronously');
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.equal(focused, true, 'opener should be refocused after updateComplete resolves');
+  });
+
+  it('does not refocus an opener that has left the document', async () => {
+    let focused = false;
+    const ctx = {
+      _osdViewer: null,
+      _lightboxOpen: true,
+      _inertedElements: [],
+      _lightboxOpener: { isConnected: false, focus: () => { focused = true; } },
+      updateComplete: Promise.resolve(true),
+    };
+
+    PnwmImageSlideshow.prototype._closeLightbox.call(ctx);
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.equal(focused, false);
   });
 });
 

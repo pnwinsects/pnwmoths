@@ -127,8 +127,10 @@ eleventyComputed:
   </div>
 
   <div class="species-data">
-    <pnwm-occurrence-map slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-occurrence-map>
-    <pnwm-phenology-chart slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-phenology-chart>
+    {# species-name feeds the map's and chart's accessible names, which otherwise
+       fall back to the raw slug ("Occurrence map for virbia-ferruginosa"). #}
+    <pnwm-occurrence-map slug="{{ sp.slug }}" species-name="{{ sp.genus }} {{ sp.species_display }}" data-pagefind-ignore></pnwm-occurrence-map>
+    <pnwm-phenology-chart slug="{{ sp.slug }}" species-name="{{ sp.genus }} {{ sp.species_display }}" data-pagefind-ignore></pnwm-phenology-chart>
     {# Filter bar drives map and chart via pnwm-filter-change events (see script below) #}
     <pnwm-filter-bar slug="{{ sp.slug }}" data-pagefind-ignore></pnwm-filter-bar>
     <noscript data-pagefind-ignore>

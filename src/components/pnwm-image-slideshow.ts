@@ -156,6 +156,8 @@ export class PnwmImageSlideshow extends LitElement {
   _osdViewer: import('openseadragon').Viewer | null;
   _resizeObserver: ResizeObserver | null;
   _inertedElements: Element[];
+  // Element that had focus when the lightbox opened, so it can be restored on close
+  _lightboxOpener: HTMLElement | null;
   // Bound keydown listener stored as instance field for symmetric add/remove
   _boundHandleKeydown: (e: KeyboardEvent) => void;
 
@@ -169,6 +171,7 @@ export class PnwmImageSlideshow extends LitElement {
     this._resizeObserver = null;
     this._inertedElements = [];
     this._osdViewer = null;
+    this._lightboxOpener = null;
     this._highResSpecimens = [];
     this.highResAvailable = false;
     this.highResSpecimens = '';
@@ -264,16 +267,31 @@ export class PnwmImageSlideshow extends LitElement {
 
   async _openLightbox(): Promise<void> {
     this._lightboxOpen = true;
-    // Inert all siblings up the ancestor chain (not the host itself) so keyboard
-    // focus is trapped in the lightbox without inerting our own shadow DOM.
+    // Remember the opener so focus can return to it on close (WCAG 2.4.3).
+    // The trigger lives in this shadow root, so read activeElement through it.
+    this._lightboxOpener =
+      (this.shadowRoot?.activeElement as HTMLElement | null)
+      ?? (document.activeElement as HTMLElement | null);
+    // The ancestor walk below cannot inert the host (that would take our own
+    // lightbox with it), so the slideshow underneath is inerted separately via
+    // `?inert=${this._lightboxOpen}` in render() — otherwise Tab reaches the
+    // trigger and thumbnail strip sitting behind the overlay.
+    //
+    // Inert every sibling on the way up to and INCLUDING <body>'s own children, so
+    // the header nav, partners banner and footer are all taken out of the tab
+    // order — not just the ancestors between us and <body>. The host itself is
+    // skipped at each level so our own shadow DOM stays reachable.
+    // Previously this stopped one level short (`parentElement.tagName !== 'BODY'`),
+    // which let Tab walk straight out of the open lightbox into the partner links.
     let node: Element = this;
-    while (node.parentElement && node.parentElement.tagName !== 'BODY') {
+    while (node.parentElement) {
       Array.from(node.parentElement.children).forEach(sibling => {
         if (sibling !== node && !sibling.hasAttribute('inert')) {
           sibling.setAttribute('inert', '');
           this._inertedElements.push(sibling);
         }
       });
+      if (node.parentElement.tagName === 'BODY') break;
       node = node.parentElement;
     }
     await this.updateComplete;
@@ -306,6 +324,17 @@ export class PnwmImageSlideshow extends LitElement {
     this._lightboxOpen = false;
     this._inertedElements.forEach(el => el.removeAttribute('inert'));
     this._inertedElements = [];
+    // Return focus to whatever opened the lightbox; without this it stays on the
+    // now-removed close button and the browser resets it to <body>, dropping the
+    // keyboard user back at the top of the page.
+    // Deferred to the next render: the opener sits inside .slideshow, which is
+    // still `inert` until this update flushes, and focus() on an element in an
+    // inert subtree is silently ignored.
+    const opener = this._lightboxOpener;
+    this._lightboxOpener = null;
+    void this.updateComplete.then(() => {
+      if (opener?.isConnected) opener.focus();
+    });
   }
 
   _formatCaption(img: {
@@ -395,7 +424,13 @@ export class PnwmImageSlideshow extends LitElement {
 
     const lightbox = this._lightboxOpen
       ? html`
-          <div class="lightbox" @click=${(e: MouseEvent) => { if (e.target === e.currentTarget) this._closeLightbox(); }}>
+          <div
+            class="lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label=${current.alt ? `Full-size photo: ${current.alt}` : 'Full-size photo'}
+            @click=${(e: MouseEvent) => { if (e.target === e.currentTarget) this._closeLightbox(); }}
+          >
             ${useOsd
               ? html`
                   <div id="osd-viewer" class="osd-viewer"></div>
@@ -422,7 +457,7 @@ export class PnwmImageSlideshow extends LitElement {
     // Single image — no controls
     if (this._images.length === 1) {
       return html`
-        <div role="region" aria-label="Species photos" class="slideshow">
+        <div role="region" aria-label="Species photos" class="slideshow" ?inert=${this._lightboxOpen}>
           <div class="slide">
             <button
               class="slide-trigger"
@@ -444,7 +479,7 @@ export class PnwmImageSlideshow extends LitElement {
 
     // Multiple images — thumbnail strip with scroll controls
     return html`
-      <div role="region" aria-label="Species photos" class="slideshow">
+      <div role="region" aria-label="Species photos" class="slideshow" ?inert=${this._lightboxOpen}>
         <div class="slide">
           <button
             class="slide-trigger"
