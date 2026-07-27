@@ -42,10 +42,14 @@
         <input type="search" class="site-search-input" placeholder="Search…" aria-label="Search site">
         {#- No role="listbox": the results are plain <a> elements, and a listbox
            whose children are not role="option" is invalid ARIA (axe
-           aria-required-children). Left as a labelled live region so the result
-           count / "No results found." is announced. A real combobox (roving
-           aria-activedescendant, ArrowDown into the list) is tracked separately. -#}
-        <div class="site-search-results" id="site-search-results" aria-label="Search results" aria-live="polite" hidden></div>
+           aria-required-children). A real combobox (roving aria-activedescendant,
+           ArrowDown into the list) is tracked separately.
+           This container is NOT the live region: it is [hidden] (display:none, so
+           out of the accessibility tree) while doSearch() fills it, and revealing
+           an already-populated element is not a live update — nothing would be
+           announced. The always-rendered status element below carries the count. -#}
+        <div class="site-search-results" id="site-search-results" aria-label="Search results" hidden></div>
+        <p class="sr-only" id="site-search-status" role="status"></p>
       </div>
     </nav>
   </header>
@@ -97,7 +101,14 @@
     (async () => {
       const input = document.querySelector('.site-search-input');
       const resultsEl = document.getElementById('site-search-results');
+      const statusEl = document.getElementById('site-search-status');
       if (!input || !resultsEl) return;
+
+      // Announce the outcome through a permanently-visible-to-AT status element.
+      // resultsEl itself cannot do this: it is display:none while being filled.
+      function announce(message) {
+        if (statusEl) statusEl.textContent = message;
+      }
 
       let pagefind;
       try {
@@ -136,12 +147,19 @@
 
       async function doSearch() {
         const query = input.value.trim();
-        if (!query) { resultsEl.hidden = true; resultsEl.innerHTML = ''; return; }
+        if (!query) { resultsEl.hidden = true; resultsEl.innerHTML = ''; announce(''); return; }
         const search = await pagefind.search(query);
         const results = await Promise.all(search.results.slice(0, 8).map(r => r.data()));
         if (!results.length) {
           resultsEl.innerHTML = '<p class="site-search-empty">No results found.</p>';
+          announce('No results found.');
         } else {
+          // The list is capped at 8, so report the cap explicitly rather than
+          // announcing "8 results" when the query actually matched far more.
+          const total = search.results.length;
+          announce(total > results.length
+            ? `Showing ${results.length} of ${total} results for ${query}.`
+            : `${total} result${total === 1 ? '' : 's'} for ${query}.`);
           resultsEl.innerHTML = results.map(r =>
             `<a class="site-search-result" href="${esc(r.url)}">
               <span class="site-search-result-title">${esc(r.meta?.title || r.url)}</span>

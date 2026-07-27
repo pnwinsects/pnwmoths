@@ -74,11 +74,15 @@ class PnwmOccurrenceMap extends LitElement {
     // plus the record count, since the markers themselves convey nothing to AT.
     const name = this.speciesName || this.slug;
     const visible = this.filters ? filterRecords(this._records, this.filters) : this._records;
+    // Count what _renderMap() actually plots, not every matching record: markers
+    // are skipped for records with no coordinates, so counting `visible` would
+    // announce more points than the map shows.
+    const plotted = visible.filter(r => r.latitude != null && r.longitude != null).length;
     return html`<div
       id="map-${this.slug}"
       style="min-height:320px"
       role="region"
-      aria-label="Occurrence map for ${name}: ${visible.length} record${visible.length === 1 ? '' : 's'} plotted."
+      aria-label="Occurrence map for ${name}: ${plotted} record${plotted === 1 ? '' : 's'} plotted."
     ></div>`;
   }
 

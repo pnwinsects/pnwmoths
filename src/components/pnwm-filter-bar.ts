@@ -320,8 +320,10 @@ class PnwmFilterBar extends LitElement {
           </select>
         </div>
 
-        <div class="filter-group year-range">
-          <span class="filter-group-caption">Year range: ${this._yearMin} &ndash; ${this._yearMax}</span>
+        <!-- role="group" + aria-labelledby ties the caption to the slider pair it
+             describes; the pairing was previously conveyed only by layout. -->
+        <div class="filter-group year-range" role="group" aria-labelledby="filter-year-caption-${this.slug}">
+          <span class="filter-group-caption" id="filter-year-caption-${this.slug}">Year range: ${this._yearMin} &ndash; ${this._yearMax}</span>
           <div class="year-range-inputs">
             <label for="filter-year-min-${this.slug}" class="sr-only">Minimum year</label>
             <input
@@ -346,8 +348,8 @@ class PnwmFilterBar extends LitElement {
           </div>
         </div>
 
-        <div class="filter-group year-range">
-          <span class="filter-group-caption">Elevation: ${this._elevationMin} &ndash; ${this._elevationMax} ft</span>
+        <div class="filter-group year-range" role="group" aria-labelledby="filter-elevation-caption-${this.slug}">
+          <span class="filter-group-caption" id="filter-elevation-caption-${this.slug}">Elevation: ${this._elevationMin} &ndash; ${this._elevationMax} ft</span>
           <div class="year-range-inputs">
             <label for="filter-elevation-min-${this.slug}" class="sr-only">Minimum elevation in feet</label>
             <input
