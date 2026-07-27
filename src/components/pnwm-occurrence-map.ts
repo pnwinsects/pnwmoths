@@ -9,6 +9,7 @@ class PnwmOccurrenceMap extends LitElement {
   static get properties(): PropertyDeclarations {
     return {
       slug: { type: String },
+      speciesName: { type: String, attribute: 'species-name' },
       filters: { attribute: false },
       _records: { attribute: false, state: true },
       _loading: { type: Boolean, state: true },
@@ -17,6 +18,7 @@ class PnwmOccurrenceMap extends LitElement {
   }
 
   slug: string;
+  speciesName: string;
   filters: Partial<FilterChangeDetail> | null;
   _records: OccurrenceRecord[];
   _loading: boolean;
@@ -27,6 +29,7 @@ class PnwmOccurrenceMap extends LitElement {
   constructor() {
     super();
     this.slug = '';
+    this.speciesName = '';
     this.filters = null;
     this._records = [];
     this._loading = true;
@@ -63,7 +66,24 @@ class PnwmOccurrenceMap extends LitElement {
     if (this._error) {
       return html`<div style="min-height:320px;display:flex;align-items:center;justify-content:center"><p style="color:var(--pico-del-color)">Could not load occurrence data. Try reloading the page.</p></div>`;
     }
-    return html`<div id="map-${this.slug}" style="min-height:320px" role="application" aria-label="Occurrence map for ${this.slug}"></div>`;
+    // role="region", not role="application": the latter tells screen readers to
+    // stop intercepting keys and hand everything to the widget, which is only
+    // right for something that implements its own full keyboard model. Leaflet's
+    // controls are ordinary focusable buttons, so browse mode should stay on.
+    // The label carries the species name (the attribute) rather than the slug,
+    // plus the record count, since the markers themselves convey nothing to AT.
+    const name = this.speciesName || this.slug;
+    const visible = this.filters ? filterRecords(this._records, this.filters) : this._records;
+    // Count what _renderMap() actually plots, not every matching record: markers
+    // are skipped for records with no coordinates, so counting `visible` would
+    // announce more points than the map shows.
+    const plotted = visible.filter(r => r.latitude != null && r.longitude != null).length;
+    return html`<div
+      id="map-${this.slug}"
+      style="min-height:320px"
+      role="region"
+      aria-label="Occurrence map for ${name}: ${plotted} record${plotted === 1 ? '' : 's'} plotted."
+    ></div>`;
   }
 
   updated(changed: PropertyValues): void {

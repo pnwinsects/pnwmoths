@@ -83,13 +83,16 @@ export class KeyResultsGrid extends LitElement {
     this.requestUpdate();
   }
 
+  // The thumbnail is decorative (alt=""): the card's own label already names the
+  // species, so descriptive alt text made every card announce its binomial twice
+  // — 862 duplicated names on a full /identify/ result set (axe image-redundant-alt).
   _renderCard(sp: KeySpecies): TemplateResult {
     return html`
       <a class="pnwm-krg-card" href="${this._prefix}species/${sp.slug}/">
         ${sp.nav_image && !this._failedImages.has(sp.slug)
           ? html`<img
               src="${buildCardUrl(sp.slug, sp.nav_image, 320)}"
-              alt="${sp.genus} ${sp.epithet}"
+              alt=""
               loading="lazy"
               @error=${() => this._onImageError(sp.slug)}>`
           : this._renderPlaceholder()

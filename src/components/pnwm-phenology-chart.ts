@@ -20,6 +20,7 @@ class PnwmPhenologyChart extends LitElement {
   static get properties(): PropertyDeclarations {
     return {
       slug: { type: String },
+      speciesName: { type: String, attribute: 'species-name' },
       filters: { attribute: false },
       _records: { attribute: false, state: true },
       _loading: { type: Boolean, state: true },
@@ -42,6 +43,7 @@ class PnwmPhenologyChart extends LitElement {
   }
 
   slug: string;
+  speciesName: string;
   filters: Partial<FilterChangeDetail> | null;
   _records: OccurrenceRecord[];
   _loading: boolean;
@@ -50,6 +52,7 @@ class PnwmPhenologyChart extends LitElement {
   constructor() {
     super();
     this.slug = '';
+    this.speciesName = '';
     this.filters = null;
     this._records = [];
     this._loading = true;
@@ -86,11 +89,34 @@ class PnwmPhenologyChart extends LitElement {
 
     const visible = this.filters ? filterRecords(this._records, this.filters) : this._records;
     return html`
-      <p style="color:var(--pico-muted-color)">${visible.length} record${visible.length === 1 ? '' : 's'}</p>
-      <div class="chart-container" role="img" aria-label="Phenology chart for ${this.slug}">
+      <p style="color:var(--pico-muted-color)" aria-live="polite">${visible.length} record${visible.length === 1 ? '' : 's'}</p>
+      <div class="chart-container" role="img" aria-label=${this._chartLabel(visible)}>
         <canvas></canvas>
       </div>
     `;
+  }
+
+  /** Display name for the species; falls back to the slug when the attribute is absent. */
+  get _displayName(): string {
+    return this.speciesName || this.slug;
+  }
+
+  /**
+   * Accessible name for the chart. A <canvas> exposes nothing to assistive tech,
+   * so the label has to carry the data itself — previously it read only
+   * "Phenology chart for virbia-ferruginosa", which conveyed neither the species
+   * (a raw slug) nor a single value from the chart.
+   */
+  _chartLabel(visible: OccurrenceRecord[]): string {
+    const counts = aggregateByMonth(visible);
+    const total = counts.reduce((a, b) => a + b, 0);
+    if (!total) {
+      return `Phenology chart for ${this._displayName}: no records match the current filters.`;
+    }
+    const byMonth = counts
+      .map((n, i) => `${MONTHS[i]} ${n}`)
+      .join(', ');
+    return `Phenology chart for ${this._displayName}: records collected per month — ${byMonth}.`;
   }
 
   updated(changed: PropertyValues): void {

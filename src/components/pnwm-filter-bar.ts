@@ -99,8 +99,41 @@ class PnwmFilterBar extends LitElement {
         gap: 0.5rem;
         align-items: center;
       }
-      a.clear-filters {
+      /* "Clear filters" became a <button>; this keeps its previous link-like
+         appearance. Pico is outside this shadow root, so a bare button would fall
+         back to the UA's native button chrome rather than inheriting page styles. */
+      button.clear-filters {
+        padding: 0;
+        border: none;
+        background: none;
+        width: auto;
+        font: inherit;
+        color: var(--pico-primary);
+        text-decoration: underline;
         cursor: pointer;
+      }
+      button.clear-filters:focus-visible {
+        outline: 2px solid var(--pico-primary);
+        outline-offset: 2px;
+      }
+      /* Range-group captions ("Year range: 1900 – 2026"). These were <label>
+         elements with no "for" and no wrapped control — orphan labels that name
+         nothing. They are plain text now, so keep the label's typography. */
+      .filter-group-caption {
+        display: block;
+      }
+      /* Shadow DOM cannot see theme.css's .sr-only, so it needs its own copy —
+         without it these labels rendered as visible body text next to the sliders. */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
       }
     `;
   }
@@ -287,8 +320,10 @@ class PnwmFilterBar extends LitElement {
           </select>
         </div>
 
-        <div class="filter-group year-range">
-          <label>Year range: ${this._yearMin} &ndash; ${this._yearMax}</label>
+        <!-- role="group" + aria-labelledby ties the caption to the slider pair it
+             describes; the pairing was previously conveyed only by layout. -->
+        <div class="filter-group year-range" role="group" aria-labelledby="filter-year-caption-${this.slug}">
+          <span class="filter-group-caption" id="filter-year-caption-${this.slug}">Year range: ${this._yearMin} &ndash; ${this._yearMax}</span>
           <div class="year-range-inputs">
             <label for="filter-year-min-${this.slug}" class="sr-only">Minimum year</label>
             <input
@@ -313,8 +348,8 @@ class PnwmFilterBar extends LitElement {
           </div>
         </div>
 
-        <div class="filter-group year-range">
-          <label>Elevation: ${this._elevationMin} &ndash; ${this._elevationMax} ft</label>
+        <div class="filter-group year-range" role="group" aria-labelledby="filter-elevation-caption-${this.slug}">
+          <span class="filter-group-caption" id="filter-elevation-caption-${this.slug}">Elevation: ${this._elevationMin} &ndash; ${this._elevationMax} ft</span>
           <div class="year-range-inputs">
             <label for="filter-elevation-min-${this.slug}" class="sr-only">Minimum elevation in feet</label>
             <input
@@ -340,7 +375,9 @@ class PnwmFilterBar extends LitElement {
         </div>
 
         <div class="filter-group">
-          <a href="#" class="clear-filters" @click=${this._onClearFilters}>Clear filters</a>
+          <!-- A button, not <a href="#">: this performs an in-page action rather
+               than navigating, and the anchor was announced as a link to "#". -->
+          <button type="button" class="clear-filters" @click=${this._onClearFilters}>Clear filters</button>
         </div>
       </div>
     `;

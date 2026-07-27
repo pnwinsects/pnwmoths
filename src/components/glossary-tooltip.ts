@@ -4,8 +4,11 @@
  * Reads data-definition and data-image-url from <abbr class="glossary-term">
  * elements inserted by the build-time glossary transform.
  *
- * Removes the `title` attribute at runtime (replaced by aria-label) to prevent
- * the browser's native tooltip from appearing alongside the custom one.
+ * Removes the `title` attribute at runtime to prevent the browser's native
+ * tooltip from appearing alongside the custom one. The definition is exposed via
+ * aria-describedby on the popover, NOT aria-label on the term: aria-label would
+ * REPLACE the term's accessible name, so a screen reader reading the sentence
+ * would say a 250-word definition where the word "thorax" belongs.
  */
 
 const terms = document.querySelectorAll<HTMLElement>('abbr.glossary-term');
@@ -18,7 +21,9 @@ terms.forEach((abbr: HTMLElement, index: number) => {
   popover.className = 'glossary-popover';
   popover.setAttribute('popover', 'auto');
   popover.setAttribute('role', 'tooltip');
-  popover.setAttribute('aria-hidden', 'true');
+  // No aria-hidden toggling: the popover is the target of aria-describedby, and
+  // marking it hidden while it is referenced is contradictory. Closed popovers are
+  // already display:none, which keeps them out of the reading order on their own.
   popover.innerHTML = '<img class="gt-img" alt="" hidden><p class="gt-def"></p>';
   document.body.appendChild(popover);
 
@@ -26,12 +31,15 @@ terms.forEach((abbr: HTMLElement, index: number) => {
   const gtImg = popover.querySelector<HTMLImageElement>('.gt-img')!;
   const gtDef = popover.querySelector<HTMLParagraphElement>('.gt-def')!;
 
-  // Move title -> aria-label (D-09)
-  const title = abbr.getAttribute('title');
-  if (title) {
-    abbr.setAttribute('aria-label', title);
-    abbr.removeAttribute('title');
-  }
+  // Populate the definition up front rather than on first show(), so the
+  // aria-describedby reference below resolves to real text from the outset.
+  gtDef.textContent = abbr.dataset.definition ?? '';
+
+  // Drop the native tooltip (it would duplicate the custom popover) and point at
+  // the popover as the term's DESCRIPTION. The term keeps its own text as its
+  // accessible name — see the note in the file header on why aria-label is wrong.
+  abbr.removeAttribute('title');
+  abbr.setAttribute('aria-describedby', popover.id);
   // Make keyboard-focusable (D-06)
   abbr.setAttribute('tabindex', '0');
 
@@ -52,9 +60,6 @@ terms.forEach((abbr: HTMLElement, index: number) => {
 
   function show(): void {
     const imageUrl = abbr.dataset.imageUrl;
-    const definition = abbr.dataset.definition;
-
-    gtDef.textContent = definition || '';
 
     if (imageUrl) {
       gtImg.src = imageUrl;
@@ -74,7 +79,6 @@ terms.forEach((abbr: HTMLElement, index: number) => {
     popover.style.top = '-9999px';
 
     popover.showPopover();
-    popover.removeAttribute('aria-hidden');
 
     // Viewport edge clamp
     const popoverWidth = popover.offsetWidth;
@@ -89,6 +93,5 @@ terms.forEach((abbr: HTMLElement, index: number) => {
 
   function hide(): void {
     try { popover.hidePopover(); } catch (_) { /* already hidden */ }
-    popover.setAttribute('aria-hidden', 'true');
   }
 });
