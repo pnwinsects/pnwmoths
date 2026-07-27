@@ -7,6 +7,13 @@ pagination:
 permalink: "plates/{{ plate.slug }}/index.html"
 eleventyComputed:
   title: "{{ plate.title }} — PNW Moths"
+  # Sharing metadata (issue #198). The plate's own thumbnail is already on the CDN
+  # at a fixed path — the same one the plate index grid uses. It is 240x300 and the
+  # optimizer will not upscale it, so X drops it (below its 300x157 large-card floor)
+  # while Bluesky/Slack/Discord render it fine — accepted, see ADR 0021.
+  description: "{{ plate.title | safe }}{% if plate.description %} ({{ plate.description | safe }}){% endif %} — a zoomable high-resolution photographic plate of pinned Pacific Northwest moth specimens."
+  socialImage: "{{ cdnBaseUrl }}/plates/{{ plate.slug }}/thumbnail.jpg"
+  socialImageAlt: "Photographic plate of pinned moth specimens — {{ plate.title | safe }}"
 ---
 <h1>{{ plate.title }}</h1>
 

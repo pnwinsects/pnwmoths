@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "FAQs -- PNW Moths"
+title: "FAQs — PNW Moths"
 permalink: /faqs/index.html
+description: "Answers to common questions about moths — their life cycle, how they differ from butterflies, what they eat, whether they are attracted to light, and how to find them."
 ---
 
 # Frequently Asked Questions

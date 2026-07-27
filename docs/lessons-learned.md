@@ -40,6 +40,16 @@ cost a debugging cycle to discover.
   a subpath. Any Vite+Eleventy project is prone to double-prefix bugs — add a load test
   against a non-root `pathPrefix` to the smoke check before shipping.
 
+- **Vite's HTML scanner also sweeps `<meta>`, not just `<link>` and `<img>`.** It treats
+  every `<link href>` as a copyable asset regardless of `rel`, and the `content` of a
+  small allow-list of `<meta>` tags — `og:image`, `og:video`, `og:audio`,
+  `twitter:image`, `msapplication-TileImage` — the same way. A root-relative,
+  directory-style value there (`/species/{slug}/`) makes it `fs.readFile` a directory and
+  throw `EISDIR` at build time. Two escapes: an absolute `https://` URL, which
+  `isExternalUrl` skips (what the sharing metadata in `base.njk` relies on), or a
+  `vite-ignore` attribute (what `src/species-redirect.njk` relies on, since its canonical
+  link must stay `pathPrefix`-relative).
+
 - **Serve mode and build mode have different hook sequencing.** `npm run build` passing
   does not guarantee `eleventy --serve` works — build outputs (e.g. emitted JSON) can
   silently drop under serve. Test both explicitly.
@@ -225,6 +235,14 @@ cost a debugging cycle to discover.
 - **Store injected metadata in `data-*` attributes, not DOM text.** Definition text in
   `data-definition` (materialized into a popover only at runtime) keeps it out of the
   Pagefind index for free — no special exclusion config needed.
+
+- **Anything derived from factsheet prose inherits the legacy CMS's malformed Markdown.**
+  The meta descriptions built from each account's opening paragraph exposed
+  `euxoa-lineifrons.md`, whose emphasis markers straddled non-breaking spaces
+  (`**Genus lineifrons* *is a pale…`) — which had also been italicising its entire
+  opening paragraph on the page, unnoticed, since the migration. Derive defensively
+  (`stripMarkdown` drops unbalanced markers) and scan *all* ~1,265 outputs for residue
+  after any such change; a single bad file in a corpus that size is invisible in a sample.
 
 - **Spot-check real build output for transforms.** The single-substitution bug above
   passed the existing unit tests and was only caught by inspecting an actual generated

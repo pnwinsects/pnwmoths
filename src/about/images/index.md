@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "About the Images -- PNW Moths"
+title: "About the Images — PNW Moths"
 permalink: /about/images/index.html
+description: "Image licensing, the specimen photography and plate-making methods used on this site, and a guide to producing photographic plates of your own."
 ---
 
 # About the Images

@@ -6,11 +6,31 @@ import { pathToFileURL } from "node:url";
 import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
+import {
+  proseDescription,
+  speciesDescription,
+  speciesSocialImage,
+  speciesSocialImageAlt,
+  SITE_DESCRIPTION,
+  SITE_IMAGE_ALT,
+  SITE_NAME,
+  type HighResPhotoLike,
+  type SpeciesImageLike,
+  type SpeciesLike,
+} from "./src/_lib/social-meta.ts";
 
 // On GitHub Pages the site lives under /pnwmoths/. actions/configure-pages sets
 // GITHUB_PAGES=true so the build knows to apply the prefix. Locally the dev
 // server serves at root, so we use "/" which makes | url a no-op.
 const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
+
+// Origin this build will be served from. Sharing metadata (og:url, og:image,
+// rel=canonical) must be absolute, and pathPrefix alone cannot supply an origin —
+// so this mirrors the same GITHUB_PAGES switch, and staging never advertises
+// itself with production URLs. See docs/adr/0021-sharing-metadata.md.
+const SITE_ORIGIN = process.env.GITHUB_PAGES
+  ? "https://pnwinsects.github.io"
+  : "https://moths.pnwinsects.org";
 
 // bunny.net Pull Zone — public CDN base URL. Not a secret; hard-coded here.
 // To update: log in to bunny.net dashboard, find the Pull Zone hostname, paste here.
@@ -65,6 +85,47 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   // Thousands-separated integer, e.g. 92446 -> "92,446". Used for home-page stats.
   eleventyConfig.addFilter("number", v => Number(v).toLocaleString("en-US"));
 
+  // --- Sharing metadata (issue #198) ---------------------------------------
+
+  // Site-root-relative path -> absolute URL. Chain it after `| url`, which supplies
+  // pathPrefix: {{ page.url | url | absoluteUrl }}. Absoluteness is required by
+  // og:/canonical consumers, and it is also what keeps eleventy-plugin-vite's HTML
+  // asset scanner away from these tags — it sweeps every <link href> and the
+  // og:image <meta content>, but skips external URLs.
+  eleventyConfig.addFilter("absoluteUrl", p => new URL(p as string, SITE_ORIGIN).href);
+
+  // First prose paragraph of each factsheet, derived on demand and memoised.
+  // Loading all ~1,265 up front would stall config startup for pages that are
+  // never built (e.g. the single-template Eleventy runs in the test suite).
+  const proseSummaries = new Map<string, string | null>();
+  function proseSummaryFor(slug: string): string | null {
+    const cached = proseSummaries.get(slug);
+    if (cached !== undefined) return cached;
+    const path = resolve("src/content/species", `${slug}.md`);
+    const summary = existsSync(path) ? proseDescription(readFileSync(path, "utf8")) : null;
+    proseSummaries.set(slug, summary);
+    return summary;
+  }
+
+  // {{ sp | speciesDescription }} — factsheet prose if we have any, else taxonomy.
+  eleventyConfig.addFilter("speciesDescription", sp => {
+    const species = sp as SpeciesLike & { slug: string };
+    return speciesDescription(species, proseSummaryFor(species.slug));
+  });
+
+  // {{ sp.slug | speciesSocialImage(speciesPhotos[sp.slug], images[sp.slug]) }}
+  // Returns "" for species with no photos, so the layout falls back to the site card.
+  eleventyConfig.addFilter("speciesSocialImage", (slug, highRes, images) =>
+    speciesSocialImage(
+      slug as string,
+      highRes as HighResPhotoLike | undefined,
+      images as SpeciesImageLike[] | undefined,
+      CDN_BASE_URL,
+    ));
+
+  // {{ sp | speciesSocialImageAlt }}
+  eleventyConfig.addFilter("speciesSocialImageAlt", sp => speciesSocialImageAlt(sp as SpeciesLike));
+
   // Annotate species prose pages at build time: wrap first occurrences of glossary
   // terms in <abbr class="glossary-term"> elements.
   // Guard 1: skip non-HTML outputs (outputPath is false for permalink:false pages)
@@ -78,6 +139,12 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
 
   // Expose CDN base URL to all Nunjucks templates as {{ cdnBaseUrl }}
   eleventyConfig.addGlobalData("cdnBaseUrl", CDN_BASE_URL);
+
+  // Sharing-metadata defaults, used by src/_includes/base.njk for every page that
+  // does not set its own `description` / `socialImage` / `socialImageAlt`.
+  eleventyConfig.addGlobalData("siteName", SITE_NAME);
+  eleventyConfig.addGlobalData("siteDescription", SITE_DESCRIPTION);
+  eleventyConfig.addGlobalData("siteImageAlt", SITE_IMAGE_ALT);
 
   // Passthrough copy: per-species Parquet files from data/parquet/{slug}/ to _site/species/{slug}/
   // data/parquet/acronicta-americana/records.parquet -> _site/species/acronicta-americana/records.parquet

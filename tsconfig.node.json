@@ -3,7 +3,9 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -14,7 +16,9 @@
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "skipLibCheck": true,
     "noEmit": true
   },
@@ -22,6 +26,7 @@
     "scripts/**/*.ts",
     "src/_data/**/*.ts",
     "src/_lib/**/*.ts",
+    "src/_includes/**/*.ts",
     "src/types/**/*.ts",
     "eleventy.config.ts",
     "eleventy.config.test.ts",
