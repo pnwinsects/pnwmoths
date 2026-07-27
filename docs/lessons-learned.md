@@ -106,7 +106,34 @@ cost a debugging cycle to discover.
 - **Focus trap = sibling-walk `inert` + high z-index, not `main.inert`.** Inerting the
   Lit host's own ancestor blocks the component itself. Instead, walk host → `<body>`,
   inert siblings at each level, leave the ancestor chain interactive. Also set the overlay
-  to z-index 9000 to clear Leaflet controls (z-index 1000).
+  to z-index 9000 to clear Leaflet controls (z-index 1000). Two corrections learned the
+  hard way ([0020](adr/0020-inert-modal-focus-containment.md)): the walk must include
+  **`<body>`'s own children** — stopping at `parentElement.tagName !== 'BODY'` leaves the
+  header, footer and any body-level banner fully tabbable behind the overlay — and because
+  the walk skips the host, **anything else inside the host must be inerted separately**
+  (`?inert=${this._open}` on the underlying content), or Tab reaches the controls sitting
+  behind the modal.
+
+- **`focus()` is silently ignored inside an `inert` subtree.** Restoring focus to the
+  element that opened a modal fails if the un-inerting re-render hasn't flushed yet — no
+  error, focus just falls back to `<body>` and the keyboard user lands at the top of the
+  page. Defer the restore: `void this.updateComplete.then(() => opener.focus())`. Note the
+  ordering trap — *adding* containment is what breaks restore, so the two changes have to
+  be tested together.
+
+- **A backtick inside a comment in a `` css`` `` block terminates the template literal.**
+  Writing ``/* labels with no `for` */`` inside Lit's tagged CSS ends the string mid-rule
+  and yields confusing downstream parse errors (`TS1005: ';' expected`) pointing at lines
+  far from the comment. Use plain quotes in CSS comments.
+
+- **Lit `` html`` `` templates have no JSX-style comments.** `{/* … */}` is not syntax
+  here; it renders as literal text in the page. Use `<!-- … -->`.
+
+- **Global utility classes do not cross a shadow boundary.** A `.sr-only` (or any helper)
+  defined in `theme.css` has no effect inside a component's shadow root — the class silently
+  does nothing and "visually hidden" labels render as ordinary visible text. Shadow-DOM
+  components need their own copy in `static styles`. This sat unnoticed in the filter bar
+  because unstyled labels look plausible rather than broken.
 
 - **`min-width: 0` on every CSS grid `1fr` child.** Without it, `1fr` cells expand past
   their allocation to fit content and overflow into the adjacent column. Mandatory on any
@@ -147,6 +174,44 @@ cost a debugging cycle to discover.
   white content (#fff, ≥4.5:1) and the cream nav (#f3e8ba, ≥4.5:1); the legacy light olive
   `#a4ab78` is only ~2.4:1 and is safe for decorative fills/borders only, never text.
 
+## Accessibility
+
+- **`aria-label` *replaces* an element's accessible name — it never supplements it.** Using
+  it to attach explanatory text destroys the thing it was attached to: moving each glossary
+  definition onto its `<abbr>` meant a screen reader announced a 267-character definition
+  where the word "thorax" belongs, mid-sentence, on every species account. Supplementary
+  text is `aria-describedby` pointing at an element that holds it. Reach for `aria-label`
+  only when an element has *no* usable text of its own (icon buttons).
+
+- **A live region must already be in the accessibility tree when it changes.** Filling a
+  `[hidden]` / `display:none` container and *then* revealing it announces nothing — the
+  mutation happened while the region was out of the tree, and revealing populated content
+  is not an update. Keep a small, always-rendered `.sr-only` `role="status"` element and
+  write the message into that. The header search carried an `aria-live="polite"` that had
+  never once fired for this reason.
+
+- **An image inside a link or label that already names the target must be `alt=""`.**
+  Descriptive alt on a card thumbnail duplicates the card's own text, so every result is
+  announced twice — 866 such nodes across `/identify/` and `/plates/`. Decorative-by-context
+  is the common case in a grid of labelled cards.
+
+- **`role="application"` suppresses screen-reader browse mode.** It tells AT to stop
+  interpreting content and forward every keystroke, which is only correct for a widget that
+  implements a complete keyboard model of its own. A Leaflet map whose controls are ordinary
+  focusable buttons is not that; `role="region"` with a real label is.
+
+- **Audit in a real browser, not by reading source.** Source review and automated scanning
+  each caught things the other missed here. axe found the ~1,050 unnamed buttons and the
+  4.01:1 nav contrast; only scripted keyboard probing showed that focus escaped the modal
+  and that focus restore silently failed. Neither substitutes for assistive-technology
+  testing, which remains the largest untested surface
+  ([#208](https://github.com/pnwinsects/pnwmoths/issues/208)).
+
+- **State conveyed only by a visual property is invisible to AT.** Dimming non-matching
+  taxa to `opacity:0.35` communicates nothing programmatically (334 of 417 rows, zero ARIA
+  signal) and also drops the text below contrast minimums. Pair any such affordance with
+  `aria-disabled`, visually-hidden text, or a live result count.
+
 ## Build-time HTML transforms
 
 - **Initialize the `seen` Set per transform invocation, never at module scope.** Module
@@ -164,6 +229,14 @@ cost a debugging cycle to discover.
 - **Spot-check real build output for transforms.** The single-substitution bug above
   passed the existing unit tests and was only caught by inspecting an actual generated
   species page. Load and verify a real page, don't trust green units alone.
+
+- **`applyGlossaryTerms` only sees *direct-child* text nodes of `main p, li, h2, h3`.**
+  It filters `el.childNodes` for `nodeType === 3`, so any term nested inside another
+  element — most often a link — is invisible to it. Two consequences: prose that hand-links
+  a term gets no tooltip (two species accounts shipped dead links to the old WWU site for
+  exactly this reason, [#202](https://github.com/pnwinsects/pnwmoths/issues/202)), and
+  **changing heading levels changes tooltip coverage**, because `h4`/`h5` are not in the
+  selector list. Re-check a rendered account after any bulk edit to prose structure.
 
 ## Data migration & integrity
 
@@ -220,6 +293,14 @@ cost a debugging cycle to discover.
   and diff against it — data byte-for-byte, HTML modulo content-hashed asset names. It
   catches output drift that unit tests can't, and is cheap to produce once. Fail closed
   (`if ! diff … exit 1`), never `diff … && echo ok` under `set -e`.
+
+- **If `npm run build:site` dirties `data/`, the committed artifact is stale — that's a
+  bug, not churn.** Since [0017](adr/0017-reproducible-committed-artifacts.md) these files
+  are byte-reproducible, so a non-empty `git status` after a build means the artifact no
+  longer matches its inputs. Do not commit the regenerated file as a side effect of
+  unrelated work, and do not dismiss it: a stale `key-matrix.json` was serving a placeholder
+  for a species that had a photo, and pinned the drift into a test expectation
+  ([#197](https://github.com/pnwinsects/pnwmoths/issues/197)). Revert it, and file it.
 
 - **Verify UI behavior through the data/event layer, not a headless viewport.** The
   preview browser reports a 0×0 viewport, so nothing is ever "visible" to an
