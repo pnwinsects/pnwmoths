@@ -10,6 +10,7 @@ import {
   resolveLegacyPath,
   normalizeLegacyPath,
   stripQueryAndHash,
+  stripUnexpandedPlaceholder,
   STATIC_MAP,
   REDIRECT_PAGE_PATH,
   REDIRECT_FROM_PARAM,
@@ -28,6 +29,32 @@ describe('stripQueryAndHash', () => {
 
   test('leaves a clean path untouched', () => {
     assert.equal(stripQueryAndHash('/browse/foo/'), '/browse/foo/');
+  });
+});
+
+describe('stripUnexpandedPlaceholder', () => {
+  test('strips a literal {REQUEST_URI} left by the legacy rewrite rule', () => {
+    assert.equal(
+      stripUnexpandedPlaceholder('{REQUEST_URI}browse/acronicta/acronicta-americana/'),
+      'browse/acronicta/acronicta-americana/',
+    );
+  });
+
+  test('strips the ${...} and %{...} spellings', () => {
+    assert.equal(stripUnexpandedPlaceholder('${REQUEST_URI}browse/foo/'), 'browse/foo/');
+    assert.equal(stripUnexpandedPlaceholder('%{REQUEST_URI}browse/foo/'), 'browse/foo/');
+  });
+
+  test('strips a percent-encoded placeholder that nothing decoded', () => {
+    assert.equal(stripUnexpandedPlaceholder('%7BREQUEST_URI%7Dbrowse/foo/'), 'browse/foo/');
+  });
+
+  test('strips repeated placeholders', () => {
+    assert.equal(stripUnexpandedPlaceholder('{REQUEST_URI}{REQUEST_URI}browse/foo/'), 'browse/foo/');
+  });
+
+  test('leaves a normal path untouched', () => {
+    assert.equal(stripUnexpandedPlaceholder('/browse/foo/'), '/browse/foo/');
   });
 });
 
@@ -103,6 +130,23 @@ describe('resolveLegacyPath: matched cases', () => {
 
   test('maps the legacy homepage', () => {
     assert.deepEqual(resolveLegacyPath('/', SLUGS), { target: 'index.html', matched: true });
+  });
+
+  test('resolves a link whose {REQUEST_URI} the legacy site never expanded', () => {
+    assert.deepEqual(
+      resolveLegacyPath(
+        '{REQUEST_URI}browse/family-notuidae/subfamily-acronictinae/acronicta/acronicta-americana/',
+        SLUGS,
+      ),
+      { target: 'species/acronicta-americana/index.html', matched: true },
+    );
+  });
+
+  test('a bare unexpanded placeholder falls back to the homepage as matched', () => {
+    assert.deepEqual(resolveLegacyPath('{REQUEST_URI}', SLUGS), {
+      target: 'index.html',
+      matched: true,
+    });
   });
 });
 
