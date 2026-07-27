@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "Site Credits -- PNW Moths"
+title: "Site Credits — PNW Moths"
 permalink: /about/credits/index.html
+description: "The institutions, web team, taxonomists, photographers, and funders behind Pacific Northwest Moths."
 ---
 
 # Site Credits

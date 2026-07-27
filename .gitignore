@@ -9,6 +9,10 @@ var/
 # Former Git LFS directories: images are now served from CDN, not stored in this repo
 images/
 !src/**/images/
+# Site chrome (banner, partner logos, range map, share card) is not photography —
+# it lives in the repo and is served from public/, Vite's publicDir. Re-included
+# explicitly so it does not have to be force-added past the rule above.
+!public/images/
 plates/
 cdn-old-locations.txt
 cdn-bad-slug-old-locations.txt

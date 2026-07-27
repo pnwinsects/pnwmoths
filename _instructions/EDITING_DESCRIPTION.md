@@ -18,6 +18,22 @@ The American Dagger Moth (Acronicta americana) is a common species found through
 The `slug` in frontmatter MUST match the filename (without `.md`).
 The slug convention is `(genus + '-' + species).toLowerCase()`.
 
+## The first paragraph is public twice
+
+The opening paragraph doubles as the species page's **link preview** — the sentence people
+see when the page is shared to BlueSky, Slack, or a group chat (and the snippet search
+engines show). It is trimmed to about 200 characters at a sentence break.
+
+So write the first paragraph as a standalone one-or-two-sentence summary of the moth,
+the way the existing accounts do:
+
+> *Abagrotis apposita* is a mottled brick-red, medium-sized moth (FW length 14–17 mm)
+> that flies in forests in late summer.
+
+Headings, bullet lists, and block quotes are skipped, so the paragraph can sit under an
+`## Identification` heading as usual. Species with no `.md` file on file get an automatic
+"*Genus species* — a moth of the family …" sentence instead; nothing breaks.
+
 ## Steps
 
 1. Look up the species slug. Open `data/species.csv`, find the row, compute slug as `{genus}-{species}` lowercased (e.g., genus=Acronicta, species=americana -> acronicta-americana).

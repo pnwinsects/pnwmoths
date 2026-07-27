@@ -4,6 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "PNW Moths" }}</title>
+  {#- Sharing metadata (issue #198). Pages contribute `description`, and optionally
+     `socialImage` / `socialImageAlt` / `ogType`; everything else falls back to the
+     site defaults registered in eleventy.config.ts.
+
+     Every URL below is ABSOLUTE (`| url` for pathPrefix, then `| absoluteUrl` for
+     the origin). Crawlers require that — and it is also what keeps these tags away
+     from eleventy-plugin-vite's HTML asset scanner, which treats every <link href>
+     and the og:image <meta content> as a copyable local asset but skips external
+     URLs. A root-relative canonical here would repeat the EISDIR failure that
+     src/species-redirect.njk documents. See docs/lessons-learned.md. -#}
+  {%- set pageDescription = description or siteDescription -%}
+  {#- Alt text has to track the image, not the page: species with no photos on file
+     set an empty `socialImage` and fall back to the site card, and would otherwise
+     describe it as a specimen photograph of themselves. -#}
+  {%- if socialImage -%}
+    {%- set pageSocialImage = socialImage -%}
+    {%- set pageSocialImageAlt = socialImageAlt or siteImageAlt -%}
+  {%- else -%}
+    {%- set pageSocialImage = "/images/social-card.png" | url | absoluteUrl -%}
+    {%- set pageSocialImageAlt = siteImageAlt -%}
+  {%- endif -%}
+  {%- set pageUrl = page.url | url | absoluteUrl -%}
+  <meta name="description" content="{{ pageDescription }}">
+  <link rel="canonical" href="{{ pageUrl }}">
+  <meta property="og:site_name" content="{{ siteName }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:title" content="{{ title or 'PNW Moths' }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:url" content="{{ pageUrl }}">
+  <meta property="og:image" content="{{ pageSocialImage }}">
+  <meta property="og:image:alt" content="{{ pageSocialImageAlt }}">
+  {#- Twitter/X reads og:title, og:description and og:image when the twitter:*
+     equivalents are absent, so only the card type needs stating. Bluesky, Slack,
+     Discord and Signal all read the Open Graph tags above. -#}
+  <meta name="twitter:card" content="summary_large_image">
   <!-- Assets under public/ (Vite publicDir) are referenced with a plain
        root-absolute path and NO `| url` filter: Vite rewrites them with `base`,
        which is the same pathPrefix. Applying `| url` here would both double the

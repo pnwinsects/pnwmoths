@@ -14,5 +14,14 @@ accept = ["100..=103", "200..=299", "429"]
 # JBLM/.mil) sit behind WAF/bot-protection that intermittently returns 403 to
 # automated checkers while serving 200 to browsers. Excluded to keep the link
 # check non-flaky; these URLs are verified to load in a browser.
-exclude = ["\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca"]
+#
+# The site's own page URLs. Every page carries an absolute `rel=canonical` and
+# `og:url` pointing at production (issue #198), and lychee extracts the canonical
+# link like any other `<link href>`. Checking those would validate the *deployed*
+# site rather than the build under test: a PR that adds a page would fail the link
+# check for the entirely correct reason that the page is not deployed yet. The
+# trailing slash matches directory-style page permalinks only, so CDN assets on the
+# same host (`/species-tiles/…_thumbnail.webp?width=530`, `/plates/…/thumbnail.jpg`)
+# are still checked.
+exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]

@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "References -- PNW Moths"
+title: "References — PNW Moths"
 permalink: /about/references/index.html
+description: "Bibliography of the works informing the taxonomy, identification key, and species accounts of Pacific Northwest Moths."
 ---
 
 # References

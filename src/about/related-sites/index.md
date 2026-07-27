@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "Related Sites -- PNW Moths"
+title: "Related Sites — PNW Moths"
 permalink: /about/related-sites/index.html
+description: "A curated list of related projects, regional moth and insect resources, and partner organizations."
 ---
 
 # Related Sites

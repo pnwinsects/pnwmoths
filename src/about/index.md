@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "About -- PNW Moths"
+title: "About — PNW Moths"
 permalink: /about/index.html
+description: "About Pacific Northwest Moths — an open-source resource bringing together species fact sheets, photographic plates, distribution records, and an identification key for the moths of the region."
 ---
 
 # About PNW Moths

@@ -9,6 +9,14 @@ eleventyComputed:
   # species_display may contain quotes (issue #85); `safe` keeps the value raw through
   # eleventyComputed so base.njk escapes it exactly once (avoids &amp;quot; in <title>).
   title: "{{ sp.genus }} {{ sp.species_display | safe }} — PNW Moths"
+  # Sharing metadata (issue #198). `safe` for the same reason as the title: the
+  # factsheet prose these are derived from contains quotes, ampersands and dashes,
+  # and base.njk escapes the value once when it writes the content="…" attribute.
+  ogType: article
+  description: "{{ sp | speciesDescription | safe }}"
+  # "" when the species has no photos on file — base.njk then uses the site card.
+  socialImage: "{{ sp.slug | speciesSocialImage(speciesPhotos[sp.slug], images[sp.slug]) | safe }}"
+  socialImageAlt: "{{ sp | speciesSocialImageAlt | safe }}"
 ---
 
 {#- Separators carry no literal spaces and there is no whitespace between the inline

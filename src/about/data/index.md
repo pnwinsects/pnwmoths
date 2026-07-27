@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: "About the Data -- PNW Moths"
+title: "About the Data — PNW Moths"
 permalink: /about/data/index.html
+description: "Where the occurrence records behind the distribution maps and phenology charts come from, how they are cleaned and georeferenced, and their known limitations."
 ---
 
 # About the Data
