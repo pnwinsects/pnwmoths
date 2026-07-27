@@ -62,10 +62,14 @@ export function stripMarkdown(markdown: string): string {
  * Returns null when the document has no such paragraph.
  */
 export function firstParagraph(markdown: string): string | null {
-  // Strip a YAML front-matter block if one is present.
+  // Strip a YAML front-matter block if one is present. The shipped factsheets have
+  // none, but prose arriving from elsewhere might.
   const body = markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, "");
-  for (const block of body.split(/\r?\n\s*\r?\n/)) {
-    const trimmed = block.trim();
+  for (const rawBlock of body.split(/\r?\n\s*\r?\n/)) {
+    // A heading with no blank line after it shares a block with the prose beneath
+    // it. Drop the heading lines rather than the paragraph they introduce —
+    // otherwise a missing blank line silently costs the page its description.
+    const trimmed = rawBlock.replace(/^(?:[ \t]*#{1,6}[^\n]*\r?\n)+/, "").trim();
     if (!trimmed) continue;
     // Headings, blockquotes, lists, tables, fences and HTML blocks are structure,
     // not description.

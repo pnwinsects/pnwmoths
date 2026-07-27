@@ -61,6 +61,20 @@ test('firstParagraph: skips headings and returns the first real paragraph', () =
   );
 });
 
+test('firstParagraph: finds prose that follows a heading with no blank line between', () => {
+  // Without the heading strip, the paragraph shares a block with `##### Adults`,
+  // the block reads as structure, and the page silently loses its description.
+  const markdown = '## Identification\n##### Adults\n*Abagrotis apposita* is a mottled brick-red moth of late summer.';
+  assert.equal(
+    firstParagraph(markdown),
+    'Abagrotis apposita is a mottled brick-red moth of late summer.',
+  );
+});
+
+test('firstParagraph: a block of nothing but headings is still structure', () => {
+  assert.equal(firstParagraph('## Identification\n##### Adults'), null);
+});
+
 test('firstParagraph: skips lists, blockquotes, tables, fences and short stubs', () => {
   const markdown = [
     '# Title',

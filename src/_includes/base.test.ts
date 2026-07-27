@@ -42,9 +42,8 @@ test('base.njk: emits the Open Graph tags link previews actually read', () => {
     'og:image',
     'og:image:alt',
   ]) {
-    assert.match(
-      layout,
-      new RegExp(`<meta property="${property.replace(/:/g, ':')}" content="`),
+    assert.ok(
+      layout.includes(`<meta property="${property}" content="`),
       `base.njk must emit an ${property} tag`,
     );
   }

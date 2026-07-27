@@ -8,15 +8,19 @@
 
 Location: `src/content/species/{slug}.md`
 
+The file is **Markdown only — no YAML frontmatter**. The filename is the slug; nothing
+inside the file repeats it. All 1,264 accounts on the site are written this way.
+
 ```markdown
----
-slug: acronicta-americana
----
-The American Dagger Moth (Acronicta americana) is a common species found throughout...
+## Identification
+
+##### Adults
+
+The American Dagger Moth (*Acronicta americana*) is a common species found throughout...
 ```
 
-The `slug` in frontmatter MUST match the filename (without `.md`).
-The slug convention is `(genus + '-' + species).toLowerCase()`.
+The slug convention is `(genus + '-' + species).toLowerCase()`, so
+`src/content/species/acronicta-americana.md` is the account for *Acronicta americana*.
 
 ## The first paragraph is public twice
 
@@ -31,16 +35,15 @@ the way the existing accounts do:
 > that flies in forests in late summer.
 
 Headings, bullet lists, and block quotes are skipped, so the paragraph can sit under an
-`## Identification` heading as usual. Species with no `.md` file on file get an automatic
-"*Genus species* — a moth of the family …" sentence instead; nothing breaks.
+`## Identification` heading as usual — with or without a blank line after the heading.
+Species with no `.md` file on file get an automatic "*Genus species* — a moth of the
+family …" sentence instead; nothing breaks.
 
 ## Steps
 
 1. Look up the species slug. Open `data/species.csv`, find the row, compute slug as `{genus}-{species}` lowercased (e.g., genus=Acronicta, species=americana -> acronicta-americana).
 
-2. Create or edit `src/content/species/{slug}.md`. The file must have:
-   - YAML frontmatter with `slug` field matching the filename
-   - Markdown body below the frontmatter
+2. Create or edit `src/content/species/{slug}.md`. Markdown body only — no frontmatter.
 
 3. Verify the build:
    ```bash
