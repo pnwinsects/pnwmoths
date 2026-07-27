@@ -63,6 +63,27 @@ export function stripQueryAndHash(path: string): string {
 }
 
 /**
+ * Server-config placeholders that can arrive verbatim when the legacy host's rewrite rule
+ * fails to interpolate, e.g. "?from={REQUEST_URI}browse/…" (Apache/nginx/IIS variants, and
+ * the percent-encoded "%7BREQUEST_URI%7D" spelling that survives when nothing decoded it).
+ * We strip them instead of asking the legacy site's operators to redeploy a fix: the real
+ * path is right there after the placeholder, and treating these as misses would both strand
+ * visitors and flood the /analytics/ miss queue with one bogus entry per legacy page.
+ */
+const UNEXPANDED_PLACEHOLDER = /^[$%]?(?:\{|%7[Bb])[A-Za-z0-9_]+(?:\}|%7[Dd])/;
+
+/** Remove a leading unexpanded server variable such as "{REQUEST_URI}" or "${REQUEST_URI}". */
+export function stripUnexpandedPlaceholder(path: string): string {
+  let out = path;
+  let previous: string;
+  do {
+    previous = out;
+    out = out.replace(UNEXPANDED_PLACEHOLDER, '').trimStart();
+  } while (out !== previous);
+  return out;
+}
+
+/**
  * Normalize a legacy path to the "/a/b/" shape used as the STATIC_MAP key: leading and
  * trailing slash, no query string or fragment.
  *
@@ -71,7 +92,8 @@ export function stripQueryAndHash(path: string): string {
  * miss list groups by page rather than by every unique parameter combination.
  */
 export function normalizeLegacyPath(fromPath: string): string {
-  let path = stripQueryAndHash(fromPath.trim());
+  let path = stripUnexpandedPlaceholder(fromPath.trim());
+  path = stripQueryAndHash(path);
   if (path === '') return '/';
   if (!path.startsWith('/')) path = '/' + path;
   if (!path.endsWith('/')) path += '/';
