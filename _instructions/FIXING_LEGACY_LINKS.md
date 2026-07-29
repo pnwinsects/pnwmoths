@@ -3,6 +3,7 @@
 ## What This Changes
 
 - `src/_lib/legacy-redirects.ts` — the table that maps old pnwmoths.biol.wwu.edu URLs to pages on this site
+- `src/_data/speciesSlugs.json` — the species slug lookup that table checks against
 - `data/species-redirects.csv` — used instead, when an old **species** page just needs to point at a species we renamed
 - **No** uploads, **no** API keys, **no** analytics account. Everything here is an edit in the repo.
 
@@ -56,7 +57,20 @@ Open the old URL and decide what the visitor was after.
 - **Nothing meaningful** (a Django admin path, a bot probing for `/wp-login.php`) — leave it alone.
   Not every miss deserves a mapping, and adding junk to the table only makes it harder to read.
 
-### 3a. If it's a species we renamed
+### 3a. If it's a species that already has a page here
+
+Check `src/_data/speciesSlugs.json` for the slug. That file is the lookup `/redirect.html`
+uses to recognise a species address, and it is maintained by hand alongside `data/species.csv` —
+a species added to the CSV without a matching line here is unreachable from every old
+`/browse/…` link even though its page is live. Add the slug in alphabetical order:
+
+```json
+  "clostera-brucei",
+```
+
+`npm test` fails if the two files disagree, so this can only go missing between commits.
+
+### 3b. If it's a species we renamed
 
 Add a row to `data/species-redirects.csv`:
 
@@ -70,7 +84,7 @@ redirect page at `/species/{old_slug}/`, so the old address works directly, not 
 `/redirect.html`. See [CURATING_SPECIES_SYNONYMS.md](CURATING_SPECIES_SYNONYMS.md) for the wider
 taxonomy-change workflow.
 
-### 3b. If it's an old species name the old site used
+### 3c. If it's an old species name the old site used
 
 Open `src/_lib/legacy-redirects.ts` and add an entry to `SYNONYMS`, old slug on the left:
 
@@ -80,7 +94,7 @@ export const SYNONYMS: Record<string, string> = {
 };
 ```
 
-### 3c. If it's any other page
+### 3d. If it's any other page
 
 Open `src/_lib/legacy-redirects.ts` and add an entry to `STATIC_MAP`. The key is the old path with
 slashes at both ends; the value is the page here, **without** a leading slash and naming

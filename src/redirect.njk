@@ -86,7 +86,9 @@ eleventyExcludeFromCollections: true
     // navigation time so every redirect resolves correctly in prod.
     const BASE = '{{ "/" | url }}';
 
-    // Species slug lookup (generated from data/species.csv)
+    // Species slug lookup (src/_data/speciesSlugs.json — hand-maintained alongside
+    // data/species.csv, with src/_data/speciesSlugs.test.ts failing the build on drift:
+    // a species missing here is silently unreachable from every legacy /browse/ link).
     const SPECIES_SLUGS = new Set({{ speciesSlugs | dump | safe }});
 
     /**

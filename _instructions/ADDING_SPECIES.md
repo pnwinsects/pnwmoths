@@ -2,6 +2,7 @@
 
 ## What This Changes
 - `data/species.csv` — new row for the species
+- `src/_data/speciesSlugs.json` — the slug list that keeps old-site links working
 - `src/content/species/{slug}.md` — (optional) prose description
 - Build output: new species page at `_site/species/{slug}/`
 
@@ -42,15 +43,25 @@ Once you have saved the species and know its `id`, follow `ADDING_PHOTO.md` and 
    ```
    The `slug` in frontmatter MUST match the slug convention above.
 
-3. Verify the build:
+3. Open `src/_data/speciesSlugs.json` and add the new slug in alphabetical order:
+   ```json
+     "xestia-dolosa",
+   ```
+   This is the lookup table that `/redirect.html` uses to send visitors from old
+   pnwmoths.biol.wwu.edu `/browse/…` addresses to the new species page. Skip it and the
+   species page still works, but old links to it dump visitors on Browse and the address
+   shows up under **Unmapped Legacy Links** on the analytics page. `npm test` fails if this
+   file and `data/species.csv` disagree.
+
+4. Verify the build:
    ```bash
    npm run build
    ```
    Expected: build completes without errors. A new page exists at `_site/species/xestia-dolosa/index.html`.
 
-4. If build passes, commit and push:
+5. If build passes, commit and push:
    ```bash
-   git add data/species.csv
+   git add data/species.csv src/_data/speciesSlugs.json
    # If you created a description file in step 2, also add it:
    # git add src/content/species/xestia-dolosa.md
    git commit -m "Add species: Xestia dolosa"
