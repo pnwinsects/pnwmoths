@@ -16,7 +16,7 @@ const SCRIPTS_DIR = resolve(dirname(fileURLToPath(import.meta.url)));
 
 const NAIVE_GUARD = /import\.meta\.url\s*===\s*`file:\/\/\$\{process\.argv\[1\]\}`/;
 const CORRECT_GUARD = /import\.meta\.url\s*===\s*pathToFileURL\(process\.argv\[1\]\)\.href/;
-const ANY_GUARD = /import\.meta\.url\s*===/;
+const ENTRY_POINT_COMPARISON = /import\.meta\.url\s*===\s*[^;\n]+/g;
 
 function sourceFiles(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true })
@@ -49,7 +49,8 @@ describe('entry-point guards', () => {
   it('every import.meta.url entry-point comparison uses pathToFileURL', () => {
     const offenders = files.filter((f) => {
       const src = readFileSync(f, 'utf8');
-      return ANY_GUARD.test(src) && !CORRECT_GUARD.test(src);
+      const guards = src.match(ENTRY_POINT_COMPARISON) ?? [];
+      return guards.some((guard) => !CORRECT_GUARD.test(guard));
     });
     assert.deepEqual(offenders, []);
   });
