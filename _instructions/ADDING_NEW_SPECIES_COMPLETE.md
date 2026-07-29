@@ -18,7 +18,9 @@ reference the species by its `id` field (`species_id` in images.csv and records.
 
 ### Step 1: Add the species
 
-Follow [ADDING_SPECIES.md](ADDING_SPECIES.md).
+Follow [ADDING_SPECIES.md](ADDING_SPECIES.md). That guide includes adding the slug to
+`src/_data/speciesSlugs.json` — don't skip it, or links to this species from the old WWU
+site will strand visitors on Browse.
 
 After completing that guide, note the `id` you assigned — you will use it
 as `species_id` in the next two steps.
@@ -54,7 +56,7 @@ Expected:
 Stage all changed files in a single commit:
 
 ```bash
-git add data/species.csv
+git add data/species.csv src/_data/speciesSlugs.json
 # If you added photos:
 git add data/images.csv images/{slug}/
 # If you added records:

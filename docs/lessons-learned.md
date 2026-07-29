@@ -80,6 +80,15 @@ cost a debugging cycle to discover.
   multiplies by the number of days retained, so cap list lengths in both the producer
   (`scripts/fetch-analytics.ts`) and the loader (`src/_data/analytics.ts`).
 
+- **A hand-maintained mirror of a source-of-truth file will drift, silently.**
+  `src/_data/speciesSlugs.json` looked generated (`redirect.njk` even said so) but nothing
+  produced it, so adding a species to `data/species.csv` left the legacy-URL resolver
+  unaware of it: real visitors following `/browse/…/{slug}/` were dumped on Browse, and the
+  address was reported under "Unmapped Legacy Links" as a mapping nobody had written —
+  while `/species/{slug}/` was published and returning 200. If a derived file can't be
+  generated during the build, make a test assert the derivation
+  (`src/_data/speciesSlugs.test.ts`); a comment claiming it is generated is not a guard.
+
 ## DuckDB at build time
 
 - **`nullstr = ''` on every `read_csv` that reads nullable text.** Without it, a blank
