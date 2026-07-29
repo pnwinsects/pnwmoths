@@ -21,21 +21,61 @@ import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { normalizeSlug } from '../_lib/unpublished-species.ts';
 
+const canonicalSpeciesSlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+let fixtureCounter = 0;
+
+function assertCanonicalSpeciesSlugs(slugs: string[], source: string): void {
+  const invalid = slugs.filter(s => !canonicalSpeciesSlugPattern.test(s));
+  assert.deepEqual(
+    invalid,
+    [],
+    `${source} must use only lowercase alphanumerics separated by single hyphens; ` +
+      'punctuation would create a legacy redirect to a non-canonical species URL',
+  );
+}
+
+function withFixtureCsv(csv: string, assertion: (path: string) => void): void {
+  // OS temp dir, not the repo: a crashed run must not leave a stray CSV in the working tree.
+  const tempDir = process.env.RUNNER_TEMP ?? process.env.TMPDIR ?? process.env.TEMP ?? '/tmp';
+  const path = resolve(tempDir, `species-slugs-fixture-${process.pid}-${fixtureCounter++}.csv`);
+  writeFileSync(path, csv);
+  try {
+    assertion(path);
+  } finally {
+    rmSync(path, { force: true });
+  }
+}
+
 /**
  * Derive the expected contents of speciesSlugs.json from data/species.csv.
  *
  * csv-parse (not a naive line split) because species.csv carries newlines inside quoted
  * authority fields; normalizeSlug because species epithets such as "sp No 1" produce a raw
  * slug with spaces that the site stores hyphenated ("aseptis-sp-no-1").
+ * The URL alphabet check lives here, not in normalizeSlug, because normalizeSlug is shared by
+ * less strict deny-list callers while this lookup feeds live /species/{slug}/ redirects.
  */
 function deriveSpeciesSlugs(csvPath = resolve('data/species.csv')): string[] {
   const rows = parse(readFileSync(csvPath), { columns: true, skip_empty_lines: true }) as Array<{
     genus?: string;
     species?: string;
   }>;
-  const slugs = rows
-    .map(r => normalizeSlug(`${r.genus ?? ''}-${r.species ?? ''}`))
-    .filter(s => s.length > 1);
+  const slugs = rows.map((r, index) => {
+    const genus = (r.genus ?? '').trim();
+    const species = (r.species ?? '').trim();
+    assert.notEqual(
+      genus,
+      '',
+      `data/species.csv record ${index + 1} is missing genus; cannot derive a species slug`,
+    );
+    assert.notEqual(
+      species,
+      '',
+      `data/species.csv record ${index + 1} is missing species; cannot derive a species slug`,
+    );
+    return normalizeSlug(`${genus}-${species}`);
+  });
+  assertCanonicalSpeciesSlugs(slugs, 'derived data/species.csv slugs');
   return [...new Set(slugs)].sort();
 }
 
@@ -62,7 +102,7 @@ test('speciesSlugs.json contains no slug that is absent from data/species.csv (w
     stale,
     [],
     'these entries in src/_data/speciesSlugs.json no longer exist in data/species.csv — remove them, ' +
-      'or add a data/species-redirects.csv row if the species was renamed',
+      'and if the species was renamed, add a data/species-redirects.csv row from the retired slug',
   );
 });
 
@@ -71,9 +111,11 @@ test('speciesSlugs.json is sorted and duplicate-free (keeps hand edits reviewabl
   assert.deepEqual(slugs, [...new Set(slugs)].sort(), 'expected a sorted, de-duplicated array');
 });
 
-test('speciesSlugs.json entries are all normalized (lowercase, hyphenated, no whitespace)', () => {
-  const unnormalized = loadJson().filter(s => s !== normalizeSlug(s));
-  assert.deepEqual(unnormalized, []);
+test('speciesSlugs.json entries are all canonical (lowercase, alphanumeric, hyphen-separated, no punctuation)', () => {
+  const slugs = loadJson();
+  const unnormalized = slugs.filter(s => s !== normalizeSlug(s));
+  assert.deepEqual(unnormalized, [], 'expected entries to be lowercase, hyphenated, and whitespace-free');
+  assertCanonicalSpeciesSlugs(slugs, 'src/_data/speciesSlugs.json entries');
 });
 
 test('deriveSpeciesSlugs: hyphenates whitespace in provisional epithets and de-duplicates', () => {
@@ -82,14 +124,20 @@ test('deriveSpeciesSlugs: hyphenates whitespace in provisional epithets and de-d
     '1,Aseptis,sp No 1,,,"(Smith,\n1892)",Noctuidae,,Noctuinae,,\n' +
     '2,Clostera,brucei,,,"(Hy. Edwards, 1885)",Notodontidae,,Pygaerinae,,\n' +
     '3,Clostera,brucei,,,"(Hy. Edwards, 1885)",Notodontidae,,Pygaerinae,,\n';
-  const path = resolve(
-    process.env.RUNNER_TEMP ?? process.env.TMPDIR ?? process.env.TEMP ?? '/tmp',
-    `species-slugs-fixture-${process.pid}.csv`,
-  );
-  writeFileSync(path, csv);
-  try {
+  withFixtureCsv(csv, path => {
     assert.deepEqual(deriveSpeciesSlugs(path), ['aseptis-sp-no-1', 'clostera-brucei']);
-  } finally {
-    rmSync(path, { force: true });
-  }
+  });
+});
+
+test('deriveSpeciesSlugs: rejects punctuation before it can become a non-canonical species URL', () => {
+  const csv =
+    'id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,epithet_quoted,tribe\n' +
+    '1,Genus,foo/bar,,,"(Smith, 1892)",Noctuidae,,Noctuinae,,\n' +
+    '2,Other,foo_bar,,,"(Smith, 1892)",Noctuidae,,Noctuinae,,\n';
+  withFixtureCsv(csv, path => {
+    assert.throws(
+      () => deriveSpeciesSlugs(path),
+      /derived data\/species\.csv slugs must use only lowercase alphanumerics separated by single hyphens/,
+    );
+  });
 });
