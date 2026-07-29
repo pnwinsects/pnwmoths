@@ -13,6 +13,7 @@ import { DuckDBInstance } from '@duckdb/node-api';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Pure functions — unit-testable without I/O
@@ -143,7 +144,7 @@ export async function main(): Promise<void> {
   console.log(`Wrote ${filtered.length} species-district triples to _site/species-districts.json`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => {
     console.error((err as Error).message);
     process.exit(1);

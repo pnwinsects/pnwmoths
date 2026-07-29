@@ -45,6 +45,7 @@ import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { DuckDBInstance } from '@duckdb/node-api';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention).
@@ -229,7 +230,7 @@ async function main(): Promise<void> {
 // Self-invocation guard — prevents main() from running on test import.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => {
     console.error((err as Error).message);
     process.exit(1);

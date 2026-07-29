@@ -315,6 +315,19 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **Compare entry points with `pathToFileURL(process.argv[1]).href`, never
+  `` `file://${process.argv[1]}` ``.** `import.meta.url` is a normalized file URL
+  (`file:///C:/a/b.ts`); `process.argv[1]` on Windows is a backslash path (`C:\a\b.ts`).
+  String-concatenating `file://` onto it produces neither, so the guard is *always* false
+  on Windows: the script loads, defines everything, calls nothing, and exits 0. Silent
+  no-op, success exit code — indistinguishable from a clean run, including the `DRY_RUN=1`
+  sanity check the runbooks tell maintainers to do first. 27 scripts shipped this way and
+  CI never caught it, because on POSIX the two forms coincide
+  ([#189](https://github.com/pnwinsects/pnwmoths/issues/189)).
+  `scripts/entry-point-guards.test.ts` is a source-level invariant test that keeps it from
+  coming back. General rule: a cross-platform bug that fails *silently* on the platform CI
+  doesn't run needs a source-level guard, not a runtime one.
+
 - **A byte-identical baseline is the strongest safety net for behavior-preserving work.**
   For migrations/refactors (e.g. the TS conversion), commit a pre-change `_site/` baseline
   and diff against it — data byte-for-byte, HTML modulo content-hashed asset names. It

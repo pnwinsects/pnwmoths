@@ -4,6 +4,7 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 export async function main(): Promise<void> {
   const db = await DuckDBInstance.create(':memory:');
@@ -49,7 +50,7 @@ export async function main(): Promise<void> {
   console.log(`Wrote ${rows.length} species-state pairs to _site/species-states.json`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => {
     console.error((err as Error).message);
     process.exit(1);

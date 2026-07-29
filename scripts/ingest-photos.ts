@@ -30,6 +30,7 @@ import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/pars
 import { dbxCall } from './lib/dropbox-list.ts';
 import { readManifest, writeManifest, sortForInvestigation } from './lib/manifest.ts';
 import type { ManifestRow } from './lib/manifest.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; D-10 env-vars-at-invocation;
@@ -662,7 +663,7 @@ async function main(): Promise<void> {
 // Self-invocation guard — exact form from scripts/upload-plates.js:128-133.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error(redact((err as Error).message ?? String(err)));
     process.exit(1);

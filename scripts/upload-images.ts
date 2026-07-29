@@ -31,6 +31,7 @@ import { readdirSync, existsSync } from 'node:fs';
 import { mkdtemp, unlink } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-tiles.ts).
@@ -361,6 +362,6 @@ async function main(): Promise<void> {
 // Prevents main() from running when the test file imports the exports above.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => { console.error(redact((err as Error).message)); process.exit(1); });
 }

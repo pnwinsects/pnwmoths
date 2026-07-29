@@ -21,6 +21,7 @@ import { readManifest } from './lib/manifest.ts';
 import type { ManifestRow } from './lib/manifest.ts';
 import type { View, MatchBucket } from './lib/parse-photo-filename.ts';
 import type { Specimen } from '../src/types/index.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention).
@@ -175,6 +176,6 @@ async function main(): Promise<void> {
 // Prevents main() from running when the test file imports the exports above.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => { console.error(redact((err as Error).message)); process.exit(1); });
 }

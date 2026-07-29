@@ -15,7 +15,7 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 import { statSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const GEOJSON_PATH = resolve(ROOT, 'data/boundaries/pnw-districts.geojson');
@@ -80,7 +80,7 @@ export async function main(): Promise<void> {
   console.log('[verify-boundaries] all reference points resolved correctly. OK');
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error((err as Error).message);
     process.exit(1);

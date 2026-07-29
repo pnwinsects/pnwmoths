@@ -41,6 +41,7 @@ import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
 import type { MatchBucket } from './lib/parse-photo-filename.ts';
 import { downloadSharedFile } from './lib/dropbox-download.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; D-10 env-vars-at-invocation;
@@ -560,6 +561,6 @@ async function mainThumbnailOnly(
 // Self-invocation guard — verbatim from scripts/ingest-photos.ts.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => { console.error(redact((err as Error).message)); process.exit(1); });
 }

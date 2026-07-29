@@ -15,6 +15,7 @@ import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { normalizeSlug, loadUnpublishedSpecies } from '../src/_lib/unpublished-species.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Pure row-builder + CSV serializer — unit-testable without a DuckDB build
@@ -196,7 +197,7 @@ export async function main(): Promise<void> {
   console.log(`Wrote ${rows.length} species to _site/species-audit.csv`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error((err as Error).message);
     process.exit(1);
