@@ -13,6 +13,7 @@ import { KeyMatrixSchema } from '../src/types/schemas.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../src/_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../src/_lib/format-epithet.ts';
+import { pathToFileURL } from 'node:url';
 
 /**
  * Normalize a species binomial: trim whitespace and collapse multiple spaces to one.
@@ -418,7 +419,7 @@ export async function main(): Promise<void> {
   );
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => {
     console.error((err as Error).message);
     process.exit(1);

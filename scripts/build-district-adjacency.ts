@@ -28,7 +28,7 @@
 // Run: node scripts/build-district-adjacency.ts
 import { writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { stringify } from 'csv-stringify/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
 import { FALLBACK_DEGREE_THRESHOLD } from './lib/district-assignment.ts';
@@ -152,7 +152,7 @@ export async function main(): Promise<void> {
   console.log('[build-district-adjacency] wrote data/district-adjacency.csv');
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error((err as Error).message);
     process.exit(1);

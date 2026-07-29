@@ -39,6 +39,7 @@ import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
 import type { View } from './lib/parse-photo-filename.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-plates.js
@@ -414,6 +415,6 @@ async function main(): Promise<void> {
 // Prevents main() from running when the test file imports the exports above.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => { console.error(redact((err as Error).message)); process.exit(1); });
 }

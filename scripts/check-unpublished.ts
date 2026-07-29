@@ -14,6 +14,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { loadUnpublishedSpecies, normalizeSlug } from '../src/_lib/unpublished-species.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Exported pure helper — unit-testable without a full build
@@ -156,6 +157,6 @@ function main(): void {
   process.exit(0);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main();
 }

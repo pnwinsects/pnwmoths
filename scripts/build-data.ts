@@ -6,6 +6,7 @@ import type { DuckDBConnection } from '@duckdb/node-api';
 import { readFileSync, mkdirSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 import { OccurrenceRecordSchema } from '../src/types/schemas.ts';
+import { pathToFileURL } from 'node:url';
 
 /**
  * Pre-flight CSV validation (before DuckDB import).
@@ -289,7 +290,7 @@ export async function main(): Promise<void> {
 }
 
 // Only run when executed directly (not when imported by tests)
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => {
     console.error((err as Error).message);
     process.exit(1);

@@ -55,6 +55,7 @@
 import { join, posix, sep } from 'node:path';
 import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (same auth pattern as upload-images.ts).
@@ -354,6 +355,6 @@ async function main(): Promise<void> {
 // Self-invocation guard — prevents main() from running on test import.
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => { console.error(redact((err as Error).message)); process.exit(1); });
 }

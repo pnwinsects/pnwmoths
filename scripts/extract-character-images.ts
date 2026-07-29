@@ -34,6 +34,7 @@ import { resolve } from 'node:path';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { stringify } from 'csv-stringify/sync';
 import { toWebpName } from './upload-images.ts';
+import { pathToFileURL } from 'node:url';
 
 const KEY_DATA_PATH: string = process.env['KEY_DATA'] ?? resolve('data/key.data');
 const OUTPUT_CSV_PATH: string = resolve('data/key-character-images.csv');
@@ -118,6 +119,6 @@ async function main(): Promise<void> {
 }
 
 // Self-invocation guard — verbatim from upload-tiles.ts:417-419.
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch(err => { console.error((err as Error).message); process.exit(1); });
 }

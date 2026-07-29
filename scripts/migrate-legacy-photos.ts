@@ -34,6 +34,7 @@ import { resolve, join } from 'node:path';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { parse } from 'csv-parse/sync';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Env constants (mirrors upload-images.ts / upload-tiles.ts).
@@ -197,6 +198,6 @@ async function main(): Promise<void> {
 }
 
 // Self-invocation guard — verbatim from upload-tiles.ts:417-419.
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => { console.error(redact((err as Error).message)); process.exit(1); });
 }

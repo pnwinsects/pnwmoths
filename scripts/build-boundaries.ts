@@ -169,7 +169,7 @@ export function checkCrosswalkCoverage(
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -303,7 +303,7 @@ export async function main(): Promise<void> {
   console.log(`[build-boundaries] wrote ${OUTPUT_PATH}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error((err as Error).message);
     process.exit(1);

@@ -29,7 +29,7 @@
 // Run: node scripts/fill-district-from-coords.ts
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
@@ -406,7 +406,7 @@ export async function main(): Promise<void> {
   console.log('[fill-district-from-coords] wrote data/records.csv and data/coord-fill-report.csv');
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error((err as Error).message);
     process.exit(1);

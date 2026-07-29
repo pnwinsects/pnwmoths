@@ -32,6 +32,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { listSiteFiles, hashBytes } from './upload-site.ts';
+import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Configuration
@@ -235,6 +236,6 @@ async function main(): Promise<void> {
 // Self-invocation guard
 // ---------------------------------------------------------------------------
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => { console.error((err as Error).message); process.exit(1); });
 }
