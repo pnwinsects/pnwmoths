@@ -140,6 +140,11 @@ class PnwmAnalyticsDashboard extends LitElement {
         margin: 0 0 0.75rem;
       }
       canvas { max-width: 100%; }
+      /* Horizontal bar charts need explicit height so every category label fits. */
+      .chart-canvas-fixed {
+        position: relative;
+        width: 100%;
+      }
       table { width: 100%; font-size: 0.9rem; }
       th { text-align: left; }
       td:last-child, th:last-child { text-align: right; }
@@ -187,6 +192,17 @@ class PnwmAnalyticsDashboard extends LitElement {
       requests += day.total_requests;
     }
     return { pageviews, visitors, requests };
+  }
+
+  /** Aggregate country hits across days, highest first. */
+  _getTopCountries(days: DaySummary[], limit: number = 15): Array<[string, number]> {
+    const countryCounts = new Map<string, number>();
+    for (const day of days) {
+      for (const c of day.countries) {
+        countryCounts.set(c.code, (countryCounts.get(c.code) ?? 0) + c.count);
+      }
+    }
+    return [...countryCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit);
   }
 
   _onYearChange(e: Event): void {
@@ -257,7 +273,12 @@ class PnwmAnalyticsDashboard extends LitElement {
         </div>
         <div class="chart-card">
           <h3>Top Countries</h3>
-          <canvas id="chart-countries"></canvas>
+          <div
+            class="chart-canvas-fixed"
+            style="height: ${Math.max(this._getTopCountries(filteredDays).length, 1) * 28 + 48}px"
+          >
+            <canvas id="chart-countries"></canvas>
+          </div>
         </div>
         <div class="chart-card">
           <h3>Top Referrers</h3>
@@ -465,13 +486,7 @@ class PnwmAnalyticsDashboard extends LitElement {
     // Countries (horizontal bar) — aggregate from filtered data
     const countriesCanvas = this.shadowRoot?.getElementById('chart-countries') as HTMLCanvasElement | null;
     if (countriesCanvas) {
-      const countryCounts = new Map<string, number>();
-      for (const day of days) {
-        for (const c of day.countries) {
-          countryCounts.set(c.code, (countryCounts.get(c.code) ?? 0) + c.count);
-        }
-      }
-      const top = [...countryCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15);
+      const top = this._getTopCountries(days);
 
       const config: ChartConfiguration<'bar', number[], string> = {
         type: 'bar',
@@ -485,8 +500,12 @@ class PnwmAnalyticsDashboard extends LitElement {
         options: {
           indexAxis: 'y',
           responsive: true,
+          maintainAspectRatio: false,
           plugins: { legend: { display: false } },
-          scales: { x: { beginAtZero: true } },
+          scales: {
+            x: { beginAtZero: true },
+            y: { ticks: { autoSkip: false } },
+          },
         },
       };
       this._charts.push(new Chart(countriesCanvas, config));
