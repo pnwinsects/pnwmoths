@@ -18,6 +18,9 @@
 | authority | string | yes | Harris 1841 |
 | family | string | yes | Noctuidae |
 | similar_species | string (slug) | no | acronicta-oblinita (pipe-separated for multiple: slug1\|slug2) |
+| subfamily | string | no | Acronictinae — genus-level; copy from another species of the same genus |
+| epithet_quoted | `1` or blank | no | `1` marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); display only |
+| tribe | string | no | Blank where the subfamily has no tribal subdivision ([ADR 0016](../docs/adr/0016-tribe-hierarchy-level.md)) |
 
 > **Note:** `noc_id` is the Hodges/MONA checklist number, stored as a string (VARCHAR). Most values are plain integers (e.g., `9200`). Species added after the original Hodges checklist were assigned MONA supplement numbers in the format `93-XXXX` (e.g., `93-0016`) — these are valid and should be entered as-is.
 
@@ -25,13 +28,20 @@
 
 ## Adding photos and records for the same species
 
-Once you have saved the species and know its `id`, follow `ADDING_PHOTO.md` and `ADDING_RECORDS.md` using that `id` as `species_id`. The build validates referential integrity, so the species row must exist in `data/species.csv` before adding photos or records.
+Photos and records reference the species by its **slug**, not by `id`. The `id` column is
+`species.csv`'s own primary key and appears in no other file.
+
+Once the species row is saved, follow [ADDING_PHOTO.md](ADDING_PHOTO.md) and
+[ADDING_RECORDS.md](ADDING_RECORDS.md) using `species_slug`. The build validates referential
+integrity, so the species row must exist in `data/species.csv` first.
 
 ## Steps
 
-1. Open `data/species.csv`. Find the highest `id` value. Add a new row with `id` = highest + 1:
+1. Open `data/species.csv`. Find the highest `id` value — at the time of writing that is 3383, so
+   the example below uses 3384. Check it yourself rather than copying the number; ids only ever go
+   up. Add a new row with all 11 columns, trailing blanks included:
    ```csv
-   701,Xestia,dolosa,Greater Black-letter Dart,10942,Franclemont 1980,Noctuidae,xestia-smithii
+   3384,Xestia,dolosa,Greater Black-letter Dart,10942,Franclemont 1980,Noctuidae,xestia-smithii,Noctuinae,,Noctuini
    ```
 
 2. (Optional) Create a prose description file at `src/content/species/{slug}.md`:
@@ -55,9 +65,18 @@ Once you have saved the species and know its `id`, follow `ADDING_PHOTO.md` and 
 
 4. Verify the build:
    ```bash
-   npm run build
+   npm run build:site
    ```
    Expected: build completes without errors. A new page exists at `_site/species/xestia-dolosa/index.html`.
+
+   `build:site` rather than `npm run build` because `build` also runs the broken-link check, which
+   needs [lychee](https://lychee.cli.rs/) installed locally (see [CONTRIBUTING.md](../CONTRIBUTING.md));
+   the Docker path below includes it.
+
+
+   No page is emitted if the family is withheld (`data/withheld-families.csv` — Geometridae today),
+   if the family cell is blank, or if the slug is listed in `data/unpublished-species.csv`. That is
+   the gate working, not a failure.
 
 5. If build passes, commit and push:
    ```bash
@@ -70,10 +89,13 @@ Once you have saved the species and know its `id`, follow `ADDING_PHOTO.md` and 
 
 ## Verify
 - Expected: `_site/species/{slug}/index.html` exists after build.
-- Expected: The new species appears on the browse page at `_site/browse/index.html`.
-- Failure: If build fails with "invalid slug" or "duplicate id", check the CSV row format.
+- Expected: the new species appears on the browse page at `_site/browse/index.html`.
+- Failure: `data/species.csv is missing required column: "…"` — a column was dropped from the header.
+- Failure: `Invalid common_name "…" — remove the legacy backslash before the apostrophe` — write a
+  plain `'`.
+- Failure: `npm test` reports `speciesSlugs.json` disagreeing with `species.csv` — step 3 was skipped.
 
 ## Docker Alternative
 ```bash
-docker compose run --rm dev npm run build
+docker compose run --rm dev npm run build:site
 ```
