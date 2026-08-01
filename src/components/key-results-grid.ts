@@ -5,20 +5,20 @@
 import { LitElement, html, type TemplateResult, type PropertyDeclarations } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import type { KeySpecies } from '../types/schemas.ts';
+import { derivativeUrl } from '../_lib/derivative-url.ts';
 
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 
 /**
  * Construct a CDN thumbnail URL for a species image.
- * Mirrors the pattern from pnwm-taxon-browser.ts (D-07).
  *
- * @param slug - species slug (e.g. 'habrosyne-scripta')
- * @param navImage - bare filename string (e.g. 'Habrosyne scripta-A-D.jpg')
- * @param height - CDN resize height (e.g. 320 for 2x at 160px display height)
- * @returns CDN URL with encodeURIComponent-encoded filename and ?height= query param
+ * Uses the pre-generated `@320h` derivative (ADR 0022) rather than an optimizer
+ * query. The `height` parameter is retained for call-site readability but no longer
+ * varies the URL: one 320px-tall thumbnail serves the 93/186/320 slots across the
+ * site, and the browser scales it down.
  */
-export function buildCardUrl(slug: string, navImage: string, height: number): string {
-  return `${CDN_BASE_URL}/${slug}/${encodeURIComponent(navImage)}?height=${height}`;
+export function buildCardUrl(slug: string, navImage: string, _height: number): string {
+  return derivativeUrl(CDN_BASE_URL, `${slug}/${navImage}`, '320h');
 }
 
 /**

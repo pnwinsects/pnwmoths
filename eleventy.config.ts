@@ -6,6 +6,7 @@ import { pathToFileURL } from "node:url";
 import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
+import { derivativeUrl, sourceUrl, type VariantToken } from "./src/_lib/derivative-url.ts";
 import {
   proseDescription,
   speciesDescription,
@@ -136,6 +137,18 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
     if (!outputPath.includes("/species/")) return content;
     return applyGlossaryTerms(content, termMap);
   });
+
+  // {{ "slug/Photo A-D.jpg" | derivative("320h") } — URL of a pre-generated image
+  // variant (ADR 0022). Takes the UNENCODED source path; the helper encodes it, so
+  // templates must NOT pipe through `urlencode` as well or the path double-encodes.
+  eleventyConfig.addFilter("derivative", (sourcePath, token) =>
+    derivativeUrl(CDN_BASE_URL, sourcePath as string, token as VariantToken));
+
+  // {{ "slug/Photo A-D.jpg" | cdnSource }} — URL of a stored object with no
+  // derivative. Only two callers: the 1500px hero slot, which *is* the stored
+  // _thumbnail.webp, and the legacy og:image fallback, which stays JPEG for crawlers.
+  eleventyConfig.addFilter("cdnSource", sourcePath =>
+    sourceUrl(CDN_BASE_URL, sourcePath as string));
 
   // Expose CDN base URL to all Nunjucks templates as {{ cdnBaseUrl }}
   eleventyConfig.addGlobalData("cdnBaseUrl", CDN_BASE_URL);

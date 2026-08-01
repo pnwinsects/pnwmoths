@@ -55,7 +55,12 @@ describe('derivedPath', () => {
 
 describe('VARIANTS matrix', () => {
   it('omits a 1500 hi-res variant — that slot is the stored thumbnail itself', () => {
-    assert.equal(VARIANTS.highres.some((v) => v.token === '1500'), false);
+    // `'1500'` is not in VariantToken at all, so tsc rejects a direct comparison:
+    // the invariant is enforced at compile time and this only pins the token list.
+    assert.deepEqual(
+      VARIANTS.highres.map((v) => v.token),
+      ['530', '1060', '320h', '1200'],
+    );
   });
 
   it('shares one 320h thumbnail across the 93/186/320 slots', () => {

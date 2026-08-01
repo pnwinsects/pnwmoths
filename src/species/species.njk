@@ -69,7 +69,8 @@ eleventyComputed:
       {% if (not (highResEntry and highResEntry.high_res_available)) and spImages and spImages.length > 0 %}
         {% for img in spImages %}
           <figure>
-            <img src="{{ cdnBaseUrl }}/{{ sp.slug }}/{{ img.filename | urlencode }}"
+            <img src="{{ (sp.slug + '/' + img.filename) | derivative('full') }}"
+                 data-thumb="{{ (sp.slug + '/' + img.filename) | derivative('320h') }}"
                  alt="{{ sp.genus }} {{ sp.species_display }}"
                  data-photographer="{{ img.photographer }}"
                  {% if img.locality %}data-locality="{{ img.locality }}"{% endif %}
@@ -85,10 +86,11 @@ eleventyComputed:
         {% endfor %}
       {% elif highResEntry and highResEntry.high_res_available %}
         {% for specimen in highResEntry.specimens %}
-          {% set thumbBase = cdnBaseUrl + "/" + specimen.tiles_path + "_thumbnail.webp" %}
+          {% set thumbSrc = specimen.tiles_path + "_thumbnail.webp" %}
           <figure>
-            <img src="{{ thumbBase }}?width=530"
-                 srcset="{{ thumbBase }}?width=530 530w, {{ thumbBase }}?width=1060 1060w, {{ thumbBase }}?width=1500 1500w"
+            <img src="{{ thumbSrc | derivative('530') }}"
+                 data-thumb="{{ thumbSrc | derivative('320h') }}"
+                 srcset="{{ thumbSrc | derivative('530') }} 530w, {{ thumbSrc | derivative('1060') }} 1060w, {{ thumbSrc | cdnSource }} 1500w"
                  sizes="530px"
                  alt="{{ sp.genus }} {{ sp.species_display }}"
                  {% if highResEntry.photographer %}data-photographer="{{ highResEntry.photographer }}"{% endif %}
@@ -116,7 +118,7 @@ eleventyComputed:
                 <a class="similar-species-entry" href="{{ ('/species/' + slug + '/') | url }}">
                   <div class="similar-species-thumb">
                     {% if simImages and simImages.length > 0 %}
-                      <img src="{{ cdnBaseUrl }}/{{ slug }}/{{ simImages[0].filename | urlencode }}"
+                      <img src="{{ (slug + '/' + simImages[0].filename) | derivative('320h') }}"
                            alt="{{ s.genus }} {{ s.species_display }}"
                            height="93"
                            loading="lazy">

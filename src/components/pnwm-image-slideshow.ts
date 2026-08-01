@@ -135,6 +135,7 @@ export class PnwmImageSlideshow extends LitElement {
   _lightboxOpen: boolean;
   _images: Array<{
     src: string;
+    thumb: string;
     alt: string;
     photographer: string;
     license: string;
@@ -191,6 +192,9 @@ export class PnwmImageSlideshow extends LitElement {
       const figcaption = fig.querySelector('figcaption');
       return [{
         src: img.getAttribute('src') || '',
+        // The strip renders at 93px tall; templates supply a small pre-generated
+        // thumbnail so it does not download the full-size image (ADR 0022).
+        thumb: img.dataset.thumb || img.getAttribute('src') || '',
         alt: img.getAttribute('alt') || '',
         photographer: img.dataset.photographer || (figcaption ? figcaption.textContent?.trim() ?? '' : ''),
         license: img.dataset.license || '',
@@ -501,7 +505,7 @@ export class PnwmImageSlideshow extends LitElement {
               aria-current=${i === this._currentIndex ? 'true' : 'false'}
               aria-label=${`Photo ${i + 1} of ${this._images.length}: ${img.alt}`}
               @click=${() => { this._currentIndex = i; }}
-            ><img src=${img.src} alt="" height="93"></button>
+            ><img src=${img.thumb} alt="" height="93" loading="lazy"></button>
           `)}
         </div>
         <div class="controls">

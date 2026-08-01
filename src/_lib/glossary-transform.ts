@@ -1,3 +1,4 @@
+import { derivativeUrl } from './derivative-url.ts';
 import { parse } from 'node-html-parser';
 import type { TextNode } from 'node-html-parser';
 
@@ -51,8 +52,11 @@ export function buildTermMap(rows: GlossaryRow[], cdnBaseUrl: string): TermMapEn
     term: row.term,
     lower: row.term.toLowerCase(),
     definition: row.definition || '',
+    // The popover is max-width 260px, but this used to load the 1500x1800
+    // original — the Optimizer's auto-WebP made it merely wasteful rather than
+    // visibly slow. @376x450 covers the box with retina headroom (ADR 0022).
     imageUrl: row.image_filename
-      ? `${cdnBaseUrl}/glossary/${encodeURIComponent(row.image_filename)}`
+      ? derivativeUrl(cdnBaseUrl, `glossary/${row.image_filename}`, '376x450')
       : '',
     regex: new RegExp(
       `(?<![a-zA-Z0-9])${escapeRegex(row.term)}(?![a-zA-Z0-9])`,

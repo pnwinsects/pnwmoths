@@ -14,6 +14,7 @@
 
 import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url.ts';
 
 /** Source families, which determine the variant set. */
 export type SourceKind = 'legacy' | 'highres' | 'glossary';
@@ -68,7 +69,7 @@ export type Transform =
 
 export interface Variant {
   /** Token that appears after `@` in the derived path. */
-  token: string;
+  token: VariantToken;
   /** Output extension, without the dot. */
   ext: 'webp' | 'jpg';
   transform: Transform;
@@ -123,15 +124,13 @@ export interface DerivativeSpec {
 /**
  * Build the derived storage path for a source + variant.
  *
- * `derived/<source-path-without-extension>@<token>.<ext>`. The `@` separator is
- * deliberate: legacy Django-era filenames are already full of hyphens, so a
- * hyphen would be ambiguous to read and to undo.
+ * Delegates to src/_lib/derivative-url.ts, which the templates and the build
+ * guard also use. The convention must not have two implementations: this script
+ * decides what to upload, and the templates decide what to request, and a
+ * divergence between those two is 23,172 broken images.
  */
 export function derivedPath(sourcePath: string, variant: Variant): string {
-  const slash = sourcePath.lastIndexOf('/');
-  const dot = sourcePath.lastIndexOf('.');
-  const stem = dot > slash ? sourcePath.slice(0, dot) : sourcePath;
-  return `derived/${stem}@${variant.token}.${variant.ext}`;
+  return derivativePath(sourcePath, variant.token);
 }
 
 /** Every derivative required for one source image. */

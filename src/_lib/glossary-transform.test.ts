@@ -78,7 +78,7 @@ describe('buildTermMap', () => {
   it('builds imageUrl from cdnBaseUrl and image_filename', () => {
     const rows = [{ term: 'costa', definition: 'leading edge', image_filename: 'costa.jpg' }];
     const [entry] = buildTermMap(rows, CDN);
-    assert.equal(entry?.imageUrl, 'https://cdn.example/glossary/costa.jpg');
+    assert.equal(entry?.imageUrl, 'https://cdn.example/derived/glossary/costa%40376x450.webp');
   });
 
   it('sets imageUrl to empty string when image_filename is empty', () => {
@@ -177,7 +177,7 @@ describe('applyGlossaryTerms', () => {
     const html = '<html><body><main><p>The wing structure.</p></main></body></html>';
     const result = applyGlossaryTerms(html, termMap);
     assert.ok(
-      result.includes('data-image-url="https://cdn.example/glossary/wing.jpg"'),
+      result.includes('data-image-url="https://cdn.example/derived/glossary/wing%40376x450.webp"'),
       'data-image-url should contain CDN URL'
     );
   });
