@@ -38,6 +38,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'no
 import { pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
+import { acquireManifestLock, releaseManifestLock } from './lib/derivatives.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-tiles.ts).
@@ -52,6 +53,7 @@ const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
 const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 const MANIFEST_PATH: string = resolve('var/derivatives-manifest.csv');
 const OUTPUT_PATH: string = resolve('data/image-derivatives.csv');
+const LOCK_PATH: string = resolve('var/derivatives-manifest.lock');
 const MANIFEST_COLUMNS = ['derived_path', 'source_path', 'kind', 'variant', 'status', 'bytes', 'error'] as const;
 const OUTPUT_COLUMNS = ['derived_path', 'source_path', 'kind', 'variant', 'bytes'] as const;
 
@@ -175,6 +177,23 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
+  // Self-heal from the committed record. data/image-derivatives.csv is the
+  // durable statement of what is on the CDN; var/ is scratch. If a manifest row
+  // is already listed there, it is uploaded regardless of what the scratch file
+  // says — which recovers both a wiped var/ and the concurrent-write race that
+  // reset 20 rows during the #224 pilot.
+  const alreadyOnCdn = new Set(
+    readManifest(OUTPUT_PATH).map((r) => r.derived_path),
+  );
+  let reconciled = 0;
+  for (const row of rows) {
+    if (row.status === 'generated' && alreadyOnCdn.has(row.derived_path)) {
+      row.status = 'uploaded';
+      reconciled++;
+    }
+  }
+  if (reconciled > 0) logStage(`Reconciled ${reconciled} row(s) already recorded on the CDN.`);
+
   const byStatus: Record<string, number> = {};
   for (const row of rows) byStatus[row.status] = (byStatus[row.status] ?? 0) + 1;
 
@@ -203,6 +222,9 @@ async function main(): Promise<void> {
     console.error('ERROR: BUNNY_STORAGE_PASSWORD is required (or set DRY_RUN=1).');
     process.exit(1);
   }
+
+  acquireManifestLock(LOCK_PATH);
+  process.on('exit', () => releaseManifestLock(LOCK_PATH));
 
   if (todo.length === 0) {
     logStage(`Nothing to upload — ${byStatus['uploaded'] ?? 0} already on the CDN.`);
