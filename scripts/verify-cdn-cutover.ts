@@ -287,15 +287,23 @@ async function probeNegotiation(paths: readonly string[]): Promise<void> {
   console.log('\nWebP content-negotiation probe (the one behaviour the cutover removes):');
   for (const path of paths) {
     const headers = { 'Accept': 'image/webp,image/avif,image/*,*/*;q=0.8' };
-    const [prod, staging] = await Promise.all([
-      fetch(objectUrl(PROD_ORIGIN, path), { method: 'HEAD', headers }),
-      fetch(objectUrl(STAGING_ORIGIN, path), { method: 'HEAD', headers }),
-    ]);
-    const fmt = (r: Response): string =>
-      `${r.status} ${(r.headers.get('content-type') ?? '?').split(';')[0]} ${r.headers.get('content-length') ?? '?'}B`;
     console.log(`  ${path}`);
-    console.log(`    production: ${fmt(prod)}`);
-    console.log(`    staging:    ${fmt(staging)}`);
+    // Diagnostic output only — it must never decide the verdict, and a blip here
+    // must never discard a completed sweep. This runs before the PASS/FAIL
+    // summary, so an escaping rejection would kill the process holding a clean
+    // 26,927-object result (caught in review on #227).
+    try {
+      const [prod, staging] = await Promise.all([
+        fetch(objectUrl(PROD_ORIGIN, path), { method: 'HEAD', headers }),
+        fetch(objectUrl(STAGING_ORIGIN, path), { method: 'HEAD', headers }),
+      ]);
+      const fmt = (r: Response): string =>
+        `${r.status} ${(r.headers.get('content-type') ?? '?').split(';')[0]} ${r.headers.get('content-length') ?? '?'}B`;
+      console.log(`    production: ${fmt(prod)}`);
+      console.log(`    staging:    ${fmt(staging)}`);
+    } catch (err) {
+      console.log(`    probe unavailable (${String(err)}) — does not affect the verdict`);
+    }
   }
   console.log(
     '  Expected: production answers image/webp, staging answers image/jpeg at a larger size.\n' +
