@@ -32,6 +32,22 @@ Habrosyne scripta-A-D.jpg  Accept: image/webp,avif     → image/webp   85,042 B
 Disabling the Optimizer reverts all ~4,000 legacy JPEGs to their stored form, ~28% larger. No
 template names this behaviour, so it is the dependency most likely to be missed.
 
+A three-day access-log audit ([#222](https://github.com/pnwinsects/pnwmoths/issues/222),
+`scripts/audit-optimizer-usage.ts`) confirmed the five call sites are the complete set — and turned
+up one pattern nothing in the codebase emits, `?width=1200&amp` at 867 requests across 867 distinct
+files. That is the share-card URL with its `&` read as the literal HTML entity: the markup escapes
+it correctly as `&amp;`, but crawlers that fail to decode it request a query string where
+`format=jpg` is lost, and Bunny answers in WebP.
+
+```text
+?width=1200&format=jpg       → image/jpeg  174,168 B   (intended)
+?width=1200&amp;format=jpg   → image/webp  140,024 B   (what crawlers get)
+```
+
+WebP is exactly the format [0021](0021-sharing-metadata.md) calls "not cosmetic" to avoid, on the
+branch covering 1,155 of 1,253 species pages. So the share-preview path has a live defect today,
+one that exists only because the URL needs a query string at all.
+
 ## Decision
 
 **Pre-generate every image variant offline, upload it to the CDN as a normal object, and turn the
@@ -86,10 +102,16 @@ and this is the only way to exercise the loss of auto-WebP without experimenting
 - Adding a photo gains a required step: generate and upload derivatives. `_instructions/ADDING_PHOTO.md`
   and `_instructions/UPLOADING_IMAGES.md` must carry it, and the guard enforces it.
 - Changing an image size stops being a template edit and becomes a re-derive-and-upload run.
+- **The entity-mangling defect disappears rather than being patched.** A static `@1200.jpg` carries
+  no query string, so there is no `&` to escape and nothing for a crawler to misread. This is the
+  rare case where the cheaper option is also the more correct one, and it is worth more than the
+  $114/year: it fixes share previews on the 1,155 species pages [0021](0021-sharing-metadata.md)
+  identified as at risk.
 - `og:image` URLs already scraped by Facebook/X/Slack point at `?width=1200&format=jpg`. With the
   Optimizer off the query string is ignored and those serve the 1500px WebP — the format
   [0021](0021-sharing-metadata.md) documents crawlers handling badly — until each card is re-scraped.
-  New shares are correct immediately.
+  New shares are correct immediately. Note the mis-parsing crawlers are *already* getting WebP, so
+  for them this is not a regression.
 - Derivatives are reproducible, so `derived/` can be regenerated wholesale if the convention changes;
   the old objects simply linger, which the additive-only zone tolerates.
 - Re-enabling the Optimizer remains a single dashboard toggle if any of this proves wrong.
