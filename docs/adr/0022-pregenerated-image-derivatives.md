@@ -72,9 +72,12 @@ Four parts:
    |---|---|
    | Legacy photo (`{slug}/{filename}`) | `@320h.webp`, `@full.webp` |
    | High-res thumbnail (`{tiles_path}_thumbnail.webp`, 1500px) | `@530.webp`, `@1060.webp`, `@320h.webp`, `@1200.jpg` |
-   | Glossary illustration | `@188x225.webp`, `@376x450.webp` (north-gravity crop) |
+   | Glossary illustration | `@188x225.webp`, `@376x450.webp` (fit within box, no crop) |
 
-   ≈12,000 objects, well under 1 GB.
+   **23,338 objects, ~2 GB** — 4,034 legacy photos ×2, 3,811 high-res thumbnails ×4, 13 glossary
+   illustrations ×2. (The 1500px hero slot needs no derivative: it *is* the stored `_thumbnail.webp`.)
+   At Bunny's storage rate that is a couple of cents a month, so the size does not change the
+   decision — but it is twice the count this record first estimated.
 
 3. **One shared URL helper** owns the naming convention. The five call sites that build optimizer
    URLs today — `src/species/species.njk`, `src/components/pnwm-taxon-browser.ts`,
@@ -112,6 +115,16 @@ and this is the only way to exercise the loss of auto-WebP without experimenting
   [0021](0021-sharing-metadata.md) documents crawlers handling badly — until each card is re-scraped.
   New shares are correct immediately. Note the mis-parsing crawlers are *already* getting WebP, so
   for them this is not a regression.
+- **`crop_gravity=north` in the glossary template is dead and always has been.** On this pull zone
+  Bunny returns byte-identical output for gravity `north`, `south` and absent (verified by MD5): with
+  both dimensions given it fits within the box and never upscales — plain `contain`, no cropping. So
+  the glossary derivative is an ordinary bounded resize, and this record's original claim that it was
+  "the single non-trivial transform" was wrong. The dead parameter should come out of the template
+  along with the rest ([#225](https://github.com/pnwinsects/pnwmoths/issues/225)).
+- Every variant was verified against what the Optimizer serves today: identical pixel dimensions
+  across all seven, including Bunny's own rounding (`width=376` yields 375). At `Q=80` the
+  pre-generated files run **10–40% smaller** than the Optimizer's output, so the cutover is a modest
+  bandwidth improvement rather than a cost.
 - Derivatives are reproducible, so `derived/` can be regenerated wholesale if the convention changes;
   the old objects simply linger, which the additive-only zone tolerates.
 - Re-enabling the Optimizer remains a single dashboard toggle if any of this proves wrong.
