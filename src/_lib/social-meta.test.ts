@@ -214,9 +214,12 @@ test('speciesSocialImage: prefers the high-res thumbnail, large enough and in a 
     [{ filename: 'legacy.jpg' }],
     CDN,
   );
-  // format=jpg is not cosmetic: Facebook, LinkedIn and WhatsApp are all unreliable
-  // with a WebP og:image, and 1,155 of 1,253 species pages take this branch.
-  assert.equal(url, `${CDN}/photos/abagrotis-apposita/12345-D_thumbnail.webp?width=1200&format=jpg`);
+  // JPEG is not cosmetic: Facebook, LinkedIn and WhatsApp are all unreliable with a
+  // WebP og:image, and 1,155 of 1,253 species pages take this branch. The pre-generated
+  // @1200.jpg carries no query string, which also removes the entity-mangling defect
+  // that was feeding crawlers WebP (#222).
+  assert.equal(url, `${CDN}/derived/photos/abagrotis-apposita/12345-D_thumbnail%401200.jpg`);
+  assert.equal(url.includes('?'), false, 'no query string means no & for a crawler to misread');
 });
 
 test('speciesSocialImage: falls back to the lead legacy photo, URL-encoded', () => {

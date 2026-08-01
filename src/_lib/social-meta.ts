@@ -12,6 +12,8 @@
 
 /** Upper bound on a meta description. Facebook truncates near 300, Google's SERP
  *  snippet near 160, and Bluesky's card near 200 — 200 is the useful middle. */
+import { derivativeUrl, sourceUrl } from './derivative-url.ts';
+
 export const MAX_DESCRIPTION_LENGTH = 200;
 
 /** og:site_name, and the visible site name on the default share card. */
@@ -161,13 +163,17 @@ export interface SpeciesImageLike {
  * Mirrors the branch order in src/species/species.njk: a high-res specimen wins,
  * otherwise the lead legacy photo (images rows arrive pre-sorted by weight).
  *
- * The high-res thumbnail goes through Bunny's image optimizer twice over. `width`
- * because the on-page render asks for 530px, too small for a share card. `format`
- * because the stored tile is WebP, and WebP `og:image` is a coin flip off the
- * major platforms: X documents support, but Facebook documents only JPEG/PNG/GIF,
- * and LinkedIn and WhatsApp are both unreliable with it. `&format=jpg` yields a
- * 1200x800 JPEG at ~198KB — comfortably inside every platform's size ceiling —
- * and costs nothing but a query parameter. Legacy photos are already JPEG.
+ * The high-res branch uses the pre-generated `@1200.jpg` derivative (ADR 0022).
+ * JPEG rather than WebP is load-bearing, not cosmetic: the stored tile is WebP, and
+ * WebP `og:image` is a coin flip off the major platforms — X documents support, but
+ * Facebook documents only JPEG/PNG/GIF, and LinkedIn and WhatsApp are both
+ * unreliable with it. 1200x800 at ~166KB sits inside every platform's ceiling.
+ *
+ * Having no query string is itself a fix. The old `?width=1200&format=jpg` URL was
+ * correctly escaped as `&amp;` in the markup, but crawlers that fail to decode the
+ * entity dropped `format=jpg` and got WebP back — 867 such requests in three days of
+ * access log (#222). A static path has no `&` to misread. Legacy photos are already
+ * JPEG, so the fallback stays an unmodified source.
  */
 export function speciesSocialImage(
   slug: string,
@@ -176,9 +182,9 @@ export function speciesSocialImage(
   cdnBaseUrl: string,
 ): string {
   const specimen = highRes?.high_res_available ? highRes.specimens?.[0] : undefined;
-  if (specimen) return `${cdnBaseUrl}/${specimen.tiles_path}_thumbnail.webp?width=1200&format=jpg`;
+  if (specimen) return derivativeUrl(cdnBaseUrl, `${specimen.tiles_path}_thumbnail.webp`, '1200');
   const lead = images?.[0];
-  if (lead) return `${cdnBaseUrl}/${slug}/${encodeURIComponent(lead.filename)}`;
+  if (lead) return sourceUrl(cdnBaseUrl, `${slug}/${lead.filename}`);
   return "";
 }
 

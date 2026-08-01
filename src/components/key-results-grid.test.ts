@@ -18,12 +18,16 @@ import type { KeySpecies } from '../types/schemas.ts';
 // ---------------------------------------------------------------------------
 
 describe('buildCardUrl', () => {
-  test('constructs CDN URL with encodeURIComponent and ?height=', () => {
+  test('constructs a pre-generated derivative URL, not an optimizer query', () => {
     assert.equal(
       buildCardUrl('habrosyne-scripta', 'Habrosyne scripta-A-D.jpg', 320),
-      'https://moths.pnwinsects.org/habrosyne-scripta/Habrosyne%20scripta-A-D.jpg?height=320',
-      'encodeURIComponent must encode the space; ?height=320 per UI-SPEC'
+      'https://moths.pnwinsects.org/derived/habrosyne-scripta/Habrosyne%20scripta-A-D%40320h.webp',
+      'the space must be encoded; the 320px slot now maps to the shared @320h variant (ADR 0022)'
     );
+  });
+
+  test('emits no optimizer query string', () => {
+    assert.equal(buildCardUrl('s', 'i.jpg', 320).includes('?'), false);
   });
 
   test('uses the correct CDN base URL', () => {
