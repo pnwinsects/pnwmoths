@@ -4,7 +4,7 @@ Every image the site displays is served as a **pre-generated derivative** — a 
 fixed size, stored under `derived/` on the CDN. The edge no longer resizes anything on request, so
 an image that has not been through this pipeline simply does not appear.
 
-Run this **after** uploading any new species photo, glossary illustration, or high-res tile
+Run this **after** uploading any new species photo, glossary illustration, plate, or high-res tile
 thumbnail. The build refuses to finish until you do (`[check-derivatives] SOURCE GATE FAILED`).
 
 Background and rationale: [ADR 0022](../docs/adr/0022-pregenerated-image-derivatives.md).
@@ -83,7 +83,7 @@ template is asking for the wrong one.
 
 - **Withheld families are skipped.** The source gate only checks species that actually get a page,
   so a family under embargo cannot fail the build. Lifting an embargo can, though — see ADR 0022.
-- **Regenerating everything** is ~23,000 files and a few hours of `vips`. Use `KIND=glossary`,
-  `LIMIT=8` or `DRY_RUN=1` to scope a trial run first.
+- **Regenerating everything** is ~23,000 files and a few hours of `vips`. Use `KIND=legacy |
+  highres | glossary | plates`, `LIMIT=8` or `DRY_RUN=1` to scope a trial run first.
 - **Nothing is ever deleted.** Superseded derivatives linger on the zone, which the additive-only
   deploy ([ADR 0008](../docs/adr/0008-deploy-bunny-additive.md)) tolerates.

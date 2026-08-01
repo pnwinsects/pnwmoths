@@ -84,12 +84,12 @@ describe('VARIANTS matrix', () => {
 
 describe('buildWorkList', () => {
   it('produces one spec per source × variant', () => {
-    const list = buildWorkList({ legacy: ['a/b.jpg'], highres: ['t/c.webp'], glossary: ['glossary/g.jpg'] });
-    assert.equal(list.length, 2 + 4 + 2);
+    const list = buildWorkList({ legacy: ['a/b.jpg'], highres: ['t/c.webp'], glossary: ['glossary/g.jpg'], plates: ['plates/p/thumbnail.jpg'] });
+    assert.equal(list.length, 2 + 4 + 2 + 1);
   });
 
   it('collapses duplicate sources — glossary terms share illustrations', () => {
-    const list = buildWorkList({ legacy: [], highres: [], glossary: ['glossary/g.jpg', 'glossary/g.jpg'] });
+    const list = buildWorkList({ legacy: [], highres: [], glossary: ['glossary/g.jpg', 'glossary/g.jpg'], plates: [] });
     assert.equal(list.length, 2);
   });
 
@@ -98,13 +98,14 @@ describe('buildWorkList', () => {
       legacy: ['a/b.jpg', 'a/b.jpg'],
       highres: ['t/c.webp'],
       glossary: [],
+      plates: [],
     });
     const paths = list.map((s) => s.derivedPath);
     assert.equal(new Set(paths).size, paths.length);
   });
 
   it('is deterministic, so reruns and diffs are stable', () => {
-    const args = { legacy: ['b/2.jpg', 'a/1.jpg'], highres: [], glossary: [] };
+    const args = { legacy: ['b/2.jpg', 'a/1.jpg'], highres: [], glossary: [], plates: [] };
     assert.deepEqual(buildWorkList(args), buildWorkList(args));
     assert.equal(buildWorkList(args)[0]?.sourcePath, 'a/1.jpg');
   });
@@ -240,6 +241,10 @@ describe('readSources', () => {
     'wing,wing.jpg',
     'no-image,',
   ].join('\n') + '\n');
+  writeFileSync(join(dataDir, 'plates.json'), JSON.stringify([
+    { slug: 'plate-0-commonly-reported-moths-2', width: 2400, height: 3000 },
+    { width: 100, height: 100 },  // slugless row is skipped rather than yielding "plates/undefined/"
+  ]));
 
   const sources = readSources(dataDir);
 
@@ -267,16 +272,26 @@ describe('readSources', () => {
     assert.deepEqual(sources.glossary, [{ path: 'glossary/wing.jpg', speciesSlug: null }]);
   });
 
+  it('derives the plate thumbnail path from the slug in plates.json', () => {
+    assert.deepEqual(sources.plates, [
+      { path: 'plates/plate-0-commonly-reported-moths-2/thumbnail.jpg', speciesSlug: null },
+    ]);
+  });
+
   it('sourcePaths flattens to the shape buildWorkList takes', () => {
     assert.deepEqual(sourcePaths(sources), {
       legacy: ['abagrotis-apposita/Abagrotis apposita-A-D.jpg'],
       highres: ['species-tiles/abagrotis-apposita/A-D_thumbnail.webp'],
       glossary: ['glossary/wing.jpg'],
+      plates: ['plates/plate-0-commonly-reported-moths-2/thumbnail.jpg'],
     });
   });
 
   it('feeds buildWorkList a complete variant set per source', () => {
     const specs = buildWorkList(sourcePaths(sources));
-    assert.equal(specs.length, VARIANTS.legacy.length + VARIANTS.highres.length + VARIANTS.glossary.length);
+    assert.equal(
+      specs.length,
+      VARIANTS.legacy.length + VARIANTS.highres.length + VARIANTS.glossary.length + VARIANTS.plates.length,
+    );
   });
 });

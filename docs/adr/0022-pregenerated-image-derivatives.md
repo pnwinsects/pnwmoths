@@ -73,9 +73,16 @@ Four parts:
    | Legacy photo (`{slug}/{filename}`) | `@320h.webp`, `@full.webp` |
    | High-res thumbnail (`{tiles_path}_thumbnail.webp`, 1500px) | `@530.webp`, `@1060.webp`, `@320h.webp`, `@1200.jpg` |
    | Glossary illustration | `@188x225.webp`, `@376x450.webp` (fit within box, no crop) |
+   | Plate thumbnail (`plates/{slug}/thumbnail.jpg`) | `@240x300.webp` |
 
-   **23,338 objects, ~2 GB** — 4,034 legacy photos ×2, 3,811 high-res thumbnails ×4, 13 glossary
-   illustrations ×2. (The 1500px hero slot needs no derivative: it *is* the stored `_thumbnail.webp`.)
+   **23,436 objects, ~2 GB** — 4,034 legacy photos ×2, 3,811 high-res thumbnails ×4, 13 glossary
+   illustrations ×2, 98 plate thumbnails ×1. (The 1500px hero slot needs no derivative: it *is* the
+   stored `_thumbnail.webp`.)
+
+   The plate variant is a **re-encode, not a resize**: the stored thumbnail is already 240×300, the
+   exact size the grid displays. It was added late, during the #227 cutover sweep, because it is the
+   one place the Optimizer was doing real work that nothing else replaced — see the Consequences
+   below.
    At Bunny's storage rate that is a couple of cents a month, so the size does not change the
    decision — but it is twice the count this record first estimated.
 
@@ -137,6 +144,19 @@ and this is the only way to exercise the loss of auto-WebP without experimenting
   the glossary derivative is an ordinary bounded resize, and this record's original claim that it was
   "the single non-trivial transform" was wrong. The dead parameter should come out of the template
   along with the rest ([#225](https://github.com/pnwinsects/pnwmoths/issues/225)).
+- **The `/plates/` index was the one real regression, and it was only found by measuring.** A full
+  HEAD sweep of all 26,829 image objects against an Optimizer-disabled staging pull zone
+  (`scripts/verify-cdn-cutover.ts`) returned 200 with the correct content type for every one — no
+  missing objects anywhere. But the accompanying negotiation probe showed plate thumbnails dropping
+  from ~12 KB to ~54 KB, because those stored JPEGs are encoded at roughly one byte per pixel and
+  auto-WebP had been quietly rescuing them. Measured across all 98: **1,283 KB → 5,327 KB** on a
+  single page. Adding the `plates` variant brings it to **1,097 KB**, better than the Optimizer
+  managed. Nothing in CI would have caught this — `check-page-weight.ts` measures HTML, not images.
+- **Species DZI tiles and plate Zoomify tiles are unaffected**, which is worth recording because it
+  is not obvious. Species tiles are stored `.webp` already and came back byte-identical across both
+  origins; plate tiles are `.jpg`, but at 256px the Optimizer's WebP conversion saved only ~1%
+  (10,660 B → 10,548 B). The runtime tile fetches were the largest unknown going in, and they turned
+  out to be a non-event.
 - Every variant was verified against what the Optimizer serves today: identical pixel dimensions
   across all seven, including Bunny's own rounding (`width=376` yields 375). At `Q=80` the
   pre-generated files run **10–40% smaller** than the Optimizer's output, so the cutover is a modest
