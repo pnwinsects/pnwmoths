@@ -83,7 +83,20 @@ to copy an existing row for the same species and edit it.
 npm run build:site
 ```
 
-Expected: the build completes, ending with `[check-derivatives] PASS: …`.
+Expected: the build completes. Partway through — it is the 6th of 17 steps, not the last — you
+should see:
+
+```
+[check-derivatives] PASS: … emitted derivative URL(s) …
+```
+
+That line is the one that proves your photo's derivatives are on the CDN. The run continues past it
+and ends with `verify-parquet`.
+
+`build:site` is the full content build. It is used here rather than `npm run build` because
+`build` additionally runs the broken-link check, which needs [lychee](https://lychee.cli.rs/)
+installed locally — see [CONTRIBUTING.md](../CONTRIBUTING.md). The Docker path below includes it, so
+prefer that if you want the link check too.
 
 **6. Commit:**
 
@@ -107,8 +120,12 @@ derivatives are not on the CDN. You skipped step 3, or it did not finish. See
 **`Invalid image filename "…" in images.csv`** — the filename contains a character outside
 `a-z A-Z 0-9 space . _ -`. Rename the file on the CDN and in the CSV to match.
 
-**`data/images.csv is missing required column: "…"`** — a column was deleted or the header was
-edited. Restore it; blanks are fine, missing columns are not.
+**`data/images.csv is missing required column: "…"`** — the header lost one of the eight columns
+the build requires (`species_slug`, `filename`, `photographer`, `weight`, `license`, `view`,
+`specimen`, `navigational`). Restore it; a blank *value* is fine, a missing *column* is not.
+
+Note the remaining ten columns (`locality` through `subspecies`) are **not** checked by that
+validation, so deleting one fails silently rather than loudly. Keep the header intact.
 
 **The photo does not appear but the build passed** — check `species_slug` matches the species page's
 URL segment exactly. A typo there produces a row that belongs to no species, and nothing complains.

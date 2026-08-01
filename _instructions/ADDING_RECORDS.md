@@ -45,6 +45,11 @@ present in the header even where the value is blank.
    Expected: build completes. Data validation passes (known species, valid record_type, valid state,
    in-bounds coordinates).
 
+   `build:site` rather than `npm run build` because `build` also runs the broken-link check, which
+   needs [lychee](https://lychee.cli.rs/) installed locally (see [CONTRIBUTING.md](../CONTRIBUTING.md));
+   the Docker path below includes it.
+
+
 4. If build passes, commit and push:
    ```bash
    git add data/records.csv

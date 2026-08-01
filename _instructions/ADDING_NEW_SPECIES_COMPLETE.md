@@ -50,7 +50,12 @@ Expected:
 - Photos appear on the species page (if added)
 - `_site/species/{slug}/records.parquet` exists (if records added)
 - Species appears on the browse page at `_site/browse/index.html`
-- The run ends with `[check-derivatives] PASS: …`
+- `[check-derivatives] PASS: …` appears partway through (6th of 17 steps, not the last line)
+
+`build:site` is the full content build. It is used here rather than `npm run build` because
+`build` additionally runs the broken-link check, which needs [lychee](https://lychee.cli.rs/)
+installed locally — see [CONTRIBUTING.md](../CONTRIBUTING.md). The Docker path below includes it, so
+prefer that if you want the link check too.
 
 ### Step 5: Commit and push
 

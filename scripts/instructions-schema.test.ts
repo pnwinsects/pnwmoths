@@ -27,8 +27,8 @@ import { parse } from 'csv-parse/sync';
 // without such a heading is simply not checked, so this imposes nothing on
 // prose-only guides.
 
-const INSTRUCTIONS_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..', '_instructions');
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const INSTRUCTIONS_DIR = join(PROJECT_ROOT, '_instructions');
 
 /** `## Schema: data/<something>.csv`, capturing the path. */
 const SCHEMA_HEADING = /^#{1,6}\s+Schema:\s+(\S+\.csv)\s*$/gm;
@@ -82,13 +82,20 @@ export function schemaTablesIn(doc: string, markdown: string): SchemaTable[] {
   return tables;
 }
 
-/** Column names in a CSV's header row. */
-function csvHeader(path: string): string[] {
-  const rows = parse(readFileSync(path), { columns: true, skip_empty_lines: true, to: 1 }) as
-    Record<string, string>[];
-  const first = rows[0];
-  assert.ok(first, `${path} has no data rows`);
-  return Object.keys(first);
+/**
+ * Column names in a CSV's header row.
+ *
+ * `columns: false` reads the header as a plain row rather than inferring it from
+ * the first data row. Doing it the other way collapses duplicate headers and
+ * fails a header-only file as "no data rows" — neither of which should look like
+ * a documentation problem.
+ */
+export function csvHeader(path: string): string[] {
+  const rows = parse(readFileSync(path), { columns: false, skip_empty_lines: true, to: 1 }) as
+    string[][];
+  const header = rows[0];
+  assert.ok(header && header.length > 0, `${path} has no header row`);
+  return header;
 }
 
 const docs = readdirSync(INSTRUCTIONS_DIR).filter((f) => f.endsWith('.md'));
@@ -113,6 +120,42 @@ describe('_instructions schema tables match the real CSV headers', () => {
       );
     });
   }
+});
+
+describe('the guard actually fails on the bug it exists to catch', () => {
+  // docs/lessons-learned.md: "Mutation-test the guard afterwards: reintroduce the
+  // bug and confirm it goes red. A guard you haven't watched fail is a guess."
+  // Doing that by hand proves it once; this proves it on every run, and is the
+  // only test here that exercises the assertion path rather than the parser.
+  const unknownColumns = (doc: string, csvPath: string): string[] => {
+    const table = schemaTablesIn(doc, `## Schema: ${csvPath}\n| Field |\n|---|\n| species_id |\n`)[0];
+    assert.ok(table, 'fixture should produce a table');
+    const header = new Set(csvHeader(resolve(PROJECT_ROOT, csvPath)));
+    return table.fields.filter((f) => !header.has(f));
+  };
+
+  it('reports species_id against data/records.csv — the exact #240 bug', () => {
+    assert.deepEqual(unknownColumns('fixture.md', 'data/records.csv'), ['species_id']);
+  });
+
+  it('reports species_id against data/images.csv too', () => {
+    assert.deepEqual(unknownColumns('fixture.md', 'data/images.csv'), ['species_id']);
+  });
+
+  it('accepts the column those files really use', () => {
+    const table = schemaTablesIn('f.md', '## Schema: data/records.csv\n| Field |\n|---|\n| species_slug |\n')[0];
+    const header = new Set(csvHeader(resolve(PROJECT_ROOT, 'data/records.csv')));
+    assert.deepEqual(table!.fields.filter((f) => !header.has(f)), []);
+  });
+});
+
+describe('csvHeader', () => {
+  it('reads the declared header, not the keys of the first data row', () => {
+    // data/images.csv has 18 columns; inferring from a row would still give 18,
+    // but would collapse duplicates and choke on a header-only file.
+    assert.equal(csvHeader(resolve(PROJECT_ROOT, 'data/images.csv'))[0], 'species_slug');
+    assert.equal(csvHeader(resolve(PROJECT_ROOT, 'data/images.csv')).length, 18);
+  });
 });
 
 describe('schemaTablesIn', () => {

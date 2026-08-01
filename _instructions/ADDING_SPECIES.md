@@ -37,10 +37,11 @@ integrity, so the species row must exist in `data/species.csv` first.
 
 ## Steps
 
-1. Open `data/species.csv`. Find the highest `id` value. Add a new row with `id` = highest + 1 —
-   all 11 columns, trailing blanks included:
+1. Open `data/species.csv`. Find the highest `id` value — at the time of writing that is 3383, so
+   the example below uses 3384. Check it yourself rather than copying the number; ids only ever go
+   up. Add a new row with all 11 columns, trailing blanks included:
    ```csv
-   3162,Xestia,dolosa,Greater Black-letter Dart,10942,Franclemont 1980,Noctuidae,xestia-smithii,Noctuinae,,Noctuini
+   3384,Xestia,dolosa,Greater Black-letter Dart,10942,Franclemont 1980,Noctuidae,xestia-smithii,Noctuinae,,Noctuini
    ```
 
 2. (Optional) Create a prose description file at `src/content/species/{slug}.md`:
@@ -67,6 +68,11 @@ integrity, so the species row must exist in `data/species.csv` first.
    npm run build:site
    ```
    Expected: build completes without errors. A new page exists at `_site/species/xestia-dolosa/index.html`.
+
+   `build:site` rather than `npm run build` because `build` also runs the broken-link check, which
+   needs [lychee](https://lychee.cli.rs/) installed locally (see [CONTRIBUTING.md](../CONTRIBUTING.md));
+   the Docker path below includes it.
+
 
    No page is emitted if the family is withheld (`data/withheld-families.csv` — Geometridae today),
    if the family cell is blank, or if the slug is listed in `data/unpublished-species.csv`. That is
