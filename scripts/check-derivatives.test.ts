@@ -116,6 +116,7 @@ describe('scopedSources', () => {
       { path: 'species-tiles/abagrotis-apposita/A-D_thumbnail.webp', speciesSlug: 'abagrotis-apposita' },
     ],
     glossary: [{ path: 'glossary/wing.jpg', speciesSlug: null }],
+    plates: [{ path: 'plates/plate-0/thumbnail.jpg', speciesSlug: null }],
   };
 
   it('drops sources belonging to species that do not build', () => {
@@ -125,15 +126,17 @@ describe('scopedSources', () => {
       [
         'abagrotis-apposita/a.jpg',
         'glossary/wing.jpg',
+        'plates/plate-0/thumbnail.jpg',
         'species-tiles/abagrotis-apposita/A-D_thumbnail.webp',
       ],
     );
   });
 
-  it('keeps glossary art regardless of the species scope', () => {
-    // The glossary page is unconditional, so its images are never out of scope.
+  it('keeps species-less art regardless of the species scope', () => {
+    // The glossary and plates pages are unconditional, so their images are
+    // never out of scope.
     const scoped = scopedSources(sources, new Set());
-    assert.deepEqual(scoped.map((s) => s.path), ['glossary/wing.jpg']);
+    assert.deepEqual(scoped.map((s) => s.path).sort(), ['glossary/wing.jpg', 'plates/plate-0/thumbnail.jpg']);
   });
 
   it('carries the source kind through, since it decides the variant set', () => {
@@ -151,6 +154,7 @@ describe('scopedSources', () => {
         { path: 'glossary/wing.jpg', speciesSlug: null },
         { path: 'glossary/wing.jpg', speciesSlug: null },
       ],
+      plates: [],
     };
     assert.equal(scopedSources(shared, new Set()).length, 1);
   });

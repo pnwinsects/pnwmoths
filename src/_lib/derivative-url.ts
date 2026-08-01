@@ -15,7 +15,7 @@
 // to the bundle, as with legacy-redirects.ts (ADR 0019).
 
 /** Variant tokens from the ADR 0022 matrix. */
-export type VariantToken = '320h' | 'full' | '530' | '1060' | '1200' | '188x225' | '376x450';
+export type VariantToken = '320h' | 'full' | '530' | '1060' | '1200' | '188x225' | '376x450' | '240x300';
 
 /**
  * Output extension per variant.
@@ -32,6 +32,7 @@ export const VARIANT_EXT: Readonly<Record<VariantToken, 'webp' | 'jpg'>> = {
   '1200': 'jpg',
   '188x225': 'webp',
   '376x450': 'webp',
+  '240x300': 'webp',
 };
 
 /**

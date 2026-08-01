@@ -152,8 +152,8 @@ export function scopedSources(
 
   for (const kind of Object.keys(sources) as SourceKind[]) {
     for (const entry of sources[kind]) {
-      // A null slug means the image is not species-scoped (glossary art), which
-      // is always in scope — the glossary page is unconditional.
+      // A null slug means the image is not species-scoped (glossary art, plate
+      // thumbnails), which is always in scope — those pages are unconditional.
       if (entry.speciesSlug !== null && !buildableSlugs.has(normalizeSlug(entry.speciesSlug))) continue;
       if (seen.has(entry.path)) continue;
       seen.add(entry.path);

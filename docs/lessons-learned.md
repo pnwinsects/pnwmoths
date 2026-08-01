@@ -384,6 +384,24 @@ cost a debugging cycle to discover.
   variant set. Ask of any output-scanning check: what does this artifact not contain
   because a client assembles it later? ([#226](https://github.com/pnwinsects/pnwmoths/issues/226))
 
+- **A bulk network check needs a serial re-check pass, not just per-request retries.** The
+  cutover sweep reported 6 consecutive `fetch failed` errors on one species out of 26,927
+  objects; every one served 200 when asked again calmly. Under concurrency a local hiccup
+  does not arrive as one scattered failure, it arrives as a burst, and a per-request retry
+  ladder rides the same congestion it is retrying into. Re-check anything non-ok serially
+  at the end, outside the concurrency limit, before reporting. A false "do NOT disable the
+  Optimizer" is the exact failure mode [0017](adr/0017-reproducible-committed-artifacts.md)
+  keeps the *build* offline to avoid — a one-off verification script does not get to
+  reintroduce it. ([#227](https://github.com/pnwinsects/pnwmoths/issues/227))
+
+- **Measure the thing you are about to turn off; do not reason about it.** Every prediction
+  going into the Optimizer cutover was about missing objects, and all 26,927 were present.
+  The actual regression was a *format* change nobody had modelled: plate thumbnails stored
+  at ~1 byte/pixel, which auto-WebP had been quietly rescuing, so one page went 1,283 KB →
+  5,327 KB. Meanwhile the biggest predicted unknown — runtime DZI tile fetches — was a
+  non-event (already `.webp`, byte-identical). Both facts came from HEADing real URLs
+  against a disposable staging pull zone, which cost nothing and took minutes.
+
 - **Scope a data gate to what actually builds, and derive that scope from data, not from
   `_site/`.** An unscoped source check failed immediately on 83 rows for withheld
   Geometridae — real missing files, but for pages nobody can reach, so the gate would have
