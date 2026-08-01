@@ -2,12 +2,14 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { writeFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import {
   VARIANTS,
   derivedPath,
   specsForSource,
   buildWorkList,
+  readSources,
+  sourcePaths,
   vipsCommands,
   vipsTarget,
   acquireManifestLock,
@@ -215,5 +217,66 @@ describe('manifest lock', () => {
   it('reports a live process as alive and an impossible pid as dead', () => {
     assert.equal(isProcessAlive(process.pid), true);
     assert.equal(isProcessAlive(999999999), false);
+  });
+});
+
+describe('readSources', () => {
+  // A throwaway data dir, so the assertions pin the shape rather than the
+  // 4,000-row committed inventory.
+  const dataDir = mkdtempSync(join(tmpdir(), 'pnwmoths-sources-'));
+  writeFileSync(join(dataDir, 'images.csv'), [
+    'species_slug,filename',
+    'abagrotis-apposita,Abagrotis apposita-A-D.jpg',
+    // Blank cells are skipped rather than yielding a path like "undefined/x".
+    ',orphan.jpg',
+    'no-file,',
+  ].join('\n') + '\n');
+  writeFileSync(join(dataDir, 'species-photos.json'), JSON.stringify({
+    'abagrotis-apposita': { specimens: [{ tiles_path: 'species-tiles/abagrotis-apposita/A-D' }] },
+    'no-specimens': {},
+  }));
+  writeFileSync(join(dataDir, 'glossary.csv'), [
+    'term,image_filename',
+    'wing,wing.jpg',
+    'no-image,',
+  ].join('\n') + '\n');
+
+  const sources = readSources(dataDir);
+
+  it('joins legacy paths from species_slug and filename', () => {
+    assert.deepEqual(sources.legacy, [
+      { path: 'abagrotis-apposita/Abagrotis apposita-A-D.jpg', speciesSlug: 'abagrotis-apposita' },
+    ]);
+  });
+
+  it('appends _thumbnail.webp to each high-res tiles_path', () => {
+    assert.deepEqual(sources.highres, [
+      {
+        path: 'species-tiles/abagrotis-apposita/A-D_thumbnail.webp',
+        speciesSlug: 'abagrotis-apposita',
+      },
+    ]);
+  });
+
+  it('takes the high-res species slug from the JSON key, not the tiles path', () => {
+    // ADR 0001: join slugs never come from a filename or a storage path.
+    assert.equal(sources.highres[0]?.speciesSlug, 'abagrotis-apposita');
+  });
+
+  it('leaves glossary art unattached to any species', () => {
+    assert.deepEqual(sources.glossary, [{ path: 'glossary/wing.jpg', speciesSlug: null }]);
+  });
+
+  it('sourcePaths flattens to the shape buildWorkList takes', () => {
+    assert.deepEqual(sourcePaths(sources), {
+      legacy: ['abagrotis-apposita/Abagrotis apposita-A-D.jpg'],
+      highres: ['species-tiles/abagrotis-apposita/A-D_thumbnail.webp'],
+      glossary: ['glossary/wing.jpg'],
+    });
+  });
+
+  it('feeds buildWorkList a complete variant set per source', () => {
+    const specs = buildWorkList(sourcePaths(sources));
+    assert.equal(specs.length, VARIANTS.legacy.length + VARIANTS.highres.length + VARIANTS.glossary.length);
   });
 });

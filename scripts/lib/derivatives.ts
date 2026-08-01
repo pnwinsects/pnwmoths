@@ -13,7 +13,8 @@
  */
 
 import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { dirname, join } from 'node:path';
+import { parse } from 'csv-parse/sync';
 import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url.ts';
 
 /** Source families, which determine the variant set. */
@@ -173,6 +174,77 @@ export function buildWorkList(sources: {
     }
   }
   return specs;
+}
+
+// ---------------------------------------------------------------------------
+// Source inventories
+// ---------------------------------------------------------------------------
+
+/** One source image, plus the species it belongs to (null for glossary art). */
+export interface SourceEntry {
+  /** Storage path of the source, e.g. `abagrotis-apposita/Abagrotis apposita-A-D.jpg`. */
+  path: string;
+  /**
+   * Owning species slug, or null when the image is not species-scoped.
+   *
+   * Present so callers can ask whether the species actually builds. The legacy
+   * slug comes from the `species_slug` column and the high-res one from the
+   * species-photos.json key — never from the filename, which is the ADR 0001
+   * join rule.
+   */
+  speciesSlug: string | null;
+}
+
+export type SourceInventory = Readonly<Record<SourceKind, SourceEntry[]>>;
+
+/**
+ * The three source inventories, read from the committed flat files.
+ *
+ * Shared by the generator (which produces a derivative for every entry) and the
+ * build guard (which checks only the entries a built page can reach). The
+ * generator is deliberately unscoped: withholding a family is reversible, and a
+ * derivative already on the CDN costs nothing but makes lifting the embargo a
+ * template change rather than a regeneration run.
+ */
+export function readSources(dataDir: string): SourceInventory {
+  const images = parse(readFileSync(join(dataDir, 'images.csv')), {
+    columns: true, skip_empty_lines: true,
+  }) as Array<{ species_slug: string; filename: string }>;
+  const legacy = images
+    .filter((r) => r.species_slug && r.filename)
+    .map((r) => ({ path: `${r.species_slug}/${r.filename}`, speciesSlug: r.species_slug }));
+
+  const photos = JSON.parse(readFileSync(join(dataDir, 'species-photos.json'), 'utf8')) as
+    Record<string, { specimens?: Array<{ tiles_path: string }> }>;
+  const highres: SourceEntry[] = [];
+  for (const [speciesSlug, entry] of Object.entries(photos)) {
+    for (const specimen of entry.specimens ?? []) {
+      if (specimen.tiles_path) {
+        highres.push({ path: `${specimen.tiles_path}_thumbnail.webp`, speciesSlug });
+      }
+    }
+  }
+
+  const glossaryRows = parse(readFileSync(join(dataDir, 'glossary.csv')), {
+    columns: true, skip_empty_lines: true,
+  }) as Array<{ image_filename?: string }>;
+  const glossary = glossaryRows
+    .map((r) => r.image_filename)
+    .filter((f): f is string => Boolean(f))
+    .map((f) => ({ path: `glossary/${f}`, speciesSlug: null }));
+
+  return { legacy, highres, glossary };
+}
+
+/** Just the paths, in the shape buildWorkList takes. */
+export function sourcePaths(sources: SourceInventory): {
+  legacy: string[]; highres: string[]; glossary: string[];
+} {
+  return {
+    legacy: sources.legacy.map((e) => e.path),
+    highres: sources.highres.map((e) => e.path),
+    glossary: sources.glossary.map((e) => e.path),
+  };
 }
 
 /** Output-format suffix vips appends to the target filename. */
