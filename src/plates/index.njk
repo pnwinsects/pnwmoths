@@ -15,7 +15,11 @@ description: "High-resolution photographic plates of pinned Pacific Northwest mo
       {# Decorative: the <h2> inside this link already carries the plate title, so
          repeating it in alt made each card announce the title twice. #}
       <img
-        src="{{ cdnBaseUrl }}/plates/{{ plate.slug }}/thumbnail.jpg"
+        {#- The stored thumbnail is already 240×300, so this is a re-encode, not a
+            resize: those JPEGs run 54–76 KB and the WebP derivative is ~12 KB.
+            Before the derivative existed this grid was 5.3 MB of thumbnails with
+            the Optimizer off (ADR 0022). -#}
+        src="{{ ('plates/' + plate.slug + '/thumbnail.jpg') | derivative('240x300') }}"
         alt=""
         width="240" height="300"
         loading="lazy">

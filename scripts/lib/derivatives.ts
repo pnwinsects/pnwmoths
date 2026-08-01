@@ -18,7 +18,7 @@ import { parse } from 'csv-parse/sync';
 import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url.ts';
 
 /** Source families, which determine the variant set. */
-export type SourceKind = 'legacy' | 'highres' | 'glossary';
+export type SourceKind = 'legacy' | 'highres' | 'glossary' | 'plates';
 
 /**
  * Mutual exclusion on the shared derivatives manifest.
@@ -111,6 +111,17 @@ export const VARIANTS: Readonly<Record<SourceKind, readonly Variant[]>> = {
     { token: '188x225', ext: 'webp', transform: { op: 'fit', width: 188, height: 225 } },
     { token: '376x450', ext: 'webp', transform: { op: 'fit', width: 376, height: 450 } },
   ],
+  // The stored plate thumbnail is ALREADY 240×300 — the exact size the grid
+  // displays it at — so this re-encodes rather than resizes. That is the whole
+  // point: at ~1 byte per pixel those JPEGs are 54–76 KB each, and WebP at Q=80
+  // brings them to ~12 KB. Measured on the Optimizer-disabled staging zone, the
+  // /plates/ index went from 1,283 KB of thumbnails to 5,327 KB without this
+  // variant — the only regression the cutover sweep turned up (#227).
+  // `fit` rather than `passthrough` so a future thumbnail uploaded larger than
+  // the grid slot is bounded instead of shipped at full size.
+  plates: [
+    { token: '240x300', ext: 'webp', transform: { op: 'fit', width: 240, height: 300 } },
+  ],
 };
 
 export interface DerivativeSpec {
@@ -151,20 +162,18 @@ export function specsForSource(sourcePath: string, kind: SourceKind): Derivative
  * them from data/images.csv, data/species-photos.json and data/glossary.csv.
  * Duplicates are collapsed — many glossary terms share one illustration.
  */
-export function buildWorkList(sources: {
-  legacy: readonly string[];
-  highres: readonly string[];
-  glossary: readonly string[];
-}): DerivativeSpec[] {
+export function buildWorkList(
+  sources: Readonly<Record<SourceKind, readonly string[]>>,
+): DerivativeSpec[] {
   const specs: DerivativeSpec[] = [];
   const seen = new Set<string>();
-  const kinds: readonly [SourceKind, readonly string[]][] = [
-    ['legacy', sources.legacy],
-    ['highres', sources.highres],
-    ['glossary', sources.glossary],
-  ];
+  // Driven off VARIANTS rather than a hand-written list: a new source kind that
+  // someone forgets to add here would silently generate nothing, which is the
+  // same class of drift this module exists to prevent.
+  const kinds = Object.keys(VARIANTS) as SourceKind[];
 
-  for (const [kind, paths] of kinds) {
+  for (const kind of kinds) {
+    const paths = sources[kind];
     for (const path of [...new Set(paths)].sort()) {
       for (const spec of specsForSource(path, kind)) {
         if (seen.has(spec.derivedPath)) continue;
@@ -233,17 +242,23 @@ export function readSources(dataDir: string): SourceInventory {
     .filter((f): f is string => Boolean(f))
     .map((f) => ({ path: `glossary/${f}`, speciesSlug: null }));
 
-  return { legacy, highres, glossary };
+  const plateRows = JSON.parse(readFileSync(join(dataDir, 'plates.json'), 'utf8')) as
+    Array<{ slug?: string }>;
+  const plates = plateRows
+    .map((r) => r.slug)
+    .filter((s): s is string => Boolean(s))
+    .map((slug) => ({ path: `plates/${slug}/thumbnail.jpg`, speciesSlug: null }));
+
+  return { legacy, highres, glossary, plates };
 }
 
 /** Just the paths, in the shape buildWorkList takes. */
-export function sourcePaths(sources: SourceInventory): {
-  legacy: string[]; highres: string[]; glossary: string[];
-} {
+export function sourcePaths(sources: SourceInventory): Record<SourceKind, string[]> {
   return {
     legacy: sources.legacy.map((e) => e.path),
     highres: sources.highres.map((e) => e.path),
     glossary: sources.glossary.map((e) => e.path),
+    plates: sources.plates.map((e) => e.path),
   };
 }
 
