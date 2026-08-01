@@ -37,7 +37,10 @@ import { promisify } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
-import { buildWorkList, vipsCommands, type DerivativeSpec, type SourceKind } from './lib/derivatives.ts';
+import {
+  buildWorkList, vipsCommands, acquireManifestLock, releaseManifestLock,
+  type DerivativeSpec, type SourceKind,
+} from './lib/derivatives.ts';
 
 const execFileAsync = promisify(execFile);
 
@@ -52,6 +55,7 @@ const OUTPUT_DIR: string = resolve(process.env['OUTPUT_DIR'] ?? 'var/derivatives
 const CONCURRENCY: number = Math.max(1, Number(process.env['CONCURRENCY'] ?? '4'));
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const MANIFEST_PATH: string = resolve('var/derivatives-manifest.csv');
+const LOCK_PATH: string = resolve('var/derivatives-manifest.lock');
 const MANIFEST_COLUMNS = ['derived_path', 'source_path', 'kind', 'variant', 'status', 'bytes', 'error'] as const;
 
 type Status = 'pending' | 'generated' | 'failed';
@@ -229,6 +233,9 @@ async function main(): Promise<void> {
     logStage('[dry-run] no files written.');
     return;
   }
+
+  acquireManifestLock(LOCK_PATH);
+  process.on('exit', () => releaseManifestLock(LOCK_PATH));
 
   if (limited.length === 0) {
     logStage(`Nothing to do — all ${specs.length.toLocaleString('en-US')} derivatives present.`);
