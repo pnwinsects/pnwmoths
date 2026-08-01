@@ -24,7 +24,7 @@ character illustrations to WebP offline instead of asking the Optimizer.
 One dependency is invisible in the codebase. The Optimizer also performs **automatic WebP
 content-negotiation on every image**, with no query string involved:
 
-```
+```text
 Habrosyne scripta-A-D.jpg  Accept: */*                 → image/jpeg  118,963 B
 Habrosyne scripta-A-D.jpg  Accept: image/webp,avif     → image/webp   85,042 B
 ```
