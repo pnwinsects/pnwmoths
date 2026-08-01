@@ -375,6 +375,24 @@ cost a debugging cycle to discover.
   it**, as a tracked follow-up — not vague deferred debt. And when images 404, distinguish
   "wrong filename" from "never uploaded" early: the fix differs (catalog edit vs migration).
 
+- **Scanning the built output is only half a guard when components build URLs in the
+  browser.** `check-derivatives.ts` started as "every `derived/` URL in `_site/*.html` must
+  be in the manifest", which passed 13,107/13,107 — and would still have missed a whole
+  class of breakage, because `pnwm-taxon-browser` and `key-results-grid` assemble their
+  thumbnail URLs at runtime from JSON. Those URLs are never in the HTML. The complement is
+  a gate over the *inputs*: every source image a built page can reach must have its full
+  variant set. Ask of any output-scanning check: what does this artifact not contain
+  because a client assembles it later? ([#226](https://github.com/pnwinsects/pnwmoths/issues/226))
+
+- **Scope a data gate to what actually builds, and derive that scope from data, not from
+  `_site/`.** An unscoped source check failed immediately on 83 rows for withheld
+  Geometridae — real missing files, but for pages nobody can reach, so the gate would have
+  been noise from day one. Scoping it through the same withheld/unpublished predicates
+  `src/_data/species.ts` uses makes it silent today and loud at exactly the right moment:
+  lifting the embargo now fails the build rather than publishing broken `<img>` tags.
+  Deriving the scope from `_site/species/` instead would have been subtly wrong — Eleventy
+  does not clean between builds, so a stale directory silently widens it.
+
 - **Settle a major-version bump by parsing real data with both versions, not by reading the
   changelog.** Dependabot surfaced six breaking changes for csv-parse 7.0.0; all six actually
   landed in 6.0.0, which we were already past, and upstream's own changelog says 7.0.0 "was

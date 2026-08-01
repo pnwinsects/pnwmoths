@@ -39,6 +39,7 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import {
   buildWorkList, vipsCommands, acquireManifestLock, releaseManifestLock,
+  readSources, sourcePaths,
   type DerivativeSpec, type SourceKind,
 } from './lib/derivatives.ts';
 
@@ -98,40 +99,6 @@ async function withRetry<T>(fn: () => Promise<T>, label: string): Promise<T> {
 /** Encode each path segment, preserving separators. Django-era names contain spaces. */
 export function encodeStoragePath(path: string): string {
   return path.split('/').map(encodeURIComponent).join('/');
-}
-
-// ---------------------------------------------------------------------------
-// Source inventories
-// ---------------------------------------------------------------------------
-
-export function readSources(dataDir: string): {
-  legacy: string[]; highres: string[]; glossary: string[];
-} {
-  const images = parse(readFileSync(join(dataDir, 'images.csv')), {
-    columns: true, skip_empty_lines: true,
-  }) as Array<{ species_slug: string; filename: string }>;
-  const legacy = images
-    .filter((r) => r.species_slug && r.filename)
-    .map((r) => `${r.species_slug}/${r.filename}`);
-
-  const photos = JSON.parse(readFileSync(join(dataDir, 'species-photos.json'), 'utf8')) as
-    Record<string, { specimens?: Array<{ tiles_path: string }> }>;
-  const highres: string[] = [];
-  for (const entry of Object.values(photos)) {
-    for (const specimen of entry.specimens ?? []) {
-      if (specimen.tiles_path) highres.push(`${specimen.tiles_path}_thumbnail.webp`);
-    }
-  }
-
-  const glossaryRows = parse(readFileSync(join(dataDir, 'glossary.csv')), {
-    columns: true, skip_empty_lines: true,
-  }) as Array<{ image_filename?: string }>;
-  const glossary = glossaryRows
-    .map((r) => r.image_filename)
-    .filter((f): f is string => Boolean(f))
-    .map((f) => `glossary/${f}`);
-
-  return { legacy, highres, glossary };
 }
 
 // ---------------------------------------------------------------------------
@@ -205,7 +172,7 @@ export function groupBySource(specs: readonly DerivativeSpec[]): Map<string, Der
 
 async function main(): Promise<void> {
   const sources = readSources(resolve('data'));
-  let specs = buildWorkList(sources);
+  let specs = buildWorkList(sourcePaths(sources));
   if (KIND) specs = specs.filter((s) => s.kind === (KIND as SourceKind));
 
   const manifest = readManifest(MANIFEST_PATH);

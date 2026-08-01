@@ -84,10 +84,26 @@ Four parts:
    `src/components/key-results-grid.ts`, `src/glossary/index.njk`, `src/_lib/social-meta.ts` — all
    route through it. Five hand-built URL patterns is how a variant silently stops existing.
 
-4. **A committed derivative manifest + build-time guard.** The generator writes
-   `data/image-derivatives.csv`; a build check fails when a template references a derivative absent
-   from it. The check reads the manifest rather than issuing ~12,000 HEAD requests, which keeps it
-   offline, fast, and reproducible ([0017](0017-reproducible-committed-artifacts.md)).
+4. **A committed derivative manifest + build-time guard.** `scripts/upload-derivatives.ts` writes
+   `data/image-derivatives.csv` from its *uploaded* rows, so the file records what is on the CDN
+   rather than what exists on a laptop. `scripts/check-derivatives.ts` then runs two gates against
+   it, offline — reading the manifest rather than issuing ~23,000 HEAD requests keeps the check
+   fast and reproducible ([0017](0017-reproducible-committed-artifacts.md)):
+
+   - **Emitted gate** — every `derived/` URL in the built HTML must be a manifest row. Catches a
+     template asking for a variant nobody generates.
+   - **Source gate** — every source image a built page can reach must have its *whole* variant set
+     in the manifest. Catches a photo that was uploaded but never derived, which the emitted gate
+     cannot see: `pnwm-taxon-browser` and `key-results-grid` assemble their thumbnail URLs in the
+     browser, so those URLs are never in the HTML at all.
+
+   The source gate is scoped to species that actually build — same withheld-family and
+   unpublished-species gates as `src/_data/species.ts`. That scoping is load-bearing, not a
+   convenience: `data/images.csv` carries 83 rows for 27 Geometridae whose files are simply absent
+   from the CDN ([#232](https://github.com/pnwinsects/pnwmoths/issues/232)). Geometridae is withheld,
+   so no page renders them and an unscoped gate would fail every build over images nobody can see.
+   Scope is derived from `data/species.csv` rather than read back out of `_site/`, which Eleventy
+   does not clean between builds — a stale directory would silently widen it.
 
 The guard is the load-bearing part. Today a curator uploads a JPEG and the edge compresses, converts
 and resizes it with no pipeline knowledge required — which is exactly the
@@ -127,6 +143,11 @@ and this is the only way to exercise the loss of auto-WebP without experimenting
   bandwidth improvement rather than a cost.
 - Derivatives are reproducible, so `derived/` can be regenerated wholesale if the convention changes;
   the old objects simply linger, which the additive-only zone tolerates.
+- **Lifting the Geometridae embargo now fails the build**, naming the 83 absent source images. That
+  is the intended behaviour rather than a trap: publishing those 27 pages today would publish broken
+  `<img>` tags, and the guard is the first thing in the project that would say so — `lychee.toml`
+  excludes image extensions, so CI has never verified an image URL
+  ([#232](https://github.com/pnwinsects/pnwmoths/issues/232)).
 - Re-enabling the Optimizer remains a single dashboard toggle if any of this proves wrong.
 
 ## Alternatives considered

@@ -78,7 +78,13 @@ Add a row to `data/images.csv` for the new image:
 | specimen | string | no | `A`, `B`, `C`, `D` |
 | navigational | boolean | no | leave blank unless this is a curated navigation image |
 
-### 5. Invalidate CDN cache (replacing an existing file only)
+### 5. Generate the image's derivatives
+
+**Required — the build fails without this.** The site displays pre-generated derivatives, not the
+file you just uploaded, so a new image is invisible until it has been through
+[GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md). Follow that runbook, then come back.
+
+### 6. Invalidate CDN cache (replacing an existing file only)
 
 When replacing an image that was already served by the CDN, the cached version may be stale for hours. Purge it:
 
@@ -97,8 +103,8 @@ For new uploads (filename not previously served), no purge is needed.
 # File appears in Storage Zone
 rclone ls bunny:acronicta-americana/ | grep "Acronicta americana"
 
-# Build still passes
-npm run build:data
+# Build still passes, including the derivative guard
+npm run build:site
 ```
 
 Then open `https://moths.pnwinsects.org/{slug}/{url-encoded-filename}` in a browser — the image should load.
