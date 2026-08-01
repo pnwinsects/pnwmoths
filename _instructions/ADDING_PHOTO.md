@@ -1,71 +1,120 @@
 # Task: Add a Photo for a Species
 
+Photos are **not stored in this repository.** They live on the Bunny CDN, and the repo holds only a
+row of metadata describing each one. Adding a photo is therefore three steps in three places, and
+skipping any of them means the photo does not appear:
+
+1. Upload the image file to the CDN — [UPLOADING_IMAGES.md](UPLOADING_IMAGES.md)
+2. Generate its display variants — [GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md)
+3. Add a row to `data/images.csv` — this guide
+
+The build fails if you do 3 without 1 and 2, naming the file it cannot find. That is deliberate.
+
 ## What This Changes
-- `images/{slug}/` — new image file (tracked by Git LFS)
-- `data/images.csv` — new row referencing the image
-- Build output: photo appears on the species page
+
+- **bunny.net Storage Zone `pnwmoths`** — the image file, and its `derived/` variants
+- **`data/images.csv`** — one new row
+- **`data/image-derivatives.csv`** — rows recording the uploaded variants (written for you)
+- Build output: the photo appears on the species page
 
 ## Schema: data/images.csv
 
 | Field | Type | Required | Example |
 |-------|------|----------|---------|
-| species_id | integer | yes | 1 (must match an id in species.csv) |
-| filename | string | yes | 02.jpg |
-| photographer | string | yes | Jane Doe |
-| weight | integer | yes | 2 (display order; lower = earlier) |
-| license | string | yes | CC BY 4.0 (see License conventions below) |
-| view | string | no | dorsal |
-| specimen | string | no | A |
+| species_slug | string | yes | `acronicta-americana` |
+| filename | string | yes | `Acronicta americana-A-D.jpg` |
+| photographer | string | yes | `Merrill A. Peterson` |
+| weight | integer | yes | `2` (display order within the species; lower sorts first) |
+| license | string | yes | `CC BY-NC-SA 4.0` (see below) |
+| view | string | no | `dorsal`, `ventral`, `lateral`, or `head` |
+| specimen | string | no | Specimen letter (`A`, `B`, `C`, `D`) when several are shown |
+| navigational | string | no | Leave blank unless this is the curated navigation image |
+| locality | string | no | `Quartz Mt.` |
+| state | string | no | `WA` |
+| latitude | decimal | no | `47.074` |
+| longitude | decimal | no | `-121.061` |
+| elevation_ft | integer | no | `5324` |
+| year | integer | no | `2005` |
+| month | integer | no | `7` |
+| day | integer | no | `14` |
+| collector | string | no | `Crabo/Coughlin` |
+| subspecies | string | no | |
+
+**The species is referenced by `species_slug`, not by a numeric id.** The slug is
+`(genus + '-' + species).toLowerCase()` with spaces hyphenated — `acronicta-americana`. It is not
+stored in `data/species.csv`; derive it from the genus and species columns.
+
+**`filename` must contain only letters, digits, spaces, dots, hyphens and underscores.** The build
+rejects anything else. Spaces are fine and common — `Acronicta americana-A-D.jpg` is the normal
+shape, and the filename must match what you uploaded exactly.
 
 ### License conventions
 
-| Situation | license value | Example |
-|-----------|--------------|---------|
-| Creative Commons | The CC license identifier | `CC BY 4.0` |
-| Copyrighted (used with permission) | `(c) Photographer Name` | `(c) Merrill Peterson` |
+| Situation | `license` value | Example |
+|-----------|-----------------|---------|
+| Creative Commons | The CC licence identifier | `CC BY-NC-SA 4.0` |
+| Copyrighted, used with permission | `(c) Photographer Name` | `(c) Merrill Peterson` |
 | Public domain | `public domain` | `public domain` |
-
-The `view` and `specimen` fields are optional. When importing from the source site, these can be extracted from the original filename (e.g., `B-V-acronicta-americana-01.jpg` where B = specimen, V = ventral).
-
-- `view`: View angle — `dorsal`, `ventral`, `lateral`, or `head`
-- `specimen`: Specimen identifier letter (`A`, `B`, `C`, `D`) when multiple specimens are shown
 
 ## Steps
 
-1. Find the `species_id` and slug for the target species in `data/species.csv`.
+**1. Confirm the species exists.** Find its row in `data/species.csv` and work out the slug. If the
+species is not there yet, do [ADDING_SPECIES.md](ADDING_SPECIES.md) first — the build checks
+referential integrity and will reject a photo for a species it does not know.
 
-2. Copy the image file into `images/{slug}/`. Use a sequential filename (e.g., if `01.jpg` exists, use `02.jpg`). Images must be `.jpg`, `.jpeg`, or `.png`.
+**2. Upload the image to the CDN.** Follow [UPLOADING_IMAGES.md](UPLOADING_IMAGES.md). Keep the
+original filename; do not rename it.
 
-3. Open `data/images.csv`. Add a row:
-   ```csv
-   1,02.jpg,Jane Doe,2,CC BY 4.0,dorsal,A
-   ```
+**3. Generate and upload the derivatives.** Follow
+[GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md). This is what actually gets displayed.
 
-4. **Git LFS steps (required for images):**
-   - Ensure Git LFS is installed: `git lfs install`
-   - LFS tracking is automatic via `.gitattributes` (patterns: `images/**/*.jpg`, `images/**/*.jpeg`, `images/**/*.png`)
-   - Verify: `git lfs status` should show the new image as an LFS object
-   - Stage the image: `git add images/{slug}/{filename}` — this stages the LFS pointer, not the raw binary
+**4. Add the row to `data/images.csv`:**
 
-5. Verify the build:
-   ```bash
-   npm run build
-   ```
-   Expected: build completes. The species page shows the new photo.
+```csv
+acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,2,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
+```
 
-6. Commit and push:
-   ```bash
-   git add data/images.csv images/{slug}/{filename}
-   git commit -m "Add photo for [species name]"
-   git push
-   ```
+Count the commas — there are 18 columns, and trailing blanks still need their separators. Easiest is
+to copy an existing row for the same species and edit it.
+
+**5. Verify the build:**
+
+```bash
+npm run build:site
+```
+
+Expected: the build completes, ending with `[check-derivatives] PASS: …`.
+
+**6. Commit:**
+
+```bash
+git add data/images.csv data/image-derivatives.csv
+git commit -m "Add photo for Acronicta americana"
+git push
+```
 
 ## Verify
-- Expected: `_site/species/{slug}/index.html` includes an `<img>` tag for the new photo.
-- Expected: `git lfs status` shows the image file as tracked by LFS.
-- Failure: If image appears as broken on deployed site, LFS was not pulled before build — run `git lfs pull` first.
+
+- `_site/species/{slug}/index.html` contains an `<img>` for the new photo.
+- Open the species page in a browser and confirm the image loads.
+
+## Reading a failure
+
+**`[check-derivatives] SOURCE GATE FAILED … missing @320h, @full`** — the row is in the CSV but the
+derivatives are not on the CDN. You skipped step 3, or it did not finish. See
+[GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md).
+
+**`Invalid image filename "…" in images.csv`** — the filename contains a character outside
+`a-z A-Z 0-9 space . _ -`. Rename the file on the CDN and in the CSV to match.
+
+**`data/images.csv is missing required column: "…"`** — a column was deleted or the header was
+edited. Restore it; blanks are fine, missing columns are not.
+
+**The photo does not appear but the build passed** — check `species_slug` matches the species page's
+URL segment exactly. A typo there produces a row that belongs to no species, and nothing complains.
 
 ## Docker Alternative
+
 ```bash
-docker compose run --rm dev npm run build
+docker compose run --rm dev npm run build:site
 ```

@@ -7,12 +7,14 @@ including photos and occurrence records. Each step references a detailed task gu
 
 | Step | Guide | What it does |
 |------|-------|--------------|
-| 1 | ADDING_SPECIES.md | Add species row to CSV, get its `id` |
-| 2 | ADDING_PHOTO.md | Add photos using the `id` from step 1 |
-| 3 | ADDING_RECORDS.md | Add occurrence records using the `id` from step 1 |
+| 1 | ADDING_SPECIES.md | Add the species row to `data/species.csv` |
+| 2 | ADDING_PHOTO.md | Upload photos to the CDN and add their metadata rows |
+| 3 | ADDING_RECORDS.md | Add occurrence records |
 
-**Important:** Species must be added first (step 1) because photos and records
-reference the species by its `id` field (`species_id` in images.csv and records.csv).
+**Important:** the species must be added first (step 1), because photos and records reference it by
+**`species_slug`** — `(genus + '-' + species).toLowerCase()`, spaces hyphenated. The `id` column in
+`species.csv` is that file's own primary key and appears nowhere else. The build validates
+referential integrity, so a photo or record for an unknown slug fails the build.
 
 ## Workflow
 
@@ -22,34 +24,33 @@ Follow [ADDING_SPECIES.md](ADDING_SPECIES.md). That guide includes adding the sl
 `src/_data/speciesSlugs.json` — don't skip it, or links to this species from the old WWU
 site will strand visitors on Browse.
 
-After completing that guide, note the `id` you assigned — you will use it
-as `species_id` in the next two steps.
+After completing that guide, note the species **slug** — you will use it in the next two steps.
 
 ### Step 2: Add photos (optional)
 
-Follow [ADDING_PHOTO.md](ADDING_PHOTO.md).
-
-Use the `id` from step 1 as `species_id` in `data/images.csv`.
+Follow [ADDING_PHOTO.md](ADDING_PHOTO.md). Photos are not stored in this repo: the file goes to the
+CDN, its display variants are generated, and only a metadata row lands in `data/images.csv`. All
+three are required or the build fails.
 
 ### Step 3: Add occurrence records (optional)
 
-Follow [ADDING_RECORDS.md](ADDING_RECORDS.md).
-
-Use the `id` from step 1 as `species_id` in `data/records.csv`.
+Follow [ADDING_RECORDS.md](ADDING_RECORDS.md), using the slug in the `species_slug` column of
+`data/records.csv`.
 
 ### Step 4: Build and verify
 
 Run a single build to verify everything together:
 
 ```bash
-npm run build
+npm run build:site
 ```
 
 Expected:
 - New species page exists at `_site/species/{slug}/index.html`
 - Photos appear on the species page (if added)
-- `_site/species/{slug}/data.parquet` exists (if records added)
+- `_site/species/{slug}/records.parquet` exists (if records added)
 - Species appears on the browse page at `_site/browse/index.html`
+- The run ends with `[check-derivatives] PASS: …`
 
 ### Step 5: Commit and push
 
@@ -57,8 +58,8 @@ Stage all changed files in a single commit:
 
 ```bash
 git add data/species.csv src/_data/speciesSlugs.json
-# If you added photos:
-git add data/images.csv images/{slug}/
+# If you added photos (the image files themselves live on the CDN, not here):
+git add data/images.csv data/image-derivatives.csv
 # If you added records:
 git add data/records.csv
 # If you created a description file:
@@ -70,5 +71,5 @@ git push
 ## Docker Alternative
 
 ```bash
-docker compose run --rm dev npm run build
+docker compose run --rm dev npm run build:site
 ```
