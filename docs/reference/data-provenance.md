@@ -32,6 +32,22 @@ Two reasons:
 
 Use `curl` whenever you need verbatim legacy text.
 
+**As of 2026-08 the legacy host 301s to the new site** (`/browse-all/` →
+`moths.pnwinsects.org/redirect.html?from=/browse-all/`), so this recipe no
+longer returns legacy HTML for every path. Two fallbacks, in order:
+
+- <https://dev.pnwmoths.biol.wwu.edu/> still serves the original site, including
+  the pages that have been cut over. It is login-gated, so `curl` will not reach
+  it — use a browser session. This is the authority for what the old site
+  *rendered*, as opposed to what it stored.
+- The reference MySQL database below holds the same content and, for the browse
+  hierarchy, holds it in a more usable form.
+
+The distinction matters: the rendered page and the stored tree agree on ordering
+(verified for the browse hierarchy), but only the rendered page tells you what
+the UI actually did — e.g. `/browse-all/` and `/browse/` were two separate pages
+linked by a "Browse with Images" anchor, not one page with a toggle.
+
 ## Reference MySQL database (original CMS data)
 
 The original site's CMS data is preserved in a local Docker container named
@@ -66,6 +82,13 @@ when the reference data changes):
   join tables — the species-to-plate assignment is a curatorial layout
   decision (which numbered plate a genus landed on) and is not derivable from
   `family`/`subfamily`/`tribe` alone.
+- [`scripts/extract-taxon-order.ts`](../../scripts/extract-taxon-order.ts)
+  → `data/taxon-order.csv` + `data/species-order.csv` (checklist order, issue
+  #218). Reads the `cms_page` / `cms_title` browse subtree: the CMS is a
+  django-cms install whose page tree is stored as an MPTT nested set, and its
+  left-to-right order *is* the curated checklist sequence the legacy
+  `/browse-all/` page rendered. Ordering is not derivable from `species.csv`
+  (see [data/README.md](../../data/README.md#checklist-order)).
 - [`scripts/backfill-legacy-county.ts`](../../scripts/backfill-legacy-county.ts)
   → legacy county backfill.
 - [`scripts/recover-clipped-bc-records.ts`](../../scripts/recover-clipped-bc-records.ts)

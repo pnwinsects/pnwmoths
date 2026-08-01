@@ -125,6 +125,8 @@ erDiagram
 | `glossary.csv` | ~150 | Wing-anatomy and taxonomy terms injected into species fact sheets at build time. |
 | `species-links.csv` | ~2 400 | Per-species external links (BugGuide, Moth Photographers Group, Butterflies and Moths of North America). Long format: one row per link (`species_slug,site,url`); a species may have several. Extracted from the legacy reference MySQL DB by [`scripts/extract-reference-links.ts`](../scripts/extract-reference-links.ts) (`npm run links:materialize`). |
 | `plates.json` | ~50 | Reference plate metadata (legacy moth-guide plates). Width/height used for CDN image sizing. |
+| `taxon-order.csv` | ~480 | Checklist (phylogenetic) order of the higher taxa — family, subfamily, tribe, genus. Columns `rank,name`; **row order is the data**. See [Checklist order](#checklist-order) below. |
+| `species-order.csv` | ~300 | Species order for the 30 genera the reference site does *not* list alphabetically. Columns `genus,species_slug`; **row order is the data**. Genera absent from this file are alphabetical. |
 | `parquet/<slug>/records.parquet` | varies | Per-species records, materialized by `scripts/build-data.js` for fast DuckDB queries at build time. |
 
 ## Taxonomy provenance (`family` / `subfamily` / `tribe`)
@@ -163,6 +165,19 @@ curator file and must see exactly that file. So do `derive-district-audit.ts` an
 `emit-records-district-audit.ts`, whose artifact is keyed by row index into `records.csv` and
 whose question ("does the curator's stated county agree with the coordinates?") is meaningless
 for imported rows, whose county *is* derived from those coordinates.
+
+## Checklist order
+
+Professional users read the catalog in **checklist order** — the phylogenetic sequence a printed checklist uses (Drepanidae before Noctuidae; *Habrosyne* before *Ceranemota*) — not alphabetically. Nothing else in `data/` encodes it: `noc_id` is unusable as a sort key (blanks, three incompatible formats, and duplicate values) and says nothing about the order of families, subfamilies, or tribes.
+
+Two files record it, both as flat lists in which **row order is the data**. There is deliberately **no ordinal column** — an integer would have to be renumbered downstream of every insertion. To move a taxon, move its line; to add one, insert a line.
+
+- **`taxon-order.csv`** — one line per family, subfamily, tribe, and genus. Higher-taxon names are globally unique in this dataset, so no lineage columns are needed; rank and membership already live in `species.csv`.
+- **`species-order.csv`** — one line per species, but **only for the 30 genera whose order is not alphabetical**. The reference site lists species alphabetically by epithet in the other 361, which the site does for free, so recording them would be ~1,100 lines of redundancy to keep in sync. A listed genus is written out whole, so the file reads as "this is the order" rather than "these are the corrections".
+
+The non-alphabetical genera are real, not an artifact — the live reference site shows *Apamea* ending `… vultuosa, unanimis, zeta` and *Noctua* as `pronuba, comes`. They look like species appended to a genus page over the years rather than inserted, but they are what the original renders, so they are reproduced.
+
+Both are materialized by [`scripts/extract-taxon-order.ts`](../scripts/extract-taxon-order.ts) from the legacy CMS page tree, whose nested-set ordering *is* the curated sequence. Anything absent from these files falls back to alphabetical; the script reports every taxon it could not place so the fallback is a visible decision rather than a silent one.
 
 ## Slug convention
 
