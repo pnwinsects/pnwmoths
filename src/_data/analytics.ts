@@ -146,6 +146,13 @@ export const RawDaySchema = z.object({
   total_bytes: z.number(),
   visitor_hll: z.optional(z.string()),
   pageviews: z.array(DayEntrySchema),
+  // Length deliberately unchecked. fetch-analytics.ts builds this as
+  // `new Array(24).fill(0)` and writes only indices 0-23, so a wrong length means a
+  // corrupt file — but both readers index a fixed 0..23 loop with `?? 0`, so a short
+  // array costs one bar of the hourly chart and a long one has its tail ignored.
+  // Rejecting the file here would discard the whole day instead: its pageviews,
+  // unique visitors, referrers, countries and redirect backlog. Pinned by
+  // "aggregateDays tolerates a wrong-length requests_by_hour" in analytics.test.ts.
   requests_by_hour: z.array(z.number()),
   referrers: z.array(z.object({ domain: z.string(), count: z.number() })),
   countries: z.array(z.object({ code: z.string(), count: z.number() })),

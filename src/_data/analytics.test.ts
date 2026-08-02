@@ -179,3 +179,55 @@ describe('readDay validates the external daily files', () => {
     assert.deepEqual(roundTripped.date, valid.date);
   });
 });
+
+// ---------------------------------------------------------------------------
+// requests_by_hour is a 24-slot contract. scripts/fetch-analytics.ts builds it
+// as `new Array(24).fill(0)` and only ever writes indices 0-23, so a wrong length
+// means a corrupt or hand-edited file.
+//
+// RawDaySchema deliberately does NOT enforce the length, and these tests pin why:
+// both readers (aggregateDays below, and pnwm-analytics-dashboard) index a fixed
+// 0..23 loop with `?? 0`, so a short array loses one bar of the hourly chart and a
+// long one has its tail ignored — while every other metric for that day survives.
+// Rejecting the file in readDay would instead discard the whole day: its
+// pageviews, unique visitors, referrers, countries, redirect misses and 404s.
+// That is a far worse trade for a defect the consumers already absorb, and
+// analytics data is irrecoverable after Bunny's 72-hour log retention.
+// ---------------------------------------------------------------------------
+
+describe('aggregateDays tolerates a wrong-length requests_by_hour', () => {
+  const withHours = (hours: number[]): RawDay => day('2026-06-29', { requests_by_hour: hours });
+
+  test('a full 24-hour day sums every hour', () => {
+    const out = aggregateDays([withHours(new Array<number>(24).fill(1))]).rolling30.requests_by_hour;
+    assert.equal(out.length, 24);
+    assert.equal(out.reduce((a, b) => a + b, 0), 24);
+  });
+
+  test('a short array loses only the missing hours — no NaN, no dropped day', () => {
+    const result = aggregateDays([withHours(new Array<number>(23).fill(1))]);
+    const out = result.rolling30.requests_by_hour;
+    assert.equal(out.length, 24, 'output is always 24 slots regardless of input length');
+    assert.equal(out.reduce((a, b) => a + b, 0), 23);
+    assert.ok(!out.some(Number.isNaN), 'a missing hour reads as 0, never NaN');
+    assert.equal(result.days.length, 1, 'the day itself is still counted');
+    assert.equal(result.rolling30.total_pageviews, 50, 'its other metrics are intact');
+  });
+
+  test('a long array has its tail ignored rather than overflowing the chart', () => {
+    const out = aggregateDays([withHours(new Array<number>(25).fill(1))]).rolling30.requests_by_hour;
+    assert.equal(out.length, 24);
+    assert.equal(out.reduce((a, b) => a + b, 0), 24, 'the 25th entry is not counted');
+  });
+
+  test('readDay keeps such a file rather than discarding the day', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'pnwm-analytics-'));
+    try {
+      const path = join(dir, '2026-06-29.json');
+      writeFileSync(path, JSON.stringify(withHours(new Array<number>(23).fill(1))));
+      assert.equal(readDay(path)?.requests_by_hour.length, 23);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
