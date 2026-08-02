@@ -983,9 +983,34 @@
     "high_res_available": true,
     "specimens": [
       {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/acronicta-insita/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/acronicta-insita/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/acronicta-insita/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/acronicta-insita/B-V"
+      },
+      {
         "specimen_id": "C",
         "view": "D",
         "tiles_path": "species-tiles/acronicta-insita/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/acronicta-insita/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -4965,6 +4990,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "callopistria-floridensis": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/callopistria-floridensis/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/callopistria-floridensis/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "calophasia-lunula": {
     "high_res_available": true,
     "specimens": [
@@ -5849,6 +5891,50 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/clostera-albosigma/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "clostera-brucei": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/clostera-brucei/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/clostera-brucei/C-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "clostera-multnoma": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/clostera-multnoma/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/clostera-multnoma/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/clostera-multnoma/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/clostera-multnoma/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -7643,6 +7729,23 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/drasteria-inepta/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "drasteria-maculosa": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/drasteria-maculosa/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/drasteria-maculosa/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
