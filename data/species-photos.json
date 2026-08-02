@@ -3902,6 +3902,40 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "apantesis-behrii": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-behrii/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-behrii/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-blakei": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-blakei/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-blakei/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "apantesis-carlotta": {
     "high_res_available": true,
     "specimens": [
@@ -3924,6 +3958,371 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/apantesis-carlotta/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-complicata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-complicata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-complicata/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-doris": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-doris/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-doris/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-edwardsii": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-edwardsii/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-edwardsii/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-edwardsii/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-edwardsii/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-elongata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-elongata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-elongata/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-elongata/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-elongata/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-elongata/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-elongata/C-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-eureka": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-eureka/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-eureka/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-margo": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-margo/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-margo/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-nevadensis": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-nevadensis/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-nevadensis/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-nevadensis/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-nevadensis/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-nevadensis/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-nevadensis/C-V"
+      },
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-nevadensis/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-nevadensis/D-V"
+      },
+      {
+        "specimen_id": "E",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-nevadensis/E-D"
+      },
+      {
+        "specimen_id": "E",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-nevadensis/E-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-ornata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-ornata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-ornata/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-ornata/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-ornata/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-ornata/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-ornata/C-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-parthenice": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-parthenice/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-parthenice/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-quenseli": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-quenseli/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-quenseli/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-quenseli/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-quenseli/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-speciosa": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-speciosa/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-speciosa/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-virgo": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-virgo/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-virgo/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-virguncula": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-virguncula/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-virguncula/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-williamsii": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-williamsii/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-williamsii/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "apantesis-yukona": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-yukona/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-yukona/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/apantesis-yukona/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/apantesis-yukona/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -5028,6 +5427,16 @@
     "high_res_available": true,
     "specimens": [
       {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/calosaturnia-mendocino/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/calosaturnia-mendocino/A-V"
+      },
+      {
         "specimen_id": "B",
         "view": "D",
         "tiles_path": "species-tiles/calosaturnia-mendocino/B-D"
@@ -5577,6 +5986,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "cecrita-lunata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/cecrita-lunata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/cecrita-lunata/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "ceranemota-crumbi": {
     "high_res_available": true,
     "specimens": [
@@ -5969,6 +6395,60 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/clostera-strigosa/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "coelodasys-conspecta": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/coelodasys-conspecta/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/coelodasys-conspecta/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/coelodasys-conspecta/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/coelodasys-conspecta/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "coelodasys-unicornis": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/coelodasys-unicornis/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/coelodasys-unicornis/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/coelodasys-unicornis/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/coelodasys-unicornis/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -9564,6 +10044,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "euxoa-absona": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/euxoa-absona/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/euxoa-absona/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "euxoa-adumbrata": {
     "high_res_available": true,
     "specimens": [
@@ -11001,6 +11498,33 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/euxoa-lineifrons/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "euxoa-lucida": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/euxoa-lucida/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/euxoa-lucida/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/euxoa-lucida/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/euxoa-lucida/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -12878,6 +13402,67 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "globia-alameda": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/globia-alameda/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/globia-alameda/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/globia-alameda/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/globia-alameda/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "globia-oblonga": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/globia-oblonga/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/globia-oblonga/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "globia-subflava": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/globia-subflava/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/globia-subflava/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "gluphisia-avimacula": {
     "high_res_available": true,
     "specimens": [
@@ -14624,6 +15209,23 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/hyppa-indistincta/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "ianassa-pallida": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/ianassa-pallida/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/ianassa-pallida/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -17131,6 +17733,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "manulea-bicolor": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/manulea-bicolor/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/manulea-bicolor/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "marathyssa-inficita": {
     "high_res_available": true,
     "specimens": [
@@ -18457,6 +19076,50 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/ochropleura-implecta/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "oedemasia-salicis": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/oedemasia-salicis/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/oedemasia-salicis/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "oedemasia-semirufescens": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/oedemasia-semirufescens/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/oedemasia-semirufescens/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/oedemasia-semirufescens/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/oedemasia-semirufescens/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -25728,6 +26391,18 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/syngrapha-rectangula/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "syngrapha-surena": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/syngrapha-surena/A-D"
       }
     ],
     "photographer": "Merrill Peterson",
