@@ -1,6 +1,5 @@
 import { DuckDBInstance } from '@duckdb/node-api';
-import { readFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import photos from '../../data/species-photos.json' with { type: 'json' };
 import type { TaxonFamily, TaxonGenus, TaxonSubfamily, TaxonTribe, NavImage, SpeciesPhoto } from '../types/index.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
@@ -44,14 +43,14 @@ interface NavImageDbRow {
 }
 
 /**
- * Load data/species-photos.json (the high-res photo manifest) as a slug→entry
- * map. Missing file soft-fails to `{}`, mirroring src/_data/speciesPhotos.ts.
+ * The high-res photo manifest as a slug→entry map.
+ *
+ * Imported rather than read so the compiler verifies the committed file against
+ * `SpeciesPhoto` (#250); the annotation is what makes the import a check rather
+ * than an inference. This also drops a `resolve('data/species-photos.json')`
+ * that silently depended on the process cwd being the repo root.
  */
-function loadHighResPhotos(): Record<string, SpeciesPhoto> {
-  const path = resolve('data/species-photos.json');
-  if (!existsSync(path)) return {};
-  return JSON.parse(readFileSync(path, 'utf8')) as Record<string, SpeciesPhoto>;
-}
+const HIGH_RES_PHOTOS: Record<string, SpeciesPhoto> = photos;
 
 /**
  * Build a synthetic navImage from a high-res manifest entry for a species that
@@ -232,7 +231,7 @@ export default async function (): Promise<TaxonFamily[]> {
   // Fallback: species with only high-res pipeline photos (in species-photos.json)
   // and no images.csv row get a synthetic navImage so they still show a browse
   // thumbnail (issue #84). images.csv rows always win when both exist.
-  const highResPhotos = loadHighResPhotos();
+  const highResPhotos = HIGH_RES_PHOTOS;
   for (const row of speciesRows) {
     if (bySpeciesSlug[row.slug]?.length) continue;
     const navImg = highResNavImage(row.slug, highResPhotos[row.slug]);

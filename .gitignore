@@ -13,7 +13,12 @@ images/
 # it lives in the repo and is served from public/, Vite's publicDir. Re-included
 # explicitly so it does not have to be force-added past the rule above.
 !public/images/
-plates/
+# Anchored: the ignore is for the top-level Zoomify tile staging directory that
+# _instructions/ADDING_PLATE.md tells you to copy plates into. Unanchored, it also
+# swallowed src/plates/ — the tracked .njk templates there survived only because
+# they predate the rule, and any new file would have been silently untracked.
+# Same trap the images/ rule above works around with its !src/**/images/ re-include.
+/plates/
 cdn-old-locations.txt
 cdn-bad-slug-old-locations.txt
 

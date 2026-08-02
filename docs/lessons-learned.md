@@ -445,6 +445,15 @@ cost a debugging cycle to discover.
   Mutation-test the guard afterwards: reintroduce the bug and confirm it goes red. A guard you
   haven't watched fail is a guess.
 
+- **A committed JSON file can be checked by the compiler, not just cast.** `resolveJsonModule`
+  is on, so `import data from '../../data/x.json' with { type: 'json' }` gives a type inferred from
+  the file's real contents — and assigning that to a declared interface verifies the committed bytes
+  at compile time. Measured cost: 0.08s of `tsc` for a 660 KB file. This is strictly stronger than
+  `as`, which only asserts, and it caught a cast in `src/_data/plates.ts` that claimed `title` and
+  `description` on manifest entries that have never had either (#250). It works only for files with
+  a fixed path that ship in the repo; anything read at runtime, or discovered by listing a
+  directory, still needs zod at the boundary.
+
 - **Reproducible is not the same as current.** A committed artifact can be perfectly
   deterministic and still disagree with its inputs, because nothing forces whoever changed the
   inputs to regenerate it. `data/key-matrix.json` stayed stale for months after a photo was added

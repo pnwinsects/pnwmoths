@@ -4,7 +4,10 @@
 // already sitting on Bunny storage (those files have no legacy-link fields at all).
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { aggregateDays, type RawDay } from './analytics.ts';
+import { aggregateDays, readDay, RawDaySchema, type RawDay } from './analytics.ts';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 function day(date: string, overrides: Partial<RawDay> = {}): RawDay {
   return {
@@ -104,5 +107,75 @@ describe('aggregateDays: legacy links (#181)', () => {
     );
     const result = aggregateDays(days);
     assert.equal(result.rolling30.redirect_hits.total, 30);
+  });
+});
+
+
+// ---------------------------------------------------------------------------
+// readDay: the one JSON the build reads that does not come from the repo (#250)
+// ---------------------------------------------------------------------------
+
+describe('readDay validates the external daily files', () => {
+  function withFile<T>(name: string, contents: string, fn: (path: string) => T): T {
+    const dir = mkdtempSync(join(tmpdir(), 'pnwm-analytics-'));
+    try {
+      const path = join(dir, name);
+      writeFileSync(path, contents);
+      return fn(path);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  }
+
+  const valid: RawDay = day('2026-06-29');
+
+  test('accepts a well-formed day file', () => {
+    withFile('2026-06-29.json', JSON.stringify(valid), (path) => {
+      assert.deepEqual(readDay(path)?.date, '2026-06-29');
+    });
+  });
+
+  test('accepts a schema_version 2 file, which has no legacy-link fields', () => {
+    // These are still in the archive on Bunny; rejecting them would drop real days.
+    const { redirect_hits: _h, redirect_misses: _m, not_found: _n, ...v2 } = valid;
+    withFile('2026-01-01.json', JSON.stringify(v2), (path) => {
+      assert.equal(readDay(path)?.date, valid.date);
+    });
+  });
+
+  test('tolerates unknown keys, so a newer writer does not break an older build', () => {
+    withFile('2026-06-29.json', JSON.stringify({ ...valid, schema_version: 99, brand_new: [] }), (path) => {
+      assert.equal(readDay(path)?.date, '2026-06-29');
+    });
+  });
+
+  test('skips a file that is not valid JSON rather than failing the build', () => {
+    withFile('broken.json', '{"date": "2026-06-29",', (path) => {
+      assert.equal(readDay(path), null);
+    });
+  });
+
+  test('skips a file whose shape is wrong — the case the `as` cast let through', () => {
+    // total_requests as a string reached the page as NaN before this (#250).
+    withFile('bad.json', JSON.stringify({ ...valid, total_requests: 'lots' }), (path) => {
+      assert.equal(readDay(path), null);
+    });
+  });
+
+  test('skips a file missing a required field', () => {
+    const { pageviews: _p, ...missing } = valid;
+    withFile('bad.json', JSON.stringify(missing), (path) => {
+      assert.equal(readDay(path), null);
+    });
+  });
+
+  test('RawDaySchema and the RawDay type stay in step', () => {
+    // The type is inferred from the schema, so this is a compile-time tautology
+    // that becomes a runtime check if anyone replaces the inference with a hand
+    // written interface.
+    const parsed = RawDaySchema.safeParse(valid);
+    assert.ok(parsed.success);
+    const roundTripped: RawDay = parsed.data;
+    assert.deepEqual(roundTripped.date, valid.date);
   });
 });

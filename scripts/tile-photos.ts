@@ -35,13 +35,14 @@
 
 import { resolve, join, dirname } from 'node:path';
 import { mkdir, unlink } from 'node:fs/promises';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
 import type { MatchBucket } from './lib/parse-photo-filename.ts';
 import { downloadSharedFile } from './lib/dropbox-download.ts';
 import { pathToFileURL } from 'node:url';
+import tileConfig from './tile-config.json' with { type: 'json' };
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; D-10 env-vars-at-invocation;
@@ -49,7 +50,6 @@ import { pathToFileURL } from 'node:url';
 // ---------------------------------------------------------------------------
 
 const MANIFEST_PATH: string = resolve('data/species-photos-manifest.csv');
-const TILE_CONFIG_PATH: string = resolve('scripts/tile-config.json');
 const DROPBOX_TOKEN: string = process.env['DROPBOX_TOKEN'] ?? '';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
@@ -309,7 +309,9 @@ function uploadThumbnailToCdn(localPath: string, row: ManifestRow): void {
 
 async function main(): Promise<void> {
   // --- Load config (TILE-03: parameters live in tile-config.json, not the script). ---
-  const config = JSON.parse(readFileSync(TILE_CONFIG_PATH, 'utf8')) as TileConfig;
+  // Imported, so the compiler checks the committed config against TileConfig and
+  // the path no longer depends on the process cwd being the repo root (#250).
+  const config: TileConfig = tileConfig;
 
   // --- Resolve runtime dirs: env override takes precedence over config file. ---
   const tileOutputDir: string = TILE_OUTPUT_DIR_OVERRIDE || config.tileOutputDir;
