@@ -37,7 +37,7 @@ import { rm, unlink, readdir } from 'node:fs/promises';
 import { existsSync, statSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
-import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
+import { readManifest, writeManifest, advanceStatus, holdManifestLock } from './lib/manifest.ts';
 import type { View } from './lib/parse-photo-filename.ts';
 import { pathToFileURL } from 'node:url';
 import tileConfig from './tile-config.json' with { type: 'json' };
@@ -257,6 +257,13 @@ async function main(): Promise<void> {
 
   // --- Resolve runtime dirs: env override takes precedence over config file. ---
   const tileOutputDir: string = TILE_OUTPUT_DIR_OVERRIDE || config.tileOutputDir;
+
+  // --- Mutual exclusion (#234). ---
+  // "Tiling is 60% done, let me start uploading the finished ones" is the exact
+  // overlap this refuses: tile-photos.ts would later rewrite the manifest from
+  // rows it read before these uploads, resetting them from `uploaded` to `tiled`.
+  // Taken before the read for the same reason. DRY_RUN below stays unlocked.
+  if (!DRY_RUN) holdManifestLock();
 
   // --- Read manifest. ---
   const rows: ManifestRow[] = await readManifest(MANIFEST_PATH);

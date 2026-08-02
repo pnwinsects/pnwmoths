@@ -9,7 +9,11 @@ import {
   writeManifest,
   sortForInvestigation,
   advanceStatus,
+  holdManifestLock,
+  MANIFEST_LOCK_PATH,
+  MANIFEST_WRITERS,
 } from './manifest.ts';
+import { acquireManifestLock, releaseManifestLock } from './manifest-lock.ts';
 import type { ManifestRow, ManifestStatus } from './manifest.ts';
 
 // Helper to build a ManifestRow with defaults for fields not under test.
@@ -365,5 +369,25 @@ describe('advanceStatus', () => {
         return true;
       },
     );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// holdManifestLock — the photo pipeline's binding of the generic lock (#234)
+// ---------------------------------------------------------------------------
+describe('holdManifestLock', () => {
+  it('locks under var/, not next to the curator-edited manifest in data/', () => {
+    // A pid file in data/ reads as something to commit; var/ is gitignored.
+    assert.match(MANIFEST_LOCK_PATH, /[/\\]var[/\\]species-photos-manifest\.lock$/);
+  });
+
+  it('blocks a second run and names all three pipeline stages', () => {
+    const lockPath = join(mkdtempSync(join(tmpdir(), 'pnwmoths-hold-lock-')), 'manifest.lock');
+    holdManifestLock(lockPath);
+    assert.throws(
+      () => acquireManifestLock(lockPath, process.pid + 1, MANIFEST_WRITERS),
+      /ingest-photos\.ts, tile-photos\.ts and upload-tiles\.ts/,
+    );
+    releaseManifestLock(lockPath);
   });
 });

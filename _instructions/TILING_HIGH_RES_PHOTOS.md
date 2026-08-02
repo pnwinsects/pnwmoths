@@ -42,6 +42,12 @@ data server ([ADR 0001](../docs/adr/0001-static-no-server.md)). You will need:
   ~10,000-pair corpus. Each source TIFF is deleted immediately after its tiles are
   written, so peak TIFF disk usage is one file at a time (~20–250 MB). No large TIFF
   staging area is needed.
+- **No other photo-pipeline stage running.** Ingest, tiling and upload share the manifest
+  and each rewrites it in full, so the second one started refuses to run and names the
+  process holding the lock. Resist the urge to start uploading the finished pairs while
+  tiling is still going — that is precisely the overlap that would reset already-uploaded
+  rows to an earlier status ([ADR 0025](../docs/adr/0025-manifest-locks.md)). `DRY_RUN=1`
+  is exempt, so you can always look without stopping the run.
 
 ## Configuration
 
@@ -189,6 +195,14 @@ holds the full manifest in memory and writes it periodically; manual edits made 
 will be overwritten on the next checkpoint write.
 
 ## When Things Go Wrong
+
+**`Manifest is locked by pid NNNN`**
+Another photo-pipeline stage is running, and both would rewrite
+`data/species-photos-manifest.csv` from their own in-memory copy. Wait for pid `NNNN` to
+finish, or stop it. If that pid is long gone (a `kill -9` leaves the lock file behind), the
+next run takes the stale lock over by itself — you should never need to delete
+`var/species-photos-manifest.lock` by hand, and deleting one that is live is how you get the
+silent status rollback the lock exists to prevent.
 
 **`vips: command not found`**
 The `libvips-tools` package is not installed on this machine. Install it:

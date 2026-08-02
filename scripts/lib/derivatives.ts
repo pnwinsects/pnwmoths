@@ -12,8 +12,8 @@
  * copies of `@320h.webp` is how a variant silently stops existing.
  */
 
-import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url.ts';
 
@@ -21,45 +21,14 @@ import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url
 export type SourceKind = 'legacy' | 'highres' | 'glossary' | 'plates';
 
 /**
- * Mutual exclusion on the shared derivatives manifest.
+ * The scripts that share var/derivatives-manifest.csv, named in the lock error.
  *
- * generate-derivatives.ts and upload-derivatives.ts both load the whole manifest
- * into memory and rewrite it wholesale. Run concurrently, the last writer wins
- * and silently discards the other's status changes — which is exactly what
- * happened during the #224 pilot: 20 rows were uploaded to the CDN, and the
- * still-running generator's next write reset them all to `generated`.
- *
- * A stale lock (holder died) is taken over rather than blocking forever, since
- * these are long interruptible runs on one workstation.
+ * The lock itself lives in scripts/lib/manifest-lock.ts — the photo pipeline has
+ * the same whole-file read-modify-write hazard ([#234](https://github.com/pnwinsects/pnwmoths/issues/234)),
+ * so the mechanism is neutral and each pipeline supplies its own cast list.
  */
-export function acquireManifestLock(lockPath: string, pid: number = process.pid): void {
-  if (existsSync(lockPath)) {
-    const holder = Number(readFileSync(lockPath, 'utf8').trim());
-    if (holder && holder !== pid && isProcessAlive(holder)) {
-      throw new Error(
-        `Manifest is locked by pid ${holder} (${lockPath}). `
-        + 'generate-derivatives.ts and upload-derivatives.ts must not run at the same time — '
-        + 'they share var/derivatives-manifest.csv and the last writer would discard the other\'s work.',
-      );
-    }
-  }
-  mkdirSync(dirname(lockPath), { recursive: true });
-  writeFileSync(lockPath, String(pid));
-}
-
-export function releaseManifestLock(lockPath: string): void {
-  if (existsSync(lockPath)) unlinkSync(lockPath);
-}
-
-export function isProcessAlive(pid: number): boolean {
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch (err) {
-    // EPERM means it exists but belongs to another user — still alive.
-    return (err as NodeJS.ErrnoException).code === 'EPERM';
-  }
-}
+export const DERIVATIVES_MANIFEST_WRITERS =
+  'generate-derivatives.ts and upload-derivatives.ts';
 
 /** A single image transform, expressed independently of the tool that runs it. */
 export type Transform =

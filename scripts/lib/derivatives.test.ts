@@ -12,9 +12,6 @@ import {
   sourcePaths,
   vipsCommands,
   vipsTarget,
-  acquireManifestLock,
-  releaseManifestLock,
-  isProcessAlive,
   type Variant,
 } from './derivatives.ts';
 
@@ -181,43 +178,6 @@ describe('vipsCommands', () => {
       const cmds = vipsCommands({ op: 'fit', width: 4000, height: 4000 }, '/in', '/out.webp', 'webp', src);
       assert.ok(cmds[0]!.includes('down'));
     });
-  });
-});
-
-describe('manifest lock', () => {
-  const lockPath = join(tmpdir(), `deriv-lock-${process.pid}.lock`);
-
-  it('refuses to run while a live process holds the lock', () => {
-    acquireManifestLock(lockPath, process.pid);
-    // A different pid that is definitely alive: our own parent-safe stand-in.
-    assert.throws(
-      () => acquireManifestLock(lockPath, process.pid + 1),
-      /locked by pid/,
-      'a second holder must be rejected, not silently allowed to clobber',
-    );
-    releaseManifestLock(lockPath);
-  });
-
-  it('takes over a stale lock rather than blocking forever', () => {
-    writeFileSync(lockPath, '999999999'); // a pid that cannot exist
-    assert.doesNotThrow(() => acquireManifestLock(lockPath, process.pid));
-    releaseManifestLock(lockPath);
-  });
-
-  it('is re-entrant for the same pid, so a retry does not deadlock', () => {
-    acquireManifestLock(lockPath, process.pid);
-    assert.doesNotThrow(() => acquireManifestLock(lockPath, process.pid));
-    releaseManifestLock(lockPath);
-  });
-
-  it('release is idempotent', () => {
-    releaseManifestLock(lockPath);
-    assert.doesNotThrow(() => releaseManifestLock(lockPath));
-  });
-
-  it('reports a live process as alive and an impossible pid as dead', () => {
-    assert.equal(isProcessAlive(process.pid), true);
-    assert.equal(isProcessAlive(999999999), false);
   });
 });
 

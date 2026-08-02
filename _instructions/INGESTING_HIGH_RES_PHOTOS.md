@@ -12,6 +12,7 @@ You will need:
 - **Dropbox app access token** with the `files.metadata.read` scope — generate one yourself, see Step 1 below. Tokens start with `sl.` and are short-lived (~4 hours unless refreshed)
 - **Node 24** — matches `.nvmrc`. Verify with `node --version`
 - **tmux** (or `screen`) — the full run takes 5–15 minutes against the audit corpus, and tmux keeps it alive across laptop sleep and an accidentally closed terminal
+- **No other photo-pipeline run in progress** — tiling, upload, or a second ingest, including the quick `RESORT_ONLY` re-sort in Step 7. All of them rewrite `data/species-photos-manifest.csv` in full, so the one started second refuses to run and names the process holding the lock ([ADR 0025](../docs/adr/0025-manifest-locks.md)). A lock left behind by a killed run is taken over automatically; never delete `var/species-photos-manifest.lock` by hand
 
 No file is read from disk for the token. Pass it on the invocation line (see Step 3). The script redacts the token from every error message before logging.
 
@@ -110,6 +111,7 @@ Tail the log for the final summary line; the counts should add up to the total f
 
 ## When Things Go Wrong
 
+- **`Manifest is locked by pid NNNN`** — another photo-pipeline run (tiling, upload, or a second ingest) is in progress and would have its status changes discarded by this one. Wait for that pid to finish, or stop it; a lock whose holder is already dead is taken over on the next run without any manual cleanup.
 - **Dropbox 401 / 403** — token expired or wrong scope. Regenerate at <https://www.dropbox.com/developers/apps> with the `files.metadata.read` scope checked.
 - **Dropbox 429** (rate limit) — the script retries up to 5 times with 2s / 4s / 8s / 16s / 32s backoff. If still failing, the page errors out and the partial manifest is preserved; rerun later.
 - **`recursive: true` not allowed** — should never happen. The script hardcodes `recursive: false` because shared-link listing forbids recursion. If you see this, something has been edited.

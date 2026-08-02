@@ -33,3 +33,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0022](0022-pregenerated-image-derivatives.md) | Image variants pre-generated offline under `derived/`, guarded by a committed manifest; Bunny Optimizer retired | Accepted |
 | [0023](0023-runbook-schema-guard.md) | Runbook CSV schemas checked mechanically — complete tables, sample rows, and prose column names resolved per-document | Accepted |
 | [0024](0024-html-validity-gate.md) | `build:check-html` fails the build on a malformed or unknown start tag in `_site/` | Accepted |
+| [0025](0025-manifest-locks.md) | Pipeline manifests guarded by a pid lock taken before the read; the sequential build and one-shot migrations are not | Accepted |

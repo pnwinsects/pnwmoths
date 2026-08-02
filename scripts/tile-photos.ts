@@ -38,7 +38,7 @@ import { mkdir, unlink } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
-import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
+import { readManifest, writeManifest, advanceStatus, holdManifestLock } from './lib/manifest.ts';
 import type { MatchBucket } from './lib/parse-photo-filename.ts';
 import { downloadSharedFile } from './lib/dropbox-download.ts';
 import { pathToFileURL } from 'node:url';
@@ -316,6 +316,15 @@ async function main(): Promise<void> {
   // --- Resolve runtime dirs: env override takes precedence over config file. ---
   const tileOutputDir: string = TILE_OUTPUT_DIR_OVERRIDE || config.tileOutputDir;
   const tiffCacheDir: string  = TIFF_CACHE_DIR_OVERRIDE  || config.tiffCacheDir;
+
+  // --- Mutual exclusion (#234). ---
+  // Before the read, not before the first write: it is the stale in-memory copy
+  // that discards the other run's status changes, so locking after loading rows
+  // would be too late. THUMBNAIL_ONLY takes it too — it writes no statuses, but
+  // it reads a file another stage may be rewriting under it. DRY_RUN is the one
+  // mode left unlocked: it writes nothing, and peeking at the manifest during a
+  // multi-hour run must not fail.
+  if (!DRY_RUN) holdManifestLock();
 
   // --- Read manifest. ---
   const rows: ManifestRow[] = await readManifest(MANIFEST_PATH);

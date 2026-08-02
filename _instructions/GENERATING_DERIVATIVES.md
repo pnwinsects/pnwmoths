@@ -24,7 +24,9 @@ Background and rationale: [ADR 0022](../docs/adr/0022-pregenerated-image-derivat
 - **`BUNNY_STORAGE_PASSWORD`** — needed for the upload step only. bunny.net → Storage → `pnwmoths` →
   FTP & API Access.
 - A clean `var/derivatives-manifest.csv` state. The two scripts share it and refuse to run
-  concurrently; if one died mid-run, the next takes the stale lock over automatically.
+  concurrently — with each other or with a second copy of themselves. `DRY_RUN=1` is exempt
+  and safe at any time, since it writes nothing. If a run died mid-flight, the next one takes
+  the stale lock over automatically ([ADR 0025](../docs/adr/0025-manifest-locks.md)).
 
 ## Steps
 
