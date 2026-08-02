@@ -224,21 +224,21 @@ made to `data/species-photos-manifest.csv` mid-run will be overwritten on the ne
 checkpoint write. If you need to edit the manifest (e.g., to correct a `last_error`
 entry), wait until the run completes or stop the script first.
 
-### Do NOT start this while tiling is still running
+### Do NOT start this while another pipeline stage is running
 
-The same reason, one level up: `npm run photos:tile` also holds the whole manifest in
-memory, so a tiling run finishing after your uploads would rewrite these rows back to
-`status: tiled` and you would re-upload every one of them. Starting the upload for the
-pairs that have already been tiled is a natural thing to want on a multi-hour run, so the
-script refuses it outright — `Manifest is locked by pid NNNN`, naming the process to wait
-for ([ADR 0025](../docs/adr/0025-manifest-locks.md)). `DRY_RUN=1 npm run photos:upload` is
-exempt and safe to run at any time.
+The same reason, one level up: `npm run photos:tile`, `npm run photos:ingest` and a second
+copy of this script all hold the whole manifest in memory too. A tiling run finishing after
+your uploads would rewrite these rows back to `status: tiled`, and you would re-upload every
+one of them. Starting the upload for the pairs that have already been tiled is a natural
+thing to want on a multi-hour run, so the script refuses it outright — `Manifest is locked by
+pid NNNN`, naming the process to wait for ([ADR 0025](../docs/adr/0025-manifest-locks.md)).
+`DRY_RUN=1 npm run photos:upload` is exempt and safe to run at any time.
 
 ## When Things Go Wrong
 
 **`Manifest is locked by pid NNNN`**
-Another photo-pipeline stage (ingest or tiling) is running against the same manifest. Wait
-for pid `NNNN` to finish, or stop it. Note that this fires *before* the credential check, so
+Another photo-pipeline run — ingest, tiling, or a second upload — is working against the same
+manifest. Wait for pid `NNNN` to finish, or stop it. This fires *before* the credential check, so
 it is the first thing you see even if `BUNNY_STORAGE_PASSWORD` is also missing. A lock left
 behind by a killed run is taken over automatically by the next one — do not delete
 `var/species-photos-manifest.lock` by hand.

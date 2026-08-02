@@ -3,8 +3,9 @@ import assert from 'node:assert/strict';
 import { dirname, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { readdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { acquireManifestLock, releaseManifestLock, isProcessAlive } from './manifest-lock.ts';
+import { acquireManifestLock, releaseManifestLock, isProcessAlive, claimLock } from './manifest-lock.ts';
 
 const lockPath = join(tmpdir(), `pnwmoths-manifest-lock-${process.pid}.lock`);
 
@@ -76,9 +77,71 @@ describe('manifest lock', () => {
     assert.doesNotThrow(() => releaseManifestLock(lockPath));
   });
 
+  it('does not overwrite a live holder when it refuses', () => {
+    // The loser must leave the file alone. If refusing also rewrote the pid, the
+    // holder's own release would delete a lock it no longer owns.
+    acquireManifestLock(lockPath, process.pid);
+    assert.throws(() => acquireManifestLock(lockPath, process.pid + 1));
+    assert.equal(readFileSync(lockPath, 'utf8').trim(), String(process.pid));
+    releaseManifestLock(lockPath);
+  });
+
   it('reports a live process as alive and an impossible pid as dead', () => {
     assert.equal(isProcessAlive(process.pid), true);
     assert.equal(isProcessAlive(999999999), false);
+  });
+
+  it('claims exclusively — a second claimant loses instead of overwriting', () => {
+    // The property that makes the lock a lock. "Is anyone holding it? No — then
+    // write my pid" is itself a read-modify-write race: two runs started close
+    // enough together both pass the check and both proceed. Asserted directly
+    // rather than by racing processes, because the window is microseconds wide —
+    // eight processes released off a shared wall-clock deadline still serialize
+    // cleanly, so a race test would pass against a check-then-write lock too.
+    const p = join(tmpdir(), `pnwmoths-claim-${process.pid}.lock`);
+    rmSync(p, { force: true });
+    assert.equal(claimLock(p, 111), true);
+    assert.equal(claimLock(p, 222), false, 'the second claimant must lose the create, not win it');
+    assert.equal(readFileSync(p, 'utf8'), '111', 'the loser must not overwrite the holder');
+    rmSync(p, { force: true });
+  });
+
+  it('never publishes a lock file that is missing its pid', () => {
+    // An exclusive create (`wx`) leaves the file zero-length between create and
+    // write. A claimant reading it in that window would see no pid, call the lock
+    // garbage, and delete the winner's lock — so the pid is written first and the
+    // finished file is linked into place.
+    const p = join(tmpdir(), `pnwmoths-claim-atomic-${process.pid}.lock`);
+    rmSync(p, { force: true });
+    claimLock(p, 4242);
+    assert.equal(readFileSync(p, 'utf8').trim(), '4242');
+    rmSync(p, { force: true });
+  });
+
+  it('holds across real processes, not just within one', async () => {
+    // Everything above is in-process. This is the only check that the lock a
+    // maintainer actually hits — a separate `node scripts/…` invocation — refuses.
+    const racePath = join(tmpdir(), `pnwmoths-lock-race-${process.pid}.lock`);
+    rmSync(racePath, { force: true });
+    const modulePath = fileURLToPath(new URL('./manifest-lock.ts', import.meta.url));
+
+    const run = (holdMs: number): Promise<number | null> => new Promise((done) => {
+      const child = spawn(process.execPath, ['-e', `
+        const { acquireManifestLock } = await import(${JSON.stringify(modulePath)});
+        try {
+          acquireManifestLock(${JSON.stringify(racePath)});
+          await new Promise((r) => setTimeout(r, ${holdMs}));
+          process.exit(0);
+        } catch { process.exit(3); }
+      `], { stdio: 'ignore' });
+      child.on('exit', done);
+    });
+
+    const holder = run(1200);
+    await new Promise((r) => setTimeout(r, 300)); // let the holder take it first
+    assert.equal(await run(0), 3, 'a second process must refuse while the first holds the lock');
+    assert.equal(await holder, 0);
+    rmSync(racePath, { force: true });
   });
 });
 

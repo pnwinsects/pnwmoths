@@ -26,13 +26,19 @@
  * a `kill -9` must not be the thing that stops the next attempt.
  */
 
-import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, unlinkSync, linkSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 /**
  * Take the lock, or throw naming the process that holds it.
  *
  * Re-entrant for the same pid so a retry inside one run cannot deadlock.
+ *
+ * The claim is atomic, never a check followed by a write. "Does a live holder
+ * exist? No — then write my pid" is itself a read-modify-write race: two runs
+ * started close enough together both see no holder, both write, and both proceed
+ * believing they hold it. That is the same lost-update shape the lock exists to
+ * prevent, so the kernel decides the winner, not this code.
  *
  * @param lockPath  pid file guarding the manifest
  * @param pid       claimant; injectable so tests can stand in for a second run
@@ -44,9 +50,17 @@ export function acquireManifestLock(
   pid: number = process.pid,
   writers = 'the scripts that share it',
 ): void {
-  if (existsSync(lockPath)) {
-    const holder = Number(readFileSync(lockPath, 'utf8').trim());
-    if (holder && holder !== pid && isProcessAlive(holder)) {
+  mkdirSync(dirname(lockPath), { recursive: true });
+
+  // Bounded: each iteration either wins, refuses, or clears exactly one dead
+  // holder. Looping unbounded on a lock that keeps reappearing would hang a run
+  // with no output, which is worse than refusing.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (claimLock(lockPath, pid)) return;
+
+    const holder = readHolder(lockPath);
+    if (holder === pid) return; // already ours — a retry inside one run
+    if (holder && isProcessAlive(holder)) {
       throw new Error(
         `Manifest is locked by pid ${holder} (${lockPath}). `
         + `${writers} must not run at the same time — each rewrites the manifest in full, `
@@ -54,9 +68,64 @@ export function acquireManifestLock(
         + `Wait for pid ${holder} to finish, or kill it if it is stuck.`,
       );
     }
+
+    // Dead holder, empty file, or released between our claim and our read.
+    // Clear it and race for it again — if another stale-lock breaker beats us to
+    // the create, the next iteration finds *it* alive and refuses, so breaking a
+    // stale lock cannot produce two winners either.
+    try {
+      unlinkSync(lockPath);
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err;
+    }
   }
-  mkdirSync(dirname(lockPath), { recursive: true });
-  writeFileSync(lockPath, String(pid));
+
+  throw new Error(
+    `Could not take the manifest lock at ${lockPath}: it is being claimed and released `
+    + 'repeatedly. Check what else is running before starting this again.',
+  );
+}
+
+/**
+ * Publish the pid file atomically. False means someone else got there first.
+ *
+ * Write-then-link rather than `writeFileSync(..., { flag: 'wx' })`: an exclusive
+ * create still leaves the file zero-length between the create and the write, and
+ * a claimant that read it in that window would see no pid, conclude the lock was
+ * garbage, and delete the winner's lock. `link` is atomic and publishes a file
+ * that already contains the pid, so the lock is never observable as empty.
+ *
+ * Exported only so a test can assert the exclusivity directly: the window this
+ * closes is microseconds wide, so racing real processes at it does not reliably
+ * reproduce a check-then-write bug (measured — eight processes released off a
+ * shared deadline still serialized cleanly).
+ */
+export function claimLock(lockPath: string, pid: number): boolean {
+  const staging = `${lockPath}.${pid}.tmp`;
+  writeFileSync(staging, String(pid));
+  try {
+    linkSync(staging, lockPath);
+    return true;
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'EEXIST') return false;
+    throw err;
+  } finally {
+    try {
+      unlinkSync(staging);
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err;
+    }
+  }
+}
+
+/** The pid in the lock file, or 0 if it is gone, empty, or not a number. */
+function readHolder(lockPath: string): number {
+  try {
+    return Number(readFileSync(lockPath, 'utf8').trim()) || 0;
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') return 0;
+    throw err;
+  }
 }
 
 /** Drop the lock. Idempotent — safe to call when it was never taken. */

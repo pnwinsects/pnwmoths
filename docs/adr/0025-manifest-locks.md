@@ -36,16 +36,22 @@ claimant that refuses to start with a message naming the holder, and takeover of
 is dead. Each pipeline binds it to its own manifest — `holdManifestLock()` in `scripts/lib/manifest.ts`
 for the photo pipeline, `DERIVATIVES_MANIFEST_WRITERS` for the derivatives scripts.
 
-Three properties are load-bearing:
+Four properties are load-bearing:
 
-1. **The lock is taken before `readManifest`, not before the first write.** The damage is done by a
+1. **The claim is atomic** — the pid is written to a staging file and `link`ed into place, never
+   `existsSync` followed by a write. A check-then-write claim is itself a read-modify-write race,
+   which would make the lock an instance of the bug it exists to prevent. `link` rather than an
+   `O_EXCL` create because an exclusive create still leaves the file zero-length between create and
+   write, and a claimant reading it in that window would see no pid, call the lock garbage, and
+   delete the winner's.
+2. **The lock is taken before `readManifest`, not before the first write.** The damage is done by a
    *stale read*: a run that has already loaded the rows cannot be made safe by locking later. A
    source-level test in `scripts/lib/manifest-lock.test.ts` pins the ordering, because the two
    arrangements look equally sensible in a diff.
-2. **A stale lock is taken over, never waited on.** These are interruptible multi-hour runs on one
+3. **A stale lock is taken over, never waited on.** These are interruptible multi-hour runs on one
    workstation, and a lock file left by a `kill -9` must not be the thing that stops the next
    attempt. Same for an empty or hand-mangled lock file.
-3. **`DRY_RUN` does not lock.** It writes nothing, and peeking at the manifest during a long run is
+4. **`DRY_RUN` does not lock.** It writes nothing, and peeking at the manifest during a long run is
    exactly when a maintainer wants a dry run. `THUMBNAIL_ONLY` *does* lock despite writing no
    statuses — it reads a file another stage may be rewriting under it.
 
@@ -89,6 +95,10 @@ derivatives pipeline, and nothing else in this repo. Two deliberate exclusions:
   during a 1 TB tiling run would leave a lock only manual `rm` could clear, and the runbook step
   telling maintainers to delete a lock file is a step that teaches them to delete it while it is
   live.
+- **Racing real processes as the test for atomicity.** Rejected on measurement: eight processes
+  released off a shared wall-clock deadline still serialized cleanly against a deliberately
+  check-then-write claim, so the test would have passed the bug. Exclusivity is asserted directly
+  on the claim instead, and a two-process test covers the end-to-end refusal.
 - **Advisory warning instead of refusal** ("another run may be in progress"). Rejected: the whole
   failure mode is that every visible signal already said success. A warning is one more signal to
   miss.
