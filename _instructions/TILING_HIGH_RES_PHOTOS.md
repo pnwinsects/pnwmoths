@@ -38,6 +38,11 @@ data server ([ADR 0001](../docs/adr/0001-static-no-server.md)). You will need:
   the download endpoint is a shared-link read, and the script's own missing-token error
   names `files.content.read`, so granting all three avoids a second round trip. Never
   commit the token, paste it into chat, or store it in a file on disk.
+
+  Needed only when something actually has to be downloaded. If every eligible TIFF is
+  already in `{tiffCacheDir}`, the run says so and proceeds without it — which is the
+  normal case when resuming, since `sl.` tokens are short-lived and the one that fetched
+  the files has usually expired by the time you pick the run back up.
 - **Disk headroom**: roughly 850 KB of tiles per pair, so about 9 GB for a full
   ~10,000-pair corpus. Each source TIFF is deleted immediately after its tiles are
   written, so peak TIFF disk usage is one file at a time (~20–250 MB). No large TIFF
