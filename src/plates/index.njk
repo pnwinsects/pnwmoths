@@ -20,9 +20,17 @@ description: "High-resolution photographic plates of pinned Pacific Northwest mo
          is ~12 KB. Before the derivative existed this grid was 5.3 MB of
          thumbnails with the Optimizer off (ADR 0022).
 
-         Both comments live outside the tag on purpose. A `{#-` inside an open tag
-         strips the whitespace separating the tag name from its first attribute and
-         emits `<imgsrc="…">` — see scripts/check-html.ts. #}
+         This comment lives outside the tag on purpose. A Nunjucks comment sitting
+         between the tag name and its first attribute, with whitespace-control
+         hyphens on both delimiters, closes the gap on each side and emits a start
+         tag with no space before the attribute — which is an element nobody
+         defined, so it renders as nothing. Only the pair does it: one hyphen
+         leaves the other side's newline intact.
+
+         Do not spell those delimiters out in here to explain it. The first
+         closing delimiter ends the comment wherever it appears, so the rest of
+         the sentence becomes page content. scripts/check-html.ts fails the build
+         on both mistakes. #}
       <img
         src="{{ ('plates/' + plate.slug + '/thumbnail.jpg') | derivative('240x300') }}"
         alt=""

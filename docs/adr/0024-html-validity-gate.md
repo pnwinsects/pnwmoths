@@ -13,8 +13,18 @@ open tag:
   src="{{ … | derivative('240x300') }}"
 ```
 
-The `-` ate the newline separating the tag name from its first attribute, so every card on
-`/plates/` shipped as `<imgsrc="https://…">` — 98 of them. The HTML tokenizer ends a tag name at
+It takes **both** markers to do the damage, which is why it survived review: `{#-` strips the
+whitespace before the comment and `-#}` strips the whitespace after it, so together they close the
+gap on each side and weld `<img` to `src=`. Either one alone leaves the other side's newline intact
+and renders correctly — verified against Nunjucks directly:
+
+```text
+<img\n  {#- c -#}\n  src="x">   →   <imgsrc="x">      ← broken
+<img\n  {#- c  #}\n  src="x">   →   <img\n  src="x">   ← fine
+<img\n  {#  c -#}\n  src="x">   →   <img\n  src="x">   ← fine
+```
+
+So every card on `/plates/` shipped as `<imgsrc="https://…">` — 98 of them. The HTML tokenizer ends a tag name at
 whitespace, `/` or `>`, so that is an element named `imgsrc`, which renders as nothing. The plates
 index lost every thumbnail, in production, for months.
 
@@ -88,6 +98,7 @@ a conversation, not pass quietly.
   could be without first measuring the existing error load.
 - **Parse with `node-html-parser`, already a dependency.** Rejected: it reports the broken markup as
   a valid `img`. It is the right tool for reading documents and the wrong one for judging them.
-- **A source-level lint banning `{#-`/`{%-`/`{{-` inside an open tag.** Rejected: it guards one
-  cause rather than the defect, needs its own fragile parse of the template, and would miss the same
+- **A source-level lint banning whitespace-control markers inside an open tag.** Rejected: it
+  guards one cause rather than the defect, and would have to reason about marker *pairs* rather
+  than single tokens — a lone `{#-` there is harmless, needs its own fragile parse of the template, and would miss the same
   breakage arriving from a filter, an include or a future template language.

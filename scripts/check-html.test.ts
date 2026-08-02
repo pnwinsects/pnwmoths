@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { findBadTags, maskRawText } from './check-html.ts';
 
 describe('findBadTags catches the bug it exists for', () => {
-  // The literal shape /plates/ shipped for months: a Nunjucks `{#-` inside the
-  // open tag ate the newline after `<img`, so 98 cards rendered as an element
-  // named `imgsrc` and no thumbnail appeared.
+  // The literal shape /plates/ shipped for months: a Nunjucks `{#- … -#}` inside
+  // the open tag closed the whitespace on both sides of the comment, so 98 cards
+  // rendered as an element named `imgsrc` and no thumbnail appeared.
   const broken = '<li><a href="/plates/x/">\n  <imgsrc="https://cdn/x.webp"\n    alt="" width="240">\n</a></li>';
 
   it('reports the fused tag name', () => {

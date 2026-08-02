@@ -446,8 +446,9 @@ cost a debugging cycle to discover.
   haven't watched fail is a guess.
 
 - **A lenient parser is the wrong tool for judging output.** `/plates/` shipped 98 cards as
-  `<imgsrc="…">` for months — a Nunjucks `{#-` inside an open tag ate the newline separating the
-  tag name from its first attribute, and the HTML tokenizer read the result as an element named
+  `<imgsrc="…">` for months — a Nunjucks comment inside an open tag, written `{#- … -#}`, closed the
+  whitespace on *both* sides and welded the tag name to its first attribute (either marker alone is
+  harmless, which is part of why it survived review), and the HTML tokenizer read the result as an element named
   `imgsrc`, which renders as nothing. Every existing check missed it for the same underlying
   reason: they read the output *as a document*. `node-html-parser` (already a dependency) hands
   back an ordinary `img`; lychee checks `src` attributes and this markup has none; the derivative
