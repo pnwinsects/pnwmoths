@@ -202,6 +202,71 @@ export function selectProbePaths(targets: readonly Target[], sample: number): st
   return Array.from({ length: sample }, (_, i) => jpegs[Math.floor(i * step)]!);
 }
 
+/**
+ * The two responses the Optimizer check compares: the object as stored, and the
+ * same object asked for at `?width=100`.
+ */
+export interface OptimizerProbe {
+  plain: { status: number; contentType: string | null; length: number | null };
+  resized: { status: number; contentType: string | null; length: number | null };
+}
+
+export type OptimizerVerdict = 'disabled' | 'active' | 'inconclusive';
+
+export interface OptimizerCheck {
+  verdict: OptimizerVerdict;
+  detail: string;
+}
+
+/**
+ * Decide whether the Bunny Optimizer is actually off, from one object fetched
+ * with and without a resize query string.
+ *
+ * This is the check ADR 0022 names: `?width=100` must return the **full-size
+ * original**. Byte sizes alone cannot tell "disabled" from "serving a stale
+ * optimized copy" — a cached transform answers 200 with a plausible
+ * content-type and sails through the sweep. A query string is not a cache key
+ * on this zone, so the resized request either transforms at the edge or is
+ * ignored entirely; there is no third behaviour.
+ *
+ * Pure, so the verdict is testable without a network (#248).
+ */
+export function classifyOptimizerProbe(probe: OptimizerProbe): OptimizerCheck {
+  const { plain, resized } = probe;
+  if (plain.status !== 200 || resized.status !== 200) {
+    return {
+      verdict: 'inconclusive',
+      detail: `probe objects did not both return 200 (plain ${plain.status}, ?width=100 ${resized.status})`,
+    };
+  }
+  if (plain.length === null || resized.length === null) {
+    return { verdict: 'inconclusive', detail: 'origin did not report content-length on both responses' };
+  }
+  if (plain.length !== resized.length) {
+    return {
+      verdict: 'active',
+      detail:
+        `?width=100 returned ${resized.length.toLocaleString('en-US')}B against ` +
+        `${plain.length.toLocaleString('en-US')}B stored — the edge is still transforming, ` +
+        'so the Optimizer is enabled or serving a cached transform',
+    };
+  }
+  if (resized.contentType !== plain.contentType) {
+    return {
+      verdict: 'active',
+      detail:
+        `?width=100 returned ${resized.contentType ?? '?'} against ${plain.contentType ?? '?'} stored — ` +
+        'same size but a converted format still means the edge is transforming',
+    };
+  }
+  return {
+    verdict: 'disabled',
+    detail:
+      `?width=100 returned the stored object unchanged (${plain.length.toLocaleString('en-US')}B, ` +
+      `${plain.contentType ?? '?'})`,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Network
 // ---------------------------------------------------------------------------
@@ -221,6 +286,32 @@ async function head(url: string): Promise<{ status: number; contentType: string 
       if (attempt >= delays.length) throw err;
       await new Promise((r) => setTimeout(r, delays[attempt]!));
     }
+  }
+}
+
+/**
+ * Fetch one object plain and at `?width=100`, and decide whether the Optimizer
+ * is off. A transport failure returns `inconclusive` rather than throwing: this
+ * runs after a completed sweep, and a blip must not discard a clean 26,927-object
+ * result — the same reason probeNegotiation swallows its errors. What it must not
+ * do is stay silent, because the PASS line claims "Optimizer disabled".
+ */
+async function checkOptimizerDisabled(origin: string, path: string): Promise<OptimizerCheck> {
+  const read = async (url: string): Promise<OptimizerProbe['plain']> => {
+    const res = await fetch(url, { method: 'HEAD' });
+    const len = res.headers.get('content-length');
+    return {
+      status: res.status,
+      contentType: (res.headers.get('content-type') ?? '').split(';')[0] || null,
+      length: len === null ? null : Number(len),
+    };
+  };
+  const url = objectUrl(origin, path);
+  try {
+    const [plain, resized] = await Promise.all([read(url), read(`${url}?width=100`)]);
+    return classifyOptimizerProbe({ plain, resized });
+  } catch (err) {
+    return { verdict: 'inconclusive', detail: `probe request failed (${String(err)})` };
   }
 }
 
@@ -336,7 +427,9 @@ async function main(): Promise<void> {
     // same origin, so it is skipped rather than printed as a fake contrast.
     console.log(
       `[verify-cdn-cutover] target is the production origin (${PROD_ORIGIN}) — sweeping it directly.\n` +
-      '  Post-cutover this is expected; the WebP negotiation probe is skipped (nothing to compare against).',
+      '  Post-cutover this is expected. The WebP negotiation probe needs two origins to contrast, so it\n' +
+      '  is replaced by the ?width=100 check from ADR 0022, which asks this origin directly whether the\n' +
+      '  Optimizer is off.',
     );
   }
 
@@ -401,8 +494,36 @@ async function main(): Promise<void> {
 
   // Comparing an origin against itself would print an identical pair as though
   // it were a contrast, which is worse than printing nothing.
-  const probePaths = STAGING_ORIGIN === PROD_ORIGIN ? [] : selectProbePaths(targets, PROBE_SAMPLE);
+  const sameOrigin = STAGING_ORIGIN === PROD_ORIGIN;
+  const probePaths = sameOrigin ? [] : selectProbePaths(targets, PROBE_SAMPLE);
   await probeNegotiation(probePaths);
+
+  // The ADR 0022 check, against whichever origin was swept. Without it this
+  // script ended by printing "Optimizer disabled" having tested no such thing:
+  // the sweep only proves every object answers 200 with a plausible content
+  // type, which an active Optimizer does too (#248). Pre-cutover it proves the
+  // staging zone genuinely has the add-on off before you trust the sweep;
+  // post-cutover, when both origins are production, it is the only thing left
+  // that can tell "disabled" from "serving a cached transform".
+  const probePath = selectProbePaths(targets, 1)[0];
+  let optimizer: OptimizerCheck;
+  if (probePath === undefined) {
+    optimizer = { verdict: 'inconclusive', detail: 'no legacy JPEG source in the target set to probe' };
+  } else {
+    console.log(`\nOptimizer check (ADR 0022) against ${STAGING_ORIGIN}: ${probePath}`);
+    optimizer = await checkOptimizerDisabled(STAGING_ORIGIN, probePath);
+    console.log(`  ${optimizer.verdict}: ${optimizer.detail}`);
+  }
+
+  if (optimizer.verdict === 'active') {
+    console.error(
+      `\n[verify-cdn-cutover] FAIL: the sweep passed, but the Optimizer is still transforming at the edge.\n` +
+      `  ${optimizer.detail}\n` +
+      '  Disable the add-on on the pull zone and purge the zone cache, then re-run. A query string is not\n' +
+      '  a cache key here, so the purge is the only way to clear transforms already cached (ADR 0009).',
+    );
+    process.exit(1);
+  }
 
   if (failures.length > 0) {
     console.error(
@@ -413,9 +534,14 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
+  // Only claim the Optimizer is off when something actually established it.
+  const optimizerNote =
+    optimizer.verdict === 'disabled'
+      ? ', Optimizer confirmed disabled'
+      : ` (Optimizer state UNVERIFIED — ${optimizer.detail})`;
   console.log(
     `\n[verify-cdn-cutover] PASS: all ${results.length.toLocaleString('en-US')} object(s) served 200 ` +
-    'with the expected content type, Optimizer disabled.',
+    `with the expected content type${optimizerNote}.`,
   );
   process.exit(0);
 }
