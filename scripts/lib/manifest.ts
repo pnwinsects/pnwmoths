@@ -10,6 +10,8 @@
  *   - ManifestStatus           -- string-literal union of all valid status values (D-05)
  *   - readManifest(path)       -- returns [] when path doesn't exist; otherwise
  *                                 parses CSV into row objects keyed by column name
+ *   - holdManifestLock()       -- mutual exclusion for the whole-file rewrite
+ *                                 below; every writer takes it before reading
  *   - writeManifest(path, rows)-- rewrites the manifest in full; header emitted
  *                                 from COLUMNS; field order pinned by COLUMNS;
  *                                 csv-stringify auto-quotes any field containing
@@ -30,6 +32,8 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { acquireManifestLock, releaseManifestLock } from './manifest-lock.ts';
 
 /**
  * D-05 manifest schema. Order is part of the contract; downstream Phase 27/28/29
@@ -117,6 +121,37 @@ export async function readManifest(path: string): Promise<ManifestRow[]> {
 export async function writeManifest(path: string, rows: ManifestRow[]): Promise<void> {
   const csv = stringify(rows, { header: true, columns: [...COLUMNS] });
   await writeFile(path, csv);
+}
+
+/** The three pipeline stages that rewrite the manifest in full. */
+export const MANIFEST_WRITERS =
+  'ingest-photos.ts, tile-photos.ts and upload-tiles.ts';
+
+/**
+ * Pid file guarding the manifest. Under `var/` (gitignored) rather than beside
+ * the manifest in `data/`, so a lock left by a killed run never looks like
+ * something a curator should commit.
+ */
+export const MANIFEST_LOCK_PATH: string = resolve('var/species-photos-manifest.lock');
+
+/**
+ * Take the manifest lock for the rest of this process, releasing it on exit.
+ *
+ * Every writer must call this **before `readManifest`**, not before its first
+ * `writeManifest`: the damage is done by a *stale read*, so a run that has
+ * already loaded the rows cannot be made safe by locking later.
+ *
+ * Tiling is a resumable multi-hour run over ~1 TB ([ADR 0013](../../docs/adr/0013-highres-osd-dzi.md)),
+ * which makes "tiling is 60% done, let me start uploading the finished ones" the
+ * natural maintainer instinct — and the exact move that would reset `uploaded`
+ * and `tiled` rows to an earlier stage, costing hours of re-tiling
+ * ([#234](https://github.com/pnwinsects/pnwmoths/issues/234)).
+ *
+ * @param lockPath  overridable so tests do not touch the repo's own lock file
+ */
+export function holdManifestLock(lockPath: string = MANIFEST_LOCK_PATH): void {
+  acquireManifestLock(lockPath, process.pid, MANIFEST_WRITERS);
+  process.on('exit', () => releaseManifestLock(lockPath));
 }
 
 /**

@@ -38,7 +38,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'no
 import { pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
-import { acquireManifestLock, releaseManifestLock } from './lib/derivatives.ts';
+import { DERIVATIVES_MANIFEST_WRITERS } from './lib/derivatives.ts';
+import { acquireManifestLock, releaseManifestLock } from './lib/manifest-lock.ts';
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-tiles.ts).
@@ -223,7 +224,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  acquireManifestLock(LOCK_PATH);
+  acquireManifestLock(LOCK_PATH, process.pid, DERIVATIVES_MANIFEST_WRITERS);
   process.on('exit', () => releaseManifestLock(LOCK_PATH));
 
   if (todo.length === 0) {

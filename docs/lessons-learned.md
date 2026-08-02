@@ -289,6 +289,22 @@ cost a debugging cycle to discover.
   destructive step (e.g. file deletion) so an interrupted run is always recoverable.
   Guard credential-free pre-flight with a `DRY_RUN` check placed *before* the API-key check.
 
+- **Whole-file read-modify-write state needs a lock the moment two long runs can overlap —
+  and the lock goes before the *read*.** A pipeline stage that loads a manifest, mutates rows
+  and rewrites the file in full does not corrupt anything when run concurrently; the last
+  writer just emits a valid file missing the other's changes. That is what makes it lethal.
+  During the #224 pilot an uploader put 20 files on the CDN and the still-running generator
+  reset all 20 rows to the previous status: the uploader reported `20 uploaded, 0 failed`, the
+  objects were on the CDN, and all 20 fetched byte-identical. The only symptom was a status
+  line whose buckets summed to the row total with no `uploaded` bucket in it. Locking before
+  the first write is *not enough* — the stale in-memory copy is the bug, so the lock belongs
+  before `readManifest` ([#234](https://github.com/pnwinsects/pnwmoths/issues/234),
+  [ADR 0025](adr/0025-manifest-locks.md)). Take over a lock whose holder is dead rather than
+  waiting, or one `kill -9` wedges a multi-hour resumable run; leave `DRY_RUN` unlocked so a
+  peek during a long run still works. Scope it to *long-running scripts sharing whole-file
+  state a human would plausibly overlap* — not the `&&`-sequential build chain, not one-shot
+  migrations.
+
 - **Prefer an authoritative source over a heuristic when one is recoverable.** Extracting
   bindings from the original tool's own data (the Lucid3 `key.data`) beat a fuzzy filename
   matcher decisively (180/237 vs 77/237, no mis-bindings). Look for the source of truth

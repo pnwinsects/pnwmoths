@@ -38,10 +38,11 @@ import { pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import {
-  buildWorkList, vipsCommands, acquireManifestLock, releaseManifestLock,
+  buildWorkList, vipsCommands, DERIVATIVES_MANIFEST_WRITERS,
   readSources, sourcePaths,
   type DerivativeSpec, type SourceKind,
 } from './lib/derivatives.ts';
+import { acquireManifestLock, releaseManifestLock } from './lib/manifest-lock.ts';
 
 const execFileAsync = promisify(execFile);
 
@@ -201,7 +202,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  acquireManifestLock(LOCK_PATH);
+  acquireManifestLock(LOCK_PATH, process.pid, DERIVATIVES_MANIFEST_WRITERS);
   process.on('exit', () => releaseManifestLock(LOCK_PATH));
 
   if (limited.length === 0) {

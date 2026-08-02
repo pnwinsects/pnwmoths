@@ -28,7 +28,7 @@ import { parse } from 'csv-parse/sync';
 import type { MatchBucket, ParseSpecimenAndViewResult } from './lib/parse-photo-filename.ts';
 import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/parse-photo-filename.ts';
 import { dbxCall } from './lib/dropbox-list.ts';
-import { readManifest, writeManifest, sortForInvestigation } from './lib/manifest.ts';
+import { readManifest, writeManifest, sortForInvestigation, holdManifestLock } from './lib/manifest.ts';
 import type { ManifestRow } from './lib/manifest.ts';
 import { pathToFileURL } from 'node:url';
 
@@ -438,6 +438,9 @@ async function main(): Promise<void> {
   // D-05: photos:investigate is the curator's daily-use command — edit synonyms.csv,
   // run this, manifest reclassified + re-sorted. No source TIFFs are downloaded.
   if (RESORT_ONLY) {
+    // Short, but still a read-modify-rewrite of the whole file: a re-sort landing
+    // on top of a running tile-photos.ts would drop its status advances (#234).
+    holdManifestLock();
     const species = await loadSpecies(SPECIES_CSV);
     const synonyms = await loadSynonyms(SYNONYMS_CSV, species);
     const existing = await readManifest(MANIFEST_PATH);
@@ -500,6 +503,10 @@ async function main(): Promise<void> {
   }
 
   // --- Full run ---
+  // Taken before the read, not before the write: the rows loaded next are what a
+  // concurrent run would make stale (#234). DRY_RUN returned above, unlocked.
+  holdManifestLock();
+
   const species = await loadSpecies(SPECIES_CSV);
   console.log(`[ingest-photos] loaded ${species.byBinomial.size} species records from ${SPECIES_CSV}`);
   const synonyms = await loadSynonyms(SYNONYMS_CSV, species);
