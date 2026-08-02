@@ -173,6 +173,12 @@ and this is the only way to exercise the loss of auto-WebP without experimenting
   purged; a full sweep of all 26,927 image objects against production returned 200 with the expected
   content type. `?width=100` now returns the full-size original, which is the check that actually
   distinguishes "disabled" from "serving a stale optimized copy".
+- **That check is now part of the script, not a manual step** ([#248](https://github.com/pnwinsects/pnwmoths/issues/248)).
+  `verify-cdn-cutover.ts` ended by printing "Optimizer disabled" on the strength of a sweep that
+  cannot establish it: an active Optimizer also answers 200 with a plausible content type. It now
+  fetches one legacy JPEG plain and at `?width=100`, fails the run if the edge is still transforming,
+  and downgrades the PASS line to "Optimizer state UNVERIFIED" rather than claiming a property it
+  could not test.
 - **Purging is part of the procedure, not an afterthought.** Between the toggle and the purge,
   production served Optimizer-compressed copies from cache — smaller than storage, so nothing looked
   broken, but any measurement taken in that window mixes pre- and post-toggle responses. A query

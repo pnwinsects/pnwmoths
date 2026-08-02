@@ -10,6 +10,8 @@ import {
   classify,
   objectUrl,
   selectProbePaths,
+  classifyOptimizerProbe,
+  type OptimizerProbe,
   type Target,
 } from './verify-cdn-cutover.ts';
 
@@ -188,5 +190,99 @@ describe('selectProbePaths', () => {
 
   it('returns nothing when probing is switched off', () => {
     assert.deepEqual(selectProbePaths(targets, 0), []);
+  });
+});
+
+
+// ---------------------------------------------------------------------------
+// classifyOptimizerProbe — the ADR 0022 check (#248)
+//
+// The sweep proves every object answers 200 with a plausible content type. An
+// ACTIVE Optimizer does that too, so the sweep alone can never justify the
+// "Optimizer disabled" line this script prints. `?width=100` returning the
+// full-size original is what distinguishes disabled from a cached transform;
+// byte sizes on their own cannot, because a cached transform is a perfectly
+// valid-looking 200.
+// ---------------------------------------------------------------------------
+
+describe('classifyOptimizerProbe', () => {
+  const res = (status: number, contentType: string | null, length: number | null) =>
+    ({ status, contentType, length });
+  const probe = (plain: OptimizerProbe['plain'], resized: OptimizerProbe['plain']): OptimizerProbe =>
+    ({ plain, resized });
+
+  it('reports disabled when ?width=100 returns the stored object unchanged', () => {
+    const out = classifyOptimizerProbe(probe(
+      res(200, 'image/jpeg', 1251349),
+      res(200, 'image/jpeg', 1251349),
+    ));
+    assert.equal(out.verdict, 'disabled');
+    assert.match(out.detail, /unchanged/);
+  });
+
+  it('reports active when ?width=100 comes back smaller — the edge still transforms', () => {
+    const out = classifyOptimizerProbe(probe(
+      res(200, 'image/jpeg', 1251349),
+      res(200, 'image/jpeg', 4210),
+    ));
+    assert.equal(out.verdict, 'active');
+    assert.match(out.detail, /still transforming/);
+  });
+
+  it('reports active on a format conversion even at an identical size', () => {
+    // Belt and braces: auto-WebP at the same byte count would otherwise read as
+    // disabled, and format conversion is the dependency ADR 0022 calls the one
+    // most likely to be missed.
+    const out = classifyOptimizerProbe(probe(
+      res(200, 'image/jpeg', 100000),
+      res(200, 'image/webp', 100000),
+    ));
+    assert.equal(out.verdict, 'active');
+    assert.match(out.detail, /converted format/);
+  });
+
+  it('is inconclusive rather than wrong when either probe is not 200', () => {
+    assert.equal(classifyOptimizerProbe(probe(
+      res(200, 'image/jpeg', 100), res(404, null, null),
+    )).verdict, 'inconclusive');
+    assert.equal(classifyOptimizerProbe(probe(
+      res(500, null, null), res(200, 'image/jpeg', 100),
+    )).verdict, 'inconclusive');
+  });
+
+  it('is inconclusive when the origin omits content-length', () => {
+    const out = classifyOptimizerProbe(probe(
+      res(200, 'image/jpeg', null),
+      res(200, 'image/jpeg', null),
+    ));
+    assert.equal(out.verdict, 'inconclusive');
+    assert.match(out.detail, /content-length/);
+  });
+
+  it('never returns disabled without having compared two real responses', () => {
+    // The property that matters: no input short of a genuine match may produce
+    // the verdict that lets the script claim the cutover is verified.
+    const notOk: OptimizerProbe[] = [
+      probe(res(200, 'image/jpeg', 10), res(200, 'image/jpeg', 9)),
+      probe(res(200, 'image/jpeg', 10), res(200, 'image/webp', 10)),
+      probe(res(200, 'image/jpeg', null), res(200, 'image/jpeg', null)),
+      probe(res(403, null, null), res(403, null, null)),
+    ];
+    for (const p of notOk) assert.notEqual(classifyOptimizerProbe(p).verdict, 'disabled');
+  });
+});
+
+describe('selectProbePaths as the Optimizer probe source', () => {
+  it('yields a single legacy JPEG for the ADR 0022 check', () => {
+    const targets: Target[] = [
+      { path: 'derived/x/a@320h.webp', bucket: 'derivative' },
+      { path: 'clostera-brucei/Clostera brucei-C-D.jpg', bucket: 'source' },
+    ];
+    assert.deepEqual(selectProbePaths(targets, 1), ['clostera-brucei/Clostera brucei-C-D.jpg']);
+  });
+
+  it('yields nothing when no legacy JPEG is in scope, so the run reports UNVERIFIED', () => {
+    const targets: Target[] = [{ path: 'derived/x/a@320h.webp', bucket: 'derivative' }];
+    assert.deepEqual(selectProbePaths(targets, 1), []);
   });
 });
