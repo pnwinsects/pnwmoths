@@ -4,15 +4,15 @@
 - `data/boundaries/pnw-districts.geojson` — rewritten in full (single merged
   FeatureCollection; not additive). Every feature is exactly
   `{district_id, name}`.
-- `data/district-adjacency.csv` — regenerated (Phase 47) whenever the
-  boundary geometry changes, since adjacency is a pure function of that
-  geometry. This step is **boundary-lifecycle-scoped**: it belongs here, not
-  in `ASSIGNING_DISTRICTS.md` (which only runs when *records* are added and
-  never touches boundary geometry or this file).
+- `data/district-adjacency.csv` — regenerated whenever the boundary geometry
+  changes, since adjacency is a pure function of that geometry. This step is
+  **boundary-lifecycle-scoped**: it belongs here, not in
+  [ASSIGNING_DISTRICTS.md](ASSIGNING_DISTRICTS.md) (which only runs when
+  *records* are added and never touches boundary geometry or this file).
 - No other file changes. This is the boundary-**acquisition** step only —
-  it does NOT assign `district_id` onto `data/records.csv`. That
-  assignment/join maintainer runbook is a **separate Phase 46 deliverable**;
-  this file documents only the boundary-refresh step.
+  it does NOT assign `district_id` onto `data/records.csv`. That is
+  [ASSIGNING_DISTRICTS.md](ASSIGNING_DISTRICTS.md)'s job; this file documents
+  only the boundary-refresh step.
 
 ## Source Reference
 
@@ -73,9 +73,9 @@ redirect's `Location` header.
    [verify-boundaries] all reference points resolved correctly. OK
    ```
 
-4. Regenerate the district-adjacency table (Phase 47, QC-02) — **only
-   needed when the boundary geometry itself changes**, since adjacency is a
-   pure function of `data/boundaries/pnw-districts.geojson`'s polygons. Do
+4. Regenerate the district-adjacency table — **only needed when the boundary
+   geometry itself changes**, since adjacency is a pure function of
+   `data/boundaries/pnw-districts.geojson`'s polygons. Do
    NOT run this as part of `ASSIGNING_DISTRICTS.md`'s record-addition
    workflow — that runbook never touches boundary geometry, so this table
    never goes stale from adding records.

@@ -13,10 +13,11 @@
   below, one row per `data/records.csv` row (100% coverage by construction,
   including no-coord/out-of-bounds/axis-order-suspect rows marked with an
   explicit no-district outcome). Report-only — this step never touches
-  `data/records.csv`. This is the full-coverage derived-district artifact
-  Phase 47's QC mismatch report and its build-time coverage-gap gate depend
-  on; it must be regenerated whenever `data/records.csv` gains new rows or
-  the build gate will fail.
+  `data/records.csv`. The build's QC mismatch report
+  (`scripts/emit-records-district-audit.ts`, run as
+  `npm run build:records-district-audit`) reads this file and fails the build
+  if any `data/records.csv` row is missing from it, so it must be
+  regenerated whenever `data/records.csv` gains new rows.
 - No other file changes. This is the county/district-**assignment** step
   only — it does not touch `data/boundaries/pnw-districts.geojson` (that is
   `_instructions/REFRESHING_BOUNDARIES.md`'s job) or the Eleventy build.
@@ -26,12 +27,11 @@ Run this sequence any time new records are added to `data/records.csv`
 (local upload), so every new occurrence gets a `county`/`district_id` the
 same way the rest of the dataset did, and the build-time coverage-gap gate
 (which checks the derived-district artifact against `data/records.csv`)
-keeps passing. Steps 1-3 (below) are the same additive assignment sequence
-this file has always documented; step 4 is new (Phase 47) and must be run
-even if steps 1-3 leave some records unassigned (`unassigned`,
-`out-of-bounds`, `axis-order-suspect`, `no-coords` outcomes are all valid,
-committed rows in the derived artifact — only a row's *absence* from that
-artifact is a problem).
+keeps passing. Steps 1-3 are the additive assignment sequence; step 4
+regenerates the audit artifact and must be run even if steps 1-3 leave some
+records unassigned (`unassigned`, `out-of-bounds`, `axis-order-suspect`,
+`no-coords` outcomes are all valid, committed rows in the derived artifact —
+only a row's *absence* from that artifact is a problem).
 
 ## Steps
 
@@ -90,9 +90,9 @@ artifact is a problem).
    records drops noticeably below 99%, that is the signal to investigate
    (see Verify below), not the raw combined number.
 
-4. Regenerate the full-coverage derived-district audit artifact — required
-   before Phase 47's coverage-gap build gate will pass if new records were
-   added. This is append-only-safe (Pitfall 1): the `row_index` join key is
+4. Regenerate the full-coverage derived-district audit artifact — the build's
+   coverage-gap gate will not pass without this if new records were added.
+   This is append-only-safe: the `row_index` join key is
    only correct because new records are always **appended** to
    `data/records.csv`, never inserted mid-file (mirrors
    `_instructions/ADDING_RECORDS.md`'s "append one row" convention). Reuses
@@ -131,8 +131,8 @@ artifact is a problem).
 
 `data/boundaries/pnw-districts.geojson` currently includes only one Alberta
 census division (`CA:4804`) — see `scripts/build-boundaries.ts`'s `AB_CDUID`
-constant and its D-04 decision comment. That was a deliberate Phase 45
-scoping choice (it matched every Alberta id `data/district-crosswalk.csv`
+constant and its D-04 decision comment. That was a deliberate scoping
+choice (it matched every Alberta id `data/district-crosswalk.csv`
 referenced at the time), not a complete Alberta census-division dataset.
 
 Practical effect: an Alberta record whose coordinates fall inside a
@@ -187,7 +187,8 @@ any new ids `data/district-crosswalk.csv` needs, and re-run
   `scripts/lib/district-assignment.ts`'s `FALLBACK_KM` constant may need a
   larger, still-conservative tolerance) before assuming a data-quality issue
   in the new records themselves.
-- Failure: the build's coverage-gap gate (Phase 47) fails after adding new
-  records — this means step 4 above (`derive-district-audit.ts`) was not
-  re-run and committed after the new records were appended; re-run it and
-  commit the updated `data/records-derived-district.csv`.
+- Failure: the build prints a coverage-gap failure from
+  `build:records-district-audit` after new records were added — step 4 above
+  (`derive-district-audit.ts`) was not re-run and committed after the new
+  records were appended; re-run it and commit the updated
+  `data/records-derived-district.csv`.

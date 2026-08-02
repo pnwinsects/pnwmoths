@@ -79,9 +79,17 @@ CI will build the new plate page automatically from the updated `data/plates.jso
 ## Linking species to the new plate
 
 Each species page shows a "View Photographic Plate" link when it has an entry
-in `data/species-plates.csv` (`species_slug,plate_slug`), consumed by
-[`src/_data/speciesPlates.ts`](../src/_data/speciesPlates.ts). Add a row for
-every species that appears on the new plate:
+in `data/species-plates.csv`, consumed by
+[`src/_data/speciesPlates.ts`](../src/_data/speciesPlates.ts).
+
+## Schema: data/species-plates.csv
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| species_slug | string | yes | `abagrotis-apposita` (must match a species in `data/species.csv`) |
+| plate_slug | string | yes | `plate-NN-familyname` (the `slug` you chose in step 1) |
+
+Add a row for every species that appears on the new plate:
 
 ```csv
 some-species-slug,plate-NN-familyname

@@ -29,10 +29,12 @@
 ## Adding photos and records for the same species
 
 Photos and records reference the species by its **slug**, not by `id`. The `id` column is
-`species.csv`'s own primary key and appears in no other file.
+`species.csv`'s own primary key and appears in no other file — note there is no `species_slug`
+column here to copy from; you derive the slug from `genus` and `species`.
 
 Once the species row is saved, follow [ADDING_PHOTO.md](ADDING_PHOTO.md) and
-[ADDING_RECORDS.md](ADDING_RECORDS.md) using `species_slug`. The build validates referential
+[ADDING_RECORDS.md](ADDING_RECORDS.md), where that slug goes in the `species_slug` column of
+`data/images.csv` and `data/records.csv` respectively. The build validates referential
 integrity, so the species row must exist in `data/species.csv` first.
 
 ## Steps

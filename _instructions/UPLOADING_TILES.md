@@ -6,15 +6,16 @@
   `tiled` to `uploaded` for each successfully uploaded row, or to `failed` (with the
   error stored in `last_error`) after retry exhaustion
 - **bunny.net Storage Zone `pnwmoths`** — new objects under the prefix
-  `species-tiles/{species-slug-lowercase}/{specimen_id}-{view}/`, containing the `.dzi`
-  descriptor and the full `_files/` tile pyramid (one HTTP PUT per file)
-- **Local tile directories** — `{tileOutputDir}/{slug}/{specimen_id}-{view}_files/` and
-  `{tileOutputDir}/{slug}/{specimen_id}-{view}.dzi` are deleted immediately after each
-  row's successful upload (D-03: disk reclamation)
+  `species-tiles/{species-slug-lowercase}/`, containing the `{specimen_id}-{view}.dzi`
+  descriptor, the full `{specimen_id}-{view}_files/` tile pyramid, and the
+  `{specimen_id}-{view}_thumbnail.webp` still image (one HTTP PUT per file)
+- **Local tile directories** — `{tileOutputDir}/{slug}/{specimen_id}-{view}_files/`,
+  `{tileOutputDir}/{slug}/{specimen_id}-{view}.dzi` and the matching `_thumbnail.webp`
+  are deleted immediately after each row's successful upload (D-03: disk reclamation)
 - **No** Eleventy build changes. **No** edits to `data/images.csv`. **No** changes to
-  `scripts/tile-config.json` or any other config file. Those belong to Phase 31
-  (data/species-photos.json build integration) and Phase 32 (OpenSeadragon viewer
-  wiring).
+  `scripts/tile-config.json` or any other config file. Uploading only puts the tiles on
+  the CDN; making them appear on a species page is a separate step — see
+  [What Happens Next](#what-happens-next).
 
 ## Prerequisites
 
@@ -28,12 +29,13 @@ You will need all of the following on this laptop before running the script:
   automatically).
 - **`curl`** available on PATH — confirm with `curl --version` (8.x is the verified
   version).
-- **`data/species-photos-manifest.csv`** present and pulled to latest; some rows must
-  already be at `status: tiled` (i.e., Phase 29 has run for at least some rows).
-  Pull the latest before running.
+- **`data/species-photos-manifest.csv`** present and pulled to latest, with some rows
+  already at `status: tiled` — this run has nothing to do otherwise. Confirm:
+  `grep -c ',tiled,' data/species-photos-manifest.csv` returns a non-zero count.
+  Tiling is [TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md).
 - **`var/tiles/`** directory (or whatever `TILE_OUTPUT_DIR` points to) populated with
-  tile pyramids for the `status: tiled` rows. If you ran Phase 29 to completion you
-  have this. Confirm: `ls var/tiles/ | head -5` should list species directories.
+  tile pyramids for the `status: tiled` rows. Tiling leaves these behind for you.
+  Confirm: `ls var/tiles/ | head -5` should list species directories.
 - **Outbound HTTPS** to `https://la.storage.bunnycdn.com` (the Storage Zone endpoint)
   from this laptop.
 - **`BUNNY_STORAGE_PASSWORD`** — the Storage Zone password from the bunny.net dashboard. Go to
@@ -87,8 +89,8 @@ Expected output:
   ... (3803 more)
 ```
 
-Note: the exact file count and "more" count will vary depending on how many Phase 29
-rows have completed by the time you run this.
+Note: the exact file count and "more" count will vary depending on how many rows have
+reached `status: tiled` by the time you run this.
 
 Operator checklist before proceeding:
 
@@ -115,8 +117,8 @@ Detach with `Ctrl-b d`. Reattach with `tmux attach -t upload`.
 ### Pre-Flight Footprint Check
 
 Before the first upload, the script walks `var/tiles/` for all `status: tiled` rows,
-measures total bytes on disk, and prints a footprint summary. This is the UPLOAD-03
-sanity check:
+measures total bytes on disk, and prints a footprint summary — your last chance to
+catch a corpus far larger than you expected before it lands on the CDN:
 
 ```
 [upload-tiles] Pre-flight: measuring tile corpus size (this may take 30-90s)...
@@ -129,8 +131,8 @@ Proceeding with upload...
 ```
 
 The "Estimated full-run size" line only appears when fewer rows have tiles on disk
-than exist at `status: tiled` (i.e., Phase 29 is still in progress). When Phase 29
-has completed and all tiles are present, only the "Total on-disk size" line appears.
+than exist at `status: tiled` — i.e. tiling has not caught up yet. Once every
+`status: tiled` row has its tiles on disk, only the "Total on-disk size" line appears.
 
 Cross-reference the projected size against bunny.net's current Storage pricing (look
 up the price on bunny.net's pricing page manually — hardcoded rates drift). If the
@@ -169,11 +171,13 @@ Every 25 rows, a progress checkpoint line is printed:
 
 ### Expected Runtime
 
-Approximately 27 hours serial at ~50 ms/PUT × ~350,000 file PUTs for the full
-~3,808-row corpus (~92 tile files per directory × 3,808 rows, plus one `.dzi`
-descriptor per row). The run is unattended in tmux (D-01 — serial uploads, simplicity
-over speed). Plan accordingly: start the run in the evening and check back the next
-morning.
+Roughly 350,000 serial PUTs for the full ~3,808-row corpus (~92 tile files per
+directory, plus one `.dzi` descriptor and one `_thumbnail.webp` per row). Wall-clock is
+dominated by round-trip latency to bunny.net and nothing else — at 50 ms per PUT that is
+about 5 hours, at 250 ms about a day. The uploads are deliberately serial (D-01:
+simplicity over speed), so there is no knob to turn. Treat it as an unattended overnight
+run in tmux: start it in the evening, check back the next morning, and time a real run
+from the log timestamps rather than trusting an estimate.
 
 ## Resume After Interruption
 
@@ -208,8 +212,9 @@ is gone. The script detects the missing directory, catches the `ENOENT` error, a
 marks the row `status: failed`. The `last_error` column in the manifest will contain
 the ENOENT message.
 
-Operator remediation: re-tile the affected rows with `npm run photos:tile` (Phase 29),
-then re-run `npm run photos:upload`. This is the documented tradeoff between D-02
+Operator remediation: re-tile the affected rows with `npm run photos:tile`
+([TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md)), then re-run
+`npm run photos:upload`. This is the documented tradeoff between D-02
 (whole-directory recovery granularity) and D-03 (immediate post-upload deletion).
 
 ### Do NOT edit the manifest while the script is running
@@ -238,13 +243,14 @@ env var, and restart.
 **Mixed-case slug appears in CDN URL or storage path**
 This should never happen — the script calls `.toLowerCase()` on `species_slug`
 unconditionally (L-08) before every path join. If an uppercase slug appears in DRY_RUN
-output, file a bug against `scripts/upload-tiles.js` (Phase 30 Plan 01).
+output, file a bug against `scripts/upload-tiles.ts`.
 
 **`ENOENT` errors on tile directory — rows moving to `status: failed`**
 A row reached `status: tiled` in memory, the tile directory was deleted, but the
 manifest checkpoint flush didn't happen before a `kill -9` (the 24-row window). On
 restart, the manifest still shows `status: tiled` but the directory is gone. Re-tile
-the affected rows with `npm run photos:tile` (Phase 29), then re-run the upload.
+the affected rows with `npm run photos:tile`
+([TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md)), then re-run the upload.
 
 **Pre-flight walk takes more than 90 seconds**
 Expected on a full corpus of ~450,000 files; `statSync` per file on macOS APFS is
@@ -264,7 +270,7 @@ from where it left off.
 
 After the run completes, run the following checks before committing the manifest.
 
-**1. Pull Zone resolves the .dzi descriptor (ROADMAP SC-4).**
+**1. Pull Zone resolves the .dzi descriptor.**
 
 Pick three random `status: uploaded` rows from the manifest and run:
 
@@ -276,15 +282,20 @@ Expected response: `HTTP/2 200`, `content-type: application/xml` or `text/xml`. 
 `404` means either the upload did not reach the Storage Zone (check the bunny.net
 dashboard) or the Pull Zone cache has not refreshed yet (wait 1–2 minutes and retry).
 
-**2. A representative tile file resolves through the Pull Zone.**
+**2. A representative tile file and the still thumbnail resolve through the Pull Zone.**
 
 ```bash
 curl -I https://moths.pnwinsects.org/species-tiles/{slug}/{specimen_id}-{view}_files/0/0_0.webp
+curl -I https://moths.pnwinsects.org/species-tiles/{slug}/{specimen_id}-{view}_thumbnail.webp
 ```
 
-Expected: `HTTP/2 200`, `content-type: image/webp`. Adjust the `0/0_0.webp` segment
-to match your actual tile layout — open the `.dzi` descriptor in a browser to confirm
-the correct tile coordinates.
+Expected: `HTTP/2 200`, `content-type: image/webp` for both. Adjust the `0/0_0.webp`
+segment to match your actual tile layout — open the `.dzi` descriptor in a browser to
+confirm the correct tile coordinates. A missing `_thumbnail.webp` is recoverable
+without re-tiling: `npm run photos:rethumbnail` re-downloads the source TIFF and
+uploads a fresh thumbnail for `status: uploaded` rows, leaving the tiles and the
+manifest `status` alone. It needs both `DROPBOX_TOKEN` and `BUNNY_STORAGE_PASSWORD`
+(see [TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md)).
 
 **3. Manifest diff shows tiled → uploaded transitions.**
 
@@ -328,25 +339,32 @@ After all verification steps pass:
 
 ```bash
 git add data/species-photos-manifest.csv
-git commit -m 'chore(30): record uploaded rows from bulk run'
+git commit -m 'chore: record uploaded rows from bulk tile upload'
 ```
 
-The manifest is the durable source of truth for Phase 31. Commit it before moving on.
-
-## Next Phase Handoff
-
-Phase 31 (`data/species-photos.json` build integration) reads `status: uploaded` rows
-from `data/species-photos-manifest.csv` and materializes them into the Eleventy data
-tree. The CDN tile path convention is:
-
-```
-https://moths.pnwinsects.org/species-tiles/{slug-lowercase}/{specimen_id}-{view}/
-```
-
-This is the URL format Phase 31 will use to construct OpenSeadragon viewer entries.
-Do not edit or delete any objects in the bunny.net Storage Zone after this run until
-Phase 31 has been verified — tile URLs are now public and downstream code will start
-depending on them.
+The manifest is the durable source of truth for every step downstream of this one —
+nothing else records which tiles exist on the CDN. Commit it before moving on.
 
 Keep the `upload-run-YYYY-MM-DD-HHMM.log` file alongside the manifest commit so
 future debugging has the full timestamped run log available.
+
+## What Happens Next
+
+Uploaded tiles do not appear on the site by themselves. Two things read them:
+
+1. **`npm run photos:materialize`** (`scripts/generate-species-photos.ts`) reads the
+   `status: uploaded` rows out of `data/species-photos-manifest.csv`, groups them by
+   species, and rewrites the committed `data/species-photos.json`. Run it after this
+   runbook and commit the result.
+2. **The species page** picks that JSON up at build time through
+   `src/_data/speciesPhotos.ts`, and `src/components/pnwm-image-slideshow.ts` opens the
+   zoomable viewer at `{CDN_BASE_URL}/{tiles_path}.dzi` — the same path this run wrote:
+
+   ```
+   https://moths.pnwinsects.org/species-tiles/{slug-lowercase}/{specimen_id}-{view}.dzi
+   ```
+
+Those tile URLs are public the moment the upload finishes, and the standing rule for
+the Storage Zone applies to them like everything else: it is additive, and nothing is
+ever deleted from it ([ADR 0008](../docs/adr/0008-deploy-bunny-additive.md)). Re-running
+this runbook overwrites objects in place, which is safe; removing them is not.

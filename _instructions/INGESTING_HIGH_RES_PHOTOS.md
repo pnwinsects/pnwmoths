@@ -4,14 +4,14 @@
 
 - `data/species-photos-manifest.csv` — new on first run; updated in place on every subsequent run
 - Dropbox API — read-only metadata via `/2/files/list_folder` (and `/list_folder/continue` for pagination); no file bytes downloaded at this stage
-- **No** bunny.net writes, **no** CDN cache changes, **no** Eleventy build changes — those belong to Phases 28–31
+- **No** bunny.net writes, **no** CDN cache changes, **no** Eleventy build changes. This step only writes down what exists in Dropbox; tiling, uploading and wiring the photos into the site come later ([TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md), [UPLOADING_TILES.md](UPLOADING_TILES.md))
 
 ## Before You Start
 
 You will need:
 - **Dropbox app access token** with the `files.metadata.read` scope — generate one yourself, see Step 1 below. Tokens start with `sl.` and are short-lived (~4 hours unless refreshed)
 - **Node 24** — matches `.nvmrc`. Verify with `node --version`
-- **tmux** (or `screen`) on the operator machine — the full run takes 5–15 minutes against the audit corpus, and tmux keeps it alive across SSH disconnects
+- **tmux** (or `screen`) — the full run takes 5–15 minutes against the audit corpus, and tmux keeps it alive across laptop sleep and an accidentally closed terminal
 
 No file is read from disk for the token. Pass it on the invocation line (see Step 3). The script redacts the token from every error message before logging.
 
@@ -47,7 +47,7 @@ tmux new -s ingest
 DROPBOX_TOKEN=sl.your-token-here npm run photos:ingest
 ```
 
-Detach with `Ctrl-b d`. Reattach with `tmux attach -t ingest`. On `maderas.amandrai.net` the job runs for about 5–15 minutes against the ~5,000-file audit corpus (metadata only, so no bytes transferred).
+Detach with `Ctrl-b d`. Reattach with `tmux attach -t ingest`. The job runs for about 5–15 minutes against the ~5,000-file audit corpus (metadata only, so no bytes transferred). It runs on your own laptop — there is no build or data server ([ADR 0001](../docs/adr/0001-static-no-server.md)).
 
 ### 4. Read the log output
 
@@ -61,7 +61,10 @@ Format: `<ISO timestamp> <12-char content_hash prefix> <action> <outcome> [extra
 
 ### 5. Interpret the manifest columns
 
-Open `data/species-photos-manifest.csv` in a spreadsheet. The 13-column schema (locked):
+Open `data/species-photos-manifest.csv` in a spreadsheet. The 13-column schema is locked —
+every later step in the photo pipeline reads these columns by name.
+
+#### Schema: data/species-photos-manifest.csv
 
 | Column | Meaning |
 |---|---|
@@ -89,11 +92,11 @@ Kill the tmux session, restart it with the same command. The script reads the ex
 npm run photos:investigate
 ```
 
-This re-runs the script in re-sort-only mode — no Dropbox calls. It reads the manifest, moves all `genus-only` / `likely-synonym` / `provisional` / `unparseable` rows to the top (ordered by binomial frequency, most common first), and writes it back. Open the file in a spreadsheet and work top-down; Phase 27 uses the surfaced rows to seed `data/species-synonyms.csv`.
+This re-runs the script in re-sort-only mode — no Dropbox calls. It reads the manifest, moves all `genus-only` / `likely-synonym` / `provisional` / `unparseable` rows to the top (ordered by binomial frequency, most common first), and writes it back. Open the file in a spreadsheet and work top-down; [CURATING_SPECIES_SYNONYMS.md](CURATING_SPECIES_SYNONYMS.md) uses the surfaced rows to seed `data/species-synonyms.csv`.
 
 ### 8. The `*custom/` Dropbox subfolder
 
-The non-recursive listing emits a single `folder` entry for `*custom/` and the script logs it as `folder-skip`. Inspecting that subfolder is a deferred task tracked in `.planning/STATE.md`; do not enable recursive listing without a separate planning round.
+The non-recursive listing emits a single `folder` entry for `*custom/` and the script logs it as `folder-skip`. Nothing inside it has ever been ingested. Deciding what is in there and whether it belongs in the corpus is open work — file a GitHub issue rather than reaching for recursion here, which shared-link listing forbids in any case (see the `recursive: true` entry below).
 
 ## Verify
 

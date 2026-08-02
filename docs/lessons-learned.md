@@ -445,6 +445,13 @@ cost a debugging cycle to discover.
   Mutation-test the guard afterwards: reintroduce the bug and confirm it goes red. A guard you
   haven't watched fail is a guess.
 
+- **A wider reference set can make a guard weaker, not stronger.** The runbook column guard
+  resolves a column name in prose against the CSVs *that document names*, not against every
+  header in `data/`. The wider version reads as the stricter one and isn't: `species_id` — the
+  exact bug the guard exists to catch (#240) — is a real column of `data/records-bad-coords.csv`,
+  so a repo-wide union would have passed it. Before widening a matcher's reference set, check
+  whether the known bug still fails against it ([ADR 0023](adr/0023-runbook-schema-guard.md)).
+
 - **Never let a script write outputs to a fixed path when its inputs are redirectable.**
   `build-key.ts` honored `KEY_CHAR_IMAGES_CSV` for input but hardcoded its `data/` output
   paths, so tests pointing at fixtures overwrote the committed artifacts on every `npm test`
