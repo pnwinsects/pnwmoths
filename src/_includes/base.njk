@@ -127,7 +127,14 @@
       </div>
     </div>
   </section>
-  <footer>
+  {#- Belt-and-braces, NOT a fix: Pagefind already drops `<footer>` content by
+     default, verified with a probe token (see docs/lessons-learned.md). The
+     attribute states the intent — this chrome repeats on all ~1375 pages and must
+     never reach the index — and keeps that true if the block is ever restructured
+     into a plain <div>/<section>, which Pagefind does NOT exclude by default (the
+     reason .partners-banner's own ignore *is* load-bearing). It also keeps the
+     glossary transform, which skips [data-pagefind-ignore] subtrees, out of here. -#}
+  <footer data-pagefind-ignore>
     <p><a href="{{ '/contact/' | url }}">Contact us</a> · <a href="{{ repoUrl }}">Source code on GitHub</a></p>
     <p>Pacific Northwest Moths. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>.</p>
   </footer>

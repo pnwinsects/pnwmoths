@@ -152,6 +152,22 @@ test('plate.njk: shares the plate thumbnail already published to the CDN', () =>
   assert.match(plateTemplate, /^\s+description:\s*"\{\{ plate\.title/m);
 });
 
+test('base.njk: repeated site chrome is excluded from the Pagefind index (issue #255)', () => {
+  // Nav, partners banner and footer render identically on every page; indexing any of
+  // them would make their words match all ~1375 pages. Pagefind's defaults already
+  // drop <nav> and <footer>, so those two attributes are declarations of intent —
+  // .partners-banner is a <section>, which Pagefind does index, so its ignore is the
+  // one that actually does work. Asserting all three keeps the rule uniform, and
+  // holds if any of these blocks is restructured into a non-excluded element.
+  for (const [label, pattern] of [
+    ['site nav', /<nav class="site-nav"[^>]*data-pagefind-ignore/],
+    ['partners banner', /<section class="partners-banner"[^>]*data-pagefind-ignore/],
+    ['footer', /<footer[^>]*data-pagefind-ignore/],
+  ] as const) {
+    assert.match(layout, pattern, `the ${label} must carry data-pagefind-ignore`);
+  }
+});
+
 /** Every page template that renders through base.njk, found by walking src/. */
 function pageTemplates(dir: string, found: string[] = []): string[] {
   for (const entry of readdirSync(dir)) {

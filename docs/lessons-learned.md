@@ -253,6 +253,18 @@ cost a debugging cycle to discover.
   (`stripMarkdown` drops unbalanced markers) and scan *all* ~1,265 outputs for residue
   after any such change; a single bad file in a corpus that size is invisible in a sample.
 
+- **Pagefind already excludes `<nav>` and `<footer>` by default — verify before "fixing"
+  index pollution.** The footer looked like it was polluting every page's index (license
+  text, "Source code on GitHub"), and adding `data-pagefind-ignore` produced a
+  *byte-identical* index. Probe rather than reason about it: inject a nonsense token
+  (`zzqqxxprobe`) into the built HTML, re-run `npm run build:pagefind`, and watch the
+  "Indexed N words" line — inside `<footer>` the count did not move, inside
+  `<main>` it went up by one. Semantic wrappers matter: `.partners-banner` is a
+  `<section>`, which Pagefind *does* index, so its ignore attribute is load-bearing
+  where the footer's is documentation. Note "Indexed N words" counts *unique* words,
+  so it will not budge for repeated chrome whose vocabulary appears elsewhere — the
+  probe token is what makes the signal readable.
+
 - **Spot-check real build output for transforms.** The single-substitution bug above
   passed the existing unit tests and was only caught by inspecting an actual generated
   species page. Load and verify a real page, don't trust green units alone.
