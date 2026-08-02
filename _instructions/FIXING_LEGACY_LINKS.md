@@ -72,7 +72,15 @@ a species added to the CSV without a matching line here is unreachable from ever
 
 ### 3b. If it's a species we renamed
 
-Add a row to `data/species-redirects.csv`:
+Add a row to `data/species-redirects.csv`.
+
+#### Schema: data/species-redirects.csv
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| old_slug | string | yes | `eilema-bicolor` (the retired slug; must not be a live species) |
+| new_slug | string | yes | `manulea-bicolor` (the slug the visitor should land on) |
+| reason | string | yes | Free text — say why, and cite the issue if there is one. A row missing its second comma is silently skipped, so keep the field even if you leave it blank |
 
 ```csv
 old_slug,new_slug,reason

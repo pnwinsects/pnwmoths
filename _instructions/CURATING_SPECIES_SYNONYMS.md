@@ -13,7 +13,7 @@ You will need:
 - A spreadsheet program (Excel, LibreOffice Calc, or Google Sheets with the CSV imported) to read `data/species-photos-manifest.csv` and optionally `data/species.csv`
 - A text editor for `data/species-synonyms.csv` — direct CSV editing is fine; the file is two columns, header on line 1
 
-You do NOT need a Dropbox token for this task. Phase 27 curation is offline.
+You do NOT need a Dropbox token for this task. Synonym curation is entirely offline.
 
 ## Steps
 
@@ -21,11 +21,11 @@ You do NOT need a Dropbox token for this task. Phase 27 curation is offline.
 
 Open `data/species-photos-manifest.csv` in your spreadsheet of choice. LibreOffice Calc handles flat CSVs cleanly; Excel works too; in Google Sheets use File → Import → Append/Replace.
 
-Phase 26's `sortForInvestigation` already moved the `genus-only`, `likely-synonym`, `provisional`, and `unparseable` rows to the top, ordered by binomial frequency. Work top-down — the most-impactful single decision is at the very top.
+The ingest script's `sortForInvestigation` pass (`npm run photos:investigate`, see [INGESTING_HIGH_RES_PHOTOS.md](INGESTING_HIGH_RES_PHOTOS.md)) already moved the `genus-only`, `likely-synonym`, `provisional`, and `unparseable` rows to the top, ordered by binomial frequency. Work top-down — the most-impactful single decision is at the very top.
 
 ### 2. Identify a `from_binomial` to re-route
 
-The top of the manifest shows the highest-frequency unmatched binomials in the v2.2 corpus. The top 12 at the time of the Phase 27 curation pass are:
+The top of the manifest shows the highest-frequency unmatched binomials in the v2.2 corpus. The top 12 at the time of the first curation pass were:
 
 ```
 smerinthus ophthalmica   (32 files)
@@ -42,7 +42,7 @@ drepanulatrix bifilata   (8)
 digrammia muscariata     (8)
 ```
 
-Clearing the top 12 alone moves the clean-or-resolved match rate from 77.3% to roughly 80%. The long tail of 30–80 unique binomials provides the remaining bar-clearing toward the ≥95% target (L-04). Note that 22 rows have an empty `binomial_raw` — those are unreachable through synonyms.csv (no key to match on) and should be left alone.
+Clearing the top 12 alone moves the clean-or-resolved match rate from 77.3% to roughly 80%. The long tail of 30–80 unique binomials provides the remaining bar-clearing toward the ≥95% target. Note that 22 rows have an empty `binomial_raw` — those are unreachable through synonyms.csv (no key to match on) and should be left alone.
 
 ### 3. Look up the target species
 
@@ -99,7 +99,7 @@ The first row of the file is now the next-highest-frequency unresolved binomial.
 
 ### 7. Commit synonyms.csv AND the manifest in the same PR
 
-The git history is the audit trail (D-01). Do NOT split the curator decision and its effect across two commits. Stage both files together:
+The git history is the audit trail — it is the only record of *why* a binomial was re-routed. Do NOT split the curator decision and its effect across two commits. Stage both files together:
 
 ```bash
 git add data/species-synonyms.csv data/species-photos-manifest.csv
@@ -114,12 +114,12 @@ In a spreadsheet view of `data/species-photos-manifest.csv`:
 
 - The rows you re-routed have `match_bucket = resolved-via-synonym`
 - `binomial_resolved` and `species_slug` columns are populated (not empty)
-- `status` remains `discovered` (Phase 28 uses `status`, not `match_bucket`, to gate downloads)
+- `status` remains `discovered` — curation never advances it. What curation changes is `match_bucket`, and that is exactly what makes a row tileable: `isTileable()` in `scripts/tile-photos.ts` requires *both* a status other than `tiled` *and* a `match_bucket` of `clean-match`, `slug-match` or `resolved-via-synonym`. A row you re-route out of `likely-synonym` becomes eligible on the next tiling run
 
 On the command line:
 
 - The tail of the `npm run photos:investigate` output shows the promoted count and the new per-bucket distribution
-- Over multiple passes, the clean-or-resolved match rate (clean-match + resolved-via-synonym divided by total rows) climbs toward the ≥95% target, up from the 77.3% baseline (L-04)
+- Over multiple passes, the clean-or-resolved match rate (clean-match + resolved-via-synonym divided by total rows) climbs toward the ≥95% target, up from the 77.3% baseline
 
 ## When Things Go Wrong
 

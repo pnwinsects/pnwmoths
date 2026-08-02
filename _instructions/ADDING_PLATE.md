@@ -66,10 +66,14 @@ curl -sI "https://moths.pnwinsects.org/plates/plate-NN-familyname/thumbnail.jpg"
 # Expected: HTTP/2 200
 ```
 
-**6. Commit and push.**
+**6. Link the species to the plate.** Do this before committing — see [Linking species to
+the new plate](#linking-species-to-the-new-plate) below. A plate with no rows in
+`data/species-plates.csv` builds fine and is reachable, but no species page links to it.
+
+**7. Commit and push.**
 
 ```sh
-git add data/plates.json
+git add data/plates.json data/species-plates.csv
 git commit -m "feat: add plate NN (Family Name)"
 git push
 ```
@@ -79,9 +83,17 @@ CI will build the new plate page automatically from the updated `data/plates.jso
 ## Linking species to the new plate
 
 Each species page shows a "View Photographic Plate" link when it has an entry
-in `data/species-plates.csv` (`species_slug,plate_slug`), consumed by
-[`src/_data/speciesPlates.ts`](../src/_data/speciesPlates.ts). Add a row for
-every species that appears on the new plate:
+in `data/species-plates.csv`, consumed by
+[`src/_data/speciesPlates.ts`](../src/_data/speciesPlates.ts).
+
+## Schema: data/species-plates.csv
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| species_slug | string | yes | `abagrotis-apposita` — `(genus + '-' + species).toLowerCase()`, alphanumeric and hyphens only. Must match a species in `data/species.csv` |
+| plate_slug | string | yes | `plate-NN-familyname` (the `slug` you chose in step 1) |
+
+Add a row for every species that appears on the new plate:
 
 ```csv
 some-species-slug,plate-NN-familyname

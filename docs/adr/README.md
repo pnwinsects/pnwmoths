@@ -31,3 +31,5 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0020](0020-inert-modal-focus-containment.md) | Modal focus is contained with `inert` (through `<body>`'s children) rather than a keydown focus trap | Accepted |
 | [0021](0021-sharing-metadata.md) | Share previews from derived factsheet prose + CDN photos, absolute URLs via `SITE_ORIGIN`, one committed fallback card | Accepted |
 | [0022](0022-pregenerated-image-derivatives.md) | Image variants pre-generated offline under `derived/`, guarded by a committed manifest; Bunny Optimizer retired | Accepted |
+| [0023](0023-runbook-schema-guard.md) | Runbook CSV schemas checked mechanically — complete tables, sample rows, and prose column names resolved per-document | Accepted |
+| [0024](0024-html-validity-gate.md) | `build:check-html` fails the build on a malformed or unknown start tag in `_site/` | Accepted |

@@ -445,6 +445,26 @@ cost a debugging cycle to discover.
   Mutation-test the guard afterwards: reintroduce the bug and confirm it goes red. A guard you
   haven't watched fail is a guess.
 
+- **A lenient parser is the wrong tool for judging output.** `/plates/` shipped 98 cards as
+  `<imgsrc="…">` for months — a Nunjucks comment inside an open tag, written `{#- … -#}`, closed the
+  whitespace on *both* sides and welded the tag name to its first attribute (either marker alone is
+  harmless, which is part of why it survived review), and the HTML tokenizer read the result as an element named
+  `imgsrc`, which renders as nothing. Every existing check missed it for the same underlying
+  reason: they read the output *as a document*. `node-html-parser` (already a dependency) hands
+  back an ordinary `img`; lychee checks `src` attributes and this markup has none; the derivative
+  guard proved the CDN file existed; the weight check saw the page get *smaller*. Vite does emit
+  `parse5 error code unexpected-character-in-attribute-name` — as a warning, and the build exits 0.
+  A defect that destroys the document while emitting valid-looking bytes is invisible to anything
+  that starts by parsing it. `scripts/check-html.ts` checks the bytes instead
+  ([ADR 0024](adr/0024-html-validity-gate.md)).
+
+- **A wider reference set can make a guard weaker, not stronger.** The runbook column guard
+  resolves a column name in prose against the CSVs *that document names*, not against every
+  header in `data/`. The wider version reads as the stricter one and isn't: `species_id` — the
+  exact bug the guard exists to catch (#240) — is a real column of `data/records-bad-coords.csv`,
+  so a repo-wide union would have passed it. Before widening a matcher's reference set, check
+  whether the known bug still fails against it ([ADR 0023](adr/0023-runbook-schema-guard.md)).
+
 - **Never let a script write outputs to a fixed path when its inputs are redirectable.**
   `build-key.ts` honored `KEY_CHAR_IMAGES_CSV` for input but hardcoded its `data/` output
   paths, so tests pointing at fixtures overwrote the committed artifacts on every `npm test`
