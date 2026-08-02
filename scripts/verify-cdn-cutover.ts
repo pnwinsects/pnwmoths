@@ -327,11 +327,17 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   if (STAGING_ORIGIN && STAGING_ORIGIN === PROD_ORIGIN) {
-    console.error(
-      `[verify-cdn-cutover] STAGING_ORIGIN is the production origin (${PROD_ORIGIN}).\n` +
-      '  That would verify nothing: production still has the Optimizer enabled.',
+    // Before the cutover this was a hard error: sweeping production verified
+    // nothing, because production still transformed everything at the edge.
+    // With the Optimizer disabled (#227) production IS an untransformed origin,
+    // and sweeping it is the most useful thing this script does — it proves the
+    // manifest still matches what the live site serves. Only the negotiation
+    // probe becomes meaningless, since both sides of the comparison are now the
+    // same origin, so it is skipped rather than printed as a fake contrast.
+    console.log(
+      `[verify-cdn-cutover] target is the production origin (${PROD_ORIGIN}) — sweeping it directly.\n` +
+      '  Post-cutover this is expected; the WebP negotiation probe is skipped (nothing to compare against).',
     );
-    process.exit(1);
   }
 
   const siteDir = resolve(SITE_DIR);
@@ -393,7 +399,10 @@ async function main(): Promise<void> {
     if (list.length > 30) console.error(`  …and ${list.length - 30} more`);
   }
 
-  await probeNegotiation(selectProbePaths(targets, PROBE_SAMPLE));
+  // Comparing an origin against itself would print an identical pair as though
+  // it were a contrast, which is worse than printing nothing.
+  const probePaths = STAGING_ORIGIN === PROD_ORIGIN ? [] : selectProbePaths(targets, PROBE_SAMPLE);
+  await probeNegotiation(probePaths);
 
   if (failures.length > 0) {
     console.error(

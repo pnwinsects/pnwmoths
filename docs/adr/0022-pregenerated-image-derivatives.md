@@ -169,6 +169,15 @@ and this is the only way to exercise the loss of auto-WebP without experimenting
   excludes image extensions, so CI has never verified an image URL
   ([#232](https://github.com/pnwinsects/pnwmoths/issues/232)).
 - Re-enabling the Optimizer remains a single dashboard toggle if any of this proves wrong.
+- **The cutover is complete.** The Optimizer was disabled on pull zone `5726079` and the zone cache
+  purged; a full sweep of all 26,927 image objects against production returned 200 with the expected
+  content type. `?width=100` now returns the full-size original, which is the check that actually
+  distinguishes "disabled" from "serving a stale optimized copy".
+- **Purging is part of the procedure, not an afterthought.** Between the toggle and the purge,
+  production served Optimizer-compressed copies from cache — smaller than storage, so nothing looked
+  broken, but any measurement taken in that window mixes pre- and post-toggle responses. A query
+  string is not a cache key on this CDN, so the zone purge is the only way to reach a known state
+  short of waiting out the image TTL ([0009](0009-bunny-cache-policy.md)).
 
 ## Alternatives considered
 
