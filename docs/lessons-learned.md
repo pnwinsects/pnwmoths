@@ -384,6 +384,22 @@ cost a debugging cycle to discover.
   variant set. Ask of any output-scanning check: what does this artifact not contain
   because a client assembles it later? ([#226](https://github.com/pnwinsects/pnwmoths/issues/226))
 
+- **Turning off an edge transform does not un-transform what is already cached — purge, then
+  measure.** Immediately after the Optimizer was disabled, production served a plate thumbnail
+  at 14,243 B where storage held 44,425 B, and a legacy JPEG at 126,651 B against a stored
+  147,961 B. Nothing was broken (the cached copies were *smaller*), which is exactly what makes
+  it dangerous: every measurement taken in that window silently describes a mix of pre- and
+  post-toggle responses. **A query string is not a cache key on Bunny** — `?bust=<random>`
+  returned `cdn-cache: HIT` — so selective busting is not available; purge the zone or wait out
+  the long image TTL ([0009](adr/0009-bunny-cache-policy.md)). After the purge every sampled
+  object matched its stored bytes exactly.
+
+- **To prove an edge transform is off, ask it to transform.** Comparing byte sizes could not
+  distinguish "Optimizer disabled" from "serving a stale optimized copy" — both give a number
+  that differs from storage. Requesting `?width=100` and getting the full-size original settles
+  it in one call, because only a live transform could honour it. Pick the test whose two
+  outcomes have different *causes*, not merely different values.
+
 - **A bulk network check needs a serial re-check pass, not just per-request retries.** The
   cutover sweep reported 6 consecutive `fetch failed` errors on one species out of 26,927
   objects; every one served 200 when asked again calmly. Under concurrency a local hiccup
