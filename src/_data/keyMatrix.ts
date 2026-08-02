@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import keyMatrixJson from '../../data/key-matrix.json' with { type: 'json' };
 import { resolve } from 'node:path';
 import { parse as parseCsv } from 'csv-parse/sync';
 import type { Character, KeySpecies } from '../types/index.ts';
@@ -34,11 +35,16 @@ interface SpeciesCsvRow {
   family: string;
 }
 
+// Imported rather than read so the compiler verifies the committed artifact
+// against Character/KeySpecies (#250). `RawKeyMatrix` names only the two fields
+// this loader uses; the annotation still checks them against the real file,
+// while `matrix` and `meta` stay out of the return value (page-weight guard —
+// this module runs in Node at build time, so importing the whole 248 KB costs
+// the page nothing; the browser fetches _site/key-matrix.json separately).
+// scripts/build-key.test.ts proves the committed bytes match a fresh build (#197).
+const raw: RawKeyMatrix = keyMatrixJson;
+
 export default function (): KeyMatrixData {
-  // Read and parse key-matrix.json — do NOT spread matrix/meta into return value
-  const raw = JSON.parse(
-    readFileSync(resolve('data/key-matrix.json'), 'utf-8')
-  ) as RawKeyMatrix;
 
   // Read and parse species.csv to get family per species
   const speciesRows = parseCsv(

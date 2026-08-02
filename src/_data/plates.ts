@@ -13,10 +13,28 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import platesManifest from '../../data/plates.json' with { type: 'json' };
 
 const DEFAULT_SOURCE = '/Users/rainhead/dev/pnwinsects-app/pnwmoths_https/usr/local/www/pnwmoths/django/pnwmoths/static/media/plates_z';
 const PLATES_Z_SOURCE = process.env.PLATES_Z_SOURCE ?? DEFAULT_SOURCE;
+
+/**
+ * What data/plates.json actually holds, per _instructions/ADDING_PLATE.md.
+ *
+ * Deliberately narrower than PlateEntry: the manifest carries no `title` or
+ * `description` — those are derived below. The old code read the file and cast
+ * it `as PlateEntry[]`, which claimed two fields no entry has ever had; the
+ * import plus this annotation is what surfaced that (#250).
+ */
+interface PlateManifestEntry {
+  number: string;
+  family: string;
+  slug: string;
+  width: number;
+  height: number;
+}
+
+const MANIFEST: PlateManifestEntry[] = platesManifest;
 
 // Local interface covering all consumed/returned fields (both code paths)
 interface PlateEntry {
@@ -158,24 +176,21 @@ async function readDimensions(dirPath: string): Promise<{ width: number; height:
   };
 }
 
-const MANIFEST_PATH = fileURLToPath(new URL('../../data/plates.json', import.meta.url));
-
 export default async function (): Promise<PlateEntry[]> {
+  // The curator's local Zoomify tile directory is the richer source, but it only
+  // exists on their machine; every other build (CI included) derives plates from
+  // the committed manifest. That fallback is no longer conditional — the manifest
+  // is committed, so its absence is a broken checkout, not a build to continue.
   if (!existsSync(PLATES_Z_SOURCE)) {
-    if (existsSync(MANIFEST_PATH)) {
-      const raw = JSON.parse(await readFile(MANIFEST_PATH, 'utf8')) as PlateEntry[];
-      return raw.map(({ number, family, slug, width, height }) => ({
-        number,
-        family,
-        title: `Plate ${number}: ${family.replace(/\s*\([^)]*\)\s*$/, '').trim()}`,
-        description: DESCRIPTIONS[number] ?? null,
-        slug,
-        width,
-        height,
-      }));
-    }
-    console.warn(`[plates] Source not found: ${PLATES_Z_SOURCE} — skipping plate data`);
-    return [];
+    return MANIFEST.map(({ number, family, slug, width, height }) => ({
+      number,
+      family,
+      title: `Plate ${number}: ${family.replace(/\s*\([^)]*\)\s*$/, '').trim()}`,
+      description: DESCRIPTIONS[number] ?? null,
+      slug,
+      width,
+      height,
+    }));
   }
 
   const entries = await readdir(PLATES_Z_SOURCE, { withFileTypes: true });

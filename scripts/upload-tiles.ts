@@ -34,12 +34,13 @@
 
 import { resolve, join, relative } from 'node:path';
 import { rm, unlink, readdir } from 'node:fs/promises';
-import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
+import { existsSync, statSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus } from './lib/manifest.ts';
 import type { View } from './lib/parse-photo-filename.ts';
 import { pathToFileURL } from 'node:url';
+import tileConfig from './tile-config.json' with { type: 'json' };
 
 // ---------------------------------------------------------------------------
 // Module-level env constants (project convention; mirrors upload-plates.js
@@ -47,7 +48,6 @@ import { pathToFileURL } from 'node:url';
 // ---------------------------------------------------------------------------
 
 const MANIFEST_PATH: string = resolve('data/species-photos-manifest.csv');
-const TILE_CONFIG_PATH: string = resolve('scripts/tile-config.json');
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
@@ -250,7 +250,10 @@ function preflightFootprint(tileOutputDir: string, tiledRows: ManifestRow[]): vo
 
 async function main(): Promise<void> {
   // --- Load config (tileOutputDir default from tile-config.json). ---
-  const config = JSON.parse(readFileSync(TILE_CONFIG_PATH, 'utf8')) as { tileOutputDir: string };
+  // Imported, so the compiler checks the committed config and the path no longer
+  // depends on the process cwd being the repo root (#250). Only tileOutputDir is
+  // read here; the rest of the config belongs to the tiling step.
+  const config: { tileOutputDir: string } = tileConfig;
 
   // --- Resolve runtime dirs: env override takes precedence over config file. ---
   const tileOutputDir: string = TILE_OUTPUT_DIR_OVERRIDE || config.tileOutputDir;

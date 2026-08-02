@@ -4,7 +4,10 @@
 // already sitting on Bunny storage (those files have no legacy-link fields at all).
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { aggregateDays, type RawDay } from './analytics.ts';
+import { aggregateDays, readDay, RawDaySchema, type RawDay } from './analytics.ts';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 function day(date: string, overrides: Partial<RawDay> = {}): RawDay {
   return {
@@ -104,5 +107,127 @@ describe('aggregateDays: legacy links (#181)', () => {
     );
     const result = aggregateDays(days);
     assert.equal(result.rolling30.redirect_hits.total, 30);
+  });
+});
+
+
+// ---------------------------------------------------------------------------
+// readDay: the one JSON the build reads that does not come from the repo (#250)
+// ---------------------------------------------------------------------------
+
+describe('readDay validates the external daily files', () => {
+  function withFile<T>(name: string, contents: string, fn: (path: string) => T): T {
+    const dir = mkdtempSync(join(tmpdir(), 'pnwm-analytics-'));
+    try {
+      const path = join(dir, name);
+      writeFileSync(path, contents);
+      return fn(path);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  }
+
+  const valid: RawDay = day('2026-06-29');
+
+  test('accepts a well-formed day file', () => {
+    withFile('2026-06-29.json', JSON.stringify(valid), (path) => {
+      assert.deepEqual(readDay(path)?.date, '2026-06-29');
+    });
+  });
+
+  test('accepts a schema_version 2 file, which has no legacy-link fields', () => {
+    // These are still in the archive on Bunny; rejecting them would drop real days.
+    const { redirect_hits: _h, redirect_misses: _m, not_found: _n, ...v2 } = valid;
+    withFile('2026-01-01.json', JSON.stringify(v2), (path) => {
+      assert.equal(readDay(path)?.date, valid.date);
+    });
+  });
+
+  test('tolerates unknown keys, so a newer writer does not break an older build', () => {
+    withFile('2026-06-29.json', JSON.stringify({ ...valid, schema_version: 99, brand_new: [] }), (path) => {
+      assert.equal(readDay(path)?.date, '2026-06-29');
+    });
+  });
+
+  test('skips a file that is not valid JSON rather than failing the build', () => {
+    withFile('broken.json', '{"date": "2026-06-29",', (path) => {
+      assert.equal(readDay(path), null);
+    });
+  });
+
+  test('skips a file whose shape is wrong — the case the `as` cast let through', () => {
+    // total_requests as a string reached the page as NaN before this (#250).
+    withFile('bad.json', JSON.stringify({ ...valid, total_requests: 'lots' }), (path) => {
+      assert.equal(readDay(path), null);
+    });
+  });
+
+  test('skips a file missing a required field', () => {
+    const { pageviews: _p, ...missing } = valid;
+    withFile('bad.json', JSON.stringify(missing), (path) => {
+      assert.equal(readDay(path), null);
+    });
+  });
+
+  test('RawDaySchema and the RawDay type stay in step', () => {
+    // The type is inferred from the schema, so this is a compile-time tautology
+    // that becomes a runtime check if anyone replaces the inference with a hand
+    // written interface.
+    const parsed = RawDaySchema.safeParse(valid);
+    assert.ok(parsed.success);
+    const roundTripped: RawDay = parsed.data;
+    assert.deepEqual(roundTripped.date, valid.date);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// requests_by_hour is a 24-slot contract. scripts/fetch-analytics.ts builds it
+// as `new Array(24).fill(0)` and only ever writes indices 0-23, so a wrong length
+// means a corrupt or hand-edited file.
+//
+// RawDaySchema deliberately does NOT enforce the length, and these tests pin why:
+// both readers (aggregateDays below, and pnwm-analytics-dashboard) index a fixed
+// 0..23 loop with `?? 0`, so a short array loses one bar of the hourly chart and a
+// long one has its tail ignored — while every other metric for that day survives.
+// Rejecting the file in readDay would instead discard the whole day: its
+// pageviews, unique visitors, referrers, countries, redirect misses and 404s.
+// That is a far worse trade for a defect the consumers already absorb, and
+// analytics data is irrecoverable after Bunny's 72-hour log retention.
+// ---------------------------------------------------------------------------
+
+describe('aggregateDays tolerates a wrong-length requests_by_hour', () => {
+  const withHours = (hours: number[]): RawDay => day('2026-06-29', { requests_by_hour: hours });
+
+  test('a full 24-hour day sums every hour', () => {
+    const out = aggregateDays([withHours(new Array<number>(24).fill(1))]).rolling30.requests_by_hour;
+    assert.equal(out.length, 24);
+    assert.equal(out.reduce((a, b) => a + b, 0), 24);
+  });
+
+  test('a short array loses only the missing hours — no NaN, no dropped day', () => {
+    const result = aggregateDays([withHours(new Array<number>(23).fill(1))]);
+    const out = result.rolling30.requests_by_hour;
+    assert.equal(out.length, 24, 'output is always 24 slots regardless of input length');
+    assert.equal(out.reduce((a, b) => a + b, 0), 23);
+    assert.ok(!out.some(Number.isNaN), 'a missing hour reads as 0, never NaN');
+    assert.equal(result.days.length, 1, 'the day itself is still counted');
+    assert.equal(result.rolling30.total_pageviews, 50, 'its other metrics are intact');
+  });
+
+  test('a long array has its tail ignored rather than overflowing the chart', () => {
+    const out = aggregateDays([withHours(new Array<number>(25).fill(1))]).rolling30.requests_by_hour;
+    assert.equal(out.length, 24);
+    assert.equal(out.reduce((a, b) => a + b, 0), 24, 'the 25th entry is not counted');
+  });
+
+  test('readDay keeps such a file rather than discarding the day', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'pnwm-analytics-'));
+    try {
+      const path = join(dir, '2026-06-29.json');
+      writeFileSync(path, JSON.stringify(withHours(new Array<number>(23).fill(1))));
+      assert.equal(readDay(path)?.requests_by_hour.length, 23);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

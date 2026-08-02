@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { HyperLogLog } from '../../scripts/lib/hyperloglog.ts';
+import * as z from 'zod/mini';
 
 const ANALYTICS_DIR = resolve('data/analytics');
 
@@ -84,28 +85,88 @@ export default function (): AnalyticsData {
 
   if (files.length === 0) return emptyData();
 
-  return aggregateDays(
-    files.map((f) => JSON.parse(readFileSync(resolve(ANALYTICS_DIR, f), 'utf-8')) as RawDay),
-  );
+  return aggregateDays(files.flatMap((f) => readDay(resolve(ANALYTICS_DIR, f)) ?? []));
 }
 
-/** A daily file as written by scripts/fetch-analytics.ts, any schema_version. */
-export interface RawDay {
-  date: string;
-  total_requests: number;
-  total_pageviews: number;
-  total_unique_visitors?: number;
-  total_bytes: number;
-  visitor_hll?: string;
-  pageviews: DayEntry[];
-  requests_by_hour: number[];
-  referrers: Array<{ domain: string; count: number }>;
-  countries: Array<{ code: string; count: number }>;
-  status_codes: Array<{ status: number; count: number }>;
-  redirect_hits?: RedirectHits;
-  redirect_misses?: RedirectMiss[];
-  not_found?: DayEntry[];
+/**
+ * Parse and validate one day file, or return null after saying why.
+ *
+ * This is the one JSON the build reads that does not come from the repo: the
+ * nightly job fetches it from the CDN's access logs, so its shape is an external
+ * input rather than something the compiler can check (#250). The committed
+ * artifacts are imported and verified at compile time; this one cannot be, and is
+ * also the only one where a bad file is plausible.
+ *
+ * A malformed day is skipped, not fatal. Analytics aggregation is explicitly
+ * soft-fail (docs/lessons-learned.md: "crashing the job to protect data quality
+ * costs an entire irrecoverable day of logs") and one corrupt day should not take
+ * the analytics page — or a deploy — down with it. Before this, a malformed file
+ * flowed straight through the `as RawDay` cast and surfaced as NaN totals on the
+ * page, which is the same outcome with none of the warning.
+ */
+export function readDay(path: string): RawDay | null {
+  const file = basename(path);
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(readFileSync(path, 'utf-8'));
+  } catch (err) {
+    console.warn(`[analytics] ${file}: not valid JSON — skipping (${(err as Error).message})`);
+    return null;
+  }
+  const result = RawDaySchema.safeParse(parsed);
+  if (!result.success) {
+    const issues = result.error.issues
+      .map((iss) => `${iss.path.join('.') || '(root)'}: ${iss.message}`)
+      .slice(0, 5)
+      .join('; ');
+    console.warn(`[analytics] ${file}: unexpected shape — skipping (${issues})`);
+    return null;
+  }
+  return result.data;
 }
+
+/**
+ * A daily file as written by scripts/fetch-analytics.ts, any schema_version.
+ *
+ * The optional fields are not laxness: files written before schema_version 3
+ * predate legacy-link tracking (#181) and are still in the archive on Bunny, so
+ * the schema has to accept them. `aggregateDays` defaults each one below.
+ *
+ * The type is inferred from the schema so the two cannot drift — the same
+ * arrangement as src/types/schemas.ts. Extra keys are allowed (zod/mini objects
+ * are non-strict), so a newer schema_version does not fail an older build.
+ */
+const DayEntrySchema = z.object({ path: z.string(), count: z.number() });
+
+export const RawDaySchema = z.object({
+  date: z.string(),
+  total_requests: z.number(),
+  total_pageviews: z.number(),
+  total_unique_visitors: z.optional(z.number()),
+  total_bytes: z.number(),
+  visitor_hll: z.optional(z.string()),
+  pageviews: z.array(DayEntrySchema),
+  // Length deliberately unchecked. fetch-analytics.ts builds this as
+  // `new Array(24).fill(0)` and writes only indices 0-23, so a wrong length means a
+  // corrupt file — but both readers index a fixed 0..23 loop with `?? 0`, so a short
+  // array costs one bar of the hourly chart and a long one has its tail ignored.
+  // Rejecting the file here would discard the whole day instead: its pageviews,
+  // unique visitors, referrers, countries and redirect backlog. Pinned by
+  // "aggregateDays tolerates a wrong-length requests_by_hour" in analytics.test.ts.
+  requests_by_hour: z.array(z.number()),
+  referrers: z.array(z.object({ domain: z.string(), count: z.number() })),
+  countries: z.array(z.object({ code: z.string(), count: z.number() })),
+  status_codes: z.array(z.object({ status: z.number(), count: z.number() })),
+  redirect_hits: z.optional(
+    z.object({ total: z.number(), matched: z.number(), missed: z.number() }),
+  ),
+  redirect_misses: z.optional(
+    z.array(z.object({ from: z.string(), count: z.number(), referrer: z.nullable(z.string()) })),
+  ),
+  not_found: z.optional(z.array(DayEntrySchema)),
+});
+
+export type RawDay = z.infer<typeof RawDaySchema>;
 
 /** Roll daily files (newest first) into the shape the analytics page consumes. */
 export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
