@@ -1,6 +1,12 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSpeciesPhotos, isMaterializable, toTilesPath } from './generate-species-photos.ts';
+import {
+  buildSpeciesPhotos,
+  isMaterializable,
+  toTilesPath,
+  DEFAULT_PHOTOGRAPHER,
+  DEFAULT_LICENSE,
+} from './generate-species-photos.ts';
 import type { ManifestRow } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
@@ -116,6 +122,44 @@ describe('buildSpeciesPhotos', () => {
     assert.equal(entry.specimens.length, 2);
   });
 
+  // #214: photographer/license are curator-entered and have no manifest column.
+  // Regenerating used to drop them, which failed `tsc --noEmit` against
+  // SpeciesPhotoSchema and stripped every photo's credit from the site.
+  it('carries forward curator-entered photographer and license', () => {
+    const result = buildSpeciesPhotos([row({})], {
+      'abagrotis-apposita': { photographer: 'Lars Crabo', license: 'CC BY-SA' },
+    });
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    assert.equal(entry.photographer, 'Lars Crabo');
+    assert.equal(entry.license, 'CC BY-SA');
+  });
+
+  it('applies default attribution to a species absent from the existing output', () => {
+    const result = buildSpeciesPhotos([row({})], {});
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    assert.equal(entry.photographer, DEFAULT_PHOTOGRAPHER);
+    assert.equal(entry.license, DEFAULT_LICENSE);
+  });
+
+  it('treats a blank curator value as absent rather than emitting an empty credit', () => {
+    const result = buildSpeciesPhotos([row({})], {
+      'abagrotis-apposita': { photographer: '', license: '' },
+    });
+    const entry = result['abagrotis-apposita'];
+    assert.ok(entry !== undefined);
+    assert.equal(entry.photographer, DEFAULT_PHOTOGRAPHER);
+    assert.equal(entry.license, DEFAULT_LICENSE);
+  });
+
+  it('does not resurrect attribution for a species that dropped out of the manifest', () => {
+    const result = buildSpeciesPhotos([row({})], {
+      'feltia-herilis': { photographer: 'Merrill Peterson', license: 'CC BY-NC' },
+    });
+    assert.ok(!('feltia-herilis' in result));
+  });
+
   it('groups two species into two top-level keys', () => {
     const rows = [
       row({ species_slug: 'abagrotis-apposita', specimen_id: 'A', view: 'D' }),
@@ -157,7 +201,11 @@ describe('buildSpeciesPhotos', () => {
       row({ specimen_id: 'A', view: 'D' }),
       row({ specimen_id: 'A', view: 'V' }),
     ];
-    const result = buildSpeciesPhotos(rows);
+    const result = buildSpeciesPhotos(rows, {
+      'abagrotis-apposita': { photographer: 'Merrill Peterson', license: 'CC BY-NC' },
+    });
+    // Full committed shape, attribution included — this is what data/species-photos.json
+    // holds and what SpeciesPhotoSchema requires (#214).
     assert.deepEqual(result, {
       'abagrotis-apposita': {
         high_res_available: true,
@@ -165,6 +213,8 @@ describe('buildSpeciesPhotos', () => {
           { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' },
           { specimen_id: 'A', view: 'V', tiles_path: 'species-tiles/abagrotis-apposita/A-V' },
         ],
+        photographer: 'Merrill Peterson',
+        license: 'CC BY-NC',
       },
     });
   });
