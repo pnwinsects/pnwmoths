@@ -184,10 +184,24 @@ export function isAlreadyTiled(tileOutputDir: string, row: ManifestRow): boolean
 }
 
 /**
+ * Statuses that mean this row's tiles already exist and must not be rebuilt.
+ *
+ * `uploaded` belongs here as much as `tiled` does (#214). upload-tiles.ts deletes
+ * the local tile directory once a row is on the CDN, so `isAlreadyTiled`'s
+ * filesystem check cannot catch an uploaded row — it sees no .dzi and reports
+ * "not tiled". Without this guard a plain `npm run photos:tile` re-downloads every
+ * TIFF the corpus has ever processed (~250 GB of Dropbox reads at present) and then
+ * calls advanceStatus(row, 'tiled'), walking finished rows *backwards* out of
+ * `uploaded` — which hands them straight back to upload-tiles.ts for a full re-upload.
+ */
+const COMPLETED_STATUSES: Set<string> = new Set<ManifestStatus>(['tiled', 'uploaded']);
+
+/**
  * Returns true if the row should be processed in this run.
  *
  * A row is tileable when ALL of the following hold:
- *   - status is not already 'tiled' (manifest-level idempotency guard, TILE-02)
+ *   - status is not already 'tiled' or 'uploaded' (manifest-level idempotency
+ *     guard, TILE-02)
  *   - match_bucket is one of the three resolved buckets (clean-match, slug-match,
  *     resolved-via-synonym) — other buckets need curation before tiling
  *   - specimen_id, view, species_slug, dropbox_path are all non-empty — absence
@@ -195,7 +209,7 @@ export function isAlreadyTiled(tileOutputDir: string, row: ManifestRow): boolean
  */
 export function isTileable(row: ManifestRow): boolean {
   return (
-    row.status !== 'tiled' &&
+    !COMPLETED_STATUSES.has(row.status) &&
     TILEABLE_BUCKETS.has(row.match_bucket as MatchBucket) &&
     Boolean(row.specimen_id) &&
     Boolean(row.view) &&
@@ -358,11 +372,22 @@ async function main(): Promise<void> {
   }
 
   // --- Missing-secret guard (matches scripts/ingest-photos.ts format). ---
-  if (!DROPBOX_TOKEN) {
+  // Required only for rows that actually need a download (#214). Tiling a cache
+  // the maintainer already holds involves no Dropbox call at all, and demanding a
+  // live token for it stranded work behind an expired credential for no reason —
+  // `sl.` tokens are short-lived, and a resumed run is exactly the case where the
+  // TIFFs are on disk and the token from the first attempt has since died.
+  const needsDownload = eligible.some(row => !existsSync(tiffCachePath(tiffCacheDir, row)));
+  if (needsDownload && !DROPBOX_TOKEN) {
     console.error(
       '[tile-photos] DROPBOX_TOKEN is required. Generate a Dropbox app token with files.content.read scope at https://www.dropbox.com/developers/apps'
     );
     process.exit(1);
+  }
+  if (!needsDownload && eligible.length > 0) {
+    console.log(
+      `[tile-photos] every eligible TIFF is already cached in ${tiffCacheDir} — no Dropbox access needed`
+    );
   }
 
   // --- Pre-create output directories. ---
@@ -382,15 +407,15 @@ async function main(): Promise<void> {
 
   try {
     for (const row of eligible) {
-      // Manifest-level idempotency: status=tiled rows are excluded by isTileable
+      // Manifest-level idempotency: completed rows are excluded by isTileable
       // but can appear here if isTileable was overridden by a caller; belt-and-suspenders.
-      if (row.status === 'tiled') {
+      if (COMPLETED_STATUSES.has(row.status)) {
         stats.skippedAlreadyTiled++;
         continue;
       }
 
       // Filesystem-level idempotency: tiles exist but manifest hadn't caught up.
-      if (isAlreadyTiled(tileOutputDir, row) && row.status !== 'tiled') {
+      if (isAlreadyTiled(tileOutputDir, row)) {
         advanceStatus(row, 'tiled');
         logStage(row.content_hash, 'tile', 'already-on-disk-advance', row.species_slug);
         stats.skippedAlreadyTiled++;
