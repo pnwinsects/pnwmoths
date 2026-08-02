@@ -37,6 +37,10 @@ const SITE_ORIGIN = process.env.GITHUB_PAGES
 // To update: log in to bunny.net dashboard, find the Pull Zone hostname, paste here.
 const CDN_BASE_URL = "https://moths.pnwinsects.org";
 
+// Public source repository, linked from the footer and the Contact page (issue #199)
+// so visitors can read the code, file bugs, or contribute.
+const REPO_URL = "https://github.com/pnwinsects/pnwmoths";
+
 // Load glossary terms once at startup. termMap is sorted longest-first and
 // has pre-compiled regexes — shared across all addTransform invocations via closure.
 // csv-parse/sync is synchronous; no async needed here.
@@ -152,6 +156,9 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
 
   // Expose CDN base URL to all Nunjucks templates as {{ cdnBaseUrl }}
   eleventyConfig.addGlobalData("cdnBaseUrl", CDN_BASE_URL);
+
+  // Source repository, linked from base.njk's footer and src/contact/index.njk.
+  eleventyConfig.addGlobalData("repoUrl", REPO_URL);
 
   // Sharing-metadata defaults, used by src/_includes/base.njk for every page that
   // does not set its own `description` / `socialImage` / `socialImageAlt`.
