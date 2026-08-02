@@ -360,7 +360,7 @@ Uploaded tiles do not appear on the site by themselves. Two things read them:
    `src/_data/speciesPhotos.ts`, and `src/components/pnwm-image-slideshow.ts` opens the
    zoomable viewer at `{CDN_BASE_URL}/{tiles_path}.dzi` — the same path this run wrote:
 
-   ```
+   ```text
    https://moths.pnwinsects.org/species-tiles/{slug-lowercase}/{specimen_id}-{view}.dzi
    ```
 

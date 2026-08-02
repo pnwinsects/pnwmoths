@@ -205,9 +205,9 @@ and the corrected config will never be applied.
 
 **Dropbox download fails with HTTP 401**
 `DROPBOX_TOKEN` is expired or was generated without the required scopes. Regenerate a token
-at <https://www.dropbox.com/developers/apps>. On the Permissions tab, confirm both
-`files.metadata.read` and `sharing.read` are checked before generating a new token on the
-Settings tab.
+at <https://www.dropbox.com/developers/apps>. On the Permissions tab, confirm all three of
+`files.metadata.read`, `files.content.read` and `sharing.read` are checked before generating a
+new token on the Settings tab — the same set the Prerequisites above ask for.
 
 **Dropbox download fails with HTTP 429**
 The script's `withRetry` helper backs off at 2s / 4s / 8s / 16s / 32s (five attempts, 62s

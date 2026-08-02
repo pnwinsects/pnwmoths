@@ -114,7 +114,7 @@ In a spreadsheet view of `data/species-photos-manifest.csv`:
 
 - The rows you re-routed have `match_bucket = resolved-via-synonym`
 - `binomial_resolved` and `species_slug` columns are populated (not empty)
-- `status` remains `discovered` (tiling gates on `status`, not `match_bucket`, so curation never changes what is eligible to tile)
+- `status` remains `discovered` — curation never advances it. What curation changes is `match_bucket`, and that is exactly what makes a row tileable: `isTileable()` in `scripts/tile-photos.ts` requires *both* a status other than `tiled` *and* a `match_bucket` of `clean-match`, `slug-match` or `resolved-via-synonym`. A row you re-route out of `likely-synonym` becomes eligible on the next tiling run
 
 On the command line:
 
