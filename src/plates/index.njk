@@ -13,12 +13,17 @@ description: "High-resolution photographic plates of pinned Pacific Northwest mo
   <li>
     <a href="{{ ('/plates/' + plate.slug + '/') | url }}">
       {# Decorative: the <h2> inside this link already carries the plate title, so
-         repeating it in alt made each card announce the title twice. #}
+         repeating it in alt made each card announce the title twice.
+
+         The stored thumbnail is already 240×300, so the derivative below is a
+         re-encode, not a resize: those JPEGs run 54–76 KB and the WebP derivative
+         is ~12 KB. Before the derivative existed this grid was 5.3 MB of
+         thumbnails with the Optimizer off (ADR 0022).
+
+         Both comments live outside the tag on purpose. A `{#-` inside an open tag
+         strips the whitespace separating the tag name from its first attribute and
+         emits `<imgsrc="…">` — see scripts/check-html.ts. #}
       <img
-        {#- The stored thumbnail is already 240×300, so this is a re-encode, not a
-            resize: those JPEGs run 54–76 KB and the WebP derivative is ~12 KB.
-            Before the derivative existed this grid was 5.3 MB of thumbnails with
-            the Optimizer off (ADR 0022). -#}
         src="{{ ('plates/' + plate.slug + '/thumbnail.jpg') | derivative('240x300') }}"
         alt=""
         width="240" height="300"
