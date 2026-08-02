@@ -258,6 +258,59 @@ describe('main (integration)', () => {
     });
   });
 
+  test('the committed artifacts match a fresh build (ADR 0017)', () => {
+    // Reproducibility across two temp builds proves the script is deterministic.
+    // It says nothing about whether what is *checked in* still matches its
+    // inputs — and that is the failure that actually happened. #156 gave
+    // clostera-brucei a nav image in data/images.csv without regenerating
+    // data/key-matrix.json, so the committed artifact disagreed with its inputs
+    // for months (#197). Consequences, in order of how much they cost:
+    //
+    //   1. /identify/ rendered the grey placeholder for a species whose photo
+    //      was on the CDN the whole time.
+    //   2. `npm run build:site && npm test` failed on a clean checkout, because
+    //      the build regenerated the artifact and a test still pinned the stale
+    //      value — the documented flow in CLAUDE.md left you with a red suite.
+    //   3. The regenerated file sat in the working tree, so `git commit -a`
+    //      after any build silently shipped it.
+    //
+    // This test runs before the build in every workflow (pr-check, production,
+    // staging all run `npm test` ahead of `npm run build*`), so it sees the
+    // committed bytes rather than freshly overwritten ones. Fix by running
+    // `npm run build:key` and committing the result.
+    const fresh = withKeyBuild({}, outDir => ({
+      matrix: readFileSync(join(outDir, 'key-matrix.json'), 'utf-8'),
+      coverage: readFileSync(join(outDir, 'key-coverage-report.json'), 'utf-8'),
+    }));
+    const committed = {
+      matrix: readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8'),
+      coverage: readFileSync(resolve(ROOT, 'data/key-coverage-report.json'), 'utf-8'),
+    };
+
+    // Report the first differing species rather than diffing two 150 KB strings,
+    // which is unreadable in test output and was part of why this went unnoticed.
+    if (committed.matrix !== fresh.matrix) {
+      const a = JSON.parse(committed.matrix) as KeyMatrix;
+      const b = JSON.parse(fresh.matrix) as KeyMatrix;
+      const byFreshSlug = new Map(b.species.map(s => [s.slug, JSON.stringify(s)]));
+      const drifted = a.species
+        .filter(s => byFreshSlug.get(s.slug) !== JSON.stringify(s))
+        .map(s => `${s.slug} (committed nav_image: ${JSON.stringify(s.nav_image)})`);
+      assert.fail(
+        'data/key-matrix.json is stale — run `npm run build:key` and commit the result. ' +
+          (drifted.length > 0
+            ? `Differing species: ${drifted.slice(0, 10).join(', ')}` +
+              (drifted.length > 10 ? ` … and ${drifted.length - 10} more` : '')
+            : 'The difference is outside the species list (characters, matrix or meta).'),
+      );
+    }
+    assert.strictEqual(
+      committed.coverage,
+      fresh.coverage,
+      'data/key-coverage-report.json is stale — run `npm run build:key` and commit the result',
+    );
+  });
+
   test('artifacts are byte-reproducible across runs (ADR 0017)', () => {
     // Both artifacts are committed, so identical inputs must produce identical bytes.
     // They previously embedded a build timestamp, which made every regeneration diff

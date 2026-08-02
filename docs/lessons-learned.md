@@ -445,6 +445,16 @@ cost a debugging cycle to discover.
   Mutation-test the guard afterwards: reintroduce the bug and confirm it goes red. A guard you
   haven't watched fail is a guess.
 
+- **Reproducible is not the same as current.** A committed artifact can be perfectly
+  deterministic and still disagree with its inputs, because nothing forces whoever changed the
+  inputs to regenerate it. `data/key-matrix.json` stayed stale for months after a photo was added
+  to `data/images.csv` (#197), which meant `/identify/` showed a grey placeholder for a species
+  whose image was live, and `npm run build:site && npm test` — the flow CLAUDE.md documents —
+  failed on a clean checkout because the build refreshed the artifact and a test still pinned the
+  old value. If an artifact is committed, test that it equals a fresh build, not just that two
+  builds agree. Rebuild into a temp dir via the script's output override, never in place
+  ([ADR 0017](adr/0017-reproducible-committed-artifacts.md)).
+
 - **A lenient parser is the wrong tool for judging output.** `/plates/` shipped 98 cards as
   `<imgsrc="…">` for months — a Nunjucks comment inside an open tag, written `{#- … -#}`, closed the
   whitespace on *both* sides and welded the tag name to its first attribute (either marker alone is

@@ -100,32 +100,30 @@ describe('GRID-03 placeholder condition (real-data gate)', () => {
     // emitted nav_image: null. #71 consolidated the data onto the full slugs, so the
     // null set is now empty. A regression here means an image row lost its slug key.
     //
-    // #156 reintroduced exactly one deliberate exception: `clostera-brucei`'s only
-    // catalogued photos (A/B specimens) were misidentified and have been reassigned
-    // to clostera-multnoma (curator-confirmed). Clostera brucei's narrow-sense C
-    // specimens exist only in the curator's high-res source set (not yet
-    // downloaded/tiled/uploaded), so clostera-brucei legitimately has zero
-    // CDN-backed photos right now and degrades to the gray placeholder. Remove this
-    // exception once the C specimens are ingested and clostera-brucei has a real
-    // nav_image again.
-    const EXPECTED_NULL_NAV_IMAGE_SLUGS = new Set(['clostera-brucei']);
+    // #156 added one deliberate exception, `clostera-brucei`: its only catalogued
+    // photos (A/B specimens) were misidentified and were reassigned to
+    // clostera-multnoma, leaving it with no CDN-backed image. That exception was
+    // written to be removed "once the C specimens are ingested", and they since
+    // were — data/images.csv now carries `Clostera brucei-C-D.jpg` (dorsal,
+    // weight 1) and its `@320h` derivative resolves on the CDN. So the set is
+    // empty again and this is a plain invariant, not an allow-list.
+    //
+    // The exception outlived its cause for months because data/key-matrix.json
+    // was never regenerated after #156's data change, so this test was reading a
+    // stale artifact that still said null (#197). scripts/build-key.test.ts now
+    // asserts the committed artifact matches a fresh build, which is what stops
+    // that from recurring — without it, an exception list here can quietly
+    // describe a file nobody has rebuilt.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     const nullNavImageSpecies = raw.species.filter((s: KeySpecies) => s.nav_image === null);
-    const unexpectedNullNavImageSpecies = nullNavImageSpecies.filter(
-      (s: KeySpecies) => !EXPECTED_NULL_NAV_IMAGE_SLUGS.has(s.slug)
-    );
-    assert.equal(
-      unexpectedNullNavImageSpecies.length,
-      0,
-      `expected no unanticipated null nav_image species, got ${unexpectedNullNavImageSpecies.length}: ` +
-        unexpectedNullNavImageSpecies.map((s: KeySpecies) => s.slug).join(', ')
-    );
     assert.deepEqual(
-      new Set(nullNavImageSpecies.map((s: KeySpecies) => s.slug)),
-      EXPECTED_NULL_NAV_IMAGE_SLUGS,
-      'expected the null nav_image set to be exactly the known clostera-brucei exception (#156)'
+      nullNavImageSpecies.map((s: KeySpecies) => s.slug),
+      [],
+      'every matched key species must resolve to a catalogued nav image; a slug listed ' +
+        'here lost its image rows in data/images.csv, or gained a key entry before its ' +
+        'photos were catalogued',
     );
   });
 

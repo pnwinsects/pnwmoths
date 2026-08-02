@@ -39,6 +39,15 @@ it records when the content actually changed, not when a build last ran.
 `scripts/build-key.test.ts` enforces this: two consecutive builds must produce byte-identical
 output, and neither artifact may contain a timestamp field.
 
+**Amended (#197): reproducibility is necessary but not sufficient — the committed bytes must also
+equal a fresh build.** Determinism says the script gives the same answer twice; it says nothing
+about whether what is checked in is still that answer. `data/key-matrix.json` sat stale for months
+after [#156](https://github.com/pnwinsects/pnwmoths/issues/156) changed `data/images.csv` without
+regenerating it. So `build-key.test.ts` now also rebuilds into a temp dir (via `KEY_OUT_DIR`, never
+in place — that was #163) and compares against the committed file, naming the differing species
+rather than diffing 150 KB of JSON. It runs in `npm test`, which every workflow runs *before* any
+`build:*` step, so it reads the committed bytes rather than freshly overwritten ones.
+
 This applies to any future committed artifact. Non-committed outputs (`_site/`, reports written
 outside the repo) are unaffected.
 
@@ -47,6 +56,14 @@ outside the repo) are unaffected.
 - A dirty `data/` after a build now means the inputs changed. That is a real signal, and
   [#163](https://github.com/pnwinsects/pnwmoths/issues/163)-class bugs surface immediately in
   `git status` instead of hiding.
+- **A stale artifact is a user-visible bug, not just untidiness.** `/identify/` rendered the grey
+  placeholder for `clostera-brucei` for months while its photo sat on the CDN, because the key
+  matrix still said `nav_image: null`. The freshness check above is what turns that class of drift
+  into a failing test at the commit that causes it.
+- A partly hand-maintained artifact cannot use this check as written. `data/species-photos.json`
+  is generated but then enriched with curator-entered `photographer` and `license` fields, so a
+  whole-file comparison would always fail; guarding it means comparing only the generator-owned
+  fields.
 - Artifact diffs in review show only substantive change.
 - The reproducibility test doubles as a determinism guard: if map/set iteration order or any other
   nondeterminism leaks into the emitted JSON, it fails there rather than as mystery churn.
