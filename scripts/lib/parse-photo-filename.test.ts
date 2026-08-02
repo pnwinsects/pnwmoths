@@ -18,6 +18,20 @@ describe('extractBinomial', () => {
     assert.equal(r.bucketHint, null);
   });
 
+  // #214: the tail is stripped before the binomial walk, so a space-separated
+  // tail must not be mistaken for the Genus/epithet split.
+  it('parses Euxoa absona A-D.tif without swallowing the specimen into the epithet', () => {
+    const r = extractBinomial('Euxoa absona A-D.tif');
+    assert.equal(r.binomial, 'euxoa absona');
+    assert.equal(r.bucketHint, null);
+  });
+
+  it('parses Syngrapha-surena A-V.tif (hyphen-joined binomial, space-separated tail)', () => {
+    const r = extractBinomial('Syngrapha-surena A-V.tif');
+    assert.equal(r.binomial, 'syngrapha surena');
+    assert.equal(r.bucketHint, null);
+  });
+
   it('parses Paraseptis-adnixa-B-D.tif (Genus-species hyphen joined)', () => {
     const r = extractBinomial('Paraseptis-adnixa-B-D.tif');
     assert.equal(r.binomial, 'paraseptis adnixa');
@@ -87,6 +101,30 @@ describe('parseSpecimenAndView', () => {
     assert.deepStrictEqual(
       parseSpecimenAndView('Abagrotis apposita-A-D.tif'),
       { specimen: 'A', view: 'D' },
+    );
+  });
+
+  // #214: these three separator styles are all present in the Dropbox corpus.
+  // Accepting only the bare hyphen left 12 files with no specimen_id/view, which
+  // made them untileable even where the binomial was a clean match.
+  it('accepts a space before the specimen tail (Euxoa absona A-D.tif)', () => {
+    assert.deepStrictEqual(
+      parseSpecimenAndView('Euxoa absona A-D.tif'),
+      { specimen: 'A', view: 'D' },
+    );
+  });
+
+  it('accepts a spaced hyphen before the specimen tail (Dasyfidonia avuncularia - A-D.tif)', () => {
+    assert.deepStrictEqual(
+      parseSpecimenAndView('Dasyfidonia avuncularia - A-D.tif'),
+      { specimen: 'A', view: 'D' },
+    );
+  });
+
+  it('still reads a hyphenated epithet with a space-separated tail (Autographa v-alba B-V.tif)', () => {
+    assert.deepStrictEqual(
+      parseSpecimenAndView('Autographa v-alba B-V.tif'),
+      { specimen: 'B', view: 'V' },
     );
   });
 

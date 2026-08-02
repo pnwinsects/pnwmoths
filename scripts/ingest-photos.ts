@@ -464,11 +464,32 @@ async function main(): Promise<void> {
       }
     }
 
+    // Backfill specimen_id / view where the parser can now read a tail it could
+    // not before (#214). Rows are only ever written into an *empty* field, so an
+    // ingest-time value — or a curator's correction — is never overwritten; this
+    // is the same additive-only rule the district write-back follows.
+    //
+    // It belongs here rather than in a one-off script because the trigger recurs:
+    // every loosening of the filename grammar strands rows that were ingested
+    // under the stricter one, and a full re-ingest will not revisit them (rows
+    // already in the manifest are skipped by content_hash).
+    let backfilled = 0;
+    for (const row of existing) {
+      if (row.specimen_id && row.view) continue;
+      if (!row.filename_raw) continue;
+      const { specimen, view } = parseSpecimenAndView(row.filename_raw);
+      if (!specimen || !view) continue;
+      if (!row.specimen_id) row.specimen_id = specimen;
+      if (!row.view) row.view = view;
+      backfilled++;
+      logStage(row.content_hash, 'backfill', 'specimen-view', `${row.filename_raw} → ${specimen}-${view}`);
+    }
+
     // L-03: sortForInvestigation is unchanged — resolved-via-synonym rows trail
     // with clean-match rows in the "not-needs-investigation" partition.
     const sorted = sortForInvestigation(existing);
     await writeManifest(MANIFEST_PATH, sorted);
-    console.log(`[ingest-photos] re-sorted manifest; ${sorted.length} rows; ${promoted} promoted to resolved-via-synonym`);
+    console.log(`[ingest-photos] re-sorted manifest; ${sorted.length} rows; ${promoted} promoted to resolved-via-synonym; ${backfilled} specimen/view backfilled`);
     return;
   }
 

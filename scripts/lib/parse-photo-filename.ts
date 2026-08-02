@@ -27,11 +27,22 @@
  * loosened here so institutional specimen IDs (OSAC_*, WWUC*) are admitted.
  */
 
-// Tail regex shared with parseSpecimenAndView. `-([A-Z0-9_]+)-([DV])` matches
+// Tail regex shared with parseSpecimenAndView. `([A-Z0-9_]+)-([DV])` matches
 // either a single capital letter or an institutional accession in the specimen
 // slot, and exactly D | V in the view slot, immediately before the extension.
-const TAIL_RE = /-([A-Z0-9_]+)-([DV])\.[^.]+$/;
-const TAIL_STRIP_RE = /-[A-Z0-9_]+-[DV]$/;
+//
+// SEP admits the separators actually present in the corpus before that tail:
+// `-` (the convention), a space (`Euxoa absona A-D.tif`), or a spaced hyphen
+// (`Dasyfidonia avuncularia - A-D.tif`). Requiring the bare hyphen left 12 files
+// with an empty specimen_id and view, which excluded them from tiling even when
+// the binomial resolved cleanly — 7 were clean matches sitting in the backlog
+// with nothing else wrong with them (#214).
+//
+// `\s*-\s*` collapses to the original `-` when there is no surrounding space, so
+// every filename that parsed before parses identically.
+const SEP = String.raw`(?:\s*-\s*|\s+)`;
+const TAIL_RE = new RegExp(SEP + String.raw`([A-Z0-9_]+)-([DV])\.[^.]+$`);
+const TAIL_STRIP_RE = new RegExp(SEP + String.raw`[A-Z0-9_]+-[DV]$`);
 
 // Provisional triggers — any single-token match returns provisional immediately.
 // The consecutive ['n', 'sp'] pair is handled separately because 'n' alone is
