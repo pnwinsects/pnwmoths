@@ -114,19 +114,44 @@ function writeManifest(path: string, rows: readonly ManifestRow[]): void {
  *
  * Only `uploaded` rows are included — deliberately. A derivative that exists on
  * this laptop but not on the CDN must fail the guard, not pass it.
+ *
+ * Merged over `existing` rather than replacing it (#214). `var/` is scratch and
+ * routinely holds only the slice of the corpus the current run touched, while
+ * this file is the durable statement of the whole zone — so emitting from scratch
+ * alone silently deleted every derivative the run did not happen to cover. That
+ * turns the runbook's own advice to scope a run (`KIND=highres`, `LIMIT=8`) into a
+ * change that drops ~23,000 rows and fails the source gate for every other species.
+ * Nothing is ever removed from the zone, so nothing is removed from the record;
+ * a rerun of the same path refreshes its bytes in place.
  */
-export function emitCommittedManifest(rows: readonly ManifestRow[]): string {
-  const uploaded = rows
-    .filter((r) => r.status === 'uploaded')
-    .map((r) => ({
+export function emitCommittedManifest(
+  rows: readonly ManifestRow[],
+  existing: readonly ManifestRow[] = [],
+): string {
+  const byPath = new Map<string, Record<string, string>>();
+  for (const r of existing) {
+    byPath.set(r.derived_path, {
       derived_path: r.derived_path,
       source_path: r.source_path,
       kind: r.kind,
       variant: r.variant,
       bytes: r.bytes,
-    }))
-    .sort((a, b) => a.derived_path.localeCompare(b.derived_path));
-  return stringify(uploaded, { header: true, columns: [...OUTPUT_COLUMNS] });
+    });
+  }
+  for (const r of rows) {
+    if (r.status !== 'uploaded') continue;
+    byPath.set(r.derived_path, {
+      derived_path: r.derived_path,
+      source_path: r.source_path,
+      kind: r.kind,
+      variant: r.variant,
+      bytes: r.bytes,
+    });
+  }
+  const merged = [...byPath.values()].sort((a, b) =>
+    a['derived_path']!.localeCompare(b['derived_path']!),
+  );
+  return stringify(merged, { header: true, columns: [...OUTPUT_COLUMNS] });
 }
 
 // ---------------------------------------------------------------------------
@@ -183,9 +208,8 @@ async function main(): Promise<void> {
   // is already listed there, it is uploaded regardless of what the scratch file
   // says — which recovers both a wiped var/ and the concurrent-write race that
   // reset 20 rows during the #224 pilot.
-  const alreadyOnCdn = new Set(
-    readManifest(OUTPUT_PATH).map((r) => r.derived_path),
-  );
+  const committed = readManifest(OUTPUT_PATH);
+  const alreadyOnCdn = new Set(committed.map((r) => r.derived_path));
   let reconciled = 0;
   for (const row of rows) {
     if (row.status === 'generated' && alreadyOnCdn.has(row.derived_path)) {
@@ -229,7 +253,7 @@ async function main(): Promise<void> {
 
   if (todo.length === 0) {
     logStage(`Nothing to upload — ${byStatus['uploaded'] ?? 0} already on the CDN.`);
-    writeFileSync(OUTPUT_PATH, emitCommittedManifest(rows));
+    writeFileSync(OUTPUT_PATH, emitCommittedManifest(rows, committed));
     logStage(`Committed manifest: ${OUTPUT_PATH}`);
     return;
   }
@@ -278,7 +302,7 @@ async function main(): Promise<void> {
 
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, todo.length) }, () => worker()));
   writeManifest(MANIFEST_PATH, rows);
-  writeFileSync(OUTPUT_PATH, emitCommittedManifest(rows));
+  writeFileSync(OUTPUT_PATH, emitCommittedManifest(rows, committed));
 
   logStage(`Done: ${uploaded.toLocaleString('en-US')} uploaded, ${failed} failed.`);
   logStage(`Committed manifest: ${OUTPUT_PATH}`);

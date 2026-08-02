@@ -94,6 +94,39 @@ describe('emitCommittedManifest', () => {
     assert.equal(header, 'derived_path,source_path,kind,variant,bytes');
   });
 
+  // #214: var/ holds only what the current run touched, so emitting from scratch
+  // state alone deleted every other derivative's row and failed the source gate
+  // site-wide. Scoping a run (KIND=, LIMIT=, ONLY=) is the documented workflow,
+  // which made this reachable from the runbook's own instructions.
+  it('preserves existing committed rows the current run never touched', () => {
+    const csv = emitCommittedManifest(
+      [row({ derived_path: 'derived/new@320h.webp' })],
+      [row({ derived_path: 'derived/untouched@320h.webp' })],
+    );
+    assert.match(csv, /derived\/untouched@320h\.webp/);
+    assert.match(csv, /derived\/new@320h\.webp/);
+  });
+
+  it('refreshes an existing row rather than duplicating it', () => {
+    const csv = emitCommittedManifest(
+      [row({ derived_path: 'derived/same@320h.webp', bytes: '999' })],
+      [row({ derived_path: 'derived/same@320h.webp', bytes: '111' })],
+    );
+    const hits = csv.trim().split('\n').filter((l) => l.includes('derived/same@320h.webp'));
+    assert.equal(hits.length, 1);
+    assert.match(hits[0]!, /999/);
+  });
+
+  it('keeps a committed row even when this run failed to re-upload it', () => {
+    // The object is still on the zone; nothing is ever deleted there. Dropping the
+    // row would fail the build for an image that renders perfectly well.
+    const csv = emitCommittedManifest(
+      [row({ derived_path: 'derived/flaky@320h.webp', status: 'failed' })],
+      [row({ derived_path: 'derived/flaky@320h.webp' })],
+    );
+    assert.match(csv, /derived\/flaky@320h\.webp/);
+  });
+
   it('sorts by derived_path so the committed diff is stable', () => {
     const csv = emitCommittedManifest([
       row({ derived_path: 'derived/z@320h.webp' }),
