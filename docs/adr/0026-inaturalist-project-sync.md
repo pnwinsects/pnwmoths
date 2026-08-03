@@ -72,8 +72,11 @@ Supporting decisions:
 - **Migration refuses anything it cannot faithfully reproduce.** Three `records.csv` rows are
   specimens — one a Canadian National Collection specimen — that cite an observation as
   *documentation*. Handing one over would delete the specimen and let the sync recreate it as
-  an anonymous iNaturalist photograph. Migration also refuses a sync report older than an hour,
-  since a stale one describes a project that may since have changed.
+  an anonymous iNaturalist photograph, or a row carrying detail the sync cannot reproduce
+  (`elevation_ft`, which iNaturalist does not supply). It computes its worklist from a live
+  fetch rather than the committed sync report: that file's mtime is its checkout time, so a
+  fresh clone or a `git switch` makes a months-old report look current, and deleting curator
+  rows on that basis is unrecoverable.
 
 ## Rejected alternatives
 

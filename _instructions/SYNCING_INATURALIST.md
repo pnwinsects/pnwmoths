@@ -87,16 +87,18 @@ where a synced record follows iNaturalist automatically as identifications chang
 To hand one over:
 
 ```bash
-npm run inat:sync             # writes the report listing what can be handed over
 npm run inat:migrate          # deletes those rows from data/records.csv
 npm run inat:sync             # imports the same observations, now sync-owned
 ```
 
-The sync must have run within the last hour, or migrate refuses: the report only describes the
-project as it was when the sync ran, and acting on a stale one can delete a record that will not
-come back. Rows that cite an observation but are not themselves plain iNaturalist photographs —
-a museum specimen documented by an observation, say — are never handed over, and migrate says so
-rather than skipping them quietly.
+`inat:migrate` checks the iNaturalist project itself before deleting anything, so it always acts
+on what the project holds right now — you don't need to have run a sync first, and there is no
+stale-report problem to worry about.
+
+Two kinds of row are never handed over, and migrate says so rather than skipping them quietly:
+one that cites an observation as documentation but isn't itself an iNaturalist photograph (a
+museum specimen, say), and one carrying detail the sync cannot reproduce — an elevation, most
+often, which iNaturalist doesn't supply.
 
 `npm run inat:migrate -- --dry-run` shows what it would delete first. The record does not
 disappear from the site — it changes hands. Check with `git diff data/records.csv`; the diff

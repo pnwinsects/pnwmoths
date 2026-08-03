@@ -11,7 +11,6 @@ import {
   RECORDS_INAT_COLUMNS,
   RECORDS_INAT_CSV_PATH,
   RECORD_COORDINATE_BOUNDS,
-  assertInatRecordsPresent,
   createAllRecordsTable,
   hasInatRecords,
 } from './lib/records-source.ts';
@@ -140,7 +139,6 @@ export async function main(): Promise<void> {
     }
   }
   validateCsv('data/records.csv', [...RECORDS_COLUMNS]);
-  assertInatRecordsPresent();
   // The iNaturalist import (#23) is validated only when it has rows. A
   // header-only file is the legitimate state of the repo before the first sync
   // runs, and validateCsv throws on a CSV with no data rows.

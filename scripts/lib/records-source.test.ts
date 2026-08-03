@@ -8,6 +8,7 @@ import {
   RECORDS_INAT_COLUMNS,
   assertInatRecordsPresent,
   buildAllRecordsSql,
+  createAllRecordsTable,
   hasInatRecords,
   isWithinRecordBounds,
   readAllRecordRows,
@@ -66,6 +67,34 @@ describe('assertInatRecordsPresent', () => {
     // maps, the aggregates and the home-page count, and the build stays green.
     assert.throws(
       () => assertInatRecordsPresent(join(dir, 'absent.csv')),
+      /is missing/,
+    );
+  });
+});
+
+describe('buildAllRecordsSql — fail closed on a missing file', () => {
+  it('throws rather than quietly returning the curator file alone', () => {
+    // The regression this guards: every combined-records reader goes through
+    // here, so a deleted records-inat.csv would otherwise drop every imported
+    // record from the maps, the state and district aggregates, the species
+    // audit and the home-page count — with a green build and no diff.
+    assert.throws(
+      () => buildAllRecordsSql(recordsPath, join(dir, 'absent.csv')),
+      /is missing/,
+    );
+  });
+
+  it('covers every reader, so no call site has to remember', async () => {
+    // createAllRecordsTable delegates to buildAllRecordsSql, so the four
+    // DuckDB-based readers inherit the check; readAllRecordRows asserts
+    // directly. (Awaited — an unawaited assert.rejects passes vacuously.)
+    const conn = { run: async (): Promise<undefined> => undefined };
+    await assert.rejects(
+      () => createAllRecordsTable(conn, 'records', recordsPath, join(dir, 'absent.csv')),
+      /is missing/,
+    );
+    assert.throws(
+      () => readAllRecordRows(recordsPath, join(dir, 'absent.csv')),
       /is missing/,
     );
   });
@@ -131,9 +160,13 @@ describe('readAllRecordRows', () => {
     assert.equal(readAllRecordRows(recordsPath, inatPath).length, 1);
   });
 
-  it('tolerates a missing import file entirely', () => {
+  it('reads an absent file as empty at the low level, but the combined reader refuses', () => {
+    // readInatRecordRows is the raw parser and stays tolerant — migrate and the
+    // sync both need to read a file that may legitimately not exist yet. Only
+    // the COMBINED view, which claims to be every record the site serves, is
+    // entitled to refuse.
     assert.deepEqual(readInatRecordRows(join(dir, 'absent.csv')), []);
-    assert.equal(readAllRecordRows(recordsPath, join(dir, 'absent.csv')).length, 1);
+    assert.throws(() => readAllRecordRows(recordsPath, join(dir, 'absent.csv')), /is missing/);
   });
 });
 

@@ -171,6 +171,9 @@ export function hasInatRecords(path: string = RECORDS_INAT_CSV_PATH): boolean {
 /**
  * Assert the iNaturalist file has not gone missing.
  *
+ * Called by {@link buildAllRecordsSql}, so every combined-records reader is
+ * covered without having to remember.
+ *
  * `hasInatRecords` deliberately treats absent and header-only alike, because
  * both mean "no imported rows to union". For a BUILD that is a dangerous
  * conflation: the file is committed, so absence means a bad merge, a stray
@@ -206,6 +209,13 @@ export function buildAllRecordsSql(
   recordsPath: string = RECORDS_CSV_PATH,
   inatPath: string = RECORDS_INAT_CSV_PATH,
 ): string {
+  // Checked HERE, at the seam, rather than at each call site. Five build steps
+  // read the combined corpus; a guarantee that depends on all five remembering
+  // to assert first is not a guarantee, and the one that matters most
+  // (src/_data/stats.ts) runs inside Eleventy where an omission would be
+  // easiest to miss. Putting it here also means it cannot be bypassed by
+  // running a single build step on its own.
+  assertInatRecordsPresent(inatPath);
   const cols = RECORDS_COLUMNS.join(', ');
   const curator = `SELECT ${cols} FROM ${readCsvSql(recordsPath, RECORDS_COLUMNS)}`;
   if (!hasInatRecords(inatPath)) return curator;
@@ -269,5 +279,10 @@ export function readAllRecordRows(
   recordsPath: string = RECORDS_CSV_PATH,
   inatPath: string = RECORDS_INAT_CSV_PATH,
 ): RecordRow[] {
+  // Fails closed on the same terms as buildAllRecordsSql. Both answer "every
+  // record the site serves"; one of them silently answering "all but the
+  // imported ones" would be the worse kind of inconsistency, since the two are
+  // used interchangeably to cross-check each other.
+  assertInatRecordsPresent(inatPath);
   return [...readCuratorRecordRows(recordsPath), ...readInatRecordRows(inatPath)];
 }
