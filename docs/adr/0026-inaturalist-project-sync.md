@@ -50,6 +50,14 @@ Supporting decisions:
   jurisdictions is rejected outright; a record with no district at all is kept only when its
   state is unambiguous (see the state-only fallback under Consequences), and otherwise rejected
   to the report.
+- **A record must state a location accuracy of 2 km or better** (`MAX_ACCURACY_M`), and every
+  imported record carries that figure in `notes` beside the URL, in the curator's existing
+  format. Decided by the collaborator on #23 against a recommendation to accept unstated
+  accuracies: measurement showed ~24% of research-grade PNW Lepidoptera state none, and that
+  such records are not systematically worse-located than ones that do (15% of stated accuracies
+  are coarser than 1 km). He chose the stricter rule on data-quality grounds, and it costs
+  nothing against the project as it stands — its own records state an accuracy in every case,
+  none worse than 296 m.
 - **Removals carry a reason.** The sync fetches the project's whole eligible set and partitions
   locally, so "left the project" is distinguishable from "lost research grade" and from
   "re-identified as something we have no page for". They call for different responses from the

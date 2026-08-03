@@ -78,13 +78,31 @@ export const INAT_RECORD_TYPE = 'photograph';
  * matters (a potential first state record, say), the project's coordinators
  * can ask the observer directly.
  *
- * The 'import-annotated' path is kept because it is the reversible half of the
- * decision: the unanimity and place-name machinery it depends on is also what
+ * Note that {@link MAX_ACCURACY_M} now SUBSUMES this decision: iNaturalist
+ * publishes an obscured point with a ~27 km radius, which fails the 2 km floor
+ * whichever way this constant is set. Flipping it back would change the reason
+ * reported — 'obscured' is the more actionable one, since it tells the curator
+ * to ask the observer — but not the outcome. It is kept for that reason, and
+ * because the unanimity and place-name machinery it depends on is also what
  * makes the state-only fallback safe for unplaceable non-obscured records, so
- * none of it is dead weight. Flip this constant to change the policy —
- * nothing else needs to change.
+ * none of it is dead weight.
  */
 export const OBSCURED_POLICY: 'import-annotated' | 'skip' = 'skip';
+
+/**
+ * Coarsest location a record may state, in metres (#23).
+ *
+ * iNaturalist's accuracy figure is a radius the observer sets around their
+ * point — filled in automatically from a phone's GPS fix, left blank when
+ * someone drops a pin by hand or uploads a photo with no GPS in it. The
+ * collaborator's rule is that a record must state one, and it must be no
+ * coarser than 2 km. Sampling PNW Lepidoptera, about a quarter of research-
+ * grade observations state nothing and ~15% of those that do are coarser than
+ * 1 km, so this is a real filter rather than a formality — though the PNWMoths
+ * project's own records are far better than that (nothing blank, nothing over
+ * 2 km, median 18 m), because the people adding them were chosen for it.
+ */
+export const MAX_ACCURACY_M = 2000;
 
 /**
  * Ranks that can be reduced to a binomial. Research grade normally implies
@@ -306,6 +324,8 @@ export function countyForDistrict(
 /** Why an observation in the project did not become (or stay) a record. */
 export type SkipReason =
   | 'left-project'
+  | 'no-accuracy'
+  | 'accuracy-too-coarse'
   | 'not-research-grade'
   | 'rank-above-species'
   | 'unresolved-taxon'
@@ -319,6 +339,8 @@ export type SkipReason =
 /** Human-readable gloss for each skip/removal reason, used in the report. */
 export const SKIP_REASON_LABEL: Record<SkipReason, string> = {
   'left-project': 'no longer in the iNaturalist project',
+  'no-accuracy': 'states no location accuracy',
+  'accuracy-too-coarse': `location accuracy coarser than ${MAX_ACCURACY_M / 1000} km`,
   'not-research-grade': 'in the project but no longer research grade',
   'rank-above-species': 'identified only to genus or above',
   'unresolved-taxon': 'identified as a taxon with no page on the site',
@@ -494,6 +516,14 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
     return skip('obscured', `${accuracyKm(obs) ?? 'unknown'} km`);
   }
 
+  // Location-precision floor (#23). Checked AFTER the obscured gate so an
+  // obscured record is reported as obscured — the more actionable reason —
+  // rather than as merely coarse, even though its ~27 km radius would fail
+  // here too.
+  const accuracyM = accuracyMetres(obs);
+  if (accuracyM === null) return skip('no-accuracy', obs.place_guess ?? '');
+  if (accuracyM > MAX_ACCURACY_M) return skip('accuracy-too-coarse', `${accuracyM} m`);
+
   const user = obs.user;
   const { year, month, day } = splitObservedOn(obs.observed_on);
 
@@ -514,10 +544,11 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
       // line in the summary when someone fills in their profile.
       collector: (user?.name || user?.login || '').trim(),
       obscured: obs.obscured,
-      // No annotation when the accuracy is unknown — "location accuracy: ?km"
-      // would be published to the site as-is.
-      accuracyNote:
-        obs.obscured && accuracyKm(obs) !== null ? `location accuracy: ${accuracyKm(obs)}km` : '',
+      // Every record carries its accuracy (#23), following the curator's own
+      // hand-entered convention ("location accuracy: ...; <url>"). Metres, not
+      // km: it is the unit iNaturalist supplies, it needs no rounding, and the
+      // 2 km cap keeps the number short. Screening guarantees it is present.
+      accuracyNote: `location accuracy: ${accuracyMetres(obs) ?? '?'}m`,
       accuracyKm:
         obs.public_positional_accuracy !== null &&
         Number.isFinite(obs.public_positional_accuracy)
@@ -527,11 +558,17 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
   };
 }
 
-/** Published accuracy in km to 2dp, or null when unknown. */
-function accuracyKm(obs: InatObservation): string | null {
+/** Published accuracy radius in metres, or null when the observer stated none. */
+export function accuracyMetres(obs: InatObservation): number | null {
   const metres = obs.public_positional_accuracy;
   if (metres === null || metres === undefined || !Number.isFinite(metres)) return null;
-  return (metres / 1000).toFixed(2);
+  return metres;
+}
+
+/** Published accuracy in km to 2dp, or null when unknown. */
+function accuracyKm(obs: InatObservation): string | null {
+  const metres = accuracyMetres(obs);
+  return metres === null ? null : (metres / 1000).toFixed(2);
 }
 
 /**

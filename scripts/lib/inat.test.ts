@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   BLAST_RADIUS_MAX_FLOOR,
+  MAX_ACCURACY_M,
   binomialToSlug,
   buildCrosswalkIndex,
   collectCitedObservationIds,
@@ -430,18 +431,82 @@ describe('screenObservation', () => {
     assert.equal(result.skipped.detail, '26.94 km');
   });
 
-  it('annotates rather than skips under the import-annotated policy', () => {
-    // Kept under test because ADR 0026 says the alternative is one constant
-    // away; an untested alternative is not one constant away.
+  it('rejects a real obscured record even under the import-annotated policy', () => {
+    // The 2 km accuracy floor subsumes the obscured decision: iNaturalist
+    // publishes obscured points with a ~27 km radius, so they fail the floor
+    // whichever way OBSCURED_POLICY is set. Flipping the constant back would
+    // change the reason reported, not the outcome.
     const result = screenObservation(
       observation({ obscured: true, public_positional_accuracy: 26940 }),
+      context({ obscuredPolicy: 'import-annotated' }),
+    );
+    assert.equal(result.ok, false);
+    if (result.ok) return;
+    assert.equal(result.skipped.reason, 'accuracy-too-coarse');
+  });
+
+  it('lets a precise obscured record through under the import-annotated policy', () => {
+    // Not a shape iNaturalist actually produces — obscuring is what sets the
+    // radius — but it is what keeps the alternative branch exercised rather
+    // than merely asserted to exist.
+    const result = screenObservation(
+      observation({ obscured: true, public_positional_accuracy: 300 }),
       context({ obscuredPolicy: 'import-annotated' }),
     );
     assert.equal(result.ok, true);
     if (!result.ok) return;
     assert.equal(result.candidate.obscured, true);
-    // Matches the curator's own hand-entered wording.
-    assert.equal(result.candidate.accuracyNote, 'location accuracy: 26.94km');
+    assert.equal(result.candidate.accuracyNote, 'location accuracy: 300m');
+  });
+
+  it('rejects an observation that states no location accuracy', () => {
+    // Decided on #23: a blank accuracy fails the rule. About a quarter of
+    // research-grade PNW observations are in this position.
+    const result = screenObservation(
+      observation({ public_positional_accuracy: null }),
+      context(),
+    );
+    assert.equal(result.ok, false);
+    if (result.ok) return;
+    assert.equal(result.skipped.reason, 'no-accuracy');
+  });
+
+  it('rejects an accuracy coarser than the 2 km floor', () => {
+    const result = screenObservation(
+      observation({ public_positional_accuracy: 2001 }),
+      context(),
+    );
+    assert.equal(result.ok, false);
+    if (result.ok) return;
+    assert.equal(result.skipped.reason, 'accuracy-too-coarse');
+    assert.equal(result.skipped.detail, '2001 m');
+  });
+
+  it('accepts an accuracy exactly at the floor', () => {
+    const result = screenObservation(
+      observation({ public_positional_accuracy: MAX_ACCURACY_M }),
+      context(),
+    );
+    assert.equal(result.ok, true);
+  });
+
+  it('reports an obscured record as obscured, not merely as too coarse', () => {
+    // Its ~27 km radius would fail the floor too, but "obscured" is the
+    // actionable reason — it tells the curator to ask the observer.
+    const result = screenObservation(
+      observation({ obscured: true, public_positional_accuracy: 26940 }),
+      context(),
+    );
+    assert.equal(result.ok, false);
+    if (result.ok) return;
+    assert.equal(result.skipped.reason, 'obscured');
+  });
+
+  it('carries the accuracy into the record notes', () => {
+    const result = screenObservation(observation({ public_positional_accuracy: 15 }), context());
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.candidate.accuracyNote, 'location accuracy: 15m');
   });
 
   it('falls back to the login when the observer has no display name', () => {
@@ -498,7 +563,7 @@ describe('finalizeRow', () => {
     assert.equal(result.row.district_id, 'US:41007');
     assert.equal(result.row.record_type, 'photograph');
     assert.equal(result.row.collection, 'iNaturalist');
-    assert.equal(result.row.notes, 'https://www.inaturalist.org/observations/3792087');
+    assert.equal(result.row.notes, 'https://www.inaturalist.org/observations/3792087');  // no annotation on this bare fixture
     assert.equal(result.row.inat_id, '3792087');
   });
 

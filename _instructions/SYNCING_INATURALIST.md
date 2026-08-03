@@ -21,6 +21,10 @@ like without it going quiet on you.
 ## The Rules It Follows
 
 - Only **research grade** observations in the project are imported.
+- An observation must state a **location accuracy of 2 km or better**, or it is left out. On
+  iNaturalist that figure is a circle around the point, filled in automatically from a phone's
+  GPS and left blank when someone drops a pin by hand — a blank counts as failing the rule.
+  Every imported record carries its accuracy in the notes, alongside the link.
 - An observation that leaves the project, drops below research grade, or is re-identified as
   something with no page on this site is **removed** from the site on the next run.
 - An observation already entered by hand in `data/records.csv` is **not** imported, so nothing
@@ -122,6 +126,8 @@ project that suddenly shrank.
 | `not-research-grade` | In the project, but the community has not confirmed it | Nothing here — it imports itself once it reaches research grade |
 | `rank-above-species` | Identified only to genus or above | As above |
 | `already-curated` | You entered it by hand already | Optional: hand it over, above |
+| `no-accuracy` | The observer never set a location accuracy | Nothing here — the observer can add one on iNaturalist, and it imports on the next run |
+| `accuracy-too-coarse` | Location stated as worse than 2 km | As above |
 | `no-district` | Could not be placed in any known county or district | Check the coordinates on iNaturalist |
 | `out-of-bounds` | Outside the Pacific Northwest | Usually means it should not be in the project |
 | `obscured` | Location hidden by the observer, so the coordinates are up to 27 km out | Nothing automatic. If the record matters, ask the observer via the project and enter it by hand |
@@ -147,7 +153,7 @@ the same order, so the two line up when read side by side.
 | day | integer | From the observation date |
 | collector | string | The observer's name, or their login |
 | collection | string | Always `iNaturalist` |
-| notes | string | The observation URL, and the accuracy where the location is obscured |
+| notes | string | The location accuracy, then the observation URL |
 | district_id | string | Derived from the coordinates; blank when the location is imprecise |
 | inat_id | integer | The observation number — how a record is matched run to run |
 

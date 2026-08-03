@@ -86,7 +86,7 @@ erDiagram
         int     day
         string  collector      "the observer"
         string  collection     "always 'iNaturalist'"
-        string  notes          "the observation URL"
+        string  notes          "location accuracy, then the observation URL"
         string  district_id    "derived; blank when the location is imprecise"
         int     inat_id        PK "iNaturalist observation number"
     }
