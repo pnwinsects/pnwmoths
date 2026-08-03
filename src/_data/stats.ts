@@ -3,6 +3,7 @@ import { existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadWithheldFamilies } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies } from '../_lib/unpublished-species.ts';
+import { buildAllRecordsSql } from '../../scripts/lib/records-source.ts';
 
 /** Directory of per-species narrative markdown files; the basename is the slug. */
 const NARRATIVE_DIR = resolve('src/content/species');
@@ -74,8 +75,10 @@ export default async function (): Promise<SiteStats> {
     .getRows()
     .filter((r) => narrativeSlugs.has(String(r[0])))
     .length;
+  // Every occurrence source, not just the curator file — the home-page count
+  // must match what a visitor can actually browse (#23).
   const records = await scalar(`
-    SELECT count(*) FROM read_csv_auto('data/records.csv', header = true)
+    SELECT count(*) FROM (${buildAllRecordsSql()})
     WHERE species_slug IN (SELECT slug FROM shown)
   `);
   const images = existsSync('data/images.csv')

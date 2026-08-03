@@ -1,5 +1,5 @@
 // scripts/emit-species-districts.ts
-// Post-Vite build step: query records.csv via DuckDB, write
+// Post-Vite build step: query every occurrence record via DuckDB, write
 // _site/species-districts.json — the PNW-scoped species×state×county
 // aggregate consumed by the Browse district filter (BFILT-01).
 //
@@ -14,6 +14,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { pathToFileURL } from 'node:url';
+import { createAllRecordsTable } from './lib/records-source.ts';
 
 // ---------------------------------------------------------------------------
 // Pure functions — unit-testable without I/O
@@ -91,29 +92,7 @@ export async function main(): Promise<void> {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
-  await conn.run(`
-    CREATE TABLE records AS
-    SELECT * FROM read_csv('data/records.csv',
-      header = true,
-      columns = {
-        'species_slug': 'VARCHAR',
-        'record_type': 'VARCHAR',
-        'latitude': 'DOUBLE',
-        'longitude': 'DOUBLE',
-        'state': 'VARCHAR',
-        'county': 'VARCHAR',
-        'locality': 'VARCHAR',
-        'elevation_ft': 'INTEGER',
-        'year': 'INTEGER',
-        'month': 'INTEGER',
-        'day': 'INTEGER',
-        'collector': 'VARCHAR',
-        'collection': 'VARCHAR',
-        'notes': 'VARCHAR',
-        'district_id': 'VARCHAR'
-      }
-    )
-  `);
+  await createAllRecordsTable(conn);
 
   const result = await conn.runAndReadAll(`
     SELECT DISTINCT species_slug, state, county

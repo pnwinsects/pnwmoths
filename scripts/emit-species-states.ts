@@ -1,38 +1,18 @@
 // scripts/emit-species-states.ts
-// Post-Vite build step: query records.csv via DuckDB, write _site/species-states.json
+// Post-Vite build step: query every occurrence record via DuckDB, write
+// _site/species-states.json
 // Run via: npm run build:species-states
 import { DuckDBInstance } from '@duckdb/node-api';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { createAllRecordsTable } from './lib/records-source.ts';
 
 export async function main(): Promise<void> {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
 
-  await conn.run(`
-    CREATE TABLE records AS
-    SELECT * FROM read_csv('data/records.csv',
-      header = true,
-      columns = {
-        'species_slug': 'VARCHAR',
-        'record_type': 'VARCHAR',
-        'latitude': 'DOUBLE',
-        'longitude': 'DOUBLE',
-        'state': 'VARCHAR',
-        'county': 'VARCHAR',
-        'locality': 'VARCHAR',
-        'elevation_ft': 'INTEGER',
-        'year': 'INTEGER',
-        'month': 'INTEGER',
-        'day': 'INTEGER',
-        'collector': 'VARCHAR',
-        'collection': 'VARCHAR',
-        'notes': 'VARCHAR',
-        'district_id': 'VARCHAR'
-      }
-    )
-  `);
+  await createAllRecordsTable(conn);
 
   const result = await conn.runAndReadAll(`
     SELECT DISTINCT species_slug, state

@@ -6,6 +6,14 @@ import type { DuckDBConnection } from '@duckdb/node-api';
 import { readFileSync, mkdirSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 import { OccurrenceRecordSchema } from '../src/types/schemas.ts';
+import {
+  RECORDS_COLUMNS,
+  RECORDS_INAT_COLUMNS,
+  RECORDS_INAT_CSV_PATH,
+  RECORD_COORDINATE_BOUNDS,
+  createAllRecordsTable,
+  hasInatRecords,
+} from './lib/records-source.ts';
 import { pathToFileURL } from 'node:url';
 
 /**
@@ -130,11 +138,13 @@ export async function main(): Promise<void> {
       );
     }
   }
-  validateCsv('data/records.csv', [
-    'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
-    'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection', 'notes',
-    'district_id'
-  ]);
+  validateCsv('data/records.csv', [...RECORDS_COLUMNS]);
+  // The iNaturalist import (#23) is validated only when it has rows. A
+  // header-only file is the legitimate state of the repo before the first sync
+  // runs, and validateCsv throws on a CSV with no data rows.
+  if (hasInatRecords()) {
+    validateCsv(RECORDS_INAT_CSV_PATH, [...RECORDS_INAT_COLUMNS]);
+  }
 
   // --- DuckDB import with explicit schema ---
   const db = await DuckDBInstance.create(':memory:');
@@ -162,31 +172,12 @@ export async function main(): Promise<void> {
     )
   `);
 
-  // records.csv — WITHOUT nullstr='' (blank cells become NULL; county/district_id are
-  // now populated for ~96%+ of rows following the Phase 44 legacy re-join)
-  await conn.run(`
-    CREATE TABLE records AS
-    SELECT * FROM read_csv('data/records.csv',
-      header = true,
-      columns = {
-        'species_slug': 'VARCHAR',
-        'record_type': 'VARCHAR',
-        'latitude': 'DOUBLE',
-        'longitude': 'DOUBLE',
-        'state': 'VARCHAR',
-        'county': 'VARCHAR',
-        'locality': 'VARCHAR',
-        'elevation_ft': 'INTEGER',
-        'year': 'INTEGER',
-        'month': 'INTEGER',
-        'day': 'INTEGER',
-        'collector': 'VARCHAR',
-        'collection': 'VARCHAR',
-        'notes': 'VARCHAR',
-        'district_id': 'VARCHAR'
-      }
-    )
-  `);
+  // Every occurrence record the site serves: the curator file plus, when
+  // present, the machine-owned iNaturalist import (#23). Read WITHOUT
+  // nullstr='' (blank cells become NULL; county/district_id are now populated
+  // for ~96%+ of rows following the Phase 44 legacy re-join). The column spec
+  // and the union live in scripts/lib/records-source.ts.
+  await createAllRecordsTable(conn);
 
   // --- Post-import validation queries ---
   const validationChecks: { description: string; query: string }[] = [
@@ -216,11 +207,13 @@ export async function main(): Promise<void> {
       `
     },
     {
-      description: 'out-of-bounds coordinates (PNW bounds: lat 42.0-60.0, lon -139.0 to -110.0)',
+      description:
+        `out-of-bounds coordinates (PNW bounds: lat ${RECORD_COORDINATE_BOUNDS.latMin}-${RECORD_COORDINATE_BOUNDS.latMax}, ` +
+        `lon ${RECORD_COORDINATE_BOUNDS.lonMin} to ${RECORD_COORDINATE_BOUNDS.lonMax})`,
       query: `
         SELECT species_slug, latitude, longitude FROM records
-        WHERE latitude < 42.0 OR latitude > 60.0
-           OR longitude < -139.0 OR longitude > -110.0
+        WHERE latitude < ${RECORD_COORDINATE_BOUNDS.latMin} OR latitude > ${RECORD_COORDINATE_BOUNDS.latMax}
+           OR longitude < ${RECORD_COORDINATE_BOUNDS.lonMin} OR longitude > ${RECORD_COORDINATE_BOUNDS.lonMax}
       `
     },
     {
