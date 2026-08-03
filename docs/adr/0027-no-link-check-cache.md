@@ -6,7 +6,7 @@
 
 PR #260's `build` check failed on a link nobody had touched:
 
-```
+```text
 [_site/about/related-sites/index.html]:
 [ERROR] https://www.lepsoc.org/ | Error (cached)
 ```
@@ -61,8 +61,11 @@ valuable until it is measured against a current build.
 **The link check keeps no result cache.** `cache` and `max_cache_age` are gone from `lychee.toml`,
 and the `actions/cache` step is gone from all three workflows.
 
-Every run re-probes the 35 external URLs. They run concurrently, so the added wall-clock is roughly
-one request — bounded by `timeout = 20` — against a multi-minute build.
+Every run re-probes the 35 external URLs. They run concurrently, so in the normal case the added
+wall-clock is roughly one request against a multi-minute build — measured at 3s for the whole check,
+2,993 unique links included. The worst case is bounded by the slowest single URL, and that bound is
+`timeout = 20` × the `max_retries = 3` attempts, not `timeout` alone: one unreachable host can hold
+the check open for about a minute before failing it.
 
 This removes the bug class rather than managing it. With no cached state there is nothing for a
 non-blocking run to write, nothing for a blocking run to trust, and no shared namespace to reason

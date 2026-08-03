@@ -20,8 +20,27 @@ accept = ["100..=103", "200..=299", "429"]
 # link like any other `<link href>`. Checking those would validate the *deployed*
 # site rather than the build under test: a PR that adds a page would fail the link
 # check for the entirely correct reason that the page is not deployed yet. The
-# trailing slash matches directory-style page permalinks only, so CDN assets on the
-# same host (`/species-tiles/…_thumbnail.webp?width=530`, `/plates/…/thumbnail.jpg`)
-# are still checked.
+# trailing slash matches directory-style page permalinks only, so this pattern takes
+# the ~1,550 canonical page URLs and nothing else.
+#
+# CDN images are not checked here either — the extension pattern above excludes all
+# ~17,000 of them, and their presence is proven offline against the upload manifests
+# instead (ADR 0017/0022), which is deterministic where 17,000 HEAD requests would be
+# a network-flake generator:
+#
+#   derived/…                         data/image-derivatives.csv, both gates of
+#                                     scripts/check-derivatives.ts
+#   species-tiles/…_thumbnail.webp    data/species-photos.json, materialized only from
+#                                     data/species-photos-manifest.csv rows that
+#                                     upload-tiles.ts marked status=uploaded
+#   plates/…/thumbnail.jpg,           the check-derivatives source gate, via the
+#   <slug>/<legacy>.jpg               plates.json / images.csv source inventories
+#
+# `.github/scripts/check-cdn-urls.py` does probe the CDN over HTTP, scoped to the
+# images a PR actually adds. Note this exclude was once written the other way round:
+# it claimed CDN assets were "still checked", which was true only while the Bunny
+# Optimizer put a `?width=` query string on every URL and the extension anchor
+# therefore missed them. ADR 0022 retired the Optimizer; the URLs became plain
+# `.webp`/`.jpg` and silently fell under the exclude.
 exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]
