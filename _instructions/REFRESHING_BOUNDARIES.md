@@ -94,10 +94,16 @@ redirect's `Location` header.
 
 5. If all scripts exit 0, commit the updated files:
    ```bash
+   git switch -c refresh-boundaries
    git add data/boundaries/pnw-districts.geojson data/district-adjacency.csv
    git commit -m "Refresh boundary data"
-   git push
+   git push -u origin HEAD
+   gh pr create --fill
    ```
+
+   The `main` branch is protected: it takes changes only through a pull request whose
+   build check passes. `gh pr create` opens one; merge it from the PR page (or with
+   `gh pr merge`) once the check is green, and the site deploys automatically.
 
 ## Verify
 - Expected: `node scripts/build-boundaries.ts` exits 0, coverage `184/184`

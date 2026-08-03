@@ -73,10 +73,16 @@ the new plate](#linking-species-to-the-new-plate) below. A plate with no rows in
 **7. Commit and push.**
 
 ```sh
+git switch -c add-plate
 git add data/plates.json data/species-plates.csv
 git commit -m "feat: add plate NN (Family Name)"
-git push
+git push -u origin HEAD
+gh pr create --fill
 ```
+
+The `main` branch is protected: it takes changes only through a pull request whose
+build check passes. `gh pr create` opens one; merge it from the PR page (or with
+`gh pr merge`) once the check is green, and the site deploys automatically.
 
 CI will build the new plate page automatically from the updated `data/plates.json`.
 

@@ -43,10 +43,16 @@ filters at the top of the [species list](/browse/).
    region with your text (or omits it entirely if the file doesn't exist).
 4. If the build passes, commit and push:
    ```bash
+   git switch -c edit-announcement
    git add src/content/home-announcement.md
    git commit -m "Update homepage announcement"
-   git push
+   git push -u origin HEAD
+   gh pr create --fill
    ```
+
+   The `main` branch is protected: it takes changes only through a pull request whose
+   build check passes. `gh pr create` opens one; merge it from the PR page (or with
+   `gh pr merge`) once the check is green, and the site deploys automatically.
 
 ## Notes
 

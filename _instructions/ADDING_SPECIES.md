@@ -82,12 +82,18 @@ integrity, so the species row must exist in `data/species.csv` first.
 
 5. If build passes, commit and push:
    ```bash
+   git switch -c add-species
    git add data/species.csv src/_data/speciesSlugs.json
    # If you created a description file in step 2, also add it:
    # git add src/content/species/xestia-dolosa.md
    git commit -m "Add species: Xestia dolosa"
-   git push
+   git push -u origin HEAD
+   gh pr create --fill
    ```
+
+   The `main` branch is protected: it takes changes only through a pull request whose
+   build check passes. `gh pr create` opens one; merge it from the PR page (or with
+   `gh pr merge`) once the check is green, and the site deploys automatically.
 
 ## Verify
 - Expected: `_site/species/{slug}/index.html` exists after build.

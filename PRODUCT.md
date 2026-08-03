@@ -39,7 +39,7 @@ See [CONTEXT.md](CONTEXT.md) for the domain vocabulary and [docs/adr/](docs/adr/
 | Not building | Why |
 |---|---|
 | Admin / editing UI | Editing is done in flat files; a UX would be premature |
-| User submissions / community ID | iNaturalist already fills this role; it needs server infrastructure |
+| User submissions / community ID | iNaturalist fills this role, and research-grade records from the [PNWMoths project](https://www.inaturalist.org/projects/pnwmoths) are imported by a maintainer-run script ([ADR 0026](docs/adr/0026-inaturalist-project-sync.md)) — but submission and identification happen there, not here; hosting them would need server infrastructure |
 | Server-side search | No server; Pagefind is the static equivalent |
 | Real-time / live observation feeds | All data is build-time |
 | Multi-site support | The original app served several insect sites; this is pnwmoths only |

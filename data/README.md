@@ -22,7 +22,7 @@ erDiagram
 
     records {
         string  species_slug   FK
-        string  record_type    "specimen | literature | observation"
+        string  record_type    "specimen | photograph | literature | field notes | sight_field_notes"
         float   latitude
         float   longitude
         string  state
@@ -72,6 +72,24 @@ erDiagram
         int     height
     }
 
+    records_inat {
+        string  species_slug   FK
+        string  record_type    "always 'photograph'"
+        float   latitude
+        float   longitude
+        string  state          "derived from coordinates"
+        string  county         "derived; blank when the location is imprecise"
+        string  locality
+        int     year
+        int     month
+        int     day
+        string  collector      "the observer"
+        string  collection     "always 'iNaturalist'"
+        string  notes          "the observation URL"
+        string  district_id    "derived; blank when the location is imprecise"
+        int     inat_id        PK "iNaturalist observation number"
+    }
+
     parquet_records {
         string  species_slug   FK
         string  records_parquet "per-species materialized view"
@@ -84,6 +102,7 @@ erDiagram
     }
 
     species ||--o{ records          : "has occurrence records"
+    species ||--o{ records_inat     : "has imported observations"
     species ||--o{ images           : "has photos"
     species ||--o{ parquet_records  : "materialized as"
     species ||--o{ species_links    : "has external links"
@@ -96,6 +115,8 @@ erDiagram
 |------|--------------|-------------|
 | `species.csv` | ~900 | One row per species. Primary key is `id`; slug is derived as `genus.lower()-species.lower()`. `epithet_quoted` (`1` or blank) marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); it drives display only — the slug and foreign keys always use the clean epithet. See [`src/_lib/format-epithet.ts`](../src/_lib/format-epithet.ts). |
 | `records.csv` | ~30 000 | Geo-referenced occurrence records (specimens, literature, observations). |
+| `records-inat.csv` | ~60 | **Generated, not hand-edited.** Occurrence records imported from the [PNWMoths iNaturalist project](https://www.inaturalist.org/projects/pnwmoths) by [`scripts/sync-inat-records.ts`](../scripts/sync-inat-records.ts) (`npm run inat:sync`), rewritten in full every run. Same 15 columns as `records.csv` plus `inat_id`, the observation number that keys the reconcile. See [ADR 0026](../docs/adr/0026-inaturalist-project-sync.md) and [_instructions/SYNCING_INATURALIST.md](../_instructions/SYNCING_INATURALIST.md). |
+| `inat-sync-report.csv` | varies | Generated. One row per observation the sync did *not* import, with the reason. Rewritten every run. |
 | `records-bad.csv` | varies | Records that failed validation — same schema as `records.csv`. |
 | `records-bad-coords.csv` | varies | Records dropped for coordinates outside the PNW bounds (lat 42–60, lon −139 to −110) — typically swapped lat/lon. Kept for curation; not built into the site. Produced by [`scripts/recover-clipped-bc-records.ts`](../scripts/recover-clipped-bc-records.ts). |
 | `images.csv` | ~5 000 | Photo metadata. Images are hosted on the CDN; `filename` is the CDN asset key. |
@@ -117,6 +138,26 @@ Two things trip up anyone re-deriving this data:
 - **Genus synonymy.** A few genera are listed under an older name (e.g. `Speranza` species appear under `Macaria`), so a genus-keyed lookup misses them.
 
 A handful of species remain unclassified because they have no page on the reference site (or their `family` itself is suspect) — tracked in [#73](https://github.com/pnwinsects/pnwmoths/issues/73). Prefer the reference site over external sources like iNaturalist, whose subfamily circumscriptions sometimes disagree (e.g. iNat lumps `Acopa` into Noctuinae; the reference site places it in Amphipyrinae).
+
+## Two record files, two owners
+
+Occurrence records live in two files. `records.csv` is **curator-owned**: hand-edited, and
+mutated only by deliberate one-shot maintainer scripts, always additively.
+`records-inat.csv` is **machine-owned**: rewritten wholesale from the iNaturalist project on
+every sync, so a row survives only while its observation is in the project at research grade.
+
+The split exists because reconciliation is destructive — an observation removed from the project
+must disappear from the site — and a network-driven row *deleter* must not be pointed at the
+curator's file ([ADR 0026](../docs/adr/0026-inaturalist-project-sync.md)).
+
+"Every record the site serves" is the union of the two, defined once in
+[`scripts/lib/records-source.ts`](../scripts/lib/records-source.ts). Build steps that feed the
+site go through it. Maintainer curation scripts (`dedup-records`, `fill-district-from-coords`,
+`backfill-legacy-county`, `recover-clipped-bc-records`) deliberately do not — they mutate the
+curator file and must see exactly that file. So do `derive-district-audit.ts` and
+`emit-records-district-audit.ts`, whose artifact is keyed by row index into `records.csv` and
+whose question ("does the curator's stated county agree with the coordinates?") is meaningless
+for imported rows, whose county *is* derived from those coordinates.
 
 ## Slug convention
 

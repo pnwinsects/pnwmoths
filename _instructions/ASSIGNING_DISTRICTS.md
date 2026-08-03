@@ -122,10 +122,16 @@ only a row's *absence* from that artifact is a problem).
 
 5. If all scripts exit 0, commit the updated files:
    ```bash
+   git switch -c assign-districts
    git add data/records.csv data/legacy-rejoin-report.csv data/coord-fill-report.csv data/records-derived-district.csv
    git commit -m "Assign districts to new records"
-   git push
+   git push -u origin HEAD
+   gh pr create --fill
    ```
+
+   The `main` branch is protected: it takes changes only through a pull request whose
+   build check passes. `gh pr create` opens one; merge it from the PR page (or with
+   `gh pr merge`) once the check is green, and the site deploys automatically.
 
 ## Known Alberta Gap
 
