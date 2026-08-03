@@ -4,6 +4,7 @@
 
 - [Node.js 24](https://nodejs.org/) (or use [nvm](https://github.com/nvm-sh/nvm): `nvm use`)
 - [lychee](https://lychee.cli.rs/) — required locally for `npm run build:validate-links` (the Docker path includes it automatically)
+- [GitHub CLI](https://cli.github.com/) (`gh`), signed in with `gh auth login` — the `main` branch is protected, so every change lands through a pull request. The [maintainer runbooks](_instructions/) end with `gh pr create`.
 
 Or use Docker to skip local tooling (see below).
 

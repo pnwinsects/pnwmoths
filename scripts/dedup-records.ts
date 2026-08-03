@@ -120,8 +120,11 @@ export function dedupeRecords(rows: RecordRow[], columns: string[]): DedupeResul
  * `original`, in order. A re-serialisation that normalises line endings (CRLF ->
  * LF), re-quotes a field, or drops a blank line breaks this, because the
  * affected lines no longer match byte-for-byte.
+ *
+ * Exported so every deletion-only rewrite of records.csv shares one guard —
+ * scripts/migrate-inat-records.ts (#23) is the second caller.
  */
-function isLineDeletionOnly(original: string, rewritten: string): boolean {
+export function isLineDeletionOnly(original: string, rewritten: string): boolean {
   const from = original.split('\n');
   let i = 0;
   for (const line of rewritten.split('\n')) {

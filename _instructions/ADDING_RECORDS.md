@@ -4,6 +4,12 @@
 - `data/records.csv` — new rows for occurrence records
 - Build output: updated per-species Parquet file at `_site/species/{slug}/records.parquet`
 
+> **This is the hand-edited records file.** There is a second one,
+> `data/records-inat.csv`, holding records imported from the iNaturalist project. It is
+> rewritten from scratch on every sync, so anything typed into it is erased — never edit it by
+> hand. To add records from iNaturalist, see
+> [SYNCING_INATURALIST.md](SYNCING_INATURALIST.md). The site serves both files together.
+
 ## Schema: data/records.csv
 
 | Field | Type | Required | Example |
@@ -52,10 +58,19 @@ present in the header even where the value is blank.
 
 4. If build passes, commit and push:
    ```bash
+   git switch -c add-records-$(date +%Y%m%d-%H%M)
    git add data/records.csv
    git commit -m "Add occurrence records for [species name]"
-   git push
+   git push -u origin HEAD
+   gh pr create --fill
    ```
+
+   The `main` branch is protected: it takes changes only through a pull request whose
+   build check passes. `gh pr create` opens one; merge it from the PR page (or with
+   `gh pr merge`) once the check is green, and the site deploys automatically. The
+   date suffix just keeps each branch name unique, so the same command works every
+   time. `gh` is the GitHub CLI — see [CONTRIBUTING.md](../CONTRIBUTING.md) for
+   installing and signing into it.
 
 ## Verify
 - Expected: build completes without validation errors.
