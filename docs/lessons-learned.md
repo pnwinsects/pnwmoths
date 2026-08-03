@@ -344,6 +344,33 @@ cost a debugging cycle to discover.
   coming back. General rule: a cross-platform bug that fails *silently* on the platform CI
   doesn't run needs a source-level guard, not a runtime one.
 
+- **A non-blocking check must not write state a blocking check reads.** `production.yml`'s link
+  check is `continue-on-error: true`, but it saved its lychee cache to the same
+  `lychee-cache-` namespace the blocking PR check restored from — and `max_cache_age = "7d"`
+  kept a cached *error* fresh for a week. One transient outage on an external site red-flagged
+  every PR until someone found and deleted the poisoned cache entry, with a message naming a
+  page the contributor had never touched
+  ([#261](https://github.com/pnwinsects/pnwmoths/issues/261)). Removed in
+  [0027](adr/0027-no-link-check-cache.md). The general shape: shared mutable CI state inherits
+  the *weakest* writer's failure semantics, so check which workflows can write a cache before
+  trusting one.
+
+- **Measure a cache before hardening it.** The lychee cache looked essential — a stale local
+  `.lycheecache` held 11,806 entries. Against a current build it covered **35** URLs: internal
+  links resolve to `file://`, which lychee never caches (`ignore_cache()` returns true for any
+  file URI), and the 17,000 CDN images left the workload when
+  [0022](adr/0022-pregenerated-image-derivatives.md) retired the Bunny Optimizer and their
+  `?width=` query strings with it. `lychee --dump` answers this in one command; a cache file is
+  a record of a past configuration, not the current one. Two of the three fixes proposed for the
+  bug above were more machinery than the thing they protected.
+
+- **A green check that skipped the work is not evidence.** Removing that cache turned the first run
+  red on two Government of Canada hosts that refuse GitHub's runners. The 18 preceding production
+  runs were "clean" because a 7-day window meant they never probed those hosts — failures appeared
+  only in runs where an entry had aged out, which is the opposite of a low failure rate. Before
+  reading a passing history as coverage, check whether the passing runs actually asked. The same
+  trap sits in any skip-if-unchanged gate.
+
 - **A byte-identical baseline is the strongest safety net for behavior-preserving work.**
   For migrations/refactors (e.g. the TS conversion), commit a pre-change `_site/` baseline
   and diff against it — data byte-for-byte, HTML modulo content-hashed asset names. It

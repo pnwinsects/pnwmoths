@@ -37,12 +37,6 @@ jobs:
       - uses: ./.github/actions/install-lychee
         with:
           version: '0.23.0'
-      - name: Cache lychee URL results
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .lycheecache
-          key: lychee-cache-${{ github.run_id }}
-          restore-keys: lychee-cache-
       - name: Build site (with blocking link check)
         run: npm run build
       - name: Check new CDN image URLs

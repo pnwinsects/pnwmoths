@@ -34,12 +34,6 @@ jobs:
       - uses: ./.github/actions/install-lychee
         with:
           version: '0.23.0'
-      - name: Cache lychee URL results
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .lycheecache
-          key: lychee-cache-${{ github.run_id }}
-          restore-keys: lychee-cache-
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - name: Build site (staging — under /pnwmoths/)
         run: npm run build:site
