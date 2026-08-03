@@ -1,0 +1,50 @@
+name: Link rot check
+# Weekly external-link check that reports to a GitHub issue instead of a log
+# nobody reads. See docs/adr/0028-link-rot-reporting.md.
+#
+# Deliberately NOT part of pr-check.yml: a third-party host going down is not
+# something a contributor caused or can fix, so it must never turn a PR red
+# (#261, #263). Deliberately not `continue-on-error` inside an existing job
+# either — that is exactly the pattern that failed silently for days.
+on:
+  schedule:
+    # 09:00 UTC Monday = 1/2 AM Pacific. Weekly, because link rot is slow and a
+    # report that arrives more often than anyone acts on it becomes noise.
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: link-rot
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false # no git push here; keep token out of .git/config
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - name: Install DuckDB extensions (spatial, httpfs)
+        uses: ./.github/actions/install-duckdb-extensions
+      - uses: ./.github/actions/install-lychee
+        with:
+          version: '0.23.0'
+      - name: Build site
+        run: npm run build:site
+      - name: Check links
+        # Exit 2 means "links are broken", which is this job's subject matter,
+        # not its failure. The reporting step is what must run and succeed.
+        run: npm run links:check-json || true
+      - name: Report to the tracking issue
+        run: npm run links:report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
