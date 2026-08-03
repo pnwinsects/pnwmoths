@@ -1,9 +1,9 @@
 timeout = 20
 max_retries = 3
-cache = true
-# Treat cached URL results as fresh for a week (default is 1d) — cuts re-checks
-# of stable internal links and reduces flakiness against rate-limited hosts.
-max_cache_age = "7d"
+# No result cache — the absence of `cache`/`max_cache_age` is deliberate (ADR 0027).
+# Internal links resolve to file:// URIs, which lychee never caches, and the CDN
+# images are excluded below, so a cache would only spare this site ~35 external
+# requests per run — while letting one transient failure fail every PR for a week.
 accept = ["100..=103", "200..=299", "429"]
 # External reference hosts (BugGuide, Moth Photographers Group, BAMONA) are
 # linked per species from data/species-links.csv (~2400 links). Excluded from
