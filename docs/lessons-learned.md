@@ -364,6 +364,14 @@ cost a debugging cycle to discover.
   a record of a past configuration, not the current one. Two of the three fixes proposed for the
   bug above were more machinery than the thing they protected.
 
+- **`npm test` names its files explicitly, so a new `*.test.ts` runs only if you add it there.**
+  Forgetting is silent — the suite stays green and the new file looks like coverage while running
+  zero times. Four files had drifted out this way (`upload-derivatives`, `audit-optimizer-usage`,
+  `backfill-tribe`, and the new `report-link-rot`): 39 passing tests nothing ever ran. The list is
+  deliberate — ordering matters for the data-pipeline tests — so the fix is
+  `scripts/test-registration.test.ts`, which fails when a test file on disk is unregistered or a
+  registered pattern matches nothing.
+
 - **A green check that skipped the work is not evidence.** Removing that cache turned the first run
   red on two Government of Canada hosts that refuse GitHub's runners. The 18 preceding production
   runs were "clean" because a 7-day window meant they never probed those hosts — failures appeared
