@@ -97,6 +97,8 @@ export type ReportedUrl = UrlState & { url: string };
  * under many, so sources are merged per URL and the URL is the identity.
  */
 export function parseLycheeReport(report: unknown): BrokenLink[] {
+  if (!report || typeof report !== 'object' || Array.isArray(report)) return [];
+
   const maps = ['error_map', 'timeout_map'] as const;
   const byUrl = new Map<string, BrokenLink>();
 
@@ -141,10 +143,15 @@ export function mergeState(previous: State, current: BrokenLink[], today: string
 
   for (const link of current) {
     const before = previous[link.url];
+    // At most one strike per day. Two runs on the same date — a manual
+    // `workflow_dispatch`, a re-run of a failed job — are one observation from
+    // one runner minutes apart, and counting them twice would confirm a URL
+    // without the independent second look that is the entire point of the rule.
+    const sameDay = before?.lastSeen === today;
     next[link.url] = {
       firstSeen: before?.firstSeen ?? today,
       lastSeen: today,
-      strikes: (before?.strikes ?? 0) + 1,
+      strikes: sameDay ? before.strikes : (before?.strikes ?? 0) + 1,
       reason: link.reason,
       sources: link.sources,
     };
@@ -165,7 +172,36 @@ export function classify(state: State): { confirmed: ReportedUrl[]; pending: Rep
   };
 }
 
-/** Read the embedded state back out of an issue body. Absent or corrupt → empty. */
+/**
+ * Shape check for one remembered URL.
+ *
+ * Parsing is not enough here. This state is stored in an issue body a human can
+ * edit, so well-formed JSON carrying the wrong types is the *likely* corruption,
+ * not the exotic one — and a string `strikes` would turn `strikes + 1` into
+ * string concatenation, quietly producing "11" and a URL that never reports.
+ */
+function isUrlState(value: unknown): value is UrlState {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const v = value as Record<string, unknown>;
+  return (
+    typeof v['firstSeen'] === 'string' &&
+    typeof v['lastSeen'] === 'string' &&
+    typeof v['strikes'] === 'number' &&
+    Number.isInteger(v['strikes']) &&
+    v['strikes'] > 0 &&
+    typeof v['reason'] === 'string' &&
+    Array.isArray(v['sources']) &&
+    v['sources'].every((s) => typeof s === 'string')
+  );
+}
+
+/**
+ * Read the embedded state back out of an issue body.
+ *
+ * Absent, corrupt or wrongly-shaped → empty. Discarding the whole map rather
+ * than the bad entry is deliberate: a partially-trusted memory is harder to
+ * reason about than none, and the cost is one run's strikes.
+ */
 export function parseIssueBody(body: string): State {
   const start = body.indexOf(STATE_OPEN);
   if (start === -1) return {};
@@ -176,7 +212,10 @@ export function parseIssueBody(body: string): State {
   try {
     const parsed: unknown = JSON.parse(body.slice(from, end).trim());
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
-    return parsed as State;
+
+    const entries = Object.entries(parsed as Record<string, unknown>);
+    if (!entries.every(([url, value]) => url && isUrlState(value))) return {};
+    return Object.fromEntries(entries) as State;
   } catch {
     // A hand-edited body should cost one run's memory, never a crashed report.
     return {};
@@ -274,11 +313,32 @@ function gh(args: string[], input?: string): string {
   return result.stdout;
 }
 
+/**
+ * The issue this job owns, or null to open a fresh one.
+ *
+ * Identified by its own state marker, not by the label alone. A label is
+ * something a person can apply to any issue, and this job *overwrites the entire
+ * body* of what it finds — so trusting the label would let one mislabel destroy
+ * somebody's writeup. The marker is written only by `renderIssueBody`, which
+ * makes it proof of authorship.
+ *
+ * More than one match means two trackers are live and one is about to be
+ * silently abandoned; that is a person's call, so fail loudly instead.
+ */
 function findOpenIssue(label: string): ExistingIssue | null {
-  const raw = gh(['issue', 'list', '--label', label, '--state', 'open', '--limit', '1',
+  const raw = gh(['issue', 'list', '--label', label, '--state', 'open', '--limit', '50',
     '--json', 'number,body']);
-  const parsed = JSON.parse(raw) as ExistingIssue[];
-  return parsed.length > 0 ? (parsed[0] ?? null) : null;
+  const owned = (JSON.parse(raw) as ExistingIssue[])
+    .filter((issue) => typeof issue.body === 'string' && issue.body.includes(STATE_OPEN));
+
+  if (owned.length > 1) {
+    throw new Error(
+      `Found ${owned.length} open issues carrying the link-rot state marker ` +
+      `(#${owned.map((i) => i.number).join(', #')}). Close all but one; this job ` +
+      'will not guess which to overwrite.',
+    );
+  }
+  return owned[0] ?? null;
 }
 
 function main(): void {

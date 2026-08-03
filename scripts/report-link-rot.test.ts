@@ -78,6 +78,14 @@ describe('parseLycheeReport', () => {
     assert.deepEqual(parseLycheeReport({ error_map: { a: 'not-an-array' } }), []);
     assert.deepEqual(parseLycheeReport({ error_map: { a: [{ no_url: 1 }] } }), []);
   });
+
+  it('tolerates a non-object report — null indexes into nothing', () => {
+    assert.deepEqual(parseLycheeReport(null), []);
+    assert.deepEqual(parseLycheeReport(undefined), []);
+    assert.deepEqual(parseLycheeReport([]), []);
+    assert.deepEqual(parseLycheeReport('not json'), []);
+    assert.deepEqual(parseLycheeReport(42), []);
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -114,6 +122,34 @@ describe('mergeState', () => {
     assert.equal(state['https://example.com/x']?.strikes, 1);
     assert.equal(state['https://example.com/x']?.firstSeen, '2026-08-24');
     assert.deepEqual(classify(state).confirmed, []);
+  });
+
+  it('counts at most one strike per day, so a re-run cannot confirm a URL', () => {
+    // A manual dispatch or a job re-run is one observation from one runner,
+    // not the independent second look the two-strike rule is buying.
+    let state: State = mergeState({}, [link], '2026-08-10');
+    state = mergeState(state, [link], '2026-08-10');
+    state = mergeState(state, [link], '2026-08-10');
+    assert.equal(state['https://example.com/x']?.strikes, 1);
+    assert.deepEqual(classify(state).confirmed, []);
+  });
+
+  it('still strikes on the next day after same-day re-runs', () => {
+    let state: State = mergeState({}, [link], '2026-08-10');
+    state = mergeState(state, [link], '2026-08-10');
+    state = mergeState(state, [link], '2026-08-17');
+    assert.equal(state['https://example.com/x']?.strikes, 2);
+    assert.equal(classify(state).confirmed.length, 1);
+  });
+
+  it('refreshes reason and sources on a same-day re-run without striking', () => {
+    const state = mergeState(
+      mergeState({}, [link], '2026-08-10'),
+      [{ ...link, reason: 'Rejected status code: 500' }],
+      '2026-08-10',
+    );
+    assert.equal(state['https://example.com/x']?.strikes, 1);
+    assert.equal(state['https://example.com/x']?.reason, 'Rejected status code: 500');
   });
 
   it('refreshes reason and sources from the latest run', () => {
@@ -188,6 +224,47 @@ describe('issue body state', () => {
 
   it('ignores a JSON array, which is not a state map', () => {
     assert.deepEqual(parseIssueBody('<!-- link-rot-state: [1,2] -->'), {});
+  });
+
+  it('rejects well-formed JSON with wrongly-typed fields', () => {
+    // The likely corruption for a body a human can edit: valid JSON, wrong
+    // shape. A string `strikes` would make `strikes + 1` concatenate to "11".
+    const withState = (v: unknown): string =>
+      `<!-- link-rot-state: ${JSON.stringify({ 'https://e.example': v })} -->`;
+    const valid = {
+      firstSeen: '2026-08-10', lastSeen: '2026-08-10', strikes: 1,
+      reason: 'Timeout', sources: ['_site/a/index.html'],
+    };
+    assert.equal(Object.keys(parseIssueBody(withState(valid))).length, 1, 'sanity: valid passes');
+
+    for (const bad of [
+      { ...valid, strikes: '1' },
+      { ...valid, strikes: 1.5 },
+      { ...valid, strikes: 0 },
+      { ...valid, strikes: -1 },
+      { ...valid, firstSeen: 20260810 },
+      { ...valid, lastSeen: null },
+      { ...valid, reason: { text: 'Timeout' } },
+      { ...valid, sources: 'not-an-array' },
+      { ...valid, sources: [1, 2] },
+      'a bare string',
+      null,
+      [],
+    ]) {
+      assert.deepEqual(parseIssueBody(withState(bad)), {}, `should reject ${JSON.stringify(bad)}`);
+    }
+  });
+
+  it('discards the whole map when any single entry is bad', () => {
+    const good = {
+      firstSeen: '2026-08-10', lastSeen: '2026-08-10', strikes: 1,
+      reason: 'Timeout', sources: [],
+    };
+    const body = `<!-- link-rot-state: ${JSON.stringify({
+      'https://ok.example': good,
+      'https://bad.example': { ...good, strikes: 'lots' },
+    })} -->`;
+    assert.deepEqual(parseIssueBody(body), {});
   });
 });
 

@@ -46,13 +46,28 @@ Three parts, each answering one of the failures above:
 2. **The two-strike rule.** `scripts/report-link-rot.ts` records a failing URL but does not report it
    until it fails again the following week, likely from a different runner IP. Single-run flakes and
    transient outages never reach the actionable list; they sit in a collapsed "observed once" section
-   marked as needing no action. Strikes must be *consecutive* — a recovery resets the count, so a
-   link failing every third week never accumulates its way into the report.
+   marked as needing no action. Two properties make the rule mean what it says:
+   - Strikes must be *consecutive* — a recovery resets the count, so a link failing every third week
+     never accumulates its way into the report.
+   - **At most one strike per day.** A manual `workflow_dispatch` or a re-run of a failed job is one
+     observation from one runner minutes apart, and counting it twice would confirm a URL without the
+     independent second look the rule exists to buy.
 
 3. **State lives in the issue body**, in an HTML comment. The report and the memory of the report
    cannot drift apart, there is no cache to poison (ADR 0027, learned the hard way), and no bot
-   commit to a protected branch. A hand-edited or corrupt body costs one run's memory and never
-   crashes the job.
+   commit to a protected branch. State is validated field by field on read, not merely parsed: this
+   body is human-editable, so well-formed JSON of the wrong shape is the likely corruption, and an
+   unchecked string `strikes` would make `strikes + 1` concatenate. Anything unexpected discards the
+   whole map — one run's memory — rather than crashing or half-trusting it.
+
+4. **The job must never render a malfunction as good news.** Two guards, because both failure paths
+   end in a falsely closed issue:
+   - lychee exit `0` (clean) and `2` (broken links found) continue to reporting; `1` (missing input)
+     and `3` (bad config) fail the job. Swallowing those would hand the reporter a stale or absent
+     report, which reads as zero failures and **closes the tracking issue**.
+   - The issue is located by its own state marker, not by the label. This job overwrites the entire
+     body of what it finds, and a label is something anyone can apply to any issue. More than one
+     marked issue aborts rather than guessing which to overwrite.
 
 The issue text tells the reader to open each link in a browser before editing anything, and says
 that if it loads fine, the fix is an `exclude` entry with a note — not a link edit. That instruction
