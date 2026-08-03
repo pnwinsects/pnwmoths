@@ -15,6 +15,14 @@ accept = ["100..=103", "200..=299", "429"]
 # automated checkers while serving 200 to browsers. Excluded to keep the link
 # check non-flaky; these URLs are verified to load in a browser.
 #
+# The Government of Canada hosts are the same class, found the hard way: with the
+# result cache removed (ADR 0027) they were probed for the first time in weeks and
+# hung rather than answered — 129 timeouts and 8m40s of link check, from two hosts.
+# `agriculture.canada.ca` is linked from every species page, so one unreachable host
+# was 1,238 of the 1,238 errors. Both serve 200 in ~0.3s from a workstation, so this
+# is the runner's network being refused, not link rot; a re-run cannot clear it.
+# `cbif.gc.ca` was already excluded here for what was evidently the same reason.
+#
 # The site's own page URLs. Every page carries an absolute `rel=canonical` and
 # `og:url` pointing at production (issue #198), and lychee extracts the canonical
 # link like any other `<link href>`. Checking those would validate the *deployed*
@@ -42,5 +50,5 @@ accept = ["100..=103", "200..=299", "429"]
 # Optimizer put a `?width=` query string on every URL and the extension anchor
 # therefore missed them. ADR 0022 retired the Optimizer; the URLs became plain
 # `.webp`/`.jpg` and silently fell under the exclude.
-exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca"]
+exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca", "agriculture\\.canada\\.ca", "geonames\\.nrcan\\.gc\\.ca"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]

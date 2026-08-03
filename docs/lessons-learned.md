@@ -364,6 +364,13 @@ cost a debugging cycle to discover.
   a record of a past configuration, not the current one. Two of the three fixes proposed for the
   bug above were more machinery than the thing they protected.
 
+- **A green check that skipped the work is not evidence.** Removing that cache turned the first run
+  red on two Government of Canada hosts that refuse GitHub's runners. The 18 preceding production
+  runs were "clean" because a 7-day window meant they never probed those hosts — failures appeared
+  only in runs where an entry had aged out, which is the opposite of a low failure rate. Before
+  reading a passing history as coverage, check whether the passing runs actually asked. The same
+  trap sits in any skip-if-unchanged gate.
+
 - **A byte-identical baseline is the strongest safety net for behavior-preserving work.**
   For migrations/refactors (e.g. the TS conversion), commit a pre-change `_site/` baseline
   and diff against it — data byte-for-byte, HTML modulo content-hashed asset names. It

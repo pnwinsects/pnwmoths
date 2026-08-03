@@ -69,16 +69,45 @@ the check open for about a minute before failing it.
 
 This removes the bug class rather than managing it. With no cached state there is nothing for a
 non-blocking run to write, nothing for a blocking run to trust, and no shared namespace to reason
-about. A transient outage now fails one run, and a re-run clears it.
+about.
+
+## What removing it immediately revealed
+
+The first cache-free run went red on two Government of Canada hosts — `agriculture.canada.ca`
+(linked from every species page, so 1,238 of the 1,238 errors) and `geonames.nrcan.gc.ca` — with
+129 timeouts and an 8m40s link check. Both serve 200 in ~0.3s from a workstation. They are excluded
+now, alongside `cbif.gc.ca`, which was already in that list for what was evidently the same reason.
+
+This corrects the framing above, and issue #261's. The cache was **not** turning a transient failure
+sticky; it was turning a *persistent* one invisible. Two facts establish it:
+
+- The production run named in #261 as writing the poisoned entry, `30808703476`, shows
+  `[TIMEOUT] https://www.lepsoc.org` in its own log. The cached error was a faithful recording of a
+  real condition — the host does not answer GitHub's runners — not a fluke. #261's "was up and
+  returning 200 the whole time" was measured from a browser.
+- Of the previous 20 production runs, 18 were clean. That is not evidence those hosts were
+  reachable: with a 7-day window those runs **never probed them**. Failures appear exactly in the
+  runs where the entry had aged out and the URL was re-checked, which is the opposite of a low
+  failure rate.
+
+A cache that suppresses probing does not make a check pass; it makes the check stop asking, and the
+green tick then means nothing about the hosts it covered.
 
 ## Consequences
 
-- 35 external requests per CI run, spread over 27 hosts. At CI volumes this is unremarkable traffic
+- 33 external requests per CI run, spread over 25 hosts. At CI volumes this is unremarkable traffic
   for any of them.
-- **A blocking PR check is now exposed to live third-party downtime**, where before it could ride a
-  cached success. This is the deliberate trade: a live failure is honest, names a real condition, and
-  clears on re-run. The stuck-for-a-week alternative was neither. `max_retries = 3` and the `exclude`
-  list absorb the ordinary noise.
+- **A blocking PR check is exposed to third-party hosts that refuse GitHub's runners**, where before
+  it could ride a cached success. Where that is a real outage, the failure is honest and clears on
+  re-run. Where it is cloud-IP blocking, as with the two hosts above, a re-run cannot clear it and
+  the host belongs in `exclude` with evidence — verified by hand, not assumed.
+- **This is the trade to watch.** 33 hosts, any of which can block a contributor for a reason no
+  contributor can fix, and the honest expectation is that the exclude list grows. If that becomes
+  routine, the structural answer is to make the PR check internal-only (`lychee --offline`, 0.5s,
+  2,958 `file://` links — the only links a PR can actually break) and leave external coverage to the
+  non-blocking production run or a scheduled job. Tracked in
+  [#263](https://github.com/pnwinsects/pnwmoths/issues/263); not done here because it changes what
+  the PR gate means, which is a larger decision than removing a cache.
 - `.lycheecache` is no longer written. It stays in `.gitignore`; a stale local copy is inert.
 - The `lychee-cache-*` entries in the Actions cache are now unread and expire on their own.
 - **If the external link count grows by an order of magnitude, revisit** — but re-read this ADR
