@@ -28,12 +28,12 @@ like without it going quiet on you.
 - Locations are checked against the same county and regional-district boundaries the rest of
   the site uses. An observation that cannot be placed in one of WA, OR, ID, MT, BC or AB is
   left out and listed in the report rather than guessed at.
-- Observations whose location iNaturalist has obscured never get a county: the published
-  location can be up to 27 km from the true one, which is wider than many counties, so claiming
-  one would be a guess. The accuracy is noted on the record. They keep their **state** only when
-  it is unambiguous — either every district the true location could be in agrees, or
-  iNaturalist's own place name says so outright. Near a state line, where neither holds, the
-  record is left out and listed in the report.
+- Observations whose location iNaturalist has obscured are **not imported**. The published
+  location can be up to 27 km from the true one, which is wider than many counties, so the
+  record could not carry a trustworthy county — and where an observer chose to obscure a
+  location, that choice is respected rather than worked around. They are listed in the report as
+  `obscured`. If one matters (a potential first state record, say), the project's coordinators
+  can ask the observer directly and the record can be entered by hand.
 
 ## Steps
 
@@ -124,7 +124,7 @@ project that suddenly shrank.
 | `already-curated` | You entered it by hand already | Optional: hand it over, above |
 | `no-district` | Could not be placed in any known county or district | Check the coordinates on iNaturalist |
 | `out-of-bounds` | Outside the Pacific Northwest | Usually means it should not be in the project |
-| `obscured` | Location hidden by the observer | Only appears if the obscured-record policy is set to skip |
+| `obscured` | Location hidden by the observer, so the coordinates are up to 27 km out | Nothing automatic. If the record matters, ask the observer via the project and enter it by hand |
 
 ## Schema: data/records-inat.csv
 

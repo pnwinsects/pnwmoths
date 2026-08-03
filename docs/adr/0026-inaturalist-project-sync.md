@@ -114,14 +114,15 @@ predates this work and is fixed alongside it.)
 - Two upstream fields are user-editable (the observer's display name, and their place
   description), so an occasional "updated" line reflects an edited iNaturalist profile rather
   than a data change.
-- Obscured observations never get a county or district: their published coordinates can be
-  ~27 km from the truth, wider than many PNW counties. Nor is their state read off the published
-  point — sampling obscured PNW Lepidoptera observations shows that derivation is wrong 1-4% of
-  the time, concentrated along the Columbia River where the WA/OR line runs. A state is asserted
-  only when every district the true location could be in agrees, or when iNaturalist's own place
-  name (which for an obscured observation names a place genuinely containing the true location)
-  says so outright. Otherwise the record is rejected to the report. The policy remains one
-  constant, `OBSCURED_POLICY`, pending the collaborator's answer on #23.
+- Obscured observations are **not imported** (`OBSCURED_POLICY = 'skip'`, decided by the
+  collaborator on #23). Their published coordinates can be ~27 km from the truth, wider than
+  many PNW counties, so the record cannot carry a trustworthy county; and where an observer
+  chose to obscure a location, that choice is respected rather than worked around. Investigation
+  along the way established that deriving even the *state* from the published point is wrong
+  1-4% of the time, concentrated along the Columbia River — so the decision costs less than it
+  might appear. The `import-annotated` alternative remains implemented and one constant away,
+  because the unanimity and place-name machinery it needs is the same machinery that makes the
+  state-only fallback safe for unplaceable non-obscured records.
 - A record that cannot be placed in a district but whose neighbours within 25 km all agree on a
   state is kept with that state and no district — coastal, island and on-the-water records land
   here. Unanimity is what makes it safe: near a border the neighbours disagree and the record is

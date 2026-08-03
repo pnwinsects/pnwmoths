@@ -70,10 +70,21 @@ export const INAT_RECORD_TYPE = 'photograph';
  *                        ("location accuracy: 26.94km; <url>").
  *   'skip'             — drop every obscured observation, and report it.
  *
- * Pending the collaborator's decision on issue #23; flip this constant to
- * change the policy — nothing else needs to change.
+ * DECIDED on #23: 'skip'. The collaborator's reasoning is a data-quality one
+ * that outranks the recovery machinery below — "within 27 km of here"
+ * compromises the integrity of an occurrence record whatever we do with the
+ * state — plus a consent one: if an observer chose to obscure a location, we
+ * respect that rather than working around it. Where an obscured record really
+ * matters (a potential first state record, say), the project's coordinators
+ * can ask the observer directly.
+ *
+ * The 'import-annotated' path is kept because it is the reversible half of the
+ * decision: the unanimity and place-name machinery it depends on is also what
+ * makes the state-only fallback safe for unplaceable non-obscured records, so
+ * none of it is dead weight. Flip this constant to change the policy —
+ * nothing else needs to change.
  */
-export const OBSCURED_POLICY: 'import-annotated' | 'skip' = 'import-annotated';
+export const OBSCURED_POLICY: 'import-annotated' | 'skip' = 'skip';
 
 /**
  * Ranks that can be reduced to a binomial. Research grade normally implies
@@ -401,6 +412,13 @@ export interface ScreenContext {
   siteSlugs: Set<string>;
   /** Lowercased binomial -> site slug, from data/species-synonyms.csv. */
   synonyms: Map<string, string>;
+  /**
+   * Overrides {@link OBSCURED_POLICY}. Production never sets it — the constant
+   * is the single switch. It exists so both branches stay under test: the
+   * alternative is documented as one constant away, and a claim like that is
+   * worth only as much as the test behind it.
+   */
+  obscuredPolicy?: 'import-annotated' | 'skip';
 }
 
 /** `observed_on` is a local calendar date (`YYYY-MM-DD`); split it as text.
@@ -472,7 +490,7 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
     return skip('out-of-bounds', `${latitude}, ${longitude}`);
   }
 
-  if (obs.obscured && OBSCURED_POLICY === 'skip') {
+  if (obs.obscured && (ctx.obscuredPolicy ?? OBSCURED_POLICY) === 'skip') {
     return skip('obscured', `${accuracyKm(obs) ?? 'unknown'} km`);
   }
 

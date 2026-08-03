@@ -416,10 +416,26 @@ describe('screenObservation', () => {
     assert.equal(result.skipped.reason, 'no-coordinates');
   });
 
-  it('annotates an obscured observation with its published accuracy', () => {
+  it('skips an obscured observation under the decided policy', () => {
+    // OBSCURED_POLICY = 'skip' (#23): ~27 km is wider than many PNW counties,
+    // and an observer's choice to obscure is respected rather than worked
+    // around.
     const result = screenObservation(
       observation({ obscured: true, public_positional_accuracy: 26940 }),
       context(),
+    );
+    assert.equal(result.ok, false);
+    if (result.ok) return;
+    assert.equal(result.skipped.reason, 'obscured');
+    assert.equal(result.skipped.detail, '26.94 km');
+  });
+
+  it('annotates rather than skips under the import-annotated policy', () => {
+    // Kept under test because ADR 0026 says the alternative is one constant
+    // away; an untested alternative is not one constant away.
+    const result = screenObservation(
+      observation({ obscured: true, public_positional_accuracy: 26940 }),
+      context({ obscuredPolicy: 'import-annotated' }),
     );
     assert.equal(result.ok, true);
     if (!result.ok) return;
