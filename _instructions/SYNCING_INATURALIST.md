@@ -4,8 +4,12 @@ Bring research-grade observations from the [PNWMoths iNaturalist
 project](https://www.inaturalist.org/projects/pnwmoths) into the site as occurrence records.
 
 Run this whenever you have curated the project — added observations, or had identifications
-change — and want the site to catch up. It is safe to run any time; running it twice in a row
-does nothing the second time.
+change — and want the site to catch up. It is safe to run any time, and safe to run twice.
+
+The summary compares against the **last committed** state, not what is sitting in your working
+copy, so it keeps reporting the same changes every time you run it until you commit them in
+step 4. That is deliberate — it means you can re-run and re-read the summary as often as you
+like without it going quiet on you.
 
 ## What This Changes
 - `data/records-inat.csv` — rewritten in full every run. **Machine-owned: never edit it by hand.**
@@ -24,9 +28,12 @@ does nothing the second time.
 - Locations are checked against the same county and regional-district boundaries the rest of
   the site uses. An observation that cannot be placed in one of WA, OR, ID, MT, BC or AB is
   left out and listed in the report rather than guessed at.
-- Observations whose location iNaturalist has obscured are imported with their state, but with
-  no county — the published location can be up to 27 km from the true one, which is wider than
-  many counties, so claiming one would be a guess. The accuracy is noted on the record.
+- Observations whose location iNaturalist has obscured never get a county: the published
+  location can be up to 27 km from the true one, which is wider than many counties, so claiming
+  one would be a guess. The accuracy is noted on the record. They keep their **state** only when
+  it is unambiguous — either every district the true location could be in agrees, or
+  iNaturalist's own place name says so outright. Near a state line, where neither holds, the
+  record is left out and listed in the report.
 
 ## Steps
 
@@ -52,7 +59,7 @@ does nothing the second time.
 
 4. If the build passes, commit and push:
    ```bash
-   git switch -c inat-sync
+   git switch -c inat-sync-$(date +%Y%m%d-%H%M)
    git add data/records-inat.csv data/inat-sync-report.csv
    git commit -m "Sync records from the iNaturalist project"
    git push -u origin HEAD
@@ -61,7 +68,10 @@ does nothing the second time.
 
    The `main` branch is protected: it takes changes only through a pull request whose
    build check passes. `gh pr create` opens one; merge it from the PR page (or with
-   `gh pr merge`) once the check is green, and the site deploys automatically.
+   `gh pr merge`) once the check is green, and the site deploys automatically. The
+   date suffix just keeps each branch name unique, so the same command works every
+   time. `gh` is the GitHub CLI — see [CONTRIBUTING.md](../CONTRIBUTING.md) for
+   installing and signing into it.
 
 ## Handing a Record Over
 
@@ -77,6 +87,12 @@ npm run inat:sync             # writes the report listing what can be handed ove
 npm run inat:migrate          # deletes those rows from data/records.csv
 npm run inat:sync             # imports the same observations, now sync-owned
 ```
+
+The sync must have run within the last hour, or migrate refuses: the report only describes the
+project as it was when the sync ran, and acting on a stale one can delete a record that will not
+come back. Rows that cite an observation but are not themselves plain iNaturalist photographs —
+a museum specimen documented by an observation, say — are never handed over, and migrate says so
+rather than skipping them quietly.
 
 `npm run inat:migrate -- --dry-run` shows what it would delete first. The record does not
 disappear from the site — it changes hands. Check with `git diff data/records.csv`; the diff
@@ -147,7 +163,8 @@ the same order, so the two line up when read side by side.
 ## Verify
 - Expected: `npm run inat:sync` exits 0 and reports what it wrote.
 - Expected: `npm run build:site` completes.
-- Expected: re-running `npm run inat:sync` immediately reports no changes.
+- Expected: re-running `npm run inat:sync` reports the same changes again until you commit
+  them — see the note at the top. After the commit is merged, it reports no changes.
 
 ## Notes
 

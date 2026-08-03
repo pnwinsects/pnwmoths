@@ -14,18 +14,19 @@
 // effect on the site is nil — the record does not disappear, it changes owner
 // and becomes self-updating.
 //
-// It reads data/inat-sync-report.csv, NOT data/records-inat.csv. The sync
-// refuses to emit an observation that records.csv already cites, so a
-// hand-entered record can never appear in records-inat.csv while its
-// hand-entered row exists — keying off that file would deadlock, and nothing
-// would ever migrate. The report's `already-curated` rows are the sync saying
-// "this observation is in the project and eligible; I am standing off because
-// you have it by hand", which is exactly the handover signal.
+// The handover list comes from a LIVE fetch (computeHandoverIds), not from the
+// committed data/inat-sync-report.csv. Two reasons. The sync refuses to emit an
+// observation records.csv already cites, so a hand-entered record can never
+// appear in records-inat.csv while its hand-entered row exists — keying off
+// that file would deadlock and nothing would ever migrate. And the report is
+// committed, so its mtime is the checkout time: a fresh clone or a `git switch`
+// makes a months-old report look like it was written seconds ago, and deleting
+// curator rows on that basis is unrecoverable. Asking iNaturalist directly
+// makes the question unambiguous.
 //
 // Order of operations (the runbook spells this out):
-//   1. npm run inat:sync      writes the report
-//   2. npm run inat:migrate   removes the hand-entered rows
-//   3. npm run inat:sync      imports them under the sync's ownership
+//   1. npm run inat:migrate   removes the hand-entered rows
+//   2. npm run inat:sync      imports them under the sync's ownership
 //
 // Why this is a separate, deliberately-run script and not part of the sync:
 // deleting from data/records.csv is a curator-file mutation, and it must be
@@ -46,7 +47,7 @@
 // Idempotent: a second run finds nothing to do.
 //
 // Run: npm run inat:migrate
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
@@ -54,11 +55,11 @@ import { stringify } from 'csv-stringify/sync';
 import { isLineDeletionOnly } from './dedup-records.ts';
 import { extractObservationIds } from './lib/inat.ts';
 import { RECORDS_CSV_PATH } from './lib/records-source.ts';
+import { computeHandoverIds } from './sync-inat-records.ts';
 import type { RecordRow } from './lib/records-source.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RECORDS_PATH = resolve(ROOT, RECORDS_CSV_PATH);
-const REPORT_PATH = resolve(ROOT, 'data/inat-sync-report.csv');
 
 export interface MigrationCandidate {
   /** 0-based index into the parsed records.csv rows. */
@@ -66,6 +67,8 @@ export interface MigrationCandidate {
   row: RecordRow;
   /** The observation ids that row cites, all of which the sync will take. */
   inatIds: string[];
+  /** Why it is being held back. Empty for rows that will be migrated. */
+  blockedReason: string;
 }
 
 export interface MigrationPlan {
@@ -73,6 +76,58 @@ export interface MigrationPlan {
   kept: RecordRow[];
   /** Rows to delete, because the sync already carries the same observation. */
   migrated: MigrationCandidate[];
+  /** Rows the sync would take, held back because they carry curator content. */
+  blocked: MigrationCandidate[];
+}
+
+/**
+ * True when a row is a plain iNaturalist photograph record — the only shape
+ * the sync can faithfully reproduce.
+ *
+ * Four rows in data/records.csv cite an observation as DOCUMENTATION for a
+ * record that is not the observation: three specimens (one of them a Canadian
+ * National Collection specimen, `collection = CNC`) and one photograph whose
+ * notes read "Record documented at: <url>". Migrating any of them would delete
+ * a specimen and let the sync recreate it as
+ * `record_type = photograph, collection = iNaturalist`, with the observer's
+ * display name replacing the collector and the institutional attribution gone
+ * — a change a reviewer would read as one line moving between two files.
+ *
+ * So the test is not "does it cite an observation" but "is the observation all
+ * this row is". Notes must be the URL alone, optionally preceded by the
+ * accuracy annotation the sync itself writes.
+ */
+export function isPlainInatPhotograph(row: RecordRow): boolean {
+  if (row.record_type !== 'photograph') return false;
+  if (row.collection !== '' && row.collection !== 'iNaturalist') return false;
+  const notes = (row.notes ?? '').trim();
+  const withoutAccuracy = notes.replace(/^locat(?:ion|ity) accuracy:[^;]*;\s*/i, '');
+  return /^https?:\/\/(?:www\.)?inaturalist\.org\/observations\/\d+(?:#\S*)?$/.test(
+    withoutAccuracy.trim(),
+  );
+}
+
+/**
+ * Columns a curator may have filled that the sync cannot reproduce, so a
+ * handover would silently destroy them.
+ *
+ * `elevation_ft` is the whole list, and it is not hypothetical: the single
+ * handover candidate in the project today is the Astoria *Lophocampa roseata*
+ * record, carrying `elevation_ft = 230`. iNaturalist does not supply elevation,
+ * so the sync writes that column blank unconditionally — the runbook says as
+ * much. Migrating the row would drop 230 permanently, and because the
+ * migration diff is deletions only, nothing about the change would look like a
+ * loss to anyone reviewing it.
+ *
+ * Every other column the sync does populate: differently, sometimes (iNat's
+ * `Mike Patterson` where the curator wrote `M. Patterson`), but the synced
+ * value is the one that will stay current, which is the point of handing over.
+ */
+export const UNREPRODUCIBLE_COLUMNS: Array<keyof RecordRow> = ['elevation_ft'];
+
+/** Columns of `row` that a handover would destroy, if any. */
+export function unreproducibleValues(row: RecordRow): Array<keyof RecordRow> {
+  return UNREPRODUCIBLE_COLUMNS.filter((c) => (row[c] ?? '').trim() !== '');
 }
 
 /**
@@ -95,15 +150,48 @@ export function planMigration(
 ): MigrationPlan {
   const kept: RecordRow[] = [];
   const migrated: MigrationCandidate[] = [];
+  const blocked: MigrationCandidate[] = [];
 
   records.forEach((row, index) => {
     const inatIds = extractObservationIds(row.notes);
     const takenOver = inatIds.length > 0 && inatIds.every((id) => handoverIds.has(id));
-    if (takenOver) migrated.push({ index, row, inatIds });
-    else kept.push(row);
+    if (!takenOver) {
+      kept.push(row);
+      return;
+    }
+    // Reported, never silently skipped: these are rows a maintainer might
+    // reasonably expect to migrate, and the reasons they cannot are judgements
+    // he may disagree with.
+    if (!isPlainInatPhotograph(row)) {
+      blocked.push({
+        index,
+        row,
+        inatIds,
+        blockedReason:
+          'it cites an observation as documentation but is not itself a plain iNaturalist ' +
+          'photograph — handing it over would replace it with one and lose the collection ' +
+          'attribution',
+      });
+      kept.push(row);
+      return;
+    }
+    const wouldLose = unreproducibleValues(row);
+    if (wouldLose.length > 0) {
+      blocked.push({
+        index,
+        row,
+        inatIds,
+        blockedReason:
+          `it carries ${wouldLose.map((c) => `${c} = ${row[c]}`).join(', ')}, which ` +
+          'iNaturalist does not supply — handing it over would erase that permanently',
+      });
+      kept.push(row);
+      return;
+    }
+    migrated.push({ index, row, inatIds, blockedReason: '' });
   });
 
-  return { kept, migrated };
+  return { kept, migrated, blocked };
 }
 
 /**
@@ -123,6 +211,10 @@ export function migrateCsv(
   const [first] = rows;
   const columns = first ? Object.keys(first) : [];
   const plan = planMigration(rows, handoverIds);
+  // Nothing to delete means nothing to rewrite. Running the round-trip anyway
+  // would reject a CRLF records.csv with a byte-faithfulness error when the
+  // honest answer is "there is nothing to migrate".
+  if (plan.migrated.length === 0) return { output: raw, plan };
   const output = stringify(plan.kept, { header: true, columns });
   if (!isLineDeletionOnly(raw, output)) {
     throw new Error(
@@ -135,30 +227,24 @@ export function migrateCsv(
   return { output, plan };
 }
 
-/**
- * Observation ids the last sync reported as `already-curated` — the handover
- * worklist.
- */
-export function readHandoverIds(reportPath: string = REPORT_PATH): Set<string> {
-  if (!existsSync(reportPath)) return new Set();
-  const rows = parse(readFileSync(reportPath), {
-    columns: true,
-    skip_empty_lines: true,
-  }) as Array<{ inat_id: string; outcome: string }>;
-  return new Set(
-    rows.filter((r) => r.outcome === 'already-curated').map((r) => r.inat_id),
-  );
-}
+/** Accepted flags. An unrecognised one is an error, never a silent no-op. */
+const MIGRATE_FLAGS = new Set(['--dry-run']);
 
-export function main(argv: string[] = process.argv.slice(2)): void {
+export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
+  const unknown = argv.filter((a) => !MIGRATE_FLAGS.has(a));
+  if (unknown.length > 0) {
+    console.error(`Unrecognised option${unknown.length === 1 ? '' : 's'}: ${unknown.join(' ')}`);
+    console.error('Usage: npm run inat:migrate [-- --dry-run]');
+    process.exit(2);
+  }
   const dryRun = argv.includes('--dry-run');
 
-  const handoverIds = readHandoverIds();
+  console.log('Checking the iNaturalist project for records it can take over...');
+  const handoverIds = await computeHandoverIds();
   if (handoverIds.size === 0) {
     console.log(
-      'Nothing to migrate — the last sync found no hand-entered record whose ' +
-        'observation is also in the iNaturalist project. ' +
-        '(Run "npm run inat:sync" first if you have not.)',
+      'Nothing to migrate — no hand-entered record in records.csv has an observation the ' +
+        'sync is currently able to import.',
     );
     return;
   }
@@ -166,8 +252,12 @@ export function main(argv: string[] = process.argv.slice(2)): void {
   const raw = readFileSync(RECORDS_PATH, 'utf8');
   const { output, plan } = migrateCsv(raw, handoverIds);
 
+  for (const held of plan.blocked) {
+    console.warn(`Not migrating ${held.row.species_slug}: ${held.blockedReason}.`);
+  }
+
   if (plan.migrated.length === 0) {
-    console.log('Nothing to migrate — those records are no longer in records.csv.');
+    console.log('Nothing to migrate.');
     return;
   }
 
@@ -196,11 +286,14 @@ export function main(argv: string[] = process.argv.slice(2)): void {
       `${RECORDS_CSV_PATH}. Review with "git diff data/records.csv".`,
   );
   console.log(
-    'Now run "npm run inat:sync" again — it will import the same observations, ' +
-      'this time under the sync\'s ownership.',
+    'Now run "npm run inat:sync" — it will import the same observations, this time under ' +
+      "the sync's ownership.",
   );
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  main();
+  main().catch((err) => {
+    console.error((err as Error).message);
+    process.exit(1);
+  });
 }

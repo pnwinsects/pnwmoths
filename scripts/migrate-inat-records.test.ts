@@ -1,10 +1,12 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { migrateCsv, planMigration, readHandoverIds } from './migrate-inat-records.ts';
+import {
+  isPlainInatPhotograph,
+  migrateCsv,
+  planMigration,
+  unreproducibleValues,
+} from './migrate-inat-records.ts';
 import { RECORDS_COLUMNS } from './lib/records-source.ts';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
 import type { RecordRow } from './lib/records-source.ts';
 
 function row(overrides: Partial<RecordRow> = {}): RecordRow {
@@ -16,7 +18,7 @@ function row(overrides: Partial<RecordRow> = {}): RecordRow {
     state: 'OR',
     county: 'Clatsop',
     locality: 'Astoria',
-    elevation_ft: '230',
+    elevation_ft: '',
     year: '2016',
     month: '8',
     day: '2',
@@ -63,15 +65,29 @@ describe('planMigration', () => {
     assert.equal(plan.migrated.length, 2);
   });
 
-  it('keeps a multi-observation row unless the sync carries every one', () => {
-    // Migrating on a partial match would silently drop the observation the
-    // sync is NOT carrying.
+  it('never migrates a row citing more than one observation', () => {
+    // Partial coverage would drop the observation the sync is not carrying;
+    // full coverage is ambiguous (one occurrence documented twice, or two
+    // occurrences in one row?). No such row exists in records.csv today, so
+    // refusing costs nothing and guessing could not be checked.
     const multi = row({
       notes:
         'https://www.inaturalist.org/observations/1; https://www.inaturalist.org/observations/2',
     });
     assert.equal(planMigration([multi], new Set(['1'])).migrated.length, 0);
-    assert.equal(planMigration([multi], new Set(['1', '2'])).migrated.length, 1);
+    const both = planMigration([multi], new Set(['1', '2']));
+    assert.equal(both.migrated.length, 0);
+    assert.equal(both.blocked.length, 1);
+    assert.equal(both.kept.length, 1);
+  });
+
+  it('holds back a row the sync cannot faithfully reproduce, and reports it', () => {
+    const specimen = row({ record_type: 'specimen', collection: 'CNC' });
+    const plan = planMigration([specimen], new Set(['3792087']));
+    assert.equal(plan.migrated.length, 0);
+    assert.equal(plan.blocked.length, 1);
+    // Held back means KEPT — never dropped from the file.
+    assert.equal(plan.kept.length, 1);
   });
 
   it('ignores differences between the hand-entered and synced values', () => {
@@ -93,26 +109,68 @@ describe('planMigration', () => {
   });
 });
 
-describe('readHandoverIds', () => {
-  it('returns nothing when the sync has not been run', () => {
-    assert.equal(readHandoverIds(join(tmpdir(), 'pnwm-no-such-report.csv')).size, 0);
+describe('isPlainInatPhotograph', () => {
+  it('accepts a plain iNaturalist photograph row', () => {
+    assert.equal(isPlainInatPhotograph(row({ collection: 'iNaturalist' })), true);
+    assert.equal(isPlainInatPhotograph(row({ collection: '' })), true);
   });
 
-  it('selects only already-curated rows from the report', () => {
-    // The other outcomes are rejections, not handovers; migrating on one would
-    // delete a curator row the sync has no intention of replacing.
-    const dir = mkdtempSync(join(tmpdir(), 'pnwm-migrate-'));
-    const path = join(dir, 'inat-sync-report.csv');
-    writeFileSync(
-      path,
-      'inat_id,url,outcome,detail\n' +
-        '1,u,already-curated,d\n' +
-        '2,u,unresolved-taxon,d\n' +
-        '3,u,already-curated,d\n' +
-        '4,u,out-of-bounds,d\n',
+  it('accepts one carrying the accuracy annotation the sync writes', () => {
+    assert.equal(
+      isPlainInatPhotograph(
+        row({
+          notes:
+            'location accuracy: 26.94km; https://www.inaturalist.org/observations/49684455',
+        }),
+      ),
+      true,
     );
-    assert.deepEqual([...readHandoverIds(path)].sort(), ['1', '3']);
-    rmSync(dir, { recursive: true, force: true });
+  });
+
+  it('rejects a specimen that merely cites an observation', () => {
+    // Real rows: a CNC specimen and a D Holden coll specimen both cite an
+    // observation as documentation. Migrating one would delete the specimen
+    // and let the sync recreate it as an anonymous iNaturalist photograph.
+    assert.equal(isPlainInatPhotograph(row({ record_type: 'specimen' })), false);
+  });
+
+  it('rejects a row held in another collection', () => {
+    assert.equal(isPlainInatPhotograph(row({ collection: 'CNC' })), false);
+    assert.equal(isPlainInatPhotograph(row({ collection: 'C_LaBar' })), false);
+  });
+
+  it('rejects notes carrying prose beyond the URL', () => {
+    assert.equal(
+      isPlainInatPhotograph(
+        row({
+          notes: 'Record documented at: https://www.inaturalist.org/observations/221684965',
+        }),
+      ),
+      false,
+    );
+  });
+});
+
+describe('unreproducibleValues', () => {
+  it('flags an elevation the sync cannot reproduce', () => {
+    // The one live handover candidate carries elevation_ft = 230. iNaturalist
+    // does not supply elevation, so the sync writes that column blank — the
+    // handover would erase 230 with a diff that is deletions only, i.e. a loss
+    // invisible to anyone reviewing it.
+    assert.deepEqual(unreproducibleValues(row({ elevation_ft: '230' })), ['elevation_ft']);
+  });
+
+  it('is empty for a row carrying nothing the sync would drop', () => {
+    assert.deepEqual(unreproducibleValues(row({ elevation_ft: '' })), []);
+    assert.deepEqual(unreproducibleValues(row({ elevation_ft: '  ' })), []);
+  });
+
+  it('holds such a row back rather than migrating it', () => {
+    const plan = planMigration([row({ elevation_ft: '230' })], new Set(['3792087']));
+    assert.equal(plan.migrated.length, 0);
+    assert.equal(plan.blocked.length, 1);
+    assert.equal(plan.kept.length, 1);
+    assert.match(plan.blocked[0]?.blockedReason ?? '', /elevation_ft = 230/);
   });
 });
 
@@ -121,7 +179,7 @@ describe('migrateCsv', () => {
   const keptLine =
     'euxoa-aurantiaca,specimen,42.02,-113.115,ID,Cassia,Black Pine Mts,6312,2012,7,12,L. G. Crabo,LGCC,,US:16031';
   const migratableLine =
-    'lophocampa-roseata,photograph,46.183537,-123.829004,OR,Clatsop,Astoria,230,2016,8,2,M. Patterson,,' +
+    'lophocampa-roseata,photograph,46.183537,-123.829004,OR,Clatsop,Astoria,,2016,8,2,M. Patterson,,' +
     'https://www.inaturalist.org/observations/3792087,US:41007';
 
   it('removes only the migrated line, byte for byte', () => {

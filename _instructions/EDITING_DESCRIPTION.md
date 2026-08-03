@@ -53,7 +53,7 @@ family …" sentence instead; nothing breaks.
 
 4. If build passes, commit and push:
    ```bash
-   git switch -c edit-description
+   git switch -c edit-description-$(date +%Y%m%d-%H%M)
    git add src/content/species/{slug}.md
    git commit -m "Update description: [species name]"
    git push -u origin HEAD
@@ -62,7 +62,10 @@ family …" sentence instead; nothing breaks.
 
    The `main` branch is protected: it takes changes only through a pull request whose
    build check passes. `gh pr create` opens one; merge it from the PR page (or with
-   `gh pr merge`) once the check is green, and the site deploys automatically.
+   `gh pr merge`) once the check is green, and the site deploys automatically. The
+   date suffix just keeps each branch name unique, so the same command works every
+   time. `gh` is the GitHub CLI — see [CONTRIBUTING.md](../CONTRIBUTING.md) for
+   installing and signing into it.
 
 ## Verify
 - Expected: `_site/species/{slug}/index.html` contains the description text after build.

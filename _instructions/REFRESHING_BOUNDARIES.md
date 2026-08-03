@@ -94,7 +94,7 @@ redirect's `Location` header.
 
 5. If all scripts exit 0, commit the updated files:
    ```bash
-   git switch -c refresh-boundaries
+   git switch -c refresh-boundaries-$(date +%Y%m%d-%H%M)
    git add data/boundaries/pnw-districts.geojson data/district-adjacency.csv
    git commit -m "Refresh boundary data"
    git push -u origin HEAD
@@ -103,7 +103,10 @@ redirect's `Location` header.
 
    The `main` branch is protected: it takes changes only through a pull request whose
    build check passes. `gh pr create` opens one; merge it from the PR page (or with
-   `gh pr merge`) once the check is green, and the site deploys automatically.
+   `gh pr merge`) once the check is green, and the site deploys automatically. The
+   date suffix just keeps each branch name unique, so the same command works every
+   time. `gh` is the GitHub CLI — see [CONTRIBUTING.md](../CONTRIBUTING.md) for
+   installing and signing into it.
 
 ## Verify
 - Expected: `node scripts/build-boundaries.ts` exits 0, coverage `184/184`

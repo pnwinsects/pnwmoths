@@ -6,10 +6,12 @@ import { join } from 'node:path';
 import {
   RECORDS_COLUMNS,
   RECORDS_INAT_COLUMNS,
+  assertInatRecordsPresent,
   buildAllRecordsSql,
   hasInatRecords,
   isWithinRecordBounds,
   readAllRecordRows,
+  readCsvSql,
   readInatRecordRows,
 } from './records-source.ts';
 
@@ -50,6 +52,28 @@ describe('hasInatRecords', () => {
   it('is true once there is a data row', () => {
     writeFileSync(inatPath, `${INAT_HEADER}\n${INAT_ROW}\n`);
     assert.equal(hasInatRecords(inatPath), true);
+  });
+});
+
+describe('assertInatRecordsPresent', () => {
+  it('passes for a header-only file — a legitimate state', () => {
+    writeFileSync(inatPath, `${INAT_HEADER}\n`);
+    assert.doesNotThrow(() => assertInatRecordsPresent(inatPath));
+  });
+
+  it('throws when the committed file has gone missing', () => {
+    // Without this the union quietly drops every imported record from the
+    // maps, the aggregates and the home-page count, and the build stays green.
+    assert.throws(
+      () => assertInatRecordsPresent(join(dir, 'absent.csv')),
+      /is missing/,
+    );
+  });
+});
+
+describe('readCsvSql', () => {
+  it('refuses a path that would break out of the SQL string literal', () => {
+    assert.throws(() => readCsvSql("data/it's.csv", RECORDS_COLUMNS), /quote/);
   });
 });
 

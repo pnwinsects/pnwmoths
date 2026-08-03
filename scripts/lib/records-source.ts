@@ -143,6 +143,13 @@ function columnsSpec(columns: readonly string[]): string {
 
 /** A `read_csv(...)` call with an explicit, fully-typed column spec. */
 export function readCsvSql(path: string, columns: readonly string[]): string {
+  // Every caller passes a module constant today, but the function is exported
+  // and parameterised, and DuckDB cannot parameterise a file path — so the
+  // quote character that would break out of the literal is rejected outright
+  // rather than escaped.
+  if (path.includes("'")) {
+    throw new Error(`Refusing to build SQL for a path containing a quote: ${path}`);
+  }
   return `read_csv('${path}', header = true, columns = ${columnsSpec(columns)})`;
 }
 
@@ -159,6 +166,28 @@ export function readCsvSql(path: string, columns: readonly string[]): string {
 export function hasInatRecords(path: string = RECORDS_INAT_CSV_PATH): boolean {
   if (!existsSync(path)) return false;
   return readInatRecordRows(path).length > 0;
+}
+
+/**
+ * Assert the iNaturalist file has not gone missing.
+ *
+ * `hasInatRecords` deliberately treats absent and header-only alike, because
+ * both mean "no imported rows to union". For a BUILD that is a dangerous
+ * conflation: the file is committed, so absence means a bad merge, a stray
+ * `rm` or a .gitignore mistake — and the union would quietly drop every
+ * imported record from the maps, the state and district aggregates, the
+ * species audit and the home-page count, with a green build and no diff in the
+ * output. Every other data file in this pipeline hard-fails when missing; this
+ * one must too. A header-only file stays silent — that is a legitimate state.
+ */
+export function assertInatRecordsPresent(path: string = RECORDS_INAT_CSV_PATH): void {
+  if (existsSync(path)) return;
+  throw new Error(
+    `${path} is missing. It is a committed file, so this means it was deleted or lost in a ` +
+      'merge — building without it would silently drop every imported iNaturalist record from ' +
+      'the site. Restore it (git checkout -- ' + path + ') or, if the import is genuinely ' +
+      'being retired, replace it with a header-only file.',
+  );
 }
 
 /**

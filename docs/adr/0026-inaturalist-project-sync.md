@@ -15,11 +15,11 @@ unique.
 
 Two facts shaped the design more than the requirement did.
 
-**The conventions already exist.** `data/records.csv` contains 145 iNaturalist observation URLs
-across rows the curator entered by hand, 29 of them tagged `collection = iNaturalist`, all with
-`record_type = photograph` and the URL in `notes`, and two annotated
-`location accuracy: 26.94km; <url>`. This work automates an established practice; it does not
-invent one.
+**The conventions already exist.** `data/records.csv` cites 145 iNaturalist observations the
+curator entered by hand, 29 tagged `collection = iNaturalist`, 142 with `record_type =
+photograph` and the URL in `notes`, and two annotated `location accuracy: 26.94km; <url>`. This
+work automates an established practice; it does not invent one. (The other three are specimens
+citing an observation as documentation — see the migration constraint below.)
 
 **Reconciliation is destructive.** Removing a row because a remote server changed is unlike
 anything else that writes occurrence data here. Every existing `records.csv` writer is
@@ -44,17 +44,28 @@ Supporting decisions:
 - **Geography is derived, never imported.** Point-in-polygon against the committed boundaries
   gives a district; the state comes from the district id's FIPS/CDUID prefix; the county comes
   from `data/district-crosswalk.csv`.
-- **Ingest fails closed on geography.** No district, or a district outside the six covered
-  jurisdictions, means the observation is rejected to a report — never written with a blank
-  state. `build-data.ts` exempts an empty state from its allow-list check, so such a record
-  would build cleanly and then be invisible to every filter on the page.
+- **Ingest fails closed on geography.** A record is never written with a blank state.
+  `build-data.ts` exempts an empty state from its allow-list check, so such a record would build
+  cleanly and then be invisible to every filter on the page. A district outside the six covered
+  jurisdictions is rejected outright; a record with no district at all is kept only when its
+  state is unambiguous (see the state-only fallback under Consequences), and otherwise rejected
+  to the report.
 - **Removals carry a reason.** The sync fetches the project's whole eligible set and partitions
   locally, so "left the project" is distinguishable from "lost research grade" and from
   "re-identified as something we have no page for". They call for different responses from the
   curator.
 - **Convergence on one file happens by pull.** The sync refuses to emit an observation already
   cited in `records.csv`; `scripts/migrate-inat-records.ts` hands such a record over on demand,
-  deleting the hand-entered row so the next sync owns it.
+  deleting the hand-entered row so the next sync owns it. That dedup decision is made **last**,
+  after every other gate including the district gates — `already-curated` is the list migrate
+  deletes from, so it has to mean "this would otherwise be a record". An earlier draft checked
+  it first, which listed two observations (`Pseudaletia unipuncta`, `Furcula gigans`) as
+  handover candidates that the sync would then have rejected, losing both records.
+- **Migration refuses anything it cannot faithfully reproduce.** Three `records.csv` rows are
+  specimens — one a Canadian National Collection specimen — that cite an observation as
+  *documentation*. Handing one over would delete the specimen and let the sync recreate it as
+  an anonymous iNaturalist photograph. Migration also refuses a sync report older than an hour,
+  since a stale one describes a project that may since have changed.
 
 ## Rejected alternatives
 
@@ -103,11 +114,30 @@ predates this work and is fixed alongside it.)
 - Two upstream fields are user-editable (the observer's display name, and their place
   description), so an occasional "updated" line reflects an edited iNaturalist profile rather
   than a data change.
-- Obscured observations are imported with a state but no county or district. Their published
-  coordinates can be ~27 km from the truth, which is wider than many PNW counties. The policy is
-  one constant, `OBSCURED_POLICY`, pending the collaborator's answer on #23.
+- Obscured observations never get a county or district: their published coordinates can be
+  ~27 km from the truth, wider than many PNW counties. Nor is their state read off the published
+  point — sampling obscured PNW Lepidoptera observations shows that derivation is wrong 1-4% of
+  the time, concentrated along the Columbia River where the WA/OR line runs. A state is asserted
+  only when every district the true location could be in agrees, or when iNaturalist's own place
+  name (which for an obscured observation names a place genuinely containing the true location)
+  says so outright. Otherwise the record is rejected to the report. The policy remains one
+  constant, `OBSCURED_POLICY`, pending the collaborator's answer on #23.
 - A record that cannot be placed in a district but whose neighbours within 25 km all agree on a
   state is kept with that state and no district — coastal, island and on-the-water records land
   here. Unanimity is what makes it safe: near a border the neighbours disagree and the record is
-  rejected instead of being assigned to the wrong side.
+  rejected instead of being assigned to the wrong side. The neighbourhood search scales the
+  degree threshold by `cos(latitude)`, because a degree of longitude is ~74 km at 48°N against
+  ~111 km for latitude; dividing by the latitude constant would search an ellipse only ~17 km
+  wide east-west, and a neighbour that is missed is a neighbour that cannot disagree.
+- The fetch cross-checks its own completeness against the `total_results` the API reports. A
+  truncated sweep that still returns HTTP 200 is the dangerous failure: every observation it
+  missed would be reconciled as a removal, with the entirely plausible reason "no longer in the
+  project".
 - `src/_data/stats.ts` counts the union, so the home-page record total includes imported records.
+- `data/records.csv` is no longer written only additively: `migrate-inat-records.ts` deletes rows
+  from it, as `dedup-records.ts` already did. Both are pure deletions, maintainer-invoked, and
+  reviewable as a deletions-only diff. The invariant that holds is the one that matters — nothing
+  rewrites a curator's *values*, and nothing writes that file as a side effect of a network fetch.
+- The handover refuses any row carrying detail the sync cannot reproduce. `elevation_ft` is the
+  live case: the one current candidate carries `230`, iNaturalist supplies no elevation, and the
+  deletions-only diff would make the loss invisible on review.

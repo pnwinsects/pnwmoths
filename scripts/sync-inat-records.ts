@@ -43,14 +43,17 @@ import type { InatRecordRow } from './lib/records-source.ts';
 import {
   INAT_PROJECT_ID,
   NEARBY_STATE_KM,
+  assertObservationShape,
   buildCrosswalkIndex,
   collectCitedObservationIds,
   finalizeRow,
   formatSummary,
+  observationUrl,
   guardBlastRadius,
   reconcile,
   screenObservation,
   stateFromNearbyDistricts,
+  stateFromPlaceGuess,
 } from './lib/inat.ts';
 import type {
   Candidate,
@@ -208,6 +211,7 @@ export async function fetchProjectObservations(
 ): Promise<InatObservation[]> {
   const all: InatObservation[] = [];
   let idAbove = 0;
+  let expectedTotal: number | null = null;
 
   for (;;) {
     const url =
@@ -222,8 +226,12 @@ export async function fetchProjectObservations(
           'Nothing was written — re-run when the API is reachable.',
       );
     }
-    const body = (await response.json()) as { results?: InatObservation[] };
+    const body = (await response.json()) as {
+      results?: InatObservation[];
+      total_results?: number;
+    };
     const results = body.results ?? [];
+    if (expectedTotal === null) expectedTotal = body.total_results ?? null;
     all.push(...results);
 
     // A short page is terminal: iNaturalist returns exactly per_page rows for
@@ -232,10 +240,25 @@ export async function fetchProjectObservations(
 
     // Advance by the max RAW id, before any local filtering — deriving the
     // cursor from kept rows would stall the sweep on a trailing dropped row.
-    const last = results[results.length - 1];
-    if (!last) break;
-    idAbove = last.id;
+    // Max, not the last element: the comment above is the whole point — the
+    // cursor must not depend on the server honouring order_by. A skipped
+    // observation is not merely missing, it is reconciled as a REMOVAL.
+    idAbove = Math.max(...results.map((r) => r.id));
     await sleep(REQUEST_PACE_MS);
+  }
+
+  // A truncated sweep is the dangerous kind of success: every observation it
+  // failed to return is reconciled as a removal, with the entirely plausible
+  // reason "no longer in the iNaturalist project". Compare against the count
+  // the API itself reported. Only a SHORTFALL is fatal — an observation added
+  // to the project mid-sweep legitimately puts the total above the first
+  // page's figure.
+  if (expectedTotal !== null && all.length < expectedTotal) {
+    throw new Error(
+      `iNaturalist reported ${expectedTotal} observations but the sweep returned ` +
+        `${all.length}. Nothing was written — a truncated fetch is indistinguishable ` +
+        'from records having been removed from the project. Re-run.',
+    );
   }
 
   return all;
@@ -266,13 +289,22 @@ export interface BuildResult {
  * _Spheroid, which take [lat, lon] and are POINT-only.
  */
 export async function resolveNearbyStates(
-  candidates: Array<{ index: number; lat: number; lon: number }>,
+  candidates: Array<{ index: number; lat: number; lon: number; radiusKm: number }>,
   geojsonPath: string = BOUNDARIES_GEOJSON,
 ): Promise<Map<number, string>> {
   const states = new Map<number, string>();
   if (candidates.length === 0) return states;
 
-  const degreeThreshold = NEARBY_STATE_KM / KM_PER_DEGREE_LAT;
+  // A degree of LONGITUDE is much shorter than a degree of latitude at these
+  // latitudes (~74 km vs ~111 km at 48N), and ST_Distance below is planar in
+  // degrees. Dividing by the latitude constant would therefore search an
+  // ellipse only ~17 km wide east-west — and the unanimity rule this feeds is
+  // only safe if the neighbourhood is complete: a neighbour that is missed is
+  // a neighbour that cannot disagree. Scaling by cos(latitude) uses the
+  // SHORTEST degree, so the search region always CONTAINS the intended circle.
+  // Over-selecting north-south is the safe direction: it can only add
+  // districts, and an extra district can only cause a rejection, never a wrong
+  // state.
   const instance = await DuckDBInstance.create(':memory:');
   const conn = await instance.connect();
   try {
@@ -280,17 +312,22 @@ export async function resolveNearbyStates(
     await conn.run('INSTALL spatial;');
     await conn.run('LOAD spatial;');
     await conn.run(`CREATE TABLE districts AS SELECT * FROM ST_Read('${geojsonPath}');`);
-    await conn.run('CREATE TABLE candidates (row_id INTEGER, lon DOUBLE, lat DOUBLE);');
+    await conn.run(
+      'CREATE TABLE candidates (row_id INTEGER, lon DOUBLE, lat DOUBLE, radius_km DOUBLE);',
+    );
     // Only numeric, already-parsed coordinates are interpolated — never a raw
     // string from the API response.
-    const values = candidates.map((c) => `(${c.index}, ${c.lon}, ${c.lat})`).join(', ');
+    const values = candidates
+      .map((c) => `(${c.index}, ${c.lon}, ${c.lat}, ${c.radiusKm})`)
+      .join(', ');
     await conn.run(`INSERT INTO candidates VALUES ${values};`);
 
     const reader = await conn.runAndReadAll(`
       SELECT c.row_id AS row_id, list(DISTINCT d.district_id) AS district_ids
       FROM candidates c
       JOIN districts d
-        ON ST_Distance(d.geom, ST_Point(c.lon, c.lat)) < ${degreeThreshold}
+        ON ST_Distance(d.geom, ST_Point(c.lon, c.lat))
+           < c.radius_km / (${KM_PER_DEGREE_LAT} * cos(radians(c.lat)))
       GROUP BY c.row_id
     `);
     const rows = reader.getRowObjectsJS() as Array<{ row_id: number; district_ids: string[] }>;
@@ -332,7 +369,8 @@ export async function buildRows(
   const skipped: Skipped[] = [];
 
   for (const obs of observations) {
-    const result = screenObservation(obs, ctx);
+    assertObservationShape(obs);
+    const result = screenObservation(obs, { siteSlugs: ctx.siteSlugs, synonyms: ctx.synonyms });
     if (result.ok) candidates.push(result.candidate);
     else skipped.push(result.skipped);
   }
@@ -348,16 +386,42 @@ export async function buildRows(
   // Note resolveByCoordinates records an UNMATCHED candidate too, as
   // `outcome: 'unassigned'` with an empty districtId — so "unplaced" is an
   // empty district_id, not an absent map entry.
-  const unplaced = candidates
-    .map((c, index) => ({ index, lat: c.latitude, lon: c.longitude }))
-    .filter((c) => !resolutions.get(c.index)?.districtId);
-  const nearbyStates = await resolveNearbyStates(unplaced, geojsonPath);
+  // Two populations go through the wider unanimity pass, for the same reason:
+  // their position is known less precisely than a district.
+  //   - unplaced records, searched at NEARBY_STATE_KM
+  //   - OBSCURED records, searched at their own published accuracy radius,
+  //     because the true location is somewhere in that box and any state it
+  //     could reach must get a vote
+  const needStateVote = candidates
+    .map((c, index) => ({ index, candidate: c }))
+    .filter(({ index, candidate }) =>
+      candidate.obscured || !resolutions.get(index)?.districtId,
+    )
+    .map(({ index, candidate }) => ({
+      index,
+      lat: candidate.latitude,
+      lon: candidate.longitude,
+      radiusKm: candidate.obscured
+        ? candidate.accuracyKm ?? NEARBY_STATE_KM
+        : NEARBY_STATE_KM,
+    }));
+  const nearbyStates = await resolveNearbyStates(needStateVote, geojsonPath);
 
   const rows: InatRecordRow[] = [];
   candidates.forEach((candidate, index) => {
     const districtId = resolutions.get(index)?.districtId;
     let placement: Placement;
-    if (districtId) {
+    if (candidate.obscured) {
+      // Never the containing district: the point it contains is randomised.
+      // A state every reachable district agrees on — failing that,
+      // iNaturalist's own place name, which for an obscured observation names
+      // a place that genuinely CONTAINS the true location. That fallback is
+      // what keeps a San Juan Islands record (whose 27km box reaches British
+      // Columbia, so the districts cannot be unanimous) filed correctly under
+      // Washington instead of being thrown away.
+      const state = nearbyStates.get(index) ?? stateFromPlaceGuess(candidate.locality);
+      placement = state ? { kind: 'state-only', state } : { kind: 'none' };
+    } else if (districtId) {
       placement = {
         kind: 'district',
         districtId,
@@ -368,8 +432,25 @@ export async function buildRows(
       placement = state ? { kind: 'state-only', state } : { kind: 'none' };
     }
     const finalized = finalizeRow(candidate, placement, ctx.crosswalk);
-    if (finalized.ok) rows.push(finalized.row);
-    else skipped.push(finalized.skipped);
+    if (!finalized.ok) {
+      skipped.push(finalized.skipped);
+      return;
+    }
+    // The dedup check is deliberately LAST, once the row is fully built and
+    // every gate has passed. `already-curated` is the handover worklist
+    // scripts/migrate-inat-records.ts deletes curator rows from, so it has to
+    // mean "this would otherwise be a record" — anything weaker turns the
+    // handover into silent data loss for an observation the sync would go on
+    // to reject. See the note in screenObservation.
+    if (ctx.citedIds.has(finalized.row.inat_id)) {
+      skipped.push({
+        inatId: finalized.row.inat_id,
+        reason: 'already-curated',
+        detail: observationUrl(finalized.row.inat_id),
+      });
+      return;
+    }
+    rows.push(finalized.row);
   });
 
   rows.sort((a, b) => Number(a.inat_id) - Number(b.inat_id));
@@ -418,6 +499,35 @@ export function buildRecordsCsv(rows: InatRecordRow[]): string {
   return stringify(rows, { header: true, columns: [...RECORDS_INAT_COLUMNS] });
 }
 
+/**
+ * Observation ids that are in the project, eligible, AND already entered by
+ * hand in records.csv — the handover worklist, computed from a LIVE fetch.
+ *
+ * scripts/migrate-inat-records.ts calls this rather than reading
+ * data/inat-sync-report.csv. The report is committed, so its filesystem mtime
+ * is the checkout time, not the sync time: a fresh clone or a `git switch`
+ * stamps it with "now" and any staleness check on it passes on a report that
+ * describes the project as it was months ago. Deleting curator rows on that
+ * basis is unrecoverable. Fetching makes the question unambiguous — the
+ * handover list is by definition a statement about the project right now.
+ */
+export async function computeHandoverIds(): Promise<Set<string>> {
+  const citedIds = collectCitedObservationIds(
+    readCuratorRecordRows(resolve(ROOT, 'data/records.csv')),
+  );
+  const observations = await fetchProjectObservations();
+  const { skipped } = await buildRows(observations, {
+    siteSlugs: loadSiteSlugs(),
+    synonyms: loadSynonyms(),
+    citedIds,
+    crosswalk: buildCrosswalkIndex(loadCrosswalk()),
+    districtNames: loadDistrictNames(),
+  });
+  return new Set(
+    skipped.filter((s) => s.reason === 'already-curated').map((s) => s.inatId),
+  );
+}
+
 // ---------------------------------------------------------------------------
 // CLI
 // ---------------------------------------------------------------------------
@@ -426,7 +536,19 @@ function countRemoved(changes: RecordChange[]): number {
   return changes.filter((c) => c.kind === 'removed').length;
 }
 
+/** Accepted flags. An unrecognised one is an error, never a silent no-op. */
+const SYNC_FLAGS = new Set(['--dry-run', '--force']);
+
 export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
+  // A typo must not perform a destructive write. `--dryrun` silently ignored
+  // would rewrite the file while the maintainer believed he was previewing —
+  // and previewing first is the whole safety story in the runbook.
+  const unknown = argv.filter((a) => !SYNC_FLAGS.has(a));
+  if (unknown.length > 0) {
+    console.error(`Unrecognised option${unknown.length === 1 ? '' : 's'}: ${unknown.join(' ')}`);
+    console.error('Usage: npm run inat:sync [-- --dry-run] [-- --force]');
+    process.exit(2);
+  }
   const dryRun = argv.includes('--dry-run');
   const force = argv.includes('--force');
 
@@ -453,7 +575,11 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
   console.log('');
   console.log(formatSummary(changes, skipped));
 
-  const guard = guardBlastRadius(previous.length, countRemoved(changes));
+  // Counted over DISTINCT ids, matching reconcile's de-duplicated view — a
+  // repeated id would otherwise inflate the denominator and make the guard
+  // less likely to fire, which is the wrong direction for a safety check.
+  const previousCount = new Set(previous.map((r) => r.inat_id)).size;
+  const guard = guardBlastRadius(previousCount, countRemoved(changes));
   if (guard.tripped && !force) {
     console.error(`REFUSING TO WRITE: ${guard.message}.`);
     console.error(
@@ -472,8 +598,11 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     return;
   }
 
-  writeFileSync(OUT_CSV, buildRecordsCsv(rows));
+  // Report first: it is the diagnostic for what follows, and if the process
+  // dies between the two writes a stale report alongside a fresh records file
+  // is the more misleading pair.
   writeFileSync(REPORT_CSV, buildReportCsv(skipped));
+  writeFileSync(OUT_CSV, buildRecordsCsv(rows));
   console.log(`Wrote ${rows.length} records to ${RECORDS_INAT_CSV_PATH}`);
   console.log(`Wrote ${skipped.length} report rows to data/inat-sync-report.csv`);
   console.log('');

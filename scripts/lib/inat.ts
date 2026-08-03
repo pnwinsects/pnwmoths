@@ -8,10 +8,14 @@
 // scripts/migrate-inat-records.ts. Both import from here.
 //
 // Mapping conventions are NOT invented here — they match what the curator has
-// been doing by hand since 2020. data/records.csv already contains 145
-// observation URLs across 29 rows tagged `collection = iNaturalist`, all with
+// been doing by hand since 2020. data/records.csv already cites 145 iNaturalist
+// observations, 29 of them tagged `collection = iNaturalist`, 142 of them with
 // `record_type = photograph` and the URL in `notes`. This module automates an
 // established practice rather than introducing a new one.
+//
+// The other three are specimens that cite an observation as DOCUMENTATION —
+// see isPlainInatPhotograph() in scripts/migrate-inat-records.ts, which is why
+// the handover refuses to touch them.
 import { classifyCoordinate, parseCoordinate } from './district-assignment.ts';
 import { isWithinRecordBounds } from './records-source.ts';
 import type { InatRecordRow } from './records-source.ts';
@@ -45,17 +49,26 @@ export const INAT_RECORD_TYPE = 'photograph';
  * iNaturalist obscures a location at the observer's request (or automatically
  * for sensitive taxa) by publishing a random point inside a ~27 km box around
  * the true one. That is wider than many PNW counties, so an obscured record
- * cannot be trusted to name a county — and a wrong county propagates into the
- * range maps and the Browse-by-county filters.
+ * cannot name a county — and a wrong county propagates into the range maps and
+ * the Browse-by-county filters.
  *
- *   'import-annotated' — import it, annotate `notes` with the accuracy, and
- *                        leave `county` and `district_id` BLANK so it never
- *                        asserts a district. `state` is still derived, so the
- *                        record stays visible to the state filter rather than
- *                        silently vanishing from every view. This matches the
- *                        curator's existing hand-entered practice
+ * It is also wider than the distance to a state line for a great many PNW
+ * records, which is the subtler hazard. Deriving the STATE from the published
+ * point is wrong about 1-4% of the time, concentrated exactly where you would
+ * expect: sampling obscured PNW Lepidoptera observations turns up cases along
+ * the Columbia River whose published point lands in Oregon while iNaturalist's
+ * own place name says Washington, and vice versa. So an obscured record's
+ * state is asserted only when EVERY district within its own published accuracy
+ * radius agrees on one — the same unanimity rule {@link stateFromNearbyDistricts}
+ * applies to unplaceable records. Near a border the neighbours disagree and the
+ * record is rejected rather than filed under the wrong state.
+ *
+ *   'import-annotated' — import it when its state is unambiguous, annotate
+ *                        `notes` with the accuracy, and leave `county` and
+ *                        `district_id` BLANK so it never asserts a district.
+ *                        Matches the curator's existing hand-entered practice
  *                        ("location accuracy: 26.94km; <url>").
- *   'skip'             — drop it, and report it.
+ *   'skip'             — drop every obscured observation, and report it.
  *
  * Pending the collaborator's decision on issue #23; flip this constant to
  * change the policy — nothing else needs to change.
@@ -67,8 +80,13 @@ export const OBSCURED_POLICY: 'import-annotated' | 'skip' = 'import-annotated';
  * species-or-below, but the project's own rules admit `needs_id`, and an
  * identification can be rolled back to genus at any time — so this is checked,
  * not assumed.
+ *
+ * `hybrid` is deliberately absent. iNaturalist names a hybrid
+ * `Genus species1 x species2`, whose first two words are a real site slug — so
+ * accepting the rank would file a hybrid as an occurrence of the pure parent
+ * species. Hybrids are reported, not imported.
  */
-const BINOMIAL_RANKS = new Set(['species', 'subspecies', 'variety', 'form', 'hybrid']);
+const BINOMIAL_RANKS = new Set(['species', 'subspecies', 'variety', 'form']);
 
 /**
  * Observation ids inside free text.
@@ -130,6 +148,15 @@ export function binomialToSlug(taxonName: string): string {
 }
 
 /**
+ * Slugs are "alphanumeric and hyphens only" (CONTEXT.md). iNaturalist names
+ * that do not reduce to one — hybrid formulas (`Genus a x b`), subgenera
+ * (`Papilio (Pterourus) rutulus`) — are rejected rather than coerced.
+ */
+function isWellFormedSlug(slug: string): boolean {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(slug);
+}
+
+/**
  * Resolve an iNaturalist taxon to a site species slug, or null when the site
  * has no page for it.
  *
@@ -151,9 +178,13 @@ export function resolveSpeciesSlug(
   synonyms: Map<string, string>,
 ): string | null {
   if (!BINOMIAL_RANKS.has(rank)) return null;
+  // A hybrid formula can reach here as rank `species` on some taxa; the
+  // multiplication sign is the giveaway either way.
+  if (/[x\u00d7]\s/i.test(taxonName) && taxonName.trim().split(/\s+/).length > 2) return null;
   const synonym = synonyms.get(taxonName.trim().toLowerCase());
   if (synonym !== undefined && siteSlugs.has(synonym)) return synonym;
   const slug = binomialToSlug(taxonName);
+  if (!isWellFormedSlug(slug)) return null;
   return siteSlugs.has(slug) ? slug : null;
 }
 
@@ -301,6 +332,41 @@ export interface InatObservation {
   user: { id: number; login: string; name: string | null } | null;
 }
 
+/**
+ * Reject a response that is not shaped the way this module assumes.
+ *
+ * Every CSV in this pipeline is validated before use; the network response was
+ * the one input that was not. It matters most for `obscured`, which fails OPEN:
+ * if iNaturalist renamed or dropped that field, `obs.obscured` would be
+ * `undefined`, every obscured observation would be treated as precise, and each
+ * would be published with a county and district derived from a deliberately
+ * randomised point — silently, and in exactly the way OBSCURED_POLICY exists to
+ * prevent. A missing `quality_grade` would instead reject everything, which the
+ * blast-radius guard catches; nothing catches a missing `obscured`.
+ *
+ * Checked per observation so the error names the first bad one.
+ *
+ * @throws {Error} If a required field is absent.
+ */
+export function assertObservationShape(obs: InatObservation): void {
+  const missing: string[] = [];
+  if (typeof obs.id !== 'number') missing.push('id');
+  if (typeof obs.quality_grade !== 'string') missing.push('quality_grade');
+  if (typeof obs.obscured !== 'boolean') missing.push('obscured');
+  if (!('observed_on' in obs)) missing.push('observed_on');
+  if (!('geojson' in obs)) missing.push('geojson');
+  if (!('place_guess' in obs)) missing.push('place_guess');
+  if (!('taxon' in obs)) missing.push('taxon');
+  if (!('user' in obs)) missing.push('user');
+  if (missing.length === 0) return;
+  throw new Error(
+    `iNaturalist observation ${String(obs.id ?? '?')} is missing expected field(s): ` +
+      `${missing.join(', ')}. The v2 API's response shape has changed, or the fields= list is ` +
+      'out of date. Nothing was written — importing under a changed shape can publish records ' +
+      'with wrong locations.',
+  );
+}
+
 /** An observation that passed screening, awaiting its district assignment. */
 export interface Candidate {
   inatId: string;
@@ -316,6 +382,8 @@ export interface Candidate {
   obscured: boolean;
   /** Accuracy annotation for `notes`, e.g. `location accuracy: 26.94km`. */
   accuracyNote: string;
+  /** Published accuracy radius in km, when known — the obscuration box size. */
+  accuracyKm: number | null;
 }
 
 export interface Skipped {
@@ -333,8 +401,6 @@ export interface ScreenContext {
   siteSlugs: Set<string>;
   /** Lowercased binomial -> site slug, from data/species-synonyms.csv. */
   synonyms: Map<string, string>;
-  /** Observation ids already cited in data/records.csv. */
-  citedIds: Set<string>;
 }
 
 /** `observed_on` is a local calendar date (`YYYY-MM-DD`); split it as text.
@@ -367,10 +433,18 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
   if (obs.quality_grade !== 'research') {
     return skip('not-research-grade', obs.quality_grade);
   }
-  if (ctx.citedIds.has(inatId)) {
-    return skip('already-curated', observationUrl(inatId));
-  }
 
+  // NOTE: whether this observation is already cited in records.csv is
+  // deliberately NOT checked here. `already-curated` is the handover worklist
+  // that scripts/migrate-inat-records.ts deletes curator rows from, so it must
+  // mean "this WOULD have been imported" — a claim that cannot be made until
+  // every other gate, including the district gates in finalizeRow, has passed.
+  // Checking it early made it a claim the code had not verified: observations
+  // 62265205 (Pseudaletia unipuncta) and 47673376 (Furcula gigans) are both
+  // research grade, both cited in records.csv, and both resolve to taxa with
+  // no page here — so an early check would list them as handover candidates,
+  // migrate would delete the curator rows, and the next sync would reject them
+  // as unresolved-taxon. The records would be gone. See buildRows().
   const taxon = obs.taxon;
   if (!taxon) return skip('rank-above-species', 'no identification');
   if (!BINOMIAL_RANKS.has(taxon.rank)) return skip('rank-above-species', `${taxon.name} (${taxon.rank})`);
@@ -399,7 +473,7 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
   }
 
   if (obs.obscured && OBSCURED_POLICY === 'skip') {
-    return skip('obscured', `${accuracyKm(obs)} km`);
+    return skip('obscured', `${accuracyKm(obs) ?? 'unknown'} km`);
   }
 
   const user = obs.user;
@@ -422,15 +496,23 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
       // line in the summary when someone fills in their profile.
       collector: (user?.name || user?.login || '').trim(),
       obscured: obs.obscured,
-      accuracyNote: obs.obscured ? `location accuracy: ${accuracyKm(obs)}km` : '',
+      // No annotation when the accuracy is unknown — "location accuracy: ?km"
+      // would be published to the site as-is.
+      accuracyNote:
+        obs.obscured && accuracyKm(obs) !== null ? `location accuracy: ${accuracyKm(obs)}km` : '',
+      accuracyKm:
+        obs.public_positional_accuracy !== null &&
+        Number.isFinite(obs.public_positional_accuracy)
+          ? obs.public_positional_accuracy / 1000
+          : null,
     },
   };
 }
 
-/** Published accuracy in km to 2dp — matches the curator's existing notes. */
-function accuracyKm(obs: InatObservation): string {
+/** Published accuracy in km to 2dp, or null when unknown. */
+function accuracyKm(obs: InatObservation): string | null {
   const metres = obs.public_positional_accuracy;
-  if (metres === null || !Number.isFinite(metres)) return '?';
+  if (metres === null || metres === undefined || !Number.isFinite(metres)) return null;
   return (metres / 1000).toFixed(2);
 }
 
@@ -466,6 +548,66 @@ export function stateFromNearbyDistricts(districtIds: string[]): string | null {
   }
   if (states.size !== 1) return null;
   const [only] = [...states];
+  return only ?? null;
+}
+
+/** ISO-3166-2 subdivision codes as iNaturalist writes them in a place name. */
+const STATE_BY_SUBDIVISION_CODE: Record<string, string> = {
+  'us-wa': 'WA',
+  'us-or': 'OR',
+  'us-id': 'ID',
+  'us-mt': 'MT',
+  'ca-bc': 'BC',
+  'ca-ab': 'AB',
+};
+
+/** Full names, for place names that carry no subdivision code. */
+const STATE_BY_FULL_NAME: Record<string, string> = {
+  washington: 'WA',
+  oregon: 'OR',
+  idaho: 'ID',
+  montana: 'MT',
+  'british columbia': 'BC',
+  alberta: 'AB',
+};
+
+/**
+ * The state named by an iNaturalist place description, or null if it names
+ * none or more than one.
+ *
+ * For an OBSCURED observation this is authoritative in a way the coordinates
+ * are not: iNaturalist replaces the displayed place with a standard
+ * administrative place that CONTAINS the true location, while the published
+ * point is randomised within a ~27 km box. So where the coordinates say
+ * "somewhere within 27 km of here", this says "in this county".
+ *
+ * The subdivision code wins over the full name, and the reason is a real trap:
+ * `Washington County, US-OR, US` is in OREGON. Matching on full names first
+ * would see "washington" and file an Oregon record under Washington.
+ *
+ * Only used for obscured records. For everything else the coordinates are
+ * better evidence than a free-text field the observer can edit.
+ */
+export function stateFromPlaceGuess(placeGuess: string | null): string | null {
+  if (!placeGuess) return null;
+  const text = placeGuess.toLowerCase();
+
+  const byCode = new Set<string>();
+  for (const [code, state] of Object.entries(STATE_BY_SUBDIVISION_CODE)) {
+    if (new RegExp(`\\b${code}\\b`).test(text)) byCode.add(state);
+  }
+  if (byCode.size === 1) {
+    const [only] = [...byCode];
+    return only ?? null;
+  }
+  if (byCode.size > 1) return null;
+
+  const byName = new Set<string>();
+  for (const [name, state] of Object.entries(STATE_BY_FULL_NAME)) {
+    if (text.includes(name)) byName.add(state);
+  }
+  if (byName.size !== 1) return null;
+  const [only] = [...byName];
   return only ?? null;
 }
 
@@ -620,7 +762,11 @@ export function reconcile(
     }
   }
 
-  for (const row of previous) {
+  // Iterated over the de-duplicated map, not the raw array: a repeated
+  // inat_id (only reachable by a hand-edit of a machine-owned file, or a
+  // partial write) would otherwise emit two removals for one record and
+  // inflate the count the blast-radius guard reads.
+  for (const row of before.values()) {
     if (after.has(row.inat_id)) continue;
     changes.push({
       kind: 'removed',
@@ -642,14 +788,21 @@ export function reconcile(
 export const BLAST_RADIUS_FRACTION = 0.2;
 
 /**
- * Absolute floor below which the fraction is ignored.
+ * Ceiling on the absolute floor below which the fraction is ignored.
  *
- * Without it the guard is useless at small scale and actively harmful: 20% of
- * 63 rows is 13, so an ordinary intentional prune would demand --force and
- * train the maintainer to pass it reflexively, which is the same as having no
- * guard at all.
+ * A fixed floor of 25 would be worse than none on a small file: at 62 imported
+ * records it makes the fraction rule unreachable (25 rows is already 40%), so
+ * every removal up to 25 — nearly half the corpus — passes unremarked. The
+ * effective floor is therefore min(this, a quarter of the file), which keeps
+ * the guard meaningful as the file grows without making it fire on every
+ * ordinary prune while it is small.
  */
-export const BLAST_RADIUS_MIN_ROWS = 25;
+export const BLAST_RADIUS_MAX_FLOOR = 25;
+
+/** The floor actually applied for a file of `previousCount` rows. */
+export function blastRadiusFloor(previousCount: number): number {
+  return Math.min(BLAST_RADIUS_MAX_FLOOR, Math.ceil(previousCount / 4));
+}
 
 export interface GuardResult {
   tripped: boolean;
@@ -674,7 +827,7 @@ export function guardBlastRadius(previousCount: number, removedCount: number): G
     };
   }
   const share = removedCount / previousCount;
-  if (removedCount > BLAST_RADIUS_MIN_ROWS && share > BLAST_RADIUS_FRACTION) {
+  if (removedCount > blastRadiusFloor(previousCount) && share > BLAST_RADIUS_FRACTION) {
     return {
       tripped: true,
       message:
@@ -782,8 +935,9 @@ export function formatSummary(changes: RecordChange[], skipped: Skipped[]): stri
     lines.push(`Already in records.csv by hand (${alreadyCurated.length}):`);
     for (const s of alreadyCurated) lines.push(`  ${s.detail}`);
     lines.push('  These are in the project AND entered by hand, so they are not');
-    lines.push('  imported twice. To hand them over to the sync so they stay up to');
-    lines.push('  date automatically, run: npm run inat:migrate');
+    lines.push('  imported twice. Some can be handed over to the sync so they stay');
+    lines.push('  up to date automatically — run "npm run inat:migrate" to see which');
+    lines.push('  (it refuses any whose hand-entered detail it cannot reproduce).');
     lines.push('');
   }
 

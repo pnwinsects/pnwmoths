@@ -47,7 +47,7 @@ export interface SpeciesAuditRow {
 export interface BuildSpeciesAuditRowsOptions {
   /** Raw data/species.csv rows. */
   speciesRows: SpeciesInput[];
-  /** Normalized slugs present in data/records.csv (any record counts). */
+  /** Normalized slugs present in ANY occurrence source (any record counts). */
   recordSlugs: Set<string>;
   /** Normalized slugs from data/key-matrix.json species[].slug. */
   keySlugs: Set<string>;

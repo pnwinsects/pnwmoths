@@ -80,6 +80,7 @@ erDiagram
         string  state          "derived from coordinates"
         string  county         "derived; blank when the location is imprecise"
         string  locality
+        int     elevation_ft   "always blank — iNaturalist does not supply it"
         int     year
         int     month
         int     day
@@ -142,7 +143,11 @@ A handful of species remain unclassified because they have no page on the refere
 ## Two record files, two owners
 
 Occurrence records live in two files. `records.csv` is **curator-owned**: hand-edited, and
-mutated only by deliberate one-shot maintainer scripts, always additively.
+mutated only by deliberate, maintainer-run scripts. Those are additive with two deliberate
+exceptions, both pure deletions a human asks for and reviews as a diff —
+[`dedup-records.ts`](../scripts/dedup-records.ts) (purging duplicate rows) and
+[`migrate-inat-records.ts`](../scripts/migrate-inat-records.ts) (handing a record to the
+iNaturalist sync). Nothing writes it as a side effect of fetching from a network.
 `records-inat.csv` is **machine-owned**: rewritten wholesale from the iNaturalist project on
 every sync, so a row survives only while its observation is in the project at research grade.
 

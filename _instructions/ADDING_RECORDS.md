@@ -58,7 +58,7 @@ present in the header even where the value is blank.
 
 4. If build passes, commit and push:
    ```bash
-   git switch -c add-records
+   git switch -c add-records-$(date +%Y%m%d-%H%M)
    git add data/records.csv
    git commit -m "Add occurrence records for [species name]"
    git push -u origin HEAD
@@ -67,7 +67,10 @@ present in the header even where the value is blank.
 
    The `main` branch is protected: it takes changes only through a pull request whose
    build check passes. `gh pr create` opens one; merge it from the PR page (or with
-   `gh pr merge`) once the check is green, and the site deploys automatically.
+   `gh pr merge`) once the check is green, and the site deploys automatically. The
+   date suffix just keeps each branch name unique, so the same command works every
+   time. `gh` is the GitHub CLI — see [CONTRIBUTING.md](../CONTRIBUTING.md) for
+   installing and signing into it.
 
 ## Verify
 - Expected: build completes without validation errors.

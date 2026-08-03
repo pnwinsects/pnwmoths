@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  BLAST_RADIUS_MIN_ROWS,
+  BLAST_RADIUS_MAX_FLOOR,
   binomialToSlug,
   buildCrosswalkIndex,
   collectCitedObservationIds,
@@ -13,9 +13,11 @@ import {
   observationUrl,
   reconcile,
   resolveSpeciesSlug,
+  assertObservationShape,
   screenObservation,
   stateForDistrictId,
   stateFromNearbyDistricts,
+  stateFromPlaceGuess,
 } from './inat.ts';
 import type {
   Candidate,
@@ -48,7 +50,6 @@ function context(overrides: Partial<ScreenContext> = {}): ScreenContext {
   return {
     siteSlugs: new Set(['lophocampa-roseata', 'apantesis-doris', 'smerinthus-cerisyi']),
     synonyms: new Map([['grammia doris', 'apantesis-doris']]),
-    citedIds: new Set<string>(),
     ...overrides,
   };
 }
@@ -66,6 +67,7 @@ function candidate(overrides: Partial<Candidate> = {}): Candidate {
     collector: 'Mike Patterson',
     obscured: false,
     accuracyNote: '',
+    accuracyKm: null,
     ...overrides,
   };
 }
@@ -218,6 +220,50 @@ describe('resolveSpeciesSlug', () => {
   });
 });
 
+describe('resolveSpeciesSlug — malformed names', () => {
+  const ctx = context();
+
+  it('refuses a hybrid rather than filing it under a parent species', () => {
+    // iNaturalist names hybrids `Genus a x b`, whose first two words are a
+    // real site slug — so accepting one would record a hybrid as an occurrence
+    // of the pure species.
+    assert.equal(
+      resolveSpeciesSlug('Lophocampa roseata \u00d7 argentata', 'species', ctx.siteSlugs, ctx.synonyms),
+      null,
+    );
+    assert.equal(
+      resolveSpeciesSlug('Lophocampa roseata x argentata', 'hybrid', ctx.siteSlugs, ctx.synonyms),
+      null,
+    );
+  });
+
+  it('refuses a name that cannot reduce to an alphanumeric slug', () => {
+    assert.equal(
+      resolveSpeciesSlug('Papilio (Pterourus) rutulus', 'species', ctx.siteSlugs, ctx.synonyms),
+      null,
+    );
+  });
+});
+
+describe('assertObservationShape', () => {
+  it('accepts a well-formed observation', () => {
+    assert.doesNotThrow(() => assertObservationShape(observation()));
+  });
+
+  it('rejects a response missing `obscured`, which would otherwise fail open', () => {
+    // The dangerous one: undefined is falsy, so every obscured observation
+    // would be treated as precise and published with a county derived from a
+    // randomised point.
+    const { obscured: _omitted, ...rest } = observation();
+    assert.throws(() => assertObservationShape(rest as InatObservation), /obscured/);
+  });
+
+  it('names every missing field so the cause is obvious', () => {
+    const { taxon: _t, user: _u, ...rest } = observation();
+    assert.throws(() => assertObservationShape(rest as InatObservation), /taxon, user/);
+  });
+});
+
 describe('stateForDistrictId', () => {
   it('maps every covered prefix', () => {
     assert.equal(stateForDistrictId('US:53033'), 'WA');
@@ -301,12 +347,20 @@ describe('screenObservation', () => {
     assert.equal(result.skipped.reason, 'not-research-grade');
   });
 
-  it('rejects an observation already entered by hand in records.csv', () => {
-    const ctx = context({ citedIds: new Set(['3792087']) });
-    const result = screenObservation(observation(), ctx);
+  it('does not decide already-curated — that is settled after every other gate', () => {
+    // Regression guard for a data-loss bug: screening used to short-circuit on
+    // "already cited in records.csv" BEFORE the taxon gate, so an observation
+    // that is cited AND unresolvable was reported as a handover candidate.
+    // migrate would then delete the curator row and the next sync would reject
+    // the observation, losing the record. Observations 62265205 and 47673376
+    // are exactly this shape in the real data.
+    const result = screenObservation(
+      observation({ taxon: { id: 1, name: 'Pseudaletia unipuncta', rank: 'species' } }),
+      context(),
+    );
     assert.equal(result.ok, false);
     if (result.ok) return;
-    assert.equal(result.skipped.reason, 'already-curated');
+    assert.equal(result.skipped.reason, 'unresolved-taxon');
   });
 
   it('rejects a genus-level identification', () => {
@@ -385,6 +439,35 @@ describe('screenObservation', () => {
   });
 });
 
+describe('stateFromPlaceGuess', () => {
+  it('reads the subdivision code', () => {
+    assert.equal(stateFromPlaceGuess('San Juan County, US-WA, US'), 'WA');
+    assert.equal(stateFromPlaceGuess('Comox-Strathcona, CA-BC, CA'), 'BC');
+  });
+
+  it('prefers the subdivision code over a full name that contradicts it', () => {
+    // The trap: Washington County is in OREGON. Matching full names first
+    // would file an Oregon record under Washington.
+    assert.equal(stateFromPlaceGuess('Washington County, US-OR, US'), 'OR');
+  });
+
+  it('falls back to a full name when no code is present', () => {
+    assert.equal(stateFromPlaceGuess('Washington, US'), 'WA');
+    assert.equal(stateFromPlaceGuess('British Columbia, CA'), 'BC');
+  });
+
+  it('refuses anything that names no state, or more than one', () => {
+    assert.equal(stateFromPlaceGuess('United States'), null);
+    assert.equal(stateFromPlaceGuess(null), null);
+    assert.equal(stateFromPlaceGuess(''), null);
+    assert.equal(stateFromPlaceGuess('Columbia River, US-WA / US-OR, US'), null);
+  });
+
+  it('is not fooled by a code appearing inside another word', () => {
+    assert.equal(stateFromPlaceGuess('Camp Musher, Nowhere'), null);
+  });
+});
+
 describe('finalizeRow', () => {
   it('builds a complete row with the observation URL in notes', () => {
     const result = finalizeRow(
@@ -425,12 +508,15 @@ describe('finalizeRow', () => {
   });
 
   it('keeps the state but asserts no district for an obscured record', () => {
-    const obscured = candidate({ obscured: true, accuracyNote: 'location accuracy: 26.94km' });
-    const result = finalizeRow(
-      obscured,
-      { kind: 'district', districtId: 'US:41007', districtName: 'Clatsop' },
-      crosswalk,
-    );
+    // buildRows only ever hands an obscured candidate a state-only placement —
+    // the district containing its published point is meaningless, because that
+    // point is randomised within a ~27km box.
+    const obscured = candidate({
+      obscured: true,
+      accuracyNote: 'location accuracy: 26.94km',
+      accuracyKm: 26.94,
+    });
+    const result = finalizeRow(obscured, { kind: 'state-only', state: 'OR' }, crosswalk);
     assert.equal(result.ok, true);
     if (!result.ok) return;
     assert.equal(result.row.state, 'OR');
@@ -440,6 +526,14 @@ describe('finalizeRow', () => {
       result.row.notes,
       'location accuracy: 26.94km; https://www.inaturalist.org/observations/3792087',
     );
+  });
+
+  it('rejects an obscured record whose box could span a state line', () => {
+    // The Columbia River case: a published point in Oregon whose obscuration
+    // box also reaches Washington. Asserting either state would be a guess.
+    const obscured = candidate({ obscured: true, accuracyKm: 26.94 });
+    const result = finalizeRow(obscured, { kind: 'none' }, crosswalk);
+    assert.equal(result.ok, false);
   });
 });
 
@@ -528,6 +622,12 @@ describe('reconcile', () => {
     const changes = reconcile([inatRow()], [], none);
     assert.equal(changes[0]?.reason, null);
   });
+
+  it('emits one removal for a duplicated inat_id, not two', () => {
+    // A duplicate would otherwise inflate the count the blast-radius guard reads.
+    const changes = reconcile([inatRow(), inatRow()], [], none);
+    assert.equal(changes.filter((c) => c.kind === 'removed').length, 1);
+  });
 });
 
 describe('guardBlastRadius', () => {
@@ -548,7 +648,22 @@ describe('guardBlastRadius', () => {
   });
 
   it('does not trip on a large absolute removal that is a small share', () => {
-    assert.equal(guardBlastRadius(10000, BLAST_RADIUS_MIN_ROWS + 1).tripped, false);
+    assert.equal(guardBlastRadius(10000, BLAST_RADIUS_MAX_FLOOR + 1).tripped, false);
+  });
+
+  it('trips on a large share of a SMALL file', () => {
+    // The real failure shape: a truncated fetch against the current 62-row
+    // file. A fixed floor of 25 made the fraction rule unreachable here, so
+    // losing 24 of 62 records passed unremarked.
+    assert.equal(guardBlastRadius(62, 24).tripped, true);
+    // The floor for a 62-row file is ceil(62/4) = 16, so 17 is the first
+    // tripping count; a fixed floor of 25 would have let all of these through.
+    assert.equal(guardBlastRadius(62, 17).tripped, true);
+    assert.equal(guardBlastRadius(62, 16).tripped, false);
+  });
+
+  it('still tolerates an ordinary small prune', () => {
+    assert.equal(guardBlastRadius(62, 12).tripped, false);
   });
 
   it('always trips when a non-empty file would be emptied', () => {
