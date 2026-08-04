@@ -286,6 +286,17 @@ cost a debugging cycle to discover.
   `check-derivatives.ts` at build time; fixing both makes the ledger assert CDN objects that do
   not exist until a maintainer runs the copy. Grep for the bare slug, not for one prefix.
 
+- **A generated artifact must not carry hand-added fields.** `data/species-photos.json` holds
+  `photographer` and `license` on all 1,241 species; `generate-species-photos.ts` has never
+  produced them, so `npm run photos:materialize` silently strips every credit. The generator
+  documents this in a comment, which is exactly where a runbook step
+  ([#214](https://github.com/pnwinsects/pnwmoths/issues/214) step 2 is "regenerate it") will not
+  look. Either the generator emits the field or the field lives in its own file — "add it manually
+  afterwards" is a data-loss bug with a delay fuse ([#267](https://github.com/pnwinsects/pnwmoths/issues/267),
+  [ADR 0017](adr/0017-reproducible-committed-artifacts.md)). Note that types did not save us:
+  `speciesPhotos.ts` requires both fields, but the error only fires *after* the damage is staged,
+  and a 1,200-key structural mismatch reads as a JSON shape problem, not as lost attribution.
+
 - **`parse` + `stringify` round-tripping a CSV rewrites quoting you did not touch.**
   `csv-stringify` quotes only where required, so rows whose fields carried unnecessary quotes
   come back unquoted and land in the diff as unrelated churn. After a scripted edit, diff for
