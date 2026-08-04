@@ -267,6 +267,30 @@ cost a debugging cycle to discover.
 
 ## Data migration & integrity
 
+- **A genus rename has to be all-or-nothing.** Renaming two of our six *Protorthodes* to
+  *Trichopolia* (#259) split one genus into two interleaved blocks in checklist order, because
+  MPG holds all six under *Trichopolia* — so our display genus alternated down the page. If an
+  external list moves a genus, either follow it for every species we hold in that genus or for
+  none; a partial move is worse than either ([ADR 0029](adr/0029-checklist-order-from-mpg.md)).
+
+- **Two consumers, two case conventions, one column.** `data/species-synonyms.csv`'s
+  `from_binomial` is lowercased by `ingest-photos.ts` before matching but compared
+  **case-sensitively** by `build-key.ts` against the frozen Lucid source. A lowercase row is
+  therefore silently invisible to the key: no error, just `build-key: 1188 matched` where it had
+  been 1191. Write it capitalised. When a shared column has no single normalizer, the looser
+  consumer hides the stricter one's failure.
+
+- **Re-keying a slug means re-keying every path that embeds it.** A rename touches
+  `image-derivatives.csv` in two path shapes — `<slug>/<file>` for legacy photos and
+  `species-tiles/<slug>/…` for high-res tiles. Fixing only the first passes `npm test` and fails
+  `check-derivatives.ts` at build time; fixing both makes the ledger assert CDN objects that do
+  not exist until a maintainer runs the copy. Grep for the bare slug, not for one prefix.
+
+- **`parse` + `stringify` round-tripping a CSV rewrites quoting you did not touch.**
+  `csv-stringify` quotes only where required, so rows whose fields carried unnecessary quotes
+  come back unquoted and land in the diff as unrelated churn. After a scripted edit, diff for
+  changed lines that do not mention your target and restore them.
+
 - **Add a uniqueness pre-flight before the full build.** A `GROUP BY slug HAVING count(*)
   > 1` assertion in the migration test scaffold catches duplicate-key collisions (which
   become Eleventy permalink clashes) from the CSV alone — cheaper than discovering them

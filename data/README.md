@@ -125,8 +125,9 @@ erDiagram
 | `glossary.csv` | ~150 | Wing-anatomy and taxonomy terms injected into species fact sheets at build time. |
 | `species-links.csv` | ~2 400 | Per-species external links (BugGuide, Moth Photographers Group, Butterflies and Moths of North America). Long format: one row per link (`species_slug,site,url`); a species may have several. Extracted from the legacy reference MySQL DB by [`scripts/extract-reference-links.ts`](../scripts/extract-reference-links.ts) (`npm run links:materialize`). |
 | `plates.json` | ~50 | Reference plate metadata (legacy moth-guide plates). Width/height used for CDN image sizing. |
-| `taxon-order.csv` | ~480 | Checklist (phylogenetic) order of the higher taxa — family, subfamily, tribe, genus. Columns `rank,name`; **row order is the data**. See [Checklist order](#checklist-order) below. |
-| `species-order.csv` | ~300 | Species order for the 30 genera the reference site does *not* list alphabetically. Columns `genus,species_slug`; **row order is the data**. Genera absent from this file are alphabetical. |
+| `checklist-order.csv` | 1 425 | Generated. Every species in checklist (phylogenetic) order; **row order is the data**, one row per species in `species.csv`. Columns `species_slug,mpg_p_no,matched_via`. Written by [`scripts/build-checklist-order.ts`](../scripts/build-checklist-order.ts). See [Checklist order](#checklist-order) below and [ADR 0029](../docs/adr/0029-checklist-order-from-mpg.md). |
+| `mpg-taxa.csv` | 13 245 | The Moths Photographers Group North American taxon list, the source of checklist order. All 17 columns of `MPG-Taxa_20240311.xlsx`, rendered once by [`scripts/convert-mpg-xlsx.ts`](../scripts/convert-mpg-xlsx.ts). Not hand-edited — replace it wholesale when MPG ships a new workbook. |
+| `mpg-crosswalk.csv` | ~5 | **Curator-owned.** One row per species that no mechanical tier can match to an MPG row, mapping it to a binomial with the decision's `source` (issue comment, reasoning). Deliberately small: every row here is a judgement call someone made and can be held to. |
 | `parquet/<slug>/records.parquet` | varies | Per-species records, materialized by `scripts/build-data.js` for fast DuckDB queries at build time. |
 
 ## Taxonomy provenance (`family` / `subfamily` / `tribe`)
@@ -170,14 +171,20 @@ for imported rows, whose county *is* derived from those coordinates.
 
 Professional users read the catalog in **checklist order** — the phylogenetic sequence a printed checklist uses (Drepanidae before Noctuidae; *Habrosyne* before *Ceranemota*) — not alphabetically. Nothing else in `data/` encodes it: `noc_id` is unusable as a sort key (blanks, three incompatible formats, and duplicate values) and says nothing about the order of families, subfamilies, or tribes.
 
-Two files record it, both as flat lists in which **row order is the data**. There is deliberately **no ordinal column** — an integer would have to be renumbered downstream of every insertion. To move a taxon, move its line; to add one, insert a line.
+One file records it — `checklist-order.csv`, a flat list of every species in which **row order is the data**. There is deliberately **no ordinal column**: an integer would have to be renumbered downstream of every insertion. `mpg_p_no` rides along as provenance, so a future MPG release can be diffed against ours; it is not the sort key, because MPG renumbers between releases.
 
-- **`taxon-order.csv`** — one line per family, subfamily, tribe, and genus. Higher-taxon names are globally unique in this dataset, so no lineage columns are needed; rank and membership already live in `species.csv`.
-- **`species-order.csv`** — one line per species, but **only for the 30 genera whose order is not alphabetical**. The reference site lists species alphabetically by epithet in the other 361, which the site does for free, so recording them would be ~1,100 lines of redundancy to keep in sync. A listed genus is written out whole, so the file reads as "this is the order" rather than "these are the corrections".
+One species-level key is enough because **our genera are contiguous in the MPG list**. Restricted to the species we hold, each genus occupies a single unbroken block of MPG rows, so sorting species by MPG row reproduces family, subfamily, tribe, and genus order for free. That property is load-bearing, so `scripts/build-checklist-order.test.ts` asserts it rather than trusting it.
 
-The non-alphabetical genera are real, not an artifact — the live reference site shows *Apamea* ending `… vultuosa, unanimis, zeta` and *Noctua* as `pronuba, comes`. They look like species appended to a genus page over the years rather than inserted, but they are what the original renders, so they are reproduced.
+The order comes from the Moths Photographers Group taxon list (`mpg-taxa.csv`), not from our own data — see [ADR 0029](../docs/adr/0029-checklist-order-from-mpg.md) for why, and for the legacy-CMS approach it supersedes. [`scripts/build-checklist-order.ts`](../scripts/build-checklist-order.ts) joins the two, matching in tiers: exact binomial, Latin gender-ending variant, MONA number, original combination named in MPG's synonymy, and finally `mpg-crosswalk.csv`, where each row is a curator decision recorded with its source.
 
-Both are materialized by [`scripts/extract-taxon-order.ts`](../scripts/extract-taxon-order.ts) from the legacy CMS page tree, whose nested-set ordering *is* the curated sequence. Anything absent from these files falls back to alphabetical; the script reports every taxon it could not place so the fallback is a visible decision rather than a silent one.
+Anything it cannot place falls to the end of its genus, alphabetically, and is **reported on every run** so the fallback stays a visible decision rather than a silent one. Expect provisional names (`sp`, `n sp`, `aff x`, `nr x`) to land there permanently — being undescribed, they have no MPG row and never will.
+
+To refresh after MPG ships a new workbook:
+
+```bash
+node scripts/convert-mpg-xlsx.ts ~/Downloads/MPG-Taxa_YYYYMMDD.xlsx
+node scripts/build-checklist-order.ts     # DRY_RUN=1 to see the report without writing
+```
 
 ## Slug convention
 

@@ -60,12 +60,16 @@ Open the file in a **text editor** (not a spreadsheet — spreadsheets sometimes
 from_binomial,to_species_slug
 ```
 
-Append your row at the bottom. Both values are lowercase. `from_binomial` matches `binomial_raw` from the manifest exactly (lowercased, space-separated). `to_species_slug` matches the slug column in `data/species.csv` (lowercased, hyphen-joined).
+Append your row at the bottom.
+
+**Capitalise `from_binomial` the way a binomial is normally written — `Grammia doris`, not `grammia doris`.** Two different scripts read this column and they disagree about case: the photo ingest lowercases it before matching, so either form works there, but [`scripts/build-key.ts`](../scripts/build-key.ts) matches the Lucid key's binomials **case-sensitively** and a lowercase row silently fails to resolve. The symptom is a drop in the `build-key: N matched, M unmatched` line and nothing else — no error, no warning.
+
+`to_species_slug` is always lowercase and hyphen-joined, matching the slug derived from `data/species.csv`.
 
 Example row (illustrative only — not pre-filled in the seed file; every row is a deliberate curator decision):
 
 ```
-grammia nevadensis,apantesis-nevadensis
+Grammia nevadensis,apantesis-nevadensis
 ```
 
 Make sure each row ends with a newline. Save.

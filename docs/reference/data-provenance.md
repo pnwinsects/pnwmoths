@@ -82,13 +82,16 @@ when the reference data changes):
   join tables — the species-to-plate assignment is a curatorial layout
   decision (which numbered plate a genus landed on) and is not derivable from
   `family`/`subfamily`/`tribe` alone.
-- [`scripts/extract-taxon-order.ts`](../../scripts/extract-taxon-order.ts)
-  → `data/taxon-order.csv` + `data/species-order.csv` (checklist order, issue
-  #218). Reads the `cms_page` / `cms_title` browse subtree: the CMS is a
-  django-cms install whose page tree is stored as an MPTT nested set, and its
-  left-to-right order *is* the curated checklist sequence the legacy
-  `/browse-all/` page rendered. Ordering is not derivable from `species.csv`
-  (see [data/README.md](../../data/README.md#checklist-order)).
+Checklist order was extracted from this database too, for a while. The CMS is a
+django-cms install whose `/browse/` page tree is stored as an MPTT nested set,
+and its left-to-right walk *is* the sequence the legacy `/browse-all/` page
+rendered — verified against the curator's list of published pages, where the
+order matched exactly over all 418 shared higher taxa. That extraction has been
+**superseded** by the Moths Photographers Group taxon list
+([ADR 0029](../adr/0029-checklist-order-from-mpg.md)): the nested set can only
+place taxa that existed when the CMS was dumped, so every species added since
+needed a curator decision. The nested set remains the best evidence of what the
+*legacy* site's order was, if that question ever comes up again.
 - [`scripts/backfill-legacy-county.ts`](../../scripts/backfill-legacy-county.ts)
   → legacy county backfill.
 - [`scripts/recover-clipped-bc-records.ts`](../../scripts/recover-clipped-bc-records.ts)
