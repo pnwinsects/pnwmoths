@@ -3,14 +3,20 @@
  * Shared loader and predicate for the provisional/undescribed-species deny-list (ISSUE-80).
  *
  * This is a DISPLAY deny-list — occurrence records, images, per-species parquet directories,
- * and Lucid key source data for listed species are preserved intact. Any species can be
- * re-included on the next build by deleting its line from data/unpublished-species.csv.
+ * and Lucid key source data for listed species are preserved intact in data/. Any species can
+ * be re-included on the next build by deleting its line from data/unpublished-species.csv.
  *
- * Applied at the same four choke points as the family-withholding gate:
- *   - src/_data/species.ts  (species pages + Pagefind search index)
- *   - src/_data/taxon.ts    (Browse taxonomy tree)
- *   - scripts/build-key.ts  (Identify / data/key-matrix.json)
- *   - src/_data/stats.ts    (home-page vanity counts)
+ * "Preserved in data/" is not "published": every path OUT of data/ and into _site/ must apply
+ * this gate. Five choke points, the same set as the family-withholding gate:
+ *   - src/_data/species.ts    (species pages + Pagefind search index)
+ *   - src/_data/taxon.ts      (Browse taxonomy tree)
+ *   - scripts/build-key.ts    (Identify / data/key-matrix.json)
+ *   - src/_data/stats.ts      (home-page vanity counts)
+ *   - scripts/copy-parquet.ts (per-species occurrence Parquet)
+ *
+ * The fifth was missing for as long as the fourth existed, and published occurrence records
+ * for all 45 deny-listed species at /species/{slug}/records.parquet (#275). Adding a step that
+ * writes into _site/species/ means adding it here.
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';

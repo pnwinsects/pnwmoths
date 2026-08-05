@@ -331,6 +331,19 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **A post-build gate must run downstream of every step that writes into the output.**
+  `check-withheld` and `check-unpublished` ran straight after `build:eleventy`, and
+  `build:copy-parquet` ran *after* them — so the gates read `_site/species/` before the step
+  that filled it. Both passed for a year while occurrence records for 126 embargoed Geometridae
+  and 45 provisional species were published at `/species/{slug}/records.parquet`, pages 404ing
+  above them ([#275](https://github.com/pnwinsects/pnwmoths/issues/275)). Neither gate was
+  wrong; both were early. Two habits fall out: order gates last in `build:site`, and write them
+  against the *directory*, not the artifact you happen to be thinking of — "a gated slug has
+  nothing under `_site/species/<slug>/`" survives a new build step, "no `index.html`" does not.
+  The corollary for the data side: a display deny-list is only a deny-list at the choke points
+  that consult it, so adding a step that copies out of `data/` means adding a fifth caller of
+  `loadUnpublishedSpecies`, not just a new npm script.
+
 - **A green build gate says nothing about what the CDN is serving.** Deploy is additive — no
   purge, no deletes ([0008](adr/0008-deploy-bunny-additive.md)) — so a page that stops being
   emitted stays live at its last build, forever. `check-unpublished` passes because the gate
