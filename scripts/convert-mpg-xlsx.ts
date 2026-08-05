@@ -10,7 +10,7 @@
 //   have and does not want (data/ is flat, contributor-editable files). MPG
 //   ships a new workbook every year or two; rendering it to CSV once, on
 //   receipt, keeps the derivation reproducible and lets the next release be
-//   diffed against this one line by line. See ADR 0029.
+//   diffed against this one line by line. See ADR 0030.
 //
 // All 17 columns are carried through verbatim, including the ones no code
 // reads (Author with Year, Common Name, Taxonomic Note, MPG URL). Dropping

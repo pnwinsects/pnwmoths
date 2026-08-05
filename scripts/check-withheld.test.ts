@@ -115,3 +115,72 @@ test('findLeaks: page leak and key-matrix leak both reported', () => {
     rmSync(tmpDir, { recursive: true, force: true });
   }
 });
+
+// ---------------------------------------------------------------------------
+// findLeaks — data leak detection (#275)
+// ---------------------------------------------------------------------------
+
+test('findLeaks: a withheld slug with only records.parquet is a DATA leak, not a page leak', () => {
+  // The #275 shape exactly: the display gate worked (no index.html), and the
+  // occurrence records were published anyway by a later build step.
+  const tmpDir = resolve(ROOT, '.tmp-check-withheld-data-test');
+  const slug = 'hydriomena-perfracta';
+  const speciesDir = resolve(tmpDir, 'species', slug);
+  mkdirSync(speciesDir, { recursive: true });
+  writeFileSync(resolve(speciesDir, 'records.parquet'), 'PAR1');
+
+  try {
+    const leaks = findLeaks({
+      withheldSlugs: new Set([slug]),
+      siteDir: tmpDir,
+      keyMatrixSlugs: new Set<string>(),
+    });
+    assert.deepStrictEqual(leaks.pageLeaks, [], 'no page was emitted');
+    assert.equal(leaks.dataLeaks.length, 1);
+    assert.match(leaks.dataLeaks[0] ?? '', /^hydriomena-perfracta \(records\.parquet\)$/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('findLeaks: any unexpected file under a withheld slug is caught, not just Parquet', () => {
+  // The invariant is "nothing under the directory", so a future build step that
+  // writes something new is caught without anyone remembering to update the gate.
+  const tmpDir = resolve(ROOT, '.tmp-check-withheld-future-test');
+  const slug = 'rheumaptera-hastata';
+  const speciesDir = resolve(tmpDir, 'species', slug);
+  mkdirSync(speciesDir, { recursive: true });
+  writeFileSync(resolve(speciesDir, 'occurrences.json'), '[]');
+
+  try {
+    const leaks = findLeaks({
+      withheldSlugs: new Set([slug]),
+      siteDir: tmpDir,
+      keyMatrixSlugs: new Set<string>(),
+    });
+    assert.equal(leaks.dataLeaks.length, 1);
+    assert.match(leaks.dataLeaks[0] ?? '', /occurrences\.json/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('findLeaks: a withheld slug whose directory holds only index.html is a page leak alone', () => {
+  const tmpDir = resolve(ROOT, '.tmp-check-withheld-page-only-test');
+  const slug = 'euthyatira-lorata';
+  const speciesDir = resolve(tmpDir, 'species', slug);
+  mkdirSync(speciesDir, { recursive: true });
+  writeFileSync(resolve(speciesDir, 'index.html'), '<html>leaked</html>');
+
+  try {
+    const leaks = findLeaks({
+      withheldSlugs: new Set([slug]),
+      siteDir: tmpDir,
+      keyMatrixSlugs: new Set<string>(),
+    });
+    assert.deepStrictEqual(leaks.pageLeaks, [slug]);
+    assert.deepStrictEqual(leaks.dataLeaks, [], 'index.html is the page, not extra data');
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});

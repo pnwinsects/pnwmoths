@@ -40,10 +40,17 @@ test('normalizeSlug: already-hyphenated slug unchanged modulo case', () => {
 // loadUnpublishedSpecies
 // ---------------------------------------------------------------------------
 
-test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 46 entries', () => {
+test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 45 entries', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished instanceof Set, 'result should be a Set');
-  assert.strictEqual(unpublished.size, 46, `expected 46 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+  assert.strictEqual(unpublished.size, 45, `expected 45 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+});
+
+test('loadUnpublishedSpecies: real CSV does NOT contain "hemileuca-nuteglan" (#268 removed, not hidden)', () => {
+  // The deny-list means "provisional, not yet described" — not "rejected". A name deleted from
+  // the catalog must not reappear here as a parking space; see docs/adr/0029-removing-a-species.md.
+  const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
+  assert.ok(!unpublished.has('hemileuca-nuteglan'), 'should not contain hemileuca-nuteglan');
 });
 
 test('loadUnpublishedSpecies: real CSV contains "euxoa-aurantiaca" (#156 curator omission)', () => {

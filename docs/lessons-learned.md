@@ -271,7 +271,7 @@ cost a debugging cycle to discover.
   *Trichopolia* (#259) split one genus into two interleaved blocks in checklist order, because
   MPG holds all six under *Trichopolia* — so our display genus alternated down the page. If an
   external list moves a genus, either follow it for every species we hold in that genus or for
-  none; a partial move is worse than either ([ADR 0029](adr/0029-checklist-order-from-mpg.md)).
+  none; a partial move is worse than either ([ADR 0030](adr/0030-checklist-order-from-mpg.md)).
 
 - **Two consumers, two case conventions, one column.** `data/species-synonyms.csv`'s
   `from_binomial` is lowercased by `ingest-photos.ts` before matching but compared
@@ -365,6 +365,31 @@ cost a debugging cycle to discover.
   by eye.
 
 ## Verification & process
+
+- **A post-build gate must run downstream of every step that writes into the output.**
+  `check-withheld` and `check-unpublished` ran straight after `build:eleventy`, and
+  `build:copy-parquet` ran *after* them — so the gates read `_site/species/` before the step
+  that filled it. Both passed for a year while occurrence records for 126 embargoed Geometridae
+  and 45 provisional species were published at `/species/{slug}/records.parquet`, pages 404ing
+  above them ([#275](https://github.com/pnwinsects/pnwmoths/issues/275)). Neither gate was
+  wrong; both were early. Two habits fall out: order gates last in `build:site`, and write them
+  against the *directory*, not the artifact you happen to be thinking of — "a gated slug has
+  nothing under `_site/species/<slug>/`" survives a new build step, "no `index.html`" does not.
+  The corollary for the data side: a display deny-list is only a deny-list at the choke points
+  that consult it, so adding a step that copies out of `data/` means adding a fifth caller of
+  `loadUnpublishedSpecies`, not just a new npm script.
+
+- **A green build gate says nothing about what the CDN is serving.** Deploy is additive — no
+  purge, no deletes ([0008](adr/0008-deploy-bunny-additive.md)) — so a page that stops being
+  emitted stays live at its last build, forever. `check-unpublished` passes because the gate
+  works: no deny-listed species is *emitted*. Meanwhile 32 of the 45 deny-listed slugs were
+  still returning 200 in production, alongside a species deleted outright in
+  [#268](https://github.com/pnwinsects/pnwmoths/issues/268)
+  ([#273](https://github.com/pnwinsects/pnwmoths/issues/273)). Nothing linked to them and they
+  were out of the sitemap, which is exactly why nobody noticed. "The build doesn't emit it" and
+  "it isn't on the internet" are different claims: verify the second with `curl -sI` against the
+  live host, not by reading `_site/`. Any *removal* — of a page, a route, an asset — needs that
+  second check written into its runbook.
 
 - **Compare entry points with `pathToFileURL(process.argv[1]).href`, never
   `` `file://${process.argv[1]}` ``.** `import.meta.url` is a normalized file URL

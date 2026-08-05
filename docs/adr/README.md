@@ -37,3 +37,5 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0026](0026-inaturalist-project-sync.md) | iNaturalist records live in a separate, machine-owned `data/records-inat.csv`; reconciliation is destructive so it never touches the curator file | Accepted |
 | [0027](0027-no-link-check-cache.md) | The link check keeps no result cache — it still checks every link, but only its 35 external URLs were ever cacheable (internal links are `file://`, CDN images are excluded and manifest-checked) | Accepted |
 | [0028](0028-link-rot-reporting.md) | Broken external links reported to one self-closing GitHub issue, listed only after two consecutive weekly failures | Accepted |
+| [0029](0029-removing-a-species.md) | Removing a species deletes its row and every record outright — not a move to the deny-list, and no tombstone redirect | Accepted |
+| [0030](0030-checklist-order-from-mpg.md) | Checklist order comes from the MPG taxon list, superseding the legacy-CMS nested-set extraction | Accepted |

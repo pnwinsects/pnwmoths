@@ -3,7 +3,7 @@
 // the phylogenetic sequence a printed checklist uses (Drepanidae before
 // Noctuidae, Habrosyne before Ceranemota), not alphabetical.
 //
-// Why the Moths Photographers Group list is the source (ADR 0029):
+// Why the Moths Photographers Group list is the source (ADR 0030):
 //
 //   Nothing in data/ encodes sequence. `noc_id` is unusable as a sort key —
 //   blanks, three incompatible formats, duplicate values — and says nothing

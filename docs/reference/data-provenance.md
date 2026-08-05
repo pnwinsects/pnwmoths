@@ -88,7 +88,7 @@ and its left-to-right walk *is* the sequence the legacy `/browse-all/` page
 rendered — verified against the curator's list of published pages, where the
 order matched exactly over all 418 shared higher taxa. That extraction has been
 **superseded** by the Moths Photographers Group taxon list
-([ADR 0029](../adr/0029-checklist-order-from-mpg.md)): the nested set can only
+([ADR 0030](../adr/0030-checklist-order-from-mpg.md)): the nested set can only
 place taxa that existed when the CMS was dumped, so every species added since
 needed a curator decision. The nested set remains the best evidence of what the
 *legacy* site's order was, if that question ever comes up again.

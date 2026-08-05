@@ -272,11 +272,14 @@ describe('data/checklist-order.csv', () => {
     assert.deepEqual(regressions, []);
   });
 
-  it('leaves only provisional names and the two open curator questions unplaced', () => {
+  it('leaves only provisional names and the one open curator question unplaced', () => {
     const unplaced = ordered.filter((r) => r.matched_via === 'unplaced').map((r) => r.species_slug);
     const provisional = unplaced.filter((s) => /\b(sp|species|aff|nr)\b/.test(s));
+    // Was two. `hemileuca-nuteglan` left the catalog entirely in #268, so the only
+    // named species still without a position is the one the curator told us not to
+    // act on. Every other formerly-unplaced name resolved by being renamed on this
+    // branch, which is what makes them placeable at all.
     assert.deepEqual(unplaced.filter((s) => !provisional.includes(s)), [
-      'hemileuca-nuteglan', // curator: remove from the site (#266)
       'macaria-marmorata', // curator: the Stamnodes mapping is an epithet collision, do not act (#218)
     ]);
     assert.equal(provisional.length, 21);
