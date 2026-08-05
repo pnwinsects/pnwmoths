@@ -82,6 +82,7 @@ when the reference data changes):
   join tables — the species-to-plate assignment is a curatorial layout
   decision (which numbered plate a genus landed on) and is not derivable from
   `family`/`subfamily`/`tribe` alone.
+
 Checklist order was extracted from this database too, for a while. The CMS is a
 django-cms install whose `/browse/` page tree is stored as an MPTT nested set,
 and its left-to-right walk *is* the sequence the legacy `/browse-all/` page
@@ -92,6 +93,7 @@ order matched exactly over all 418 shared higher taxa. That extraction has been
 place taxa that existed when the CMS was dumped, so every species added since
 needed a curator decision. The nested set remains the best evidence of what the
 *legacy* site's order was, if that question ever comes up again.
+
 - [`scripts/backfill-legacy-county.ts`](../../scripts/backfill-legacy-county.ts)
   → legacy county backfill.
 - [`scripts/recover-clipped-bc-records.ts`](../../scripts/recover-clipped-bc-records.ts)

@@ -2,8 +2,10 @@
 
 **Status:** Accepted
 
-Supersedes the legacy-CMS extraction described in [data/README.md](../../data/README.md#checklist-order)
-as of PR #221 / issue #259. That approach was never released; its rationale is preserved below
+Supersedes the legacy-CMS nested-set extraction, described in
+[data-provenance](../reference/data-provenance.md#reference-mysql-database-original-cms-data), as of PR #221 /
+issue #259. (`data/README.md#checklist-order` now documents *this* decision, not the one being
+superseded.) That approach was never released; its rationale is preserved below
 rather than deleted, because the *problem* it identified is unchanged and the reasoning about
 row-order-as-data survived intact into this decision.
 
@@ -14,7 +16,7 @@ printed checklist uses. Drepanidae before Noctuidae; *Habrosyne* before *Ceranem
 page ([#218](https://github.com/pnwinsects/pnwmoths/issues/218)) needs it, and nothing in `data/`
 encoded it.
 
-`noc_id` cannot serve as a sort key. Across 1,425 species it has 26 blanks, three incompatible
+`noc_id` cannot serve as a sort key. Across the 1,424 species it has 26 blanks, three incompatible
 formats in one column (bare integers, `93-XXXX` Poole 1989 Noctuoidea numbers, and `MONA 7731`),
 and 10 values shared by two species. More fundamentally it says nothing about the order of
 families, subfamilies, or tribes — only species carry it.
@@ -36,7 +38,7 @@ placed it by hand. That cost recurs on every future addition, forever.
 
 The curator proposed the Moths Photographers Group taxon list
 ([#218 comment](https://github.com/pnwinsects/pnwmoths/issues/218#issuecomment-5162215105)),
-`MPG-Taxa_20240311.xlsx`, 13,245 rows covering all of North America. Measured against our 1,425
+`MPG-Taxa_20240311.xlsx`, 13,245 rows covering all of North America. Measured against our 1,424
 species it wins on three counts:
 
 - **It agrees with the order we reconstructed.** Kendall τ = 0.96 over the 1,339 species that match
@@ -69,11 +71,12 @@ which row order is the data.**
   Exact binomial → Latin gender-ending variant → MONA number → full original combination named in
   MPG's synonymy → [`data/mpg-crosswalk.csv`](../../data/mpg-crosswalk.csv), where each row records
   a curator decision *and its source*. Current coverage: 1,364 exact, 5 gender, 23 MONA,
-  5 synonymy, 5 crosswalk = 1,402 of 1,425.
+  5 synonymy, 5 crosswalk = 1,402 of 1,424.
 - **Anything unplaced falls to the end of its genus and is reported on every run**, so the
-  alphabetical fallback stays a visible decision. The remaining 23 are 21 provisional names
-  (`sp`, `n sp`, `aff x`, `nr x`) that have no MPG row by definition, plus two open curator
-  questions.
+  alphabetical fallback stays a visible decision. The remaining 22 are 21 provisional names
+  (`sp`, `n sp`, `aff x`, `nr x`) that have no MPG row by definition, plus one open curator
+  question — `macaria-marmorata`, where MPG's mapping crosses subfamily and the curator said not
+  to act.
 
 **Ordering by MPG does not mean adopting MPG's generic placement.** `species_slug` is the foreign
 key across every CSV and the URL structure, so each rename costs a redirect plus a data migration.
@@ -93,9 +96,13 @@ a time by the curator. Six were, in this PR (see #259).
   *Trichopolia* interleaved the two names, because MPG holds all six under *Trichopolia*. Renames
   within a genus have to be all-or-nothing; that is what forced the other four in this PR.
 - **Renaming a slug leaves the CDN behind.** `species_slug` is the CDN folder key, so the eight
-  renames in this PR left 120 objects needing an additive copy before their images resolve
-  ([#266](https://github.com/pnwinsects/pnwmoths/issues/266)); `data/cdn-retired-images.csv` is the
-  work-list. `check-derivatives.ts` reads the manifest, not the CDN, so the build cannot catch this.
+  renames in this PR left **1,730 objects** needing an additive copy before their images resolve
+  ([#266](https://github.com/pnwinsects/pnwmoths/issues/266), done). `data/cdn-retired-images.csv`
+  is *not* the work-list, though it was first taken for one: it enumerates the originals and the
+  derivative variants — 144 rows — but not the DeepZoom pyramids under `species-tiles/`, which are
+  1,586 of the total and are what the high-res viewer fetches. The work-list is a walk of the four
+  slug prefixes in the storage zone. `check-derivatives.ts` reads the manifest, not the CDN, so the
+  build cannot catch any of it.
 - **Ordering surfaced duplicate species.** Six of our species resolve to an MPG row another of our
   species already occupies — the curator's synonymies plus three the matcher found
   ([#265](https://github.com/pnwinsects/pnwmoths/issues/265)). Order is unaffected (the tie-break

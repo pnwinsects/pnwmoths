@@ -47,6 +47,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
+import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -80,8 +81,22 @@ export interface PlacedSpecies {
   matched_via: MatchTier;
 }
 
+/**
+ * The species slug, in the one shape the rest of the site uses as a foreign key.
+ *
+ * `(genus + '-' + species).toLowerCase()` is the rule, but lowercasing alone is not
+ * the whole of it: a provisional epithet carries spaces (`Xylophanes` + `nr libya`),
+ * and every other file — `data/unpublished-species.csv`, `src/_data/speciesSlugs.json`,
+ * `data/images.csv`, and the `/species/{slug}/` URL — stores the whitespace collapsed
+ * to hyphens (`xylophanes-nr-libya`). Emitting `xylophanes-nr libya` here gave
+ * `data/checklist-order.csv` 14 rows whose species_slug joined to nothing and could
+ * not appear in a URL.
+ *
+ * `normalizeSlug` is that reconciliation, and is shared with the gates rather than
+ * restated, so the checklist cannot drift from what the site publishes.
+ */
 export const slugOf = (row: { genus: string; species: string }): string =>
-  `${row.genus}-${row.species}`.toLowerCase();
+  normalizeSlug(`${row.genus}-${row.species}`);
 
 /**
  * MPG marks a genus whose placement it considers unresolved by quoting it

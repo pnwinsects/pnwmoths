@@ -64,7 +64,7 @@ hyles-euphorbiae,890215,exact
 hyles-gallii,890216,exact
 hyles-lineata,890217,exact
 deilephila-elpenor,890218,exact
-xylophanes-nr libya,,unplaced
+xylophanes-nr-libya,,unplaced
 callizzia-amorata,91a0002,exact
 idaea-dimidiata,91a0079,exact
 cladara-limitaria,91a0125,exact
@@ -177,7 +177,7 @@ sicya-morsicaria,91a1288,exact
 somatolophia-ectrapelaria,91a1310,exact
 plataea-diva,91a1326,exact
 plataea-trilinearia,91a1327,exact
-plataea-n sp,,unplaced
+plataea-n-sp,,unplaced
 caripeta-divisata,91a1339,exact
 caripeta-aequaliaria,91a1341,exact
 caripeta-angustiorata,91a1344,exact
@@ -312,7 +312,7 @@ idia-suffusalis,930473,exact
 idia-lubricalis,930482,exact
 idia-occidentalis,930483,exact
 idia-immaculalis,930486,exact
-idia-nr americalis,,unplaced
+idia-nr-americalis,,unplaced
 phalaenophana-pyramusalis,930487,exact
 zanclognatha-jacchusalis,930500,exact
 chytolita-morbidalis,930502,exact
@@ -692,10 +692,10 @@ schinia-argentifascia,932163,exact
 schinia-illustra,932164,exact
 schinia-unimacula,932168,exact
 schinia-cumatilis,932177,exact
-schinia-aff verna,,unplaced
+schinia-aff-verna,,unplaced
 heliolonche-modicella,932184,exact
 heliolonche-pictipennis,932187,exact
-heliolonche-n sp,,unplaced
+heliolonche-n-sp,,unplaced
 callopistria-floridensis,932190,exact
 cryphia-olivacea,932195,exact
 cryphia-cuerva,932200,exact
@@ -770,8 +770,8 @@ resapamea-venosa,932366,exact
 resapamea-enargia,932367,exact
 resapamea-passer,932368,exact
 resapamea-diluvius,932368.1,exact
-resapamea-aff passer,,unplaced
-resapamea-n sp nr innota,,unplaced
+resapamea-aff-passer,,unplaced
+resapamea-n-sp-nr-innota,,unplaced
 mesapamea-fractilinea,932370,exact
 mesapamea-secalis,932371.1,exact
 eremobina-claudens,932372,exact
@@ -808,7 +808,7 @@ amphipoea-americana,932447,exact
 amphipoea-pacifica,932448,exact
 amphipoea-keiferi,932451,exact
 amphipoea-lunata,932452,exact
-amphipoea-n sp,,unplaced
+amphipoea-n-sp,,unplaced
 hydraecia-medialis,932455,exact
 hydraecia-obliqua,932456,exact
 hydraecia-perobliqua,932459,exact
@@ -872,8 +872,8 @@ aseptis-ethnica,932630,exact
 aseptis-fanatica,932631,exact
 aseptis-binotata,932634,exact
 aseptis-characta,932648,exact
-aseptis-sp no 1,,unplaced
-aseptis-sp no 3,,unplaced
+aseptis-sp-no-1,,unplaced
+aseptis-sp-no-3,,unplaced
 aseptis-species,,unplaced
 paraseptis-adnixa,932648.5,exact
 epidemas-cinerea,932650,exact
@@ -897,7 +897,7 @@ zotheca-tranquilla,932673,exact
 enargia-decolor,932674,exact
 enargia-infumata,932675,exact
 enargia-fausta,932676,exact
-enargia-n sp,,unplaced
+enargia-n-sp,,unplaced
 ipimorpha-nanaimo,932677,exact
 ipimorpha-viridipallida,932678,exact
 ipimorpha-pleonectusa,932679,exact
@@ -924,7 +924,7 @@ dryotype-opina,932702,exact
 mniotype-pallescens,932704,exact
 mniotype-ducta,932705,exact
 mniotype-tenera,932706,exact
-mniotype-aff tenera,,unplaced
+mniotype-aff-tenera,,unplaced
 mniotype-sp,,unplaced
 sutyna-privata,932707,exact
 ufeus-satyricus,932709,exact
@@ -961,7 +961,7 @@ egira-curialis,932794,exact
 egira-dolosa,932795,exact
 egira-rubrica,932796,exact
 egira-perlubens,932797,exact
-egira-aff curialis,,unplaced
+egira-aff-curialis,,unplaced
 tholera-americana,932809,exact
 nephelodes-minians,932810,exact
 nephelodes-demaculata,932811,exact
@@ -1112,7 +1112,7 @@ lacinipolia-rectilinea,933063,exact
 lacinipolia-strigicollis,933069,exact
 lacinipolia-quadrilineata,933075,exact
 lacinipolia-patalis,933077,exact
-lacinipolia-aff pensilis,,unplaced
+lacinipolia-aff-pensilis,,unplaced
 trichocerapoda-strigata,933082,exact
 trichocerapoda-oblita,933083,exact
 anhimella-perbrunnea,933085,exact

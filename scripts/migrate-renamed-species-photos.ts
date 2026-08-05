@@ -50,6 +50,19 @@ const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 /** Parallel copies in flight. Modest on purpose — this is someone else's storage API. */
 const CONCURRENCY = 8;
 
+/**
+ * Per-request ceiling. `fetch` has no default timeout, so a connection that opens
+ * and then stalls hangs the whole migration behind one of the eight workers, with
+ * no output and nothing to retry. Generous enough for the largest object here
+ * (a few MB) on a slow link.
+ */
+const REQUEST_TIMEOUT_MS = 60_000;
+
+/** A fetch that gives up rather than hanging, so withRetry has something to retry. */
+async function fetchWithTimeout(url: string, init: RequestInit = {}): Promise<Response> {
+  return await fetch(url, { ...init, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+}
+
 const TAG = '[migrate-renamed-species-photos]';
 
 // ---------------------------------------------------------------------------
@@ -144,48 +157,52 @@ async function withRetry<T>(fn: () => Promise<T>, label: string): Promise<T> {
 }
 
 async function listDir(dir: string): Promise<BunnyEntry[]> {
-  const res = await fetch(storageUrl(dir), { headers: { AccessKey: BUNNY_STORAGE_PASSWORD } });
+  const res = await fetchWithTimeout(storageUrl(dir), { headers: { AccessKey: BUNNY_STORAGE_PASSWORD } });
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`list ${dir}: ${res.status} ${res.statusText}`);
   return (await res.json()) as BunnyEntry[];
 }
 
-/** Every object key under a prefix, recursing into subdirectories (the tile pyramids). */
-async function walk(prefix: string): Promise<string[]> {
-  const keys: string[] = [];
+/** Every object under a prefix with its size, recursing into subdirectories (the tile pyramids). */
+async function walk(prefix: string): Promise<Map<string, number>> {
+  const found = new Map<string, number>();
   for (const entry of await withRetry(() => listDir(prefix), `list ${prefix}`)) {
     if (entry.IsDirectory) {
-      keys.push(...await walk(`${prefix}${entry.ObjectName}/`));
+      for (const [k, v] of await walk(`${prefix}${entry.ObjectName}/`)) found.set(k, v);
     } else {
-      keys.push(`${prefix}${entry.ObjectName}`);
+      found.set(`${prefix}${entry.ObjectName}`, entry.Length);
     }
   }
-  return keys;
+  return found;
 }
 
 /**
- * Every object key that already exists under the destination prefixes.
+ * Every object already under the destination prefixes, keyed to its size.
  *
  * Deliberately a directory walk rather than a per-object probe. Bunny's storage
  * API answers **401** to a HEAD on an object — not 404, not 200 — so the obvious
  * `HEAD -> res.ok` test silently reports every target as absent, and the migration
  * re-copies its whole plan on every run. Verified: HEAD 401, GET 200 on the same
  * key. Listing is also one request per directory instead of one per object.
+ *
+ * Sizes, not just keys, because an aborted PUT leaves a short object under the right
+ * name. A key-only check would treat that as done and skip it forever; comparing
+ * against the source length makes a truncated copy self-healing on the next run.
  */
-async function existingTargets(slug: string): Promise<Set<string>> {
-  const keys = new Set<string>();
+async function existingTargets(slug: string): Promise<Map<string, number>> {
+  const found = new Map<string, number>();
   for (const prefix of SLUG_PREFIXES) {
-    for (const key of await walk(prefix(slug))) keys.add(key);
+    for (const [key, size] of await walk(prefix(slug))) found.set(key, size);
   }
-  return keys;
+  return found;
 }
 
 async function copyObject(fromKey: string, toKey: string): Promise<void> {
-  const get = await fetch(storageUrl(fromKey), { headers: { AccessKey: BUNNY_STORAGE_PASSWORD } });
+  const get = await fetchWithTimeout(storageUrl(fromKey), { headers: { AccessKey: BUNNY_STORAGE_PASSWORD } });
   if (!get.ok) throw new Error(`download ${fromKey}: ${get.status} ${get.statusText}`);
   const body = new Uint8Array(await get.arrayBuffer());
 
-  const put = await fetch(storageUrl(toKey), {
+  const put = await fetchWithTimeout(storageUrl(toKey), {
     method: 'PUT',
     headers: {
       AccessKey: BUNNY_STORAGE_PASSWORD,
@@ -226,19 +243,25 @@ async function main(): Promise<void> {
 
   const plan: Array<{ from: string; to: string }> = [];
   const stats = { copied: 0, skipped: 0, failed: 0 };
+  let truncated = 0;
 
   for (const { from, to } of RENAMES) {
     const already = await existingTargets(to);
     let found = 0;
     let present = 0;
     for (const prefix of SLUG_PREFIXES) {
-      for (const key of await walk(prefix(from))) {
+      for (const [key, size] of await walk(prefix(from))) {
         found++;
         const target = retargetKey(key, from, to);
-        if (already.has(target)) {
+        const existing = already.get(target);
+        if (existing === size) {
           present++;
           stats.skipped++;
           continue;
+        }
+        if (existing !== undefined) {
+          truncated++;
+          console.log(`${TAG} re-copying ${target}: ${existing} bytes present, source is ${size}`);
         }
         plan.push({ from: key, to: target });
       }
@@ -246,7 +269,10 @@ async function main(): Promise<void> {
     console.log(`${TAG} ${from} -> ${to}: ${found} object(s), ${present} already present`);
   }
 
-  console.log(`${TAG} ${plan.length} object(s) to copy, ${stats.skipped} already present`);
+  console.log(
+    `${TAG} ${plan.length} object(s) to copy, ${stats.skipped} already present` +
+      (truncated > 0 ? `, ${truncated} present but the wrong size (re-copying)` : ''),
+  );
 
   await pooled(plan, CONCURRENCY, async ({ from, to }) => {
     try {

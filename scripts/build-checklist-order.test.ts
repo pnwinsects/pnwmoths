@@ -13,6 +13,7 @@ import {
   normalizeEpithet,
   normalizeGenus,
   orderSpecies,
+  slugOf,
   type MpgRow,
   type SpeciesRow,
 } from './build-checklist-order.ts';
@@ -223,8 +224,8 @@ describe('data/checklist-order.csv', () => {
     { columns: true, skip_empty_lines: true },
   );
   const { species, crosswalk, mpg } = loadInputs(ROOT);
-  const slugs = species.map((s) => `${s.genus}-${s.species}`.toLowerCase());
-  const familyOf = new Map(species.map((s) => [`${s.genus}-${s.species}`.toLowerCase(), s.family]));
+  const slugs = species.map(slugOf);
+  const familyOf = new Map(species.map((s) => [slugOf(s), s.family]));
 
   it('holds every species exactly once, and nothing else', () => {
     assert.deepEqual([...ordered.map((r) => r.species_slug)].sort(), [...slugs].sort());
@@ -266,8 +267,16 @@ describe('data/checklist-order.csv', () => {
     }
   });
 
+  // Compared as STRINGS, deliberately. `P No` is an alphanumeric hierarchical code —
+  // `09a0001`, `16a0082X`, `300007.85n` — so Number() is NaN for two thirds of MPG's
+  // rows, and a numeric comparator would leave `regressions` empty no matter what the
+  // file said. The character-set pin below is what keeps lexicographic ordering
+  // meaningful: a future MPG release that introduced a separator would change the
+  // sort silently, and this fails instead.
   it('never regresses in MPG sequence across the placed rows', () => {
     const placed = ordered.filter((r) => r.matched_via !== 'unplaced').map((r) => r.mpg_p_no);
+    assert.ok(placed.length > 1000, `only ${placed.length} placed rows — the check below would be vacuous`);
+    assert.deepEqual(placed.filter((p) => !/^[0-9a-zA-Z.]+$/.test(p)), [], 'P No outside the known character set');
     const regressions = placed.filter((p, i) => i > 0 && p < (placed[i - 1] ?? ''));
     assert.deepEqual(regressions, []);
   });
@@ -290,9 +299,23 @@ describe('data/checklist-order.csv', () => {
     // match is dead weight that will silently rot when MPG next changes.
     const index = buildMpgIndex(mpg);
     for (const [slug] of crosswalk) {
-      const row = species.find((s) => `${s.genus}-${s.species}`.toLowerCase() === slug);
+      const row = species.find((s) => slugOf(s) === slug);
       assert.ok(row, `crosswalk names a species not in species.csv: ${slug}`);
       assert.equal(matchSpecies(row, index, new Map()), null, `crosswalk row is redundant: ${slug}`);
     }
+  });
+
+  // species_slug here is a foreign key to data/species.csv and a URL segment.
+  // Provisional epithets carry spaces ("nr libya"), and lowercasing alone leaves them
+  // in — 14 rows of this file once joined to nothing and could not appear in a URL
+  // (#221 review). Membership is already pinned above; this is about the SHAPE.
+  it('emits only canonical slugs — lowercase alphanumerics and single hyphens', () => {
+    const invalid = ordered.map((r) => r.species_slug).filter((s) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s));
+    assert.deepEqual(invalid, []);
+  });
+
+  it('slugOf collapses whitespace in a provisional epithet', () => {
+    assert.equal(slugOf({ genus: 'Xylophanes', species: 'nr libya' }), 'xylophanes-nr-libya');
+    assert.equal(slugOf({ genus: 'Aseptis', species: 'sp No 1' }), 'aseptis-sp-no-1');
   });
 });

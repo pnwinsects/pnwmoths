@@ -66,9 +66,16 @@ Append your row at the bottom.
 
 `to_species_slug` is always lowercase and hyphen-joined, matching the slug derived from `data/species.csv`.
 
+## Schema: data/species-synonyms.csv
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| from_binomial | string | yes | `Grammia nevadensis` — the retired name, capitalised as a binomial normally is |
+| to_species_slug | string | yes | `apantesis-nevadensis` — must match a species in `data/species.csv` |
+
 Example row (illustrative only — not pre-filled in the seed file; every row is a deliberate curator decision):
 
-```
+```csv
 Grammia nevadensis,apantesis-nevadensis
 ```
 
@@ -129,4 +136,4 @@ On the command line:
 
 **A `synonym-warn target-not-in-species-csv <from> → <to>` line appeared in the log.** Your `to_species_slug` is not present in `data/species.csv`. Open `data/species.csv`, search for the genus you intended, and copy the slug exactly as it appears in the data (lowercase, hyphen-joined). The row in `data/species-synonyms.csv` was dropped and the corresponding manifest rows were NOT promoted. Correct the typo and re-run `npm run photos:investigate`.
 
-**A manifest row you expected to promote did not move.** The `from_binomial` does not exactly match the manifest's `binomial_raw`. Check for: extra trailing whitespace, mixed case (must be all lowercase), use of hyphens instead of spaces (use spaces), or a misspelling. Look at the actual `binomial_raw` value in the spreadsheet and copy it character-for-character into your synonyms.csv row.
+**A manifest row you expected to promote did not move.** The `from_binomial` does not match the manifest's `binomial_raw`. Check for: extra trailing whitespace, use of hyphens instead of spaces (use spaces), or a misspelling. **Case is not the problem here** — the photo ingest lowercases both sides before matching, so `Grammia doris` and `grammia doris` promote alike. Write it capitalised, as above: `build-key.ts` is the reader that does care, and it fails silently on a lowercase row.
