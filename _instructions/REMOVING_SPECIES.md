@@ -120,9 +120,23 @@ So if the species had a published page, `/species/<slug>/` **stays live and reac
 this change merges, frozen at its last build. It drops out of Browse, Search and the checklist,
 and nothing on the site links to it, but a bookmark or a search-engine result still finds it.
 
-Taking it down means deleting the object from the Bunny storage zone by hand, under
-`species/<slug>/`. Ask whoever holds the Bunny credentials. Photos are handled the same way —
-retired image paths are recorded in `data/cdn-retired-images.csv` rather than deleted.
+Taking it down means deleting the built page from the Bunny storage zone by hand. Ask whoever
+holds the Bunny credentials, and be precise about what comes out:
+
+- **Delete** `species/<slug>/` — the generated HTML, and nothing else. It is rebuilt from the
+  data on every deploy, so there is no original to lose.
+- **Leave the photo originals alone.** They live in the same zone under their own paths, and
+  they are the only copy. The site does not delete images even when they are superseded; it
+  records the retired path in `data/cdn-retired-images.csv` and stops referencing it. Do the
+  same here, and never point a syncing delete at the zone.
+
+Then confirm the page is actually gone:
+
+```bash
+curl -sI https://moths.pnwinsects.org/species/<slug>/ | head -1   # expect 404
+```
+
+Bunny caches, so allow a few minutes before concluding the delete did not work.
 
 ## Docker alternative
 

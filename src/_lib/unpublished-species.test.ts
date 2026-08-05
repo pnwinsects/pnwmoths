@@ -46,6 +46,13 @@ test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 4
   assert.strictEqual(unpublished.size, 45, `expected 45 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
 });
 
+test('loadUnpublishedSpecies: real CSV does NOT contain "hemileuca-nuteglan" (#268 removed, not hidden)', () => {
+  // The deny-list means "provisional, not yet described" — not "rejected". A name deleted from
+  // the catalog must not reappear here as a parking space; see docs/adr/0029-removing-a-species.md.
+  const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
+  assert.ok(!unpublished.has('hemileuca-nuteglan'), 'should not contain hemileuca-nuteglan');
+});
+
 test('loadUnpublishedSpecies: real CSV contains "euxoa-aurantiaca" (#156 curator omission)', () => {
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished.has('euxoa-aurantiaca'), 'should contain euxoa-aurantiaca');

@@ -38,11 +38,11 @@ slug, in all files — not a move to the deny-list, and not a redirect.**
 - **No redirect, because there is nothing to redirect to.** `data/species-redirects.csv` exists
   to send a visitor to the *surviving* taxon; a deleted name has no survivor. A legacy
   `/browse/…/` URL falls through to Browse, and `/species/<slug>/` is a plain 404.
-- **Derived artifacts are regenerated, never hand-edited.**
+- **Build-derived artifacts are regenerated, never hand-edited.**
   `data/records-derived-district.csv` is keyed by `row_index` into `data/records.csv`, so
   deleting rows mid-file shifts every later index; the build's coverage gate catches this.
   Re-run `scripts/derive-district-audit.ts`.
-- **Per-record run reports are pruned to match.** `data/coord-fill-report.csv` and
+- **One-shot run reports are the exception, and are pruned by hand.** `data/coord-fill-report.csv` and
   `data/legacy-rejoin-report.csv` carry one row per record examined. Neither can be reproduced
   by re-running its script today (both are one-shot backfills, one of which needs the
   out-of-tree reference database), so their nuteglan rows are deleted by hand. Pruning is
