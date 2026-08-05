@@ -331,6 +331,18 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **A green build gate says nothing about what the CDN is serving.** Deploy is additive — no
+  purge, no deletes ([0008](adr/0008-deploy-bunny-additive.md)) — so a page that stops being
+  emitted stays live at its last build, forever. `check-unpublished` passes because the gate
+  works: no deny-listed species is *emitted*. Meanwhile 32 of the 45 deny-listed slugs were
+  still returning 200 in production, alongside a species deleted outright in
+  [#268](https://github.com/pnwinsects/pnwmoths/issues/268)
+  ([#273](https://github.com/pnwinsects/pnwmoths/issues/273)). Nothing linked to them and they
+  were out of the sitemap, which is exactly why nobody noticed. "The build doesn't emit it" and
+  "it isn't on the internet" are different claims: verify the second with `curl -sI` against the
+  live host, not by reading `_site/`. Any *removal* — of a page, a route, an asset — needs that
+  second check written into its runbook.
+
 - **Compare entry points with `pathToFileURL(process.argv[1]).href`, never
   `` `file://${process.argv[1]}` ``.** `import.meta.url` is a normalized file URL
   (`file:///C:/a/b.ts`); `process.argv[1]` on Windows is a backslash path (`C:\a\b.ts`).
