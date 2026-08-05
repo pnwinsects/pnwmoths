@@ -9,9 +9,9 @@
 // Steps:
 //   1. loadUnpublishedSpecies() — if empty, print skip message and exit 0.
 //   2. Well-formedness: assert each deny-list slug matches exactly one species.csv row.
-//   3. PAGE/DATA GATE: readdir _site/species; decode percent-encoding; normalize;
-//      a deny-listed directory is a page leak if it holds an index.html, a data
-//      leak otherwise.
+//   3. PAGE/DATA GATE: readdir _site/species; decode + normalize each basename to
+//      match the deny-list; a deny-listed directory is a page leak if it holds an
+//      index.html, a data leak otherwise.
 //   4. KEY-MATRIX GATE: read data/key-matrix.json species[].slug; check for leaks.
 //   5. Non-empty leak collections → actionable message + exit 1.
 //      Otherwise print pass summary + exit 0.
@@ -28,7 +28,12 @@ import { pathToFileURL } from 'node:url';
 export interface FindUnpublishedLeaksOptions {
   /** Normalized deny-list slugs (hyphenated, lowercased). */
   unpublishedSlugs: Set<string>;
-  /** Raw directory basenames from _site/species/ (may be space-encoded or percent-encoded). */
+  /**
+   * Directory basenames from _site/species/, EXACTLY as they appear on disk —
+   * percent-encoded forms included. They are decoded for slug matching and used
+   * verbatim for the filesystem probe; passing a pre-decoded name would make the
+   * probe miss "aseptis-sp%20no%201" and misreport a page leak as a data leak.
+   */
   emittedSlugs: string[];
   /**
    * Root of the built site, used to tell a page leak from a data-only leak.
@@ -65,6 +70,22 @@ export interface UnpublishedLeakReport {
  * A leak is any emitted or key-matrix slug whose normalizeSlug form is a member
  * of unpublishedSlugs.
  */
+/**
+ * Percent-decode a directory basename, tolerating names that are not valid encodings.
+ *
+ * A literal "%" in a filename ("100% cotton") makes decodeURIComponent throw a
+ * URIError. A gate that throws on an odd filename fails the build for the wrong
+ * reason and hides whatever it was actually looking for, so an undecodable name
+ * is matched as-is.
+ */
+function decodeBasename(basename: string): string {
+  try {
+    return decodeURIComponent(basename);
+  } catch {
+    return basename;
+  }
+}
+
 export function findUnpublishedLeaks(opts: FindUnpublishedLeaksOptions): UnpublishedLeakReport {
   const { unpublishedSlugs, emittedSlugs, keyMatrixSlugs, siteDir } = opts;
 
@@ -73,7 +94,9 @@ export function findUnpublishedLeaks(opts: FindUnpublishedLeaksOptions): Unpubli
   const keyMatrixLeaks: string[] = [];
 
   for (const raw of emittedSlugs) {
-    if (!unpublishedSlugs.has(normalizeSlug(raw))) continue;
+    if (!unpublishedSlugs.has(normalizeSlug(decodeBasename(raw)))) continue;
+    // The probe uses `raw`, not the decoded form: the directory on disk is the
+    // encoded one, and resolve() would build a path that does not exist.
     const hasPage =
       siteDir === undefined || existsSync(resolve(siteDir, 'species', raw, 'index.html'));
     if (hasPage) {
@@ -135,11 +158,10 @@ function main(): void {
   const siteSpeciesDir = resolve('_site', 'species');
   let emittedSlugs: string[] = [];
   if (existsSync(siteSpeciesDir)) {
-    emittedSlugs = readdirSync(siteSpeciesDir).map(basename =>
-      // Decode percent-encoding so both "aseptis-sp%20no%201" and literal-space
-      // forms normalize identically via normalizeSlug.
-      decodeURIComponent(basename)
-    );
+    // Pass the on-disk basenames through untouched. findUnpublishedLeaks decodes
+    // them for matching (so "aseptis-sp%20no%201" and the literal-space form
+    // normalize identically) and needs the undecoded form to stat the directory.
+    emittedSlugs = readdirSync(siteSpeciesDir);
   } else {
     console.warn('[check-unpublished] _site/species not found — skipping page gate');
   }

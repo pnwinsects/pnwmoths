@@ -132,3 +132,57 @@ test('findUnpublishedLeaks: without siteDir every leak stays a page leak (caller
   assert.deepStrictEqual(leaks.pageLeaks, ['drasteria-sp']);
   assert.deepStrictEqual(leaks.dataLeaks, []);
 });
+
+test('findUnpublishedLeaks: a percent-encoded directory holding index.html is a PAGE leak', () => {
+  // The directory on disk is "aseptis-sp%20no%201"; the deny-list stores
+  // "aseptis-sp-no-1". Matching needs the decoded form, the filesystem probe needs
+  // the encoded one — get that backwards and a real page leak is filed as a data leak.
+  const tmpDir = mkdtempSync(join(tmpdir(), 'check-unpublished-encoded-'));
+  const onDisk = 'aseptis-sp%20no%201';
+  mkdirSync(join(tmpDir, 'species', onDisk), { recursive: true });
+  writeFileSync(join(tmpDir, 'species', onDisk, 'index.html'), '<html>leaked</html>');
+
+  try {
+    const leaks = findUnpublishedLeaks({
+      unpublishedSlugs: new Set(['aseptis-sp-no-1']),
+      emittedSlugs: [onDisk],
+      keyMatrixSlugs: [],
+      siteDir: tmpDir,
+    });
+    assert.deepStrictEqual(leaks.pageLeaks, [onDisk]);
+    assert.deepStrictEqual(leaks.dataLeaks, []);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('findUnpublishedLeaks: a percent-encoded directory with only data is a DATA leak', () => {
+  const tmpDir = mkdtempSync(join(tmpdir(), 'check-unpublished-encoded-data-'));
+  const onDisk = 'aseptis-sp%20no%201';
+  mkdirSync(join(tmpDir, 'species', onDisk), { recursive: true });
+  writeFileSync(join(tmpDir, 'species', onDisk, 'records.parquet'), 'PAR1');
+
+  try {
+    const leaks = findUnpublishedLeaks({
+      unpublishedSlugs: new Set(['aseptis-sp-no-1']),
+      emittedSlugs: [onDisk],
+      keyMatrixSlugs: [],
+      siteDir: tmpDir,
+    });
+    assert.deepStrictEqual(leaks.pageLeaks, []);
+    assert.deepStrictEqual(leaks.dataLeaks, [onDisk]);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('findUnpublishedLeaks: a basename that is not a valid encoding is matched as-is, not thrown on', () => {
+  // decodeURIComponent("100%") throws URIError. A gate that dies on an odd
+  // filename fails the build for the wrong reason and hides the real answer.
+  const leaks = findUnpublishedLeaks({
+    unpublishedSlugs: new Set(['drasteria-sp']),
+    emittedSlugs: ['weird-100%-name', 'drasteria-sp'],
+    keyMatrixSlugs: [],
+  });
+  assert.deepStrictEqual(leaks.pageLeaks, ['drasteria-sp']);
+});
