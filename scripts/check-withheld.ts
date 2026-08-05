@@ -1,16 +1,19 @@
 // scripts/check-withheld.ts
 // Post-build gate: hard-fails (exit 1) if any withheld-family species has an
-// emitted page in _site/species/ OR appears in data/key-matrix.json.
-// Run via: npm run build:check-withheld (after build:eleventy)
+// emitted page in _site/species/, ANY OTHER FILE under _site/species/<slug>/
+// (occurrence Parquet — #275), OR appears in data/key-matrix.json.
+// Run via: npm run build:check-withheld — AFTER build:copy-parquet, which is the
+// step that used to write the data leak this gate now catches.
 //
 // Steps:
 //   1. loadWithheldFamilies() — if empty, print skip message and exit 0.
 //   2. Parse data/species.csv; compute withheld-family slugs.
 //   3. PAGE GATE: assert no _site/species/<slug>/index.html exists.
-//   4. KEY-MATRIX GATE: assert no key-matrix.json species[].slug is withheld.
-//   5. Non-empty leak collections → actionable message + exit 1.
+//   4. DATA GATE: assert no OTHER file exists under _site/species/<slug>/.
+//   5. KEY-MATRIX GATE: assert no key-matrix.json species[].slug is withheld.
+//   6. Non-empty leak collections → actionable message + exit 1.
 //      Otherwise print pass summary + exit 0.
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { loadWithheldFamilies } from '../src/_lib/withheld-families.ts';
@@ -32,6 +35,17 @@ export interface FindLeaksOptions {
 export interface LeakReport {
   /** Withheld slugs with an emitted _site/species/<slug>/index.html. */
   pageLeaks: string[];
+  /**
+   * Withheld slugs with any OTHER file under _site/species/<slug>/ — occurrence
+   * Parquet, most of the time.
+   *
+   * A page is not the only way to publish a species. `copy-parquet.ts` used to
+   * copy data/parquet/ wholesale, serving embargoed occurrence records at
+   * /species/{slug}/records.parquet while the page itself 404'd (#275). The
+   * invariant this enforces is the strong one: a withheld slug has NOTHING
+   * under its site directory, whatever future build steps decide to write there.
+   */
+  dataLeaks: string[];
   /** Withheld slugs found in key-matrix.json species[].slug. */
   keyMatrixLeaks: string[];
 }
@@ -47,19 +61,26 @@ export function findLeaks(opts: FindLeaksOptions): LeakReport {
   const { withheldSlugs, siteDir, keyMatrixSlugs } = opts;
 
   const pageLeaks: string[] = [];
+  const dataLeaks: string[] = [];
   const keyMatrixLeaks: string[] = [];
 
   for (const slug of withheldSlugs) {
-    const pagePath = resolve(siteDir, 'species', slug, 'index.html');
-    if (existsSync(pagePath)) {
+    const speciesDir = resolve(siteDir, 'species', slug);
+    if (existsSync(resolve(speciesDir, 'index.html'))) {
       pageLeaks.push(slug);
+    }
+    if (existsSync(speciesDir)) {
+      const others = readdirSync(speciesDir).filter(name => name !== 'index.html');
+      if (others.length > 0) {
+        dataLeaks.push(`${slug} (${others.join(', ')})`);
+      }
     }
     if (keyMatrixSlugs.has(slug)) {
       keyMatrixLeaks.push(slug);
     }
   }
 
-  return { pageLeaks, keyMatrixLeaks };
+  return { pageLeaks, dataLeaks, keyMatrixLeaks };
 }
 
 // ---------------------------------------------------------------------------
@@ -105,16 +126,23 @@ function main(): void {
 
   // 4. Run the pure leak detector
   const siteDir = resolve('_site');
-  const { pageLeaks, keyMatrixLeaks } = findLeaks({ withheldSlugs, siteDir, keyMatrixSlugs });
+  const { pageLeaks, dataLeaks, keyMatrixLeaks } = findLeaks({ withheldSlugs, siteDir, keyMatrixSlugs });
 
   // 5. Report
-  const hasLeaks = pageLeaks.length > 0 || keyMatrixLeaks.length > 0;
+  const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0;
 
   if (hasLeaks) {
     if (pageLeaks.length > 0) {
       console.error(
         `[check-withheld] PAGE GATE FAILED: ${pageLeaks.length} withheld species emitted pages:\n` +
         pageLeaks.map(s => `  _site/species/${s}/index.html`).join('\n'),
+      );
+    }
+    if (dataLeaks.length > 0) {
+      console.error(
+        `[check-withheld] DATA GATE FAILED: ${dataLeaks.length} withheld species have files under ` +
+        `_site/species/ (occurrence data is published even when the page is not — #275):\n` +
+        dataLeaks.map(s => `  _site/species/${s}`).join('\n'),
       );
     }
     if (keyMatrixLeaks.length > 0) {
@@ -127,7 +155,7 @@ function main(): void {
   }
 
   console.log(
-    `[check-withheld] PASS: checked ${withheldSlugCount} withheld slugs — 0 page leaks, 0 key-matrix leaks`,
+    `[check-withheld] PASS: checked ${withheldSlugCount} withheld slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks`,
   );
   process.exit(0);
 }

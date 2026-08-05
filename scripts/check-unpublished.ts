@@ -1,12 +1,17 @@
 // scripts/check-unpublished.ts
 // Post-build gate: hard-fails (exit 1) if any deny-listed provisional/undescribed
-// species has an emitted page in _site/species/ OR appears in data/key-matrix.json.
-// Run via: npm run build:check-unpublished (after build:eleventy and build:key)
+// species has an emitted page in _site/species/, has any OTHER file under
+// _site/species/<slug>/ (occurrence Parquet — #275), OR appears in
+// data/key-matrix.json.
+// Run via: npm run build:check-unpublished — AFTER build:copy-parquet, which is
+// the step that used to write the data leak this gate now catches.
 //
 // Steps:
 //   1. loadUnpublishedSpecies() — if empty, print skip message and exit 0.
 //   2. Well-formedness: assert each deny-list slug matches exactly one species.csv row.
-//   3. PAGE GATE: readdir _site/species; decode percent-encoding; normalize; check for leaks.
+//   3. PAGE/DATA GATE: readdir _site/species; decode percent-encoding; normalize;
+//      a deny-listed directory is a page leak if it holds an index.html, a data
+//      leak otherwise.
 //   4. KEY-MATRIX GATE: read data/key-matrix.json species[].slug; check for leaks.
 //   5. Non-empty leak collections → actionable message + exit 1.
 //      Otherwise print pass summary + exit 0.
@@ -25,13 +30,28 @@ export interface FindUnpublishedLeaksOptions {
   unpublishedSlugs: Set<string>;
   /** Raw directory basenames from _site/species/ (may be space-encoded or percent-encoded). */
   emittedSlugs: string[];
+  /**
+   * Root of the built site, used to tell a page leak from a data-only leak.
+   * Omit to classify every emitted directory as a page leak (the pre-#275 behaviour).
+   */
+  siteDir?: string;
   /** Raw slugs from data/key-matrix.json species[].slug. */
   keyMatrixSlugs: string[];
 }
 
 export interface UnpublishedLeakReport {
-  /** Deny-listed slugs with an emitted _site/species/<dir>/. */
+  /** Deny-listed slugs with an emitted _site/species/<dir>/index.html. */
   pageLeaks: string[];
+  /**
+   * Deny-listed slugs whose site directory exists but holds no page — occurrence
+   * Parquet, most of the time.
+   *
+   * Reported apart from pageLeaks because the two have different causes and
+   * different fixes: a page leak means the display gate failed, a data leak means
+   * a build step wrote into _site/species/ without consulting the gate at all,
+   * which is exactly what copy-parquet.ts did for 45 deny-listed species (#275).
+   */
+  dataLeaks: string[];
   /** Deny-listed slugs found in key-matrix.json species[].slug. */
   keyMatrixLeaks: string[];
 }
@@ -46,14 +66,20 @@ export interface UnpublishedLeakReport {
  * of unpublishedSlugs.
  */
 export function findUnpublishedLeaks(opts: FindUnpublishedLeaksOptions): UnpublishedLeakReport {
-  const { unpublishedSlugs, emittedSlugs, keyMatrixSlugs } = opts;
+  const { unpublishedSlugs, emittedSlugs, keyMatrixSlugs, siteDir } = opts;
 
   const pageLeaks: string[] = [];
+  const dataLeaks: string[] = [];
   const keyMatrixLeaks: string[] = [];
 
   for (const raw of emittedSlugs) {
-    if (unpublishedSlugs.has(normalizeSlug(raw))) {
+    if (!unpublishedSlugs.has(normalizeSlug(raw))) continue;
+    const hasPage =
+      siteDir === undefined || existsSync(resolve(siteDir, 'species', raw, 'index.html'));
+    if (hasPage) {
       pageLeaks.push(raw);
+    } else {
+      dataLeaks.push(raw);
     }
   }
 
@@ -63,7 +89,7 @@ export function findUnpublishedLeaks(opts: FindUnpublishedLeaksOptions): Unpubli
     }
   }
 
-  return { pageLeaks, keyMatrixLeaks };
+  return { pageLeaks, dataLeaks, keyMatrixLeaks };
 }
 
 // ---------------------------------------------------------------------------
@@ -131,15 +157,28 @@ function main(): void {
   }
 
   // 5. Run the pure leak detector
-  const { pageLeaks, keyMatrixLeaks } = findUnpublishedLeaks({ unpublishedSlugs: unpublished, emittedSlugs, keyMatrixSlugs });
+  const { pageLeaks, dataLeaks, keyMatrixLeaks } = findUnpublishedLeaks({
+    unpublishedSlugs: unpublished,
+    emittedSlugs,
+    keyMatrixSlugs,
+    siteDir: resolve('_site'),
+  });
 
-  const hasLeaks = pageLeaks.length > 0 || keyMatrixLeaks.length > 0;
+  const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0;
 
   if (hasLeaks) {
     if (pageLeaks.length > 0) {
       console.error(
         `[check-unpublished] PAGE GATE FAILED: ${pageLeaks.length} unpublished species emitted pages:\n` +
         pageLeaks.map(s => `  _site/species/${s}/`).join('\n'),
+      );
+    }
+    if (dataLeaks.length > 0) {
+      console.error(
+        `[check-unpublished] DATA GATE FAILED: ${dataLeaks.length} unpublished species have files ` +
+        `under _site/species/ with no page (occurrence data is published even when the page is ` +
+        `not — #275):\n` +
+        dataLeaks.map(s => `  _site/species/${s}/`).join('\n'),
       );
     }
     if (keyMatrixLeaks.length > 0) {
@@ -152,7 +191,7 @@ function main(): void {
   }
 
   console.log(
-    `[check-unpublished] PASS: checked ${unpublished.size} deny-list slugs — 0 page leaks, 0 key-matrix leaks`,
+    `[check-unpublished] PASS: checked ${unpublished.size} deny-list slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks`,
   );
   process.exit(0);
 }
