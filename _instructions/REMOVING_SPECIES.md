@@ -17,12 +17,20 @@ Removal is for the case where nothing survives to point at. The reasoning is in
 
 ## Before you start
 
-**Does the species have a live page right now?** Open
-`https://moths.pnwinsects.org/species/<slug>/` in a browser.
+**Does the species have a live page right now?** Ask the live site, not the repo — a species
+can be hidden from every build and still be published, because deploys never delete:
+
+```bash
+curl -sI https://moths.pnwinsects.org/species/<slug>/ | head -1
+```
 
 - **404** — good, nothing is published. Skip to step 1.
-- **The page loads** — read the warning at the bottom of this file *first*. Deleting the rows
-  will not take that page down.
+- **200** — the page loads. Read the warning at the bottom of this file *first*. Deleting the
+  rows will not take it down.
+
+Do not answer this question by looking at `_site/`, or by reasoning that the species is already
+hidden. That is exactly the mistake made in #268: the species had been deny-listed for a month,
+emitted no page, and was still live at its old build — along with 32 others (#273).
 
 The slug is the genus and species, lowercased and joined with a hyphen: *Hemileuca nuteglan* →
 `hemileuca-nuteglan`.

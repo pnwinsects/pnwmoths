@@ -54,9 +54,15 @@ slug, in all files — not a move to the deny-list, and not a redirect.**
 - **The CDN keeps whatever it was already serving.** Deploy is additive — no purge, no deletes
   ([ADR 0008](0008-deploy-bunny-additive.md)) — so removing a species that *had* a published
   page does not take that page down. It has to be deleted from the storage zone by hand, the
-  way retired images are tracked in `data/cdn-retired-images.csv`. This cost nothing for
-  *nuteglan*, which was deny-listed and so never had a page, and it is the single step most
-  likely to be missed next time. `_instructions/REMOVING_SPECIES.md` leads with it.
+  way retired images are tracked in `data/cdn-retired-images.csv`. This is the single step most
+  likely to be missed, and it was missed here: *nuteglan* had been deny-listed since #106 and
+  emits no page, which was mistaken for never having had one — but a page published before the
+  deny-listing was still live at `/species/hemileuca-nuteglan/`, frozen at its 2026-07-18
+  build. Probing production afterwards found 32 other deny-listed species in the same state.
+  Tracked in [#273](https://github.com/pnwinsects/pnwmoths/issues/273); the general lesson is
+  that the build gate says nothing about what the CDN is serving.
+  `_instructions/REMOVING_SPECIES.md` leads with the check against production, not against the
+  build.
 - **The removed slug becomes a permanent entry in "Unmapped Legacy Links."**
   `scripts/fetch-analytics.ts` replays the legacy resolver over CDN logs and reports every
   unmatched species-shaped path as a mapping nobody has written
