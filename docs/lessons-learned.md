@@ -267,6 +267,41 @@ cost a debugging cycle to discover.
 
 ## Data migration & integrity
 
+- **A genus rename has to be all-or-nothing.** Renaming two of our six *Protorthodes* to
+  *Trichopolia* (#259) split one genus into two interleaved blocks in checklist order, because
+  MPG holds all six under *Trichopolia* — so our display genus alternated down the page. If an
+  external list moves a genus, either follow it for every species we hold in that genus or for
+  none; a partial move is worse than either ([ADR 0030](adr/0030-checklist-order-from-mpg.md)).
+
+- **Two consumers, two case conventions, one column.** `data/species-synonyms.csv`'s
+  `from_binomial` is lowercased by `ingest-photos.ts` before matching but compared
+  **case-sensitively** by `build-key.ts` against the frozen Lucid source. A lowercase row is
+  therefore silently invisible to the key: no error, just `build-key: 1188 matched` where it had
+  been 1191. Write it capitalised. When a shared column has no single normalizer, the looser
+  consumer hides the stricter one's failure.
+
+- **Re-keying a slug means re-keying every path that embeds it.** A rename touches
+  `image-derivatives.csv` in two path shapes — `<slug>/<file>` for legacy photos and
+  `species-tiles/<slug>/…` for high-res tiles. Fixing only the first passes `npm test` and fails
+  `check-derivatives.ts` at build time; fixing both makes the ledger assert CDN objects that do
+  not exist until a maintainer runs the copy. Grep for the bare slug, not for one prefix.
+
+- **A generated artifact must not carry hand-added fields.** `data/species-photos.json` holds
+  `photographer` and `license` on all 1,241 species; `generate-species-photos.ts` has never
+  produced them, so `npm run photos:materialize` silently strips every credit. The generator
+  documents this in a comment, which is exactly where a runbook step
+  ([#214](https://github.com/pnwinsects/pnwmoths/issues/214) step 2 is "regenerate it") will not
+  look. Either the generator emits the field or the field lives in its own file — "add it manually
+  afterwards" is a data-loss bug with a delay fuse ([#267](https://github.com/pnwinsects/pnwmoths/issues/267),
+  [ADR 0017](adr/0017-reproducible-committed-artifacts.md)). Note that types did not save us:
+  `speciesPhotos.ts` requires both fields, but the error only fires *after* the damage is staged,
+  and a 1,200-key structural mismatch reads as a JSON shape problem, not as lost attribution.
+
+- **`parse` + `stringify` round-tripping a CSV rewrites quoting you did not touch.**
+  `csv-stringify` quotes only where required, so rows whose fields carried unnecessary quotes
+  come back unquoted and land in the diff as unrelated churn. After a scripted edit, diff for
+  changed lines that do not mention your target and restore them.
+
 - **Add a uniqueness pre-flight before the full build.** A `GROUP BY slug HAVING count(*)
   > 1` assertion in the migration test scaffold catches duplicate-key collisions (which
   become Eleventy permalink clashes) from the CSV alone — cheaper than discovering them

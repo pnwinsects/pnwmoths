@@ -30,7 +30,7 @@ Implementation patterns, constraints, and gotchas from the high-res photo pipeli
 ## Architecture invariants
 
 - **Static only** — pure static files, no server or database at runtime, ever ([ADR 0001](docs/adr/0001-static-no-server.md)). All pipeline operations (upload, tiling, district assignment) are maintainer-run scripts on a local machine; there is no data/build server.
-- **`species_slug` = `(genus+'-'+species).toLowerCase()`** is the foreign key across every CSV and the URL structure. Never derive join slugs from image filenames.
+- **`species_slug` = `(genus+'-'+species).toLowerCase()`, then whitespace runs collapsed to hyphens** — is the foreign key across every CSV and the URL structure. The collapse is not optional: provisional epithets carry spaces (`Xylophanes` + `nr libya` → `xylophanes-nr-libya`), and lowercasing alone silently produces a key that joins to nothing. Use [`normalizeSlug`](src/_lib/unpublished-species.ts) rather than restating the rule. Never derive join slugs from image filenames.
 - **Graceful no-JS degradation is mandatory** — taxonomy, prose, and photos must render as static HTML; Lit components enhance, never gate, content.
 - **Occurrence data loads async from per-species Parquet** (Snappy compression, read by hyparquet); it is never inlined and is excluded from the Pagefind index.
 - **`pathPrefix` is conditional on `process.env.GITHUB_PAGES`** — `/` for production, `/pnwmoths/` for GitHub Pages staging. Never hardcode `/pnwmoths/`.
