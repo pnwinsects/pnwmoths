@@ -29,24 +29,55 @@ The decisions were already written down — scattered across issue comments, `re
 - **UI and presentation preferences** → their issues. Menu order and map zoom are not catalogue facts.
 - **Bug reports.** "Italics aren't rendering" is a bug, not a decision.
 
-## Conventions
+## How to add an entry
 
-- **Entries are append-only and numbered `C-nnn`** in chronological order. Never renumber, never
-  delete. A reversal is a *new* entry that names the one it supersedes; the superseded entry gets a
-  back-pointer.
-- **Quoted text is the curator's own words**, linked to the comment it came from. Where the only
-  record is someone else's restatement, the entry says so — that distinction is the reason a
-  reversal like C-020 was possible to reconstruct at all.
-- **Status** is one of *Applied* (in `data/`), *Pending* (accepted, not yet done), *On hold*
-  (awaiting the curator or an outside authority), *Superseded*.
-- **Add the entry in the PR that acts on the decision**, alongside the data change. Not later.
+This section is the one place the rules live; the runbooks in [`_instructions/`](../_instructions/)
+point here rather than restating them.
+
+Take the next `C-nnn` number, put the entry at the **top** of the log, and give it all of:
+
+| Field | What it holds |
+| --- | --- |
+| **Number and date** | `C-nnn`, and the date the *decision* was made — not the date you wrote it up. |
+| **Title** | The ruling in one line, as an outcome: "*Schizura ipomaeae* stays in *Schizura*." |
+| **Source** | A link to where the call was made, as precise as the source allows: a **comment permalink** where there is one, otherwise the **issue body** or **PR**, labelled as such. For a decision made by email, quote it into an issue first and cite that — email is not a source anyone else can open. |
+| **Provenance** | Whether the quoted words are the **curator's own** or **someone else's restatement**. Say which, always. |
+| **Status** | See below. |
+| **The ruling itself** | Quote it where you can. A curator's sentence outlives any paraphrase of it. |
+| **Why it matters** | The consequence, the tension, or the thing that will otherwise be forgotten. This is the part worth writing. |
+| **What changed** | Which files in `data/` or `src/content/`, and the PR or ADR that carried it. |
+| **Cross-references** | `Supersedes` / `Superseded by` / `Refines` / `Refined by`, by `C-nnn`. |
+
+**Write the entry when the decision is made, not when it ships.** If your change applies it, the
+entry goes in that PR alongside the data change. If it cannot be applied yet, file the entry now as
+*Pending* or *On hold* — the log records rulings, and a ruling nobody has acted on is exactly the one
+that gets forgotten.
+
+### Status vocabulary
+
+- **Applied** — in `data/` today.
+- **Pending** — accepted, not yet done. Name the issue tracking it.
+- **On hold** — awaiting the curator or an outside authority.
+- **Superseded** — reversed by a later entry, which the entry names.
+
+An entry covering several items may carry **scoped statuses**, semicolon-separated with the scope in
+parentheses: *Applied (renames); Pending (merges — #265)*. See C-014, C-017 and C-019. Splitting one
+ruling into several entries to keep statuses simple is the wrong trade — the ruling is the unit.
+
+### Append-only, with two exceptions
+
+Entries are never renumbered, rewritten or deleted. Exactly two edits to an existing entry are
+allowed: **updating its Status** as work lands, and **adding a back-pointer** to a later entry that
+supersedes or refines it. A changed ruling is a new entry, never an edit to the old one — that is
+what made C-020 possible to reconstruct.
 
 ---
 
 ## C-020 · 2026-08-05 · *Schizura ipomaeae* stays in *Schizura*
 
-**Issue** [#269](https://github.com/pnwinsects/pnwmoths/issues/269) · **Applied**
-[PR #282](https://github.com/pnwinsects/pnwmoths/pull/282) · **Supersedes** part of C-012
+**Source** [#269 issue body](https://github.com/pnwinsects/pnwmoths/issues/269), the curator's own
+words · **Status** Applied ([PR #282](https://github.com/pnwinsects/pnwmoths/pull/282)) ·
+**Supersedes** part of C-012
 
 > Currently, Schizura ipomaeae has a page on the site but the genus doesn't appear on the Browse
 > page. I suspect this was from when we migrated two species (conspecta, unicornis) from Schizura
@@ -60,8 +91,8 @@ search entry all returned. The stale page Merrill saw was an additive-deploy lef
 
 ## C-019 · 2026-08-05 · Two of three found-while-matching merges confirmed; *Catocala allusa* held
 
-**Issue** [#265](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5195492377) ·
-**Status** Pending (merges), On hold (*Catocala*)
+**Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5195492377), the curator's own words ·
+**Status** Pending (the two confirmed merges — #265); On hold (*Catocala allusa*)
 
 > It's fine to: 1) treat Macaria submarmorata as a synonym subsumed within M. signaria. 2) treat
 > Phyllodesma coturnix as a synonym subsumed within P. americana. For now, hold off on making any
@@ -76,8 +107,8 @@ is dropped.
 
 ## C-018 · 2026-08-05 · *Hemileuca nuteglan* deleted outright
 
-**Issue** [#268](https://github.com/pnwinsects/pnwmoths/issues/268#issuecomment-5195457970) ·
-**Applied** [ADR 0029](adr/0029-removing-a-species.md)
+**Source** [#268 comment](https://github.com/pnwinsects/pnwmoths/issues/268#issuecomment-5195457970), the curator's own words ·
+**Status** Applied ([ADR 0029](adr/0029-removing-a-species.md))
 
 > Go ahead and entirely delete Hemileuca nuteglan from the site, including any records associated
 > with it. Having a query for the page redirect to a 404 is fine.
@@ -89,8 +120,8 @@ have been in it, distinct from *provisional* (C-004) and *superseded* (C-016).
 
 ## C-017 · 2026-08-05 · Records and images follow the name; *marmorata* disambiguated
 
-**Issue** [#259](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5195750440) ·
-**Status** Applied (renames), Pending (merges — see C-019)
+**Source** [#259 comment](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5195750440), the curator's own words ·
+**Status** Applied (renames); Pending (merges — see C-019)
 
 > All records and images under the old names should be migrated to the new names. Currently, the
 > page for Drasteria maculosa has prose and photos but no dots on the map.
@@ -106,8 +137,8 @@ Also settled in the same comment:
 
 ## C-016 · 2026-08-03 · Eight names resolved against the MPG master list
 
-**Issue** [#259](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5172589343) ·
-**Status** Applied (renames), Pending (merges — see C-019, #265)
+**Source** [#259 comment](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5172589343), the curator's own words ·
+**Status** Applied (renames); Pending (merges — see C-019, #265)
 
 | Ours | Becomes | Kind |
 | --- | --- | --- |
@@ -128,8 +159,8 @@ immediately after aemula."*
 
 ## C-015 · 2026-08-03 · iNaturalist record admission policy
 
-**Issue** [#23](https://github.com/pnwinsects/pnwmoths/issues/23#issuecomment-5169980381) ·
-**Applied** [ADR 0026](adr/0026-inaturalist-project-sync.md)
+**Source** [#23 comment](https://github.com/pnwinsects/pnwmoths/issues/23#issuecomment-5169980381), the curator's own words ·
+**Status** Applied ([ADR 0026](adr/0026-inaturalist-project-sync.md))
 
 Only research-grade observations from the [pnwmoths iNat project](https://www.inaturalist.org/projects/pnwmoths),
 and:
@@ -147,7 +178,7 @@ The 2 km ceiling is a curator standard, not a technical limit — worth knowing 
 
 ## C-014 · 2026-08-02 · Geometrid genera placed; *Speranza* retired; second list named "Checklist"
 
-**Issue** [#218](https://github.com/pnwinsects/pnwmoths/issues/218#issuecomment-5160842499) ·
+**Source** [#218 comment](https://github.com/pnwinsects/pnwmoths/issues/218#issuecomment-5160842499), the curator's own words ·
 **Status** Applied (checklist order and the Checklist page —
 [ADR 0030](adr/0030-checklist-order-from-mpg.md), [ADR 0031](adr/0031-checklist-page.md)); **Pending**
 (the *Speranza* → *Macaria* rename, [#279](https://github.com/pnwinsects/pnwmoths/issues/279); the
@@ -176,8 +207,8 @@ The 2 km ceiling is a curator standard, not a technical limit — worth knowing 
 
 ## C-013 · 2026-07-21 · iNaturalist life stage governs whether a date is used
 
-**Issue** [#172](https://github.com/pnwinsects/pnwmoths/issues/172#issuecomment-5038674149) ·
-**Applied** [ADR 0018](adr/0018-phenology-reared-exclusion.md) · **Extends** C-002
+**Source** [#172 comment](https://github.com/pnwinsects/pnwmoths/issues/172#issuecomment-5038674149), the curator's own words ·
+**Status** Applied ([ADR 0018](adr/0018-phenology-reared-exclusion.md)) · **Extends** C-002
 
 > only records from iNat with life stage included and as "adult" would be eligible for having the
 > date added to our date information. All records with life stage of egg, larva, or pupa would have
@@ -190,8 +221,9 @@ record still plots on the map.
 
 ## C-012 · 2026-07-21 · Launch cleanup batch
 
-**Issue** [#157](https://github.com/pnwinsects/pnwmoths/issues/157) · **Status** Applied; the
-*Schizura* item superseded by C-020
+**Source** [#157 issue body](https://github.com/pnwinsects/pnwmoths/issues/157) — a maintainer's
+restatement of the curator's Browse review, not his words · **Status** Applied; the *Schizura* item
+**superseded by C-020**
 
 Recorded as a restatement of Merrill's Browse review, not in his words — the *Schizura* item is why
 that distinction is now a convention here.
@@ -208,7 +240,8 @@ that distinction is now a convention here.
 
 ## C-011 · 2026-07-21 · *Euxoa aurantiaca* omitted, records retained
 
-**Issue** [#156](https://github.com/pnwinsects/pnwmoths/issues/156) · **Status** Applied
+**Source** [#156 issue body](https://github.com/pnwinsects/pnwmoths/issues/156) — a maintainer's
+restatement, echoed in the `reason` column of `data/unpublished-species.csv` · **Status** Applied
 
 Not featured on the legacy site and with no completed species account, so it is deny-listed for now
 — *"omitted for now — occurrence records retained."* Recorded as a restatement, in
@@ -220,7 +253,7 @@ the name it replaced (C-005).
 
 ## C-010 · 2026-07-06 · Species to add to the Identify key
 
-**Issue** [#19](https://github.com/pnwinsects/pnwmoths/issues/19#issuecomment-4896823722) ·
+**Source** [#19 comment](https://github.com/pnwinsects/pnwmoths/issues/19#issuecomment-4896823722), the curator's own words ·
 **Status** Pending
 
 A 25-name list from Merrill's own earlier notes (*Catocala meskei*, *Admetovis icarus*,
@@ -229,8 +262,8 @@ pages but no key row. The gap is tracked in `data/key-coverage-report.json`.
 
 ## C-009 · 2026-07-03 · *Clostera brucei* photos are mostly *C. multnoma*
 
-**PR** [#110](https://github.com/pnwinsects/pnwmoths/pull/110#issuecomment-4879914499) ·
-**Applied** via [#156](https://github.com/pnwinsects/pnwmoths/issues/156)
+**Source** [#110 comment](https://github.com/pnwinsects/pnwmoths/pull/110#issuecomment-4879914499),
+the curator's own words · **Status** Applied via [#156](https://github.com/pnwinsects/pnwmoths/issues/156)
 
 > Regarding the Clostera brucei photos, only the Colorado specimen is brucei. The others (Scatter Cr,
 > Tiffany Mdws) are Clostera multnoma and should be re-mapped to that species […] This was the result
@@ -243,7 +276,8 @@ counterpart of the invariant that join slugs are never derived from image filena
 
 ## C-008 · 2026-07-03 · Content-free pages must not appear in Browse or Search
 
-**Issue** [#106](https://github.com/pnwinsects/pnwmoths/issues/106) · **Status** Applied
+**Source** [#106 issue body](https://github.com/pnwinsects/pnwmoths/issues/106), the curator's own
+words · **Status** Applied
 
 > Species with pages devoid of content are appearing in Browse, such as Noctuidae: Noctuinae: Egira
 > shows Egira aff. curialis, and the link to its page shows a page without images or other content.
@@ -254,7 +288,7 @@ absent one. Restated for provisional names in C-017.
 
 ## C-007 · 2026-07-03 · *Callopistria floridensis* and *Clostera brucei* added
 
-**Issue** [#84](https://github.com/pnwinsects/pnwmoths/issues/84#issuecomment-4879058926) ·
+**Source** [#84 comment](https://github.com/pnwinsects/pnwmoths/issues/84#issuecomment-4879058926), the curator's own words ·
 **Status** Applied
 
 > Callopistria floridensis should be added. Noctuidae: Eriopinae: Callopistria are the higher taxa
@@ -265,7 +299,7 @@ the exclusions in C-005 and C-006.
 
 ## C-006 · 2026-07-03 · Twelve legacy drafts stay unpublished; images retained
 
-**Issue** [#84](https://github.com/pnwinsects/pnwmoths/issues/84#issuecomment-4879087584) ·
+**Source** [#84 comment](https://github.com/pnwinsects/pnwmoths/issues/84#issuecomment-4879087584), the curator's own words ·
 **Status** Applied
 
 `arctia-brachyptera`, `euxoa-pimensis`, `hemileuca-juno`, `lacinipolia-acutipennis`,
@@ -283,7 +317,7 @@ records, images and Parquet survive intact for every listed name.
 
 ## C-005 · 2026-07-03 · Ten names absent from the legacy CMS stay hidden; data retained
 
-**Issue** [#84](https://github.com/pnwinsects/pnwmoths/issues/84#issuecomment-4879116956) ·
+**Source** [#84 comment](https://github.com/pnwinsects/pnwmoths/issues/84#issuecomment-4879116956), the curator's own words ·
 **Status** Applied
 
 `anarta-obesula`, `copablepharon-longipenne`, `drasteria-nubicola`, `euxoa-scandens`,
@@ -300,7 +334,7 @@ became `oedemasia-salicis`, which is published (C-011). **This exclusion never a
 
 ## C-004 · 2026-07-03 · Provisional morphospecies and the "judgement" list
 
-**Issue** [#80](https://github.com/pnwinsects/pnwmoths/issues/80#issuecomment-4878597896) ·
+**Source** [#80 comment](https://github.com/pnwinsects/pnwmoths/issues/80#issuecomment-4878597896), the curator's own words ·
 **Status** Applied as hiding, not removal
 
 > For the 20 species in the "Provisional morphospecies" bucket, there are two solutions: hide them or
@@ -327,7 +361,7 @@ came from.
 
 ## C-003 · 2026-07-01 · *Euthyatira lorata* placed; four out-of-region taxa dropped
 
-**Issue** [#73](https://github.com/pnwinsects/pnwmoths/issues/73#issuecomment-4849743794) ·
+**Source** [#73 comment](https://github.com/pnwinsects/pnwmoths/issues/73#issuecomment-4849743794), the curator's own words ·
 **Status** Applied as hiding, not deletion · **Refined by** C-014
 
 > For issue 73, Euthyatira lorata should be in Drepanidae: Thyatirinae. The other four species can
@@ -341,8 +375,8 @@ cross-reference. All four are deny-listed today; none was deleted.
 
 ## C-002 · 2026-06-29 · Reared and immature records excluded from phenology; foodplant terms not
 
-**Issue** [#59](https://github.com/pnwinsects/pnwmoths/issues/59#issuecomment-4836009937) ·
-**Applied** [ADR 0018](adr/0018-phenology-reared-exclusion.md)
+**Source** [#59 comment](https://github.com/pnwinsects/pnwmoths/issues/59#issuecomment-4836009937), the curator's own words ·
+**Status** Applied ([ADR 0018](adr/0018-phenology-reared-exclusion.md))
 
 > we could have any dates for reared specimens moved to the notes field. That way, the data would
 > continue to not be used for the graph, but would be viewable when clicking dots on maps.
@@ -357,8 +391,9 @@ record a nectar source for an adult. Extended to iNaturalist in C-013.
 
 ## C-001 · 2026-06-27 · Geometridae withheld until records and accounts exist
 
-**Issue** [#48](https://github.com/pnwinsects/pnwmoths/issues/48) · **Status** On hold ·
-**Applied** [ADR 0015](adr/0015-data-driven-gating.md)
+**Source** [#48 issue body](https://github.com/pnwinsects/pnwmoths/issues/48) — written by a
+maintainer, not the curator · **Status** On hold; gate applied
+([ADR 0015](adr/0015-data-driven-gating.md))
 
 The family is held out of pages, Browse, Identify and search because its occurrence records were
 never sourced and its species accounts were never written. **A hold, not a deletion** — the data

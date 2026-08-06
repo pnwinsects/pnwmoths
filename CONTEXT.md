@@ -53,8 +53,7 @@ Two data-driven deny-lists suppress content from the public site without deletin
 - **Withheld family** — `data/withheld-families.csv`. Holds an entire family out of pages, Browse, Identify, and search, with a build-time leak gate. Used for the **Geometridae** public embargo (GitHub issue #48), pending curator content.
 - **Unpublished species** — `data/unpublished-species.csv`. A per-species deny-list for provisional/undescribed morphospecies.
 - **`shown` / visible predicate** — the single source of truth (`stats.ts`) for whether a species appears publicly, applied consistently across all choke points.
-
-Which taxa are gated, renamed, merged, or excluded is a **curatorial decision**, recorded in [`docs/curation-log.md`](docs/curation-log.md) as a numbered `C-nnn` entry ([ADR 0032](docs/adr/0032-curation-log.md)) — as distinct from the gating *mechanism* above, which is [ADR 0015](docs/adr/0015-data-driven-gating.md). The `reason` columns in the deny-list CSVs say why a given row is there; the log survives the row's deletion.
+- **Curatorial decision** — a ruling about what the catalogue contains, what a taxon is called, where it sits, or which data is admitted: gating, renames, merges, synonymies, placements, photo attributions, record-admission policy. Recorded in [`docs/curation-log.md`](docs/curation-log.md) as a numbered `C-nnn` entry, which is authoritative on its own scope ([ADR 0032](docs/adr/0032-curation-log.md)). Distinct from the gating *mechanism* above, which is [ADR 0015](docs/adr/0015-data-driven-gating.md): *which* taxa are gated is a curatorial decision, *how* they are gated is architecture. The `reason` columns in the deny-list CSVs say why a given row is there; the log survives the row's deletion.
 
 ## Infrastructure & roles
 

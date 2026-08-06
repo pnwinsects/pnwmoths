@@ -9,10 +9,11 @@
 ## Record the Decision
 
 Each synonym row is a curatorial call about which name wins. When the decision came from the curator
-— rather than from a source you are merely transcribing — add an entry to
-[`docs/curation-log.md`](../docs/curation-log.md) alongside the CSV rows: date, issue link, the
-curator's words, and the rows you added. Next `C-nnn` number, top of the file
-([ADR 0032](../docs/adr/0032-curation-log.md)).
+— rather than from a published authority you are merely transcribing — add an entry to the
+[curation log](../docs/curation-log.md) alongside the CSV rows, in the same change. The required
+fields and the numbering rule are in
+["How to add an entry"](../docs/curation-log.md#how-to-add-an-entry), which is the one place they
+live; don't restate them from memory ([ADR 0032](../docs/adr/0032-curation-log.md)).
 
 ## Before You Start
 

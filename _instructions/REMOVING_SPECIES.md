@@ -148,14 +148,17 @@ Bunny caches, so allow a few minutes before concluding the delete did not work.
 
 ## Record the decision
 
-A removal is a curator's ruling, not a maintenance chore. Add an entry to
-[`docs/curation-log.md`](../docs/curation-log.md) in the same change: the date, a link to the issue
-or email where the call was made, the curator's own words if you have them, and what you deleted.
-Take the next `C-nnn` number and put it at the top of the log.
+A removal is a curator's ruling, not a maintenance chore. Add an entry to the
+[curation log](../docs/curation-log.md) **in this same change** — the required fields and the
+numbering rule are in ["How to add an entry"](../docs/curation-log.md#how-to-add-an-entry), which is
+the one place they live. Do not restate them from memory.
 
-Do this now rather than later. The species row is gone after this task, and with it every
-in-tree trace of why — which is exactly what the log exists to prevent
+Do it now rather than later: the species row is gone after this task, and with it every in-tree
+trace of why — the failure this log exists to prevent
 ([ADR 0032](../docs/adr/0032-curation-log.md)).
+
+If the call was made by **email**, quote it into the GitHub issue first and cite the issue. Email is
+not a source the next maintainer can open.
 
 ## Docker alternative
 

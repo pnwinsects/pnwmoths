@@ -16,8 +16,8 @@ curator's calls about the catalogue itself. Those were recorded three ways, none
   `data/species-redirects.csv` and `data/cdn-retired-images.csv` all carry one. Precise, adjacent to
   the effect, and **deleted along with the row when the decision is reversed.**
 - **An issue comment.** Authoritative and quotable, but closed issues are not somewhere anyone looks,
-  and one decision is often spread across several threads: the six merges on #265 were confirmed
-  across #218, #259 and two comments on #265.
+  and one decision is often spread across several threads: of the six merges on #265, five were
+  confirmed across #218, #259 and two comments on #265, and the sixth is still on hold.
 - **Prose in a commit message or a code comment.** Which is where it drifts.
 
 Three failures made the gap concrete:
@@ -48,11 +48,18 @@ numbered, newest-first log, whose entries are pointers plus the *why*.**
 - **Entries are numbered `C-nnn` in chronological order and never renumbered or deleted.** A
   reversal is a new entry naming the one it supersedes, and the superseded entry gets a
   back-pointer — the same rule as superseded ADRs, for the same reason.
+- **"Append-only" governs the record, not the bookkeeping.** Exactly two edits to an existing entry
+  are allowed: updating its **Status** as work lands, and adding a **back-pointer** to a later entry
+  that supersedes or refines it. The decision, the quote and its provenance are never rewritten —
+  a changed ruling is a new entry.
 - **Quoted text is the curator's own words, linked to the source comment.** Where the only record is
   someone else's restatement, the entry says so. #157 was a restatement, and its *Schizura* item was
   the one that turned out to be wrong; the provenance distinction is load-bearing, not decorative.
-- **The entry is added in the PR that acts on the decision**, next to the data change. A log
-  maintained separately from the work is a log that stops being written.
+- **The entry is written when the decision is made, not when it ships.** If the same change applies
+  it, the entry goes in that PR next to the data change. If it cannot be applied yet — awaiting other
+  work, or an outside authority — the entry goes in immediately as *Pending* or *On hold*, and a
+  later PR updates the status. Recording only what has shipped would have lost C-010, C-019 and half
+  of C-014, which are decisions with no acting change yet.
 - **The `reason` columns stay.** They are the decision at the point of use and they make a CSV
   self-explanatory; the log is what survives the row's deletion. Cheap duplication, different jobs.
 
