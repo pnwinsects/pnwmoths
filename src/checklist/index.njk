@@ -18,7 +18,12 @@ description: "The complete checklist of Pacific Northwest moths — every specie
 <noscript>
   <p><em>Filtering by state or district needs JavaScript. The complete list is below.</em></p>
 </noscript>
-<pnwm-checklist-filter data-pagefind-ignore></pnwm-checklist-filter>
+{#- path-prefix is REQUIRED, not decorative: the element fetches the two
+   species-*.json aggregates, and pathPrefix is "/pnwmoths/" on the GitHub Pages
+   staging deploy. Omit it and the fetch 404s, the catch below swallows it, and
+   the filters silently never appear — no error, no missing content, just a page
+   that quietly lost a feature. Browse passes it for the same reason. -#}
+<pnwm-checklist-filter path-prefix="{{ '/' | url }}" data-pagefind-ignore></pnwm-checklist-filter>
 
 {#- The list is not expandable, so this markup IS the page: the filter below only
    hides rows already present. Nothing is fetched to render it, so it works with
@@ -30,7 +35,11 @@ description: "The complete checklist of Pacific Northwest moths — every specie
    species that matched, rather than by repeating every slug on every enclosing
    section — this page already carries ~1,250 species, and the duplicated
    attributes would have roughly doubled its transfer size for nothing. -#}
-<div class="checklist">
+{#- data-pagefind-ignore, exactly as src/browse/index.njk does for the same list.
+   Without it this page enters the index as a 94 KB fragment of 1,253 binomials and
+   competes with every species page in site search. The heading and intro above are
+   still indexed, so the page itself remains findable by name. -#}
+<div class="checklist" data-pagefind-ignore>
   {% for family in checklist %}
     <section class="checklist-group">
       <h2 id="checklist-family-{{ family.name | lower }}">{{ family.name }}</h2>

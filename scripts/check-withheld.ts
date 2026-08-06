@@ -152,8 +152,21 @@ function main(): void {
 
   // 4. Run the pure leak detector
   const siteDir = resolve('_site');
+  // Report the count this gate actually parsed. A renamed template or a changed
+  // attribute would leave readChecklistSlugs returning [] and the gate printing
+  // "0 checklist leaks" while checking nothing at all — a pass that means the
+  // opposite of what it says.
+  const checklistSlugs = readChecklistSlugs(siteDir);
+  if (existsSync(resolve(siteDir, 'checklist', 'index.html')) && checklistSlugs.length === 0) {
+    console.error(
+      '[check-withheld] CHECKLIST GATE UNUSABLE: _site/checklist/index.html exists but no ' +
+      'species rows were parsed from it. The page markup changed and this gate is now blind.',
+    );
+    process.exit(1);
+  }
+
   const { pageLeaks, dataLeaks, keyMatrixLeaks, checklistLeaks } = findLeaks({
-    withheldSlugs, siteDir, keyMatrixSlugs, checklistSlugs: readChecklistSlugs(siteDir),
+    withheldSlugs, siteDir, keyMatrixSlugs, checklistSlugs,
   });
 
   // 5. Report
@@ -190,7 +203,9 @@ function main(): void {
   }
 
   console.log(
-    `[check-withheld] PASS: checked ${withheldSlugCount} withheld slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks, 0 checklist leaks`,
+    `[check-withheld] PASS: checked ${withheldSlugCount} withheld slugs against ` +
+    `${checklistSlugs.length} checklist rows — 0 page leaks, 0 data leaks, ` +
+    `0 key-matrix leaks, 0 checklist leaks`,
   );
   process.exit(0);
 }

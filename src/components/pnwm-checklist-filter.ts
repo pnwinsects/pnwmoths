@@ -44,6 +44,31 @@ const STATE_NAMES: Record<string, string> = {
 };
 
 /**
+ * Species recorded in a state that no selectable district can reach.
+ *
+ * Montana is capped to a western-MT county allow-list (`data/mt-county-allowlist.csv`,
+ * see docs/concerns.md), while the state aggregate is not — so 86 of Montana's 344
+ * species appear under "Montana" and under no county at all. WA/OR/ID/BC lose 1-4
+ * each to records with no district assigned. Someone building a county list would
+ * otherwise get a quietly incomplete one, which is precisely what the curator asked
+ * this page for.
+ */
+export function unreachableByDistrict(
+  allSlugs: string[],
+  stateMap: Record<string, Set<string>>,
+  districtMap: Record<string, Set<string>>,
+  selectedState: string,
+): number {
+  if (!selectedState) return 0;
+  const prefix = `${selectedState}:`;
+  return allSlugs.filter(slug => {
+    if (!stateMap[slug]?.has(selectedState)) return false;
+    for (const key of districtMap[slug] ?? []) if (key.startsWith(prefix)) return false;
+    return true;
+  }).length;
+}
+
+/**
  * Decide the visibility of every species row, given the current selection.
  *
  * Pure and exported: the DOM walk below is not worth testing, but this is — it is
@@ -77,8 +102,10 @@ export class PnwmChecklistFilter extends LitElement {
     _statesAvailable: { type: Array, state: true },
     _districtRows: { type: Array, state: true },
     _shown: { type: Number, state: true },
+    _unreachable: { type: Number, state: true },
     _total: { type: Number, state: true },
     _ready: { type: Boolean, state: true },
+    _failed: { type: Boolean, state: true },
   };
 
   _selectedState = '';
@@ -88,8 +115,10 @@ export class PnwmChecklistFilter extends LitElement {
   _districtMap: Record<string, Set<string>> = {};
   _districtRows: SpeciesDistrict[] = [];
   _shown = 0;
+  _unreachable = 0;
   _total = 0;
   _ready = false;
+  _failed = false;
 
   /** Light DOM — Pico styles the selects, and this element manipulates its siblings. */
   createRenderRoot(): this { return this; }
@@ -123,6 +152,7 @@ export class PnwmChecklistFilter extends LitElement {
       // rather than offering a filter that would silently do nothing.
       if (err instanceof SchemaValidationError) throw err;
       this._ready = false;
+      this._failed = true;
     }
   }
 
@@ -140,10 +170,9 @@ export class PnwmChecklistFilter extends LitElement {
   /**
    * Hide non-matching species, then hide any group left with nothing visible.
    *
-   * Bottom-up: a genus is empty when all its species are hidden, a tribe when all its
-   * genera are, and so on. Walking the nested sections outward from the deepest lets
-   * one pass settle every level, and keeps the headings of empty groups from
-   * stranding above a blank space.
+   * Each group asks its own descendants directly, so one pass settles every level
+   * regardless of order — a tribe sees its genera's species, not its genera's
+   * visibility. The point is that a heading never strands above a blank space.
    */
   _apply(): void {
     const rows = this._rows;
@@ -162,21 +191,33 @@ export class PnwmChecklistFilter extends LitElement {
       if (on) shown++;
     }
 
-    // Deepest-first, so an outer group sees its inner groups' final state.
-    const groups = [...document.querySelectorAll<HTMLElement>('.checklist-group')].reverse();
+    const groups = [...document.querySelectorAll<HTMLElement>('.checklist-group')];
     for (const group of groups) {
       const hasVisibleRow = [...group.querySelectorAll<HTMLElement>('li[data-slug]')].some(li => !li.hidden);
       group.hidden = !hasVisibleRow;
     }
 
     this._shown = shown;
+    this._unreachable = unreachableByDistrict(
+      rows.map(r => r.dataset['slug'] ?? ''),
+      this._stateMap,
+      this._districtMap,
+      this._selectedState,
+    );
   }
 
   render(): TemplateResult {
-    // Nothing at all until the aggregates are in hand. This element renders into the
-    // light DOM, so there is no slot to fall back to — the page's own <noscript>
-    // sits outside it and is never touched. Rendering disabled controls here would
-    // offer a filter that cannot filter.
+    // This element renders into the light DOM, so there is no slot to fall back to —
+    // the page's own <noscript> sits outside it and is never touched.
+    //
+    // A failed fetch says so rather than rendering nothing. The page's own
+    // description promises filtering; silently omitting the controls leaves a reader
+    // hunting for a feature that is simply absent, with no console error either.
+    if (this._failed) {
+      return html`<p role="status"><small>
+        Filtering is unavailable — the occurrence data could not be loaded. The complete list is below.
+      </small></p>`;
+    }
     if (!this._ready) return html``;
 
     const districts = this._selectedState ? districtsForState(this._districtRows, this._selectedState) : [];
@@ -218,6 +259,10 @@ export class PnwmChecklistFilter extends LitElement {
         ${this._selectedState
           ? html`Showing ${this._shown} of ${this._total} species.`
           : html`Showing all ${this._total} species.`}
+        ${this._unreachable > 0 && !this._selectedCounty
+          ? html`<br><small>${this._unreachable} of these have no ${districtLabel(this._selectedState).toLowerCase()}
+              recorded and will not appear under any ${districtLabel(this._selectedState).toLowerCase()}.</small>`
+          : ''}
       </p>
     `;
   }

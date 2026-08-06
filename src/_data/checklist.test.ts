@@ -86,7 +86,8 @@ test('toChecklistOrder: does not mutate its input', () => {
   assert.deepEqual(
     input[0]!.subfamilies[0]!.tribes[0]!.genera[0]!.species.map(s => s.slug),
     ['aaa-one', 'aaa-two'],
-    'the taxon tree is shared with Browse — reordering it in place would reorder Browse too',
+    'taxon.ts is not memoised today, so nothing is shared — but the day it is, an ' +
+      'in-place reorder here would silently reorder Browse as well',
   );
 });
 

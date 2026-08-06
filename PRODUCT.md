@@ -16,6 +16,7 @@ Prove that a static build pipeline can replace a Django/CMS stack for a data-hea
 
 - **Species factsheets** — taxonomy, prose description, credited photo carousel, occurrence map (Leaflet), phenology chart, similar-species row, and an OpenSeadragon deep-zoom viewer for species with high-res tiles. Interactive parts are Lit web components loading Parquet asynchronously; everything degrades gracefully with JS off.
 - **Browse** — a single accordion over the `Family → Subfamily → Genus → Species` tree, with navigation images and state + county/regional-district filters.
+- **Checklist** — the same species as a names-only list in taxonomic sequence (`/checklist/`), nested under family → subfamily → tribe → genus, with the same filters. Fully server-rendered and not expandable, so it prints and answers Ctrl-F; this is the view working entomologists asked for, and the one the legacy site served at `/browse-all/`.
 - **Identify** — a client-side character-key filter over a 237-state × 1,228-species bitset matrix (a static reimplementation of the site's exported Lucid3 key), with a live "N species match" grid.
 - **Search** — Pagefind static full-text search (occurrence data deliberately excluded from the index).
 - **Glossary** — illustrated terms, plus build-time tooltips on their first occurrence in species prose.

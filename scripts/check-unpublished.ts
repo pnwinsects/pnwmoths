@@ -190,12 +190,23 @@ function main(): void {
   }
 
   // 5. Run the pure leak detector
+  // Same blindness guard as check-withheld: a page that exists but parses to zero
+  // rows means the markup moved and this gate is checking nothing.
+  const checklistSlugs = readChecklistSlugs(resolve('_site'));
+  if (existsSync(resolve('_site/checklist/index.html')) && checklistSlugs.length === 0) {
+    console.error(
+      '[check-unpublished] CHECKLIST GATE UNUSABLE: _site/checklist/index.html exists but no ' +
+      'species rows were parsed from it. The page markup changed and this gate is now blind.',
+    );
+    process.exit(1);
+  }
+
   const { pageLeaks, dataLeaks, keyMatrixLeaks, checklistLeaks } = findUnpublishedLeaks({
     unpublishedSlugs: unpublished,
     emittedSlugs,
     keyMatrixSlugs,
     siteDir: resolve('_site'),
-    checklistSlugs: readChecklistSlugs(resolve('_site')),
+    checklistSlugs,
   });
 
   const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0 ||
@@ -232,7 +243,9 @@ function main(): void {
   }
 
   console.log(
-    `[check-unpublished] PASS: checked ${unpublished.size} deny-list slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks, 0 checklist leaks`,
+    `[check-unpublished] PASS: checked ${unpublished.size} deny-list slugs against ` +
+    `${checklistSlugs.length} checklist rows — 0 page leaks, 0 data leaks, ` +
+    `0 key-matrix leaks, 0 checklist leaks`,
   );
   process.exit(0);
 }

@@ -2,13 +2,18 @@
  * The taxonomy in CHECKLIST order — the sequence professional users expect, rather
  * than the alphabetical one Browse uses.
  *
- * This deliberately REUSES `taxon.ts`'s tree instead of building its own from
- * DuckDB. That tree has already applied both content gates
- * (`isWithheldOrUnclassified`, `isUnpublished`), and a second query would be a
- * second place for those gates to be forgotten. #275 is what that looks like when
- * it happens: a build step that read `data/` directly, published what the gates had
- * excluded, and nothing noticed for a year. Reordering a gated tree cannot leak;
- * re-deriving one can.
+ * This deliberately REUSES `taxon.ts`'s builder instead of writing its own DuckDB
+ * query. That builder applies both content gates (`isWithheldOrUnclassified`,
+ * `isUnpublished`), and a second query would be a second place for those gates to be
+ * forgotten. #275 is what that looks like when it happens: a build step that read
+ * `data/` directly, published what the gates had excluded, and nothing noticed for a
+ * year. Reordering a gated tree cannot leak; re-deriving one can.
+ *
+ * `taxon.ts` is not memoised, so this runs its query a second time — measured at
+ * ~50 ms against a multi-minute build, which is a fair price for having exactly one
+ * definition of what the site is allowed to show. The tree it returns is freshly
+ * built and not shared with Browse; the non-mutation test below is defensive rather
+ * than load-bearing, and would matter the day someone does memoise it.
  *
  * The order comes from `data/checklist-order.csv`, whose ROW ORDER is the data —
  * there is no ordinal column to sort on (see [ADR 0030]). Position in that file is
