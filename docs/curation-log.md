@@ -106,7 +106,9 @@ Three collisions remain, and all three are known and accepted: `93-0907` (*Drast
 #265 / C-016), `93-0801` (*Catocala*, on hold pending Lars Crabo — #265 / C-019), and `93-0008`
 (*Clostera*, the post-imaging split explained on #110 / C-009). That is the curator-approved
 baseline [ADR 0033](adr/0033-referential-integrity-gate.md) said a future `noc_id` collision report
-would need before it could be written.
+would need before it could be written; that report is now tracked on
+[#290](https://github.com/pnwinsects/pnwmoths/issues/290), which also proposes checking `noc_id`
+against MPG wholesale — a comparison that would have caught all seven of these without asking.
 
 Changed seven `noc_id` cells in `data/species.csv`. Nothing on the site renders differently — the
 field is displayed but not joined on — and `data/checklist-order.csv` regenerates byte-identical,
