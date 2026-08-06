@@ -1,4 +1,4 @@
-import { describe, it, test } from 'node:test';
+import { after, describe, it, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -334,6 +334,23 @@ describe('readReferences', () => {
     });
   });
 
+  it('rejects a json-array-field entry with no usable slug rather than skipping it', () => {
+    // Skipping would shrink the checked set while the gate still passed — the
+    // partial-vacuity variant of the `empty` failure mode.
+    for (const species of ['[{"slug":"aaa-one"},{}]', '[{"slug":"aaa-one"},{"slug":42}]', '[{"slug":"aaa-one"}," "]']) {
+      withFixture({ 'data/fixture.json': `{"meta":{},"species":${species}}` }, () => {
+        assert.throws(
+          () =>
+            readReferences(
+              relation({ kind: 'json-array-field', path: 'data/fixture.json', arrayKey: 'species', column: 'slug' }),
+              tmp,
+            ),
+          /species\[1\]/,
+        );
+      });
+    }
+  });
+
   it('reads basenames from an md-basenames relation, ignoring non-Markdown', () => {
     withFixture(
       {
@@ -443,9 +460,20 @@ describe('the species and exception loaders', () => {
 
   it('rejects an unknown kind rather than silently never matching', () => {
     withData(
-      { 'data/referential-integrity-exceptions.csv': 'relation,slug,kind,issue\na,b,typo,#1\n' },
+      { 'data/referential-integrity-exceptions.csv': 'relation,slug,kind,issue\nimages.csv,b,typo,#1\n' },
       () => {
         assert.throws(() => loadExceptions(tmp), /unknown kind "typo"/);
+      },
+    );
+  });
+
+  it('rejects an unknown relation rather than reporting the waiver as stale', () => {
+    // A typo'd relation matches nothing; without this it would surface as a STALE
+    // EXCEPTION, telling the maintainer the violation was fixed when it was not.
+    withData(
+      { 'data/referential-integrity-exceptions.csv': 'relation,slug,kind,issue\nimage.csv,b,orphan,#1\n' },
+      () => {
+        assert.throws(() => loadExceptions(tmp), /unknown relation "image\.csv"/);
       },
     );
   });
@@ -464,6 +492,9 @@ describe('the species and exception loaders', () => {
 describe('the CLI', () => {
   const tmp = resolve(ROOT, '.tmp-integrity-cli');
   const SCRIPT = resolve(ROOT, 'scripts/check-referential-integrity.ts');
+
+  // In a hook, not per test: a failed assertion must not strand the tree.
+  after(() => rmSync(tmp, { recursive: true, force: true }));
 
   /** A complete, minimal tree satisfying every declared relation. */
   function writeTree(over: Record<string, string> = {}): void {
@@ -505,7 +536,6 @@ describe('the CLI', () => {
     const { status, output } = gate();
     assert.equal(status, 0, output);
     assert.match(output, /PASS: \d+ references across 13 relations/);
-    rmSync(tmp, { recursive: true, force: true });
   });
 
   it('exits 1 on an orphan reference', () => {
@@ -514,7 +544,6 @@ describe('the CLI', () => {
     assert.equal(status, 1, 'a gate that does not fail is not a gate');
     assert.match(output, /FAILED: 1 violation/);
     assert.match(output, /zzz-nine/);
-    rmSync(tmp, { recursive: true, force: true });
   });
 
   it('exits 1 on a stale exception even when nothing else is wrong', () => {
@@ -524,7 +553,6 @@ describe('the CLI', () => {
     const { status, output } = gate();
     assert.equal(status, 1);
     assert.match(output, /STALE EXCEPTIONS/);
-    rmSync(tmp, { recursive: true, force: true });
   });
 
   it('exits 1 — not 0 — when a BOM would otherwise empty a relation', () => {
@@ -535,7 +563,6 @@ describe('the CLI', () => {
     const { status, output } = gate();
     assert.equal(status, 1, 'a BOM must not turn a failing gate into a passing one');
     assert.match(output, /zzz-nine/);
-    rmSync(tmp, { recursive: true, force: true });
   });
 
   it('exits 1 when a declared source is truncated to its header', () => {
@@ -543,7 +570,6 @@ describe('the CLI', () => {
     const { status, output } = gate();
     assert.equal(status, 1);
     assert.match(output, /yields NO references/);
-    rmSync(tmp, { recursive: true, force: true });
   });
 
   it('exits 1 with a named file when species.csv is missing', () => {
@@ -553,7 +579,6 @@ describe('the CLI', () => {
     assert.equal(status, 1);
     assert.match(output, /data\/species\.csv not found/);
     assert.doesNotMatch(output, /at Object\.\w+ \(node:/, 'no raw stack trace');
-    rmSync(tmp, { recursive: true, force: true });
   });
 
   it('excuses a documented violation and still exits 0', () => {
@@ -565,7 +590,6 @@ describe('the CLI', () => {
     const { status, output } = gate();
     assert.equal(status, 0, output);
     assert.match(output, /1 known exception/);
-    rmSync(tmp, { recursive: true, force: true });
   });
 });
 

@@ -37,10 +37,11 @@ The slug is the genus and species, lowercased and joined with a hyphen: *Hemileu
 
 ## 1. Delete every row that names the slug
 
-Search for the slug across `data/`, case-insensitively, and delete every line it appears on:
+Search for the slug across `data/` and `src/`, case-insensitively, and delete every line it
+appears on:
 
 ```bash
-grep -ril "<slug>" data/
+grep -ril "<slug>" data/ src/
 ```
 
 Expect hits in some of these:
@@ -59,8 +60,8 @@ Expect hits in some of these:
 | `data/coord-fill-report.csv`, `data/legacy-rejoin-report.csv` | one row per record examined by a past backfill — prune to match |
 | `src/_data/speciesSlugs.json` | the legacy-URL lookup entry |
 
-Two more hold references that `grep -ril "<slug>" data/` finds but that you must **not** fix by
-deleting a line:
+Two more hold references that the same grep finds but that you must **not** fix by deleting a
+line:
 
 | File | What to do instead |
 |---|---|
@@ -112,8 +113,8 @@ If a photo, link or key entry was missed, the build says so. Three messages poin
   gate to run, and the one that catches almost everything: a leftover row in `images.csv`,
   `species-links.csv`, `species-plates.csv`, `checklist-order.csv`, `species-synonyms.csv`,
   `mpg-crosswalk.csv`, `species-photos.json`, `speciesSlugs.json`, another species'
-  `similar_species` list, or an orphaned `src/content/species/<slug>.md`. It names the file and the
-  line, and prints what that file is for
+  `similar_species` list, or an orphaned `src/content/species/<slug>.md`. It names the file — and
+  the line, for CSV sources — and prints what that file is for
   ([ADR 0033](../docs/adr/0033-referential-integrity-gate.md)).
 - **`Validation failed — orphaned records (species_slug not in species table)`** — records were
   left behind after the species row was deleted.

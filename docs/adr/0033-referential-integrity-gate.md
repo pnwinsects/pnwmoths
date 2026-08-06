@@ -8,27 +8,27 @@
 ## Context
 
 `species_slug` is the foreign key across every CSV ([ADR 0010](0010-slug-foreign-key.md)), and until
-now exactly **one** of its thirteen relations was enforced at build time: `records → species`, as a
-DuckDB query in `build-data.ts`. The other twelve landed in one of three places, chosen historically
-rather than by principle:
+now exactly **one** of its fourteen relations was enforced at build time: `records → species`
+(`records.csv` + `records-inat.csv` over the unioned table), as a DuckDB query in `build-data.ts`.
+The other thirteen landed in one of three places, chosen historically rather than by principle:
 
-- **A build gate (1)** — `records.csv` + `records-inat.csv` → species, via DuckDB.
-  `check-unpublished.ts` also asserts that every deny-list slug matches exactly one species row,
-  which is the same shape of check on one more file. (`data/withheld-families.csv` is *not* a slug
-  relation at all — its only column is `family`.)
+- **A second build gate (1)** — `check-unpublished.ts` asserts that every deny-list slug in
+  `data/unpublished-species.csv` matches exactly one species row, the same shape of check as the
+  DuckDB one. (`data/withheld-families.csv` is *not* a slug relation at all — its only column is
+  `family`.)
 - **A unit test (3)** — `speciesSlugs.json` (both directions), `species-redirects.new_slug`,
   `checklist-order.csv`.
-- **Nothing at all (8)** — `images.csv`, `species-links.csv`, `species-plates.csv`,
+- **Nothing at all (9)** — `images.csv`, `species-links.csv`, `species-plates.csv`,
   `species-synonyms.to_species_slug`, `mpg-crosswalk.csv`, `species.csv`'s `similar_species`
-  pipe-list, `src/content/species/*.md`, and `data/species-photos.json`. Two more were not even
-  counted until this work went looking: `data/key-matrix.json`'s 1,191 `species[].slug` entries and
-  `src/_data/speciesSlugs.json`, both committed artifacts that go stale silently.
+  pipe-list, `src/content/species/*.md`, `data/species-photos.json` — and `data/key-matrix.json`,
+  whose 1,191 `species[].slug` entries were not even counted as a relation until this work went
+  looking: a committed artifact that goes stale silently.
 
 Every unguarded relation was added without anyone deciding *not* to check it. That is the actual
 failure mode: not a wrong check, but a file nobody thought to check.
 
 An orphan slug is invisible by construction. The join produces nothing, the page renders without the
-thing, no error is raised. Auditing all eleven relations found two live faults that had never
+thing, no error is raised. Auditing all fourteen relations found two live faults that had never
 surfaced:
 
 - **Five high-res photo sets that can never render.** `data/species-photos.json` keys
@@ -153,7 +153,7 @@ while the issue read as answered.
 
 ## Provenance
 
-Two reviews shaped the final shape of this, and both found real defects in the first implementation:
+Three reviews shaped the final shape of this, and each found real defects in the implementation:
 
 - **Violations were reported per row**, so one missing species referenced on four lines read as four
   faults. Caught by a test I wrote while implementing.
@@ -169,6 +169,14 @@ Two reviews shaped the final shape of this, and both found real defects in the f
   tests green. Now covered by CLI tests that run the script against a fixture tree.
 - **Reported line numbers assumed record index equalled physical line**, wrong after a blank line or
   a quoted embedded newline.
+- **A `key-matrix.json` entry without a usable `slug` was skipped silently** — a partial
+  regeneration could shrink the checked set with the gate still green, the partial-vacuity variant
+  of the `empty` failure mode. Now a hard error, like the other JSON structural faults.
+- **A typo'd `relation` in the exceptions file surfaced as a STALE EXCEPTION**, telling the
+  maintainer the violation was fixed when the waiver simply named nothing. Now rejected against
+  `RELATIONS` by name.
 - Several claims in the first draft of this record were false and are corrected above: the relation
   arithmetic, `withheld-families.csv` counted as a slug relation, the "83 broken images" cited as
-  slug orphans, and the assertion that three existing tests became redundant.
+  slug orphans, and the assertion that three existing tests became redundant. The corrected
+  arithmetic was wrong a second time (a double-counted relation and a stale "eleven") and is now
+  reconciled against the fourteen relations the script and `build-data.ts` actually enforce.

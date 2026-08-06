@@ -334,11 +334,24 @@ export function readReferences(relation: Relation, root = '.'): Reference[] | nu
       if (!Array.isArray(arr)) {
         throw new Error(`[check-referential-integrity] ${relation.path} has no array at "${arrayKey}"`);
       }
+      // Strict like `json-array`, not lenient like the CSV kinds: this file is a
+      // generated artifact, so an entry without a usable slug is corruption, and
+      // skipping it would shrink the checked set while the gate still passed.
       const refs: Reference[] = [];
-      for (const entry of arr) {
-        if (typeof entry !== 'object' || entry === null) continue;
+      for (const [i, entry] of arr.entries()) {
+        if (typeof entry !== 'object' || entry === null || Array.isArray(entry)) {
+          throw new Error(
+            `[check-referential-integrity] ${relation.path}: ${arrayKey}[${i}] is not an object`,
+          );
+        }
         const value = (entry as Record<string, unknown>)[column];
-        if (typeof value === 'string' && value.trim() !== '') refs.push({ raw: value });
+        if (typeof value !== 'string' || value.trim() === '') {
+          throw new Error(
+            `[check-referential-integrity] ${relation.path}: ${arrayKey}[${i}] has a missing, ` +
+              `non-string, or blank "${column}"`,
+          );
+        }
+        refs.push({ raw: value });
       }
       return refs;
     }
@@ -587,15 +600,24 @@ export function loadExceptions(root = '.'): Exception[] {
   return rows
     .filter((r) => (r['relation'] ?? '').trim() !== '' && (r['slug'] ?? '').trim() !== '')
     .map((r) => {
+      const relation = (r['relation'] ?? '').trim();
+      // A typo'd relation would otherwise surface as a STALE EXCEPTION, which tells
+      // the maintainer the violation was fixed when really the waiver names nothing.
+      if (!RELATIONS.some((rel) => rel.name === relation)) {
+        throw new Error(
+          `[check-referential-integrity] ${path}: unknown relation "${relation}" for ` +
+            `"${(r['slug'] ?? '').trim()}" — expected one of ${RELATIONS.map((rel) => rel.name).join(', ')}`,
+        );
+      }
       const kind = (r['kind'] ?? '').trim();
       if (!isViolationKind(kind)) {
         throw new Error(
           `[check-referential-integrity] ${path}: unknown kind "${kind}" for ` +
-            `"${(r['relation'] ?? '').trim()} ${(r['slug'] ?? '').trim()}" — expected one of ${VIOLATION_KINDS.join(', ')}`,
+            `"${relation} ${(r['slug'] ?? '').trim()}" — expected one of ${VIOLATION_KINDS.join(', ')}`,
         );
       }
       return {
-        relation: (r['relation'] ?? '').trim(),
+        relation,
         slug: (r['slug'] ?? '').trim(),
         kind,
         issue: (r['issue'] ?? '').trim(),
