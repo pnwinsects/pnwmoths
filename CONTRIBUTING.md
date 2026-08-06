@@ -86,4 +86,3 @@ _instructions/      Plain-English maintainer guides
 - **Species slug:** `(genus + '-' + species).toLowerCase()`, alphanumeric and hyphens only — the canonical key across CSVs and URLs; see [`CONTEXT.md`](CONTEXT.md) / [ADR 0010](docs/adr/0010-slug-foreign-key.md)
 - **Parquet path:** `data/parquet/{slug}/records.parquet` → deployed to `_site/species/{slug}/records.parquet`
 - **Prose path:** `src/content/species/{slug}.md` — rendered into the factsheet if present
-
