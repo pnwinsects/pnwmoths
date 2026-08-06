@@ -7,7 +7,7 @@ import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { findLeaks } from './check-withheld.ts';
+import { findLeaks, readChecklistSlugs } from './check-withheld.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -183,4 +183,59 @@ test('findLeaks: a withheld slug whose directory holds only index.html is a page
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
+});
+
+// ---------------------------------------------------------------------------
+// findLeaks — Checklist gate (#218)
+// ---------------------------------------------------------------------------
+
+test('findLeaks: a withheld species named on the Checklist page is a checklist leak', () => {
+  // The checklist lists NAMES, not pages, so this leak leaves _site/species/
+  // untouched and every other gate here sees nothing — the #275 shape.
+  const leaks = findLeaks({
+    withheldSlugs: new Set(['hydriomena-perfracta']),
+    siteDir: resolve(ROOT, '.tmp-nonexistent-site'),
+    keyMatrixSlugs: new Set<string>(),
+    checklistSlugs: ['abagrotis-apposita', 'hydriomena-perfracta'],
+  });
+  assert.deepStrictEqual(leaks.checklistLeaks, ['hydriomena-perfracta']);
+  assert.deepStrictEqual(leaks.pageLeaks, [], 'no page was emitted — that is the point');
+});
+
+test('findLeaks: a clean Checklist page produces no leak', () => {
+  const leaks = findLeaks({
+    withheldSlugs: new Set(['hydriomena-perfracta']),
+    siteDir: resolve(ROOT, '.tmp-nonexistent-site'),
+    keyMatrixSlugs: new Set<string>(),
+    checklistSlugs: ['abagrotis-apposita', 'hemileuca-nuttalli'],
+  });
+  assert.deepStrictEqual(leaks.checklistLeaks, []);
+});
+
+test('findLeaks: omitting checklistSlugs (page not built) is not a leak', () => {
+  const leaks = findLeaks({
+    withheldSlugs: new Set(['hydriomena-perfracta']),
+    siteDir: resolve(ROOT, '.tmp-nonexistent-site'),
+    keyMatrixSlugs: new Set<string>(),
+  });
+  assert.deepStrictEqual(leaks.checklistLeaks, []);
+});
+
+test('readChecklistSlugs: parses the data-slug attributes the page emits', () => {
+  const tmpDir = resolve(ROOT, '.tmp-check-withheld-checklist');
+  mkdirSync(resolve(tmpDir, 'checklist'), { recursive: true });
+  writeFileSync(
+    resolve(tmpDir, 'checklist', 'index.html'),
+    '<ul class="checklist-species"><li data-slug="abagrotis-apposita"><a>x</a></li>' +
+      '<li data-slug="hemileuca-nuttalli"><a>y</a></li></ul>',
+  );
+  try {
+    assert.deepStrictEqual(readChecklistSlugs(tmpDir), ['abagrotis-apposita', 'hemileuca-nuttalli']);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('readChecklistSlugs: an unbuilt page yields an empty list, not a throw', () => {
+  assert.deepStrictEqual(readChecklistSlugs(resolve(ROOT, '.tmp-nonexistent-site')), []);
 });

@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/styles/theme.css">
 </head>
 <body>
-  {#- Bypass block (WCAG 2.4.1): the banner, eight nav links and the search field
+  {#- Bypass block (WCAG 2.4.1): the banner, nine nav links and the search field
      are nine tab stops repeated on every page. The link is visually hidden until
      focused; see .skip-link in theme.css. -#}
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -66,6 +66,7 @@
       <ul>
         <li><a href="{{ '/' | url }}">Home</a></li>
         <li><a href="{{ '/browse/' | url }}">Browse</a></li>
+        <li><a href="{{ '/checklist/' | url }}">Checklist</a></li>
         <li><a href="{{ '/identify/' | url }}">Identify</a></li>
         <li><a href="{{ '/plates/' | url }}">Plates</a></li>
         <li><a href="{{ '/glossary/' | url }}">Glossary</a></li>

@@ -19,6 +19,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { loadUnpublishedSpecies, normalizeSlug } from '../src/_lib/unpublished-species.ts';
+import { readChecklistSlugs } from './check-withheld.ts';
 import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
@@ -40,6 +41,13 @@ export interface FindUnpublishedLeaksOptions {
    * Omit to classify every emitted directory as a page leak (the pre-#275 behaviour).
    */
   siteDir?: string;
+  /**
+   * Species slugs named by the emitted Checklist page (#218), if it was built.
+   *
+   * The checklist lists NAMES, not pages, so a deny-listed species reaching it
+   * leaves _site/species/ untouched and every gate above sees nothing.
+   */
+  checklistSlugs?: string[];
   /** Raw slugs from data/key-matrix.json species[].slug. */
   keyMatrixSlugs: string[];
 }
@@ -59,6 +67,8 @@ export interface UnpublishedLeakReport {
   dataLeaks: string[];
   /** Deny-listed slugs found in key-matrix.json species[].slug. */
   keyMatrixLeaks: string[];
+  /** Deny-listed slugs named by the emitted Checklist page. */
+  checklistLeaks: string[];
 }
 
 /**
@@ -87,7 +97,8 @@ function decodeBasename(basename: string): string {
 }
 
 export function findUnpublishedLeaks(opts: FindUnpublishedLeaksOptions): UnpublishedLeakReport {
-  const { unpublishedSlugs, emittedSlugs, keyMatrixSlugs, siteDir } = opts;
+  const { unpublishedSlugs, emittedSlugs, keyMatrixSlugs, siteDir, checklistSlugs } = opts;
+  const checklistLeaks = (checklistSlugs ?? []).filter(slug => unpublishedSlugs.has(normalizeSlug(slug)));
 
   const pageLeaks: string[] = [];
   const dataLeaks: string[] = [];
@@ -112,7 +123,7 @@ export function findUnpublishedLeaks(opts: FindUnpublishedLeaksOptions): Unpubli
     }
   }
 
-  return { pageLeaks, dataLeaks, keyMatrixLeaks };
+  return { pageLeaks, dataLeaks, keyMatrixLeaks, checklistLeaks };
 }
 
 // ---------------------------------------------------------------------------
@@ -179,14 +190,16 @@ function main(): void {
   }
 
   // 5. Run the pure leak detector
-  const { pageLeaks, dataLeaks, keyMatrixLeaks } = findUnpublishedLeaks({
+  const { pageLeaks, dataLeaks, keyMatrixLeaks, checklistLeaks } = findUnpublishedLeaks({
     unpublishedSlugs: unpublished,
     emittedSlugs,
     keyMatrixSlugs,
     siteDir: resolve('_site'),
+    checklistSlugs: readChecklistSlugs(resolve('_site')),
   });
 
-  const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0;
+  const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0 ||
+    checklistLeaks.length > 0;
 
   if (hasLeaks) {
     if (pageLeaks.length > 0) {
@@ -203,6 +216,12 @@ function main(): void {
         dataLeaks.map(s => `  _site/species/${s}/`).join('\n'),
       );
     }
+    if (checklistLeaks.length > 0) {
+      console.error(
+        `[check-unpublished] CHECKLIST GATE FAILED: ${checklistLeaks.length} unpublished species ` +
+        `named on the Checklist page:\n` + checklistLeaks.map(s => `  ${s}`).join('\n'),
+      );
+    }
     if (keyMatrixLeaks.length > 0) {
       console.error(
         `[check-unpublished] KEY-MATRIX GATE FAILED: ${keyMatrixLeaks.length} unpublished species in key-matrix.json:\n` +
@@ -213,7 +232,7 @@ function main(): void {
   }
 
   console.log(
-    `[check-unpublished] PASS: checked ${unpublished.size} deny-list slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks`,
+    `[check-unpublished] PASS: checked ${unpublished.size} deny-list slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks, 0 checklist leaks`,
   );
   process.exit(0);
 }
