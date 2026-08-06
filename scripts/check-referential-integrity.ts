@@ -5,10 +5,8 @@
 // is a data fault, not a build fault, and should be reported before anything is built.
 //
 // Why this exists: `species_slug` is the foreign key across every CSV (ADR 0010),
-// but only ONE of its relations was ever enforced at build time — records → species,
-// in build-data.ts. The rest were enforced in unit tests (speciesSlugs, redirects,
-// checklist order) or not at all (images, links, plates, synonyms, crosswalk,
-// similar_species, the content directory, the photo manifest). The split was
+// but only ONE of its relations was enforced at build time — records → species, in
+// build-data.ts. The rest were enforced in unit tests or not at all. The split was
 // historical: every unguarded relation was added without anyone deciding not to
 // check it, and #232 closed having asked for exactly this and got a derivative-
 // manifest gate instead.
@@ -18,21 +16,53 @@
 // tiled high-res photo sets (`macaria-*`, #279) and a whole species account
 // (`lacinipolia-vicina`, #285) sat unreferenced without a single build complaining.
 //
+// FOUR THINGS CAN BE WRONG, reported apart because the fixes differ:
+//   orphan    — the slug matches no species at all.
+//   near-miss — it matches only after normalization. Consumers join on the RAW
+//               cell (src/_data/images.ts, speciesLinks.ts and species.njk all use
+//               exact string equality), so "aseptis-sp no 1" resolves to nothing
+//               even though the species exists as "aseptis-sp-no-1". A gate that
+//               normalized both sides would bless exactly the silent empty join it
+//               is here to prevent.
+//   duplicate — a one-row-per-species file names the same species twice.
+//   empty     — a declared source exists but yields NO references. Almost always a
+//               renamed column, a truncated file, or a UTF-8 BOM (which turns the
+//               first header into a different string and makes every row read as
+//               undefined). Without this, the gate passes having checked nothing —
+//               the one failure it must never have.
+//
 // EXISTENCE, NOT VISIBILITY. A relation may legitimately point at a species that
 // is gated — a deny-listed taxon still has images, records and Parquet on purpose
 // (ADR 0015). This gate asserts the species.csv row EXISTS; check-withheld and
 // check-unpublished own what is published.
 //
 // KNOWN EXCEPTIONS RATCHET. `data/referential-integrity-exceptions.csv` lists the
-// orphans that exist today, each with the issue that will resolve it. A new orphan
-// fails the build; a listed one does not. A listed one that is no longer an orphan
-// ALSO fails, so the file cannot quietly accumulate stale entries — the point is to
-// let the gate land while curator questions are open, not to make it optional.
+// violations that exist today, each with the issue that will resolve it. A new one
+// fails the build; a listed one does not. A listed one that no longer describes a
+// real violation ALSO fails, so the file cannot quietly accumulate stale entries —
+// the point is to let the gate land while curator questions are open, not to make
+// it optional. The key includes `kind`, so an orphan waiver cannot silently start
+// excusing a duplicate of the same slug.
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
+
+/**
+ * Shared parse options for every CSV this gate reads.
+ *
+ * `bom: true` is load-bearing, not defensive: Excel and Notepad on Windows prepend
+ * a UTF-8 BOM, which without stripping becomes part of the first column's name and
+ * makes every row's slug read as `undefined` — a relation that checks nothing while
+ * reporting success. The same option for the same reason is in ingest-photos.ts,
+ * build-key.ts and extract-species-plates.ts.
+ *
+ * `info: true` yields the real physical line for each record, so a blank line or a
+ * quoted embedded newline (species.csv has them) cannot shift the numbers a failure
+ * message reports.
+ */
+const CSV_OPTIONS = { columns: true, skip_empty_lines: true, bom: true, info: true } as const;
 
 // ---------------------------------------------------------------------------
 // The declared relations
@@ -41,37 +71,51 @@ import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
 /**
  * How a source names the species it references.
  *
- * - `csv-column`    — one slug per row in `column`.
- * - `csv-pipe-list` — `column` holds a `|`-separated slug list (species.csv's `similar_species`).
- * - `json-keys`     — the object's keys are slugs (data/species-photos.json).
- * - `md-basenames`  — one Markdown file per species in `dir` (src/content/species).
+ * - `csv-column`       — one slug per row in `column`.
+ * - `csv-pipe-list`    — `column` holds a `|`-separated slug list (species.csv's `similar_species`).
+ * - `json-keys`        — the object's keys are slugs (data/species-photos.json).
+ * - `json-array`       — the document is an array of slug strings (src/_data/speciesSlugs.json).
+ * - `json-array-field` — `arrayKey` holds objects; `column` names their slug field
+ *                        (data/key-matrix.json `species[].slug`).
+ * - `md-basenames`     — one Markdown file per species in the directory.
  */
-export type RelationKind = 'csv-column' | 'csv-pipe-list' | 'json-keys' | 'md-basenames';
+export type RelationKind =
+  | 'csv-column'
+  | 'csv-pipe-list'
+  | 'json-keys'
+  | 'json-array'
+  | 'json-array-field'
+  | 'md-basenames';
 
 export interface Relation {
-  /** Stable identifier used in the exceptions file and in failure output. */
+  /** Stable identifier, unique across RELATIONS, used in the exceptions file and in output. */
   readonly name: string;
   /** Path to the CSV/JSON file, or the directory for `md-basenames`. */
   readonly path: string;
   readonly kind: RelationKind;
-  /** Column holding the slug(s). Required for the two CSV kinds. */
+  /** Column (CSV) or object field (`json-array-field`) holding the slug(s). */
   readonly column?: string;
+  /** For `json-array-field`: the top-level key holding the array. */
+  readonly arrayKey?: string;
   /**
-   * `unique` means no two rows may name the same species — a per-species file
-   * (one plate row, one deny-list row) where a duplicate is itself a fault.
-   * `repeated` means many rows per species is normal (images, records, links).
+   * `unique` means no two references may name the same species — a per-species file
+   * where a repeat is itself a fault. `repeated` means many per species is normal.
+   *
+   * Note that `unique` is unenforceable for `json-keys` (JSON.parse collapses repeated
+   * keys before we see them) and `md-basenames` (a directory cannot hold two files with
+   * one name). It is declared there to document intent; the duplicate check never fires.
    */
   readonly cardinality: 'unique' | 'repeated';
-  /** Why this relation exists, for whoever reads a failure. */
+  /** What the relation is for, printed with any violation so the fix is obvious. */
   readonly note: string;
 }
 
 /**
  * Every place a species is referenced by slug.
  *
- * ADDING A DATA FILE THAT NAMES SPECIES MEANS ADDING A LINE HERE. That is the
- * whole point: the failure mode this gate addresses is not a wrong check, it is a
- * file nobody thought to check.
+ * ADDING A FILE THAT NAMES SPECIES MEANS ADDING A LINE HERE. That is the whole
+ * point: the failure mode this gate addresses is not a wrong check, it is a file
+ * nobody thought to check. A test enforces it for `data/*.csv` and `data/*.json`.
  *
  * Deliberately absent:
  * - `data/records.csv` / `records-inat.csv` — build-data.ts already fails on orphaned
@@ -91,7 +135,7 @@ export const RELATIONS: readonly Relation[] = [
     kind: 'csv-column',
     column: 'species_slug',
     cardinality: 'repeated',
-    note: 'specimen photos; an orphan row renders nowhere and #232 found 83 of them',
+    note: 'specimen photos; a row whose slug does not join renders nowhere',
   },
   {
     name: 'species-links.csv',
@@ -115,7 +159,7 @@ export const RELATIONS: readonly Relation[] = [
     kind: 'csv-column',
     column: 'species_slug',
     cardinality: 'unique',
-    note: 'taxonomic sequence for the Checklist page (ADR 0030)',
+    note: 'taxonomic sequence for the Checklist page; regenerate with `node scripts/build-checklist-order.ts` rather than editing by hand (ADR 0030)',
   },
   {
     name: 'unpublished-species.csv',
@@ -139,7 +183,7 @@ export const RELATIONS: readonly Relation[] = [
     kind: 'csv-column',
     column: 'new_slug',
     cardinality: 'repeated',
-    note: 'redirect targets; a retired slug must land on a species that exists',
+    note: 'redirect targets; a retired slug must land on a species that exists. Its old_slug is the INVERSE rule (must be absent) and is owned by speciesRedirects.test.ts',
   },
   {
     name: 'mpg-crosswalk.csv',
@@ -155,21 +199,37 @@ export const RELATIONS: readonly Relation[] = [
     kind: 'csv-pipe-list',
     column: 'similar_species',
     cardinality: 'repeated',
-    note: 'cross-references between factsheets; an orphan renders a dead link',
+    note: 'cross-references between factsheets; species.njk matches on exact equality, so an unresolved entry renders nothing at all — no anchor, no error',
   },
   {
     name: 'species-photos.json',
     path: 'data/species-photos.json',
     kind: 'json-keys',
     cardinality: 'unique',
-    note: 'high-res tile manifest; an orphan key means tiles that can never be shown',
+    note: 'high-res tile manifest; an unresolved key means tiles that can never be shown',
+  },
+  {
+    name: 'key-matrix.json',
+    path: 'data/key-matrix.json',
+    kind: 'json-array-field',
+    arrayKey: 'species',
+    column: 'slug',
+    cardinality: 'unique',
+    note: 'committed Identify artifact; build-key.ts derives it from species.csv, so a failure here means the artifact is stale — re-run `npm run build:key` and commit (ADR 0017)',
+  },
+  {
+    name: 'speciesSlugs.json',
+    path: 'src/_data/speciesSlugs.json',
+    kind: 'json-array',
+    cardinality: 'unique',
+    note: 'committed legacy-redirect slug list; speciesSlugs.test.ts owns the reverse direction (every species must appear here)',
   },
   {
     name: 'src/content/species',
     path: 'src/content/species',
     kind: 'md-basenames',
     cardinality: 'unique',
-    note: 'species accounts; an orphan file is prose that no page can reach',
+    note: 'species accounts; a file whose slug does not join is prose no page can reach',
   },
 ];
 
@@ -179,22 +239,53 @@ export const RELATIONS: readonly Relation[] = [
 
 /** One slug reference, kept with enough context to name it in a failure. */
 export interface Reference {
-  /** The slug as written in the source, before normalization. */
+  /** The slug exactly as written in the source, before any normalization. */
   readonly raw: string;
-  /** 1-based line number for CSVs (header is line 1), or undefined otherwise. */
+  /** Physical line in the file, for CSV sources. */
   readonly line?: number;
+}
+
+function parseFailure(path: string, e: unknown): Error {
+  return new Error(
+    `[check-referential-integrity] cannot parse ${path}: ${(e as Error).message}`,
+    { cause: e },
+  );
+}
+
+/** csv-parse's `info: true` record shape, narrowed to the field we use. */
+interface CsvRecord {
+  readonly record: Record<string, string>;
+  readonly info: { readonly lines: number };
+}
+
+function parseCsv(path: string, full: string): CsvRecord[] {
+  try {
+    // csv-parse's sync `parse` is generic over the record type, so the shape is
+    // declared rather than asserted — no cast, and a wrong field name is a type error.
+    return parse<CsvRecord>(readFileSync(full), CSV_OPTIONS);
+  } catch (e) {
+    throw parseFailure(path, e);
+  }
 }
 
 /**
  * Read every species reference a relation makes.
  *
- * A missing source is not a failure: `data/records-inat.csv` is absent until the
- * first sync, and a gate that fails on an optional file fails for the wrong reason.
- * Callers get an empty list and the CLI reports the file as skipped.
+ * Returns null when the source is absent. Every declared relation's file exists
+ * today and a test asserts that it stays that way; the null branch is what keeps a
+ * deleted file from crashing the gate instead of being reported.
  */
 export function readReferences(relation: Relation, root = '.'): Reference[] | null {
   const full = resolve(root, relation.path);
   if (!existsSync(full)) return null;
+
+  const readJson = (): unknown => {
+    try {
+      return JSON.parse(readFileSync(full, 'utf8'));
+    } catch (e) {
+      throw parseFailure(relation.path, e);
+    }
+  };
 
   switch (relation.kind) {
     case 'csv-column':
@@ -203,47 +294,53 @@ export function readReferences(relation: Relation, root = '.'): Reference[] | nu
       if (column === undefined) {
         throw new Error(`[check-referential-integrity] relation "${relation.name}" is a CSV kind with no column`);
       }
-      // This gate runs before build-data.ts, so it is the first thing to touch these
-      // files: a malformed CSV must produce a readable failure naming the file, not a
-      // csv-parse stack trace about a column count.
-      let rows: Array<Record<string, string>>;
-      try {
-        rows = parse(readFileSync(full), { columns: true, skip_empty_lines: true }) as Array<Record<string, string>>;
-      } catch (e) {
-        throw new Error(
-          `[check-referential-integrity] cannot parse ${relation.path}: ${(e as Error).message}`,
-          { cause: e },
-        );
-      }
       const refs: Reference[] = [];
-      rows.forEach((row, i) => {
-        const cell = row[column];
-        if (cell === undefined || cell.trim() === '') return;
-        const line = i + 2; // header occupies line 1
-        if (relation.kind === 'csv-pipe-list') {
-          for (const part of cell.split('|')) {
-            if (part.trim() !== '') refs.push({ raw: part, line });
-          }
-        } else {
-          refs.push({ raw: cell, line });
+      for (const { record, info } of parseCsv(relation.path, full)) {
+        const cell = record[column];
+        if (cell === undefined || cell.trim() === '') continue;
+        const parts = relation.kind === 'csv-pipe-list' ? cell.split('|') : [cell];
+        for (const part of parts) {
+          if (part.trim() !== '') refs.push({ raw: part, line: info.lines });
         }
-      });
+      }
       return refs;
     }
     case 'json-keys': {
-      let parsed: unknown;
-      try {
-        parsed = JSON.parse(readFileSync(full, 'utf8'));
-      } catch (e) {
-        throw new Error(
-          `[check-referential-integrity] cannot parse ${relation.path}: ${(e as Error).message}`,
-          { cause: e },
-        );
-      }
+      const parsed = readJson();
       if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
         throw new Error(`[check-referential-integrity] ${relation.path} is not a JSON object`);
       }
       return Object.keys(parsed).map((raw) => ({ raw }));
+    }
+    case 'json-array': {
+      const parsed = readJson();
+      if (!Array.isArray(parsed) || parsed.some((v) => typeof v !== 'string')) {
+        throw new Error(`[check-referential-integrity] ${relation.path} is not a JSON array of strings`);
+      }
+      return (parsed as string[]).map((raw) => ({ raw }));
+    }
+    case 'json-array-field': {
+      const { arrayKey, column } = relation;
+      if (arrayKey === undefined || column === undefined) {
+        throw new Error(
+          `[check-referential-integrity] relation "${relation.name}" needs both arrayKey and column`,
+        );
+      }
+      const parsed = readJson();
+      if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
+        throw new Error(`[check-referential-integrity] ${relation.path} is not a JSON object`);
+      }
+      const arr = (parsed as Record<string, unknown>)[arrayKey];
+      if (!Array.isArray(arr)) {
+        throw new Error(`[check-referential-integrity] ${relation.path} has no array at "${arrayKey}"`);
+      }
+      const refs: Reference[] = [];
+      for (const entry of arr) {
+        if (typeof entry !== 'object' || entry === null) continue;
+        const value = (entry as Record<string, unknown>)[column];
+        if (typeof value === 'string' && value.trim() !== '') refs.push({ raw: value });
+      }
+      return refs;
     }
     case 'md-basenames': {
       return readdirSync(full, { withFileTypes: true })
@@ -253,40 +350,58 @@ export function readReferences(relation: Relation, root = '.'): Reference[] | nu
   }
 }
 
+// ---------------------------------------------------------------------------
+// The species side
+// ---------------------------------------------------------------------------
+
 /**
- * Species slugs from `data/species.csv`, normalized.
+ * The two forms of the species key.
  *
- * Derived here rather than imported so the gate depends on the CSV and not on a
- * committed artifact that could itself be stale — `src/_data/speciesSlugs.json`
- * is checked against this same file by its own test.
+ * `site` is what the built site actually uses: `src/_data/species.ts` derives it in
+ * SQL as `replace(lower(genus || '-' || species), ' ', '-')`, and every consumer
+ * compares raw strings against it. References are checked against THIS set.
+ *
+ * `normalized` additionally collapses whitespace runs and trims, via normalizeSlug.
+ * A reference absent from `site` but present here is a near-miss: the species exists,
+ * and the reference will still join to nothing.
  */
-export function loadSpeciesSlugs(root = '.'): Set<string> {
-  const rows = parse(readFileSync(resolve(root, 'data/species.csv')), {
-    columns: true,
-    skip_empty_lines: true,
-  }) as Array<{ genus: string; species: string }>;
-  return new Set(rows.map((r) => normalizeSlug(`${r.genus}-${r.species}`)));
+export interface SpeciesKeys {
+  readonly site: Set<string>;
+  readonly normalized: Set<string>;
+}
+
+export function loadSpeciesSlugs(root = '.'): SpeciesKeys {
+  const path = 'data/species.csv';
+  const full = resolve(root, path);
+  if (!existsSync(full)) {
+    throw new Error(
+      `[check-referential-integrity] ${path} not found — there is nothing to check references against`,
+    );
+  }
+  const site = new Set<string>();
+  const normalized = new Set<string>();
+  for (const { record } of parseCsv(path, full)) {
+    const binomial = `${record['genus'] ?? ''}-${record['species'] ?? ''}`;
+    site.add(binomial.toLowerCase().replaceAll(' ', '-'));
+    normalized.add(normalizeSlug(binomial));
+  }
+  return { site, normalized };
 }
 
 // ---------------------------------------------------------------------------
 // The pure check
 // ---------------------------------------------------------------------------
 
+export type ViolationKind = 'orphan' | 'near-miss' | 'duplicate' | 'empty';
+
 export interface Violation {
   readonly relation: string;
-  readonly kind: 'orphan' | 'duplicate';
-  /** The normalized slug at fault. */
+  readonly kind: ViolationKind;
+  /** The slug at fault, as written. Empty for `empty`, which is about the file. */
   readonly slug: string;
-  /** As first written in the source, when it differs from the normalized form. */
-  readonly raw: string;
-  /**
-   * Every line the slug appears on (CSV sources only), so a fault that spans rows
-   * is one violation naming all of them.
-   *
-   * One missing species is ONE fault, however many rows reference it: #232's 83
-   * broken images spanned 27 species, and reporting 83 violations would have made
-   * the same problem look three times bigger than it was.
-   */
+  /** The form it would take after normalization, when that differs. */
+  readonly normalized?: string;
+  /** Every physical line it appears on, for CSV sources. */
   readonly lines?: number[];
   /** How many references name this slug in the relation. */
   readonly count: number;
@@ -296,17 +411,18 @@ export interface Violation {
 export interface Exception {
   readonly relation: string;
   readonly slug: string;
+  readonly kind: ViolationKind;
   readonly issue: string;
 }
 
 export interface IntegrityReport {
   /** Violations with no matching exception. Non-empty means fail. */
   readonly violations: Violation[];
-  /** Exceptions that matched a real violation — expected, and reported for visibility. */
+  /** Exceptions that matched a real violation — expected, reported for visibility. */
   readonly excused: Violation[];
   /**
-   * Exceptions matching nothing: the orphan was fixed and the line was left behind.
-   * Also a failure, so the file shrinks as the questions get answered.
+   * Exceptions matching nothing: the fault was fixed and the line was left behind,
+   * or two lines describe the same one. Also a failure, so the file shrinks.
    */
   readonly staleExceptions: Exception[];
   /** Relations whose source file is absent. */
@@ -314,27 +430,60 @@ export interface IntegrityReport {
   readonly checkedReferences: number;
 }
 
-function exceptionKey(relation: string, slug: string): string {
-  return `${relation} ${slug}`;
+function exceptionKey(relation: string, slug: string, kind: ViolationKind): string {
+  // JSON-encoded triple rather than a delimiter-joined string: a raw slug may contain
+  // spaces (the pre-normalization form of a provisional epithet), so any single-character
+  // separator could make two different triples collide.
+  return JSON.stringify([relation, slug, kind]);
 }
 
 /**
- * Compare every declared relation against the species set.
+ * Compare every declared relation against the species keys.
  *
  * Pure: takes the already-read references so it is testable without a filesystem.
- * `references` maps relation name → refs, or null for an absent source.
+ * `references` maps relation name to its refs, or null for an absent source.
  */
 export function findViolations(
-  speciesSlugs: Set<string>,
+  species: SpeciesKeys,
   references: ReadonlyMap<string, Reference[] | null>,
   exceptions: readonly Exception[],
   relations: readonly Relation[] = RELATIONS,
 ): IntegrityReport {
+  const duplicateNames = [...new Set(
+    relations.map((r) => r.name).filter((name, i, all) => all.indexOf(name) !== i),
+  )];
+  if (duplicateNames.length > 0) {
+    // Two relations sharing a name collide in the references map: the last write
+    // wins and the other is silently checked against the wrong file's references.
+    throw new Error(
+      `[check-referential-integrity] duplicate relation name(s): ${duplicateNames.join(', ')}`,
+    );
+  }
+
   const violations: Violation[] = [];
   const excused: Violation[] = [];
   const skipped: string[] = [];
-  const matchedExceptions = new Set<string>();
   let checkedReferences = 0;
+
+  // How many exception lines exist per key, and how many real violations each key
+  // matched. Counting rather than set-membership is what makes a DUPLICATED waiver
+  // line report as stale: one line is consumed by the violation, the copy is not.
+  const available = new Map<string, number>();
+  for (const e of exceptions) {
+    const key = exceptionKey(e.relation, e.slug, e.kind);
+    available.set(key, (available.get(key) ?? 0) + 1);
+  }
+  const matched = new Map<string, number>();
+
+  const record = (v: Violation): void => {
+    const key = exceptionKey(v.relation, v.slug, v.kind);
+    if ((available.get(key) ?? 0) > 0) {
+      matched.set(key, (matched.get(key) ?? 0) + 1);
+      excused.push(v);
+    } else {
+      violations.push(v);
+    }
+  };
 
   for (const relation of relations) {
     const refs = references.get(relation.name);
@@ -343,32 +492,43 @@ export function findViolations(
       continue;
     }
 
-    // Group by normalized slug first: the unit of a fault is a slug, not a row.
-    const seen = new Map<string, { raw: string; lines: number[]; count: number }>();
-    for (const ref of refs) {
-      checkedReferences++;
-      const slug = normalizeSlug(ref.raw);
-      const entry = seen.get(slug) ?? { raw: ref.raw, lines: [], count: 0 };
-      entry.count++;
-      if (ref.line !== undefined) entry.lines.push(ref.line);
-      seen.set(slug, entry);
+    if (refs.length === 0) {
+      // A declared source that yields nothing is the gate's own worst failure: it
+      // reports success having checked nothing. Renamed column, truncated file, BOM.
+      record({ relation: relation.name, kind: 'empty', slug: '', count: 0 });
+      continue;
     }
 
-    const record = (violation: Violation): void => {
-      const key = exceptionKey(relation.name, violation.slug);
-      if (exceptions.some((e) => exceptionKey(e.relation, e.slug) === key)) {
-        matchedExceptions.add(key);
-        excused.push(violation);
-      } else {
-        violations.push(violation);
-      }
-    };
+    // Group by the raw form: the unit of a fault is a slug, not a row. #232's 83
+    // broken images spanned 27 species, and reporting per row would have made one
+    // problem look three times its size.
+    const seen = new Map<string, { lines: number[]; count: number }>();
+    for (const ref of refs) {
+      checkedReferences++;
+      const entry = seen.get(ref.raw) ?? { lines: [], count: 0 };
+      entry.count++;
+      if (ref.line !== undefined) entry.lines.push(ref.line);
+      seen.set(ref.raw, entry);
+    }
 
-    for (const [slug, { raw, lines, count }] of seen) {
-      const common = { relation: relation.name, slug, raw, count, ...(lines.length > 0 ? { lines } : {}) };
-      if (!speciesSlugs.has(slug)) {
-        record({ ...common, kind: 'orphan' });
-        continue; // An orphan that also duplicates is still one missing species.
+    for (const [raw, { lines, count }] of seen) {
+      const common = {
+        relation: relation.name,
+        slug: raw,
+        count,
+        ...(lines.length > 0 ? { lines } : {}),
+      };
+      if (!species.site.has(raw)) {
+        const normalized = normalizeSlug(raw);
+        // Consumers join on the raw cell, so a slug that only resolves after
+        // normalization joins to nothing — reported apart from a true orphan
+        // because the fix is to correct the reference, not to add a species.
+        record(
+          species.normalized.has(normalized)
+            ? { ...common, kind: 'near-miss', normalized }
+            : { ...common, kind: 'orphan' },
+        );
+        continue;
       }
       if (relation.cardinality === 'unique' && count > 1) {
         record({ ...common, kind: 'duplicate' });
@@ -376,63 +536,117 @@ export function findViolations(
     }
   }
 
-  const staleExceptions = exceptions.filter(
-    (e) => !matchedExceptions.has(exceptionKey(e.relation, e.slug)),
-  );
+  // Walk the exceptions in file order, letting each key consume as many lines as it
+  // matched violations. Whatever is left over is stale: a fault that was fixed, or a
+  // copy-pasted line.
+  const unconsumed = new Map(matched);
+  const staleExceptions = exceptions.filter((e) => {
+    const key = exceptionKey(e.relation, e.slug, e.kind);
+    const left = unconsumed.get(key) ?? 0;
+    if (left > 0) {
+      unconsumed.set(key, left - 1);
+      return false;
+    }
+    return true;
+  });
 
   return { violations, excused, staleExceptions, skipped, checkedReferences };
+}
+
+const VIOLATION_KINDS: readonly ViolationKind[] = ['orphan', 'near-miss', 'duplicate', 'empty'];
+
+function isViolationKind(value: string): value is ViolationKind {
+  return (VIOLATION_KINDS as readonly string[]).includes(value);
 }
 
 /**
  * Load the known-exceptions ratchet.
  *
  * A missing file means "no exceptions" rather than an error: deleting it is a
- * legitimate way to demand a fully clean tree.
+ * legitimate way to demand a fully clean tree. A malformed one is reported by name —
+ * this is the file a curator hand-edits, and its `issue` column is free prose, so an
+ * unquoted comma is a matter of time.
+ *
+ * Duplicate lines are kept rather than deduplicated: findViolations matches one
+ * exception per violation, so extra copies surface as stale and get deleted.
  */
 export function loadExceptions(root = '.'): Exception[] {
-  const full = resolve(root, 'data/referential-integrity-exceptions.csv');
+  const path = 'data/referential-integrity-exceptions.csv';
+  const full = resolve(root, path);
   if (!existsSync(full)) return [];
-  const rows = parse(readFileSync(full), { columns: true, skip_empty_lines: true }) as Array<{
-    relation: string;
-    slug: string;
-    issue: string;
-  }>;
+  let rows: Array<Record<string, string>>;
+  try {
+    rows = parse<Record<string, string>>(readFileSync(full), {
+      columns: true,
+      skip_empty_lines: true,
+      bom: true,
+    });
+  } catch (e) {
+    throw parseFailure(path, e);
+  }
   return rows
-    .filter((r) => (r.relation ?? '').trim() !== '' && (r.slug ?? '').trim() !== '')
-    .map((r) => ({ relation: r.relation.trim(), slug: normalizeSlug(r.slug), issue: (r.issue ?? '').trim() }));
+    .filter((r) => (r['relation'] ?? '').trim() !== '' && (r['slug'] ?? '').trim() !== '')
+    .map((r) => {
+      const kind = (r['kind'] ?? '').trim();
+      if (!isViolationKind(kind)) {
+        throw new Error(
+          `[check-referential-integrity] ${path}: unknown kind "${kind}" for ` +
+            `"${(r['relation'] ?? '').trim()} ${(r['slug'] ?? '').trim()}" — expected one of ${VIOLATION_KINDS.join(', ')}`,
+        );
+      }
+      return {
+        relation: (r['relation'] ?? '').trim(),
+        slug: (r['slug'] ?? '').trim(),
+        kind,
+        issue: (r['issue'] ?? '').trim(),
+      };
+    });
 }
 
 // ---------------------------------------------------------------------------
 // CLI entry-point
 // ---------------------------------------------------------------------------
 
+function noteFor(relationName: string): string {
+  return RELATIONS.find((r) => r.name === relationName)?.note ?? '';
+}
+
 function describe(v: Violation): string {
-  const where = v.lines === undefined || v.lines.length === 0
-    ? ''
-    : ` (line${v.lines.length > 1 ? 's' : ''} ${v.lines.slice(0, 6).join(', ')}${v.lines.length > 6 ? `, +${v.lines.length - 6} more` : ''})`;
-  if (v.kind === 'duplicate') {
-    return `  ${v.relation} — "${v.slug}" appears ${v.count}× in a one-row-per-species file${where}`;
-  }
-  const asWritten = v.raw === v.slug ? '' : ` written "${v.raw}"`;
+  const where =
+    v.lines === undefined || v.lines.length === 0
+      ? ''
+      : ` (line${v.lines.length > 1 ? 's' : ''} ${v.lines.slice(0, 6).join(', ')}` +
+        `${v.lines.length > 6 ? `, +${v.lines.length - 6} more` : ''})`;
   const times = v.count > 1 ? `, ${v.count} references` : '';
-  return `  ${v.relation} — "${v.slug}"${asWritten} has no data/species.csv row${times}${where}`;
+  const head = `  ${v.relation} — `;
+  switch (v.kind) {
+    case 'empty':
+      return `${head}the file exists but yields NO references. Renamed column, truncated file, or a UTF-8 BOM.\n      ${noteFor(v.relation)}`;
+    case 'near-miss':
+      return `${head}"${v.slug}" resolves only after normalization, to "${v.normalized}"${times}${where}.\n      Consumers join on the raw value, so this reference joins to nothing. Write "${v.normalized}".`;
+    case 'duplicate':
+      return `${head}"${v.slug}" appears ${v.count}× in a one-row-per-species file${where}.\n      ${noteFor(v.relation)}`;
+    case 'orphan':
+      return `${head}"${v.slug}" has no data/species.csv row${times}${where}.\n      ${noteFor(v.relation)}`;
+  }
 }
 
 function main(): void {
-  const speciesSlugs = loadSpeciesSlugs();
-  const exceptions = loadExceptions();
-
+  let species: SpeciesKeys;
+  let exceptions: Exception[];
   const references = new Map<string, Reference[] | null>();
-  for (const relation of RELATIONS) {
-    try {
+  try {
+    species = loadSpeciesSlugs();
+    exceptions = loadExceptions();
+    for (const relation of RELATIONS) {
       references.set(relation.name, readReferences(relation));
-    } catch (e) {
-      console.error((e as Error).message);
-      process.exit(1);
     }
+  } catch (e) {
+    console.error((e as Error).message);
+    process.exit(1);
   }
 
-  const report = findViolations(speciesSlugs, references, exceptions);
+  const report = findViolations(species, references, exceptions);
 
   for (const name of report.skipped) {
     console.warn(`[check-referential-integrity] ${name} not found — relation skipped`);
@@ -442,18 +656,19 @@ function main(): void {
     console.error(
       `[check-referential-integrity] STALE EXCEPTIONS: ${report.staleExceptions.length} line(s) in ` +
         `data/referential-integrity-exceptions.csv no longer describe a real violation. ` +
-        `The fault was fixed — delete the line:\n` +
-        report.staleExceptions.map((e) => `  ${e.relation} — "${e.slug}" (${e.issue})`).join('\n'),
+        `The fault was fixed, or the line is a duplicate — delete it:\n` +
+        report.staleExceptions
+          .map((e) => `  ${e.relation} — ${e.kind} "${e.slug}" (${e.issue})`)
+          .join('\n'),
     );
   }
 
   if (report.violations.length > 0) {
     console.error(
-      `[check-referential-integrity] FAILED: ${report.violations.length} reference(s) to species ` +
-        `that data/species.csv does not contain:\n` +
+      `[check-referential-integrity] FAILED: ${report.violations.length} violation(s):\n` +
         report.violations.map(describe).join('\n') +
-        `\n\nEvery slug must match a data/species.csv row — see ADR 0010. Fix the reference, add the ` +
-        `species, or (only for a documented curator question) add a line to ` +
+        `\n\nEvery slug must match a data/species.csv row exactly — see ADR 0010. Fix the reference, ` +
+        `add the species, or (only for a documented curator question) add a line to ` +
         `data/referential-integrity-exceptions.csv naming the issue that will resolve it.`,
     );
   }
@@ -465,7 +680,7 @@ function main(): void {
   const excusedNote = report.excused.length > 0 ? `, ${report.excused.length} known exception(s)` : '';
   console.log(
     `[check-referential-integrity] PASS: ${report.checkedReferences} references across ` +
-      `${RELATIONS.length - report.skipped.length} relations resolve to ${speciesSlugs.size} species${excusedNote}`,
+      `${RELATIONS.length - report.skipped.length} relations resolve to ${species.site.size} species${excusedNote}`,
   );
   process.exit(0);
 }
