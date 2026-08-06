@@ -157,9 +157,9 @@ describe('GRID-01 real-data gate', () => {
   test('meta.matchedSpecies === 1191 in real data/key-matrix.json', () => {
     // Issue #84 deny-lists unpublished species, excluding formerly matched key species.
     // oedemasia-salicis was un-gated (Merrill's guidance: it's the canonical current
-    // placement and should show its page/images); schizura-ipomaeae was newly gated
-    // instead (the #84 CMS-exclusion actually belongs to it, not to oedemasia-salicis).
-    // schizura-ipomaeae was not itself a matched key species, so the swap is a net +1.
+    // placement and should show its page/images), a net +1 over the 1190 baseline.
+    // Un-hiding schizura-ipomaeae (#269) leaves this count alone — the key spells it
+    // "Schizura ipomoeae", so it is an unmatched key species regardless of the gate.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;

@@ -265,8 +265,10 @@ describe('computeMatching', () => {
     //   yellow OR orange:                  172 matched
     //   empty selection:                 1,191 matched (after unpublished deny-list gating #84)
     //
-    // oedemasia-salicis was un-gated and schizura-ipomaeae was newly gated (schizura-ipomaeae
-    // was not itself a matched key species), a net +1 vs. the prior 861/1,190 baseline.
+    // oedemasia-salicis was un-gated, a net +1 vs. the prior 861/1,190 baseline. Un-hiding
+    // schizura-ipomaeae (#269) does not move these counts: the Lucid key spells it
+    // "Schizura ipomoeae", which matches no species.csv row, so it is an unmatched key
+    // species either way (see data/key-coverage-report.json).
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
 
