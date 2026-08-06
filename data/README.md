@@ -175,6 +175,22 @@ One file records it — `checklist-order.csv`, a flat list of every species in w
 
 One species-level key is enough because **our genera are contiguous in the MPG list**. Restricted to the species we hold, each genus occupies a single unbroken block of MPG rows, so sorting species by MPG row reproduces family, subfamily, tribe, and genus order for free. That property is load-bearing, so `scripts/build-checklist-order.test.ts` asserts it rather than trusting it.
 
+### The Checklist page orders within our hierarchy, not MPG's
+
+`/checklist/` nests species under **our** family → subfamily → tribe → genus and orders each
+level by checklist position (a node takes its earliest species' position). The flattened page
+order is therefore *not* identical to `checklist-order.csv` read top to bottom, and cannot be:
+MPG disagrees with our subfamily/tribe placement in 53 places
+([#279](https://github.com/pnwinsects/pnwmoths/issues/279)), so a genus can sit inside one of our
+groups while MPG's sequence puts it elsewhere.
+
+Two such crossings exist today. We file *Acopa* in Amphipyrinae/Psaphidini, MPG in
+Noctuinae/Bryophilini; we file *Protoperigea* in Noctuinae/Caradrinini, MPG holds it as
+*Caradrina*. Both render in the right taxonomic place and out of MPG's linear order — which is
+the correct trade for a page whose whole purpose is the nested taxonomy. Genus contiguity, which
+is what the one-sort-key design actually depends on, still holds and is asserted by
+`scripts/build-checklist-order.test.ts`.
+
 The order comes from the Moths Photographers Group taxon list (`mpg-taxa.csv`), not from our own data — see [ADR 0030](../docs/adr/0030-checklist-order-from-mpg.md) for why, and for the legacy-CMS approach it supersedes. [`scripts/build-checklist-order.ts`](../scripts/build-checklist-order.ts) joins the two, matching in tiers: exact binomial, Latin gender-ending variant, MONA number, original combination named in MPG's synonymy, and finally `mpg-crosswalk.csv`, where each row is a curator decision recorded with its source.
 
 Anything it cannot place falls to the end of its genus, alphabetically, and is **reported on every run** so the fallback stays a visible decision rather than a silent one. Expect provisional names (`sp`, `n sp`, `aff x`, `nr x`) to land there permanently — being undescribed, they have no MPG row and never will.

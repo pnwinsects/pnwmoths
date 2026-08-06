@@ -1,0 +1,76 @@
+---
+layout: base.njk
+title: Checklist — PNW Moths
+permalink: /checklist/index.html
+description: "The complete checklist of Pacific Northwest moths — every species on the site, in taxonomic sequence, filterable by state or province and by county or regional district."
+---
+<h1>Checklist</h1>
+
+<p>
+  Every species on the site, in taxonomic sequence rather than alphabetical order, nested under
+  family, subfamily, tribe and genus. For the same list with photographs, see
+  <a href="{{ '/browse/' | url }}">Browse</a>.
+</p>
+
+{#- The <noscript> is a SIBLING, not a child. This element renders into the light
+   DOM (ADR 0005), so Lit's first render replaces its children and <slot> is inert
+   — a fallback placed inside would be destroyed by the code meant to preserve it. -#}
+<noscript>
+  <p><em>Filtering by state or district needs JavaScript. The complete list is below.</em></p>
+</noscript>
+{#- path-prefix is REQUIRED, not decorative: the element fetches the two
+   species-*.json aggregates, and pathPrefix is "/pnwmoths/" on the GitHub Pages
+   staging deploy. Omit it and the fetch 404s, the catch below swallows it, and
+   the filters silently never appear — no error, no missing content, just a page
+   that quietly lost a feature. Browse passes it for the same reason. -#}
+<pnwm-checklist-filter path-prefix="{{ '/' | url }}" data-pagefind-ignore></pnwm-checklist-filter>
+
+{#- The list is not expandable, so this markup IS the page: the filter below only
+   hides rows already present. Nothing is fetched to render it, so it works with
+   JavaScript off — the architecture invariant, and also what makes the page
+   printable and findable with Ctrl-F, which is what the entomologists who asked
+   for it actually do with a checklist.
+
+   Only the <li> carries a slug. The ancestors are found by walking up from the
+   species that matched, rather than by repeating every slug on every enclosing
+   section — this page already carries ~1,250 species, and the duplicated
+   attributes would have roughly doubled its transfer size for nothing. -#}
+{#- data-pagefind-ignore, exactly as src/browse/index.njk does for the same list.
+   Without it this page enters the index as a 94 KB fragment of 1,253 binomials and
+   competes with every species page in site search. The heading and intro above are
+   still indexed, so the page itself remains findable by name. -#}
+<div class="checklist" data-pagefind-ignore>
+  {% for family in checklist %}
+    <section class="checklist-group">
+      <h2 id="checklist-family-{{ family.name | lower }}">{{ family.name }}</h2>
+      {% for subfam in family.subfamilies %}
+        {#- Heading levels track effective depth, matching Browse: a null subfamily or
+           tribe flattens its children up a level so the outline never skips. -#}
+        <section class="checklist-group">
+          {% if subfam.name %}
+            <h3 id="checklist-family-{{ family.name | lower }}--subfamily-{{ subfam.name | lower }}">{{ subfam.name }}</h3>
+          {% endif %}
+          {% set tribeLevel = 4 if subfam.name else 3 %}
+          {% for tribe in subfam.tribes %}
+            <section class="checklist-group">
+              {% if tribe.name %}
+                <h{{ tribeLevel }} id="checklist-family-{{ family.name | lower }}{% if subfam.name %}--subfamily-{{ subfam.name | lower }}{% endif %}--tribe-{{ tribe.name | lower }}">{{ tribe.name }}</h{{ tribeLevel }}>
+              {% endif %}
+              {% set genusLevel = (tribeLevel + 1) if tribe.name else tribeLevel %}
+              {% for genus in tribe.genera %}
+                <section class="checklist-group">
+                  <h{{ genusLevel }} id="checklist-family-{{ family.name | lower }}{% if subfam.name %}--subfamily-{{ subfam.name | lower }}{% endif %}{% if tribe.name %}--tribe-{{ tribe.name | lower }}{% endif %}--genus-{{ genus.genus_slug }}">{{ genus.name }}</h{{ genusLevel }}>
+                  <ul class="checklist-species">
+                    {% for sp in genus.species %}
+                      <li data-slug="{{ sp.slug }}"><a href="{{ ('/species/' + sp.slug + '/') | url }}"><em>{{ genus.name }} {{ sp.name }}</em>{% if sp.common_name %} — {{ sp.common_name }}{% endif %}</a></li>
+                    {% endfor %}
+                  </ul>
+                </section>
+              {% endfor %}
+            </section>
+          {% endfor %}
+        </section>
+      {% endfor %}
+    </section>
+  {% endfor %}
+</div>

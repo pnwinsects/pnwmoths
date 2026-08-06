@@ -6,6 +6,9 @@ description: "Browse every species account on the site by family, subfamily, tri
 ---
 <h1>Browse all species</h1>
 
+<p>For the same species as a names-only list in taxonomic sequence, see the
+<a href="{{ '/checklist/' | url }}">Checklist</a>.</p>
+
 <script type="application/json" id="taxon-data" data-pagefind-ignore>
   {{ taxon | tojson | safe }}
 </script>

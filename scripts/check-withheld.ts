@@ -26,6 +26,15 @@ import { pathToFileURL } from 'node:url';
 export interface FindLeaksOptions {
   /** Slugs that must not appear in any emitted page or key matrix entry. */
   withheldSlugs: Set<string>;
+  /**
+   * Species slugs named by the emitted Checklist page (#218), if it was built.
+   *
+   * The checklist lists NAMES, not pages, so a gated species reaching it leaves
+   * _site/species/ untouched and the page gate above sees nothing. That is the
+   * #275 shape — a step that publishes what the gates excluded, through a route
+   * the gates do not look at.
+   */
+  checklistSlugs?: string[];
   /** Root of the built site (normally PROJECT_ROOT/_site). */
   siteDir: string;
   /** Slugs that appear in key-matrix.json species[].slug. */
@@ -48,6 +57,8 @@ export interface LeakReport {
   dataLeaks: string[];
   /** Withheld slugs found in key-matrix.json species[].slug. */
   keyMatrixLeaks: string[];
+  /** Withheld slugs named by the emitted Checklist page. */
+  checklistLeaks: string[];
 }
 
 /**
@@ -58,11 +69,12 @@ export interface LeakReport {
  * file-system and JSON artifact.
  */
 export function findLeaks(opts: FindLeaksOptions): LeakReport {
-  const { withheldSlugs, siteDir, keyMatrixSlugs } = opts;
+  const { withheldSlugs, siteDir, keyMatrixSlugs, checklistSlugs } = opts;
 
   const pageLeaks: string[] = [];
   const dataLeaks: string[] = [];
   const keyMatrixLeaks: string[] = [];
+  const checklistLeaks = (checklistSlugs ?? []).filter(slug => withheldSlugs.has(slug));
 
   for (const slug of withheldSlugs) {
     const speciesDir = resolve(siteDir, 'species', slug);
@@ -80,7 +92,21 @@ export function findLeaks(opts: FindLeaksOptions): LeakReport {
     }
   }
 
-  return { pageLeaks, dataLeaks, keyMatrixLeaks };
+  return { pageLeaks, dataLeaks, keyMatrixLeaks, checklistLeaks };
+}
+
+/**
+ * Species slugs named by the emitted Checklist page, or [] if it was not built.
+ *
+ * The page tags each row `<li data-slug="…">` precisely so this is a parse of one
+ * attribute rather than of HTML. Absent page → empty list → gate passes, matching
+ * how the other gates treat a missing artifact.
+ */
+export function readChecklistSlugs(siteDir: string): string[] {
+  const path = resolve(siteDir, 'checklist', 'index.html');
+  if (!existsSync(path)) return [];
+  const html = readFileSync(path, 'utf8');
+  return [...html.matchAll(/<li data-slug="([^"]+)"/g)].map(m => m[1] ?? '');
 }
 
 // ---------------------------------------------------------------------------
@@ -126,10 +152,26 @@ function main(): void {
 
   // 4. Run the pure leak detector
   const siteDir = resolve('_site');
-  const { pageLeaks, dataLeaks, keyMatrixLeaks } = findLeaks({ withheldSlugs, siteDir, keyMatrixSlugs });
+  // Report the count this gate actually parsed. A renamed template or a changed
+  // attribute would leave readChecklistSlugs returning [] and the gate printing
+  // "0 checklist leaks" while checking nothing at all — a pass that means the
+  // opposite of what it says.
+  const checklistSlugs = readChecklistSlugs(siteDir);
+  if (existsSync(resolve(siteDir, 'checklist', 'index.html')) && checklistSlugs.length === 0) {
+    console.error(
+      '[check-withheld] CHECKLIST GATE UNUSABLE: _site/checklist/index.html exists but no ' +
+      'species rows were parsed from it. The page markup changed and this gate is now blind.',
+    );
+    process.exit(1);
+  }
+
+  const { pageLeaks, dataLeaks, keyMatrixLeaks, checklistLeaks } = findLeaks({
+    withheldSlugs, siteDir, keyMatrixSlugs, checklistSlugs,
+  });
 
   // 5. Report
-  const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0;
+  const hasLeaks = pageLeaks.length > 0 || dataLeaks.length > 0 || keyMatrixLeaks.length > 0 ||
+    checklistLeaks.length > 0;
 
   if (hasLeaks) {
     if (pageLeaks.length > 0) {
@@ -145,6 +187,12 @@ function main(): void {
         dataLeaks.map(s => `  _site/species/${s}`).join('\n'),
       );
     }
+    if (checklistLeaks.length > 0) {
+      console.error(
+        `[check-withheld] CHECKLIST GATE FAILED: ${checklistLeaks.length} withheld species named on ` +
+        `the Checklist page:\n` + checklistLeaks.map(s => `  ${s}`).join('\n'),
+      );
+    }
     if (keyMatrixLeaks.length > 0) {
       console.error(
         `[check-withheld] KEY-MATRIX GATE FAILED: ${keyMatrixLeaks.length} withheld species in key-matrix.json:\n` +
@@ -155,7 +203,9 @@ function main(): void {
   }
 
   console.log(
-    `[check-withheld] PASS: checked ${withheldSlugCount} withheld slugs — 0 page leaks, 0 data leaks, 0 key-matrix leaks`,
+    `[check-withheld] PASS: checked ${withheldSlugCount} withheld slugs against ` +
+    `${checklistSlugs.length} checklist rows — 0 page leaks, 0 data leaks, ` +
+    `0 key-matrix leaks, 0 checklist leaks`,
   );
   process.exit(0);
 }
