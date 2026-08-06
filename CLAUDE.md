@@ -17,6 +17,8 @@ Durable knowledge lives in a few files — keep them current; this is the produc
 
 Work is tracked in **GitHub Issues** (`gh`) — the single, authoritative, shared source of truth for features, bugs, and tech debt. There is a collaborator who does not use these tools and the repo may change hands, so work visibility must live where anyone can see it. Do not use TodoWrite or markdown TODO lists for durable work items; file a GitHub issue. Decisions and their *why* go in `docs/adr/`; issues track work in flight and reference ADRs.
 
+Label an issue **`curation`** when it is blocked on the curator's taxonomic or content judgement rather than on engineering — a merge to confirm, a species whose photos need a destination, a name we may or may not want to follow. `gh issue list --label curation` is the short list to put in front of him. See [docs/agents/triage-labels.md](docs/agents/triage-labels.md).
+
 ## Agent skills
 
 Config that the engineering skills (`to-issues`, `to-prd`, `grill-with-docs`, `improve-codebase-architecture`, …) read from:
