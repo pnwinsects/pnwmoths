@@ -146,6 +146,17 @@ curl -sI https://moths.pnwinsects.org/species/<slug>/ | head -1   # expect 404
 
 Bunny caches, so allow a few minutes before concluding the delete did not work.
 
+## Record the decision
+
+A removal is a curator's ruling, not a maintenance chore. Add an entry to
+[`docs/curation-log.md`](../docs/curation-log.md) in the same change: the date, a link to the issue
+or email where the call was made, the curator's own words if you have them, and what you deleted.
+Take the next `C-nnn` number and put it at the top of the log.
+
+Do this now rather than later. The species row is gone after this task, and with it every
+in-tree trace of why — which is exactly what the log exists to prevent
+([ADR 0032](../docs/adr/0032-curation-log.md)).
+
 ## Docker alternative
 
 ```bash

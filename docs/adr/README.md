@@ -40,3 +40,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0029](0029-removing-a-species.md) | Removing a species deletes its row and every record outright — not a move to the deny-list, and no tombstone redirect | Accepted |
 | [0030](0030-checklist-order-from-mpg.md) | Checklist order comes from the MPG taxon list, superseding the legacy-CMS nested-set extraction | Accepted |
 | [0031](0031-checklist-page.md) | The Checklist is its own server-rendered page, not a mode of Browse; its list is excluded from the search index | Accepted |
+| [0032](0032-curation-log.md) | Curatorial decisions get their own append-only log (`docs/curation-log.md`), separate from ADRs | Accepted |

@@ -9,6 +9,7 @@ Durable knowledge lives in a few files — keep them current; this is the produc
 - **[PRODUCT.md](PRODUCT.md)** — what PNW Moths is, for whom, capabilities, scope, out-of-scope, constraints.
 - **[CONTEXT.md](CONTEXT.md)** — the domain glossary. Use its terms exactly (species, slug, occurrence record, district, factsheet, Identify/key-matrix, withheld/unpublished gating…). Update when a term is coined or sharpened.
 - **[docs/adr/](docs/adr/)** — numbered decision records with rationale and rejected alternatives. **When a decision is made, add an ADR before moving on.** Mark superseded records; don't delete them.
+- **[docs/curation-log.md](docs/curation-log.md)** — the curator's rulings about the catalogue itself: inclusions, exclusions, names, merges, placements, record-admission policy. Append-only, numbered `C-nnn`, newest first. **When you act on a curatorial decision, add the entry in the same PR** ([ADR 0032](docs/adr/0032-curation-log.md)). Engineering decisions go in `docs/adr/`; *which taxa are gated* goes here.
 - **[docs/concerns.md](docs/concerns.md)** — live tech debt and known gaps (accepted vs actionable). **[docs/lessons-learned.md](docs/lessons-learned.md)** — reusable "if you touch X, know Y" engineering lessons.
 - **[docs/reference/](docs/reference/)** — provenance of the legacy data (original WWU site, reference MySQL DB, Lucid3 key source, subfamily-in-CMS-paths).
 - **[_instructions/](_instructions/)** — plain-English maintainer runbooks (adding species/records/photos, assigning districts, tiling, uploading).

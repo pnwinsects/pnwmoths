@@ -54,6 +54,8 @@ Two data-driven deny-lists suppress content from the public site without deletin
 - **Unpublished species** — `data/unpublished-species.csv`. A per-species deny-list for provisional/undescribed morphospecies.
 - **`shown` / visible predicate** — the single source of truth (`stats.ts`) for whether a species appears publicly, applied consistently across all choke points.
 
+Which taxa are gated, renamed, merged, or excluded is a **curatorial decision**, recorded in [`docs/curation-log.md`](docs/curation-log.md) as a numbered `C-nnn` entry ([ADR 0032](docs/adr/0032-curation-log.md)) — as distinct from the gating *mechanism* above, which is [ADR 0015](docs/adr/0015-data-driven-gating.md). The `reason` columns in the deny-list CSVs say why a given row is there; the log survives the row's deletion.
+
 ## Infrastructure & roles
 
 - **CDN** — [Bunny](https://bunny.net): a Storage Zone + Pull Zone + Optimizer holds all image assets. `CDN_BASE_URL` is a hard-coded **public** constant (not a secret, not an env var).

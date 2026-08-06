@@ -6,6 +6,14 @@
 - `data/species-photos-manifest.csv` — rows whose `binomial_raw` matches one of your decisions get re-routed to `match_bucket: resolved-via-synonym` with `binomial_resolved` and `species_slug` populated from `data/species.csv`
 - **No** Dropbox API calls, **no** bunny.net writes, **no** file downloads, **no** Dropbox token required — synonym curation is an in-repo edit + re-classify loop
 
+## Record the Decision
+
+Each synonym row is a curatorial call about which name wins. When the decision came from the curator
+— rather than from a source you are merely transcribing — add an entry to
+[`docs/curation-log.md`](../docs/curation-log.md) alongside the CSV rows: date, issue link, the
+curator's words, and the rows you added. Next `C-nnn` number, top of the file
+([ADR 0032](../docs/adr/0032-curation-log.md)).
+
 ## Before You Start
 
 You will need:
