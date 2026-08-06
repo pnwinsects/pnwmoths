@@ -25,6 +25,16 @@ import {
 } from './pnwm-taxon-browser.ts';
 import type { SpeciesState, SpeciesDistrict } from '../types/index.ts';
 
+/**
+ * Label for the district select's "no filter" option.
+ *
+ * Not `districtLabel(state).toLowerCase() + 's'` — that yields "All countys". Only
+ * two jurisdictions exist here, so spell both rather than reach for a pluraliser.
+ */
+export function allDistrictsLabel(selectedState: string): string {
+  return selectedState === 'BC' ? 'All regional districts' : 'All counties';
+}
+
 const STATE_NAMES: Record<string, string> = {
   BC: 'British Columbia',
   ID: 'Idaho',
@@ -176,7 +186,12 @@ export class PnwmChecklistFilter extends LitElement {
       <div class="checklist-filters" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:end;margin-block:1rem">
         <div>
           <label for="checklist-state">State or province</label>
-          <select id="checklist-state" style="width:auto;margin:0" @change=${this._onStateChange}>
+          <select
+            id="checklist-state"
+            style="width:auto;margin:0"
+            .value=${this._selectedState}
+            @change=${this._onStateChange}
+          >
             <option value="">All states</option>
             ${this._statesAvailable.map(s => html`
               <option value=${s} ?selected=${this._selectedState === s}>${STATE_NAMES[s] ?? s}</option>
@@ -189,9 +204,10 @@ export class PnwmChecklistFilter extends LitElement {
             id="checklist-district"
             style="width:auto;margin:0"
             ?disabled=${!this._selectedState}
+            .value=${this._selectedCounty}
             @change=${this._onCountyChange}
           >
-            <option value="">All ${label.toLowerCase()}s</option>
+            <option value="">${allDistrictsLabel(this._selectedState)}</option>
             ${districts.map(d => html`
               <option value=${d} ?selected=${this._selectedCounty === d}>${d}</option>
             `)}

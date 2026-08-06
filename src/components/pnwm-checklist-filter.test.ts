@@ -10,7 +10,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { visibleSlugs } from './pnwm-checklist-filter.ts';
+import { visibleSlugs, allDistrictsLabel } from './pnwm-checklist-filter.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -80,4 +80,16 @@ test('the emitted Checklist page carries the hooks the component queries', () =>
 
   const rows = [...html.matchAll(/<li data-slug="([^"]+)"/g)].length;
   assert.ok(rows > 1000, `expected the full checklist, found ${rows} rows`);
+});
+
+// ---------------------------------------------------------------------------
+// allDistrictsLabel
+// ---------------------------------------------------------------------------
+
+test('allDistrictsLabel: pluralises both jurisdictions correctly', () => {
+  // The obvious `districtLabel(state).toLowerCase() + 's'` produces "All countys",
+  // which shipped in the first draft and was caught by driving the real page.
+  assert.equal(allDistrictsLabel(''), 'All counties');
+  assert.equal(allDistrictsLabel('WA'), 'All counties');
+  assert.equal(allDistrictsLabel('BC'), 'All regional districts');
 });
