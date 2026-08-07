@@ -73,6 +73,47 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-021 · 2026-08-06 · Seven shared `noc_id` values are transcription errors, not synonymies
+
+**Source** [#286 comment](https://github.com/pnwinsects/pnwmoths/issues/286#issuecomment-5208555790),
+the curator's own words · **Status** Applied ([PR #289](https://github.com/pnwinsects/pnwmoths/pull/289)) ·
+**Refines** C-016 and C-019
+
+> The NOC number for Fishia nigrescens is correct, but the NOC number for Lasionycta staudingeri
+> should be 93-2992
+> The NOC number for Apantesis quenseli is correct, but the NOC for A. nevadensis should be 93-0258
+> The NOC number for Tarache augustipennis is correct, but the NOC for T. major should be 93-1371
+> The NOC number for Homoglaea californica is correct, but the NOC for H. carbonaria should be 93-2529
+> The NOC number for Euxoa hardwicki is correct, but the NOC for E. simona should be 93-3348
+> The NOC number for Hypenodes fractilinea is correct, but the NOC for H. sombrus should be 93-0664
+> The MONA number for Digrammia denticulata is correct, but the MONA number for D. sexpunctata
+> should be 6387.1
+
+Seven of the ten collisions were **bad numbers, not taxonomy** — in every case one row of the pair
+carried a Hodges/MONA number belonging to the other moth. None of the three explanations the issue
+offered (merge, split, data-entry error) applied to more than one pair each; the whole class was the
+third. `93-2693.1` is the one worth remembering: *Fishia nigrescens* and *Lasionycta staudingeri*
+are not close relatives, and that implausibility is what made the collision worth chasing.
+
+Each correction is independently corroborated by MPG, which we had already scraped and never
+compared against: for all six Poole numbers the corrected value equals MPG's own page number for
+that species (`data/checklist-order.csv`, matched on genus + epithet, so the agreement is not
+circular). `data/mpg-taxa.csv` also confirms `6387.1` for *Digrammia sexpunctata* and explains how
+that collision arose — MPG records it as *"a synonym of 6373 Digrammia denticulata"* until it was
+split out under its own number, which our data never followed.
+
+Three collisions remain, and all three are known and accepted: `93-0907` (*Drasteria*, merging on
+#265 / C-016), `93-0801` (*Catocala*, on hold pending Lars Crabo — #265 / C-019), and `93-0008`
+(*Clostera*, the post-imaging split explained on #110 / C-009). That is the curator-approved
+baseline [ADR 0033](adr/0033-referential-integrity-gate.md) said a future `noc_id` collision report
+would need before it could be written; that report is now tracked on
+[#290](https://github.com/pnwinsects/pnwmoths/issues/290), which also proposes checking `noc_id`
+against MPG wholesale — a comparison that would have caught all seven of these without asking.
+
+Changed seven `noc_id` cells in `data/species.csv`. Nothing on the site renders differently — the
+field is displayed but not joined on — and `data/checklist-order.csv` regenerates byte-identical,
+because all seven species already matched MPG on name rather than number.
+
 ## C-020 · 2026-08-05 · *Schizura ipomaeae* stays in *Schizura*
 
 **Source** [#269 issue body](https://github.com/pnwinsects/pnwmoths/issues/269), the curator's own
