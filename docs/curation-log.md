@@ -73,6 +73,63 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-022 · 2026-08-06 · The *Lacinipolia vicina* complex is mid-revision — change nothing
+
+**Source** [#285 comment](https://github.com/pnwinsects/pnwmoths/issues/285#issuecomment-5208475452),
+the curator's own words · **Status** On hold (awaiting the curator and Lars Crabo — #285) ·
+**Refines** C-009 and C-010
+
+> The Lacinipolia vicina complex, which formerly included L. vicina, L. pensilis, and two other
+> species not found in the PNW was revised and split into multiple species. Of these, the following
+> occur in the PNW: L. acutipennis, L. dimocki, L. pensilis, and L. sareta.
+>
+> What you see on the site at present represents an incomplete effort to update the site to reflect
+> the new taxonomy. Part of the challenge is knowing which names to apply to which records. For now,
+> let's not do anything about these species. I'll consult with Lars and hopefully we can come up
+> with a decent plan for how to proceed.
+
+Neither option #285 offered was right. The issue asked whether *vicina* and *sareta* are two species
+(so the account and photos move back to *vicina*) or one under a new name (so *sareta* is substituted
+throughout and *vicina* becomes a synonym). Both assume a **rename or a mis-attribution between two
+names**. What actually happened is a **split into four**, of which *vicina* is not one: under the
+current taxonomy *L. vicina* does not occur in the PNW at all, so its account describes a moth this
+catalogue no longer has a row for, and the material filed under it belongs to some distribution
+across *acutipennis*, *dimocki*, *pensilis* and *sareta* that nobody has worked out yet.
+
+**The blocker is at record level, not name level.** Every name is already in `data/species.csv`
+(*pensilis* 2096, *acutipennis* 3314, *dimocki* 3315, *sareta* 3341) and in
+`data/checklist-order.csv` at 93-3042, .1, .2 and .3. What is missing is the assignment: which of
+*sareta*'s 84 records and *pensilis*'s 386 belong to which successor name. That is a determination
+from specimens, and no amount of reading our own files produces it — which is why this is on hold
+rather than pending.
+
+This is the second time the pattern in C-009 has surfaced, and the general form is now clear: **a
+split that post-dates our imaging leaves photos, prose and records all carrying the pre-split name,
+and they do not move as a unit.** C-009 handled it for *Clostera* when the curator could name the
+specimens. Here he cannot, yet.
+
+### The half-finished state, so nobody re-derives it
+
+- *pensilis* and *sareta* are published; *acutipennis* and *dimocki* are display-gated per C-006
+  (#84), which predates this and is not disturbed.
+- `src/content/species/lacinipolia-sareta.md` is byte-identical to `lacinipolia-vicina.md` and names
+  the moth *vicina* seven times. *sareta* therefore has no account of its own, and *acutipennis* and
+  *dimocki* have account files that no page renders.
+- Four of *sareta*'s six `data/images.csv` rows are named `Lacinipolia vicina-A/B-D/V.jpg`; the other
+  two are a genuine *sareta* specimen from Georgetown Cyn., ID.
+- The four matching `Lacinipolia vicina-*.tif` high-res files sit in `data/species-photos-manifest.csv`
+  as `genus-only`/`discovered` — unmatched and untiled, because no `lacinipolia-vicina` row exists.
+- `lacinipolia-vicina` is otherwise absent from `data/`: no species row, no synonym, no redirect.
+- *sareta* is absent from `data/key-matrix.json` while it sits on the C-010 add-to-key list; adding
+  it now would key characters to an account written about a different moth, so that one item of C-010
+  waits on this.
+
+**No catalogue row, record, image or account changed, deliberately** — not one species, checklist,
+`images.csv` or `src/content/species/` line. `src/content/species/lacinipolia-vicina.md` stays where
+it is: it is the only copy of the pre-split account, and it will be the reference when the four names
+are sorted out. The single edit under `data/` is prose: the reason on its
+`data/referential-integrity-exceptions.csv` row, which keeps the build green and now points here.
+
 ## C-021 · 2026-08-06 · Seven shared `noc_id` values are transcription errors, not synonymies
 
 **Source** [#286 comment](https://github.com/pnwinsects/pnwmoths/issues/286#issuecomment-5208555790),
@@ -301,6 +358,8 @@ A 25-name list from Merrill's own earlier notes (*Catocala meskei*, *Admetovis i
 *Tarache acerba*, … see the comment), plus a standing request: report which species have published
 pages but no key row. The gap is tracked in `data/key-coverage-report.json`.
 
+**Refined by C-022**, which puts the *Lacinipolia sareta* item of this list on hold.
+
 ## C-009 · 2026-07-03 · *Clostera brucei* photos are mostly *C. multnoma*
 
 **Source** [#110 comment](https://github.com/pnwinsects/pnwmoths/pull/110#issuecomment-4879914499),
@@ -314,6 +373,9 @@ the curator's own words · **Status** Applied via [#156](https://github.com/pnwi
 The general warning is the durable part: a specimen photographed before a split carries the
 pre-split name, so **an image filename is never evidence of identity.** This is the curatorial
 counterpart of the invariant that join slugs are never derived from image filenames.
+
+**Refined by C-022**, the same pattern in *Lacinipolia* — where, unlike here, the curator cannot yet
+say which specimen is which.
 
 ## C-008 · 2026-07-03 · Content-free pages must not appear in Browse or Search
 
