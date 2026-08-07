@@ -37,10 +37,11 @@ The slug is the genus and species, lowercased and joined with a hyphen: *Hemileu
 
 ## 1. Delete every row that names the slug
 
-Search for the slug across `data/`, case-insensitively, and delete every line it appears on:
+Search for the slug across `data/` and `src/`, case-insensitively, and delete every line it
+appears on:
 
 ```bash
-grep -ril "<slug>" data/
+grep -ril "<slug>" data/ src/
 ```
 
 Expect hits in some of these:
@@ -54,8 +55,21 @@ Expect hits in some of these:
 | `data/records-bad.csv`, `data/records-bad-coords.csv` | records held back for curation |
 | `data/images.csv` | photo rows |
 | `data/species-links.csv`, `data/species-plates.csv`, `data/species-synonyms.csv` | external links, plate assignments, synonyms |
+| `data/mpg-crosswalk.csv` | its hand-authored MPG match, if it has one |
+| `data/species-photos.json` | its high-res tile entry, if it has one |
 | `data/coord-fill-report.csv`, `data/legacy-rejoin-report.csv` | one row per record examined by a past backfill — prune to match |
 | `src/_data/speciesSlugs.json` | the legacy-URL lookup entry |
+
+Two more hold references that the same grep finds but that you must **not** fix by deleting a
+line:
+
+| File | What to do instead |
+|---|---|
+| `data/checklist-order.csv` | **Regenerate**, don't hand-edit: `node scripts/build-checklist-order.ts` ([ADR 0030](../docs/adr/0030-checklist-order-from-mpg.md)) |
+| `data/species.csv` — *other* species' `similar_species` | Remove the retired slug from the `\|`-separated list in each row that names it. Leaving it there renders no "similar species" entry at all — silently, with no error |
+
+And if the species was in the Identify key, `data/key-matrix.json` needs `npm run build:key` and a
+commit; it is a committed artifact derived from `data/species.csv`.
 
 Also delete `src/content/species/<slug>.md` if a description was written
 ([EDITING_DESCRIPTION.md](EDITING_DESCRIPTION.md)), and `data/parquet/<slug>/` if it exists
@@ -93,8 +107,15 @@ npm test
 npm run build:site
 ```
 
-If a photo, link or key entry was missed, the build says so. Two messages point back at step 1:
+If a photo, link or key entry was missed, the build says so. Three messages point back at step 1:
 
+- **`[check-referential-integrity] FAILED: … "<slug>" has no data/species.csv row`** — the first
+  gate to run, and the one that catches almost everything: a leftover row in `images.csv`,
+  `species-links.csv`, `species-plates.csv`, `checklist-order.csv`, `species-synonyms.csv`,
+  `mpg-crosswalk.csv`, `species-photos.json`, `speciesSlugs.json`, another species'
+  `similar_species` list, or an orphaned `src/content/species/<slug>.md`. It names the file — and
+  the line, for CSV sources — and prints what that file is for
+  ([ADR 0033](../docs/adr/0033-referential-integrity-gate.md)).
 - **`Validation failed — orphaned records (species_slug not in species table)`** — records were
   left behind after the species row was deleted.
 - **`check-unpublished … 0 matches in species.csv`** — the deny-list row was left behind.

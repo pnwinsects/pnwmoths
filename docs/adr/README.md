@@ -41,3 +41,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0030](0030-checklist-order-from-mpg.md) | Checklist order comes from the MPG taxon list, superseding the legacy-CMS nested-set extraction | Accepted |
 | [0031](0031-checklist-page.md) | The Checklist is its own server-rendered page, not a mode of Browse; its list is excluded from the search index | Accepted |
 | [0032](0032-curation-log.md) | Curatorial decisions get their own append-only log (`docs/curation-log.md`), separate from ADRs | Accepted |
+| [0033](0033-referential-integrity-gate.md) | Every species reference is declared in one table and checked before the build; known orphans held in a self-expiring ratchet | Accepted |

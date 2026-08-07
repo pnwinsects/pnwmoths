@@ -1,0 +1,7 @@
+relation,slug,kind,issue
+species-photos.json,macaria-bitactata,orphan,#279 — high-res tiles keyed to the MPG genus while species.csv still says Speranza
+species-photos.json,macaria-colata,orphan,#279 — high-res tiles keyed to the MPG genus while species.csv still says Speranza
+species-photos.json,macaria-decorata,orphan,#279 — high-res tiles keyed to the MPG genus; also ambiguous between Speranza and Digrammia decorata
+species-photos.json,macaria-lorquinaria,orphan,#279 — high-res tiles keyed to the MPG genus while species.csv still says Speranza
+species-photos.json,macaria-plumosata,orphan,#279 — high-res tiles keyed to the MPG genus while species.csv still says Speranza
+src/content/species,lacinipolia-vicina,orphan,#285 — account duplicated onto lacinipolia-sareta; which name owns it is a curator call
