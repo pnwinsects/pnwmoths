@@ -124,10 +124,11 @@ specimens. Here he cannot, yet.
   it now would key characters to an account written about a different moth, so that one item of C-010
   waits on this.
 
-**Nothing in `data/` or `src/content/` changed, deliberately.** `src/content/species/lacinipolia-vicina.md`
-stays where it is: it is the only copy of the pre-split account, and it will be the reference when the
-four names are sorted out. Its row in `data/referential-integrity-exceptions.csv` keeps the build green
-and now points here.
+**No catalogue row, record, image or account changed, deliberately** — not one species, checklist,
+`images.csv` or `src/content/species/` line. `src/content/species/lacinipolia-vicina.md` stays where
+it is: it is the only copy of the pre-split account, and it will be the reference when the four names
+are sorted out. The single edit under `data/` is prose: the reason on its
+`data/referential-integrity-exceptions.csv` row, which keeps the build green and now points here.
 
 ## C-021 · 2026-08-06 · Seven shared `noc_id` values are transcription errors, not synonymies
 
