@@ -2,7 +2,7 @@
 
 This moth is easily identified in most of the region by its red color, scalloped margin, and deeply concave notch at the anal angle of the forewing.
 
-*Phyllodesma coturnix* Lajonquière was synonymized with *Phyllodesma americana* in the most recent checklist of North American moths (Pohl &amp; Nanz 2023). This name has been used in the past for some California and southern Oregon populations. Franclemont (1973) and Powell &amp; Opler (2009) separated *coturnix* from *americana* only by its smaller size and male genitalia. Limited mtDNA barcode sequence divergence in California material has been read by some as suggesting two taxa, but Pohl &amp; Nanz (2023) synonymize them.
+*Phyllodesma coturnix* Lajonquière was synonymized with *Phyllodesma americana* in the most recent checklist of North American moths (Pohl &amp; Nanz 2023). This name has been used in the past for some California and southern Oregon populations. Franclemont (1973) and Powell &amp; Opler (2009) separated *coturnix* from *americana* only by its smaller size and male genitalia. Limited mtDNA barcode sequence divergence in California material has been read by some as suggesting two taxa.
 
 ## Habitat
 
