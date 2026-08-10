@@ -76,8 +76,9 @@ what made C-020 possible to reconstruct.
 ## C-023 · 2026-08-06 · The five confirmed merges apply; both retiring accounts drop
 
 **Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5208340221),
-the curator's own words · **Status** Applied (repo data — #265 PR); Pending (CDN copy —
-`scripts/migrate-merged-species-photos.ts`) · **Refines** C-016, C-017 and C-019
+the curator's own words · **Status** Applied (repo data and CDN copy — #265 PR; 380 objects
+copied 2026-08-10, six *Macaria* sources absent per the #232 gap, see #48) ·
+**Refines** C-016, C-017 and C-019
 
 The merges themselves were ruled in C-016 and C-019; this entry records the prose disposition that
 was still open on C-019, and their application. On *Drasteria*:
