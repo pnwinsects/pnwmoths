@@ -5707,10 +5707,10 @@ derived/phyllodesma-americana/Phyllodesma americana-B-D@320h.webp,phyllodesma-am
 derived/phyllodesma-americana/Phyllodesma americana-B-D@full.webp,phyllodesma-americana/Phyllodesma americana-B-D.jpg,legacy,full,76106
 derived/phyllodesma-americana/Phyllodesma americana-B-V@320h.webp,phyllodesma-americana/Phyllodesma americana-B-V.jpg,legacy,320h,39632
 derived/phyllodesma-americana/Phyllodesma americana-B-V@full.webp,phyllodesma-americana/Phyllodesma americana-B-V.jpg,legacy,full,79500
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-D@320h.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-D.jpg,legacy,320h,43292
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-D@full.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-D.jpg,legacy,full,89398
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-V@320h.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-V.jpg,legacy,320h,43168
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-V@full.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-V.jpg,legacy,full,92374
+derived/phyllodesma-americana/Phyllodesma coturnix-C-D@320h.webp,phyllodesma-americana/Phyllodesma coturnix-C-D.jpg,legacy,320h,43292
+derived/phyllodesma-americana/Phyllodesma coturnix-C-D@full.webp,phyllodesma-americana/Phyllodesma coturnix-C-D.jpg,legacy,full,89398
+derived/phyllodesma-americana/Phyllodesma coturnix-C-V@320h.webp,phyllodesma-americana/Phyllodesma coturnix-C-V.jpg,legacy,320h,43168
+derived/phyllodesma-americana/Phyllodesma coturnix-C-V@full.webp,phyllodesma-americana/Phyllodesma coturnix-C-V.jpg,legacy,full,92374
 derived/plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D@320h.webp,plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D.jpg,legacy,320h,42338
 derived/plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D@full.webp,plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D.jpg,legacy,full,86086
 derived/plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-V@320h.webp,plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-V.jpg,legacy,320h,41488
@@ -19679,14 +19679,14 @@ derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@1060.webp,species-til
 derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@1200.jpg,species-tiles/spargaloma-sexpunctata/A-V_thumbnail.webp,highres,1200,153624
 derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@320h.webp,species-tiles/spargaloma-sexpunctata/A-V_thumbnail.webp,highres,320h,40206
 derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@530.webp,species-tiles/spargaloma-sexpunctata/A-V_thumbnail.webp,highres,530,43188
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@1060.webp,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,1060,110766
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@1200.jpg,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,1200,169982
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@320h.webp,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,320h,41000
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@530.webp,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,530,44892
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@1060.webp,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,1060,91378
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@1200.jpg,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,1200,145990
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@320h.webp,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,320h,38486
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@530.webp,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,530,41648
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@1060.webp,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,1060,110766
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@1200.jpg,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,1200,169982
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@320h.webp,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,320h,41000
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@530.webp,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,530,44892
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@1060.webp,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,1060,91378
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@1200.jpg,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,1200,145990
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@320h.webp,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,320h,38486
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@530.webp,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,530,41648
 derived/species-tiles/speranza-guenearia/A-D_thumbnail@1060.webp,species-tiles/speranza-guenearia/A-D_thumbnail.webp,highres,1060,94160
 derived/species-tiles/speranza-guenearia/A-D_thumbnail@1200.jpg,species-tiles/speranza-guenearia/A-D_thumbnail.webp,highres,1200,146305
 derived/species-tiles/speranza-guenearia/A-D_thumbnail@320h.webp,species-tiles/speranza-guenearia/A-D_thumbnail.webp,highres,320h,38142
@@ -21999,10 +21999,10 @@ derived/speranza-amboflava/Speranza amboflava-B-D@320h.webp,speranza-amboflava/S
 derived/speranza-amboflava/Speranza amboflava-B-D@full.webp,speranza-amboflava/Speranza amboflava-B-D.jpg,legacy,full,74726
 derived/speranza-amboflava/Speranza amboflava-B-V@320h.webp,speranza-amboflava/Speranza amboflava-B-V.jpg,legacy,320h,40320
 derived/speranza-amboflava/Speranza amboflava-B-V@full.webp,speranza-amboflava/Speranza amboflava-B-V.jpg,legacy,full,76312
-derived/speranza-andersoni/Speranza andersoni-A-D@320h.webp,speranza-andersoni/Speranza andersoni-A-D.jpg,legacy,320h,42226
-derived/speranza-andersoni/Speranza andersoni-A-D@full.webp,speranza-andersoni/Speranza andersoni-A-D.jpg,legacy,full,86010
-derived/speranza-andersoni/Speranza andersoni-A-V@320h.webp,speranza-andersoni/Speranza andersoni-A-V.jpg,legacy,320h,39940
-derived/speranza-andersoni/Speranza andersoni-A-V@full.webp,speranza-andersoni/Speranza andersoni-A-V.jpg,legacy,full,78190
+derived/speranza-occiduaria/Speranza andersoni-B-D@320h.webp,speranza-occiduaria/Speranza andersoni-B-D.jpg,legacy,320h,42226
+derived/speranza-occiduaria/Speranza andersoni-B-D@full.webp,speranza-occiduaria/Speranza andersoni-B-D.jpg,legacy,full,86010
+derived/speranza-occiduaria/Speranza andersoni-B-V@320h.webp,speranza-occiduaria/Speranza andersoni-B-V.jpg,legacy,320h,39940
+derived/speranza-occiduaria/Speranza andersoni-B-V@full.webp,speranza-occiduaria/Speranza andersoni-B-V.jpg,legacy,full,78190
 derived/speranza-bitactata/Speranza bitactata-A-D@320h.webp,speranza-bitactata/Speranza bitactata-A-D.jpg,legacy,320h,45442
 derived/speranza-bitactata/Speranza bitactata-A-D@full.webp,speranza-bitactata/Speranza bitactata-A-D.jpg,legacy,full,90644
 derived/speranza-bitactata/Speranza bitactata-A-V@320h.webp,speranza-bitactata/Speranza bitactata-A-V.jpg,legacy,320h,43758

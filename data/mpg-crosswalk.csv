@@ -1,6 +1,3 @@
 species_slug,mpg_binomial,source
 protoperigea-anotha,Caradrina anotha,"#218 — epithet + family, no MONA number in MPG (93- is a Poole 1989 number); presented to the curator without objection"
 protoperigea-posticata,Caradrina posticata,"#218 — epithet + family, no MONA number in MPG (93- is a Poole 1989 number); presented to the curator without objection"
-drasteria-nubicola,Drasteria maculosa,"#259 — curator: ""Drasteria nubicola is now Drasteria maculosa (Behr, 1870)""; we hold both, so this is a merge, not a rename (see #265)"
-speranza-andersoni,Macaria occiduaria,"#259 — curator: ""Speranza andersoni is a synonym of Macaria occiduaria (Packard, 1874)""; we hold speranza-occiduaria, so this is a merge (see #265)"
-macaria-unipunctaria,Macaria signaria,"#259 — curator: ""Macaria unipunctaria is a synonym of Macaria signaria (Hübner, [1809])""; we hold macaria-signaria, so this is a merge (see #265)"

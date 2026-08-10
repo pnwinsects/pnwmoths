@@ -255,6 +255,18 @@ export async function main(): Promise<void> {
   const matchedIndices: number[] = resolvedSlugs.flatMap((s, i) => (s !== null ? [i] : []));
   const unmatchedBinomials = speciesBinomials.filter((_, i) => resolvedSlugs[i] === null);
 
+  // A merged species (#265) can be scored under two key columns — its own binomial
+  // and a synonym-resolved retired one. species[] must carry each slug once, so
+  // group the matched columns by slug; the matrix ORs a slug's columns together,
+  // because a specimen keyed under either historical name is still this species.
+  const slugColumns = new Map<string, number[]>();
+  for (const i of matchedIndices) {
+    const slug = resolvedSlugs[i]!;
+    const cols = slugColumns.get(slug);
+    if (cols) cols.push(i);
+    else slugColumns.set(slug, [i]);
+  }
+
   // 5. DuckDB nav-image join — query ALL images, resolve per slug in TypeScript (no SQL interpolation)
   const db = await DuckDBInstance.create(':memory:');
   const { navImages, imagePairs } = await queryNavImages(db);
@@ -316,9 +328,9 @@ export async function main(): Promise<void> {
     ])
   );
 
-  const matchedSlugs = matchedIndices.map(i => resolvedSlugs[i]!);
-  const species = matchedSlugs.map((slug, spIdx) => {
-    const origIdx = matchedIndices[spIdx]!;
+  const matchedSlugs = [...slugColumns.keys()];
+  const species = matchedSlugs.map(slug => {
+    const origIdx = slugColumns.get(slug)![0]!;
     const binomial = speciesBinomials[origIdx] ?? '';
     const normalized = normalizeBinomial(binomial);
     const parts = normalized.split(' ');
@@ -337,10 +349,11 @@ export async function main(): Promise<void> {
 
   const nMatchedSpecies = matchedSlugs.length;
   const matrix = dataRows.map(row => {
-    // Build list of matched-species-rank positions that score '1' in this row
+    // Build list of matched-species-rank positions that score '1' in this row.
+    // A slug with several source columns matches if ANY of them scores '1'.
     const matchingRanks: number[] = [];
-    for (const [rank, origIdx] of matchedIndices.entries()) {
-      if (row[origIdx + 1] === '1') {
+    for (const [rank, slug] of matchedSlugs.entries()) {
+      if (slugColumns.get(slug)!.some(origIdx => row[origIdx + 1] === '1')) {
         matchingRanks.push(rank);
       }
     }

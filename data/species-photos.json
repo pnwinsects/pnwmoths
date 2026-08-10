@@ -23329,23 +23329,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "speranza-andersoni": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/speranza-andersoni/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/speranza-andersoni/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "speranza-guenearia": {
     "high_res_available": true,
     "specimens": [
@@ -23353,6 +23336,23 @@
         "specimen_id": "A",
         "view": "D",
         "tiles_path": "species-tiles/speranza-guenearia/A-D"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "speranza-occiduaria": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-occiduaria/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-occiduaria/B-V"
       }
     ],
     "photographer": "Merrill Peterson",

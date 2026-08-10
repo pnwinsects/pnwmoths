@@ -13,7 +13,6 @@ drepana-bilineata,850020,mona
 eudeilinia-herminiata,850021,exact
 oreta-rosea,850023,exact
 phyllodesma-americana,870003,exact
-phyllodesma-coturnix,870003,synonymy
 malacosoma-disstria,870014,exact
 malacosoma-constrictum,870015,gender
 malacosoma-californicum,870018,gender
@@ -112,7 +111,6 @@ speranza-exauspicata,91a0714,mona
 speranza-bitactata,91a0720,mona
 speranza-decorata,91a0725,mona
 speranza-colata,91a0726,mona
-speranza-andersoni,91a0727,crosswalk
 speranza-occiduaria,91a0727,mona
 speranza-helena,91a0731,mona
 speranza-simplex,91a0733,mona
@@ -126,8 +124,6 @@ macaria-aemulataria,91a0752,exact
 macaria-adonis,91a0760,exact
 macaria-sexmaculata,91a0766,exact
 macaria-signaria,91a0767,exact
-macaria-submarmorata,91a0767,synonymy
-macaria-unipunctaria,91a0767,crosswalk
 macaria-oweni,91a0770,exact
 macaria-marmorata,,unplaced
 digrammia-californiaria,91a0774,exact
@@ -385,7 +381,6 @@ drasteria-parallela,930903.1,exact
 drasteria-petricola,930905,exact
 drasteria-hudsonica,930906,exact
 drasteria-maculosa,930908,exact
-drasteria-nubicola,930908,crosswalk
 drasteria-perplexa,930909,exact
 drasteria-adumbrata,930910,exact
 drasteria-stretchii,930911,exact

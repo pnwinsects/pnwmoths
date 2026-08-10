@@ -40,10 +40,13 @@ test('normalizeSlug: already-hyphenated slug unchanged modulo case', () => {
 // loadUnpublishedSpecies
 // ---------------------------------------------------------------------------
 
-test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 44 entries', () => {
+test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 42 entries', () => {
+  // 44 → 42 with the #265 merges: drasteria-nubicola and phyllodesma-coturnix left the
+  // catalog entirely (merged into their seniors, C-023), so their deny-list rows went too —
+  // a slug that no longer exists has nothing to gate.
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished instanceof Set, 'result should be a Set');
-  assert.strictEqual(unpublished.size, 44, `expected 44 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+  assert.strictEqual(unpublished.size, 42, `expected 42 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
 });
 
 test('loadUnpublishedSpecies: real CSV does NOT contain "hemileuca-nuteglan" (#268 removed, not hidden)', () => {

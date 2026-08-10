@@ -95,3 +95,59 @@ test('real data/species-redirects.csv: no new_slug is in the unpublished-species
       'so the redirect (meta refresh, canonical link, JS fallback) would resolve to a 404',
   );
 });
+
+test('filterToEmittedTargets: suppresses gated targets, keeps live and unknown ones', async () => {
+  const { filterToEmittedTargets } = await import('./speciesRedirects.ts');
+  const rows = [
+    { oldSlug: 'a-b', newSlug: 'c-d', reason: 'published target' },
+    { oldSlug: 'e-f', newSlug: 'g-h', reason: 'withheld-family target' },
+    { oldSlug: 'i-j', newSlug: 'k-l', reason: 'deny-listed target' },
+    { oldSlug: 'm-n', newSlug: 'o-p', reason: 'target unknown to species.csv — integrity gate owns it' },
+  ];
+  const slugToFamily = new Map([
+    ['c-d', 'Noctuidae'],
+    ['g-h', 'Geometridae'],
+    ['k-l', 'Noctuidae'],
+  ]);
+  const emitted = filterToEmittedTargets(rows, slugToFamily, new Set(['geometridae']), new Set(['k-l']));
+  assert.deepEqual(emitted.map(r => r.oldSlug), ['a-b', 'm-n']);
+});
+
+test('real data: the #265 Geometridae merge redirects stay in the CSV but emit no stub while the family is withheld', async () => {
+  // speranza-occiduaria and macaria-signaria are display-gated by the #48 embargo, so a
+  // stub pointing at them is a built-in 404 (the blocking link check catches it). The
+  // rows must survive in the CSV — the retirement is a fact, and the stubs appear
+  // automatically when the embargo lifts.
+  const raw = parseRedirectsCsv(readFileSync(resolve('data/species-redirects.csv'), 'utf8'));
+  const rawOld = new Set(raw.map(r => r.oldSlug));
+  for (const retired of ['speranza-andersoni', 'macaria-unipunctaria', 'macaria-submarmorata']) {
+    assert.ok(rawOld.has(retired), `${retired} must stay recorded in species-redirects.csv`);
+  }
+
+  const { default: getSpeciesRedirects } = await import('./speciesRedirects.ts');
+  const { loadWithheldFamilies, isWithheldOrUnclassified } = await import('../_lib/withheld-families.ts');
+  const { loadUnpublishedSpecies, normalizeSlug } = await import('../_lib/unpublished-species.ts');
+  const { parse } = await import('csv-parse/sync');
+  const withheld = loadWithheldFamilies();
+  const unpublished = loadUnpublishedSpecies();
+  // csv-parse, not a naive line split: authority fields like "(Packard, 1874)" carry
+  // commas, and the family column sits after them.
+  const speciesRows = parse(readFileSync(resolve('data/species.csv')), {
+    columns: true, skip_empty_lines: true, bom: true,
+  }) as Array<{ genus?: string; species?: string; family?: string }>;
+  const slugToFamily = new Map(
+    speciesRows.map(r => [normalizeSlug(`${r.genus ?? ''}-${r.species ?? ''}`), r.family ?? ''] as const)
+  );
+  assert.equal(slugToFamily.get('speranza-occiduaria'), 'Geometridae', 'family lookup sanity check');
+
+  const gatedButEmitted = getSpeciesRedirects().filter(r => {
+    const family = slugToFamily.get(r.newSlug);
+    if (family === undefined) return false;
+    return isWithheldOrUnclassified(family, withheld) || unpublished.has(r.newSlug);
+  });
+  assert.deepEqual(
+    gatedButEmitted.map(r => `${r.oldSlug} -> ${r.newSlug}`),
+    [],
+    'every emitted redirect stub must target a page the build actually produces',
+  );
+});
