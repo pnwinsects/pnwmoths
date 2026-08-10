@@ -73,12 +73,50 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-025 · 2026-08-10 · *Catocala allusa* and *C. faustina* stay two species; ours takes the name *cleopatra*
+
+**Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5243497181),
+the curator relaying Lars Crabo · **Status** Pending (rename — #298) · **Refines** C-019 and C-021
+
+> I heard back from Lars about the Catocala faustina/allusa issue. He says that we should continue to
+> treat ours as two species (based on a conversation with a Catocala expert, Larry Gall, who has a
+> forthcoming paper on the matter). However, we should be using the name cleopatra instead of allusa.
+> Current taxonomy lists cleopatra as a subspecies of faustina, but the Gall paper will be elevating
+> cleopatra to species level. For now, let's use the name cleopatra instead of allusa and once that
+> paper comes out, we can add the formal citation (and hopefully a checklist number).
+
+Why it matters: this closes the C-019 hold **against** the MPG synonymy — the site's "contrarian and
+potentially incorrect view" (the *allusa* account's own words) turns out to anticipate Gall's
+forthcoming elevation, on the authority of the *Catocala* specialist himself. The catalogue keeps two
+species where MPG has one; the next crosswalk builder must not refile the #265 merge question. The
+name changes: *cleopatra* Strecker, 1874 has priority over *allusa* Hulst, 1884 (both currently
+*faustina* subspecies per MPG's own synonymy note, which already flags "active study … Lawrence Gall").
+The shared `noc_id` `93-0801` (C-021) stays shared until the paper brings a checklist number; the
+formal citation goes into both accounts when it exists. The accounts' argumentative paragraphs are
+Lars's to rewrite then — the rename applies the name only.
+
+What changed: nothing yet — the rename (species row, 50 records, photos + tiles, key synonym,
+redirects, account file) is tracked as #298.
+
+## C-024 · 2026-08-10 · The *americana* synonymy note loses its closing clause
+
+**Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5243418290),
+the curator's own words · **Status** Applied · **Refines** C-023
+
+> Yes, please drop "but Pohl & Nanz (2023) synonymize them." from the account for Phyllodesma americana.
+
+The C-023 sentences cited Pohl & Nanz twice — the paragraph's pre-existing first sentence already
+attributes the synonymy to them — and when the duplication was pointed out the curator chose this
+trim. The second added sentence now ends "…has been read by some as suggesting two taxa."
+
+What changed: `src/content/species/phyllodesma-americana.md`, one clause removed.
+
 ## C-023 · 2026-08-06 · The five confirmed merges apply; both retiring accounts drop
 
 **Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5208340221),
 the curator's own words · **Status** Applied (repo data and CDN copy — #265 PR; 380 objects
 copied 2026-08-10, six *Macaria* sources absent per the #232 gap, see #48) ·
-**Refines** C-016, C-017 and C-019
+**Refines** C-016, C-017 and C-019 · **Refined by** C-024
 
 The merges themselves were ruled in C-016 and C-019; this entry records the prose disposition that
 was still open on C-019, and their application. On *Drasteria*:
@@ -231,7 +269,8 @@ search entry all returned. The stale page Merrill saw was an additive-deploy lef
 ## C-019 · 2026-08-05 · Two of three found-while-matching merges confirmed; *Catocala allusa* held
 
 **Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5195492377), the curator's own words ·
-**Status** Applied (the two confirmed merges — C-023); On hold (*Catocala allusa*)
+**Status** Applied (the two confirmed merges — C-023); the *Catocala allusa* hold is resolved by C-025 (two
+species stand; renamed *cleopatra*) · **Refined by** C-025
 
 > It's fine to: 1) treat Macaria submarmorata as a synonym subsumed within M. signaria. 2) treat
 > Phyllodesma coturnix as a synonym subsumed within P. americana. For now, hold off on making any
