@@ -154,19 +154,23 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1191 in real data/key-matrix.json', () => {
+  test('meta.matchedSpecies === 1192 in real data/key-matrix.json', () => {
     // Issue #84 deny-lists unpublished species, excluding formerly matched key species.
     // oedemasia-salicis was un-gated (Merrill's guidance: it's the canonical current
     // placement and should show its page/images), a net +1 over the 1190 baseline.
     // Un-hiding schizura-ipomaeae (#269) leaves this count alone — the key spells it
     // "Schizura ipomoeae", so it is an unmatched key species regardless of the gate.
+    // The #265 merges move it again, net +1 over 1191: the retired "Drasteria
+    // nubicola" key column now synonym-resolves to drasteria-maculosa (previously
+    // deny-listed, so unmatched), while "Phyllodesma coturnix" folds into
+    // phyllodesma-americana's existing entry (OR-merged, no new slug).
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1191,
-      `expected meta.matchedSpecies to be 1191, got ${raw.meta.matchedSpecies}`
+      1192,
+      `expected meta.matchedSpecies to be 1192, got ${raw.meta.matchedSpecies}`
     );
   });
 });

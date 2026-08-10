@@ -73,6 +73,46 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-023 · 2026-08-06 · The five confirmed merges apply; both retiring accounts drop
+
+**Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5208340221),
+the curator's own words · **Status** Applied (repo data — #265 PR); Pending (CDN copy —
+`scripts/migrate-merged-species-photos.ts`) · **Refines** C-016, C-017 and C-019
+
+The merges themselves were ruled in C-016 and C-019; this entry records the prose disposition that
+was still open on C-019, and their application. On *Drasteria*:
+
+> No need to carry "Crescent Dunes near Denio" from Drasteria nubicola to D. maculosa. Let's just go
+> with the current maculosa account and drop the nubicola account.
+
+On *Phyllodesma*, choice (b) — drop the *coturnix* account, add detail to *americana* — with the
+added sentences in the curator's own wording:
+
+> Franclemont (1973) and Powell & Opler (2009) separated *coturnix* from *americana* only by its
+> smaller size and male genitalia. Limited mtDNA barcode sequence divergence in California material
+> has been read by some as suggesting two taxa, but Pohl & Nanz (2023) synonymize them.
+
+Why it matters: the *nubicola* account's one unique fact — the "Crescent Dunes near Denio" type
+locality that *maculosa*'s rewrite generalised to "southern Harney County" — is **knowingly
+dropped**, not lost. The *coturnix* account's 652-word argument that the taxa might be distinct
+survives only as the two sentences above; the sources it cited beyond them (Mustelin's southern
+California material, Franclemont's rearing suggestion) now live only in git history. The curator
+also confirmed re-lettering the incoming specimens where the survivor already uses the letter
+("Yes - that's a good catch"), so photos keep their historical binomial filenames but take new
+catalog letters: *andersoni* A→B under *occiduaria*; *unipunctaria* B→C and A→D and *submarmorata*
+A→E under *signaria*; *coturnix* A→C under *americana*.
+
+What changed (all in the #265 PR): five rows deleted from `data/species.csv` (with
+`similar_species` repointed on *D. hudsonica* and cleared on *P. americana*); *nubicola*'s six
+occurrence records re-keyed to *maculosa*; `data/images.csv`, `data/image-derivatives.csv`,
+`data/species-photos.json` and the photo manifest re-keyed and re-lettered;
+`data/species-redirects.csv` and `data/species-synonyms.csv` gained the five retired names;
+28 objects recorded in `data/cdn-retired-images.csv`; `src/content/species/drasteria-nubicola.md`
+and `phyllodesma-coturnix.md` deleted; the sentences above added to `phyllodesma-americana.md`;
+`build-key.ts` now OR-merges key columns that resolve to one slug, adding *maculosa* to Identify
+(1,191 → 1,192). *Catocala allusa* remains untouched and on hold (C-019). The C-017 *Macaria
+marmorata* → *M. signaria* ruling is **not** part of this batch; it is tracked as #294.
+
 ## C-022 · 2026-08-06 · The *Lacinipolia vicina* complex is mid-revision — change nothing
 
 **Source** [#285 comment](https://github.com/pnwinsects/pnwmoths/issues/285#issuecomment-5208475452),
@@ -190,7 +230,7 @@ search entry all returned. The stale page Merrill saw was an additive-deploy lef
 ## C-019 · 2026-08-05 · Two of three found-while-matching merges confirmed; *Catocala allusa* held
 
 **Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5195492377), the curator's own words ·
-**Status** Pending (the two confirmed merges — #265); On hold (*Catocala allusa*)
+**Status** Applied (the two confirmed merges — C-023); On hold (*Catocala allusa*)
 
 > It's fine to: 1) treat Macaria submarmorata as a synonym subsumed within M. signaria. 2) treat
 > Phyllodesma coturnix as a synonym subsumed within P. americana. For now, hold off on making any
@@ -219,7 +259,7 @@ have been in it, distinct from *provisional* (C-004) and *superseded* (C-016).
 ## C-017 · 2026-08-05 · Records and images follow the name; *marmorata* disambiguated
 
 **Source** [#259 comment](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5195750440), the curator's own words ·
-**Status** Applied (renames); Pending (merges — see C-019)
+**Status** Applied (renames); Applied (merges — C-023); Pending (*Macaria marmorata* → *M. signaria* — #294)
 
 > All records and images under the old names should be migrated to the new names. Currently, the
 > page for Drasteria maculosa has prose and photos but no dots on the map.
@@ -236,7 +276,7 @@ Also settled in the same comment:
 ## C-016 · 2026-08-03 · Eight names resolved against the MPG master list
 
 **Source** [#259 comment](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5172589343), the curator's own words ·
-**Status** Applied (renames); Pending (merges — see C-019, #265)
+**Status** Applied (renames); Applied (merges — C-023)
 
 | Ours | Becomes | Kind |
 | --- | --- | --- |
