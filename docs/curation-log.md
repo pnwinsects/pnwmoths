@@ -260,7 +260,8 @@ have been in it, distinct from *provisional* (C-004) and *superseded* (C-016).
 ## C-017 · 2026-08-05 · Records and images follow the name; *marmorata* disambiguated
 
 **Source** [#259 comment](https://github.com/pnwinsects/pnwmoths/issues/259#issuecomment-5195750440), the curator's own words ·
-**Status** Applied (renames); Applied (merges — C-023); Pending (*Macaria marmorata* → *M. signaria* — #294)
+**Status** Applied (renames); Applied (merges — C-023); Applied (*Macaria marmorata* → *M. signaria* — #294; its
+four CDN objects were part of the #232 never-landed batch, so only the name mapping is recorded, see #48)
 
 > All records and images under the old names should be migrated to the new names. Currently, the
 > page for Drasteria maculosa has prose and photos but no dots on the map.
