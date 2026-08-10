@@ -281,16 +281,14 @@ describe('data/checklist-order.csv', () => {
     assert.deepEqual(regressions, []);
   });
 
-  it('leaves only provisional names and the one open curator question unplaced', () => {
+  it('leaves only provisional names unplaced', () => {
     const unplaced = ordered.filter((r) => r.matched_via === 'unplaced').map((r) => r.species_slug);
     const provisional = unplaced.filter((s) => /\b(sp|species|aff|nr)\b/.test(s));
-    // Was two. `hemileuca-nuteglan` left the catalog entirely in #268, so the only
-    // named species still without a position is the one the curator told us not to
-    // act on. Every other formerly-unplaced name resolved by being renamed on this
-    // branch, which is what makes them placeable at all.
-    assert.deepEqual(unplaced.filter((s) => !provisional.includes(s)), [
-      'macaria-marmorata', // curator: the Stamnodes mapping is an epithet collision, do not act (#218)
-    ]);
+    // Was two, then one, now none. `hemileuca-nuteglan` left the catalog in #268;
+    // `macaria-marmorata` — long the sole named species without a position, because
+    // MPG's master list has no row for the name — was ruled a synonym of
+    // M. signaria (C-017) and merged in #294. Every named species now places.
+    assert.deepEqual(unplaced.filter((s) => !provisional.includes(s)), []);
     assert.equal(provisional.length, 21);
   });
 
