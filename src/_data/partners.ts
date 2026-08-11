@@ -23,7 +23,6 @@ const collaborators: Partner[] = [
   { name: 'Oregon Department of Agriculture', url: 'https://www.oregon.gov/oda', logo: 'orAg.png' },
   { name: 'Royal British Columbia Museum', url: 'https://www.royalbcmuseum.bc.ca/', logo: 'RBCM.png' },
   { name: 'Washington State Department of Agriculture', url: 'https://agr.wa.gov/', logo: 'wsda.png' },
-  { name: 'Lucid', url: 'https://www.lucidcentral.com/', logo: 'lucid.png' },
   { name: 'Beaty Biodiversity Museum, University of British Columbia', url: 'https://www.beatymuseum.ubc.ca/', logo: 'ubc.png' },
 ];
 
