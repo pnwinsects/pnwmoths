@@ -6,7 +6,7 @@
 
 This species can usually be identified from other *Catocala* species by its medium size, pale gray-tan forewing, and dark gray reniform spot lacking rusty color. It is smaller and much less powdery than *Catocala junctura*. *Catocala irene* has a more mottled forewing with a distinct rusty color, including in the reniform spot. *Catocala hermia*, a species that is restricted to the far eastern part of the Northwest, is similar in size and color. It is variable, but tends to be either more powdery with an indistinct pattern, or more blue-gray, with darker lines than *C. faustina*. It also differs in details of the pattern, including a more diffuse subterminal line and shorter paired teeth on the portion of the postmedial line that is opposite the cell.
 
-This species and *Catocala allusa* have been combined recently (Gall & Hawks 2010). We believe that these moths are partially sympatric without evidence for intergradation and maintain them as separate species pending further study.  See additional comments under *C. allusa*.
+This species and *Catocala allusa* have been combined recently (Gall & Hawks 2010). We believe that these moths are partially sympatric without evidence for intergradation and maintain them as separate species pending further study.  See additional comments under *C. cleopatra*.
 
 ## Habitat
 

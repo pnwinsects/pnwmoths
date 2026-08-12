@@ -76,7 +76,9 @@ what made C-020 possible to reconstruct.
 ## C-025 · 2026-08-10 · *Catocala allusa* and *C. faustina* stay two species; ours takes the name *cleopatra*
 
 **Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5243497181),
-the curator relaying Lars Crabo · **Status** Pending (rename — #298) · **Refines** C-019 and C-021
+the curator relaying Lars Crabo · **Status** Applied (repo data and CDN copy — #298 PR; 267 objects
+copied 2026-08-11; the accounts' argumentative paragraphs await Lars's rewrite once the Gall citation
+exists) · **Refines** C-019 and C-021
 
 > I heard back from Lars about the Catocala faustina/allusa issue. He says that we should continue to
 > treat ours as two species (based on a conversation with a Catocala expert, Larry Gall, who has a
