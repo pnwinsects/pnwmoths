@@ -26,7 +26,7 @@ test('every #298 retirement row is a pure folder retarget under a walked prefix'
     columns: true, skip_empty_lines: true, bom: true,
   }) as Array<{ old_path: string; superseded_by: string; reason: string }>;
   const rows = retired.filter(r => r.reason.includes('#298'));
-  assert.ok(rows.length >= 16, `expected the 16 repo-tracked objects, got ${rows.length}`);
+  assert.equal(rows.length, 16, `expected the 16 repo-tracked objects, got ${rows.length}`);
   for (const { old_path, superseded_by } of rows) {
     assert.ok(
       SLUG_PREFIXES.some(p => old_path.startsWith(p(FROM_SLUG))),
