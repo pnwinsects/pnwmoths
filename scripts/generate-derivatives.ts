@@ -19,11 +19,13 @@
  *   LIMIT=8 node scripts/generate-derivatives.ts          # vertical-slice pilot
  *   node scripts/generate-derivatives.ts                  # full run
  *   KIND=glossary node scripts/generate-derivatives.ts    # one source family
+ *   ONLY=clostera-brucei node scripts/generate-derivatives.ts   # one species
  *
  * Environment variables:
  *   DRY_RUN       — "1" to print the plan and exit without generating
  *   LIMIT         — process at most N derivatives (pilot runs)
  *   KIND          — restrict to legacy | highres | glossary
+ *   ONLY          — restrict to sources whose path contains this substring
  *   OUTPUT_DIR    — local output root (default var/derivatives)
  *   CONCURRENCY   — parallel workers (default 4)
  *
@@ -53,6 +55,19 @@ const execFileAsync = promisify(execFile);
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const LIMIT: number = Number(process.env['LIMIT'] ?? '0');
 const KIND: string = process.env['KIND'] ?? '';
+
+/**
+ * Substring filter on the source path, for adding a photo without re-deriving
+ * the corpus (#214).
+ *
+ * `LIMIT` cannot do this job: it slices the front of the work list, so the eight
+ * derivatives you want are only reachable by first regenerating everything ahead
+ * of them. And the resumability check below treats any derivative whose local
+ * file is missing as outstanding — `var/` is scratch, so on a fresh checkout that
+ * is all 23,000 of them, several hours of vips, no matter how few photos actually
+ * changed.
+ */
+const ONLY: string = process.env['ONLY'] ?? '';
 const OUTPUT_DIR: string = resolve(process.env['OUTPUT_DIR'] ?? 'var/derivatives');
 const CONCURRENCY: number = Math.max(1, Number(process.env['CONCURRENCY'] ?? '4'));
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
@@ -175,6 +190,7 @@ async function main(): Promise<void> {
   const sources = readSources(resolve('data'));
   let specs = buildWorkList(sourcePaths(sources));
   if (KIND) specs = specs.filter((s) => s.kind === (KIND as SourceKind));
+  if (ONLY) specs = specs.filter((s) => s.sourcePath.includes(ONLY));
 
   const manifest = readManifest(MANIFEST_PATH);
 

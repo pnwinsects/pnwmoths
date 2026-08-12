@@ -286,16 +286,19 @@ cost a debugging cycle to discover.
   `check-derivatives.ts` at build time; fixing both makes the ledger assert CDN objects that do
   not exist until a maintainer runs the copy. Grep for the bare slug, not for one prefix.
 
-- **A generated artifact must not carry hand-added fields.** `data/species-photos.json` holds
-  `photographer` and `license` on all 1,241 species; `generate-species-photos.ts` has never
-  produced them, so `npm run photos:materialize` silently strips every credit. The generator
-  documents this in a comment, which is exactly where a runbook step
-  ([#214](https://github.com/pnwinsects/pnwmoths/issues/214) step 2 is "regenerate it") will not
-  look. Either the generator emits the field or the field lives in its own file — "add it manually
-  afterwards" is a data-loss bug with a delay fuse ([#267](https://github.com/pnwinsects/pnwmoths/issues/267),
-  [ADR 0017](adr/0017-reproducible-committed-artifacts.md)). Note that types did not save us:
-  `speciesPhotos.ts` requires both fields, but the error only fires *after* the damage is staged,
-  and a 1,200-key structural mismatch reads as a JSON shape problem, not as lost attribution.
+- **A generated artifact must not carry hand-added fields it does not preserve.** For a year of
+  its life, `data/species-photos.json` held curator-entered `photographer`/`license` that
+  `generate-species-photos.ts` never produced, so `npm run photos:materialize` silently stripped
+  every credit ([#267](https://github.com/pnwinsects/pnwmoths/issues/267)) — and the warning lived
+  in a generator comment, exactly where a runbook step ("regenerate it") never looks. **Resolved by
+  the third option** the original dilemma ("generator emits the field, or the field lives in its
+  own file") missed: the generator now merges into the committed artifact, carrying curator fields
+  forward and naming every slug that takes a default
+  ([ADR 0034](adr/0034-generated-artifacts-merge-curator-fields.md); see the merge-rule lesson
+  below). Two residues worth keeping: types did not save us — `speciesPhotos.ts` required both
+  fields, but the error fired only *after* the damage was staged, reading as a JSON shape problem
+  rather than lost attribution — and any generator that overwrites rather than merges its committed
+  output should be treated as this bug waiting to recur.
 
 - **`parse` + `stringify` round-tripping a CSV rewrites quoting you did not touch.**
   `csv-stringify` quotes only where required, so rows whose fields carried unnecessary quotes
@@ -316,6 +319,36 @@ cost a debugging cycle to discover.
   join collision). Numeric IDs are opaque to contributors; slugs match the URL structure.
   Derive join slugs from the DB genus+species, not from image filenames (they diverge for
   reclassified species).
+
+- **A "done" status the idempotency guard doesn't know about re-does the whole corpus.**
+  `tile-photos.ts` skipped `status=tiled` and nothing else, so every one of the 3,811
+  rows already at `uploaded` came back as eligible: `upload-tiles.ts` deletes the local
+  tile directory once a row is on the CDN, so the filesystem check that would have caught
+  it finds no `.dzi` and reports "not tiled". A routine `npm run photos:tile` would have
+  re-downloaded ~250 GB from Dropbox and walked finished rows *backwards* out of
+  `uploaded`, handing them all back for re-upload — and its first log line would have said
+  `3,826 eligible` where the true backlog was 15 (#214). When a status machine grows a
+  stage, re-read every `!== 'someStatus'` guard written before it existed; the guard that
+  needs updating is the one that names a single status where it means "not finished".
+
+- **Committed artifacts written by a script usually have a second author.** Both
+  `data/species-photos.json` (curator-entered `photographer`/`license`) and
+  `data/image-derivatives.csv` (the durable record of a CDN whose scratch state lives in
+  `var/`) were emitted from scratch by their generator, so a run silently deleted whatever
+  it hadn't computed — one of them failing `tsc --noEmit` on every single run, the other
+  reachable from the runbook's own advice to scope a run. Before a generator writes a
+  committed file, ask what is in that file that its inputs cannot reproduce, and merge
+  rather than replace ([ADR 0034](adr/0034-generated-artifacts-merge-curator-fields.md)).
+
+- **Loosening a parser does not fix the rows already parsed under the strict version.**
+  Filenames using a space rather than a hyphen before the specimen tail
+  (`Euxoa absona A-D.tif`) ingested with an empty `specimen_id`/`view`, which made them
+  untileable even where the binomial was a clean match. Fixing the regex changed nothing
+  on its own: a re-ingest skips rows already present by `content_hash`, and `RESORT_ONLY`
+  deliberately re-classifies from the stored `binomial_raw` rather than re-parsing. A
+  grammar change needs a backfill path for the existing manifest — put it in the
+  re-classification pass, where it stays available for the next such change, and write
+  only into empty fields so it can never clobber a correction.
 
 - **Write-back scripts must be additive-only and idempotent.** Scripts that mutate
   committed data (`records.csv` district fill, CDN migration) must never overwrite

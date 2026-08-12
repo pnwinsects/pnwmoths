@@ -30,12 +30,25 @@ Background and rationale: [ADR 0022](../docs/adr/0022-pregenerated-image-derivat
 
 ## Steps
 
-**1. Generate.** Both scripts are resumable and idempotent — a rerun after a complete run does no
-work and writes nothing, so re-running after adding one photo processes only that photo.
+**1. Generate.** Both scripts are resumable and idempotent — a rerun never re-uploads what is
+already on the CDN.
+
+Scope the run to what you actually added. `ONLY` matches any substring of the source path:
+
+```bash
+DRY_RUN=1 KIND=highres ONLY=callopistria-floridensis node scripts/generate-derivatives.ts
+KIND=highres ONLY=callopistria-floridensis node scripts/generate-derivatives.ts
+```
+
+Generation is *not* free the second time around, despite the manifest: a row that has been
+uploaded no longer counts as `generated`, and `var/derivatives` is scratch that may not survive
+at all. An unscoped run after adding two photos still re-derives all ~23,000 files. Reach for
+`ONLY` (or `KIND`) whenever you know which images changed, and keep the full run for a change to
+the variant matrix itself:
 
 ```bash
 DRY_RUN=1 node scripts/generate-derivatives.ts   # print the plan first
-node scripts/generate-derivatives.ts
+node scripts/generate-derivatives.ts             # everything — hours
 ```
 
 **2. Upload.**
@@ -47,6 +60,10 @@ BUNNY_STORAGE_PASSWORD=... node scripts/upload-derivatives.ts
 
 The committed manifest is written from **uploaded** rows only, so a derivative sitting on your
 laptop but not on the CDN still fails the guard. That is deliberate.
+
+New rows are merged into `data/image-derivatives.csv`, never swapped in for it, so a scoped run
+adds its own lines and leaves every other species' alone. Expect the diff to be pure insertions;
+deletions mean something is wrong and the file should not be committed.
 
 **3. Commit the manifest.**
 

@@ -16,6 +16,8 @@ should know are imperfect right now. Each item is tagged:
 | 2,660 BC rows missing `district_id` | These pre-existing BC rows carry a county name but no stable `district_id`; the additive-only re-join skipped them. Fix is a crosswalk name-lookup pass. | `scripts/backfill-legacy-county.ts`, `data/district-crosswalk.csv` | ACTIONABLE |
 | Stale StatCan district names | Two regional-district names are carried verbatim from StatCan and are known to be out of date. A Browse display override to show current names is deferred. | `data/boundaries/pnw-districts.geojson` | ACCEPTED (display override deferred) |
 | Synonym curation pass not yet run | Curation tooling shipped, but the first curator pass over ~30–80 unresolved binomials has not been performed. | `data/species-synonyms.csv` | ACTIONABLE |
+| 1,018 ingested photos blocked on taxonomy, not tooling | After #214 cleared everything mechanically processable, the manifest still holds `status: discovered` rows that no script can advance: **670 genus-only** (filename names a genus the catalog has, with an epithet it does not), **326 likely-synonym** (binomial absent from `species.csv` and from `species-synonyms.csv`), **14 unparseable**, **8 provisional** (`sp`, `n sp`, `nr <species>` — deliberately never coerced into a clean match). Each needs a human to decide what species it is; `match_bucket` records why each is held. The route for most is adding a row to `species-synonyms.csv` and re-running `npm run photos:investigate`, which promotes and tiles them — that pass alone moved 86 rows. | `data/species-photos-manifest.csv`, [CURATING_SPECIES_SYNONYMS.md](../_instructions/CURATING_SPECIES_SYNONYMS.md) | ACTIONABLE (needs a curator, not a maintainer) |
+| 166 derivative rows in a `failed` state | `var/derivatives-manifest.csv` carries 166 rows at `status: failed` from an earlier run, predating #214 and untouched by it. They are excluded from `data/image-derivatives.csv`, so the source gate is honest about them, but no one has established whether the sources are broken or the failures were transient. | `var/derivatives-manifest.csv`, `scripts/generate-derivatives.ts` | ACTIONABLE |
 
 ## Build / CI limits
 
@@ -55,3 +57,11 @@ Accepted as out-of-scope for now; revisit in a future feature milestone.
 | Django URL redirects | SEO-01 — legacy Django URL redirects; requires Netlify/Cloudflare edge rules to route old paths into `/redirect.html`. Until they exist, old links 404 rather than reaching the handler — visible now as the Top 404s table on `/analytics/` ([0019](adr/0019-legacy-link-telemetry-from-logs.md)). | issue #181, `src/_lib/legacy-redirects.ts` | ACCEPTED (deferred) |
 | Photographic plates page | PLAT-01, PLAT-02 — a photographic plates page. | — | ACCEPTED (deferred) |
 | No way to pin a checklist position | Checklist order is derived wholly from the MPG taxon list, so a curator instruction of the form *"place X immediately after Y"* cannot be expressed. The one live case, `idia-concisa` after `idia-aemula`, is **already correct** — MPG's own sequence puts it there (930471, 930472) — so nothing is wrong today and nothing is asserted either. If a future MPG release moves it, the order silently changes and no check notices. Designing the anchor mechanism (sort semantics, what happens when the anchor is renamed or deleted, whether it also serves the 21 provisional names) is the deferred work. | issue #259, `scripts/build-checklist-order.ts` | ACCEPTED (deferred) |
+
+## image-derivatives.csv ordering will churn on the next upload-derivatives run
+
+**Actionable, cosmetic.** The taxonomy renames (#295/#296/#304/#305) re-keyed derivative rows in
+place, leaving ~13 ordering inversions against the sort `emitCommittedManifest` writes. Content is
+correct and unique; the next `upload-derivatives` run will re-sort the file and produce a large
+no-op diff. Harmless, but whoever reviews that diff should expect it — or re-sort deliberately in
+a dedicated commit first.

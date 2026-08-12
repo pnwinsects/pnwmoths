@@ -367,13 +367,27 @@ future debugging has the full timestamped run log available.
 
 ## What Happens Next
 
-Uploaded tiles do not appear on the site by themselves. Two things read them:
+Uploaded tiles do not appear on the site by themselves. Three things read them:
 
 1. **`npm run photos:materialize`** (`scripts/generate-species-photos.ts`) reads the
    `status: uploaded` rows out of `data/species-photos-manifest.csv`, groups them by
    species, and rewrites the committed `data/species-photos.json`. Run it after this
-   runbook and commit the result.
-2. **The species page** picks that JSON up at build time through
+   runbook and commit the result. It preserves the `photographer` and `license` a
+   curator entered, and gives any species new to the file the corpus default —
+   naming each one it defaulted, so check that list if a batch is someone else's work.
+2. **[GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md)**, which is not optional
+   here. Every `_thumbnail.webp` this run uploaded is a *source image*, and the species
+   page serves it only through pre-generated `derived/` variants ([ADR 0022](../docs/adr/0022-pregenerated-image-derivatives.md)).
+   Skip it and `npm run build` fails at `[check-derivatives] SOURCE GATE FAILED` naming
+   each thumbnail. Scope the run to what you just added rather than re-deriving 23,000
+   files — `ONLY` takes any substring of the source path:
+
+   ```bash
+   KIND=highres ONLY=callopistria-floridensis node scripts/generate-derivatives.ts
+   node scripts/upload-derivatives.ts     # needs BUNNY_STORAGE_PASSWORD
+   git add data/image-derivatives.csv
+   ```
+3. **The species page** picks that JSON up at build time through
    `src/_data/speciesPhotos.ts`, and `src/components/pnwm-image-slideshow.ts` opens the
    zoomable viewer at `{CDN_BASE_URL}/{tiles_path}.dzi` — the same path this run wrote:
 

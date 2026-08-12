@@ -112,6 +112,19 @@ describe('isTileable', () => {
     assert.equal(isTileable(row({ status: 'tiled' })), false);
   });
 
+  // #214: upload-tiles.ts deletes the local tile directory after a successful
+  // upload, so isAlreadyTiled() finds no .dzi for an uploaded row and cannot be
+  // the guard here. If isTileable let these through, a routine tile run would
+  // re-download the entire processed corpus and walk finished rows backwards
+  // from 'uploaded' to 'tiled', queueing them all for re-upload.
+  it('returns false when status is uploaded (tiles are on the CDN, local copy deleted)', () => {
+    assert.equal(isTileable(row({ status: 'uploaded' })), false);
+  });
+
+  it('returns true when status is failed (a failed row is retried)', () => {
+    assert.equal(isTileable(row({ status: 'failed' })), true);
+  });
+
   it('returns false for match_bucket genus-only (needs curation)', () => {
     assert.equal(isTileable(row({ match_bucket: 'genus-only' })), false);
   });
