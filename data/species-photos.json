@@ -16670,43 +16670,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "macaria-bitactata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-bitactata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-bitactata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-bitactata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-bitactata/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-bitactata/C-D"
-      },
-      {
-        "specimen_id": "C",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-bitactata/C-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "macaria-colata": {
     "high_res_available": true,
     "specimens": [
@@ -23324,6 +23287,43 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/spargaloma-sexpunctata/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "speranza-bitactata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-bitactata/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-bitactata/D-V"
+      },
+      {
+        "specimen_id": "E",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-bitactata/E-D"
+      },
+      {
+        "specimen_id": "E",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-bitactata/E-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-bitactata/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-bitactata/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
