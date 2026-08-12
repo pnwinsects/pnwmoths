@@ -22,7 +22,7 @@ erDiagram
 
     records {
         string  species_slug   FK
-        string  record_type    "specimen | literature | observation"
+        string  record_type    "specimen | photograph | literature | field notes | sight_field_notes"
         float   latitude
         float   longitude
         string  state
@@ -72,6 +72,25 @@ erDiagram
         int     height
     }
 
+    records_inat {
+        string  species_slug   FK
+        string  record_type    "always 'photograph'"
+        float   latitude
+        float   longitude
+        string  state          "derived from coordinates"
+        string  county         "derived; blank when the location is imprecise"
+        string  locality
+        int     elevation_ft   "always blank — iNaturalist does not supply it"
+        int     year
+        int     month
+        int     day
+        string  collector      "the observer"
+        string  collection     "always 'iNaturalist'"
+        string  notes          "location accuracy, then the observation URL"
+        string  district_id    "derived; blank when the location is imprecise"
+        int     inat_id        PK "iNaturalist observation number"
+    }
+
     parquet_records {
         string  species_slug   FK
         string  records_parquet "per-species materialized view"
@@ -84,6 +103,7 @@ erDiagram
     }
 
     species ||--o{ records          : "has occurrence records"
+    species ||--o{ records_inat     : "has imported observations"
     species ||--o{ images           : "has photos"
     species ||--o{ parquet_records  : "materialized as"
     species ||--o{ species_links    : "has external links"
@@ -94,8 +114,10 @@ erDiagram
 
 | File | Rows (approx) | Description |
 |------|--------------|-------------|
-| `species.csv` | ~900 | One row per species. Primary key is `id`; slug is derived as `genus.lower()-species.lower()`. `epithet_quoted` (`1` or blank) marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); it drives display only — the slug and foreign keys always use the clean epithet. See [`src/_lib/format-epithet.ts`](../src/_lib/format-epithet.ts). |
+| `species.csv` | 1 424 | One row per species. Primary key is `id`; slug is derived as `genus.lower()-species.lower()` with whitespace collapsed to hyphens (see [Slug convention](#slug-convention)). `epithet_quoted` (`1` or blank) marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); it drives display only — the slug and foreign keys always use the clean epithet. See [`src/_lib/format-epithet.ts`](../src/_lib/format-epithet.ts). |
 | `records.csv` | ~30 000 | Geo-referenced occurrence records (specimens, literature, observations). |
+| `records-inat.csv` | ~60 | **Generated, not hand-edited.** Occurrence records imported from the [PNWMoths iNaturalist project](https://www.inaturalist.org/projects/pnwmoths) by [`scripts/sync-inat-records.ts`](../scripts/sync-inat-records.ts) (`npm run inat:sync`), rewritten in full every run. Same 15 columns as `records.csv` plus `inat_id`, the observation number that keys the reconcile. See [ADR 0026](../docs/adr/0026-inaturalist-project-sync.md) and [_instructions/SYNCING_INATURALIST.md](../_instructions/SYNCING_INATURALIST.md). |
+| `inat-sync-report.csv` | varies | Generated. One row per observation the sync did *not* import, with the reason. Rewritten every run. |
 | `records-bad.csv` | varies | Records that failed validation — same schema as `records.csv`. |
 | `records-bad-coords.csv` | varies | Records dropped for coordinates outside the PNW bounds (lat 42–60, lon −139 to −110) — typically swapped lat/lon. Kept for curation; not built into the site. Produced by [`scripts/recover-clipped-bc-records.ts`](../scripts/recover-clipped-bc-records.ts). |
 | `images.csv` | ~5 000 | Photo metadata. Images are hosted on the CDN; `filename` is the CDN asset key. |
@@ -103,6 +125,9 @@ erDiagram
 | `glossary.csv` | ~150 | Wing-anatomy and taxonomy terms injected into species fact sheets at build time. |
 | `species-links.csv` | ~2 400 | Per-species external links (BugGuide, Moth Photographers Group, Butterflies and Moths of North America). Long format: one row per link (`species_slug,site,url`); a species may have several. Extracted from the legacy reference MySQL DB by [`scripts/extract-reference-links.ts`](../scripts/extract-reference-links.ts) (`npm run links:materialize`). |
 | `plates.json` | ~50 | Reference plate metadata (legacy moth-guide plates). Width/height used for CDN image sizing. |
+| `checklist-order.csv` | 1 424 | Generated. Every species in checklist (phylogenetic) order; **row order is the data**, one row per species in `species.csv`. Columns `species_slug,mpg_p_no,matched_via`. Written by [`scripts/build-checklist-order.ts`](../scripts/build-checklist-order.ts). See [Checklist order](#checklist-order) below and [ADR 0030](../docs/adr/0030-checklist-order-from-mpg.md). |
+| `mpg-taxa.csv` | 13 245 | The Moths Photographers Group North American taxon list, the source of checklist order. All 17 columns of `MPG-Taxa_20240311.xlsx`, rendered once by [`scripts/convert-mpg-xlsx.ts`](../scripts/convert-mpg-xlsx.ts). Not hand-edited — replace it wholesale when MPG ships a new workbook. |
+| `mpg-crosswalk.csv` | ~5 | **Curator-owned.** One row per species that no mechanical tier can match to an MPG row, mapping it to a binomial with the decision's `source` (issue comment, reasoning). Deliberately small: every row here is a judgement call someone made and can be held to. |
 | `parquet/<slug>/records.parquet` | varies | Per-species records, materialized by `scripts/build-data.js` for fast DuckDB queries at build time. |
 
 ## Taxonomy provenance (`family` / `subfamily` / `tribe`)
@@ -118,6 +143,67 @@ Two things trip up anyone re-deriving this data:
 
 A handful of species remain unclassified because they have no page on the reference site (or their `family` itself is suspect) — tracked in [#73](https://github.com/pnwinsects/pnwmoths/issues/73). Prefer the reference site over external sources like iNaturalist, whose subfamily circumscriptions sometimes disagree (e.g. iNat lumps `Acopa` into Noctuinae; the reference site places it in Amphipyrinae).
 
+## Two record files, two owners
+
+Occurrence records live in two files. `records.csv` is **curator-owned**: hand-edited, and
+mutated only by deliberate, maintainer-run scripts. Those are additive with two deliberate
+exceptions, both pure deletions a human asks for and reviews as a diff —
+[`dedup-records.ts`](../scripts/dedup-records.ts) (purging duplicate rows) and
+[`migrate-inat-records.ts`](../scripts/migrate-inat-records.ts) (handing a record to the
+iNaturalist sync). Nothing writes it as a side effect of fetching from a network.
+`records-inat.csv` is **machine-owned**: rewritten wholesale from the iNaturalist project on
+every sync, so a row survives only while its observation is in the project at research grade.
+
+The split exists because reconciliation is destructive — an observation removed from the project
+must disappear from the site — and a network-driven row *deleter* must not be pointed at the
+curator's file ([ADR 0026](../docs/adr/0026-inaturalist-project-sync.md)).
+
+"Every record the site serves" is the union of the two, defined once in
+[`scripts/lib/records-source.ts`](../scripts/lib/records-source.ts). Build steps that feed the
+site go through it. Maintainer curation scripts (`dedup-records`, `fill-district-from-coords`,
+`backfill-legacy-county`, `recover-clipped-bc-records`) deliberately do not — they mutate the
+curator file and must see exactly that file. So do `derive-district-audit.ts` and
+`emit-records-district-audit.ts`, whose artifact is keyed by row index into `records.csv` and
+whose question ("does the curator's stated county agree with the coordinates?") is meaningless
+for imported rows, whose county *is* derived from those coordinates.
+
+## Checklist order
+
+Professional users read the catalog in **checklist order** — the phylogenetic sequence a printed checklist uses (Drepanidae before Noctuidae; *Habrosyne* before *Ceranemota*) — not alphabetically. Nothing else in `data/` encodes it: `noc_id` is unusable as a sort key (blanks, three incompatible formats, and duplicate values) and says nothing about the order of families, subfamilies, or tribes.
+
+One file records it — `checklist-order.csv`, a flat list of every species in which **row order is the data**. There is deliberately **no ordinal column**: an integer would have to be renumbered downstream of every insertion. `mpg_p_no` rides along as provenance, so a future MPG release can be diffed against ours; it is not the sort key, because MPG renumbers between releases.
+
+One species-level key is enough because **our genera are contiguous in the MPG list**. Restricted to the species we hold, each genus occupies a single unbroken block of MPG rows, so sorting species by MPG row reproduces family, subfamily, tribe, and genus order for free. That property is load-bearing, so `scripts/build-checklist-order.test.ts` asserts it rather than trusting it.
+
+### The Checklist page orders within our hierarchy, not MPG's
+
+`/checklist/` nests species under **our** family → subfamily → tribe → genus and orders each
+level by checklist position (a node takes its earliest species' position). The flattened page
+order is therefore *not* identical to `checklist-order.csv` read top to bottom, and cannot be:
+MPG disagrees with our subfamily/tribe placement in 53 places
+([#279](https://github.com/pnwinsects/pnwmoths/issues/279)), so a genus can sit inside one of our
+groups while MPG's sequence puts it elsewhere.
+
+Two such crossings exist today. We file *Acopa* in Amphipyrinae/Psaphidini, MPG in
+Noctuinae/Bryophilini; we file *Protoperigea* in Noctuinae/Caradrinini, MPG holds it as
+*Caradrina*. Both render in the right taxonomic place and out of MPG's linear order — which is
+the correct trade for a page whose whole purpose is the nested taxonomy. Genus contiguity, which
+is what the one-sort-key design actually depends on, still holds and is asserted by
+`scripts/build-checklist-order.test.ts`.
+
+The order comes from the Moths Photographers Group taxon list (`mpg-taxa.csv`), not from our own data — see [ADR 0030](../docs/adr/0030-checklist-order-from-mpg.md) for why, and for the legacy-CMS approach it supersedes. [`scripts/build-checklist-order.ts`](../scripts/build-checklist-order.ts) joins the two, matching in tiers: exact binomial, Latin gender-ending variant, MONA number, original combination named in MPG's synonymy, and finally `mpg-crosswalk.csv`, where each row is a curator decision recorded with its source.
+
+Anything it cannot place falls to the end of its genus, alphabetically, and is **reported on every run** so the fallback stays a visible decision rather than a silent one. Expect provisional names (`sp`, `n sp`, `aff x`, `nr x`) to land there permanently — being undescribed, they have no MPG row and never will.
+
+To refresh after MPG ships a new workbook:
+
+```bash
+node scripts/convert-mpg-xlsx.ts ~/Downloads/MPG-Taxa_YYYYMMDD.xlsx
+node scripts/build-checklist-order.ts     # DRY_RUN=1 to see the report without writing
+```
+
 ## Slug convention
 
-Species slugs are derived as `genus.toLowerCase() + '-' + species.toLowerCase()` (e.g., `apantesis-arizoniensis`). Slugs are used as foreign keys in `records.csv`, `images.csv`, and `parquet/` directory names. They are not stored in `species.csv` — derive them at read time.
+Species slugs are derived as `genus.toLowerCase() + '-' + species.toLowerCase()` (e.g., `apantesis-arizoniensis`), **and then any run of whitespace is collapsed to a single hyphen**. The second half only matters for the provisional names, whose epithet carries spaces — `Xylophanes` + `nr libya` is stored and served as `xylophanes-nr-libya`, never `xylophanes-nr libya`. Lowercasing alone is the easy mistake; it produced 14 unusable rows in `checklist-order.csv` before it was caught in review. [`normalizeSlug`](../src/_lib/unpublished-species.ts) is the single implementation — use it rather than restating the rule.
+
+Slugs are used as foreign keys in `records.csv`, `images.csv`, and `parquet/` directory names, and as the `/species/{slug}/` URL segment. They are not stored in `species.csv` — derive them at read time.

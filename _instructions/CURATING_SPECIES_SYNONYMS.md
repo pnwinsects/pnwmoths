@@ -6,6 +6,15 @@
 - `data/species-photos-manifest.csv` — rows whose `binomial_raw` matches one of your decisions get re-routed to `match_bucket: resolved-via-synonym` with `binomial_resolved` and `species_slug` populated from `data/species.csv`
 - **No** Dropbox API calls, **no** bunny.net writes, **no** file downloads, **no** Dropbox token required — synonym curation is an in-repo edit + re-classify loop
 
+## Record the Decision
+
+Each synonym row is a curatorial call about which name wins. When the decision came from the curator
+— rather than from a published authority you are merely transcribing — add an entry to the
+[curation log](../docs/curation-log.md) alongside the CSV rows, in the same change. The required
+fields and the numbering rule are in
+["How to add an entry"](../docs/curation-log.md#how-to-add-an-entry), which is the one place they
+live; don't restate them from memory ([ADR 0032](../docs/adr/0032-curation-log.md)).
+
 ## Before You Start
 
 You will need:
@@ -60,12 +69,23 @@ Open the file in a **text editor** (not a spreadsheet — spreadsheets sometimes
 from_binomial,to_species_slug
 ```
 
-Append your row at the bottom. Both values are lowercase. `from_binomial` matches `binomial_raw` from the manifest exactly (lowercased, space-separated). `to_species_slug` matches the slug column in `data/species.csv` (lowercased, hyphen-joined).
+Append your row at the bottom.
+
+**Capitalise `from_binomial` the way a binomial is normally written — `Grammia doris`, not `grammia doris`.** Two different scripts read this column and they disagree about case: the photo ingest lowercases it before matching, so either form works there, but [`scripts/build-key.ts`](../scripts/build-key.ts) matches the Lucid key's binomials **case-sensitively** and a lowercase row silently fails to resolve. The symptom is a drop in the `build-key: N matched, M unmatched` line and nothing else — no error, no warning.
+
+`to_species_slug` is always lowercase and hyphen-joined, matching the slug derived from `data/species.csv`.
+
+## Schema: data/species-synonyms.csv
+
+| Field | Type | Required | Example |
+|-------|------|----------|---------|
+| from_binomial | string | yes | `Grammia nevadensis` — the retired name, capitalised as a binomial normally is |
+| to_species_slug | string | yes | `apantesis-nevadensis` — must match a species in `data/species.csv` |
 
 Example row (illustrative only — not pre-filled in the seed file; every row is a deliberate curator decision):
 
-```
-grammia nevadensis,apantesis-nevadensis
+```csv
+Grammia nevadensis,apantesis-nevadensis
 ```
 
 Make sure each row ends with a newline. Save.
@@ -125,4 +145,4 @@ On the command line:
 
 **A `synonym-warn target-not-in-species-csv <from> → <to>` line appeared in the log.** Your `to_species_slug` is not present in `data/species.csv`. Open `data/species.csv`, search for the genus you intended, and copy the slug exactly as it appears in the data (lowercase, hyphen-joined). The row in `data/species-synonyms.csv` was dropped and the corresponding manifest rows were NOT promoted. Correct the typo and re-run `npm run photos:investigate`.
 
-**A manifest row you expected to promote did not move.** The `from_binomial` does not exactly match the manifest's `binomial_raw`. Check for: extra trailing whitespace, mixed case (must be all lowercase), use of hyphens instead of spaces (use spaces), or a misspelling. Look at the actual `binomial_raw` value in the spreadsheet and copy it character-for-character into your synonyms.csv row.
+**A manifest row you expected to promote did not move.** The `from_binomial` does not match the manifest's `binomial_raw`. Check for: extra trailing whitespace, use of hyphens instead of spaces (use spaces), or a misspelling. **Case is not the problem here** — the photo ingest lowercases both sides before matching, so `Grammia doris` and `grammia doris` promote alike. Write it capitalised, as above: `build-key.ts` is the reader that does care, and it fails silently on a lowercase row.

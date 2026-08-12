@@ -32,6 +32,22 @@ Two reasons:
 
 Use `curl` whenever you need verbatim legacy text.
 
+**As of 2026-08 the legacy host 301s to the new site** (`/browse-all/` →
+`moths.pnwinsects.org/redirect.html?from=/browse-all/`), so this recipe no
+longer returns legacy HTML for every path. Two fallbacks, in order:
+
+- <https://dev.pnwmoths.biol.wwu.edu/> still serves the original site, including
+  the pages that have been cut over. It is login-gated, so `curl` will not reach
+  it — use a browser session. This is the authority for what the old site
+  *rendered*, as opposed to what it stored.
+- The reference MySQL database below holds the same content and, for the browse
+  hierarchy, holds it in a more usable form.
+
+The distinction matters: the rendered page and the stored tree agree on ordering
+(verified for the browse hierarchy), but only the rendered page tells you what
+the UI actually did — e.g. `/browse-all/` and `/browse/` were two separate pages
+linked by a "Browse with Images" anchor, not one page with a toggle.
+
 ## Reference MySQL database (original CMS data)
 
 The original site's CMS data is preserved in a local Docker container named
@@ -66,6 +82,18 @@ when the reference data changes):
   join tables — the species-to-plate assignment is a curatorial layout
   decision (which numbered plate a genus landed on) and is not derivable from
   `family`/`subfamily`/`tribe` alone.
+
+Checklist order was extracted from this database too, for a while. The CMS is a
+django-cms install whose `/browse/` page tree is stored as an MPTT nested set,
+and its left-to-right walk *is* the sequence the legacy `/browse-all/` page
+rendered — verified against the curator's list of published pages, where the
+order matched exactly over all 418 shared higher taxa. That extraction has been
+**superseded** by the Moths Photographers Group taxon list
+([ADR 0030](../adr/0030-checklist-order-from-mpg.md)): the nested set can only
+place taxa that existed when the CMS was dumped, so every species added since
+needed a curator decision. The nested set remains the best evidence of what the
+*legacy* site's order was, if that question ever comes up again.
+
 - [`scripts/backfill-legacy-county.ts`](../../scripts/backfill-legacy-county.ts)
   → legacy county backfill.
 - [`scripts/recover-clipped-bc-records.ts`](../../scripts/recover-clipped-bc-records.ts)

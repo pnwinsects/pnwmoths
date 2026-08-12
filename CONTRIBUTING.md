@@ -4,6 +4,7 @@
 
 - [Node.js 24](https://nodejs.org/) (or use [nvm](https://github.com/nvm-sh/nvm): `nvm use`)
 - [lychee](https://lychee.cli.rs/) — required locally for `npm run build:validate-links` (the Docker path includes it automatically)
+- [GitHub CLI](https://cli.github.com/) (`gh`), signed in with `gh auth login` — the `main` branch is protected, so every change lands through a pull request. The [maintainer runbooks](_instructions/) end with `gh pr create`.
 
 Or use Docker to skip local tooling (see below).
 
@@ -85,4 +86,3 @@ _instructions/      Plain-English maintainer guides
 - **Species slug:** `(genus + '-' + species).toLowerCase()`, alphanumeric and hyphens only — the canonical key across CSVs and URLs; see [`CONTEXT.md`](CONTEXT.md) / [ADR 0010](docs/adr/0010-slug-foreign-key.md)
 - **Parquet path:** `data/parquet/{slug}/records.parquet` → deployed to `_site/species/{slug}/records.parquet`
 - **Prose path:** `src/content/species/{slug}.md` — rendered into the factsheet if present
-

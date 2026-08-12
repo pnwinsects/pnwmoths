@@ -101,10 +101,19 @@ prefer that if you want the link check too.
 **6. Commit:**
 
 ```bash
+git switch -c add-photo-$(date +%Y%m%d-%H%M)
 git add data/images.csv data/image-derivatives.csv
 git commit -m "Add photo for Acronicta americana"
-git push
+git push -u origin HEAD
+gh pr create --fill
 ```
+
+The `main` branch is protected: it takes changes only through a pull request whose
+build check passes. `gh pr create` opens one; merge it from the PR page (or with
+`gh pr merge`) once the check is green, and the site deploys automatically. The
+date suffix just keeps each branch name unique, so the same command works every time.
+`gh` is the GitHub CLI — see [CONTRIBUTING.md](../CONTRIBUTING.md) for installing and
+signing into it.
 
 ## Verify
 

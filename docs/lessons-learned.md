@@ -267,6 +267,41 @@ cost a debugging cycle to discover.
 
 ## Data migration & integrity
 
+- **A genus rename has to be all-or-nothing.** Renaming two of our six *Protorthodes* to
+  *Trichopolia* (#259) split one genus into two interleaved blocks in checklist order, because
+  MPG holds all six under *Trichopolia* — so our display genus alternated down the page. If an
+  external list moves a genus, either follow it for every species we hold in that genus or for
+  none; a partial move is worse than either ([ADR 0030](adr/0030-checklist-order-from-mpg.md)).
+
+- **Two consumers, two case conventions, one column.** `data/species-synonyms.csv`'s
+  `from_binomial` is lowercased by `ingest-photos.ts` before matching but compared
+  **case-sensitively** by `build-key.ts` against the frozen Lucid source. A lowercase row is
+  therefore silently invisible to the key: no error, just `build-key: 1188 matched` where it had
+  been 1191. Write it capitalised. When a shared column has no single normalizer, the looser
+  consumer hides the stricter one's failure.
+
+- **Re-keying a slug means re-keying every path that embeds it.** A rename touches
+  `image-derivatives.csv` in two path shapes — `<slug>/<file>` for legacy photos and
+  `species-tiles/<slug>/…` for high-res tiles. Fixing only the first passes `npm test` and fails
+  `check-derivatives.ts` at build time; fixing both makes the ledger assert CDN objects that do
+  not exist until a maintainer runs the copy. Grep for the bare slug, not for one prefix.
+
+- **A generated artifact must not carry hand-added fields.** `data/species-photos.json` holds
+  `photographer` and `license` on all 1,241 species; `generate-species-photos.ts` has never
+  produced them, so `npm run photos:materialize` silently strips every credit. The generator
+  documents this in a comment, which is exactly where a runbook step
+  ([#214](https://github.com/pnwinsects/pnwmoths/issues/214) step 2 is "regenerate it") will not
+  look. Either the generator emits the field or the field lives in its own file — "add it manually
+  afterwards" is a data-loss bug with a delay fuse ([#267](https://github.com/pnwinsects/pnwmoths/issues/267),
+  [ADR 0017](adr/0017-reproducible-committed-artifacts.md)). Note that types did not save us:
+  `speciesPhotos.ts` requires both fields, but the error only fires *after* the damage is staged,
+  and a 1,200-key structural mismatch reads as a JSON shape problem, not as lost attribution.
+
+- **`parse` + `stringify` round-tripping a CSV rewrites quoting you did not touch.**
+  `csv-stringify` quotes only where required, so rows whose fields carried unnecessary quotes
+  come back unquoted and land in the diff as unrelated churn. After a scripted edit, diff for
+  changed lines that do not mention your target and restore them.
+
 - **Add a uniqueness pre-flight before the full build.** A `GROUP BY slug HAVING count(*)
   > 1` assertion in the migration test scaffold catches duplicate-key collisions (which
   become Eleventy permalink clashes) from the CSV alone — cheaper than discovering them
@@ -300,7 +335,7 @@ cost a debugging cycle to discover.
   it hadn't computed — one of them failing `tsc --noEmit` on every single run, the other
   reachable from the runbook's own advice to scope a run. Before a generator writes a
   committed file, ask what is in that file that its inputs cannot reproduce, and merge
-  rather than replace ([ADR 0026](adr/0026-generated-artifacts-merge-curator-fields.md)).
+  rather than replace ([ADR 0034](adr/0034-generated-artifacts-merge-curator-fields.md)).
 
 - **Loosening a parser does not fix the rows already parsed under the strict version.**
   Filenames using a space rather than a hyphen before the specimen tail
@@ -361,6 +396,31 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **A post-build gate must run downstream of every step that writes into the output.**
+  `check-withheld` and `check-unpublished` ran straight after `build:eleventy`, and
+  `build:copy-parquet` ran *after* them — so the gates read `_site/species/` before the step
+  that filled it. Both passed for a year while occurrence records for 126 embargoed Geometridae
+  and 45 provisional species were published at `/species/{slug}/records.parquet`, pages 404ing
+  above them ([#275](https://github.com/pnwinsects/pnwmoths/issues/275)). Neither gate was
+  wrong; both were early. Two habits fall out: order gates last in `build:site`, and write them
+  against the *directory*, not the artifact you happen to be thinking of — "a gated slug has
+  nothing under `_site/species/<slug>/`" survives a new build step, "no `index.html`" does not.
+  The corollary for the data side: a display deny-list is only a deny-list at the choke points
+  that consult it, so adding a step that copies out of `data/` means adding a fifth caller of
+  `loadUnpublishedSpecies`, not just a new npm script.
+
+- **A green build gate says nothing about what the CDN is serving.** Deploy is additive — no
+  purge, no deletes ([0008](adr/0008-deploy-bunny-additive.md)) — so a page that stops being
+  emitted stays live at its last build, forever. `check-unpublished` passes because the gate
+  works: no deny-listed species is *emitted*. Meanwhile 32 of the 45 deny-listed slugs were
+  still returning 200 in production, alongside a species deleted outright in
+  [#268](https://github.com/pnwinsects/pnwmoths/issues/268)
+  ([#273](https://github.com/pnwinsects/pnwmoths/issues/273)). Nothing linked to them and they
+  were out of the sitemap, which is exactly why nobody noticed. "The build doesn't emit it" and
+  "it isn't on the internet" are different claims: verify the second with `curl -sI` against the
+  live host, not by reading `_site/`. Any *removal* — of a page, a route, an asset — needs that
+  second check written into its runbook.
+
 - **Compare entry points with `pathToFileURL(process.argv[1]).href`, never
   `` `file://${process.argv[1]}` ``.** `import.meta.url` is a normalized file URL
   (`file:///C:/a/b.ts`); `process.argv[1]` on Windows is a backslash path (`C:\a\b.ts`).
@@ -373,6 +433,41 @@ cost a debugging cycle to discover.
   `scripts/entry-point-guards.test.ts` is a source-level invariant test that keeps it from
   coming back. General rule: a cross-platform bug that fails *silently* on the platform CI
   doesn't run needs a source-level guard, not a runtime one.
+
+- **A non-blocking check must not write state a blocking check reads.** `production.yml`'s link
+  check is `continue-on-error: true`, but it saved its lychee cache to the same
+  `lychee-cache-` namespace the blocking PR check restored from — and `max_cache_age = "7d"`
+  kept a cached *error* fresh for a week. One transient outage on an external site red-flagged
+  every PR until someone found and deleted the poisoned cache entry, with a message naming a
+  page the contributor had never touched
+  ([#261](https://github.com/pnwinsects/pnwmoths/issues/261)). Removed in
+  [0027](adr/0027-no-link-check-cache.md). The general shape: shared mutable CI state inherits
+  the *weakest* writer's failure semantics, so check which workflows can write a cache before
+  trusting one.
+
+- **Measure a cache before hardening it.** The lychee cache looked essential — a stale local
+  `.lycheecache` held 11,806 entries. Against a current build it covered **35** URLs: internal
+  links resolve to `file://`, which lychee never caches (`ignore_cache()` returns true for any
+  file URI), and the 17,000 CDN images left the workload when
+  [0022](adr/0022-pregenerated-image-derivatives.md) retired the Bunny Optimizer and their
+  `?width=` query strings with it. `lychee --dump` answers this in one command; a cache file is
+  a record of a past configuration, not the current one. Two of the three fixes proposed for the
+  bug above were more machinery than the thing they protected.
+
+- **`npm test` names its files explicitly, so a new `*.test.ts` runs only if you add it there.**
+  Forgetting is silent — the suite stays green and the new file looks like coverage while running
+  zero times. Four files had drifted out this way (`upload-derivatives`, `audit-optimizer-usage`,
+  `backfill-tribe`, and the new `report-link-rot`): 39 passing tests nothing ever ran. The list is
+  deliberate — ordering matters for the data-pipeline tests — so the fix is
+  `scripts/test-registration.test.ts`, which fails when a test file on disk is unregistered or a
+  registered pattern matches nothing.
+
+- **A green check that skipped the work is not evidence.** Removing that cache turned the first run
+  red on two Government of Canada hosts that refuse GitHub's runners. The 18 preceding production
+  runs were "clean" because a 7-day window meant they never probed those hosts — failures appeared
+  only in runs where an entry had aged out, which is the opposite of a low failure rate. Before
+  reading a passing history as coverage, check whether the passing runs actually asked. The same
+  trap sits in any skip-if-unchanged gate.
 
 - **A byte-identical baseline is the strongest safety net for behavior-preserving work.**
   For migrations/refactors (e.g. the TS conversion), commit a pre-change `_site/` baseline

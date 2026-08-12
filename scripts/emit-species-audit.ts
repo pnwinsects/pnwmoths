@@ -16,6 +16,7 @@ import { parse } from 'csv-parse/sync';
 import { normalizeSlug, loadUnpublishedSpecies } from '../src/_lib/unpublished-species.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { pathToFileURL } from 'node:url';
+import { buildAllRecordsSql } from './lib/records-source.ts';
 
 // ---------------------------------------------------------------------------
 // Pure row-builder + CSV serializer — unit-testable without a DuckDB build
@@ -46,7 +47,7 @@ export interface SpeciesAuditRow {
 export interface BuildSpeciesAuditRowsOptions {
   /** Raw data/species.csv rows. */
   speciesRows: SpeciesInput[];
-  /** Normalized slugs present in data/records.csv (any record counts). */
+  /** Normalized slugs present in ANY occurrence source (any record counts). */
   recordSlugs: Set<string>;
   /** Normalized slugs from data/key-matrix.json species[].slug. */
   keySlugs: Set<string>;
@@ -128,31 +129,19 @@ export function toCsv(rows: SpeciesAuditRow[]): string {
 // CLI entry-point — wires the real data sources
 // ---------------------------------------------------------------------------
 
-/** DISTINCT normalized record slugs from data/records.csv via DuckDB. */
+/**
+ * DISTINCT normalized record slugs across EVERY occurrence source via DuckDB.
+ *
+ * Includes the iNaturalist import (#23): a species whose only occurrence is an
+ * imported observation must not be audited as having no records — that is the
+ * exact coverage signal this artifact exists to give.
+ */
 async function loadRecordSlugs(): Promise<Set<string>> {
   const db = await DuckDBInstance.create(':memory:');
   const conn = await db.connect();
   const reader = await conn.runAndReadAll(`
     SELECT DISTINCT species_slug
-    FROM read_csv('data/records.csv',
-      header = true,
-      columns = {
-        'species_slug': 'VARCHAR',
-        'record_type': 'VARCHAR',
-        'latitude': 'DOUBLE',
-        'longitude': 'DOUBLE',
-        'state': 'VARCHAR',
-        'county': 'VARCHAR',
-        'locality': 'VARCHAR',
-        'elevation_ft': 'INTEGER',
-        'year': 'INTEGER',
-        'month': 'INTEGER',
-        'day': 'INTEGER',
-        'collector': 'VARCHAR',
-        'collection': 'VARCHAR',
-        'notes': 'VARCHAR',
-        'district_id': 'VARCHAR'
-      })
+    FROM (${buildAllRecordsSql()})
     WHERE species_slug IS NOT NULL AND species_slug != ''
   `);
   const rows = reader.getRows();

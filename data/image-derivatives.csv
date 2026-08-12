@@ -1527,10 +1527,10 @@ derived/catocala-aholibah/Catocala aholibah-A-D@320h.webp,catocala-aholibah/Cato
 derived/catocala-aholibah/Catocala aholibah-A-D@full.webp,catocala-aholibah/Catocala aholibah-A-D.jpg,legacy,full,91328
 derived/catocala-aholibah/Catocala aholibah-A-V@320h.webp,catocala-aholibah/Catocala aholibah-A-V.jpg,legacy,320h,36828
 derived/catocala-aholibah/Catocala aholibah-A-V@full.webp,catocala-aholibah/Catocala aholibah-A-V.jpg,legacy,full,75094
-derived/catocala-allusa/Catocala allusa-A-D@320h.webp,catocala-allusa/Catocala allusa-A-D.jpg,legacy,320h,37552
-derived/catocala-allusa/Catocala allusa-A-D@full.webp,catocala-allusa/Catocala allusa-A-D.jpg,legacy,full,77560
-derived/catocala-allusa/Catocala allusa-A-V@320h.webp,catocala-allusa/Catocala allusa-A-V.jpg,legacy,320h,36122
-derived/catocala-allusa/Catocala allusa-A-V@full.webp,catocala-allusa/Catocala allusa-A-V.jpg,legacy,full,75182
+derived/catocala-cleopatra/Catocala allusa-A-D@320h.webp,catocala-cleopatra/Catocala allusa-A-D.jpg,legacy,320h,37552
+derived/catocala-cleopatra/Catocala allusa-A-D@full.webp,catocala-cleopatra/Catocala allusa-A-D.jpg,legacy,full,77560
+derived/catocala-cleopatra/Catocala allusa-A-V@320h.webp,catocala-cleopatra/Catocala allusa-A-V.jpg,legacy,320h,36122
+derived/catocala-cleopatra/Catocala allusa-A-V@full.webp,catocala-cleopatra/Catocala allusa-A-V.jpg,legacy,full,75182
 derived/catocala-amatrix/Catocala amatrix-B-D@320h.webp,catocala-amatrix/Catocala amatrix-B-D.jpg,legacy,320h,45354
 derived/catocala-amatrix/Catocala amatrix-B-D@full.webp,catocala-amatrix/Catocala amatrix-B-D.jpg,legacy,full,93290
 derived/catocala-amatrix/Catocala amatrix-B-V@320h.webp,catocala-amatrix/Catocala amatrix-B-V.jpg,legacy,320h,43118
@@ -3635,14 +3635,14 @@ derived/furcula-cinereoides/Furcula cinerea-B-D@320h.webp,furcula-cinereoides/Fu
 derived/furcula-cinereoides/Furcula cinerea-B-D@full.webp,furcula-cinereoides/Furcula cinerea-B-D.jpg,legacy,full,83122
 derived/furcula-cinereoides/Furcula cinerea-B-V@320h.webp,furcula-cinereoides/Furcula cinerea-B-V.jpg,legacy,320h,40312
 derived/furcula-cinereoides/Furcula cinerea-B-V@full.webp,furcula-cinereoides/Furcula cinerea-B-V.jpg,legacy,full,78126
-derived/furcula-furcula/Furcula occidentalis-A-D@320h.webp,furcula-furcula/Furcula occidentalis-A-D.jpg,legacy,320h,41762
-derived/furcula-furcula/Furcula occidentalis-A-D@full.webp,furcula-furcula/Furcula occidentalis-A-D.jpg,legacy,full,80664
-derived/furcula-furcula/Furcula occidentalis-A-V@320h.webp,furcula-furcula/Furcula occidentalis-A-V.jpg,legacy,320h,34956
-derived/furcula-furcula/Furcula occidentalis-A-V@full.webp,furcula-furcula/Furcula occidentalis-A-V.jpg,legacy,full,72990
-derived/furcula-furcula/Furcula occidentalis-B-D@320h.webp,furcula-furcula/Furcula occidentalis-B-D.jpg,legacy,320h,40006
-derived/furcula-furcula/Furcula occidentalis-B-D@full.webp,furcula-furcula/Furcula occidentalis-B-D.jpg,legacy,full,78116
-derived/furcula-furcula/Furcula occidentalis-B-V@320h.webp,furcula-furcula/Furcula occidentalis-B-V.jpg,legacy,320h,37770
-derived/furcula-furcula/Furcula occidentalis-B-V@full.webp,furcula-furcula/Furcula occidentalis-B-V.jpg,legacy,full,73096
+derived/furcula-gigans/Furcula occidentalis-A-D@320h.webp,furcula-gigans/Furcula occidentalis-A-D.jpg,legacy,320h,41762
+derived/furcula-gigans/Furcula occidentalis-A-D@full.webp,furcula-gigans/Furcula occidentalis-A-D.jpg,legacy,full,80664
+derived/furcula-gigans/Furcula occidentalis-A-V@320h.webp,furcula-gigans/Furcula occidentalis-A-V.jpg,legacy,320h,34956
+derived/furcula-gigans/Furcula occidentalis-A-V@full.webp,furcula-gigans/Furcula occidentalis-A-V.jpg,legacy,full,72990
+derived/furcula-gigans/Furcula occidentalis-B-D@320h.webp,furcula-gigans/Furcula occidentalis-B-D.jpg,legacy,320h,40006
+derived/furcula-gigans/Furcula occidentalis-B-D@full.webp,furcula-gigans/Furcula occidentalis-B-D.jpg,legacy,full,78116
+derived/furcula-gigans/Furcula occidentalis-B-V@320h.webp,furcula-gigans/Furcula occidentalis-B-V.jpg,legacy,320h,37770
+derived/furcula-gigans/Furcula occidentalis-B-V@full.webp,furcula-gigans/Furcula occidentalis-B-V.jpg,legacy,full,73096
 derived/furcula-modesta/Furcula modesta-A-D@320h.webp,furcula-modesta/Furcula modesta-A-D.jpg,legacy,320h,41248
 derived/furcula-modesta/Furcula modesta-A-D@full.webp,furcula-modesta/Furcula modesta-A-D.jpg,legacy,full,80854
 derived/furcula-modesta/Furcula modesta-A-V@320h.webp,furcula-modesta/Furcula modesta-A-V.jpg,legacy,320h,39586
@@ -5707,10 +5707,10 @@ derived/phyllodesma-americana/Phyllodesma americana-B-D@320h.webp,phyllodesma-am
 derived/phyllodesma-americana/Phyllodesma americana-B-D@full.webp,phyllodesma-americana/Phyllodesma americana-B-D.jpg,legacy,full,76106
 derived/phyllodesma-americana/Phyllodesma americana-B-V@320h.webp,phyllodesma-americana/Phyllodesma americana-B-V.jpg,legacy,320h,39632
 derived/phyllodesma-americana/Phyllodesma americana-B-V@full.webp,phyllodesma-americana/Phyllodesma americana-B-V.jpg,legacy,full,79500
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-D@320h.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-D.jpg,legacy,320h,43292
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-D@full.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-D.jpg,legacy,full,89398
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-V@320h.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-V.jpg,legacy,320h,43168
-derived/phyllodesma-coturnix/Phyllodesma coturnix-A-V@full.webp,phyllodesma-coturnix/Phyllodesma coturnix-A-V.jpg,legacy,full,92374
+derived/phyllodesma-americana/Phyllodesma coturnix-C-D@320h.webp,phyllodesma-americana/Phyllodesma coturnix-C-D.jpg,legacy,320h,43292
+derived/phyllodesma-americana/Phyllodesma coturnix-C-D@full.webp,phyllodesma-americana/Phyllodesma coturnix-C-D.jpg,legacy,full,89398
+derived/phyllodesma-americana/Phyllodesma coturnix-C-V@320h.webp,phyllodesma-americana/Phyllodesma coturnix-C-V.jpg,legacy,320h,43168
+derived/phyllodesma-americana/Phyllodesma coturnix-C-V@full.webp,phyllodesma-americana/Phyllodesma coturnix-C-V.jpg,legacy,full,92374
 derived/plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D@320h.webp,plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D.jpg,legacy,320h,42338
 derived/plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D@full.webp,plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-D.jpg,legacy,full,86086
 derived/plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-V@320h.webp,plagiomimicus-dimidiata/Plagiomimicus dimidiata-A-V.jpg,legacy,320h,41488
@@ -6149,42 +6149,42 @@ derived/protoperigea-umbricata/Protoperigea umbricata-A-D@320h.webp,protoperigea
 derived/protoperigea-umbricata/Protoperigea umbricata-A-D@full.webp,protoperigea-umbricata/Protoperigea umbricata-A-D.jpg,legacy,full,79808
 derived/protoperigea-umbricata/Protoperigea umbricata-A-V@320h.webp,protoperigea-umbricata/Protoperigea umbricata-A-V.jpg,legacy,320h,40126
 derived/protoperigea-umbricata/Protoperigea umbricata-A-V@full.webp,protoperigea-umbricata/Protoperigea umbricata-A-V.jpg,legacy,full,77974
-derived/protorthodes-alfkenii/Protorthodes alfkenii-A-D@320h.webp,protorthodes-alfkenii/Protorthodes alfkenii-A-D.jpg,legacy,320h,46298
-derived/protorthodes-alfkenii/Protorthodes alfkenii-A-D@full.webp,protorthodes-alfkenii/Protorthodes alfkenii-A-D.jpg,legacy,full,94008
-derived/protorthodes-alfkenii/Protorthodes alfkenii-A-V@320h.webp,protorthodes-alfkenii/Protorthodes alfkenii-A-V.jpg,legacy,320h,44882
-derived/protorthodes-alfkenii/Protorthodes alfkenii-A-V@full.webp,protorthodes-alfkenii/Protorthodes alfkenii-A-V.jpg,legacy,full,91206
-derived/protorthodes-curtica/Protorthodes curtica-A-D@320h.webp,protorthodes-curtica/Protorthodes curtica-A-D.jpg,legacy,320h,43134
-derived/protorthodes-curtica/Protorthodes curtica-A-D@full.webp,protorthodes-curtica/Protorthodes curtica-A-D.jpg,legacy,full,87996
-derived/protorthodes-curtica/Protorthodes curtica-A-V@320h.webp,protorthodes-curtica/Protorthodes curtica-A-V.jpg,legacy,320h,42658
-derived/protorthodes-curtica/Protorthodes curtica-A-V@full.webp,protorthodes-curtica/Protorthodes curtica-A-V.jpg,legacy,full,85908
-derived/protorthodes-curtica/Protorthodes curtica-B-D@320h.webp,protorthodes-curtica/Protorthodes curtica-B-D.jpg,legacy,320h,44288
-derived/protorthodes-curtica/Protorthodes curtica-B-D@full.webp,protorthodes-curtica/Protorthodes curtica-B-D.jpg,legacy,full,91158
-derived/protorthodes-curtica/Protorthodes curtica-B-V@320h.webp,protorthodes-curtica/Protorthodes curtica-B-V.jpg,legacy,320h,43788
-derived/protorthodes-curtica/Protorthodes curtica-B-V@full.webp,protorthodes-curtica/Protorthodes curtica-B-V.jpg,legacy,full,88358
-derived/protorthodes-eureka/Protorthodes eureka-A-D@320h.webp,protorthodes-eureka/Protorthodes eureka-A-D.jpg,legacy,320h,43396
-derived/protorthodes-eureka/Protorthodes eureka-A-D@full.webp,protorthodes-eureka/Protorthodes eureka-A-D.jpg,legacy,full,85078
-derived/protorthodes-eureka/Protorthodes eureka-A-V@320h.webp,protorthodes-eureka/Protorthodes eureka-A-V.jpg,legacy,320h,43426
-derived/protorthodes-eureka/Protorthodes eureka-A-V@full.webp,protorthodes-eureka/Protorthodes eureka-A-V.jpg,legacy,full,82978
-derived/protorthodes-incincta/Protorthodes incincta-B-D@320h.webp,protorthodes-incincta/Protorthodes incincta-B-D.jpg,legacy,320h,42424
-derived/protorthodes-incincta/Protorthodes incincta-B-D@full.webp,protorthodes-incincta/Protorthodes incincta-B-D.jpg,legacy,full,84340
-derived/protorthodes-incincta/Protorthodes incincta-B-V@320h.webp,protorthodes-incincta/Protorthodes incincta-B-V.jpg,legacy,320h,42616
-derived/protorthodes-incincta/Protorthodes incincta-B-V@full.webp,protorthodes-incincta/Protorthodes incincta-B-V.jpg,legacy,full,85048
-derived/protorthodes-incincta/Protorthodes incincta-C-D@320h.webp,protorthodes-incincta/Protorthodes incincta-C-D.jpg,legacy,320h,45052
-derived/protorthodes-incincta/Protorthodes incincta-C-D@full.webp,protorthodes-incincta/Protorthodes incincta-C-D.jpg,legacy,full,98382
-derived/protorthodes-incincta/Protorthodes incincta-C-V@320h.webp,protorthodes-incincta/Protorthodes incincta-C-V.jpg,legacy,320h,44152
-derived/protorthodes-incincta/Protorthodes incincta-C-V@full.webp,protorthodes-incincta/Protorthodes incincta-C-V.jpg,legacy,full,93526
-derived/protorthodes-oviduca/Protorthodes oviduca-A-D@320h.webp,protorthodes-oviduca/Protorthodes oviduca-A-D.jpg,legacy,320h,45140
-derived/protorthodes-oviduca/Protorthodes oviduca-A-D@full.webp,protorthodes-oviduca/Protorthodes oviduca-A-D.jpg,legacy,full,92192
-derived/protorthodes-oviduca/Protorthodes oviduca-A-V@320h.webp,protorthodes-oviduca/Protorthodes oviduca-A-V.jpg,legacy,320h,43018
-derived/protorthodes-oviduca/Protorthodes oviduca-A-V@full.webp,protorthodes-oviduca/Protorthodes oviduca-A-V.jpg,legacy,full,85350
-derived/protorthodes-rufula/Protorthodes perforata-A-D@320h.webp,protorthodes-rufula/Protorthodes perforata-A-D.jpg,legacy,320h,44298
-derived/protorthodes-rufula/Protorthodes perforata-A-D@full.webp,protorthodes-rufula/Protorthodes perforata-A-D.jpg,legacy,full,89216
-derived/protorthodes-rufula/Protorthodes perforata-A-V@320h.webp,protorthodes-rufula/Protorthodes perforata-A-V.jpg,legacy,320h,44734
-derived/protorthodes-rufula/Protorthodes perforata-A-V@full.webp,protorthodes-rufula/Protorthodes perforata-A-V.jpg,legacy,full,91138
-derived/protorthodes-rufula/Protorthodes rufula-A-D@320h.webp,protorthodes-rufula/Protorthodes rufula-A-D.jpg,legacy,320h,43196
-derived/protorthodes-rufula/Protorthodes rufula-A-D@full.webp,protorthodes-rufula/Protorthodes rufula-A-D.jpg,legacy,full,88846
-derived/protorthodes-rufula/Protorthodes rufula-A-V@320h.webp,protorthodes-rufula/Protorthodes rufula-A-V.jpg,legacy,320h,43148
-derived/protorthodes-rufula/Protorthodes rufula-A-V@full.webp,protorthodes-rufula/Protorthodes rufula-A-V.jpg,legacy,full,86702
+derived/trichopolia-alfkenii/Protorthodes alfkenii-A-D@320h.webp,trichopolia-alfkenii/Protorthodes alfkenii-A-D.jpg,legacy,320h,46298
+derived/trichopolia-alfkenii/Protorthodes alfkenii-A-D@full.webp,trichopolia-alfkenii/Protorthodes alfkenii-A-D.jpg,legacy,full,94008
+derived/trichopolia-alfkenii/Protorthodes alfkenii-A-V@320h.webp,trichopolia-alfkenii/Protorthodes alfkenii-A-V.jpg,legacy,320h,44882
+derived/trichopolia-alfkenii/Protorthodes alfkenii-A-V@full.webp,trichopolia-alfkenii/Protorthodes alfkenii-A-V.jpg,legacy,full,91206
+derived/trichopolia-curtica/Protorthodes curtica-A-D@320h.webp,trichopolia-curtica/Protorthodes curtica-A-D.jpg,legacy,320h,43134
+derived/trichopolia-curtica/Protorthodes curtica-A-D@full.webp,trichopolia-curtica/Protorthodes curtica-A-D.jpg,legacy,full,87996
+derived/trichopolia-curtica/Protorthodes curtica-A-V@320h.webp,trichopolia-curtica/Protorthodes curtica-A-V.jpg,legacy,320h,42658
+derived/trichopolia-curtica/Protorthodes curtica-A-V@full.webp,trichopolia-curtica/Protorthodes curtica-A-V.jpg,legacy,full,85908
+derived/trichopolia-curtica/Protorthodes curtica-B-D@320h.webp,trichopolia-curtica/Protorthodes curtica-B-D.jpg,legacy,320h,44288
+derived/trichopolia-curtica/Protorthodes curtica-B-D@full.webp,trichopolia-curtica/Protorthodes curtica-B-D.jpg,legacy,full,91158
+derived/trichopolia-curtica/Protorthodes curtica-B-V@320h.webp,trichopolia-curtica/Protorthodes curtica-B-V.jpg,legacy,320h,43788
+derived/trichopolia-curtica/Protorthodes curtica-B-V@full.webp,trichopolia-curtica/Protorthodes curtica-B-V.jpg,legacy,full,88358
+derived/trichopolia-eureka/Protorthodes eureka-A-D@320h.webp,trichopolia-eureka/Protorthodes eureka-A-D.jpg,legacy,320h,43396
+derived/trichopolia-eureka/Protorthodes eureka-A-D@full.webp,trichopolia-eureka/Protorthodes eureka-A-D.jpg,legacy,full,85078
+derived/trichopolia-eureka/Protorthodes eureka-A-V@320h.webp,trichopolia-eureka/Protorthodes eureka-A-V.jpg,legacy,320h,43426
+derived/trichopolia-eureka/Protorthodes eureka-A-V@full.webp,trichopolia-eureka/Protorthodes eureka-A-V.jpg,legacy,full,82978
+derived/trichopolia-incincta/Protorthodes incincta-B-D@320h.webp,trichopolia-incincta/Protorthodes incincta-B-D.jpg,legacy,320h,42424
+derived/trichopolia-incincta/Protorthodes incincta-B-D@full.webp,trichopolia-incincta/Protorthodes incincta-B-D.jpg,legacy,full,84340
+derived/trichopolia-incincta/Protorthodes incincta-B-V@320h.webp,trichopolia-incincta/Protorthodes incincta-B-V.jpg,legacy,320h,42616
+derived/trichopolia-incincta/Protorthodes incincta-B-V@full.webp,trichopolia-incincta/Protorthodes incincta-B-V.jpg,legacy,full,85048
+derived/trichopolia-incincta/Protorthodes incincta-C-D@320h.webp,trichopolia-incincta/Protorthodes incincta-C-D.jpg,legacy,320h,45052
+derived/trichopolia-incincta/Protorthodes incincta-C-D@full.webp,trichopolia-incincta/Protorthodes incincta-C-D.jpg,legacy,full,98382
+derived/trichopolia-incincta/Protorthodes incincta-C-V@320h.webp,trichopolia-incincta/Protorthodes incincta-C-V.jpg,legacy,320h,44152
+derived/trichopolia-incincta/Protorthodes incincta-C-V@full.webp,trichopolia-incincta/Protorthodes incincta-C-V.jpg,legacy,full,93526
+derived/trichopolia-oviduca/Protorthodes oviduca-A-D@320h.webp,trichopolia-oviduca/Protorthodes oviduca-A-D.jpg,legacy,320h,45140
+derived/trichopolia-oviduca/Protorthodes oviduca-A-D@full.webp,trichopolia-oviduca/Protorthodes oviduca-A-D.jpg,legacy,full,92192
+derived/trichopolia-oviduca/Protorthodes oviduca-A-V@320h.webp,trichopolia-oviduca/Protorthodes oviduca-A-V.jpg,legacy,320h,43018
+derived/trichopolia-oviduca/Protorthodes oviduca-A-V@full.webp,trichopolia-oviduca/Protorthodes oviduca-A-V.jpg,legacy,full,85350
+derived/trichopolia-rufula/Protorthodes perforata-A-D@320h.webp,trichopolia-rufula/Protorthodes perforata-A-D.jpg,legacy,320h,44298
+derived/trichopolia-rufula/Protorthodes perforata-A-D@full.webp,trichopolia-rufula/Protorthodes perforata-A-D.jpg,legacy,full,89216
+derived/trichopolia-rufula/Protorthodes perforata-A-V@320h.webp,trichopolia-rufula/Protorthodes perforata-A-V.jpg,legacy,320h,44734
+derived/trichopolia-rufula/Protorthodes perforata-A-V@full.webp,trichopolia-rufula/Protorthodes perforata-A-V.jpg,legacy,full,91138
+derived/trichopolia-rufula/Protorthodes rufula-A-D@320h.webp,trichopolia-rufula/Protorthodes rufula-A-D.jpg,legacy,320h,43196
+derived/trichopolia-rufula/Protorthodes rufula-A-D@full.webp,trichopolia-rufula/Protorthodes rufula-A-D.jpg,legacy,full,88846
+derived/trichopolia-rufula/Protorthodes rufula-A-V@320h.webp,trichopolia-rufula/Protorthodes rufula-A-V.jpg,legacy,320h,43148
+derived/trichopolia-rufula/Protorthodes rufula-A-V@full.webp,trichopolia-rufula/Protorthodes rufula-A-V.jpg,legacy,full,86702
 derived/protoschinia-nuchalis/Schinia nuchalis-A-D@320h.webp,protoschinia-nuchalis/Schinia nuchalis-A-D.jpg,legacy,320h,48954
 derived/protoschinia-nuchalis/Schinia nuchalis-A-D@full.webp,protoschinia-nuchalis/Schinia nuchalis-A-D.jpg,legacy,full,100174
 derived/protoschinia-nuchalis/Schinia nuchalis-A-V@320h.webp,protoschinia-nuchalis/Schinia nuchalis-A-V.jpg,legacy,320h,39862
@@ -9863,14 +9863,14 @@ derived/species-tiles/catocala-aholibah/A-V_thumbnail@1060.webp,species-tiles/ca
 derived/species-tiles/catocala-aholibah/A-V_thumbnail@1200.jpg,species-tiles/catocala-aholibah/A-V_thumbnail.webp,highres,1200,147062
 derived/species-tiles/catocala-aholibah/A-V_thumbnail@320h.webp,species-tiles/catocala-aholibah/A-V_thumbnail.webp,highres,320h,35644
 derived/species-tiles/catocala-aholibah/A-V_thumbnail@530.webp,species-tiles/catocala-aholibah/A-V_thumbnail.webp,highres,530,38812
-derived/species-tiles/catocala-allusa/A-D_thumbnail@1060.webp,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,1060,95904
-derived/species-tiles/catocala-allusa/A-D_thumbnail@1200.jpg,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,1200,150096
-derived/species-tiles/catocala-allusa/A-D_thumbnail@320h.webp,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,320h,36344
-derived/species-tiles/catocala-allusa/A-D_thumbnail@530.webp,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,530,39898
-derived/species-tiles/catocala-allusa/A-V_thumbnail@1060.webp,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,1060,91344
-derived/species-tiles/catocala-allusa/A-V_thumbnail@1200.jpg,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,1200,144628
-derived/species-tiles/catocala-allusa/A-V_thumbnail@320h.webp,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,320h,34716
-derived/species-tiles/catocala-allusa/A-V_thumbnail@530.webp,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,530,37778
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@1060.webp,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,1060,95904
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@1200.jpg,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,1200,150096
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@320h.webp,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,320h,36344
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@530.webp,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,530,39898
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@1060.webp,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,1060,91344
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@1200.jpg,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,1200,144628
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@320h.webp,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,320h,34716
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@530.webp,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,530,37778
 derived/species-tiles/catocala-amatrix/A-D_thumbnail@1060.webp,species-tiles/catocala-amatrix/A-D_thumbnail.webp,highres,1060,104360
 derived/species-tiles/catocala-amatrix/A-D_thumbnail@1200.jpg,species-tiles/catocala-amatrix/A-D_thumbnail.webp,highres,1200,161034
 derived/species-tiles/catocala-amatrix/A-D_thumbnail@320h.webp,species-tiles/catocala-amatrix/A-D_thumbnail.webp,highres,320h,37642
@@ -16347,30 +16347,30 @@ derived/species-tiles/macaria-adonis/C-V_thumbnail@1060.webp,species-tiles/macar
 derived/species-tiles/macaria-adonis/C-V_thumbnail@1200.jpg,species-tiles/macaria-adonis/C-V_thumbnail.webp,highres,1200,137328
 derived/species-tiles/macaria-adonis/C-V_thumbnail@320h.webp,species-tiles/macaria-adonis/C-V_thumbnail.webp,highres,320h,38392
 derived/species-tiles/macaria-adonis/C-V_thumbnail@530.webp,species-tiles/macaria-adonis/C-V_thumbnail.webp,highres,530,41364
-derived/species-tiles/macaria-bitactata/A-D_thumbnail@1060.webp,species-tiles/macaria-bitactata/A-D_thumbnail.webp,highres,1060,114368
-derived/species-tiles/macaria-bitactata/A-D_thumbnail@1200.jpg,species-tiles/macaria-bitactata/A-D_thumbnail.webp,highres,1200,170824
-derived/species-tiles/macaria-bitactata/A-D_thumbnail@320h.webp,species-tiles/macaria-bitactata/A-D_thumbnail.webp,highres,320h,52008
-derived/species-tiles/macaria-bitactata/A-D_thumbnail@530.webp,species-tiles/macaria-bitactata/A-D_thumbnail.webp,highres,530,56082
-derived/species-tiles/macaria-bitactata/A-V_thumbnail@1060.webp,species-tiles/macaria-bitactata/A-V_thumbnail.webp,highres,1060,103572
-derived/species-tiles/macaria-bitactata/A-V_thumbnail@1200.jpg,species-tiles/macaria-bitactata/A-V_thumbnail.webp,highres,1200,159043
-derived/species-tiles/macaria-bitactata/A-V_thumbnail@320h.webp,species-tiles/macaria-bitactata/A-V_thumbnail.webp,highres,320h,50872
-derived/species-tiles/macaria-bitactata/A-V_thumbnail@530.webp,species-tiles/macaria-bitactata/A-V_thumbnail.webp,highres,530,54364
-derived/species-tiles/macaria-bitactata/B-D_thumbnail@1060.webp,species-tiles/macaria-bitactata/B-D_thumbnail.webp,highres,1060,126158
-derived/species-tiles/macaria-bitactata/B-D_thumbnail@1200.jpg,species-tiles/macaria-bitactata/B-D_thumbnail.webp,highres,1200,183093
-derived/species-tiles/macaria-bitactata/B-D_thumbnail@320h.webp,species-tiles/macaria-bitactata/B-D_thumbnail.webp,highres,320h,53576
-derived/species-tiles/macaria-bitactata/B-D_thumbnail@530.webp,species-tiles/macaria-bitactata/B-D_thumbnail.webp,highres,530,58246
-derived/species-tiles/macaria-bitactata/B-V_thumbnail@1060.webp,species-tiles/macaria-bitactata/B-V_thumbnail.webp,highres,1060,109654
-derived/species-tiles/macaria-bitactata/B-V_thumbnail@1200.jpg,species-tiles/macaria-bitactata/B-V_thumbnail.webp,highres,1200,169491
-derived/species-tiles/macaria-bitactata/B-V_thumbnail@320h.webp,species-tiles/macaria-bitactata/B-V_thumbnail.webp,highres,320h,52058
-derived/species-tiles/macaria-bitactata/B-V_thumbnail@530.webp,species-tiles/macaria-bitactata/B-V_thumbnail.webp,highres,530,56074
-derived/species-tiles/macaria-bitactata/C-D_thumbnail@1060.webp,species-tiles/macaria-bitactata/C-D_thumbnail.webp,highres,1060,103098
-derived/species-tiles/macaria-bitactata/C-D_thumbnail@1200.jpg,species-tiles/macaria-bitactata/C-D_thumbnail.webp,highres,1200,155196
-derived/species-tiles/macaria-bitactata/C-D_thumbnail@320h.webp,species-tiles/macaria-bitactata/C-D_thumbnail.webp,highres,320h,48084
-derived/species-tiles/macaria-bitactata/C-D_thumbnail@530.webp,species-tiles/macaria-bitactata/C-D_thumbnail.webp,highres,530,51676
-derived/species-tiles/macaria-bitactata/C-V_thumbnail@1060.webp,species-tiles/macaria-bitactata/C-V_thumbnail.webp,highres,1060,93192
-derived/species-tiles/macaria-bitactata/C-V_thumbnail@1200.jpg,species-tiles/macaria-bitactata/C-V_thumbnail.webp,highres,1200,142827
-derived/species-tiles/macaria-bitactata/C-V_thumbnail@320h.webp,species-tiles/macaria-bitactata/C-V_thumbnail.webp,highres,320h,46430
-derived/species-tiles/macaria-bitactata/C-V_thumbnail@530.webp,species-tiles/macaria-bitactata/C-V_thumbnail.webp,highres,530,49660
+derived/species-tiles/speranza-bitactata/D-D_thumbnail@1060.webp,species-tiles/speranza-bitactata/D-D_thumbnail.webp,highres,1060,114368
+derived/species-tiles/speranza-bitactata/D-D_thumbnail@1200.jpg,species-tiles/speranza-bitactata/D-D_thumbnail.webp,highres,1200,170824
+derived/species-tiles/speranza-bitactata/D-D_thumbnail@320h.webp,species-tiles/speranza-bitactata/D-D_thumbnail.webp,highres,320h,52008
+derived/species-tiles/speranza-bitactata/D-D_thumbnail@530.webp,species-tiles/speranza-bitactata/D-D_thumbnail.webp,highres,530,56082
+derived/species-tiles/speranza-bitactata/D-V_thumbnail@1060.webp,species-tiles/speranza-bitactata/D-V_thumbnail.webp,highres,1060,103572
+derived/species-tiles/speranza-bitactata/D-V_thumbnail@1200.jpg,species-tiles/speranza-bitactata/D-V_thumbnail.webp,highres,1200,159043
+derived/species-tiles/speranza-bitactata/D-V_thumbnail@320h.webp,species-tiles/speranza-bitactata/D-V_thumbnail.webp,highres,320h,50872
+derived/species-tiles/speranza-bitactata/D-V_thumbnail@530.webp,species-tiles/speranza-bitactata/D-V_thumbnail.webp,highres,530,54364
+derived/species-tiles/speranza-bitactata/E-D_thumbnail@1060.webp,species-tiles/speranza-bitactata/E-D_thumbnail.webp,highres,1060,126158
+derived/species-tiles/speranza-bitactata/E-D_thumbnail@1200.jpg,species-tiles/speranza-bitactata/E-D_thumbnail.webp,highres,1200,183093
+derived/species-tiles/speranza-bitactata/E-D_thumbnail@320h.webp,species-tiles/speranza-bitactata/E-D_thumbnail.webp,highres,320h,53576
+derived/species-tiles/speranza-bitactata/E-D_thumbnail@530.webp,species-tiles/speranza-bitactata/E-D_thumbnail.webp,highres,530,58246
+derived/species-tiles/speranza-bitactata/E-V_thumbnail@1060.webp,species-tiles/speranza-bitactata/E-V_thumbnail.webp,highres,1060,109654
+derived/species-tiles/speranza-bitactata/E-V_thumbnail@1200.jpg,species-tiles/speranza-bitactata/E-V_thumbnail.webp,highres,1200,169491
+derived/species-tiles/speranza-bitactata/E-V_thumbnail@320h.webp,species-tiles/speranza-bitactata/E-V_thumbnail.webp,highres,320h,52058
+derived/species-tiles/speranza-bitactata/E-V_thumbnail@530.webp,species-tiles/speranza-bitactata/E-V_thumbnail.webp,highres,530,56074
+derived/species-tiles/speranza-bitactata/C-D_thumbnail@1060.webp,species-tiles/speranza-bitactata/C-D_thumbnail.webp,highres,1060,103098
+derived/species-tiles/speranza-bitactata/C-D_thumbnail@1200.jpg,species-tiles/speranza-bitactata/C-D_thumbnail.webp,highres,1200,155196
+derived/species-tiles/speranza-bitactata/C-D_thumbnail@320h.webp,species-tiles/speranza-bitactata/C-D_thumbnail.webp,highres,320h,48084
+derived/species-tiles/speranza-bitactata/C-D_thumbnail@530.webp,species-tiles/speranza-bitactata/C-D_thumbnail.webp,highres,530,51676
+derived/species-tiles/speranza-bitactata/C-V_thumbnail@1060.webp,species-tiles/speranza-bitactata/C-V_thumbnail.webp,highres,1060,93192
+derived/species-tiles/speranza-bitactata/C-V_thumbnail@1200.jpg,species-tiles/speranza-bitactata/C-V_thumbnail.webp,highres,1200,142827
+derived/species-tiles/speranza-bitactata/C-V_thumbnail@320h.webp,species-tiles/speranza-bitactata/C-V_thumbnail.webp,highres,320h,46430
+derived/species-tiles/speranza-bitactata/C-V_thumbnail@530.webp,species-tiles/speranza-bitactata/C-V_thumbnail.webp,highres,530,49660
 derived/species-tiles/macaria-colata/A-D_thumbnail@1060.webp,species-tiles/macaria-colata/A-D_thumbnail.webp,highres,1060,108866
 derived/species-tiles/macaria-colata/A-D_thumbnail@1200.jpg,species-tiles/macaria-colata/A-D_thumbnail.webp,highres,1200,163582
 derived/species-tiles/macaria-colata/A-D_thumbnail@320h.webp,species-tiles/macaria-colata/A-D_thumbnail.webp,highres,320h,51566
@@ -18971,70 +18971,70 @@ derived/species-tiles/protoperigea-umbricata/A-V_thumbnail@1060.webp,species-til
 derived/species-tiles/protoperigea-umbricata/A-V_thumbnail@1200.jpg,species-tiles/protoperigea-umbricata/A-V_thumbnail.webp,highres,1200,139547
 derived/species-tiles/protoperigea-umbricata/A-V_thumbnail@320h.webp,species-tiles/protoperigea-umbricata/A-V_thumbnail.webp,highres,320h,38336
 derived/species-tiles/protoperigea-umbricata/A-V_thumbnail@530.webp,species-tiles/protoperigea-umbricata/A-V_thumbnail.webp,highres,530,41050
-derived/species-tiles/protorthodes-alfkenii/A-D_thumbnail@1060.webp,species-tiles/protorthodes-alfkenii/A-D_thumbnail.webp,highres,1060,117156
-derived/species-tiles/protorthodes-alfkenii/A-D_thumbnail@1200.jpg,species-tiles/protorthodes-alfkenii/A-D_thumbnail.webp,highres,1200,174602
-derived/species-tiles/protorthodes-alfkenii/A-D_thumbnail@320h.webp,species-tiles/protorthodes-alfkenii/A-D_thumbnail.webp,highres,320h,44882
-derived/species-tiles/protorthodes-alfkenii/A-D_thumbnail@530.webp,species-tiles/protorthodes-alfkenii/A-D_thumbnail.webp,highres,530,49796
-derived/species-tiles/protorthodes-alfkenii/A-V_thumbnail@1060.webp,species-tiles/protorthodes-alfkenii/A-V_thumbnail.webp,highres,1060,109742
-derived/species-tiles/protorthodes-alfkenii/A-V_thumbnail@1200.jpg,species-tiles/protorthodes-alfkenii/A-V_thumbnail.webp,highres,1200,165018
-derived/species-tiles/protorthodes-alfkenii/A-V_thumbnail@320h.webp,species-tiles/protorthodes-alfkenii/A-V_thumbnail.webp,highres,320h,43436
-derived/species-tiles/protorthodes-alfkenii/A-V_thumbnail@530.webp,species-tiles/protorthodes-alfkenii/A-V_thumbnail.webp,highres,530,47954
-derived/species-tiles/protorthodes-curtica/A-D_thumbnail@1060.webp,species-tiles/protorthodes-curtica/A-D_thumbnail.webp,highres,1060,105376
-derived/species-tiles/protorthodes-curtica/A-D_thumbnail@1200.jpg,species-tiles/protorthodes-curtica/A-D_thumbnail.webp,highres,1200,160421
-derived/species-tiles/protorthodes-curtica/A-D_thumbnail@320h.webp,species-tiles/protorthodes-curtica/A-D_thumbnail.webp,highres,320h,41688
-derived/species-tiles/protorthodes-curtica/A-D_thumbnail@530.webp,species-tiles/protorthodes-curtica/A-D_thumbnail.webp,highres,530,46022
-derived/species-tiles/protorthodes-curtica/A-V_thumbnail@1060.webp,species-tiles/protorthodes-curtica/A-V_thumbnail.webp,highres,1060,101778
-derived/species-tiles/protorthodes-curtica/A-V_thumbnail@1200.jpg,species-tiles/protorthodes-curtica/A-V_thumbnail.webp,highres,1200,155103
-derived/species-tiles/protorthodes-curtica/A-V_thumbnail@320h.webp,species-tiles/protorthodes-curtica/A-V_thumbnail.webp,highres,320h,41380
-derived/species-tiles/protorthodes-curtica/A-V_thumbnail@530.webp,species-tiles/protorthodes-curtica/A-V_thumbnail.webp,highres,530,45410
-derived/species-tiles/protorthodes-curtica/B-D_thumbnail@1060.webp,species-tiles/protorthodes-curtica/B-D_thumbnail.webp,highres,1060,114882
-derived/species-tiles/protorthodes-curtica/B-D_thumbnail@1200.jpg,species-tiles/protorthodes-curtica/B-D_thumbnail.webp,highres,1200,168898
-derived/species-tiles/protorthodes-curtica/B-D_thumbnail@320h.webp,species-tiles/protorthodes-curtica/B-D_thumbnail.webp,highres,320h,42930
-derived/species-tiles/protorthodes-curtica/B-D_thumbnail@530.webp,species-tiles/protorthodes-curtica/B-D_thumbnail.webp,highres,530,47506
-derived/species-tiles/protorthodes-curtica/B-V_thumbnail@1060.webp,species-tiles/protorthodes-curtica/B-V_thumbnail.webp,highres,1060,105640
-derived/species-tiles/protorthodes-curtica/B-V_thumbnail@1200.jpg,species-tiles/protorthodes-curtica/B-V_thumbnail.webp,highres,1200,159309
-derived/species-tiles/protorthodes-curtica/B-V_thumbnail@320h.webp,species-tiles/protorthodes-curtica/B-V_thumbnail.webp,highres,320h,42262
-derived/species-tiles/protorthodes-curtica/B-V_thumbnail@530.webp,species-tiles/protorthodes-curtica/B-V_thumbnail.webp,highres,530,46358
-derived/species-tiles/protorthodes-eureka/A-D_thumbnail@1060.webp,species-tiles/protorthodes-eureka/A-D_thumbnail.webp,highres,1060,101490
-derived/species-tiles/protorthodes-eureka/A-D_thumbnail@1200.jpg,species-tiles/protorthodes-eureka/A-D_thumbnail.webp,highres,1200,154978
-derived/species-tiles/protorthodes-eureka/A-D_thumbnail@320h.webp,species-tiles/protorthodes-eureka/A-D_thumbnail.webp,highres,320h,41952
-derived/species-tiles/protorthodes-eureka/A-D_thumbnail@530.webp,species-tiles/protorthodes-eureka/A-D_thumbnail.webp,highres,530,45734
-derived/species-tiles/protorthodes-eureka/A-V_thumbnail@1060.webp,species-tiles/protorthodes-eureka/A-V_thumbnail.webp,highres,1060,92946
-derived/species-tiles/protorthodes-eureka/A-V_thumbnail@1200.jpg,species-tiles/protorthodes-eureka/A-V_thumbnail.webp,highres,1200,145757
-derived/species-tiles/protorthodes-eureka/A-V_thumbnail@320h.webp,species-tiles/protorthodes-eureka/A-V_thumbnail.webp,highres,320h,41644
-derived/species-tiles/protorthodes-eureka/A-V_thumbnail@530.webp,species-tiles/protorthodes-eureka/A-V_thumbnail.webp,highres,530,45540
-derived/species-tiles/protorthodes-incincta/B-D_thumbnail@1060.webp,species-tiles/protorthodes-incincta/B-D_thumbnail.webp,highres,1060,100000
-derived/species-tiles/protorthodes-incincta/B-D_thumbnail@1200.jpg,species-tiles/protorthodes-incincta/B-D_thumbnail.webp,highres,1200,152409
-derived/species-tiles/protorthodes-incincta/B-D_thumbnail@320h.webp,species-tiles/protorthodes-incincta/B-D_thumbnail.webp,highres,320h,40910
-derived/species-tiles/protorthodes-incincta/B-D_thumbnail@530.webp,species-tiles/protorthodes-incincta/B-D_thumbnail.webp,highres,530,44722
-derived/species-tiles/protorthodes-incincta/B-V_thumbnail@1060.webp,species-tiles/protorthodes-incincta/B-V_thumbnail.webp,highres,1060,102628
-derived/species-tiles/protorthodes-incincta/B-V_thumbnail@1200.jpg,species-tiles/protorthodes-incincta/B-V_thumbnail.webp,highres,1200,155461
-derived/species-tiles/protorthodes-incincta/B-V_thumbnail@320h.webp,species-tiles/protorthodes-incincta/B-V_thumbnail.webp,highres,320h,41310
-derived/species-tiles/protorthodes-incincta/B-V_thumbnail@530.webp,species-tiles/protorthodes-incincta/B-V_thumbnail.webp,highres,530,45368
-derived/species-tiles/protorthodes-incincta/C-D_thumbnail@1060.webp,species-tiles/protorthodes-incincta/C-D_thumbnail.webp,highres,1060,131342
-derived/species-tiles/protorthodes-incincta/C-D_thumbnail@1200.jpg,species-tiles/protorthodes-incincta/C-D_thumbnail.webp,highres,1200,195722
-derived/species-tiles/protorthodes-incincta/C-D_thumbnail@320h.webp,species-tiles/protorthodes-incincta/C-D_thumbnail.webp,highres,320h,44270
-derived/species-tiles/protorthodes-incincta/C-D_thumbnail@530.webp,species-tiles/protorthodes-incincta/C-D_thumbnail.webp,highres,530,49192
-derived/species-tiles/protorthodes-incincta/C-V_thumbnail@1060.webp,species-tiles/protorthodes-incincta/C-V_thumbnail.webp,highres,1060,118546
-derived/species-tiles/protorthodes-incincta/C-V_thumbnail@1200.jpg,species-tiles/protorthodes-incincta/C-V_thumbnail.webp,highres,1200,180171
-derived/species-tiles/protorthodes-incincta/C-V_thumbnail@320h.webp,species-tiles/protorthodes-incincta/C-V_thumbnail.webp,highres,320h,43160
-derived/species-tiles/protorthodes-incincta/C-V_thumbnail@530.webp,species-tiles/protorthodes-incincta/C-V_thumbnail.webp,highres,530,47624
-derived/species-tiles/protorthodes-oviduca/A-D_thumbnail@1060.webp,species-tiles/protorthodes-oviduca/A-D_thumbnail.webp,highres,1060,112240
-derived/species-tiles/protorthodes-oviduca/A-D_thumbnail@1200.jpg,species-tiles/protorthodes-oviduca/A-D_thumbnail.webp,highres,1200,165919
-derived/species-tiles/protorthodes-oviduca/A-D_thumbnail@320h.webp,species-tiles/protorthodes-oviduca/A-D_thumbnail.webp,highres,320h,43740
-derived/species-tiles/protorthodes-oviduca/A-D_thumbnail@530.webp,species-tiles/protorthodes-oviduca/A-D_thumbnail.webp,highres,530,48304
-derived/species-tiles/protorthodes-oviduca/A-V_thumbnail@1060.webp,species-tiles/protorthodes-oviduca/A-V_thumbnail.webp,highres,1060,96436
-derived/species-tiles/protorthodes-oviduca/A-V_thumbnail@1200.jpg,species-tiles/protorthodes-oviduca/A-V_thumbnail.webp,highres,1200,148631
-derived/species-tiles/protorthodes-oviduca/A-V_thumbnail@320h.webp,species-tiles/protorthodes-oviduca/A-V_thumbnail.webp,highres,320h,41340
-derived/species-tiles/protorthodes-oviduca/A-V_thumbnail@530.webp,species-tiles/protorthodes-oviduca/A-V_thumbnail.webp,highres,530,45506
-derived/species-tiles/protorthodes-rufula/A-D_thumbnail@1060.webp,species-tiles/protorthodes-rufula/A-D_thumbnail.webp,highres,1060,108192
-derived/species-tiles/protorthodes-rufula/A-D_thumbnail@1200.jpg,species-tiles/protorthodes-rufula/A-D_thumbnail.webp,highres,1200,163802
-derived/species-tiles/protorthodes-rufula/A-D_thumbnail@320h.webp,species-tiles/protorthodes-rufula/A-D_thumbnail.webp,highres,320h,41834
-derived/species-tiles/protorthodes-rufula/A-D_thumbnail@530.webp,species-tiles/protorthodes-rufula/A-D_thumbnail.webp,highres,530,46210
-derived/species-tiles/protorthodes-rufula/A-V_thumbnail@1060.webp,species-tiles/protorthodes-rufula/A-V_thumbnail.webp,highres,1060,103020
-derived/species-tiles/protorthodes-rufula/A-V_thumbnail@1200.jpg,species-tiles/protorthodes-rufula/A-V_thumbnail.webp,highres,1200,156746
-derived/species-tiles/protorthodes-rufula/A-V_thumbnail@320h.webp,species-tiles/protorthodes-rufula/A-V_thumbnail.webp,highres,320h,41656
-derived/species-tiles/protorthodes-rufula/A-V_thumbnail@530.webp,species-tiles/protorthodes-rufula/A-V_thumbnail.webp,highres,530,45700
+derived/species-tiles/trichopolia-alfkenii/A-D_thumbnail@1060.webp,species-tiles/trichopolia-alfkenii/A-D_thumbnail.webp,highres,1060,117156
+derived/species-tiles/trichopolia-alfkenii/A-D_thumbnail@1200.jpg,species-tiles/trichopolia-alfkenii/A-D_thumbnail.webp,highres,1200,174602
+derived/species-tiles/trichopolia-alfkenii/A-D_thumbnail@320h.webp,species-tiles/trichopolia-alfkenii/A-D_thumbnail.webp,highres,320h,44882
+derived/species-tiles/trichopolia-alfkenii/A-D_thumbnail@530.webp,species-tiles/trichopolia-alfkenii/A-D_thumbnail.webp,highres,530,49796
+derived/species-tiles/trichopolia-alfkenii/A-V_thumbnail@1060.webp,species-tiles/trichopolia-alfkenii/A-V_thumbnail.webp,highres,1060,109742
+derived/species-tiles/trichopolia-alfkenii/A-V_thumbnail@1200.jpg,species-tiles/trichopolia-alfkenii/A-V_thumbnail.webp,highres,1200,165018
+derived/species-tiles/trichopolia-alfkenii/A-V_thumbnail@320h.webp,species-tiles/trichopolia-alfkenii/A-V_thumbnail.webp,highres,320h,43436
+derived/species-tiles/trichopolia-alfkenii/A-V_thumbnail@530.webp,species-tiles/trichopolia-alfkenii/A-V_thumbnail.webp,highres,530,47954
+derived/species-tiles/trichopolia-curtica/A-D_thumbnail@1060.webp,species-tiles/trichopolia-curtica/A-D_thumbnail.webp,highres,1060,105376
+derived/species-tiles/trichopolia-curtica/A-D_thumbnail@1200.jpg,species-tiles/trichopolia-curtica/A-D_thumbnail.webp,highres,1200,160421
+derived/species-tiles/trichopolia-curtica/A-D_thumbnail@320h.webp,species-tiles/trichopolia-curtica/A-D_thumbnail.webp,highres,320h,41688
+derived/species-tiles/trichopolia-curtica/A-D_thumbnail@530.webp,species-tiles/trichopolia-curtica/A-D_thumbnail.webp,highres,530,46022
+derived/species-tiles/trichopolia-curtica/A-V_thumbnail@1060.webp,species-tiles/trichopolia-curtica/A-V_thumbnail.webp,highres,1060,101778
+derived/species-tiles/trichopolia-curtica/A-V_thumbnail@1200.jpg,species-tiles/trichopolia-curtica/A-V_thumbnail.webp,highres,1200,155103
+derived/species-tiles/trichopolia-curtica/A-V_thumbnail@320h.webp,species-tiles/trichopolia-curtica/A-V_thumbnail.webp,highres,320h,41380
+derived/species-tiles/trichopolia-curtica/A-V_thumbnail@530.webp,species-tiles/trichopolia-curtica/A-V_thumbnail.webp,highres,530,45410
+derived/species-tiles/trichopolia-curtica/B-D_thumbnail@1060.webp,species-tiles/trichopolia-curtica/B-D_thumbnail.webp,highres,1060,114882
+derived/species-tiles/trichopolia-curtica/B-D_thumbnail@1200.jpg,species-tiles/trichopolia-curtica/B-D_thumbnail.webp,highres,1200,168898
+derived/species-tiles/trichopolia-curtica/B-D_thumbnail@320h.webp,species-tiles/trichopolia-curtica/B-D_thumbnail.webp,highres,320h,42930
+derived/species-tiles/trichopolia-curtica/B-D_thumbnail@530.webp,species-tiles/trichopolia-curtica/B-D_thumbnail.webp,highres,530,47506
+derived/species-tiles/trichopolia-curtica/B-V_thumbnail@1060.webp,species-tiles/trichopolia-curtica/B-V_thumbnail.webp,highres,1060,105640
+derived/species-tiles/trichopolia-curtica/B-V_thumbnail@1200.jpg,species-tiles/trichopolia-curtica/B-V_thumbnail.webp,highres,1200,159309
+derived/species-tiles/trichopolia-curtica/B-V_thumbnail@320h.webp,species-tiles/trichopolia-curtica/B-V_thumbnail.webp,highres,320h,42262
+derived/species-tiles/trichopolia-curtica/B-V_thumbnail@530.webp,species-tiles/trichopolia-curtica/B-V_thumbnail.webp,highres,530,46358
+derived/species-tiles/trichopolia-eureka/A-D_thumbnail@1060.webp,species-tiles/trichopolia-eureka/A-D_thumbnail.webp,highres,1060,101490
+derived/species-tiles/trichopolia-eureka/A-D_thumbnail@1200.jpg,species-tiles/trichopolia-eureka/A-D_thumbnail.webp,highres,1200,154978
+derived/species-tiles/trichopolia-eureka/A-D_thumbnail@320h.webp,species-tiles/trichopolia-eureka/A-D_thumbnail.webp,highres,320h,41952
+derived/species-tiles/trichopolia-eureka/A-D_thumbnail@530.webp,species-tiles/trichopolia-eureka/A-D_thumbnail.webp,highres,530,45734
+derived/species-tiles/trichopolia-eureka/A-V_thumbnail@1060.webp,species-tiles/trichopolia-eureka/A-V_thumbnail.webp,highres,1060,92946
+derived/species-tiles/trichopolia-eureka/A-V_thumbnail@1200.jpg,species-tiles/trichopolia-eureka/A-V_thumbnail.webp,highres,1200,145757
+derived/species-tiles/trichopolia-eureka/A-V_thumbnail@320h.webp,species-tiles/trichopolia-eureka/A-V_thumbnail.webp,highres,320h,41644
+derived/species-tiles/trichopolia-eureka/A-V_thumbnail@530.webp,species-tiles/trichopolia-eureka/A-V_thumbnail.webp,highres,530,45540
+derived/species-tiles/trichopolia-incincta/B-D_thumbnail@1060.webp,species-tiles/trichopolia-incincta/B-D_thumbnail.webp,highres,1060,100000
+derived/species-tiles/trichopolia-incincta/B-D_thumbnail@1200.jpg,species-tiles/trichopolia-incincta/B-D_thumbnail.webp,highres,1200,152409
+derived/species-tiles/trichopolia-incincta/B-D_thumbnail@320h.webp,species-tiles/trichopolia-incincta/B-D_thumbnail.webp,highres,320h,40910
+derived/species-tiles/trichopolia-incincta/B-D_thumbnail@530.webp,species-tiles/trichopolia-incincta/B-D_thumbnail.webp,highres,530,44722
+derived/species-tiles/trichopolia-incincta/B-V_thumbnail@1060.webp,species-tiles/trichopolia-incincta/B-V_thumbnail.webp,highres,1060,102628
+derived/species-tiles/trichopolia-incincta/B-V_thumbnail@1200.jpg,species-tiles/trichopolia-incincta/B-V_thumbnail.webp,highres,1200,155461
+derived/species-tiles/trichopolia-incincta/B-V_thumbnail@320h.webp,species-tiles/trichopolia-incincta/B-V_thumbnail.webp,highres,320h,41310
+derived/species-tiles/trichopolia-incincta/B-V_thumbnail@530.webp,species-tiles/trichopolia-incincta/B-V_thumbnail.webp,highres,530,45368
+derived/species-tiles/trichopolia-incincta/C-D_thumbnail@1060.webp,species-tiles/trichopolia-incincta/C-D_thumbnail.webp,highres,1060,131342
+derived/species-tiles/trichopolia-incincta/C-D_thumbnail@1200.jpg,species-tiles/trichopolia-incincta/C-D_thumbnail.webp,highres,1200,195722
+derived/species-tiles/trichopolia-incincta/C-D_thumbnail@320h.webp,species-tiles/trichopolia-incincta/C-D_thumbnail.webp,highres,320h,44270
+derived/species-tiles/trichopolia-incincta/C-D_thumbnail@530.webp,species-tiles/trichopolia-incincta/C-D_thumbnail.webp,highres,530,49192
+derived/species-tiles/trichopolia-incincta/C-V_thumbnail@1060.webp,species-tiles/trichopolia-incincta/C-V_thumbnail.webp,highres,1060,118546
+derived/species-tiles/trichopolia-incincta/C-V_thumbnail@1200.jpg,species-tiles/trichopolia-incincta/C-V_thumbnail.webp,highres,1200,180171
+derived/species-tiles/trichopolia-incincta/C-V_thumbnail@320h.webp,species-tiles/trichopolia-incincta/C-V_thumbnail.webp,highres,320h,43160
+derived/species-tiles/trichopolia-incincta/C-V_thumbnail@530.webp,species-tiles/trichopolia-incincta/C-V_thumbnail.webp,highres,530,47624
+derived/species-tiles/trichopolia-oviduca/A-D_thumbnail@1060.webp,species-tiles/trichopolia-oviduca/A-D_thumbnail.webp,highres,1060,112240
+derived/species-tiles/trichopolia-oviduca/A-D_thumbnail@1200.jpg,species-tiles/trichopolia-oviduca/A-D_thumbnail.webp,highres,1200,165919
+derived/species-tiles/trichopolia-oviduca/A-D_thumbnail@320h.webp,species-tiles/trichopolia-oviduca/A-D_thumbnail.webp,highres,320h,43740
+derived/species-tiles/trichopolia-oviduca/A-D_thumbnail@530.webp,species-tiles/trichopolia-oviduca/A-D_thumbnail.webp,highres,530,48304
+derived/species-tiles/trichopolia-oviduca/A-V_thumbnail@1060.webp,species-tiles/trichopolia-oviduca/A-V_thumbnail.webp,highres,1060,96436
+derived/species-tiles/trichopolia-oviduca/A-V_thumbnail@1200.jpg,species-tiles/trichopolia-oviduca/A-V_thumbnail.webp,highres,1200,148631
+derived/species-tiles/trichopolia-oviduca/A-V_thumbnail@320h.webp,species-tiles/trichopolia-oviduca/A-V_thumbnail.webp,highres,320h,41340
+derived/species-tiles/trichopolia-oviduca/A-V_thumbnail@530.webp,species-tiles/trichopolia-oviduca/A-V_thumbnail.webp,highres,530,45506
+derived/species-tiles/trichopolia-rufula/A-D_thumbnail@1060.webp,species-tiles/trichopolia-rufula/A-D_thumbnail.webp,highres,1060,108192
+derived/species-tiles/trichopolia-rufula/A-D_thumbnail@1200.jpg,species-tiles/trichopolia-rufula/A-D_thumbnail.webp,highres,1200,163802
+derived/species-tiles/trichopolia-rufula/A-D_thumbnail@320h.webp,species-tiles/trichopolia-rufula/A-D_thumbnail.webp,highres,320h,41834
+derived/species-tiles/trichopolia-rufula/A-D_thumbnail@530.webp,species-tiles/trichopolia-rufula/A-D_thumbnail.webp,highres,530,46210
+derived/species-tiles/trichopolia-rufula/A-V_thumbnail@1060.webp,species-tiles/trichopolia-rufula/A-V_thumbnail.webp,highres,1060,103020
+derived/species-tiles/trichopolia-rufula/A-V_thumbnail@1200.jpg,species-tiles/trichopolia-rufula/A-V_thumbnail.webp,highres,1200,156746
+derived/species-tiles/trichopolia-rufula/A-V_thumbnail@320h.webp,species-tiles/trichopolia-rufula/A-V_thumbnail.webp,highres,320h,41656
+derived/species-tiles/trichopolia-rufula/A-V_thumbnail@530.webp,species-tiles/trichopolia-rufula/A-V_thumbnail.webp,highres,530,45700
 derived/species-tiles/proxenus-mendosa/A-D_thumbnail@1060.webp,species-tiles/proxenus-mendosa/A-D_thumbnail.webp,highres,1060,95102
 derived/species-tiles/proxenus-mendosa/A-D_thumbnail@1200.jpg,species-tiles/proxenus-mendosa/A-D_thumbnail.webp,highres,1200,149187
 derived/species-tiles/proxenus-mendosa/A-D_thumbnail@320h.webp,species-tiles/proxenus-mendosa/A-D_thumbnail.webp,highres,320h,39374
@@ -20107,14 +20107,14 @@ derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@1060.webp,species-til
 derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@1200.jpg,species-tiles/spargaloma-sexpunctata/A-V_thumbnail.webp,highres,1200,153624
 derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@320h.webp,species-tiles/spargaloma-sexpunctata/A-V_thumbnail.webp,highres,320h,40206
 derived/species-tiles/spargaloma-sexpunctata/A-V_thumbnail@530.webp,species-tiles/spargaloma-sexpunctata/A-V_thumbnail.webp,highres,530,43188
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@1060.webp,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,1060,110766
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@1200.jpg,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,1200,169982
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@320h.webp,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,320h,41000
-derived/species-tiles/speranza-andersoni/A-D_thumbnail@530.webp,species-tiles/speranza-andersoni/A-D_thumbnail.webp,highres,530,44892
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@1060.webp,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,1060,91378
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@1200.jpg,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,1200,145990
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@320h.webp,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,320h,38486
-derived/species-tiles/speranza-andersoni/A-V_thumbnail@530.webp,species-tiles/speranza-andersoni/A-V_thumbnail.webp,highres,530,41648
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@1060.webp,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,1060,110766
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@1200.jpg,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,1200,169982
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@320h.webp,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,320h,41000
+derived/species-tiles/speranza-occiduaria/B-D_thumbnail@530.webp,species-tiles/speranza-occiduaria/B-D_thumbnail.webp,highres,530,44892
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@1060.webp,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,1060,91378
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@1200.jpg,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,1200,145990
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@320h.webp,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,320h,38486
+derived/species-tiles/speranza-occiduaria/B-V_thumbnail@530.webp,species-tiles/speranza-occiduaria/B-V_thumbnail.webp,highres,530,41648
 derived/species-tiles/speranza-guenearia/A-D_thumbnail@1060.webp,species-tiles/speranza-guenearia/A-D_thumbnail.webp,highres,1060,94160
 derived/species-tiles/speranza-guenearia/A-D_thumbnail@1200.jpg,species-tiles/speranza-guenearia/A-D_thumbnail.webp,highres,1200,146305
 derived/species-tiles/speranza-guenearia/A-D_thumbnail@320h.webp,species-tiles/speranza-guenearia/A-D_thumbnail.webp,highres,320h,38142
@@ -20535,14 +20535,14 @@ derived/species-tiles/sympistis-cherti/A-V_thumbnail@1060.webp,species-tiles/sym
 derived/species-tiles/sympistis-cherti/A-V_thumbnail@1200.jpg,species-tiles/sympistis-cherti/A-V_thumbnail.webp,highres,1200,143272
 derived/species-tiles/sympistis-cherti/A-V_thumbnail@320h.webp,species-tiles/sympistis-cherti/A-V_thumbnail.webp,highres,320h,38748
 derived/species-tiles/sympistis-cherti/A-V_thumbnail@530.webp,species-tiles/sympistis-cherti/A-V_thumbnail.webp,highres,530,41730
-derived/species-tiles/sympistis-chionanti/A-D_thumbnail@1060.webp,species-tiles/sympistis-chionanti/A-D_thumbnail.webp,highres,1060,98058
-derived/species-tiles/sympistis-chionanti/A-D_thumbnail@1200.jpg,species-tiles/sympistis-chionanti/A-D_thumbnail.webp,highres,1200,149827
-derived/species-tiles/sympistis-chionanti/A-D_thumbnail@320h.webp,species-tiles/sympistis-chionanti/A-D_thumbnail.webp,highres,320h,40816
-derived/species-tiles/sympistis-chionanti/A-D_thumbnail@530.webp,species-tiles/sympistis-chionanti/A-D_thumbnail.webp,highres,530,44612
-derived/species-tiles/sympistis-chionanti/A-V_thumbnail@1060.webp,species-tiles/sympistis-chionanti/A-V_thumbnail.webp,highres,1060,89726
-derived/species-tiles/sympistis-chionanti/A-V_thumbnail@1200.jpg,species-tiles/sympistis-chionanti/A-V_thumbnail.webp,highres,1200,140800
-derived/species-tiles/sympistis-chionanti/A-V_thumbnail@320h.webp,species-tiles/sympistis-chionanti/A-V_thumbnail.webp,highres,320h,38858
-derived/species-tiles/sympistis-chionanti/A-V_thumbnail@530.webp,species-tiles/sympistis-chionanti/A-V_thumbnail.webp,highres,530,41784
+derived/species-tiles/sympistis-chionanthi/A-D_thumbnail@1060.webp,species-tiles/sympistis-chionanthi/A-D_thumbnail.webp,highres,1060,98058
+derived/species-tiles/sympistis-chionanthi/A-D_thumbnail@1200.jpg,species-tiles/sympistis-chionanthi/A-D_thumbnail.webp,highres,1200,149827
+derived/species-tiles/sympistis-chionanthi/A-D_thumbnail@320h.webp,species-tiles/sympistis-chionanthi/A-D_thumbnail.webp,highres,320h,40816
+derived/species-tiles/sympistis-chionanthi/A-D_thumbnail@530.webp,species-tiles/sympistis-chionanthi/A-D_thumbnail.webp,highres,530,44612
+derived/species-tiles/sympistis-chionanthi/A-V_thumbnail@1060.webp,species-tiles/sympistis-chionanthi/A-V_thumbnail.webp,highres,1060,89726
+derived/species-tiles/sympistis-chionanthi/A-V_thumbnail@1200.jpg,species-tiles/sympistis-chionanthi/A-V_thumbnail.webp,highres,1200,140800
+derived/species-tiles/sympistis-chionanthi/A-V_thumbnail@320h.webp,species-tiles/sympistis-chionanthi/A-V_thumbnail.webp,highres,320h,38858
+derived/species-tiles/sympistis-chionanthi/A-V_thumbnail@530.webp,species-tiles/sympistis-chionanthi/A-V_thumbnail.webp,highres,530,41784
 derived/species-tiles/sympistis-cibalis/A-D_thumbnail@1060.webp,species-tiles/sympistis-cibalis/A-D_thumbnail.webp,highres,1060,94478
 derived/species-tiles/sympistis-cibalis/A-D_thumbnail@1200.jpg,species-tiles/sympistis-cibalis/A-D_thumbnail.webp,highres,1200,146168
 derived/species-tiles/sympistis-cibalis/A-D_thumbnail@320h.webp,species-tiles/sympistis-cibalis/A-D_thumbnail.webp,highres,320h,40218
@@ -22431,10 +22431,10 @@ derived/speranza-amboflava/Speranza amboflava-B-D@320h.webp,speranza-amboflava/S
 derived/speranza-amboflava/Speranza amboflava-B-D@full.webp,speranza-amboflava/Speranza amboflava-B-D.jpg,legacy,full,74726
 derived/speranza-amboflava/Speranza amboflava-B-V@320h.webp,speranza-amboflava/Speranza amboflava-B-V.jpg,legacy,320h,40320
 derived/speranza-amboflava/Speranza amboflava-B-V@full.webp,speranza-amboflava/Speranza amboflava-B-V.jpg,legacy,full,76312
-derived/speranza-andersoni/Speranza andersoni-A-D@320h.webp,speranza-andersoni/Speranza andersoni-A-D.jpg,legacy,320h,42226
-derived/speranza-andersoni/Speranza andersoni-A-D@full.webp,speranza-andersoni/Speranza andersoni-A-D.jpg,legacy,full,86010
-derived/speranza-andersoni/Speranza andersoni-A-V@320h.webp,speranza-andersoni/Speranza andersoni-A-V.jpg,legacy,320h,39940
-derived/speranza-andersoni/Speranza andersoni-A-V@full.webp,speranza-andersoni/Speranza andersoni-A-V.jpg,legacy,full,78190
+derived/speranza-occiduaria/Speranza andersoni-B-D@320h.webp,speranza-occiduaria/Speranza andersoni-B-D.jpg,legacy,320h,42226
+derived/speranza-occiduaria/Speranza andersoni-B-D@full.webp,speranza-occiduaria/Speranza andersoni-B-D.jpg,legacy,full,86010
+derived/speranza-occiduaria/Speranza andersoni-B-V@320h.webp,speranza-occiduaria/Speranza andersoni-B-V.jpg,legacy,320h,39940
+derived/speranza-occiduaria/Speranza andersoni-B-V@full.webp,speranza-occiduaria/Speranza andersoni-B-V.jpg,legacy,full,78190
 derived/speranza-bitactata/Speranza bitactata-A-D@320h.webp,speranza-bitactata/Speranza bitactata-A-D.jpg,legacy,320h,45442
 derived/speranza-bitactata/Speranza bitactata-A-D@full.webp,speranza-bitactata/Speranza bitactata-A-D.jpg,legacy,full,90644
 derived/speranza-bitactata/Speranza bitactata-A-V@320h.webp,speranza-bitactata/Speranza bitactata-A-V.jpg,legacy,320h,43758
@@ -22455,14 +22455,14 @@ derived/speranza-brunneata/Speranza brunneata-A-D@320h.webp,speranza-brunneata/S
 derived/speranza-brunneata/Speranza brunneata-A-D@full.webp,speranza-brunneata/Speranza brunneata-A-D.jpg,legacy,full,97016
 derived/speranza-brunneata/Speranza brunneata-A-V@320h.webp,speranza-brunneata/Speranza brunneata-A-V.jpg,legacy,320h,44442
 derived/speranza-brunneata/Speranza brunneata-A-V@full.webp,speranza-brunneata/Speranza brunneata-A-V.jpg,legacy,full,88748
-derived/speranza-colata/Speranza colata-A-D@320h.webp,speranza-colata/Speranza colata-A-D.jpg,legacy,320h,47100
-derived/speranza-colata/Speranza colata-A-D@full.webp,speranza-colata/Speranza colata-A-D.jpg,legacy,full,98882
-derived/speranza-colata/Speranza colata-A-V@320h.webp,speranza-colata/Speranza colata-A-V.jpg,legacy,320h,43380
-derived/speranza-colata/Speranza colata-A-V@full.webp,speranza-colata/Speranza colata-A-V.jpg,legacy,full,88656
-derived/speranza-colata/Speranza colata-B-D@320h.webp,speranza-colata/Speranza colata-B-D.jpg,legacy,320h,45564
-derived/speranza-colata/Speranza colata-B-D@full.webp,speranza-colata/Speranza colata-B-D.jpg,legacy,full,87958
-derived/speranza-colata/Speranza colata-B-V@320h.webp,speranza-colata/Speranza colata-B-V.jpg,legacy,320h,45510
-derived/speranza-colata/Speranza colata-B-V@full.webp,speranza-colata/Speranza colata-B-V.jpg,legacy,full,87962
+derived/macaria-colata/Speranza colata-D-D@320h.webp,macaria-colata/Speranza colata-D-D.jpg,legacy,320h,47100
+derived/macaria-colata/Speranza colata-D-D@full.webp,macaria-colata/Speranza colata-D-D.jpg,legacy,full,98882
+derived/macaria-colata/Speranza colata-D-V@320h.webp,macaria-colata/Speranza colata-D-V.jpg,legacy,320h,43380
+derived/macaria-colata/Speranza colata-D-V@full.webp,macaria-colata/Speranza colata-D-V.jpg,legacy,full,88656
+derived/macaria-colata/Speranza colata-E-D@320h.webp,macaria-colata/Speranza colata-E-D.jpg,legacy,320h,45564
+derived/macaria-colata/Speranza colata-E-D@full.webp,macaria-colata/Speranza colata-E-D.jpg,legacy,full,87958
+derived/macaria-colata/Speranza colata-E-V@320h.webp,macaria-colata/Speranza colata-E-V.jpg,legacy,320h,45510
+derived/macaria-colata/Speranza colata-E-V@full.webp,macaria-colata/Speranza colata-E-V.jpg,legacy,full,87962
 derived/speranza-decorata/Speranza decorata-A-D@320h.webp,speranza-decorata/Speranza decorata-A-D.jpg,legacy,320h,48822
 derived/speranza-decorata/Speranza decorata-A-D@full.webp,speranza-decorata/Speranza decorata-A-D.jpg,legacy,full,99410
 derived/speranza-decorata/Speranza decorata-A-V@320h.webp,speranza-decorata/Speranza decorata-A-V.jpg,legacy,320h,47656
@@ -22495,22 +22495,22 @@ derived/speranza-loricaria/Speranza loricaria-A-D@320h.webp,speranza-loricaria/S
 derived/speranza-loricaria/Speranza loricaria-A-D@full.webp,speranza-loricaria/Speranza loricaria-A-D.jpg,legacy,full,81418
 derived/speranza-loricaria/Speranza loricaria-A-V@320h.webp,speranza-loricaria/Speranza loricaria-A-V.jpg,legacy,320h,38398
 derived/speranza-loricaria/Speranza loricaria-A-V@full.webp,speranza-loricaria/Speranza loricaria-A-V.jpg,legacy,full,73570
-derived/speranza-lorquinaria/Speranza lorguinaria-A-D@320h.webp,speranza-lorquinaria/Speranza lorguinaria-A-D.jpg,legacy,320h,43746
-derived/speranza-lorquinaria/Speranza lorguinaria-A-D@full.webp,speranza-lorquinaria/Speranza lorguinaria-A-D.jpg,legacy,full,90564
-derived/speranza-lorquinaria/Speranza lorguinaria-A-V@320h.webp,speranza-lorquinaria/Speranza lorguinaria-A-V.jpg,legacy,320h,43324
-derived/speranza-lorquinaria/Speranza lorguinaria-A-V@full.webp,speranza-lorquinaria/Speranza lorguinaria-A-V.jpg,legacy,full,88878
+derived/macaria-lorquinaria/Speranza lorguinaria-A-D@320h.webp,macaria-lorquinaria/Speranza lorguinaria-A-D.jpg,legacy,320h,43746
+derived/macaria-lorquinaria/Speranza lorguinaria-A-D@full.webp,macaria-lorquinaria/Speranza lorguinaria-A-D.jpg,legacy,full,90564
+derived/macaria-lorquinaria/Speranza lorguinaria-A-V@320h.webp,macaria-lorquinaria/Speranza lorguinaria-A-V.jpg,legacy,320h,43324
+derived/macaria-lorquinaria/Speranza lorguinaria-A-V@full.webp,macaria-lorquinaria/Speranza lorguinaria-A-V.jpg,legacy,full,88878
 derived/speranza-occiduaria/Speranza occiduaria-A-D@320h.webp,speranza-occiduaria/Speranza occiduaria-A-D.jpg,legacy,320h,42842
 derived/speranza-occiduaria/Speranza occiduaria-A-D@full.webp,speranza-occiduaria/Speranza occiduaria-A-D.jpg,legacy,full,90186
 derived/speranza-occiduaria/Speranza occiduaria-A-V@320h.webp,speranza-occiduaria/Speranza occiduaria-A-V.jpg,legacy,320h,41854
 derived/speranza-occiduaria/Speranza occiduaria-A-V@full.webp,speranza-occiduaria/Speranza occiduaria-A-V.jpg,legacy,full,84944
-derived/speranza-plumosata/Speranza plumosata-A-D@320h.webp,speranza-plumosata/Speranza plumosata-A-D.jpg,legacy,320h,44622
-derived/speranza-plumosata/Speranza plumosata-A-D@full.webp,speranza-plumosata/Speranza plumosata-A-D.jpg,legacy,full,87640
-derived/speranza-plumosata/Speranza plumosata-A-V@320h.webp,speranza-plumosata/Speranza plumosata-A-V.jpg,legacy,320h,44616
-derived/speranza-plumosata/Speranza plumosata-A-V@full.webp,speranza-plumosata/Speranza plumosata-A-V.jpg,legacy,full,87626
-derived/speranza-plumosata/Speranza plumosata-B-D@320h.webp,speranza-plumosata/Speranza plumosata-B-D.jpg,legacy,320h,43940
-derived/speranza-plumosata/Speranza plumosata-B-D@full.webp,speranza-plumosata/Speranza plumosata-B-D.jpg,legacy,full,85776
-derived/speranza-plumosata/Speranza plumosata-B-V@320h.webp,speranza-plumosata/Speranza plumosata-B-V.jpg,legacy,320h,41900
-derived/speranza-plumosata/Speranza plumosata-B-V@full.webp,speranza-plumosata/Speranza plumosata-B-V.jpg,legacy,full,82272
+derived/macaria-plumosata/Speranza plumosata-D-D@320h.webp,macaria-plumosata/Speranza plumosata-D-D.jpg,legacy,320h,44622
+derived/macaria-plumosata/Speranza plumosata-D-D@full.webp,macaria-plumosata/Speranza plumosata-D-D.jpg,legacy,full,87640
+derived/macaria-plumosata/Speranza plumosata-D-V@320h.webp,macaria-plumosata/Speranza plumosata-D-V.jpg,legacy,320h,44616
+derived/macaria-plumosata/Speranza plumosata-D-V@full.webp,macaria-plumosata/Speranza plumosata-D-V.jpg,legacy,full,87626
+derived/macaria-plumosata/Speranza plumosata-B-D@320h.webp,macaria-plumosata/Speranza plumosata-B-D.jpg,legacy,320h,43940
+derived/macaria-plumosata/Speranza plumosata-B-D@full.webp,macaria-plumosata/Speranza plumosata-B-D.jpg,legacy,full,85776
+derived/macaria-plumosata/Speranza plumosata-B-V@320h.webp,macaria-plumosata/Speranza plumosata-B-V.jpg,legacy,320h,41900
+derived/macaria-plumosata/Speranza plumosata-B-V@full.webp,macaria-plumosata/Speranza plumosata-B-V.jpg,legacy,full,82272
 derived/speranza-quadrilinearia/Itame quadrilinearia-A-D@320h.webp,speranza-quadrilinearia/Itame quadrilinearia-A-D.jpg,legacy,320h,41166
 derived/speranza-quadrilinearia/Itame quadrilinearia-A-D@full.webp,speranza-quadrilinearia/Itame quadrilinearia-A-D.jpg,legacy,full,78230
 derived/speranza-quadrilinearia/Itame quadrilinearia-A-V@320h.webp,speranza-quadrilinearia/Itame quadrilinearia-A-V.jpg,legacy,320h,40182
@@ -22747,10 +22747,10 @@ derived/sympistis-cherti/Sympistis cherti-A-D@320h.webp,sympistis-cherti/Sympist
 derived/sympistis-cherti/Sympistis cherti-A-D@full.webp,sympistis-cherti/Sympistis cherti-A-D.jpg,legacy,full,87628
 derived/sympistis-cherti/Sympistis cherti-A-V@320h.webp,sympistis-cherti/Sympistis cherti-A-V.jpg,legacy,320h,40166
 derived/sympistis-cherti/Sympistis cherti-A-V@full.webp,sympistis-cherti/Sympistis cherti-A-V.jpg,legacy,full,78494
-derived/sympistis-chionanti/Sympistis chionanti-A-D@320h.webp,sympistis-chionanti/Sympistis chionanti-A-D.jpg,legacy,320h,42440
-derived/sympistis-chionanti/Sympistis chionanti-A-D@full.webp,sympistis-chionanti/Sympistis chionanti-A-D.jpg,legacy,full,82052
-derived/sympistis-chionanti/Sympistis chionanti-A-V@320h.webp,sympistis-chionanti/Sympistis chionanti-A-V.jpg,legacy,320h,40564
-derived/sympistis-chionanti/Sympistis chionanti-A-V@full.webp,sympistis-chionanti/Sympistis chionanti-A-V.jpg,legacy,full,77548
+derived/sympistis-chionanthi/Sympistis chionanti-A-D@320h.webp,sympistis-chionanthi/Sympistis chionanti-A-D.jpg,legacy,320h,42440
+derived/sympistis-chionanthi/Sympistis chionanti-A-D@full.webp,sympistis-chionanthi/Sympistis chionanti-A-D.jpg,legacy,full,82052
+derived/sympistis-chionanthi/Sympistis chionanti-A-V@320h.webp,sympistis-chionanthi/Sympistis chionanti-A-V.jpg,legacy,320h,40564
+derived/sympistis-chionanthi/Sympistis chionanti-A-V@full.webp,sympistis-chionanthi/Sympistis chionanti-A-V.jpg,legacy,full,77548
 derived/sympistis-cibalis/Sympistis cibalis-A-D@320h.webp,sympistis-cibalis/Sympistis cibalis-A-D.jpg,legacy,320h,41876
 derived/sympistis-cibalis/Sympistis cibalis-A-D@full.webp,sympistis-cibalis/Sympistis cibalis-A-D.jpg,legacy,full,80026
 derived/sympistis-cibalis/Sympistis cibalis-A-V@320h.webp,sympistis-cibalis/Sympistis cibalis-A-V.jpg,legacy,320h,38720

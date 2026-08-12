@@ -1,9 +1,9 @@
 timeout = 20
 max_retries = 3
-cache = true
-# Treat cached URL results as fresh for a week (default is 1d) — cuts re-checks
-# of stable internal links and reduces flakiness against rate-limited hosts.
-max_cache_age = "7d"
+# No result cache — the absence of `cache`/`max_cache_age` is deliberate (ADR 0027).
+# Internal links resolve to file:// URIs, which lychee never caches, and the CDN
+# images are excluded below, so a cache would only spare this site ~35 external
+# requests per run — while letting one transient failure fail every PR for a week.
 accept = ["100..=103", "200..=299", "429"]
 # External reference hosts (BugGuide, Moth Photographers Group, BAMONA) are
 # linked per species from data/species-links.csv (~2400 links). Excluded from
@@ -15,13 +15,40 @@ accept = ["100..=103", "200..=299", "429"]
 # automated checkers while serving 200 to browsers. Excluded to keep the link
 # check non-flaky; these URLs are verified to load in a browser.
 #
+# The Government of Canada hosts are the same class, found the hard way: with the
+# result cache removed (ADR 0027) they were probed for the first time in weeks and
+# hung rather than answered — 129 timeouts and 8m40s of link check, from two hosts.
+# `agriculture.canada.ca` is linked from every species page, so one unreachable host
+# was 1,238 of the 1,238 errors. Both serve 200 in ~0.3s from a workstation, so this
+# is the runner's network being refused, not link rot; a re-run cannot clear it.
+# `cbif.gc.ca` was already excluded here for what was evidently the same reason.
+#
 # The site's own page URLs. Every page carries an absolute `rel=canonical` and
 # `og:url` pointing at production (issue #198), and lychee extracts the canonical
 # link like any other `<link href>`. Checking those would validate the *deployed*
 # site rather than the build under test: a PR that adds a page would fail the link
 # check for the entirely correct reason that the page is not deployed yet. The
-# trailing slash matches directory-style page permalinks only, so CDN assets on the
-# same host (`/species-tiles/…_thumbnail.webp?width=530`, `/plates/…/thumbnail.jpg`)
-# are still checked.
-exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca"]
+# trailing slash matches directory-style page permalinks only, so this pattern takes
+# the ~1,550 canonical page URLs and nothing else.
+#
+# CDN images are not checked here either — the extension pattern above excludes all
+# ~17,000 of them, and their presence is proven offline against the upload manifests
+# instead (ADR 0017/0022), which is deterministic where 17,000 HEAD requests would be
+# a network-flake generator:
+#
+#   derived/…                         data/image-derivatives.csv, both gates of
+#                                     scripts/check-derivatives.ts
+#   species-tiles/…_thumbnail.webp    data/species-photos.json, materialized only from
+#                                     data/species-photos-manifest.csv rows that
+#                                     upload-tiles.ts marked status=uploaded
+#   plates/…/thumbnail.jpg,           the check-derivatives source gate, via the
+#   <slug>/<legacy>.jpg               plates.json / images.csv source inventories
+#
+# `.github/scripts/check-cdn-urls.py` does probe the CDN over HTTP, scoped to the
+# images a PR actually adds. Note this exclude was once written the other way round:
+# it claimed CDN assets were "still checked", which was true only while the Bunny
+# Optimizer put a `?width=` query string on every URL and the extension anchor
+# therefore missed them. ADR 0022 retired the Optimizer; the URLs became plain
+# `.webp`/`.jpg` and silently fell under the exclude.
+exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca", "agriculture\\.canada\\.ca", "geonames\\.nrcan\\.gc\\.ca"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]

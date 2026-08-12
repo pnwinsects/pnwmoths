@@ -11,6 +11,9 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'csv-parse/sync';
+import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
+import { loadUnpublishedSpecies, isUnpublished, normalizeSlug } from '../_lib/unpublished-species.ts';
 
 // fileURLToPath (not .pathname) so this resolves correctly on Windows, where a bare
 // URL.pathname keeps a leading "/" before the drive letter (e.g. "/C:/...") and fails
@@ -40,10 +43,54 @@ export function parseRedirectsCsv(text: string): SpeciesRedirect[] {
   return rows;
 }
 
+/**
+ * Keep only redirects whose target actually gets a page.
+ *
+ * A merge can retire a slug into a survivor that is itself display-gated — the
+ * #265 Geometridae merges redirect into species the #48 family embargo hides —
+ * and a stub pointing at an unemitted page is a built-in 404 the blocking link
+ * check fails on. The CSV keeps the row (the retirement is a fact either way);
+ * the stub is suppressed here, at the consumer, and appears automatically when
+ * the gate lifts (ADR 0015 pattern). A target missing from species.csv entirely
+ * is passed through: check-referential-integrity owns that failure.
+ */
+export function filterToEmittedTargets(
+  rows: SpeciesRedirect[],
+  slugToFamily: ReadonlyMap<string, string>,
+  withheld: Set<string>,
+  unpublished: Set<string>,
+): SpeciesRedirect[] {
+  return rows.filter(r => {
+    const family = slugToFamily.get(r.newSlug);
+    if (family === undefined) return true;
+    return !isWithheldOrUnclassified(family, withheld) && !isUnpublished(r.newSlug, unpublished);
+  });
+}
+
+const SPECIES_CSV_PATH = fileURLToPath(new URL('../../data/species.csv', import.meta.url));
+
+function loadSlugToFamily(): Map<string, string> {
+  if (!existsSync(SPECIES_CSV_PATH)) return new Map();
+  const rows = parse(readFileSync(SPECIES_CSV_PATH), {
+    columns: true, skip_empty_lines: true, bom: true,
+  }) as Array<{ genus?: string; species?: string; family?: string }>;
+  return new Map(
+    rows.map(r => [normalizeSlug(`${r.genus ?? ''}-${r.species ?? ''}`), r.family ?? '']),
+  );
+}
+
 export default function (): SpeciesRedirect[] {
   if (!existsSync(CSV_PATH)) {
     console.warn(`[species-redirects] CSV not found: ${CSV_PATH} — no redirect stubs emitted`);
     return [];
   }
-  return parseRedirectsCsv(readFileSync(CSV_PATH, 'utf8'));
+  const rows = parseRedirectsCsv(readFileSync(CSV_PATH, 'utf8'));
+  const emitted = filterToEmittedTargets(
+    rows, loadSlugToFamily(), loadWithheldFamilies(), loadUnpublishedSpecies(),
+  );
+  const gated = rows.length - emitted.length;
+  if (gated > 0) {
+    console.log(`[species-redirects] ${gated} redirect(s) target gated species — stubs suppressed until the gate lifts`);
+  }
+  return emitted;
 }

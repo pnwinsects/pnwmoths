@@ -5623,23 +5623,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "catocala-allusa": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/catocala-allusa/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/catocala-allusa/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "catocala-amatrix": {
     "high_res_available": true,
     "specimens": [
@@ -5713,6 +5696,23 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/catocala-chelidonia/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "catocala-cleopatra": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/catocala-cleopatra/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/catocala-cleopatra/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -17375,43 +17375,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "macaria-bitactata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-bitactata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-bitactata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-bitactata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-bitactata/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-bitactata/C-D"
-      },
-      {
-        "specimen_id": "C",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-bitactata/C-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "macaria-colata": {
     "high_res_available": true,
     "specimens": [
@@ -22097,128 +22060,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "protorthodes-alfkenii": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-alfkenii/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-alfkenii/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protorthodes-curtica": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-curtica/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-curtica/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-curtica/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-curtica/B-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protorthodes-eureka": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-eureka/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-eureka/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protorthodes-incincta": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-incincta/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-incincta/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-incincta/C-D"
-      },
-      {
-        "specimen_id": "C",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-incincta/C-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protorthodes-oviduca": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-oviduca/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-oviduca/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protorthodes-rufula": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protorthodes-rufula/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protorthodes-rufula/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "proxenus-mendosa": {
     "high_res_available": true,
     "specimens": [
@@ -24217,18 +24058,38 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "speranza-andersoni": {
+  "speranza-bitactata": {
     "high_res_available": true,
     "specimens": [
       {
-        "specimen_id": "A",
+        "specimen_id": "C",
         "view": "D",
-        "tiles_path": "species-tiles/speranza-andersoni/A-D"
+        "tiles_path": "species-tiles/speranza-bitactata/C-D"
       },
       {
-        "specimen_id": "A",
+        "specimen_id": "C",
         "view": "V",
-        "tiles_path": "species-tiles/speranza-andersoni/A-V"
+        "tiles_path": "species-tiles/speranza-bitactata/C-V"
+      },
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-bitactata/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-bitactata/D-V"
+      },
+      {
+        "specimen_id": "E",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-bitactata/E-D"
+      },
+      {
+        "specimen_id": "E",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-bitactata/E-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -24241,6 +24102,23 @@
         "specimen_id": "A",
         "view": "D",
         "tiles_path": "species-tiles/speranza-guenearia/A-D"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "speranza-occiduaria": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-occiduaria/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-occiduaria/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -25032,18 +24910,18 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "sympistis-chionanti": {
+  "sympistis-chionanthi": {
     "high_res_available": true,
     "specimens": [
       {
         "specimen_id": "A",
         "view": "D",
-        "tiles_path": "species-tiles/sympistis-chionanti/A-D"
+        "tiles_path": "species-tiles/sympistis-chionanthi/A-D"
       },
       {
         "specimen_id": "A",
         "view": "V",
-        "tiles_path": "species-tiles/sympistis-chionanti/A-V"
+        "tiles_path": "species-tiles/sympistis-chionanthi/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -27155,6 +27033,128 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/trichoplusia-ni/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "trichopolia-alfkenii": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-alfkenii/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-alfkenii/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "trichopolia-curtica": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-curtica/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-curtica/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-curtica/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-curtica/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "trichopolia-eureka": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-eureka/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-eureka/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "trichopolia-incincta": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-incincta/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-incincta/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-incincta/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-incincta/C-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "trichopolia-oviduca": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-oviduca/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-oviduca/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "trichopolia-rufula": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/trichopolia-rufula/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/trichopolia-rufula/A-V"
       }
     ],
     "photographer": "Merrill Peterson",

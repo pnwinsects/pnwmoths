@@ -40,10 +40,20 @@ test('normalizeSlug: already-hyphenated slug unchanged modulo case', () => {
 // loadUnpublishedSpecies
 // ---------------------------------------------------------------------------
 
-test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 46 entries', () => {
+test('loadUnpublishedSpecies: real data/unpublished-species.csv yields exactly 42 entries', () => {
+  // 44 → 42 with the #265 merges: drasteria-nubicola and phyllodesma-coturnix left the
+  // catalog entirely (merged into their seniors, C-023), so their deny-list rows went too —
+  // a slug that no longer exists has nothing to gate.
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(unpublished instanceof Set, 'result should be a Set');
-  assert.strictEqual(unpublished.size, 46, `expected 46 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+  assert.strictEqual(unpublished.size, 42, `expected 42 entries, got ${unpublished.size}: ${[...unpublished].join(', ')}`);
+});
+
+test('loadUnpublishedSpecies: real CSV does NOT contain "hemileuca-nuteglan" (#268 removed, not hidden)', () => {
+  // The deny-list means "provisional, not yet described" — not "rejected". A name deleted from
+  // the catalog must not reappear here as a parking space; see docs/adr/0029-removing-a-species.md.
+  const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
+  assert.ok(!unpublished.has('hemileuca-nuteglan'), 'should not contain hemileuca-nuteglan');
 });
 
 test('loadUnpublishedSpecies: real CSV contains "euxoa-aurantiaca" (#156 curator omission)', () => {
@@ -74,11 +84,16 @@ test('loadUnpublishedSpecies: real CSV does NOT contain "oedemasia-salicis" — 
   );
 });
 
-test('loadUnpublishedSpecies: real CSV contains "schizura-ipomaeae" (the actual species the #84 CMS-exclusion applies to, also independently hidden per ISSUE-157)', () => {
+test('loadUnpublishedSpecies: real CSV does NOT contain "schizura-ipomaeae" — the sole species remaining in Schizura, un-hidden per #269', () => {
+  // #157 hid it on the reading that nothing should remain published under Schizura after
+  // conspecta/unicornis moved to Coelodasys. #269 reverses that: M. Peterson confirms
+  // Schizura ipomaeae keeps its combination and belongs on Browse under
+  // Notodontidae → Heterocampinae. (The #84 legacy-CMS exclusion was schizura-concinna,
+  // now oedemasia-salicis — never this species.)
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
   assert.ok(
-    unpublished.has('schizura-ipomaeae'),
-    'the #84 legacy-CMS exclusion belongs to Schizura ipomaeae, a distinct current species, not to the migrated Oedemasia salicis',
+    !unpublished.has('schizura-ipomaeae'),
+    'schizura-ipomaeae must be published: it is the current, curator-confirmed combination (#269)',
   );
 });
 

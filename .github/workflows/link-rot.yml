@@ -1,0 +1,65 @@
+name: Link rot check
+# Weekly external-link check that reports to a GitHub issue instead of a log
+# nobody reads. See docs/adr/0028-link-rot-reporting.md.
+#
+# Deliberately NOT part of pr-check.yml: a third-party host going down is not
+# something a contributor caused or can fix, so it must never turn a PR red
+# (#261, #263). Deliberately not `continue-on-error` inside an existing job
+# either — that is exactly the pattern that failed silently for days.
+on:
+  schedule:
+    # 09:00 UTC Monday = 1/2 AM Pacific. Weekly, because link rot is slow and a
+    # report that arrives more often than anyone acts on it becomes noise.
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: link-rot
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false # no git push here; keep token out of .git/config
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - name: Install DuckDB extensions (spatial, httpfs)
+        uses: ./.github/actions/install-duckdb-extensions
+      - uses: ./.github/actions/install-lychee
+        with:
+          version: '0.23.0'
+      - name: Build site
+        run: npm run build:site
+      - name: Check links
+        # lychee: 0 = clean, 2 = broken links found, 1 = missing input,
+        # 3 = bad config. Only 0 and 2 mean the check actually ran, and only
+        # those may continue to reporting.
+        #
+        # A blanket `|| true` here would be the bug this whole workflow exists
+        # to prevent: on exit 1 or 3 the report is stale or absent, the reporter
+        # reads zero failures, and it CLOSES the tracking issue as "all clear".
+        # A malfunction must never render as good news.
+        run: |
+          set +e
+          npm run links:check-json
+          status=$?
+          set -e
+          if [ "$status" -ne 0 ] && [ "$status" -ne 2 ]; then
+            echo "::error::lychee exited $status (expected 0 or 2) — the link check malfunctioned; not reporting"
+            exit "$status"
+          fi
+          echo "lychee exited $status"
+      - name: Report to the tracking issue
+        run: npm run links:report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

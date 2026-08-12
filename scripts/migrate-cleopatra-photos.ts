@@ -1,0 +1,122 @@
+/**
+ * scripts/migrate-cleopatra-photos.ts
+ *
+ * One-off migration for #298: copy every CDN object under `catocala-allusa/`
+ * (all four image prefixes, tile pyramids included) onto `catocala-cleopatra/`.
+ *
+ * A pure folder rename in the #266 mold: Lars Crabo's ruling (curation log
+ * C-025) keeps *Catocala faustina* and ours as two species but changes our
+ * name to *cleopatra* — the specimen letter does not change (nothing to
+ * collide with under a fresh slug) and filenames keep their historical
+ * `Catocala allusa-*` binomials, which is the specimen's original
+ * determination, not an error.
+ *
+ * First consumer of scripts/lib/bunny-storage.ts (extracted per the #296
+ * review). Additive and idempotent: size-checked skip against a walk of the
+ * destination, old objects never deleted or modified (ADR 0008); retirement
+ * is recorded in data/cdn-retired-images.csv.
+ *
+ * Usage:
+ *   DRY_RUN=1 BUNNY_STORAGE_PASSWORD=... node scripts/migrate-cleopatra-photos.ts
+ *   BUNNY_STORAGE_PASSWORD=... node scripts/migrate-cleopatra-photos.ts
+ *
+ * The password is needed even for DRY_RUN=1 — the work list is a storage-API
+ * directory listing (the tile pyramid is enumerated nowhere in the repo).
+ */
+import { pathToFileURL } from 'node:url';
+import { createBunnyStorage, retargetSlugSegment, pooled } from './lib/bunny-storage.ts';
+
+const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
+const TAG = '[migrate-cleopatra-photos]';
+
+export const FROM_SLUG = 'catocala-allusa';
+export const TO_SLUG = 'catocala-cleopatra';
+
+/** The four places a species' image objects live in the zone (same set as #266). */
+export const SLUG_PREFIXES: ReadonlyArray<(slug: string) => string> = [
+  slug => `${slug}/`,
+  slug => `derived/${slug}/`,
+  slug => `species-tiles/${slug}/`,
+  slug => `derived/species-tiles/${slug}/`,
+];
+
+async function main(): Promise<void> {
+  const password = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
+  if (!password) {
+    console.error(`${TAG} BUNNY_STORAGE_PASSWORD required (bunny.net → pnwmoths zone → FTP & API Access → Password).`);
+    console.error(`${TAG} It is needed even for DRY_RUN=1, because the work list is a storage-API directory listing.`);
+    process.exit(1);
+  }
+  const storage = createBunnyStorage({
+    host: process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com',
+    zone: process.env['BUNNY_ZONE'] ?? 'pnwmoths',
+    password,
+    tag: TAG,
+  });
+
+  console.log(`${TAG} ${FROM_SLUG} -> ${TO_SLUG}, ${SLUG_PREFIXES.length} prefixes${DRY_RUN ? ' — DRY RUN' : ''}`);
+
+  const already = new Map<string, number>();
+  for (const prefix of SLUG_PREFIXES) {
+    for (const [k, v] of await storage.walk(prefix(TO_SLUG))) already.set(k, v);
+  }
+
+  const plan: Array<{ from: string; to: string }> = [];
+  const stats = { copied: 0, skipped: 0, failed: 0 };
+  let truncated = 0;
+  let found = 0;
+
+  for (const prefix of SLUG_PREFIXES) {
+    for (const [key, size] of await storage.walk(prefix(FROM_SLUG))) {
+      found++;
+      const target = retargetSlugSegment(key, FROM_SLUG, TO_SLUG);
+      const existing = already.get(target);
+      if (existing === size) {
+        stats.skipped++;
+        continue;
+      }
+      if (existing !== undefined) {
+        truncated++;
+        console.log(`${TAG} re-copying ${target}: ${existing} bytes present, source is ${size}`);
+      }
+      plan.push({ from: key, to: target });
+    }
+  }
+
+  console.log(
+    `${TAG} ${found} source object(s); ${plan.length} to copy, ${stats.skipped} already present` +
+      (truncated > 0 ? `, ${truncated} present but the wrong size (re-copying)` : ''),
+  );
+
+  await pooled(plan, 8, async ({ from, to }) => {
+    try {
+      if (DRY_RUN) {
+        stats.copied++;
+        console.log(`  would COPY ${from} -> ${to}`);
+        return;
+      }
+      await storage.withRetry(() => storage.copyObject(from, to), `copy ${from}`);
+      stats.copied++;
+      if (stats.copied % 100 === 0) console.log(`${TAG} ${stats.copied} copied…`);
+    } catch (err) {
+      stats.failed++;
+      console.error(`${TAG} FAILED ${from} -> ${to}: ${storage.redact((err as Error).message)}`);
+    }
+  });
+
+  console.log('');
+  console.log(`${TAG} summary:`);
+  console.log(`  ${DRY_RUN ? 'would copy' : 'copied'}: ${stats.copied}`);
+  console.log(`  skipped (already present): ${stats.skipped}`);
+  console.log(`  failed: ${stats.failed}`);
+  if (stats.failed > 0) process.exit(1);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(err => {
+    const pw = process.env['BUNNY_STORAGE_PASSWORD'];
+    const msg = (err as Error).message ?? String(err);
+    console.error(pw ? msg.split(pw).join('[REDACTED]') : msg);
+    process.exit(1);
+  });
+}

@@ -181,6 +181,10 @@ test('integration: build-data.ts with bad CSV data exits non-zero with "Validati
   copyFileSync(resolve(ROOT, 'data/images.csv'), resolve(tmpDataDir, 'images.csv'));
   copyFileSync(resolve(ROOT, 'data/glossary.csv'), resolve(tmpDataDir, 'glossary.csv'));
   copyFileSync(resolve(ROOT, 'data/records-bad.csv'), resolve(tmpDataDir, 'records.csv'));
+  // build-data.ts hard-fails when data/records-inat.csv is absent, because a
+  // committed file going missing would silently drop every imported record
+  // from the site. Each fixture therefore stages the real one.
+  copyFileSync(resolve(ROOT, 'data/records-inat.csv'), resolve(tmpDataDir, 'records-inat.csv'));
 
   // Write a wrapper script that sets cwd to tmpDir and runs main()
   const scriptPath = resolve(ROOT, 'scripts/build-data.ts');
@@ -226,6 +230,7 @@ test('integration: build-data.ts rejects invalid image_filename in glossary.csv'
   copyFileSync(resolve(ROOT, 'data/species.csv'), resolve(tmpDataDir, 'species.csv'));
   copyFileSync(resolve(ROOT, 'data/images.csv'), resolve(tmpDataDir, 'images.csv'));
   copyFileSync(resolve(ROOT, 'data/records.csv'), resolve(tmpDataDir, 'records.csv'));
+  copyFileSync(resolve(ROOT, 'data/records-inat.csv'), resolve(tmpDataDir, 'records-inat.csv'));
 
   // Write a glossary.csv with an invalid image_filename (contains space and !)
   writeFileSync(resolve(tmpDataDir, 'glossary.csv'), [
@@ -710,6 +715,7 @@ test('integration: build-data.ts accepts images.csv filename with spaces without
   copyFileSync(resolve(ROOT, 'data/species.csv'), resolve(tmpDataDir, 'species.csv'));
   copyFileSync(resolve(ROOT, 'data/glossary.csv'), resolve(tmpDataDir, 'glossary.csv'));
   copyFileSync(resolve(ROOT, 'data/records.csv'), resolve(tmpDataDir, 'records.csv'));
+  copyFileSync(resolve(ROOT, 'data/records-inat.csv'), resolve(tmpDataDir, 'records-inat.csv'));
 
   // Write an images.csv with a filename containing a space (Django-style original filename)
   writeFileSync(resolve(tmpDataDir, 'images.csv'), [
@@ -760,6 +766,7 @@ test('integration: build-data.ts rejects a literal backslash-apostrophe in speci
   copyFileSync(resolve(ROOT, 'data/images.csv'), resolve(tmpDataDir, 'images.csv'));
   copyFileSync(resolve(ROOT, 'data/glossary.csv'), resolve(tmpDataDir, 'glossary.csv'));
   copyFileSync(resolve(ROOT, 'data/records.csv'), resolve(tmpDataDir, 'records.csv'));
+  copyFileSync(resolve(ROOT, 'data/records-inat.csv'), resolve(tmpDataDir, 'records-inat.csv'));
 
   // Write a species.csv row with the legacy escaping bug reintroduced.
   writeFileSync(resolve(tmpDataDir, 'species.csv'), [

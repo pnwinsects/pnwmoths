@@ -34,4 +34,12 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0023](0023-runbook-schema-guard.md) | Runbook CSV schemas checked mechanically — complete tables, sample rows, and prose column names resolved per-document | Accepted |
 | [0024](0024-html-validity-gate.md) | `build:check-html` fails the build on a malformed or unknown start tag in `_site/` | Accepted |
 | [0025](0025-manifest-locks.md) | Pipeline manifests guarded by a pid lock taken before the read; the sequential build and one-shot migrations are not | Accepted |
-| [0026](0026-generated-artifacts-merge-curator-fields.md) | Generators merge into their committed artifact — curator fields and untouched entries survive a scoped run | Accepted |
+| [0026](0026-inaturalist-project-sync.md) | iNaturalist records live in a separate, machine-owned `data/records-inat.csv`; reconciliation is destructive so it never touches the curator file | Accepted |
+| [0027](0027-no-link-check-cache.md) | The link check keeps no result cache — it still checks every link, but only its 35 external URLs were ever cacheable (internal links are `file://`, CDN images are excluded and manifest-checked) | Accepted |
+| [0028](0028-link-rot-reporting.md) | Broken external links reported to one self-closing GitHub issue, listed only after two consecutive weekly failures | Accepted |
+| [0029](0029-removing-a-species.md) | Removing a species deletes its row and every record outright — not a move to the deny-list, and no tombstone redirect | Accepted |
+| [0030](0030-checklist-order-from-mpg.md) | Checklist order comes from the MPG taxon list, superseding the legacy-CMS nested-set extraction | Accepted |
+| [0031](0031-checklist-page.md) | The Checklist is its own server-rendered page, not a mode of Browse; its list is excluded from the search index | Accepted |
+| [0032](0032-curation-log.md) | Curatorial decisions get their own append-only log (`docs/curation-log.md`), separate from ADRs | Accepted |
+| [0033](0033-referential-integrity-gate.md) | Every species reference is declared in one table and checked before the build; known orphans held in a self-expiring ratchet | Accepted |
+| [0034](0034-generated-artifacts-merge-curator-fields.md) | Generators merge into their committed artifact — curator fields and untouched entries survive a scoped run | Accepted |

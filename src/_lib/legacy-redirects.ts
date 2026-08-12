@@ -42,7 +42,10 @@ export const STATIC_MAP: Record<string, string> = {
   '/gsearch/': 'search/index.html',
   '/identify/': 'identify/index.html',
   '/browse/': 'browse/index.html',
-  '/browse-all/': 'browse/index.html',
+  // The legacy /browse-all/ was the checklist — a names-only list in taxonomic
+  // sequence — not the image browse. It pointed at Browse only because the
+  // Checklist page did not exist yet.
+  '/browse-all/': 'checklist/index.html',
   '/photographic-plates/': 'plates/index.html',
 };
 

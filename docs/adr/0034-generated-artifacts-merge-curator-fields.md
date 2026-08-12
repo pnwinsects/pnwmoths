@@ -1,4 +1,4 @@
-# 0026. Generators merge into their committed artifact; they never emit it from scratch
+# 0034. Generators merge into their committed artifact; they never emit it from scratch
 
 **Status:** Accepted
 

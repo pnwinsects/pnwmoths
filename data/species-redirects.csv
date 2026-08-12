@@ -7,3 +7,21 @@ oligocentria-pallida,ianassa-pallida,oligocentria-pallida->ianassa-pallida canon
 oligocentria-semirufescens,oedemasia-semirufescens,oligocentria-semirufescens->oedemasia-semirufescens canonical genus migration (#155)
 schizura-concinna,oedemasia-salicis,schizura-concinna->oedemasia-salicis canonical genus migration (#155)
 saturnia-mendocino,calosaturnia-mendocino,Saturnia->Calosaturnia consolidation (#156)
+protorthodes-rufula,trichopolia-rufula,"protorthodes-rufula->trichopolia-rufula Protorthodes->Trichopolia per MPG, curator-confirmed (#259)"
+protorthodes-eureka,trichopolia-eureka,"protorthodes-eureka->trichopolia-eureka Protorthodes->Trichopolia per MPG, curator-confirmed (#259)"
+furcula-furcula,furcula-gigans,furcula-furcula->furcula-gigans Furcula furcula->Furcula gigans per curator (#259)
+sympistis-chionanti,sympistis-chionanthi,sympistis-chionanti->sympistis-chionanthi chionanti->chionanthi spelling correction per curator (#259)
+protorthodes-alfkenii,trichopolia-alfkenii,"protorthodes-alfkenii->trichopolia-alfkenii Protorthodes->Trichopolia per MPG, extends the curator-confirmed move (#259)"
+protorthodes-curtica,trichopolia-curtica,"protorthodes-curtica->trichopolia-curtica Protorthodes->Trichopolia per MPG, extends the curator-confirmed move (#259)"
+protorthodes-incincta,trichopolia-incincta,"protorthodes-incincta->trichopolia-incincta Protorthodes->Trichopolia per MPG, extends the curator-confirmed move (#259)"
+protorthodes-oviduca,trichopolia-oviduca,"protorthodes-oviduca->trichopolia-oviduca Protorthodes->Trichopolia per MPG, extends the curator-confirmed move (#259)"
+drasteria-nubicola,drasteria-maculosa,"merged into drasteria-maculosa — same taxon, curator-confirmed (#265)"
+speranza-andersoni,speranza-occiduaria,"merged into speranza-occiduaria — synonym of Macaria occiduaria, curator-confirmed (#265)"
+macaria-unipunctaria,macaria-signaria,"merged into macaria-signaria — synonym, curator-confirmed (#265)"
+macaria-submarmorata,macaria-signaria,"merged into macaria-signaria — synonym, curator-confirmed (#265)"
+phyllodesma-coturnix,phyllodesma-americana,"merged into phyllodesma-americana — synonymized by Pohl & Nanz (2023), curator-confirmed (#265)"
+macaria-marmorata,macaria-signaria,"merged into macaria-signaria — synonym, curator ruling C-017 (#294)"
+catocala-allusa,catocala-cleopatra,"renamed — Lars Crabo via curator: two species stand, cleopatra has priority; Gall paper forthcoming (C-025, #298)"
+speranza-colata,macaria-colata,"returned to Macaria per curator ruling on #279 (C-026 / #303)"
+speranza-lorquinaria,macaria-lorquinaria,"returned to Macaria per curator ruling on #279 (C-026 / #303)"
+speranza-plumosata,macaria-plumosata,"returned to Macaria per curator ruling on #279 (C-026 / #303)"

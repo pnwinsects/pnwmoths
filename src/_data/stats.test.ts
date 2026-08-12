@@ -9,6 +9,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
+import { readAllRecordRows } from '../../scripts/lib/records-source.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '../..');
@@ -97,10 +98,13 @@ test('stats: withheld families (Geometridae) are excluded from the species count
 // data/records.csv. The records vanity count must exclude it, but the underlying data must
 // not be touched.
 test('stats: unpublished euxoa-aurantiaca is excluded from the records count while its records remain in the data', async () => {
-  const recordRows = parse(readFileSync(resolve(ROOT, 'data/records.csv')), {
-    columns: true,
-    skip_empty_lines: true,
-  }) as Array<{ species_slug: string }>;
+  // Counted against EVERY occurrence source, the same union stats.ts reads
+  // (#23) — reading data/records.csv alone would under-count by the size of
+  // the iNaturalist import and fail for a reason unrelated to this invariant.
+  const recordRows = readAllRecordRows(
+    resolve(ROOT, 'data/records.csv'),
+    resolve(ROOT, 'data/records-inat.csv'),
+  );
 
   const euxoaRecords = recordRows.filter((r) => r.species_slug === 'euxoa-aurantiaca');
   assert.ok(euxoaRecords.length > 0, 'Expected euxoa-aurantiaca occurrence records to remain in data/records.csv');

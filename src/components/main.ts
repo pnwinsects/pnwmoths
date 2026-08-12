@@ -4,6 +4,7 @@ import './pnwm-phenology-chart.ts';
 import './pnwm-filter-bar.ts';
 import './pnwm-image-slideshow.ts';
 import './pnwm-taxon-browser.ts';
+import './pnwm-checklist-filter.ts';
 import './pnwm-plate-viewer.ts';
 import './glossary-tooltip.ts';
 import './pnwm-identify.ts';
