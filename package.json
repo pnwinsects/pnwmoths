@@ -80,6 +80,6 @@
     "pagefind": "^1.5.2",
     "playwright-core": "^1.61.1",
     "typescript": "^7.0.2",
-    "vite": "^8.0.8"
+    "vite": "^8.2.1"
   }
 }
