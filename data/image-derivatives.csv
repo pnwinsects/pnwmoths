@@ -1527,10 +1527,10 @@ derived/catocala-aholibah/Catocala aholibah-A-D@320h.webp,catocala-aholibah/Cato
 derived/catocala-aholibah/Catocala aholibah-A-D@full.webp,catocala-aholibah/Catocala aholibah-A-D.jpg,legacy,full,91328
 derived/catocala-aholibah/Catocala aholibah-A-V@320h.webp,catocala-aholibah/Catocala aholibah-A-V.jpg,legacy,320h,36828
 derived/catocala-aholibah/Catocala aholibah-A-V@full.webp,catocala-aholibah/Catocala aholibah-A-V.jpg,legacy,full,75094
-derived/catocala-allusa/Catocala allusa-A-D@320h.webp,catocala-allusa/Catocala allusa-A-D.jpg,legacy,320h,37552
-derived/catocala-allusa/Catocala allusa-A-D@full.webp,catocala-allusa/Catocala allusa-A-D.jpg,legacy,full,77560
-derived/catocala-allusa/Catocala allusa-A-V@320h.webp,catocala-allusa/Catocala allusa-A-V.jpg,legacy,320h,36122
-derived/catocala-allusa/Catocala allusa-A-V@full.webp,catocala-allusa/Catocala allusa-A-V.jpg,legacy,full,75182
+derived/catocala-cleopatra/Catocala allusa-A-D@320h.webp,catocala-cleopatra/Catocala allusa-A-D.jpg,legacy,320h,37552
+derived/catocala-cleopatra/Catocala allusa-A-D@full.webp,catocala-cleopatra/Catocala allusa-A-D.jpg,legacy,full,77560
+derived/catocala-cleopatra/Catocala allusa-A-V@320h.webp,catocala-cleopatra/Catocala allusa-A-V.jpg,legacy,320h,36122
+derived/catocala-cleopatra/Catocala allusa-A-V@full.webp,catocala-cleopatra/Catocala allusa-A-V.jpg,legacy,full,75182
 derived/catocala-amatrix/Catocala amatrix-B-D@320h.webp,catocala-amatrix/Catocala amatrix-B-D.jpg,legacy,320h,45354
 derived/catocala-amatrix/Catocala amatrix-B-D@full.webp,catocala-amatrix/Catocala amatrix-B-D.jpg,legacy,full,93290
 derived/catocala-amatrix/Catocala amatrix-B-V@320h.webp,catocala-amatrix/Catocala amatrix-B-V.jpg,legacy,320h,43118
@@ -9603,14 +9603,14 @@ derived/species-tiles/catocala-aholibah/A-V_thumbnail@1060.webp,species-tiles/ca
 derived/species-tiles/catocala-aholibah/A-V_thumbnail@1200.jpg,species-tiles/catocala-aholibah/A-V_thumbnail.webp,highres,1200,147062
 derived/species-tiles/catocala-aholibah/A-V_thumbnail@320h.webp,species-tiles/catocala-aholibah/A-V_thumbnail.webp,highres,320h,35644
 derived/species-tiles/catocala-aholibah/A-V_thumbnail@530.webp,species-tiles/catocala-aholibah/A-V_thumbnail.webp,highres,530,38812
-derived/species-tiles/catocala-allusa/A-D_thumbnail@1060.webp,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,1060,95904
-derived/species-tiles/catocala-allusa/A-D_thumbnail@1200.jpg,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,1200,150096
-derived/species-tiles/catocala-allusa/A-D_thumbnail@320h.webp,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,320h,36344
-derived/species-tiles/catocala-allusa/A-D_thumbnail@530.webp,species-tiles/catocala-allusa/A-D_thumbnail.webp,highres,530,39898
-derived/species-tiles/catocala-allusa/A-V_thumbnail@1060.webp,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,1060,91344
-derived/species-tiles/catocala-allusa/A-V_thumbnail@1200.jpg,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,1200,144628
-derived/species-tiles/catocala-allusa/A-V_thumbnail@320h.webp,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,320h,34716
-derived/species-tiles/catocala-allusa/A-V_thumbnail@530.webp,species-tiles/catocala-allusa/A-V_thumbnail.webp,highres,530,37778
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@1060.webp,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,1060,95904
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@1200.jpg,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,1200,150096
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@320h.webp,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,320h,36344
+derived/species-tiles/catocala-cleopatra/A-D_thumbnail@530.webp,species-tiles/catocala-cleopatra/A-D_thumbnail.webp,highres,530,39898
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@1060.webp,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,1060,91344
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@1200.jpg,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,1200,144628
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@320h.webp,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,320h,34716
+derived/species-tiles/catocala-cleopatra/A-V_thumbnail@530.webp,species-tiles/catocala-cleopatra/A-V_thumbnail.webp,highres,530,37778
 derived/species-tiles/catocala-amatrix/A-D_thumbnail@1060.webp,species-tiles/catocala-amatrix/A-D_thumbnail.webp,highres,1060,104360
 derived/species-tiles/catocala-amatrix/A-D_thumbnail@1200.jpg,species-tiles/catocala-amatrix/A-D_thumbnail.webp,highres,1200,161034
 derived/species-tiles/catocala-amatrix/A-D_thumbnail@320h.webp,species-tiles/catocala-amatrix/A-D_thumbnail.webp,highres,320h,37642

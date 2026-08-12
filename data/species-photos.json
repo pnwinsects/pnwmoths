@@ -5172,23 +5172,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "catocala-allusa": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/catocala-allusa/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/catocala-allusa/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "catocala-amatrix": {
     "high_res_available": true,
     "specimens": [
@@ -5262,6 +5245,23 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/catocala-chelidonia/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "catocala-cleopatra": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/catocala-cleopatra/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/catocala-cleopatra/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
