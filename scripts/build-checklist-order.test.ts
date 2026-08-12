@@ -231,10 +231,16 @@ describe('data/checklist-order.csv', () => {
     assert.deepEqual([...ordered.map((r) => r.species_slug)].sort(), [...slugs].sort());
   });
 
-  // The whole reason this is one file instead of four: if our genera did not
-  // occupy unbroken blocks, a single species-level sort key could not
-  // reproduce genus order and the page would need a separate genus ordering.
-  it('keeps every genus in one unbroken block', () => {
+  // Genus blocks are the page's job, not this file's: src/_data/checklist.ts
+  // groups by genus and anchors each block at its earliest species' position,
+  // so interleaved rows here still render as unbroken blocks. Fragmentation
+  // in this file is nonetheless worth noticing — it means our genus label
+  // disagrees with MPG's sequence somewhere — so the known cases are pinned:
+  // C-026 keeps bitactata/decorata in Speranza while colata/lorquinaria/
+  // plumosata returned to Macaria, and MPG (which places them all in Macaria)
+  // sequences the two sets interleaved. A new genus appearing here deserves
+  // the same scrutiny before it is added.
+  it('fragments only the genera the curation log explains', () => {
     const spans = new Map<string, number[]>();
     ordered.forEach((row, rank) => {
       const genus = row.species_slug.slice(0, row.species_slug.indexOf('-'));
@@ -244,8 +250,9 @@ describe('data/checklist-order.csv', () => {
     });
     const fragmented = [...spans.entries()]
       .filter(([, ranks]) => (ranks.at(-1) ?? 0) - (ranks[0] ?? 0) !== ranks.length - 1)
-      .map(([genus]) => genus);
-    assert.deepEqual(fragmented, []);
+      .map(([genus]) => genus)
+      .sort();
+    assert.deepEqual(fragmented, ['macaria', 'speranza']);
   });
 
   it('puts families in the standard Pohl sequence', () => {

@@ -73,6 +73,43 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-026 · 2026-08-10 · The five stranded-photo species: three return to *Macaria*, two stay *Speranza*, *Digrammia decorata* stands apart
+
+**Source** [#279 comment](https://github.com/pnwinsects/pnwmoths/issues/279#issuecomment-5245197930),
+the curator's own words · **Status** Applied (*bitactata*, *colata*, *lorquinaria*, *plumosata* — #303 PR);
+On hold (the `macaria-decorata` tile set — which species it depicts is the open question on #303) ·
+**Refines** C-014
+
+> For this set of species, we should follow what MPG does:
+> Use Speranza bitactata, not Macaria bitactata
+> Use Macaria colata, not Speranza colata
+> Use Speranza decorata, not Macaria decorata
+> Digrammia decorata is a species distinct from Speranza decorata
+> Use Macaria lorquinaria, not Speranza lorquinaria
+> Use Macaria plumosata, not Speranza plumosata
+>
+> Images should be renamed as needed (adding new letters A,B,C,D, etc. if necessary to avoid duplicate
+> use of a letter)
+
+Why it matters: this settles 5 of the 27 genus disagreements #279 tracks, and it is a per-species
+ruling, not a blanket "follow MPG" — for *bitactata* and *decorata* the list keeps *Speranza* even
+though our MPG snapshot (`data/mpg-taxa.csv`) titles both rows "Macaria …"; the explicit list is what
+was applied. The letters instruction resolves every collision between the stranded high-res sets and
+the legacy lettered photos: letters change only where they must (*bitactata* tiles A→D, B→E, C kept;
+*colata* legacy A→D, B→E; *plumosata* legacy A→D; *lorquinaria* untouched). The tiled
+"Macaria decorata" specimens are deliberately **not** moved: the name historically fits *Speranza
+decorata* (Hulst, 1896 — MPG returns it to *Macaria* per Sihvonen & Skou 2015) but the specimens do
+not resemble our legacy *Speranza decorata* photos, and a separate "Speranza decorata" TIFF set
+exists in the inbox — so which species they depict is a genuine identification question, put to the
+curator on #303. Their integrity exception stands until he answers. Side effect: with the catalog
+names now matching the TIFF names, the parallel "Speranza …" sets in the #214 photo backlog become
+resolvable on a future ingest run.
+
+What changed (#303 PR): three `data/species.csv` rows re-genused in place; images, derivatives,
+`species-photos.json`, and the photo manifest re-keyed and re-lettered per the map above; +3
+redirects, +4 synonyms; 60 objects recorded in `data/cdn-retired-images.csv`; four of the five
+`referential-integrity-exceptions.csv` rows retired; checklist and key artifacts regenerated.
+
 ## C-025 · 2026-08-10 · *Catocala allusa* and *C. faustina* stay two species; ours takes the name *cleopatra*
 
 **Source** [#265 comment](https://github.com/pnwinsects/pnwmoths/issues/265#issuecomment-5243497181),
