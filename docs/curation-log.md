@@ -398,10 +398,11 @@ The 2 km ceiling is a curator standard, not a technical limit — worth knowing 
 
 **Source** [#218 comment](https://github.com/pnwinsects/pnwmoths/issues/218#issuecomment-5160842499), the curator's own words ·
 **Status** Applied (checklist order and the Checklist page —
-[ADR 0030](adr/0030-checklist-order-from-mpg.md), [ADR 0031](adr/0031-checklist-page.md)); **Pending**
-(the *Speranza* → *Macaria* rename, [#279](https://github.com/pnwinsects/pnwmoths/issues/279); the
-*Holoarctia* deletion, [#278](https://github.com/pnwinsects/pnwmoths/issues/278)) ·
-**Refines** C-003
+[ADR 0030](adr/0030-checklist-order-from-mpg.md), [ADR 0031](adr/0031-checklist-page.md)); **Partly
+applied** (the *Speranza* → *Macaria* question — C-026 ruled five species per-name, the other 22
+genus disagreements stay open on [#279](https://github.com/pnwinsects/pnwmoths/issues/279));
+**Pending** (the *Holoarctia* deletion, [#278](https://github.com/pnwinsects/pnwmoths/issues/278)) ·
+**Refines** C-003 · **Refined by** C-026
 
 > The geometrid genera Macaria and Speranza have been used inconsistently over the years. […]
 > Speranza is no longer in use for N American species and anything we have under Speranza should be
