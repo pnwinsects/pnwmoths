@@ -199,7 +199,12 @@ async function main(): Promise<void> {
 
   // Name every slug taking inherited defaults so a curator can correct any that
   // are genuinely someone else's work.
-  const defaulted = Object.keys(result).filter(slug => !existing[slug]?.photographer);
+  // Either field blank counts: a committed entry with a photographer but no
+  // license would otherwise take DEFAULT_LICENSE silently, against the
+  // "main() names every slug that takes the default" promise above.
+  const defaulted = Object.keys(result).filter(
+    slug => !existing[slug]?.photographer || !existing[slug]?.license,
+  );
   if (defaulted.length > 0) {
     console.log(
       `[generate-species-photos] ${defaulted.length} species had no curator attribution; defaulted to "${DEFAULT_PHOTOGRAPHER}" / "${DEFAULT_LICENSE}":`

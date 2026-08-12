@@ -57,3 +57,11 @@ Accepted as out-of-scope for now; revisit in a future feature milestone.
 | Django URL redirects | SEO-01 — legacy Django URL redirects; requires Netlify/Cloudflare edge rules to route old paths into `/redirect.html`. Until they exist, old links 404 rather than reaching the handler — visible now as the Top 404s table on `/analytics/` ([0019](adr/0019-legacy-link-telemetry-from-logs.md)). | issue #181, `src/_lib/legacy-redirects.ts` | ACCEPTED (deferred) |
 | Photographic plates page | PLAT-01, PLAT-02 — a photographic plates page. | — | ACCEPTED (deferred) |
 | No way to pin a checklist position | Checklist order is derived wholly from the MPG taxon list, so a curator instruction of the form *"place X immediately after Y"* cannot be expressed. The one live case, `idia-concisa` after `idia-aemula`, is **already correct** — MPG's own sequence puts it there (930471, 930472) — so nothing is wrong today and nothing is asserted either. If a future MPG release moves it, the order silently changes and no check notices. Designing the anchor mechanism (sort semantics, what happens when the anchor is renamed or deleted, whether it also serves the 21 provisional names) is the deferred work. | issue #259, `scripts/build-checklist-order.ts` | ACCEPTED (deferred) |
+
+## image-derivatives.csv ordering will churn on the next upload-derivatives run
+
+**Actionable, cosmetic.** The taxonomy renames (#295/#296/#304/#305) re-keyed derivative rows in
+place, leaving ~13 ordering inversions against the sort `emitCommittedManifest` writes. Content is
+correct and unique; the next `upload-derivatives` run will re-sort the file and produce a large
+no-op diff. Harmless, but whoever reviews that diff should expect it — or re-sort deliberately in
+a dedicated commit first.
