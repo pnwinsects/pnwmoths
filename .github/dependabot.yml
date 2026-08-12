@@ -4,6 +4,12 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # @types/node's major tracks the Node major line, and .nvmrc pins Node 24 (LTS).
+      # Accepting a major here lets tsc vouch for APIs the runtime doesn't have — and
+      # `tsc --noEmit` is the only gate that would catch it. Bump this alongside .nvmrc.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
     directory: /

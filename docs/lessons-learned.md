@@ -581,6 +581,14 @@ cost a debugging cycle to discover.
   definitively — 101,287 rows, byte-identical. Check the *patch* line too: 7.0.0 shipped a
   broken CJS export fixed in 7.0.1, so the "obvious" `^7.0.0` was the wrong pin.
 
+- **`@types/node`'s major follows `.nvmrc`, not "latest" — a green typecheck doesn't clear
+  it.** Dependabot offered `@types/node` 26 while `.nvmrc` (and therefore CI's
+  `node-version-file`) pins Node 24 LTS. It typechecked clean and all 1581 tests passed,
+  because the bump breaks nothing that *exists* — it widens what the compiler will vouch
+  for, so a Node 26-only API would sail through the one gate meant to catch it and fail at
+  runtime instead. Green is the expected result here, not evidence. The major is ignored in
+  `.github/dependabot.yml`; lift the ignore in the same PR that moves `.nvmrc`.
+
 - **A test that hardcodes a library's output can't detect that library changing.** The sole
   guard on csv-parse's `relax_quotes` behavior asserted against a hand-written string that
   didn't match what csv-parse actually returned, and checked only the two fields that were
