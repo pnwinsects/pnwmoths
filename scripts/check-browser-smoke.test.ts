@@ -8,9 +8,11 @@ import {
   contentTypeFor,
   parsePlottedCount,
   parseResultCount,
+  parseTimeout,
   pickSpeciesSlug,
   resolveRequestPath,
   serveSite,
+  summarize,
 } from './check-browser-smoke.ts';
 
 // The browser-driving half of check-browser-smoke.ts is exercised by running it
@@ -225,11 +227,85 @@ describe('serveSite', () => {
 });
 
 describe('CHECKS', () => {
-  it('covers the three pages the components live on', () => {
-    assert.equal(CHECKS.length, 3);
+  // Deliberately not asserting an exact count: that would be pure ossification,
+  // an edit tax on adding the fourth check ADR 0035 already anticipates.
+  it('is non-empty and every entry is runnable', () => {
+    assert.ok(CHECKS.length > 0);
+    for (const check of CHECKS) {
+      assert.equal(typeof check.name, 'string');
+      assert.ok(check.name.length > 0);
+      assert.equal(typeof check.run, 'function');
+    }
   });
 
   it('gives every check a distinct name, since names are how failures are reported', () => {
     assert.equal(new Set(CHECKS.map((c) => c.name)).size, CHECKS.length);
+  });
+});
+
+describe('parseTimeout', () => {
+  it('defaults when unset or empty', () => {
+    assert.equal(parseTimeout(undefined), 15_000);
+    assert.equal(parseTimeout(''), 15_000);
+  });
+
+  it('accepts a positive number', () => {
+    assert.equal(parseTimeout('500'), 500);
+  });
+
+  // NaN reaching setDefaultTimeout disables the timeout, so a typo would hang
+  // CI to its job limit instead of failing.
+  it('rejects values that would disable the timeout', () => {
+    assert.throws(() => parseTimeout('garbage'), /positive number/);
+    assert.throws(() => parseTimeout('0'), /positive number/);
+    assert.throws(() => parseTimeout('-5'), /positive number/);
+    assert.throws(() => parseTimeout('Infinity'), /positive number/);
+  });
+});
+
+describe('summarize', () => {
+  // This is the rule that decides whether CI goes green. Inverting it would
+  // make every assertion in the file decorative, so it is tested directly
+  // rather than only through a browser run.
+  const silent = (): void => {};
+  const run = (outcomes: Parameters<typeof summarize>[0]): { code: number; errors: string[] } => {
+    const errors: string[] = [];
+    const code = summarize(outcomes, silent, (msg: string) => errors.push(msg));
+    return { code, errors };
+  };
+
+  const passing = (name: string) => ({ name, failure: null, pageErrors: [] });
+
+  it('exits 0 only when every check passed', () => {
+    assert.equal(run([passing('a'), passing('b')]).code, 0);
+  });
+
+  it('exits 1 when any check failed', () => {
+    const { code, errors } = run([passing('a'), { name: 'b', failure: 'broke', pageErrors: [] }]);
+    assert.equal(code, 1);
+    assert.ok(errors.some((e) => e.includes('FAIL b')));
+    assert.ok(errors.some((e) => e.includes('1 of 2')));
+  });
+
+  it('exits 1 when a check passed its assertions but the page threw', () => {
+    const { code, errors } = run([{ name: 'a', failure: null, pageErrors: ['TypeError: x'] }]);
+    assert.equal(code, 1);
+    assert.ok(errors.some((e) => e.includes('passed its assertions but the page threw')));
+    assert.ok(errors.some((e) => e.includes('TypeError: x')));
+  });
+
+  // The "green while checking nothing" shape (ADR 0033): an empty run is a
+  // failure, not a vacuous pass.
+  it('exits 1 when no checks ran at all', () => {
+    const { code, errors } = run([]);
+    assert.equal(code, 1);
+    assert.ok(errors.some((e) => e.includes('no checks ran')));
+  });
+
+  it('reports at most three page errors so one check cannot bury the others', () => {
+    const { errors } = run([
+      { name: 'a', failure: null, pageErrors: ['e1', 'e2', 'e3', 'e4', 'e5'] },
+    ]);
+    assert.equal(errors.filter((e) => e.includes('page threw:')).length, 3);
   });
 });

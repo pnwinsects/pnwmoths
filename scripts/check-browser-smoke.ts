@@ -43,19 +43,42 @@ import type { AddressInfo } from 'node:net';
 import { chromium, type Browser, type Locator, type Page } from 'playwright-core';
 
 const SITE_DIR = resolve(process.env['SITE_DIR'] ?? '_site');
-const TIMEOUT_MS = Number(process.env['SMOKE_TIMEOUT_MS'] ?? 15_000);
+
+/**
+ * Per-assertion timeout.
+ *
+ * Validated rather than passed straight through: a non-numeric value would
+ * reach `setDefaultTimeout(NaN)`, which disables the timeout entirely, and the
+ * job would then hang until the CI runner's own limit killed it — a typo
+ * turning a gate into an outage.
+ */
+export function parseTimeout(raw: string | undefined, fallback = 15_000): number {
+  if (raw === undefined || raw === '') return fallback;
+  const parsed = Number(raw);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    throw new Error(`SMOKE_TIMEOUT_MS must be a positive number of milliseconds, got ${JSON.stringify(raw)}`);
+  }
+  return parsed;
+}
+
+const TIMEOUT_MS = parseTimeout(process.env['SMOKE_TIMEOUT_MS']);
 
 /**
  * Channels to try, in order, when the caller has not named one.
  *
  * `playwright-core` ships no browser of its own — that is why it is the
  * dependency here rather than `playwright` (see generate-social-card.ts, which
- * launches `channel: 'chrome'` for the same reason). Locally that resolves to
- * the developer's installed Google Chrome; the GitHub Actions ubuntu runner
- * image preinstalls both Chrome and Chromium, so no download step is needed
- * there either.
+ * launches `channel: 'chrome'` for the same reason). Locally and on the GitHub
+ * Actions ubuntu runner alike, `chrome` resolves to the installed Google Chrome
+ * and needs no download.
+ *
+ * `msedge` is the real fallback. `chromium` is NOT a fallback to the runner's
+ * system Chromium package: that channel resolves to Playwright's own bundled
+ * build, which playwright-core never downloads by design, so it fails wherever
+ * Chrome is absent too. It is kept only for a developer who happens to have run
+ * `playwright install`, and must not be mistaken for redundancy in CI.
  */
-const DEFAULT_CHANNELS = ['chrome', 'chromium', 'msedge'];
+const DEFAULT_CHANNELS = ['chrome', 'msedge', 'chromium'];
 
 // ---------------------------------------------------------------------------
 // Pure helpers (exported for unit testing without a browser)
@@ -332,7 +355,13 @@ export const CHECKS: Check[] = [
       try {
         await region.waitFor({ state: 'attached' });
       } catch {
-        const stuck = await page.locator('pnwm-occurrence-map').innerText().catch(() => '');
+        // Short timeout for the diagnostic read: if the component is missing
+        // entirely (a bad SMOKE_SPECIES landing on the 404 page) the default
+        // would burn a second full timeout before reporting an empty string.
+        const stuck = await page
+          .locator('pnwm-occurrence-map')
+          .innerText({ timeout: 2_000 })
+          .catch(() => '');
         fail(
           `the occurrence map never rendered its map region.\n` +
             `      It still reads: ${JSON.stringify(stuck.trim().slice(0, 80))}\n` +
@@ -353,17 +382,39 @@ export const CHECKS: Check[] = [
             `      most records on the site. The Parquet load or the coordinate columns are broken.`,
         );
       }
-      // Leaflet only builds markers from `updated()`, so their presence proves
-      // the second render actually ran rather than the label alone being right.
-      const markers = await page.locator('pnwm-occurrence-map .leaflet-marker-pane, pnwm-occurrence-map path.leaflet-interactive').count();
-      if (markers === 0) {
-        fail(`aria-label claims ${plotted} records plotted but Leaflet drew no marker layer.`);
+      // Count the markers Leaflet actually drew and require the number to MATCH
+      // the label, rather than merely being non-zero.
+      //
+      // Each record becomes an `L.circleMarker`, which Leaflet's SVG renderer
+      // emits as `path.leaflet-interactive`. The region mask polygon is
+      // `interactive: false`, so it carries no such class and is not counted.
+      //
+      // Do NOT reach for `.leaflet-marker-pane` here: Leaflet creates that pane
+      // unconditionally at map init and circle markers do not live in it, so a
+      // presence check on the pane is true whenever a map exists at all — an
+      // assertion that cannot fail. Counting and comparing is what makes this
+      // catch a renderer regression, or someone enabling `preferCanvas` (which
+      // draws no path elements at all).
+      const markers = await page.locator('pnwm-occurrence-map path.leaflet-interactive').count();
+      if (markers !== plotted) {
+        fail(
+          `the map's aria-label claims ${plotted} records plotted, but Leaflet drew ${markers}\n` +
+            `      marker path(s). The label and the rendered layer disagree.`,
+        );
       }
     },
   },
   {
-    // Browse is pure client-side reactivity: fetch two JSON files, build the
-    // tree, then toggle a Set on click. Both halves re-render or nothing moves.
+    // Browse's disclosure state is the purest re-render test on the site: the
+    // click handler only mutates a Set and calls requestUpdate(), with no data
+    // fetch anywhere in the path.
+    //
+    // Note what this does NOT prove. The taxonomy tree is parsed synchronously
+    // from an inline `#taxon-data` script in connectedCallback, before the first
+    // render, so a completely frozen component still shows every family row
+    // collapsed. Only the toggle below can tell a frozen component from a
+    // healthy one. (species-states.json / species-districts.json are fetched
+    // too, but they feed the filter dropdowns, which this check never touches.)
     name: 'browse: expanding a family reveals its children',
     async run({ page, origin }) {
       await page.goto(`${origin}/browse/`, { waitUntil: 'domcontentloaded' });
@@ -374,9 +425,9 @@ export const CHECKS: Check[] = [
         await toggle.waitFor({ state: 'visible' });
       } catch {
         fail(
-          `the taxon browser rendered no family rows. It fetches species-states.json and\n` +
-            `      species-districts.json and re-renders when they resolve — a frozen component\n` +
-            `      shows an empty toolbar and nothing else.`,
+          `the taxon browser rendered no family rows at all. The tree is parsed from the\n` +
+            `      inline #taxon-data script during connectedCallback, so this is a missing or\n` +
+            `      malformed payload in the built page — not a reactivity failure.`,
         );
       }
 
@@ -433,22 +484,55 @@ export const CHECKS: Check[] = [
         fail(`Identify opened with an unusable species count: ${JSON.stringify(await count.innerText())}`);
       }
 
+      // Tie the opening count to the matrix the server actually served.
+      //
+      // Without this the check passes with key-matrix.json DELETED, which was
+      // verified, not theorised. The opening count line is rendered on the FIRST
+      // frame from constructor fallbacks — `key-results-grid`'s `totalCount`
+      // defaults to 1190 and `pnwm-identify` renders
+      // `this._keyMatrix?.meta.matchedSpecies ?? 1190` — so "Showing all 1,190
+      // species" appears whether or not the fetch ever resolved. pnwm-identify
+      // soft-degrades on a failed or schema-invalid fetch (console.error only),
+      // and then dispatches a placeholder `{count: 0, hasSelection: true}`,
+      // which renders "0 species match" and satisfies a naive narrowing test.
+      // Comparing against `meta.matchedSpecies` is what distinguishes loaded
+      // data from the fallback — they are deliberately different numbers.
+      const matrixRes = await page.request.get(`${origin}/key-matrix.json`);
+      if (!matrixRes.ok()) {
+        fail(`the build serves no key-matrix.json (${matrixRes.status()}); Identify has no data.`);
+      }
+      const expectedTotal = (await matrixRes.json())?.meta?.matchedSpecies;
+      if (typeof expectedTotal !== 'number') {
+        fail(`key-matrix.json has no numeric meta.matchedSpecies to check the page against.`);
+      }
+      if (before !== expectedTotal) {
+        fail(
+          `Identify opened showing ${before} species but key-matrix.json declares\n` +
+            `      ${expectedTotal}. The page is rendering its hard-coded fallback. Either the matrix\n` +
+            `      fetch failed or its schema was rejected (both only console.error), or the component\n` +
+            `      is frozen and never re-rendered with the data it did receive.`,
+        );
+      }
+
       // Walk down the disclosure chain — category, then question — because the
       // checkboxes live inside `hidden` containers until both are open. Each
       // step is reported on its own: a frozen component leaves the NEXT
       // control present in the DOM but never visible, and Playwright's default
       // report for that is a page of retry log rather than the one fact that
       // matters.
+      //
+      // Everything below the category is scoped INSIDE it. Unscoped, a
+      // `fieldset legend button` could resolve into a still-collapsed later
+      // category if the first one's questions were all contingent-hidden — a
+      // spurious failure the day curation reorders the key.
+      const category = page.locator('pnwm-identify .pnwm-kfp-category').first();
+      await clickDisclosure(category.locator('h2 button').first(), 'a character category heading');
       await clickDisclosure(
-        page.locator('pnwm-identify .pnwm-kfp-category h2 button').first(),
-        'a character category heading',
-      );
-      await clickDisclosure(
-        page.locator('pnwm-identify fieldset legend button').first(),
+        category.locator('fieldset legend button').first(),
         'a question heading inside the expanded category',
       );
 
-      const checkbox = page.locator('pnwm-identify fieldset input[type="checkbox"]').first();
+      const checkbox = category.locator('fieldset input[type="checkbox"]').first();
       try {
         await checkbox.waitFor({ state: 'visible' });
       } catch {
@@ -474,8 +558,24 @@ export const CHECKS: Check[] = [
       if (after === null) {
         fail(`results count became unparseable: ${JSON.stringify(await count.innerText())}`);
       }
-      if (after > before) {
-        fail(`selecting a character widened the results, ${before} -> ${after}.`);
+      // Strictly fewer, and strictly more than none. `after === 0` is the exact
+      // shape the placeholder dispatch produces when the matrix never loaded.
+      if (after === 0) {
+        fail(
+          `selecting a character matched 0 species. Either computeMatching is broken or the\n` +
+            `      key matrix never loaded and this is the placeholder {count: 0} dispatch.`,
+        );
+      }
+      if (after >= before) {
+        fail(`selecting a character did not narrow the results: ${before} -> ${after}.`);
+      }
+
+      // The count line is a string; the cards are the render. Requiring them to
+      // agree means a grid that stopped re-rendering its results cannot hide
+      // behind a correct-looking number.
+      const cards = await page.locator('key-results-grid a.pnwm-krg-card').count();
+      if (cards !== after) {
+        fail(`the results count says ${after} species match but the grid rendered ${cards} card(s).`);
       }
     },
   },
@@ -484,6 +584,59 @@ export const CHECKS: Check[] = [
 // ---------------------------------------------------------------------------
 // Runner
 // ---------------------------------------------------------------------------
+
+/** What one check produced: its failure text, if any, and anything the page threw. */
+export interface CheckOutcome {
+  name: string;
+  /** Null when every assertion passed. */
+  failure: string | null;
+  /** First lines of any uncaught page exceptions, in order. */
+  pageErrors: string[];
+}
+
+/**
+ * Decide the process exit code from what the checks produced, and say so.
+ *
+ * Split out from the run loop so the rule can be tested without a browser. It
+ * is a small rule, and it is the one place where getting it backwards would
+ * make every other line in this file pointless: a gate that reports failures
+ * and then exits 0 is worse than no gate, because CI goes green over it.
+ *
+ * A check that passed its assertions but left an uncaught exception on the page
+ * counts as failed. Under #315 nothing threw at all, so silence is not
+ * reassurance — but noise is definitely not health.
+ */
+export function summarize(outcomes: CheckOutcome[], log = console.log, logError = console.error): number {
+  let failed = 0;
+  for (const outcome of outcomes) {
+    if (outcome.failure === null && outcome.pageErrors.length === 0) {
+      log(`[browser-smoke] ok   ${outcome.name}`);
+      continue;
+    }
+    failed++;
+    logError(`[browser-smoke] FAIL ${outcome.name}`);
+    if (outcome.failure !== null) {
+      logError(`      ${outcome.failure}`);
+    } else {
+      logError(`      passed its assertions but the page threw ${outcome.pageErrors.length} uncaught error(s):`);
+    }
+    for (const pageError of outcome.pageErrors.slice(0, 3)) {
+      logError(`      page threw: ${pageError}`);
+    }
+  }
+  // An empty outcome list is a failure, not a pass: it means the run checked
+  // nothing, which is exactly the shape of "green while checking nothing".
+  if (outcomes.length === 0) {
+    logError('[browser-smoke] no checks ran.');
+    return 1;
+  }
+  if (failed > 0) {
+    logError(`[browser-smoke] ${failed} of ${outcomes.length} check(s) failed.`);
+    return 1;
+  }
+  log(`[browser-smoke] all ${outcomes.length} checks passed.`);
+  return 0;
+}
 
 export async function runSmokeChecks(): Promise<number> {
   if (!existsSync(SITE_DIR)) {
@@ -497,7 +650,7 @@ export async function runSmokeChecks(): Promise<number> {
   console.log(`[browser-smoke] species under test: ${slug}`);
 
   let browser: Browser | null = null;
-  let failed = 0;
+  const outcomes: CheckOutcome[] = [];
   try {
     try {
       browser = await launchBrowser();
@@ -513,46 +666,27 @@ export async function runSmokeChecks(): Promise<number> {
       // A fresh page per check: no cross-check state, and each one's uncaught
       // exceptions belong to it alone.
       const { page, errors } = await openPage(browser, origin);
+      let failure: string | null = null;
       try {
         await check.run({ page, origin, slug });
-        if (errors.length > 0) {
-          // Reaching the assertions while throwing is still a defect — under
-          // #315 nothing threw at all, so silence here is not reassurance.
-          failed++;
-          console.error(`[browser-smoke] FAIL ${check.name}`);
-          console.error(`      passed its assertions but the page threw ${errors.length} uncaught error(s):`);
-          for (const err of errors.slice(0, 3)) console.error(`        ${err.message.split('\n')[0]}`);
-        } else {
-          console.log(`[browser-smoke] ok   ${check.name}`);
-        }
       } catch (err) {
-        failed++;
         // Playwright's own errors carry a retry log dozens of lines long. Keep
         // the first few — the useful part is always at the top — so one failing
         // check cannot bury the others.
-        const detail = err instanceof SmokeFailure
+        failure = err instanceof SmokeFailure
           ? err.message
           : `unexpected error: ${(err instanceof Error ? err.message : String(err)).split('\n').slice(0, 4).join('\n      ')}`;
-        console.error(`[browser-smoke] FAIL ${check.name}`);
-        console.error(`      ${detail}`);
-        for (const pageErr of errors.slice(0, 3)) {
-          console.error(`      page threw: ${pageErr.message.split('\n')[0]}`);
-        }
       } finally {
         await page.close();
       }
+      outcomes.push({ name: check.name, failure, pageErrors: errors.map((e) => e.message.split('\n')[0] ?? '') });
     }
   } finally {
     if (browser) await browser.close();
     await close();
   }
 
-  if (failed > 0) {
-    console.error(`[browser-smoke] ${failed} of ${CHECKS.length} check(s) failed.`);
-    return 1;
-  }
-  console.log(`[browser-smoke] all ${CHECKS.length} checks passed.`);
-  return 0;
+  return summarize(outcomes);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

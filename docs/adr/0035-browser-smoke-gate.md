@@ -52,14 +52,27 @@ production upload.**
   async Parquet load to resolve *and* `_loading = false` to go through the accessor); a Browse family
   heading must flip `aria-expanded` and reveal a child; an Identify character selection must move the
   results count. "Did the HTML appear" would have passed during the outage.
+- **Where a number is available, it is compared, not merely checked for presence.** This is the rule
+  that separates a real assertion from a decorative one, and both original violations were caught by
+  review rather than by writing them correctly the first time (see Provenance). The map's marker paths
+  must *equal* the count in its aria-label; the Identify results grid must render exactly as many
+  cards as its count line claims, and must open showing exactly the `meta.matchedSpecies` of the
+  matrix the fixture server served.
 - **Only observable DOM is asserted** — aria-labels, `aria-expanded`, visible text. Never component
   internals. The map's aria-label is load-bearing precisely because it is the component's own
-  published summary of what it drew, so an assertion on it cannot drift from what a user gets.
+  published summary of what it drew, so an assertion on it cannot drift from what a user gets. The one
+  thing read from outside the DOM is `key-matrix.json` itself, fetched from the fixture server so the
+  page's opening count can be compared against the data it was built from.
 - **Three pages, chosen for distinct machinery, not for coverage.** The species factsheet is the
-  async-Parquet path (hyparquet, the copied `.parquet` files, `import.meta.env.BASE_URL`); Browse is
-  pure client-side reactivity over two fetched JSON files; Identify is the only path that crosses a
-  component boundary, where `pnwm-identify` sets properties on `<key-results-grid>`. A shadowed field
-  on either side of that boundary breaks the third check and neither of the first two.
+  async-Parquet path (hyparquet, the copied `.parquet` files, `import.meta.env.BASE_URL`); Identify is
+  the only path that crosses a component boundary, where `pnwm-identify` sets properties on
+  `<key-results-grid>`, so a shadowed field on either side breaks it and neither of the others.
+  Browse is the purest *re-render* test — its click handler only mutates a Set and calls
+  `requestUpdate()`, with no data fetch in the path at all. Note what Browse therefore does **not**
+  prove: its taxonomy tree is parsed synchronously from an inline `#taxon-data` script before the
+  first render, so a completely frozen component still shows every family row, collapsed. Only the
+  toggle distinguishes frozen from healthy. (`species-states.json` and `species-districts.json` are
+  fetched too, but they feed the filter dropdowns, which no check touches.)
 - **The species under test is derived from the build, never pinned.** `pickSpeciesSlug()` takes the
   largest `records.parquet` — the species with the most records. A hard-coded slug would be a
   curation hostage (species get merged, renamed and gated, see [ADR 0029](0029-removing-a-species.md)),
@@ -75,7 +88,10 @@ production upload.**
 - **`playwright-core`, driving an already-installed browser.** It is already a dependency for
   `generate-social-card.ts` and bundles no browser of its own; the GitHub Actions ubuntu runner image
   preinstalls Chrome, so CI needs no download step and no `--with-deps`. Channels are probed
-  (`chrome`, `chromium`, `msedge`) and `SMOKE_BROWSER_CHANNEL` overrides.
+  (`chrome`, then `msedge`, then `chromium`) and `SMOKE_BROWSER_CHANNEL` overrides. Only `msedge` is
+  a genuine fallback: the `chromium` channel resolves to Playwright's *bundled* build, which
+  playwright-core never downloads, so it does **not** reach the system Chromium the runner also ships.
+  It is kept for a developer who has run `playwright install`, and is not redundancy in CI.
 - **It runs before `site:upload` in production**, not after. `deploy:smoke` already checks that the
   CDN serves what we uploaded; that is a freshness check and it passed happily throughout the outage.
   This one asks whether what we are about to upload works.
@@ -90,7 +106,7 @@ production upload.**
   green because the local install was vite 8.0.10 while `package.json` asked for `^8.2.1`. That is
   worth knowing on its own: *the bundler version is part of the input*, and a local build proves less
   about production than it appears to. Recorded in [lessons-learned](../lessons-learned.md).
-- **CI gains a browser step of roughly a minute.** Failures cost more — each unmet assertion burns
+- **CI gains a browser step of roughly ten seconds.** Failures cost more — each unmet assertion burns
   its 15s timeout — which is the right way round.
 - **The failure messages carry the diagnosis, not just the symptom.** A frozen map prints the #315
   signature and points at `declare` and `useDefineForClassFields`, because the expensive part of that
@@ -102,8 +118,14 @@ production upload.**
   would need the fixture server to mount the prefix. Staging is manual by design
   ([ADR 0008](0008-deploy-bunny-additive.md)) and both gated paths — PR and production — are covered,
   so the prefix handling is not built until something needs it.
-- **Three checks is a floor, not a target.** [ADR 0013](0013-highres-osd-dzi.md) already wants a
-  one-species E2E for the OSD viewer in the lightbox; that is a natural fourth and is not built here.
+- **Three checks is a floor, not a target, and the uncovered surface is worth naming.** A #315-class
+  bug confined to `pnwm-filter-bar`, `pnwm-image-slideshow`, `pnwm-phenology-chart`,
+  `pnwm-checklist-filter`, `pnwm-plate-viewer` or `pnwm-analytics-dashboard` still passes this gate —
+  including the photo lightbox, which the outage description at the top of this record lists as a
+  symptom. That gap is a deliberate consequence of choosing three checks for distinct machinery
+  rather than for breadth, but it should be read as a gap and not as coverage.
+  [ADR 0013](0013-highres-osd-dzi.md) already wants a one-species E2E for the OSD viewer in the
+  lightbox; that is the natural fourth and is not built here.
 
 ## Alternatives rejected
 
@@ -131,3 +153,43 @@ production upload.**
 - **Advisory rather than blocking.** [ADR 0033](0033-referential-integrity-gate.md) draws this line
   well: advisory is right where judgement is involved, blocking is right where the answer is
   mechanical. "Did the component re-render" is mechanical.
+
+## Provenance
+
+An adversarial review of the first implementation found three assertions that could not fail and two
+false statements in this record. Each was reproduced before being fixed, and the reproductions are
+the reason the corrected assertions are trusted:
+
+- **The Identify check passed with `key-matrix.json` deleted from the build.** Verified by removing
+  the file and rerunning: all three checks green. The opening count line renders on the *first* frame
+  from constructor fallbacks (`key-results-grid`'s `totalCount = 1190`, and
+  `this._keyMatrix?.meta.matchedSpecies ?? 1190`), so it appears whether or not the fetch resolved;
+  `pnwm-identify` soft-degrades on a failed *or schema-invalid* matrix with only a `console.error`,
+  then dispatches a placeholder `{count: 0, hasSelection: true}` that renders "0 species match" and
+  satisfied the naive narrowing test. The check now compares the opening count against the served
+  matrix's `meta.matchedSpecies` — 1192, deliberately not the 1190 fallback — and requires the
+  post-selection count to be non-zero, strictly smaller, and equal to the number of cards rendered.
+  Both the deleted-file and the schema-invalid cases now fail, verified.
+- **The marker assertion could not fail.** It counted
+  `.leaflet-marker-pane, path.leaflet-interactive` and required the total to be non-zero — but
+  Leaflet creates the marker pane unconditionally at map init and circle markers do not live in it,
+  so the pane alone satisfied it. Probed on the live page: pane present, pane children 0, interactive
+  paths 776, aria-label 776. Now the path count must *equal* the label's count, which also catches a
+  renderer regression or someone enabling `preferCanvas`.
+- **Browse's mechanism was described wrongly here and in the check's failure message.** Verified by
+  deleting both `species-states.json` and `species-districts.json`: the check still passed. The tree
+  comes from an inline script, not those fetches. The old diagnosis ("a frozen component shows an
+  empty toolbar and nothing else") would have pointed a maintainer at the wrong subsystem — and this
+  record argues that recognition, not repair, was the expensive part of the outage.
+- **The exit-code rule was untested**, so inverting `failed > 0` would have left `npm test` green
+  while CI went green over real failures. Extracted as `summarize()` and tested directly, including
+  the empty-outcome case (a run that checked nothing now exits 1).
+- **`SMOKE_TIMEOUT_MS=garbage` disabled the timeout** via `setDefaultTimeout(NaN)`, turning a typo
+  into a job-limit hang. Now validated.
+- **The `chromium` channel was described as CI redundancy**; it is not, and the ordering and comment
+  are corrected above.
+- **An unscoped `fieldset legend button` could resolve into a collapsed later category** if the first
+  category's questions were ever all contingent-hidden. Not reachable with today's key, but a
+  data-dependent spurious failure waiting on a curation reorder. Now scoped to the expanded category.
+- The step-cost estimate in Consequences was wrong by roughly 6× (it is ~10s, not ~1min) and is
+  corrected.
