@@ -43,3 +43,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0032](0032-curation-log.md) | Curatorial decisions get their own append-only log (`docs/curation-log.md`), separate from ADRs | Accepted |
 | [0033](0033-referential-integrity-gate.md) | Every species reference is declared in one table and checked before the build; known orphans held in a self-expiring ratchet | Accepted |
 | [0034](0034-generated-artifacts-merge-curator-fields.md) | Generators merge into their committed artifact — curator fields and untouched entries survive a scoped run | Accepted |
+| [0035](0035-browser-smoke-gate.md) | The built bundle is driven in a real headless browser before it ships; every other gate reads bytes | Accepted |

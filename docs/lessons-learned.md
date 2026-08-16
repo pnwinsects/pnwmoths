@@ -123,13 +123,23 @@ cost a debugging cycle to discover.
   erases the annotation-only declaration that the bundler keeps. Write
   `declare slug: string;` — TypeScript is required to erase a `declare` field under every
   flag combination — and assign the initial value in the constructor.
-  `src/components/reactive-fields.test.ts` guards this.
+  `src/components/reactive-fields.test.ts` guards the pattern statically, and
+  `npm run smoke:browser` catches the general case by driving the built bundle
+  ([ADR 0035](adr/0035-browser-smoke-gate.md)).
 
   This shipped: a Vite 8 bump (Aug 2026) changed the transform's default for
   `useDefineForClassFields`, and production silently lost every map, filter, accordion and
   lightbox for three days while the pages still rendered their first frame. Diagnosis
   shortcut: `Object.keys($0)` on a healthy Lit element shows the internal `__`-prefixed
   storage keys (`__slug`); a shadowed one shows the bare property names.
+
+- **A green local build proves less than it looks like — the bundler version is part of the
+  input.** Reproducing the freeze above needed the *installed* Vite, not the one in
+  `package.json`: a `node_modules` still on 8.0.10 rebuilt the pre-fix sources perfectly
+  happily, because that version resolved `useDefineForClassFields` the other way. `npm ci`
+  first when a bug's suspect is anything the bundler decides, and check
+  `node -e "console.log(require('vite/package.json').version)"` against `package.json`
+  before concluding a defect does not reproduce.
 
 - **A compiler option only applies where the bundler can find it.** `tsconfig.browser.json`
   has an `include` of `src/components/**`, but eleventy-plugin-vite hands Vite a *copy* of
