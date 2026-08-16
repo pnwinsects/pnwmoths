@@ -51,10 +51,19 @@ Edge rules: **exactly one**, named `csv handling` — three stacked actions and 
 - Condition — IF ANY / Request URL ANY matches `*.csv`
 
 The rule exists because Smart Cache would otherwise classify `.csv` as a cacheable asset and give
-it a long TTL. pnwmoths serves **mutable** CSVs (the flat-file data the site is built from and
-links to), and with no purge on deploy a cached copy would be stale indefinitely — so the
-classification has to be overridden explicitly. The `Content-Type` action is part of the same rule
-because Bunny would otherwise serve stored CSVs as a download rather than as text.
+it a long TTL. The site publishes exactly two CSVs, both at the root — `/species-audit.csv` and
+`/records-district-audit.csv`, the build-time audit reports emitted during `build:site`. They are
+regenerated on every build and change in place, and with no purge on deploy a cached copy would be
+stale indefinitely, so the classification has to be overridden explicitly. (Nothing under `data/`
+is published; those CSVs are only read at build time.) The action the rule genuinely depends on is
+therefore the **cache override**, since that is the one Smart Cache would decide differently; the
+`Content-Type` action is belt-and-braces, because `upload-site.ts`'s `contentTypeFor()` map already
+sends that exact value on PUT — it is kept because it pins the value at the edge.
+
+Measured on the two published CSVs, confirming the rule is live:
+
+- `/species-audit.csv` and `/records-district-audit.csv` → `Cache-Control: no-cache`,
+  `Content-Type: text/csv; charset=utf-8`
 
 Resulting response headers on <https://moths.pnwinsects.org> (measured by `HEAD`):
 
@@ -66,8 +75,10 @@ Resulting response headers on <https://moths.pnwinsects.org> (measured by `HEAD`
 There is **no edge rule for `*.parquet`**, so per-species occurrence data is subject to whatever
 Smart Cache decides. Measured today, `/species/{slug}/records.parquet` is served
 `Cache-Control: no-cache` with `Content-Type: application/octet-stream` — the behaviour we want,
-but incidentally rather than by configuration. Parquet is mutable and rewritten in place on every
-deploy, so this is load-bearing and currently unpinned.
+but incidentally rather than by configuration: CSV gets `no-cache` because an edge rule *pins* it,
+whereas Parquet gets it only because `application/octet-stream` happens to fall on the
+non-cacheable side of Smart Cache's classification. Parquet is mutable and rewritten in place on
+every deploy, so this is load-bearing and currently unpinned.
 [#320](https://github.com/pnwinsects/pnwmoths/issues/320) tracks adding an explicit `*.parquet`
 rule mirroring `csv handling`.
 
