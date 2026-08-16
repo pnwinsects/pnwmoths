@@ -153,9 +153,18 @@ class PnwmAnalyticsDashboard extends LitElement {
     `;
   }
 
-  _data: AnalyticsData | null = null;
-  _selectedYear: string = 'all';
-  _charts: Chart[] = [];
+  // Declared, never initialized in the class body — a class field would shadow the
+  // reactive accessor Lit puts on the prototype. See docs/lessons-learned.md.
+  declare _data: AnalyticsData | null;
+  declare _selectedYear: string;
+  declare _charts: Chart[];
+
+  constructor() {
+    super();
+    this._data = null;
+    this._selectedYear = 'all';
+    this._charts = [];
+  }
 
   connectedCallback(): void {
     super.connectedCallback();

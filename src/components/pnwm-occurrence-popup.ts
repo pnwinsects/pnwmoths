@@ -20,7 +20,7 @@ class PnwmOccurrencePopup extends LitElement {
     record: { attribute: false },
   };
 
-  record: OccurrenceRecord | null;
+  declare record: OccurrenceRecord | null;
 
   createRenderRoot(): this { return this; }
 

@@ -3,5 +3,17 @@
   "references": [
     { "path": "./tsconfig.node.json" },
     { "path": "./tsconfig.browser.json" }
-  ]
+  ],
+  // tsc compiles nothing from this solution file, but bundlers do read it. Vite is
+  // handed `.11ty-vite/` as its root (a copy of the tree made by eleventy-plugin-vite),
+  // so component sources no longer sit under tsconfig.browser.json's `include` and
+  // its options do not apply — the nearest tsconfig for those files is this one.
+  // `useDefineForClassFields` must therefore be restated here: with it left to the
+  // bundler's default, TypeScript field declarations are emitted as real class fields
+  // that shadow the accessors Lit installs for reactive properties, and every
+  // component silently stops re-rendering. See docs/lessons-learned.md.
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": false
+  }
 }

@@ -108,17 +108,34 @@ export class PnwmChecklistFilter extends LitElement {
     _failed: { type: Boolean, state: true },
   };
 
-  _selectedState = '';
-  _selectedCounty = '';
-  _statesAvailable: string[] = [];
-  _stateMap: Record<string, Set<string>> = {};
-  _districtMap: Record<string, Set<string>> = {};
-  _districtRows: SpeciesDistrict[] = [];
-  _shown = 0;
-  _unreachable = 0;
-  _total = 0;
-  _ready = false;
-  _failed = false;
+  // Declared, never initialized in the class body — a class field would shadow the
+  // reactive accessor Lit puts on the prototype. See docs/lessons-learned.md.
+  declare _selectedState: string;
+  declare _selectedCounty: string;
+  declare _statesAvailable: string[];
+  declare _stateMap: Record<string, Set<string>>;
+  declare _districtMap: Record<string, Set<string>>;
+  declare _districtRows: SpeciesDistrict[];
+  declare _shown: number;
+  declare _unreachable: number;
+  declare _total: number;
+  declare _ready: boolean;
+  declare _failed: boolean;
+
+  constructor() {
+    super();
+    this._selectedState = '';
+    this._selectedCounty = '';
+    this._statesAvailable = [];
+    this._stateMap = {};
+    this._districtMap = {};
+    this._districtRows = [];
+    this._shown = 0;
+    this._unreachable = 0;
+    this._total = 0;
+    this._ready = false;
+    this._failed = false;
+  }
 
   /** Light DOM — Pico styles the selects, and this element manipulates its siblings. */
   createRenderRoot(): this { return this; }

@@ -53,16 +53,30 @@ export class KeyResultsGrid extends LitElement {
     };
   }
 
-  matchedSpecies: KeySpecies[] = [];
-  hasSelection = false;
-  matchedCount = 0;
-  totalCount = 1190;
-  pathPrefix = '';
+  // Declared, never initialized in the class body: a class field would be defined
+  // on the instance and shadow the reactive accessor Lit installs on the prototype,
+  // silently killing re-renders. Initialize in the constructor instead. See
+  // docs/lessons-learned.md ("Lit reactive properties and class fields").
+  declare matchedSpecies: KeySpecies[];
+  declare hasSelection: boolean;
+  declare matchedCount: number;
+  declare totalCount: number;
+  declare pathPrefix: string;
 
   /** Slugs whose CDN thumbnail failed to load — rendered as the gray placeholder
    *  instead of a broken <img> (GRID-03/SC3: "no broken <img> tags appear in the grid").
    *  Guards against bad/missing nav_image data (e.g. CDN 404s). */
-  _failedImages = new Set<string>();
+  declare _failedImages: Set<string>;
+
+  constructor() {
+    super();
+    this.matchedSpecies = [];
+    this.hasSelection = false;
+    this.matchedCount = 0;
+    this.totalCount = 1190;
+    this.pathPrefix = '';
+    this._failedImages = new Set<string>();
+  }
 
   /** Light DOM — theme.css .similar-species-placeholder must reach card internals */
   createRenderRoot(): this { return this; }

@@ -113,6 +113,31 @@ cost a debugging cycle to discover.
 
 ## Lit web components
 
+- **Never declare a reactive property as a plain TypeScript class field — use `declare`.**
+  Lit installs reactive properties as accessors on the *prototype*. A field declaration
+  (`slug: string;`, or `_charts: Chart[] = [];`) compiles to a real class field whenever
+  `useDefineForClassFields` is on, and a class field is defined on the *instance*, which
+  shadows that accessor. The setter never runs, so `requestUpdate()` is never called: the
+  component renders exactly once and is then frozen. Nothing throws, no console error
+  appears, and the node-based component tests still pass, because Node's type stripping
+  erases the annotation-only declaration that the bundler keeps. Write
+  `declare slug: string;` — TypeScript is required to erase a `declare` field under every
+  flag combination — and assign the initial value in the constructor.
+  `src/components/reactive-fields.test.ts` guards this.
+
+  This shipped: a Vite 8 bump (Aug 2026) changed the transform's default for
+  `useDefineForClassFields`, and production silently lost every map, filter, accordion and
+  lightbox for three days while the pages still rendered their first frame. Diagnosis
+  shortcut: `Object.keys($0)` on a healthy Lit element shows the internal `__`-prefixed
+  storage keys (`__slug`); a shadowed one shows the bare property names.
+
+- **A compiler option only applies where the bundler can find it.** `tsconfig.browser.json`
+  has an `include` of `src/components/**`, but eleventy-plugin-vite hands Vite a *copy* of
+  the tree (`.11ty-vite/`) as its root, so the files Vite actually compiles are not under
+  that `include`. The nearest `tsconfig.json` to them is the root solution file, so
+  browser-affecting options must be restated there — otherwise the bundler's own default
+  wins, and changes when the bundler does.
+
 - **Use light DOM when Pico CSS (or any global element-selector CSS) must apply.** Set
   `createRenderRoot() { return this; }`. Pico's element selectors don't penetrate shadow
   DOM, and Leaflet needs light DOM too. Decide this at component creation — retrofitting is

@@ -100,16 +100,16 @@ export class PnwmIdentify extends LitElement {
     };
   }
 
-  _categoryMap: CategoryMap;
-  _expandedCategories: Set<string>;
+  declare _categoryMap: CategoryMap;
+  declare _expandedCategories: Set<string>;
   /** Questions (sub-character-groups) currently expanded. Empty = all collapsed. */
-  _expandedQuestions: Set<string>;
+  declare _expandedQuestions: Set<string>;
   /** Selection: Map<questionText, Set<characterId>> */
-  _selection: Map<string, Set<number>>;
-  _keyMatrix: KeyMatrix | null;
-  _questionGroups: QuestionGroups | null;
-  _matchedSpecies: KeySpecies[];
-  _matchedCount: number;
+  declare _selection: Map<string, Set<number>>;
+  declare _keyMatrix: KeyMatrix | null;
+  declare _questionGroups: QuestionGroups | null;
+  declare _matchedSpecies: KeySpecies[];
+  declare _matchedCount: number;
 
   /** Light DOM — Pico CSS must reach checkboxes, fieldsets, labels (D-03, PATTERNS.md) */
   createRenderRoot(): this { return this; }
