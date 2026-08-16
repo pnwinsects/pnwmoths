@@ -55,6 +55,12 @@ npm install
 npm run build       # build:data (CSV→DuckDB→Parquet) → eleventy → copy-parquet → pagefind → link check → weight check
 npm test            # data pipeline + Lit component tests (node --test)
 npm run typecheck   # tsc --noEmit (both tsconfigs)
+npm run smoke:browser  # drives the built _site/ in headless Chrome (run after a build)
 ```
+
+`npm test` reads the TypeScript *sources*; `smoke:browser` is the only gate that runs what the
+bundler actually emitted, which is where a component can render once and then freeze with every
+other check still green ([ADR 0035](docs/adr/0035-browser-smoke-gate.md)). It sits outside
+`npm run build` on purpose, so the build stays offline and browser-free; CI runs it as its own step.
 
 Full step ordering lives in `package.json`; `build:site` produces and verifies `_site/`, `build` adds a blocking link check. See [CONTRIBUTING.md](CONTRIBUTING.md) for the Docker path and the required `BUNNY_STORAGE_PASSWORD` deploy secret. Deployment: push to `main` → additive Bunny upload (production, moths.pnwinsects.org); GitHub Pages is manual staging ([ADR 0008](docs/adr/0008-deploy-bunny-additive.md)).

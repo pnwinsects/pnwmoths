@@ -39,6 +39,12 @@ jobs:
           version: '0.23.0'
       - name: Build site (with blocking link check)
         run: npm run build
+      # Runs the bundle, not the sources — the one gate that can see a component
+      # that rendered once and froze (issue #316, ADR 0035). The runner image
+      # preinstalls Google Chrome, which playwright-core drives directly; there
+      # is no browser download step.
+      - name: Browser smoke test
+        run: npm run smoke:browser
       - name: Check new CDN image URLs
         if: steps.changed-data.outputs.any_changed == 'true'
         run: |

@@ -41,6 +41,12 @@ jobs:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
       - name: Build site
         run: npm run build:site
+      # Blocking, and deliberately BEFORE the upload: this is the gate that
+      # would have stopped the frozen bundle of PR #315 from reaching the CDN
+      # (issue #316, ADR 0035). deploy:smoke below checks a different thing —
+      # that the CDN is serving what we just uploaded, not that it works.
+      - name: Browser smoke test
+        run: npm run smoke:browser
       - name: Check links (non-blocking)
         run: npm run build:validate-links
         continue-on-error: true
