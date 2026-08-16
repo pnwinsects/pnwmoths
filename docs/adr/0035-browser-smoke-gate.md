@@ -97,6 +97,11 @@ production upload.**
   outage was not fixing it but recognising it.
 - **This does not cover no-JS degradation**, which is a separate invariant and stays with the static
   gates: these checks run *with* JavaScript by definition.
+- **`staging.yml` is deliberately not wired up.** The GitHub Pages build sets `pathPrefix` to
+  `/pnwmoths/`, so its assets do not resolve under a server rooted at `/`; running the check there
+  would need the fixture server to mount the prefix. Staging is manual by design
+  ([ADR 0008](0008-deploy-bunny-additive.md)) and both gated paths — PR and production — are covered,
+  so the prefix handling is not built until something needs it.
 - **Three checks is a floor, not a target.** [ADR 0013](0013-highres-osd-dzi.md) already wants a
   one-species E2E for the OSD viewer in the lightbox; that is a natural fourth and is not built here.
 
