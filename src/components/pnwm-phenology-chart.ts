@@ -42,12 +42,12 @@ class PnwmPhenologyChart extends LitElement {
     `;
   }
 
-  slug: string;
-  speciesName: string;
-  filters: Partial<FilterChangeDetail> | null;
-  _records: OccurrenceRecord[];
-  _loading: boolean;
-  _chart: Chart | null;
+  declare slug: string;
+  declare speciesName: string;
+  declare filters: Partial<FilterChangeDetail> | null;
+  declare _records: OccurrenceRecord[];
+  declare _loading: boolean;
+  declare _chart: Chart | null;
 
   constructor() {
     super();

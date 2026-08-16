@@ -31,10 +31,10 @@ class PnwmPlateViewer extends LitElement {
     }
   `;
 
-  tilesUrl: string;
-  prefixUrl: string;
-  width: number;
-  height: number;
+  declare tilesUrl: string;
+  declare prefixUrl: string;
+  declare width: number;
+  declare height: number;
 
   constructor() {
     super();

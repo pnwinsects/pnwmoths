@@ -141,19 +141,19 @@ class PnwmFilterBar extends LitElement {
   // Instance fields — declared above constructor, assigned in constructor
   // (useDefineForClassFields: false means these become constructor assignments,
   // which is compatible with Lit reactive property descriptors — D-08 / Pitfall 1)
-  slug: string;
-  _state: string;
-  _recordType: string;
-  _yearMin: number;
-  _yearMax: number;
-  _states: string[];
-  _recordTypes: string[];
-  _county: string;
-  _collection: string;
-  _elevationMin: number;
-  _elevationMax: number;
-  _counties: CountyOption[];
-  _collections: string[];
+  declare slug: string;
+  declare _state: string;
+  declare _recordType: string;
+  declare _yearMin: number;
+  declare _yearMax: number;
+  declare _states: string[];
+  declare _recordTypes: string[];
+  declare _county: string;
+  declare _collection: string;
+  declare _elevationMin: number;
+  declare _elevationMax: number;
+  declare _counties: CountyOption[];
+  declare _collections: string[];
 
   constructor() {
     super();

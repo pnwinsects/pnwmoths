@@ -292,19 +292,19 @@ class PnwmTaxonBrowser extends LitElement {
     };
   }
 
-  _families: TaxonFamily[];
-  _stateMap: Record<string, Set<string>>;
-  _statesAvailable: string[];
-  _selectedState: string;
-  _selectedDistrict: string;
-  _districtMap: Record<string, Set<string>>;
-  _districtRows: SpeciesDistrict[];
-  _districtsAvailable: string[];
-  _showImages: boolean;
-  _expandedFamilies: Set<string>;
-  _expandedSubfamilies: Set<string>;
-  _expandedTribes: Set<string>;
-  _expandedGenera: Set<string>;
+  declare _families: TaxonFamily[];
+  declare _stateMap: Record<string, Set<string>>;
+  declare _statesAvailable: string[];
+  declare _selectedState: string;
+  declare _selectedDistrict: string;
+  declare _districtMap: Record<string, Set<string>>;
+  declare _districtRows: SpeciesDistrict[];
+  declare _districtsAvailable: string[];
+  declare _showImages: boolean;
+  declare _expandedFamilies: Set<string>;
+  declare _expandedSubfamilies: Set<string>;
+  declare _expandedTribes: Set<string>;
+  declare _expandedGenera: Set<string>;
 
   get _prefix(): string { return (this as { 'path-prefix'?: string })['path-prefix'] || '/'; }
 

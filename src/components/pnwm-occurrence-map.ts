@@ -17,14 +17,14 @@ class PnwmOccurrenceMap extends LitElement {
     };
   }
 
-  slug: string;
-  speciesName: string;
-  filters: Partial<FilterChangeDetail> | null;
-  _records: OccurrenceRecord[];
-  _loading: boolean;
-  _error: unknown;
-  _map: L.Map | null;
-  _markerGroup: L.FeatureGroup | null;
+  declare slug: string;
+  declare speciesName: string;
+  declare filters: Partial<FilterChangeDetail> | null;
+  declare _records: OccurrenceRecord[];
+  declare _loading: boolean;
+  declare _error: unknown;
+  declare _map: L.Map | null;
+  declare _markerGroup: L.FeatureGroup | null;
 
   constructor() {
     super();

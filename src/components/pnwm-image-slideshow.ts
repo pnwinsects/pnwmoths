@@ -130,10 +130,10 @@ export class PnwmImageSlideshow extends LitElement {
     }
   `;
 
-  slug: string;
-  _currentIndex: number;
-  _lightboxOpen: boolean;
-  _images: Array<{
+  declare slug: string;
+  declare _currentIndex: number;
+  declare _lightboxOpen: boolean;
+  declare _images: Array<{
     src: string;
     thumb: string;
     alt: string;
@@ -148,19 +148,19 @@ export class PnwmImageSlideshow extends LitElement {
     collector: string;
     subspecies: string;
   }>;
-  _stripOverflows: boolean;
-  highResAvailable: boolean;
-  highResSpecimens: string;
-  cdnBaseUrl: string;
-  prefixUrl: string;
-  _highResSpecimens: Specimen[];
-  _osdViewer: import('openseadragon').Viewer | null;
-  _resizeObserver: ResizeObserver | null;
-  _inertedElements: Element[];
+  declare _stripOverflows: boolean;
+  declare highResAvailable: boolean;
+  declare highResSpecimens: string;
+  declare cdnBaseUrl: string;
+  declare prefixUrl: string;
+  declare _highResSpecimens: Specimen[];
+  declare _osdViewer: import('openseadragon').Viewer | null;
+  declare _resizeObserver: ResizeObserver | null;
+  declare _inertedElements: Element[];
   // Element that had focus when the lightbox opened, so it can be restored on close
-  _lightboxOpener: HTMLElement | null;
+  declare _lightboxOpener: HTMLElement | null;
   // Bound keydown listener stored as instance field for symmetric add/remove
-  _boundHandleKeydown: (e: KeyboardEvent) => void;
+  declare _boundHandleKeydown: (e: KeyboardEvent) => void;
 
   constructor() {
     super();
