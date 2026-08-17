@@ -78,10 +78,17 @@ production upload.**
   curation hostage (species get merged, renamed and gated, see [ADR 0029](0029-removing-a-species.md)),
   and "most records" is what makes a plotted count of zero a real failure rather than an artefact of
   which species we happened to name.
-- **Everything off-origin is aborted** — OpenStreetMap tiles, Bunny CDN photos, Google Fonts. The
-  check is hermetic and has no external failure modes, and blocking the network forces the assertions
-  onto what the components *compute* rather than what they download. A map still reports the markers
-  it plotted with no basemap under them.
+- **Every request not addressed to the fixture server is aborted — which is not the same as
+  "third-party".** OpenStreetMap tiles and Google Fonts genuinely are. The photos and deep-zoom tiles
+  are not: `CDN_BASE_URL` and `SITE_ORIGIN` are the same host, so in production those are
+  **same-origin** requests for the site's own assets, blocked here only because the fixture serves
+  `_site/` from loopback while the built pages carry absolute production URLs. Blocking both keeps
+  the check hermetic and forces the assertions onto what the components *compute* rather than what
+  they download — a map still reports the markers it plotted with no basemap under it. The cost is a
+  fidelity gap: every page under test runs with its images broken, which production never does, so no
+  assertion here may depend on an image having loaded. Because the assets are same-origin, the way to
+  lift that limit when it bites is to **fulfil** those requests from local bytes — a path mapping,
+  not an origin override, and not a licence to reach the real network ([#318](https://github.com/pnwinsects/pnwmoths/issues/318)).
 - **It is NOT part of `npm run build`.** The build stays runnable offline and without a browser, the
   same reasoning that keeps `generate-range-map.ts` and `generate-social-card.ts` manual. A
   maintainer editing a CSV on a laptop must not need Chrome to see their change.
@@ -193,3 +200,10 @@ the reason the corrected assertions are trusted:
   data-dependent spurious failure waiting on a curation reorder. Now scoped to the expanded category.
 - The step-cost estimate in Consequences was wrong by roughly 6× (it is ~10s, not ~1min) and is
   corrected.
+- **"Off-origin" was the wrong word for the CDN, in this record and in the script.** `CDN_BASE_URL`
+  and `SITE_ORIGIN` are both `https://moths.pnwinsects.org`: the photos and deep-zoom tiles are the
+  site's own first-party assets, same-origin in production, and only foreign to the *fixture* server
+  on loopback. The blocking behaviour was right and is unchanged; the description was misleading, and
+  it hid the cleanest answer to the OSD question — fulfil those requests from local bytes, which
+  same-origin makes a path mapping rather than an origin override. Corrected by the repo owner after
+  merge.
