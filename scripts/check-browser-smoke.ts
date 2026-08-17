@@ -263,13 +263,26 @@ async function launchBrowser(): Promise<Browser> {
 }
 
 /**
- * Open a page that can reach `origin` and nothing else.
+ * Open a page that can reach the fixture server and nothing else.
  *
- * Everything off-origin is aborted: OpenStreetMap tiles, the Bunny CDN's
- * photos, Google Fonts. That keeps the check hermetic and fast, and it forces
- * the assertions onto what the components compute rather than what they
- * download — a map still reports the markers it plotted with no basemap under
- * them.
+ * Two different kinds of request are blocked here, and conflating them is a
+ * mistake: OpenStreetMap tiles and Google Fonts are genuinely third-party, but
+ * the photos and deep-zoom tiles are NOT. `CDN_BASE_URL` and `SITE_ORIGIN` in
+ * eleventy.config.ts are the same host, so in production those are same-origin
+ * requests for the site's own assets. They are blocked here only because the
+ * fixture serves `_site/` from loopback while the built pages carry absolute
+ * production URLs.
+ *
+ * Blocking both keeps the check hermetic and fast, and forces the assertions
+ * onto what the components compute rather than what they download — a map
+ * still reports the markers it plotted with no basemap under it.
+ *
+ * The cost is a fidelity gap worth stating: every page under test runs with its
+ * images broken, a state production never has. No assertion here may depend on
+ * an image having loaded. Where that becomes limiting (the OSD deep-zoom viewer
+ * is the live example, issue #318), the fix is to FULFIL those requests from
+ * local bytes rather than to allow real network — same-origin makes that a
+ * path mapping, not an origin override.
  */
 async function openPage(browser: Browser, origin: string): Promise<{ page: Page; errors: Error[] }> {
   const page = await browser.newPage();
