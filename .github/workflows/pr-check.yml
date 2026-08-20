@@ -39,6 +39,13 @@ jobs:
           version: '0.23.0'
       - name: Build site (with blocking link check)
         run: npm run build
+        env:
+          # lychee resolves github.com links through the GitHub API. Unauthenticated,
+          # the shared runner IPs exhaust the anonymous rate limit and the API answers
+          # 404, which lychee reports as a broken link — so a public, working URL like
+          # github.com/pnwinsects/pnwmoths/issues intermittently fails the blocking
+          # link check. The token raises the limit; lychee reads it from this env var.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Runs the bundle, not the sources — the one gate that can see a component
       # that rendered once and froze (issue #316, ADR 0035). The runner image
       # preinstalls Google Chrome, which playwright-core drives directly; there

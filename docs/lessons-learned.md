@@ -434,6 +434,18 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **A "broken link" that reproduces nowhere is a CI-identity problem, not link rot.** lychee
+  resolves `github.com` URLs through the GitHub API rather than fetching the page, so on the
+  shared Actions runner IPs it exhausts the anonymous rate limit and the API answers **404** —
+  which the report renders as `[404] … | Rejected status code: 404 Not Found`, indistinguishable
+  from a genuinely dead link. Two PR checks failed on a single such error against
+  `github.com/pnwinsects/pnwmoths/issues`, a public URL serving 200 to anyone who tried it by
+  hand, while `main` stayed green. The fix is `GITHUB_TOKEN` in the env of every step that runs
+  lychee — not a `lychee.toml` exclude, which would blind the check to real rot on the one host
+  we link to most deliberately. Before excluding a host, check whether the failure is *the
+  runner's identity* rather than the target: intermittent, unreproducible off-runner, and
+  confined to one host is the signature.
+
 - **A post-build gate must run downstream of every step that writes into the output.**
   `check-withheld` and `check-unpublished` ran straight after `build:eleventy`, and
   `build:copy-parquet` ran *after* them — so the gates read `_site/species/` before the step
