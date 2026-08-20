@@ -50,6 +50,10 @@ jobs:
       - name: Check links (non-blocking)
         run: npm run build:validate-links
         continue-on-error: true
+        env:
+          # Authenticates lychee's github.com checks; anonymous runner IPs hit the
+          # API rate limit and get 404s that read as link rot (see pr-check.yml).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload _site to Bunny
         run: npm run site:upload
         env:
