@@ -44,3 +44,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0033](0033-referential-integrity-gate.md) | Every species reference is declared in one table and checked before the build; known orphans held in a self-expiring ratchet | Accepted |
 | [0034](0034-generated-artifacts-merge-curator-fields.md) | Generators merge into their committed artifact — curator fields and untouched entries survive a scoped run | Accepted |
 | [0035](0035-browser-smoke-gate.md) | The built bundle is driven in a real headless browser before it ships; every other gate reads bytes | Accepted |
+| [0036](0036-cdn-inventory-by-accountability.md) | The CDN is inventoried by accountability — every object joined to what explains it, findings reported both directions, advisory only | Accepted |
