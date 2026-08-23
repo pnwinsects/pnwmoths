@@ -35,6 +35,23 @@ export interface BunnyStorageConfig {
   tag?: string;
 }
 
+export interface SurveyOptions {
+  /** Directory listings in flight. Default 1 — `walk`'s original serial behavior. */
+  concurrency?: number;
+  /**
+   * Called with each subdirectory key (trailing slash) before descending.
+   * Returning false records it in `pruned` and leaves its contents unlisted.
+   */
+  descend?: (dirKey: string) => boolean;
+}
+
+export interface Survey {
+  /** Every object reached, with its stored size. */
+  files: Map<string, number>;
+  /** Directories `descend` refused, with a trailing slash, in discovery order. */
+  pruned: string[];
+}
+
 export interface BunnyStorage {
   /** Storage-zone URL for a key. Each path segment is encoded; the separators are not. */
   storageUrl(key: string): string;
@@ -42,6 +59,11 @@ export interface BunnyStorage {
   redact(msg: string): string;
   /** Every object under a prefix with its size, recursing into subdirectories. */
   walk(prefix: string): Promise<Map<string, number>>;
+  /**
+   * `walk` with bounded concurrency and the option to stop at a subdirectory.
+   * A non-empty prefix is normalized to a directory key; `''` is the zone root.
+   */
+  survey(prefix: string, options?: SurveyOptions): Promise<Survey>;
   /** Additive GET→PUT copy of one object, preserving the stored Content-Type. */
   copyObject(fromKey: string, toKey: string): Promise<void>;
   /** Five-attempt exponential backoff (2/4/8/16/32s), matching the upload scripts. */
@@ -120,17 +142,48 @@ export function createBunnyStorage(config: BunnyStorageConfig): BunnyStorage {
     return (await res.json()) as BunnyEntry[];
   };
 
-  const walk = async (prefix: string): Promise<Map<string, number>> => {
-    const found = new Map<string, number>();
-    for (const entry of await withRetry(() => listDir(prefix), `list ${prefix}`)) {
-      if (entry.IsDirectory) {
-        for (const [k, v] of await walk(`${prefix}${entry.ObjectName}/`)) found.set(k, v);
-      } else {
-        found.set(`${prefix}${entry.ObjectName}`, entry.Length);
-      }
+  /**
+   * Breadth-first listing with a bounded number of requests in flight.
+   *
+   * Iterative rather than recursive because the two knobs the inventory needs —
+   * concurrency and pruning — are properties of the *frontier*, not of any one
+   * directory: a recursive walk can only parallelize within a single listing,
+   * which is exactly the wrong axis here (a species-tiles pyramid is thousands
+   * of directories holding a handful of files each).
+   *
+   * Order is not stable across runs once concurrency > 1. Callers that need a
+   * stable artifact must sort; `files` being a Map is not a promise of order.
+   */
+  const survey = async (prefix: string, options: SurveyOptions = {}): Promise<Survey> => {
+    const { concurrency = 1, descend } = options;
+    const files = new Map<string, number>();
+    const pruned: string[] = [];
+    // Keys are built by concatenation, so a prefix that is not a directory would
+    // silently mint `speciesabagrotis-apposita/…`. The zone root is the one
+    // prefix that is correctly empty.
+    const root = prefix === '' || prefix.endsWith('/') ? prefix : `${prefix}/`;
+    let frontier: string[] = [root];
+
+    while (frontier.length > 0) {
+      const level = frontier;
+      frontier = [];
+      await pooled(level, concurrency, async (dir) => {
+        for (const entry of await withRetry(() => listDir(dir), `list ${dir}`)) {
+          if (entry.IsDirectory) {
+            const child = `${dir}${entry.ObjectName}/`;
+            if (descend && !descend(child)) pruned.push(child);
+            else frontier.push(child);
+          } else {
+            files.set(`${dir}${entry.ObjectName}`, entry.Length);
+          }
+        }
+      });
     }
-    return found;
+    return { files, pruned };
   };
+
+  const walk = async (prefix: string): Promise<Map<string, number>> =>
+    (await survey(prefix)).files;
 
   const copyObject = async (fromKey: string, toKey: string): Promise<void> => {
     const get = await fetchWithTimeout(storageUrl(fromKey), { headers: { AccessKey: password } });
@@ -149,5 +202,5 @@ export function createBunnyStorage(config: BunnyStorageConfig): BunnyStorage {
     if (!put.ok) throw new Error(`upload ${toKey}: ${put.status} ${put.statusText}`);
   };
 
-  return { storageUrl, redact, walk, copyObject, withRetry };
+  return { storageUrl, redact, walk, survey, copyObject, withRetry };
 }

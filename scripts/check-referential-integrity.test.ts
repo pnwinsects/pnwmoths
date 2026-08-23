@@ -665,6 +665,8 @@ const UNDECLARED_BY_DESIGN: Record<string, string> = {
   'data/referential-integrity-exceptions.csv':
     'the ratchet itself — its slugs are the known violations, so checking them here would be circular',
   'data/key-coverage-report.json': 'run report listing UNMATCHED binomials — absent slugs are its subject',
+  'data/cdn-inventory-report.csv':
+    'run report on CDN objects nothing accounts for — slugs absent from species.csv are its subject',
   'data/plates.json': 'its `slug` is a plate slug, not a species slug',
 };
 
