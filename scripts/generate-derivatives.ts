@@ -41,7 +41,7 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import {
   buildWorkList, vipsCommands, DERIVATIVES_MANIFEST_WRITERS,
-  readSources, sourcePaths,
+  readSources, sourcePaths, SOURCE_KINDS,
   type DerivativeSpec, type SourceKind,
 } from './lib/derivatives.ts';
 import { acquireManifestLock, releaseManifestLock } from './lib/manifest-lock.ts';
@@ -189,7 +189,17 @@ export function groupBySource(specs: readonly DerivativeSpec[]): Map<string, Der
 async function main(): Promise<void> {
   const sources = readSources(resolve('data'));
   let specs = buildWorkList(sourcePaths(sources));
-  if (KIND) specs = specs.filter((s) => s.kind === (KIND as SourceKind));
+  if (KIND) {
+    // A typo here used to filter the work list to zero and then report
+    // "Nothing to do — all 0 derivatives present", which reads as success. The
+    // runbooks now put KIND in front of a maintainer following prose, so an
+    // unknown value has to be a refusal rather than a quiet no-op.
+    if (!SOURCE_KINDS.includes(KIND as SourceKind)) {
+      console.error(`[derivatives] KIND="${KIND}" is not a source kind. Expected one of: ${SOURCE_KINDS.join(', ')}.`);
+      process.exit(1);
+    }
+    specs = specs.filter((s) => s.kind === (KIND as SourceKind));
+  }
   if (ONLY) specs = specs.filter((s) => s.sourcePath.includes(ONLY));
 
   const manifest = readManifest(MANIFEST_PATH);
