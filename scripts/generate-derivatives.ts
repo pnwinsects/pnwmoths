@@ -24,7 +24,7 @@
  * Environment variables:
  *   DRY_RUN       — "1" to print the plan and exit without generating
  *   LIMIT         — process at most N derivatives (pilot runs)
- *   KIND          — restrict to legacy | highres | glossary
+ *   KIND          — restrict to legacy | highres | glossary | plates
  *   ONLY          — restrict to sources whose path contains this substring
  *   OUTPUT_DIR    — local output root (default var/derivatives)
  *   CONCURRENCY   — parallel workers (default 4)
@@ -205,7 +205,7 @@ async function main(): Promise<void> {
 
   // DRY_RUN guard first (ADR 0013) — pre-flight inspection needs no tooling.
   if (DRY_RUN) {
-    logStage(`[dry-run] sources: ${sources.legacy.length} legacy, ${sources.highres.length} hi-res, ${sources.glossary.length} glossary`);
+    logStage(`[dry-run] sources: ${sources.legacy.length} legacy, ${sources.highres.length} hi-res, ${sources.glossary.length} glossary, ${sources.plates.length} plates`);
     logStage(`[dry-run] total derivatives: ${specs.length.toLocaleString('en-US')}`);
     logStage(`[dry-run] already generated: ${(specs.length - todo.length).toLocaleString('en-US')}`);
     logStage(`[dry-run] would generate: ${limited.length.toLocaleString('en-US')}`);

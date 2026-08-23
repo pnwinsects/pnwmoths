@@ -434,6 +434,19 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **Replacing a script with a prose recipe inverts something.** `scripts/upload-plates.js`
+  computed each file's path *relative to* `plates/` and put the prefix back on
+  (`` const cdnPath = `plates/${rel}` ``). When it was deleted as a spent one-off, the hand-written
+  `curl` recipe that replaced it in `_instructions/ADDING_PLATE.md` walked `plates/${SLUG}` —
+  whose paths already begin with `plates/` — and *stripped* the prefix
+  (`` dest_path="${file#plates/}" ``). Both look right in isolation; together they aimed a whole
+  asset class at the zone root, where the viewer's `tiles-url`, the share image, and the
+  derivative work list would all have missed it ([#326](https://github.com/pnwinsects/pnwmoths/issues/326)).
+  It went unnoticed for two months because no plate has been added since. The lesson is not
+  "keep the script": it is that a recipe standing in for deleted code has to be *run once*
+  before it is committed, and that the runbook needs a verification step whose failure is
+  visible — the CDN inventory found this, the docs never would have.
+
 - **A "broken link" that reproduces nowhere is a CI-identity problem, not link rot.** lychee
   resolves `github.com` URLs through the GitHub API rather than fetching the page, so on the
   shared Actions runner IPs it exhausts the anonymous rate limit and the API answers **404** —
