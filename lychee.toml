@@ -23,6 +23,17 @@ accept = ["100..=103", "200..=299", "429"]
 # is the runner's network being refused, not link rot; a re-run cannot clear it.
 # `cbif.gc.ca` was already excluded here for what was evidently the same reason.
 #
+# `edits.nationalmap.gov` is the US counterpart of `geonames.nrcan.gc.ca` — the two are
+# cited in the same sentence of the About/Data page as the gazetteers the coordinates
+# came from — and it is excluded for a plainer reason than either: the host is simply
+# slower than any timeout worth setting. It failed the check on two consecutive PRs
+# (#325, #327) as the only issue in 46,000 links, and three probes from a workstation
+# gave two 40s hangs and one 200 at **22.1s** — TCP connects in 40ms and then the app
+# takes 20+ seconds or never answers. Raising `timeout` cannot fix a host that hangs
+# outright two times in three, and unlike the GITHUB_TOKEN case this is not the
+# runner's identity: it reproduces off-runner. The URL is verified to load in a
+# browser, and its Canadian twin has been excluded here all along.
+#
 # The site's own page URLs. Every page carries an absolute `rel=canonical` and
 # `og:url` pointing at production (issue #198), and lychee extracts the canonical
 # link like any other `<link href>`. Checking those would validate the *deployed*
@@ -50,5 +61,5 @@ accept = ["100..=103", "200..=299", "429"]
 # Optimizer put a `?width=` query string on every URL and the extension anchor
 # therefore missed them. ADR 0022 retired the Optimizer; the URLs became plain
 # `.webp`/`.jpg` and silently fell under the exclude.
-exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca", "agriculture\\.canada\\.ca", "geonames\\.nrcan\\.gc\\.ca"]
+exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca", "agriculture\\.canada\\.ca", "geonames\\.nrcan\\.gc\\.ca", "edits\\.nationalmap\\.gov"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]
