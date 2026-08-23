@@ -471,8 +471,11 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
   const plates = JSON.parse(readFileSync(resolve(dataDir, 'plates.json'), 'utf8')) as Array<{ slug?: string }>;
   const species = readCsv<{ genus: string; species: string; family: string | null }>(resolve(dataDir, 'species.csv'));
 
-  const withheld = loadWithheldFamilies();
-  const unpublished = loadUnpublishedSpecies();
+  // Both loaders default to a **cwd-relative** `data/…` path and warn-and-return-empty
+  // when it is missing, so an unqualified call from anywhere but the repo root would
+  // quietly report every gated species as published.
+  const withheld = loadWithheldFamilies(resolve(dataDir, 'withheld-families.csv'));
+  const unpublished = loadUnpublishedSpecies(resolve(dataDir, 'unpublished-species.csv'));
   const speciesSlugs = new Set<string>();
   const gatedSlugs = new Set<string>();
   for (const row of species) {

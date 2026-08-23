@@ -38,7 +38,7 @@ BUNNY_STORAGE_PASSWORD='…' npm run cdn:inventory
 
 It prints what accounts for the zone, then the findings:
 
-```
+```text
 [emit-cdn-inventory] 146958 units in the zone:
 [emit-cdn-inventory]   site                6941  161.1 MB
 [emit-cdn-inventory]   superseded-build   98987  446.2 MB

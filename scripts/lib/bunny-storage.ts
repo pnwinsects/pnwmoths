@@ -59,7 +59,10 @@ export interface BunnyStorage {
   redact(msg: string): string;
   /** Every object under a prefix with its size, recursing into subdirectories. */
   walk(prefix: string): Promise<Map<string, number>>;
-  /** `walk` with bounded concurrency and the option to stop at a subdirectory. */
+  /**
+   * `walk` with bounded concurrency and the option to stop at a subdirectory.
+   * A non-empty prefix is normalized to a directory key; `''` is the zone root.
+   */
   survey(prefix: string, options?: SurveyOptions): Promise<Survey>;
   /** Additive GET→PUT copy of one object, preserving the stored Content-Type. */
   copyObject(fromKey: string, toKey: string): Promise<void>;
@@ -155,7 +158,11 @@ export function createBunnyStorage(config: BunnyStorageConfig): BunnyStorage {
     const { concurrency = 1, descend } = options;
     const files = new Map<string, number>();
     const pruned: string[] = [];
-    let frontier: string[] = [prefix];
+    // Keys are built by concatenation, so a prefix that is not a directory would
+    // silently mint `speciesabagrotis-apposita/…`. The zone root is the one
+    // prefix that is correctly empty.
+    const root = prefix === '' || prefix.endsWith('/') ? prefix : `${prefix}/`;
+    let frontier: string[] = [root];
 
     while (frontier.length > 0) {
       const level = frontier;

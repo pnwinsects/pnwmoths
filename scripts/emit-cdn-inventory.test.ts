@@ -1,6 +1,7 @@
 import { describe, it, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { parse } from 'csv-parse/sync';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -320,15 +321,25 @@ describe('loadSources', () => {
   });
 
   it('indexes photos by the raw CSV cell, exactly as the object is named', () => {
-    const first = readFileSync(resolve(ROOT, 'data/images.csv'), 'utf8').split('\n')[1] ?? '';
-    const [slug, filename] = first.split(',');
-    assert.ok(loaded.photos.has(`${slug}/${filename}`), `images.csv row 1 should index as ${slug}/${filename}`);
+    // Parsed, not split: a quoted cell or a CRLF ending would make `filename` a
+    // fragment and fail the assertion while loadSources was perfectly correct.
+    const [first] = parse(readFileSync(resolve(ROOT, 'data/images.csv')), {
+      columns: true, skip_empty_lines: true, bom: true,
+    }) as Array<{ species_slug: string; filename: string }>;
+    const key = `${first?.species_slug}/${first?.filename}`;
+    assert.ok(loaded.photos.has(key), `images.csv row 1 should index as ${key}`);
   });
 
   it('only counts tiles the uploader confirmed reached the zone', () => {
     // `tiled` means the pyramid is on the workstation. A pyramid in the zone for
     // a `tiled` row is a real finding, so it must not be pre-excused here.
     for (const pair of loaded.tilePairs) assert.match(pair, /^species-tiles\/[^/]+\/.+/);
-    assert.ok(loaded.tilePairs.size < 4938, 'every manifest row cannot be an uploaded row');
+    const manifest = parse(readFileSync(resolve(ROOT, 'data/species-photos-manifest.csv')), {
+      columns: true, skip_empty_lines: true, bom: true,
+    }) as Array<{ status: string }>;
+    assert.ok(
+      loaded.tilePairs.size < manifest.length,
+      'every manifest row cannot be an uploaded row',
+    );
   });
 });
