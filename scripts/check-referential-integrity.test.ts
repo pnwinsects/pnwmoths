@@ -667,6 +667,8 @@ const UNDECLARED_BY_DESIGN: Record<string, string> = {
   'data/key-coverage-report.json': 'run report listing UNMATCHED binomials — absent slugs are its subject',
   'data/cdn-inventory-report.csv':
     'run report on CDN objects nothing accounts for — slugs absent from species.csv are its subject',
+  'data/cdn-duplicates-report.csv':
+    'run report pairing an orphan CDN object with its live twin — the orphan side is a slug that no longer exists',
   'data/plates.json': 'its `slug` is a plate slug, not a species slug',
 };
 

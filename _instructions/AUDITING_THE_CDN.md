@@ -16,8 +16,12 @@ Background and rationale: [ADR 0036](../docs/adr/0036-cdn-inventory-by-accountab
 
 - **`data/cdn-inventory-report.csv`** — committed. One row per finding. Commit it: its diff is how
   you see what became unaccounted for since the last audit.
-- **`var/cdn-inventory-full.csv`** — local scratch. Every object with what accounts for it. Use it
-  to answer one-off questions; it is far too big and too churny to commit.
+- **`data/cdn-duplicates-report.csv`** — committed. Images the zone holds more than one copy of,
+  where at least one copy is unaccounted for. Commit it with the findings report.
+- **`var/cdn-inventory-full.csv`** — local scratch. Every object with what accounts for it. Use
+  it to answer one-off questions; it is far too big and too churny to commit.
+- **`var/cdn-duplicates-full.csv`** — local scratch. Every duplicate group, including the
+  thousands with nothing to decide that the committed report filters out.
 - **`var/cdn-listing.csv`**, **`var/cdn-site-manifest.json`** — local scratch. The raw listing, so
   you can re-run the classification without listing the zone again.
 - **Nothing on the CDN.** The audit only reads.
@@ -74,6 +78,32 @@ Open `data/cdn-inventory-report.csv` and sort by `shape`. Each shape asks a diff
 The `detail` column carries the actionable half — whether the species is published, gated, or absent
 from `data/species.csv` entirely.
 
+### 2a. Read the duplicates report
+
+Renames are additive: changing a genus copies every photo to the new slug and leaves the old
+one in place. `data/cdn-retired-images.csv` records the pairs somebody wrote down;
+`data/cdn-duplicates-report.csv` finds the rest, by grouping objects on the SHA256 the storage
+listing hands back for free.
+
+Each group is contiguous in the file. A group holding one live copy and one orphan is a
+leftover, and its orphan is the one class of unaccounted object you can retire without asking
+whether anything is lost — the bytes are still being served from the other path.
+
+```text
+xestia-c/Xestia c-nigrum-A-D.jpg          ≡  xestia-c-nigrum/Xestia c-nigrum-A-D.jpg
+species-tiles/protorthodes-rufula/A-D…    ≡  species-tiles/trichopolia-rufula/A-D…
+key-images/Blue copy.webp                 ≡  key-images/Blue.webp
+```
+
+Retiring one means adding a row to `data/cdn-retired-images.csv` — that is what stops it being
+reported again, and it is a record rather than a deletion. Deleting the object is a separate,
+manual decision (step 4).
+
+Only images are compared. A `.dzi` descriptor is determined entirely by the source's pixel
+dimensions, so unrelated specimens shot at the same size have byte-identical descriptors;
+comparing those would report 824 groups that mean nothing. The unfiltered list is in
+`var/cdn-duplicates-full.csv` if you want it.
+
 ### 3. Re-check without re-listing
 
 The listing is cached, so you can re-run the classification instantly — useful after editing a CSV
@@ -82,6 +112,11 @@ to confirm a finding is resolved on paper:
 ```bash
 USE_CACHE=1 npm run cdn:inventory
 ```
+
+A listing that is missing any object's checksum cannot answer the duplicate question, so a run
+off one leaves `data/cdn-duplicates-report.csv` alone and says so — rather than writing a report
+whose missing groups would read as "somebody cleaned these up". A cached listing from before the
+checksum column is the usual reason.
 
 To look at one corner of the zone instead of all of it (this leaves the committed report alone):
 
@@ -114,7 +149,7 @@ Then purge the pull-zone cache for that path, or the old copy is served for up t
 
 ```bash
 git checkout -b cdn-audit-YYYY-MM-DD
-git add data/cdn-inventory-report.csv
+git add data/cdn-inventory-report.csv data/cdn-duplicates-report.csv
 git commit -m "chore: refresh the CDN inventory report"
 git push -u origin HEAD
 gh pr create --fill
@@ -123,6 +158,17 @@ gh pr create --fill
 `main` is protected, so the refreshed report lands through a pull request like anything else. The
 PR diff is the useful artifact: added rows are what became unaccounted for since the last audit,
 removed rows are what somebody fixed.
+
+## Schema: data/cdn-duplicates-report.csv
+
+| Field | Description |
+|---|---|
+| `checksum` | SHA256 from the storage listing, uppercase hex. Rows sharing one are the same bytes. |
+| `path` | The storage key of this copy. |
+| `bytes` | Stored size. |
+| `species_slug` | The species the path claims, if any — often the old slug of a rename. |
+| `accounted_by` | What explains this copy: `photo`, `tiles`, `key-image`, … or `unaccounted`. |
+| `note` | `superseded` when `data/cdn-retired-images.csv` already records this copy. |
 
 ## Schema: data/cdn-inventory-report.csv
 

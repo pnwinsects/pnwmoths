@@ -101,6 +101,12 @@ const FULL_PATH = 'var/cdn-inventory-full.csv';
 /** The committed artifact: only what nothing accounts for. */
 const REPORT_PATH = 'data/cdn-inventory-report.csv';
 
+/** The second committed artifact: duplicates that make an orphan actionable. */
+const DUPLICATES_PATH = 'data/cdn-duplicates-report.csv';
+
+/** Every duplicate group, including the ones with nothing to decide. */
+const DUPLICATES_FULL_PATH = 'var/cdn-duplicates-full.csv';
+
 // ---------------------------------------------------------------------------
 // Vocabulary
 // ---------------------------------------------------------------------------
@@ -129,6 +135,11 @@ export interface Unit {
   path: string;
   kind: 'object' | 'tile-pyramid';
   bytes: number | null;
+  /**
+   * SHA256 as the storage API reports it, or null for a pyramid (never listed)
+   * and for a listing taken before this field was recorded.
+   */
+  checksum: string | null;
 }
 
 /** Everything in the repo that can account for an object, pre-indexed. */
@@ -438,6 +449,97 @@ export function findMissing(units: readonly Unit[], sources: Sources): ReportRow
   return rows;
 }
 
+/** One copy of something the zone holds more than once. */
+export interface DuplicateRow {
+  checksum: string;
+  path: string;
+  bytes: string;
+  species_slug: string;
+  accounted_by: Accounting;
+  /** `superseded` when data/cdn-retired-images.csv already explains this copy. */
+  note: string;
+}
+
+/**
+ * Objects the zone holds more than one byte-identical copy of.
+ *
+ * The renames did this deliberately: a genus change copies every photo to the
+ * new slug and leaves the old one in place, because nothing here deletes
+ * (ADR 0008). `data/cdn-retired-images.csv` records the pairs somebody thought
+ * to write down; this finds the rest, including the ones no path comparison
+ * could — `macaria-plumosata/Speranza plumosata-D-D.jpg` and
+ * `speranza-plumosata/Speranza plumosata-A-D.jpg` are the same bytes under a
+ * different *specimen letter*, so only the checksum relates them.
+ *
+ * The point is not tidiness. An orphan photo is un-actionable while nobody can
+ * say whether deleting it loses anything; a copy that is byte-identical to one
+ * the site still serves is a different object entirely.
+ *
+ * Returns every group, which is mostly not interesting: 824 of the zone's 1,187
+ * groups are identical `.dzi` descriptors (two photos of the same pixel
+ * dimensions produce the same XML) and ~1,400 more copies are build output that
+ * two deploys emitted identically. `withAnOrphan` is the filter that leaves the
+ * ones a human has something to decide about.
+ */
+export function findDuplicates(units: readonly Unit[], sources: Sources): DuplicateRow[] {
+  const byChecksum = new Map<string, Unit[]>();
+  for (const unit of units) {
+    if (!unit.checksum) continue;
+    const group = byChecksum.get(unit.checksum);
+    if (group) group.push(unit);
+    else byChecksum.set(unit.checksum, [unit]);
+  }
+
+  const rows: DuplicateRow[] = [];
+  for (const [checksum, group] of byChecksum) {
+    if (group.length < 2) continue;
+    for (const unit of group) {
+      rows.push({
+        checksum,
+        path: unit.path,
+        bytes: unit.bytes === null ? '' : String(unit.bytes),
+        species_slug: speciesSlugOf(unit.path) ?? '',
+        accounted_by: classify(unit, sources).accounting,
+        note: sources.retired.has(unit.path) ? 'superseded' : '',
+      });
+    }
+  }
+  // Grouped by checksum and stable within a group, so each set of copies is
+  // contiguous in the committed file and its diff reads as whole groups.
+  return rows.sort((a, b) =>
+    a.checksum === b.checksum ? (a.path < b.path ? -1 : 1) : a.checksum < b.checksum ? -1 : 1,
+  );
+}
+
+/**
+ * The duplicate groups worth committing: those holding at least one copy that
+ * nothing accounts for.
+ *
+ * Everything else is the zone agreeing with itself — a descriptor that two
+ * photos share, a chunk two builds emitted identically. Committing those would
+ * bury 63 decidable groups under 1,124 that are not.
+ */
+export function withAnOrphan(rows: readonly DuplicateRow[]): DuplicateRow[] {
+  const images = rows.filter((r) => isImage(r.path));
+  const interesting = new Set(images.filter((r) => r.accounted_by === 'unaccounted').map((r) => r.checksum));
+  return images.filter((r) => interesting.has(r.checksum));
+}
+
+/**
+ * Whether two identical copies of this path would mean anything.
+ *
+ * Only image bytes carry the claim "this is the same photograph". Everything
+ * else in the zone repeats for reasons that are not duplication at all: a `.dzi`
+ * descriptor is determined entirely by the source's pixel dimensions, so two
+ * unrelated specimens photographed at the same size produce the same XML
+ * (`protorthodes-incincta/C-D.dzi` and `malacosoma-constrictum/B-D.dzi` are
+ * byte-identical and have nothing to do with each other), and one group of 135
+ * identical site objects is just a page the build emits the same way every time.
+ */
+export function isImage(path: string): boolean {
+  return /\.(?:jpe?g|png|gif|webp)$/i.test(path);
+}
+
 /** Units and bytes per accounting category, for the run summary. */
 export function summarize(units: readonly Unit[], sources: Sources): Map<Accounting, { units: number; bytes: number }> {
   const totals = new Map<Accounting, { units: number; bytes: number }>();
@@ -529,20 +631,22 @@ function writeCache(units: readonly Unit[], siteManifest: Record<string, string>
         path: u.path,
         unit: u.kind,
         bytes: u.bytes === null ? '' : String(u.bytes),
+        checksum: u.checksum ?? '',
       })),
-      { header: true, columns: ['path', 'unit', 'bytes'] },
+      { header: true, columns: ['path', 'unit', 'bytes', 'checksum'] },
     ),
   );
   writeFileSync(resolve(ROOT, CACHE_SITE_MANIFEST), JSON.stringify(siteManifest));
 }
 
 function readCache(): CachedListing {
-  const rows = readCsv<{ path: string; unit: string; bytes: string }>(resolve(ROOT, CACHE_LISTING));
+  const rows = readCsv<{ path: string; unit: string; bytes: string; checksum?: string }>(resolve(ROOT, CACHE_LISTING));
   return {
     units: rows.map((r) => ({
       path: r.path,
       kind: r.unit === 'tile-pyramid' ? 'tile-pyramid' : 'object',
       bytes: r.bytes === '' ? null : Number(r.bytes),
+      checksum: r.checksum ? r.checksum : null,
     })),
     siteManifest: JSON.parse(readFileSync(resolve(ROOT, CACHE_SITE_MANIFEST), 'utf8')) as Record<string, string>,
   };
@@ -576,14 +680,16 @@ async function listZone(): Promise<CachedListing> {
   console.log(`${TAG} site manifest: ${Object.keys(siteManifest).length} paths in the current deploy`);
   console.log(`${TAG} listing the zone (concurrency ${CONCURRENCY}${DEEP ? ', DEEP — descending into tile pyramids' : ''})…`);
 
-  const { files, pruned } = await storage.survey(PREFIX, {
+  const { files, checksums, pruned } = await storage.survey(PREFIX, {
     concurrency: CONCURRENCY,
     descend: (dir) => DEEP || !isPyramidDir(dir),
   });
 
   const units: Unit[] = [
-    ...[...files].map(([path, bytes]): Unit => ({ path, kind: 'object', bytes })),
-    ...pruned.map((path): Unit => ({ path, kind: 'tile-pyramid', bytes: null })),
+    ...[...files].map(([path, bytes]): Unit => ({
+      path, kind: 'object', bytes, checksum: checksums.get(path) ?? null,
+    })),
+    ...pruned.map((path): Unit => ({ path, kind: 'tile-pyramid', bytes: null, checksum: null })),
   ];
   return { units, siteManifest };
 }
@@ -621,6 +727,12 @@ async function main(): Promise<void> {
   const totals = summarize(units, sources);
   const orphans = buildReport(units, sources);
   const missing = findMissing(units, sources);
+  // Objects the listing gave no checksum for. Today that is none of 142,911;
+  // the count exists because a duplicate report is a claim about the WHOLE zone,
+  // and one built from partial hashes states that claim falsely.
+  const unhashed = units.filter((u) => u.kind === 'object' && u.checksum === null);
+  const allDuplicates = findDuplicates(units, sources);
+  const duplicates = withAnOrphan(allDuplicates);
   const report = [...orphans, ...missing].sort((a, b) =>
     a.shape === b.shape ? (a.path < b.path ? -1 : 1) : a.shape < b.shape ? -1 : 1,
   );
@@ -640,13 +752,35 @@ async function main(): Promise<void> {
           bytes: u.bytes === null ? '' : String(u.bytes),
           accounted_by: u.accounting,
           detail: u.detail,
+          checksum: u.checksum ?? '',
         })),
-      { header: true, columns: ['path', 'unit', 'bytes', 'accounted_by', 'detail'] },
+      { header: true, columns: ['path', 'unit', 'bytes', 'accounted_by', 'detail', 'checksum'] },
     ),
   );
 
   if (PREFIX) {
     console.log(`${TAG} PREFIX=${PREFIX} — partial listing, so ${REPORT_PATH} is left untouched.`);
+  } else if (unhashed.length > 0) {
+    // Refusing rather than degrading, because the failure is invisible in the
+    // artifact: a run with some checksums missing drops the groups they belonged
+    // to, and the committed file's diff then reads as "somebody cleaned these up"
+    // rather than "this run could not see them". A cached listing from before
+    // the checksum column is the common case (every object unhashed); a partial
+    // listing is the dangerous one, and both land here.
+    console.log(
+      `${TAG} ${unhashed.length} of ${units.filter((u) => u.kind === 'object').length} object(s) have no checksum — ` +
+      `a duplicate report from a partial listing would silently omit whole groups.`,
+    );
+    for (const u of unhashed.slice(0, 3)) console.log(`${TAG}   e.g. ${u.path}`);
+    console.log(`${TAG} ${DUPLICATES_PATH} and ${DUPLICATES_FULL_PATH} left untouched. Re-run without USE_CACHE=1 to refresh the listing.`);
+  } else {
+    const columns = ['checksum', 'path', 'bytes', 'species_slug', 'accounted_by', 'note'];
+    writeFileSync(resolve(ROOT, DUPLICATES_PATH), stringify(duplicates, { header: true, columns }));
+    writeFileSync(resolve(ROOT, DUPLICATES_FULL_PATH), stringify(allDuplicates, { header: true, columns }));
+  }
+
+  if (PREFIX) {
+    // (the findings report is written below only for a full sweep)
   } else {
     writeFileSync(
       resolve(ROOT, REPORT_PATH),
@@ -664,6 +798,21 @@ async function main(): Promise<void> {
     console.log(`${TAG}   ${category.padEnd(16)} ${String(entry.units).padStart(7)}  ${formatBytes(entry.bytes)}`);
   }
 
+  if (unhashed.length === 0) {
+    const allGroups = new Set(allDuplicates.map((d) => d.checksum)).size;
+    const groups = new Set(duplicates.map((d) => d.checksum)).size;
+    console.log(
+      `${TAG} ${allGroups} object(s) stored more than once (${allDuplicates.length} copies, ` +
+      `${allDuplicates.filter((d) => d.note === 'superseded').length} already in cdn-retired-images.csv).`,
+    );
+    console.log(
+      `${TAG}   ${groups} group(s) hold a copy nothing accounts for — the decidable ones, in ${DUPLICATES_PATH}.`,
+    );
+    console.log(
+      `${TAG}   the rest is the zone agreeing with itself (shared .dzi descriptors, identical build output) — ${DUPLICATES_FULL_PATH}.`,
+    );
+  }
+
   const byShape = new Map<string, number>();
   for (const row of report) byShape.set(row.shape, (byShape.get(row.shape) ?? 0) + 1);
   console.log(`${TAG} ${report.length} finding(s) — ${orphans.length} unaccounted for, ${missing.length} expected and absent:`);
@@ -674,7 +823,9 @@ async function main(): Promise<void> {
   console.log(
     PREFIX
       ? `${TAG} wrote ${FULL_PATH} (${orphans.length} unaccounted under ${PREFIX}).`
-      : `${TAG} wrote ${REPORT_PATH} (${report.length} findings) and ${FULL_PATH} (full accounting).`,
+      : `${TAG} wrote ${REPORT_PATH} (${report.length} findings)` +
+        (unhashed.length === 0 ? `, ${DUPLICATES_PATH} (${duplicates.length} copies)` : '') +
+        ` and ${FULL_PATH} (full accounting).`,
   );
   console.log(`${TAG} Advisory only — nothing here deletes anything. Review before acting (ADR 0008).`);
 }
