@@ -365,6 +365,18 @@ describe('findDuplicates', () => {
   });
 });
 
+// The guard on the committed duplicates report. `some object has a checksum` is
+// not the same claim as `the listing is complete`, and only the second one makes
+// a duplicate report true.
+test('a listing missing any object checksum is not a basis for a duplicate report', () => {
+  const units = [object('a-b/x.jpg', 10, 'AAAA1111'), object('c-d/y.jpg', 10, null)];
+  const unhashed = units.filter((u) => u.kind === 'object' && u.checksum === null);
+  assert.equal(unhashed.length, 1, 'one object has no checksum, so the run must not replace the report');
+  // The pair would otherwise look like a clean group of one, which is exactly
+  // the shape a silently-narrowed report takes.
+  assert.deepEqual(findDuplicates(units, sources()), []);
+});
+
 test('summarize counts every unit exactly once', () => {
   const s = sources({ photos: new Set(['a-b/x.jpg']) });
   const totals = summarize([object('a-b/x.jpg', 10), object('c-d/y.jpg', 5), pyramid('species-tiles/e/A-D_files/')], s);

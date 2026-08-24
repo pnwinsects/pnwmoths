@@ -727,7 +727,10 @@ async function main(): Promise<void> {
   const totals = summarize(units, sources);
   const orphans = buildReport(units, sources);
   const missing = findMissing(units, sources);
-  const withChecksums = units.filter((u) => u.checksum !== null).length;
+  // Objects the listing gave no checksum for. Today that is none of 142,911;
+  // the count exists because a duplicate report is a claim about the WHOLE zone,
+  // and one built from partial hashes states that claim falsely.
+  const unhashed = units.filter((u) => u.kind === 'object' && u.checksum === null);
   const allDuplicates = findDuplicates(units, sources);
   const duplicates = withAnOrphan(allDuplicates);
   const report = [...orphans, ...missing].sort((a, b) =>
@@ -757,11 +760,19 @@ async function main(): Promise<void> {
 
   if (PREFIX) {
     console.log(`${TAG} PREFIX=${PREFIX} — partial listing, so ${REPORT_PATH} is left untouched.`);
-  } else if (withChecksums === 0) {
-    // A listing taken before checksums were recorded would report zero
-    // duplicates, which is a much more dangerous answer than no answer.
-    console.log(`${TAG} listing carries no checksums — re-run without USE_CACHE=1 to refresh it.`);
-    console.log(`${TAG} ${DUPLICATES_PATH} left untouched.`);
+  } else if (unhashed.length > 0) {
+    // Refusing rather than degrading, because the failure is invisible in the
+    // artifact: a run with some checksums missing drops the groups they belonged
+    // to, and the committed file's diff then reads as "somebody cleaned these up"
+    // rather than "this run could not see them". A cached listing from before
+    // the checksum column is the common case (every object unhashed); a partial
+    // listing is the dangerous one, and both land here.
+    console.log(
+      `${TAG} ${unhashed.length} of ${units.filter((u) => u.kind === 'object').length} object(s) have no checksum — ` +
+      `a duplicate report from a partial listing would silently omit whole groups.`,
+    );
+    for (const u of unhashed.slice(0, 3)) console.log(`${TAG}   e.g. ${u.path}`);
+    console.log(`${TAG} ${DUPLICATES_PATH} and ${DUPLICATES_FULL_PATH} left untouched. Re-run without USE_CACHE=1 to refresh the listing.`);
   } else {
     const columns = ['checksum', 'path', 'bytes', 'species_slug', 'accounted_by', 'note'];
     writeFileSync(resolve(ROOT, DUPLICATES_PATH), stringify(duplicates, { header: true, columns }));
@@ -787,7 +798,7 @@ async function main(): Promise<void> {
     console.log(`${TAG}   ${category.padEnd(16)} ${String(entry.units).padStart(7)}  ${formatBytes(entry.bytes)}`);
   }
 
-  if (withChecksums > 0) {
+  if (unhashed.length === 0) {
     const allGroups = new Set(allDuplicates.map((d) => d.checksum)).size;
     const groups = new Set(duplicates.map((d) => d.checksum)).size;
     console.log(
@@ -812,8 +823,9 @@ async function main(): Promise<void> {
   console.log(
     PREFIX
       ? `${TAG} wrote ${FULL_PATH} (${orphans.length} unaccounted under ${PREFIX}).`
-      : `${TAG} wrote ${REPORT_PATH} (${report.length} findings), ${DUPLICATES_PATH} ` +
-        `(${duplicates.length} copies) and ${FULL_PATH} (full accounting).`,
+      : `${TAG} wrote ${REPORT_PATH} (${report.length} findings)` +
+        (unhashed.length === 0 ? `, ${DUPLICATES_PATH} (${duplicates.length} copies)` : '') +
+        ` and ${FULL_PATH} (full accounting).`,
   );
   console.log(`${TAG} Advisory only — nothing here deletes anything. Review before acting (ADR 0008).`);
 }

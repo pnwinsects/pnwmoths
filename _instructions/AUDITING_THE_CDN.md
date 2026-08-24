@@ -18,8 +18,10 @@ Background and rationale: [ADR 0036](../docs/adr/0036-cdn-inventory-by-accountab
   you see what became unaccounted for since the last audit.
 - **`data/cdn-duplicates-report.csv`** — committed. Images the zone holds more than one copy of,
   where at least one copy is unaccounted for. Commit it with the findings report.
-- **`var/cdn-inventory-full.csv`**, **`var/cdn-duplicates-full.csv`** — local scratch. Every object with what accounts for it. Use it
-  to answer one-off questions; it is far too big and too churny to commit.
+- **`var/cdn-inventory-full.csv`** — local scratch. Every object with what accounts for it. Use
+  it to answer one-off questions; it is far too big and too churny to commit.
+- **`var/cdn-duplicates-full.csv`** — local scratch. Every duplicate group, including the
+  thousands with nothing to decide that the committed report filters out.
 - **`var/cdn-listing.csv`**, **`var/cdn-site-manifest.json`** — local scratch. The raw listing, so
   you can re-run the classification without listing the zone again.
 - **Nothing on the CDN.** The audit only reads.
@@ -87,7 +89,7 @@ Each group is contiguous in the file. A group holding one live copy and one orph
 leftover, and its orphan is the one class of unaccounted object you can retire without asking
 whether anything is lost — the bytes are still being served from the other path.
 
-```
+```text
 xestia-c/Xestia c-nigrum-A-D.jpg          ≡  xestia-c-nigrum/Xestia c-nigrum-A-D.jpg
 species-tiles/protorthodes-rufula/A-D…    ≡  species-tiles/trichopolia-rufula/A-D…
 key-images/Blue copy.webp                 ≡  key-images/Blue.webp
@@ -111,9 +113,10 @@ to confirm a finding is resolved on paper:
 USE_CACHE=1 npm run cdn:inventory
 ```
 
-A cached listing from before checksums were recorded cannot answer the duplicate question, so a
-run off one leaves `data/cdn-duplicates-report.csv` alone and says so rather than reporting zero
-duplicates.
+A listing that is missing any object's checksum cannot answer the duplicate question, so a run
+off one leaves `data/cdn-duplicates-report.csv` alone and says so — rather than writing a report
+whose missing groups would read as "somebody cleaned these up". A cached listing from before the
+checksum column is the usual reason.
 
 To look at one corner of the zone instead of all of it (this leaves the committed report alone):
 
