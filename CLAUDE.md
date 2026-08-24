@@ -38,7 +38,7 @@ Implementation patterns, constraints, and gotchas from the high-res photo pipeli
 - **Occurrence data loads async from per-species Parquet** (Snappy compression, read by hyparquet); it is never inlined and is excluded from the Pagefind index.
 - **`pathPrefix` is conditional on `process.env.GITHUB_PAGES`** — `/` for production, `/pnwmoths/` for GitHub Pages staging. Never hardcode `/pnwmoths/`.
 - **`CDN_BASE_URL` is a hard-coded public constant** in `eleventy.config.ts` — not a secret, not an env var.
-- **Data mutations are additive-only and idempotent** — district write-back and CDN migrations never overwrite curator-entered values; disagreements go to advisory reports, never build failures.
+- **Data mutations are additive-only and idempotent** — district write-back and CDN migrations never overwrite curator-entered values; disagreements go to advisory reports, never build failures. Every advisory report is listed at the unlinked `/curation/` index, driven by the manifest in [`src/_data/curationReports.ts`](src/_data/curationReports.ts) — **a new report means a new entry there**, or nobody can reach it ([ADR 0037](docs/adr/0037-curation-reports-published-unlinked.md)).
 
 See [docs/lessons-learned.md](docs/lessons-learned.md) for the full set of build-pipeline / DuckDB / Lit gotchas.
 

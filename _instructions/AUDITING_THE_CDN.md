@@ -18,6 +18,9 @@ Background and rationale: [ADR 0036](../docs/adr/0036-cdn-inventory-by-accountab
   you see what became unaccounted for since the last audit.
 - **`data/cdn-duplicates-report.csv`** — committed. Images the zone holds more than one copy of,
   where at least one copy is unaccounted for. Commit it with the findings report.
+
+  Both reports are republished to the live site at `/curation/` on the next deploy, so the curator
+  can read them without a checkout. That page is unlinked — send the URL when you want an answer.
 - **`var/cdn-inventory-full.csv`** — local scratch. Every object with what accounts for it. Use
   it to answer one-off questions; it is far too big and too churny to commit.
 - **`var/cdn-duplicates-full.csv`** — local scratch. Every duplicate group, including the

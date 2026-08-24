@@ -2,6 +2,13 @@
 
 Source files for the pnwmoths static build pipeline. CSV and JSON files are the authoritative source; Parquet files are derived at build time.
 
+Several files here are **advisory reports** rather than inputs — generated output that states a
+disagreement or a gap for a human to judge, which nothing in the build reads back. They are all
+published on the built site at **`/curation/`**, an unlinked index that says what question each
+one answers and when it was regenerated. That page is the list; the table below is the schema.
+See [ADR 0037](../docs/adr/0037-curation-reports-published-unlinked.md), and add new reports to
+[`src/_data/curationReports.ts`](../src/_data/curationReports.ts).
+
 ## Entity Relationship Diagram
 
 ```mermaid
