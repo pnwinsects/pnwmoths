@@ -1,0 +1,28 @@
+{#- One report on /curation/. Expects `report` in context — a CurationReport from
+   src/_data/curationReports.ts — and is included from inside a {% for %} there.
+
+   `question` and `body` are trusted authored strings from that manifest, not data, which
+   is why `body` passes through `| safe`: it carries <code> spans naming columns. -#}
+<section class="curation-report" id="{{ report.id }}">
+  <h3><a href="#{{ report.id }}">{{ report.title }}</a></h3>
+
+  <p class="curation-question"><strong>{{ report.question }}</strong></p>
+
+  <p>{{ report.body | safe }}</p>
+
+  <p class="curation-regenerated"><em>Regenerated:</em> {{ report.regenerated | safe }}</p>
+
+  <ul class="curation-files">
+    {%- for file in report.files %}
+    <li><a href="{{ file.href | url }}" download>{{ file.label }}</a></li>
+    {%- endfor %}
+  </ul>
+
+  {%- if report.see.length %}
+  <p class="curation-see">Background:
+    {%- for ref in report.see %}
+    <a href="{% if ref.url.startsWith('http') %}{{ ref.url }}{% else %}{{ repoUrl }}/blob/main/{{ ref.url }}{% endif %}">{{ ref.label }}</a>{% if not loop.last %} ·{% endif %}
+    {%- endfor %}
+  </p>
+  {%- endif %}
+</section>

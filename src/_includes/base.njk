@@ -27,6 +27,12 @@
   {%- endif -%}
   {%- set pageUrl = page.url | url | absoluteUrl -%}
   <meta name="description" content="{{ pageDescription }}">
+  {#- Opt-in crawler directive. Only the unlinked internal pages set it (/curation/);
+     omitting the tag entirely is the correct default — an absent robots meta means
+     "index, follow", so there is nothing to state on a public page. -#}
+  {%- if robots %}
+  <meta name="robots" content="{{ robots }}">
+  {%- endif %}
   <link rel="canonical" href="{{ pageUrl }}">
   <meta property="og:site_name" content="{{ siteName }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">

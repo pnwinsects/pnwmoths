@@ -181,3 +181,24 @@ test('every page rendered through base.njk supplies its own description', () => 
       '`description:` in its front matter (issue #198)',
   );
 });
+
+// --- robots directive (issue #332) -----------------------------------------
+// An absent robots meta already means "index, follow", so the tag must stay opt-in:
+// emitting `content=""` or a hardcoded default on every page would be a site-wide
+// crawler directive introduced by accident.
+
+test('base.njk: emits a robots meta only for pages that ask for one', () => {
+  assert.match(layout, /\{%-? if robots %\}/);
+  assert.match(layout, /<meta name="robots" content="\{\{ robots \}\}">/);
+});
+
+test('base.njk: only the unlinked internal pages set robots', () => {
+  const setters = pageTemplates(resolve('src'))
+    .filter((path) => /^\s*robots:/m.test(readFileSync(path, 'utf8')))
+    .map((path) => path.replace(`${resolve('.')}/`, ''));
+  assert.deepEqual(
+    setters,
+    ['src/curation/index.njk'],
+    'a page started setting `robots:` — that is a crawler directive, so it needs a reason',
+  );
+});

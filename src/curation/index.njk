@@ -1,0 +1,62 @@
+---
+layout: base.njk
+title: Curation Reports — PNW Moths
+permalink: /curation/index.html
+eleventyExcludeFromCollections: true
+robots: noindex, nofollow
+description: "Index of the advisory reports the PNW Moths build produces for curatorial review."
+---
+{#- Unlinked internal page (issue #332), the same shape as /analytics/: absent from the
+   nav and the footer, `robots: noindex` above, and the whole body carries
+   data-pagefind-ignore so it contributes nothing to site search. It is reached by
+   bookmark, by the people who need it.
+
+   Everything below is driven by src/_data/curationReports.ts. Do not hand-write a
+   report into this file — the manifest is what the copy step reads too, and a report
+   that exists only here would link a file nothing copies. -#}
+<div data-pagefind-ignore>
+
+<h1>Curation Reports</h1>
+
+<p>Every report the build produces for a human to judge, in one place. They are all
+<strong>advisory</strong>: each one states a disagreement or a gap and stops there. Nothing in
+the build reads them back, none of them can fail a build, and none of them causes anything to be
+changed or deleted. Acting on a report is always somebody's decision.</p>
+
+<p>This page is not linked from anywhere on the site and is not indexed by search — it is a
+working page for the people maintaining the catalogue.</p>
+
+<p>Rulings made in response to these reports belong in the
+<a href="{{ repoUrl }}/blob/main/docs/curation-log.md">curation log</a>. Questions still waiting on
+the curator are labelled <code>curation</code>
+<a href="{{ repoUrl }}/issues?q=is%3Aissue+is%3Aopen+label%3Acuration">in the issue tracker</a>.</p>
+
+{%- set curatorReports = curationReports | selectattr("audience", "equalto", "curation") -%}
+{%- set engineeringReports = curationReports | selectattr("audience", "equalto", "engineering") -%}
+
+<h2 id="for-the-curator">For the curator</h2>
+
+<p>These ask questions only someone who knows the moths and the collection can answer — which
+species a photograph belongs to, whether two names are the same animal, whether a gap is real.</p>
+
+{% for report in curatorReports %}{% include "curation-report.njk" %}{% endfor %}
+
+<h2 id="data-quality">Data quality</h2>
+
+<p>These are for whoever is maintaining the data. They compare two fallible sources against each
+other — a typed county against a coordinate, a record against a schema — and report where the two
+disagree, without preferring either.</p>
+
+{% for report in engineeringReports %}{% include "curation-report.njk" %}{% endfor %}
+
+<h2 id="reading-these-files">Reading these files</h2>
+
+<p>Every report is a plain CSV or JSON file. CSVs open directly in Excel, Numbers or Google
+Sheets; a few are large enough that a spreadsheet is the only comfortable way to read them. The
+files are regenerated as described above and replaced wholesale each time, so a copy you have
+downloaded is a snapshot, not a live view.</p>
+
+<p>The columns of each underlying data file are documented in
+<a href="{{ repoUrl }}/blob/main/data/README.md">data/README.md</a>.</p>
+
+</div>

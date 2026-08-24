@@ -973,6 +973,48 @@ pnwm-occurrence-popup .pnwm-occ-note {
   border-radius: 2px;
 }
 
+/* --- Curation reports (/curation/, issue #332) --- */
+/* An unlinked internal index. Each report is a short block: a bold question, a
+   paragraph, then its files. The card border is what separates one report from the
+   next when a dozen of them stack up — headings alone read as one long page. */
+.curation-report {
+  border-left: 3px solid var(--pico-muted-border-color);
+  padding-left: 1rem;
+  margin-bottom: 2.5rem;
+}
+.curation-report h3 {
+  margin-bottom: 0.5rem;
+}
+/* The heading is its own anchor, so the URL of one report can be pasted into an
+   issue. Underlining every one of them would make the page look like a link farm. */
+.curation-report h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.curation-report h3 a:hover,
+.curation-report h3 a:focus-visible {
+  text-decoration: underline;
+}
+.curation-question {
+  margin-bottom: 0.5rem;
+}
+.curation-regenerated,
+.curation-see {
+  font-size: 0.9em;
+  color: var(--pico-muted-color);
+}
+.curation-files {
+  margin-bottom: 0.5rem;
+}
+/* The download is the point of each block, so it has to read as a link. Wrapping the
+   filename in <code> inside the <a> did not: Pico's code styling wins on colour and
+   its background box swallows the underline, leaving the most important element on
+   the page looking like inert monospace. Monospace comes from the class instead. */
+.curation-files a {
+  font-family: var(--pico-font-family-monospace);
+  font-size: 0.9em;
+}
+
 /* --- Reduced motion --- */
 /* Honor the OS "reduce motion" setting: neutralize transitions, animations, and
    smooth scrolling. Shadow-DOM components carry their own copy of this guard
