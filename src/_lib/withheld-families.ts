@@ -47,7 +47,7 @@ export function loadWithheldFamilies(csvPath: string = DEFAULT_CSV_PATH): Set<st
  * @param family Family name from a species row (may be null/undefined for sparse data).
  * @param withheld Set returned by loadWithheldFamilies().
  */
-export function isWithheld(family: string | null | undefined, withheld: Set<string>): boolean {
+export function isWithheld(family: string | null | undefined, withheld: ReadonlySet<string>): boolean {
   return family != null && withheld.has(family.trim().toLowerCase());
 }
 
@@ -74,7 +74,7 @@ export function isUnclassifiedFamily(family: string | null | undefined): boolean
  */
 export function isWithheldOrUnclassified(
   family: string | null | undefined,
-  withheld: Set<string>,
+  withheld: ReadonlySet<string>,
 ): boolean {
   return isUnclassifiedFamily(family) || isWithheld(family, withheld);
 }
