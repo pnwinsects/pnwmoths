@@ -48,6 +48,14 @@ export interface SurveyOptions {
 export interface Survey {
   /** Every object reached, with its stored size. */
   files: Map<string, number>;
+  /**
+   * SHA256 of each object, as the storage API reports it (uppercase hex).
+   *
+   * The listing carries this for free — it is in the same response as the size —
+   * which is what makes byte-identical duplicates findable without downloading
+   * anything. An object the API reports without one is simply absent here.
+   */
+  checksums: Map<string, string>;
   /** Directories `descend` refused, with a trailing slash, in discovery order. */
   pruned: string[];
 }
@@ -74,6 +82,8 @@ interface BunnyEntry {
   ObjectName: string;
   IsDirectory: boolean;
   Length: number;
+  /** Uppercase SHA256 hex. Present on stored objects; absent on directories. */
+  Checksum?: string | null;
 }
 
 const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms));
@@ -157,6 +167,7 @@ export function createBunnyStorage(config: BunnyStorageConfig): BunnyStorage {
   const survey = async (prefix: string, options: SurveyOptions = {}): Promise<Survey> => {
     const { concurrency = 1, descend } = options;
     const files = new Map<string, number>();
+    const checksums = new Map<string, string>();
     const pruned: string[] = [];
     // Keys are built by concatenation, so a prefix that is not a directory would
     // silently mint `speciesabagrotis-apposita/…`. The zone root is the one
@@ -174,12 +185,14 @@ export function createBunnyStorage(config: BunnyStorageConfig): BunnyStorage {
             if (descend && !descend(child)) pruned.push(child);
             else frontier.push(child);
           } else {
-            files.set(`${dir}${entry.ObjectName}`, entry.Length);
+            const key = `${dir}${entry.ObjectName}`;
+            files.set(key, entry.Length);
+            if (entry.Checksum) checksums.set(key, entry.Checksum);
           }
         }
       });
     }
-    return { files, pruned };
+    return { files, checksums, pruned };
   };
 
   const walk = async (prefix: string): Promise<Map<string, number>> =>

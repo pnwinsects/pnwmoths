@@ -60,12 +60,23 @@ Six properties are load-bearing:
    summary line — 446 MB of deploy churn is worth knowing — but keeping them out of the report is
    what makes 901 findings legible instead of 100,000.
 
-5. **Advisory, never a gate.** It exits 0 whatever it finds. It needs the network, and the build is
+5. **Duplicates are found by checksum, and only for images.** The storage listing returns a
+   SHA256 for every object in the same response as its size, so byte-identical copies are
+   findable without downloading anything — the listing was already being fetched and the field
+   discarded. This is what makes an orphan decidable: a copy that is byte-identical to one the
+   site still serves can be retired without anyone asking what is lost. Two scoping rules keep
+   the artifact readable. Only image bytes are compared — a `.dzi` descriptor is determined
+   entirely by the source's pixel dimensions, so unrelated specimens shot at the same size have
+   identical descriptors, and 824 of the zone's 1,187 duplicate groups are exactly that. And
+   only groups holding an unaccounted copy are committed, because the rest is the zone agreeing
+   with itself. The unfiltered list stays in `var/`.
+
+6. **Advisory, never a gate.** It exits 0 whatever it finds. It needs the network, and the build is
    offline by construction, so it is not in `npm run build` — the district audits set the
    precedent ([0014](0014-districts-offline-writeback.md)), and a network sweep that can fail a
    build on a blip is the thing [0027](0027-no-link-check-cache.md) already refused.
 
-6. **It never deletes.** What to do about an orphan is a curator's call and the zone holds the
+7. **It never deletes.** What to do about an orphan is a curator's call and the zone holds the
    originals. The script reads; the runbook's cleanup steps are manual and deliberate.
 
 The expensive half is cached: `var/cdn-listing.csv` and `var/cdn-site-manifest.json` let
@@ -77,6 +88,17 @@ to keep out of diffs.
 
 ## Consequences
 
+- Renames are legible for the first time. 326 image objects are stored more than once; 272 of
+  those copies are already recorded in `data/cdn-retired-images.csv`, which says the rename
+  bookkeeping mostly works, and the 34 that are not are now listed. They are every historical
+  fix in miniature: a genus rename (`protorthodes-*` → `trichopolia-*`), a spelling correction
+  (`sympistis-chionanti` → `chionanthi`), two slugs truncated at a hyphen inside the epithet
+  (`xestia-c` for `xestia-c-nigrum`, `autographa-v` for `autographa-v-alba` — the exact failure
+  [0010](0010-slug-foreign-key.md) warns about), a slug with a stray space, a filename with
+  underscores where the catalogue uses spaces, a resolved placeholder (`mniotype-species` →
+  `mniotype-pallescens`), and three `… copy.webp` files from someone's file manager.
+- Size is not a substitute for a checksum, by a factor of two: 523 photo objects share a size
+  with another object, and only 223 of them are actually byte-identical.
 - "What is in the zone, and what accounts for it" is one command. The first run: 146,958 units,
   901 findings — 209 stale site paths, 498 photos with no row, 83 rows with no photo, 74 tile
   pyramids for photos the manifest never confirmed, 34 unreferenced key illustrations, and one

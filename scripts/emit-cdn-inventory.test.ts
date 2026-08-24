@@ -7,13 +7,16 @@ import { fileURLToPath } from 'node:url';
 import {
   buildReport,
   classify,
+  findDuplicates,
   findMissing,
+  isImage,
   isPyramidDir,
   loadSources,
   plateSlugOf,
   speciesSlugOf,
   summarize,
   tilePairOf,
+  withAnOrphan,
   type Sources,
   type Unit,
 } from './emit-cdn-inventory.ts';
@@ -38,8 +41,9 @@ function sources(overrides: Partial<Sources> = {}): Sources {
   };
 }
 
-const object = (path: string, bytes = 1): Unit => ({ path, kind: 'object', bytes });
-const pyramid = (path: string): Unit => ({ path, kind: 'tile-pyramid', bytes: null });
+const object = (path: string, bytes = 1, checksum: string | null = null): Unit =>
+  ({ path, kind: 'object', bytes, checksum });
+const pyramid = (path: string): Unit => ({ path, kind: 'tile-pyramid', bytes: null, checksum: null });
 
 // ---------------------------------------------------------------------------
 // Path shapes
@@ -277,6 +281,87 @@ describe('findMissing', () => {
     });
     const units = [object('a-b/x.jpg'), object('derived/a-b/x@320h.webp'), object('glossary/v.jpg'), object('key-images/k.webp')];
     assert.deepEqual(findMissing(units, s), []);
+  });
+});
+
+// The renames copied every photo to the new slug and left the old one in place,
+// because nothing here deletes. This is what tells an orphan that is a leftover
+// from one that is the only copy of something.
+describe('findDuplicates', () => {
+  const A = 'AAAA1111';
+  const B = 'BBBB2222';
+
+  it('groups copies by checksum, not by path', () => {
+    // The specimen letter changed in the re-upload, so no path comparison
+    // relates these two — this is the case the checksum exists for.
+    const units = [
+      object('macaria-plumosata/Speranza plumosata-D-D.jpg', 10, A),
+      object('speranza-plumosata/Speranza plumosata-A-D.jpg', 10, A),
+      object('somewhere/else.jpg', 10, B),
+    ];
+    const rows = findDuplicates(units, sources());
+    assert.deepEqual(rows.map((r) => r.path), [
+      'macaria-plumosata/Speranza plumosata-D-D.jpg',
+      'speranza-plumosata/Speranza plumosata-A-D.jpg',
+    ]);
+    assert.ok(rows.every((r) => r.checksum === A));
+  });
+
+  it('does not treat a shared size as a duplicate', () => {
+    // 523 photo objects share a size with another; JPEG sizes collide.
+    const units = [object('a-b/x.jpg', 143269, A), object('c-d/y.jpg', 143269, B)];
+    assert.deepEqual(findDuplicates(units, sources()), []);
+  });
+
+  it('says which copy the retired list already explains', () => {
+    const s = sources({ retired: new Map([['capsula-oblonga/x.jpg', 'globia-oblonga/x.jpg']]) });
+    const rows = findDuplicates(
+      [object('capsula-oblonga/x.jpg', 10, A), object('globia-oblonga/x.jpg', 10, A)],
+      s,
+    );
+    assert.deepEqual(rows.map((r) => r.note), ['superseded', '']);
+  });
+
+  it('records what accounts for each copy, so a live one is distinguishable', () => {
+    const s = sources({ photos: new Set(['globia-oblonga/x.jpg']) });
+    const rows = findDuplicates(
+      [object('capsula-oblonga/x.jpg', 10, A), object('globia-oblonga/x.jpg', 10, A)],
+      s,
+    );
+    assert.deepEqual(rows.map((r) => r.accounted_by), ['unaccounted', 'photo']);
+  });
+
+  it('reports only image bytes, where a shared checksum means something', () => {
+    // Two specimens photographed at the same pixel size produce byte-identical
+    // .dzi XML and have nothing to do with each other — 824 of the zone's
+    // duplicate groups are that. Same for a page two builds emit identically.
+    const units = [
+      object('species-tiles/protorthodes-incincta/C-D.dzi', 10, A),
+      object('species-tiles/malacosoma-constrictum/B-D.dzi', 10, A),
+    ];
+    assert.deepEqual(withAnOrphan(findDuplicates(units, sources())), []);
+    assert.equal(isImage('a/b.dzi'), false);
+    assert.equal(isImage('a/b.html'), false);
+    assert.equal(isImage('a/b.JPG'), true);
+    assert.equal(isImage('species-tiles/a/A-D_thumbnail.webp'), true);
+  });
+
+  it('keeps a whole group once any copy in it is an orphan', () => {
+    const s = sources({ photos: new Set(['xestia-c-nigrum/x.jpg']) });
+    const rows = withAnOrphan(findDuplicates(
+      [object('xestia-c/x.jpg', 10, A), object('xestia-c-nigrum/x.jpg', 10, A), object('other/z.jpg', 5, B)],
+      s,
+    ));
+    // Sorted by path within the group, so which copy comes first is incidental —
+    // `xestia-c-nigrum/` precedes `xestia-c/` because '-' sorts before '/'.
+    assert.deepEqual(rows.map((r) => r.path), ['xestia-c-nigrum/x.jpg', 'xestia-c/x.jpg']);
+    assert.deepEqual(rows.map((r) => r.accounted_by), ['photo', 'unaccounted']);
+  });
+
+  it('ignores units with no checksum, rather than grouping them together', () => {
+    // A pyramid is never listed, so it has no checksum. Two of them are not
+    // "the same object stored twice"; treating null as a key would say they are.
+    assert.deepEqual(findDuplicates([pyramid('species-tiles/a/A-D_files/'), pyramid('species-tiles/b/A-D_files/')], sources()), []);
   });
 });
 
