@@ -669,6 +669,8 @@ const UNDECLARED_BY_DESIGN: Record<string, string> = {
     'run report on CDN objects nothing accounts for — slugs absent from species.csv are its subject',
   'data/cdn-duplicates-report.csv':
     'run report pairing an orphan CDN object with its live twin — the orphan side is a slug that no longer exists',
+  'data/hidden-images-report.csv':
+    'run report on images.csv rows that reach no page — every slug in it is already checked as images.csv',
   'data/plates.json': 'its `slug` is a plate slug, not a species slug',
 };
 

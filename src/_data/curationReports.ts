@@ -90,6 +90,20 @@ function offSite(href: string, label: string): ReportFile {
  */
 const reports: CurationReport[] = [
   {
+    id: 'hidden-images',
+    title: 'Hidden photographs: catalogued images that no page displays',
+    audience: 'curation',
+    question: 'Which photographs are catalogued and on the CDN but appear on no page, and why?',
+    body: 'One row per catalogued photograph that reaches no page, with a direct link to the image so it can be looked at without a login. Read <code>cause</code> first, and read the file top-down — it is sorted so the rows needing a ruling come first. <code>hidden-by-tiles</code> is the one the curator asked for: the species has high-resolution tiles, and because the page shows the tiles <em>instead of</em> the catalogued photographs, a specimen no tile covers stopped being visible — this is the <em>Phyllodesma coturnix</em> case. <code>unmatchable-by-tiles</code> is the same situation for a row carrying no specimen or view to compare. <code>family-withheld</code> and <code>species-unpublished</code> are whole species that build no page at all. <code>superseded-by-tiles</code>, the bulk of the file, is the uninteresting case kept for completeness: the same specimen and view <em>is</em> published, as a better tile. <code>filename_name_differs</code> flags a photograph filed under one name whose filename carries another — the trace of a rename or a merge, and the fastest way to the interesting rows.',
+    regenerated: 'Manually: <code>npm run report:hidden-images</code>. Offline and cheap, from the committed data. Its <code>cdn_status</code> column is only as fresh as the CDN inventory beside it, so run <code>npm run cdn:inventory</code> first if that column matters.',
+    files: [fromRepo('data/hidden-images-report.csv')],
+    see: [
+      { label: 'Issue #299', url: 'https://github.com/pnwinsects/pnwmoths/issues/299' },
+      { label: 'ADR 0013 — high-resolution tiles', url: 'docs/adr/0013-highres-osd-dzi.md' },
+      { label: 'ADR 0015 — data-driven gating', url: 'docs/adr/0015-data-driven-gating.md' },
+    ],
+  },
+  {
     id: 'cdn-inventory',
     title: 'CDN inventory: objects nothing accounts for',
     audience: 'curation',

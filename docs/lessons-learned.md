@@ -441,6 +441,20 @@ cost a debugging cycle to discover.
   sidecar; keep the CSV valid. Format-check as part of the human-legibility pass, not just
   by eye.
 
+- **`images.csv` and `species-photos.json` spell the same concept differently: `dorsal`/
+  `ventral` against `D`/`V`.** Any join between a catalogued photo row and a published
+  tile has to normalise both sides. Forgetting produces ZERO matches, not an error —
+  and zero matches means "no tile covers this photograph", so the hidden-images report
+  claimed all 3,479 rows on tiled species were hidden instead of the 39 that are. It
+  read entirely plausibly. `normalizeView()` in `scripts/emit-hidden-images.ts` is the
+  one place that mapping lives; when two vocabularies describe one thing, assert on a
+  known-matching pair, because a broken comparison looks like a real finding.
+
+- **`loadWithheldFamilies()` returns LOWERCASED names; `isWithheld()` lowercases the
+  family it is given but not the set.** Hand-building `new Set(['Geometridae'])` to call
+  it matches nothing and silently un-withholds everything — the fail-open direction. Pass
+  the loader's output, or lowercase deliberately.
+
 ## Verification & process
 
 - **Replacing a script with a prose recipe inverts something.** `scripts/upload-plates.js`
