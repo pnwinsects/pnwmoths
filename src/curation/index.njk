@@ -31,15 +31,12 @@ working page for the people maintaining the catalogue.</p>
 the curator are labelled <code>curation</code>
 <a href="{{ repoUrl }}/issues?q=is%3Aissue+is%3Aopen+label%3Acuration">in the issue tracker</a>.</p>
 
-{%- set curatorReports = curationReports | selectattr("audience", "equalto", "curation") -%}
-{%- set engineeringReports = curationReports | selectattr("audience", "equalto", "engineering") -%}
-
 <h2 id="for-the-curator">For the curator</h2>
 
 <p>These ask questions only someone who knows the moths and the collection can answer — which
 species a photograph belongs to, whether two names are the same animal, whether a gap is real.</p>
 
-{% for report in curatorReports %}{% include "curation-report.njk" %}{% endfor %}
+{% for report in curationReports.curation %}{% include "curation-report.njk" %}{% endfor %}
 
 <h2 id="data-quality">Data quality</h2>
 
@@ -47,14 +44,19 @@ species a photograph belongs to, whether two names are the same animal, whether 
 other — a typed county against a coordinate, a record against a schema — and report where the two
 disagree, without preferring either.</p>
 
-{% for report in engineeringReports %}{% include "curation-report.njk" %}{% endfor %}
+{% for report in curationReports.engineering %}{% include "curation-report.njk" %}{% endfor %}
 
 <h2 id="reading-these-files">Reading these files</h2>
 
-<p>Every report is a plain CSV or JSON file. CSVs open directly in Excel, Numbers or Google
+<p>Almost every report is a plain CSV or JSON file. CSVs open directly in Excel, Numbers or Google
 Sheets; a few are large enough that a spreadsheet is the only comfortable way to read them. The
 files are regenerated as described above and replaced wholesale each time, so a copy you have
 downloaded is a snapshot, not a live view.</p>
+
+<p>One report — link rot — has no file. Its findings go to a GitHub issue that closes itself when
+the links recover, because a link that fails once from a build server has usually not failed at
+all, and a file full of those gets read once and never again. What is listed there has failed
+twice, a week apart.</p>
 
 <p>The columns of each underlying data file are documented in
 <a href="{{ repoUrl }}/blob/main/data/README.md">data/README.md</a>.</p>

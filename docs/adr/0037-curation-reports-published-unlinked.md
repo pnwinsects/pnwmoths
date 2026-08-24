@@ -6,11 +6,13 @@
 
 This project produces a lot of advisory reports and almost nobody can read them.
 
-Ten of them exist. Two are written into `_site/` by build steps — `species-audit.csv` and
+Ten exist as files. Two are written into `_site/` by build steps — `species-audit.csv` and
 `records-district-audit.csv` — and both scripts describe themselves in a header comment as
 emitting an "UNLINKED diagnostic CSV … referenced by nothing — reachable only by direct URL."
 That was accurate and it was the whole problem: a URL nobody has been told is a URL nobody
-visits. The other eight live only in `data/`, so reaching them requires a git checkout.
+visits. The other eight live only in `data/`, so reaching them requires a git checkout. An
+eleventh, link rot, is the exception that proves the rule: it has a good destination already
+([0028](0028-link-rot-reporting.md)) and it is the one anybody actually reads.
 
 The curator does not have a checkout, and will not. He is the only person who can answer most of
 what these reports ask — which species a photograph belongs to, whether two names are the same
@@ -38,6 +40,14 @@ files the same array names. Each file's link `href` is *derived* from its source
 restated, so the copy destination and the link are the same string by construction. A report
 listed but not copied is a 404; a report copied but not listed is a file nobody knows exists.
 Neither is reachable from this shape.
+
+**A report's destination is whatever fits it; the index lists it either way.** Ten reports are
+files. Link rot is not: [0028](0028-link-rot-reporting.md) sends it to a self-closing GitHub issue
+on a two-strike rule, precisely because the raw checker output is the noisy artifact that rule
+exists to filter, and because a file has no owner. Publishing that output here would undo it. So
+the manifest carries an off-site destination for that one entry and the page links out. The point
+of the index is that a reader can see what is checked — a `/curation/` with no link-rot entry
+would say, by omission, that nothing checks the links.
 
 **It is an index, not a viewer.** The page links raw CSV and JSON. Rendering 95,000 rows of
 `legacy-rejoin-report.csv` as HTML would be a worse spreadsheet than a spreadsheet, and the
@@ -91,7 +101,11 @@ message.
 - **Leave the reports in the repo and keep writing issues.** This is what was already happening.
   It works for findings someone has already triaged and fails completely for the ones nobody has
   looked at yet.
+- **Publish the raw `lychee` JSON as an eleventh file.** It is the artifact [0028](0028-link-rot-reporting.md)
+  was written to stop anyone reading: a single run cannot distinguish a dead link from a host that
+  refuses the build server's network, and a report carrying that noise gets closed unread. The
+  entry points at the two-strike issue instead.
 - **Compute row counts and file sizes for the page.** Useful, and cheap for the eight reports
   sourced from `data/`, but impossible at Eleventy time for the two the build emits into `_site/`
-  afterwards — a page that showed counts for eight of ten reports would read as a bug. Rows are
+  afterwards — a page that showed counts for eight of eleven reports would read as a bug. Rows are
   described in words instead.

@@ -62,6 +62,15 @@ cost a debugging cycle to discover.
   with a test that runs a real `vite.build()` over just that page and asserts the imported
   code lands in the bundle: a broken import leaves a page that renders and does nothing.
 
+- **Nunjucks' `selectattr` is not Jinja's: it takes a test name and arguments and then
+  ignores them.** `selectattr('audience', 'equalto', 'curation')` filters on the
+  *truthiness* of `audience` alone, so it returns every item that has one — the whole
+  list. It throws nothing and renders cleanly. On `/curation/` this put all eleven
+  reports under both section headings, and the template read exactly as intended; the
+  count is the only tell. Group in the data layer (`groupByAudience()` in
+  `src/_data/curationReports.ts`) rather than filtering in a template, and assert on
+  **rendered output** — a test that greps template source cannot see this class of bug at all.
+
 ## Analytics from CDN logs
 
 - **The Bunny access log already contains query strings.** `entry.path` is the full

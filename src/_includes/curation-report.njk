@@ -14,7 +14,9 @@
 
   <ul class="curation-files">
     {%- for file in report.files %}
-    <li><a href="{{ file.href | url }}" download>{{ file.label }}</a></li>
+    {#- `download` and `| url` are for files this build ships. An off-site destination
+       (the link-rot issue) is already an absolute URL and must not take either. -#}
+    <li>{% if file.external %}<a href="{{ file.href }}">{{ file.label }}</a>{% else %}<a href="{{ file.href | url }}" download>{{ file.label }}</a>{% endif %}</li>
     {%- endfor %}
   </ul>
 

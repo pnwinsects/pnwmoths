@@ -9,7 +9,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { curationReports } from '../_data/curationReports.ts';
+import nunjucks from 'nunjucks';
+import { curationReports, groupByAudience } from '../_data/curationReports.ts';
 
 const page = readFileSync(resolve('src/curation/index.njk'), 'utf8');
 const partial = readFileSync(resolve('src/_includes/curation-report.njk'), 'utf8');
@@ -69,11 +70,60 @@ test('the page renders the manifest rather than hand-listing reports', () => {
   }
 });
 
-test('both audience sections are rendered, curator-facing first', () => {
-  const curator = page.indexOf('"curation"');
-  const engineering = page.indexOf('"engineering"');
-  assert.ok(curator !== -1 && engineering !== -1, 'both audience filters must be present');
-  assert.ok(curator < engineering, 'the curator section comes first');
+// --- rendered output -------------------------------------------------------
+// These render the real template with the real manifest. Asserting on template
+// SOURCE could not catch the bug that made them necessary: Nunjucks' selectattr
+// accepts a test name and arguments and then ignores them, so both sections
+// silently listed every report. The template looked exactly right.
+
+/** The page body, rendered with the real manifest (layout and front matter aside). */
+function render(): string {
+  const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(resolve('src/_includes')));
+  env.addFilter('url', (value: string) => value);
+  const body = page.replace(/^---\n[\s\S]*?\n---\n/, '');
+  return env.renderString(body, {
+    curationReports: groupByAudience(),
+    repoUrl: 'https://github.com/pnwinsects/pnwmoths',
+  });
+}
+
+/** Section ids in document order, split at the "Data quality" heading. */
+function renderedSections(): { curation: string[]; engineering: string[] } {
+  const html = render();
+  const split = html.indexOf('id="data-quality"');
+  assert.ok(split !== -1, 'the page must have a data-quality heading');
+  const ids = (part: string): string[] =>
+    [...part.matchAll(/class="curation-report" id="([^"]+)"/g)].map((m) => m[1] as string);
+  return { curation: ids(html.slice(0, split)), engineering: ids(html.slice(split)) };
+}
+
+test('each report is rendered exactly once, in its own section', () => {
+  const rendered = renderedSections();
+  assert.deepEqual(rendered.curation, groupByAudience().curation.map((r) => r.id));
+  assert.deepEqual(rendered.engineering, groupByAudience().engineering.map((r) => r.id));
+});
+
+test('every report in the manifest reaches the page', () => {
+  const rendered = renderedSections();
+  assert.deepEqual(
+    [...rendered.curation, ...rendered.engineering].sort(),
+    curationReports.map((r) => r.id).sort(),
+  );
+});
+
+test('a report appears in one section only', () => {
+  const rendered = renderedSections();
+  const both = rendered.curation.filter((id) => rendered.engineering.includes(id));
+  assert.deepEqual(both, [], 'these reports were rendered in both sections');
+});
+
+test('the rendered page links every file the manifest names', () => {
+  const html = render();
+  for (const report of curationReports) {
+    for (const file of report.files) {
+      assert.ok(html.includes(`href="${file.href}"`), `${report.id} does not link ${file.href}`);
+    }
+  }
 });
 
 test('report links carry the pathPrefix filter', () => {
@@ -81,4 +131,20 @@ test('report links carry the pathPrefix filter', () => {
   // assets and need `| url` — the GitHub Pages staging build serves them under
   // /pnwmoths/. See docs/lessons-learned.md.
   assert.match(partial, /href="\{\{ file\.href \| url \}\}"/);
+});
+
+test('off-site destinations are linked raw, without pathPrefix or download', () => {
+  // `| url` on an absolute URL would prepend /pnwmoths/ to it on the staging build,
+  // and `download` on a cross-origin link is ignored by every browser anyway.
+  assert.match(partial, /\{% if file\.external %\}<a href="\{\{ file\.href \}\}">/);
+});
+
+test('every off-site destination is an absolute URL', () => {
+  for (const report of curationReports) {
+    for (const file of report.files) {
+      if (!file.external) continue;
+      assert.match(file.href, /^https:\/\//, `${report.id} marks a non-absolute href external`);
+      assert.equal(file.source, null, `${report.id}: an external destination is not a file to copy`);
+    }
+  }
 });

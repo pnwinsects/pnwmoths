@@ -18,17 +18,23 @@ import { basename } from 'node:path';
 /** Who a report is addressed to. Drives the ordering and the two sections on the page. */
 export type ReportAudience = 'curation' | 'engineering';
 
-/** One downloadable file belonging to a report. */
+/** One place a report's findings can be read. Usually a file; occasionally not. */
 export interface ReportFile {
   /**
    * Repo-relative path copied into `_site/curation/` by the build, or null when a
-   * build step already writes the file into `_site/` under its own name.
+   * build step already writes the file into `_site/` under its own name — and also
+   * null for an `external` destination, which is not a file at all.
    */
   source: string | null;
-  /** Site-absolute path, before `pathPrefix`. Derived from `source` when there is one. */
+  /**
+   * Where to read it. Site-absolute (before `pathPrefix`) unless `external`, in which
+   * case it is an off-site URL and must NOT take the `| url` filter.
+   */
   href: string;
-  /** Filename shown as the link text. */
+  /** The link text: a filename, or a description of the destination. */
   label: string;
+  /** True when `href` leaves this site. */
+  external?: boolean;
 }
 
 /** Background reading for a report — an ADR, a runbook, an issue. */
@@ -62,6 +68,14 @@ function fromRepo(source: string): ReportFile {
 /** A report file a build step already emits into `_site/`, linked where it lands. */
 function alreadyEmitted(href: string): ReportFile {
   return { source: null, href, label: basename(href) };
+}
+
+/**
+ * A report whose findings land somewhere other than a file in this build — today,
+ * only the link-rot issue. Nothing is copied; the page links out.
+ */
+function offSite(href: string, label: string): ReportFile {
+  return { source: null, href, label, external: true };
 }
 
 /**
@@ -193,6 +207,19 @@ const reports: CurationReport[] = [
     files: [fromRepo('data/records-bad-coords.csv')],
     see: [],
   },
+  {
+    id: 'link-rot',
+    title: 'Link rot: external links that have stopped working',
+    audience: 'engineering',
+    question: 'Which links out of this site are broken, and broken for real rather than for one run?',
+    body: 'The only report here that is not a file. A URL is listed only after failing <strong>two consecutive weekly runs</strong>, because a check running from a GitHub runner cannot tell a dead link from a host that refuses that network — and a report carrying that noise gets closed unread, which is the same outcome as no report at all. Single-run failures sit in a collapsed section marked as needing no action. The issue closes itself when the links recover, so no open issue means nothing is broken. <strong>Scope:</strong> this covers the ~35 links in site prose and templates. The 2,400-odd per-species reference links in <code>data/species-links.csv</code> — Moth Photographers Group, BugGuide, BAMONA — are excluded from every check because those hosts rate-limit, and a handful of institution and government hosts are excluded for the same reason the two-strike rule exists. Those go unchecked.',
+    regenerated: 'Weekly, 09:00 UTC Monday, by <code>.github/workflows/link-rot.yml</code>. The raw checker output is deliberately not published: it is the noisy artifact the two-strike rule exists to filter, and it reports to a place with no owner.',
+    files: [offSite('https://github.com/pnwinsects/pnwmoths/issues?q=is%3Aissue+label%3Alink-rot', 'the “Broken external links” issue')],
+    see: [
+      { label: 'ADR 0028 — link rot goes to a self-closing issue', url: 'docs/adr/0028-link-rot-reporting.md' },
+      { label: 'ADR 0027 — no link-check cache', url: 'docs/adr/0027-no-link-check-cache.md' },
+    ],
+  },
 ];
 
 /** Every report, curator-facing first. Consumed by src/curation/index.njk. */
@@ -216,7 +243,34 @@ export function copyPlan(): CopyInstruction[] {
     .map((file) => ({ source: file.source, dest: file.href.replace(/^\//, '') }));
 }
 
+/** The shape `curationReports` takes in a template. */
+export interface CurationReportGroups {
+  /** Every report, manifest order. */
+  all: CurationReport[];
+  /** Reports needing the curator's judgement. */
+  curation: CurationReport[];
+  /** Reports for whoever maintains the data. */
+  engineering: CurationReport[];
+}
+
+/**
+ * Group by audience HERE rather than in the template.
+ *
+ * Nunjucks' `selectattr` is not Jinja's: it accepts a test name and arguments and
+ * then ignores them, filtering on the truthiness of the attribute alone. So
+ * `selectattr('audience', 'equalto', 'curation')` returns EVERY report that has a
+ * non-empty `audience` — which is all of them. It fails silently and looks right
+ * until you count the sections. See docs/lessons-learned.md.
+ */
+export function groupByAudience(input: CurationReport[] = reports): CurationReportGroups {
+  return {
+    all: input,
+    curation: input.filter((report) => report.audience === 'curation'),
+    engineering: input.filter((report) => report.audience === 'engineering'),
+  };
+}
+
 /** Eleventy global data: `curationReports` in templates. */
-export default function (): CurationReport[] {
-  return reports;
+export default function (): CurationReportGroups {
+  return groupByAudience();
 }
