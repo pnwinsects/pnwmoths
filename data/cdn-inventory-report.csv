@@ -4,7 +4,6 @@ glossary/body_regions_collar_jpeg.jpg,object,2071524,,glossary-no-row,no row in 
 key-images/Abdomen and thorax distinct.webp,object,43846,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Abdomen striped.webp,object,201770,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Blue Hindwing.webp,object,51042,,key-image-no-row,no row in data/key-character-images.csv names this image
-key-images/Blue copy.webp,object,22712,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Discal spot hindwing present.webp,object,114658,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Eyespot absent forewing.webp,object,86602,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Eyespot absent hindwing.webp,object,96598,,key-image-no-row,no row in data/key-character-images.csv names this image
@@ -25,9 +24,7 @@ key-images/Hindwing fringe scalloped.webp,object,16714,,key-image-no-row,no row 
 key-images/Hindwing veins distinct.webp,object,21238,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Light costal stripe present.webp,object,159168,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Patagia somewhat distinct.webp,object,38840,,key-image-no-row,no row in data/key-character-images.csv names this image
-key-images/Pink copy.webp,object,23964,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Puget lowland.webp,object,81626,,key-image-no-row,no row in data/key-character-images.csv names this image
-key-images/Purple copy.webp,object,23370,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Scalloped fringe 2.webp,object,13084,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/Smooth fringe 1.webp,object,20144,,key-image-no-row,no row in data/key-character-images.csv names this image
 key-images/forewing discal spot absent.webp,object,67196,,key-image-no-row,no row in data/key-character-images.csv names this image
@@ -151,8 +148,6 @@ aseptis-ethnica/Aseptis ethnica-A-D.jpg,object,148771,aseptis-ethnica,photo-no-r
 aseptis-ethnica/Aseptis ethnica-A-V.jpg,object,150444,aseptis-ethnica,photo-no-row,no row in data/images.csv; aseptis-ethnica is published
 aseptis-fannatica/Aseptis fannatica-A-D.jpg,object,144893,aseptis-fannatica,photo-no-row,no row in data/images.csv; aseptis-fannatica is not in data/species.csv
 aseptis-fannatica/Aseptis fannatica-A-V.jpg,object,161971,aseptis-fannatica,photo-no-row,no row in data/images.csv; aseptis-fannatica is not in data/species.csv
-autographa-v/Autographa v-alba-A-D.jpg,object,137665,autographa-v,photo-no-row,no row in data/images.csv; autographa-v is not in data/species.csv
-autographa-v/Autographa v-alba-A-V.jpg,object,137286,autographa-v,photo-no-row,no row in data/images.csv; autographa-v is not in data/species.csv
 axenus-amplus/Axenus amplus-A-D.jpg,object,165295,axenus-amplus,photo-no-row,no row in data/images.csv; axenus-amplus is not in data/species.csv
 axenus-amplus/Axenus amplus-A-V.jpg,object,163194,axenus-amplus,photo-no-row,no row in data/images.csv; axenus-amplus is not in data/species.csv
 besma-quercivoraria/Besma quercivoraria-OSAC_0001081358-D.jpg,object,440201,besma-quercivoraria,photo-no-row,no row in data/images.csv; besma-quercivoraria is not in data/species.csv
@@ -165,8 +160,6 @@ caradrina-multifera/Caradrina multifera-B-D.jpg,object,136831,caradrina-multifer
 caradrina-multifera/Caradrina multifera-B-V.jpg,object,132832,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
 caradrina-multifera/Caradrina multifera-C-D.jpg,object,141356,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
 caradrina-multifera/Caradrina multifera-C-V.jpg,object,132636,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
-caripeta -divisata/Caripeta divisata-A-D.jpg,object,90731,caripeta -divisata,photo-no-row,no row in data/images.csv; caripeta -divisata is not in data/species.csv
-caripeta -divisata/Caripeta divisata-A-V.jpg,object,90282,caripeta -divisata,photo-no-row,no row in data/images.csv; caripeta -divisata is not in data/species.csv
 chesiadodes-cinerea/Chesiadodes cinerea-OSAC_0001081315-D.jpg,object,373558,chesiadodes-cinerea,photo-no-row,no row in data/images.csv; chesiadodes-cinerea is not in data/species.csv
 chesiadodes-cinerea/Chesiadodes cinerea-OSAC_0001081315-V.jpg,object,400602,chesiadodes-cinerea,photo-no-row,no row in data/images.csv; chesiadodes-cinerea is not in data/species.csv
 chlorochlamys-appellaria/Chlorochlamys appellaria-OSAC_0001081322-D.jpg,object,269987,chlorochlamys-appellaria,photo-no-row,no row in data/images.csv; chlorochlamys-appellaria is not in data/species.csv
@@ -211,7 +204,6 @@ dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081386-D.jpg,object,365776,dyss
 dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081386-V.jpg,object,361127,dysstroma-walkerata,photo-no-row,no row in data/images.csv; dysstroma-walkerata is not in data/species.csv
 dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081387-D.jpg,object,357041,dysstroma-walkerata,photo-no-row,no row in data/images.csv; dysstroma-walkerata is not in data/species.csv
 dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081387-V.jpg,object,342642,dysstroma-walkerata,photo-no-row,no row in data/images.csv; dysstroma-walkerata is not in data/species.csv
-egira-aff-curialis/Egira_aff_curialis-A-D.jpg,object,125842,egira-aff-curialis,photo-no-row,no row in data/images.csv; egira-aff-curialis is gated and gets no page
 enargia-fausta/Enargia fausta-A-D.jpg,object,117054,enargia-fausta,photo-no-row,no row in data/images.csv; enargia-fausta is published
 enargia-fausta/Enargia fausta-A-V.jpg,object,113825,enargia-fausta,photo-no-row,no row in data/images.csv; enargia-fausta is published
 eulithis-harveyata/Eulithis harveyata-A-D.jpg,object,126831,eulithis-harveyata,photo-no-row,no row in data/images.csv; eulithis-harveyata is not in data/species.csv
@@ -498,8 +490,6 @@ phigalia-plumogeraria/Phigalia plumogeraria-OSAC_0000120823-V.jpg,object,398942,
 phigalia-plumogeraria/Phigalia plumogeraria-OSAC_0000499919-D.jpg,object,211767,phigalia-plumogeraria,photo-no-row,no row in data/images.csv; phigalia-plumogeraria is gated and gets no page
 plagiomimicus-tepperi/Plagiomimicus tepperi-A-D.jpg,object,128627,plagiomimicus-tepperi,photo-no-row,no row in data/images.csv; plagiomimicus-tepperi is not in data/species.csv
 plagiomimicus-tepperi/Plagiomimicus tepperi-A-V.jpg,object,122861,plagiomimicus-tepperi,photo-no-row,no row in data/images.csv; plagiomimicus-tepperi is not in data/species.csv
-plataea-n sp/Plataea sp-A-D.jpg,object,129723,plataea-n sp,photo-no-row,no row in data/images.csv; plataea-n sp is not in data/species.csv
-plataea-n sp/Plataea sp-A-V.jpg,object,134023,plataea-n sp,photo-no-row,no row in data/images.csv; plataea-n sp is not in data/species.csv
 plataea-sp/Plataea sp-A-D.jpg,object,152494,plataea-sp,photo-no-row,no row in data/images.csv; plataea-sp is not in data/species.csv
 plataea-sp/Plataea sp-A-V.jpg,object,157149,plataea-sp,photo-no-row,no row in data/images.csv; plataea-sp is not in data/species.csv
 platarctia-parthenos/Platarctia parthenos-A-D.jpg,object,138137,platarctia-parthenos,photo-no-row,no row in data/images.csv; platarctia-parthenos is not in data/species.csv
@@ -608,10 +598,6 @@ trichodezia-californiata/Trichodezia californiata-OSAC_0001081373-D.jpg,object,3
 trichodezia-californiata/Trichodezia californiata-OSAC_0001081373-V.jpg,object,332138,trichodezia-californiata,photo-no-row,no row in data/images.csv; trichodezia-californiata is not in data/species.csv
 ufeus-hulsti/Ufeus hulsti-A-D.jpg,object,118628,ufeus-hulsti,photo-no-row,no row in data/images.csv; ufeus-hulsti is not in data/species.csv
 ufeus-hulsti/Ufeus hulsti-A-V.jpg,object,115213,ufeus-hulsti,photo-no-row,no row in data/images.csv; ufeus-hulsti is not in data/species.csv
-xestia-c/Xestia c-nigrum-A-D.jpg,object,126073,xestia-c,photo-no-row,no row in data/images.csv; xestia-c is not in data/species.csv
-xestia-c/Xestia c-nigrum-A-v.jpg,object,128523,xestia-c,photo-no-row,no row in data/images.csv; xestia-c is not in data/species.csv
-xestia-c/Xestia c-nigrum-B-D.jpg,object,131602,xestia-c,photo-no-row,no row in data/images.csv; xestia-c is not in data/species.csv
-xestia-c/Xestia c-nigrum-B-V.jpg,object,132590,xestia-c,photo-no-row,no row in data/images.csv; xestia-c is not in data/species.csv
 zanclognatha-lutalba/Zanclognatha lutalba-A-D.jpg,object,132906,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
 zanclognatha-lutalba/Zanclognatha lutalba-A-V.jpg,object,136624,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
 zanclognatha-lutalba/Zanclognatha lutalba-B-D.jpg,object,166038,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
@@ -843,60 +829,42 @@ species-tiles/macaria-bitactata/C-V.dzi,object,206,macaria-bitactata,tiles-no-ph
 species-tiles/macaria-bitactata/C-V_files/,tile-pyramid,,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-D.dzi,object,206,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-D_files/,tile-pyramid,,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
-species-tiles/protorthodes-alfkenii/A-D_thumbnail.webp,object,177270,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-V.dzi,object,206,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-V_files/,tile-pyramid,,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
-species-tiles/protorthodes-alfkenii/A-V_thumbnail.webp,object,164556,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
 species-tiles/protorthodes-curtica/A-D.dzi,object,206,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/A-D_files/,tile-pyramid,,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
-species-tiles/protorthodes-curtica/A-D_thumbnail.webp,object,159668,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/A-V.dzi,object,206,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/A-V_files/,tile-pyramid,,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
-species-tiles/protorthodes-curtica/A-V_thumbnail.webp,object,153280,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/B-D.dzi,object,206,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/B-D_files/,tile-pyramid,,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
-species-tiles/protorthodes-curtica/B-D_thumbnail.webp,object,178436,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/B-V.dzi,object,206,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-curtica/B-V_files/,tile-pyramid,,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
-species-tiles/protorthodes-curtica/B-V_thumbnail.webp,object,157768,protorthodes-curtica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-curtica is not in data/species.csv
 species-tiles/protorthodes-eureka/A-D.dzi,object,206,protorthodes-eureka,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-eureka is not in data/species.csv
 species-tiles/protorthodes-eureka/A-D_files/,tile-pyramid,,protorthodes-eureka,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-eureka is not in data/species.csv
-species-tiles/protorthodes-eureka/A-D_thumbnail.webp,object,155516,protorthodes-eureka,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-eureka is not in data/species.csv
 species-tiles/protorthodes-eureka/A-V.dzi,object,206,protorthodes-eureka,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-eureka is not in data/species.csv
 species-tiles/protorthodes-eureka/A-V_files/,tile-pyramid,,protorthodes-eureka,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-eureka is not in data/species.csv
-species-tiles/protorthodes-eureka/A-V_thumbnail.webp,object,136668,protorthodes-eureka,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-eureka is not in data/species.csv
 species-tiles/protorthodes-incincta/B-D.dzi,object,206,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/B-D_files/,tile-pyramid,,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
-species-tiles/protorthodes-incincta/B-D_thumbnail.webp,object,146582,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/B-V.dzi,object,206,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/B-V_files/,tile-pyramid,,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
-species-tiles/protorthodes-incincta/B-V_thumbnail.webp,object,155238,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/C-D.dzi,object,206,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/C-D_files/,tile-pyramid,,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
-species-tiles/protorthodes-incincta/C-D_thumbnail.webp,object,231688,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/C-V.dzi,object,206,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-incincta/C-V_files/,tile-pyramid,,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
-species-tiles/protorthodes-incincta/C-V_thumbnail.webp,object,201858,protorthodes-incincta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-incincta is not in data/species.csv
 species-tiles/protorthodes-oviduca/A-D.dzi,object,206,protorthodes-oviduca,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-oviduca is not in data/species.csv
 species-tiles/protorthodes-oviduca/A-D_files/,tile-pyramid,,protorthodes-oviduca,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-oviduca is not in data/species.csv
-species-tiles/protorthodes-oviduca/A-D_thumbnail.webp,object,166140,protorthodes-oviduca,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-oviduca is not in data/species.csv
 species-tiles/protorthodes-oviduca/A-V.dzi,object,206,protorthodes-oviduca,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-oviduca is not in data/species.csv
 species-tiles/protorthodes-oviduca/A-V_files/,tile-pyramid,,protorthodes-oviduca,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-oviduca is not in data/species.csv
-species-tiles/protorthodes-oviduca/A-V_thumbnail.webp,object,137120,protorthodes-oviduca,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-oviduca is not in data/species.csv
 species-tiles/protorthodes-rufula/A-D.dzi,object,206,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-D_files/,tile-pyramid,,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
-species-tiles/protorthodes-rufula/A-D_thumbnail.webp,object,167356,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-V.dzi,object,206,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-V_files/,tile-pyramid,,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
-species-tiles/protorthodes-rufula/A-V_thumbnail.webp,object,155724,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/speranza-andersoni/A-D.dzi,object,206,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-D_files/,tile-pyramid,,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-V.dzi,object,206,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-V_files/,tile-pyramid,,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/sympistis-chionanti/A-D.dzi,object,206,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-D_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
-species-tiles/sympistis-chionanti/A-D_thumbnail.webp,object,152552,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V.dzi,object,206,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
-species-tiles/sympistis-chionanti/A-V_thumbnail.webp,object,139884,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 test/somefile.jpg,object,750219,,unknown,
