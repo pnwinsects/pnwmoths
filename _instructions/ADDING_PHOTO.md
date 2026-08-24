@@ -65,6 +65,22 @@ referential integrity and will reject a photo for a species it does not know.
 **2. Upload the image to the CDN.** Follow [UPLOADING_IMAGES.md](UPLOADING_IMAGES.md). Keep the
 original filename; do not rename it.
 
+> **Never rename a photograph, ever — not even when the name is now the wrong species.**
+> A filename records what the moth was called when it was photographed. It is also the key that
+> joins our copy to its derivatives, its high-resolution TIFF, and the original on the legacy
+> host. Renaming breaks all three: ten of the 83 photographs recovered in #232 could not be found
+> on the legacy host because an earlier merge had re-lettered their filenames.
+>
+> If the filename names a different species from the one the photograph belongs to — a rename, a
+> merge, or a redetermination — that is normal and expected. Put the photograph under the correct
+> `species_slug` in `data/images.csv` and record the ruling in
+> [`data/photo-determinations.csv`](../data/photo-determinations.csv), quoting the curator and
+> linking the issue. See [ADR 0038](../docs/adr/0038-photo-identity-is-data-not-filename.md).
+>
+> If the destination species already uses that specimen letter, the **incoming** photograph takes
+> the next free letter and the one already there keeps its own (C-026). Change the `specimen`
+> column, never the filename.
+
 **3. Generate and upload the derivatives.** Follow
 [GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md). This is what actually gets displayed.
 

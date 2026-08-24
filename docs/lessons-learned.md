@@ -455,6 +455,28 @@ cost a debugging cycle to discover.
   it matches nothing and silently un-withholds everything — the fail-open direction. Pass
   the loader's output, or lowercase deliberately.
 
+- **A CDN migration that writes a NEW path needs no purge; one that overwrites an EXISTING
+  path does.** ADR 0009's "no manual purge on deploy" holds because deploys are additive and
+  land on new paths — but tiles and derivatives carry `cache-control: max-age=25600000`
+  (~296 days), so any object rewritten *in place* keeps serving the old bytes at the edge for
+  most of a year while the origin is correct. The #330 tile re-key hit this on exactly the one
+  case that was a swap rather than a move: `mniotype-ducta/A-*` and `mniotype-tenera/A-*` are
+  each other's destinations, the origin was right immediately, and the edge served the wrong
+  moth until purged. Verify a migration against the **storage API**, not the pull zone, or you
+  are grading the edge cache; then purge the overwritten prefixes:
+  `POST https://api.bunny.net/purge?url=<prefix>/*&async=false` with `AccessKey: $BUNNY_ACCOUNT_API_KEY`
+  (wildcards work; returns 200 with an empty body).
+
+- **A swap is not two moves.** Copying `A -> B` then `B -> A` destroys both: the first write
+  overwrites the second's source, and the second copy duplicates whatever just landed. Any
+  key that is both a source and a destination has to be buffered before the first byte is
+  written (`scripts/migrate-determined-photo-tiles.ts`). The same trap sits in the *data*
+  edits — rewriting `data/image-derivatives.csv` by applying every planned move to every row
+  sends a swapped row straight back where it started, so exactly one move may apply per row.
+  Worse, an "already present at the right length?" skip is actively wrong for a swap: both
+  sides are tiles of similar moths at identical dimensions, so equal byte length is common
+  while the content is the other species.
+
 ## Verification & process
 
 - **Replacing a script with a prose recipe inverts something.** `scripts/upload-plates.js`

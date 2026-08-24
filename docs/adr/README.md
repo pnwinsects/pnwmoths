@@ -46,3 +46,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0035](0035-browser-smoke-gate.md) | The built bundle is driven in a real headless browser before it ships; every other gate reads bytes | Accepted |
 | [0036](0036-cdn-inventory-by-accountability.md) | The CDN is inventoried by accountability — every object joined to what explains it, findings reported both directions, advisory only | Accepted |
 | [0037](0037-curation-reports-published-unlinked.md) | Every advisory report is listed at an unlinked, `noindex` `/curation/` index, driven by one manifest shared with the copy step | Accepted |
+| [0038](0038-photo-identity-is-data-not-filename.md) | A photograph's species lives in `data/photo-determinations.csv`, not in its filename; filenames are permanent opaque identifiers | Accepted |

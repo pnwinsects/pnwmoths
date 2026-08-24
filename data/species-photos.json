@@ -2083,23 +2083,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "amphipoea-keiferi": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/amphipoea-keiferi/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/amphipoea-keiferi/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "amphipoea-lunata": {
     "high_res_available": true,
     "specimens": [
@@ -2197,6 +2180,16 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/amphipyra-tragopoginis/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/amphipyra-tragopoginis/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/amphipyra-tragopoginis/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -4634,16 +4627,6 @@
     "high_res_available": true,
     "specimens": [
       {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/aseptis-ethnica/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/aseptis-ethnica/A-V"
-      },
-      {
         "specimen_id": "B",
         "view": "D",
         "tiles_path": "species-tiles/aseptis-ethnica/B-D"
@@ -4652,6 +4635,23 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/aseptis-ethnica/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "aseptis-fanatica": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/aseptis-fanatica/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/aseptis-fanatica/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -9018,16 +9018,6 @@
     "high_res_available": true,
     "specimens": [
       {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/enargia-fausta/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/enargia-fausta/A-V"
-      },
-      {
         "specimen_id": "B",
         "view": "D",
         "tiles_path": "species-tiles/enargia-fausta/B-D"
@@ -9046,6 +9036,23 @@
         "specimen_id": "C",
         "view": "V",
         "tiles_path": "species-tiles/enargia-fausta/C-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "enargia-infumata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/enargia-infumata/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/enargia-infumata/D-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -15563,6 +15570,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "lacinipolia-bucketti": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/lacinipolia-bucketti/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/lacinipolia-bucketti/D-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "lacinipolia-comis": {
     "high_res_available": true,
     "specimens": [
@@ -15761,16 +15785,6 @@
         "specimen_id": "C",
         "view": "V",
         "tiles_path": "species-tiles/lacinipolia-olivacea/C-V"
-      },
-      {
-        "specimen_id": "D",
-        "view": "D",
-        "tiles_path": "species-tiles/lacinipolia-olivacea/D-D"
-      },
-      {
-        "specimen_id": "D",
-        "view": "V",
-        "tiles_path": "species-tiles/lacinipolia-olivacea/D-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -22106,16 +22120,6 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/proxenus-miranda/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/proxenus-miranda/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/proxenus-miranda/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -22557,6 +22561,16 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/resapamea-innota/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/resapamea-innota/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/resapamea-innota/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -22594,6 +22608,16 @@
         "specimen_id": "C",
         "view": "V",
         "tiles_path": "species-tiles/resapamea-passer/C-V"
+      },
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/resapamea-passer/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/resapamea-passer/D-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -22611,16 +22635,6 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/resapamea-venosa/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/resapamea-venosa/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/resapamea-venosa/B-V"
       },
       {
         "specimen_id": "C",
@@ -23075,6 +23089,16 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/schinia-honesta/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/schinia-honesta/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/schinia-honesta/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -23083,16 +23107,6 @@
   "schinia-intermontana": {
     "high_res_available": true,
     "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/schinia-intermontana/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/schinia-intermontana/A-V"
-      },
       {
         "specimen_id": "B",
         "view": "D",
@@ -23839,16 +23853,6 @@
     "high_res_available": true,
     "specimens": [
       {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/smerinthus-cerisyi/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/smerinthus-cerisyi/A-V"
-      },
-      {
         "specimen_id": "B",
         "view": "D",
         "tiles_path": "species-tiles/smerinthus-cerisyi/B-D"
@@ -23884,6 +23888,23 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/smerinthus-jamaicensis/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "smerinthus-ophthalmica": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/smerinthus-ophthalmica/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/smerinthus-ophthalmica/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -26325,16 +26346,6 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/tarache-areli/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/tarache-areli/C-D"
-      },
-      {
-        "specimen_id": "C",
-        "view": "V",
-        "tiles_path": "species-tiles/tarache-areli/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -26497,6 +26508,16 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/tarache-toddi/A-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/tarache-toddi/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/tarache-toddi/C-V"
       }
     ],
     "photographer": "Merrill Peterson",

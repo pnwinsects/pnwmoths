@@ -20,6 +20,8 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { readManifest } from './lib/manifest.ts';
 import type { ManifestRow } from './lib/manifest.ts';
+import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
+import type { PhotoDetermination } from './lib/photo-determinations.ts';
 import type { View, MatchBucket } from './lib/parse-photo-filename.ts';
 import type { Specimen } from '../src/types/index.ts';
 import { pathToFileURL } from 'node:url';
@@ -121,6 +123,35 @@ export function toTilesPath(row: ManifestRow): string {
 }
 
 /**
+ * Re-file manifest rows the curator has determined belong to another species.
+ *
+ * The manifest's `species_slug` comes from the TIFF's filename and nothing else
+ * (see scripts/lib/photo-determinations.ts). Where a determination exists it is
+ * the authority, and it carries the destination specimen letter with it —
+ * `toTilesPath` builds `species-tiles/<slug>/<specimen>-<view>` from these two
+ * fields, so overriding both is what moves the tile set onto the right account.
+ *
+ * Rows without a determination pass through untouched: the filename match is
+ * still the default, just no longer the last word.
+ *
+ * Pure and total — a determination naming a stem absent from the manifest is not
+ * an error here (it may govern a legacy JPEG in data/images.csv that was never
+ * tiled). check-photo-determinations.ts is what refuses a determination that
+ * matches nothing anywhere.
+ */
+export function applyDeterminations(
+  rows: ManifestRow[],
+  determinations: Map<string, PhotoDetermination>,
+): ManifestRow[] {
+  if (determinations.size === 0) return rows;
+  return rows.map(row => {
+    const ruling = determinations.get(toPhotoStem(row.filename_raw));
+    if (!ruling) return row;
+    return { ...row, species_slug: ruling.species_slug, specimen_id: ruling.specimen };
+  });
+}
+
+/**
  * Build the full species-photos output object from a set of manifest rows.
  * Only rows passing isMaterializable() are included.
  * Specimens within each species are sorted: specimen_id alphabetical, then D before V.
@@ -174,12 +205,30 @@ export function buildSpeciesPhotos(
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
-  const rows: ManifestRow[] = await readManifest(MANIFEST_PATH);
+  const rawRows: ManifestRow[] = await readManifest(MANIFEST_PATH);
+  const determinations = readPhotoDeterminations();
+  const rows = applyDeterminations(rawRows, determinations);
   const uploadedRows = rows.filter(isMaterializable);
 
   console.log(
     `[generate-species-photos] manifest: ${rows.length} rows total; ${uploadedRows.length} eligible (status=uploaded)`
   );
+
+  // Name every re-filed photograph. A determination silently changing which
+  // account a photograph appears on is the same class of surprise this file
+  // exists to end.
+  const refiled = rawRows.filter(r => determinations.has(toPhotoStem(r.filename_raw)));
+  if (refiled.length > 0) {
+    console.log(
+      `[generate-species-photos] ${refiled.length} photographs re-filed by data/photo-determinations.csv:`
+    );
+    for (const row of refiled) {
+      const ruling = determinations.get(toPhotoStem(row.filename_raw))!;
+      console.log(
+        `    ${row.filename_raw}: ${row.species_slug} ${row.specimen_id} -> ${ruling.species_slug} ${ruling.specimen} (${ruling.source})`
+      );
+    }
+  }
 
   // Read (not import) the previous output: this file is the script's own product,
   // so a static import would pin the build-time copy and defeat the round-trip.

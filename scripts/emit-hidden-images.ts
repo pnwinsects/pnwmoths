@@ -70,6 +70,7 @@ import { pathToFileURL } from 'node:url';
 import { normalizeSlug, loadUnpublishedSpecies } from '../src/_lib/unpublished-species.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { encodePath } from '../src/_lib/derivative-url.ts';
+import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
 
 /** Public origin, same constant as eleventy.config.ts. Not a secret, not an env var. */
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
@@ -152,6 +153,19 @@ export interface HiddenImageRow {
   displayed_as: string;
   /** '1' when the filename opens with a different binomial — the synonymy tell. */
   filename_name_differs: string;
+  /**
+   * The issue where the curator settled what this photograph is, or '' when
+   * nobody has.
+   *
+   * `filename_name_differs` alone reads as an open question, and #336 put it to
+   * the curator that way for eleven photographs the catalogue had *already*
+   * determined — he answered by restating determinations that were sitting in
+   * `data/images.csv`. A filename that disagrees with its species is only a
+   * question while it is unadjudicated; once `data/photo-determinations.csv`
+   * names the ruling, the disagreement is expected and the row is a display
+   * question, not an identity one.
+   */
+  determined_by: string;
   family: string;
   common_name: string;
   /** Direct link to the photograph on the CDN. Always resolvable; needs no login. */
@@ -355,6 +369,11 @@ export interface BuildHiddenImageRowsOptions {
   missingOnCdn: ReadonlySet<string> | null;
   /** Where each photograph is still shown outside its account, from computeThumbnailUse(). */
   thumbnailUse: ThumbnailUse;
+  /**
+   * Curator rulings from data/photo-determinations.csv, so a filename that
+   * disagrees with its species can be reported as settled rather than asked again.
+   */
+  determinations?: ReadonlyMap<string, { source: string }>;
   cdnBaseUrl?: string;
 }
 
@@ -367,6 +386,7 @@ export interface BuildHiddenImageRowsOptions {
 export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): HiddenImageRow[] {
   const { images, species, tiled, withheldFamilies, unpublished, missingOnCdn, thumbnailUse } = options;
   const cdnBaseUrl = options.cdnBaseUrl ?? CDN_BASE_URL;
+  const determinations = options.determinations ?? new Map<string, { source: string }>();
   const rows: HiddenImageRow[] = [];
 
   for (const image of images) {
@@ -422,6 +442,7 @@ export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): Hidd
       cdn_status: cdnStatus,
       filename_name_differs:
         filenameNameDiffers(image.filename, speciesRow.genus, speciesRow.species) ? '1' : '',
+      determined_by: determinations.get(toPhotoStem(image.filename))?.source ?? '',
       displayed_as: formatSurfaces(thumbnailUse.get(thumbnailKey(slug, image.filename))),
       family: speciesRow.family.trim(),
       common_name: speciesRow.common_name.trim(),
@@ -453,6 +474,7 @@ export const HIDDEN_IMAGE_COLUMNS = [
   'cdn_status',
   'displayed_as',
   'filename_name_differs',
+  'determined_by',
   'family',
   'common_name',
   'image_url',
@@ -680,6 +702,7 @@ function main(): void {
     unpublished,
     missingOnCdn,
     thumbnailUse,
+    determinations: readPhotoDeterminations(),
   });
 
   const outPath = resolve(ROOT, 'data/hidden-images-report.csv');

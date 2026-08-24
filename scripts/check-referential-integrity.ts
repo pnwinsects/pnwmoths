@@ -138,6 +138,14 @@ export const RELATIONS: readonly Relation[] = [
     note: 'specimen photos; a row whose slug does not join renders nowhere',
   },
   {
+    name: 'photo-determinations.csv',
+    path: 'data/photo-determinations.csv',
+    kind: 'csv-column',
+    column: 'species_slug',
+    cardinality: 'repeated',
+    note: 'curator rulings on which species a photograph depicts; an unjoinable slug silently re-files nothing',
+  },
+  {
     name: 'species-links.csv',
     path: 'data/species-links.csv',
     kind: 'csv-column',

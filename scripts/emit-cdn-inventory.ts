@@ -150,6 +150,19 @@ export interface Sources {
   derivatives: ReadonlySet<string>;
   /** `{species_slug}/{filename}` from data/images.csv. */
   photos: ReadonlySet<string>;
+  /**
+   * `{filename}` → the slugs data/images.csv files it under.
+   *
+   * The catalogue registers a photograph by (slug, filename), and the slug is
+   * the curator's determination while the filename is what the moth was called
+   * when it was photographed. Those diverge on every redetermination, so an
+   * object sitting at `<old-species>/<filename>` is a *copy at a superseded
+   * path*, not an unregistered photograph — the catalogue accounts for it, just
+   * under a different folder. Matching on the full path alone cannot tell the
+   * two apart, and reported eleven such copies as findings for the curator on
+   * #330 when every one was already determined and published elsewhere.
+   */
+  photosByFilename: ReadonlyMap<string, readonly string[]>;
   /** `old_path` → `superseded_by`, from data/cdn-retired-images.csv. */
   retired: ReadonlyMap<string, string>;
   /** `glossary/{image_filename}` from data/glossary.csv. */
@@ -355,6 +368,18 @@ function describe(unit: Unit, sources: Sources): { shape: string; detail: string
     return { shape: 'stale-site', detail: join('not in the current _site-manifest.json', slugNote) };
   }
   if (slug !== null) {
+    // Registered, but under another species: this is a copy left at the path the
+    // photograph had before it was redetermined. Distinct from an unregistered
+    // photograph, and NOT a curator question — the determination has already been
+    // made, and the only outstanding work is a row in data/cdn-retired-images.csv.
+    const filename = bare.slice(slug.length + 1);
+    const elsewhere = (sources.photosByFilename.get(filename) ?? []).filter((s) => s !== slug);
+    if (elsewhere.length > 0) {
+      return {
+        shape: 'photo-refiled',
+        detail: `data/images.csv files this filename under ${elsewhere.join(', ')}; copy at a superseded path`,
+      };
+    }
     return { shape: 'photo-no-row', detail: join('no row in data/images.csv', slugNote) };
   }
   return { shape: 'unknown', detail: '' };
@@ -597,6 +622,13 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
     siteDirs,
     derivatives: new Set(derivatives.map((r) => r.derived_path)),
     photos: new Set(images.filter((r) => r.species_slug && r.filename).map((r) => `${r.species_slug}/${r.filename}`)),
+    photosByFilename: images
+      .filter((r) => r.species_slug && r.filename)
+      .reduce<Map<string, string[]>>((acc, r) => {
+        const slugs = acc.get(r.filename) ?? [];
+        if (!slugs.includes(r.species_slug)) slugs.push(r.species_slug);
+        return acc.set(r.filename, slugs);
+      }, new Map()),
     retired: new Map(retiredRows.filter((r) => r.old_path).map((r) => [r.old_path, r.superseded_by ?? ''])),
     glossaryImages: new Set(glossary.filter((r) => r.image_filename).map((r) => `glossary/${r.image_filename}`)),
     keyImages: new Set(keyImages.filter((r) => r.image_filename).map((r) => `key-images/${r.image_filename}`)),

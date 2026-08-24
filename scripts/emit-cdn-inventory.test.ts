@@ -29,6 +29,7 @@ function sources(overrides: Partial<Sources> = {}): Sources {
     site: new Set(),
     derivatives: new Set(),
     photos: new Set(),
+    photosByFilename: new Map(),
     retired: new Map(),
     glossaryImages: new Set(),
     keyImages: new Set(),
@@ -215,6 +216,28 @@ describe('classify', () => {
     assert.equal(classify(object('glossary/unused.jpg'), s).shape, 'glossary-no-row');
     assert.equal(classify(object('key-images/unused.webp'), s).shape, 'key-image-no-row');
     assert.equal(classify(object('some-file.txt'), s).shape, 'unknown');
+  });
+
+  // #330 asked the curator to adjudicate eleven photographs that data/images.csv
+  // had already determined, because path-only matching cannot tell "nobody
+  // registered this" from "registered under the species it was redetermined to".
+  // The distinction is the difference between a question and a bookkeeping row.
+  it('separates a copy at a superseded path from a genuinely unregistered photo', () => {
+    const s = sources({
+      speciesSlugs: new Set(['amphipoea-keiferi', 'resapamea-innota']),
+      photos: new Set(['resapamea-innota/Amphipoea keiferi-A-D.jpg']),
+      photosByFilename: new Map([['Amphipoea keiferi-A-D.jpg', ['resapamea-innota']]]),
+    });
+
+    const refiled = classify(object('amphipoea-keiferi/Amphipoea keiferi-A-D.jpg'), s);
+    assert.equal(refiled.shape, 'photo-refiled');
+    assert.match(refiled.detail, /resapamea-innota/);
+
+    // A filename nothing in the catalogue names is still a real finding.
+    assert.equal(
+      classify(object('amphipoea-keiferi/Amphipoea keiferi-Z-D.jpg'), s).shape,
+      'photo-no-row',
+    );
   });
 
   // ADDING_PLATE.md strips the local `plates/` prefix on upload while every
