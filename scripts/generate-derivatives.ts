@@ -24,7 +24,7 @@
  * Environment variables:
  *   DRY_RUN       — "1" to print the plan and exit without generating
  *   LIMIT         — process at most N derivatives (pilot runs)
- *   KIND          — restrict to legacy | highres | glossary
+ *   KIND          — restrict to legacy | highres | glossary | plates
  *   ONLY          — restrict to sources whose path contains this substring
  *   OUTPUT_DIR    — local output root (default var/derivatives)
  *   CONCURRENCY   — parallel workers (default 4)
@@ -41,7 +41,7 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import {
   buildWorkList, vipsCommands, DERIVATIVES_MANIFEST_WRITERS,
-  readSources, sourcePaths,
+  readSources, sourcePaths, SOURCE_KINDS,
   type DerivativeSpec, type SourceKind,
 } from './lib/derivatives.ts';
 import { acquireManifestLock, releaseManifestLock } from './lib/manifest-lock.ts';
@@ -189,7 +189,17 @@ export function groupBySource(specs: readonly DerivativeSpec[]): Map<string, Der
 async function main(): Promise<void> {
   const sources = readSources(resolve('data'));
   let specs = buildWorkList(sourcePaths(sources));
-  if (KIND) specs = specs.filter((s) => s.kind === (KIND as SourceKind));
+  if (KIND) {
+    // A typo here used to filter the work list to zero and then report
+    // "Nothing to do — all 0 derivatives present", which reads as success. The
+    // runbooks now put KIND in front of a maintainer following prose, so an
+    // unknown value has to be a refusal rather than a quiet no-op.
+    if (!SOURCE_KINDS.includes(KIND as SourceKind)) {
+      console.error(`[derivatives] KIND="${KIND}" is not a source kind. Expected one of: ${SOURCE_KINDS.join(', ')}.`);
+      process.exit(1);
+    }
+    specs = specs.filter((s) => s.kind === (KIND as SourceKind));
+  }
   if (ONLY) specs = specs.filter((s) => s.sourcePath.includes(ONLY));
 
   const manifest = readManifest(MANIFEST_PATH);
@@ -205,7 +215,7 @@ async function main(): Promise<void> {
 
   // DRY_RUN guard first (ADR 0013) — pre-flight inspection needs no tooling.
   if (DRY_RUN) {
-    logStage(`[dry-run] sources: ${sources.legacy.length} legacy, ${sources.highres.length} hi-res, ${sources.glossary.length} glossary`);
+    logStage(`[dry-run] sources: ${sources.legacy.length} legacy, ${sources.highres.length} hi-res, ${sources.glossary.length} glossary, ${sources.plates.length} plates`);
     logStage(`[dry-run] total derivatives: ${specs.length.toLocaleString('en-US')}`);
     logStage(`[dry-run] already generated: ${(specs.length - todo.length).toLocaleString('en-US')}`);
     logStage(`[dry-run] would generate: ${limited.length.toLocaleString('en-US')}`);

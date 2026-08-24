@@ -20,6 +20,9 @@ import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url
 /** Source families, which determine the variant set. */
 export type SourceKind = 'legacy' | 'highres' | 'glossary' | 'plates';
 
+/** The same four, as values — so a `KIND=` argument can be validated rather than silently matching nothing. */
+export const SOURCE_KINDS: readonly SourceKind[] = ['legacy', 'highres', 'glossary', 'plates'];
+
 /**
  * The scripts that share var/derivatives-manifest.csv, named in the lock error.
  *
@@ -125,7 +128,7 @@ export function specsForSource(sourcePath: string, kind: SourceKind): Derivative
 }
 
 /**
- * Build the full work list from the three source inventories.
+ * Build the full work list from the four source inventories.
  *
  * Inputs are plain path lists so this stays pure and testable; the caller reads
  * them from data/images.csv, data/species-photos.json and data/glossary.csv.
@@ -176,7 +179,7 @@ export interface SourceEntry {
 export type SourceInventory = Readonly<Record<SourceKind, SourceEntry[]>>;
 
 /**
- * The three source inventories, read from the committed flat files.
+ * The four source inventories, read from the committed flat files.
  *
  * Shared by the generator (which produces a derivative for every entry) and the
  * build guard (which checks only the entries a built page can reach). The

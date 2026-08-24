@@ -84,8 +84,8 @@ Expected: `[check-derivatives] PASS: … emitted derivative URL(s) …`.
 
 The guard runs two checks and names the file either way.
 
-**`SOURCE GATE FAILED`** — an image in `data/images.csv`, `data/species-photos.json` or
-`data/glossary.csv` has no derivatives. This is the normal "new photo, forgot the pipeline" case:
+**`SOURCE GATE FAILED`** — an image in `data/images.csv`, `data/species-photos.json`,
+`data/glossary.csv` or `data/plates.json` has no derivatives. This is the normal "new photo, forgot the pipeline" case:
 run steps 1–3.
 
 ```
