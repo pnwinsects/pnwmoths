@@ -11,6 +11,9 @@
 //     consumers was wrong: see the scanBuiltSite() suite below
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import {
   normalizeView,
   coverageKey,
@@ -34,7 +37,7 @@ import {
   type BuildHiddenImageRowsOptions,
 } from './emit-hidden-images.ts';
 
-const NOCTUID: SpeciesInput = { genus: 'Phyllodesma', species: 'americana', common_name: '', family: 'Lasiocampidae' };
+const LAPPET: SpeciesInput = { genus: 'Phyllodesma', species: 'americana', common_name: '', family: 'Lasiocampidae' };
 
 function image(overrides: Partial<ImageInput> = {}): ImageInput {
   return {
@@ -49,7 +52,7 @@ function image(overrides: Partial<ImageInput> = {}): ImageInput {
 function options(overrides: Partial<BuildHiddenImageRowsOptions> = {}): BuildHiddenImageRowsOptions {
   return {
     images: [image()],
-    species: new Map([['phyllodesma-americana', NOCTUID]]),
+    species: new Map([['phyllodesma-americana', LAPPET]]),
     tiled: new Map(),
     withheldFamilies: new Set(),
     unpublished: new Set(),
@@ -195,7 +198,7 @@ describe('buildHiddenImageRows — cause precedence', () => {
 
   it('reports a blank family as withheld, and says so in the detail', () => {
     const rows = buildHiddenImageRows(options({
-      species: new Map([['phyllodesma-americana', { ...NOCTUID, family: '' }]]),
+      species: new Map([['phyllodesma-americana', { ...LAPPET, family: '' }]]),
     }));
     assert.equal(rows[0]?.cause, 'family-withheld');
     assert.match(rows[0]?.detail ?? '', /no family/);
@@ -286,7 +289,7 @@ describe('buildHiddenImageRows — ordering', () => {
         image({ filename: 'Phyllodesma americana-A-V.jpg', view: 'ventral' }),
       ],
       species: new Map([
-        ['phyllodesma-americana', NOCTUID],
+        ['phyllodesma-americana', LAPPET],
         ['zzz-species', { genus: 'Zzz', species: 'species', common_name: '', family: 'Geometridae' }],
       ]),
       tiled: new Map([['phyllodesma-americana', TILES_A]]),
@@ -351,10 +354,37 @@ describe('loadMissingOnCdn', () => {
     assert.equal(loadMissingOnCdn('data/no-such-inventory-report.csv'), null);
   });
 
-  it('reads only missing-photo findings from the real report', () => {
+  // Deliberately NOT asserting that the committed report contains findings. Zero
+  // missing photos is the desirable end state, and a unit test that fails when the data
+  // gets better is reporting a data state as a code defect.
+  it('keeps only missing-photo findings, ignoring the other shapes', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'cdn-inv-'));
+    const path = join(dir, 'inventory.csv');
+    writeFileSync(
+      path,
+      'path,unit,bytes,species_slug,shape,detail\n' +
+        'a-species/A-D.jpg,object,1,a-species,missing-photo,gone\n' +
+        'b-species/B-D.jpg,object,1,b-species,photo-no-row,unaccounted\n' +
+        'c-species/C-D.jpg,object,1,c-species,missing-photo,gone\n',
+    );
+    assert.deepEqual(
+      [...(loadMissingOnCdn(path) ?? [])].sort(),
+      ['a-species/A-D.jpg', 'c-species/C-D.jpg'],
+    );
+  });
+
+  it('returns an empty set — not null — for a report with no missing-photo rows', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'cdn-inv-'));
+    const path = join(dir, 'inventory.csv');
+    writeFileSync(path, 'path,unit,bytes,species_slug,shape,detail\n');
+    const missing = loadMissingOnCdn(path);
+    assert.notEqual(missing, null, 'a present-but-empty report is evidence, unlike an absent one');
+    assert.equal(missing?.size, 0);
+  });
+
+  it('parses every path in the committed report as slug/filename', () => {
     const missing = loadMissingOnCdn('data/cdn-inventory-report.csv');
     assert.ok(missing !== null, 'the committed inventory report should be on disk');
-    assert.ok(missing.size > 0);
     for (const path of missing) assert.ok(path.includes('/'), `${path} should be slug/filename`);
   });
 });

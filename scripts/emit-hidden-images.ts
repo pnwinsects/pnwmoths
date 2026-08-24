@@ -529,11 +529,15 @@ function main(): void {
 
   const photos: Record<string, { high_res_available?: boolean; specimens?: TileSpecimen[] }> =
     JSON.parse(readFileSync(resolve(ROOT, 'data/species-photos.json'), 'utf8'));
+  // `high_res_available` ALONE, with no `specimens?.length` guard — because that is what
+  // src/species/species.njk branches on. An entry flagged available with zero specimens
+  // makes the account render the tiles branch and show nothing at all, and requiring
+  // specimens here would classify its photographs as displayed and emit no rows: silently
+  // absent from a report whose whole premise is completeness. With an empty coverage set
+  // every row falls to `hidden-by-tiles`, which is exactly what the page does.
   const tiled = new Map<string, readonly TileSpecimen[]>();
   for (const [slug, entry] of Object.entries(photos)) {
-    if (entry.high_res_available && entry.specimens?.length) {
-      tiled.set(normalizeSlug(slug), entry.specimens);
-    }
+    if (entry.high_res_available) tiled.set(normalizeSlug(slug), entry.specimens ?? []);
   }
 
   const images: ImageInput[] = readCsv(resolve(ROOT, 'data/images.csv')).map((row) => ({
