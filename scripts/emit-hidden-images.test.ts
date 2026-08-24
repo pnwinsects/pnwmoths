@@ -11,9 +11,9 @@
 //     consumers was wrong: see the scanBuiltSite() suite below
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import {
   normalizeView,
   coverageKey,
@@ -27,6 +27,7 @@ import {
   extractImageReferences,
   surfaceOf,
   scanBuiltSite,
+  describeIncompleteSite,
   formatSurfaces,
   thumbnailKey,
   CAUSE_SEVERITY,
@@ -438,7 +439,7 @@ describe('scanBuiltSite', () => {
   const images = [{ slug: 'apantesis-margo', filename: 'Grammia margo-C-D.jpg' }];
 
   it('records a photograph found on browse', () => {
-    const use = scanBuiltSite(
+    const { use } = scanBuiltSite(
       [{ path: 'browse/index.html', content: '"Grammia margo-C-D.jpg"' }],
       images,
     );
@@ -446,7 +447,7 @@ describe('scanBuiltSite', () => {
   });
 
   it('merges surfaces across files and renders them in a stable order', () => {
-    const use = scanBuiltSite(
+    const { use } = scanBuiltSite(
       [
         { path: 'species/zzz/index.html', content: 'Grammia%20margo-C-D%40320h.webp' },
         { path: 'browse/index.html', content: '"Grammia margo-C-D.jpg"' },
@@ -461,7 +462,7 @@ describe('scanBuiltSite', () => {
   });
 
   it('ignores the photograph\'s own account page', () => {
-    const use = scanBuiltSite(
+    const { use } = scanBuiltSite(
       [{ path: 'species/apantesis-margo/index.html', content: '"Grammia margo-C-D.jpg"' }],
       images,
     );
@@ -469,17 +470,36 @@ describe('scanBuiltSite', () => {
   });
 
   it('reports nothing for a photograph the built site never references', () => {
-    const use = scanBuiltSite([{ path: 'browse/index.html', content: 'nothing here' }], images);
+    const { use } = scanBuiltSite([{ path: 'browse/index.html', content: 'nothing here' }], images);
     assert.equal(use.size, 0);
   });
 
   // One filename can be catalogued under more than one slug; each gets its own answer.
   it('attributes a shared filename to every slug that carries it', () => {
-    const use = scanBuiltSite(
+    const { use } = scanBuiltSite(
       [{ path: 'browse/index.html', content: '"Shared-A-D.jpg"' }],
       [{ slug: 'aaa-one', filename: 'Shared-A-D.jpg' }, { slug: 'bbb-two', filename: 'Shared-A-D.jpg' }],
     );
     assert.equal(use.size, 2);
+  });
+
+  // `referenced` is the sanity floor, so it must count a photograph found ONLY on its own
+  // account — that page is proof the site was built, even though it sets no surface.
+  it('counts a photograph referenced only by its own account as referenced', () => {
+    const { use, referenced } = scanBuiltSite(
+      [{ path: 'species/apantesis-margo/index.html', content: '"Grammia margo-C-D.jpg"' }],
+      images,
+    );
+    assert.equal(use.size, 0);
+    assert.deepEqual([...referenced], ['Grammia margo-C-D.jpg']);
+  });
+
+  it('leaves `referenced` empty for a site that references nothing catalogued', () => {
+    const { referenced } = scanBuiltSite(
+      [{ path: 'browse/index.html', content: '<html>no images</html>' }],
+      images,
+    );
+    assert.equal(referenced.size, 0);
   });
 });
 
@@ -520,5 +540,55 @@ describe('buildHiddenImageRows — displayed_as', () => {
       ]),
     }));
     assert.deepEqual(rows.map((r) => r.species_slug), ['bbb-hidden', 'aaa-shown']);
+  });
+});
+
+
+describe('describeIncompleteSite', () => {
+  // The guard exists because an empty _site/ ran to completion, exit 0, reporting every
+  // photograph as invisible — the same defect class this report was twice wrong about.
+  function buildSite(pages: number, omit: string[] = []): string {
+    const dir = mkdtempSync(join(tmpdir(), 'site-'));
+    for (const file of ['browse/index.html', 'identify/index.html', 'key-matrix.json']) {
+      if (omit.includes(file)) continue;
+      mkdirSync(join(dir, dirname(file)), { recursive: true });
+      writeFileSync(join(dir, file), 'x');
+    }
+    for (let i = 0; i < pages; i++) {
+      mkdirSync(join(dir, 'species', `sp-${i}`), { recursive: true });
+      writeFileSync(join(dir, 'species', `sp-${i}`, 'index.html'), 'x');
+    }
+    return dir;
+  }
+
+  it('accepts a site with every surface and enough species pages', () => {
+    assert.equal(describeIncompleteSite(buildSite(3), 3), null);
+  });
+
+  it('rejects an empty directory, which existsSync would have accepted', () => {
+    const problem = describeIncompleteSite(mkdtempSync(join(tmpdir(), 'site-')), 3);
+    assert.match(problem ?? '', /not a built site/);
+  });
+
+  it('names the surface that is missing', () => {
+    assert.match(describeIncompleteSite(buildSite(3, ['identify/index.html']), 3) ?? '', /identify/);
+    assert.match(describeIncompleteSite(buildSite(3, ['key-matrix.json']), 3) ?? '', /key-matrix/);
+  });
+
+  it('rejects a build with fewer species pages than the gates allow', () => {
+    const problem = describeIncompleteSite(buildSite(2), 3);
+    assert.match(problem ?? '', /2 species pages but the visibility gates allow 3/);
+  });
+
+  // More pages than expected is not this guard's business — the deploy is additive and a
+  // leftover page is #273's problem, not a reason to refuse to report.
+  it('accepts a site with more species pages than expected', () => {
+    assert.equal(describeIncompleteSite(buildSite(5), 3), null);
+  });
+
+  it('does not mistake a species directory with no index.html for a page', () => {
+    const dir = buildSite(2);
+    mkdirSync(join(dir, 'species', 'sp-empty'), { recursive: true });
+    assert.match(describeIncompleteSite(dir, 3) ?? '', /2 species pages/);
   });
 });

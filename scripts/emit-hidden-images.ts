@@ -63,7 +63,7 @@
 // `npm run build:site` first; the script exits non-zero with that instruction otherwise.
 //
 // Run via: npm run report:hidden-images  (writes data/hidden-images-report.csv)
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { pathToFileURL } from 'node:url';
@@ -73,6 +73,8 @@ import { encodePath } from '../src/_lib/derivative-url.ts';
 
 /** Public origin, same constant as eleventy.config.ts. Not a secret, not an env var. */
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
+
+
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -284,10 +286,22 @@ export function surfaceOf(relativePath: string, slug: string): ThumbnailSurface 
  * reasoning as ADR 0035 — the browser smoke gate exists because every other check reads
  * sources rather than what shipped.
  */
+export interface SiteScan {
+  /** Where each photograph is shown, excluding its own account. */
+  use: ThumbnailUse;
+  /**
+   * Catalogued filenames referenced ANYWHERE in the scanned files, own account included.
+   * Not used to classify anything — it is the sanity floor. A real build references
+   * nearly the whole catalogue, so a near-empty set means the site handed to this script
+   * is hollow or half-built, and every `displayed_as` would come back blank.
+   */
+  referenced: Set<string>;
+}
+
 export function scanBuiltSite(
   files: readonly { path: string; content: string }[],
   images: readonly { slug: string; filename: string }[],
-): ThumbnailUse {
+): SiteScan {
   const bySlugFilename = new Map<string, string[]>();
   for (const image of images) {
     const bucket = bySlugFilename.get(image.filename);
@@ -296,11 +310,12 @@ export function scanBuiltSite(
   }
 
   const use: ThumbnailUse = new Map();
+  const referenced = new Set<string>();
   for (const file of files) {
-    const referenced = extractImageReferences(file.content);
-    for (const filename of referenced) {
+    for (const filename of extractImageReferences(file.content)) {
       const slugs = bySlugFilename.get(filename);
       if (!slugs) continue;
+      referenced.add(filename);
       for (const slug of slugs) {
         const surface = surfaceOf(file.path, slug);
         if (surface === null || surface === 'account') continue;
@@ -311,7 +326,7 @@ export function scanBuiltSite(
       }
     }
   }
-  return use;
+  return { use, referenced };
 }
 
 /** Stable rendering of the surfaces a row appears on, for the CSV cell. */
@@ -480,6 +495,47 @@ function readCsv(path: string): Record<string, string>[] {
 }
 
 /**
+ * Why the built site cannot be trusted to answer "where is this photograph shown", or
+ * null when it can.
+ *
+ * Names the three surfaces scanBuiltSite() reads, plus a species-page count: a build that
+ * stopped early has the layout but not the pages, and a page count below what the
+ * visibility gates allow means this scan would miss similar-species thumbnails.
+ */
+export function describeIncompleteSite(siteDir: string, expectedSpeciesPages: number): string | null {
+  for (const required of ['browse/index.html', 'identify/index.html', 'key-matrix.json']) {
+    if (!existsSync(join(siteDir, required))) return `has no ${required}, so it is not a built site`;
+  }
+  const speciesDir = join(siteDir, 'species');
+  const built = existsSync(speciesDir)
+    ? readdirSync(speciesDir, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory() && existsSync(join(speciesDir, entry.name, 'index.html')))
+        .length
+    : 0;
+  if (built < expectedSpeciesPages) {
+    return `has ${built} species pages but the visibility gates allow ${expectedSpeciesPages}, ` +
+      'so it is stale or half-built';
+  }
+  return null;
+}
+
+/**
+ * The first input newer than the newest built page, or null when the site is current.
+ *
+ * Compared against `_site/index.html` rather than the directory: a directory's mtime
+ * moves when anything inside it is touched, including this report being copied in.
+ */
+function stalestInput(siteDir: string, inputs: readonly string[]): string | null {
+  const marker = join(siteDir, 'index.html');
+  if (!existsSync(marker)) return null; // the coverage floor already rejected non-sites
+  const builtAt = statSync(marker).mtimeMs;
+  for (const input of inputs) {
+    if (existsSync(input) && statSync(input).mtimeMs > builtAt) return input;
+  }
+  return null;
+}
+
+/**
  * Built files that can reference an image: every page, plus the key matrix Identify
  * ships. Parquet, CSVs and binaries are skipped — they cannot display anything, and the
  * report's own CSV sitting in _site/curation/ would otherwise match every row in itself.
@@ -552,6 +608,14 @@ function main(): void {
 
   // `displayed_as` is read from the BUILT site, so a build is required. Predicting it
   // from data/ is what the earlier version did, and it was wrong — see scanBuiltSite().
+  // The species that build a page — the same gate src/_data/species.ts applies.
+  const published = new Set<string>();
+  for (const [slug, row] of species) {
+    if (isWithheldOrUnclassified(row.family, withheldFamilies)) continue;
+    if (unpublished.has(slug)) continue;
+    published.add(slug);
+  }
+
   const siteDir = resolve(ROOT, process.env['SITE_DIR'] ?? '_site');
   if (!existsSync(siteDir)) {
     console.error(
@@ -560,10 +624,44 @@ function main(): void {
     );
     process.exit(1);
   }
-  const thumbnailUse = scanBuiltSite(
+  const scan = scanBuiltSite(
     readSiteFiles(siteDir),
     images.map((row) => ({ slug: normalizeSlug(row.species_slug), filename: row.filename })),
   );
+
+  // A hollow or half-built _site/ is the one input that makes this report maximally and
+  // SILENTLY wrong: every displayed_as comes back blank, so every photograph is declared
+  // invisible and the curator is sent to rule on the whole catalogue. existsSync does not
+  // catch it — an empty directory exists.
+  //
+  // Checked STRUCTURALLY, against the three surfaces this scan reads and the number of
+  // species pages the gates say should exist. A proportion of the catalogue would not
+  // work: a complete build references only ~37% of catalogued filenames, because a ventral
+  // photograph of a tiled species is on no page by design — the very thing being counted.
+  const problem = describeIncompleteSite(siteDir, published.size);
+  if (problem) {
+    console.error(
+      `[hidden-images] ERROR: ${siteDir} ${problem}. Every photograph would be reported as ` +
+        'appearing nowhere. Run `npm run build:site` and try again.',
+    );
+    process.exit(1);
+  }
+
+  const staleAgainst = stalestInput(siteDir, [
+    resolve(ROOT, 'data/images.csv'),
+    resolve(ROOT, 'data/species-photos.json'),
+    resolve(ROOT, 'data/species.csv'),
+  ]);
+  if (staleAgainst) {
+    console.error(
+      `[hidden-images] ERROR: ${staleAgainst} is newer than the built site, so _site/ does not ` +
+        'reflect the data this report reads. Every difference would show up as a photograph ' +
+        'that appears nowhere. Run `npm run build:site` and try again.',
+    );
+    process.exit(1);
+  }
+
+  const thumbnailUse = scan.use;
 
   const missingOnCdn = loadMissingOnCdn(resolve(ROOT, 'data/cdn-inventory-report.csv'));
   if (missingOnCdn === null) {
