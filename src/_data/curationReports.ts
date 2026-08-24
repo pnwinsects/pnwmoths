@@ -13,6 +13,12 @@
 //
 // Adding a report: add an entry, and if its source is a repo file, that is all — the
 // copy step picks it up. Keep `question` in the curator's terms, not the pipeline's.
+//
+// Only list a report whose rows are REAL FINDINGS. `data/records-bad.csv` is not here
+// and must not be added: nothing writes it, and scripts/build-data.test.ts copies it in
+// as records.csv to exercise the validation-failure path. Its five rows are invented
+// ("J. Smith", "Test", `nonexistent-species`). Listed under "which records were
+// rejected" it would send the curator to inspect fixtures. See issue #334.
 import { basename } from 'node:path';
 
 /** Who a report is addressed to. Drives the ordering and the two sections on the page. */
@@ -186,16 +192,6 @@ const reports: CurationReport[] = [
     see: [
       { label: 'Runbook: assigning districts', url: '_instructions/ASSIGNING_DISTRICTS.md' },
     ],
-  },
-  {
-    id: 'records-bad',
-    title: 'Rejected records: rows that failed validation',
-    audience: 'engineering',
-    question: 'Which occurrence records were rejected outright, and can they be repaired?',
-    body: 'Records that failed validation, in the same columns as <code>records.csv</code> so a repaired row can be moved straight back. These are not in the site\'s data and do not appear on any map or phenology chart.',
-    regenerated: 'Written when validation rejects a row; kept in the repo so nothing is silently dropped.',
-    files: [fromRepo('data/records-bad.csv')],
-    see: [],
   },
   {
     id: 'records-bad-coords',

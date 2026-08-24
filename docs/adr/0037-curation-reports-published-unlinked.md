@@ -6,13 +6,13 @@
 
 This project produces a lot of advisory reports and almost nobody can read them.
 
-Ten exist as files. Two are written into `_site/` by build steps — `species-audit.csv` and
+Ten of them. Two are written into `_site/` by build steps — `species-audit.csv` and
 `records-district-audit.csv` — and both scripts describe themselves in a header comment as
 emitting an "UNLINKED diagnostic CSV … referenced by nothing — reachable only by direct URL."
 That was accurate and it was the whole problem: a URL nobody has been told is a URL nobody
-visits. The other eight live only in `data/`, so reaching them requires a git checkout. An
-eleventh, link rot, is the exception that proves the rule: it has a good destination already
-([0028](0028-link-rot-reporting.md)) and it is the one anybody actually reads.
+visits. Seven more are files that live only in `data/`, so reaching them requires a git
+checkout. The tenth, link rot, is the exception that proves the rule: it has a good
+destination already ([0028](0028-link-rot-reporting.md)) and it is the one anybody reads.
 
 The curator does not have a checkout, and will not. He is the only person who can answer most of
 what these reports ask — which species a photograph belongs to, whether two names are the same
@@ -41,7 +41,7 @@ restated, so the copy destination and the link are the same string by constructi
 listed but not copied is a 404; a report copied but not listed is a file nobody knows exists.
 Neither is reachable from this shape.
 
-**A report's destination is whatever fits it; the index lists it either way.** Ten reports are
+**A report's destination is whatever fits it; the index lists it either way.** Nine reports are
 files. Link rot is not: [0028](0028-link-rot-reporting.md) sends it to a self-closing GitHub issue
 on a two-strike rule, precisely because the raw checker output is the noisy artifact that rule
 exists to filter, and because a file has no owner. Publishing that output here would undo it. So
@@ -67,6 +67,13 @@ QC is a nav slot taken from the moths.
 a test enforces that no `curation` report appears after an `engineering` one. The distinction is
 the same one [0032](0032-curation-log.md) draws: a curatorial question needs someone who knows
 the moths; a data-quality question needs whoever maintains the data.
+
+**Only real findings are listed.** `data/records-bad.csv` looked like an eleventh report and is
+not one: nothing writes it, `scripts/build-data.test.ts` copies it in as `records.csv` to
+exercise the validation-failure path, and its five rows are invented. Listed under "which records
+were rejected" it would have sent the curator to inspect fixtures ([#334](https://github.com/pnwinsects/pnwmoths/issues/334)).
+A page whose premise is "these are questions worth your time" is worth exactly as much as its
+weakest entry.
 
 **A missing source file fails the build.** The reports are advisory and can never fail a build on
 their *findings* — that is what makes them advisory. But a manifest naming a file that is not on
@@ -101,11 +108,11 @@ message.
 - **Leave the reports in the repo and keep writing issues.** This is what was already happening.
   It works for findings someone has already triaged and fails completely for the ones nobody has
   looked at yet.
-- **Publish the raw `lychee` JSON as an eleventh file.** It is the artifact [0028](0028-link-rot-reporting.md)
+- **Publish the raw `lychee` JSON as a tenth file.** It is the artifact [0028](0028-link-rot-reporting.md)
   was written to stop anyone reading: a single run cannot distinguish a dead link from a host that
   refuses the build server's network, and a report carrying that noise gets closed unread. The
   entry points at the two-strike issue instead.
-- **Compute row counts and file sizes for the page.** Useful, and cheap for the eight reports
+- **Compute row counts and file sizes for the page.** Useful, and cheap for the seven reports
   sourced from `data/`, but impossible at Eleventy time for the two the build emits into `_site/`
-  afterwards — a page that showed counts for eight of eleven reports would read as a bug. Rows are
+  afterwards — a page that showed counts for seven of ten reports would read as a bug. Rows are
   described in words instead.
