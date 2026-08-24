@@ -289,3 +289,35 @@ derived/speranza-plumosata/Speranza plumosata-B-D@full.webp,derived/macaria-plum
 speranza-plumosata/Speranza plumosata-B-V.jpg,macaria-plumosata/Speranza plumosata-B-V.jpg,returned to the curator-ruled genus per #279 (C-026 / #303) [plumosata],2026-08-11
 derived/speranza-plumosata/Speranza plumosata-B-V@320h.webp,derived/macaria-plumosata/Speranza plumosata-B-V@320h.webp,returned to the curator-ruled genus per #279 (C-026 / #303) [plumosata],2026-08-11
 derived/speranza-plumosata/Speranza plumosata-B-V@full.webp,derived/macaria-plumosata/Speranza plumosata-B-V@full.webp,returned to the curator-ruled genus per #279 (C-026 / #303) [plumosata],2026-08-11
+autographa-v/Autographa v-alba-A-D.jpg,autographa-v-alba/Autographa v-alba-A-D.jpg,slug truncated at the hyphen inside the epithet (#277),2026-08-23
+autographa-v/Autographa v-alba-A-V.jpg,autographa-v-alba/Autographa v-alba-A-V.jpg,slug truncated at the hyphen inside the epithet (#277),2026-08-23
+caripeta -divisata/Caripeta divisata-A-D.jpg,caripeta-divisata/Caripeta divisata-A-D.jpg,stray space in the slug (#277),2026-08-23
+caripeta -divisata/Caripeta divisata-A-V.jpg,caripeta-divisata/Caripeta divisata-A-V.jpg,stray space in the slug (#277),2026-08-23
+egira-aff-curialis/Egira_aff_curialis-A-D.jpg,egira-aff-curialis/Egira aff curialis-A-D.jpg,underscores in filename where the catalogue uses spaces (#277),2026-08-23
+key-images/Blue copy.webp,key-images/Blue.webp,file-manager duplicate of the same illustration (#277),2026-08-23
+key-images/Pink copy.webp,key-images/Pink.webp,file-manager duplicate of the same illustration (#277),2026-08-23
+key-images/Purple copy.webp,key-images/Purple.webp,file-manager duplicate of the same illustration (#277),2026-08-23
+plataea-n sp/Plataea sp-A-D.jpg,plataea-n-sp/Plataea sp-A-D.jpg,whitespace collapsed to hyphens per ADR 0010 (#277),2026-08-23
+plataea-n sp/Plataea sp-A-V.jpg,plataea-n-sp/Plataea sp-A-V.jpg,whitespace collapsed to hyphens per ADR 0010 (#277),2026-08-23
+species-tiles/protorthodes-alfkenii/A-D_thumbnail.webp,species-tiles/trichopolia-alfkenii/A-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-alfkenii/A-V_thumbnail.webp,species-tiles/trichopolia-alfkenii/A-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-curtica/A-D_thumbnail.webp,species-tiles/trichopolia-curtica/A-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-curtica/A-V_thumbnail.webp,species-tiles/trichopolia-curtica/A-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-curtica/B-D_thumbnail.webp,species-tiles/trichopolia-curtica/B-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-curtica/B-V_thumbnail.webp,species-tiles/trichopolia-curtica/B-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-eureka/A-D_thumbnail.webp,species-tiles/trichopolia-eureka/A-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-eureka/A-V_thumbnail.webp,species-tiles/trichopolia-eureka/A-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-incincta/B-D_thumbnail.webp,species-tiles/trichopolia-incincta/B-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-incincta/B-V_thumbnail.webp,species-tiles/trichopolia-incincta/B-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-incincta/C-D_thumbnail.webp,species-tiles/trichopolia-incincta/C-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-incincta/C-V_thumbnail.webp,species-tiles/trichopolia-incincta/C-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-oviduca/A-D_thumbnail.webp,species-tiles/trichopolia-oviduca/A-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-oviduca/A-V_thumbnail.webp,species-tiles/trichopolia-oviduca/A-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-rufula/A-D_thumbnail.webp,species-tiles/trichopolia-rufula/A-D_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/protorthodes-rufula/A-V_thumbnail.webp,species-tiles/trichopolia-rufula/A-V_thumbnail.webp,"Protorthodes->Trichopolia genus rename (#259, C-016/C-017)",2026-08-23
+species-tiles/sympistis-chionanti/A-D_thumbnail.webp,species-tiles/sympistis-chionanthi/A-D_thumbnail.webp,"Sympistis chionanti->chionanthi spelling fix (#259, C-016)",2026-08-23
+species-tiles/sympistis-chionanti/A-V_thumbnail.webp,species-tiles/sympistis-chionanthi/A-V_thumbnail.webp,"Sympistis chionanti->chionanthi spelling fix (#259, C-016)",2026-08-23
+xestia-c/Xestia c-nigrum-A-D.jpg,xestia-c-nigrum/Xestia c-nigrum-A-D.jpg,slug truncated at the hyphen inside the epithet (#277),2026-08-23
+xestia-c/Xestia c-nigrum-A-v.jpg,xestia-c-nigrum/Xestia c-nigrum-A-v.jpg,slug truncated at the hyphen inside the epithet (#277),2026-08-23
+xestia-c/Xestia c-nigrum-B-D.jpg,xestia-c-nigrum/Xestia c-nigrum-B-D.jpg,slug truncated at the hyphen inside the epithet (#277),2026-08-23
+xestia-c/Xestia c-nigrum-B-V.jpg,xestia-c-nigrum/Xestia c-nigrum-B-V.jpg,slug truncated at the hyphen inside the epithet (#277),2026-08-23
