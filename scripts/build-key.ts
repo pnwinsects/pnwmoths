@@ -113,10 +113,12 @@ export function buildBitset(speciesCount: number, matchingIndices: number[]): st
 }
 
 /**
- * Query data/images.csv for navigational-priority images per species slug.
+ * Query data/images.csv for the navigation image (lowest weight) per species slug.
+ * Unlike Browse this does NOT exclude ventral views, and it only reaches species the
+ * key matrix carries — see docs/reference/photo-display-rules.md.
  *
  * Returns:
- *   - navImages:  Map<slug, filename> — the single nav-priority image per slug
+ *   - navImages:  Map<slug, filename> — the lowest-weight image per slug
  *   - imagePairs: Set<`${slug} ${filename}`> — EVERY (slug, filename) pair in
  *                 images.csv. Used by the post-emit guard to assert each emitted
  *                 nav_image is a real catalogued image (so it resolves on the CDN
@@ -148,7 +150,6 @@ async function queryNavImages(
           'license': 'VARCHAR',
           'view': 'VARCHAR',
           'specimen': 'VARCHAR',
-          'navigational': 'VARCHAR',
           'locality': 'VARCHAR',
           'state': 'VARCHAR',
           'latitude': 'VARCHAR',
@@ -164,16 +165,14 @@ async function queryNavImages(
     `);
 
     // Load ALL images — no slug interpolation into SQL (T-39-01)
-    // Order by navigational priority first, then weight ascending
+    // Order by weight ascending
     const imagesResult = await conn.runAndReadAll(`
-      SELECT species_slug, filename, navigational, TRY_CAST(weight AS INTEGER) AS weight_int
+      SELECT species_slug, filename, TRY_CAST(weight AS INTEGER) AS weight_int
       FROM images
-      ORDER BY species_slug,
-        CASE WHEN navigational = 'true' THEN 0 ELSE 1 END,
-        TRY_CAST(weight AS INTEGER)
+      ORDER BY species_slug, TRY_CAST(weight AS INTEGER)
     `);
 
-    // Build Map<slug, filename> in TypeScript — first row per slug wins (lowest weight / navigational priority)
+    // Build Map<slug, filename> in TypeScript — first row per slug wins (lowest weight)
     // Simultaneously collect the full set of valid (slug, filename) pairs for the ISSUE-43 guard.
     const navImages = new Map<string, string>();
     const imagePairs = new Set<string>();

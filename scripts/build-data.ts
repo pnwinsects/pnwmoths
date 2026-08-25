@@ -122,7 +122,7 @@ export async function main(): Promise<void> {
       );
     }
   }
-  const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']);
+  const imageRows = validateCsv('data/images.csv', ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']);
   for (const row of imageRows) {
     const filename = row['filename'];
     if (filename !== undefined && !/^[a-zA-Z0-9 ._-]+$/.test(filename)) {

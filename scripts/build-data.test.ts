@@ -25,7 +25,7 @@ test('validateCsv: species.csv with correct columns does not throw', () => {
 test('validateCsv: images.csv with correct columns does not throw', () => {
   validateCsv(
     resolve(ROOT, 'data/images.csv'),
-    ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen', 'navigational']
+    ['species_slug', 'filename', 'photographer', 'weight', 'license', 'view', 'specimen']
   );
 });
 
@@ -319,14 +319,14 @@ test('build-data.ts: blank subfamily in species CSV arrives as NULL with nullstr
   }
 });
 
-test('build-data.ts: blank navigational in images CSV arrives as NULL with nullstr', async () => {
-  const tmpDir = resolve(ROOT, '.tmp-nullstr-navigational');
+test('build-data.ts: blank specimen in images CSV arrives as NULL with nullstr', async () => {
+  const tmpDir = resolve(ROOT, '.tmp-nullstr-specimen');
   mkdirSync(tmpDir, { recursive: true });
   const tmpFile = resolve(tmpDir, 'images-nullstr.csv');
   try {
     writeFileSync(tmpFile, [
-      'species_slug,filename,photographer,weight,license,view,specimen,navigational',
-      'acronicta-americana,01.jpg,Jane Doe,1,CC BY 4.0,,,'
+      'species_slug,filename,photographer,weight,license,view,specimen',
+      'acronicta-americana,01.jpg,Jane Doe,1,CC BY 4.0,,'
     ].join('\n'));
 
     const { DuckDBInstance } = await import('@duckdb/node-api');
@@ -345,19 +345,18 @@ test('build-data.ts: blank navigational in images CSV arrives as NULL with nulls
           'weight': 'INTEGER',
           'license': 'VARCHAR',
           'view': 'VARCHAR',
-          'specimen': 'VARCHAR',
-          'navigational': 'VARCHAR'
+          'specimen': 'VARCHAR'
         }
       )
     `);
 
-    const result = await conn.runAndReadAll('SELECT navigational FROM images');
-    const rows = result.getRowObjectsJS() as Array<{ navigational: string | null }>;
+    const result = await conn.runAndReadAll('SELECT specimen FROM images');
+    const rows = result.getRowObjectsJS() as Array<{ specimen: string | null }>;
     conn.closeSync();
 
     const [firstRow] = rows;
     assert.ok(firstRow !== undefined);
-    assert.strictEqual(firstRow.navigational, null, 'blank navigational cell should be NULL, not empty string');
+    assert.strictEqual(firstRow.specimen, null, 'blank specimen cell should be NULL, not empty string');
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
@@ -719,8 +718,8 @@ test('integration: build-data.ts accepts images.csv filename with spaces without
 
   // Write an images.csv with a filename containing a space (Django-style original filename)
   writeFileSync(resolve(tmpDataDir, 'images.csv'), [
-    'species_slug,filename,photographer,weight,license,view,specimen,navigational',
-    'acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,1,CC BY 4.0,dorsal,A,'
+    'species_slug,filename,photographer,weight,license,view,specimen',
+    'acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,1,CC BY 4.0,dorsal,A'
   ].join('\n'));
 
   const scriptPath = resolve(ROOT, 'scripts/build-data.ts');
