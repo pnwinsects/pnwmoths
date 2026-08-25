@@ -7,6 +7,7 @@ import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
 import { derivativeUrl, sourceUrl, type VariantToken } from "./src/_lib/derivative-url.ts";
+import { pickAccountPhotos, pickSimilarPhoto } from "./src/_lib/photo-display.ts";
 import {
   proseDescription,
   speciesDescription,
@@ -127,6 +128,22 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
       images as SpeciesImageLike[] | undefined,
       CDN_BASE_URL,
     ));
+
+  // {{ images[sp.slug] | accountPhotos(speciesPhotos[sp.slug]) }} — what the species
+  // account displays: { mode: 'tiles' | 'photos' | 'none', photos }. The tile branch is
+  // TILE_POLICY 'replaces' (src/_lib/photo-display.ts), stated there and not in the
+  // template.
+  eleventyConfig.addFilter("accountPhotos", (images, highRes) => {
+    const entry = highRes as { high_res_available?: boolean } | undefined;
+    return pickAccountPhotos(
+      (images as SpeciesImageLike[] | undefined) ?? [],
+      entry?.high_res_available === true,
+    );
+  });
+
+  // {{ images[slug] | similarThumbnail }} — the similar-species thumbnail, or null.
+  eleventyConfig.addFilter("similarThumbnail", images =>
+    pickSimilarPhoto((images as SpeciesImageLike[] | undefined) ?? []));
 
   // {{ sp | speciesSocialImageAlt }}
   eleventyConfig.addFilter("speciesSocialImageAlt", sp => speciesSocialImageAlt(sp as SpeciesLike));

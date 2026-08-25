@@ -8,22 +8,23 @@
 // read, never acted on by the build, and it can never fail one.
 //
 // THE ACCOUNT IS NOT THE ONLY PLACE A PHOTOGRAPH APPEARS, and an earlier draft of this
-// report assumed it was. Three other surfaces read data/images.csv directly and never
-// consult tile status, each taking ONE row per species as a thumbnail:
-//
-//   browse    src/_data/taxon.ts       first non-ventral row by weight — and its own
-//                                      comment says "images.csv rows always win when
-//                                      both exist"; tiles are only a fallback
-//   identify  scripts/build-key.ts     first row by weight
-//   similar   src/species/species.njk  first row by weight, rendered on OTHER species'
-//                                      pages that name this one in similar_species
+// report assumed it was. Three other surfaces read data/images.csv and never consult
+// tile status: the Browse tree, Identify cards, and the similar-species thumbnails that
+// render on OTHER species' pages.
 //
 // So `cause` answers "why is this not on the species account", and `displayed_as`
 // answers "where is it still shown". Seven of the 39 rows this report was built to
 // surface are browse or Identify thumbnails today; calling them invisible would have
-// sent the curator to rule on photographs he can already see. `displayed_as` is read
-// from the BUILT site rather than predicted — see scanBuiltSite() for why a hand model
-// of these three consumers is not good enough.
+// sent the curator to rule on photographs he can already see.
+//
+// `displayed_as` COMES FROM THE DISPLAY INDEX (src/_lib/photo-display-index.ts), which
+// inverts the selection rules over the same artifacts the surfaces render from — the
+// Browse tree, the key matrix, the species collection. It used to be read from the
+// emitted HTML instead, because at the time there was no module to ask and three hand
+// models of the rules had each been wrong (#299). The scan still exists and still runs:
+// scripts/check-display-index.ts checks the index against `_site/` on every build, so
+// the model is held to the bytes rather than trusted in place of them (#338). That is
+// what lets this report run without a build.
 //
 // FOUR REASONS THE SPECIES ACCOUNT DOES NOT DISPLAY A PHOTOGRAPH. Checked in this
 // order, because the first that applies is the proximate one — a row on a species
@@ -59,18 +60,22 @@
 // This is the column that tells the curator whether there is anything to look at, so
 // overstating it would be the worst kind of wrong here.
 //
-// REQUIRES A BUILT `_site/`, because `displayed_as` is read from it. Run
-// `npm run build:site` first; the script exits non-zero with that instruction otherwise.
-//
 // Run via: npm run report:hidden-images  (writes data/hidden-images-report.csv)
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { pathToFileURL } from 'node:url';
 import { normalizeSlug, loadUnpublishedSpecies } from '../src/_lib/unpublished-species.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { encodePath } from '../src/_lib/derivative-url.ts';
 import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
+import { loadDisplayIndex } from './lib/display-index.ts';
+import {
+  photoKey,
+  formatIndexSurfaces,
+  type DisplayIndex,
+  type IndexSurface,
+} from '../src/_lib/photo-display-index.ts';
 
 /** Public origin, same constant as eleventy.config.ts. Not a secret, not an env var. */
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
@@ -242,113 +247,12 @@ export function filenameNameDiffers(filename: string, genus: string, species: st
   return !filename.trim().toLowerCase().startsWith(expected);
 }
 
-/** Where a photograph still appears outside its own species account. */
-export type ThumbnailSurface = 'browse' | 'identify' | 'similar' | 'other';
-
-/** `${slug}\u0000${filename}` -> the surfaces that show it. */
-export type ThumbnailUse = Map<string, Set<ThumbnailSurface>>;
-
-export function thumbnailKey(slug: string, filename: string): string {
-  return `${slug}\u0000${filename}`;
-}
-
 /**
- * Every image filename referenced by one built file, in either form it can take.
- *
- * Two forms, because two code paths produce them: the browse payload and the key
- * matrix carry the raw `Genus species-A-D.jpg`, while a rendered <img> carries the
- * percent-encoded derivative, `Genus%20species-A-D%40320h.webp`. Both normalise back
- * to the raw filename here.
+ * `displayed_as` answers "where ELSE is this photograph shown", so a row's own account
+ * never counts — and by construction cannot, since every row in this report is one the
+ * account does not display.
  */
-export function extractImageReferences(content: string): Set<string> {
-  const found = new Set<string>();
-  for (const match of content.matchAll(/[A-Za-z][A-Za-z0-9 ._'"()-]*\.jpg/g)) {
-    found.add(match[0]);
-  }
-  for (const match of content.matchAll(/[A-Za-z][A-Za-z0-9%._'"()-]*%40[0-9a-zA-Z]+\.(?:webp|jpg)/g)) {
-    const stem = match[0].slice(0, match[0].lastIndexOf('%40'));
-    try {
-      found.add(`${decodeURIComponent(stem)}.jpg`);
-    } catch {
-      // A stem that is not valid percent-encoding is not one of ours.
-    }
-  }
-  return found;
-}
-
-/** Which surface a built page is, from its `_site`-relative path. */
-export function surfaceOf(relativePath: string, slug: string): ThumbnailSurface | 'account' | null {
-  if (relativePath.startsWith('browse/')) return 'browse';
-  if (relativePath.startsWith('identify/') || relativePath === 'key-matrix.json') return 'identify';
-  const species = /^species\/([^/]+)\//.exec(relativePath);
-  if (species) return species[1] === slug ? 'account' : 'similar';
-  return 'other';
-}
-
-/**
- * Where each catalogued photograph is actually referenced in the BUILT site.
- *
- * Read from `_site`, not predicted from `data/`. An earlier version of this report
- * modelled the three consumers by hand — reproducing their orderings from
- * src/_data/taxon.ts, scripts/build-key.ts and src/species/species.njk — and got browse
- * wrong: the genus strip takes up to FOUR images across a whole genus, so a species can
- * contribute a second photograph the model never predicted, and Identify has no card at
- * all for the 232 published species the Lucid key does not carry. Six photographs were
- * reported invisible while they were on `/browse/` and Identify.
- *
- * Any model of a consumer can drift from it; the emitted bytes cannot. This is the same
- * reasoning as ADR 0035 — the browser smoke gate exists because every other check reads
- * sources rather than what shipped.
- */
-export interface SiteScan {
-  /** Where each photograph is shown, excluding its own account. */
-  use: ThumbnailUse;
-  /**
-   * Catalogued filenames referenced ANYWHERE in the scanned files, own account included.
-   * Not used to classify anything — it is the sanity floor. A real build references
-   * nearly the whole catalogue, so a near-empty set means the site handed to this script
-   * is hollow or half-built, and every `displayed_as` would come back blank.
-   */
-  referenced: Set<string>;
-}
-
-export function scanBuiltSite(
-  files: readonly { path: string; content: string }[],
-  images: readonly { slug: string; filename: string }[],
-): SiteScan {
-  const bySlugFilename = new Map<string, string[]>();
-  for (const image of images) {
-    const bucket = bySlugFilename.get(image.filename);
-    if (bucket) bucket.push(image.slug);
-    else bySlugFilename.set(image.filename, [image.slug]);
-  }
-
-  const use: ThumbnailUse = new Map();
-  const referenced = new Set<string>();
-  for (const file of files) {
-    for (const filename of extractImageReferences(file.content)) {
-      const slugs = bySlugFilename.get(filename);
-      if (!slugs) continue;
-      referenced.add(filename);
-      for (const slug of slugs) {
-        const surface = surfaceOf(file.path, slug);
-        if (surface === null || surface === 'account') continue;
-        const key = thumbnailKey(slug, filename);
-        const surfaces = use.get(key);
-        if (surfaces) surfaces.add(surface);
-        else use.set(key, new Set([surface]));
-      }
-    }
-  }
-  return { use, referenced };
-}
-
-/** Stable rendering of the surfaces a row appears on, for the CSV cell. */
-export function formatSurfaces(surfaces: ReadonlySet<ThumbnailSurface> | undefined): string {
-  if (!surfaces || surfaces.size === 0) return '';
-  const order: ThumbnailSurface[] = ['browse', 'identify', 'similar', 'other'];
-  return order.filter((s) => surfaces.has(s)).join(' ');
-}
+const EXCLUDE_OWN_ACCOUNT: readonly IndexSurface[] = ['account'];
 
 export interface BuildHiddenImageRowsOptions {
   images: readonly ImageInput[];
@@ -367,8 +271,12 @@ export interface BuildHiddenImageRowsOptions {
   unpublished: ReadonlySet<string>;
   /** `slug/filename` paths the CDN inventory reports as missing, or null when unavailable. */
   missingOnCdn: ReadonlySet<string> | null;
-  /** Where each photograph is still shown outside its account, from computeThumbnailUse(). */
-  thumbnailUse: ThumbnailUse;
+  /**
+   * Where each photograph appears, from src/_lib/photo-display-index.ts. The row's own
+   * account is excluded when the cell is rendered — `displayed_as` answers "where ELSE",
+   * and a photograph on its own account is not in this report to begin with.
+   */
+  displayIndex: DisplayIndex;
   /**
    * Curator rulings from data/photo-determinations.csv, so a filename that
    * disagrees with its species can be reported as settled rather than asked again.
@@ -384,7 +292,7 @@ export interface BuildHiddenImageRowsOptions {
  * that the photograph is visible.
  */
 export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): HiddenImageRow[] {
-  const { images, species, tiled, withheldFamilies, unpublished, missingOnCdn, thumbnailUse } = options;
+  const { images, species, tiled, withheldFamilies, unpublished, missingOnCdn, displayIndex } = options;
   const cdnBaseUrl = options.cdnBaseUrl ?? CDN_BASE_URL;
   const determinations = options.determinations ?? new Map<string, { source: string }>();
   const rows: HiddenImageRow[] = [];
@@ -443,7 +351,7 @@ export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): Hidd
       filename_name_differs:
         filenameNameDiffers(image.filename, speciesRow.genus, speciesRow.species) ? '1' : '',
       determined_by: determinations.get(toPhotoStem(image.filename))?.source ?? '',
-      displayed_as: formatSurfaces(thumbnailUse.get(thumbnailKey(slug, image.filename))),
+      displayed_as: formatIndexSurfaces(displayIndex.get(photoKey(slug, image.filename)), EXCLUDE_OWN_ACCOUNT),
       family: speciesRow.family.trim(),
       common_name: speciesRow.common_name.trim(),
       image_url: `${cdnBaseUrl}/${encodePath(objectPath)}`,
@@ -517,69 +425,6 @@ function readCsv(path: string): Record<string, string>[] {
 }
 
 /**
- * Why the built site cannot be trusted to answer "where is this photograph shown", or
- * null when it can.
- *
- * Names the three surfaces scanBuiltSite() reads, plus a species-page count: a build that
- * stopped early has the layout but not the pages, and a page count below what the
- * visibility gates allow means this scan would miss similar-species thumbnails.
- */
-export function describeIncompleteSite(siteDir: string, expectedSpeciesPages: number): string | null {
-  for (const required of ['browse/index.html', 'identify/index.html', 'key-matrix.json']) {
-    if (!existsSync(join(siteDir, required))) return `has no ${required}, so it is not a built site`;
-  }
-  const speciesDir = join(siteDir, 'species');
-  const built = existsSync(speciesDir)
-    ? readdirSync(speciesDir, { withFileTypes: true })
-        .filter((entry) => entry.isDirectory() && existsSync(join(speciesDir, entry.name, 'index.html')))
-        .length
-    : 0;
-  if (built < expectedSpeciesPages) {
-    return `has ${built} species pages but the visibility gates allow ${expectedSpeciesPages}, ` +
-      'so it is stale or half-built';
-  }
-  return null;
-}
-
-/**
- * The first input newer than the newest built page, or null when the site is current.
- *
- * Compared against `_site/index.html` rather than the directory: a directory's mtime
- * moves when anything inside it is touched, including this report being copied in.
- */
-function stalestInput(siteDir: string, inputs: readonly string[]): string | null {
-  const marker = join(siteDir, 'index.html');
-  if (!existsSync(marker)) return null; // the coverage floor already rejected non-sites
-  const builtAt = statSync(marker).mtimeMs;
-  for (const input of inputs) {
-    if (existsSync(input) && statSync(input).mtimeMs > builtAt) return input;
-  }
-  return null;
-}
-
-/**
- * Built files that can reference an image: every page, plus the key matrix Identify
- * ships. Parquet, CSVs and binaries are skipped — they cannot display anything, and the
- * report's own CSV sitting in _site/curation/ would otherwise match every row in itself.
- */
-function readSiteFiles(siteDir: string): { path: string; content: string }[] {
-  const files: { path: string; content: string }[] = [];
-  const walk = (dir: string, prefix: string): void => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
-      if (entry.isDirectory()) {
-        if (entry.name === 'pagefind' || entry.name === 'curation') continue;
-        walk(join(dir, entry.name), rel);
-      } else if (entry.name.endsWith('.html') || rel === 'key-matrix.json') {
-        files.push({ path: rel, content: readFileSync(join(dir, entry.name), 'utf8') });
-      }
-    }
-  };
-  walk(siteDir, '');
-  return files;
-}
-
-/**
  * `slug/filename` paths the CDN inventory reports absent, or null when the report is
  * not on disk. null is NOT an empty set: an absent report is no evidence either way,
  * and an empty set would silently assert every object is present.
@@ -593,7 +438,7 @@ export function loadMissingOnCdn(path: string): Set<string> | null {
   return missing;
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const species = new Map<string, SpeciesInput>();
   for (const row of readCsv(resolve(ROOT, 'data/species.csv'))) {
     const slug = normalizeSlug(`${row['genus'] ?? ''}-${row['species'] ?? ''}`);
@@ -628,62 +473,11 @@ function main(): void {
   const withheldFamilies = loadWithheldFamilies(resolve(ROOT, 'data/withheld-families.csv'));
   const unpublished = loadUnpublishedSpecies(resolve(ROOT, 'data/unpublished-species.csv'));
 
-  // `displayed_as` is read from the BUILT site, so a build is required. Predicting it
-  // from data/ is what the earlier version did, and it was wrong — see scanBuiltSite().
-  // The species that build a page — the same gate src/_data/species.ts applies.
-  const published = new Set<string>();
-  for (const [slug, row] of species) {
-    if (isWithheldOrUnclassified(row.family, withheldFamilies)) continue;
-    if (unpublished.has(slug)) continue;
-    published.add(slug);
-  }
-
-  const siteDir = resolve(ROOT, process.env['SITE_DIR'] ?? '_site');
-  if (!existsSync(siteDir)) {
-    console.error(
-      `[hidden-images] ERROR: ${siteDir} does not exist. This report reads the built site to ` +
-        'find where each photograph is still shown. Run `npm run build:site` first.',
-    );
-    process.exit(1);
-  }
-  const scan = scanBuiltSite(
-    readSiteFiles(siteDir),
-    images.map((row) => ({ slug: normalizeSlug(row.species_slug), filename: row.filename })),
-  );
-
-  // A hollow or half-built _site/ is the one input that makes this report maximally and
-  // SILENTLY wrong: every displayed_as comes back blank, so every photograph is declared
-  // invisible and the curator is sent to rule on the whole catalogue. existsSync does not
-  // catch it — an empty directory exists.
-  //
-  // Checked STRUCTURALLY, against the three surfaces this scan reads and the number of
-  // species pages the gates say should exist. A proportion of the catalogue would not
-  // work: a complete build references only ~37% of catalogued filenames, because a ventral
-  // photograph of a tiled species is on no page by design — the very thing being counted.
-  const problem = describeIncompleteSite(siteDir, published.size);
-  if (problem) {
-    console.error(
-      `[hidden-images] ERROR: ${siteDir} ${problem}. Every photograph would be reported as ` +
-        'appearing nowhere. Run `npm run build:site` and try again.',
-    );
-    process.exit(1);
-  }
-
-  const staleAgainst = stalestInput(siteDir, [
-    resolve(ROOT, 'data/images.csv'),
-    resolve(ROOT, 'data/species-photos.json'),
-    resolve(ROOT, 'data/species.csv'),
-  ]);
-  if (staleAgainst) {
-    console.error(
-      `[hidden-images] ERROR: ${staleAgainst} is newer than the built site, so _site/ does not ` +
-        'reflect the data this report reads. Every difference would show up as a photograph ' +
-        'that appears nowhere. Run `npm run build:site` and try again.',
-    );
-    process.exit(1);
-  }
-
-  const thumbnailUse = scan.use;
+  // Where every catalogued photograph appears, derived from the artifacts the surfaces
+  // render from rather than from a rebuilt `_site/`. scripts/check-display-index.ts is
+  // what keeps this honest: it runs in build:site and fails on any disagreement between
+  // this index and the emitted HTML.
+  const displayIndex = await loadDisplayIndex();
 
   const missingOnCdn = loadMissingOnCdn(resolve(ROOT, 'data/cdn-inventory-report.csv'));
   if (missingOnCdn === null) {
@@ -701,7 +495,7 @@ function main(): void {
     withheldFamilies,
     unpublished,
     missingOnCdn,
-    thumbnailUse,
+    displayIndex,
     determinations: readPhotoDeterminations(),
   });
 
@@ -725,5 +519,8 @@ function main(): void {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  main();
+  main().catch((err: unknown) => {
+    console.error(`[hidden-images] ${err instanceof Error ? err.message : String(err)}`);
+    process.exit(1);
+  });
 }

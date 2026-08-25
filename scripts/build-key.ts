@@ -13,6 +13,7 @@ import { KeyMatrixSchema } from '../src/types/schemas.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../src/_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../src/_lib/format-epithet.ts';
+import { WEIGHT_ORDER_SQL, pickIdentifyPhoto } from '../src/_lib/photo-display.ts';
 import { pathToFileURL } from 'node:url';
 
 /**
@@ -164,29 +165,38 @@ async function queryNavImages(
       )
     `);
 
-    // Load ALL images — no slug interpolation into SQL (T-39-01)
-    // Order by weight ascending
+    // Load ALL images — no slug interpolation into SQL (T-39-01). The ordering is the
+    // shared one from src/_lib/photo-display.ts: a constant fragment, not user input.
+    // Identify does NOT exclude ventral views; only Browse does.
     const imagesResult = await conn.runAndReadAll(`
-      SELECT species_slug, filename, TRY_CAST(weight AS INTEGER) AS weight_int
+      SELECT species_slug, filename, ${WEIGHT_ORDER_SQL} AS weight_int
       FROM images
-      ORDER BY species_slug, TRY_CAST(weight AS INTEGER)
+      ORDER BY species_slug, ${WEIGHT_ORDER_SQL}
     `);
 
-    // Build Map<slug, filename> in TypeScript — first row per slug wins (lowest weight)
-    // Simultaneously collect the full set of valid (slug, filename) pairs for the ISSUE-43 guard.
-    const navImages = new Map<string, string>();
+    // Group in TypeScript, then let pickIdentifyPhoto choose — rather than trusting the
+    // ORDER BY and taking the first row per slug. The two agree today (the fragment above
+    // IS the picker's ordering), and going through the picker is what keeps them agreeing.
+    // Collect the full set of valid (slug, filename) pairs for the ISSUE-43 guard as we go.
     const imagePairs = new Set<string>();
-    type ImagesRow = { species_slug: unknown; filename: unknown };
+    const bySlug = new Map<string, { filename: string; weight: number | null }[]>();
+    type ImagesRow = { species_slug: unknown; filename: unknown; weight_int: unknown };
     const rows = imagesResult.getRowObjectsJS() as ImagesRow[];
     for (const row of rows) {
       const slug = String(row.species_slug ?? '');
       const filename = String(row.filename ?? '');
-      if (slug && filename) {
-        imagePairs.add(`${slug} ${filename}`);
-        if (!navImages.has(slug)) {
-          navImages.set(slug, filename);
-        }
-      }
+      if (!slug || !filename) continue;
+      imagePairs.add(`${slug} ${filename}`);
+      const weight = typeof row.weight_int === 'number' ? row.weight_int : null;
+      const bucket = bySlug.get(slug);
+      if (bucket) bucket.push({ filename, weight });
+      else bySlug.set(slug, [{ filename, weight }]);
+    }
+
+    const navImages = new Map<string, string>();
+    for (const [slug, candidates] of bySlug) {
+      const chosen = pickIdentifyPhoto(candidates);
+      if (chosen) navImages.set(slug, chosen.filename);
     }
     return { navImages, imagePairs };
   } finally {

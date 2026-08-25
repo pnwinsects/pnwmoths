@@ -13,6 +13,7 @@
 /** Upper bound on a meta description. Facebook truncates near 300, Google's SERP
  *  snippet near 160, and Bluesky's card near 200 — 200 is the useful middle. */
 import { derivativeUrl, sourceUrl } from './derivative-url.ts';
+import { pickSharePhoto } from './photo-display.ts';
 
 export const MAX_DESCRIPTION_LENGTH = 200;
 
@@ -154,6 +155,12 @@ export interface HighResPhotoLike {
 /** The subset of an `images` row this module reads. */
 export interface SpeciesImageLike {
   filename: string;
+  /**
+   * Optional because callers pass the already-ordered array from src/_data/images.ts.
+   * pickSharePhoto orders by weight regardless, and a stable sort over rows that all
+   * lack a weight preserves the order it was handed.
+   */
+  weight?: number | null;
 }
 
 /**
@@ -175,17 +182,20 @@ export interface SpeciesImageLike {
  * access log (#222). A static path has no `&` to misread. Legacy photos are already
  * JPEG, so the fallback stays an unmodified source.
  */
-// One of seven display rules over data/images.csv — docs/reference/photo-display-rules.md.
 export function speciesSocialImage(
   slug: string,
   highRes: HighResPhotoLike | undefined,
   images: SpeciesImageLike[] | undefined,
   cdnBaseUrl: string,
 ): string {
+  // The share rule lives in pickSharePhoto: tile if there is one, else the
+  // lowest-weight catalogued photograph, else "" so the layout falls back to the
+  // site card. `prefers`, not `replaces` — unlike the account, a tiled species with
+  // no usable tile still shows its photographs.
   const specimen = highRes?.high_res_available ? highRes.specimens?.[0] : undefined;
-  if (specimen) return derivativeUrl(cdnBaseUrl, `${specimen.tiles_path}_thumbnail.webp`, '1200');
-  const lead = images?.[0];
-  if (lead) return sourceUrl(cdnBaseUrl, `${slug}/${lead.filename}`);
+  const chosen = pickSharePhoto(images ?? [], specimen ? `${specimen.tiles_path}_thumbnail.webp` : null);
+  if (chosen.kind === 'tile') return derivativeUrl(cdnBaseUrl, chosen.tile, '1200');
+  if (chosen.kind === 'photo') return sourceUrl(cdnBaseUrl, `${slug}/${chosen.photo.filename}`);
   return "";
 }
 
