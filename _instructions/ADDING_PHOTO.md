@@ -24,11 +24,10 @@ The build fails if you do 3 without 1 and 2, naming the file it cannot find. Tha
 | species_slug | string | yes | `acronicta-americana` |
 | filename | string | yes | `Acronicta americana-A-D.jpg` |
 | photographer | string | yes | `Merrill A. Peterson` |
-| weight | integer | yes | `2` (display order within the species; lower sorts first) |
+| weight | integer | yes | `2` (display order within the species; lower sorts first — and the lowest-weight photo is the one Browse and Identify show as the species' thumbnail) |
 | license | string | yes | `CC BY-NC-SA 4.0` (see below) |
 | view | string | no | `dorsal`, `ventral`, `lateral`, or `head` |
 | specimen | string | no | Specimen letter (`A`, `B`, `C`, `D`) when several are shown |
-| navigational | string | no | Leave blank unless this is the curated navigation image |
 | locality | string | no | `Quartz Mt.` |
 | state | string | no | `WA` |
 | latitude | decimal | no | `47.074` |
@@ -87,10 +86,10 @@ original filename; do not rename it.
 **4. Add the row to `data/images.csv`:**
 
 ```csv
-acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,2,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
+acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,2,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,
 ```
 
-Count the commas — there are 18 columns, and trailing blanks still need their separators. Easiest is
+Count the commas — there are 17 columns, and trailing blanks still need their separators. Easiest is
 to copy an existing row for the same species and edit it.
 
 **5. Verify the build:**
@@ -153,9 +152,9 @@ the legacy host all join on it, and renaming orphans all three
 catalogued, upload a corrected copy alongside it and record the old path in
 [`data/cdn-retired-images.csv`](../data/cdn-retired-images.csv) rather than renaming in place.
 
-**`data/images.csv is missing required column: "…"`** — the header lost one of the eight columns
+**`data/images.csv is missing required column: "…"`** — the header lost one of the seven columns
 the build requires (`species_slug`, `filename`, `photographer`, `weight`, `license`, `view`,
-`specimen`, `navigational`). Restore it; a blank *value* is fine, a missing *column* is not.
+`specimen`). Restore it; a blank *value* is fine, a missing *column* is not.
 
 Note the remaining ten columns (`locality` through `subspecies`) are **not** checked by that
 validation, so deleting one fails silently rather than loudly. Keep the header intact.

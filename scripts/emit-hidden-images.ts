@@ -14,7 +14,7 @@
 //   browse    src/_data/taxon.ts       first non-ventral row by weight — and its own
 //                                      comment says "images.csv rows always win when
 //                                      both exist"; tiles are only a fallback
-//   identify  scripts/build-key.ts     first row by (navigational, weight)
+//   identify  scripts/build-key.ts     first row by weight
 //   similar   src/species/species.njk  first row by weight, rendered on OTHER species'
 //                                      pages that name this one in similar_species
 //

@@ -32,13 +32,12 @@ function isTaxonSpeciesDbRow(obj: unknown): obj is TaxonSpeciesDbRow {
   );
 }
 
-// Images query projects: species_slug, filename, photographer, weight (TRY_CAST INTEGER), navigational
+// Images query projects: species_slug, filename, photographer, weight (TRY_CAST INTEGER)
 interface NavImageDbRow {
   species_slug: string;
   filename: string;
   photographer: string;
   weight: number | null;
-  navigational: string | null;
   thumb_url?: string;
 }
 
@@ -65,7 +64,6 @@ function highResNavImage(slug: string, entry: SpeciesPhoto | undefined): NavImag
     filename: '',
     photographer: entry.photographer ?? '',
     weight: null,
-    navigational: null,
     thumb_url: `${specimen.tiles_path}_thumbnail.webp`,
   };
 }
@@ -104,6 +102,10 @@ interface TaxonFamilyBuild {
   subfamilyMap?: Record<string, TaxonSubfamilyBuild>;
 }
 
+/**
+ * The genus strip: up to four images taken across the WHOLE genus by weight, not
+ * one per species. Rule inventory: docs/reference/photo-display-rules.md.
+ */
 function pickNavImages(speciesSlugs: string[], bySpeciesSlug: Record<string, NavImageDbRow[]>): NavImage[] {
   const seen = new Set<string>();
   const candidates: NavImage[] = [];
@@ -116,12 +118,7 @@ function pickNavImages(speciesSlugs: string[], bySpeciesSlug: Record<string, Nav
       }
     }
   }
-  candidates.sort((a, b) => {
-    const navA = a.navigational === 'true' ? 0 : 1;
-    const navB = b.navigational === 'true' ? 0 : 1;
-    if (navA !== navB) return navA - navB;
-    return (a.weight ?? 999) - (b.weight ?? 999);
-  });
+  candidates.sort((a, b) => (a.weight ?? 999) - (b.weight ?? 999));
   return candidates.slice(0, 4);
 }
 
@@ -169,7 +166,6 @@ export default async function (): Promise<TaxonFamily[]> {
         'license': 'VARCHAR',
         'view': 'VARCHAR',
         'specimen': 'VARCHAR',
-        'navigational': 'VARCHAR',
         'locality': 'VARCHAR',
         'state': 'VARCHAR',
         'latitude': 'VARCHAR',
@@ -192,11 +188,13 @@ export default async function (): Promise<TaxonFamily[]> {
     ORDER BY family, subfamily NULLS LAST, tribe NULLS LAST, genus, species
   `);
 
-  // Browse shows navigational thumbnails only; ventral (underside) shots belong
-  // on species-account pages, not in the tree (issue #107). Rows with a null view
-  // are kept — they are unclassified, not confirmed ventral.
+  // Browse shows one navigation thumbnail per species, the lowest weight; ventral
+  // (underside) shots belong on species-account pages, not in the tree (issue #107).
+  // Rows with a null view are kept — they are unclassified, not confirmed ventral.
+  // This is one of seven display rules over images.csv, and the ventral exclusion is
+  // unique to Browse — see docs/reference/photo-display-rules.md before changing it.
   const imagesResult = await conn.runAndReadAll(`
-    SELECT species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight, navigational
+    SELECT species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight
     FROM images
     WHERE view IS DISTINCT FROM 'ventral'
     ORDER BY species_slug, TRY_CAST(weight AS INTEGER)
@@ -300,12 +298,7 @@ export default async function (): Promise<TaxonFamily[]> {
           genus.navImages = pickNavImages(slugs, bySpeciesSlug);
           genus.species = genus.species.map(sp => {
             const imgs = (bySpeciesSlug[sp.slug] ?? []).slice();
-            imgs.sort((a, b) => {
-              const navA = a.navigational === 'true' ? 0 : 1;
-              const navB = b.navigational === 'true' ? 0 : 1;
-              if (navA !== navB) return navA - navB;
-              return (a.weight ?? 999) - (b.weight ?? 999);
-            });
+            imgs.sort((a, b) => (a.weight ?? 999) - (b.weight ?? 999));
             const navImage = imgs[0] ?? null;
             return { ...sp, navImage };
           });

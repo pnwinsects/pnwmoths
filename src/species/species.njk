@@ -55,6 +55,8 @@ eleventyComputed:
 
 <div class="species-content">
   <div class="species-photos">
+    {# Tiles render INSTEAD OF the catalogued photographs — the only surface that
+       knows tiles exist. See docs/reference/photo-display-rules.md. #}
     {% set spImages = images[sp.slug] %}
     {% set highResEntry = speciesPhotos[sp.slug] %}
     <pnwm-image-slideshow
@@ -114,6 +116,8 @@ eleventyComputed:
           {% for slug in sp.similar_slugs %}
             {% for s in species %}
               {% if s.slug == slug %}
+                {# simImages[0] = lowest weight, ventral included, tiles ignored —
+                   docs/reference/photo-display-rules.md #}
                 {% set simImages = images[slug] %}
                 <a class="similar-species-entry" href="{{ ('/species/' + slug + '/') | url }}">
                   <div class="similar-species-thumb">

@@ -90,7 +90,6 @@ async function main(): Promise<void> {
         'license': 'VARCHAR',
         'view': 'VARCHAR',
         'specimen': 'VARCHAR',
-        'navigational': 'VARCHAR',
         'locality': 'VARCHAR',
         'state': 'VARCHAR',
         'latitude': 'VARCHAR',

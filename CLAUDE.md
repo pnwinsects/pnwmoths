@@ -11,7 +11,7 @@ Durable knowledge lives in a few files — keep them current; this is the produc
 - **[docs/adr/](docs/adr/)** — numbered decision records with rationale and rejected alternatives. **When a decision is made, add an ADR before moving on.** Mark superseded records; don't delete them.
 - **[docs/curation-log.md](docs/curation-log.md)** — the curator's rulings about the catalogue itself: what it contains, what a taxon is called, where it sits, and which data is admitted (the file states its own scope and the required fields). Append-only, numbered `C-nnn`, newest first. **Write the entry when the decision is made — in the PR that applies it, or immediately as `Pending` if it can't be applied yet** ([ADR 0032](docs/adr/0032-curation-log.md)). Engineering decisions go in `docs/adr/`; *which taxa are gated* goes here.
 - **[docs/concerns.md](docs/concerns.md)** — live tech debt and known gaps (accepted vs actionable). **[docs/lessons-learned.md](docs/lessons-learned.md)** — reusable "if you touch X, know Y" engineering lessons.
-- **[docs/reference/](docs/reference/)** — provenance of the legacy data (original WWU site, reference MySQL DB, Lucid3 key source, subfamily-in-CMS-paths).
+- **[docs/reference/](docs/reference/)** — provenance of the legacy data (original WWU site, reference MySQL DB, Lucid3 key source, subfamily-in-CMS-paths) and the [photo display rules](docs/reference/photo-display-rules.md) — which photograph each surface shows, until [#338](https://github.com/pnwinsects/pnwmoths/issues/338) gives them an owner.
 - **[_instructions/](_instructions/)** — plain-English maintainer runbooks (adding species/records/photos, assigning districts, tiling, uploading).
 
 ## Work tracking

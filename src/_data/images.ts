@@ -12,7 +12,6 @@ interface ImageRow {
   license: string | null;
   view: string | null;
   specimen: string | null;
-  navigational: string | null;
   locality: string | null;
   state: string | null;
   latitude: number | null;
@@ -71,7 +70,6 @@ export default function (): Record<string, ImageRow[]> {
       license: row['license'] || null,
       view: row['view'] || null,
       specimen: row['specimen'] || null,
-      navigational: row['navigational'] || null,
       locality: row['locality'] || null,
       state: row['state'] || null,
       latitude: toFloat(row['latitude'] ?? ''),
@@ -84,7 +82,9 @@ export default function (): Record<string, ImageRow[]> {
       subspecies: row['subspecies'] || null,
     });
   }
-  // Sort each species' images by weight
+  // Sort each species' images by weight. This ordering IS the account carousel, the
+  // similar-species thumbnail ([0]) and the share-image fallback ([0]) — see
+  // docs/reference/photo-display-rules.md.
   for (const slug of Object.keys(bySpecies)) {
     bySpecies[slug]?.sort((a, b) => (a.weight ?? 0) - (b.weight ?? 0));
   }

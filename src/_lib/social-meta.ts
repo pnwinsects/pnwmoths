@@ -175,6 +175,7 @@ export interface SpeciesImageLike {
  * access log (#222). A static path has no `&` to misread. Legacy photos are already
  * JPEG, so the fallback stays an unmodified source.
  */
+// One of seven display rules over data/images.csv — docs/reference/photo-display-rules.md.
 export function speciesSocialImage(
   slug: string,
   highRes: HighResPhotoLike | undefined,

@@ -76,7 +76,10 @@ Add a row to `data/images.csv` for the new image:
 | license | string | yes | `CC BY-NC-SA 4.0` or `(c) Photographer Name` |
 | view | string | no | `dorsal`, `ventral`, `lateral`, or `head` |
 | specimen | string | no | `A`, `B`, `C`, `D` |
-| navigational | boolean | no | leave blank unless this is a curated navigation image |
+
+The row has ten further columns (`locality` through `subspecies`) that this table does not list —
+see the full schema in [ADDING_PHOTO.md](ADDING_PHOTO.md), and keep every separator even where the
+value is blank.
 
 ### 5. Generate the image's derivatives
 

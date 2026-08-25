@@ -47,3 +47,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0036](0036-cdn-inventory-by-accountability.md) | The CDN is inventoried by accountability — every object joined to what explains it, findings reported both directions, advisory only | Accepted |
 | [0037](0037-curation-reports-published-unlinked.md) | Every advisory report is listed at an unlinked, `noindex` `/curation/` index, driven by one manifest shared with the copy step | Accepted |
 | [0038](0038-photo-identity-is-data-not-filename.md) | A photograph's species lives in `data/photo-determinations.csv`, not in its filename; filenames are permanent opaque identifiers | Accepted |
+| [0039](0039-photo-display-selection-by-weight.md) | `weight` alone selects which photograph a surface shows; the never-populated `navigational` flag is removed and the seven display rules are written down | Accepted |

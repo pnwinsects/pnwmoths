@@ -61,7 +61,7 @@ export type GlossaryWord = z.infer<typeof GlossaryWordSchema>;
 // --- SpeciesImage ---
 // Images from images.csv — ALL columns are VARCHAR (no coercion at DuckDB read time)
 // taxon.js reads with all-VARCHAR columns; weight coerced via TRY_CAST separately
-// navigational and subspecies are 100% empty → null under nullstr=''
+// subspecies is 100% empty → null under nullstr=''
 export const SpeciesImageSchema = z.object({
   species_slug:  z.string(),
   filename:      z.string(),
@@ -70,7 +70,6 @@ export const SpeciesImageSchema = z.object({
   license:       z.string(),
   view:          z.nullable(z.string()),
   specimen:      z.nullable(z.string()),
-  navigational:  z.nullable(z.string()), // 100% empty; compared as string: navigational === 'true'
   locality:      z.nullable(z.string()),
   state:         z.nullable(z.string()),
   latitude:      z.nullable(z.string()), // VARCHAR, not DOUBLE (images.csv all-VARCHAR)
@@ -128,13 +127,12 @@ export type SpeciesDistrict = z.infer<typeof SpeciesDistrictSchema>;
 // tribe node with name === null, whose genera render directly under the
 // subfamily (mirrors the name === null "no subfamily grouping" convention).
 // NavImage columns from taxon.js images query:
-//   species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight, navigational
-// weight comes back as number|null (TRY_CAST returns null on failure); navigational as string|null
+//   species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight
+// weight comes back as number|null (TRY_CAST returns null on failure)
 export const NavImageSchema = z.object({
   filename:     z.string(),
   photographer: z.string(),
   weight:       z.nullable(z.number()),    // int constraint dropped (not in zod/mini); enforced by DuckDB INT32
-  navigational: z.nullable(z.string()),
   species_slug: z.string(),
   // CDN-relative path (no leading slash, no query) to a prebuilt thumbnail, used
   // for species that have only high-res pipeline photos and no images.csv row.
