@@ -399,3 +399,28 @@ Those tile URLs are public the moment the upload finishes, and the standing rule
 the Storage Zone applies to them like everything else: it is additive, and nothing is
 ever deleted from it ([ADR 0008](../docs/adr/0008-deploy-bunny-additive.md)). Re-running
 this runbook overwrites objects in place, which is safe; removing them is not.
+
+### Tiling a species HIDES its catalogued photographs — from its own page only
+
+Once `data/species-photos.json` marks a species `high_res_available`, its account renders
+the deep-zoom viewer **instead of** its `data/images.csv` photographs, not alongside them.
+Every one of them disappears from that page, including views the tiles do not cover — a
+ventral shot with no ventral tile is simply gone.
+
+They do **not** disappear from the site. `/browse/`, Identify and other species' "similar
+species" rows read `data/images.csv` and never consult tile status, so the same photograph
+usually stays visible there. This asymmetry is `TILE_POLICY` in
+[`src/_lib/photo-display.ts`](../src/_lib/photo-display.ts) —
+[docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md) has the
+table.
+
+**So check what you displaced.** After `photos:materialize`, run:
+
+```bash
+npm run report:hidden-images
+```
+
+and look at `data/hidden-images-report.csv` for the slugs you just tiled: rows with cause
+`hidden-by-tiles` are photographs the tiles do not cover, and a blank `displayed_as` means
+that photograph is now on no page at all. Those are the ones worth a curator's eye — the
+rest are `superseded-by-tiles`, the same specimen and view in a better version.

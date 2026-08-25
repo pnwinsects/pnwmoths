@@ -18,7 +18,7 @@ import { parse } from 'csv-parse/sync';
 // exists in neither file; both are keyed by `species_slug` (#240). Nothing
 // caught it, because prose is not compiled.
 //
-// Four checks, in the order a runbook meets them (#243):
+// Five checks, in the order a runbook meets them (#243, #338):
 //
 //   1. Every `data/*.csv` a runbook names exists on disk.
 //   2. A `## Schema: data/<file>.csv` heading must be followed by a markdown
@@ -33,6 +33,13 @@ import { parse } from 'csv-parse/sync';
 //   4. Column names in *prose* are resolved too, against the CSVs that same
 //      runbook names. This is what would have caught #240 in
 //      ADDING_NEW_SPECIES_COMPLETE.md, which names columns only in prose.
+//   5. "the Nth of M steps" claims about `npm run build:site` resolve against
+//      package.json. Two runbooks told the reader to expect a line "6th of 17
+//      steps" through a build that had 21 of them, and then 22 — the count went
+//      stale the moment a step was added, silently, in exactly the way a column
+//      name did in #240. Where the surrounding lines name a `[tag]` the build
+//      prints, the ORDINAL is resolved too, so "6th" has to be the step that
+//      actually emits it.
 //
 // Check 4 is deliberately scoped per-document rather than to every CSV in
 // data/. Resolving against the union of all headers looks stricter and is in
@@ -71,8 +78,10 @@ const CSV_FENCE = /^```csv\r?\n([\s\S]*?)^```/gm;
  * docs.
  */
 const NOT_COLUMNS = new Set([
-  'sight_field_notes', // a *value* of records.csv's record_type, not a column
-  'shared_link',       // Dropbox API terminology (the `shared_link` listing mode)
+  'sight_field_notes',  // a *value* of records.csv's record_type, not a column
+  'shared_link',        // Dropbox API terminology (the `shared_link` listing mode)
+  'high_res_available', // a key in data/species-photos.json (a JSON file, so no header
+                        // to resolve against); never a column of any CSV
 ]);
 
 export interface SchemaTable {
@@ -171,6 +180,50 @@ export function csvHeader(path: string): string[] {
   return header;
 }
 
+/**
+ * `6th of 17 steps` — a runbook's claim about the shape of `npm run build:site`.
+ *
+ * Captured as (ordinal, total) with the line it sits on, because both halves can
+ * rot and they rot for different reasons: the total moves whenever a step is
+ * added anywhere, the ordinal only when one is added ahead of the step being
+ * described.
+ */
+const STEP_CLAIM = /\b(\d+)(?:st|nd|rd|th)\s+of\s+(\d+)\s+steps\b/g;
+
+/** A `[bracketed-tag]` as the build prints it, e.g. `[check-derivatives] PASS`. */
+const BUILD_TAG = /\[([a-z][a-z0-9-]*)\]/g;
+
+export interface StepClaim {
+  ordinal: number;
+  total: number;
+  /** Tags named within a few lines of the claim — the step it is describing. */
+  nearbyTags: string[];
+}
+
+export function stepClaimsIn(markdown: string, window: number = 6): StepClaim[] {
+  const lines = markdown.split(/\r?\n/);
+  const claims: StepClaim[] = [];
+  lines.forEach((line, i) => {
+    for (const match of line.matchAll(STEP_CLAIM)) {
+      const nearby = lines.slice(Math.max(0, i - window), i + window + 1).join('\n');
+      claims.push({
+        ordinal: Number(match[1]),
+        total: Number(match[2]),
+        nearbyTags: [...nearby.matchAll(BUILD_TAG)].map((m) => m[1]!),
+      });
+    }
+  });
+  return claims;
+}
+
+/** The steps `npm run build:site` runs, in order, without the `npm run ` noise. */
+export function buildSiteSteps(packageJsonPath: string): string[] {
+  const pkg: unknown = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+  const scripts = (pkg as { scripts?: Record<string, string> }).scripts ?? {};
+  const site = scripts['build:site'] ?? '';
+  return site.split('&&').map((step) => step.trim().replace(/^npm run /, '')).filter(Boolean);
+}
+
 const docs = readdirSync(INSTRUCTIONS_DIR).filter((f) => f.endsWith('.md'));
 const markdown = new Map(docs.map((doc) => [doc, readFileSync(join(INSTRUCTIONS_DIR, doc), 'utf8')]));
 const tables = docs.flatMap((doc) => schemaTablesIn(doc, markdown.get(doc)!));
@@ -247,6 +300,40 @@ describe('column names in prose resolve against the CSVs the doc names', () => {
           `belongs to, or — if it is not a column at all — add it to NOT_COLUMNS ` +
           `in ${'scripts/instructions-schema.test.ts'} with a reason.`,
       );
+    });
+  }
+});
+
+describe('build-step claims resolve against package.json', () => {
+  const steps = buildSiteSteps(join(PROJECT_ROOT, 'package.json'));
+
+  it('finds the build:site steps to check against', () => {
+    assert.ok(steps.length > 10, `expected a multi-step build, found ${steps.length}`);
+  });
+
+  for (const doc of docs) {
+    const claims = stepClaimsIn(markdown.get(doc)!);
+    if (claims.length === 0) continue;
+    it(`${doc} → ${claims.length} step claim(s)`, () => {
+      for (const claim of claims) {
+        assert.equal(
+          claim.total,
+          steps.length,
+          `${doc} says the build has ${claim.total} steps; build:site in package.json has ` +
+            `${steps.length}. A reader watching for "step ${claim.ordinal} of ${claim.total}" ` +
+            'stops trusting the runbook — update the count.',
+        );
+        // The ordinal is only checkable where the prose names the tag the step
+        // prints. Where it does, "6th" must be the step that actually emits it.
+        const named = claim.nearbyTags.find((tag) => steps.some((s) => s === tag || s === `build:${tag}`));
+        if (!named) continue;
+        const at = steps.findIndex((s) => s === named || s === `build:${named}`);
+        assert.equal(
+          claim.ordinal,
+          at + 1,
+          `${doc} calls [${named}] step ${claim.ordinal}; it is step ${at + 1} of build:site.`,
+        );
+      }
     });
   }
 });

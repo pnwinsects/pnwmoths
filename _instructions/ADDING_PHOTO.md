@@ -15,7 +15,12 @@ The build fails if you do 3 without 1 and 2, naming the file it cannot find. Tha
 - **bunny.net Storage Zone `pnwmoths`** — the image file, and its `derived/` variants
 - **`data/images.csv`** — one new row
 - **`data/image-derivatives.csv`** — rows recording the uploaded variants (written for you)
-- Build output: the photo appears on the species page
+- Build output: the photo appears on the species page — **unless the species has high-resolution
+  tiles**, in which case the account shows the deep-zoom viewer *instead of* the catalogued
+  photographs and your new row will not be visible there. It still reaches `/browse/`, Identify and
+  other species' "similar species" rows. That is by design, not a failed build; the rules are in
+  [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md), and
+  `data/hidden-images-report.csv` lists every photograph in that position.
 
 ## Schema: data/images.csv
 
@@ -98,7 +103,7 @@ to copy an existing row for the same species and edit it.
 npm run build:site
 ```
 
-Expected: the build completes. Partway through — it is the 6th of 17 steps, not the last — you
+Expected: the build completes. Partway through — it is the 6th of 22 steps, not the last — you
 should see:
 
 ```
