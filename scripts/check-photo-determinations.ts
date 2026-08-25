@@ -129,16 +129,6 @@ function viewCode(view: string): string {
   return '';
 }
 
-/**
- * The slug a photograph's filename *claims*, or null when it names no specimen.
- *
- * Delegates to the shared reader so this check and the ingest pipeline cannot
- * disagree about what a filename says — see identityFromFilename().
- */
-export function slugClaimedByFilename(filename: string): string | null {
-  return identityFromFilename(filename)?.slug ?? null;
-}
-
 export interface Violation {
   readonly check: 'A' | 'B' | 'C' | 'D' | 'D-new' | 'D-resolved';
   readonly message: string;

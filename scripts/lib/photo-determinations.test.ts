@@ -94,6 +94,16 @@ describe('identityFromFilename', () => {
     assert.equal(identityFromFilename('Xylophanes nr libya-A-D.jpg')?.slug, 'xylophanes-nr-libya');
   });
 
+  it('reads the spaced-hyphen separator of the Geometridae import', () => {
+    assert.deepEqual(identityFromFilename('Dasyfidonia avuncularia - A-D.jpg'), {
+      slug: 'dasyfidonia-avuncularia', specimen: 'A', view: 'D',
+    });
+  });
+
+  it('returns null for a name that is not a photograph at all', () => {
+    assert.equal(identityFromFilename('IMG_2043.jpg'), null);
+  });
+
   it('keeps a hyphen inside the epithet', () => {
     assert.equal(identityFromFilename('Xestia c-nigrum-A-V.jpg')?.slug, 'xestia-c-nigrum');
   });

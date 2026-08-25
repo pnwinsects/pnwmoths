@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { findViolations, slugClaimedByFilename, KNOWN_COLLISIONS } from './check-photo-determinations.ts';
+import { findViolations, KNOWN_COLLISIONS } from './check-photo-determinations.ts';
 import type { PhotoDetermination } from './lib/photo-determinations.ts';
 
 type ImageRow = { species_slug: string; filename: string; specimen: string; view: string };
@@ -30,25 +30,6 @@ function tiles(slug: string, ...slots: string[]) {
     },
   };
 }
-
-describe('slugClaimedByFilename', () => {
-  it('reads the binomial the filename asserts', () => {
-    assert.equal(slugClaimedByFilename('Amphipoea keiferi-A-D.jpg'), 'amphipoea-keiferi');
-  });
-
-  it('tolerates the spaced-hyphen separator seen in the Geometridae import', () => {
-    assert.equal(slugClaimedByFilename('Dasyfidonia avuncularia - A-D.jpg'), 'dasyfidonia-avuncularia');
-  });
-
-  it('collapses whitespace runs, matching normalizeSlug', () => {
-    assert.equal(slugClaimedByFilename('Xylophanes nr libya-A-D.jpg'), 'xylophanes-nr-libya');
-  });
-
-  it('returns null when there is no parseable binomial to compare against', () => {
-    assert.equal(slugClaimedByFilename('IMG_2043.jpg'), null);
-    assert.equal(slugClaimedByFilename('Veins_jpg.jpg'), null);
-  });
-});
 
 describe('findViolations', () => {
   const NO_TILES = {};
