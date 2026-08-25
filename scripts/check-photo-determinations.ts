@@ -27,7 +27,9 @@
  *   B. Every determination agrees with data/images.csv about slug and specimen
  *      (fatal — otherwise this file decorates rather than governs).
  *   C. No tiled specimen slot holds a photograph the catalogue assigns to a
- *      different species (fatal — this is the bug itself).
+ *      different species (fatal — this is the bug itself). A recorded
+ *      determination exempts the pair only once the tiles have actually landed
+ *      where it says, so the half-finished runbook fails rather than passing.
  *   D. No two photographs of one species claim the same specimen letter and view
  *      (ADVISORY — 22 such pairs predate this check and each needs the curator,
  *      not an engineer; failing on them would block every build on a backlog of
@@ -45,10 +47,9 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { pathToFileURL } from 'node:url';
-import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
+import { readPhotoDeterminations, toPhotoStem, identityFromFilename } from './lib/photo-determinations.ts';
 import type { PhotoDetermination } from './lib/photo-determinations.ts';
 import { readManifest } from './lib/manifest.ts';
-import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
 
 const TAG = '[check-photo-determinations]';
 
@@ -77,22 +78,13 @@ function viewCode(view: string): string {
 }
 
 /**
- * The slug a photograph's filename *claims*, or null when the filename carries
- * no parseable binomial.
+ * The slug a photograph's filename *claims*, or null when it names no specimen.
  *
- * Mirrors the tail-stripping in scripts/lib/parse-photo-filename.ts rather than
- * importing it: that module answers "what did ingest decide?", which is a
- * question about the manifest. This one answers "what does this name say?" over
- * `data/images.csv`, where the tail is always `-<specimen>-<view>` and the
- * separator conventions are narrower.
+ * Delegates to the shared reader so this check and the ingest pipeline cannot
+ * disagree about what a filename says — see identityFromFilename().
  */
 export function slugClaimedByFilename(filename: string): string | null {
-  const stem = toPhotoStem(filename);
-  const match = stem.match(/^(.+?)\s*-\s*([A-Z0-9_]+)-([DV])$/);
-  if (!match) return null;
-  const binomial = match[1]!.trim();
-  if (!/^[A-Z][a-z]+[\s-]/.test(binomial)) return null;
-  return normalizeSlug(binomial);
+  return identityFromFilename(filename)?.slug ?? null;
 }
 
 export interface Violation {
@@ -157,7 +149,17 @@ export function findViolations(
     if (!claimed || claimed === row.species_slug) continue;
     const slot = `${row.specimen}|${viewCode(row.view)}`;
     if (!tiled.get(claimed)?.has(slot)) continue;
-    if (determinations.has(toPhotoStem(row.filename))) continue;
+    // A determination exempts this pair ONLY once the tiles have actually
+    // landed where it says. Exempting on the mere existence of a row reopens the
+    // bug for a half-finished workflow: `photos:materialize` is not part of
+    // `build:site` and `data/species-photos.json` is committed, so a maintainer
+    // who edits images.csv and records the ruling — exactly what ADDING_PHOTO.md
+    // prescribes — but does not re-materialise leaves the tiles keyed to the old
+    // species with every gate green and the wrong moth public.
+    const ruling = determinations.get(toPhotoStem(row.filename));
+    if (ruling && tiled.get(ruling.species_slug)?.has(`${ruling.specimen}|${viewCode(row.view)}`)) {
+      continue;
+    }
     violations.push({
       check: 'C',
       message:

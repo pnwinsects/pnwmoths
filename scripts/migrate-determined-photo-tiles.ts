@@ -38,11 +38,14 @@
  * Additive, per ADR 0008: nothing is deleted, and the vacated paths are recorded
  * in `data/cdn-retired-images.csv` rather than removed.
  *
- * Idempotent for the ten moves that write to a path which did not exist — an
- * object already present at full length is skipped. NOT idempotent for the
- * swap, and it cannot be made so: both sides exist at the same lengths before
- * and after, so re-running reverts it. That path is therefore gated behind
- * CONFIRM_SWAP=1; see the check in main().
+ * Idempotent, including for the swap. Two mechanisms, because one is not enough:
+ * an object already present at full length is skipped, which covers the moves
+ * that write to a path that did not exist; and `data/cdn-retired-images.csv` is
+ * read as a LEDGER of moves already carried out, which is the only thing that
+ * can settle a swap. A swap's two sides exist at the same byte lengths before
+ * and after, so length tells you nothing about which way round the zone is — but
+ * the retirement row says which direction was applied. CONFIRM_SWAP=1 remains as
+ * a backstop for a cycle that is genuinely un-ledgered.
  *
  * PURGE AFTER A SWAP. Ten of the eleven re-keys write to a path that did not
  * exist, so ADR 0009's "no manual purge" holds. The Mniotype swap does not: it
@@ -62,8 +65,11 @@
  * The key is required even for DRY_RUN: the work list is a storage-API directory
  * listing, which the public pull zone cannot serve.
  */
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readPhotoDeterminations } from './lib/photo-determinations.ts';
+import { parse } from 'csv-parse/sync';
+import { readPhotoDeterminations, identityFromFilename } from './lib/photo-determinations.ts';
 
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
@@ -78,24 +84,50 @@ const REQUEST_TIMEOUT_MS = 60_000;
 const BUFFER_LIMIT_BYTES = 512 * 1024 * 1024;
 
 /**
- * The manifest rows whose tiles exist, as `stem -> {slug, specimen, view}` of
- * the path they were built at.
+ * Where a photograph's tiles were built, read from its filename.
  *
- * Derived from the filename rather than read from the manifest CSV: the manifest
- * has already been re-filed by the determinations at materialize time, so its
- * current `species_slug` is the *destination*, not the source. The filename is
- * what the tiles were keyed by, and it is the one thing that never changed.
+ * Derived from the filename rather than the manifest's current `species_slug`:
+ * the manifest has already been re-filed by the determinations at materialize
+ * time, so its slug is the *destination*. The filename is what the tiles were
+ * keyed by and the one thing that never changed.
+ *
+ * Delegates to the shared reader so this and the gate cannot disagree — a
+ * private regex here was blind to the space-separated names ingest admits, and
+ * would have dropped their moves silently.
  */
 export function sourcePathParts(
   stem: string,
 ): { slug: string; specimen: string; view: string } | null {
-  const match = stem.match(/^(.+?)\s*-\s*([A-Z0-9_]+)-([DV])$/);
-  if (!match) return null;
-  return {
-    slug: match[1]!.trim().toLowerCase().replace(/\s+/g, '-'),
-    specimen: match[2]!,
-    view: match[3]!,
-  };
+  return identityFromFilename(stem);
+}
+
+/**
+ * Moves already carried out, from `data/cdn-retired-images.csv`.
+ *
+ * THE LEDGER THAT MAKES A SWAP IDEMPOTENT. Every other move writes to a path
+ * that did not exist, so "already there at the right length" means done. A swap
+ * has no such tell — both sides exist at the same lengths before and after — so
+ * without a record, a re-run reads the already-swapped source and puts it back.
+ *
+ * The retirement CSV is that record: applying a move writes a row retiring
+ * `<from>_thumbnail.webp` in favour of `<to>_thumbnail.webp`. It is committed,
+ * it is written for every move anyway, and it says *which direction* the zone
+ * was left in — which is exactly the fact a length comparison cannot recover.
+ */
+export function appliedMoves(path: string = resolve('data/cdn-retired-images.csv')): Set<string> {
+  if (!existsSync(path)) return new Set();
+  const rows = parse(readFileSync(path), { columns: true, skip_empty_lines: true }) as {
+    old_path?: string;
+    superseded_by?: string;
+  }[];
+  const applied = new Set<string>();
+  for (const row of rows) {
+    const from = (row.old_path ?? '').trim();
+    const to = (row.superseded_by ?? '').trim();
+    if (!from.endsWith('_thumbnail.webp') || !to.endsWith('_thumbnail.webp')) continue;
+    applied.add(`${from.replace(/_thumbnail\.webp$/, '')} -> ${to.replace(/_thumbnail\.webp$/, '')}`);
+  }
+  return applied;
 }
 
 export interface TileMove {
@@ -108,14 +140,27 @@ export interface TileMove {
 /** The tile sets a determination implies, source and destination. */
 export function planMoves(
   determinations: ReturnType<typeof readPhotoDeterminations>,
+  applied: ReadonlySet<string> = new Set(),
 ): TileMove[] {
   const moves: TileMove[] = [];
   for (const [stem, ruling] of determinations) {
     const from = sourcePathParts(stem);
-    if (!from) continue;
+    if (!from) {
+      // Never `continue`. A determination whose stem will not parse produces no
+      // move here, while generate-species-photos.ts — which looks the stem up
+      // directly and needs no parse — happily re-files species-photos.json to a
+      // tile path this script then never creates. The page would ask for tiles
+      // that do not exist and the viewer would open blank, with nothing logged.
+      throw new Error(
+        `cannot read a specimen and view from "${stem}" (${ruling.source}), so its tiles cannot be located. ` +
+          `data/species-photos.json WILL be re-filed for it, leaving the account pointing at tiles that do not exist. ` +
+          `Fix the photo_stem in data/photo-determinations.csv, or move this photograph by hand and record it in data/cdn-retired-images.csv.`,
+      );
+    }
     const fromPrefixKey = `species-tiles/${from.slug}/${from.specimen}-${from.view}`;
     const toPrefixKey = `species-tiles/${ruling.species_slug}/${ruling.specimen}-${from.view}`;
     if (fromPrefixKey === toPrefixKey) continue; // determination confirms where it already sits
+    if (applied.has(`${fromPrefixKey} -> ${toPrefixKey}`)) continue; // done in an earlier run
     moves.push({ fromPrefixKey, toPrefixKey, stem, source: ruling.source });
   }
   return moves;
@@ -270,7 +315,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const moves = planMoves(readPhotoDeterminations());
+  const moves = planMoves(readPhotoDeterminations(), appliedMoves());
   console.log(`${TAG} ${moves.length} tile sets to re-key`);
 
   // --- build the full copy plan before writing anything ---------------------

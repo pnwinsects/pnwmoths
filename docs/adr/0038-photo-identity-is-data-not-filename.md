@@ -69,7 +69,20 @@ data.**
 
 4. **`scripts/check-photo-determinations.ts` gates the build** on the disagreement itself: no
    tiled specimen slot may hold a photograph the catalogue assigns to a different species. That
-   check, run against the pre-fix tree, reports all 20 mis-keyed slots.
+   check, run against the pre-fix tree, reports all 20 mis-keyed slots. A recorded determination
+   exempts a pair only once the tiles have actually landed where it says — `photos:materialize`
+   is not part of `build:site` and `data/species-photos.json` is committed, so exempting on the
+   mere existence of a row would let a half-finished runbook ship the wrong moth with every gate
+   green.
+
+5. **One filename parser, not three.** `identityFromFilename()` in
+   `scripts/lib/photo-determinations.ts` is what ingest, the gate and the migration all read
+   names with. A gate that parses filenames more narrowly than the pipeline it guards is blind
+   exactly where it matters: a private regex requiring a hyphen before the specimen could not see
+   the seven space-separated names ingest admits on purpose (`Euxoa absona A-D`, and six more,
+   all tiled). It also may not parse more *loosely* in the wrong dimension — `extractBinomial()`
+   splits on the first space and reads `Mniotype aff tenera-B-V` as "mniotype aff", losing a real
+   species.
 
 ## Consequences
 

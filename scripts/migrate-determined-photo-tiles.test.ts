@@ -1,7 +1,10 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { planMoves, retarget, sourcePathParts, storageUrl, tileSetPrefixOf } from './migrate-determined-photo-tiles.ts';
+import { appliedMoves, planMoves, retarget, sourcePathParts, storageUrl, tileSetPrefixOf } from './migrate-determined-photo-tiles.ts';
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import type { PhotoDetermination } from './lib/photo-determinations.ts';
 
 function det(rows: [stem: string, slug: string, specimen: string][]): Map<string, PhotoDetermination> {
@@ -124,5 +127,73 @@ describe('tileSetPrefixOf', () => {
       tileSetPrefixOf('species-tiles/mniotype-ducta/A-D_thumbnail.webp'),
       tileSetPrefixOf('species-tiles/mniotype-ducta/A-V_thumbnail.webp'),
     );
+  });
+});
+
+describe('planMoves: unparseable stems', () => {
+  // Silently skipping was the dangerous option: generate-species-photos.ts looks
+  // the stem up directly and needs no parse, so it re-files species-photos.json
+  // regardless — leaving the account pointing at tiles this script never made.
+  it('throws rather than dropping a determination whose tiles it cannot locate', () => {
+    assert.throws(
+      () => planMoves(det([['Apantesis bolanderi D', 'apantesis-nevadensis', 'B']])),
+      /cannot read a specimen and view/,
+    );
+  });
+
+  it('plans a space-separated name instead of dropping it', () => {
+    const moves = planMoves(det([['Euxoa lucida B-V', 'euxoa-absona', 'C']]));
+    assert.deepEqual(moves.map(m => [m.fromPrefixKey, m.toPrefixKey]), [
+      ['species-tiles/euxoa-lucida/B-V', 'species-tiles/euxoa-absona/C-V'],
+    ]);
+  });
+});
+
+describe('appliedMoves', () => {
+  function ledger(body: string): string {
+    const dir = mkdtempSync(join(tmpdir(), 'retired-'));
+    const path = join(dir, 'cdn-retired-images.csv');
+    writeFileSync(path, 'old_path,superseded_by,reason,retired_on\n' + body);
+    return path;
+  }
+
+  it('reads applied moves off the retirement ledger', () => {
+    const path = ledger(
+      'species-tiles/mniotype-ducta/A-D_thumbnail.webp,species-tiles/mniotype-tenera/A-D_thumbnail.webp,swap,2026-08-24\n',
+    );
+    assert.ok(appliedMoves(path).has('species-tiles/mniotype-ducta/A-D -> species-tiles/mniotype-tenera/A-D'));
+  });
+
+  it('ignores retirement rows that are not tile-set thumbnails', () => {
+    const path = ledger('capsula-alameda/Capsula alameda-A-D.jpg,globia-alameda/Globia alameda-A-D.jpg,rename,2026-07-19\n');
+    assert.equal(appliedMoves(path).size, 0);
+  });
+
+  it('is empty when no ledger exists', () => {
+    assert.equal(appliedMoves('/nonexistent/cdn-retired-images.csv').size, 0);
+  });
+
+  // THE REASON THIS LEDGER EXISTS. A swap's two sides are indistinguishable by
+  // length before and after, so without a record a re-run reverts production.
+  it('makes an already-applied swap plan nothing', () => {
+    const swap = det([
+      ['Mniotype ducta-A-D', 'mniotype-tenera', 'A'],
+      ['Mniotype tenera-A-D', 'mniotype-ducta', 'A'],
+    ]);
+    assert.equal(planMoves(swap).length, 2);
+    const applied = new Set([
+      'species-tiles/mniotype-ducta/A-D -> species-tiles/mniotype-tenera/A-D',
+      'species-tiles/mniotype-tenera/A-D -> species-tiles/mniotype-ducta/A-D',
+    ]);
+    assert.deepEqual(planMoves(swap, applied), []);
+  });
+
+  it('still plans a NEW determination alongside applied ones', () => {
+    const applied = new Set(['species-tiles/mniotype-ducta/A-D -> species-tiles/mniotype-tenera/A-D']);
+    const moves = planMoves(
+      det([['Mniotype ducta-A-D', 'mniotype-tenera', 'A'], ['Tarache areli-C-D', 'tarache-toddi', 'C']]),
+      applied,
+    );
+    assert.deepEqual(moves.map(m => m.toPrefixKey), ['species-tiles/tarache-toddi/C-D']);
   });
 });

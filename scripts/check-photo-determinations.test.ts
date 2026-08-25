@@ -145,19 +145,48 @@ describe('findViolations', () => {
     );
   });
 
-  // A recorded determination means a human has already adjudicated this pair;
-  // the tile move is tracked elsewhere and must not re-fire here forever.
-  it('[C] is suppressed by a recorded determination', () => {
+  // A recorded determination stops the check re-firing forever — but only once
+  // the tiles have actually landed where it says.
+  it('[C] is suppressed by a determination the tiles have caught up with', () => {
     const images: ImageRow[] = [
       { species_slug: 'resapamea-innota', filename: 'Amphipoea keiferi-A-D.jpg', specimen: 'C', view: 'dorsal' },
     ];
     const found = findViolations(
       images,
       determinations({ photo_stem: 'Amphipoea keiferi-A-D', species_slug: 'resapamea-innota', specimen: 'C' }),
-      tiles('amphipoea-keiferi', 'C-D'),
+      // Both the vacating account and the destination hold the slot mid-migration.
+      { ...tiles('amphipoea-keiferi', 'C-D'), ...tiles('resapamea-innota', 'C-D') },
       NO_STEMS,
     );
     assert.deepEqual(found, []);
+  });
+
+  // The half-finished runbook: images.csv edited and the ruling recorded, but
+  // `photos:materialize` not run — and it is NOT part of build:site, while
+  // species-photos.json is committed. Exempting on the mere existence of a
+  // determination made every gate green with the wrong moth still public.
+  it('[C] still fires when the ruling is recorded but the tiles never moved', () => {
+    const images: ImageRow[] = [
+      { species_slug: 'resapamea-innota', filename: 'Amphipoea keiferi-A-D.jpg', specimen: 'C', view: 'dorsal' },
+    ];
+    const found = findViolations(
+      images,
+      determinations({ photo_stem: 'Amphipoea keiferi-A-D', species_slug: 'resapamea-innota', specimen: 'C' }),
+      tiles('amphipoea-keiferi', 'C-D'), // destination has no tiles yet
+      NO_STEMS,
+    );
+    assert.equal(found.length, 1);
+    assert.equal(found[0]!.check, 'C');
+  });
+
+  // The gate must see the names ingest admits, or it is blind to the next #330.
+  it('[C] sees a space-separated filename', () => {
+    const images: ImageRow[] = [
+      { species_slug: 'euxoa-absona', filename: 'Euxoa lucida B-V.jpg', specimen: 'B', view: 'ventral' },
+    ];
+    const found = findViolations(images, new Map(), tiles('euxoa-lucida', 'B-V'), NO_STEMS);
+    assert.equal(found.length, 1);
+    assert.equal(found[0]!.check, 'C');
   });
 
   // --- D -------------------------------------------------------------------

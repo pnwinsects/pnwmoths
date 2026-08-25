@@ -46,6 +46,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'csv-parse/sync';
+import { stripSpecimenTail, parseSpecimenAndView } from './parse-photo-filename.ts';
+import { normalizeSlug } from '../../src/_lib/unpublished-species.ts';
 
 export const DETERMINATIONS_PATH: string = resolve('data/photo-determinations.csv');
 
@@ -69,6 +71,53 @@ export interface PhotoDetermination {
   readonly source: string;
   /** The curator's words, and why this letter. */
   readonly note: string;
+}
+
+/** What a filename asserts: the species it names, and which specimen and view. */
+export interface FilenameIdentity {
+  /** The slug the filename claims — NOT necessarily where the catalogue files it. */
+  readonly slug: string;
+  readonly specimen: string;
+  readonly view: 'D' | 'V';
+}
+
+/**
+ * Read a photograph's filename the way the ingest pipeline reads it, or null
+ * when it carries no specimen tail at all.
+ *
+ * ONE PARSER, THREE CONSUMERS. `ingest-photos.ts` decides which species a TIFF
+ * is filed under from its filename; `check-photo-determinations.ts` compares
+ * that reading against the catalogue; `migrate-determined-photo-tiles.ts`
+ * reconstructs the tile path that reading produced. If those three disagree
+ * about what a filename says, the gate cannot see the case it exists to catch —
+ * which is exactly what a privately-rolled regex requiring a hyphen before the
+ * specimen did: it was blind to the seven space-separated names
+ * (`Euxoa absona A-D`, `Euxoa lucida …`, `Syngrapha surena A-D`) that ingest
+ * admits on purpose and has already tiled.
+ *
+ * The slug half is `normalizeSlug` over the tail-stripped name rather than
+ * `extractBinomial`, because that helper splits on the first space and reads
+ * `Mniotype aff tenera-B-V` as "mniotype aff" — dropping the epithet of a real
+ * species. Both halves must be right: the specimen tail decides the tile path,
+ * the binomial decides the species.
+ *
+ * Returns null without a parseable specimen AND view, so non-photo objects
+ * (`Veins_jpg.jpg`) do not yield a confident-looking slug.
+ */
+export function identityFromFilename(filename: string): FilenameIdentity | null {
+  if (typeof filename !== 'string' || !filename) return null;
+  // Accepts a filename OR a bare stem. `parseSpecimenAndView` anchors on a file
+  // extension, but the determinations file is keyed by stem — so callers reach
+  // this with `Amphipoea keiferi-A-D` and would get nothing back. Re-attaching a
+  // synthetic extension is what lets one reader serve both, rather than each
+  // consumer deciding for itself what a name looks like, which is the drift this
+  // helper exists to end.
+  const stem = toPhotoStem(filename);
+  const { specimen, view } = parseSpecimenAndView(`${stem}.x`);
+  if (!specimen || (view !== 'D' && view !== 'V')) return null;
+  const slug = normalizeSlug(stripSpecimenTail(stem));
+  if (!slug) return null;
+  return { slug, specimen, view };
 }
 
 /** Strip a file extension, leaving the stem that identifies the photograph. */
