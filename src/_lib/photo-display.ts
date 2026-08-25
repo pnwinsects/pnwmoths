@@ -180,10 +180,16 @@ export function pickCardPhoto<T extends Weighted & Viewed>(rows: readonly T[]): 
  * `/browse/` that nothing keyed by species accounts for (the *Phyllodesma coturnix*
  * dorsal, the case the curator asked about by name).
  *
+ * Excludes ventral rows, like every Browse rule. Its only caller feeds it rows a SQL
+ * `NON_VENTRAL_SQL` filter has already removed, so this changes nothing today — but a
+ * Browse picker that leaves the Browse rule to its caller is one refactor away from
+ * putting an underside shot in a genus strip, and `pickCardPhoto` beside it does not.
+ *
  * `key` identifies a candidate for de-duplication — a filename, or a tile thumbnail path
- * for the synthetic high-res fallback rows, which have no filename.
+ * for the synthetic high-res fallback rows, which have no filename. A ventral row is
+ * dropped BEFORE it claims a key, so it cannot suppress a duplicate that would be shown.
  */
-export function pickGenusStrip<T extends Weighted>(
+export function pickGenusStrip<T extends Weighted & Viewed>(
   speciesSlugs: readonly string[],
   bySpeciesSlug: Readonly<Record<string, readonly T[]>>,
   key: (row: T) => string,
@@ -193,6 +199,7 @@ export function pickGenusStrip<T extends Weighted>(
   const candidates: T[] = [];
   for (const slug of speciesSlugs) {
     for (const row of bySpeciesSlug[slug] ?? []) {
+      if (isVentral(row.view)) continue;
       const k = key(row);
       if (seen.has(k)) continue;
       seen.add(k);

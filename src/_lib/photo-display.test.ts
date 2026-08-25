@@ -165,6 +165,41 @@ describe('the genus strip: four across a WHOLE genus', () => {
   it('ignores a slug with no images at all', () => {
     assert.deepEqual(pickGenusStrip(['nothing-here'], bySlug, (r) => r.filename), []);
   });
+
+  // Browse excludes ventral shots at EVERY level, not just the species card. taxon.ts
+  // filters them in SQL before this picker ever sees them, so this asserts the module's
+  // own rule rather than today's behaviour — a Browse picker that left the Browse rule to
+  // its caller would put an underside shot in a genus strip the moment the caller changed.
+  it('excludes a ventral row even when it is the lightest in the genus', () => {
+    const withVentral = {
+      g: [
+        row({ filename: 'under.jpg', weight: 1, view: 'ventral' }),
+        row({ filename: 'top.jpg', weight: 2, view: 'dorsal' }),
+      ],
+    };
+    assert.deepEqual(pickGenusStrip(['g'], withVentral, (r) => r.filename).map((r) => r.filename), ['top.jpg']);
+  });
+
+  // Dropped before it claims a de-duplication key, so it cannot suppress the photograph
+  // that should be shown in its place.
+  it('does not let a ventral row consume the dedup key of a shown one', () => {
+    const sameKey = {
+      g: [
+        row({ filename: 'shared.jpg', weight: 1, view: 'ventral' }),
+        row({ filename: 'shared.jpg', weight: 2, view: 'dorsal' }),
+      ],
+    };
+    const strip = pickGenusStrip(['g'], sameKey, (r) => r.filename);
+    assert.equal(strip.length, 1);
+    assert.equal(strip[0]?.view, 'dorsal');
+  });
+
+  // The synthetic high-res fallback rows carry no view at all; a filter that treated
+  // "unknown" as ventral would empty the strips for tile-only species.
+  it('keeps a row with no view, which is what the high-res fallback rows look like', () => {
+    const noView = { g: [{ species_slug: 'x', filename: 'tiles.webp', weight: null }] };
+    assert.equal(pickGenusStrip(['g'], noView, (r) => r.filename).length, 1);
+  });
 });
 
 describe('the higher strips: the first of each genus below', () => {

@@ -47,11 +47,12 @@ filters), `src/_data/taxon.ts`, `scripts/build-key.ts` and `src/_lib/social-meta
 
 ## Consequences worth knowing before you touch this
 
-- **Only the account knows tiles exist.** Tiling a species removes its catalogued photographs
-  from its own page while leaving them on `/browse/`, Identify and other species' similar-species
-  rows. `TILE_POLICY` in the module states that asymmetry per surface — `replaces` for the
-  account, `prefers` for the share image, `fallback` for Browse, `ignores` for the rest — so it
-  is one table rather than a thing one consumer out of six happens to know.
+- **Only the account lets tiles REPLACE the catalogued photographs.** Tiling a species removes
+  its photographs from its own page while leaving them on `/browse/`, Identify and other species'
+  similar-species rows. Three surfaces do consult tile status, and they do three different things
+  with it: `TILE_POLICY` says which — `replaces` for the account, `prefers` for the share image,
+  `fallback` for Browse (a tile stands in only where there is no catalogued row at all),
+  `ignores` for Identify and similar species. One table rather than four conventions.
 - **The ventral exclusion is Browse-only** ([#107](https://github.com/pnwinsects/pnwmoths/issues/107)).
   Rows with a *blank* `view` are kept everywhere — unclassified is not confirmed-ventral. Browse
   and Identify differ **only** in that filter, which is exactly the difference a tidying
