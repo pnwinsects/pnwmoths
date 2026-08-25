@@ -1,13 +1,21 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
+  applyDeterminations,
   buildSpeciesPhotos,
   isMaterializable,
   toTilesPath,
   DEFAULT_PHOTOGRAPHER,
   DEFAULT_LICENSE,
 } from './generate-species-photos.ts';
+import { readManifest } from './lib/manifest.ts';
+import { readPhotoDeterminations } from './lib/photo-determinations.ts';
 import type { ManifestRow } from './lib/manifest.ts';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 // ---------------------------------------------------------------------------
 // Row factory — supplies all 13 COLUMNS values so tests don't accidentally
@@ -230,5 +238,59 @@ describe('buildSpeciesPhotos', () => {
     const [firstSpecimen] = entry.specimens;
     assert.ok(firstSpecimen !== undefined);
     assert.equal(firstSpecimen.tiles_path, 'species-tiles/abagrotis-apposita/A-D');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Staleness gate — ADR 0017 (#197 amendment)
+// ---------------------------------------------------------------------------
+
+describe('data/species-photos.json', () => {
+  // ADR 0017 already requires this of "any future committed artifact", and
+  // build-key.test.ts has enforced it for data/key-matrix.json since #197 —
+  // after that file "sat stale for months" while data/images.csv moved under it.
+  //
+  // The identical failure then happened here, and this is the check that was
+  // missing. `photos:materialize` is NOT part of `build:site`, so nothing ever
+  // reproduces this artifact: it can disagree with the manifest and the
+  // determinations indefinitely while every gate stays green. That is how the
+  // tiles for eleven species stayed keyed to the species their photographs were
+  // *named* after rather than the one the catalogue files them under, and eleven
+  // accounts published another species' moth at full resolution (#330, #336).
+  //
+  // Like build-key.test.ts this runs in `npm test`, which every workflow runs
+  // ahead of any `build:*` step, so it reads the committed bytes rather than
+  // ones a build just overwrote.
+  it('is not stale — matches a fresh run of photos:materialize', async () => {
+    const committedRaw = readFileSync(resolve(ROOT, 'data/species-photos.json'), 'utf-8');
+    const committed = JSON.parse(committedRaw) as Record<string, Record<string, unknown>>;
+
+    const rows = await readManifest(resolve(ROOT, 'data/species-photos-manifest.csv'));
+    const determinations = readPhotoDeterminations(resolve(ROOT, 'data/photo-determinations.csv'));
+    // `existing` carries photographer/license forward by design — those are
+    // curator-entered and not derived, so feeding the committed file back in is
+    // what a real run does, not a way of making the comparison pass.
+    const fresh = buildSpeciesPhotos(applyDeterminations(rows, determinations), committed);
+
+    if (JSON.stringify(fresh, null, 2) + '\n' === committedRaw) return;
+
+    // Name the differing species rather than diffing 200 KB of JSON, which is
+    // unreadable in test output — the same reasoning as build-key.test.ts.
+    const slugs = [...new Set([...Object.keys(committed), ...Object.keys(fresh)])].sort();
+    const drifted = slugs
+      .filter(slug => JSON.stringify(committed[slug]) !== JSON.stringify(fresh[slug]))
+      .map(slug => {
+        if (!(slug in committed)) return `${slug} (missing from the committed file)`;
+        if (!(slug in fresh)) return `${slug} (committed, but no longer materialized)`;
+        return slug;
+      });
+
+    assert.fail(
+      'data/species-photos.json is stale — run `npm run photos:materialize` and commit the result. ' +
+        (drifted.length > 0
+          ? `Differing species: ${drifted.slice(0, 10).join(', ')}` +
+            (drifted.length > 10 ? ` … and ${drifted.length - 10} more` : '')
+          : 'The species all match; the difference is in formatting.'),
+    );
   });
 });

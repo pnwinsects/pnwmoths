@@ -30,10 +30,14 @@
  *      different species (fatal — this is the bug itself). A recorded
  *      determination exempts the pair only once the tiles have actually landed
  *      where it says, so the half-finished runbook fails rather than passing.
- *   D. No two photographs of one species claim the same specimen letter and view
- *      (ADVISORY — 22 such pairs predate this check and each needs the curator,
- *      not an engineer; failing on them would block every build on a backlog of
- *      taxonomic questions).
+ *   D. No two photographs of one species claim the same specimen letter and view.
+ *      RATCHETED: the 22 pairs that predate this check are listed in
+ *      KNOWN_COLLISIONS and stay advisory, because each needs the curator (#341)
+ *      and failing on a backlog of taxonomic questions would block every build.
+ *      A collision that is *not* listed is being introduced by the change under
+ *      review — actionable now, by whoever caused it — and is fatal. An entry
+ *      that no longer collides is fatal too, so the list is pruned rather than
+ *      left to rot.
  *
  * Check C is deliberately expressed over `data/images.csv` rather than the
  * manifest: images.csv is the curator-editable file, so the check speaks in
@@ -69,6 +73,54 @@ interface SpeciesPhotoEntry {
   specimens: { specimen_id: string; view: string }[];
 }
 
+/**
+ * The specimen-letter collisions that predate this check — `slug|specimen|view`.
+ *
+ * A RATCHET, NOT AN EXEMPTION. Each of these is an earlier redetermination that
+ * moved a photograph to a species already using its letter, so one species holds
+ * two different moths both labelled specimen A. Resolving them needs the curator
+ * (#341), and failing the build on a backlog of taxonomic questions would stop
+ * all work on this repo — so the ones listed here stay advisory.
+ *
+ * A collision that is NOT listed here is being introduced by the change under
+ * review, which is a different thing entirely: it is actionable now, by the
+ * person who caused it, and C-026 already settles how (the incoming photograph
+ * takes the next free letter; the incumbent keeps its own). Those are fatal.
+ *
+ * Why a ratchet at all: a collision is a latent version of #330. It is harmless
+ * while neither photograph is tiled, and the moment one is, the specimen letter
+ * pairs a tile with the wrong caption. Letting the count drift upward quietly
+ * grows the pool of future incidents.
+ *
+ * This list only shrinks. When the curator rules on one, record it in
+ * data/photo-determinations.csv and delete the line — the check reports any
+ * entry here that no longer collides, so it cannot rot.
+ */
+export const KNOWN_COLLISIONS: ReadonlySet<string> = new Set([
+  'apantesis-nevadensis|A|D',
+  'apantesis-nevadensis|A|V',
+  'drasteria-divergens|A|D',
+  'drasteria-divergens|A|V',
+  'eupsilia-tristigmata|A|D',
+  'eupsilia-tristigmata|A|V',
+  'euxoa-bifasciata|A|D',
+  'euxoa-bifasciata|A|V',
+  'globia-subflava|A|D',
+  'globia-subflava|A|V',
+  'lacinipolia-sareta|A|D',
+  'lacinipolia-sareta|A|V',
+  'protitame-subalbaria|A|D',
+  'protitame-subalbaria|A|V',
+  'speranza-quadrilinearia|A|D',
+  'speranza-quadrilinearia|A|V',
+  'sympistis-pallida|A|D',
+  'sympistis-pallida|A|V',
+  'sympistis-sandaraca|A|D',
+  'sympistis-sandaraca|A|V',
+  'trichopolia-rufula|A|D',
+  'trichopolia-rufula|A|V',
+]);
+
 /** `dorsal`/`ventral` in images.csv; `D`/`V` in the tile manifest. */
 function viewCode(view: string): string {
   const v = view.trim().toLowerCase();
@@ -88,7 +140,7 @@ export function slugClaimedByFilename(filename: string): string | null {
 }
 
 export interface Violation {
-  readonly check: 'A' | 'B' | 'C' | 'D';
+  readonly check: 'A' | 'B' | 'C' | 'D' | 'D-new' | 'D-resolved';
   readonly message: string;
 }
 
@@ -101,6 +153,11 @@ export function findViolations(
   determinations: Map<string, PhotoDetermination>,
   speciesPhotos: Record<string, SpeciesPhotoEntry>,
   manifestStems: ReadonlySet<string>,
+  // Defaults to EMPTY, not to KNOWN_COLLISIONS: this function is driven by
+  // fixtures in tests, and inheriting the real 22-entry baseline made every
+  // fixture report 22 spurious "no longer collides" violations. main() passes
+  // the real baseline explicitly.
+  knownCollisions: ReadonlySet<string> = new Set(),
 ): Violation[] {
   const violations: Violation[] = [];
   const imagesByStem = new Map(images.map(r => [toPhotoStem(r.filename), r]));
@@ -183,10 +240,30 @@ export function findViolations(
   for (const [key, filenames] of slots) {
     if (filenames.length < 2) continue;
     const [slug, specimen, code] = key.split('|');
+    const known = knownCollisions.has(key);
     violations.push({
-      check: 'D',
-      message: `${slug} specimen ${specimen}-${code} is claimed by ${filenames.length} photographs: ${filenames.join(', ')}`,
+      check: known ? 'D' : 'D-new',
+      message:
+        `${slug} specimen ${specimen}-${code} is claimed by ${filenames.length} photographs: ${filenames.join(', ')}` +
+        (known
+          ? ''
+          : ` — this one is NEW. Two photographs of one species cannot share a specimen letter: the letter is ` +
+            `what pairs a tile with its caption, so this is a latent version of #330. Give the incoming ` +
+            `photograph the next free letter (C-026) and leave the incumbent alone, or add it to ` +
+            `KNOWN_COLLISIONS with the issue that will resolve it.`),
     });
+  }
+
+  // An entry that no longer collides is a line to delete, not a silent pass —
+  // otherwise the baseline rots into a list nobody trusts or prunes.
+  for (const key of knownCollisions) {
+    if ((slots.get(key)?.length ?? 0) < 2) {
+      const [slug, specimen, code] = key.split('|');
+      violations.push({
+        check: 'D-resolved',
+        message: `${slug} specimen ${specimen}-${code} no longer collides — delete it from KNOWN_COLLISIONS in ${'scripts/check-photo-determinations.ts'}`,
+      });
+    }
   }
 
   return violations;
@@ -206,7 +283,13 @@ async function main(): Promise<void> {
     (await readManifest(MANIFEST_PATH)).map(r => toPhotoStem(r.filename_raw)),
   );
 
-  const violations = findViolations(images, determinations, speciesPhotos, manifestStems);
+  const violations = findViolations(
+    images,
+    determinations,
+    speciesPhotos,
+    manifestStems,
+    KNOWN_COLLISIONS,
+  );
   const fatal = violations.filter(v => v.check !== 'D');
   const advisory = violations.filter(v => v.check === 'D');
 
@@ -217,7 +300,7 @@ async function main(): Promise<void> {
 
   if (advisory.length > 0) {
     console.log(
-      `${TAG} ADVISORY — ${advisory.length} specimen letters claimed by more than one photograph (#341):`,
+      `${TAG} ADVISORY — ${advisory.length} known specimen-letter collisions awaiting the curator (#341):`,
     );
     for (const v of advisory) console.log(`    ${v.message}`);
   }
