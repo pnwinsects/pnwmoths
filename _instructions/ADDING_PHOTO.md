@@ -139,8 +139,38 @@ signing into it.
 
 ## Verify
 
+**Which case are you in?** Open the species page. If it shows the ordinary photo carousel,
+the species has no high-resolution tiles. If it opens a **zoomable viewer**, it does — and
+the viewer renders *instead of* the catalogued photographs, so your new row will not be on
+that page at all.
+
+**No tiles — verify on the species page:**
+
 - `_site/species/{slug}/index.html` contains an `<img>` for the new photo.
 - Open the species page in a browser and confirm the image loads.
+
+**Tiled — verify on a surface that reads `data/images.csv`.** The account not showing your
+photograph is expected here, not a failed build. `/browse/`, Identify and other species'
+"similar species" rows never consult tile status, so the photograph normally reaches at
+least one of them:
+
+```bash
+npm run report:hidden-images
+grep "Acronicta americana-A-D.jpg" data/hidden-images-report.csv
+```
+
+That report needs no build of its own. Read two columns of the row it prints:
+
+- **`displayed_as`** — the surfaces showing the photograph (`browse`, `identify`,
+  `similar`). Any value here means it is on the site and you are done.
+- **`cause`** — why the account does not show it. `superseded-by-tiles` means a tile of the
+  same specimen and view already shows this moth in a better version; `hidden-by-tiles`
+  means no tile covers it.
+
+A row with a **blank `displayed_as`** is the one worth raising: the photograph you just
+added appears nowhere on the site. That is a question for the curator (is this specimen
+worth tiling, or is it superseded?), not a build to debug. The rules behind all of this are
+in [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md).
 
 ## Reading a failure
 
