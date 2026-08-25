@@ -34,7 +34,7 @@ Before a finding becomes a numbered question, it must survive all five.
 ### 1. Is it already answered in the repo?
 
 Join the finding against every artifact that could account for it — not just the obvious one.
-#330 matched CDN objects to `data/images.csv` **by path** (`<slug>/<filename>`). But the
+Issue #330 matched CDN objects to `data/images.csv` **by path** (`<slug>/<filename>`). But the
 catalogue registers a photograph by *(slug, filename)*, where the slug is the determination and
 the filename is what the moth was called when it was photographed. Those diverge on every
 redetermination ([ADR 0038](../adr/0038-photo-identity-is-data-not-filename.md)), so an object at

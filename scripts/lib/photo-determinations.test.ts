@@ -49,9 +49,11 @@ describe('readPhotoDeterminations', () => {
     });
   });
 
-  it('skips rows with a blank stem rather than keying on the empty string', () => {
+  // A ruling with no photograph attached can never be applied, and check A
+  // cannot report it either — it needs a stem to name.
+  it('refuses a row with a blank stem rather than dropping it', () => {
     const path = writeCsv(HEADER + ',resapamea-innota,C,#330,orphan row\n');
-    assert.equal(readPhotoDeterminations(path).size, 0);
+    assert.throws(() => readPhotoDeterminations(path), /empty photo_stem/);
   });
 
   // The whole file is a claim about identity; two claims about one photograph

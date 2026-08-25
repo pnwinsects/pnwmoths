@@ -202,10 +202,18 @@ export function findViolations(
     tiled.set(slug, new Set(entry.specimens.map(s => `${s.specimen_id}|${s.view}`)));
   }
   for (const row of images) {
-    const claimed = slugClaimedByFilename(row.filename);
-    if (!claimed || claimed === row.species_slug) continue;
-    const slot = `${row.specimen}|${viewCode(row.view)}`;
-    if (!tiled.get(claimed)?.has(slot)) continue;
+    const identity = identityFromFilename(row.filename);
+    if (!identity || identity.slug === row.species_slug) continue;
+    // The stale tiles sit at the slot the FILENAME names, not the one the
+    // catalogue now uses. Building this from `row.specimen` looked up the
+    // *destination* letter in the *source* species' tile set: after a
+    // determination moved `Amphipoea keiferi-A-D.jpg` to specimen C, the check
+    // asked whether amphipoea-keiferi had tiles at C-D — it has them at A-D —
+    // found nothing, and passed. That is silent exactly in the half-finished
+    // state this check was narrowed to catch. It still caught the original 20
+    // slots only because those were unadjudicated, so the two letters agreed.
+    const sourceSlot = `${identity.specimen}|${identity.view}`;
+    if (!tiled.get(identity.slug)?.has(sourceSlot)) continue;
     // A determination exempts this pair ONLY once the tiles have actually
     // landed where it says. Exempting on the mere existence of a row reopens the
     // bug for a half-finished workflow: `photos:materialize` is not part of
@@ -214,13 +222,13 @@ export function findViolations(
     // prescribes — but does not re-materialise leaves the tiles keyed to the old
     // species with every gate green and the wrong moth public.
     const ruling = determinations.get(toPhotoStem(row.filename));
-    if (ruling && tiled.get(ruling.species_slug)?.has(`${ruling.specimen}|${viewCode(row.view)}`)) {
+    if (ruling && tiled.get(ruling.species_slug)?.has(`${ruling.specimen}|${identity.view}`)) {
       continue;
     }
     violations.push({
       check: 'C',
       message:
-        `${claimed} publishes tiles for specimen ${slot.replace('|', '-')}, but data/images.csv ` +
+        `${identity.slug} publishes tiles for specimen ${sourceSlot.replace('|', '-')}, but data/images.csv ` +
         `files "${row.filename}" under ${row.species_slug} — the account is showing another ` +
         `species' photograph. Record the determination in data/photo-determinations.csv and ` +
         `re-key the tiles, or correct data/images.csv`,

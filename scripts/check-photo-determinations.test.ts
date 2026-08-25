@@ -154,8 +154,9 @@ describe('findViolations', () => {
     const found = findViolations(
       images,
       determinations({ photo_stem: 'Amphipoea keiferi-A-D', species_slug: 'resapamea-innota', specimen: 'C' }),
-      // Both the vacating account and the destination hold the slot mid-migration.
-      { ...tiles('amphipoea-keiferi', 'C-D'), ...tiles('resapamea-innota', 'C-D') },
+      // Mid-migration: the source still holds the filename's slot, the
+      // destination already holds the determined one.
+      { ...tiles('amphipoea-keiferi', 'A-D'), ...tiles('resapamea-innota', 'C-D') },
       NO_STEMS,
     );
     assert.deepEqual(found, []);
@@ -172,11 +173,28 @@ describe('findViolations', () => {
     const found = findViolations(
       images,
       determinations({ photo_stem: 'Amphipoea keiferi-A-D', species_slug: 'resapamea-innota', specimen: 'C' }),
-      tiles('amphipoea-keiferi', 'C-D'), // destination has no tiles yet
+      // Stale tiles sit at the FILENAME's letter. The first version of this
+      // fixture said 'C-D' — the destination letter — which made the test pass
+      // for the wrong reason and hid the same bug the code had.
+      tiles('amphipoea-keiferi', 'A-D'),
       NO_STEMS,
     );
     assert.equal(found.length, 1);
     assert.equal(found[0]!.check, 'C');
+    assert.match(found[0]!.message, /specimen A-D/);
+  });
+
+  it('[C] is silent once the tiles reach the destination letter', () => {
+    const images: ImageRow[] = [
+      { species_slug: 'resapamea-innota', filename: 'Amphipoea keiferi-A-D.jpg', specimen: 'C', view: 'dorsal' },
+    ];
+    const found = findViolations(
+      images,
+      determinations({ photo_stem: 'Amphipoea keiferi-A-D', species_slug: 'resapamea-innota', specimen: 'C' }),
+      { ...tiles('amphipoea-keiferi', 'A-D'), ...tiles('resapamea-innota', 'C-D') },
+      NO_STEMS,
+    );
+    assert.deepEqual(found, []);
   });
 
   // The gate must see the names ingest admits, or it is blind to the next #330.
