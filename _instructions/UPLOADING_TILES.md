@@ -407,9 +407,11 @@ the deep-zoom viewer **instead of** its `data/images.csv` photographs, not along
 Every one of them disappears from that page, including views the tiles do not cover — a
 ventral shot with no ventral tile is simply gone.
 
-They do **not** disappear from the site. `/browse/`, Identify and other species' "similar
-species" rows read `data/images.csv` and never consult tile status, so the same photograph
-usually stays visible there. This asymmetry is `TILE_POLICY` in
+They do not necessarily disappear from the **site**. `/browse/`, Identify and other species'
+"similar species" rows read `data/images.csv` and never consult tile status — but each shows
+only ONE photograph per species, the lightest by `weight`, so of a species' six photographs
+at most one or two are visible anywhere once its account shows tiles. This asymmetry is
+`TILE_POLICY` in
 [`src/_lib/photo-display.ts`](../src/_lib/photo-display.ts) —
 [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md) has the
 table.
@@ -420,7 +422,10 @@ table.
 npm run report:hidden-images
 ```
 
-and look at `data/hidden-images-report.csv` for the slugs you just tiled: rows with cause
-`hidden-by-tiles` are photographs the tiles do not cover, and a blank `displayed_as` means
-that photograph is now on no page at all. Those are the ones worth a curator's eye — the
-rest are `superseded-by-tiles`, the same specimen and view in a better version.
+and look at `data/hidden-images-report.csv` for the slugs you just tiled. Read `cause`
+before `displayed_as`: `superseded-by-tiles` is the normal outcome and needs nothing (a tile
+of the same specimen and view now shows that moth better), while `hidden-by-tiles` means no
+tile covers that specimen and view. A `hidden-by-tiles` row with a blank `displayed_as` is a
+photograph your tiling run removed from the site entirely — that is the one worth putting in
+front of the curator. `unmatchable-by-tiles` is neither: it means the row has no `specimen`
+or no `view` to compare, which is a data fix rather than a judgement call.

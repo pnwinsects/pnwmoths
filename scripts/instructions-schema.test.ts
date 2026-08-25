@@ -190,8 +190,16 @@ export function csvHeader(path: string): string[] {
  */
 const STEP_CLAIM = /\b(\d+)(?:st|nd|rd|th)\s+of\s+(\d+)\s+steps\b/g;
 
-/** A `[bracketed-tag]` as the build prints it, e.g. `[check-derivatives] PASS`. */
-const BUILD_TAG = /\[([a-z][a-z0-9-]*)\]/g;
+/**
+ * A `[bracketed-tag]` as the build prints it, e.g. `[check-derivatives] PASS`.
+ *
+ * The negative lookahead is what separates a build tag from ordinary Markdown:
+ * `[label](href)` and `[label][ref]` are links, and this file is full of them.
+ * Without it, a `[here](…)` three lines from a step count would be read as a
+ * build step that does not exist — and since an unresolved tag now fails rather
+ * than being skipped, that would be a false red on prose that is perfectly fine.
+ */
+const BUILD_TAG = /\[([a-z][a-z0-9-]*)\](?![([])/g;
 
 export interface StepClaim {
   ordinal: number;
@@ -307,8 +315,11 @@ describe('column names in prose resolve against the CSVs the doc names', () => {
 describe('build-step claims resolve against package.json', () => {
   const steps = buildSiteSteps(join(PROJECT_ROOT, 'package.json'));
 
+  // The floor is 2, not "about as many as today": what this guards is the PARSE.
+  // A split that fails returns the whole `build:site` string as one element, and
+  // every total below would then be compared against 1.
   it('finds the build:site steps to check against', () => {
-    assert.ok(steps.length > 10, `expected a multi-step build, found ${steps.length}`);
+    assert.ok(steps.length > 1, `build:site did not split into steps; got ${steps.length}`);
   });
 
   for (const doc of docs) {
@@ -323,16 +334,25 @@ describe('build-step claims resolve against package.json', () => {
             `${steps.length}. A reader watching for "step ${claim.ordinal} of ${claim.total}" ` +
             'stops trusting the runbook — update the count.',
         );
-        // The ordinal is only checkable where the prose names the tag the step
-        // prints. Where it does, "6th" must be the step that actually emits it.
-        const named = claim.nearbyTags.find((tag) => steps.some((s) => s === tag || s === `build:${tag}`));
-        if (!named) continue;
-        const at = steps.findIndex((s) => s === named || s === `build:${named}`);
-        assert.equal(
-          claim.ordinal,
-          at + 1,
-          `${doc} calls [${named}] step ${claim.ordinal}; it is step ${at + 1} of build:site.`,
-        );
+        // The ordinal is checkable wherever the prose names the tag the step prints,
+        // and a tag that does not resolve is a FAILURE rather than a skip: the way
+        // this claim goes stale is a step being renamed, and skipping unknown tags
+        // would switch the ordinal check off in exactly that case.
+        for (const tag of claim.nearbyTags) {
+          const at = steps.findIndex((s) => s === tag || s === `build:${tag}`);
+          assert.notEqual(
+            at,
+            -1,
+            `${doc} shows a build tag [${tag}] beside a step count, but build:site has no ` +
+              `such step. It was renamed or misspelled — and while it does not resolve, the ` +
+              `ordinal in "${claim.ordinal} of ${claim.total} steps" is not being checked at all.`,
+          );
+          assert.equal(
+            claim.ordinal,
+            at + 1,
+            `${doc} calls [${tag}] step ${claim.ordinal}; it is step ${at + 1} of build:site.`,
+          );
+        }
       }
     });
   }
@@ -380,6 +400,30 @@ describe('the guard actually fails on the bug it exists to catch', () => {
   it('accepts the column those files really use', () => {
     const md = 'Records in `data/records.csv` key off `species_slug`.';
     assert.deepEqual(proseUnknowns(md), []);
+  });
+
+  // The step-count check, mutation-tested the same way. Each case is a way the
+  // claim rots: the total when a step is added anywhere, the ordinal when one is
+  // added ahead of it, and the tag when a step is renamed — that last one being
+  // the case an earlier draft of this check skipped silently.
+  it('reads a step claim and the build tag beside it', () => {
+    const md = 'watch for `[check-derivatives] PASS` — the 6th of 22 steps, not the last\n';
+    const [claim] = stepClaimsIn(md);
+    assert.equal(claim?.ordinal, 6);
+    assert.equal(claim?.total, 22);
+    assert.deepEqual(claim?.nearbyTags, ['check-derivatives']);
+  });
+
+  it('does not read a Markdown link label as a build tag', () => {
+    const md = 'see [here](GENERATING_DERIVATIVES.md) and [ref][1] — the 6th of 22 steps\n';
+    assert.deepEqual(stepClaimsIn(md)[0]?.nearbyTags, []);
+  });
+
+  it('splits build:site into its steps, and does not return it whole', () => {
+    const steps = buildSiteSteps(join(PROJECT_ROOT, 'package.json'));
+    assert.ok(steps.length > 1);
+    assert.ok(steps.every((s) => !s.includes('&&')), 'a step still contains &&');
+    assert.ok(steps.every((s) => !s.startsWith('npm run ')), 'a step still carries "npm run "');
   });
 
   it('rejects a sample row whose field count matches no declared schema', () => {

@@ -17,10 +17,12 @@ The build fails if you do 3 without 1 and 2, naming the file it cannot find. Tha
 - **`data/image-derivatives.csv`** — rows recording the uploaded variants (written for you)
 - Build output: the photo appears on the species page — **unless the species has high-resolution
   tiles**, in which case the account shows the deep-zoom viewer *instead of* the catalogued
-  photographs and your new row will not be visible there. It still reaches `/browse/`, Identify and
-  other species' "similar species" rows. That is by design, not a failed build; the rules are in
-  [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md), and
-  `data/hidden-images-report.csv` lists every photograph in that position.
+  photographs and your new row will not be visible there. It **may** still appear on `/browse/`,
+  on Identify, or in another species' "similar species" row, but none of those is guaranteed:
+  each shows one photograph per species, chosen by lowest `weight`, so a new row that is not the
+  lightest may appear nowhere at all. `data/hidden-images-report.csv` is what answers it for your
+  row — see [Verify](#verify). The rules are in
+  [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md).
 
 ## Schema: data/images.csv
 
@@ -159,18 +161,28 @@ npm run report:hidden-images
 grep "Acronicta americana-A-D.jpg" data/hidden-images-report.csv
 ```
 
-That report needs no build of its own. Read two columns of the row it prints:
+That report needs no build of its own. The row it prints answers two different questions in
+two columns, and both matter:
 
-- **`displayed_as`** — the surfaces showing the photograph (`browse`, `identify`,
-  `similar`). Any value here means it is on the site and you are done.
-- **`cause`** — why the account does not show it. `superseded-by-tiles` means a tile of the
-  same specimen and view already shows this moth in a better version; `hidden-by-tiles`
-  means no tile covers it.
+- **`displayed_as`** — *where* the photograph appears (`browse`, `identify`, `similar`).
+  Any value means it is on the site somewhere; blank means it is on no page at all.
+- **`cause`** — *why* the account does not show it. This is the column that decides what to
+  do about it, and not every cause is the same kind of problem:
 
-A row with a **blank `displayed_as`** is the one worth raising: the photograph you just
-added appears nowhere on the site. That is a question for the curator (is this specimen
-worth tiling, or is it superseded?), not a build to debug. The rules behind all of this are
-in [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md).
+| `cause` | What it means | What to do |
+|---|---|---|
+| `superseded-by-tiles` | A tile of the **same specimen and view** already shows this moth, at higher resolution. | Nothing. This is the normal outcome for a tiled species. |
+| `hidden-by-tiles` | No tile covers this specimen and view, so the account shows neither. | Worth a curator's eye — should this specimen be tiled too? |
+| `unmatchable-by-tiles` | The row has no `specimen` or no `view`, so it cannot be compared to the tiles at all. | Yours to fix: fill in those two columns of the row you just added. |
+| `cdn-missing` | The last CDN inventory did not find the object. | Yours to fix: the upload or its derivatives did not land. Re-check step 1 and [GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md). |
+
+So read `cause` first. A blank `displayed_as` next to `cdn-missing` or `unmatchable-by-tiles`
+is your own step to finish, not a question for anyone; a blank one next to `hidden-by-tiles`
+is the case that genuinely needs the curator. (`family-withheld` and `species-unpublished`
+appear in that column too, but only for species with no public page at all — if you are
+adding a photograph to one of those, nothing you do will make it visible until the gate
+lifts.) The rules behind all of this are in
+[docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md).
 
 ## Reading a failure
 
