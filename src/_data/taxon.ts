@@ -4,6 +4,13 @@ import type { TaxonFamily, TaxonGenus, TaxonSubfamily, TaxonTribe, NavImage, Spe
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../_lib/format-epithet.ts';
+import {
+  WEIGHT_ORDER_SQL,
+  NON_VENTRAL_SQL,
+  pickCardPhoto,
+  pickGenusStrip,
+  pickHigherStrip,
+} from '../_lib/photo-display.ts';
 
 // Narrow projection interfaces for the two DuckDB queries
 
@@ -103,23 +110,12 @@ interface TaxonFamilyBuild {
 }
 
 /**
- * The genus strip: up to four images taken across the WHOLE genus by weight, not
- * one per species. Rule inventory: docs/reference/photo-display-rules.md.
+ * The genus strip. The rule — four across the whole genus, by weight — lives in
+ * pickGenusStrip(); this only supplies the de-duplication key, because only Browse
+ * has synthetic high-res rows with a thumb_url and no filename.
  */
 function pickNavImages(speciesSlugs: string[], bySpeciesSlug: Record<string, NavImageDbRow[]>): NavImage[] {
-  const seen = new Set<string>();
-  const candidates: NavImage[] = [];
-  for (const slug of speciesSlugs) {
-    for (const img of (bySpeciesSlug[slug] ?? [])) {
-      const key = img.thumb_url ?? img.filename;
-      if (!seen.has(key)) {
-        seen.add(key);
-        candidates.push({ ...img, species_slug: slug });
-      }
-    }
-  }
-  candidates.sort((a, b) => (a.weight ?? 999) - (b.weight ?? 999));
-  return candidates.slice(0, 4);
+  return pickGenusStrip(speciesSlugs, bySpeciesSlug, (img) => img.thumb_url ?? img.filename);
 }
 
 export default async function (): Promise<TaxonFamily[]> {
@@ -188,16 +184,14 @@ export default async function (): Promise<TaxonFamily[]> {
     ORDER BY family, subfamily NULLS LAST, tribe NULLS LAST, genus, species
   `);
 
-  // Browse shows one navigation thumbnail per species, the lowest weight; ventral
-  // (underside) shots belong on species-account pages, not in the tree (issue #107).
-  // Rows with a null view are kept — they are unclassified, not confirmed ventral.
-  // This is one of seven display rules over images.csv, and the ventral exclusion is
-  // unique to Browse — see docs/reference/photo-display-rules.md before changing it.
+  // Browse shows one navigation thumbnail per species, and excludes ventral shots —
+  // both rules come from src/_lib/photo-display.ts, which holds the SQL fragments and
+  // their in-memory twins side by side so the two dialects cannot drift apart.
   const imagesResult = await conn.runAndReadAll(`
-    SELECT species_slug, filename, photographer, TRY_CAST(weight AS INTEGER) AS weight
+    SELECT species_slug, filename, photographer, ${WEIGHT_ORDER_SQL} AS weight
     FROM images
-    WHERE view IS DISTINCT FROM 'ventral'
-    ORDER BY species_slug, TRY_CAST(weight AS INTEGER)
+    WHERE ${NON_VENTRAL_SQL}
+    ORDER BY species_slug, ${WEIGHT_ORDER_SQL}
   `);
 
   conn.closeSync();
@@ -277,16 +271,11 @@ export default async function (): Promise<TaxonFamily[]> {
     genusMap[gen]!.species.push({ slug: row.slug, name: displayName, common_name: row.common_name, navImage: null });
   }
 
-  // Collect the first navImage from each genus in order until 4 total. Shared by
-  // the tribe, subfamily, and family aggregations (they differ only in the genus
-  // stream they walk).
+  // The tribe, subfamily and family strips: the first image of each genus strip
+  // below them, in tree order, until the strip is full. They differ only in the
+  // genus stream they walk.
   function firstFourNavImages(genera: TaxonGenusBuild[]): NavImage[] {
-    const images: NavImage[] = [];
-    for (const genus of genera) {
-      if (images.length >= 4) break;
-      if (genus.navImages.length > 0) images.push(genus.navImages[0]!);
-    }
-    return images.slice(0, 4);
+    return pickHigherStrip(genera.map(g => g.navImages));
   }
 
   // Convert maps to arrays, assign navImages at each level
@@ -296,12 +285,12 @@ export default async function (): Promise<TaxonFamily[]> {
         const genera = Object.values(tribe.genusMap!).map(genus => {
           const slugs = genus.species.map(s => s.slug);
           genus.navImages = pickNavImages(slugs, bySpeciesSlug);
-          genus.species = genus.species.map(sp => {
-            const imgs = (bySpeciesSlug[sp.slug] ?? []).slice();
-            imgs.sort((a, b) => (a.weight ?? 999) - (b.weight ?? 999));
-            const navImage = imgs[0] ?? null;
-            return { ...sp, navImage };
-          });
+          genus.species = genus.species.map(sp => ({
+            ...sp,
+            // The card rule. Ventral rows never reach here — the query already
+            // excluded them — so this is pickCardPhoto over an already-filtered set.
+            navImage: pickCardPhoto(bySpeciesSlug[sp.slug] ?? []),
+          }));
           return genus;
         });
 

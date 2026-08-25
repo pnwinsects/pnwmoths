@@ -1,4 +1,5 @@
 import { readFileSync } from "fs";
+import { orderByWeight } from "../_lib/photo-display.ts";
 
 // Local interface for the emitted image row shape.
 // Note: photographer is string|null here (emitted via `row.photographer || null`),
@@ -82,11 +83,12 @@ export default function (): Record<string, ImageRow[]> {
       subspecies: row['subspecies'] || null,
     });
   }
-  // Sort each species' images by weight. This ordering IS the account carousel, the
-  // similar-species thumbnail ([0]) and the share-image fallback ([0]) — see
-  // docs/reference/photo-display-rules.md.
+  // Display order, from src/_lib/photo-display.ts. This ordering IS the account
+  // carousel, and [0] of it is the similar-species thumbnail and the share-image
+  // fallback — the pickers for those surfaces take it from here.
   for (const slug of Object.keys(bySpecies)) {
-    bySpecies[slug]?.sort((a, b) => (a.weight ?? 0) - (b.weight ?? 0));
+    const rows = bySpecies[slug];
+    if (rows) bySpecies[slug] = orderByWeight(rows);
   }
   return bySpecies;
 }

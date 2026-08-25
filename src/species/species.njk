@@ -55,10 +55,11 @@ eleventyComputed:
 
 <div class="species-content">
   <div class="species-photos">
-    {# Tiles render INSTEAD OF the catalogued photographs — the only surface that
-       knows tiles exist. See docs/reference/photo-display-rules.md. #}
-    {% set spImages = images[sp.slug] %}
+    {# The account rule, from src/_lib/photo-display.ts: tiles render INSTEAD OF the
+       catalogued photographs (TILE_POLICY 'replaces'), so `display.mode` is that branch
+       and this template no longer restates it. #}
     {% set highResEntry = speciesPhotos[sp.slug] %}
+    {% set display = images[sp.slug] | accountPhotos(highResEntry) %}
     <pnwm-image-slideshow
       slug="{{ sp.slug }}"
       {% if highResEntry and highResEntry.high_res_available %}
@@ -68,8 +69,8 @@ eleventyComputed:
       prefix-url="{{ '/osd-images/' | url }}"
       {% endif %}
       data-pagefind-ignore>
-      {% if (not (highResEntry and highResEntry.high_res_available)) and spImages and spImages.length > 0 %}
-        {% for img in spImages %}
+      {% if display.mode == 'photos' %}
+        {% for img in display.photos %}
           <figure>
             <img src="{{ (sp.slug + '/' + img.filename) | derivative('full') }}"
                  data-thumb="{{ (sp.slug + '/' + img.filename) | derivative('320h') }}"
@@ -86,7 +87,7 @@ eleventyComputed:
             <figcaption>{{ img.photographer }}</figcaption>
           </figure>
         {% endfor %}
-      {% elif highResEntry and highResEntry.high_res_available %}
+      {% elif display.mode == 'tiles' %}
         {% for specimen in highResEntry.specimens %}
           {% set thumbSrc = specimen.tiles_path + "_thumbnail.webp" %}
           <figure>
@@ -116,13 +117,13 @@ eleventyComputed:
           {% for slug in sp.similar_slugs %}
             {% for s in species %}
               {% if s.slug == slug %}
-                {# simImages[0] = lowest weight, ventral included, tiles ignored —
-                   docs/reference/photo-display-rules.md #}
-                {% set simImages = images[slug] %}
+                {# The similar-species rule, from src/_lib/photo-display.ts: lowest
+                   weight, ventral included, tiles ignored. #}
+                {% set simThumb = images[slug] | similarThumbnail %}
                 <a class="similar-species-entry" href="{{ ('/species/' + slug + '/') | url }}">
                   <div class="similar-species-thumb">
-                    {% if simImages and simImages.length > 0 %}
-                      <img src="{{ (slug + '/' + simImages[0].filename) | derivative('320h') }}"
+                    {% if simThumb %}
+                      <img src="{{ (slug + '/' + simThumb.filename) | derivative('320h') }}"
                            alt="{{ s.genus }} {{ s.species_display }}"
                            height="93"
                            loading="lazy">

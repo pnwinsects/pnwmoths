@@ -2,10 +2,16 @@
 
 Which photograph each surface shows for a species, and why the answer differs by surface.
 
-`data/images.csv` is read by four files that display photographs, with seven distinct rules
-between them. Each picks differently, and no module owns the question — [#338](https://github.com/pnwinsects/pnwmoths/issues/338) tracks
-that debt. Until a module does, this file is the inventory. **If you change a selection rule,
-change the row here too**; each call site carries a comment pointing back at this file.
+`data/images.csv` is read by six surfaces that display photographs, with seven distinct rules
+between them. The rules live in one module — [`src/_lib/photo-display.ts`](../../src/_lib/photo-display.ts),
+one picker per surface — and this file is its prose companion: what each surface does and why
+the answers differ ([ADR 0040](../adr/0040-photo-display-module.md)).
+
+**Where a photograph appears** is the inverse question, and it is derived rather than restated:
+[`src/_lib/photo-display-index.ts`](../../src/_lib/photo-display-index.ts) inverts the pickers
+over the artifacts the surfaces render from, and
+[`scripts/check-display-index.ts`](../../scripts/check-display-index.ts) fails the build if that
+index and the emitted HTML disagree about any of the 4,034 catalogued photographs.
 
 Domain terms are in [../../CONTEXT.md](../../CONTEXT.md).
 
@@ -25,26 +31,35 @@ derived, never declared. `NavImage`, `pickNavImages()` and `navImages` all name 
 
 ## The rules, surface by surface
 
-| Surface | Source | Rule |
+| Surface | Picker | Rule |
 |---|---|---|
-| Species account carousel | [`src/species/species.njk`](../../src/species/species.njk) | **Every** row for the species, in `weight` order — **unless** the species has high-res tiles, in which case the deep-zoom viewer renders *instead of* the catalogued photographs and none of them appear. |
-| Browse species card | [`src/_data/taxon.ts`](../../src/_data/taxon.ts) | Lowest `weight` among rows whose `view` is not `ventral`. A species with **no** `images.csv` row at all falls back to a synthetic thumbnail from the high-res manifest (prefers the `D` specimen) — [#84](https://github.com/pnwinsects/pnwmoths/issues/84); `images.csv` rows always win when both exist. |
-| Browse **genus** strip | `pickNavImages()` in the same file | Up to **four** images taken across the whole genus by `weight`, deduped by thumbnail path — *not* one per species. A species can therefore put a second photograph on `/browse/` that no per-species rule predicts. |
-| Browse **tribe / subfamily / family** strips | `firstFourNavImages()` in the same file | The genus strip's **first** image from each genus in tree order, until four. |
-| Identify cards | [`scripts/build-key.ts`](../../scripts/build-key.ts) | Lowest `weight`, ventral **not** excluded — and only for the 1,192 species the key matrix carries, so a species with a page but no key entry has no Identify card at all. |
-| Similar-species thumbnails | `src/species/species.njk` | `images[slug][0]` — lowest `weight`, ventral not excluded. Rendered on **other** species' pages, the ones naming this species in `similar_species`. |
-| Share / Open Graph image | [`src/_lib/social-meta.ts`](../../src/_lib/social-meta.ts) | The first high-res specimen's thumbnail if the species is tiled, else `images[slug][0]`; else the site share card ([ADR 0021](../adr/0021-sharing-metadata.md)). |
+| Species account carousel | `pickAccountPhotos` | **Every** row for the species, in `weight` order — **unless** the species has high-res tiles, in which case the deep-zoom viewer renders *instead of* the catalogued photographs and none of them appear. |
+| Browse species card | `pickCardPhoto` | Lowest `weight` among rows whose `view` is not `ventral`. A species with **no** `images.csv` row at all falls back to a synthetic thumbnail from the high-res manifest (prefers the `D` specimen) — [#84](https://github.com/pnwinsects/pnwmoths/issues/84); `images.csv` rows always win when both exist. |
+| Browse **genus** strip | `pickGenusStrip` | Up to **four** images taken across the whole genus by `weight`, deduped by thumbnail path — *not* one per species. A species can therefore put a second photograph on `/browse/` that no per-species rule predicts. |
+| Browse **tribe / subfamily / family** strips | `pickHigherStrip` | The genus strip's **first** image from each genus in tree order, until four. |
+| Identify cards | `pickIdentifyPhoto` | Lowest `weight`, ventral **not** excluded — and only for the 1,192 species the key matrix carries, so a species with a page but no key entry has no Identify card at all. |
+| Similar-species thumbnails | `pickSimilarPhoto` | `images[slug][0]` — lowest `weight`, ventral not excluded. Rendered on **other** species' pages, the ones naming this species in `similar_species`. |
+| Share / Open Graph image | `pickSharePhoto` | The first high-res specimen's thumbnail if the species is tiled, else `images[slug][0]`; else the site share card ([ADR 0021](../adr/0021-sharing-metadata.md)). |
+
+Each picker is a function in [`src/_lib/photo-display.ts`](../../src/_lib/photo-display.ts); the
+call sites are `src/species/species.njk` (via the `accountPhotos` / `similarThumbnail` Eleventy
+filters), `src/_data/taxon.ts`, `scripts/build-key.ts` and `src/_lib/social-meta.ts`.
 
 ## Consequences worth knowing before you touch this
 
 - **Only the account knows tiles exist.** Tiling a species removes its catalogued photographs
   from its own page while leaving them on `/browse/`, Identify and other species' similar-species
-  rows. That asymmetry is the reason
-  [`emit-hidden-images.ts`](../../scripts/emit-hidden-images.ts) answers "where is this
-  photograph shown" by grepping the built `_site/` rather than predicting it from source — three
-  attempts to model these rules by hand were each wrong.
-- **Two different null-`weight` conventions.** [`src/_data/images.ts`](../../src/_data/images.ts)
-  sorts an unparseable `weight` to the **front** (`?? 0`); `taxon.ts` sorts it to the **back**
-  (`?? 999`). Every row currently has a numeric weight, so nothing depends on it today.
+  rows. `TILE_POLICY` in the module states that asymmetry per surface — `replaces` for the
+  account, `prefers` for the share image, `fallback` for Browse, `ignores` for the rest — so it
+  is one table rather than a thing one consumer out of six happens to know.
 - **The ventral exclusion is Browse-only** ([#107](https://github.com/pnwinsects/pnwmoths/issues/107)).
-  Rows with a *blank* `view` are kept everywhere — unclassified is not confirmed-ventral.
+  Rows with a *blank* `view` are kept everywhere — unclassified is not confirmed-ventral. Browse
+  and Identify differ **only** in that filter, which is exactly the difference a tidying
+  refactor would erase; `src/_lib/photo-display.test.ts` asserts it directly.
+- **One null-`weight` convention: last.** An unparseable weight sorts to the back, in SQL
+  (`TRY_CAST` → `NULL` in an `ASC` sort) and in memory alike, so a malformed cell can never
+  quietly become a species' thumbnail. `src/_data/images.ts` used to sort such a row to the
+  *front*; every row has a numeric weight today, so unifying changed nothing observable.
+- **Adding a surface means three edits**: a picker here, a branch in the index, and a row in
+  this table. Skip the second and `build:check-display-index` fails on the first photograph the
+  new surface displays.
