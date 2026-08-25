@@ -32,166 +32,20 @@ key-images/forewing discal spot present.webp,object,185776,,key-image-no-row,no 
 "key-images/forewing median line, no.webp",object,244022,,key-image-no-row,no row in data/key-character-images.csv names this image
 "key-images/forewing with large spot spanning both orbicular and discal region, no.webp",object,196206,,key-image-no-row,no row in data/key-character-images.csv names this image
 "key-images/forewing with large spot spanning both orbicular and discal region, yes.webp",object,162930,,key-image-no-row,no row in data/key-character-images.csv names this image
-dasyfidonia-avuncularia/Dasyfidonia avuncularia - A-D.jpg,object,,dasyfidonia-avuncularia,missing-photo,a row in data/images.csv with no object in the zone
-dasyfidonia-avuncularia/Dasyfidonia avuncularia - A-V.jpg,object,,dasyfidonia-avuncularia,missing-photo,a row in data/images.csv with no object in the zone
-dasyfidonia-avuncularia/Dasyfidonia avuncularia - B-D.jpg,object,,dasyfidonia-avuncularia,missing-photo,a row in data/images.csv with no object in the zone
-dasyfidonia-avuncularia/Dasyfidonia avuncularia - B-V.jpg,object,,dasyfidonia-avuncularia,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-burneyata/Digrammia burnegata - A-D.jpg,object,,digrammia-burneyata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-burneyata/Digrammia burnegata - A-V.jpg,object,,digrammia-burneyata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-burneyata/Digrammia burnegata - B-D.jpg,object,,digrammia-burneyata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-burneyata/Digrammia burnegata - B-V.jpg,object,,digrammia-burneyata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-californiaria/Digrammia californaria - A-D.jpg,object,,digrammia-californiaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-californiaria/Digrammia californaria - A-V.jpg,object,,digrammia-californiaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-cinereola/Digrammia cinereola - A-D.jpg,object,,digrammia-cinereola,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-cinereola/Digrammia cinereola - A-V.jpg,object,,digrammia-cinereola,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-curvata/Digrammia curvata - A-V.jpg,object,,digrammia-curvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-curvata/Digrammia curvata - B-D.jpg,object,,digrammia-curvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-curvata/Digrammia curvata - B-V.jpg,object,,digrammia-curvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-decorata/Digrammia decorata - A-D.jpg,object,,digrammia-decorata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-decorata/Digrammia decorata - A-V.jpg,object,,digrammia-decorata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-decorata/Digrammia decorata - B-D.jpg,object,,digrammia-decorata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-decorata/Digrammia decorata - B-V.jpg,object,,digrammia-decorata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-excurvata/Digrammia excurvata - A-D.jpg,object,,digrammia-excurvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-excurvata/Digrammia excurvata - A-V.jpg,object,,digrammia-excurvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-excurvata/Digrammia excurvata - B-D.jpg,object,,digrammia-excurvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-excurvata/Digrammia excurvata - B-V.jpg,object,,digrammia-excurvata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-extenuata/Digrammia extenuate - A-D.jpg,object,,digrammia-extenuata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-extenuata/Digrammia extenuate - A-V.jpg,object,,digrammia-extenuata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-irrorata/Digrammia irrorata - A-D.jpg,object,,digrammia-irrorata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-irrorata/Digrammia irrorata - A-V.jpg,object,,digrammia-irrorata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-modocata/Digrammia modocata - A-D.jpg,object,,digrammia-modocata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-modocata/Digrammia modocata - A-V.jpg,object,,digrammia-modocata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-modocata/Digrammia modocata - B-D.jpg,object,,digrammia-modocata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-modocata/Digrammia modocata - B-V.jpg,object,,digrammia-modocata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-muscariata/Digrammia muscariata - A-D.jpg,object,,digrammia-muscariata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-muscariata/Digrammia muscariata - A-V.jpg,object,,digrammia-muscariata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-muscariata/Digrammia muscariata - B-D.jpg,object,,digrammia-muscariata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-muscariata/Digrammia muscariata - B-V.jpg,object,,digrammia-muscariata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-napensis/Digrammia napensis -A-D.jpg,object,,digrammia-napensis,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-napensis/Digrammia napensis -A-V.jpg,object,,digrammia-napensis,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-napensis/Digrammia napensis -B-D.jpg,object,,digrammia-napensis,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-napensis/Digrammia napensis -B-V.jpg,object,,digrammia-napensis,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-neptaria/Digrammia neptaria - A-D.jpg,object,,digrammia-neptaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-neptaria/Digrammia neptaria - A-V.jpg,object,,digrammia-neptaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-neptaria/Digrammia neptaria - B -V.jpg,object,,digrammia-neptaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-neptaria/Digrammia neptaria - B-D.jpg,object,,digrammia-neptaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-rippertaria/Digrammia rippertaria - A-D.jpg,object,,digrammia-rippertaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-rippertaria/Digrammia rippertaria - A-V.jpg,object,,digrammia-rippertaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-rippertaria/Digrammia rippertaria - B-D.jpg,object,,digrammia-rippertaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-rippertaria/Digrammia rippertaria - B-V.jpg,object,,digrammia-rippertaria,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-sexpunctata/Digrammia sexpunctata - A-D.jpg,object,,digrammia-sexpunctata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-subminiata/Digrammia subminiata - A-D.jpg,object,,digrammia-subminiata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-subminiata/Digrammia subminiata - A-V.jpg,object,,digrammia-subminiata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-subminiata/Digrammia subminiata - B-D.jpg,object,,digrammia-subminiata,missing-photo,a row in data/images.csv with no object in the zone
-digrammia-subminiata/Digrammia subminiata - B-V.jpg,object,,digrammia-subminiata,missing-photo,a row in data/images.csv with no object in the zone
-epelis-truncataria/Epelis truncataria - A-D.jpg,object,,epelis-truncataria,missing-photo,a row in data/images.csv with no object in the zone
-epelis-truncataria/Epelis truncataria - A-V.jpg,object,,epelis-truncataria,missing-photo,a row in data/images.csv with no object in the zone
-epelis-truncataria/Epelis truncataria - B-V.jpg,object,,epelis-truncataria,missing-photo,a row in data/images.csv with no object in the zone
-fernaldella-fimetaria/Fernaldella fimeteria - A-D.jpg,object,,fernaldella-fimetaria,missing-photo,a row in data/images.csv with no object in the zone
-fernaldella-fimetaria/Fernaldella fimeteria - A-V.jpg,object,,fernaldella-fimetaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-adonis/Macaria adonis - A-D.jpg,object,,macaria-adonis,missing-photo,a row in data/images.csv with no object in the zone
-macaria-adonis/Macaria adonis - A-V.jpg,object,,macaria-adonis,missing-photo,a row in data/images.csv with no object in the zone
-macaria-adonis/Macaria adonis - B-V.jpg,object,,macaria-adonis,missing-photo,a row in data/images.csv with no object in the zone
-macaria-aemulataria/Macaria aemulataria - A-D.jpg,object,,macaria-aemulataria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-aemulataria/Macaria aemulataria - A-V.jpg,object,,macaria-aemulataria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-aemulataria/Macaria aemulataria - B-V.jpg,object,,macaria-aemulataria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-notata/Macaria notata - A-V.jpg,object,,macaria-notata,missing-photo,a row in data/images.csv with no object in the zone
-macaria-oweni/Macaria oweni - A-D.jpg,object,,macaria-oweni,missing-photo,a row in data/images.csv with no object in the zone
-macaria-oweni/Macaria oweni - A-V.jpg,object,,macaria-oweni,missing-photo,a row in data/images.csv with no object in the zone
-macaria-sexmaculata/Macaria sexmaculata - A-D.jpg,object,,macaria-sexmaculata,missing-photo,a row in data/images.csv with no object in the zone
-macaria-sexmaculata/Macaria sexmaculata - A-V.jpg,object,,macaria-sexmaculata,missing-photo,a row in data/images.csv with no object in the zone
-macaria-sexmaculata/Macaria sexmaculata - B-D.jpg,object,,macaria-sexmaculata,missing-photo,a row in data/images.csv with no object in the zone
-macaria-sexmaculata/Macaria sexmaculata - B-V.jpg,object,,macaria-sexmaculata,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria marmorata - F-D.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria marmorata - F-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria marmorata - G-D.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria marmorata - G-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria signaria - A-D.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria signaria - A-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria signaria - B-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria submarmorata -E-D.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria submarmorata -E-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria unipunctaria - C-D.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria unipunctaria - C-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria unipunctaria -D-D.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-macaria-signaria/Macaria unipunctaria -D-V.jpg,object,,macaria-signaria,missing-photo,a row in data/images.csv with no object in the zone
-abagrotis-rubicundis/Abagrotis rubicundis-A-D.jpg,object,139006,abagrotis-rubicundis,photo-no-row,no row in data/images.csv; abagrotis-rubicundis is not in data/species.csv
-abagrotis-rubicundis/Abagrotis rubicundis-A-V.jpg,object,139874,abagrotis-rubicundis,photo-no-row,no row in data/images.csv; abagrotis-rubicundis is not in data/species.csv
-acronicta-dactylina/Acronicta dactylina-A-D.jpg,object,137843,acronicta-dactylina,photo-no-row,no row in data/images.csv; acronicta-dactylina is not in data/species.csv
-acronicta-dactylina/Acronicta dactylina-A-V.jpg,object,118280,acronicta-dactylina,photo-no-row,no row in data/images.csv; acronicta-dactylina is not in data/species.csv
-acronicta-dactylina/Acronicta dactylina-B-D.jpg,object,141886,acronicta-dactylina,photo-no-row,no row in data/images.csv; acronicta-dactylina is not in data/species.csv
-acronicta-dactylina/Acronicta dactylina-B-V.jpg,object,127311,acronicta-dactylina,photo-no-row,no row in data/images.csv; acronicta-dactylina is not in data/species.csv
-acronicta-dactylina/Acronicta dactylina-C-V.jpg,object,139918,acronicta-dactylina,photo-no-row,no row in data/images.csv; acronicta-dactylina is not in data/species.csv
-acronicta-parallela/Acronicta parallela-A-D.jpg,object,130892,acronicta-parallela,photo-no-row,no row in data/images.csv; acronicta-parallela is not in data/species.csv
-acronicta-parallela/Acronicta parallela-A-V.jpg,object,126356,acronicta-parallela,photo-no-row,no row in data/images.csv; acronicta-parallela is not in data/species.csv
-acronicta-parallela/Acronicta parallela-B-D.jpg,object,142348,acronicta-parallela,photo-no-row,no row in data/images.csv; acronicta-parallela is not in data/species.csv
-acronicta-parallela/Acronicta parallela-B-V.jpg,object,136821,acronicta-parallela,photo-no-row,no row in data/images.csv; acronicta-parallela is not in data/species.csv
-amphipoea-keiferi/Amphipoea keiferi-A-D.jpg,object,126964,amphipoea-keiferi,photo-no-row,no row in data/images.csv; amphipoea-keiferi is published
-amphipoea-keiferi/Amphipoea keiferi-A-V.jpg,object,126125,amphipoea-keiferi,photo-no-row,no row in data/images.csv; amphipoea-keiferi is published
-amphipoea-senilis/Amphipoea senilis-A-D.jpg,object,113858,amphipoea-senilis,photo-no-row,no row in data/images.csv; amphipoea-senilis is not in data/species.csv
-amphipoea-senilis/Amphipoea senilis-A-V.jpg,object,112870,amphipoea-senilis,photo-no-row,no row in data/images.csv; amphipoea-senilis is not in data/species.csv
-amphipoea-senilis/Amphipoea senilis-B-D.jpg,object,125649,amphipoea-senilis,photo-no-row,no row in data/images.csv; amphipoea-senilis is not in data/species.csv
-amphipoea-senilis/Amphipoea senilis-B-V.jpg,object,118333,amphipoea-senilis,photo-no-row,no row in data/images.csv; amphipoea-senilis is not in data/species.csv
-anarta-fervida/Anarta fervida-A-D.jpg,object,154324,anarta-fervida,photo-no-row,no row in data/images.csv; anarta-fervida is not in data/species.csv
-anarta-fervida/Anarta fervida-A-V.jpg,object,147800,anarta-fervida,photo-no-row,no row in data/images.csv; anarta-fervida is not in data/species.csv
-anarta-hadeniformis/Anarta hadeniformis-A-D.jpg,object,134137,anarta-hadeniformis,photo-no-row,no row in data/images.csv; anarta-hadeniformis is not in data/species.csv
-anarta-hadeniformis/Anarta hadeniformis-A-V.jpg,object,127018,anarta-hadeniformis,photo-no-row,no row in data/images.csv; anarta-hadeniformis is not in data/species.csv
-anarta-montanica/Anarta montanica-A-D.jpg,object,162981,anarta-montanica,photo-no-row,no row in data/images.csv; anarta-montanica is not in data/species.csv
-anarta-montanica/Anarta montanica-A-V.jpg,object,155234,anarta-montanica,photo-no-row,no row in data/images.csv; anarta-montanica is not in data/species.csv
-anarta-ptilodonta/Anarta ptilodonta-A-D.jpg,object,141725,anarta-ptilodonta,photo-no-row,no row in data/images.csv; anarta-ptilodonta is not in data/species.csv
-anarta-ptilodonta/Anarta ptilodonta-A-V.jpg,object,120334,anarta-ptilodonta,photo-no-row,no row in data/images.csv; anarta-ptilodonta is not in data/species.csv
-anarta-ptilodonta/Anarta ptilodonta-B-D.jpg,object,161333,anarta-ptilodonta,photo-no-row,no row in data/images.csv; anarta-ptilodonta is not in data/species.csv
-anarta-ptilodonta/Anarta ptilodonta-B-V.jpg,object,143830,anarta-ptilodonta,photo-no-row,no row in data/images.csv; anarta-ptilodonta is not in data/species.csv
-apamea-aurianticolor/Apamea aurianticolor-A-D.jpg,object,151634,apamea-aurianticolor,photo-no-row,no row in data/images.csv; apamea-aurianticolor is not in data/species.csv
-apamea-aurianticolor/Apamea aurianticolor-A-V.jpg,object,142408,apamea-aurianticolor,photo-no-row,no row in data/images.csv; apamea-aurianticolor is not in data/species.csv
-aseptis-ethnica/Aseptis ethnica-A-D.jpg,object,148771,aseptis-ethnica,photo-no-row,no row in data/images.csv; aseptis-ethnica is published
-aseptis-ethnica/Aseptis ethnica-A-V.jpg,object,150444,aseptis-ethnica,photo-no-row,no row in data/images.csv; aseptis-ethnica is published
-aseptis-fannatica/Aseptis fannatica-A-D.jpg,object,144893,aseptis-fannatica,photo-no-row,no row in data/images.csv; aseptis-fannatica is not in data/species.csv
-aseptis-fannatica/Aseptis fannatica-A-V.jpg,object,161971,aseptis-fannatica,photo-no-row,no row in data/images.csv; aseptis-fannatica is not in data/species.csv
-axenus-amplus/Axenus amplus-A-D.jpg,object,165295,axenus-amplus,photo-no-row,no row in data/images.csv; axenus-amplus is not in data/species.csv
-axenus-amplus/Axenus amplus-A-V.jpg,object,163194,axenus-amplus,photo-no-row,no row in data/images.csv; axenus-amplus is not in data/species.csv
 besma-quercivoraria/Besma quercivoraria-OSAC_0001081358-D.jpg,object,440201,besma-quercivoraria,photo-no-row,no row in data/images.csv; besma-quercivoraria is not in data/species.csv
 besma-quercivoraria/Besma quercivoraria-OSAC_0001081358-V.jpg,object,404797,besma-quercivoraria,photo-no-row,no row in data/images.csv; besma-quercivoraria is not in data/species.csv
 besma-quercivoraria/Besma quercivoraria-OSAC_0001081359-D.jpg,object,432846,besma-quercivoraria,photo-no-row,no row in data/images.csv; besma-quercivoraria is not in data/species.csv
 besma-quercivoraria/Besma quercivoraria-OSAC_0001081359-V.jpg,object,413285,besma-quercivoraria,photo-no-row,no row in data/images.csv; besma-quercivoraria is not in data/species.csv
-caradrina-multifera/Caradrina multifera-A-D.jpg,object,132650,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
-caradrina-multifera/Caradrina multifera-A-V.jpg,object,126246,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
-caradrina-multifera/Caradrina multifera-B-D.jpg,object,136831,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
-caradrina-multifera/Caradrina multifera-B-V.jpg,object,132832,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
-caradrina-multifera/Caradrina multifera-C-D.jpg,object,141356,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
-caradrina-multifera/Caradrina multifera-C-V.jpg,object,132636,caradrina-multifera,photo-no-row,no row in data/images.csv; caradrina-multifera is not in data/species.csv
 chesiadodes-cinerea/Chesiadodes cinerea-OSAC_0001081315-D.jpg,object,373558,chesiadodes-cinerea,photo-no-row,no row in data/images.csv; chesiadodes-cinerea is not in data/species.csv
 chesiadodes-cinerea/Chesiadodes cinerea-OSAC_0001081315-V.jpg,object,400602,chesiadodes-cinerea,photo-no-row,no row in data/images.csv; chesiadodes-cinerea is not in data/species.csv
 chlorochlamys-appellaria/Chlorochlamys appellaria-OSAC_0001081322-D.jpg,object,269987,chlorochlamys-appellaria,photo-no-row,no row in data/images.csv; chlorochlamys-appellaria is not in data/species.csv
 chlorochlamys-appellaria/Chlorochlamys appellaria-OSAC_0001081322-V.jpg,object,268643,chlorochlamys-appellaria,photo-no-row,no row in data/images.csv; chlorochlamys-appellaria is not in data/species.csv
 chlorochlamys-appellaria/Chlorochlamys appellaria-OSAC_0001081324-D.jpg,object,311302,chlorochlamys-appellaria,photo-no-row,no row in data/images.csv; chlorochlamys-appellaria is not in data/species.csv
 chlorochlamys-appellaria/Chlorochlamys appellaria-OSAC_0001081324-V.jpg,object,307998,chlorochlamys-appellaria,photo-no-row,no row in data/images.csv; chlorochlamys-appellaria is not in data/species.csv
-chrysodeixis-eriosoma/Chrysodeixis eriosoma-A-D.jpg,object,116337,chrysodeixis-eriosoma,photo-no-row,no row in data/images.csv; chrysodeixis-eriosoma is not in data/species.csv
-chrysodeixis-eriosoma/Chrysodeixis eriosoma-A-V.jpg,object,112316,chrysodeixis-eriosoma,photo-no-row,no row in data/images.csv; chrysodeixis-eriosoma is not in data/species.csv
-chytolita-petrealis/Chytolita petrealis-A-D.jpg,object,158862,chytolita-petrealis,photo-no-row,no row in data/images.csv; chytolita-petrealis is not in data/species.csv
-chytolita-petrealis/Chytolita petrealis-A-V.jpg,object,155710,chytolita-petrealis,photo-no-row,no row in data/images.csv; chytolita-petrealis is not in data/species.csv
-clemensia-albata/Clemensia albata-A-D.jpg,object,153722,clemensia-albata,photo-no-row,no row in data/images.csv; clemensia-albata is not in data/species.csv
-clemensia-albata/Clemensia albata-A-V.jpg,object,139627,clemensia-albata,photo-no-row,no row in data/images.csv; clemensia-albata is not in data/species.csv
-condica-lunata/Condica lunata-A-D.jpg,object,154362,condica-lunata,photo-no-row,no row in data/images.csv; condica-lunata is not in data/species.csv
-condica-lunata/Condica lunata-A-V.jpg,object,160043,condica-lunata,photo-no-row,no row in data/images.csv; condica-lunata is not in data/species.csv
-datana-ministra/Datana ministra-A-D.jpg,object,129910,datana-ministra,photo-no-row,no row in data/images.csv; datana-ministra is not in data/species.csv
-datana-ministra/Datana ministra-A-V.jpg,object,125639,datana-ministra,photo-no-row,no row in data/images.csv; datana-ministra is not in data/species.csv
-diachrysia-aeroides/Diachrysia aeroides-A-D.jpg,object,144214,diachrysia-aeroides,photo-no-row,no row in data/images.csv; diachrysia-aeroides is not in data/species.csv
-diachrysia-aeroides/Diachrysia aeroides-A-V.jpg,object,140416,diachrysia-aeroides,photo-no-row,no row in data/images.csv; diachrysia-aeroides is not in data/species.csv
 dichorda-illustraria/Dichorda illustraria-OSAC_0001081352-D.jpg,object,309652,dichorda-illustraria,photo-no-row,no row in data/images.csv; dichorda-illustraria is not in data/species.csv
 dichorda-illustraria/Dichorda illustraria-OSAC_0001081352-V.jpg,object,321578,dichorda-illustraria,photo-no-row,no row in data/images.csv; dichorda-illustraria is not in data/species.csv
 dichorda-illustraria/Dichorda illustraria-OSAC_0001081354-D.jpg,object,320962,dichorda-illustraria,photo-no-row,no row in data/images.csv; dichorda-illustraria is not in data/species.csv
 dichorda-illustraria/Dichorda illustraria-OSAC_0001081354-V.jpg,object,301690,dichorda-illustraria,photo-no-row,no row in data/images.csv; dichorda-illustraria is not in data/species.csv
-digrammia-nubicalatata/Digrammia nubicalatata-A-D.jpg,object,118384,digrammia-nubicalatata,photo-no-row,no row in data/images.csv; digrammia-nubicalatata is not in data/species.csv
-digrammia-nubicalatata/Digrammia nubicalatata-A-V.jpg,object,109792,digrammia-nubicalatata,photo-no-row,no row in data/images.csv; digrammia-nubicalatata is not in data/species.csv
-digrammia-nubicalatata/Digrammia nubicalatata-B-D.jpg,object,95310,digrammia-nubicalatata,photo-no-row,no row in data/images.csv; digrammia-nubicalatata is not in data/species.csv
-digrammia-nubicalatata/Digrammia nubicalatata-B-V.jpg,object,97589,digrammia-nubicalatata,photo-no-row,no row in data/images.csv; digrammia-nubicalatata is not in data/species.csv
-drasteria-convergens/Drasteria convergens-A-D.jpg,object,155644,drasteria-convergens,photo-no-row,no row in data/images.csv; drasteria-convergens is not in data/species.csv
-drasteria-convergens/Drasteria convergens-A-V.jpg,object,143768,drasteria-convergens,photo-no-row,no row in data/images.csv; drasteria-convergens is not in data/species.csv
-drasteria-species/Drasteria species-A-D.jpg,object,152055,drasteria-species,photo-no-row,no row in data/images.csv; drasteria-species is not in data/species.csv
-drasteria-species/Drasteria species-A-V.jpg,object,137833,drasteria-species,photo-no-row,no row in data/images.csv; drasteria-species is not in data/species.csv
-drepanulatrix-unicabararia/Drepanulatrix unicabararia-A-D.jpg,object,103956,drepanulatrix-unicabararia,photo-no-row,no row in data/images.csv; drepanulatrix-unicabararia is not in data/species.csv
-drepanulatrix-unicabararia/Drepanulatrix unicabararia-A-V.jpg,object,100115,drepanulatrix-unicabararia,photo-no-row,no row in data/images.csv; drepanulatrix-unicabararia is not in data/species.csv
 dysstroma-colvillei/Dysstroma colvillei-OSAC_0000130334-D.jpg,object,389151,dysstroma-colvillei,photo-no-row,no row in data/images.csv; dysstroma-colvillei is not in data/species.csv
 dysstroma-colvillei/Dysstroma colvillei-OSAC_0000130334-V.jpg,object,378470,dysstroma-colvillei,photo-no-row,no row in data/images.csv; dysstroma-colvillei is not in data/species.csv
 dysstroma-truncata/Dysstroma truncata-OSAC_0001081384-D.jpg,object,385642,dysstroma-truncata,photo-no-row,no row in data/images.csv; dysstroma-truncata is gated and gets no page
@@ -204,12 +58,6 @@ dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081386-D.jpg,object,365776,dyss
 dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081386-V.jpg,object,361127,dysstroma-walkerata,photo-no-row,no row in data/images.csv; dysstroma-walkerata is not in data/species.csv
 dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081387-D.jpg,object,357041,dysstroma-walkerata,photo-no-row,no row in data/images.csv; dysstroma-walkerata is not in data/species.csv
 dysstroma-walkerata/Dysstroma walkerata-OSAC_0001081387-V.jpg,object,342642,dysstroma-walkerata,photo-no-row,no row in data/images.csv; dysstroma-walkerata is not in data/species.csv
-enargia-fausta/Enargia fausta-A-D.jpg,object,117054,enargia-fausta,photo-no-row,no row in data/images.csv; enargia-fausta is published
-enargia-fausta/Enargia fausta-A-V.jpg,object,113825,enargia-fausta,photo-no-row,no row in data/images.csv; enargia-fausta is published
-eulithis-harveyata/Eulithis harveyata-A-D.jpg,object,126831,eulithis-harveyata,photo-no-row,no row in data/images.csv; eulithis-harveyata is not in data/species.csv
-eulithis-harveyata/Eulithis harveyata-A-V.jpg,object,126612,eulithis-harveyata,photo-no-row,no row in data/images.csv; eulithis-harveyata is not in data/species.csv
-eulithis-xylena/Eulithis xylena-A-D.jpg,object,121836,eulithis-xylena,photo-no-row,no row in data/images.csv; eulithis-xylena is not in data/species.csv
-eulithis-xylena/Eulithis xylena-A-V.jpg,object,115022,eulithis-xylena,photo-no-row,no row in data/images.csv; eulithis-xylena is not in data/species.csv
 eumacaria-madopata/Eumacaria madopata-OSAC_0000992639-D.jpg,object,378220,eumacaria-madopata,photo-no-row,no row in data/images.csv; eumacaria-madopata is gated and gets no page
 eumacaria-madopata/Eumacaria madopata-OSAC_0000992639-V.jpg,object,391309,eumacaria-madopata,photo-no-row,no row in data/images.csv; eumacaria-madopata is gated and gets no page
 eumacaria-madopata/Eumacaria madopata-OSAC_0001033424-D.jpg,object,386720,eumacaria-madopata,photo-no-row,no row in data/images.csv; eumacaria-madopata is gated and gets no page
@@ -266,112 +114,20 @@ eupithecia-tripunctaria/Eupithecia tripunctaria-OSAC_0001081335-D.jpg,object,341
 eupithecia-tripunctaria/Eupithecia tripunctaria-OSAC_0001081335-V.jpg,object,334033,eupithecia-tripunctaria,photo-no-row,no row in data/images.csv; eupithecia-tripunctaria is not in data/species.csv
 eupithecia-tripunctaria/Eupithecia tripunctaria-OSAC_0001081345-D.jpg,object,368804,eupithecia-tripunctaria,photo-no-row,no row in data/images.csv; eupithecia-tripunctaria is not in data/species.csv
 eupithecia-tripunctaria/Eupithecia tripunctaria-OSAC_0001081345-V.jpg,object,355757,eupithecia-tripunctaria,photo-no-row,no row in data/images.csv; eupithecia-tripunctaria is not in data/species.csv
-eupsilia-sidus/Eupsilia sidus-A-D.jpg,object,151129,eupsilia-sidus,photo-no-row,no row in data/images.csv; eupsilia-sidus is not in data/species.csv
-eupsilia-sidus/Eupsilia sidus-A-V.jpg,object,153542,eupsilia-sidus,photo-no-row,no row in data/images.csv; eupsilia-sidus is not in data/species.csv
 eusarca-falcata/Eusarca falcata-OSAC_0000908217-D.jpg,object,364381,eusarca-falcata,photo-no-row,no row in data/images.csv; eusarca-falcata is not in data/species.csv
 eusarca-falcata/Eusarca falcata-OSAC_0000908217-V.jpg,object,360097,eusarca-falcata,photo-no-row,no row in data/images.csv; eusarca-falcata is not in data/species.csv
 eusarca-falcata/Eusarca falcata-OSAC_0000990713-D.jpg,object,391533,eusarca-falcata,photo-no-row,no row in data/images.csv; eusarca-falcata is not in data/species.csv
 eusarca-falcata/Eusarca falcata-OSAC_0000990713-V.jpg,object,386960,eusarca-falcata,photo-no-row,no row in data/images.csv; eusarca-falcata is not in data/species.csv
-eustroma-semiatrata/Eustroma semiatrata-A-D.jpg,object,109261,eustroma-semiatrata,photo-no-row,no row in data/images.csv; eustroma-semiatrata is not in data/species.csv
-eustroma-semiatrata/Eustroma semiatrata-A-V.jpg,object,109567,eustroma-semiatrata,photo-no-row,no row in data/images.csv; eustroma-semiatrata is not in data/species.csv
-eustroma-semiatrata/Eustroma semiatrata-B-D.jpg,object,109500,eustroma-semiatrata,photo-no-row,no row in data/images.csv; eustroma-semiatrata is not in data/species.csv
-eustroma-semiatrata/Eustroma semiatrata-B-V.jpg,object,107878,eustroma-semiatrata,photo-no-row,no row in data/images.csv; eustroma-semiatrata is not in data/species.csv
 fernaldella-stalactaria/Fernaldella stalactaria-OSAC_0001006957-D.jpg,object,370462,fernaldella-stalactaria,photo-no-row,no row in data/images.csv; fernaldella-stalactaria is not in data/species.csv
 fernaldella-stalactaria/Fernaldella stalactaria-OSAC_0001006957-V.jpg,object,376070,fernaldella-stalactaria,photo-no-row,no row in data/images.csv; fernaldella-stalactaria is not in data/species.csv
 fernaldella-stalactaria/Fernaldella stalactaria-OSAC_0001006996-D.jpg,object,383046,fernaldella-stalactaria,photo-no-row,no row in data/images.csv; fernaldella-stalactaria is not in data/species.csv
 fernaldella-stalactaria/Fernaldella stalactaria-OSAC_0001006996-V.jpg,object,369363,fernaldella-stalactaria,photo-no-row,no row in data/images.csv; fernaldella-stalactaria is not in data/species.csv
-fishia-species/Fishia species-A-D.jpg,object,133366,fishia-species,photo-no-row,no row in data/images.csv; fishia-species is not in data/species.csv
-fishia-species/Fishia species-A-V.jpg,object,130855,fishia-species,photo-no-row,no row in data/images.csv; fishia-species is not in data/species.csv
-furcula-cinerea/Furcula cinerea-A-D.jpg,object,128109,furcula-cinerea,photo-no-row,no row in data/images.csv; furcula-cinerea is not in data/species.csv
-furcula-cinerea/Furcula cinerea-A-V.jpg,object,118143,furcula-cinerea,photo-no-row,no row in data/images.csv; furcula-cinerea is not in data/species.csv
-furcula-cinerea/Furcula cinerea-B-D.jpg,object,133172,furcula-cinerea,photo-no-row,no row in data/images.csv; furcula-cinerea is not in data/species.csv
-furcula-cinerea/Furcula cinerea-B-V.jpg,object,127272,furcula-cinerea,photo-no-row,no row in data/images.csv; furcula-cinerea is not in data/species.csv
-furcula-occidentalis/Furcula occidentalis-A-D.jpg,object,130171,furcula-occidentalis,photo-no-row,no row in data/images.csv; furcula-occidentalis is not in data/species.csv
-furcula-occidentalis/Furcula occidentalis-A-V.jpg,object,119527,furcula-occidentalis,photo-no-row,no row in data/images.csv; furcula-occidentalis is not in data/species.csv
-furcula-occidentalis/Furcula occidentalis-B-D.jpg,object,126980,furcula-occidentalis,photo-no-row,no row in data/images.csv; furcula-occidentalis is not in data/species.csv
-furcula-occidentalis/Furcula occidentalis-B-V.jpg,object,119637,furcula-occidentalis,photo-no-row,no row in data/images.csv; furcula-occidentalis is not in data/species.csv
-grammia-behrii/Grammia behrii-B-D.jpg,object,152981,grammia-behrii,photo-no-row,no row in data/images.csv; grammia-behrii is not in data/species.csv
-grammia-behrii/Grammia behrii-B-V.jpg,object,149960,grammia-behrii,photo-no-row,no row in data/images.csv; grammia-behrii is not in data/species.csv
-grammia-blakei/Grammia blakei-A-D.jpg,object,139931,grammia-blakei,photo-no-row,no row in data/images.csv; grammia-blakei is not in data/species.csv
-grammia-blakei/Grammia blakei-A-V.jpg,object,132470,grammia-blakei,photo-no-row,no row in data/images.csv; grammia-blakei is not in data/species.csv
-grammia-complicata/Grammia complicata-A-D.jpg,object,150797,grammia-complicata,photo-no-row,no row in data/images.csv; grammia-complicata is not in data/species.csv
-grammia-complicata/Grammia complicata-A-V.jpg,object,146920,grammia-complicata,photo-no-row,no row in data/images.csv; grammia-complicata is not in data/species.csv
-grammia-doris/Grammia doris-A-D.jpg,object,144623,grammia-doris,photo-no-row,no row in data/images.csv; grammia-doris is not in data/species.csv
-grammia-doris/Grammia doris-A-V.jpg,object,139167,grammia-doris,photo-no-row,no row in data/images.csv; grammia-doris is not in data/species.csv
-grammia-edwardsii/Grammia edwardsii-A-D.jpg,object,146052,grammia-edwardsii,photo-no-row,no row in data/images.csv; grammia-edwardsii is not in data/species.csv
-grammia-edwardsii/Grammia edwardsii-A-V.jpg,object,140361,grammia-edwardsii,photo-no-row,no row in data/images.csv; grammia-edwardsii is not in data/species.csv
-grammia-edwardsii/Grammia edwardsii-B-D.jpg,object,142819,grammia-edwardsii,photo-no-row,no row in data/images.csv; grammia-edwardsii is not in data/species.csv
-grammia-edwardsii/Grammia edwardsii-B-V.jpg,object,119699,grammia-edwardsii,photo-no-row,no row in data/images.csv; grammia-edwardsii is not in data/species.csv
-grammia-eureka/Grammia eureka-A-D.jpg,object,131074,grammia-eureka,photo-no-row,no row in data/images.csv; grammia-eureka is not in data/species.csv
-grammia-eureka/Grammia eureka-A-V.jpg,object,120702,grammia-eureka,photo-no-row,no row in data/images.csv; grammia-eureka is not in data/species.csv
-grammia-margo/Grammia margo-C-D.jpg,object,145679,grammia-margo,photo-no-row,no row in data/images.csv; grammia-margo is not in data/species.csv
-grammia-margo/Grammia margo-C-V.jpg,object,128502,grammia-margo,photo-no-row,no row in data/images.csv; grammia-margo is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-A-D.jpg,object,136725,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-A-V.jpg,object,134610,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-B-D.jpg,object,140529,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-B-V.jpg,object,132113,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-C-D.jpg,object,141976,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-C-V.jpg,object,140060,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-D-D.jpg,object,141532,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-nevadensis/Grammia nevadensis-D-V.jpg,object,130932,grammia-nevadensis,photo-no-row,no row in data/images.csv; grammia-nevadensis is not in data/species.csv
-grammia-ornata/Grammia ornata-A-D.jpg,object,149537,grammia-ornata,photo-no-row,no row in data/images.csv; grammia-ornata is not in data/species.csv
-grammia-ornata/Grammia ornata-A-V.jpg,object,140424,grammia-ornata,photo-no-row,no row in data/images.csv; grammia-ornata is not in data/species.csv
-grammia-ornata/Grammia ornata-B-D.jpg,object,149129,grammia-ornata,photo-no-row,no row in data/images.csv; grammia-ornata is not in data/species.csv
-grammia-ornata/Grammia ornata-B-V.jpg,object,145585,grammia-ornata,photo-no-row,no row in data/images.csv; grammia-ornata is not in data/species.csv
-grammia-ornata/Grammia ornata-C-D.jpg,object,142124,grammia-ornata,photo-no-row,no row in data/images.csv; grammia-ornata is not in data/species.csv
-grammia-ornata/Grammia ornata-C-V.jpg,object,131983,grammia-ornata,photo-no-row,no row in data/images.csv; grammia-ornata is not in data/species.csv
-grammia-parthenice/Grammia parthenice-A-D.jpg,object,140090,grammia-parthenice,photo-no-row,no row in data/images.csv; grammia-parthenice is not in data/species.csv
-grammia-parthenice/Grammia parthenice-A-V.jpg,object,135187,grammia-parthenice,photo-no-row,no row in data/images.csv; grammia-parthenice is not in data/species.csv
-grammia-quenseli/Grammia quenseli-A-D.jpg,object,162095,grammia-quenseli,photo-no-row,no row in data/images.csv; grammia-quenseli is not in data/species.csv
-grammia-quenseli/Grammia quenseli-A-V.jpg,object,153797,grammia-quenseli,photo-no-row,no row in data/images.csv; grammia-quenseli is not in data/species.csv
-grammia-quenseli/Grammia quenseli-B-D.jpg,object,148170,grammia-quenseli,photo-no-row,no row in data/images.csv; grammia-quenseli is not in data/species.csv
-grammia-quenseli/Grammia quenseli-B-V.jpg,object,142769,grammia-quenseli,photo-no-row,no row in data/images.csv; grammia-quenseli is not in data/species.csv
-grammia-speciosa/Grammia speciosa-A-D.jpg,object,153015,grammia-speciosa,photo-no-row,no row in data/images.csv; grammia-speciosa is not in data/species.csv
-grammia-speciosa/Grammia speciosa-A-V.jpg,object,152734,grammia-speciosa,photo-no-row,no row in data/images.csv; grammia-speciosa is not in data/species.csv
-grammia-virgo/Grammia virgo-A-D.jpg,object,142453,grammia-virgo,photo-no-row,no row in data/images.csv; grammia-virgo is not in data/species.csv
-grammia-virgo/Grammia virgo-A-V.jpg,object,136367,grammia-virgo,photo-no-row,no row in data/images.csv; grammia-virgo is not in data/species.csv
-grammia-virguncula/Grammia virguncula-A-D.jpg,object,144040,grammia-virguncula,photo-no-row,no row in data/images.csv; grammia-virguncula is not in data/species.csv
-grammia-virguncula/Grammia virguncula-A-V.jpg,object,138983,grammia-virguncula,photo-no-row,no row in data/images.csv; grammia-virguncula is not in data/species.csv
-grammia-williamsii/Grammia williamsii-A-D.jpg,object,139770,grammia-williamsii,photo-no-row,no row in data/images.csv; grammia-williamsii is not in data/species.csv
-grammia-williamsii/Grammia williamsii-A-V.jpg,object,138000,grammia-williamsii,photo-no-row,no row in data/images.csv; grammia-williamsii is not in data/species.csv
-grammia-yukona/Grammia yukona-A-D.jpg,object,122638,grammia-yukona,photo-no-row,no row in data/images.csv; grammia-yukona is not in data/species.csv
-grammia-yukona/Grammia yukona-A-V.jpg,object,117740,grammia-yukona,photo-no-row,no row in data/images.csv; grammia-yukona is not in data/species.csv
-grammia-yukona/Grammia yukona-B-D.jpg,object,130856,grammia-yukona,photo-no-row,no row in data/images.csv; grammia-yukona is not in data/species.csv
-grammia-yukona/Grammia yukona-B-V.jpg,object,130169,grammia-yukona,photo-no-row,no row in data/images.csv; grammia-yukona is not in data/species.csv
-gynaephora-rossi/Gynaephora rossi-A-D.jpg,object,165615,gynaephora-rossi,photo-no-row,no row in data/images.csv; gynaephora-rossi is not in data/species.csv
-gynaephora-rossi/Gynaephora rossi-A-V.jpg,object,153308,gynaephora-rossi,photo-no-row,no row in data/images.csv; gynaephora-rossi is not in data/species.csv
-gynaephora-rossi/Gynaephora rossi-B-D.jpg,object,140454,gynaephora-rossi,photo-no-row,no row in data/images.csv; gynaephora-rossi is not in data/species.csv
-gynaephora-rossi/Gynaephora rossi-B-V.jpg,object,134139,gynaephora-rossi,photo-no-row,no row in data/images.csv; gynaephora-rossi is not in data/species.csv
-heliothis-virescens/Heliothis virescens-B-D.jpg,object,127892,heliothis-virescens,photo-no-row,no row in data/images.csv; heliothis-virescens is not in data/species.csv
-heliothis-virescens/Heliothis virescens-B-V.jpg,object,122787,heliothis-virescens,photo-no-row,no row in data/images.csv; heliothis-virescens is not in data/species.csv
-hemeroplanis-finitima/Hemeroplanis finitima-A-D.jpg,object,141176,hemeroplanis-finitima,photo-no-row,no row in data/images.csv; hemeroplanis-finitima is not in data/species.csv
-hemeroplanis-finitima/Hemeroplanis finitima-A-V.jpg,object,126831,hemeroplanis-finitima,photo-no-row,no row in data/images.csv; hemeroplanis-finitima is not in data/species.csv
-hemeroplanis-finitima/Hemeroplanis finitima-B-D.jpg,object,157947,hemeroplanis-finitima,photo-no-row,no row in data/images.csv; hemeroplanis-finitima is not in data/species.csv
-hemeroplanis-finitima/Hemeroplanis finitima-B-V.jpg,object,145597,hemeroplanis-finitima,photo-no-row,no row in data/images.csv; hemeroplanis-finitima is not in data/species.csv
 hesperumia-fumosaria/Hesperumia fumosaria-OSAC_0000449697-D.jpg,object,342847,hesperumia-fumosaria,photo-no-row,no row in data/images.csv; hesperumia-fumosaria is not in data/species.csv
 hesperumia-fumosaria/Hesperumia fumosaria-OSAC_0000449697-V.jpg,object,318894,hesperumia-fumosaria,photo-no-row,no row in data/images.csv; hesperumia-fumosaria is not in data/species.csv
 hesperumia-fumosaria/Hesperumia fumosaria-OSAC_0001081314-D.jpg,object,362314,hesperumia-fumosaria,photo-no-row,no row in data/images.csv; hesperumia-fumosaria is not in data/species.csv
 hesperumia-fumosaria/Hesperumia fumosaria-OSAC_0001081314-V.jpg,object,360887,hesperumia-fumosaria,photo-no-row,no row in data/images.csv; hesperumia-fumosaria is not in data/species.csv
-holarctia-obliterata/Holarctia obliterata-A-D.jpg,object,144508,holarctia-obliterata,photo-no-row,no row in data/images.csv; holarctia-obliterata is not in data/species.csv
-holarctia-obliterata/Holarctia obliterata-A-V.jpg,object,139490,holarctia-obliterata,photo-no-row,no row in data/images.csv; holarctia-obliterata is not in data/species.csv
-holoarctia-sordida/Holoarctia sordida-A-D.jpg,object,136704,holoarctia-sordida,photo-no-row,no row in data/images.csv; holoarctia-sordida is not in data/species.csv
-holoarctia-sordida/Holoarctia sordida-A-V.jpg,object,138330,holoarctia-sordida,photo-no-row,no row in data/images.csv; holoarctia-sordida is not in data/species.csv
-holoarctia-sordida/Holoarctia sordida-B-D.jpg,object,144312,holoarctia-sordida,photo-no-row,no row in data/images.csv; holoarctia-sordida is not in data/species.csv
-holoarctia-sordida/Holoarctia sordida-B-V.jpg,object,140208,holoarctia-sordida,photo-no-row,no row in data/images.csv; holoarctia-sordida is not in data/species.csv
-holoarctia-sordida/Holoarctia sordida-C-D.jpg,object,148797,holoarctia-sordida,photo-no-row,no row in data/images.csv; holoarctia-sordida is not in data/species.csv
-holoarctia-sordida/Holoarctia sordida-C-V.jpg,object,141862,holoarctia-sordida,photo-no-row,no row in data/images.csv; holoarctia-sordida is not in data/species.csv
 horisme-intestinata/Horisme intestinata-OSAC_0001033503-D.jpg,object,367650,horisme-intestinata,photo-no-row,no row in data/images.csv; horisme-intestinata is not in data/species.csv
 horisme-intestinata/Horisme intestinata-OSAC_0001033503-V.jpg,object,379986,horisme-intestinata,photo-no-row,no row in data/images.csv; horisme-intestinata is not in data/species.csv
-hyalophora-columbia/Hyalophora columbia-A-D.jpg,object,171827,hyalophora-columbia,photo-no-row,no row in data/images.csv; hyalophora-columbia is not in data/species.csv
-hyalophora-columbia/Hyalophora columbia-A-V.jpg,object,181767,hyalophora-columbia,photo-no-row,no row in data/images.csv; hyalophora-columbia is not in data/species.csv
-hyalophora-columbia/Hyalophora columbia-B-D.jpg,object,168044,hyalophora-columbia,photo-no-row,no row in data/images.csv; hyalophora-columbia is not in data/species.csv
-hyalophora-columbia/Hyalophora columbia-B-V.jpg,object,178141,hyalophora-columbia,photo-no-row,no row in data/images.csv; hyalophora-columbia is not in data/species.csv
-hydraecia-pallescens/Hydraecia pallescens-A-D.jpg,object,114567,hydraecia-pallescens,photo-no-row,no row in data/images.csv; hydraecia-pallescens is not in data/species.csv
-hydraecia-pallescens/Hydraecia pallescens-A-V.jpg,object,112172,hydraecia-pallescens,photo-no-row,no row in data/images.csv; hydraecia-pallescens is not in data/species.csv
-hydraecia-pallescens/Hydraecia pallescens-B-D.jpg,object,130696,hydraecia-pallescens,photo-no-row,no row in data/images.csv; hydraecia-pallescens is not in data/species.csv
-hydraecia-pallescens/Hydraecia pallescens-B-V.jpg,object,130976,hydraecia-pallescens,photo-no-row,no row in data/images.csv; hydraecia-pallescens is not in data/species.csv
-hydraecia-pallescens/Hydraecia pallescens-C-D.jpg,object,128324,hydraecia-pallescens,photo-no-row,no row in data/images.csv; hydraecia-pallescens is not in data/species.csv
-hydraecia-pallescens/Hydraecia pallescens-C-V.jpg,object,124586,hydraecia-pallescens,photo-no-row,no row in data/images.csv; hydraecia-pallescens is not in data/species.csv
 hydriomena-irata/Hydriomena irata-OSAC_0000892692-D.jpg,object,374534,hydriomena-irata,photo-no-row,no row in data/images.csv; hydriomena-irata is not in data/species.csv
 hydriomena-irata/Hydriomena irata-OSAC_0000892692-V.jpg,object,387962,hydriomena-irata,photo-no-row,no row in data/images.csv; hydriomena-irata is not in data/species.csv
 hydriomena-irata/Hydriomena irata-OSAC_0001081377-D.jpg,object,372546,hydriomena-irata,photo-no-row,no row in data/images.csv; hydriomena-irata is not in data/species.csv
@@ -388,51 +144,18 @@ hydriomena-perfracta/Hydriomena perfracta-OSAC_0001078379-D.jpg,object,400993,hy
 hydriomena-perfracta/Hydriomena perfracta-OSAC_0001078379-V.jpg,object,380722,hydriomena-perfracta,photo-no-row,no row in data/images.csv; hydriomena-perfracta is gated and gets no page
 hydriomena-perfracta/Hydriomena perfracta-OSAC_0001081382-D.jpg,object,397621,hydriomena-perfracta,photo-no-row,no row in data/images.csv; hydriomena-perfracta is gated and gets no page
 hydriomena-perfracta/Hydriomena perfracta-OSAC_0001081382-V.jpg,object,376508,hydriomena-perfracta,photo-no-row,no row in data/images.csv; hydriomena-perfracta is gated and gets no page
-hypenodes-sobria/Hypenodes sobria-A-D.jpg,object,131982,hypenodes-sobria,photo-no-row,no row in data/images.csv; hypenodes-sobria is not in data/species.csv
-hypenodes-sobria/Hypenodes sobria-A-V.jpg,object,129892,hypenodes-sobria,photo-no-row,no row in data/images.csv; hypenodes-sobria is not in data/species.csv
 idaea-bonifata/Idaea bonifata-OSAC_0001081349-D.jpg,object,281715,idaea-bonifata,photo-no-row,no row in data/images.csv; idaea-bonifata is not in data/species.csv
 idaea-bonifata/Idaea bonifata-OSAC_0001081349-V.jpg,object,261935,idaea-bonifata,photo-no-row,no row in data/images.csv; idaea-bonifata is not in data/species.csv
 idaea-bonifata/Idaea bonifata-OSAC_0001081350-D.jpg,object,296280,idaea-bonifata,photo-no-row,no row in data/images.csv; idaea-bonifata is not in data/species.csv
 idaea-bonifata/Idaea bonifata-OSAC_0001081350-V.jpg,object,263158,idaea-bonifata,photo-no-row,no row in data/images.csv; idaea-bonifata is not in data/species.csv
-itame-quadrilinearia/Itame quadrilinearia-A-D.jpg,object,127353,itame-quadrilinearia,photo-no-row,no row in data/images.csv; itame-quadrilinearia is not in data/species.csv
-itame-quadrilinearia/Itame quadrilinearia-A-V.jpg,object,125563,itame-quadrilinearia,photo-no-row,no row in data/images.csv; itame-quadrilinearia is not in data/species.csv
-lacinipolia-olivacea/Lacinipolia olivacea-D-D.jpg,object,142140,lacinipolia-olivacea,photo-no-row,no row in data/images.csv; lacinipolia-olivacea is published
-lacinipolia-olivacea/Lacinipolia olivacea-D-V.jpg,object,140832,lacinipolia-olivacea,photo-no-row,no row in data/images.csv; lacinipolia-olivacea is published
-lacinipolia-vicina/Lacinipolia vicina-A-D.jpg,object,139740,lacinipolia-vicina,photo-no-row,no row in data/images.csv; lacinipolia-vicina is not in data/species.csv
-lacinipolia-vicina/Lacinipolia vicina-A-V.jpg,object,144364,lacinipolia-vicina,photo-no-row,no row in data/images.csv; lacinipolia-vicina is not in data/species.csv
-lacinipolia-vicina/Lacinipolia vicina-B-D.jpg,object,155868,lacinipolia-vicina,photo-no-row,no row in data/images.csv; lacinipolia-vicina is not in data/species.csv
-lacinipolia-vicina/Lacinipolia vicina-B-V.jpg,object,151292,lacinipolia-vicina,photo-no-row,no row in data/images.csv; lacinipolia-vicina is not in data/species.csv
-lacinipolia-vittula/Lacinipolia vittula-A-D.jpg,object,148471,lacinipolia-vittula,photo-no-row,no row in data/images.csv; lacinipolia-vittula is not in data/species.csv
-lacinipolia-vittula/Lacinipolia vittula-A-V.jpg,object,122588,lacinipolia-vittula,photo-no-row,no row in data/images.csv; lacinipolia-vittula is not in data/species.csv
-lacinipolia-vittula/Lacinipolia vittula-B-D.jpg,object,155379,lacinipolia-vittula,photo-no-row,no row in data/images.csv; lacinipolia-vittula is not in data/species.csv
-lacinipolia-vittula/Lacinipolia vittula-B-V.jpg,object,138076,lacinipolia-vittula,photo-no-row,no row in data/images.csv; lacinipolia-vittula is not in data/species.csv
-leucania-anteoclara/Leucania anteoclara-A-D.jpg,object,106983,leucania-anteoclara,photo-no-row,no row in data/images.csv; leucania-anteoclara is not in data/species.csv
-leucania-anteoclara/Leucania anteoclara-A-V.jpg,object,109328,leucania-anteoclara,photo-no-row,no row in data/images.csv; leucania-anteoclara is not in data/species.csv
-leucania-species/Leucania species-A-D.jpg,object,119095,leucania-species,photo-no-row,no row in data/images.csv; leucania-species is not in data/species.csv
-leucania-species/Leucania species-A-V.jpg,object,114686,leucania-species,photo-no-row,no row in data/images.csv; leucania-species is not in data/species.csv
-lithophane-jefferyi/Lithophane jefferyi-A-D.jpg,object,132353,lithophane-jefferyi,photo-no-row,no row in data/images.csv; lithophane-jefferyi is not in data/species.csv
-lithophane-jefferyi/Lithophane jefferyi-A-V.jpg,object,132734,lithophane-jefferyi,photo-no-row,no row in data/images.csv; lithophane-jefferyi is not in data/species.csv
 lycia-ursaria/Lycia ursaria-OSAC_0001081316-D.jpg,object,414348,lycia-ursaria,photo-no-row,no row in data/images.csv; lycia-ursaria is not in data/species.csv
 lycia-ursaria/Lycia ursaria-OSAC_0001081316-V.jpg,object,414685,lycia-ursaria,photo-no-row,no row in data/images.csv; lycia-ursaria is not in data/species.csv
-macaria-ulsterata/Macaria ulsterata-A-D.jpg,object,127883,macaria-ulsterata,photo-no-row,no row in data/images.csv; macaria-ulsterata is not in data/species.csv
-macaria-ulsterata/Macaria ulsterata-A-V.jpg,object,125454,macaria-ulsterata,photo-no-row,no row in data/images.csv; macaria-ulsterata is not in data/species.csv
 malacodea-pulchraria/Malacodea pulchraria-OSAC_0001079537-D.jpg,object,361111,malacodea-pulchraria,photo-no-row,no row in data/images.csv; malacodea-pulchraria is not in data/species.csv
 malacodea-pulchraria/Malacodea pulchraria-OSAC_0001079537-V.jpg,object,336620,malacodea-pulchraria,photo-no-row,no row in data/images.csv; malacodea-pulchraria is not in data/species.csv
-mniotype-ducta/Mniotype ducta-A-D.jpg,object,131887,mniotype-ducta,photo-no-row,no row in data/images.csv; mniotype-ducta is published
-mniotype-species/Mniotype species-A-D.jpg,object,142700,mniotype-species,photo-no-row,no row in data/images.csv; mniotype-species is not in data/species.csv
-mniotype-species/Mniotype species-A-V.jpg,object,134351,mniotype-species,photo-no-row,no row in data/images.csv; mniotype-species is not in data/species.csv
-mniotype-tenera/Mniotype tenera-A-D.jpg,object,138796,mniotype-tenera,photo-no-row,no row in data/images.csv; mniotype-tenera is published
-mniotype-tenera/Mniotype tenera-A-V.jpg,object,134908,mniotype-tenera,photo-no-row,no row in data/images.csv; mniotype-tenera is published
-nacophoria-mexicanaria/Nacophoria mexicanaria-A-D.jpg,object,128864,nacophoria-mexicanaria,photo-no-row,no row in data/images.csv; nacophoria-mexicanaria is not in data/species.csv
-nacophoria-mexicanaria/Nacophoria mexicanaria-A-V.jpg,object,120621,nacophoria-mexicanaria,photo-no-row,no row in data/images.csv; nacophoria-mexicanaria is not in data/species.csv
 nemoria-pulcherrima/Nemoria pulcherrima-OSAC_0001081351-D.jpg,object,334835,nemoria-pulcherrima,photo-no-row,no row in data/images.csv; nemoria-pulcherrima is not in data/species.csv
 nemoria-pulcherrima/Nemoria pulcherrima-OSAC_0001081351-V.jpg,object,311848,nemoria-pulcherrima,photo-no-row,no row in data/images.csv; nemoria-pulcherrima is not in data/species.csv
 nemoria-pulcherrima/Nemoria pulcherrima-OSAC_0001081355-D.jpg,object,324143,nemoria-pulcherrima,photo-no-row,no row in data/images.csv; nemoria-pulcherrima is not in data/species.csv
 nemoria-pulcherrima/Nemoria pulcherrima-OSAC_0001081355-V.jpg,object,312401,nemoria-pulcherrima,photo-no-row,no row in data/images.csv; nemoria-pulcherrima is not in data/species.csv
-neoarctia-beanii/Neoarctia beanii-A-D.jpg,object,142976,neoarctia-beanii,photo-no-row,no row in data/images.csv; neoarctia-beanii is not in data/species.csv
-neoarctia-beanii/Neoarctia beanii-A-V.jpg,object,132618,neoarctia-beanii,photo-no-row,no row in data/images.csv; neoarctia-beanii is not in data/species.csv
-neoarctia-brucei/Neoarctia brucei-A-D.jpg,object,123306,neoarctia-brucei,photo-no-row,no row in data/images.csv; neoarctia-brucei is not in data/species.csv
-neoarctia-brucei/Neoarctia brucei-A-V.jpg,object,129780,neoarctia-brucei,photo-no-row,no row in data/images.csv; neoarctia-brucei is not in data/species.csv
 neoterpes-edwardsata/Neoterpes edwardsata-OSAC_0000874687-D.jpg,object,348365,neoterpes-edwardsata,photo-no-row,no row in data/images.csv; neoterpes-edwardsata is not in data/species.csv
 neoterpes-edwardsata/Neoterpes edwardsata-OSAC_0000874687-V.jpg,object,343835,neoterpes-edwardsata,photo-no-row,no row in data/images.csv; neoterpes-edwardsata is not in data/species.csv
 neoterpes-edwardsata/Neoterpes edwardsata-OSAC_0001081357-D.jpg,object,324007,neoterpes-edwardsata,photo-no-row,no row in data/images.csv; neoterpes-edwardsata is not in data/species.csv
@@ -445,42 +168,15 @@ neoterpes-ephelidaria/Neoterpes ephelidaria-OSAC_0001081356-D.jpg,object,328447,
 neoterpes-ephelidaria/Neoterpes ephelidaria-OSAC_0001081356-V.jpg,object,324163,neoterpes-ephelidaria,photo-no-row,no row in data/images.csv; neoterpes-ephelidaria is not in data/species.csv
 nepytia-freemani/Nepytia freemani-OSAC_0001081360-D.jpg,object,377371,nepytia-freemani,photo-no-row,no row in data/images.csv; nepytia-freemani is not in data/species.csv
 nepytia-freemani/Nepytia freemani-OSAC_0001081360-V.jpg,object,350157,nepytia-freemani,photo-no-row,no row in data/images.csv; nepytia-freemani is not in data/species.csv
-notarctia-proxima/Notarctia proxima-A-D.jpg,object,136383,notarctia-proxima,photo-no-row,no row in data/images.csv; notarctia-proxima is not in data/species.csv
-notarctia-proxima/Notarctia proxima-A-V.jpg,object,133834,notarctia-proxima,photo-no-row,no row in data/images.csv; notarctia-proxima is not in data/species.csv
-notarctia-proxima/Notarctia proxima-B-D.jpg,object,138805,notarctia-proxima,photo-no-row,no row in data/images.csv; notarctia-proxima is not in data/species.csv
-notarctia-proxima/Notarctia proxima-B-V.jpg,object,136039,notarctia-proxima,photo-no-row,no row in data/images.csv; notarctia-proxima is not in data/species.csv
-notodonta-scitipennis/Notodonta scitipennis-A-D.jpg,object,126545,notodonta-scitipennis,photo-no-row,no row in data/images.csv; notodonta-scitipennis is not in data/species.csv
-nycteola-frigidana/Nycteola frigidana-A-D.jpg,object,131204,nycteola-frigidana,photo-no-row,no row in data/images.csv; nycteola-frigidana is published
-nycteola-frigidana/Nycteola frigidana-A-V.jpg,object,121976,nycteola-frigidana,photo-no-row,no row in data/images.csv; nycteola-frigidana is published
-odontosia-elegans/Odontosia elegans-A-D.jpg,object,125739,odontosia-elegans,photo-no-row,no row in data/images.csv; odontosia-elegans is not in data/species.csv
-odontosia-elegans/Odontosia elegans-A-V.jpg,object,120867,odontosia-elegans,photo-no-row,no row in data/images.csv; odontosia-elegans is not in data/species.csv
 operophtera-danbyi/Operophtera danbyi-OSAC_0001081367-D.jpg,object,212836,operophtera-danbyi,photo-no-row,no row in data/images.csv; operophtera-danbyi is not in data/species.csv
 operophtera-danbyi/Operophtera danbyi-OSAC_0001081368-D.jpg,object,393404,operophtera-danbyi,photo-no-row,no row in data/images.csv; operophtera-danbyi is not in data/species.csv
 operophtera-danbyi/Operophtera danbyi-OSAC_0001081368-V.jpg,object,382253,operophtera-danbyi,photo-no-row,no row in data/images.csv; operophtera-danbyi is not in data/species.csv
-orthodes-delecta/Orthodes delecta-A-D.jpg,object,150320,orthodes-delecta,photo-no-row,no row in data/images.csv; orthodes-delecta is not in data/species.csv
-orthodes-delecta/Orthodes delecta-A-V.jpg,object,149268,orthodes-delecta,photo-no-row,no row in data/images.csv; orthodes-delecta is not in data/species.csv
-pararctia-yarrowii/Pararctia yarrowii-A-D.jpg,object,149942,pararctia-yarrowii,photo-no-row,no row in data/images.csv; pararctia-yarrowii is not in data/species.csv
-pararctia-yarrowii/Pararctia yarrowii-A-V.jpg,object,145661,pararctia-yarrowii,photo-no-row,no row in data/images.csv; pararctia-yarrowii is not in data/species.csv
-parasemia-plantaginis/Parasemia plantaginis-A-D.jpg,object,155524,parasemia-plantaginis,photo-no-row,no row in data/images.csv; parasemia-plantaginis is not in data/species.csv
-parasemia-plantaginis/Parasemia plantaginis-A-V.jpg,object,158728,parasemia-plantaginis,photo-no-row,no row in data/images.csv; parasemia-plantaginis is not in data/species.csv
-parasemia-plantaginis/Parasemia plantaginis-B-D.jpg,object,138243,parasemia-plantaginis,photo-no-row,no row in data/images.csv; parasemia-plantaginis is not in data/species.csv
-parasemia-plantaginis/Parasemia plantaginis-B-V.jpg,object,145999,parasemia-plantaginis,photo-no-row,no row in data/images.csv; parasemia-plantaginis is not in data/species.csv
 pasiphila-rectangula/Pasiphila rectangula-A-D.jpg,object,151736,pasiphila-rectangula,photo-no-row,no row in data/images.csv; pasiphila-rectangula is not in data/species.csv
 pasiphila-rectangula/Pasiphila rectangula-A-V.jpg,object,145899,pasiphila-rectangula,photo-no-row,no row in data/images.csv; pasiphila-rectangula is not in data/species.csv
 pero-honestaria/Pero honestaria-OSAC_0001077563-D.jpg,object,397747,pero-honestaria,photo-no-row,no row in data/images.csv; pero-honestaria is not in data/species.csv
 pero-honestaria/Pero honestaria-OSAC_0001077563-V.jpg,object,390153,pero-honestaria,photo-no-row,no row in data/images.csv; pero-honestaria is not in data/species.csv
 pero-honestaria/Pero honestaria-OSAC_0001077564-D.jpg,object,402420,pero-honestaria,photo-no-row,no row in data/images.csv; pero-honestaria is not in data/species.csv
 pero-honestaria/Pero honestaria-OSAC_0001077564-V.jpg,object,395744,pero-honestaria,photo-no-row,no row in data/images.csv; pero-honestaria is not in data/species.csv
-peromiza-costiguttata/Peromiza costiguttata-A-D.jpg,object,102739,peromiza-costiguttata,photo-no-row,no row in data/images.csv; peromiza-costiguttata is not in data/species.csv
-peromiza-costiguttata/Peromiza costiguttata-A-V.jpg,object,100354,peromiza-costiguttata,photo-no-row,no row in data/images.csv; peromiza-costiguttata is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-A-D.jpg,object,132065,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-A-V.jpg,object,130238,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-B-D.jpg,object,135850,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-B-V.jpg,object,134721,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-C-D.jpg,object,137068,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-C-V.jpg,object,132860,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-D-D.jpg,object,139505,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
-pheosia-rimosa/Pheosia rimosa-D-V.jpg,object,140505,pheosia-rimosa,photo-no-row,no row in data/images.csv; pheosia-rimosa is not in data/species.csv
 pherne-subpunctata/Pherne subpunctata-OSAC_0001081370-D.jpg,object,339176,pherne-subpunctata,photo-no-row,no row in data/images.csv; pherne-subpunctata is not in data/species.csv
 pherne-subpunctata/Pherne subpunctata-OSAC_0001081370-V.jpg,object,352974,pherne-subpunctata,photo-no-row,no row in data/images.csv; pherne-subpunctata is not in data/species.csv
 pherne-subpunctata/Pherne subpunctata-OSAC_0001081371-D.jpg,object,390864,pherne-subpunctata,photo-no-row,no row in data/images.csv; pherne-subpunctata is not in data/species.csv
@@ -488,68 +184,24 @@ pherne-subpunctata/Pherne subpunctata-OSAC_0001081371-V.jpg,object,358659,pherne
 phigalia-plumogeraria/Phigalia plumogeraria-OSAC_0000120823-D.jpg,object,437046,phigalia-plumogeraria,photo-no-row,no row in data/images.csv; phigalia-plumogeraria is gated and gets no page
 phigalia-plumogeraria/Phigalia plumogeraria-OSAC_0000120823-V.jpg,object,398942,phigalia-plumogeraria,photo-no-row,no row in data/images.csv; phigalia-plumogeraria is gated and gets no page
 phigalia-plumogeraria/Phigalia plumogeraria-OSAC_0000499919-D.jpg,object,211767,phigalia-plumogeraria,photo-no-row,no row in data/images.csv; phigalia-plumogeraria is gated and gets no page
-plagiomimicus-tepperi/Plagiomimicus tepperi-A-D.jpg,object,128627,plagiomimicus-tepperi,photo-no-row,no row in data/images.csv; plagiomimicus-tepperi is not in data/species.csv
-plagiomimicus-tepperi/Plagiomimicus tepperi-A-V.jpg,object,122861,plagiomimicus-tepperi,photo-no-row,no row in data/images.csv; plagiomimicus-tepperi is not in data/species.csv
-plataea-sp/Plataea sp-A-D.jpg,object,152494,plataea-sp,photo-no-row,no row in data/images.csv; plataea-sp is not in data/species.csv
-plataea-sp/Plataea sp-A-V.jpg,object,157149,plataea-sp,photo-no-row,no row in data/images.csv; plataea-sp is not in data/species.csv
-platarctia-parthenos/Platarctia parthenos-A-D.jpg,object,138137,platarctia-parthenos,photo-no-row,no row in data/images.csv; platarctia-parthenos is not in data/species.csv
-platarctia-parthenos/Platarctia parthenos-A-V.jpg,object,139583,platarctia-parthenos,photo-no-row,no row in data/images.csv; platarctia-parthenos is not in data/species.csv
-platyprepia-virginalis/Platyprepia virginalis-A-D.jpg,object,125630,platyprepia-virginalis,photo-no-row,no row in data/images.csv; platyprepia-virginalis is not in data/species.csv
-platyprepia-virginalis/Platyprepia virginalis-A-V.jpg,object,122397,platyprepia-virginalis,photo-no-row,no row in data/images.csv; platyprepia-virginalis is not in data/species.csv
-platyprepia-virginalis/Platyprepia virginalis-B-D.jpg,object,135918,platyprepia-virginalis,photo-no-row,no row in data/images.csv; platyprepia-virginalis is not in data/species.csv
-platyprepia-virginalis/Platyprepia virginalis-B-V.jpg,object,131256,platyprepia-virginalis,photo-no-row,no row in data/images.csv; platyprepia-virginalis is not in data/species.csv
 probole-amicaria/Probole amicaria-OSAC_0000997164-D.jpg,object,378406,probole-amicaria,photo-no-row,no row in data/images.csv; probole-amicaria is not in data/species.csv
 probole-amicaria/Probole amicaria-OSAC_0000997164-V.jpg,object,417189,probole-amicaria,photo-no-row,no row in data/images.csv; probole-amicaria is not in data/species.csv
 prorella-leucata/Prorella leucata-OSAC0001081348-D.jpg,object,317144,prorella-leucata,photo-no-row,no row in data/images.csv; prorella-leucata is not in data/species.csv
 prorella-leucata/Prorella leucata-OSAC0001081348-V.jpg,object,284004,prorella-leucata,photo-no-row,no row in data/images.csv; prorella-leucata is not in data/species.csv
-protitame-matilda/Protitame matilda-A-D.jpg,object,120624,protitame-matilda,photo-no-row,no row in data/images.csv; protitame-matilda is not in data/species.csv
-protitame-matilda/Protitame matilda-A-V.jpg,object,111982,protitame-matilda,photo-no-row,no row in data/images.csv; protitame-matilda is not in data/species.csv
-protogygia-elevata/Protogygia elevata-B-D.jpg,object,136733,protogygia-elevata,photo-no-row,no row in data/images.csv; protogygia-elevata is not in data/species.csv
-protogygia-elevata/Protogygia elevata-B-V.jpg,object,127609,protogygia-elevata,photo-no-row,no row in data/images.csv; protogygia-elevata is not in data/species.csv
-protorthodes-perforata/Protorthodes perforata-A-D.jpg,object,146412,protorthodes-perforata,photo-no-row,no row in data/images.csv; protorthodes-perforata is not in data/species.csv
-protorthodes-perforata/Protorthodes perforata-A-V.jpg,object,148753,protorthodes-perforata,photo-no-row,no row in data/images.csv; protorthodes-perforata is not in data/species.csv
-proxenus-miranda/Proxenus miranda-B-D.jpg,object,128093,proxenus-miranda,photo-no-row,no row in data/images.csv; proxenus-miranda is published
-proxenus-miranda/Proxenus miranda-B-V.jpg,object,128842,proxenus-miranda,photo-no-row,no row in data/images.csv; proxenus-miranda is published
-resapamea-venosa/Resapamea venosa-B-D.jpg,object,140467,resapamea-venosa,photo-no-row,no row in data/images.csv; resapamea-venosa is published
-resapamea-venosa/Resapamea venosa-B-V.jpg,object,127233,resapamea-venosa,photo-no-row,no row in data/images.csv; resapamea-venosa is published
 scelidocantha-triseriata/Scelidocantha triseriata-OSAC0000130395-D.jpg,object,366545,scelidocantha-triseriata,photo-no-row,no row in data/images.csv; scelidocantha-triseriata is not in data/species.csv
 scelidocantha-triseriata/Scelidocantha triseriata-OSAC0000130395-V.jpg,object,339862,scelidocantha-triseriata,photo-no-row,no row in data/images.csv; scelidocantha-triseriata is not in data/species.csv
-schinia-intermontana/Schinia intermontana-A-D.jpg,object,143083,schinia-intermontana,photo-no-row,no row in data/images.csv; schinia-intermontana is published
-schinia-intermontana/Schinia intermontana-A-V.jpg,object,138719,schinia-intermontana,photo-no-row,no row in data/images.csv; schinia-intermontana is published
-schinia-nuchalis/Schinia nuchalis-A-D.jpg,object,158963,schinia-nuchalis,photo-no-row,no row in data/images.csv; schinia-nuchalis is not in data/species.csv
-schinia-nuchalis/Schinia nuchalis-A-V.jpg,object,121044,schinia-nuchalis,photo-no-row,no row in data/images.csv; schinia-nuchalis is not in data/species.csv
-sicya-mersicaria/Sicya mersicaria-A-D.jpg,object,147509,sicya-mersicaria,photo-no-row,no row in data/images.csv; sicya-mersicaria is not in data/species.csv
-sicya-mersicaria/Sicya mersicaria-A-V.jpg,object,128713,sicya-mersicaria,photo-no-row,no row in data/images.csv; sicya-mersicaria is not in data/species.csv
-sicya-mersicaria/Sicya mersicaria-B-D.jpg,object,144914,sicya-mersicaria,photo-no-row,no row in data/images.csv; sicya-mersicaria is not in data/species.csv
-sicya-mersicaria/Sicya mersicaria-B-V.jpg,object,132230,sicya-mersicaria,photo-no-row,no row in data/images.csv; sicya-mersicaria is not in data/species.csv
 sicya-morsicaria/Sicya morsicaria-OSAC_0001081361-D.jpg,object,400865,sicya-morsicaria,photo-no-row,no row in data/images.csv; sicya-morsicaria is gated and gets no page
 sicya-morsicaria/Sicya morsicaria-OSAC_0001081361-V.jpg,object,361299,sicya-morsicaria,photo-no-row,no row in data/images.csv; sicya-morsicaria is gated and gets no page
 sicya-morsicaria/Sicya morsicaria-OSAC_0001081364-D.jpg,object,387174,sicya-morsicaria,photo-no-row,no row in data/images.csv; sicya-morsicaria is gated and gets no page
 sicya-morsicaria/Sicya morsicaria-OSAC_0001081364-V.jpg,object,350788,sicya-morsicaria,photo-no-row,no row in data/images.csv; sicya-morsicaria is gated and gets no page
-simyra-insularis/Simyra insularis-A-D.jpg,object,120904,simyra-insularis,photo-no-row,no row in data/images.csv; simyra-insularis is not in data/species.csv
-simyra-insularis/Simyra insularis-A-V.jpg,object,112544,simyra-insularis,photo-no-row,no row in data/images.csv; simyra-insularis is not in data/species.csv
-simyra-insularis/Simyra insularis-B-D.jpg,object,115444,simyra-insularis,photo-no-row,no row in data/images.csv; simyra-insularis is not in data/species.csv
-simyra-insularis/Simyra insularis-B-V.jpg,object,109147,simyra-insularis,photo-no-row,no row in data/images.csv; simyra-insularis is not in data/species.csv
-smerinthus-cerisyi/Smerinthus cerisyi-A-D.jpg,object,131898,smerinthus-cerisyi,photo-no-row,no row in data/images.csv; smerinthus-cerisyi is published
-smerinthus-cerisyi/Smerinthus cerisyi-A-V.jpg,object,129631,smerinthus-cerisyi,photo-no-row,no row in data/images.csv; smerinthus-cerisyi is published
 snowia-montanaria/Snowia montanaria-OSAC_0001081363-D.jpg,object,356777,snowia-montanaria,photo-no-row,no row in data/images.csv; snowia-montanaria is not in data/species.csv
 snowia-montanaria/Snowia montanaria-OSAC_0001081363-V.jpg,object,379125,snowia-montanaria,photo-no-row,no row in data/images.csv; snowia-montanaria is not in data/species.csv
-sometolephia-ectrapelaria/Sometolephia ectrapelaria-A-D.jpg,object,165080,sometolephia-ectrapelaria,photo-no-row,no row in data/images.csv; sometolephia-ectrapelaria is not in data/species.csv
-sometolephia-ectrapelaria/Sometolephia ectrapelaria-A-V.jpg,object,158138,sometolephia-ectrapelaria,photo-no-row,no row in data/images.csv; sometolephia-ectrapelaria is not in data/species.csv
-sometolephia-ectrapelaria/Sometolephia ectrapelaria-B-D.jpg,object,169256,sometolephia-ectrapelaria,photo-no-row,no row in data/images.csv; sometolephia-ectrapelaria is not in data/species.csv
-sometolephia-ectrapelaria/Sometolephia ectrapelaria-B-V.jpg,object,165169,sometolephia-ectrapelaria,photo-no-row,no row in data/images.csv; sometolephia-ectrapelaria is not in data/species.csv
 speranza-confederata/Speranza confederata-OSAC_000021258-D.jpg,object,399630,speranza-confederata,photo-no-row,no row in data/images.csv; speranza-confederata is not in data/species.csv
 speranza-confederata/Speranza confederata-OSAC_000021258-V.jpg,object,389426,speranza-confederata,photo-no-row,no row in data/images.csv; speranza-confederata is not in data/species.csv
-speranza-exhauspicata/Speranza exhauspicata-A-D.jpg,object,154389,speranza-exhauspicata,photo-no-row,no row in data/images.csv; speranza-exhauspicata is not in data/species.csv
-speranza-exhauspicata/Speranza exhauspicata-A-V.jpg,object,146809,speranza-exhauspicata,photo-no-row,no row in data/images.csv; speranza-exhauspicata is not in data/species.csv
-speranza-exhauspicata/Speranza exhauspicata-B-D.jpg,object,160021,speranza-exhauspicata,photo-no-row,no row in data/images.csv; speranza-exhauspicata is not in data/species.csv
-speranza-exhauspicata/Speranza exhauspicata-B-V.jpg,object,154413,speranza-exhauspicata,photo-no-row,no row in data/images.csv; speranza-exhauspicata is not in data/species.csv
 speranza-hesperata/Speranza hesperata-OSAC_0000993197-D.jpg,object,385340,speranza-hesperata,photo-no-row,no row in data/images.csv; speranza-hesperata is not in data/species.csv
 speranza-hesperata/Speranza hesperata-OSAC_0000993197-V.jpg,object,376454,speranza-hesperata,photo-no-row,no row in data/images.csv; speranza-hesperata is not in data/species.csv
 speranza-hesperata/Speranza hesperata-OSAC_0001027811-D.jpg,object,362802,speranza-hesperata,photo-no-row,no row in data/images.csv; speranza-hesperata is not in data/species.csv
 speranza-hesperata/Speranza hesperata-OSAC_0001027811-V.jpg,object,384605,speranza-hesperata,photo-no-row,no row in data/images.csv; speranza-hesperata is not in data/species.csv
-speranza-lorguinaria/Speranza lorguinaria-A-D.jpg,object,147876,speranza-lorguinaria,photo-no-row,no row in data/images.csv; speranza-lorguinaria is not in data/species.csv
-speranza-lorguinaria/Speranza lorguinaria-A-V.jpg,object,145539,speranza-lorguinaria,photo-no-row,no row in data/images.csv; speranza-lorguinaria is not in data/species.csv
 speranza-marcescaria/Speranza marcescaria-OSAC_0000899797-D.jpg,object,351710,speranza-marcescaria,photo-no-row,no row in data/images.csv; speranza-marcescaria is not in data/species.csv
 speranza-marcescaria/Speranza marcescaria-OSAC_0000899797-V.jpg,object,451612,speranza-marcescaria,photo-no-row,no row in data/images.csv; speranza-marcescaria is not in data/species.csv
 speranza-marcescaria/Speranza marcescaria-OSAC_0000994743-D.jpg,object,355150,speranza-marcescaria,photo-no-row,no row in data/images.csv; speranza-marcescaria is not in data/species.csv
@@ -564,28 +216,12 @@ stamnodes-annellata/Stamnodes annellata-OSAC_0001081379-D.jpg,object,369319,stam
 stamnodes-annellata/Stamnodes annellata-OSAC_0001081379-V.jpg,object,396221,stamnodes-annellata,photo-no-row,no row in data/images.csv; stamnodes-annellata is not in data/species.csv
 stamnodes-coenonymphata/Stamnodes coenonymphata-OSAC_0000120822-D.jpg,object,343272,stamnodes-coenonymphata,photo-no-row,no row in data/images.csv; stamnodes-coenonymphata is not in data/species.csv
 stamnodes-coenonymphata/Stamnodes coenonymphata-OSAC_0000120822-V.jpg,object,391161,stamnodes-coenonymphata,photo-no-row,no row in data/images.csv; stamnodes-coenonymphata is not in data/species.csv
-stretchia-plusiiformis/Stretchia plusiiformis-A-D.jpg,object,143328,stretchia-plusiiformis,photo-no-row,no row in data/images.csv; stretchia-plusiiformis is not in data/species.csv
-stretchia-plusiiformis/Stretchia plusiiformis-A-V.jpg,object,134848,stretchia-plusiiformis,photo-no-row,no row in data/images.csv; stretchia-plusiiformis is not in data/species.csv
-stretchia-plusiiformis/Stretchia plusiiformis-B-D.jpg,object,145432,stretchia-plusiiformis,photo-no-row,no row in data/images.csv; stretchia-plusiiformis is not in data/species.csv
-stretchia-plusiiformis/Stretchia plusiiformis-B-V.jpg,object,140688,stretchia-plusiiformis,photo-no-row,no row in data/images.csv; stretchia-plusiiformis is not in data/species.csv
-sympistis-chorda/Sympistis chorda-A-D.jpg,object,132843,sympistis-chorda,photo-no-row,no row in data/images.csv; sympistis-chorda is not in data/species.csv
-sympistis-chorda/Sympistis chorda-A-V.jpg,object,127819,sympistis-chorda,photo-no-row,no row in data/images.csv; sympistis-chorda is not in data/species.csv
-sympistis-melantho/Sympistis melantho-A-D.jpg,object,144986,sympistis-melantho,photo-no-row,no row in data/images.csv; sympistis-melantho is not in data/species.csv
-sympistis-melantho/Sympistis melantho-A-V.jpg,object,136277,sympistis-melantho,photo-no-row,no row in data/images.csv; sympistis-melantho is not in data/species.csv
-sympistis-nigrita/Sympistis nigrita-A-D.jpg,object,144582,sympistis-nigrita,photo-no-row,no row in data/images.csv; sympistis-nigrita is not in data/species.csv
-sympistis-nigrita/Sympistis nigrita-A-V.jpg,object,139742,sympistis-nigrita,photo-no-row,no row in data/images.csv; sympistis-nigrita is not in data/species.csv
-sympistis-nigrita/Sympistis nigrita-B-D.jpg,object,144620,sympistis-nigrita,photo-no-row,no row in data/images.csv; sympistis-nigrita is not in data/species.csv
-sympistis-nigrita/Sympistis nigrita-B-V.jpg,object,143461,sympistis-nigrita,photo-no-row,no row in data/images.csv; sympistis-nigrita is not in data/species.csv
 synchlora-aerata/Synchlora aerata-OSAC_0001081321-D.jpg,object,327818,synchlora-aerata,photo-no-row,no row in data/images.csv; synchlora-aerata is not in data/species.csv
 synchlora-aerata/Synchlora aerata-OSAC_0001081321-V.jpg,object,296766,synchlora-aerata,photo-no-row,no row in data/images.csv; synchlora-aerata is not in data/species.csv
 synchlora-aerata/Synchlora aerata-OSAC_0001081323-D.jpg,object,347173,synchlora-aerata,photo-no-row,no row in data/images.csv; synchlora-aerata is not in data/species.csv
 synchlora-aerata/Synchlora aerata-OSAC_0001081323-V.jpg,object,316490,synchlora-aerata,photo-no-row,no row in data/images.csv; synchlora-aerata is not in data/species.csv
 tetracis-cachexiata/Tetracis cachexiata-OSAC_0001081376-D.jpg,object,289911,tetracis-cachexiata,photo-no-row,no row in data/images.csv; tetracis-cachexiata is not in data/species.csv
 tetracis-cachexiata/Tetracis cachexiata-OSAC_0001081376-V.jpg,object,299770,tetracis-cachexiata,photo-no-row,no row in data/images.csv; tetracis-cachexiata is not in data/species.csv
-tetracis-pailldata/Tetracis pailldata-A-D.jpg,object,88349,tetracis-pailldata,photo-no-row,no row in data/images.csv; tetracis-pailldata is not in data/species.csv
-tetracis-pailldata/Tetracis pailldata-A-V.jpg,object,88309,tetracis-pailldata,photo-no-row,no row in data/images.csv; tetracis-pailldata is not in data/species.csv
-tetracis-pailldata/Tetracis pailldata-B-D.jpg,object,97490,tetracis-pailldata,photo-no-row,no row in data/images.csv; tetracis-pailldata is not in data/species.csv
-tetracis-pailldata/Tetracis pailldata-B-V.jpg,object,95972,tetracis-pailldata,photo-no-row,no row in data/images.csv; tetracis-pailldata is not in data/species.csv
 tetracis-pallidata/Tetracis pallidata-OSAC_0001081369-D.jpg,object,353105,tetracis-pallidata,photo-no-row,no row in data/images.csv; tetracis-pallidata is gated and gets no page
 tetracis-pallidata/Tetracis pallidata-OSAC_0001081369-V.jpg,object,350089,tetracis-pallidata,photo-no-row,no row in data/images.csv; tetracis-pallidata is gated and gets no page
 tetracis-pallidata/Tetracis pallidata-OSAC_0001081374-D.jpg,object,364868,tetracis-pallidata,photo-no-row,no row in data/images.csv; tetracis-pallidata is gated and gets no page
@@ -596,12 +232,270 @@ trichodezia-californiata/Trichodezia californiata-OSAC_0001081366-D.jpg,object,3
 trichodezia-californiata/Trichodezia californiata-OSAC_0001081366-V.jpg,object,369041,trichodezia-californiata,photo-no-row,no row in data/images.csv; trichodezia-californiata is not in data/species.csv
 trichodezia-californiata/Trichodezia californiata-OSAC_0001081373-D.jpg,object,331500,trichodezia-californiata,photo-no-row,no row in data/images.csv; trichodezia-californiata is not in data/species.csv
 trichodezia-californiata/Trichodezia californiata-OSAC_0001081373-V.jpg,object,332138,trichodezia-californiata,photo-no-row,no row in data/images.csv; trichodezia-californiata is not in data/species.csv
-ufeus-hulsti/Ufeus hulsti-A-D.jpg,object,118628,ufeus-hulsti,photo-no-row,no row in data/images.csv; ufeus-hulsti is not in data/species.csv
-ufeus-hulsti/Ufeus hulsti-A-V.jpg,object,115213,ufeus-hulsti,photo-no-row,no row in data/images.csv; ufeus-hulsti is not in data/species.csv
-zanclognatha-lutalba/Zanclognatha lutalba-A-D.jpg,object,132906,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
-zanclognatha-lutalba/Zanclognatha lutalba-A-V.jpg,object,136624,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
-zanclognatha-lutalba/Zanclognatha lutalba-B-D.jpg,object,166038,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
-zanclognatha-lutalba/Zanclognatha lutalba-B-V.jpg,object,156793,zanclognatha-lutalba,photo-no-row,no row in data/images.csv; zanclognatha-lutalba is not in data/species.csv
+abagrotis-rubicundis/Abagrotis rubicundis-A-D.jpg,object,139006,abagrotis-rubicundis,photo-refiled,data/images.csv files this filename under abagrotis-rubricundis; copy at a superseded path
+abagrotis-rubicundis/Abagrotis rubicundis-A-V.jpg,object,139874,abagrotis-rubicundis,photo-refiled,data/images.csv files this filename under abagrotis-rubricundis; copy at a superseded path
+acronicta-dactylina/Acronicta dactylina-A-D.jpg,object,137843,acronicta-dactylina,photo-refiled,data/images.csv files this filename under acronicta-insita; copy at a superseded path
+acronicta-dactylina/Acronicta dactylina-A-V.jpg,object,118280,acronicta-dactylina,photo-refiled,data/images.csv files this filename under acronicta-insita; copy at a superseded path
+acronicta-dactylina/Acronicta dactylina-B-D.jpg,object,141886,acronicta-dactylina,photo-refiled,data/images.csv files this filename under acronicta-insita; copy at a superseded path
+acronicta-dactylina/Acronicta dactylina-B-V.jpg,object,127311,acronicta-dactylina,photo-refiled,data/images.csv files this filename under acronicta-insita; copy at a superseded path
+acronicta-dactylina/Acronicta dactylina-C-V.jpg,object,139918,acronicta-dactylina,photo-refiled,data/images.csv files this filename under acronicta-insita; copy at a superseded path
+acronicta-parallela/Acronicta parallela-A-D.jpg,object,130892,acronicta-parallela,photo-refiled,data/images.csv files this filename under acronicta-mansueta; copy at a superseded path
+acronicta-parallela/Acronicta parallela-A-V.jpg,object,126356,acronicta-parallela,photo-refiled,data/images.csv files this filename under acronicta-mansueta; copy at a superseded path
+acronicta-parallela/Acronicta parallela-B-D.jpg,object,142348,acronicta-parallela,photo-refiled,data/images.csv files this filename under acronicta-mansueta; copy at a superseded path
+acronicta-parallela/Acronicta parallela-B-V.jpg,object,136821,acronicta-parallela,photo-refiled,data/images.csv files this filename under acronicta-mansueta; copy at a superseded path
+amphipoea-senilis/Amphipoea senilis-A-D.jpg,object,113858,amphipoea-senilis,photo-refiled,data/images.csv files this filename under amphipoea-keiferi; copy at a superseded path
+amphipoea-senilis/Amphipoea senilis-A-V.jpg,object,112870,amphipoea-senilis,photo-refiled,data/images.csv files this filename under amphipoea-keiferi; copy at a superseded path
+amphipoea-senilis/Amphipoea senilis-B-D.jpg,object,125649,amphipoea-senilis,photo-refiled,data/images.csv files this filename under amphipoea-keiferi; copy at a superseded path
+amphipoea-senilis/Amphipoea senilis-B-V.jpg,object,118333,amphipoea-senilis,photo-refiled,data/images.csv files this filename under amphipoea-keiferi; copy at a superseded path
+anarta-fervida/Anarta fervida-A-D.jpg,object,154324,anarta-fervida,photo-refiled,data/images.csv files this filename under scotogramma-fervida; copy at a superseded path
+anarta-fervida/Anarta fervida-A-V.jpg,object,147800,anarta-fervida,photo-refiled,data/images.csv files this filename under scotogramma-fervida; copy at a superseded path
+anarta-hadeniformis/Anarta hadeniformis-A-D.jpg,object,134137,anarta-hadeniformis,photo-refiled,data/images.csv files this filename under trudestra-hadeniformis; copy at a superseded path
+anarta-hadeniformis/Anarta hadeniformis-A-V.jpg,object,127018,anarta-hadeniformis,photo-refiled,data/images.csv files this filename under trudestra-hadeniformis; copy at a superseded path
+anarta-montanica/Anarta montanica-A-D.jpg,object,162981,anarta-montanica,photo-refiled,data/images.csv files this filename under anarta-inconcinna; copy at a superseded path
+anarta-montanica/Anarta montanica-A-V.jpg,object,155234,anarta-montanica,photo-refiled,data/images.csv files this filename under anarta-inconcinna; copy at a superseded path
+anarta-ptilodonta/Anarta ptilodonta-A-D.jpg,object,141725,anarta-ptilodonta,photo-refiled,data/images.csv files this filename under scotogramma-ptilodonta; copy at a superseded path
+anarta-ptilodonta/Anarta ptilodonta-A-V.jpg,object,120334,anarta-ptilodonta,photo-refiled,data/images.csv files this filename under scotogramma-ptilodonta; copy at a superseded path
+anarta-ptilodonta/Anarta ptilodonta-B-D.jpg,object,161333,anarta-ptilodonta,photo-refiled,data/images.csv files this filename under scotogramma-ptilodonta; copy at a superseded path
+anarta-ptilodonta/Anarta ptilodonta-B-V.jpg,object,143830,anarta-ptilodonta,photo-refiled,data/images.csv files this filename under scotogramma-ptilodonta; copy at a superseded path
+apamea-aurianticolor/Apamea aurianticolor-A-D.jpg,object,151634,apamea-aurianticolor,photo-refiled,data/images.csv files this filename under apamea-auranticolor; copy at a superseded path
+apamea-aurianticolor/Apamea aurianticolor-A-V.jpg,object,142408,apamea-aurianticolor,photo-refiled,data/images.csv files this filename under apamea-auranticolor; copy at a superseded path
+aseptis-fannatica/Aseptis fannatica-A-D.jpg,object,144893,aseptis-fannatica,photo-refiled,data/images.csv files this filename under aseptis-fanatica; copy at a superseded path
+aseptis-fannatica/Aseptis fannatica-A-V.jpg,object,161971,aseptis-fannatica,photo-refiled,data/images.csv files this filename under aseptis-fanatica; copy at a superseded path
+axenus-amplus/Axenus amplus-A-D.jpg,object,165295,axenus-amplus,photo-refiled,data/images.csv files this filename under axenus-arvalis; copy at a superseded path
+axenus-amplus/Axenus amplus-A-V.jpg,object,163194,axenus-amplus,photo-refiled,data/images.csv files this filename under axenus-arvalis; copy at a superseded path
+caradrina-multifera/Caradrina multifera-A-D.jpg,object,132650,caradrina-multifera,photo-refiled,data/images.csv files this filename under caradrina-montana; copy at a superseded path
+caradrina-multifera/Caradrina multifera-A-V.jpg,object,126246,caradrina-multifera,photo-refiled,data/images.csv files this filename under caradrina-montana; copy at a superseded path
+caradrina-multifera/Caradrina multifera-B-D.jpg,object,136831,caradrina-multifera,photo-refiled,data/images.csv files this filename under caradrina-montana; copy at a superseded path
+caradrina-multifera/Caradrina multifera-B-V.jpg,object,132832,caradrina-multifera,photo-refiled,data/images.csv files this filename under caradrina-montana; copy at a superseded path
+caradrina-multifera/Caradrina multifera-C-D.jpg,object,141356,caradrina-multifera,photo-refiled,data/images.csv files this filename under caradrina-montana; copy at a superseded path
+caradrina-multifera/Caradrina multifera-C-V.jpg,object,132636,caradrina-multifera,photo-refiled,data/images.csv files this filename under caradrina-montana; copy at a superseded path
+chrysodeixis-eriosoma/Chrysodeixis eriosoma-A-D.jpg,object,116337,chrysodeixis-eriosoma,photo-refiled,data/images.csv files this filename under chrysodeixis-chalcites; copy at a superseded path
+chrysodeixis-eriosoma/Chrysodeixis eriosoma-A-V.jpg,object,112316,chrysodeixis-eriosoma,photo-refiled,data/images.csv files this filename under chrysodeixis-chalcites; copy at a superseded path
+chytolita-petrealis/Chytolita petrealis-A-D.jpg,object,158862,chytolita-petrealis,photo-refiled,data/images.csv files this filename under chytolita-morbidalis; copy at a superseded path
+chytolita-petrealis/Chytolita petrealis-A-V.jpg,object,155710,chytolita-petrealis,photo-refiled,data/images.csv files this filename under chytolita-morbidalis; copy at a superseded path
+clemensia-albata/Clemensia albata-A-D.jpg,object,153722,clemensia-albata,photo-refiled,data/images.csv files this filename under clemensia-umbrata; copy at a superseded path
+clemensia-albata/Clemensia albata-A-V.jpg,object,139627,clemensia-albata,photo-refiled,data/images.csv files this filename under clemensia-umbrata; copy at a superseded path
+condica-lunata/Condica lunata-A-D.jpg,object,154362,condica-lunata,photo-refiled,data/images.csv files this filename under condica-mersa; copy at a superseded path
+condica-lunata/Condica lunata-A-V.jpg,object,160043,condica-lunata,photo-refiled,data/images.csv files this filename under condica-mersa; copy at a superseded path
+datana-ministra/Datana ministra-A-D.jpg,object,129910,datana-ministra,photo-refiled,data/images.csv files this filename under datana-californica; copy at a superseded path
+datana-ministra/Datana ministra-A-V.jpg,object,125639,datana-ministra,photo-refiled,data/images.csv files this filename under datana-californica; copy at a superseded path
+diachrysia-aeroides/Diachrysia aeroides-A-D.jpg,object,144214,diachrysia-aeroides,photo-refiled,data/images.csv files this filename under diachrysia-aereoides; copy at a superseded path
+diachrysia-aeroides/Diachrysia aeroides-A-V.jpg,object,140416,diachrysia-aeroides,photo-refiled,data/images.csv files this filename under diachrysia-aereoides; copy at a superseded path
+digrammia-nubicalatata/Digrammia nubicalatata-A-D.jpg,object,118384,digrammia-nubicalatata,photo-refiled,data/images.csv files this filename under digrammia-nubiculata; copy at a superseded path
+digrammia-nubicalatata/Digrammia nubicalatata-A-V.jpg,object,109792,digrammia-nubicalatata,photo-refiled,data/images.csv files this filename under digrammia-nubiculata; copy at a superseded path
+digrammia-nubicalatata/Digrammia nubicalatata-B-D.jpg,object,95310,digrammia-nubicalatata,photo-refiled,data/images.csv files this filename under digrammia-nubiculata; copy at a superseded path
+digrammia-nubicalatata/Digrammia nubicalatata-B-V.jpg,object,97589,digrammia-nubicalatata,photo-refiled,data/images.csv files this filename under digrammia-nubiculata; copy at a superseded path
+drasteria-convergens/Drasteria convergens-A-D.jpg,object,155644,drasteria-convergens,photo-refiled,data/images.csv files this filename under drasteria-parallela; copy at a superseded path
+drasteria-convergens/Drasteria convergens-A-V.jpg,object,143768,drasteria-convergens,photo-refiled,data/images.csv files this filename under drasteria-parallela; copy at a superseded path
+drasteria-species/Drasteria species-A-D.jpg,object,152055,drasteria-species,photo-refiled,data/images.csv files this filename under drasteria-sp; copy at a superseded path
+drasteria-species/Drasteria species-A-V.jpg,object,137833,drasteria-species,photo-refiled,data/images.csv files this filename under drasteria-sp; copy at a superseded path
+drepanulatrix-unicabararia/Drepanulatrix unicabararia-A-D.jpg,object,103956,drepanulatrix-unicabararia,photo-refiled,data/images.csv files this filename under drepanulatrix-unicalcararia; copy at a superseded path
+drepanulatrix-unicabararia/Drepanulatrix unicabararia-A-V.jpg,object,100115,drepanulatrix-unicabararia,photo-refiled,data/images.csv files this filename under drepanulatrix-unicalcararia; copy at a superseded path
+eulithis-harveyata/Eulithis harveyata-A-D.jpg,object,126831,eulithis-harveyata,photo-refiled,data/images.csv files this filename under eulithis-destinata; copy at a superseded path
+eulithis-harveyata/Eulithis harveyata-A-V.jpg,object,126612,eulithis-harveyata,photo-refiled,data/images.csv files this filename under eulithis-destinata; copy at a superseded path
+eulithis-xylena/Eulithis xylena-A-D.jpg,object,121836,eulithis-xylena,photo-refiled,data/images.csv files this filename under eulithis-xylina; copy at a superseded path
+eulithis-xylena/Eulithis xylena-A-V.jpg,object,115022,eulithis-xylena,photo-refiled,data/images.csv files this filename under eulithis-xylina; copy at a superseded path
+eupsilia-sidus/Eupsilia sidus-A-D.jpg,object,151129,eupsilia-sidus,photo-refiled,data/images.csv files this filename under eupsilia-tristigmata; copy at a superseded path
+eupsilia-sidus/Eupsilia sidus-A-V.jpg,object,153542,eupsilia-sidus,photo-refiled,data/images.csv files this filename under eupsilia-tristigmata; copy at a superseded path
+eustroma-semiatrata/Eustroma semiatrata-A-D.jpg,object,109261,eustroma-semiatrata,photo-refiled,data/images.csv files this filename under antepirrhoe-semiatrata; copy at a superseded path
+eustroma-semiatrata/Eustroma semiatrata-A-V.jpg,object,109567,eustroma-semiatrata,photo-refiled,data/images.csv files this filename under antepirrhoe-semiatrata; copy at a superseded path
+eustroma-semiatrata/Eustroma semiatrata-B-D.jpg,object,109500,eustroma-semiatrata,photo-refiled,data/images.csv files this filename under antepirrhoe-semiatrata; copy at a superseded path
+eustroma-semiatrata/Eustroma semiatrata-B-V.jpg,object,107878,eustroma-semiatrata,photo-refiled,data/images.csv files this filename under antepirrhoe-semiatrata; copy at a superseded path
+fishia-species/Fishia species-A-D.jpg,object,133366,fishia-species,photo-refiled,data/images.csv files this filename under fishia-sp; copy at a superseded path
+fishia-species/Fishia species-A-V.jpg,object,130855,fishia-species,photo-refiled,data/images.csv files this filename under fishia-sp; copy at a superseded path
+furcula-cinerea/Furcula cinerea-A-D.jpg,object,128109,furcula-cinerea,photo-refiled,data/images.csv files this filename under furcula-cinereoides; copy at a superseded path
+furcula-cinerea/Furcula cinerea-A-V.jpg,object,118143,furcula-cinerea,photo-refiled,data/images.csv files this filename under furcula-cinereoides; copy at a superseded path
+furcula-cinerea/Furcula cinerea-B-D.jpg,object,133172,furcula-cinerea,photo-refiled,data/images.csv files this filename under furcula-cinereoides; copy at a superseded path
+furcula-cinerea/Furcula cinerea-B-V.jpg,object,127272,furcula-cinerea,photo-refiled,data/images.csv files this filename under furcula-cinereoides; copy at a superseded path
+furcula-occidentalis/Furcula occidentalis-A-D.jpg,object,130171,furcula-occidentalis,photo-refiled,data/images.csv files this filename under furcula-gigans; copy at a superseded path
+furcula-occidentalis/Furcula occidentalis-A-V.jpg,object,119527,furcula-occidentalis,photo-refiled,data/images.csv files this filename under furcula-gigans; copy at a superseded path
+furcula-occidentalis/Furcula occidentalis-B-D.jpg,object,126980,furcula-occidentalis,photo-refiled,data/images.csv files this filename under furcula-gigans; copy at a superseded path
+furcula-occidentalis/Furcula occidentalis-B-V.jpg,object,119637,furcula-occidentalis,photo-refiled,data/images.csv files this filename under furcula-gigans; copy at a superseded path
+grammia-behrii/Grammia behrii-B-D.jpg,object,152981,grammia-behrii,photo-refiled,data/images.csv files this filename under apantesis-behrii; copy at a superseded path
+grammia-behrii/Grammia behrii-B-V.jpg,object,149960,grammia-behrii,photo-refiled,data/images.csv files this filename under apantesis-behrii; copy at a superseded path
+grammia-blakei/Grammia blakei-A-D.jpg,object,139931,grammia-blakei,photo-refiled,data/images.csv files this filename under apantesis-blakei; copy at a superseded path
+grammia-blakei/Grammia blakei-A-V.jpg,object,132470,grammia-blakei,photo-refiled,data/images.csv files this filename under apantesis-blakei; copy at a superseded path
+grammia-complicata/Grammia complicata-A-D.jpg,object,150797,grammia-complicata,photo-refiled,data/images.csv files this filename under apantesis-complicata; copy at a superseded path
+grammia-complicata/Grammia complicata-A-V.jpg,object,146920,grammia-complicata,photo-refiled,data/images.csv files this filename under apantesis-complicata; copy at a superseded path
+grammia-doris/Grammia doris-A-D.jpg,object,144623,grammia-doris,photo-refiled,data/images.csv files this filename under apantesis-doris; copy at a superseded path
+grammia-doris/Grammia doris-A-V.jpg,object,139167,grammia-doris,photo-refiled,data/images.csv files this filename under apantesis-doris; copy at a superseded path
+grammia-edwardsii/Grammia edwardsii-A-D.jpg,object,146052,grammia-edwardsii,photo-refiled,data/images.csv files this filename under apantesis-edwardsii; copy at a superseded path
+grammia-edwardsii/Grammia edwardsii-A-V.jpg,object,140361,grammia-edwardsii,photo-refiled,data/images.csv files this filename under apantesis-edwardsii; copy at a superseded path
+grammia-edwardsii/Grammia edwardsii-B-D.jpg,object,142819,grammia-edwardsii,photo-refiled,data/images.csv files this filename under apantesis-edwardsii; copy at a superseded path
+grammia-edwardsii/Grammia edwardsii-B-V.jpg,object,119699,grammia-edwardsii,photo-refiled,data/images.csv files this filename under apantesis-edwardsii; copy at a superseded path
+grammia-eureka/Grammia eureka-A-D.jpg,object,131074,grammia-eureka,photo-refiled,data/images.csv files this filename under apantesis-eureka; copy at a superseded path
+grammia-eureka/Grammia eureka-A-V.jpg,object,120702,grammia-eureka,photo-refiled,data/images.csv files this filename under apantesis-eureka; copy at a superseded path
+grammia-margo/Grammia margo-C-D.jpg,object,145679,grammia-margo,photo-refiled,data/images.csv files this filename under apantesis-margo; copy at a superseded path
+grammia-margo/Grammia margo-C-V.jpg,object,128502,grammia-margo,photo-refiled,data/images.csv files this filename under apantesis-margo; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-A-D.jpg,object,136725,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-A-V.jpg,object,134610,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-B-D.jpg,object,140529,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-B-V.jpg,object,132113,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-C-D.jpg,object,141976,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-C-V.jpg,object,140060,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-D-D.jpg,object,141532,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-nevadensis/Grammia nevadensis-D-V.jpg,object,130932,grammia-nevadensis,photo-refiled,data/images.csv files this filename under apantesis-nevadensis; copy at a superseded path
+grammia-ornata/Grammia ornata-A-D.jpg,object,149537,grammia-ornata,photo-refiled,data/images.csv files this filename under apantesis-ornata; copy at a superseded path
+grammia-ornata/Grammia ornata-A-V.jpg,object,140424,grammia-ornata,photo-refiled,data/images.csv files this filename under apantesis-ornata; copy at a superseded path
+grammia-ornata/Grammia ornata-B-D.jpg,object,149129,grammia-ornata,photo-refiled,data/images.csv files this filename under apantesis-ornata; copy at a superseded path
+grammia-ornata/Grammia ornata-B-V.jpg,object,145585,grammia-ornata,photo-refiled,data/images.csv files this filename under apantesis-ornata; copy at a superseded path
+grammia-ornata/Grammia ornata-C-D.jpg,object,142124,grammia-ornata,photo-refiled,data/images.csv files this filename under apantesis-ornata; copy at a superseded path
+grammia-ornata/Grammia ornata-C-V.jpg,object,131983,grammia-ornata,photo-refiled,data/images.csv files this filename under apantesis-ornata; copy at a superseded path
+grammia-parthenice/Grammia parthenice-A-D.jpg,object,140090,grammia-parthenice,photo-refiled,data/images.csv files this filename under apantesis-parthenice; copy at a superseded path
+grammia-parthenice/Grammia parthenice-A-V.jpg,object,135187,grammia-parthenice,photo-refiled,data/images.csv files this filename under apantesis-parthenice; copy at a superseded path
+grammia-quenseli/Grammia quenseli-A-D.jpg,object,162095,grammia-quenseli,photo-refiled,data/images.csv files this filename under apantesis-quenseli; copy at a superseded path
+grammia-quenseli/Grammia quenseli-A-V.jpg,object,153797,grammia-quenseli,photo-refiled,data/images.csv files this filename under apantesis-quenseli; copy at a superseded path
+grammia-quenseli/Grammia quenseli-B-D.jpg,object,148170,grammia-quenseli,photo-refiled,data/images.csv files this filename under apantesis-quenseli; copy at a superseded path
+grammia-quenseli/Grammia quenseli-B-V.jpg,object,142769,grammia-quenseli,photo-refiled,data/images.csv files this filename under apantesis-quenseli; copy at a superseded path
+grammia-speciosa/Grammia speciosa-A-D.jpg,object,153015,grammia-speciosa,photo-refiled,data/images.csv files this filename under apantesis-speciosa; copy at a superseded path
+grammia-speciosa/Grammia speciosa-A-V.jpg,object,152734,grammia-speciosa,photo-refiled,data/images.csv files this filename under apantesis-speciosa; copy at a superseded path
+grammia-virgo/Grammia virgo-A-D.jpg,object,142453,grammia-virgo,photo-refiled,data/images.csv files this filename under apantesis-virgo; copy at a superseded path
+grammia-virgo/Grammia virgo-A-V.jpg,object,136367,grammia-virgo,photo-refiled,data/images.csv files this filename under apantesis-virgo; copy at a superseded path
+grammia-virguncula/Grammia virguncula-A-D.jpg,object,144040,grammia-virguncula,photo-refiled,data/images.csv files this filename under apantesis-virguncula; copy at a superseded path
+grammia-virguncula/Grammia virguncula-A-V.jpg,object,138983,grammia-virguncula,photo-refiled,data/images.csv files this filename under apantesis-virguncula; copy at a superseded path
+grammia-williamsii/Grammia williamsii-A-D.jpg,object,139770,grammia-williamsii,photo-refiled,data/images.csv files this filename under apantesis-williamsii; copy at a superseded path
+grammia-williamsii/Grammia williamsii-A-V.jpg,object,138000,grammia-williamsii,photo-refiled,data/images.csv files this filename under apantesis-williamsii; copy at a superseded path
+grammia-yukona/Grammia yukona-A-D.jpg,object,122638,grammia-yukona,photo-refiled,data/images.csv files this filename under apantesis-yukona; copy at a superseded path
+grammia-yukona/Grammia yukona-A-V.jpg,object,117740,grammia-yukona,photo-refiled,data/images.csv files this filename under apantesis-yukona; copy at a superseded path
+grammia-yukona/Grammia yukona-B-D.jpg,object,130856,grammia-yukona,photo-refiled,data/images.csv files this filename under apantesis-yukona; copy at a superseded path
+grammia-yukona/Grammia yukona-B-V.jpg,object,130169,grammia-yukona,photo-refiled,data/images.csv files this filename under apantesis-yukona; copy at a superseded path
+gynaephora-rossi/Gynaephora rossi-A-D.jpg,object,165615,gynaephora-rossi,photo-refiled,data/images.csv files this filename under gynaephora-rossii; copy at a superseded path
+gynaephora-rossi/Gynaephora rossi-A-V.jpg,object,153308,gynaephora-rossi,photo-refiled,data/images.csv files this filename under gynaephora-rossii; copy at a superseded path
+gynaephora-rossi/Gynaephora rossi-B-D.jpg,object,140454,gynaephora-rossi,photo-refiled,data/images.csv files this filename under gynaephora-rossii; copy at a superseded path
+gynaephora-rossi/Gynaephora rossi-B-V.jpg,object,134139,gynaephora-rossi,photo-refiled,data/images.csv files this filename under gynaephora-rossii; copy at a superseded path
+heliothis-virescens/Heliothis virescens-B-D.jpg,object,127892,heliothis-virescens,photo-refiled,data/images.csv files this filename under chloridea-virescens; copy at a superseded path
+heliothis-virescens/Heliothis virescens-B-V.jpg,object,122787,heliothis-virescens,photo-refiled,data/images.csv files this filename under chloridea-virescens; copy at a superseded path
+hemeroplanis-finitima/Hemeroplanis finitima-A-D.jpg,object,141176,hemeroplanis-finitima,photo-refiled,data/images.csv files this filename under hemeroplanis-historialis; copy at a superseded path
+hemeroplanis-finitima/Hemeroplanis finitima-A-V.jpg,object,126831,hemeroplanis-finitima,photo-refiled,data/images.csv files this filename under hemeroplanis-historialis; copy at a superseded path
+hemeroplanis-finitima/Hemeroplanis finitima-B-D.jpg,object,157947,hemeroplanis-finitima,photo-refiled,data/images.csv files this filename under hemeroplanis-historialis; copy at a superseded path
+hemeroplanis-finitima/Hemeroplanis finitima-B-V.jpg,object,145597,hemeroplanis-finitima,photo-refiled,data/images.csv files this filename under hemeroplanis-historialis; copy at a superseded path
+holarctia-obliterata/Holarctia obliterata-A-D.jpg,object,144508,holarctia-obliterata,photo-refiled,data/images.csv files this filename under apantesis-obliterata; copy at a superseded path
+holarctia-obliterata/Holarctia obliterata-A-V.jpg,object,139490,holarctia-obliterata,photo-refiled,data/images.csv files this filename under apantesis-obliterata; copy at a superseded path
+holoarctia-sordida/Holoarctia sordida-A-D.jpg,object,136704,holoarctia-sordida,photo-refiled,data/images.csv files this filename under chelis-sordida; copy at a superseded path
+holoarctia-sordida/Holoarctia sordida-A-V.jpg,object,138330,holoarctia-sordida,photo-refiled,data/images.csv files this filename under chelis-sordida; copy at a superseded path
+holoarctia-sordida/Holoarctia sordida-B-D.jpg,object,144312,holoarctia-sordida,photo-refiled,data/images.csv files this filename under chelis-sordida; copy at a superseded path
+holoarctia-sordida/Holoarctia sordida-B-V.jpg,object,140208,holoarctia-sordida,photo-refiled,data/images.csv files this filename under chelis-sordida; copy at a superseded path
+holoarctia-sordida/Holoarctia sordida-C-D.jpg,object,148797,holoarctia-sordida,photo-refiled,data/images.csv files this filename under chelis-sordida; copy at a superseded path
+holoarctia-sordida/Holoarctia sordida-C-V.jpg,object,141862,holoarctia-sordida,photo-refiled,data/images.csv files this filename under chelis-sordida; copy at a superseded path
+hyalophora-columbia/Hyalophora columbia-A-D.jpg,object,171827,hyalophora-columbia,photo-refiled,data/images.csv files this filename under hyalophora-gloveri; copy at a superseded path
+hyalophora-columbia/Hyalophora columbia-A-V.jpg,object,181767,hyalophora-columbia,photo-refiled,data/images.csv files this filename under hyalophora-gloveri; copy at a superseded path
+hyalophora-columbia/Hyalophora columbia-B-D.jpg,object,168044,hyalophora-columbia,photo-refiled,data/images.csv files this filename under hyalophora-gloveri; copy at a superseded path
+hyalophora-columbia/Hyalophora columbia-B-V.jpg,object,178141,hyalophora-columbia,photo-refiled,data/images.csv files this filename under hyalophora-gloveri; copy at a superseded path
+hydraecia-pallescens/Hydraecia pallescens-A-D.jpg,object,114567,hydraecia-pallescens,photo-refiled,data/images.csv files this filename under hydraecia-medialis; copy at a superseded path
+hydraecia-pallescens/Hydraecia pallescens-A-V.jpg,object,112172,hydraecia-pallescens,photo-refiled,data/images.csv files this filename under hydraecia-medialis; copy at a superseded path
+hydraecia-pallescens/Hydraecia pallescens-B-D.jpg,object,130696,hydraecia-pallescens,photo-refiled,data/images.csv files this filename under hydraecia-medialis; copy at a superseded path
+hydraecia-pallescens/Hydraecia pallescens-B-V.jpg,object,130976,hydraecia-pallescens,photo-refiled,data/images.csv files this filename under hydraecia-medialis; copy at a superseded path
+hydraecia-pallescens/Hydraecia pallescens-C-D.jpg,object,128324,hydraecia-pallescens,photo-refiled,data/images.csv files this filename under hydraecia-medialis; copy at a superseded path
+hydraecia-pallescens/Hydraecia pallescens-C-V.jpg,object,124586,hydraecia-pallescens,photo-refiled,data/images.csv files this filename under hydraecia-medialis; copy at a superseded path
+hypenodes-sobria/Hypenodes sobria-A-D.jpg,object,131982,hypenodes-sobria,photo-refiled,data/images.csv files this filename under hypenodes-sombrus; copy at a superseded path
+hypenodes-sobria/Hypenodes sobria-A-V.jpg,object,129892,hypenodes-sobria,photo-refiled,data/images.csv files this filename under hypenodes-sombrus; copy at a superseded path
+itame-quadrilinearia/Itame quadrilinearia-A-D.jpg,object,127353,itame-quadrilinearia,photo-refiled,data/images.csv files this filename under speranza-quadrilinearia; copy at a superseded path
+itame-quadrilinearia/Itame quadrilinearia-A-V.jpg,object,125563,itame-quadrilinearia,photo-refiled,data/images.csv files this filename under speranza-quadrilinearia; copy at a superseded path
+lacinipolia-vicina/Lacinipolia vicina-A-D.jpg,object,139740,lacinipolia-vicina,photo-refiled,data/images.csv files this filename under lacinipolia-sareta; copy at a superseded path
+lacinipolia-vicina/Lacinipolia vicina-A-V.jpg,object,144364,lacinipolia-vicina,photo-refiled,data/images.csv files this filename under lacinipolia-sareta; copy at a superseded path
+lacinipolia-vicina/Lacinipolia vicina-B-D.jpg,object,155868,lacinipolia-vicina,photo-refiled,data/images.csv files this filename under lacinipolia-sareta; copy at a superseded path
+lacinipolia-vicina/Lacinipolia vicina-B-V.jpg,object,151292,lacinipolia-vicina,photo-refiled,data/images.csv files this filename under lacinipolia-sareta; copy at a superseded path
+lacinipolia-vittula/Lacinipolia vittula-A-D.jpg,object,148471,lacinipolia-vittula,photo-refiled,data/images.csv files this filename under lacinipolia-stenotis; copy at a superseded path
+lacinipolia-vittula/Lacinipolia vittula-A-V.jpg,object,122588,lacinipolia-vittula,photo-refiled,data/images.csv files this filename under lacinipolia-stenotis; copy at a superseded path
+lacinipolia-vittula/Lacinipolia vittula-B-D.jpg,object,155379,lacinipolia-vittula,photo-refiled,data/images.csv files this filename under lacinipolia-stenotis; copy at a superseded path
+lacinipolia-vittula/Lacinipolia vittula-B-V.jpg,object,138076,lacinipolia-vittula,photo-refiled,data/images.csv files this filename under lacinipolia-stenotis; copy at a superseded path
+leucania-anteoclara/Leucania anteoclara-A-D.jpg,object,106983,leucania-anteoclara,photo-refiled,data/images.csv files this filename under leucania-anteroclara; copy at a superseded path
+leucania-anteoclara/Leucania anteoclara-A-V.jpg,object,109328,leucania-anteoclara,photo-refiled,data/images.csv files this filename under leucania-anteroclara; copy at a superseded path
+leucania-species/Leucania species-A-D.jpg,object,119095,leucania-species,photo-refiled,data/images.csv files this filename under leucania-sp; copy at a superseded path
+leucania-species/Leucania species-A-V.jpg,object,114686,leucania-species,photo-refiled,data/images.csv files this filename under leucania-sp; copy at a superseded path
+lithophane-jefferyi/Lithophane jefferyi-A-D.jpg,object,132353,lithophane-jefferyi,photo-refiled,data/images.csv files this filename under lithophane-jeffreyi; copy at a superseded path
+lithophane-jefferyi/Lithophane jefferyi-A-V.jpg,object,132734,lithophane-jefferyi,photo-refiled,data/images.csv files this filename under lithophane-jeffreyi; copy at a superseded path
+macaria-ulsterata/Macaria ulsterata-A-D.jpg,object,127883,macaria-ulsterata,photo-refiled,data/images.csv files this filename under macaria-notata; copy at a superseded path
+macaria-ulsterata/Macaria ulsterata-A-V.jpg,object,125454,macaria-ulsterata,photo-refiled,data/images.csv files this filename under macaria-notata; copy at a superseded path
+nacophoria-mexicanaria/Nacophoria mexicanaria-A-D.jpg,object,128864,nacophoria-mexicanaria,photo-refiled,data/images.csv files this filename under phaeoura-mexicanaria; copy at a superseded path
+nacophoria-mexicanaria/Nacophoria mexicanaria-A-V.jpg,object,120621,nacophoria-mexicanaria,photo-refiled,data/images.csv files this filename under phaeoura-mexicanaria; copy at a superseded path
+neoarctia-beanii/Neoarctia beanii-A-D.jpg,object,142976,neoarctia-beanii,photo-refiled,data/images.csv files this filename under chelis-beanii; copy at a superseded path
+neoarctia-beanii/Neoarctia beanii-A-V.jpg,object,132618,neoarctia-beanii,photo-refiled,data/images.csv files this filename under chelis-beanii; copy at a superseded path
+neoarctia-brucei/Neoarctia brucei-A-D.jpg,object,123306,neoarctia-brucei,photo-refiled,data/images.csv files this filename under chelis-brucei; copy at a superseded path
+neoarctia-brucei/Neoarctia brucei-A-V.jpg,object,129780,neoarctia-brucei,photo-refiled,data/images.csv files this filename under chelis-brucei; copy at a superseded path
+notarctia-proxima/Notarctia proxima-A-D.jpg,object,136383,notarctia-proxima,photo-refiled,data/images.csv files this filename under apantesis-arizoniensis; copy at a superseded path
+notarctia-proxima/Notarctia proxima-A-V.jpg,object,133834,notarctia-proxima,photo-refiled,data/images.csv files this filename under apantesis-arizoniensis; copy at a superseded path
+notarctia-proxima/Notarctia proxima-B-D.jpg,object,138805,notarctia-proxima,photo-refiled,data/images.csv files this filename under apantesis-arizoniensis; copy at a superseded path
+notarctia-proxima/Notarctia proxima-B-V.jpg,object,136039,notarctia-proxima,photo-refiled,data/images.csv files this filename under apantesis-arizoniensis; copy at a superseded path
+notodonta-scitipennis/Notodonta scitipennis-A-D.jpg,object,126545,notodonta-scitipennis,photo-refiled,data/images.csv files this filename under notodonta-manitou; copy at a superseded path
+odontosia-elegans/Odontosia elegans-A-D.jpg,object,125739,odontosia-elegans,photo-refiled,data/images.csv files this filename under pheosidea-elegans; copy at a superseded path
+odontosia-elegans/Odontosia elegans-A-V.jpg,object,120867,odontosia-elegans,photo-refiled,data/images.csv files this filename under pheosidea-elegans; copy at a superseded path
+orthodes-delecta/Orthodes delecta-A-D.jpg,object,150320,orthodes-delecta,photo-refiled,data/images.csv files this filename under orthodes-noverca; copy at a superseded path
+orthodes-delecta/Orthodes delecta-A-V.jpg,object,149268,orthodes-delecta,photo-refiled,data/images.csv files this filename under orthodes-noverca; copy at a superseded path
+pararctia-yarrowii/Pararctia yarrowii-A-D.jpg,object,149942,pararctia-yarrowii,photo-refiled,data/images.csv files this filename under arctia-yarrowii; copy at a superseded path
+pararctia-yarrowii/Pararctia yarrowii-A-V.jpg,object,145661,pararctia-yarrowii,photo-refiled,data/images.csv files this filename under arctia-yarrowii; copy at a superseded path
+parasemia-plantaginis/Parasemia plantaginis-A-D.jpg,object,155524,parasemia-plantaginis,photo-refiled,data/images.csv files this filename under arctia-plantaginis; copy at a superseded path
+parasemia-plantaginis/Parasemia plantaginis-A-V.jpg,object,158728,parasemia-plantaginis,photo-refiled,data/images.csv files this filename under arctia-plantaginis; copy at a superseded path
+parasemia-plantaginis/Parasemia plantaginis-B-D.jpg,object,138243,parasemia-plantaginis,photo-refiled,data/images.csv files this filename under arctia-plantaginis; copy at a superseded path
+parasemia-plantaginis/Parasemia plantaginis-B-V.jpg,object,145999,parasemia-plantaginis,photo-refiled,data/images.csv files this filename under arctia-plantaginis; copy at a superseded path
+peromiza-costiguttata/Peromiza costiguttata-A-D.jpg,object,102739,peromiza-costiguttata,photo-refiled,data/images.csv files this filename under perizoma-costiguttata; copy at a superseded path
+peromiza-costiguttata/Peromiza costiguttata-A-V.jpg,object,100354,peromiza-costiguttata,photo-refiled,data/images.csv files this filename under perizoma-costiguttata; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-A-D.jpg,object,132065,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-A-V.jpg,object,130238,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-B-D.jpg,object,135850,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-B-V.jpg,object,134721,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-C-D.jpg,object,137068,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-C-V.jpg,object,132860,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-D-D.jpg,object,139505,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+pheosia-rimosa/Pheosia rimosa-D-V.jpg,object,140505,pheosia-rimosa,photo-refiled,data/images.csv files this filename under pheosia-californica; copy at a superseded path
+plagiomimicus-tepperi/Plagiomimicus tepperi-A-D.jpg,object,128627,plagiomimicus-tepperi,photo-refiled,data/images.csv files this filename under plagiomimicus-yakama; copy at a superseded path
+plagiomimicus-tepperi/Plagiomimicus tepperi-A-V.jpg,object,122861,plagiomimicus-tepperi,photo-refiled,data/images.csv files this filename under plagiomimicus-yakama; copy at a superseded path
+plataea-sp/Plataea sp-A-D.jpg,object,152494,plataea-sp,photo-refiled,data/images.csv files this filename under plataea-n-sp; copy at a superseded path
+plataea-sp/Plataea sp-A-V.jpg,object,157149,plataea-sp,photo-refiled,data/images.csv files this filename under plataea-n-sp; copy at a superseded path
+platarctia-parthenos/Platarctia parthenos-A-D.jpg,object,138137,platarctia-parthenos,photo-refiled,data/images.csv files this filename under arctia-parthenos; copy at a superseded path
+platarctia-parthenos/Platarctia parthenos-A-V.jpg,object,139583,platarctia-parthenos,photo-refiled,data/images.csv files this filename under arctia-parthenos; copy at a superseded path
+platyprepia-virginalis/Platyprepia virginalis-A-D.jpg,object,125630,platyprepia-virginalis,photo-refiled,data/images.csv files this filename under arctia-virginalis; copy at a superseded path
+platyprepia-virginalis/Platyprepia virginalis-A-V.jpg,object,122397,platyprepia-virginalis,photo-refiled,data/images.csv files this filename under arctia-virginalis; copy at a superseded path
+platyprepia-virginalis/Platyprepia virginalis-B-D.jpg,object,135918,platyprepia-virginalis,photo-refiled,data/images.csv files this filename under arctia-virginalis; copy at a superseded path
+platyprepia-virginalis/Platyprepia virginalis-B-V.jpg,object,131256,platyprepia-virginalis,photo-refiled,data/images.csv files this filename under arctia-virginalis; copy at a superseded path
+protitame-matilda/Protitame matilda-A-D.jpg,object,120624,protitame-matilda,photo-refiled,data/images.csv files this filename under protitame-subalbaria; copy at a superseded path
+protitame-matilda/Protitame matilda-A-V.jpg,object,111982,protitame-matilda,photo-refiled,data/images.csv files this filename under protitame-subalbaria; copy at a superseded path
+protogygia-elevata/Protogygia elevata-B-D.jpg,object,136733,protogygia-elevata,photo-refiled,data/images.csv files this filename under protogygia-arena; copy at a superseded path
+protogygia-elevata/Protogygia elevata-B-V.jpg,object,127609,protogygia-elevata,photo-refiled,data/images.csv files this filename under protogygia-arena; copy at a superseded path
+protorthodes-perforata/Protorthodes perforata-A-D.jpg,object,146412,protorthodes-perforata,photo-refiled,data/images.csv files this filename under trichopolia-rufula; copy at a superseded path
+protorthodes-perforata/Protorthodes perforata-A-V.jpg,object,148753,protorthodes-perforata,photo-refiled,data/images.csv files this filename under trichopolia-rufula; copy at a superseded path
+schinia-nuchalis/Schinia nuchalis-A-D.jpg,object,158963,schinia-nuchalis,photo-refiled,data/images.csv files this filename under protoschinia-nuchalis; copy at a superseded path
+schinia-nuchalis/Schinia nuchalis-A-V.jpg,object,121044,schinia-nuchalis,photo-refiled,data/images.csv files this filename under protoschinia-nuchalis; copy at a superseded path
+sicya-mersicaria/Sicya mersicaria-A-D.jpg,object,147509,sicya-mersicaria,photo-refiled,data/images.csv files this filename under sicya-morsicaria; copy at a superseded path
+sicya-mersicaria/Sicya mersicaria-A-V.jpg,object,128713,sicya-mersicaria,photo-refiled,data/images.csv files this filename under sicya-morsicaria; copy at a superseded path
+sicya-mersicaria/Sicya mersicaria-B-D.jpg,object,144914,sicya-mersicaria,photo-refiled,data/images.csv files this filename under sicya-morsicaria; copy at a superseded path
+sicya-mersicaria/Sicya mersicaria-B-V.jpg,object,132230,sicya-mersicaria,photo-refiled,data/images.csv files this filename under sicya-morsicaria; copy at a superseded path
+simyra-insularis/Simyra insularis-A-D.jpg,object,120904,simyra-insularis,photo-refiled,data/images.csv files this filename under acronicta-insularis; copy at a superseded path
+simyra-insularis/Simyra insularis-A-V.jpg,object,112544,simyra-insularis,photo-refiled,data/images.csv files this filename under acronicta-insularis; copy at a superseded path
+simyra-insularis/Simyra insularis-B-D.jpg,object,115444,simyra-insularis,photo-refiled,data/images.csv files this filename under acronicta-insularis; copy at a superseded path
+simyra-insularis/Simyra insularis-B-V.jpg,object,109147,simyra-insularis,photo-refiled,data/images.csv files this filename under acronicta-insularis; copy at a superseded path
+sometolephia-ectrapelaria/Sometolephia ectrapelaria-A-D.jpg,object,165080,sometolephia-ectrapelaria,photo-refiled,data/images.csv files this filename under somatolophia-ectrapelaria; copy at a superseded path
+sometolephia-ectrapelaria/Sometolephia ectrapelaria-A-V.jpg,object,158138,sometolephia-ectrapelaria,photo-refiled,data/images.csv files this filename under somatolophia-ectrapelaria; copy at a superseded path
+sometolephia-ectrapelaria/Sometolephia ectrapelaria-B-D.jpg,object,169256,sometolephia-ectrapelaria,photo-refiled,data/images.csv files this filename under somatolophia-ectrapelaria; copy at a superseded path
+sometolephia-ectrapelaria/Sometolephia ectrapelaria-B-V.jpg,object,165169,sometolephia-ectrapelaria,photo-refiled,data/images.csv files this filename under somatolophia-ectrapelaria; copy at a superseded path
+speranza-exhauspicata/Speranza exhauspicata-A-D.jpg,object,154389,speranza-exhauspicata,photo-refiled,data/images.csv files this filename under speranza-exauspicata; copy at a superseded path
+speranza-exhauspicata/Speranza exhauspicata-A-V.jpg,object,146809,speranza-exhauspicata,photo-refiled,data/images.csv files this filename under speranza-exauspicata; copy at a superseded path
+speranza-exhauspicata/Speranza exhauspicata-B-D.jpg,object,160021,speranza-exhauspicata,photo-refiled,data/images.csv files this filename under speranza-exauspicata; copy at a superseded path
+speranza-exhauspicata/Speranza exhauspicata-B-V.jpg,object,154413,speranza-exhauspicata,photo-refiled,data/images.csv files this filename under speranza-exauspicata; copy at a superseded path
+speranza-lorguinaria/Speranza lorguinaria-A-D.jpg,object,147876,speranza-lorguinaria,photo-refiled,data/images.csv files this filename under macaria-lorquinaria; copy at a superseded path
+speranza-lorguinaria/Speranza lorguinaria-A-V.jpg,object,145539,speranza-lorguinaria,photo-refiled,data/images.csv files this filename under macaria-lorquinaria; copy at a superseded path
+stretchia-plusiiformis/Stretchia plusiiformis-A-D.jpg,object,143328,stretchia-plusiiformis,photo-refiled,data/images.csv files this filename under stretchia-plusiaeformis; copy at a superseded path
+stretchia-plusiiformis/Stretchia plusiiformis-A-V.jpg,object,134848,stretchia-plusiiformis,photo-refiled,data/images.csv files this filename under stretchia-plusiaeformis; copy at a superseded path
+stretchia-plusiiformis/Stretchia plusiiformis-B-D.jpg,object,145432,stretchia-plusiiformis,photo-refiled,data/images.csv files this filename under stretchia-plusiaeformis; copy at a superseded path
+stretchia-plusiiformis/Stretchia plusiiformis-B-V.jpg,object,140688,stretchia-plusiiformis,photo-refiled,data/images.csv files this filename under stretchia-plusiaeformis; copy at a superseded path
+sympistis-chorda/Sympistis chorda-A-D.jpg,object,132843,sympistis-chorda,photo-refiled,data/images.csv files this filename under sympistis-sokar; copy at a superseded path
+sympistis-chorda/Sympistis chorda-A-V.jpg,object,127819,sympistis-chorda,photo-refiled,data/images.csv files this filename under sympistis-sokar; copy at a superseded path
+sympistis-melantho/Sympistis melantho-A-D.jpg,object,144986,sympistis-melantho,photo-refiled,data/images.csv files this filename under sympistis-sandaraca; copy at a superseded path
+sympistis-melantho/Sympistis melantho-A-V.jpg,object,136277,sympistis-melantho,photo-refiled,data/images.csv files this filename under sympistis-sandaraca; copy at a superseded path
+sympistis-nigrita/Sympistis nigrita-A-D.jpg,object,144582,sympistis-nigrita,photo-refiled,data/images.csv files this filename under sympistis-zetterstedtii; copy at a superseded path
+sympistis-nigrita/Sympistis nigrita-A-V.jpg,object,139742,sympistis-nigrita,photo-refiled,data/images.csv files this filename under sympistis-zetterstedtii; copy at a superseded path
+sympistis-nigrita/Sympistis nigrita-B-D.jpg,object,144620,sympistis-nigrita,photo-refiled,data/images.csv files this filename under sympistis-zetterstedtii; copy at a superseded path
+sympistis-nigrita/Sympistis nigrita-B-V.jpg,object,143461,sympistis-nigrita,photo-refiled,data/images.csv files this filename under sympistis-zetterstedtii; copy at a superseded path
+tetracis-pailldata/Tetracis pailldata-A-D.jpg,object,88349,tetracis-pailldata,photo-refiled,data/images.csv files this filename under tetracis-pallidata; copy at a superseded path
+tetracis-pailldata/Tetracis pailldata-A-V.jpg,object,88309,tetracis-pailldata,photo-refiled,data/images.csv files this filename under tetracis-pallidata; copy at a superseded path
+tetracis-pailldata/Tetracis pailldata-B-D.jpg,object,97490,tetracis-pailldata,photo-refiled,data/images.csv files this filename under tetracis-pallidata; copy at a superseded path
+tetracis-pailldata/Tetracis pailldata-B-V.jpg,object,95972,tetracis-pailldata,photo-refiled,data/images.csv files this filename under tetracis-pallidata; copy at a superseded path
+ufeus-hulsti/Ufeus hulsti-A-D.jpg,object,118628,ufeus-hulsti,photo-refiled,data/images.csv files this filename under ufeus-hulstii; copy at a superseded path
+ufeus-hulsti/Ufeus hulsti-A-V.jpg,object,115213,ufeus-hulsti,photo-refiled,data/images.csv files this filename under ufeus-hulstii; copy at a superseded path
+zanclognatha-lutalba/Zanclognatha lutalba-A-D.jpg,object,132906,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
+zanclognatha-lutalba/Zanclognatha lutalba-A-V.jpg,object,136624,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
+zanclognatha-lutalba/Zanclognatha lutalba-B-D.jpg,object,166038,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
+zanclognatha-lutalba/Zanclognatha lutalba-B-V.jpg,object,156793,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
 images/logos/lucid.png,object,3595,,stale-site,not in the current _site-manifest.json
 plates/manifest.json,object,16954,,stale-site,not in the current _site-manifest.json
 species/alsophila-pometaria/records.parquet,object,381,alsophila-pometaria,stale-site,not in the current _site-manifest.json; alsophila-pometaria is gated and gets no page
@@ -811,10 +705,34 @@ species/xestia-c/index.html,object,5160,xestia-c,stale-site,not in the current _
 species/xestia-c/records.parquet,object,15960,xestia-c,stale-site,not in the current _site-manifest.json; xestia-c is not in data/species.csv
 species/xylophanes-nr libya/index.html,object,2847,xylophanes-nr libya,stale-site,not in the current _site-manifest.json; xylophanes-nr libya is not in data/species.csv
 species/xylophanes-nr-libya/records.parquet,object,2137,xylophanes-nr-libya,stale-site,not in the current _site-manifest.json; xylophanes-nr-libya is gated and gets no page
+species-tiles/amphipyra-tragopoginis/B-D.dzi,object,206,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
+species-tiles/amphipyra-tragopoginis/B-D_files/,tile-pyramid,,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
+species-tiles/amphipyra-tragopoginis/B-D_thumbnail.webp,object,123558,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
+species-tiles/amphipyra-tragopoginis/B-V.dzi,object,206,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
+species-tiles/amphipyra-tragopoginis/B-V_files/,tile-pyramid,,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
+species-tiles/amphipyra-tragopoginis/B-V_thumbnail.webp,object,121568,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
+species-tiles/aseptis-fanatica/B-D.dzi,object,206,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
+species-tiles/aseptis-fanatica/B-D_files/,tile-pyramid,,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
+species-tiles/aseptis-fanatica/B-D_thumbnail.webp,object,178678,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
+species-tiles/aseptis-fanatica/B-V.dzi,object,206,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
+species-tiles/aseptis-fanatica/B-V_files/,tile-pyramid,,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
+species-tiles/aseptis-fanatica/B-V_thumbnail.webp,object,190802,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
 species-tiles/catocala-allusa/A-D.dzi,object,206,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-D_files/,tile-pyramid,,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-V.dzi,object,206,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-V_files/,tile-pyramid,,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
+species-tiles/enargia-infumata/D-D.dzi,object,206,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
+species-tiles/enargia-infumata/D-D_files/,tile-pyramid,,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
+species-tiles/enargia-infumata/D-D_thumbnail.webp,object,131924,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
+species-tiles/enargia-infumata/D-V.dzi,object,206,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
+species-tiles/enargia-infumata/D-V_files/,tile-pyramid,,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
+species-tiles/enargia-infumata/D-V_thumbnail.webp,object,129548,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
+species-tiles/lacinipolia-bucketti/D-D.dzi,object,206,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
+species-tiles/lacinipolia-bucketti/D-D_files/,tile-pyramid,,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
+species-tiles/lacinipolia-bucketti/D-D_thumbnail.webp,object,137338,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
+species-tiles/lacinipolia-bucketti/D-V.dzi,object,206,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
+species-tiles/lacinipolia-bucketti/D-V_files/,tile-pyramid,,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
+species-tiles/lacinipolia-bucketti/D-V_thumbnail.webp,object,130124,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
 species-tiles/macaria-bitactata/A-D.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/A-D_files/,tile-pyramid,,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/A-V.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
@@ -859,6 +777,30 @@ species-tiles/protorthodes-rufula/A-D.dzi,object,206,protorthodes-rufula,tiles-n
 species-tiles/protorthodes-rufula/A-D_files/,tile-pyramid,,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-V.dzi,object,206,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-V_files/,tile-pyramid,,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
+species-tiles/resapamea-innota/C-D.dzi,object,206,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
+species-tiles/resapamea-innota/C-D_files/,tile-pyramid,,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
+species-tiles/resapamea-innota/C-D_thumbnail.webp,object,144740,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
+species-tiles/resapamea-innota/C-V.dzi,object,206,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
+species-tiles/resapamea-innota/C-V_files/,tile-pyramid,,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
+species-tiles/resapamea-innota/C-V_thumbnail.webp,object,131168,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
+species-tiles/resapamea-passer/D-D.dzi,object,206,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
+species-tiles/resapamea-passer/D-D_files/,tile-pyramid,,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
+species-tiles/resapamea-passer/D-D_thumbnail.webp,object,177844,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
+species-tiles/resapamea-passer/D-V.dzi,object,206,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
+species-tiles/resapamea-passer/D-V_files/,tile-pyramid,,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
+species-tiles/resapamea-passer/D-V_thumbnail.webp,object,137108,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
+species-tiles/schinia-honesta/C-D.dzi,object,206,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
+species-tiles/schinia-honesta/C-D_files/,tile-pyramid,,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
+species-tiles/schinia-honesta/C-D_thumbnail.webp,object,166262,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
+species-tiles/schinia-honesta/C-V.dzi,object,206,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
+species-tiles/schinia-honesta/C-V_files/,tile-pyramid,,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
+species-tiles/schinia-honesta/C-V_thumbnail.webp,object,142692,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
+species-tiles/smerinthus-ophthalmica/B-D.dzi,object,206,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
+species-tiles/smerinthus-ophthalmica/B-D_files/,tile-pyramid,,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
+species-tiles/smerinthus-ophthalmica/B-D_thumbnail.webp,object,184566,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
+species-tiles/smerinthus-ophthalmica/B-V.dzi,object,206,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
+species-tiles/smerinthus-ophthalmica/B-V_files/,tile-pyramid,,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
+species-tiles/smerinthus-ophthalmica/B-V_thumbnail.webp,object,168766,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
 species-tiles/speranza-andersoni/A-D.dzi,object,206,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-D_files/,tile-pyramid,,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-V.dzi,object,206,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
@@ -867,4 +809,10 @@ species-tiles/sympistis-chionanti/A-D.dzi,object,206,sympistis-chionanti,tiles-n
 species-tiles/sympistis-chionanti/A-D_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V.dzi,object,206,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
+species-tiles/tarache-toddi/C-D.dzi,object,206,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
+species-tiles/tarache-toddi/C-D_files/,tile-pyramid,,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
+species-tiles/tarache-toddi/C-D_thumbnail.webp,object,132238,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
+species-tiles/tarache-toddi/C-V.dzi,object,206,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
+species-tiles/tarache-toddi/C-V_files/,tile-pyramid,,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
+species-tiles/tarache-toddi/C-V_thumbnail.webp,object,134220,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
 test/somefile.jpg,object,750219,,unknown,

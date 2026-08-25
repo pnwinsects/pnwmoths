@@ -134,15 +134,19 @@ export function toTilesPath(row: ManifestRow): string {
  * Rows without a determination pass through untouched: the filename match is
  * still the default, just no longer the last word.
  *
+ * Generic over the row rather than pinned to ManifestRow, because emit-cdn-inventory.ts
+ * reads the manifest into a four-column projection and must apply the same
+ * override — it decides which tile pyramids are accounted for, and joining
+ * against the raw manifest reports every re-keyed destination as an orphan.
+ *
  * Pure and total — a determination naming a stem absent from the manifest is not
  * an error here (it may govern a legacy JPEG in data/images.csv that was never
  * tiled). check-photo-determinations.ts is what refuses a determination that
  * matches nothing anywhere.
  */
-export function applyDeterminations(
-  rows: ManifestRow[],
-  determinations: Map<string, PhotoDetermination>,
-): ManifestRow[] {
+export function applyDeterminations<
+  T extends { filename_raw: string; species_slug: string; specimen_id: string },
+>(rows: T[], determinations: Map<string, PhotoDetermination>): T[] {
   if (determinations.size === 0) return rows;
   return rows.map(row => {
     const ruling = determinations.get(toPhotoStem(row.filename_raw));
