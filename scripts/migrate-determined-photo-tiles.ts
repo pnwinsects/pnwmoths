@@ -380,7 +380,10 @@ async function main(): Promise<void> {
     // ~0.01–0.03 is the same photograph re-encoded; ~0.1 is a different moth.
     // Fetch from the storage API, not the pull zone: tiles carry
     // max-age=25600000 and the edge will show you the pre-migration bytes.
-    if (process.env['CONFIRM_SWAP'] !== '1') {
+    // DRY_RUN writes nothing, so it does not need write confirmation — and
+    // refusing it meant a new determination could not even be previewed while
+    // an un-ledgered cycle sat in the plan.
+    if (process.env['CONFIRM_SWAP'] !== '1' && !DRY_RUN) {
       console.error(`${TAG} ${cyclic.length} objects form a swap (${(cyclicBytes / 1e6).toFixed(1)} MB):`);
       // Derived from the cyclic OBJECTS, not from `moves`: a move whose source
       // tile set does not exist contributes no objects and is not part of any

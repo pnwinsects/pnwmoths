@@ -49,9 +49,11 @@ describe('readPhotoDeterminations', () => {
     });
   });
 
-  it('skips rows with a blank stem rather than keying on the empty string', () => {
+  // A ruling with no photograph attached can never be applied, and check A
+  // cannot report it either — it needs a stem to name.
+  it('refuses a row with a blank stem rather than dropping it', () => {
     const path = writeCsv(HEADER + ',resapamea-innota,C,#330,orphan row\n');
-    assert.equal(readPhotoDeterminations(path).size, 0);
+    assert.throws(() => readPhotoDeterminations(path), /empty photo_stem/);
   });
 
   // The whole file is a claim about identity; two claims about one photograph
@@ -90,6 +92,16 @@ describe('identityFromFilename', () => {
   it('keeps every token of a provisional binomial', () => {
     assert.equal(identityFromFilename('Mniotype aff tenera-B-V.jpg')?.slug, 'mniotype-aff-tenera');
     assert.equal(identityFromFilename('Xylophanes nr libya-A-D.jpg')?.slug, 'xylophanes-nr-libya');
+  });
+
+  it('reads the spaced-hyphen separator of the Geometridae import', () => {
+    assert.deepEqual(identityFromFilename('Dasyfidonia avuncularia - A-D.jpg'), {
+      slug: 'dasyfidonia-avuncularia', specimen: 'A', view: 'D',
+    });
+  });
+
+  it('returns null for a name that is not a photograph at all', () => {
+    assert.equal(identityFromFilename('IMG_2043.jpg'), null);
   });
 
   it('keeps a hyphen inside the epithet', () => {

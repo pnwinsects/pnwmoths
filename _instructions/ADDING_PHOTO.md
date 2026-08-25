@@ -119,6 +119,8 @@ prefer that if you want the link check too.
 ```bash
 git switch -c add-photo-$(date +%Y%m%d-%H%M)
 git add data/images.csv data/image-derivatives.csv
+# ...and data/photo-determinations.csv too, if you recorded a ruling in step 4:
+git add data/photo-determinations.csv
 git commit -m "Add photo for Acronicta americana"
 git push -u origin HEAD
 gh pr create --fill
@@ -143,7 +145,13 @@ derivatives are not on the CDN. You skipped step 3, or it did not finish. See
 [GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md).
 
 **`Invalid image filename "…" in images.csv`** — the filename contains a character outside
-`a-z A-Z 0-9 space . _ -`. Rename the file on the CDN and in the CSV to match.
+`a-z A-Z 0-9 space . _ -`. Fix the name **before** the photograph enters the catalogue: rename the
+local file, upload under the corrected name, and use that name in the row. Once a photograph is in
+`data/images.csv` its filename is permanent — derivatives, the high-resolution TIFF and the copy on
+the legacy host all join on it, and renaming orphans all three
+([ADR 0038](../docs/adr/0038-photo-identity-is-data-not-filename.md)). If the bad name is already
+catalogued, upload a corrected copy alongside it and record the old path in
+[`data/cdn-retired-images.csv`](../data/cdn-retired-images.csv) rather than renaming in place.
 
 **`data/images.csv is missing required column: "…"`** — the header lost one of the eight columns
 the build requires (`species_slug`, `filename`, `photographer`, `weight`, `license`, `view`,

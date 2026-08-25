@@ -129,8 +129,10 @@ export function toPhotoStem(filename: string): string {
  * Every determination, keyed by photo stem.
  *
  * Absent file is not an error — it means no determination has ever been needed.
- * A repeated stem is: two rulings about one photograph cannot both be applied,
- * and picking one silently is how the wrong one wins.
+ * A repeated stem is, and so is an empty one: two rulings about one photograph
+ * cannot both be applied and picking one silently is how the wrong one wins,
+ * while a ruling with no photograph attached can never be applied at all and
+ * would not even reach check A, which needs a stem to report.
  */
 export function readPhotoDeterminations(
   path: string = DETERMINATIONS_PATH,
@@ -144,7 +146,16 @@ export function readPhotoDeterminations(
   const byStem = new Map<string, PhotoDetermination>();
   for (const row of rows) {
     const stem = (row.photo_stem ?? '').trim();
-    if (!stem) continue;
+    if (!stem) {
+      // A row with no key is a ruling that can never be applied: it re-files
+      // nothing, and check A cannot report it because there is no stem to
+      // report. Silently dropping it is how a curator's answer goes missing.
+      throw new Error(
+        `[photo-determinations] a row in ${path} has an empty photo_stem ` +
+          `(species_slug=${row.species_slug ?? ''}, source=${row.source ?? ''}). ` +
+          `A determination with no photograph to attach to cannot be applied.`,
+      );
+    }
     if (byStem.has(stem)) {
       throw new Error(
         `[photo-determinations] "${stem}" appears twice in ${path}. ` +

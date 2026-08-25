@@ -73,7 +73,7 @@ what made C-020 possible to reconstruct.
 
 ---
 
-## C-028 · 2026-08-24 · Eleven photographs were of another species than the account showing them; the tiles move, the filenames do not
+## C-028 · 2026-08-24 · Eleven species accounts published another species' photographs; the tiles move, the filenames do not
 
 **Source** [#330 comment](https://github.com/pnwinsects/pnwmoths/issues/330#issuecomment-5400837287)
 and [#336 comment](https://github.com/pnwinsects/pnwmoths/issues/336#issuecomment-5401307703),
@@ -97,7 +97,10 @@ redetermining nine of them and crossing a tenth pair:
 and, on #330 Q1, *"Filenames with ducta are actually tenera and vice versa"*; on #336 item 11,
 *"Tarache areli-C-D and C-V are actually Tarache toddi."*
 
-Why it matters: **`data/images.csv` already recorded every one of these determinations.** The
+Why it matters: **`data/images.csv` already recorded every one of these determinations that it
+carries a row for.** (Two do not have one: `Mniotype ducta-A-V` and `Resapamea venosa-B-V` exist
+only as high-resolution TIFFs, with no catalogued JPEG — which is why check A in
+`check-photo-determinations.ts` accepts a determination matched by the manifest alone.) The
 question #330 asked — publish these or leave them? — rested on a false premise, and the objects it
 listed are re-encoded copies of the same photographs left at their pre-redetermination paths
 (identical dimensions, RMSE ≈ 0.014; ~15% smaller, which is why the checksum-based duplicate scan
