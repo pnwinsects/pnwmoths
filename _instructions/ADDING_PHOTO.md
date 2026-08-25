@@ -15,7 +15,14 @@ The build fails if you do 3 without 1 and 2, naming the file it cannot find. Tha
 - **bunny.net Storage Zone `pnwmoths`** — the image file, and its `derived/` variants
 - **`data/images.csv`** — one new row
 - **`data/image-derivatives.csv`** — rows recording the uploaded variants (written for you)
-- Build output: the photo appears on the species page
+- Build output: the photo appears on the species page — **unless the species has high-resolution
+  tiles**, in which case the account shows the deep-zoom viewer *instead of* the catalogued
+  photographs and your new row will not be visible there. It **may** still appear on `/browse/`,
+  on Identify, or in another species' "similar species" row, but none of those is guaranteed:
+  each shows one photograph per species, chosen by lowest `weight`, so a new row that is not the
+  lightest may appear nowhere at all. `data/hidden-images-report.csv` is what answers it for your
+  row — see [Verify](#verify). The rules are in
+  [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md).
 
 ## Schema: data/images.csv
 
@@ -98,7 +105,7 @@ to copy an existing row for the same species and edit it.
 npm run build:site
 ```
 
-Expected: the build completes. Partway through — it is the 6th of 17 steps, not the last — you
+Expected: the build completes. Partway through — it is the 6th of 22 steps, not the last — you
 should see:
 
 ```
@@ -134,8 +141,48 @@ signing into it.
 
 ## Verify
 
+**Which case are you in?** Open the species page. If it shows the ordinary photo carousel,
+the species has no high-resolution tiles. If it opens a **zoomable viewer**, it does — and
+the viewer renders *instead of* the catalogued photographs, so your new row will not be on
+that page at all.
+
+**No tiles — verify on the species page:**
+
 - `_site/species/{slug}/index.html` contains an `<img>` for the new photo.
 - Open the species page in a browser and confirm the image loads.
+
+**Tiled — verify on a surface that reads `data/images.csv`.** The account not showing your
+photograph is expected here, not a failed build. `/browse/`, Identify and other species'
+"similar species" rows never consult tile status, so the photograph normally reaches at
+least one of them:
+
+```bash
+npm run report:hidden-images
+grep "Acronicta americana-A-D.jpg" data/hidden-images-report.csv
+```
+
+That report needs no build of its own. The row it prints answers two different questions in
+two columns, and both matter:
+
+- **`displayed_as`** — *where* the photograph appears (`browse`, `identify`, `similar`).
+  Any value means it is on the site somewhere; blank means it is on no page at all.
+- **`cause`** — *why* the account does not show it. This is the column that decides what to
+  do about it, and not every cause is the same kind of problem:
+
+| `cause` | What it means | What to do |
+|---|---|---|
+| `superseded-by-tiles` | A tile of the **same specimen and view** already shows this moth, at higher resolution. | Nothing. This is the normal outcome for a tiled species. |
+| `hidden-by-tiles` | No tile covers this specimen and view, so the account shows neither. | Worth a curator's eye — should this specimen be tiled too? |
+| `unmatchable-by-tiles` | The row has no `specimen` or no `view`, so it cannot be compared to the tiles at all. | Yours to fix: fill in those two columns of the row you just added. |
+| `cdn-missing` | The last CDN inventory did not find the object. | Yours to fix: the upload or its derivatives did not land. Re-check step 1 and [GENERATING_DERIVATIVES.md](GENERATING_DERIVATIVES.md). |
+
+So read `cause` first. A blank `displayed_as` next to `cdn-missing` or `unmatchable-by-tiles`
+is your own step to finish, not a question for anyone; a blank one next to `hidden-by-tiles`
+is the case that genuinely needs the curator. (`family-withheld` and `species-unpublished`
+appear in that column too, but only for species with no public page at all — if you are
+adding a photograph to one of those, nothing you do will make it visible until the gate
+lifts.) The rules behind all of this are in
+[docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md).
 
 ## Reading a failure
 

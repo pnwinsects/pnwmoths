@@ -399,3 +399,33 @@ Those tile URLs are public the moment the upload finishes, and the standing rule
 the Storage Zone applies to them like everything else: it is additive, and nothing is
 ever deleted from it ([ADR 0008](../docs/adr/0008-deploy-bunny-additive.md)). Re-running
 this runbook overwrites objects in place, which is safe; removing them is not.
+
+### Tiling a species HIDES its catalogued photographs — from its own page only
+
+Once `data/species-photos.json` marks a species `high_res_available`, its account renders
+the deep-zoom viewer **instead of** its `data/images.csv` photographs, not alongside them.
+Every one of them disappears from that page, including views the tiles do not cover — a
+ventral shot with no ventral tile is simply gone.
+
+They do not necessarily disappear from the **site**. `/browse/`, Identify and other species'
+"similar species" rows read `data/images.csv` and never consult tile status — but each shows
+only ONE photograph per species, the lightest by `weight`, so of a species' six photographs
+at most one or two are visible anywhere once its account shows tiles. This asymmetry is
+`TILE_POLICY` in
+[`src/_lib/photo-display.ts`](../src/_lib/photo-display.ts) —
+[docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md) has the
+table.
+
+**So check what you displaced.** After `photos:materialize`, run:
+
+```bash
+npm run report:hidden-images
+```
+
+and look at `data/hidden-images-report.csv` for the slugs you just tiled. Read `cause`
+before `displayed_as`: `superseded-by-tiles` is the normal outcome and needs nothing (a tile
+of the same specimen and view now shows that moth better), while `hidden-by-tiles` means no
+tile covers that specimen and view. A `hidden-by-tiles` row with a blank `displayed_as` is a
+photograph your tiling run removed from the site entirely — that is the one worth putting in
+front of the curator. `unmatchable-by-tiles` is neither: it means the row has no `specimen`
+or no `view` to compare, which is a data fix rather than a judgement call.
