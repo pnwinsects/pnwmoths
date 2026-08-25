@@ -705,34 +705,10 @@ species/xestia-c/index.html,object,5160,xestia-c,stale-site,not in the current _
 species/xestia-c/records.parquet,object,15960,xestia-c,stale-site,not in the current _site-manifest.json; xestia-c is not in data/species.csv
 species/xylophanes-nr libya/index.html,object,2847,xylophanes-nr libya,stale-site,not in the current _site-manifest.json; xylophanes-nr libya is not in data/species.csv
 species/xylophanes-nr-libya/records.parquet,object,2137,xylophanes-nr-libya,stale-site,not in the current _site-manifest.json; xylophanes-nr-libya is gated and gets no page
-species-tiles/amphipyra-tragopoginis/B-D.dzi,object,206,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
-species-tiles/amphipyra-tragopoginis/B-D_files/,tile-pyramid,,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
-species-tiles/amphipyra-tragopoginis/B-D_thumbnail.webp,object,123558,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
-species-tiles/amphipyra-tragopoginis/B-V.dzi,object,206,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
-species-tiles/amphipyra-tragopoginis/B-V_files/,tile-pyramid,,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
-species-tiles/amphipyra-tragopoginis/B-V_thumbnail.webp,object,121568,amphipyra-tragopoginis,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; amphipyra-tragopoginis is published
-species-tiles/aseptis-fanatica/B-D.dzi,object,206,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
-species-tiles/aseptis-fanatica/B-D_files/,tile-pyramid,,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
-species-tiles/aseptis-fanatica/B-D_thumbnail.webp,object,178678,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
-species-tiles/aseptis-fanatica/B-V.dzi,object,206,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
-species-tiles/aseptis-fanatica/B-V_files/,tile-pyramid,,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
-species-tiles/aseptis-fanatica/B-V_thumbnail.webp,object,190802,aseptis-fanatica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; aseptis-fanatica is published
 species-tiles/catocala-allusa/A-D.dzi,object,206,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-D_files/,tile-pyramid,,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-V.dzi,object,206,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-V_files/,tile-pyramid,,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
-species-tiles/enargia-infumata/D-D.dzi,object,206,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
-species-tiles/enargia-infumata/D-D_files/,tile-pyramid,,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
-species-tiles/enargia-infumata/D-D_thumbnail.webp,object,131924,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
-species-tiles/enargia-infumata/D-V.dzi,object,206,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
-species-tiles/enargia-infumata/D-V_files/,tile-pyramid,,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
-species-tiles/enargia-infumata/D-V_thumbnail.webp,object,129548,enargia-infumata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; enargia-infumata is published
-species-tiles/lacinipolia-bucketti/D-D.dzi,object,206,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
-species-tiles/lacinipolia-bucketti/D-D_files/,tile-pyramid,,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
-species-tiles/lacinipolia-bucketti/D-D_thumbnail.webp,object,137338,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
-species-tiles/lacinipolia-bucketti/D-V.dzi,object,206,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
-species-tiles/lacinipolia-bucketti/D-V_files/,tile-pyramid,,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
-species-tiles/lacinipolia-bucketti/D-V_thumbnail.webp,object,130124,lacinipolia-bucketti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; lacinipolia-bucketti is published
 species-tiles/macaria-bitactata/A-D.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/A-D_files/,tile-pyramid,,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/A-V.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
@@ -777,30 +753,6 @@ species-tiles/protorthodes-rufula/A-D.dzi,object,206,protorthodes-rufula,tiles-n
 species-tiles/protorthodes-rufula/A-D_files/,tile-pyramid,,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-V.dzi,object,206,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
 species-tiles/protorthodes-rufula/A-V_files/,tile-pyramid,,protorthodes-rufula,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-rufula is not in data/species.csv
-species-tiles/resapamea-innota/C-D.dzi,object,206,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
-species-tiles/resapamea-innota/C-D_files/,tile-pyramid,,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
-species-tiles/resapamea-innota/C-D_thumbnail.webp,object,144740,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
-species-tiles/resapamea-innota/C-V.dzi,object,206,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
-species-tiles/resapamea-innota/C-V_files/,tile-pyramid,,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
-species-tiles/resapamea-innota/C-V_thumbnail.webp,object,131168,resapamea-innota,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-innota is published
-species-tiles/resapamea-passer/D-D.dzi,object,206,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
-species-tiles/resapamea-passer/D-D_files/,tile-pyramid,,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
-species-tiles/resapamea-passer/D-D_thumbnail.webp,object,177844,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
-species-tiles/resapamea-passer/D-V.dzi,object,206,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
-species-tiles/resapamea-passer/D-V_files/,tile-pyramid,,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
-species-tiles/resapamea-passer/D-V_thumbnail.webp,object,137108,resapamea-passer,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; resapamea-passer is published
-species-tiles/schinia-honesta/C-D.dzi,object,206,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
-species-tiles/schinia-honesta/C-D_files/,tile-pyramid,,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
-species-tiles/schinia-honesta/C-D_thumbnail.webp,object,166262,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
-species-tiles/schinia-honesta/C-V.dzi,object,206,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
-species-tiles/schinia-honesta/C-V_files/,tile-pyramid,,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
-species-tiles/schinia-honesta/C-V_thumbnail.webp,object,142692,schinia-honesta,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; schinia-honesta is published
-species-tiles/smerinthus-ophthalmica/B-D.dzi,object,206,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
-species-tiles/smerinthus-ophthalmica/B-D_files/,tile-pyramid,,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
-species-tiles/smerinthus-ophthalmica/B-D_thumbnail.webp,object,184566,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
-species-tiles/smerinthus-ophthalmica/B-V.dzi,object,206,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
-species-tiles/smerinthus-ophthalmica/B-V_files/,tile-pyramid,,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
-species-tiles/smerinthus-ophthalmica/B-V_thumbnail.webp,object,168766,smerinthus-ophthalmica,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; smerinthus-ophthalmica is published
 species-tiles/speranza-andersoni/A-D.dzi,object,206,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-D_files/,tile-pyramid,,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
 species-tiles/speranza-andersoni/A-V.dzi,object,206,speranza-andersoni,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; speranza-andersoni is not in data/species.csv
@@ -809,10 +761,4 @@ species-tiles/sympistis-chionanti/A-D.dzi,object,206,sympistis-chionanti,tiles-n
 species-tiles/sympistis-chionanti/A-D_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V.dzi,object,206,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
-species-tiles/tarache-toddi/C-D.dzi,object,206,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
-species-tiles/tarache-toddi/C-D_files/,tile-pyramid,,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
-species-tiles/tarache-toddi/C-D_thumbnail.webp,object,132238,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
-species-tiles/tarache-toddi/C-V.dzi,object,206,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
-species-tiles/tarache-toddi/C-V_files/,tile-pyramid,,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
-species-tiles/tarache-toddi/C-V_thumbnail.webp,object,134220,tarache-toddi,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; tarache-toddi is published
 test/somefile.jpg,object,750219,,unknown,
