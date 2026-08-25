@@ -35,9 +35,14 @@
  * that so a future migration with a large cycle fails loudly instead of
  * swapping to death.
  *
- * Additive and idempotent, per ADR 0008: nothing is deleted, an object already
- * present at full length is skipped, and the vacated paths are recorded in
- * `data/cdn-retired-images.csv` rather than removed.
+ * Additive, per ADR 0008: nothing is deleted, and the vacated paths are recorded
+ * in `data/cdn-retired-images.csv` rather than removed.
+ *
+ * Idempotent for the ten moves that write to a path which did not exist — an
+ * object already present at full length is skipped. NOT idempotent for the
+ * swap, and it cannot be made so: both sides exist at the same lengths before
+ * and after, so re-running reverts it. That path is therefore gated behind
+ * CONFIRM_SWAP=1; see the check in main().
  *
  * PURGE AFTER A SWAP. Ten of the eleven re-keys write to a path that did not
  * exist, so ADR 0009's "no manual purge" holds. The Mniotype swap does not: it
@@ -129,6 +134,19 @@ export function retarget(key: string, fromPrefixKey: string, toPrefixKey: string
     if (key.startsWith(from)) return `${base}${toPrefixKey}${key.slice(from.length)}`;
   }
   return key;
+}
+
+/**
+ * The tile set an object belongs to: `species-tiles/<slug>/<spec>-<view>`.
+ *
+ * Trims the `derived/` prefix and everything the leaf accretes — `.dzi`,
+ * `_files/12/3_4.webp`, `_thumbnail@530.webp` — so ~230 objects collapse to the
+ * one name a human recognises.
+ */
+export function tileSetPrefixOf(key: string): string {
+  const [bucket, slug, leaf] = key.replace(/^derived\//, '').split('/');
+  const stem = (leaf ?? '').replace(/(\.[^.]*|_files|_thumbnail.*)$/, '');
+  return `${bucket}/${slug}/${stem}`;
 }
 
 export function storageUrl(key: string): string {
@@ -296,6 +314,41 @@ async function main(): Promise<void> {
         `${cyclic.length} objects are both a source and a destination (${(cyclicBytes / 1e6).toFixed(1)} MB), ` +
           `over the ${(BUFFER_LIMIT_BYTES / 1e6).toFixed(0)} MB buffer limit. Split the migration rather than raising it.`,
       );
+    }
+
+    // A SWAP IS ONE-SHOT, AND THE SCRIPT CANNOT TELL WHETHER IT HAS RUN.
+    //
+    // Every other move here is idempotent: the destination is a path that did
+    // not exist, so "already there at the right length" means done. A swap has
+    // no such tell. Both sides exist before and after, at the same lengths,
+    // because they are tiles of two similar moths at identical dimensions — and
+    // re-running reads the already-swapped source and puts it back, silently
+    // reverting the fix in production.
+    //
+    // So refuse, and make a human assert it. Verify which way round the zone
+    // currently is by comparing a tile against the catalogued photograph rather
+    // than by trusting a length:
+    //
+    //   curl -so t.webp https://moths.pnwinsects.org/species-tiles/mniotype-ducta/A-D_files/8/0_0.webp
+    //   magick compare -metric RMSE t.webp <the JPEG images.csv files under mniotype-ducta> null:
+    //
+    // ~0.01–0.03 is the same photograph re-encoded; ~0.1 is a different moth.
+    // Fetch from the storage API, not the pull zone: tiles carry
+    // max-age=25600000 and the edge will show you the pre-migration bytes.
+    if (process.env['CONFIRM_SWAP'] !== '1') {
+      console.error(`${TAG} ${cyclic.length} objects form a swap (${(cyclicBytes / 1e6).toFixed(1)} MB):`);
+      // Derived from the cyclic OBJECTS, not from `moves`: a move whose source
+      // tile set does not exist contributes no objects and is not part of any
+      // cycle, but its prefix can still appear as another move's destination.
+      // Listing those would name innocent species in a warning about a swap.
+      const cyclicPairs = new Set(
+        cyclic.map(p => [p.from, p.to].map(tileSetPrefixOf).sort().join(' <-> ')),
+      );
+      for (const pair of [...cyclicPairs].sort()) console.error(`${TAG}   ${pair}`);
+      console.error(`${TAG} A swap cannot be detected as already-applied — re-running REVERTS it.`);
+      console.error(`${TAG} Verify the zone's current state first (see the comment at this check), then:`);
+      console.error(`${TAG}   CONFIRM_SWAP=1 node scripts/migrate-determined-photo-tiles.ts`);
+      process.exit(1);
     }
     console.log(`${TAG} ${cyclic.length} objects form a swap (${(cyclicBytes / 1e6).toFixed(1)} MB) — buffering before any write`);
   }

@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { planMoves, retarget, sourcePathParts, storageUrl } from './migrate-determined-photo-tiles.ts';
+import { planMoves, retarget, sourcePathParts, storageUrl, tileSetPrefixOf } from './migrate-determined-photo-tiles.ts';
 import type { PhotoDetermination } from './lib/photo-determinations.ts';
 
 function det(rows: [stem: string, slug: string, specimen: string][]): Map<string, PhotoDetermination> {
@@ -103,6 +103,26 @@ describe('storageUrl', () => {
     assert.equal(
       storageUrl('species-tiles/tarache-toddi/C-D.dzi'),
       'https://la.storage.bunnycdn.com/pnwmoths/species-tiles/tarache-toddi/C-D.dzi',
+    );
+  });
+});
+
+describe('tileSetPrefixOf', () => {
+  // The swap refusal prints these. A pair naming the wrong species — or naming
+  // 576 objects instead of two tile sets — is a warning nobody can act on.
+  it('collapses every object in a tile set to the one name a human recognises', () => {
+    const want = 'species-tiles/mniotype-ducta/A-D';
+    assert.equal(tileSetPrefixOf('species-tiles/mniotype-ducta/A-D.dzi'), want);
+    assert.equal(tileSetPrefixOf('species-tiles/mniotype-ducta/A-D_files/12/3_4.webp'), want);
+    assert.equal(tileSetPrefixOf('species-tiles/mniotype-ducta/A-D_thumbnail.webp'), want);
+    assert.equal(tileSetPrefixOf('derived/species-tiles/mniotype-ducta/A-D_thumbnail@530.webp'), want);
+    assert.equal(tileSetPrefixOf('derived/species-tiles/mniotype-ducta/A-D_thumbnail@1200.jpg'), want);
+  });
+
+  it('keeps A-D and A-V apart', () => {
+    assert.notEqual(
+      tileSetPrefixOf('species-tiles/mniotype-ducta/A-D_thumbnail.webp'),
+      tileSetPrefixOf('species-tiles/mniotype-ducta/A-V_thumbnail.webp'),
     );
   });
 });
