@@ -26,7 +26,8 @@
  *   retired-photo    an `old_path` in data/cdn-retired-images.csv (kept on purpose)
  *   glossary-image   an `image_filename` in data/glossary.csv
  *   key-image        an `image_filename` in data/key-character-images.csv
- *   tiles            a tile pyramid for an uploaded data/species-photos-manifest.csv row
+ *   tiles            a tile pyramid for an uploaded data/species-photos-manifest.csv
+ *                    row, after data/photo-determinations.csv is applied to it
  *   plate            a Zoomify tile tree for a `slug` in data/plates.json
  *   analytics        the `_analytics/` prefix scripts/upload-analytics.ts owns
  *   superseded-build a content-addressed bundle or search shard from an earlier deploy
@@ -69,6 +70,8 @@ import { stringify } from 'csv-stringify/sync';
 import { createBunnyStorage } from './lib/bunny-storage.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished, normalizeSlug } from '../src/_lib/unpublished-species.ts';
+import { applyDeterminations } from './generate-species-photos.ts';
+import { readPhotoDeterminations } from './lib/photo-determinations.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const TAG = '[emit-cdn-inventory]';
@@ -150,6 +153,19 @@ export interface Sources {
   derivatives: ReadonlySet<string>;
   /** `{species_slug}/{filename}` from data/images.csv. */
   photos: ReadonlySet<string>;
+  /**
+   * `{filename}` → the slugs data/images.csv files it under.
+   *
+   * The catalogue registers a photograph by (slug, filename), and the slug is
+   * the curator's determination while the filename is what the moth was called
+   * when it was photographed. Those diverge on every redetermination, so an
+   * object sitting at `<old-species>/<filename>` is a *copy at a superseded
+   * path*, not an unregistered photograph — the catalogue accounts for it, just
+   * under a different folder. Matching on the full path alone cannot tell the
+   * two apart, and reported eleven such copies as findings for the curator on
+   * #330 when every one was already determined and published elsewhere.
+   */
+  photosByFilename: ReadonlyMap<string, readonly string[]>;
   /** `old_path` → `superseded_by`, from data/cdn-retired-images.csv. */
   retired: ReadonlyMap<string, string>;
   /** `glossary/{image_filename}` from data/glossary.csv. */
@@ -355,6 +371,18 @@ function describe(unit: Unit, sources: Sources): { shape: string; detail: string
     return { shape: 'stale-site', detail: join('not in the current _site-manifest.json', slugNote) };
   }
   if (slug !== null) {
+    // Registered, but under another species: this is a copy left at the path the
+    // photograph had before it was redetermined. Distinct from an unregistered
+    // photograph, and NOT a curator question — the determination has already been
+    // made, and the only outstanding work is a row in data/cdn-retired-images.csv.
+    const filename = bare.slice(slug.length + 1);
+    const elsewhere = (sources.photosByFilename.get(filename) ?? []).filter((s) => s !== slug);
+    if (elsewhere.length > 0) {
+      return {
+        shape: 'photo-refiled',
+        detail: `data/images.csv files this filename under ${elsewhere.join(', ')}; copy at a superseded path`,
+      };
+    }
     return { shape: 'photo-no-row', detail: join('no row in data/images.csv', slugNote) };
   }
   return { shape: 'unknown', detail: '' };
@@ -567,7 +595,13 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
   const retiredRows = readCsv<{ old_path: string; superseded_by: string }>(resolve(dataDir, 'cdn-retired-images.csv'));
   const glossary = readCsv<{ image_filename?: string }>(resolve(dataDir, 'glossary.csv'));
   const keyImages = readCsv<{ image_filename?: string }>(resolve(dataDir, 'key-character-images.csv'));
-  const photoManifest = readCsv<{ species_slug: string; specimen_id: string; view: string; status: string }>(
+  const photoManifest = readCsv<{
+    filename_raw: string;
+    species_slug: string;
+    specimen_id: string;
+    view: string;
+    status: string;
+  }>(
     resolve(dataDir, 'species-photos-manifest.csv'),
   );
   const plates = JSON.parse(readFileSync(resolve(dataDir, 'plates.json'), 'utf8')) as Array<{ slug?: string }>;
@@ -597,13 +631,27 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
     siteDirs,
     derivatives: new Set(derivatives.map((r) => r.derived_path)),
     photos: new Set(images.filter((r) => r.species_slug && r.filename).map((r) => `${r.species_slug}/${r.filename}`)),
+    photosByFilename: images
+      .filter((r) => r.species_slug && r.filename)
+      .reduce<Map<string, string[]>>((acc, r) => {
+        const slugs = acc.get(r.filename) ?? [];
+        if (!slugs.includes(r.species_slug)) slugs.push(r.species_slug);
+        return acc.set(r.filename, slugs);
+      }, new Map()),
     retired: new Map(retiredRows.filter((r) => r.old_path).map((r) => [r.old_path, r.superseded_by ?? ''])),
     glossaryImages: new Set(glossary.filter((r) => r.image_filename).map((r) => `glossary/${r.image_filename}`)),
     keyImages: new Set(keyImages.filter((r) => r.image_filename).map((r) => `key-images/${r.image_filename}`)),
     // Only rows whose tiles actually reached the zone: a `tiled` row's pyramid
     // is on the workstation, and a pyramid here for one is worth reporting.
+    // Determinations applied FIRST, exactly as generate-species-photos.ts does.
+    // The manifest records what ingest read off each filename; where the curator
+    // has since said the photograph is a different species, the tiles were
+    // re-keyed to match `data/species-photos.json`, not the manifest. Joining
+    // against the raw manifest reports every re-keyed destination as a pyramid
+    // nothing accounts for, and — worse — keeps accounting for the vacated
+    // source as if it were still live.
     tilePairs: new Set(
-      photoManifest
+      applyDeterminations(photoManifest, readPhotoDeterminations())
         .filter((r) => r.status === 'uploaded' && r.species_slug)
         .map((r) => `species-tiles/${r.species_slug}/${r.specimen_id}-${r.view}`),
     ),

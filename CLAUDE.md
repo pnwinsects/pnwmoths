@@ -20,6 +20,8 @@ Work is tracked in **GitHub Issues** (`gh`) — the single, authoritative, share
 
 Label an issue **`curation`** when it is blocked on the curator's taxonomic or content judgement rather than on engineering — a merge to confirm, a species whose photos need a destination, a name we may or may not want to follow. `gh issue list --label curation` is the short list to put in front of him. See [docs/agents/triage-labels.md](docs/agents/triage-labels.md).
 
+**Before you ask him anything, read [docs/agents/asking-the-curator.md](docs/agents/asking-the-curator.md).** His attention is the scarcest resource here. #330 put twelve numbered questions to him and all twelve were answerable from the repo or a public URL — while the actual defect those findings pointed at (eleven accounts publishing another species' photographs) went unasked, because no report looked at what a page displays.
+
 ## Agent skills
 
 Config that the engineering skills (`to-issues`, `to-prd`, `grill-with-docs`, `improve-codebase-architecture`, …) read from:
@@ -38,6 +40,7 @@ Implementation patterns, constraints, and gotchas from the high-res photo pipeli
 - **Occurrence data loads async from per-species Parquet** (Snappy compression, read by hyparquet); it is never inlined and is excluded from the Pagefind index.
 - **`pathPrefix` is conditional on `process.env.GITHUB_PAGES`** — `/` for production, `/pnwmoths/` for GitHub Pages staging. Never hardcode `/pnwmoths/`.
 - **`CDN_BASE_URL` is a hard-coded public constant** in `eleventy.config.ts` — not a secret, not an env var.
+- **A photograph's species is data, not its filename** — filenames are permanent opaque identifiers and are never rewritten; where the filename disagrees with the catalogue, the ruling lives in `data/photo-determinations.csv` and `scripts/check-photo-determinations.ts` fails the build if a tiled specimen slot holds a photograph the catalogue assigns elsewhere ([ADR 0038](docs/adr/0038-photo-identity-is-data-not-filename.md)).
 - **Data mutations are additive-only and idempotent** — district write-back and CDN migrations never overwrite curator-entered values; disagreements go to advisory reports, never build failures. Every advisory report is listed at the unlinked `/curation/` index, driven by the manifest in [`src/_data/curationReports.ts`](src/_data/curationReports.ts) — **a new report means a new entry there**, or nobody can reach it ([ADR 0037](docs/adr/0037-curation-reports-published-unlinked.md)).
 
 See [docs/lessons-learned.md](docs/lessons-learned.md) for the full set of build-pipeline / DuckDB / Lit gotchas.

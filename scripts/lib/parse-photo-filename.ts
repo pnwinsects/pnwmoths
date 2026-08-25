@@ -180,6 +180,27 @@ export function extractBinomial(filename: string): ExtractBinomialResult {
  * is always exactly D (dorsal) or V (ventral), case-sensitive, immediately
  * before the extension.
  */
+/**
+ * The filename with its trailing `-<specimen>-<view>` removed, and the extension
+ * dropped — i.e. the part that names the moth.
+ *
+ * Exported because two consumers outside ingest need to answer "what species
+ * does this filename claim?" and must answer it *exactly* as ingest does, or
+ * the gate that compares the two readings has a blind spot. Rolling a private
+ * regex instead is what left `scripts/check-photo-determinations.ts` unable to
+ * see the space-separated names this module admits on purpose (`Euxoa absona
+ * A-D.jpg`, FIX in the SEP comment above) — seven of which are tiled.
+ *
+ * Deliberately NOT extractBinomial(): that splits on the first space and so
+ * reads `Mniotype aff tenera-B-V` as "mniotype aff", losing the epithet of a
+ * real species. Stripping only the tail leaves the whole binomial, however many
+ * tokens it has, for the caller to normalise.
+ */
+export function stripSpecimenTail(filename: string): string {
+  if (typeof filename !== 'string' || !filename) return '';
+  return filename.replace(/\.[^.]+$/, '').replace(TAIL_STRIP_RE, '');
+}
+
 export function parseSpecimenAndView(filename: string): ParseSpecimenAndViewResult {
   if (typeof filename !== 'string' || !filename) {
     return { specimen: '', view: '' };

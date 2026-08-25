@@ -37,9 +37,22 @@ Use `curl` whenever you need verbatim legacy text.
 longer returns legacy HTML for every path. Two fallbacks, in order:
 
 - <https://dev.pnwmoths.biol.wwu.edu/> still serves the original site, including
-  the pages that have been cut over. It is login-gated, so `curl` will not reach
-  it — use a browser session. This is the authority for what the old site
-  *rendered*, as opposed to what it stored.
+  the pages that have been cut over. The **pages** are login-gated, so `curl` will
+  not reach them — use a browser session. This is the authority for what the old
+  site *rendered*, as opposed to what it stored.
+
+  **But `/media/` is public.** Every specimen photograph the legacy site ever held
+  is at `https://dev.pnwmoths.biol.wwu.edu/media/moths/<filename>`, served without
+  authentication, with cached thumbnails alongside at
+  `/media/moths/cache/<filename>.141x93_q95.jpg`. Spaces and underscores are
+  interchangeable in the filename; the server normalises them.
+
+  This is the recovery path for any photograph missing from the CDN, and it is
+  worth checking **before** asking the curator whether an original still exists —
+  #232 sat open for a year on a question one HEAD request answers, and all 83 of
+  its files were there ([C-027](../curation-log.md)). A photograph re-lettered by
+  a later merge exists only under its *original* filename, so reverse the letter
+  map from the curation log before concluding it is gone.
 - The reference MySQL database below holds the same content and, for the browse
   hierarchy, holds it in a more usable form.
 

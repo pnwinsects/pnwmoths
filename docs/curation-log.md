@@ -73,6 +73,99 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-028 · 2026-08-24 · Eleven photographs were of another species than the account showing them; the tiles move, the filenames do not
+
+**Source** [#330 comment](https://github.com/pnwinsects/pnwmoths/issues/330#issuecomment-5400837287)
+and [#336 comment](https://github.com/pnwinsects/pnwmoths/issues/336#issuecomment-5401307703),
+the curator's own words · **Status** Applied (determinations, catalogue letters, tile re-key — this PR);
+Pending (uploading the untiled *A. keiferi* and *N. frigidana* TIFFs — #342) · **Refines** C-026
+
+Asked which of a set of apparently unregistered photographs to publish, the curator answered by
+redetermining nine of them and crossing a tenth pair:
+
+> 3: All images with filename Amphipoea senilis are actually Amphipoea keiferi. The images with
+> filename Amphipoea keiferi are actually Resapamea innota.
+> 4: Aseptis ethnica-A-D and Aseptis ethnica-A-V are actually Aseptis fanatica.
+> 5: Enargia fausta-A-D and Enargia fausta-A-V are actually Enargia infumata.
+> 6: Lacinipolia olivacea-D-D and Lacinopolia olivacia-D-V are actually Lacinipolia bucketti
+> 7: Nycteola frigidana-A-D and Nycteola frigidana-A-V are actually Lacinipola cinereana
+> 8: Proxenus miranda-B-D and Proxenus miranda-B-V are actually Amphipyra tragopoginis
+> 9: Resapamea venosa-B-D and Resapamea venosa-B-V are actually Resapamea passer
+> 10: Schinia intermontana-A-D and Schinia intermontana-A-D are actually Schinia honesta
+> 11: Smerinthus cerisyi-A-D and Smerinthus cerisyi-A-V are actually Smerinthus ophthalmica
+
+and, on #330 Q1, *"Filenames with ducta are actually tenera and vice versa"*; on #336 item 11,
+*"Tarache areli-C-D and C-V are actually Tarache toddi."*
+
+Why it matters: **`data/images.csv` already recorded every one of these determinations.** The
+question #330 asked — publish these or leave them? — rested on a false premise, and the objects it
+listed are re-encoded copies of the same photographs left at their pre-redetermination paths
+(identical dimensions, RMSE ≈ 0.014; ~15% smaller, which is why the checksum-based duplicate scan
+in #331 did not pair them). Nothing needed publishing.
+
+What the answers did surface is that the *tiles* never got the determinations. They are keyed by
+the photo manifest's `species_slug`, derived from the TIFF's filename, and
+`src/species/species.njk` renders a species' tiles **instead of** its catalogued photographs. So
+eleven accounts published another species' photographs at full resolution while `data/images.csv`
+was correct throughout — the *Amphipoea keiferi* page showed nothing but *Resapamea innota*.
+Verified per tile against both candidate photographs before anything was moved. `tarache-areli`
+was not in #330 at all; it has no leftover object in its CDN folder, so the inventory could not
+see it.
+
+Two of the curator's lines needed reading rather than transcribing, and both are recorded in
+`data/photo-determinations.csv` rather than silently corrected. *"Lacinipola cinereana"* (7) is
+not a species: the congener is ***Nycteola* cinereana**, which is what `data/images.csv` already
+said. (10) names `Schinia intermontana-A-D` twice where the pair is the dorsal and its ventral.
+
+The open question from (1) — *"I will need to see if we have a ventral for tenera"* — resolves
+**yes**. No tenera ventral exists as a JPEG, but `Mniotype ducta-A-V.tif` is uploaded and tiled,
+and by the curator's own crosswise rule that file is *tenera*. It was being shown on the *ducta*
+account; the swap gives both species a complete dorsal-and-ventral pair.
+
+Letters follow C-026 — the incoming photograph keeps its letter unless the destination already
+uses it, in which case it takes the next free one, and the incumbent is never renumbered:
+*innota* A→C, *fanatica* A→B, *infumata* A→D, *cinereana* A→C, *passer* B→D, *honesta* A→C,
+*ophthalmica* A→B; *bucketti* D, *tragopoginis* B, *toddi* C and both *Mniotype* A were free and
+kept. Filenames are **not** rewritten ([ADR 0038](adr/0038-photo-identity-is-data-not-filename.md)),
+which reverses the C-023 practice of re-lettering them — that practice is why ten of the 83
+photographs in #232 could not be found on the legacy host under their catalogued names.
+
+What changed (this PR): `data/photo-determinations.csv` added, 28 rulings;
+`data/images.csv` 13 specimen letters; `data/species-photos.json` regenerated through the new
+determinations layer; 2,698 tile objects re-keyed on the CDN
+(`scripts/migrate-determined-photo-tiles.ts`); 88 rows retargeted in
+`data/image-derivatives.csv`; 163 rows added to `data/cdn-retired-images.csv` (110 vacated tile
+thumbnails and variants, 23 legacy JPEGs at pre-redetermination paths — including #330 Q2's
+`mniotype-species/` pair, confirmed *"Yes"*); `scripts/check-photo-determinations.ts` added to
+`build:site`.
+
+## C-027 · 2026-08-24 · The 83 Geometridae photographs still exist; they were never a curator question
+
+**Source** [#330 comment](https://github.com/pnwinsects/pnwmoths/issues/330#issuecomment-5400837287),
+the curator's own words · **Status** Applied (#232)
+
+> 12: The specific example listed under issue 232 (Dasyfidonia avuncularia - A-D.jpg) does exist on
+> the dev site (with the incorrect extra spaces before and after "A" in the filename). Based on
+> this, I assume the others are there too, but I can't confirm without a list.
+
+Why it matters: he was right, and he should never have been asked. **All 83 exist** on
+`dev.pnwmoths.biol.wwu.edu` under `/media/moths/`, which serves them without authentication — so
+this was answerable mechanically at any point in the year the question sat open. #330 asked "do
+the originals still exist, and do we want these species illustrated?" when only the second half
+was ever his to answer, and the second half is moot once the first is *yes*.
+
+73 resolve under the filename `data/images.csv` carries. The other ten are the *Macaria signaria*
+merge: C-023 re-lettered their **filenames** (*unipunctaria* B→C and A→D, *submarmorata* A→E,
+*marmorata* A→F and B→G), so on the legacy host they exist only under the letters they carried
+before it. Reversing that map found all ten. This is the concrete cost of rewriting a filename,
+and the reason [ADR 0038](adr/0038-photo-identity-is-data-not-filename.md) forbids it.
+
+The count in `docs/concerns.md` was also wrong: 24 species, not 27.
+
+What changed: 83 originals recovered and uploaded to the CDN, derivatives generated and recorded
+in `data/image-derivatives.csv`; `docs/concerns.md` corrected; #232 closed. The Geometridae
+embargo (#48) no longer has a missing-photo blocker.
+
 ## C-026 · 2026-08-10 · The five stranded-photo species: three return to *Macaria*, two stay *Speranza*, *Digrammia decorata* stands apart
 
 **Source** [#279 comment](https://github.com/pnwinsects/pnwmoths/issues/279#issuecomment-5245197930),
