@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdtempSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
-import { tilePrefix, tiffCachePath, isAlreadyTiled, isTileable, isMissingThumbnail } from './tile-photos.ts';
+import { tilePrefix, tiffCachePath, isAlreadyTiled, isTileable, isMissingThumbnail, findSlotCollisions, excludedBySlugFilter } from './tile-photos.ts';
 import type { ManifestRow } from './lib/manifest.ts';
 
 // ---------------------------------------------------------------------------
@@ -104,6 +104,12 @@ describe('isTileable', () => {
     assert.equal(isTileable(row({ match_bucket: 'resolved-via-synonym' })), true);
   });
 
+  // A curator's ruling is curation: the six #342 TIFFs sat in genus-only, ruled on
+  // and untileable, until photos:investigate learned to file them by determination.
+  it('returns true for match_bucket resolved-via-determination', () => {
+    assert.equal(isTileable(row({ match_bucket: 'resolved-via-determination' })), true);
+  });
+
   it('returns true for match_bucket slug-match', () => {
     assert.equal(isTileable(row({ match_bucket: 'slug-match' })), true);
   });
@@ -157,6 +163,62 @@ describe('isTileable', () => {
 // ---------------------------------------------------------------------------
 // Suite 5: isMissingThumbnail
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Suite: findSlotCollisions — never overwrite another photograph's tiles
+// ---------------------------------------------------------------------------
+describe('findSlotCollisions', () => {
+  const held = row({ content_hash: 'a'.repeat(64), filename_raw: 'Macaria colata-A-D.tif', species_slug: 'macaria-colata', status: 'uploaded' });
+
+  it('blocks a tileable row whose slot is already tiled or uploaded by another photograph', () => {
+    const incoming = row({ content_hash: 'b'.repeat(64), filename_raw: 'Speranza colata-A-D.tif', species_slug: 'macaria-colata' });
+    const blocked = findSlotCollisions([held, incoming]);
+    assert.equal(blocked.size, 1);
+    assert.match(blocked.get(incoming.content_hash)!, /macaria-colata\/A-D is already held by Macaria colata-A-D.tif \(uploaded\)/);
+    assert.match(blocked.get(incoming.content_hash)!, /photo-determinations\.csv/);
+  });
+
+  it('lets the row that already holds the slot through (a re-run of itself)', () => {
+    const retry = row({ content_hash: 'a'.repeat(64), filename_raw: 'Macaria colata-A-D.tif', species_slug: 'macaria-colata', status: 'failed' });
+    assert.equal(findSlotCollisions([retry]).size, 0);
+  });
+
+  // The Macaria signaria case: three photographs, one slot, none tiled yet.
+  it('lets the first claimant of a free slot through and blocks the rest', () => {
+    const rows = ['marmorata', 'unipunctaria', 'submarmorata'].map((name, i) =>
+      row({ content_hash: String(i).repeat(64), filename_raw: `Macaria ${name}-A-D.tif`, species_slug: 'macaria-signaria' }));
+    const blocked = findSlotCollisions(rows);
+    assert.deepEqual([...blocked.keys()], ['1'.repeat(64), '2'.repeat(64)]);
+    assert.match(blocked.get('1'.repeat(64))!, /also claimed by Macaria marmorata-A-D.tif/);
+  });
+
+  it('treats slugs case-insensitively, like tilePrefix does', () => {
+    const incoming = row({ content_hash: 'b'.repeat(64), species_slug: 'Macaria-Colata' });
+    assert.equal(findSlotCollisions([held, incoming]).size, 1);
+  });
+
+  it('ignores different views and different specimens', () => {
+    const ventral = row({ content_hash: 'b'.repeat(64), species_slug: 'macaria-colata', view: 'V' });
+    const specimenB = row({ content_hash: 'c'.repeat(64), species_slug: 'macaria-colata', specimen_id: 'B' });
+    assert.equal(findSlotCollisions([held, ventral, specimenB]).size, 0);
+  });
+
+  it('never blocks a row that is not tileable anyway', () => {
+    const parked = row({ content_hash: 'b'.repeat(64), species_slug: 'macaria-colata', match_bucket: 'genus-only' });
+    assert.equal(findSlotCollisions([held, parked]).size, 0);
+  });
+});
+
+describe('excludedBySlugFilter', () => {
+  it('excludes nothing when no filter is set', () => {
+    assert.equal(excludedBySlugFilter(row({}), new Set()), false);
+  });
+  it('keeps only the listed slugs, case-insensitively', () => {
+    const only = new Set(['amphipoea-keiferi', 'nycteola-cinereana']);
+    assert.equal(excludedBySlugFilter(row({ species_slug: 'Amphipoea-keiferi' }), only), false);
+    assert.equal(excludedBySlugFilter(row({ species_slug: 'macaria-signaria' }), only), true);
+  });
+});
 
 describe('isMissingThumbnail', () => {
   it('returns true for a complete clean-match row with status uploaded', () => {

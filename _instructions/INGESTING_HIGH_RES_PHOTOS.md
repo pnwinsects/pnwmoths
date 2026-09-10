@@ -79,7 +79,7 @@ every later step in the photo pipeline reads these columns by name.
 | `view` | `D` (dorsal) or `V` (ventral) |
 | `binomial_resolved` | Matched species binomial (empty unless `clean-match`) |
 | `species_slug` | Matched species slug (empty unless `clean-match`) |
-| `match_bucket` | `clean-match` / `slug-match` / `resolved-via-synonym` / `genus-only` / `likely-synonym` / `provisional` / `unparseable`. The first three carry a resolved `species_slug` and are the only ones [TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md) will tile; the rest need [curation](CURATING_SPECIES_SYNONYMS.md) first. `resolved-via-synonym` is written by the synonym pre-pass, not by the first ingest |
+| `match_bucket` | `clean-match` / `slug-match` / `resolved-via-synonym` / `resolved-via-determination` / `genus-only` / `likely-synonym` / `provisional` / `unparseable`. The first four carry a resolved `species_slug` and are the only ones [TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md) will tile (`resolved-via-determination` is a row `data/photo-determinations.csv` rules on, filed by `npm run photos:investigate`); the rest need [curation](CURATING_SPECIES_SYNONYMS.md) first. `resolved-via-synonym` is written by the synonym pre-pass, not by the first ingest |
 | `status` | `discovered` from this stage; later phases advance it |
 | `last_error` | Empty on success; populated only on retry-exhausted Dropbox errors |
 

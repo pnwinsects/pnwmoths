@@ -30,6 +30,8 @@ import { extractBinomial, parseSpecimenAndView, toSpeciesSlug } from './lib/pars
 import { dbxCall } from './lib/dropbox-list.ts';
 import { readManifest, writeManifest, sortForInvestigation, holdManifestLock } from './lib/manifest.ts';
 import type { ManifestRow } from './lib/manifest.ts';
+import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
+import type { PhotoDetermination } from './lib/photo-determinations.ts';
 import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
@@ -219,6 +221,62 @@ async function loadSpecies(csvPath: string): Promise<SpeciesLookup> {
     genera.add(genus.toLowerCase());
   }
   return { byBinomial, bySlug, genera };
+}
+
+/**
+ * File every manifest row the curator has determined under the species and
+ * specimen letter the determination names (ADR 0045).
+ *
+ * A determination is the last word on what a photograph is
+ * (scripts/lib/photo-determinations.ts), so this runs AFTER the synonym pass and
+ * overrides whatever the filename match or a synonym produced — including a
+ * confident `clean-match` to the wrong species, which is the case the file
+ * exists for. The row's bucket becomes `resolved-via-determination`, which
+ * tile-photos.ts treats as tileable: before this pass a determined photograph
+ * whose filename named no current species (`Amphipoea senilis-A-D.tif`) sat in
+ * `genus-only` forever, ruled on and untileable (#342).
+ *
+ * Idempotent: a row already carrying the determined values is left alone and not
+ * counted. A determination naming a slug species.csv does not have is skipped
+ * with a warning rather than written — the referential-integrity gate refuses
+ * that file anyway, and a manifest row must never point at a species that does
+ * not exist.
+ *
+ * @returns how many rows changed
+ */
+export function applyDeterminationsToManifest(
+  rows: ManifestRow[],
+  determinations: ReadonlyMap<string, PhotoDetermination>,
+  species: SpeciesLookup,
+): number {
+  let promoted = 0;
+  for (const row of rows) {
+    if (!row.filename_raw) continue;
+    const ruling = determinations.get(toPhotoStem(row.filename_raw));
+    if (!ruling) continue;
+    const target = species.bySlug.get(ruling.species_slug);
+    if (!target) {
+      console.warn(
+        `[ingest-photos] determination for "${ruling.photo_stem}" names ${ruling.species_slug}, ` +
+          'which is not in data/species.csv — left as is',
+      );
+      continue;
+    }
+    const binomial_resolved = `${target.genus} ${target.species}`.toLowerCase();
+    if (
+      row.match_bucket === 'resolved-via-determination' &&
+      row.species_slug === ruling.species_slug &&
+      row.specimen_id === ruling.specimen &&
+      row.binomial_resolved === binomial_resolved
+    ) continue;
+    row.match_bucket = 'resolved-via-determination';
+    row.species_slug = ruling.species_slug;
+    row.specimen_id = ruling.specimen;
+    row.binomial_resolved = binomial_resolved;
+    promoted++;
+    logStage(row.content_hash, 'reclassify', 'resolved-via-determination', `${row.filename_raw} → ${ruling.species_slug} ${ruling.specimen}`);
+  }
+  return promoted;
 }
 
 interface SynonymEntry {
@@ -485,11 +543,17 @@ async function main(): Promise<void> {
       logStage(row.content_hash, 'backfill', 'specimen-view', `${row.filename_raw} → ${specimen}-${view}`);
     }
 
-    // L-03: sortForInvestigation is unchanged — resolved-via-synonym rows trail
-    // with clean-match rows in the "not-needs-investigation" partition.
+    // The curator's determinations are the last word (ADR 0038, 0045): applied
+    // after the synonym pass so a ruling overrides a synonym or a clean match,
+    // and after the backfill so the letter it assigns is not "backfilled" over.
+    const determined = applyDeterminationsToManifest(existing, readPhotoDeterminations(), species);
+
+    // L-03: sortForInvestigation is unchanged — resolved-via-synonym and
+    // resolved-via-determination rows trail with clean-match rows in the
+    // "not-needs-investigation" partition.
     const sorted = sortForInvestigation(existing);
     await writeManifest(MANIFEST_PATH, sorted);
-    console.log(`[ingest-photos] re-sorted manifest; ${sorted.length} rows; ${promoted} promoted to resolved-via-synonym; ${backfilled} specimen/view backfilled`);
+    console.log(`[ingest-photos] re-sorted manifest; ${sorted.length} rows; ${promoted} promoted to resolved-via-synonym; ${determined} filed by determination; ${backfilled} specimen/view backfilled`);
     return;
   }
 

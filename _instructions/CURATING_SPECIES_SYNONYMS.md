@@ -103,7 +103,7 @@ This re-runs the script in re-sort-only mode: no Dropbox calls. It re-loads `dat
 The final log line reports the count of rows promoted:
 
 ```
-[ingest-photos] re-sorted manifest; N rows; M promoted to resolved-via-synonym
+[ingest-photos] re-sorted manifest; N rows; M promoted to resolved-via-synonym; K filed by determination; …
 ```
 
 ### 6. Confirm the promotion

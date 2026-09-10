@@ -3,7 +3,73 @@ import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { classify, loadSynonyms } from './ingest-photos.ts';
+import { classify, loadSynonyms, applyDeterminationsToManifest } from './ingest-photos.ts';
+import type { ManifestRow } from './lib/manifest.ts';
+import type { PhotoDetermination } from './lib/photo-determinations.ts';
+
+function manifestRow(overrides: Partial<ManifestRow> = {}): ManifestRow {
+  return {
+    content_hash: 'abc', dropbox_path: '/Amphipoea senilis-A-D.tif', size_bytes: '1', server_modified: '',
+    filename_raw: 'Amphipoea senilis-A-D.tif', binomial_raw: 'amphipoea senilis', specimen_id: 'A', view: 'D',
+    binomial_resolved: '', species_slug: '', match_bucket: 'genus-only', status: 'discovered', last_error: '',
+    ...overrides,
+  };
+}
+
+const ruling = (photo_stem: string, species_slug: string, specimen: string): PhotoDetermination =>
+  ({ photo_stem, species_slug, specimen, source: '#330', note: '' });
+
+// ---------------------------------------------------------------------------
+// applyDeterminationsToManifest (ADR 0045, #342)
+// ---------------------------------------------------------------------------
+describe('applyDeterminationsToManifest', () => {
+  const species = {
+    byBinomial: new Map([['amphipoea keiferi', { genus: 'Amphipoea', species: 'keiferi' }]]),
+    bySlug: new Map([
+      ['amphipoea-keiferi', { genus: 'Amphipoea', species: 'keiferi' }],
+      ['nycteola-cinereana', { genus: 'Nycteola', species: 'cinereana' }],
+    ]),
+    genera: new Set(['amphipoea', 'nycteola']),
+  };
+
+  it('files a genus-only row under the determined species and letter, and makes it tileable', () => {
+    const rows = [manifestRow()];
+    const n = applyDeterminationsToManifest(rows, new Map([['Amphipoea senilis-A-D', ruling('Amphipoea senilis-A-D', 'amphipoea-keiferi', 'A')]]), species);
+    assert.equal(n, 1);
+    assert.equal(rows[0]?.match_bucket, 'resolved-via-determination');
+    assert.equal(rows[0]?.species_slug, 'amphipoea-keiferi');
+    assert.equal(rows[0]?.binomial_resolved, 'amphipoea keiferi');
+  });
+
+  // The letter is part of the ruling (C-026): frigidana specimen A becomes cinereana C.
+  it('overrides a confident clean-match and the specimen letter alike', () => {
+    const rows = [manifestRow({ filename_raw: 'Nycteola frigidana-A-V.tif', binomial_raw: 'nycteola frigidana', view: 'V',
+      match_bucket: 'clean-match', species_slug: 'nycteola-frigidana', binomial_resolved: 'nycteola frigidana' })];
+    applyDeterminationsToManifest(rows, new Map([['Nycteola frigidana-A-V', ruling('Nycteola frigidana-A-V', 'nycteola-cinereana', 'C')]]), species);
+    assert.equal(rows[0]?.species_slug, 'nycteola-cinereana');
+    assert.equal(rows[0]?.specimen_id, 'C');
+    assert.equal(rows[0]?.view, 'V', 'the view is not part of the ruling');
+  });
+
+  it('is idempotent and counts only rows it changed', () => {
+    const rows = [manifestRow()];
+    const d = new Map([['Amphipoea senilis-A-D', ruling('Amphipoea senilis-A-D', 'amphipoea-keiferi', 'A')]]);
+    assert.equal(applyDeterminationsToManifest(rows, d, species), 1);
+    assert.equal(applyDeterminationsToManifest(rows, d, species), 0);
+  });
+
+  it('leaves rows with no ruling alone', () => {
+    const rows = [manifestRow({ filename_raw: 'Other moth-A-D.tif' })];
+    assert.equal(applyDeterminationsToManifest(rows, new Map([['Amphipoea senilis-A-D', ruling('Amphipoea senilis-A-D', 'amphipoea-keiferi', 'A')]]), species), 0);
+    assert.equal(rows[0]?.match_bucket, 'genus-only');
+  });
+
+  it('refuses to point a row at a species that does not exist', () => {
+    const rows = [manifestRow()];
+    assert.equal(applyDeterminationsToManifest(rows, new Map([['Amphipoea senilis-A-D', ruling('Amphipoea senilis-A-D', 'no-such-species', 'A')]]), species), 0);
+    assert.equal(rows[0]?.species_slug, '');
+  });
+});
 
 // ---------------------------------------------------------------------------
 // classify (with synonyms pre-pass) — D-04, D-06
