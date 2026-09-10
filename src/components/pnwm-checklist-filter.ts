@@ -379,10 +379,13 @@ export class PnwmChecklistFilter extends LitElement {
           >Add another area</button>
         </div>
       </div>
-      ${this._pinned.length > 0 ? html`
+      ${/* list-style on each <li> too: Pico's `ul li { list-style: square }` outranks the
+           none inherited from the <ul>, and Chrome paints the first flex item's marker
+           INSIDE its chip as a stray black square (docs/lessons-learned.md). */
+      this._pinned.length > 0 ? html`
         <ul class="checklist-pins" aria-label="Selected areas" style="list-style:none;padding:0;margin-block:0 1rem;display:flex;flex-wrap:wrap;gap:.5rem">
           ${this._pinned.map(j => html`
-            <li style="margin:0">
+            <li style="margin:0;list-style:none">
               <button
                 type="button"
                 class="outline secondary"

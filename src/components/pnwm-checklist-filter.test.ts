@@ -171,6 +171,14 @@ test('the Checklist template carries the hooks the component queries', () => {
   );
 });
 
+test('the chip list items switch off Pico\'s square marker themselves', () => {
+  // Pico's `ul li { list-style: square }` beats `list-style: none` inherited from the
+  // <ul>, and Chrome paints the first flex item's marker inside its chip as a black
+  // square after the ✕. Caught by screenshot; pinned here so it stays fixed.
+  const src = readFileSync(resolve(ROOT, 'src/components/pnwm-checklist-filter.ts'), 'utf8');
+  assert.match(src, /<li style="[^"]*list-style:none[^"]*">/, 'every chip <li> must declare list-style:none');
+});
+
 // ---------------------------------------------------------------------------
 // allDistrictsLabel
 // ---------------------------------------------------------------------------
