@@ -71,7 +71,7 @@
     "@duckdb/node-api": "^1.5.1-r.2",
     "@picocss/pico": "^2.1.1",
     "chart.js": "^4.5.1",
-    "csv-parse": "^7.0.1",
+    "csv-parse": "^7.0.2",
     "csv-stringify": "^6.7.0",
     "hyparquet": "^1.26.2",
     "leaflet": "^1.9.4",
