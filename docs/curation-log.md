@@ -523,7 +523,7 @@ genus disagreements stay open on [#279](https://github.com/pnwinsects/pnwmoths/i
 ## C-013 · 2026-07-21 · iNaturalist life stage governs whether a date is used
 
 **Source** [#172 comment](https://github.com/pnwinsects/pnwmoths/issues/172#issuecomment-5038674149), the curator's own words ·
-**Status** Applied ([ADR 0018](adr/0018-phenology-reared-exclusion.md)) · **Extends** C-002
+**Status** Applied — the sync reads the Life Stage annotation and withholds every non-adult date ([ADR 0042](adr/0042-inat-life-stage-gates-record-date.md); the hand-entered side is [ADR 0018](adr/0018-phenology-reared-exclusion.md)) · **Extends** C-002
 
 > only records from iNat with life stage included and as "adult" would be eligible for having the
 > date added to our date information. All records with life stage of egg, larva, or pupa would have

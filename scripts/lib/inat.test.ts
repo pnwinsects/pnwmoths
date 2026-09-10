@@ -16,6 +16,9 @@ import {
   resolveSpeciesSlug,
   assertObservationShape,
   screenObservation,
+  lifeStage,
+  LIFE_STAGE_TERM_ID,
+  LIFE_STAGE_ADULT_VALUE_ID,
   stateForDistrictId,
   stateFromNearbyDistricts,
   stateFromPlaceGuess,
@@ -43,6 +46,8 @@ function observation(overrides: Partial<InatObservation> = {}): InatObservation 
     place_guess: 'Kensington Ave',
     taxon: { id: 224121, name: 'Lophocampa roseata', rank: 'species' },
     user: { id: 15366, login: 'mikepatterson', name: 'Mike Patterson' },
+    // Annotated Adult, so the fixture keeps its date (C-013).
+    annotations: [{ controlled_attribute_id: LIFE_STAGE_TERM_ID, controlled_value_id: LIFE_STAGE_ADULT_VALUE_ID }],
     ...overrides,
   };
 }
@@ -68,6 +73,7 @@ function candidate(overrides: Partial<Candidate> = {}): Candidate {
     collector: 'Mike Patterson',
     obscured: false,
     accuracyNote: '',
+    dateNote: '',
     accuracyKm: null,
     ...overrides,
   };
@@ -263,6 +269,41 @@ describe('assertObservationShape', () => {
     const { taxon: _t, user: _u, ...rest } = observation();
     assert.throws(() => assertObservationShape(rest as InatObservation), /taxon, user/);
   });
+
+  // The API omits `annotations` on an observation that has none, so absence must
+  // pass; a non-array means the field changed shape and must not.
+  it('accepts an absent annotations list and rejects a malformed one', () => {
+    const { annotations: _a, ...rest } = observation();
+    assert.doesNotThrow(() => assertObservationShape(rest as InatObservation));
+    assert.throws(
+      () => assertObservationShape(JSON.parse(JSON.stringify({ ...observation(), annotations: 'adult' })) as InatObservation),
+      /annotations/,
+    );
+  });
+});
+
+describe('lifeStage', () => {
+  it('reads Adult', () => {
+    assert.deepEqual(lifeStage(observation()), { kind: 'adult' });
+  });
+
+  it('names the immature stage the observer recorded', () => {
+    const larva = observation({ annotations: [{ controlled_attribute_id: LIFE_STAGE_TERM_ID, controlled_value_id: 6 }] });
+    assert.deepEqual(lifeStage(larva), { kind: 'immature', label: 'larva' });
+  });
+
+  // Unannotated is the curator's conservative default (C-013), not a fallback to adult.
+  it('treats a missing annotation as its own case', () => {
+    assert.deepEqual(lifeStage(observation({ annotations: [] })), { kind: 'unannotated' });
+    assert.deepEqual(lifeStage(observation({ annotations: null })), { kind: 'unannotated' });
+    const sexOnly = observation({ annotations: [{ controlled_attribute_id: 9, controlled_value_id: 10 }] });
+    assert.deepEqual(lifeStage(sexOnly), { kind: 'unannotated' });
+  });
+
+  it('reports a value it does not know by number rather than guessing', () => {
+    const odd = observation({ annotations: [{ controlled_attribute_id: LIFE_STAGE_TERM_ID, controlled_value_id: 99 }] });
+    assert.deepEqual(lifeStage(odd), { kind: 'immature', label: 'life stage value 99' });
+  });
 });
 
 describe('stateForDistrictId', () => {
@@ -339,6 +380,33 @@ describe('screenObservation', () => {
     assert.equal(result.ok, true);
     if (!result.ok) return;
     assert.equal(result.candidate.day, '2');
+  });
+
+  // C-013: only an adult's date is a flight date. Everything else keeps the
+  // record — it still plots on the map — but the date moves into notes, where the
+  // phenology bars never read it.
+  it('moves a larva\'s date into the note and blanks the record date', () => {
+    const larva = observation({ annotations: [{ controlled_attribute_id: LIFE_STAGE_TERM_ID, controlled_value_id: 6 }] });
+    const result = screenObservation(larva, context());
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.deepEqual([result.candidate.year, result.candidate.month, result.candidate.day], ['', '', '']);
+    assert.equal(result.candidate.dateNote, 'larva, observed 2016-08-02');
+  });
+
+  it('treats an unannotated observation like an immature one', () => {
+    const result = screenObservation(observation({ annotations: [] }), context());
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.candidate.month, '');
+    assert.equal(result.candidate.dateNote, 'life stage not annotated, observed 2016-08-02');
+  });
+
+  it('keeps an adult\'s date and writes no date note', () => {
+    const result = screenObservation(observation(), context());
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.candidate.dateNote, '');
   });
 
   it('rejects a needs_id observation', () => {
@@ -565,6 +633,21 @@ describe('finalizeRow', () => {
     assert.equal(result.row.collection, 'iNaturalist');
     assert.equal(result.row.notes, 'https://www.inaturalist.org/observations/3792087');  // no annotation on this bare fixture
     assert.equal(result.row.inat_id, '3792087');
+  });
+
+  it('joins the accuracy, the date note and the URL in that order', () => {
+    const result = finalizeRow(
+      candidate({ accuracyNote: 'location accuracy: 15m', dateNote: 'larva, observed 2016-08-02', month: '', day: '', year: '' }),
+      { kind: 'district', districtId: 'US:41007', districtName: 'Clatsop' },
+      crosswalk,
+    );
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(
+      result.row.notes,
+      'location accuracy: 15m; larva, observed 2016-08-02; https://www.inaturalist.org/observations/3792087',
+    );
+    assert.equal(result.row.month, '');
   });
 
   it('refuses a candidate that could not be placed at all', () => {

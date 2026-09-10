@@ -25,6 +25,11 @@ like without it going quiet on you.
   iNaturalist that figure is a circle around the point, filled in automatically from a phone's
   GPS and left blank when someone drops a pin by hand — a blank counts as failing the rule.
   Every imported record carries its accuracy in the notes, alongside the link.
+- An observation's **date is used only when the observer annotated it as an adult** on
+  iNaturalist (the "Life Stage" annotation). A larva, pupa or egg, or an observation with no
+  life-stage annotation at all, is still imported and still plots on the map, but its date is
+  moved into the notes so it never enters a flight-season graph. To get such a date counted,
+  add the annotation on iNaturalist; the next run picks it up.
 - An observation that leaves the project, drops below research grade, or is re-identified as
   something with no page on this site is **removed** from the site on the next run.
 - An observation already entered by hand in `data/records.csv` is **not** imported, so nothing
@@ -150,12 +155,12 @@ the same order, so the two line up when read side by side.
 | county | string | Derived from the coordinates; blank when the location is imprecise |
 | locality | string | The observer's place description |
 | elevation_ft | integer | Always blank — iNaturalist does not supply it |
-| year | integer | From the observation date |
-| month | integer | From the observation date |
-| day | integer | From the observation date |
+| year | integer | From the observation date, when annotated adult; otherwise blank |
+| month | integer | From the observation date, when annotated adult; otherwise blank |
+| day | integer | From the observation date, when annotated adult; otherwise blank |
 | collector | string | The observer's name, or their login |
 | collection | string | Always `iNaturalist` |
-| notes | string | The location accuracy, then the observation URL |
+| notes | string | The location accuracy; then, for a record whose date was withheld, the life stage and observed date; then the observation URL |
 | district_id | string | Derived from the coordinates; blank when the location is imprecise |
 | inat_id | integer | The observation number — how a record is matched run to run |
 

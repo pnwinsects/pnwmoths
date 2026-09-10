@@ -91,6 +91,10 @@ const INAT_FIELDS = [
   'user.id',
   'user.login',
   'user.name',
+  // Life stage (C-013): the date is used only when the observer annotated the
+  // observation as an adult. Both ids are needed to tell the term from its value.
+  'annotations.controlled_attribute_id',
+  'annotations.controlled_value_id',
 ].join(',');
 
 const PAGE_SIZE = 200;
