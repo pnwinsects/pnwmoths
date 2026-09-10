@@ -34,17 +34,15 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
 import { classifyCoordinate, parseCoordinate, FALLBACK_DEGREE_THRESHOLD, KM_PER_DEGREE_LAT } from './lib/district-assignment.ts';
+import { RECORDS_CSV_COLUMNS } from './lib/records-source.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 // records.csv column order — copied verbatim from backfill-legacy-county.ts.
-// D-06: this phase adds no new column; it only fills the already-present
-// (Phase 44) district_id column.
-const RECORDS_COLUMNS = [
-  'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
-  'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection',
-  'notes', 'district_id',
-];
+// records.csv column order comes from the one place that owns it. A local copy
+// here silently DROPPED any column it did not list when this script rewrote the
+// file — which is exactly what would have happened to record_id (ADR 0044).
+const RECORDS_COLUMNS: readonly string[] = RECORDS_CSV_COLUMNS;
 
 const REPORT_COLUMNS = [
   'species_slug', 'latitude', 'longitude', 'state', 'county', 'outcome',

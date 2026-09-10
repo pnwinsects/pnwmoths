@@ -24,16 +24,14 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
+import { RECORDS_CSV_COLUMNS } from './lib/records-source.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-// records.csv column order — mirrors recover-clipped-bc-records.ts, with the
-// new stable-ID column appended (RESEARCH.md "Records.csv Schema Change").
-const RECORDS_COLUMNS = [
-  'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
-  'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection',
-  'notes', 'district_id',
-];
+// records.csv column order comes from the one place that owns it. A local copy
+// here silently DROPPED any column it did not list when this script rewrote the
+// file — which is exactly what would have happened to record_id (ADR 0044).
+const RECORDS_COLUMNS: readonly string[] = RECORDS_CSV_COLUMNS;
 
 const REPORT_COLUMNS = [
   'species_slug', 'latitude', 'longitude', 'year', 'outcome',

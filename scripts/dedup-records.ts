@@ -14,6 +14,12 @@
 // duplicate. When such a pair is collapsed the copy that already carries a
 // district_id is retained, so the derived value is never lost.
 //
+// record_id is excluded too, for a different reason (ADR 0044): the ids were
+// assigned to rows that already existed, so two identical rows with different
+// ids are still one occurrence entered twice — the id carries no evidence
+// about that. The first copy keeps its id; the later id is retired with the
+// line and is never reused.
+//
 // Rows that differ in any curator-entered field — including a blank vs. filled
 // locality — are NOT duplicates and are left untouched. The purge is idempotent:
 // a second run finds nothing to remove.
@@ -37,6 +43,9 @@ const RECORDS_PATH = resolve(ROOT, 'data/records.csv');
 // fields, never entered by a curator, so they carry no record identity and are
 // excluded from the duplicate comparison.
 export const DERIVED_COLUMNS = ['district_id'];
+
+/** Columns that carry no record identity for the duplicate comparison. */
+export const IDENTITY_EXEMPT_COLUMNS = [...DERIVED_COLUMNS, 'record_id'];
 
 export type RecordRow = Record<string, string>;
 
@@ -78,7 +87,7 @@ export interface DedupeResult {
  * @param columns - Column names in order (the CSV header).
  */
 export function dedupeRecords(rows: RecordRow[], columns: string[]): DedupeResult {
-  const identityColumns = columns.filter((c) => !DERIVED_COLUMNS.includes(c));
+  const identityColumns = columns.filter((c) => !IDENTITY_EXEMPT_COLUMNS.includes(c));
   const keyOf = (r: RecordRow) => JSON.stringify(identityColumns.map((c) => r[c]));
 
   const positionByKey = new Map<string, number>();

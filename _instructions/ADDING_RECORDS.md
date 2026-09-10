@@ -29,22 +29,31 @@
 | collection | string | no | UW Burke Museum |
 | notes | string | no | (free text) |
 | district_id | string | no | Leave blank — assigned by the pipeline, not entered by hand (see [ASSIGNING_DISTRICTS.md](ASSIGNING_DISTRICTS.md)) |
+| record_id | integer | yes | Leave blank — step 3 assigns it. Once assigned it never changes; never copy one from another row |
 
 The species is referenced by **`species_slug`**, not by a numeric id. The slug is
 `(genus + '-' + species).toLowerCase()` with spaces hyphenated — `acronicta-americana`. It is not
-stored in `data/species.csv`; derive it from the genus and species columns. All 15 columns must be
+stored in `data/species.csv`; derive it from the genus and species columns. All 16 columns must be
 present in the header even where the value is blank.
 
 ## Steps
 
 1. Confirm the species exists in `data/species.csv` and work out its slug.
 
-2. Open `data/records.csv`. Append one row per occurrence — 15 fields, trailing blanks included:
+2. Open `data/records.csv`. Append one row per occurrence — 16 fields, trailing blanks included
+   (the last two are `district_id` and `record_id`, both left blank):
    ```csv
-   acronicta-americana,specimen,47.6062,-122.3321,WA,King,Seattle,56,2019,6,15,J. Smith,UW Burke Museum,,
+   acronicta-americana,specimen,47.6062,-122.3321,WA,King,Seattle,56,2019,6,15,J. Smith,UW Burke Museum,,,
    ```
 
-3. Verify the build:
+3. Give the new rows their identifiers:
+   ```bash
+   npm run records:assign-ids
+   ```
+   Expected: `assigned N record_ids (…) in data/records.csv`. Each new row now ends in a number
+   above every existing one. The build refuses the file until this has run, and says so.
+
+4. Verify the build:
    ```bash
    npm run build:site
    ```
@@ -56,7 +65,7 @@ present in the header even where the value is blank.
    the Docker path below includes it.
 
 
-4. If build passes, commit and push:
+5. If build passes, commit and push:
    ```bash
    git switch -c add-records-$(date +%Y%m%d-%H%M)
    git add data/records.csv
