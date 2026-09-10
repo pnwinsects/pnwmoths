@@ -352,6 +352,12 @@ export const SKIP_REASON_LABEL: Record<SkipReason, string> = {
   'already-curated': 'already entered by hand in records.csv',
 };
 
+/** One iNaturalist annotation: a controlled term and the value chosen for it. */
+export interface InatAnnotation {
+  controlled_attribute_id: number;
+  controlled_value_id: number;
+}
+
 /** The iNaturalist v2 fields this module needs. */
 export interface InatObservation {
   id: number;
@@ -363,6 +369,42 @@ export interface InatObservation {
   place_guess: string | null;
   taxon: { id: number; name: string; rank: string } | null;
   user: { id: number; login: string; name: string | null } | null;
+  /** Absent from the API response when the observation has none; the fetch always asks for it. */
+  annotations?: InatAnnotation[] | null;
+}
+
+/**
+ * iNaturalist's "Life Stage" controlled term and its "Adult" value, from
+ * GET /v1/controlled_terms (term 1: Adult 2, Teneral 3, Pupa 4, Nymph 5, Larva 6,
+ * Egg 7, Juvenile 8, Subimago 16). Only `Adult` counts: the curator's rule (C-013)
+ * names adults, and a teneral moth is an adult that cannot yet fly.
+ */
+export const LIFE_STAGE_TERM_ID = 1;
+export const LIFE_STAGE_ADULT_VALUE_ID = 2;
+
+/** Labels for the life-stage values, so a note can say what the observer recorded. */
+const LIFE_STAGE_LABEL: Record<number, string> = {
+  2: 'adult', 3: 'teneral', 4: 'pupa', 5: 'nymph', 6: 'larva', 7: 'egg', 8: 'juvenile', 16: 'subimago',
+};
+
+export type LifeStage =
+  | { kind: 'adult' }
+  | { kind: 'immature'; label: string }
+  | { kind: 'unannotated' };
+
+/**
+ * What the observer said the moth was, from the Life Stage annotation.
+ *
+ * Unannotated is its own answer, not a default to adult: the curator's rule (C-013)
+ * treats a missing annotation the same as an immature one, so a forgotten annotation
+ * cannot put a larva's date into a flight-season graph. An unknown value id is reported
+ * by number rather than guessed at.
+ */
+export function lifeStage(obs: Pick<InatObservation, 'annotations'>): LifeStage {
+  const stage = (obs.annotations ?? []).find((a) => a.controlled_attribute_id === LIFE_STAGE_TERM_ID);
+  if (!stage) return { kind: 'unannotated' };
+  if (stage.controlled_value_id === LIFE_STAGE_ADULT_VALUE_ID) return { kind: 'adult' };
+  return { kind: 'immature', label: LIFE_STAGE_LABEL[stage.controlled_value_id] ?? `life stage value ${stage.controlled_value_id}` };
 }
 
 /**
@@ -391,6 +433,9 @@ export function assertObservationShape(obs: InatObservation): void {
   if (!('place_guess' in obs)) missing.push('place_guess');
   if (!('taxon' in obs)) missing.push('taxon');
   if (!('user' in obs)) missing.push('user');
+  // The API omits `annotations` on an observation that has none, so its absence is
+  // not evidence the field was dropped. Only its type is checked.
+  if (obs.annotations != null && !Array.isArray(obs.annotations)) missing.push('annotations');
   if (missing.length === 0) return;
   throw new Error(
     `iNaturalist observation ${String(obs.id ?? '?')} is missing expected field(s): ` +
@@ -415,6 +460,12 @@ export interface Candidate {
   obscured: boolean;
   /** Accuracy annotation for `notes`, e.g. `location accuracy: 26.94km`. */
   accuracyNote: string;
+  /**
+   * Where the date went when the record does not carry one (C-013): the life stage
+   * and the observed date, e.g. `larva, observed 2021-07-04`; '' when the date is
+   * in year/month/day.
+   */
+  dateNote: string;
   /** Published accuracy radius in km, when known — the obscuration box size. */
   accuracyKm: number | null;
 }
@@ -525,7 +576,18 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
   if (accuracyM > MAX_ACCURACY_M) return skip('accuracy-too-coarse', `${accuracyM} m`);
 
   const user = obs.user;
-  const { year, month, day } = splitObservedOn(obs.observed_on);
+
+  // Life stage governs whether the date becomes a record date (C-013). Only an
+  // observation annotated Adult keeps year/month/day; a larva, pupa or egg — or an
+  // observation with no annotation at all — has its date moved into notes, where the
+  // phenology bars never read it (ADR 0018) and the curator can still see it.
+  const stage = lifeStage(obs);
+  const dated = splitObservedOn(obs.observed_on);
+  const { year, month, day } = stage.kind === 'adult' ? dated : { year: '', month: '', day: '' };
+  const dateNote = stage.kind === 'adult'
+    ? ''
+    : `${stage.kind === 'immature' ? stage.label : 'life stage not annotated'}` +
+      (obs.observed_on ? `, observed ${obs.observed_on}` : '');
 
   return {
     ok: true,
@@ -549,6 +611,7 @@ export function screenObservation(obs: InatObservation, ctx: ScreenContext): Scr
       // km: it is the unit iNaturalist supplies, it needs no rounding, and the
       // 2 km cap keeps the number short. Screening guarantees it is present.
       accuracyNote: `location accuracy: ${accuracyMetres(obs) ?? '?'}m`,
+      dateNote,
       accuracyKm:
         obs.public_positional_accuracy !== null &&
         Number.isFinite(obs.public_positional_accuracy)
@@ -734,7 +797,7 @@ export function finalizeRow(
   }
 
   const url = observationUrl(candidate.inatId);
-  const notes = candidate.accuracyNote ? `${candidate.accuracyNote}; ${url}` : url;
+  const notes = [candidate.accuracyNote, candidate.dateNote, url].filter(Boolean).join('; ');
 
   return {
     ok: true,
