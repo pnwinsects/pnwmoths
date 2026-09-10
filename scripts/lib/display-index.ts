@@ -30,6 +30,7 @@ import {
   type BrowseNode,
   type IndexImage,
 } from '../../src/_lib/photo-display-index.ts';
+import type { TileSpecimenLike } from '../../src/_lib/photo-display.ts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -55,17 +56,21 @@ export function readKeySpecies(path: string = resolve(ROOT, 'data/key-matrix.jso
 }
 
 /**
- * Tiled species, by `high_res_available` ALONE.
+ * Tiled species → their published tile specimens, by `high_res_available` ALONE.
  *
  * No `specimens?.length` guard, because that is what src/species/species.njk branches on:
- * an entry flagged available with no specimens still takes the tiles branch and shows
- * nothing. Requiring specimens here would report those photographs as displayed.
+ * an entry flagged available with no specimens still takes the tiles branch, with an empty
+ * coverage set. The picker then treats every catalogued row as uncovered, exactly as the
+ * page does.
  */
-export function readTiledSlugs(path: string = resolve(ROOT, 'data/species-photos.json')): Set<string> {
-  const photos: Record<string, { high_res_available?: boolean }> = JSON.parse(readFileSync(path, 'utf8'));
-  const tiled = new Set<string>();
+export function readTiles(
+  path: string = resolve(ROOT, 'data/species-photos.json'),
+): Map<string, readonly TileSpecimenLike[]> {
+  const photos: Record<string, { high_res_available?: boolean; specimens?: TileSpecimenLike[] }> =
+    JSON.parse(readFileSync(path, 'utf8'));
+  const tiled = new Map<string, readonly TileSpecimenLike[]>();
   for (const [slug, entry] of Object.entries(photos)) {
-    if (entry.high_res_available) tiled.add(slug);
+    if (entry.high_res_available) tiled.set(slug, entry.specimens ?? []);
   }
   return tiled;
 }
@@ -74,7 +79,7 @@ export function readTiledSlugs(path: string = resolve(ROOT, 'data/species-photos
 export async function loadDisplayIndex(): Promise<DisplayIndex> {
   const [browseTree, species] = await Promise.all([taxonData(), speciesData()]);
   const imagesBySlug: Record<string, IndexImage[]> = imagesData();
-  const tiled = readTiledSlugs();
+  const tiled = readTiles();
 
   // The accounts that exist are the species collection, gates already applied. A
   // similar-species link renders only when its target is in that same collection —
@@ -84,7 +89,7 @@ export async function loadDisplayIndex(): Promise<DisplayIndex> {
   const accounts: AccountInput[] = species.map((row) => ({
     slug: row.slug,
     similarSlugs: row.similar_slugs.filter((slug) => built.has(slug)),
-    tiled: tiled.has(row.slug),
+    tiles: tiled.get(row.slug) ?? null,
   }));
 
   return buildDisplayIndex({

@@ -80,15 +80,18 @@ export type Surface =
  * silently removed its catalogued photographs from its own page while leaving them on
  * `/browse/`, on Identify and on other species' pages (#338, #299).
  *
- *   replaces — tiles render INSTEAD OF the catalogued photographs; none of them appear
- *   prefers  — a tile is used when there is one, otherwise the catalogued photograph
- *   fallback — catalogued photographs win; a tile is used only when there are none
- *   ignores  — the surface never consults tile status at all
+ *   supplements — every tile renders, and so does every catalogued photograph whose
+ *                 specimen and view no tile covers (ADR 0041). Before ADR 0041 the account
+ *                 policy was `replaces` — tiles INSTEAD OF the catalogued photographs — and
+ *                 33 photographs the curator asked to see appeared nowhere (#336).
+ *   prefers     — a tile is used when there is one, otherwise the catalogued photograph
+ *   fallback    — catalogued photographs win; a tile is used only when there are none
+ *   ignores     — the surface never consults tile status at all
  */
-export type TilePolicy = 'replaces' | 'prefers' | 'fallback' | 'ignores';
+export type TilePolicy = 'supplements' | 'prefers' | 'fallback' | 'ignores';
 
 export const TILE_POLICY: Record<Surface, TilePolicy> = {
-  'account': 'replaces',
+  'account': 'supplements',
   'browse-card': 'fallback',
   'browse-genus-strip': 'fallback',
   'browse-higher-strip': 'fallback',
@@ -137,24 +140,108 @@ export function orderByWeight<T extends Weighted>(rows: readonly T[]): T[] {
 }
 
 // ---------------------------------------------------------------------------
+// Layer 1b — tile coverage: does a published tile show this specimen and view?
+// ---------------------------------------------------------------------------
+
+/** A row that names which specimen and view it photographs. Only the account compares these. */
+export interface SpecimenView {
+  specimen?: string | null;
+  view?: string | null;
+}
+
+/** One published tile set from data/species-photos.json: a specimen letter and a `D`/`V` view. */
+export interface TileSpecimenLike {
+  specimen_id: string;
+  view: string;
+}
+
+/**
+ * images.csv spells views `dorsal`/`ventral`; species-photos.json spells them `D`/`V`.
+ * Two vocabularies for one concept, so a comparison that forgets to normalise finds
+ * ZERO matches — and zero matches reads as "no tile covers this photograph", which is how
+ * the hidden-images report once claimed every row on every tiled species was hidden
+ * (docs/lessons-learned.md). Returns '' when there is nothing to compare.
+ */
+export function normalizeView(raw: string | null | undefined): string {
+  const v = (raw ?? '').trim().toLowerCase();
+  if (v === 'dorsal' || v === 'd') return 'D';
+  if (v === 'ventral' || v === 'v') return 'V';
+  return '';
+}
+
+/** Coverage key for one specimen+view, or null when the row cannot be keyed. */
+export function coverageKey(specimen: string | null | undefined, view: string | null | undefined): string | null {
+  const s = (specimen ?? '').trim().toUpperCase();
+  const v = normalizeView(view);
+  return s && v ? `${s}|${v}` : null;
+}
+
+/** The keys a species' published tiles cover. */
+export function tileCoverage(tiles: readonly TileSpecimenLike[]): Set<string> {
+  const keys = new Set<string>();
+  for (const tile of tiles) {
+    const key = coverageKey(tile.specimen_id, tile.view);
+    if (key) keys.add(key);
+  }
+  return keys;
+}
+
+/**
+ * How one catalogued photograph stands against a tiled species' tiles.
+ *
+ *   covered     — a tile shows the same specimen and view, so the tile is the better copy.
+ *                 Every catalogued row of that specimen and view is covered — there can be
+ *                 more than one (#341), and a tile stands in for all of them.
+ *   uncovered   — no tile shows it; the account renders the photograph itself. A row whose
+ *                 view is one tiles never have (`lateral`, `head`) is uncovered by
+ *                 definition, since no tile could ever match it.
+ *   unmatchable — the row has a BLANK specimen or a BLANK view, so nothing can be compared.
+ *                 Kept distinct from `uncovered` because showing it would risk a duplicate
+ *                 of a tile and hiding it would assert something unmeasured; the account
+ *                 hides it and the hidden-images report asks for the missing cell instead.
+ */
+export type TileOutcome = 'covered' | 'uncovered' | 'unmatchable';
+
+export function tileOutcome(row: SpecimenView, coverage: ReadonlySet<string>): TileOutcome {
+  const specimen = (row.specimen ?? '').trim();
+  const view = (row.view ?? '').trim();
+  if (!specimen || !view) return 'unmatchable';
+  const key = coverageKey(specimen, view);
+  if (key === null) return 'uncovered';
+  return coverage.has(key) ? 'covered' : 'uncovered';
+}
+
+// ---------------------------------------------------------------------------
 // Layer 2 — one picker per surface
 // ---------------------------------------------------------------------------
 
 /**
- * What a species account displays. The one surface that knows tiles exist, and it shows
- * them INSTEAD OF the catalogued photographs, not alongside — `mode` is that branch, and
- * naming it is how the rest of the site can stop guessing at it.
+ * What a species account displays. The one surface that knows tiles exist. With tiles,
+ * every tile renders and `photos` holds the catalogued photographs no tile covers, in
+ * `weight` order — the curator's ruling on #336 that a photograph the tiles do not show
+ * "should be shown on the new site" (ADR 0041). Without tiles, `photos` is every row.
+ * `mode` names the branch so the template and the display index cannot disagree on it.
  */
 export type AccountDisplay<T> =
-  | { mode: 'tiles'; photos: readonly [] }
+  | { mode: 'tiles'; photos: readonly T[] }
   | { mode: 'photos'; photos: readonly T[] }
   | { mode: 'none'; photos: readonly [] };
 
-export function pickAccountPhotos<T extends Weighted>(
+/**
+ * @param tiles the species' published tile specimens, or null when it has none
+ *   (`high_res_available` false). An EMPTY array is a tiled species with nothing to
+ *   show — `high_res_available` alone is what src/species/species.njk branches on — and
+ *   then every catalogued row is uncovered and renders, so the page is not blank.
+ */
+export function pickAccountPhotos<T extends Weighted & SpecimenView>(
   rows: readonly T[],
-  tiled: boolean,
+  tiles: readonly TileSpecimenLike[] | null,
 ): AccountDisplay<T> {
-  if (tiled) return { mode: 'tiles', photos: [] };
+  if (tiles !== null) {
+    const coverage = tileCoverage(tiles);
+    const uncovered = rows.filter((row) => tileOutcome(row, coverage) === 'uncovered');
+    return { mode: 'tiles', photos: orderByWeight(uncovered) };
+  }
   if (rows.length === 0) return { mode: 'none', photos: [] };
   return { mode: 'photos', photos: orderByWeight(rows) };
 }

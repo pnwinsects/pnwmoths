@@ -15,11 +15,14 @@ import { buildDisplayIndex, photoKey, formatIndexSurfaces, type IndexSurface } f
 
 const IMAGES = {
   'phyllodesma-americana': [
-    { filename: 'Phyllodesma americana-A-D.jpg', weight: 1 },
-    { filename: 'Phyllodesma coturnix-C-D.jpg', weight: 3 },
+    { filename: 'Phyllodesma americana-A-D.jpg', weight: 1, specimen: 'A', view: 'dorsal' },
+    { filename: 'Phyllodesma coturnix-C-D.jpg', weight: 3, specimen: 'C', view: 'dorsal' },
   ],
-  'apantesis-margo': [{ filename: 'Grammia margo-C-D.jpg', weight: 1 }],
+  'apantesis-margo': [{ filename: 'Grammia margo-C-D.jpg', weight: 1, specimen: 'C', view: 'dorsal' }],
 };
+
+/** Tiles for specimen A only — the coturnix specimen C has none. */
+const TILES_A = [{ specimen_id: 'A', view: 'D' }, { specimen_id: 'A', view: 'V' }];
 
 function surfaces(index: ReturnType<typeof buildDisplayIndex>, slug: string, filename: string): string {
   return formatIndexSurfaces(index.get(photoKey(slug, filename)));
@@ -105,21 +108,25 @@ describe('account and similar are per built page', () => {
     const index = buildDisplayIndex({
       browseTree: [],
       keySpecies: [],
-      accounts: [{ slug: 'phyllodesma-americana', similarSlugs: [], tiled: false }],
+      accounts: [{ slug: 'phyllodesma-americana', similarSlugs: [], tiles: null }],
       imagesBySlug: IMAGES,
     });
     assert.equal(surfaces(index, 'phyllodesma-americana', 'Phyllodesma americana-A-D.jpg'), 'account');
     assert.equal(surfaces(index, 'phyllodesma-americana', 'Phyllodesma coturnix-C-D.jpg'), 'account');
   });
 
-  it('records NONE of them when the account is tiled', () => {
+  // The coturnix ventral was the photograph that appeared nowhere (#336): its account was
+  // tiled, and tiles used to replace every catalogued row. Now a tile supersedes only the
+  // row of the same specimen and view (ADR 0041).
+  it('records only the rows no tile covers when the account is tiled', () => {
     const index = buildDisplayIndex({
       browseTree: [],
       keySpecies: [],
-      accounts: [{ slug: 'phyllodesma-americana', similarSlugs: [], tiled: true }],
+      accounts: [{ slug: 'phyllodesma-americana', similarSlugs: [], tiles: TILES_A }],
       imagesBySlug: IMAGES,
     });
-    assert.equal(index.size, 0);
+    assert.equal(surfaces(index, 'phyllodesma-americana', 'Phyllodesma americana-A-D.jpg'), '');
+    assert.equal(surfaces(index, 'phyllodesma-americana', 'Phyllodesma coturnix-C-D.jpg'), 'account');
   });
 
   // The thumbnail belongs to the OTHER species and renders on this page — which is how a
@@ -128,7 +135,7 @@ describe('account and similar are per built page', () => {
     const index = buildDisplayIndex({
       browseTree: [],
       keySpecies: [],
-      accounts: [{ slug: 'phyllodesma-americana', similarSlugs: ['apantesis-margo'], tiled: true }],
+      accounts: [{ slug: 'phyllodesma-americana', similarSlugs: ['apantesis-margo'], tiles: TILES_A }],
       imagesBySlug: IMAGES,
     });
     assert.equal(surfaces(index, 'apantesis-margo', 'Grammia margo-C-D.jpg'), 'similar');
@@ -138,7 +145,7 @@ describe('account and similar are per built page', () => {
     const index = buildDisplayIndex({
       browseTree: [],
       keySpecies: [],
-      accounts: [{ slug: 'apantesis-margo', similarSlugs: ['phyllodesma-americana'], tiled: false }],
+      accounts: [{ slug: 'apantesis-margo', similarSlugs: ['phyllodesma-americana'], tiles: null }],
       imagesBySlug: IMAGES,
     });
     assert.equal(surfaces(index, 'phyllodesma-americana', 'Phyllodesma americana-A-D.jpg'), 'similar');
@@ -152,8 +159,8 @@ describe('a photograph on several surfaces', () => {
       browseTree: [{ genera: [{ navImages: [{ species_slug: 'apantesis-margo', filename: 'Grammia margo-C-D.jpg' }] }] }],
       keySpecies: [{ slug: 'apantesis-margo', nav_image: 'Grammia margo-C-D.jpg' }],
       accounts: [
-        { slug: 'apantesis-margo', similarSlugs: [], tiled: false },
-        { slug: 'phyllodesma-americana', similarSlugs: ['apantesis-margo'], tiled: false },
+        { slug: 'apantesis-margo', similarSlugs: [], tiles: null },
+        { slug: 'phyllodesma-americana', similarSlugs: ['apantesis-margo'], tiles: null },
       ],
       imagesBySlug: IMAGES,
     });

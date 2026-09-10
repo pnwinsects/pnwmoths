@@ -446,9 +446,11 @@ cost a debugging cycle to discover.
   tile has to normalise both sides. Forgetting produces ZERO matches, not an error —
   and zero matches means "no tile covers this photograph", so the hidden-images report
   claimed all 3,479 rows on tiled species were hidden instead of the 39 that are. It
-  read entirely plausibly. `normalizeView()` in `scripts/emit-hidden-images.ts` is the
-  one place that mapping lives; when two vocabularies describe one thing, assert on a
-  known-matching pair, because a broken comparison looks like a real finding.
+  read entirely plausibly. `normalizeView()` in `src/_lib/photo-display.ts` is the one
+  place that mapping lives — the account picker and the report both call it, so they cannot
+  disagree ([ADR 0041](adr/0041-account-shows-photos-tiles-do-not-cover.md)); when two
+  vocabularies describe one thing, assert on a known-matching pair, because a broken
+  comparison looks like a real finding.
 
 - **`loadWithheldFamilies()` returns LOWERCASED names; `isWithheld()` lowercases the
   family it is given but not the set.** Hand-building `new Set(['Geometridae'])` to call

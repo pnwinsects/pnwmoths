@@ -28,29 +28,32 @@
 //
 // FOUR REASONS THE SPECIES ACCOUNT DOES NOT DISPLAY A PHOTOGRAPH. Checked in this
 // order, because the first that applies is the proximate one — a row on a species
-// with no page is not "hidden by tiles" in any useful sense, even when tiles exist:
+// with no page is not "superseded by tiles" in any useful sense, even when tiles exist:
 //
 //   1. family-withheld       the family is embargoed (#48) — no page is built
 //   2. species-unpublished   the slug is on the deny-list (#84) — no page is built
-//   3. *-by-tiles            the account exists, but src/species/species.njk shows the
-//                            high-res branch INSTEAD OF, not alongside, images.csv:
-//                              {% if (not high_res_available) and spImages %} … legacy …
-//                              {% elif high_res_available %}                  … tiles  …
-//                            so one tiled specimen hides every images.csv row for the
-//                            species. Split three ways by what the tiles actually cover
-//                            (see classifyTileOutcome) — the split is the whole point.
+//   3. *-by-tiles            the account exists and is tiled. A row whose specimen and
+//                            view a tile covers is `superseded-by-tiles`: shown, as a
+//                            better copy. A row with a BLANK specimen or a BLANK view is
+//                            `unmatchable-by-tiles`: the account cannot tell whether a
+//                            tile covers it, so it hides it and this report asks for
+//                            the missing cell. A row no tile covers — including any
+//                            lateral or head view, which tiles never have — is
+//                            DISPLAYED: the account renders it beside the tiles
+//                            (ADR 0041) and it produces no row here.
 //   4. cdn-missing           the account renders an <img> whose object is not on the CDN
 //                            (#232). A broken image displays nothing, so it belongs here.
 //
-// WHY THE TILE SPLIT MATTERS. At the time of writing: 3,440 rows on tiled species are
-// the SAME specimen and view as a published tile — the photograph is still shown, in a
-// better version — against 32 that no tile covers and 7 that cannot be matched at all.
-// Of those 39, seven are still browse or Identify thumbnails, so 32 photographs appear
-// nowhere on the site at all. That last number is the report. Listing all 3,479 as
-// "hidden" would bury them under ninety times their number, which is how a report
-// becomes unread. `superseded-by-tiles` is emitted anyway, sorted last, because a report
-// that silently drops 88% of its subject is not a report of what is hidden — it is an
-// opinion about what matters, and the person reading it has no way to check it.
+// The tile outcome is `tileOutcome()` in src/_lib/photo-display.ts — the SAME function
+// the account's picker uses — so this report cannot call a photograph hidden that the
+// page shows, or the reverse. Before ADR 0041 the account showed tiles INSTEAD OF the
+// catalogued photographs, a third outcome (`hidden-by-tiles`) covered the rows no tile
+// matched, and 33 photographs the curator asked to see appeared nowhere (#336).
+//
+// WHY `superseded-by-tiles` IS EMITTED AT ALL. It is the bulk of the file and the least
+// of it, sorted last. It is kept because a report that silently drops most of its
+// subject is not a report of what is hidden — it is an opinion about what matters, and
+// the person reading it has no way to check it.
 //
 // `cdn_status` COMES FROM A REPORT, NOT FROM THE NETWORK. This script is offline; its
 // only evidence about the CDN is data/cdn-inventory-report.csv, which a maintainer
@@ -76,6 +79,7 @@ import {
   type DisplayIndex,
   type IndexSurface,
 } from '../src/_lib/photo-display-index.ts';
+import { tileCoverage, tileOutcome, type TileSpecimenLike } from '../src/_lib/photo-display.ts';
 
 /** Public origin, same constant as eleventy.config.ts. Not a secret, not an env var. */
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
@@ -87,7 +91,6 @@ const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 // ---------------------------------------------------------------------------
 
 export type HiddenCause =
-  | 'hidden-by-tiles'
   | 'unmatchable-by-tiles'
   | 'family-withheld'
   | 'species-unpublished'
@@ -99,12 +102,11 @@ export type HiddenCause =
  * is deliberately at the bottom — it is the bulk of the file and the least of it.
  */
 export const CAUSE_SEVERITY: Record<HiddenCause, number> = {
-  'hidden-by-tiles': 0,
-  'unmatchable-by-tiles': 1,
-  'family-withheld': 2,
-  'species-unpublished': 3,
-  'cdn-missing': 4,
-  'superseded-by-tiles': 5,
+  'unmatchable-by-tiles': 0,
+  'family-withheld': 1,
+  'species-unpublished': 2,
+  'cdn-missing': 3,
+  'superseded-by-tiles': 4,
 };
 
 /**
@@ -137,10 +139,7 @@ export interface SpeciesInput {
 }
 
 /** One tiled specimen from data/species-photos.json. */
-export interface TileSpecimen {
-  specimen_id: string;
-  view: string;
-}
+export type TileSpecimen = TileSpecimenLike;
 
 export interface HiddenImageRow {
   species_slug: string;
@@ -180,47 +179,23 @@ export interface HiddenImageRow {
 }
 
 /**
- * images.csv spells views `dorsal`/`ventral`; species-photos.json spells them `D`/`V`.
- * Two vocabularies for one concept, so a comparison that forgets to normalise finds
- * ZERO matches and reports every row on every tiled species as hidden — which reads
- * entirely plausibly at 3,711 rows. Returns '' when there is nothing to compare.
+ * The view vocabulary and coverage arithmetic live in src/_lib/photo-display.ts, beside
+ * the account picker that shares them; re-exported so this report's tests and readers
+ * find them where the report is.
  */
-export function normalizeView(raw: string): string {
-  const v = raw.trim().toLowerCase();
-  if (v === 'dorsal' || v === 'd') return 'D';
-  if (v === 'ventral' || v === 'v') return 'V';
-  return '';
-}
-
-/** Tile coverage key for one specimen+view, or null when the row cannot be keyed. */
-export function coverageKey(specimen: string, view: string): string | null {
-  const s = specimen.trim().toUpperCase();
-  const v = normalizeView(view);
-  return s && v ? `${s}|${v}` : null;
-}
-
-/** The keys a species' published tiles cover. */
-export function tileCoverage(specimens: readonly TileSpecimen[]): Set<string> {
-  const keys = new Set<string>();
-  for (const specimen of specimens) {
-    const key = coverageKey(specimen.specimen_id, specimen.view);
-    if (key) keys.add(key);
-  }
-  return keys;
-}
+export { normalizeView, coverageKey, tileCoverage } from '../src/_lib/photo-display.ts';
 
 /**
- * Which of the three tile outcomes applies to one row on a tiled species.
- *
- * `unmatchable-by-tiles` is its own outcome rather than being folded into
- * `hidden-by-tiles`: a row with no specimen or no view cannot be compared against the
- * tiles at all, so calling it uncovered would assert something unmeasured. The curator
- * is being asked a different question about those — "what is this photograph of?"
+ * Which tile outcome this report gives one row on a tiled species — or null when the
+ * account displays the row (no tile covers it, so the page renders the photograph
+ * itself; ADR 0041) and there is nothing to report.
  */
-export function classifyTileOutcome(row: ImageInput, coverage: ReadonlySet<string>): HiddenCause {
-  const key = coverageKey(row.specimen, row.view);
-  if (key === null) return 'unmatchable-by-tiles';
-  return coverage.has(key) ? 'superseded-by-tiles' : 'hidden-by-tiles';
+export function classifyTileOutcome(row: ImageInput, coverage: ReadonlySet<string>): HiddenCause | null {
+  switch (tileOutcome(row, coverage)) {
+    case 'covered': return 'superseded-by-tiles';
+    case 'unmatchable': return 'unmatchable-by-tiles';
+    case 'uncovered': return null;
+  }
 }
 
 /**
@@ -326,12 +301,16 @@ export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): Hidd
     } else if (coverage) {
       const keys = tileCoverage(coverage);
       cause = classifyTileOutcome(image, keys);
-      detail = cause === 'superseded-by-tiles'
-        ? 'the same specimen and view is published as a high-resolution tile'
-        : cause === 'hidden-by-tiles'
-          ? `no tile covers specimen ${image.specimen.trim() || '?'} ${normalizeView(image.view) || '?'};` +
-            ` tiled: ${[...keys].sort().map((k) => k.replace('|', '-')).join(' ') || 'none'}`
-          : 'row has no specimen or no view, so it cannot be matched against the tiles';
+      if (cause === 'superseded-by-tiles') {
+        detail = 'the same specimen and view is published as a high-resolution tile';
+      } else if (cause === 'unmatchable-by-tiles') {
+        detail = `row has a blank ${!image.specimen.trim() ? 'specimen' : 'view'} cell, so it cannot be matched` +
+          ` against the tiles (tiled: ${[...keys].sort().map((k) => k.replace('|', '-')).join(' ') || 'none'});` +
+          ' fill it in and the account will show the photograph or a tile will supersede it';
+      } else if (cdnStatus === 'missing') {
+        cause = 'cdn-missing';
+        detail = 'the page links this object, but the last CDN inventory did not find it';
+      }
     } else if (cdnStatus === 'missing') {
       cause = 'cdn-missing';
       detail = 'the page links this object, but the last CDN inventory did not find it';
@@ -457,7 +436,7 @@ async function main(): Promise<void> {
   // makes the account render the tiles branch and show nothing at all, and requiring
   // specimens here would classify its photographs as displayed and emit no rows: silently
   // absent from a report whose whole premise is completeness. With an empty coverage set
-  // every row falls to `hidden-by-tiles`, which is exactly what the page does.
+  // every row is uncovered and displayed, which is exactly what the page does.
   const tiled = new Map<string, readonly TileSpecimen[]>();
   for (const [slug, entry] of Object.entries(photos)) {
     if (entry.high_res_available) tiled.set(normalizeSlug(slug), entry.specimens ?? []);

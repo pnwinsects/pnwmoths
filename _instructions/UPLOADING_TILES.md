@@ -400,32 +400,26 @@ the Storage Zone applies to them like everything else: it is additive, and nothi
 ever deleted from it ([ADR 0008](../docs/adr/0008-deploy-bunny-additive.md)). Re-running
 this runbook overwrites objects in place, which is safe; removing them is not.
 
-### Tiling a species HIDES its catalogued photographs — from its own page only
+### Tiling a species supersedes only the matching catalogued photographs
 
 Once `data/species-photos.json` marks a species `high_res_available`, its account renders
-the deep-zoom viewer **instead of** its `data/images.csv` photographs, not alongside them.
-Every one of them disappears from that page, including views the tiles do not cover — a
-ventral shot with no ventral tile is simply gone.
-
-They do not necessarily disappear from the **site**. `/browse/`, Identify and other species'
-"similar species" rows read `data/images.csv` and never consult tile status — but each shows
-only ONE photograph per species, the lightest by `weight`, so of a species' six photographs
-at most one or two are visible anywhere once its account shows tiles. This asymmetry is
-`TILE_POLICY` in
+the tiles **and** every `data/images.csv` photograph no tile covers
+([ADR 0041](../docs/adr/0041-account-shows-photos-tiles-do-not-cover.md)). A tile stands in
+for the catalogued rows of the same specimen and view, and for nothing else. A ventral shot
+with no ventral tile stays on the page, and so does any lateral or head shot. This is `TILE_POLICY` in
 [`src/_lib/photo-display.ts`](../src/_lib/photo-display.ts) —
 [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md) has the
 table.
 
-**So check what you displaced.** After `photos:materialize`, run:
+The one way a tiling run can hide a photograph is a catalogued row with a blank `specimen`
+or a blank `view` cell: the account cannot tell whether a tile already shows it, and hides it
+rather than show the same moth twice. **So check for those.** After `photos:materialize`, run:
 
 ```bash
 npm run report:hidden-images
 ```
 
-and look at `data/hidden-images-report.csv` for the slugs you just tiled. Read `cause`
-before `displayed_as`: `superseded-by-tiles` is the normal outcome and needs nothing (a tile
-of the same specimen and view now shows that moth better), while `hidden-by-tiles` means no
-tile covers that specimen and view. A `hidden-by-tiles` row with a blank `displayed_as` is a
-photograph your tiling run removed from the site entirely — that is the one worth putting in
-front of the curator. `unmatchable-by-tiles` is neither: it means the row has no `specimen`
-or no `view` to compare, which is a data fix rather than a judgement call.
+and look at `data/hidden-images-report.csv` for the slugs you just tiled. `superseded-by-tiles`
+is the normal outcome and needs nothing (a tile of the same specimen and view now shows that
+moth better). `unmatchable-by-tiles` is a data fix, not a judgement call: fill in the blank
+cell from the filename and the account will show the photograph, or a tile will supersede it.
