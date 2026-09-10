@@ -26,17 +26,20 @@ one turned out to be the same specimen and view as a published tile; the filenam
 
 **`TILE_POLICY['account']` is `supplements`.** A tiled account renders every tile *and* every
 catalogued photograph whose specimen and view no tile covers, tiles first, then the rest in
-`weight` order. A tile supersedes exactly one catalogued row: the one of the same specimen and
-view.
+`weight` order. A tile supersedes every catalogued row of the same specimen and view — usually
+one, but [#341](https://github.com/pnwinsects/pnwmoths/issues/341) lists 22 letters claimed
+twice, and a tile stands in for all of them.
 
 - The comparison is `tileOutcome()` in
   [`src/_lib/photo-display.ts`](../../src/_lib/photo-display.ts) — `covered`, `uncovered` or
   `unmatchable` — and it is the **same function** the hidden-images report classifies with, so
   the report cannot call hidden what the page shows. `normalizeView()`, `coverageKey()` and
   `tileCoverage()` moved there from the report for the same reason.
-- A row with no `specimen` or no `view` is `unmatchable` and is **not** shown. Showing it
-  would risk a duplicate of a tile; hiding it asserts nothing. The report keeps it as
-  `unmatchable-by-tiles`, now the top-severity cause, and says to fill in the two cells.
+- A row with a blank `specimen` or a blank `view` is `unmatchable` and is **not** shown.
+  Showing it would risk a duplicate of a tile; hiding it asserts nothing. The report keeps it
+  as `unmatchable-by-tiles`, now the top-severity cause, and says to fill in the blank cell.
+  A view tiles never have (`lateral`, `head`) is not unmatchable: no tile could cover it, so
+  it is uncovered and shown.
 - The report's `hidden-by-tiles` cause is retired: the situation it named no longer exists.
 - The slideshow decides per slide whether to open the deep-zoom viewer, from a
   `data-tiles-path` on the figure, rather than assuming figures and tiles line up one to one.

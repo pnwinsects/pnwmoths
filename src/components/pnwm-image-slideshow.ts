@@ -163,6 +163,8 @@ export class PnwmImageSlideshow extends LitElement {
   declare cdnBaseUrl: string;
   declare prefixUrl: string;
   declare _osdViewer: import('openseadragon').Viewer | null;
+  // Bumped by every _syncViewer call; a sync that awaited and finds a newer one bails.
+  declare _syncGeneration: number;
   declare _resizeObserver: ResizeObserver | null;
   declare _inertedElements: Element[];
   // Element that had focus when the lightbox opened, so it can be restored on close
@@ -180,6 +182,7 @@ export class PnwmImageSlideshow extends LitElement {
     this._resizeObserver = null;
     this._inertedElements = [];
     this._osdViewer = null;
+    this._syncGeneration = 0;
     this._lightboxOpener = null;
     this.highResAvailable = false;
     this.cdnBaseUrl = '';
@@ -319,16 +322,26 @@ export class PnwmImageSlideshow extends LitElement {
    * after the lightbox opens and after every step through it, so a strip that mixes
    * tiled specimens with catalogued photographs (ADR 0041) never shows one kind of
    * slide through the other's viewer.
+   *
+   * Two awaits sit between deciding and acting — Lit's render and the OpenSeadragon
+   * import, which is a network fetch the first time. A keypress or a close during either
+   * would otherwise let this call create or re-point a viewer for a slide that is no
+   * longer current. Every call takes a generation number; after each await, a call that
+   * is no longer the latest stops, and the latest one re-reads the slide it is for.
    */
   async _syncViewer(): Promise<void> {
+    const generation = ++this._syncGeneration;
+    const stale = (): boolean => generation !== this._syncGeneration || !this._lightboxOpen;
     if (!this._lightboxOpen) return;
-    const current = this._currentImage();
-    if (!current || !this._usesOsd()) {
+    if (!this._usesOsd()) {
       this._osdViewer?.destroy();
       this._osdViewer = null;
       return;
     }
     await this.updateComplete;
+    if (stale()) return;
+    const current = this._currentImage();
+    if (!current || !this._usesOsd()) return;
     const viewerEl = this.shadowRoot?.querySelector('#osd-viewer') as HTMLElement | null;
     if (!viewerEl) return;
     if (this._osdViewer) {
@@ -337,10 +350,15 @@ export class PnwmImageSlideshow extends LitElement {
       return;
     }
     const { default: OpenSeadragon } = await import('openseadragon');
+    // The import is the long await. Re-read everything: the slide, whether it still
+    // wants a viewer, and whether another call created one meanwhile.
+    if (stale() || this._osdViewer) return;
+    const latest = this._currentImage();
+    if (!latest || !this._usesOsd()) return;
     this._osdViewer = OpenSeadragon({
       element: viewerEl,
       prefixUrl: this.prefixUrl,
-      tileSources: this._buildDziUrl(current.tilesPath),
+      tileSources: this._buildDziUrl(latest.tilesPath),
       visibilityRatio: 1.0,
       minZoomLevel: 0.5,
       defaultZoomLevel: 0,

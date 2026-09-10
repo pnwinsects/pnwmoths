@@ -128,9 +128,13 @@ describe('classifyTileOutcome', () => {
     assert.equal(classifyTileOutcome(image({ view: 'ventral' }), dorsalOnly), null);
   });
 
-  it('calls a row unmatchable rather than displayed when it cannot be keyed', () => {
+  it('calls a row unmatchable rather than displayed when a cell is blank', () => {
     assert.equal(classifyTileOutcome(image({ specimen: '' }), coverage), 'unmatchable-by-tiles');
     assert.equal(classifyTileOutcome(image({ view: '' }), coverage), 'unmatchable-by-tiles');
+  });
+
+  it('reports nothing for a view no tile could cover, which the account displays', () => {
+    assert.equal(classifyTileOutcome(image({ view: 'lateral' }), coverage), null);
   });
 });
 

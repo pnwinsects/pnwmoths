@@ -116,8 +116,20 @@ describe('the account: tiles REPLACE the catalogued photographs', () => {
     assert.deepEqual(display.photos, []);
   });
 
-  it('hides a row it cannot match rather than risk duplicating a tile', () => {
+  it('hides a row with a blank specimen or view rather than risk duplicating a tile', () => {
     const display = pickAccountPhotos([row({ specimen: '' }), row({ filename: 'v.jpg', view: null })], TILES_A);
+    assert.deepEqual(display.photos, []);
+  });
+
+  // Tiles are only ever dorsal or ventral, so a lateral or head shot can never be
+  // covered — it is uncovered by definition, not unmatchable.
+  it('shows a view that no tile could ever cover', () => {
+    const display = pickAccountPhotos([row({ filename: 'lat.jpg', view: 'lateral' })], TILES_A);
+    assert.deepEqual(display.photos.map((r) => r.filename), ['lat.jpg']);
+  });
+
+  it('lets one tile stand in for every catalogued row of that specimen and view', () => {
+    const display = pickAccountPhotos([row({ filename: 'a1.jpg' }), row({ filename: 'a2.jpg', weight: 2 })], TILES_A);
     assert.deepEqual(display.photos, []);
   });
 

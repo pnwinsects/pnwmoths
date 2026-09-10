@@ -34,12 +34,13 @@
 //   2. species-unpublished   the slug is on the deny-list (#84) — no page is built
 //   3. *-by-tiles            the account exists and is tiled. A row whose specimen and
 //                            view a tile covers is `superseded-by-tiles`: shown, as a
-//                            better copy. A row with no specimen or no view is
+//                            better copy. A row with a BLANK specimen or a BLANK view is
 //                            `unmatchable-by-tiles`: the account cannot tell whether a
 //                            tile covers it, so it hides it and this report asks for
-//                            the missing cells. A row no tile covers is DISPLAYED — the
-//                            account renders it beside the tiles (ADR 0041) — and
-//                            produces no row here.
+//                            the missing cell. A row no tile covers — including any
+//                            lateral or head view, which tiles never have — is
+//                            DISPLAYED: the account renders it beside the tiles
+//                            (ADR 0041) and it produces no row here.
 //   4. cdn-missing           the account renders an <img> whose object is not on the CDN
 //                            (#232). A broken image displays nothing, so it belongs here.
 //
@@ -303,9 +304,9 @@ export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): Hidd
       if (cause === 'superseded-by-tiles') {
         detail = 'the same specimen and view is published as a high-resolution tile';
       } else if (cause === 'unmatchable-by-tiles') {
-        detail = `row has no specimen or no view, so it cannot be matched against the tiles` +
-          ` (tiled: ${[...keys].sort().map((k) => k.replace('|', '-')).join(' ') || 'none'});` +
-          ' fill in both cells and the account will show it or a tile will supersede it';
+        detail = `row has a blank ${!image.specimen.trim() ? 'specimen' : 'view'} cell, so it cannot be matched` +
+          ` against the tiles (tiled: ${[...keys].sort().map((k) => k.replace('|', '-')).join(' ') || 'none'});` +
+          ' fill it in and the account will show the photograph or a tile will supersede it';
       } else if (cdnStatus === 'missing') {
         cause = 'cdn-missing';
         detail = 'the page links this object, but the last CDN inventory did not find it';

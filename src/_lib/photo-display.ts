@@ -189,18 +189,25 @@ export function tileCoverage(tiles: readonly TileSpecimenLike[]): Set<string> {
 /**
  * How one catalogued photograph stands against a tiled species' tiles.
  *
- *   covered     — a tile shows the same specimen and view, so the tile is the better copy
- *   uncovered   — no tile shows it; the account renders the photograph itself
- *   unmatchable — the row has no specimen or no view, so nothing can be compared. Kept
- *                 distinct from `uncovered` because showing it would risk a duplicate of a
- *                 tile and hiding it would assert something unmeasured; the account hides
- *                 it and the hidden-images report asks for the missing cells instead.
+ *   covered     — a tile shows the same specimen and view, so the tile is the better copy.
+ *                 Every catalogued row of that specimen and view is covered — there can be
+ *                 more than one (#341), and a tile stands in for all of them.
+ *   uncovered   — no tile shows it; the account renders the photograph itself. A row whose
+ *                 view is one tiles never have (`lateral`, `head`) is uncovered by
+ *                 definition, since no tile could ever match it.
+ *   unmatchable — the row has a BLANK specimen or a BLANK view, so nothing can be compared.
+ *                 Kept distinct from `uncovered` because showing it would risk a duplicate
+ *                 of a tile and hiding it would assert something unmeasured; the account
+ *                 hides it and the hidden-images report asks for the missing cell instead.
  */
 export type TileOutcome = 'covered' | 'uncovered' | 'unmatchable';
 
 export function tileOutcome(row: SpecimenView, coverage: ReadonlySet<string>): TileOutcome {
-  const key = coverageKey(row.specimen, row.view);
-  if (key === null) return 'unmatchable';
+  const specimen = (row.specimen ?? '').trim();
+  const view = (row.view ?? '').trim();
+  if (!specimen || !view) return 'unmatchable';
+  const key = coverageKey(specimen, view);
+  if (key === null) return 'uncovered';
   return coverage.has(key) ? 'covered' : 'uncovered';
 }
 

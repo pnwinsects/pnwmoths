@@ -405,15 +405,15 @@ this runbook overwrites objects in place, which is safe; removing them is not.
 Once `data/species-photos.json` marks a species `high_res_available`, its account renders
 the tiles **and** every `data/images.csv` photograph no tile covers
 ([ADR 0041](../docs/adr/0041-account-shows-photos-tiles-do-not-cover.md)). A tile stands in
-for exactly one catalogued row: the one of the same specimen and view. A ventral shot with no
-ventral tile stays on the page. This is `TILE_POLICY` in
+for the catalogued rows of the same specimen and view, and for nothing else. A ventral shot
+with no ventral tile stays on the page, and so does any lateral or head shot. This is `TILE_POLICY` in
 [`src/_lib/photo-display.ts`](../src/_lib/photo-display.ts) —
 [docs/reference/photo-display-rules.md](../docs/reference/photo-display-rules.md) has the
 table.
 
-The one way a tiling run can hide a photograph is a catalogued row with no `specimen` or no
-`view`: the account cannot tell whether a tile already shows it, and hides it rather than
-show the same moth twice. **So check for those.** After `photos:materialize`, run:
+The one way a tiling run can hide a photograph is a catalogued row with a blank `specimen`
+or a blank `view` cell: the account cannot tell whether a tile already shows it, and hides it
+rather than show the same moth twice. **So check for those.** After `photos:materialize`, run:
 
 ```bash
 npm run report:hidden-images
@@ -421,6 +421,5 @@ npm run report:hidden-images
 
 and look at `data/hidden-images-report.csv` for the slugs you just tiled. `superseded-by-tiles`
 is the normal outcome and needs nothing (a tile of the same specimen and view now shows that
-moth better). `unmatchable-by-tiles` is a data fix, not a judgement call: fill in the row's
-`specimen` and `view` from its filename and the account will show it, or a tile will
-supersede it.
+moth better). `unmatchable-by-tiles` is a data fix, not a judgement call: fill in the blank
+cell from the filename and the account will show the photograph, or a tile will supersede it.

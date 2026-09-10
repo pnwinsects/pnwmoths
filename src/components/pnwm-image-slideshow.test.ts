@@ -131,7 +131,7 @@ describe('_syncViewer', () => {
   it('tears the viewer down when stepping onto a plain photograph', async () => {
     let destroyed = false;
     const ctx = {
-      _lightboxOpen: true, highResAvailable: true, _currentIndex: 1,
+      _lightboxOpen: true, highResAvailable: true, _currentIndex: 1, _syncGeneration: 0,
       _images: [slide({ tilesPath: 'species-tiles/x/A-D' }), slide()],
       _osdViewer: { destroy: () => { destroyed = true; } },
       _currentImage: PnwmImageSlideshow.prototype._currentImage,
@@ -146,7 +146,7 @@ describe('_syncViewer', () => {
   it('re-points an existing viewer when stepping onto another tile set', async () => {
     let opened = '';
     const ctx = {
-      _lightboxOpen: true, highResAvailable: true, _currentIndex: 1, cdnBaseUrl: 'https://cdn',
+      _lightboxOpen: true, highResAvailable: true, _currentIndex: 1, _syncGeneration: 0, cdnBaseUrl: 'https://cdn',
       _images: [slide({ tilesPath: 'species-tiles/x/A-D' }), slide({ tilesPath: 'species-tiles/x/A-V' })],
       _osdViewer: { open: (url: string) => { opened = url; } },
       _currentImage: PnwmImageSlideshow.prototype._currentImage,
@@ -160,8 +160,55 @@ describe('_syncViewer', () => {
   });
 
   it('does nothing while the lightbox is closed', async () => {
-    const ctx = { _lightboxOpen: false, _osdViewer: { destroy: () => { throw new Error('should not destroy'); } } };
+    const ctx = { _lightboxOpen: false, _syncGeneration: 0, _osdViewer: { destroy: () => { throw new Error('should not destroy'); } } };
     await assert.doesNotReject(() => PnwmImageSlideshow.prototype._syncViewer.call(ctx));
+  });
+
+  // The render await is where a keypress can land. A sync that started for the tiled
+  // slide must not re-point the viewer once the user has moved on to a plain one.
+  it('abandons a sync overtaken by a step onto a plain slide before render completed', async () => {
+    let opened = 0;
+    let release!: () => void;
+    const rendered = new Promise<boolean>((resolve) => { release = () => resolve(true); });
+    const ctx = {
+      _lightboxOpen: true, highResAvailable: true, _currentIndex: 0, _syncGeneration: 0, cdnBaseUrl: 'https://cdn',
+      _images: [slide({ tilesPath: 'species-tiles/x/A-D' }), slide()],
+      _osdViewer: { open: () => { opened++; }, destroy: () => {} },
+      _currentImage: PnwmImageSlideshow.prototype._currentImage,
+      _usesOsd: PnwmImageSlideshow.prototype._usesOsd,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      shadowRoot: { querySelector: () => ({}) },
+      updateComplete: rendered,
+    };
+    const first = PnwmImageSlideshow.prototype._syncViewer.call(ctx);
+    // The user steps onto the plain slide while the first sync is still waiting on render.
+    ctx._currentIndex = 1;
+    const second = PnwmImageSlideshow.prototype._syncViewer.call(ctx);
+    release();
+    await Promise.all([first, second]);
+    assert.equal(opened, 0, 'the overtaken sync must not re-point the viewer');
+    assert.equal(ctx._osdViewer, null, 'the latest sync tore the viewer down for the plain slide');
+  });
+
+  it('abandons a sync when the lightbox closes before render completed', async () => {
+    let opened = 0;
+    let release!: () => void;
+    const rendered = new Promise<boolean>((resolve) => { release = () => resolve(true); });
+    const ctx = {
+      _lightboxOpen: true, highResAvailable: true, _currentIndex: 0, _syncGeneration: 0, cdnBaseUrl: 'https://cdn',
+      _images: [slide({ tilesPath: 'species-tiles/x/A-D' })],
+      _osdViewer: { open: () => { opened++; }, destroy: () => {} },
+      _currentImage: PnwmImageSlideshow.prototype._currentImage,
+      _usesOsd: PnwmImageSlideshow.prototype._usesOsd,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      shadowRoot: { querySelector: () => ({}) },
+      updateComplete: rendered,
+    };
+    const pending = PnwmImageSlideshow.prototype._syncViewer.call(ctx);
+    ctx._lightboxOpen = false;
+    release();
+    await pending;
+    assert.equal(opened, 0);
   });
 });
 
