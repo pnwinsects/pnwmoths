@@ -34,11 +34,18 @@ interface Row {
   filename: string;
   weight: number | null;
   view?: string | null;
+  specimen?: string | null;
 }
 
 function row(overrides: Partial<Row> = {}): Row {
-  return { species_slug: 'abagrotis-apposita', filename: 'a.jpg', weight: 1, view: 'dorsal', ...overrides };
+  return { species_slug: 'abagrotis-apposita', filename: 'a.jpg', weight: 1, view: 'dorsal', specimen: 'A', ...overrides };
 }
+
+/** The tile set most species carry: specimen A, both views. */
+const TILES_A = [
+  { specimen_id: 'A', view: 'D' },
+  { specimen_id: 'A', view: 'V' },
+];
 
 describe('the ordering, in both dialects', () => {
   it('orders low weight first', () => {
@@ -83,27 +90,50 @@ describe('the ordering, in both dialects', () => {
 
 describe('the account: tiles REPLACE the catalogued photographs', () => {
   it('shows every row in weight order when there are no tiles', () => {
-    const display = pickAccountPhotos([row({ filename: 'b.jpg', weight: 2 }), row({ filename: 'a.jpg', weight: 1 })], false);
+    const display = pickAccountPhotos([row({ filename: 'b.jpg', weight: 2 }), row({ filename: 'a.jpg', weight: 1 })], null);
     assert.equal(display.mode, 'photos');
     assert.deepEqual(display.photos.map((r) => r.filename), ['a.jpg', 'b.jpg']);
   });
 
-  // This is the asymmetry that made tiling a species remove its photographs from its own
-  // page while leaving them on /browse/ and Identify (#299). It is intended; it is only
-  // dangerous when it is invisible.
-  it('shows NONE of them when the species is tiled', () => {
-    const display = pickAccountPhotos([row()], true);
+  // Before ADR 0041 a tiled account showed NONE of its catalogued photographs, and 33 the
+  // curator asked to see appeared nowhere on the site (#336). Now a tile supersedes only
+  // the row of the same specimen and view; every other row still renders.
+  it('shows the rows no tile covers when the species is tiled, in weight order', () => {
+    const display = pickAccountPhotos([
+      row({ filename: 'a-d.jpg', weight: 1, specimen: 'A', view: 'dorsal' }),
+      row({ filename: 'a-v.jpg', weight: 2, specimen: 'A', view: 'ventral' }),
+      row({ filename: 'c-v.jpg', weight: 4, specimen: 'C', view: 'ventral' }),
+      row({ filename: 'b-d.jpg', weight: 3, specimen: 'B', view: 'dorsal' }),
+    ], TILES_A);
     assert.equal(display.mode, 'tiles');
+    assert.deepEqual(display.photos.map((r) => r.filename), ['b-d.jpg', 'c-v.jpg']);
+  });
+
+  // dorsal/ventral against D/V: forgetting to normalise finds nothing covered and shows
+  // every photograph twice, once as a tile and once as itself.
+  it('matches coverage across the two view vocabularies', () => {
+    const display = pickAccountPhotos([row({ view: 'Ventral', specimen: ' a ' })], TILES_A);
     assert.deepEqual(display.photos, []);
   });
 
-  it('distinguishes "tiles" from "nothing at all"', () => {
-    assert.equal(pickAccountPhotos([], false).mode, 'none');
-    assert.equal(pickAccountPhotos([], true).mode, 'tiles');
+  it('hides a row it cannot match rather than risk duplicating a tile', () => {
+    const display = pickAccountPhotos([row({ specimen: '' }), row({ filename: 'v.jpg', view: null })], TILES_A);
+    assert.deepEqual(display.photos, []);
   });
 
-  it('records that only the account replaces, and what the others do', () => {
-    assert.equal(TILE_POLICY['account'], 'replaces');
+  it('shows every row when the species is flagged tiled but has no tiles', () => {
+    const display = pickAccountPhotos([row()], []);
+    assert.equal(display.mode, 'tiles');
+    assert.deepEqual(display.photos.map((r) => r.filename), ['a.jpg']);
+  });
+
+  it('distinguishes "tiles" from "nothing at all"', () => {
+    assert.equal(pickAccountPhotos([], null).mode, 'none');
+    assert.equal(pickAccountPhotos([], TILES_A).mode, 'tiles');
+  });
+
+  it('records that only the account supplements tiles, and what the others do', () => {
+    assert.equal(TILE_POLICY['account'], 'supplements');
     assert.equal(TILE_POLICY['share'], 'prefers');
     assert.equal(TILE_POLICY['browse-card'], 'fallback');
     assert.equal(TILE_POLICY['identify'], 'ignores');

@@ -7,7 +7,12 @@ import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
 import { derivativeUrl, sourceUrl, type VariantToken } from "./src/_lib/derivative-url.ts";
-import { pickAccountPhotos, pickSimilarPhoto } from "./src/_lib/photo-display.ts";
+import {
+  pickAccountPhotos,
+  pickSimilarPhoto,
+  type SpecimenView,
+  type TileSpecimenLike,
+} from "./src/_lib/photo-display.ts";
 import {
   proseDescription,
   speciesDescription,
@@ -130,14 +135,14 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
     ));
 
   // {{ images[sp.slug] | accountPhotos(speciesPhotos[sp.slug]) }} — what the species
-  // account displays: { mode: 'tiles' | 'photos' | 'none', photos }. The tile branch is
-  // TILE_POLICY 'replaces' (src/_lib/photo-display.ts), stated there and not in the
-  // template.
+  // account displays: { mode: 'tiles' | 'photos' | 'none', photos }. In 'tiles' mode
+  // `photos` is the catalogued rows no tile covers — TILE_POLICY 'supplements'
+  // (src/_lib/photo-display.ts), stated there and not in the template.
   eleventyConfig.addFilter("accountPhotos", (images, highRes) => {
-    const entry = highRes as { high_res_available?: boolean } | undefined;
+    const entry = highRes as { high_res_available?: boolean; specimens?: TileSpecimenLike[] } | undefined;
     return pickAccountPhotos(
-      (images as SpeciesImageLike[] | undefined) ?? [],
-      entry?.high_res_available === true,
+      (images as (SpeciesImageLike & SpecimenView)[] | undefined) ?? [],
+      entry?.high_res_available === true ? (entry.specimens ?? []) : null,
     );
   });
 

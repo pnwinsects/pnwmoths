@@ -4,7 +4,7 @@
 // The load-bearing behaviours, each of which fails SILENTLY and plausibly:
 //   - view normalisation (dorsal/ventral vs D/V) — get it wrong and every row on every
 //     tiled species is reported hidden, which reads fine at 3,500 rows
-//   - cause precedence — a gated species must not be described as "hidden by tiles"
+//   - cause precedence — a gated species must not be described as "superseded by tiles"
 //   - cdn_status never overstating what the inventory establishes
 //   - the binomial comparison catching coturnix, which a genus-only test does not
 //   - displayed_as, which now comes from src/_lib/photo-display-index.ts. Reading the
@@ -117,16 +117,18 @@ describe('classifyTileOutcome', () => {
     assert.equal(classifyTileOutcome(image({ view: 'ventral' }), coverage), 'superseded-by-tiles');
   });
 
-  it('calls a row hidden when no tile covers its specimen', () => {
-    assert.equal(classifyTileOutcome(image({ specimen: 'C' }), coverage), 'hidden-by-tiles');
+  // A row no tile covers is DISPLAYED — the account renders it beside the tiles
+  // (ADR 0041) — so it is not this report's business and classifies to null.
+  it('reports nothing for a row no tile covers', () => {
+    assert.equal(classifyTileOutcome(image({ specimen: 'C' }), coverage), null);
   });
 
-  it('calls a row hidden when the specimen is tiled but that view is not', () => {
+  it('reports nothing when the specimen is tiled but that view is not', () => {
     const dorsalOnly = tileCoverage([{ specimen_id: 'A', view: 'D' }]);
-    assert.equal(classifyTileOutcome(image({ view: 'ventral' }), dorsalOnly), 'hidden-by-tiles');
+    assert.equal(classifyTileOutcome(image({ view: 'ventral' }), dorsalOnly), null);
   });
 
-  it('calls a row unmatchable rather than hidden when it cannot be keyed', () => {
+  it('calls a row unmatchable rather than displayed when it cannot be keyed', () => {
     assert.equal(classifyTileOutcome(image({ specimen: '' }), coverage), 'unmatchable-by-tiles');
     assert.equal(classifyTileOutcome(image({ view: '' }), coverage), 'unmatchable-by-tiles');
   });
@@ -270,7 +272,7 @@ describe('buildHiddenImageRows — links', () => {
 
   it('gives the species page URL when the page exists', () => {
     const rows = buildHiddenImageRows(options({
-      images: [image({ specimen: 'C' })],
+      images: [image({ specimen: '' })],
       tiled: new Map([['phyllodesma-americana', TILES_A]]),
     }));
     assert.equal(rows[0]?.species_page_url, 'https://moths.pnwinsects.org/species/phyllodesma-americana/');
@@ -292,8 +294,8 @@ describe('buildHiddenImageRows — ordering', () => {
       tiled: new Map([['phyllodesma-americana', TILES_A]]),
       withheldFamilies: new Set(['geometridae']),
     }));
+    // The specimen-C row is displayed on its account and produces no row at all.
     assert.deepEqual(rows.map((r) => r.cause), [
-      'hidden-by-tiles',
       'family-withheld',
       'superseded-by-tiles',
     ]);
@@ -302,7 +304,7 @@ describe('buildHiddenImageRows — ordering', () => {
   it('puts superseded-by-tiles last in the severity table', () => {
     const worst = Math.max(...Object.values(CAUSE_SEVERITY));
     assert.equal(CAUSE_SEVERITY['superseded-by-tiles'], worst);
-    assert.equal(CAUSE_SEVERITY['hidden-by-tiles'], 0);
+    assert.equal(CAUSE_SEVERITY['unmatchable-by-tiles'], 0);
   });
 });
 
@@ -324,25 +326,25 @@ describe('toCsv', () => {
 describe('summarize', () => {
   it('counts by cause, and separately how many appear nowhere at all', () => {
     const rows = buildHiddenImageRows(options({
-      images: [image({ specimen: 'C' }), image({ specimen: 'D' }), image()],
+      images: [image({ specimen: '' }), image({ view: '' }), image()],
       tiled: new Map([['phyllodesma-americana', TILES_A]]),
       displayIndex: new Map([
         [photoKey('phyllodesma-americana', 'Phyllodesma americana-A-D.jpg'), new Set(['browse' as const])],
       ]),
     }));
     assert.deepEqual(summarize(rows), {
-      // Both hidden rows share the default filename, so both pick up the browse surface.
-      'hidden-by-tiles': { total: 2, nowhere: 0 },
+      // Both unmatchable rows share the default filename, so both pick up the browse surface.
+      'unmatchable-by-tiles': { total: 2, nowhere: 0 },
       'superseded-by-tiles': { total: 1, nowhere: 0 },
     });
   });
 
   it('counts a row shown nowhere in both totals', () => {
     const rows = buildHiddenImageRows(options({
-      images: [image({ specimen: 'C' })],
+      images: [image({ specimen: '' })],
       tiled: new Map([['phyllodesma-americana', TILES_A]]),
     }));
-    assert.deepEqual(summarize(rows), { 'hidden-by-tiles': { total: 1, nowhere: 1 } });
+    assert.deepEqual(summarize(rows), { 'unmatchable-by-tiles': { total: 1, nowhere: 1 } });
   });
 });
 
@@ -391,13 +393,13 @@ describe('loadMissingOnCdn', () => {
 describe('buildHiddenImageRows — displayed_as', () => {
   it('carries the surfaces through to the row', () => {
     const rows = buildHiddenImageRows(options({
-      images: [image({ specimen: 'C' })],
+      images: [image({ specimen: '' })],
       tiled: new Map([['phyllodesma-americana', TILES_A]]),
       displayIndex: new Map([
         [photoKey('phyllodesma-americana', 'Phyllodesma americana-A-D.jpg'), new Set(['browse' as const])],
       ]),
     }));
-    assert.equal(rows[0]?.cause, 'hidden-by-tiles');
+    assert.equal(rows[0]?.cause, 'unmatchable-by-tiles');
     assert.equal(rows[0]?.displayed_as, 'browse');
   });
 
@@ -405,8 +407,8 @@ describe('buildHiddenImageRows — displayed_as', () => {
   it('sorts rows shown nowhere ahead of rows still on a thumbnail', () => {
     const rows = buildHiddenImageRows(options({
       images: [
-        image({ species_slug: 'aaa-shown', filename: 'Aaa shown-C-D.jpg', specimen: 'C' }),
-        image({ species_slug: 'bbb-hidden', filename: 'Bbb hidden-C-D.jpg', specimen: 'C' }),
+        image({ species_slug: 'aaa-shown', filename: 'Aaa shown-C-D.jpg', specimen: '' }),
+        image({ species_slug: 'bbb-hidden', filename: 'Bbb hidden-C-D.jpg', specimen: '' }),
       ],
       species: new Map([
         ['aaa-shown', { genus: 'Aaa', species: 'shown', common_name: '', family: 'Noctuidae' }],

@@ -55,27 +55,49 @@ eleventyComputed:
 
 <div class="species-content">
   <div class="species-photos">
-    {# The account rule, from src/_lib/photo-display.ts: tiles render INSTEAD OF the
-       catalogued photographs (TILE_POLICY 'replaces'), so `display.mode` is that branch
-       and this template no longer restates it. #}
+    {# The account rule, from src/_lib/photo-display.ts: every tile renders, and so does
+       every catalogued photograph no tile covers (TILE_POLICY 'supplements', ADR 0041).
+       `display.mode` is that branch and `display.photos` the uncovered rows, so this
+       template restates neither. #}
     {% set highResEntry = speciesPhotos[sp.slug] %}
     {% set display = images[sp.slug] | accountPhotos(highResEntry) %}
     <pnwm-image-slideshow
       slug="{{ sp.slug }}"
       {% if highResEntry and highResEntry.high_res_available %}
       high-res-available
-      high-res-specimens="{{ highResEntry.specimens | tojson | escape }}"
       cdn-base-url="{{ cdnBaseUrl }}"
       prefix-url="{{ '/osd-images/' | url }}"
       {% endif %}
       data-pagefind-ignore>
-      {% if display.mode == 'photos' %}
+      {% if display.mode == 'tiles' %}
+        {# A tile figure carries its DZI path, so the slideshow opens the deep-zoom viewer
+           for exactly the figures that have one and a plain lightbox for the rest. #}
+        {% for specimen in highResEntry.specimens %}
+          {% set thumbSrc = specimen.tiles_path + "_thumbnail.webp" %}
+          <figure>
+            <img src="{{ thumbSrc | derivative('530') }}"
+                 data-thumb="{{ thumbSrc | derivative('320h') }}"
+                 data-tiles-path="{{ specimen.tiles_path }}"
+                 data-specimen="{{ specimen.specimen_id }}"
+                 data-view="{{ "Dorsal" if specimen.view == "D" else "Ventral" }}"
+                 srcset="{{ thumbSrc | derivative('530') }} 530w, {{ thumbSrc | derivative('1060') }} 1060w, {{ thumbSrc | cdnSource }} 1500w"
+                 sizes="530px"
+                 alt="{{ sp.genus }} {{ sp.species_display }}"
+                 {% if highResEntry.photographer %}data-photographer="{{ highResEntry.photographer }}"{% endif %}
+                 {% if highResEntry.license %}data-license="{{ highResEntry.license }}"{% endif %}>
+            <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>
+          </figure>
+        {% endfor %}
+      {% endif %}
+      {% if display.mode == 'photos' or display.mode == 'tiles' %}
         {% for img in display.photos %}
           <figure>
             <img src="{{ (sp.slug + '/' + img.filename) | derivative('full') }}"
                  data-thumb="{{ (sp.slug + '/' + img.filename) | derivative('320h') }}"
                  alt="{{ sp.genus }} {{ sp.species_display }}"
                  data-photographer="{{ img.photographer }}"
+                 {% if img.specimen %}data-specimen="{{ img.specimen }}"{% endif %}
+                 {% if img.view %}data-view="{{ img.view | capitalize }}"{% endif %}
                  {% if img.locality %}data-locality="{{ img.locality }}"{% endif %}
                  {% if img.state %}data-state="{{ img.state }}"{% endif %}
                  {% if img.elevation_ft %}data-elevation="{{ img.elevation_ft }}"{% endif %}
@@ -87,21 +109,8 @@ eleventyComputed:
             <figcaption>{{ img.photographer }}</figcaption>
           </figure>
         {% endfor %}
-      {% elif display.mode == 'tiles' %}
-        {% for specimen in highResEntry.specimens %}
-          {% set thumbSrc = specimen.tiles_path + "_thumbnail.webp" %}
-          <figure>
-            <img src="{{ thumbSrc | derivative('530') }}"
-                 data-thumb="{{ thumbSrc | derivative('320h') }}"
-                 srcset="{{ thumbSrc | derivative('530') }} 530w, {{ thumbSrc | derivative('1060') }} 1060w, {{ thumbSrc | cdnSource }} 1500w"
-                 sizes="530px"
-                 alt="{{ sp.genus }} {{ sp.species_display }}"
-                 {% if highResEntry.photographer %}data-photographer="{{ highResEntry.photographer }}"{% endif %}
-                 {% if highResEntry.license %}data-license="{{ highResEntry.license }}"{% endif %}>
-            <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>
-          </figure>
-        {% endfor %}
-      {% else %}
+      {% endif %}
+      {% if display.mode == 'none' %}
         <figure>
           <div aria-label="No images available for this species">
             No photos on file for this species.

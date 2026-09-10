@@ -33,7 +33,7 @@ derived, never declared. `NavImage`, `pickNavImages()` and `navImages` all name 
 
 | Surface | Picker | Rule |
 |---|---|---|
-| Species account carousel | `pickAccountPhotos` | **Every** row for the species, in `weight` order — **unless** the species has high-res tiles, in which case the deep-zoom viewer renders *instead of* the catalogued photographs and none of them appear. |
+| Species account carousel | `pickAccountPhotos` | Without high-res tiles: **every** row for the species, in `weight` order. With tiles: every tile, then every row whose **specimen and view no tile covers**, in `weight` order ([ADR 0041](../adr/0041-account-shows-photos-tiles-do-not-cover.md)). A row with no `specimen` or no `view` cannot be compared and is not shown. |
 | Browse species card | `pickCardPhoto` | Lowest `weight` among rows whose `view` is not `ventral`. A species with **no** `images.csv` row at all falls back to a synthetic thumbnail from the high-res manifest (prefers the `D` specimen) — [#84](https://github.com/pnwinsects/pnwmoths/issues/84); `images.csv` rows always win when both exist. |
 | Browse **genus** strip | `pickGenusStrip` | Up to **four** images taken across the whole genus by `weight`, deduped by thumbnail path — *not* one per species. A species can therefore put a second photograph on `/browse/` that no per-species rule predicts. |
 | Browse **tribe / subfamily / family** strips | `pickHigherStrip` | The genus strip's **first** image from each genus in tree order, until four. |
@@ -47,12 +47,14 @@ filters), `src/_data/taxon.ts`, `scripts/build-key.ts` and `src/_lib/social-meta
 
 ## Consequences worth knowing before you touch this
 
-- **Only the account lets tiles REPLACE the catalogued photographs.** Tiling a species removes
-  its photographs from its own page while leaving them on `/browse/`, Identify and other species'
-  similar-species rows. Three surfaces do consult tile status, and they do three different things
-  with it: `TILE_POLICY` says which — `replaces` for the account, `prefers` for the share image,
-  `fallback` for Browse (a tile stands in only where there is no catalogued row at all),
-  `ignores` for Identify and similar species. One table rather than four conventions.
+- **Only the account compares a photograph against the tiles.** A tile supersedes exactly the
+  catalogued row of the same specimen and view; every other row still renders beside the tiles.
+  Three surfaces consult tile status, and they do three different things with it: `TILE_POLICY`
+  says which — `supplements` for the account, `prefers` for the share image, `fallback` for
+  Browse (a tile stands in only where there is no catalogued row at all), `ignores` for Identify
+  and similar species. One table rather than four conventions. The comparison itself is
+  `tileOutcome()`, shared with the hidden-images report so the two cannot disagree; a row with
+  no `specimen` or no `view` is `unmatchable` and hidden rather than risk a duplicate.
 - **The ventral exclusion is Browse-only** ([#107](https://github.com/pnwinsects/pnwmoths/issues/107)).
   Rows with a *blank* `view` are kept everywhere — unclassified is not confirmed-ventral. Browse
   and Identify differ **only** in that filter, which is exactly the difference a tidying

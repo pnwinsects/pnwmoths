@@ -64,7 +64,9 @@ The layers:
 - **A picker per surface** in the same module, parameterized by scope, count, filter and
   tile-awareness — with `TILE_POLICY` naming what tiles do to each surface
   (`replaces` / `prefers` / `fallback` / `ignores`). The account's exclusive tile branch is
-  stated once, as data, instead of being known to one consumer out of six.
+  stated once, as data, instead of being known to one consumer out of six. *(The account
+  policy has since changed from `replaces` to `supplements` —
+  [ADR 0041](0041-account-shows-photos-tiles-do-not-cover.md).)*
 - **An inverse index** in [`src/_lib/photo-display-index.ts`](../../src/_lib/photo-display-index.ts),
   built by [`scripts/lib/display-index.ts`](../../scripts/lib/display-index.ts) **out of the
   artifacts the surfaces render from** — the Browse tree from `src/_data/taxon.ts`, the

@@ -55,118 +55,122 @@ describe('_formatCaption', () => {
 });
 
 describe('_buildDziUrl', () => {
-  it('constructs DZI URL from cdnBaseUrl + tiles_path + .dzi extension', () => {
+  it('constructs DZI URL from cdnBaseUrl + tiles path + .dzi extension', () => {
     const ctx = { cdnBaseUrl: 'https://moths.pnwinsects.org' };
-    const specimen = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
-    const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, specimen);
+    const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, 'species-tiles/abagrotis-apposita/A-D');
     assert.equal(result, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-D.dzi');
   });
 
-  it('handles institutional accession specimen_id', () => {
+  it('handles institutional accession specimen ids', () => {
     const ctx = { cdnBaseUrl: 'https://moths.pnwinsects.org' };
-    const specimen = { specimen_id: 'WWUC0000003275', view: 'V', tiles_path: 'species-tiles/feltia-herilis/WWUC0000003275-V' };
-    const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, specimen);
+    const result = PnwmImageSlideshow.prototype._buildDziUrl.call(ctx, 'species-tiles/feltia-herilis/WWUC0000003275-V');
     assert.equal(result, 'https://moths.pnwinsects.org/species-tiles/feltia-herilis/WWUC0000003275-V.dzi');
   });
 });
 
-describe('_nextSpecimen', () => {
-  const specimenA = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
-  const specimenB = { specimen_id: 'A', view: 'V', tiles_path: 'species-tiles/abagrotis-apposita/A-V' };
+// A strip mixes tiled specimens with catalogued photographs no tile covers (ADR 0041),
+// so stepping through the lightbox walks EVERY slide and the viewer follows the slide.
+function slide(overrides: Partial<{ tilesPath: string; src: string }> = {}) {
+  return { src: 'x.jpg', thumb: 'x.jpg', alt: '', tilesPath: '', specimen: '', view: '', photographer: '', license: '',
+    locality: '', state: '', elevation: '', year: '', month: '', day: '', collector: '', subspecies: '', ...overrides };
+}
 
-  it('advances _currentIndex from 0 to 1 and calls open with correct URL', () => {
-    let openedWith = null;
-    const _osdViewer = { open: (url: string) => { openedWith = url; } };
-    const ctx = {
-      _currentIndex: 0,
-      _highResSpecimens: [specimenA, specimenB],
-      _osdViewer,
-      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
-      cdnBaseUrl: 'https://moths.pnwinsects.org',
-    };
-    PnwmImageSlideshow.prototype._nextSpecimen.call(ctx);
+describe('_nextImage / _prevImage', () => {
+  const tiled = slide({ tilesPath: 'species-tiles/abagrotis-apposita/A-D' });
+  const plain = slide({ src: 'plain.jpg' });
+
+  it('advances through every slide, tiled or not, and re-syncs the viewer', () => {
+    let synced = 0;
+    const ctx = { _images: [tiled, plain], _currentIndex: 0, _syncViewer: async () => { synced++; } };
+    PnwmImageSlideshow.prototype._nextImage.call(ctx);
     assert.equal(ctx._currentIndex, 1);
-    assert.equal(openedWith, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-V.dzi');
+    assert.equal(synced, 1);
   });
 
-  it('wraps from last index back to 0 and calls open with first specimen URL', () => {
-    let openedWith = null;
-    const _osdViewer = { open: (url: string) => { openedWith = url; } };
-    const ctx = {
-      _currentIndex: 1,
-      _highResSpecimens: [specimenA, specimenB],
-      _osdViewer,
-      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
-      cdnBaseUrl: 'https://moths.pnwinsects.org',
-    };
-    PnwmImageSlideshow.prototype._nextSpecimen.call(ctx);
+  it('wraps from the last slide back to the first', () => {
+    const ctx = { _images: [tiled, plain], _currentIndex: 1, _syncViewer: async () => {} };
+    PnwmImageSlideshow.prototype._nextImage.call(ctx);
     assert.equal(ctx._currentIndex, 0);
-    assert.equal(openedWith, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-D.dzi');
   });
 
-  it('does not throw when _osdViewer is null; _currentIndex still advances', () => {
-    const ctx = {
-      _currentIndex: 0,
-      _highResSpecimens: [specimenA, specimenB],
-      _osdViewer: null,
-      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
-      cdnBaseUrl: 'https://moths.pnwinsects.org',
-    };
-    assert.doesNotThrow(() => PnwmImageSlideshow.prototype._nextSpecimen.call(ctx));
+  it('wraps from the first slide back to the last', () => {
+    const ctx = { _images: [tiled, plain], _currentIndex: 0, _syncViewer: async () => {} };
+    PnwmImageSlideshow.prototype._prevImage.call(ctx);
     assert.equal(ctx._currentIndex, 1);
+  });
+
+  it('does nothing with no slides', () => {
+    const ctx = { _images: [], _currentIndex: 0, _syncViewer: async () => { throw new Error('should not sync'); } };
+    assert.doesNotThrow(() => PnwmImageSlideshow.prototype._nextImage.call(ctx));
+    assert.equal(ctx._currentIndex, 0);
   });
 });
 
-describe('_prevSpecimen', () => {
-  const specimenA = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
-  const specimenB = { specimen_id: 'A', view: 'V', tiles_path: 'species-tiles/abagrotis-apposita/A-V' };
-
-  it('wraps from index 0 to last index and calls open with last specimen URL', () => {
-    let openedWith = null;
-    const _osdViewer = { open: (url: string) => { openedWith = url; } };
-    const ctx = {
-      _currentIndex: 0,
-      _highResSpecimens: [specimenA, specimenB],
-      _osdViewer,
-      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
-      cdnBaseUrl: 'https://moths.pnwinsects.org',
-    };
-    PnwmImageSlideshow.prototype._prevSpecimen.call(ctx);
-    assert.equal(ctx._currentIndex, 1);
-    assert.equal(openedWith, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-V.dzi');
+describe('_usesOsd', () => {
+  const tiled = slide({ tilesPath: 'species-tiles/abagrotis-apposita/A-D' });
+  const plain = slide();
+  const usesOsd = (ctx: object) => PnwmImageSlideshow.prototype._usesOsd.call({
+    _currentImage: PnwmImageSlideshow.prototype._currentImage, ...ctx,
   });
 
-  it('retreats from index 1 to 0 and calls open with first specimen URL', () => {
-    let openedWith = null;
-    const _osdViewer = { open: (url: string) => { openedWith = url; } };
-    const ctx = {
-      _currentIndex: 1,
-      _highResSpecimens: [specimenA, specimenB],
-      _osdViewer,
-      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
-      cdnBaseUrl: 'https://moths.pnwinsects.org',
-    };
-    PnwmImageSlideshow.prototype._prevSpecimen.call(ctx);
-    assert.equal(ctx._currentIndex, 0);
-    assert.equal(openedWith, 'https://moths.pnwinsects.org/species-tiles/abagrotis-apposita/A-D.dzi');
+  it('is false when the page has no high-res tiles at all', () => {
+    assert.equal(usesOsd({ highResAvailable: false, _images: [tiled], _currentIndex: 0 }), false);
+  });
+
+  it('is true on a tiled slide and false on a plain photograph in the same strip', () => {
+    assert.equal(usesOsd({ highResAvailable: true, _images: [tiled, plain], _currentIndex: 0 }), true);
+    assert.equal(usesOsd({ highResAvailable: true, _images: [tiled, plain], _currentIndex: 1 }), false);
+  });
+
+  it('is false before any figure has been read', () => {
+    assert.equal(usesOsd({ highResAvailable: true, _images: [], _currentIndex: 0 }), false);
   });
 });
 
-describe('useOsd derivation', () => {
-  const useOsd = (ctx: { highResAvailable: boolean; _highResSpecimens?: unknown[] }) =>
-    ctx.highResAvailable && (ctx._highResSpecimens?.length ?? 0) > 0;
-
-  it('is false when highResAvailable is false and _highResSpecimens is undefined', () => {
-    assert.equal(useOsd({ highResAvailable: false, _highResSpecimens: undefined }), false);
+describe('_syncViewer', () => {
+  it('tears the viewer down when stepping onto a plain photograph', async () => {
+    let destroyed = false;
+    const ctx = {
+      _lightboxOpen: true, highResAvailable: true, _currentIndex: 1,
+      _images: [slide({ tilesPath: 'species-tiles/x/A-D' }), slide()],
+      _osdViewer: { destroy: () => { destroyed = true; } },
+      _currentImage: PnwmImageSlideshow.prototype._currentImage,
+      _usesOsd: PnwmImageSlideshow.prototype._usesOsd,
+      updateComplete: Promise.resolve(true),
+    };
+    await PnwmImageSlideshow.prototype._syncViewer.call(ctx);
+    assert.equal(destroyed, true);
+    assert.equal(ctx._osdViewer, null);
   });
 
-  it('is false when highResAvailable is true but _highResSpecimens is empty', () => {
-    assert.equal(useOsd({ highResAvailable: true, _highResSpecimens: [] }), false);
+  it('re-points an existing viewer when stepping onto another tile set', async () => {
+    let opened = '';
+    const ctx = {
+      _lightboxOpen: true, highResAvailable: true, _currentIndex: 1, cdnBaseUrl: 'https://cdn',
+      _images: [slide({ tilesPath: 'species-tiles/x/A-D' }), slide({ tilesPath: 'species-tiles/x/A-V' })],
+      _osdViewer: { open: (url: string) => { opened = url; } },
+      _currentImage: PnwmImageSlideshow.prototype._currentImage,
+      _usesOsd: PnwmImageSlideshow.prototype._usesOsd,
+      _buildDziUrl: PnwmImageSlideshow.prototype._buildDziUrl,
+      shadowRoot: { querySelector: () => ({}) },
+      updateComplete: Promise.resolve(true),
+    };
+    await PnwmImageSlideshow.prototype._syncViewer.call(ctx);
+    assert.equal(opened, 'https://cdn/species-tiles/x/A-V.dzi');
   });
 
-  it('is true when highResAvailable is true and _highResSpecimens has at least one entry', () => {
-    const specimen = { specimen_id: 'A', view: 'D', tiles_path: 'species-tiles/abagrotis-apposita/A-D' };
-    assert.equal(useOsd({ highResAvailable: true, _highResSpecimens: [specimen] }), true);
+  it('does nothing while the lightbox is closed', async () => {
+    const ctx = { _lightboxOpen: false, _osdViewer: { destroy: () => { throw new Error('should not destroy'); } } };
+    await assert.doesNotReject(() => PnwmImageSlideshow.prototype._syncViewer.call(ctx));
+  });
+});
+
+describe('_specimenLine', () => {
+  it('names the specimen and view when both are known', () => {
+    assert.equal(PnwmImageSlideshow.prototype._specimenLine.call({}, { specimen: 'A', view: 'Dorsal' }), 'Specimen A · Dorsal');
+  });
+  it('is empty for a photograph with no specimen letter', () => {
+    assert.equal(PnwmImageSlideshow.prototype._specimenLine.call({}, { view: 'Dorsal' }), '');
   });
 });
 
@@ -259,7 +263,6 @@ describe('_handleKeydown', () => {
     let closed = false;
     const ctx = {
       _lightboxOpen: open,
-      _highResSpecimens: [],
       _images: [],
       _closeLightbox() { closed = true; },
     };

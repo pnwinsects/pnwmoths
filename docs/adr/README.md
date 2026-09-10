@@ -49,3 +49,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0038](0038-photo-identity-is-data-not-filename.md) | A photograph's species lives in `data/photo-determinations.csv`, not in its filename; filenames are permanent opaque identifiers | Accepted |
 | [0039](0039-photo-display-selection-by-weight.md) | `weight` alone selects which photograph a surface shows; the never-populated `navigational` flag is removed and the seven display rules are written down | Accepted |
 | [0040](0040-photo-display-module.md) | One module owns photo display selection; the location index it derives is checked against the emitted HTML on every build | Accepted |
+| [0041](0041-account-shows-photos-tiles-do-not-cover.md) | A tiled species account shows its tiles *and* every catalogued photograph no tile covers; tiles supersede only the same specimen and view | Accepted |

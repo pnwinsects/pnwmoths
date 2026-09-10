@@ -1,5 +1,31 @@
 import { LitElement, html, css, type PropertyDeclarations, type CSSResult, type TemplateResult, type PropertyValues } from 'lit';
-import type { Specimen } from '../types/index.ts';
+
+/**
+ * One slide, read from a light-DOM <figure>. A figure that carries `data-tiles-path` is a
+ * high-resolution tile set and opens in the deep-zoom viewer; one without is a catalogued
+ * photograph and opens as a plain image. Both kinds sit in the same strip, because a
+ * species account shows its tiles AND the catalogued photographs no tile covers
+ * (ADR 0041) — the viewer is chosen per slide, never per page.
+ */
+export interface SlideImage {
+  src: string;
+  thumb: string;
+  alt: string;
+  /** DZI path under the CDN base, without the `.dzi` suffix; '' for a plain photograph. */
+  tilesPath: string;
+  specimen: string;
+  view: string;
+  photographer: string;
+  license: string;
+  locality: string;
+  state: string;
+  elevation: string;
+  year: string;
+  month: string;
+  day: string;
+  collector: string;
+  subspecies: string;
+}
 
 export class PnwmImageSlideshow extends LitElement {
   static properties: PropertyDeclarations = {
@@ -9,10 +35,8 @@ export class PnwmImageSlideshow extends LitElement {
     _images: { attribute: false, state: true },
     _stripOverflows: { state: true },
     highResAvailable: { type: Boolean, attribute: 'high-res-available' },
-    highResSpecimens: { attribute: 'high-res-specimens' },
     cdnBaseUrl: { type: String, attribute: 'cdn-base-url' },
     prefixUrl: { type: String, attribute: 'prefix-url' },
-    _highResSpecimens: { state: true },
   };
 
   static styles: CSSResult = css`
@@ -133,27 +157,11 @@ export class PnwmImageSlideshow extends LitElement {
   declare slug: string;
   declare _currentIndex: number;
   declare _lightboxOpen: boolean;
-  declare _images: Array<{
-    src: string;
-    thumb: string;
-    alt: string;
-    photographer: string;
-    license: string;
-    locality: string;
-    state: string;
-    elevation: string;
-    year: string;
-    month: string;
-    day: string;
-    collector: string;
-    subspecies: string;
-  }>;
+  declare _images: SlideImage[];
   declare _stripOverflows: boolean;
   declare highResAvailable: boolean;
-  declare highResSpecimens: string;
   declare cdnBaseUrl: string;
   declare prefixUrl: string;
-  declare _highResSpecimens: Specimen[];
   declare _osdViewer: import('openseadragon').Viewer | null;
   declare _resizeObserver: ResizeObserver | null;
   declare _inertedElements: Element[];
@@ -173,9 +181,7 @@ export class PnwmImageSlideshow extends LitElement {
     this._inertedElements = [];
     this._osdViewer = null;
     this._lightboxOpener = null;
-    this._highResSpecimens = [];
     this.highResAvailable = false;
-    this.highResSpecimens = '';
     this.cdnBaseUrl = '';
     this.prefixUrl = '';
     this._boundHandleKeydown = this._handleKeydown.bind(this);
@@ -196,6 +202,9 @@ export class PnwmImageSlideshow extends LitElement {
         // thumbnail so it does not download the full-size image (ADR 0022).
         thumb: img.dataset.thumb || img.getAttribute('src') || '',
         alt: img.getAttribute('alt') || '',
+        tilesPath: img.dataset.tilesPath || '',
+        specimen: img.dataset.specimen || '',
+        view: img.dataset.view || '',
         photographer: img.dataset.photographer || (figcaption ? figcaption.textContent?.trim() ?? '' : ''),
         license: img.dataset.license || '',
         locality: img.dataset.locality || '',
@@ -212,15 +221,6 @@ export class PnwmImageSlideshow extends LitElement {
     // Hide static figures once JS component takes over
     if (this._images.length > 0) {
       figures.forEach(f => { (f as HTMLElement).style.display = 'none'; });
-    }
-
-    if (this.getAttribute('high-res-specimens')) {
-      try {
-        this._highResSpecimens = JSON.parse(this.getAttribute('high-res-specimens') ?? '[]') as Specimen[];
-      } catch (e) {
-        console.error('[pnwmoths] Failed to parse high-res-specimens attribute', e);
-        this._highResSpecimens = [];
-      }
     }
 
     document.addEventListener('keydown', this._boundHandleKeydown);
@@ -261,11 +261,9 @@ export class PnwmImageSlideshow extends LitElement {
     if (e.key === 'Escape' && this._lightboxOpen) {
       this._closeLightbox();
     } else if (e.key === 'ArrowLeft' && this._lightboxOpen) {
-      if (this._highResSpecimens?.length > 1) this._prevSpecimen();
-      else if (this._images.length > 1) this._currentIndex = (this._currentIndex - 1 + this._images.length) % this._images.length;
+      if (this._images.length > 1) this._prevImage();
     } else if (e.key === 'ArrowRight' && this._lightboxOpen) {
-      if (this._highResSpecimens?.length > 1) this._nextSpecimen();
-      else if (this._images.length > 1) this._currentIndex = (this._currentIndex + 1) % this._images.length;
+      if (this._images.length > 1) this._nextImage();
     }
   }
 
@@ -302,24 +300,53 @@ export class PnwmImageSlideshow extends LitElement {
     const closeBtn = this.shadowRoot?.querySelector('.lightbox-close') as HTMLElement | null;
     if (closeBtn) closeBtn.focus();
 
-    if (this.highResAvailable && this._highResSpecimens?.length) {
-      const viewerEl = this.shadowRoot?.querySelector('#osd-viewer') as HTMLElement | null;
-      if (viewerEl && !this._osdViewer) {
-        const { default: OpenSeadragon } = await import('openseadragon');
-        // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
-        const current = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
-        this._osdViewer = OpenSeadragon({
-          element: viewerEl,
-          prefixUrl: this.prefixUrl,
-          tileSources: this._buildDziUrl(current),
-          visibilityRatio: 1.0,
-          minZoomLevel: 0.5,
-          defaultZoomLevel: 0,
-          showNavigator: false,
-          showRotationControl: false,
-        });
-      }
+    await this._syncViewer();
+  }
+
+  /** The slide the lightbox is showing, or null before any figure has been read. */
+  _currentImage(): SlideImage | null {
+    return this._images[this._currentIndex] ?? this._images[0] ?? null;
+  }
+
+  /** Whether the current slide opens in the deep-zoom viewer rather than as a plain image. */
+  _usesOsd(): boolean {
+    return this.highResAvailable && (this._currentImage()?.tilesPath ?? '') !== '';
+  }
+
+  /**
+   * Bring the viewer into line with the current slide: create it or re-point it when
+   * the slide is a tile set, tear it down when the slide is a plain photograph. Called
+   * after the lightbox opens and after every step through it, so a strip that mixes
+   * tiled specimens with catalogued photographs (ADR 0041) never shows one kind of
+   * slide through the other's viewer.
+   */
+  async _syncViewer(): Promise<void> {
+    if (!this._lightboxOpen) return;
+    const current = this._currentImage();
+    if (!current || !this._usesOsd()) {
+      this._osdViewer?.destroy();
+      this._osdViewer = null;
+      return;
     }
+    await this.updateComplete;
+    const viewerEl = this.shadowRoot?.querySelector('#osd-viewer') as HTMLElement | null;
+    if (!viewerEl) return;
+    if (this._osdViewer) {
+      // OSD open() accepts a DZI URL string at runtime; the string overload is declared in src/types/openseadragon.d.ts
+      this._osdViewer.open(this._buildDziUrl(current.tilesPath));
+      return;
+    }
+    const { default: OpenSeadragon } = await import('openseadragon');
+    this._osdViewer = OpenSeadragon({
+      element: viewerEl,
+      prefixUrl: this.prefixUrl,
+      tileSources: this._buildDziUrl(current.tilesPath),
+      visibilityRatio: 1.0,
+      minZoomLevel: 0.5,
+      defaultZoomLevel: 0,
+      showNavigator: false,
+      showRotationControl: false,
+    });
   }
 
   _closeLightbox(): void {
@@ -381,24 +408,26 @@ export class PnwmImageSlideshow extends LitElement {
     return parts;
   }
 
-  _buildDziUrl(specimen: Specimen): string {
-    return `${this.cdnBaseUrl}/${specimen.tiles_path}.dzi`;
+  _buildDziUrl(tilesPath: string): string {
+    return `${this.cdnBaseUrl}/${tilesPath}.dzi`;
   }
 
-  _prevSpecimen(): void {
-    this._currentIndex = (this._currentIndex - 1 + this._highResSpecimens.length) % this._highResSpecimens.length;
-    // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
-    const spec = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
-    // OSD open() accepts a DZI URL string at runtime; the string overload is declared in src/types/openseadragon.d.ts
-    this._osdViewer?.open(this._buildDziUrl(spec));
+  _prevImage(): void {
+    if (this._images.length === 0) return;
+    this._currentIndex = (this._currentIndex - 1 + this._images.length) % this._images.length;
+    void this._syncViewer();
   }
 
-  _nextSpecimen(): void {
-    this._currentIndex = (this._currentIndex + 1) % this._highResSpecimens.length;
-    // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
-    const spec = this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!;
-    // OSD open() accepts a DZI URL string at runtime; the string overload is declared in src/types/openseadragon.d.ts
-    this._osdViewer?.open(this._buildDziUrl(spec));
+  _nextImage(): void {
+    if (this._images.length === 0) return;
+    this._currentIndex = (this._currentIndex + 1) % this._images.length;
+    void this._syncViewer();
+  }
+
+  /** "Specimen A · Dorsal" for a slide that names its specimen and view, else ''. */
+  _specimenLine(img: { specimen?: string; view?: string }): string {
+    if (!img.specimen) return '';
+    return img.view ? `Specimen ${img.specimen} · ${img.view}` : `Specimen ${img.specimen}`;
   }
 
   _scrollLeft(): void {
@@ -419,12 +448,11 @@ export class PnwmImageSlideshow extends LitElement {
 
     // noUncheckedIndexedAccess: _images[_currentIndex] returns T | undefined; fallback to [0]
     const current = this._images[this._currentIndex] ?? this._images[0]!;
-
-    const useOsd = this.highResAvailable && this._highResSpecimens?.length > 0;
-    // noUncheckedIndexedAccess: use ?? fallback pattern (Pitfall 7)
-    const currentSpecimen = useOsd
-      ? (this._highResSpecimens[this._currentIndex] ?? this._highResSpecimens[0]!)
-      : null;
+    const useOsd = this._usesOsd();
+    const specimenLine = this._specimenLine(current);
+    const captionLines = specimenLine
+      ? [specimenLine, ...this._formatCaption(current)]
+      : this._formatCaption(current);
 
     const lightbox = this._lightboxOpen
       ? html`
@@ -436,18 +464,18 @@ export class PnwmImageSlideshow extends LitElement {
             @click=${(e: MouseEvent) => { if (e.target === e.currentTarget) this._closeLightbox(); }}
           >
             ${useOsd
-              ? html`
-                  <div id="osd-viewer" class="osd-viewer"></div>
-                  <p class="caption-line">
-                    Specimen ${currentSpecimen!.specimen_id} &middot;
-                    ${currentSpecimen!.view === 'D' ? 'Dorsal' : 'Ventral'}
-                    ${current.photographer ? html` &middot; &copy; ${current.photographer}${current.license ? html` &middot; ${current.license}` : ''}` : ''}
-                  </p>
-                `
+              ? html`<div id="osd-viewer" class="osd-viewer"></div>`
               : html`<img src=${current.src} alt=${current.alt}>`}
-            ${useOsd && this._highResSpecimens.length > 1 ? html`
-              <button class="lightbox-prev" aria-label="Previous specimen" @click=${() => this._prevSpecimen()}>&#x276E;</button>
-              <button class="lightbox-next" aria-label="Next specimen" @click=${() => this._nextSpecimen()}>&#x276F;</button>
+            ${specimenLine || current.photographer ? html`
+              <p class="caption-line">
+                ${specimenLine}
+                ${specimenLine && current.photographer ? html` &middot; ` : ''}
+                ${current.photographer ? html`&copy; ${current.photographer}${current.license ? html` &middot; ${current.license}` : ''}` : ''}
+              </p>
+            ` : ''}
+            ${this._images.length > 1 ? html`
+              <button class="lightbox-prev" aria-label="Previous photo" @click=${() => this._prevImage()}>&#x276E;</button>
+              <button class="lightbox-next" aria-label="Next photo" @click=${() => this._nextImage()}>&#x276F;</button>
             ` : ''}
             <button
               class="lightbox-close"
@@ -474,7 +502,7 @@ export class PnwmImageSlideshow extends LitElement {
                 @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
               >
             </button>
-            ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
+            ${captionLines.map(line => html`<p class="caption-line">${line}</p>`)}
           </div>
         </div>
         ${lightbox}
@@ -496,7 +524,7 @@ export class PnwmImageSlideshow extends LitElement {
               @error=${(e: Event) => console.error(`[pnwmoths] Image failed to load: ${(e.target as HTMLImageElement).src}`)}
             >
           </button>
-          ${this._formatCaption(current).map(line => html`<p class="caption-line">${line}</p>`)}
+          ${captionLines.map(line => html`<p class="caption-line">${line}</p>`)}
         </div>
         <div class="thumbnail-strip" role="group" aria-label="Photo thumbnails">
           ${this._images.map((img, i) => html`
