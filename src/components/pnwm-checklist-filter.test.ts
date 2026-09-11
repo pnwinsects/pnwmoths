@@ -10,7 +10,21 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { visibleSlugs, allDistrictsLabel, unreachableByDistrict } from './pnwm-checklist-filter.ts';
+import {
+  visibleSlugs,
+  allDistrictsLabel,
+  unreachableByDistrict,
+  combineSelections,
+  describeSelections,
+  jurisdictionKey,
+  jurisdictionLabel,
+  type Jurisdiction,
+} from './pnwm-checklist-filter.ts';
+
+/** Shorthand for a selection: `area('WA')` is the whole state, `area('WA', 'Whatcom')` one county. */
+function area(state: string, county = ''): Jurisdiction {
+  return { state, county };
+}
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -28,24 +42,24 @@ const districtMap = {
 
 test('visibleSlugs: no state selected shows everything, including species with no records', () => {
   assert.deepEqual(
-    [...visibleSlugs(ALL, stateMap, districtMap, '', '')],
+    [...visibleSlugs(ALL, stateMap, districtMap, [])],
     ALL,
     'the default view must be the complete checklist — that is the point of the page',
   );
 });
 
 test('visibleSlugs: a state selection filters to species recorded there', () => {
-  assert.deepEqual([...visibleSlugs(ALL, stateMap, districtMap, 'WA', '')], ['abagrotis-apposita']);
+  assert.deepEqual([...visibleSlugs(ALL, stateMap, districtMap, [area('WA')])], ['abagrotis-apposita']);
   assert.deepEqual(
-    [...visibleSlugs(ALL, stateMap, districtMap, 'OR', '')].sort(),
+    [...visibleSlugs(ALL, stateMap, districtMap, [area('OR')])].sort(),
     ['abagrotis-apposita', 'hemileuca-nuttalli'],
   );
 });
 
 test('visibleSlugs: a district selection narrows within the state', () => {
-  assert.deepEqual([...visibleSlugs(ALL, stateMap, districtMap, 'WA', 'Whatcom')], ['abagrotis-apposita']);
+  assert.deepEqual([...visibleSlugs(ALL, stateMap, districtMap, [area('WA', 'Whatcom')])], ['abagrotis-apposita']);
   assert.deepEqual(
-    [...visibleSlugs(ALL, stateMap, districtMap, 'OR', 'Lane')].sort(),
+    [...visibleSlugs(ALL, stateMap, districtMap, [area('OR', 'Lane')])].sort(),
     ['abagrotis-apposita', 'hemileuca-nuttalli'],
   );
 });
@@ -53,7 +67,7 @@ test('visibleSlugs: a district selection narrows within the state', () => {
 test('visibleSlugs: a district with no species yields an empty set, not everything', () => {
   // The "empty result" path is worth pinning: falling back to "show all" when a
   // filter matches nothing would quietly tell the reader the opposite of the truth.
-  assert.deepEqual([...visibleSlugs(ALL, stateMap, districtMap, 'WA', 'Lane')], []);
+  assert.deepEqual([...visibleSlugs(ALL, stateMap, districtMap, [area('WA', 'Lane')])], []);
 });
 
 test('visibleSlugs: a species recorded in the state but not the chosen district is hidden', () => {
@@ -62,9 +76,69 @@ test('visibleSlugs: a species recorded in the state but not the chosen district 
   // for the wrong reason.
   const inOregonNotLane = { ...stateMap, 'sierra-species': new Set(['OR']) };
   const districts = { ...districtMap, 'sierra-species': new Set(['OR:Baker']) };
-  const shown = visibleSlugs([...ALL, 'sierra-species'], inOregonNotLane, districts, 'OR', 'Lane');
+  const shown = visibleSlugs([...ALL, 'sierra-species'], inOregonNotLane, districts, [area('OR', 'Lane')]);
   assert.equal(shown.has('sierra-species'), false, 'recorded in OR but not in Lane');
   assert.equal(shown.has('hemileuca-nuttalli'), true, 'recorded in OR:Lane');
+});
+
+// ---------------------------------------------------------------------------
+// Combining areas (#293): the union the curator asked for
+// ---------------------------------------------------------------------------
+
+test('visibleSlugs: several areas show species known from ANY of them', () => {
+  // The Georgia Basin case: Washington plus British Columbia.
+  const states = { ...stateMap, 'island-species': new Set(['BC']) };
+  const shown = visibleSlugs([...ALL, 'island-species'], states, districtMap, [area('WA'), area('BC')]);
+  assert.deepEqual([...shown].sort(), ['abagrotis-apposita', 'island-species']);
+  // The Olympic Peninsula case: several counties of one state.
+  const districts = { ...districtMap, 'coast-species': new Set(['WA:Clallam']) };
+  const peninsula = visibleSlugs([...ALL, 'coast-species'], states, districts, [area('WA', 'Clallam'), area('WA', 'Whatcom')]);
+  assert.deepEqual([...peninsula].sort(), ['abagrotis-apposita', 'coast-species']);
+});
+
+test('visibleSlugs: a whole state and a county of another state mix freely', () => {
+  const shown = visibleSlugs(ALL, stateMap, districtMap, [area('OR', 'Lane'), area('WA')]);
+  assert.deepEqual([...shown].sort(), ['abagrotis-apposita', 'hemileuca-nuttalli']);
+});
+
+test('combineSelections: the selects join the pinned areas, deduplicated', () => {
+  const pinned = [area('WA'), area('OR', 'Lane')];
+  assert.deepEqual(combineSelections(pinned, area('BC')), [area('WA'), area('OR', 'Lane'), area('BC')]);
+  assert.deepEqual(combineSelections(pinned, area('WA')), pinned, 'already pinned');
+  assert.deepEqual(combineSelections(pinned, null), pinned);
+  assert.deepEqual(combineSelections(pinned, area('')), pinned, 'nothing selected');
+});
+
+test('combineSelections: a county adds nothing when its whole state is selected', () => {
+  // Listing "Whatcom (WA)" beside "Washington" would claim the filter is narrower
+  // than it is; the union already contains every WA species.
+  assert.deepEqual(combineSelections([area('WA')], area('WA', 'Whatcom')), [area('WA')]);
+  assert.deepEqual(combineSelections([area('WA', 'Whatcom')], area('WA')), [area('WA')]);
+});
+
+test('describeSelections: reads as a sentence fragment', () => {
+  assert.equal(describeSelections([]), '');
+  assert.equal(describeSelections([area('WA')]), 'Washington');
+  assert.equal(describeSelections([area('WA'), area('BC')]), 'Washington and British Columbia');
+  assert.equal(
+    describeSelections([area('WA', 'Clallam'), area('WA', 'Jefferson'), area('WA', 'Mason')]),
+    'Clallam (WA), Jefferson (WA) and Mason (WA)',
+  );
+});
+
+test('jurisdiction keys match the aggregates, and labels tag counties with their state', () => {
+  // Same-named counties in different states (#133) must never collapse.
+  assert.equal(jurisdictionKey(area('WA', 'Lincoln')), 'WA:Lincoln');
+  assert.equal(jurisdictionKey(area('MT')), 'MT');
+  assert.equal(jurisdictionLabel(area('WA', 'Lincoln')), 'Lincoln (WA)');
+  assert.equal(jurisdictionLabel(area('BC')), 'British Columbia');
+});
+
+test('unreachableByDistrict: counts each species once across several whole-state selections', () => {
+  const states = { a: new Set(['MT', 'WA']), b: new Set(['MT']) };
+  const districts = {};
+  assert.equal(unreachableByDistrict(['a', 'b'], states, districts, [area('MT'), area('WA')]), 2);
+  assert.equal(unreachableByDistrict(['a', 'b'], states, districts, [area('MT', 'Flathead')]), 0, 'a county selection has already excluded them');
 });
 
 // ---------------------------------------------------------------------------
@@ -97,6 +171,14 @@ test('the Checklist template carries the hooks the component queries', () => {
   );
 });
 
+test('the chip list items switch off Pico\'s square marker themselves', () => {
+  // Pico's `ul li { list-style: square }` beats `list-style: none` inherited from the
+  // <ul>, and Chrome paints the first flex item's marker inside its chip as a black
+  // square after the ✕. Caught by screenshot; pinned here so it stays fixed.
+  const src = readFileSync(resolve(ROOT, 'src/components/pnwm-checklist-filter.ts'), 'utf8');
+  assert.match(src, /<li style="[^"]*list-style:none[^"]*">/, 'every chip <li> must declare list-style:none');
+});
+
 // ---------------------------------------------------------------------------
 // allDistrictsLabel
 // ---------------------------------------------------------------------------
@@ -119,13 +201,13 @@ test('unreachableByDistrict: counts species in the state that no district can re
   // this the page would hand a curator a quietly incomplete county list.
   const states = { a: new Set(['MT']), b: new Set(['MT']), c: new Set(['WA']) };
   const districts = { a: new Set(['MT:Flathead']), c: new Set(['WA:Whatcom']) };
-  assert.equal(unreachableByDistrict(['a', 'b', 'c'], states, districts, 'MT'), 1);
-  assert.equal(unreachableByDistrict(['a', 'b', 'c'], states, districts, 'WA'), 0);
+  assert.equal(unreachableByDistrict(['a', 'b', 'c'], states, districts, [area('MT')]), 1);
+  assert.equal(unreachableByDistrict(['a', 'b', 'c'], states, districts, [area('WA')]), 0);
 });
 
 test('unreachableByDistrict: is zero when no state is selected', () => {
   const states = { a: new Set(['MT']) };
-  assert.equal(unreachableByDistrict(['a'], states, {}, ''), 0);
+  assert.equal(unreachableByDistrict(['a'], states, {}, []), 0);
 });
 
 test('unreachableByDistrict: a district in another state does not count as reachable', () => {
@@ -133,6 +215,6 @@ test('unreachableByDistrict: a district in another state does not count as reach
   // let an OR record satisfy an MT query.
   const states = { a: new Set(['MT', 'OR']) };
   const districts = { a: new Set(['OR:Lane']) };
-  assert.equal(unreachableByDistrict(['a'], states, districts, 'MT'), 1);
-  assert.equal(unreachableByDistrict(['a'], states, districts, 'OR'), 0);
+  assert.equal(unreachableByDistrict(['a'], states, districts, [area('MT')]), 1);
+  assert.equal(unreachableByDistrict(['a'], states, districts, [area('OR')]), 0);
 });

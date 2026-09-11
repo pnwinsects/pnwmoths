@@ -441,6 +441,12 @@ cost a debugging cycle to discover.
   sidecar; keep the CSV valid. Format-check as part of the human-legibility pass, not just
   by eye.
 
+- **Pico styles `ul li { list-style: square }`, and it beats `list-style: none` set on the
+  `<ul>`.** A flex row of `<li>` chips still carries markers, and Chrome paints the first
+  item's marker *inside* its chip as a stray black square after the text. Set `list-style:
+  none` on the `<li>` itself. Same family as the `summary::after` chevron: when a bare element
+  looks wrong, grep `pico.css` before blaming your own CSS or the browser.
+
 - **`images.csv` and `species-photos.json` spell the same concept differently: `dorsal`/
   `ventral` against `D`/`V`.** Any join between a catalogued photo row and a published
   tile has to normalise both sides. Forgetting produces ZERO matches, not an error —
