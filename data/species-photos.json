@@ -2083,6 +2083,33 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "amphipoea-keiferi": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/amphipoea-keiferi/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/amphipoea-keiferi/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/amphipoea-keiferi/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/amphipoea-keiferi/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "amphipoea-lunata": {
     "high_res_available": true,
     "specimens": [
@@ -19019,6 +19046,16 @@
         "specimen_id": "B",
         "view": "V",
         "tiles_path": "species-tiles/nycteola-cinereana/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/nycteola-cinereana/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/nycteola-cinereana/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
