@@ -192,6 +192,36 @@ describe('findSlotCollisions', () => {
     assert.match(blocked.get('1'.repeat(64))!, /also claimed by Macaria marmorata-A-D.tif/);
   });
 
+  // An interrupted run left a .dzi on disk; two untiled rows claim that slot. Letting
+  // the first through would have isAlreadyTiled() hand it the other photograph's
+  // tiles and mark it tiled.
+  it('holds every claimant of a contested slot whose tiles are already on disk', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'tiles-'));
+    try {
+      mkdirSync(join(dir, 'macaria-signaria'), { recursive: true });
+      writeFileSync(join(dir, 'macaria-signaria', 'A-D.dzi'), '');
+      const rows = ['marmorata', 'unipunctaria'].map((name, i) =>
+        row({ content_hash: String(i).repeat(64), filename_raw: `Macaria ${name}-A-D.tif`, species_slug: 'macaria-signaria' }));
+      const blocked = findSlotCollisions(rows, (r) => isAlreadyTiled(dir, r));
+      assert.deepEqual([...blocked.keys()].sort(), ['0'.repeat(64), '1'.repeat(64)]);
+      assert.match(blocked.get('0'.repeat(64))!, /already has tiles on disk .* 2 untiled rows claim it/);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('lets a lone claimant keep tiles it left on disk itself', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'tiles-'));
+    try {
+      mkdirSync(join(dir, 'amphipoea-keiferi'), { recursive: true });
+      writeFileSync(join(dir, 'amphipoea-keiferi', 'A-D.dzi'), '');
+      const only = row({ content_hash: 'b'.repeat(64), species_slug: 'amphipoea-keiferi' });
+      assert.equal(findSlotCollisions([only], (r) => isAlreadyTiled(dir, r)).size, 0);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('treats slugs case-insensitively, like tilePrefix does', () => {
     const incoming = row({ content_hash: 'b'.repeat(64), species_slug: 'Macaria-Colata' });
     assert.equal(findSlotCollisions([held, incoming]).size, 1);

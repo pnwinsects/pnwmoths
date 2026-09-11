@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -66,6 +66,28 @@ describe('readPhotoDeterminations', () => {
         'Amphipoea keiferi-A-D,amphipoea-keiferi,A,#331,second\n',
     );
     assert.throws(() => readPhotoDeterminations(path), /appears twice/);
+  });
+});
+
+describe('readPhotoDeterminations — a ruling needs both halves', () => {
+  const HEADER = 'photo_stem,species_slug,specimen,source,note\n';
+  function withFile(csv: string, fn: (path: string) => void): void {
+    const dir = mkdtempSync(join(tmpdir(), 'determinations-'));
+    const path = join(dir, 'photo-determinations.csv');
+    writeFileSync(path, csv);
+    try { fn(path); } finally { rmSync(dir, { recursive: true, force: true }); }
+  }
+
+  it('refuses a blank specimen letter rather than writing it over the manifest', () => {
+    withFile(HEADER + 'Amphipoea senilis-A-D,amphipoea-keiferi,,#330,\n', (path) => {
+      assert.throws(() => readPhotoDeterminations(path), /blank specimen/);
+    });
+  });
+
+  it('refuses a blank species', () => {
+    withFile(HEADER + 'Amphipoea senilis-A-D,,A,#330,\n', (path) => {
+      assert.throws(() => readPhotoDeterminations(path), /blank species_slug/);
+    });
   });
 });
 

@@ -162,10 +162,22 @@ export function readPhotoDeterminations(
           `One photograph, one determination — supersede the old row rather than adding a second.`,
       );
     }
+    const species_slug = (row.species_slug ?? '').trim();
+    const specimen = (row.specimen ?? '').trim();
+    // Both halves of the ruling are required. A blank slug re-files the photograph
+    // nowhere; a blank letter would be written over the manifest's specimen_id by
+    // applyDeterminationsToManifest and strand the row — tileable by bucket, refused
+    // by isTileable for its empty specimen — with nothing to say why.
+    if (!species_slug || !specimen) {
+      throw new Error(
+        `[photo-determinations] "${stem}" in ${path} has a blank ${!species_slug ? 'species_slug' : 'specimen'}. ` +
+          'A determination names both the species and the specimen letter at that species (C-026).',
+      );
+    }
     byStem.set(stem, {
       photo_stem: stem,
-      species_slug: (row.species_slug ?? '').trim(),
-      specimen: (row.specimen ?? '').trim(),
+      species_slug,
+      specimen,
       source: (row.source ?? '').trim(),
       note: (row.note ?? '').trim(),
     });

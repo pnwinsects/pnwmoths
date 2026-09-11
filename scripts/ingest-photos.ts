@@ -254,6 +254,12 @@ export function applyDeterminationsToManifest(
     if (!row.filename_raw) continue;
     const ruling = determinations.get(toPhotoStem(row.filename_raw));
     if (!ruling) continue;
+    // readPhotoDeterminations refuses these; guarded again because a caller can
+    // hand in any map, and a blank letter written here strands the row.
+    if (!ruling.specimen || !ruling.species_slug) {
+      console.warn(`[ingest-photos] determination for "${ruling.photo_stem}" lacks a species or a specimen letter — left as is`);
+      continue;
+    }
     const target = species.bySlug.get(ruling.species_slug);
     if (!target) {
       console.warn(

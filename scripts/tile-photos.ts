@@ -247,7 +247,13 @@ function slotKey(row: ManifestRow): string {
  * into already belongs to a different photograph.
  *
  * A slot is owned by any row already tiled or uploaded there, and by the first
- * tileable row that claims it in this run. Two photographs cannot share
+ * tileable row that claims it in this run — unless tiles for that slot are ALREADY
+ * ON DISK from an interrupted run and more than one untiled row claims it. Then
+ * nobody can say whose tiles they are: isAlreadyTiled() would hand them to
+ * whichever claimant came first and advance it to `tiled` over another photograph's
+ * pyramid. Every claimant is held instead, and the operator settles the letters.
+ * `slotOnDisk` is that check; main() passes isAlreadyTiled for the run's output
+ * directory. Two photographs cannot share
  * `species-tiles/{slug}/{specimen}-{view}`: the second dzsave would silently
  * overwrite the first on disk and then on the CDN, and the account would publish
  * one moth under the other's letter. This is how a merge or a synonym promotion
@@ -260,26 +266,43 @@ function slotKey(row: ManifestRow): string {
  *
  * @returns content_hash → why, for every blocked row
  */
-export function findSlotCollisions(rows: readonly ManifestRow[]): Map<string, string> {
+export function findSlotCollisions(
+  rows: readonly ManifestRow[],
+  slotOnDisk: (row: ManifestRow) => boolean = () => false,
+): Map<string, string> {
   const owner = new Map<string, ManifestRow>();
   for (const row of rows) {
     if (!COMPLETED_STATUSES.has(row.status) || !row.species_slug || !row.specimen_id || !row.view) continue;
     if (!owner.has(slotKey(row))) owner.set(slotKey(row), row);
   }
   const blocked = new Map<string, string>();
+  const claimants = new Map<string, ManifestRow[]>();
   for (const row of rows) {
     if (!isTileable(row)) continue;
     const key = slotKey(row);
     const holder = owner.get(key);
     if (!holder) {
       owner.set(key, row);
+      claimants.set(key, [row]);
       continue;
     }
     if (holder.content_hash === row.content_hash) continue;
+    if (!COMPLETED_STATUSES.has(holder.status)) claimants.get(key)?.push(row);
     blocked.set(
       row.content_hash,
-      `${row.species_slug}/${row.specimen_id}-${row.view} is ${holder.status === 'discovered' || holder.status === 'downloaded' || holder.status === 'failed' ? 'also claimed' : 'already held'} ` +
+      `${row.species_slug}/${row.specimen_id}-${row.view} is ${COMPLETED_STATUSES.has(holder.status) ? 'already held' : 'also claimed'} ` +
         `by ${holder.filename_raw} (${holder.status}); give ${row.filename_raw} a free letter in data/photo-determinations.csv`,
+    );
+  }
+  // A contested slot whose tiles already exist on disk: hold the first claimant too.
+  for (const rows_ of claimants.values()) {
+    const first = rows_[0];
+    if (!first || rows_.length < 2 || !slotOnDisk(first)) continue;
+    blocked.set(
+      first.content_hash,
+      `${first.species_slug}/${first.specimen_id}-${first.view} already has tiles on disk from an earlier run and ` +
+        `${rows_.length} untiled rows claim it (${rows_.map((r) => r.filename_raw).join(', ')}); ` +
+        'nobody can say whose they are — settle the letters in data/photo-determinations.csv, then delete that tile directory and re-run',
     );
   }
   return blocked;
@@ -417,7 +440,7 @@ async function main(): Promise<void> {
   }
 
   // --- Filter eligible rows, then hold back any whose tile slot is taken. ---
-  const blocked = findSlotCollisions(rows);
+  const blocked = findSlotCollisions(rows, (row) => isAlreadyTiled(tileOutputDir, row));
   for (const row of rows) {
     const why = blocked.get(row.content_hash);
     if (why) logStage(row.content_hash, 'tile', 'slot-collision', why);

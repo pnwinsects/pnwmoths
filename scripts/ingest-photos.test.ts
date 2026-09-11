@@ -64,6 +64,13 @@ describe('applyDeterminationsToManifest', () => {
     assert.equal(rows[0]?.match_bucket, 'genus-only');
   });
 
+  it('never writes a blank letter over a row', () => {
+    const rows = [manifestRow()];
+    assert.equal(applyDeterminationsToManifest(rows, new Map([['Amphipoea senilis-A-D', ruling('Amphipoea senilis-A-D', 'amphipoea-keiferi', '')]]), species), 0);
+    assert.equal(rows[0]?.specimen_id, 'A');
+    assert.equal(rows[0]?.match_bucket, 'genus-only');
+  });
+
   it('refuses to point a row at a species that does not exist', () => {
     const rows = [manifestRow()];
     assert.equal(applyDeterminationsToManifest(rows, new Map([['Amphipoea senilis-A-D', ruling('Amphipoea senilis-A-D', 'no-such-species', 'A')]]), species), 0);

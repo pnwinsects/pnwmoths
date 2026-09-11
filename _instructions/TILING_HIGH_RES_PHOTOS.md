@@ -112,9 +112,11 @@ Operator checklist before proceeding:
 - Tile prefix paths are lowercase species slugs (the genus segment is lowercased by the
   script regardless of the TIFF filename capitalisation)
 - Output is rooted at the correct `tileOutputDir` (or the `TILE_OUTPUT_DIR` override)
-- Eligible row count is roughly the count of `clean-match` + `slug-match` +
-  `resolved-via-synonym` + `resolved-via-determination` rows in the manifest, minus any rows
-  already at `status: tiled`
+- Eligible row count is at most the count of `clean-match` + `slug-match` +
+  `resolved-via-synonym` + `resolved-via-determination` rows in the manifest that are not
+  yet `tiled` or `uploaded`. Rows held back for a slot collision (see below) and, when
+  `TILE_ONLY_SLUGS` is set, rows for other species are excluded from it too, and the log line
+  says how many
 
 ## Run the Full Pipeline
 
