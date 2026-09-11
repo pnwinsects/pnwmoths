@@ -76,6 +76,9 @@ say:
 
 - `TILE_OUTPUT_DIR` — overrides `tileOutputDir`
 - `TIFF_CACHE_DIR` — overrides `tiffCacheDir`
+- `TILE_ONLY_SLUGS` — comma-separated species slugs; when set, only rows for those species are
+  tiled. Use it for a targeted run so it does not sweep up every row that has become tileable
+  since the last one.
 
 `DROPBOX_TOKEN` is required for any non-dry-run invocation. Pass it on the invocation
 line (see below); this keeps the token in the process environment only and out of shell
@@ -109,8 +112,11 @@ Operator checklist before proceeding:
 - Tile prefix paths are lowercase species slugs (the genus segment is lowercased by the
   script regardless of the TIFF filename capitalisation)
 - Output is rooted at the correct `tileOutputDir` (or the `TILE_OUTPUT_DIR` override)
-- Eligible row count is roughly the count of `clean-match` + `slug-match` +
-  `resolved-via-synonym` rows in the manifest, minus any rows already at `status: tiled`
+- Eligible row count is at most the count of `clean-match` + `slug-match` +
+  `resolved-via-synonym` + `resolved-via-determination` rows in the manifest that are not
+  yet `tiled` or `uploaded`. Rows held back for a slot collision (see below) and, when
+  `TILE_ONLY_SLUGS` is set, rows for other species are excluded from it too, and the log line
+  says how many
 
 ## Run the Full Pipeline
 
@@ -208,6 +214,15 @@ finish, or stop it. If that pid is long gone (a `kill -9` leaves the lock file b
 next run takes the stale lock over by itself — you should never need to delete
 `var/species-photos-manifest.lock` by hand, and deleting one that is live is how you get the
 silent status rollback the lock exists to prevent.
+
+**`slot-collision … is already held by …`** (a log line, not an error)
+The row would write its tiles to `species-tiles/{slug}/{specimen}-{view}`, and a different
+photograph is already tiled there, or another untiled row claims the same slot in this run.
+The row is held back so nothing is overwritten; the count is in the `eligible for tiling` line.
+Two photographs can only share a slot by mistake — usually a merge or synonym that re-lettered
+the photograph in `data/images.csv` without the manifest hearing about it. Give the incoming
+photograph its letter in `data/photo-determinations.csv`, run `npm run photos:investigate`, and
+re-run.
 
 **`vips: command not found`**
 The `libvips-tools` package is not installed on this machine. Install it:

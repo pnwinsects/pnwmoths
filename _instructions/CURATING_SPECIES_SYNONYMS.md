@@ -103,7 +103,7 @@ This re-runs the script in re-sort-only mode: no Dropbox calls. It re-loads `dat
 The final log line reports the count of rows promoted:
 
 ```
-[ingest-photos] re-sorted manifest; N rows; M promoted to resolved-via-synonym
+[ingest-photos] re-sorted manifest; N rows; M promoted to resolved-via-synonym; K filed by determination; …
 ```
 
 ### 6. Confirm the promotion
@@ -134,7 +134,7 @@ In a spreadsheet view of `data/species-photos-manifest.csv`:
 
 - The rows you re-routed have `match_bucket = resolved-via-synonym`
 - `binomial_resolved` and `species_slug` columns are populated (not empty)
-- `status` remains `discovered` — curation never advances it. What curation changes is `match_bucket`, and that is exactly what makes a row tileable: `isTileable()` in `scripts/tile-photos.ts` requires *both* a status other than `tiled` *and* a `match_bucket` of `clean-match`, `slug-match` or `resolved-via-synonym`. A row you re-route out of `likely-synonym` becomes eligible on the next tiling run
+- `status` remains `discovered` — curation never advances it. What curation changes is `match_bucket`, and that is exactly what makes a row tileable (`resolved-via-synonym` and `resolved-via-determination` alike): `isTileable()` in `scripts/tile-photos.ts` requires *both* a status other than `tiled` *and* a `match_bucket` of `clean-match`, `slug-match`, `resolved-via-synonym` or `resolved-via-determination`. A row you re-route out of `likely-synonym` becomes eligible on the next tiling run
 
 On the command line:
 

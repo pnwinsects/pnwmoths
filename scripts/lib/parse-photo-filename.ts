@@ -67,6 +67,7 @@ export type View = 'D' | 'V' | '';
  * Do NOT add or remove values; ingest-photos.js is the source of truth.
  */
 export type MatchBucket =
+  | 'resolved-via-determination' // data/photo-determinations.csv names this photograph (ADR 0045)
   | 'resolved-via-synonym'  // Phase 27 synonym pre-pass matched a known synonym
   | 'provisional'           // FIX #3: n sp, sp, nr <epithet> — undescribed/provisional ID
   | 'unparseable'           // null binomial, null bucketHint — filename not parseable

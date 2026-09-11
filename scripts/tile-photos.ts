@@ -55,15 +55,27 @@ const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
 const TILE_OUTPUT_DIR_OVERRIDE: string = process.env['TILE_OUTPUT_DIR'] ?? '';
 const TIFF_CACHE_DIR_OVERRIDE: string = process.env['TIFF_CACHE_DIR'] ?? '';
 const THUMBNAIL_ONLY: boolean = process.env['THUMBNAIL_ONLY'] === '1';
+/**
+ * Comma-separated species slugs to restrict a run to, e.g.
+ * `TILE_ONLY_SLUGS=amphipoea-keiferi,nycteola-cinereana`. Empty means every
+ * eligible row. Exists so a targeted run (#342) does not sweep up every other
+ * row that has become tileable since the last run, some of which are waiting on
+ * a letter (see findSlotCollisions).
+ */
+const TILE_ONLY_SLUGS: ReadonlySet<string> = new Set(
+  (process.env['TILE_ONLY_SLUGS'] ?? '').split(',').map((s) => s.trim().toLowerCase()).filter(Boolean),
+);
 const BUNNY_STORAGE_PASSWORD: string = process.env['BUNNY_STORAGE_PASSWORD'] ?? '';
 const BUNNY_STORAGE_HOST: string = process.env['BUNNY_STORAGE_HOST'] ?? 'la.storage.bunnycdn.com';
 const BUNNY_ZONE: string = process.env['BUNNY_ZONE'] ?? 'pnwmoths';
 
 /**
- * The three match_bucket values for which a row is a tiling candidate.
- * All three have a resolved species_slug and a non-empty dropbox_path.
+ * The four match_bucket values for which a row is a tiling candidate.
+ * All four have a resolved species_slug and a non-empty dropbox_path.
  * Rows outside these buckets (genus-only, likely-synonym, unparseable,
- * provisional) need curation before they can be tiled.
+ * provisional) need curation before they can be tiled — and a curator's
+ * determination IS that curation: `npm run photos:investigate` files a ruled
+ * photograph as resolved-via-determination (ADR 0045).
  *
  * Typed as Set<MatchBucket> to enforce the union at compile time (D-09).
  */
@@ -71,6 +83,7 @@ const TILEABLE_BUCKETS: Set<MatchBucket> = new Set([
   'clean-match',
   'slug-match',
   'resolved-via-synonym',
+  'resolved-via-determination',
 ]);
 
 // ---------------------------------------------------------------------------
@@ -202,8 +215,9 @@ const COMPLETED_STATUSES: Set<string> = new Set<ManifestStatus>(['tiled', 'uploa
  * A row is tileable when ALL of the following hold:
  *   - status is not already 'tiled' or 'uploaded' (manifest-level idempotency
  *     guard, TILE-02)
- *   - match_bucket is one of the three resolved buckets (clean-match, slug-match,
- *     resolved-via-synonym) — other buckets need curation before tiling
+ *   - match_bucket is one of the four resolved buckets (clean-match, slug-match,
+ *     resolved-via-synonym, resolved-via-determination) — other buckets need
+ *     curation before tiling
  *   - specimen_id, view, species_slug, dropbox_path are all non-empty — absence
  *     of any field makes either the output path or the download call impossible
  */
@@ -216,6 +230,82 @@ export function isTileable(row: ManifestRow): boolean {
     Boolean(row.species_slug) &&
     Boolean(row.dropbox_path)
   );
+}
+
+/** True when the run is restricted to some slugs and this row's is not among them. */
+export function excludedBySlugFilter(row: ManifestRow, only: ReadonlySet<string> = TILE_ONLY_SLUGS): boolean {
+  return only.size > 0 && !only.has(row.species_slug.toLowerCase());
+}
+
+/** The tile slot a row would occupy: `species-tiles/{slug}/{specimen}-{view}`, as a key. */
+function slotKey(row: ManifestRow): string {
+  return `${row.species_slug.toLowerCase()}|${row.specimen_id}|${row.view}`;
+}
+
+/**
+ * Tileable rows that must NOT be tiled this run, because the slot they would write
+ * into already belongs to a different photograph.
+ *
+ * A slot is owned by any row already tiled or uploaded there, and by the first
+ * tileable row that claims it in this run — unless tiles for that slot are ALREADY
+ * ON DISK from an interrupted run and more than one untiled row claims it. Then
+ * nobody can say whose tiles they are: isAlreadyTiled() would hand them to
+ * whichever claimant came first and advance it to `tiled` over another photograph's
+ * pyramid. Every claimant is held instead, and the operator settles the letters.
+ * `slotOnDisk` is that check; main() passes isAlreadyTiled for the run's output
+ * directory. Two photographs cannot share
+ * `species-tiles/{slug}/{specimen}-{view}`: the second dzsave would silently
+ * overwrite the first on disk and then on the CDN, and the account would publish
+ * one moth under the other's letter. This is how a merge or a synonym promotion
+ * can arm a destructive run — `Macaria marmorata-A-D`, `Macaria unipunctaria-A-D`
+ * and `Macaria submarmorata-A-D` all resolve to `macaria-signaria` A, because
+ * their letters were reassigned in data/images.csv (C-023) and never in the
+ * manifest. The fix is a determination row giving the incoming photograph its
+ * free letter (data/photo-determinations.csv), after which
+ * `npm run photos:investigate` files it and this guard lets it through.
+ *
+ * @returns content_hash → why, for every blocked row
+ */
+export function findSlotCollisions(
+  rows: readonly ManifestRow[],
+  slotOnDisk: (row: ManifestRow) => boolean = () => false,
+): Map<string, string> {
+  const owner = new Map<string, ManifestRow>();
+  for (const row of rows) {
+    if (!COMPLETED_STATUSES.has(row.status) || !row.species_slug || !row.specimen_id || !row.view) continue;
+    if (!owner.has(slotKey(row))) owner.set(slotKey(row), row);
+  }
+  const blocked = new Map<string, string>();
+  const claimants = new Map<string, ManifestRow[]>();
+  for (const row of rows) {
+    if (!isTileable(row)) continue;
+    const key = slotKey(row);
+    const holder = owner.get(key);
+    if (!holder) {
+      owner.set(key, row);
+      claimants.set(key, [row]);
+      continue;
+    }
+    if (holder.content_hash === row.content_hash) continue;
+    if (!COMPLETED_STATUSES.has(holder.status)) claimants.get(key)?.push(row);
+    blocked.set(
+      row.content_hash,
+      `${row.species_slug}/${row.specimen_id}-${row.view} is ${COMPLETED_STATUSES.has(holder.status) ? 'already held' : 'also claimed'} ` +
+        `by ${holder.filename_raw} (${holder.status}); give ${row.filename_raw} a free letter in data/photo-determinations.csv`,
+    );
+  }
+  // A contested slot whose tiles already exist on disk: hold the first claimant too.
+  for (const rows_ of claimants.values()) {
+    const first = rows_[0];
+    if (!first || rows_.length < 2 || !slotOnDisk(first)) continue;
+    blocked.set(
+      first.content_hash,
+      `${first.species_slug}/${first.specimen_id}-${first.view} already has tiles on disk from an earlier run and ` +
+        `${rows_.length} untiled rows claim it (${rows_.map((r) => r.filename_raw).join(', ')}); ` +
+        'nobody can say whose they are — settle the letters in data/photo-determinations.csv, then delete that tile directory and re-run',
+    );
+  }
+  return blocked;
 }
 
 /**
@@ -349,11 +439,20 @@ async function main(): Promise<void> {
     return;
   }
 
-  // --- Filter eligible rows. ---
-  const eligible = rows.filter(isTileable);
+  // --- Filter eligible rows, then hold back any whose tile slot is taken. ---
+  const blocked = findSlotCollisions(rows, (row) => isAlreadyTiled(tileOutputDir, row));
+  for (const row of rows) {
+    const why = blocked.get(row.content_hash);
+    if (why) logStage(row.content_hash, 'tile', 'slot-collision', why);
+  }
+  const eligible = rows.filter((row) => isTileable(row) && !blocked.has(row.content_hash) && !excludedBySlugFilter(row));
 
   console.log(
-    `[tile-photos] manifest: ${rows.length} rows total; ${eligible.length} eligible for tiling`
+    `[tile-photos] manifest: ${rows.length} rows total; ${eligible.length} eligible for tiling` +
+      (TILE_ONLY_SLUGS.size > 0 ? ` (TILE_ONLY_SLUGS restricts this run to ${[...TILE_ONLY_SLUGS].join(', ')})` : '') +
+      (blocked.size > 0
+        ? `; ${blocked.size} held back — their tile slot belongs to another photograph (see slot-collision lines above)`
+        : '')
   );
 
   // --- DRY_RUN path: print first 5 eligible rows; exit without side-effects. ---
