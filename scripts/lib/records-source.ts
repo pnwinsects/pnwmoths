@@ -20,10 +20,11 @@
 // (CLAUDE.md) and one-shot (ADR 0025). Rewriting a file nobody hand-edits is a
 // categorically safer operation than reaching into one people do.
 //
-// The two files have DIFFERENT WIDTHS — records-inat.csv carries a 16th
-// `inat_id` column — so a DuckDB file-list read with an explicit `columns=`
-// spec cannot read both. Every union below therefore selects the 15 canonical
-// columns explicitly from each file in turn.
+// The two files have DIFFERENT 16th COLUMNS — records.csv carries `record_id`
+// (ADR 0044) and records-inat.csv carries `inat_id` — so a DuckDB file-list
+// read with an explicit `columns=` spec cannot read both. Every union below
+// therefore reads each file with its own spec and selects the 15 canonical
+// columns from each in turn. Neither identifier reaches the browser.
 //
 // Before this module, the 15-column DuckDB spec was copy-pasted verbatim into
 // build-data.ts, emit-species-states.ts, emit-species-districts.ts and
@@ -31,12 +32,28 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 
-/** data/records.csv column order. Load-bearing: the CSV has no other schema. */
+/**
+ * The 15 canonical occurrence columns every record the site serves has, in
+ * order. Load-bearing: the CSVs have no other schema.
+ */
 export const RECORDS_COLUMNS = [
   'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
   'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection',
   'notes', 'district_id',
 ] as const;
+
+/**
+ * data/records.csv column order — the 15 canonical columns plus the record's
+ * stable identifier (ADR 0044, #178).
+ *
+ * `record_id` is an opaque positive integer, assigned once by
+ * scripts/assign-record-ids.ts and never reused or renumbered. It is source
+ * data, not a derived column: a curator appends a row with the cell blank, the
+ * script fills it, and from then on it IS the record's identity across edits,
+ * re-uploads and references. Last column, so the leading 15 line up with
+ * records-inat.csv when a human reads the two side by side.
+ */
+export const RECORDS_CSV_COLUMNS = [...RECORDS_COLUMNS, 'record_id'] as const;
 
 /**
  * data/records-inat.csv column order — the 15 canonical columns plus the
@@ -78,7 +95,48 @@ const RECORDS_COLUMN_TYPES: Record<string, string> = {
   notes: 'VARCHAR',
   district_id: 'VARCHAR',
   inat_id: 'BIGINT',
+  record_id: 'INTEGER',
 };
+
+/**
+ * Why data/records.csv cannot be built, or [] when every row carries a usable
+ * `record_id`. Checked by build-data.ts before the DuckDB import.
+ *
+ * Three faults, each named with the first offending row so the message points
+ * at a line: a blank cell (a row was appended without running
+ * `npm run records:assign-ids`), a value that is not a positive integer (a hand
+ * edit), and a value used twice (a copy-paste of an existing row that kept its
+ * id — the exact thing the column exists to make impossible).
+ */
+export function recordIdProblems(rows: readonly { record_id?: string }[]): string[] {
+  const problems: string[] = [];
+  const seen = new Map<string, number>();
+  let blank = 0;
+  let firstBlank = -1;
+  for (const [i, row] of rows.entries()) {
+    const id = (row.record_id ?? '').trim();
+    const line = i + 2; // 1-based, after the header
+    if (id === '') {
+      blank++;
+      if (firstBlank < 0) firstBlank = line;
+      continue;
+    }
+    if (!/^[1-9]\d*$/.test(id)) {
+      problems.push(`line ${line}: record_id "${id}" is not a positive integer`);
+      continue;
+    }
+    const earlier = seen.get(id);
+    if (earlier !== undefined) problems.push(`line ${line}: record_id ${id} is already used on line ${earlier}`);
+    else seen.set(id, line);
+  }
+  if (blank > 0) {
+    problems.unshift(
+      `${blank} row(s) have a blank record_id (first at line ${firstBlank}). ` +
+        'Run `npm run records:assign-ids` to assign them, then build again.',
+    );
+  }
+  return problems;
+}
 
 /**
  * The coordinate box an occurrence record may occupy.
@@ -128,6 +186,11 @@ export interface RecordRow {
   collection: string;
   notes: string;
   district_id: string;
+}
+
+/** One data/records.csv row — {@link RecordRow} plus its stable identifier. */
+export interface CuratorRecordRow extends RecordRow {
+  record_id: string;
 }
 
 /** One data/records-inat.csv row — {@link RecordRow} plus the observation id. */
@@ -217,7 +280,7 @@ export function buildAllRecordsSql(
   // running a single build step on its own.
   assertInatRecordsPresent(inatPath);
   const cols = RECORDS_COLUMNS.join(', ');
-  const curator = `SELECT ${cols} FROM ${readCsvSql(recordsPath, RECORDS_COLUMNS)}`;
+  const curator = `SELECT ${cols} FROM ${readCsvSql(recordsPath, RECORDS_CSV_COLUMNS)}`;
   if (!hasInatRecords(inatPath)) return curator;
   const inat = `SELECT ${cols} FROM ${readCsvSql(inatPath, RECORDS_INAT_COLUMNS)}`;
   return `${curator}\nUNION ALL\n${inat}`;
@@ -261,8 +324,8 @@ function parseCsvRows<T>(path: string): T[] {
 }
 
 /** Every data/records.csv row, in file order. */
-export function readCuratorRecordRows(path: string = RECORDS_CSV_PATH): RecordRow[] {
-  return parseCsvRows<RecordRow>(path);
+export function readCuratorRecordRows(path: string = RECORDS_CSV_PATH): CuratorRecordRow[] {
+  return parseCsvRows<CuratorRecordRow>(path);
 }
 
 /** Every data/records-inat.csv row, in file order ([] when absent/header-only). */

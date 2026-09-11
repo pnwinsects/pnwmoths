@@ -7,8 +7,9 @@ import { readFileSync, mkdirSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 import { OccurrenceRecordSchema } from '../src/types/schemas.ts';
 import {
-  RECORDS_COLUMNS,
+  RECORDS_CSV_COLUMNS,
   RECORDS_INAT_COLUMNS,
+  recordIdProblems,
   RECORDS_INAT_CSV_PATH,
   RECORD_COORDINATE_BOUNDS,
   createAllRecordsTable,
@@ -138,7 +139,18 @@ export async function main(): Promise<void> {
       );
     }
   }
-  validateCsv('data/records.csv', [...RECORDS_COLUMNS]);
+  const recordRows = validateCsv('data/records.csv', [...RECORDS_CSV_COLUMNS]);
+  // Every record has one stable id (ADR 0044). Checked before DuckDB sees the
+  // file: a blank id parses as NULL and a duplicate as two rows, and neither
+  // would fail on its own — the file would build and the identity gap would be
+  // silent, which is the state #178 was filed to end.
+  const idProblems = recordIdProblems(recordRows);
+  if (idProblems.length > 0) {
+    throw new Error(
+      `data/records.csv record_id check failed:\n  ${idProblems.slice(0, 10).join('\n  ')}` +
+        (idProblems.length > 10 ? `\n  … and ${idProblems.length - 10} more` : ''),
+    );
+  }
   // The iNaturalist import (#23) is validated only when it has rows. A
   // header-only file is the legitimate state of the repo before the first sync
   // runs, and validateCsv throws on a CSV with no data rows.

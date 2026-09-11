@@ -51,4 +51,5 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0040](0040-photo-display-module.md) | One module owns photo display selection; the location index it derives is checked against the emitted HTML on every build | Accepted |
 | [0041](0041-account-shows-photos-tiles-do-not-cover.md) | A tiled species account shows its tiles *and* every catalogued photograph no tile covers; tiles supersede only the same specimen and view | Accepted |
 | [0042](0042-inat-life-stage-gates-record-date.md) | The iNaturalist sync keeps an observation's date only when it is annotated Adult; otherwise the date moves into `notes` and no column is added | Accepted |
+| [0044](0044-record-id.md) | Every `records.csv` row carries an opaque, never-reused `record_id`, minted by `npm run records:assign-ids`; the build refuses a blank or duplicate | Accepted |
 | [0045](0045-manifest-honours-determinations.md) | `photos:investigate` files a determined photograph under the curator's species and letter as `resolved-via-determination`, which is tileable | Accepted |

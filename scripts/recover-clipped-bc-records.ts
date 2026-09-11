@@ -27,6 +27,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
+import { RECORDS_CSV_COLUMNS } from './lib/records-source.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -38,11 +39,16 @@ const NEW_LON_MIN = -139.0, NEW_LON_MAX = -110.0;
 const OLD_LAT_MIN = 42.0, OLD_LAT_MAX = 55.0;
 const OLD_LON_MIN = -125.0, OLD_LON_MAX = -110.0;
 
-const RECORDS_COLUMNS = [
+// The bad-coords sidecar keeps the 14-column shape it was written with; the
+// records.csv write uses the file's real column order so nothing appended since
+// (district_id, record_id — ADR 0044) is dropped. Recovered rows get their
+// record_id from `npm run records:assign-ids` afterwards.
+const BAD_RECORD_COLUMNS = [
   'species_slug', 'record_type', 'latitude', 'longitude', 'state', 'county',
   'locality', 'elevation_ft', 'year', 'month', 'day', 'collector', 'collection', 'notes',
 ];
-const BAD_COLUMNS = ['species_id', 'species_slug', ...RECORDS_COLUMNS.slice(1)];
+const RECORDS_COLUMNS: readonly string[] = RECORDS_CSV_COLUMNS;
+const BAD_COLUMNS = ['species_id', 'species_slug', ...BAD_RECORD_COLUMNS.slice(1)];
 
 // Records already in records.csv (inside the old box) are excluded here; this
 // query returns only the records the old box clipped (band) plus out-of-region
