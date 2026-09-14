@@ -1,16 +1,4 @@
 species_id,species_slug,record_type,latitude,longitude,state,county,locality,elevation_ft,year,month,day,collector,collection,notes
-2695,lacinipolia-stenotis,specimen,-117.047,46.339,WA,Asotin,Asotin,,1963,9,15,R. E. Miller,?,Miller cards; Shepard notes
-2695,lacinipolia-stenotis,specimen,-119.348,47.605,WA,Grant,Dry Falls,,1945,9,11,E. C. Johnston,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-118.352,46.065,WA,Walla Walla,Walla Walla,,1960,9,19,W. C. Cook,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-118.904,46.086,WA,Walla Walla,Wallula,,1948,9,21,W. C. Cook,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-120.433,46.217,WA,Yakima,Satus Cr.,,1949,9,19,E. C. Johnston,CNC,Crabo notes
-1834,xestia-speciosa,photograph,39.75,-105.22,BC,,Golden,1732,2008,7,25,R. or L. Avis photo,,Crabo ID
-1900,coenophila-opacifrons,specimen,50.135,50.135,BC,East Kootenay,Engstrom's Pond,3727,2013,8,10,W. D. Nicholson,RBCM,
-2695,lacinipolia-stenotis,specimen,-119.55,49.3,BC,Okanagan-Similkameen,"Okanagan Falls, 5kmSE",,1990,9,16,J. Troubridge,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-119.549,49.183,BC,Okanagan-Similkameen,Oliver,,1953,9,11,,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-119.549,49.183,BC,Okanagan-Similkameen,Oliver,,1953,9,15,,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-119.549,49.183,BC,Okanagan-Similkameen,Oliver,,1953,9,18,,CNC,Crabo notes
-1772,euxoa-olivalis,specimen,50.693,-109.282,AB,,South Saskatchewan R. @ Hwy.41,2100,1999,7,13,Crabo/Troubridge,WSU,
 2274,hemileuca-hera,specimen,41.944,-114.686,ID,Twin Falls,Shoshone Cr.,5125,1987,8,19,D. V. McCorkle,DVM,
 1720,apamea-devastator,specimen,46.73,-109.75,MT,Sweet Grass,"Greycliff RS, 2.5mSE",3921,1988,7,24,Crabo/Morrell,WSU,
 1443,lasionycta-impingens,specimen,45.05,-109.47,MT,Carbon,Hellroaring Lakes,9980,1988,7,26,Crabo/Morrell,LGCC,
@@ -139,7 +127,6 @@ species_id,species_slug,record_type,latitude,longitude,state,county,locality,ele
 1625,lithophane-georgii,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,,?,Cook list; Shepard notes; 
 2535,xylena-nupera,specimen,48.554,-109.679,MT,Hill,Havre,2535,,,,W. C. Cook,?,Cook list; Shepard notes; 
 2101,apantesis-williamsii,specimen,45.017,-109.934,MT,Park,Cooke City,7570,1959,7,27,"F., P. & B. Rindge",AMNH,Crabo notes; 
-3350,papaipema-unimoda,specimen,46.693,-144.044,MT,Missoula,"MPG Ranch, Bitterroot R",3166,2022,9,5,M. Seidensticker,CSU,
 2486,tholera-americana,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
 1689,nephelodes-minians,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
 2253,anarta-trifolii,specimen,48.554,-109.679,MT,Hill,Havre,,,,,,?,Cooke list; Shepard notes; 
@@ -179,8 +166,3 @@ October 30, 1967"
 2274,hemileuca-hera,specimen,41.013,-121.601,OR,Klamath,"Merill, 4mS",4000,1983,9,2,,OSAC,marcata
 2422,alypia-langtoni,specimen,41.947,-120.419,OR,Lake,Goose L.,4705,1973,5,1,"S. Jewett, Jr.",OSAC,
 1760,apantesis-ornata,specimen,41.967,-117.743,OR,Malheur,McDermitt Cr.,4415,2002,6,23,D. N. Ross,DNR,
-2695,lacinipolia-stenotis,specimen,-118.899,42.889,OR,Harney,"Frenchglen, 5mN",,1961,9,13,D. F. Hardwick,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-118.866,42.976,OR,Harney,"Frenchglen, 9mN",,1961,9,13,W. C. Cook,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-121.274,44.564,OR,Jefferson,Cove Palisades SP,,1962,9,2,W. C. Cook,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-121.17,44.5,OR,Jefferson,"Madras, 10mSW",,1970,9,11,D. F. Hardwick,CNC,Crabo notes
-2695,lacinipolia-stenotis,specimen,-118.204,43.049,OR,Malheur,"Follyfarm, 5mSE",,1961,9,15,D. F. Hardwick,CNC,Crabo notes

@@ -20,6 +20,12 @@
 // species absent from species.csv (slug-deduped/excluded) are skipped, matching
 // the original migration.
 //
+// Do not re-run. Both outputs have been worked on since: records are removed
+// from data/records-bad-coords.csv as they are resolved, and a re-run would
+// restore every one of them — and append the recovered band to records.csv a
+// second time, because the query selects by the old box, not by what the file
+// already holds.
+//
 // Run: node scripts/recover-clipped-bc-records.ts   (container must be running)
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';

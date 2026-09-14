@@ -104,6 +104,18 @@ const reports: CurationReport[] = [
     ],
   },
   {
+    id: 'records-bad-coords',
+    title: 'Records held off the map: coordinates outside the site’s bounds',
+    audience: 'curation',
+    question: 'Which occurrence records are held off the site because their coordinates fall outside the area it maps, and should any of them be published?',
+    body: 'One row per record whose coordinates fall outside the publishing bounds (latitude 42–60° N, longitude 110–139° W). <strong>Few of these are swapped latitude and longitude.</strong> The reversed and mistyped records that the catalogue could correct have been corrected and published; almost everything left has plausible coordinates that are simply beyond the bounds. Most are central and eastern Montana, east of 110° W — a line that cuts through counties already on the site — and a handful fall just south of the Oregon and Idaho borders. Whether they belong on the site is a coverage question, not a data error. A record leaves this file once it is resolved, so nothing ruled on reappears.',
+    regenerated: 'Never. It was extracted once from the legacy database by <code>scripts/recover-clipped-bc-records.ts</code>, which must not be re-run: it would restore every resolved record.',
+    files: [fromRepo('data/records-bad-coords.csv')],
+    see: [
+      { label: 'Issue #367 — publish Montana east of 110° W, and six border records?', url: 'https://github.com/pnwinsects/pnwmoths/issues/367' },
+    ],
+  },
+  {
     id: 'cdn-inventory',
     title: 'CDN inventory: objects nothing accounts for',
     audience: 'curation',
@@ -206,16 +218,6 @@ const reports: CurationReport[] = [
     see: [
       { label: 'Runbook: assigning districts', url: '_instructions/ASSIGNING_DISTRICTS.md' },
     ],
-  },
-  {
-    id: 'records-bad-coords',
-    title: 'Suspect coordinates: records outside the region',
-    audience: 'engineering',
-    question: 'Which records have coordinates that cannot be right?',
-    body: 'Records whose coordinates fall outside the covered region (latitude 42–60, longitude −139 to −110). Most are transposed latitude and longitude and are recoverable by swapping the two — the pair is usually recognisable at a glance. Held out of the site until someone rules on them.',
-    regenerated: 'Manually, by the recovery script: <code>node scripts/recover-clipped-bc-records.ts</code>.',
-    files: [fromRepo('data/records-bad-coords.csv')],
-    see: [],
   },
   {
     id: 'link-rot',

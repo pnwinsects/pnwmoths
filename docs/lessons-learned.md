@@ -487,6 +487,16 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **Describe a report's contents by counting them, not by what the script that wrote it
+  expected.** The `/curation/` entry for `data/records-bad-coords.csv` said *"Most are
+  transposed latitude and longitude"* — the recovery script's header had guessed "e.g. swapped
+  lat/lon", and nobody grouped the file. The curator read the page, found a few swapped pairs,
+  and wrote in asking how to rule on each of 184 records. Fourteen were swapped; 160 were correct
+  central and eastern Montana coordinates east of the −110° publishing edge — one coverage
+  question, not 184 corrections ([#367](https://github.com/pnwinsects/pnwmoths/issues/367)). A
+  report's description is the curator's first reading of the data, so a `GROUP BY` over the file
+  is the minimum before writing one.
+
 - **Replacing a script with a prose recipe inverts something.** `scripts/upload-plates.js`
   computed each file's path *relative to* `plates/` and put the prefix back on
   (`` const cdnPath = `plates/${rel}` ``). When it was deleted as a spent one-off, the hand-written
