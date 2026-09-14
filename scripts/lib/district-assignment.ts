@@ -49,9 +49,10 @@ export type CoordinateOutcome = 'axis-order-suspect' | 'out-of-bounds' | 'ok';
  * True iff (latitude, longitude) looks like a swapped lat/lon pair: the
  * `latitude` column value is implausible as a latitude BUT plausible as a
  * longitude, AND the `longitude` column value is plausible as a latitude.
- * Verified against the known-swapped rows in data/records-bad-coords.csv
- * (e.g. Asotin Co., WA: latitude=-117.047, longitude=46.339 — a real record
- * with its columns swapped).
+ * Verified against the known-swapped rows once held in
+ * data/records-bad-coords.csv (e.g. Asotin Co., WA: latitude=-117.047,
+ * longitude=46.339 — a real record with its columns swapped), since corrected
+ * and published.
  */
 export function isAxisOrderSuspect(latitude: number, longitude: number): boolean {
   const latPlausibleAsLat =

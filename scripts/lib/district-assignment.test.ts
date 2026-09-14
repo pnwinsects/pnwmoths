@@ -51,13 +51,13 @@ describe('parseCoordinate', () => {
 // ---------------------------------------------------------------------------
 
 describe('classifyCoordinate — axis-order guard', () => {
-  it('flags the known-swapped Asotin Co., WA row from data/records-bad-coords.csv', () => {
+  it('flags the known-swapped Asotin Co., WA row once held in data/records-bad-coords.csv', () => {
     // latitude column holds -117.047 (a longitude value); longitude column
     // holds 46.339 (a latitude value) — a real swapped-axis record.
     assert.equal(classifyCoordinate(-117.047, 46.339), 'axis-order-suspect');
   });
 
-  it('flags the known-swapped Harney Co., OR row from data/records-bad-coords.csv', () => {
+  it('flags the known-swapped Harney Co., OR row once held in data/records-bad-coords.csv', () => {
     assert.equal(classifyCoordinate(-118.899, 42.889), 'axis-order-suspect');
   });
 
