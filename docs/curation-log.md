@@ -77,8 +77,7 @@ what made C-020 possible to reconstruct.
 
 **Source** [#303 comment](https://github.com/pnwinsects/pnwmoths/issues/303#issuecomment-5655174353),
 the curator's own words (quoted without the comment's two broken link brackets) · **Status** Applied
-(determinations, *Digrammia* views — this PR); Pending (copying the tile sets on the CDN — this PR) ·
-**Refines** C-026
+(this PR) · **Refines** C-026
 
 > The the tiled specimen A and the legacy Speranza decorata specimen A are both _Speranza decorata_.
 >
