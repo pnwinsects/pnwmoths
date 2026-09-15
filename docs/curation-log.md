@@ -73,6 +73,41 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-030 · 2026-09-13 · The tiled "Macaria decorata" specimens are *Speranza decorata*; *Digrammia decorata*'s views were swapped
+
+**Source** [#303 comment](https://github.com/pnwinsects/pnwmoths/issues/303#issuecomment-5655174353),
+the curator's own words (quoted without the comment's two broken link brackets) · **Status** Applied
+(determinations, *Digrammia* views — this PR); Pending (copying the tile sets on the CDN — this PR) ·
+**Refines** C-026
+
+> The the tiled specimen A and the legacy Speranza decorata specimen A are both _Speranza decorata_.
+>
+> The images of _Digrammia decorata_ on the dev site are indeed _Digrammia decorata_, but note that
+> the D and V are reversed for both specimens (A and B).
+
+Why it matters: C-026 held these tiles back because two readings disagreed. The name "Macaria
+decorata" is MPG's combination for *Speranza decorata*, but to a non-expert eye the tiled moths
+looked nothing like our legacy *Speranza decorata* photographs. **The name was the reliable
+evidence; the resemblance test was not.** The question on #303 covered specimens A and B as one set,
+and the curator's answer links A, so B moves with it.
+
+The tiles take letters **C and D**, because the legacy *Speranza decorata* photographs already hold A
+and B. That follows C-026's rule: the incoming photograph takes the next free letter. The filenames
+do not change ([ADR 0038](adr/0038-photo-identity-is-data-not-filename.md)).
+
+The four *Digrammia decorata* JPEGs recorded no view or specimen in `data/images.csv`, like the rest
+of the #232 batch. Nothing contradicted their filenames, so the Browse card, which skips ventral
+photographs, would have led with the underside. They now carry the curator's views, with weights
+reordered so each dorsal photograph comes first. The species' four high-resolution TIFFs have the
+same filenames and probably the same mistake. The pipeline cannot yet record a view correction for a
+TIFF ([#373](https://github.com/pnwinsects/pnwmoths/issues/373)).
+
+What changed (this PR): 4 rows in `data/photo-determinations.csv`;
+`data/species-photos-manifest.csv` and `data/species-photos.json` regenerated, moving the tile sets
+from `macaria-decorata` A and B to `speranza-decorata` C and D; 16 rows retargeted in
+`data/image-derivatives.csv`; the `macaria-decorata` row removed from
+`data/referential-integrity-exceptions.csv`; specimen and view filled in on 4 `data/images.csv` rows.
+
 ## C-029 · 2026-09-13 · The name stays *Schizura ipomaeae*; the key's *ipomoeae* is an older spelling of it
 
 **Source** [#283 comment](https://github.com/pnwinsects/pnwmoths/issues/283#issuecomment-5655382075),
@@ -197,8 +232,8 @@ embargo (#48) no longer has a missing-photo blocker.
 
 **Source** [#279 comment](https://github.com/pnwinsects/pnwmoths/issues/279#issuecomment-5245197930),
 the curator's own words · **Status** Applied (*bitactata*, *colata*, *lorquinaria*, *plumosata* — #303 PR);
-On hold (the `macaria-decorata` tile set — which species it depicts is the open question on #303) ·
-**Refines** C-014
+On hold (the `macaria-decorata` tile set — which species it depicts is the open question on #303),
+resolved by C-030 · **Refines** C-014 · **Refined by** C-030
 
 > For this set of species, we should follow what MPG does:
 > Use Speranza bitactata, not Macaria bitactata

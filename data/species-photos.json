@@ -17453,33 +17453,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "macaria-decorata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-decorata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-decorata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-decorata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-decorata/B-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "macaria-lorquinaria": {
     "high_res_available": true,
     "specimens": [
@@ -24148,6 +24121,33 @@
         "specimen_id": "E",
         "view": "V",
         "tiles_path": "species-tiles/speranza-bitactata/E-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "speranza-decorata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-decorata/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-decorata/C-V"
+      },
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-decorata/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-decorata/D-V"
       }
     ],
     "photographer": "Merrill Peterson",
