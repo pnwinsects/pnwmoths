@@ -4,8 +4,9 @@
  * One-off migration for #303: copy the CDN objects of the four species the
  * curator's #279 ruling re-genused (curation log C-026) onto their ruled slugs
  * and letters. The fifth species in the ruling, the `macaria-decorata` tile
- * set, is deliberately absent — which species it depicts is still an open
- * question on #303 and nothing moves until the curator answers.
+ * set, is deliberately absent — which species it depicted was an open question
+ * when this ran. The curator later ruled it *Speranza decorata* (C-030), and
+ * those tiles moved by determination through migrate-determined-photo-tiles.ts.
  *
  * Two shapes of work in one migration:
  *
