@@ -1,7 +1,8 @@
 // scripts/migrate-genus-fix-photos.test.ts
 // Unit tests for the #303 genus-fix migration: the bitactata letter map, the
-// decorata exclusion, and consistency between the copy table and the repo's
-// own record of the move (cdn-retired-images.csv, images.csv, derivatives).
+// decorata exclusion (its tiles moved later, by determination — C-030), and
+// consistency between the copy table and the repo's own record of the move
+// (cdn-retired-images.csv, images.csv, derivatives).
 // Run via: node --test scripts/migrate-genus-fix-photos.test.ts
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -38,7 +39,7 @@ test('retargetBitactataKey: letter rewrite is scoped to the segment after the sl
   assert.equal(retargetBitactataKey(other), other);
 });
 
-test('FILE_COPIES: no decorata anywhere — that half of the ruling is on hold', () => {
+test('FILE_COPIES: no decorata anywhere — its tiles moved by determination instead (C-030)', () => {
   for (const { from, to } of FILE_COPIES) {
     assert.ok(!from.includes('decorata') && !to.includes('decorata'), `${from} -> ${to}`);
   }
@@ -55,11 +56,13 @@ test('FILE_COPIES: 30 legacy objects, unique targets, historical binomials prese
   }
 });
 
-test('every #303 retirement row is either an explicit copy or a bitactata tile object', () => {
+test('every genus-fix retirement row is either an explicit copy or a bitactata tile object', () => {
   const retired = parse(readFileSync(resolve(ROOT, 'data/cdn-retired-images.csv')), {
     columns: true, skip_empty_lines: true, bom: true,
   }) as Array<{ old_path: string; superseded_by: string; reason: string }>;
-  const rows = retired.filter(r => r.reason.includes('#303'));
+  // Selected by this migration's own reason, not by issue number: #303 also
+  // carries the decorata re-key, which migrate-determined-photo-tiles.ts ledgers.
+  const rows = retired.filter(r => r.reason.startsWith('returned to the curator-ruled genus per #279'));
   assert.equal(rows.length, 60);
   const explicit = new Map(FILE_COPIES.map(p => [p.from, p.to]));
   for (const { old_path, superseded_by } of rows) {
