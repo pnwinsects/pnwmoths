@@ -153,6 +153,48 @@ describe('the account: tiles REPLACE the catalogued photographs', () => {
   });
 });
 
+describe('the account: a tile\'s caption comes from the row it supersedes', () => {
+  function captionRows(rows: Row[], tiles: typeof TILES_A): (string | null)[] {
+    const display = pickAccountPhotos(rows, tiles);
+    if (display.mode !== 'tiles') throw new Error(`expected tiles mode, got ${display.mode}`);
+    return display.tiles.map((pair) => pair.row?.filename ?? null);
+  }
+
+  // #358: a tiled account showed "Specimen A · Dorsal" and nothing else, while the
+  // locality, date and collector sat unread on the images.csv row of that specimen and view.
+  it('pairs each tile with the catalogued row of its specimen and view', () => {
+    const rows = [
+      row({ filename: 'a-v.jpg', specimen: 'A', view: 'ventral' }),
+      row({ filename: 'a-d.jpg', specimen: 'A', view: 'dorsal' }),
+    ];
+    assert.deepEqual(captionRows(rows, TILES_A), ['a-d.jpg', 'a-v.jpg']);
+  });
+
+  it('pairs across the two view vocabularies and letter case', () => {
+    assert.deepEqual(captionRows([row({ filename: 'a-d.jpg', specimen: ' a ', view: 'Dorsal' })], TILES_A), ['a-d.jpg', null]);
+  });
+
+  it('leaves a tile with no caption row when nothing catalogued matches it', () => {
+    assert.deepEqual(captionRows([row({ specimen: 'B' })], TILES_A), [null, null]);
+  });
+
+  // Two rows under one letter and view are two moths (#341). Eupsilia tristigmata's A-V
+  // tile was cut from "Eupsilia tristigmata-A-V.tif", but the lighter of its two A-V rows is
+  // "Eupsilia sidus-A-V.jpg" — a weight pick would caption the tile with the wrong specimen.
+  it('gives a tile NO caption row when two catalogued photographs share its specimen and view', () => {
+    const rows = [
+      row({ filename: 'sidus-a-v.jpg', weight: 2, specimen: 'A', view: 'ventral' }),
+      row({ filename: 'tristigmata-a-v.jpg', weight: 4, specimen: 'A', view: 'ventral' }),
+    ];
+    assert.deepEqual(captionRows(rows, TILES_A), [null, null]);
+  });
+
+  it('does not let pairing change which photographs render', () => {
+    const rows = [row({ filename: 'a-d.jpg' }), row({ filename: 'b-d.jpg', specimen: 'B', weight: 2 })];
+    assert.deepEqual(pickAccountPhotos(rows, TILES_A).photos.map((r) => r.filename), ['b-d.jpg']);
+  });
+});
+
 describe('the Browse card: lowest weight, ventral excluded', () => {
   it('skips a ventral shot even when it is the lightest', () => {
     const chosen = pickCardPhoto([

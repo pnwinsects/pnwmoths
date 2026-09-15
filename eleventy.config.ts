@@ -137,7 +137,8 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   // {{ images[sp.slug] | accountPhotos(speciesPhotos[sp.slug]) }} — what the species
   // account displays: { mode: 'tiles' | 'photos' | 'none', photos }. In 'tiles' mode
   // `photos` is the catalogued rows no tile covers — TILE_POLICY 'supplements'
-  // (src/_lib/photo-display.ts), stated there and not in the template.
+  // (src/_lib/photo-display.ts), stated there and not in the template — and `tiles`
+  // pairs each tile with the one row whose label data captions it (ADR 0046).
   eleventyConfig.addFilter("accountPhotos", (images, highRes) => {
     const entry = highRes as { high_res_available?: boolean; specimens?: TileSpecimenLike[] } | undefined;
     return pickAccountPhotos(
