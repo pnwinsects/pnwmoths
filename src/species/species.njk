@@ -61,6 +61,19 @@ eleventyComputed:
        template restates neither. #}
     {% set highResEntry = speciesPhotos[sp.slug] %}
     {% set display = images[sp.slug] | accountPhotos(highResEntry) %}
+    {#- A photograph's label transcription, as the data-* attributes the slideshow turns into
+       caption lines. One macro for tiles and catalogued photographs alike, so the two captions
+       cannot drift apart again (#358). -#}
+    {%- macro labelData(r) -%}
+      {% if r.locality %} data-locality="{{ r.locality }}"{% endif %}
+      {%- if r.state %} data-state="{{ r.state }}"{% endif %}
+      {%- if r.elevation_ft %} data-elevation="{{ r.elevation_ft }}"{% endif %}
+      {%- if r.year %} data-year="{{ r.year }}"{% endif %}
+      {%- if r.month %} data-month="{{ r.month }}"{% endif %}
+      {%- if r.day %} data-day="{{ r.day }}"{% endif %}
+      {%- if r.collector %} data-collector="{{ r.collector }}"{% endif %}
+      {%- if r.subspecies %} data-subspecies="{{ r.subspecies }}"{% endif %}
+    {%- endmacro %}
     <pnwm-image-slideshow
       slug="{{ sp.slug }}"
       {% if highResEntry and highResEntry.high_res_available %}
@@ -72,7 +85,10 @@ eleventyComputed:
       {% if display.mode == 'tiles' %}
         {# A tile figure carries its DZI path, so the slideshow opens the deep-zoom viewer
            for exactly the figures that have one and a plain lightbox for the rest. #}
-        {% for specimen in highResEntry.specimens %}
+        {#- `pair.row` is the catalogued photograph this tile supersedes, when there is exactly
+           one; its label transcription captions the tile (ADR 0046). -#}
+        {% for pair in display.tiles %}
+          {% set specimen = pair.tile %}
           {% set thumbSrc = specimen.tiles_path + "_thumbnail.webp" %}
           <figure>
             <img src="{{ thumbSrc | derivative('530') }}"
@@ -84,7 +100,8 @@ eleventyComputed:
                  sizes="530px"
                  alt="{{ sp.genus }} {{ sp.species_display }}"
                  {% if highResEntry.photographer %}data-photographer="{{ highResEntry.photographer }}"{% endif %}
-                 {% if highResEntry.license %}data-license="{{ highResEntry.license }}"{% endif %}>
+                 {% if highResEntry.license %}data-license="{{ highResEntry.license }}"{% endif %}
+                 {%- if pair.row %}{{ labelData(pair.row) }}{% endif %}>
             <figcaption>Specimen {{ specimen.specimen_id }} · {{ "Dorsal" if specimen.view == "D" else "Ventral" }}</figcaption>
           </figure>
         {% endfor %}
@@ -98,14 +115,7 @@ eleventyComputed:
                  data-photographer="{{ img.photographer }}"
                  {% if img.specimen %}data-specimen="{{ img.specimen }}"{% endif %}
                  {% if img.view %}data-view="{{ img.view | capitalize }}"{% endif %}
-                 {% if img.locality %}data-locality="{{ img.locality }}"{% endif %}
-                 {% if img.state %}data-state="{{ img.state }}"{% endif %}
-                 {% if img.elevation_ft %}data-elevation="{{ img.elevation_ft }}"{% endif %}
-                 {% if img.year %}data-year="{{ img.year }}"{% endif %}
-                 {% if img.month %}data-month="{{ img.month }}"{% endif %}
-                 {% if img.day %}data-day="{{ img.day }}"{% endif %}
-                 {% if img.collector %}data-collector="{{ img.collector }}"{% endif %}
-                 {% if img.subspecies %}data-subspecies="{{ img.subspecies }}"{% endif %}>
+                 {{- labelData(img) }}>
             <figcaption>{{ img.photographer }}</figcaption>
           </figure>
         {% endfor %}

@@ -216,16 +216,40 @@ export function tileOutcome(row: SpecimenView, coverage: ReadonlySet<string>): T
 // ---------------------------------------------------------------------------
 
 /**
- * What a species account displays. The one surface that knows tiles exist. With tiles,
- * every tile renders and `photos` holds the catalogued photographs no tile covers, in
- * `weight` order — the curator's ruling on #336 that a photograph the tiles do not show
- * "should be shown on the new site" (ADR 0041). Without tiles, `photos` is every row.
- * `mode` names the branch so the template and the display index cannot disagree on it.
+ * One tile, beside the catalogued photograph whose label transcription its caption carries.
+ *
+ * A tile set records only a specimen letter and a view; the collection data — locality,
+ * date, collector — lives on the `data/images.csv` row of the same specimen and view, the
+ * row the tile supersedes (#358). `row` is that row when exactly ONE matches, and null when
+ * none does or when two do. Two rows under one letter and view are two different moths
+ * (#341), and choosing between them by weight would print one specimen's label under a
+ * photograph of the other — so neither is chosen (ADR 0046).
  */
-export type AccountDisplay<T> =
-  | { mode: 'tiles'; photos: readonly T[] }
+export interface TilePairing<S, T> {
+  tile: S;
+  row: T | null;
+}
+
+/**
+ * What a species account displays. The one surface that knows tiles exist. With tiles,
+ * every tile renders — in `tiles`, each paired with its caption row — and `photos` holds
+ * the catalogued photographs no tile covers, in `weight` order: the curator's ruling on
+ * #336 that a photograph the tiles do not show "should be shown on the new site"
+ * (ADR 0041). Without tiles, `photos` is every row. `mode` names the branch so the
+ * template and the display index cannot disagree on it.
+ */
+export type AccountDisplay<T, S = TileSpecimenLike> =
+  | { mode: 'tiles'; tiles: readonly TilePairing<S, T>[]; photos: readonly T[] }
   | { mode: 'photos'; photos: readonly T[] }
   | { mode: 'none'; photos: readonly [] };
+
+/** The one catalogued row a tile stands in for, or null when there is none or more than one. */
+function soleCoveredRow<T extends SpecimenView>(tile: TileSpecimenLike, rows: readonly T[]): T | null {
+  const key = coverageKey(tile.specimen_id, tile.view);
+  if (key === null) return null;
+  const matches = rows.filter((row) => coverageKey(row.specimen, row.view) === key);
+  return matches.length === 1 ? (matches[0] ?? null) : null;
+}
 
 /**
  * @param tiles the species' published tile specimens, or null when it has none
@@ -233,14 +257,18 @@ export type AccountDisplay<T> =
  *   show — `high_res_available` alone is what src/species/species.njk branches on — and
  *   then every catalogued row is uncovered and renders, so the page is not blank.
  */
-export function pickAccountPhotos<T extends Weighted & SpecimenView>(
+export function pickAccountPhotos<T extends Weighted & SpecimenView, S extends TileSpecimenLike = TileSpecimenLike>(
   rows: readonly T[],
-  tiles: readonly TileSpecimenLike[] | null,
-): AccountDisplay<T> {
+  tiles: readonly S[] | null,
+): AccountDisplay<T, S> {
   if (tiles !== null) {
     const coverage = tileCoverage(tiles);
     const uncovered = rows.filter((row) => tileOutcome(row, coverage) === 'uncovered');
-    return { mode: 'tiles', photos: orderByWeight(uncovered) };
+    return {
+      mode: 'tiles',
+      tiles: tiles.map((tile) => ({ tile, row: soleCoveredRow(tile, rows) })),
+      photos: orderByWeight(uncovered),
+    };
   }
   if (rows.length === 0) return { mode: 'none', photos: [] };
   return { mode: 'photos', photos: orderByWeight(rows) };
