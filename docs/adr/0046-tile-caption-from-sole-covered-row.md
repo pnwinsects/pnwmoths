@@ -36,8 +36,10 @@ was cut from `Eupsilia tristigmata-A-V.tif`; the lighter of its two A-V rows is
 ## Consequences
 
 - Every tile that supersedes one row now shows that specimen's collection data.
-- The eighteen ambiguous tiles stay uncaptioned until #341 re-letters the incoming photograph,
-  at which point each resolves to one row with no change here.
+- All twenty tiles that match two rows stay without label data — the eighteen whose rows
+  disagree, and *Protitame subalbaria*'s two, whose rows agree only because neither carries a
+  label. All twenty are #341 cases, so each resolves to one row when #341 re-letters the
+  incoming photograph, with no change here.
 - Which photographs an account displays is unchanged; so is the display index.
 
 ## Alternatives considered
