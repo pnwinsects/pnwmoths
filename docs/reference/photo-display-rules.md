@@ -37,7 +37,7 @@ derived, never declared. `NavImage`, `pickNavImages()` and `navImages` all name 
 | Browse species card | `pickCardPhoto` | Lowest `weight` among rows whose `view` is not `ventral`. A species with **no** `images.csv` row at all falls back to a synthetic thumbnail from the high-res manifest (prefers the `D` specimen) — [#84](https://github.com/pnwinsects/pnwmoths/issues/84); `images.csv` rows always win when both exist. |
 | Browse **genus** strip | `pickGenusStrip` | Up to **four** images taken across the whole genus by `weight`, deduped by thumbnail path — *not* one per species. A species can therefore put a second photograph on `/browse/` that no per-species rule predicts. |
 | Browse **tribe / subfamily / family** strips | `pickHigherStrip` | The genus strip's **first** image from each genus in tree order, until four. |
-| Identify cards | `pickIdentifyPhoto` | Lowest `weight`, ventral **not** excluded — and only for the 1,192 species the key matrix carries, so a species with a page but no key entry has no Identify card at all. |
+| Identify cards | `pickIdentifyPhoto` | Lowest `weight`, ventral **not** excluded — and only for the species the key matrix carries (`meta.matchedSpecies` in `data/key-matrix.json`), so a species with a page but no key entry has no Identify card at all. |
 | Similar-species thumbnails | `pickSimilarPhoto` | `images[slug][0]` — lowest `weight`, ventral not excluded. Rendered on **other** species' pages, the ones naming this species in `similar_species`. |
 | Share / Open Graph image | `pickSharePhoto` | The first high-res specimen's thumbnail if the species is tiled, else `images[slug][0]`; else the site share card ([ADR 0021](../adr/0021-sharing-metadata.md)). |
 

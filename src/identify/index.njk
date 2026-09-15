@@ -28,7 +28,7 @@ description: "Narrow the moths of the Pacific Northwest to a shortlist by select
   {%- endfor -%}
   </ul>
 
-  <h2>All matched key species (1,192)</h2>
+  <h2>All matched key species ({{ keyMatrix.species | length | number }})</h2>
   {%- for group in keyMatrix.familyGroups -%}
     <h3>{{ group.family or "(no family)" }}</h3>
     {%- for genusGroup in group.genera -%}

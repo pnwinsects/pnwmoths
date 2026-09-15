@@ -73,6 +73,30 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-029 · 2026-09-13 · The name stays *Schizura ipomaeae*; the key's *ipomoeae* is an older spelling of it
+
+**Source** [#283 comment](https://github.com/pnwinsects/pnwmoths/issues/283#issuecomment-5655382075),
+the curator's own words · **Status** Applied (this PR)
+
+> ipomaeae is correct
+
+The Lucid identification key names this species *Schizura ipomoeae*, so Identify never matched it
+to the site's *Schizura ipomaeae* and the species had no Identify card. (C-020 brought it back to
+Browse, which is a different problem.)
+
+Why it matters: **the question in #283 leaned the wrong way.** It suggested *ipomoeae* was right,
+since the name honours the morning-glory genus *Ipomoea*, and that the site had inherited a typo.
+The MPG checklist (`data/mpg-taxa.csv`, Hodges 8005) records the opposite. Miller et al. (2021)
+restored Doubleday's original spelling *ipomaeae*. Hodges et al. (1983) had corrected it to
+*ipomoeae* and listed *ipomaeae* as an incorrect original spelling, and the key follows that older
+checklist. That history is MPG's note, not the curator's words. It explains why the key disagrees,
+and why renaming the species to match the key would have gone against the current checklist.
+
+What changed: one row in `data/species-synonyms.csv` (`Schizura ipomoeae` → `schizura-ipomaeae`).
+The regenerated `data/key-matrix.json` and `data/key-coverage-report.json` now match 1,193 key
+species (was 1,192) and leave 34 unmatched (was 35). The species name, URL and photographs are
+unchanged.
+
 ## C-028 · 2026-08-24 · Eleven species accounts published another species' photographs; the tiles move, the filenames do not
 
 **Source** [#330 comment](https://github.com/pnwinsects/pnwmoths/issues/330#issuecomment-5400837287)
