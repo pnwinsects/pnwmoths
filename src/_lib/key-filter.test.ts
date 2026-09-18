@@ -258,12 +258,12 @@ describe('computeMatching', () => {
     //
     // Real-artifact regression counts (see RESEARCH.md "Concrete expected values"):
     //   WA state selected (char id=0):     873 matched (after unpublished deny-list gating #84)
-    //   WA OR OR selected (ids 0+2):     1,023 matched
+    //   WA OR OR selected (ids 0+2):     1,024 matched
     //   WA AND eyespot=Yes (ids 0, eyespot): 7 matched
     //   eyespot=Yes only:                    9 matched
-    //   forewing-yellow only:               80 matched
-    //   yellow OR orange:                  179 matched
-    //   empty selection:                 1,207 matched (after unpublished deny-list gating #84)
+    //   forewing-yellow only:               81 matched
+    //   yellow OR orange:                  180 matched
+    //   empty selection:                 1,208 matched (after unpublished deny-list gating #84)
     //
     // oedemasia-salicis was un-gated, a net +1 vs. the prior 861/1,190 baseline. Un-hiding
     // schizura-ipomaeae (#269) did not move these counts: the Lucid key spells it
@@ -278,6 +278,8 @@ describe('computeMatching', () => {
     // The same PR generalises that: 13 more key binomials name a published species under
     // a genus we have already retired (C-032), a net +13 over 1,194. WA moves too, so
     // the 863 it used to assert becomes 873.
+    // C-033 adds the fourteenth, "Notarctia arizoniensis" -> apantesis-arizoniensis, a net
+    // +1 over 1,207. WA does not move: the species has no Washington record.
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
 
@@ -301,12 +303,12 @@ describe('computeMatching', () => {
     assert.strictEqual(result.count, 873, 'WA selection must match 873 species (real-artifact regression)');
   });
 
-  it('TC-7b: empty selection returns all 1,207 species (real artifact)', async () => {
+  it('TC-7b: empty selection returns all 1,208 species (real artifact)', async () => {
     // Empty selection → D-03 base case: no constrained questions → all species pass.
     // (euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoins the key)
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
     const result = computeMatching(realMatrix as KeyMatrix, new Map(), realGroups);
-    assert.strictEqual(result.count, 1207, 'empty selection must return all 1,207 species');
+    assert.strictEqual(result.count, 1208, 'empty selection must return all 1,208 species');
   });
 });

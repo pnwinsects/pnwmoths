@@ -73,12 +73,50 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-033 · 2026-09-18 · The fourteenth retired-genus key name — *Notarctia arizoniensis* — was ours to answer, not the curator's
+
+**Source** `data/mpg-taxa.csv` row P930277, transcribed · **Provenance** NOT the curator's words, and
+not a new ruling: the Moths Photographers Group list committed to this repo states the combination
+outright · **Status** Applied (this PR) · **Refines** C-032
+
+C-032 put thirteen key binomials onto their current names and held one back, saying *Notarctia
+arizoniensis* "needs Merrill, not a maintainer." **That was wrong, and the way it was wrong is the
+[#330](https://github.com/pnwinsects/pnwmoths/issues/330) failure in miniature** — a question sent to
+the curator that the repo already answers. [`docs/agents/asking-the-curator.md`](agents/asking-the-curator.md)
+exists to catch exactly this, and running its first check catches it: `data/mpg-taxa.csv` P930277 reads
+
+> *Apantesis arizoniensis* (Stretch, 1873), formerly in the genus *Notarctia*, Systematic Entomology:
+> 41(4): 844-853, is elevated from synonymy of 8181 *N. proxima*.
+
+So the key's *Notarctia arizoniensis* and our `apantesis-arizoniensis` are one species, on the same
+authority that already governs checklist order ([ADR 0030](adr/0030-checklist-order-from-mpg.md)).
+The row is a transcription. `meta.matchedSpecies` 1,207 → 1,208, and the account has an Identify card
+for the first time.
+
+**What was genuinely his, and still is.** The same MPG sentence says *arizoniensis* was *elevated from
+synonymy of* *Apantesis proxima*, which still stands as MONA 8181 and which we hold no account for.
+The four photographs that account publishes are named `Notarctia proxima-*.jpg`. Either they are
+*arizoniensis* specimens carrying the name everything went under before the split — the ordinary
+[ADR 0038](adr/0038-photo-identity-is-data-not-filename.md) case — or the account has been publishing
+a different species. That is a determination, it is on
+[#376](https://github.com/pnwinsects/pnwmoths/issues/376), and it is unaffected by this entry: the
+name *Apantesis arizoniensis* is right for the species whatever the photographs turn out to be.
+
+**The lesson, which is not about this moth.** C-032 sorted its candidates by evidence and then filed
+the one case whose evidence was *ambiguous* as a curator question, without first asking whether a
+different artifact settled it. Compound findings split into a name question and a specimen question,
+and the name question is almost always ours. Answer our own half before writing anything down as his.
+
+**What changed** — one row in `data/species-synonyms.csv`; `data/key-matrix.json` and
+`data/key-coverage-report.json` rebuilt; four more high-resolution TIFFs promoted out of `genus-only`
+in `data/species-photos-manifest.csv`. Nineteen key binomials remain unmatched.
+
 ## C-032 · 2026-09-18 · Thirteen key binomials name a published species under a genus we have already retired
 
 **Source** this PR, extending the [#278 ruling](https://github.com/pnwinsects/pnwmoths/issues/278#issuecomment-5655356221) ·
 **Provenance** NOT the curator's words. The identifications are read out of `data/images.csv` — see
 below — and the extension was a maintainer's call, approved by the repo owner, not Merrill's ·
-**Status** Applied (this PR) · **Refines** C-031
+**Status** Applied · **Refines** C-031 · **Refined by** C-033
 
 C-031 fixed one instance of a defect that turns out to be general. The Lucid key's binomials are the
 names in use when the key was authored; the catalogue has moved on; `scripts/build-key.ts` joins the
