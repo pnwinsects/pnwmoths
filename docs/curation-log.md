@@ -87,9 +87,12 @@ no account for. This entry records what checking the legacy store did and did no
 curator he need not answer.
 
 **What is true.** The legacy media library holds all four photographs a second time under
-`Notarctia arizoniensis-*.jpg`, byte-identical (equal SHA-256 on every pair). They are two distinct
-files, not one aliased: no redirect, and distinct `ETag`s. A fabricated filename 404s and a different
-species returns different bytes, so the server is not answering everything with the same image. What
+`Notarctia arizoniensis-*.jpg`, byte-identical (equal SHA-256 on every pair). Both URLs answer
+`200` directly, with no redirect between them, and each returns its own `Last-Modified` and `ETag` —
+which is what the timestamps below are read from. A fabricated filename 404s and a different species
+returns different bytes, so the server is not answering everything with the same image. (Read that as
+two separately stored copies rather than one file under two names; it is an inference from the
+response metadata, not something the server states.) What
 the site publishes today is a re-encode of those same images — RMSE ≈ 0.014, against 0.217 for a
 genuinely different moth, the signature the #330 post-mortem describes.
 
@@ -110,10 +113,11 @@ this pair; nobody has checked the rest of the legacy store for byte-identical cr
 
 **How the error happened**, since that is the reusable part. Byte-identity was read as a *sequence*
 — old name, then corrected name — when the evidence only showed *coexistence*. The headers that
-distinguish the two readings (`Last-Modified`, `ETag`) were never requested, because every fetch used
-`curl -L`, which follows redirects silently and reports nothing about the response it followed. **A
-checksum says two files match; it says nothing about which came first, or why.** The same care ADR
-0038 demands about filenames applies to their timestamps.
+distinguish the two readings (`Last-Modified`, `ETag`) came back on every response and were simply
+never captured or looked at: every fetch was `curl -s -L -o <file>`, which keeps the bytes, discards
+the headers, and follows any redirect without saying it did. `curl -s -L -D - -o <file>` costs
+nothing and keeps both. **A checksum says two files match; it says nothing about which came first, or
+why.** The same care ADR 0038 demands about filenames applies to their timestamps.
 
 Also corrected here: [`docs/reference/data-provenance.md`](reference/data-provenance.md) claimed the
 legacy server normalises spaces and underscores in media filenames. It does not — `Grammia_doris-A-D.jpg`

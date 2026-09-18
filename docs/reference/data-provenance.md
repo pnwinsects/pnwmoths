@@ -49,10 +49,12 @@ longer returns legacy HTML for every path. Two fallbacks, in order:
   (`Grammia_doris-A-D.jpg` 404s where `Grammia%20doris-A-D.jpg` returns 200), an earlier
   claim here that C-034 corrected.
 
-  Request it **without following redirects** when the answer matters. Every file carries a
-  `Last-Modified` and an `ETag` from the 2013-08-04 bulk load, and those are what distinguish
-  two files that happen to match from one file served under two names — a distinction a
-  `curl -L` checksum cannot make, and one C-034 got wrong by not asking for it.
+  **Keep the response headers** when the answer matters — `curl -s -L -D - -o <file>`, not
+  `curl -s -L -o <file>`. The media responses seen so far carry `Last-Modified` and `ETag`
+  dating from the 2013-08-04 bulk load, and where both are present they are supporting
+  evidence for whether two matching URLs are two stored copies or one file under two names.
+  Treat them as corroboration, not proof, and do not assume every response has them. C-034
+  reached the wrong conclusion by keeping only the bytes.
 
   This is the recovery path for any photograph missing from the CDN, and it is
   worth checking **before** asking the curator whether an original still exists —
