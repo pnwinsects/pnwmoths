@@ -73,11 +73,50 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-034 · 2026-09-18 · The four *Notarctia proxima* photographs are *Apantesis arizoniensis* — the same files are held under both names
+
+**Source** the original site's media library, checksummed; recorded on
+[#376](https://github.com/pnwinsects/pnwmoths/issues/376) · **Provenance** NOT the curator's words
+and not his ruling. It is evidence the project already held, read out; he is notified and can
+correct it · **Status** Applied (this PR) · **Refines** C-033
+
+C-033 left one question genuinely his: the *Apantesis arizoniensis* account publishes four
+photographs named `Notarctia proxima-*.jpg`, and *A. proxima* is still a species (MONA 8181) we hold
+no account for. Before spending his attention, we checked what the project already had — the step
+[`docs/agents/asking-the-curator.md`](agents/asking-the-curator.md) puts first and that
+[#330](https://github.com/pnwinsects/pnwmoths/issues/330) skipped.
+
+**The legacy media library serves all four photographs under `Notarctia arizoniensis-*.jpg` as
+well, and the two sets are byte-identical** — equal SHA-256 on every pair. That is not a server
+artifact: a fabricated filename 404s, and a different species returns different bytes. What the site
+publishes today is a re-encode of those same images (RMSE ≈ 0.014, against 0.217 for a genuinely
+different moth — the same signature the #330 post-mortem describes). And the high-resolution
+originals scanned in 2026 exist **only** under the *arizoniensis* name; there is no *proxima* pair
+in that corpus at all.
+
+So the re-determination was made before us, by whoever prepared the collection, and the published
+files simply kept their older name — *A. arizoniensis* was sunk under *A. proxima* until MPG
+elevated it (8181.1), which is exactly when specimens would have been labelled *proxima*. The
+catalogue has said *arizoniensis* all along.
+
+Why it matters beyond this moth: **the conclusion was already in the repo twice** — in the
+`species_slug` and in the legacy filenames — and neither states that a human ever decided it. That
+is the failure [ADR 0032](adr/0032-curation-log.md) and
+[ADR 0038](adr/0038-photo-identity-is-data-not-filename.md) exist to stop, so the four rows now live
+in `data/photo-determinations.csv` with the evidence rather than only as a slug.
+
+**Not closed.** #376 stays open, retitled so it asks nothing unless we are wrong: if either specimen
+is really *A. proxima*, the photographs come off the account and *A. proxima* needs a destination.
+The curator is the only person who can say so, and he does not have to say anything for this to
+stand.
+
+**What changed** — four rows in `data/photo-determinations.csv`.
+
 ## C-033 · 2026-09-18 · The fourteenth retired-genus key name — *Notarctia arizoniensis* — was ours to answer, not the curator's
 
 **Source** `data/mpg-taxa.csv` row P930277, transcribed · **Provenance** NOT the curator's words, and
 not a new ruling: the Moths Photographers Group list committed to this repo states the combination
-outright · **Status** Applied (this PR) · **Refines** C-032
+outright · **Status** Applied · **Refines** C-032 · **Refined by** C-034
 
 C-032 put thirteen key binomials onto their current names and held one back, saying *Notarctia
 arizoniensis* "needs Merrill, not a maintainer." **That was wrong, and the way it was wrong is the
