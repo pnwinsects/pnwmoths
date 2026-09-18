@@ -9,7 +9,7 @@
 ## Before You Start
 
 You will need:
-- **Dropbox app access token** with the `files.metadata.read` scope — generate one yourself, see Step 1 below. Tokens start with `sl.` and are short-lived (~4 hours unless refreshed)
+- **Dropbox app access token** with the `files.metadata.read` scope — generate one yourself, see Step 1 below. Tokens start with `sl.` and **last 24 hours**. Generate one when you sit down to run this, not in advance: a token from a previous session is a dead value, and the only symptom is a `401` on the first call
 - **Node 24** — matches `.nvmrc`. Verify with `node --version`
 - **tmux** (or `screen`) — the full run takes 5–15 minutes against the audit corpus, and tmux keeps it alive across laptop sleep and an accidentally closed terminal
 - **No other photo-pipeline run in progress** — tiling, upload, or a second ingest, including the quick `RESORT_ONLY` re-sort in Step 7. All of them rewrite `data/species-photos-manifest.csv` in full, so the one started second refuses to run and names the process holding the lock ([ADR 0025](../docs/adr/0025-manifest-locks.md)). A lock left behind by a killed run is taken over automatically; never delete `var/species-photos-manifest.lock` by hand
