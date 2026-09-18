@@ -154,7 +154,7 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1193 in real data/key-matrix.json', () => {
+  test('meta.matchedSpecies === 1194 in real data/key-matrix.json', () => {
     // Issue #84 deny-lists unpublished species, excluding formerly matched key species.
     // oedemasia-salicis was un-gated (Merrill's guidance: it's the canonical current
     // placement and should show its page/images), a net +1 over the 1190 baseline.
@@ -166,13 +166,15 @@ describe('GRID-01 real-data gate', () => {
     // phyllodesma-americana's existing entry (OR-merged, no new slug).
     // #283 makes "Schizura ipomoeae" a synonym of schizura-ipomaeae (C-029), net +1
     // over 1192.
+    // #278 makes "Holoarctia sordida" a synonym of chelis-sordida (C-031), net +1 over
+    // 1193: the key kept the retired genus for a species our catalogue has always had.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1193,
-      `expected meta.matchedSpecies to be 1193, got ${raw.meta.matchedSpecies}`
+      1194,
+      `expected meta.matchedSpecies to be 1194, got ${raw.meta.matchedSpecies}`
     );
   });
 });

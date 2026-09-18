@@ -263,7 +263,7 @@ describe('computeMatching', () => {
     //   eyespot=Yes only:                    9 matched
     //   forewing-yellow only:               75 matched
     //   yellow OR orange:                  172 matched
-    //   empty selection:                 1,193 matched (after unpublished deny-list gating #84)
+    //   empty selection:                 1,194 matched (after unpublished deny-list gating #84)
     //
     // oedemasia-salicis was un-gated, a net +1 vs. the prior 861/1,190 baseline. Un-hiding
     // schizura-ipomaeae (#269) did not move these counts: the Lucid key spells it
@@ -272,6 +272,9 @@ describe('computeMatching', () => {
     // key column), a net +1 over the 1,191 baseline.
     // #283 adds "Schizura ipomoeae" as a synonym of schizura-ipomaeae (C-029), a net +1
     // over the 862/1,192 baseline.
+    // #278 adds "Holoarctia sordida" as a synonym of chelis-sordida (C-031), a net +1
+    // over the 863/1,193 baseline — our catalogue has said Chelis all along; the key
+    // still said Holoarctia, so a published species had no Identify card.
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
 
@@ -295,12 +298,12 @@ describe('computeMatching', () => {
     assert.strictEqual(result.count, 863, 'WA selection must match 863 species (real-artifact regression)');
   });
 
-  it('TC-7b: empty selection returns all 1,193 species (real artifact)', async () => {
+  it('TC-7b: empty selection returns all 1,194 species (real artifact)', async () => {
     // Empty selection → D-03 base case: no constrained questions → all species pass.
     // (euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoins the key)
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
     const result = computeMatching(realMatrix as KeyMatrix, new Map(), realGroups);
-    assert.strictEqual(result.count, 1193, 'empty selection must return all 1,193 species');
+    assert.strictEqual(result.count, 1194, 'empty selection must return all 1,194 species');
   });
 });

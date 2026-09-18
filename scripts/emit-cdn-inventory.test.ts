@@ -185,17 +185,17 @@ describe('classify', () => {
   // removed, absent from the manifest of the build that is live now.
   it('calls a site path outside the current manifest a stale-site leftover', () => {
     const s = sources({
-      speciesSlugs: new Set(['holoarctia-sp']),
-      gatedSlugs: new Set(['holoarctia-sp']),
+      speciesSlugs: new Set(['chelis-sp']),
+      gatedSlugs: new Set(['chelis-sp']),
       siteDirs: new Set(['species']),
     });
-    const page = classify(object('species/holoarctia-sp/index.html'), s);
+    const page = classify(object('species/chelis-sp/index.html'), s);
     assert.equal(page.accounting, 'unaccounted');
     assert.equal(page.shape, 'stale-site');
     assert.match(page.detail, /not in the current _site-manifest\.json/);
-    assert.match(page.detail, /holoarctia-sp is gated and gets no page/);
+    assert.match(page.detail, /chelis-sp is gated and gets no page/);
 
-    assert.equal(classify(object('species/holoarctia-sp/records.parquet'), s).shape, 'stale-site');
+    assert.equal(classify(object('species/chelis-sp/records.parquet'), s).shape, 'stale-site');
   });
 
   it('names the species a leftover belongs to, and whether it exists at all', () => {
