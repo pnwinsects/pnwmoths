@@ -154,7 +154,7 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1194 in real data/key-matrix.json', () => {
+  test('meta.matchedSpecies === 1207 in real data/key-matrix.json', () => {
     // Issue #84 deny-lists unpublished species, excluding formerly matched key species.
     // oedemasia-salicis was un-gated (Merrill's guidance: it's the canonical current
     // placement and should show its page/images), a net +1 over the 1190 baseline.
@@ -168,13 +168,14 @@ describe('GRID-01 real-data gate', () => {
     // over 1192.
     // #278 makes "Holoarctia sordida" a synonym of chelis-sordida (C-031), net +1 over
     // 1193: the key kept the retired genus for a species our catalogue has always had.
+    // C-032 applies the same reading to 13 more retired-genus key names, net +13 over 1207.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1194,
-      `expected meta.matchedSpecies to be 1194, got ${raw.meta.matchedSpecies}`
+      1207,
+      `expected meta.matchedSpecies to be 1207, got ${raw.meta.matchedSpecies}`
     );
   });
 });

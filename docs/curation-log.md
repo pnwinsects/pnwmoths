@@ -73,12 +73,72 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-032 · 2026-09-18 · Thirteen key binomials name a published species under a genus we have already retired
+
+**Source** this PR, extending the [#278 ruling](https://github.com/pnwinsects/pnwmoths/issues/278#issuecomment-5655356221) ·
+**Provenance** NOT the curator's words. The identifications are read out of `data/images.csv` — see
+below — and the extension was a maintainer's call, approved by the repo owner, not Merrill's ·
+**Status** Applied (this PR) · **Refines** C-031
+
+C-031 fixed one instance of a defect that turns out to be general. The Lucid key's binomials are the
+names in use when the key was authored; the catalogue has moved on; `scripts/build-key.ts` joins the
+two by binomial. Where the genus changed and nobody wrote a synonym row, **a species with a page,
+photographs and records has no Identify card at all**, and nothing reports it — the species is simply
+absent from a matrix of 1,228.
+
+*Chelis sordida* was one of thirteen more:
+
+| The key says | We publish it as | What our own data already says |
+| --- | --- | --- |
+| *Odontosia elegans* | `pheosidea-elegans` | holds `Odontosia elegans-A-D.jpg` |
+| *Neoarctia beanii* | `chelis-beanii` | holds `Neoarctia beanii-A-D.jpg` |
+| *Neoarctia brucei* | `chelis-brucei` | holds `Neoarctia brucei-A-D.jpg` |
+| *Holarctia obliterata* | `apantesis-obliterata` | holds `Holarctia obliterata-A-D.jpg` |
+| *Parasemia plantaginis* | `arctia-plantaginis` | holds `Parasemia plantaginis-A-D.jpg` |
+| *Pararctia yarrowii* | `arctia-yarrowii` | holds `Pararctia yarrowii-A-D.jpg` |
+| *Platarctia parthenos* | `arctia-parthenos` | holds `Platarctia parthenos-A-D.jpg` |
+| *Platyprepia virginalis* | `arctia-virginalis` | holds `Platyprepia virginalis-A-D.jpg` |
+| *Simyra insularis* | `acronicta-insularis` | holds `Simyra insularis-A-D.jpg` |
+| *Heliothis virescens* | `chloridea-virescens` | holds `Heliothis virescens-B-D.jpg` |
+| *Aseptis adnixa* | `paraseptis-adnixa` | same epithet, same family; genus segregation only |
+| *Aseptis marina* | `viridiseptis-marina` | same epithet, same family; genus segregation only |
+| *Protorthodes texana* | `nudorthodes-texana` | same epithet, same family; genus segregation only |
+
+**The evidence, and its limit.** For the first ten, the species account already publishes a
+photograph *whose filename is the key's binomial* — a previous maintainer moved that file onto that
+slug, which is the catalogue asserting the two names are one taxon (ADR 0038). Reading it back out is
+transcription, not a new ruling. The last three have no such file: they rest on same epithet, same
+family, and a genus segregation the catalogue has already adopted (*Protorthodes* → *Trichopolia* is
+the same move, curator-confirmed on #259). **If any of the three is wrong, the symptom is a wrong card
+in Identify** — delete the row from `data/species-synonyms.csv` and rebuild.
+
+**A same epithet is not enough on its own**, which is why this list is thirteen and not twenty. The
+key's *Plagiomimicus tepperi* has a same-epithet twin in *Anicla tepperi* — and is nonetheless our
+`plagiomimicus-yakama`, because that is where its photograph is filed. Coincidence of epithet within
+a family is common; the filed photograph is what distinguishes it.
+
+**Open, for the curator.** *Notarctia arizoniensis* is deliberately absent. It looks like the same
+case — we publish *Apantesis arizoniensis* — but that account's photographs are named **`Notarctia
+proxima-*.jpg`**, an epithet found nowhere in `data/species.csv`. Either *proxima* is a synonym of
+*arizoniensis* and the row is safe, or the account is publishing a different species' photographs,
+which is the #330 defect. It needs Merrill, not a maintainer.
+
+**Left unmatched: 20 key binomials.** Eleven more are the same shape but with the *epithet* changed
+too (*Pheosia rimosa* → `pheosia-californica`, *Lacinipolia vicina* → `lacinipolia-sareta`,
+*Lithophane jefferyi* → `lithophane-jeffreyi`, and eight others). Each is a synonymy or a spelling
+ruling, not a genus transcription, so each is a curator decision of the C-016/C-017 kind. The rest
+are key species we do not hold, or hold under the deny-list (*Hemileuca juno*).
+
+**What changed** — 13 rows in `data/species-synonyms.csv`; `data/key-matrix.json` and
+`data/key-coverage-report.json` rebuilt (`meta.matchedSpecies` 1,194 → 1,207);
+`data/species-photos-manifest.csv` promoted 30 more high-resolution TIFFs out of `genus-only`.
+
 ## C-031 · 2026-09-13 · *Holoarctia* sp. is *Chelis* sp. and stays unpublished; the key's *Holoarctia sordida* is *Chelis sordida*
 
 **Source** [#278 comment](https://github.com/pnwinsects/pnwmoths/issues/278#issuecomment-5655356221),
 the curator's own words · **Status** Applied (this PR; the CDN copy is a maintainer run of
 [`scripts/migrate-holoarctia-chelis-photos.ts`](../scripts/migrate-holoarctia-chelis-photos.ts)) ·
-**Refines** C-014
+**Refines** C-014 · **Refined by** C-032
 
 > Holoarctia sp-A-* should be renamed to "Chelis sp-A-*" so we can retain the images. We do not have
 > an account for this species, so the images should not be published.
