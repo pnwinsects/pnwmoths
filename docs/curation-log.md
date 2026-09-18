@@ -73,44 +73,57 @@ what made C-020 possible to reconstruct.
 
 ---
 
-## C-034 · 2026-09-18 · The four *Notarctia proxima* photographs are *Apantesis arizoniensis* — the same files are held under both names
+## C-034 · 2026-09-18 · The legacy site illustrated *Notarctia arizoniensis* and *N. proxima* with the same two moths; which species they are is still open
 
-**Source** the original site's media library, checksummed; recorded on
-[#376](https://github.com/pnwinsects/pnwmoths/issues/376) · **Provenance** NOT the curator's words
-and not his ruling. It is evidence the project already held, read out; he is notified and can
-correct it · **Status** Applied (this PR) · **Refines** C-033
+**Source** the legacy media library at `dev.pnwmoths.biol.wwu.edu/media/moths/`, checksummed and
+date-stamped; put to the curator on [#376](https://github.com/pnwinsects/pnwmoths/issues/376) ·
+**Provenance** NOT the curator's words and not a ruling of any kind — a maintainer's reading of
+legacy files · **Status** On hold — awaiting the curator (#376) · **Refines** C-033
 
 C-033 left one question genuinely his: the *Apantesis arizoniensis* account publishes four
 photographs named `Notarctia proxima-*.jpg`, and *A. proxima* is still a species (MONA 8181) we hold
-no account for. Before spending his attention, we checked what the project already had — the step
-[`docs/agents/asking-the-curator.md`](agents/asking-the-curator.md) puts first and that
-[#330](https://github.com/pnwinsects/pnwmoths/issues/330) skipped.
+no account for. This entry records what checking the legacy store did and did not establish, because
+**the first reading of it was wrong and was briefly published** — on #376, in a comment telling the
+curator he need not answer.
 
-**The legacy media library serves all four photographs under `Notarctia arizoniensis-*.jpg` as
-well, and the two sets are byte-identical** — equal SHA-256 on every pair. That is not a server
-artifact: a fabricated filename 404s, and a different species returns different bytes. What the site
-publishes today is a re-encode of those same images (RMSE ≈ 0.014, against 0.217 for a genuinely
-different moth — the same signature the #330 post-mortem describes). And the high-resolution
-originals scanned in 2026 exist **only** under the *arizoniensis* name; there is no *proxima* pair
-in that corpus at all.
+**What is true.** The legacy media library holds all four photographs a second time under
+`Notarctia arizoniensis-*.jpg`, byte-identical (equal SHA-256 on every pair). They are two distinct
+files, not one aliased: no redirect, and distinct `ETag`s. A fabricated filename 404s and a different
+species returns different bytes, so the server is not answering everything with the same image. What
+the site publishes today is a re-encode of those same images — RMSE ≈ 0.014, against 0.217 for a
+genuinely different moth, the signature the #330 post-mortem describes.
 
-So the re-determination was made before us, by whoever prepared the collection, and the published
-files simply kept their older name — *A. arizoniensis* was sunk under *A. proxima* until MPG
-elevated it (8181.1), which is exactly when specimens would have been labelled *proxima*. The
-catalogue has said *arizoniensis* all along.
+**What is not true**, though it was written down first: that this shows a re-determination. It does
+not. The two sets were stored **eighty seconds apart**, inside the single 2013-08-04 batch that
+loaded the whole library:
 
-Why it matters beyond this moth: **the conclusion was already in the repo twice** — in the
-`species_slug` and in the legacy filenames — and neither states that a human ever decided it. That
-is the failure [ADR 0032](adr/0032-curation-log.md) and
-[ADR 0038](adr/0038-photo-identity-is-data-not-filename.md) exist to stop, so the four rows now live
-in `data/photo-determinations.csv` with the evidence rather than only as a slug.
+| | as *N. arizoniensis* | as *N. proxima* |
+| --- | --- | --- |
+| A dorsal | 12:17:00 | 12:18:18 |
+| A ventral | 12:17:10 | 12:18:44 |
+| B dorsal | 12:17:41 | 12:19:06 |
+| B ventral | 12:18:06 | 12:19:27 |
 
-**Not closed.** #376 stays open, retitled so it asks nothing unless we are wrong: if either specimen
-is really *A. proxima*, the photographs come off the account and *A. proxima* needs a destination.
-The curator is the only person who can say so, and he does not have to say anything for this to
-stand.
+Nothing was renamed afterwards. **The legacy site carried both species and illustrated both with the
+same two specimens** — which is a catalogue fact worth having on its own, and possibly not unique to
+this pair; nobody has checked the rest of the legacy store for byte-identical cross-species sets.
 
-**What changed** — four rows in `data/photo-determinations.csv`.
+**How the error happened**, since that is the reusable part. Byte-identity was read as a *sequence*
+— old name, then corrected name — when the evidence only showed *coexistence*. The headers that
+distinguish the two readings (`Last-Modified`, `ETag`) were never requested, because every fetch used
+`curl -L`, which follows redirects silently and reports nothing about the response it followed. **A
+checksum says two files match; it says nothing about which came first, or why.** The same care ADR
+0038 demands about filenames applies to their timestamps.
+
+Also corrected here: [`docs/reference/data-provenance.md`](reference/data-provenance.md) claimed the
+legacy server normalises spaces and underscores in media filenames. It does not — `Grammia_doris-A-D.jpg`
+and `Holoarctia_sordida-A-D.jpg` both 404 where the space-separated forms return 200.
+
+**Nothing is recorded in `data/photo-determinations.csv`.** A row there governs; asserting one on an
+inference this entry withdraws would be worse than the silence it was meant to fix. The determination
+stays with the curator on #376, where the question is now posed plainly again.
+
+**What changed** — this entry, and one sentence in `docs/reference/data-provenance.md`.
 
 ## C-033 · 2026-09-18 · The fourteenth retired-genus key name — *Notarctia arizoniensis* — was ours to answer, not the curator's
 
