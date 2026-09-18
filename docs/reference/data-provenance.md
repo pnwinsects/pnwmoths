@@ -44,8 +44,17 @@ longer returns legacy HTML for every path. Two fallbacks, in order:
   **But `/media/` is public.** Every specimen photograph the legacy site ever held
   is at `https://dev.pnwmoths.biol.wwu.edu/media/moths/<filename>`, served without
   authentication, with cached thumbnails alongside at
-  `/media/moths/cache/<filename>.141x93_q95.jpg`. Spaces and underscores are
-  interchangeable in the filename; the server normalises them.
+  `/media/moths/cache/<filename>.141x93_q95.jpg`. **The filename must be exact**, with
+  spaces percent-encoded: the server does *not* normalise underscores to spaces
+  (`Grammia_doris-A-D.jpg` 404s where `Grammia%20doris-A-D.jpg` returns 200), an earlier
+  claim here that C-034 corrected.
+
+  **Keep the response headers** when the answer matters — `curl -s -L -D - -o <file>`, not
+  `curl -s -L -o <file>`. The media responses seen so far carry `Last-Modified` and `ETag`
+  dating from the 2013-08-04 bulk load, and where both are present they are supporting
+  evidence for whether two matching URLs are two stored copies or one file under two names.
+  Treat them as corroboration, not proof, and do not assume every response has them. C-034
+  reached the wrong conclusion by keeping only the bytes.
 
   This is the recovery path for any photograph missing from the CDN, and it is
   worth checking **before** asking the curator whether an original still exists —

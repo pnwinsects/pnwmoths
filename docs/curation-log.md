@@ -73,11 +73,67 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-034 · 2026-09-18 · The legacy site illustrated *Notarctia arizoniensis* and *N. proxima* with the same two moths; which species they are is still open
+
+**Source** the legacy media library at `dev.pnwmoths.biol.wwu.edu/media/moths/`, checksummed and
+date-stamped; put to the curator on [#376](https://github.com/pnwinsects/pnwmoths/issues/376) ·
+**Provenance** NOT the curator's words and not a ruling of any kind — a maintainer's reading of
+legacy files · **Status** On hold — awaiting the curator (#376) · **Refines** C-033
+
+C-033 left one question genuinely his: the *Apantesis arizoniensis* account publishes four
+photographs named `Notarctia proxima-*.jpg`, and *A. proxima* is still a species (MONA 8181) we hold
+no account for. This entry records what checking the legacy store did and did not establish, because
+**the first reading of it was wrong and was briefly published** — on #376, in a comment telling the
+curator he need not answer.
+
+**What is true.** The legacy media library holds all four photographs a second time under
+`Notarctia arizoniensis-*.jpg`, byte-identical (equal SHA-256 on every pair). Both URLs answer
+`200` directly, with no redirect between them, and each returns its own `Last-Modified` and `ETag` —
+which is what the timestamps below are read from. A fabricated filename 404s and a different species
+returns different bytes, so the server is not answering everything with the same image. (Read that as
+two separately stored copies rather than one file under two names; it is an inference from the
+response metadata, not something the server states.) What
+the site publishes today is a re-encode of those same images — RMSE ≈ 0.014, against 0.217 for a
+genuinely different moth, the signature the #330 post-mortem describes.
+
+**What is not true**, though it was written down first: that this shows a re-determination. It does
+not. The two sets were stored **eighty seconds apart**, inside the single 2013-08-04 batch that
+loaded the whole library:
+
+| | as *N. arizoniensis* | as *N. proxima* |
+| --- | --- | --- |
+| A dorsal | 12:17:00 | 12:18:18 |
+| A ventral | 12:17:10 | 12:18:44 |
+| B dorsal | 12:17:41 | 12:19:06 |
+| B ventral | 12:18:06 | 12:19:27 |
+
+Nothing was renamed afterwards. **The legacy site carried both species and illustrated both with the
+same two specimens** — which is a catalogue fact worth having on its own, and possibly not unique to
+this pair; nobody has checked the rest of the legacy store for byte-identical cross-species sets.
+
+**How the error happened**, since that is the reusable part. Byte-identity was read as a *sequence*
+— old name, then corrected name — when the evidence only showed *coexistence*. The headers that
+distinguish the two readings (`Last-Modified`, `ETag`) came back on every response and were simply
+never captured or looked at: every fetch was `curl -s -L -o <file>`, which keeps the bytes, discards
+the headers, and follows any redirect without saying it did. `curl -s -L -D - -o <file>` costs
+nothing and keeps both. **A checksum says two files match; it says nothing about which came first, or
+why.** The same care ADR 0038 demands about filenames applies to their timestamps.
+
+Also corrected here: [`docs/reference/data-provenance.md`](reference/data-provenance.md) claimed the
+legacy server normalises spaces and underscores in media filenames. It does not — `Grammia_doris-A-D.jpg`
+and `Holoarctia_sordida-A-D.jpg` both 404 where the space-separated forms return 200.
+
+**Nothing is recorded in `data/photo-determinations.csv`.** A row there governs; asserting one on an
+inference this entry withdraws would be worse than the silence it was meant to fix. The determination
+stays with the curator on #376, where the question is now posed plainly again.
+
+**What changed** — this entry, and one sentence in `docs/reference/data-provenance.md`.
+
 ## C-033 · 2026-09-18 · The fourteenth retired-genus key name — *Notarctia arizoniensis* — was ours to answer, not the curator's
 
 **Source** `data/mpg-taxa.csv` row P930277, transcribed · **Provenance** NOT the curator's words, and
 not a new ruling: the Moths Photographers Group list committed to this repo states the combination
-outright · **Status** Applied (this PR) · **Refines** C-032
+outright · **Status** Applied · **Refines** C-032 · **Refined by** C-034
 
 C-032 put thirteen key binomials onto their current names and held one back, saying *Notarctia
 arizoniensis* "needs Merrill, not a maintainer." **That was wrong, and the way it was wrong is the
