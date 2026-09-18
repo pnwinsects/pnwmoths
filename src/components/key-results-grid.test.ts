@@ -168,7 +168,7 @@ describe('GRID-01 real-data gate', () => {
     // over 1192.
     // #278 makes "Holoarctia sordida" a synonym of chelis-sordida (C-031), net +1 over
     // 1193: the key kept the retired genus for a species our catalogue has always had.
-    // C-032 applies the same reading to 13 more retired-genus key names, net +13 over 1207.
+    // C-032 applies the same reading to 13 more retired-genus key names, net +13 over 1194.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
