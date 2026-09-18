@@ -68,13 +68,13 @@ test('findUnpublishedLeaks: non-deny emitted slug "drasteria-parallela" is not a
 
 test('findUnpublishedLeaks: planted key-matrix slug is reported as a key-matrix leak', () => {
   const leaks = findUnpublishedLeaks({
-    unpublishedSlugs: new Set(['holoarctia-sp']),
+    unpublishedSlugs: new Set(['chelis-sp']),
     emittedSlugs: [],
-    keyMatrixSlugs: ['holoarctia-sp', 'aseptis-binotata'],
+    keyMatrixSlugs: ['chelis-sp', 'aseptis-binotata'],
   });
   assert.ok(
-    leaks.keyMatrixLeaks.includes('holoarctia-sp'),
-    `Expected 'holoarctia-sp' in keyMatrixLeaks, got: ${JSON.stringify(leaks.keyMatrixLeaks)}`,
+    leaks.keyMatrixLeaks.includes('chelis-sp'),
+    `Expected 'chelis-sp' in keyMatrixLeaks, got: ${JSON.stringify(leaks.keyMatrixLeaks)}`,
   );
   assert.deepStrictEqual(leaks.pageLeaks, []);
 });

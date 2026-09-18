@@ -1138,7 +1138,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2551,Nola,minna,Ceanothus Nola Moth,93-1133,"Butler, 1881",Nolidae,meganola-minuscula,Nolinae,,
 2552,Euxoa,vetusta,,93-3343,"(Walker, 1865)",Noctuidae,,Noctuinae,,Noctuini
 2553,Euxoa,murdocki,,93-3451,"(Smith, 1890)",Noctuidae,,Noctuinae,,Noctuini
-2554,Holoarctia,sp,,,,Erebidae,,,,
+2554,Chelis,sp,,,,Erebidae,,Arctiinae,,Arctiini
 2555,Plagiomimicus,yakama,,93-1659.1,"Crabo & Wikle, 2018",Noctuidae,,Amphipyrinae,,Stiriini
 2556,Bruceia,pulverina,,93-0212,"Neumoegen, 1893",Erebidae,,Arctiinae,,Lithosiini
 2557,Alastria,chico,,93-2288,"Lafontaine & Troubridge, 2004",Noctuidae,apamea-cuculliformis,Noctuinae,,Actinotiini
