@@ -79,7 +79,7 @@
     "lit": "^3.3.3",
     "node-html-parser": "^9.0.4",
     "openseadragon": "^6.1.0",
-    "zod": "^4.4.3"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@11ty/eleventy-plugin-vite": "^8.0.0",
