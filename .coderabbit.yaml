@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# Peter's own branches are reviewed with the CodeRabbit CLI before the pull
+# request is opened, so the PR bot skips his PRs. Everyone else's it still reviews.
+reviews:
+  auto_review:
+    ignore_usernames: ["rainhead"]
