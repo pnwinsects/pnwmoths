@@ -42,6 +42,14 @@ accept = ["100..=103", "200..=299", "429"]
 # trailing slash matches directory-style page permalinks only, so this pattern takes
 # the ~1,550 canonical page URLs and nothing else.
 #
+# This repo's own files on `main` (`github.com/pnwinsects/pnwmoths/blob/main/…`) are
+# excluded for the same reason. /curation/ links its reports' ADRs and runbooks there, and
+# a PR that adds an ADR and cites it would fail the check because the file is not on
+# `main` yet — PR #387 was the first to do both. Checking them against GitHub also tests
+# the wrong tree: it would pass a link to a file this PR deletes. Instead,
+# src/_data/curationReports.test.ts checks every such path against the checked-out
+# tree, which is what `main` becomes on merge.
+#
 # CDN images are not checked here either — the extension pattern above excludes all
 # ~17,000 of them, and their presence is proven offline against the upload manifests
 # instead (ADR 0017/0022), which is deterministic where 17,000 HEAD requests would be
@@ -61,5 +69,5 @@ accept = ["100..=103", "200..=299", "429"]
 # Optimizer put a `?width=` query string on every URL and the extension anchor
 # therefore missed them. ADR 0022 retired the Optimizer; the URLs became plain
 # `.webp`/`.jpg` and silently fell under the exclude.
-exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca", "agriculture\\.canada\\.ca", "geonames\\.nrcan\\.gc\\.ca", "edits\\.nationalmap\\.gov"]
+exclude = ["^https://moths\\.pnwinsects\\.org/[^?]*/$", "\\.(?:jpg|jpeg|png|gif|webp|svg|ico)$", "bugguide\\.net", "mothphotographersgroup\\.msstate\\.edu", "butterfliesandmoths\\.org", "naturalhistory\\.si\\.edu", "amnh\\.org", "ualberta\\.ca", "army\\.mil", "cbif\\.gc\\.ca", "agriculture\\.canada\\.ca", "geonames\\.nrcan\\.gc\\.ca", "edits\\.nationalmap\\.gov", "^https://github\\.com/pnwinsects/pnwmoths/blob/main/"]
 remap = ["(file://.+/_site)/pnwmoths(.*) $1$2"]
