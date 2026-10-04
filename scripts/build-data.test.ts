@@ -8,6 +8,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { validateCsv } from './build-data.ts';
+import { RECORDS_CSV_COLUMNS } from './lib/records-source.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -884,3 +885,83 @@ test('real data/images.csv: clostera-brucei A/B specimens are reassigned to clos
   assert.deepEqual(specimens, ['A', 'A', 'B', 'B'], 'expected both A and B specimen pairs (dorsal + ventral)');
 });
 
+
+// --- Out-of-bounds records are held, not refused (ADR 0047) ---
+
+/**
+ * Run build-data.ts's main() in a scratch copy of the data directory whose
+ * records.csv holds exactly `recordLines`. Returns the exit status, stderr, and
+ * the scratch directory (caller removes it).
+ */
+function runBuildDataWith(name: string, recordLines: string[]): { ok: boolean; output: string; tmpDir: string } {
+  const tmpDir = resolve(ROOT, `.tmp-${name}`);
+  const tmpDataDir = resolve(tmpDir, 'data');
+  mkdirSync(tmpDataDir, { recursive: true });
+  for (const f of ['species.csv', 'images.csv', 'glossary.csv', 'records-inat.csv']) {
+    copyFileSync(resolve(ROOT, 'data', f), resolve(tmpDataDir, f));
+  }
+  writeFileSync(resolve(tmpDataDir, 'records.csv'), [RECORDS_CSV_COLUMNS.join(','), ...recordLines, ''].join('\n'));
+  const wrapper = resolve(tmpDir, 'run.mjs');
+  writeFileSync(wrapper, [
+    `import { main } from '${resolve(ROOT, 'scripts/build-data.ts')}';`,
+    `process.chdir('${tmpDir}');`,
+    `main().catch(err => { console.error(err.message); process.exit(1); });`,
+  ].join('\n'));
+  try {
+    const out = execSync(`node ${wrapper}`, { cwd: tmpDir, timeout: 60000, stdio: 'pipe' });
+    return { ok: true, output: out.toString(), tmpDir };
+  } catch (err) {
+    const e = err as { stdout?: Buffer; stderr?: Buffer };
+    return { ok: false, output: `${e.stdout?.toString() ?? ''}${e.stderr?.toString() ?? ''}`, tmpDir };
+  }
+}
+
+test('integration: an out-of-bounds curator record is held — the build passes and its Parquet omits it', async () => {
+  const { ok, output, tmpDir } = runBuildDataWith('oob-held', [
+    'acronicta-americana,specimen,46.5,-112.0,MT,Lewis and Clark,Helena,,1990,7,1,Test,Test,,,1',
+    'acronicta-americana,specimen,46.73,-109.75,MT,Sweet Grass,Greycliff,,1988,7,24,Test,Test,,,2',
+  ]);
+  try {
+    assert.ok(ok, `build-data.ts should pass with a held record, got: ${output}`);
+    assert.match(output, /Holding 1 record/);
+    const { DuckDBInstance } = await import('@duckdb/node-api');
+    const db = await DuckDBInstance.create(':memory:');
+    const conn = await db.connect();
+    const parquet = resolve(tmpDir, 'data/parquet/acronicta-americana/records.parquet');
+    const reader = await conn.runAndReadAll(`SELECT longitude FROM read_parquet('${parquet}')`);
+    conn.closeSync();
+    assert.deepEqual(reader.getRows().map((r) => r[0]), [-112]);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('integration: a held record is still validated — an orphaned slug fails the build', () => {
+  // Otherwise widening the bounds could publish a record for no species, and
+  // a row would sit unpublishable for a second reason nobody could see.
+  const { ok, output, tmpDir } = runBuildDataWith('oob-orphan', [
+    'acronicta-americana,specimen,46.5,-112.0,MT,Lewis and Clark,Helena,,1990,7,1,Test,Test,,,1',
+    'nonexistent-species,specimen,46.73,-109.75,MT,Sweet Grass,Greycliff,,1988,7,24,Test,Test,,,2',
+  ]);
+  try {
+    assert.ok(!ok, 'build-data.ts should fail on an orphaned held record');
+    assert.match(output, /orphaned records/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('integration: a swapped latitude and longitude still fails — it is a typo, not a held record', () => {
+  // -122.3 as a latitude is outside the region entirely; holding it would hide
+  // the curator's slip instead of reporting it.
+  const { ok, output, tmpDir } = runBuildDataWith('oob-swapped', [
+    'acronicta-americana,specimen,46.5,-112.0,MT,Lewis and Clark,Helena,,1990,7,1,Test,Test,,,1',
+    'acronicta-americana,specimen,-122.3,47.6,WA,King,Seattle,,1990,7,1,Test,Test,,,2',
+  ]);
+  try {
+    assert.ok(!ok, 'build-data.ts should fail on swapped coordinates');
+    assert.match(output, /implausible coordinates/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});

@@ -16,8 +16,8 @@
 |-------|------|----------|---------|
 | species_slug | string | yes | `acronicta-americana` (must match a species in species.csv) |
 | record_type | string | yes | `specimen`, `photograph`, `literature`, `field notes`, or `sight_field_notes` |
-| latitude | decimal | yes | 47.6062 (PNW bounds: 42.0 to 60.0) |
-| longitude | decimal | yes | -122.3321 (PNW bounds: -139.0 to -110.0) |
+| latitude | decimal | yes | 47.6062 (published if 42.0 to 60.0; see below) |
+| longitude | decimal | yes | -122.3321 (published if -139.0 to -110.0; see below) |
 | state | string | yes | WA, OR, ID, MT, BC, or AB |
 | county | string | no | King |
 | locality | string | no | Seattle |
@@ -95,8 +95,13 @@ Validation failures print as `Validation failed — <description>:` followed by 
 - **`invalid record_type values`** — must be exactly one of `specimen`, `photograph`, `literature`,
   `field notes`, `sight_field_notes`.
 - **`invalid state values`** — must be one of WA, OR, ID, BC, AB, MT.
-- **`out-of-bounds coordinates (PNW bounds: lat 42.0-60.0, lon -139.0 to -110.0)`** — most often
-  latitude and longitude swapped, or a missing minus sign on the longitude.
+- **`implausible coordinates — outside the region entirely`** — most often latitude and longitude
+  swapped, or a missing minus sign on the longitude.
+
+A record whose coordinates are real but beyond the area the site maps (for example eastern
+Montana, east of 110° W) is **not** an error. The build keeps it, prints `Holding N record(s) …`,
+and leaves it off every map and count. It is listed on the `/curation/` page under *Records held
+off the map* until the curator rules on it.
 - **`NULL required fields`** — `species_slug`, `latitude` or `longitude` is blank.
 - **`data/records.csv contains non-UTF-8 bytes`** — edited in Excel on Windows; re-save as CSV UTF-8.
 

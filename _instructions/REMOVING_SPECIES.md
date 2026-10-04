@@ -50,9 +50,8 @@ Expect hits in some of these:
 |---|---|
 | `data/species.csv` | the one species row |
 | `data/unpublished-species.csv` | its deny-list row, if it has one |
-| `data/records.csv` | every occurrence record |
+| `data/records.csv` | every occurrence record, including any held off the map as out-of-bounds |
 | `data/records-inat.csv` | any imported observation (see the note below) |
-| `data/records-bad.csv`, `data/records-bad-coords.csv` | records held back for curation |
 | `data/images.csv` | photo rows |
 | `data/species-links.csv`, `data/species-plates.csv`, `data/species-synonyms.csv` | external links, plate assignments, synonyms |
 | `data/mpg-crosswalk.csv` | its hand-authored MPG match, if it has one |

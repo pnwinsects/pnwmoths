@@ -487,6 +487,14 @@ cost a debugging cycle to discover.
 
 ## Verification & process
 
+- **Rows kept in a side file miss every bulk edit made to the main one.** The held-records
+  sidecar sat beside `data/records.csv` for three months; when *Protorthodes* moved to
+  *Trichopolia*, every record in the main file followed the name and the one in the sidecar did
+  not. Nothing noticed, because nothing validated the sidecar. Moving it into `records.csv`
+  surfaced the stale slug on the first build ([ADR 0047](adr/0047-out-of-bounds-records-held-in-records-csv.md)).
+  If data must be held back, hold it in the file that every rename, merge and check already
+  touches, and gate it at read time.
+
 - **Describe a report's contents by counting them, not by what the script that wrote it
   expected.** The `/curation/` entry for `data/records-bad-coords.csv` said *"Most are
   transposed latitude and longitude"* — the recovery script's header had guessed "e.g. swapped
@@ -755,8 +763,8 @@ cost a debugging cycle to discover.
 - **A wider reference set can make a guard weaker, not stronger.** The runbook column guard
   resolves a column name in prose against the CSVs *that document names*, not against every
   header in `data/`. The wider version reads as the stricter one and isn't: `species_id` — the
-  exact bug the guard exists to catch (#240) — is a real column of `data/records-bad-coords.csv`,
-  so a repo-wide union would have passed it. Before widening a matcher's reference set, check
+  exact bug the guard exists to catch (#240) — was a real column of `data/records-bad-coords.csv`
+  until [ADR 0047](adr/0047-out-of-bounds-records-held-in-records-csv.md) removed it, so a repo-wide union would have passed it. Before widening a matcher's reference set, check
   whether the known bug still fails against it ([ADR 0023](adr/0023-runbook-schema-guard.md)).
 
 - **Never let a script write outputs to a fixed path when its inputs are redirectable.**

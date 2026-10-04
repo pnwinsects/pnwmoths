@@ -5,12 +5,16 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
   RECORDS_COLUMNS,
+  RECORDS_CSV_COLUMNS,
   RECORDS_INAT_COLUMNS,
   assertInatRecordsPresent,
   buildAllRecordsSql,
   createAllRecordsTable,
   hasInatRecords,
+  beyondBounds,
+  isOutOfBoundsRecord,
   isWithinRecordBounds,
+  outOfBoundsSql,
   readAllRecordRows,
   readCsvSql,
   readInatRecordRows,
@@ -187,5 +191,106 @@ describe('isWithinRecordBounds', () => {
     // but outside the publishing rule. Anything generating records must apply
     // this narrower gate or it writes a file that fails the build.
     assert.equal(isWithinRecordBounds(45.0, -105.0), false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Out-of-bounds records (ADR 0047): kept in records.csv, left out of the union
+// ---------------------------------------------------------------------------
+
+// These tests execute the SQL, so the fixture needs the real 16-column header.
+const CURATOR_HEADER = RECORDS_CSV_COLUMNS.join(',');
+let nextId = 1;
+
+/** A records.csv row at the given coordinates (blank string = blank cell). */
+function curatorRowAt(latitude: string, longitude: string, slug = 'lophocampa-roseata'): string {
+  return `${slug},specimen,${latitude},${longitude},MT,Carbon,Red Lodge,,1988,7,26,Crabo,WSU,,,${nextId++}`;
+}
+
+// The edges are inclusive, and a blank coordinate is invalid, not held.
+const PREDICATE_CASES: { latitude: string; longitude: string; outOfBounds: boolean; why: string }[] = [
+  { latitude: '47.6', longitude: '-122.3', outOfBounds: false, why: 'inside' },
+  { latitude: '42', longitude: '-110', outOfBounds: false, why: 'south-east corner, inclusive' },
+  { latitude: '60', longitude: '-139', outOfBounds: false, why: 'north-west corner, inclusive' },
+  { latitude: '46.73', longitude: '-109.75', outOfBounds: true, why: 'east of 110° W (Greycliff, MT)' },
+  { latitude: '41.947', longitude: '-120.419', outOfBounds: true, why: 'south of 42° N (Goose L.)' },
+  { latitude: '60.1', longitude: '-122.3', outOfBounds: true, why: 'north' },
+  { latitude: '47.6', longitude: '-139.1', outOfBounds: true, why: 'west' },
+  { latitude: '', longitude: '-109.75', outOfBounds: false, why: 'blank latitude is invalid, not held' },
+  { latitude: '46.73', longitude: '', outOfBounds: false, why: 'blank longitude is invalid, not held' },
+];
+
+describe('isOutOfBoundsRecord and outOfBoundsSql', () => {
+  for (const c of PREDICATE_CASES) {
+    it(`TypeScript: ${c.why}`, () => {
+      assert.equal(isOutOfBoundsRecord({ latitude: c.latitude, longitude: c.longitude }), c.outOfBounds);
+    });
+  }
+
+  it('agree on every case — the served union and the report must partition the file', async () => {
+    const { DuckDBInstance } = await import('@duckdb/node-api');
+    const db = await DuckDBInstance.create(':memory:');
+    const conn = await db.connect();
+    const values = PREDICATE_CASES.map(
+      (c, i) => `(${i}, ${c.latitude === '' ? 'NULL' : c.latitude}::DOUBLE, ${c.longitude === '' ? 'NULL' : c.longitude}::DOUBLE)`,
+    ).join(', ');
+    const reader = await conn.runAndReadAll(
+      `SELECT i, ${outOfBoundsSql()} AS held FROM (VALUES ${values}) t(i, latitude, longitude) ORDER BY i`,
+    );
+    const sqlHeld = reader.getRows().map((r) => r[1]);
+    conn.closeSync();
+    // false, never NULL: `WHERE NOT NULL` would drop a blank-coordinate row
+    // from the served union, and build-data.ts's NULL check would never see it.
+    assert.deepEqual(sqlHeld, PREDICATE_CASES.map((c) => c.outOfBounds));
+  });
+});
+
+describe('beyondBounds', () => {
+  it('names the edge a point lies past', () => {
+    assert.equal(beyondBounds(46.73, -109.75), 'east');
+    assert.equal(beyondBounds(41.013, -121.601), 'south');
+    assert.equal(beyondBounds(41.5, -105), 'south and east');
+    assert.equal(beyondBounds(61, -140), 'north and west');
+  });
+});
+
+describe('buildAllRecordsSql — out-of-bounds records', () => {
+  const count = async (sql: string): Promise<number> => {
+    const { DuckDBInstance } = await import('@duckdb/node-api');
+    const db = await DuckDBInstance.create(':memory:');
+    const conn = await db.connect();
+    const reader = await conn.runAndReadAll(`SELECT count(*) FROM (${sql})`);
+    conn.closeSync();
+    return Number(reader.getRows()[0]?.[0]);
+  };
+
+  it('leaves the curator file\'s out-of-bounds rows out of what the site serves', async () => {
+    const path = join(dir, 'records-held.csv');
+    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n${curatorRowAt('46.73', '-109.75')}\n`);
+    writeFileSync(inatPath, `${INAT_HEADER}\n`);
+    assert.equal(await count(buildAllRecordsSql(path, inatPath)), 1);
+    assert.equal(await count(buildAllRecordsSql(path, inatPath, { includeOutOfBounds: true })), 2);
+  });
+
+  it('keeps a blank-coordinate curator row, so the build\'s NULL check can fail on it', async () => {
+    const path = join(dir, 'records-blank.csv');
+    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('', '-109.75')}\n`);
+    writeFileSync(inatPath, `${INAT_HEADER}\n`);
+    assert.equal(await count(buildAllRecordsSql(path, inatPath)), 1);
+  });
+
+  it('does not filter the iNaturalist side — an out-of-bounds row there is a sync bug the build must see', async () => {
+    const path = join(dir, 'records-inbounds.csv');
+    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n`);
+    const inatOut = INAT_ROW.replace('48.54,-123.01', '46.73,-109.75');
+    writeFileSync(inatPath, `${INAT_HEADER}\n${inatOut}\n`);
+    assert.equal(await count(buildAllRecordsSql(path, inatPath)), 2);
+  });
+
+  it('is applied by readAllRecordRows too, so the two readers still agree', () => {
+    const path = join(dir, 'records-held-rows.csv');
+    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n${curatorRowAt('46.73', '-109.75')}\n`);
+    writeFileSync(inatPath, `${INAT_HEADER}\n`);
+    assert.equal(readAllRecordRows(path, inatPath).length, 1);
   });
 });

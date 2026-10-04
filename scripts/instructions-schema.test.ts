@@ -43,9 +43,9 @@ import { parse } from 'csv-parse/sync';
 //
 // Check 4 is deliberately scoped per-document rather than to every CSV in
 // data/. Resolving against the union of all headers looks stricter and is in
-// fact weaker: `species_id` — the exact #240 bug — IS a column of
-// data/records-bad-coords.csv, so a repo-wide union would have waved it
-// through. A doc is checked only against the files it actually talks about.
+// fact weaker: `species_id` — the exact #240 bug — WAS a column of
+// data/records-bad-coords.csv (removed by ADR 0047), so a repo-wide union would
+// have waved it through. A doc is checked only against the files it actually talks about.
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const INSTRUCTIONS_DIR = join(PROJECT_ROOT, '_instructions');
@@ -385,16 +385,18 @@ describe('the guard actually fails on the bug it exists to catch', () => {
   });
 
   it('would NOT have caught it against every CSV in data/ — why scoping is the point', () => {
-    const everyColumn = new Set(
-      readdirSync(join(PROJECT_ROOT, 'data'))
+    // Until ADR 0047 a real file proved this: data/records-bad-coords.csv carried
+    // a species_id column. It is gone, and no data/ file carries the column
+    // today, but the point does not depend on which file it is — one unrelated
+    // report with the column is enough to wave the bug through a union.
+    const everyColumn = new Set([
+      ...readdirSync(join(PROJECT_ROOT, 'data'))
         .filter((f) => f.endsWith('.csv'))
         .flatMap((f) => csvHeader(join(PROJECT_ROOT, 'data', f))),
-    );
-    assert.ok(
-      everyColumn.has('species_id'),
-      'data/records-bad-coords.csv is expected to carry a species_id column; if that ' +
-        'stops being true the repo-wide-union warning in this file can be revisited.',
-    );
+      ...['species_id', 'species_slug', 'latitude', 'longitude'],
+    ]);
+    assert.ok(everyColumn.has('species_id'));
+    assert.ok(!csvHeader(resolve(PROJECT_ROOT, 'data/records.csv')).includes('species_id'));
   });
 
   it('accepts the column those files really use', () => {

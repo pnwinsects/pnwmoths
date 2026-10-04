@@ -20,11 +20,13 @@
 // species absent from species.csv (slug-deduped/excluded) are skipped, matching
 // the original migration.
 //
-// Do not re-run. Both outputs have been worked on since: records are removed
-// from data/records-bad-coords.csv as they are resolved, and a re-run would
-// restore every one of them — and append the recovered band to records.csv a
-// second time, because the query selects by the old box, not by what the file
-// already holds.
+// HISTORICAL — do not re-run; it refuses to. Both outputs have moved on. The
+// out-of-bounds records it wrote to data/records-bad-coords.csv now live in
+// data/records.csv as out-of-bounds records with their own record_ids, and that
+// sidecar no longer exists (ADR 0047). A re-run would append the recovered band
+// to records.csv a second time, because the query selects by the old box, not
+// by what the file already holds. Kept as provenance for where those rows came
+// from (docs/reference/data-provenance.md).
 //
 // Run: node scripts/recover-clipped-bc-records.ts   (container must be running)
 import { execFileSync } from 'node:child_process';
@@ -171,4 +173,11 @@ function main(): void {
   console.log(`[recover-bc] bad coordinates -> data/records-bad-coords.csv: ${badCoords.length}`);
 }
 
-main();
+// Refuses to run (see the header). main() stays so the recovery can still be
+// read as the record of how these rows were produced.
+void main;
+console.error(
+  '[recover-bc] refusing to run: this is a historical one-off. Its outputs now live in ' +
+    'data/records.csv (ADR 0047), and a re-run would append the recovered band twice.',
+);
+process.exit(1);

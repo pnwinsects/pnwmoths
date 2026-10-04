@@ -125,7 +125,7 @@ export interface Relation {
  *   emit-records-district-audit.ts already fails on both coverage gaps and field
  *   divergence at a shared index, which is the stronger check.
  * - the one-shot run reports (`coord-fill-report`, `legacy-rejoin-report`,
- *   `inat-sync-report`, `records-bad*`) — historical records of what a script saw,
+ *   `inat-sync-report`, `records-bad`) — historical records of what a script saw,
  *   not live references. They are expected to name species that have since changed.
  */
 export const RELATIONS: readonly Relation[] = [

@@ -103,7 +103,7 @@ to copy an existing row for the same species and edit it.
 npm run build:site
 ```
 
-Expected: the build completes. Partway through — it is the 6th of 22 steps, not the last — you
+Expected: the build completes. Partway through — it is the 6th of 23 steps, not the last — you
 should see:
 
 ```
