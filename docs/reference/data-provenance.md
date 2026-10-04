@@ -119,7 +119,9 @@ needed a curator decision. The nested set remains the best evidence of what the
 - [`scripts/backfill-legacy-county.ts`](../../scripts/backfill-legacy-county.ts)
   → legacy county backfill.
 - [`scripts/recover-clipped-bc-records.ts`](../../scripts/recover-clipped-bc-records.ts)
-  → recovered BC records.
+  → recovered BC records, and the out-of-bounds records now held in `records.csv`
+  ([ADR 0047](../adr/0047-out-of-bounds-records-held-in-records-csv.md)). Historical:
+  it refuses to run.
 
 Connection details are overridable via the `MYSQL_CONTAINER`, `MYSQL_DB`,
 `MYSQL_USER`, and `MYSQL_PASSWORD` environment variables; the defaults match the

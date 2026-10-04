@@ -659,7 +659,6 @@ const UNDECLARED_BY_DESIGN: Record<string, string> = {
   'data/coord-fill-report.csv': 'one-shot run report — a historical record, not a live reference',
   'data/legacy-rejoin-report.csv': 'one-shot run report',
   'data/records-bad.csv': 'quarantined rows held deliberately outside the catalogue',
-  'data/records-bad-coords.csv': 'quarantined rows held deliberately outside the catalogue',
   'data/species-photos-manifest.csv':
     'pipeline ledger: its species_slug is blank until a row matches, and unmatched rows are the normal state',
   'data/referential-integrity-exceptions.csv':

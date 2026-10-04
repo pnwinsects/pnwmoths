@@ -55,3 +55,4 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0044](0044-record-id.md) | Every `records.csv` row carries an opaque, never-reused `record_id`, minted by `npm run records:assign-ids`; the build refuses a blank or duplicate | Accepted |
 | [0045](0045-manifest-honours-determinations.md) | `photos:investigate` files a determined photograph under the curator's species and letter as `resolved-via-determination`, which is tileable | Accepted |
 | [0046](0046-tile-caption-from-sole-covered-row.md) | A tile's caption carries the label data of the one catalogued photograph it supersedes; when two share its letter and view, it carries none | Accepted |
+| [0047](0047-out-of-bounds-records-held-in-records-csv.md) | A record outside the publishing bounds but plausibly regional is kept in `records.csv`, left out of everything served, and listed on `/curation/` every build; a typo outside the region still fails | Accepted |

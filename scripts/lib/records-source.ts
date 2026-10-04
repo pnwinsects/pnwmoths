@@ -147,10 +147,22 @@ export function recordIdProblems(rows: readonly { record_id?: string }[]): strin
  * polygons can be matched. A coordinate can therefore be assignable to a
  * district and still not be publishable.
  *
- * Defined here because build-data.ts hard-fails the build on any record
- * outside it — so anything that GENERATES records has to apply the same rule
- * up front, or it produces a file that cannot be built. scripts/lib/inat.ts is
- * the first such generator.
+ * What happens to a record outside it depends on whose file it is in
+ * (ADR 0047):
+ *
+ *   - data/records.csv keeps it, provided it is plausibly from the region —
+ *     inside the wider district-assignment box (PNW_BOUNDS). Outside that box
+ *     the coordinate is a typo (swapped axes, a missing minus sign) and
+ *     build-data.ts fails on it. Inside it, the row is an OUT-OF-BOUNDS RECORD:
+ *     it has a record_id and is validated like any other row, but the served union
+ *     ({@link buildAllRecordsSql}) leaves it out, so it reaches no map, Parquet
+ *     file or count. scripts/emit-out-of-bounds-records.ts lists every one on
+ *     /curation/ on every build. Widening these bounds publishes them; nothing
+ *     else has to change.
+ *   - data/records-inat.csv must never hold one. The sync applies this rule up
+ *     front (scripts/lib/inat.ts) and reports what it skipped, so an
+ *     out-of-bounds iNaturalist row is a generator bug, and build-data.ts still
+ *     fails the build on it.
  */
 export const RECORD_COORDINATE_BOUNDS = {
   latMin: 42.0,
@@ -167,6 +179,48 @@ export function isWithinRecordBounds(latitude: number, longitude: number): boole
     longitude >= RECORD_COORDINATE_BOUNDS.lonMin &&
     longitude <= RECORD_COORDINATE_BOUNDS.lonMax
   );
+}
+
+/**
+ * True iff a data/records.csv row is an out-of-bounds record: both coordinates
+ * present and numeric, and the point outside {@link RECORD_COORDINATE_BOUNDS}.
+ *
+ * A row with a blank or unparseable coordinate is NOT out of bounds — it is
+ * invalid, and build-data.ts fails on it. Treating it as merely held would let
+ * a typo vanish from the site with a green build. {@link outOfBoundsSql} is the
+ * same predicate in SQL; records-source.test.ts holds the two to each other.
+ */
+export function isOutOfBoundsRecord(row: { latitude: string; longitude: string }): boolean {
+  if (row.latitude.trim() === '' || row.longitude.trim() === '') return false;
+  const latitude = Number(row.latitude);
+  const longitude = Number(row.longitude);
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return false;
+  return !isWithinRecordBounds(latitude, longitude);
+}
+
+/**
+ * {@link isOutOfBoundsRecord} as a DuckDB predicate over DOUBLE `latitude` and
+ * `longitude` columns. NULL coordinates make it false, not NULL, so that
+ * `WHERE NOT (…)` keeps a NULL-coordinate row in the served union, where
+ * build-data.ts's NULL check can see it and fail.
+ */
+export function outOfBoundsSql(): string {
+  const b = RECORD_COORDINATE_BOUNDS;
+  return (
+    `(latitude IS NOT NULL AND longitude IS NOT NULL AND NOT (` +
+    `latitude BETWEEN ${b.latMin} AND ${b.latMax} AND longitude BETWEEN ${b.lonMin} AND ${b.lonMax}))`
+  );
+}
+
+/** Which way(s) an out-of-bounds coordinate lies beyond the bounds, e.g. "east" or "south". */
+export function beyondBounds(latitude: number, longitude: number): string {
+  const b = RECORD_COORDINATE_BOUNDS;
+  const ways: string[] = [];
+  if (latitude < b.latMin) ways.push('south');
+  if (latitude > b.latMax) ways.push('north');
+  if (longitude < b.lonMin) ways.push('west');
+  if (longitude > b.lonMax) ways.push('east');
+  return ways.join(' and ');
 }
 
 /** One occurrence row in the 15-column shape — every value a string. */
@@ -256,10 +310,26 @@ export function assertInatRecordsPresent(path: string = RECORDS_INAT_CSV_PATH): 
   );
 }
 
+/** Options for {@link buildAllRecordsSql} and {@link createAllRecordsTable}. */
+export interface AllRecordsOptions {
+  /**
+   * Keep data/records.csv's out-of-bounds records instead of leaving them out.
+   * Only build-data.ts's validation wants this: a held row must still name a
+   * real species and a real state, or it would be unpublishable for a second
+   * reason nobody can see.
+   */
+  includeOutOfBounds?: boolean;
+}
+
 /**
  * SQL selecting every occurrence record the site serves, in the 15 canonical
  * columns, as the UNION ALL of the curator file and (when non-empty) the
  * iNaturalist file.
+ *
+ * "Serves" excludes the curator file's out-of-bounds records (ADR 0047). The
+ * filter applies to the curator side only: the iNaturalist side is passed
+ * through unfiltered so that build-data.ts's bounds check still catches an
+ * out-of-bounds row there, which is a sync bug rather than a held record.
  *
  * UNION ALL, never UNION: the two files are disjoint by construction (the sync
  * refuses to emit an observation already cited in records.csv — see
@@ -271,6 +341,7 @@ export function assertInatRecordsPresent(path: string = RECORDS_INAT_CSV_PATH): 
 export function buildAllRecordsSql(
   recordsPath: string = RECORDS_CSV_PATH,
   inatPath: string = RECORDS_INAT_CSV_PATH,
+  options: AllRecordsOptions = {},
 ): string {
   // Checked HERE, at the seam, rather than at each call site. Five build steps
   // read the combined corpus; a guarantee that depends on all five remembering
@@ -280,7 +351,8 @@ export function buildAllRecordsSql(
   // running a single build step on its own.
   assertInatRecordsPresent(inatPath);
   const cols = RECORDS_COLUMNS.join(', ');
-  const curator = `SELECT ${cols} FROM ${readCsvSql(recordsPath, RECORDS_CSV_COLUMNS)}`;
+  const held = options.includeOutOfBounds ? '' : ` WHERE NOT ${outOfBoundsSql()}`;
+  const curator = `SELECT ${cols} FROM ${readCsvSql(recordsPath, RECORDS_CSV_COLUMNS)}${held}`;
   if (!hasInatRecords(inatPath)) return curator;
   const inat = `SELECT ${cols} FROM ${readCsvSql(inatPath, RECORDS_INAT_COLUMNS)}`;
   return `${curator}\nUNION ALL\n${inat}`;
@@ -311,9 +383,10 @@ export async function createAllRecordsTable(
   tableName: string = 'records',
   recordsPath: string = RECORDS_CSV_PATH,
   inatPath: string = RECORDS_INAT_CSV_PATH,
+  options: AllRecordsOptions = {},
 ): Promise<void> {
   await conn.run(
-    `CREATE TABLE ${tableName} AS\n${buildAllRecordsSql(recordsPath, inatPath)}`,
+    `CREATE TABLE ${tableName} AS\n${buildAllRecordsSql(recordsPath, inatPath, options)}`,
   );
 }
 
@@ -335,7 +408,8 @@ export function readInatRecordRows(path: string = RECORDS_INAT_CSV_PATH): InatRe
 
 /**
  * Every occurrence record the site serves, curator rows first, as plain parsed
- * rows. The non-DuckDB counterpart to {@link createAllRecordsTable}, for
+ * rows — the curator file's out-of-bounds records left out, as in
+ * {@link buildAllRecordsSql}. The non-DuckDB counterpart to {@link createAllRecordsTable}, for
  * callers already using csv-parse.
  */
 export function readAllRecordRows(
@@ -347,5 +421,6 @@ export function readAllRecordRows(
   // imported ones" would be the worse kind of inconsistency, since the two are
   // used interchangeably to cross-check each other.
   assertInatRecordsPresent(inatPath);
-  return [...readCuratorRecordRows(recordsPath), ...readInatRecordRows(inatPath)];
+  const served = readCuratorRecordRows(recordsPath).filter((row) => !isOutOfBoundsRecord(row));
+  return [...served, ...readInatRecordRows(inatPath)];
 }

@@ -73,6 +73,36 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-035 · 2026-09-14 · Eighteen records held off the map were resolved from evidence already in the catalogue: fourteen published at corrected coordinates, four dropped as copies
+
+**Source** [PR #368](https://github.com/pnwinsects/pnwmoths/pull/368), and the closing section
+of the [#367 issue body](https://github.com/pnwinsects/pnwmoths/issues/367), which put each
+correction to the curator with "If any is wrong, say so here" · **Provenance** NOT the curator's
+words — a maintainer's corrections, each read from evidence in the catalogue. No reply on #367
+disputes them · **Status** Applied
+
+These are record-admission calls, so they belong here, and #368 did not write one. It resolved
+them by deleting rows from the held-records file, which left the diff as the only record. This
+entry is written late, on 2026-10-04, by [#386](https://github.com/pnwinsects/pnwmoths/issues/386),
+which also moved the 166 records still held into `data/records.csv` so the next ruling is an edit
+with a `record_id` rather than a deletion ([ADR 0047](adr/0047-out-of-bounds-records-held-in-records-csv.md)).
+
+| Records | What was wrong | Evidence | Result |
+| ---: | --- | --- | --- |
+| 12 | latitude and longitude reversed, all *Lacinipolia stenotis* | swapped back, each falls inside the county on its label | published |
+| 2 | reversed, as above | the same specimen already published with the right coordinates: records 10132 (Asotin 1963), 7705 (Frenchglen 9mN 1961) | dropped as copies |
+| 1 | MPG Ranch, Bitterroot R.: longitude −144.044 | a slip for −114.044, where the other MPG Ranch record sits | published; *Papaipema unimoda* has no page (#84) |
+| 1 | South Saskatchewan R. @ Hwy 41, AB: about 50 km inside Saskatchewan | the two other records from that locality sit at 50.743, −110.071 | published at those coordinates |
+| 1 | Engstrom's Pond, BC: longitude a copy of latitude | already published as record 78291 | dropped as a copy |
+| 1 | Golden, BC placed at Golden, Colorado | already published as record 72599 | dropped as a copy |
+
+**Why it matters.** Each "published" row moved a coordinate the label did not state. If the
+curator ever disagrees with one, this table is where to start; the records are 94133–94146.
+
+**What changed** — `data/records.csv`: records 94133–94146 appended, in
+[8f4a0a2](https://github.com/pnwinsects/pnwmoths/commit/8f4a0a20bafc6c0cb07e4172442a9c90d239e866).
+The four copies were deleted from the held-records file, which no longer exists.
+
 ## C-034 · 2026-09-18 · The legacy site illustrated *Notarctia arizoniensis* and *N. proxima* with the same two moths; which species they are is still open
 
 **Source** the legacy media library at `dev.pnwmoths.biol.wwu.edu/media/moths/`, checksummed and

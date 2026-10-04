@@ -12,10 +12,13 @@ import {
   recordIdProblems,
   RECORDS_INAT_CSV_PATH,
   RECORD_COORDINATE_BOUNDS,
+  RECORDS_CSV_PATH,
+  outOfBoundsSql,
   createAllRecordsTable,
   hasInatRecords,
 } from './lib/records-source.ts';
 import { pathToFileURL } from 'node:url';
+import { PNW_BOUNDS } from './build-boundaries.ts';
 
 /**
  * Pre-flight CSV validation (before DuckDB import).
@@ -189,7 +192,14 @@ export async function main(): Promise<void> {
   // nullstr='' (blank cells become NULL; county/district_id are now populated
   // for ~96%+ of rows following the Phase 44 legacy re-join). The column spec
   // and the union live in scripts/lib/records-source.ts.
+  //
+  // `records` leaves out the curator file's out-of-bounds records (ADR 0047);
+  // it is what the Parquet export reads. `records_checked` keeps them, because
+  // a held record must still be a valid record — otherwise widening the bounds
+  // would publish an orphan, and a row could be unpublishable for a second
+  // reason nobody sees while it waits.
   await createAllRecordsTable(conn);
+  await createAllRecordsTable(conn, 'records_checked', undefined, undefined, { includeOutOfBounds: true });
 
   // --- Post-import validation queries ---
   const validationChecks: { description: string; query: string }[] = [
@@ -197,7 +207,7 @@ export async function main(): Promise<void> {
       description: 'orphaned records (species_slug not in species table)',
       query: `
         SELECT DISTINCT r.species_slug
-        FROM records r
+        FROM records_checked r
         LEFT JOIN species s ON r.species_slug = regexp_replace(lower(trim(s.genus) || '-' || trim(s.species)), '\\s+', '-', 'g')
         WHERE s.genus IS NULL
       `
@@ -205,33 +215,52 @@ export async function main(): Promise<void> {
     {
       description: 'invalid record_type values',
       query: `
-        SELECT DISTINCT record_type FROM records
+        SELECT DISTINCT record_type FROM records_checked
         WHERE record_type NOT IN ('specimen', 'photograph', 'literature', 'field notes', 'sight_field_notes')
       `
     },
     {
       description: 'invalid state values',
       query: `
-        SELECT DISTINCT state FROM records
+        SELECT DISTINCT state FROM records_checked
         WHERE state NOT IN ('WA', 'OR', 'ID', 'BC', 'AB', 'MT')
           AND state IS NOT NULL
           AND state != ''
       `
     },
     {
+      // Over the SERVED table, so only the iNaturalist import can trip it: the
+      // curator file's out-of-bounds rows are held, not served (ADR 0047). The
+      // sync drops out-of-bounds observations before writing, so a row here
+      // means the generator and this rule have drifted apart.
       description:
-        `out-of-bounds coordinates (PNW bounds: lat ${RECORD_COORDINATE_BOUNDS.latMin}-${RECORD_COORDINATE_BOUNDS.latMax}, ` +
+        `out-of-bounds coordinates in ${RECORDS_INAT_CSV_PATH} (PNW bounds: lat ${RECORD_COORDINATE_BOUNDS.latMin}-${RECORD_COORDINATE_BOUNDS.latMax}, ` +
         `lon ${RECORD_COORDINATE_BOUNDS.lonMin} to ${RECORD_COORDINATE_BOUNDS.lonMax})`,
       query: `
         SELECT species_slug, latitude, longitude FROM records
-        WHERE latitude < ${RECORD_COORDINATE_BOUNDS.latMin} OR latitude > ${RECORD_COORDINATE_BOUNDS.latMax}
-           OR longitude < ${RECORD_COORDINATE_BOUNDS.lonMin} OR longitude > ${RECORD_COORDINATE_BOUNDS.lonMax}
+        WHERE ${outOfBoundsSql()}
+      `
+    },
+    {
+      // A record outside the publishing bounds is held, not refused — but only
+      // if it is plausibly from the region at all (ADR 0047). Outside the wider
+      // district-assignment box, the coordinate is a typo rather than a
+      // coverage question: almost always latitude and longitude swapped, or a
+      // longitude missing its minus sign. Those still fail, as they did before
+      // records could be held, so a curator's slip is not quietly hidden.
+      description:
+        `implausible coordinates — outside the region entirely (lat ${PNW_BOUNDS.latMin}-${PNW_BOUNDS.latMax}, ` +
+        `lon ${PNW_BOUNDS.lonMin} to ${PNW_BOUNDS.lonMax}); usually latitude and longitude swapped, or a missing minus sign`,
+      query: `
+        SELECT species_slug, latitude, longitude FROM records_checked
+        WHERE latitude < ${PNW_BOUNDS.latMin} OR latitude > ${PNW_BOUNDS.latMax}
+           OR longitude < ${PNW_BOUNDS.lonMin} OR longitude > ${PNW_BOUNDS.lonMax}
       `
     },
     {
       description: 'NULL required fields',
       query: `
-        SELECT species_slug, latitude, longitude FROM records
+        SELECT species_slug, latitude, longitude FROM records_checked
         WHERE species_slug IS NULL OR latitude IS NULL OR longitude IS NULL
       `
     }
@@ -251,6 +280,20 @@ export async function main(): Promise<void> {
   if (validationFailed) {
     conn.closeSync();
     process.exit(1);
+  }
+
+  // Not a failure: an out-of-bounds record is kept and listed on /curation/
+  // until a curator's ruling moves it (ADR 0047). Said aloud so a curator who
+  // appends one and sees it missing from the map has a line to find.
+  const heldReader = await conn.runAndReadAll(
+    `SELECT (SELECT count(*) FROM records_checked) - (SELECT count(*) FROM records)`,
+  );
+  const held = Number(heldReader.getRows()[0]?.[0] ?? 0);
+  if (held > 0) {
+    console.log(
+      `Holding ${held} record(s) in ${RECORDS_CSV_PATH} whose coordinates fall outside the publishing bounds — ` +
+        'not published; listed on /curation/ as records-out-of-bounds.csv.',
+    );
   }
 
   // --- Parquet export (per-species files) ---
