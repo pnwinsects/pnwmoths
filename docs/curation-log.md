@@ -73,6 +73,28 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-036 · 2026-10-07 · The two moths on the *Apantesis arizoniensis* account are *A. arizoniensis*
+
+**Source** [#376 comment](https://github.com/pnwinsects/pnwmoths/issues/376#issuecomment-6048447211),
+the curator's own words · **Status** Applied · **Refines** C-033, C-034
+
+> Both photos are Apantesis arizoniensis.
+
+This answers the one question C-033 left with him and C-034 left open. The account's four
+photographs are named `Notarctia proxima-*.jpg`, but they are *arizoniensis*. They carry the name
+the species went under while it was a synonym of *A. proxima* (MPG P930277, quoted in C-033). This
+is the ordinary [ADR 0038](adr/0038-photo-identity-is-data-not-filename.md) case: a filename that
+predates the determination.
+
+**Why it matters.** The account stays illustrated. We still hold no account for *A. proxima*
+(MONA 8181), and nothing here creates one. If one is ever wanted, it needs its own photographs: the
+legacy site's *proxima* page showed these same two *arizoniensis* specimens (C-034), so that page
+is not a source for it.
+
+**What changed** — four rows in `data/photo-determinations.csv` (`Notarctia proxima-{A,B}-{D,V}`,
+specimens A and B, unchanged), recording as a ruling what `data/images.csv` already did. No
+photograph moves, and no page changes.
+
 ## C-035 · 2026-09-14 · Eighteen records held off the map were resolved from evidence already in the catalogue: fourteen published at corrected coordinates, four dropped as copies
 
 **Source** [PR #368](https://github.com/pnwinsects/pnwmoths/pull/368), and the closing section
@@ -108,7 +130,7 @@ The four copies were deleted from the held-records file, which no longer exists.
 **Source** the legacy media library at `dev.pnwmoths.biol.wwu.edu/media/moths/`, checksummed and
 date-stamped; put to the curator on [#376](https://github.com/pnwinsects/pnwmoths/issues/376) ·
 **Provenance** NOT the curator's words and not a ruling of any kind — a maintainer's reading of
-legacy files · **Status** On hold — awaiting the curator (#376) · **Refines** C-033
+legacy files · **Status** Superseded — answered by C-036 · **Refines** C-033 · **Refined by** C-036
 
 C-033 left one question genuinely his: the *Apantesis arizoniensis* account publishes four
 photographs named `Notarctia proxima-*.jpg`, and *A. proxima* is still a species (MONA 8181) we hold
@@ -163,7 +185,7 @@ stays with the curator on #376, where the question is now posed plainly again.
 
 **Source** `data/mpg-taxa.csv` row P930277, transcribed · **Provenance** NOT the curator's words, and
 not a new ruling: the Moths Photographers Group list committed to this repo states the combination
-outright · **Status** Applied · **Refines** C-032 · **Refined by** C-034
+outright · **Status** Applied · **Refines** C-032 · **Refined by** C-034, C-036
 
 C-032 put thirteen key binomials onto their current names and held one back, saying *Notarctia
 arizoniensis* "needs Merrill, not a maintainer." **That was wrong, and the way it was wrong is the
