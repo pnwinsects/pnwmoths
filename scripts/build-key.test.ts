@@ -20,6 +20,8 @@ import {
   resolveSlug,
   parseCharacterLabel,
   buildBitset,
+  parseKeyScores,
+  buildKeyTemplate,
 } from './build-key.ts';
 
 describe('normalizeBinomial', () => {
@@ -105,32 +107,21 @@ describe('parseCharacterLabel', () => {
     assert.throws(() => parseCharacterLabel('A:B:C:D:E'), /unexpected.*depth/i);
   });
 
-  test('strips outer double-quotes from stray-quote label (real csv-parse relax_quotes output)', () => {
-    // Round-trips the real CSV rather than a hand-written fixture: the point of this
-    // test is to catch a change in csv-parse's relax_quotes handling, which a
-    // hardcoded string cannot do (ISSUE-165). Reads the embedded-quote "dipped"
-    // label straight out of data/key-characters.csv with build-key.ts's own options.
-    const rows = parse(readFileSync(resolve(ROOT, 'data/key-characters.csv')), {
-      columns: false,
-      skip_empty_lines: true,
-      relax_quotes: true,
-    }) as string[][];
-
-    const raw = rows.map(r => r[0]).find(c => typeof c === 'string' && c.includes('dipped'));
-    assert.ok(raw, 'expected a character label containing "dipped" in data/key-characters.csv');
-
-    // relax_quotes wraps the whole field in quotes and leaves the inner pair around
-    // `dipped` intact. Assert that shape explicitly — if csv-parse ever stops
-    // producing it, this fails here rather than silently changing the parsed key.
-    assert.match(raw!, /^".*"dipped".*"$/, 'expected outer quotes plus preserved inner quotes');
-
+  test('the embedded-quote "dipped" question survives data/key-scores.csv intact', () => {
+    // Lucid's export left this label's inner quotes unescaped, which is why the old
+    // species-as-columns file needed relax_quotes and parseCharacterLabel stripped a
+    // stray outer pair (ISSUE-165). key-scores.csv is written by csv-stringify, so the
+    // quotes are escaped properly and the label reaches the parser clean. Read it from
+    // the real file so a hand edit that breaks the quoting fails here.
+    const { labels } = parseKeyScores(readFileSync(resolve(ROOT, 'data/key-scores.csv')));
+    const raw = labels.find(l => l.includes('dipped'));
+    assert.ok(raw, 'expected a character-state column containing "dipped"');
     const result = parseCharacterLabel(raw!);
     assert.strictEqual(result.category, 'Abdomen and thorax');
     assert.strictEqual(result.subcategory, 'Abdomen');
     assert.strictEqual(
       result.question,
-      'Does it appear as if the tip of the abdomen was "dipped" in a different color?',
-      'only the outer quote pair is stripped; the inner quotes are part of the question'
+      'Does it appear as if the tip of the abdomen was "dipped" in a different color?'
     );
     assert.match(result.state, /^(Yes|No)$/);
   });
@@ -200,6 +191,102 @@ describe('buildBitset', () => {
   });
 });
 
+describe('parseKeyScores', () => {
+  const header = 'binomial,Cat:Q:Yes,Cat:Q:No\n';
+
+  test('reads one row per species: 1 is scored, blank and 0 are unscored', () => {
+    const { labels, binomials, scores } = parseKeyScores(header + 'Aus bus,1,\nCus dus,0,1\n');
+    assert.deepStrictEqual(labels, ['Cat:Q:Yes', 'Cat:Q:No']);
+    assert.deepStrictEqual(binomials, ['Aus bus', 'Cus dus']);
+    assert.deepStrictEqual(scores, [[true, false], [false, true]]);
+  });
+
+  test('accepts the BOM Excel writes on "CSV UTF-8"', () => {
+    const { binomials } = parseKeyScores('\uFEFF' + header + 'Aus bus,1,\n');
+    assert.deepStrictEqual(binomials, ['Aus bus']);
+  });
+
+  test('normalizes whitespace in names', () => {
+    const { binomials } = parseKeyScores(header + ' Tolype  laricis ,1,\n');
+    assert.deepStrictEqual(binomials, ['Tolype laricis']);
+  });
+
+  test('rejects a cell that is not 1, 0 or blank, naming the line and column', () => {
+    // An `x` typed in Excel must not silently become "unscored".
+    assert.throws(
+      () => parseKeyScores(header + 'Aus bus,x,\n'),
+      /line 2 \("Aus bus"\), column "Cat:Q:Yes": "x"/
+    );
+  });
+
+  test('rejects a species scored on two rows', () => {
+    assert.throws(
+      () => parseKeyScores(header + 'Aus bus,1,\nAus  bus,,1\n'),
+      /line 3: "Aus bus" is already scored on line 2/
+    );
+  });
+
+  test('rejects a blank name', () => {
+    assert.throws(() => parseKeyScores(header + ',1,\n'), /line 2: blank binomial/);
+  });
+
+  test('rejects a file whose first column is not "binomial"', () => {
+    assert.throws(() => parseKeyScores('species,Cat:Q:Yes\nAus bus,1\n'), /must be headed "binomial"/);
+  });
+});
+
+describe('buildKeyTemplate', () => {
+  const labels = ['Cat:Q:Yes', 'Cat:Q:No'];
+  const rows = (csv: string) => parse(csv, { columns: false }) as string[][];
+
+  test('lists only species no key row scores, with the key\'s exact header and blank cells', () => {
+    const out = rows(
+      buildKeyTemplate({
+        labels,
+        keyBinomials: ['Aus bus'],
+        species: [
+          { genus: 'Aus', species: 'bus', withheld: false },
+          { genus: 'Cus', species: 'dus', withheld: false },
+        ],
+        synonymMap: new Map(),
+        checklistRank: new Map(),
+      })
+    );
+    assert.deepStrictEqual(out, [['binomial', ...labels], ['Cus dus', '', '']]);
+  });
+
+  test('a species scored under a synonym is not listed', () => {
+    const out = rows(
+      buildKeyTemplate({
+        labels,
+        keyBinomials: ['Oldus bus'],
+        species: [{ genus: 'Aus', species: 'bus', withheld: false }],
+        synonymMap: new Map([['Oldus bus', 'aus-bus']]),
+        checklistRank: new Map(),
+      })
+    );
+    assert.strictEqual(out.length, 1, 'header only');
+  });
+
+  test('published species come first, then withheld; checklist order within each', () => {
+    const out = rows(
+      buildKeyTemplate({
+        labels,
+        keyBinomials: [],
+        species: [
+          { genus: 'Geo', species: 'one', withheld: true },
+          { genus: 'Zus', species: 'late', withheld: false },
+          { genus: 'Aus', species: 'early', withheld: false },
+          { genus: 'Nus', species: 'unranked', withheld: false },
+        ],
+        synonymMap: new Map(),
+        checklistRank: new Map([['zus-late', 0], ['aus-early', 1], ['geo-one', 2]]),
+      })
+    ).map(r => r[0]);
+    assert.deepStrictEqual(out, ['binomial', 'Zus late', 'Aus early', 'Nus unranked', 'Geo one']);
+  });
+});
+
 // ---------------------------------------------------------------------------
 // Integration helpers. Every test that runs build-key.ts MUST route its output
 // through KEY_OUT_DIR: the script otherwise writes data/key-matrix.json and
@@ -248,8 +335,9 @@ function buildKeyMatrix(env: Record<string, string> = {}): KeyMatrix {
 }
 
 describe('main (integration)', () => {
-  test('emits key-matrix.json and key-coverage-report.json', () => {
+  test('emits key-matrix.json, key-coverage-report.json and key-template.csv', () => {
     withKeyBuild({}, outDir => {
+      assert.ok(existsSync(join(outDir, 'key-template.csv')), 'key-template.csv must exist');
       assert.ok(existsSync(join(outDir, 'key-matrix.json')), 'key-matrix.json must exist');
       assert.ok(
         existsSync(join(outDir, 'key-coverage-report.json')),
@@ -281,10 +369,12 @@ describe('main (integration)', () => {
     const fresh = withKeyBuild({}, outDir => ({
       matrix: readFileSync(join(outDir, 'key-matrix.json'), 'utf-8'),
       coverage: readFileSync(join(outDir, 'key-coverage-report.json'), 'utf-8'),
+      template: readFileSync(join(outDir, 'key-template.csv'), 'utf-8'),
     }));
     const committed = {
       matrix: readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8'),
       coverage: readFileSync(resolve(ROOT, 'data/key-coverage-report.json'), 'utf-8'),
+      template: readFileSync(resolve(ROOT, 'data/key-template.csv'), 'utf-8'),
     };
 
     // Report the first differing species rather than diffing two 150 KB strings,
@@ -308,6 +398,13 @@ describe('main (integration)', () => {
       committed.coverage,
       fresh.coverage,
       'data/key-coverage-report.json is stale — run `npm run build:key` and commit the result',
+    );
+    // The template is what the curator downloads from /curation/ to score new species,
+    // so a stale one offers him species already in the key, or hides new ones.
+    assert.strictEqual(
+      committed.template,
+      fresh.template,
+      'data/key-template.csv is stale — run `npm run build:key` and commit the result',
     );
   });
 

@@ -1,17 +1,20 @@
 // scripts/build-key.ts
-// Pre-build: parse data/key-characters.csv → emit data/key-matrix.json + data/key-coverage-report.json
+// Pre-build: parse data/key-scores.csv → emit data/key-matrix.json + data/key-coverage-report.json
 // Run via: npm run build:key
 // Mirrors emit-species-states.ts (JSON emit pattern) + build-data.ts (DuckDB + validateCsv)
+//
+// data/key-scores.csv is the key's source of truth: one row per species (named by
+// binomial, as the curator writes it), one column per character-state, `1` where the
+// species has that state and blank where it is unscored (ADR 0048, issue #390). It
+// was transposed from Lucid3's export, which had species as columns.
 import { DuckDBInstance } from '@duckdb/node-api';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { parse } from 'csv-parse/sync';
-// Note: validateCsv from build-data.ts is not used here because key-characters.csv
-// contains embedded unescaped double-quotes in character labels (Lucid export artifact)
-// that trip csv-parse without relax_quotes. We do the UTF-8 + file-exists preflight inline.
+import { stringify } from 'csv-stringify/sync';
 import { KeyMatrixSchema } from '../src/types/schemas.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
-import { loadUnpublishedSpecies, isUnpublished } from '../src/_lib/unpublished-species.ts';
+import { loadUnpublishedSpecies, isUnpublished, normalizeSlug } from '../src/_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../src/_lib/format-epithet.ts';
 import { WEIGHT_ORDER_SQL, pickIdentifyPhoto } from '../src/_lib/photo-display.ts';
 import { pathToFileURL } from 'node:url';
@@ -70,10 +73,7 @@ export function parseCharacterLabel(label: string): {
   question: string;
   state: string;
 } {
-  // Strip leading/trailing double-quotes produced by csv-parse relax_quotes on embedded-quote fields.
-  // e.g. '"Abdomen and thorax:...:Yes"' → 'Abdomen and thorax:...:Yes'
-  const cleaned = label.replace(/^"|"$/g, '');
-  const parts = cleaned.split(':');
+  const parts = label.split(':');
   if (parts.length === 3) {
     const [category, question, state] = parts as [string, string, string];
     return {
@@ -92,6 +92,119 @@ export function parseCharacterLabel(label: string): {
     };
   }
   throw new Error(`Unexpected character label depth: "${label}" (${parts.length} parts; expected 3 or 4)`);
+}
+
+/** The leading column of data/key-scores.csv. Every other column is a character-state. */
+export const KEY_SCORES_NAME_COLUMN = 'binomial';
+
+/**
+ * Parse data/key-scores.csv: one row per species, one column per character-state.
+ *
+ * A cell is `1` (the species has the state), or blank or `0` (unscored — which the key
+ * treats as "unknown", never "absent"; ADR 0012). Anything else is an error rather
+ * than a guess: an `x` or a `Y` typed in Excel must not silently become unscored.
+ * Binomials are whitespace-normalized and must be unique.
+ *
+ * Returns the character-state labels in column order (column order IS char_id, which
+ * data/key-character-images.csv binds to), the binomials in row order, and
+ * scores[speciesRow][charId].
+ */
+export function parseKeyScores(raw: Buffer | string): {
+  labels: string[];
+  binomials: string[];
+  scores: boolean[][];
+} {
+  const rows = parse(raw, { columns: false, skip_empty_lines: true, bom: true }) as string[][];
+  const [header, ...body] = rows;
+  if (!header || header[0]?.trim() !== KEY_SCORES_NAME_COLUMN) {
+    throw new Error(
+      `data/key-scores.csv: the first column must be headed "${KEY_SCORES_NAME_COLUMN}", got ${JSON.stringify(header?.[0] ?? null)}`
+    );
+  }
+  const labels = header.slice(1);
+  const duplicateLabels = labels.filter((l, i) => labels.indexOf(l) !== i);
+  if (duplicateLabels.length > 0) {
+    throw new Error(`data/key-scores.csv: duplicate character-state column(s): ${duplicateLabels.join(' | ')}`);
+  }
+
+  const problems: string[] = [];
+  const firstLine = new Map<string, number>();
+  const binomials: string[] = [];
+  const scores: boolean[][] = [];
+  body.forEach((row, i) => {
+    const line = i + 2; // 1-based, after the header
+    const binomial = normalizeBinomial(row[0] ?? '');
+    if (binomial === '') problems.push(`line ${line}: blank ${KEY_SCORES_NAME_COLUMN}`);
+    const earlier = firstLine.get(binomial);
+    if (binomial !== '' && earlier !== undefined) {
+      problems.push(`line ${line}: "${binomial}" is already scored on line ${earlier}`);
+    } else {
+      firstLine.set(binomial, line);
+    }
+    const scored = labels.map((label, c) => {
+      const cell = (row[c + 1] ?? '').trim();
+      if (cell === '1') return true;
+      if (cell === '' || cell === '0') return false;
+      problems.push(`line ${line} ("${binomial}"), column "${label}": ${JSON.stringify(cell)} — use 1, or leave blank`);
+      return false;
+    });
+    binomials.push(binomial);
+    scores.push(scored);
+  });
+
+  if (problems.length > 0) {
+    const shown = problems.slice(0, 20);
+    throw new Error(
+      `data/key-scores.csv has ${problems.length} problem(s):\n  ${shown.join('\n  ')}` +
+        (problems.length > shown.length ? `\n  … and ${problems.length - shown.length} more` : '')
+    );
+  }
+  return { labels, binomials, scores };
+}
+
+/**
+ * Render data/key-template.csv: the header of data/key-scores.csv, then one blank row
+ * per species we hold that no key row scores yet — the curator fills in `1`s and the
+ * rows are appended with `npm run key:merge` (issue #390).
+ *
+ * `species` must already exclude unpublished species: a provisional name is not
+ * something to key. Withheld species (the Geometridae embargo) ARE included, after
+ * the published ones, because scoring them is how the embargo eventually lifts.
+ * Within each group, rows follow checklist order (ADR 0030), so a family's species
+ * sit together; any species the checklist lacks sorts last, by name.
+ *
+ * A species counts as scored when any key row resolves to it — directly or through
+ * data/species-synonyms.csv — against ALL species, withheld included.
+ */
+export function buildKeyTemplate(opts: {
+  labels: string[];
+  keyBinomials: string[];
+  species: Array<{ genus: string; species: string; withheld: boolean }>;
+  synonymMap: Map<string, string>;
+  checklistRank: Map<string, number>;
+}): string {
+  const slugOf = (r: { genus: string; species: string }) =>
+    `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`;
+  const allSlugs = new Set(opts.species.map(slugOf));
+  const scored = new Set(
+    opts.keyBinomials.map(b => resolveSlug(b, allSlugs, opts.synonymMap)).filter(s => s !== null)
+  );
+  const rank = (r: { genus: string; species: string }) =>
+    opts.checklistRank.get(normalizeSlug(`${r.genus}-${r.species}`)) ?? Number.POSITIVE_INFINITY;
+  const missing = opts.species
+    .filter(r => !scored.has(slugOf(r)))
+    .map(r => ({ ...r, binomial: normalizeBinomial(`${r.genus} ${r.species}`), rank: rank(r) }))
+    .sort(
+      (a, b) =>
+        Number(a.withheld) - Number(b.withheld) ||
+        a.rank - b.rank ||
+        a.binomial.localeCompare(b.binomial)
+    );
+  const blank = opts.labels.map(() => '');
+  return stringify(
+    [[KEY_SCORES_NAME_COLUMN, ...opts.labels], ...missing.map(r => [r.binomial, ...blank])],
+    { record_delimiter: '\n' }
+  );
 }
 
 /**
@@ -206,30 +319,23 @@ async function queryNavImages(
 
 export async function main(): Promise<void> {
   // 1. Pre-flight validation (UTF-8 + file-exists check)
-  // key-characters.csv has embedded unescaped quotes in some labels (Lucid export artifact);
-  // validateCsv from build-data.ts would fail on csv-parse without relax_quotes, so we inline
-  // the UTF-8 + existence check here.
+  const scoresPath = process.env['KEY_SCORES_CSV'] ?? resolve('data/key-scores.csv');
   let raw: Buffer;
   try {
-    raw = readFileSync(resolve('data/key-characters.csv'));
+    raw = readFileSync(scoresPath);
   } catch (e) {
-    throw new Error(`Cannot read data/key-characters.csv: ${(e as Error).message}`);
+    throw new Error(`Cannot read data/key-scores.csv: ${(e as Error).message}`);
   }
   try {
     new TextDecoder('utf-8', { fatal: true }).decode(raw);
   } catch {
     throw new Error(
-      'data/key-characters.csv contains non-UTF-8 bytes. If edited in Excel on Windows, re-save as CSV UTF-8.'
+      'data/key-scores.csv contains non-UTF-8 bytes. If edited in Excel, re-save as "CSV UTF-8".'
     );
   }
 
-  // 2. CSV parse — columns: false (MANDATORY: row 0 is species data, not field names — Pitfall 1)
-  // relax_quotes: true — some character labels contain embedded unescaped double-quotes
-  // (Lucid export artifact, e.g. 'dipped" in a different color?'); relax_quotes allows parsing
-  // these without error. columns: false is still MANDATORY (row 0 is species data, not headers).
-  const allRows: string[][] = parse(raw, { columns: false, skip_empty_lines: true, relax_quotes: true });
-  const [headerRow, ...dataRows] = allRows;
-  const speciesBinomials = (headerRow ?? []).slice(1); // 1,228 entries (col 0 is the label column)
+  // 2. One row per species, one column per character-state (issue #390).
+  const { labels, binomials: speciesBinomials, scores } = parseKeyScores(raw);
 
   // 3. Load slug resolution resources
   const withheld = loadWithheldFamilies();
@@ -264,9 +370,9 @@ export async function main(): Promise<void> {
   const matchedIndices: number[] = resolvedSlugs.flatMap((s, i) => (s !== null ? [i] : []));
   const unmatchedBinomials = speciesBinomials.filter((_, i) => resolvedSlugs[i] === null);
 
-  // A merged species (#265) can be scored under two key columns — its own binomial
+  // A merged species (#265) can be scored under two key rows — its own binomial
   // and a synonym-resolved retired one. species[] must carry each slug once, so
-  // group the matched columns by slug; the matrix ORs a slug's columns together,
+  // group the matched rows by slug; the matrix ORs a slug's rows together,
   // because a specimen keyed under either historical name is still this species.
   const slugColumns = new Map<string, number[]>();
   for (const i of matchedIndices) {
@@ -289,7 +395,7 @@ export async function main(): Promise<void> {
     const imageRows = parse(
       readFileSync(csvPath),
       // relax_quotes: curator alt_text is free text and may contain an unescaped
-      // double-quote — same reason the key-characters.csv parse above sets it.
+      // double-quote.
       // Without it a single stray quote aborts the whole key build (defeats D-08 soft-skip).
       { columns: true, skip_empty_lines: true, bom: true, relax_quotes: true }
     ) as Array<{ char_id: string; image_filename: string; alt_text: string }>;
@@ -298,9 +404,9 @@ export async function main(): Promise<void> {
       const id = Number(raw);
       // Require an explicit non-negative integer. `/^\d+$/` rejects blank/whitespace
       // (Number('') === 0 would otherwise silently attach the image to character 0).
-      if (!/^\d+$/.test(raw) || id >= dataRows.length) {
+      if (!/^\d+$/.test(raw) || id >= labels.length) {
         console.warn(
-          `build-key: key-character-images.csv char_id ${JSON.stringify(r.char_id)} invalid or out of range [0, ${dataRows.length}) — skipping`
+          `build-key: key-character-images.csv char_id ${JSON.stringify(r.char_id)} invalid or out of range [0, ${labels.length}) — skipping`
         );
         continue;
       }
@@ -317,11 +423,11 @@ export async function main(): Promise<void> {
     console.warn('build-key: data/key-character-images.csv absent — no character help images (soft-skip)');
   }
 
-  const characters = dataRows.map((row, idx) => {
+  const characters = labels.map((label, idx) => {
     const m = imageMap.get(idx);
     return {
       id: idx,
-      ...parseCharacterLabel(row[0] ?? ''),
+      ...parseCharacterLabel(label),
       image_filename: m?.image_filename ?? null,
       alt_text: m?.alt_text ?? null,
     };
@@ -357,12 +463,12 @@ export async function main(): Promise<void> {
   });
 
   const nMatchedSpecies = matchedSlugs.length;
-  const matrix = dataRows.map(row => {
-    // Build list of matched-species-rank positions that score '1' in this row.
-    // A slug with several source columns matches if ANY of them scores '1'.
+  const matrix = labels.map((_, charIdx) => {
+    // Build list of matched-species-rank positions that score this character-state.
+    // A slug with several source rows matches if ANY of them scores it.
     const matchingRanks: number[] = [];
     for (const [rank, slug] of matchedSlugs.entries()) {
-      if (slugColumns.get(slug)!.some(origIdx => row[origIdx + 1] === '1')) {
+      if (slugColumns.get(slug)!.some(origIdx => scores[origIdx]![charIdx])) {
         matchingRanks.push(rank);
       }
     }
@@ -372,7 +478,7 @@ export async function main(): Promise<void> {
   // 7. Zod build-time validation (KEY-03)
   const artifact = KeyMatrixSchema.parse({
     meta: {
-      totalKeySpecies:  speciesBinomials.length,    // 1,228 (all key.csv binomials incl. unmatched)
+      totalKeySpecies:  speciesBinomials.length,    // every key-scores.csv row, incl. unmatched
       matchedSpecies:   matchedSlugs.length,         // 1,189 (resolved to site slugs)
       unmatchedSpecies: unmatchedBinomials.length,   // 39
     },
@@ -384,9 +490,15 @@ export async function main(): Promise<void> {
   // 8. Post-Zod structural invariants (T-39-02 mitigation)
   const nBytes = Math.ceil(artifact.species.length / 8);
   const expectedB64Len = Math.ceil(nBytes / 3) * 4;
+  // The column count is pinned because char_id is the column position, and
+  // data/key-character-images.csv binds help images by char_id. A character-state
+  // column added, removed or moved shifts every image after it onto the wrong
+  // question — so changing the columns means re-binding those images, then this number.
   if (artifact.matrix.length !== 237) {
     throw new Error(
-      `matrix.length invariant failed: expected 237, got ${artifact.matrix.length}`
+      `matrix.length invariant failed: expected 237 character-state columns in data/key-scores.csv, ` +
+        `got ${artifact.matrix.length}. If a column was added on purpose, re-check ` +
+        `data/key-character-images.csv (it binds images by column position) before updating this.`
     );
   }
   for (let i = 0; i < artifact.matrix.length; i++) {
@@ -415,7 +527,7 @@ export async function main(): Promise<void> {
     );
   }
 
-  // 9. Write artifacts (D-07: commit both)
+  // 9. Write artifacts (D-07: commit all three)
   // KEY_OUT_DIR redirects output for testing, mirroring KEY_CHAR_IMAGES_CSV for input.
   // Tests that override the input MUST also override the output: without this the
   // suite writes fixture-derived data over the committed artifacts, and a later
@@ -435,6 +547,24 @@ export async function main(): Promise<void> {
     })),
   };
   writeFileSync(join(outDir, 'key-coverage-report.json'), JSON.stringify(coverageReport));
+
+  // 10. The scoring template: every species we hold that the key does not (issue #390).
+  const checklistRank = new Map(
+    (parse(readFileSync(resolve('data/checklist-order.csv')), {
+      columns: true,
+      skip_empty_lines: true,
+    }) as Array<{ species_slug: string }>).map((r, i) => [r.species_slug, i])
+  );
+  const template = buildKeyTemplate({
+    labels,
+    keyBinomials: speciesBinomials,
+    species: allSpeciesRows
+      .filter(r => !isUnpublished(normalizeSlug(`${r.genus}-${r.species}`), unpublished))
+      .map(r => ({ genus: r.genus, species: r.species, withheld: isWithheldOrUnclassified(r.family, withheld) })),
+    synonymMap,
+    checklistRank,
+  });
+  writeFileSync(join(outDir, 'key-template.csv'), template);
 
   console.log(
     `build-key: ${matchedSlugs.length} matched, ${unmatchedBinomials.length} unmatched of ${speciesBinomials.length} total`

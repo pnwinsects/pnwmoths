@@ -156,6 +156,20 @@ const reports: CurationReport[] = [
     ],
   },
   {
+    id: 'key-template',
+    title: 'Identification key template: species the key does not score yet',
+    audience: 'curation',
+    question: 'Which species do we hold that Identify cannot find, and what are their character states?',
+    body: 'A spreadsheet with one row per species the identification key does not score yet and one column per character-state, laid out exactly like the key\'s own scores (<code>data/key-scores.csv</code>). Published species come first, then the withheld Geometridae, each group in checklist order. Open it in Excel, put a <code>1</code> in every cell that applies to the species and leave the rest blank (a blank never rules a species out), delete or ignore the rows you do not get to, save as <strong>CSV UTF-8</strong>, and attach it to an issue. A maintainer merges it with <code>npm run key:merge</code>; rows with no <code>1</code>s are skipped, and species the key already scores are never overwritten.',
+    regenerated: 'Every build (<code>npm run build:key</code>), from the committed key scores and species list, so a species leaves the template as soon as its scores are merged.',
+    files: [fromRepo('data/key-template.csv')],
+    see: [
+      { label: 'Runbook: adding species to the key', url: '_instructions/ADDING_SPECIES_TO_KEY.md' },
+      { label: 'ADR 0048 — the key is scored one species per row', url: 'docs/adr/0048-key-scores-one-row-per-species.md' },
+      { label: 'Issue #390', url: 'https://github.com/pnwinsects/pnwmoths/issues/390' },
+    ],
+  },
+  {
     id: 'key-coverage',
     title: 'Identification key coverage: key species with no page',
     audience: 'curation',
