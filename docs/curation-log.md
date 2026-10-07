@@ -73,6 +73,68 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-037 · 2026-10-07 · The site maps all of Montana, and a degree of latitude past the region to the south and north
+
+**Source** [#367 comment](https://github.com/pnwinsects/pnwmoths/issues/367#issuecomment-6048361978),
+the curator's own words · **Status** Applied · **Refines** C-035
+
+> 1: yes
+> rationale: since these would be the only MT records for quite a few species, it's worth keeping them
+> regarding the Greycliff RS (= rest stop) records, changing latitude to 45.73 is correct.
+>
+> 2: yes
+> rationale: there are going to be some geometrid species that are known from N CA but not (yet) known
+> from S OR. Thus, it's a good idea to have a bit of buffer around the perimeter of the official
+> boundary of what the site covers. The same is true at the N end of the map. Let's have a buffer of 1
+> degree latitude to the N and S of our boundaries.
+>
+> For the location that's 4 miles south of Merrill, OR, update the state and county for the record to
+> reflect reality (this was not in Klamath Co., OR)
+
+**The rulings, as applied.**
+
+- **Montana east of 110° W is published.** The publishing bounds' eastern edge moves from 110° W to
+  104° W, Montana's eastern border rounded inward. All 160 held Montana records reach the maps. A
+  record in the last 0.04° of Montana would be held and listed on `/curation/`, not lost.
+- **A degree of latitude past the region, south and north.** The bounds go from 42–60° N to
+  41–61° N. That publishes the six southern-border records, and anything as far as 61° N.
+  These are now the same latitudes as the district-assignment box (`PNW_BOUNDS`), so a held
+  record can only lie in a strip west of 139° W or east of 104° W.
+- **Greycliff RS, 2.5mSE** (records 94148, 94158): latitude 46.73 → 45.73, as he confirmed.
+  `district_id` goes from US:30045 (Judith Basin, where the bad latitude fell) to US:30097 (Sweet
+  Grass, the county on the label, where 45.73 falls).
+- **"Merill, 4mS"** (records 94308–94310): state OR → **CA**, county Klamath → **Siskiyou**,
+  latitude 41.013 → **41.967**. `district_id` stays blank: the boundary file has no California
+  counties, and a blank is how the Alberta records are carried too.
+
+**The reading taken on the Merrill records, and why.** He asked for the state and county to reflect
+"the location that's 4 miles south of Merrill". He didn't rule on the latitude, which #367 had also
+asked about. The stored coordinate (41.013° N) and the label disagree, and so do their counties:
+the coordinate falls in **Shasta** County, 110 km south, while 4 miles south of Merrill
+(42.025° N) is 41.967° N, in **Siskiyou** County. Both counties were checked against the Census
+geocoder, not taken from memory. He named the place by its label, and the specimens' 4,000 ft
+elevation fits the Tule Lake basin near Merrill rather than the lower ground at 41.013, so the
+label is taken as true and the latitude as the slip. If he meant the coordinate, the fix is
+county Shasta and latitude back to 41.013.
+
+**Not changed.** The other three southern-border records keep their labelled state and county,
+though their coordinates fall in California or Nevada: Goose L., Lake Co., OR; McDermitt Cr.,
+Malheur Co., OR; Shoshone Cr., Twin Falls Co., ID. All three sit within 6 km of a border that runs
+through the named place, so the label may well be right. He was asked to correct only the Merrill
+locality.
+
+**Why it matters.** The bounds are now a coverage policy, not just a typo filter. They follow the
+curator's reasoning that species known from just over the border belong on the site. The same
+buffer applies to the iNaturalist import, which uses these bounds. An observation that falls
+outside every county in the boundary file is still skipped there as `no-district` and listed in
+`data/inat-sync-report.csv`, so northern California observations won't arrive without a state.
+`CA` joins the states `build-data.ts` accepts. Like `AB`, it stays out of the Browse and Checklist
+dropdowns.
+
+**What changed** — `RECORD_COORDINATE_BOUNDS` in `scripts/lib/records-source.ts`; five rows in
+`data/records.csv`; `data/records-derived-district.csv` regenerated; `CA` added to the accepted
+states.
+
 ## C-036 · 2026-10-07 · The two moths on the *Apantesis arizoniensis* account are *A. arizoniensis*
 
 **Source** [#376 comment](https://github.com/pnwinsects/pnwmoths/issues/376#issuecomment-6048447211),
@@ -101,7 +163,7 @@ photograph moves, and no page changes.
 of the [#367 issue body](https://github.com/pnwinsects/pnwmoths/issues/367), which put each
 correction to the curator with "If any is wrong, say so here" · **Provenance** NOT the curator's
 words — a maintainer's corrections, each read from evidence in the catalogue. No reply on #367
-disputes them · **Status** Applied
+disputes them · **Status** Applied · **Refined by** C-037
 
 These are record-admission calls, so they belong here, and #368 did not write one. It resolved
 them by deleting rows from the held-records file, which left the diff as the only record. This

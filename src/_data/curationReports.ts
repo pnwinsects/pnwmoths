@@ -108,12 +108,12 @@ const reports: CurationReport[] = [
     title: 'Records held off the map: coordinates outside the site’s bounds',
     audience: 'curation',
     question: 'Which occurrence records are held off the site because their coordinates fall outside the area it maps, and should any of them be published?',
-    body: 'One row per record in <code>data/records.csv</code> whose coordinates fall outside the publishing bounds (latitude 42–60° N, longitude 110–139° W), with its <code>record_id</code>. <code>beyond</code> says which edge it lies past. These coordinates are plausible, not typos — a coordinate outside the region entirely fails the build instead — so whether they belong on the site is a coverage question. Most are central and eastern Montana, <code>east</code> of 110° W, a line that cuts through counties already on the site; a handful lie just <code>south</code> of the Oregon and Idaho borders. A ruling removes a row by changing the data: correct the coordinates, widen the bounds, or delete the record, and write the ruling in the curation log.',
+    body: 'One row per record in <code>data/records.csv</code> whose coordinates fall outside the publishing bounds (latitude 41–61° N, longitude 104–139° W), with its <code>record_id</code>. <code>beyond</code> says which edge it lies past. These coordinates are plausible, not typos — a coordinate outside the region entirely fails the build instead — so whether they belong on the site is a coverage question. Since the curator&rsquo;s rulings on #367 the bounds take in all of Montana and a degree of latitude past the region to the south and north, so a held record can only lie in a narrow strip <code>west</code> of 139° W or <code>east</code> of Montana, and the report is usually empty. A ruling removes a row by changing the data: correct the coordinates, widen the bounds, or delete the record, and write the ruling in the curation log.',
     regenerated: 'Every build (<code>npm run build:records-out-of-bounds</code>), from the committed records. Nothing in it is edited by hand.',
     files: [alreadyEmitted('/records-out-of-bounds.csv')],
     see: [
       { label: 'ADR 0047 — out-of-bounds records are held in records.csv', url: 'docs/adr/0047-out-of-bounds-records-held-in-records-csv.md' },
-      { label: 'Issue #367 — publish Montana east of 110° W, and six border records?', url: 'https://github.com/pnwinsects/pnwmoths/issues/367' },
+      { label: 'Issue #367 — Montana east of 110° W and the southern border records, published', url: 'https://github.com/pnwinsects/pnwmoths/issues/367' },
     ],
   },
   {

@@ -180,17 +180,17 @@ describe('isWithinRecordBounds', () => {
   });
 
   it('rejects the corners build-data.ts rejects', () => {
-    assert.equal(isWithinRecordBounds(41.9, -122.3), false);
-    assert.equal(isWithinRecordBounds(60.1, -122.3), false);
+    assert.equal(isWithinRecordBounds(40.9, -122.3), false);
+    assert.equal(isWithinRecordBounds(61.1, -122.3), false);
     assert.equal(isWithinRecordBounds(47.6, -139.1), false);
-    assert.equal(isWithinRecordBounds(47.6, -109.9), false);
+    assert.equal(isWithinRecordBounds(47.6, -103.9), false);
   });
 
   it('is stricter than the district-assignment bounds', () => {
-    // lon -105 is inside PNW_BOUNDS (which is sized to the boundary geometry)
+    // lon -103.5 is inside PNW_BOUNDS (which is sized to the boundary geometry)
     // but outside the publishing rule. Anything generating records must apply
     // this narrower gate or it writes a file that fails the build.
-    assert.equal(isWithinRecordBounds(45.0, -105.0), false);
+    assert.equal(isWithinRecordBounds(45.0, -103.5), false);
   });
 });
 
@@ -210,11 +210,12 @@ function curatorRowAt(latitude: string, longitude: string, slug = 'lophocampa-ro
 // The edges are inclusive, and a blank coordinate is invalid, not held.
 const PREDICATE_CASES: { latitude: string; longitude: string; outOfBounds: boolean; why: string }[] = [
   { latitude: '47.6', longitude: '-122.3', outOfBounds: false, why: 'inside' },
-  { latitude: '42', longitude: '-110', outOfBounds: false, why: 'south-east corner, inclusive' },
-  { latitude: '60', longitude: '-139', outOfBounds: false, why: 'north-west corner, inclusive' },
-  { latitude: '46.73', longitude: '-109.75', outOfBounds: true, why: 'east of 110° W (Greycliff, MT)' },
-  { latitude: '41.947', longitude: '-120.419', outOfBounds: true, why: 'south of 42° N (Goose L.)' },
-  { latitude: '60.1', longitude: '-122.3', outOfBounds: true, why: 'north' },
+  { latitude: '41', longitude: '-104', outOfBounds: false, why: 'south-east corner, inclusive' },
+  { latitude: '61', longitude: '-139', outOfBounds: false, why: 'north-west corner, inclusive' },
+  { latitude: '46.73', longitude: '-109.75', outOfBounds: false, why: 'east of 110° W, published since #367 (Greycliff, MT)' },
+  { latitude: '41.947', longitude: '-120.419', outOfBounds: false, why: 'south of 42° N, published since #367 (Goose L.)' },
+  { latitude: '46.5', longitude: '-103.5', outOfBounds: true, why: 'east of 104° W, past Montana' },
+  { latitude: '61.1', longitude: '-122.3', outOfBounds: true, why: 'north' },
   { latitude: '47.6', longitude: '-139.1', outOfBounds: true, why: 'west' },
   { latitude: '', longitude: '-109.75', outOfBounds: false, why: 'blank latitude is invalid, not held' },
   { latitude: '46.73', longitude: '', outOfBounds: false, why: 'blank longitude is invalid, not held' },
@@ -247,10 +248,10 @@ describe('isOutOfBoundsRecord and outOfBoundsSql', () => {
 
 describe('beyondBounds', () => {
   it('names the edge a point lies past', () => {
-    assert.equal(beyondBounds(46.73, -109.75), 'east');
-    assert.equal(beyondBounds(41.013, -121.601), 'south');
-    assert.equal(beyondBounds(41.5, -105), 'south and east');
-    assert.equal(beyondBounds(61, -140), 'north and west');
+    assert.equal(beyondBounds(46.5, -103.5), 'east');
+    assert.equal(beyondBounds(40.9, -121.601), 'south');
+    assert.equal(beyondBounds(40.5, -103.5), 'south and east');
+    assert.equal(beyondBounds(61.5, -140), 'north and west');
   });
 });
 
@@ -266,7 +267,7 @@ describe('buildAllRecordsSql — out-of-bounds records', () => {
 
   it('leaves the curator file\'s out-of-bounds rows out of what the site serves', async () => {
     const path = join(dir, 'records-held.csv');
-    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n${curatorRowAt('46.73', '-109.75')}\n`);
+    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n${curatorRowAt('46.5', '-103.5')}\n`);
     writeFileSync(inatPath, `${INAT_HEADER}\n`);
     assert.equal(await count(buildAllRecordsSql(path, inatPath)), 1);
     assert.equal(await count(buildAllRecordsSql(path, inatPath, { includeOutOfBounds: true })), 2);
@@ -282,14 +283,14 @@ describe('buildAllRecordsSql — out-of-bounds records', () => {
   it('does not filter the iNaturalist side — an out-of-bounds row there is a sync bug the build must see', async () => {
     const path = join(dir, 'records-inbounds.csv');
     writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n`);
-    const inatOut = INAT_ROW.replace('48.54,-123.01', '46.73,-109.75');
+    const inatOut = INAT_ROW.replace('48.54,-123.01', '46.5,-103.5');
     writeFileSync(inatPath, `${INAT_HEADER}\n${inatOut}\n`);
     assert.equal(await count(buildAllRecordsSql(path, inatPath)), 2);
   });
 
   it('is applied by readAllRecordRows too, so the two readers still agree', () => {
     const path = join(dir, 'records-held-rows.csv');
-    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n${curatorRowAt('46.73', '-109.75')}\n`);
+    writeFileSync(path, `${CURATOR_HEADER}\n${curatorRowAt('46.5', '-112')}\n${curatorRowAt('46.5', '-103.5')}\n`);
     writeFileSync(inatPath, `${INAT_HEADER}\n`);
     assert.equal(readAllRecordRows(path, inatPath).length, 1);
   });

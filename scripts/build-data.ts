@@ -223,7 +223,7 @@ export async function main(): Promise<void> {
       description: 'invalid state values',
       query: `
         SELECT DISTINCT state FROM records_checked
-        WHERE state NOT IN ('WA', 'OR', 'ID', 'BC', 'AB', 'MT')
+        WHERE state NOT IN ('WA', 'OR', 'ID', 'BC', 'AB', 'MT', 'CA')
           AND state IS NOT NULL
           AND state != ''
       `
