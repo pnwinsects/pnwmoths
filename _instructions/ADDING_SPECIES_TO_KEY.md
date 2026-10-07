@@ -23,7 +23,7 @@ Background: [ADR 0048](../docs/adr/0048-key-scores-one-row-per-species.md), issu
 3. For each species you score, put a `1` in every cell that applies. Don't type `x`, `Y` or `yes`; the merge rejects anything but `1`, `0` or blank, and names the cell.
 4. Leave rows you don't get to as they are. Rows with no `1`s are skipped. You can also delete them.
 5. Don't edit, reorder, add or delete **columns**. If the columns differ from the key's, the merge refuses the whole file.
-6. Save as **CSV UTF-8 (Comma delimited)**. Attach it to a GitHub issue (#390, or a new one), or send it to a maintainer.
+6. Save as **CSV UTF-8 (Comma delimited)** (in Google Sheets: File → Download → CSV). Attach it to a GitHub issue (#390, or a new one), or send it to a maintainer. Whether the curator works in Excel or a shared Google Sheet is still open on #390; this step will change to match.
 
 To **correct** a species the key already scores, say which cells to change. The merge never overwrites existing scores; a maintainer edits that row in `data/key-scores.csv` directly.
 

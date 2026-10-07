@@ -68,7 +68,10 @@ came out byte-identical to the versions built from the old file.
 - **Key the rows by `species_slug`.** Rejected for now (see above). Doing it would turn
   the 19 unmatched names into referential-integrity exceptions or deleted data. It is worth
   revisiting once the C-032 synonym rulings are made.
-- **An `.xlsx` template with dropdowns and frozen panes.** Rejected: a binary in the repo and a
-  second format to parse. The CSV opens in Excel directly, and the curator saves back to it.
+- **The format the curator works in is open**: an Excel file or a Google Sheet, whichever he
+  prefers ([asked on #390](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6048849635)).
+  Whatever he picks, `data/key-scores.csv` stays the source and the merge reads CSV, so his answer
+  changes how the template reaches him and comes back, not this decision. Committing an
+  `.xlsx` as the source was rejected: it would be a binary in the repo and a second format to parse.
 - **Fill blank template rows into `key-scores.csv` directly.** Rejected: an all-blank row puts
   the species in every Identify result.
