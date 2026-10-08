@@ -257,13 +257,13 @@ describe('computeMatching', () => {
     // They must appear in computeMatching results for any selection (no opposing 1s → D-03 never eliminates).
     //
     // Real-artifact regression counts (see RESEARCH.md "Concrete expected values"):
-    //   WA state selected (char id=0):     873 matched (after unpublished deny-list gating #84)
+    //   WA state selected (char id=0):     882 matched (after unpublished deny-list gating #84)
     //   WA OR OR selected (ids 0+2):     1,024 matched
     //   WA AND eyespot=Yes (ids 0, eyespot): 7 matched
     //   eyespot=Yes only:                    9 matched
     //   forewing-yellow only:               81 matched
     //   yellow OR orange:                  180 matched
-    //   empty selection:                 1,208 matched (after unpublished deny-list gating #84)
+    //   empty selection:                 1,220 matched (after unpublished deny-list gating #84)
     //
     // oedemasia-salicis was un-gated, a net +1 vs. the prior 861/1,190 baseline. Un-hiding
     // schizura-ipomaeae (#269) did not move these counts: the Lucid key spells it
@@ -280,6 +280,8 @@ describe('computeMatching', () => {
     // the 863 it used to assert becomes 873.
     // C-033 adds the fourteenth, "Notarctia arizoniensis" -> apantesis-arizoniensis, a net
     // +1 over 1,207. WA does not move: the species has no Washington record.
+    // C-038 confirms 12 more key binomials as synonyms of published species (#390), a net
+    // +12 over 1,208; nine of them are scored for Washington, so WA goes 873 -> 882.
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
 
@@ -299,16 +301,16 @@ describe('computeMatching', () => {
       result.matchedSlugs.includes('xestia-normanianus'),
       'xestia-normanianus (all-zero) must appear in WA-filtered results (D-04)',
     );
-    // Regression check: WA selection should yield 873 matched species after unpublished deny-list gating (#84).
-    assert.strictEqual(result.count, 873, 'WA selection must match 873 species (real-artifact regression)');
+    // Regression check: WA selection should yield 882 matched species after unpublished deny-list gating (#84).
+    assert.strictEqual(result.count, 882, 'WA selection must match 882 species (real-artifact regression)');
   });
 
-  it('TC-7b: empty selection returns all 1,208 species (real artifact)', async () => {
+  it('TC-7b: empty selection returns all 1,220 species (real artifact)', async () => {
     // Empty selection → D-03 base case: no constrained questions → all species pass.
     // (euthyatira-lorata reclassified Geometridae→Drepanidae in #73, so it rejoins the key)
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
     const result = computeMatching(realMatrix as KeyMatrix, new Map(), realGroups);
-    assert.strictEqual(result.count, 1208, 'empty selection must return all 1,208 species');
+    assert.strictEqual(result.count, 1220, 'empty selection must return all 1,220 species');
   });
 });

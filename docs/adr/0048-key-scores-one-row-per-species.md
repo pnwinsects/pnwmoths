@@ -59,6 +59,10 @@ came out byte-identical to the versions built from the old file.
   the 237 invariant. Existing species are unscored on a new character, so it never excludes
   them.
 
+- **Since C-038**, the curator has confirmed 12 of those unmatched names as synonyms of species we
+  publish, so 7 remain unmatched (one unpublished, one unscored, *Lacinipolia vicina*, and four
+  species we hold no account for).
+
 ## Alternatives considered
 
 - **A template beside the old file, with an importer that inserts columns.** Rejected: it keeps
@@ -68,10 +72,9 @@ came out byte-identical to the versions built from the old file.
 - **Key the rows by `species_slug`.** Rejected for now (see above). Doing it would turn
   the 19 unmatched names into referential-integrity exceptions or deleted data. It is worth
   revisiting once the C-032 synonym rulings are made.
-- **The format the curator works in is open**: an Excel file or a Google Sheet, whichever he
-  prefers ([asked on #390](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6048849635)).
-  Whatever he picks, `data/key-scores.csv` stays the source and the merge reads CSV, so his answer
-  changes how the template reaches him and comes back, not this decision. Committing an
-  `.xlsx` as the source was rejected: it would be a binary in the repo and a second format to parse.
+- **An `.xlsx` or Google Sheet as the source.** The curator is happy with either for scoring
+  ([#390](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6049060198)), so the template
+  stays a CSV that opens in both, and `data/key-scores.csv` stays the source. A committed `.xlsx`
+  would have meant a binary in the repo and a second format to parse.
 - **Fill blank template rows into `key-scores.csv` directly.** Rejected: an all-blank row puts
   the species in every Identify result.
