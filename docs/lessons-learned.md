@@ -306,7 +306,7 @@ cost a debugging cycle to discover.
 
 - **Two consumers, two case conventions, one column.** `data/species-synonyms.csv`'s
   `from_binomial` is lowercased by `ingest-photos.ts` before matching but compared
-  **case-sensitively** by `build-key.ts` against the frozen Lucid source. A lowercase row is
+  **case-sensitively** by `build-key.ts` against the binomials in `data/key-scores.csv`. A lowercase row is
   therefore silently invisible to the key: no error, just `build-key: 1188 matched` where it had
   been 1191. Write it capitalised. When a shared column has no single normalizer, the looser
   consumer hides the stricter one's failure.

@@ -73,6 +73,52 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-038 · 2026-10-07 · Twelve key binomials are the species we publish under a newer name; the key's *Lacinipolia vicina* is not carried to *L. sareta*
+
+**Source** [#390 comment](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6049060198),
+the curator's own words, answering the numbered table in
+[this comment](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6048990487) · **Status**
+Applied · **Refines** C-032
+
+> 1–12 yes; 13 fresh
+
+These are the eleven key names C-032 left unmatched because the *epithet* changed as well as the
+genus, which made each a synonymy ruling rather than a transcription. There are also two spelling
+variants. For eleven of the twelve, the catalogue already files the key name's own photographs under
+the newer species (e.g. `Pheosia rimosa-*.jpg` on the *P. californica* account). He confirmed each
+pair is the same moth:
+
+| # | Key binomial | Species |
+| --- | --- | --- |
+| 1 | *Pheosia rimosa* | `pheosia-californica` |
+| 2 | *Notodonta scitipennis* | `notodonta-manitou` |
+| 3 | *Furcula cinerea* | `furcula-cinereoides` |
+| 4 | *Furcula occidentalis* | `furcula-gigans` |
+| 5 | *Datana ministra* | `datana-californica` |
+| 6 | *Clemensia albata* | `clemensia-umbrata` |
+| 7 | *Acronicta parallela* | `acronicta-mansueta` |
+| 8 | *Plagiomimicus tepperi* | `plagiomimicus-yakama` |
+| 9 | *Lithophane jefferyi* | `lithophane-jeffreyi` |
+| 10 | *Leucania anteoclara* | `leucania-anteroclara` |
+| 11 | *Heliothodes diminutiva* | `heliothodes-diminutivus` |
+| 12 | *Mythimna yukonensis* | `mythimna-yuconensis` |
+
+**13, "fresh":** the key's *Lacinipolia vicina* scores are **not** carried to *L. sareta*. They may
+describe the whole *vicina* complex from before the split (#285, C-022), so *sareta* stays in the key
+template, to be scored from scratch. *L. vicina* stays an unmatched key name, its scores kept but
+reaching no species.
+
+Why it matters: these twelve species already had full key scores that no one could reach, because
+the key used names the site has since changed. Identify now finds them, and none of the twelve needs
+scoring by hand.
+
+**What changed** — 12 rows in `data/species-synonyms.csv`; `data/key-matrix.json`,
+`data/key-coverage-report.json` and `data/key-template.csv` rebuilt (matched 1,208 → 1,220; unmatched
+19 → 7; template 168 → 156 species); 30 high-resolution TIFF rows in
+`data/species-photos-manifest.csv` promoted to `resolved-via-synonym` by `npm run photos:investigate`.
+Seven key binomials remain unmatched: *Hemileuca juno* (unpublished), *Hypenodes sobria* (no
+scores), *L. vicina* (above), and four species we hold no account for.
+
 ## C-036 · 2026-10-07 · The two moths on the *Apantesis arizoniensis* account are *A. arizoniensis*
 
 **Source** [#376 comment](https://github.com/pnwinsects/pnwmoths/issues/376#issuecomment-6048447211),
@@ -224,7 +270,7 @@ in `data/species-photos-manifest.csv`. Nineteen key binomials remain unmatched.
 **Source** this PR, extending the [#278 ruling](https://github.com/pnwinsects/pnwmoths/issues/278#issuecomment-5655356221) ·
 **Provenance** NOT the curator's words. The identifications are read out of `data/images.csv` — see
 below — and the extension was a maintainer's call, approved by the repo owner, not Merrill's ·
-**Status** Applied · **Refines** C-031 · **Refined by** C-033
+**Status** Applied · **Refines** C-031 · **Refined by** C-033, C-038
 
 C-031 fixed one instance of a defect that turns out to be general. The Lucid key's binomials are the
 names in use when the key was authored; the catalogue has moved on; `scripts/build-key.ts` joins the
