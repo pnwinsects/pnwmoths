@@ -19,7 +19,7 @@
  *       <media_details item_id='1224' media_index='1' …/>
  *     </media_item>
  *   The 237 <state_item>s appear in document order, which is identical to
- *   data/key-characters.csv row order — i.e. build-key.ts's char_id (verified:
+ *   data/key-scores.csv column order — i.e. build-key.ts's char_id (verified:
  *   0 position mismatches against data/key-matrix.json). So char_id = the index
  *   of each state_item in document order; we join to images via media_details@item_id.
  *
@@ -64,7 +64,7 @@ function decodeXmlEntities(s: string): string {
  */
 export function extractRows(xml: string): ImageRow[] {
   // 1. state_item item_ids in document order → char_id = index.
-  //    (Document order == feature-tree depth-first order == key-characters.csv order.)
+  //    (Document order == feature-tree depth-first order == key-scores.csv column order.)
   const stateIds: string[] = [];
   const stateRe = /<state_item\b[^>]*\bitem_id='([^']*)'/g;
   for (let m; (m = stateRe.exec(xml)); ) stateIds.push(m[1]!);

@@ -1,6 +1,8 @@
 /**
  * Copy key-matrix.json from data/ to _site/ after Eleventy build.
- * eleventy-plugin-vite wipes _site/ during build; post-build copy restores it.
+ * (A build step of its own since the days eleventy-plugin-vite wiped _site/ mid-build;
+ * that no longer happens — ADR 0049 — but the step is harmless and is what the
+ * build:check-key-weight step after it expects.)
  */
 import { copyFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';

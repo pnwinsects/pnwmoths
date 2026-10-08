@@ -1,9 +1,10 @@
 /**
  * Copy Parquet files from data/parquet/{slug}/ to _site/species/{slug}/
  *
- * The eleventy-plugin-vite build renames _site -> .11ty-vite, runs Vite
- * into a new empty _site/, so binary passthrough-copied files don't survive.
- * This script runs after the full build to restore them.
+ * The only thing that publishes Parquet: there is deliberately no Eleventy passthrough
+ * for data/parquet/. One stood in eleventy.config.ts, ungated, for as long as
+ * eleventy-plugin-vite silently discarded passthrough copies; without the plugin it
+ * published every withheld species' records, and check-withheld caught it (ADR 0049).
  *
  * GATED. This used to be an unconditional recursive copy of data/parquet/, which
  * published occurrence data for every species whose page the build deliberately

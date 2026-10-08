@@ -29,6 +29,7 @@
     "src/_includes/**/*.ts",
     "src/types/**/*.ts",
     "eleventy.config.ts",
+    "vite.config.ts",
     "eleventy.config.test.ts",
     "scripts/**/*.test.ts",
     "src/_data/**/*.test.ts",

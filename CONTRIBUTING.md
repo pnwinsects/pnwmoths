@@ -20,8 +20,9 @@ The build runs ~16 steps; the main stages (the full, authoritative order lives i
 | Step | Command | What it does |
 |------|---------|--------------|
 | Data | `npm run build:data` | Validates CSVs, imports to DuckDB, exports per-species Parquet files |
+| Client bundle | `npm run build:vite` | Builds the JS and CSS entries (`vite.config.ts`) and the manifest pages load them through |
 | HTML | `npm run build:eleventy` | Generates ~700 species pages and all browse/search/glossary pages |
-| Parquet copy | `npm run build:copy-parquet` | Copies Parquet files into `_site/` after Vite rewrites the output dir |
+| Parquet copy | `npm run build:copy-parquet` | Publishes per-species Parquet into `_site/`, skipping withheld and unpublished species |
 | Search index | `npm run build:pagefind` | Indexes all pages for client-side search |
 | Link check | `npm run build:validate-links` | Fails on broken internal links (requires lychee) |
 | Page weight | `npm run build:check-weight` | Warns when any page exceeds the size threshold |

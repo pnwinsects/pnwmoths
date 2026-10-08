@@ -175,9 +175,8 @@ It is **16×16 only**: no high-DPI, SVG, or touch-icon variant exists. Upscaling
 16×16 source looks bad, so a redrawn higher-resolution icon is separate future
 work; do not synthesise one from this file.
 
-It reaches the site root because `public/` is Vite's `publicDir` (see
-[`eleventy.config.ts`](../../eleventy.config.ts)), whose contents are copied verbatim
-into `_site/`, and it is declared in
+It reaches the site root because Eleventy passthrough-copies `public/` there verbatim
+(see [`eleventy.config.ts`](../../eleventy.config.ts)), and it is declared in
 [`src/_includes/base.njk`](../../src/_includes/base.njk). It must live at the
 origin root (`/favicon.ico`) — browsers request that path automatically — so it
 cannot be served from the CDN image paths like the species photo corpus.

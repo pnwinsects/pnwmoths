@@ -1,12 +1,13 @@
 import { EleventyRenderPlugin } from "@11ty/eleventy";
-import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
+import { cp } from "node:fs/promises";
 import { resolve, isAbsolute } from "node:path";
 import { pathToFileURL } from "node:url";
 import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
 import { derivativeUrl, sourceUrl, type VariantToken } from "./src/_lib/derivative-url.ts";
+import { entryTags, pathPrefix, VITE_MANIFEST, VITE_OUT_DIR, type ViteManifest } from "./src/_lib/vite-entries.ts";
 import {
   pickAccountPhotos,
   pickSimilarPhoto,
@@ -26,10 +27,8 @@ import {
   type SpeciesLike,
 } from "./src/_lib/social-meta.ts";
 
-// On GitHub Pages the site lives under /pnwmoths/. actions/configure-pages sets
-// GITHUB_PAGES=true so the build knows to apply the prefix. Locally the dev
-// server serves at root, so we use "/" which makes | url a no-op.
-const pathPrefix = process.env.GITHUB_PAGES ? "/pnwmoths/" : "/";
+// pathPrefix — "/pnwmoths/" on GitHub Pages, "/" everywhere else — is imported from
+// src/_lib/vite-entries.ts, because vite.config.ts must apply the same one.
 
 // Origin this build will be served from. Sharing metadata (og:url, og:image,
 // rel=canonical) must be absolute, and pathPrefix alone cannot supply an origin —
@@ -100,9 +99,7 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
 
   // Site-root-relative path -> absolute URL. Chain it after `| url`, which supplies
   // pathPrefix: {{ page.url | url | absoluteUrl }}. Absoluteness is required by
-  // og:/canonical consumers, and it is also what keeps eleventy-plugin-vite's HTML
-  // asset scanner away from these tags — it sweeps every <link href> and the
-  // og:image <meta content>, but skips external URLs.
+  // og:/canonical consumers.
   eleventyConfig.addFilter("absoluteUrl", p => new URL(p as string, SITE_ORIGIN).href);
 
   // First prose paragraph of each factsheet, derived on demand and memoised.
@@ -189,77 +186,47 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   eleventyConfig.addGlobalData("siteDescription", SITE_DESCRIPTION);
   eleventyConfig.addGlobalData("siteImageAlt", SITE_IMAGE_ALT);
 
-  // Passthrough copy: per-species Parquet files from data/parquet/{slug}/ to _site/species/{slug}/
-  // data/parquet/acronicta-americana/records.parquet -> _site/species/acronicta-americana/records.parquet
-  eleventyConfig.addPassthroughCopy({ "data/parquet": "species" });
+  // Per-species Parquet is NOT passthrough-copied: scripts/copy-parquet.ts publishes it,
+  // gated on withheld and unpublished species (#275). An ungated copy of data/parquet/
+  // stood here for as long as eleventy-plugin-vite silently discarded passthrough copies;
+  // without the plugin it would publish embargoed occurrence data (ADR 0049).
 
-  // Pico CSS from node_modules
-  eleventyConfig.addPassthroughCopy({
-    "node_modules/@picocss/pico/css/pico.min.css": "css/pico.min.css"
+  // Site chrome (banner, partner logos, range map, favicon, share card) at the site root.
+  eleventyConfig.addPassthroughCopy({ public: "/" });
+
+  // The client bundle (ADR 0049). `npm run build:vite` writes it to VITE_OUT_DIR before
+  // Eleventy runs; its hashed assets/ are copied as-is, and each page loads its entries
+  // through the viteEntry shortcode below. Vite never sees the HTML.
+  eleventyConfig.addPassthroughCopy({ [`${VITE_OUT_DIR}/assets`]: "assets" });
+  const manifestPath = resolve(VITE_OUT_DIR, VITE_MANIFEST);
+  eleventyConfig.addWatchTarget(manifestPath);
+  let manifest: { mtimeMs: number; value: ViteManifest } | null = null;
+  eleventyConfig.addShortcode("viteEntry", (entry: string) => {
+    if (!existsSync(manifestPath)) {
+      throw new Error(`viteEntry: ${manifestPath} does not exist. Run \`npm run build:vite\` first.`);
+    }
+    // Re-read when `vite build --watch` rewrites it during `npm run dev`.
+    const { mtimeMs } = statSync(manifestPath);
+    if (manifest?.mtimeMs !== mtimeMs) {
+      manifest = { mtimeMs, value: JSON.parse(readFileSync(manifestPath, "utf8")) as ViteManifest };
+    }
+    return entryTags(manifest.value, entry, pathPrefix);
   });
-
-  // Passthrough copy for component source files so Vite can find them
-  eleventyConfig.addPassthroughCopy({ "src/components": "components" });
-  eleventyConfig.addPassthroughCopy({ "src/types": "types" });
-  // _lib shared utilities needed by pnwm-identify (key-filter, computeMatching)
-  eleventyConfig.addPassthroughCopy({ "src/_lib": "_lib" });
-
-  // Theme CSS
-  eleventyConfig.addPassthroughCopy({ "src/styles": "styles" });
-
-  // NOTE: public/ (banner image, partner logos, favicon) is deliberately NOT
-  // passthrough-copied here — eleventy-plugin-vite adds that automatically for
-  // Vite's publicDir. See the publicDir option below.
 
   // About page images (label examples, screenshots)
   eleventyConfig.addPassthroughCopy("src/about/data/images");
   eleventyConfig.addPassthroughCopy("src/about/images/images");
 
-  // Vite plugin: bundles client-side JS components
-  // The writeBundle hook fires after Vite finishes writing to _site/, so images copied here
-  // are not wiped (unlike eleventy.after, which fires in parallel with Vite).
-  eleventyConfig.addPlugin(EleventyVitePlugin, {
-    viteOptions: {
-      appType: "mpa",
-      base: pathPrefix,
-      // Vite's public directory. Everything under it is copied verbatim into _site/
-      // and — critically — root-absolute references to it in HTML are rewritten by
-      // string substitution alone (checkPublicFile short-circuits before any read).
-      //
-      // Without this, vite:build-html calls fs.readFile for every asset referenced in
-      // every page. The shared layout puts the favicon, the banner and 13 partner
-      // logos on all ~1,300 pages, and Vite populates its asset cache only *after*
-      // the read resolves, so the concurrent first wave all misses the cache: tens of
-      // thousands of simultaneous open() calls and a hard EMFILE build failure that
-      // gets worse with every species added. See docs/lessons-learned.md.
-      //
-      // Must stay a project-root-relative "public": eleventy-plugin-vite passthrough-
-      // copies this path (project-relative) into _site/, which it then renames to
-      // .11ty-vite/ and hands to Vite as `root` — and Vite resolves a relative
-      // publicDir against that root. Only a top-level "public" makes both agree.
-      publicDir: "public",
-      server: {
-        hmr: { port: 24679 },
-      },
-      build: {
-        sourcemap: true,
-      },
-      plugins: [{
-        name: "pnwm-copy-images",
-        writeBundle: async () => {
-          await new Promise<void>((res, rej) => execFile("node", ["scripts/copy-images.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
-          await new Promise<void>((res, rej) => execFile("node", ["scripts/emit-species-states.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
-        }
-      }]
-    }
-  });
-
-  // In --serve mode Vite runs as middleware (no build, no writeBundle), so copy on each
-  // Eleventy rebuild instead. Images persist between watch rebuilds since Eleventy doesn't
-  // wipe _site/ on partial rebuilds.
+  // `npm run build:site` runs these as build steps of their own. Under --serve there are
+  // no build steps, so run them after each Eleventy rebuild instead.
   eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode !== "serve") return;
+    // The bundle too. A rebuild by `vite build --watch` rewrites the manifest, which
+    // triggers this Eleventy rebuild, but an incremental rebuild does not redo the
+    // .vite-build/ passthrough, so the pages would name a bundle _site/ does not have.
+    await cp(resolve(VITE_OUT_DIR, "assets"), resolve("_site/assets"), { recursive: true });
     await new Promise<void>((res, rej) => execFile("node", ["scripts/copy-images.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
+    await new Promise<void>((res, rej) => execFile("node", ["scripts/copy-parquet.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     await new Promise<void>((res, rej) => execFile("node", ["scripts/emit-species-states.ts"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));
     if (!existsSync("_site/pagefind")) {
       await new Promise<void>((res, rej) => execFile("./node_modules/.bin/pagefind", ["--site", "_site"], (err, stdout) => { if (stdout) process.stdout.write(stdout); if (err) rej(err); else res(); }));

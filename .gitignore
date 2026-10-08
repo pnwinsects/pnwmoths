@@ -29,3 +29,8 @@ wwu-urls.txt
 .env
 .env.age
 link-report.json
+
+# Client bundle written by `npm run build:vite` (ADR 0049); copied into _site/ by Eleventy.
+.vite-build/
+# Left behind when an eleventy-plugin-vite build died mid-run (before ADR 0049).
+.11ty-vite/

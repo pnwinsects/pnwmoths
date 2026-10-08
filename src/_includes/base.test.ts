@@ -202,3 +202,16 @@ test('base.njk: only the unlinked internal pages set robots', () => {
     'a page started setting `robots:` — that is a crawler directive, so it needs a reason',
   );
 });
+
+test('base.njk: holds no inline module script (one Vite entry per page)', () => {
+  // Every page is built from this layout, and an inline <script type="module"> is a
+  // Vite entry of its own. The header search used to be one: ~1,370 byte-identical
+  // chunks per build, which pushed vite 8.3 past CI's 4 GB heap (#364). Page behaviour
+  // belongs in src/components/, loaded through main.ts.
+  const inline = layout.match(/<script type="module">/g) ?? [];
+  assert.equal(inline.length, 0, 'move the script into src/components/ and import it from main.ts');
+});
+
+test('base.njk: site search gets its pathPrefix-bearing URLs from data attributes', () => {
+  assert.match(layout, /id="site-search" data-pagefind-url="\{\{ '\/pagefind\/pagefind\.js' \| url \}\}" data-base-url="\{\{ '\/' \| url \}\}"/);
+});

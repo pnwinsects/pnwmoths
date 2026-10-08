@@ -1,0 +1,5 @@
+/* The site stylesheet: one Vite entry, so it is content-hashed under /assets/ and
+   cached long-term (ADR 0009, ADR 0049). Order matters: Pico first, the theme over it.
+   Component CSS (Leaflet's, imported by the occurrence map) arrives with main.ts. */
+@import '@picocss/pico/css/pico.min.css';
+@import './theme.css';

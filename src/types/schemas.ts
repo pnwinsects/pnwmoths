@@ -205,7 +205,7 @@ export type KeySpecies = z.infer<typeof KeySpeciesSchema>;
 // Deliberately carries no build timestamp: the artifact is committed, so it must be
 // reproducible or every regeneration diffs and real drift hides in the churn (ADR 0017).
 export const KeyMatrixMetaSchema = z.object({
-  totalKeySpecies:  z.number(),    // 1,228 — all species in key.csv including unmatched
+  totalKeySpecies:  z.number(),    // every row of data/key-scores.csv, including unmatched
   matchedSpecies:   z.number(),    // 1,189 — species resolved to site slugs (in matrix)
   unmatchedSpecies: z.number(),    // 39 = 1,228 − 1,189
 });

@@ -1,6 +1,6 @@
 # 0012. `/identify/` reimplements the Lucid3 key as static client-side data
 
-**Status:** Accepted
+**Status:** Accepted · Amended by [0048](0048-key-scores-one-row-per-species.md) (the scores are now `data/key-scores.csv`, one species per row)
 
 ## Context
 
