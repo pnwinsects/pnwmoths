@@ -1,10 +1,9 @@
 // Copy the advisory reports named in src/_data/curationReports.ts into _site/,
 // so /curation/ links real files (issue #332).
 //
-// Runs after build:eleventy for the same reason build:copy-parquet and
-// build:copy-images do: eleventy-plugin-vite renames _site -> .11ty-vite and builds
-// into a fresh empty _site/, so nothing an Eleventy passthrough copied survives.
-// See docs/lessons-learned.md.
+// A build step of its own, after build:eleventy. It began as a workaround for
+// eleventy-plugin-vite wiping _site/ mid-build, which no longer happens (ADR 0049);
+// it stays a script because the manifest, not a passthrough glob, says what to copy.
 //
 // A missing source is a HARD failure, not an advisory one. The reports themselves are
 // advisory — they report disagreements for a human to judge — but a source file that

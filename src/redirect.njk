@@ -51,7 +51,7 @@ eleventyExcludeFromCollections: true
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
-<body>
+<body data-base-url="{{ '/' | url }}">
   <div class="redirect-box">
     <div class="spinner" id="spinner"></div>
     <h1>Redirecting…</h1>
@@ -61,86 +61,10 @@ eleventyExcludeFromCollections: true
       or <a href="{{ '/search/index.html' | url }}">searching</a>.
     </p>
   </div>
-  <script type="module">
-    /**
-     * PNW Moths redirect handler.
-     *
-     * Accepts: /redirect.html?from=/old/path/on/wwu/site
-     * Maps old pnwmoths.biol.wwu.edu URL patterns to new site URLs.
-     *
-     * The resolution table and algorithm live in src/_lib/legacy-redirects.ts, which
-     * scripts/fetch-analytics.ts imports as well: the nightly CDN-log job replays this
-     * exact resolution over "/redirect.html?from=…" requests so unmatched legacy URLs
-     * show up on /analytics/ as a list of mappings still to be written (#181). Keeping
-     * one implementation is what makes that report trustworthy — a copy pasted in here
-     * would drift and the report would describe a resolver nobody is running.
-     *
-     * _lib is passthrough-copied to _site/_lib, so this relative import resolves during
-     * the Vite MPA build (same arrangement as pnwm-identify -> _lib/key-filter.ts).
-     */
-    import { resolveLegacyPath, REDIRECT_FROM_PARAM } from './_lib/legacy-redirects.ts';
-
-    // pathPrefix-aware base: "/" locally, "/pnwmoths/" on GitHub Pages.
-    // Targets from resolveLegacyPath are site-relative and name index.html explicitly (no
-    // reliance on the host's implicit directory-index resolution); BASE is prepended at
-    // navigation time so every redirect resolves correctly in prod.
-    const BASE = '{{ "/" | url }}';
-
-    // Species slug lookup (src/_data/speciesSlugs.json — hand-maintained alongside
-    // data/species.csv, with src/_data/speciesSlugs.test.ts failing the build on drift:
-    // a species missing here is silently unreachable from every legacy /browse/ link).
-    const SPECIES_SLUGS = new Set({{ speciesSlugs | dump | safe }});
-
-    /**
-     * Log a redirect event for debugging. Misses are *not* beaconed anywhere: the request
-     * for this page already carries ?from= into the Bunny access log, and the nightly
-     * analytics job classifies it there. No endpoint means nothing to keep running.
-     */
-    function logRedirect(fromPath, target, matched) {
-      if (!matched) {
-        console.warn('[pnwmoths-redirect] No exact match:', {
-          ts: new Date().toISOString(),
-          from: fromPath,
-          to: target,
-          matched: matched,
-          referrer: document.referrer || null,
-        });
-      }
-
-      // Google Analytics event (if gtag is loaded)
-      if (typeof gtag === 'function') {
-        gtag('event', 'redirect', {
-          event_category: matched ? 'redirect_matched' : 'redirect_missed',
-          event_label: fromPath,
-          value: matched ? 1 : 0,
-        });
-      }
-    }
-
-    // --- Main ---
-    const params = new URLSearchParams(window.location.search);
-    const fromPath = params.get(REDIRECT_FROM_PARAM);
-
-    if (!fromPath) {
-      // No ?from= parameter — redirect home
-      window.location.replace(BASE + 'index.html');
-    } else {
-      const { target, matched } = resolveLegacyPath(fromPath, SPECIES_SLUGS);
-      logRedirect(fromPath, BASE + target, matched);
-
-      if (!matched) {
-        // Show fallback message briefly before redirecting
-        document.getElementById('spinner').style.display = 'none';
-        document.getElementById('message').textContent =
-          'This page has moved. Redirecting to the best match…';
-        document.getElementById('fallback').style.display = 'block';
-        setTimeout(function () {
-          window.location.replace(BASE + target);
-        }, 3000);
-      } else {
-        window.location.replace(BASE + target);
-      }
-    }
-  </script>
+  {#- The redirect logic is src/components/legacy-redirect.ts, its own Vite entry
+     (ADR 0049). It reads the two values below: the species slugs it resolves
+     against, and the pathPrefix-aware base on <body>. -#}
+  <script type="application/json" id="species-slugs">{{ speciesSlugs | dump | safe }}</script>
+  {% viteEntry "src/components/legacy-redirect.ts" %}
 </body>
 </html>

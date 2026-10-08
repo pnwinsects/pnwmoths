@@ -1,6 +1,6 @@
 # 0003. Eleventy as the static site generator
 
-**Status:** Accepted
+**Status:** Accepted · Amended by [0049](0049-vite-builds-entries-not-pages.md) (Vite no longer runs over the output)
 
 ## Context
 
@@ -26,6 +26,8 @@ interactive components.
 - Integration seams to be aware of: `eleventy-plugin-vite` rewrites the output dir during build,
   so Parquet and image copies run *after* Eleventy via `scripts/copy-images.ts` / a copy-parquet
   step; and asset paths interact with `pathPrefix` (see [0008](0008-deploy-bunny-additive.md)).
+  *(Since [0049](0049-vite-builds-entries-not-pages.md) the plugin is gone: Vite builds its
+  entries separately and never rewrites the output directory.)*
 
 ## Alternatives considered
 

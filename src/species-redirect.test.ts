@@ -1,18 +1,14 @@
 // src/species-redirect.test.ts
 // Regression guard for the retired-species redirect stub template (issues #155/#156).
-// eleventy-plugin-vite's HTML asset scanner treats every <link href> as a copyable
-// asset regardless of `rel` (unlike <meta>, which it only sweeps for a small allow-list
-// of `name`/`property` values). Without `vite-ignore` on the canonical <link>, Vite's
-// html plugin tries to fs.readFile the directory-style "/species/{slug}/" target and
-// throws EISDIR at build time. See src/species-redirect.njk for the full explanation.
+// (It also guarded an EISDIR failure in eleventy-plugin-vite's HTML asset scanner, via a
+// `vite-ignore` attribute on the canonical <link>. Vite no longer reads the HTML, so the
+// attribute and that guard went with the plugin; ADR 0049.)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, mkdtempSync, rmSync, mkdirSync, writeFileSync, realpathSync } from 'node:fs';
-import { resolve, isAbsolute, join } from 'node:path';
-import { tmpdir } from 'node:os';
+import { readFileSync } from 'node:fs';
+import { resolve, isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import Eleventy from '@11ty/eleventy';
-import { build as viteBuild } from 'vite';
 import getSpeciesRedirects from './_data/speciesRedirects.ts';
 
 const templateSource = readFileSync(resolve('src/species-redirect.njk'), 'utf8');
@@ -55,17 +51,6 @@ test('species-redirect.njk: permalink emits /species/{old_slug}/index.html (reti
 test('species-redirect.njk: is excluded from Eleventy collections and uses no layout', () => {
   assert.match(templateSource, /layout:\s*false/);
   assert.match(templateSource, /eleventyExcludeFromCollections:\s*true/);
-});
-
-test('species-redirect.njk: canonical <link> carries vite-ignore (EISDIR regression guard)', () => {
-  const linkTagMatch = templateSource.match(/<link\s+rel="canonical"[^>]*>/);
-  assert.ok(linkTagMatch, 'expected a <link rel="canonical"> tag');
-  assert.match(
-    linkTagMatch![0],
-    /\bvite-ignore\b/,
-    'the canonical <link> must carry vite-ignore or eleventy-plugin-vite will try to ' +
-      'read the directory-style href as a local asset file and throw EISDIR at build time'
-  );
 });
 
 test('species-redirect.njk: is marked noindex (redirect stubs should not be indexed)', () => {
@@ -133,50 +118,5 @@ test('species-redirect.njk: pathPrefix "/pnwmoths/" (GitHub Pages) prefixes ever
       /window\.location\.replace\("\/pnwmoths\/species\//,
       'inline JS fallback must also be prefixed with pathPrefix on GitHub Pages staging',
     );
-  }
-});
-
-test('species-redirect output survives a real Vite MPA build (EISDIR regression test)', async () => {
-  // Reproduces the exact production layout: rendered redirect stubs alongside synthetic
-  // "real species page" directories at each newSlug target (the directory-vs-file
-  // collision that threw EISDIR before the vite-ignore fix). Runs a real vite.build()
-  // and asserts it does not throw.
-  const pages = await renderRedirectPages('/');
-  const expected = getSpeciesRedirects();
-  // realpathSync is required on macOS: os.tmpdir() returns /var/folders/... which is a
-  // symlink to /private/var/folders/.... Vite resolves `root` to the real path, so without
-  // this the emitted asset names come out as long ../../.. traversals and rolldown rejects
-  // them ("must be strings that are neither absolute nor relative paths") before the build
-  // can exercise the EISDIR condition at all — the test errored for an unrelated reason
-  // rather than guarding anything (ISSUE-168). Linux CI has no such indirection.
-  const dir = realpathSync(mkdtempSync(join(tmpdir(), 'pnwm-vite-eisdir-')));
-  try {
-    const input: Record<string, string> = {};
-    for (const page of pages) {
-      const outDir = join(dir, page.url.replace(/^\//, ''));
-      mkdirSync(outDir, { recursive: true });
-      writeFileSync(join(outDir, 'index.html'), page.content);
-      input[page.url.replace(/^\/|\/$/g, '') + '/index'] = join(outDir, 'index.html');
-    }
-    for (const row of expected) {
-      const targetDir = join(dir, 'species', row.newSlug);
-      mkdirSync(targetDir, { recursive: true });
-      writeFileSync(join(targetDir, 'index.html'), `<!DOCTYPE html><html><body>${row.newSlug}</body></html>`);
-    }
-
-    await assert.doesNotReject(
-      () =>
-        viteBuild({
-          root: dir,
-          logLevel: 'silent',
-          build: {
-            write: false,
-            rollupOptions: { input },
-          },
-        }),
-      'Vite build must not throw EISDIR when redirect canonical links point at sibling species output directories',
-    );
-  } finally {
-    rmSync(dir, { recursive: true, force: true });
   }
 });
