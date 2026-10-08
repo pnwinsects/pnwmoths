@@ -10,6 +10,7 @@ import './glossary-tooltip.ts';
 import './pnwm-identify.ts';
 import './key-results-grid.ts';
 import './pnwm-analytics-dashboard.ts';
+import { initSiteSearch } from './site-search.ts';
 import type { FilterChangeDetail } from '../types/index.ts';
 
 // Species-page wiring: forward filter-bar changes to the map and phenology chart.
@@ -27,3 +28,6 @@ if (occurrenceMap || phenologyChart) {
     if (phenologyChart) phenologyChart.filters = detail;
   });
 }
+
+// Header search, on every page. See site-search.ts for why it is not inline in base.njk.
+void initSiteSearch();
