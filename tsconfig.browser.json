@@ -14,7 +14,10 @@
     "verbatimModuleSyntax": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "types": ["vite/client"],
+    // "node" for the component tests (node:test, node:fs). They used to get Node's
+    // types only by accident, through eleventy-plugin-vite's type declaration
+    // importing vite's; that declaration went with the plugin (ADR 0049).
+    "types": ["vite/client", "node"],
     "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "noEmit": true

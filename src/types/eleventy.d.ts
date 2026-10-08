@@ -20,6 +20,8 @@ interface EleventyConfig {
     fn: (this: EleventyTransformContext, content: string) => string
   ): void;
   addGlobalData(name: string, value: unknown): void;
+  addShortcode(name: string, fn: (...args: string[]) => string): void;
+  addWatchTarget(path: string): void;
   addPassthroughCopy(pathOrRecord: string | Record<string, string>, opts?: unknown): void;
   addDataExtension(extension: string, options: DataExtensionOptions): void;
   on(event: string, callback: (data: { runMode: string }) => Promise<void> | void): void;
@@ -29,10 +31,4 @@ declare module '@11ty/eleventy' {
   export class EleventyRenderPlugin {
     configFunction(config: EleventyConfig): void;
   }
-}
-
-declare module '@11ty/eleventy-plugin-vite' {
-  import type { UserConfigExport } from 'vite';
-  const EleventyVitePlugin: (eleventyConfig: EleventyConfig, options?: { viteOptions?: UserConfigExport }) => void;
-  export default EleventyVitePlugin;
 }
