@@ -464,13 +464,13 @@ describe('screenObservation', () => {
   });
 
   it('rejects a point the district gate would accept but the build would reject', () => {
-    // Eastern Montana at lon -105 is inside PNW_BOUNDS (lon -140..-103, sized
-    // to the boundary geometry) but outside the publishing bounds build-data.ts
-    // enforces (lon -139..-110). Importing it would write a row that hard-fails
-    // the very next build.
-    assert.equal(classifyCoordinate(45.0, -105.0), 'ok');
+    // Western North Dakota at lon -103.5 is inside PNW_BOUNDS (lon -140..-103,
+    // sized to the boundary geometry) but outside the publishing bounds
+    // build-data.ts enforces (lon -139..-104). Importing it would write a row
+    // that hard-fails the very next build.
+    assert.equal(classifyCoordinate(45.0, -103.5), 'ok');
     const result = screenObservation(
-      observation({ geojson: { coordinates: [-105.0, 45.0] } }),
+      observation({ geojson: { coordinates: [-103.5, 45.0] } }),
       context(),
     );
     assert.equal(result.ok, false);
