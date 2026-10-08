@@ -33,7 +33,7 @@ If the file is absent, the factsheet renders without a prose section.
 
 ## Build pipeline
 
-Run `npm run build`. It runs ~16 ordered steps: data → Identify key → HTML → content-gating
+Run `npm run build`. It runs ~16 ordered steps: data → Identify key → client bundle (Vite) → HTML → content-gating
 gates → asset/Parquet copies → build-time emitters (species-states/districts/audit) → search
 index → weight/schema checks → link check. The authoritative order lives in
 [`package.json`](../package.json) (`build:site`); [`CONTRIBUTING.md`](../CONTRIBUTING.md) has the

@@ -173,24 +173,32 @@ describe('resolveLegacyPath: reported misses', () => {
 
 describe('redirect.njk wiring', () => {
   const template = readFileSync(resolve('src/redirect.njk'), 'utf8');
+  // The page's logic, a Vite entry of its own since ADR 0049.
+  const script = readFileSync(resolve('src/components/legacy-redirect.ts'), 'utf8');
+
+  test('the page loads the legacy-redirect entry', () => {
+    assert.match(template, /\{% viteEntry "src\/components\/legacy-redirect\.ts" %\}/);
+  });
 
   test('imports the shared resolver instead of carrying its own copy', () => {
     assert.match(
-      template,
-      /import\s*\{[^}]*resolveLegacyPath[^}]*\}\s*from\s*'\.\/_lib\/legacy-redirects\.ts'/,
-      'src/redirect.njk must import src/_lib/legacy-redirects.ts — a second inline copy of the '
+      script,
+      /import\s*\{[^}]*resolveLegacyPath[^}]*\}\s*from\s*'\.\.\/_lib\/legacy-redirects\.ts'/,
+      'src/components/legacy-redirect.ts must import src/_lib/legacy-redirects.ts — a second copy of the '
         + 'resolver would drift from the one scripts/fetch-analytics.ts replays over the CDN logs',
     );
   });
 
   test('no longer defines its own mapping tables', () => {
-    assert.doesNotMatch(template, /const STATIC_MAP\s*=/);
-    assert.doesNotMatch(template, /const SYNONYMS\s*=/);
+    for (const source of [template, script]) {
+      assert.doesNotMatch(source, /const STATIC_MAP\s*=/);
+      assert.doesNotMatch(source, /const SYNONYMS\s*=/);
+    }
   });
 
   test('reads the same ?from= parameter name the analytics job parses', () => {
     assert.equal(REDIRECT_FROM_PARAM, 'from');
-    assert.match(template, /params\.get\(REDIRECT_FROM_PARAM\)/);
+    assert.match(script, /params\.get\(REDIRECT_FROM_PARAM\)/);
   });
 
   test('is served from the path the analytics job looks for', () => {

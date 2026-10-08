@@ -8,6 +8,7 @@
     "build:check-integrity": "node scripts/check-referential-integrity.ts",
     "build:data": "node scripts/build-data.ts",
     "build:key": "node scripts/build-key.ts",
+    "build:vite": "vite build",
     "build:eleventy": "eleventy --config=eleventy.config.ts",
     "build:copy-parquet": "node scripts/copy-parquet.ts",
     "build:copy-key-matrix": "node scripts/copy-key-matrix.ts",
@@ -28,10 +29,10 @@
     "build:records-out-of-bounds": "node scripts/emit-out-of-bounds-records.ts",
     "build:records-district-audit": "node scripts/emit-records-district-audit.ts",
     "build:copy-curation-reports": "node scripts/copy-curation-reports.ts",
-    "build:site": "npm run build:check-integrity && npm run build:check-determinations && npm run build:data && npm run build:key && npm run build:eleventy && npm run build:check-derivatives && npm run build:copy-parquet && npm run build:check-withheld && npm run build:check-unpublished && npm run build:copy-key-matrix && npm run build:check-key-weight && npm run build:check-display-index && npm run build:copy-images && npm run build:species-states && npm run build:species-districts && npm run build:species-audit && npm run build:records-out-of-bounds && npm run build:records-district-audit && npm run build:copy-curation-reports && npm run build:pagefind && npm run build:check-weight && npm run build:check-html && npm run verify:parquet",
+    "build:site": "npm run build:check-integrity && npm run build:check-determinations && npm run build:data && npm run build:key && npm run build:vite && npm run build:eleventy && npm run build:check-derivatives && npm run build:copy-parquet && npm run build:check-withheld && npm run build:check-unpublished && npm run build:copy-key-matrix && npm run build:check-key-weight && npm run build:check-display-index && npm run build:copy-images && npm run build:species-states && npm run build:species-districts && npm run build:species-audit && npm run build:records-out-of-bounds && npm run build:records-district-audit && npm run build:copy-curation-reports && npm run build:pagefind && npm run build:check-weight && npm run build:check-html && npm run verify:parquet",
     "build": "npm run build:site && npm run build:validate-links",
     "build:copy-images": "node scripts/copy-images.ts",
-    "dev": "npm run build:data && eleventy --serve --config=eleventy.config.ts",
+    "dev": "npm run build:data && node scripts/dev.ts",
     "records:assign-ids": "node scripts/assign-record-ids.ts",
     "inat:sync": "node scripts/sync-inat-records.ts",
     "inat:migrate": "node scripts/migrate-inat-records.ts",
@@ -83,7 +84,6 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@11ty/eleventy-plugin-vite": "^8.0.0",
     "@types/leaflet": "^1.9.22",
     "@types/node": "^24.13.5",
     "pagefind": "^1.5.2",

@@ -56,7 +56,7 @@ See [docs/lessons-learned.md](docs/lessons-learned.md) for the full set of build
 
 ```bash
 npm install
-npm run build       # build:data (CSV→DuckDB→Parquet) → eleventy → copy-parquet → pagefind → link check → weight check
+npm run build       # build:data (CSV→DuckDB→Parquet) → vite (JS/CSS entries) → eleventy → copy-parquet → pagefind → link check → weight check
 npm test            # data pipeline + Lit component tests (node --test)
 npm run typecheck   # tsc --noEmit (both tsconfigs)
 npm run smoke:browser  # drives the built _site/ in headless Chrome (run after a build)

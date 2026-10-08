@@ -9,11 +9,7 @@
      site defaults registered in eleventy.config.ts.
 
      Every URL below is ABSOLUTE (`| url` for pathPrefix, then `| absoluteUrl` for
-     the origin). Crawlers require that — and it is also what keeps these tags away
-     from eleventy-plugin-vite's HTML asset scanner, which treats every <link href>
-     and the og:image <meta content> as a copyable local asset but skips external
-     URLs. A root-relative canonical here would repeat the EISDIR failure that
-     src/species-redirect.njk documents. See docs/lessons-learned.md. -#}
+     the origin), because crawlers require it. -#}
   {%- set pageDescription = description or siteDescription -%}
   {#- Alt text has to track the image, not the page: species with no photos on file
      set an empty `socialImage` and fall back to the site card, and would otherwise
@@ -45,17 +41,18 @@
      equivalents are absent, so only the card type needs stating. Bluesky, Slack,
      Discord and Signal all read the Open Graph tags above. -#}
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Assets under public/ (Vite publicDir) are referenced with a plain
-       root-absolute path and NO `| url` filter: Vite rewrites them with `base`,
-       which is the same pathPrefix. Applying `| url` here would both double the
-       prefix source-of-truth and defeat Vite's public-file short-circuit,
-       reintroducing a per-page fs.readFile. Page links below still use `| url`. -->
-  <link rel="icon" href="/favicon.ico" sizes="16x16" type="image/x-icon">
+  {#- Files under public/ are passthrough-copied to the site root and referenced with
+     `| url` like any page link: Vite no longer rewrites the HTML (ADR 0049). -#}
+  <link rel="icon" href="{{ '/favicon.ico' | url }}" sizes="16x16" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600&family=Spinnaker&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/pico.min.css">
-  <link rel="stylesheet" href="/styles/theme.css">
+  {#- The stylesheet and the component bundle are Vite entries, hashed for long-term
+     caching; the shortcode writes their tags from Vite's manifest (ADR 0049). Module
+     scripts are deferred, so loading the bundle here runs it after the page parses,
+     as it did from the end of <body>. -#}
+  {% viteEntry "src/styles/site.css" %}
+  {% viteEntry "src/components/main.ts" %}
 </head>
 <body>
   {#- Bypass block (WCAG 2.4.1): the banner, nine nav links and the search field
@@ -64,7 +61,7 @@
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <div class="banner">
-      <img src="/images/header.png"
+      <img src="{{ '/images/header.png' | url }}"
           alt="Pacific Northwest moths — a row of specimen photographs on black">
       <div class="pnwm-site-name">Pacific Northwest Moths</div>
     </div>
@@ -114,7 +111,7 @@
           {% for partner in partners.collaborators %}
           <li>
             <a href="{{ partner.url }}" title="{{ partner.name }}" target="_blank" rel="noopener">
-              <img src="/images/logos/{{ partner.logo }}" alt="{{ partner.name }}" loading="lazy">
+              <img src="{{ ('/images/logos/' + partner.logo) | url }}" alt="{{ partner.name }}" loading="lazy">
             </a>
           </li>
           {% endfor %}
@@ -126,7 +123,7 @@
           {% for partner in partners.funders %}
           <li>
             <a href="{{ partner.url }}" title="{{ partner.name }}" target="_blank" rel="noopener">
-              <img src="/images/logos/{{ partner.logo }}" alt="{{ partner.name }}" loading="lazy">
+              <img src="{{ ('/images/logos/' + partner.logo) | url }}" alt="{{ partner.name }}" loading="lazy">
             </a>
           </li>
           {% endfor %}
@@ -138,6 +135,5 @@
     <p><a href="{{ '/contact/' | url }}">Contact us</a> · <a href="{{ repoUrl }}">Source code on GitHub</a></p>
     <p>Pacific Northwest Moths. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>.</p>
   </footer>
-  <script type="module" src="/components/main.js"></script>
 </body>
 </html>

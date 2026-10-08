@@ -7,61 +7,49 @@ cost a debugging cycle to discover.
 
 ## Build pipeline: Eleventy + Vite interaction
 
-- **Vite wipes the Eleventy output directory (`_site/`) during its build.** Any file that
-  isn't a Vite entry point (Parquet, CSS, images, JSON data) must be copied in *after*
-  Vite runs, via `scripts/copy-images.js` / the `build:copy-parquet` step — Eleventy
-  passthrough copy alone does not survive. The `emptyOutDir: false` comment in the Vite
-  config is misleading; don't rely on it.
+- **Don't hand a bundler the HTML when the page count grows with the data.** Until
+  [ADR 0049](adr/0049-vite-builds-entries-not-pages.md), eleventy-plugin-vite gave Vite every
+  page as an entry, and per-page work kept finding new ways to scale with the species count:
+  ~20,000 concurrent `open()` calls on shared-layout assets (`EMFILE`, #187), a directory
+  read as a file through a `<link href>` (`EISDIR`, #155), ~1,370 identical chunks from one
+  inline script in the layout, and finally vite 8.3 needing more than CI's 4 GB heap (#364).
+  Each had a local fix (`public/` short-circuits, `vite-ignore`, moving the script); the
+  cause was the arrangement. Now Vite builds three entries (`src/_lib/vite-entries.ts`) and
+  never reads a page, and its build takes ~2 s instead of ~17 s.
 
-- **`| url` filter rule: static assets yes, Vite entry points and `public/` no.** Assets
-  copied in post-Vite (CSS) need `| url` to pick up `pathPrefix`. Assets Vite processes
-  (JS bundle `<script src>` tags) and anything under `public/` must *not* use `| url` —
-  Vite applies `base` (which is `pathPrefix`) to them itself, so the prefix would get
-  applied twice and URLs 404. Same rule bites `fetch()` URLs and `tojson` output
-  (`| safe` also required there).
+- **A step that throws output away can hide a bug in what it threw away.** The plugin
+  renamed `_site/` and rebuilt it, silently discarding every Eleventy passthrough copy —
+  which is why `build:copy-parquet`, `build:copy-images` and friends exist. One discarded
+  copy was `data/parquet` → `species/`, **ungated**: the moment the plugin went, it published
+  occurrence data for 121 withheld species, and `check-withheld` failed the build (#275's
+  leak, re-armed). When you remove a destructive step, re-run every gate before trusting
+  the result; what it was destroying may have been wrong all along.
 
-- **Site-wide images must live in `public/` (Vite's `publicDir`), never be Vite assets.**
-  `vite:build-html` resolves every `<img src>` / `<link href>` in every page through
-  `fileToBuiltUrl`, which does `await fs.readFile(...)` and only *then* populates its
-  asset cache — so a shared layout produces one concurrent read per page per asset, all
-  missing the cache. With ~1,300 species pages and 15 assets in `base.njk` (favicon,
-  banner, 13 partner logos) that is ~20,000 simultaneous `open()` calls: `EMFILE: too
-  many open files`, first on Windows (512-descriptor CRT default) and eventually
-  everywhere, growing with every species added (issue #187). Files under `publicDir` are
-  short-circuited by `checkPublicFile` before any read and rewritten by string
-  substitution, so the cost is zero regardless of page count. Two constraints keep this
-  working: the directory must be top-level `public/` (eleventy-plugin-vite
-  passthrough-copies `publicDir` as a *project-relative* path, while Vite resolves it
-  against `root` = the `.11ty-vite/` copy of the output — only `"public"` satisfies
-  both), and references to it must be plain root-absolute paths with no `| url`.
+- **`| url` on everything a page references; the `viteEntry` tags carry their own prefix.**
+  `public/` files, page links, `fetch()` URLs and `tojson` output (`| safe` there too) all
+  go through `| url` to pick up `pathPrefix`. The tags `{% viteEntry %}` writes already
+  include it (it reads Vite's manifest and prefixes with the same `pathPrefix`), and URLs
+  inside the bundle get it from Vite's `base`. Before ADR 0049 the rule for `public/` was the
+  opposite — Vite rewrote those references itself — so older comments may say otherwise.
 
 - **`pathPrefix` must stay conditional on `process.env.GITHUB_PAGES`.** Never hardcode
   `/pnwmoths/`. Local/production builds serve from `/`; GitHub Pages staging serves from
   a subpath. Any Vite+Eleventy project is prone to double-prefix bugs — add a load test
   against a non-root `pathPrefix` to the smoke check before shipping.
 
-- **Vite's HTML scanner also sweeps `<meta>`, not just `<link>` and `<img>`.** It treats
-  every `<link href>` as a copyable asset regardless of `rel`, and the `content` of a
-  small allow-list of `<meta>` tags — `og:image`, `og:video`, `og:audio`,
-  `twitter:image`, `msapplication-TileImage` — the same way. A root-relative,
-  directory-style value there (`/species/{slug}/`) makes it `fs.readFile` a directory and
-  throw `EISDIR` at build time. Two escapes: an absolute `https://` URL, which
-  `isExternalUrl` skips (what the sharing metadata in `base.njk` relies on), or a
-  `vite-ignore` attribute (what `src/species-redirect.njk` relies on, since its canonical
-  link must stay `pathPrefix`-relative).
-
 - **Serve mode and build mode have different hook sequencing.** `npm run build` passing
   does not guarantee `eleventy --serve` works — build outputs (e.g. emitted JSON) can
   silently drop under serve. Test both explicitly.
 
-- **An inline `<script type="module">` in a page is a Vite entry.** That's the supported
-  way for a standalone page (e.g. `src/redirect.njk`) to import from `src/_lib` — the
-  passthrough copy of `_lib` is what makes the relative import resolve in `_site/`. The
-  cost is one hashed chunk per such page, which is why per-species inline modules are
-  banned in favour of `components/main.ts` (see the comment there). Guard the arrangement
-  with a test that runs a real `vite.build()` over just that page and asserts the imported
-  code lands in the bundle: a broken import leaves a page that renders and does nothing.
-
+- **Page scripts are Vite entries in `VITE_ENTRIES`, loaded with `{% viteEntry %}` — never
+  inline modules.** Vite no longer reads the HTML (ADR 0049), so an inline
+  `<script type="module">` ships verbatim: a bare or `.ts` import inside it fails in the
+  browser, and nothing fails at build time. Behaviour every page needs goes in
+  `src/components/` and is imported by `main.ts`; a page that needs its own script gets its
+  own entry (as `/redirect.html` has `legacy-redirect.ts`), with template values passed in
+  through `data-` attributes or a JSON block. `base.test.ts` fails if the layout regains an
+  inline module, and `src/redirect.test.ts` runs a real `vite build` and asserts the shared
+  resolver lands in the redirect entry.
 - **Nunjucks' `selectattr` is not Jinja's: it takes a test name and arguments and then
   ignores them.** `selectattr('audience', 'equalto', 'curation')` filters on the
   *truthiness* of `audience` alone, so it returns every item that has one — the whole
@@ -151,9 +139,8 @@ cost a debugging cycle to discover.
   before concluding a defect does not reproduce.
 
 - **A compiler option only applies where the bundler can find it.** `tsconfig.browser.json`
-  has an `include` of `src/components/**`, but eleventy-plugin-vite hands Vite a *copy* of
-  the tree (`.11ty-vite/`) as its root, so the files Vite actually compiles are not under
-  that `include`. The nearest `tsconfig.json` to them is the root solution file, so
+  has an `include` of `src/components/**`, but the bundler does not read it: it looks for the
+  nearest file *named* `tsconfig.json`, which for `src/components/` is the root solution file. So
   browser-affecting options must be restated there — otherwise the bundler's own default
   wins, and changes when the bundler does.
 
