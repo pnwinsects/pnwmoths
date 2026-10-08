@@ -28,15 +28,16 @@ export function normalizeBinomial(raw: string): string {
 }
 
 /**
- * Convert a (possibly whitespace-anomalous) binomial to a site slug.
- * e.g. 'Tolype  laricis' → 'tolype-laricis'
+ * Convert a (possibly whitespace-anomalous) binomial to a site slug, by the repo's one
+ * slug rule (normalizeSlug): lowercase, every whitespace run collapsed to a hyphen.
+ * e.g. 'Tolype  laricis' → 'tolype-laricis'; 'Xylophanes nr libya' → 'xylophanes-nr-libya'.
+ *
+ * Every word counts. This used to keep only the first two, so a provisional epithet
+ * resolved to a slug that matches nothing, and a name with a stray third word
+ * ("Aus bus typo") silently resolved to "aus-bus" (#391 review).
  */
 export function binomialToSlug(binomial: string): string {
-  const normalized = normalizeBinomial(binomial);
-  const parts = normalized.split(' ');
-  const genus = parts[0] ?? '';
-  const epithet = parts[1] ?? '';
-  return `${genus.toLowerCase()}-${epithet.toLowerCase()}`;
+  return normalizeSlug(normalizeBinomial(binomial));
 }
 
 /**
@@ -183,8 +184,7 @@ export function buildKeyTemplate(opts: {
   synonymMap: Map<string, string>;
   checklistRank: Map<string, number>;
 }): string {
-  const slugOf = (r: { genus: string; species: string }) =>
-    `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`;
+  const slugOf = (r: { genus: string; species: string }) => normalizeSlug(`${r.genus}-${r.species}`);
   const allSlugs = new Set(opts.species.map(slugOf));
   const scored = new Set(
     opts.keyBinomials.map(b => resolveSlug(b, allSlugs, opts.synonymMap)).filter(s => s !== null)
@@ -349,10 +349,10 @@ export async function main(): Promise<void> {
   // key-matrix.json (ISSUE-48 / ISSUE-80).
   const speciesRows = allSpeciesRows.filter(
     r => !isWithheldOrUnclassified(r.family, withheld) &&
-         !isUnpublished(`${r.genus.toLowerCase()}-${r.species.toLowerCase()}`, unpublished)
+         !isUnpublished(normalizeSlug(`${r.genus}-${r.species}`), unpublished)
   );
   const siteSlugSet = new Set(
-    speciesRows.map(r => `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`)
+    speciesRows.map(r => normalizeSlug(`${r.genus}-${r.species}`))
   );
 
   const synonymRows = parse(
@@ -438,7 +438,7 @@ export async function main(): Promise<void> {
   // (issue #85). The slug is derived separately, so quotes never leak into identity.
   const slugToName = new Map(
     speciesRows.map(r => [
-      `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`,
+      normalizeSlug(`${r.genus}-${r.species}`),
       { genus: r.genus, epithet: formatEpithet(r.species, isEpithetQuoted(r.epithet_quoted)) },
     ])
   );

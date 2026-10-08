@@ -25,6 +25,7 @@ import { pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { parseKeyScores, resolveSlug, normalizeBinomial, KEY_SCORES_NAME_COLUMN } from './build-key.ts';
+import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
 
 export interface MergePlan {
   /** Rows to append, as CSV records (binomial first). */
@@ -60,7 +61,14 @@ export function planMerge(
     );
   }
 
+  // "Already scored" means the SPECIES, not the name. The key still holds retired names
+  // (e.g. "Pheosia rimosa", a synonym of pheosia-californica); a row submitted under the
+  // accepted name would otherwise be appended, and build-key ORs a species' rows
+  // together, quietly changing scores the merge promises never to touch.
   const have = new Set(base.binomials);
+  const haveSlugs = new Set(
+    base.binomials.map(b => resolveSlug(b, siteSlugSet, synonymMap)).filter(s => s !== null)
+  );
   const plan: MergePlan = { append: [], alreadyScored: [], unscored: [], unknown: [] };
   add.binomials.forEach((binomial, i) => {
     const row = add.scores[i]!;
@@ -68,17 +76,28 @@ export function planMerge(
       plan.unscored.push(binomial);
       return;
     }
-    if (have.has(binomial)) {
+    const slug = resolveSlug(binomial, siteSlugSet, synonymMap);
+    if (have.has(binomial) || (slug !== null && haveSlugs.has(slug))) {
       plan.alreadyScored.push(binomial);
       return;
     }
-    if (resolveSlug(binomial, siteSlugSet, synonymMap) === null) {
+    if (slug === null) {
       plan.unknown.push(binomial);
       return;
     }
     plan.append.push([binomial, ...row.map(v => (v ? '1' : ''))]);
   });
   return plan;
+}
+
+/**
+ * What to write before appending to a file with these contents: a newline when the file
+ * does not already end with one. csv-stringify always ends the committed file with a
+ * newline, but an editor that strips the final one would otherwise glue the first
+ * appended name onto the last cell of the last row.
+ */
+export function separatorFor(existing: string): string {
+  return existing.length > 0 && !existing.endsWith('\n') ? '\n' : '';
 }
 
 export function main(argv: string[]): void {
@@ -100,7 +119,7 @@ export function main(argv: string[]): void {
     columns: true,
     skip_empty_lines: true,
   }) as Array<{ genus: string; species: string }>;
-  const siteSlugSet = new Set(species.map(r => `${r.genus.toLowerCase()}-${r.species.toLowerCase()}`));
+  const siteSlugSet = new Set(species.map(r => normalizeSlug(`${r.genus}-${r.species}`)));
   const synonyms = parse(readFileSync(resolve('data/species-synonyms.csv')), {
     columns: true,
     skip_empty_lines: true,
@@ -119,8 +138,10 @@ export function main(argv: string[]): void {
   }
 
   if (plan.append.length > 0) {
-    // The committed file always ends with a newline (csv-stringify writes one per record).
-    appendFileSync(scoresPath, stringify(plan.append, { record_delimiter: '\n' }));
+    appendFileSync(
+      scoresPath,
+      separatorFor(existing.toString('utf8')) + stringify(plan.append, { record_delimiter: '\n' })
+    );
   }
 
   console.log(`key:merge: appended ${plan.append.length} species to data/key-scores.csv`);

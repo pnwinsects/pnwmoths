@@ -54,6 +54,14 @@ describe('binomialToSlug', () => {
   test('converts trailing-space binomial to slug', () => {
     assert.strictEqual(binomialToSlug('Tyta luctuosa '), 'tyta-luctuosa');
   });
+
+  test('keeps every word: a provisional epithet with spaces', () => {
+    assert.strictEqual(binomialToSlug('Xylophanes nr libya'), 'xylophanes-nr-libya');
+  });
+
+  test('keeps every word: a stray third word does not vanish into the first two', () => {
+    assert.strictEqual(binomialToSlug('Aus bus typo'), 'aus-bus-typo');
+  });
 });
 
 describe('resolveSlug', () => {

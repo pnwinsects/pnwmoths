@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { planMerge } from './merge-key-scores.ts';
+import { planMerge, separatorFor } from './merge-key-scores.ts';
 
 const header = 'binomial,Cat:Q:Yes,Cat:Q:No\n';
 const existing = header + 'Aus bus,1,\n';
@@ -51,5 +51,36 @@ describe('planMerge', () => {
   test('accepts the BOM Excel writes on "CSV UTF-8"', () => {
     const plan = planMerge(existing, '﻿' + header + 'Cus dus,1,\n', species, new Map());
     assert.deepStrictEqual(plan.append.map(r => r[0]), ['Cus dus']);
+  });
+
+  test('treats a species the key scores under a retired name as already scored', () => {
+    // The key holds "Oldus dus", a synonym of cus-dus. A row submitted under the
+    // accepted name must not be appended: build-key would OR the two rows together.
+    const keyed = header + 'Aus bus,1,\nOldus dus,,1\n';
+    const plan = planMerge(keyed, header + 'Cus dus,1,\n', species, new Map([['Oldus dus', 'cus-dus']]));
+    assert.deepStrictEqual(plan.alreadyScored, ['Cus dus']);
+    assert.deepStrictEqual(plan.append, []);
+  });
+
+  test('rejects a name with a stray extra word instead of resolving its first two', () => {
+    const plan = planMerge(existing, header + 'Cus dus typo,1,\n', species, new Map());
+    assert.deepStrictEqual(plan.unknown, ['Cus dus typo']);
+  });
+
+  test('accepts a provisional name whose epithet has spaces', () => {
+    const withProvisional = new Set([...species, 'xus-nr-yus']);
+    const plan = planMerge(existing, header + 'Xus nr yus,1,\n', withProvisional, new Map());
+    assert.deepStrictEqual(plan.append.map(r => r[0]), ['Xus nr yus']);
+  });
+});
+
+describe('separatorFor', () => {
+  test('adds a newline when the file does not end with one', () => {
+    assert.equal(separatorFor('binomial,a\nAus bus,1'), '\n');
+  });
+  test('adds nothing when it does, or when the file is empty', () => {
+    assert.equal(separatorFor('binomial,a\nAus bus,1\n'), '');
+    assert.equal(separatorFor('binomial,a\r\nAus bus,1\r\n'), '');
+    assert.equal(separatorFor(''), '');
   });
 });

@@ -44,7 +44,7 @@ npm test
 - **left N already-scored species untouched**: the file had rows for species the key already scores. If they are corrections, apply them to `data/key-scores.csv` by hand on purpose.
 - **Nothing written: N name(s) match no species**: almost always a typo in the name column. Fix the name in the file and rerun. A name that is a real synonym needs a `data/species-synonyms.csv` row first; see [CURATING_SPECIES_SYNONYMS.md](CURATING_SPECIES_SYNONYMS.md).
 
-`npm run build:key` should report one more matched species for each row appended. Commit everything it changed under `data/` in the same change. The staleness test in `scripts/build-key.test.ts` fails if `data/key-matrix.json` or `data/key-template.csv` is out of date.
+`npm run build:key` should report one more matched species for each *published* species appended. Withheld species (the Geometridae) don't raise the count until their family is released, so a merge of withheld rows leaves it unchanged; check the rows in `data/key-scores.csv` instead. Commit everything it changed under `data/` in the same change. The staleness test in `scripts/build-key.test.ts` fails if `data/key-matrix.json` or `data/key-template.csv` is out of date.
 
 Withheld species (the Geometridae) can be merged before they are published. They stay out of Identify until their family is released from `data/withheld-families.csv`.
 
