@@ -72,26 +72,38 @@ linked by a "Browse with Images" anchor, not one page with a toggle.
 
 ## Reference MySQL database (original CMS data)
 
-The original site's CMS data is preserved in a local Docker container named
-`pnwmoths-mysql`, running `mysql:5.6`. This is where the original species
-records and curated external links live, and it is the origin of much of the
-migrated `data/*.csv`.
+The original site's CMS data is preserved in a local Docker container running
+`mysql:5.6`. This is where the original species records and curated external
+links live, and it is the origin of much of the migrated `data/*.csv`.
+
+The container is **`pnwinsects-app-db-1`**, part of the Compose project in the
+`pnwinsects/pnwinsects-app` checkout (branch `docker-local-dev`) — the same
+stack the curator's offline copy of the legacy site runs on
+([ADR 0050](../adr/0050-legacy-site-local-docker.md),
+[`_instructions/RUNNING_THE_LEGACY_SITE.md`](../../_instructions/RUNNING_THE_LEGACY_SITE.md)).
+It exposes port 3307 on the host.
+
+> **This file previously named a container `pnwmoths-mysql`, which does not
+> exist on any current machine.** The scripts below still default to that name,
+> so they fail until `MYSQL_CONTAINER` is set — and three of them hardcode it
+> with no override at all. See [#399](https://github.com/pnwinsects/pnwmoths/issues/399).
 
 This is a **reference / read source only** — it is *not* part of the build and
 *not* declared in [`docker-compose.yml`](../../docker-compose.yml) (that file
-defines only the `dev` build service for the site itself). The container is
-stood up separately and left **stopped by default**. There is no local mysql
-client or driver in the project, so all access goes through `docker exec`.
+defines only the `dev` build service for the site itself). There is no local
+mysql client or driver in the project, so all access goes through `docker exec`.
 
-Bring it up and query it:
+Bring it up and query it, from the `pnwinsects-app` checkout:
 
 ```sh
-docker start pnwmoths-mysql
-docker exec -i pnwmoths-mysql mysql -upnwmoths -ppnwmoths pnwmoths
+docker compose up -d db
+docker exec -i pnwinsects-app-db-1 mysql -upnwmoths -ppnwmoths pnwmoths
 ```
 
 Database, user, and password are all `pnwmoths`. The scripts that read it use
 `mysql --batch` (tab-separated, no header) and decode the escaping in code.
+Point the ones that accept the override at it with
+`MYSQL_CONTAINER=pnwinsects-app-db-1`.
 
 Scripts that consume this container (each writes a committed CSV; re-run only
 when the reference data changes):
