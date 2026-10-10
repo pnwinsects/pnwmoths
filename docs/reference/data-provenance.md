@@ -50,8 +50,9 @@ Two fallbacks, in order:
 
   **This host is on borrowed time.** It is the last running copy of the legacy site,
   on a WWU machine whose sysadmin has been reassigned; WWU intends to retire these
-  records within about a year. Work to preserve it locally is tracked separately —
-  do not assume it will answer.
+  records within about a year. It is preserved as an offline Docker bundle the
+  curator runs locally ([ADR 0052](../adr/0052-legacy-site-local-docker.md)) — do
+  not assume the WWU host will answer.
 
   **But `/media/` is public.** Every specimen photograph the legacy site ever held
   is at `https://dev.pnwmoths.biol.wwu.edu/media/moths/<filename>`, served without
@@ -84,26 +85,42 @@ linked by a "Browse with Images" anchor, not one page with a toggle.
 
 ## Reference MySQL database (original CMS data)
 
-The original site's CMS data is preserved in a local Docker container named
-`pnwmoths-mysql`, running `mysql:5.6`. This is where the original species
-records and curated external links live, and it is the origin of much of the
-migrated `data/*.csv`.
+The original site's CMS data is preserved in a local Docker container running
+`mysql:5.6`. This is where the original species records and curated external
+links live, and it is the origin of much of the migrated `data/*.csv`.
+
+The database is **not a long-lived container** — it exists only while a Compose
+stack from the `pnwinsects/pnwinsects-app` checkout (branch `docker-local-dev`)
+is up, and **Compose names it after the directory it was started in**. From the
+checkout itself that is `pnwinsects-app-db-1`; from the curator's unpacked
+bundle folder it is `pnwmoths-local-site-db-1`. Check with `docker ps` rather
+than assuming either name. It is the same stack the curator's offline copy of
+the legacy site runs on
+([ADR 0052](../adr/0052-legacy-site-local-docker.md),
+[`_instructions/RUNNING_THE_LEGACY_SITE.md`](../../_instructions/RUNNING_THE_LEGACY_SITE.md)),
+and either way it exposes port 3307 on the host.
+
+> **This file previously named a container `pnwmoths-mysql`, which does not
+> exist on any current machine.** The scripts below still default to that name,
+> so they fail until `MYSQL_CONTAINER` is set — and three of them hardcode it
+> with no override at all. See [#399](https://github.com/pnwinsects/pnwmoths/issues/399).
 
 This is a **reference / read source only** — it is *not* part of the build and
 *not* declared in [`docker-compose.yml`](../../docker-compose.yml) (that file
-defines only the `dev` build service for the site itself). The container is
-stood up separately and left **stopped by default**. There is no local mysql
-client or driver in the project, so all access goes through `docker exec`.
+defines only the `dev` build service for the site itself). There is no local
+mysql client or driver in the project, so all access goes through `docker exec`.
 
-Bring it up and query it:
+Bring it up and query it, from the `pnwinsects-app` checkout:
 
 ```sh
-docker start pnwmoths-mysql
-docker exec -i pnwmoths-mysql mysql -upnwmoths -ppnwmoths pnwmoths
+docker compose up -d db
+docker exec -i pnwinsects-app-db-1 mysql -upnwmoths -ppnwmoths pnwmoths
 ```
 
 Database, user, and password are all `pnwmoths`. The scripts that read it use
 `mysql --batch` (tab-separated, no header) and decode the escaping in code.
+Point the ones that accept the override at it with
+`MYSQL_CONTAINER=pnwinsects-app-db-1`.
 
 Scripts that consume this container (each writes a committed CSV; re-run only
 when the reference data changes):
