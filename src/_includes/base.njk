@@ -44,6 +44,10 @@
   {#- Files under public/ are passthrough-copied to the site root and referenced with
      `| url` like any page link: Vite no longer rewrites the HTML (ADR 0049). -#}
   <link rel="icon" href="{{ '/favicon.ico' | url }}" sizes="16x16" type="image/x-icon">
+  {#- iOS/iPadOS home-screen icon. Requested unprompted by Safari whether or not it is
+     declared, which is why it showed up as a steady trickle of 404s in the analytics;
+     declaring it is also what keeps Apple from falling back to a screenshot. -#}
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | url }}" sizes="180x180">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600&family=Spinnaker&display=swap" rel="stylesheet">

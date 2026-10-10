@@ -1,0 +1,23 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+layout: false
+---
+{#- /robots.txt — a template rather than a file in public/, because the Sitemap line
+   must carry an absolute URL and the origin differs between production and the
+   GitHub Pages staging build (SITE_ORIGIN in eleventy.config.ts).
+
+   Until this existed, /robots.txt was the single most-requested URL the site did not
+   serve: 6,222 direct 404s in a 30-day window, plus 5,174 more arriving at the legacy
+   WWU hostname and being swept into the redirect handler, where they crowded the real
+   legacy URLs out of the #181 mapping queue.
+
+   Nothing is disallowed, deliberately. /analytics/ and /curation/ are unlinked
+   internal pages kept out of search by `robots: noindex` in their front matter, and a
+   crawler can only obey a meta tag on a page it is allowed to fetch — disallowing
+   them here would leave them indexable by any crawler that found them some other way.
+-#}
+User-agent: *
+Allow: /
+
+Sitemap: {{ "/sitemap.xml" | url | absoluteUrl }}

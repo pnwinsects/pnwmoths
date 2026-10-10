@@ -212,7 +212,7 @@ describe('aggregate', () => {
 
   it('produces correct schema_version', () => {
     const result = aggregate([], date, from, to);
-    assert.equal(result.schema_version, 3);
+    assert.equal(result.schema_version, 4);
   });
 
   it('counts total requests', () => {
@@ -450,19 +450,19 @@ describe('aggregate: legacy link tracking', () => {
 
   it('reports zero redirect hits when none occurred', () => {
     const result = aggregate([entry()], date, from, to, slugs);
-    assert.deepEqual(result.redirect_hits, { total: 0, matched: 0, missed: 0 });
+    assert.deepEqual(result.redirect_hits, { total: 0, matched: 0, missed: 0, automated: 0 });
     assert.deepEqual(result.redirect_misses, []);
   });
 
   it('counts a resolvable legacy URL as matched and does not report it', () => {
     const result = aggregate([redirectEntry('/browse/acronicta-americana/')], date, from, to, slugs);
-    assert.deepEqual(result.redirect_hits, { total: 1, matched: 1, missed: 0 });
+    assert.deepEqual(result.redirect_hits, { total: 1, matched: 1, missed: 0, automated: 0 });
     assert.deepEqual(result.redirect_misses, []);
   });
 
   it('reports an unresolvable legacy URL as a miss', () => {
     const result = aggregate([redirectEntry('/browse/xestia-unknown/')], date, from, to, slugs);
-    assert.deepEqual(result.redirect_hits, { total: 1, matched: 0, missed: 1 });
+    assert.deepEqual(result.redirect_hits, { total: 1, matched: 0, missed: 1, automated: 0 });
     assert.equal(result.redirect_misses[0]!.from, '/browse/xestia-unknown/');
     assert.equal(result.redirect_misses[0]!.count, 1);
   });
@@ -516,6 +516,61 @@ describe('aggregate: legacy link tracking', () => {
     const result = aggregate(entries, date, from, to, slugs);
     assert.equal(result.redirect_misses.length, 50);
     assert.equal(result.redirect_hits.missed, 80);
+  });
+
+  // --- automated traffic (src/_lib/request-noise.ts) -----------------------
+  // The miss list is capped per day, so filtering downstream would be too late:
+  // noise that reaches this cap evicts real URLs permanently.
+
+  it('keeps automated probes out of the mapping queue but still counts them', () => {
+    const result = aggregate(
+      [
+        redirectEntry('/.env.production'),
+        redirectEntry('/wp-login.php'),
+        redirectEntry('/robots.txt'),
+        redirectEntry('/browse/xestia-unknown/'),
+      ],
+      date, from, to, slugs,
+    );
+    assert.deepEqual(
+      result.redirect_misses.map((m) => m.from),
+      ['/browse/xestia-unknown/'],
+      'only the plausible legacy URL belongs in the work queue',
+    );
+    // The honest totals are untouched: 4 requests arrived and none resolved.
+    assert.equal(result.redirect_hits.total, 4);
+    assert.equal(result.redirect_hits.missed, 4);
+    assert.equal(result.redirect_hits.automated, 3);
+  });
+
+  it('does not let automated traffic evict a real URL from the capped list', () => {
+    // 60 probes plus one genuine legacy URL. Before the filter the probes could
+    // fill all 50 slots and the real one would be dropped and unrecoverable.
+    const probes = Array.from({ length: 60 }, (_, i) => redirectEntry(`/.env.v${i}`));
+    const result = aggregate(
+      [...probes, redirectEntry('/browse/needs-a-mapping/')],
+      date, from, to, slugs,
+    );
+    assert.deepEqual(result.redirect_misses.map((m) => m.from), ['/browse/needs-a-mapping/']);
+    assert.equal(result.redirect_hits.automated, 60);
+  });
+
+  it('excludes scanner 404s but keeps a 404 on a browser default visible', () => {
+    const result = aggregate(
+      [
+        entry({ path: '/.env', statusCode: 404 }),
+        entry({ path: '/wp-login.php', statusCode: 404 }),
+        entry({ path: '/robots.txt', statusCode: 404 }),
+        entry({ path: '/species/typo/', statusCode: 404 }),
+      ],
+      date, from, to, slugs,
+    );
+    assert.deepEqual(
+      result.not_found.map((n) => n.path).sort(),
+      ['/robots.txt', '/species/typo/'],
+      'a 404 on robots.txt is a real gap in what the site serves',
+    );
+    assert.equal(result.not_found_probes, 2);
   });
 
   it('aggregates 404 paths, which never reach the redirect handler at all', () => {

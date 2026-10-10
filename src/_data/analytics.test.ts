@@ -31,7 +31,7 @@ describe('aggregateDays: legacy links (#181)', () => {
       day('2026-06-29', { redirect_hits: { total: 10, matched: 7, missed: 3 } }),
       day('2026-06-28', { redirect_hits: { total: 4, matched: 4, missed: 0 } }),
     ]);
-    assert.deepEqual(result.rolling30.redirect_hits, { total: 14, matched: 11, missed: 3 });
+    assert.deepEqual(result.rolling30.redirect_hits, { total: 14, matched: 11, missed: 3, automated: 0 });
   });
 
   test('merges the same missed URL across days and sorts by total hits', () => {
@@ -86,7 +86,7 @@ describe('aggregateDays: legacy links (#181)', () => {
 
   test('schema_version 2 files (no legacy fields) roll up to empty rather than throwing', () => {
     const result = aggregateDays([day('2026-06-29'), day('2026-06-28')]);
-    assert.deepEqual(result.rolling30.redirect_hits, { total: 0, matched: 0, missed: 0 });
+    assert.deepEqual(result.rolling30.redirect_hits, { total: 0, matched: 0, missed: 0, automated: 0 });
     assert.deepEqual(result.rolling30.top_redirect_misses, []);
     assert.deepEqual(result.rolling30.top_not_found, []);
     // The rest of the rollup is unaffected
@@ -97,6 +97,54 @@ describe('aggregateDays: legacy links (#181)', () => {
     const result = aggregateDays([]);
     assert.deepEqual(result.rolling30.top_redirect_misses, []);
     assert.deepEqual(result.rolling30.top_not_found, []);
+  });
+
+  // Days written before schema_version 4 carry unfiltered misses. Without this the
+  // queue stays full of scanner probes until the whole window has rolled over.
+  test('filters automated traffic out of days stored under the old behaviour', () => {
+    const result = aggregateDays([
+      day('2026-06-29', {
+        redirect_misses: [
+          { from: '/robots.txt/', count: 5174, referrer: null },
+          { from: '/.env.production/', count: 173, referrer: null },
+          { from: '/browse/needs-a-mapping/', count: 4, referrer: null },
+        ],
+      }),
+    ]);
+    assert.deepEqual(
+      result.rolling30.top_redirect_misses.map((m) => m.from),
+      ['/browse/needs-a-mapping/'],
+      'the real URL was outranked 1,000:1 and is the only actionable row',
+    );
+    assert.equal(result.rolling30.redirect_hits.automated, 5347);
+  });
+
+  test('keeps a 404 on a browser default visible but hides scanner probes', () => {
+    const result = aggregateDays([
+      day('2026-06-29', {
+        not_found: [
+          { path: '/robots.txt', count: 6222 },
+          { path: '/wp-login.php', count: 16 },
+          { path: '/species/typo/', count: 2 },
+        ],
+      }),
+    ]);
+    assert.deepEqual(
+      result.rolling30.top_not_found,
+      [{ path: '/robots.txt', count: 6222 }, { path: '/species/typo/', count: 2 }],
+    );
+    assert.equal(result.rolling30.not_found_probes, 16);
+  });
+
+  test('carries a schema_version 4 day\'s own automated count through', () => {
+    const result = aggregateDays([
+      day('2026-06-29', {
+        redirect_hits: { total: 100, matched: 10, missed: 90, automated: 80 },
+        not_found_probes: 7,
+      }),
+    ]);
+    assert.equal(result.rolling30.redirect_hits.automated, 80);
+    assert.equal(result.rolling30.not_found_probes, 7);
   });
 
   test('only the rolling 30-day window contributes to the backlog', () => {

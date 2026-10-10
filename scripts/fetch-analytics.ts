@@ -28,6 +28,7 @@ import {
   REDIRECT_PAGE_PATH,
   REDIRECT_FROM_PARAM,
 } from '../src/_lib/legacy-redirects.ts';
+import { isLegacyMappingCandidate, isNoise404 } from '../src/_lib/request-noise.ts';
 
 // ---------------------------------------------------------------------------
 // Constants & env
@@ -120,11 +121,17 @@ export interface DailyAnalytics {
   status_codes: Array<{ status: number; count: number }>;
   cache_statuses: Array<{ status: string; count: number }>;
   /** Hits on /redirect.html, split by whether a specific target was found (#181). */
-  redirect_hits: { total: number; matched: number; missed: number };
-  /** Legacy URLs that landed on a generic fallback page — the mapping backlog (#181). */
+  redirect_hits: { total: number; matched: number; missed: number; automated: number };
+  /**
+   * Legacy URLs that landed on a generic fallback page — the mapping backlog (#181).
+   * Automated traffic is excluded here but counted in `redirect_hits.automated`;
+   * see src/_lib/request-noise.ts for why.
+   */
   redirect_misses: RedirectMiss[];
   /** Top 404 paths — legacy links that never reached /redirect.html at all (#181). */
   not_found: Array<{ path: string; count: number }>;
+  /** 404s excluded from `not_found` as vulnerability scanning. */
+  not_found_probes: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -388,6 +395,10 @@ export function aggregate(
   let totalBytes = 0;
   let redirectTotal = 0;
   let redirectMatched = 0;
+  // Noise excluded from the two work queues, counted rather than discarded so the
+  // page can say how much traffic it is declining to list (#181).
+  let redirectAutomated = 0;
+  let notFoundProbes = 0;
 
   // Site host for self-referral filtering
   const siteHost = 'moths.pnwinsects.org';
@@ -434,7 +445,14 @@ export function aggregate(
     // 404s — legacy links that never reached the redirect page at all (#181)
     if (entry.statusCode === 404) {
       const cleanPath = stripQueryString(entry.path);
-      notFoundCounts.set(cleanPath, (notFoundCounts.get(cleanPath) ?? 0) + 1);
+      // Scanner probes only. A 404 on /robots.txt or an icon stays listed: that is
+      // a real gap in what the site serves, and is how the missing robots.txt was
+      // found. See src/_lib/request-noise.ts.
+      if (isNoise404(cleanPath)) {
+        notFoundProbes++;
+      } else {
+        notFoundCounts.set(cleanPath, (notFoundCounts.get(cleanPath) ?? 0) + 1);
+      }
     }
 
     // Legacy-URL redirects: replay the browser's own resolution over the log so that
@@ -449,11 +467,19 @@ export function aggregate(
         // Group by normalized path so one legacy page isn't split across every
         // tracking-parameter variant of its URL.
         const key = normalizeLegacyPath(fromPath);
-        missCounts.set(key, (missCounts.get(key) ?? 0) + 1);
-        if (domain) {
-          const perMiss = missReferrers.get(key) ?? new Map<string, number>();
-          perMiss.set(domain, (perMiss.get(domain) ?? 0) + 1);
-          missReferrers.set(key, perMiss);
+        // Admission test runs BEFORE the top-N truncation below. Filtering later
+        // would be too late: the cap is per day, and in the 30 days to 2026-10-09
+        // automated traffic filled every visible slot, so a real legacy URL was
+        // discarded here and could never be recovered downstream.
+        if (!isLegacyMappingCandidate(key)) {
+          redirectAutomated++;
+        } else {
+          missCounts.set(key, (missCounts.get(key) ?? 0) + 1);
+          if (domain) {
+            const perMiss = missReferrers.get(key) ?? new Map<string, number>();
+            perMiss.set(domain, (perMiss.get(domain) ?? 0) + 1);
+            missReferrers.set(key, perMiss);
+          }
         }
       }
     }
@@ -465,7 +491,7 @@ export function aggregate(
       .slice(0, limit);
 
   return {
-    schema_version: 3,
+    schema_version: 4,
     date,
     generated_at: new Date().toISOString(),
     source_window: { from: `${date}T00:00:00Z`, to: `${date}T23:59:59.999Z` },
@@ -485,6 +511,7 @@ export function aggregate(
       total: redirectTotal,
       matched: redirectMatched,
       missed: redirectTotal - redirectMatched,
+      automated: redirectAutomated,
     },
     redirect_misses: sortedTop(missCounts, TOP_REDIRECT_MISSES).map(([from, count]) => ({
       from: from as string,
@@ -492,6 +519,7 @@ export function aggregate(
       referrer: topKey(missReferrers.get(from as string)),
     })),
     not_found: sortedTop(notFoundCounts, TOP_NOT_FOUND).map(([path, count]) => ({ path: path as string, count })),
+    not_found_probes: notFoundProbes,
   };
 }
 
