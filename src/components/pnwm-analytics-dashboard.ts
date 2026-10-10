@@ -23,7 +23,7 @@ Chart.register(
 
 interface DayEntry { path: string; count: number }
 interface RedirectMiss { from: string; count: number; referrer: string | null }
-interface RedirectHits { total: number; matched: number; missed: number }
+interface RedirectHits { total: number; matched: number; missed: number; automated?: number }
 interface DaySummary {
   date: string;
   total_requests: number;
@@ -57,6 +57,7 @@ interface AnalyticsData {
     redirect_hits?: RedirectHits;
     top_redirect_misses?: RedirectMiss[];
     top_not_found?: DayEntry[];
+    not_found_probes?: number;
   };
 }
 
@@ -318,6 +319,11 @@ class PnwmAnalyticsDashboard extends LitElement {
     const misses = rolling?.top_redirect_misses ?? [];
     const notFound = rolling?.top_not_found ?? [];
     const hits = rolling?.redirect_hits ?? { total: 0, matched: 0, missed: 0 };
+    // Disclosed rather than silently subtracted: `missed` stays the honest count of
+    // requests, so the headline number and the shorter table have to be reconciled
+    // in the copy. See src/_lib/request-noise.ts.
+    const automated = hits.automated ?? 0;
+    const probes404 = rolling?.not_found_probes ?? 0;
 
     if (misses.length === 0 && notFound.length === 0) return html``;
 
@@ -327,7 +333,8 @@ class PnwmAnalyticsDashboard extends LitElement {
           <h3>Unmapped Legacy Links (Last 30 Days)</h3>
           <p class="card-note">
             ${hits.missed.toLocaleString()} of ${hits.total.toLocaleString()} old-site links
-            found no specific page and fell back to Browse or the home page.
+            found no specific page and fell back to Browse or the home page.${automated > 0 ? html`
+            ${automated.toLocaleString()} of those were automated scans and are not listed.` : ''}
           </p>
           <table>
             <thead><tr><th>Old URL</th><th>Linked from</th><th>Hits</th></tr></thead>
@@ -346,7 +353,8 @@ class PnwmAnalyticsDashboard extends LitElement {
       ${notFound.length > 0 ? html`
         <div class="chart-card">
           <h3>Top 404s (Last 30 Days)</h3>
-          <p class="card-note">Requested paths that do not exist and never reached the redirect handler.</p>
+          <p class="card-note">Requested paths that do not exist and never reached the redirect handler.${probes404 > 0 ? html`
+            A further ${probes404.toLocaleString()} were vulnerability scans and are not listed.` : ''}</p>
           <table>
             <thead><tr><th>Path</th><th>Hits</th></tr></thead>
             <tbody>

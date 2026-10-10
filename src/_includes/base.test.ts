@@ -10,7 +10,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, relative } from 'node:path';
 
 const layout = readFileSync(resolve('src/_includes/base.njk'), 'utf8');
 const speciesTemplate = readFileSync(resolve('src/species/species.njk'), 'utf8');
@@ -173,7 +173,11 @@ test('every page rendered through base.njk supplies its own description', () => 
       const source = readFileSync(path, 'utf8');
       return source.includes('layout: base.njk') && !/^\s*description:/m.test(source);
     })
-    .map((path) => path.replace(`${resolve('.')}/`, ''));
+    // `relative`, not a string replace: on Windows the paths come back with
+    // backslashes and no prefix matches, so the guard reported absolute paths and
+    // failed wholesale for Windows contributors while staying green on CI — the
+    // same trap already documented in scripts/test-registration.test.ts.
+    .map((path) => relative(resolve('.'), path).replaceAll('\\', '/'));
   assert.deepEqual(
     missing,
     [],
@@ -195,10 +199,11 @@ test('base.njk: emits a robots meta only for pages that ask for one', () => {
 test('base.njk: only the unlinked internal pages set robots', () => {
   const setters = pageTemplates(resolve('src'))
     .filter((path) => /^\s*robots:/m.test(readFileSync(path, 'utf8')))
-    .map((path) => path.replace(`${resolve('.')}/`, ''));
+    .map((path) => relative(resolve('.'), path).replaceAll('\\', '/'))
+    .sort();
   assert.deepEqual(
     setters,
-    ['src/curation/index.njk'],
+    ['src/analytics/index.njk', 'src/curation/index.njk'],
     'a page started setting `robots:` — that is a crawler directive, so it needs a reason',
   );
 });
