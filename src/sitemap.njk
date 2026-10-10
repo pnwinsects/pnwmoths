@@ -1,0 +1,24 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+layout: false
+---
+{#- /sitemap.xml — referenced from /robots.txt.
+
+   collections.all is exactly the right set without any filtering here, and that is
+   not an accident: every page that must not be indexed already carries
+   `eleventyExcludeFromCollections: true` — /analytics/, /curation/, /redirect.html,
+   and the species-slug redirect stubs. If a new unlisted page is ever added without
+   that flag it will appear here, which is what sitemap.test.ts guards.
+
+   No <lastmod>: the site is rebuilt nightly from CSVs, so a build timestamp would
+   tell crawlers every one of the ~1,300 pages changed every day, which is both false
+   and a reason for them to stop trusting the field. Omitting it is better than
+   filling it with noise.
+-#}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for item in collections.all %}
+  <url><loc>{{ item.url | url | absoluteUrl }}</loc></url>
+{%- endfor %}
+</urlset>

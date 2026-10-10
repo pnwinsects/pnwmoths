@@ -1,4 +1,4 @@
-# 0050. The retired legacy site is kept as a read-only Docker bundle the curator runs locally
+# 0052. The retired legacy site is kept as a read-only Docker bundle the curator runs locally
 
 **Status:** Accepted · Refs [pnwinsects/pnwinsects-app@`docker-local-dev`](https://github.com/pnwinsects/pnwinsects-app/tree/docker-local-dev)
 

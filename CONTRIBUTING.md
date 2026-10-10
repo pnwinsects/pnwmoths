@@ -55,11 +55,16 @@ Tests cover the data pipeline (`scripts/build-data.test.ts`) and Lit components 
 
 ## CI
 
-Three workflows run on GitHub Actions:
+Workflows on GitHub Actions:
 
 - **`production.yml`** — on push to `main`, builds the site at root `/` and uploads `_site` additively to the Bunny Storage Zone (production, <https://moths.pnwinsects.org/>)
 - **`staging.yml`** — manual (`workflow_dispatch`) GitHub Pages staging deploy, builds under `/pnwmoths/`
 - **`pr-check.yml`** — full build + link check on pull requests
+- **`analytics.yml`** — nightly (08:00 UTC), pulls the Bunny logs that feed `/analytics/`
+- **`link-rot.yml`** — weekly, checks external links and keeps one tracking issue ([ADR 0028](docs/adr/0028-link-rot-reporting.md))
+- **`legacy-hostnames.yml`** — daily, checks that the retired `biol.wwu.edu` hostnames still redirect here, and keeps one tracking issue ([ADR 0050](docs/adr/0050-legacy-wwu-hostnames.md))
+
+The last three run on a schedule rather than on pull requests on purpose: each depends on an external service, and an outage there must not turn a contributor's PR red.
 
 **Required secret:** the production deploy needs the repository secret `BUNNY_STORAGE_PASSWORD` (the Bunny `pnwmoths` Storage Zone password), set at GitHub → Settings → Secrets and variables → Actions. Until it exists, the upload step fails (the rest of CI still runs).
 

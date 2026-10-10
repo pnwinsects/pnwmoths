@@ -11,7 +11,7 @@ second is how you assemble or refresh the bundle he receives.
 the rule that the published site has no server and no database
 ([ADR 0001](../docs/adr/0001-static-no-server.md)). Nothing here is reachable from the internet.
 
-Background and rationale: [ADR 0050](../docs/adr/0050-legacy-site-local-docker.md).
+Background and rationale: [ADR 0052](../docs/adr/0052-legacy-site-local-docker.md).
 
 ## What This Changes
 

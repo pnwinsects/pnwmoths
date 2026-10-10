@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { HyperLogLog } from '../../scripts/lib/hyperloglog.ts';
+import { isLegacyMappingCandidate, isNoise404 } from '../_lib/request-noise.ts';
 import * as z from 'zod/mini';
 
 const ANALYTICS_DIR = resolve('data/analytics');
@@ -21,6 +22,13 @@ interface RedirectHits {
   total: number;
   matched: number;
   missed: number;
+  /**
+   * Misses excluded from the work queue as automated traffic (#181).
+   *
+   * Reported rather than dropped: `missed` stays the honest count of requests that
+   * resolved to nothing, and this says how much of it a maintainer can ignore.
+   */
+  automated: number;
 }
 
 /**
@@ -44,6 +52,8 @@ interface DaySummary {
   redirect_hits: RedirectHits;
   redirect_misses: RedirectMiss[];
   not_found: DayEntry[];
+  /** 404s excluded from `not_found` as vulnerability scanning (#181). */
+  not_found_probes: number;
 }
 
 export interface AnalyticsData {
@@ -72,6 +82,8 @@ export interface AnalyticsData {
     top_redirect_misses: RedirectMiss[];
     /** Most-requested missing paths over the window (#181). */
     top_not_found: DayEntry[];
+    /** 404s excluded from `top_not_found` as vulnerability scanning (#181). */
+    not_found_probes: number;
   };
 }
 
@@ -158,12 +170,18 @@ export const RawDaySchema = z.object({
   countries: z.array(z.object({ code: z.string(), count: z.number() })),
   status_codes: z.array(z.object({ status: z.number(), count: z.number() })),
   redirect_hits: z.optional(
-    z.object({ total: z.number(), matched: z.number(), missed: z.number() }),
+    z.object({
+      total: z.number(),
+      matched: z.number(),
+      missed: z.number(),
+      automated: z.optional(z.number()),
+    }),
   ),
   redirect_misses: z.optional(
     z.array(z.object({ from: z.string(), count: z.number(), referrer: z.nullable(z.string()) })),
   ),
   not_found: z.optional(z.array(DayEntrySchema)),
+  not_found_probes: z.optional(z.number()),
 });
 
 export type RawDay = z.infer<typeof RawDaySchema>;
@@ -187,9 +205,15 @@ export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
       status_codes: raw.status_codes,
       // schema_version < 3 files predate legacy-link tracking (#181) — treat as empty
       // rather than crashing the build on the analytics archive already on Bunny.
-      redirect_hits: raw.redirect_hits ?? { total: 0, matched: 0, missed: 0 },
+      redirect_hits: {
+        ...(raw.redirect_hits ?? { total: 0, matched: 0, missed: 0 }),
+        // schema_version < 4 files carry unfiltered misses and no count of their own;
+        // the rolling loop filters them and adds what it removes to this.
+        automated: raw.redirect_hits?.automated ?? 0,
+      },
       redirect_misses: raw.redirect_misses ?? [],
       not_found: raw.not_found ?? [],
+      not_found_probes: raw.not_found_probes ?? 0,
     };
   });
 
@@ -222,7 +246,8 @@ export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
   let totalPvs = 0;
   let totalVisitors = 0;
   let totalBytes = 0;
-  const redirectHits: RedirectHits = { total: 0, matched: 0, missed: 0 };
+  const redirectHits: RedirectHits = { total: 0, matched: 0, missed: 0, automated: 0 };
+  let notFoundProbes = 0;
 
   for (const day of recent) {
     totalReqs += day.total_requests;
@@ -244,13 +269,27 @@ export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
     redirectHits.total += day.redirect_hits.total;
     redirectHits.matched += day.redirect_hits.matched;
     redirectHits.missed += day.redirect_hits.missed;
+    redirectHits.automated += day.redirect_hits.automated;
     for (const miss of day.redirect_misses) {
+      // Filtered here as well as in fetch-analytics.ts, for the days already stored
+      // under the old behaviour: without this the queue stays full of `.env` probes
+      // until the whole 30-day window has rolled over. For a schema_version 4 day
+      // this removes nothing, because nothing noisy was written.
+      if (!isLegacyMappingCandidate(miss.from)) {
+        redirectHits.automated += miss.count;
+        continue;
+      }
       missCounts.set(miss.from, (missCounts.get(miss.from) ?? 0) + miss.count);
       // Keep the first referrer seen (days are newest-first) purely as a hint about
       // who is still linking the dead URL.
       if (miss.referrer && !missReferrers.get(miss.from)) missReferrers.set(miss.from, miss.referrer);
     }
+    notFoundProbes += day.not_found_probes;
     for (const nf of day.not_found) {
+      if (isNoise404(nf.path)) {
+        notFoundProbes += nf.count;
+        continue;
+      }
       notFoundCounts.set(nf.path, (notFoundCounts.get(nf.path) ?? 0) + nf.count);
     }
   }
@@ -308,6 +347,7 @@ export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
         referrer: missReferrers.get(from as string) ?? null,
       })),
       top_not_found: topN(notFoundCounts, 25).map(([path, count]) => ({ path: path as string, count })),
+      not_found_probes: notFoundProbes,
     },
   };
 }
@@ -332,9 +372,10 @@ function emptyData(): AnalyticsData {
       top_referrers: [],
       top_countries: [],
       requests_by_hour: new Array(24).fill(0),
-      redirect_hits: { total: 0, matched: 0, missed: 0 },
+      redirect_hits: { total: 0, matched: 0, missed: 0, automated: 0 },
       top_redirect_misses: [],
       top_not_found: [],
+      not_found_probes: 0,
     },
   };
 }

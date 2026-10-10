@@ -21,11 +21,15 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 /** Every `*.test.ts` under the directories `npm test` draws from. */
 function testFilesOnDisk(): string[] {
   const found: string[] = [];
+  // Paths are normalised to forward slashes: `relative()` yields `scripts\a.test.ts`
+  // on Windows, which matches no forward-slash pattern, so every entry read as
+  // stale and the guard failed wholesale for Windows contributors while staying
+  // green on CI.
   const walk = (dir: string): void => {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const full = join(dir, entry.name);
       if (entry.isDirectory()) walk(full);
-      else if (entry.name.endsWith('.test.ts')) found.push(relative(ROOT, full));
+      else if (entry.name.endsWith('.test.ts')) found.push(relative(ROOT, full).replaceAll('\\', '/'));
     }
   };
   walk(join(ROOT, 'scripts'));

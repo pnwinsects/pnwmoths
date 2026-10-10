@@ -1,6 +1,7 @@
 # 0019. Legacy-link telemetry is derived from CDN access logs, not a client beacon
 
-**Status:** Accepted
+**Status:** Accepted · Extended by [ADR 0051](0051-denoising-legacy-link-queue.md)
+(automated traffic is filtered out of the queue; daily files are now `schema_version: 4`)
 
 ## Context
 
