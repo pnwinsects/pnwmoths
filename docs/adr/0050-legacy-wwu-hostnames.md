@@ -74,6 +74,17 @@ only assertion in the repo that fails when the front door is bricked up. It is n
 `npm run build`, which stays offline and hermetic; it sits with `deploy:smoke` and
 `verify:cdn-cutover`.
 
+It runs daily from [`.github/workflows/legacy-hostnames.yml`](../../.github/workflows/legacy-hostnames.yml),
+which opens (or comments on) a tracking issue when it fails and closes it when service
+returns. A scheduled job is the only form that works here: what it guards is not in the repo,
+so a check that ran only on our commits could not have caught this outage — it was caused by a
+third party retiring a DNS record. It is deliberately kept out of `pr-check.yml` for the same
+reason as the link-rot check: a CDN misconfiguration is not something a contributor caused or
+can fix, so it must never turn a PR red. The job needs no `npm ci` and no build, because the
+script imports only Node builtins — so it still reports when the install or the build is
+broken, which is when a regression is easiest to miss. Three attempts with a pause between
+them keep a single transient network failure on the runner from filing an issue.
+
 ## Consequences
 
 - **Legacy deep links work again**, through the existing resolver, with no change to

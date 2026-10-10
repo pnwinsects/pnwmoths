@@ -1,0 +1,114 @@
+name: Legacy hostname check
+# Daily check that the retired biol.wwu.edu hostnames still redirect into this
+# site. See docs/adr/0050-legacy-wwu-hostnames.md.
+#
+# Why this runs on a schedule rather than on push: what it guards is not in the
+# repo. The hostnames and edge rules live in the Bunny dashboard and can be
+# changed, or silently expire, with no commit to review. A check that only ran
+# on our commits would not have caught the outage it exists to prevent — that
+# one was caused by a third party retiring a DNS record.
+#
+# Why daily: the failure is total (every inbound legacy link dies) and
+# invisible from inside the site. The /analytics/ unmapped-legacy-links queue
+# is derived from requests that ARRIVE, so when the hostnames refuse every
+# request the queue reads empty — identical to "everything resolves". There is
+# no other signal. Ten HTTP requests a day is a cheap way to keep that from
+# going unnoticed for months.
+#
+# Deliberately NOT part of pr-check.yml, for the same reason as the link-rot
+# check (#261, #263): CDN configuration is not something a contributor caused
+# or can fix, so it must never turn a PR red.
+on:
+  schedule:
+    # 11:00 UTC = 3/4 AM Pacific — after the nightly analytics run, so a
+    # failure here lands beside the data it would explain.
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: legacy-hostnames
+  cancel-in-progress: false
+
+env:
+  ISSUE_TITLE: 'Legacy WWU hostnames are not redirecting'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false # no git push here; keep token out of .git/config
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+      # No `npm ci` and no build: the check imports only Node builtins and
+      # talks to the public internet. Keeping it dependency-free means it still
+      # runs when the install or the build is broken — which is exactly when a
+      # regression is most likely to be missed.
+
+      - name: Check legacy hostname redirects
+        id: check
+        run: |
+          set -o pipefail
+          # Three attempts: a single transient failure from a runner's network
+          # must not open an issue claiming the site's inbound links are dead.
+          # Only a repeated failure is evidence of a real problem.
+          for attempt in 1 2 3; do
+            if node scripts/check-legacy-hostnames.ts 2>&1 | tee probe-output.txt; then
+              exit 0
+            fi
+            echo "attempt $attempt failed; retrying in 30s"
+            sleep 30
+          done
+          exit 1
+
+      - name: Open or update the tracking issue
+        # Scoped to the check's own outcome: if setup failed, the probes never
+        # ran, and an issue claiming the hostnames are down would be a lie.
+        if: failure() && steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ADR_URL: ${{ github.server_url }}/${{ github.repository }}/blob/main/docs/adr/0050-legacy-wwu-hostnames.md
+        run: |
+          output=$(cat probe-output.txt 2>/dev/null || echo '(no probe output captured — the check did not run)')
+          # Built with printf rather than a heredoc: a heredoc inside a YAML
+          # block scalar carries the block's indentation into every line, which
+          # markdown then renders as one big code block.
+          {
+            printf '%s\n\n' 'The daily legacy hostname check failed three times in a row, so inbound links from the retired `biol.wwu.edu` names are most likely broken for real visitors.'
+            printf '%s\n\n' '**This will not show up anywhere else.** The `/analytics/` unmapped-legacy-links queue only sees requests that arrive; when a hostname refuses every request the queue reads empty, which looks exactly like "every legacy link resolves".'
+            printf '```\n%s\n```\n\n' "$output"
+            printf 'Fix: Bunny dashboard → Pull Zone `pnwmoths` → Hostnames and Edge Rules. The expected configuration is recorded in [ADR 0050](%s).\n\n' "$ADR_URL"
+            printf '%s\n\n' 'Reproduce locally with `npm run verify:legacy-hostnames`.'
+            printf '[Workflow run](%s)\n' "$RUN_URL"
+          } > issue-body.md
+          existing=$(gh issue list --state open --limit 200 --json number,title \
+            --jq "[.[] | select(.title == \"${ISSUE_TITLE}\") | .number] | .[0] // empty")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file issue-body.md
+            echo "commented on existing issue #$existing"
+          else
+            gh issue create --title "${ISSUE_TITLE}" --body-file issue-body.md
+          fi
+
+      - name: Close the tracking issue when the check passes
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          # Only reached when the check genuinely ran and passed. A malfunction
+          # fails the step above and never gets here, so this cannot render a
+          # broken check as good news (ADR 0028).
+          existing=$(gh issue list --state open --limit 200 --json number,title \
+            --jq "[.[] | select(.title == \"${ISSUE_TITLE}\") | .number] | .[0] // empty")
+          if [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "All legacy hostnames redirect correctly again. [Workflow run](${RUN_URL})"
+            echo "closed issue #$existing"
+          fi
