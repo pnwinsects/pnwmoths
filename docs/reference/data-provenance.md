@@ -89,12 +89,16 @@ The original site's CMS data is preserved in a local Docker container running
 `mysql:5.6`. This is where the original species records and curated external
 links live, and it is the origin of much of the migrated `data/*.csv`.
 
-The container is **`pnwinsects-app-db-1`**, part of the Compose project in the
-`pnwinsects/pnwinsects-app` checkout (branch `docker-local-dev`) — the same
-stack the curator's offline copy of the legacy site runs on
+The database is **not a long-lived container** — it exists only while a Compose
+stack from the `pnwinsects/pnwinsects-app` checkout (branch `docker-local-dev`)
+is up, and **Compose names it after the directory it was started in**. From the
+checkout itself that is `pnwinsects-app-db-1`; from the curator's unpacked
+bundle folder it is `pnwmoths-local-site-db-1`. Check with `docker ps` rather
+than assuming either name. It is the same stack the curator's offline copy of
+the legacy site runs on
 ([ADR 0052](../adr/0052-legacy-site-local-docker.md),
-[`_instructions/RUNNING_THE_LEGACY_SITE.md`](../../_instructions/RUNNING_THE_LEGACY_SITE.md)).
-It exposes port 3307 on the host.
+[`_instructions/RUNNING_THE_LEGACY_SITE.md`](../../_instructions/RUNNING_THE_LEGACY_SITE.md)),
+and either way it exposes port 3307 on the host.
 
 > **This file previously named a container `pnwmoths-mysql`, which does not
 > exist on any current machine.** The scripts below still default to that name,

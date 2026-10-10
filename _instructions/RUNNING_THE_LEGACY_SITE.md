@@ -37,11 +37,17 @@ Background and rationale: [ADR 0052](../docs/adr/0052-legacy-site-local-docker.m
 
 These are the only instructions he needs, and they ship inside the bundle as `READ ME FIRST.txt`:
 
-1. Install Docker Desktop and open it. Wait for the whale icon to settle.
-2. Double-click **Start PNW Moths**. The first run takes up to fifteen minutes because the
-   database is being loaded; after that, under a minute.
-3. Sign in when the browser opens — user name `merrill`, password `pnwmoths`.
-4. Double-click **Stop PNW Moths** when finished.
+1. Unzip the download first, and work only in the folder that appears. Double-clicking
+   **inside** the zip extracts that one file to a temp folder and leaves the site behind;
+   both launchers detect that and say so rather than failing obscurely.
+2. Install Docker Desktop and open it. Wait for the whale icon to settle.
+3. Double-click **Start PNW Moths**. Windows may ask once whether to run a file that came
+   from the internet — "Run", or "More info" → "Run anyway". Measured on a reasonably quick
+   machine, the first run takes about two minutes (allow longer on a slow one, since the
+   whole database is imported); afterwards it comes up in about twelve seconds.
+4. Sign in when the browser opens — user name `merrill`, password `pnwmoths`.
+5. Double-click **Stop PNW Moths** when finished. It takes about ten seconds and deletes
+   nothing.
 
 The site is at `http://localhost:8000`, and the record browser at
 `http://localhost:8000/admin/species/speciesrecord/`.
@@ -98,14 +104,24 @@ If overrides seem to have no effect, rebuild before debugging the Python: a stal
 twice served old code through an apparently successful build. The container logs a
 `[local_overrides]` line at startup listing the admins it patched. No line, no overrides.
 
+The launcher's readiness check is a plain `GET /`, and that is deliberately enough: with the
+database stopped the same request returns 500, not 200, so a 200 proves the import has finished
+and the app can reach MySQL. Do not "improve" it into a check that bypasses the database.
+
 ## If It Goes Wrong
 
 - **"Docker Desktop does not seem to be running."** It isn't. Open it, wait for the whale.
 - **The browser shows a sign-in page.** Expected. See step 1.
 - **A factsheet 500s** with `IOError` on a file under `cache/`. The media tree is incomplete;
   re-copy it including `moths/cache`.
-- **The first start times out.** The database import is slower on some machines. Stop, start
-  again; the import resumes from where MySQL left off or re-runs cleanly.
+- **The first start times out.** The import is slower on some machines, so first try stopping and
+  starting again. If it still times out, the database volume holds a half-finished import, and
+  MySQL only runs its import script against an *empty* data directory — so starting again cannot
+  fix it on its own. Clear it and start over, from the bundle folder:
+
+  ```bash
+  docker compose -f docker-compose.offline.yml down -v
+  ```
 
 ## Notes
 
@@ -114,4 +130,6 @@ twice served old code through an apparently successful build. The container logs
   of the live dev database is the one thing only he can provide.
 - The reference database container is also what several extraction scripts in this repository
   talk to; see [`docs/reference/data-provenance.md`](../docs/reference/data-provenance.md) for
-  the container name and port.
+  the container name and port. Compose names the containers after the directory it is run in, so
+  the same database is `pnwinsects-app-db-1` from the app checkout and `pnwmoths-local-site-db-1`
+  from the curator's unpacked bundle. Check `docker ps` rather than assuming a name.
