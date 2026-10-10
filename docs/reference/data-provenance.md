@@ -11,15 +11,18 @@ Domain terms (slug, NOC ID, subfamily, key matrix, …) are defined in
 
 ## Original site (source of truth for legacy content)
 
-The canonical legacy site is <https://pnwmoths.biol.wwu.edu/>. It is the source
+The canonical legacy site **was** <https://pnwmoths.biol.wwu.edu/> — the source
 of truth for legacy copy/content (species prose, captions, credits) and for the
 browse taxonomy. When you need to confirm what the old site actually said or how
-it grouped taxa, this is the authority.
+it grouped taxa, that is still the authority, but **it is no longer reachable at
+that address**; see the fallbacks below and use `curl` against whichever of them
+still answers.
 
-Fetch it with `curl` from a local machine, **not** a fetch/preview/browser tool:
+Fetch legacy HTML with `curl` from a local machine, **not** a fetch/preview/browser
+tool:
 
 ```sh
-curl -s https://pnwmoths.biol.wwu.edu/ | less
+curl -s https://dev.pnwmoths.biol.wwu.edu/ | less
 ```
 
 Two reasons:
@@ -32,14 +35,23 @@ Two reasons:
 
 Use `curl` whenever you need verbatim legacy text.
 
-**As of 2026-08 the legacy host 301s to the new site** (`/browse-all/` →
-`moths.pnwinsects.org/redirect.html?from=/browse-all/`), so this recipe no
-longer returns legacy HTML for every path. Two fallbacks, in order:
+**The legacy host no longer serves legacy HTML at all.** Since 2026-08 `/browse-all/`
+has 301'd to `moths.pnwinsects.org/redirect.html?from=/browse-all/`, so this recipe
+stopped returning legacy content for cut-over paths. In 2026-10 WWU decommissioned
+the vhost outright and left the DNS name pointing at our CDN, so **no path on it
+returns legacy content any more** — the redirect is now ours, served by a Bunny edge
+rule ([ADR 0050](../adr/0050-legacy-wwu-hostnames.md)), and there is nothing behind it.
+Two fallbacks, in order:
 
 - <https://dev.pnwmoths.biol.wwu.edu/> still serves the original site, including
   the pages that have been cut over. The **pages** are login-gated, so `curl` will
   not reach them — use a browser session. This is the authority for what the old
   site *rendered*, as opposed to what it stored.
+
+  **This host is on borrowed time.** It is the last running copy of the legacy site,
+  on a WWU machine whose sysadmin has been reassigned; WWU intends to retire these
+  records within about a year. Work to preserve it locally is tracked separately —
+  do not assume it will answer.
 
   **But `/media/` is public.** Every specimen photograph the legacy site ever held
   is at `https://dev.pnwmoths.biol.wwu.edu/media/moths/<filename>`, served without
