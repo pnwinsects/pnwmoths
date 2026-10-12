@@ -2,7 +2,7 @@
 // Maintainer-run re-join: restores the reference DB's curated county /
 // regional-district assignment onto data/records.csv, additive-only.
 //
-// The reference MySQL container (`pnwmoths-mysql`) holds a curated
+// The legacy MySQL reference database (scripts/lib/reference-db.ts) holds a curated
 // `species_speciesrecord` table with a `county_id`/`state_id` the 2021
 // migration never carried over. This script re-derives the join via a
 // two-tier natural key (species + coordinates + date + collector + collection
@@ -17,8 +17,8 @@
 // (state, legacy_name) pair absent from the crosswalk (D-03, no --force). Every
 // run prints a console summary and writes data/legacy-rejoin-report.csv (D-04).
 //
-// Run: node scripts/backfill-legacy-county.ts   (container must be running)
-import { execFileSync } from 'node:child_process';
+// Run: node scripts/backfill-legacy-county.ts   (the reference database must be running; see scripts/lib/reference-db.ts)
+import { queryReferenceDb } from './lib/reference-db.ts';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -321,29 +321,6 @@ export function joinNaturalKey(
 // CLI entry-point — wires Docker extraction, crosswalk, and write-back
 // ---------------------------------------------------------------------------
 
-/** Decode mysql --batch escaping (\t \n \\ within tab-separated fields). */
-function unescapeBatch(s: string): string {
-  return s.replace(/\\(.)/g, (_m, c) =>
-    c === 't' ? '\t' : c === 'n' ? '\n' : c === '0' ? '\0' : c);
-}
-
-/** Run a fixed literal SQL string against the container; array-args
- * execFileSync (no shell) — no CSV/DB field value is ever interpolated into
- * `sql` at any call site (T-44-03). */
-function queryContainer(sql: string): Record<string, string>[] {
-  const out = execFileSync(
-    'docker',
-    ['exec', '-i', 'pnwmoths-mysql', 'mysql', '-upnwmoths', '-ppnwmoths', 'pnwmoths', '--batch'],
-    { input: sql, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
-  );
-  const lines = out.replace(/\n$/, '').split('\n');
-  const header = (lines[0] ?? '').split('\t');
-  return lines.slice(1).map((line) => {
-    const cells = line.split('\t').map(unescapeBatch);
-    return Object.fromEntries(header.map((h, i) => [h, cells[i] ?? '']));
-  });
-}
-
 const SPECIES_SQL = 'SELECT id, genus, species FROM species_species';
 
 /** Load data/district-crosswalk.csv into a "state|legacy_name" -> stable_id map. */
@@ -366,7 +343,7 @@ export async function main(): Promise<void> {
     skip_empty_lines: true,
   }) as Array<{ id: string; genus: string; species: string }>;
 
-  const dbSpeciesRowsParsed = queryContainer(SPECIES_SQL);
+  const dbSpeciesRowsParsed = queryReferenceDb(SPECIES_SQL);
 
   const dbSpeciesById = new Map<string, DbSpeciesRow>();
   const dbIdsByNormalizedBinomial = new Map<string, string[]>();
@@ -409,7 +386,7 @@ export async function main(): Promise<void> {
     district_id: r.district_id ?? '',
   }));
 
-  const dbRawRows = queryContainer(SQL);
+  const dbRawRows = queryReferenceDb(SQL);
   const dbRows: DbRow[] = dbRawRows.map((r) => ({
     species_id: r.species_id ?? '',
     latitude: r.latitude ?? '',

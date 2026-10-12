@@ -16,8 +16,8 @@
 // after a curator hand-edit is safe. Genera the legacy paths don't classify are
 // left blank, never guessed.
 //
-// Run: node scripts/backfill-tribe.ts   (pnwmoths-mysql container must be running)
-import { execFileSync } from 'node:child_process';
+// Run: node scripts/backfill-tribe.ts   (the reference database must be running; see scripts/lib/reference-db.ts)
+import { queryReferenceDb } from './lib/reference-db.ts';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -134,28 +134,6 @@ export function applyTribes(
 // CLI entry-point — wires Docker extraction to the write-back
 // ---------------------------------------------------------------------------
 
-/** Decode mysql --batch escaping (\t \n \\ within tab-separated fields). */
-function unescapeBatch(s: string): string {
-  return s.replace(/\\(.)/g, (_m, c) =>
-    c === 't' ? '\t' : c === 'n' ? '\n' : c === '0' ? '\0' : c);
-}
-
-/** Run a fixed literal SQL string against the container; array-args
- *  execFileSync (no shell) — no CSV/DB field value is interpolated into `sql`. */
-function queryContainer(sql: string): Record<string, string>[] {
-  const out = execFileSync(
-    'docker',
-    ['exec', '-i', 'pnwmoths-mysql', 'mysql', '-upnwmoths', '-ppnwmoths', 'pnwmoths', '--batch'],
-    { input: sql, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
-  );
-  const lines = out.replace(/\n$/, '').split('\n');
-  const header = (lines[0] ?? '').split('\t');
-  return lines.slice(1).map((line) => {
-    const cells = line.split('\t').map(unescapeBatch);
-    return Object.fromEntries(header.map((h, i) => [h, cells[i] ?? '']));
-  });
-}
-
 export async function main(): Promise<void> {
   const speciesCsvPath = resolve(ROOT, 'data/species.csv');
   const speciesRows = parse(readFileSync(speciesCsvPath), {
@@ -163,7 +141,7 @@ export async function main(): Promise<void> {
     skip_empty_lines: true,
   }) as Array<Record<string, string>>;
 
-  const dbRows = queryContainer(TRIBE_SQL).map((r) => ({
+  const dbRows = queryReferenceDb(TRIBE_SQL).map((r) => ({
     genus: r.genus ?? '',
     tribe: r.tribe ?? '',
   }));

@@ -39,7 +39,7 @@ classify are left blank, never guessed. Tribe surfaces in the `<pnwm-taxon-brows
 - "Tribe where present" falls out of the `name === null` node: mixed-depth subfamilies (only
   Arctiinae and Noctuinae, each with one post-migration genus outside the legacy hierarchy) render
   tribed and untribed genera side by side without special-casing.
-- Re-deriving tribe requires the `pnwmoths-mysql` reference container, matching how subfamily was
+- Re-deriving tribe requires the legacy MySQL reference database, matching how subfamily was
   recovered (see [data-provenance](../reference/data-provenance.md)). The committed `tribe` column is
   the runtime source of truth; the DB is only needed to regenerate it.
 - The Browse page inlines the whole taxon tree (D-10), so the added tribe nodes grow that payload

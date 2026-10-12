@@ -298,6 +298,16 @@ cost a debugging cycle to discover.
 
 ## Data migration & integrity
 
+- **Reach the legacy reference database only through `scripts/lib/reference-db.ts`.** Five
+  scripts once each carried their own `docker exec`, and all five named a container,
+  `pnwmoths-mysql`, that no machine had any more; three hardcoded it. Nobody noticed, because
+  these scripts run only when someone re-derives a committed CSV (#399). Docker Compose names
+  a container after the directory it was started from, so the same database is
+  `pnwinsects-app-db-1` from the app checkout and `pnwmoths-local-site-db-1` from the
+  curator's bundle. Check `docker ps`, don't assume. The Docker CLI's wording for a stopped
+  daemon also changed between versions ("Cannot connect to the Docker daemon" became
+  "failed to connect to the docker API"), so match both when explaining failures.
+
 - **A genus rename has to be all-or-nothing.** Renaming two of our six *Protorthodes* to
   *Trichopolia* (#259) split one genus into two interleaved blocks in checklist order, because
   MPG holds all six under *Trichopolia* — so our display genus alternated down the page. If an

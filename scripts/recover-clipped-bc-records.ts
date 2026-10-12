@@ -6,7 +6,7 @@
 // north to ~60N and west to ~-139W, so ~2,800 legitimate occurrence records
 // were silently dropped. The 2021 source dump that migrate-species.js read is
 // gone, so this script recovers the clipped records from the live reference
-// MySQL container (`pnwmoths-mysql`) instead.
+// MySQL reference database (scripts/lib/reference-db.ts) instead.
 //
 // It re-applies the EXACT pipeline filters (linked_photo=0, the six PNW states,
 // non-null coords) but with the widened box, then:
@@ -28,8 +28,8 @@
 // by what the file already holds. Kept as provenance for where those rows came
 // from (docs/reference/data-provenance.md).
 //
-// Run: node scripts/recover-clipped-bc-records.ts   (container must be running)
-import { execFileSync } from 'node:child_process';
+// Run: node scripts/recover-clipped-bc-records.ts   (the reference database must be running; see scripts/lib/reference-db.ts)
+import { queryReferenceDb } from './lib/reference-db.ts';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -85,26 +85,6 @@ WHERE r.state_id IN (42,43,61,66,77,80) AND r.linked_photo = 0
        AND r.longitude BETWEEN ${OLD_LON_MIN} AND ${OLD_LON_MAX})
 `;
 
-/** Decode mysql --batch escaping (\t \n \\ within tab-separated fields). */
-function unescapeBatch(s: string): string {
-  return s.replace(/\\(.)/g, (_m, c) =>
-    c === 't' ? '\t' : c === 'n' ? '\n' : c === '0' ? '\0' : c);
-}
-
-function queryContainer(): Record<string, string>[] {
-  const out = execFileSync(
-    'docker',
-    ['exec', '-i', 'pnwmoths-mysql', 'mysql', '-upnwmoths', '-ppnwmoths', 'pnwmoths', '--batch'],
-    { input: SQL, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
-  );
-  const lines = out.replace(/\n$/, '').split('\n');
-  const header = (lines[0] ?? '').split('\t');
-  return lines.slice(1).map((line) => {
-    const cells = line.split('\t').map(unescapeBatch);
-    return Object.fromEntries(header.map((h, i) => [h, cells[i] ?? '']));
-  });
-}
-
 function inBox(lat: number, lon: number, latMin: number, latMax: number, lonMin: number, lonMax: number): boolean {
   return lat >= latMin && lat <= latMax && lon >= lonMin && lon <= lonMax;
 }
@@ -118,7 +98,7 @@ function main(): void {
     slugById.set(r.id ?? '', `${r.genus ?? ''}-${r.species ?? ''}`.toLowerCase());
   }
 
-  const rows = queryContainer();
+  const rows = queryReferenceDb(SQL);
 
   const bandToAppend: Record<string, string>[] = [];
   const badCoords: Record<string, string>[] = [];

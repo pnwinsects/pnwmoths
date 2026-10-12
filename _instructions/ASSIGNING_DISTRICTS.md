@@ -35,10 +35,17 @@ only a row's *absence* from that artifact is a problem).
 
 ## Steps
 
-1. Start the reference MySQL container (`pnwmoths-mysql`) that step 1 reads
-   the curated legacy county/regional-district data from — see
-   `scripts/backfill-legacy-county.ts`'s header comment for details on what
-   this container holds.
+1. Start the legacy MySQL reference database that step 2 reads the curated
+   county/regional-district data from. From the `pnwinsects/pnwinsects-app`
+   checkout (branch `docker-local-dev`):
+   ```bash
+   docker compose up -d db
+   ```
+   The scripts look for the container `pnwinsects-app-db-1`. If you started it
+   from the curator's bundle folder instead, it is `pnwmoths-local-site-db-1`;
+   run `docker ps` and set `MYSQL_CONTAINER` to the name shown. See
+   [data provenance](../docs/reference/data-provenance.md) for what the
+   database holds.
 
 2. Run the legacy re-join — restores the curated county name + `district_id`
    for any record the reference database already has an answer for:
