@@ -1,6 +1,6 @@
 # 0047. Out-of-bounds records are held in `records.csv`, not in a sidecar; the build leaves them out and lists them every build
 
-**Status:** Accepted · Closes [#386](https://github.com/pnwinsects/pnwmoths/issues/386) · Extends [ADR 0044](0044-record-id.md) · Refs [#367](https://github.com/pnwinsects/pnwmoths/issues/367)
+**Status:** Accepted · Closes [#386](https://github.com/pnwinsects/pnwmoths/issues/386) · Extends [ADR 0044](0044-record-id.md) · Refs [#367](https://github.com/pnwinsects/pnwmoths/issues/367) · The bounds quoted below were widened to lat 41–61° N, lon 104–139° W by the curator's #367 rulings (C-037), as the Consequences section anticipated; the mechanism is unchanged.
 
 ## Context
 

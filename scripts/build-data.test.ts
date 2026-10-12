@@ -919,7 +919,7 @@ function runBuildDataWith(name: string, recordLines: string[]): { ok: boolean; o
 test('integration: an out-of-bounds curator record is held — the build passes and its Parquet omits it', async () => {
   const { ok, output, tmpDir } = runBuildDataWith('oob-held', [
     'acronicta-americana,specimen,46.5,-112.0,MT,Lewis and Clark,Helena,,1990,7,1,Test,Test,,,1',
-    'acronicta-americana,specimen,46.73,-109.75,MT,Sweet Grass,Greycliff,,1988,7,24,Test,Test,,,2',
+    'acronicta-americana,specimen,46.5,-103.5,MT,Wibaux,Wibaux,,1988,7,24,Test,Test,,,2',
   ]);
   try {
     assert.ok(ok, `build-data.ts should pass with a held record, got: ${output}`);
@@ -941,7 +941,7 @@ test('integration: a held record is still validated — an orphaned slug fails t
   // a row would sit unpublishable for a second reason nobody could see.
   const { ok, output, tmpDir } = runBuildDataWith('oob-orphan', [
     'acronicta-americana,specimen,46.5,-112.0,MT,Lewis and Clark,Helena,,1990,7,1,Test,Test,,,1',
-    'nonexistent-species,specimen,46.73,-109.75,MT,Sweet Grass,Greycliff,,1988,7,24,Test,Test,,,2',
+    'nonexistent-species,specimen,46.5,-103.5,MT,Wibaux,Wibaux,,1988,7,24,Test,Test,,,2',
   ]);
   try {
     assert.ok(!ok, 'build-data.ts should fail on an orphaned held record');

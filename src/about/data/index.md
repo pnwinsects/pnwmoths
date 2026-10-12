@@ -125,8 +125,10 @@ collection records in spreadsheet format.
 
 ## Data Quality and Limitations
 
-- Records outside the PNW coordinate bounds (approximately 42–60° N latitude,
-  110–139° W longitude) are excluded — often caused by swapped lat/lon values.
+- Records outside the site's coordinate bounds (41–61° N latitude, 104–139° W
+  longitude: the Pacific Northwest and all of Montana, with a degree of latitude to
+  spare at the south and north, since some species reach just over the border) are not
+  mapped. Coordinates far outside that area, often swapped lat/lon values, are rejected.
 - Records missing a valid species identification, coordinates, or state/province
   are excluded from the site.
 - Some families (currently Geometridae) have their occurrence records withheld

@@ -242,9 +242,9 @@ const STATE_BY_DISTRICT_PREFIX: Record<string, string> = {
  * one of the six the site covers.
  *
  * Null is a hard stop for the import, not a blank cell. The PNW coordinate
- * bounds build-data.ts enforces (lat 42-60, lon -139..-110) are much larger
- * than the six jurisdictions: they also contain northwest Wyoming, the Alaska
- * panhandle, the Yukon border and most of Alberta. A record from any of those
+ * bounds build-data.ts enforces (lat 41-61, lon -139..-104) are much larger
+ * than the six jurisdictions: they also contain northern California and Nevada,
+ * northwest Wyoming, the Alaska panhandle, the Yukon border and most of Alberta. A record from any of those
  * would pass validation with an empty state — build-data.ts exempts NULL and
  * empty from its state check — and land on a species map invisible to every
  * filter. Failing closed here is what prevents that.

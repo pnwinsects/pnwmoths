@@ -16,7 +16,7 @@ export const OccurrenceRecordSchema = z.object({
   record_type:   z.string(),        // 'specimen' | 'photograph' | 'literature' | 'sight_field_notes'
   latitude:      z.number(),
   longitude:     z.number(),
-  state:         z.string(),        // 'WA' | 'OR' | 'BC' | 'ID' | 'AB' | 'MT'
+  state:         z.string(),        // 'WA' | 'OR' | 'BC' | 'ID' | 'AB' | 'MT' | 'CA'
   county:        z.nullable(z.string()),   // ~96%+ filled following the Phase 44 legacy re-join
   locality:      z.nullable(z.string()),
   elevation_ft:  z.nullable(z.number()),   // int constraint dropped (not in zod/mini); enforced by DuckDB INT32

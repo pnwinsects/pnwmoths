@@ -36,9 +36,10 @@ export type OutOfBoundsRow = Record<(typeof OUT_OF_BOUNDS_COLUMNS)[number], stri
 
 /**
  * The report rows for the given records.csv rows, in file order. `beyond` names
- * the edge or edges the point lies past ("east", "south", "south and east"),
- * which is how the curator's questions divide: east of 110° W is the Montana
- * coverage question, south of 42° N the border records (#367).
+ * the edge or edges the point lies past ("east", "south", "south and east").
+ * Since the curator's #367 rulings (C-037) the publishing bounds reach the
+ * district-assignment box everywhere except two one-degree strips — west of
+ * 139° W and east of 104° W — so a held record now lies in one of those.
  */
 export function outOfBoundsRows(rows: readonly CuratorRecordRow[]): OutOfBoundsRow[] {
   return rows.filter(isOutOfBoundsRecord).map((r) => ({

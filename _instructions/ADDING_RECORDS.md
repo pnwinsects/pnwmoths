@@ -98,8 +98,8 @@ Validation failures print as `Validation failed — <description>:` followed by 
 - **`implausible coordinates — outside the region entirely`** — most often latitude and longitude
   swapped, or a missing minus sign on the longitude.
 
-A record whose coordinates are real but beyond the area the site maps (for example eastern
-Montana, east of 110° W) is **not** an error. The build keeps it, prints `Holding N record(s) …`,
+A record whose coordinates are real but beyond the area the site maps (41–61° N, 104–139° W;
+for example western North Dakota, just east of Montana) is **not** an error. The build keeps it, prints `Holding N record(s) …`,
 and leaves it off every map and count. It is listed on the `/curation/` page under *Records held
 off the map* until the curator rules on it.
 - **`NULL required fields`** — `species_slug`, `latitude` or `longitude` is blank.

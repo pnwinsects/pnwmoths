@@ -27,8 +27,8 @@ describe('outOfBoundsRows', () => {
   it('lists only out-of-bounds rows, in file order, with their record_id', () => {
     const rows = outOfBoundsRows([
       row('1', '46.5', '-112'),
-      row('2', '46.73', '-109.75'),
-      row('3', '41.947', '-120.419'),
+      row('2', '46.5', '-103.5'),
+      row('3', '40.9', '-120.419'),
       row('4', '', '-109.75'),
     ]);
     assert.deepEqual(rows.map((r) => [r.record_id, r.beyond]), [['2', 'east'], ['3', 'south']]);

@@ -165,10 +165,16 @@ export function recordIdProblems(rows: readonly { record_id?: string }[]): strin
  *     fails the build on it.
  */
 export const RECORD_COORDINATE_BOUNDS = {
-  latMin: 42.0,
-  latMax: 60.0,
+  // The curator's rulings on #367 (C-037): a degree of latitude past the region
+  // to the south and north, because species known from just over the border
+  // (northern California, the far north) are worth carrying ...
+  latMin: 41.0,
+  latMax: 61.0,
   lonMin: -139.0,
-  lonMax: -110.0,
+  // ... and all of Montana, not just the part west of 110° W. Montana's eastern
+  // border is 104.04° W; a record in that last 0.04° is held and listed on
+  // /curation/ rather than lost.
+  lonMax: -104.0,
 };
 
 /** True iff a coordinate is inside {@link RECORD_COORDINATE_BOUNDS}. */
