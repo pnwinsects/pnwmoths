@@ -47,8 +47,10 @@ export function explainFailure(detail: string, container: string): string {
 /**
  * Run `sql` against the reference database and return mysql's raw `--batch` output:
  * tab-separated, with mysql's escaping, and with a header row unless `columnNames` is
- * false. The SQL goes in on stdin and the password through MYSQL_PWD, so neither
- * appears in argv. Callers pass fixed literal SQL; no data value is interpolated.
+ * false. The SQL goes in on stdin. The password reaches mysql as MYSQL_PWD, which
+ * `docker exec -e MYSQL_PWD` (name only) copies from this process's environment, so
+ * the value is in no command line, the host's `docker` included. Callers pass fixed
+ * literal SQL; no data value is interpolated.
  */
 export function runReferenceSql(sql: string, { columnNames = true }: { columnNames?: boolean } = {}): string {
   try {
@@ -56,13 +58,19 @@ export function runReferenceSql(sql: string, { columnNames = true }: { columnNam
       'docker',
       [
         'exec', '-i',
-        '-e', `MYSQL_PWD=${PASSWORD}`,
+        '-e', 'MYSQL_PWD',
         CONTAINER,
         'mysql', `-u${USER}`, DB,
         '--batch',
         ...(columnNames ? [] : ['-N']),
       ],
-      { input: sql, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['pipe', 'pipe', 'pipe'] },
+      {
+        input: sql,
+        encoding: 'utf8',
+        maxBuffer: 64 * 1024 * 1024,
+        stdio: ['pipe', 'pipe', 'pipe'],
+        env: { ...process.env, MYSQL_PWD: PASSWORD },
+      },
     );
   } catch (err) {
     const e = err as { stderr?: string; message: string };
