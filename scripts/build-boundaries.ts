@@ -227,8 +227,8 @@ export async function main(): Promise<void> {
 
   console.log('[build-boundaries] running mapshaper@0.7.37 pipeline...');
   // Array-form execFileSync args — NO shell string, no path/field
-  // interpolation into a shell (T-45-02, mirrors recover-clipped-bc-records.ts
-  // / backfill-legacy-county.ts's execFileSync(cmd, argsArray, opts) shape).
+  // interpolation into a shell (T-45-02, mirrors scripts/lib/reference-db.ts's
+  // execFileSync(cmd, argsArray, opts) shape).
   // Flag order below is load-bearing: -filter-fields MUST run after
   // -merge-layers (Pitfall 4) or mapshaper hard-errors.
   execFileSync(

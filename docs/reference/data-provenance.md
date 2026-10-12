@@ -100,10 +100,12 @@ the legacy site runs on
 [`_instructions/RUNNING_THE_LEGACY_SITE.md`](../../_instructions/RUNNING_THE_LEGACY_SITE.md)),
 and either way it exposes port 3307 on the host.
 
-> **This file previously named a container `pnwmoths-mysql`, which does not
-> exist on any current machine.** The scripts below still default to that name,
-> so they fail until `MYSQL_CONTAINER` is set — and three of them hardcode it
-> with no override at all. See [#399](https://github.com/pnwinsects/pnwmoths/issues/399).
+> **Older docs and scripts named a container `pnwmoths-mysql`, which does not
+> exist on any current machine** ([#399](https://github.com/pnwinsects/pnwmoths/issues/399)).
+> Every script now reaches the database through
+> [`scripts/lib/reference-db.ts`](../../scripts/lib/reference-db.ts), which defaults
+> to `pnwinsects-app-db-1` and, when the container is missing or stopped, says how
+> to start it.
 
 This is a **reference / read source only** — it is *not* part of the build and
 *not* declared in [`docker-compose.yml`](../../docker-compose.yml) (that file
@@ -118,9 +120,9 @@ docker exec -i pnwinsects-app-db-1 mysql -upnwmoths -ppnwmoths pnwmoths
 ```
 
 Database, user, and password are all `pnwmoths`. The scripts that read it use
-`mysql --batch` (tab-separated, no header) and decode the escaping in code.
-Point the ones that accept the override at it with
-`MYSQL_CONTAINER=pnwinsects-app-db-1`.
+`mysql --batch` (tab-separated) and decode the escaping in code. From the
+curator's bundle the container is `pnwmoths-local-site-db-1`; point the scripts at
+it with `MYSQL_CONTAINER=pnwmoths-local-site-db-1`.
 
 Scripts that consume this container (each writes a committed CSV; re-run only
 when the reference data changes):
@@ -152,9 +154,10 @@ needed a curator decision. The nested set remains the best evidence of what the
   ([ADR 0047](../adr/0047-out-of-bounds-records-held-in-records-csv.md)). Historical:
   it refuses to run.
 
-Connection details are overridable via the `MYSQL_CONTAINER`, `MYSQL_DB`,
-`MYSQL_USER`, and `MYSQL_PASSWORD` environment variables; the defaults match the
-container above.
+Every one of them reads its connection details from
+[`scripts/lib/reference-db.ts`](../../scripts/lib/reference-db.ts), overridable via
+the `MYSQL_CONTAINER`, `MYSQL_DB`, `MYSQL_USER`, and `MYSQL_PASSWORD` environment
+variables; the defaults match the `pnwinsects-app-db-1` container above.
 
 ## Subfamily encoding (not a DB column)
 

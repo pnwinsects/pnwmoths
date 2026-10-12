@@ -35,16 +35,14 @@
  * One species (parastichtis-suspecta) is a member of two adjacent plates
  * (57 and 58); the lower-numbered plate is kept deterministically.
  *
- * The reference DB runs as a (stopped-by-default) Docker container, mysql:5.6.
- * There is no local mysql client or driver, so we query via `docker exec`.
- * Start the container first:  docker start pnwmoths-mysql
+ * Reads the legacy MySQL reference database through scripts/lib/reference-db.ts,
+ * which says where it runs and how to start it.
  *
  * Usage:
  *   node scripts/extract-species-plates.ts
  *   DRY_RUN=1 node scripts/extract-species-plates.ts   # print CSV; no write
  *
- * Env overrides (defaults match the pnwmoths-mysql container):
- *   MYSQL_CONTAINER, MYSQL_DB, MYSQL_USER, MYSQL_PASSWORD
+ * Env overrides: MYSQL_CONTAINER, MYSQL_DB, MYSQL_USER, MYSQL_PASSWORD (see reference-db.ts).
  *
  * The output CSV is committed to the repo and read by the site at build time
  * (src/_data/speciesPlates.ts). Re-run only when the reference data changes.
@@ -53,7 +51,7 @@
 import { resolve } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { runReferenceSql } from './lib/reference-db.ts';
 import { parse } from 'csv-parse/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
 import { pathToFileURL } from 'node:url';
@@ -67,11 +65,6 @@ const SPECIES_CSV: string = resolve('data/species.csv');
 const SYNONYMS_CSV: string = resolve('data/species-synonyms.csv');
 const PLATES_JSON: string = resolve('data/plates.json');
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
-
-const CONTAINER: string = process.env['MYSQL_CONTAINER'] ?? 'pnwmoths-mysql';
-const DB: string = process.env['MYSQL_DB'] ?? 'pnwmoths';
-const USER: string = process.env['MYSQL_USER'] ?? 'pnwmoths';
-const PASSWORD: string = process.env['MYSQL_PASSWORD'] ?? 'pnwmoths';
 
 const SQL: string = `
 SELECT sp.image AS image, ss.genus AS genus, ss.species AS species
@@ -152,34 +145,9 @@ export function toCsv(rows: SpeciesPlate[]): string {
 // Data sources
 // ---------------------------------------------------------------------------
 
-/**
- * Run the extraction query against the reference MySQL container via
- * `docker exec`. Password is passed through MYSQL_PWD (via `docker exec -e`)
- * rather than -p so it never appears in argv and mysql emits no insecure-password
- * warning. Re-throws with a start-the-container hint on the common failure modes.
- */
+/** Run the extraction query; tab-separated rows, no header. */
 function runQuery(): string {
-  try {
-    return execFileSync(
-      'docker',
-      [
-        'exec',
-        '-e', `MYSQL_PWD=${PASSWORD}`,
-        CONTAINER,
-        'mysql', `-u${USER}`, DB,
-        '-N', '--batch',
-        '-e', SQL,
-      ],
-      { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] },
-    );
-  } catch (err) {
-    const e = err as { stderr?: string; message: string };
-    const detail = (e.stderr ?? e.message).trim();
-    throw new Error(
-      `[extract-species-plates] query against container '${CONTAINER}' failed:\n${detail}\n` +
-        `Hint: ensure the reference DB is running:  docker start ${CONTAINER}`,
-    );
-  }
+  return runReferenceSql(SQL, { columnNames: false });
 }
 
 /**
