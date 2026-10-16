@@ -160,7 +160,7 @@ const reports: CurationReport[] = [
     title: 'Identification key template: species the key does not score yet',
     audience: 'curation',
     question: 'Which species do we hold that Identify cannot find, and what are their character states?',
-    body: 'A spreadsheet with one row per species the identification key does not score yet and one column per character-state, laid out exactly like the key\'s own scores (<code>data/key-scores.csv</code>). Published species come first, then the withheld Geometridae, each group in checklist order. Open it in Excel, put a <code>1</code> in every cell that applies to the species and leave the rest blank (a blank never rules a species out), delete or ignore the rows you do not get to, save as <strong>CSV UTF-8</strong>, and attach it to an issue. A maintainer merges it with <code>npm run key:merge</code>; rows with no <code>1</code>s are skipped, and species the key already scores are never overwritten.',
+    body: 'A spreadsheet with one row per species the identification key does not score yet and one column per character-state, laid out exactly like the key\'s own scores (<code>data/key-scores.csv</code>). Published species come first, then the withheld Geometridae, each group in checklist order. Open it in Excel, put a <code>1</code> in every cell that applies to the species and leave the rest blank (visitors still see a species whose question you left blank), delete or ignore the rows you do not get to, save as <strong>CSV UTF-8</strong>, and attach it to an issue. A maintainer merges it with <code>npm run key:merge</code>; rows with no <code>1</code>s are skipped, and species the key already scores are never overwritten.',
     regenerated: 'Every build (<code>npm run build:key</code>), from the committed key scores and species list, so a species leaves the template as soon as its scores are merged.',
     files: [fromRepo('data/key-template.csv')],
     see: [
@@ -174,7 +174,7 @@ const reports: CurationReport[] = [
     title: 'Identification key scores: what the live key uses',
     audience: 'curation',
     question: 'How is each species we have already scored in the identification key described, state by state?',
-    body: 'The live scores behind Identify: one row per species and one column per character-state, in the same layout as the key template, so a row can be copied to a new species. A <code>1</code> means the species has that state; a blank means it has not been scored. Identify drops a species on a question only when the species has a <code>1</code> on another state of that question and none on the states selected, so when you score a species on a question, mark every state that applies to it.',
+    body: 'The live scores behind Identify: one row per species and one column per character-state, in the same layout as the key template, so a row can be copied to a new species. A <code>1</code> means the species has that state; a blank means nobody has said. When you score a species on a question, mark every state that applies to it: a visitor who picks a state you left blank will not see the species, unless you left the whole question blank.',
     regenerated: 'Committed by hand: it changes when a maintainer merges a filled-in template or corrects a cell.',
     files: [fromRepo('data/key-scores.csv')],
     see: [

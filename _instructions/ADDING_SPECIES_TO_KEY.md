@@ -13,9 +13,9 @@ Background: [ADR 0048](../docs/adr/0048-key-scores-one-row-per-species.md), issu
 `data/key-scores.csv` has **one row per species and one column per character-state**. The first column, `binomial`, holds the name, e.g. `Pheosia californica`. Each of the other 237 columns is headed with a full question and answer, such as `Forewing color and pattern:Color:Main color of forewing:Brown`.
 
 - `1` means the species has that state.
-- Blank means **not scored**. A blank never rules a species out. If you are unsure, leave it blank.
-- There is no separate mark for "absent". Identify rules a species out on a question when the species has a `1` on some other state of that question and a blank on every state the visitor selected. So if a species is always brown or gray, mark both `Brown` and `Gray` and leave the other colors blank; do not mark only one. If you have no information about a question, leave all its cells blank and the species is never ruled out on it.
-- A species can have several states of one question (e.g. two forewing colors). Identify treats answers within a question as OR, and answers across questions as AND.
+- Blank means **not scored**. If you are unsure, leave it blank, and visitors will still see the species.
+- There is no separate mark for "absent". Mark what the species does have, and anything you leave blank counts as "not this". If a species is always brown or gray, put a `1` under `Brown` and under `Gray` and leave the other colors blank; a visitor who picks green then won't see it. If you leave every color blank, that visitor still sees the species, because you have said nothing about its color. So for any question you score, mark every answer that applies.
+- A species can have several states of one question (e.g. two forewing colors). A visitor who picks several answers to one question sees species that have any of them; a visitor who answers several questions sees only species that fit every one.
 
 To see the scores the live key uses (for example to copy a similar species' row), open **Identification key scores** on the site's `/curation/` page. It is `data/key-scores.csv` and has the same columns as the template.
 
