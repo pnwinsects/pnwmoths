@@ -14,7 +14,10 @@ Background: [ADR 0048](../docs/adr/0048-key-scores-one-row-per-species.md), issu
 
 - `1` means the species has that state.
 - Blank means **not scored**. A blank never rules a species out. If you are unsure, leave it blank.
+- There is no separate mark for "absent". Identify rules a species out on a question when the species has a `1` on some other state of that question and a blank on every state the visitor selected. So if a species is always brown or gray, mark both `Brown` and `Gray` and leave the other colors blank; do not mark only one. If you have no information about a question, leave all its cells blank and the species is never ruled out on it.
 - A species can have several states of one question (e.g. two forewing colors). Identify treats answers within a question as OR, and answers across questions as AND.
+
+To see the scores the live key uses (for example to copy a similar species' row), open **Identification key scores** on the site's `/curation/` page. It is `data/key-scores.csv` and has the same columns as the template.
 
 ## For the curator: scoring species
 

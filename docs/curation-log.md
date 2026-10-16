@@ -73,6 +73,34 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-040 · 2026-10-16 · The key's Distribution and Seasonality scores will come from occurrence records as they stand, with a warning about sparse data
+
+**Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6222767374),
+the curator's own words · **Status** Pending (#397) · **Refines** C-038
+
+> I think it would make the most sense to have the key use the sparse data as is, provided we add an
+> alert to users in the phenology and distribution sections of the key saying that these characters
+> are subject to change as we add more data to the database and are unreliable for species with
+> sparse data. We could also encourage users to document (in iNaturalist) any records that represent
+> range or phenology extensions.
+
+#397 asked whether records that only say where and when someone happened to collect should be allowed
+to rule a species out of the key. He answered yes, on two conditions: the key tells its users the
+scores can change and are unreliable for species with few records, and it points them to iNaturalist
+for recording range and phenology extensions.
+
+Why it matters: the issue proposed "derived scores only add 1s", so that sparse records could never
+remove a species from the results. He chose the other trade: the key trusts the records, and the page
+is honest about it. The notice is part of the ruling, not polish, and so is the iNaturalist
+prompt. He had earlier (in [#390](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6049060198))
+asked for the ecoregions to be assigned from boundary shapefiles; that stays open as an engineering
+question in #397 (which boundary files, and where "Western Montana" ends).
+
+**What changed** — nothing yet. The derivation, the notice, and the removal of these 64 columns from the
+template are tracked on #397.
+
+---
+
 ## C-039 · 2026-10-16 · Six species take MPG's spelling: *Macaria notata* becomes *M. ulsterata*, and five species change the ending of their name
 
 **Source** [#369 comment](https://github.com/pnwinsects/pnwmoths/issues/369#issuecomment-6222791134),
@@ -114,6 +142,8 @@ them), `src/content/species/*.md` filenames, and every file keyed by slug; six r
 `data/species-redirects.csv`; 211 retirement rows in `data/cdn-retired-images.csv`; `data/checklist-order.csv`
 now matches all six to MPG exactly rather than by gender or MONA number. `data/mpg-taxa.csv` was not
 touched: it already holds the six MPG spellings.
+
+---
 
 ## C-038 · 2026-10-07 · Twelve key binomials are the species we publish under a newer name; the key's *Lacinipolia vicina* is not carried to *L. sareta*
 
