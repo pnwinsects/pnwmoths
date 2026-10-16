@@ -91,12 +91,17 @@ async function main(): Promise<void> {
 
   const sources = new Map<string, number>();
   const already = new Map<string, number>();
+  const empty: string[] = [];
   for (const { from, to } of RENAMES) {
+    let found = 0;
     for (const prefix of SLUG_PREFIXES) {
-      for (const [k, v] of await storage.walk(prefix(from))) sources.set(k, v);
-      for (const [k, v] of await storage.walk(prefix(to))) already.set(k, v);
+      for (const [k, v] of await storage.walk(prefix(from))) { sources.set(k, v); found++; }
+      for (const [k, v] of await storage.walk(prefix(to))) { already.set(k, v); found++; }
     }
+    // Every renamed species has photographs, so one with nothing at either name is a typo or a wrong zone.
+    if (found === 0) empty.push(`${from} -> ${to}`);
   }
+  for (const pair of empty) console.error(`${TAG} NO OBJECTS under either name: ${pair}`);
 
   console.log(`${TAG} ${sources.size} source object(s) across ${RENAMES.length} renamed species${DRY_RUN ? ' — DRY RUN' : ''}`);
   if (sources.size === 0) {
@@ -153,7 +158,8 @@ async function main(): Promise<void> {
   console.log(`  skipped (already present): ${stats.skipped}`);
   console.log(`  conflicts: ${conflicts.length}`);
   console.log(`  failed: ${stats.failed}`);
-  if (stats.failed > 0 || (conflicts.length > 0 && !REPAIR_MISMATCHED)) process.exit(1);
+  if (empty.length > 0) console.log(`  species with no objects at either name: ${empty.length}`);
+  if (stats.failed > 0 || empty.length > 0 || (conflicts.length > 0 && !REPAIR_MISMATCHED)) process.exit(1);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
