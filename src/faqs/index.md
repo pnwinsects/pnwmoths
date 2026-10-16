@@ -33,7 +33,7 @@ The length of time for a moth to complete its life cycle from egg to adult varie
 
 ## What are the worst pest moths in the region?
 
-The larvae of almost all moths feed on plant parts, including leaves, stems, twigs and branches, flowers, fruits, or roots, but few are serious pests. However, some moth larvae are among the most serious pest insects in the Pacific Northwest. Perhaps the most economically damaging of these is the larva of the codling moth (*Cydia pomonella*), which feeds in fruits including apples. This species belongs to a family of small moths (Tortricidae) that is not featured on our website. Other orchard pests include the tent caterpillar moths, including the Western Tent Caterpillar Moth (*Malacosoma californicum*). Major pests of field crops and ornamental plants include our many species of loopers, cutworms, and armyworms, including the Alfalfa Looper (*Autographa californica*), the Variegated Cutworm Moth (*Peridroma saucia*), and the Western Yellowstriped Armyworm Moth (*Spodoptera praefica*). Serious pests of forests include the caterpillar of the Douglas Fir Tussock Moth (*Orygia pseudotsugata*) and the Pandora Pinemoth (*Coloradia pandora*).
+The larvae of almost all moths feed on plant parts, including leaves, stems, twigs and branches, flowers, fruits, or roots, but few are serious pests. However, some moth larvae are among the most serious pest insects in the Pacific Northwest. Perhaps the most economically damaging of these is the larva of the codling moth (*Cydia pomonella*), which feeds in fruits including apples. This species belongs to a family of small moths (Tortricidae) that is not featured on our website. Other orchard pests include the tent caterpillar moths, including the Western Tent Caterpillar Moth (*Malacosoma californica*). Major pests of field crops and ornamental plants include our many species of loopers, cutworms, and armyworms, including the Alfalfa Looper (*Autographa californica*), the Variegated Cutworm Moth (*Peridroma saucia*), and the Western Yellowstriped Armyworm Moth (*Spodoptera praefica*). Serious pests of forests include the caterpillar of the Douglas Fir Tussock Moth (*Orygia pseudotsugata*) and the Pandora Pinemoth (*Coloradia pandora*).
 
 ## What do caterpillars and moths eat?
 
@@ -77,7 +77,7 @@ The following moth species are all represented by at least 250 different occurre
 
 | Species | Records |
 |---------|---------|
-| *Malacosoma californicum* | 780 |
+| *Malacosoma californica* | 780 |
 | *Smerinthus ophthalmica* | 768 |
 | *Autographa californica* | 759 |
 | *Panthea virginarius* | 665 |

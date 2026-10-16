@@ -13989,38 +13989,38 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "heliothodes-diminutivus": {
+  "heliothodes-diminutiva": {
     "high_res_available": true,
     "specimens": [
       {
         "specimen_id": "A",
         "view": "D",
-        "tiles_path": "species-tiles/heliothodes-diminutivus/A-D"
+        "tiles_path": "species-tiles/heliothodes-diminutiva/A-D"
       },
       {
         "specimen_id": "A",
         "view": "V",
-        "tiles_path": "species-tiles/heliothodes-diminutivus/A-V"
+        "tiles_path": "species-tiles/heliothodes-diminutiva/A-V"
       },
       {
         "specimen_id": "B",
         "view": "D",
-        "tiles_path": "species-tiles/heliothodes-diminutivus/B-D"
+        "tiles_path": "species-tiles/heliothodes-diminutiva/B-D"
       },
       {
         "specimen_id": "B",
         "view": "V",
-        "tiles_path": "species-tiles/heliothodes-diminutivus/B-V"
+        "tiles_path": "species-tiles/heliothodes-diminutiva/B-V"
       },
       {
         "specimen_id": "C",
         "view": "D",
-        "tiles_path": "species-tiles/heliothodes-diminutivus/C-D"
+        "tiles_path": "species-tiles/heliothodes-diminutiva/C-D"
       },
       {
         "specimen_id": "C",
         "view": "V",
-        "tiles_path": "species-tiles/heliothodes-diminutivus/C-V"
+        "tiles_path": "species-tiles/heliothodes-diminutiva/C-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -17480,23 +17480,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "macaria-notata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/macaria-notata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/macaria-notata/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "macaria-plumosata": {
     "high_res_available": true,
     "specimens": [
@@ -17524,6 +17507,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "macaria-ulsterata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/macaria-ulsterata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/macaria-ulsterata/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "macronoctua-onusta": {
     "high_res_available": true,
     "specimens": [
@@ -17541,75 +17541,75 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "malacosoma-californicum": {
+  "malacosoma-californica": {
     "high_res_available": true,
     "specimens": [
       {
         "specimen_id": "A",
         "view": "D",
-        "tiles_path": "species-tiles/malacosoma-californicum/A-D"
+        "tiles_path": "species-tiles/malacosoma-californica/A-D"
       },
       {
         "specimen_id": "A",
         "view": "V",
-        "tiles_path": "species-tiles/malacosoma-californicum/A-V"
+        "tiles_path": "species-tiles/malacosoma-californica/A-V"
       },
       {
         "specimen_id": "B",
         "view": "D",
-        "tiles_path": "species-tiles/malacosoma-californicum/B-D"
+        "tiles_path": "species-tiles/malacosoma-californica/B-D"
       },
       {
         "specimen_id": "B",
         "view": "V",
-        "tiles_path": "species-tiles/malacosoma-californicum/B-V"
+        "tiles_path": "species-tiles/malacosoma-californica/B-V"
       },
       {
         "specimen_id": "C",
         "view": "D",
-        "tiles_path": "species-tiles/malacosoma-californicum/C-D"
+        "tiles_path": "species-tiles/malacosoma-californica/C-D"
       },
       {
         "specimen_id": "C",
         "view": "V",
-        "tiles_path": "species-tiles/malacosoma-californicum/C-V"
+        "tiles_path": "species-tiles/malacosoma-californica/C-V"
       },
       {
         "specimen_id": "D",
         "view": "D",
-        "tiles_path": "species-tiles/malacosoma-californicum/D-D"
+        "tiles_path": "species-tiles/malacosoma-californica/D-D"
       },
       {
         "specimen_id": "D",
         "view": "V",
-        "tiles_path": "species-tiles/malacosoma-californicum/D-V"
+        "tiles_path": "species-tiles/malacosoma-californica/D-V"
       }
     ],
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "malacosoma-constrictum": {
+  "malacosoma-constricta": {
     "high_res_available": true,
     "specimens": [
       {
         "specimen_id": "A",
         "view": "D",
-        "tiles_path": "species-tiles/malacosoma-constrictum/A-D"
+        "tiles_path": "species-tiles/malacosoma-constricta/A-D"
       },
       {
         "specimen_id": "A",
         "view": "V",
-        "tiles_path": "species-tiles/malacosoma-constrictum/A-V"
+        "tiles_path": "species-tiles/malacosoma-constricta/A-V"
       },
       {
         "specimen_id": "B",
         "view": "D",
-        "tiles_path": "species-tiles/malacosoma-constrictum/B-D"
+        "tiles_path": "species-tiles/malacosoma-constricta/B-D"
       },
       {
         "specimen_id": "B",
         "view": "V",
-        "tiles_path": "species-tiles/malacosoma-constrictum/B-V"
+        "tiles_path": "species-tiles/malacosoma-constricta/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -17676,18 +17676,18 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "manduca-quinquemaculata": {
+  "manduca-quinquemaculatus": {
     "high_res_available": true,
     "specimens": [
       {
         "specimen_id": "A",
         "view": "D",
-        "tiles_path": "species-tiles/manduca-quinquemaculata/A-D"
+        "tiles_path": "species-tiles/manduca-quinquemaculatus/A-D"
       },
       {
         "specimen_id": "A",
         "view": "V",
-        "tiles_path": "species-tiles/manduca-quinquemaculata/A-V"
+        "tiles_path": "species-tiles/manduca-quinquemaculatus/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -19926,28 +19926,28 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "paonias-excaecatus": {
+  "paonias-excaecata": {
     "high_res_available": true,
     "specimens": [
       {
         "specimen_id": "A",
         "view": "D",
-        "tiles_path": "species-tiles/paonias-excaecatus/A-D"
+        "tiles_path": "species-tiles/paonias-excaecata/A-D"
       },
       {
         "specimen_id": "A",
         "view": "V",
-        "tiles_path": "species-tiles/paonias-excaecatus/A-V"
+        "tiles_path": "species-tiles/paonias-excaecata/A-V"
       },
       {
         "specimen_id": "B",
         "view": "D",
-        "tiles_path": "species-tiles/paonias-excaecatus/B-D"
+        "tiles_path": "species-tiles/paonias-excaecata/B-D"
       },
       {
         "specimen_id": "B",
         "view": "V",
-        "tiles_path": "species-tiles/paonias-excaecatus/B-V"
+        "tiles_path": "species-tiles/paonias-excaecata/B-V"
       }
     ],
     "photographer": "Merrill Peterson",

@@ -14,8 +14,8 @@ eudeilinia-herminiata,850021,exact
 oreta-rosea,850023,exact
 phyllodesma-americana,870003,exact
 malacosoma-disstria,870014,exact
-malacosoma-constrictum,870015,gender
-malacosoma-californicum,870018,gender
+malacosoma-constricta,870015,exact
+malacosoma-californica,870018,exact
 tolype-laricis,870024,exact
 tolype-distincta,870028,exact
 coloradia-doris,890032,exact
@@ -31,7 +31,7 @@ hyalophora-gloveri,890084,exact
 hyalophora-euryalus,890085,exact
 agrius-cingulata,890086,exact
 manduca-sexta,890090,exact
-manduca-quinquemaculata,890091,gender
+manduca-quinquemaculatus,890091,exact
 ceratomia-amyntor,890102,exact
 ceratomia-undulosa,890103,exact
 sphinx-chersis,890111,exact
@@ -45,7 +45,7 @@ sphinx-sequoiae,890125,exact
 smerinthus-jamaicensis,890140,exact
 smerinthus-cerisyi,890141,exact
 smerinthus-ophthalmica,890142,exact
-paonias-excaecatus,890144,gender
+paonias-excaecata,890144,exact
 paonias-myops,890145,exact
 pachysphinx-modesta,890148,exact
 pachysphinx-occidentalis,890149,exact
@@ -119,7 +119,7 @@ speranza-loricaria,91a0735,mona
 macaria-plumosata,91a0736,exact
 speranza-quadrilinearia,91a0738,mona
 speranza-guenearia,91a0740,mona
-macaria-notata,91a0751,mona
+macaria-ulsterata,91a0751,exact
 macaria-aemulataria,91a0752,exact
 macaria-adonis,91a0760,exact
 macaria-sexmaculata,91a0766,exact
@@ -640,7 +640,7 @@ condica-discistriga,931991,exact
 condica-mersa,931993,exact
 condica-albolabes,931994,exact
 microhelia-angelica,932035,exact
-heliothodes-diminutivus,932036,gender
+heliothodes-diminutiva,932036,exact
 eutricopis-nexilis,932038,exact
 pyrrhia-cilisca,932040,exact
 pyrrhia-exprimens,932041,exact
