@@ -170,6 +170,20 @@ const reports: CurationReport[] = [
     ],
   },
   {
+    id: 'key-scores',
+    title: 'Identification key scores: what the live key uses',
+    audience: 'curation',
+    question: 'How is each species we have already scored in the identification key described, state by state?',
+    body: 'The live scores behind Identify: one row per species and one column per character-state, in the same layout as the key template, so a row can be copied to a new species. A <code>1</code> means the species has that state; a blank means it has not been scored. Identify drops a species on a question only when the species has a <code>1</code> on another state of that question and none on the states selected, so when you score a species on a question, mark every state that applies to it.',
+    regenerated: 'Committed by hand: it changes when a maintainer merges a filled-in template or corrects a cell.',
+    files: [fromRepo('data/key-scores.csv')],
+    see: [
+      { label: 'Runbook: adding species to the key', url: '_instructions/ADDING_SPECIES_TO_KEY.md' },
+      { label: 'ADR 0048 — the key is scored one species per row', url: 'docs/adr/0048-key-scores-one-row-per-species.md' },
+      { label: 'Issue #390', url: 'https://github.com/pnwinsects/pnwmoths/issues/390' },
+    ],
+  },
+  {
     id: 'key-coverage',
     title: 'Identification key coverage: key species with no page',
     audience: 'curation',
