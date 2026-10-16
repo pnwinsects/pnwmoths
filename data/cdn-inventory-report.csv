@@ -405,8 +405,6 @@ leucania-species/Leucania species-A-D.jpg,object,119095,leucania-species,photo-r
 leucania-species/Leucania species-A-V.jpg,object,114686,leucania-species,photo-refiled,data/images.csv files this filename under leucania-sp; copy at a superseded path
 lithophane-jefferyi/Lithophane jefferyi-A-D.jpg,object,132353,lithophane-jefferyi,photo-refiled,data/images.csv files this filename under lithophane-jeffreyi; copy at a superseded path
 lithophane-jefferyi/Lithophane jefferyi-A-V.jpg,object,132734,lithophane-jefferyi,photo-refiled,data/images.csv files this filename under lithophane-jeffreyi; copy at a superseded path
-macaria-ulsterata/Macaria ulsterata-A-D.jpg,object,127883,macaria-ulsterata,photo-refiled,data/images.csv files this filename under macaria-notata; copy at a superseded path
-macaria-ulsterata/Macaria ulsterata-A-V.jpg,object,125454,macaria-ulsterata,photo-refiled,data/images.csv files this filename under macaria-notata; copy at a superseded path
 nacophoria-mexicanaria/Nacophoria mexicanaria-A-D.jpg,object,128864,nacophoria-mexicanaria,photo-refiled,data/images.csv files this filename under phaeoura-mexicanaria; copy at a superseded path
 nacophoria-mexicanaria/Nacophoria mexicanaria-A-V.jpg,object,120621,nacophoria-mexicanaria,photo-refiled,data/images.csv files this filename under phaeoura-mexicanaria; copy at a superseded path
 neoarctia-beanii/Neoarctia beanii-A-D.jpg,object,142976,neoarctia-beanii,photo-refiled,data/images.csv files this filename under chelis-beanii; copy at a superseded path
@@ -496,6 +494,7 @@ zanclognatha-lutalba/Zanclognatha lutalba-A-D.jpg,object,132906,zanclognatha-lut
 zanclognatha-lutalba/Zanclognatha lutalba-A-V.jpg,object,136624,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
 zanclognatha-lutalba/Zanclognatha lutalba-B-D.jpg,object,166038,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
 zanclognatha-lutalba/Zanclognatha lutalba-B-V.jpg,object,156793,zanclognatha-lutalba,photo-refiled,data/images.csv files this filename under zanclognatha-jacchusalis; copy at a superseded path
+curation/records-bad-coords.csv,object,18488,,stale-site,not in the current _site-manifest.json
 images/logos/lucid.png,object,3595,,stale-site,not in the current _site-manifest.json
 plates/manifest.json,object,16954,,stale-site,not in the current _site-manifest.json
 species/alsophila-pometaria/records.parquet,object,381,alsophila-pometaria,stale-site,not in the current _site-manifest.json; alsophila-pometaria is gated and gets no page
@@ -617,7 +616,7 @@ species/macaria-aemulataria/index.html,object,4757,macaria-aemulataria,stale-sit
 species/macaria-aemulataria/records.parquet,object,381,macaria-aemulataria,stale-site,not in the current _site-manifest.json; macaria-aemulataria is gated and gets no page
 species/macaria-marmorata/index.html,object,4876,macaria-marmorata,stale-site,not in the current _site-manifest.json; macaria-marmorata is not in data/species.csv
 species/macaria-marmorata/records.parquet,object,381,macaria-marmorata,stale-site,not in the current _site-manifest.json; macaria-marmorata is not in data/species.csv
-species/macaria-notata/records.parquet,object,381,macaria-notata,stale-site,not in the current _site-manifest.json; macaria-notata is gated and gets no page
+species/macaria-notata/records.parquet,object,381,macaria-notata,stale-site,not in the current _site-manifest.json; macaria-notata is not in data/species.csv
 species/macaria-oweni/index.html,object,4222,macaria-oweni,stale-site,not in the current _site-manifest.json; macaria-oweni is gated and gets no page
 species/macaria-oweni/records.parquet,object,381,macaria-oweni,stale-site,not in the current _site-manifest.json; macaria-oweni is gated and gets no page
 species/macaria-sexmaculata/index.html,object,5215,macaria-sexmaculata,stale-site,not in the current _site-manifest.json; macaria-sexmaculata is gated and gets no page
@@ -709,6 +708,18 @@ species-tiles/catocala-allusa/A-D.dzi,object,206,catocala-allusa,tiles-no-photo,
 species-tiles/catocala-allusa/A-D_files/,tile-pyramid,,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-V.dzi,object,206,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
 species-tiles/catocala-allusa/A-V_files/,tile-pyramid,,catocala-allusa,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; catocala-allusa is not in data/species.csv
+species-tiles/heliothodes-diminutivus/A-D.dzi,object,206,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/A-D_files/,tile-pyramid,,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/A-V.dzi,object,206,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/A-V_files/,tile-pyramid,,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/B-D.dzi,object,206,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/B-D_files/,tile-pyramid,,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/B-V.dzi,object,206,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/B-V_files/,tile-pyramid,,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/C-D.dzi,object,206,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/C-D_files/,tile-pyramid,,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/C-V.dzi,object,206,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
+species-tiles/heliothodes-diminutivus/C-V_files/,tile-pyramid,,heliothodes-diminutivus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; heliothodes-diminutivus is not in data/species.csv
 species-tiles/macaria-bitactata/A-D.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/A-D_files/,tile-pyramid,,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/A-V.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
@@ -721,6 +732,46 @@ species-tiles/macaria-bitactata/C-D.dzi,object,206,macaria-bitactata,tiles-no-ph
 species-tiles/macaria-bitactata/C-D_files/,tile-pyramid,,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/C-V.dzi,object,206,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
 species-tiles/macaria-bitactata/C-V_files/,tile-pyramid,,macaria-bitactata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-bitactata is not in data/species.csv
+species-tiles/macaria-notata/A-D.dzi,object,206,macaria-notata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-notata is not in data/species.csv
+species-tiles/macaria-notata/A-D_files/,tile-pyramid,,macaria-notata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-notata is not in data/species.csv
+species-tiles/macaria-notata/A-V.dzi,object,206,macaria-notata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-notata is not in data/species.csv
+species-tiles/macaria-notata/A-V_files/,tile-pyramid,,macaria-notata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; macaria-notata is not in data/species.csv
+species-tiles/malacosoma-californicum/A-D.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/A-D_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/A-V.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/A-V_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/B-D.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/B-D_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/B-V.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/B-V_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/C-D.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/C-D_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/C-V.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/C-V_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/D-D.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/D-D_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/D-V.dzi,object,206,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-californicum/D-V_files/,tile-pyramid,,malacosoma-californicum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-californicum is not in data/species.csv
+species-tiles/malacosoma-constrictum/A-D.dzi,object,206,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/A-D_files/,tile-pyramid,,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/A-V.dzi,object,206,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/A-V_files/,tile-pyramid,,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/B-D.dzi,object,206,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/B-D_files/,tile-pyramid,,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/B-V.dzi,object,206,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/malacosoma-constrictum/B-V_files/,tile-pyramid,,malacosoma-constrictum,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; malacosoma-constrictum is not in data/species.csv
+species-tiles/manduca-quinquemaculata/A-D.dzi,object,206,manduca-quinquemaculata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; manduca-quinquemaculata is not in data/species.csv
+species-tiles/manduca-quinquemaculata/A-D_files/,tile-pyramid,,manduca-quinquemaculata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; manduca-quinquemaculata is not in data/species.csv
+species-tiles/manduca-quinquemaculata/A-V.dzi,object,206,manduca-quinquemaculata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; manduca-quinquemaculata is not in data/species.csv
+species-tiles/manduca-quinquemaculata/A-V_files/,tile-pyramid,,manduca-quinquemaculata,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; manduca-quinquemaculata is not in data/species.csv
+species-tiles/paonias-excaecatus/A-D.dzi,object,206,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/A-D_files/,tile-pyramid,,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/A-V.dzi,object,206,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/A-V_files/,tile-pyramid,,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/B-D.dzi,object,206,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/B-D_files/,tile-pyramid,,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/B-V.dzi,object,206,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
+species-tiles/paonias-excaecatus/B-V_files/,tile-pyramid,,paonias-excaecatus,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; paonias-excaecatus is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-D.dzi,object,206,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-D_files/,tile-pyramid,,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
 species-tiles/protorthodes-alfkenii/A-V.dzi,object,206,protorthodes-alfkenii,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; protorthodes-alfkenii is not in data/species.csv
@@ -761,4 +812,6 @@ species-tiles/sympistis-chionanti/A-D.dzi,object,206,sympistis-chionanti,tiles-n
 species-tiles/sympistis-chionanti/A-D_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V.dzi,object,206,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
 species-tiles/sympistis-chionanti/A-V_files/,tile-pyramid,,sympistis-chionanti,tiles-no-photo,no uploaded row in data/species-photos-manifest.csv; sympistis-chionanti is not in data/species.csv
+css/pico.min.css,object,83319,,unknown,
+styles/theme.css,object,23094,,unknown,
 test/somefile.jpg,object,750219,,unknown,
