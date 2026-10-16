@@ -23,8 +23,11 @@
  * The objects the repo tracks are checked against `data/cdn-retired-images.csv`
  * in the unit test.
  *
- * Additive and idempotent (size-checked skip, never deletes — ADR 0008). Retirement
- * of the old objects is recorded in `data/cdn-retired-images.csv`.
+ * Additive and idempotent (size-checked skip, never deletes — ADR 0008). A target
+ * that already exists at a different size is reported as a CONFLICT and left alone,
+ * because it may be a different object rather than an aborted copy; once checked by
+ * hand, REPAIR_MISMATCHED=1 overwrites it. Retirement of the old objects is recorded
+ * in `data/cdn-retired-images.csv`.
  *
  * Usage:
  *   DRY_RUN=1 BUNNY_STORAGE_PASSWORD=... node scripts/migrate-mpg-spelling-photos.ts
@@ -37,6 +40,8 @@ import { pathToFileURL } from 'node:url';
 import { createBunnyStorage, pooled, retargetSlugSegment } from './lib/bunny-storage.ts';
 
 const DRY_RUN: boolean = process.env['DRY_RUN'] === '1';
+/** Opt-in: overwrite a target whose size differs from its source (an aborted copy, once checked by hand). */
+const REPAIR_MISMATCHED: boolean = process.env['REPAIR_MISMATCHED'] === '1';
 const TAG = '[migrate-mpg-spelling-photos]';
 
 /** The six renames ruled in C-039 (#369). */
@@ -101,7 +106,7 @@ async function main(): Promise<void> {
 
   const plan: Array<{ from: string; to: string }> = [];
   const stats = { copied: 0, skipped: 0, failed: 0 };
-  let truncated = 0;
+  const conflicts: string[] = [];
 
   for (const [key, size] of sources) {
     const target = retarget(key);
@@ -112,15 +117,18 @@ async function main(): Promise<void> {
       continue;
     }
     if (existing !== undefined) {
-      truncated++;
-      console.log(`${TAG} re-copying ${target}: ${existing} bytes present, source is ${size}`);
+      // A different size is either an aborted copy or a different object that already
+      // lives at the new path. Only a person can tell which, so it is reported, not overwritten.
+      conflicts.push(target);
+      console.log(`${TAG} CONFLICT ${target}: ${existing} bytes present, source is ${size}`);
+      if (!REPAIR_MISMATCHED) continue;
     }
     plan.push({ from: key, to: target });
   }
 
   console.log(
     `${TAG} ${plan.length} object(s) to copy, ${stats.skipped} already present` +
-      (truncated > 0 ? `, ${truncated} present but the wrong size (re-copying)` : ''),
+      (conflicts.length > 0 ? `, ${conflicts.length} present at a different size (${REPAIR_MISMATCHED ? 're-copying' : 'left alone — see CONFLICT lines'})` : ''),
   );
 
   await pooled(plan, 8, async ({ from, to }) => {
@@ -143,8 +151,9 @@ async function main(): Promise<void> {
   console.log(`${TAG} summary:`);
   console.log(`  ${DRY_RUN ? 'would copy' : 'copied'}: ${stats.copied}`);
   console.log(`  skipped (already present): ${stats.skipped}`);
+  console.log(`  conflicts: ${conflicts.length}`);
   console.log(`  failed: ${stats.failed}`);
-  if (stats.failed > 0) process.exit(1);
+  if (stats.failed > 0 || (conflicts.length > 0 && !REPAIR_MISMATCHED)) process.exit(1);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
