@@ -101,12 +101,56 @@ template are tracked on #397.
 
 ---
 
+## C-039 · 2026-10-16 · Six species take MPG's spelling: *Macaria notata* becomes *M. ulsterata*, and five species change the ending of their name
+
+**Source** [#369 comment](https://github.com/pnwinsects/pnwmoths/issues/369#issuecomment-6222791134),
+the curator's own words, answering the two numbered questions in the issue body · **Status** Applied ·
+**Refines** C-038
+
+> 1: yes
+> 2: yes
+
+Question 1 asked whether to replace *Macaria notata* (Linnaeus, 1758), the European species, with
+*Macaria ulsterata* (Pearsall, 1913). MPG reinstated the North American moth under that name in Pohl &
+Nanz (2023) and notes that "Historical records of M. notata in NA refer to M. ulsterata." Question 2
+asked whether to follow MPG's ending on five names, where the ending only tracks the grammatical gender
+of the genus:
+
+| Was | Now |
+| --- | --- |
+| *Macaria notata* (Linnaeus, 1758) | *Macaria ulsterata* (Pearsall, 1913) |
+| *Malacosoma californicum* | *Malacosoma californica* |
+| *Malacosoma constrictum* | *Malacosoma constricta* |
+| *Heliothodes diminutivus* | *Heliothodes diminutiva* |
+| *Manduca quinquemaculata* | *Manduca quinquemaculatus* |
+| *Paonias excaecatus* | *Paonias excaecata* |
+
+Why it matters: five of these pages are public, and the old addresses now redirect to the new ones. The
+photographs keep their historical filenames (`Heliothodes diminutivus-A-D.jpg` still names its own
+specimen); only the folder they sit in changes, so the CDN copy is a separate step a maintainer runs
+(`scripts/migrate-mpg-spelling-photos.ts`). *Macaria ulsterata* is in withheld Geometridae and shows
+nothing to visitors. The species accounts' prose still uses the old names, and is left for Lars Crabo
+to rewrite; the rename applies the name only.
+
+What this reverses from C-038: for *Heliothodes* the key's binomial *H. diminutiva* now matches the
+species directly, so its synonym row is gone. The key still scores *Malacosoma californicum*, *M.
+constrictum*, *Manduca quinquemaculata* and *Paonias excaecatus* under their old names, so each has a
+new row in `data/species-synonyms.csv` and the key reaches all four as before.
+
+**What changed** — the species rows in `data/species.csv` (and the `similar_species` lists that name
+them), `src/content/species/*.md` filenames, and every file keyed by slug; six rows in
+`data/species-redirects.csv`; 211 retirement rows in `data/cdn-retired-images.csv`; `data/checklist-order.csv`
+now matches all six to MPG exactly rather than by gender or MONA number. `data/mpg-taxa.csv` was not
+touched: it already holds the six MPG spellings.
+
+---
+
 ## C-038 · 2026-10-07 · Twelve key binomials are the species we publish under a newer name; the key's *Lacinipolia vicina* is not carried to *L. sareta*
 
 **Source** [#390 comment](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6049060198),
 the curator's own words, answering the numbered table in
 [this comment](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6048990487) · **Status**
-Applied · **Refines** C-032
+Applied · **Refines** C-032 · **Refined by** C-039
 
 > 1–12 yes; 13 fresh
 
