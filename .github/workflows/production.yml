@@ -13,7 +13,7 @@ permissions:
 # build (issue #308 describes how a stuck deploy once blocked every later push).
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # The environment is for its secret (the analytics download needs the Bunny
     # password), not for serialising: environments do not queue runs, concurrency
     # groups do.
@@ -67,7 +67,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: production
     # One upload at a time, and only one waiting behind it: a newer push replaces
     # a waiting one, which is safe because every build contains all earlier commits.
