@@ -57,7 +57,7 @@ Tests cover the data pipeline (`scripts/build-data.test.ts`) and Lit components 
 
 Workflows on GitHub Actions:
 
-- **`production.yml`** — on push to `main`, builds the site at root `/` and uploads `_site` additively to the Bunny Storage Zone (production, <https://moths.pnwinsects.org/>)
+- **`production.yml`** — on push to `main`, builds the site at root `/` (every push builds in parallel), then uploads `_site` additively to the Bunny Storage Zone, one upload at a time ([ADR 0053](docs/adr/0053-build-in-parallel-deploy-in-turn.md); production, <https://moths.pnwinsects.org/>)
 - **`staging.yml`** — manual (`workflow_dispatch`) GitHub Pages staging deploy, builds under `/pnwmoths/`
 - **`pr-check.yml`** — full build + link check on pull requests
 - **`analytics.yml`** — nightly (08:00 UTC), pulls the Bunny logs that feed `/analytics/`

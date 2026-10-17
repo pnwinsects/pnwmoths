@@ -7,19 +7,22 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: production-deploy
-  cancel-in-progress: false
-
+# Builds run in parallel, one per push: nothing here touches the CDN, so there is
+# nothing to serialise. Only the deploy job queues, so a push waits behind an
+# earlier upload only for the upload itself, not for its own typecheck, tests and
+# build (issue #308 describes how a stuck deploy once blocked every later push).
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    # The environment is for its secret (the analytics download needs the Bunny
+    # password), not for serialising: environments do not queue runs, concurrency
+    # groups do.
     environment: production
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false # no git push here; keep token out of .git/config
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -54,9 +57,56 @@ jobs:
           # Authenticates lychee's github.com checks; anonymous runner IPs hit the
           # API rate limit and get 404s that read as link rot (see pr-check.yml).
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Keep the built site for the deploy job
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site
+          path: _site
+          retention-days: 1
+          if-no-files-found: error
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    # One upload at a time, and only one waiting behind it: a newer push replaces
+    # a waiting one, which is safe because every build contains all earlier commits.
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false # no git push here; keep token out of .git/config
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      # Builds finish in any order, so a slow build of an older commit can reach
+      # this point after a newer commit has already deployed. Uploading it then
+      # would put older files over newer ones, because the upload overwrites changed
+      # files. Skip instead: the newer commit's own run carries everything.
+      - name: Skip if a newer commit is on main
+        id: fresh
+        if: github.ref == 'refs/heads/main'
+        run: |
+          head=$(git ls-remote origin refs/heads/main | cut -f1)
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            echo "main is now at $head, not $GITHUB_SHA; its own run will deploy." >> "$GITHUB_STEP_SUMMARY"
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Fetch the built site
+        if: steps.fresh.outputs.stale != 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site
+          path: _site
       - name: Upload _site to Bunny
+        if: steps.fresh.outputs.stale != 'true'
         run: npm run site:upload
         env:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
       - name: CDN smoke check
+        if: steps.fresh.outputs.stale != 'true'
         run: npm run deploy:smoke
