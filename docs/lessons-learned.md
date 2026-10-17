@@ -771,3 +771,11 @@ cost a debugging cycle to discover.
   [ADR 0017](adr/0017-reproducible-committed-artifacts.md) for the related rule that committed
   artifacts embed no timestamp — the churn from that timestamp is what hid this bug for
   months, and "the file always shows as modified" is a warning sign, not a fact of life.
+
+- **Pin the runner image; `ubuntu-latest` changes the machine under a passing build.** GitHub
+  announced that `ubuntu-latest` moves to Ubuntu 26.04 from 2026-10-19 to 2026-11-19, a few
+  weeks of rollout during which the same label could mean either image. Our builds depend on what
+  the image ships: the browser smoke test drives the Google Chrome preinstalled on the runner
+  (`scripts/check-browser-smoke.ts`), and the DuckDB extension and lychee installs download
+  binaries built for a platform. Every workflow now names its image (`ubuntu-26.04`), so a move to
+  a newer one is its own pull request with its own CI run.
