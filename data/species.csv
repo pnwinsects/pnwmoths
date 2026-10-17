@@ -1230,93 +1230,93 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2846,Sympistis,chandleri,,93-1857,"(Grote, 1873)",Noctuidae,sympistis-utahensis|sympistis-poliochroa|sympistis-major,Oncocnemidinae,,
 2847,Trichopolia,eureka,,93-3104,"(Barnes & Benjamin, 1927)",Noctuidae,trichopolia-curtica,Noctuinae,,Eriopygini
 2849,Resapamea,diluvius,,93-2368.1,"Crabo, 2013",Noctuidae,resapamea-passer,Noctuinae,,Apameini
-2893,Hydriomena,perfracta,,MONA 7229,"Swett, 1910",Geometridae,,Larentiinae,,
-2952,Hydriomena,furcata,,7257,"(Thunberg, 1784) ",Geometridae,,Larentiinae,,
+2893,Hydriomena,perfracta,,MONA 7229,"Swett, 1910",Geometridae,,Larentiinae,,Hydriomenini
+2952,Hydriomena,furcata,,7257,"(Thunberg, 1784) ",Geometridae,,Larentiinae,,Hydriomenini
 2962,Perizoma,costiguttata,,MONA 7325,"(Hulst, 1896) ",Geometridae,,Larentiinae,,
-2971,Stamnodes,topazata,,MONA 7349,"(Strecker, 1899)",Geometridae,,Larentiinae,,
-2980,Antepirrhoe,semiatrata,,MONA 7210,"(Hulst, 1881) ",Geometridae,,Larentiinae,,
-2985,Eulithis,destinata,,MONA 7204,"(Möschler, 1860)",Geometridae,,Larentiinae,,
-2987,Eulithis,xylina,,MONA 7207,"(Hulst, 1896) ",Geometridae,,Larentiinae,,
-2988,Ecliptopera,silaceata,,MONA 7213,"([Denis & Schiffermüller], 1775)",Geometridae,,Larentiinae,,
-2989,Dysstroma,citrata,,MONA 7182,"(Linnaeus, 1761)",Geometridae,,Larentiinae,,
-2990,Dysstroma,sobria,,MONA 7184,"Swett, 1917",Geometridae,,Larentiinae,,
-2992,Dysstroma,truncata,,MONA 7187,"(Hufnagel, 1767)",Geometridae,,Larentiinae,,
-3002,Ceratodalia,gueneata,,MONA 7221,"Packard, 1876",Geometridae,,Larentiinae,,
-3009,Epirrita,pulchraria,,MONA 7435,"(Taylor, 1907)",Geometridae,,Larentiinae,,
-3016,Venusia,pearsalli,,MONA 7429,"(Dyar, 1906) ",Geometridae,,Larentiinae,,
-3017,Trichodezia,albovittata,,MONA 7430,"(Guenée, [1858])",Geometridae,,Larentiinae,,
-3019,Rheumaptera,hastata,,MONA 7293,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,
+2971,Stamnodes,topazata,,MONA 7349,"(Strecker, 1899)",Geometridae,,Larentiinae,,Stamnodini
+2980,Antepirrhoe,semiatrata,,MONA 7210,"(Hulst, 1881) ",Geometridae,,Larentiinae,,Cidariini
+2985,Eulithis,destinata,,MONA 7204,"(Möschler, 1860)",Geometridae,,Larentiinae,,Cidariini
+2987,Eulithis,xylina,,MONA 7207,"(Hulst, 1896) ",Geometridae,,Larentiinae,,Cidariini
+2988,Ecliptopera,silaceata,,MONA 7213,"([Denis & Schiffermüller], 1775)",Geometridae,,Larentiinae,,Cidariini
+2989,Dysstroma,citrata,,MONA 7182,"(Linnaeus, 1761)",Geometridae,,Larentiinae,,Cidariini
+2990,Dysstroma,sobria,,MONA 7184,"Swett, 1917",Geometridae,,Larentiinae,,Cidariini
+2992,Dysstroma,truncata,,MONA 7187,"(Hufnagel, 1767)",Geometridae,,Larentiinae,,Cidariini
+3002,Ceratodalia,gueneata,,MONA 7221,"Packard, 1876",Geometridae,,Larentiinae,,Cidariini
+3009,Epirrita,pulchraria,,MONA 7435,"(Taylor, 1907)",Geometridae,,Larentiinae,,Operophterini
+3016,Venusia,pearsalli,,MONA 7429,"(Dyar, 1906) ",Geometridae,,Larentiinae,,Asthenini
+3017,Trichodezia,albovittata,,MONA 7430,"(Guenée, [1858])",Geometridae,,Larentiinae,,Cidariini
+3019,Rheumaptera,hastata,,MONA 7293,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,Rheumapterini
 3021,Hydria,undulata,,MONA 7291,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,
-3022,Triphosa,haesitata,,MONA 7285,"(Guenée, 1858)",Geometridae,,Larentiinae,,
+3022,Triphosa,haesitata,,MONA 7285,"(Guenée, 1858)",Geometridae,,Larentiinae,,Triphosini
 3305,Annaphila,miona,,93-1749,"Smith, 1908",Noctuidae,annaphila-lithosina,Amphipyrinae,,Stiriini
-3095,Hemithea,aestivaria,,MONA 7083,"(Hübner, 1799)",Geometridae,,Geometrinae,,
+3095,Hemithea,aestivaria,,MONA 7083,"(Hübner, 1799)",Geometridae,,Geometrinae,,Hemitheini
 3097,Archiearis,infans,,MONA 6256,"(Möschler, 1862)",Geometridae,,Archiearinae,,
 3098,Leucobrephos,brephoides,,MONA 6257,"(Walker, 1857)",Geometridae,,Archiearinae,,
-3099,Alsophila,pometaria,,MONA 6258,"(Harris, 1841)",Geometridae,,Ennominae,,
-3100,Nematocampa,resistaria,,MONA 7010,"(Herrich-Schäffer, [1855])",Geometridae,,Ennominae,,
-3102,Protitame,virginalis,,MONA 6270,"(Hulst, 1900) ",Geometridae,,Ennominae,,
-3103,Protitame,subalbaria,,MONA 6266,"(Packard, 1873) ",Geometridae,,Ennominae,,
-3104,Eumacaria,madopata,,MONA 6272,"(Guenée, [1858])",Geometridae,,Ennominae,,
+3099,Alsophila,pometaria,,MONA 6258,"(Harris, 1841)",Geometridae,,Ennominae,,Alsophilini
+3100,Nematocampa,resistaria,,MONA 7010,"(Herrich-Schäffer, [1855])",Geometridae,,Ennominae,,Ennomini
+3102,Protitame,virginalis,,MONA 6270,"(Hulst, 1900) ",Geometridae,,Ennominae,,Cassymini
+3103,Protitame,subalbaria,,MONA 6266,"(Packard, 1873) ",Geometridae,,Ennominae,,Cassymini
+3104,Eumacaria,madopata,,MONA 6272,"(Guenée, [1858])",Geometridae,,Ennominae,,Macariini
 3106,Speranza,brunneata,,MONA 6286,"(Thunberg, 1784) ",Geometridae,,Ennominae,,
 3107,Speranza,amboflava,,MONA 6284,"(Ferguson, 1953)",Geometridae,,Ennominae,,
 3109,Speranza,boreata,,MONA 6287.1,"(Ferguson, 2008)",Geometridae,,Ennominae,,
 3111,Speranza,exauspicata,,MONA 6292,"Walker, 1861",Geometridae,,Ennominae,,
 3113,Speranza,bitactata,,MONA 6304,"(Walker, 1862) ",Geometridae,,Ennominae,,
 3114,Speranza,decorata,,MONA 6306,"(Hulst, 1896) ",Geometridae,,Ennominae,,
-3115,Macaria,colata,,MONA 6308,"(Grote, 1881)",Geometridae,,Ennominae,,
+3115,Macaria,colata,,MONA 6308,"(Grote, 1881)",Geometridae,,Ennominae,,Macariini
 3116,Speranza,occiduaria,,MONA 6279,"(Packard, 1874)",Geometridae,,Ennominae,,
 3118,Speranza,helena,,MONA 6277,"(Cassino, 1928)",Geometridae,,Ennominae,,
 3120,Speranza,simplex,,MONA 6281,"(Dyar, 1907)",Geometridae,,Ennominae,,
-3121,Macaria,lorquinaria,,MONA 6324,"(Guenée, [1858])",Geometridae,,Ennominae,,
+3121,Macaria,lorquinaria,,MONA 6324,"(Guenée, [1858])",Geometridae,,Ennominae,,Macariini
 3122,Speranza,loricaria,,MONA 6290,"(Eversmann, 1837)",Geometridae,,Ennominae,,
-3123,Macaria,plumosata,,MONA 6296,"(Barnes & McDunnough, 1917)",Geometridae,,Ennominae,,
+3123,Macaria,plumosata,,MONA 6296,"(Barnes & McDunnough, 1917)",Geometridae,,Ennominae,,Macariini
 3124,Speranza,quadrilinearia,,MONA 6288,"(Packard, 1873) ",Geometridae,,Ennominae,,
 3125,Speranza,guenearia,,MONA 6301,"(Packard, 1876)",Geometridae,,Ennominae,,
 3126,Epelis,truncataria,,MONA 6321,"(Walker, 1862) ",Geometridae,,Ennominae,,
-3128,Macaria,ulsterata,,MONA 6330,"(Pearsall, 1913)",Geometridae,,Ennominae,,
-3131,Macaria,adonis,,MONA 6338," Barnes & McDunnough, 1918",Geometridae,,Ennominae,,
-3140,Digrammia,delectata,,MONA 6374,"(Hulst, 1887) ",Geometridae,,Ennominae,,
-3142,Digrammia,denticulata,,MONA 6373,"(Grote, 1883)",Geometridae,,Ennominae,,
-3143,Digrammia,nubiculata,,MONA 6371,"(Packard, 1876)",Geometridae,,Ennominae,,
-3163,Hesperumia,sulphuraria,,MONA 6431,"Packard, 1873",Geometridae,,Ennominae,,
-3166,Neoalcis,californiaria,,MONA 6435,"(Packard, 1871) ",Geometridae,,Ennominae,,
-3186,Anavitrinella,pampinaria,,MONA 6590,"(Guenée, [1858])",Geometridae,,Ennominae,,
-3190,Protoboarmia,porcelaria,,MONA 6598,"(Guenée, [1858])",Geometridae,,Ennominae,,
-3194,Biston,betularia,,MONA 6640,"(Linnaeus, 1758 )",Geometridae,,Ennominae,,
-3213,Drepanulatrix,unicalcararia,,MONA 6682,"(Guenée, [1858])",Geometridae,,Ennominae,,
-3216,Drepanulatrix,quadraria,,MONA 6685,"(Grote, 1882)",Geometridae,,Ennominae,,
-3218,Drepanulatrix,foeminaria,,MONA 6686,"(Guenée, [1858])",Geometridae,,Ennominae,,
-3219,Drepanulatrix,carnearia,,MONA 6688,"(Hulst, 1888)",Geometridae,,Ennominae,,
-3221,Drepanulatrix,secundaria,,MONA 6690,"Barnes & McDunnough, 1916",Geometridae,,Ennominae,,
-3229,Euchlaena,johnsonaria,,MONA 6729,"(Fitch, 1869)",Geometridae,,Ennominae,,
-3230,Euchlaena,madusaria,,MONA 6731,"(Walker, 1860)",Geometridae,,Ennominae,,
-3232,Euchlaena,tigrinaria,,MONA 6737,"(Guenée, 1858)",Geometridae,,Ennominae,,
-3238,Pero,mizon,,MONA 6757,"(Rindge, 1955)",Geometridae,,Ennominae,,
-3242,Phaeoura,mexicanaria,,MONA 6766,"(Grote, 1883)",Geometridae,,Ennominae,,
-3244,Gabriola,dyari,,MONA 6781,"Taylor, 1904",Geometridae,,Ennominae,,
-3246,Campaea,perlata,,MONA 6796,"(Guenée, 1858)",Geometridae,,Ennominae,,
-3248,Ennomos,alniaria,,MONA 6797.1,"(Linnaeus, 1758 )",Geometridae,,Ennominae,,
+3128,Macaria,ulsterata,,MONA 6330,"(Pearsall, 1913)",Geometridae,,Ennominae,,Macariini
+3131,Macaria,adonis,,MONA 6338," Barnes & McDunnough, 1918",Geometridae,,Ennominae,,Macariini
+3140,Digrammia,delectata,,MONA 6374,"(Hulst, 1887) ",Geometridae,,Ennominae,,Macariini
+3142,Digrammia,denticulata,,MONA 6373,"(Grote, 1883)",Geometridae,,Ennominae,,Macariini
+3143,Digrammia,nubiculata,,MONA 6371,"(Packard, 1876)",Geometridae,,Ennominae,,Macariini
+3163,Hesperumia,sulphuraria,,MONA 6431,"Packard, 1873",Geometridae,,Ennominae,,Boarmiini
+3166,Neoalcis,californiaria,,MONA 6435,"(Packard, 1871) ",Geometridae,,Ennominae,,Boarmiini
+3186,Anavitrinella,pampinaria,,MONA 6590,"(Guenée, [1858])",Geometridae,,Ennominae,,Boarmiini
+3190,Protoboarmia,porcelaria,,MONA 6598,"(Guenée, [1858])",Geometridae,,Ennominae,,Boarmiini
+3194,Biston,betularia,,MONA 6640,"(Linnaeus, 1758 )",Geometridae,,Ennominae,,Boarmiini
+3213,Drepanulatrix,unicalcararia,,MONA 6682,"(Guenée, [1858])",Geometridae,,Ennominae,,Caberini
+3216,Drepanulatrix,quadraria,,MONA 6685,"(Grote, 1882)",Geometridae,,Ennominae,,Caberini
+3218,Drepanulatrix,foeminaria,,MONA 6686,"(Guenée, [1858])",Geometridae,,Ennominae,,Caberini
+3219,Drepanulatrix,carnearia,,MONA 6688,"(Hulst, 1888)",Geometridae,,Ennominae,,Caberini
+3221,Drepanulatrix,secundaria,,MONA 6690,"Barnes & McDunnough, 1916",Geometridae,,Ennominae,,Caberini
+3229,Euchlaena,johnsonaria,,MONA 6729,"(Fitch, 1869)",Geometridae,,Ennominae,,Gnophini
+3230,Euchlaena,madusaria,,MONA 6731,"(Walker, 1860)",Geometridae,,Ennominae,,Gnophini
+3232,Euchlaena,tigrinaria,,MONA 6737,"(Guenée, 1858)",Geometridae,,Ennominae,,Gnophini
+3238,Pero,mizon,,MONA 6757,"(Rindge, 1955)",Geometridae,,Ennominae,,Odontoperini
+3242,Phaeoura,mexicanaria,,MONA 6766,"(Grote, 1883)",Geometridae,,Ennominae,,Nacophorini
+3244,Gabriola,dyari,,MONA 6781,"Taylor, 1904",Geometridae,,Ennominae,,Nacophorini
+3246,Campaea,perlata,,MONA 6796,"(Guenée, 1858)",Geometridae,,Ennominae,,Campaeini
+3248,Ennomos,alniaria,,MONA 6797.1,"(Linnaeus, 1758 )",Geometridae,,Ennominae,,Ennomini
 3250,Enypia,packardata,,7007,"Taylor, 1906",Geometridae,,Ennominae,,
 3253,Enypia,venata,,7005,"(Grote, 1883)",Geometridae,,Ennominae,,
-3260,Tetracis,pallidata,,6960.1,"Ferris, 2009",Geometridae,,Ennominae,,
-3262,Tetracis,formosa,,6958,"(Hulst, 1896) ",Geometridae,,Ennominae,,
-3263,Tetracis,cervinaria,,6956,"(Packard, 1871) ",Geometridae,,Ennominae,,
-3264,Tetracis,pallulata,,6955,"(Hulst, 1887) ",Geometridae,,Ennominae,,
-3265,Tetracis,jubararia,,6954,"(Hulst, 1886)",Geometridae,,Ennominae,,
-3269,Somatolophia,ectrapelaria,,6945,"(Grossbeck, 1908)",Geometridae,,Ennominae,,
-3271,Plataea,n sp,,6926.1,"Shepard, 201X",Geometridae,,Ennominae,,
-3272,Plataea,trilinearia,,6926,"(Packard, 1873) ",Geometridae,,Ennominae,,
-3273,Plataea,diva,,6925,"Hulst, 1896",Geometridae,,Ennominae,,
-3274,Sicya,morsicaria,,6915,"(Hulst, 1886)",Geometridae,,Ennominae,,
-3275,Sicya,macularia,,6912,"(Harris, 1850)",Geometridae,,Ennominae,,
-3278,Nepytia,umbrosaria,,6899,"(Packard, 1873) ",Geometridae,,Ennominae,,
-3283,Caripeta,angustiorata,,6867,"Walker, 1863",Geometridae,,Ennominae,,
-3284,Caripeta,aequaliaria,,6865,"Grote, 1883",Geometridae,,Ennominae,,
-3296,Metanema,inatomaria,,6819,"Guenée, 1858",Geometridae,,Ennominae,,
+3260,Tetracis,pallidata,,6960.1,"Ferris, 2009",Geometridae,,Ennominae,,Ennomini
+3262,Tetracis,formosa,,6958,"(Hulst, 1896) ",Geometridae,,Ennominae,,Ennomini
+3263,Tetracis,cervinaria,,6956,"(Packard, 1871) ",Geometridae,,Ennominae,,Ennomini
+3264,Tetracis,pallulata,,6955,"(Hulst, 1887) ",Geometridae,,Ennominae,,Ennomini
+3265,Tetracis,jubararia,,6954,"(Hulst, 1886)",Geometridae,,Ennominae,,Ennomini
+3269,Somatolophia,ectrapelaria,,6945,"(Grossbeck, 1908)",Geometridae,,Ennominae,,Ennomini
+3271,Plataea,n sp,,6926.1,"Shepard, 201X",Geometridae,,Ennominae,,Ennomini
+3272,Plataea,trilinearia,,6926,"(Packard, 1873) ",Geometridae,,Ennominae,,Ennomini
+3273,Plataea,diva,,6925,"Hulst, 1896",Geometridae,,Ennominae,,Ennomini
+3274,Sicya,morsicaria,,6915,"(Hulst, 1886)",Geometridae,,Ennominae,,Ennomini
+3275,Sicya,macularia,,6912,"(Harris, 1850)",Geometridae,,Ennominae,,Ennomini
+3278,Nepytia,umbrosaria,,6899,"(Packard, 1873) ",Geometridae,,Ennominae,,Ennomini
+3283,Caripeta,angustiorata,,6867,"Walker, 1863",Geometridae,,Ennominae,,Ennomini
+3284,Caripeta,aequaliaria,,6865,"Grote, 1883",Geometridae,,Ennominae,,Ennomini
+3296,Metanema,inatomaria,,6819,"Guenée, 1858",Geometridae,,Ennominae,,Anagogini
 3303,Hypenodes,fractilinea,Broken-line Hypenodes Moth,93-0662,"(Smith, 1908)",Erebidae,hypenodes-sombrus,Hypenodinae,,
 3304,Hypenodes,sombrus,,93-0664,"(Smith, 1908)",Erebidae,hypenodes-fractilinea,Hypenodinae,,
 3342,Arctia,brachyptera,,93-0292,"Troubridge & Lafontaine, 2000",Erebidae,,Arctiinae,,Arctiini
-3310,Caripeta,divisata,,,,Geometridae,,Ennominae,,
+3310,Caripeta,divisata,,MONA 6863,"Walker, 1863",Geometridae,,Ennominae,,Ennomini
 3311,Catocala,piatrix,Penitent Underwing Moth,93-0762,"Grote, 1864",Erebidae,catocala-neogama,Erebinae,,Catocalini
 3312,Tarache,acerba,,93-1368,"(H. Edwards, 1881)",Noctuidae,,Acontiinae,,Acontiini
 3313,Lasionycta,staudingeri,,93-2992,"(Aurivillius, 1891)",Noctuidae,,Noctuinae,,Eriopygini
@@ -1347,24 +1347,24 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 3343,Scotogramma,harnardi,,93-2851,"Barnes & Benjamin, 1924",Noctuidae,,Noctuinae,,Hadenini
 3344,Ulolonche,disticha,,93-3124,"(Morrison, 1875)",Noctuidae,,Noctuinae,,Eriopygini
 3346,Euxoa,pimensis,,93-3383,"Barnes & McDunnough, 1910",Noctuidae,,Noctuinae,,Noctuini
-2880,Anticlea,vasiliata,,MONA 7329,"Guenée, 1858",Geometridae,,Larentiinae,,
-2883,Mesoleuca,gratulata,,MONA 7308,"(Walker, 1862) ",Geometridae,,Larentiinae,,
-2889,Spargania,luctuata,,MONA 7313,"([Denis & Schiffermüller], 1775)",Geometridae,,Larentiinae,,
-2895,Hydriomena,edenata,,MONA 7232,"Swett, 1909",Geometridae,,Larentiinae,,
-2903,Cladara,limitaria,,MONA 7637,"(Walker, 1860)",Geometridae,,Larentiinae,,
-2909,Lobophora,nivigerata,,MONA 7640,"Walker, 1862",Geometridae,,Larentiinae,,
-2941,Eupithecia,ravocostaliata,,MONA 7605,"Packard, 1876",Geometridae,,Larentiinae,,
-2949,Hydriomena,crokeri,,MONA 7247,"Swett, 1910",Geometridae,,Larentiinae,,
+2880,Anticlea,vasiliata,,MONA 7329,"Guenée, 1858",Geometridae,,Larentiinae,,Larentiini
+2883,Mesoleuca,gratulata,,MONA 7308,"(Walker, 1862) ",Geometridae,,Larentiinae,,Larentiini
+2889,Spargania,luctuata,,MONA 7313,"([Denis & Schiffermüller], 1775)",Geometridae,,Larentiinae,,Larentiini
+2895,Hydriomena,edenata,,MONA 7232,"Swett, 1909",Geometridae,,Larentiinae,,Hydriomenini
+2903,Cladara,limitaria,,MONA 7637,"(Walker, 1860)",Geometridae,,Larentiinae,,Trichopterygini
+2909,Lobophora,nivigerata,,MONA 7640,"Walker, 1862",Geometridae,,Larentiinae,,Trichopterygini
+2941,Eupithecia,ravocostaliata,,MONA 7605,"Packard, 1876",Geometridae,,Larentiinae,,Eupitheciini
+2949,Hydriomena,crokeri,,MONA 7247,"Swett, 1910",Geometridae,,Larentiinae,,Hydriomenini
 2961,Perizoma,curvilinea,,MONA 7324,"(Hulst, 1896) ",Geometridae,,Larentiinae,,
-2965,Stamnoctenis,pearsalli,,MONA 7357,"(Swett, 1914)",Geometridae,,Larentiinae,,
-2997,Dysstroma,brunneata,,MONA 7194,"(Packard, 1867)",Geometridae,,Larentiinae,,
-3062,Idaea,dimidiata,,MONA 7126,"(Hufnagel, 1767)",Geometridae,,Sterrhinae,,
-3085,Nemoria,darwiniata,,MONA 7035,"(Dyar, 1904 )",Geometridae,,Geometrinae,,
-3191,Melanolophia,imitata,,MONA 6618,"(Walker, 1860)",Geometridae,,Ennominae,,
-3201,Phigalia,plumogeraria,,MONA 6661,"(Hulst, 1888)",Geometridae,,Ennominae,,
-3239,Pero,behrensaria,,MONA 6760,"(Packard, 1871) ",Geometridae,,Ennominae,,
-3277,Nepytia,phantasmaria,,6907,"(Strecker, 1899)",Geometridae,,Ennominae,,
-3289,Plagodis,phlogosaria,,6842,"(Guenée, 1858)",Geometridae,,Ennominae,,
+2965,Stamnoctenis,pearsalli,,MONA 7357,"(Swett, 1914)",Geometridae,,Larentiinae,,Stamnodini
+2997,Dysstroma,brunneata,,MONA 7194,"(Packard, 1867)",Geometridae,,Larentiinae,,Cidariini
+3062,Idaea,dimidiata,,MONA 7126,"(Hufnagel, 1767)",Geometridae,,Sterrhinae,,Sterrhini
+3085,Nemoria,darwiniata,,MONA 7035,"(Dyar, 1904 )",Geometridae,,Geometrinae,,Nemoriini
+3191,Melanolophia,imitata,,MONA 6618,"(Walker, 1860)",Geometridae,,Ennominae,,Boarmiini
+3201,Phigalia,plumogeraria,,MONA 6661,"(Hulst, 1888)",Geometridae,,Ennominae,,Boarmiini
+3239,Pero,behrensaria,,MONA 6760,"(Packard, 1871) ",Geometridae,,Ennominae,,Odontoperini
+3277,Nepytia,phantasmaria,,6907,"(Strecker, 1899)",Geometridae,,Ennominae,,Ennomini
+3289,Plagodis,phlogosaria,,6842,"(Guenée, 1858)",Geometridae,,Ennominae,,Anagogini
 3348,Notodonta,ochreata,,93-0015.2,"(Barnes & McDunnough, 1912)",Notodontidae,notodonta-pacifica,Notodontinae,,
 3349,Lycomorpha,pholus,Black-and-yellow Lichen Moth,93-0201,"(Drury, 1773)",Erebidae,,Arctiinae,,Lithosiini
 3350,Papaipema,unimoda,Meadow Rue Borer,93-2465,"(Smith, 1894)",Noctuidae,papaipema-insulidens|papaipema-limata,Noctuinae,,Apameini
@@ -1382,27 +1382,27 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2679,Egira,aff curialis,,,,Noctuidae,,Noctuinae,,Orthosiini
 2722,Schinia,aff verna,,,,Noctuidae,,Heliothinae,,
 2725,Resapamea,aff passer,,,,Noctuidae,,Noctuinae,,Apameini
-3129,Macaria,aemulataria,,MONA 6326,,Geometridae,,Ennominae,,
-3132,Macaria,sexmaculata,,MONA 6343,,Geometridae,,Ennominae,,
-3135,Macaria,signaria,,MONA 6344,,Geometridae,,Ennominae,,
-3137,Macaria,oweni,,MONA 6351,,Geometridae,,Ennominae,,
-3138,Digrammia,californiaria,,MONA 6380,,Geometridae,,Ennominae,,
-3139,Digrammia,sexpunctata,,MONA 6387.1,,Geometridae,,Ennominae,,
-3144,Digrammia,curvata,,MONA 6370,,Geometridae,,Ennominae,,
-3148,Digrammia,excurvata,,MONA 6363,,Geometridae,,Ennominae,,
-3149,Digrammia,burneyata,,MONA 6376,,Geometridae,,Ennominae,,
-3150,Digrammia,modocata,,MONA 6376.1,,Geometridae,,Ennominae,,
-3151,Digrammia,muscariata,,MONA 6377,,Geometridae,,Ennominae,,
-3152,Digrammia,extenuata,,MONA 6377.1,,Geometridae,,Ennominae,,
-3153,Digrammia,rippertaria,,MONA 6394.1,,Geometridae,,Ennominae,,
-3154,Digrammia,decorata,,MONA 6389,,Geometridae,,Ennominae,,
-3156,Digrammia,subminiata,,MONA 6399,,Geometridae,,Ennominae,,
-3157,Digrammia,neptaria,,MONA 6396,,Geometridae,,Ennominae,,
-3158,Digrammia,irrorata,,MONA 6395,,Geometridae,,Ennominae,,
-3159,Fernaldella,fimetaria,,MONA 6420,,Geometridae,,Ennominae,,
-3161,Dasyfidonia,avuncularia,,MONA 6426,,Geometridae,,Ennominae,,
-3306,Digrammia,cinereola,,MONA 6363.2,,Geometridae,,Ennominae,,
-3307,Digrammia,napensis,,MONA 6366,,Geometridae,,Ennominae,,
+3129,Macaria,aemulataria,,MONA 6326,"(Walker, 1861)",Geometridae,,Ennominae,,Macariini
+3132,Macaria,sexmaculata,,MONA 6343,"Packard, 1867",Geometridae,,Ennominae,,Macariini
+3135,Macaria,signaria,,MONA 6344,"(Hübner, 1809)",Geometridae,,Ennominae,,Macariini
+3137,Macaria,oweni,,MONA 6351,,Geometridae,,Ennominae,,Macariini
+3138,Digrammia,californiaria,,MONA 6380,"(Packard, 1871)",Geometridae,,Ennominae,,Macariini
+3139,Digrammia,sexpunctata,,MONA 6387.1,,Geometridae,,Ennominae,,Macariini
+3144,Digrammia,curvata,,MONA 6370,"(Grote, 1880)",Geometridae,,Ennominae,,Macariini
+3148,Digrammia,excurvata,,MONA 6363,,Geometridae,,Ennominae,,Macariini
+3149,Digrammia,burneyata,,MONA 6376,,Geometridae,,Ennominae,,Macariini
+3150,Digrammia,modocata,,MONA 6376.1,,Geometridae,,Ennominae,,Macariini
+3151,Digrammia,muscariata,,MONA 6377,"(Guenée, [1858])",Geometridae,,Ennominae,,Macariini
+3152,Digrammia,extenuata,,MONA 6377.1,,Geometridae,,Ennominae,,Macariini
+3153,Digrammia,rippertaria,,MONA 6394.1,"(Duponchel, 1830)",Geometridae,,Ennominae,,Macariini
+3154,Digrammia,decorata,,MONA 6389,"(Grossbeck, 1907)",Geometridae,,Ennominae,,Macariini
+3156,Digrammia,subminiata,,MONA 6399,"(Packard, 1873)",Geometridae,,Ennominae,,Macariini
+3157,Digrammia,neptaria,,MONA 6396,"(Guenée, [1858])",Geometridae,,Ennominae,,Macariini
+3158,Digrammia,irrorata,,MONA 6395,"(Packard, 1876)",Geometridae,,Ennominae,,Macariini
+3159,Fernaldella,fimetaria,,MONA 6420,"(Grote & Robinson, 1870)",Geometridae,,Ennominae,,
+3161,Dasyfidonia,avuncularia,,MONA 6426,"(Guenée, [1858])",Geometridae,,Ennominae,,Macariini
+3306,Digrammia,cinereola,,MONA 6363.2,,Geometridae,,Ennominae,,Macariini
+3307,Digrammia,napensis,,MONA 6366,,Geometridae,,Ennominae,,Macariini
 3338,Apantesis,bolanderi,,93-0263,,Erebidae,,Arctiinae,,Arctiini
 3371,Ianassa,pallida,Pale Prominent Moth,93-0107,"(Strecker, 1899)",Notodontidae,oedemasia-semirufescens,Heterocampinae,,
 3372,Coelodasys,unicornis,Unicorn Caterpillar Moth,93-0100,"(J.E. Smith, 1797)",Notodontidae,coelodasys-conspecta,Heterocampinae,,
@@ -1417,3 +1417,336 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 3381,Xestia,c-nigrum,Lesser Black-letter Dart Moth,93-3588,"(Linnaeus, 1758)",Noctuidae,,Noctuinae,,Noctuini
 3382,Callopistria,floridensis,Florida Fern Moth,93-2190,"(Guenée, 1852)",Noctuidae,,Eriopinae,,
 3383,Clostera,brucei,,93-0008,"(Hy. Edwards, 1885)",Notodontidae,clostera-apicalis|clostera-paraphora|clostera-multnoma,Pygaerinae,,
+3384,Cyclophora,dataria,,MONA 7135,"(Hulst, 1887)",Geometridae,,Sterrhinae,,Cosymbiini
+3385,Cyclophora,pendulinaria,Sweetfern Geometer Moth,MONA 7139,"(Guenée, [1858])",Geometridae,,Sterrhinae,,Cosymbiini
+3386,Haematopis,grataria,Chickweed Geometer,MONA 7146,"(Fabricius, 1798)",Geometridae,,Sterrhinae,,Timandrini
+3387,Lobocleta,quaesitata,,MONA 7096,"(Hulst, 1880)",Geometridae,,Sterrhinae,,Sterrhini
+3388,Idaea,demissaria,Red-Bordered Wave,MONA 7114,"(Hübner, [1831])",Geometridae,,Sterrhinae,,Sterrhini
+3389,Idaea,occidentaria,,MONA 7117,"(Packard, 1873)",Geometridae,,Sterrhinae,,Sterrhini
+3390,Idaea,rotundopennata,,MONA 7125,"(Packard, 1876)",Geometridae,,Sterrhinae,,Sterrhini
+3391,Leptostales,rubromarginaria,Dark-ribboned Wave Moth,MONA 7179,"(Packard, 1871)",Geometridae,,Sterrhinae,,Haemaleini
+3392,Leptostales,ferruminaria,,MONA 7180,"(Zeller, 1872)",Geometridae,,Sterrhinae,,Haemaleini
+3393,Scopula,limboundata,Large Lace-border Moth,MONA 7159,"(Haworth, 1809)",Geometridae,,Sterrhinae,,Scopulini
+3394,Scopula,ancellata,Angled Wave Moth,MONA 7162,"(Hulst, 1887)",Geometridae,,Sterrhinae,,Scopulini
+3395,Scopula,fuscata,,MONA 7163,"(Hulst, 1887)",Geometridae,,Sterrhinae,,Scopulini
+3396,Scopula,junctaria,Simple Wave Moth,MONA 7164,"(Walker, 1861)",Geometridae,,Sterrhinae,,Scopulini
+3397,Scopula,quinquelinearia,,MONA 7164.1,"(Packard, 1871)",Geometridae,,Sterrhinae,,Scopulini
+3398,Scopula,frigidaria,Frigid Wave Moth,MONA 7166,"(Möschler, 1860)",Geometridae,,Sterrhinae,,Scopulini
+3399,Scopula,siccata,,MONA 7167,"McDunnough, 1939",Geometridae,,Sterrhinae,,Scopulini
+3400,Scopula,cajanderi,,MONA 7168,"(Herz, 1903)",Geometridae,,Sterrhinae,,Scopulini
+3401,Scopula,inductata,Soft-lined Wave Moth,MONA 7169,"(Guenée, [1858])",Geometridae,,Sterrhinae,,Scopulini
+3402,Scopula,luteolata,,MONA 7170,"(Hulst, 1880)",Geometridae,,Sterrhinae,,Scopulini
+3403,Scopula,sideraria,,MONA 7171,"(Guenée, [1858])",Geometridae,,Sterrhinae,,Scopulini
+3404,Scopula,sentinaria,,MONA 7172,"(Geyer, 1837)",Geometridae,,Sterrhinae,,Scopulini
+3405,Acasis,viridata,Olive-and-black Carpet Moth,MONA 7635,"(Packard, 1873)",Geometridae,,Larentiinae,,Trichopterygini
+3406,Cladara,atroliturata,Scribbler Moth,MONA 7639,"(Walker, [1863])",Geometridae,,Larentiinae,,Trichopterygini
+3407,Aplocera,plagiata,Treble-bar Moth,MONA 7627,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,Chesiadini
+3408,Carsia,sororiata,Manchester Treble-bar Moth,MONA 7626,"(Hübner, [1813])",Geometridae,,Larentiinae,,Chesiadini
+3409,Eubaphe,mendica,Beggar Moth,MONA 7440,"(Walker, 1854)",Geometridae,,Larentiinae,,Eudulini
+3410,Hydrelia,albifera,Fragile White Carpet Moth,MONA 7423,"(Walker, 1866)",Geometridae,,Larentiinae,,Asthenini
+3411,Hydrelia,brunneifasciata,,MONA 7424,"(Packard, 1876)",Geometridae,,Larentiinae,,Asthenini
+3412,Nomenia,duodecemlineata,,MONA 7426,"(Packard, 1873)",Geometridae,,Larentiinae,,Asthenini
+3413,Nomenia,obsoleta,,MONA 7427,"Swett, 1916",Geometridae,,Larentiinae,,Asthenini
+3414,Venusia,cambrica,Welsh Wave Moth,MONA 7425,"Curtis, 1839",Geometridae,,Larentiinae,,Asthenini
+3415,Martania,basaliata,Square-patched Carpet Moth,MONA 7316,"(Walker, 1862)",Geometridae,,Larentiinae,,Melanthiini
+3416,Martania,grandis,,MONA 7317,"(Hulst, 1896)",Geometridae,,Larentiinae,,Melanthiini
+3417,Horisme,intestinata,Brown Bark Carpet Moth,MONA 7445,"(Guenée, [1858])",Geometridae,,Larentiinae,,Melanthiini
+3418,Horisme,incana,,MONA 7446,"Swett, 1918",Geometridae,,Larentiinae,,Melanthiini
+3419,Eupithecia,palpata,Small Pine Looper Moth,MONA 7449,"Packard, 1873",Geometridae,,Larentiinae,,Eupitheciini
+3420,Eupithecia,ornata,,MONA 7455,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3421,Eupithecia,columbiata,,MONA 7459,"(Dyar, 1904)",Geometridae,,Larentiinae,,Eupitheciini
+3422,Eupithecia,maestosa,,MONA 7460,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3423,Eupithecia,subvirens,,MONA 7461,"Dietze, 1875",Geometridae,,Larentiinae,,Eupitheciini
+3424,Eupithecia,castellata,,MONA 7462,"McDunnough, 1944",Geometridae,,Larentiinae,,Eupitheciini
+3425,Eupithecia,pusillata,,MONA 7464.1,"([Denis & Schiffermüller], 1775)",Geometridae,,Larentiinae,,Eupitheciini
+3426,Eupithecia,interruptofasciata,Juniper Looper Moth,MONA 7551,"Packard, 1873",Geometridae,,Larentiinae,,Eupitheciini
+3427,Eupithecia,longipalpata,,MONA 7468,"Packard, 1876",Geometridae,,Larentiinae,,Eupitheciini
+3428,Eupithecia,placidata,,MONA 7471,"Taylor, 1908",Geometridae,,Larentiinae,,Eupitheciini
+3429,Eupithecia,unicolor,,MONA 7472,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3430,Eupithecia,pseudotsugata,,MONA 7473,"MacKay, 1951",Geometridae,,Larentiinae,,Eupitheciini
+3431,Eupithecia,misturata,,MONA 7476,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3432,Eupithecia,bivittata,,MONA 7478,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3433,Eupithecia,pygmaeata,,MONA 7479,"(Hübner, [1799])",Geometridae,,Larentiinae,,Eupitheciini
+3434,Eupithecia,bryanti,,MONA 7480,"Taylor, 1906",Geometridae,,Larentiinae,,Eupitheciini
+3435,Eupithecia,regina,,MONA 7483,"Taylor, 1906",Geometridae,,Larentiinae,,Eupitheciini
+3436,Eupithecia,borealis,,MONA 7485,"(Hulst, 1898)",Geometridae,,Larentiinae,,Eupitheciini
+3437,Eupithecia,subfuscata,Grey Pug Moth,MONA 7487,"(Haworth, 1809)",Geometridae,,Larentiinae,,Eupitheciini
+3438,Eupithecia,tripunctaria,,MONA 7488,"Herrich-Schäffer, 1852",Geometridae,,Larentiinae,,Eupitheciini
+3439,Eupithecia,harrisonata,,MONA 7490,"MacKay, 1951",Geometridae,,Larentiinae,,Eupitheciini
+3440,Eupithecia,casloata,,MONA 7492,"(Dyar, 1904)",Geometridae,,Larentiinae,,Eupitheciini
+3441,Eupithecia,sheppardata,,MONA 7494,"McDunnough, 1938",Geometridae,,Larentiinae,,Eupitheciini
+3442,Eupithecia,rotundopuncta,,MONA 7496,"Packard, 1871",Geometridae,,Larentiinae,,Eupitheciini
+3443,Eupithecia,intricata,,MONA 7518,"(Zetterstedt, 1839)",Geometridae,,Larentiinae,,Eupitheciini
+3444,Eupithecia,satyrata,Satyr Pug Moth,MONA 7520,"(Hübner, [1813])",Geometridae,,Larentiinae,,Eupitheciini
+3445,Eupithecia,nimbicolor,,MONA 7522,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3446,Eupithecia,cimicifugata,,MONA 7524,"Pearsall, 1908",Geometridae,,Larentiinae,,Eupitheciini
+3447,Eupithecia,zygadeniata,,MONA 7532,"Packard, 1876",Geometridae,,Larentiinae,,Eupitheciini
+3448,Eupithecia,cretaceata,,MONA 7533,"(Packard, 1874)",Geometridae,,Larentiinae,,Eupitheciini
+3449,Eupithecia,behrensata,,MONA 7535,"Packard, 1876",Geometridae,,Larentiinae,,Eupitheciini
+3450,Eupithecia,multiscripta,,MONA 7536,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3451,Eupithecia,sharronata,,MONA 7537.1,"Bolte, 1990",Geometridae,,Larentiinae,,Eupitheciini
+3452,Eupithecia,gelidata,,MONA 7538,"Möschler, 1860",Geometridae,,Larentiinae,,Eupitheciini
+3453,Eupithecia,multistrigata,,MONA 7539,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3454,Eupithecia,perfusca,,MONA 7540,"(Hulst, 1898)",Geometridae,,Larentiinae,,Eupitheciini
+3455,Eupithecia,annulata,Larch Pug Moth,MONA 7543,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3456,Eupithecia,olivacea,,MONA 7546,"Taylor, 1906",Geometridae,,Larentiinae,,Eupitheciini
+3457,Eupithecia,lachrymosa,,MONA 7548,"(Hulst, 1900)",Geometridae,,Larentiinae,,Eupitheciini
+3458,Eupithecia,lafontaineata,,MONA 7548.1,"Bolte, 1990",Geometridae,,Larentiinae,,Eupitheciini
+3459,Eupithecia,lariciata,Larch Pug Moth*,MONA 7489,"(Freyer, 1841)",Geometridae,,Larentiinae,,Eupitheciini
+3460,Eupithecia,niphadophilata,,MONA 7552,"(Dyar, 1904)",Geometridae,,Larentiinae,,Eupitheciini
+3461,Eupithecia,subcolorata,,MONA 7553,"(Hulst, 1898)",Geometridae,,Larentiinae,,Eupitheciini
+3462,Eupithecia,assimilata,,MONA 7554.1,"Doubleday, 1856",Geometridae,,Larentiinae,,Eupitheciini
+3463,Eupithecia,zelmira,,MONA 7555,"Swett & Cassino, 1920",Geometridae,,Larentiinae,,Eupitheciini
+3464,Eupithecia,segregata,,MONA 7557,"Pearsall, 1910",Geometridae,,Larentiinae,,Eupitheciini
+3465,Eupithecia,tenuata,,MONA 7559,"Hulst, 1880",Geometridae,,Larentiinae,,Eupitheciini
+3466,Eupithecia,agnesata,,MONA 7561,"Taylor, 1908",Geometridae,,Larentiinae,,Eupitheciini
+3467,Eupithecia,niveifascia,,MONA 7566,"(Hulst, 1898)",Geometridae,,Larentiinae,,Eupitheciini
+3468,Eupithecia,johnstoni,,MONA 7570,"McDunnough, 1946",Geometridae,,Larentiinae,,Eupitheciini
+3469,Eupithecia,dichroma,,MONA 7571,"McDunnough, 1946",Geometridae,,Larentiinae,,Eupitheciini
+3470,Eupithecia,albicapitata,,MONA 7574,"Packard, 1876",Geometridae,,Larentiinae,,Eupitheciini
+3471,Eupithecia,mutata,Spruce Cone Looper Moth,MONA 7575,"Pearsall, 1908",Geometridae,,Larentiinae,,Eupitheciini
+3472,Eupithecia,columbrata,,MONA 7577,"McDunnough, 1940",Geometridae,,Larentiinae,,Eupitheciini
+3473,Eupithecia,spermaphaga,,MONA 7578,"(Dyar, 1917)",Geometridae,,Larentiinae,,Eupitheciini
+3474,Eupithecia,purpurissata,,MONA 7579,"Grossbeck, 1908",Geometridae,,Larentiinae,,Eupitheciini
+3475,Eupithecia,gilvipennata,,MONA 7581,"Cassino & Swett, 1922",Geometridae,,Larentiinae,,Eupitheciini
+3476,Eupithecia,absinthiata,,MONA 7586.1,"(Clerck, 1759)",Geometridae,,Larentiinae,,Eupitheciini
+3477,Eupithecia,subapicata,,MONA 7587,"Guenée, [1858]",Geometridae,,Larentiinae,,Eupitheciini
+3478,Eupithecia,anticaria,,MONA 7594,"Walker, 1862",Geometridae,,Larentiinae,,Eupitheciini
+3479,Eupithecia,graefii,,MONA 7600,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3480,Eupithecia,nevadata,,MONA 7601,"Packard, 1871",Geometridae,,Larentiinae,,Eupitheciini
+3481,Eupithecia,leucata,,MONA 7613,"(Hulst, 1896)",Geometridae,,Larentiinae,,Eupitheciini
+3482,Eupithecia,mellisa,,MONA 7621,"(Grossbeck, 1908)",Geometridae,,Larentiinae,,Eupitheciini
+3483,Eupithecia,insipidata,,MONA 7622,"(Pearsall, 1910)",Geometridae,,Larentiinae,,Eupitheciini
+3484,Pasiphila,rectangulata,Green Pug Moth,MONA 7625,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,Eupitheciini
+3485,Epirrita,autumnata,Autumnal Moth,MONA 7433,"(Borkhausen, 1794)",Geometridae,,Larentiinae,,Operophterini
+3486,Epirrita,undulata,,MONA 7434,"(Harrison, 1942)",Geometridae,,Larentiinae,,Operophterini
+3487,Operophtera,brumata,Winter Moth,MONA 7436,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,Operophterini
+3488,Operophtera,bruceata,Bruce Spanworm Moth,MONA 7437,"(Hulst, 1886)",Geometridae,,Larentiinae,,Operophterini
+3489,Operophtera,occidentalis,,MONA 7438,"(Hulst, 1896)",Geometridae,,Larentiinae,,Operophterini
+3490,Operophtera,danbyi,,MONA 7439,"(Hulst, 1896)",Geometridae,,Larentiinae,,Operophterini
+3491,Triphosa,californiata,,MONA 7287,"(Packard, 1871)",Geometridae,,Larentiinae,,Triphosini
+3492,Lampropteryx,suffumata,Water Carpet,MONA 7221.5,"([Denis & Schiffermüller], 1775)",Geometridae,,Larentiinae,,Cidariini
+3493,Dysstroma,suspectata,,MONA 7185,"(Möschler, 1874)",Geometridae,,Larentiinae,,Cidariini
+3494,Dysstroma,ochrofuscaria,,MONA 7186,"Ferguson, 1983",Geometridae,,Larentiinae,,Cidariini
+3495,Dysstroma,infuscata,,MONA 7186.1,"(Tengström, 1869)",Geometridae,,Larentiinae,,Cidariini
+3496,Dysstroma,walkerata,Orange-Spotted Carpet Moth,MONA 7188,"(Pearsall, 1909)",Geometridae,,Larentiinae,,Cidariini
+3497,Dysstroma,pseudimmanata,,MONA 7188.1,"(Heydemann, 1929)",Geometridae,,Larentiinae,,Cidariini
+3498,Dysstroma,hersiliata,Orange-barred Carpet,MONA 7189,"(Guenée, [1858])",Geometridae,,Larentiinae,,Cidariini
+3499,Dysstroma,rutlandia,,MONA 7190,"McDunnough, 1943",Geometridae,,Larentiinae,,Cidariini
+3500,Dysstroma,formosa,Formosa Carpet Moth,MONA 7191,"(Hulst, 1896)",Geometridae,,Larentiinae,,Cidariini
+3501,Dysstroma,colvillei,,MONA 7192,"Blackmore, 1926",Geometridae,,Larentiinae,,Cidariini
+3502,Dysstroma,mancipata,,MONA 7195,"(Guenée, [1858])",Geometridae,,Larentiinae,,Cidariini
+3503,Eulithis,propulsata,,MONA 7199,"(Walker, 1862)",Geometridae,,Larentiinae,,Cidariini
+3504,Eulithis,testata,Chevron Moth,MONA 7201,"(Linnaeus, 1761)",Geometridae,,Larentiinae,,Cidariini
+3505,Eulithis,flavibrunneata,,MONA 7205,"(McDunnough, 1943)",Geometridae,,Larentiinae,,Cidariini
+3506,Eurhinosea,flavaria,,MONA 7209,"Packard, 1873",Geometridae,,Larentiinae,,Cidariini
+3507,Antepirrhoe,fasciata,,MONA 7211,"(Barnes & McDunnough, 1918)",Geometridae,,Larentiinae,,Cidariini
+3508,Antepirrhoe,atrifasciata,,MONA 7212,"(Hulst, 1888)",Geometridae,,Larentiinae,,Cidariini
+3509,Colostygia,circumvallaria,,MONA 7215,"(Taylor, 1906)",Geometridae,,Larentiinae,,Cidariini
+3510,Plemyria,georgii,George's Carpet Moth,MONA 7216,"Hulst, 1896",Geometridae,,Larentiinae,,Cidariini
+3511,Thera,juniperata,Juniper Carpet Moth,MONA 7217,"(Linnaeus, 1758)",Geometridae,,Larentiinae,,Cidariini
+3512,Thera,otisi,,MONA 7219,"(Dyar, 1904)",Geometridae,,Larentiinae,,Cidariini
+3513,Trichodezia,californiata,,MONA 7432,"(Packard, 1871)",Geometridae,,Larentiinae,,Cidariini
+3514,Euphyia,intermediata,Sharp-angled Carpet Moth,MONA 7399,"(Guenée, [1858])",Geometridae,,Larentiinae,,Euphyiini
+3515,Xanthorhoe,labradorensis,Labrador Carpet Moth,MONA 7368,"(Packard, 1867)",Geometridae,,Larentiinae,,Xanthorhoini
+3516,Xanthorhoe,packardata,,MONA 7369,"McDunnough, 1945",Geometridae,,Larentiinae,,Xanthorhoini
+3517,Xanthorhoe,abrasaria,,MONA 7370,"(Herrich-Schäffer, [1855])",Geometridae,,Larentiinae,,Xanthorhoini
+3518,Xanthorhoe,iduata,,MONA 7371,"(Guenée, [1858])",Geometridae,,Larentiinae,,Xanthorhoini
+3519,Xanthorhoe,macdunnoughi,,MONA 7372,"Swett, 1918",Geometridae,,Larentiinae,,Xanthorhoini
+3520,Xanthorhoe,ramaria,,MONA 7373,"Swett & Cassino, 1920",Geometridae,,Larentiinae,,Xanthorhoini
+3521,Xanthorhoe,delectaria,,MONA 7373.1,"Cassino & Swett, 1920",Geometridae,,Larentiinae,,Xanthorhoini
+3522,Xanthorhoe,lagganata,,MONA 7374,"Swett & Cassino, 1920",Geometridae,,Larentiinae,,Xanthorhoini
+3523,Xanthorhoe,baffinensis,,MONA 7376,"McDunnough, 1939",Geometridae,,Larentiinae,,Xanthorhoini
+3524,Xanthorhoe,algidata,,MONA 7378,"(Möschler, 1874)",Geometridae,,Larentiinae,,Xanthorhoini
+3525,Xanthorhoe,pontiaria,,MONA 7379,"Taylor, 1906",Geometridae,,Larentiinae,,Xanthorhoini
+3526,Xanthorhoe,fossaria,,MONA 7380,"Taylor, 1906",Geometridae,,Larentiinae,,Xanthorhoini
+3527,Xanthorhoe,decoloraria,Red Carpet Moth,MONA 7384,"(Esper, [1806])",Geometridae,,Larentiinae,,Xanthorhoini
+3528,Xanthorhoe,alticolata,,MONA 7385,"Barnes & McDunnough, 1916",Geometridae,,Larentiinae,,Xanthorhoini
+3529,Xanthorhoe,defensaria,,MONA 7386,"(Guenée, [1858])",Geometridae,,Larentiinae,,Xanthorhoini
+3530,Xanthorhoe,ferrugata,Red Twin-Spot Moth,MONA 7388,"(Clerck, 1759)",Geometridae,,Larentiinae,,Xanthorhoini
+3531,Xanthorhoe,clarkeata,,MONA 7389.1,"Ferguson, 1987",Geometridae,,Larentiinae,,Xanthorhoini
+3532,Xanthorhoe,borealis,,MONA 7389,"Hulst, 1896",Geometridae,,Larentiinae,,Xanthorhoini
+3533,Xanthorhoe,lacustrata,Toothed Brown Carpet Moth,MONA 7390,"(Guenée, [1858])",Geometridae,,Larentiinae,,Xanthorhoini
+3534,Enchoria,lacteata,,MONA 7403,"(Packard, 1876)",Geometridae,,Larentiinae,,Xanthorhoini
+3535,Psychophora,phocata,,MONA 7411,"(Möschler, 1862)",Geometridae,,Larentiinae,,Xanthorhoini
+3536,Psychophora,suttoni,,MONA 7412,"Heinrich, 1942",Geometridae,,Larentiinae,,Xanthorhoini
+3537,Orthonama,obstipata,Gem Moth,MONA 7414,"(Fabricius, 1794)",Geometridae,,Larentiinae,,Xanthorhoini
+3538,Orthonama,evansi,,MONA 7415,"McDunnough, 1920",Geometridae,,Larentiinae,,Xanthorhoini
+3539,Costaconvexa,centrostrigaria,Bent-line Carpet Moth,MONA 7416,"(Wollaston, 1858)",Geometridae,,Larentiinae,,Xanthorhoini
+3540,Zenophleps,lignicolorata,,MONA 7406,"(Packard, 1874)",Geometridae,,Larentiinae,,Cataclysmini
+3541,Zenophleps,alpinata,,MONA 7408,"Cassino, 1927",Geometridae,,Larentiinae,,Cataclysmini
+3542,Epirrhoe,alternata,White-banded Toothed Carpet Moth,MONA 7394,"(Müller, 1764)",Geometridae,,Larentiinae,,Epirrhoini
+3543,Epirrhoe,plebeculata,,MONA 7395,"(Guenée, [1858])",Geometridae,,Larentiinae,,Epirrhoini
+3544,Epirrhoe,sperryi,,MONA 7396,"Herbulot, 1951",Geometridae,,Larentiinae,,Epirrhoini
+3545,Mesoleuca,ruficillata,White-ribboned Carpet Moth,MONA 7307,"(Guenée, [1858])",Geometridae,,Larentiinae,,Larentiini
+3546,Spargania,magnoliata,Double-banded Carpet Moth,MONA 7312,"Guenée, [1858]",Geometridae,,Larentiinae,,Larentiini
+3547,Anticlea,multiferata,Many-lined Carpet Moth,MONA 7330,"(Walker, 1863)",Geometridae,,Larentiinae,,Larentiini
+3548,Hydriomena,exculpata,,MONA 7223,"Barnes & McDunnough, 1917",Geometridae,,Larentiinae,,Hydriomenini
+3549,Hydriomena,expurgata,,MONA 7224,"Barnes & McDunnough, 1918",Geometridae,,Larentiinae,,Hydriomenini
+3550,Hydriomena,irata,,MONA 7228,"Swett, 1910",Geometridae,,Larentiinae,,Hydriomenini
+3551,Hydriomena,marinata,,MONA 7231,"Barnes & McDunnough, 1917",Geometridae,,Larentiinae,,Hydriomenini
+3552,Hydriomena,divisaria,Black-dashed Hydriomena Moth,MONA 7235,"(Walker, 1860)",Geometridae,,Larentiinae,,Hydriomenini
+3553,Hydriomena,renunciata,Renounced Hydriomena Moth,MONA 7236,"(Walker, 1862)",Geometridae,,Larentiinae,,Hydriomenini
+3554,Hydriomena,albimontanata,,MONA 7243,"McDunnough, 1939",Geometridae,,Larentiinae,,Hydriomenini
+3555,Hydriomena,nevadae,,MONA 7245,"Barnes & McDunnough, 1917",Geometridae,,Larentiinae,,Hydriomenini
+3556,Hydriomena,californiata,,MONA 7246,"(Packard, 1871)",Geometridae,,Larentiinae,,Hydriomenini
+3557,Hydriomena,ruberata,Ruddy Highflyer Moth,MONA 7254,"(Freyer, [1831])",Geometridae,,Larentiinae,,Hydriomenini
+3558,Hydriomena,macdunnoughi,,MONA 7255,"Swett, 1918",Geometridae,,Larentiinae,,Hydriomenini
+3559,Hydriomena,quinquefasciata,,MONA 7258,"(Packard, 1871)",Geometridae,,Larentiinae,,Hydriomenini
+3560,Hydriomena,albifasciata,,MONA 7261,"(Packard, 1874)",Geometridae,,Larentiinae,,Hydriomenini
+3561,Hydriomena,speciosata,,MONA 7263,"(Packard, 1873)",Geometridae,,Larentiinae,,Hydriomenini
+3562,Hydriomena,morosata,,MONA 7264,"Barnes & McDunnough, 1917",Geometridae,,Larentiinae,,Hydriomenini
+3563,Hydriomena,nubilofasciata,Oak Winter Highflier Moth,MONA 7276,"(Packard, 1871)",Geometridae,,Larentiinae,,Hydriomenini
+3564,Hydriomena,manzanita,,MONA 7277,"Taylor, 1906",Geometridae,,Larentiinae,,Hydriomenini
+3565,Entephria,kidluitata,,MONA 7300.3,"(Munroe, 1951)",Geometridae,,Larentiinae,,Hydriomenini
+3566,Entephria,multivagata,,MONA 7301,"(Hulst, 1881)",Geometridae,,Larentiinae,,Hydriomenini
+3567,Entephria,takuata,,MONA 7302,"Taylor, 1908",Geometridae,,Larentiinae,,Hydriomenini
+3568,Entephria,lagganata,,MONA 7303,"Taylor, 1908",Geometridae,,Larentiinae,,Hydriomenini
+3569,Stamnodes,blackmorei,,MONA 7334,"Swett, 1915",Geometridae,,Larentiinae,,Stamnodini
+3570,Stamnodes,affiliata,,MONA 7337,"Pearsall, 1911",Geometridae,,Larentiinae,,Stamnodini
+3571,Stamnodes,annellata,,MONA 7340,"(Hulst, 1887)",Geometridae,,Larentiinae,,Stamnodini
+3572,Stamnodes,marmorata,,MONA 7363,"(Packard, 1871)",Geometridae,,Larentiinae,,Stamnodini
+3573,Stamnodes,tessellata,,MONA 7364,"(Packard, 1874)",Geometridae,,Larentiinae,,Stamnodini
+3574,Stamnodes,animata,,MONA 7366,"(Pearsall, 1906)",Geometridae,,Larentiinae,,Stamnodini
+3575,Stamnoctenis,morrisata,,MONA 7356,"(Hulst, 1887)",Geometridae,,Larentiinae,,Stamnodini
+3576,Stamnoctenis,rubrosuffusa,,MONA 7358,"(Grossbeck, 1912)",Geometridae,,Larentiinae,,Stamnodini
+3577,Scelidacantha,triseriata,,MONA 7634,"(Packard, 1874)",Geometridae,,Larentiinae,,
+3578,Scelidacantha,fuscata,,MONA 7629,"(Grossbeck, 1906)",Geometridae,,Larentiinae,,
+3579,Chlorosea,nevadaria,,MONA 7012,"Packard, 1873",Geometridae,,Geometrinae,,Nemoriini
+3580,Chlorosea,banksaria,,MONA 7013,"Sperry, 1944",Geometridae,,Geometrinae,,Nemoriini
+3581,Nemoria,pulcherrima,,MONA 7016,"(Barnes & McDunnough, 1916)",Geometridae,,Geometrinae,,Nemoriini
+3582,Nemoria,unitaria,Single-lined Emerald Moth,MONA 7018,"(Packard, 1873)",Geometridae,,Geometrinae,,Nemoriini
+3583,Nemoria,pistaciaria,,MONA 7027,"(Packard, 1876)",Geometridae,,Geometrinae,,Nemoriini
+3584,Nemoria,obliqua,,MONA 7037,"(Hulst, 1898)",Geometridae,,Geometrinae,,Nemoriini
+3585,Nemoria,intensaria,,MONA 7043,"(Pearsall, 1911)",Geometridae,,Geometrinae,,Nemoriini
+3586,Nemoria,glaucomarginaria,,MONA 7049,"(Barnes & McDunnough, 1917)",Geometridae,,Geometrinae,,Nemoriini
+3587,Dichorda,rectaria,,MONA 7056,"(Grote, 1877)",Geometridae,,Geometrinae,,Nemoriini
+3588,Synchlora,aerata,Wavy-lined Emerald Moth,MONA 7058,"(Fabricius, 1798)",Geometridae,,Geometrinae,,Nemoriini
+3589,Synchlora,bistriaria,Oblique-striped Emerald Moth,MONA 7065,"(Packard, 1876)",Geometridae,,Geometrinae,,Nemoriini
+3590,Chlorochlamys,chloroleucaria,Blackberry Looper,MONA 7071,"(Guenée, [1858])",Geometridae,,Geometrinae,,Hemitheini
+3591,Chlorochlamys,triangularis,,MONA 7072,"Prout, 1912",Geometridae,,Geometrinae,,Hemitheini
+3592,Chlorochlamys,appellaria,,MONA 7073,"Pearsall, 1911",Geometridae,,Geometrinae,,Hemitheini
+3593,Mesothea,incertata,Day Emerald Moth,MONA 7085,"(Walker, [1863])",Geometridae,,Geometrinae,,Hemitheini
+3594,Psamatodes,atrimacularia,,MONA 6328.1,"(Barnes & McDunnough, 1913)",Geometridae,,Ennominae,,Macariini
+3595,Macaria,marcescaria,,MONA 6323,"(Guenée, [1858])",Geometridae,,Ennominae,,Macariini
+3596,Macaria,umbriferata,,MONA 6293,"(Hulst, 1887)",Geometridae,,Ennominae,,Macariini
+3597,Macaria,anataria,,MONA 6287,"(Swett, 1913)",Geometridae,,Ennominae,,Macariini
+3598,Macaria,confederata,,MONA 6295,"(Barnes & McDunnough, 1917)",Geometridae,,Ennominae,,Macariini
+3599,Macaria,hesperata,,MONA 6299.1,"(Ferguson, 2008)",Geometridae,,Ennominae,,Macariini
+3600,Macaria,ribearia,Currant Spanworm,MONA 6274,"(Fitch, 1848)",Geometridae,,Ennominae,,Macariini
+3601,Macaria,masquerata,,MONA 6342.1,"Ferguson, 2008",Geometridae,,Ennominae,,Macariini
+3602,Macaria,bicolorata,Bicolored Angle,MONA 6341,"(Fabricius, 1798)",Geometridae,,Ennominae,,Macariini
+3603,Macaria,granitata,Granite Moth,MONA 6352,"Guenée, [1858]",Geometridae,,Ennominae,,Macariini
+3604,Digrammia,ubiquitata,,MONA 6374.1,"Ferguson, 2008",Geometridae,,Ennominae,,Macariini
+3605,Digrammia,triviata,,MONA 6385,"(Barnes & McDunnough, 1917)",Geometridae,,Ennominae,,Macariini
+3606,Digrammia,pertinata,,MONA 6365,"(McDunnough, 1939)",Geometridae,,Ennominae,,Macariini
+3607,Digrammia,setonana,,MONA 6364,"(McDunnough, 1927)",Geometridae,,Ennominae,,Macariini
+3608,Digrammia,ordinata,,MONA 6358,"(Walker, 1862)",Geometridae,,Ennominae,,Macariini
+3609,Digrammia,plemmelata,,MONA 6389.1,"Ferguson, 2008",Geometridae,,Ennominae,,Macariini
+3610,Glena,nigricaria,,MONA 6448,"(Barnes & McDunnough, 1913)",Geometridae,,Ennominae,,Boarmiini
+3611,Glena,mcdunnougharia,,MONA 6454,"Sperry, 1952",Geometridae,,Ennominae,,Boarmiini
+3612,Stenoporpia,anastomosaria,,MONA 6462,"(Grossbeck, 1908)",Geometridae,,Ennominae,,Boarmiini
+3613,Stenoporpia,pulmonaria,,MONA 6463,"(Grote, 1881)",Geometridae,,Ennominae,,Boarmiini
+3614,Stenoporpia,separataria,,MONA 6473,"(Grote, 1883)",Geometridae,,Ennominae,,Boarmiini
+3615,Stenoporpia,excelsaria,,MONA 6474,"(Strecker, 1899)",Geometridae,,Ennominae,,Boarmiini
+3616,Glaucina,spaldingata,,MONA 6503,"(Cassino & Swett, 1923)",Geometridae,,Ennominae,,Boarmiini
+3617,Glaucina,nephos,,MONA 6506,"Rindge, 1959",Geometridae,,Ennominae,,Boarmiini
+3618,Chesiadodes,cinerea,,MONA 6530,"Rindge, 1973",Geometridae,,Ennominae,,Boarmiini
+3619,Hulstina,formosata,,MONA 6540,"(Hulst, 1896)",Geometridae,,Ennominae,,Boarmiini
+3620,Pterotaea,lamiaria,,MONA 6553,"(Strecker, 1899)",Geometridae,,Ennominae,,Boarmiini
+3621,Pterotaea,succurva,,MONA 6555,"Rindge, 1970",Geometridae,,Ennominae,,Boarmiini
+3622,Pterotaea,albescens,,MONA 6566,"McDunnough, 1941",Geometridae,,Ennominae,,Boarmiini
+3623,Iridopsis,clivinaria,Mountain Mahogany Looper Moth,MONA 6575,"(Guenée, [1858])",Geometridae,,Ennominae,,Boarmiini
+3624,Iridopsis,vellivolata,Large Purplish Gray,MONA 6582,"(Hulst, 1881)",Geometridae,,Ennominae,,Boarmiini
+3625,Iridopsis,larvaria,Bent-line Gray Moth,MONA 6588,"(Guenée, [1858])",Geometridae,,Ennominae,,Boarmiini
+3626,Iridopsis,emasculatum,,MONA 6589,"(Dyar, 1904)",Geometridae,,Ennominae,,Boarmiini
+3627,Anavitrinella,addendaria,,MONA 6592,"(Grossbeck, 1908)",Geometridae,,Ennominae,,Boarmiini
+3628,Ectropis,crepuscularia,Small Engrailed Moth,MONA 6597,"([Denis & Schiffermüller], 1775)",Geometridae,,Ennominae,,Boarmiini
+3629,Prionomelia,spododea,,MONA 6613,"(Hulst, 1896)",Geometridae,,Ennominae,,Boarmiini
+3630,Eufidonia,convergaria,Pine Powder Moth/Converged Powder Moth,MONA 6637,"(Walker, 1860)",Geometridae,,Ennominae,,Boarmiini
+3631,Eufidonia,discospilata,Sharp-lined Powder Moth,MONA 6639,"(Walker, 1862)",Geometridae,,Ennominae,,Boarmiini
+3632,Carphoides,incopriarius,,MONA 6624,"(Hulst, 1887)",Geometridae,,Ennominae,,Boarmiini
+3633,Orthofidonia,exornata,,MONA 6429,"(Walker, 1862)",Geometridae,,Ennominae,,Boarmiini
+3634,Hesperumia,fumosaria,,MONA 6432,"Comstock, 1937",Geometridae,,Ennominae,,Boarmiini
+3635,Hesperumia,latipennis,,MONA 6433,"(Hulst, 1896)",Geometridae,,Ennominae,,Boarmiini
+3636,Aethalura,intertexta,Four-Barred Gray Moth,MONA 6570,"(Walker, 1860)",Geometridae,,Ennominae,,Boarmiini
+3637,Biston,sonomensis,,MONA 6647,"(McDunnough, 1941)",Geometridae,,Ennominae,,Boarmiini
+3638,Biston,sinuaria,,MONA 6650,"(Barnes & McDunnough, 1916)",Geometridae,,Ennominae,,Boarmiini
+3639,Erannis,tiliaria,Linden Looper,MONA 6665,"(Harris, 1841)",Geometridae,,Ennominae,,Boarmiini
+3640,Erannis,vancouverensis,,MONA 6665.1,"Hulst, 1896",Geometridae,,Ennominae,,Boarmiini
+3641,Hypagyrtis,unipunctata,One-spotted Variant Moth,MONA 6654,"(Haworth, 1809)",Geometridae,,Ennominae,,Boarmiini
+3642,Hypagyrtis,piniata,Pine Measuringworm Moth,MONA 6656,"(Packard, 1870)",Geometridae,,Ennominae,,Boarmiini
+3643,Phigalia,titea,The Half-wing,MONA 6658,"(Cramer, 1780)",Geometridae,,Ennominae,,Boarmiini
+3644,Lycia,ursaria,Stout Spanworm Moth,MONA 6651,"(Walker, 1860)",Geometridae,,Ennominae,,Boarmiini
+3645,Lycia,rachelae,Twilight Moth,MONA 6653,"(Hulst, 1896)",Geometridae,,Ennominae,,Boarmiini
+3646,Cabera,exanthemata,,MONA 6676,"(Scopoli, 1763)",Geometridae,,Ennominae,,Caberini
+3647,Cabera,erythemaria,Yellow-dusted Cream Moth,MONA 6677,"Guenée, [1858]",Geometridae,,Ennominae,,Caberini
+3648,Cabera,variolaria,Vestal Moth,MONA 6678,"Guenée, [1858]",Geometridae,,Ennominae,,Caberini
+3649,Cabera,borealis,,MONA 6679,"(Hulst, 1896)",Geometridae,,Ennominae,,Caberini
+3650,Eudrepanulatrix,rectifascia,,MONA 6681,"(Hulst, 1896)",Geometridae,,Ennominae,,Caberini
+3651,Drepanulatrix,hulstii,,MONA 6683,"(Dyar, 1903)",Geometridae,,Ennominae,,Caberini
+3652,Drepanulatrix,bifilata,,MONA 6684,"(Hulst, 1880)",Geometridae,,Ennominae,,Caberini
+3653,Drepanulatrix,nevadaria,,MONA 6687,"(Hulst, 1888)",Geometridae,,Ennominae,,Caberini
+3654,Drepanulatrix,falcataria,,MONA 6689,"(Packard, 1873)",Geometridae,,Ennominae,,Caberini
+3655,Drepanulatrix,baueraria,,MONA 6691,"Sperry, 1948",Geometridae,,Ennominae,,Caberini
+3656,Drepanulatrix,monicaria,,MONA 6692,"(Guenée, [1858])",Geometridae,,Ennominae,,Caberini
+3657,Apodrepanulatrix,litaria,,MONA 6694,"(Hulst, 1887)",Geometridae,,Ennominae,,Caberini
+3658,Ixala,desperaria,,MONA 6695,"(Hulst, 1887)",Geometridae,,Ennominae,,Caberini
+3659,Stergamataea,delicatum,,MONA 6710,"(Hulst, 1900)",Geometridae,,Ennominae,,Caberini
+3660,Spodolepis,danbyi,,MONA 6799.1,"(Hulst, 1898)",Geometridae,,Ennominae,,Epirranthini
+3661,Philedia,punctomacularia,,MONA 6802,"(Hulst, 1888)",Geometridae,,Ennominae,,Diptychini
+3662,Thallophaga,taylorata,,MONA 6808,"(Hulst, 1896)",Geometridae,,Ennominae,,Diptychini
+3663,Thallophaga,hyperborea,,MONA 6809,"(Hulst, [1901] 1900)",Geometridae,,Ennominae,,Diptychini
+3664,Lomographa,semiclarata,Bluish Spring Moth,MONA 6666,"(Walker, 1866)",Geometridae,,Ennominae,,Baptini
+3665,Lomographa,vestaliata,White Spring Moth,MONA 6667,"(Guenée, [1858])",Geometridae,,Ennominae,,Baptini
+3666,Metarranthis,duaria,Ruddy Metarranthis Moth,MONA 6822,"(Guenée, [1858])",Geometridae,,Ennominae,,
+3667,Selenia,alciphearia,Northern Selenia Moth,MONA 6817,"Walker, 1860",Geometridae,,Ennominae,,
+3668,Selenia,kentaria,Kent's Geometer Moth,MONA 6818,"(Grote & Robinson, 1867)",Geometridae,,Ennominae,,
+3669,Sericosema,juturnaria,Bordered Fawn Moth,MONA 6672,"(Guenée, [1858])",Geometridae,,Ennominae,,
+3670,Sericosema,immaculata,,MONA 6673,"(Barnes & McDunnough, 1913)",Geometridae,,Ennominae,,
+3671,Sericosema,wilsonensis,,MONA 6674,"Cassino & Swett, 1922",Geometridae,,Ennominae,,
+3672,Probole,alienaria,Alien Probole Moth,MONA 6837,"Herrich-Schäffer, [1855]",Geometridae,,Ennominae,,Anagogini
+3673,Probole,amicaria,Friendly Probole Moth,MONA 6838,"(Herrich-Schäffer, [1855])",Geometridae,,Ennominae,,Anagogini
+3674,Plagodis,pulveraria,American Barred Umber Moth,MONA 6836,"(Linnaeus, 1758)",Geometridae,,Ennominae,,Anagogini
+3675,Plagodis,fervidaria,Fervid Plagodis,MONA 6843,"(Herrich-Schäffer, [1855])",Geometridae,,Ennominae,,Anagogini
+3676,Metanema,determinata,Dark Metanema Moth,MONA 6820,"Walker, 1866",Geometridae,,Ennominae,,Anagogini
+3677,Aspitates,aberrata,,MONA 6715,"(Edwards, 1884)",Geometridae,,Ennominae,,Gnophini
+3678,Aspitates,forbesi,,MONA 6716,"Munroe, 1963",Geometridae,,Ennominae,,Gnophini
+3679,Aspitates,orciferaria,,MONA 6717,"(Walker, [1863])",Geometridae,,Ennominae,,Gnophini
+3680,Aspitates,taylori,,MONA 6719,"(Butler, 1893)",Geometridae,,Ennominae,,Gnophini
+3681,Euchlaena,mollisaria,,MONA 6730,"(Hulst, 1886)",Geometridae,,Ennominae,,Gnophini
+3682,Euchlaena,marginaria,Ochre Euchlaena Moth,MONA 6734,"(Minot, 1869)",Geometridae,,Ennominae,,Gnophini
+3683,Xanthotype,urticaria,False Crocus Geometer Moth,MONA 6740,"Swett, 1918",Geometridae,,Ennominae,,Gnophini
+3684,Xanthotype,sospeta,Crocus Geometer Moth,MONA 6743,"(Drury, 1773)",Geometridae,,Ennominae,,Gnophini
+3685,Charissa,turfosaria,,MONA 6596,"(Wehrli, 1922)",Geometridae,,Ennominae,,Gnophini
+3686,Pero,meskaria,Meske's Pero,MONA 6747,"(Packard, 1876)",Geometridae,,Ennominae,,Odontoperini
+3687,Pero,honestaria,Honest Pero Moth,MONA 6753,"(Walker, 1860)",Geometridae,,Ennominae,,Odontoperini
+3688,Pero,morrisonaria,Morrison's Pero Moth,MONA 6755,"(Edwards, 1881)",Geometridae,,Ennominae,,Odontoperini
+3689,Pero,washakiensis,Washakie's Pero,MONA 6760.1,"Ferris, 2003",Geometridae,,Ennominae,,Odontoperini
+3690,Pero,occidentalis,,MONA 6761,"(Hulst, 1896)",Geometridae,,Ennominae,,Odontoperini
+3691,Aethaloida,packardaria,,MONA 6774,"(Hulst, 1888)",Geometridae,,Ennominae,,Nacophorini
+3692,Gabriola,sierrae,,MONA 6782,"McDunnough, 1945",Geometridae,,Ennominae,,Nacophorini
+3693,Gabriola,minima,,MONA 6783,"(Hulst, 1896)",Geometridae,,Ennominae,,Nacophorini
+3694,Sicya,crocearia,,MONA 6911,"Packard, 1873",Geometridae,,Ennominae,,Ennomini
+3695,Neoterpes,ephelidaria,,MONA 6859,"(Hulst, 1886)",Geometridae,,Ennominae,,Ennomini
+3696,Neoterpes,trianguliferata,,MONA 6860,"(Packard, 1871)",Geometridae,,Ennominae,,Ennomini
+3697,Neoterpes,edwardsata,,MONA 6861,"(Packard, 1871)",Geometridae,,Ennominae,,Ennomini
+3698,Pherne,placeraria,,MONA 6949,"(Guenée, [1858])",Geometridae,,Ennominae,,Ennomini
+3699,Pherne,sperryi,,MONA 6951,"McDunnough, 1935",Geometridae,,Ennominae,,Ennomini
+3700,Pherne,subpunctata,,MONA 6952,"(Hulst, 1898)",Geometridae,,Ennominae,,Ennomini
+3701,Eriplatymetra,coloradaria,,MONA 6852,"(Grote & Robinson, 1867)",Geometridae,,Ennominae,,Ennomini
+3702,Snowia,montanaria,,MONA 6875,"Neumoegen, 1884",Geometridae,,Ennominae,,Ennomini
+3703,Besma,quercivoraria,Oak Besma Moth,MONA 6885,"(Guenée, [1858])",Geometridae,,Ennominae,,Ennomini
+3704,Lambdina,fiscellaria,Hemlock Looper Moth,MONA 6888,"(Guenée, [1858])",Geometridae,,Ennominae,,Ennomini
+3705,Lambdina,pellucidaria,Yellow-headed Looper,MONA 6892,"(Grote & Robinson, 1867)",Geometridae,,Ennominae,,Ennomini
+3706,Nepytia,freemani,Western False Hemlock Looper Moth,MONA 6910,"Munroe, 1963",Geometridae,,Ennominae,,Ennomini
+3707,Meris,suffusaria,,MONA 6878,"McDunnough, 1940",Geometridae,,Ennominae,,Ennomini
+3708,Ennomos,magnaria,Maple Spanworm Moth,MONA 6797,"Guenée, [1858]",Geometridae,,Ennominae,,Ennomini
+3709,Tetracis,crocallata,Yellow Slant-line,MONA 6963,"Guenée, [1858]",Geometridae,,Ennominae,,Ennomini
+3710,Tetracis,cachexiata,White Slant-Line Moth,MONA 6964,"Guenée, [1858]",Geometridae,,Ennominae,,Ennomini
+3711,Tetracis,fuscata,,MONA 6953,"(Hulst, 1898)",Geometridae,,Ennominae,,Ennomini
+3712,Tetracis,barnesii,,MONA 6959,"(Hulst, 1896)",Geometridae,,Ennominae,,Ennomini
+3713,Prochoerodes,lineola,Large Maple Spanworm Moth,MONA 6982,"(Goeze, 1781)",Geometridae,,Ennominae,,Ennomini
+3714,Prochoerodes,amplicineraria,,MONA 6978,"(Pearsall, 1906)",Geometridae,,Ennominae,,Ennomini
+3715,Prochoerodes,forficaria,,MONA 6981,"(Guenée, [1858])",Geometridae,,Ennominae,,Ennomini
+
