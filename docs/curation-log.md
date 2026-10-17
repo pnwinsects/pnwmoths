@@ -73,6 +73,60 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-041 · 2026-10-16 · Merrill's October 2026 list of PNW Geometridae adds 332 species to the catalogue, withheld with the family
+
+**Source** [#413 issue body](https://github.com/pnwinsects/pnwmoths/issues/413), the curator's own
+words · **Status** Applied (332 species added; blank tribe, authority and MONA cells filled);
+Pending (10 held rows, and 18 rows that sit under another genus on the site — tracked on #413,
+#279 and #418)
+
+> The attached file has our current working list of PNW Geometridae. Many of these species are not
+> yet in the site database and so they aren't showing up in things like the template for scoring the
+> key. Note that the last two columns haven't been completely filled in. The file from Moth
+> Photographers Group should have all of the information necessary for filling these in (and for
+> double-checking spellings, checklist numbers, etc.
+
+He asked for the species on his list to be in the database so they can be scored in the key
+template, and for MPG to settle names, numbers and authorities. All 467 rows were compared with
+`data/species.csv`, `data/species-synonyms.csv` and the committed MPG list (the March 2024 copy, so
+the 2023 checklist; the 2025 list is waiting on #418).
+
+| What the row is | Rows | What happened |
+| --- | ---: | --- |
+| Already on the site under the same name | 100 | Nothing added. |
+| Already on the site under another genus (11 *Speranza*, *Hydria undulata*, *Epirrita pulchraria*, *Epelis truncataria*, *Fernaldella fimetaria*, 2 *Enypia*) or as a synonym (*Macaria bitactata*) | 18 | Nothing added; the genus is for #279 / #418. |
+| New, with a name that matches MPG | 325 | Added. |
+| New, but Merrill's spelling differs from MPG's (e.g. *Nemoria obliquia*, MPG *obliqua*) | 7 | Added under MPG's spelling. |
+| Merrill's own note says it is now part of another species (4 *Lobophora*, *Macaria notata*, *M. perplexata*, *Digrammia respersata*) | 7 | Not added. |
+| New, but adding it would split a genus that #279 is about to move (*Rheumaptera meadii*, *R. subhastata*, *Narraga stalachtaria*, *Sabulodes aegrotata*, *S. edwardsata*, *S. griseata*) | 6 | Held for #279 / #418. |
+| *Macaria sulphurea*, which MPG's 2025 list calls *Speranza sulphurea* | 1 | Held for #418. |
+| Genus written in quotes by Merrill and MPG (*"Perizoma" custodiata*, *"Lithostege" marcata*) | 2 | Held; his call. |
+| *Idaea seriata* (MONA 7126.01), which neither MPG list has | 1 | Held; his call. |
+
+Where Merrill's list and MPG disagree, MPG's value is used for new rows: authority (a dozen were
+different in substance, for example *Eupithecia absinthiata* "(Clemens, 1759)" against MPG's
+"(Clerck, 1759)"), and MONA number (12 rows, most of them transposed digits, for example
+*Eupithecia lafontaineata* 7458.1 against 7548.1). Merrill's tribe, subfamily and common name are
+kept. Two tribe cases: MPG puts all of *Aspitates* in Gnophini while Merrill has three species in
+Angeronini, and tribe is a property of the genus, so the genus follows MPG; and *Lampropteryx
+suffumata* keeps Merrill's Cidariini where MPG has an unnamed tribe.
+
+**Blank cells filled on the 105 species we already held:** the tribe on 101 rows (tribe is genus-wide,
+so this includes species Merrill did not list), the authority on 14, and the MONA number on 1
+(*Caripeta divisata*). Nothing already entered was changed. Differences left for a ruling, none
+applied: *Digrammia modocata* (ours MONA 6376.1; Merrill and MPG 6368.1), *D. rippertaria* (ours
+6394.1; Merrill and MPG 6394), and *Nematocampa resistaria* (ours has the year 1855; Merrill and
+MPG have 1856). For *D. cinereola*, Merrill has 6363.1 but ours, 6363.2, is the number MPG gives.
+
+Why it matters: the key template grew from 156 to 488 species, so Merrill can score the new
+Geometridae. Nothing becomes public: the family is still withheld (C-001), and no species accounts
+or photographs were created.
+
+**What changed** — 332 rows in `data/species.csv`, `src/_data/speciesSlugs.json`,
+`data/checklist-order.csv`, `data/key-template.csv`.
+
+---
+
 ## C-040 · 2026-10-16 · The key's Distribution and Seasonality scores will come from occurrence records as they stand, with a warning about sparse data
 
 **Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6222767374),
