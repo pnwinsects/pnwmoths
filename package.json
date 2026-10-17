@@ -36,6 +36,7 @@
     "records:assign-ids": "node scripts/assign-record-ids.ts",
     "inat:sync": "node scripts/sync-inat-records.ts",
     "inat:migrate": "node scripts/migrate-inat-records.ts",
+    "species:rename": "node scripts/rename-species.ts",
     "photos:ingest": "node scripts/ingest-photos.ts",
     "photos:investigate": "RESORT_ONLY=1 node scripts/ingest-photos.ts",
     "photos:tile": "node scripts/tile-photos.ts",
