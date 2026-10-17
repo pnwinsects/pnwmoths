@@ -729,7 +729,6 @@ function main(): void {
         `(ADR 0054). Leave the cell blank unless \`npm run species:rename\` set it:\n  ` +
         badFolders.join('\n  '),
     );
-    process.exit(1);
   }
 
   for (const name of report.skipped) {
@@ -757,7 +756,7 @@ function main(): void {
     );
   }
 
-  if (report.violations.length > 0 || report.staleExceptions.length > 0) {
+  if (report.violations.length > 0 || report.staleExceptions.length > 0 || badFolders.length > 0) {
     process.exit(1);
   }
 
