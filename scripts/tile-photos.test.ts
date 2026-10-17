@@ -179,6 +179,12 @@ describe('findSlotCollisions', () => {
     assert.match(blocked.get(incoming.content_hash)!, /photo-determinations\.csv/);
   });
 
+  it('still sees a collision after a rename: the held tiles sit in a frozen folder, the new row has none', () => {
+    const frozen = row({ ...held, species_slug: 'macaria-colata', cdn_folder: 'speranza-colata' });
+    const incoming = row({ content_hash: 'b'.repeat(64), filename_raw: 'Macaria colata-A-D-2.tif', species_slug: 'macaria-colata', cdn_folder: '' });
+    assert.equal(findSlotCollisions([frozen, incoming]).size, 1);
+  });
+
   it('lets the row that already holds the slot through (a re-run of itself)', () => {
     const retry = row({ content_hash: 'a'.repeat(64), filename_raw: 'Macaria colata-A-D.tif', species_slug: 'macaria-colata', status: 'failed' });
     assert.equal(findSlotCollisions([retry]).size, 0);

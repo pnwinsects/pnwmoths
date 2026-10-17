@@ -239,9 +239,15 @@ export function excludedBySlugFilter(row: ManifestRow, only: ReadonlySet<string>
   return only.size > 0 && !only.has(row.species_slug.toLowerCase());
 }
 
-/** The tile slot a row would occupy: `species-tiles/{slug}/{specimen}-{view}`, as a key. */
+/**
+ * The tile slot a row would occupy on its species' account: species, specimen and view, as a key.
+ *
+ * Keyed by the species and not by the CDN folder: after a rename an old tile set sits in a frozen
+ * folder and a new photograph of the same specimen would get a different one, and two A-D tiles
+ * on one account is the collision this guards against (ADR 0054).
+ */
 function slotKey(row: ManifestRow): string {
-  return `${tileFolder(row)}|${row.specimen_id}|${row.view}`;
+  return `${row.species_slug.toLowerCase()}|${row.specimen_id}|${row.view}`;
 }
 
 /**
