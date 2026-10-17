@@ -23,8 +23,8 @@
 //   src/_data/speciesSlugs.json, src/content/species/<slug>.md  the entry and the file name
 //   scripts/check-photo-determinations.ts  the species' entries in KNOWN_COLLISIONS
 //
-// then regenerates the two committed files derived from the above (checklist order and the
-// Identify matrix), and fails — before writing anything — if any file that should be free of
+// then regenerates the committed files derived from the above (checklist order, the Identify
+// matrix and the hidden-images report), and fails — before writing anything — if any file that should be free of
 // the old slug still holds it.
 //
 // WHAT IT LEAVES ALONE
@@ -34,15 +34,20 @@
 //   - `cdn_folder` cells, `tiles_path` values, `image-derivatives.csv` and `cdn-retired-images.csv`,
 //     which name where an object IS, not what the species is called;
 //   - the one-off run reports (coord-fill, legacy-rejoin, ...), which are history;
-//   - files `npm run build:site` regenerates (the hidden-images and CDN inventory reports).
+//   - the CDN inventory report, which lists the storage zone and needs the Bunny password
+//     (`npm run cdn:inventory` refreshes it; it is advisory).
 //
 // Usage:
 //   DRY_RUN=1 npm run species:rename -- malacosoma-californicum malacosoma-californica
 //   npm run species:rename -- malacosoma-californicum "Malacosoma californica" --reason "MPG spelling (#369)"
 //
-// Idempotent: when the new species exists and the old one does not, it reports that and exits 0.
+// Idempotent: when the new species exists, the old one does not and no file still holds the old
+// slug, it reports that and exits 0. If an earlier run stopped partway, it says how to undo it.
+//
+// It renames one species. A genus move is one run per species, and a genus should move as a whole
+// or not at all (docs/lessons-learned.md), so run it for every species of the genus before you commit.
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
@@ -171,6 +176,11 @@ export interface RenameRequest {
   target: string;
   /** Why, for the redirect row. */
   reason?: string;
+  /**
+   * Allow the new slug to be one that used to redirect to a different species. Its old
+   * address then shows this species instead, which is the curator's call (`--reuse-slug`).
+   */
+  reuseSlug?: boolean;
 }
 
 export interface RenamePlan {
@@ -324,7 +334,21 @@ export function planRename(root: string, request: RenameRequest): RenamePlan {
       (parse(ws.read('data/species-redirects.csv'), { columns: true, skip_empty_lines: true }) as Array<Record<string, string>>)
         .some((r) => r['old_slug'] === oldSlug && r['new_slug'] === asSlug);
     if (redirected && speciesRows.some((r) => speciesSlug(r) === asSlug)) {
-      return emptyPlan('already-renamed', asSlug, request.target);
+      // The species row and the redirect say it was done. Check that the rest was too: a run
+      // that stopped partway can leave both written and other files still on the old slug.
+      const leftovers = findOldSlug(ws, oldSlug);
+      if (leftovers.length > 0) {
+        throw new Error(
+          `${TAG} ${asSlug} exists and ${oldSlug} does not, but the old slug is still in ${leftovers.length} place(s), ` +
+            `so an earlier run stopped partway. Restore the files with \`git restore data src scripts\`, delete ` +
+            `src/content/species/${asSlug}.md if \`git status\` shows it as new, and run the command again:\n  ` +
+            leftovers.slice(0, 20).join('\n  '),
+        );
+      }
+      const plan = emptyPlan('already-renamed', asSlug, request.target);
+      const unreached = keyNameWithoutSynonym(ws, oldSlug, asSlug);
+      if (unreached) plan.notes.push(keyNote(unreached, asSlug));
+      return plan;
     }
     throw new Error(`${TAG} no species has the slug "${oldSlug}" in data/species.csv`);
   }
@@ -365,7 +389,7 @@ export function planRename(root: string, request: RenameRequest): RenamePlan {
   for (const { path, column } of EXTRA_SLUG_COLUMNS) rekeyCsvColumn(ws, plan, path, column, oldSlug, newSlug);
 
   // --- Redirect and synonym rows. -----------------------------------------------------------
-  addRedirect(ws, plan, oldSlug, newSlug, request.reason ?? `renamed to ${newBinomial}`);
+  addRedirect(ws, plan, oldSlug, newSlug, request.reason ?? `renamed to ${newBinomial}`, request.reuseSlug === true);
   addSynonym(ws, plan, `${oldRow.genus} ${oldRow.species}`, newSlug);
 
   // --- Hard-coded slugs in source. ----------------------------------------------------------
@@ -384,7 +408,10 @@ export function planRename(root: string, request: RenameRequest): RenamePlan {
   plan.notes.push(
     `The authority, common name and noc_id of ${newBinomial} are unchanged; edit data/species.csv if the rename changes them.`,
     `The prose in src/content/species/${newSlug}.md still says the old name.`,
-    `data/species-synonyms.csv now maps "${oldRow.genus} ${oldRow.species}" to ${newSlug}. Delete that row if the old name is a different taxon, not a synonym.`,
+    `data/species-synonyms.csv now maps "${oldRow.genus} ${oldRow.species}" to ${newSlug}. Delete that row only if the old name is a different taxon, not a synonym.` +
+      (keyNames(ws).has(`${oldRow.genus} ${oldRow.species}`)
+        ? ` The key scores this species as "${oldRow.genus} ${oldRow.species}" (data/key-scores.csv), so deleting the row also drops ${newBinomial} from Identify until its key row is renamed or rescored.`
+        : ''),
     'No CDN copy is needed: photographs and tiles stay in their folders (ADR 0054).',
   );
   return plan;
@@ -493,7 +520,7 @@ function freezeFolders(ws: Workspace, plan: RenamePlan, root: string, oldSlug: s
   }
 }
 
-function addRedirect(ws: Workspace, plan: RenamePlan, oldSlug: string, newSlug: string, reason: string): void {
+function addRedirect(ws: Workspace, plan: RenamePlan, oldSlug: string, newSlug: string, reason: string, reuseSlug: boolean): void {
   const path = 'data/species-redirects.csv';
   if (!ws.exists(path)) throw new Error(`${TAG} ${path} is missing`);
   let changed = 0;
@@ -503,9 +530,18 @@ function addRedirect(ws: Workspace, plan: RenamePlan, oldSlug: string, newSlug: 
   const lines = text.split('\n');
   const kept = lines.filter((line, i) => {
     if (i === 0 || line === '') return true;
-    const [from] = splitCsvLine(line);
-    if (unquote(from ?? '') === newSlug) {
-      plan.notes.push(`Removed the redirect from "${newSlug}": the slug is a live species again.`);
+    const [from, to] = splitCsvLine(line).map(unquote);
+    if (from === newSlug) {
+      // Renaming back to a name this species once had is fine. A slug that sends visitors to a
+      // different species is that species' old address, and taking it over is not ours to decide.
+      // (RELATIONS re-keys new_slug before this runs, so a redirect to the old slug reads as one to the new.)
+      if (to !== oldSlug && to !== newSlug && !reuseSlug) {
+        throw new Error(
+          `${TAG} "${newSlug}" is an old address of ${to} (data/species-redirects.csv), so renaming ${oldSlug} to it would ` +
+            `send that species' old links here. If the curator has ruled that the name now belongs to this species, run again with --reuse-slug.`,
+        );
+      }
+      plan.notes.push(`Removed the redirect from "${newSlug}" to ${to}: the slug is a live species again.`);
       changed++;
       return false;
     }
@@ -555,6 +591,31 @@ function rekeyKnownCollisions(ws: Workspace, plan: RenamePlan, oldSlug: string, 
   if (!pattern.test(text)) return;
   ws.write(path, text.replace(pattern, `'${newSlug}|`));
   plan.counts.set(path, (text.match(pattern) ?? []).length);
+}
+
+/** The binomials `data/key-scores.csv` scores, as written there. */
+function keyNames(ws: Workspace): Set<string> {
+  const path = 'data/key-scores.csv';
+  if (!ws.exists(path)) return new Set();
+  const firstColumn = ws.read(path).split('\n').slice(1).map((line) => unquote(splitCsvLine(line)[0] ?? ''));
+  return new Set(firstColumn.filter((name) => name !== ''));
+}
+
+/**
+ * A key binomial for the old slug that no synonym row sends to the new slug, or null. The key
+ * matches its binomials to species case-sensitively, through the slug or a synonym, so such a
+ * name reaches no species and the species drops out of Identify.
+ */
+function keyNameWithoutSynonym(ws: Workspace, oldSlug: string, newSlug: string): string | null {
+  const name = [...keyNames(ws)].find((n) => normalizeSlug(n.replaceAll(' ', '-')) === oldSlug);
+  if (!name) return null;
+  const synonyms = ws.read('data/species-synonyms.csv').split('\n').slice(1).map((line) => splitCsvLine(line).map(unquote));
+  return synonyms.some(([from, to]) => from === name && to === newSlug) ? null : name;
+}
+
+function keyNote(name: string, newSlug: string): string {
+  return `The key scores this species as "${name}" (data/key-scores.csv) and no row in data/species-synonyms.csv sends that name to ${newSlug}, ` +
+    `so Identify cannot find it. Add the row "${name},${newSlug}" unless "${name}" is a different taxon.`;
 }
 
 // ---------------------------------------------------------------------------
@@ -615,14 +676,35 @@ export function findOldSlug(ws: Workspace, oldSlug: string): string[] {
 // ---------------------------------------------------------------------------
 
 export function applyPlan(root: string, plan: RenamePlan): void {
-  // Move the accounts first. A move that fails (a file created since the plan was made, a
-  // permission problem) then leaves every data file untouched, and the command can be run again;
-  // the other order would leave data naming the new slug with the account still at the old path.
-  for (const { to } of plan.moves) {
-    if (existsSync(join(root, to))) throw new Error(`${TAG} ${to} already exists; nothing was written`);
+  // Write every edit to a temporary file next to its target first. A failure there (a full disk,
+  // a directory you cannot write) leaves every file as it was, and the command can be run again.
+  const staged: Array<{ tmp: string; target: string }> = [];
+  try {
+    for (const [path, text] of plan.edits) {
+      const target = join(root, path);
+      const tmp = `${target}.rename-tmp`;
+      writeFileSync(tmp, text);
+      staged.push({ tmp, target });
+    }
+    for (const { to } of plan.moves) {
+      if (existsSync(join(root, to))) throw new Error(`${TAG} ${to} already exists; nothing was written`);
+    }
+  } catch (e) {
+    for (const { tmp } of staged) rmSync(tmp, { force: true });
+    throw e;
   }
-  for (const { from, to } of plan.moves) renameSync(join(root, from), join(root, to));
-  for (const [path, text] of plan.edits) writeFileSync(join(root, path), text);
+  // Then move the accounts and put the files in place. Each step is a rename within one
+  // directory, which does not fail for want of space; if one fails anyway, say how to undo.
+  try {
+    for (const { from, to } of plan.moves) renameSync(join(root, from), join(root, to));
+    for (const { tmp, target } of staged) renameSync(tmp, target);
+  } catch (e) {
+    for (const { tmp } of staged) rmSync(tmp, { force: true });
+    throw new Error(
+      `${TAG} ${(e as Error).message}. Some files were already changed: restore them with \`git restore data src scripts\`, ` +
+        'delete any new account that `git status` shows, and run the command again.',
+    );
+  }
 }
 
 function printPlan(plan: RenamePlan, dryRun: boolean): void {
@@ -632,9 +714,13 @@ function printPlan(plan: RenamePlan, dryRun: boolean): void {
   for (const note of plan.notes) console.log(`  note: ${note}`);
 }
 
-/** Regenerate the two committed files derived from the ones the rename edits. */
+/**
+ * Regenerate the committed files derived from the ones the rename edits: checklist order, the
+ * Identify matrix, and the hidden-images report. The CDN inventory report is not among them: it
+ * lists the storage zone, which needs the Bunny password, and it is advisory.
+ */
 function regenerate(root: string): void {
-  for (const script of ['scripts/build-checklist-order.ts', 'scripts/build-key.ts']) {
+  for (const script of ['scripts/build-checklist-order.ts', 'scripts/build-key.ts', 'scripts/emit-hidden-images.ts']) {
     console.log(`${TAG} running ${script}`);
     execFileSync(process.execPath, [script], { cwd: root, stdio: 'inherit' });
   }
@@ -643,17 +729,19 @@ function regenerate(root: string): void {
 export function parseArgs(argv: readonly string[]): RenameRequest {
   const positional: string[] = [];
   let reason: string | undefined;
+  let reuseSlug = false;
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]!;
-    if (arg === '--reason') reason = argv[++i];
+    if (arg === '--reuse-slug') reuseSlug = true;
+    else if (arg === '--reason') reason = argv[++i];
     else if (arg.startsWith('--reason=')) reason = arg.slice('--reason='.length);
     else positional.push(arg);
   }
   const [oldSlug, target] = positional;
   if (!oldSlug || !target || positional.length > 2) {
-    throw new Error(`usage: npm run species:rename -- <old-slug> "<New Genus> <new epithet>" [--reason "..."]`);
+    throw new Error(`usage: npm run species:rename -- <old-slug> "<New Genus> <new epithet>" [--reason "..."] [--reuse-slug]`);
   }
-  return { oldSlug, target, ...(reason ? { reason } : {}) };
+  return { oldSlug, target, ...(reason ? { reason } : {}), ...(reuseSlug ? { reuseSlug } : {}) };
 }
 
 export function main(argv: readonly string[] = process.argv.slice(2)): void {
@@ -662,6 +750,7 @@ export function main(argv: readonly string[] = process.argv.slice(2)): void {
   const plan = planRename(ROOT, request);
   if (plan.status === 'already-renamed') {
     console.log(`${TAG} ${plan.newSlug} already exists and ${plan.oldSlug} does not; nothing to do.`);
+    for (const note of plan.notes) console.log(`  note: ${note}`);
     return;
   }
   printPlan(plan, dryRun);

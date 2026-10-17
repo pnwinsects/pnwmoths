@@ -185,6 +185,16 @@ describe('findSlotCollisions', () => {
     assert.equal(findSlotCollisions([frozen, incoming]).size, 1);
   });
 
+  it('sees two species writing one folder: a species renamed onto a slug that is still a frozen folder', () => {
+    // alpha-one was renamed to alpha-two, so its tiles stay in the folder alpha-one. Then another
+    // species was renamed onto alpha-one, and a photograph of its specimen A arrives.
+    const frozen = row({ ...held, species_slug: 'alpha-two', cdn_folder: 'alpha-one' });
+    const incoming = row({ content_hash: 'b'.repeat(64), filename_raw: 'Alpha one-A-D.tif', species_slug: 'alpha-one', cdn_folder: '' });
+    const blocked = findSlotCollisions([frozen, incoming]);
+    assert.equal(blocked.size, 1);
+    assert.match(blocked.get(incoming.content_hash)!, /the folder alpha-one\/A-D/);
+  });
+
   it('lets the row that already holds the slot through (a re-run of itself)', () => {
     const retry = row({ content_hash: 'a'.repeat(64), filename_raw: 'Macaria colata-A-D.tif', species_slug: 'macaria-colata', status: 'failed' });
     assert.equal(findSlotCollisions([retry]).size, 0);

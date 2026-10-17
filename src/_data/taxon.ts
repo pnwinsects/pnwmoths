@@ -158,7 +158,6 @@ export default async function (): Promise<TaxonFamily[]> {
       quote = '"',
       escape = '"',
       auto_detect = false,
-      null_padding = true,
       columns = {
         'species_slug': 'VARCHAR',
         'filename': 'VARCHAR',

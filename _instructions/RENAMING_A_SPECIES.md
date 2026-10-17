@@ -43,10 +43,20 @@ The reason is saved in `data/species-redirects.csv` beside the redirect from the
 
 It changes the slug in every data file that holds one, moves the species' account to the new file
 name under `src/content/species/`, adds the redirect and a synonym row for the old name, and
-regenerates the checklist order and the Identify data. It stops before writing anything if the old
-slug would still appear somewhere afterwards, and it tells you where.
+regenerates the checklist order, the Identify data and the hidden-images report. It stops before
+writing anything if the old slug would still appear somewhere afterwards, and it tells you where.
 
-It is safe to run twice. The second run says the new species already exists and does nothing.
+It is safe to run twice. The second run says the new species already exists and does nothing. If a
+run stopped partway (a full disk, an interrupted terminal), the second run finds the old slug still
+in some files and tells you how to put everything back and start again.
+
+It refuses a new name whose slug is still the old address of a *different* species in
+`data/species-redirects.csv`, because the old links to that species would then show this one. Use
+`--reuse-slug` only when the curator has ruled that the name now belongs to this species.
+
+**Moving a genus** is one run per species. Move every species we hold in the genus, or none of them,
+before you commit: a partial move splits the genus in checklist order
+([lessons learned](../docs/lessons-learned.md)). The command does not check this for you.
 
 ## 4. What it leaves for you
 
@@ -55,8 +65,10 @@ It is safe to run twice. The second run says the new species already exists and 
 - **The account text.** The prose in `src/content/species/<new-slug>.md` still uses the old name.
   That is the author's text; change it only if the author agrees.
 - **The synonym row.** `data/species-synonyms.csv` now maps the old name to the new species, so a
-  photograph or key row filed under the old name still finds it. Delete that row if the old name
-  was a different animal and not a synonym.
+  photograph or key row filed under the old name still finds it. Delete that row only if the old
+  name was a different animal and not a synonym. If the key scores the species under the old name
+  (the command tells you when it does), deleting the row also removes the species from Identify,
+  because `data/key-scores.csv` names it by that old name. Rename or rescore its key row too.
 
 ## 5. Check and commit
 
@@ -65,7 +77,9 @@ npm test
 npm run build:site
 ```
 
-`build:site` regenerates the hidden-images and CDN inventory reports. Commit those with the rest.
+Commit everything the command changed, including `data/hidden-images-report.csv`. The CDN
+inventory report (`data/cdn-inventory-report.csv`) still lists the old slug until someone runs
+`npm run cdn:inventory`, which needs the Bunny password; it is advisory, so that can wait.
 In the built site, the old address should show a "redirecting" page and the new address the
 account, with the same photographs.
 

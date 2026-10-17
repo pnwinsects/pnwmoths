@@ -329,8 +329,12 @@ cost a debugging cycle to discover.
   **Superseded by [ADR 0054](adr/0054-cdn-folder-is-frozen-and-rename-is-one-command.md):** the
   folder is now the `cdn_folder` column, built into every path by `src/_lib/photo-path.ts`, so a
   rename re-keys the slug and moves no object. `npm run species:rename` does the re-keying, and a
-  test fails if code joins a slug and a filename by hand. The lesson that remains: a path built
-  from the slug works until the first rename, so the test uses a renamed species.
+  source scan in `npm test` flags the forms of hand-built path this repository has used. The
+  lesson that remains: a path built from the slug works until the first rename, so the tests use a
+  renamed species. The first version of that scan looked for a slug joined to a *filename*, and
+  would have missed three of the paths the change itself had to fix, because those joined a slug
+  to an image name, a specimen and view, or a directory. Test a guard against the cases that made
+  you write it.
 
 - **A generated artifact must not carry hand-added fields it does not preserve.** For a year of
   its life, `data/species-photos.json` held curator-entered `photographer`/`license` that

@@ -661,6 +661,45 @@ function describe(v: Violation): string {
   }
 }
 
+// ---------------------------------------------------------------------------
+// cdn_folder: the folder a photograph is stored under (ADR 0054)
+// ---------------------------------------------------------------------------
+
+/** The files whose rows carry a `cdn_folder`. */
+export const CDN_FOLDER_FILES = ['data/images.csv', 'data/species-photos-manifest.csv'] as const;
+
+/**
+ * Rows whose `cdn_folder` cannot be a folder a photograph is stored under. A blank cell means
+ * the species slug. A filled one is set by `npm run species:rename` to the slug the species had
+ * before, so it must be a slug in its own right (lower-case, hyphens) and must be either a
+ * species today or the old address of one in data/species-redirects.csv. A typo in the cell
+ * otherwise shows nothing wrong until someone looks at the photograph, and for a withheld
+ * species the build checks no page that would show it.
+ */
+export function findBadCdnFolders(species: SpeciesKeys, root = '.'): string[] {
+  const known = new Set(species.site);
+  const redirects = resolve(root, 'data/species-redirects.csv');
+  if (existsSync(redirects)) {
+    for (const { record } of parseCsv('data/species-redirects.csv', redirects)) known.add(record['old_slug'] ?? '');
+  }
+  const problems: string[] = [];
+  for (const path of CDN_FOLDER_FILES) {
+    const full = resolve(root, path);
+    if (!existsSync(full)) continue;
+    for (const { record, info } of parseCsv(path, full)) {
+      const folder = record['cdn_folder'];
+      if (folder === undefined || folder === '') continue;
+      const where = `${path}:${info.lines}`;
+      if (normalizeSlug(folder) !== folder) {
+        problems.push(`${where}: cdn_folder "${folder}" is not written as a slug (lower-case, hyphens, no spaces)`);
+      } else if (!known.has(folder)) {
+        problems.push(`${where}: cdn_folder "${folder}" is neither a species nor an old address in data/species-redirects.csv`);
+      }
+    }
+  }
+  return problems;
+}
+
 function main(): void {
   let species: SpeciesKeys;
   let exceptions: Exception[];
@@ -677,6 +716,21 @@ function main(): void {
   }
 
   const report = findViolations(species, references, exceptions);
+  let badFolders: string[];
+  try {
+    badFolders = findBadCdnFolders(species);
+  } catch (e) {
+    console.error((e as Error).message);
+    process.exit(1);
+  }
+  if (badFolders.length > 0) {
+    console.error(
+      `[check-referential-integrity] FAILED: ${badFolders.length} cdn_folder cell(s) name no folder a photograph could be in ` +
+        `(ADR 0054). Leave the cell blank unless \`npm run species:rename\` set it:\n  ` +
+        badFolders.join('\n  '),
+    );
+    process.exit(1);
+  }
 
   for (const name of report.skipped) {
     console.warn(`[check-referential-integrity] ${name} not found — relation skipped`);

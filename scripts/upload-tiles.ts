@@ -316,7 +316,6 @@ async function main(): Promise<void> {
 
   try {
     for (const row of tiledRows) {
-      const slug = tileFolder(row);
       const pair = `${row.specimen_id}-${row.view}`;
       const localPrefix = tileUploadPath(tileOutputDir, row);
       const dziLocalPath = `${localPrefix}.dzi`;
@@ -378,7 +377,7 @@ async function main(): Promise<void> {
 
         // --- Advance manifest status (must happen before deletion per D-03). ---
         advanceStatus(row, 'uploaded');
-        logStage(row.content_hash, 'upload', 'ok', `${slug}/${pair}  ${tileFiles.length + 1} files`);
+        logStage(row.content_hash, 'upload', 'ok', `${tilesPath(row)}  ${tileFiles.length + 1} files`);
         stats.uploaded++;
 
         // --- Delete local tile directory, .dzi, and thumbnail (D-03: unconditional, post-status-advance). ---

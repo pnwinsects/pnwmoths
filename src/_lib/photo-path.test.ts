@@ -97,6 +97,8 @@ describe('a renamed species, through each place that shows a photograph', () => 
 function isExempt(rel: string): boolean {
   return (
     rel === 'src/_lib/photo-path.ts' ||
+    // Builds `derived/<source path>@<variant>` from a source path photoPath() already made.
+    rel === 'src/_lib/derivative-url.ts' ||
     /^scripts\/migrate-[^/]+\.ts$/.test(rel) ||
     /\.test\.ts$/.test(rel) ||
     rel.startsWith('src/content/')
@@ -119,11 +121,21 @@ function sourceFiles(): string[] {
   return found.filter((rel) => !isExempt(rel)).sort();
 }
 
-/** Each way of joining a folder and a filename by hand that this repository has used. */
+/**
+ * Each way of joining a slug to the rest of a storage path by hand that this repository has
+ * used. Before ADR 0054 all of these were correct, because the slug was the folder; three of them
+ * (`${slug}/${navImage}` in the Identify card, `join(dir, row.species_slug…, …)` for tiles on
+ * disk and for their upload) did not mention a filename at all, which is why the patterns look
+ * for a slug followed by more path rather than for a filename.
+ */
 const HAND_BUILT: ReadonlyArray<{ pattern: RegExp; what: string }> = [
-  { pattern: /\$\{[^}]*slug[^}]*\}\/\$\{[^}]*filename[^}]*\}/i, what: '`${…slug…}/${…filename…}`' },
-  { pattern: /slug\s*\+\s*['"]\/['"]\s*\+\s*[\w.]*filename/i, what: "`slug + '/' + …filename`" },
+  // `${slug}/${…}`, except a page address such as `/species/${slug}/`.
+  { pattern: /(?<!species\/)\$\{[^}]*slug[^}]*\}\/\$\{/i, what: '`${…slug…}/${…}`' },
+  { pattern: /slug\s*\+\s*['"]\/['"]\s*\+/i, what: "`slug + '/' + …`" },
+  // path.join with a slug in it; an array's `.join(…)` is not a path.
+  { pattern: /(?<![.\w])join\([^;]*(?:species_slug|\bslug\b\s*[,)])/i, what: '`join(…, slug, …)`' },
   { pattern: /species-tiles\/\$\{/, what: '`species-tiles/${…}`' },
+  { pattern: /derived\/\$\{/, what: '`derived/${…}`' },
 ];
 
 /** Lines that are only a comment can describe a path without building one. */
@@ -153,15 +165,21 @@ describe('findHandBuiltPhotoPaths', () => {
       { rel: 'a.ts', text: 'const p = `${row.species_slug}/${row.filename}`;' },
       { rel: 'b.njk', text: "{{ (sp.slug + '/' + img.filename) | derivative('full') }}" },
       { rel: 'c.ts', text: 'const t = `species-tiles/${slug}/${pair}`;' },
+      // The three that the first version of this scan missed, as they were written on main.
+      { rel: 'd.ts', text: "  return derivativeUrl(CDN_BASE_URL, `${slug}/${navImage}`, '320h');" },
+      { rel: 'e.ts', text: '  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);' },
+      { rel: 'f.ts', text: 'const url = `${CDN}/derived/${folder}/${file}@320h.webp`;' },
     ];
-    assert.equal(findHandBuiltPhotoPaths(files).length, 3);
+    const flagged = new Set(findHandBuiltPhotoPaths(files).map((hit) => hit.split(':')[0]));
+    assert.deepEqual([...flagged].sort(), ['a.ts', 'b.njk', 'c.ts', 'd.ts', 'e.ts', 'f.ts']);
   });
 
   it('ignores comments and labels that are not paths', () => {
     const files = [
       { rel: 'a.ts', text: '// the path is `${slug}/${filename}`' },
       { rel: 'b.ts', text: ' * `species-tiles/${slug}/…` is mirrored on disk' },
-      { rel: 'c.ts', text: 'log(`${row.species_slug}/${row.specimen_id}-${row.view}`);' },
+      { rel: 'c.ts', text: 'const url = `/species/${slug}/`;' },
+      { rel: 'd.ts', text: "const list = slugs.join('|') + slug;" },
     ];
     assert.deepEqual(findHandBuiltPhotoPaths(files), []);
   });

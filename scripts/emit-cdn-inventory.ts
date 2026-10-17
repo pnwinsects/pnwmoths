@@ -381,7 +381,7 @@ function describe(unit: Unit, sources: Sources): { shape: string; detail: string
     if (elsewhere.length > 0) {
       return {
         shape: 'photo-refiled',
-        detail: `data/images.csv files this filename under ${elsewhere.join(', ')}; copy at a superseded path`,
+        detail: `data/images.csv stores this filename in the folder ${elsewhere.join(', ')}; copy at a superseded path`,
       };
     }
     return { shape: 'photo-no-row', detail: join('no row in data/images.csv', slugNote) };

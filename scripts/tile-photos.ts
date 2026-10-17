@@ -240,14 +240,27 @@ export function excludedBySlugFilter(row: ManifestRow, only: ReadonlySet<string>
 }
 
 /**
- * The tile slot a row would occupy on its species' account: species, specimen and view, as a key.
+ * The two slots a row's tiles occupy, as keys. Either can collide with another photograph:
  *
- * Keyed by the species and not by the CDN folder: after a rename an old tile set sits in a frozen
- * folder and a new photograph of the same specimen would get a different one, and two A-D tiles
- * on one account is the collision this guards against (ADR 0054).
+ * - the **account** slot (species, specimen, view): two A-D tile sets on one account. After a
+ *   rename an old tile set sits in a frozen folder and a new photograph of the same specimen
+ *   would get a different folder, so the folder alone does not catch this.
+ * - the **folder** slot (CDN folder, specimen, view): two tile sets written into one directory.
+ *   A species renamed onto a slug that is still another species' frozen folder (the rename
+ *   command allows that) would otherwise tile over the older set (ADR 0054).
+ *
+ * Before ADR 0054 the slug was the folder, so one key covered both.
  */
-function slotKey(row: ManifestRow): string {
-  return `${row.species_slug.toLowerCase()}|${row.specimen_id}|${row.view}`;
+function slotKeys(row: ManifestRow): string[] {
+  const place = `${row.specimen_id}|${row.view}`;
+  return [`account:${row.species_slug.toLowerCase()}|${place}`, `folder:${tileFolder(row)}|${place}`];
+}
+
+/** How a slot key reads in a message: `<slug-or-folder>/<specimen>-<view>`. */
+function describeSlot(key: string): string {
+  const [kind, rest] = key.split(':', 2) as [string, string];
+  const [where, specimen, view] = rest.split('|');
+  return `${kind === 'folder' ? 'the folder ' : ''}${where}/${specimen}-${view}`;
 }
 
 /**
@@ -281,34 +294,36 @@ export function findSlotCollisions(
   const owner = new Map<string, ManifestRow>();
   for (const row of rows) {
     if (!COMPLETED_STATUSES.has(row.status) || !row.species_slug || !row.specimen_id || !row.view) continue;
-    if (!owner.has(slotKey(row))) owner.set(slotKey(row), row);
+    for (const key of slotKeys(row)) if (!owner.has(key)) owner.set(key, row);
   }
   const blocked = new Map<string, string>();
   const claimants = new Map<string, ManifestRow[]>();
   for (const row of rows) {
     if (!isTileable(row)) continue;
-    const key = slotKey(row);
-    const holder = owner.get(key);
-    if (!holder) {
-      owner.set(key, row);
-      claimants.set(key, [row]);
-      continue;
+    for (const key of slotKeys(row)) {
+      const holder = owner.get(key);
+      if (!holder) {
+        owner.set(key, row);
+        claimants.set(key, [row]);
+        continue;
+      }
+      if (holder.content_hash === row.content_hash) continue;
+      if (!COMPLETED_STATUSES.has(holder.status)) claimants.get(key)?.push(row);
+      if (blocked.has(row.content_hash)) continue;
+      blocked.set(
+        row.content_hash,
+        `${describeSlot(key)} is ${COMPLETED_STATUSES.has(holder.status) ? 'already held' : 'also claimed'} ` +
+          `by ${holder.filename_raw} (${holder.status}); give ${row.filename_raw} a free letter in data/photo-determinations.csv`,
+      );
     }
-    if (holder.content_hash === row.content_hash) continue;
-    if (!COMPLETED_STATUSES.has(holder.status)) claimants.get(key)?.push(row);
-    blocked.set(
-      row.content_hash,
-      `${row.species_slug}/${row.specimen_id}-${row.view} is ${COMPLETED_STATUSES.has(holder.status) ? 'already held' : 'also claimed'} ` +
-        `by ${holder.filename_raw} (${holder.status}); give ${row.filename_raw} a free letter in data/photo-determinations.csv`,
-    );
   }
   // A contested slot whose tiles already exist on disk: hold the first claimant too.
-  for (const rows_ of claimants.values()) {
+  for (const [key, rows_] of claimants) {
     const first = rows_[0];
-    if (!first || rows_.length < 2 || !slotOnDisk(first)) continue;
+    if (!first || rows_.length < 2 || !slotOnDisk(first) || blocked.has(first.content_hash)) continue;
     blocked.set(
       first.content_hash,
-      `${first.species_slug}/${first.specimen_id}-${first.view} already has tiles on disk from an earlier run and ` +
+      `${describeSlot(key)} already has tiles on disk from an earlier run and ` +
         `${rows_.length} untiled rows claim it (${rows_.map((r) => r.filename_raw).join(', ')}); ` +
         'nobody can say whose they are — settle the letters in data/photo-determinations.csv, then delete that tile directory and re-run',
     );
@@ -562,7 +577,7 @@ async function main(): Promise<void> {
         runVipsThumbnail(cachePath, prefix, config);
         await unlink(cachePath);
         advanceStatus(row, 'tiled');
-        logStage(row.content_hash, 'tile', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+        logStage(row.content_hash, 'tile', 'ok', tilesPath(row));
         stats.tiled++;
       } catch (err) {
         const safeMsg = redact((err as Error).message ?? String(err));
@@ -616,7 +631,7 @@ async function mainThumbnailOnly(
     console.log('[tile-photos] DRY_RUN=1 — printing first 5 eligible rows, not invoking fetch, vips, or upload');
     for (const row of eligible.slice(0, 5)) {
       const cachePath = tiffCachePath(tiffCacheDir, row);
-      console.log(`  -> ${row.species_slug}/${row.specimen_id}-${row.view}`);
+      console.log(`  -> ${tilesPath(row)}`);
       console.log(`     tiff cache  : ${cachePath}`);
       console.log(`     dropbox_path: ${row.dropbox_path}`);
     }
@@ -665,7 +680,7 @@ async function mainThumbnailOnly(
         await mkdir(dirname(prefix), { recursive: true });
         runVipsThumbnail(cachePath, prefix, config);
         await unlink(cachePath);
-        logStage(row.content_hash, 'thumbnail', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+        logStage(row.content_hash, 'thumbnail', 'ok', tilesPath(row));
 
         // --- Upload stage ---
         await withRetry(
@@ -673,7 +688,7 @@ async function mainThumbnailOnly(
           `upload ${row.specimen_id}-${row.view}/_thumbnail`
         );
         await unlink(thumbnailPath);
-        logStage(row.content_hash, 'upload', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+        logStage(row.content_hash, 'upload', 'ok', tilesPath(row));
 
         stats.thumbnailed++;
       } catch (err) {

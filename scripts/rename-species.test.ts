@@ -272,6 +272,52 @@ describe('planRename', () => {
     assert.equal(read(root, 'data/species.csv'), SPECIES_CSV, 'the plan is built in memory; nothing was written');
   });
 
+  it('refuses a slug that is still another species\' old address, unless told --reuse-slug', () => {
+    const redirects = FILES['data/species-redirects.csv']!.replace('malacosoma-californica,malacosoma-californicum', 'malacosoma-californica,malacosoma-disstria');
+    const root = makeRoot({ 'data/species-redirects.csv': redirects });
+    assert.throws(() => planRename(root, { oldSlug: OLD, target: NEW }), /old address of malacosoma-disstria.*--reuse-slug/s);
+    const plan = planRename(root, { oldSlug: OLD, target: NEW, reuseSlug: true });
+    assert.ok(plan.notes.some((n) => n.includes('Removed the redirect from "malacosoma-californica" to malacosoma-disstria')));
+    assert.deepEqual(parseArgs(['a-b', 'A c', '--reuse-slug']), { oldSlug: 'a-b', target: 'A c', reuseSlug: true });
+  });
+
+  it('does not call a run that stopped partway "already renamed"', () => {
+    const root = makeRoot();
+    const plan = planRename(root, { oldSlug: OLD, target: NEW });
+    // Only species.csv and the redirect got written before the run stopped.
+    for (const path of ['data/species.csv', 'data/species-redirects.csv']) writeFileSync(join(root, path), plan.edits.get(path)!);
+    assert.throws(() => planRename(root, { oldSlug: OLD, target: NEW }), /stopped partway.*git restore/s);
+  });
+
+  it('warns on a re-run when the key names the old binomial and no synonym reaches the species', () => {
+    const root = makeRoot({ 'data/key-scores.csv': 'binomial,Color:Brown\nMalacosoma californicum,1\n' });
+    applyPlan(root, planRename(root, { oldSlug: OLD, target: NEW }));
+    assert.equal(planRename(root, { oldSlug: OLD, target: NEW }).notes.length, 0, 'the synonym the run added reaches it');
+    // Someone deletes the synonym row, as the old note invited.
+    const synonyms = read(root, 'data/species-synonyms.csv').replace(`Malacosoma californicum,${NEW}\n`, '');
+    writeFileSync(join(root, 'data/species-synonyms.csv'), synonyms);
+    const again = planRename(root, { oldSlug: OLD, target: NEW });
+    assert.equal(again.status, 'already-renamed');
+    assert.ok(again.notes.some((n) => n.includes('Identify cannot find it') && n.includes(`"Malacosoma californicum,${NEW}"`)));
+  });
+
+  it('says that deleting the synonym drops the species from Identify, when the key uses the old name', () => {
+    const root = makeRoot({ 'data/key-scores.csv': 'binomial,Color:Brown\nMalacosoma californicum,1\n' });
+    const plan = planRename(root, { oldSlug: OLD, target: NEW });
+    assert.ok(plan.notes.some((n) => n.includes('drops Malacosoma californica from Identify')));
+  });
+
+  it('writes nothing when a file cannot be staged', () => {
+    const root = makeRoot();
+    const plan = planRename(root, { oldSlug: OLD, target: NEW });
+    // A directory where a temporary file should go makes the write fail.
+    mkdirSync(join(root, 'data/records.csv.rename-tmp'));
+    assert.throws(() => applyPlan(root, plan));
+    assert.equal(read(root, 'data/species.csv'), SPECIES_CSV);
+    assert.ok(existsSync(join(root, `src/content/species/${OLD}.md`)), 'the account did not move');
+    assert.ok(!existsSync(join(root, 'data/species.csv.rename-tmp')), 'staged files are cleaned up');
+  });
+
   it('leaves the curator-owned fields and the prose alone, and says so', () => {
     const root = makeRoot();
     const plan = planRename(root, { oldSlug: OLD, target: NEW });
