@@ -317,9 +317,13 @@ export function planRename(root: string, request: RenameRequest): RenamePlan {
   });
 
   if (!oldRow) {
-    // Already done? The target exists and the old name does not.
+    // Already done? The target exists, the old name does not, and a redirect from the old
+    // address to the target says that this is the rename and not a mistyped old slug.
     const asSlug = normalizeSlug(request.target);
-    if (speciesRows.some((r) => speciesSlug(r) === asSlug)) {
+    const redirected = ws.exists('data/species-redirects.csv') &&
+      (parse(ws.read('data/species-redirects.csv'), { columns: true, skip_empty_lines: true }) as Array<Record<string, string>>)
+        .some((r) => r['old_slug'] === oldSlug && r['new_slug'] === asSlug);
+    if (redirected && speciesRows.some((r) => speciesSlug(r) === asSlug)) {
       return emptyPlan('already-renamed', asSlug, request.target);
     }
     throw new Error(`${TAG} no species has the slug "${oldSlug}" in data/species.csv`);
@@ -437,7 +441,12 @@ function rekeyRelation(ws: Workspace, plan: RenamePlan, relation: Relation, oldS
 
     case 'md-basenames': {
       const from = `${path}/${oldSlug}.md`;
-      if (ws.exists(from)) plan.moves.push({ from, to: `${path}/${newSlug}.md` });
+      const to = `${path}/${newSlug}.md`;
+      if (!ws.exists(from)) return;
+      // rename() replaces an existing file without complaint, which would lose an orphan
+      // account's prose after the data edits had already been written.
+      if (ws.exists(to)) throw new Error(`${TAG} ${to} already exists; resolve it before renaming`);
+      plan.moves.push({ from, to });
       return;
     }
 

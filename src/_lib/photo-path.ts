@@ -13,9 +13,10 @@
 // column existed and what a hand-added row should leave.
 //
 // THIS IS THE ONLY MODULE THAT JOINS A FOLDER AND A FILENAME. Templates, build scripts
-// and browser components all call it. `scripts/check-photo-paths.ts` fails the build if
-// another file builds `<slug>/<filename>` by hand, because the mistake it prevents shows
-// up only after the first rename and then as a quiet wrong folder.
+// and browser components all call it. A test in `src/_lib/photo-path.test.ts`
+// (`findHandBuiltPhotoPaths`, run by `npm test`) fails if another file builds
+// `<slug>/<filename>` by hand, because the mistake it prevents shows up only after the
+// first rename and then as a quiet wrong folder.
 //
 // Browser-safe: no Node imports, no DOM access (src/_lib is bundled for the browser).
 

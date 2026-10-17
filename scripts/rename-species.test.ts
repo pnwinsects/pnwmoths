@@ -242,6 +242,17 @@ describe('planRename', () => {
     assert.equal(again.edits.size, 0);
   });
 
+  it('does not call a mistyped old slug "already renamed" just because the target exists', () => {
+    const root = makeRoot();
+    assert.throws(() => planRename(root, { oldSlug: 'malacosoma-californikum', target: 'Malacosoma constrictum' }), /no species has the slug/);
+  });
+
+  it('refuses to overwrite an account that already has the new name', () => {
+    const root = makeRoot({ [`src/content/species/${NEW}.md`]: 'An orphan account.\n' });
+    assert.throws(() => planRename(root, { oldSlug: OLD, target: NEW }), /already exists; resolve it/);
+    assert.equal(read(root, `src/content/species/${NEW}.md`), 'An orphan account.\n');
+  });
+
   it('refuses a rename onto a slug that is already a species (that is a merge)', () => {
     const root = makeRoot();
     assert.throws(() => planRename(root, { oldSlug: OLD, target: 'Malacosoma constrictum' }), /merging two species/);
