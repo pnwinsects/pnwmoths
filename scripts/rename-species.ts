@@ -615,8 +615,14 @@ export function findOldSlug(ws: Workspace, oldSlug: string): string[] {
 // ---------------------------------------------------------------------------
 
 export function applyPlan(root: string, plan: RenamePlan): void {
-  for (const [path, text] of plan.edits) writeFileSync(join(root, path), text);
+  // Move the accounts first. A move that fails (a file created since the plan was made, a
+  // permission problem) then leaves every data file untouched, and the command can be run again;
+  // the other order would leave data naming the new slug with the account still at the old path.
+  for (const { to } of plan.moves) {
+    if (existsSync(join(root, to))) throw new Error(`${TAG} ${to} already exists; nothing was written`);
+  }
   for (const { from, to } of plan.moves) renameSync(join(root, from), join(root, to));
+  for (const [path, text] of plan.edits) writeFileSync(join(root, path), text);
 }
 
 function printPlan(plan: RenamePlan, dryRun: boolean): void {
