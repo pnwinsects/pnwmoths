@@ -36,6 +36,7 @@ Plain-English instructions for common maintenance tasks are in [`_instructions/`
 - [`ADDING_PLATE.md`](_instructions/ADDING_PLATE.md)
 - [`EDITING_HOME_ANNOUNCEMENT.md`](_instructions/EDITING_HOME_ANNOUNCEMENT.md)
 - [`REMOVING_SPECIES.md`](_instructions/REMOVING_SPECIES.md)
+- [`RENAMING_A_SPECIES.md`](_instructions/RENAMING_A_SPECIES.md) — a new scientific name for the same moth, in one command
 - [`RUNNING_THE_LEGACY_SITE.md`](_instructions/RUNNING_THE_LEGACY_SITE.md) — the retired WWU site, as a read-only offline copy
 
 ## License

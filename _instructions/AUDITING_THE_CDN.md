@@ -83,8 +83,8 @@ from `data/species.csv` entirely.
 
 ### 2a. Read the duplicates report
 
-Renames are additive: changing a genus copies every photo to the new slug and leaves the old
-one in place. `data/cdn-retired-images.csv` records the pairs somebody wrote down;
+Renames made before ADR 0054 are additive: changing a genus copied every photo to the new slug and left the old
+one in place. A rename made with `npm run species:rename` copies nothing, because the photographs stay in their folder. `data/cdn-retired-images.csv` records the pairs somebody wrote down;
 `data/cdn-duplicates-report.csv` finds the rest, by grouping objects on the SHA256 the storage
 listing hands back for free.
 

@@ -72,7 +72,7 @@ a species added to the CSV without a matching line here is unreachable from ever
 
 ### 3b. If it's a species we renamed
 
-Add a row to `data/species-redirects.csv`.
+`npm run species:rename` adds the row for you ([RENAMING_A_SPECIES.md](RENAMING_A_SPECIES.md)). If the species was renamed some other way, add a row to `data/species-redirects.csv` yourself.
 
 #### Schema: data/species-redirects.csv
 

@@ -326,6 +326,11 @@ cost a debugging cycle to discover.
   `species-tiles/<slug>/…` for high-res tiles. Fixing only the first passes `npm test` and fails
   `check-derivatives.ts` at build time; fixing both makes the ledger assert CDN objects that do
   not exist until a maintainer runs the copy. Grep for the bare slug, not for one prefix.
+  **Superseded by [ADR 0054](adr/0054-cdn-folder-is-frozen-and-rename-is-one-command.md):** the
+  folder is now the `cdn_folder` column, built into every path by `src/_lib/photo-path.ts`, so a
+  rename re-keys the slug and moves no object. `npm run species:rename` does the re-keying, and a
+  test fails if code joins a slug and a filename by hand. The lesson that remains: a path built
+  from the slug works until the first rename, so the test uses a renamed species.
 
 - **A generated artifact must not carry hand-added fields it does not preserve.** For a year of
   its life, `data/species-photos.json` held curator-entered `photographer`/`license` that
