@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import {
   COLUMNS,
   readManifest,
@@ -21,7 +21,7 @@ function makeTestRow(partial: Partial<ManifestRow> & { binomial_raw?: string; ma
   return {
     content_hash: '', dropbox_path: '', size_bytes: '', server_modified: '',
     filename_raw: '', binomial_raw: '', specimen_id: '', view: '',
-    binomial_resolved: '', species_slug: '', match_bucket: '', status: '', last_error: '',
+    binomial_resolved: '', species_slug: '', match_bucket: '', status: '', last_error: '', cdn_folder: '',
     ...partial,
   };
 }
@@ -30,8 +30,8 @@ function makeTestRow(partial: Partial<ManifestRow> & { binomial_raw?: string; ma
 // COLUMNS — pins the D-05 manifest schema and column order
 // ---------------------------------------------------------------------------
 describe('COLUMNS', () => {
-  it('has exactly 13 columns', () => {
-    assert.equal(COLUMNS.length, 13);
+  it('has exactly 14 columns', () => {
+    assert.equal(COLUMNS.length, 14);
   });
 
   it('matches the D-05 column order exactly', () => {
@@ -49,6 +49,7 @@ describe('COLUMNS', () => {
       'match_bucket',
       'status',
       'last_error',
+      'cdn_folder',
     ]);
   });
 
@@ -57,9 +58,9 @@ describe('COLUMNS', () => {
     assert.equal(firstCol, 'content_hash');
   });
 
-  it('terminates with last_error', () => {
+  it('terminates with cdn_folder', () => {
     const lastCol = COLUMNS[COLUMNS.length - 1];
-    assert.equal(lastCol, 'last_error');
+    assert.equal(lastCol, 'cdn_folder');
   });
 });
 
@@ -71,6 +72,20 @@ describe('readManifest', () => {
     const missingPath = join(tmpdir(), `manifest-does-not-exist-${Date.now()}-${Math.random().toString(36).slice(2)}.csv`);
     const rows = await readManifest(missingPath);
     assert.deepEqual(rows, []);
+  });
+
+  it('reads a manifest written before cdn_folder existed, rather than dropping every row', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'manifest-legacy-'));
+    try {
+      const path = join(dir, 'manifest.csv');
+      const header = COLUMNS.filter((c) => c !== 'cdn_folder').join(',');
+      writeFileSync(path, `${header}\nabc,/a.tif,1,2026-01-01T00:00:00Z,a.tif,x y,A,D,x y,x-y,clean-match,uploaded,\n`);
+      const rows = await readManifest(path);
+      assert.equal(rows.length, 1);
+      assert.equal(rows[0]?.cdn_folder, '');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });
 
@@ -98,6 +113,7 @@ describe('writeManifest → readManifest round-trip', () => {
           match_bucket: 'clean-match',
           status: 'discovered',
           last_error: '',
+          cdn_folder: '',
         },
         {
           content_hash: 'bbb2222222222222222222222222222222222222222222222222222222222222',
@@ -113,6 +129,7 @@ describe('writeManifest → readManifest round-trip', () => {
           match_bucket: 'genus-only',
           status: 'discovered',
           last_error: '',
+          cdn_folder: '',
         },
         {
           content_hash: 'ccc3333333333333333333333333333333333333333333333333333333333333',
@@ -130,6 +147,7 @@ describe('writeManifest → readManifest round-trip', () => {
           match_bucket: 'unparseable',
           status: 'discovered',
           last_error: '',
+          cdn_folder: '',
         },
       ];
 
@@ -298,6 +316,7 @@ describe('advanceStatus', () => {
       match_bucket:      'clean-match',
       status:            'discovered',
       last_error:        '',
+      cdn_folder:        '',
       ...overrides,
     };
   }

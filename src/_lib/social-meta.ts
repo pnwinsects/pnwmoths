@@ -14,6 +14,7 @@
  *  snippet near 160, and Bluesky's card near 200 — 200 is the useful middle. */
 import { derivativeUrl, sourceUrl } from './derivative-url.ts';
 import { pickSharePhoto } from './photo-display.ts';
+import { photoPath } from './photo-path.ts';
 
 export const MAX_DESCRIPTION_LENGTH = 200;
 
@@ -155,6 +156,8 @@ export interface HighResPhotoLike {
 /** The subset of an `images` row this module reads. */
 export interface SpeciesImageLike {
   filename: string;
+  /** Folder on the CDN when it is not the species slug (ADR 0054). */
+  cdn_folder?: string | null;
   /**
    * Optional because callers pass the already-ordered array from src/_data/images.ts.
    * pickSharePhoto orders by weight regardless, and a stable sort over rows that all
@@ -195,7 +198,7 @@ export function speciesSocialImage(
   const specimen = highRes?.high_res_available ? highRes.specimens?.[0] : undefined;
   const chosen = pickSharePhoto(images ?? [], specimen ? `${specimen.tiles_path}_thumbnail.webp` : null);
   if (chosen.kind === 'tile') return derivativeUrl(cdnBaseUrl, chosen.tile, '1200');
-  if (chosen.kind === 'photo') return sourceUrl(cdnBaseUrl, `${slug}/${chosen.photo.filename}`);
+  if (chosen.kind === 'photo') return sourceUrl(cdnBaseUrl, photoPath({ species_slug: slug, cdn_folder: chosen.photo.cdn_folder, filename: chosen.photo.filename }));
   return "";
 }
 

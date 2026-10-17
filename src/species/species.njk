@@ -109,8 +109,8 @@ eleventyComputed:
       {% if display.mode == 'photos' or display.mode == 'tiles' %}
         {% for img in display.photos %}
           <figure>
-            <img src="{{ (sp.slug + '/' + img.filename) | derivative('full') }}"
-                 data-thumb="{{ (sp.slug + '/' + img.filename) | derivative('320h') }}"
+            <img src="{{ img | photoPath | derivative('full') }}"
+                 data-thumb="{{ img | photoPath | derivative('320h') }}"
                  alt="{{ sp.genus }} {{ sp.species_display }}"
                  data-photographer="{{ img.photographer }}"
                  {% if img.specimen %}data-specimen="{{ img.specimen }}"{% endif %}
@@ -142,7 +142,7 @@ eleventyComputed:
                 <a class="similar-species-entry" href="{{ ('/species/' + slug + '/') | url }}">
                   <div class="similar-species-thumb">
                     {% if simThumb %}
-                      <img src="{{ (slug + '/' + simThumb.filename) | derivative('320h') }}"
+                      <img src="{{ simThumb | photoPath | derivative('320h') }}"
                            alt="{{ s.genus }} {{ s.species_display }}"
                            height="93"
                            loading="lazy">

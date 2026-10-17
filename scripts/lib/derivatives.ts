@@ -16,6 +16,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { derivativePath, type VariantToken } from '../../src/_lib/derivative-url.ts';
+import { photoPath } from '../../src/_lib/photo-path.ts';
 
 /** Source families, which determine the variant set. */
 export type SourceKind = 'legacy' | 'highres' | 'glossary' | 'plates';
@@ -190,10 +191,10 @@ export type SourceInventory = Readonly<Record<SourceKind, SourceEntry[]>>;
 export function readSources(dataDir: string): SourceInventory {
   const images = parse(readFileSync(join(dataDir, 'images.csv')), {
     columns: true, skip_empty_lines: true,
-  }) as Array<{ species_slug: string; filename: string }>;
+  }) as Array<{ species_slug: string; filename: string; cdn_folder?: string }>;
   const legacy = images
     .filter((r) => r.species_slug && r.filename)
-    .map((r) => ({ path: `${r.species_slug}/${r.filename}`, speciesSlug: r.species_slug }));
+    .map((r) => ({ path: photoPath(r), speciesSlug: r.species_slug }));
 
   const photos = JSON.parse(readFileSync(join(dataDir, 'species-photos.json'), 'utf8')) as
     Record<string, { specimens?: Array<{ tiles_path: string }> }>;

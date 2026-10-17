@@ -82,6 +82,7 @@ async function main(): Promise<void> {
       quote = '"',
       escape = '"',
       auto_detect = false,
+      null_padding = true,
       columns = {
         'species_slug': 'VARCHAR',
         'filename': 'VARCHAR',
@@ -99,7 +100,8 @@ async function main(): Promise<void> {
         'month': 'VARCHAR',
         'day': 'VARCHAR',
         'collector': 'VARCHAR',
-        'subspecies': 'VARCHAR'
+        'subspecies': 'VARCHAR',
+        'cdn_folder': 'VARCHAR'
       }
     )
   `);

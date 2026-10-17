@@ -39,6 +39,7 @@ import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus, holdManifestLock } from './lib/manifest.ts';
+import { tileFolder, tilesPath } from '../src/_lib/photo-path.ts';
 import type { MatchBucket } from './lib/parse-photo-filename.ts';
 import { downloadSharedFile } from './lib/dropbox-download.ts';
 import { pathToFileURL } from 'node:url';
@@ -167,11 +168,12 @@ function logStage(content_hash: string, action: string, outcome: string, extra =
  * The last path component must be `{specimen_id}-{view}` so the storage layout
  * `species-tiles/{slug}/{specimen_id}-{view}/` is mirrored on disk.
  *
- * species_slug is lowercased unconditionally — Phase 28 lesson: TIFF filenames
- * preserve mixed-case genus but tile directories and CDN paths MUST be lowercase.
+ * The folder is `cdn_folder` once a species has been renamed (ADR 0054) and the
+ * lowercased species_slug until then — Phase 28 lesson: TIFF filenames preserve
+ * mixed-case genus but tile directories and CDN paths MUST be lowercase.
  */
 export function tilePrefix(tileOutputDir: string, row: ManifestRow): string {
-  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);
+  return join(tileOutputDir, tileFolder(row), `${row.specimen_id}-${row.view}`);
 }
 
 /**
@@ -239,7 +241,7 @@ export function excludedBySlugFilter(row: ManifestRow, only: ReadonlySet<string>
 
 /** The tile slot a row would occupy: `species-tiles/{slug}/{specimen}-{view}`, as a key. */
 function slotKey(row: ManifestRow): string {
-  return `${row.species_slug.toLowerCase()}|${row.specimen_id}|${row.view}`;
+  return `${tileFolder(row)}|${row.specimen_id}|${row.view}`;
 }
 
 /**
@@ -394,9 +396,7 @@ function runVipsThumbnail(sourceTiff: string, prefix: string, config: TileConfig
  * caller's withRetry handles transient failures.
  */
 function uploadThumbnailToCdn(localPath: string, row: ManifestRow): void {
-  const slug = row.species_slug.toLowerCase();
-  const pair = `${row.specimen_id}-${row.view}`;
-  const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/${slug}/${pair}_thumbnail.webp`;
+  const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${tilesPath(row)}_thumbnail.webp`;
   execFileSync('curl', [
     '-s', '-S', '-f',
     '-X', 'PUT',

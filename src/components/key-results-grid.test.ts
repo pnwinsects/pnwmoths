@@ -30,6 +30,13 @@ describe('buildCardUrl', () => {
     assert.equal(buildCardUrl('s', 'i.jpg', 320).includes('?'), false);
   });
 
+  test('points at the frozen folder when the species has been renamed (ADR 0054)', () => {
+    assert.equal(
+      buildCardUrl('malacosoma-californica', 'Malacosoma californicum-A-D.jpg', 320, 'malacosoma-californicum'),
+      'https://moths.pnwinsects.org/derived/malacosoma-californicum/Malacosoma%20californicum-A-D%40320h.webp',
+    );
+  });
+
   test('uses the correct CDN base URL', () => {
     const url = buildCardUrl('test-slug', 'image.jpg', 320);
     assert.ok(

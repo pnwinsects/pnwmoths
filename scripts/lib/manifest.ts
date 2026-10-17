@@ -55,6 +55,9 @@ export const COLUMNS = [
   'match_bucket',
   'status',
   'last_error',
+  // Folder under species-tiles/ when it is not the species slug (ADR 0054). Blank for
+  // every row until a species is renamed; scripts/rename-species.ts fills it in.
+  'cdn_folder',
 ] as const;
 
 /**
@@ -64,7 +67,7 @@ export const COLUMNS = [
 export type ManifestStatus = 'discovered' | 'downloaded' | 'tiled' | 'uploaded' | 'failed';
 
 /**
- * D-04: ManifestRow is a mapped type over the 13 known column keys, so
+ * D-04: ManifestRow is a mapped type over the 14 known column keys, so
  * row.status is `string` (not `string | undefined`) even under noUncheckedIndexedAccess.
  */
 export type ManifestRow = Record<typeof COLUMNS[number], string>;
@@ -102,7 +105,12 @@ export async function readManifest(path: string): Promise<ManifestRow[]> {
   if (!existsSync(path)) return [];
   const raw = await readFile(path);
   const rows = parse(raw, { columns: true, skip_empty_lines: true }) as unknown[];
-  return rows.filter(isManifestRow);
+  // A manifest written before `cdn_folder` existed has no such column. Fill it in as
+  // blank rather than let the guard drop every row, which the next write would then
+  // save as an empty manifest.
+  return rows
+    .map((row) => (typeof row === 'object' && row !== null && !('cdn_folder' in row) ? { ...row, cdn_folder: '' } : row))
+    .filter(isManifestRow);
 }
 
 /**

@@ -38,6 +38,7 @@ import { existsSync, statSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus, holdManifestLock } from './lib/manifest.ts';
+import { tileFolder, tilesPath } from '../src/_lib/photo-path.ts';
 import type { View } from './lib/parse-photo-filename.ts';
 import { pathToFileURL } from 'node:url';
 import tileConfig from './tile-config.json' with { type: 'json' };
@@ -154,7 +155,7 @@ async function walk(dir: string): Promise<string[]> {
  */
 export function tileUploadPath(tileOutputDir: string, row: ManifestRow): string {
   const _view: View = row.view as View; // D-09: view is 'D' | 'V' | '' at this boundary
-  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${_view}`);
+  return join(tileOutputDir, tileFolder(row), `${row.specimen_id}-${_view}`);
 }
 
 /**
@@ -165,8 +166,7 @@ export function tileUploadPath(tileOutputDir: string, row: ManifestRow): string 
  * Storage Zone URL (BUNNY_STORAGE_HOST), not this Pull Zone URL.
  */
 export function tilePullZoneUrl(row: ManifestRow): string {
-  const slug = row.species_slug.toLowerCase();
-  return `${CDN_BASE_URL}/species-tiles/${slug}/${row.specimen_id}-${row.view}/`;
+  return `${CDN_BASE_URL}/${tilesPath(row)}/`;
 }
 
 /**
@@ -316,12 +316,12 @@ async function main(): Promise<void> {
 
   try {
     for (const row of tiledRows) {
-      const slug = row.species_slug.toLowerCase();
+      const slug = tileFolder(row);
       const pair = `${row.specimen_id}-${row.view}`;
       const localPrefix = tileUploadPath(tileOutputDir, row);
       const dziLocalPath = `${localPrefix}.dzi`;
       const filesLocalDir = `${localPrefix}_files`;
-      const storageBase = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/${slug}/${pair}`;
+      const storageBase = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${tilesPath(row)}`;
 
       try {
         // --- Upload tile files (recursive walk of _files/ dir). ---

@@ -43,6 +43,7 @@ The build fails if you do 3 without 1 and 2, naming the file it cannot find. Tha
 | day | integer | no | `14` |
 | collector | string | no | `Crabo/Coughlin` |
 | subspecies | string | no | |
+| cdn_folder | string | no | Leave blank. Blank means the photograph is stored in the folder named for `species_slug`. It is filled in only when a species is renamed, so the photographs stay where they are ([ADR 0054](../docs/adr/0054-cdn-folder-is-frozen-and-rename-is-one-command.md)) |
 
 **The species is referenced by `species_slug`, not by a numeric id.** The slug is
 `(genus + '-' + species).toLowerCase()` with spaces hyphenated — `acronicta-americana`. It is not
@@ -91,10 +92,10 @@ original filename; do not rename it.
 **4. Add the row to `data/images.csv`:**
 
 ```csv
-acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,2,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,
+acronicta-americana,Acronicta americana-A-D.jpg,Jane Doe,2,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 ```
 
-Count the commas — there are 17 columns, and trailing blanks still need their separators. Easiest is
+Count the commas — there are 18 columns (the last is `cdn_folder`, which you leave empty), and trailing blanks still need their separators. Easiest is
 to copy an existing row for the same species and edit it.
 
 **5. Verify the build:**

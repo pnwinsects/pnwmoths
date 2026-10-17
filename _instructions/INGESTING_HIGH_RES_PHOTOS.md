@@ -82,6 +82,7 @@ every later step in the photo pipeline reads these columns by name.
 | `match_bucket` | `clean-match` / `slug-match` / `resolved-via-synonym` / `resolved-via-determination` / `genus-only` / `likely-synonym` / `provisional` / `unparseable`. The first four carry a resolved `species_slug` and are the only ones [TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md) will tile (`resolved-via-determination` is a row `data/photo-determinations.csv` rules on, filed by `npm run photos:investigate`); the rest need [curation](CURATING_SPECIES_SYNONYMS.md) first. `resolved-via-synonym` is written by the synonym pre-pass, not by the first ingest |
 | `status` | `discovered` from this stage; later phases advance it |
 | `last_error` | Empty on success; populated only on retry-exhausted Dropbox errors |
+| `cdn_folder` | Empty. Blank means the tiles are stored under `species-tiles/<species_slug>/`. `npm run species:rename` fills it in when a species is renamed, so the tiles stay where they are ([ADR 0054](../docs/adr/0054-cdn-folder-is-frozen-and-rename-is-one-command.md)) |
 
 ### 6. Resume after interruption
 
