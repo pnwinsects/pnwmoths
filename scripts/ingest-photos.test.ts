@@ -11,7 +11,7 @@ function manifestRow(overrides: Partial<ManifestRow> = {}): ManifestRow {
   return {
     content_hash: 'abc', dropbox_path: '/Amphipoea senilis-A-D.tif', size_bytes: '1', server_modified: '',
     filename_raw: 'Amphipoea senilis-A-D.tif', binomial_raw: 'amphipoea senilis', specimen_id: 'A', view: 'D',
-    binomial_resolved: '', species_slug: '', match_bucket: 'genus-only', status: 'discovered', last_error: '',
+    binomial_resolved: '', species_slug: '', match_bucket: 'genus-only', status: 'discovered', cdn_folder: '', last_error: '',
     ...overrides,
   };
 }

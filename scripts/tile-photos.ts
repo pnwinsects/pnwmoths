@@ -39,6 +39,7 @@ import { existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import type { ManifestRow, ManifestStatus } from './lib/manifest.ts';
 import { readManifest, writeManifest, advanceStatus, holdManifestLock } from './lib/manifest.ts';
+import { tileFolder, tilesPath } from '../src/_lib/photo-path.ts';
 import type { MatchBucket } from './lib/parse-photo-filename.ts';
 import { downloadSharedFile } from './lib/dropbox-download.ts';
 import { pathToFileURL } from 'node:url';
@@ -167,11 +168,12 @@ function logStage(content_hash: string, action: string, outcome: string, extra =
  * The last path component must be `{specimen_id}-{view}` so the storage layout
  * `species-tiles/{slug}/{specimen_id}-{view}/` is mirrored on disk.
  *
- * species_slug is lowercased unconditionally — Phase 28 lesson: TIFF filenames
- * preserve mixed-case genus but tile directories and CDN paths MUST be lowercase.
+ * The folder is `cdn_folder` once a species has been renamed (ADR 0054) and the
+ * lowercased species_slug until then — Phase 28 lesson: TIFF filenames preserve
+ * mixed-case genus but tile directories and CDN paths MUST be lowercase.
  */
 export function tilePrefix(tileOutputDir: string, row: ManifestRow): string {
-  return join(tileOutputDir, row.species_slug.toLowerCase(), `${row.specimen_id}-${row.view}`);
+  return join(tileOutputDir, tileFolder(row), `${row.specimen_id}-${row.view}`);
 }
 
 /**
@@ -237,9 +239,28 @@ export function excludedBySlugFilter(row: ManifestRow, only: ReadonlySet<string>
   return only.size > 0 && !only.has(row.species_slug.toLowerCase());
 }
 
-/** The tile slot a row would occupy: `species-tiles/{slug}/{specimen}-{view}`, as a key. */
-function slotKey(row: ManifestRow): string {
-  return `${row.species_slug.toLowerCase()}|${row.specimen_id}|${row.view}`;
+/**
+ * The two slots a row's tiles occupy, as keys. Either can collide with another photograph:
+ *
+ * - the **account** slot (species, specimen, view): two A-D tile sets on one account. After a
+ *   rename an old tile set sits in a frozen folder and a new photograph of the same specimen
+ *   would get a different folder, so the folder alone does not catch this.
+ * - the **folder** slot (CDN folder, specimen, view): two tile sets written into one directory.
+ *   A species renamed onto a slug that is still another species' frozen folder (the rename
+ *   command allows that) would otherwise tile over the older set (ADR 0054).
+ *
+ * Before ADR 0054 the slug was the folder, so one key covered both.
+ */
+function slotKeys(row: ManifestRow): string[] {
+  const place = `${row.specimen_id}|${row.view}`;
+  return [`account:${row.species_slug.toLowerCase()}|${place}`, `folder:${tileFolder(row)}|${place}`];
+}
+
+/** How a slot key reads in a message: `<slug-or-folder>/<specimen>-<view>`. */
+function describeSlot(key: string): string {
+  const [kind, rest] = key.split(':', 2) as [string, string];
+  const [where, specimen, view] = rest.split('|');
+  return `${kind === 'folder' ? 'the folder ' : ''}${where}/${specimen}-${view}`;
 }
 
 /**
@@ -273,34 +294,36 @@ export function findSlotCollisions(
   const owner = new Map<string, ManifestRow>();
   for (const row of rows) {
     if (!COMPLETED_STATUSES.has(row.status) || !row.species_slug || !row.specimen_id || !row.view) continue;
-    if (!owner.has(slotKey(row))) owner.set(slotKey(row), row);
+    for (const key of slotKeys(row)) if (!owner.has(key)) owner.set(key, row);
   }
   const blocked = new Map<string, string>();
   const claimants = new Map<string, ManifestRow[]>();
   for (const row of rows) {
     if (!isTileable(row)) continue;
-    const key = slotKey(row);
-    const holder = owner.get(key);
-    if (!holder) {
-      owner.set(key, row);
-      claimants.set(key, [row]);
-      continue;
+    for (const key of slotKeys(row)) {
+      const holder = owner.get(key);
+      if (!holder) {
+        owner.set(key, row);
+        claimants.set(key, [row]);
+        continue;
+      }
+      if (holder.content_hash === row.content_hash) continue;
+      if (!COMPLETED_STATUSES.has(holder.status)) claimants.get(key)?.push(row);
+      if (blocked.has(row.content_hash)) continue;
+      blocked.set(
+        row.content_hash,
+        `${describeSlot(key)} is ${COMPLETED_STATUSES.has(holder.status) ? 'already held' : 'also claimed'} ` +
+          `by ${holder.filename_raw} (${holder.status}); give ${row.filename_raw} a free letter in data/photo-determinations.csv`,
+      );
     }
-    if (holder.content_hash === row.content_hash) continue;
-    if (!COMPLETED_STATUSES.has(holder.status)) claimants.get(key)?.push(row);
-    blocked.set(
-      row.content_hash,
-      `${row.species_slug}/${row.specimen_id}-${row.view} is ${COMPLETED_STATUSES.has(holder.status) ? 'already held' : 'also claimed'} ` +
-        `by ${holder.filename_raw} (${holder.status}); give ${row.filename_raw} a free letter in data/photo-determinations.csv`,
-    );
   }
   // A contested slot whose tiles already exist on disk: hold the first claimant too.
-  for (const rows_ of claimants.values()) {
+  for (const [key, rows_] of claimants) {
     const first = rows_[0];
-    if (!first || rows_.length < 2 || !slotOnDisk(first)) continue;
+    if (!first || rows_.length < 2 || !slotOnDisk(first) || blocked.has(first.content_hash)) continue;
     blocked.set(
       first.content_hash,
-      `${first.species_slug}/${first.specimen_id}-${first.view} already has tiles on disk from an earlier run and ` +
+      `${describeSlot(key)} already has tiles on disk from an earlier run and ` +
         `${rows_.length} untiled rows claim it (${rows_.map((r) => r.filename_raw).join(', ')}); ` +
         'nobody can say whose they are — settle the letters in data/photo-determinations.csv, then delete that tile directory and re-run',
     );
@@ -394,9 +417,7 @@ function runVipsThumbnail(sourceTiff: string, prefix: string, config: TileConfig
  * caller's withRetry handles transient failures.
  */
 function uploadThumbnailToCdn(localPath: string, row: ManifestRow): void {
-  const slug = row.species_slug.toLowerCase();
-  const pair = `${row.specimen_id}-${row.view}`;
-  const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/species-tiles/${slug}/${pair}_thumbnail.webp`;
+  const url = `https://${BUNNY_STORAGE_HOST}/${BUNNY_ZONE}/${tilesPath(row)}_thumbnail.webp`;
   execFileSync('curl', [
     '-s', '-S', '-f',
     '-X', 'PUT',
@@ -556,7 +577,7 @@ async function main(): Promise<void> {
         runVipsThumbnail(cachePath, prefix, config);
         await unlink(cachePath);
         advanceStatus(row, 'tiled');
-        logStage(row.content_hash, 'tile', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+        logStage(row.content_hash, 'tile', 'ok', tilesPath(row));
         stats.tiled++;
       } catch (err) {
         const safeMsg = redact((err as Error).message ?? String(err));
@@ -610,7 +631,7 @@ async function mainThumbnailOnly(
     console.log('[tile-photos] DRY_RUN=1 — printing first 5 eligible rows, not invoking fetch, vips, or upload');
     for (const row of eligible.slice(0, 5)) {
       const cachePath = tiffCachePath(tiffCacheDir, row);
-      console.log(`  -> ${row.species_slug}/${row.specimen_id}-${row.view}`);
+      console.log(`  -> ${tilesPath(row)}`);
       console.log(`     tiff cache  : ${cachePath}`);
       console.log(`     dropbox_path: ${row.dropbox_path}`);
     }
@@ -659,7 +680,7 @@ async function mainThumbnailOnly(
         await mkdir(dirname(prefix), { recursive: true });
         runVipsThumbnail(cachePath, prefix, config);
         await unlink(cachePath);
-        logStage(row.content_hash, 'thumbnail', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+        logStage(row.content_hash, 'thumbnail', 'ok', tilesPath(row));
 
         // --- Upload stage ---
         await withRetry(
@@ -667,7 +688,7 @@ async function mainThumbnailOnly(
           `upload ${row.specimen_id}-${row.view}/_thumbnail`
         );
         await unlink(thumbnailPath);
-        logStage(row.content_hash, 'upload', 'ok', `${row.species_slug}/${row.specimen_id}-${row.view}`);
+        logStage(row.content_hash, 'upload', 'ok', tilesPath(row));
 
         stats.thumbnailed++;
       } catch (err) {

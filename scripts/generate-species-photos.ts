@@ -20,6 +20,7 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { readManifest } from './lib/manifest.ts';
 import type { ManifestRow } from './lib/manifest.ts';
+import { tilesPath } from '../src/_lib/photo-path.ts';
 import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
 import type { PhotoDetermination } from './lib/photo-determinations.ts';
 import type { View, MatchBucket } from './lib/parse-photo-filename.ts';
@@ -112,14 +113,15 @@ export function isMaterializable(row: ManifestRow): boolean {
 
 /**
  * Construct the tiles_path for a manifest row.
- * Convention: species-tiles/{slug-lowercase}/{specimen_id}-{view}  (no trailing slash).
- * species_slug lowercased unconditionally (Phase 28/29 lesson).
+ * Convention: species-tiles/{folder}/{specimen_id}-{view}  (no trailing slash), where
+ * the folder is `cdn_folder` once a species has been renamed (ADR 0054) and the
+ * lower-cased species_slug until then (Phase 28/29 lesson).
  *
  * `row.view` is typed as View union here to satisfy D-09.
  */
 export function toTilesPath(row: ManifestRow): string {
   const _view: View = row.view as View; // D-09: view is 'D' | 'V' | '' at this boundary
-  return `species-tiles/${row.species_slug.toLowerCase()}/${row.specimen_id}-${_view}`;
+  return tilesPath({ ...row, view: _view });
 }
 
 /**

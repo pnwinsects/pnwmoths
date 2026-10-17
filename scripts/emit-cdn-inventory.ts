@@ -72,6 +72,7 @@ import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/with
 import { loadUnpublishedSpecies, isUnpublished, normalizeSlug } from '../src/_lib/unpublished-species.ts';
 import { applyDeterminations } from './generate-species-photos.ts';
 import { readPhotoDeterminations } from './lib/photo-determinations.ts';
+import { cdnFolder, photoPath, tilesPath } from '../src/_lib/photo-path.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const TAG = '[emit-cdn-inventory]';
@@ -151,10 +152,10 @@ export interface Sources {
   site: ReadonlySet<string>;
   /** `derived_path` values from data/image-derivatives.csv. */
   derivatives: ReadonlySet<string>;
-  /** `{species_slug}/{filename}` from data/images.csv. */
+  /** `{cdn_folder}/{filename}` from data/images.csv (the folder is the slug unless frozen, ADR 0054). */
   photos: ReadonlySet<string>;
   /**
-   * `{filename}` → the slugs data/images.csv files it under.
+   * `{filename}` → the folders data/images.csv stores it in.
    *
    * The catalogue registers a photograph by (slug, filename), and the slug is
    * the curator's determination while the filename is what the moth was called
@@ -265,7 +266,7 @@ export function tilePairOf(path: string): string | null {
   const segments = path.split('/');
   if (segments.length < 3 || !segments[2]) return null;
   const stem = segments[2].replace(/(?:_files|_thumbnail\.webp|\.dzi)$/, '');
-  return stem ? `species-tiles/${segments[1]}/${stem}` : null;
+  return stem ? `${segments.slice(0, 2).join('/')}/${stem}` : null;
 }
 
 /** The `plates.json` slug a plate object belongs to, or null. */
@@ -380,7 +381,7 @@ function describe(unit: Unit, sources: Sources): { shape: string; detail: string
     if (elsewhere.length > 0) {
       return {
         shape: 'photo-refiled',
-        detail: `data/images.csv files this filename under ${elsewhere.join(', ')}; copy at a superseded path`,
+        detail: `data/images.csv stores this filename in the folder ${elsewhere.join(', ')}; copy at a superseded path`,
       };
     }
     return { shape: 'photo-no-row', detail: join('no row in data/images.csv', slugNote) };
@@ -590,7 +591,7 @@ function readCsv<T>(path: string): T[] {
 }
 
 export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<string>): Sources {
-  const images = readCsv<{ species_slug: string; filename: string }>(resolve(dataDir, 'images.csv'));
+  const images = readCsv<{ species_slug: string; filename: string; cdn_folder?: string }>(resolve(dataDir, 'images.csv'));
   const derivatives = readCsv<{ derived_path: string }>(resolve(dataDir, 'image-derivatives.csv'));
   const retiredRows = readCsv<{ old_path: string; superseded_by: string }>(resolve(dataDir, 'cdn-retired-images.csv'));
   const glossary = readCsv<{ image_filename?: string }>(resolve(dataDir, 'glossary.csv'));
@@ -601,6 +602,7 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
     specimen_id: string;
     view: string;
     status: string;
+    cdn_folder?: string;
   }>(
     resolve(dataDir, 'species-photos-manifest.csv'),
   );
@@ -630,13 +632,14 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
     site: siteManifestPaths,
     siteDirs,
     derivatives: new Set(derivatives.map((r) => r.derived_path)),
-    photos: new Set(images.filter((r) => r.species_slug && r.filename).map((r) => `${r.species_slug}/${r.filename}`)),
+    photos: new Set(images.filter((r) => r.species_slug && r.filename).map((r) => photoPath(r))),
     photosByFilename: images
       .filter((r) => r.species_slug && r.filename)
       .reduce<Map<string, string[]>>((acc, r) => {
-        const slugs = acc.get(r.filename) ?? [];
-        if (!slugs.includes(r.species_slug)) slugs.push(r.species_slug);
-        return acc.set(r.filename, slugs);
+        const folders = acc.get(r.filename) ?? [];
+        const folder = cdnFolder(r);
+        if (!folders.includes(folder)) folders.push(folder);
+        return acc.set(r.filename, folders);
       }, new Map()),
     retired: new Map(retiredRows.filter((r) => r.old_path).map((r) => [r.old_path, r.superseded_by ?? ''])),
     glossaryImages: new Set(glossary.filter((r) => r.image_filename).map((r) => `glossary/${r.image_filename}`)),
@@ -653,7 +656,7 @@ export function loadSources(dataDir: string, siteManifestPaths: ReadonlySet<stri
     tilePairs: new Set(
       applyDeterminations(photoManifest, readPhotoDeterminations())
         .filter((r) => r.status === 'uploaded' && r.species_slug)
-        .map((r) => `species-tiles/${r.species_slug}/${r.specimen_id}-${r.view}`),
+        .map((r) => tilesPath(r)),
     ),
     plateSlugs: new Set(plates.map((p) => p.slug).filter((s): s is string => Boolean(s))),
     speciesSlugs,

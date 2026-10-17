@@ -71,6 +71,7 @@ import { pathToFileURL } from 'node:url';
 import { normalizeSlug, loadUnpublishedSpecies } from '../src/_lib/unpublished-species.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/withheld-families.ts';
 import { encodePath } from '../src/_lib/derivative-url.ts';
+import { photoPath } from '../src/_lib/photo-path.ts';
 import { readPhotoDeterminations, toPhotoStem } from './lib/photo-determinations.ts';
 import { loadDisplayIndex } from './lib/display-index.ts';
 import {
@@ -125,6 +126,8 @@ export type CdnStatus = 'missing' | 'not-reported-missing' | 'unknown';
 /** The images.csv fields this report reads. */
 export interface ImageInput {
   species_slug: string;
+  /** Folder on the CDN when it is not the species slug (ADR 0054). */
+  cdn_folder?: string;
   filename: string;
   specimen: string;
   view: string;
@@ -279,7 +282,7 @@ export function buildHiddenImageRows(options: BuildHiddenImageRowsOptions): Hidd
     // integrity gate fails the build on it before any of this runs (ADR 0033).
     if (!speciesRow) continue;
 
-    const objectPath = `${image.species_slug}/${image.filename}`;
+    const objectPath = photoPath(image);
     const cdnStatus: CdnStatus = missingOnCdn === null
       ? 'unknown'
       : missingOnCdn.has(objectPath) ? 'missing' : 'not-reported-missing';
@@ -444,6 +447,7 @@ async function main(): Promise<void> {
 
   const images: ImageInput[] = readCsv(resolve(ROOT, 'data/images.csv')).map((row) => ({
     species_slug: row['species_slug'] ?? '',
+    cdn_folder: row['cdn_folder'] ?? '',
     filename: row['filename'] ?? '',
     specimen: row['specimen'] ?? '',
     view: row['view'] ?? '',

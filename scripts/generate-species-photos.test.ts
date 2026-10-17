@@ -38,6 +38,7 @@ function row(overrides: Partial<ManifestRow>): ManifestRow {
     match_bucket: 'clean-match',
     status: 'uploaded',
     last_error: '',
+    cdn_folder: '',
     ...overrides,
   };
 }
@@ -90,6 +91,11 @@ describe('toTilesPath', () => {
   it('composes specimen_id and view as {specimen_id}-{view}', () => {
     const result = toTilesPath(row({ specimen_id: 'OSAC_12345', view: 'V' }));
     assert.equal(result, 'species-tiles/abagrotis-apposita/OSAC_12345-V');
+  });
+
+  it('keeps the tiles where they are when the species is renamed (cdn_folder, ADR 0054)', () => {
+    const renamed = row({ species_slug: 'malacosoma-californica', cdn_folder: 'malacosoma-californicum' });
+    assert.equal(toTilesPath(renamed), 'species-tiles/malacosoma-californicum/A-D');
   });
 });
 

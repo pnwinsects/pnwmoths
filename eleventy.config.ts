@@ -7,6 +7,7 @@ import { execFile } from "node:child_process";
 import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
 import { derivativeUrl, sourceUrl, type VariantToken } from "./src/_lib/derivative-url.ts";
+import { photoPath } from "./src/_lib/photo-path.ts";
 import { entryTags, pathPrefix, VITE_MANIFEST, VITE_OUT_DIR, type ViteManifest } from "./src/_lib/vite-entries.ts";
 import {
   pickAccountPhotos,
@@ -167,6 +168,10 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
   // templates must NOT pipe through `urlencode` as well or the path double-encodes.
   eleventyConfig.addFilter("derivative", (sourcePath, token) =>
     derivativeUrl(CDN_BASE_URL, sourcePath as string, token as VariantToken));
+
+  // {{ img | photoPath }} — storage path of a catalogued photograph's original,
+  // `<folder>/<filename>` (src/_lib/photo-path.ts). Pipe it into `derivative`.
+  eleventyConfig.addFilter("photoPath", row => photoPath(row as Parameters<typeof photoPath>[0]));
 
   // {{ "slug/Photo A-D.jpg" | cdnSource }} — URL of a stored object with no
   // derivative. Only two callers: the 1500px hero slot, which *is* the stored

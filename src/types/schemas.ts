@@ -198,6 +198,8 @@ export const KeySpeciesSchema = z.object({
   epithet:     z.string(),
   common_name: z.nullable(z.string()),
   nav_image:   z.nullable(z.string()),
+  // CDN folder of nav_image when it is not the slug (a renamed species, ADR 0054); absent otherwise.
+  nav_folder:  z.optional(z.string()),
 });
 export type KeySpecies = z.infer<typeof KeySpeciesSchema>;
 

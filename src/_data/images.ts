@@ -7,6 +7,8 @@ import { orderByWeight } from "../_lib/photo-display.ts";
 // Numeric fields (weight, latitude, etc.) are number|null via toInt/toFloat.
 interface ImageRow {
   species_slug: string;
+  /** Folder on the CDN when it is not the species slug (ADR 0054); null when it is. */
+  cdn_folder: string | null;
   filename: string;
   photographer: string | null;
   weight: number | null;
@@ -65,6 +67,7 @@ export default function (): Record<string, ImageRow[]> {
     if (!bySpecies[slug]) bySpecies[slug] = [];
     bySpecies[slug].push({
       species_slug: slug,
+      cdn_folder: row['cdn_folder'] || null,
       filename: row['filename'] ?? '',
       photographer: row['photographer'] || null,
       weight: toInt(row['weight'] ?? ''),

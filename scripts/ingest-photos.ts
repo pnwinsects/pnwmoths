@@ -662,6 +662,7 @@ async function main(): Promise<void> {
             match_bucket: 'unparseable',
             status: 'discovered',
             last_error: 'non-image extension',
+            cdn_folder: '',
           };
           rows.push(row);
           if (entry.content_hash) seen.add(entry.content_hash);
@@ -699,6 +700,7 @@ async function main(): Promise<void> {
           match_bucket,
           status: 'discovered',
           last_error: '',
+          cdn_folder: '',
         };
         rows.push(row);
         if (entry.content_hash) seen.add(entry.content_hash);
@@ -722,6 +724,7 @@ async function main(): Promise<void> {
           match_bucket: 'unparseable',
           status: 'failed',
           last_error: safeMsg,
+          cdn_folder: '',
         };
         rows.push(row);
         if (entry.content_hash) seen.add(entry.content_hash);

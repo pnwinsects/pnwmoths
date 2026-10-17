@@ -3,6 +3,7 @@ import photos from '../../data/species-photos.json' with { type: 'json' };
 import type { TaxonFamily, TaxonGenus, TaxonSubfamily, TaxonTribe, NavImage, SpeciesPhoto } from '../types/index.ts';
 import { loadWithheldFamilies, isWithheldOrUnclassified } from '../_lib/withheld-families.ts';
 import { loadUnpublishedSpecies, isUnpublished } from '../_lib/unpublished-species.ts';
+import { folderIfRenamed, photoPath } from '../_lib/photo-path.ts';
 import { formatEpithet, isEpithetQuoted } from '../_lib/format-epithet.ts';
 import {
   WEIGHT_ORDER_SQL,
@@ -39,13 +40,16 @@ function isTaxonSpeciesDbRow(obj: unknown): obj is TaxonSpeciesDbRow {
   );
 }
 
-// Images query projects: species_slug, filename, photographer, weight (TRY_CAST INTEGER)
+// Images query projects: species_slug, filename, photographer, weight (TRY_CAST INTEGER),
+// cdn_folder. The folder never reaches the browser as such: for a renamed species it
+// becomes `thumb_url`, the full path the browser already uses verbatim (ADR 0054).
 interface NavImageDbRow {
   species_slug: string;
   filename: string;
   photographer: string;
   weight: number | null;
   thumb_url?: string;
+  cdn_folder?: string | null;
 }
 
 /**
@@ -171,7 +175,8 @@ export default async function (): Promise<TaxonFamily[]> {
         'month': 'VARCHAR',
         'day': 'VARCHAR',
         'collector': 'VARCHAR',
-        'subspecies': 'VARCHAR'
+        'subspecies': 'VARCHAR',
+        'cdn_folder': 'VARCHAR'
       }
     )
   `);
@@ -188,7 +193,7 @@ export default async function (): Promise<TaxonFamily[]> {
   // both rules come from src/_lib/photo-display.ts, which holds the SQL fragments and
   // their in-memory twins side by side so the two dialects cannot drift apart.
   const imagesResult = await conn.runAndReadAll(`
-    SELECT species_slug, filename, photographer, ${WEIGHT_ORDER_SQL} AS weight
+    SELECT species_slug, filename, photographer, ${WEIGHT_ORDER_SQL} AS weight, cdn_folder
     FROM images
     WHERE ${NON_VENTRAL_SQL}
     ORDER BY species_slug, ${WEIGHT_ORDER_SQL}
@@ -209,7 +214,13 @@ export default async function (): Promise<TaxonFamily[]> {
   const imageRowsRaw = imagesResult.getRowObjectsJS();
   const imageRows: NavImageDbRow[] = [];
   for (const row of imageRowsRaw) {
-    if (isNavImageDbRow(row)) imageRows.push(row);
+    if (!isNavImageDbRow(row)) continue;
+    const { cdn_folder, ...nav } = row;
+    imageRows.push(
+      folderIfRenamed({ species_slug: nav.species_slug, cdn_folder })
+        ? { ...nav, thumb_url: photoPath({ species_slug: nav.species_slug, filename: nav.filename, cdn_folder }) }
+        : nav,
+    );
   }
 
   // Build bySpeciesSlug image map

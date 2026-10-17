@@ -8,7 +8,9 @@ Two other situations look similar and are not this:
 - **The name is provisional or undescribed** (`sp`, `n sp`, `aff`, `nr`) and may yet be
   described — add its slug to `data/unpublished-species.csv` instead. The page disappears; the
   records, photos and key data survive.
-- **The name was renamed, or lumped into another species** — see
+- **The name was changed, but it is the same moth** — see
+  [RENAMING_A_SPECIES.md](RENAMING_A_SPECIES.md); one command does it.
+- **The name was lumped into another species** — see
   [CURATING_SPECIES_SYNONYMS.md](CURATING_SPECIES_SYNONYMS.md) and add a row to
   `data/species-redirects.csv` so visitors land on the surviving species.
 

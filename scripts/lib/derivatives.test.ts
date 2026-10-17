@@ -186,11 +186,13 @@ describe('readSources', () => {
   // 4,000-row committed inventory.
   const dataDir = mkdtempSync(join(tmpdir(), 'pnwmoths-sources-'));
   writeFileSync(join(dataDir, 'images.csv'), [
-    'species_slug,filename',
-    'abagrotis-apposita,Abagrotis apposita-A-D.jpg',
+    'species_slug,filename,cdn_folder',
+    'abagrotis-apposita,Abagrotis apposita-A-D.jpg,',
+    // A renamed species: the slug is new, the photograph did not move (ADR 0054).
+    'malacosoma-californica,Malacosoma californicum-A-D.jpg,malacosoma-californicum',
     // Blank cells are skipped rather than yielding a path like "undefined/x".
-    ',orphan.jpg',
-    'no-file,',
+    ',orphan.jpg,',
+    'no-file,,',
   ].join('\n') + '\n');
   writeFileSync(join(dataDir, 'species-photos.json'), JSON.stringify({
     'abagrotis-apposita': { specimens: [{ tiles_path: 'species-tiles/abagrotis-apposita/A-D' }] },
@@ -211,6 +213,8 @@ describe('readSources', () => {
   it('joins legacy paths from species_slug and filename', () => {
     assert.deepEqual(sources.legacy, [
       { path: 'abagrotis-apposita/Abagrotis apposita-A-D.jpg', speciesSlug: 'abagrotis-apposita' },
+      // The folder comes from cdn_folder when it is set, the species stays the slug.
+      { path: 'malacosoma-californicum/Malacosoma californicum-A-D.jpg', speciesSlug: 'malacosoma-californica' },
     ]);
   });
 
@@ -240,7 +244,10 @@ describe('readSources', () => {
 
   it('sourcePaths flattens to the shape buildWorkList takes', () => {
     assert.deepEqual(sourcePaths(sources), {
-      legacy: ['abagrotis-apposita/Abagrotis apposita-A-D.jpg'],
+      legacy: [
+        'abagrotis-apposita/Abagrotis apposita-A-D.jpg',
+        'malacosoma-californicum/Malacosoma californicum-A-D.jpg',
+      ],
       highres: ['species-tiles/abagrotis-apposita/A-D_thumbnail.webp'],
       glossary: ['glossary/wing.jpg'],
       plates: ['plates/plate-0-commonly-reported-moths-2/thumbnail.jpg'],
@@ -251,7 +258,7 @@ describe('readSources', () => {
     const specs = buildWorkList(sourcePaths(sources));
     assert.equal(
       specs.length,
-      VARIANTS.legacy.length + VARIANTS.highres.length + VARIANTS.glossary.length + VARIANTS.plates.length,
+      2 * VARIANTS.legacy.length + VARIANTS.highres.length + VARIANTS.glossary.length + VARIANTS.plates.length,
     );
   });
 });

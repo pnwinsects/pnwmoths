@@ -1,5 +1,6 @@
 import { LitElement, html, type PropertyDeclarations, type TemplateResult } from 'lit';
 import { derivativeUrl } from '../_lib/derivative-url.ts';
+import { photoPath } from '../_lib/photo-path.ts';
 import { SpeciesStateSchema, SpeciesDistrictSchema, type SpeciesState, type SpeciesDistrict, type TaxonFamily, type TaxonSubfamily, type TaxonTribe, type TaxonGenus, type NavImage } from '../types/index.ts';
 
 const STATE_NAMES: Record<string, string> = {
@@ -489,7 +490,7 @@ class PnwmTaxonBrowser extends LitElement {
       <div style="display:inline-flex;flex-direction:row;gap:4px;overflow-x:auto">
         ${navImages.map(img => {
           const imgEl = html`<img
-            src="${derivativeUrl(CDN_BASE_URL, img.thumb_url ?? `${img.species_slug}/${img.filename}`, '320h')}"
+            src="${derivativeUrl(CDN_BASE_URL, img.thumb_url ?? photoPath(img), '320h')}"
             alt=""
             loading="lazy"
             style="height:93px;width:auto;object-fit:cover;flex-shrink:0;display:block"
@@ -559,7 +560,7 @@ class PnwmTaxonBrowser extends LitElement {
         ${species.map(sp => html`
           <a class="pnwm-tb-species-card" href="${this._prefix}species/${sp.slug}/">
             ${sp.navImage ? html`<img
-              src="${derivativeUrl(CDN_BASE_URL, sp.navImage.thumb_url ?? `${sp.navImage.species_slug}/${sp.navImage.filename}`, '320h')}"
+              src="${derivativeUrl(CDN_BASE_URL, sp.navImage.thumb_url ?? photoPath(sp.navImage), '320h')}"
               alt="${genusName} ${sp.name}"
               loading="lazy"
             >` : ''}

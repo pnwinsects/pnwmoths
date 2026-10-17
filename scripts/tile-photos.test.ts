@@ -26,6 +26,7 @@ function row(overrides: Partial<ManifestRow>): ManifestRow {
     match_bucket: 'clean-match',
     status: 'discovered',
     last_error: '',
+    cdn_folder: '',
     ...overrides,
   };
 }
@@ -176,6 +177,22 @@ describe('findSlotCollisions', () => {
     assert.equal(blocked.size, 1);
     assert.match(blocked.get(incoming.content_hash)!, /macaria-colata\/A-D is already held by Macaria colata-A-D.tif \(uploaded\)/);
     assert.match(blocked.get(incoming.content_hash)!, /photo-determinations\.csv/);
+  });
+
+  it('still sees a collision after a rename: the held tiles sit in a frozen folder, the new row has none', () => {
+    const frozen = row({ ...held, species_slug: 'macaria-colata', cdn_folder: 'speranza-colata' });
+    const incoming = row({ content_hash: 'b'.repeat(64), filename_raw: 'Macaria colata-A-D-2.tif', species_slug: 'macaria-colata', cdn_folder: '' });
+    assert.equal(findSlotCollisions([frozen, incoming]).size, 1);
+  });
+
+  it('sees two species writing one folder: a species renamed onto a slug that is still a frozen folder', () => {
+    // alpha-one was renamed to alpha-two, so its tiles stay in the folder alpha-one. Then another
+    // species was renamed onto alpha-one, and a photograph of its specimen A arrives.
+    const frozen = row({ ...held, species_slug: 'alpha-two', cdn_folder: 'alpha-one' });
+    const incoming = row({ content_hash: 'b'.repeat(64), filename_raw: 'Alpha one-A-D.tif', species_slug: 'alpha-one', cdn_folder: '' });
+    const blocked = findSlotCollisions([frozen, incoming]);
+    assert.equal(blocked.size, 1);
+    assert.match(blocked.get(incoming.content_hash)!, /the folder alpha-one\/A-D/);
   });
 
   it('lets the row that already holds the slot through (a re-run of itself)', () => {

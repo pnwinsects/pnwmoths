@@ -24,6 +24,7 @@ function row(overrides: Partial<ManifestRow>): ManifestRow {
     match_bucket: 'clean-match',
     status: 'tiled',
     last_error: '',
+    cdn_folder: '',
     ...overrides,
   };
 }

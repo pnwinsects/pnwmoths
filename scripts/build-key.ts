@@ -17,6 +17,7 @@ import { loadWithheldFamilies, isWithheldOrUnclassified } from '../src/_lib/with
 import { loadUnpublishedSpecies, isUnpublished, normalizeSlug } from '../src/_lib/unpublished-species.ts';
 import { formatEpithet, isEpithetQuoted } from '../src/_lib/format-epithet.ts';
 import { WEIGHT_ORDER_SQL, pickIdentifyPhoto } from '../src/_lib/photo-display.ts';
+import { folderIfRenamed } from '../src/_lib/photo-path.ts';
 import { pathToFileURL } from 'node:url';
 
 /**
@@ -244,7 +245,7 @@ export function buildBitset(speciesCount: number, matchingIndices: number[]): st
  */
 async function queryNavImages(
   db: Awaited<ReturnType<typeof DuckDBInstance.create>>
-): Promise<{ navImages: Map<string, string>; imagePairs: Set<string> }> {
+): Promise<{ navImages: Map<string, string>; navFolders: Map<string, string>; imagePairs: Set<string> }> {
   const conn = await db.connect();
   try {
     await conn.run(`
@@ -273,7 +274,8 @@ async function queryNavImages(
           'month': 'VARCHAR',
           'day': 'VARCHAR',
           'collector': 'VARCHAR',
-          'subspecies': 'VARCHAR'
+          'subspecies': 'VARCHAR',
+          'cdn_folder': 'VARCHAR'
         }
       )
     `);
@@ -282,7 +284,7 @@ async function queryNavImages(
     // shared one from src/_lib/photo-display.ts: a constant fragment, not user input.
     // Identify does NOT exclude ventral views; only Browse does.
     const imagesResult = await conn.runAndReadAll(`
-      SELECT species_slug, filename, ${WEIGHT_ORDER_SQL} AS weight_int
+      SELECT species_slug, filename, ${WEIGHT_ORDER_SQL} AS weight_int, cdn_folder
       FROM images
       ORDER BY species_slug, ${WEIGHT_ORDER_SQL}
     `);
@@ -292,8 +294,8 @@ async function queryNavImages(
     // IS the picker's ordering), and going through the picker is what keeps them agreeing.
     // Collect the full set of valid (slug, filename) pairs for the ISSUE-43 guard as we go.
     const imagePairs = new Set<string>();
-    const bySlug = new Map<string, { filename: string; weight: number | null }[]>();
-    type ImagesRow = { species_slug: unknown; filename: unknown; weight_int: unknown };
+    const bySlug = new Map<string, { filename: string; weight: number | null; cdn_folder: string | null }[]>();
+    type ImagesRow = { species_slug: unknown; filename: unknown; weight_int: unknown; cdn_folder: unknown };
     const rows = imagesResult.getRowObjectsJS() as ImagesRow[];
     for (const row of rows) {
       const slug = String(row.species_slug ?? '');
@@ -301,17 +303,24 @@ async function queryNavImages(
       if (!slug || !filename) continue;
       imagePairs.add(`${slug} ${filename}`);
       const weight = typeof row.weight_int === 'number' ? row.weight_int : null;
+      const cdn_folder = typeof row.cdn_folder === 'string' && row.cdn_folder ? row.cdn_folder : null;
       const bucket = bySlug.get(slug);
-      if (bucket) bucket.push({ filename, weight });
-      else bySlug.set(slug, [{ filename, weight }]);
+      if (bucket) bucket.push({ filename, weight, cdn_folder });
+      else bySlug.set(slug, [{ filename, weight, cdn_folder }]);
     }
 
     const navImages = new Map<string, string>();
+    // The folder of the chosen photograph, only where it is not the slug itself, so the
+    // matrix carries nothing extra until a species is renamed (ADR 0054).
+    const navFolders = new Map<string, string>();
     for (const [slug, candidates] of bySlug) {
       const chosen = pickIdentifyPhoto(candidates);
-      if (chosen) navImages.set(slug, chosen.filename);
+      if (!chosen) continue;
+      navImages.set(slug, chosen.filename);
+      const folder = folderIfRenamed({ species_slug: slug, cdn_folder: chosen.cdn_folder });
+      if (folder) navFolders.set(slug, folder);
     }
-    return { navImages, imagePairs };
+    return { navImages, navFolders, imagePairs };
   } finally {
     conn.closeSync();
   }
@@ -384,7 +393,7 @@ export async function main(): Promise<void> {
 
   // 5. DuckDB nav-image join — query ALL images, resolve per slug in TypeScript (no SQL interpolation)
   const db = await DuckDBInstance.create(':memory:');
-  const { navImages, imagePairs } = await queryNavImages(db);
+  const { navImages, navFolders, imagePairs } = await queryNavImages(db);
 
   // 6. Build characters[], species[], matrix[]
   // 6a. Load character image map from CSV (CIMG-02, D-08 soft-skip)
@@ -459,6 +468,7 @@ export async function main(): Promise<void> {
       epithet: accepted?.epithet ?? parts[1] ?? '',
       common_name: null,
       nav_image: navImages.get(slug) ?? null,
+      ...(navFolders.has(slug) ? { nav_folder: navFolders.get(slug)! } : {}),
     };
   });
 

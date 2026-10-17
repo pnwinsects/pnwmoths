@@ -437,10 +437,10 @@ describe('the guard actually fails on the bug it exists to catch', () => {
 
 describe('csvHeader', () => {
   it('reads the declared header, not the keys of the first data row', () => {
-    // data/images.csv has 17 columns; inferring from a row would still give 17,
+    // data/images.csv has 18 columns; inferring from a row would still give 18,
     // but would collapse duplicates and choke on a header-only file.
     assert.equal(csvHeader(resolve(PROJECT_ROOT, 'data/images.csv'))[0], 'species_slug');
-    assert.equal(csvHeader(resolve(PROJECT_ROOT, 'data/images.csv')).length, 17);
+    assert.equal(csvHeader(resolve(PROJECT_ROOT, 'data/images.csv')).length, 18);
   });
 });
 

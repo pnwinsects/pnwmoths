@@ -6,6 +6,7 @@ import { LitElement, html, type TemplateResult, type PropertyDeclarations } from
 import { repeat } from 'lit/directives/repeat.js';
 import type { KeySpecies } from '../types/schemas.ts';
 import { derivativeUrl } from '../_lib/derivative-url.ts';
+import { photoPath } from '../_lib/photo-path.ts';
 
 const CDN_BASE_URL = 'https://moths.pnwinsects.org';
 
@@ -17,8 +18,8 @@ const CDN_BASE_URL = 'https://moths.pnwinsects.org';
  * varies the URL: one 320px-tall thumbnail serves the 93/186/320 slots across the
  * site, and the browser scales it down.
  */
-export function buildCardUrl(slug: string, navImage: string, _height: number): string {
-  return derivativeUrl(CDN_BASE_URL, `${slug}/${navImage}`, '320h');
+export function buildCardUrl(slug: string, navImage: string, _height: number, navFolder?: string): string {
+  return derivativeUrl(CDN_BASE_URL, photoPath({ species_slug: slug, cdn_folder: navFolder, filename: navImage }), '320h');
 }
 
 /**
@@ -105,7 +106,7 @@ export class KeyResultsGrid extends LitElement {
       <a class="pnwm-krg-card" href="${this._prefix}species/${sp.slug}/">
         ${sp.nav_image && !this._failedImages.has(sp.slug)
           ? html`<img
-              src="${buildCardUrl(sp.slug, sp.nav_image, 320)}"
+              src="${buildCardUrl(sp.slug, sp.nav_image, 320, sp.nav_folder)}"
               alt=""
               loading="lazy"
               @error=${() => this._onImageError(sp.slug)}>`

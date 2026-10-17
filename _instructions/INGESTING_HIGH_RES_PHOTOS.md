@@ -62,7 +62,7 @@ Format: `<ISO timestamp> <12-char content_hash prefix> <action> <outcome> [extra
 
 ### 5. Interpret the manifest columns
 
-Open `data/species-photos-manifest.csv` in a spreadsheet. The 13-column schema is locked —
+Open `data/species-photos-manifest.csv` in a spreadsheet. The 14-column schema is locked —
 every later step in the photo pipeline reads these columns by name.
 
 #### Schema: data/species-photos-manifest.csv
@@ -82,6 +82,7 @@ every later step in the photo pipeline reads these columns by name.
 | `match_bucket` | `clean-match` / `slug-match` / `resolved-via-synonym` / `resolved-via-determination` / `genus-only` / `likely-synonym` / `provisional` / `unparseable`. The first four carry a resolved `species_slug` and are the only ones [TILING_HIGH_RES_PHOTOS.md](TILING_HIGH_RES_PHOTOS.md) will tile (`resolved-via-determination` is a row `data/photo-determinations.csv` rules on, filed by `npm run photos:investigate`); the rest need [curation](CURATING_SPECIES_SYNONYMS.md) first. `resolved-via-synonym` is written by the synonym pre-pass, not by the first ingest |
 | `status` | `discovered` from this stage; later phases advance it |
 | `last_error` | Empty on success; populated only on retry-exhausted Dropbox errors |
+| `cdn_folder` | Empty. Blank means the tiles are stored under `species-tiles/<species_slug>/`. `npm run species:rename` fills it in when a species is renamed, so the tiles stay where they are ([ADR 0054](../docs/adr/0054-cdn-folder-is-frozen-and-rename-is-one-command.md)) |
 
 ### 6. Resume after interruption
 
@@ -104,7 +105,7 @@ The non-recursive listing emits a single `folder` entry for `*custom/` and the s
 In the spreadsheet:
 
 - Row count is around 5,000 (5,000 data rows + 1 header)
-- Header line matches the 13 columns above exactly, in that order
+- Header line matches the 14 columns above exactly, in that order
 - `match_bucket` distribution is roughly: `clean-match` ~77.5%, `genus-only` ~12.4%, `likely-synonym` ~9.7%, `provisional` ≥6 rows (from the parser's provisional bucket), `unparseable` ≤14 rows
 
 Tail the log for the final summary line; the counts should add up to the total file count.

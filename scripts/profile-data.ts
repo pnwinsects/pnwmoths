@@ -99,7 +99,8 @@ async function main(): Promise<void> {
         'month': 'VARCHAR',
         'day': 'VARCHAR',
         'collector': 'VARCHAR',
-        'subspecies': 'VARCHAR'
+        'subspecies': 'VARCHAR',
+        'cdn_folder': 'VARCHAR'
       }
     )
   `);

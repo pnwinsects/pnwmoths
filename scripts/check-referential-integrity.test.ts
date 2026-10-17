@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import {
   RELATIONS,
+  findBadCdnFolders,
   findViolations,
   loadExceptions,
   loadSpeciesSlugs,
@@ -488,6 +489,33 @@ describe('the species and exception loaders', () => {
 // ---------------------------------------------------------------------------
 // The CLI contract — exit codes
 // ---------------------------------------------------------------------------
+
+describe('findBadCdnFolders', () => {
+  const tmp = resolve(ROOT, '.tmp-integrity-cdn-folders');
+  const species: SpeciesKeys = { site: new Set(['malacosoma-californica']), normalized: new Set(['malacosoma-californica']) };
+
+  function check(images: string): string[] {
+    mkdirSync(join(tmp, 'data'), { recursive: true });
+    try {
+      writeFileSync(join(tmp, 'data/images.csv'), images);
+      writeFileSync(join(tmp, 'data/species-redirects.csv'), 'old_slug,new_slug,reason\nmalacosoma-californicum,malacosoma-californica,#369\n');
+      return findBadCdnFolders(species, tmp);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  }
+
+  it('accepts a blank cell, a species, and an old address', () => {
+    assert.deepEqual(check('species_slug,filename,cdn_folder\nmalacosoma-californica,a.jpg,\nmalacosoma-californica,b.jpg,malacosoma-californicum\nmalacosoma-californica,c.jpg,malacosoma-californica\n'), []);
+  });
+
+  it('names a typo, and a cell not written as a slug, by line', () => {
+    const problems = check('species_slug,filename,cdn_folder\nmalacosoma-californica,a.jpg,malacosoma-californicun\nmalacosoma-californica,b.jpg,Malacosoma californicum\n');
+    assert.equal(problems.length, 2);
+    assert.match(problems[0]!, /images\.csv:2: .*"malacosoma-californicun" is neither a species nor an old address/);
+    assert.match(problems[1]!, /images\.csv:3: .*not written as a slug/);
+  });
+});
 
 describe('the CLI', () => {
   const tmp = resolve(ROOT, '.tmp-integrity-cli');
