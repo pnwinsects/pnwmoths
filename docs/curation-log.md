@@ -130,7 +130,7 @@ or photographs were created.
 ## C-040 · 2026-10-16 · The key's Distribution and Seasonality scores will come from occurrence records as they stand, with a warning about sparse data
 
 **Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6222767374),
-the curator's own words · **Status** Applied ([ADR 0055](adr/0055-key-distribution-and-seasonality-from-records.md); hand-entered scores kept alongside the records) · **Refines** C-038
+the curator's own words · **Status** Applied (records derive the answers, the notice, the template without these columns — [ADR 0055](adr/0055-key-distribution-and-seasonality-from-records.md)); Pending (the records only add to the hand-entered scores, so 434 hand-scored cells that no record supports still count; whether to drop them — #397) · **Refines** C-038
 
 > I think it would make the most sense to have the key use the sparse data as is, provided we add an
 > alert to users in the phenology and distribution sections of the key saying that these characters

@@ -47,6 +47,8 @@ const US_CLIP_BBOX = '-125,41.5,-103.5,49.5';
 const SIMPLIFY_METRES = 500;
 
 const OUTPUT_PATH = resolve(ROOT, ECOREGIONS_PATH);
+/** mapshaper writes here; the file is copied to OUTPUT_PATH only once it passes every check. */
+const STAGED_PATH = resolve(SCRATCH_DIR, 'pnw-ecoregions.geojson');
 
 async function downloadIfMissing(url: string, destPath: string): Promise<void> {
   if (existsSync(destPath)) return;
@@ -96,12 +98,12 @@ export async function main(): Promise<void> {
       '-filter-fields', 'name,country,source',
       '-simplify', `interval=${SIMPLIFY_METRES}`, 'keep-shapes',
       '-sort', 'source',
-      '-o', 'format=geojson', 'precision=0.00001', 'force', OUTPUT_PATH,
+      '-o', 'format=geojson', 'precision=0.00001', 'force', STAGED_PATH,
     ],
     { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }
   );
 
-  const raw = readFileSync(OUTPUT_PATH, 'utf8');
+  const raw = readFileSync(STAGED_PATH, 'utf8');
   const features = (JSON.parse(raw) as { features: GeoFeature[] }).features;
   const named = features.map(f => ({
     name: String(f.properties?.['name'] ?? ''),
@@ -112,11 +114,12 @@ export async function main(): Promise<void> {
   const cols = derivedColumns(parseKeyScores(readFileSync(resolve(ROOT, 'data/key-scores.csv'))).labels);
   const unreachable = missingKeyEcoregions(cols, named);
   if (outOfBounds.length > 0 || unreachable.length > 0) {
-    console.error('[build-ecoregions] FAIL: the boundary file is unusable. Fix the pipeline before committing it.');
+    console.error(`[build-ecoregions] FAIL: the new boundary file is unusable, so ${ECOREGIONS_PATH} is unchanged. It is in ${STAGED_PATH}.`);
     if (outOfBounds.length > 0) console.error('  features outside the region (failed reprojection?):', outOfBounds);
     if (unreachable.length > 0) console.error('  key answers no feature supplies:', unreachable);
     process.exit(1);
   }
+  writeFileSync(OUTPUT_PATH, raw);
 
   const us = named.filter(f => f.country === 'US').length;
   console.log(`[build-ecoregions] features: ${features.length} (US: ${us}, BC: ${features.length - us})`);
