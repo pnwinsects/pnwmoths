@@ -161,7 +161,7 @@ describe('GRID-01 real-data gate', () => {
     species: KeySpecies[];
   }
 
-  test('meta.matchedSpecies === 1220 in real data/key-matrix.json', () => {
+  test('meta.matchedSpecies === 1221 in real data/key-matrix.json', () => {
     // Issue #84 deny-lists unpublished species, excluding formerly matched key species.
     // oedemasia-salicis was un-gated (Merrill's guidance: it's the canonical current
     // placement and should show its page/images), a net +1 over the 1190 baseline.
@@ -179,13 +179,14 @@ describe('GRID-01 real-data gate', () => {
     // C-033 adds the fourteenth, "Notarctia arizoniensis" -> apantesis-arizoniensis, net +1
     // over 1207 — MPG records that move; only the account's photographs remain in question (#376).
     // C-038: the curator confirms 12 more key binomials as synonyms (#390), net +12 over 1208.
+    // The curator's first template row, Coloradia doris (#390), is net +1 over 1220.
     const raw = JSON.parse(
       readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8')
     ) as KeyMatrixData;
     assert.equal(
       raw.meta.matchedSpecies,
-      1220,
-      `expected meta.matchedSpecies to be 1220, got ${raw.meta.matchedSpecies}`
+      1221,
+      `expected meta.matchedSpecies to be 1221, got ${raw.meta.matchedSpecies}`
     );
   });
 });
