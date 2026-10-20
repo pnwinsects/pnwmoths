@@ -374,8 +374,9 @@ interface RunnableConnection {
  *
  * This is the seam every build step that feeds the site must go through, so
  * that adding a records source is a one-file change: build-data.ts,
- * emit-species-states.ts, emit-species-districts.ts, emit-species-audit.ts and
- * src/_data/stats.ts all call it.
+ * emit-species-states.ts, emit-species-districts.ts, emit-species-audit.ts,
+ * the key build (scripts/lib/key-derived-scores.ts) and src/_data/stats.ts all
+ * call it.
  *
  * The maintainer curation scripts deliberately do NOT: they mutate
  * data/records.csv and must see exactly that file. Likewise

@@ -76,9 +76,10 @@ export function buildCategoryMap(characters: Character[]): CategoryMap {
   return catMap;
 }
 
-// Categories whose data originates from the 2015 Lucid key (not live occurrence records).
-// Per UI-SPEC Copywriting Contract: show "(Key data, 2015)" sub-note.
-const KEY_DATA_CATEGORIES = new Set(['Distribution', 'Seasonality']);
+// Categories whose answers come from the occurrence records (#397, ADR 0055). The
+// curator asked for this notice as a condition of trusting sparse records (C-040).
+const RECORDS_CATEGORIES = new Set(['Distribution', 'Seasonality']);
+const INATURALIST_PROJECT_URL = 'https://www.inaturalist.org/projects/pnwmoths';
 
 // ---------------------------------------------------------------------------
 // Component
@@ -319,7 +320,7 @@ export class PnwmIdentify extends LitElement {
   _renderCategory(catName: string, questions: Map<string, Character[]>): TemplateResult {
     const expanded = this._expandedCategories.has(catName);
     const selCount = this._selectionCountForCategory(catName);
-    const isKeyData = KEY_DATA_CATEGORIES.has(catName);
+    const fromRecords = RECORDS_CATEGORIES.has(catName);
     return html`
       <div class="pnwm-kfp-category">
         <h2>
@@ -330,8 +331,13 @@ export class PnwmIdentify extends LitElement {
           >${catName}${selCount > 0 ? html` <span class="pnwm-kfp-badge">(${selCount})</span>` : ''}
           </button>
         </h2>
-        ${isKeyData ? html`<small>(Key data, 2015)</small>` : ''}
         <div ?hidden=${!expanded}>
+          ${fromRecords ? html`<p class="pnwm-kfp-note">
+            These answers come from the records on this site, so they change as records are added.
+            For a species with few records, picking a place or month can drop it from your results
+            even where it does fly. If you find a moth outside its recorded range or season, please
+            add it to the <a href=${INATURALIST_PROJECT_URL}>PNW Moths project on iNaturalist</a>.
+          </p>` : ''}
           ${[...questions.entries()]
             .filter(([q]) => !this._questionGroups
               || isQuestionVisible(q, this._selection, this._questionGroups))

@@ -16,6 +16,8 @@ like without it going quiet on you.
   Anything you type here is erased on the next run.
 - `data/inat-sync-report.csv` — rewritten in full every run. One row per observation that did
   *not* become a record, and why.
+- `data/key-matrix.json`, when you rebuild in step 3: the identification key takes each species'
+  states, ecoregions and months from its records, these included.
 - Nothing else. This never touches `data/records.csv`, which stays yours.
 
 ## The Rules It Follows
@@ -69,7 +71,7 @@ like without it going quiet on you.
 4. If the build passes, commit and push:
    ```bash
    git switch -c inat-sync-$(date +%Y%m%d-%H%M)
-   git add data/records-inat.csv data/inat-sync-report.csv
+   git add data/records-inat.csv data/inat-sync-report.csv data/key-matrix.json
    git commit -m "Sync records from the iNaturalist project"
    git push -u origin HEAD
    gh pr create --fill

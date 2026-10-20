@@ -252,12 +252,16 @@ describe('computeMatching', () => {
     );
   });
 
-  it('TC-6: fully-unscored species appear in any non-empty selection result (D-04, integration)', async () => {
-    // Real artifact: hypenodes-fractilinea and xestia-normanianus score 0 on all 237 characters.
-    // They must appear in computeMatching results for any selection (no opposing 1s → D-03 never eliminates).
+  it('TC-6: species unscored on a question appear whatever is selected on it (D-04, integration)', async () => {
+    // Real artifact: sphinx-luscitiosa and euxoa-maimes have no answer to the state question:
+    // no hand score, and no record in WA, ID, OR, MT or BC. Selecting a state must not
+    // eliminate them (no opposing 1s → D-03 never eliminates). Until #397 this test used
+    // hypenodes-fractilinea and xestia-normanianus, which scored 0 on all 237 characters;
+    // their records now give them Distribution and Seasonality answers, and no species
+    // in the key is entirely unscored any more.
     //
     // Real-artifact regression counts (see RESEARCH.md "Concrete expected values"):
-    //   WA state selected (char id=0):     883 matched (after unpublished deny-list gating #84)
+    //   WA state selected (char id=0):     891 matched (after unpublished deny-list gating #84)
     //   WA OR OR selected (ids 0+2):     1,024 matched
     //   WA AND eyespot=Yes (ids 0, eyespot): 7 matched
     //   eyespot=Yes only:                    9 matched
@@ -285,6 +289,10 @@ describe('computeMatching', () => {
     // The curator's first template row, Coloradia doris (#390), is a net +1 over 1,220. He
     // left its Distribution scores blank on purpose (#397 will derive them from records), so
     // it passes the WA filter too: 882 -> 883.
+    // #397 derives the Distribution and Seasonality answers from the records and ORs them
+    // into the hand scores. WA moves 883 -> 891: species with a Washington record but no
+    // hand-scored Washington now pass, and species scored for nowhere by hand whose records
+    // are all elsewhere (Coloradia doris: Idaho; xestia-normanianus: BC) no longer do.
     const { default: realMatrix } = await import('../../data/key-matrix.json', { with: { type: 'json' } });
     const realGroups = buildQuestionGroups(realMatrix.characters as Character[]);
 
@@ -297,15 +305,15 @@ describe('computeMatching', () => {
     const result = computeMatching(realMatrix as KeyMatrix, selection, realGroups);
 
     assert.ok(
-      result.matchedSlugs.includes('hypenodes-fractilinea'),
-      'hypenodes-fractilinea (all-zero) must appear in WA-filtered results (D-04)',
+      result.matchedSlugs.includes('sphinx-luscitiosa'),
+      'sphinx-luscitiosa (no state answer) must appear in WA-filtered results (D-04)',
     );
     assert.ok(
-      result.matchedSlugs.includes('xestia-normanianus'),
-      'xestia-normanianus (all-zero) must appear in WA-filtered results (D-04)',
+      result.matchedSlugs.includes('euxoa-maimes'),
+      'euxoa-maimes (no state answer) must appear in WA-filtered results (D-04)',
     );
-    // Regression check: WA selection should yield 883 matched species after unpublished deny-list gating (#84).
-    assert.strictEqual(result.count, 883, 'WA selection must match 883 species (real-artifact regression)');
+    // Regression check: WA selection should yield 891 matched species after unpublished deny-list gating (#84).
+    assert.strictEqual(result.count, 891, 'WA selection must match 891 species (real-artifact regression)');
   });
 
   it('TC-7b: empty selection returns all 1,221 species (real artifact)', async () => {

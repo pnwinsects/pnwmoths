@@ -84,3 +84,26 @@ describe('separatorFor', () => {
     assert.equal(separatorFor(''), '');
   });
 });
+
+describe('planMerge with derived columns (#397)', () => {
+  const STATE = 'Distribution:In which State/Province was the moth found?:Idaho';
+  const species = new Set(['aus-bus', 'cus-dus']);
+  const existing = `binomial,${STATE},Cat:Q:Yes\nAus bus,1,1\n`;
+
+  test('a template without the Distribution column is written with that cell blank', () => {
+    const plan = planMerge(existing, 'binomial,Cat:Q:Yes\nCus dus,1\n', species, new Map());
+    assert.deepEqual(plan.append, [['Cus dus', '', '1']]);
+  });
+
+  test('a file that keeps the Distribution column still merges, hand scores included', () => {
+    const plan = planMerge(existing, `binomial,${STATE},Cat:Q:Yes\nCus dus,1,1\n`, species, new Map());
+    assert.deepEqual(plan.append, [['Cus dus', '1', '1']]);
+  });
+
+  test('any other set of columns is refused', () => {
+    assert.throws(
+      () => planMerge(existing, `binomial,Cat:Q:Yes,${STATE}\nCus dus,1,\n`, species, new Map()),
+      /columns do not match/
+    );
+  });
+});
