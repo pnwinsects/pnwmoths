@@ -73,10 +73,12 @@ what made C-020 possible to reconstruct.
 
 ---
 
-## C-042 · 2026-10-20 · *Idaea seriata* is added with the authority "(Schrank, 1802)", and the two genera MPG writes in quotes are added under the plain genus name
+## C-042 · 2026-10-20 · *Idaea seriata* is added with the authority "(Schrank, 1802)", the two genera MPG writes in quotes are added under the plain genus name, and all three *Perizoma* go in Euphyiini
 
 **Source** [#413 comment](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6298037615),
-the curator's own words · **Status** Applied · **Refines** C-041
+the curator's own words; the Euphyiini placement is the maintainer's (Peter Abrahamsen), made in
+[PR #432](https://github.com/pnwinsects/pnwmoths/pull/432) and reported to the curator on #413 ·
+**Status** Applied · **Refines** C-041
 
 > 1. _Idaea seriata_ is a new addition to MPG, resulting from a publication of mine from this past
 > month. They haven't yet updated their spreadsheet to reflect this addition. The author should be
@@ -93,7 +95,7 @@ C-041 held for him.
 | Species | MONA | Authority | Subfamily | Tribe |
 | --- | --- | --- | --- | --- |
 | *Idaea seriata* (Small Speckled Wave) | 7126.01 | (Schrank, 1802) | Sterrhinae | Sterrhini |
-| *Perizoma custodiata* | 7328 | (Guenée, [1858]) | Larentiinae | blank |
+| *Perizoma custodiata* | 7328 | (Guenée, [1858]) | Larentiinae | Euphyiini |
 | *Lithostege marcata* | 7630 | Barnes & McDunnough, 1916 | Larentiinae | blank |
 
 The common name for *I. seriata* is the one on his October list. The other two authorities are
@@ -103,8 +105,10 @@ Why it matters:
 
 - **One name now covers two of MPG's genera.** MPG keeps *custodiata* (Group 1, Euphyiini) apart
   from *costiguttata* and *curvilinea* (Group 2, not placed in a tribe). On the site all three are
-  *Perizoma*, and tribe is a property of the genus, so *custodiata* has no tribe, like the other two.
-  It also means the checklist shows all three *Perizoma* together where *custodiata* sits, between
+  *Perizoma*, and tribe is a property of the genus: two values would show *Perizoma* twice in the
+  browse tree, once under each tribe (#433). The maintainer ruled that the genus goes in a tribe
+  rather than none, so *costiguttata* and *curvilinea* now carry Euphyiini, although MPG places
+  them in no tribe. The checklist shows all three *Perizoma* together where *custodiata* sits, between
   *Euphyia* and *Xanthorhoe*, because a genus is shown at the position of its earliest species.
   If MPG later gives the two groups their own genus names, the species are renamed with
   `npm run species:rename`.
@@ -116,7 +120,8 @@ Nothing becomes public: the family is still withheld (C-001). The key template g
 491 species.
 
 **What changed** — 3 rows in `data/species.csv`, `src/_data/speciesSlugs.json`,
-`data/checklist-order.csv`, `data/key-template.csv`.
+`data/checklist-order.csv`, `data/key-template.csv`; the tribe on *Perizoma costiguttata* and
+*P. curvilinea* in `data/species.csv`, which was blank.
 
 ---
 
