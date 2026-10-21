@@ -73,12 +73,59 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-042 · 2026-10-20 · *Idaea seriata* is added with the authority "(Schrank, 1802)", and the two genera MPG writes in quotes are added under the plain genus name
+
+**Source** [#413 comment](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6298037615),
+the curator's own words · **Status** Applied · **Refines** C-041
+
+> 1. _Idaea seriata_ is a new addition to MPG, resulting from a publication of mine from this past
+> month. They haven't yet updated their spreadsheet to reflect this addition. The author should be
+> listed as "(Schrank, 1802)" without quotation marks. Here's the MPG page on this species:
+> https://mothphotographersgroup.msstate.edu/species.php?hodges=7126.01
+>
+> 2. yes
+
+The second answer is to [our question](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6227671061)
+whether *"Perizoma" (Group 1) custodiata* and *"Lithostege" marcata* should be added under the plain
+genus name, as our two *Perizoma* species from MPG's Group 2 already are. These were the three rows
+C-041 held for him.
+
+| Species | MONA | Authority | Subfamily | Tribe |
+| --- | --- | --- | --- | --- |
+| *Idaea seriata* (Small Speckled Wave) | 7126.01 | (Schrank, 1802) | Sterrhinae | Sterrhini |
+| *Perizoma custodiata* | 7328 | (Guenée, [1858]) | Larentiinae | blank |
+| *Lithostege marcata* | 7630 | Barnes & McDunnough, 1916 | Larentiinae | blank |
+
+The common name for *I. seriata* is the one on his October list. The other two authorities are
+MPG's, as in C-041.
+
+Why it matters:
+
+- **One name now covers two of MPG's genera.** MPG keeps *custodiata* (Group 1, Euphyiini) apart
+  from *costiguttata* and *curvilinea* (Group 2, not placed in a tribe). On the site all three are
+  *Perizoma*, and tribe is a property of the genus, so *custodiata* has no tribe, like the other two.
+  It also means the checklist shows all three *Perizoma* together where *custodiata* sits, between
+  *Euphyia* and *Xanthorhoe*, because a genus is shown at the position of its earliest species.
+  If MPG later gives the two groups their own genus names, the species are renamed with
+  `npm run species:rename`.
+- ***Idaea seriata* has no row in our copy of MPG's list**, so the checklist places it at the end
+  of *Idaea*, which is where MONA 7126.01 falls anyway. The build reports it as unplaced on every
+  run until a later MPG list includes it.
+
+Nothing becomes public: the family is still withheld (C-001). The key template grows from 488 to
+491 species.
+
+**What changed** — 3 rows in `data/species.csv`, `src/_data/speciesSlugs.json`,
+`data/checklist-order.csv`, `data/key-template.csv`.
+
+---
+
 ## C-041 · 2026-10-16 · Merrill's October 2026 list of PNW Geometridae adds 332 species to the catalogue, withheld with the family
 
 **Source** [#413 issue body](https://github.com/pnwinsects/pnwmoths/issues/413), the curator's own
-words · **Status** Applied (332 species added; blank tribe, authority and MONA cells filled);
-Pending (10 held rows, and 18 rows that sit under another genus on the site — tracked on #413,
-#279 and #418)
+words · **Status** Applied (332 species added; blank tribe, authority and MONA cells filled;
+the three rows held for his call, by C-042); Pending (7 held rows, and 18 rows that sit under
+another genus on the site — tracked on #279 and #418) · **Refined by** C-042
 
 > The attached file has our current working list of PNW Geometridae. Many of these species are not
 > yet in the site database and so they aren't showing up in things like the template for scoring the

@@ -1749,4 +1749,6 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 3713,Prochoerodes,lineola,Large Maple Spanworm Moth,MONA 6982,"(Goeze, 1781)",Geometridae,,Ennominae,,Ennomini
 3714,Prochoerodes,amplicineraria,,MONA 6978,"(Pearsall, 1906)",Geometridae,,Ennominae,,Ennomini
 3715,Prochoerodes,forficaria,,MONA 6981,"(Guenée, [1858])",Geometridae,,Ennominae,,Ennomini
-
+3716,Idaea,seriata,Small Speckled Wave,MONA 7126.01,"(Schrank, 1802)",Geometridae,,Sterrhinae,,Sterrhini
+3717,Perizoma,custodiata,,MONA 7328,"(Guenée, [1858])",Geometridae,,Larentiinae,,
+3718,Lithostege,marcata,,MONA 7630,"Barnes & McDunnough, 1916",Geometridae,,Larentiinae,,
