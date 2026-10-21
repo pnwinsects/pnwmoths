@@ -134,3 +134,21 @@ redirect's `Location` header.
   `[build-district-adjacency] FAIL: districts table loaded zero rows` — the
   boundary file failed to load into DuckDB spatial; do not commit an empty
   `data/district-adjacency.csv`.
+
+## Ecoregions
+
+`data/boundaries/pnw-ecoregions.geojson` is a separate file with its own script. The identification key places every record in one of its ecoregions to answer "In which ecoregion…?" ([ADR 0055](../docs/adr/0055-key-distribution-and-seasonality-from-records.md)). Its sources, licences and the names that differ from the key's are in [docs/reference/ecoregions.md](../docs/reference/ecoregions.md).
+
+Refresh it only when EPA or the BC Data Catalogue publish a new version, or when the key's ecoregion answers change. Adding records never needs it.
+
+1. Run:
+   ```bash
+   node scripts/build-ecoregions.ts
+   npm run build:key
+   ```
+   The first command downloads the three sources into `.boundaries-scratch/ecoregions/` (skipped when they are already there; delete the folder to fetch new versions) and rewrites the file. It ends with `all 47 of the key's ecoregion answers are supplied`. It refuses to write a file that leaves an answer without a polygon, and lists the answers; a renamed ecoregion goes in `KEY_ECOREGION_BY_BOUNDARY_NAME` in `scripts/lib/key-derived-scores.ts`.
+2. `npm run build:key` places the records in the new boundaries. Expect small changes to `data/key-matrix.json`.
+3. Commit both files in one pull request, as in step 5 above:
+   ```bash
+   git add data/boundaries/pnw-ecoregions.geojson data/key-matrix.json
+   ```

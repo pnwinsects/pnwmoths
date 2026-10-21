@@ -10,8 +10,12 @@
 // the key already scores is reported and left alone, never overwritten. Correcting an
 // existing species' scores is an edit to its row in data/key-scores.csv, made on purpose.
 //
+// The file may have every column of data/key-scores.csv, or leave out the
+// Distribution and Seasonality columns as the template now does, because the key
+// derives those from the records (#397); left-out columns are written blank.
+//
 // Refuses (writing nothing) when:
-//   - the columns differ from data/key-scores.csv — a template from before a column
+//   - the columns are neither of those — a template from before a column
 //     change would put every score under the wrong question;
 //   - a cell holds anything but 1, 0 or blank (parseKeyScores);
 //   - a name resolves to no species we hold, directly or through
@@ -26,6 +30,7 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { parseKeyScores, resolveSlug, normalizeBinomial, KEY_SCORES_NAME_COLUMN } from './build-key.ts';
 import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
+import { derivedColumns } from './lib/key-derived-scores.ts';
 
 export interface MergePlan {
   /** Rows to append, as CSV records (binomial first). */
@@ -51,12 +56,22 @@ export function planMerge(
   const base = parseKeyScores(existing);
   const add = parseKeyScores(incoming);
 
-  if (add.labels.length !== base.labels.length || add.labels.some((l, i) => l !== base.labels[i])) {
-    const i = add.labels.findIndex((l, j) => l !== base.labels[j]);
+  // Which key column each of the file's columns is: all of them, or all but the
+  // derived ones (the template's shape since #397).
+  const derived = derivedColumns(base.labels, { requireAll: false }).all;
+  const templateIds = base.labels.flatMap((_, id) => (derived.has(id) ? [] : [id]));
+  const sameAs = (ids: number[]) =>
+    add.labels.length === ids.length && add.labels.every((l, i) => l === base.labels[ids[i]!]);
+  const allIds = base.labels.map((_, id) => id);
+  const ids = sameAs(allIds) ? allIds : sameAs(templateIds) ? templateIds : null;
+  if (ids === null) {
+    const expected = add.labels.length === allIds.length ? allIds : templateIds;
+    const i = add.labels.findIndex((l, j) => l !== base.labels[expected[j]!]);
     throw new Error(
       `The template's columns do not match data/key-scores.csv ` +
-        `(${add.labels.length} vs ${base.labels.length} character-states; first difference at column ${i + 2}: ` +
-        `${JSON.stringify(add.labels[i] ?? null)} vs ${JSON.stringify(base.labels[i] ?? null)}). ` +
+        `(${add.labels.length} character-states, against ${allIds.length}, or ${templateIds.length} without ` +
+        `Distribution and Seasonality; first difference at column ${i + 2}: ` +
+        `${JSON.stringify(add.labels[i] ?? null)} vs ${JSON.stringify(base.labels[expected[i]!] ?? null)}). ` +
         `Download a fresh template — the key's columns have changed since this one was made.`
     );
   }
@@ -85,7 +100,9 @@ export function planMerge(
       plan.unknown.push(binomial);
       return;
     }
-    plan.append.push([binomial, ...row.map(v => (v ? '1' : ''))]);
+    const full: boolean[] = base.labels.map(() => false);
+    ids.forEach((id, i) => { full[id] = row[i]!; });
+    plan.append.push([binomial, ...full.map(v => (v ? '1' : ''))]);
   });
   return plan;
 }

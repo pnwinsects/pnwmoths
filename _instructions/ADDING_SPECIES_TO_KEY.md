@@ -8,6 +8,12 @@
 
 Background: [ADR 0048](../docs/adr/0048-key-scores-one-row-per-species.md), issue [#390](https://github.com/pnwinsects/pnwmoths/issues/390).
 
+## Distribution and Seasonality come from the records
+
+Nobody scores the 64 Distribution and Seasonality columns (state or province, ecoregion, month) for a new species. The key build fills them in from the species' occurrence records: a record from Idaho in July gives the species "Idaho", the Idaho ecoregion the record falls in, and "July". Reared and immature records don't count toward months, as on the species page's flight chart. These answers are added to any `1`s in `data/key-scores.csv`, never instead of them. See [ADR 0055](../docs/adr/0055-key-distribution-and-seasonality-from-records.md).
+
+So the template has no Distribution or Seasonality columns. If a species occurs somewhere it has no record, the best fix is a record, because it then shows on the species page's map too. A maintainer can also put a `1` in that column of `data/key-scores.csv`.
+
 ## How the key is stored
 
 `data/key-scores.csv` has **one row per species and one column per character-state**. The first column, `binomial`, holds the name, e.g. `Pheosia californica`. Each of the other 237 columns is headed with a full question and answer, such as `Forewing color and pattern:Color:Main color of forewing:Brown`.
@@ -17,7 +23,7 @@ Background: [ADR 0048](../docs/adr/0048-key-scores-one-row-per-species.md), issu
 - There is no separate mark for "absent". Mark what the species does have, and anything you leave blank counts as "not this". If a species is always brown or gray, put a `1` under `Brown` and under `Gray` and leave the other colors blank; a visitor who picks green then won't see it. If you leave every color blank, that visitor still sees the species, because you have said nothing about its color. So for any question you score, mark every answer that applies.
 - A species can have several states of one question (e.g. two forewing colors). A visitor who picks several answers to one question sees species that have any of them; a visitor who answers several questions sees only species that fit every one.
 
-To see the scores the live key uses (for example to copy a similar species' row), open **Identification key scores** on the site's `/curation/` page. It is `data/key-scores.csv` and has the same columns as the template.
+To see the scores the live key uses (for example to copy a similar species' row), open **Identification key scores** on the site's `/curation/` page. It is `data/key-scores.csv`: the template's columns plus the hand-scored Distribution and Seasonality columns, without the answers the records add.
 
 ## For the curator: scoring species
 
@@ -25,7 +31,7 @@ To see the scores the live key uses (for example to copy a similar species' row)
 2. Open it in Excel. Freezing the top row and the first column (View → Freeze Panes) keeps the questions and names in view.
 3. For each species you score, put a `1` in every cell that applies. Don't type `x`, `Y` or `yes`; the merge rejects anything but `1`, `0` or blank, and names the cell.
 4. Leave rows you don't get to as they are. Rows with no `1`s are skipped. You can also delete them.
-5. Don't edit, reorder, add or delete **columns**. If the columns differ from the key's, the merge refuses the whole file.
+5. Don't edit, reorder, add or delete **columns**. If the columns differ from the key's, the merge refuses the whole file. A template made before the Distribution and Seasonality columns were dropped still merges; leave those columns blank.
 6. Save as **CSV UTF-8 (Comma delimited)** (in Google Sheets: File → Download → CSV). Attach it to a GitHub issue (#390, or a new one), or send it to a maintainer. The curator is happy with either Excel or Google Sheets ([#390](https://github.com/pnwinsects/pnwmoths/issues/390#issuecomment-6049060198)).
 
 To **correct** a species the key already scores, say which cells to change. The merge never overwrites existing scores; a maintainer edits that row in `data/key-scores.csv` directly.
@@ -44,10 +50,11 @@ npm test
 
 - **appended N species**: their rows are now at the bottom of `data/key-scores.csv`.
 - **skipped N row(s) with no scores**: template rows nobody filled in. Expected.
+- A file that still has the Distribution and Seasonality columns merges as it is, `1`s included; a file without them gets those cells blank.
 - **left N already-scored species untouched**: the file had rows for species the key already scores. If they are corrections, apply them to `data/key-scores.csv` by hand on purpose.
 - **Nothing written: N name(s) match no species**: almost always a typo in the name column. Fix the name in the file and rerun. A name that is a real synonym needs a `data/species-synonyms.csv` row first; see [CURATING_SPECIES_SYNONYMS.md](CURATING_SPECIES_SYNONYMS.md).
 
-`npm run build:key` should report one more matched species for each *published* species appended. Withheld species (the Geometridae) don't raise the count until their family is released, so a merge of withheld rows leaves it unchanged; check the rows in `data/key-scores.csv` instead. Three tests pin the key's species count against the real data, so `npm test` fails after a merge of published species: `meta.matchedSpecies` in `src/components/key-results-grid.test.ts`, and the empty-selection and Washington counts in `src/_lib/key-filter.test.ts`. A species with no Distribution scores passes the Washington filter, so it raises that count too. Bump each number to what the test reports, with a comment naming the merge, as the earlier entries there do.
+`npm run build:key` should report one more matched species for each *published* species appended. Withheld species (the Geometridae) don't raise the count until their family is released, so a merge of withheld rows leaves it unchanged; check the rows in `data/key-scores.csv` instead. Three tests pin the key's species count against the real data, so `npm test` fails after a merge of published species: `meta.matchedSpecies` in `src/components/key-results-grid.test.ts`, and the empty-selection and Washington counts in `src/_lib/key-filter.test.ts`. The Washington count rises for a new species with a Washington record, or with no record in Washington, Idaho, Oregon, Montana or BC, because a species with no state answer passes the state filter. Bump each number to what the test reports, with a comment naming the merge, as the earlier entries there do.
 
 Commit everything it changed under `data/` in the same change. The staleness test in `scripts/build-key.test.ts` fails if `data/key-matrix.json` or `data/key-template.csv` is out of date.
 

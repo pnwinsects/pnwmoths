@@ -7,6 +7,10 @@
 // binomial, as the curator writes it), one column per character-state, `1` where the
 // species has that state and blank where it is unscored (ADR 0048, issue #390). It
 // was transposed from Lucid3's export, which had species as columns.
+//
+// The Distribution and Seasonality answers are also derived from the occurrence
+// records and ORed in (#397, ADR 0055; scripts/lib/key-derived-scores.ts), so
+// key-matrix.json changes when the records do.
 import { DuckDBInstance } from '@duckdb/node-api';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -18,6 +22,7 @@ import { loadUnpublishedSpecies, isUnpublished, normalizeSlug } from '../src/_li
 import { formatEpithet, isEpithetQuoted } from '../src/_lib/format-epithet.ts';
 import { WEIGHT_ORDER_SQL, pickIdentifyPhoto } from '../src/_lib/photo-display.ts';
 import { folderIfRenamed } from '../src/_lib/photo-path.ts';
+import { derivedColumns, deriveKeyScores, readDerivableRecords } from './lib/key-derived-scores.ts';
 import { pathToFileURL } from 'node:url';
 
 /**
@@ -165,7 +170,8 @@ export function parseKeyScores(raw: Buffer | string): {
 }
 
 /**
- * Render data/key-template.csv: the header of data/key-scores.csv, then one blank row
+ * Render data/key-template.csv: a header of the given character-states (all of
+ * data/key-scores.csv's but the ones the records supply, #397), then one blank row
  * per species we hold that no key row scores yet — the curator fills in `1`s and the
  * rows are appended with `npm run key:merge` (issue #390).
  *
@@ -345,6 +351,7 @@ export async function main(): Promise<void> {
 
   // 2. One row per species, one column per character-state (issue #390).
   const { labels, binomials: speciesBinomials, scores } = parseKeyScores(raw);
+  const derivedCols = derivedColumns(labels);
 
   // 3. Load slug resolution resources
   const withheld = loadWithheldFamilies();
@@ -394,6 +401,15 @@ export async function main(): Promise<void> {
   // 5. DuckDB nav-image join — query ALL images, resolve per slug in TypeScript (no SQL interpolation)
   const db = await DuckDBInstance.create(':memory:');
   const { navImages, navFolders, imagePairs } = await queryNavImages(db);
+
+  // 5b. Distribution and Seasonality answers from the records (#397).
+  const recordsConn = await db.connect();
+  let derived: Map<string, Set<number>>;
+  try {
+    derived = deriveKeyScores(await readDerivableRecords(recordsConn), derivedCols);
+  } finally {
+    recordsConn.closeSync();
+  }
 
   // 6. Build characters[], species[], matrix[]
   // 6a. Load character image map from CSV (CIMG-02, D-08 soft-skip)
@@ -475,10 +491,14 @@ export async function main(): Promise<void> {
   const nMatchedSpecies = matchedSlugs.length;
   const matrix = labels.map((_, charIdx) => {
     // Build list of matched-species-rank positions that score this character-state.
-    // A slug with several source rows matches if ANY of them scores it.
+    // A slug with several source rows matches if ANY of them scores it, and a
+    // record adds a Distribution or Seasonality 1 the rows leave blank (#397).
     const matchingRanks: number[] = [];
     for (const [rank, slug] of matchedSlugs.entries()) {
-      if (slugColumns.get(slug)!.some(origIdx => scores[origIdx]![charIdx])) {
+      if (
+        slugColumns.get(slug)!.some(origIdx => scores[origIdx]![charIdx]) ||
+        derived.get(slug)?.has(charIdx)
+      ) {
         matchingRanks.push(rank);
       }
     }
@@ -565,8 +585,9 @@ export async function main(): Promise<void> {
       skip_empty_lines: true,
     }) as Array<{ species_slug: string }>).map((r, i) => [r.species_slug, i])
   );
+  // The template leaves out the answers the records supply (#397).
   const template = buildKeyTemplate({
-    labels,
+    labels: labels.filter((_, id) => !derivedCols.all.has(id)),
     keyBinomials: speciesBinomials,
     species: allSpeciesRows
       .filter(r => !isUnpublished(normalizeSlug(`${r.genus}-${r.species}`), unpublished))

@@ -738,6 +738,12 @@ pnwm-occurrence-popup .pnwm-occ-note {
   padding-left: 1.5rem;
 }
 
+.pnwm-kfp-note {
+  font-size: 0.875rem;
+  color: var(--pnwm-ink-muted);
+  margin: 0 0 0.75rem 0;
+}
+
 .pnwm-kfp-badge {
   background: var(--pico-primary);
   color: #fff;

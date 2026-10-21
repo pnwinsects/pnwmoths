@@ -1,5 +1,10 @@
 import { parquetReadObjects, parquetMetadata } from 'hyparquet';
 import type { OccurrenceRecord } from '../types/index.ts';
+import { isRearedRecord } from '../_lib/reared-records.ts';
+
+// Re-exported so the flight chart's rule stays importable from where it is used;
+// it lives in src/_lib because the key build applies it too (#397).
+export { REARED_TERMS, isRearedRecord } from '../_lib/reared-records.ts';
 
 /** Module-level cache keyed by slug */
 const cache = new Map<string, OccurrenceRecord[]>();
@@ -117,40 +122,6 @@ export function filterRecords(
     if (filters.elevationMax != null && (r.elevation_ft as number) > filters.elevationMax) return false;
     return true;
   });
-}
-
-/**
- * Keyword list flagging a record as reared/immature (larvae, pupae, eggs, etc.).
- * Derived from the legacy Django site's `species/models.py` REARED_TERMS, which
- * excluded reared specimens from phenology graphs by nulling their month at
- * data-entry time. Replicated here so post-2011 stragglers with populated months
- * (and any future ones) are excluded durably from the phenology bars (ISSUE-59).
- *
- * The legacy list also carried the foodplant terms `Rubus`, `Taraxacum`, and
- * `broadleaf`. Those are deliberately omitted: notes record the plants adults
- * were visiting as well as larval foodplants, so a nectaring adult would be
- * dropped from the flight-season data it belongs in (per curator, ISSUE-59).
- */
-export const REARED_TERMS = [
-  'reared', 'larva', 'em.', 'pupa', 'immature',
-  'ovum', 'emerged', 'emgd', 'em in', 'em ex', 'eggs',
-];
-
-/**
- * Whether a record is a reared/immature specimen, per the legacy keyword scan.
- *
- * Performs a case-insensitive substring match of any REARED_TERM against the
- * `notes` field ONLY — never any other column, since short tokens like "em."
- * would false-match locality/collector text. Records with null or empty-string
- * notes are not reared.
- *
- * @param record - occurrence record to test
- * @returns true if any REARED_TERM appears in the record's notes
- */
-export function isRearedRecord(record: OccurrenceRecord): boolean {
-  if (!record.notes) return false;
-  const lowered = record.notes.toLowerCase();
-  return REARED_TERMS.some(term => lowered.includes(term.toLowerCase()));
 }
 
 /**
