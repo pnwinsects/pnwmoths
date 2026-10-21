@@ -297,8 +297,9 @@ describe('data/checklist-order.csv', () => {
     // `macaria-marmorata` — long the sole named species without a position, because
     // MPG's master list has no row for the name — was ruled a synonym of
     // M. signaria (C-017) and merged in #294. `idaea-seriata` (C-042) is on MPG's
-    // species pages but not yet in its downloadable list. Once a copy of the list that
-    // has it is converted, it places, and this fails until the name is removed here.
+    // species pages but not yet in its downloadable list. This reads the committed
+    // checklist, so it fails only after a list that has it is converted AND
+    // `node scripts/build-checklist-order.ts` is rerun (ADR 0030); then remove the name.
     assert.deepEqual(unplaced.filter((s) => !provisional.includes(s)), ['idaea-seriata']);
     assert.equal(provisional.length, 21);
   });

@@ -18,9 +18,10 @@
  * The order comes from `data/checklist-order.csv`, whose ROW ORDER is the data —
  * there is no ordinal column to sort on (see [ADR 0030]). Position in that file is
  * defined only for species, so the higher ranks take their position from their
- * first species, which is exactly what makes one sort key sufficient: every genus
- * we hold occupies an unbroken block of MPG rows, asserted by
- * `scripts/build-checklist-order.test.ts`.
+ * first species, which is exactly what makes one sort key sufficient. Nearly every
+ * genus we hold occupies an unbroken block of MPG rows; the few that do not
+ * (C-026, C-042) still render as one block, because a genus takes its earliest
+ * species' position. `scripts/build-checklist-order.test.ts` pins that list.
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
