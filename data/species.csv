@@ -1232,7 +1232,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2849,Resapamea,diluvius,,93-2368.1,"Crabo, 2013",Noctuidae,resapamea-passer,Noctuinae,,Apameini
 2893,Hydriomena,perfracta,,MONA 7229,"Swett, 1910",Geometridae,,Larentiinae,,Hydriomenini
 2952,Hydriomena,furcata,,7257,"(Thunberg, 1784) ",Geometridae,,Larentiinae,,Hydriomenini
-2962,Perizoma,costiguttata,,MONA 7325,"(Hulst, 1896) ",Geometridae,,Larentiinae,,
+2962,Perizoma,costiguttata,,MONA 7325,"(Hulst, 1896) ",Geometridae,,Larentiinae,,Euphyiini
 2971,Stamnodes,topazata,,MONA 7349,"(Strecker, 1899)",Geometridae,,Larentiinae,,Stamnodini
 2980,Antepirrhoe,semiatrata,,MONA 7210,"(Hulst, 1881) ",Geometridae,,Larentiinae,,Cidariini
 2985,Eulithis,destinata,,MONA 7204,"(Möschler, 1860)",Geometridae,,Larentiinae,,Cidariini
@@ -1355,7 +1355,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2909,Lobophora,nivigerata,,MONA 7640,"Walker, 1862",Geometridae,,Larentiinae,,Trichopterygini
 2941,Eupithecia,ravocostaliata,,MONA 7605,"Packard, 1876",Geometridae,,Larentiinae,,Eupitheciini
 2949,Hydriomena,crokeri,,MONA 7247,"Swett, 1910",Geometridae,,Larentiinae,,Hydriomenini
-2961,Perizoma,curvilinea,,MONA 7324,"(Hulst, 1896) ",Geometridae,,Larentiinae,,
+2961,Perizoma,curvilinea,,MONA 7324,"(Hulst, 1896) ",Geometridae,,Larentiinae,,Euphyiini
 2965,Stamnoctenis,pearsalli,,MONA 7357,"(Swett, 1914)",Geometridae,,Larentiinae,,Stamnodini
 2997,Dysstroma,brunneata,,MONA 7194,"(Packard, 1867)",Geometridae,,Larentiinae,,Cidariini
 3062,Idaea,dimidiata,,MONA 7126,"(Hufnagel, 1767)",Geometridae,,Sterrhinae,,Sterrhini
@@ -1749,4 +1749,6 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 3713,Prochoerodes,lineola,Large Maple Spanworm Moth,MONA 6982,"(Goeze, 1781)",Geometridae,,Ennominae,,Ennomini
 3714,Prochoerodes,amplicineraria,,MONA 6978,"(Pearsall, 1906)",Geometridae,,Ennominae,,Ennomini
 3715,Prochoerodes,forficaria,,MONA 6981,"(Guenée, [1858])",Geometridae,,Ennominae,,Ennomini
-
+3716,Idaea,seriata,Small Speckled Wave,MONA 7126.01,"(Schrank, 1802)",Geometridae,,Sterrhinae,,Sterrhini
+3717,Perizoma,custodiata,,MONA 7328,"(Guenée, [1858])",Geometridae,,Larentiinae,,Euphyiini
+3718,Lithostege,marcata,,MONA 7630,"Barnes & McDunnough, 1916",Geometridae,,Larentiinae,,

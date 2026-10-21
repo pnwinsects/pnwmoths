@@ -238,8 +238,10 @@ describe('data/checklist-order.csv', () => {
   // disagrees with MPG's sequence somewhere — so the known cases are pinned:
   // C-026 keeps bitactata/decorata in Speranza while colata/lorquinaria/
   // plumosata returned to Macaria, and MPG (which places them all in Macaria)
-  // sequences the two sets interleaved. A new genus appearing here deserves
-  // the same scrutiny before it is added.
+  // sequences the two sets interleaved. C-042 puts MPG's "Perizoma" (Group 1)
+  // custodiata under plain Perizoma beside the two Group 2 species, and MPG
+  // sequences the groups about 180 rows apart. A new genus appearing here
+  // deserves the same scrutiny before it is added.
   it('fragments only the genera the curation log explains', () => {
     const spans = new Map<string, number[]>();
     ordered.forEach((row, rank) => {
@@ -252,7 +254,7 @@ describe('data/checklist-order.csv', () => {
       .filter(([, ranks]) => (ranks.at(-1) ?? 0) - (ranks[0] ?? 0) !== ranks.length - 1)
       .map(([genus]) => genus)
       .sort();
-    assert.deepEqual(fragmented, ['macaria', 'speranza']);
+    assert.deepEqual(fragmented, ['macaria', 'perizoma', 'speranza']);
   });
 
   it('puts families in the standard Pohl sequence', () => {
@@ -294,8 +296,11 @@ describe('data/checklist-order.csv', () => {
     // Was two, then one, now none. `hemileuca-nuteglan` left the catalog in #268;
     // `macaria-marmorata` — long the sole named species without a position, because
     // MPG's master list has no row for the name — was ruled a synonym of
-    // M. signaria (C-017) and merged in #294. Every named species now places.
-    assert.deepEqual(unplaced.filter((s) => !provisional.includes(s)), []);
+    // M. signaria (C-017) and merged in #294. `idaea-seriata` (C-042) is on MPG's
+    // species pages but not yet in its downloadable list. This reads the committed
+    // checklist, so it fails only after a list that has it is converted AND
+    // `node scripts/build-checklist-order.ts` is rerun (ADR 0030); then remove the name.
+    assert.deepEqual(unplaced.filter((s) => !provisional.includes(s)), ['idaea-seriata']);
     assert.equal(provisional.length, 21);
   });
 

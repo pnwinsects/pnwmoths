@@ -92,6 +92,10 @@ a time by the curator. Six were, in this PR (see #259).
 - **Genus contiguity is a load-bearing invariant, so it is tested.** If a future MPG release or a
   new species ever fragments one of our genera, the one-sort-key design silently stops reproducing
   genus order. `scripts/build-checklist-order.test.ts` fails instead.
+  *Update, 2026-10:* no longer strictly true. C-026 split *Macaria* and *Speranza*, and C-042
+  puts two of MPG's groups under one *Perizoma*, so those genera are interleaved in MPG's order.
+  The checklist page still shows each as one block, because `src/_data/checklist.ts` places a
+  genus at its earliest species; the test now pins the genera allowed to be split.
 - **A partial genus rename fragments a genus.** Renaming two of our six *Protorthodes* to
   *Trichopolia* interleaved the two names, because MPG holds all six under *Trichopolia*. Renames
   within a genus have to be all-or-nothing; that is what forced the other four in this PR.
