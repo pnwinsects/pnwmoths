@@ -20,7 +20,7 @@
 | similar_species | string (slug) | no | acronicta-oblinita (pipe-separated for multiple: slug1\|slug2) |
 | subfamily | string | no | Acronictinae — genus-level; copy from another species of the same genus |
 | epithet_quoted | `1` or blank | no | `1` marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); display only |
-| tribe | string | no | Genus-level, like subfamily. Blank where the subfamily has no tribal subdivision ([ADR 0016](../docs/adr/0016-tribe-hierarchy-level.md)) |
+| tribe | string | no | Genus-level, like subfamily. Blank where the subfamily has no tribal subdivision, or where the genus is not placed in a tribe even though others in its subfamily are (e.g. *Lithostege* in Larentiinae) ([ADR 0016](../docs/adr/0016-tribe-hierarchy-level.md)) |
 
 **Family, subfamily and tribe belong to the genus.** Copy all three from another species of the same
 genus, blanks included. If any of them differs, the build stops and names the genus and species to fix,
