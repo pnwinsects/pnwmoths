@@ -341,7 +341,7 @@ export const SKIP_REASON_LABEL: Record<SkipReason, string> = {
   'left-project': 'no longer in the iNaturalist project',
   'no-accuracy': 'states no location accuracy',
   'accuracy-too-coarse': `location accuracy coarser than ${MAX_ACCURACY_M / 1000} km`,
-  'not-research-grade': 'in the project but no longer research grade',
+  'not-research-grade': 'in the project but not research grade',
   'rank-above-species': 'identified only to genus or above',
   'unresolved-taxon': 'identified as a taxon with no page on the site',
   'no-coordinates': 'no usable coordinates',
