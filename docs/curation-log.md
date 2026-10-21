@@ -77,7 +77,8 @@ what made C-020 possible to reconstruct.
 
 **Source** [PR #432](https://github.com/pnwinsects/pnwmoths/pull/432), the maintainer's (Peter
 Abrahamsen's) ruling, not the curator's; reported to the curator in a
-[#413 comment](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6321189396) ·
+[#413 comment](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6321189396) and
+[its correction](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6321734355) ·
 **Status** Applied (in `data/species.csv`); On hold (the curator's confirmation — #413) ·
 **Refines** C-042
 
