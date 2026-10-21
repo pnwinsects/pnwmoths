@@ -185,7 +185,7 @@ Professional users read the catalog in **checklist order** — the phylogenetic 
 
 One file records it — `checklist-order.csv`, a flat list of every species in which **row order is the data**. There is deliberately **no ordinal column**: an integer would have to be renumbered downstream of every insertion. `mpg_p_no` rides along as provenance, so a future MPG release can be diffed against ours; it is not the sort key, because MPG renumbers between releases.
 
-One species-level key is enough because **our genera are contiguous in the MPG list**. Restricted to the species we hold, each genus occupies a single unbroken block of MPG rows, so sorting species by MPG row reproduces family, subfamily, tribe, and genus order for free. That property is load-bearing, so `scripts/build-checklist-order.test.ts` asserts it rather than trusting it.
+One species-level key is enough because **our genera are nearly all contiguous in the MPG list**. Restricted to the species we hold, almost every genus occupies a single unbroken block of MPG rows, so sorting species by MPG row reproduces family, subfamily, tribe, and genus order for free. The few exceptions, where our genus spans two of MPG's (C-026, C-042), still show as one block, because the Checklist page places a genus at its earliest species; `scripts/build-checklist-order.test.ts` lists them, so a new one fails the test.
 
 ### The Checklist page orders within our hierarchy, not MPG's
 
