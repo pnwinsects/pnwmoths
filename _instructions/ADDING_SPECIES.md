@@ -16,11 +16,16 @@
 | common_name | string | yes | American Dagger Moth |
 | noc_id | integer | yes | 9200 |
 | authority | string | yes | Harris 1841 |
-| family | string | yes | Noctuidae |
+| family | string | yes | Noctuidae — must match the other species of the same genus |
 | similar_species | string (slug) | no | acronicta-oblinita (pipe-separated for multiple: slug1\|slug2) |
 | subfamily | string | no | Acronictinae — genus-level; copy from another species of the same genus |
 | epithet_quoted | `1` or blank | no | `1` marks epithets the reference site shows in quotes (e.g. Clostera `"apicalis"`); display only |
-| tribe | string | no | Blank where the subfamily has no tribal subdivision ([ADR 0016](../docs/adr/0016-tribe-hierarchy-level.md)) |
+| tribe | string | no | Genus-level, like subfamily. Blank where the subfamily has no tribal subdivision ([ADR 0016](../docs/adr/0016-tribe-hierarchy-level.md)) |
+
+**Family, subfamily and tribe belong to the genus.** Copy all three from another species of the same
+genus, blanks included. If any of them differs, the build stops and names the genus and species to fix,
+because Browse would otherwise show the genus twice ([ADR 0056](../docs/adr/0056-one-placement-per-genus.md)).
+To move a genus, change every row of it in the same edit.
 
 > **Note:** `noc_id` is the Hodges/MONA checklist number, stored as a string (VARCHAR). Most values are plain integers (e.g., `9200`). Species added after the original Hodges checklist were assigned MONA supplement numbers in the format `93-XXXX` (e.g., `93-0016`) — these are valid and should be entered as-is.
 
