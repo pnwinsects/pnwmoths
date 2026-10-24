@@ -3,6 +3,7 @@
 ## What This Changes
 - `data/records.csv` — new rows for occurrence records
 - `data/key-matrix.json` — the identification key's state, ecoregion and month answers, which come from the records
+- `data/key-unsupported-answers.csv` — the old key's state, ecoregion and month answers that no record backs up, which a new record can remove from the list
 - Build output: updated per-species Parquet file at `_site/species/{slug}/records.parquet`
 
 > **This is the hand-edited records file.** There is a second one,
@@ -66,13 +67,14 @@ present in the header even where the value is blank.
    the Docker path below includes it.
 
 
-5. If build passes, commit and push. The build also updated `data/key-matrix.json`, because the
-   identification key takes each species' states, ecoregions and months from its records
-   ([ADR 0055](../docs/adr/0055-key-distribution-and-seasonality-from-records.md)); commit it with
+5. If build passes, commit and push. The build also updated `data/key-matrix.json` and
+   `data/key-unsupported-answers.csv`, because the identification key takes each species' states,
+   ecoregions and months from its records
+   ([ADR 0055](../docs/adr/0055-key-distribution-and-seasonality-from-records.md)); commit them with
    the records, or the pull request's tests fail and say the key is stale.
    ```bash
    git switch -c add-records-$(date +%Y%m%d-%H%M)
-   git add data/records.csv data/key-matrix.json
+   git add data/records.csv data/key-matrix.json data/key-unsupported-answers.csv
    git commit -m "Add occurrence records for [species name]"
    git push -u origin HEAD
    gh pr create --fill

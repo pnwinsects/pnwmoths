@@ -214,6 +214,63 @@ export function buildKeyTemplate(opts: {
   );
 }
 
+/** Where the list of unsupported answers links each species page. A committed file, so not env-dependent. */
+const SPECIES_PAGE_ORIGIN = 'https://moths.pnwinsects.org';
+
+/**
+ * Render data/key-unsupported-answers.csv: one row per place or month the old key
+ * gives a species that none of its records on the site backs up (#397, C-045).
+ *
+ * The curator ruled that these go unless he marks them as right, so each row carries
+ * what he needs to judge it: the species' record count, the answers its records do
+ * give for the same question, and its page, whose map and flight chart show them. He
+ * fills `keep`; nothing reads that column back yet.
+ *
+ * `handScored` says whether data/key-scores.csv scores the species on a char id;
+ * `derived` holds the char ids its records supply. Rows follow checklist order, then
+ * column order, so one species' rows sit together.
+ */
+export function buildUnsupportedAnswers(opts: {
+  labels: string[];
+  derivedIds: ReadonlySet<number>;
+  species: Array<{ slug: string; name: string; commonName: string; rank: number }>;
+  handScored: (slug: string, charId: number) => boolean;
+  derived: ReadonlyMap<string, ReadonlySet<number>>;
+  recordCounts: ReadonlyMap<string, number>;
+}): string {
+  const ids = [...opts.derivedIds].sort((a, b) => a - b);
+  const parsed = new Map(ids.map(id => [id, parseCharacterLabel(opts.labels[id]!)]));
+  const ordered = [...opts.species].sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+  const rows: string[][] = [];
+  for (const sp of ordered) {
+    const fromRecords = opts.derived.get(sp.slug) ?? new Set<number>();
+    for (const id of ids) {
+      if (!opts.handScored(sp.slug, id) || fromRecords.has(id)) continue;
+      const { question, state } = parsed.get(id)!;
+      const recordsSay = ids
+        .filter(other => fromRecords.has(other) && parsed.get(other)!.question === question)
+        .map(other => parsed.get(other)!.state);
+      rows.push([
+        sp.name,
+        sp.commonName,
+        question,
+        state,
+        String(opts.recordCounts.get(sp.slug) ?? 0),
+        recordsSay.length > 0 ? recordsSay.join('; ') : 'none',
+        `${SPECIES_PAGE_ORIGIN}/species/${sp.slug}/`,
+        '',
+      ]);
+    }
+  }
+  return stringify(
+    [
+      ['species', 'common_name', 'question', 'old_key_answer', 'records_on_site', 'records_answer', 'species_page', 'keep'],
+      ...rows,
+    ],
+    { record_delimiter: '\n' }
+  );
+}
+
 /**
  * Build a base64-encoded Uint8Array bitset over speciesCount species.
  * Bit i (LSB-first) is set iff i is in matchingIndices.
@@ -359,7 +416,7 @@ export async function main(): Promise<void> {
   const allSpeciesRows = parse(
     readFileSync(resolve('data/species.csv')),
     { columns: true, skip_empty_lines: true }
-  ) as Array<{ genus: string; species: string; family: string; epithet_quoted: string }>;
+  ) as Array<{ genus: string; species: string; family: string; epithet_quoted: string; common_name: string }>;
   // Filter withheld families and unpublished provisional species so their binomials
   // resolve to null in resolveSlug and land in unmatchedBinomials → excluded from
   // key-matrix.json (ISSUE-48 / ISSUE-80).
@@ -405,8 +462,11 @@ export async function main(): Promise<void> {
   // 5b. Distribution and Seasonality answers from the records (#397).
   const recordsConn = await db.connect();
   let derived: Map<string, Set<number>>;
+  const recordCounts = new Map<string, number>();
   try {
-    derived = deriveKeyScores(await readDerivableRecords(recordsConn), derivedCols);
+    const records = await readDerivableRecords(recordsConn);
+    for (const r of records) recordCounts.set(r.species_slug, (recordCounts.get(r.species_slug) ?? 0) + 1);
+    derived = deriveKeyScores(records, derivedCols);
   } finally {
     recordsConn.closeSync();
   }
@@ -596,6 +656,25 @@ export async function main(): Promise<void> {
     checklistRank,
   });
   writeFileSync(join(outDir, 'key-template.csv'), template);
+
+  // 11. The old place and month answers no record backs up, for the curator to mark (#397).
+  const commonNames = new Map(
+    speciesRows.map(r => [normalizeSlug(`${r.genus}-${r.species}`), r.common_name ?? ''])
+  );
+  const unsupported = buildUnsupportedAnswers({
+    labels,
+    derivedIds: derivedCols.all,
+    species: species.map(s => ({
+      slug: s.slug,
+      name: normalizeBinomial(`${s.genus} ${s.epithet}`),
+      commonName: commonNames.get(s.slug) ?? '',
+      rank: checklistRank.get(s.slug) ?? Number.POSITIVE_INFINITY,
+    })),
+    handScored: (slug, charId) => slugColumns.get(slug)!.some(origIdx => scores[origIdx]![charId]),
+    derived,
+    recordCounts,
+  });
+  writeFileSync(join(outDir, 'key-unsupported-answers.csv'), unsupported);
 
   console.log(
     `build-key: ${matchedSlugs.length} matched, ${unmatchedBinomials.length} unmatched of ${speciesBinomials.length} total`

@@ -22,6 +22,7 @@ import {
   buildBitset,
   parseKeyScores,
   buildKeyTemplate,
+  buildUnsupportedAnswers,
 } from './build-key.ts';
 
 describe('normalizeBinomial', () => {
@@ -243,6 +244,70 @@ describe('parseKeyScores', () => {
   });
 });
 
+describe('buildUnsupportedAnswers', () => {
+  // Two derived questions (state, month) and one the records never answer.
+  const labels = [
+    'Distribution:In which State/Province was the moth found?:Washington',
+    'Distribution:In which State/Province was the moth found?:Idaho',
+    'Seasonality:In which month was the moth found?:February',
+    'Seasonality:In which month was the moth found?:June',
+    'Wing:Colour:Red',
+  ];
+  const derivedIds = new Set([0, 1, 2, 3]);
+  const rows = (csv: string) => parse(csv, { columns: true }) as Array<Record<string, string>>;
+  const build = (hand: Record<string, number[]>, derived: Record<string, number[]>, order = ['aus-bus', 'cus-dus']) =>
+    rows(
+      buildUnsupportedAnswers({
+        labels,
+        derivedIds,
+        species: order.map((slug, rank) => ({
+          slug,
+          name: slug === 'aus-bus' ? 'Aus bus' : 'Cus dus',
+          commonName: slug === 'aus-bus' ? 'Bus Moth' : '',
+          rank,
+        })),
+        handScored: (slug, id) => (hand[slug] ?? []).includes(id),
+        derived: new Map(Object.entries(derived).map(([k, v]) => [k, new Set(v)])),
+        recordCounts: new Map([['aus-bus', 405]]),
+      })
+    );
+
+  test('lists a hand-scored place or month that no record supports, with what the records say', () => {
+    // Aus bus is scored for Washington and Idaho and for February and June; its
+    // records give Washington and June.
+    const out = build({ 'aus-bus': [0, 1, 2, 3] }, { 'aus-bus': [0, 3] });
+    assert.deepEqual(out, [
+      {
+        species: 'Aus bus', common_name: 'Bus Moth', question: 'In which State/Province was the moth found?',
+        old_key_answer: 'Idaho', records_on_site: '405', records_answer: 'Washington',
+        species_page: 'https://moths.pnwinsects.org/species/aus-bus/', keep: '',
+      },
+      {
+        species: 'Aus bus', common_name: 'Bus Moth', question: 'In which month was the moth found?',
+        old_key_answer: 'February', records_on_site: '405', records_answer: 'June',
+        species_page: 'https://moths.pnwinsects.org/species/aus-bus/', keep: '',
+      },
+    ]);
+  });
+
+  test('says "none" when the records answer nothing for the question, and counts 0 records', () => {
+    const out = build({ 'cus-dus': [2] }, {});
+    assert.equal(out.length, 1);
+    assert.equal(out[0]!.records_answer, 'none');
+    assert.equal(out[0]!.records_on_site, '0');
+  });
+
+  test('leaves out answers the records support, and every question the records never derive', () => {
+    // Column 4 (wing colour) is hand-scored but not a place or month: never listed.
+    assert.deepEqual(build({ 'aus-bus': [0, 4] }, { 'aus-bus': [0] }), []);
+  });
+
+  test('orders rows by checklist rank, then column', () => {
+    const out = build({ 'aus-bus': [2], 'cus-dus': [1] }, {}, ['cus-dus', 'aus-bus']);
+    assert.deepEqual(out.map(r => [r.species, r.old_key_answer]), [['Cus dus', 'Idaho'], ['Aus bus', 'February']]);
+  });
+});
+
 describe('buildKeyTemplate', () => {
   const labels = ['Cat:Q:Yes', 'Cat:Q:No'];
   const rows = (csv: string) => parse(csv, { columns: false }) as string[][];
@@ -343,9 +408,10 @@ function buildKeyMatrix(env: Record<string, string> = {}): KeyMatrix {
 }
 
 describe('main (integration)', () => {
-  test('emits key-matrix.json, key-coverage-report.json and key-template.csv', () => {
+  test('emits key-matrix.json, key-coverage-report.json, key-template.csv and key-unsupported-answers.csv', () => {
     withKeyBuild({}, outDir => {
       assert.ok(existsSync(join(outDir, 'key-template.csv')), 'key-template.csv must exist');
+      assert.ok(existsSync(join(outDir, 'key-unsupported-answers.csv')), 'key-unsupported-answers.csv must exist');
       assert.ok(existsSync(join(outDir, 'key-matrix.json')), 'key-matrix.json must exist');
       assert.ok(
         existsSync(join(outDir, 'key-coverage-report.json')),
@@ -378,11 +444,13 @@ describe('main (integration)', () => {
       matrix: readFileSync(join(outDir, 'key-matrix.json'), 'utf-8'),
       coverage: readFileSync(join(outDir, 'key-coverage-report.json'), 'utf-8'),
       template: readFileSync(join(outDir, 'key-template.csv'), 'utf-8'),
+      unsupported: readFileSync(join(outDir, 'key-unsupported-answers.csv'), 'utf-8'),
     }));
     const committed = {
       matrix: readFileSync(resolve(ROOT, 'data/key-matrix.json'), 'utf-8'),
       coverage: readFileSync(resolve(ROOT, 'data/key-coverage-report.json'), 'utf-8'),
       template: readFileSync(resolve(ROOT, 'data/key-template.csv'), 'utf-8'),
+      unsupported: readFileSync(resolve(ROOT, 'data/key-unsupported-answers.csv'), 'utf-8'),
     };
 
     // Report the first differing species rather than diffing two 150 KB strings,
@@ -413,6 +481,13 @@ describe('main (integration)', () => {
       committed.template,
       fresh.template,
       'data/key-template.csv is stale — run `npm run build:key` and commit the result',
+    );
+    // The curator marks this list (#397, C-045). A stale one asks him about answers
+    // a new record already supports, or misses ones a record change left unsupported.
+    assert.strictEqual(
+      committed.unsupported,
+      fresh.unsupported,
+      'data/key-unsupported-answers.csv is stale — run `npm run build:key` and commit the result',
     );
   });
 

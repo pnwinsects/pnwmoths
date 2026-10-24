@@ -171,6 +171,20 @@ const reports: CurationReport[] = [
     ],
   },
   {
+    id: 'key-unsupported-answers',
+    title: 'Identification key: old place and month answers no record backs up',
+    audience: 'curation',
+    question: 'Which states, ecoregions and months does the old key give a species that none of its records on the site supports, and which of them are right?',
+    body: 'A spreadsheet with one row per answer: the species, the question (state or province, ecoregion, or month), the old key\'s answer, how many records the species has on the site, the answers those records do give for the same question, and a link to the species page, whose map and flight chart show the records. For example, the old key says <em>Malacosoma disstria</em> flies in February, and its records give May to September and November. Today Identify still uses every one of these answers. You ruled that they go unless you mark them as right (#397), so open it in Excel, put <code>yes</code> in the <code>keep</code> column of each answer that is right, save as <strong>CSV UTF-8</strong>, and attach it to issue #397. Rows you leave blank will be dropped from the key. A missing place or month can also be fixed by adding a record, which then shows on the map too.',
+    regenerated: 'Every build (<code>npm run build:key</code>), from the committed key scores and the records, so an answer leaves the list as soon as a record backs it up.',
+    files: [fromRepo('data/key-unsupported-answers.csv')],
+    see: [
+      { label: 'Curation log C-045 — the ruling', url: 'docs/curation-log.md' },
+      { label: 'ADR 0055 — Distribution and Seasonality come from the records', url: 'docs/adr/0055-key-distribution-and-seasonality-from-records.md' },
+      { label: 'Issue #397', url: 'https://github.com/pnwinsects/pnwmoths/issues/397' },
+    ],
+  },
+  {
     id: 'key-scores',
     title: 'Identification key scores: what the key has been told by hand',
     audience: 'curation',
