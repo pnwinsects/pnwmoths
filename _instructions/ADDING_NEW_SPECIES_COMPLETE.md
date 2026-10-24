@@ -67,7 +67,7 @@ git add data/species.csv src/_data/speciesSlugs.json
 # If you added photos (the image files themselves live on the CDN, not here):
 git add data/images.csv data/image-derivatives.csv
 # If you added records (the identification key takes states, ecoregions and months from them):
-git add data/records.csv data/key-matrix.json
+git add data/records.csv data/key-matrix.json data/key-unsupported-answers.csv
 # If you created a description file:
 # git add src/content/species/{slug}.md
 git commit -m "Add species: Genus species (with photos and records)"

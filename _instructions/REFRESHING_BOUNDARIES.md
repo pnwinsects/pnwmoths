@@ -147,8 +147,8 @@ Refresh it only when EPA or the BC Data Catalogue publish a new version, or when
    npm run build:key
    ```
    The first command downloads the three sources into `.boundaries-scratch/ecoregions/` (skipped when they are already there; delete the folder to fetch new versions) and rewrites the file. It ends with `all 47 of the key's ecoregion answers are supplied`. It refuses to write a file that leaves an answer without a polygon, and lists the answers; a renamed ecoregion goes in `KEY_ECOREGION_BY_BOUNDARY_NAME` in `scripts/lib/key-derived-scores.ts`.
-2. `npm run build:key` places the records in the new boundaries. Expect small changes to `data/key-matrix.json`.
-3. Commit both files in one pull request, as in step 5 above:
+2. `npm run build:key` places the records in the new boundaries. Expect small changes to `data/key-matrix.json` and `data/key-unsupported-answers.csv`.
+3. Commit the three files in one pull request, as in step 5 above:
    ```bash
-   git add data/boundaries/pnw-ecoregions.geojson data/key-matrix.json
+   git add data/boundaries/pnw-ecoregions.geojson data/key-matrix.json data/key-unsupported-answers.csv
    ```

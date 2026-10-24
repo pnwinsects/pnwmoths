@@ -78,7 +78,8 @@ what made C-020 possible to reconstruct.
 **Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6352161503),
 the curator's own words, answering option 1 in
 [this comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6306060284) ·
-**Status** Pending (the list of 434 answers for him to mark, then the change to the key — #397) ·
+**Status** Pending (the list is on `/curation/` as `data/key-unsupported-answers.csv`, 433 answers
+by the time it was built, since one had gained a record; he marks it, then the key drops the rest — #397) ·
 **Refines** C-040
 
 > I'd like to go with 1b (keep only those that I decide are worth keeping). It does appear that some
