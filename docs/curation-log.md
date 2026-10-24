@@ -73,13 +73,81 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-045 · 2026-10-22 · The key drops the old place and month answers that no record supports, except those the curator marks as right
+
+**Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6352161503),
+the curator's own words, answering option 1 in
+[this comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6306060284) ·
+**Status** Pending (the list of 434 answers for him to mark, then the change to the key — #397) ·
+**Refines** C-040
+
+> I'd like to go with 1b (keep only those that I decide are worth keeping). It does appear that some
+> are indeed mistakes, based on the examples.
+
+Option 1b read: "**Drop them**, so the key says only what the records say. First we'd send you the
+list of all 434, and we'd keep any you mark as right."
+
+The 434 are answers in the old Lucid key, across 305 species, that give a state or province, an
+ecoregion or a month that none of the species' records on the site backs up. Since C-040 the key
+takes these answers from the records and adds the old key's answers to them, so all 434 still count
+in Identify. For example, *Malacosoma disstria* is scored as flying in February, and none of its 405
+records is from February.
+
+Why it matters: this reverses how the key was built under C-040. There, the maintainer chose to let
+the records only add answers, so that derived data never removes a value someone entered
+([ADR 0055](adr/0055-key-distribution-and-seasonality-from-records.md), decision 1). The curator
+now rules that an old answer without a record behind it goes unless he keeps it. Applying this needs
+a new ADR superseding that decision. Until the list is marked, nothing changes, and all 434 still
+count.
+
+**What changed** — nothing yet.
+
+---
+
+## C-044 · 2026-10-22 · Three records just over the southern border move to the place on their label
+
+**Source** [#367 comment](https://github.com/pnwinsects/pnwmoths/issues/367#issuecomment-6352424282),
+the curator's own words, answering
+[this comment](https://github.com/pnwinsects/pnwmoths/issues/367#issuecomment-6050206363) ·
+**Status** Applied · **Refines** C-037
+
+> 1: a
+> 2: change coordinates as follows:
+> Alypia langtoni, Goose L., Lake Co OR: 42.0001, -120.3195
+> Apantesis ornata, McDermitt Cr, Malheur Co OR: 42.0056, -118.0517
+> Hemileuca hera, Shoshone Cr, Twin Falls Co, ID: 42.2187, -114.3841
+
+**1: a** confirms the reading C-037 took on the "Merill, 4mS" records (94308–94310): the label is
+right, so they stay at 41.967° N in Siskiyou County, California. Nothing changes for them.
+
+**2.** C-037 left three records with their labelled state and county although their coordinates fell
+a few kilometres over the border, and asked him whether to keep them as labelled. He gave new
+coordinates instead, each inside the county on the label:
+
+| Record | Species | Label | Was | Now | District |
+| --- | --- | --- | --- | --- | --- |
+| 94147 | *Hemileuca hera* | Shoshone Cr., Twin Falls Co., ID | 41.944, -114.686 (Nevada) | 42.2187, -114.3841 | US:16083 (Twin Falls) |
+| 94311 | *Alypia langtoni* | Goose L., Lake Co., OR | 41.947, -120.419 (Modoc Co., CA) | 42.0001, -120.3195 | US:41037 (Lake) |
+| 94312 | *Apantesis ornata* | McDermitt Cr., Malheur Co., OR | 41.967, -117.743 (Nevada) | 42.0056, -118.0517 | US:41045 (Malheur) |
+
+Why it matters: the label and the coordinates now agree, so each record's state, county and point on
+the map say the same thing. Before, all three had no district, because the boundary file has no
+California or Nevada counties.
+
+**What changed** — 3 rows in `data/records.csv` (latitude, longitude, and the `district_id` that
+`scripts/fill-district-from-coords.ts` filled from the new coordinates);
+`data/records-derived-district.csv` and `data/coord-fill-report.csv` regenerated.
+
+---
+
 ## C-043 · 2026-10-21 · All three *Perizoma* go in Euphyiini, so the genus sits in one tribe
 
 **Source** [PR #432](https://github.com/pnwinsects/pnwmoths/pull/432), the maintainer's (Peter
 Abrahamsen's) ruling, not the curator's; reported to the curator in a
 [#413 comment](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6321189396) and
 [its correction](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6321734355) ·
-**Status** Applied (in `data/species.csv`); On hold (the curator's confirmation — #413) ·
+**Status** Applied; confirmed by the curator on 2026-10-22, "Let's keep all three in Euphyiini for
+now" ([#413 comment](https://github.com/pnwinsects/pnwmoths/issues/413#issuecomment-6352074259)) ·
 **Refines** C-042
 
 C-042 adds MPG's *"Perizoma" (Group 1) custodiata* under the plain genus name, beside our two
@@ -218,7 +286,7 @@ or photographs were created.
 ## C-040 · 2026-10-16 · The key's Distribution and Seasonality scores will come from occurrence records as they stand, with a warning about sparse data
 
 **Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6222767374),
-the curator's own words · **Status** Applied (records derive the answers, the notice, the template without these columns — [ADR 0055](adr/0055-key-distribution-and-seasonality-from-records.md)); Pending (the records only add to the hand-entered scores, so 434 hand-scored cells that no record supports still count; whether to drop them — #397) · **Refines** C-038
+the curator's own words · **Status** Applied (records derive the answers, the notice, the template without these columns — [ADR 0055](adr/0055-key-distribution-and-seasonality-from-records.md)); Pending (the records only add to the hand-entered scores, so 434 hand-scored cells that no record supports still count; C-045 rules that they go, except those the curator keeps — #397) · **Refines** C-038 · **Refined by** C-045
 
 > I think it would make the most sense to have the key use the sparse data as is, provided we add an
 > alert to users in the phenology and distribution sections of the key saying that these characters
@@ -336,7 +404,7 @@ scores), *L. vicina* (above), and four species we hold no account for.
 ## C-037 · 2026-10-07 · The site maps all of Montana, and a degree of latitude past the region to the south and north
 
 **Source** [#367 comment](https://github.com/pnwinsects/pnwmoths/issues/367#issuecomment-6048361978),
-the curator's own words · **Status** Applied · **Refines** C-035
+the curator's own words · **Status** Applied · **Refines** C-035 · **Refined by** C-044
 
 > 1: yes
 > rationale: since these would be the only MT records for quite a few species, it's worth keeping them
