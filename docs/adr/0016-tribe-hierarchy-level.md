@@ -1,6 +1,6 @@
 # 0016. Tribe as a conditional level in the taxonomy hierarchy
 
-**Status:** Accepted
+**Status:** Accepted · Refined by [0056](0056-one-placement-per-genus.md)
 
 ## Context
 

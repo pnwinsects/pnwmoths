@@ -258,6 +258,35 @@ export async function main(): Promise<void> {
       `
     },
     {
+      // Family, subfamily and tribe belong to the genus, but each species row
+      // carries its own copy. The browse tree and the checklist file a genus
+      // under every distinct placement its species carry, so a disagreement
+      // shows the genus twice, each entry holding part of it (#433). A blank
+      // cell counts as a value. Genera are grouped by the slug taxon.ts uses.
+      description:
+        'species of one genus with different family, subfamily or tribe in data/species.csv ' +
+        '(a genus sits in one place in Browse, so every species of the genus needs the same three values)',
+      query: `
+        WITH placements AS (
+          SELECT genus, lower(replace(genus, ' ', '-')) AS genus_slug, 'family' AS rank, family AS value, species FROM species
+          UNION ALL
+          SELECT genus, lower(replace(genus, ' ', '-')), 'subfamily', subfamily, species FROM species
+          UNION ALL
+          SELECT genus, lower(replace(genus, ' ', '-')), 'tribe', tribe, species FROM species
+        ),
+        split AS (
+          SELECT genus_slug, rank FROM placements
+          GROUP BY genus_slug, rank
+          HAVING count(DISTINCT coalesce(value, '')) > 1
+        )
+        SELECT min(p.genus) AS genus, p.rank, coalesce(p.value, '(blank)') AS value,
+               string_agg(p.species, ', ' ORDER BY p.species) AS species
+        FROM placements p JOIN split USING (genus_slug, rank)
+        GROUP BY p.genus_slug, p.rank, p.value
+        ORDER BY p.genus_slug, p.rank, value
+      `
+    },
+    {
       description: 'NULL required fields',
       query: `
         SELECT species_slug, latitude, longitude FROM records_checked

@@ -890,15 +890,24 @@ test('real data/images.csv: clostera-brucei A/B specimens are reassigned to clos
 
 /**
  * Run build-data.ts's main() in a scratch copy of the data directory whose
- * records.csv holds exactly `recordLines`. Returns the exit status, stderr, and
- * the scratch directory (caller removes it).
+ * records.csv holds exactly `recordLines`, and whose species.csv is the real one
+ * plus `extraSpeciesLines`. Returns the exit status, stderr, and the scratch
+ * directory (caller removes it).
  */
-function runBuildDataWith(name: string, recordLines: string[]): { ok: boolean; output: string; tmpDir: string } {
+function runBuildDataWith(
+  name: string,
+  recordLines: string[],
+  extraSpeciesLines: string[] = [],
+): { ok: boolean; output: string; tmpDir: string } {
   const tmpDir = resolve(ROOT, `.tmp-${name}`);
   const tmpDataDir = resolve(tmpDir, 'data');
   mkdirSync(tmpDataDir, { recursive: true });
   for (const f of ['species.csv', 'images.csv', 'glossary.csv', 'records-inat.csv']) {
     copyFileSync(resolve(ROOT, 'data', f), resolve(tmpDataDir, f));
+  }
+  if (extraSpeciesLines.length > 0) {
+    const species = readFileSync(resolve(tmpDataDir, 'species.csv'), 'utf-8').trimEnd();
+    writeFileSync(resolve(tmpDataDir, 'species.csv'), [species, ...extraSpeciesLines, ''].join('\n'));
   }
   writeFileSync(resolve(tmpDataDir, 'records.csv'), [RECORDS_CSV_COLUMNS.join(','), ...recordLines, ''].join('\n'));
   const wrapper = resolve(tmpDir, 'run.mjs');
@@ -961,6 +970,54 @@ test('integration: a swapped latitude and longitude still fails — it is a typo
   try {
     assert.ok(!ok, 'build-data.ts should fail on swapped coordinates');
     assert.match(output, /implausible coordinates/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+// --- A genus has one family, subfamily and tribe (#433) ---
+
+const ONE_RECORD = ['acronicta-americana,specimen,46.5,-112.0,MT,Lewis and Clark,Helena,,1990,7,1,Test,Test,,,1'];
+
+test('integration: a species whose tribe differs from the rest of its genus fails the build', () => {
+  // The real Perizoma rows are in Euphyiini (C-043). A fourth with no tribe
+  // would show Perizoma twice in Browse; a blank cell is a value, not a wildcard.
+  const { ok, output, tmpDir } = runBuildDataWith('genus-split-tribe', ONE_RECORD, [
+    '9001,Perizoma,testata,,,,Geometridae,,Larentiinae,,',
+  ]);
+  try {
+    assert.ok(!ok, 'build-data.ts should fail when a genus is split across tribes');
+    assert.match(output, /different family, subfamily or tribe/);
+    // The message names the genus, each value and the species holding it.
+    assert.match(output, /Perizoma/);
+    assert.match(output, /\(blank\)/);
+    assert.match(output, /testata/);
+    assert.match(output, /costiguttata, curvilinea, custodiata/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('integration: a species whose subfamily or family differs from its genus fails the build', () => {
+  const { ok, output, tmpDir } = runBuildDataWith('genus-split-subfamily', ONE_RECORD, [
+    '9002,Perizoma,testata,,,,Geometridae,,Sterrhinae,,Euphyiini',
+    '9003,Perizoma,probata,,,,Noctuidae,,Larentiinae,,Euphyiini',
+  ]);
+  try {
+    assert.ok(!ok, 'build-data.ts should fail when a genus is split across subfamilies or families');
+    assert.match(output, /Sterrhinae/);
+    assert.match(output, /Noctuidae/);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('integration: a new species that copies its genus placement passes', () => {
+  const { ok, output, tmpDir } = runBuildDataWith('genus-consistent', ONE_RECORD, [
+    '9004,Perizoma,testata,,,,Geometridae,,Larentiinae,,Euphyiini',
+  ]);
+  try {
+    assert.ok(ok, `build-data.ts should pass when the new row matches its genus, got: ${output}`);
   } finally {
     rmSync(tmpDir, { recursive: true, force: true });
   }
