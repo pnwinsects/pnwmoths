@@ -15,6 +15,7 @@ import { parseCharacterLabel } from '../build-key.ts';
 import { isRearedRecord } from '../../src/_lib/reared-records.ts';
 import { createAllRecordsTable } from './records-source.ts';
 import { FALLBACK_DEGREE_THRESHOLD } from './district-assignment.ts';
+import { loadSpatial } from './duckdb-spatial.ts';
 
 /** Ecoregion boundaries, built by scripts/build-ecoregions.ts. */
 export const ECOREGIONS_PATH = 'data/boundaries/pnw-ecoregions.geojson';
@@ -206,8 +207,7 @@ export async function readDerivableRecords(
   if (ecoregionsPath.includes("'")) {
     throw new Error(`Refusing to build SQL for a path containing a quote: ${ecoregionsPath}`);
   }
-  await conn.run('INSTALL spatial;');
-  await conn.run('LOAD spatial;');
+  await loadSpatial(conn);
   await createAllRecordsTable(conn, 'key_records');
   await conn.run(`
     CREATE TABLE key_ecoregions AS

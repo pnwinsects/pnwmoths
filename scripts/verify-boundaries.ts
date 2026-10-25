@@ -16,6 +16,7 @@ import { DuckDBInstance } from '@duckdb/node-api';
 import { statSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { loadSpatial } from './lib/duckdb-spatial.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const GEOJSON_PATH = resolve(ROOT, 'data/boundaries/pnw-districts.geojson');
@@ -47,12 +48,7 @@ export async function main(): Promise<void> {
 
   const instance = await DuckDBInstance.create(':memory:');
   const conn = await instance.connect();
-  // Custom extension repository workaround for a documented HTTP-302
-  // redirect gotcha installing `spatial` from the default repo (RESEARCH.md
-  // Pattern 2 / STACK.md).
-  await conn.run("SET custom_extension_repository='https://extensions.duckdb.org';");
-  await conn.run('INSTALL spatial;');
-  await conn.run('LOAD spatial;');
+  await loadSpatial(conn);
   await conn.run(`CREATE TABLE districts AS SELECT * FROM ST_Read('${GEOJSON_PATH}');`);
 
   const failures: string[] = [];

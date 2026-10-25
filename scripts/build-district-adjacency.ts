@@ -12,9 +12,9 @@
 // computation is a pure function of geometry, independent of
 // data/records.csv.
 //
-// Reuses the DuckDB spatial-extension load idiom verbatim from
-// scripts/verify-boundaries.ts (custom_extension_repository workaround,
-// INSTALL/LOAD spatial, CREATE TABLE districts AS SELECT FROM ST_Read), the
+// Reuses the spatial-extension load (scripts/lib/duckdb-spatial.ts) and the
+// CREATE TABLE districts AS SELECT FROM ST_Read idiom of
+// scripts/verify-boundaries.ts, the
 // fail-loud-on-empty zero-row guard from scripts/fill-district-from-coords.ts,
 // and the shared FALLBACK_DEGREE_THRESHOLD constant from
 // scripts/lib/district-assignment.ts (the same ~2 km tolerance already tuned
@@ -32,6 +32,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { stringify } from 'csv-stringify/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
 import { FALLBACK_DEGREE_THRESHOLD } from './lib/district-assignment.ts';
+import { loadSpatial } from './lib/duckdb-spatial.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -57,12 +58,7 @@ export async function computeAdjacency(geojsonPath: string): Promise<AdjacencyPa
   const instance = await DuckDBInstance.create(':memory:');
   const conn = await instance.connect();
   try {
-    // Custom extension repository workaround for a documented HTTP-302
-    // redirect gotcha installing `spatial` from the default repo — copied
-    // verbatim from scripts/verify-boundaries.ts (load-bearing).
-    await conn.run("SET custom_extension_repository='https://extensions.duckdb.org';");
-    await conn.run('INSTALL spatial;');
-    await conn.run('LOAD spatial;');
+    await loadSpatial(conn);
     await conn.run(`CREATE TABLE districts AS SELECT * FROM ST_Read('${geojsonPath}');`);
 
     const countResult = await conn.run('SELECT COUNT(*) AS n FROM districts;');

@@ -99,6 +99,17 @@ cost a debugging cycle to discover.
 - **Export Parquet with Snappy, not ZSTD.** hyparquet (the client-side reader) needs
   `COMPRESSION snappy`; ZSTD-compressed files won't load in the browser.
 
+- **Load the spatial extension with `loadSpatial()` (`scripts/lib/duckdb-spatial.ts`), never your own `INSTALL`.**
+  DuckDB 2.0 refuses to `INSTALL` an extension that is already installed from a different
+  repository, and the scripts used to mix the default (http) repository with
+  `https://extensions.duckdb.org`. On a laptop with no extension cached, whichever ran first
+  broke the rest: `npm test` failed 16 tests. CI hid it, because it fetches extensions with
+  curl, which records no origin. Installing from an `https://` address is no way out: it needs
+  httpfs first, which DuckDB cannot fetch over https without httpfs. `loadSpatial()` loads an
+  installed copy from wherever it came, and installs from the default repository only when
+  there is none. When you upgrade DuckDB, test with `~/.duckdb/extensions/<version>/` emptied,
+  not only with CI's cache.
+
 - **Wrap `ST_DWithin` / `ST_Distance` operands in `ST_Boundary()`.** In this spatial
   build, raw Polygon-Polygon distance silently returns 0/true regardless of separation.
   Wrapping to the boundary linestring gives correct results. (`ST_Touches`, `ST_Contains`
