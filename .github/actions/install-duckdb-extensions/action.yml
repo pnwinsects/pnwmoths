@@ -5,7 +5,7 @@ description: >-
   "Failed to install remote extension 'httpfs'": DuckDB's own installer trips on
   the extensions.duckdb.org http->https 302 during the httpfs bootstrap, whereas
   curl -L follows it. Once the files are in ~/.duckdb/extensions/<ver>/linux_amd64/,
-  the scripts' `INSTALL spatial; LOAD spatial;` short-circuit and skip the network.
+  the scripts' loadSpatial() (scripts/lib/duckdb-spatial.ts) loads them without the network.
   MUST run after `npm ci` (needs @duckdb/node-api to resolve the engine version).
 
 runs:

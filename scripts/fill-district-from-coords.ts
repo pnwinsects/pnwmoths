@@ -35,6 +35,7 @@ import { stringify } from 'csv-stringify/sync';
 import { DuckDBInstance } from '@duckdb/node-api';
 import { classifyCoordinate, parseCoordinate, FALLBACK_DEGREE_THRESHOLD, KM_PER_DEGREE_LAT } from './lib/district-assignment.ts';
 import { RECORDS_CSV_COLUMNS } from './lib/records-source.ts';
+import { loadSpatial } from './lib/duckdb-spatial.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -210,12 +211,7 @@ export async function resolveByCoordinates(
   // connection would leak once per call — harmless for this one-shot CLI but
   // not for a repeated caller.
   try {
-    // Custom extension repository workaround for a documented HTTP-302
-    // redirect gotcha installing `spatial` from the default repo — copied
-    // verbatim from scripts/verify-boundaries.ts (load-bearing).
-    await conn.run("SET custom_extension_repository='https://extensions.duckdb.org';");
-    await conn.run('INSTALL spatial;');
-    await conn.run('LOAD spatial;');
+    await loadSpatial(conn);
     await conn.run(`CREATE TABLE districts AS SELECT * FROM ST_Read('${geojsonPath}');`);
 
     const countResult = await conn.run('SELECT COUNT(*) AS n FROM districts;');
