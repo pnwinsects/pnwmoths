@@ -492,11 +492,6 @@ export const CHECKS: Check[] = [
         );
       }
 
-      const before = parseResultCount((await count.innerText()).trim());
-      if (before === null || before === 0) {
-        fail(`Identify opened with an unusable species count: ${JSON.stringify(await count.innerText())}`);
-      }
-
       // Tie the opening count to the matrix the server actually served.
       //
       // Without this the check passes with key-matrix.json DELETED, which was
@@ -518,14 +513,33 @@ export const CHECKS: Check[] = [
       if (typeof expectedTotal !== 'number') {
         fail(`key-matrix.json has no numeric meta.matchedSpecies to check the page against.`);
       }
-      if (before !== expectedTotal) {
+
+      // WAIT for the loaded count rather than reading the line once. The fallback
+      // is on screen until the matrix arrives, and reading it the moment the line
+      // became visible failed on a machine where the page drew ~500 ms before the
+      // fetch resolved, with nothing wrong. A fetch that never resolves leaves the
+      // fallback in place, so this still fails, after TIMEOUT_MS.
+      try {
+        await page.waitForFunction(
+          ([el, total]: [HasTextContent, number]) => {
+            const match = /([\d,]+)\s+species/.exec(el.textContent ?? '');
+            return match !== null && Number(match[1]!.replace(/,/g, '')) === total;
+          },
+          [await count.elementHandle(), expectedTotal] as const,
+        );
+      } catch {
+        const shown = parseResultCount((await count.innerText()).trim());
+        if (shown === null || shown === 0) {
+          fail(`Identify opened with an unusable species count: ${JSON.stringify(await count.innerText())}`);
+        }
         fail(
-          `Identify opened showing ${before} species but key-matrix.json declares\n` +
+          `Identify still shows ${shown} species after ${TIMEOUT_MS} ms, but key-matrix.json declares\n` +
             `      ${expectedTotal}. The page is rendering its hard-coded fallback. Either the matrix\n` +
             `      fetch failed or its schema was rejected (both only console.error), or the component\n` +
             `      is frozen and never re-rendered with the data it did receive.`,
         );
       }
+      const before = expectedTotal;
 
       // Walk down the disclosure chain — category, then question — because the
       // checkboxes live inside `hidden` containers until both are open. Each
