@@ -79,7 +79,7 @@
     "chart.js": "^4.5.1",
     "csv-parse": "^7.0.3",
     "csv-stringify": "^6.9.0",
-    "hyparquet": "^1.31.3",
+    "hyparquet": "^1.31.5",
     "leaflet": "^1.9.4",
     "lit": "^3.3.3",
     "node-html-parser": "^9.0.4",
