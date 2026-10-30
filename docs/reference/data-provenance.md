@@ -89,13 +89,21 @@ The original site's CMS data is preserved in a local Docker container running
 `mysql:5.6`. This is where the original species records and curated external
 links live, and it is the origin of much of the migrated `data/*.csv`.
 
+The same offline tooling also preserves the sibling PNW Butterflies and PNW
+Sawflies catalogues from separately retained MySQL 5.6 dumps. Their database
+names are `pnwbutterflies` and `pnwsawflies`; they are reference copies only and
+are not inputs to this repository's moth build. All three dumps remain private
+because they contain legacy account hashes and unpublished catalogue data.
+
 The database is **not a long-lived container** — it exists only while a Compose
-stack from the `pnwinsects/pnwinsects-app` checkout (branch `docker-local-dev`)
+stack from the `pnwinsects/pnwinsects-app` checkout (branch `master`)
 is up, and **Compose names it after the directory it was started in**. From the
 checkout itself that is `pnwinsects-app-db-1`; from the curator's unpacked
 bundle folder it is `pnwmoths-local-site-db-1`. Check with `docker ps` rather
-than assuming either name. It is the same stack the curator's offline copy of
-the legacy site runs on
+than assuming either name; the sibling bundles similarly use directory-derived
+names such as `pnwbutterflies-local-site-db-1` and
+`pnwsawflies-local-site-db-1`. It is the same stack the curator's offline copies
+of the legacy sites run on
 ([ADR 0052](../adr/0052-legacy-site-local-docker.md),
 [`_instructions/RUNNING_THE_LEGACY_SITE.md`](../../_instructions/RUNNING_THE_LEGACY_SITE.md)),
 and either way it exposes port 3307 on the host.
@@ -115,14 +123,18 @@ mysql client or driver in the project, so all access goes through `docker exec`.
 Bring it up and query it, from the `pnwinsects-app` checkout:
 
 ```sh
-docker compose up -d db
-docker exec -i pnwinsects-app-db-1 mysql -upnwmoths -ppnwmoths pnwmoths
+docker compose --env-file bundle.env up -d db
+set -a; . ./bundle.env; set +a
+docker exec -i -e MYSQL_PWD="$DB_PASSWORD" pnwinsects-app-db-1 \
+  mysql -u "$DB_USER" "$DB_NAME"
 ```
 
-Database, user, and password are all `pnwmoths`. The scripts that read it use
-`mysql --batch` (tab-separated) and decode the escaping in code. From the
-curator's bundle the container is `pnwmoths-local-site-db-1`; point the scripts at
-it with `MYSQL_CONTAINER=pnwmoths-local-site-db-1`.
+The actual credentials live only in the private, gitignored `bundle.env`; do not
+copy them into documentation, shell scripts, or either source repository. The
+scripts that read the database use `mysql --batch` (tab-separated) and decode
+the escaping in code. From the curator's bundle the container is
+`pnwmoths-local-site-db-1`; point the scripts at it with
+`MYSQL_CONTAINER=pnwmoths-local-site-db-1`.
 
 Scripts that consume this container (each writes a committed CSV; re-run only
 when the reference data changes):
