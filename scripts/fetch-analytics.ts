@@ -29,6 +29,7 @@ import {
   REDIRECT_FROM_PARAM,
 } from '../src/_lib/legacy-redirects.ts';
 import { isLegacyMappingCandidate, isNoise404 } from '../src/_lib/request-noise.ts';
+import { CANONICAL_ORIGIN, LEGACY_HOSTNAMES } from './check-legacy-hostnames.ts';
 
 // ---------------------------------------------------------------------------
 // Constants & env
@@ -102,6 +103,21 @@ export interface RedirectMiss {
   referrer: string | null;
 }
 
+export interface LegacyReferralSource {
+  domain: string;
+  count: number;
+  paths: Array<{ path: string; count: number }>;
+}
+
+export interface LegacyReferrals {
+  total_requests: number;
+  external_requests: number;
+  unknown_referrer_requests: number;
+  internal_referrer_requests: number;
+  excluded_requests: number;
+  sources: LegacyReferralSource[];
+}
+
 export interface DailyAnalytics {
   schema_version: number;
   date: string;
@@ -132,6 +148,8 @@ export interface DailyAnalytics {
   not_found: Array<{ path: string; count: number }>;
   /** 404s excluded from `not_found` as vulnerability scanning. */
   not_found_probes: number;
+  /** Initial retired-moth-host 301s, not downstream redirect-page requests. */
+  legacy_referrals: LegacyReferrals;
 }
 
 // ---------------------------------------------------------------------------
@@ -178,8 +196,11 @@ export function resolveDate(override?: string): string {
  */
 export function isPageview(entry: LogEntry): boolean {
   if (entry.statusCode < 200 || entry.statusCode >= 300) return false;
+  return isPagePath(entry.path);
+}
 
-  const path = stripQueryString(entry.path);
+function isPagePath(requestPath: string): boolean {
+  const path = stripQueryString(requestPath);
 
   // Check extension — if it has a recognized asset extension, skip it.
   const dotIndex = path.lastIndexOf('.');
@@ -373,6 +394,72 @@ const TOP_COUNTRIES = 50;
 const TOP_REDIRECT_MISSES = 50;
 const TOP_NOT_FOUND = 50;
 
+function normalizeHostname(host: string): string {
+  return host.toLowerCase().replace(/:\d+$/, '').replace(/\.$/, '').replace(/^www\./, '');
+}
+
+const LEGACY_MOTH_HOSTS = new Set(
+  LEGACY_HOSTNAMES.filter((host) => host.preservesPath).map((host) => host.hostname),
+);
+const INTERNAL_REFERRAL_HOSTS = new Set([
+  new URL(CANONICAL_ORIGIN).hostname,
+  'pnwmoths.b-cdn.net',
+  'pnwinsects.org',
+  ...LEGACY_HOSTNAMES.map((host) => host.hostname),
+]);
+
+/** Recognized automation only; an unrecognized or missing agent is not proof of a person. */
+const AUTOMATED_AGENT = /bot\b|crawler|spider|slurp|bingpreview|googleother|google-inspectiontool|facebookexternalhit|headlesschrome|curl\/|wget\/|python-requests|python-urllib|go-http-client|pnwmoths-legacy-hostname-check/i;
+const DOWNLOAD_PATH = /\.(pdf|zip|gz|csv|xlsx?|docx?|pptx?|jpe|tiff?|bmp|mp[34]|webm|wav|ogg)\/?$/i;
+
+export function aggregateLegacyReferrals(entries: LogEntry[]): LegacyReferrals {
+  const result: LegacyReferrals = {
+    total_requests: 0,
+    external_requests: 0,
+    unknown_referrer_requests: 0,
+    internal_referrer_requests: 0,
+    excluded_requests: 0,
+    sources: [],
+  };
+  const sources = new Map<string, { count: number; paths: Map<string, number> }>();
+
+  for (const entry of entries) {
+    if (entry.statusCode !== 301 || !LEGACY_MOTH_HOSTS.has(normalizeHostname(entry.host))) continue;
+    result.total_requests++;
+    const path = stripQueryString(entry.path);
+    if (!isPagePath(path) || !isLegacyMappingCandidate(path) || DOWNLOAD_PATH.test(path)
+      || AUTOMATED_AGENT.test(entry.userAgent ?? '')) {
+      result.excluded_requests++;
+      continue;
+    }
+
+    const referrer = entry.referer && URL.canParse(entry.referer) ? new URL(entry.referer) : null;
+    if (!referrer || !['http:', 'https:'].includes(referrer.protocol) || !referrer.hostname) {
+      result.unknown_referrer_requests++;
+      continue;
+    }
+    const domain = normalizeHostname(referrer.hostname);
+    if (INTERNAL_REFERRAL_HOSTS.has(domain)) {
+      result.internal_referrer_requests++;
+      continue;
+    }
+
+    result.external_requests++;
+    const source = sources.get(domain) ?? { count: 0, paths: new Map<string, number>() };
+    source.count++;
+    source.paths.set(path, (source.paths.get(path) ?? 0) + 1);
+    sources.set(domain, source);
+  }
+
+  const byCount = <T extends { count: number }>(a: T, b: T): number => b.count - a.count;
+  result.sources = [...sources].map(([domain, source]) => ({
+    domain,
+    count: source.count,
+    paths: [...source.paths].map(([path, count]) => ({ path, count })).sort(byCount),
+  })).sort(byCount);
+  return result;
+}
+
 export function aggregate(
   entries: LogEntry[],
   date: string,
@@ -491,7 +578,7 @@ export function aggregate(
       .slice(0, limit);
 
   return {
-    schema_version: 4,
+    schema_version: 5,
     date,
     generated_at: new Date().toISOString(),
     source_window: { from: `${date}T00:00:00Z`, to: `${date}T23:59:59.999Z` },
@@ -520,6 +607,7 @@ export function aggregate(
     })),
     not_found: sortedTop(notFoundCounts, TOP_NOT_FOUND).map(([path, count]) => ({ path: path as string, count })),
     not_found_probes: notFoundProbes,
+    legacy_referrals: aggregateLegacyReferrals(entries),
   };
 }
 

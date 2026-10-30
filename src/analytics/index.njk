@@ -19,10 +19,64 @@ All-time totals: <strong>{{ analytics.cumulative.total_pageviews | number }}</st
 Use the time filter below to view stats for a specific year.</p>
 
 <script type="application/json" id="analytics-data" data-pagefind-ignore>
-  {{ analytics | tojson | safe }}
+  {{ analytics | tojson | replace("<", "\\u003c") | safe }}
 </script>
 
 <pnwm-analytics-dashboard></pnwm-analytics-dashboard>
+
+{% set referrals = analytics.rolling30.legacy_referrals %}
+<section id="legacy-referral-sources" aria-labelledby="legacy-referral-heading" data-pagefind-ignore>
+  <h2 id="legacy-referral-heading">Sites Linking to Retired WWU URLs (Last 30 Days)</h2>
+  <p>External sites sending page requests to the retired PNW Moths hostnames.
+    This report uses the initial 301 request, not subsequent requests to the new site,
+    and is independent of the year filter above.</p>
+  {% if referrals.days_collected === 0 %}
+  <p>Not collected yet. This report starts with the next nightly analytics collection;
+    historical files do not contain this information.</p>
+  {% else %}
+  <p>Reporting window: <strong>{{ referrals.window_start }}</strong> to <strong>{{ referrals.window_end }}</strong> (UTC).
+    Collection available for <strong>{{ referrals.days_collected }} of 30 days</strong>,
+    from {{ referrals.first_date }} to {{ referrals.last_date }}.
+    {% if referrals.days_collected < 30 %}Partial coverage: uncollected days are not counted as zero traffic.{% endif %}</p>
+  <p>{{ referrals.total_requests | number }} initial legacy-host requests:
+    <strong>{{ referrals.external_requests | number }} externally referred</strong>,
+    {{ referrals.unknown_referrer_requests | number }} with no usable referrer,
+    {{ referrals.internal_referrer_requests | number }} with an internal referrer, and
+    {{ referrals.excluded_requests | number }} excluded as assets/downloads, browser defaults,
+    scanner probes, or recognized automation.</p>
+  {% if referrals.sources.length > 0 %}
+  <p>Top 25 referring domains, ranked by requests; expand a row for up to five most-requested old paths.
+    Counts combine HTTP and HTTPS and the leading <code>www.</code> alias.</p>
+  <table>
+    <thead><tr><th scope="col">Referring domain</th><th scope="col">Old paths requested</th><th scope="col">Requests</th></tr></thead>
+    <tbody>
+      {% for source in referrals.sources %}
+      <tr>
+        <td>{{ source.domain | escape }}</td>
+        <td>
+          <details>
+            <summary>Top old paths</summary>
+            <ul>
+              {% for item in source.paths %}
+              <li><code>{{ item.path | escape }}</code> ({{ item.count | number }} requests)</li>
+              {% endfor %}
+            </ul>
+          </details>
+        </td>
+        <td>{{ source.count | number }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No externally referred legacy page requests were recorded on the collected days.</p>
+  {% endif %}
+  {% endif %}
+  <p>These are outreach leads, not verified people or unique visits. Referrers can be absent or forged;
+    bot filtering is heuristic. Bookmarks, privacy settings, apps, HTTPS-to-HTTP links, and cached
+    redirects can hide sources or visits. Only referring domains and old paths are retained;
+    query strings and referring-page URLs are not.</p>
+</section>
 
 <noscript>
   <h2>Top Pages (Last 30 Days)</h2>

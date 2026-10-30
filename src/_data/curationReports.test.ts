@@ -46,6 +46,17 @@ test('both sections are non-empty, so neither heading introduces nothing', () =>
   assert.ok(groups.engineering.length > 0);
 });
 
+test('the legacy referral report is discoverable without copying a second report file', () => {
+  const report = groupByAudience().engineering.find((item) => item.id === 'legacy-referral-sources');
+  assert.ok(report);
+  assert.deepEqual(report.files, [{
+    source: null,
+    href: '/analytics/#legacy-referral-sources',
+    label: 'Sites linking to retired WWU URLs',
+  }]);
+  assert.ok(!copyPlan().some((item) => item.dest.includes('analytics')));
+});
+
 test('every copied report is one the page will actually render', () => {
   const rendered = new Set(groupByAudience().all.flatMap((r) => r.files).map((f) => f.href));
   for (const { dest } of copyPlan()) {

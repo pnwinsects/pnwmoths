@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { HyperLogLog } from '../../scripts/lib/hyperloglog.ts';
 import { isLegacyMappingCandidate, isNoise404 } from '../_lib/request-noise.ts';
+import type { LegacyReferrals } from '../../scripts/fetch-analytics.ts';
 import * as z from 'zod/mini';
 
 const ANALYTICS_DIR = resolve('data/analytics');
@@ -56,6 +57,14 @@ interface DaySummary {
   not_found_probes: number;
 }
 
+export interface LegacyReferralReport extends LegacyReferrals {
+  window_start: string;
+  window_end: string;
+  first_date: string;
+  last_date: string;
+  days_collected: number;
+}
+
 export interface AnalyticsData {
   days: DaySummary[];
   cumulative: {
@@ -84,6 +93,7 @@ export interface AnalyticsData {
     top_not_found: DayEntry[];
     /** 404s excluded from `top_not_found` as vulnerability scanning (#181). */
     not_found_probes: number;
+    legacy_referrals: LegacyReferralReport;
   };
 }
 
@@ -182,9 +192,69 @@ export const RawDaySchema = z.object({
   ),
   not_found: z.optional(z.array(DayEntrySchema)),
   not_found_probes: z.optional(z.number()),
+  legacy_referrals: z.optional(z.object({
+    total_requests: z.number(),
+    external_requests: z.number(),
+    unknown_referrer_requests: z.number(),
+    internal_referrer_requests: z.number(),
+    excluded_requests: z.number(),
+    sources: z.array(z.object({
+      domain: z.string(),
+      count: z.number(),
+      paths: z.array(DayEntrySchema),
+    })),
+  })),
 });
 
 export type RawDay = z.infer<typeof RawDaySchema>;
+
+/** Merge before ranking; older files are unmeasured, not zero-referral days. */
+function legacyReferralReport(rawDays: RawDay[]): LegacyReferralReport {
+  const end = rawDays[0]?.date ?? '';
+  const start = end ? new Date(`${end}T00:00:00Z`) : null;
+  if (start) start.setUTCDate(start.getUTCDate() - 29);
+  const result: LegacyReferralReport = {
+    window_start: start?.toISOString().slice(0, 10) ?? '',
+    window_end: end,
+    first_date: '',
+    last_date: '',
+    days_collected: 0,
+    total_requests: 0,
+    external_requests: 0,
+    unknown_referrer_requests: 0,
+    internal_referrer_requests: 0,
+    excluded_requests: 0,
+    sources: [],
+  };
+  const sources = new Map<string, { count: number; paths: Map<string, number> }>();
+  for (const day of rawDays) {
+    if (day.date < result.window_start || day.date > end || !day.legacy_referrals) continue;
+    const refs = day.legacy_referrals;
+    result.days_collected++;
+    result.first_date = !result.first_date || day.date < result.first_date ? day.date : result.first_date;
+    result.last_date = day.date > result.last_date ? day.date : result.last_date;
+    result.total_requests += refs.total_requests;
+    result.external_requests += refs.external_requests;
+    result.unknown_referrer_requests += refs.unknown_referrer_requests;
+    result.internal_referrer_requests += refs.internal_referrer_requests;
+    result.excluded_requests += refs.excluded_requests;
+    for (const ref of refs.sources) {
+      const source = sources.get(ref.domain) ?? { count: 0, paths: new Map<string, number>() };
+      source.count += ref.count;
+      for (const item of ref.paths) {
+        source.paths.set(item.path, (source.paths.get(item.path) ?? 0) + item.count);
+      }
+      sources.set(ref.domain, source);
+    }
+  }
+  result.sources = [...sources].map(([domain, source]) => ({
+    domain,
+    count: source.count,
+    paths: [...source.paths].map(([path, count]) => ({ path, count }))
+      .sort((a, b) => b.count - a.count || a.path.localeCompare(b.path)).slice(0, 5),
+  })).sort((a, b) => b.count - a.count || a.domain.localeCompare(b.domain)).slice(0, 25);
+  return result;
+}
 
 /** Roll daily files (newest first) into the shape the analytics page consumes. */
 export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
@@ -348,6 +418,7 @@ export function aggregateDays(rawDays: RawDay[]): AnalyticsData {
       })),
       top_not_found: topN(notFoundCounts, 25).map(([path, count]) => ({ path: path as string, count })),
       not_found_probes: notFoundProbes,
+      legacy_referrals: legacyReferralReport(rawDays),
     },
   };
 }
@@ -376,6 +447,7 @@ function emptyData(): AnalyticsData {
       top_redirect_misses: [],
       top_not_found: [],
       not_found_probes: 0,
+      legacy_referrals: legacyReferralReport([]),
     },
   };
 }
