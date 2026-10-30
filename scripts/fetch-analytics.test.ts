@@ -11,6 +11,7 @@ import {
   extractRedirectFrom,
   loadSpeciesSlugs,
   aggregate,
+  aggregateLegacyReferrals,
 } from './fetch-analytics.ts';
 
 // ---------------------------------------------------------------------------
@@ -212,7 +213,140 @@ describe('aggregate', () => {
 
   it('produces correct schema_version', () => {
     const result = aggregate([], date, from, to);
-    assert.equal(result.schema_version, 4);
+    assert.equal(result.schema_version, 5);
+  });
+
+  describe('aggregateLegacyReferrals', () => {
+    const legacy = (overrides: Record<string, unknown> = {}) => entry({
+      host: 'pnwmoths.biol.wwu.edu',
+      statusCode: 301,
+      path: '/browse/family-sphingidae/hyles/hyles-lineata/',
+      referer: 'https://bugguide.net/node/view/123?private=value',
+      ...overrides,
+    });
+
+    it('counts only initial legacy moth 301s, not downstream or direct canonical requests', () => {
+      const result = aggregateLegacyReferrals([
+        legacy(),
+        legacy({ host: 'pnwmoths-new.biol.wwu.edu', scheme: 'http' }),
+        legacy({ host: 'www.PNWMOTHS.BIOL.WWU.EDU.:443' }),
+        legacy({ host: 'pnwsawflies.biol.wwu.edu' }),
+        legacy({ host: 'pnwbutterflies.biol.wwu.edu' }),
+        legacy({ host: 'pnwantlions.biol.wwu.edu' }),
+        legacy({ host: 'moths.pnwinsects.org', path: '/redirect.html?from=/browse/' }),
+        legacy({ host: 'moths.pnwinsects.org', path: '/species/hyles-lineata/' }),
+        legacy({ host: 'pnwmoths.biol.wwu.edu.example.com' }),
+        legacy({ statusCode: 200 }),
+        legacy({ statusCode: 302 }),
+        legacy({ statusCode: 404 }),
+      ]);
+      assert.equal(result.total_requests, 3);
+      assert.equal(result.external_requests, 3);
+      assert.deepEqual(result.sources, [{
+        domain: 'bugguide.net',
+        count: 3,
+        paths: [{ path: '/browse/family-sphingidae/hyles/hyles-lineata/', count: 3 }],
+      }]);
+    });
+
+    it('merges www aliases, strips queries/fragments, and retains no identifying log fields', () => {
+      const result = aggregateLegacyReferrals([
+        legacy({ path: '/browse-all/?q=private#section', referer: 'https://WWW.BUGGUIDE.NET.:8443/a?secret=value' }),
+        legacy({ path: '/browse-all/?other=value' }),
+        legacy({ path: '/', referer: 'http://bugguide.net/another-page' }),
+      ]);
+      assert.deepEqual(result.sources, [{
+        domain: 'bugguide.net',
+        count: 3,
+        paths: [{ path: '/browse-all/', count: 2 }, { path: '/', count: 1 }],
+      }]);
+      const json = JSON.stringify(result);
+      for (const omitted of ['private', 'secret', 'another-page', '192.168', 'Mozilla', 'timestamp']) {
+        assert.ok(!json.includes(omitted), `must not retain ${omitted}`);
+      }
+    });
+
+    it('separates missing, malformed, and non-web referrers from internal referrals', () => {
+      const result = aggregateLegacyReferrals([
+        ...[null, '', '-', 'not-a-url', 'javascript:alert(1)', 'file:///local', 'https://'].map(
+          (referer) => legacy({ referer }),
+        ),
+        ...[
+          'https://moths.pnwinsects.org/',
+          'https://www.moths.pnwinsects.org/',
+          'https://pnwmoths.b-cdn.net/',
+          'https://www.pnwinsects.org/',
+          'https://pnwmoths.biol.wwu.edu/',
+          'https://www.pnwmoths-new.biol.wwu.edu/',
+          'https://pnwsawflies.biol.wwu.edu/',
+          'https://pnwbutterflies.biol.wwu.edu/',
+          'https://pnwantlions.biol.wwu.edu/',
+        ].map((referer) => legacy({ referer })),
+        legacy({ referer: 'https://biology.wwu.edu/' }),
+      ]);
+      assert.equal(result.unknown_referrer_requests, 7);
+      assert.equal(result.internal_referrer_requests, 9);
+      assert.equal(result.external_requests, 1, 'other WWU departments remain outreach leads');
+      assert.equal(result.sources[0]?.domain, 'biology.wwu.edu');
+      assert.equal(result.total_requests, 17);
+    });
+
+    it('excludes assets, browser defaults, downloads, probes and recognized automation before ranking', () => {
+      const paths = [
+        '/media/images/header.jpg?cache=1', '/assets/main.js', '/species/foo/records.parquet',
+        '/css/site.css', '/tiles/foo/0/1_1.jpg', '/robots.txt', '/sitemap.xml',
+        '/favicon.ico/', '/.well-known/acme-challenge/token', '/.env', '/wp-login.php',
+        '/media/checklist.PDF?download=1', '/data/records.csv',
+      ];
+      const agents = [
+        'Googlebot/2.1', 'Bingbot/2.0', 'GPTBot/1.2', 'Bytespider',
+        'GoogleOther', 'facebookexternalhit/1.1', 'HeadlessChrome/131.0',
+        'curl/8.0', 'Wget/1.2', 'python-requests/2.0', 'Go-http-client/1.1',
+        'pnwmoths-legacy-hostname-check/1.0',
+      ];
+      const result = aggregateLegacyReferrals([
+        ...paths.map((path) => legacy({ path })),
+        ...agents.map((userAgent) => legacy({ userAgent })),
+        legacy({ path: '/', userAgent: null }),
+      ]);
+      assert.equal(result.excluded_requests, paths.length + agents.length);
+      assert.equal(result.external_requests, 1);
+      assert.deepEqual(result.sources[0]?.paths, [{ path: '/', count: 1 }]);
+      assert.equal(result.total_requests, result.external_requests + result.excluded_requests
+        + result.unknown_referrer_requests + result.internal_referrer_requests);
+    });
+
+    it('keeps all daily sources and paths so rolling rankings are not biased by daily caps', () => {
+      const entries = Array.from({ length: 60 }, (_, i) => legacy({
+        referer: `https://source-${i}.example/`,
+      }));
+      entries.push(...Array.from({ length: 60 }, (_, i) => legacy({ path: `/browse/page-${i}/` })));
+      const result = aggregateLegacyReferrals(entries);
+      assert.equal(result.sources.length, 61);
+      assert.equal(result.sources[0]?.domain, 'bugguide.net');
+      assert.equal(result.sources[0]?.count, 60);
+      assert.equal(result.sources[0]?.paths.length, 60);
+    });
+
+    it('includes the report in the daily schema even on zero-traffic days', () => {
+      const result = aggregate([], '2026-10-29', '', '', new Set());
+      assert.deepEqual(result.legacy_referrals, {
+        total_requests: 0,
+        external_requests: 0,
+        unknown_referrer_requests: 0,
+        internal_referrer_requests: 0,
+        excluded_requests: 0,
+        sources: [],
+      });
+    });
+
+    it('wires nonempty initial-request referrals into the uploaded daily artifact', () => {
+      const entries = [legacy(), legacy({ host: 'moths.pnwinsects.org', path: '/redirect.html?from=/' })];
+      const result = aggregate(entries, '2026-10-29', '', '', new Set());
+      assert.equal(result.legacy_referrals.total_requests, 1);
+      assert.equal(result.legacy_referrals.sources[0]?.domain, 'bugguide.net');
+      assert.equal(result.legacy_referrals.sources[0]?.count, 1);
+    });
   });
 
   it('counts total requests', () => {

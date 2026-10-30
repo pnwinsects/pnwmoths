@@ -68,6 +68,23 @@ The last three run on a schedule rather than on pull requests on purpose: each d
 
 **Required secret:** the production deploy needs the repository secret `BUNNY_STORAGE_PASSWORD` (the Bunny `pnwmoths` Storage Zone password), set at GitHub → Settings → Secrets and variables → Actions. Until it exists, the upload step fails (the rest of CI still runs).
 
+### Legacy-link outreach report
+
+The **Sites Linking to Retired WWU URLs** section of
+[/analytics/](https://moths.pnwinsects.org/analytics/#legacy-referral-sources)
+collects prospective outreach leads ([ADR 0057](docs/adr/0057-legacy-referral-outreach-report.md)).
+Review it after about 30 days of collection alongside backlink research. It ranks
+external referring domains observed on initial 301 requests to the old moth
+hostnames and shows their most-requested old paths, with no JavaScript required.
+It is independent of the dashboard year filter.
+
+The report states its 30-calendar-day UTC window, collected dates, and coverage.
+Older daily files are unmeasured, not zero traffic. Assets, recognized automation
+and scanner probes are excluded; missing and internal referrers are counted
+separately. Counts are requests, not verified visitors. Missing/forged referrers,
+HTTP links and browser-cached redirects mean the report cannot replace backlink
+research. No historical backfill or outreach is performed automatically.
+
 ## Project structure
 
 ```

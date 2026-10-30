@@ -265,11 +265,24 @@ const reports: CurationReport[] = [
     ],
   },
   {
+    id: 'legacy-referral-sources',
+    title: 'Legacy-link outreach: sites still linking to retired WWU URLs',
+    audience: 'engineering',
+    question: 'Which external sites still send readers to the retired moth URLs, and which old paths do they use?',
+    body: 'A rolling 30-calendar-day report ranking external referring domains observed on initial legacy-host 301 requests, with their most-requested old paths. It separates missing and internal referrers from excluded assets, probes and recognized automation, and states how many days have actually been collected. Review about a month of new evidence alongside backlink research before contacting site maintainers. Requests are not verified people; referrers may be absent or forged.',
+    regenerated: 'Nightly, from the existing Bunny access-log collection, then rendered on every site build. Collection is prospective; old daily files are unmeasured, not zero traffic.',
+    files: [{ source: null, href: '/analytics/#legacy-referral-sources', label: 'Sites linking to retired WWU URLs' }],
+    see: [
+      { label: 'ADR 0057 - legacy-link outreach report', url: 'docs/adr/0057-legacy-referral-outreach-report.md' },
+      { label: 'Contributor guide', url: 'CONTRIBUTING.md' },
+    ],
+  },
+  {
     id: 'link-rot',
     title: 'Link rot: external links that have stopped working',
     audience: 'engineering',
     question: 'Which links out of this site are broken, and broken for real rather than for one run?',
-    body: 'The only report here that is not a file. A URL is listed only after failing <strong>two consecutive weekly runs</strong>, because a check running from a GitHub runner cannot tell a dead link from a host that refuses that network — and a report carrying that noise gets closed unread, which is the same outcome as no report at all. Single-run failures sit in a collapsed section marked as needing no action. The issue closes itself when the links recover, so no open issue means nothing is broken. <strong>Scope:</strong> this covers the ~35 links in site prose and templates. The 2,400-odd per-species reference links in <code>data/species-links.csv</code> — Moth Photographers Group, BugGuide, BAMONA — are excluded from every check because those hosts rate-limit, and a handful of institution and government hosts are excluded for the same reason the two-strike rule exists. Those go unchecked.',
+    body: 'A URL is listed only after failing <strong>two consecutive weekly runs</strong>, because a check running from a GitHub runner cannot tell a dead link from a host that refuses that network — and a report carrying that noise gets closed unread, which is the same outcome as no report at all. Single-run failures sit in a collapsed section marked as needing no action. The issue closes itself when the links recover, so no open issue means nothing is broken. <strong>Scope:</strong> this covers the ~35 links in site prose and templates. The 2,400-odd per-species reference links in <code>data/species-links.csv</code> — Moth Photographers Group, BugGuide, BAMONA — are excluded from every check because those hosts rate-limit, and a handful of institution and government hosts are excluded for the same reason the two-strike rule exists. Those go unchecked.',
     regenerated: 'Weekly, 09:00 UTC Monday, by <code>.github/workflows/link-rot.yml</code>. The raw checker output is deliberately not published: it is the noisy artifact the two-strike rule exists to filter, and it reports to a place with no owner.',
     files: [offSite('https://github.com/pnwinsects/pnwmoths/issues?q=is%3Aissue+label%3Alink-rot', 'the “Broken external links” issue')],
     see: [

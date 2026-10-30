@@ -5,9 +5,11 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { aggregateDays, readDay, RawDaySchema, type RawDay } from './analytics.ts';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import nunjucks from 'nunjucks';
+import { aggregate, type LegacyReferrals } from '../../scripts/fetch-analytics.ts';
 
 function day(date: string, overrides: Partial<RawDay> = {}): RawDay {
   return {
@@ -277,5 +279,187 @@ describe('aggregateDays tolerates a wrong-length requests_by_hour', () => {
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
+  });
+});
+
+function referrals(overrides: Partial<LegacyReferrals> = {}): LegacyReferrals {
+  return {
+    total_requests: 0,
+    external_requests: 0,
+    unknown_referrer_requests: 0,
+    internal_referrer_requests: 0,
+    excluded_requests: 0,
+    sources: [],
+    ...overrides,
+  };
+}
+
+describe('aggregateDays: legacy referral outreach', () => {
+  test('merges source/path counts before ranking and preserves the raw daily details', () => {
+    const raw = [
+      day('2026-10-30', { legacy_referrals: referrals({
+        total_requests: 10, external_requests: 5, unknown_referrer_requests: 2,
+        internal_referrer_requests: 1, excluded_requests: 2,
+        sources: [
+          { domain: 'bugguide.net', count: 2, paths: [{ path: '/browse-all/', count: 2 }] },
+          { domain: 'other.example', count: 3, paths: [{ path: '/', count: 3 }] },
+        ],
+      }) }),
+      day('2026-10-29', { legacy_referrals: referrals({
+        total_requests: 5, external_requests: 4, unknown_referrer_requests: 1,
+        sources: [{ domain: 'bugguide.net', count: 4, paths: [
+          { path: '/browse-all/', count: 3 }, { path: '/', count: 1 },
+        ] }],
+      }) }),
+    ];
+    const before = structuredClone(raw);
+    const report = aggregateDays(raw).rolling30.legacy_referrals;
+    assert.deepEqual(report.sources, [
+      { domain: 'bugguide.net', count: 6, paths: [
+        { path: '/browse-all/', count: 5 }, { path: '/', count: 1 },
+      ] },
+      { domain: 'other.example', count: 3, paths: [{ path: '/', count: 3 }] },
+    ]);
+    assert.equal(report.total_requests, 15);
+    assert.equal(report.external_requests, 9);
+    assert.equal(report.unknown_referrer_requests, 3);
+    assert.equal(report.internal_referrer_requests, 1);
+    assert.equal(report.excluded_requests, 2);
+    assert.deepEqual(raw, before);
+  });
+
+  test('uses 30 calendar days, not the most recent 30 files, and counts zero-traffic collection days', () => {
+    const result = aggregateDays([
+      day('2026-10-30', { legacy_referrals: referrals() }),
+      day('2026-10-28'),
+      day('2026-10-01', { legacy_referrals: referrals({ total_requests: 1, unknown_referrer_requests: 1 }) }),
+      day('2026-09-30', { legacy_referrals: referrals({ total_requests: 100, unknown_referrer_requests: 100 }) }),
+    ]);
+    const report = result.rolling30.legacy_referrals;
+    assert.equal(report.window_start, '2026-10-01');
+    assert.equal(report.window_end, '2026-10-30');
+    assert.equal(report.first_date, '2026-10-01');
+    assert.equal(report.last_date, '2026-10-30');
+    assert.equal(report.days_collected, 2, 'missing fields do not count as measured days');
+    assert.equal(report.total_requests, 1, 'September 30 is outside the inclusive window');
+    assert.ok(!('legacy_referrals' in result.days[0]!), 'only the rollup goes into the client payload');
+  });
+
+  test('reports uncollected data distinctly from a collected zero', () => {
+    assert.equal(aggregateDays([day('2026-10-30')]).rolling30.legacy_referrals.days_collected, 0);
+    assert.equal(aggregateDays([
+      day('2026-10-30', { legacy_referrals: referrals() }),
+    ]).rolling30.legacy_referrals.days_collected, 1);
+    const empty = aggregateDays([]).rolling30.legacy_referrals;
+    assert.equal(empty.days_collected, 0);
+    assert.equal(empty.window_start, '');
+    assert.deepEqual(empty.sources, []);
+  });
+
+  test('publishes the top 25 domains and five paths only after merging the window', () => {
+    const rows = Array.from({ length: 60 }, (_, i) => ({
+      domain: `source-${String(i).padStart(2, '0')}.example`,
+      count: i + 1,
+      paths: [{ path: '/', count: i + 1 }],
+    }));
+    const recurring = {
+      domain: 'recurring.example',
+      count: 7,
+      paths: Array.from({ length: 7 }, (_, i) => ({ path: `/path-${i}/`, count: 1 })),
+    };
+    const days = Array.from({ length: 10 }, (_, i) => day(`2026-10-${30 - i}`, {
+      legacy_referrals: referrals({
+        external_requests: 7 + (i === 0 ? 1830 : 0),
+        total_requests: 7 + (i === 0 ? 1830 : 0),
+        sources: i === 0 ? [...rows, recurring] : [recurring],
+      }),
+    }));
+    const report = aggregateDays(days).rolling30.legacy_referrals;
+    assert.equal(report.sources.length, 25);
+    assert.equal(report.sources[0]?.domain, 'recurring.example', 'a low-ranked daily source wins across days');
+    assert.equal(report.sources[0]?.count, 70);
+    assert.equal(report.sources[0]?.paths.length, 5);
+    assert.equal(report.sources[0]?.paths[0]?.count, 10);
+    assert.equal(report.external_requests, 1900, 'headline totals include domains outside the displayed top 25');
+  });
+
+  test('the writer output validates and rolls up, while older schemas remain valid', () => {
+    const current = aggregate([], '2026-10-30', '', '', new Set());
+    const parsed = RawDaySchema.safeParse(JSON.parse(JSON.stringify(current)));
+    assert.ok(parsed.success);
+    assert.equal(aggregateDays([parsed.data]).rolling30.legacy_referrals.days_collected, 1);
+    assert.ok(RawDaySchema.safeParse(day('2026-10-29')).success);
+    assert.equal(RawDaySchema.safeParse({
+      ...day('2026-10-30'), legacy_referrals: { sources: [] },
+    }).success, false, 'a present but malformed report is not silently treated as a measured day');
+  });
+});
+
+describe('rendered /analytics/ legacy referral report', () => {
+  function render(days: RawDay[]): string {
+    const env = new nunjucks.Environment(undefined, { autoescape: false });
+    env.addFilter('number', (value: number) => value.toLocaleString('en-US'));
+    env.addFilter('tojson', (value: unknown) => JSON.stringify(value));
+    const template = readFileSync(resolve('src/analytics/index.njk'), 'utf8')
+      .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
+    return env.renderString(template, { analytics: aggregateDays(days) });
+  }
+
+  function reportSection(html: string): string {
+    const match = html.match(/<section id="legacy-referral-sources"[\s\S]*?<\/section>/);
+    assert.ok(match, 'report must be present in ordinary static HTML');
+    return match[0];
+  }
+
+  test('older archives say not collected rather than no referrals', () => {
+    const section = reportSection(render([day('2026-10-30')]));
+    assert.match(section, /Not collected yet/);
+    assert.doesNotMatch(section, /No externally referred/);
+  });
+
+  test('a collected zero has explicit coverage, totals, limitations and a zero-referral state', () => {
+    const html = render([day('2026-10-30', { legacy_referrals: referrals() })]);
+    const section = reportSection(html);
+    assert.match(section, /1 of 30 days/);
+    assert.match(section, /2026-10-01/);
+    assert.match(section, /2026-10-30/);
+    assert.match(section, /Partial coverage/);
+    assert.match(section, /0 initial legacy-host requests/);
+    assert.match(section, /No externally referred legacy page requests/);
+    assert.match(section, /not verified people or unique visits/);
+    assert.match(section, /independent of the year filter/);
+    assert.ok(html.indexOf('<section id="legacy-referral-sources"') < html.indexOf('<noscript>'));
+    assert.ok(html.indexOf('</pnwm-analytics-dashboard>') < html.indexOf('<section id="legacy-referral-sources"'));
+  });
+
+  test('a complete 30-day window does not claim partial coverage', () => {
+    const days = Array.from({ length: 30 }, (_, i) => day(`2026-10-${String(30 - i).padStart(2, '0')}`, {
+      legacy_referrals: referrals(),
+    }));
+    const section = reportSection(render(days));
+    assert.match(section, /30 of 30 days/);
+    assert.doesNotMatch(section, /Partial coverage/);
+  });
+
+  test('renders ranked domains and expandable old paths, escaping log data in HTML and script JSON', () => {
+    const path = '/browse/</script><img src=x onerror=alert(1)>';
+    const html = render([day('2026-10-30', { legacy_referrals: referrals({
+      total_requests: 4, external_requests: 3, excluded_requests: 1,
+      sources: [
+        { domain: 'smaller.example', count: 1, paths: [{ path: '/', count: 1 }] },
+        { domain: 'larger.example', count: 2, paths: [{ path, count: 2 }] },
+      ],
+    }) })]);
+    const section = reportSection(html);
+    assert.ok(section.indexOf('larger.example') < section.indexOf('smaller.example'));
+    assert.match(section, /<details>/);
+    assert.match(section, /&lt;\/script&gt;&lt;img/);
+    assert.doesNotMatch(html, /<img src=x/);
+    assert.match(section, /3 externally referred/);
+    assert.match(section, /1 excluded/);
+    const script = html.match(/<script[^>]*id="analytics-data"[^>]*>([\s\S]*?)<\/script>/);
+    assert.ok(script);
+    const data = JSON.parse(script[1]!);
+    assert.equal(data.rolling30.legacy_referrals.sources[0].paths[0].path, path);
   });
 });
