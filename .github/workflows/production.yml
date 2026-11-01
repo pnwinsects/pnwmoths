@@ -74,39 +74,44 @@ jobs:
     concurrency:
       group: production-deploy
       cancel-in-progress: false
+    permissions:
+      contents: read
+      actions: write # require-current-tip cancels a run that a newer push overtook
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false # no git push here; keep token out of .git/config
+      # Builds finish in any order, so a slow build of an older commit can reach
+      # this point after a newer commit has already deployed, and a re-run always
+      # checks out its original commit. Uploading either would put older files over
+      # newer ones, because the upload overwrites changed files. So the deploy stops
+      # unless this commit is still the tip: cancelled (grey) when a newer commit's
+      # run will deploy it, red for a re-run, never green (ADR 0053).
+      - name: Refuse to deploy a superseded commit
+        uses: ./.github/actions/require-current-tip
+        with:
+          token: ${{ github.token }}
+          phase: before setup
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
-      # Builds finish in any order, so a slow build of an older commit can reach
-      # this point after a newer commit has already deployed. Uploading it then
-      # would put older files over newer ones, because the upload overwrites changed
-      # files. Skip instead: the newer commit's own run carries everything.
-      - name: Skip if a newer commit is on main
-        id: fresh
-        if: github.ref == 'refs/heads/main'
-        run: |
-          head=$(git ls-remote origin refs/heads/main | cut -f1)
-          if [ "$head" != "$GITHUB_SHA" ]; then
-            echo "main is now at $head, not $GITHUB_SHA; its own run will deploy." >> "$GITHUB_STEP_SUMMARY"
-            echo "stale=true" >> "$GITHUB_OUTPUT"
-          fi
       - name: Fetch the built site
-        if: steps.fresh.outputs.stale != 'true'
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: site
           path: _site
+      # Last check before the upload, the first change to production: a merge can
+      # land while the job sets up.
+      - name: Re-check the tip before uploading
+        uses: ./.github/actions/require-current-tip
+        with:
+          token: ${{ github.token }}
+          phase: before the upload
       - name: Upload _site to Bunny
-        if: steps.fresh.outputs.stale != 'true'
         run: npm run site:upload
         env:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
       - name: CDN smoke check
-        if: steps.fresh.outputs.stale != 'true'
         run: npm run deploy:smoke
