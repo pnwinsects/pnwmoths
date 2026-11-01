@@ -1,6 +1,6 @@
 # 0053. Production builds run in parallel; only the upload waits its turn
 
-**Status:** Accepted · Refines [0008](0008-deploy-bunny-additive.md)
+**Status:** Accepted · Refines [0008](0008-deploy-bunny-additive.md) · Amended 2026-11-01: a deploy that falls behind stops grey or red, not green
 
 ## Context
 
@@ -21,9 +21,25 @@ The workflow has two jobs.
   check.
 
 Builds can finish in any order, and the upload overwrites files that changed, so an older commit
-whose build finishes late could put older files over a newer deploy. `deploy` therefore first
-checks that `GITHUB_SHA` is still the head of `main`, and skips the upload if not. Skipping loses
-nothing: every build contains all earlier commits, and the newer commit's own run deploys it.
+whose build finishes late could put older files over a newer deploy. A re-run does the same: it
+checks out its original commit, not the current head. `deploy` therefore checks that `GITHUB_SHA`
+is still the head of its branch before setup and again just before the upload, with
+[`require-current-tip`](../../.github/actions/require-current-tip/action.yml), and stops if not.
+Stopping loses nothing: every build contains all earlier commits, and the newer commit's own run
+deploys it.
+
+How the run ends says which case it was (amended 2026-11-01; until then the run skipped the upload
+and ended green):
+
+- **Cancelled (grey)** for a first attempt that a newer push overtook, when a run of the newer
+  commit exists and wasn't cancelled. The job writes the newer commit to the run's summary and
+  cancels its own run, which needs `actions: write`.
+- **Failed (red)** for a re-run, and for a moved head with no run of its own, since then nothing is
+  set to deploy it.
+- **Never green.** A green run that uploaded nothing looks like a deploy. SalishSea.io learned this
+  when a re-run rolled its production back unnoticed
+  ([its decision 024](https://github.com/salish-sea/salishsea-io/blob/main/docs/decisions/024-deploy-gating-and-alerting.md)),
+  and this check is a copy of its action.
 
 ## Consequences
 

@@ -1,0 +1,78 @@
+name: Require current tip
+description: >
+  Stop unless the commit this run is holding is still the tip of its branch, so a deploy
+  never moves production backwards. A first attempt that a newer push overtook cancels
+  its own run, if a run of the newer commit exists to deploy it; anything else, a re-run
+  included, fails. Never green: a green run that deployed nothing hides a rollback.
+  Copied from SalishSea.io's action of the same name, whose decision 024 has the
+  reasoning:
+  https://github.com/salish-sea/salishsea-io/blob/main/docs/decisions/024-deploy-gating-and-alerting.md
+inputs:
+  token:
+    description: >
+      Token used to read the branch head and the newer commit's runs, and to cancel
+      this run: the job needs `actions: write`.
+    required: true
+  phase:
+    description: Where in the deploy this check runs; shown in the summary.
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        PHASE: ${{ inputs.phase }}
+      run: |
+        head_sha=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_REF_NAME}" --jq .sha)
+        if [ "${head_sha}" = "${GITHUB_SHA}" ]; then
+          echo "${GITHUB_SHA} is the tip of ${GITHUB_REF_NAME} (${PHASE})."
+          exit 0
+        fi
+
+        # Overtaken, not replayed: on a first attempt the branch moved on while this run
+        # waited or built, and a run of the newer commit, queued behind this one or
+        # already done, ships everything this one would have, or fails red itself. Grey,
+        # as GitHub marks a run a newer one replaced; red would be noise that teaches
+        # people to ignore red, and green would claim a deploy that didn't happen. Any run
+        # of the newer commit counts unless it was cancelled.
+        # GITHUB_WORKFLOW_REF is owner/repo/.github/workflows/<file>@<ref>.
+        workflow_file=$(basename "${GITHUB_WORKFLOW_REF%@*}")
+        newer_runs=0
+        if [ "${GITHUB_RUN_ATTEMPT}" = "1" ]; then
+          newer_runs=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/${workflow_file}/runs?head_sha=${head_sha}" \
+            --jq '[.workflow_runs[] | select(.conclusion != "cancelled")] | length')
+        fi
+        if [ "${newer_runs}" -gt 0 ]; then
+          {
+            echo "### Deploy cancelled: superseded"
+            echo ""
+            echo "Checked ${PHASE}. \`${GITHUB_REF_NAME}\` moved on to \`${head_sha}\` while this run"
+            echo "held \`${GITHUB_SHA}\`. That commit's own run deploys both, so this one stopped"
+            echo "before changing anything. If that run fails, its own red says so."
+          } >> "${GITHUB_STEP_SUMMARY}"
+          echo "::notice::Superseded by ${head_sha}, whose run deploys it; cancelling."
+          gh run cancel "${GITHUB_RUN_ID}"
+          # The cancel ends this step; if it didn't take, fail rather than deploy.
+          sleep 300
+          echo "::error::The run did not cancel. Refusing to deploy ${GITHUB_SHA}: ${GITHUB_REF_NAME} is now ${head_sha}."
+          exit 1
+        fi
+
+        echo "::error::Refusing to deploy ${GITHUB_SHA} (${PHASE}): ${GITHUB_REF_NAME} is now ${head_sha}."
+        {
+          echo "### Deploy stopped: superseded commit"
+          echo ""
+          echo "Checked ${PHASE}. This run holds \`${GITHUB_SHA}\`, but \`${GITHUB_REF_NAME}\`"
+          echo "is now \`${head_sha}\`. Deploying would move production backwards."
+          echo ""
+          if [ "${GITHUB_RUN_ATTEMPT}" = "1" ]; then
+            echo "No run of \`${head_sha}\` was found to deploy it, so production may be"
+            echo "behind: dispatch a fresh deploy (\`gh workflow run ${workflow_file} --ref ${GITHUB_REF_NAME}\`)."
+          else
+            echo "**Re-running _this_ run will not help**: it would hold \`${GITHUB_SHA}\` again"
+            echo "and stop here again. To deploy the current tip, re-run the deploy whose"
+            echo "commit is \`${head_sha}\`, or push a new commit to trigger a fresh run."
+          fi
+        } >> "${GITHUB_STEP_SUMMARY}"
+        exit 1
