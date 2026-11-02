@@ -110,10 +110,13 @@ The current site settings are:
 | PNW Butterflies | `pnwbutterflies` | `butterfly` | `butterflies` |
 | PNW Sawflies | `pnwsawflies` | `sawfly` | `sawflies` |
 
-Mac `.command` and `.sh` files must be stored with Unix LF endings and executable mode `0755`.
-The app repository's `.gitattributes` enforces LF; the zip creator must preserve Unix mode bits.
-If it does not, macOS fails before Docker with `/bin/bash^M: bad interpreter` or refuses to open
-the launcher.
+Mac `.command`, `.sh`, and `bundle.env` files should be stored with Unix LF endings, and the
+executables need mode `0755`. The app repository's `.gitattributes` enforces LF for tracked
+scripts and examples; the zip creator must preserve Unix mode bits. The Mac launcher also strips
+carriage returns from its private runtime copy of `bundle.env`, because `WEB_PORT=8000` written
+with Windows CRLF otherwise reaches Compose as `8000^M` and fails with `invalid hostPort: 8000`.
+If the executable scripts themselves use CRLF, macOS fails earlier with
+`/bin/bash^M: bad interpreter`.
 
 ### 4. Check it before sending
 
@@ -139,6 +142,9 @@ and the app can reach MySQL. Do not "improve" it into a check that bypasses the 
 - **Mac says `/bin/bash^M: bad interpreter`.** The archive contains Windows CRLF endings.
   Rebuild it from LF-normalized scripts; asking the curator to repair it in Terminal is not an
   acceptable workaround.
+- **Compose says `invalid hostPort: 8000`.** The private `bundle.env` reached Compose with a
+  hidden Windows carriage return. Use a package containing the normalized Mac launcher; do not
+  ask the curator to edit the file in Terminal.
 - **The browser shows a sign-in page.** Expected. See step 1.
 - **A factsheet 500s** with `IOError` on a file under `cache/`. The media tree is incomplete;
   re-copy it including `moths/cache`.
