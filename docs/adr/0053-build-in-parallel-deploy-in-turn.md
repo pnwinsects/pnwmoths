@@ -1,6 +1,6 @@
 # 0053. Production builds run in parallel; only the upload waits its turn
 
-**Status:** Accepted · Refines [0008](0008-deploy-bunny-additive.md) · Amended 2026-11-01: a deploy that falls behind stops grey or red, not green
+**Status:** Accepted · Refines [0008](0008-deploy-bunny-additive.md) · Amended 2026-11-01: a deploy that falls behind stops grey or red, not green · Amended 2026-11-04: it waits for the newer commit's run before failing
 
 ## Context
 
@@ -33,9 +33,12 @@ and ended green):
 
 - **Cancelled (grey)** for a first attempt that a newer push overtook, when a run of the newer
   commit exists and wasn't cancelled. The job writes the newer commit to the run's summary and
-  cancels its own run, which needs `actions: write`.
-- **Failed (red)** for a re-run, and for a moved head with no run of its own, since then nothing is
-  set to deploy it.
+  cancels its own run, which needs `actions: write`. GitHub can take minutes to create a push's
+  run, so the job waits up to five minutes for one, reading the head again at each check (amended
+  2026-11-04: until then it looked once, and on 2026-11-04 SalishSea.io's copy failed red a run
+  whose newer commit got its run two and a half minutes after the push).
+- **Failed (red)** for a re-run, and for a moved head that gets no run of its own within those
+  five minutes, since then nothing is set to deploy it.
 - **Never green.** A green run that uploaded nothing looks like a deploy. SalishSea.io learned this
   when a re-run rolled its production back unnoticed
   ([its decision 024](https://github.com/salish-sea/salishsea-io/blob/main/docs/decisions/024-deploy-gating-and-alerting.md)),
