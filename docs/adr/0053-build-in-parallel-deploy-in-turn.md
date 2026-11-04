@@ -34,9 +34,12 @@ and ended green):
 - **Cancelled (grey)** for a first attempt that a newer push overtook, when a run of the newer
   commit exists and wasn't cancelled. The job writes the newer commit to the run's summary and
   cancels its own run, which needs `actions: write`. GitHub can take minutes to create a push's
-  run, so the job waits up to five minutes for one, reading the head again at each check (amended
-  2026-11-04: until then it looked once, and on 2026-11-04 SalishSea.io's copy failed red a run
-  whose newer commit got its run two and a half minutes after the push).
+  run, so each of the job's two checks waits up to five minutes for one, reading the head again
+  each time (amended 2026-11-04: until then it looked once, and on 2026-11-04 SalishSea.io's copy
+  failed red a run whose newer commit got its run two and a half minutes after the push). A
+  lookup that fails during the wait counts as no run yet, so a passing GitHub API error doesn't
+  end the step before it writes its summary. A push that starts no run, such as one marked
+  `[skip ci]`, now costs a deploy it overtakes five minutes before failing red.
 - **Failed (red)** for a re-run, and for a moved head that gets no run of its own within those
   five minutes, since then nothing is set to deploy it.
 - **Never green.** A green run that uploaded nothing looks like a deploy. SalishSea.io learned this
