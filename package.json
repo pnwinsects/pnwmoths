@@ -73,25 +73,25 @@
   "author": "Peter Abrahamsen <rainhead@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy": "^3.1.8",
     "@duckdb/node-api": "^2.0.0-r.1",
     "@picocss/pico": "^2.1.1",
-    "chart.js": "^4.5.1",
+    "chart.js": "^4.6.1",
     "csv-parse": "^7.0.3",
     "csv-stringify": "^6.9.0",
-    "hyparquet": "^1.31.3",
+    "hyparquet": "^1.33.0",
     "leaflet": "^1.9.4",
     "lit": "^3.3.3",
-    "node-html-parser": "^9.0.4",
+    "node-html-parser": "^9.0.7",
     "openseadragon": "^6.1.1",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.22",
     "@types/node": "^24.19.2",
-    "pagefind": "^1.5.2",
-    "playwright-core": "^1.63.0",
+    "pagefind": "^1.6.0",
+    "playwright-core": "^1.65.0",
     "typescript": "^7.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.6"
   }
 }
