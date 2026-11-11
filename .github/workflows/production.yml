@@ -18,6 +18,9 @@ jobs:
     # password), not for serialising: environments do not queue runs, concurrency
     # groups do.
     environment: production
+    outputs:
+      analytics-complete: ${{ steps.analytics.outputs.complete }}
+      analytics-report: ${{ steps.analytics.outputs.report }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -38,10 +41,55 @@ jobs:
       - uses: ./.github/actions/install-lychee
         with:
           version: '0.23.0'
+      # Each day's analytics file never changes once uploaded, so the files
+      # downloaded by earlier deploys are kept in the Actions cache and only new
+      # or changed ones are fetched. A download that fails does not stop the
+      # deploy: the script keeps the cached copy, exits 2, and the
+      # analytics-issue job below opens a tracking issue (#450, ADR 0058).
+      - name: Restore analytics downloaded by earlier deploys
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: data/analytics
+          key: analytics-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: analytics-
       - name: Download analytics from Bunny Storage
-        run: node scripts/download-analytics.ts
+        id: analytics
+        # Exit 0 means complete and 2 means incomplete; only those two mean the
+        # download ran. Anything else is a malfunction and fails the build, so
+        # it can never be reported as "all files downloaded" (ADR 0028).
+        run: |
+          fingerprint() { cat data/analytics/*.json 2>/dev/null | sha256sum; }
+          before=$(fingerprint)
+          set +e
+          node scripts/download-analytics.ts
+          status=$?
+          set -e
+          case "$status" in
+            0) echo "complete=true" >> "$GITHUB_OUTPUT" ;;
+            2)
+              echo "complete=false" >> "$GITHUB_OUTPUT"
+              echo "::warning title=Analytics incomplete::Some analytics files could not be downloaded from Bunny; the deploy continues without them. See the tracking issue."
+              {
+                echo 'report<<ANALYTICS_REPORT_EOF'
+                cat analytics-report.md
+                echo 'ANALYTICS_REPORT_EOF'
+              } >> "$GITHUB_OUTPUT"
+              ;;
+            *) exit "$status" ;;
+          esac
+          # Re-saving a cache that nothing changed would only crowd out others.
+          if [ "$(fingerprint)" != "$before" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; fi
         env:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
+          ANALYTICS_REPORT: analytics-report.md
+      # Saved now rather than at the end of the job, so a later failure in the
+      # build does not throw away what this run downloaded.
+      - name: Keep the analytics for the next deploy
+        if: steps.analytics.outputs.changed == 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: data/analytics
+          key: analytics-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Build site
         run: npm run build:site
       # Blocking, and deliberately BEFORE the upload: this is the gate that
@@ -115,3 +163,56 @@ jobs:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
       - name: CDN smoke check
         run: npm run deploy:smoke
+
+  # Raises or resolves the issue that tracks an incomplete analytics download.
+  # A job of its own so that the build job, which runs every npm dependency,
+  # never holds a token that can write issues; and so that two builds finishing
+  # together cannot both open an issue. Deploy does not wait for it.
+  analytics-issue:
+    needs: build
+    # Runs even when a later build step failed, because the download result is
+    # still true. Skipped when the download never ran or malfunctioned, since
+    # then there is nothing true to report.
+    if: always() && needs.build.outputs.analytics-complete != ''
+    runs-on: ubuntu-26.04
+    permissions:
+      issues: write
+    concurrency:
+      group: analytics-issue
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      ISSUE_TITLE: 'Production build could not download all analytics files'
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Open or update the tracking issue
+        if: needs.build.outputs.analytics-complete == 'false'
+        env:
+          REPORT: ${{ needs.build.outputs.analytics-report }}
+        run: |
+          # Built with printf rather than a heredoc: a heredoc inside a YAML
+          # block scalar carries the block's indentation into every line, which
+          # markdown then renders as one big code block.
+          {
+            printf '%s\n' "$REPORT"
+            printf '%s\n\n' 'This is usually Bunny Storage failing for a while, not a fault in the repo. Each later production deploy retries the download, and this issue closes itself when one gets every file.'
+            printf '[Workflow run](%s)\n' "$RUN_URL"
+          } > issue-body.md
+          existing=$(gh issue list --state open --limit 200 --json number,title \
+            --jq "[.[] | select(.title == \"${ISSUE_TITLE}\") | .number] | .[0] // empty")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file issue-body.md
+            echo "commented on existing issue #$existing"
+          else
+            gh issue create --title "${ISSUE_TITLE}" --body-file issue-body.md
+          fi
+      - name: Close the tracking issue
+        if: needs.build.outputs.analytics-complete == 'true'
+        run: |
+          existing=$(gh issue list --state open --limit 200 --json number,title \
+            --jq "[.[] | select(.title == \"${ISSUE_TITLE}\") | .number] | .[0] // empty")
+          if [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "A production build downloaded every analytics file again. [Workflow run](${RUN_URL})"
+            echo "closed issue #$existing"
+          fi
