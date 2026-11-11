@@ -153,6 +153,19 @@ describe('checkGatedPaths', () => {
     assert.equal(report.checked, 4);
   });
 
+  it('asks again about a path with no clear answer, and reports what the second answer shows', async () => {
+    const calls = new Map<string, number>();
+    const flaky = (async (url: string | URL | Request) => {
+      const n = (calls.get(String(url)) ?? 0) + 1;
+      calls.set(String(url), n);
+      if (String(url).endsWith('records.parquet') && n === 1) throw new Error('fetch failed');
+      return new Response(null, { status: String(url).endsWith('records.parquet') ? 200 : 404 });
+    }) as typeof fetch;
+    const report = await checkGatedPaths('https://cdn.test', ['hidden'], flaky);
+    assert.deepEqual(report.live, ['species/hidden/records.parquet']);
+    assert.deepEqual(report.unknown, []);
+  });
+
   it('counts a network error as unclear, not as a failure', async () => {
     const failing = (async () => { throw new Error('ECONNRESET'); }) as typeof fetch;
     const report = await checkGatedPaths('https://cdn.test', ['x'], failing);

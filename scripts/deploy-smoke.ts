@@ -222,6 +222,11 @@ export interface GatedReport {
 /**
  * Request every gated path and sort the answers. 404 is the only good answer;
  * never throws.
+ *
+ * A path with no clear answer is asked once more, one request at a time, before it
+ * is reported. About one request in a thousand fails at the network level when 16
+ * run at once, and on the first run against production one such failure hid a file
+ * that was still being served.
  */
 export async function checkGatedPaths(
   cdnOrigin: string,
@@ -231,8 +236,8 @@ export async function checkGatedPaths(
 ): Promise<GatedReport> {
   const paths = slugs.flatMap(gatedPaths);
   const live: string[] = [];
-  const unknown: string[] = [];
-  await pooled(paths, concurrency, async (path) => {
+  const unclear: string[] = [];
+  const probe = async (path: string): Promise<'live' | 'gone' | string> => {
     try {
       const res = await fetchImpl(`${cdnOrigin}/${path}`, {
         method: 'HEAD',
@@ -240,12 +245,27 @@ export async function checkGatedPaths(
         redirect: 'follow',
         signal: AbortSignal.timeout(15_000),
       });
-      if (res.ok) live.push(path);
-      else if (res.status !== 404) unknown.push(`${path} (HTTP ${res.status})`);
+      if (res.ok) return 'live';
+      if (res.status === 404) return 'gone';
+      return `HTTP ${res.status}`;
     } catch (err) {
-      unknown.push(`${path} (${(err as Error).message})`);
+      return (err as Error).message;
     }
+  };
+
+  await pooled(paths, concurrency, async (path) => {
+    const answer = await probe(path);
+    if (answer === 'live') live.push(path);
+    else if (answer !== 'gone') unclear.push(path);
   });
+
+  const unknown: string[] = [];
+  await pooled(unclear, 1, async (path) => {
+    const answer = await probe(path);
+    if (answer === 'live') live.push(path);
+    else if (answer !== 'gone') unknown.push(`${path} (${answer})`);
+  });
+
   return { live: live.sort(), unknown: unknown.sort(), checked: paths.length };
 }
 
