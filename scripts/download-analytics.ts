@@ -125,7 +125,8 @@ export interface SyncResult {
 
 export interface SyncDeps {
   list(): Promise<RemoteFile[]>;
-  download(name: string): Promise<string>;
+  /** The file's bytes, exactly as stored, so they can be checked against the listing. */
+  download(name: string): Promise<Uint8Array>;
 }
 
 // ---------------------------------------------------------------------------
@@ -177,13 +178,13 @@ export async function listRemoteFiles(): Promise<RemoteFile[]> {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-/** Download a single analytics file and return its contents. */
-async function downloadFile(filename: string): Promise<string> {
+/** Download a single analytics file and return its bytes. */
+async function downloadFile(filename: string): Promise<Uint8Array> {
   const res = await fetchWithRetry(analyticsFileUrl(filename), `download ${filename}`);
   if (!res.ok) {
     throw new Error(redact(`Download ${filename}: HTTP ${res.status} ${res.statusText}`));
   }
-  return await res.text();
+  return new Uint8Array(await res.arrayBuffer());
 }
 
 // ---------------------------------------------------------------------------
@@ -191,17 +192,22 @@ async function downloadFile(filename: string): Promise<string> {
 // ---------------------------------------------------------------------------
 
 /**
- * Whether the file at `path` already matches `remote`: by SHA256 when Bunny
- * reported one, otherwise by size. Size alone still catches the likely damage,
- * a download cut short.
+ * Whether `bytes` match `remote`: by SHA256 when Bunny reported one, otherwise
+ * by size. Size alone still catches the likely damage, a download cut short.
  */
+export function matchesListing(bytes: Uint8Array, remote: RemoteFile): boolean {
+  if (remote.checksum) {
+    const sha = createHash('sha256').update(bytes).digest('hex');
+    return sha.toUpperCase() === remote.checksum.toUpperCase();
+  }
+  return bytes.byteLength === remote.length;
+}
+
+/** Whether the file at `path` exists and matches `remote`. */
 export function isCurrent(path: string, remote: RemoteFile): boolean {
   if (!existsSync(path)) return false;
-  if (remote.checksum) {
-    const local = createHash('sha256').update(readFileSync(path)).digest('hex');
-    return local.toUpperCase() === remote.checksum.toUpperCase();
-  }
-  return statSync(path).size === remote.length;
+  if (!remote.checksum) return statSync(path).size === remote.length;
+  return matchesListing(readFileSync(path), remote);
 }
 
 function countLocal(dir: string): number {
@@ -210,7 +216,9 @@ function countLocal(dir: string): number {
 }
 
 /**
- * Bring `outDir` up to date with Bunny, never throwing for a network failure.
+ * Bring `outDir` up to date with Bunny. A failure to list or download is
+ * recorded in the result rather than thrown; a failure to write locally is
+ * thrown, because that is a fault in the build machine, not in Bunny.
  * Existing local files that Bunny no longer lists are left alone.
  */
 export async function syncAnalytics(outDir: string, deps: SyncDeps): Promise<SyncResult> {
@@ -229,18 +237,23 @@ export async function syncAnalytics(outDir: string, deps: SyncDeps): Promise<Syn
       files.push({ name: entry.name, status: 'current' });
       continue;
     }
+    let content: Uint8Array;
     try {
-      const content = await deps.download(entry.name);
-      // Write beside the target and rename, so a crash mid-write cannot leave a
-      // truncated file for the cache to keep.
-      const tmp = `${path}.part`;
-      writeFileSync(tmp, content);
-      renameSync(tmp, path);
-      files.push({ name: entry.name, status: 'downloaded' });
+      content = await deps.download(entry.name);
+      if (!matchesListing(content, entry)) {
+        throw new Error(`download ${entry.name}: received ${content.byteLength} bytes that do not match Bunny's listing`);
+      }
     } catch (err) {
       const error = redact(String((err as Error).message ?? err));
       files.push({ name: entry.name, status: existsSync(path) ? 'stale' : 'missing', error });
+      continue;
     }
+    // Write beside the target and rename, so a crash mid-write cannot leave a
+    // truncated file for the cache to keep.
+    const tmp = `${path}.part`;
+    writeFileSync(tmp, content);
+    renameSync(tmp, path);
+    files.push({ name: entry.name, status: 'downloaded' });
   }
   return { listingError: null, files, localCount: countLocal(outDir) };
 }

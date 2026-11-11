@@ -28,11 +28,13 @@ already skips a day that is missing or malformed rather than failing.
   uploads it, so a build normally downloads one file.
 - **Download only what is new or changed.** A cached file is current when its
   SHA256 matches the `Checksum` in Bunny's listing, or its size matches when the
-  listing has no checksum.
+  listing has no checksum. A downloaded file is checked the same way before it
+  replaces the cached copy.
 - **A download that fails does not fail the build.** The script keeps the older
   cached copy, or leaves the day out if there is none, and exits **2**. A failed
   listing is treated the same way: the page is built from the cached files. Exit
-  **1** is kept for misconfiguration and bugs, and still fails the build.
+  **1** is kept for misconfiguration, bugs and local write errors, and still fails
+  the build.
 - **An incomplete download opens a tracking issue, and a complete one closes it.**
   The `analytics-issue` job in `production.yml` comments on the open issue titled
   *Production build could not download all analytics files*, or opens one, with

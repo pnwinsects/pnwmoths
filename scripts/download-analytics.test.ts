@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
@@ -74,7 +74,7 @@ describe('syncAnalytics', () => {
     };
     const result = await syncAnalytics(dir, {
       list: async () => Object.entries(content).map(([n, c]) => remote(n, c)),
-      download: async (n) => { requested.push(n); return content[n]!; },
+      download: async (n) => { requested.push(n); return Buffer.from(content[n]!); },
     });
     assert.deepEqual(requested, ['2026-07-02.json', '2026-07-03.json']);
     assert.deepEqual(result.files.map((f) => f.status), ['current', 'downloaded', 'downloaded']);
@@ -90,7 +90,7 @@ describe('syncAnalytics', () => {
     const requested: string[] = [];
     await syncAnalytics(dir, {
       list: async () => [remote('2026-07-01.json', '{"a":1}', false), remote('2026-07-02.json', '{"b":2}', false)],
-      download: async (n) => { requested.push(n); return '{"b":2}'; },
+      download: async (n) => { requested.push(n); return Buffer.from('{"b":2}'); },
     });
     assert.deepEqual(requested, ['2026-07-02.json']);
   });
@@ -113,6 +113,27 @@ describe('syncAnalytics', () => {
     assert.match(report, /`2026-07-04\.json` \(older copy kept\): download x: HTTP 502/);
   });
 
+  it('keeps the cached copy when the downloaded bytes do not match the listing', async () => {
+    const dir = tempDir();
+    writeFileSync(join(dir, '2026-07-04.json'), '{"cached":1}');
+    const result = await syncAnalytics(dir, {
+      list: async () => [remote('2026-07-04.json', '{"fresh":1}')],
+      download: async () => Buffer.from('{"fre'),
+    });
+    assert.equal(result.files[0]!.status, 'stale');
+    assert.match(result.files[0]!.error ?? '', /do not match Bunny's listing/);
+    assert.equal(readFileSync(join(dir, '2026-07-04.json'), 'utf-8'), '{"cached":1}');
+  });
+
+  it('throws when the file cannot be written, rather than blaming Bunny', async () => {
+    const dir = tempDir();
+    mkdirSync(join(dir, '2026-07-04.json.part')); // a directory where the temp file must go
+    await assert.rejects(syncAnalytics(dir, {
+      list: async () => [remote('2026-07-04.json', '{}')],
+      download: async () => Buffer.from('{}'),
+    }));
+  });
+
   it('treats a failed listing as incomplete and keeps every cached file', async () => {
     const dir = tempDir();
     writeFileSync(join(dir, '2026-07-01.json'), '{}');
@@ -126,7 +147,7 @@ describe('syncAnalytics', () => {
   });
 
   it('is complete when Bunny lists nothing', async () => {
-    const result = await syncAnalytics(tempDir(), { list: async () => [], download: async () => '' });
+    const result = await syncAnalytics(tempDir(), { list: async () => [], download: async () => new Uint8Array() });
     assert.ok(isComplete(result));
   });
 });
