@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Arctia yarrowii* is a boldly patterned species from rocky mountain slopes. It is medium to large (FW length 22 mm). The forewing ground color is cream to light yellow. The forewing is patterned with broad, uneven dark brownish gray transverse lines. These are sometimes fused to cover large areas of the forewing. The hindwing is orange, including the fringe, marked with dark gray. The basal area is black to near the large discal spot. The marginal band is comprised of a series of spots, often fused, and irregular black patches at the wing margin. Most of the body is black, but the collar and anterior tegulae are the same yellowish as the forewing ground color, the legs are part dark orange, and the tip of the abdomen is bright orange. The black antennae are weakly bipectinate in males and simple in females.
 
@@ -22,11 +22,11 @@ This species occurs in northwestern Wyoming and northeastern Utah in the United 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No specific information is available regarding larval foodplants, but it probably feeds on general herbaceous vegetation like related species. A parasitized cocoon on the top of a small flat stone found at Slate Peak, Okanogan County, Washington probably was from this species.
 
-##### Adults
+### Adults
 
 Adults are diurnal. They fly two to three meters above the rocky tundra, often in a seemingly a straight line with the wind, and are difficult to catch. Females call in late afternoon and evening, even during cloudy periods (Peter Jakubek, personal communication).
 

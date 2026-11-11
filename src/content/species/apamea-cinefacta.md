@@ -24,11 +24,11 @@ The range of *A. cinefacta* extends south through California and extreme western
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on short bunchgrasses or short rhizomatous grasses (Poaceae) based upon the habitat.
 
-##### Adults
+### Adults
 
 Adults fly in the spring, with most flying during May in our region. They are nocturnal and come to lights.
 

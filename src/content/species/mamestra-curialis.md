@@ -22,11 +22,11 @@ This boreal forest species is found across southern Canada to the Maritime Provi
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva of *M. curialis* is a cutworm that feeds on a variety of low plants.
 
-##### Adults
+### Adults
 
 This moth flies during the summer. All Pacific Northwest records are from July. It is nocturnal and comes to light.
 

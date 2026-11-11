@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Acerbia alpina* is a spectacular, large (FW length 20-23 mm) colorful arctic and subarctic erebid moth that has been found on rocky mountain slopes in southern Yukon Territory not far from British Columbia. The forewing has an abstract pattern of cream spots on a black background with nearly undiscernible typical lines and spots; however, the pattern is probably black on white with fused thick black transverse lines and black veins on a pale background. The hindwing is orange with a hoary dark gray base, black veins, discal spot, and incomplete postmedial line. The head, thorax, and abdomen are nearly black with patches of orange, especially on the legs.
 
@@ -22,7 +22,7 @@ This is a holarctic moth. The range extends east from Yukon Territory and northe
 
 ## Life History
 
-##### Adults
+### Adults
 
 Adults fly during the summer, typically in late June and July. They are diurnal.
 

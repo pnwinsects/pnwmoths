@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia infimatis* is the brownest and latest-flying of four similar longitudinally streaked *Xestia* species that occur in the Pacific Northwest. It is medium-sized (FW length 14 - 19 mm; females slightly smaller than males) with heavily streaked forewings due to dark veins and accentuation of the horizontal elements of the lines and spots. The ground color varies from light gray and tan, dark brown-gray, to wood brown in males, and is grayer in females. The terminal area has patches of dark gray to brown opposite the cell and in the fold in both sexes and the costa is slightly lighter and grayer than the ground in brown specimens. A black basal dash is present, which appears very long because it is fused with the anterior component of the claviform spot. The transverse lines are faint, except for a series of spots along the costa. The postmedial line is most evident, evident as a series of dark and light spots marking the tips of the teeth. The orbicular spot is black with an inner white component, long and very thin, and filled with a thin streak of the ground color. The reniform is similar, usually with the posteromedial portion drawn sharply toward the base reaching beyond the medial orbicular spot. The hindwing is slightly brownish-gray, darker gray toward the margin, with gray discal spot and veins, and a two-toned gray fringe. The head and thorax are similar in color to the forewings with gray and brown stripes across the dorsal collar and dark margins to the tegulae. The male antenna is strongly biserrate.
 
@@ -26,11 +26,11 @@ The range extends south through California to near Mexico. It is found across th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to feed on hardwoods such as serviceberry (*Amelanchier* spp.) in the Rosaceae and alders (*Alnus* spp.) in the Betulaceae, but is also reported to feed on herbaceous vegetation.  It appears to be a foodplant generalist.
 
-##### Adults
+### Adults
 
 Adults occur in the fall, usually slightly later than *X. finatimis*. Records from the Northwest are from late July to mid-October, with most from September.
 

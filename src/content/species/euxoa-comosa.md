@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa comosa* is one of the most variable species in the genus—at least in terms of shades of brown—both across the range of the species as well as within populations. It is typically a gray-brown small to medium–sized moth (FW length 13–18 mm) that flies in forests at all elevations during the summer. Its forewing is less often gray, commonly tinted with red, orange, or olive, with a simple pattern of toothed dark lines and indistinct spots. Most specimens are darker on the outer forewing, a gray shade preceding the terminal line with or without a similar dark terminal area. The basal and antemedial lines are similar, dark gray, double with components of unequal strength filled with a light shade of the ground color, or reduced to adjacent dark and light lines if the more faint component is absent. The antemedial line is darkest abutting the median area, oriented nearly straight across the forewing, toothed basad on the veins. The median line is dark gray, often prominent, moderately diffuse and variable in width from narrow to very wide, irregular, oriented nearly straight across the forewing. The postmedial line is dark, toothed on the veins, usually with a lighter-colored outer component, drawn basad on the costa, smoothly convex around the reniform spot, and angled slightly toward the base below the level of the cell. The subterminal line is pale, gray-tan, orange-tan in brown or reddish specimens, and yellow in many gray ones, usually broken into powdery spots, slightly irregular with a weak W-mark on veins M3 and CuA1. It is preceded by a dark gray shade, dark red-brown in reddish morphs, that is even across the wing or slightly darker between the veins. The terminal line is dark gray, thin or a series of spots. The fringe is similar to the terminal area. The orbicular and reniform spots are pale, usually a pale shade of the ground color or luteous. The orbicular spot is absent or a small circle or oval filled with the ground color. The reniform spot is relatively small, kidney-shaped, often incomplete anteriorly and posteriorly, with thin medial and thick lateral sides, usually filled with the ground color but sometimes with a darker shade. The claviform spot is absent. The hindwing is dark brown-gray with slightly darker gray margin, veins, discal spot, and terminal line. The hindwing fringe is two-toned gray. The head and thorax match the forewing color and lack dark marks. A frontal tubercle is present. The male antenna is biserrate with long fasciculae. *Euxoa comosa* is a member of the subgenus *Euxoa*.
 
@@ -47,11 +47,11 @@ The range of this species extends from coast to coast. It is found across the Co
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation including grasses (Poaceae).
 
-##### Adults
+### Adults
 
 *Euxoa comosa* is found most commonly in late summer from late July to early September, although records span late June to late September in our region. It is nocturnal and comes readily to lights.
 

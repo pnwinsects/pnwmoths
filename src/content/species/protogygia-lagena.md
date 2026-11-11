@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protogygia lagena* is the largest (FW 17 - 23 mm) of four similar, streaky, gray to brown species with fused forewing orbicular and reniform spots. They are difficult to identify by superficial appearance but can usually be sorted by combination of subtle features of the maculation, size, and flight period. The forewing of *P. lagena* is slightly reddish gray-brown in males and duller gray brown in females.  The forewings appear streaky, due to dark gray veins bordered by light gray and absence of the ordinary transverse lines. A series of dark gray wedges are present in the terminal area, and the terminal line is a series of black spots between the veins. A long, basal dash is present. A similar black line is present at the trailing margin in the median area. The elongate orbicular spot is somewhat diamond-shaped and is fused to the thin reniform spot. Both are pale and partially outlined with black. The central portions of the spots are filled with the ground color. The hindwings are white with slightly darker veins and terminal line in males and light gray with a gray marginal band, and dark gray veins and terminal line in females. The top of the head and base of the collar are light brown gray. A black line crossed the top third of the collar and the tip is gray tan like the rest of the thorax. The tegulae are lined with black around the margins. The male antenna is filiform with weak fasciculations.
 
@@ -22,11 +22,11 @@ This species reaches its northern limit in the Pacific Northwest. It is more wid
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Protogygia comstocki* is single-brooded. The adults are on the wing in May and June at the same time as *Protogygia enalaga* but earlier than the similar species *P. postera*.  The records from our region extend into July.  It is  nocturnal and comes to light.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Notodonta ochreata* is a moderately large (FW length 19–22 mm) prominent moth with mottled light gray, charcoal, and yellow-tan forewing that occurs forests of extreme eastern Idaho during July. Like other members of the genus, *N*. *ochreata* has an elongate forewing with rounded apex and a dark flange extending from the mid-posterior margin. The ground color is dusty whitish gray, luteous tan proximal to the antemedial line, with extensive dusty charcoal suffusion at the anterior antemedial line, between the discal spot and postmedial line, on the flange and adjacent posterior margin, and the entire terminal area. Brown is present between the veins in the subterminal area, strongest on the posterior half, but this color is relatively inconspicuous. The antemedial line is irregular, excurved, most evident as the luteous filling. The postmedial line is scalloped evenly, convex near the apex and then straight parallel to the outer margin. The subterminal line is even, pale, with brown shading in the subterminal area. A thin brown or gray basal dash spans the antemedial area. The discal spot is a thin transverse gray line surrounded by whitish scales. The hindwing is nearly white with a variable dusting of gray scales, darkest in females, with dark gray terminal line and black fringe at the anal angle. The head and thorax are dark tan and charcoal. The male antenna is serrate.
 
@@ -22,11 +22,11 @@ The global distribution of *N*. *ochreata* is limited to extreme southern Montan
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva is unknown. Miller et al. (2018) infer that it probably feeds on Salicaceae based on the known food plants of other *Notodonta* species.
 
-##### Adults
+### Adults
 
 All Pacific Northwest records are from July. It has also been found during June in other parts of its range. The adults are nocturnal and come to light. Females are rarely encountered.
 

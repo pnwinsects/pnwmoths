@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mniotype tenera* is a medium-sized moth (FW length 16–20 mm) that flies in wet forests during the summer. It has a dark gray-brown forewing with slight reddish mottling and a nondescript pattern that includes a black median bar, white scales in the lateral reniform spot, and a light subterminal line with a "W" mark. It is dull gray-brown, blackish brown, or dark red-brown, mottled with subtle dark red-brown. The posterior subterminal area is slightly lighter. A short black basal dash is present and a black bar extends across the median area in the fold. The basal and antemedial lines are black filled with the ground color, toothed toward the base on the veins. The antemedial line is slightly excurved and often strongly zigzagged posteriorly. The median line is black, faint. The postmedial line is black, strongly toothed on the veins, drawn toward the base on the costa, narrowly curved around the anterior cell, and then strongly angled toward the base below the reniform spot and curved toward the posterior margin through the fold so that the median area is narrowed posteriorly. The subterminal line is white to tan, diffuse, irregular and often broken into spots, offset below the apex and forming a moderate W-mark to the margin on M3 and CuA1. It is preceded by a series black chevrons near the W-mark. The terminal line is a series of black triangles. The fringe is striped dark brown and black with crossing light lines at the ends of the veins. All three spots are outlined by thin black lines. The orbicular spot is moderate-sized, oval, filled with the ground color or slightly lighter brown. The reniform spot is moderate-sized, broadly kidney-shaped, filled with the ground color medially and light ochre to white scales laterally. The claviform spot is moderately large, fused to the median bar. The hindwing is pale gray basally, darker gray beyond the mid-wing, with with dark veins, discal spot, and terminal line. The hindwing fringe is white with a gray and ochre base. The head and thorax are dark brown with thin dark line across the distal collar. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ The range extends north along the Pacific Coast through the Alaska Panhandle (th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on various hardwoods based upon closely related species.
 
-##### Adults
+### Adults
 
 This moth flies during the summer, usually fairly early in the year. The records from our region extend from late May to early August. It is nocturnal and comes to lights.
 

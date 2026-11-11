@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mesapamea* *secalis* is an introduced, variable, stout, small to medium-sized (FW 12.5–14 mm) stout noctuid that typically has a nondescript dark forewing with a prominent light reniform spot. Its range is spreading in western British Columbia and Washington. The forewing can be light olive brown, dark reddish-brown, or blackish-brown. The pattern is variable, mottled, nearly uniform,
 or light with contrasting darker medial area. Dark gray patches in the terminal area opposite the cell
@@ -31,7 +31,7 @@ is darker than the rest of the wing in *O*.
 of *M*. *secalis* but differs in having a black median dash across the fold and a black
 triangular mark in the postmedial area near the tornus.
 
-##### Larvae
+### Larvae
 
 ## Habitat
 
@@ -49,11 +49,11 @@ This species was first found in North America in Vancouver, British Columbia and
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae feed on a variety of grasses, including most economically important cereal grains (wheat, rye, barley, oat, and corn).
 
-##### Adults
+### Adults
 
 Adults have been found from late May into August in the Pacific Northwest. It is most common during June and July. It is nocturnal and comes to light.
 

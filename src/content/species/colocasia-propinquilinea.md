@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Colocasia propinquilinea* is a light gray medium-sized moth (FW length 15–20 mm) that flies in southeastern British Columbia during late spring and early summer. It has a dark posterior median area, black lines, and a prominent oval black orbicular spot filled with white. The gray ground color is variable, ranging from pale whitish gray to steel gray, gradually darker toward the outer margin. The median area is usually entirely or partially darker gray than the adjacent wing, most often posterior to the cell, but often including the cell between the spots. The lines are black. The antemedial line is very irregular. The median line is variable in prominence from absent to nearly as dark as the other lines. The postmedial line is scalloped, convex from the costal margin to below the reniform spot and then concave toward the base. The subterminal line is irregular and pale, usually preceded by a black shade. The terminal line is black, interrupted by the veins, and forms a black spot at the anal angle. The orbicular spot is oval, but very prominent, due to distinct black outline and white filling. The reniform spot is variable, black, complete, or evident only as the medial wall and white filling. The claviform spot is absent. The head and thorax are light to dark gray, usually with a gray edge to the collar and transverse gray banding on the distal tegulae. The male antenna is strongly bipectinate.
 
@@ -22,11 +22,11 @@ This species reaches its western limit in British Columbia. It occurs from south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding on a wide variety of hardwood trees and shrubs.
 
-##### Adults
+### Adults
 
 Adults are on the wing in late spring and early summer. The only British Columbia record found for this site is from mid-May. It is nocturnal and comes to lights.
 

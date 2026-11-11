@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Melanapamea mixta* is a medium-sized moth (FW length 15–18 mm) that flies in extreme southwestern Oregon during June. It has a nearly black forewing that appears mottled due to pure black markings, and its reniform spot has light yellow filling. The forewing has a slightly scalloped outer margin. The color is even slightly purplish black with as slight sheen, appearing black except for the fact that the lines and outlines of the spot are darker black. Several white spots are present on the costa distal to the median line. The antemdial line is zigzag, nearly perpendicular to the posterior margin. The median line is perpendicular to the costa between the spots, then offset lateral to run parallel to the distal postmedial below the reniform spot. The postmedial line is scalloped, drawn to the base on the costa, weakly excurved around the cell, and curved to meet the posterior margin at a right angle below the reniform spot. The subterminal line is pale but very spotty, usually evident near the apex. It is preceded by an incomplete black shade. The terminal line is black, thin. The fringe is black with small yellow spots on the base at the tips of the veins. The orbicular spot is round or slightly oval, filled with the ground color. The reniform spot is kidney-shaped, filled peripherally with light yellow and centrally with a powdery black crescent. The claviform spot is small. The hindwing is smoky gray with slightly darker reniform spot, thin dark terminal line, and dark gray fringe. The head and thorax match the forewing. The male antenna is weakly biserrate, bead-like.
 
@@ -22,11 +22,11 @@ This species has also been found in extreme northwestern California on the West 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it probably feeds on grasses (Poaceae) based on related species.
 
-##### Adults
+### Adults
 
 This species flies during June in the Pacific Northwest. It is nocturnal and comes to lights.
 

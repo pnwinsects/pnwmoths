@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Aseptis ethnica* is a broad-winged, medium-sized to large moth (FW length 18–19 mm) that flies in southwestern Oregon during the summer. It has a slightly mottled dark blackish-brown forewing that is broadly triangular and has a slightly scalloped outer margin. It is nearly uniform dull dark gray-brown to blackish brown in the Northwest, slightly lighter in the terminal area. A few lighter brown spots are present along the costa, likely the pale filling of the lines. The course of the postmedial line is marked by small black spots on the veins in some specimens. The subterminal line is tan to brown, powdery, vague, and diffuse, irregular. The fringe is concolorous with small tan or brown spots in the base at the tips of the veins. The orbicular and reniform spots are weakly outlined in gray, although the orbicular spot is black in a few specimens, and are located near to each other. The orbicular spot is round, filled with the ground color. The reniform spot is kidney-shaped, filled with dark gray to black. A gray to black claviform spot is evident in some specimens. The hindwing has slightly concave segment posterior to M1, although less prominent than in many other *Aseptis* species. It is dark gray-brown with dark veins and terminal line. The hindwing fringe is gray with a tan base. The head and thorax are the same color as the forewing. The male antenna is bead-like.
 
@@ -8,7 +8,7 @@ This species and *Aseptis fanatica* can be recognized by their broad dull dark b
 
 Populations of *A. ethnica* are geographically variable. Specimens from the southern part of its range in California are much lighter than those from the Pacific Northwest, ranging from gray-tan to mottled reddish brown.
 
-##### Larvae
+### Larvae
 
 The larva is smooth, green with fine blue mottling and a thin white lateral stripe.  The prolegs are contrastingly pink.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This moth is restricted to California outside of the Pacific Northwest, reaching
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on manzanitas (*Arctostaphylos* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 The flight period of *A. ethnica* is summer, usually during July and August. It is nocturnal and comes to lights.
 

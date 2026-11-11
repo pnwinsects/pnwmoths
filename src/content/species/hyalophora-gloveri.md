@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hyalophora
 gloveri* is
@@ -29,11 +29,11 @@ This species has a limited range in the Pacific Northwest.  It has been found o
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a general feeder on broad-leaved shrubs and trees.  Published foodplants include willow (*Salix* spp.) in the Salicaceae, cherry (*Prunus* spp.) in the Rosaceae, alder (*Alnus* spp.) in the Betulaceae, currant (*Ribes* spp.) in the Grossulariaceae, and buffalo berry (*Shepherdia canadensis*) in the Elaeagnaceae.
 
-##### Adults
+### Adults
 
 The records from our region are from late spring and summer.  This species is nocturnal and comes to light.  The adults do not feed.
 

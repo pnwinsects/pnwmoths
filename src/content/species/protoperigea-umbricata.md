@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protoperigea umbricata* is a moderately large brown moth (FW length 18 - 20 mm) that flies in dry forests and steppe habitats during the early fall. It has darker gray on the distal forewing and pure white on the hindwings. The ground color of the wings is slightly mottled and powdery due to a suffusion of dark scales. The darkest gray area near the margin is medial to the subterminal line where it is darkest on the veins and in the terminal area. The gray transverse lines are usually faint and incomplete except as dark spots on the costa. The weakly scalloped postmedial line is usually visible. It is drawn toward the base at the costa, is most heavily toothed and straight near the lateral reniform spot, is smoothly concave toward the base below the spot, and toothed at the trailing margin. The subterminal line is a nearly straight series of pale brown spots between the veins. An indistinct median line is evident in darkly marked specimens. The orbicular spot is a small dark dot or is absent. The reniform spot is a gray smudge, sometimes with a portion of the lateral wall showing as a light line. The claviform spot is absent. The hindwing is pure white, rarely with portions of a dark terminal line. The head and thorax are tan, often with gray medial margins on the tegulae. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species extends at least as far south as central California. I
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but herbaceous vegetation is suspected.
 
-##### Adults
+### Adults
 
 This species flies during the fall and has been collected from late July until early October in the Pacific Northwest. It is nocturnal and comes to lights.
 

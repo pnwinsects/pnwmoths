@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Diarsia dislocata* is our only *Diarsia* species with gray ground color with variable amounts of red-brown suffusion. Like other species in the genus, it is small to medium-sized (FW length 13 - 15 mm). The forewing is relatively broad, typical for the genus, with gray to brown-gray ground color that is most evident at the base of the forewing. The forewing is heavily suffused with red-brown, darkest in the median area and medial to the subterminal line near the apex. The terminal forewing is dark brown-gray in some individuals. The transverse lines are slightly darker gray and double, but only the component near the median area is strong, with light filling. The antemedial line is irregular to straight, oriented across the forewing. The postmedial line is weakly to moderately scalloped. The pale subterminal line is near straight except for an offset near the apex. The terminal line is broken into a series of lines between the veins. The orbicular spot is round to oval, variably outline in black or black with and inner yellow line, but is evident only as pale filling in most specimens. The reniform spot is similar, fairly large and kidney-shaped lacking a dark outer line in most specimens but is evident due to pale gray filling. The hindwing is light brownish-gray with slightly darker gray discal spot, postmedial line, and submarginal band. The thorax is gray to light gray-brown with a slight reddish tint and slightly lighter collar. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is found in boreal, subarctic, and montane habitats across northern
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species appears to be single brooded. Pacific Northwest records are from July and August. It is nocturnal and comes to lights.
 

@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrotis venerabilis* is a common, dull gray-brown moth with a dark gray costa, filling of the forewing spots, and streaky terminal wing that also has a long black claviform spot and pale hindwing in males and darker gray hindwing in females. It is medium-sized (FW length 15–18 mm) and flies in dry forest and steppe habitats in the fall. The forewing ground color is light to medium dark gray-brown, dark gray to black along the costa and in the terminal area opposite the reniform spot. The distal forewing is streaky due to black veins, black chevrons between the veins medial to the subterminal line, and black line abutting the lateral reniform spot in most specimens. The transverse lines are absent, except for dark spots on the costa. The subterminal line is also absent, although its position is shown by the border of the dark terminal gray area and the lateral margins of the black chevrons. The orbicular spot is thin, black, and very long, extending from the forewing base to the reniform spot in some individuals. The reniform spot is fairly large and the lateral border is weakly indented. It is black with a thin, inner line of the ground color with the remainder filled with dark gray similar to the costa. The claviform spot is very long and appears to continue to the base of the forewing due to a black basal dash. The hindwing in males is pale gray with light gray veins and margin; that of females is nearly uniform darker gray with darker veins and a light gray fringe. The head and base of the collar are light brown, while the rest of the collar is dark gray. The rest of the thorax is light gray-brown with dark margins on the tegulae. The male antenna is broadly bipectinate.
 
 This species is most likely to be confused with brown streaky late-season *Euxoa* species, particularly *Euxoa atristrigata*, but can usually be identified by the combination of broad male antenna, long black claviform spot, and the very long orbicular spot that is not fused to the reniform spot. *Euxoa atristrigata* has fused orbicular and reniform spots in most specimens, lacks the very long claviform spot, and has a narrower male antenna.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, pale gray dorsally and darker gray laterally with fine dark lines.  It is illustrated by Lafontaine (2004).
 
@@ -26,11 +26,11 @@ This species is widely distributed throughout most of North America south of sou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation, particularly legumes (Fabaceae), but will also feed on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in late summer and fall. Pacific Northwest records extend from early August to mid October. This species is nocturnal and males come readily to lights. Females are rarely collected.
 

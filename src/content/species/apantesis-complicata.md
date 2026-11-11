@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis complicata* is a rarely collected species found in grassland habitats near the Salish Sea in British Columbia and Washington. It is a small to medium-sized tiger moth (FW length 14–15 mm). The forewing appears black with off-white veins and transverse lines. The latter are limited to the postmedial and subterminal regions, lacking more basal lines found in the similar species *Apantesis ornata*. The hindwing ground color is yellow-orange. The black markings are heavy, typically fused and often forming a uniform thickness marginal band. The eye is reduced in size, smaller than that of *Apantesis ornata*.
 
 *Apantesis ornata*, which occurs in western Washington south of Puget Sound, is closely similar to *Apantesis complicata*. These taxa have been considered conspecific by some authors. The rationale for regarding them as distinct is discussed by Schmidt (2009). *Apantesis complicata* lacks the forewing pale antemedial region line commonly found in *A. ornata*, its eyes are smaller, and the valve of the male genitalia lacks a clasper that is found in *A. ornata*.
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -26,11 +26,11 @@ This species does not occur outside of the Pacific Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is available at present regarding larval foodplants.
 
-##### Adults
+### Adults
 
 Adults of this moth fly in early and mid summer. Although the reduced eye size suggests that this species might be partially diurnal all Washington specimens have been collected at night in light traps.
 

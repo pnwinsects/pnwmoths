@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea antennata* is a large *Apamea* (FW length 18–22 mm) that flies in dry forests and parklands throughout all but the most densely forested and open steppe habitats in our area. It has variable orange-brown, red-brown, or dark brown forewings with grayish or pale violet shading in the posterior margin and subterminal area. The outer margin of the forewing is lightly scalloped. The color is slightly mottled medium-dark warm brown with an orange to slight red tint. The posterior wing and much or the subterminal area are most often light gray with a violet to silver hue, reduced in some west-side specimens. The terminal area is darker gray with diffuse stripes of red-brown or the gray between the veins in many specimens. A black basal dash is present, with a similar black mark along the posterior margin near the base. The basal, antemedial, and postmedial lines are red-brown, partially double and filled with the ground color and the light gray color. The basal line is a pair of spots on the costa. The antemedial line is usually present across the wing but is darkest on the costa, in the cell, and in the fold, is angled toward the outer margin with teeth toward the base on the veins. The median line is dark brown to gray-brown, diffuse, angled toward the outer margin from the costa to below the reniform spot and then parallel to the postmedial line to the posterior margin. The postmedial line is scalloped, often with spots on the veins distal to the teeth, weak on the anterior wing where it curves evenly around the reniform spot, then strongly angled toward the base to near the antemedial line. A short segment in the fold is prominently black and light gray. The subterminal line is pale red-tan, thin, very uneven with a strong but slightly diffuse W-mark on M3 and Cu1 that reaches the outer margin. It is preceded by a thin red-brown shade, wider and often grayer in the fold, and two dark wedges at the anterior W-mark. The terminal line is a series of dark triangles that accentuate the saw-tooth pattern or the margin. The fringe is dark brown to gray-brown with lighter transverse lines at the ends of the veins. The orbicular and reniform spots are partially outlined in black or red-brown and filled with the ground color or lighter yellow-brown. The orbicular spot is an elongate oval, nearly touching the reniform spot. The reniform spot is irregularly kidney-shaped or hourglass-shaped, weakly outlined on the lateral side, filled with darker gray inferiorly. The claviform spot is variable, either black or gray. A diffuse black shade extends from the spot to the postmedial line in some spots. The hindwing is gray-tan with extensive gray suffusion and a pink tine, slightly darker gray veins, discal spot, and terminal line. The hindwing fringe is pale tan with a strong rose tint. The head and thorax are red-brown to reddish gray-brown with darker brown lines near the edges of the collar and tegulae. The male antenna is bead-like.
 
@@ -28,11 +28,11 @@ This species is common and widely distributed in a variety of forested habitats 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on native bunchgrasses in the Poaceae based upon the habitat.
 
-##### Adults
+### Adults
 
 Adults fly during late spring and summer. Records from the Pacific Northwest extend from late May to early August. This species is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis erratica* is a medium-sized species (FW length 14 - 17 mm) that is pale cream, light gray, or light reddish in color with a variable forewing pattern that usually includes a dark spot in the lower reniform spot and a series of dots marking the teeth of the postmedial line. The forewing color is variable, usually even warm light cream with a slight reddish or orange tint or clay gray. A dark shade precedes the subterminal line, usually a dark shade of the ground color but some specimens also have vague dark gray dots between the veins. The basal and antemedial lines are absent in most cream specimens but are present in darker gray ones and are gray, double, and filled with the ground color when visible. The postmedial line is also faint except for a series of dots on the veins that mark the tips of the teeth of the dentate line, although the double lines are visible in specimens that also have the other lines showing. The pale subterminal line is smooth and usually evident across the wing. The orbicular and reniform spots are similar, pale and variably filled with reddish scales in pale specimens or slightly reddish gray in gray specimens. The lower or upper and lower portions of the reniform spot contain a gray dot in some individuals. The orbicular spot varies from a small round dot to a short oblique bar. The reniform spot is usually an upright oval or weakly figure-eight shape. The claviform spot is absent. The hindwing is pale luteous gray, fairly heavily suffused with dark gray to blackish gray toward the margin and has a weak discal spot and dark veins. The lighter fringe is pink-tinged in many specimens. The head and thorax are uniform and match the forewing color. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of *A. erratica* extends south in California to the latitude of San Fr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a foodplant generalist feeding on various hardwoods such as willows (*Salix* spp.) in the Salicaceae, snowberry (*Symphoricarpos* spp.) in the Caprifoliaceae, and huckleberries (*Vaccinium* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 *Abagrotis erratica* flies in late summer and fall from late July through September in our region. It is nocturnal and comes to lights. It has also been collected at sugar bait in eastern Washington.
 

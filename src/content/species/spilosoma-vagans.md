@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spilosoma vagans* is a variably colored and patterned, medium-size (FW length 14 - 18 mm) tiger moth. The ground color of both wings is similar, most commonly light yellow brown with a salt-and-pepper dusting of black scales, but the color ranges to ochre, bright orange brown, gray brown, and dark reddish brown. Most specimens have a black spot at the lower end of the discal cell. The lines are dark gray, somewhat diffuse, and discontinuous and range in prominence from completely absent to all normal lines present. The hindwing markings are also variable. Almost all specimens have a gray discal spot and traces of a marginal band, but the strength of the markings ranges to all but the terminal wing and fringe suffused with dark gray.
 
@@ -24,11 +24,11 @@ This species is found in western North America from southern California, souther
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on various kinds of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 *Spilosoma vagans* has been found from late April until early August in our region. It is most common in June. The adults males are nocturnal and come to light. Females are rarely if ever collected in light traps.
 

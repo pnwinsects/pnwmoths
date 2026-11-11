@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Proserpinus flavofasciata* is an uncommonly collected day-flying bumblebee mimic without clear wings. It is a large moth but is small for a sphinx moth (FW length 21 mm). The forewings are blackish gray with a lighter gray subterminal area traversed by black veins. The hindwings are dark yellow with black basal area, veins, and narrow marginal band. The head and thorax are "bumblebee" yellow with a black collar, while the abdomen is mostly black with a small amount of yellow near the tip. The antenna is black, club-shaped.
 
@@ -22,11 +22,11 @@ This species occurs in boreal and montane forests across the width of North Amer
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on fireweed (*Epilobium* spp.) in the Onagraceae.
 
-##### Adults
+### Adults
 
 Adult moths fly in early spring, sometimes when snow banks are still present, and nectar on flowering currents (*Ribes* spp.) or other spring flowers in high mountain areas.  Records in our region are from late April to early June. The moths are diurnal and mimic bumblebees (*Bombus* spp.) in appearance and behavior.
 

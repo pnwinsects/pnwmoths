@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa plagigera* is a small to medium-sized *Euxoa* (FW length 14–17 mm) that flies in a variety of habitats on both sides of the Cascade Mountains during the summer. It has blackish gray forewings, a pattern dominated by silver-gray costa and lining of the spots, and an elongate, horizontal orbicular spot. The forewing is silvery blue-gray, extensively suffused with blackish gray surrounding the cell and extending along the veins in the posterior median and subterminal areas. The cell is dark gray, is are the costa preceding the subterminal line and the terminal area. A pale light tan-gray streak is present throughout the fold. A diffuse black basal dash is present. The proximal radial vein and the cubital vein are light gray, and the distal veins are dark. The basal and antemedial lines are dark gray or black and light gray. The basal line is evident on the costa and cubital vein. The antemedial line is two spots on the costa, then irregular below the cubital vein, strongly angled toward the outer margin with a long sharply point toward the costa between 1A+2A and the posterior margin. No median line is present. The postmedial line is poorly defined, thin and lightly scalloped, two spots on the costa, indistinct through the cell, and better-defined below the cell where it is angled strongly toward the base. The subterminal line is pale gray, often slightly yellow, thin, slightly irregular with an offset below the apex and a moderate "W" mark on the mid-forewing. It is preceded by a dark gray spot on the costa and a series of black wedges between the veins on the mid-forewing, strongest at the "W" mark. The terminal line is a series of black spots. The fringe is gray, weakly barred. The orbicular and reniform spots are outlined in black outer and silver gray inner lines and are filled with the ground color. The orbicular spot is an elongate bar, nearly oriented along the axis of the cell. The reniform spot is kidney-shaped, moderate-sized. The claviform spot is black, moderately large and narrow. The hindwing is light gray, barely darker at the margin, with faint gray discal spot, veins, submarginal shade, and terminal line. The hindwing fringe is white with a gray base. The head and thorax are dark gray with light and dark margins on the tegulae. The base of the collar is light gray and the edge is darker, separated by a transverse black line. A frontal tubercle is present. The male antenna is biserrate. *Euxoa plagigera* is placed in the subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The range extends east from the Pacific Northwest to southern Saskatchewan, west
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults fly in late summer and early fall, slightly later than *E. tessellata*. Records from our region are from late June to mid-September, with most museum specimens from late July and early August. It is nocturnal and comes readily to lights.
 

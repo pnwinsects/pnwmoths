@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Proxenus mindara* is a small (FW length 11 - 14 mm) medium dark brownish-gray moth with forewing markings nearly limited to pale scales in the upper and lower portion of the reniform spot, a punctate black orbicular spot, and dark veins on the distal third of the wing. The postmedial line is very faintly evident on the veins in some individuals. The hindwing is light gray. The head and thorax match the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends south to southern California from the Pacific 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous plants like related species.
 
-##### Adults
+### Adults
 
 *Proxenus mindara* has a long flight season and is on the wing from early May through September in our region suggesting the presence of more than on brood. It is most commonly collected during July and early August. It is nocturnal and comes to lights.
 

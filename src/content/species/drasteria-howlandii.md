@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria howlandii* is a common *Drasteria* from dry steppe habitats that has a banded brown and blue-gray forewing and bright orange and black hindwings. It is medium-sized (FW length 14 - 19 mm). The forewing ground color is gray-brown. The forewing appears transversely banded because the median area abutting the antemedial line and the terminal area are light blue-gray and the filling of the antemedial line and area between the postmedial and subterminal lines are dark brown. The median line is double. The subterminal line is preceded by a series of black wedges. The angular field between the reniform spot and laterally expanded postmedial line is light brown, with white scaling at the lateral reniform spot and along veins M3 and CuA1. The hindwing is bright orange to red-orange, usually the latter, with black markings. The discal spot is fairly large and is separate from the postmedial band. The marginal band is bilobed, typical for the genus. The ground color of the undersides of both wings is nearly uniform orange. The head and thorax are sandy brown. The antennae are ciliate in males; simple in females.
 
@@ -22,11 +22,11 @@ This species is distributed in the American West. Powell and Opler (2009) descri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on buckwheats (*Eriogonum* spp.) in the Polygonaceae.
 
-##### Adults
+### Adults
 
 *Drasteria howlandii* has a bimodal flight curve, with peaks in April and August suggesting that it is bivoltine. This species is diurnal and nocturnal and can be collected by hand netting or by attraction to light. Day-flying individuals have a rapid flight, bobbing somewhat when flying slowly.
 

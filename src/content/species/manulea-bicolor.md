@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Manulea bicolor*, the bicolored moth, is a small to medium-sized (FW length 13–17 mm), aptly named, gray and yellow moth that occurs in most of British Columbia and adjacent states east of north-eastern Washington during the summer. Most of the moth, including head thorax, and most of both wings and abdomen are dull medium to dark gray. The collar, tip of the abdomen, and costa of the forewing are contrasting bright ochre yellow. The forewing is relatively long.
 
@@ -22,11 +22,11 @@ The distribution of *M. bicolor* is limited to British Columbia, extreme north-e
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on tree lichens, and particularly favors lichens growing on conifers such as spruces and firs.
 
-##### Adults
+### Adults
 
 Adults occur in late summer and early fall. They are nocturnal and come to lights.
 

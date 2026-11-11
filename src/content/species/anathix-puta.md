@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anathix puta* is a small moth (FW length 12–15 mm) with short broad forewings that are orange-brown suffused with gray with a pattern that includes an even curved postmedial line, variable dark spots preceding the subterminal line, and a figure-eight-shaped reniform spot with a diffuse gray spot in the lower end. It usually flies near aspens during early fall. The forewing is relatively short, broad, and blunt, although the apex is weakly falcate in some specimens. The color is mottled orange-brown to gray-tan, slightly darker at the base, along the costa, and in the terminal area which tends to be gray. Almost all specimens are diffusely suffused with gray. Some specimens have light veins on the mid-wing. The basal, antemedial, and postmedial lines are a dark shade of the ground color, double filled with the ground color or bluish gray, often relatively obscure. The basal line is excurved. The antemedial line is angled toward the outer margin, waved with lateral-convex segments at each end and more diffusely across the mid-wing. The median line is orange-brown to gray-brown depending on the color of the rest of the wing, diffuse and slightly irregular, angled from the costa to the lower reniform spot where it is bent to run perpendicular to the posterior margin. The postmedial line is very smoothly and broadly curved around the reniform spot, bending toward the posterior margin at CuA2, not far above the margin. The subterminal line is pale, very even and nearly parallel to the outer margin. It is preceded in some specimens by brown or black spots between the veins across the wing except at the margins. The terminal line is a series of faint spots. The orbicular and reniform spots are outlined an outer red-brown and inner pale line. The orbicular spot is round, often open toward the costa, filled with the ground color. The reniform spot is moderately large, weakly figure-eight-shaped with gray filling of the lower third. No claviform spot is evident. The hindwing is light tan, sometimes with an orange tint, suffused with gray that is darkest in the submarginal area and spares the margin. A diffuse discal spot is present. The fringe is off-white, often with an orange or pink cast. The head and thorax are gray-tan to orange-tan. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ The range of this species extends east across the boreal forest and parklands of
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae. It appears to favor quaking aspen (*P. tremuloides*).
 
-##### Adults
+### Adults
 
 *Anathix puta* flies during late summer and early fall, usually in August and September. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hemaris thetis* is a medium-sized, day-flying sphinx moth (FW length 17 mm) with clear wings that resembles a bumblebee. The forewings are long and very narrow for the size of the moth and the hindwings are quite small. The wing margins and veins are blackish gray with red-brown areas at the bases of both fore- and hindwings and a red spot at the apex of the forewing; the rest of the wings are clear. The head is olive dorsally, light yellow ventrally, with a black band across the frons. The thorax and anterior abdomen are yellowish medium olive, while the rest of the abdomen is banded black and light yellow. The pattern of black and yellow on the abdomen is the diagnostic feature between this moth and *Hemaris diffinis* and is discussed further below. The antenna is club-like, tapering gradually from tip to base typical of all sphinx moths.
 
@@ -10,7 +10,7 @@ This species is easily identified as a member of the genus *Hemaris* by its clea
 
 The synonym *Hemaris palpalis* Grote was described from Gilroy, British Columbia. The type series of *Hemaris rubens* Henry Edwards, also considered a synonym of *Macroglossa thetis* Boisduval, is from Oregon and Lake Tahoe, California.
 
-##### Larvae
+### Larvae
 
 The larva is blue-green with faint markings and a caudal horn.  It is illustrated by Powell & Opler (2009) under the name *Hemaris diffinis*.
 
@@ -30,11 +30,11 @@ This species is widely distributed throughout the Pacific Northwest in open mixe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Caprifoliaceae such as honeysuckle (*Lonicera* spp.) and snowberry (*Symphoricarpos* spp.).
 
-##### Adults
+### Adults
 
 Adults fly during the day and are bumblebee mimics.  They nectar and hover in front of flowers while feeding, unlike bumblebees which land on the flower.  *Hemaris thetis* have been collected from mid-April to late July in the Pacific Northwest, with the later records from higher elevations.
 

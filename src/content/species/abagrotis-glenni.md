@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis glenni* is a medium-sized (FW length 13 - 17 mm), dark brown-gray moth that flies near junipers during the late summer. It has a gray thorax with a central brown area and a forewing with light cream-colored spots and black horizontal streaks at the base and in the cell. The forewing ground color is slightly variable, usually dark gray-brown, but darker blackish gray or with a red-brown suffusion in some areas.  The wing is slightly darker near the subterminal line. The terminal area is usually lighter gray, especially near the apex, but is luteous with dark veins in some individuals. A black basal dash is fused to the black-filled claviform spot to produce a long basal streak. The cell is filled with black outside of the spots; this black continues as a streak toward the outer margin from the reniform spot in most specimens. The transverse lines are only evident as double gray marks at the costa. The orbicular and reniform spots are filled with light yellow scales. The orbicular spot is absent or small, while the reniform spot is wide and ovoid in shape. The hindwing is dark gray with a two-toned gray and white fringe. The head, collar, and patagiae are gray, while the central thorax is tan to light reddish brown. The male antenna is filiform.
 
@@ -8,7 +8,7 @@ This species is most similar to *Abagrotis striata* and *Abagrotis mirabilis*. 
 
 This species is geographically variable. Specimens from most of our area are gray, but those from Anacortes, Washington and southern Idaho are more red-brown in ground color similar to populations in the southern Rocky Mountains in Colorado and Utah. Those from British Columbia have dark gray ground color.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, pink-brown with white dorsal spots and black sub-dorsal and lateral dashes.  It is illustrated by Miller and Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is found widely in the Rocky Mountain states from western Montana t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on conifers of the family Cupressaceae.  In the Pacific Northwest, the primary larval foodplant is western juniper (*Juniperus occidentalis*), but it may also feed on cedars at higher elevations in the Cascades. The likely foodplant in eastern Washington is *Juniperus communis*, and *Juniperus maritima* is a dominant tree where this species occurs in Anacortes, Washington.
 
-##### Adults
+### Adults
 
 This species flies in late summer and early fall. Records in our region are from early July through September with most specimens having been collected in August. It is nocturnal and comes to lights.
 

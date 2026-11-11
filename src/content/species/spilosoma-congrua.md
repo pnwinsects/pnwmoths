@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spilosoma congrua* is a predominantly eastern species that only occurs in the Pacific Northwest in south-central British Columbia. It is similar in size (FW length 17 - 22 mm) and general appearance to the more common *Spilosoma virginica* but its abdomen is white without the yellow and black marks of *S. virginica*. In addition, the forewing of *S. congrua* is usually more heavily spotted with gray to black along the veins. Dots are present along the postmedial and subterminal lines in most specimens, and some have additional dots along the antemedial and basal lines. In contrast the hindwing of *S. congrua* is immaculate. The femora and tibiae of the forelegs are yellow and black. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ This species is limited to south-central British Columbia in our area.
 
 ## Life History
 
-##### Adults
+### Adults
 
 The few Pacific Northwest records of this moth suggests that it flies from mid-May until mid-June.
 
-##### Larvae
+### Larvae
 
 The larva is reported to be a general feeder on herbaceous plants by Covell (1984).
 

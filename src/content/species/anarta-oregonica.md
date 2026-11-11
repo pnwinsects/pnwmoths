@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anarta oregonica* is a mottled, dull, dark brown, medium-sized moth (FW length 14 - 16 mm) that flies in high elevation forests during the summer. It has a dark reniform spot and a two-toned light brown and black hindwing. The dull brown forewing color is slightly darker along the costa and in the terminal area, sometimes dark brown-gray in the terminal area. The basal, antemedial, and postmedial lines are dark gray, double with filling of slightly lighter brown than the ground. The basal and antemedial lines are moderately irregular. The latter line is slightly slanted away from the base and slightly incurved at the posterior margin. The median line is dark gray, but usually faint except on the costa. The postmedial line is weakly to moderately scalloped, sometimes with thin pale lines on the veins near the tips of the teeth, drawn toward the base on the costa, gently and broadly excurved around the reniform spot, and bent to join the posterior margin at near a right angle. The subterminal line is pale ochre-brown, irregular with an offset toward the base below the costa and a strong W-mark on M3 and CuA1 to the outer margin. The line is preceded by dark gray to black marks on the costa and near the W-mark. The terminal line is a thin pale line at the base of the fringe and a series of dark gray spots between veins. The fringe is dark brown, sometimes weakly checkered. The orbicular and reniform spots are outlined in thin black. The orbicular spot is round, filled with the ground or slightly lighter brown and usually with a darker central ocellus. The reniform spot is moderately large, broadly kidney-shaped or weakly figure-eight-shaped, mostly filled with smudgy charcoal gray and a small amount of the ground color. The claviform spot is small, black, filled with the ground color or dark gray. The hindwing is pale tan with a moderately well-defined dark gray marginal band, a discal lunule, and veins. The hindwing fringe is light tan with a darker tan base. The head and thorax match the forewing, often with gray transverse bands on the collar. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species extends south through the mountains to California, Uta
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based upon closely related species.
 
-##### Adults
+### Adults
 
 *Anarta oregonica* is single-brooded and flies during the summer. It has been collected from mid-June through August in our region. This species is nocturnal and comes readily to lights.
 

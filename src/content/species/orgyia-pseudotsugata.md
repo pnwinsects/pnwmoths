@@ -8,7 +8,7 @@ This species can usually be identified by its short and broad forewings, dark fo
 
 The nominate subspecies *O. p. pseudotsugata* is found throughout most of our region. Ferguson (1978) named subspecies *O. p. morosa* for melanic populations along the Pacific Northwest Coast but noted that there was evidence for intergradation with *O. p. pseudotsugata* in areas of central Washington and northeastern Oregon.
 
-##### Larvae
+### Larvae
 
 Larva is black and densely covered with white hair tufts, combined with four very long dorsal white and yellow hair tufts.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is found in forests throughout the Pacific Northwest south of south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on conifers (Pinaceae), and particularly favors Douglas fir (*Pseudotsuga menziesii*) and true firs (*Abies* spp.).
 
-##### Adults
+### Adults
 
 This species is primarily found in late summer and fall, most commonly in August and September. The males are nocturnal and come to light. Like other species the females are sedentary and lay their eggs on the cocoon after mating.
 

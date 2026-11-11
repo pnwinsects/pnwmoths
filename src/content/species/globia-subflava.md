@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Globia subflava* is a sexually dimorphic, medium-sized, wetland moth (FW length 15–18 mm in males; 16–20 mm in females) that flies in wetlands east of the Cascade Mountains during the late summer and fall. It has dark, orange-brown males and straw-colored females with a slight orange tint. In both, the forewing lines are represented by gray spots on the veins. Gray suffusion is present along the veins, darkest along the posterior cubital vein to the end of the cell followed by near the outer margin. The terminal area is slightly darker than the rest of the wing, and there is a variable light suffusion of darker brown scales, especially in the median area. The lines are reduced to black spots on the veins except on the costa, three spots for the antemedial line and a smooth arc of spots for the postmedial line. The orbicular and reniform spots lack outlines and appear as areas of light ground color in specimens with adjacent darker suffusion. There is a gray spot in the posterior reniform spot, most evident in females. The hindwing is light ochre, darker with slight orange cast in males, with dark veins and terminal line in some males. The head and thorax match the forewings in both sexes. The abdomen is relatively long for the size of the wings. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species occurs across the Continent from central Alberta and Nebraska to so
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist that bores into rushes (Juncaceae) and other wetland plants. It is closely associated with bulrushes (*Scirpus* spp. in the Cyperaceae).
 
-##### Adults
+### Adults
 
 *Globia subflava* flies in the summer and early fall, usually beginning in mid-July. It is nocturnal and comes to lights, although it rarely leaves the wetlands in which it lives. This species can be found in numbers if lights are placed in marshes in which bulrushes grow.
 

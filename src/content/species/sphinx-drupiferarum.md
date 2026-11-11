@@ -20,11 +20,11 @@ This is another widely distributed North American sphinx moth found from Coast t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding mostly on cherries (*Prunus* spp.) in the Rosaceae.
 
-##### Adults
+### Adults
 
 Sphinx drupiferarum is single brooded and is on the wing from mid-May to early August.  It is nocturnal and comes to light.
 

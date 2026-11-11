@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis definita* is a small (FW length 13 mm), mottled, powdery-gray moth that flies in the mountains of southeastern Oregon during late summer and fall. It has brick-red scales in the reniform and orbicular spots and a pale gray hindwing. The forewing is powdery due to dark gray and light gray scales, slightly darker in the median area and on the distal wing. Mottling is strong on both sides of the subterminal line, darkest on the costa and at the anal angle in both areas. A pale streak extends from the wing base to the antemedial line at the base of the claviform spot, and a dark line connects the spots across the posterior cell. The basal, antemedial, and postmedial lines are dark gray, double with light gray filling. The antemedial line is slightly irregular, slightly oblique from anteromedial to posterolateral. The postmedial line is very weakly scalloped, drawn sharply toward the base at the costa, excurved around the reniform spot, and touching the lower reniform spot where it is bent to extend to meet the trailing margin at a right angle. The median line is dark gray, running through the lateral portion of the orbicular spot. The subterminal line is light gray, similar to the filling of the lines, finely dentate across the mid-wing, and straighter near the anterior and posterior margins. The terminal line is thin and dark gray. The fringe is weakly checkered light and dark gray. The orbicular and reniform spots are similar, dark gray with pale gray peripheral and dark gray and brick red central filling. The orbicular spot is round with a mixed gray and red central ocellus. The reniform spot is moderately wide, kidney-shaped, predominantly filled with red. The claviform spot is less prominent than the other spots, small, gray with pale and red filling. The hindwing is light whitish gray with gray along the veins near the margin, dark veins, and a thin dark terminal line. The hindwing fringe is white. The head and thorax are gray with pale and dark gray bands across the base and tip of the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species includes eastern and southern California and Utah beyo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species. The most likely foodplants are desert shrubs in the Rosaceae, based on the preference of the closely related *Sympistis dunbari*.
 
-##### Adults
+### Adults
 
 This species flies in late summer. It is nocturnal and comes to light.
 

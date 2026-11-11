@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Chelis sordida* is, as its name suggests, a drably colored tiger moth. It is medium-sized (FW length 15–16 mm), dark gray with pale yellowish forewing lines, and flies in the high Rocky Mountains during the summer. The forewing is charcoal-gray, traversed by irregular cream or dull ochre lines that produce a fishnet pattern on the outer third of the wing. The postmedial line is smoothly curved and traverses the width of the wing. Pale scaling along the veins is limited to the wing base, greatest on 1A+2A. The wing margin, including the fringe, is off-white. The hindwing is mostly dark smoky gray with darker veins and discal spot, but the fringe is off-white and some individuals show paler areas at the base of the marginal band. The body is mostly black, with yellow off-white on the top of the head, the edge of the collar and tegulae, and at the end of each abdominal segment. The weakly bipectinate antenna is black.
 
@@ -24,11 +24,11 @@ The relationship of Rocky Mountain *Chelis* populations to others in Yukon Terri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available for this species.
 
-##### Adults
+### Adults
 
 Adults are diurnal, preferring to fly in late afternoon and evening. They are strong flyers and can be difficult to net. Most records are from July to mid-August.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 Scotogramma harnardi is a seldom-collected powdery grayish yellow medium-sized noctuid moth (FW length 15 mm; n = 1) that flies in eastern Oregon during spring. The forewing scales are yellow and gray, producing a powdery gray-yellow pattern with faint indistinct slightly darker gray lines and spots. The darkest spot is on the anterior mid-wing, due to fused dark filling of the otherwise obsolete reniform spot and the anterior medial line. Other prominent markings are faint transverse lines, most prominently the antemedial line, dark shade medial to the subterminal line, and the terminal line. Some specimens of this species from outside the Pacific Northwest have thin dark outlines of the claviform, orbicular, and reniform spots, but the two known Oregon specimens lack well-defined spots. The fringe is checkered weakly with yellow and slightly darker gray. The hindwing is pale with an ill-defined broad gray marginal band, dark veins, and small discal spot. The hindwing fringe is gray-yellow off-white. The head and thorax match the gray forewing elements. The male antenna is filiform, ciliate ventrally. The eye is covered with fine hairs.
 
@@ -24,11 +24,11 @@ This moth has only been encountered twice at Succor Creek State Park in Malheur 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
-##### Adults
+### Adults
 
 Adults fly during spring. Both occurrences of this moth in the Pacific Northwest are from early May.
 

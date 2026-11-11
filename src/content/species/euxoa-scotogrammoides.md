@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa scotogrammoides* is a nondescript, gray-tan to brown-gray, medium-sized *Euxoa* (FW length 15–19 mm) that flies east of the Cascades during late spring and early summer. Its forewing has a faint pattern lacking dark gray or black elements. Most populations of this moth are grayish-tan, slightly darker gray along the costa and near the outer margin. A population from southwestern Oregon is darker brown-gray and slightly larger than other populations from our area. The terminal area is darker than the rest of the forewing, but usually not as dark as the shade preceding the subterminal line. The basal, antemedial, and postmedial lines are gray-brown, double filled with slightly lighter shade of the ground color, darkest on the costa and variable in darkness on the rest of the forewing. The basal line is inconspicuous or evident as spots on the costa. The antemedial line is usually patchy, occasionally complete, slightly irregular, and angled slightly toward the outer margin.  The median line is gray-brown, usually faint but sometimes as dark as the shade near the subterminal line, weakly excurved. The postmedial line is toothed on the veins when evident, nearly straight across the wing near the reniform spot and angled toward the base below the level of the cell. The subterminal line is pale, patchy and incomplete, preceded by a dark gray-brown shade. The terminal line is thin and faint. The fringe matches the terminal area. The orbicular spot is absent or a small pale spot. The reniform spot is weakly outlined in pale scales and is filled with gray-brown. The claviform spot is absent. The hindwing is gray-tan, darker brown-gray in the southwestern Oregon population, with slightly darker veins, discal spot, and terminal line. The hindwing fringe is off-white with a variable darker base. The head and thorax match the forewing. A frontal tubercle is present. The male antenna is biserrate. *Euxoa scotogrammoides* is a member of the subgenus *Euxoa*.
 
@@ -26,11 +26,11 @@ The range of this species extends south from our region to north-eastern Califor
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies relatively early in the year, usually beginning in late spring at low elevation and later in the summer at higher elevations. Records for our region begin in mid-May and end in mid-July. This species is nocturnal and comes to lights.
 

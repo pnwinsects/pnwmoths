@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Polia piniae* is a common, large (FW length 22 - 26 mm), blue-gray species that flies in forests during the summer. It has large orbicular and reniform spots with smudgy black wedge marks medial to the subterminal line. The forewing appears long and narrow and slightly pointed toward the apex due to an angled outer margin. The ground is dusty medium-dark blue-gray, focally darkest in the cell between the spots and adjacent costa and slightly darker along the trailing margin of the median area. The basal and antemedial lines are double, gray, and filled with the ground color, nearly obsolete except at the costa. The diffuse median line is dark gray, faint at the trailing margin, absent on the mid-wing, and dark gray as noted above. The postmedial line is also faint but usually evident as a thin scalloped gray line followed by light gray. The pale subterminal line is preceded by ill-defined black wedges between the veins at the costa, opposite the cell, and near the trailing margin. The terminal line is thin, dark gray. The margin is nearly straight or slightly undulating. The fringe blue-gray. The orbicular and reniform spots are thin, black, often faint or incomplete, and filled with light blue-gray. The orbicular spot is large, round, oval, or irregular in shape. The reniform is large, usually irregularly figure-eight shaped. The claviform spot is relatively small, varying from gray to black. The hindwing is light gray with a yellow tint, suffused with light gray medial to the postmedial line, darker gray near the margin but not to the margin between veins M3 to CuA2. The discal spot, terminal line, and veins are darker gray. The fringe is pale gray with a darker base. The head and thorax are mostly hoary blue-gray. A gull-wing black transverse line traverses the mid-collar, black lateral margins are present on the tegulae, and a weak tuft of dark scales is present on the anterior thorax. The eye is covered with hairs. The male antenna is weakly biserrate.
 
@@ -22,11 +22,11 @@ This species is found in the western portion of North America. South of the Paci
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on hardwoods such as alder (*Alnus* spp.) in the Betulaceae and willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected from early June to mid-August in our region. They are nocturnal and come to lights.
 

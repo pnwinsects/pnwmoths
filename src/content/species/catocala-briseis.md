@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Catocala briseis* is a medium-sized underwing moth (FW length 28 - 32 mm) that flies in boreal and montane forests during late summer and fall. It has black-gray and white forewings and dark red-and-black banded hindwings. The forewing margin is scalloped. The ground color is dark gray, usually blackish and often with a slight blue tint. Pale spots are present between the reniform spot and the antemedial line, distal to the reniform spot, and in the subterminal area opposite the cell and on the mid-forewing. The subterminal area sometimes has a slightly brown tint. The basal, antemedial, and postmedial lines are double, black, with slightly lighter filling than the ground color, often white at the trailing margin and usually paler in the postmedial line than in the antemedial line. The basal and antemedial lines are relatively inconspicuous due to the dark adjacent wing color. The antemedial line is evenly waved across the wing at a slight oblique angle toward the anal angle. The postmedial line is moderately strongly toothed, especially opposite the cell, and is drawn sharply toward the base above vein 1A+2A. The median line is a black shade in the anterior median area. The subterminal line is dark gray to black, double, filled with bluish white or pale gray, evenly toothed across the wing nearly parallel to the outer margin and slightly inset toward the base near the costa. The terminal line is a series of black spots followed by white to light gray spots between veins. The fringe is gray with thin black longitudinal stripes. The reniform spot is dark gray, wide, inconspicuous against the dark adjacent median line. The subreniform spot is black filled with light gray. The hindwing is slightly orange-tinted bright red with black median and marginal bands. The median band is variable, ending bluntly before the inner margin or narrowing and reaching the margin. The hindwing fringe is white to pale yellow with dark gray checkering on the mid-wing. The head and thorax are nearly uniform dark blue-gray. The male antenna is filiform.
 
@@ -10,7 +10,7 @@ This species can usually be recognized by its moderate size, blackish forewing w
 
 *Catocala grotiana* replaces *C. briseis* in the southern Rocky Mountain states and occurs in southern Oregon and Idaho in our region. It has more extensive white in the subterminal area than *C. briseis*. It is likely that this is a subspecies of *C. briseis*.
 
-##### Larvae
+### Larvae
 
 The larva is mostly smooth, gray and tan with small red-orange subdorsal spots, a red-orange and black patch in the middle of the back, and a ventral fringe of whisker-like hairs below the lateral line.  It is illustrated by Miller & Hammond (2003).
 
@@ -30,11 +30,11 @@ This boreal zone species occurs across Canada and the northern United States to 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Salicaceae including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.) including quaking aspen (*P. tremuloides*).
 
-##### Adults
+### Adults
 
 The flight period of *C. briseis* is late summer and fall, beginning in mid-July and peaking in September in our region. It is nocturnal and comes to sugar bait and lights.
 

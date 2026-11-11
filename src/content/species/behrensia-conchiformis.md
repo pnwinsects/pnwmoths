@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Behrensia conchiformis* is a distinctive, gray and white small moth (FW length 12–14 mm) that flies in forests throughout the Northwest during the spring. It has metallic green scales on the forewing. The wing has a slightly pointed apex and smoothly convex outer margin. The ground color is mottled gray with scattered metallic emerald green scales. A few dark yellow spots are present on the base and in the subterminal area in some individuals. The median area is mostly darker blackish gray except for a white patch near the lower orbicular and reniform spots. The basal, antemedial, and postmedial lines are dark gray, filled with gray with scattered green scales to completely filled with metallic green. The antemedial line is very irregular, with a strongly concave medial segment in the fold. The postmedial line is finely undulating, square across the wing near the reniform spot, and perpendicular to the wing below the spot. The subterminal line is pale, finely irregular, and preceded by a slightly darker gray shade. The terminal line is gray and is sometimes a row of metallic green spots rather than a line. The fringe is dark gray. The orbicular spot is moderately large, round, gray in outline and filled with white and a gray central ocellus. The reniform spot is widely oval, dark gray, and very inconspicuous due to filling of the adjacent dark gray median area. The hindwing is white with a dirty look due to strong suffusion of gray scales. The veins, discal spot, and wide marginal band are dark gray. The hindwing fringe is white with a wide gray base on most of the wing and white at the anal angle. The head is white with several tufts of scales and gray tufts at the bases of the antennae. The collar is uniform gray-brown. The rest of the thorax is hoary dark gray with dark edges on the tegulae. Dorsal tufts are present on several of the abdominal segments. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found on the West Coast of North America from southern British C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on honeysuckle (*Lonicera* spp.) and snowberry (*Symphoricarpos* spp.) in the Caprifoliaceae.
 
-##### Adults
+### Adults
 
 *Behrensia conchiformi*s flies during the spring, with records from early March to mid-June in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Amphipyra brunneoatra* is a medium-sized (FW length 16 mm), broad-winged moth that flies in southwestern Oregon during the late summer. It has a glossy, dark gray-brown forewing with a light terminal area separated from the darker adjacent area by a jagged serrate subterminal line. The forewing color is slightly powdery, darkest in the cell and in the subterminal area. The light terminal area has a slight pink tint. The terminal line is a series of gray lines. The base of the fringe is light and the distal portion is slightly checkered. The basal, antemedial, and postmedial lines are dark, double when most distinct, and filled with slightly lighter than the ground color. The antemedial line is irregular while the postmedial line is smoothly convex around the reniform spot. The serrate subterminal line is light. The orbicular and reniform spots are light with dark filling of the ground color; both are indistinct and inconspicuous. The claviform spot is absent. The hindwing is light yellowish gray, slightly darker in the submarginal area, with a thin gray terminal line between the veins and a fringe that is similar to the wing base in color but sometimes shows a pink tint. The head and thorax are similar to the forewing ground color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species includes most of California west of the Sierra Nevada.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on cottonwoods (*Populus* spp.) in the Salicaceae based upon the habitat and closely related species.
 
-##### Adults
+### Adults
 
 The adults of *A. brunneoatra* fly in late summer. They are nocturnal and come to lights.
 

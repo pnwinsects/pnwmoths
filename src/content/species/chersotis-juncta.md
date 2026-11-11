@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Chersotis juncta* is a medium-sized noctuid moth (FW length 13 - 16 mm) with smooth, dark brown forewings with pale spots, including the claviform spot, and black markings along some of the lines and in the cell between the orbicular and reniform spots. The moth resembles many species of *Euxoa* and *Parabagrotis* in shape and color. The forewings are smooth, dark brown, often with a slight purple or reddish tint. The transverse lines are faint except for black dots where the basal, antemedial, and postmedial lines meet the costa and the subterminal line which is evident as a series of ill-defined pale spots in most individuals. The spots are more prominent pale yellow-brown and are filled with the ground color. The posterior orbicular and reniform spots are fused across the lower cell, and the cell anterior to the fused spots is filled with black to form a quadrate spot. The claviform spot is large and elongate and its base at the antemedial line is another black spot. The hindwings are dull dark gray with faintly darker margin and discal spot. The head and thorax are brown like the forewings and the abdomen is dark gray. The male antenna is weakly beadlike.
 
@@ -22,11 +22,11 @@ This species occurs in North America where it is found across the northern Conti
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in mid summer. Pacific Northwest records are from late June to early August. It is nocturnal and comes to light.
 

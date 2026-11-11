@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Idia immaculalis* is a large *Idia* species (FW length 16 - 21 mm) with uniformly light gray-tan ("ecru") wings with complete absence of markings. The hindwings are slightly lighter than the forewings. The forewings are relatively broad. The labial palpi are moderately long. The male antenna is bipectinate and that of the female is simple with long cilia extending from each side of each segment (biciliate).
 
@@ -22,11 +22,11 @@ This species occurs in the American West. The range is incompletely known.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No specific information is presently available for this species, but it is probably a detritivore feeding on dead leaf material, like related species.
 
-##### Adults
+### Adults
 
 *Idia immaculalis* is a summer species. Adults have been collected from mid June until early August. It is nocturnal and comes to light.
 

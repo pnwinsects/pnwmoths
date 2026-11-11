@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Oedemasia semirufescens* is a medium-sized, prominent moth (FW length 16–21 mm) with finely streaked pale blue-gray forewings with pale pinkish brown at the base and posterior margin. The forewings are relatively long, with scalloping of the outer margin that is most pronounced at the anal angle. In addition to the colors described above, the posterior wing base is dark brown. Specimens from west of the Cascades are more mottled than those from further east, and have a slight yellow cast to the entire wing. The transverse lines are obsolete or evident as fine lines on the veins. A thin black dash is present. The discal spot is a small black dot at the end of the cell, but can be absent. The male hindwing is pale grayish yellow with a dark gray anal angle. Females have darker hindwings with a light gray marginal band. The thorax is gray with darker posterior tufts. The male antenna is bipectinate, tapered toward the tip, while that of the female is simple.
 
@@ -24,11 +24,11 @@ This species has a large range in North America. It occurs throughout the East, 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwood trees and shrubs, particularly in the families Fagaceae, Betulaceae, Rosaceae, Aceraceae, and Salicaceae.
 
-##### Adults
+### Adults
 
 This species is probably single brooded and occurs from June through August in the Pacific Northwest. It is nocturnal and comes to light. Adults do not feed.
 

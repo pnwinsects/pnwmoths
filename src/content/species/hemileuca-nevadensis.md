@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adult
+### Adult
 
 *Hemileuca nevadensis* is a large to very large, diurnal moth (FW length 25–35 mm; wingspan 5.0–6.5 cm) that flies in desert wetlands during the fall. The forewings and hindwings are similarly patterned, with black bases and margins against a translucent creamy white ground color. The costa is also black. The large discal spots are black with bar-like pale white to yellow centers. The collar and tegulae are usually cream, but the latter can be black. The abdomen color is sexually dimorphic: Those of females are completely black, whereas the male has a black abdomen with and orange-red tip. The antennae are bipectinate, much wider in males than in females.
 
@@ -8,7 +8,7 @@ This species is unlikely to be confused with other species in the Pacific Northw
 
 The relationship of *Hemileuca nevadensis* to the eastern moth *Hemileuca maia* is an interesting taxonomic problem. Once thought to be clearly distinct, with *H. nevadensis* feeding on willows (*Salix* spp.) in western wetlands and *H. maia* on oaks (*Quercus* spp.) in eastern upland habitats, the relationship has become muddled since the discovery of buckbean-feeding (*Menyanthes trifoliata*) wetland populations near the Great Lakes.
 
-##### Larvae
+### Larvae
 
 The body is pale yellow and black with black and white, branched spines (which can deliver a sting if handled) as well as golden yellow whorls of hairs on the dorsum. The prolegs are red.  It is illustrated by Tuskes et al. (1996).
 
@@ -28,11 +28,11 @@ Distributed across most of the western and northern plains states from southeast
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The eggs are laid in rings around twigs of larval host plants.  They overwinter and the larvae emerge in the spring.  This species appears to be a foodplant specialist on Salicaceae including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.).  Young larvae feed in groups where as older larvae are solitary. The cocoons are spun loosely in leaf litter under the host plants.
 
-##### Adult
+### Adult
 
 *Hemileuca nevadensis* adults emerge in September and October.  It is a very active day flier with males actively searching for calling females.
 

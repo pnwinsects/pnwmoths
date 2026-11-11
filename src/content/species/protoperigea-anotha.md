@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protoperigea anotha* is a small to medium-sized (FW length 14 - 16 mm) noctuid moth that flies at high elevations during the summer. It has glossy, dull gray-brown wings with gray markings. The ground color varies from slightly yellow-brown to gray-brown, with a dusty appearance due to sprinkled dark scales. The scales are easily rubbed off the wing and this species is difficult to find and maintain in good condition. The lines are gray, single, indistinct, and darkest at the costal margin. The antemedial line is slightly irregular but visible across the entire wing. The postmedial line is dentate, squared toward the lateral margin around the reniform spot and nearly straight across the wing to the trailing margin below the spot. The median line is a broad gray shade. The subterminal line is irregular, mostly evident as the interface between gray medial to the line and the ground color terminal area. The orbicular spot is a small dark spot or is absent. The reniform spot is only evident as the gray filling. The claviform spot is absent. The hindwing is glossy whitish gray, slightly darker toward the outer margin, with a faint gray discal spot and light gray fringe. The head and thorax are even gray-brown. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species also occurs in the Rocky Mountains in western Alberta.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is single brooded and the adults fly during the summer. It has most commonly been collected in July in our area. It is nocturnal and comes to lights.
 

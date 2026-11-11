@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis funebris* is a small, dark, day-flying moth (FW length 11 - 12 mm) that flies in the mountains of British Columbia and Washington during the summer. It has a dark gray forewing with a black median area and sooty black hindwing with a white fringe. The ground color is powdery dark gray to dark brown-gray, even except in the terminal area. The median area is velvety black, sometimes dark gray in the cell and on the costa. A series of short black lines are present between the veins in the distal subterminal area on the mid-wing. The lines are black, even. The basal line is very short and is located at the wing base. The antemedial line is bilobed, broadly excurved from the costa to vein 1A+2A near the trailing margin, then with a shorter curved segment to the trailing margin. The postmedial line is S-shaped, curved lateral barely distal to the reniform spot and concave toward the wing base below it. The subterminal line is gray, uneven, and preceded by a dark gray shade. The fringe is dark gray. The orbicular and reniform spots are light gray with central filling of the gray ground color. One or both spots can be obscured by the black median color; often only the reniform spot is visible. The claviform spot is absent. The hindwing is uniform velvety brownish black with an immaculate white fringe. The head and thorax are dark gray with a lighter gray edge on the collar. The eye is reduced in size. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is found in the mountains of British Columbia, likely throughout mo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is exclusively diurnal and visits flowers. The flight period is July and August in the Pacific Northwest, slightly earlier in late June and July further north.
 

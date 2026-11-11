@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis poliochroa* is a medium-sized (FW length 15–17 mm), heavily streaked gray and black moth that flies in dry forests east of the Cascade and Coast Ranges in the fall. It has fused orbicular and reniform spots and a pale hindwing with a black marginal band. The forewing is grizzled charcoal gray with a strongly longitudinally streaked appearance due to dark veins accentuating the longitudinal elements of the pattern. The distal wing is darker and less grizzled gray than elsewhere. A thin black basal dash extends to the antemedial line. The basal line is absent. The antemedial, median, and postmedial lines form similar dark oblique marks on the costa. The antemedial line line is light gray medially and dark gray adjacent to the median area, irregular but usually faint. The median line is gray, variably present below the cell. The postmedial line is dark gray abutting the median area and light gray laterally, moderately scalloped, drawn toward the base on the costa, bent sharply at the anterior cell to course obliquely across the rest of the wing to the trailing margin, touching the lower reniform spot. The subterminal line is pale gray and very irregular, evident between the veins where it is preceded by long black wedge-shaped marks and followed by black lines that extend to the outer margin. The terminal line is black. The fringe is dark gray or weakly to strongly checkered with light and dark gray. The spots have thin black and wider light gray inner outlines, which are filled with the ground color. The orbicular spot is elongate oval or diamond-shaped, fused to the medial reniform spot. The reniform spot is triangular or kidney-shaped. The claviform spot is large, reaching the postmedial line in most specimens. The hindwing is slightly brownish off-white with dark gray veins, thin discal spot, and a well-demarcated blackish gray marginal band. The hindwing fringe is tricolored with a yellow and gray inner line and white edge. The head and thorax are grizzled dark gray with dark and light gray bands on the collar, widest dark near the base and edge. The male antenna is filiform.
 
@@ -24,7 +24,7 @@ The range of this species includes the southern half of Alberta, the Rocky Mount
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but penstemons (*Penstemon* spp.) in the Scrophulariaceae are suspected based upon related species.
 

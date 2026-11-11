@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ianassa pallida* is a medium to large, prominent moth (FW length 18–23 mm.) with light orange-brown forewings with lighter whitish gray toward the apex. The forewings are long with scalloped outer margin. The ordinary transverse lines are faint brown, obsolete near the posterior margin. A brown mark is also present at the anal angle. The discal spot is a thin black bar, the black continued on the veins distal to the cell. Other black markings include a thin basal dash and two lines at and adjacent to the subapical costa. The male hindwing is pale yellow brown with dark brown at the anal angle; that of the female is darker brown gray. The thorax is silvery brown and dark orange brown with weak posterior tufting. The antenna is bipectinate, tapering toward the tip; those of the female are simple.
 
@@ -24,11 +24,11 @@ This species occurs throughout much of western North America as far north as sou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is currently available regarding larval foodplants, but it probably feeds on hardwoods based on closely related species.
 
-##### Adults
+### Adults
 
 *Ianassa pallida* appears to be single brooded and is most commonly found in July. Pacific Northwest collection records span late May to early September. It is nocturnal and comes to light. As with other prominent moths the adults do not feed.
 

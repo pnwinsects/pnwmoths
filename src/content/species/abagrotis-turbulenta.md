@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis turbulenta* is a rarely collected, medium-sized *Abagrotis* species (FW length 15 - 16 mm) that occurs in south-western British Columbia and north-central Washington in our area. It has gray-tan forewings with bluish clay basal and terminal areas, smooth double lines, and dark-filled spots. The median area is traversed by a gray median line and the area medial to the subterminal line is darker gray than the rest of the forewing. The basal, antemedial, and postmedial lines are dark gray, double, even, and filled with the ground color. The antemedial line is nearly straight and has an oblique course from anteromedial to posterolateral. The postmedial line is gently excurved toward the margin. The orbicular and reniform spots are similar, darker than the ground color on the outside and paler on the inside with uniform dark brown filling. The claviform spot is absent. The hindwing is medium dark to dark gray with barely evident discal spot and a slightly lighter two-toned fringe. The head and thorax are even gray-brown like the forewing ground color. The male antenna is filiform.
 
@@ -10,7 +10,7 @@ This species is most similar to *Abagrotis scopeops*, a common and widespread sp
 
 The type locality of *Abagrotis turbulenta* McDunnough is Seton Lake, British Columbia.
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -30,11 +30,11 @@ The center of distribution of this species is in the Four Corners states and adj
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it might feed on junipers based on its distribution and association with this plant.
 
-##### Adults
+### Adults
 
 Adults have been found from mid-July to mid-September in the Pacific Northwest.
 

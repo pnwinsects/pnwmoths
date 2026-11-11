@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea inordinata* is a relatively small species of *Apamea* (FW length 13 - 17 mm) that flies in grassland habitats in late spring. It has a mottled gray-brown forewing and orange-ochre hindwings with a well-defined dark marginal band. The forewing is mottled and streaked medium gray-brown, lightest ochre to tan in the central median area and darkest gray in the terminal area and median area posterior to the fold. A black basal dash is usually present, and a black median dash connects the antemedial and postmedial lines across the lower median area. The subterminal line is preceded by a series of black wedges across the mid-wing but not at the costal or trailing margins. The antemedial and postmedial lines are gray, double, and filled with whitish gray. The more prominent postmedial line is smooth, excurved to almost touch the subterminal line at the level of the anterior cell then parallel to the outer margin to the trailing margin. The subterminal line is whitish gray, complete, forming a sharp W-mark to the outer margin on veins M3 and CuA1. The fringe is checkered gray with white at the distal veins. The orbicular spot is ovoid or bar-like, of an outer black and inner white components, and an central line of the ground color. The reniform spot has an outer black and an inner pale gray component and is filled with the ground color but is often incomplete and relatively inconspicuous. The claviform spot is small and fused to the median dash when present. The hindwing is ochre-yellow with a slight orange tint. It is marked with blackish gray thick discal spot, well-defined marginal band on the outer third of the wing, a thin postmedial line, and veins. The hindwing fringe is whitish with ochre and gray on the inner half. The head and thorax are powdery gray-brown with a weak dark line across the collar and margins on the tegulae. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species has a relatively narrow north-south distribution across North Ameri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on grasses (Poaceae) like closely related species.
 
-##### Adults
+### Adults
 
 This species is single brooded with adults on the wing in the late spring and early summer. Almost all Pacific Northwest records are from early May to mid-June. It is nocturnal and comes to lights. Occasional specimens fly during the day.
 

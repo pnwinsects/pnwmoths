@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ufeus hulstii* is a smooth red-brown large moth (FW length 20 - 21 mm) that flies above mid-elevation during the summer. It has forewing markings limited to light and dark gray antemedial and postmedial lines. The forewing color is even with a gloss when fresh. The antemedial and postmedial lines are similar, dark gray adjacent to the median area and light gray outside the median area. The antemedial line is irregular, zig-zagged near the trailing margin. The postmedial line is smoothly convex toward the outer margin, smooth with short teeth on the veins. No other markings are present. The hindwing is smoky gray with slightly darker discal spot. The head and thorax match the forewing color. The male antenna is bead-like.
 
@@ -18,11 +18,11 @@ This species has been collected in Washington and Oregon in our region. It is fo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No certain information is presently available regarding larval foodplants of this species.  Crumb (1956) reported Salicaceae as foodplants, but these larvae were probably mis-identifications of *U. satyricus*.
 
-##### Adults
+### Adults
 
 This species flies in mid-summer, unlike *Ufeus satyricus* which emerges in the fall and overwinters until spring. Most records from our region are from July and August.
 

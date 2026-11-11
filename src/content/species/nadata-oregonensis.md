@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 This oak-feeding species resembles its common and widespread congener *Nadata gibbosa*, but both fore- and hindwings are darker and hoarier red-brown with dark veins.  It is slightly smaller (FW length 18–26 mm).  As in *N. gibbosa,* the forewing margin is scalloped, only the antemedial and postmedial lines are present, and the reniform spot is comprised of two silvery white dots.  The fringes of both wings are white with a tan base.  The thorax is similar in color to the forewings and bears a loose tuft of scales on the anterior portion.  The male antenna is broadly bipectinate, while that of the female is simple.
 
@@ -22,11 +22,11 @@ This species is restricted to California outside the Pacific Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on deciduous oaks (*Quercus* spp.) in the Fagaceae, and primarily uses Oregon white oak (*Q. garryana)* in western Oregon.
 
-##### Adults
+### Adults
 
 Adults have been collected from mid-May through early August.  Most records are from the early summer.  The adults are nocturnal and come readily to light.  Like other prominent moths they do not feed as adults.
 

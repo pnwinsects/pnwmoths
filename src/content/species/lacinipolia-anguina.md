@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lacinipolia anguina* is a small, gray moth (FW length 12 - 15 mm) that flies in northern forests in the Pacific Northwest. The forewing is relatively long with a slightly pointed apex, a small flange at the anal angle, large forewing spots, and two black spots near the anal angle of the forewing. The ground color is mottled lead-gray, slightly darker in the median area and on the costa in the subterminal area. Two black spots separated by the subterminal line are present at the anal angle, a small chevron-shaped mark in the subterminal area and a longer spot that continues into the fringe in the terminal area. A short, black dash is present at the wing base. The veins are thin and dark on the distal wing. The basal, antemedial, and postmedial lines are gray, double, and filled with slightly lighter gray than the ground color. The antemedial line is smoothly excurved with slight notches at the veins, apex of the arc in the fold. The median line is faint, smoky, dark gray. The postmedial line is weakly scalloped, faint from the costa around the reniform spot which interrupts it, and stronger below the reniform spot, where it forms a smooth, light and dark gray segment that is concave toward the base. The subterminal line is pale gray, irregular with a strong, light-colored tooth toward the base on 1A+2A above the anal angle. It is preceded by a dark, gray spot on the costa, thin, dark gray from the lower end of the cell to the fold, and a darker spot in the fold that is described above. The terminal line is very thin and dark. The fringe is lightly checkered gray. The orbicular spot is round, outlined in dark gray on the inner and outer sides and pale gray elsewhere, filled with the ground color or slightly lighter gray with or without a faint ocellus. The reniform spot is large and kidney-shaped, with the lower portion ballooning across the postmedial line, defined medially by dark gray and lacking a border laterally, and filled with light gray and a dark crescent on the medial side. The claviform spot is small, black, and filled with the ground color. The hindwing is pale, whitish-gray, darker gray in females, with darker gray veins, margin, and thin terminal line. The hindwing fringe is white with a pale gray base. The head and thorax are gray with a thin black line across the distal collar. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species extends east across southern Canada to the Atlantic an
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a climbing cutworm feeding on various herbaceous plants based upon closely related species.
 
-##### Adults
+### Adults
 
 This species is single-brooded. The adults fly in early summer, with most records from our region from June and July. They are nocturnal and come to lights.
 

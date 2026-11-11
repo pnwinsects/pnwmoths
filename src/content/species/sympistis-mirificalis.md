@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis mirificalis* is a small (FW length 13 - 14 mm) noctuid moth that flies in eastern Oregon, eastern Washington and southern Idaho during the fall. It has a gray-brown forewing with pale filled forewing spots and long black wedges on the distal wing, and bright yellow hindwing with a black marginal band. The ground color is brown-gray, lighter in the medial subterminal area and darker gray near the outer margin. A thin, black basal dash ends at the base of the claviform spot. The antemedial and median lines are absent, except for oblique black lines across the costa. The postmedial line is similar on the costa, but is also represented by an oblique gray line below the reniform spot. The subterminal line is pale gray, thin, and very irregular. It is preceded by long black wedges between the veins. The terminal line is thin and black. The fringe has a striped light gray and gray base and strongly checkered light gray and gray edge. The three forewing spots have thin outer black and inner white outlines and are filled with the ground color. The orbicular spot is long and oval, with the reniform spot is narrow and boomerange-shaped. The clavifom spot is very long. The hindwing is pure bright yellow with a jet black marginal band and no suffusion. The fringe is tricolored, yellow, gray, with a white edge. The head and thorax are gray-brown with a dark edge on the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species includes Colorado and eastern and southern California 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species. It probably feeds on a species of Penstemon (*Penstemon* spp.) in the Scrophulariaceae, the most common foodplant for related species.
 
-##### Adults
+### Adults
 
 *Sympistis mirificalis* flies during September in the Northwest. It is nocturnal and comes to lights.
 

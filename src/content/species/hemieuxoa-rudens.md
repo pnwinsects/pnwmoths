@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hemieuxoa rudens* is a small to medium-sized moth (FW length 13–17 mm) with distinctive but variable forewing pattern, typically with long black basal dash and a similar black mark in the posterior part of the cell . The most recognizable form is pale gray with slight dusting of darker scales, browner and more mottled on the costa and chalky white on the base of the costa. Dark gray is present in the terminal area and as a quadrate spot on the costa in the subterminal area. A large black basal dash extends to below the orbicular spot. The posterior dash is diffuse and indistinct, filling much of the basal area below the cell. The other black mark is a well-defined black bar in the posterior cell between the orbicular and reniform spots. These spots are outlined by a thin black line, are filled with light tan peripherally and have a darker center, a small dot in the case of the orbicular spot. Ordinary lines are reduced to dots on the costa except for the postmedial line that is an arc of small dark dots. A form without the basal dash or median bar is less common. It tends to be browner and more heavily spotted, appearing sandy or dusty. The other markings are preserved in this form, including dark areas on the distal wing and distinct orbicular and reniform spots. Neither form has a claviform spot. The hindwing is pearlescent white with gray marginal shading, dark veins, and a tricolored fringe but lacking a discal spot. The head and thorax usually match the forewing ground color but can be reddish brown. The male antenna is weakly biserrate.
 
@@ -24,11 +24,11 @@ This species might also be found in southern Idaho because there are numerous re
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae have been reared on broomweed (*Xanthocephalum wrightii*) and grasses according to Crumb (1956).
 
-##### Adults
+### Adults
 
 The only Oregon record of this moth is from mid-August. Farther south this moth is double brooded with spring and late summer flights.
 

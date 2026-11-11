@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Meganola minuscula* is a very small moth (FW length 8–10 mm) that flies near oaks during the spring. It has a whitish gray forewing marked with streaky gray dots on the lines and often with a dark triangle on the mid-costa. The forewing has an elongated apex and is ovate in shape. The color is light gray, often whitish, with faint longitudinal streaking due to slightly lighter veins. Dark gray areas are present along the costa from the base to the antemedial line and at the median line. The lines are gray. The antemedial line is reduced to a few spots on the veins. The median line is gray, often dark in Northwest population, diffuse, producing a dark band across the wing or a gray spot on or near the costa. The postmedial line is double, usually complete, thickest on the veins, widely excurved around the reniform spot and bent perpendicular to the trailing margin at the lower spot. The subterminal line is a series of indistinct gray spots. The terminal line is gray, indistinct. The fringe is gray with weak checkering. The orbicular spot is a small gray dot. The reniform spot is gray filled with the lighter ground color, incomplete and difficult to identify as separate from the median and postmedial lines. No claviform spot is present. The hindwing is very light gray with a faint discal spot and slightly darker margin and fringe. The head and thorax are powdery light gray. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ This species is most widespread in the East where it is found from southern Cana
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is reported to feed on both oaks (*Quercus* spp.) in the Fagaceae and willows (*Salix* spp.) in the Salicaceae in eastern North America.  However in the Pacific Northwest, it appears to be largely restricted to feeding on Oregon white oak (*Q. garryana*).
 
-##### Adults
+### Adults
 
 The flight season of *M. minuscula* is spring. It has been collected from late March to early June in our region. This species is nocturnal and comes to lights.
 

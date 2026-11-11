@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa apopsis* is a recently described alpine species that is only known from two locations in the Coast Range of southwestern British Columbia. It is a small moth (FW length 14–15 mm) with a powdery gray forewing with a suffused median area, a light "halo" lateral to the postmedial line, and small eyes. The entire forewing appears grizzled due to scattered white and black scales on a gray background, and the entire median area is darker gray than the rest of the forewing. The basal, antemedial, and postmedial lines are dark gray to black. The median line is only evident on the costa. The antemedial line is toothed inward on the veins, nearly perpendicular to the posterior margin, preceded by a lighter gray component. The median line is dark gray, diffuse and inconspicuous against the darker color of the median area. The postmedial line is moderately scalloped, followed by a light gray band that is lighter and wider than the corresponding light portion of the antemedial line, drawn toward the base on the costa, straight or inwardly concave lateral to the reniform spot, and concave and angled toward the base below the level of the cell. The subterminal line is pale, faint and diffuse. It is preceded by an even to streaked gray shade. The terminal line is dark, thin or broken into spots. The fringe is concolorous with the terminal area. The orbicular spot is small, pale, and inconspicuous. The reniform spot is weakly outlined by the ground color and filled with the dark gray of the surrounding median area. The claviform spot is absent or a dark smudge. The hindwing is brownish gray, darker toward the margin, with dark discal spot, veins, and terminal line. The hindwing fringe is white with a slightly darker base. The head and thorax are dark gray. A frontal tubercle is present. The male antenna is biserrate. *Euxoa apopsis* is a member of the subgenus *Pleonectopoda*, defined by the presence of a twist near the base of the male vesica. Many members of this subgenus fly at high elevations or in the subarctic.
 
@@ -37,11 +37,11 @@ This species is endemic to southwestern British Columbia.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
-##### Adults
+### Adults
 
 Adults fly during early to mid-July. They are probably day-flying. This is suggested by the small size of the eyes, an adaptation to strict diurnal flight in a number of noctuid moths. In addition, the two specimens of *E. apopsis* from the type locality at Gott Peak were collected by Jim Troubridge on the same day that he also collected the specimen of *Xestia maculata* that is figured in the Noctuini MONA fascicle (Lafontaine 1998). This is a diurnal alpine moth indicating that Jim, who black-lighted often at this site, collected during the day on that date. No additional *E. apopsis* have been found at Gott Peak despite many years of light-trapping by him and Lars Crabo.
 

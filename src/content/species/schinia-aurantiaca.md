@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia auriantiaca* is a very small (FW length 9 mm), day-flying moth that flies in southeastern Oregon in the spring. It has a large reniform on the forewing and a red-orange hindwing with a thin dark discal spot and an even narrower hindwing marginal band. The forewing is slightly orange tan, darker gray-brown median to the antemedial line, in the subterminal area, and filling the spots. The antemedial line is double with a dark gray inner component and lighter outer one, slightly irregular on the veins and gently excurved. The median line is very faint gray. The postmedian line is very smooth, light gray, and double, and is filled with the ground color. It is broadly excurved with a nearly straight segment lateral to the reniform spot and bent beneath the spot to run at a slight angle toward the outer margin to the posterior margin. The subterminal line is very irregular, evident as a transition from the darker subterminal area to the ground color terminal area. The terminal line is a series of gray spots. The fringe is weakly checkered brown-gray. The orbicular and reniform spots are outlined in dark gray and filled with the gray-tan color of the wing base and subterminal area. The orbicular spot is round, while the reniform spot is large and kidney-shaped. No claviform spot is evident. The hindwing is even bright red-orange with a thin bar-like gray discal spot and even sharply-demarcated dark gray marginal band. The hindwing fringe is light gray with a dark gray base. The head and thorax are tan. The eye size is reduced. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The known range of *S. aurantiaca* outside of the Northwest includes California 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Hardwick (1996) cites *Erastrium sapphirinum* (Polemoniaceae) as the larval foodplant. This species is not recorded for the Pacific Northwest, although other species of *Erastrium* are found in our area. Chuck Harp (pers. comm. 2013) suggests that the most likely foodplant in Oregon is *Erastrium sparsiflorum *var*. wilcoxii* (A. Nelson) Conquist. This his plant has been found at the same location as the moth in Oregon. Chuck notes that the plant is found elsewhere in the Pacific Northwest on sandy soils, including in southern Washington and in Idaho.
 
-##### Adults
+### Adults
 
 The adults are diurnal and visit flowers. The occur in late spring. The specimens from Oregon were collected during May.
 

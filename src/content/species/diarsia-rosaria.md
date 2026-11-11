@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Diarsia rosaria* is a very common, small to medium-sized moth (FW length 12 - 15 mm) that is found in a variety of habitats almost throughout the entire season in the Pacific Northwest. It has a relatively short and broad red-brown forewing marked with light ochre in the orbicular and reniform spots. The forewing ground color is medium dark red-brown, often with a gray cast that is most evident in females. The cell, costa, and terminal area are often darker red-brown to gray-brown. The transverse lines are slightly darker gray with filling of the ground color. The antemedial and postmedial lines are similar, fairly even. The veins lateral to the postmedial line are darker in some specimens, producing a series of thin marks oriented along the axis of the forewing. The median line is faint, evident near the costa and trailing margin. The subterminal line is pale and even to slightly irregular. The orbicular and reniform spots are similar, black with an inner light ochre line and partially filled with light ochre to gray scales. The claviform spot is usually obsolete, although the tip is sometimes evident as a gray spot. The hindwing is light gray with darker gray margin, diffuse discal spot, and veins, and a reddish fringe. The head and thorax match the forewing color. The male antenna is weakly biserrate.
 
@@ -22,11 +22,11 @@ This species occurs to the south of our region in California to the central Coas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species primarily feeds on grasses (Poaceae), although it will also feed on herbaceous vegetation in families such as the Rosaceae.
 
-##### Adults
+### Adults
 
 The phenogram demonstrates a clear bimodal seasonal occurrence, one from late April to June, and the other from July to October, indicating that the species is bivoltine in our area. The adults are nocturnal and come to lights.
 

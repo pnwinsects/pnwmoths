@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa excogita* is a uniform, rich red-brown, small to medium-sized *Euxoa* (FW length 15–18 mm) that flies in forests in late summer. It has reduced black markings, light scales in the reniform spots, a similar light subterminal line, and a dark hindwing. The forewing is slightly darker and grayer in the terminal area and is nearly devoid of dark markings. The basal, antemedial, and postmedial lines form pairs of gray spots flanking pale yellow scales on the costa and are extremely faint dark and light gray on the rest of the forewing, not evident except on close inspection. The median line is absent. The subterminal line is pale ochre or gray, usually a slightly irregular series of diffuse spots but sometimes complete. It is preceded by a shade of the same color as the terminal area, and the fringe is the same color. The orbicular spot is usually absent. The reniform spot is a powdery lunule of pale scales along the lateral side of a very faint gray spot. No claviform spot is present. The hindwing is brown-gray with darker gray margin, with dark veins, discal spot, and terminal line. The hindwing fringe is white with a ochre and gray base. The head and thorax are the red-brown forewing color with a black transverse line on the distal third. A frontal tubercle is present. The male antenna is biserrate. *Euxoa bicollaris* is place in the subgenus *Euxoa* and is a member of the *Euxoa* *infausta* species-group.
 
@@ -24,11 +24,11 @@ This species is found in the Rocky Mountains from Montana to Colorado and Utah o
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The adults are on the wing during the mid-summer, with records from late June to early August in our region. It is nocturnal and comes to lights.
 

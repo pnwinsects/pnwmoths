@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa ridingsiana* is a small to medium-sized *Euxoa* (FW length 13–16 mm) that flies in dry forests during the summer. It has a dark gray-brown and ochre-tan forewing with light gray veins lining the cell, pale-filled spots, and a two-toned, off-white hindwing. The forewing is relatively short and rectangular. It is gray-brown. The costa is dull ochre-tan, striped with light gray veins and darker brown. A dull yellow streak is present in the fold and the subterminal area is streaky yellow tan and darker gray-brown. The radial and cubital veins and their proximal branches are pale gray. The terminal area is brown-gray. The antemedial line is brown and black, irregular and angled strongly toward the outer margin below the cubital vein, often bulging far lateral between 1A+2A and the posterior margin. The median line is absent. The postmedial line is gray followed by ochre-tan, weakly scalloped, relatively faint, pulled far basad on the costa, bluntly excurved around the end of the cell, and angled 45° toward the base below the level of the cell. The pale ochre subterminal line is powdery, often broken into spots, slightly irregular. It is preceded by a blackish gray shade on the costa and multiple black wedges opposite the cell and in the fold. The terminal line is dark gray, linear or broken into spots. The fringe is gray with a thin tan base. The orbicular and reniform spots are black with a thin lining of light whitish-gray, filled centrally with gray. The orbicular spot is round or a tilted oval and the reniform spot is kidney-shaped. The claviform spot is black, moderate-sized and narrow. The hindwing is pale yellowish-gray with a fairly well-defined gray marginal band, darker in females, with two-toned gray and white fringe. The head and most of the thorax are dark gray-brown. The base of the collar is brown, separated from the darker edge by a thin black line. A frontal tubercle is present. The male antenna is weakly biserrate. *Euxoa ridingsiana* is placed in the subgenus *Orosagrotis*.
 
@@ -24,11 +24,11 @@ This species has a fairly wide range in western North America. It occurs as far 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies during late summer, usually during July and August. It is nocturnal and comes to lights.
 

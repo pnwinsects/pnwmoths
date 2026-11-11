@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypocoena basistriga* is a small moth (FW length 11–12 mm) that flies in wetlands in northern British Columbia during the fall. It has a streaked brown forewing, pale cubital vein and branches, a black basal dash, a dark spotted terminal line, and a dark gray hindwing. The forewing is dark tan, slightly lighter gray on the costa and darker gray-brown near the posterior and outer margins. A thin black basal dash is present. The cubital vein and proximal branches M3, CuA1, and CuA2 are white. The veins on the distal wing are dark gray, each bordered by lighter gray-tan. An ill-defined thin dark gray stripe abuts the anterior cubital vein and M3, and a similar gray stripe is present in the fold on the mid-wing. The terminal line is comprised of dark gray triangles between the veins. Other lines and the forewing spots are absent. The fringe is tan. The hindwing is dark brownish gray with a thin darker terminal line and light tan fringe. The head and thorax are gray-tan. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species has been collected in the far eastern and central parts of British 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species. It probably bores in monocots like sedges (Cyperaceae).
 
-##### Adults
+### Adults
 
 This species has been collected in late summer and early fall across its range, most commonly during August and September. The limited number of records from British Columbia are from September and early October. It is nocturnal and comes to lights.
 

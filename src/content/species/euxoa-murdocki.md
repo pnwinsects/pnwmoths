@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa murdocki* is an attractive, small *Euxoa* (FW length 11–14 mm) that flies east of the Cascades during the fall. It has banded orange-brown, black, and light gray forewings. The forewing is bright orange-brown in the antemedial area, subterminal area, and at the apex. The basal area and median area proximal to the median lines are light gray, and the distal median area and terminal area are dark gray. The basal, antemedial, and postmedial lines are double, gray except thick black abutting the median area. The antemedial line is smoothly arched across the forewing. The dark gray median line is straight across the forewing. The postmedial line is smooth, is fused to the lateral reniform spot and perpendicular to the posterior margin below the medial spot. The subterminal line is pale tan, sinuous. The orbicular spot is light gray, lacking an outline except for a few black scales at its lateral end. The reniform is partially outlined in black and filled with similar gray to the surrounding median area. The claviform spot is black, fused to the antemedial line as a focal bump. The hindwing is light gray-tan with gray broad ill-defined gray marginal band, discal spot, and veins. The hindwing fringe is white with a tan base. The head and thorax are orange brown with gray at the base of the collar. The male antenna is weakly biserrate. *Euxoa murdocki* is a member of the subgenus *Euxoa*, the subgenus with the largest number of species.
 
@@ -8,7 +8,7 @@ This species is unmistakable among *Euxoa*. It could conceivably be mistaken fo
 
 The type locality of *Agrotis murdocki* Smith is British Columbia.
 
-##### Larvae
+### Larvae
 
 The early stages of this species are unknown.
 
@@ -28,11 +28,11 @@ Outside of the Pacific Northwest *Euxoa murdocki* occurs from southern Canada as
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in the fall. Most of the records from our region are from late August through September.
 

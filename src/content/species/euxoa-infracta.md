@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa infracta* is a small to medium-sized *Euxoa* (FW length 13–16 mm) that flies in forests east of the Cascade summit during late summer. It has dark black-brown forewings with copper-brown antemedial and subterminal areas and filling of the spots. The basal, median, costal subterminal, and terminal areas are similar blackish brown, while the antemedial and the rest of the subterminal areas are brown with a copper tint. The cell is black, but this is inconspicuous against the dark median area. The basal, antemedial, and postmedial lines are black, double with similar components, filled with the coppery brown color. The basal and antemedial lines are slightly irregular, oriented perpendicular to the wing axis. The median line is absent. The postmedial line is weaker than the other lines, nearly even, pulled basad on the costa, slightly concave opposite the reniform spot, and angled 45° toward the base below the level of the cell. The subterminal line is slightly lighter than the ground color, slightly irregular. It is preceded by a dark brown-gray shade across the entire wing. The fringe is concolorous with the terminal area. The orbicular and reniform spots are outlined in black, are moderately large, and are filled with the black-brown color of the median area. The orbicular spot is oval and the reniform spot is kidney-shaped. The claviform spot is black, small to moderate-sized, and narrow. The hindwing is tan-gray with darker gray veins, discal spot, and terminal line. The hindwing fringe is off-white with a gray base. The head and thorax are brown-black with a faint black line across the collar. A frontal tubercle is present. The male antenna is weakly biserrate. *Euxoa dodi* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The western distribution of this species extends south to southern California, c
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies in the summer and early fall. It has been collected from early July to mid-September in our region, but most records are from August. It is nocturnal and comes to lights.
 

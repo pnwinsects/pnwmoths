@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protogygia arena* is the smallest (FW length 14 - 15 mm) of four similar *Protogygia* species that have streaky gray to brown forewings with fused or nearly fused orbicular and reniform spots. The forewings are light to medium dark brown gray with dark gray transverse lines that are strong at the costa. The irregular antemedial line is more faint than the scalloped postmedial line. The smudgy gray subterminal line is preceded by dark wedges except near the apex. A thin black basal dash is present. The orbicular spot is elongate, often with a long extension to the wing base, is partially outlined in black and filled with whitish gray. The reniform spot is similar pale-filled but also has a darker center. The cell is often filled with dark gray between the spots. The hindwing is light gray with slightly darker discal spot and irregular marginal shading. The head and thorax are mouse gray. The male antenna is beadlike with strong fasciculations.
 
@@ -24,11 +24,11 @@ This species has a restricted range. The only known locality outside of Oregon i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a burrowing cutworm that burrows through sand and feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in late spring and early summer. The type series was collected from mid-May to mid-June.  Records of this species from late summer and fall are atypical and require closer evaluation.
 

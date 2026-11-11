@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Leucania insueta* is a medium-sized (FW length 15 - 16 mm), reddish-tan moth that flies in eastern British Columbia during the summer. It has a forewing with a light gray costa, white veins, an arcing line of black dots as a postmedial line, and a pale gray hindwing with a darker margin. This species and *Leucania dia* were considered to be the same species until recently (Schmidt and Anweiler 2010). The forewing is tan with red-brown streaks between the veins in the cell and on the distal wing. The wing immediately adjacent to the cubital vein, the distal costa, and the distal wing are darker brown to gray-brown, the latter strongest opposite the cell and in the fold. The veins are light gray, most prominently on the costa and on the cubital vein. A thin black basal dash is present. The postmedial line is a smooth arc of small, black dots or short lines on the veins. Occasional specimens have a gray or black dot at the posterior end of the cell at the distal cubital vein. The fringe is dark brown or gray-brown. The hindwing is pale whitish-gray at the base with a darker ill-defined gray marginal band and dark veins. The hindwing fringe is light gray. The head and thorax are gray-tan with faint gray transverse banding on the collar and edges on the tegulae. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of *L. insueta* extends east to the Atlantic from our region. It occur
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various grasses (Poaceae).
 
-##### Adults
+### Adults
 
 The flight period of the few specimens that are known from British Columbia is June and July. It has two broods in eastern North America, peaking in May and August (Forbes 1954). This species is nocturnal and comes to lights.
 

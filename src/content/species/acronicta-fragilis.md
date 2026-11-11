@@ -2,7 +2,7 @@
 
 
 
-##### Adults
+### Adults
 
 *Acronicta fragilis* is the smallest member of the genus in the Northwest (FW length 15 - 18 mm). It has a relatively broad dark gray forewing with a strongly dentate pale-filled postmedial line that has a square shape around the reniform spot. The forewing is powdery charcoal gray in the inland Northwest, slightly darker in the fold in the median area and on the distal wing opposite the cell and in the fold in some specimens. A very short basal dash is visible in some specimens. The basal, antemedial, and postmedial lines are black, double with nearly equally strong inner and outer components. The basal and antemedial lines are filled with the ground color. The irregular antemedial line is obliqued to the long axis of the wing. The postmedial line is strongly and evenly scalloped and is filled with light gray. The shape consists of straight segments connected by right angles: the transverse segments are a long line from below the costa to the fold and a shorter segment from the inferior reniform spot to the trailing margin. The median line is dark gray, usually evident near the costa. The subterminal line is pale and indistinct. A series of small black triangles between veins forms the terminal line. The fringe is weakly scalloped gray and dark gray. The orbicular and reniform spots are black in outline and filled with the ground color. The orbicular spot is found and usually filled with light gray and sometimes containing a small central ocellus. The reniform spot is less prominent, usually filled with diffuse gray centrally. The claviform spot is absent. The hindwing is pale whitish gray with a slight yellow cast and a sprinkling of gray scales towards the margin, a faint discal spot and postmedial line, a thin dark terminal line, and a fringe that is similar to the ground color. The head and thorax are even, similar to the forewing ground color. The male antenna is filiform.
 
@@ -40,13 +40,13 @@ The range of this species extends across Canada and the adjacent northern United
 
 
 
-##### Larvae
+### Larvae
 
 In eastern North America, this species is a foodplant generalist feeding on a wide variety of hardwood trees and shrubs including Betulaceae and Rosaceae.  In the Pacific Northwest, cherries (*Prunus* spp.), apples (*Malus* spp.), and roses (*Rosa* spp.) may be favored foodplants.
 
 
 
-##### Adults
+### Adults
 
 *Acronicta fragilis* flies most commonly in late spring to early July in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa cinereopallidus* is a fall-flying, small *Euxoa* (FW length 12–15 mm) that flies in sage steppe during the fall. It has a streaky, tan-gray forewing with white veins bordering the cell, pale-filled spots, and a pale hindwing with diffuse gray marginal suffusion. The females are slightly smaller than the males. The ground color is dull tan-gray, darkest gray in the cell and terminal area. The fold is gray-ochre, and the distal subterminal area is lighter gray, especially below the apex and along veins M3 and CuA1, where teeth extend to the outer margin. The cubital vein and veins bordering the anterior cell are silver gray to the reniform spot. The other veins are black. A weak basal dash is present in some specimens. The white and black basal line is evident at the costa and cubital vein in some specimens. A segment of the antemedial line is present at the base of the claviform spot. The postmedial line is gray and whitish gray on the costa, weakly scalloped and evident as the oblique transition between the darker median and lighter subterminal areas below the reniform spot. The subterminal line is pale gray, slightly irregular, traversed by the light "W" mark described above, and is preceded by a dark gray mark on the costa and several small black wedges between veins on the mid-forewing. The terminal line is black, thin or a series of spots. The fringe is varies from tan off-white to dark gray-brown with a tan base. The orbicular and reniform spots are partially outlined in black, are lined with light gray, and are variably filled with white, tan, or gray. The orbicular spot is small to moderate-sized, round to ovoid, complete or open toward the costa. The reniform spot is deeply indented laterally, boomerang-shape, sometimes traversed by the pale cubital vein. The claviform spot is small to moderate-sized, narrow, sometimes absent. The hindwing is whitish gray with light gray suffusion near the margin and slightly darker discal spot, veins, and terminal line in males; duskier light gray-brown with greater wider gray marginal band in females. The hindwing fringe is white in both sexes. The head and thorax are powdery olive-gray, often with a hoary light gray edge on the collar. A frontal tubercle is present. The male antenna is biserrate. *Euxoa cinereopallidus* is placed in the large subgenus *Euxoa*.
 
@@ -35,11 +35,11 @@ The range of this species extends east from the Pacific Northwest across souther
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 Adults fly in the fall, with Pacific Northwest collection records from September. It is nocturnal and comes to lights. Adults can be found taking nectar on the flowers of rabbitbrush (*Ericameria nauseosus*, Asteraceae).
 

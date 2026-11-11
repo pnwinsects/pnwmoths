@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichoplusia ni*, the Cabbage Looper, is a nondescript member of the subfamily Plusiinae that has a distinct silver stigma on a mottled brown-gray forewing. It is medium-sized (FW length 15 - 18 mm) and occurs in dry habitats and agricultural settings on both sides of the Coast and Cascade Mountain. The forewing margin is slightly scalloped. The dull gray color is finely mottled with brown, especially in the cell and fold, and is slightly darker from the stigma to the outer margin. The stigma is slightly shiny white, and variable in shape. The medial part is shaped like a sinuous tilted U with asymmetric limbs, the medial one being longer. The outer part is a small oval, sometimes with a central spot of the ground color. These parts are fused in roughly half of the specimens. The double gray transverse lines are filled with brown, are sinuous in course, and inconspicuous. The irregular toothed subterminal line is preceded by a series of long black wedges between the veins. A series of small pale brown spots are present near the margin, sometimes with longer pale streaks more proximally in the terminal area. The terminal line is thin, black. The fringe is gray and tan, with darker basal row and moderate checkering with dark gray. The hindwing is brown-gray, gradually darker gray toward the margin, with dark veins and thin terminal line. The hindwing fringe has a yellow basal row bordered by a thin gray line, gray mesial checkering, and a white edge. The head and thorax are dull gray with faint darker barring on the collar and brown tufts on the posterior thorax. Additional gray dorsal tufts are present on the abdomen, and the male has distinctive dark golden brown lateral tufts on segments five and six that are easily observed without magnification. The male antenna is filiform.
 
 This species can be identified by the combination of its dull mottled gray forewing and white stigma. The only other common Plusiine moth in most of the areas where *T. ni* is likely to be found is *Autographa californica* which has a gray and brown forewing and a silver stigma which is not divided into two parts. The black lines proximal the subterminal line and pale dots proximal to the terminal line are also diagnostic. Males of *T. ni* are easily distinguished from all other moths in our area by the long lateral tufts on the abdomen.
 
-##### Larvae
+### Larvae
 
 Larva is smooth with only two pairs of abdominal prolegs.  It is green with a thin white lateral line, and is illustrated by Lafontaine & Poole (1991).
 
@@ -26,11 +26,11 @@ This species is globally distributed and is found on all continents except Antar
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding on a wide diversity of herbaceous plants, but appears to favor the Brassicaceae.
 
-##### Adults
+### Adults
 
 Adults are highly vagile, and frequently disperse over hundreds of miles. They have a long flight period suggesting that they are multiple brooded in our area, with records from late May through November. They have been most commonly collected from late July through September. This species is nocturnal and comes to lights.
 

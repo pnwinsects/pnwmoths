@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Photedes defecta* is an uncommon small to medium-sized moth (FW length 12 - 16 mm) that is restricted to wetlands during the summer. It has a strongly streaked, tan and gray-brown (sometimes yellow) forewing with markings absent or consisting of black spots and a pale discal bar with a black dot. The forewing color is variable from straw-yellow to tan, with a light to dark gray streak from the base to the outer margin along the cubital vein that widens to include most of the terminal wing. The costa and trailing margins are palest and mostly even. The veins on the distal wing are gray, surrounded on each side by a tan streak with a brown line in each central interspace, producing a strong pattern of fine stripes. Some specimens have thin pale cubital and radial veins. The antemedial and postmedial lines are absent or are faintly zigzag with black spots on the veins at the ends of the teeth. The terminal line is similar when present with dots between the veins. The reniform spot is a pale bar at the end of the cell, often with a black spot is present at the lower end. Other markings are absent. The hindwing is whitish to yellow-tan, usually suffused with gray and faintly striped similar to the forewing, with gray diffuse discal spot and postmedial line. The thin terminal line is prominent, often black. The hindwing fringe is similar to the ground color. The head and thorax are yellow-brown to gray-tan, similar to the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found in a relatively narrow north-south distribution to the Eas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae bore in the stems of reed-like monocots. Forbes (1954) notes that many Eurasian species are strongly carnivorous on other caterpillars.
 
-##### Adults
+### Adults
 
 *Photedes defecta* is on the wing during the late summer, usually from July to early September. It is nocturnal and comes to lights, although it is rarely found unless the lights are placed in its wetland habitat.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Brachylomia algens* is a small, olive-gray moth (FW length 13–14 mm) that flies in northern and eastern British Columbia during the summer. Its forewings have a short forked basal dash, a black-rimmed orbicular spot, a pale-filled reniform spot, and a gray spot near the anal angle. The ground color is slightly mottled medium-dark olive-gray, lighter at the base, in the distal subterminal area except on the costa, and at the apex. The costal subterminal area is slightly darker gray. A short black basal dash is forked at the tip. The basal, antemedial, and postmedial lines are gray, partially double filled with light olive gray, incomplete but evident on the costa. The antemedial line is usually visible on the mid-wing. The median line is gray, absent or faint. The postmedial line is stronger than the other lines and has paler gray filling. It is weakly toothed on the veins, drawn sharply toward the base on the costa, nearly straight or slightly concave near the reniform spot, and concave toward the base and nearly perpendicular to the posterior margin below the spot. The subterminal line is light gray, slightly irregular, preceded by an ill-defined black spot in the fold. The orbicular post is an upright oval, outlined in black although often incompletely, filled with pale gray peripherally and the ground color centrally. The reniform spot is moderate-sized, kidney-shaped, outlined in black medially and partially or entirely filled with light gray. The claviform spot is absent. The hindwing is light gray, with slightly darker and ill-defined discal spot, postmedial line, and submarginal and marginal bands. The hindwing fringe is similarly light gray. The head and posterior thorax are powdery gray. The collar has a light tan base, a black transverse line, and a gray edge. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ The range of this species extends from Yukon Territory and all of Alberta and Sa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on cottonwoods (*Populus* spp.) and willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 *Brachylomia algens* flies during the summer and early fall. It has been recorded from July, August, and September across the range of the species. It is nocturnal and comes to lights.
 

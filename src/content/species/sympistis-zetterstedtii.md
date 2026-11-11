@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis zetterstedtii* is a small to very small (FW length 10–12 mm) moth that flies over rocky alpine tundra during the summer. It has glossy blackish-gray forewings marked with light blue-gray lines and spots and white hindwings with even black marginal bands. The forewing is sprinkled with pale light blue-gray and or light yellow scales. The lightest areas are outside the median area, usually greatest in the terminal area, the medial subterminal area abutting the postmedial line, and on the entire wing base. The lines are dark gray with pale scales along the antemedial and postmedial line outside of the median area. The antemedial line is irregular, oriented straight across the wing. The median line is barely evident due to the dark ground color. The postmedial line is scalloped, bluntly excurved around the end of the cell and then curved to meet the trailing margin at a right angle. The subterminal line is pale, diffuse, and uneven, often toothed to the outer margin. The terminal line is thin. The fringe is dark gray, weakly moderately checkered. The spots are dark gray with pale peripheral and dark gray central filling. The orbicular spot is small, oval. The reniform spot is kidney-shaped. The claviform spot is absent. The ground color of the hindwing is pure white with extensive dark gray suffusion to the discal spot and along the inner margin. The veins and small, thin discal spot are gray. The blackish gray marginal band is sharply demarcated medially and even in width. The hindwing fringe is white with a gray base. The eyes are reduced in size. The head and thorax are dark black with yellow on the palpi and collar. Many of the scales are long and hair-like. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The species has a Holarctic distribution, occurring across Asia to Scandinavia i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This moth flies during the day. It frequently rests on the rocks. As an evasive maneuver, this species will drop between the cracks in the rocks as often as it takes flight, frustrating those that try to catch it by slapping a net on top of the resting moth. It seeks nectar at the flowers of moss campion (*Silene acaulis*) and saxifrage (*Saxifraga* spp.). This species flies during the summer from June to August depending on location, elevation, and snowpack.
 

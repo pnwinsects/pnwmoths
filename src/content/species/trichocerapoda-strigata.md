@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichocerapoda strigata* is, as the name suggests, a streaky gray moth. It is small (FW length 11 - 13 mm) with a long claviform spot and a small spike toward the base on the lower medial reniform spot. The forewing apex is slightly elongate. The color is medium-dark gray, with thin dark veins and a black basal dash. The terminal area is darker gray than the rest of the wing. Some specimens show a slight tan flush in the cell and fold. Pale on each side of the cubital vein produces a long mark resembling the claviform spot medial to the orbicular spot. The lines are nearly absent, evident as faint gray spots on the costa. Some specimens show a portion of the postmedial line as a gray transverse mark lateral to the reniform spot and a slanted mark below the spot. The subterminal line is evident as the irregular transition from the paler subterminal area to the dark terminal area, including an ill-defined pale W-mark on M3 and CuA1. It is preceded by dark gray or black spots near the anal angle in most specimens. The terminal line is thin and dark. The fringe is gray with dark checkering. The spots are outlined in thin black on the outside with a thin white inner line and are filled with the gray ground color. The orbicular spot is very long and oval, sometimes touching the reniform spot. The reniform spot is kidney-shaped with a spike-like extension toward the base from the lower inner corner that most often extends to the lateral orbicular spot. The claviform spot is very long. The hindwing is whitish gray in males and medium gray in females, with a poorly-marginated gray marginal band and thin, dark terminal line. The veins are slightly darker gray than the ground. The fringe is white with a gray base that is darker in females. The head and thorax are powdery gray with a weak black transverse line on the collar. The eye is covered with sparse, fine hairs. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ The range of this species extends south through eastern and southern California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Trichocerapoda* has a fall flight, usually appearing in early September and flying into October. It is nocturnal and comes to lights.
 

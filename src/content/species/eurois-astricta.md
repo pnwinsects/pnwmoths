@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eurois astricta* is a large cutworm moth (FW length 20 - 25 mm) that flies in forests throughout the Pacific Northwest during the summer. It has dark gray-brown forewings with a red-brown to purplish hue marked with a busy pattern or lines and spots. The ground color is dark gray-brown with a distinct red to purple-red flush that is most evident in the median area and as filling of the lines. The basal area, region between the orbicular and reniform spots, and the area between the postmedial and subterminal lines are usually darkest, and the filling of the lines and the terminal area are lightest. A black line connects the spots across the lower cell. A black shade and series of large wedge-shaped black marks precedes the subterminal line and are largest opposite the cell and the fold. The lines black and double. The antemedial line is nearly straight. The postmedial line is gently excurved toward the costa and is scalloped, especially the inner component. The subterminal line is irregular, evident due to the black shading and wedges that precedes it. The terminal line is a series of black crescents between the veins. The orbicular spot is black, incomplete toward the costa, and usually an oblique circle or oval in shape. It is filled with light gray, occasionally only with the ground color. The reniform spot is black and fairly large, heart-shaped or irregular with an extension toward the base at the lower margin. It is usually filled with darker scales than the orbicular spot but usually light gray at the periphery. The claviform spot is black. The hindwing is dark brown gray, sometimes lighter at the margin, with a faint gray discal spot but often lacking a postmedial band, and has a slightly lighter gray to whitish fringe. The head and thorax are uniform dull dark brown-gray. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is widely distributed in boreal spruce-fir forests or hardwood fore
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many hardwoods including huckleberries (*Vaccinium* spp.) in the Ericaceae, alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, maples (*Acer* spp.) in the Aceraceae, *Viburnum* spp. in the Caprifoliaceae, and quaking aspen (*Populus tremuloides*) in the Salicaceae.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in summer to early fall. The Pacific Northwest records are from late June to mid-September. It is nocturnal and comes readily to lights.
 

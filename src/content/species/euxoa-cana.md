@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 True to its species name ("cana" means gray), *Euxoa cana* is a powdery gray, small to medium-sized *Euxoa* (FW length 14–17 mm) that flies in dry forest and steppe in early fall. It has light yellow scales lining the forewing spots, a small black claviform spot, and whitish hindwings with dark veins and margin (darker in females). The forewings are nearly uniform, slightly darker gray near the margin. Some specimens are slightly streaky on the outer forewing due to dark veins. The basal line is barely evident near the costa. The antemedial and postmedial lines are variable, extremely faint to black. When visible, the antemedial line is slightly irregular and slanted toward the outer margin. The postmedial line is mildly toothed on the veins, bent 90° lateral to the reniform spot and usually touching both ends of the spot, slightly concave below the spot. The subterminal line is absent or a series of ill-defined small luteous spots. It is preceded by a barely darker shade near the costa. The terminal line is dark, thin or broken into spots between the veins. The fringe is concolorous with the terminal area. The orbicular and reniform spots are partially outlined in dark gray to black, with powdery lining of pale luteous scales and filling of the ground color. The orbicular spot is often faint and sometimes absent, oval. The reniform spot is kidney-shaped, variable in prominence. The claviform spot is black, absent or small. The hindwing is pale gray, slightly darker in females, with darker gray near the outer margin, prominent dark veins, and thin discal spot and terminal line. The hindwing fringe is white, sometimes with patchy gray at the base. The head and thorax are gray without dark markings. A frontal tubercle is present. The male antenna is biserrate. *Euxoa cana* is a member of the large subgenus *Euxoa*.
 
@@ -37,11 +37,11 @@ The range of *E. cana* is mostly limited to the Northwest and adjacent Great Ba
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 *Euxoa cana* is found in late summer and early fall, flying slightly earlier than most of the late-season steppe *Euxoa* species. Most specimens have been collected during the months of August and September.  It is nocturnal and comes to lights.
 

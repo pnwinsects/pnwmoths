@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia speciosa* is a moderately large broad-winged noctuid species (FW length 19 - 21 mm) with a busy powdery pattern of pale-filled scalloped lines and spots with a reniform spot that is filled with gray centrally. It occurs in high elevation conifer forests in northern Washington and British Columbia in our region. The forewing ground color is slightly mottled powdery medium gray, usually without darker areas. The transverse lines are dark gray, double, with pale whitish gray filling. The antemedial line is zig-zagged and the inner component of the postmedial line is strongly scalloped. The pale subterminal line is nearly straight. It is preceded by a series of smudged black wedges that are variable in strength and number but usually present at least near the apex and opposite the cell. The orbicular and reniform spots are dark gray, often incomplete, and filled with light whitish gray peripherally and the ground color centrally. The dark filling of the reniform spot is extensive. A faint black bar connects the lower portions of these spots across the posterior cell. The claviform spot is small and indistinct. The hindwing is powdery pale gray with indistinct darker discal spot, scalloped postmedial line, and indistinct submarginal shade near the anal angle. The head and thorax are grizzled black and white. The male antenna is weakly biserrate.
 
@@ -28,11 +28,11 @@ This species has a Holarctic distribution and occurs across most of the Northern
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist, feeding on hardwoods such as huckleberries (*Vaccinium* spp.) in the Ericaceae and birches (*Betula* spp.) in the Betulaceae, as well as herbaceous plants in families such as the Asteraceae.
 
-##### Adults
+### Adults
 
 The adults are on the wing from mid-June to late August in our region. It is nocturnal and comes to lights.
 

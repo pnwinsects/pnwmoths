@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cisthene barnesii* is a small (FW length 11–12 mm), brightly-colored moth that is only found in southeastern Idaho in the Pacific Northwest and flies during the summer. It has an orange line across the forewing and a red or yellow hindwing. The forewing is even blackish gray, usually with orange along the costal and posterior margins that are connected by a narrow straight orange band across the distal third of the wing. The hindwings are red, dark pink, or orange-yellow with a narrow black marginal band that spares the anal angle. The dorsal head and central thorax are black, while the collar and tegulae are orange. The abdomen is red. The antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has a Rocky Mountain region distribution in the United States, rang
 
 ## **Life History**
 
-##### Larvae
+### Larvae
 
 No information is presently available for this species.
 
-##### Adults
+### Adults
 
 *Cisthene barnesii* has been found from mid-July to late August in Idaho. It is nocturnal and comes to light.
 

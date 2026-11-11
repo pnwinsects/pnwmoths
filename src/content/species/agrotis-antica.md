@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 This recently described species from dry pine forests resembles a large dull form of *Agrotis obliqua*, a common higher elevation species. It is a medium-sized species (FW length 14–18 mm) with dull, wood-brown forewings with a sooty gray costa and thin, dark veins. The forewings appear long and narrow for the genus. A dark gray patch is also present at the margin opposite the cell. The lines are thin and black. The antemedial line is sharply drawn toward the outer margin near the trailing margin and nearly touches the postmedial line. The postmedial line is strongly dentate. The pale subterminal line is usually a series of wedges, often preceded by several long black chevrons that are longest opposite the reniform spot. The orbicular and reniform spots are black, usually with a thin paler brown inner component, and are filled with the ground color. The orbicular spot is an elongate oval, and the reniform spot is kidney-shaped. The cell between these spots is dark gray to black. One or two black dashes extends laterally from the reniform spots in some individuals. The hindwing is pale gray basally with sooty veins, discal spot, and outer margin in males; uniform dark gray with very faint spots and veins in females. The head is medium brown. The collar is faintly striped, with darker basal and lighter distal bands. The tegulae are lighter brown than the forewing with darker brown margins, but lack gray color. The male antenna is biserrate with strong fasciculations.
 
@@ -22,11 +22,11 @@ This species is found in the central and southern Rocky Mountains and in norther
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-burrowing cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults are on the wing earlier than *Agrotis obliqua* at the few sites where both species have been collected, usually in late spring or early summer. Pacific Northwest records are from early May to early July. This species is nocturnal and comes to lights.
 

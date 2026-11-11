@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia vernilis* is the most easterly distributed of four similar finely streaked gray *Xestia* species that are found in our region. It is a medium-sized noctuid (FW length 15 - 19 mm) with nearly even steel gray forewings with thin dark veins and lines. The terminal area is slightly darker gray. A thin, black basal dash is present. The transverse lines are very thin except at the costa, zig-zagged and dentate, blending with the longitudinal streaking produced by the veins. The orbicular spot is black, shaped like a long thin oval or diamond, and filled with whitish gray. The reniform spots is variable from nearly absent to slightly less evident than the orbicular spot, thin, black, and filled with the ground color. The claviform is only evident as a black continuation of the basal dash. The hindwing is light luteous gray with slightly darker gray discal spot, postmedial line that is absent to evident as dark marks on the veins, and terminal line. The hindwing fringe is pale whitish gray. The head and thorax gray with a transverse line across the distal third of the collar. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is found in the Rocky Mountains from west-central Alberta to south-
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on various hardwoods based on closely related species.
 
-##### Adults
+### Adults
 
 The adults fly in late summer and early fall. Records from our region span late July through September. It is nocturnal and comes to lights.
 

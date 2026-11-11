@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Acronicta lanceolaria* is a very rarely collected, light gray, medium-sized moth (FW length 20 mm) that has been collected in the eastern part of the Pacific Northwest. It has a relatively long, apically pointed forewing and reduced pattern consisting of the light and dark postmedial line and a white hindwing. The forewing ground color is even powdery light to medium gray, usually with a pale streak through the cell to the apex. The pattern is nearly absent. Some specimens show the postmedial line from the cell to the trailing margin. When present this line is pale gray medially and dark gray laterally. The orbicular spot is a faint pale dot, and the reniform spot is pale or a dark and light chevron-shaped mark. The hindwing is pure white. The thorax is light gray. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ The range of this species extends to the East Coast from our region. It has been
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a general feeder on low shrubs. It feeds on willows (*Salix* spp., Salicaceae), *Spiraea* (Rosaceae), as well as several other species.
 
-##### Adults
+### Adults
 
 This species flies in late spring and again in the fall (in the East). The flight time is not well known in our area due to the small number of records. It is nocturnal and comes to lights.
 

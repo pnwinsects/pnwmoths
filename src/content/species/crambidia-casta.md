@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Crambidia casta* is a small to medium-sized, white-winged moth (FW length 14–17 mm) that flies in a variety of dry habitats during late summer and fall. The pure white forewings are long and narrow with a satiny sheen. The broader and roughly triangular hindwings are duller white, appearing slightly dusky. The dorsal hind wings near the anterior margin and the ventral forewings are darker smoky gray. The head and abdomen are white.
 
@@ -22,11 +22,11 @@ This species is widely distributed in North America. In the east it is reported 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on lichens, and may particularly favor lichens growing on junipers or sagebrush east of the Cascades.
 
-##### Adults
+### Adults
 
 Adults fly from late summer until early October. They are nocturnal and come to light. The wings are rolled around the body when the moth is at rest. When doing so, it becomes very thin and has the appearance of a stick or bleached grass stem.
 

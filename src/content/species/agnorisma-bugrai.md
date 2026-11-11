@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agnorisma bugrai* is an attractive, medium-sized (FW length 15 - 17 mm) moth with fairly broad forewings. The ground color of the thorax, forewings, and abdomen is purplish gray-brown. The top of the head and collar are black. The forewings are smooth and evenly colored except for the slightly darker postmedial area. The basal, antemedial, and postmedial lines are slightly darker filled with pale gray-brown and are very smooth without scalloping or abrupt angulation, while the pale subterminal line is uneven but faint. The orbicular and reniform spots are fairly large and filled with slightly lighter gray brown than the rest of the forewing. Their outlines are pale, but the spots are most evident due to silhouetting by black filling of the cell between the antemedial line and orbicular spot and between the orbicular and reniform spots. The dorsal hindwings are shiny medium gray with slightly darker discal spot and marginal area. The antennae of both sexes are filiform.
 
@@ -22,11 +22,11 @@ This species has a transcontinental range. It is found in Canada from Newfoundla
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in late summer and early fall. Pacific Northwest records are from late July to mid September. It is nocturnal and comes to lights
 

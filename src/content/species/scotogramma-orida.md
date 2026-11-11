@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Scotogramma orida* is a common small to medium-sized noctuid moth (FW length 14 - 15 mm) that flies in southern Oregon in the fall. It has powdery gray forewings and white hindwings with black bands at the margin on both sides. The wings have a scalloped outer margin and are relatively stubby in shape. The color is slightly mottled powdery medium-dark gray with a slight tan tint, slightly darker on the costa and wing base. The terminal area is darker gray and there is a similar shade or series of fused spots preceding the subterminal line. The basal, antemedial, and postmedial lines are double, gray, but nearly obsolete except as lines on the costa. The median line is also only evident on the costa. The subterminal line is pale, irregular and complete across the wing. A series of small dark gray triangles forms the terminal line. The fringe is slightly scalloped gray-tan and dark gray. The orbicular and reniform spot outlines are thin and black with slightly lighter inner components. The orbicular spot is oval with central filling of the ground color. The reniform spot is kidney-shaped with filling of the ground color in the upper half and gray in the lower half. The claviform spot is black, small, and filled with the ground. The hindwing is pure white with a well-defined dark gray marginal band, dark gray veins across the wing in females and marking the position of the postmedial line in males, with a white fringe. The thorax is sandy tan-gray with faint transverse barring on the collar. The eye surface is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species extends south through Nevada to central California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 The adults of *S. orida* are on the wing in the fall, beginning in early September. It is nocturnal and comes to lights.
 

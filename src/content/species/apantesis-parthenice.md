@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis parthenice* is a medium-sized (FW length 17–19 mm) red hindwing species of *Apantesis* found in British Columbia and eastern Idaho in our region. The forewing is similar to that of *Apantesis virgo*, appearing black with off-white veins and transverse lines at and distal to the cell; however *A. parthenice* has a pale transverse line oriented perpendicular to the costa in the mid-cell that is lacking in *A. virgo*. The red hindwing has pale-rimmed black discal and marginal spots, lacking marks medial to the discal spot. The body and antennae are similar to those of most other *Apantesis* species.
 
@@ -22,11 +22,11 @@ This species is widespread in North America, having the largest range of any *Ap
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on general herbaceous vegetation, particularly Asteraceae.
 
-##### Adults
+### Adults
 
 *Apantesis parthenice* is single brooded. Adults have been collected from mid June to late August in the Pacific Northwest with most records from July. According to Schmidt (2009) this species flies a few weeks later than *A. virgo* where the two species occur together.
 

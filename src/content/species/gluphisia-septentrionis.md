@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Gluphisia septentrionis* is a small to medium-sized moth (FW length 13–15 mm) that flies in forests throughout the Northwest from late spring until fall. It has variable mottled gray forewings banded with ochre to light olive forewings and lacking well-defined spots.  The forewings are fairly broad and stubby without scalloping or flanges.  They are powdery ash gray with variable ochre to olive basal and median areas, often heavily dusted with gray.  The gray uneven basal, antemedial, postmedial, and subterminal lines are usually visible, especially the antemedial and postmedial lines which are darkest gray, while the spots are obsolete. Variable numbers of raised glossy scales on the basal and median forewing can often be seen with the naked eye and appear like grit on emery cloth.  The hindwing is dull gray, darkest toward the margin.  The body is hoary medium gray to dark gray.  The antennae are bipectinate, broadly in males and weakly in females.
 
@@ -8,7 +8,7 @@ This species can usually be identified as a prominent by its broad antennae and 
 
 Populations of this species from northeastern Nevada are small and have a broad pale olive median area.
 
-##### Larvae
+### Larvae
 
 The larva is smooth, slender, and green, and may have a pair of thin yellow stripes (one along each side, toward the top) or it may have a single wide yellow stripe along the midline that contains large purple spots. It is depicted by Miller *et al.* (2018).
 
@@ -28,11 +28,11 @@ This species is widely distributed throughout most of North America.  Eastern p
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on Salicaceae, including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.).
 
-##### Adults
+### Adults
 
 Adults have a long flight period and might be multiple-brooded in our area.  Pacific Northwest records are from early May through August.  It is nocturnal and comes readily to light.  As with other prominents the adults do not feed.
 

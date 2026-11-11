@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tarache areli* is a small (FW length 10 - 13 mm) moth that flies in arid steppe and forest habitats in the eastern part of the Pacific Northwest during the summer. It has a bicolored cream and gray-brown forewing that is marked with a pure white preapical spot and a metallic blue reniform spot with a central black spot. The forewing ground color is pale yellow or tan off-white, darker in females than in males, clearly darker than a pure white preapical spot on the costa in the subterminal area. The wing distal to the median line is mottled gray-brown. The basal and antemedial lines are gray, double. The lower halves of the median and postmedial lines are fused, black and metallic blue-gray. Other black spots are found lateral to the reniform spot on the postmedial line, as a pair of spots medial to the subterminal line near the apex, and as a series of small black spots at the terminal line. The subterminal line is pale and relatively faint. The fringe is gray with pale patches at mid-wing and near the apex in some individuals. The orbicular spot is thin and black, incomplete with gaps anteriorly and posteriorly. The reniform spot is black, round, filled with metallic blue-gray scales and a central black spot. The claviform spot is absent. The hindwing is pale yellow-gray, darker tan in females, slightly darker gray near the margin, with a pale two-toned fringe. The head is dark brown. The thorax is cream to tan, matching the medial forewing color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is most common in the Four Corners States and adjacent west Texas, 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Malvaceae such as the scarlet globe mallow (*Sphaeralcea* spp.).
 
-##### Adults
+### Adults
 
 Adults fly in late summer and have been collected in August in our region. It is a nocturnal species and comes to lights.
 

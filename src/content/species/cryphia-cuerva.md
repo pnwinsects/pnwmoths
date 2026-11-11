@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cryphia cuerva* is a small (FW length 10 - 13 mm), variable, greenish to gray moth that flies predominantly east of the Cascade crest in the late summer and fall. Its forewing has a lichen-like pattern. The forewing is relatively short with a slightly pointed apex and convex outer margin. The color is very variable, especially in darkness. It range from dark olive gray to yellowish gray to pale olive gray. Very light specimens have a nearly even forewing in terms of darkness with markings consisting of black lines and spots, while most dark specimens have lighter wing base and/or distal wing beyond the postmedial line with markings consisting of the pale inner filling of the lines and spots. The lighter areas in dark specimens are mottled green. The basal, antemdial, and postmedial lines partially double, filled with lighter scales, and are irregularly irregular across the wing. The antemedial line is toothed toward the outer margin between the orbicular and claviform spots and angled sharply toward the outer margin near the trailing margin. The median line is evident near the costal margin in lighter specimens. The postmedial line has a square shape around the reniform spot, is drawn sharply toward the base of the wing on the costal margin, and is obliqued toward the base from the lower reniform spot to the trailing margin. The subterminal line is dark and irregular although not always present. The terminal line is broken at the veins. The fringe is checkered with the ground color and black. The orbicular and reniform spots are similar with an outer black and an inner paler line and darker central filling. These spots are close to each other. The claviform spot is black, evident in pale specimens. The hindwing is light gray with a slightly darker submarginal shade, a small gray discal spot, and a gray fringe. The head and thorax match the wing ground color, with the head slightly lighter than the thorax. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This is a West Coast species. It occurs widely in northern California, and along
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on rock lichens like related species.
 
-##### Adults
+### Adults
 
 Adults fly in the late summer and fall although a few individuals have been found as early as June. They usually become common in August and fly through September. This species is nocturnal and comes to lights.
 

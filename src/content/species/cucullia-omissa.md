@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia omissa* is a large, narrow-winged moth (FW length 20 - 22 mm) that flies in forests throughout much of our region during the summer. It has a smooth, medium blue-gray forewing with a brown costa and clustered black marks near the anal angle.  As in other *Cucullia*, the forewing has a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" when the moth is resting, which is variably present in pinned specimens. The forewing ground color is smooth medium-dark violet-gray. The costa and trailing margin of dark gray-brown and slightly reddish brown. The veins are dark, very thin, and a similar thin basal dash is present. A few gray lines are present between the veins near the outer margin. Two stronger black dashes are present at the anal angle, longest near vein CuA2, with red-brown between them. An adjacent C-shaped double black mark preceded by a dark smudge represents a remnant of the postmedial line on the trailing margin. Traces of the gray antemedial line are barely evident on the mid-wing in a few specimens, but the vague gray or brown outlines of the orbicular and reniform spots are usually visible. The terminal line is a series of black lines between the veins on most of the wings, becoming a continuous line near the anal angle. The hindwing is pale brown-gray, broadly darker brown-gray at the margin, with dark gray veins and thin terminal line. The hindwing fringe is white with a light tan and gray fringe.
 
@@ -22,11 +22,11 @@ This species has a transcontinental range, occurring in a relatively narrow nort
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on asters (*Aster* spp.) in the Asteraceae.
 
-##### Adults
+### Adults
 
 This species flies during the summer, usually in from May to early August. It is attracted to lights, but possibly less strongly than many other moths.
 

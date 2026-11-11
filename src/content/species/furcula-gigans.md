@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Furcula gigans* is our darkest *Furcula* and tends to be slightly larger than our other species (FW length 17–21 mm.).  Both fore- and hindwings are a waxy light gray with a yellow tint, appearing nearly translucent like vellum paper.  The forewings are heavily marked with dark, hoary, gray lines and black spots.  The dark band across the median area is broad, with relatively straight margins in most individuals.  The postmedial line consists of three separate strongly scalloped lines; the other lines consist of strong black dots on the veins.  Patches of ochre are present near the transverse lines in some specimens.  The hindwings are marked with a discal spot, faint diffuse marginal band, dark veins, and terminal spots on the veins.  The anterior thorax is similar gray to the posterior thorax, occasionally lighter but not pure white.  The male antenna is bipectinate while that of the female is simple.
 
@@ -24,11 +24,11 @@ The range of this species is limited to western North America. Outside of our re
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Willow (*Salix* spp.) in the Salicaceae is reported as the foodplant by Forbes (1948).
 
-##### Adults
+### Adults
 
 This species is single brooded and has been collected from late April through mid-August, with most records in late spring and early summer.  The adults do not feed.  It is nocturnal and comes to light.
 

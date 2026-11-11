@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis brunneipennis* is a rarely collected, smooth red-brown, medium-sized *Abagrotis* (FW length 14 - 16 mm) that occurs in forests. Its forewing sometimes, but not always, has blackish brown areas between the basal and antemedial lines and the postmedial and subterminal lines. Almost all Pacific Northwest specimens of this species are a rich dark orange-brown color, darkest at the costal margin near the subterminal line and lightest at the adjacent apex. When present, the dark areas between the lines produce a banded appearance to the forewing that is unique in the genus. The transverse lines and spots are barely evident. The median line and claviform spot are absent. The hindwing is dark gray with a two-toned dark and light gray fringe. The head and thorax match the forewing ground color. The male antenna is filiform.
 
 This species can usually be identified by its red-brown color and slight glossy sheen. The most similar species is *Abagrotis cupida*, but its lines are more distinct and it has a dark spot at the costal origin of the subterminal line that *A. brunneipennis* lacks.
 
-##### Larvae
+### Larvae
 
 The larva is described in Lafontaine (1998). It has pale brown spiracles and a continuous pattern of subdorsal dark spots.
 
@@ -26,11 +26,11 @@ This species is interesting because records of its occurrence are widely dispers
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a foodplant specialist feeding on huckleberries (*Vaccinium* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 Adults fly in late summer in our region. Records are from the months of July and August. It is nocturnal and comes to lights.
 

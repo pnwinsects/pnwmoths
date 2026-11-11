@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta frigida* is a small (FW length 12–13 mm) gray noctuid moth with black-banded off-white hindwings that is likely to occur in northern British Columbia during June and July. The forewing is slightly mottled powdery medium-dark gray with white-filled basal, antemedial, and postmedial lines. These lines are double, black. The basal and antemedial lines contribute to the mottled appearance of the wing base, but the strongly dentate postmedial line is a distinct feature of the distal wing pattern. The sinuous subterminal line is pale, most evident as a transition between darker subterminal and lighter terminal areas. The fringe is strongly checkered white and black. The orbicular spot is the most prominent spot, round or slightly ovoid, black filled with the ground color. The claviform and reniform spots are variable. When visible the reniform spot is dark gray to black, filled with white peripherally and the ground color centrally. The subterminal line is preceded by a dark shade, loosely arranged into chevrons. The terminal line is thin, black. The hindwing is dull off-white with moderate suffusion of gray scales, elongate dark gray discal spot, thin but complete subterminal line, and wide dark gray marginal band. The hindwing fringe is white with a gray base. The ventral hindwing is similar in color to the dorsum, with thin incomplete postmedial band and weak marginal band. The head and thorax are similar to the forewing in color. The male antenna is biserrate. The eye is covered in thin hairs.
 
@@ -24,11 +24,11 @@ This species is known from western Alberta and southwestern Yukon Territory. Giv
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
-##### Adults
+### Adults
 
 Adults fly during early to mid-summer. It has been collected in late June in Yukon and during July in Alberta. Adults are predominantly nocturnal and come to lights in regions where it is sufficiently dark to light trap, but occasionally fly during the day. A series of this moth was collected in malaise traps near Kluane Lake, Yukon Territory.
 

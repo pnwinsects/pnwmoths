@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Dargida diffusa*, the Wheat Head Armyworm, is a small (FW length 12–15 mm), longitudinally streaked moth with a white cubital vein and dark gray hindwing in our area. It flies in steppe habitats during late spring and early summer. The forewing ground color is typically dark yellow-tan with an olive tint, occasionally lighter dull ochre-yellow, lighter near the apex. The costal and other margins are light blue gray in dark specimens and light tan in lighter ones. A band of olive gray to brown-gray is present near the costa from the base to the end of the cell, curving toward the apex distal to the cell. A triangular area of similar color is present from the end of the cubital vein to the outer margin and apex anterior to vein M3. A thin black dash is present, and a similar black mark is posterior to the distal cubital vein. A black and gray mark resembling a dash on the inner third of the wing near the tip of the basal dash is probably the claviform spot. The cubital vein and the proximal portions of its distal branches M3 and CuA1 are white. The other veins are thin gray except near the trailing margin. Most of the ordinary transverse lines and spots are lacking. A few specimens have a row of black spots at the subterminal line. The terminal line is thin, gray to brown. The fringe is ochre to light gray with several faint striations. A small black spot at the end of the cell represents the reniform spot. The hindwing is dark gray in most Pacific Northwest specimens although some specimens from the eastern part of our region are pale whitish gray to light gray, darker near the margin, with light gray veins, and a white fringe.  The head is tan to yellow brown. The collar is lighter than the forewing with fine transverse striations. The rest of the thorax is slightly darker olive gray to gray brown. The surface of the eye is covered with fine hairs. The male antenna is bead-like to biserrate.
 
@@ -26,11 +26,11 @@ Western populations of *D. diffusa* extend south into eastern California and Nev
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on the seedheads of grasses (Poaceae) and prefers tall coarse grasses. It is a pest of cereal crops, including wheat in Washington.
 
-##### Adults
+### Adults
 
 *Dargida diffusa* is multiple brooded and adults are on the wing during spring and summer. The records from our region are mostly from late spring and early summer, with fewer later in the year from July to early September. It is nocturnal and comes to lights.
 

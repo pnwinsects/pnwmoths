@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Scotogramma fervida* is a small, gray-tan moth (FW length 13 - 15 mm) that flies in sage steppe in the southern portion of the Pacific Northwest during late spring and early summer. It has a smudgy, gray-filled reniform spot and a dark red-brown shade preceding the posterior subterminal line. The forewing is slightly mottled dull gray-tan with a slight golden cast. The terminal area is gray. A short irregular black basal dash is present. The basal, antemedial, and postmedial lines are gray, double with filling of the ground color, and are strongest as paired spots on the costa. The antemedial line is very faint and usually only partially evident, irregular and slanted toward the outer margin from the costa. The median line is gray, very faint except for a spot on the costa. The postmedial line is also very faint, smoothly excurved around the reniform spot and oblique toward the base from the lower cell to the posterior margin. The subterminal line is pale yellow-brown, complete, offset toward the base at the costa and forming a moderately-strong W-mark on veins M3 and CuA1, nearly straight elsewhere. This line is preceded by a red-brown to dark gray shade in the distal subterminal area, as well as by a series of black wedges between the veins on the mid-wing. The terminal line is a series of black spots are triangles. The fringe is checkered gray and tan. The orbicular post is partially outlined in thin black, oval, filled with the ground color or light gray with a gray ocellus. The reniform spot is asymmetrically kidney-shaped with an expanded lower half, outlined with strong black inferiorly and weak gray to incomplete anteriorly, filled with the ground color and smoky purple to charcoal gray in the posterior half. The claviform spot is small, black filled with the ground color or gray. The hindwing is dirty light gray-tan with an ill-defined gray marginal band, gray veins, discal spot, and thin terminal line. The hindwing fringe is off-white with a yellow and gray base. The thorax is gray-tan with black and gray barring across the collar and powdery dark margins on the tegulae. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is found in western North America. It occurs from southern Alberta 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based upon closely related species.
 
-##### Adults
+### Adults
 
 Adults of *S. fervida* fly during the summer and have been collected in June and July in Oregon. It is a nocturnal species that comes to lights.
 

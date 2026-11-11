@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Coelodasys unicornis* is our smallest *Coelodasys* species (FW length 14–17 mm). It has a relatively short and stubby forewings with a prominent light reddish area at the outer margin and a fairly "busy" pattern of lines, streaks, and colorful mottling. The forewings are gray or mixed gray and red-brown medial to the postmedial line and light red-brown, blue-gray, black, and gray distal to this line. The scalloped transversely oriented postmedial line, black bar-like discal spot usually preceded by a pale gray area in the cell, and a series of black and black and white dashes between veins on the distal area are the most prominent marks. A double black basal line separates a small pale basal area from the rest of the forewing. The male hindwing is light gray, usually with extensive gray shading and marginal band. The female hindwing is darker gray. The thorax is light to medium gray, with dark barring on the collar and weak tufts at the posterior margin. The male antenna is bipectinate while that of the female is simple.
 
@@ -10,7 +10,7 @@ Specimens from western Washington and Oregon are lighter, more reddish in color,
 
 This species is placed in the genus *Coelodasys* Packard in a recent check list of the prominents of the New World by Becker (2014), having previously been placed in the genus *Schizura* Doubleday.
 
-##### Larvae
+### Larvae
 
 Larva is mostly smooth, green and mottled gray and red with a sharp thoracic dorsal hump. It is illustrated by Miller & Hammond (2003).
 
@@ -30,11 +30,11 @@ This species has a broad distribution in North America. Forbes (1948) gives its 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeder on many kinds of hardwood trees and shrubs, particularly in the families Fagaceae, Betulaceae, Rosaceae, and Ericaceae. Larvae are sometimes pests in fruit orchards.
 
-##### Adults
+### Adults
 
 Aduls have a very long flight season suggesting that it might be multiple brooded. They have been collected from late May until mid September. They are nocturnal and come to light.
 

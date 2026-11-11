@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Stretchia prima* is a small to medium-sized spring flying moth (FW length 12 mm) that flies in eastern Oregon during the spring. It has a powdery light to dark gray forewing with fused or nearly fused orbicular and reniform spots. The forewing has a pointed apex and smoothly convex lateral margin. It is powdery gray, dark gray, or brown gray, sometimes darker in the median area. The transverse lines are gray. The basal line is irregular below the costa. The antemedial line is smoothly excurved. The median line is usually faint, evident on the costa. The postmedial line is slightly scalloped, sharply drawn toward the base on the costa and S-shaped elsewhere, inwardly oblique form the costa to the trailing margin. The subterminal line is pale gray, faint and diffuse. It is preceded by dark gray spots on the costa and posterior margin. The terminal line is thin, dark gray. The fringe is the same color as the terminal area. The orbicular and reniform spots are large, outlined in thin gray on the outside and thin pale gray inwardly, usually broadly fused, filled with gray, lightest in the orbicular spot, and darker gray in the lateral and inferior reniform spot. The orbicular spot is round or oval and the reniform spot is bar-like or an upright oval tilted toward the lateral margin anteriorly. No claviform spot is present. The hindwing is gray with a slightly lighter fringe. The collar is tan. The head and rest of the thorax are gray. A ridge of scales extends anteriorly from the frons. A weak median crest is present on the thorax. The eye surface is covered with fine hairs. The male antenna is bipectinate.
 
@@ -24,11 +24,11 @@ This species is also found in California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a specialist feeding on currants (*Ribes* spp.) in the Grossulariaceae based upon closely related species.
 
-##### Adults
+### Adults
 
 This species flies during the spring like other members of the genus. It is nocturnal and comes to lights.
 

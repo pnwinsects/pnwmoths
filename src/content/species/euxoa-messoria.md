@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa messoria* is a common, gray-tan *Euxoa* with variable markings. It is a medium-sized moth (FW length 15–18 mm) that occurs on both sides of the Cascades during late summer and fall. The ground color is fairly constant, medium dark gray-tan to gray-brown, often with darker gray as a spot on the costa in the subterminal area and in the entire terminal area. The cell is variable, most often of the ground color but sometimes dark gray and occasionally black from the antemedial line to the reniform spot. Specimens with a dark cell often have a thin or diffuse black basal dash. Some specimens are slightly mottled and some have a slightly lighter costa on the basal half. The basal, antemedial, and postmedial lines are gray to black, variable in strength but typically darkest abutting the median area, filled with the ground color or slightly lighter tan. The basal and antemedial lines are evenly scalloped; the latter line is slightly tilted toward the outer margin. The median line is gray, diffuse, and very faint. The postmedial line is drawn toward the base on the costa, smoothly curved across the anterior cell, and straight at an slanted toward the base across the rest of the wing. The subterminal line is pale, slightly yellowish, often absent or broken into diffuse spots, waved with concave segments opposite the cell and in the fold and a weak W-mark on M3 and CuA1. It is occasionally preceded by a few black lines across from the end of the cell. The terminal line is thin, dark, interrupted at the veins. The fringe is similar to the terminal area, sometimes slightly lighter. The three spots are often similar, outlined in light to dark gray, sometimes black. The orbicular spot is oval, darkest at the medial and lateral ends, filled with the ground color or rarely slightly paler gray. The reniform spot is strongest medially, kidney-shaped, filled similar as the orbicular spot but sometimes with a gray central lunule or spot at the lower end. The claviform spot is often absent, gray to black when present, small to moderate-sized and narrow. The hindwing is white in males and light gray in females, with a narrow gray marginal band in males up to 1/4x the wing width and a wider band in females about twice as wide. A thin dark terminal line is present at the base of the white fringe. The head and thorax are gray-tan with a thin black line across the distal collar. The male antenna is weakly bipectinate, tapering toward the tip. *Euxoa messoria* is one of three members of the subgenus *Longivesica* in the Northwest. All have very long vesicas of the male aedeagi and correspondingly long appendices bursae in females.
 
@@ -24,11 +24,11 @@ This species is widely distributed in North America and is one of the few *Euxoa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation in families such as the Fabaceae, Brassicaceae, Solanaceae, Asteraceae, Lamiaceae, and Poaceae.  During epidemic outbreaks, it will also climb into trees of fruit orchards, causing extensive damage to fruit trees after all herbaceous vegetation on the ground has been devoured.
 
-##### Adults
+### Adults
 
 *Euxoa messoria* can appear on the wing as early as late June and flies through September. However, the majority of the records in our region are from August to the beginning of September. It is nocturnal and comes to lights. It has also been collected at sugar bait along the east slope of the Cascades.
 

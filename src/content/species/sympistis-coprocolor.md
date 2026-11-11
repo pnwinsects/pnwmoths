@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis coprocolor* is a small to medium-sized brown moth (FW length 14 -15 mm) that flies in a variety of habitats during early to mid-summer. It has a pattern of black dots and carbide-like granular suffusion in the basal and distal wings and a light gray-brown and black hindwing. The ground color is medium-dark gray brown to warm wood brown, lighter and grayer in more xeric locales. The antemedial, median, postmedial, and terminal lines area series of black dots on the veins, limited to the portion of the wing posterior to the cell proximal to outer margin, and gray marks on the costa. The posterior basal area and the distal wing beyond the postmedial line are covered in powdery black. The fringe is checkered brown and gray. The orbicular and reniform spots are thinly outlined in brown and filled with the ground or slightly lighter brown. The orbicular spot is oval or teardrop-shaped and the reniform spot is broadly ovoid. No claviform spot is evident. The hindwing ground color is light gray-brown with slightly darker gray discal spot and veins. The marginal band is dark gray to black and the terminal line is thin and black. The fringe is cream with a brown base. The head is a mixture of cream and blue-gray scales. The thorax posterior to the collar is brown with powdery black scales. The collar is light brown with gray basal and brown terminal transverse lines. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of this species outside the Pacific Northwest extends eastward to the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but the foodplant is strongly suspected to be the beardtongue *Penstemon fruticosus* in the Scrophulariaceae based upon the habitat association.
 
-##### Adults
+### Adults
 
 Adults of this moth appear relatively early for the genus at some localities.  It has been found as early as mid-May.  The flight season extends until August and is latest at the highest elevations.  *Sympistis coprocolor* is nocturnal and comes to lights.
 

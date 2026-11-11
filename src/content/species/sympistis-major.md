@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis major* is a medium-sized (FW length 15 - 18 mm), variable streaked gray moth that flies in dry forests east of the Cascade and Coast Ranges in the summer. It has fused orbicular and reniform spots and a pale hindwing with a dark margin and pale fringe. The color and pattern of the forewing is variable. The color ranges from blue-gray to brown-gray, usually slightly lighter on the posterior wing and darker toward the margin and sometimes lighter in the posteromedial subterminal area. The color tends to be darker and the pattern less prominent in females. All elements of the pattern are variable. A thin black basal dash is often present. The basal line is absent. The antemedial, median, and postmedial lines are usually limited to similar oblique gray marks on the costa but can be completely absent. The gray postmedial line is usually visible to the top of the cell, rarely further posteriorly. The subterminal line is pale gray, often slightly yellow, evident as irregular spots between the veins and gradually increasing in thickness from anterior to posterior. It is variably preceded and followed by long black lines. The terminal line is light to dark gray. The fringe is dark gray, solid or weakly checkered. The spots can be present or absent. When present they have thin dark gray outer and light gray inner outlines and are filled with the ground color. The orbicular spot is elongate oval or diamond-shaped, touching or fused to the medial reniform spot. The reniform spot is strongly kidney-shaped. The claviform spot is long, reaching over half-way to the postmedial line. The hindwing ground color is also variable, light gray to darker brown-gray, generally lighter in males than in females, darker toward the margin but rarely forming a dark band. The veins and terminal line are dark gray. The hindwing fringe is tricolored with a yellow and dark gray inner line and white to gray edge. The head and posterior thorax are dark gray. The collar is banded with transverse dark and light gray. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is widely distributed in the American West, occurring south through
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults fly during the summer, with Northwest records from late May to August with a peak in late June and early July. It is nocturnal and comes to lights.
 

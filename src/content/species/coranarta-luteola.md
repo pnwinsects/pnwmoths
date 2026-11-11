@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Coranarta luteola* is a distinctive small (FW length 11 - 12 mm) noctuid moth that flies during the day in northern bogs. It has black forewings and banded yellow and black hindwings. The forewing is charcoal gray, darkest in the median area, with a hoary appearance due to scattered lighter scales. The transverse lines are single, black, and relatively smooth. The subterminal line is pale and is preceded by a darker shade. The orbicular and reniform spots are black; the latter is prominently filled with white scales except for the center which remains as a black vertical line. The hindwing is bright yellow with a sharply demarcated black marginal band and white fringe. The head and body are charcoal gray and the abdomen is black. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species occurs across the boreal zone of North America from Alaska to Labra
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on laurels (*Kalmia microphylla* and *Kalmia polifolia*) in the Ericaceae.
 
-##### Adults
+### Adults
 
 Adults are strictly diurnal. They visit flowers and are particularly fond of the flowers of bog rosemary (*Andromeda polifolia*). They fly during the spring, later at high altitudes, and have been found during June in our region and from mid-May to mid-July across the entire North American range (Lafontaine et al. 1987).
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Dasychira* species are gray, rounded-wing moths that can be identified by their bipectinate antennae and tufts of raised metallic scales on the dorsal posterior thorax and proximal abdominal segments. The males are smaller than the females. *Dasychira vagans* is a medium size moth (FW length 14–20 mm in males; 21–24 mm in females).
 
@@ -8,7 +8,7 @@ The western subspecies *Dasychira vagans grisea* (Barnes & McDunnough) has mediu
 
 This species is most similar to *Dasychira grisefacta grisefacta,* with which it occurs east of the Cascade axis. *Dasychira vagans* is smoother bluer gray with more pale white scales in and around the reniform spot, and its lines are thinner and less diffuse than those of *D. g. grisefacta*.
 
-##### Larvae
+### Larvae
 
 Larva is densely covered with tufts of gray and white hairs, with pairs of long, laterally projecting black hair tufts at the head and tail.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ In the Pacific Northwest, *Dasychira vagans* is found in forests throughout our 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding primarily on hardwoods such as Aceraceae, Betulaceae, Fagaceae, Salicaceae, and Rosaceae, but particularly favors oaks (*Quercus* spp.).
 
-##### Adults
+### Adults
 
 This species is single brooded and the adults fly from June through August. Like other members of the subfamily Lymantriinae they do not feed as adults. They are nocturnal and come to lights. Ferguson (1978) notes that this species flies relatively late at night, often not until midnight.
 

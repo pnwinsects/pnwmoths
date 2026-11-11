@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon atrinotum* is a medium-sized, yellow moth (FW length 17–20 mm) that is similar to its closest relative, *Copablepharon absidum*, but more heavily marked with gray suffusion, dark scaling along the veins, and black along the antemedial and postmedial lines. These dark markings are most evident in specimens from the early part of the season. The hindwing is light to dark gray with a white fringe, also darkest in early-season individuals. The male antenna is bead-like. The valve of the male genitalia lacks a flange along the posterior margin that is found in *C. absidum*.
 
@@ -24,11 +24,11 @@ The limited range of this species extends south through northern Nevada to the v
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a burrowing cutworm that burrows through sand and feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The adults have been collected in June and July. It is nocturnal and comes to lights.
 

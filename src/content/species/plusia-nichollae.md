@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Plusia nichollae* is an attractive small to medium-sized moth (FW length 13 - 18 mm) that flies in the western Pacific Northwest during the summer. It has several shiny gold stigmas on a bright orange-brown forewing. The forewing color is warm golden-brown, with a gold sheen except along the costa and on the fringe. The base of the costa, apex, and posterior wing distal to the antemedial line are brighter colored and the most metallic other than the stigma. Two shiny golden stigmas are present on the mid-median area. Both are broad, sideways teardrop-shaped, with the basal stigma roughly twice as large as the distal one. The basal stigma is most often simple, without a daughter spot above the cubital vein. If present, this spot is small and usually round. An quadrate stigma is located near the apex, with less shiny metallic area on the adjacent wing fading toward the apex. The lines are dark red-brown. The basal line is transverse to the wing near the base. The antemedial and postmedial lines are similar, simple and bilobed toward the outer margin below the costa, then double, parallel to each other and the median line across the posterior wing angled toward the base. The median line is strongly oblique toward the outer margin from the costa to the lower cell, then bent sharply to course parallel to the adjacent lines to the trailing margin. The subterminal line is smoothly waved, most evident posterior to the subapical gold spot. A thin dark brown terminal line is present at the base of the purplish brown fringe. A black dot is present at the anterior end of the cell. The hindwing is gray-brown with slightly darker veins and a pink-brown fringe. The head, collar, and central thorax are bright-orange brown. The lateral tegulae and the end of a posterior thoracic tuft are purplish brown. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of *P. nichollae* extends south to the San Francisco Bay region in wes
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on sedges and grasses like closely related species.  A likely foodplant in coastal grasslands on sand dunes is the sand-dune sedge (*Carex pansa*) in the Cyperaceae.
 
-##### Adults
+### Adults
 
 Adults are partly diurnal, and frequently nectar on flowers during the day.  A favored nectar flower in coastal grasslands on sand dunes is the sand-dune goldenrod (*Solidago spathulata*) in the Asteraceae. It comes to lights at night. This species has been taken at fermented-fruit sugar bait in bogs in Grays Harbor County, Washington.
 

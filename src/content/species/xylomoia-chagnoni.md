@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xylomoia chagnoni* is a small (FW length 12–13 mm), yellow tan or grayish tan moth that flies in a small portion of southeastern British Columbia and eastern Idaho during June and July. Its tan forewings have a slight gray tint, are lightest in the posterior median and subterminal areas, and have a thin black line across the posterior medial area. A suffusion of gray scales is darkest along the trailing margin basad to the antemedial line and opposite the cell and near the anal angle in the terminal area. A thin black bar spans the median area in the fold and is fused with a short dark segments of the adjoining lines. The lines are double, gray to black, but mostly incomplete. Short segments of the antemedial and postmedial lines in the fold are most prominent, along with a series of gray dots along the postmedial line. The antemedial line is zigzag, while the postmedial line is convex lateral near the anterior cell and then strongly oblique toward the wing base to the trailing margin. The subterminal line is pale, very faint. The terminal line black interrupted by the ground on the veins. The fringe is checkered tan and gray. The spots are very faintly and incompletely outlined and filled with the ground, barely evident in most specimens. The hindwing is light tan with a faint yellow sheen, slightly darker gray on the outer third. The discal spot and scalloped postmedian line are gray, ill defined. The terminal line is dark gray to black, darker than other hindwing markings except faint at the anterior and posterior margins. The head and thorax are gray tan like the forewing, with gray transverse stripes on the prothoracic collar. The male antenna is nearly filiform. The eye is round and smooth.
 
@@ -22,11 +22,11 @@ This moth occurs predominantly in eastern and central North America. Its range e
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva of *X. chagnoni* is a borer in the root shoots of reed canary grass (*Phalaris arundinacea*) (Forbes 1954).
 
-##### Adults
+### Adults
 
 Adults are on the wing during late June and the month of July in British Columbia. They are nocturnal and come to lights.
 

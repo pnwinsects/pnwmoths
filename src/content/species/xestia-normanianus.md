@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia normanianus* is a medium-sized noctuid (FW length 15–20 mm) with relatively stubby reddish tan or light gray forewing and contrasting black markings: filling of the cell outside of the relatively large spots and a bar on the costa near the subterminal line. This species is limited to north-eastern British Columbia in our region. The ground color is slightly mottled dull grayish red-brown to tan, with nearly continues variation between these extremes. The basal, antemedial, and postmedial lines are darker, double filled with the ground color, and undulating without scalloping or strong curves. The median shade is darker than the ground but similar otherwise, evident only on the costa in some specimens and reaching the trailing margin in others. The postmedial line is slightly uneven, pale but preceded on the medial side by a dark shade and a black irregular wedge on the costa. The forewing fringe is similar to the ground color but usually somewhat reddish. The orbicular and reniform spots are outlined partially in black and are filled with the ground color, the orbicular spot is unevenly triangular with open base directed anterior and the reniform spot is weakly kidney shaped with absent posterior margin; both spots are conspicuous due to black filling of the cell between the antemedial line and the medial reniform spot. The claviform spot is variable, present as a black spot or line near the expected apex of the spot or absent. The hindwing is fuscous with a copper sheen. The veins, discal spot, and terminal line are slightly darker gray, generally inconspicuous. The hindwing fringe is lighter, usually whitish at the edge with a reddish base. The head and thorax match the forewing ground color. The male antenna is filiform with ventral innumerable short cilia.
 
@@ -22,11 +22,11 @@ This species is fairly widespread in eastern North America from the St. Lawrence
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a fairly general feeder on broad-leaved woody shrubs and small trees. Lafontaine (1998) lists a number of hosts in the plant families Ericaceae, Rosaceae, and Myricaceae.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and early fall, beginning in early July in the East.
 

@@ -20,11 +20,11 @@ The range of *M. angelica* extends south through California where it occurs at l
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The life history is reported by Hardwick (1996). The larva feeds on flowers and seedheads of *Lagophylla ramosissima* and possibly also on other species in this genus (Asteraceae).
 
-##### Adults
+### Adults
 
 Adults are strictly diurnal and visit flowers during the day. They fly in spring and early summer, later at higher elevations in California. Most of the Pacific Northwest specimens have been collected in early June.
 

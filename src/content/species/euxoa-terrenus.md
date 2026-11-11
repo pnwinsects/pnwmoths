@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa terrenus* is a common, medium-sized *Euxoa* (FW length 15–18 mm) that occurs in a variety of habitats during the summer. It has powdery, gray-brown forewings with dark gray double lines, cell, and outline of the spots. The forewing is usually dark gray-brown or brown with a variable sprinkling of dark scales, but populations from arid environments can be light gray-tan. The cell is dark gray to black, and the terminal area other than the apex is variably shaded with dark gray. A short, black basal dash is suggested in some specimens. The basal and antemedial lines are dark gray to black, double with components of similar strength, filled with the ground color or a slightly lighter shade, slightly irregular. The antemedial line is nearly perpendicular to the posterior margin. The median line is dark gray, faint except near the costa. The postmedial line is double with a dark, evenly toothed inner and faint, diffuse, and smooth outer components, filled similar to the antemedial line, drawn basad on the costa and weakly convex around the cell near the reniform spot and angled slightly toward the base below the spot. The subterminal line is pale gray-tan, sometimes slightly yellow or orange, slightly irregular with an offset below the apex and weak W-mark on M3 and CuA1. It is preceded by a dark gray shade that is strongest on the costa and mid-forewing, sometimes condensed into diffuse spots or short wedges. A series of black spots forms the terminal line. The fringe is concolorous with the terminal area. The orbicular and reniform spots are partially outlined in black and are moderate-size. The orbicular spot is round or slightly oval, often open toward the costa and sometimes toward the posterior margin, filled with the ground color or slightly lighter gray. The reniform spot is kidney-shaped, often incomplete anteriorly and posteriorly, filled with the ground color, slightly lighter gray, and often containing a faint dark lunule or a dark gray spot at the lower end. The claviform spot is black and small to moderate in size. The hindwing is dark brown-gray, with barely darker veins, discal spot, and terminal line. The hindwing fringe is off-white with a darker base. The head and thorax match the forewing color, with a thin black transverse line across the mid-collar. A frontal tubercle is present. The male antenna is biserrate. *Euxoa terrenus* is placed in the largest subgenus *Euxoa*.
 
@@ -26,11 +26,11 @@ The northern range of this species includes the mountains of southern Alberta. F
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species has a long flight season and can be found from late spring until early fall. However, the majority of the records for our region are from late July and August.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis dentata* is a small to medium-sized, powdery-gray moth (FW length 13 - 16 mm) that flies in forests in British Columbia and a few localities further south during late summer and fall. Its markings are mostly limited to dark lines and a pale-filled wide reniform spot. The forewing shape is relatively short and blunt-tipped. The color is nearly even powdery medium-dark gray, slightly lighter near the costa and on the distal wing, especially near the anal angle. The basal, antemedial, and postmedial lines are dark gray with faint lighter gray along the side of the antemedial and postmedial lines outside of the median area. The basal line is a spot on the costa. The antemedial line is oblique from anteromedial to posterolateral on the costa, then sinuous across the wing to the trailing margin. The median line is a short oblique mark on the costa. The postmedial line is dentate with slightly darker tips of the teeth, widely excurved around the distal cell and then oblique toward the wing base to the trailing margin. The suberminal line is absent. The terminal line is a dark gray line. The fringe is gray, weakly checkered. The reniform spot is broad, gray in outline and filled with slightly lighter gray than the ground, except for the ground color at the posterior end. The orbicular and claviform spots are absent. The hindwing is even powdery brown-gray, with a diffuse slightly scalloped postmedial line followed by a slightly paler band. A thin gray terminal line is present at the base of the fringe which is white with a gray base. The head and thorax are gray, with lighter gray edge on the collar and central tegulae. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is found across boreal North America to the Atlantic. The range ext
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been recorded from huckleberries (*Vaccinium* spp.) in the Ericaceae (Forbes 1954).
 
-##### Adults
+### Adults
 
 The adults are on the wing in July and August in most parts of its range. A few Pacific Northwest specimens have also been taken in early September.  This species is nocturnal and comes to lights.
 

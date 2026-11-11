@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Psammopolia wyatti* is a large, pale, silver-gray noctuid (FW length 18 - 24 mm) that flies on ocean beaches during the summer. The forewing has large, pale-filled spots, a thin, basal dash, and a ground color of slightly mottled, pale, silvery gray, which is slightly darker gray in the median area in some specimens. The basal, antemedial, and postmedial lines are gray to black, double, and filled with lighter whitish gray. The components of the latter two lines that border the median area are darkest. The antemedial line is irregular, especially near the trailing margin. The postmedial line is strongly dentate with irregular sized teeth. It is drawn sharply toward the wing base in the fold. The median line is smoky gray, variable from absent, evident near the costa, or complete. The subterminal line is evident as a series of chevrons, variable in strength from nearly absent to a complete serrate line across the entire wing. The terminal line is black, present between the veins. The fringe is checkered gray. The orbicular and reniform spots are thin, black, large, and filled with uniform light whitish gray. The claviform spot is black, wide, and reaching the postmedial line is most specimens. The hindwing is pale brownish-gray, suffused with medium gray medial to the postmedial line and near the margin, with a faintly darker postmedial line, thin, dark terminal line, and two-tone gray to white fringe. The head and thorax are silver gray with a transverse black line posterior to the collar. The surface of the eye is covered by dense hairs. The male antenna is beadlike.
 
@@ -24,11 +24,11 @@ This species is not known from outside of our region.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a burrowing cutworm that burrows through the sand and feeds on various herbaceous vegetation such as beach knotweed (*Polygonum paronychia*) in the Polygonaceae, sand verbena (*Abronia* spp.) in the Nyctaginaceae, beach tansy (*Tanacetum douglasii*) in the Asteraceae, and various beach grasses (Poaceae).
 
-##### Adults
+### Adults
 
 This species flies during the summer and has a long flight period. Specimens have been collected from late May until mid-September. It is nocturnal and comes to lights.
 

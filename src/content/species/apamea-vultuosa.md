@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea vultuosa* is a medium-sized *Apamea* (FW length 17–19 mm) that is found along the West Coast and in southern British Columbia in our area. It has yellow-brown forewings with triangular dark marks along the outer margin, although an entirely dark brown form exists. The forewing is usually even dull yellow-brown with mottled warm brown along the costa, between the two spots in the cell, and at the trailing margin near the wing base. The terminal area is darker gray-brown, separated into two distinct triangular marks where the subterminal line reaches the margin on the mid-wing. These marks extend into the subterminal area although the demarcation between the terminal and subterminal areas is poor. Uncommon darker mottled brown forms have less contrasting darker areas in the same distribution. A faint basal dash is present. The transverse lines are evident as paired spots on the costa and as series of paired dark dots on the veins along the course of the postmedial line. The orbicular spot is brown, elongate, filled with the ground color and a central horizontal brown streak. The reniform spots is outlined in dark outer and ground color to white inner components and is filled with brown centrally and gray inferiorly. The claviform spot is variable, brown or absent. The hindwing is brown-gray with gray central and marginal shading, darker gray discal spot and veins. The hindwing fringe is lighter, often pinkish, with a darker gray base. The head and base of the collar are light brown. The remainder of the thorax, including the rest of the collar, are dark brown. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species occurs across southern Canada to the mouth of the St. Lawrence Rive
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in late spring and early summer. The records for the Pacific Northwest range from mid-May to mid-July. It is nocturnal and comes to lights.
 

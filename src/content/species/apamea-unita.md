@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea unita* is a rarely collected medium-sized brownish gray moth (FW length 15–20 mm) that occurs in Idaho and eastern Oregon in the Pacific Northwest.  The forewing has a slightly scalloped outer margin. It is slightly mottled brownish gray. The mid-median area between the orbicular and claviform spots and the median line is paler, usually light gray like the filling of the orbicular post. The anterior wing base, median area distal to the reniform spot, and the subterminal area distal to the cell and in the fold are slightly lighter as well. The posterior base and median area, the mid-subterminal area, and the terminal area other than the apex are slightly darker and browner. Thick black basal and median dashes are present, with a similar dark mark above the trailing margin across the wing base. Many of the distal veins are black, thickest in the terminal area. The lines are dark to black, double filled with a light shade of the ground color. The antemedial line is excurved with apex at the median dash, sharply toothed toward the base on the veins. The median line is dark gray, slanted from the costa to CuA2, then bent 90° to run parallel to the postmedial line to the posterior margin. The postmedial line is scalloped, drawn sharply toward the base below the costa, very slightly convex opposite the reniform spot, then nearly straight at an oblique angle toward the base to the posterior margin. The subterminal line is pale, irregular with a moderately strong W-mark on M3 and CuA2. It is preceded by black wedges at the W-mark. Black triangles between the veins is the terminal. The fringe is weakly checkered gray-brown. The orbicular and reniform spots are outlined in black. The orbicular spot is large, oval, filled with light gray similar to the adjacent median area. The  appears to extend out toward the anal angle of the wing almost to the post-medial line, forming a light, rounded lobe-shaped patch. The hindwing is pale gray to tan and darkens along the outer margin.
 
@@ -22,11 +22,11 @@ This species is found in dry, open conifer forests and mountain meadows at highe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on grasses (Poaceae) like related species.
 
-##### Adults
+### Adults
 
 The flight season of *A. unita* is July and August. It is nocturnal and comes to lights.
 

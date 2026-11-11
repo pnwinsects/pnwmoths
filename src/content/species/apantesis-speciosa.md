@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis speciosa* is a northern *Apantesis* with predominantly longitudinal markings on the forewing and an orange and black hindwing, closely resembling *Apantesis virgincula*. It is a small to medium-sized moth (FW length 14–16 mm). The forewing is longitudinally streaked with light ochre on the veins with the transverse pale markings limited to the zigzag subterminal line. The hindwing is usually heavily marked with black, including the basal area, multiples spots, and a marginal band. The antennae are entirely black, moderately bipectinate in males and biserrate in females. The eyes are reduced in size compared to nocturnal species.
 
@@ -22,11 +22,11 @@ This species occurs in northern North America, from central Alaska to Hudson Bay
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available for this species, but it probably feeds on general herbaceous vegetation like closely related species.
 
-##### Adults
+### Adults
 
 *Apantesis speciosa* is diurnal. Adults occur from mid June to mid July in Alberta.
 

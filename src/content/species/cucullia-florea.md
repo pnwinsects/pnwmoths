@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia florea* is a large streaky gray moth (FW length 20 - 23 mm) that flies in forests throughout much of our region during late spring and summer. It has a long pointed forewing with a darker costa, trailing margin without brown or red color, faint spots, and dark marks near the anal angle. The forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The color is medium-dark blue gray, darker near the costa and on the trailing margin, and lacking warm brown or red-brown tints. The pattern is streaked due to thin dark veins and a faint pale stripe between the veins on the distal wing. A very thin basal dash is present. A darker black dash is present near the anal dash, and there are several faint gray lines between the veins below the apex. A double C-shaped dark gray mark medial to the dash is a remnant of the postmedial line. The lines are nearly absent elsewhere. Both the antemedial and postmedial lines are evident as gray marks near the costa in some individuals, and segments of dark gray from portions of the antemedial line are sometimes visible on the mid-wing. The terminal line is a series of black lines that become confluent near the posterior wing. The fringe is gray with very faint logitudinal striations. The orbicular and reniform spots are usually faintly visible, with spotted faint gray outlines and several internal spots. The hindwing is medium-dark brownish gray with darker margin, veins, discal spot, and terminal line. The hindwing fringe is pale whitish tan with a light tan base. The head and base of the collar gray-brown. The central thorax is dark gray. The rest of the thorax is light gray with transverse barring on the collar and gray on the medial tegulae. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species occurs across the boreal zone of North America in a relatively narr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on a number of herbaceous Asteraceae including asters (*Aster* spp.), fleabanes (*Erigeron* spp.), and goldenrods (*Solidago* spp.).
 
-##### Adults
+### Adults
 
 The flight period of *C. florea* is late spring and summer, usually from late May through July. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pronoctua typica* is a relatively large noctuid (FW length 20 - 22 mm) with dull gray-tan forewings with gray lines and spots. The forewing is suffused with gray at the median line and preceding the subterminal line. The transverse lines are gray, double, and filled with the ground color. The basal and antemedial lines are mildly irregular with the postmedial line is scalloped, especially the medial component. The pale subterminal line is jaggedly irregular. The orbicular spot is absent or very faint, oval, with filling of the ground color and rarely containing a darker ocellus. The reniform spot is faint and is filled with the ground color and dark gray inferiorly. The claviform spot is absent. The hindwing is light gray-tan with faint gray discal spot, veins, and terminal line. The fringe is slightly lighter. The head and thorax match the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends south and east of our region to south-western 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based on closely related species.
 
-##### Adults
+### Adults
 
 Adults of *Pronoctua typica* are on the wing from late June to September in our region. They are nocturnal and come to lights.
 

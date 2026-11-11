@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Heliocheilus paradoxus* is a small (FW length 12 - 15 mm), grayish-yellow moth that flies in steppe during the summer. It has a pattern of mottled gray on the forewing and pale yellow-gray hindwing with a gray discal spot and marginal band containing a pale area near the margin. The moth resembles a small blunt-winged *Helicoverpa zea*, but the males have a unique swollen mid costa and expanded interspace between veins R1 and R2. This area tends to lose its scales and is therefore translucent in most wild-caught specimens. The forewings appear short and triangular and have a slightly convex costal margin. The forewing ground color is light gray-yellow with a slight green or olive cast. Gray mottling is most extensive in the subterminal area, followed in prominence by the terminal area and the posterior wing. The light gray basal, antemedial, and median lines are relatively faint. The postmedian line is usually darker gray, thin, and strongly and evenly toothed on the veins. The subterminal line is most evident as a transition from darker gray subterminal area to the lighter terminal area. A series of small dark dots forms the terminal line. The fringe is slightly grayer than the ground color but similar in darkness. The orbicular, reniform, and claviform spots are variable, usually evident as smudged areas of light to dark gray but sometimes absent. The hindwing is light yellow-gray with a thick dark discal spot and marginal band. A consistent rectangular area of the ground color is present near the outer margin between veins M3 and CuA2, with smaller similar color spots at the anal angle. A serrate gray postmedial line is evident on the mid-wing in some individuals. The hindwing fringe is tricolored with a yellow base, gray median line, and pale edge. The head and thorax are the color of the forewing ground. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found across the southern United States. The northern limits of 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 The flight period of *H. paradoxus* is summer, with records from early June through August in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa taura* is an uncommonly collected, small to medium-sized *Euxoa* (FW length 14–18 mm) that flies in British Columbia during the summer. It has light gray-tan forewings with a round orbicular spot filled with light gray and a dark ocellus, and a light tan hindwing with a gray marginal band. The forewing is mottled light grayish-tan, often suffused with gray-brown to produce a "dirty" appearance. The outer margin is mottled with gray. The cell, especially the anterior portion between the spots, is darker gray. The fold and costa are sometimes lighter than the ground in a form with a darker gray median area. The transverse lines are powdery gray, focally double. The basal line is indistinct. The antemedial line is angled slightly toward the outer margin and toothed toward the base on the veins. The median line is gray, diffuse, and faint. The postmedial line is light gray, varying from sharply-defined to indistinct, toothed on the veins, pulled basad and the costa, nearly perpendicular to the forewing lateral to the reniform spot, and bent 45° toward the base at the level of the lower cell. The subterminal line is light tan and undulating. It is preceded by a gray spot on the costa and a powdery shade with indistinct gray wedges from the lower cell to the posterior margin. The orbicular and reniform spots are partially outlined in black, lined with light tan-gray, and filled with powdery darker gray. The orbicular spot is round or oval, often open toward the costa. The reniform spot is kidney-shaped, often indistinct at the lower end. The claviform is black, moderate-size, often incomplete inferiorly. The hindwing is pale tan-gray with a smoky brown-gray moderately well-defined marginal band, thin discal spot, veins, and terminal line. The hindwing fringe is white with a striped ochre and gray base. The head and most of the thorax match the ground color of the forewing, powdery gray-tan. A frontal tubercle is present. The male antenna is weakly biserrate. *Euxoa taura* is a member of the subgenus *Orosagrotis*.
 
@@ -36,11 +36,11 @@ This is a species that is found predominantly on the western Great Plains. It is
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 The flight period of *E. taura* is the summer, with records from mid-July to September across the entire range of the species. It is nocturnal and comes to lights.
 

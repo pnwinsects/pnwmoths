@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria hudsonica* is a common northerly *Drasteria* with gray forewings and pale yellow and black hindwings. It is a small to medium-sized moth (FW length 14–17 mm). The forewings are mottled gray, whitish gray between and antemedial and median lines and between the reniform spot and adjacent postmedial line, and slightly lighter than the ground distal to the subterminal line. As in other members of the tribe Melipotini the reniform is focally laterally expanded near the reniform spot and has a mildy scalloped outer margin. The hindwing is light yellow patterned typical for the genus with black fused angular discal spot, postmedial band, and marginal band on a light yellow. The head and thorax are gray. The antennae are ciliate in males and simple in females.
 
@@ -22,11 +22,11 @@ This species is common and widely distributed across Canada, extending southward
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a foodplant specialist feeding on buffalo-berry (*Shepherdia* spp.) in the Elaeagnaceae.
 
-##### Adults
+### Adults
 
 *Drasteria hudsonica* appears to be single brooded with a flight in summer. Pacific Northwest records are from early May to early August. This species is both diurnal and nocturnal. Adults are commonly on the wing during the day.
 

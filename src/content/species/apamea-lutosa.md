@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea lutosa* is a rarely-collected medium-sized moth (FW length 15–19 mm) with a light grayish ochre forewing with a gray spot in the lower reniform spot and otherwise ill-defined forewing pattern that flies in south-central British Columbia and central Washington during the summer. The forewing margin is weakly scalloped. The color is pale yellow-tan with light gray suffusion, slightly darker gray along the costa and in the terminal area. The lines are a slightly darker shade of the same color, faint and indistinct. The postmedial line is most evident, scalloped with dark lines on the veins at the tips of the teeth, smoothly curved around the reniform spot and then straight at an oblique angle toward the base. A faint gray median line is evident in some specimens. The subterminal line is pale, usually evident across the wing, sinuous, with a slight offset below the apex and a weak W-mark on the mid-wing. It is preceded by a light gray shade on the costa. The terminal line is dark, thin, sometimes forming dark triangles between the veins. The fringe is gray-tan. The orbicular spot is very faint, a slanted oval filled with the ground color. The reniform spot is kidney-shaped, filled with gray at the posterior end and lighter gray or nearly white scales anteriorly. No claviform spot is evident. The hindwing is gray-tan off-white with gray marginal suffusion and light gray discal spot, veins, and terminal line. The hindwing fringe is off-white with an ochre and gray base. The head and thorax are even gray-tan. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is predominantly found in eastern and central North America. It occ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 The flight period of *A. lutosa* is the summer, with most records from June and July across its range. It is nocturnal and comes to lights.
 

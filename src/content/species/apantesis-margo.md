@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis margo* is an uncommon, small (FW length 11–13 mm), day-flying tiger moth found only in the Peace River region of northeastern British Columbia in our region. It has relatively narrow forewings with limited pale markings, usually the median, postmedial, and zigzag subterminal lines and the horizontal subcubital line. The hindwing is dull yellow to orange-yellow with extensive dark gray markings, usually fused to encircle the wing margins with a separate discal spot. The thorax is mostly black, with pale edges on the tegulae. The antennae are bipectinate in males and biserrate in females.
 
@@ -22,11 +22,11 @@ This species has a fairly broad distribution in the plains and mountains of cent
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 The adults of *A. margo* are strictly diurnal. They have a rapid buzzing flight and are difficult to catch.  The few records from our region are from late May and early June.
 

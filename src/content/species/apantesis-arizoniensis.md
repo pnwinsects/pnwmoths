@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis arizoniensis* resembles a pale *Apantesis* with a bright orange pink body. It is a medium to large moth (FW length 16 - 22 mm) with larger females than males. The forewing appears black with wide transverse and longitudinal yellow lines similar to those of species of *Apantesis*. Females are darker yellow than the males. The cubital vein is pale and is visible across the black markings in the median area, especially between the pale median and postmedial region pale lines. The dorsal hindwing is pale to dark pink, also darkest in females, with pale-rimmed black discal spot, marginal spots, and thin interrupted marginal band. The dorsal thorax and tegulae are striped similar to *Apantesis* species, but the collar and head are off-white without black marks. The ventral thorax is black with orange forelegs. The body is distinctive deep rose dorsally, jet black ventrally with a variable-size oval pale patch spanning several segments. The dorsum is marked with a thin black line and the tip is black.
 
@@ -22,11 +22,11 @@ This species is distributed from the American Southwest to Colombia in South Ame
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is probably a generalist feeding on a wide variety of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults have been collected in early June and late August in the Pacific Northwest suggesting that this species might be double brooded.
 

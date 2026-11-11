@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schizura ipomaeae* is our largest *Schizura* species (FW length 18–22 mm). Its forewing has a pointed apex and weakly scalloped outer margin. It is gray-brown to red-brown with a whitish gray anterior margin that is palest at the apex. The forewing is streaky, with portions of the transverse lines evident as short lines on the veins. The discal spot is a narrow dark gray or red-brown bar surrounded by a pale halo. The fringe is checkered light and dark brown. The male hindwing is pale yellowish white with dark gray at the anal angle, base of the fringe, and medial margin; a postmedial band is evident at the margin, occasionally nearly to the anterior margin in some individuals. The female hindwing is dark gray with lighter fringe and areas near the base. As in other *Schizura,* the male antenna is bipectinate at the base with a long narrow apical section; that of the female is simple.
 
 The large size, streaky brown forewing with a pale gray costa, and broad male antenna differentiates this species from all other moths in our region. Our other *Schizura* species are predominantly gray.
 
-##### Larvae
+### Larvae
 
 Larva has short hairy scoli or tubercles, and is mottled green and purple-red with three mid-dorsal humps.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is broadly distributed in North America. It occurs throughout the E
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwood trees and shrubs, particularly in the families Fagaceae, Betulaceae, Rosaceae, and Ericaceae.
 
-##### Adults
+### Adults
 
 Adults appear to be single brooded and fly from late May to mid August. They are nocturnal and come readily to light.
 

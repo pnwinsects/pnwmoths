@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia atrata* is a rarely collected, medium to large noctuid moth (FW length 15 - 21 mm) that flies in eastern British Columbia during the summer in our region. It has broad, powdery, nearly even, dark brown forewings with faint markings. The transverse lines are very faintly darker, as are the orbicular and reniform spot. The tips of the teeth of the postmedial line are marked by a series of pale spots in some specimens, and distal costal and outer margins are marked by a series of pale dots. The hindwing is dark gray with a thin dark terminal line and concolorous fringe. The head and thorax match the forewing. The male antenna is bead-like.
 
@@ -26,11 +26,11 @@ The range of *Xestia atrata* is limited to south-eastern British Columbia. Howev
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Xestia atrata* flies from late June to early August across its entire range (Lafontaine 1998). It is nocturnal and comes to light.
 

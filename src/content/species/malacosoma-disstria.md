@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Malacosoma disstria* is a common, orange-brown moth that flies in forests throughout the Pacific Northwest during the summer. Round-winged males are smaller than the females (FW length 12–14 mm in males; 17–19 mm in females). The ground color of both fore- and hindwings is even warm yellow-brown to orange-brown, with markings limited to slightly outwardly convex brown antemedial and postmedial lines on the forewing and a diffuse dark medial band on the hindwing. The females tend to be lighter colored than the males and often have a tan median area that is darker than the rest of the forewing. The fringes of both wings are usually darker than the ground color in both sexes except for a few white segments on the anterior half of the forewing. No spots are present on either fore- or hindwing. The head and thorax match the wing color. The antennae are bipectinate, wider in males than in females.
 
@@ -8,7 +8,7 @@ This species is easily recognized as a member of its genus by the uniform brown 
 
 Several synonyms of this species were named from the Pacific Northwest. *Clisiocampa erosa* Stretch was named from Oregon. *Clisiocampa erosa* var. *sylvaticoides* Neumoegen and Dyar and *Clisiocampa erosa* var. *perversa* Neumoegen and Dyar were both name from [Portland, Oregon].
 
-##### Larvae
+### Larvae
 
 Larva has long yellow lateral hair tufts, the color is blue with orange lateral lines and white dorsal patches. It is illustrated by Miller and Hammond (2003).
 
@@ -28,11 +28,11 @@ This is the most widely distributed Tent Caterpillar in North America. Franclemo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist hardwood feeder, and has been recorded on Ericaceae, Salicaceae, Betulaceae, and Fagaceae.  It particularly favors oaks (*Quercus* spp.) west of the Cascades, and cottonwoods and quaking aspen (*Populus* spp.) east of the Cascades.  The larvae do not live in silken tents, but rest communally on branches and tree trunks.
 
-##### Adults
+### Adults
 
 *Malacosoma disstria* is similar to other *Malacosoma* species in that the adults do not feed, are nocturnal, and come to lights. They have a strong buzzing flight and bounce and spin on the ground when attracted to lights. Pacific Northwest records are from late May through August although the moth is most commonly found in July.
 

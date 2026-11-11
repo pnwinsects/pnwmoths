@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Noctua pronuba* is a common, large noctuid moth (FW length 24 - 27 mm) that is found in a multitude of habitats in our region after spreading here in 2001. It has a long forewing in some shade of warm brown bearing prominent, small black dots near the apex, and a bright yellow-orange hindwing with a black marginal band but lacking a discal spot. The forewing is orange-brown, tan, dark red-brown, or dark brown, variable suffused with black scales and mottling and sometimes with a gray costa medial to the mid forewing. The transverse lines are slightly darker to absent with slightly paler light brown to gray filling. The pale subterminal line is preceded by two fused black dots at the costa. The orbicular and reniform spots are fairly large. The orbicular spot is light brown with pale tan, gray, or ochre filling. The renifrom spot is dark with a thin, light brown to ochre inner line and darker filling. The claviform spot is absent. The hindwing is bright yellow-orange with a sharply demarcated pure black marginal band and orange fringe. The head and thorax match the forewing color in most specimens. Some dark individuals have light brown head and collar and contrasting blackish brown remainder of the thorax. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is native to Eurasia. It was accidentally introduced to eastern Can
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of grasses and herbaceous vegetation in such families as Asteraceae, Fabaceae, Brassicaceae, Rosaceae, Chenopodiaceae, Apiaceae, Solanaceae, and Poaceae.
 
-##### Adults
+### Adults
 
 Adults appear to be highly vagile, and may migrate great distances. They have been collected from early May to the middle of October in our region. This species is nocturnal and comes to lights. Anectodal evidence suggests that *N. comes* has become less common in the Pacific Northwest since the arrival of *N. pronuba*.
 

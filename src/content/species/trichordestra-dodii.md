@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichordestra dodii* is a small to medium-sized noctuid (FW length 14–15 mm) that flies in forests in the extreme eastern part of the Northwest in early summer. It has a busy pattern of lines and spots on a mottled red-brown, gray-brown, and blue-gray forewing. The ground color is mottled gray-brown and tan, often reddish, darkest in the cell and anterior subterminal area. Light blue-gray suffusion is present on the posterior wing from the base to the subterminal line and more solidly in the distal subterminal area and at the apex. The rest of the terminal area is dark gray. A nearly black patch below the reniform spot is bordered by the cubital and CuA2 veins and the postmedial line. The basal, antemedial, and postmedial lines are gray, double-filled with tan, light blue adjacent to areas with strong blue color on the posterior wing. The basal and antemedial lines are slightly irregular. The latter is slanted toward the anal angle from the costa. The median line is a sooty shade, evident near the posterior postmedial line. The postmedial line is weakly scalloped, sharply displaced toward the base on the costa and nearly straight around the reniform spot, slightly angled toward the base below the spot. The subterminal line is tan to light yellow, offset toward the base below the costa and with a weak W-mark on M3 and CuA1. A preceding gray to red-brown shade is relatively narrow, evident on the costa and below M1. The terminal line is a series of weak gray spots. The fringe is reddish gray to dark gray with faint longitudinal lines. The spots are partially outlined in black and are moderate-sized. The orbicular spot is ovoid or slightly quadrate, open anteriorly, filled with light blue-gray peripherally and diffuse darker gray centrally. The reniform spot is kidney-shaped, indistinct anteriorly, sometimes with a light yellow line inside the black outline, filled with red-brown centrally and dark gray inferiorly. The claviform spot is nearly solid black, small. The hindwing is pale brown-gray with a moderately-well demarcated gray marginal band that has a stripe of the ground color at the outer margin at the anal angle, and gray veins and discal spot. The hindwing fringe is tan off-white with a yellow and gray base. The head and thorax are gray, sometimes reddish, with transverse lines across the collar. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is predominantly found in the Rocky Mountain region from southern A
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a generalist feeding on both herbaceous vegetation and hardwoods based upon closely related species.
 
-##### Adults
+### Adults
 
 This species is single brooded and flies from mid-June through July across its range. It is nocturnal and comes to lights.
 

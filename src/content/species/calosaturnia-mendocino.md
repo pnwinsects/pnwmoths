@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Calosaturnia mendocino* is a large (FW length 27–30 mm), orange-brown, day-flying moth that flies in southwestern Oregon during the spring. It has prominent discal eyespots and is by far our smallest member of the subfamily Saturniinae. The forewing is orange-brown with a red, black, and white mark at the apex. It lacks all transverse lines. The hindwing is lighter orange with dark basal suffusion and black thin postmedial and thicker submarginal bands. The well-developed discal eyespots of both fore- and hindwings are round with rings of orange, blue, and a central "pupil." The forewing spot is bordered by white on the basal and outer sides. The head is white, the thorax is orange-brown, and the abdomen is gray and brown covered with long pale hair-like scales. The antennae are broadly bipectinate in males and narrower in females.
 
 *Calosaturnia mendocino* can be positively identified by its early flight season, orange color, hypnotic eyespots, and lack of forewing lines. Similar *Calosaturnia* species occur in California but not in the Northwest.
 
-##### Larvae
+### Larvae
 
 The last instar larva is yellow and has scoli or tubercles covered with orange hair tufts and longer white hairs. It is illustrated by Miller & Hammond (2003). Miller & Hammond (2007) also illustrate the young larvae that change dramatically in color pattern with each instar.
 
@@ -26,11 +26,11 @@ This species has a Pacific Coast distribution and only occurs in California outs
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae of this species feed mostly on manzanita (*Arctostaphylos* spp.) and madrone (*Arbutus menziesii*) in the Ericaceae, but have also been reported on *Ceanothus* in the Rhamnaceae.
 
-##### Adults
+### Adults
 
 The adults of *C. mendocino* are diurnal and fly during early spring. Pacific Northwest records are from mid-March through April. They do not feed as adults.
 

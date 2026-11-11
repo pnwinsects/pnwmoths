@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hydraecia perobliqua* is an uncommon, medium-sized moth (FW length 13–18 mm) that flies in desert wetlands during late summer. It has an orange-brown forewing with thin spots, zigzag antemedial line, and a pale distal area demarcated by a nearly straight postmedial line. The forewing color is nearly even orange-brown from the base to the postmedial line, subtly darker in the median area below the cell. The distal wing is paler, light gray-tan abutting the postmedial line and darkening slightly toward the outer margin. A small triangular patch on the costa preceding the subterminal line gives the impression that the postmedial line continues to the apex although it curves toward the base on the costa. The basal and antemedial lines are a dark shade of the ground, partially double and filled with the ground color. The basal line is faint on the costa. The antemedial line is darker, sinuous with three lateral bulges, one large on the mid-wing and two smaller near the margins. The median line is slightly darker than the ground, angled 90° at the reniform spot, faint but usually visible from the costa to the spot and below the cell. The postmedial line is darker than the other lines, single and smooth, sharply drawn toward the base on the costa, a short straight segment toward the outer margin from just below the costa to vein R5, then bent 90° toward the base and nearly straight from there to the posterior margin. The subterminal line is pale, faint, slightly offset below the apex and slightly sinuous elsewhere. It is preceded by a faint shade, darkest on the costa as described above. The terminal line is smooth, similar in color to the postmedial line. The fringe is similar to the ground color. The hindwing is pale yellow, including the fringe with slightly darker veins. The head and thorax match the forewing color, with a weak median crest on the anterior thorax. The male antenna is strongly biserrate with a wide central shaft.
 
@@ -22,11 +22,11 @@ This species has been found in the dry interior of the Northwest as far north as
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it probably bores into the stems of herbaceous plants like closely related species.
 
-##### Adults
+### Adults
 
 The flight season of *H. perobliqua* is late summer, usually in July and August in the Northwest. A few specimens have been collected during September. It is nocturnal and comes to lights. This species does not wander far from its wetland habitat.
 

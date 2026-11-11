@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Egira simplex* is a common and widely-distributed medium-sized (FW length 16 - 20 mm) spring-flying moth with a mottled powdery light to medium gray forewing with a large pale orbicular and reniform spots, a black median line that is angled at the reniform spot, black basal dash and terminal area lines, and a pale white hindwing with a relatively large discal spot. The forewing is relatively long with an elongate but rounded apex. It is powdery gray lightly dusted with darker scales, darker east of the Cascades and occasionally melanic. The anterior wing base is paler gray and the terminal area is darker powdery gray. Several ill-defined black lines are present between the veins in the terminal area, darkest and longest opposite the cell and in the fold. An anterior-convex curved black line is present posterior to the distal cell and a short black line is present along the radial vein in the medial cell. A thin basal dash is black inferiorly and white to pale gray anteriorly. The basal line is absent. The antemedial line gray, irregular and angled toward the outer margin but usually incomplete. The median line is is bent 90° at the median reniform spot with the anterior and posterior segments angled toward the base, thick and dark gray near the costa and paler gray on the posterior wing. The postmedial line is faint gray, usually evident as the pale gray filling, lightly scalloped, sharply deviated toward the base on the costa, nearly square around the end of the cell, and strongly angled toward the base below the reniform spot. The subterminal line is pale gray, incomplete, nearly parallel to the outer margin, traversed by some of the longest terminal area black marks. The terminal line is a series of gray triangles between veins. The fringe is checkered gray. The orbicular spot is large, an elongate oval that fills most of the medial cell medial, partially outlined in dark gray to black but open anteriorly and posteriorly, filled with the ground color or paler gray. The reniform spot is large, partially outlined in black medially and inferiorly and filled with the ground color and gray inferiorly, rarely with a faint red-brown flush. The claviform spot is black, strongest posteriorly, filled with the ground color, usually reaching distal to the median line. The hindwing is faint tan off-white with a dusting of gray scales, with gray relatively large ovoid discal spot, gray postmedial line evident on the veins and sometimes between the veins, and a spotted terminal line. The hindwing fringe is off-white with a powdery gray base. The head and thorax are pale gray, medium gray, or tan-gray, usually with a brownish head and collar base, with a black V-shaped line across median collar and black lateral edges on the tegulae. The anterior thorax has a slight crest. The eyes are covered with fine hairs. The male antenna is asymmetric, pectinate anteriorly and serrate posteriorly.
 
@@ -26,11 +26,11 @@ This species is primarily found along the the Pacific Coast. It is widespread in
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a very broad generalist feeding on many kinds of hardwoods and conifers (Pinaceae).  During epidemic outbreaks, it has caused massive defoliation to stands of Douglas fir (*Pseudotsuga menziesii*) and Sitka spruce (*Picea sitchensis*) in coastal rainforests of the Pacific Northwest.
 
-##### Adults
+### Adults
 
 This species flies during early spring, usually beginning in early March with stragglers through late May. It is nocturnal and comes to lights.
 

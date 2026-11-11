@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spilosoma pteridis* is a small, dark tiger moth (FW length 11 - 13 mm). The forewing is dark reddish-gray. The discal spot and lines are faint darker gray, barely evident in most specimens, with the lines visible at the costa and posterior margin except for the subterminal line which is darkest opposite the cell. The hindwing is dark smoky gray with a similar or reddish fringe and dark discal spot. The head, thorax, and dorsal antennae are lighter red brown, while the abdomen is gray with red brown hairs. The antennae are bipectinate in males, and simple in females.
 
@@ -26,11 +26,11 @@ This species is most common in western Oregon and Washington. It also occurs eas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants, but it probably uses various herbaceous plants.
 
-##### Adults
+### Adults
 
 This species has been collected from late spring to early August. Most records are from late May through June. The males are nocturnal and come readily to light, while females are rarely collected.
 

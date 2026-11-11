@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anarta nigrolunata* is a distinctive small (FW length 10–13 mm), day-flying moth that is found near timberline in early summer. It has mottled, gray forewings and banded black and white hindwings. The forewings are smoky medium dark gray with charcoal lines and spots. All of the lines are present. The basal and antemedial line are irregular, while the postmedial line is scalloped but often reduced to a series of spots between the veins. The subterminal line is pale but is preceded by a patchy charcoal shade. The terminal line is a series of spots between the veins. The three spots are similar, dark with dark gray filling. The fringe is checkered dark and light gray. The hindwing is white, suffused with dark gray at the base, with a large black discal spot and an even broad and well-defined black marginal band. The hindwing fringe is white. The head and thorax are covered with hairlike gray scales. The male antenna is bead-like. The eyes are reduced in size, appearing elliptical when viewed from the front, and are covered with small hairs.
 
@@ -24,11 +24,11 @@ This species is widely distributed in the northern parts of North America from A
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on dwarf species of Ericaceae, including dwarf huckleberries (*Vaccinium* spp.), kinnikinnick (*Arctostaphylos uva-ursi*), and crowberry (*Empetrum nigrum*) in the Empetraceae.
 
-##### Adults
+### Adults
 
 The adults fly during the summer. They are one of the earliest alpine moths and are on the wing while snow drifts are still melting. This species puddles on roads, often next to melting drifts, and flies over patches of its crowberry. It is relatively easy to collect with a net unlike many other day-flying moths.
 

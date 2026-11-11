@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa costata* is a small to medium-sized *Euxoa* (FW length 14–18 mm) that flies during the summer.It is the reddest of several similar brown moths with pale costas and filling of the spots. The forewing is orangish red-brown, slightly darker to nearly black in and near the cell, tan at the apex, and dark gray on the rest of the terminal area. The costa is powdery steel-gray to silver-gray, fading before the postmedial line. A black basal dash is present. The ordinary transverse lines are very weak. Some specimens show portions of the gray antemedial and postmedial lines. The lightly scalloped postmedial line is most consistent, evenly curved around the reniform spot and then nearly straight at a 45° angle toward the base. The subterminal line ochre, powdery and often incomplete. It is preceded by a dark brown shade at the costa and on the mid-forewing. The orbicular and reniform spots are outlined in dark gray and are filled with the color of the adjacent costa, lighter in the orbicular spot than in the reniform spot. The orbicular spot is oval, moderate to large in size, open anteriorly and fused to the costa. The reniform spot is kidney-shaped, often filled with darker gray internally and fading at the lower end in some specimens. No claviform spot is present. The hindwing is medium-dark brown-gray with slightly darker discal spot, veins, and terminal line. The fringe is similar, slightly lighter at the edge. The head and thorax are red-brown with a distinct black line across the mid-collar. A frontal tubercle is present. The male antenna is widely biserrate. *Euxoa costata* is a member of the subgenus 
 *Euxoa*.
@@ -38,11 +38,11 @@ The range of this species is predominantly near the Pacific Coast. The range ext
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 Adults of *Euxoa costata* fly in the summer, with most records from mid-July to mid-August. It is a nocturnal moth that comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis sokar* is a light gray-tan, medium-sized moth (FW length 15 - 16 mm) that flies east of the Cascade Mountain crest during the late summer and fall. It has thick black transverse lines on the forewing, a black head, and a white hindwing with a gray marginal band. The forewing ground color is light grayish tan with a slight reddish tint. The distal median area and adjacent subterminal area are lighter, often with a pale streak extending distally from the reniform spot. The with distal to the mid-subterminal area is nearly dark gray, sometimes with scales of the ground color near the anal angle. The fringe is slightly lighter gray. The basal line is a dark spot on the costa. The antemedial line is thick, black, slightly excurved near the costa, and perpendicular to the trailing margin on the posterior forewing. The postmedial line is black, thickest on the wing margins, slightly irregular, directed toward the anal angle from the costa, curved slightly less than 90° at the end of the cell to course slightly toward the wing base from the lower cell to near the trailing margin, then bent sharply toward the base just above the margin. The dark gray median line is variable in strength, usually a diffuse spot on the costa and faint elsewhere across the wing. The terminal line is dark and thin. The reniform spot is evident as pale tan filling. The orbicular spot is usually absent, occasionally also visible as a pale spot. The claviform spot and subterminal lines are absent. The hindwing is pearly white, slightly gray in females, with a dark gray marginal band, veins, and thin terminal line. The discal spot is absent. The hindwing fringe is tricolored with a yellow base, thin gray median line, and white edge. The head is tan with solid black transverse bar at the bases of the antennae. The collar is tan, and the rest of the thorax is gray-brown. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species is found in eastern and southern California south of the Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but beardtongues (*Penstemon* spp.) in the Scrophulariaceae are suspected based upon the habitat and preferences of many related species.
 
-##### Adults
+### Adults
 
 The flight period of this species is late summer and fall. They first appear in late July and fly through September in our region. This species is nocturnal and comes to lights.
 

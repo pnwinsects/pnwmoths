@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Homorthodes carneola* is a rarely collected, small, dark gray-brown moth (FW length 12 mm) that flies in south-central British Columbia during the summer. Its forewing has a lighter-filled, round reniform spot and inconspicuous dark other markings. The forewing is relatively short with a slightly pointed apex for the genus. The ground color is even, dark gray-brown. The basal, antemedial, and postmedial lines are slight darker brown, double filled with a lighter shade of the ground color. The basal and antemedial lines are irregular, with the latter slightly convex toward the outer margin. The median line is gray, most evident on the anterior wing. The postmedial line is faint except on the costa and near the trailing margin, weakly toothed, sometimes with light and dark spots on the tips of the teeth on the mid-wing, drawn toward the base on the costa, weakly excurved around the reniform spot, and slightly angled toward the base below the spot. The subterminal line is pale ochre-brown to orange-brown, sinuous and preceded by dark gray to gray-brown spots between the veins on the costa and below the cell. The terminal line is a series of dark spots, sometimes joined by a dark line. The fringe is similar to the ground color, weakly checkered. The orbicular and reniform spots are weakly outlined in gray-brown. The orbicular spot is round, most evident due to gray-brown filling that is slightly lighter than the surrounding wing. The reniform spot is hourglass-shaped, often surrounded by a few small white dots, filled peripherally with the ground color and centrally with dark gray. No claviform spot is evident. The hindwing is slightly brownish gray with darker gray discal spot and veins and a thin terminal line. The hindwing fringe is gray with a striped yellow and gray base. The head and thorax are even dark brown. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is only known from south-central British Columbia near the Fraser R
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 The flight period of this moth is summer, with records from British Columbia in July. It is nocturnal and comes to lights.
 

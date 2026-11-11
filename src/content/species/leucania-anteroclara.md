@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Leucania anteroclara* is a medium-sized (FW length 16 - 18 mm), pale, yellow-tan moth that flies in steppe habitats during late summer and fall. Its streaked forewings have pale veins -- darker brown below the cubital vein, between the veins distal to the cell, and along the trailing margin -- and a white hindwing. The forewing is palest on the lower half posterior to the dark near the cubital vein and in an oblique area that ends at the apex. Scattered dark scales are present, especially along the trailing margin. A slightly darker brown to red-brown streak is present along the entire length of the posterior cubital vein. Less dark, thinner streaks are present between the veins distal to the cell and across most of the forewing parallel to the trailing margin. The veins are pale, white on the cubital vein and straw elsewhere, with lines of dark and light in each interspace. A black spot is present at the posterior cell at the distal cubital vein. The postmedial line is marked by weak gray spots, strongest on veins M2 and CuA1. The terminal line is a series of tiny black dots between the veins. The fringe is similar to the ground color. All other lines and spots are absent. The hindwing is nearly pure white, including the fringe, with faint gray spots marking the terminal line on the mid-wing in some specimens. The head and thorax are the same color as the wing, with faint gray transverse barring on the collar. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ According to Poole (nearctica.com) *L. anteroclara* is a species of the Rocky Mo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a climbing cutworm feeding on coarse grasses (Poaceae) like closely related species.
 
-##### Adults
+### Adults
 
 This species flies during late summer and fall in the Northwest. Adults have been collected from late July to late September but are most common in August. It is a nocturnal species that comes to lights.
 

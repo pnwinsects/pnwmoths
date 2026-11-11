@@ -24,11 +24,11 @@ This species has a limited range near the Pacific Coast of North America. It ext
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on short bunchgrasses (Poaceae) based upon the habitat.
 
-##### Adults
+### Adults
 
 Adults of *A. centralis* fly from June through August in our region. They are nocturnal and come to lights.
 

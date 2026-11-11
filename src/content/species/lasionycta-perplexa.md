@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta perplexa* is a common, widely distributed, medium-sized noctuid moth (FW length 15 - 19 mm) that flies in montane conifer forests throughout our region. It has blue-gray forewings usually marked with a pale teardrop-shaped, irregular, or round orbicular spot. The forewing is slightly bluish-gray with a busy pattern of lines and spots, slightly darker in the median area due to a diffuse dark gray median line. The basal, antemedial, and postmedial lines are darker gray, double, and filled with the ground color or lighter gray. The antemedial line is zig-zagged on the veins. The postmedial line is dentate, sharply drawn toward the base at the costa, and obliqued toward the base below the top of the cell with an offset toward the base at the level of the inferior reniform spot. The subterminal line is usually a series of pale spots that is preceded by black wedges between the veins that are least dark at the costa. The orbicular spot is usually prominent, due to filling of whitish gray scales, often with a gray central ocellus. It is often teardrop or lemon-shaped, but can also be diamond-shaped or round. The reniform spot is kidney-shaped or weakly figure-eight shaped and is less prominent because it is filled with the ground color. The black claviform spot is variable in size, small to long and touching the postmedial line. The hindwing is medium-dark to dark brownish gray, darker gray toward the margin, with dark discal spot and postmedial line that are most evident in individuals with lighter ground color. The fringe is two-toned gray. The head and thorax are powdery gray with weak light and dark gray lines on the edges of the collar and tegulae. The male antenna is bipectinate with a long extension from both sides of each individual segment.
 
@@ -22,11 +22,11 @@ This species is predominantly distributed in the mountains of western North Amer
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to feed on alders (*Alnus* spp.) in the Betulaceae.  In forest habitats without alders, it probably feeds on various other hardwoods.
 
-##### Adults
+### Adults
 
 Adults of *L. perplexa* fly during the summer and have been most commonly collected from late June to early August in our region. They are nocturnal and come to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Resapamea passer* is a medium-sized moth (FW length 15–19 mm) that flies in lowlands on both sides of the Cascade Mountains during the summer. Its dull brown, red-brown, or yellow-brown forewings have a black claviform spot and often additional black spots that include the outline of the reniform spot. The most common form in most of its range is dull dark brown, but dark red-brown and mottled gray and tan forms are not infrequent. The terminal area is slightly darker gray in some specimens. In a few of the lighter specimens, there is an indistinct darker gray-brown suffusion on the mid- and anterior wing, proximal to the postmedial line. The basal and antemedial lines are variable. The basal line is usually absent, occasionally evident on the costa. The antemedial line is gray occasionally bordered by a light shade of the ground color, slightly slanted toward the outer margin and toothed toward the base on the veins. The median line is usually absent, occasionally visible as a diffuse gray shade in light specimens. The postmedial line is a scalloped gray line bordered by a slightly lighter shade of the ground color, S-shaped with a smooth curve around the end of the cell and a inwardly concave segment below the reniform spot. The subterminal line is often absent, light tan in light specimens, undulating. It is preceded by a gray shade in light specimens. The terminal line is a series of black triangles. The fringe matches the ground, slightly checkered in some specimens. The orbicular spot is variable, absent, evident as slightly lighter filling without a dark outline, or round, oval, or teardrop-shaped outlined in a thin to thick black line. The reniform spot is moderately large, kidney-shaped, outlined in gray to thick black, and filled with the ground color, dull pale ochre, or a combination of the two colors. The claviform spot is small to moderate-sized, thin, often thick black with a thicker anterior segment, occasionally absent. The hindwing is pale gray-tan with a slight gray suffusion toward the margin and darker gray veins, discal spot, and terminal line. The hindwing fringe is light gray-tan. The head and thorax are dull red-brown, tan, or dark brown, matching the forewing color. The male antenna is bead-like.
 
@@ -22,7 +22,7 @@ This moth has a fairly large range in North America, extending to the Atlantic C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist with larvae that bore into the stems and roots of dock (*Rumex* spp.) and perhaps knotweed (*Polygonum* spp.) in the Polygonaceae.
 

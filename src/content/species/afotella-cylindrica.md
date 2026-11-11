@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Afotella cylindrica* is a small plainly marked gray noctuid moth (FW length 11 - 13 mm) that flies in desert habitats throughout the year. It has powdery gray forewings, often with a red-brown line medial to the subterminal line, and a light tan hindwing. The forewing is minimally darker along the costa and in the terminal area, with darker veins. The transverse lines are barely darker gray than the adjacent wing and are poorly defined except as dots on the costa. The pale subterminal line is white or slightly yellow, and is preceded by a dark gray patch near the apex, and a lighter gray or dark red-brown shade. The orbicular spot is gray, round or oval, with peripheral slightly lighter gray and a central ocellus of the ground color. The orbicular spot is similar but is filled with the ground color and is usually indistinct. The claviform spot is dark, occasionally absent. The hindwing is light tan or whitish tan with gray veins, postmedial line, and discal spot and a two-toned pale fringe. The head and thorax are gray. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends south from the Pacific Northwest and Alberta t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Afotella cylindrica* has a long flight season from spring to fall. The records from our region extend from mid-April to October, although it is most commonly collected in June and July. It is nocturnal and comes to lights.
 

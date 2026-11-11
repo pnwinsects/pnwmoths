@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Scotogramma ptilodonta* is a rarely collected, small to medium-sized noctuid moth (FW length 13 - 15 mm) that flies in extreme southern Oregon during the summer and early fall. It has white hindwings and nearly uniform, medium-gray forewings with a large reniform spot and prominent claviform spots. The forewing is dusty, medium-dark gray. The lines are nearly absent. The double black antemedial line is visible in one of six specimens examined. The pale subterminal line is faint and is preceded by a dark shade in the middle of the wing in several individuals. The orbicular spot is a oval, black but very faint. The reniform is also black and relatively large in size. It is also indistinct but is more evident because its lower portion is suffused with dark gray. The claviform spot is black and sharply defined. The hindwing is white in males with scattered dark scales along the veins, darkest at the position of the postmedial line, and at the thin terminal line; the hindwing is light gray in females with diffuse darker gray along the veins and as an ill-defined marginal band. The hindwing fringe is white in males and two-toned gray inner and white outer in females. The thorax and head are gray. The male antenna is bead-like. The surface of the eye is covered by fine hairs.
 
@@ -22,11 +22,11 @@ The range of this species includes the western Great Basin, central and southern
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation like related species.
 
-##### Adults
+### Adults
 
 Adults are on the wing in late summer. It has been collected in July and August in Oregon and Nevada. This species is nocturnal and comes to lights.
 

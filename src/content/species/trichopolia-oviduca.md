@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichopolia oviduca* is a small (FW length 12 - 14 mm), pale gray, orange-brown, or red-brown moth that flies in most of British Columbia, northeastern Washington, and western Montana during the spring and early summer. Specimens from British Columbia are mostly pale gray, with some orange suffusion. Most specimens from eastern North America are darker red-brown. This moth has pale-rimmed, gray-filled forewing spots. The color is slightly darker on the costa and in the subterminal area, greatest anteriorly. The lines are gray and double with light gray filling. The antemedial line is close to the orbicular spot, toothed toward the base on the veins, slightly angled toward the outer margin, at least on the costa. The median line is diffuse, usually faint or absent. The postmedial line is drawn toward the base on the costa, smoothly excurved near the reniform spot and often touching the lower spot, then curved to meet the posterior margin at a right angle. The line is often weakly toothed with dark lines on the veins in the subterminal area at the tips of the teeth. The subterminal line is pale ochre, very smooth undulating across the wing, preceded by an orange brown shade and occasionally by smudgy gray-brown spots on the mid-forewing. The terminal line is a faint dark line. The fringe is concolorous with the terminal area. The spots are outlined in pale ochre and filled with gray that is darker than the surrounding wing. The orbicular spot is round or slightly ovoid. The reniform spot is oval, weakly hourglass-shaped, or weakly kidney-shaped. A claviform spot is lacking. The hindwing is pale gray in the west, slightly darker gray in the east, with a faint gray discal spot and thin terminal line. The hindwing fringe is whitish gray with a light gray base. The head and thorax are even gray. The eye is covered in fine hairs. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ This species has a wide distribution in North America, ranging east to the Atlan
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbs and grasses.
 
-##### Adults
+### Adults
 
 Adults are reported as being double-brooded (Powell & Opler 2009). The very few Northwest records are from June and July. This species is nocturnal and comes to lights.
 

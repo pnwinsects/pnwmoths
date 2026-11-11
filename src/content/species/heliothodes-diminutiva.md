@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Heliothodes diminutivus* is a very small (FW length 7 - 10 mm),day-flying moth that flies in steppe during late spring. It has dark pink to red forewings and black hindwings with cream-colored spots. The forewing of most Northwest populations are dark-rose colored. Olive patches with a mixture of ochre and gray scales are present on the posterior wing base, the posterior median area, on the costa at the positions of the antemedial and postmedial lines, and in the terminal area parallel to the outer margin. The remainder of the median area and a small triangular patch in the medial cell are light yellow. The spots are large and broadly fused to the same color surrounding dark areas. The fringe is dark gray at the apex and anal angle and white with a gray base across the rest of the wing. The hindwing is black with a brassy sheen. A white median area is usually broken into two similar-sized patches where the reniform spot and marginal band touch. Most elements of a normal pattern of lines and spots is lost in the black. The hindwing fringe is white with a dark gray base. The entire body is black with a dense covering of gray-yellow hair-like scales, densest at the thorax. The eye is reduced in size. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of this species extends to Baja California through most of California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The life history is described from Riverside County, California by Hardwick (1996). This population feeds on *Lasthenia californica* in the Asteraceae. Two other species of *Lasthenia*, *L. glaberrima* and *L. minor*, occur in our area and are potential foodplants for this moth.
 
-##### Adults
+### Adults
 
 Adults are diurnal and visit flowers during the day. They are fond of yellow fleabanes (*Erigeron* spp.) in Kittitas County, Washington. The flight period is May and early June in our region.
 

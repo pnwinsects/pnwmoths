@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa cryptica* is a medium-sized moth (FW length 16 mm) that flies on the east slope of the Cascade Range in southern Oregon during the summer. It has a powdery, dark blackish-gray forewing with a black and white basal dash and spots outlined in black and light gray. The forewing color is nearly uniform except for a darker shade in medial to the subterminal line. A short thin basal dash is white anteriorly and black posteriorly. The transverse lines are gray, double with strong and weak components, filled with a slightly lighter shade of the ground color. The basal line is irregular. The antemedial line is moderately angled toward the outer margin, and is laterally convex between the veins, bulging strongly above the posterior margin. The median line is absent. The postmedial line lacks an outer dark component, is evenly toothed on the veins, drawn sharply toward the base on the costa, excurved throught the width of the distal cell, and angled 45° toward the base from the level of the posterior cell to the posterior margin. The subterminal line is light gray, powdery, sinuous. It is preceded by a dark gray shade that is condensed into diffuse spots between the veins across the mid-wing. The terminal line is thin, dark. The orbicular and reniform spots are partially outlined by black outer and powdery light gray to slightly yellowish inner scales and are filled centrally with the light gray that fills the lines. The orbicular spot is weakly oval, open toward the costa. The reniform spot is kidney-shaped, often open at both ends or posteriorly. The claviform spot is black, thin, and moderate-sized. The hindwing is gray, darker toward the outer margin, with dark veins, discal spot, and terminal line. The hindwing fringe is two-toned gray. The head and thorax are dark gray with a thin black line across the mid-collar. The male antenna is weakly bipectinate. *Euxoa cryptica* is a member of the subgenus *Pleonectopoda*. This genus is characterized by a subbasal twist in the male vesica that is evident when the vesica is everted and inflated during dissection. Many members of this subgenus occur at high elevations and high latitudes.
 
@@ -35,11 +35,11 @@ The range of this species is narrowly limited to the Sierra Nevada outside of ou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly during the summer. They have been collected from June to late August in our region. It is a nocturnal species and comes to lights.
 

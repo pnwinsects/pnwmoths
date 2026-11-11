@@ -6,7 +6,7 @@
 
 Many *Syngrapha* species are similar superficially. This species can be recognized by its dark brown-black and rusty median area and thin linear stigma. The most similar species is *Autographa ampla* which has a solid black median patch, a deeper V-shaped stigma, and black spots at the apex and anal angle in the terminal area that *S. epigaea* lacks. This species could potentially be confused with *Syngrapha surena*, a very rare moth that has been collected in central British Columbia. *S. surena* has a very broadly V-shaped stigma that separates anterior silver-gray and posterior dark gray portions of the medial forewing.
 
-##### Larvae
+### Larvae
 
 Larva is smooth with only two pairs of abdominal prolegs.  The color is green with thin white dorsal lines and a broader white lateral line.  It is illustrated by Lafontaine & Poole (1991).
 
@@ -26,11 +26,11 @@ The species is found across northern North America from central Yukon, British C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a foodplant specialist feeding primarily on huckleberries (*Vaccinium* spp.) in the Ericaceae, but will feed on other plants late in the season.
 
-##### Adults
+### Adults
 
 In the  Pacific Northwest  adults fly from early July to early September. It is nocturnal and comes to lights.
 

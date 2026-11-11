@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa nevada* is a fall-flying, small to medium-sized *Euxoa* (FW length 12–16 mm) with streaky gray and olive-tan forewings, elongate fused orbicular and reniform spots, and hindwings that are pure white with dark terminal line in males and gray with dark veins and white fringe in females. Females are variable in size, but are often smaller than the males. The forewing has a relatively sharply pointed apex for the genus, with a slight angle of the outer margin on vein CuA1. Its color is olive-tan and gray, lightest in the distal subterminal area and at the apex and slightly darker gray between the veins. The veins near the costa the cubital vein, and 1A+2A are powdery light gray, while the other veins are dark. The terminal area is dark gray, and the cell is often dark brown-gray. A black basal dash is present. The basal and antemedial lines are evident on the costa in some specimens but are absent otherwise. The postmedial line is only visible as spots on the costa and an angled lightly scalloped gray line below the reniform spot. The subterminal line is evident as the uneven transition between the light subterminal area and gray terminal area, approaching the outer margin near the apex and as a "W" mark on the mid-forewing. The forewing spots are outlined in gray or black, lined by gray, and filled centrally with the ground color. The orbicular spot is very long, usually fused to the C-shaped reniform spot. The claviform is absent or relatively weak, small or moderate-sized when present. The male hindwing and fringe are white, with darker gray veins near the outer margin and a dark terminal line; that of the female is light brown-gray with gray marginal suffusion, darker veins and terminal line, and a white fringe with a patchy gray base. The head and thorax are powdery olive gray with a black line across the mid-collar. A frontal tubercle is present. The male antenna is weakly bipectinate. *Euxoa nevada* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species is widely distributed on arid rangelands throughout much of western
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.  The sensitivity to wildfires suggests that it may be a foodplant specialist feeding on semi-woody plants such as buckwheats (*Eriogonum* spp.) in the Polygonaceae.
 
-##### Adults
+### Adults
 
 Adults of *E. nevada* are on the wing during the fall. It has been collected from late August to early October in the Pacific Northwest. It is nocturnal and comes to lights. Males are fairly common at most sites where it occurs but females are collected infrequently at lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eutricopis nexilis* is the most often encountered day-flying member of the subfamily Heliothidinae at middle to high elevations in our area. It is a very small moth (FW length 7 - 9 mm) with rosy pink, black, and white markings on both upper- and undersides. The forewing is usually dark pink to claret, sometimes dark olive gray instead of red. Olive patches of mixed dark gray and light yellow scales are present at the base, along the costa and trailing margin in the median area, and near the outer margin. The filling of the large forewing spots is either this mixture of light and dark scales or dark red. The distal median area and a small spot at the medial base of the cell are cream, with dark along the cubital vein in the lower cell. The large orbicular, reniform, and claviform spots are fused to the adjacent dark areas. The fringe is dark gray at the apex and anal angle and two-toned with dark basal and white apical components elsewhere. The hindwing is black with a median cream band that is usually divided into two similar-size patches where the discal spot, which is broadly fused to the black wing base, touches the marginal band. The hindwing fringe is pure white with a dark gray base. The head and thorax are dark gray with a covering of white, light yellow, and rose hair-like scales. The abdomen is dark gray covered with whitish hair-like scales. The eye size is reduced. The male antenna is weakly biserrate.
 
@@ -24,11 +24,11 @@ The range of this species extends east to the Atlantic Provinces and New England
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on pussytoes (*Antennaria* spp.) in the Asteraceae.
 
-##### Adults
+### Adults
 
 Adults are strictly diurnal and visit flowers during the day. They are closely associated with the foodplant and take nectar at its flowers. The flight of the adults is closely tied to the flowering of *Antennaria*. Specimens from the Pacific Northwest have been collected from late May to early August, with the early records from low elevations and the late ones from alpine habitats.
 

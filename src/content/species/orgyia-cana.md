@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Orgyia cana* is a small to medium-sized moth (FW length 13–16 mm; wingspan 2.9–3.2 cm) that flies in southern Oregon and Idaho during summer and fall. It has stubby grey-brown forewings with a diffuse discal spot, a white and black spot above the anal angle, and short broad antenna.  Both wings are relatively short and round, and the outer margin of the forewing is smoothly convex.  The color is brown, usually with a glaucous suffusion of gray scales that produce a blue-gray color.  The basal, antemedial, postmedial lines are dark gray to black, single, wide, and scalloped.  The anterior portion of the subterminal line is similar but this line is usually absent on the posterior wing.  The terminal line is absent or similar dark gray.  The discal spot is outlined in dark gray and filled with light gray and tan which usually extends to outside of the outline. A "subanal spot" is present in the posterior subterminal area slightly above the posterior margin which consists of black medial and white lateral patches. The hindwing is nearly round, medium to dark brown, darkening slightly towards the outer margin.  The male antenna are short and broadly bipectinate.  The flightless females have vestigial pad-like wings, are heavy-bodied, gray and nondescript.
 
@@ -20,11 +20,11 @@ In the Pacific Northwest, this species is found in southern Idaho and Oregon.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species winters as eggs and emerges as larvae in spring.  The larvae feed on various hardwood trees and shrubs in such families as Rosaceae and Salicaceae.
 
-##### Adults
+### Adults
 
 Mature adults are found from late May to early September. They are nocturnal and come to lights. This species is single brooded and the adults do not feed.
 

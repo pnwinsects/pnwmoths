@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Dodia albertae* is a dull gray, small to medium-sized (FW length 14–16 mm) tiger moth with broad, translucent wings and a slender body. The forewing is translucent gray with scattered light gray scales on the outer wing. The light gray subterminal line is waved, diffuse, and forms a prominent contrasting light mark at the anterior margin. The hindwing is uniform darker gray with slightly darker veins and marginal band. The head and body are also dark gray. The antennae are filiform.
 
@@ -22,11 +22,11 @@ This species has a Holarctic distribution. In Eurasia it occurs from northern Mo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of *D. albertae* are unknown.
 
-##### Adults
+### Adults
 
 Adults occur from early June until mid-July. They fly both in the day and night.
 

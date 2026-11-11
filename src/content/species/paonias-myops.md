@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Paonias myops* is a large sphinx moth (FW length 25–30 mm) that flies east of the Cascades during late spring and summer. Its hindwings are yellow and brown with a black and blue eyespot. Its forewings are long and appear curved because the distal costa is convex and the distal trailing margin is concave. The outer margin is slightly uneven with two teeth. It is mottled orange-brown to purplish brown with pale lavender transverse lines and dark brown or blackish mottling near the trailing margin and distal to the postmedial line. Yellow areas is present at the apex and sometimes near the anal angle. No discal spot is evident. The hindwing is purplish brown and orange with a bright yellow base and anal angle which surrounds a moderately-large black eyespot. Its pale blue center is unmarked without a black ocellus—hence the common name. The thorax and abdomen match the forewing color, velvety dark orange-brown in most specimens. The antenna is club-like.
 
@@ -22,11 +22,11 @@ The range of this species is similar to that of *Paonias excaecatus* in the Unit
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae feed on many hardwoods, particularly various Rosaceae and huckleberries (*Vaccinium* spp.) in the Ericaceae.  In the Pacific Northwest, cherries (*Prunus* spp.) and serviceberry (*Amelanchier* spp.) may be of particular importance.
 
-##### Adults
+### Adults
 
 Adults are on the wing from May to early August. They are nocturnal and come readily to light. Members of the genus *Paonias* do not feed as adults.
 

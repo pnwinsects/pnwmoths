@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protogygia album* is a nearly entirely white moth found in dry steppe habitats. It is medium-sized (FW length 14–17 mm). The forewing is sprinkled with scattered black scales, and the only consistent marking is a small, black dot at the position of the lower reniform spot. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ The range of this species extends south through California to northern Mexico. T
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been observed feeding on blazing-star (*Mentzelia laevicaulis*) in the Loasaceae.
 
-##### Adults
+### Adults
 
 Adults have a long flight season in the Pacific Northwest, with records from mid June through September. It is nocturnal and comes to lights.
 

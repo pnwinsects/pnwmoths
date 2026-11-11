@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eumorpha achemon* is a very large moth (FW length 44–45 mm) with boldly geometrically-patterned tan and dark brown thorax, a similar forewing pattern, and bright pink hindwing.  The forewing is long and narrow with a slightly hooked tip.  It is medium-dark gray-tan, lighter gray on the basal and posterior forewing, and darker and browner toward the outer margin.  The median area posterior to CuA2, the apex, and anal angle are marked with sharply-defined patches of velvety warm brown.  A small black spot is located near the wing base.  The hindwings are bright pink, darkest near the anal angle.  The outer margin is powdery gray-tan, lighter gray posteriorly, with a brown and black submarginal band that is divided into discrete spots on the posterior half of the wing.  The head and thorax are similar to the forewing ground color, with dark triangular tegulae.  The antenna is whitish, club-shaped. The abdomen is gray-tan with weak banding on each segment.
 
@@ -22,11 +22,11 @@ Records of this species are most common in southwestern Oregon in our area, alth
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various members of the Vitaceae including cultivated grapes (*Vitis* spp.).
 
-##### Adults
+### Adults
 
 Adults are crepuscular and nocturnal and visit flowers for nectar.  They are attracted to lights.  The few Pacific Northwest records are from June and again in August and September.
 

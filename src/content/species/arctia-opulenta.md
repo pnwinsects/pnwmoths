@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Arctia opulenta* is very close in appearance to its congener *A. caja*, and it was until recently considered to be one of its northern subspecies. It is a large moth (FW length 25 mm). The forewing is white with dark brown gray markings, giving the impression of white lines on a dark background. The hind wing is red with a black discal spot and a series of similar size round black spots filled with metallic blue scales. The head and abdomen matches the brown forewing markings and the abdomen is slightly darker red than the hindwings with black spots. The eyes are reduced in size. The bipectinate antennae are white dorsally.
 
@@ -22,11 +22,11 @@ This species only occurs in northern British Columbia north of the Pacific North
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae have been found on willow (*Salix* spp. - Salicaceae) in British Columbia by Chris Schmidt.
 
-##### Adults
+### Adults
 
 Adults of this species are diurnal and fly high and fast above shrubs and tundra.
 

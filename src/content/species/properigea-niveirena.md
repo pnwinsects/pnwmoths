@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Properigea niveirena* is a small to moderate-sized moth (FW length 13–16 mm) that flies west of the Cascades and in the Blue Mountains during the summer. It has a dark gray forewing with a white-rimmed crescent-shaped reniform spot. The forewing has a long apex. It is nearly even dark gray, usually lighter mottled gray in the terminal area. The basal, antemedial, and postmedial lines are black. The basal line is irregular. The antemedial line is slightly slanted toward the outer margin and is toothed toward the base on the veins. The median line is absent or very faint and diffuse dark gray. The postmedial line is weakly toothed on the veins, drawn strongly toward the base on the costa and weakly on the trailing margin and is weakly S-shaped elsewhere. The subterminal line is light tan-gray, jagged. The terminal line is a black. The fringe is gray. The orbicular spot is absent or a small oval filled with the ground or slightly lighter gray. The reniform spot is strongly crescent-shaped, outlined in black outer and pure white inner lines, often incomplete at the anterior and posterior ends, and is filled centrally with a dark gray crescent. The claviform spot is absent. The hindwing is medium-dark gray, darker toward the margin, with dark veins and terminal line. The fringe is white with a gray base. The head and thorax are dark gray. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends south through California to the border with Me
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is suspected to feed on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The flight period of *P. niveirena* is the summer, most commonly in July and early August. It is a nocturnal species that comes to lights.
 

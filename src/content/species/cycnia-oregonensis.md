@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cycnia oregonensis* is a pale, medium-sized (FW length 17–21 mm) tiger moth with a black and yellow abdomen. The forewing is usually dark cream with paler veins and no other markings. The unmarked hindwings are paler off-white in most of the Pacific Northwest. The head is ochre-yellow, whereas the collar is the same color as the forewings. The dorsal abdomen is bright ochre-yellow (except for white at the tip) with several rows of black spots. The antenna is bipectinate, broadest in males.
 
@@ -24,11 +24,11 @@ This species is found in a large part of North America. It is common in the east
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on dogbane (*Apocynum* spp.).
 
-##### Adults
+### Adults
 
 *Cycnia oregonensis* has a long flight season from late spring until mid August. Most records are from June until early August. It is nocturnal and comes to light.
 

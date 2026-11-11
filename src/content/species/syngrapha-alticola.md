@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Syngrapha alticola* is a small (FW length 12 - 13 mm) day-flying mottled gray-brown moth that flies in alpine meadows in British Columbia, northern Washington, and western Montana during the summer. It has a short, looped stigma and a yellow and black hindwing. The forewing is relatively short for the genus, with a slight flange at the anal angle. The color appears mottled brown, darkest basal to the reniform spot and the lower postmedial line. The wing beyond the postmedial line is lighter and grayer, except for the brown-black subterminal line and a shade preceding it. The color is lightest in the median area lateral to the reniform spot, in the medial subterminal area, and in the terminal area near the anal angle. The median area below the cell is smooth dark gray-brown, darkest near the stigma. The white stigma is a fairly short and blunt hairpin loop, thickest at the end of the loop. The basal, antemedial, and postmedial lines are dark brown, double, filled with brown to light gray-brown that is lightest in the posterior antemedial line and in the postmedial line. The basal line is short and inconspicuous. The antemedial line is oblique across the costa, interrupted by the cell, and strongly incurved below the cubital vein. The dark brown median line is visible on the lower median area and near the costa. The postmedial line appears pale, is smoothly excurved below the costa and nearly straight or slightly inwardly concave across the rest of the wing, slightly oblique toward the base. The dark subterminal line is very uneven, approaching the costa opposite the cell and on the mid-wing near vein CuA1. The terminal line is pale gray-brown with dark spots between the veins. The fringe is moderately checkered gray-brown and brown, paler gray near the anal angle. The orbicular spot is pale brown, faint, round to oval. The reniform spot is thin and pale, an upright bar or hourglass-shape, often incomplete at the anterior and posterior ends, surrounded by ill-defined dark brown and filled with the ground color. The hindwing is bright yellow with gray basal and inner margin suffusion and a well-defined dark gray to black marginal band. The hindwing fringe usually has a white to pale yellow edge lightly checkered with gray and an ochre base and thick gray median line.
 
@@ -22,11 +22,11 @@ This species is widespread in the continental portions of arctic and subarctic N
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 This species is strictly diurnal and visits flowers. The flight period is the summer, usually July and August.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Papestra quadrata* is the smallest and most colorful species of *Papestra* in North America, which is not saying a lot, since the other species are shades or gray and white. It is a medium-sized moth (FW length 15 - 18 mm) with dark brown-gray, often with a slight purplish or reddish tint, with a variable pattern that usually has a blue-gray and red-brown patch between the postmedial and subterminal lines near the anal angle and a black bar between the claviform spot and postmedial line. It flies near timberline during the summer. The forewing is slightly mottled dark gray-brown, usually with a blue-gray band between the postmedial and subterminal line, although this band is often restricted to near the anal angle. The transverse lines are black and double. The antemedial line is more evident than the postmedial line. The latter is filled with blue-gray similar to the adjacent wing. The subterminal line is light whitish gray to light yellow and is irregular and forms a "W" mark to near the outer margin on veins M3 and CuA1. It is preceded by black chevrons between the veins near the level of the inferior cell and dark red-brown near the anal angle. The orbicular and reniform spots are thin and black. The former is circular and is filled with gray and a central ocellus. The reniform spot is kidney- or weakly figure-eight-shaped, variably filled with dark to light gray. The claviform spot is moderate sized. A black bar connects it to the postmedial line in the majority of specimens. The hindwing is dark brown-gray, darker near the margin, with faint darker discal spot and veins. The head and thorax are hoary dark gray to brown-gray with a black transverse band on the collar. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is found across the subarctic and boreal portions of northern North
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it may be a generalist feeding on both hardwoods and herbaceous vegetation like related species.
 
-##### Adults
+### Adults
 
 This species is single brooded and the adults are on the wing during the summer, usually early in the season. Records from our region span mid-May to early August. It is nocturnal and comes to lights.
 

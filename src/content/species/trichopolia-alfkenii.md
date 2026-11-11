@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichopolia alfkenii* is a small (FW length 12 - 14 mm), mottled, dark gray-brown moth that flies commonly across southern Oregon during the fall. Its forewing has a slightly oval black orbicular spot, a gray-filled reniform spot, gray veins on the distal wing, and its hindwing has a dark margin. The forewing is slightly powdery medium-dark gray-brown, slightly darker and grayer on the costa and distal to the postmedial line.  The veins are covered with light and dark scales, appearing mostly darker than the ground color, especially distal to the median area. The basal and antemedial lines are gray, double, and filled with the ground color, evident as dark and light spots on the costa and usually indistinct elsewhere. When evident, the basal line is drawn toward the base on the cubital vein and the antemedial line is smoothly excurved with notches toward the base on the veins. The median line is gray, a diffuse oblique line medial to the reniform spot and faint or absent elsewhere. The postmedial line is similar to the antemedial line on the costa, variable elsewhere, absent, a double gray line, or a series of dark and light spots on the vein lateral to the line, drawn toward the base on the costa, forming a tight convex curve lateral to the reniform spot, and nearly straight from the mid-cell to the posterior margin, often touching the lower reniform spot. The subterminal line is pale yellow-tan, irregular across the wing, preceded by a dark gray-brown shade and sometimes a few dark spots between the veins on the mid-wing. The terminal line is a series of small gray spot. The fringe is gray-brown, sometimes with tan checkering of the base. The orbicular spot is outlined in gray to black, oval, filled with light gray and a gray-brown ocellus. The reniform spot is usually weakly hourglass-shaped, slightly tilted toward the base anteriorly, incompletely outlined in gray and a light shade of the ground color or light gray, filled with dark brown-gray. A faint small claviform spot is sometimes present. The hindwing is pale whitish basally, darkening to medium-dark gray at the outer margin, with a dark gray discal bar, veins, and terminal line. The hindwing fringe is white with a gray base. The head and thorax match the forewing color. The eye is sparsely covered with very fine hairs. The male antenna is weakly bipectinate.
 
@@ -22,11 +22,11 @@ This moth reaches its northern range limit in our area. It is widespread through
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist feeding on many kinds of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The flight period of *T. alfkenii* is the fall, usually beginning in mid-August and lasting through September. This species is nocturnal and comes to lights.
 

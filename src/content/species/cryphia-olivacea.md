@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cryphia olivacea* is the least common and largest (FW length 14 - 15 mm) of two similar Northwest-region lichen-like moths in the genus *Cryphia*. It has a slightly pointed forewing apex, more so than *Crypia cuerva*, and the color is medium-dark gray-brown or olive with a powdery appearance due to sprinkled dark scales. The basal and median areas are slightly darker and browner than the rest of the wing, and there is an even darker gray spot preceding the subterminal line near the apex. The basal, antemedial, and postmedial lines are dark gray. The former two lines are irregular, while the postmedial line is scalloped with the teeth of the line direct toward the wing base rather toward the outer margin, as in most noctuid moths. It is nearly straight across the wing near the reniform spot, is drawn sharply toward the base on the costa, and is obliqued toward the base on the posterior half of the wing. The subterminal line is powdery dark gray. The terminal area is checkered light and dark gray, opposite similar checkering in the fringe. The orbicular spot is round, black with white filling and a central gray to black ocellus. The renifor spot is similar but slightly less prominent. The claviform spot is dark gray, indistinct. The hindwing is smoky gray with darker discal spot, postmedial line, submarginal band that is darker on the veins and spares a row of pale spots at the margin. The fringe is light gray with slight checkering. The head and thorax are powdery gray-brown. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has been collected in western Montana, Colorado, northern and south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on lichens.
 
-##### Adults
+### Adults
 
 Limited records suggests that this species flies in July and August, slightly earlier in the year than *Cryphia cuerva*.
 

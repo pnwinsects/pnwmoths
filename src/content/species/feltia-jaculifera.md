@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Feltia jaculifera* is a common and widespread streaky pale and dark gray moth with a long black claviform spot and pale orbicular and reniform spots that are accentuated by black in the adjacent cell. It is medium-sized (FW length 15–18 mm). The forewing ground color of is pale brown gray. The cell is black medial to the reniform spots. Dark gray is present between the reniform spot and the postmedial line, along the costa near the subterminal line, and in the terminal area. The veins bordering the cell are light gray from the base to the reniform spot. A thick, black basal dash connects the claviform spot to the forewing base, although it is interrupted by the pale filling of the crossing lines. The veins are thin and black, adding to the streaky look to the forewing. The lines are inconspicuous, evident as gray dots along the costa and pale filling across the basal dash. The postmedial line is weakly scalloped. Its position is indicated by termination of adjacent dark areas and a series of black dashes between the veins in the adjacent medial area. The subterminal line is also a transition between pale gray medial to it and dark gray in the terminal area. It forms a "W" mark at veins M3 and CuA1. A series of black spots abuts the subterminal line in the dark terminal area. The orbicular spot is a broad U, open toward the costa and filled with similar pale gray. The reniform spots is fairly large with a weak lateral indent. It is filled with pale gray and pale rusty scales, usually appearing light orange. The claviform spot is very long, nearly reaching the postmedial line. The hindwing is nearly white with a thin, smoky gray marginal shade in males, usually light gray with a wider gray marginal band, but occasionally entirely dark gray in females. The hindwing fringe is white in both sexes. The head and thorax are similar in color to the forewing, usually light brown-gray to gray-brown. The collar is slightly banded with a dark transverse line near the distal third. The male antenna is biserrate with stout fasciculations.
 
@@ -8,7 +8,7 @@ This species can usually be identified without difficulty due to its streaky lig
 
 The type locality of the synonym *Feltia edentata* Smith is Pullman, Washington.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, light reddish brown dorsally and gray-brown laterally with subdorsal and lateral rows of small black spots.  It is illustrated by Lafontaine (2004).
 
@@ -28,11 +28,11 @@ This species is common across large parts of North America from coast to coast. 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on general herbaceous vegetation, particularly the families Asteraceae and Fabaceae, but will also feed on grasses (Poaceae) during epidemic outbreaks.
 
-##### Adults
+### Adults
 
 Adults are on the wing from mid-July to October in our region, peaking in late August and early September.  They are nocturnal and come readily to light.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypena atomaria* differs from our other Hypena species in color and wing pattern. It is a small moth (FW length 13–14 mm) with a broad wing with a slight concave outer margin near the apex, convex otherwise. The ground color is brownish gray heavily dusted with medium brown. The antemedial, postmedial, and subterminal lines have similar smooth shape and brown color, and each is followed by lighter wing color. These lines are evenly spaced across the wing, dividing it into four segments of similar width. The spots are absent. The hindwing is luteous white, dusted with brown near the margin. Like other members of the subfamily Hypeninae the palpi are long. The male antenna is ciliate, without knob-like thickening.
 
@@ -22,11 +22,11 @@ This is an eastern North American moth. Forbes (1954) gives the range from New Y
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults fly in June in the East and Midwest.
 

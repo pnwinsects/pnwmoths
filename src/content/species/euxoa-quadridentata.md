@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa quadridentata* is a sexually dimorphic, small to medium-sized *Euxoa* (FW length 12–16 mm) that flies in steppe and dry forest habitats in late summer and early fall. It has a bold, streaky pattern of pale veins, an ochre costal margin, and four pale "teeth" along the outer margin of the forewing. The males are slightly larger than the females. Males have a pale ochre ground color while females are light gray. These colors are most evident in the subterminal area, along the posterior margin below 1A+2A, alongside the veins through the mid-median area, and as a pale streak in the fold. The cell is dark olive, gray-tan, or brown-black, extending to the postmedial line and the interspaces in the median area anterior to 1A+2A. The costa is ochre at the base, cream to the reniform spot, and whitish to slightly beyond the postmedial line. The cubital and radial veins are white. Their branches are thin and black with white, light gray, or light ochre extending adjacent to them, toothed on the outer margin on R5 and M1 near the apex and M3 and CuA1 on the mid-forewing. The terminal area is gray-brown except at the apex. A diffuse black smudge is present between the cubital vein and 1A+2A at the base. Silvery gray replaces the ochre color in females. The lines are obscure, with absence of the basal and median lines. An excurved black segment of the antemedial line is located at the base of the claviform spot on the mid-forewing. The position of the postmedial line is evident as the transition between darker median area and lighter subterminal area and as an oblique array of black spots below the reniform spot. The subterminal line is a similar transition from light to dark, traversed by the light veins described above and marked by a series of thick black spots between the veins. The terminal line is black, thin or a series of spots. The fringe is gray-tan with faint darker striations. The orbicular and reniform spots are outlined in black lined with cream or whitish gray. The orbicular spot is small to moderate-sized, oval, complete or open toward the costa, entirely pale or filled centrally with the ground color. The reniform spot is kidney-shaped, entirely pale or filled centrally with a lunule of the ground color, its lower end obscured by the pale cubital vein. The black claviform spot is long and thin. The hindwing is whitish gray with a diffuse gray marginal band in males, slightly darker gray with a wider band in females, with a dark terminal line and white fringe in both sexes. The head and posterior thorax are hoary gray and tan. Males have a collar with a light yellow base and gray edge separated by a black line, that of females is similarly patterned but powdery gray-ochre basally and gray distally. A frontal tubercle is present. The male antenna is biserrate. This species is a member of the large subgenus *Euxoa*.
 
@@ -24,14 +24,14 @@ The range of this species extends east across southern Canada to southern Manito
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Little information is presently available regarding larval foodplants of
  this species, but it is probably a soil-surface feeding cutworm that 
 feeds on herbaceous vegetation based on related species.  Larvae were 
 found feeding on wheat crops (Poaceae) on the Great Plains.
 
-##### Adults
+### Adults
 
 *Euxoa quadridentata* flies during the fall. It has been collected during all of September and the first part of October in the Pacific Northwest. It is nocturnal and comes to lights.
 

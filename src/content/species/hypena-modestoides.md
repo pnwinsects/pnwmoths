@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypena modestoides* is a small moth (FW length 16 - 17 mm) with elongate wings that have a slight falcate (hook-shaped) apex. The forewing is mottled medium brown, much lighter brown lateral to the postmedial line and sometimes along the posterior margin. A triangular patch of light yellow-brown is present at the apex, accentuated by a dark gray-brown mark below it at the outer margin. The antemedial and postmedial line are serrate, especially near the posterior margin. The postmedial line is oriented obliquely across the forewing, meeting the costa further from the base than the posterior margin. The pale subterminal line is irregular but not strongly so. As in *H. californica* the orbicular spot and reniform spot are comprised of patches of raised scales and appear as black dots. A third patch of raised scales is present at the wing base. A black bar spans the orbicular and reniform spots in some specimens. The broad hindwings are light yellowish gray with gray speckling, a faint discal spot and postmedial line, and a thin terminal line at the base of the fringe. The palpi are very long and laterally flattened. The antennae are simple in both sexes.
 
@@ -24,11 +24,11 @@ This species was described from Vancouver Island. It probably has a similar West
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva is unknown, although it is likely that it feeds on nettle (*Urtica* sp.) in the Urticaceae like *H. californica*.
 
-##### Adults
+### Adults
 
 Adults have been collected in spring and August suggesting the presence of spring and summer broods. It is a nocturnal species and comes to light.
 

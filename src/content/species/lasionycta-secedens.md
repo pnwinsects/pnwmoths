@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta secedens* is a small to medium-sized noctuid moth (FW length 12 - 15 mm) that flies in boreal forests in British Columbia in our region. It has powdery dark and medium-gray forewings and yellow and black hindwings. The forewing is charcoal gray with slightly lighter medium gray basal to the antemedial line and in the subterminal area. The lines and spots are similar black. The antemedial line is slightly irregular and the postmedial line is smoothly scalloped between the veins. The median line is absent or very faint. The subterminal line is irregular, evident as a series of black spots near the outer margin. The orbicular spot is small and round. The reniform spot is heart-shaped. The claviform spot is small to elongate. The orbicular and reniform spots are filled with the medium gray of the wing base and subterminal area; the claviform is filled with the same gray as the other spots or the darker ground color. The hindwing is light yellow with a dark gray marginal band that continues to the wing base along the costal margin. The discal spot is fused to the anterior dark margin. A faint postmedial line is evident near the posterior wing margin in a few individuals. The head and thorax are hoary dark gray. The male antenna is weakly beaded, nearly filiform.
 
@@ -24,11 +24,11 @@ This species is widely distributed across both northern Eurasia and North Americ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species may be a foodplant specialist feeding on *Vaccinium vitis-idaea* in the Ericaceae, but is polyphagous when reared in captivity.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected in June and July. They are predominantly nocturnal and come to lights. They have been collected while seeking nectar on the flowers of bearberry (*Arctostaphylos uva-ursae*) in central Yukon Territory.
 

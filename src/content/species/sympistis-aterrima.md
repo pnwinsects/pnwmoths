@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis aterrima* is a small black moth (FW length 10–12 mm) that flies in high-elevation forests in west-central and southwestern Oregon in late summer. It has a forewing with mottled white in the postmedial line and adjacent subterminal area and a black hindwing with a white median line and white fringe. The ground color is brownish black, nearly even in the median area and slightly mottled with brown at the base and in the terminal area. The subterminal area is mottled white to light tan with a powdery appearance due to intermixed black scales. The basal and antemedial lines are black and double, and are filled with brown, and are poorly seen against the dark ground color. The postmedial line is double with a black medial and light gray outer components, filled with light tan to white. It is smoothly convex lateral around the reniform spot and slightly concave toward the base below the spot. The subterminal line is pale, very thin, and incomplete. The fringe is of the ground color. The orbicular, reniform, and claviform spots are inconspicuous, black filled with the ground color. The hindwing is velvety black with a off-white to tan median line. The hindwing fringe is white with a black base. The head and thorax are blackish gray. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species occurs in California south of the Oregon border. It is recorded fro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species. It is likely that it feeds on beardtongue (*Penstemon* spp.) in the Scrophulariaceae based on larval preferences of related species.
 
-##### Adults
+### Adults
 
 *Sympistis aterrima* flies in late August to mid-September in the Northwest. It is nocturnal and comes to lights.
 

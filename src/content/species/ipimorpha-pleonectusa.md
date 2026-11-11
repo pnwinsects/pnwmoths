@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ipimorpha pleonectusa* is an uncommonly collected, medium-size moth (FW length 15–16 mm) that flies east of the Cascades during August. It has an olive-gray, broadly truncate forewing with pale straight lines and large spots. The wing has a slightly hooked tip and a bulging outer margin on the posterior wing. The color is smooth light to medium-dark olive-gray, slightly darker lateral to the postmedial line. The basal, antemedial, and postmedial lines are slightly darker than the ground color, double filled with contrasting light ochre. The lines are nearly straight, with slight undulation of the antemedial line and slight convexity of the postmedial line. A faint dark median line is present. The subterminal line is paler than the filling of the other lines, complete across the wing and moderately irregular in course. The fringe is similar in color to the terminal area without a terminal line. The claviform, orbicular, and reniform spots are outlined by thin pale yellow and are filled with a slightly darker shade of the ground color. All of these spots are large, with the ballooned claviform spot touching the lower orbicular spot. The hindwing is pale to medium-dark brown-gray with very faint discal spot and postmedial line in some specimens. The hindwing fringe is light brown-gray with a yellowish base. The head and thorax match the forewing color, with a slight median ridge on the anterior thorax. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends across North America to the Atlantic Coast. Th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae, with a preference for feeding on quaking aspen (*P. tremuloides*).
 
-##### Adults
+### Adults
 
 Adults are on the wing in late summer, typically during August. They are nocturnal and come to lights.
 

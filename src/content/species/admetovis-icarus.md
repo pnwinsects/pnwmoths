@@ -1,10 +1,10 @@
 ## Identification
 
-##### Adults
+### Adults
 
 Admetovis icarus is a rarely collected medium-size noctuid (FW length XX - XX mm) with a mottle lead gray forewing with characteristic pale flame-shaped mark on the distal wing that flies in montane forests during mid-summer. The flame appearance is due to pale tan
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -28,7 +28,7 @@ Life History
 
 The early stages of *A*. *icarus* are unknown. It might feed externally on woody shrubs based on the known foodplant of *A*.*oxymorus*.
 
-##### Adults
+### Adults
 
 Adults are on the wing during mid-summer. They are nocturnal and come to lights.
 

@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Paonias excaecatus*, the Blind Eyed Sphinx, is a large to very large moth (FW length 28–39 mm) with strongly mottled warm brown forewings with deeply scalloped outer margins and dark pink and brown hindwings bearing black and blue eyespots. The forewing is long and appears curved distally because of a convex distal costal margin and concave distal trailing margin. The outer margin is strongly and slightly unevenly scalloped, accentuated by the fringe which is white in the concave segments. The base, anterior median area, and terminal area are darkest brown. The central median area is darkest and richest brown, separated from the trailing margin by a nearly longitudinal line. Several ill-defined dark marks are present on the subapical distal wing. The lines other than the compound postmedial line are fairly inconspicuous. The discal spot is a black dot. The hindwing is brown with dark pink or red centrally and at the base. Its margin is weakly scalloped. The large black eyespot near the anal angle has a central blue area that lacks a black ocellus (pupil). The body is brown with a median darker brown stripe on the thorax. The antenna is club-like.
 
 This species can be identified by its large size, brown forewing with scalloped outer margin, and pink hindwing with a black and blue eyespot. It can be told from brown forms of *Smerinthus cerisyi* by the lack of a black ocellus in the blue portion of the hindwing eyespot and from *Paonias myops* by the red—not yellow—hindwing color.
 
-##### Larvae
+### Larvae
 
 The larva is granulose green with faint yellow lateral stripes and a caudal horn.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species has a wide range in North America north of Mexico. It ranges as far
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Larvae feed on many hardwoods, particularly Fagaceae and Rosaceae.  West of the Cascades, Oregon white oak (*Quercus garryana*) and various Rosaceae such as hawthorn (*Crataegus* spp.) and ocean-spray (*Holodiscus discolor*) are the primary foodplants.  In the Blue Mountains, cherries (*Prunus* spp.) and other Rosaceae are the primary foodplants.
 
-##### Adults
+### Adults
 
 Adults fly during late spring and summer, with most records from late May through July.  It is single brooded.  This species is nocturnal and comes readily to light.  The adults do not feed.
 

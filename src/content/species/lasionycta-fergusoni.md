@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta fergusoni* is a medium-sized (FW length 14 - 18 mm), gray to blue-gray noctuid moth that flies in high elevation conifer forests as far south as northern Idaho and Washington. Its forewing has black antemedial and postmedial lines and large spots. The forewing is nearly even, hoary gray due to a mixture of black and gray scales, slightly darker in the median area. The distal wing is evenly colored beyond the postmedial line, occasionally with darker terminal area. The antmedial and postmedial lines are thick and dark gray to black, bordered with slightly lighter gray away from the median area. The antemedial line is smooth, and the postmedial line is weakly scalloped and S-shaped, laterally convex around the reniform spot and concave toward the wing base below this spot. The median line is only evident at the costa and in the cell. The subterminal line is usually absent. The orbicular and reniform spots are black and filled with uniform gray, slightly lighter than the ground color. The fringe is checkered with light and dark gray. The orbicular spot is oval, usually incomplete toward the wing base. The reniform spot is fairly large and kidney to heart-shaped. The claviform spot is long, spanning the median area to the postmedial line. The hindwing is dark gray with barely evident discal spot and postmedial line and a two-toned gray fringe. The head and thorax are hoary dark gray with a black line across the distal collar and a dark spot posterior to the collar. The male antenna is bipectinate with T-shaped individual segments.
 
@@ -24,11 +24,11 @@ The similar species *Lasionycta conjugata* flies in the Rocky Mountains of Color
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 The adults are on the wing during the summer, with Pacific Northwest records from late June to early August. It is nocturnal and comes to lights.
 

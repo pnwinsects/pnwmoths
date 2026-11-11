@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Coloradia pandora*, the Pandora Moth, is a very large (FW length 33–40 mm in males and 43–44 mm in females; wingspan 7.3–9.1 cm), heavy-bodied silkworm moth with loosely-scaled gray forewings and pink hindwings. The dark brown-gray forewings are variably suffused with light gray, greatest in the terminal area where the pale scales emphasize the jagged subterminal line. The other transverse lines are darker than the ground color, somewhat diffuse and zigzag in shape. The discal spot is round and black. The pale pink hindwings have gray veins toward the outer margin and are marked with a black oval black discal spot and dark gray wavy postmedian line and marginal band. The fringes are weakly checkered with white at the ends the veins. The body is fuzzy dark gray with long pink scales over much of the gray abdomen. The antennae are yellow, widely quadripectinate in males and thinner and bipectinate in females.
 
@@ -8,7 +8,7 @@ In most of our region *Coloradia pandora* is identified easily by its very large
 
 Pacific Northwest populations are assigned to subspecies *lindseyi* Barnes and Benjamin by Ferguson (1971), who distinguished it from other subspecies by larger size and darker appearance on both wings. He suspected that *C. p. lindseyi* is diurnal based on relatively small eyes and a report of day-time flight; however, it is clearly nocturnal in our region. Tuskes et al. (1996) do not recognize this subspecies and consider Pacific Northwest populations to be the nominate subspecies *C*. *p*. *pandora.*
 
-##### Larvae
+### Larvae
 
 The larva has very short black scoli or tubercles and is gray-black with white lateral and subdorsal dashes. It is illustrated by Miller and Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is most abundant in ponderosa pine forests at middle elevations. It
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a specialist on pines (*Pinus* spp.) (Pinaceae), including ponderosa pine (the main host), Jeffrey pine, lodgepole pine, pinyon pine, sugar pine and coulter pine.  During epidemic outbreak years, it may also feed on Douglas fir in western Oregon. Development takes 2 years to complete. Eggs are layed in groups on pine trunks or needles. The first year larvae overwinter in clusters and the second year is spent as a pupae underground.
 
-##### Adults
+### Adults
 
 Adults have been collected from late June to early fall in the Pacific Northwest.  They are nocturnal and come readily to light. The mouth parts are vestigial and adults do not feed. This species has episodic outbreaks during which it is abundant.
 

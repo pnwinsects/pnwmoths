@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa cicatricosa* is a common, small to medium-sized *Euxoa* (FW length 12–16 mm) that flies in sage steppe during the fall. It has a streaky, brown-gray, dull ochre and whitish-gray forewing and a gray-suffused, white hindwing. Females are slightly darker than the males. The ground color is tan-gray to brown-gray, often with a slightly olive or orange tint, darkest in the cell. Light ochre to burnt orange is present in the fold, in the subterminal area, and on the posterior half of the wing in light specimens. The subterminal portion of the costa and the terminal area except the apex are dark gray. The costa and the cubital vein are silver gray from the base to the reniform spot. The other veins are thin and black, with silvery gray alongside veins M3 and CuA1 from the medial subterminal area to the outer margin where they form a small W-mark, along short segments of R5 and M1 near the subterminal line, and along 1A+2A in some specimens. A short, subbasal dash is present below the cubital vein. The basal and median lines are absent. An excurved gray and light gray segment of the antemedial line is present on the mid-forewing at the base of the claviform spot, and a less distinct lateral projection of this line is present in some specimens. The postmedial line has a weakly scalloped dark gray to black inner line followed by an ochre or tan outer component, sharply curved around the reniform spot, usually touching the lower spot, nearly straight at a strong oblique angle toward the base below the spot. The subterminal line is pale ochre, slightly irregular and traversed by the light veins described above. It is preceded by a dark gray mark on the costa and several small gray wedges between veins on the posterior and mid-wing. The terminal line is black, thin or a series of spots. The fringe is gray with an ochre or tan base. The orbicular and reniform spots are outlined in black, lined with ochre, and filled with the dark ground color or burnt orange. The orbicular spot is small to moderate-sized, oval, tilted basad anteriorly, complete or open toward the costa. The reniform spot is kidney-shaped, obscured by the pale cubital vein at the lower end. The dark gray to black claviform spot is small to moderate-sized, thin. The hindwing is white with powdery gray submarkingal suffusion and a terminal line in males; smoky brown-gray with a pale base, and dark veins, postmedial line, and veins in females. The hindwing fringe is white in both sexes. The head and thorax are a powdery mixture of tan, light gray, and dark gray. The collar has a light base, ochre in males, white and black transverse lines on the mid-portion, and variable gray, dark gray, or tan distal portion with a light edge. A frontal tubercle is present. The male antenna is biserrate. This species is a member of the large subgenus *Euxoa*.
 
@@ -35,11 +35,11 @@ The range of *E. cicatricosa* extends east across southern Canada to central Sas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 *Euxoa cicatricosa* flies in the fall from mid-August to October. It is most commonly collected in September. It is a nocturnal species that comes to lights.
 

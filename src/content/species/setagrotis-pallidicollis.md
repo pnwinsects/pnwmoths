@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Setagrotis pallidicollis* is a light gray, medium-sized noctuid moth (FW length 15–18 mm) that is suffused with red-brown along the posterior forewing and marked with black lines and a long, oval to diamond-shaped orbicular spot that is often fused to the reniform spot. It is common in a variety of habitats, especially dry forests, and flies during the summer. The forewing ground color is light to medium-dark gray, darkest along the diffuse median line but occasionally in the entire median area. A black basal dash is present in about half of the specimens. The basal, antemedial, and postmedial lines are single, black, and are usually clearly evident. The postmedial line is dentate with narrow teeth that form a series of short lines on the veins. The subterminal line is usually absent, although the position of the line is demarcated by a shade in some individuals. The orbicular spot is an elongate black oval or diamond filled with the gray ground color or slightly lighter gray; it is fused to the reniform spot which is small and faint except for its medial margin in most specimens. The claviform spot is absent. The hindwing is light gray with a slight yellow or brownish cast, shaded lightly with gray toward the margin, with darker gray veins and a fairly prominent discal spot. The head and thorax are light to dark gray, sometimes with a rusty tint, and usually has a black line across the tip of the collar. The male antenna is weakly biserrate.
 
@@ -24,11 +24,11 @@ The range of this species extends south from our region through much of Californ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on various hardwoods such as alders (*Alnus* spp.) in the Betulaceae and serviceberry (*Amelanchier* spp.) in the Rosaceae.  Bitterbrush (*Purshia tridentata*) in the Rosaceae may be a favored larval foodplant based on the habitat.
 
-##### Adults
+### Adults
 
 Adults are found in the summer, with Northwest records from mid-June to early September. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia pulla* is an early spring-flying hoary dark gray medium-sized moth (FW length 17–19 mm) with a checkered fringe on the forewing and a white fringe on the hindwing from steppe habitats. As in other members of the genus the forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The forewing is hoary dark gray, lighter due to a suffusion of light scales along the costa, in the fold in the median area, and in the terminal area. Some specimens have a rusty-brown tint in the reniform spot and on the distal wing. The antemedial line is charcoal gray, deeply zig-zagged between the veins. The postmedial line has patchy dark gray inner and outer lines filled with light gray that is more continuous across the wing. It is drawn sharply toward the base on the costa, is smoothly convex toward the outer margin on the distal wing, and is irregular above the trailing margin with a tooth toward the base on vein 1A+2A. The terminal line is a black line on the posterior wing that is broken by the lighter veins. The fringe is hoary light to dark gray with black and white checkering at the base. The reniform spot is a dark gray to rusty smudge. Other lines and spots are absent. The hindwing is dark brown-gray with a sprinkling of lighter scales on the basal half and a thin dark terminal line. The hindwing fringe is white with a checkered dark gray and white base. The thorax is covered thickly with hoary black and white scales. The head and base of the collar have a rusty tint. The distal collar is striped with black and whitish gray. The male antenna is moderately bipectinate.
 
@@ -8,7 +8,7 @@ This species can be identified readily by its dark gray wings with checkered for
 
 The type locality of *Lathosea pulla* Grote is Oregon.
 
-##### Larvae
+### Larvae
 
 Larvae is smooth and green with dorsal and lateral white stripes.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is found in Utah, western Colorado, Arizona, and the northern and s
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on rabbitbrush (*Chrysothamnus* spp.) in the Asteraceae.
 
-##### Adults
+### Adults
 
 The adults fly in early spring, usually from February to early April in the Northwest. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Smerinthus ophthalmica* is one of the most common and widespread moths in the Pacific Northwest.  It is a large sphinx moth (FW length 34–47 mm) with pink hindwings with a blue eyespot with a central black pupil. The forewing has a smoothly scalloped outer margin. Its ground color is variable, most commonly light gray and darker gray-brown, but tan and dark brown individuals are fairly common in most populations. The forewing is marked with a complex pattern of light and dark brown. It is pale from the forewing base to the end of the cell anterior to the cubital vein and to the outer component of the antemedial line posterior to this vein, as well as across the distal forewing near the postmedial line and at the apex. The median area is darker gray to brown-gray, as is the outer margin below the apex. A small triangular black spot is present at the distal posterior margin. The cubital vein and its branches and the transverse vein across the distal cell are partially whitish, fading to the ground color by the outer margin. The lateral aspect of the antemedial line is bent sharply 90° on the mid-wing below CuA2 with the apex pointed toward the margin. The postmedial line has many components which are smoothly undulating. The hindwing is mostly rose pink to red with tan outer and light gray anterior and medial margins. It is marked with a prominent eyespot, black at the periphery, bright blue with a large black pupil centrally. The sides of the thorax are light gray and the central portion is dark gray-brown. The antenna is thick, tapering slightly from apex to base.
 
@@ -10,7 +10,7 @@ The most cogent argument for recognizing this species as distinct from the more 
 
 *Smerinthus vancouveriensis* Butler (type locality: Vancouver Island, British Columbia) is a synonym of *Smerinthus ophthalmica*.
 
-##### Larvae
+### Larvae
 
 The larva is granulose green with yellow subdorsal lines and yellow lateral stripes, a short caudal horn.  It is illustrated by Miller & Hammond (2003) under the name *Smerinthus cerisyi*.
 
@@ -30,11 +30,11 @@ This species is common to abundant in all forest and riparian habitats throughou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Salicaceae including willows (*Salix* spp.), cottonwoods (*Populus* spp.), and quaking aspen (*P. tremuloides*).
 
-##### Adults
+### Adults
 
 *Smerinthus opthalmica* is single brooded and has been found from April through August.  They are nocturnal and come to light.  This species is common at porch lights.  The mouthparts are reduced and the moths do not feed as adults.
 

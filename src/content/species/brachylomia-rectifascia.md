@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Brachylomia rectifascia* is a small to medium-sized moth (FW length 13–16 mm) that flies in forests throughout the Northwest during the summer. It has a gray forewing with a straight black median line and a large reniform spot filled with ochre or pink. The apical forewing is long for this genus. The color is medium-dark gray, becoming gradually lighter toward southern Oregon. The anterior antemedial and subterminal areas are darker gray in a few specimens. The base anterior to a short bifurcated black basal dash is lighter gray, as is the apex. The basal, antemedial, and postmedial lines are dark gray to black, double filled with the ground color or slightly lighter gray, the components abutting the median area darkest. The antemedial line is slightly irregular, nearly straight across the wing at a right angle to the posterior margin. The median line is thick and black and diffuse, straight or slightly concave toward the base, the posterior third abutting the postmedial line. The postemedial line is weakly toothed on the veins with dark veins segments in the subterminal area at the tips of the teeth, sharply drawn toward the base on the costa and smoothly curved elsewhere, the segment lateral to the reniform spot is angled toward the base and the segment below the reniform spot is nearly perpendicular to the posterior margin and abuts the median line. The subterminal line is light gray, wide and irregular. It is preceded by a dark gray shade that is strongest at the costa. The terminal line is dark gray, thin. The fringe is gray. The orbicular spot is round or an upright oval, outlined in thin black outer and thin inner light gray lines and filled with the ground color. The reniform spot is large, kidney-shaped with the posterolateral corner crossing the inner component of the postmedial line, outlined in thin black and filled with light yellow or rose pink. No claviform spot is evident. The hindwing is light to medium-dark gray with faintly darker discal spot, postmedial line, and submarginal band. The veins and terminal line are darker gray. The fringe is two-toned gray. The head and thorax are gray with pale luteous collar base that is separated from the gray edge by a black transverse line. The male antenna is asymmetric, pectinate anteriorly, and serrate posteriorly.
 
@@ -24,11 +24,11 @@ This species is found along the Pacific Coast of North America. It occurs in coa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably feeds on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae like related species. Willows are most likely based on habitat associations.
 
-##### Adults
+### Adults
 
 The flight period of *B. rectifascia* is summer and early fall. It has been collected from late June until mid-September but is most common in late July and early August. It is nocturnal and comes to lights.
 

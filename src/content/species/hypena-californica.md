@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypena californica* is a common moth with long brown, slightly falcate-shaped forewings and relatively large, pale hindwings. It is a small moth (FW length 15 - 17 mm). The forewing color is variable, often slightly glossy smooth purplish brown, but mottled brown and smooth light brown forms occur. The most prominent marks are the small dark orbicular spot and the reniforms spot which appears as two black dots. Both spots are comprised of raised scales of several colors. Another small patch of raised scales at the wing base is only visible under magnification because it is similar to the adjacent ground color. The orbicular and reniform spots are joined by a black bar in a third to one-half of specimens. The lines are faint, the postmedial and subterminal lines are most evident in individuals with paler forewings. The subterminal line is pale, but is often comprised of a series of small black spots. The hindwing is pale yellowish gray variably speckled with gray, a faint thin discal spot, and a thin dark terminal line at the base of the fringe. The palpi are very long and laterally flattened. The antenna is simple in both sexes.
 
@@ -24,11 +24,11 @@ This species is found along the Pacific Coast from Alaska to southern California
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on nettles (*Urtica* spp.) in the Urticaceae.
 
-##### Adults
+### Adults
 
 Adults have a very long flight season, beginning in early spring and lasting until fall. It is bimodal, suggesting the presence of spring and summer broods peaking in April and July, respectively. The moth is nocturnal and is attracted to light.
 

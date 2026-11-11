@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Acronicta hasta* is a moderately large (FW length 19 - 20 mm), even dark gray *Acronicta* that flies in the eastern part of the Pacific Northwest during the summer. It has a very thick basal dash, thinner anal and apical dashes, and a black line connecting the spots across the lower cell. The ground color is even medium gray to charcoal gray, sometimes with diffuse darker shading at the base and near the anal angle. The thick basal dash extends lateral to the antemedial line and is bordered by a light streak anteriorly and a patch of ochre yellow scales posteriorly. The anal dash and the line in the cell are about equal in thickness, and the apical dash is thin and absent on occasion. The double basal and antemedial lines are filled with the ground color are visible but not a dominant feature of the pattern. The postmedial line is weakly scalloped, usually similar to the other lines but sometimes more prominent due to lighter filling. The subterminal line is faint, pale gray. A series of black dots on the terminal line continue into the base of the fringe to produce light checkered appearance. The orbicular spot is oval, black peripherally and filled with the ground color or pale whitish gray, often incomplete and open to the costa. The medial reniform spot is black, forming a chevron-shaped mark with a thick black posterior limb and a thinner anterior limb and usually lacking the lateral wall. The claviform spot is absent. The hindwing is pale whitish gray with a slight yellow tint, darker powdery gray in females, with a faint discal dot, diffuse undulating postmedial line, a thin marginal shade, and a thin gray terminal line. The hindwing fringe matches the color of the base. The head and thorax are uniform, matching the forewing ground. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of *A. hasta* extends east through Montana and the Canadian Prairie Pr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species may be a foodplant specialist feeding on cherries (*Prunus* spp.) in the Rosaceae.
 
-##### Adults
+### Adults
 
 *Acronicta hasta* appears to be single-brooded in the Northwest; Forbes (1954) suggests that it has at least a partial second brood in the East. It flies from early May to mid-July in our region. This species is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lithophane pexata* is a late fall and spring-flying medium-sized to large moth (FW length 22–23 mm) with nearly black forewings, white orbicular and red-brown reniform spots, and white marks at the base and anal angle. The forewing is mottled blackish gray with a slight sheen. The anterior base is lighter gray. A short black basal dash is bordered anteriorly by yellow and white scales and there is a short black bar in the distal fold. The lines are black, double filled with the ground color. The basal line is evident on the costa. The antemedial line is slightly slanted toward the outer margin and evenly scalloped. The median line is black, diffuse and weak. The postmedial line is toothed, nearly straight across the wing lateral to and below the reniform spot, the segment in the fold is drawn toward the base and filled with lighter gray. The subterminal line is dull yellow except wider and paler in the fold, sinuous with an offset below the apex and a weak W-mark on the mid-wing that doesn't reach the margin. It is preceded by a brown shade and two indistinct black spots in the fold. The terminal line is black, thicker between the veins. The fringe is blackish gray. The orbicular and reniform spots are moderately large, outlined in black. The orbicular spot is a slanted oval, filled with pale gray peripherally and darker gray centrally. The reniform spot is broadly ovoid, filled with dark red-brown and dark gray with a few central ochre scales. The claviform spot is black but only evident where its tip abuts the black median bar. The hindwing is dark brownish gray with darker gray discal spot and veins. The hindwing fringe is off-white with a rust or gray base. The head and thorax are charcoal gray with white lateral edges on the tegulae. The head and thorax appear sculpted with raised tufts and ridges. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This moth is found in the northern parts of the Pacific Northwest in southern Br
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on alders (*Alnus* spp.) in the Betulaceae.  Larvae may also be partly carnivorous, feeding on insects and other caterpillars.
 
-##### Adults
+### Adults
 
 Adults of *L. pexata* emerge during the fall. They fly again in the spring after overwintering. Records from our region span early September to mid-November in the fall and mid-March to early May in the spring. This moth is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis iricolor* is a small to medium-sized (FW length 13 - 15 mm) sandy gray-brown moth that flies in sandy deserts during the fall. It has a sprinkling of dark iridescent scales on the basal and distal forewing, an off-white hindwing with a broad black marginal band, and wide white fringes on both wings. The forewing is medium-dark gray-brown, mottled darker gray in the subterminal area, with powdery carborundum-like metallic gray and black scales on the posterior wing base and entire subterminal area. The basal line is black, thin, and short. The antemedial line is partially double with black outer and a faint interrupted gray inner line, filled with light tan. It is slightly irregular and smoothly excurved. A gray median line runs closely parallel to the postmedial line below the reniform spot and turns toward the base anterior to the spot, darkest on the posterior half of the wing and on the costa. The postmedial line has black inner and pale tan outer components. It is narrowly excurved lateral to the reniform spot, touches the lower reniform spot, and turns to meet the trailing margin at a right angle below the spot. The pale tan subterminal line is irregular and blotchy, preceded by a dark gray to black shade that contains a few black wedges between the veins on the mid-wing. The outer margin is slightly scalloped with a dark terminal line. The forewing fringe has a pure white base and faintly checkered white and gray edge. The orbicular and reniform spots are outlined in thin black lined with pale brown and are filled with the darker ground color. The orbicular spot is round to slightly oval. The reniform spot is kidney-shaped or weakly figure-eight shaped, open posteriorly. No claviform spot is present. The hindwing is pale brownish white with light gray basal suffusion, a thin light to dark gray discal spot and veins, and a wide dark blackish gray marginal band. The hindwing fringe is wide and pure white. The head and thorax are sandy gray-tan. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends from the dry steppes of the Great Basin eastwa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on penstemons (*Penstemon* spp.) in the Scrophulariaceae based upon the habitat.
 
-##### Adults
+### Adults
 
 This species has a late flight at the end of the collecting season. It appears in September and flies until mid-October. It is nocturnal and comes to lights.
 

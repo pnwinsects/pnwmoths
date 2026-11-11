@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pseudocopivaleria sonoma* is a charcoal gray, medium-sized moth (FW length 16 mm) that flies in oak forests of southwestern Oregon in the spring. It has a lighter gray, round orbicular spot at the edge of the thoracic collar, and a white hindwing with dark veins and margin. The forewing has a slightly pointed apex. The dark gray is sprinkled with lighter gray scales, producing a hoary look at the base and in the subterminal area. The transverse lines are dark gray but are very poorly seen against the dark ground. The irregular subterminal line is most evident since it sets the lighter subterminal area apart from the darker terminal area. The fringe is also dark gray. The orbicular spot is round, pale filled with a dark central ocellus. The reniform spot is wide, weakly figure-eight shaped, dark gray and filled with the ground color. The claviform spot is small and barely evident against the dark ground. The hindwing is nearly white with dark gray margin and fringe, small discal spot, and veins. The head and thorax appear large for the size of the moth and are dark with lighter gray tip of the collar and tegulae margins. The male antenna is moderately biserrate.
 
@@ -22,11 +22,11 @@ The range extends south through western California to the vicinity of Los Angele
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on oaks (*Quercus* spp.) in the Fagaceae.  Oregon white oak (*Q. garryana*) is the suspected larval foodplant in the Pacific Northwest.
 
-##### Adults
+### Adults
 
 Adults fly in the early spring and have been collected in April in our area. They are nocturnal and come to lights.
 

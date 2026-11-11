@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Alypia ridingsii* is a distinctive black and pale yellow day-flying small to medium-sized (FW length 12 - 16 mm) moth that flies in sage steppe during the spring. The wings are jet black. The central forewing is uniform light yellow with black bars at the positions of the orbicular and reniform spots and black veins distal to the reniform spot. The apical fringe is pure white, while the rest of the fringe is black. The hindwing is similar, with a black bar-like discal spot and two black veins (M3 and CuA1) extending laterally from the posterior discal spot. The hindwing fringe is black. The head is black. The thorax, except for parts of the collar which are light yellow, is also black. The tibia of the middle leg is orange, while those of the other legs are black. The surface of the eye is covered with fine hairs. The antenna is simple with thickening of the distal portion.
 
@@ -24,11 +24,11 @@ This species is widely distributed in the American West, predominantly west of t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on evening primroses (*Oenothera* spp.) in the Onagraceae.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in late spring and early summer. Most records are from May and early June. The adults are diurnal and visit flowers. They fly relatively slowly and deliberately several feet above the steppe. They are relatively easy to net in flight for a noctuid.
 

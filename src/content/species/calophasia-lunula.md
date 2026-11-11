@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Calophasia lunula* is an introduced small (FW length 12 - 13 mm), brown and gray moth that flies in dry forests in eastern Washington, southern British Columbia, and northeastern Oregon during the summer. It has white-filled forewing spots and a pattern of black streaks between veins in the subterminal area. The forewing is mottled gray-brown with light gray patches at the wing base, and the posterior subterminal area, and in the terminal area. The wing is darkest in the median area and in the mid and anterior subterminal area. A black basal dash is present, ending at the base of a white-filled claviform spot. The antemedial and postmedial lines are double, filled with light brown. The antemedial line is only clearly defined on the costa and near the trailing margin. The postmedial lie is visible on the costa and as a concave segment below the reniform spot. A dark median line extends across the the wing. The postmedial line is not defined, but a series of parallel black lines are present between the veins on the terminal wing, thick in the subterminal area and thinner in the terminal area. A thin terminal line is preset. The fringe is strongly checkered with gray-brown and white. The orbicular and reniform spots are thinly outlined in black and filled with white. The orbicular spot is small narrow oval. The reniform spot is narrow and kidney-shaped. The hindwing is pale brownish white, with gray veins and marginal band. A small thin discal spot and remnants of a postmedial line are present in some specimens. The hindwing fringe is white with a light tan base. The head and thorax are gray-brown with black, white, and brown transverse barring on the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is a native of Eurasia and was introduced deliberately as a biocont
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Eurasian species of toadflax (*Linaria* spp.) in the Scrophulariaceae, and was introduced into the Pacific Northwest as a biocontrol agent against infestations of this exotic plant.
 
-##### Adults
+### Adults
 
 This species flies from late spring to August in our area. It is nocturnal and comes to lights.
 

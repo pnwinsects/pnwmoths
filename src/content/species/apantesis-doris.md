@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis doris* is a rare white, pink, and black *Apantesis* that flies in southeastern British Columbia and adjacent United States during spring and early summer. It is relatively large for the genus *Apantesis* (mean FW length 19 mm). The forewing appears light pinkish white with black markings with wide pale transverse lines, veins, costa, and fringe. This species has an extra pale transverse mark across the cell that other *Apantesis* in our region lack. The hindwing is deep pink with small pale rimmed black spots medial to the discal spot and larger spots near the outer margin. The head is pale and the thorax appears striped due to black marks on the collar, tegulae, and central thorax. The abdomen is darker pink than the hindwings with series of longitudinal black spots. The antennae are black.
 
@@ -24,11 +24,11 @@ This species is widespread but infrequently collected. Outside the Pacific North
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on general herbaceous vegetation, particularly on Asteraceae.
 
-##### Adults
+### Adults
 
 Adults of *Apantesis doris* have been collected in June and August in and near the Pacific Northwest. This species is nocturnal. It is not known whether the apparent scarcity of this species throughout its range reflects inadequate sampling of its habitat, ineffectiveness of standard collecting methods such as light trapping, or is a true indication of its rarity.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Striacosta albicosta* is a medium-sized (FW length 17 - 20 mm), dark gray moth found in the Snake River Plain in the Pacific Northwest. The forewing ground color is dark gray to dark brown-gray with a longitudinally streaked, light yellow costa, the reason for the generic and species epithets. Lighter brown is present between the veins in most individuals, the terminal area is darker gray, and the cell is filled with black. The antemedial and postmedial lines are dark, barely evident, except for the lighter brown filling. The orbicular and reniform spots are outlined in light yellow and are filled with brown. A black basal dash and black claviform spots are present on each side of the antemedial line. The hindwing is pale whitish, slightly darker gray near the margin. A thin gray terminal line is present at the base of the white fringe. The head and thorax are dark gray-brown, with a thin black line at the prothoracic collar. The abdomen is lighter gray-brown. The male antenna is  bead-like with diamond-shaped individual segments.
 
@@ -22,11 +22,11 @@ This species has only been found in southern Idaho in the Pacific Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on herbaceous vegetation in families such as the Fabaceae and Solanaceae.  Larvae require loose soils for pupation.
 
-##### Adults
+### Adults
 
 Adults occur in summer. The records from our region are from late June to early July. Adults are nocturnal and come to light.
 

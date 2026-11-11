@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa albipennis* is a common fall-flying small to medium-size *Euxoa* (FW length 13–17 mm) that flies in arid regions during the fall. Its dark, brown forewings are blackish along the costa and in the spots and lighter at the base and has a black cell, and its hindwings are white with dark veins in males and gray with a white fringe in females. The forewing is dark. warm brown or gray-brown in males and dark gray-brown in females with a dark blackish brown costa. The terminal area is dark gray, and the cell is filled with black. The antemedial area is lighter gray-tan, pure gray in some females. The basal and antemedial lines are gray and black, double but with the components of unequal strength, filled with the color of the antemedial area, irregular on the veins. The antemedial line is darkest on the costa, angled slightly toward the outer margin, and sometimes ballooned toward the outer margin below 1A+2A. The median line is dark gray, faint on the costa and barely visible on the posterior wing. The postmedial line is double at the costa, usually evident as a tooth line lateral to the reniform spot and only rarely visible as an angled line across the posterior wing. The subterminal line is a pale shade of the ground color or luteous, very thin and powdery, often absent, slightly irregular. It is preceded by a dark gray spot on the costa and a very gray shade elsewhere. The fringe matches the terminal area. The orbicular and reniform spots are partially outlined in black, are moderately large, and are positioned fairly close to each other. The orbicular spot is oval, usually open toward the costa and also often open posteriorly, filled with dark gray slightly lighter than the adjacent costa, rarely lighter gray in specimens with pale gray on the wing base. The reniform spot is kidney-shaped, usually partially line with light tan or luteous scales and often open at one or both ends, filled centrally with similar dark gray as the orbicular spot. The claviform spot is black, fairly weak, small to moderate-sized, narrow. The hindwing is pure white with dark gray absent or very thin marginal band, veins, discal spot, and terminal line; darker gray-brown with dark discal spot and veins in females. The hindwing fringe is white in both sexes. The head and thorax are black-brown, dark gray in light specimens. A frontal tubercle is present. The male antenna is weakly bipectinate. *Euxoa albipennis* is a member of the large subgenus *Euxoa* and is most closely related to *Euxoa henrietta*.
 
@@ -35,11 +35,11 @@ The range of this species extends east to southern Quebec and Connecticut along 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation such as the families Fabaceae and Asteraceae.
 
-##### Adults
+### Adults
 
 The adults of this species fly in the fall, beginning in mid-August in our region. They are most commonly collected in September. This species is nocturnal and comes to lights.
 

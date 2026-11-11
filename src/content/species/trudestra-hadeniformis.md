@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trudestra hadeniformis* is a medium-sized (FW length 15 - 16 mm), non-descript, light gray moth that flies in southeastern Oregon in late spring. It has a thin, white, subterminal line that forms a W-mark near the outer margin. The forewing is mottled light gray, slightly lighter in the fold and distal to the reniform spot, and darker on the distal wing, particularly preceding the subterminal line and in most of the terminal area except at the apex. The veins are dark gray on the distal wing. The basal, antemedial, and postmedial lines are gray, thin, double filled with the ground color. The basal and antemedial lines are evident as paired dark spots on the costa and are faint elsewhere. The antemedial line is irregular and slightly angled from the costa toward the anal angle. The postmedial line is moderately scalloped with thin dark lines on the veins at the tips of the teeth, drawn toward the base at the costa, nearly straight across the wing near the reniform spot, and then slightly angled toward the base to the posterior margin. The subterminal line is white, irregular, offset toward the outer margin on vein R5, forming a moderate W-mark on M3 and CuA1, and bent toward the anal angle between CuA2 and 1A+2A. It is preceded by dark brownish gray on most of the mid-wing. The terminal line consists of gray triangles between veins. The fringe is checkered light gray and gray. The orbicular spot is incomplete, thin gray, slightly oval, filled with lighter whitish gray than the ground and a very weak central ocellus. The reniform spot is similar, kidney-shaped, filled with the ground color and slightly darker gray posteriorly. The claviform spot is thin and black. The hindwing is pale whitish gray with a wide fairly well-demarcated dark gray marginal band and dark gray veins. The fringe is white with a yellow base. The head and thorax are similar to the ground color of the forewings with thin dark gray transverse line across the collar and lines near the edges of the tegulae. An irregular frontal tubercle is present. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ The range of this species is the desert Southwest and central Colorado. Only a f
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 This species has been found in late spring through the summer across its range. The Oregon record is from late May.
 

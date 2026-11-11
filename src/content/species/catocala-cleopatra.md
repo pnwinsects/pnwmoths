@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Catocala cleopatra* is a large moth, medium-sized for underwing moths (FW length 30–31 mm), that flies west of the Cascades during late summer and fall. Its forewings are mottled dark brownish gray with a prominent black postmedial line, and its hindwing are banded red and black. The forewing margin is scalloped. The color is mottled dark gray with a slight blue tint in the median area and brown tint on the base and distal wing. The median area medial to the reniform spot is palest gray, with less contrasting pale areas distal to the reniform spot and in the mid-subterminal area. Diffuse black shading is present in terminal area below the apex and above the anal angle, and sometimes across the median area in the fold. The basal line is black, limited to the costa and inconspicuous. The antemedial line is double, thick black with inner and outer components of equal prominence or slightly darker outer component, strongly sinuous and oriented obliquely toward the anal angle from the costal origin. The median line is diffuse black on the costa and surrounding the reniform spot. The postmedial line is smooth black, double, usually with much stronger inner component, smoothly toothed with two large teeth opposite the cell and similar teeth in the fold. The line forms an open loop to the subreniform spot and has a strong horizontal component in the lower fold. The subterminal line is dark gray, double filled with the color of the lighter gray median area except paler gray near the costa, evenly zigzag across the wing, parallel to the oblique anterior postmedial line near the costa and to the outer margin below the cell. The terminal line is a series of black spots. The fringe is dark gray with longitudinal striations. The reniform spot is dark gray, smudged and often blended beyond recognition to the surrounding median line, D-shaped with an irregular lateral border. The subreniform spot is filled with pale gray that is slightly darker than the adjacent pale medial cell. The hindwing is orange-red with black median and marginal bands. The median band ends bluntly short of the inner margin. The hindwing fringe is white to pale yellow with an inner pink to peach flush anteriorly and gray spots at the base at the ends of the veins. The head and thorax are dark gray with darker gray transverse lines across the collar and along the edges of the tegulae. The male antenna is filiform.
 
@@ -26,7 +26,7 @@ This species is found in western California to the south of our region.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Salicaceae, including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.), and appears to prefer black cottonwood (*P. trichocarpa*) in western Oregon.
 

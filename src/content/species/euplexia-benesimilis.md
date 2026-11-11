@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euplexia benesimilis* is a distinctive, dark brow,n small to medium-sized noctuid moth (FW length 13 - 15 mm) that files in forests throughout most of the Pacific Northwest during the summer. It has a large, light yellowish reniform spot and pale purple brown subterminal area. The forewing is somewhat triangular in shape and has a slightly scalloped outer margin. The ground color is blackish brown in the median and terminal wing and lighter purplish brown medial to the antemedial line and in the subterminal area. The color is lightest lateral to the postmedial line, especially lateral to the reniform spot. The antemedial and postmedial lines are triple, but only the part abutting the medial area is dark black, and filled with pale mauve. The antemedial line is smooth, forming a laterally convex curve across most of the wing. The postmedial line is drawn sharply toward the base at the costa, is scalloped lateral to the cell, and is smoothly concave and obliquely oriented toward the base caudal to the reniform spot. The median line is absent. The subterminal line is pale and slightly irregular, forming a weak W-mark toward the outer margin on veins M3 and CuA1. It is preceded by a black-brown shade that is similar to the color of the terminal area. The orbicular spot has a black outer and mauve inner component and is filled with the ground color. The large reniform spot is bounded by a black line but is mostly filled with pale yellow-white with a mauve center. The small black claviform is difficult to see against the dark background. The hindwing is pale gray with a slight yellow tint, with much darker gray marginal band, discal spot, and postmedial line. The marginal band contains a pale line near the anal angle. The fringe is pale with a gray inner line. The head and thorax are dark brown. The male antenna is beaded.
 
@@ -24,11 +24,11 @@ This species is widely distributed throughout much of North America in moist for
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a very broad generalist feeding on all types of herbaceous vegetation, ferns, hardwood shrubs and trees, and on conifers.
 
-##### Adults
+### Adults
 
 *Euplexia benesimilis* is predominantly found during the summer in the Pacific Northwest and is probably single-brooded in our area. Two broods have been reported from other areas (Powell & Opler 2009). Our records are from mid-May to mid-July, although a few records from later in the year suggest the possibility of a partial second brood. This species is nocturnal and comes to lights.
 

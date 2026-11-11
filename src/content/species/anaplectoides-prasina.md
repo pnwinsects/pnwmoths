@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anaplectoides prasina* is a large (FW length 22–26 mm), mottled olive-green noctuid with black lines and spots and a white area distal to the reniform spot. The forewing appears long with a narrow base. The forewing is mottled gray, green to olive, and ochre, brighter green in fresh individuals than in older specimens. The lines are double with light filling, whitest in the postmedial line at the edge of the white patch located lateral to the reniform spot. Both the antemedial line and postmedial line are scalloped. The subterminal line is pale and uneven. It is preceded by a dark shade that forms black triangles at the costa and opposite the reniform spot. The terminal line is a series of black triangles between the veins. The orbicular, reniform, and claviform spots are large and black. The orbicular spot is a slightly misshapen oval, filled with the ground color and usually open toward the costa. The reniform spot is very large. It is filled with the ground color or red-brown and a faint darker gray line parallel to the black outline. The fringe is checkered light to dark olive and gray. The hindwing is yellow-gray with ill-defined gray suffusion at the base and toward the margin but sparing the terminal area in some individuals. The discal spot and veins are slightly darker gray. The fringe is yellowish off-white. The head and thorax are mottled green, light gray, black and rusty. The head and collar are usually light greenish gray with a faint transverse line toward the dorsal margin of the collar. A rusty tuft is present at the posterior margin of the dorsal thorax. The male antenna is weakly bead-like, nearly filiform.
 
 *Anaplectoides prasina* is the only large green moth in our area. The white spot between the reniform spot and postmedial line is diagnostic and serves to distinguish this species from *Anaplectoides pressus*. Most specimens of the latter species are smaller than those of *A. prasina* and have shorter and broader-appearing wings.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, light mottled reddish brown with a paler ventral area and a thin black lateral line.  It is illustrated by Lafontaine (1998).
 
@@ -26,11 +26,11 @@ This species has a Holarctic distribution. It is found across boreal North Ameri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a broad generalist feeding on both hardwoods and herbaceous vegetation.
 
-##### Adults
+### Adults
 
 This species has a fairly long flight period, lasting from June until September in the Pacific Northwest. It is a nocturnal species that comes readily to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tesagrotis atrifrons* is a brick-red, medium-sized noctuid moth (FW length 15 - 17 mm) with black transverse lines, a black frons ("face"), and a black line on the prothoracic collar. The forewing is dull brick-red with a slight gray cast, slightly lighter in the terminal area and grayer along the costa. The antemedial and postmedial lines are similar, double, black with gray filling. Both lines form dark spots at the costa but are faint elsewhere. The tips of the teeth of the scalloped postmedial line are evident as short dark lines in some specimens. The subterminal line is faintly visible in a minority of specimens. The reniform spot is evident as a faint dark smudge in some specimens; the orbicular and claviform spots are absent. The hindwing is light whitish-gray with a slight sheen. The margin, including the veins and fringe, and faint discal spot are gray. The frons of the head is black. The top of the head and the base of the collar are orange brown. The mid collar bears a thin black transverse line. The distal collar and the rest of the thorax are red-brown and match the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is most commonly collected outside the Northwest in the southern Ro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on bitterbrush (*Purshia tridentata*) in the Rosaceae.
 
-##### Adults
+### Adults
 
 Adults of *Tesagrotis atrifrons* have been found from early July to early September in our region. They are nocturnal and come to lights.
 

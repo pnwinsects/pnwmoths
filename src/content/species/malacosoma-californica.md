@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Malacosoma californicum* is a common red-brown, tan, and yellow-brown moth that flies in forests throughout our region. Males are smaller than 
 females (FW length 10–12 mm in males; 15–19 in females). Both sexes have
@@ -10,7 +10,7 @@ This species is easily identified as being a tent caterpillar by the yellowish o
 
 Populations of *M. californicum* is divided into several subspecies by Franclemont (1973). Our populations are referable to *Malacosoma californicum pluvialis* (Dyar). The type locality of *Clisiocampa pluvialis* Dyar is Pacific Northwest [Seattle, Washington].
 
-##### Larvae
+### Larvae
 
 The larva has long white lateral hair tufts. Its color is a complex mixture of blue, black, and orange with white dorsal patches.  It is illustrated by Miller and Hammond (2003).
 
@@ -30,11 +30,11 @@ This species is common to abundant in nearly all habitats throughout the Pacific
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist hardwood feeder, and has been recorded from at least 15 genera of trees and shrubs in the families Aceraceae, Rosaceae, Salicaceae, Rhamnaceae, Ericaceae, Betulaceae, and Fagaceae.  The most favored foodplant in juniper woodlands and sagebrush rangelands is bitterbrush (*Purshia tridentata*) in the Rosaceae.  Larvae live communally in silken tents.
 
-##### Adults
+### Adults
 
 Adults of *M. californicum* are single brooded and are on the wing during the summer.  They are most commonly collected in late June and July. They are nocturnal and come readily to light, although males much more commonly so than females.  They have a rapid buzzing flight and commonly bounce along the ground near lights.  The mouthparts are vestigial and the adults no not feed.
 

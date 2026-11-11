@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sphinx luscitiosa* is a sexually dimorphic large to very large sphinx moth (FW length 22–26 mm, 31–37 mm in females) that likely occurs in northeastern British Columbia and southeastern Idaho and flies during late spring and early summer. In males, the forewings are dark gray-brown and the hindwings are yellow and black. In females, the forewings are blue-gray and the hindwings are tan and black. Males have long narrow forewings that are smooth brown with dark veins and a few longitudinal streaks on the mid-forewing, darker brown at the base and costal margin, and black at the outer margin. That of the female is slightly broader, normal in shape for the genus. It is pale yellowish gray, darker brown gray on the costa and posterior margin with a black terminal area. Squiggly double subterminal lines are present near the margin, but most transverse markings are obsolete. A few short dark V-shaped or Y-shaped lines are present in the median area between the proximal branches of the cubital vein. The hindwings of both sexes have solid black marginal bands and white fringes but differ in ground color. That of the male is dark ochre-yellow with gray basal suffusion. That of the female is lighter and duller yellowish gray-tan with a diffuse gray postmedial line. The thorax and top of the head are black-brown while the sides of the head and lateral tegulae are light gray. The abdomen is yellow-brown with longitudinal black stripes. The antenna is club-like.
 
@@ -22,11 +22,11 @@ This is predominantly a boreal forest moth that is found from southern Yukon Ter
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae feed on a number of woody trees and shrubs (Tuttle 2007) but appear to favor willow (*Salix* spp., Salicaceae), poplar (*Populus* spp., Salicaceae), and birch (*Betula* spp., Betulaceae).
 
-##### Adults
+### Adults
 
 The flight period of this moth across most of its northern distribution is June and early July. A record from Utah is from mid-May. The males are diurnal and crepuscular and are rarely taken at light, while females are crepuscular and nocturnal and can be collected at lights. Tuttle (2009) cites a number of nectar sources, including honeysuckle (*Lonicera* spp.), ornamental lilac (*Syringa* ssp.), and dandelion (*Taraxacum* spp.). Ferguson (1971) notes that this species has been attracted to bright clothing.
 

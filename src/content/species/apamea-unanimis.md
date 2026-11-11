@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea unanimis* is a relatively small *Apamea* (FW length 14–16 mm) that was introduced from Eurasia and was reported recently from southwestern British Columbia. It has a yellowish, reddish, or olive-tinted gray-brown forewing with a multi-colored reniform spot. The forewing is slightly mottled medium-dark gray-brown with a slight olive tint, varying to yellow-gray to reddish brown. The costa and terminal area are slightly darker gray. A short black basal dash and a similar mark near the trailing margin of the base are present. The veins are often lighter gray to white, especially near the reniform spot. The transverse lines are gray, double filled with a light shade of the ground color. The antemedial and postmedial lines are faint, most evident as the light filling. The antemedial line is strongly arched toward the outer margin with apex at the fold. The postmedial line is nearly straight lateral to the reniform spot, bends and touches the lower spot, and is smoothly concave toward the base below the spot. The median line is gray, angled from the costa to the anterior reniform spot and then extending from the lower spot to the margin near the postmedial line. The subterminal line is pale, irregular, preceded by a gray mark on the costa and one or two gray wedges on the mid-wing. The terminal line is a series of dark gray spots. The fringe is checkered ground color and dark gray-brown. The orbicular and reniform spots are outlined in black. The orbicular spot is circular to ovoid, filled with a light shade of the ground peripherally and the ground color centrally. The reniform spot is multicolored with the ground color medially, ochre centrally, and white distally. The claviform spot is small. The hindwing is gray, with darker marginal area, large discal spot, veins, and terminal line. The hindwing fringe is two-toned gray. The head and thorax are dark gray-brown, lighter centrally, with slightly darker lines near the edges of the collar and tegulae. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is native to Eurasia and was first introduced into North America in
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva lives on beach grasses such as *Phragmites*, *Phalaris*, and *Glyceria* (Poaceae) (Mikkola et al. 2009). It ties several grasses together to produce an enclosure (Mikkola & Jalas 1979).
 
-##### Adults
+### Adults
 
 The flight season of *A. unanimis* is June and July. It is nocturnal and comes to lights
 

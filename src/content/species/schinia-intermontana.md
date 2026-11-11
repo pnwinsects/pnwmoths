@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia intermontana* is a very small (FW length 8 - 9 mm) day-flying moth with a checkerboard pattern of dark gray-green and cream on the forewing and black and white on hindwing. The cream forewing ground color is most evident on the median area where there are three roughly similar-size areas medial, posterior, and lateral to the reniform spot that are often partially fused. A small triangular patch of the same color is present at the base of the cell medial to the orbicular spot. The subterminal line is the same pale color and is uneven in width and irregular but usually evident across most of the wing. The antemedial and postmedial lines are pale spots on the costa; the position of the postmedial line is also evident as the transition from pale median area to dark subterminal area. The rest of the wing, including most of the base, the entire costa, the subterminal and terminal areas, and the filling of the spots is uniform dark gray-green. A variably-colored patch of dark gray to gray-green is present on the trailing margin in the median area. The fringe is checkered gray-green and white, most strongly on the mid-wing. The large spots, including the claviform spot, are broadly fused to the adjacent dark areas and the orbicular and claviform spots are difficult to pick out as individual pattern elements. The reniform spot is broadly kidney-shaped and is fused to the dark costa. The hindwing ground color is white to cream off-white, usually only evident as three spots located medial, posteromedial, and lateral to the large black quadrate discal spot. The margin of the entire wing is black, with a solid wide marginal band. The hindwing fringe is white with a black base. The head and thorax are dark greenish-gray. The eye size is reduced. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is most common and widespread in the Northwest. It has also been fo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 *Schinia intermontana* feeds on the flowers of a fleabane, *Erigeron linearis*, in the Asteraceae. The early stages are described in Hardwick (1996).
 
-##### Adults
+### Adults
 
 This is a strictly diurnal species that visits flowers for nectar. It is particularly fond of yellow fleabanes. It has been collected from mid-April to mid-June.
 

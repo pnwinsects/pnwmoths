@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa basalis* is a distinctive, moderately large *Euxoa* (FW length 18–19 mm) with bright red-brown forewings with a light gray basal area. The ground color is even bright red-brown, sometimes tinted orange or gray, contrasting tan or light gray basal to the antemedial line and darker in the cell. The terminal area is darker purplish gray. Some specimens have tan suffusion in some of the interspaces in the subterminal area, which produces a striated appearance. The basal and antemedial lines are gray-brown, partially double-filled with the color of the forewing base, strongest on the costa, increasingly irregular but fading toward the posterior margin. The median line is dark gray, faint. The postmedial line is similar to the antemedial line on the costa, barely evident as a scalloped oblique dark line below the cell. The subterminal line is ochre, variably absent, thin, or a series of diffuse spots, slightly irregular. It is preceded by a faintly darker shade of the ground color. The fringe is similar in color to the terminal area without a contrasting terminal line. The orbicular and reniform spots are partially outlined in black and lined by gray-tan. The orbicular spot is round or ovoid, complete or open toward the costa, filled with slightly darker gray or tan. The reniform spot is kidney-shaped, ill-defined at the lower end, filled with darker filling than the orbicular spot and dark gray at the lower end. The claviform spot is small, dark gray or lacking an outline, filled with gray-tan. The hindwing is light gray with darker gray shading near the margin, dark veins, discal spot, and terminal line. The hindwing fringe is light gray with a two-toned ochre and gray base. The head and thorax are dark red-brown, usually with a black transverse line on the collar and a small patch of orange scales at the costal attachment of the forewing. A frontal tubercle is present. The male antenna is weakly bipectinate. *Euxoa basalis* is a member of the large subgenus *Euxoa*.
 
@@ -35,11 +35,11 @@ This species is found in the Great Plains and Rocky Mountains with an isolated p
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults fly during summer and have been collected from early July to early September. It is nocturnal and comes to lights.
 

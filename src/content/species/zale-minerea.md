@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Zale minerea* is a variable brown *Zale* that resembles a small *Zale lunata*. It is slightly smaller (FW length 19 -22 mm) with scalloped wing margins. The ground color is one of several shades of brown, usually a rich warm shade, but occasional specimens are dull brown or have all but the costa in the central wing yellow- to orange-brown. All forms have a darker costa and multiple wavy transverse lines. A form with white and gray, appearing gray-green, or gray scales abutting the antemedial line and forming two patches in the terminal area is most common in the Northwest, but some individuals lack all such color. The antemedial line runs obliquely toward the base from the costa and has a notch at the cubital vein. The postmedial and subterminal lines are very close to each other and nearly parallel. Both form a rounded lateral projection adjacent to the lower end of the cell. The orbicular spot is a small brown dot. The reniform spot is an open crescent filled with the ground color, surrounded by a few white scales in specimens with large amounts of white elsewhere on the forewing. The hindwing is similar in color and pattern to the forewing, with basal and marginal white or gray patches in individuals with such markings on the forewing. The subterminal line is irregular and is slightly concave toward the wing base over most of its length. The brown thorax is deeply tufted posteriorly. The antenna is simple, finely ciliate in males.
 
@@ -22,11 +22,11 @@ This species is widespread in North America. It occurs widely in the East from N
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a wide variety of hardwood trees and shrubs including Betulaceae, Rosaceae, Ericaceae, Aceraceae, and Salicaceae.
 
-##### Adults
+### Adults
 
 This species is single brooded in the Pacific Northwest and is on the wing in spring and early summer. Our records span from mid April to August, with most specimens from May. It is nocturnal and comes to lights.
 

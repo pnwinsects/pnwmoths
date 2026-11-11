@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta brunnea* is a seldom-collected, medium-sized, alpine noctuid (FW length 13 - 16 mm) that occurs in northeastern Washington and eastern British Columbia in our region. It has olive-brown forewings with limited dark markings and a ventral hindwing that is pale brown with a gray discal spot, postmedial line, and thin marginal band. The forewing varies slightly from dark olive gray to olive with a scattered yellow scales, appearing brown. The forewing apex is slightly pointed. The antemedial and postmedial lines are similar and faintly darker gray than the ground color, with variable ochre scales on the side outside of the median area. A faint, diffuse median line is present in most specimens. The subterminal line is a series of indistinct ochre dots, usually preceded by a faint shade or series of dark spots between the veins. The fringe is very weakly checkered with olive and gray. The orbicular and reniform spots are similar to the lines. The orbicular spot is a small oval, usually filled with lighter ochre. The reniform spot is usually filled with darker scales and is very indistinct. The claviform spot is absent. The hindwing is dark brown-gray with faintly darker gray discal spot and postmedial line. The ventral hindwing is pale whitish tan with a powdery look due to scattered brown scales. It is marked with triangular or chevron-shaped gray discal spot and a diffuse postmedial line that is as prominent as the thin marginal band. The hindwing fringe is pale ochre with an inner gray line on both sides. The head and thorax are uniform olive-gray. The eye is covered with fine hairs, and the male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species also occurs in the Rocky Mountains of Alberta.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on alpine herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The adults are single-brooded and fly during the summer. They have been collected in late June and July in our region. This species is predominantly nocturnal and comes readily to lights, but occasional specimens fly during the day.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lithophane itata* is a late fall and early spring-flying streaky gray medium-sized moth (FW length 17 mm) that is found in association with Rocky Mountain juniper (*Juniperus scopulorum*) in British Columbia. The forewing is lead-gray with a streaky pattern due to slightly darker veins and irregular faint transverse lines. The posterior margin is slightly darker. The terminal area is darker gray, separated into two triangular patches where the subterminal area reaches the margin on the mid-wing. A thin black basal dash is present. A black bar-like dash in the fold in the median area is irregular because it appears to be partially comprised of a portion of the claviform spot. The gray median line is evident near the costa. The orbicular spot is obscure. The reniform spot is very faint except for its black curved posterior margin, and is filled with a few brown scales and a gray spot at the lower end. The hindwing and fringe are even dark brownish gray, with a slightly darker discal spot. The head and thorax are gray with a sculpted appearance due to raised ridges and a strong median tuft. The male antenna is beaded.
 
@@ -22,11 +22,11 @@ The distribution of this species is poorly known because of the similarity of ma
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been reared from Rocky Mountain juniper (*J. scopulorum*) in the Cupressaceae.
 
-##### Adults
+### Adults
 
 Adults emerge in the fall and overwinter prior to flying again during the spring. Most wild collected specimens are from the spring in May and early June. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sphinx poecila* is a very large *Sphinx* (FW length 32–40 mm) that is reported to enter our range in eastern British Columbia. The forewing is long and pointed, typical for the family, and the hindwing is smaller and oval. The forewing is mottled light to medium-dark slightly brownish gray, darkest gray at the anal angle, apex, and outer margin. Several of the black dashes between veins are sideways V-shaped or form tight loops and most of the veins are finely black giving it a streaked appearance. The fringe is checkered brown-gray and off-white. The discal spot is small, white. The hindwing is obliquely banded with light tan-gray and dark brownish gray with a weakly checkered white fringe. The thorax is black-brown with light gray at the lateral tegulae and light gray and black weak tufts at the base of the abdomen. The dorsal abdomen is banded brown gray and black, and the sides are banded tan and black. The antenna is club-shaped.
 
@@ -22,7 +22,7 @@ Southeastern British Columbia is included in the range shown for this species by
 
 ## Life History
 
-##### Adults
+### Adults
 
 Adults are reported as single brooded by Tuttle (2007), with a flight from late May to July. They are nocturnal and come to light and also nectar at flowers.
 

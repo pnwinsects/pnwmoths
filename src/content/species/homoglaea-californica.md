@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Homoglaea californica* is a mousy gray-brown moth (FW length 15–16 mm) that flies in late fall and early spring in the vicinity of cottonwoods. Its forewing is short and stout and has a pattern of light spots and lines. It is nearly uniform dull dark gray-brown in most Pacific Northwest populations, although a variety of lighter forms are known from further south in California. Some of these have gray suffusion on the outer wing, darkly suffused transverse lines with pale filling, and pale veins across the median area. The lines are dark brown with light brown filling, most evident as the filling against the dark background. The antemedial line is moderately zigzagged, angled toward the outer margin from the costa with a bulge toward the outer margin below 1A+2A. The median line is dark brown, diffuse and usually entirely evident. The postmedial line is slightly scalloped, drawn sharply toward the base on the costa, oriented transverse to the axis of the wing from below the cost to M3, and then angled toward the base to the posterior margin. The subterminal line is light, similar to the filling of the other lines, and slightly irregular. It is preceded by a slightly darker brown shade, rarely ill-defined black spots. The terminal line is dark brown, rarely larger black spots. The fringe is concolorous. The orbicular and reniform spots are pale brown filled with the ground color. The orbicular spot is an upright oval. The reniform spot is a broad upright oval or weak hourglass-shape. No claviform spot is present. The hindwing is dark brownish gray with a very faint discal spot and a pale fringe. The head and body are dark gray-brown. The male antenna is broadly bipectinate.
 
@@ -22,11 +22,11 @@ The range of this moth is restricted to California outside of the Northwest. It 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on cottonwoods (*Populus* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 This moth is one of the "winter moths" that emerge in late fall and overwinter as adults. It has been collected in October but is most commonly encountered in the spring from February until mid-May. It is nocturnal and comes to lights.
 

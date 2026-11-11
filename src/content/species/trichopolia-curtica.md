@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichopolia curtica* is a small, abundant, red-brown to gray-brown, fall-flying moth (FW length 12–14 mm) that is found east of the Cascades. It has a bipectinate male antenna and a forewing with a gray spot in the lower reniform spot and an even, light, subterminal line and preceding shade. The forewing is elongate and has a slightly pointed apex. The color is variable, most commonly gray-brown with a reddish or dark orange cast, but occasionally dark gray-brown to gray-tan without a warm tint. The costa and terminal area are usually slightly darker, and there is an even dark shade preceding the subterminal line that is similar in color as these dark areas. The basal and antemedial lines are variable, varying from absent to red-brown to gray, filled with the ground color or slightly lighter shade and sometimes evident only as the light filling. When distinct, the antemedial line is slightly excurved and angled from the costa toward the outer margin. The median line is gray to red-brown, weak, even as a slanted line anterior to the reniform spot. The postmedial line is faint but usually visible, dentate with small dark spots on the teeth, evenly curved around the reniform spot and angled toward the base below the spot. The subterminal line is pale, often slightly yellow, slightly offset below the apex and gently curved toward the outer margin elsewhere, preceded by an even shade as described above or broken into spots that are even in strength across most of the wing. The terminal line is a very thin pale line with tiny spots between the veins. The fringe is slightly darker and grayer than the rest of the wing. The orbicular spot is absent or a very faint light circle. The reniform spot is weakly hourglass-shaped, outlined in a thin faint pale line and filled with slightly darker shade of the ground color, more reddish in red-brown forms, and gray in the lower half. No claviform spot is present. The hindwing is pale tan-gray, darker gray toward the outer margin, with gray veins, weak discal spot, and incomplete terminal line. The head and thorax match the forewing color with weak tufts behind the collar. The eye is covered with fine hairs. The male antenna is bipectinate.
 
@@ -24,11 +24,11 @@ The range of *T. curtica* includes most of California and the Southwest outside 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist, feeding on many kinds of herbaceous vegetation in such families as the Asteraceae, Scrophulariaceae, Rosaceae, and also rabbitbrush (*Ericameria* spp.) in the Asteraceae.
 
-##### Adults
+### Adults
 
 Adults fly during the fall, sometimes as early as late July but typically from late August to late September. They are often observed seeking nectar on the flowers of rabbit brush (*Ericameria* spp.) in the evening. They also fly at night and are common at lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Panthea gigantea* is a large (FW length 22 - 32 mm; largest and most broad-winged in females), powdery charcoal gray noctuid that is found in ponderosa pine forest during the summer. The forewing has black transverse lines, and its ground color is nearly even hoary dark gray with a mixture of light and dark scales. The antemedial, median, and postmedian lines are single, black. The antemedial line is nearly straight across the wing. The median line is slightly zig-zagged, and the postmedial line is more sinuous and is followed by a light whitish line. The jagged irregular postmedial line is whitish, preceded by a black shade. The fringe is checkered with medium gray and black. The reniform spot is an ill-defined black smudge. The orbicular and claviform spots are absent. The hindwing is slightly translucent whitish gray in males with darker discal spot, patchy postmedial line, patchy submarginal band, dark gray terminal line, and checkered white and gray fringe; that of the female is light gray with darker gray ill-defined lines. The head and thorax are hoary dark gray. The abdomen is nearly black. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ This species is widespread in western North America. It occurs from British Colu
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding primarily on ponderosa pine (*Pinus* ponderosa) in the Pinaceae.
 
-##### Adults
+### Adults
 
 Adults have a single brood and fly during the spring and summer. They have been collected from April to September in our region, with most records from early May to early July. They are nocturnal and come to lights.
 

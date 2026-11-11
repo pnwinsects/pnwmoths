@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lacinipolia cuneata* is a common moth in the western part of the Pacific Northwest in late spring and early summer. It is small to medium-sized (FW length 13 - 15 mm) with a mottled gray forewing that has a yellow spot at the base of a black line above the anal angle. The outer margin of the forewing is scalloped. The ground color is mottled medium-gray with a slight brown or olive cast, lightest and slightly bluish-gray in most of the subterminal area. The median area except the costa is darker gray or brown-gray, sometimes with red-brown in the cell. The basal posterior margin is commonly sprinkled with wine-red scales, and sometimes with yellow. The veins are covered with gray and black scales, appearing pale basal to the postmedial line and dark distal to it, often with a row of black lines in the subterminal area near the postmedial line. A black, basal dash is present. A black line or wedge is present in the terminal area above the anal angle, preceded by a small olive or yellow spot. The rest of the terminal area is mottled gray. The lines are dark gray to black, double, and filled with gray, well-defined on the costa. The basal and antemedial lines are waved, with the latter line excurved toward the outer margin. The median line is dark gray, diffuse. The postmedial line is weakly scalloped, drawn sharply toward the base on the costa, slanted toward the base lateral to the reniform spot, bent more sharply oblique near the lower reniform spot which it touches, then turned perpendicular to the posterior margin below the spot. The subterminal line is pale gray, irregular, and indistinct, except for the olive or yellow spot above the posterior margin. A series of dark gray triangles forms the terminal line. The fringe is lightly checkered gray. The orbicular and reniform spots are partially outlined in dark gray to black, greatest medially and laterally, and filled with pale gray peripherally and darker gray centrally. The orbicular spot is a tilted oval, closest to the base anteriorly, and the reniform spot is asymmetrically kidney-shaped with an expanded posterior end. The claviform spot is black, darkest at the apex, variable in size, and often reaching the postmedial line. The hindwing is medium-gray with slightly darker margin, veins, and discal spot. The hindwing fringe is gray with a thin, yellow and gray base. The head and thorax are hoary gray with a black transverse line near the edge of the collar. The tegulae are silver-gray with black over the wings and thinner, black medial edges. The thorax has a slight median crest. The eye is covered in fine hairs. The male antenna is weakly bead-like.
 
@@ -22,11 +22,11 @@ This species is restricted to the West Coast of North America. It is found south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to feed more on hardwood shrubs rather than on herbaceous vegetation, such as *Rhododendron* spp. in the Ericaceae, but it may feed on both shrubs and herbs.
 
-##### Adults
+### Adults
 
 *Lacinipolia cuneata* flies during the spring and early summer. It usually appears in May, but has been collected as early as late April. The flight lasts until late July in some cases, although the peak is in May and June. It is nocturnal and comes to lights.
 

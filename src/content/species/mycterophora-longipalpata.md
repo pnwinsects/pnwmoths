@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mycterophora longipalpata* is our most widespread *Mycterophora* species. Like the other members of the genus, it is a small species (FW length 9 - 13 mm) with broad wings and bipectinate male antennae, resembling an inchworm moth (family Geometridae) more than other erebid or noctuid moths (families Erebidae and Noctuidae, respectively). The forewings and hindwings are similarly colored and patterned. The ground color is dull brownish gray, with faint transverse banding by the ordinary transverse lines. The apical third of the forewing is slightly darker than the ground color. The postmedial lines are dark gray, thin and usually well-defined. The forewing postmedial line is weakly scalloped, broadly excurved around the reniform spot and then oblique toward the base at the posterior margin. The hindwing postmedial line is smoother, also excurved around the discal spot and slightly offset toward the base posterior to the spot. The forewing reniform spot and hindwing discal spot are similar dark gray bars, that on the hindwing slightly stronger. The palpi are long. The male antenna is broadly bipectinate, while that of the female is simple.
 
@@ -24,11 +24,11 @@ This species is found in the American West south of our region. There are no rec
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 This species is on the wing in late summer and early fall. Records are from early July to mid September. It is nocturnal and comes to light.
 

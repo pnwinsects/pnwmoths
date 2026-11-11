@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Panthea virginarius* is a common large noctuid moth (FW length 20 - 24 mm in males; 24 - 28 mm in females) that flies in forests during the spring and summer. Although the ground color of this moth is a mixture of white and black scales, the pattern on its wings varies geographically: West of the Cascades, *P. virginarius* is white and powdery gray with black transverse lines. Further toward the east slope of the Cascades, it is a darker, more grizzled, gray with black transverse lines. The lighter western populations are darkest gray posterior to the cell, along the trailing margin in the median area, preceding the postmedial line, and at the outer margin. The antemedial, median, and postmedial lines are black. The antemedial line is uneven, usually zig-zag on the veins. The median line is thick and nearly straight to slightly uneven. The postmedial line is much more irregular, scalloped on the veins, and oriented straight across the wing from the costal margin to vein CuA1, then concave toward the base to the trailing margin without touching the median line. The white subterminal line is jagged. The fringe is checkered with white or light gray and black. The reniform spot is black, weakly kidney-shaped with a paler center or a black chevron. The orbicular spot is usually absent but is evident rarely as a small black dot or line. The hindwing is white in pale populations and pale gray to white in darker ones, with diffuse gray discal spot, a thinner and more faint postmedial line, a thick irregular submarginal band, a thin terminal line, and a checkered white and gray fringe. Specimens with heavily suffused hindwings usually have a pale white area at the margin of the wing. The head and thorax are white or gray and black, with the most prominent markings consisting of a black line at the tip of the collar and transverse barring across the distal tegulae. The male antenna is bipectinate. A few melanic specimens are olive brown with the normal black pattern.
 
@@ -8,7 +8,7 @@ The pale western populations of this species cannot be confused with any other m
 
 The western pale populations and dark eastern populations were recognized as two species, *Panthea portlandia* and *Panthea virginarius* respectively, prior to the revision of the genus by Anweiler in 2009. He recommends against the use of subspecies because of a broad zone of transition between these forms. The name *portlandia* (Grote) is available for those who wish to recognize as a subspecies the populations from the west slope of the Cascade Mountains to the Pacific Coast.
 
-##### Larvae
+### Larvae
 
 Larva is black with small red scoli or tubercles covered with tufts of light brown hairs.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This species occurs in western Alberta and south to western Wyoming and central 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on conifers (Pinaceae), and particularly favors Douglas fir (*Pseudotsuga menziesii*) and ponderosa pine (*Pinus ponderosa*).
 
-##### Adults
+### Adults
 
 *Panthea virginarius* has a long flight season and has been collected from early April to mid-September in the Pacific Northwest. Most records are from mid-May through August, with a peak in June and July. It is nocturnal and comes readily to lights.
 

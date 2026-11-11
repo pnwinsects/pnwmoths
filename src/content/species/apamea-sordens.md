@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea sordens* is a medium-sized, clay-colored moth (FW length 15–20 mm) that flies in the northern and eastern parts of the Northwest during late spring and summer. It can be found with or without a rusty red-brown median area, and has a forked black basal dash and large pale-filled forewing spots. The forewing margin is slightly scalloped. The color is pale tan-gray with variable rusty red-brown that is most consistently present in the median area and slight gray mottling. The terminal area is similar to the rest of the wing, slightly lighter blue-gray at the apex in some specimens. A black basal dash appear to fork distally in most specimens. The lines are dark gray or black bordered by a pale shade of the ground color. The basal line is straight or slightly curved from the costa to the dash. The antemedial line is excurved and smooth to wavy, touching the orbicular spot. The medial line is gray or red-brown, diffuse but evident. The postmedial line is weakly scalloped to toothed, touches the anterior and posterior reniform spot, is nearly straight lateral to the spot and slanted toward the base below the spot. The subterminal line is pale, most consistent on the anterior wing, undulating with a weak W-mark on the mid-wing that does not reach the outer margin. A slight preceding gray or red-brown shade is usually evident. Black triangles between veins constitutes the terminal line. The fringe is slightly reddish gray. The orbicular and reniform spots are partially outlined in black, moderately large, and filled with the ground color. The former is round, often open anteriorly. The latter is moderately large, kidney-shaped, and often has a whitish inner component that is strongest laterally. The claviform spot is dark gray to black, small. The hindwing is pale tan-gray, gradually darker gray toward the margin, with gray discal spot, veins, faint postmedial line, and dark terminal line. The hindwing fringe is off-white with variable amounts of gray at the base. The head and thorax are gray-tan to rusty. Weak tufts are present on several abdominal segments. The male antenna is beaded.
 
@@ -22,11 +22,11 @@ In the Pacific Northwest, this species occurs throughout most of British Columbi
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on many types of grasses (Poaceae), including many cultivated grain crops.
 
-##### Adults
+### Adults
 
 Adults of *A. sordens* fly most commonly from early May through July, rarely later in the summer. They are nocturnal and come to lights.
 

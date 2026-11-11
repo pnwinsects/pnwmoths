@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa aberrans* is a uniform, powdery brown, small to medium-sized *Euxoa* (FW length 14–18 mm) that flies in dry forests during late summer. Its forewing has a dusting of light gray scales, relatively inconspicuous lines, and pale-rimmed orbicular and reniform spots. The forewing is warm wood brown with a powdery appearance due to a suffusion of light gray scales, slightly hoary gray along the costa. The wing distal wing is often darker gray, including the terminal area and subterminal shade. The lines are gray or black, double filled with the ground color or tan, variable in darkness from absent except as spots on the costa to strong across the wing. The antemedial line is irregular, toothed basad on the vines, angled slightly toward the outer margin. The median line is dark gray, diffuse, faint or absent. The postmedial line is usually single, thin, sharply and evenly toothed on the veins, drawn basad on the costa, bluntly curved around the reniform spots and sometimes weakly concave opposite the mid-cell, and nearly straight or slightly concave at a 45° angle toward the base below the level of the cell. The subterminal line is luteous, thin or broken into small spots, offset slightly below the apex and slightly irregular across the rest of the forewing. It is preceded by a gray shade, darkest on the costa and interrupted at the level of the anterior cell.  The terminal line is dark, thin or broken into spots. The orbicular and reniform spots are outlined in black with whitish gray to light orange lining and filling of the ground color. The orbicular spot is round or a small upright oval, small to moderate-sized. The reniform spot is kidney-shaped. The claviform spot is gray to black, usually small and inconspicuous. The hindwing is tan-gray with darker gray margin, veins, discal spot, and terminal line. Its fringe is white with a gray base. The head and thorax are powdery brown to red-brown. A frontal tubercle is present. The male antenna is biserrate. This species is placed in the subgenus *Orosagrotis*.
 
@@ -35,11 +35,11 @@ This is a relatively uncommon species that is found in coniferous forests in the
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on general herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 Adults fly mostly during the summer, but the flight season extends to early fall. Specimens from the Pacific Northwest have been collected as early as late June and as late as mid-September. Most records are from late July and early August. This species is nocturnal and comes to lights.
 

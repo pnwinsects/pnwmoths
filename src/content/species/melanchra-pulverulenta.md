@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Melanchra pulverulenta* is a dark olive-gray to dull black medium-sized moth (FW length 14 - 18 mm) that flies in wet forests during the summer. The forewing is mottled and powdery medium-dark to dark brownish-gray with a slight olive cast, lacking lighter or darker areas that are not associated with the lines or spots. The basal, antemedial, and postmedial lines are black, single or double, and filled with the ground color. They are inconspicuous against the darker background but add to the mottled appearance of the wing, as does the dark gray median line. The antemedial line is slightly irregular and slightly angled from medial at the costa to lateral posteriorly. The postmedial line is scalloped between the veins and excurved toward the outer margin around the reniform spot. The subterminal line is white to slightly luteous white, irregular and incomplete, strongest near the trailing margin where it forms a white spot. The fringe is concolorous with the terminal area. The orbicular and reniform spots are thin and black, moderately large, and filled with the ground color without pale scales. The orbicular spot is round to slightly oval and the reniform spot is broadly kidney-shaped. The claviform spot is black, usually thicker than the other spots, and relatively small. The hindwing is dull medium gray with darker gray marginal band, discal spot, postmedial line, and veins. Its fringe is lighter gray. The head and thorax are the even dark olive gray. The eye is covered in fine hairs. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is widely distributed across boreal North America. It occurs from A
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a very broad generalist feeding on herbs, hardwoods, and conifers (Pinaceae).  It may prefer conifers, since there are many more feeding records from conifers including larch (*Larix* spp.), pines (*Pinus* spp.), spruces (*Picea* spp.), and Douglas fir (*Pseudotsuga menziesii*).
 
-##### Adults
+### Adults
 
 This species is on the wing during the summer, usually relatively early in the year. Records from the Pacific Northwest range are from June and July.
 

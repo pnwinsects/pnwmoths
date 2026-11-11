@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis nevadensis* is a widespread, common, late summer and fall-flying *Apantesis* with pale pink to red hindwings. It is medium-sized (FW length 15–18 mm). The forewing appears black with off - white transverse banding - all of the pale transverse marks are present and only the cubital vein is pale. The hindwing color varies regionally. It is red in populations from mesic mountain and northern locations and paler in those from desert environments. It is variably marked with black spots and a marginal band, with more spots in populations from the north and west part of the range (see below). The head and thorax are variable, either black or striped black and white like most other *Apantesis* species, while the abdomen is slightly darker than the hindwing ground color striped with black.
 
@@ -8,7 +8,7 @@ This species is most similar to *Apantesis eureka* found in Utah and southern Id
 
 Populations of *A. nevadensis* are divided into weak subspecies based on color and hindwing markings, with intergradation across our region. Populations from the British Columbia and the Washington Cascades are referable to *A. nevadensis superba*, those from Alberta and the Peace River are *A. nevadensis vivida*, and pale pink hindwing populations from the southern portion of our area are to the nominate subspecies *A. n. nevadensis*.
 
-##### Larvae
+### Larvae
 
 Larva is densely covered with long black hairs, and has a pale yellow middorsal line.
 
@@ -28,11 +28,11 @@ This species is widely distributed in the Pacific Northwest. In British Columbia
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on general herbaceous vegetation.  Wild larvae were found feeding on both lupines (*Lupinus* spp.) in the Fabaceae and desert pansy (*Viola beckwithii*) in the Violaceae at Frenchglen in southeastern Oregon (P. Hammond observations).
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in late summer and fall. Males are nocturnal and come readily to light, but females are never collected in light traps.
 

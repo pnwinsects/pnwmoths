@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mniotype pallescens* is a medium-sized moth (FW length 16–18 mm) that flies in mountain forests during the summer. It has a dark gray forewing with whitish gray reniform spot and subterminal area, black basal and median dashes, and whitish hindwings. The forewing has a slightly elongated apex and slightly scalloped outer margin. It is powdery dark gray with a slight brown tint, darker in the median and terminal areas. The subterminal area is palest gray, whitish near the posterior margin. A short black basal dash is present and there is a diffuse black bar across the median area in the fold. The basal and antemedial lines are dark gray and black filled with the ground color. The antemedial line is excurved, focally pulled toward the base on 1A+2A. The median line is black, diffuse, and faint. The postmedial line is black, strongly toothed on the veins, drawn toward the base on the costa, narrowly curved around the anterior cell, and then strongly angled toward the base below the reniform spot and curved toward the posterior margin through the fold so that the median area is much wider anteriorly than posteriorly. The subterminal line is white, diffuse, irregular with an offset below the apex and with a moderate W-mark to the margin on M3 and CuA1. It is preceded by a series of powdery to sharply-defined long black chevrons surrounded by a gray shade near the W-mark. The terminal line is a series of black triangles. The fringe is checkered dark gray. All three spots are outlined by thin black lines. The orbicular spot is moderate-sized, round, filled with medium gray and a punctate ocellus. The reniform spot is moderate-sized, broadly kidney-shaped, outlined by black medially and faint gray elsewhere, filled with medium gray medially and lighter gray centrally and laterally. The claviform spot is moderately large, fused to the median bar. The hindwing is light whitish gray with dark gray markings: veins and terminal line, dark gray small discal spot, and diffuse postmedial line and submarginal band. The hindwing fringe is white with a gray base. The head and thorax are dark gray with thin dark lines near the edges of the collar and tegulae. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ This species was described from Arizona. It has also been collected in central U
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on hardwoods based upon closely related species.
 
-##### Adults
+### Adults
 
 This species flies during the summer, usually during July. It is nocturnal and comes to lights.
 

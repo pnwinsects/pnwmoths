@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Orthosia revicta* is a spring-flying medium-sized moth (FW length 16 - 19 mm) that occurs in forests throughout our region. It has a light to medium-dark blue gray and red-brown forewing with light yellow and red-brown lines and spots. The ground color is even blue-gray, lighter and stronger blue in the western part of our region and duskier and plainer gray further east. The forewing is variably covered by bright red-brown, occasionally complete but most often leaving some areas on the medial half, the terminal area, and usually the subterminal area with the ground color. The veins area often blue-gray on the distal wing. The brown suffusion is less red and more dark gray-brown in specimens from the eastern part of the Northwest. The basal, antemedial, and postmedial lines are double, red-brown, and filled with the ground color. The antemedial line is irregular and the postmedial line is mildly to moderately toothed and sometimes followed by dots on the veins. A red-brown to gray median line is present in most specimens and is even in darkness across the wing. The subterminal line is pale yellow and is followed laterally by dark red-brown except near the costa. The margin is moderately scalloped with a series of gray to red-brown dots between the veins. The orbicular and reniform spots are similar with outer red-brown and inner light yellow lines and variable filling of the ground color, gray, or red-brown. The claviform spot is red-brown with darker anterior and fainter posterior portions. The hindwing is light to medium gray with a faint pink tint, darker in eastern than in western populations. It is darker toward the margin and has a dark discal spot and faintly darker veins. The fringe is whitish gray with a slight rosy tint. The head and thorax are blue-gray, darker gray with a red cast in heavily red-brown specimens and in eastern populations, without strong ridges or tufts. The eye is covered with fine hairs. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species occurs across northern North America to the East Coast. It occurs f
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods including alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, cherries (*Prunus* spp.) in the Rosaceae, and willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 This species flies in the early spring like most other *Orthosia* species and has been collected in April and May in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia walsinghami* is a common, small (FW length 10 - 13 mm), tan moth that flies in dry forests and steppe during late summer and fall. It has darker orange-brown basal and subterminal areas separated by black and white lines. The ground color is slightly mottled light tan, similar in median and terminal areas. The wing base medial to the antemedial line and the subterminal area are dark orange-brown to brown, darkest near the median area. The antemedial and postmedial lines are similar, white with ill-defined dark brown or black on the side outside the median area. The antemedian line is smooth and strongly excurved, nearly semicircular, toward the outer margin with apex on the mid-wing. The postmedial line is moderately scalloped, S-shaped with a bluntly excurved segment around the end of the cell and concave toward the base on the posterior half of the wing, meeting the trailing margin perpendicularly. The median line is slightly darker than the adjacent median area, faint and diffuse. The subterminal line is pale yellow-brown, mildly irregular and drawn toward the wing base opposite the cell and near the trailing margin. The terminal line is variable, absent to a series of gray spots. The fringe is pale tan, even to moderately checkered with gray. The reniform spot is variable, absent to as dark as the adjacent subterminal area, an ill-defined smudge with a lighter center. The other spots are absent. The hindwing is pale yellow-tan with light gray-tan discal spot and submarginal band. The hindwing fringe is white with a pale tan base. The head and thorax are even light tan. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of *S. walshinghami* is predominantly west of the Rocky Mountains in C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on rabbitbrush (*Ericameria* spp.) in the Asteraceae.
 
-##### Adults
+### Adults
 
 The flight period of this moth is late summer and fall. It has been collected from early August through September in our region. It is nocturnal and comes to lights, although it can often be found visiting flowers of rabbitbrush (*Ericameria* spp.) in late afternoon and evening.
 

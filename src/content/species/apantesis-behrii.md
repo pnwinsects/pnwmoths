@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis behrii* is an attractive fall-flying tiger moth from southwestern Oregon. It is a medium-sized moth (FW length 15–17 mm), slightly larger than *A. nevadensis*. The light markings on the forewing are light ochre yellow and the basal and antemedial lines are relatively wide, especially compared to the transverse lines on the distal forewing. The hindwing is orange-red with reduced size and number of spots and a thin marginal band. The antennae, head, and dorsal thorax are black. The abdomen matches the hindwings with several longitudinal black stripes typical of the genus.
 
@@ -22,11 +22,11 @@ This species is found in California south of our region where it has a patchy di
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Larvae of this species have been collected on *Lotus* (Fabaceae) and *Amsinckia* (Boraginaceae) in Los Angeles County, California (Schmidt 2009). It is probably a general feeder on forbs and grasses like many species in the genus.
 
-##### Adults
+### Adults
 
 Pacific Northwest populations of this species have been collected in September. Males are nocturnal and come to light while females are diurnal and are not captured in light traps (Schmidt 2009).
 

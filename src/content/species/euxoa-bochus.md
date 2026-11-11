@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa bochus* is a distinctive, small to medium size moth (FW length 14–17mm) that flies east of the Cascade and Coast Range summits during summer and early fall. It has a finely speckled, light violet-gray forewing with a dark red-brown costa. In addition to these features of the forewing, the terminal area is dark gray-brown. The lines are dark gray, usually absent or incomplete. The median line is dark red-brown and the postmedial line is comprised of a series of black spots. The median line is a series of smaller spots. The fringe is gray with a tan base. The orbicular and claviform spots are absent, and the reniform spot is a blackish gray kidney-shaped spot. The hindwing is nearly white with a faint margin shade in females, and small dark discal spot, dots on the veins along the course of the postmedial line, and dark terminal line. The hindwing fringe is white. The head and thorax are gray with a very thick velvety bar across the collar. A frontal tubercle is present. The male antenna is weakly biserate. *Euxoa bochus* is the only member of the subgenus *Crassivesica*, considered to be a primitive lineage of the genus *Euxoa* (Lafontaine 2004).
 
@@ -19,7 +19,7 @@ markings can vary significantly in some of the species, the shape of the
 sexes) are more constant. The habitat and flight period are also 
 important in helping to narrow the possibilities.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, yellow-green with a pale dorsal band and darker brown subdorsal and lateral lines.  It is illustrated by Lafontaine (2004).
 
@@ -39,11 +39,11 @@ This species occurs from south-central British Columbia and south-western Saskat
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist feeding on various herbaceous vegetation in such families as Fabaceae and Asteraceae, but may also feed on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults fly in late summer and fall. Pacific Northwest records are from late summer through September. It is nocturnal and comes to lights.
 

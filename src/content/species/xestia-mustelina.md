@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia mustelina* is a fairly small *Xestia* species (FW length 14 - 16 mm) that flies in forests throughout our area in summer and early fall. It has mottled, steel gray forewings with black-rimmed orbicular and reniform spots near to each other in a darker brown median area. The ground color is slightly powdery and mottled steel gray, darkest gray to slightly reddish dark brown in the cell and adjacent median area. The distal wing is variably patterned, always with a dark gray to red-brown mark medial to the subterminal line near the apex, and usually with a number of black chevrons preceding the line further posteriorly. The terminal area is variable, often slightly darker gray than the ground color. The margin is lightly scalloped. The basal, antemedial, and postmedial lines are double, light to dark gray, and filled with slightly lighter gray than the ground. The antemedial line is nearly straight except a short laterally convex bend at the trailing margin. The postmedial line has a slightly scalloped medial component, is smoothly convex toward the outer margin near the reniform spot, and then is slightly oblique toward the base to the trailing margin. The median line is usually evident as a faint gray shade. The subterminal line is pale, sometimes complete, but usually broken into a series of spots. The orbicular and reniform spots are black and filled with the gray ground. These spots are close to each other and are connected by a black line across the posterior cell. The claviform spot is small and black. The hindwing is light brownish gray, slightly darker toward the margin, with a darker gray discal spot and veins. Its lighter fringe often has a rosy hue. The head and collar are red-brown, with a black tip to the collar. The remainder of the thorax is steel gray with black margins to the tegulae. The ventral thorax and abdomen are light gray with a slight rose pink tint. The male antenna is filiform.
 
@@ -10,7 +10,7 @@ This species is most similar to gray specimens of *Anaplectoides pressus* but ca
 
 The type locality of *Aplectoides occidens* Hampson, a synonym of this species, is Sicamous, British Columbia.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, mottled reddish brown with white dorsal spots and a broad white lateral band.  It is illustrated by Miller & Hammond (2003).
 
@@ -30,11 +30,11 @@ The range of this species is limited outside of the Northwest. It ranges south i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a very broad generalist feeding on both hardwoods and conifers, including such families as Ericaceae, Myricaceae, and Pinaceae.  It is particularly common on conifers such as Douglas fir (*Pseudotsuga menziesii*), western hemlock (*Tsuga heterophylla*), and true firs (*Abies* spp.).
 
-##### Adults
+### Adults
 
 *Xestia mustelina* is on the wing from mid-July through September. It is nocturnal and comes to lights.
 

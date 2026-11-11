@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa pallipennis* is a fall-flying, small to medium sized *Euxoa* (FW length 12–16 mm) that flies in sage steppe. It has a very light powdery tan-gray forewing with small black-rimmed orbicular and reniform spots, often with black in the cell, and nearly pure white hindwings. The forewing color appears finely powdered light clay or sand-colored with a slight brassy sheen under light. The costa in the subterminal area and the terminal area are gray, usually darkest before the subterminal line on the costa and opposite the cell in the terminal area. The cell is dark gray to black in about half of all specimens. The basal and antemedial lines are gray, double dots on the costa and weaker on the rest of the forewing, filled with the ground color. Both are slightly irregular and the latter line is angled slightly toward the outer margin. The median line is usually absent, occasionally faintly visible below the reniform spot. The postmedial line also forms strong spots on the costa but is variable from nearly absent to dark across the rest of the forewing, usually thin and evenly scalloped, drawn toward the base on the costa, fairly narrowly curved through the anterior cell, less commonly widely arched around the reniform spot, and then angled 45° basad below the spot. The subterminal line is the ground color or a slightly a pale shade of it, absent or thin, irregular with a slightly offset below the apex and a weak "W" mark on the mid-forewing. It is preceded by a dark gray spot on the costa and a weak shade or few indistinct spots on the mid-wing. Black spots comprise the terminal line. The fringe is gray with a tan base. The orbicular and reniform spots are partially outlined in thin dark gray or black and are filled with the ground color. The orbicular spot is small to moderate, often open anteriorly and posteriorly, usually immaculate and only rarely with a weak gray ocellus. The reniform spot is usually only outlined on the inner side, usually with a faint gray inner lunule. The claviform spot is absent or very faint. The hindwing and fringe are pure white. A light peripheral gray shade and dark terminal line are present in some males, but are more common in females. The head and thorax match the forewing color, sometimes with a powdery gray line across the mid-collar. A frontal tubercle is present. The male antenna is weakly biserrate. *Euxoa pallipennis* is a member of the large subgenus *Euxoa*.
 
@@ -34,11 +34,11 @@ This species has a fairly extensive range in western North America. It occurs in
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation including such families as the Fabaceae and Asteraceae.  During epidemic outbreaks the larvae will also feed on grass crops (Poaceae).
 
-##### Adults
+### Adults
 
 Adults fly in late summer and fall, usually from late August through September. They are nocturnal and come to lights.
 

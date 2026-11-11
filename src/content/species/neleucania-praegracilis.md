@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Neleucania praegracilis* is a small (FW length 14 mm) moth that flies in eastern Idaho during the summer. It has longitudinally streaked, dry grass-colored forewings and pale, coppery hindwings. The apex of the forewing is slightly pointed, and the outer margin is straight from the apex to near the anal angle. The streaked appearance is due to the light ground color and veins with slightly darker shading along each side of the pale veins, darkest along the entire cubital vein and on the distal portion of the wing near the apex. The transverse lines are represented by small black dots on the veins, limited to near the trailing margin at the antemedial line and across most of the wing at the postmedial line. A series of even smaller dots between veins forms the terminal line. Other lines and spots are absent. The fringe is the ground color. The hindwing is even light copper colored without dark suffusion in specimens from Idaho, but even dark gray forms are found in other portions of the range. The terminal line is slightly darker than the rest of the forewing, and the fringe is slightly lighter. The head and thorax are similar to the forewing color, slightly darker anteriorly. The eye surface is hairy. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found on the Great Plains and in the Southwest. The range extend
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on grasses (Poaceae), feeding on members of several genera.
 
-##### Adults
+### Adults
 
 This species flies during late spring and summer and has been collected during July in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichopolia incincta* is a small, light, clay-colored moth (FW length 13 - 14 mm) that flies in dry habitats in the eastern part of our region during the fall. The forewing is light tan-gray with a slight violet tint, minimally darker blue-gray in the terminal area. Only traces of the gray basal and antemedial lines are evident, darkest on the costa. The postmedial line is also faint, but usually traceable. It is dentate, convex near the reniform spot and strongly oblique toward the base below the spot. The subterminal line is faint, slightly orange, even and parallel to the outer margin. It is preceded by a dark gray shade on the mid-wing that is condensed into ill-defined spots darkest between the veins. The terminal line is light yellow. The fringe is concolorous with the terminal area. The orbicular spot is partially outlined in thin, dark gray, open anteriorly and posteriorly, moderate-sized, round, and filled with the ground color and a small gray ocellus. The reniform spot is weakly hourglass-shaped, outlined with dark gray lined by thin yellow on the medial and lateral edges and open anteriorly and posteriorly, filled with the ground color and dark gray in the lower end. No claviform spot is evident. The hindwing is pale gray, gradually darkening toward the outer margin, with dark veins and a very weak discal spot. The hindwing fringe is whitish gray with a yellow and gray base. The head and thorax are even tan-gray similar to the forewing, with weak median tufts behind the collar. The eye is covered with short hairs. The male antenna is bipectinate.
 
@@ -26,11 +26,11 @@ This species is found on the Great Plains from southern Canada to New Mexico. It
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation such as in the family Fabaceae.
 
-##### Adults
+### Adults
 
 Adults fly in late summer and fall and have been collected in August and September in our region. They are nocturnal and come to lights.
 

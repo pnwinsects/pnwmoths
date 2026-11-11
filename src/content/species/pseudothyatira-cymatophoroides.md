@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pseudothyatira cymatophoroides* is a large gray moth (FW length 20–21 mm) characterized by forewing patterns wherein the ordinary lines are mostly represented by dark spots. The forewing has a rusty brown flange at the anal angle. The forewing is fairly long with a pointed apex and has a characteristic flange with a tuft of chestnut brown scales at the anal margin. The ground color is slightly shiny medium gray with faint rusty brown and pink areas. The rusty areas are most prominent near the base, in the cell, and near the apex. This moth comes in two distinctive forms which were once thought to be different species. One form, "*expultrix,*" is plain gray with the color described above, while the other form has contrasting brownish-black in the basal area, as well as filling the wide antemedial line in the costal portions of the postmedial and subterminal lines and the posterior subterminal area. The basal, antemedial, and post medial lines are strongly sinuous; each is comprised of three thin dark parallel components of slightly different darkness. The subterminal line is zigzagged or scalloped, most evident as dark dots where the teeth point toward the wing base. A series of prominent black dots end on the veins forms the terminal line. The fringe is light gray, usually pink-tinted. The orbicular and reniform spots are small, appearing as light gray halos around central dark spots. No claviform spot is evident. The hindwing is smoky gray, slightly lighter and yellowish toward the base, with a yellowish off-white fringe. The head and thorax are gray, with a lighter collar with dark stripes and pale and red-brown tufts on the posterior thorax. The male antenna is filiform.
 
@@ -8,7 +8,7 @@
 
 Members of the family Thyatiridae resemble noctuid moths in shape but are more closely related to hook-winged moths (Drepanidae) and inchworm moths (Geometridae).
 
-##### Larvae
+### Larvae
 
 The larva is smooth, mottled reddish brown. It is illustrated by Miller and Hammond (2003).
 
@@ -28,11 +28,11 @@ The range extends east to the East Coast coast where it occurs as far south as S
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a wide diversity of hardwood shrubs and trees, but *Rubus* species in the Rosaceae are particularly favored west of the Cascades.
 
-##### Adults
+### Adults
 
 *P. cymatophoroides* is found in the summer months from early June until late August. It is nocturnal and comes to lights.
 

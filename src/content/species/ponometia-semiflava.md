@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ponometia semiflava* is an unmistakable small moth (FW length 10 - 11 mm) that flies in the eastern part of the Northwest during the summer. It has a bright yellow body and wing base and purplish brown distal forewing. The demarcation between yellow and brown on the wing is straight and oriented obliquely across the forewing, closest to the base at the trailing margin. The distal forewing is slightly lighter gray at the costa. All lines and spots are absent. The hindwing is light gray in males and dark gray in females, darker toward the margin, with a lighter gray fringe.
 
@@ -22,11 +22,11 @@ This species is distributed across the southern portion of the United States, ex
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No foodplant records are presently available for this species, but it probably feeds on Asteraceae like closely related species.  Previous records of *Sarracenia* pitcher plants are the result of taxonomic misidentifications in eastern North America.
 
-##### Adults
+### Adults
 
 This species flies during the summer and has been collected from early June through mid-August in our region. It is nocturnal and comes to lights.
 

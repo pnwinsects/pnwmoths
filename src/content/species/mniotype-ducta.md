@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mniotype ducta* is a medium-sized to large moth (FW length 16–22 mm) that flies in forests east of the Cascade summit during the summer. It has a dark, brownish-gray forewing and a nondescript pattern that includes a black median bar, light gray filling of the orbicular and reniform spots, and a light subterminal line with a "W" mark. It is dull brown-gray, sometimes blackish, slightly darker in the median and terminal areas. The subterminal area is slightly lighter opposite the end of the cell and pale gray at the fold and posterior margin. A short black basal dash is thickest near the end. A black bar extends across the median area in the fold. The basal and antemedial lines are black filled with the ground color, toothed toward the base on the veins. The antemedial line is slightly excurved. The median line is black, faint. The postmedial line is black, strongly toothed on the veins, drawn toward the base on the costa, narrowly curved around the anterior cell, and then strongly angled toward the base below the reniform spot and curved toward the posterior margin through the fold so that the median area is much narrower posteriorly than anteriorly. The subterminal line is pale gray, thin, irregular and often broken into spots, offset below the apex and forming a moderate W-mark to the margin on M3 and CuA1. It is preceded by a dark gray shade posterior to the cell and a series black chevrons near the W-mark. The terminal line is a series of black triangles. The fringe is striped dark brown-gray with crossing light lines at the ends of the veins. All three spots are outlined by thin black lines. The orbicular spot is moderate-sized, round or oval, filled with light gray and a weak central ocellus. The reniform spot is moderate-sized, broadly kidney-shaped, filled with brown-gray medially and light gray elsewhere. The claviform spot is moderately large, fused to the median bar. The hindwing is whitish gray, with darker gray postmedial and marginal bands, discal spot, veins, and terminal line. The hindwing fringe is white with a gray and ochre base. The head and thorax are dark brown-gray with thin dark line across the distal collar. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ This species is widespread in boreal forests of Canada and the northeastern Unit
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to feed on cherries (*Prunus* spp.) in the Rosaceae, but probably feeds on many hardwoods such as alders (*Alnus* spp.) in the Betulaceae and willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 This moth flies during the summer from late June through August. It is nocturnal and comes to lights.
 

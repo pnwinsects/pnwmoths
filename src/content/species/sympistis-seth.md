@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis seth* is a streaky brown, medium-sized moth (FW length 13 -17 mm) that flies in sandy steppe habitats in southeastern Oregon in September. It has a round or asymmetrically oval orbicular spot, a black-banded cream hindwing, and white fringes on both wings. The forewing is gray-brown to brown, slightly darker in the median area and on the distal wing and lighter brown to pale blue-gray in the medial subterminal area posterior to vein CuA2 and opposite the cell. The veins are pale to the mid-subterminal area and dark further distally, the pale spots in the subterminal area extending distally along each of the veins that crosses them. The basal, antemedial, and postmedial lines are gray or brown, double filled with light shade of the ground color, faint other than as spots on the costa. The basal line is located near the wing base. The antemedial line is jagged. The postmedial line is moderately scalloped, excurved around the end of the cell, touches the posterior reniform spot, and curves to join the trailing margin at a slight angle toward the wing base. The median line is gray, closely parallel to the posterior postmedial line and bent toward the base in the cell between the spots. The subterminal line is a series of pale brown spots between the veins, preceded medially by a series of black sharply defined long arrowhead-shaped marks and followed laterally by less well-defined dark gray spots. The terminal line is black. The fringe is broad, cream at the base and white distally, containing a number of very faint brown and gray lines but appearing white. The spots have black outer and cream inner outlines and are filled with slightly reddish brown containing central pale lines. The orbicular spot is asymmetrically round or ovoid, closer to the base anteriorly than posteriorly. The reniform spot is kidney- to half-moon-shaped. The claviform spot is long with the tip touching the postmedial line. The hindwing ground color is cream with slight tan basal suffusion. It has a sharply-demarcated black marginal band and a white fringe that sometimes contains a thin tan median line. The head and thorax are sandy gray-brown to brown with faint transverse barring on the collar. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range extends south into the Great Basin from our area where it is known fro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but penstemons (*Penstemon* spp.) in the Scrophulariaceae are suspected based upon the habitat.
 
-##### Adults
+### Adults
 
 This species flies during September, usually beginning during the mid-month and peaking at the end of the month. It is nocturnal and comes to light.
 

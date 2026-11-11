@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis apposita* is a mottled brick-red, medium-sized moth (FW length 14 -  17 mm) that flies in forests in late summer. All elements of the forewing pattern are brick red. The color varies from nearly even across the wing to darker in the basal area, along the costa, and distal to the postmedial line. the lightest area in the darkest specimens is along the postmedial line. The central median area is dark due to the diffuse median line. The basal, antemedial, and postmedial lines are dark, double, with filling that is lighter than the rest of the wing. All are fairly even. The medial component of the postmedial line is weakly scalloped between the veins. The subterminal line is a series of pale yellowish spots. The orbicular and reniform spots are similar, light with filling of the ground color or slightly lighter scales. A dark spot is present in the lower reniform spot. The claviform spot is absent. The hindwing is dark brownish gray, slightly darker toward the margin, with faintly darker gray discal spot and veins, and a lighter two-toned fringe. The head and thorax are even and are slightly darker than the wings. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of *A. apposita* extends south to south-central California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to be a generalist feeding on many kinds of hardwoods including serviceberry (*Amelanchier* spp.)  in the Rosaceae, madrone (*Arbutus menziesii*) in the Ericaceae, and snowbrush (*Ceanothus* spp.) in the Rhamnaceae.
 
-##### Adults
+### Adults
 
 This species flies in the summer months, with most records in our region from early July to late August. It is nocturnal and comes to lights.
 

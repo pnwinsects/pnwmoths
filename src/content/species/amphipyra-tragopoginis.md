@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Amphipyra tragopoginis*, called The Mouse in Great Britain, is an even, dark brown, medium-size moth (FW length 16 - 18 mm) that occurs in a variety of habitats during the summer and early fall. It has three black spots marking the positions of the orbicular and reniform spots, one at the former and two at the latter spot. The forewing is relatively broad with a squared-off outer margin. The color is slightly shiny brown, nearly even except for a slight darker shade medial to the sinuous subterminal line. The other lines are absent. A single black dot forms the orbicular spot and the reniform spot is formed by two spots, one at the anterior and one at the posterior ends. There is no claviform spot. The hindwing is shiny yellow-gray, darker toward the outer margin with a dark gray fringe and veins. The head and thorax are smooth dark brown. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has a Holarctic distribution and might have been introduced into No
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a wide variety of herbaceous vegetation
 
-##### Adults
+### Adults
 
 The adults of *A. tragopoginis* fly in late summer and early fall. They have been collected from late June through to October in our area, but are most common in late July and early August. This species is nocturnal and comes to lights.
 

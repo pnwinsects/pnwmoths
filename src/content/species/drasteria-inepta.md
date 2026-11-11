@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria inepta* is our dullest *Drasteria* species. It is fairly large (FW length 20 - 22 mm) with a variable, slightly mottled gray-brown forewing with inconspicuous transverse lines and reniform spot. The lines are darker in some individuals. The irregular antemedial line is double, as is the postmedial line which lacks the conspicous dentate lateral projection near the reniform that is strongly developed in most *Drasteria* species. The postmedial line is faint, occasionally prominent due to a row of preceding dark spots. The reniform spot is light gray with several light spots along its outer margin. The hind wing is light gray-brown with a broad marginal band, the latter interrupted by a single light spot near the anal angle. The head and thorax match the forewing color. The antennae are ciliate in males and simple in females.
 
@@ -22,11 +22,11 @@ This species is predominantly found in the Intermountain West. It occurs from Wy
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 The adults are on the wing during the summer months. It is bivoltine in most parts of its range with early summer and late summer broods. This species is nocturnal and comes to light.
 

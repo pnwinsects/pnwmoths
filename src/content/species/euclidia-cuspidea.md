@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euclidia cuspidea* is a day-flying eastern species that barely enters British Columbia. It is medium-sized (FW length 15–18 mm) with triangular forewings. The ground color is mottled brown with a lighter violet tint at the outer margin and near the antemedial line. The dominant marks are dark brown: the antemedial line and an adjacent dot at the posterior margin, an equilateral triangle distal to the reniform spot, and an angular mark at the inner subterminal line near the apex. The other lines and spots are inconspicuous. The hindwings are coppery, with dark brown suffusion medial to the postmedial line and a submarginal line.
 
@@ -22,11 +22,11 @@ This species enters our area in northeastern British Columbia where it is at the
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various herbaceous legumes (Fabaceae).
 
-##### Adults
+### Adults
 
 *Euclidia cuspidea* is a spring-flying diurnal moth.  It has been collected during late May to mid-June in our area.
 

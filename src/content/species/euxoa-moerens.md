@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa moerens* is a small *Euxoa* (FW length 12–14 mm) that flies in sage steppe in southeastern Oregon and adjacent Idaho during the fall. It has a mottled gray-tan forewing with gray transverse lines and a round, dark-rimmed, pale-filled orbicular spot, and an off-white hindwing. The forewing is yellowish gray-tan with a slight brassy sheen, moderately suffused and mottled with gray. The terminal area is gray. The basal and antemedial lines are dark gray, double with unequal components, and filled with the ground color. The antemedial line is slightly irregular and angled toward the outer margin. The median line is gray and diffuse. The postmedial line is dark gray, slightly scalloped, drawn basad on the cotsa, curved close to the reniform spot, and angled slightly toward the base below the cell. The subterminal line is yellow-tan, often broken into spots and slightly irregular. It is preceded by a weak gray shade, strongest on the costa. The terminal line is thin or a series of dark gray spots. The fringe matches the terminal area. The orbicular and reniform spots are outlined in dark gray and are moderate-sized. The orbicular spot is round, filled with light gray and sometimes containing a gray ocellus. The reniform spot is kidney-shaped, filled with the ground color and a gray spot at the lower end. The claviform spot is variable, usually absent or small and gray. The hindwing and fringe are tan-gray off-white, sometimes with a diffuse light gray marginal band, with slightly darker gray veins, discal spot, and terminal line. The head and thorax are even gray-tan. A frontal tubercle is present. The male antenna is weakly biserrate. *Euxoa moerens* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species occurs in the Intermountain Region to central Colorado, northern Ar
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on herbaceous vegetation such as legumes (Fabaceae).
 
-##### Adults
+### Adults
 
 *Euxoa moerens* flies in the fall. It has been collected during September in our region. It is nocturnal and comes to lights.
 

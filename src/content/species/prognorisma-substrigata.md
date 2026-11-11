@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Prognorisma substrigata* is a distinctively patterned black and pale ochre moth with the pattern dominated by pale smooth transverse lines, geometric black marks, and a pale, horizontal streak across the lower median area. It is found in central British Columbia in our region. The moth is medium-sized (FW length 15 - 17 mm) with narrow squared-off forewings and broad hindwings. The forewing ground color is dark brown-gray with light yellow-brown in the middle of the wing and toward the posterior margin which forms a horizontal streak just anterior to the trailing margin. Thick, jet-black marks are formed by the basal dash and large claviform spot, the cell between the antemedial line and the orbicular spot and the orbicular and reniform spots, and inferior to the reniform spot below the cubital vein. A series of black wedges are also present medial to the pale brown subterminal line. The antemedial and postmedial line are very smooth. Both are double and black, but are evident mostly due to the pale yellowish filling. The hindwing is light gray basally and medium gray near the margin with a relatively large gray discal spot.
 
@@ -22,11 +22,11 @@ The distribution of this species includes two sites in the interior of British C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species flies in summer from mid-June to early August. It is nocturnal and is attracted to light.
 

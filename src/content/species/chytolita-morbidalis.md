@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 Species in the genus *Chytolita* have several structural modifications, including long blade-like labial palpi that extend far beyond the head, a small knot-like thickening of the male antenna, and a fan-like scale tuft on the femur of the male foreleg. The forewings of this fairly small moth (FW length 11–14 mm) are triangular in shape and uniform powdery light clay gray. The antemedial and postmedial lines are brownish, smoothly undulating. The median line is a brownish shade near the posterior margin, only evident at the base of the postmedial line in many individuals. The subterminal line is a slightly irregular series of light and dark wedges. The reniform spot is small, similar brown to the lines in most individuals although it is rarely black. The hindwing is slightly lighter than the forewing with an ill-defined dark postmedial line and dark and light subterminal line.
 
@@ -24,11 +24,11 @@ This species is found across boreal North America to the Atlantic Coast where it
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available for this species, but it is probably a detritivore feeding on dead leaves like closely related species of this genus.
 
-##### Adults
+### Adults
 
 The adults appear to be single brooded in our region and are on the wing in early summer. Pacific Northwest records are from June and July. It is a nocturnal species that is attracted to light.
 

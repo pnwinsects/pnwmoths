@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Dolocucullia dentilinea* is a medium-sized gray moth (FW length 16–17 mm) with long pointed forewings from mountain forests in east-central Oregon and Idaho during summer. The forewing is less pointed than in genus *Cucullia*, appearing longitudinally streaked due zigzag transverse lines and lack of much other pattern. The ground color is light to medium gray and the transverse lines and dark gray or black. The basal line is limited to the costa. The antemedial line is darkest on the costa, zigzag below the cubital vein to approach an opposing point of the postmedial line in the fold. The median line is a dark mark on the costa. The postmedial line is scalloped, excurved around the cell and then oblique to the mid-trailing margin. The terminal line is a series of black spots between the veins. The fringe is the ground color. The spots are absent except for a dark smudged mark at the reniform spot in some specimens. The hindwing is whitish with a gray marginal band and gray veins. The hindwing fringe is light gray with a whitish edge. The head and thorax are the ground color with a V-shaped mark on the median collar at the base of  midline hump. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ In the Pacific Northwest this species is found in forests at mid elevations.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous Asteraceae such as goldenrods (*Solidago* spp.).
 
-##### Adults
+### Adults
 
 The flight period of this species is late June through August in the Pacific Northwest.  It is nocturnal and comes to lights.
 

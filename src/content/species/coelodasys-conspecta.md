@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Coelodasys conspecta* is a medium-sized prominent moth (FW length 16–18 mm) that flies in dry forests during the summer. Its forewing has a uniform medium-gray base and streaked pale blue-gray and light gray to yellow-white distal area. Most of the wing is dull powdery gray, lighter on the median costa and on the distal area. The basal area is very pale. The distal costa is streaked with black, and a series of black and white dashes are present in the terminal area near the fold. Several of the distal veins are also dark, adding to the streaked look near the outer margin. The basal, antemedial, and postmedial lines are black, double, filled with lighter gray. The basal line is straight and is followed by a dark shade. The antemedial line is most evident on the costa. The postmedial line is scalloped, nearly straight across the wing except angled toward the base on the costa. The discal spot is a thin transverse black line, usually without an adjacent pale area. The male hindwing is grayish off-white with a light suffusion of gray scales, darkest near the anal angle, with gray veins and faint median and marginal lines. The female hindwing is medium gray with darker markings. The thorax is dark gray with black tufts and ridges on the posterior portion. The male antenna is bipectinate white that of the female is simple.
 
@@ -26,11 +26,11 @@ The global range of this species is uncertain due to confusion with *Coelodasys 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No specific foodplant records are presently available for this species, but it probably feeds on various hardwoods based on closely related species.
 
-##### Adults
+### Adults
 
 Adults have been collected from late May through July. It is a nocturnal species that comes to light.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Arachnis citra* is an attractive, large tiger moth (FW length 22–30 mm) that flies in eastern Idaho during the summer. It has striped white-to-cream and gray forewings and a spotted pink hindwing and abdomen. The forewing is fairly long.  The ground color in Pacific populations is white—cream elsewhere in its range—traversed by multiple wavy double lines, black filled with light gray, producing a moiré pattern. The lines are interrupted by several white veins. The hindwing is predominantly translucent dark pink, pale anteriorly, similar gray lines as on the forewing.  The white thorax is striped with black and gray similar to the forewings, while the abdomen is red with a pale tip and black and gray longitudinal stripes. The simple antennae are white. Females are larger than males and have broader and more continuous lines on the hindwing.
 
@@ -22,11 +22,11 @@ This is a species of the intermountain west. Its range includes western Colorado
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species, but it probably feeds on general herbaceous vegetation like the closely related *A. picta*, particularly legumes such as lupines (*Lupinus* spp.).
 
-##### Adults
+### Adults
 
 Adults occur in late summer to early fall. They are nocturnal and come to light.
 

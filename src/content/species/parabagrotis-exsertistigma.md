@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Parabagrotis exsertistigma* is the least variable species in the genus *Parabagrotis*. It is a dark brown, medium-sized (FW length 14 - 18 mm) noctuid moth with a light ochre to gray-brown costa, a U-shaped orbicular spot that opens toward the costa, and a light ochre to gray-brown collar with a black bar across the top. The forewing is dark red-brown to blackish brown with slight gray suffusion medial and lateral to the median area. The costa is ochre yellow, orange-brown, or rarely brown-gray from the base to the postmedial line, interrupted by gray bars at the origins of the transverse lines. The cell is pure black from the antemedial line to the reniform spot. A black basal dash is present. The transverse lines are double, gray except for a portion of the antemedial line which is black, filled with light gray-brown to light red-brown. The basal line is only evident at the costa, while the antemedial line is wavy and strongly obliqued toward the anal angle from the cell to the trailing margin. The postmedial line is very weakly scalloped and relatively straight across the wing, weakly convex toward the outer margin around the reniform spot. The subterminal line is a series of small yellow dots, occasionally absent, and preceded by a dark shade near the apex. The three spots are similar, black with a pale ochre inner component. The orbicular spot is U-shaped and is open to the costa and filled with gray. The reniform spot is usually incomplete at the anterior and posterior ends and is also filled with gray. The claviform spot is variable, sometimes complete but often faint or visible only as the anterior portion. The hindwing is dark gray, slightly darker toward the margin, with darker discal spot and veins. The fringe is two-toned with a dark gray base and light gray distally. The head and base of the collar are brown. The middle of the collar is traversed by a lighter strip followed by a moderately thick bar across the top. The rest of the thorax is dark brown. The male antenna is filiform.
 
@@ -22,7 +22,7 @@ This species is widely distributed throughout the entire Pacific Northwest as fa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae) and general herbaceous vegetation.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tesagrotis piscipellis* is the most variable species in the genus. It is a medium-sized moth (FW length 16 - 17 mm) with a black frons ("face") and a bright brick red to washed-out reddish gray forewing that lacks markings other than faint black lines bordering the median area and a spotted ochre subterminal line. The forewing is uniform dull medium dark red-brown, often slightly lighter orange-brown, with or without slight gray suffusion along the trailing margin in the terminal area. The antemedial and postmedial lines are single, black, variable from absent except at the costal margin, evident only as dark lines at the tips of the teeth of the scalloped postmedial line, to dark and complete. The subterminal line is a series of diffuse ochre to slightly greenish spots between the veins. A similarly colored faint streak is present from the end of the cell to the subterminal line in a few individuals. The spots are absent except for a faint smudge at the reniform spot in a minority of specimens. The hindwing is light whitish gray with dark veins and gray at the margin, heaviest in females, and lacks a discal spot. The top of the head and the entire thorax, including the collar, are uniform red-brown and match the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is widely distributed in the southern Rocky Mountain region, partic
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on bitterbrush (*Purshia tridentata*) in the Rosaceae, but it must also feed on other shrubs such as serviceberry (*Amelanchier* spp.) in the Rosaceae at high elevations in the Cascades and in oak woodlands of southwestern Oregon.
 
-##### Adults
+### Adults
 
 *Tesagrotis piscipellis* is common from late June to mid-September in our region. The adults are nocturnal and come to lights.
 

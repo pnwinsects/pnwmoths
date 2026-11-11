@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa furtivus* is a medium-sized *Euxoa* (FW length 15–18 mm) that flies in steppe habitats during early summer. It has gray-tan forewings, pale costal margin and cubital vein, and a series of black wedges at the subterminal line. It is medium-dark gray-tan or tan, with dark shading along the veins in the median area and on the distal forewing. The cell is darker brown. Streaky paler tan, gray, or silvery gray is present on the costa, fading by the postmedial line. The cubital vein is similar light colored, usually extending along proximal branches M3, CuA1, and CuA2. The terminal area is gray, sometimes with black between the veins. A black basal dash is variable, weak, thin, or thick. The transverse lines are weak. The basal line is reduced to spots on the costa in a few specimens but is usually absent. Most specimens have an oblique black segment of the antemedial line at the base of the claviform spot. The medial line is absent. The postmedial line is absent of weak, lightly scalloped, curved around the reniform spot and then straight or slightly concave at a 45° angle toward the base. The subterminal line is ochre, tan, or gray, powdery and often incomplete, slightly irregular with an offset below the apex and a weak "W" mark on the mid-forewing. It is preceded by a gray shade at the costa and a series of long black wedges on the mid-forewing. The terminal line is dark and thin. The fringe matches the ground color. The orbicular and reniform spots are outlined in dark gray or black, are lined with light gray or light tan, and are filled with slightly darker gray or the ground color. The orbicular spot is round or oval, small to moderate in size, complete or open anteriorly. The reniform spot is kidney-shaped, obscured at the lower end by the pale cubital vein. The claviform spot is black, weak, moderate-sized, and narrow. The hindwing is medium-dark brown-gray with slightly darker outer half, discal spot, veins, and terminal line. The fringe is white with a darker base. The head and thorax are gray-brown or tan. The collar has a light base and a transverse black line across the mid-portion. A frontal tubercle is present. The male antenna is biserrate. *Euxoa idahoensis* is a member of the large subgenus *Euxoa*.
 
@@ -22,11 +22,11 @@ The eastern range of this species includes western Alberta, Wyoming, and Colorad
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults fly from late spring through the summer, usually slightly earlier than *E. idahoensis*. Specimens from the Pacific Northwest have been collected from late May to early August. They are nocturnal and come to lights.
 

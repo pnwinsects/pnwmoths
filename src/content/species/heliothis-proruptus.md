@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Heliothis proruptus* is a beautiful, small, day-flying moth (FW length 12 mm) that flies in south-central Washington during the spring. It has banded maroon and cream forewings and white and black hindwings. The forewing median area is dark cream, slightly shaded with pale gray on the costa, near the antemedial line, and along the trailing margin. The basal and distal wings and a short segment of the costa near the reniform spot are uniform velvety maroon. These colors are separated by the smooth sinuous black antemedial and postmedial lines. The terminal line is a series of black dots. The fringe is maroon. The orbicular and reniform spots are pale gray, outlined in gray dots, and filled with the ground color. The central reniform spot is gray. The hindwing is white with black suffusion at the base and inner margin, black wide sharply-defined marginal band, and a gray discal spot that is barely distinct from the dark base. The hindwing fringe is white with a black base. The head and thorax are maroon. The base of the antenna (scape) is white. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is found in California outside of our region. Most records are from
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been reared from Indian Paintbrush (*Castilleja* spp.) in the Scrophulariaceae (Hardwick 1996).
 
-##### Adults
+### Adults
 
 Adults are diurnal and visit flowers during the day. It is fond of puccoon (*Lithospermum* spp. (Boraginaceae)) in Washington. The adults fly in early spring and have been found during April and early May in Washington.
 

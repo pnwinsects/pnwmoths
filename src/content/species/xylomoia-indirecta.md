@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xylomoia indirecta* is a small to medium-sized moth (FW length 12–15 mm) that flies in a variety of habitats during the summer. The mottled brown forewing has a pattern that includes a black bar across the median area and a triangular black patch in the subterminal area, both in the fold. The forewings are fairly broad, and their outer margins have a slightly scalloped margin in some specimens. The color is mottled light brown, sometimes with a slight olive or red cast, with darker and grayer costa and posterior margin from the base to the postmedial line. An indistinct black bar extends across the median area in the fold. The mid-wing anterior to this bar is often reddish brown, as is the wing base in some specimens. A black triangle abuts the subterminal line in the subterminal area in the fold. The terminal area is dark gray. The basal, antemedial, and postmedial lines are gray with light tan filling, evident as stripes on the costa. The basal lines is absent elsewhere. The antemedial line is distinct posterior to the cell, strongly angled toward the outer margin and incurved above the posterior margin. The median line is dark gray, diffuse on the anterior wing and faint elsewhere. The postmedial line is scalloped often followed by faint dark lines on the veins, faint anterior to CuA2 and more prominent black and pale tan from there to the posterior margin, smoothly arched from the costa to the lower cell, thence angled toward the base to 1A+2A, and bent toward the outer margin near the posterior margin. The subterminal line is pale brown, sinuous with a broad W-mark on M3 and CuA1, preceded by a narrow diffuse gray or brown shade on the costa, opposite the cell, and in the fold near the black triangular spot described above. The terminal line is gray, interrupted at the veins. The fringe is checkered gray and light brown. The orbicular and reniform spots are partially outlined in black with a light tan inner line and are filled with the ground color. The orbicular spot is a long tilted or longitudinal oval or rectangle. The reniform spot is moderately large with black medial and faint gray outer walls, open anteriorly and posteriorly. The claviform spot is black, small and often incomplete. The hindwing is gray-tan with gray suffusion toward the outer margin, with gray small discal spot, veins, and thin terminal line. The hindwing fringe is gray-tan. The head and thorax are tan and red-brown with a thin black transverse line across the distal collar. The tegulae are darker than the central thorax and head, with dark edges. Paired weak tufts are present on the anterior thorax. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ The distribution of *X. indirecta* is centered on the West Coast. It occurs in m
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist that bores into the stems of grasses (Poaceae) and sedges (Cyperaceae).
 
-##### Adults
+### Adults
 
 The flight season of this moth extends from mid-June to early September, peaking during July and early August. It is nocturnal and comes to lights.
 

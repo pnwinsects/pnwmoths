@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Properigea albimacula* is a small to medium-sized moth (FW length 14–15 mm) that flies in dry forests during the summer. It has a mottled brown forewing with a white-rimmed reniform spot. The distal forewing is fairly broad and the outer  margin is slightly scalloped. The color is mottled warm brown, slightly darker at the base and in the subterminal area and slightly lighter in the terminal area. The lines are dark gray, partially double filled with the ground color or powdery light tan and white. The basal and antemedial line are irregular, drawn slightly toward the base on the veins in the cell. The median line is dark brown, faint and diffuse. The postmedial line is toothed on the vein, strongly drawn toward the base on the costa, smoothly curved around the end of the cell and angled toward the base below the level of the cell. The subterminal line is pale tan, jagged. The terminal line is a series of dark brown spots and white dots at the end of the veins. The fringe is powdery brown. The orbicular spot is a very small oval or absent. The reniform spot is kidney-shaped, weakly outlined in dark gray and filled with pure white and a central crescent of the ground color. The claviform spot is usually absent, occasionally long, thin, and white-filled. The hindwing is light brownish gray, with an ill-defined darker marginal band and darker veins and terminal line. The hindwing is white with a gray base. The head and thorax are powdery dark brown with a dark edge on the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This moth is also found throughout most of California, although not in the most 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is suspected to feed on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected from mid-June through August in our region. They are most common during July. This species is nocturnal and comes to lights.
 

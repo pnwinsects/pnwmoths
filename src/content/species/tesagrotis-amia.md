@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tesagrotis amia* is an even dark gray-brown noctuid moth with white hindwings with dark veins and forewing markings limited to thin, black transverse lines. It is one of the largest species in the genus (FW length 17 - 18 mm) and occurs in areas with mountain mahogany (*Cercocarpus* spp.) in southeastern Washington and eastern Oregon. The forewing is even dark gray-brown, darkest brown toward the costa and grayer toward the trailing margin. A few specimens are slightly reddish. The markings are limited to the thin black antemedial and postmedial lines. The antemedial line is irregular and is oriented slightly obliquely across the forewing. The postmedial line is usually darkest. It is scalloped and smoothly arced toward the outer margin. The reniform spot is visible as a faint dark smudge in some specimens. The hindwing is white with dark gray distal veins and marginal shade, but lacks a discal spot. The marginal gray is more extensive in females than in males. The head and thorax match the forewing and lack darker marks, including on the collar. The male antenna is beadlike.
 
@@ -22,11 +22,11 @@ This species is most commonly found in the southern Rocky Mountain region from e
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on mountain mahogany (*Cercocarpus* spp.) in the Rosaceae based on habitat associations in the Northwest.
 
-##### Adults
+### Adults
 
 The adults fly during the summer and have been collected from late June through August in our region. They are nocturnal and come to lights.
 

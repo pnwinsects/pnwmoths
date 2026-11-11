@@ -20,11 +20,11 @@ This moth is widespread in North America, occurring from coast to coast across s
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on various herbaceous vegetation, including nettles (*Urtica* spp., Urticaceae) and hops (*Humulus lupulus*, Cannabaceae).
 
-##### Adults
+### Adults
 
 The flight season of *H. humuli* is very long, lasting nearly the entire year. The phenogram demonstrates a peak flight in the spring, and one or two less distinct peaks during summer and fall. Grasswitz (2008) indicates that there are up to three generations in Washington, with overlap between the stages of each generation.
 

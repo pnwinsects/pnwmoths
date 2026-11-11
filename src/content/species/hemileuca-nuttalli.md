@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hemileuca nuttalli*, Nuttall's Sheep Moth, is a very large (FW length 31–33 mm; wingspan 6.0–6.5 cm) day-flying moth that flies in steppe and open forests during late summer and fall. Its forewings are white to pale yellow with black lines and spots, whereas its hindwings are bright yellow. Its pattern is similar to that of *Hemileuca hera*, with smooth thick transverse lines, black veins near the wing margin, black wing edges, and very large discal spots on both wings. The body is yellow. The antennae are bipectinate, much wider in males than in females.
 
@@ -8,7 +8,7 @@ This is our only *Hemileuca* with white to pale yellow forewings and yellow hind
 
 The synonym *Pseudohazis washingtonensis* Medlar is described from Brewster, Washington.
 
-##### Larvae
+### Larvae
 
 The larva has short orange spiny scoli or tubercles and is black with white lateral slashes. It is illustrated by Tuskes et al. (1996).
 
@@ -28,11 +28,11 @@ This species is widely distributed in juniper woodlands and upper sagebrush rang
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds primarily on bitterbrush (*Purshia tridentata*) in the Rosaceae, but has also been found feeding on snowberry (*Symphoricarpos* spp.) in the Caprifoliaceae and currants (*Ribes* spp.) in the Grossulariaceae.
 
-##### Adults
+### Adults
 
 Adults of *H. nuttalli* are diurnal and do not feed similar to other *Hemileuca* species.  They have been found from late July to mid-September in the Pacific Northwest.  Males fly rapidly while searching for females and are fairly difficult to catch on the wing.
 

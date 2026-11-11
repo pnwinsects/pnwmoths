@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea cuculliformis* is a medium-sized to large moth (FW length 19–22 mm) with longitudinally streaked tan forewings with dark brown along the entire trailing margin and in the terminal area. The forewings appear long and have a toothed margin, accentuated by a terminal line of long brown wedges and light triangles in the fringe at the ends of the veins. The color is tan, streaky appearing due to dark veins with light tan on each side and darker red-brown in the interspaces on the posterior and distal wing. The posterior margin is dark red-brown to gray-brown, and the terminal area is similar, divided into two triangular patches where the subterminal line extends to the outer margin. The basal, antemedial, and postmedial lines are double, dark brown or gray but mostly evident as stripes on the costa. The smooth course of the postmedial line is marked by paired dark dots on each vein, and a curved white line in the fold. The reniform spot is two black dots in a patch of tan color; the other spots are absent. The hindwings are pale tan gray, slightly opalescent at the base, with a dark brown-gray marginal band, and dark gray discal spot, veins, and postmedial line. The head and base of the collar are light brown. The rest of the thorax is darker red-brown with gray brown stripes across the collar and at the edges of the tegulae. The central thorax is dark blackish brown with anterior tufts; this color and tufting extend about two-thirds of the distance to the end of the abdomen. The male antenna is beaded.
 
@@ -22,11 +22,11 @@ This species has a fairly limited distibution outside of the Northwest. It occur
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 The flight season of *A. cuculliformis* is relatively early for an *Apamea*, beginning in mid-May and lasting to early July. It is nocturnal and comes to lights.
 

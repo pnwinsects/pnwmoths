@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Clostera brucei* is a small to medium-size (FW length 15–17 mm) mottled blue-gray *Clostera* that has a limited distribution in the extreme eastern part of the Pacific Northwest.  The forewing is blotchy pale blue-gray and darker gray to blue-gray, with the lightest patches in most of the medial area and near the anal angle. Like other *Clostera* species it has pale transverse lines, with the postmedial line widened to form a white mark at the costa with adjacent dark red-brown scales in the postmedial area.  The head, thorax are abdomen are dark gray.  The antennae are bipectinate and the tip of the male abdomen is tufted.
 
 *Clostera* *brucei* is closely similar to *Clostera multnoma* and can be difficult to distinguish from it in the Pacific Northwest, especially from photographs. Both species have slightly wavy antemedial and medial lines that remain separate across the wing.  In the similar species *Clostera "apicalis"* and *Clostera strigosa* the lines are partially fused. Also, the red-brown scales near the anterior postmedial line are less prominent in *C. brucei*. In general, *C. brucei* is larger and less dark than *C. multnoma*. In spread specimens the hindwing postmedial line is visible in *C. brucei* but not in *C. multnoma*. If *C. brucei* is eventually found in extreme south-eastern Idaho it would overlap the range of *Clostera paraphora*, a slightly larger species that occurs there. The postmedial line is nearly straight in *C. brucei* but sinuous in *C. paraphora*.
 
-##### Larvae
+### Larvae
 
 The larva is illustrated in Miller et al. (2018). It is smoky to charcoal gray with black dorsal warts on segments A1 and A8 and scattered small orange spots laterally. It is covered sparsely by short fine hairs.
 
@@ -26,11 +26,11 @@ This is a species of the boreal forest and Rocky Mountains. It has a large range
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae feeds on trembling aspen (*Populus tremuloides*) and willows (*Salix* spp.) in the Salicaceae (Miller et al. 2018).
 
-##### Adults
+### Adults
 
 The adults typically fly during early summer (mid-June to mid-July), but can be found earlier or later in the year depending on elevation.
 

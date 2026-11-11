@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrotis ruta* is a fairly large (FW length 18 - 21 mm), subarctic and alpine *Agrotis* species with brown gray forewings that have smudgy black, dark-filled forewing spots. The forewing ground color is medium dark brown-gray to dark blackish-brown, usually slightly darker between the basal and antemedial lines. The transverse lines are dark gray and double, filled with the ground color. The basal line is slightly irregular in shape and is oriented across the forewing. The postmedial line is moderately scalloped in is gently convex toward the outer margin. The pale subterminal line is slightly irregular and is preceded by a long series of smudgy dark gray to black wedges between the veins. All the forewing spots are smudged black and are filled with warm dark brown. The orbicular spot is small and round to oval in shape. The reniform is fairly large and kidney-shaped, occasionally with the posterior margin drawn toward the wing base. The claviform spot is small to medium-sized. The hindwing is pale gray with a slight yellow tint and gray smudgy discal spot, dark veins, and a submarginal band. The head and thorax are slightly lighter than the forewing, usually a mixture of light tan and brown gray areas. The male antenna is moderately bipectinate.
 
@@ -22,11 +22,11 @@ This species occurs in eastern Asia as well as in most of subarctic North Americ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is on the wing from early July to mid-August. The adults are nocturnal and come to light in the brief subarctic night.
 

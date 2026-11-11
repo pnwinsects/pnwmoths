@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria hastingsii* is a common steppe *Drasteria* with "busy" brown forewing pattern and red and black hindwings. It is a medium-sized species (FW length 16 - 18 mm). The forewing is brown with a full complement of double transverse lines. The median area is lighter gray to gray-brown and the terminal area is blue-gray. The subterminal line is preceded by a series of black wedges, at least near the anterior margin, and there is a black spot at the apex. The reniform spot is filled with brown. The area between the reniform and the laterally expanded postmedial line is light brown, heavily streaked with white along the lateral reniform spot and along veins M3 and CuA1 lateral to the inferior reniform spot. The postmedial line is dentate along the veins near the reniform spot, each long tooth extending to the subterminal line. The dorsal hindwing is usually orange-red with black markings, occasionally yellow. The rectangular discal spot is clearly separate from the postmedial line, which is less jagged than in most other *Drasteria* species. The marginal band is weakly bilobed. The ventral wings are whitish with black bands, with a pink flush near the base of the hindwing.
 
@@ -24,11 +24,11 @@ The range of *D. hastingsii* is incompletely known because of confusion with *D.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on buckwheats (*Eriogonum* spp.) in the Polygonaceae.
 
-##### Adults
+### Adults
 
 Adults have a bimodal seasonal distribution indicating the presence of two broods. The early brood appears in April and flies through June, while the second brood extends from mid July to mid September. This species is diurnal and nocturnal. It comes readily to lights.
 

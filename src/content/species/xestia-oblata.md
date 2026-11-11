@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia oblata* is a very common, multicolored, medium-sized noctuid moth (FW length 16 - 18 mm) that is found in forests throughout our region during the summer. The forewing is various shades of lilac and wine-red, darkest in the cell and adjacent anterior median area, with orange terminal and basal areas. The lines are double and filled with light rose to violet, with strong components bordering the median area and the other component barely visible except in darkly marked specimens. The subterminal line is evident as the transition between red and orange near the margin. The orbicular and reniform spots are similar with black outer and orange inner lines and rose filling. The orbicular spot is oval to elongate in shape and is open to the costa. The lower inner reniform spot is often extended toward the forewing base. The hindwing is light yellow with rose pink toward the margin, sometimes with a light gray suffusion and submarginal shade but usually lacking dark spot and veins. The head and collar are light yellow with a dark line at the tip of the collar. The rest of the thorax matches the red areas of the forewing. The male antenna is weakly biserrate.
 
@@ -24,11 +24,11 @@ This species is found across North America but is most widely distributed in the
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods such as alders (*Alnus* spp.) in the Betulaceae, spiraea (*Spiraea* spp.) in the Rosaceae, and willows (*Salix* spp.) and quaking aspen (*Populus tremuloides*) in the Salicaceae.
 
-##### Adults
+### Adults
 
 *Xestia oblata* has a long flight period and flies somewhat earlier in the year than many of its close relatives. Records from the Northwest extend from mid-May to September, although most are from July and August. It is nocturnal and comes readily to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Orthodes goodelli* is a small to medium-sized (FW length 13 - 16 mm), mottled, brown moth that flies in forests from north of northern Oregon during the summer. Its forewing has a variably distinct pattern usually dominated by pale filling of the reniform spot and subterminal line near the apex. The forewing is relatively broad in shape. The ground color is variable, usually dull, dark gray-brown, but occasionally lighter or suffused with dark red-brown or a slight purple tint. The markings are usually indistinct, except in a few individuals in which the spots and lower cell between the spots are jet black. The basal, antemedial, and postmedial lines are gray, double, filled with the ground color or barely lighter scales, and relatively smooth. The inner component of the postmedial line is weakly scalloped. A faint gray-brown median line is usually evident near the costa. The light ochre-brown subterminal line is irregular, strong near the apex but occasionally prominent to the trailing margin. It is preceded by a slightly darker gray shade, darkest at the costa. A dark terminal line is evident between the veins. The fringe is similar to the rest of the wing in color. A series of pale ochre spots are present on the veins at its base in some individuals. The orbicular spot is pale, oval, and filled with the ground color. The reniform spot is weakly kidney-shaped, usually pale ochre-brown, widest laterally, and filled centrally with the ground color, sometimes partially outlined in gray or black. The claviform spot is small and gray to black. The hindwing is dull brownish-gray with barely darker discal spot and veins and a slightly lighter fringe. The head and thorax are the same color as the forewing with a slightly lighter edge to the collar. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is most widespread in eastern North America where it is found from 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Orthodes goodelli* flies from late spring to early August, apparently with a single brood. Forbes (1954) reports the presence of two broods in the East. It is nocturnal and comes to lights.
 

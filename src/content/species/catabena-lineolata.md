@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Catabena lineolata* is a small gray noctuid moth (FW length 12 - 13 mm) that flies east of the Cascade Range throughout the year. It has a pale gray forewing with a relatively simple pattern of longitudinal streaks, and a white hindwing with a gray margin. The central veins are dark bordered on each side by pale scales. The distal wing is slightly darker brownish gray. The lines are nearly absent. Oblique traces of the antemedial and postmedial lines are present on the costa. The zig-zag pattern of the postmedial line can be made out in a few individuals. The terminal line is evident as short gray lines between the veins. The fringe is the same color as the terminal area. There are no traces of the spots. The hindwing is white with a slight pearly sheen. The distal wing is gray. A thin gray terminal line is present. The fringe is gray at the apex, white elsewhere. The head and body are light gray, with fine transverse striations on the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found across North America. It appears to be most common in Cali
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on various herbaceous plants including *Verbena* species (Verbenaceae) and goldenrod (*Solidago* spp.) in the Asteraceae.
 
-##### Adults
+### Adults
 
 *Catabena lineolata* has a very long flight period in our region suggesting the presence of multiple broods. It has been collected from April to October. This species is nocturnal and comes to lights.
 

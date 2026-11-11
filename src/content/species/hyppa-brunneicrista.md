@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hyppa brunneicrista* is the brownest and has the widest male antenna of the three similar *Hyppa* species in our area. It is a medium-sized moth (FW length 17 - 19 mm) that flies at high elevation during the summer. The anterior forewing is medium-dark gray, lighter gray proximal to the antemedial line. The posterior wing is dark gray and purplish red-brown, orange in the posterior subterminal area. The terminal area except the apex is dark gray, with black lines between the veins in the anterior portion. A thick black and white basal dash is present, a similar black and white mark is located at the base of the posterior margin. A thick black bar in the fold and thinner black along the posterior margin span the median area. The antemedial line is black, very irregular with a strongly convex-lateral segment around the basal dash and zigzag course near the posterior margin. The median line is reduced to a slightly darker area near the costa. The postmedial line is positioned near the subterminal line, is smoothly convex across the wing, is faint near the anterior margin but has a distinct black and white segment posterior to the cell that appears to be the anterior continuation of the black median bar. The subterminal line is white from below M2 to the trailing margin  with a strong W-mark to the margin on veins M3 and CuA1. The orbicular and reniform spots are outlined in black, often incomplete, filled with slightly lighter gray than the ground. The orbicular spot is oval and the reniform spot is kidney-shaped. A discreet claviform spot is not evident. The hindwing is medium gray at the base and dark gray toward the margin, with a darker discal spot and light two-toned fringe. The top of the head and the base of the collar are medium gray. A black transverse bar across the collar separates the base from the lighter tip. The central thorax and medial tegulae are light gray, and the lateral tegulae are dark brown and black. The male antenna is strongly bipectinate, appearing wide to the naked eye.
 
@@ -22,11 +22,11 @@ This species is widely distributed in the boreal zone of northern North America 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is apparently a generalist feeding on both hardwoods and herbs, including alders (*Alnus* spp.) in the Betulaceae and fireweed (*Epilobium angustifolium*) in the Onagraceae.
 
-##### Adults
+### Adults
 
 This species is single-brooded and the adults fly during the summer. Pacific Northwest specimens have been collected from early June until early August. It is nocturnal and comes to lights.
 

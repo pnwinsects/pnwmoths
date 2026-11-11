@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Axenus arvalis* is a very small (FW length 9 mm) dark gray day-flying moth that occurs in the early spring in southwestern Oregon. The forewing has a triangular shape and is hoary charcoal gray in color. The pattern is reduced to pale markings near the costa at the transverse lines and a more complete pale subterminal line. The hindwing is similar dark gray with pale dusting at the discal spot and three incomplete lines between the spot and the outer margin. The hindwing fringe is pale gray. The head and thorax are hoary charcoal gray. The eye is reduced in size. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of this species is limited to California outside of the Northwest. It 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it may feed on clovers (*Trifolium* spp.) in the Fabaceae based upon adult associations.
 
-##### Adults
+### Adults
 
 Adults fly during the day and visit flowers. They are on the wing in early spring. Powell and Opler (2009) report the flight season as March to June in California.
 

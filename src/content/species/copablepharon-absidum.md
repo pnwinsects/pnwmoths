@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon absidum* is the most commonly-encountered *Copablepharon* in eastern Washington and eastern Oregon. It is medium-sized (FW length 16–20 mm) with a light ochre yellow color and slightly streaky appearance. The palest yellow areas are the costa, the cell and area of the reniform spot, the fold region, and the posterior margin. The difference between the lightest and darkest areas is variable, ranging from very slight in nearly all-yellow specimens to quite marked in specimens with extensive gray suffusion. The darkest specimens are encountered in early summer. The cubital vein is black near the cell in a few individuals. The antemedial and postmedial lines are a series of dots, also variable in strength. The hindwing is white with gray suffusion that varies between very light to dark in individuals with dark forewings. The head and thorax match the forewing ground color, while the abdomen is light cream colored. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is a Pacific Northwest endemic and has not been found outside of th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a burrowing cutworm that burrows through sandy soil, and feeds on herbaceous vegetation including sand verbena (*Abronia* spp.) in the Nyctaginaceae.
 
-##### Adults
+### Adults
 
 This species has a long flight season. Adults have been found from late spring until late fall. Records demonstrate that it is most commonly collected during May and early June and again in the fall suggesting the presence of two main broods. It is nocturnal and comes readily to light.
 

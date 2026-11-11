@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis trigona* is a relatively small *Abagrotis* (FW length 12 - 15 mm in males; 14 - 16 mm in females) with variable red-brown, orange-brown, to powdery ochre-brown forewings and uniform, dark gray hindwings. The forewings appear broad. The forewing color is darker in males than in females, ranging from brown-gray, gray-tan, to reddish or orange brown in males and ochre-brown to orange-brown in females. A slightly darker grayish line precedes the subterminal line in all specimens and the terminal area is usually a similar darker color. Some specimens have dark gray between the basal and antemedial line and between the postmedial and subterminal lines. Many of the lighter specimens, especially females, are heavily sprinkled with black scales with a powdery or salt-and-pepper effect. The transverse lines are darker than the ground color, double with filling of the ground color, and are relatively smooth. The postmedial line is dentate and the tips of the teeth are accentuated with a series of black dots or short lines along the lateral line in some specimens. The smooth pale subterminal line is variable, usually evident across the wing but occasionally absent in dark males. The orbicular and reniform spots are similar, pale with variable filling of the ground color or dark gray. The orbicular spot is small and round, while the reniform is fairly narrow, almost bar-like. The claviform spot is absent. The hindwing is dark smoky gray in both sexes although slightly darker in males, with a two-toned lighter fringe that has a slight orange or pink tint in some specimens. The thorax is uniform and matches the forewing color. The male antenna is weakly beaded.
 
@@ -24,11 +24,11 @@ This species has a wide distribution in western North America. It occurs in the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist feeding on many kinds of hardwoods including willows (*Salix* spp.) in the Salicaceae, and madrone (*Arbutus menziesii*) and huckleberries (*Vaccinium* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected mostly from early July to the end of August in our region. They are nocturnal and come to lights.
 

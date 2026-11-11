@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypoprepia miniata* is a small (FW length 13–15 mm) bright red and black moth. The forewing is carmine red with three longitudinal black stripes. The hindwing is slightly paler red with a broad black marginal band. The head, thorax and abdomen are similar to the adjacent fore and hindwings while the antennae are black.
 
 *H. miniata* cannot be confused with any other moth in our region.
 
-##### Larvae
+### Larvae
 
 Larva has sparse long hairs, is black mottled with yellow, and is illustrated by Powell & Opler (2009).
 
@@ -31,11 +31,11 @@ This moth is widely distributed in North America east of the Rocky Mountains.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on tree lichens.
 
-##### Adults
+### Adults
 
 Adults have been collected in late summer and early fall. They are nocturnal and come to light.
 

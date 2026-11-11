@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis discoidalis* is a medium size *Abagrotis* species (FW length 13 - 17 mm) with mottled gray-brown forewing and a black area in the cell between the orbicular and reniform spots. The forewing is darkest near the subterminal line and the costa is lighter tan to orange-brown. The terminal area is light blue-gray. The lines are dark gray to a darker shade of the ground color, double, with lighter filling similar to the costa, or gray-brown. The basal and antemedial lines are darker than the postmedial line. Both are slightly irregular, especially near the trailing margin. The postmedial line is less dark, lightly scalloped, and gently convex near  the cell. The pale subterminal line is gently convex toward the margin. The orbicular spot is black, oval, and open toward the costa, and filled with the ground color. It is prominent because the adjacent cell is filled with black from the antemedial line to the reniform spot. The reniform spot is incomplete, usually with black segments of the medial and lateral walls evident, and is filled with the ground color or slightly orange scales. The claviform spot is evident as a few black scales in some specimens. The hindwing is medium brownish gray with slightly darker margin, veins, and discal spot. The fringe is two-toned gray and whitish. The head and thorax match the wing ground color or are more orange-brown in specimens with orange-brown along the costa. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is most commonly found in the Great Basin, but also occurs in the R
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a foodplant specialist feeding on greasewood (*Sarcobatus vermiculatus*) in the Chenopodiaceae.
 
-##### Adults
+### Adults
 
 The adults have a long flight season and have been collected from late May through September in our region. They are nocturnal and come to lights.
 

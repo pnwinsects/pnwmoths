@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hadena variolata* is a mottled, olive-gray to olive-brown and white, medium-sized species (FW length 13 - 15 mm) that flies in forests during the late spring and summer. Its forewing has a prominent, round, white-lined, ocellate orbicular spot. The ground color is interrupted by white patches in the basal area, along the costa (including in the lines), in the central median area between the three spots, at the posterior margin between the postmedial and subterminal lines, and at the apex. These white areas are most extensive and include yellow areas in populations in the Puget Trough. The orbicular and reniform spots and lines are partially filled with white; both of these spots are dark centrally. The transverse lines are double and black. The median line is black, but only the posterior portion is evident. The subterminal line is irregular, white but incomplete, forming a weak W-mark on veins M3 and CuA1, and is preceded by a black shade that forms weak spots between the veins. The hindwing is gray, lightest at the base, with slightly darker discal spot and veins and a pale spot at the margin along vein CuA2. The head and collar are olive brown with weak pale and black banding at the base of the collar. The remainder of the thorax is a mixture of olive and white scales, palest in the central tegulae. The male antenna is bead-like. The surface of the eyes are covered with tiny hairs.
 
@@ -26,11 +26,11 @@ This species has a Holarctic distribution. It is widely distributed in western N
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on herbs of the pink family (Caryophyllaceae) such as *Lychnis* spp. and *Silene* spp.  Larvae tend to feed on the flowers and seedheads.
 
-##### Adults
+### Adults
 
 This species is single brooded. The adults fly during late spring and summer and have been collected from mid-May to mid-August in the Pacific Northwest. They are most commonly found in June and July. This species is nocturnal and comes readily to lights.
 

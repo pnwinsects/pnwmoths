@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 This is our only member of a genus with several morphological peculiarities, including long labial palpi, a knot-like thickening with small claw-like structures at the proximal third of the male antenna, and several adaptations of the male foreleg including tufts and sensory pockets. The forewings of this small moth (FW length 11–13 mm) are triangular in shape and powdery dull tan-gray, darkest from medial to the subterminal line to the outer margin. The thin gray antemedial and postmedial lines are irregular in shape and outwardly convex. The subterminal line is straight and has thin dark inner and light outer components, the light portion is most conspicuous in most specimens against the dark outer area of the wing. The reniform spot is small and dark, with a triangular shape, apex medial. The hindwing is slightly lighter than the forewing with very faint discal spot and darker postmedial line. A pale subterminal line is similar to that of the forewing but is angled inward near the anal angle. The male antenna is ciliate with a knot-like thickening at the junction of the proximal third and distal portions; that of the female is simple.
 
@@ -24,11 +24,11 @@ This is a relatively common species at low elevations west of the Cascades in co
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a detritivore feeding on dead leaves.
 
-##### Adults
+### Adults
 
 The adults are on the wing in summer, with Pacific Northwest records from July and August. It is nocturnal and the adults come to lights.
 

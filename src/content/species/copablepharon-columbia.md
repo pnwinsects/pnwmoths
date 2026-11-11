@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon columbia* is a rarely collected, late spring-flying *Copablepharon* that is restricted to a single dune system near Moses Lake, Washington. It is a medium-sized moth (FW length 16 - 18 mm) with relatively long and narrow forewings. The ground color is ochre yellow with a dusting of dark scales that give an olive tint to the forewing. The costa, fold, area of the reniform spot and distal to it, and veins are lighter ochre. The antemedial and postmedial lines are marked by series of black spots. The hindwing is even gray with a slightly paler fringe. The head and thorax match the forewing ground color, and the abdomen is darker gray covered with pale hair-like scales. The male antenna is weakly bipectinate, about 2X as wide as the shaft, and the unscaled portion is black.
 
@@ -24,11 +24,11 @@ This species is endemic to the central Columbia Basin.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a cutworm that burrows through the sand. The most likely foodplant is a *Psoralea* species (Fabacaceae) that grows on the dunes where this species is found. Other *Copablepharon* species in the *longipenne* species-group are known to feed on *Psoralea* (Lafontaine 2004).
 
-##### Adults
+### Adults
 
 Adults are single brooded and have a short flight season in early June. This moth appears to be extremely localized and is rarely collected away from open dunes. They are nocturnal and come to light.
 

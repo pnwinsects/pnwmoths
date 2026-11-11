@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tarache toddi* is a small (FW length 10 - 12 mm) moth that flies in arid environments of eastern Oregon and southern Idaho during the summer. It has forewings that are white on the basal half and gray-brown on the outer half, and are marked with a white patch on the distal costa and an oval iridescent blue-gray reniform spot. The forewing ground color is slightly cream colored, nearly pure white. The wing distal to the median line is mottled dark gray-brown except for a pure white preapical patch at the costa in the subterminal area. The basal and antemedial lines are light gray and double. The anterior median and postmedial lines are similar gray at the costa; a patch of black and metallic blue-gray scales are present on the fused median and postmedial lines in the fold. The subterminal line is cream, most evident posterior to the cell. It is preceded by two black spots near the apex. The terminal line is a series of black spots. The fringe is dark gray with several cream patches, largest at mid-wing. The orbicular spot is round or oval, black and incomplete, evident only as the medial and lateral portions. The reniform spot is round, black, and filled with metallic blue-gray scales. The claviform spot is absent. The hindwing is whitish gray with a sheen, slightly darker gray near the outer margin, white a white fringe. The top of the head is black. The thorax is white. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is widely distributed in arid desert regions of western North Ameri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is probably a foodplant specialist feeding on Malvaceae such as *Sphaeralcea* spp., but this is confused with the closely related *T. areli*.  Foodplant records may apply to both species.
 
-##### Adults
+### Adults
 
 This species flies during the summer and probably has two broods in our area. Most of the records are from June, but it has also been collected in July and September. It is nocturnal and comes to lights.
 

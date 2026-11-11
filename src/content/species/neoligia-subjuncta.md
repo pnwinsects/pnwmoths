@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Neoligia subjuncta* is a small moth (FW length 11–13 mm) that flies in boreal forests during the summer. It has a light olive-tan forewing that sometimes is red-brown in the mid-median area and is marked with variable, dark markings that includes a long strong black median dash. The forewing is slightly pointed and the outer margin is smoothly convex without a notch or scalloping above the anal angle. Dark gray markings are variable, most consistent along the costa to the postmedial line, on the base to the antemedial line, posterior to the median dash, and in the terminal area. The mid-median area often has a slight wine-red flush, strong in some coastal specimens. The transverse lines are gray and double, filled with gray on the costa, the light olive ground color across most of the wing, and whitish from the fold to the posterior margin. The antemedial line is indistinct on the anterior wing in most specimens, bulging laterally in the fold with the apex at the median dash. The postmedial line is lightly scalloped on the segment around the cell and smoothly concave toward the base on the posterior wing with apex of the curve at the median line. The median line is gray, evident on the costa. The subterminal line is pale olive, diffuse, sinuous, and usually complete. It is preceded by a gray shade on the mid-wing. The terminal line is black, thin. The fringe is dark gray. The orbicular spot is round, evident as the light olive ground color filling and a pale gray central ocellus. The reniform spot is moderately large and kidney-shaped, evident as the pale olive ground filling. A claviform spot is not visible separate from the median dash. The hindwing is pale gray with darker gray veins, discal spot, thin postmedial line, ill-defined marginal band, and two-tone fringe. The head and thorax are gray. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of *N. subjuncta* extends across northern North America from Alaska to
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species.
 
-##### Adults
+### Adults
 
 The flight period of this *N. subjuncta* is summer, with most records from July in our region. It is nocturnal and comes to lights.
 

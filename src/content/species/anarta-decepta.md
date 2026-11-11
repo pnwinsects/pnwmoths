@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anarta decepta* is a small to medium-sized (FW length 14 - 16 mm) powdery, light gray moth that flies in steppe habitats during most of the year. It has a forewing pattern of thin black lines and spots and a white and gray hindwing. The forewing is most often light whitish clay, sometimes with a slight tan cast, with a powdery sprinkling of dark scales. The distal wing is slightly darker gray, especially the anterior subterminal area. The basal, antemedial and postmedial lines are gray, incompletely double filled with the ground color, strongest as paired dots on the costa. The antemedial line is faint below the costa, irregular and weakly excurved. The median line is gray, most commonly a spot on the costa and faint oblique line on the anterior wing and absent elsewhere. The postmedial line is moderately scalloped, sometimes with black veins at the tips of the teeth, smoothly excurved around the reniform spot and oblique toward the base from the lower end of the cell. The subterminal line is pale, vague and irregular, mostly evident as a transition from darker gray in the subterminal area to the lighter terminal area. It is preceded by a light gray shade that is darkest on the costa and opposite the cell. The terminal line is a series of small gray spots. The fringe is concolorous with the terminal area. The orbicular spot is usually absent, thin and oval when visible. The reniform spot is kidney-shaped, incompletely outlined in patchy black, filled with the ground color anteriorly and gray posteriorly. The claviform spot is variable, absent to small and black. The hindwing is white with an incomplete gray marginal band that is darker and wider in females, dark gray veins that are darkest at the expected position of the postmedial line, and a thin discal spot. The hindwing fringe is white. The head and thorax are uniform of the forewing color. The basal segment of the foretarsus has stout curved claw-like setae, largest distally. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species occurs from southern Alberta through the Great Plains to western Te
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation like related species.
 
-##### Adults
+### Adults
 
 Adults of *A. decepta* have a fairly long flight season and have been collected from the spring until fall. This suggests the presence of more than one brood. It is nocturnal and comes to lights.
 

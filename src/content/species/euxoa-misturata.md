@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa misturata* is a common, fall-flying, small to medium-sized *Euxoa* (FW length 13–17 mm) that flies in steppe habitats. It has pale hindwings and a forewing that is variable in darkness and is powdery cream, tan, gray-brown, or dark gray. It usually has a small, oval orbicular spot with an ocellus. The forewing is relatively short, with a strongly convex outer margin. As indicated, the color is highly variable, whitish cream to powdery dark gray, but most commonly mottled tan or gray-brown. A few tan specimens have a slightly orange tint. Some specimens are relatively uniform, usually with darker terminal area, while others have darker cell or median area. Some specimens have pale gray cubital vein and proximal CuA1 and CuA2. The gray transverse lines are powdery and fairly inconspicuous against the powdery background. The antemedial and postmedial lines are gray against the median area and pale outside of the area, nearly absent, broken into short spots or segments, or complete. The antemedial line is mildly to moderately irregular, angled toward the outer margin, often with a lateral bulge between 1A+2A and the posterior margin. The median line is absent. The postmedial line is mildly to moderately toothed on the veins, is narrowly curved below the costa, and then straight and angled 45° basad below the spot. The subterminal line pale, varying from a thin or diffuse line to absent. It varies from slightly irregular to jagged with sharp pale teeth to the outer margin below the apex and at the "W" mark on M3 and CuA1. It is preceded by a dark gray spot but lacks a shade elsewhere. Black spots comprise the terminal line. The fringe matches the forewing color, white, gray-brown with a tan base, or dark gray. The orbicular and reniform spots are variably outlined in gray, often lacking a dark border, and are filled a pale shade of the ground color peripherally and the ground color centrally. The orbicular spot is small, round or oval, usually with an ocellus except when very small and round. The reniform spot is kidney-shaped, usually with a gray spot in the lower end in addition to the other dark filling. The claviform spot is absent or powdery gray, small to moderate in size. The hindwing is pure white, sometimes with powdery gray suffusion near the margin and a partial terminal line in males; darker off-white with gray on the outer half to two-thirds in females. The fringe is pure white in both sexes. The head and thorax are powdery and match the forewing color, even but sometimes with a powdery gray line across the mid-collar. A frontal tubercle is present. The male antenna is strongly biserrate. *Euxoa misturata* is a member of the large subgenus *Euxoa*.
 
@@ -34,11 +34,11 @@ This species is widespread in the arid regions of western North America. The ran
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation.  Massive epidemic outbreaks of this species were observed on disturbed rangelands infested with small, annual weedy mustards (Brassicaceae), and such plants probably provide a major food resource for the larvae.
 
-##### Adults
+### Adults
 
 This species flies during the fall. It has been collected as early as August and as late as October, but most records from the Pacific Northwest are from September. It is nocturnal and comes to lights.
 

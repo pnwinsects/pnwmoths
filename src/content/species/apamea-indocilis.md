@@ -20,11 +20,11 @@ The distribution of *A. indocilis* extends across southern Canada and the adjace
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults fly from late May through July in our region, most commonly during June. They are nocturnal and come to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anarta alta* is a mottled dull gray-brown medium-sized moth (FW length 14 - 15 mm) with a dark reniform spot and a banded light brown hindwing that flies in Rocky Mountain forests during late spring and summer. The forewing is slightly darker gray in the terminal area, sparing the apex. The basal, antemedial, and postmedial lines are crisp dark gray, double with filling of the ground. The basal and antemedial lines are moderately irregular. The antemedial line is scalloped on the veins and slightly excurved. The median line is dark gray, scalloped and closely parallel to the postmedial line below the reniform spot. The postmedial line is moderately scalloped, often with light or dark spots on the veins near the tips of the teeth, drawn toward the base on the costa, gently and broadly excurved around the reniform spot, touching the lower spot, and angled toward the base below the spot. The subterminal line is pale brown, offset toward the base below the costa, forming a strong W-mark on M3 and CuA1, and slightly concave toward the base between these marks. A dark gray spot precedes the line at the costa and a series of subterminal area wedges abut it near the W-mark. The terminal line is a series of dark gray triangles between veins. The fringe is light brown, weakly checkered with gray. The orbicular and reniform spots are outlined in thin black. The orbicular spot is large and round, filled with the ground color or pale gray with a darker central ocellus. The reniform spot is large, broadly kidney-shaped, mostly filled with smoky purplish gray. The claviform spot is small, black, filled with the ground color or gray. The hindwing is pale tan with a moderately well-defined dark gray marginal band, faint scalloped postmedial line, discal bar, and veins. The hindwing fringe is whitish with a slightly darker base. The head and thorax match the forewing, with faint gray barring across the collar. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species appears to have a limited range near the Canadian portion of the Ro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Anarta alta* flies during late spring and summer. It has been recorded from May to July throughout its range. It is nocturnal and comes to lights.
 

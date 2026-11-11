@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria stretchii* is a rare, small to medium-sized *Drasteria* (FW length 15 - 17 mm) with brown and blue-gray forewings and orange-red and black hindwings. The forewing is brown, dark at the base to the even antemedial line, lighter to the postmedial line, and dark between the postmedial and subterminal lines. The terminal area is smooth blue-gray. The pale area between the black-filled reniform spot and the jagged laterally projected postmedial line is filled with white and pale brown. The lateral margin of the postmedial line forms two sharp dentations outlined by black. The hindwing is orange-red with fairly thin black discal spot, postmedial line, and marginal band. The head and thorax are gray-brown. The antennae are ciliate in males and simple in females.
 
@@ -22,11 +22,11 @@ The range extends south through western Nevada and eastern California along the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species, but it may feed on buckwheats (Eriogonum spp.) in the Polygonaceae based on closely related species.
 
-##### Adults
+### Adults
 
 Adults are on the wing from early June through July. They are nocturnal and come to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ipimorpha nanaimo* is a medium-size moth (FW length 14 -17 mm) that flies west of the Cascades during late summer. It has a broad, truncate forewing with slightly olive-tinted orange-yellow color, nearly straight lines, and large spots. The wing has a slightly hooked tip and a convex posterior outer margin portion. The color is an odd light orange-yellow, appearing slightly dirty due to an olive cast that is strongest near the apical outer margin. The subterminal area is slightly darker than the terminal area. The basal line is barely evident. The antemedial and postmedial lines are similar, dark orange to orange-gray adjacent to the median area and light yellow outside of the median area. The antemedial line is slightly undulating and slightly angled toward the anal angle. The postmedial line is slightly excurved across the wing or S-shaped with an excurved anterior segment and a concave posterior portion. A faint dark median line is evident posterior to the reniform spot. The subterminal line is pale yellow, usually faint, moderately irregular. Faint gray dots form the terminal line in some specimens. The fringe is light orange-yellow. The claviform, orbicular, and reniform spots are large, outlined by faint dark orange, double filled with more conspicuous light yellow. The spot are filled internally with a dark shade of the olive-tinted ground color. The orbicular spot is round and the reniform spot is hourglass-shaped, sometimes kidney-shaped. The claviform spot is paler than the other spots, almost touching the orbicular spot. The hindwing is pale yellow, sometimes with light gray suffusion, with a diffuse orange-brown to gray postmedial line that fades at the anterior and inner margins. The fringe is the ground color without a terminal line. The head and thorax match the forewing color, with a slight median ridge on the anterior thorax. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found in the West Coast states. It is found in western Californi
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a foodplant specialist feeding on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae like closely related species.  Black cottonwood (*P. trichocarpa*) may be the preferred larval foodplant.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected from late June to early September in our region. They are most commonly found in late July and August. This species is nocturnal and comes to lights.
 

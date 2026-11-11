@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Neoligia albirena* is an uncommon small moth (FW length 10–11 mm) that occurs east of the Cascades during the summer. It has a mottled, dark gray forewing that most often has a charcoal gray base and median area, and a whitish reniform spot. The distribution of dark areas on the forewing is variable. The basal and median portions are usually nearly black, as is a triangular spot in the subterminal and terminal areas near the anal angle in some specimens. The median area distal to the reniform spot and the proximal subterminal area area mottled medium-dark gray, with whiter silvery gray in the subterminal area in a few individuals. Most specimens have dark veins across the subterminal area. The terminal area is dark gray, similar to the proximal dark areas but often lighter. Lighter specimens have mottled gray proximal to the antemedial line and dark gray or wine-red median areas. A short but thick black median dash is present, although this is obscured if the median area is very dark. The basal, antemedial, and postmedial lines are gray, double, only clearly seen in specimens with lighter adjacent color. The antemedial line is slightly irregular, bulging slightly toward the outer margin in the fold and incurved on the posterior margin. The median line is a spot on the costa. The postmedial line is finely scalloped, S-shaped, tightly curved around the reniform spot and concave toward the base below the spot. The subterminal line is pale gray, irregular, preceded by a gray shade in most specimens. The fringe is checkered medium and dark gray, with a black spot near the anal angle in specimens with a black mark on the adjacent wing. The orbicular spot is round, usually completely obscured by the adjacent dark gray but filled with light gray in a few specimens. The reniform spot is moderate-sized, kidney-shaped, filled with whitish gray and a gray spot at the lower end. The claviform spot is absent. The hindwing is light tan-gray with darker gray toward the margin and a dark thin terminal line. The hindwing fringe is two-toned gray. The head and thorax are dark gray, black in dark specimens. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of *N. albirena* extends to northern California, Wyoming, Utah, Nevada
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species.
 
-##### Adults
+### Adults
 
 The flight period of this moth is the summer, typically from June to early September. It is nocturnal and comes to lights.
 

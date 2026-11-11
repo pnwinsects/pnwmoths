@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eueretagrotis perattentus* is a broad-winged, small to medium-sized noctuid moth (FW length 15 - 17 mm) with a broad black collar and brown forewing with a black cell between the spots. The forewing ground color is dark brown with a faint purplish to reddish tint, slightly lighter anteriorly and darker toward the outer margin. The transverse lines are double with slightly lighter filling. The postmedial line is weakly scalloped, especially the medial component. The subterminal line is pale, usually preceded by a dark shade and occasionally by a series of thin black wedges. A short, black basal dash is present. The orbicular and reniform spots are fairly large, but are mostly evident due to black filling of the adjacent cell. The hindwing is pale luteous gray with faintly darker discal spot, scalloped median line, and subterminal band. The head and most of the thorax are brown like the forewing ground color, but the collar is thick and black. The abdomen is gray. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found in boreal forests across North America on both sides of th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on hardwoods such as huckleberries (*Vaccinium* spp.) in the Ericaceae and cherries (*Prunus* spp.) in the Rosaceae.
 
-##### Adults
+### Adults
 
 Adults are found in the summer months with records from late June through August in our region. It is probably single brooded. The adults are nocturnal and come to lights.
 

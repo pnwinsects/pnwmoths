@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis cibalis* is a small to medium-sized (FW length 14 - 17 mm), streaky blue-gray and orange-brown moth that flies over sandy soil during the summer. It has a pointed forewing shape and markings that are dominated by a row of black wedges in the subterminal area. The apex of the forewing is elongated and apically pointed. The color is geographically variable, blue gray with reddish-brown streaks on the anterior wing and in the subterminal area in most of the Northwest, and paler gray with more extensive light orange-brown across the entire wing in the Great Basin. The costa, trailing margin, and outer margin are darkest. The subterminal area is light whitish gray, most extensively distal to the cell but also as streaks on the mid- and posterior wing. The lines proximal to the subterminal area are only evident on the costa. The subterminal line is pale whitish gray, preceded by a dark gray and brown shade and a series of black wedges that area longest and thickest on the mid-wing. The terminal line has black medial and light outer components. The fringe is striped gray in the darker populations and tan and gray in the lighter ones. The orbicular and claviform spots are similar, pale and very long, filled with light gray. The reniform spot is pale, small and ovoid to boomerang-shaped, filled with gray that is darkest at the lower end. The hindwing is light gray, whitish in pale populations, with ill-defined gray toward the margin, dark veins and discal spot, and dark thin terminal line. The fringe is white, sometimes with a thin gray median line in dark specimens. The head is mottled gray. The collar is brown at the base with a subbasal black transverse line, a wide tan segment, and brown dorsal edge. The rest of the thorax is hoary gray with a dark gray posterior tuft.
 
@@ -26,11 +26,11 @@ The range of *S. cibalis* extends south through eastern California, Utah, and Co
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but penstemons (*Penstemon* spp.) in the Scrophulariaceae are suspected based upon the habitat.
 
-##### Adults
+### Adults
 
 This species flies during the fall, usually in September. It is nocturnal and comes to lights.
 

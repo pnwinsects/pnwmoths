@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis mirabilis* is an attractive, medium-sized species (FW length 16 - 18 mm) that occurs in the forest-steppe ecotone during the late summer. It has dark, blackish-gray forewings with cream-colored spots and an orange central thorax. The forewing is nearly uniform blackish gray with scattered gray scales, most densely in the terminal area which is slightly lighter than the rest of the forewing. The basal, antemedial, and postmedial lines are barely evident as the gray filling, and the subterminal line is a series of gray to light yellow spots. The small orbicular spot and the ovoid reniform spot are filled with light yellow. The cell is filled with black, barely evident against the dark ground. The hindwing is dark gray with slightly darker veins and a two-toned gray fringe. The head, collar, and petagiae are dark gray like the forewing while the central thorax is brick red.
 
@@ -22,11 +22,11 @@ This species is widely distributed in much of the West. Outside of the Pacific N
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on conifers of the family Cupressaceae.  Western juniper (*Juniperus occidentalis*) is the primary larval foodplant east of the Cascades in Oregon, while incense cedar (*Calocedrus decurrens*) may be the primary foodplant in the Cascades and Siskiyou Mountains. It probably feeds on common juniper (*Juniperus communis*) based on its distribution in Washington where there are no other *Juniperus* species. It has been collected from Rocky Mountain juniper (*Juniperus scopulorum*) in British Columbia (Lafontaine 1998).
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in summer and early fall. They have been collected from mid-July through September in our region. They are nocturnal and come to lights.
 

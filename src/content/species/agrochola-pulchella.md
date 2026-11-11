@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrochola pulchella* is a striking wine-red, orange, and tan small to medium-sized moth (FW length 14–16 mm) that flies west of the Cascade Range during the fall. The forewing is fairly long and has a slightly pointed apex. It is banded in vivid hues: deep rose to dark wine in the basal and antemedial areas, olive-tan in the median area proximal to the median line, dark wine red from the median line to the subterminal line, and dark orange in the terminal area. The smooth lines are mostly evident as the transitions between colors; only a portion of the excurved brown antemedial line is evident as a separate marking. The dark wine-red median line extends through the anterior reniform spot and is bent 90° at the lower end of the spot. The subterminal line is slightly irregular below the apex and nearly parallel to the outer margin elsewhere. The fringe is pale orange. The thin orbicular spot is pale olive tan, an obliquely-oriented oval. The reniform spot is ovoid or kidney shaped, outlined in pale scales, light red in the upper two-thirds and white at the lower end, filled with rose to wine red in the upper portion and tan to white in the lower end. No claviform spot is evident. The hindwing is shiny pink, immaculate to darkly suffused with gray except near the margin, with a pink to gray discal spot. The fringe is light pink. The head and thorax are orange brown with strong pink to red suffusion. The antenna has a white base (scape) and proximal dorsum; that of the male is beaded.
 
@@ -22,11 +22,11 @@ This species is found predominantly near the Pacific Coast. It occurs in western
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding on many kinds of hardwoods, particularly Salicaceae, Betulaceae, and Fagaceae.
 
-##### Adults
+### Adults
 
 The flight season of *A. pulchella* is during the fall, most commonly during September and October. It is nocturnal and comes to lights.
 

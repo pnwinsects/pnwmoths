@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drepana arcuata* is a small to medium-sized slight-bodied moth (FW length 17–20 mm) that is widely distributed in forests and flies from spring to early fall. Its forewings are broad and hook-tipped, and have smooth outer margins. The ground color is light yellow-brown to ochre, with a fine pattern of wavy brown-gray transverse lines. A strong warm-brown and black curved line extends from the distal third of the trailing margin to the apex, curving into the hook. The fringe is dark brown, black at the apex. Two gray spots mark the ends of the discal spot and a single small dot is the orbicular spot. The hindwing is slightly lighter colored than the forewing. Its lines are darkest toward the posterior and fade toward the anterior. The hindwing discal spot is formed by two spots, one at each end of the cell. The hindwing fringe is orange-brown. The head and thorax match the forewing. The antennae of both sexes are bipectinate, more strongly in males.
 
@@ -8,7 +8,7 @@
 
 Species in the family Drepanidae resemble inchworm moths (Geometridae) in general form.
 
-##### Larvae
+### Larvae
 
 The larva is mottled brown and green with knobby dorsal scoli or tubercles. It is illustrated by Miller and Hammond (2003).
 
@@ -28,11 +28,11 @@ This species occurs in boreal forest across the North American Continent. In the
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various alders (*Alnus* spp.) in the Betulaceae, particularly red alder (*A. rubra*) west of the Cascades.
 
-##### Adults
+### Adults
 
 *Drepana arcuata* has a very long flight period from spring until fall. Most specimens have been collected from May to mid-August. It is nocturnal and comes to light.
 
