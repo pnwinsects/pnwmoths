@@ -63,6 +63,11 @@ slug, in all files — not a move to the deny-list, and not a redirect.**
   that the build gate says nothing about what the CDN is serving.
   `_instructions/REMOVING_SPECIES.md` leads with the check against production, not against the
   build.
+  Since 2026-11, `npm run deploy:smoke` makes that check after every production upload: for each
+  species in `data/species.csv` with no page in the build (withheld, unpublished or blank family),
+  it fails if the CDN still serves its page or its `records.parquet`. Its first run found 25
+  withheld Geometridae pages and 130 occurrence files that the probe for #273 had not looked for.
+  A species deleted outright from `species.csv`, like *nuteglan*, is outside what it can see.
 - **The removed slug becomes a permanent entry in "Unmapped Legacy Links."**
   `scripts/fetch-analytics.ts` replays the legacy resolver over CDN logs and reports every
   unmatched species-shaped path as a mapping nobody has written

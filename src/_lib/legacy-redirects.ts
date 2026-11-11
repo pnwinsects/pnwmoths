@@ -104,16 +104,41 @@ export function normalizeLegacyPath(fromPath: string): string {
 }
 
 /**
+ * The slugs in `allSlugs` that have no species page, given the slugs that do.
+ *
+ * A species can be in the catalogue (data/species.csv) without a published page:
+ * its family is withheld, or it is on the unpublished list. The build passes the
+ * species it actually published, so this follows every gate without restating one.
+ */
+export function slugsWithoutPages(
+  allSlugs: Iterable<string>,
+  publishedSlugs: Iterable<string>,
+): string[] {
+  const published = new Set(publishedSlugs);
+  return [...allSlugs].filter((slug) => !published.has(slug)).sort();
+}
+
+/**
  * Resolve an old WWU path to a new site path.
  *
  * `matched: false` means the visitor is being dumped on a generic page (browse or home)
  * rather than the page they asked for — those are the hits worth reporting.
+ *
+ * `withoutPages` names catalogue species that have no page (withheld or unpublished).
+ * A legacy link to one goes to Browse rather than to a page that would 404 (#271). It
+ * still counts as matched: the species is known and deliberately not shown, so there is
+ * no mapping left to write.
  */
 export function resolveLegacyPath(
   fromPath: string,
   speciesSlugs: ReadonlySet<string>,
+  withoutPages: ReadonlySet<string>,
 ): RedirectResolution {
   const path = normalizeLegacyPath(fromPath);
+  const speciesTarget = (slug: string): RedirectResolution =>
+    withoutPages.has(slug)
+      ? { target: 'browse/index.html', matched: true }
+      : { target: 'species/' + slug + '/index.html', matched: true };
 
   // 1. Static map
   const staticTarget = STATIC_MAP[path];
@@ -132,19 +157,19 @@ export function resolveLegacyPath(
     }
 
     if (speciesSlugs.has(last)) {
-      return { target: 'species/' + last + '/index.html', matched: true };
+      return speciesTarget(last);
     }
 
     // Normalize spaces/underscores and try again
     const normalized = last.replace(/[_\s]+/g, '-').toLowerCase();
     if (speciesSlugs.has(normalized)) {
-      return { target: 'species/' + normalized + '/index.html', matched: true };
+      return speciesTarget(normalized);
     }
 
     // Synonym map (reclassified species)
     const synonym = SYNONYMS[last] ?? SYNONYMS[normalized];
     if (synonym && speciesSlugs.has(synonym)) {
-      return { target: 'species/' + synonym + '/index.html', matched: true };
+      return speciesTarget(synonym);
     }
 
     // Bare genus name (no hyphen) — send to browse

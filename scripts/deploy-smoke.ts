@@ -7,6 +7,11 @@
  * Checks:
  *   1. `cache-control` header is `no-cache` (not an old long-TTL policy).
  *   2. Response body SHA-256 matches the local `_site/` build output.
+ *   3. No species without a page in this build is still served: for every species in
+ *      data/species.csv that has no `_site/species/<slug>/index.html` (a withheld family
+ *      or the unpublished list), its page and its `records.parquet` must not answer 200.
+ *      The upload is additive and never deletes (ADR 0008), so a page uploaded before
+ *      its species was withheld stays live until someone deletes it; #273 found 33.
  *
  * Designed to run immediately after `npm run site:upload`. It reads the local
  * build in `_site/` to know what the correct content should be.
@@ -27,11 +32,15 @@
  *   SMOKE_URLS      — comma-separated list of site-relative paths to check
  *   SMOKE_SAMPLE    — max number of HTML pages to sample when SMOKE_URLS is not set (default: 5)
  *   SITE_DIR        — local build directory (default: _site)
+ *   SPECIES_CSV     — catalogue the gated species are read from (default: data/species.csv)
  */
 
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { parse } from 'csv-parse/sync';
 import { listSiteFiles, hashBytes } from './upload-site.ts';
+import { pooled } from './lib/bunny-storage.ts';
+import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
 import { pathToFileURL } from 'node:url';
 
 // ---------------------------------------------------------------------------
@@ -43,6 +52,7 @@ export const DEFAULT_CDN_ORIGIN = 'https://moths.pnwinsects.org';
 const CDN_ORIGIN: string = (process.env['CDN_ORIGIN'] ?? DEFAULT_CDN_ORIGIN).replace(/\/+$/, '');
 const SITE_DIR: string = process.env['SITE_DIR'] ?? '_site';
 const SMOKE_SAMPLE: number = Math.max(1, Number(process.env['SMOKE_SAMPLE'] ?? '5') || 5);
+const SPECIES_CSV: string = process.env['SPECIES_CSV'] ?? 'data/species.csv';
 
 // ---------------------------------------------------------------------------
 // Exported helpers (tested in deploy-smoke.test.ts)
@@ -174,6 +184,92 @@ export function formatResult(r: SmokeResult): string {
 }
 
 // ---------------------------------------------------------------------------
+// Species without pages must not be served (#273)
+// ---------------------------------------------------------------------------
+
+/**
+ * Slugs of catalogue species that this build gave no page.
+ *
+ * Read from the build output rather than from the gates themselves, so it follows
+ * every reason a species is left out (withheld family, unpublished list, blank
+ * family) without restating any of them.
+ */
+export function slugsWithoutPagesInBuild(speciesCsv: string, siteDir: string): string[] {
+  const rows = parse(readFileSync(speciesCsv), { columns: true, skip_empty_lines: true }) as Array<{
+    genus?: string;
+    species?: string;
+  }>;
+  const slugs = new Set(rows.map((r) => normalizeSlug(`${r.genus ?? ''}-${r.species ?? ''}`)));
+  return [...slugs]
+    .filter((slug) => !existsSync(join(siteDir, `species/${slug}/index.html`)))
+    .sort();
+}
+
+/** The CDN paths a species without a page must not serve. */
+export function gatedPaths(slug: string): string[] {
+  const dir = `species/${encodeURIComponent(slug)}/`;
+  return [dir, `${dir}records.parquet`];
+}
+
+export interface GatedReport {
+  /** Paths that answered 200: content the curator withheld, live to anyone with the URL. */
+  live: string[];
+  /** Paths that answered neither 2xx nor 404, or not at all: not proven either way. */
+  unknown: string[];
+  checked: number;
+}
+
+/**
+ * Request every gated path and sort the answers. 404 is the only good answer;
+ * never throws.
+ *
+ * A path with no clear answer is asked once more, one request at a time, before it
+ * is reported. About one request in a thousand fails at the network level when 16
+ * run at once, and on the first run against production one such failure hid a file
+ * that was still being served.
+ */
+export async function checkGatedPaths(
+  cdnOrigin: string,
+  slugs: string[],
+  fetchImpl: typeof fetch = fetch,
+  concurrency = 16,
+): Promise<GatedReport> {
+  const paths = slugs.flatMap(gatedPaths);
+  const live: string[] = [];
+  const unclear: string[] = [];
+  const probe = async (path: string): Promise<'live' | 'gone' | string> => {
+    try {
+      const res = await fetchImpl(`${cdnOrigin}/${path}`, {
+        method: 'HEAD',
+        headers: { 'User-Agent': 'pnwmoths-deploy-smoke/1.0' },
+        redirect: 'follow',
+        signal: AbortSignal.timeout(15_000),
+      });
+      if (res.ok) return 'live';
+      if (res.status === 404) return 'gone';
+      return `HTTP ${res.status}`;
+    } catch (err) {
+      return (err as Error).message;
+    }
+  };
+
+  await pooled(paths, concurrency, async (path) => {
+    const answer = await probe(path);
+    if (answer === 'live') live.push(path);
+    else if (answer !== 'gone') unclear.push(path);
+  });
+
+  const unknown: string[] = [];
+  await pooled(unclear, 1, async (path) => {
+    const answer = await probe(path);
+    if (answer === 'live') live.push(path);
+    else if (answer !== 'gone') unknown.push(`${path} (${answer})`);
+  });
+
+  return { live: live.sort(), unknown: unknown.sort(), checked: paths.length };
+}
+
+// ---------------------------------------------------------------------------
 // main()
 // ---------------------------------------------------------------------------
 
@@ -226,10 +322,38 @@ async function main(): Promise<void> {
 
   if (failed > 0) {
     console.error('[deploy-smoke] stale content detected — consider a pull-zone purge (bunny.net dashboard → Pull Zone → Purge Cache).');
-    process.exit(1);
   }
 
+  const gatedOk = await reportGated();
+
+  if (failed > 0 || !gatedOk) process.exit(1);
   console.log('[deploy-smoke] all checks passed — CDN is serving fresh content.');
+}
+
+/** Run the #273 check and print its outcome. Returns false when a gated path is live. */
+async function reportGated(): Promise<boolean> {
+  const slugs = slugsWithoutPagesInBuild(SPECIES_CSV, SITE_DIR);
+  console.log('');
+  console.log(`[deploy-smoke] checking that ${slugs.length} species without pages are not served…`);
+  const report = await checkGatedPaths(CDN_ORIGIN, slugs);
+
+  for (const path of report.unknown) console.warn(`  ? ${path}`);
+  if (report.unknown.length > 0) {
+    console.warn(`[deploy-smoke] ${report.unknown.length} gated path(s) gave no clear answer; not counted as failures.`);
+  }
+
+  if (report.live.length === 0) {
+    const confirmed = report.checked - report.unknown.length;
+    console.log(`[deploy-smoke] ${confirmed} of ${report.checked} gated paths confirmed gone (404); none served.`);
+    return true;
+  }
+  for (const path of report.live) console.error(`  ✗ ${path} — served, but this build gives its species no page`);
+  console.error(
+    `[deploy-smoke] ${report.live.length} path(s) of withheld or unpublished species are still live. ` +
+      'The upload never deletes (ADR 0008), so delete these objects from the storage zone by hand, ' +
+      'then purge them from the pull zone. See docs/adr/0029-removing-a-species.md and issue #273.',
+  );
+  return false;
 }
 
 // ---------------------------------------------------------------------------

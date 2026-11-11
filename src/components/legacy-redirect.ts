@@ -14,7 +14,7 @@
  * Its own Vite entry (src/_lib/vite-entries.ts) rather than part of main.ts: it runs
  * on one page, which loads nothing else. The page supplies the two values that used
  * to be templated into the script: the pathPrefix-aware base URL as data-base-url on
- * <body>, and the species slugs as a JSON block (#species-slugs).
+ * <body>, and the species slugs as JSON blocks (#species-slugs, #species-without-pages).
  */
 import { resolveLegacyPath, REDIRECT_FROM_PARAM } from '../_lib/legacy-redirects.ts';
 
@@ -31,6 +31,12 @@ const BASE = document.body.dataset['baseUrl'] ?? '/';
 // a species missing here is silently unreachable from every legacy /browse/ link).
 const SPECIES_SLUGS = new Set<string>(
   JSON.parse(document.getElementById('species-slugs')?.textContent ?? '[]') as string[]
+);
+
+// The subset of those species that have no page: withheld families and the unpublished
+// list. Computed by the build from the species it actually published (#271).
+const SPECIES_WITHOUT_PAGES = new Set<string>(
+  JSON.parse(document.getElementById('species-without-pages')?.textContent ?? '[]') as string[]
 );
 
 /**
@@ -67,7 +73,7 @@ if (!fromPath) {
   // No ?from= parameter — redirect home
   window.location.replace(BASE + 'index.html');
 } else {
-  const { target, matched } = resolveLegacyPath(fromPath, SPECIES_SLUGS);
+  const { target, matched } = resolveLegacyPath(fromPath, SPECIES_SLUGS, SPECIES_WITHOUT_PAGES);
   logRedirect(fromPath, BASE + target, matched);
 
   if (!matched) {
