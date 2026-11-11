@@ -323,7 +323,8 @@ async function reportGated(): Promise<boolean> {
   }
 
   if (report.live.length === 0) {
-    console.log(`[deploy-smoke] ${report.checked} gated paths checked, none served.`);
+    const confirmed = report.checked - report.unknown.length;
+    console.log(`[deploy-smoke] ${confirmed} of ${report.checked} gated paths confirmed gone (404); none served.`);
     return true;
   }
   for (const path of report.live) console.error(`  ✗ ${path} — served, but this build gives its species no page`);
