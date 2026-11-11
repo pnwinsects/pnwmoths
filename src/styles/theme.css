@@ -245,6 +245,15 @@ nav a {
    Scoped to .site-nav so it does NOT hit the breadcrumb (also a <nav>) or the
    glossary alphabet index — a broad `nav a` padding gave breadcrumb links 12px
    side padding that the plain genus <span> lacked, breaking separator spacing. */
+/* Pico gives the last <ul> in any <nav> a negative right margin, so its links can sit
+   flush with the edge of a navbar that has no padding of its own. The header's one <ul>
+   is followed by the search box, not an edge, and on a narrow screen that margin made it
+   hang 8px past the viewport, so every page scrolled sideways at 320px (WCAG 1.4.10, #206).
+   :last-of-type matches Pico's own selector, which would otherwise win on specificity. */
+.site-nav ul:last-of-type {
+  margin-right: 0;
+}
+
 .site-nav ul a {
   display: inline-block;
   padding: 10px 12px;

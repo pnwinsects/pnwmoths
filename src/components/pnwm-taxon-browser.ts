@@ -715,6 +715,8 @@ class PnwmTaxonBrowser extends LitElement {
         }
         .pnwm-tb-species-label { padding: 0.25rem 0; }
       </style>
+      ${/* Each label-and-select row wraps, and its select is capped at the row's width, so the
+         toolbar fits a 320px screen instead of making the page scroll sideways (WCAG 1.4.10, #206). */ ''}
       <div class="pnwm-tb-toolbar" style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-start;padding:8px 16px">
         <label>
           <input
@@ -724,11 +726,11 @@ class PnwmTaxonBrowser extends LitElement {
           >
           Show images
         </label>
-        <div style="display:flex;align-items:center;gap:0.5em">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5em;max-width:100%">
           <label for="pnwm-tb-state-filter" style="white-space:nowrap">Filter by state</label>
           <select
             id="pnwm-tb-state-filter"
-            style="width:auto;margin:0"
+            style="width:auto;max-width:100%;margin:0"
             .value=${this._selectedState}
             ?disabled=${!this._statesAvailable.length}
             @change=${this._onStateChange}
@@ -739,11 +741,11 @@ class PnwmTaxonBrowser extends LitElement {
             )}
           </select>
         </div>
-        <div style="display:flex;align-items:center;gap:0.5em">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5em;max-width:100%">
           <label for="pnwm-tb-district-filter" style="white-space:nowrap">Filter by ${districtLabel(this._selectedState)}</label>
           <select
             id="pnwm-tb-district-filter"
-            style="width:auto;margin:0"
+            style="width:auto;max-width:100%;margin:0"
             .value=${this._selectedDistrict}
             ?disabled=${!this._selectedState}
             @change=${this._onDistrictChange}

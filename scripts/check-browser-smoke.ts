@@ -606,6 +606,38 @@ export const CHECKS: Check[] = [
       }
     },
   },
+  {
+    // WCAG 1.4.10 (Reflow): at 320 CSS pixels, the width of a phone and of a desktop browser at
+    // 400% zoom, a page must not scroll sideways. Every page did, by 8px, because of a Pico margin
+    // on the header nav, and Browse reached 474px once a state was chosen (#206). Neither shows
+    // at desktop width, so nothing else here would notice it coming back.
+    name: 'reflow: no page scrolls sideways at 320px',
+    async run({ page, origin, slug }) {
+      await page.setViewportSize({ width: 320, height: 800 });
+      // A string, not a function: this file has no DOM types (see HasAttributes above).
+      const widths = async (): Promise<[number, number]> =>
+        (await page.evaluate(
+          '[document.documentElement.scrollWidth, document.documentElement.clientWidth]',
+        )) as [number, number];
+      const overflowing: string[] = [];
+      for (const path of ['/', '/browse/', '/identify/', `/species/${slug}/`]) {
+        await page.goto(`${origin}${path}`, { waitUntil: 'load' });
+        const [scroll, client] = await widths();
+        if (scroll > client) overflowing.push(`${path} is ${scroll}px wide`);
+      }
+      // The district filter's options are the widest content Browse renders, and only appear
+      // once a state is chosen. British Columbia has the longest names.
+      await page.goto(`${origin}/browse/`, { waitUntil: 'load' });
+      const state = page.locator('#pnwm-tb-state-filter');
+      await page.waitForFunction((el: HasAttributes) => el.getAttribute('disabled') === null, await state.elementHandle());
+      await state.selectOption('BC');
+      const [scroll, client] = await widths();
+      if (scroll > client) overflowing.push(`/browse/ with British Columbia selected is ${scroll}px wide`);
+      if (overflowing.length > 0) {
+        fail(`at a 320px viewport these pages scroll sideways:\n      ${overflowing.join('\n      ')}`);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
