@@ -1,9 +1,19 @@
 version: 2
+
+# One pull request a month covering every update, npm and GitHub Actions
+# together, instead of one pull request per package each week. Several of those
+# were superseded by the next week's bump before anyone merged them. Ignore rules
+# below still apply inside the group.
+multi-ecosystem-groups:
+  monthly:
+    schedule:
+      interval: monthly
+
 updates:
   - package-ecosystem: npm
     directory: /
-    schedule:
-      interval: weekly
+    multi-ecosystem-group: monthly
+    patterns: ['*']
     ignore:
       # @types/node's major tracks the Node major line, and .nvmrc pins Node 24 (LTS).
       # Accepting a major here lets tsc vouch for APIs the runtime doesn't have — and
@@ -13,5 +23,5 @@ updates:
 
   - package-ecosystem: github-actions
     directory: /
-    schedule:
-      interval: weekly
+    multi-ecosystem-group: monthly
+    patterns: ['*']
