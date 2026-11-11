@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
   analyticsListUrl, analyticsFileUrl, STORAGE_PREFIX,
-  syncAnalytics, isComplete, downloadedCount, renderReport, type RemoteFile,
+  syncAnalytics, isComplete, MAX_CONSECUTIVE_FAILURES, downloadedCount, renderReport, type RemoteFile,
 } from './download-analytics.ts';
 
 // ---------------------------------------------------------------------------
@@ -132,6 +132,18 @@ describe('syncAnalytics', () => {
       list: async () => [remote('2026-07-04.json', '{}')],
       download: async () => Buffer.from('{}'),
     }));
+  });
+
+  it('stops downloading after several failures in a row, and reports the rest', async () => {
+    const names = ['2026-07-01.json', '2026-07-02.json', '2026-07-03.json', '2026-07-04.json', '2026-07-05.json'];
+    let attempts = 0;
+    const result = await syncAnalytics(tempDir(), {
+      list: async () => names.map((n) => remote(n, '{}')),
+      download: async () => { attempts++; throw new Error('HTTP 502 after 4 retries'); },
+    });
+    assert.equal(attempts, MAX_CONSECUTIVE_FAILURES);
+    assert.deepEqual(result.files.map((f) => f.status), names.map(() => 'missing'));
+    assert.match(result.files.at(-1)!.error ?? '', /not attempted/);
   });
 
   it('treats a failed listing as incomplete and keeps every cached file', async () => {

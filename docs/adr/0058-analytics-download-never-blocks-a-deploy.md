@@ -32,7 +32,9 @@ already skips a day that is missing or malformed rather than failing.
   replaces the cached copy.
 - **A download that fails does not fail the build.** The script keeps the older
   cached copy, or leaves the day out if there is none, and exits **2**. A failed
-  listing is treated the same way: the page is built from the cached files. Exit
+  listing is treated the same way: the page is built from the cached files. After
+  three downloads fail in a row the rest are not attempted, so an outage with an
+  empty cache costs minutes rather than an hour of retries. Exit
   **1** is kept for misconfiguration, bugs and local write errors, and still fails
   the build.
 - **An incomplete download opens a tracking issue, and a complete one closes it.**
@@ -53,6 +55,9 @@ already skips a day that is missing or malformed rather than failing.
   the signal, and it names each affected day.
 - Builds may finish out of order (ADR 0053), so an older build's result can reopen
   an issue that a newer one closed. The next nightly deploy corrects it.
+- Two builds running in parallel can save the cache out of order, so the newest
+  entry may lack a file the other build downloaded. A later build then downloads
+  that file again; nothing is lost, because Bunny holds the authoritative copy.
 - A cache entry not used for 7 days is evicted by GitHub; the next build then
   downloads every file once, as before.
 

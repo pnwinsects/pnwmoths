@@ -57,6 +57,13 @@ export const EXIT_INCOMPLETE = 2;
 
 const DAY_FILE = /^\d{4}-\d{2}-\d{2}\.json$/;
 
+/**
+ * Downloads that fail in a row before the rest are not attempted. Each failure
+ * spends about 30 seconds on retries, so with an empty cache and Bunny failing
+ * every request, trying all ~130 files would hold the build for over an hour.
+ */
+export const MAX_CONSECUTIVE_FAILURES = 3;
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -231,10 +238,16 @@ export async function syncAnalytics(outDir: string, deps: SyncDeps): Promise<Syn
 
   mkdirSync(outDir, { recursive: true });
   const files: FileOutcome[] = [];
+  let failuresInARow = 0;
   for (const entry of remote) {
     const path = join(outDir, entry.name);
     if (isCurrent(path, entry)) {
       files.push({ name: entry.name, status: 'current' });
+      continue;
+    }
+    if (failuresInARow >= MAX_CONSECUTIVE_FAILURES) {
+      const error = `not attempted after ${MAX_CONSECUTIVE_FAILURES} downloads in a row failed`;
+      files.push({ name: entry.name, status: existsSync(path) ? 'stale' : 'missing', error });
       continue;
     }
     let content: Uint8Array;
@@ -246,8 +259,10 @@ export async function syncAnalytics(outDir: string, deps: SyncDeps): Promise<Syn
     } catch (err) {
       const error = redact(String((err as Error).message ?? err));
       files.push({ name: entry.name, status: existsSync(path) ? 'stale' : 'missing', error });
+      failuresInARow++;
       continue;
     }
+    failuresInARow = 0;
     // Write beside the target and rename, so a crash mid-write cannot leave a
     // truncated file for the cache to keep.
     const tmp = `${path}.part`;
