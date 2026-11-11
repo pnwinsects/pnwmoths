@@ -16,6 +16,8 @@ import {
   parseTaxonHash,
   resolveTaxonHash,
   taxonFragment,
+  placeName,
+  filterSummary,
 } from './pnwm-taxon-browser.ts';
 import type { TaxonFamily, TaxonSubfamily, TaxonTribe, TaxonGenus } from '../types/index.ts';
 
@@ -508,5 +510,32 @@ describe('taxonomy Browse fragments', () => {
     assert.ok(template.includes(
       `{% if sp.subfamily %}--subfamily-{{ sp.subfamily | lower }}{% endif %}{% if sp.tribe %}--tribe-{{ sp.tribe | lower }}{% endif %}--genus-{{ sp.genus_slug }}">{{ sp.genus }}</a`
     ));
+  });
+});
+
+describe('placeName', () => {
+  it('is empty when no state is chosen', () => {
+    assert.equal(placeName('', ''), '');
+  });
+  it('names a state in full', () => {
+    assert.equal(placeName('WA', ''), 'Washington');
+  });
+  it('names a US county with its state', () => {
+    assert.equal(placeName('WA', 'Adams'), 'Adams County, Washington');
+  });
+  it('names a BC regional district with the province', () => {
+    assert.equal(placeName('BC', 'Capital'), 'Capital Regional District, British Columbia');
+  });
+});
+
+describe('filterSummary', () => {
+  it('says how many species match, and what the grey means', () => {
+    assert.equal(
+      filterSummary(812, 1254, 'Washington'),
+      '812 of 1,254 species have records in Washington. Groups with none are greyed out.',
+    );
+  });
+  it('is empty with no place, so the live region stays silent', () => {
+    assert.equal(filterSummary(0, 1254, ''), '');
   });
 });
