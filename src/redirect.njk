@@ -62,9 +62,11 @@ eleventyExcludeFromCollections: true
     </p>
   </div>
   {#- The redirect logic is src/components/legacy-redirect.ts, its own Vite entry
-     (ADR 0049). It reads the two values below: the species slugs it resolves
-     against, and the pathPrefix-aware base on <body>. -#}
+     (ADR 0049). It reads the values below: the species slugs it resolves against,
+     the ones among them that have no page (sent to Browse instead, #271), and the
+     pathPrefix-aware base on <body>. -#}
   <script type="application/json" id="species-slugs">{{ speciesSlugs | dump | safe }}</script>
+  <script type="application/json" id="species-without-pages">{{ speciesSlugs | slugsWithoutPages(species) | dump | safe }}</script>
   {% viteEntry "src/components/legacy-redirect.ts" %}
 </body>
 </html>

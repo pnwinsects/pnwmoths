@@ -8,6 +8,7 @@ import { parse as parseCsv } from "csv-parse/sync";
 import { applyGlossaryTerms, buildTermMap, type GlossaryRow } from "./src/_lib/glossary-transform.ts";
 import { derivativeUrl, sourceUrl, type VariantToken } from "./src/_lib/derivative-url.ts";
 import { photoPath } from "./src/_lib/photo-path.ts";
+import { slugsWithoutPages } from "./src/_lib/legacy-redirects.ts";
 import { entryTags, pathPrefix, VITE_MANIFEST, VITE_OUT_DIR, type ViteManifest } from "./src/_lib/vite-entries.ts";
 import {
   pickAccountPhotos,
@@ -95,6 +96,11 @@ export default function (eleventyConfig: EleventyConfig): { pathPrefix: string; 
 
   // Thousands-separated integer, e.g. 92446 -> "92,446". Used for home-page stats.
   eleventyConfig.addFilter("number", v => Number(v).toLocaleString("en-US"));
+
+  // Catalogue slugs with no species page, for the legacy redirect page (#271): given
+  // every slug and the species the build published, the ones a link must not target.
+  eleventyConfig.addFilter("slugsWithoutPages", (allSlugs, species) =>
+    slugsWithoutPages(allSlugs as string[], (species as Array<{ slug: string }>).map(sp => sp.slug)));
 
   // --- Sharing metadata (issue #198) ---------------------------------------
 

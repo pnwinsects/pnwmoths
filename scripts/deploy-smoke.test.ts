@@ -1,6 +1,11 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { selectUrls, formatResult, DEFAULT_CDN_ORIGIN } from './deploy-smoke.ts';
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import {
+  selectUrls, formatResult, DEFAULT_CDN_ORIGIN, slugsWithoutPagesInBuild, checkGatedPaths,
+} from './deploy-smoke.ts';
 import type { SmokeResult } from './deploy-smoke.ts';
 
 // ---------------------------------------------------------------------------
@@ -114,5 +119,44 @@ describe('formatResult', () => {
 describe('DEFAULT_CDN_ORIGIN', () => {
   it('points to the production CDN', () => {
     assert.equal(DEFAULT_CDN_ORIGIN, 'https://moths.pnwinsects.org');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Species without pages must not be served (#273)
+// ---------------------------------------------------------------------------
+
+describe('slugsWithoutPagesInBuild', () => {
+  it('lists catalogue species with no page in the build, using the site slug rule', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'deploy-smoke-'));
+    const csv = join(dir, 'species.csv');
+    writeFileSync(csv, 'genus,species,family\nAbagrotis,apposita,Noctuidae\nAseptis,sp No 1,Noctuidae\nCladara,limitaria,Geometridae\n');
+    mkdirSync(join(dir, 'site', 'species', 'abagrotis-apposita'), { recursive: true });
+    writeFileSync(join(dir, 'site', 'species', 'abagrotis-apposita', 'index.html'), '');
+    assert.deepEqual(slugsWithoutPagesInBuild(csv, join(dir, 'site')), ['aseptis-sp-no-1', 'cladara-limitaria']);
+  });
+});
+
+describe('checkGatedPaths', () => {
+  it('fails only on paths that answer 2xx, and sets aside unclear answers', async () => {
+    const answers: Record<string, number> = {
+      'https://cdn.test/species/gone/': 404,
+      'https://cdn.test/species/gone/records.parquet': 404,
+      'https://cdn.test/species/leaked/': 200,
+      'https://cdn.test/species/leaked/records.parquet': 503,
+    };
+    const fakeFetch = (async (url: string | URL | Request) =>
+      new Response(null, { status: answers[String(url)] ?? 500 })) as typeof fetch;
+    const report = await checkGatedPaths('https://cdn.test', ['gone', 'leaked'], fakeFetch);
+    assert.deepEqual(report.live, ['species/leaked/']);
+    assert.deepEqual(report.unknown, ['species/leaked/records.parquet (HTTP 503)']);
+    assert.equal(report.checked, 4);
+  });
+
+  it('counts a network error as unclear, not as a failure', async () => {
+    const failing = (async () => { throw new Error('ECONNRESET'); }) as typeof fetch;
+    const report = await checkGatedPaths('https://cdn.test', ['x'], failing);
+    assert.deepEqual(report.live, []);
+    assert.equal(report.unknown.length, 2);
   });
 });

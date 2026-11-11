@@ -547,7 +547,9 @@ export function aggregate(
     const fromPath = extractRedirectFrom(entry.path);
     if (fromPath !== null) {
       redirectTotal++;
-      const { matched } = resolveLegacyPath(fromPath, speciesSlugs);
+      // Species without pages only change the redirect's target, never `matched`
+      // (they count as matched either way, #271), so the replay needs no list of them.
+      const { matched } = resolveLegacyPath(fromPath, speciesSlugs, new Set());
       if (matched) {
         redirectMatched++;
       } else {

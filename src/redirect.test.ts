@@ -21,6 +21,7 @@ import { pathToFileURL } from 'node:url';
 import Eleventy from '@11ty/eleventy';
 import { build as viteBuild } from 'vite';
 import { entryTags, VITE_ENTRIES, type ViteManifest } from './_lib/vite-entries.ts';
+import { slugsWithoutPages } from './_lib/legacy-redirects.ts';
 
 const REDIRECT_ENTRY = VITE_ENTRIES['legacy-redirect'];
 
@@ -29,7 +30,8 @@ const STUB_MANIFEST: ViteManifest = {
   [REDIRECT_ENTRY]: { file: 'assets/legacy-redirect-STUB.js' },
 };
 
-// Mirrors the `ts` data-extension wiring and the viteEntry shortcode in eleventy.config.ts
+// Mirrors the `ts` data-extension wiring, the viteEntry shortcode and the slugsWithoutPages
+// filter in eleventy.config.ts
 // (including the .test.ts skip) so the emitted HTML — not the template source — is what
 // gets asserted.
 async function renderRedirectPage(pathPrefix: string): Promise<string> {
@@ -38,6 +40,8 @@ async function renderRedirectPage(pathPrefix: string): Promise<string> {
     config(eleventyConfig) {
       eleventyConfig.setInputDirectory('src');
       eleventyConfig.addShortcode('viteEntry', (entry: string) => entryTags(STUB_MANIFEST, entry, pathPrefix));
+      eleventyConfig.addFilter('slugsWithoutPages', (allSlugs: string[], species: Array<{ slug: string }>) =>
+        slugsWithoutPages(allSlugs, species.map((sp) => sp.slug)));
       eleventyConfig.addDataExtension('ts', {
         read: false,
         parser: async (filePath: string) => {
@@ -64,6 +68,15 @@ describe('redirect.html: rendered output', () => {
     assert.ok(block, 'the species slug list must be in the page, where legacy-redirect.ts reads it');
     const slugs = JSON.parse(block[1] ?? '') as unknown;
     assert.ok(Array.isArray(slugs) && slugs.includes('habrosyne-scripta'), 'the block must be the species slug array');
+  });
+
+  test('lists the species without pages, so links to them go to Browse instead of a 404 (#271)', async () => {
+    const content = await renderRedirectPage('/');
+    const block = content.match(/<script type="application\/json" id="species-without-pages">([\s\S]*?)<\/script>/);
+    assert.ok(block, 'legacy-redirect.ts reads the species without pages from this block');
+    const slugs = JSON.parse(block[1] ?? '') as string[];
+    assert.ok(slugs.includes('aseptis-sp-no-1'), 'an unpublished species must be listed');
+    assert.ok(!slugs.includes('habrosyne-scripta'), 'a published species must not be listed');
   });
 
   test('loads the legacy-redirect entry, prefixed', async () => {

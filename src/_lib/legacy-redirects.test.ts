@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import {
   resolveLegacyPath,
+  slugsWithoutPages,
   normalizeLegacyPath,
   stripQueryAndHash,
   stripUnexpandedPlaceholder,
@@ -16,7 +17,9 @@ import {
   REDIRECT_FROM_PARAM,
 } from './legacy-redirects.ts';
 
-const SLUGS = new Set(['acronicta-americana', 'globia-subflava']);
+const SLUGS = new Set(['acronicta-americana', 'globia-subflava', 'aseptis-sp-no-1']);
+// aseptis-sp-no-1 is in the catalogue but has no page (on the unpublished list).
+const NO_PAGES = new Set(['aseptis-sp-no-1']);
 
 describe('stripQueryAndHash', () => {
   test('drops a query string', () => {
@@ -78,28 +81,28 @@ describe('normalizeLegacyPath', () => {
 
 describe('resolveLegacyPath: matched cases', () => {
   test('maps a known static page', () => {
-    assert.deepEqual(resolveLegacyPath('/about-moths/glossary/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/about-moths/glossary/', SLUGS, NO_PAGES), {
       target: 'glossary/index.html',
       matched: true,
     });
   });
 
   test('maps a static page carrying a query string', () => {
-    assert.deepEqual(resolveLegacyPath('/gsearch/?q=moth', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/gsearch/?q=moth', SLUGS, NO_PAGES), {
       target: 'search/index.html',
       matched: true,
     });
   });
 
   test('maps a published species slug to its factsheet', () => {
-    assert.deepEqual(resolveLegacyPath('/browse/acronicta-americana/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/browse/acronicta-americana/', SLUGS, NO_PAGES), {
       target: 'species/acronicta-americana/index.html',
       matched: true,
     });
   });
 
   test('normalizes underscores and case in a species segment', () => {
-    assert.deepEqual(resolveLegacyPath('/browse/Acronicta_Americana/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/browse/Acronicta_Americana/', SLUGS, NO_PAGES), {
       target: 'species/acronicta-americana/index.html',
       matched: true,
     });
@@ -107,7 +110,7 @@ describe('resolveLegacyPath: matched cases', () => {
 
   test('sends family/subfamily/tribe segments to browse as an intended outcome', () => {
     for (const segment of ['family-noctuidae', 'subfamily-noctuinae', 'tribe-noctuini']) {
-      assert.deepEqual(resolveLegacyPath(`/browse/${segment}/`, SLUGS), {
+      assert.deepEqual(resolveLegacyPath(`/browse/${segment}/`, SLUGS, NO_PAGES), {
         target: 'browse/index.html',
         matched: true,
       });
@@ -115,21 +118,21 @@ describe('resolveLegacyPath: matched cases', () => {
   });
 
   test('sends a bare genus segment to browse as an intended outcome', () => {
-    assert.deepEqual(resolveLegacyPath('/browse/acronicta/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/browse/acronicta/', SLUGS, NO_PAGES), {
       target: 'browse/index.html',
       matched: true,
     });
   });
 
   test('collapses any photographic plate id to the plates index', () => {
-    assert.deepEqual(resolveLegacyPath('/photographic-plates/42/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/photographic-plates/42/', SLUGS, NO_PAGES), {
       target: 'plates/index.html',
       matched: true,
     });
   });
 
   test('maps the legacy homepage', () => {
-    assert.deepEqual(resolveLegacyPath('/', SLUGS), { target: 'index.html', matched: true });
+    assert.deepEqual(resolveLegacyPath('/', SLUGS, NO_PAGES), { target: 'index.html', matched: true });
   });
 
   test('resolves a link whose {REQUEST_URI} the legacy site never expanded', () => {
@@ -137,36 +140,69 @@ describe('resolveLegacyPath: matched cases', () => {
       resolveLegacyPath(
         '{REQUEST_URI}browse/family-notuidae/subfamily-acronictinae/acronicta/acronicta-americana/',
         SLUGS,
+        NO_PAGES,
       ),
       { target: 'species/acronicta-americana/index.html', matched: true },
     );
   });
 
   test('a bare unexpanded placeholder falls back to the homepage as matched', () => {
-    assert.deepEqual(resolveLegacyPath('{REQUEST_URI}', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('{REQUEST_URI}', SLUGS, NO_PAGES), {
       target: 'index.html',
       matched: true,
     });
   });
 });
 
+describe('resolveLegacyPath: species without a page (#271)', () => {
+  test('sends a link to an unpublished or withheld species to Browse, not to a 404', () => {
+    assert.deepEqual(resolveLegacyPath('/browse/family-noctuidae/aseptis-sp-no-1/', SLUGS, NO_PAGES), {
+      target: 'browse/index.html',
+      matched: true,
+    });
+  });
+
+  test('applies after normalising underscores and case', () => {
+    assert.deepEqual(resolveLegacyPath('/browse/Aseptis_sp_no_1/', SLUGS, NO_PAGES), {
+      target: 'browse/index.html',
+      matched: true,
+    });
+  });
+
+  test('leaves species with pages alone', () => {
+    assert.deepEqual(resolveLegacyPath('/browse/acronicta-americana/', SLUGS, NO_PAGES), {
+      target: 'species/acronicta-americana/index.html',
+      matched: true,
+    });
+  });
+});
+
+describe('slugsWithoutPages', () => {
+  test('returns catalogue slugs the build did not publish, sorted', () => {
+    assert.deepEqual(
+      slugsWithoutPages(['b-two', 'a-one', 'c-three'], ['a-one']),
+      ['b-two', 'c-three'],
+    );
+  });
+});
+
 describe('resolveLegacyPath: reported misses', () => {
   test('an unpublished species-looking slug is a miss', () => {
-    assert.deepEqual(resolveLegacyPath('/browse/xestia-notaspecies/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/browse/xestia-notaspecies/', SLUGS, NO_PAGES), {
       target: 'browse/index.html',
       matched: false,
     });
   });
 
   test('an unknown top-level path falls back to home and is a miss', () => {
-    assert.deepEqual(resolveLegacyPath('/some/unknown/django/view/', SLUGS), {
+    assert.deepEqual(resolveLegacyPath('/some/unknown/django/view/', SLUGS, NO_PAGES), {
       target: 'index.html',
       matched: false,
     });
   });
 
   test('misses still return a usable target so the visitor is never stranded', () => {
-    const { target } = resolveLegacyPath('/some/unknown/view/', SLUGS);
+    const { target } = resolveLegacyPath('/some/unknown/view/', SLUGS, NO_PAGES);
     assert.ok(target.endsWith('index.html'));
   });
 });
@@ -175,6 +211,11 @@ describe('redirect.njk wiring', () => {
   const template = readFileSync(resolve('src/redirect.njk'), 'utf8');
   // The page's logic, a Vite entry of its own since ADR 0049.
   const script = readFileSync(resolve('src/components/legacy-redirect.ts'), 'utf8');
+
+  test('the page embeds the species without pages, computed from the published species', () => {
+    assert.match(template, /id="species-without-pages">\{\{ speciesSlugs \| slugsWithoutPages\(species\)/);
+    assert.match(script, /resolveLegacyPath\(fromPath, SPECIES_SLUGS, SPECIES_WITHOUT_PAGES\)/);
+  });
 
   test('the page loads the legacy-redirect entry', () => {
     assert.match(template, /\{% viteEntry "src\/components\/legacy-redirect\.ts" %\}/);
