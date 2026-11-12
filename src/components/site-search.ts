@@ -5,6 +5,11 @@
 // own, so the inline version made Vite build ~1,370 byte-identical chunks, one per page,
 // and was enough on its own to push the vite 8.3 build past CI's 4 GB heap (#364).
 //
+// It follows the APG "combobox with listbox popup" pattern (#207): focus stays in the
+// input, ArrowDown and ArrowUp move a highlight through the results by setting
+// aria-activedescendant, Enter opens the highlighted result and Escape closes the list.
+// The results are links with role="option", so a click or middle-click still works.
+//
 // The Pagefind URL and base URL carry pathPrefix, so base.njk renders them through
 // `| url` into data attributes on #site-search. Vite rewrites script src, not data
 // attributes, so the prefix is applied exactly once.
@@ -29,6 +34,37 @@ function esc(s: string): string {
   return d.innerHTML;
 }
 
+/**
+ * Where the highlight goes when ArrowDown or ArrowUp is pressed. `current` is -1 when
+ * nothing is highlighted; the highlight wraps at both ends, as in the APG examples.
+ */
+export function nextOptionIndex(current: number, count: number, key: 'ArrowDown' | 'ArrowUp'): number {
+  if (count === 0) return -1;
+  if (key === 'ArrowDown') return current < 0 || current >= count - 1 ? 0 : current + 1;
+  return current <= 0 ? count - 1 : current - 1;
+}
+
+/**
+ * The listbox's options for a set of results. Each is a link with role="option", so a
+ * pointer still follows it, but tabindex="-1" keeps it out of the Tab order: in a
+ * combobox the arrow keys move through the options and Tab leaves the widget. The
+ * option's name is its title and its description the excerpt, so a screen reader reads
+ * the title first instead of the whole excerpt as one name.
+ *
+ * `excerpt` is Pagefind's HTML (it marks the matched words with <mark>) and is inserted
+ * as it comes; everything else is escaped.
+ */
+export function optionsHtml(results: PagefindResultData[], escape: (s: string) => string): string {
+  return results
+    .map((r, i) => `<a class="site-search-result" role="option" id="site-search-option-${i}"
+        aria-selected="false" tabindex="-1" href="${escape(r.url)}"
+        aria-labelledby="site-search-option-${i}-title" aria-describedby="site-search-option-${i}-excerpt">
+        <span class="site-search-result-title" id="site-search-option-${i}-title">${escape(r.meta?.title || r.url)}</span>
+        <span class="site-search-result-excerpt" id="site-search-option-${i}-excerpt">${r.excerpt}</span>
+      </a>`)
+    .join('');
+}
+
 /** The status-line text for a completed search. */
 export function searchStatus(query: string, shown: number, total: number): string {
   if (total === 0) return 'No results found.';
@@ -43,13 +79,39 @@ export async function initSiteSearch(root: ParentNode = document): Promise<void>
   const container = root.querySelector<HTMLElement>('#site-search');
   const input = root.querySelector<HTMLInputElement>('.site-search-input');
   const resultsEl = root.querySelector<HTMLElement>('#site-search-results');
+  const listbox = root.querySelector<HTMLElement>('#site-search-listbox');
+  const emptyEl = root.querySelector<HTMLElement>('.site-search-empty');
   const statusEl = root.querySelector<HTMLElement>('#site-search-status');
-  if (!container || !input || !resultsEl) return;
+  if (!container || !input || !resultsEl || !listbox) return;
 
   // Announce the outcome through a permanently-visible-to-AT status element.
   // resultsEl itself cannot do this: it is display:none while being filled.
   const announce = (message: string) => {
     if (statusEl) statusEl.textContent = message;
+  };
+
+  const options = (): HTMLElement[] => [...listbox.querySelectorAll<HTMLElement>('[role="option"]')];
+  let active = -1;
+
+  /** Highlight option `index`, or nothing when it is -1. */
+  const setActive = (index: number) => {
+    const all = options();
+    all.forEach((el, i) => el.setAttribute('aria-selected', String(i === index)));
+    active = index;
+    const el = all[index];
+    if (el) {
+      input.setAttribute('aria-activedescendant', el.id);
+      el.scrollIntoView({ block: 'nearest' });
+    } else {
+      input.removeAttribute('aria-activedescendant');
+    }
+  };
+
+  /** Show or hide the drop-down. aria-expanded follows the listbox, not the "no results" note. */
+  const setOpen = (open: boolean) => {
+    resultsEl.hidden = !open;
+    input.setAttribute('aria-expanded', String(open && options().length > 0));
+    if (!open) setActive(-1);
   };
 
   let pagefind: Pagefind;
@@ -62,45 +124,74 @@ export async function initSiteSearch(root: ParentNode = document): Promise<void>
     return; // Pagefind not available (dev mode)
   }
 
+  // Searches can finish out of order. Only the latest may fill the list, or the
+  // highlight could point into results for a query the reader has already changed.
+  let latest = 0;
+
   const doSearch = async () => {
     const query = input.value.trim();
+    const mine = ++latest;
     if (!query) {
-      resultsEl.hidden = true;
-      resultsEl.innerHTML = '';
+      listbox.innerHTML = '';
+      setOpen(false);
       announce('');
       return;
     }
     const search = await pagefind.search(query);
     const results = await Promise.all(search.results.slice(0, MAX_RESULTS).map(r => r.data()));
+    if (mine !== latest) return;
     announce(searchStatus(query, results.length, search.results.length));
-    resultsEl.innerHTML = results.length
-      ? results
-          .map(
-            r => `<a class="site-search-result" href="${esc(r.url)}">
-              <span class="site-search-result-title">${esc(r.meta?.title || r.url)}</span>
-              <span class="site-search-result-excerpt">${r.excerpt}</span>
-            </a>`
-          )
-          .join('')
-      : '<p class="site-search-empty">No results found.</p>';
-    resultsEl.hidden = false;
+    listbox.innerHTML = optionsHtml(results, esc);
+    listbox.hidden = results.length === 0;
+    if (emptyEl) emptyEl.hidden = results.length > 0;
+    setActive(-1);
+    setOpen(true);
   };
 
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   input.addEventListener('input', () => {
+    setActive(-1);
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => void doSearch(), 200);
   });
 
+  input.addEventListener('keydown', e => {
+    const count = options().length;
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowUp':
+        if (count === 0) return;
+        e.preventDefault();
+        if (resultsEl.hidden) setOpen(true);
+        setActive(nextOptionIndex(active, count, e.key));
+        return;
+      case 'Enter': {
+        const el = options()[active];
+        if (!el || resultsEl.hidden) return;
+        e.preventDefault();
+        el.click();
+        return;
+      }
+      case 'Escape':
+        // Open: close the list and keep the query. Already closed: let the browser
+        // clear the field, as it does for any search input.
+        if (resultsEl.hidden) return;
+        e.preventDefault();
+        setOpen(false);
+        return;
+      case 'Tab':
+        setOpen(false);
+        return;
+    }
+  });
+
   // Close results on click outside
   document.addEventListener('click', e => {
-    if (!(e.target instanceof Element) || !e.target.closest('.site-search')) {
-      resultsEl.hidden = true;
-    }
+    if (!(e.target instanceof Element) || !e.target.closest('.site-search')) setOpen(false);
   });
 
   // Reopen on focus if there's a query
   input.addEventListener('focus', () => {
-    if (input.value.trim() && resultsEl.innerHTML) resultsEl.hidden = false;
+    if (input.value.trim() && (listbox.innerHTML || (emptyEl && !emptyEl.hidden))) setOpen(true);
   });
 }

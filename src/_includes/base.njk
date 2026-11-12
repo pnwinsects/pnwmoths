@@ -61,10 +61,12 @@
 <body>
   {#- Bypass block (WCAG 2.4.1): the banner, nine nav links and the search field
      are nine tab stops repeated on every page. The link is visually hidden until
-     focused; see .skip-link in theme.css. -#}
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+     focused; see .skip-link in theme.css.
+     The skip link and the banner are kept out of the search index: they open every page,
+     so every search excerpt began "content Pacific Northwest Moths." (#207). -#}
+  <a class="skip-link" href="#main-content" data-pagefind-ignore>Skip to main content</a>
   <header>
-    <div class="banner">
+    <div class="banner" data-pagefind-ignore>
       <img src="{{ '/images/header.png' | url }}"
           alt="Pacific Northwest moths — a row of specimen photographs on black">
       <div class="pnwm-site-name">Pacific Northwest Moths</div>
@@ -82,16 +84,22 @@
         <li><a href="{{ '/contact/' | url }}">Contact</a></li>
       </ul>
       <div class="site-search" id="site-search" data-pagefind-url="{{ '/pagefind/pagefind.js' | url }}" data-base-url="{{ '/' | url }}">
-        <input type="search" class="site-search-input" placeholder="Search…" aria-label="Search site">
-        {#- No role="listbox": the results are plain <a> elements, and a listbox
-           whose children are not role="option" is invalid ARIA (axe
-           aria-required-children). A real combobox (roving aria-activedescendant,
-           ArrowDown into the list) is tracked separately.
-           This container is NOT the live region: it is [hidden] (display:none, so
-           out of the accessibility tree) while doSearch() fills it, and revealing
-           an already-populated element is not a live update — nothing would be
-           announced. The always-rendered status element below carries the count. -#}
-        <div class="site-search-results" id="site-search-results" aria-label="Search results" hidden></div>
+        {#- The APG "combobox with listbox popup" pattern (#207): the input owns a listbox
+           of results; ArrowDown/ArrowUp move a highlight through them with
+           aria-activedescendant while focus stays in the input, Enter opens the
+           highlighted result, Escape closes the list. src/components/site-search.ts.
+           "No results found" sits beside the listbox, not in it: a listbox may only
+           contain options.
+           The results container is not the live region: it is [hidden] while
+           doSearch() fills it, and revealing an already-filled element is not a live
+           update, so nothing would be announced. The always-rendered status element
+           below carries the count. -#}
+        <input type="search" class="site-search-input" placeholder="Search…" aria-label="Search site"
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-listbox">
+        <div class="site-search-results" id="site-search-results" hidden>
+          <div role="listbox" id="site-search-listbox" aria-label="Search results"></div>
+          <p class="site-search-empty" hidden>No results found.</p>
+        </div>
         <p class="sr-only" id="site-search-status" role="status"></p>
       </div>
     </nav>

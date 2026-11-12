@@ -330,8 +330,16 @@ nav a:hover {
   border-bottom: none;
 }
 
-.site-search-result:hover {
+.site-search-result:hover,
+.site-search-result[aria-selected="true"] {
   background: #f5f0e0;
+}
+
+/* The option the arrow keys have highlighted. Focus stays in the input, so the
+   browser draws no focus ring here; this outline is the only sign of it (#207). */
+.site-search-result[aria-selected="true"] {
+  outline: 2px solid var(--pico-primary);
+  outline-offset: -2px;
 }
 
 .site-search-result-title {
