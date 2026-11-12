@@ -646,6 +646,50 @@ export const CHECKS: Check[] = [
     },
   },
   {
+    // #207: the header search follows the APG combobox pattern. ArrowDown must highlight a
+    // result without moving focus out of the input, and Enter must open the highlighted one.
+    // Pagefind builds its index after Eleventy, so this also proves the index loads.
+    name: 'search: the arrow keys move through results and Enter opens one',
+    async run({ page, origin }) {
+      await page.goto(`${origin}/`, { waitUntil: 'load' });
+      // Pagefind loads after the page does; typing before then searches nothing.
+      try {
+        await page.locator('#site-search[data-ready="true"]').waitFor({ state: 'attached' });
+      } catch {
+        fail('the search box never became ready: Pagefind did not load.');
+      }
+      const input = page.locator('.site-search-input');
+      await input.fill('acronicta');
+      const option = page.locator('#site-search-listbox [role="option"]');
+      try {
+        await option.first().waitFor({ state: 'visible' });
+      } catch {
+        fail('typing "acronicta" showed no results. Either Pagefind did not load or the listbox stayed empty.');
+      }
+      if ((await input.getAttribute('aria-expanded')) !== 'true') {
+        fail('the results are showing but the input still says aria-expanded="false".');
+      }
+
+      await input.press('ArrowDown');
+      await input.press('ArrowDown');
+      const second = option.nth(1);
+      const secondId = await second.getAttribute('id');
+      if ((await input.getAttribute('aria-activedescendant')) !== secondId) {
+        fail(`two ArrowDowns should highlight the second result (${secondId}); aria-activedescendant is ` +
+          `${JSON.stringify(await input.getAttribute('aria-activedescendant'))}.`);
+      }
+      if ((await second.getAttribute('aria-selected')) !== 'true') {
+        fail('the highlighted result is not marked aria-selected="true".');
+      }
+      if (!(await page.evaluate("document.activeElement === document.querySelector('.site-search-input')"))) {
+        fail('the arrow keys moved focus out of the input; in a combobox focus stays put.');
+      }
+
+      const href = await second.getAttribute('href');
+      await Promise.all([page.waitForURL((url) => url.pathname === href), input.press('Enter')]);
+    },
+  },
+  {
     // WCAG 1.4.10 (Reflow): at 320 CSS pixels, the width of a phone and of a desktop browser at
     // 400% zoom, a page must not scroll sideways. Every page did, by 8px, because of a Pico margin
     // on the header nav, and Browse reached 474px once a state was chosen (#206). Neither shows
