@@ -123,15 +123,29 @@ export async function initSiteSearch(root: ParentNode = document): Promise<void>
   } catch {
     return; // Pagefind not available (dev mode)
   }
+  // Tells the browser smoke test that typing will now search.
+  container.dataset['ready'] = 'true';
 
   // Searches can finish out of order. Only the latest may fill the list, or the
   // highlight could point into results for a query the reader has already changed.
   let latest = 0;
+  // True from a keystroke until that query's results arrive. The list still shows the
+  // previous query's results meanwhile, so the arrow keys and Enter must not act on them.
+  let stale = false;
+  // True once the reader closes the list (Escape, Tab, a click elsewhere), until they type
+  // or return to the field. A search finishing after that must not reopen it.
+  let dismissed = false;
+
+  const close = () => {
+    dismissed = true;
+    setOpen(false);
+  };
 
   const doSearch = async () => {
     const query = input.value.trim();
     const mine = ++latest;
     if (!query) {
+      stale = false;
       listbox.innerHTML = '';
       setOpen(false);
       announce('');
@@ -140,16 +154,20 @@ export async function initSiteSearch(root: ParentNode = document): Promise<void>
     const search = await pagefind.search(query);
     const results = await Promise.all(search.results.slice(0, MAX_RESULTS).map(r => r.data()));
     if (mine !== latest) return;
+    stale = false;
     announce(searchStatus(query, results.length, search.results.length));
     listbox.innerHTML = optionsHtml(results, esc);
     listbox.hidden = results.length === 0;
     if (emptyEl) emptyEl.hidden = results.length > 0;
     setActive(-1);
-    setOpen(true);
+    if (!dismissed && document.activeElement === input) setOpen(true);
   };
 
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   input.addEventListener('input', () => {
+    latest++; // any search already running is now for an old query
+    stale = true;
+    dismissed = false;
     setActive(-1);
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => void doSearch(), 200);
@@ -160,14 +178,14 @@ export async function initSiteSearch(root: ParentNode = document): Promise<void>
     switch (e.key) {
       case 'ArrowDown':
       case 'ArrowUp':
-        if (count === 0) return;
+        if (count === 0 || stale) return;
         e.preventDefault();
         if (resultsEl.hidden) setOpen(true);
         setActive(nextOptionIndex(active, count, e.key));
         return;
       case 'Enter': {
         const el = options()[active];
-        if (!el || resultsEl.hidden) return;
+        if (!el || resultsEl.hidden || stale) return;
         e.preventDefault();
         el.click();
         return;
@@ -177,21 +195,22 @@ export async function initSiteSearch(root: ParentNode = document): Promise<void>
         // clear the field, as it does for any search input.
         if (resultsEl.hidden) return;
         e.preventDefault();
-        setOpen(false);
+        close();
         return;
       case 'Tab':
-        setOpen(false);
+        close();
         return;
     }
   });
 
   // Close results on click outside
   document.addEventListener('click', e => {
-    if (!(e.target instanceof Element) || !e.target.closest('.site-search')) setOpen(false);
+    if (!(e.target instanceof Element) || !e.target.closest('.site-search')) close();
   });
 
   // Reopen on focus if there's a query
   input.addEventListener('focus', () => {
+    dismissed = false;
     if (input.value.trim() && (listbox.innerHTML || (emptyEl && !emptyEl.hidden))) setOpen(true);
   });
 }

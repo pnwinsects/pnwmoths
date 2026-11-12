@@ -652,6 +652,12 @@ export const CHECKS: Check[] = [
     name: 'search: the arrow keys move through results and Enter opens one',
     async run({ page, origin }) {
       await page.goto(`${origin}/`, { waitUntil: 'load' });
+      // Pagefind loads after the page does; typing before then searches nothing.
+      try {
+        await page.locator('#site-search[data-ready="true"]').waitFor({ state: 'attached' });
+      } catch {
+        fail('the search box never became ready: Pagefind did not load.');
+      }
       const input = page.locator('.site-search-input');
       await input.fill('acronicta');
       const option = page.locator('#site-search-listbox [role="option"]');
