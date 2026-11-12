@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
@@ -129,11 +129,15 @@ describe('DEFAULT_CDN_ORIGIN', () => {
 describe('slugsWithoutPagesInBuild', () => {
   it('lists catalogue species with no page in the build, using the site slug rule', () => {
     const dir = mkdtempSync(join(tmpdir(), 'deploy-smoke-'));
-    const csv = join(dir, 'species.csv');
-    writeFileSync(csv, 'genus,species,family\nAbagrotis,apposita,Noctuidae\nAseptis,sp No 1,Noctuidae\nCladara,limitaria,Geometridae\n');
-    mkdirSync(join(dir, 'site', 'species', 'abagrotis-apposita'), { recursive: true });
-    writeFileSync(join(dir, 'site', 'species', 'abagrotis-apposita', 'index.html'), '');
-    assert.deepEqual(slugsWithoutPagesInBuild(csv, join(dir, 'site')), ['aseptis-sp-no-1', 'cladara-limitaria']);
+    try {
+      const csv = join(dir, 'species.csv');
+      writeFileSync(csv, 'genus,species,family\nAbagrotis,apposita,Noctuidae\nAseptis,sp No 1,Noctuidae\nCladara,limitaria,Geometridae\n');
+      mkdirSync(join(dir, 'site', 'species', 'abagrotis-apposita'), { recursive: true });
+      writeFileSync(join(dir, 'site', 'species', 'abagrotis-apposita', 'index.html'), '');
+      assert.deepEqual(slugsWithoutPagesInBuild(csv, join(dir, 'site')), ['aseptis-sp-no-1', 'cladara-limitaria']);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });
 
