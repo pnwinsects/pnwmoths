@@ -1,7 +1,7 @@
-import { describe, it } from 'node:test';
+import { after, describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
@@ -57,8 +57,17 @@ function remote(name: string, content: string, withChecksum = true): RemoteFile 
   return { name, length: Buffer.byteLength(content), checksum: withChecksum ? sha(content) : null };
 }
 
+// Every folder a test makes is removed when the file's tests finish, so runs don't pile up in
+// /tmp (which is held in memory on some machines).
+const madeDirs: string[] = [];
+after(() => {
+  for (const dir of madeDirs) rmSync(dir, { recursive: true, force: true });
+});
+
 function tempDir(): string {
-  return mkdtempSync(join(tmpdir(), 'download-analytics-'));
+  const dir = mkdtempSync(join(tmpdir(), 'download-analytics-'));
+  madeDirs.push(dir);
+  return dir;
 }
 
 describe('syncAnalytics', () => {
