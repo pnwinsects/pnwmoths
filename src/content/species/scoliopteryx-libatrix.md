@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Scoliopteryx libatrix* is an attractive, medium-sized (FW length 18 - 22 mm) moth with an angled and deeply wavy forewing margin. This common species is our only representative of the subfamily Scoleopteryginae. The ground color is brown, heavily rose to orange tinted, with bright mottled orange at the base extending along the lower cell to near the reniform spot. The lines are pale milky gray. The antemedial and subterminal lines are single, while the postmedial line is double. The latter is prominent, its anterior part runs parallel to the costa, then turns sharply to curve slightly across the distal wing to the posterior margin. The subterminal line is smoothly undulating, shaped roughly like the wing margin. A raised white spot marks the forewing base, and the orbicular spot is similar. The reniform spot is two small black dots. White spots mark the cubital vein, and similar white areas are present on the feet and bases of the antennae. The hindwing is slightly pink tinted grayish brown. The head and thorax are orange brown, with midline crest on the collar.
 
 This moth is easily recognized by its orange and rosy hue and distintively scalloped wing margin.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, green with a white lateral line.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is found in Eurasia and is widely distributed in North America. It 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on the Salicaceae including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.).
 
-##### Adults
+### Adults
 
 Adults hatch in late summer and overwinter, emerging from hibernation to mate and lay eggs in the spring. As a result, the phenogram is bimodal with early and late season peaks. This species is nocturnal and comes to light. It is also attracted to sugar baits.
 

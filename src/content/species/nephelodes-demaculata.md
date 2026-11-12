@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Nephelodes* *demaculata* is a pale medium-sized noctuid moth (FW length 16 - 17 mm) that resembles a yellowish washed-out *Nephelodes minians* and flies in eastern Oregon in our region. The forewing is nearly uniform light yellow-brown to red-brown, usually with slightly darker median area. The lines and spots are similar to those of *N. minians* although often nearly obsolete. The pale filling of the reniform spot and slightly lighter terminal area can usually be made out even if the other markings are lacking. The hindwing is pale, ranging from unmarked light yellow to pale whitish gray with slight gray suffusion toward the outer margin and a white to pink fringe. The head and thorax match the forewing ground color. The eye is covered with fine hairs and the male antenna is moderately bipectinate.
 
@@ -22,11 +22,11 @@ The range of this species extends south through eastern California to the southe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on grasses (Poaceae.)
 
-##### Adults
+### Adults
 
 *Nephelodes demaculata* flies in late summer and early fall. It has been collected from late July to September, slightly earlier than the peak flight of *N. minians* in our area. It is nocturnal and comes to lights.
 

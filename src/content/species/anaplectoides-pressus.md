@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anaplectoides pressus* is a medium-sized (FW length 17–19 mm), mottled gray-green moth that flies in forests throughout our region during the summer. Its forewing has black spots. The forewing is a mottled mixture of light and medium gray, gray-green to olive, and ochre, usually darkest in the median area near the cell and at the margin. A black line connects the orbicular and reniform spots across the lower cell and a very small basal dash is present in some individuals. The transverse lines are double, gray, with filling that is slightly lighter than the ground color. The antemedial line is fairly smooth and is oriented obliquely across the forewing. The postmedial line is weakly scalloped and convex, with a nearly straight portion opposite the cell. The pale subterminal line is preceded by a series of black wedges near the apex and opposite the cell. The terminal line is a series of black lines or triangles. The fringe is weakly checkered with light greenish or light gray and dark gray. The orbicular and reniform spots are thin, black with a faint gray line parallel to the outer border within them. The orbicular spot is large and round or slightly misshapen oval in shape and is open toward the costa. It is filled with the ground color to light gray. The reniform spot is moderately large and filled with light gray or slightly rusty brown. The hindwing very pale gray with a slight yellow tint marked with diffuse gray discal spot, postmedial line, and submarginal line. The fringe is white bordered by a gray terminal line. The head and thorax are mottled gray, black, and light brown. The collar is light brown with a gray edge. The tegulae have a darker border of dark and light scales. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is widely distributed in boreal and montane North America with a si
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a broad generalist feeding on many kinds of hardwoods and herbaceous vegetation in such families as Caprifoliaceae, Salicaceae, Betulaceae, Valerianaceae, and Fabaceae.
 
-##### Adults
+### Adults
 
 This species is single-brooded with adults on the wing during the summer. Records extend from June to early September in our region. It is nocturnal and comes to lights.
 

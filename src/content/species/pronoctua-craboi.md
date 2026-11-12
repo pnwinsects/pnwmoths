@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pronoctua craboi* is a rarely collected, moderately large (FW length 18 - 20 mm), dark olive-gray species that is found in rocky habitats near timberline. The lines and spots on its forewing are filled with light gray-ochre. The forewing is nearly completely brown-gray with a slight olive cast, occasionally with lighter areas in the median area. The basal and terminal area area slightly darker than the rest of the forewing, as is the diffuse median line. The lines are similar gray, double and filled with lighter gray ochre and evident mostly as the lighter filling. The basal and antemedial lines are slightly irregular. The postmedian line is dentate. The subterminal line is light and resembles the light filling of the other lines. It is irregular and forms weak "W" marks on the veins near the apex and on veins M3 and CuA1 in the middle of the forewing. The spots are pale, similar to the filling of the lines, with central filling of the ground color. The orbicular spot is round and the reniform spot is kidney-shaped. The claviform spot is absent. The hindwing is medium dark gray-brown with darker gray suffusion at the margin, faint gray discal spot and veins, and a two-toned lighter fringe. The head and thorax are olive-gray. The male antenna is bead-like.
 
@@ -8,7 +8,7 @@
 
 The type locality of *Pronoctua craboi* Lafontaine is Mission Ridge, British Columbia, 6800'.
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -28,11 +28,11 @@ This species also occurs in the high Rocky Mountains in Wyoming and Colorado. It
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 The adults are single brooded and fly in July and August. They are nocturnal and come to lights.
 

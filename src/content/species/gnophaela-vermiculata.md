@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Gnophaela vermiculata* is a distinctive, moderately large (FW length 20 - 25 mm), black and pale, diurnal tiger moth. The forewings are elongate with slightly squared off outer margins near the apices. They appear black with translucent greenish-yellow areas between the veins in the median and subapical areas. The hindwings are similar, with the pale areas in the anterior portion of the basal and median wing. The head and thorax are black with white dots on the collar, tegulae, and wing bases and the proximal forelegs are bright orange. The abdomen is shiny bluish black with a row of white spots on each side. The antennae are bipectinate, strongly in males and weakly in females.
 
 This species is only likely to be confused with *Gnophaela latipennis*, which occurs in western Oregon in our area. *G. latipennis* has more limited pale areas on both wings, readily apparent in the photographs, and has more rounded forewing margins.
 
-##### Larvae
+### Larvae
 
 Larva is covered with tufts of hairs, black with lateral yellow patches.
 
@@ -26,11 +26,11 @@ This species is found in the Rocky Mountain region from the Pacific Northwest so
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on mountain bluebells (*Mertensia* spp.) in the Boraginaceae. Larvae were observed by Lars Crabo congregating to pupate in between rocks on a rock wall near Chinook Pass, Washington on July 9, 2006.
 
-##### Adults
+### Adults
 
 Adults of *Gnophaela vermiculata* are diurnal and are found in wet forest meadows at middle to high elevations. Adults are on the wing from late June to early fall. Their flight is fairly slow and they nectar at flowers making them easy to net.
 

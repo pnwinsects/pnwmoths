@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euthyatira pudens* is a spring-flying large moth (FW length 20–23 mm) with light pink patches on a gray background. The forewing is long and relatively narrow, with a pointed apex and slightly scalloped outer margin. It appears slightly curved because its costal margin is convex, and its trailing margin is slightly concave. The ground color is gray, usually with tan along the trailing margin, with a dusting of white in the cell and anterior subterminal area, and darker gray on the veins near the outer margin. Prominent, light pink patches bordered by darker gray are located in the basal area, anterior median area, and at the apex. The black transverse lines are faint except where they abut the pink areas. The fringe is gray, sometimes checkered with light pink. The orbicular and reniform spots are black filled with light pink, are small, and are closely positioned to the point where they are fused in some specimens. The hindwing is pale brownish gray with light gray thin discal spot, median band, and terminal area. The thorax has a dark brown-gray collar which contrast with light pink areas on the anterior tegulae. The male antenna is filiform.
 
@@ -10,7 +10,7 @@ The only other Pacific Northwest species with extensive pink patches on a gray b
 
 Members of the family Thyatiridae resemble noctuid moths in shape but are more closely related to hook-winged moths (Drepanidae) and inchworm moths (Geometridae).
 
-##### Larvae
+### Larvae
 
 Larva is smooth, dark gray-black with a contrasting white ventral area. It is illustrated by Powell and Opler (2009).
 
@@ -30,11 +30,11 @@ This species is found in moist forests and riparian zones along creeks with dogw
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on dogwoods (*Cornus* spp.) in the Cornaceae.
 
-##### Adults
+### Adults
 
 Adults are single brooded. They occur in spring and are attracted to lights.  The records from our region extend from late March until mid-June, with a peak in late April and early May.  This species is nocturnal and comes to lights.
 

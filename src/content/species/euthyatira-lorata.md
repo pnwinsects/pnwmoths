@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euthyatira lorata* is a large moth (FW length 22–23 mm) with prominent white patches in the basal area and along the anterior margin, and a tan and white patch at the anal angle of the forewing. This tan and white patch contrasts with the smooth, dark gray ground color. The ground color is smoky gray with a slight sheen. The forewings are fairly long and have a pointed apex. The anterior forewing darkens to charcoal gray between the basal and antemedial lines and distal to the postmedial line, the latter forming a nearly black elongate triangle near the apex. The transverse line are black and they thicken where they border the lighter-colored areas, especially surrounding the basal patch. The thin, black, orbicular and reniform spots are clearly separate from each other and are filled with the surrounding white color or pink. The fringe is warm orange-tan, usually weakly checkered with gray. The hindwing is warm brownish gray with a barely visible discal spot and darker gray median and terminal bands. The hindwing fringe is warm orange-tan. The head, collar, and posterior thorax are very dark brown-gray and contrast with white areas on the anterior tegulae. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species occurs on the west Coast of North America.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various dogwoods (*Cornus* spp.) in the Cornaceae.
 
-##### Adults
+### Adults
 
 *E. lorata* is single brooded and the adults fly in the spring from early March until mid-June. Most records from our region are from April. It is nocturnal and is attracted to lights.
 

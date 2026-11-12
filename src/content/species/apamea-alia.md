@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea alia* is medium-sized moth (FW length 17–20 mm) that flies in forested parts of the Northwest during the summer. It has light to medium blue-gray forewings suffused with rusty red-brown on the anterior wing, darkest on the costa. The forewing an odd pale gray with a slight reddish tint in most Pacific Northwest specimens, sometimes darker blue-gray like most other North American populations. The costa except for the apex is red-brown, fading throught the cell. The terminal area of some specimens is powdery darker gray with dark veins. A dark blackish gray spot is found medial to the subterminal line near the anal angle, and some specimens smaller additional spots precede the subterminal line on the mid-wing. The antemedial and postmedial lines are double, rusty on the anterior wing and gray elsewhere, and usually very faint except on the costa where they produce an indistinct pattern. Rows of paired dark gray spots on the veins medial to the antemedial line and lateral to the postmedial line are more prominent than the lines themselves. The orbicular and reniform spots are outlined in pale red-brown, and filled with the ground color except that the entire reniform spot or the lower half is usually filled with dark gray. The claviform spot is absent. The hindwing is medium brownish gray, darker gray toward the margin, with barely darker spot and veins. The hindwing fringe is light to dark gray with a pink tint in most specimens. The head and thorax are gray, usually with a reddish tint, and match the forewing ground color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is distributed widely across North America, occurring across the Co
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults are found from early May to late August, although most specimens are collected prior to mid-July. They are nocturnal and come to lights.
 

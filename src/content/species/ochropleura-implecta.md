@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ochropleura implecta* is a small (FW length 13 - 15mm), distinctive moth with pale ochre-white costa, similar pale orbicular and reniform spots set in a black streak in the cell, a black basal dash, and a smooth, red-brown forewing ground color. The transverse lines are limited to a series of pale dots at the subterminal line. The hindwing is nearly white, with pale gray at the costal margin and a thin dark terminal line at the base of the fringe. The head and collar are yellow-brown with a thin black band on the collar. The remainder of the thorax is red-brown, like the forewing ground color, and the abdomen is yellowish gray.
 
 This species can be identified by the combination of forewing ground color, pale costa, and pale spots contained in the black cell.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, reddish brown dorsally and green or greenish brown laterally.  It is illustrated by Lafontaine (1998).
 
@@ -26,11 +26,11 @@ The range of this species includes a large part of North America, with most of t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing-cutworm that feeds on general herbaceous vegetation in such families as the Fabaceae and Asteraceae, but it has also been reported to feed on willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 Adults have been collected from late May through August in the Pacific Northwest but are most common in mid summer. Lafontaine (1998) states that it is at least double-brooded, likely at least partially true in our region. It is nocturnal and comes to lights.
 

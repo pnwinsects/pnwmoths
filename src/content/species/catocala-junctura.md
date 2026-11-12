@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Catocala junctura* is a large underwing moth (FW length 33 - 39 mm) that flies in the dry interior of our region during the summer. It has a powdery, sandy tan-gray forewing and orange-red hindwing with a hook-shaped median band. The forewing has slightly convex scalloped forewing margin. The color is medium-dark blue-gray with a yellow-tan cast and a strongly powdered appearance due to black scales sprinkled over the entire wing. The median area medial to the reniform spot, distal median area in the cell, and the subterminal area are lighter slightly yellow-gray. The basal and antemedial lines are dark gray but obscure except near the costal margin. The antemedial line is slightly irregular and oblique toward the outer margin when visible. The median line is dark gray, usually evident on the costa and less commonly across the wing. The postmedial line is gray, single followed by pale gray or double filled with lighter gray, toothed or undulating with two strong teeth toward the outer margin opposite the cell and a single dark tooth toward the base near the trailing margin. The subterminal line is variable in prominence from absent to strong, usually double, gray with darker outer component and filling of light gray or the color of the adjacent wing, angled outward from the costa and perpendicular to the trailing margin below the cell. The terminal line is a series of strong black lines between the veins, occasionally followed by light tan spots. The fringe is slightly lighter tan-gray than the terminal area, longitudinally striped. The reniform spot is gray, D-shaped with slightly dentate outer margin, filled peripherally with the ground color and centrally with dark gray. The subreniform spot is gray, filled with slightly darker yellow-tan than the light area medial to the reniform spot. The hindwing is bright orange-red with black median and marginal bands. The median band is relatively narrow for the genus *Catocala* and is upcurved toward the inner margin posteriorly, ending well short of the margin. The hindwing fringe is light yellow with a pink base and dark gray to black checkering at the base on the mid-wing. The head and thorax are hoary tan-gray with a slightly darker edge across the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species includes much of the West south and east of our region
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Salicaceae including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.), and may particularly favor larger cottonwoods based upon the habitat.
 
-##### Adults
+### Adults
 
 *Catocala junctura* has been collected from late June until early October in the Pacific Northwest. It is nocturnal and comes to lights and sugar baits.
 

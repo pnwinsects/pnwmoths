@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia biundulata* is a very small to small (FW length 8 - 11 mm), tan moth that flies in dunes in eastern Washington and Oregon during the spring. It has a simple pattern of smooth white lines on the forewing. The forewing is nearly even in color, slightly grayer along the costa and in the terminal area. The basal line is a pale dot at the base of the costa. The antemedial and postmedial lines are smooth, broad, and white. The antemedial line is bent, apex lateral, in the cell and nearly straight elsewhere. The postmedial line is gently S-shaped, convex lateral near the end of the cell, and concave toward the base on the lower half of the wing. Other lines and spots are absent. The hindwing is brown-gray, nearly even, with a white fringe with a gray base. The head and thorax match the forewing color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends south through Nevada, Utah, and California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been reared from eggs deposited in captivity on *Gilia cana* (Polemoniaceae) in California. The foodplant in the Northwest is unknown.
 
-##### Adults
+### Adults
 
 Adults fly during the spring and summer. They have been found from May to early July in and near our region.
 

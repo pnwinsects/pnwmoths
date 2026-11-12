@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Phryganidia californica* is a plain, day-flying, prominent moth found in forests of western Oregon in our region. It is moderate-sized (FW length 15–16 mm.) with uniform plain pale grayish tan forewings and a lighter pale yellow area distal to the end of the cell in males, lacking all markings other than dark veins. The long dark antennae are bipectinate, widest in males.
 
 No other Pacific Northwest moth has plain tan wings marked only on the veins.
 
-##### Larvae
+### Larvae
 
 Larva is smooth with thin longitudinal stripes of purple, white, black, and green, and is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species' range extends south along the Pacific Coast to Baja California in 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on evergreen Fagaceae, including canyon live oak (*Quercus chrysolepis*), tan oak (*Lithocarpus densiflorus*), and golden chinquapin (*Castanopsis chrysophylla*) in Oregon.
 
-##### Adults
+### Adults
 
 The adults are primarily diurnal, although Powell & Opler (2009) report that it occasionally comes to light. Several broods occur in California. Pacific Northwest collecting dates range from late June to mid September.
 

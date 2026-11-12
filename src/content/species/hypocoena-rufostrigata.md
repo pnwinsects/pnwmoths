@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypocoena rufostrigata* is a small tan moth (FW length 13–15 mm) that flies in dry habitats during the summer. Its forewing has a checkered fringe and light and dark streaks, including a gray streak near the cubital vein that widens toward the outer margin. The ground color is tan. A black basal dash is present, often diffuse due to dark gray shading on the adjacent posterior base. A streak of dark brown-gray extends on both sides of the cubital vein from the base of the cell to the outer margin, widening laterally. Similarly colored streaks extend along other veins near the outer margin. The costa is powdery gray and the posterior margin is lightest tan. The veins are covered with light and dark scales, appearing light gray to nearly black on the distal wing in some specimens. Most specimens lack transverse lines, although a few specimens have the postmedial line evident as small dark dots on the veins. A thin dark terminal line is also present. The gray-brown fringe is traversed by light tan lines at the ends of the veins, appearing checkered. No spots are evident. The hindwing, including the fringe, is pale gray-tan with slightly darker veins, slightly darker toward the margin in a few specimens. The head and thorax are uniform gray-tan to tan. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ This species is widespread in North America, although the distribution in the Ea
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on grasses (Poaceae) and sedges (Cyperaceae) in wet grassland habitats.
 
-##### Adults
+### Adults
 
 This species flies during the summer, typically during June and July. It is nocturnal and comes to lights.
 

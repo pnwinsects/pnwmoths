@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Leucania dia* is a common, widespread, small to medium-sized (FW length 13 - 17 mm) streaky gray-brown and tan moth that flies in a variety of habitats throughout most of our area during the spring and summer. It has a gray hindwing and a gray-brown forewing with pale veins, a postmedial line of short black lines on the veins arranged in a smooth arc. Somewhat patchy gray-tan is present across the posterior wing below the cubital vein and as an oblique streak to the apex. A thin, black, basal dash is present posterior to the cubital vein. The cubital vein is white and the rest of the veins are mostly pale gray resulting in a pale streaked costa and pale lines on the distal wing. A brown line is present in each interspace on the distal wing producing a finely streaked appearance. The postmedial line is a series of short black lines on the veins, smoothly curved toward the outer margin. The terminal line is comprised of smaller black dots. The fringe is gray-brown traversed by light lines at the ends of the veins. The hindwing is medium-dark gray with darker gray margin and veins. The hindwing fringe is white with a light tan base. The head and thorax are gray-tan with faint gray transverse barring on the collar. The eye is covered in fine hairs. The male antenna is bead-like.
 
@@ -33,11 +33,11 @@ The global range of *L. dia* is not well known due to confusion with *L. insueta
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva is a foodplant specialist feeding on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 *Leucania dia* is single-brooded with a single flight in early summer. The Northwest records extend from early May to early August but are most numerous in June. This species is nocturnal and comes readily to light.
 

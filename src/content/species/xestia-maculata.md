@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia maculata* is a rarely collected, black and light gray, day-flying, medium-sized noctuid moth (FW length 14 - 16 mm) that occurs in rocky alpine tundra in northern Washington and British Columbia. The ground color is dark gray, nearly black, with lighter silver gray medial to the antemedial line, between the postmedial and subterminal line, and in the terminal area near the apex. The black lines and spots are barely evident against the black ground, but the light gray filling of the spots is prominent. The postmedial line is deeply scalloped and the subterminal line is irregular. The hindwing is smoky gray with a white fringe. The head and thorax are silver gray with black collar and tegulae. The eyes are slightly reduced in size. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species has been found in southwestern Yukon Territory, and in the Rocky Mo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are diurnal. They have been collected on the flowers of moss campion (*Silene acaulis*) during the day. The flight period is July in our region.
 

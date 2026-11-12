@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa divergens* is a common, dark red-brown, small to medium-sized *Euxoa* (FW length 13–17 mm) that flies in mesic forests during the summer. It has a white cubital vein, dark cell, white-rimmed orbicular and reniform spots, and a pale streak in the fold. The forewing ranges from medium dark red-brown to dark gray-brown with a slight reddish tint. The cell is darker, red-brown to brown-black, bordered inferiorly by a pale gray to white cubital vein. The radial vein is pale in some specimens. The costa in the subterminal area and the terminal area except the apex are darker and grayer, and the rest of the costa and subterminal area are slightly paler and grayer in some specimens. A pale ochre streak in the fold extends from the tip of the claviform spot to the postmedial line. The basal and antemedial are double with black and gray components, filled with pale tan or light gray. The basal line is irregular at the cubital vein. The antemedial line is drawn to the orbicular spot on the radial vein, angled toward the outer margin from the cubital vein, often ballooned laterally below 1A+2A, and incurved on the posterior margin. The median line is absent. The postmedial line has a weakly scalloped black inner component and an even gray outer component, is drawn toward the base on the costa, bluntly excurved around the reniform spot, and angled 45° toward the base below the cell. The subterminal line is tan, slightly irregular with an offset below the apex. The terminal line is a series of black spots. The orbicular and reniform spots are partially outlined in black outer and light gray to slightly yellow inner lines and variably filled with the ground color, darker gray, or light gray. The orbicular spot is variable in shape, usually asymmetrically ovoid with the anterior portion tilted toward the base. The reniform spot is kidney-shaped, sometimes with the lower end extended laterally. The claviform spot is black, moderate-sized. The hindwing is dark brownish gray, slightly darker and grayer toward the outer margin, with darker veins, thin discal spot, and terminal line. The hindwing fringe is two-toned gray. The head and thorax are mostly dark red-brown. The base of the collar is paler and grayer and a thin to moderately thick black line traverses the mid-collar. The male antenna is weakly bipectinate, tapering to filiform over the distal third. *Euxoa divergens* is one of three Northwest species in the subgenus *Longivesica*. These dissimilar moths share structural characters of a very long male vesica, 2.5–3x as long as the aedeagus, and a long appendix bursae in females.
 
@@ -35,11 +35,11 @@ This moth is widespread in North America. It occurs across the northern boreal f
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 The flight period of *E. divergens* is during the summer, with records in our region from late May through August. It is nocturnal and comes to lights.
 

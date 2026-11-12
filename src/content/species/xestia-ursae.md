@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia ursae* is a rarely collected arctic and alpine species that is found in the mountains of northern British Columbia in our area. It is medium-sized (FW length 16 - 17 mm in males, shorter in females) with a broad forewing shape and is dark brown with black lines and spots. The ground color of the forewing is medium-dark gray-brown, darker distal to the postmedial line, with scattered warm brown, gray, and black scales. The transverse lines are black adjacent to the median area and of the ground color opposite the median area. The antemedial line is zig-zag and the postmedial line is dentate with a white spot at the tip of each of the teeth. The orbicular, reniform, and claviform spots are similar smudgy black and filled with dark brown. The position of the subterminal line is evident as a transition to a lighter terminal area in some specimens. A thin dark terminal line is present between the veins. The hindwing is dark brown-gray with smudge sooty gray discal spot and weakly scalloped postmedial line. The fringe is two-toned medium and light gray and is bordered by a thin dark terminal line. The head and thorax are dark brown or gray-brown. The male antenna is biserrate.
 
@@ -26,11 +26,11 @@ This species has a Holarctic distribution. It occurs in eastern Eurasia as far w
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to feed on huckleberries (*Vaccinium* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 Males are nocturnal and come to light in areas where it is dark enough to run lights. Females are short-winged and do not fly. This species occurs in July.
 

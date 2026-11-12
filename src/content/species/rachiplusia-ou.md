@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Rachiplusia ou* is a fairly large member of the subfamily Plusiinae (FW length 18 - 20 mm) that has only been found in western Montana in the Pacific Northwest. It has a mottled gray forewing with a white stigma. The forewing apex is slightly pointed and there is a slight flange at the anal angle. The color is mottled gray with a distinct luster on the darker parts of the forewing, especially on the distal wing. The color varies slightly across the wing, with gray on most of the posterior wing and costa, light brown in the median area near the distal stigma, darker blackish gray in the central median area extending to the costa between the spots, and on the anterior two-thirds of the distal wing in the subterminal and terminal areas. A short irregular black basal dash is present. The whitish silver stigma is fused or divided into basal and distal parts. The basal portion is squiggly U-shaped, open anteromedially, while the distal part is round. The basal, antemedial, and postmedial lines are gray, double, with tan filling. The basal line is visible on the anterior area of the forewing. The antemedial line is evident posterior to the cell and us sinuous and slightly excurved. The wavy postmedial line is drawn sharply toward the base on the costa, is bent sharply toward the base below the costa, and courses obliquely toward the base across the forewing to the trailing margin. The subterminal line is mildly irregular, including near the apex, and is roughly parallel to the postmedial line. It is preceded by long black lines between the veins opposite the cell. The terminal line is blue-gray with dark spots between the veins. The fringe is moderately checkered with gray and dark gray. The orbicular spot is pale gray filled with a thin dark line and central pale gray. It is located anterior to the open part of the basal stigma, and is tilted with the anterior aspect toward the base. The costa adjacent to the spot is similar light gray color. The reniform spot is dark gray surrounding a thin lighter tan line, kidney-shaped, with a strong lateral indentation. It is filled with the ground color and darker gray in the lower third. The hindwing is warm gray-brown with darker gray toward the outer margin, dark veins, and a dark terminal line. The fringe is pale with weak pale yellow and gray checkering basally. The head and thorax are gray with a tan base and faint barring on the collar. A tuft of gray scales protrudes anteriorly from the frons. Loose tufts of long scales are present on the posterior median thorax. Additional tufts are present on the dorsal abdomen. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is fairly widespread in North America to the east and south of our 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding on a wide diversity of herbaceous plants.
 
-##### Adults
+### Adults
 
 Adults are quite vagile and migratory, and may disperse for several hundred miles. They occur throughout the year in the southern part of the range. The most likely time to find this species in the Northwest is in late summer and early fall. It is a nocturnal species that comes to lights.
 

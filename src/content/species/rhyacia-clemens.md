@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Rhyacia clemens* is a dull gray-brown, moderately large noctuid moth (FW length 18 -21 mm) that flies in dry habitats in the interior of our region from late spring to fall. Its forewing has a dentate postmedial line and a dark, gray bar in the cell joining the orbicular and reniform spots. The forewing is nearly uniform powdery gray-tan, with a slightly darker median line and shade before the subterminal line in most specimens and a gray bar between the orbicular and reniform spots. The transverse lines are dark gray, double, and filled with the ground color. The antemedial line is irregular, especially near the fold. The postmedial line is deeply dentate with a series of dots marking the tips of the jagged teeth. The pale subterminal line is even, except for an offset below the apex. The terminal line is a series of small dots between the veins. The orbicular spot is dark but very faint, oval in shape, and filled with the ground color, lighter gray-tan, or pale gray. The reniform spot is pale and barely evident except for slightly darker filling which forms a diffuse gray spot in the lower end. The hindwing is light gray-brown with darker gray margin, thin discal spot, and veins and has a pale light tan fringe. The head and thorax match the forewing ground color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The Pacific Northwest is near the center of this species' distribution. The limi
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it may feed on grasses (Poaceae) based on closely related species.
 
-##### Adults
+### Adults
 
 *Rhyacia clemens* has a long flight period and has been found from mid-May through September in our region. It is nocturnal and comes readily to lights.
 

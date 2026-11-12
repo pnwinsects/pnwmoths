@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypena abalienalis* is a dark brown moth with net-like white and yellow lines near the outer margin of the forewing. It is a small (FW length 12 - 14 mm) moth with triangular forewings with a smooth, convex outer margin. The ground color is even smooth brown, nearly unmarked to the postmedial lines in many individuals. The antemedial line is close to the base of the wing and zigzag shape. The smoothly undulating postmedial line is white with yellowish filling. It is broadly outwardly convex below the cell. The area distal to this line is marked with white, gray, and luteous in a complex pattern. The orbicular is a black dot; the reniform spot is usually absent. The hindwing is dark gray, a pale line at the base of the fringe. The palpi are moderately long.
 
@@ -22,11 +22,11 @@ This species also occurs in eastern North America. It is found as far south as N
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on hardwoods such as dogwoods (*Cornus* spp.) in the Cornaceae.
 
-##### Adults
+### Adults
 
 Adults are on the wing during summer and early fall. Pacific Northwest records span early June to mid-September. This species is nocturnal and comes to light.
 

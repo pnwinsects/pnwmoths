@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Amphipoea interoceanica* is a small (FW length 12-13 mm) burnt orange moth with a net-like pattern of veins and lines and white or bright orange-filled reniform spot that has been recorded from Vancouver Island but might not be a permanent resident of the Pacific Northwest. The forewing is stout with a weakly falcate apex, It is nearly uniform dull burnt orange with darker veins, slightly darker and grayer in the anterior subterminal area and in all of the terminal area except at the apex. The transverse lines are similar to the veins in color. The basal, antemedial, and postmedial lines are double with wide separation of the inner and outer components and filling of the ground color. The orbicular spot is also similar in color to the lines and veins. The reniform spot is large, with the lateral two-thirds filled with white or warm orange color.
 
@@ -24,11 +24,11 @@ This moth occurs from Arizona and Alberta to the Atlantic outside of the Pacific
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae bore in strawberries (*Fragaria* spp. (Rosaceae)) as well as grasses and sedges.
 
-##### Adults
+### Adults
 
 Adults are nocturnal and come to light. The flight period outside of the Pacific Northwest is late summer.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis cupida* is rarely collected in the Pacific Northwest. It is a small to medium-sized moth (FW length 14–16 mm) with dull powdery orange-brown forewings with a black mark on the costa adjacent to the subterminal line, dark-filled spots, and visible lines. Although most specimens are orange-brown a few are red-brown or brown. The forewing is slightly darker near the subterminal line, usually with a dark gray to black quadrate spot on the costa, and the terminal area is a lighter shade of the ground color without gray. The lines are a dark shade of the ground color, smooth, double filled with slightly lighter shade, forming dark spots on the costa. The pale subterminal line is sinuous and usually visible. The orbicular and reniform spots are pale, usually filled with gray or a dark shade of the ground color, rarely just evident as the lighter outline. The median line and claviform spot are absent. The hindwing is dark gray with a lighter orange-brown fringe. The head and thorax are the same color as the forewing and slightly powdery. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has been collected relatively commonly in eastern North America fro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist feeding on many kinds of hardwoods in such families as Salicaceae, Rosaceae, and Vitaceae.
 
-##### Adults
+### Adults
 
 Adults have been found between late June through October across its North American range (Lafontaine 1998). It is nocturnal and comes to lights.
 

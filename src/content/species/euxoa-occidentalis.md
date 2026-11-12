@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa occidentalis* is a powdery charcoal-gray small to medium-size *Euxoa* (FW length 14–17 mm) that flies is dry forests during late summer and early fall. It has a light gray-filled orbicular spot and slight reddish lining the reniform spot. There is relatively little variation in color in this species. The cell is often darker gray or black. A blackish shade precedes the subterminal line, but the terminal area is usually of the ground color. The basal, antemedial lines, and subterminal lines are gray or black, double with strongest components abutting the median area, filled with gray, sometimes with a weak coppery cast. The basal and antemedial line are slightly irregular, and the latter line is even in strength across the wing and is angled slightly toward the outer margin. The median line is blackish gray, usually nearly as dark as the subterminal shade. The postmedial line is similar in prominence to the antemedial line and is also even in strength from the costa to the posterior margin. It has a finely scalloped inner component, is drawn toward the base on the costa, smoothly or bluntly excurved around the reniform spot, then slightly concave and angled 45° toward the base to the posterior margin. The subterminal line is yellowish, sometimes light gray, usually diffuse and broken into a series of spot, slightly irregular in course, preceded by the aforementioned black shade. The terminal line is thin and the fringe matches the terminal area. The orbicular and reniform spots are partially outlined in thin dark gray, are lined with thicker pale lines. The orbicular spot is relatively small, ovoid, often lacking a dark outline but consistently lined with pale gray, usually with a weak ocellus. The reniform spot is usually incomplete, is lined with pale gray, luteous, or light orange scales and is filled centrally with the ground color. The ground claviform spot is often absent, partially outlined with dark gray to black and often containing yellow or orange scales when present. The hindwing is medium-dark gray with a darker gray margin, with dark veins, discal spot, and terminal line. The hindwing fringe is white with a light gray base. The head and thorax match the forewing color with a thin black line across the mid-collar. A frontal tubercle is present. The male antenna is strongly biserrate, appearing fairly wide. *Euxoa occidentalis* is placed in the large subgenus *Euxoa*.
 
@@ -26,11 +26,11 @@ The range extends south through the Sierra Nevada and Transverse Ranges to south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies in late summer and fall. It has been collected from mid-August through September in our region. This species flies at night and is attracted to lights.
 

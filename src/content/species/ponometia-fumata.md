@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ponometia fumata* is a very small (FW length XX - XX mm), uniform. drab gray moth that flies in southern Oregon and Idaho in our region. This moth lacks forewing markings. The hindwing is dark gray, and the hindwing fringe is white with a gray base. The head and thorax are also gray. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species is western North America. It is recorded from Californ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of *P. fumata* are unknown. It most likely feeds on plants in the mallow family (Malvaceae) based on the preferences of related species.
 
-##### Adults
+### Adults
 
 This species flies during the summer. Moths have been collected during June and August in southern Oregon.
 

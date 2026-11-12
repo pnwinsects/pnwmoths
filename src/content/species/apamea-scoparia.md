@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea scoparia* is a large, light brick-red moth (FW length 20–24 mm) that flies in mountain forests during the summer. It has a broken pale gray outline to the reniform spot, and the other markings are faint. The forewing appears long and has a weakly scalloped outer margin. It is nearly uniform brick-red, slightly darker and grayer on the costa and near the outer margin. The posterior median area is light orange-brown in some specimens. The antemedial and postmedial lines are slightly darker than the ground color or evident as pale lines, toothed with dark gray lines at the tips of the teeth, variably absent or evident as any combination of red-brown, lighter tan, and gray spots. When visible the antemedial line is zigzag on the veins and angled toward the outer margin from the costa. The postmedial line is strongly toothed, smoothly excurved around the reniform spot, and then nearly straight at an angle toward the base to the posterior margin. The subterminal line is ochre, incomplete with an angled line on the costa and a few light spots to the mid-wing. The terminal line is variable, absent, a thin line, or series of triangles between the veins. The fringe is dark brick with lighter spots in the base at the ends of the veins. The orbicular spot is oval, very faint or absent, usually a few light scales. The reniform spot is kidney-shaped with longer lower portion, outlined with broken light gray or pale ochre scales and filled with red-gray lightly sprinkled with lighter scales. The claviform spot is absent. The hindwing is medium tan-gray darkening to gray at the margin with gray thin discal spot, veins, and dark terminal line. The hindwing fringe is light tan with strong pink tint. The head and thorax are dark brick red. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is widespread in the mountains of western North America, occurring 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 This species flies during the summer, sometimes appearing as early as late May but usually peaking in late June and July. It is nocturnal and comes to lights.
 

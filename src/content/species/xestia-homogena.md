@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia homogena* is a fairly large, light gray *Xestia* (FW length 18 - 21 mm) with large, pale gray-filled forewing spots, a black basal dash, and a series of long black wedge-shaped marks medial to the subterminal line below the apex. It flies in subalpine forests during the summer. The ground color is even and slightly powdery silver-gray. A black basal dash is present, a black line connects the spots across the posterior cell, and most specimens also have a black mark at the medial orbicular spot in many specimens. The black marks medial to the subterminal line in many related *Xestia* species are very long at the apex and opposite the cell, while those near the anal angle are small smudged spots. The lines are dark gray. The antemedial line is smooth, except for a sharp tooth toward the base on vein 1A+2A. The postmedial line is moderately scalloped between the veins and is bordered on the outer margin by a pale line. The indistinct median line is faint to absent. The pale subterminal line is smooth but often lacking, although its position is indicated by the black wedge marks that precede it. The orbicular and reniform spots are black and filled with whitish gray. The orbicular spot is a large oval, partially open toward the costa along its medial end. The reniform spot is large. The claviform spot is small or large, sometimes reduced to a line consisting of its anterior portion. The hindwing is powdery light gray with indistinct darker gray discal spot, faint submarginal shade, and thin terminal line. Its fringe is slightly lighter whitish gray. The head and thorax are light gray. The male antenna is weakly biserrate.
 
@@ -24,11 +24,11 @@ This species occurs across the North American Continent from Alaska to Labrador 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it may feed on spruces (*Picea* spp.) in the Pinaceae based on closely related species.
 
-##### Adults
+### Adults
 
 Adults fly in the summer with other high-elevation *Xestia* species and are on the wing in July and August in our region. They are nocturnal and come to lights. This species flies in forest and shuns open areas.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia serraticornis* is a sexually dimorphic, large, streaky gray moth (FW length 19 - 22 mm) that flies in early spring in southwestern Oregon. It has dark lines on the distal forewings and hindwings that are white in males and dark brown-gray in females. As in other *Cucullia* species the forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The ground color is light light blue-gray in males and hoary brown-gray in females. The distal wing is often lighter in females, and bears a series of black lines between the veins in both sexes. The veins are thin, black. A thin black basal dash is present. The antemedial and postmedial lines are diffuse dark gray faint except for the posterior postmedial line which forms an irregular dark S near the trailing margin. The fringe matches the adjacent terminal wing in color and is weakly checkered basally. The orbicular and reniform spots are usually absent, sometimes evident as light spots. The claviform spots and other lines are absent. The hindwing is slightly translucent white in males, with gray veins that are darkest near the outer margin. The fringe is white with weak gray checkering anteriorly. The female has a dark smoky brown-gray hindwing with a light gray fringe with a dark base. The head and thorax match the wing color in both sexes, with transverse barring on the collar. The central thorax is dark gray. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is endemic to dry low-elevation grasslands in California. The habit
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous Asteraceae like related species.
 
-##### Adults
+### Adults
 
 The flight season of this species is in late winter and early spring in California. Poole (1994) states that most records from northern California are from March.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mythimna oxygala* is a very common, small (FW length 13–17 mm) streaked, straw-colored moth that flies in wet habitats with grasses from spring to fall. Its forewing has a few black dots and its pale hindwing is heavily suffused with dark gray. The outer margin of the forewing appears squared-off. The ground color is slightly reddish. The veins are pale straw-colored and each vein interspace has two similar thinner pale lines to produce a forewing pattern that resembles dead grass. The darker line between between the pale lines in each interspace is slightly darker and grayer than the spaces between the pale line and the adjacent veins. The cubital vein is the palest and thickest vein, and the area posterior to it is shaded with slight darker reddish to slightly gray color; a similar shade is also present distal to the cell. A crisp small black spot is present adjacent to the anterior cubital vein at the end of the cell. Similar spots are present on veins M1 and CuA2 at the position of the postmedial line, with very faint spots variably present on other veins along this line. The terminal line is a series of smaller black spots between the veins. The fringe is straw-colored. All other traces of lines or spots are absent. The hindwing is shiny, pale, and straw-colored with a heavy suffusion of dark gray scales, heaviest on the veins and sparing the margin. The fringe is white. The head and collar are pale straw, without transverse bands on the collar. The surface of the eye is hairy. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of *M. oxygala* includes much of North America except the deep South o
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that is a specialist feeding on grasses (Poaceae) and sedges (Cyperaceae). Powell and Opler (2009) also give Aster (*Aster* spp., Asteraceae) as a foodplant
 
-##### Adults
+### Adults
 
 The adults can be collected throughout much of the year, appearing in the spring and flying until late fall. Collection records from the Northwest are most numerous from May until late September. This species is nocturnal and come to lights
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anicla exuberans* is a dull, medium-sized (FW length 17–19 mm) dusty gray moth that occurs in southern British Columbia and southern Idaho in the Pacific Northwest. It has a thick, black band across the base of the collar. The forewing is dull, medium gray with a uniform sprinkling of darker scales producing the dusty or dirty appearance. The costa has a slight blue tint and the remainder is brownish. The transverse lines are gray, but absent except at the costa in most specimens and barely evident in some. The pale, irregular subterminal line is preceded by a darker gray shade, especially near the apex, and this dark area extends to the forewing margin in some specimens. The reniform spot is medium gray, often incomplete and ill-defined, and is variably filled with dark gray. The other spots are absent. The hindwing is light gray with a slight pearly sheen, a light gray marginal band, and dark veins but no discal spot. The head and most of the thorax is similar blue gray to the costal forewing. The base of the collar is a uniform thickness black band that contrasts sharply with the lighter head and remainder of the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found from the Pacific Northwest and southern Alberta through th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on grasses (Poaceae) like closely related species.
 
-##### Adults
+### Adults
 
 Adults are on the wing from mid-June to mid-August across the range of the species. The limited Pacific Northwest records are from July.
 

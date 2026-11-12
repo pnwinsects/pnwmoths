@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sunira decipiens* is a fall-flying, small to medium-sized moth (FW length 14–17 mm) that flies in forests throughout most of the Northwest. It has a light yellow to orange forewing with darker orange-brown lines and spots, and a pale yellow hindwing. The ground color is pale ochre to bright orange-tan, sometimes powdery. An orange-brown shade precedes the subterminal line and the terminal area is sometimes slightly grayer than the rest of the wing. The lines are comprised of darker and lighter shades of the ground color, usually appearing dark orange. The basal line is excurved near the wing base. The antemedial line is angled toward the outer margin with three laterally convex segments, one at each end and one on the mid-forewing. The median line is diffuse, dark orange, rarely slightly gray. The postmedial line is moderately toothed on the veins, drawn sharply toward the base on the costa and smoothly and broadly excurved around the reniform spot and angled toward the base below CuA1. The subterminal line is pale yellow, slightly irregular, preceded by the aforementioned shade. The terminal line is a series of small orane spots. The fringe is slightly darker orange than the ground color. The orbicular and reniform spots are outlined in the color of the lines. The orbicular spot is round, filled with the ground color. The reniform spot is kidney-shaped, filled with the ground color and a gray to black spot in the lower end in some specimens. The claviform spot is weak or absent, moderate-sized. The hindwing is pale yellow, sometimes with faint gray discal spot, postmedial line, and a trace of the submarginal band near the anal angle. The head and thorax are yellow to orange, matching the ground color of the forewing. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is found near the Pacific Coast from southern British Columbia to c
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.  We have no records of hardwoods for this species, so it may be feeding mostly on herbaceous vegetation in the Pacific Northwest.
 
-##### Adults
+### Adults
 
 The flight period of *S. decipiens* is during the fall, beginning in late August and lasting until early November. It is nocturnal and comes to lights.
 

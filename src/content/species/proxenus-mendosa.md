@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Proxenus mendosa* is a small (FW length 11–14 mm), very plain gray moth that occurs in southeastern British Columbia in our region. The white mark at the reniform spot is the only marking on the forewing. The forewing is even medium-dark gray, slightly darker on the distal portion beyond the expected position of the postmedial line and at the base medial to the position of the antemedial line. The reniform spot constitutes the only identifiable forewing marking. It is a faint dark bar followed laterally by a creamy pale spot. The hindwing is dusky light gray, darker toward the margin, with gray discal spot and veins, and a slightly lighter gray fringe. The head and thorax match the forewing in color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found across the boreal zone of Canada as far east as the Gaspe�
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous plants like related species. Willow (*Salix* spp.) in the Salicaceae is another possible foodplant based on habitat preference.
 
-##### Adults
+### Adults
 
 Little is known about the biology of this species in our area. Specimens from Yukon Territory were collected in mid- to late June flying at dusk. This species is at least partially nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ascalapha odorata*, the Black Witch, is an unmistakable, large brown moth (FW length 79 - 82 mm) that is a rare migrant to our area from the south. The forewings are shaped like an obtuse triangle with a fairly long apex. Both wings are deep wood brown, with a variable complex pattern of lines and spots. The straight postmedial lines can be pale whitish (shown) or inconspicuous. The forewing reniform spot is comma shaped, with dark filling except lighter bluish in the "tail," producing a convincing eyespot. The markings near the anal angle of the hindwing are also distinctive and give the impression of eyes. The body is brown similar to the wings.
 
@@ -22,11 +22,11 @@ This species is widely distributed in tropical Central and South America. It is 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on woody Fabaceae such as *Acacia* species.
 
-##### Adults
+### Adults
 
 Adults are highly vagile and migrate for hundreds of miles. They are primarily nocturnal and come to light and sugar baits.
 

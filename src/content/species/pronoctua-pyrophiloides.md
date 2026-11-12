@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pronoctua pyrophiloides* is superficially indistinguishable from *Pronoctua peabodyae*, an uncommon but more widely distributed species in the Pacific Northwest. It is a medium-sized species (FW length 16 - 19 mm) with dull olive-gray to gray-brown forewings with a darker terminal area. The double lines are filled with slightly lighter gray-tan, but the pattern is usually muted and indistinct. As in *P. peabodyae,* the hindwing is dark gray with a lighter fringe. The head and thorax match the forewing. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species is California, barely extending to southern Oregon.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based on closely related species.
 
-##### Adults
+### Adults
 
 This species is single brooded with adults on the wing in late summer and early fall. It has been collected in August and September in our region. It is nocturnal and comes to lights.
 

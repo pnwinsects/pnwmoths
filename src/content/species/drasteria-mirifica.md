@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria mirifica* is a rare *Drasteria* found in southern Idaho that resembles a pale *Drasteria hastingsii*. It is a moderate-sized *Drasteria* (FW length 17 - 19 mm). The ground color is dusty brown, with pale median area next to the evenly curved antemedial line and light blue-gray terminal area. The lines are double, but the median line is faint. Black spots medial to the subterminal line and a black spot at the apex are present in some individuals. The area distal to the reniform spot appears pale and streaky due to long, thin, spiky dentations of the postmedial line, white next to the lateral reniform spot and near the veins at the inferior spots, and thin dark scaling on the veins. The dorsal hindwing is light orange-red, with relatively thin black markings and mostly white fringe. The ventral sides of both wings are uniform white with thin black markings. The head and body are gray-brown. The antennae are ciliate in males and simple in females.
 
@@ -22,11 +22,11 @@ This species has a broad distribution in western North America, both on the Grea
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on buckwheats (*Eriogonum* spp.) in the Polygonaceae.
 
-##### Adults
+### Adults
 
 The adults are on the wing in summer. A large series of this moth was collected in early June at Winnemucca, Nevada. Specimens from Idaho are from late June and early July.
 

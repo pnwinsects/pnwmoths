@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Nycteola columbiana* is a small gray or shiny greenish moth (FW length 12–13 mm) with a rectangular forewing shape and variable pattern of dark spots and sinuous transverse lines. The base of forewing is broad due to expansion of the proximal costa which gives the wing a rectangular shape that is typical of the genus. The ground color is variable, pale greenish-white or medium-dark gray color with a slight sheen. The median area—especially the anterior portion—and the apex are darker gray. The antemedial area is strongly mottled with powdery black in some specimens. The basal, antemedial, and postmedial lines are dark gray to black, double with filling of the ground color. The basal line is strongly slanted from the costa toward the outer margin. The antemedial line is prominent with a darker gray to black lateral component, sinuous with convex outward segments in the cell and at the posterior margin, slightly slanted from the costa toward the outer margin. The median line is absent. The postmedial line is slightly weaker than the antemedial line, irregular, oriented nearly perpendicular to the wing and drawn toward the base on the costa and as a rectangular "dentil" in the fold. The subterminal line is pale, diffuse, preceded by prominent gray to black spots that are often fused into a jagged shade or checkerboard. The terminal line is dark gray, broken by the veins. The fringe is gray. The orbicular spot is absent or a faint gray spot. The discal spot is a small dark gray or triangle surrounded by a thin halo of the ground color. The claviform spot is absent in the small series examined. The hindwing is light whitish to tan-gray, darker gray toward the margin, lacking darker marks. The head and thorax are speckled light green and black or dark gray. The palpi are long with medio-laterally flattened anteriorly directed distal segments. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species is restricted to the West Coast of North America from southwestern 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No specific information is presently available regarding larval foodplants for this species, but it is probably a foodplant specialist feeding on willows (*Salix* spp.) in the Salicaceae like other members of this genus.
 
-##### Adults
+### Adults
 
 *Nycteola columbiana* appears to be double-brooded in the Northwest with spring and late summer flights. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa tocoyae* is an orange-brown, medium-sized *Euxoa* (FW length 16–19 mm) that flies in dry forests south of the central Washington Cascades during late spring and early summer. It has a faint pattern lacking strongly contrasting dark gray or black elements. Larger specimens of this moth are relatively stocky for the genus. The forewing is medium-dark gray-tan, strongly tinted orange or red-orange. The gray-brown median line and shade preceding the subterminal line are usually darkest, although the terminal area often contains gray, but are usually not strongly contrasting. The basal, antemedial, and postmedial lines are gray-brown, double filled with slightly lighter shade of the ground color, darkest on the costa and variable in darkness across the rest of the forewing. The basal line is inconspicuous or evident as spots on the costa. The antemedial line is usually present across the wing, occasionally obsolete below the costa, slightly irregular and angled slightly toward the outer margin.  The median line is gray-brown, irregular, coursing through the reniform spot and bent apex lateral below the spot. The postmedial line is toothed weakly on the veins when evident, bluntly excurved around the reniform spot and angled toward the base below the level of the cell. The subterminal line is pale, indistinct and often patchy, irregular with an offset below the costa and a moderate "W" mark on the mid-forewing on veins M3 and CuA1. It is preceded by an even gray-brown shade. The terminal line is thin or broken into spots. The fringe matches the terminal area. The orbicular and reniform spots are outlined in a pale shade of the ground and are relatively small and inconspicuous, sometimes absent in poorly marked specimens. The orbicular spot is round, filled with the ground color. The reniform spot is kidney-shaped, filled with the ground color and a darker gray spot in the lower end, occasionally entirely darker gray. The claviform spot is absent. The hindwing is light brownish gray, with slightly darker veins, discal spot, and terminal line. The hindwing fringe is white with ochre and gray base. The head and thorax match the forewing, sometimes with a very weak and thin gray line across the mid-collar. A frontal tubercle is present. The male antenna is weakly bipectinate. *Euxoa tocoyae* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This moth is found near the Pacific Coast of North America. The range extends so
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species is usually found in late spring and early summer. The records from our region extend from mid-May to late June.
 

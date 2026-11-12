@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hadena caelestis* is a small to medium-sized moth (FW length 13 - 14 mm) with a busy pattern of white and black on a dark gray ground, including large white-filled spots and a white subterminal line with a "W" mark along the wing margin. The forewing ground color is medium gray, scattered with lighter and darker scales, lighter whitish gray between the three spots in the central median area and along the trailing margin between the postmedial and subterminal lines, and darker medial to the subterminal line and in the terminal area. The transverse lines are black and double, filled with the ground color except for light whitish gray in the posterior postmedial line. The basal and antemedial lines are irregular but incomplete; the postmedial line is scalloped. The subterminal line is white and irregular, not forming a strong W-mark, preceded by a dark shade and a series of black chevrons between the veins anterior to the fold. The terminal line is a series of black triangles between the veins. The orbicular spot is moderately large and round, black but prominent due to pale gray to white filling with a faint dark center. The reniform is similar, but usually less filled with white. The claviform spot is small, not reaching the postmedial line. The hindwing is light gray basally with a smoky gray margin, diffuse discal spot and veins. A small, light spot is present along vein CuA2 near the anal angle. The hindwing fringe is mottled pale and dark with a darker gray inner component. The head and thorax are grizzled gray and pale with a weak dark gray line across the collar and dark edging to the tegulae. The male antenna is bead-like. The surface of the eye is covered with fine hairs.
 
@@ -24,11 +24,11 @@ This species is only known from the high Sierra Nevada in eastern California out
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a foodplant specialist feeding on herbs of the pink family (Caryophyllaceae) such as *Silene* and related species.
 
-##### Adults
+### Adults
 
 Adults have a short flight period and have only been collected during July and early August in our region. They usually are among the earliest species to fly in their subalpine habitat. This species is nocturnal and comes to lights.
 

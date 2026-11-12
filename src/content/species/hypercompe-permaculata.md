@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypercompe permaculata* is a heavily spotted white moth. It is medium-sized (FW length 17 - 22 mm) and the ground color of the head, thorax, and both wings is pure white. All usual forewing lines are present as series of black spots between the veins. The discal spot is also comprised of black spots. The hindwing is less heavily marked with dark gray spots, usually only the discal spot and marginal band are present. The collar, tegulae, and central thorax are also marked with black. The abdomen is white with yellow sides, heavily spotted with black to the extent that some individuals appear to be transversely striped black and white. The simple antennae are white basally and black distally.
 
@@ -22,11 +22,11 @@ This is found in western North America. It occurs widely in the Rocky Mountain r
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on general herbaceous vegetation, particularly on Caryophyllaceae and Polygonaceae.
 
-##### Adults
+### Adults
 
 The few records of this moth from our region are from July. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Panthea acronyctoides* is a white moth with black transverse lines in most of its range in eastern North America. The western subspecies *P. a. nigra* is found in central British Columbia and differs in having a salt-and-pepper medium-gray ground color with a nearly equal mixture of black and white scales. It is moderately large (FW length 18 - 21 mm (from the original description)). The antemedial, median, and postmedial lines are similar, single, thick, and black. The antemedial line are undulating. The postmedial line is scalloped between the veins and is followed by a thin white line. The subterminal line is white, markedly irregular, and preceded by a black shade. The fringe is checkered gray and black. The orbicular and reniform spots are small and black. The hindwing is gray with ill-defined darker gray discal spot, submarginal band, and a white and gray checkered fringe.
 
@@ -24,11 +24,11 @@ This species is found across boreal Canada from northern central British Columbi
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on conifers (Pinaceae), but is a generalist feeding on many species of spruces (*Picea* spp.), firs (*Abies* spp.), and pines (*Pinus* spp.). It has been reared from lodgepole pine (*Pinus contorta*) in British Columbia (Anweiler 2009).
 
-##### Adults
+### Adults
 
 Adults fly from late spring to summer. They have been collected from late May to early August in the Northwest. It is a nocturnal species that comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Idia lubricalis* is a common eastern North American *Idia* that occurs rarely in the Pacific Northwest. It is small to medium-sized (FW length 11 - 18 mm) with slightly glossy uniform dark gray-brown forewings traversed by irregular pale tan antemedial, postmedial, and subterminal lines. The orbicular spot is a pale dot and the reniform spot is a dark bar surrounded by a thin pale area. The hindwing appears medium gray with two diffuse lighter bands. Palpi moderately long. Male antenna biciliate; female antenna simple.
 
@@ -22,11 +22,11 @@ This species has a wide distribution in North America. It is widespread in the E
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a detritivore feeding on dead leaves and fungi associated with dead wood.
 
-##### Adults
+### Adults
 
 Adults have been collected in July and August in our region. They are nocturnal and come to light and sugar baits.
 

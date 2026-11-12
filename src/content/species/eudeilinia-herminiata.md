@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eudeilinia herminiata* is a small moth (FW length 12–13mm) that has been collected rarely in British Columbia during the spring and summer. Its forewings are rounded and pure white with the occasional lines of faint dots. Its palpi and legs are dark gray. The forewing markings are limited to interrupted orange-yellow to brown antemedial and postmedial lines when present.  Gary Anweiler (personal communication 2012) reports that all Alberta specimens that he has examined are immaculate, but specimens with faint lines have been collected in our region. The dorsal head and thorax are white—the body and adjacent wings of the illustrated specimen from Edmonton, Alberta are discolored. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This is a predominantly eastern North American species. It is widely distributed
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on dogwoods (*Cornus* spp.) in the Cornaceae.
 
-##### Adults
+### Adults
 
 The adults are found in late spring and early summer. Dave Holden (personal communication 2015) reports that the adults fly over the food plant at dusk. He did not collect any in a light trap placed nearby.
 

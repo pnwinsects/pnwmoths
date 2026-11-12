@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 This extremely rarely collected species is a relatively large *Abagrotis* (FW length 16 - 18 mm) that is restricted to eastern Oregon in the Pacific Northwest and flies in late summer and early fall. It has olive-brown to orange-brown forewings with black shading medial to the subterminal line. The forewings are smooth with a slight sheen and appear slightly dusty due to scattered black scales. The terminal area is grayer than the rest of the wing. The pale lines and spots are very faint except for dark gray spots on the costa at the antemedial and postmedial lines and a dark gray shade across the distal wing at the subterminal line. The hindwing is dark brown-gray with dark veins and a lighter two-toned fringe. The head and thorax match the forewing ground color, with slight transverse barring on the distal collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The only other known locality where this species has been collected is the type 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on hardwood shrubs based on closely related species. Mountain mahogany (*Cercocarpus* spp.) in the Rosaceae is a possible foodplant based on the occurrence of this plant at the Oregon localities where the moth is most common.
 
-##### Adults
+### Adults
 
 This species has been found from mid-June to mid-September in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia luna* is a distinctive, pure white, medium-sized moth (FW length 17 - 20 mm) that flies in southern Idaho during the summer. It has long, pointed forewings marked only by a few black dots on the veins. As in other members of the genus, the forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The entire forewing is shiny pure white with markings limited to black spots on the basal, antemedial, postmedial, and terminal lines. The hindwing is also immaculate white, including the fringe, along with the entire body. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species includes the Great Plains and the Great Basin. It occu
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous Asteraceae like related species.
 
-##### Adults
+### Adults
 
 The adults fly during the summer and have been collected in June and July in and near our region. It is a nocturnal species that comes to lights.
 

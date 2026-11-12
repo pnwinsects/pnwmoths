@@ -2,7 +2,7 @@
 
 
 
-##### Adults
+### Adults
 
 *Protoperigea posticata* is the most common of three similar *Protoperigea* species in our area, all of which fly during the fall. It is usually a medium-sized moth (FW length 14 - 19 mm) with powdery gray-tan forewings that are slightly darker gray near the outer margin and an off-white hindwing. The lateral subterminal area is the darkest part of the wing. The basal and antemedial lines are gray, incomplete and inconspicuous except at the costa where they form dark spots. The postmedial line is faint gray, scalloped on the veins, drawn sharply toward the base at the costal margin, then nearly straight lateral to the reniform spot from which it is separated by the width of the spot, and then difficult to trace to the trailing margin. The pale tan subterminal line is mildly irregular, sharply defined by the preceding gray shade. A diffuse gray median line extends across the wing, darkest near the costa. The orbicular spot is a small dark circle or is absent. The reniform spot is dark gray, sometimes with inner pale spots, with light to dark gray filling, usually appearing as a dark smudge. The claviform spot is absent. The hindwing is nearly white, slightly darker gray at the anterior and outer margins, with a thin terminal line but no other markings. The fringe is white to gray, darkest anteriorly. The head and thorax are unifrom grayish tan. The male antenna is bead-like.
 
@@ -38,13 +38,13 @@ This species is widely distributed east of the Cascades at low to middle elevati
 
 
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, although herbaceous plants are suspected.
 
 
 
-##### Adults
+### Adults
 
 This species flies during August and September like our other *Protoperigea* species. It is nocturnal and comes to lights.
 

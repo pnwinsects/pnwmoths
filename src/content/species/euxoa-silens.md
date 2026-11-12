@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa silens* is a medium-sized, dimorphic *Euxoa* (FW length 15–19 mm) in which one form has silver-gray forewings with black in the cell and a pale costa and the other is powdery gray with dark on the distal forewing. It flies in steppe and dry forests during early summer. This is a relatively stout *Euxoa* with a pointed forewing. The ground color of the first form is powdery silver, sometimes with a slight yellow cast. Powdery gray to gray-brown suffusion is present around the cell, extending along the veins in the posterior median and subterminal areas. The cell is dark gray to black. The terminal area, except the apex is gray. The costa is light gray, whitish at the base and at the apex, but interrupted by a gray spot in the distal subterminal area. A thin black basal dash is present and the veins are dark on the distal wing. The lines are only partially evident: double gray spots on the costa, a short segment of the antemedial line near the base of the claviform spot, and a weakly scalloped gray postmedial line near the reniform spot or across the wing in a few specimens. No trace of the median line is present. The subterminal line is pale gray but variable, often partially or completely absent. It is preceded by ill-defined gray spots or weak wedges between the veins on the mid-forewing. The terminal line is black, thin or broken into spots. The fringe is gray. The orbicular and reniform spots are partially outlined in black and are filled with light gray peripherally. The orbicular spot is oval, often open toward the costa, with a faintly darker ocellus. The reniform spot is kidney-shaped, usually incomplete laterally, with more extensive gray central filling. The claviform spot is black, small, moderate-sized, or absent. The powdery gray form is nearly evenly colored except for dark gray on the costa in the distal subterminal and terminal areas. The lines are faint except for spots on the costa, the wedges in the distal terminal area are present, and the black outlines of the spots persist. The hindwing is pale gray with a yellow cast, slightly darker in females, with darker gray near the margin, gray veins, thin discal spot, and thin terminal line. The hindwing fringe is white with a patchy gray base. The head and thorax are powdery silver gray; with a black transverse line across the mid-collar; the tip of the collar and the most of the tegulae are gray-brown in the form with a light costa. A frontal tubercle is present. The male antenna is biserrate. *Euxoa silens* species belongs to the subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species is widely distributed west of the Rocky Mountains where it occurs s
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults are on the wing fairly early during the year, with records as early as the beginning of May. It flies to mid-July in the Northwest. It is a nocturnal species and is attracted to lights.
 

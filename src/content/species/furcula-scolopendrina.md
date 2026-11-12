@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Furcula scolopendrina* is our most common *Furcula*.  It is a medium-sized moth (FW length 15–19 mm) that flies in forests throughout most of our region from late spring through the summer. It has a white forewing marked with charcoal bands, lines, and spots, and a white hindwing.  The forewing appears to curve anteriorly due to a convex posterior margins.  It is nearly white, with dark gray across the wing in the basal median area and as a triangular patch in the anterior subterminal area.  The median band is variable in width but tends to be relatively narrow with an irregular outer margin, and it is sprinkled with raised metallic and yellow scales that visible to the naked eye as shiny emery-like particles when the moth is tilted under light.  The postmedial line is double or triple and strongly scalloped.  The other lines are evident as black dots on the veins.  The discal spot is absent or a short transverse line.  The hindwing is white with gray veins and is marked by a discal dot, weak submarginal band, and a terminal line of black dots on the veins.  The head and anterior thorax are pure white, while the posterior thorax is gray.  The male antenna is bipectinate and that of the female is simple.
 
@@ -26,11 +26,11 @@ This species is widely distributed across the American West, ranging south to th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on Salicaceae, including both willows (*Salix* spp.) and cottonwoods (*Populus* spp.), but has also been reported feeding on birches (*Betula* spp.) in the Betulaceae.
 
-##### Adults
+### Adults
 
 *Furcula scolopendrina* has a very long flight season and might be multiple brooded.  Collection records extend from early April through August.
 

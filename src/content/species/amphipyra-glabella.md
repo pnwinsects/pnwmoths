@@ -2,7 +2,7 @@
 
 
 
-##### Adults
+### Adults
 
 *Amphipyra glabella* is an eastern species that barely enters our region in eastern British Columbia. It is brown-gray small to medium-sized moth (FW length 14–16 mm) with broad somewhat rounded forewings. The terminal area is pale, separated from the rest of the wing by a toothed subterminal line. The antemedial and postmedial lines are dark gray to absent. The postmedial line forms a wide arc around the reniform spot when visible. The fringe is weakly checkered light and dark brown-gray. The orbicular and reniform spots are often evident as pale patches, although the orbicular spot is a dark dot in some individuals. The claviform spot is absent. The hindwing is pale brown-gray, darker in females, with a light margin, a thin gray terminal line, and a weakly checkered fringe. The head and body match the forewing ground color. The male antenna is filiform.
 
@@ -38,13 +38,13 @@ The range of this species includes the eastern and central portions of North Ame
 
 
 
-##### Larvae
+### Larvae
 
 This species feeds on hardwoods such as cottonwoods (*Populus* spp.) in the Salicaceae and ashes (*Fraxinus* spp.) in the Oleaceae.
 
 
 
-##### Adults
+### Adults
 
 *Amphipyra glabella* flies in late summer with most eastern records from July and August according to Forbes (1954). It is nocturnal and comes to lights.
 

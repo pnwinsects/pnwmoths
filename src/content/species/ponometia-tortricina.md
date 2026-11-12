@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ponometia tortricina* is a very small (FW length 9 - 10 mm) olive-tinted yellow to brownish-gray moth that flies in arid steppe environments during the summer. The markings on its wings are limited to a black dot at the orbicular spot and dark markings at the trailing margin in lighter individuals. The most common color is even olive gray, with a slightly powdery look due to a mixture of light and dark scales. The trailing margin, distal wing, and fringe are often slightly darker gray. Some specimens have a rectangular darker gray patch on the posterior half of the wing between the positions of the postmedial and subterminal lines. The minority of specimens in our area are lighter yellow or ochre. The hindwing is gray with a whitish fringe. The head and thorax match the forewing color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is widely distributed in dry grasslands and prairies throughout muc
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on Asteraceae like other species in the genus.
 
-##### Adults
+### Adults
 
 *Ponometia tortricina* has a long flight season from late spring to early fall. It has been collected from mid-May to early September, although most records are from June and July. It is nocturnal and comes to lights.
 

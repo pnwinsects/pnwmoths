@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa hollemani* is a common, small *Euxoa* (FW length 12–15 mm) that flies east of the Cascade Range during the fall. Its forewing has a distinctive pattern of light-filled fused orbicular and reniform spots and a light gray costa. The forewing ground color is best described as steel-gray, but a large portion of the mid-forewing is wood-brown. The brown extends distally in the subterminal area along the dark veins. The costa is lighter gray, lightest near the base. The terminal area is dark gray. The cell and a thick basal dash are black. The position of the irregular subterminal line is the toothed transition between the lighter subterminal and darker terminal areas but is not marked otherwise. The pale subterminal area reaches the margin as a "W" mark along veins M3 and CuA1. The terminal line is dark. The fringe is light gray. None of the other transverse lines are evident. The orbicular and reniform spots are outlined in black and filled with light gray peripherally and darker gray centrally, strongest in the reniform spot. The orbicular spot is oval, very long and most often fused to the V-shaped reniform spot. The claviform spot is a black streak at the end of the basal dash. The hindwing is pale whitish gray with gray near the margin in males, darker gray-brown with a wider marginal band in females, with dark discal spot, veins, and terminal line in both sexes. The hindwing fringe is white with a tan and patchy gray base. Most of the head and thorax are gray-brown. The base of the collar is light gray, separated from the darker edge by a black transverse line. A frontal tubercle is present. The male antenna is biserrate. *Euxoa hollemani* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The range of this species extends south to the central portions of New Mexico an
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults fly in the fall around the time of peak flowering of rabbitbrush (*Ericameria nauseosus*, Asteraceae), beginning in early August and peaking in mid-September. It is nocturnal and comes to lights. Adults seek nectar at rabbitbrush.
 

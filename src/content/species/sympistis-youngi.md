@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis youngi* is a medium-sized (FW length 14 - 18 mm) moth that flies in dry forests during late summer and fall. It has even gray forewings with thick smooth transverse lines, thin black spots, and an orange tint to the median area near the head and collar. The wing is slightly lighter gray basal to the antemedial line and darker gray distal to the postmedial line. The basal line is short, thin, and black. The antemedial line is thick, black, and smoothly excurved. The postmedial line is thick and black, touching the anterior and posterior reniform spot and focally pointed toward the outer margin lateral to the spot, nearly straight and perpendicular to the wing below the spot except turned toward the base at the trailing margin. The terminal area is slightly lighter than the subterminal area at the apex and concolorous elsewhere. The subterminal line is absent. The terminal line is thin and gray. The forewing fringe is even  gray-brown. The three spots are thin and black filled with the color of the median area. The orbicular spot is oval and the reniform spot is kidney-shaped. The claviform spot is variable, faint, or darker than the other spots. The hindwing is pale whitish gray in males and slightly darker in females with an ill-defined gray marginal band, gray veins with dark spots at the position of the postmedial line, and a barely visible discal spot. The terminal line is dark gray, thin. The hindwing fringe is tricolored with a yellow base, thin gray median line, with a white edge. The head and collar are orange-brown. The rest of the thorax is even gray. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is found in California outside of our region.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on ocean spray (*Holodiscus discolor*) in the Rosaceae.
 
-##### Adults
+### Adults
 
 *Sympistis youngi* has a fairly long flight season for a *Sympistis* and has been collected from late June through September in the Northwest. It is most commonly encountered from late July through August. This species is nocturnal and comes to lights.
 

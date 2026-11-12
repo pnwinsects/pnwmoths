@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hypocoena inquinata* is a very small to small, tan moth (FW length 9–12 mm) that flies in wetlands during July. It has a streaky, rounded forewing with transverse markings limited to the postmedial and terminal lines and usually with black spots near the posterior margin. The forewing is short and rounded. It is gray-tan, slightly grayer and darker along the costa and outer margin. All of the veins are light tan producing a streaked pattern. Dark gray shading is present near the basal portion of the radial vein, and a diffuse black line is sometimes present in the fold across the median area. The antemedial line is absent or represented by a single black spot in the fold. The postmedial line is usually present but is incomplete, powdery black from the anterior cell to 1A+2A above the posterior margin, darkest in the fold where it is often condensed into a black spot similar to the one on the antemedial line. The terminal line is variable, faint gray to black interrupted by the veins. The fringe is the color of the terminal area. None of the usual spots are evident. The hindwing is light gray-tan to gray, usually slightly darker gray toward the margin, sometimes traversed by tan veins, with a thin dark terminal line. The hindwing fringe is light tan to gray. The head and thorax are tan to gray-tan. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ This species is widespread across boreal North America. It is widespread in the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on sedges (*Carex* spp.) in the Cyperaceae.
 
-##### Adults
+### Adults
 
 *Hypocoena inquinata* flies during the summer, usually in July. It does not wander far from its wetland habitat. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa perolivalis* is a small to medium-sized *Euxoa* (FW length 13–16 mm) that flies in the eastern part of the Pacific Northwest during the summer. It has mottled dark olive-gray and gray forewings with a dull ochre line through the fold, a streaked pale gray costa, and pale gray filling of the lines and spots. Most of the median area is olive-gray, darker gray in the cell and light ochre in the fold. The subterminal area is mottled gray and dark gray, the apex is gray, and the terminal area is uniform dark gray. The costa is gray, similar to the subterminal area and apex, but streakier. Some specimens have a very thin gray cubital vein. The basal and antemedial lines are black and gray, incomplete with the basal line evident on the anterior forewing and the antemedial line below the cubital vein. The latter is angled strongly toward the outer margin and bulges outward between the veins. The median line is absent. The postmedial line has a dark lightly scalloped inner line and fainter outer components, is pulled strongly basad on the costa, with a short straight segment lateral to the reniform spot, and then bent 45° toward the base at the level of the lower cell. The subterminal line is yellow-tan or light gray, undulating with a slightly excurved segment on the mid-forewing. It is preceded by dark gray patch on the costa and a gray shade or series of indistinct spots or wedges across the posterior and mid-forewing. The terminal line is dark gray, thin, and sometimes broken into spots. The fringe is gray, similar to the terminal area. The spots are outlined in dark gray, lined with very pale gray, and filled with medium-gray. The orbicular post is a tilted oval, relatively small, and the reniform spot is kidney-shaped. The claviform spot is black, moderate-size. The hindwing is gray with an ill-defined darker margin, discal spot, veins and terminal line. The white fringe is white with a light gray base. The head and thorax are olive gray with light and dark edges on the tegulae. The base of the collar is light gray, separated from the dull brown or olive gray edge by a black line. A frontal tubercle is present. The male antenna is bead-like. *Euxoa perolivalis* is a member of the subgenus *Orosagrotis*.
 
@@ -22,11 +22,11 @@ This species has a disjunct distribution with a fairly limited range in the Rock
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults of *E. perolivalis* fly during the summer and have been found in July and early August in the Pacific Northwest and Alberta. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Phragmatobia assimilans* is a medium-sized (FW length 14 - 19 mm), reddish tiger moth found in the northern part of the Pacific Northwest. The forewing is opaque dusty medium to dark orange brown, with distinct dark gray antemedial and postmedial lines and discal spot. The hindwing is slightly translucent pinkish red with a narrow black marginal band and dark veins. The head and thorax are slightly darker than the forewings, while the abdomen is darker red than the hindwing with several black stripes. The filiform antennae are pale.
 
@@ -22,11 +22,11 @@ This species is found in boreal forest habitats in a relatively narrow band acro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on a wide diversity of herbaceous plants, and also on some low woody hardwood shrubs.
 
-##### Adults
+### Adults
 
 Adults have been found from late spring until August. They are nocturnal and come to light.
 

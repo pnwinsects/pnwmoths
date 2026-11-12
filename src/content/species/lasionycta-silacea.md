@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta silacea* is a mottled, olive-gray and ochre medium-sized noctuid moth (FW length 14 - 18 mm) that flies near timberline in Washington and British Columbia. The forewing is dark olive with scattered ochre scales and filling of the lines and spots. The most prominent markings except in light individuals are the pale portions of the antemedial and postmedial lines, the light subterminal line, and the incompletely filled orbicular and reniform spots. In light individuals, the dark olive-gray lines are more evident. The antemedial line is mildly irregular, and the postmedial line is strongly dentate. The median line is dark but faint. The orbicular spot is small and contains a central ocellus of the ground color. The reniform spot is usually a patch of ochre scales with a central dark bar. The fringe is checkered with olive-gray and ochre. The hindwing is ochre-gray with darker smoky suffusion toward the margin, faint discal spot and postmedial line, and a light ochre fringe. The ventral hindwing is light ochre-brown with a small discal spot and gray marginal band. The head and thorax are olive-gray. The male antenna is strongly biserrate.
 
@@ -24,11 +24,11 @@ This species is only known from the vicinity of Waterton Provincial Park in sout
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies during the summer. The collection records are from July and August. It is nocturnal and comes to lights.
 

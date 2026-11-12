@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Clemensia* *umbrata* is a small (FW length 10–11 mm), pale, oval-winged tiger moth found in moist forests in our region. The forewing is pale white and smudgy brown-gray peppered with darker scales. The transverse lines are pale gray-brown marked with darker dots, these most evident as black dots on the costa, on the antemedial line in the cell, and on the postmedial line in the fold. The entire terminal line at the base of the fringe is dotted. The orbicular spot is a small black dot and the reniform is spot a black thin irregular triangle.  The hindwing whitish extensively smudged with light gray.
 
 This species is most likely to be confused with micro moths (multiple families that are not included on this site) but can be recognized by wing shape and pattern. *Meganola minuscula* is similar in size and general pattern, but it has complete black transverse lines. It also occurs in the spring before the flight of *Clemensia umbrata*.
 
-##### Larvae
+### Larvae
 
 Larva has short sparse hairs, is cryptically mottled green and black with a thin middorsal white line, and is illustrated by Miller and Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is widespread in the Pacific Northwest and has been collected most 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a specialist on tree lichens, particularly those that grow on hardwood trees such as Oregon white oak (*Quercus garryana*). McCabe (1981) reports that the larvae from New York state feed on algae and refuse lichens.
 
-##### Adults
+### Adults
 
 Adults occur in the summer from late June until early September, but are most common in July. They are nocturnal and come to light.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xylena curvimacula* is a large moth (FW length 19–23 mm) that flies in forests during late fall and early spring. It has a long, ochre-yellow and gray-brown forewing marked with a black orbicular spot and C-shaped ochre and chestnut-brown reniform spot. The forewing is relatively long and has a scalloped outer margin. The ground color of Northwest populations is dark brown-gray, rarely chestnut brown, darkest on the costa from the base to the subterminal line. A pale streak, whitish at the base and ochre elsewhere, extends through the cell from the base to the outer margin where it is broadest. The terminal area posterior to vein M3 is a mixture of gray, brown, and ochre scales, often with dark veins. A black basal dash is present and there is a black spot near the base of the cubital vein. The antemedial line is comprised of several brown to gray components that are strongly looped, visible on the costa and in the cell and obscured on the posterior wing. A weak medial line is visible on the posterior wing. The postmedial line is a series of spots on the veins. The subterminal line is pale, diffuse and difficult to define, parallel to the outer margin. It is preceded by a long black wedge or spike between M2 and M3 at the transition from yellow to brown color and a fainter and more diffuse dark shade. The fringe is gray-brown, often checkered with tan or ochre. The orbicular spot is ovoid with parallel medial and lateral sides, black, double with very thick lower portion, filled with ochre anteriorly and darkening to black posteriorly. The reniform spot is boomerang-shaped with open anterior and posterior ends, double black medially, ochre centrally, and chestnut-brown laterally. No claviform spot is present. The hindwing is dark brownish gray with barely darker gray discal spot, veins, diffuse postmedial line, and thin dark terminal line. The hindwing fringe is off-white, often with a pink tint. The face is dark brown and the head and collar are ochre-brown. The tip of the collar is light red-brown. The rest of the thorax is red-brown.
 
@@ -24,11 +24,11 @@ This species has a transcontinental distribution in North America. It occurs in 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods, but shows a preference for alders (*Alnus* spp.) in the Betulaceae and willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 The adults of *X. curvimacula* emerge during the fall and overwinter before mating in the spring. It is most commonly encountered in the spring from early March to mid-May. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Oligia obtusa* is a small dark gray-brown moth (FW length 12–13 mm) with a trapezoidal dark median area that has only recently been recorded for the Pacific Northwest. The forewings is stubby. Its color is dark gray-brown, diffusely darker in the median are below the costa and also in the terminal area. A diffuse black mark is present along the trailing margin near the base. The cubital vein and proximal CuA1 and CuA2 to the postmedial line are pale. The antemedial and postmedial lines are dark gray-brown filled with a light shade of the ground color. The antemedial line is nearly straight, slanted toward the outer margin from the costa. The postmedial line is drawn toward the base on the costa, smoothly curved around the end of the cell and then nearly straight from the mid-cell to the posterior margin at a similar opposite angle to the antemedial line. The subterminal line is pale but indistinct and incomplete, preceded by one or two black wedges between veins on the mid-wing in some specimens. The orbicular and reniform spots are outlined in a pale color similar to the filling of the lines. The orbicular spot is incomplete and inconspicuous, filled with the color of the adjacent median area. The reniform spot is kidney-shaped and filled with the ground color. The claviform spot is absent. The hindwing is smoky brownish gray with a smudged dark discal spot and concolorous fringe. The head and thorax are dark gray-brown. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ This species is mostly restricted to northeastern North America, and appears to 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it may bore into the stems of grasses (Poaceae) like related species.
 
-##### Adults
+### Adults
 
 The Chelan County specimen was found during July. It is most commonly collected during August in the East. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa olivalis* is a small to medium-sized *Euxoa* (FW 12–16 mm) that flies in steppe and forests east of the Cascade summit during early and mid-summer. It has streaky gray-brown or brown forewings with a bar-like orbicular spot crisply outlined by black and light gray and filled with brown. The forewing ground color is light yellowish gray-tan, heavily suffused with warm brown surrounding the cell and along the veins in the posterior median and subterminal areas to the point where the wing appears to be brown. In some specimens, the distal subterminal area opposite the cell and in the teeth of the "W" mark on M3 and CuA1 is light gray. The cell is filled with dark brown, and the costa in the subterminal area and the terminal area are dark gray. A black basal dash is present. The veins along the costa, including the radial vein, and the cubital vein are light gray to the postmedial line, while the other veins are black. Twin black spots mark the origins of the antemedial and postmedial lines on the costa. The antemedial line forms a brown and black "V," apex pointed lateral, at the base of the claviform spot and is obscure elsewhere. The median line is absent. The postmedial line is very faint, dark gray, scalloped on the veins. The subterminal line is light gray or tan, slightly irregular with a moderate "W"-mark on the mid-forewing. It is preceded by a dark gray shade on the costa and a series of long black wedges between the veins on the mid-forewing. The terminal line is black. The fringe is gray, finely longitudinally striped, with a tan base. The orbicular and reniform spots are outlined crisply in black outer and light gray inner lines and are filled with the ground color. The orbicular spot is bar-like, nearly horizontal, extending to near the reniform spots in most specimens. The reniform spot is C-shaped, often obscure at the lower end by the pale cubital vein. The claviform spot is black, small to moderate-sized, narrow, filled with brown. The hindwing is light whitish gray-tan with slightly darker gray on the outer third, with barely darker discal spot, veins, and terminal line. The hindwing fringe is white with a light gray base. The head and antenna are gray-tan to brown, with a black line across the mid-collar and powdery light gray edges to the tegulae. A frontal tubercle is present. The male antenna is biserrate. *Euxoa olivalis* is placed in the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The range of this species extends east across southern Canada to Saskatchewan. T
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 *Euxoa olivalis* flies during the summer from early June to the end of August. The earliest records are from low elevations. It is most common during the months of June and July. It is nocturnal and comes to lights.
 

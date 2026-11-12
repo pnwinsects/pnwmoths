@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Androloma maccullochii* is a distinctive, medium-sized (FW length 11 - 16 mm), day-flying black moth that flies in boreal and montane forests during spring and summer. It has light yellow patches on the forewing that are traversed by black veins. The central light area on the forewings of both sexes appear to have a large black V or Y-shaped mark in addition to the black veins, with the bar-like orbicular and reniform spots forming the upper part of the letter-shaped mark. Metallic scales produce shiny patches in the black portions of the forewings. The costa of the male is swollen at mid-wing forming a groove posteriorly. The hindwing is black with different-colored light areas in the two sexes: white in males and light yellow, like the forewing patches, in females. The hindwing pattern is similar in males and females with medial and lateral patches separated by a large black bar at the position of the discal spot. All of the veins traversing these pale spots are black. The fringes of both wings are entirely black. The head is black with yellow patches lateral to the eyes. The thorax is black with yellow patches on each side of midline on the collar and yellow tegulae. The tibias of the prothoracic and metathoracic legs are bright orange. The abdomen is black with light scales on the dorsal aspect of the anterior segments. The eyes are bare. Both sexes have antennae with black and white ringed segments and are simple with a long club-like thickening of the distal half.
 
@@ -22,11 +22,11 @@ This species occurs across northern North America from Alaska to eastern Ontario
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various Onagraceae.  This includes *Clarkia* spp. on native prairies west of the Cascades, fireweeds (*Epilobium* spp.) in the mountains, and evening primroses (*Oenothera* spp.) in dry habitats east of the Cascades.
 
-##### Adults
+### Adults
 
 This species flies in the spring and summer, generally early at low elevations and later at altitude. Records extend from late April to early August in the Northwest but are most common in may. The adults are diurnal and visit flowers. This species takes nectar at bear berry (*Arctostaphylos uva-ursi*) in the Cascade Mountains.
 

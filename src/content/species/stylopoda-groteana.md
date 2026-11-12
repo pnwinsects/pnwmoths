@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Stylopoda groteana* is a very small to small, nearly black moth (FW length 9–11 mm)  that flies in southeastern Idaho during late summer. It has sinuous white bands across the distal forewing and a black hindwing. The ground color is dark gray to brownish black, 
 darkest in the posterior median area and in the distal subterminal area. The filling of the postmedial line and adjacent proximal subterminal area are white, darkening gradually toward the subterminal line. The 
@@ -13,7 +13,7 @@ head and thorax are powdery, similar to the forewing. The male antenna is filifo
 
 This species can be identified by its small size, a dark gray forewing with white bands across the subterminal areas, and a black hindwing. It is most similar to two species of *Sympistis*: *S. aterrima* and *S. parvanigra*. These moths have pale band-like areas on the dorsal hindwing that are lacking in *S. groteana*.  In addition, they are found further to the west in the Cascade and Siskiyou Mountains of British Columbia, Washington, and Oregon.
 
-##### Larvae
+### Larvae
 
 The larva is unknown.
 
@@ -33,11 +33,11 @@ The *Stylopoda groteana* is found in the southern Rocky Mountain region, central
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of this moth are unknown.
 
-##### Adults
+### Adults
 
 *Stylopoda groteana* has only 
 been collected in late August and early September in our area. This moth has been found most commonly during July and August across its entire range. It is nocturnal and comes to lights.

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Aplectoides condita* is a broad-winged, medium-sized noctuid moth (FW length 15 - 19 mm) with a powdery gray forewing with faint red-brown tints marked with large light-filled orbicular and reniform spots that are connected by a black line across the lower cell. The ground color of the forewing is slightly mottled, powdery, medium gray with a slight brownish tint in Pacific Northwest populations, slightly lighter in the basal area and along the trailing margin and and occasionally with patches of red-brown between the postmedial and subterminal lines. The forewing margin is slightly scalloped, although less so in the Pacific Northwest than in Eastern populations. A thin, black, basal dash is present, and there is a black line in the lower cell between the antemedial line and the orbicular spot and between the spots. The veins lateral to the postmedial line are sometimes marked with dark. The lines are double and filled with light whitish gray, but only the portion of the antemedial and postmedial lines bordering the median area are dark. The subterminal line is faint light gray and even to slightly irregular in shape. It is preceded by a dark spot at the costa in most specimens, well-defined black marks are lacking in this area. The orbicular and reniform spots are large, thin and black, with filling of chalky light gray with darker gray centers in some specimens. The anterior portion of the black claviform is evident as a black mark below the orbicular spot. The hindwing is powdery light gray with a slight yellow tint. It is marked with ill-defined gray discal spot, postmedial band and has dark veins, dark scalloped terminal line, and a light fringe. The head and thorax are powdery gray. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is widely distributed in boreal spruce-fir forests across Canada, e
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist that feeds primarily on true firs (*Abies* spp.) and larch (*Larix* spp.) in the Pinaceae.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in late spring and summer. Pacific Northwest records are from late May through July. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spiramater lutra* is a moderate to large (FW length 17 - 21 mm), blackish moth that flies in forests throughout the Northwest during early summer. It has colorful, rusty yellow and blue-gray patches and a filling of spots on the forewing. The forewing often has a slight concave notch along the posterior aspect of the outer margin. The ground color is blackish-gray with gray mottling most evident along the costa and in the subterminal area. The basal wing is rusty brown posterior to the cell, and similar color is often present at the medial border of the subterminal line. Patches of light blue-gray are present in the subterminal area, largest and most consistent at the anal angle, and in the apical terminal area. The basal and antemedial lines are black, barely evident against the dark adjacent wing. The postmedial line is black and moderately toothed, most evident where it abuts the light posterior subterminal area. The subterminal line is light yellow to white, powdery and irregular, but usually evident across the wing. The terminal line is black spots, barely visible. The fringe is dark gray. The orbicular and reniform spots are outlined in black but are mostly evident as the lighter filling. The round orbicular spot is filled with light gray peripherally and an ocellus of the darker ground color. The reniform spot is moderately large, ovoid or slightly mesially constricted, white peripherally, often tinted with rust and yellow, and gray centrally. The claviform spot is black and barely visible. The hindwing is gray with a brassy sheen and has a slightly darker discal spot, postmedial line, and margin. A thin dark terminal line is present at the base of the slightly yellow to pink-tinted whitish fringe. The head and thorax are dark gray to black. The eyes are covered with fine hairs. The male antenna is weakly biserrate.
 
@@ -22,11 +22,11 @@ This species is widely distributed in the Canadian and Upper Austral Life Zones 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a very broad generalist feeding on many kinds of hardwoods and conifers.  Records include the Ericaceae, Anacardiaceae, Betulaceae, Fagaceae, Aceraceae, Salicaceae, Rosaceae, Grossulariaceae, Cornaceae, Elaeagnaceae, Pinaceae, and Cupressaceae.
 
-##### Adults
+### Adults
 
 The flight period of *S. lutra* is late spring and summer, usually relatively early in the season. Records from the Pacific Northwest range from early May to early August, but are most common in June.
 

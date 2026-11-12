@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anhimella contrahens* is a small (FW length 12 - 14 mm), brown to gray-brown moth that flies in the dry steppe and forests from spring to early fall. It has pale hindwings, and its forewings have a smoothly curved pale postmedial line, pale-outlined renform spot, and dark filling of the orbicular and reniform spots. The forewing color is variable, uniform dull gray-brown, slightly darker and grayer on the costa and distal to the postmedial line, to light brown or gray-tan. In paler forms the wing is mottled, with dark brown-gray suffusion at the base and in the anterior median area and weaker suffusion in the anterior subterminal area and in the mid-terminal area. The veins are sprinkled with light and dark scales, appearing dark from the postmedial line to the outer margin and darker near the tips of the teeth of the lines in some individuals. The basal and antemedial lines are variable, often indistinct in the dark form but dark, double, and toothed on the veins in the lighter form. The antemedial line is nearly transversely oriented, strongly toothed toward the base on vein 1A+2A above the posterior margin. The median line 
 is usually absent. The postmedial line is double with the medial component much darker
@@ -37,11 +37,11 @@ This species is widely distributed in forest and riparian habitats throughout mu
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation, for example dandelions (*Taraxacum officinale*) in the Asteraceae.
 
-##### Adults
+### Adults
 
 The flight season of *A. contrahens* is long, with records from late May to mid-September, suggesting that it might be double-brooded. The moth is nocturnal and comes to lights.
 

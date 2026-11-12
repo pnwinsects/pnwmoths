@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Syngrapha octoscripta* is an uncommonly collected mottled gray medium-sized moth (FW length 16 - 17 mm) that occurs along the Pacific Coast and in boreal forest habitats during the summer. It has a thin squiggly stigma that often has a circular lateral spot and a prominent rust-red spot in the posterolateral median area. The forewing has a slightly pointed apex, a scalloped outer margin, and a small flange at the anal angle. It is mottled medium-dark to dark gray, slightly darker in the posterior median area, in the distal subterminal area abutting the subterminal line, and in the apical and anal portions of the terminal area. A small but bright rusty red patch is present near the postmedial line below the distal stigma. The base and the anterior wing from the reniform spot to the subterminal shade are lightest gray. The stigma is thin, silver-white with a thin serpiginous basal component that is roughly V-shaped and a lateral spot or circle that are variably fused. The basal, antemedial, and postmedial lines are gray, double, filled with the ground color or lighter gray. The basal line is usually faint. The antemedial line is evident on the costa and below the cubital vein where it is irregular and curved toward the base posteriorly. The median line is diffuse, gray. The postmedial line is finely scalloped, sharply drawn toward the base on the costa and oblique toward the base across the rest of the wing. The subterminal line is black, jagged, with a tooth below the apex and a W-mark near CuA1 that approach the lateral margin. The terminal line is a series of pale gray lunules that are preceded by dark gray chevrons on the mid-wing. The fringe is checkered gray. The orbicular spot is pale gray, faint. The reniform spot is very thin, silvery partially surrounded by black, weakly hourglass-shaped and slightly tilted toward the outer margin, filled with the ground color and black at the lower end. The hindwing is buff to light gray-tan with light gray basal suffusion and darker gray veins, discal spot, and ill-defined broad marginal band. The hindwing fringe is buff with an ochre and gray basal stripe and gray checkering. The head and thorax are frosted dark gray with transverse barring on the collar. Long tufts are present on the posterior thorax and several abdominal segments. The male antenna is filiform.
 
@@ -10,7 +10,7 @@ Populations on the Pacific Coast are lighter gray than most populations and have
 
 The type locality of the synonym *Autographa magnifica* Ottolengui is Ucluelet, Vancouver Island, British Columbia, Canada.
 
-##### Larvae
+### Larvae
 
 Larva is smooth with only two pairs of abdominal prolegs.  The color is green with fine white dorsal lines and a wider yellow lateral line.  It is illustrated by Lafontaine & Poole (1991).
 
@@ -30,11 +30,11 @@ This species is found across northern North America from Alaska, Yukon Territory
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on huckleberries (*Vaccinium* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 The flight period of *S. octoscripta* is the summer, usually July and August. This species is nocturnal and comes to lights.
 

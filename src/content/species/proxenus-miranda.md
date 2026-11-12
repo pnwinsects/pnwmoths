@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Proxenus miranda* is a small noctuid moth (FW length 11 - 14 mm) with a satiny dark gray to black forewing marked with pale whitish scales at the outline of the reniform spot and lacking all other markings. This species is easily rubbed and is difficult to find and maintain in pristine condition. The hindwing is smoky gray with a slight sheen, lighter at the base and gradually darkening toward the outer margin. The discal spot is darker gray and the fringe is the same shade as the adjacent wing. The head and thorax are dark gray like the forewing. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ This species is widely distributed in North America. The western North American 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 *Proxenus miranda* is single brooded and the adults fly from late spring to August in our area. It is nocturnal and comes to lights.
 

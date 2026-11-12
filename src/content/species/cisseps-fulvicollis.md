@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cisseps fulvicollis* is a day-flying, narrow-winged tiger moth. It is small to medium-sized (FW length 15 - 21 mm) with a relative large body for the size of its elongate wings. The head and collar are light orange. The thorax is brown gray and the abdomen is slightly metallic blue-black. The forewings are warm brownish gray and the hindwings are black peripherally and translucent pale gray-white with black veins centrally. The black antennae are bipectinate, slightly wider in males than in females.
 
@@ -24,11 +24,11 @@ This species is widely distributed in North America, being found from coast to c
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on grasses (Poaceae) and sedges (Cyperaceae).
 
-##### Adults
+### Adults
 
 *C. fulvicollis* flies throughout the summer. It is predominantly diurnal although occasional specimens come to light. Its flight is fairly slow for a moth. It nectars on flowers, especially goldenrods (*Solidago* spp.).
 

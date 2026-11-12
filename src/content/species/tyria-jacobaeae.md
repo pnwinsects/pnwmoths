@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tyria jacobaeae*, the Cinnabar Moth, is a bright red and black moth found in the western part of the Pacific Northwest. It is medium-sized (FW length 16–21 mm). The forewing is black-gray with a bright red line parallel to the anterior margin and two red dots near the outer margin. The hindwing is solid red with black at the anterior margin and fringe. The antennae, head, and body are black.
 
 This striking moth is unlike any other species in our area.
 
-##### Larvae
+### Larvae
 
 Larva is relatively smooth with only sparse hairs, and has alternating orange and black bands.  It is illustrated by Miller & Hammond (2003).
 
@@ -31,11 +31,11 @@ This species is native to Eurasia. It is limited to the Pacific Northwest in Nor
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist on exotic tansy ragwort (*Senecio jacobaea*), a noxious agricultural weed, but will feed on some other species of *Senecio* such as the native *S. triangularis* in high mountain meadows.
 
-##### Adults
+### Adults
 
 Adults are both diurnal and nocturnal. Most specimens are collected by hand netting but it also comes to light. It flies from early May until early August but is most common in spring and early summer.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Syngrapha surena* is a rare medium-size moth (FW 15–18 mm) that occurs in central British Columbia during mid-summer. It has a pale silver-gray anterior and dark gray posterior forewing separated by a thin broadly V-shaped stigma. The forewing shape is similar to those of other *Syngrapha* species, with a slightly scalloped outer margin and slight point at the distal posterior margin near the anal angle. The color is two-toned: mottled light silvery gray over most of the forewing, and darker gray in the medial area posterior to the stigma and basal to the subterminal line. The most prominent mark is the linear thin silvery stigma, joined medially to the posterior two-thirds of the antemedial line. The stigma shape is characteristic, lacking thick segments or an adjacent dot. The basal and postmedial lines are dark gray with lighter filling, but generally inconspicuous compared to adjacent mottling and dark areas. The subterminal line is jagged, evident mostly as the transition between the preceding dark gray shade and the lighter gray terminal area. The fringe is weakly checkered dark and lighter gray. The hindwing is fuscous-tan with a broad darker terminal shade over the distal third, lacking dark veins or discal spot. The hindwing fringe is two toned, gray with a light base.
 
@@ -22,11 +22,11 @@ This species is found across boreal North America from Newfoundland and Labrador
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva is reported to feed on blueberries (*Vaccininium* spp.) (Lafontaine & Poole 1991)
 
-##### Adults
+### Adults
 
 Adults are on the wing from mid-July to mid-August. All of the Pacific Northwest records are from mid- to late July. This moth is nocturnal and is attracted to lights.
 

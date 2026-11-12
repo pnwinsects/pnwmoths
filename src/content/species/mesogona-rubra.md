@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mesogona rubra* is a smooth brick-red to dull pink-brown, medium to large noctuid species (FW length 19–21 mm) that flies in western Oregon and the southern Washington Cascades during late summer and fall. It has faint pale forewing lines and spots and shiny dark red hindwings. Populations from the northern portion of the range have uniform dark red forewings, while those from southwestern Oregon and in California are more variable, with light pink forms in addition to darker specimens. The lines and spots are similar, inconspicuous, a slightly lighter shade of the ground color with a small amount of adjacent gray along the inner portion of the postmedial line, and is a series of spots medial to the subterminal line in a few specimens. The antemedial and postmedial lines are smooth. The antemedial line is strongly angled toward the outer margin with weak convex segments near the wing margins and a slight concave mid-section. The postmedial line forms a convex arc toward the outer margin. The orbicular and reniform spots are large and filled with the ground color. The orbicular spot is a circle and the reniform spot is an upright oval, weak hourglass-shape, or kidney-shape. The hindwings are immaculate shiny dark pinkish-red.
 
@@ -8,7 +8,7 @@ This species can be recognized by the combination of its large size, uniform red
 
 The type locality of *Mesogona rubra* Hammond and Crabo is Oregon, Lane County, H. J. Andrews Experimental Forest.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, mottled pink, gray, and brown with a thin white lateral line.  There is a dark brown prothoracic shield behind the head.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ The range of this species extends south to southern California west of the Sierr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on certain species of manzanitas (*Arctostaphylos* spp.) in the Ericaceae.  In the Coast Range and along the west slope of the Cascades, the primary larval foodplant is hairy manzanita (*A. columbiana*).  In the Siskiyou region of southwestern Oregon, gray manzanita (*A. canescens*) also appears to be an important foodplant.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies from late summer through the fall. Records from our region are from late August to mid-September. It is nocturnal and comes to lights.
 

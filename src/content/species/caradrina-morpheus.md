@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Caradrina morpheus* is an introduced small to medium sized moth (FW length 12 - 15 mm) with light brown wings marked with smudged darker brown spots and a gray band across the distal wing in the subterminal area. The forewing is slightly mottled and has a slight brassy sheen. The entire forewing distal to the postmedial line is gray, with the subterminal area darker than the terminal area and separated from it by the slightly uneven pale yellowish subterminal line. The basal, antemedial, and postmedial lines are thin and gray and weakly scalloped. A faint gray median line is also present. The orbicular and reniform spots are similar, dark gray with a rusty cast that extends slightly outside the outline of both spots. The orbicular spot is small and round, while the reniform spot is kidney-shaped or weakly figure-eight shaped. The claviform spot is absent. The hindwing is light yellow gray - slightly darker in females - with a slight gray suffusion near the margin that is darkest on the veins and a small gray discal spot. The head and thorax are uniform, the same color as the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is introduced from Eurasia. It is has also been found in Alberta an
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous plants.
 
-##### Adults
+### Adults
 
 This species flies in late spring and summer and has been collected from late May until early August in the Northwest. It is nocturnal and comes to lights.
 

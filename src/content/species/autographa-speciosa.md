@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Autographa speciosa* is a medium-sized (FW length 17 - 18 mm) gray and black moth that flies in forests of the western Pacific Northwest during the summer. It has a smooth black to brown-black median area beneath a silver-white stigma. The forewing has a slightly pointed apex and a small flange at the anal angle. The ground color is smoothly mottled violet gray, lightest at the base, along the inner antemedial and posterior postmedial lines, and in the posterior terminal area. The median area posterior to the cubital vein is velvety black to brownish black. All but the medial subterminal area is blackish gray, gradually darkening toward the subterminal line. The lines are dark gray, double with violet-gray filling. Two small black spots are associated with the basal line, one on each side of the cubital vein. The antemedial line is oblique across the costa near the orbicular spot, strongly offset toward the base across the cell, then strongly oblique and slightly incurved toward the base below the cell. The postmedial line is drawn toward the base on the costa, then slightly irregular in a straight line across the rest of the wing nearly perpendicular to the trailing margin. The subterminal line is pale, very thin and incomplete, slightly irregular with a prominent W-mark centered on vein CuA1. The terminal line is thin, black. The fringe is white with gray checkering. The orbicular and reniform spot are thin, pale gray. The orbicular spot is a small tilted oval filled with the ground color. The reniform spot is partially outlined in black on the inside and outside, hourglass shaped and touching the postmedial line. The hindwing is slightly brownish gray, suffused with gray medial to a faint postmedial line and darker toward the outer margin, with gray discal spot and thin terminal line. The hindwing fringe has a white edge and checkered yellow and gray base. The head and thorax are olive gray-brown with lighter gray edges on the collar, tegulae, and loose tufts on the posterior thorax. Additional dark dorsal tufts are present on several of the abdominal segments. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species also occurs in northern California, as far south as the northern Si
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species, but it probably feeds on herbaceous plants like related species.
 
-##### Adults
+### Adults
 
 The flight season of *A. speciosa* is the summer, with records from June to August in our area. It is nocturnal and comes to lights.
 

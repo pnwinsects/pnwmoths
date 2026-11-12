@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euclidia ardita* is a small to moderate-sized (FW length 13 - 15 mm) dark brown moth that flies during the day in the spring. The forewings are triangular in shape with a deep brown ground color, violet-tinted where lighter distal to the postmedial line. The dominant markings are dark velvety brown. These include the broad antemedial line and an adjacent spot near the posterior margin, a triangular spot distal to the reniform spot, and a dark mark preceding the subterminal line near the apex. The median line is a broad dark brown shade. The orbicular spot is a small dot and the reniform spot is large but faint. The hindwings are dark coppery brown with dark brown suffusion medial to the postmedial line and a similar submarginal line. The area between the lines is lighter at the anal angle. The body is dark brown. The antennae are simple in both sexes. The eyes are slightly reduced in size.
 
@@ -22,11 +22,11 @@ This species is moderately common in moist forest and meadow habitats throughout
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on herbaceous legumes (Fabaceae), particularly *Lotus* species.
 
-##### Adults
+### Adults
 
 *Euclidia ardita* flies in the spring and early summer and is strictly diurnal. Pacific Northwest records are from late April to early July.
 

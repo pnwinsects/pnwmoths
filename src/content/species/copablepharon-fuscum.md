@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon fuscum* is our darkest *Copablepharon* and the only Pacific Northwest species in the genus from west of the Cascades, where it is restricted to sandy ocean beaches near the Salish Sea. It is a medium-sized (FW length 16–20 mm) moth with a warm yellow-brown forewing with black and yellow streaks along the margins and veins. The anterior and posterior margins of the forewing are white or pale yellow, with darker yellow in the cell, the adjacent postmedial area, and in the fold. Veins outlining the cell and in the adjacent postmedial area are black or outlined by dark gray. The antemedial and postmedial lines are variable, absent or a series of dots. The hindwing is medium to dark with gray, lightest near the base, with two-toned fringe. The head and thorax match the forewing ground color, while the abdomen is lighter. The male antenna is bead-like.
 
@@ -26,11 +26,11 @@ This species is a Pacific Northwest endemic.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a burrowing cutworm that burrows through sand and feeds on yellow sand verbena (*Abronia latifolia*) in the Nyctaginaceae.  Larvae emerge from the sand at night to feed on the hostplant. The larva makes a hole in the tough dorsal leaf and inserts its head to feed on the fleshy pulp. This leaves a circular blisterlike mark on the leaf. *Copablepharon fuscum* is the only Pacific Northwest *Copablepharon* that is known to be restricted to a single foodplant, although the life histories of other species are not well known.
 
-##### Adults
+### Adults
 
 This moth appears to be single-brooded with a flight season that extends from early May through June, with scattered records in July. It takes nectar at *Abronia latifolia* flowers. It is nocturnal and is attracted to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis reedi* is a common, dark brown, medium-sized *Abagrotis* (FW length 14 - 16 mm) with a faint pattern of double lines and dark-filled spots in various shades of the ground color. The forewing is most often dark brown, occasionally medium-dark brown or medium-dark orange-brown, darkest near the costa medial to the subterminal line. The terminal area is lighter, usually a lighter shade of the ground color but occasionally grayer near the apex. The basal, antemedial, and postmedial lines are dark brown, double, smooth, and filled with the ground color or slightly lighter brown. The median line is very faint or absent. The subterminal line is pale and slightly irregular, often only evident as a transition from dark to light. The spots are light brown and filled with slightly darker brown. The orbicular spot is usually round, while the reniform spot is ovoid or weakly figure-eight shaped. The claviform spot is absent. The hindwing is dark brownish gray with faintly darker discal spot and veins. The fringe is two-toned, gray basally and white distally. The head and thorax are evenly colored like the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has a wide distribution in western North America. It occurs through
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist feeding on many kinds of hardwoods in such families as the Salicaceae, Rosaceae, and Aceraceae.
 
-##### Adults
+### Adults
 
 Adults have a long flight period and have been collected from late June to mid-September in our region. They are nocturnal and come to lights. They have also been taken at sugar bait in eastern Washington.
 

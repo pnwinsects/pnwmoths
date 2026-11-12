@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Phragmatobia fuliginosa* is a reddish-colored, relatively small (FW length 13 - 16 mm), stout tiger moth. The forewings are smoky dark reddish brown and slightly translucent, especially centrally. The dominant marking is a black spot at the lower end of the discal cell. The veins are slightly darker than the ground color. Most specimens lack transverse lines. When present, they are limited to faint spots in the apical region. The hindwing is more translucent than the forewing. It has bright red ground color and fringe, but most is covered by a broad black marginal band. The hindwing discal spot and veins are darker black. The head and thorax are dark red brown, while the dorsal abdomen is red with longitudinal black stripes. The simple antennae are pale whitish proximally and black distally.
 
@@ -24,11 +24,11 @@ This species has a Holarctic distribution. North American populations have a bor
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a wide variety of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults are found throughout the summer and might be double brooded. They are nocturnal and come to light.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pseudohermonassa flavotincta* is an uncommon, reddish-brown to ochre-brown, medium-sized noctuid moth (FW length 15 - 16 mm) that is restricted to near the Pacific Coast. All color forms have black filling of the cell, a narrow oblique orbicular spot, and a long black claviform spot. The shape of the lines and spots resemble those of *Pseudohermonassa tenuicula,* which is found in the eastern part of British Columbia in our region. The forewing is usually red-brown, with pale ochre along the costa, at the wing base, and as filling of the lines and spots. The pale ochre form which is most common near the northern part of its range, has markings limited to the dark areas in the cell. The head and thoracic collar match the forewing ground color, with darker barring of the collar in red-brown individuals. The remainder of the thorax is ochre. The abdomen is yellowish gray. The male antennae are weakly biserrate.
 
@@ -24,11 +24,11 @@ This species does not occur outside of our region.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that appears to favor tall, coarse grasses (Poaceae) growing in marshes and riparian wetlands as larval foodplants.
 
-##### Adults
+### Adults
 
 *Pseudohermonassa flavotincta* is single brooded with a flight in mid to late summer. Adults have been collected from early July through August. It is nocturnal and comes to lights.
 

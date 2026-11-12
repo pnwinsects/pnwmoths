@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis williamsii* is a variably colored, small to medium-sized (FW length 14–16 mm) *Apantesis* species that flies from eastern British Columbia to southern Idaho from late spring to late summer. It has stubby black forewings with limited pale lines and usually has a dark red hindwing. The pale forewing markings include incomplete median, postmedial, and subterminal lines and the transverse postcubital line which extends slightly distal to the subterminal line as a small sideways "Y" near the anal angle.  The hindwing ground color in most individuals is dark red, with occasional pale yellow-white or orange specimens. The hindwing black markings are variable but are typically fairly extensive, with black basal streaks, discal and marginal spots that are often fused to adjacent marginal black areas, and black anterior and posteromedial margins that are often fused to the marginal band. The light areas on the thorax are pale tan and the color of the abdomen is similar to the hindwing ground color. The antennae are variable in color from dark to pale, moderately bipectinate in males and biserrate in females.
 
@@ -22,11 +22,11 @@ This species has a wide distribution in North America. Most records are from nea
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been reared on a variety of forbs (Schmidt 2009). It is probably a general feeder on herbaceous plants and grasses.
 
-##### Adults
+### Adults
 
 *Apantesis williamsii* has a long flight season in parts of its range. Most Pacific Northwest region records are from July and August. Adults are single brooded. Males are nocturnal and come readily to light. Like several other *Apantesis* species, females are never collected in light traps.
 

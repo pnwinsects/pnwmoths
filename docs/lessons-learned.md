@@ -464,6 +464,13 @@ cost a debugging cycle to discover.
   none` on the `<li>` itself. Same family as the `summary::after` chevron: when a bare element
   looks wrong, grep `pico.css` before blaming your own CSS or the browser.
 
+- **Pico gives the first and last `<ul>` in any `<nav>` negative side margins**
+  (`nav ul:last-of-type { margin-right: -… }`), so links can sit flush with a navbar edge. The
+  header nav has one `<ul>` followed by the search box, and on a narrow screen that margin made
+  every page 8px wider than the viewport (#206). An override has to match Pico's
+  `:last-of-type` selector, or Pico wins on specificity. The browser smoke test now fails if a
+  page scrolls sideways at 320px, which no desktop-width check would notice.
+
 - **`images.csv` and `species-photos.json` spell the same concept differently: `dorsal`/
   `ventral` against `D`/`V`.** Any join between a catalogued photo row and a published
   tile has to normalise both sides. Forgetting produces ZERO matches, not an error —

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Andropolia contacta* is a large gray moth (FW length 20–23 mm) that flies in boreal and montane forests during late summer. It has powdery forewings with prominently toothed lines, and a gray hindwing with a scalloped postmedial line. The forewing outer margin is weakly scalloped. It is powdery medium-dark gray. The lateral and posterior portions of the median area are usually slightly darker gray. The terminal area is darker, black at the subterminal line and fading almost to the ground color at the outer margin. The basal line is a black mark on the costa. The antemedial line is black laterally and light gray medially, evenly zigzagged. The median line is an oblique dark gray line from the costal margin to the median reniform spot, absent on the mid-wing, and barely evident on the posterior margin. The postmedial line is black often bordered laterally by light gray, evenly toothed, drawn sharply toward the base on the costa, widely arched toward the outer margin and then angled toward the base, nearly parallel to the outer margin on the posterior wing. The subterminal line is jaggedly irregular across the entire wing. The terminal line is a series of large black triangles. The fringe is weakly checkered gray. The orbicular, reniform, and claviform spots are partially outlined by black. The orbicular spot is a small oval, often weak laterally, filled with the ground color. The reniform spot is kidney-shaped, strongly outlined inferiorly and open toward the outer margin, filled with the ground and sometimes brown inferiorly. The claviform spot is long and thin, weak apically. The hindwing is light gray with an even suffusion or darker gray scales, with dark gray veins, discal spot, distinctly scalloped postmedial line, and terminal line. The hindwing fringe is white with a two-tone gray base. The head and thorax are gray with a weak black line across the distal collar. The male antenna is strongly biserrate.
 
@@ -24,11 +24,11 @@ This boreal forest species is found across North America from Alaska to Hudson B
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 In eastern North America, this species is reported to feed on both alders (*Alnus* spp.) and birches (*Betula* spp.) in the Betulaceae, and on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae.  However in the Pacific Northwest, it might be a specialist on quaking aspen (*P. tremuloides*) based on its habitat preference.
 
-##### Adults
+### Adults
 
 This moth flies during late summer and early fall. Records from the Pacific Northwest range from mid-July to early September. It is nocturnal and comes to lights.
 

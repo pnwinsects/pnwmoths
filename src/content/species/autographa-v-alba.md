@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Autographa v-alba* a medium-sized (FW length 18 - 20 mm) gray and black moth that flies in montane forests east of the Cascade and Coast Ranges during the summer. It has a smooth black median area beneath a silver-white stigma. The forewing has a slightly pointed apex and a weak flange at the anal angle. The ground color is smoothly mottled gray, slightly darker along the costa, especially near the basal line and at the diffuse median line. The median area posterior to the cubital vein is blackish gray, darkest black near the stigma and the adjoining lines. Dark gray shading in the subterminal area gradually darkens to black at the subterminal line. The stigma is silver-white, thin and irregular V- or sideways fishhook-shaped. The lines are dark gray, double with pale gray filling. Two small black spots are associated with the basal line, one on each side of the cubital vein. The antemedial line is oblique across the costa near the orbicular spot, is strongly offset toward the base across the cell, then strongly oblique and slightly incurved toward the base below the cell. The postmedial line is drawn toward the base on the costa, then slightly irregular and weakly concave toward the base across the wing with a slight bend above the fold. The subterminal line is pale, very thin, irregular with a prominent W-mark centered on vein CuA1. The terminal line is thin, black. The fringe is white with dark gray checkering. The orbicular and reniform spot are thin, pale gray. The orbicular spot is a small tilted oval filled with the ground color. The reniform spot is hourglass-shaped, touches the postmedial line, and is partially outlined in black on the inside and outside. The hindwing is brownish gray, darker gray toward the outer margin, with a gray postmedial line, discal spot. and terminal line. The hindwing fringe has a white edge and checkered yellow and gray base. The head and thorax are hoary dark gray with lighter gray edges to the collar, tegulae, and loose tufts on the posterior thorax. Additional dark gray dorsal tufts are present on several of the abdominal segments. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The northern range of this species includes Alberta. The range extends south thr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species, but it probably feeds on herbaceous plants like related species.
 
-##### Adults
+### Adults
 
 The flight period of *A. v-alba* is summer, usually July. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea amputatrix* is a very common, large *Apamea* (FW length 18–24 mm) that is widely distributed throughout the Pacific Northwest, including in cities, and flies during the summer. It has a variable multicolored, dark red-brown to chocolate brown forewing with a row of white or ochre spots along the lateral reniform spot. The outer margin is strongly scalloped. The forewing color is variable, with dark and light forms. In the lighter form the median area is slightly mottled claret to dark maroon. The wing medial to the medial area is mottled light blue-gray and ochre-tan in addition to the ground color, with a short black basal dash and a similar but longer black mark near the posterior margin. The subterminal area is the ground color on the costa and predominantly light blue-gray elsewhere, strongest on the posterior half in almost all specimens, with rosy suffusion near the subterminal line and black wedges and spots between the veins on the mid-wing. The terminal area is mottled blackish gray, blue-gray at the apex, with variable dark veins and lighter gray between veins on the mid-wing. The basal, antemedial are dark gray to black, double filled with brown-gray to blue-gray, irregular and usually visible across the wing. The antemedial line is slightly angled toward the outer margin. The median line is dark, relatively thin and wavy, angled toward the outer margin from the costa to below the reniform spot and then parallel to the postmedial line. The postmedial line is black, strongly scalloped, with a variable weak gray outer component, sharply drawn toward the base on the costa, nearly straight lateral to the reniform spot, and then angled toward the base and slightly concave from the lower cell to the posterior margin. The subterminal line is whitish gray to light yellow, complete, irregular with an offset below the apex and a weak W-mark on the mid-wing that does not reach the margin. The terminal line is a series of black triangles. The fringe is dark gray with pale spots at the base at the ends of the veins. The spots are outlined in dark gray to black. The orbicular spot is round to irregularly ovoid, filled with dusty light gray and often with a diffuse dark central spot. The reniform spot is large, kidney-shaped, prominently outlined in white to ochre spots laterally, filled with dusty gray to ochre. The claviform spot is black, small to medium-sized. In the dark form the entire wing is dark maroon. The lines are similar but filled with the same color. The white or ochre spots along the lateral reniform spot and the pale subterminal line remain visible. Intermediate forms exist in which some elements of the color of the light form are present in otherwise dark specimens. The hindwing is medium-dark gray tan with a slight brassy sheen, with darker gray marginal area, discal spot, veins, and terminal line. The hindwing fringe is white with a gray base. The head and thorax are powdery red-brown to dark brown, often with a dark orange patch on the central thorax. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is found throughout much of North America except in the Southeast a
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is usually a soil-surface feeding cutworm that prefers feeding on grasses (Poaceae), but during epidemic outbreaks, it may also feed on various herbaceous plants and even climbs into hardwood shrubs to feed.
 
-##### Adults
+### Adults
 
 Adults fly during late spring and summer. They have a long flight period from May to September but are most commonly found from early June to mid-August. This species is nocturnal and comes to lights.
 

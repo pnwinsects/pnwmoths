@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Idia suffusalis* is a rare, small to medium-sized *Idia* (FW length 10 - 14 mm) with gray wings with indistinct markings. The forewings are dirty medium gray with undulating darker gray antemedial and postmedial lines. The reniform spot is a smudgy dark bar surrounded by paler scales. The hindwing is similar, slightly lighter gray, with distinct dark markings limited to the discal spot and postmedial line. The male antennae is narrowly biciliate while that of the female is simple.
 
@@ -22,11 +22,11 @@ This species is found in the American West. The range is incompletely known.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available for this species, but it is probably a detritivore feeding on dead leaves like related species.
 
-##### Adults
+### Adults
 
 This species appears to have a long flight season with records from early May to mid September; however, most records are from July and August. It is nocturnal and comes to lights.
 

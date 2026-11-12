@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Papaipema sauzalitae* is a medium-sized, powdery yellow and orange-brown moth (FW length 14–16 mm) that is found along the Pacific Coast during the fall. Its forewing has a pointed and slightly hooked apex with net-like white or yellow spots. The ground color is dark yellow to orange-brown powdered heavily with dark orange-brown that is darkest in the cell and in the terminal area below the apex. The antemedial and subterminal areas are purplish brown. The transverse lines are orange-brown except the outer component of the postmedial line which is thick purplish brown, double filled with the color of the lightest adjacent color. The basal and antemedial lines are indistinct, partially evident in lighter specimens. The posterior antemedial line is drawn toward the outer margin to the level of the lateral subreniform spot. The median line is orange-brown, somewhat diffuse, most evident as an angled line posterior to the reniform spot. The postmedial line is smooth, drawn sharply toward the base on the costa, then bent below the costa and angled toward the base without a strongly convex segment lateral to the reniform spot. The subterminal line is yellow, faint, scalloped between veins including at the apex. The terminal line is thin, brown. The fringe is purple-brown with a slightly darker base. The spots are outlined in orange-brown and are filled with white or yellow. The round orbicular spot contains a dark central dot. A figure-eight-shaped subreniform spot is bisected by a dark line. The reniform spot is ovoid with a slight indentation along its medial wall, white-rimmed medially and yellow elsewhere or entirely yellow in specimens in which the other spots are yellow, with a net-like pattern formed by a brown-rimmed central crescent and brown veins. The hindwing including the fringe is light yellowish tan with light brown-gray suffusion, diffuse gray-brown postmedial line and submarginal band, and darker discal spot, veins, and terminal line. The head and thorax are dark orange-brown with a lighter edge on the collar. A strong median tuft is present on the anterior thorax. The base of the antenna (scape) is pure white. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The main distribution of this moth is in coastal California, although it also oc
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species bores into the stems of herbaceous vegetation, and appears to prefer herbs of the families Scrophulariaceae and Ranunculaceae.
 
-##### Adults
+### Adults
 
 The flight period of *P. sauzalitae* is the fall. It has been recorded from August to October in California. It is nocturnal and comes to lights.
 

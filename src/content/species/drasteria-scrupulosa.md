@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adutls
+### Adutls
 
 *Drasteria scrupulosa* is a moderately large gray *Drasteria* (FW length 18 - 21 mm) that lacks a colorful hindwing. The forewing is light gray, with variable darker brown gray near the reniform and distal to the postmedial line. Like most *Drasteria* species, the postmedial line is displaced toward the forewing margin near the reniform spot. This part of the line has two outwardly directed "teeth" in this species. The filling of the double antemedial line and reniform spot are dark brownish gray, and a small black spot is located medial to the subterminal line near the apex. The hindwing is pale slightly brownish white with dirty gray discal spot, veins, and incomplete marginal band. The head and thorax are gray. The antenna is finely ciliate in males and simple in females.
 
@@ -22,11 +22,11 @@ This is a species of the southwestern United States.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 California specimens have been collected in July and August. The adults are nocturnal and come to light.
 

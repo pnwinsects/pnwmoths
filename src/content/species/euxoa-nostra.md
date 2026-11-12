@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa nostra* is a dull, orange-brown, medium-sized *Euxoa* (FW 15–19  mm) that flies in dry habitats during the summer. The forewing is medium-dark grayish orange-brown, slightly darker in the cell and on the costa in the subterminal area. The rest of the costa, including the apex, is powdery gray, occasionally weakly gray or tan without gray scales. The terminal area is medium to dark gray. The cubital vein is powdery gray and the distal veins darker gray in some specimens. The basal, and antemedial lines are dark gray on the costa, weaker gray elsewhere, partially double filled and with the ground color. The basal line is excurved. The antemedial line is variable in darkness from absent below the cell to moderately dark across the wing, is slanted slightly toward the outer margin, toothed toward the base on the veins, and often forms a prominent bulge toward the outer margin below 1A+2A. The median line is gray, faint, diffuse, darkest near the costa. The postmedial line is dark on the costa, weaker gray to brown elsewhere and sometimes nearly absent, usually a single toothed line, bent below the costa to course near the lateral reniform spot, straight or slightly concave below the spot where it is angled toward the base. The subterminal line is tan, sinuous, offset below the apex and bulging to near the outer margin on the mid-forewing at M3 and CuA1. It is preceded by a dark gray or brown shade on the costa and a weaker shade and diffuse gray wedges between the veins posterior to the level of the cell. The terminal line is dark gray, interrupted at the veins. The fringe is gray with a tan base. The orbicular and reniform spots are partially outlined in dark gray and are moderately large. The orbicular spot is oval, filled with the ground color, light gray, or peripheral pale tan and central dark gray. The reniform spot is kidney-shaped, filled with the ground color and a dark gray spot at the lower end, sometimes more diffusely filled with gray. The claviform spot is weak, absent or a curved dark gray line at the apex. The hindwing is pale grayish tan, shaded with gray on the outer third, with slightly darker veins, discal spot, and terminal line. The hindwing fringe is white with an ochre and gray base. The head and thorax are powdery orange-brown, sometimes with a thin black transverse line across the mid collar. A frontal tubercle is present. The male antenna is strongly biserrate with long fasciculae. *Euxoa choris* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species occurs from southern Alberta and the Pacific Northwest south to Col
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults of *E. nostra* are on the wing from early June to mid-August, with collection dates of most specimens from late June to early August. It is nocturnal and comes to lights.
 

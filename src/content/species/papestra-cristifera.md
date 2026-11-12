@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Papestra cristifera* is a moderately large (FW length 17 - 20 mm) blackish-gray moth that flies in mid- to high-elevation conifer forest during the summer. It has prominent whitish-gray markings. The forewing is slightly mottled dark gray without a brown tint, slightly lighter gray in the basal area, in the subterminal area, including a prominent pale gray to slightly blue-gray patch near the anal angle. Black veins are present in the terminal area. A horizontal black line connects the claviform spot to the postmedial line. The transverse lines are black, double-filled with gray. The basal and antemedial lines are moderately irregular, with the latter slightly slanted toward the anal angle from the costa. The median line is black, usually faint but complete. The postmedial line is black, toothed on the veins, sharply drawn toward the base on the costa, nearly straight lateral to the reniform spot, and concave toward the base in the fold with a tooth above the trailing margin on vein 1A+2A. The subterminal line is white, irregular, with a moderately-strong W-mark on veins M3 and CuA1. It is preceded by a patchy black shade, usually condensed into spots or wedges that are strongest on the mid-forewing. The terminal line is a series of black triangles. The fringe is charcoal with white transverse lines at the ends of the veins. The orbicular and reniform spots are outlined in black and both are large. The orbicular spot round to lemon-shaped, is filled with light gray and a few white scales peripherally and with a dark central black ocellus. The reniform spot is strongly kidney- or sideways heart-shaped, filled with pale gray to nearly white scales peripherally and a slightly darker gray crescent centrally. The claviform spot is black, short and broad and is filled with gray slightly darker than the pale filling of the orbicular spot. The hindwing is gray with a darker margin, veins, and discal spot. The hindwing fringe is pale gray with a medium gray base. The head and thorax are charcoal gray. The mid-collar has a transverse black band and the tip is pale. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species includes much of boreal North America. It is found acr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds mostly on hardwoods including alders (*Alnus* spp.) in the Betulaceae, willows (*Salix* spp.) in the Salicaceae, and perhaps huckleberries (*Vaccinium* spp.) in the Ericaceae.  It may also feed on some herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The flight period of *P. cristifera* is summer, usually relatively early in the season. Collection records for our region span early May to early August. It is nocturnal and comes to lights.
 

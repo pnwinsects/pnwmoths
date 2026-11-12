@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia plebeia* is a dull olive-gray, medium-sized noctuid moth (FW length 16 - 18 mm) with light spots with dark filling that extends beyond the outer margin of the pale outline. It flies on both sides of the Cascade Range during summer and early fall. The forewing ground color is is usually medium-dark olive-gray with scattered darker scales, but some specimens have a slight orange cast across the entire forewing. The basal, antemedial, and postmedial lines are gray, double, and fairly smooth. Portions of the lateral component of the antemedial line is black near the orbicular and claviform spots. The faint pale subterminal line is preceded by a row of short black wedges between the veins, largest near the apex where they are fused into a dark transverse bar. The three spots are similar, pale, and filled with dark brownish black that exceeds the outlines of the spots onto the adjacent wing. The orbicular and reniform spots are fairly large and the claviform spot is short but wide. The hindwing is medium gray-brown at the base and darker gray toward the margin, with faint gray discal spot and veins and a lighter ochre to reddish fringe. The head and thorax are usually darker than the forewings, either gray-brown or slightly reddish brown. The male antenna is bead-like.
 
@@ -26,11 +26,11 @@ The range of this species is limited outside of the Pacific Northwest. Single re
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on many kinds of hardwoods in such families as the Rosaceae, Betulaceae, Ericaceae, and Salicaceae.  It may have a preference for willows (*Salix* spp.) based on the habitat.
 
-##### Adults
+### Adults
 
 Adults fly in summer and early fall. Our records span early July through September. It is nocturnal and comes to lights.
 

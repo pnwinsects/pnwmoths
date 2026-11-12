@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta uniformis* is a variable medium-sized noctuid moth (FW length 14 - 17 mm) that flies commonly near timberline in the Cascade Mountains in Washington and throughout British Columbia. It has uniform, dark gray to mottled greenish-gray or blue-gray dorsal forewing and pale ventral hindwings with a geographically variable pattern. The forewings have a somewhat pointed shape. The ground color is slate-gray to blackish gray, but the number of ochre and white scales is variable, producing great variation in the color and pattern, especially in southwestern British Columbia. The ground color varies from slate and black to predominantly dull green-gray, yellow-green, and blue-gray. Lighter areas of different color are most prominent at the wing base and margin. The lines are dark gray, with an irregular antemedial line and dentate postmedial line. The median line is usually present but varies from dark gray to nearly absent. The pale, irregular subterminal line is usually preceded by a darker shade, limited to a faint patch at the costa in plainly marked populations. The fringe is checkered with gray, and the lightest color on the wing and is plain gray in plain populations. The outlines of the orbicular and reniform spots are dark. The orbicular spot is usually filled with the color of the paler areas on the wing and usually has a dark ocellus. The reniform spot also contains pale and dark scales, but is less prominent. Both spots are barely evident in plain populations. The dorsal hindwing is dark gray with lighter scales along the costal margin, near the discal spot, and between the dark postmedial line and the marginal band. The fringe is pale whitish-gray or yellowish-gray. The ventral hindwing is pale ochre with a triangular or chevron-shaped discal spot, prominent postmedial line that is close to the discal spot and a pale patchy marginal line in most of our populations; paler whitish gray with a thinner discal spot, nearly absent postmedial line, and darker and wider marginal band in populations from the Rocky Mountains of British Columbia and Alberta. The head and thorax match the forewings, often with a broad band on the collar and dark area on the thorax posterior to the collar. The eye is covered with fine hairs. The male antenna is biserrate.
 
@@ -10,7 +10,7 @@ The North American populations of *L. uniformis* are arranged in five subspecies
 
 The type locality of *Lasionycta uniformis* *multicolor* is Canada, British Columbia, Gott Peak, 7100', 50° 21' N 122° 08' W.
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -30,11 +30,11 @@ This species occurs to southern Yukon Territory just north of the border with Br
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Larval foodplants for this species are not certainly known, but an unknown species of *Lasionycta* was observed feeding on *Polemonium elegans* in the Polemoniaceae on rocky alpine tundra above timberline on Mt. Rainier in Washington (Crumb, 1956) that was likely this species.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies during the summer, usually in July and August. It is predominantly nocturnal and comes to lights, although it also flies during the day. Females are more likely to be collected during the day, often while taking nectar at flowers such as moss campion (*Silene acaulis*).
 

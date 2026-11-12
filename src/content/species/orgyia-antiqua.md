@@ -2,7 +2,7 @@
 
 Orgyia antiqua- (Linnaeus, 1758)
 
-##### Adults
+### Adults
 
 *Orgyia antiqua* is a small, rusty-brown moth with day-flying males found in late summer and fall. Females of all *Orgyia* species have a very large fuzzy body and are wingless. Males have broad forewings, a small slender body, and broad pectinate antennae. The forewing length is 15–16 mm with an approximate wingspan of 3 cm. The forewings are red-brown to orange-brown, lightest in the median area. The wavy broad antemedial and postmedian lines are slightly darker than the adjoining areas. A half-moon shaped white subanal spot near the postmedian area is the most prominent marking. The hindwings are solid red-brown to orange-brown. The eyes are reduced in size, appearing as large as a quarter of a circle when viewed from above.
 
@@ -10,7 +10,7 @@ Males of this species can be identified by their red-brown wings with a white su
 
 The Western North American subspecies is *Orgyia antiqua badia* Henry Edwards characterized by the dark wing color outside the median area. The nominate subspecies occurs in Eurasia.
 
-##### Larvae
+### Larvae
 
 Larva is black and densely covered with yellow hair tufts, combined with four very long dorsal white hair tufts.  It is illustrated by Miller & Hammond (2003).
 
@@ -30,11 +30,11 @@ This species has a Holarctic distribution and can be found across North America 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a broad generalist feeding on a wide variety of both hardwoods and conifers such as oaks (*Quercus* spp.), willows (*Salix* spp.), cottonwoods (*Populus* spp.), huckleberries (*Vaccinium* spp.), Douglas fir (*Pseudotsuga menziesii*), and Sitka spruce (*Picea sitchensis*).  The larvae disperse by ballooning since the females are flightless. The eggs are laid en masse on the coccoon of the female and are uncovered by scales or foam unlike our other *Orgyia* species. The egg overwinters.
 
-##### Adults
+### Adults
 
 This species is diurnal. Adults are found from July to early October. The males appear red on the wing and have a characteristic rapid fluttering and bouncing flight.
 

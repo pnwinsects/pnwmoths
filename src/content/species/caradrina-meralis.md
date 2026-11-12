@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Caradrina meralis* is a small to medium-sized moth (FW length 12–16 mm) that is most common in dry forests and shrubland in our region. It has gray forewings marked with blackish gray or dark brown in the orbicular and reniform spots. The forewing is relatively short and appears squared-off at the outer margin. The color is slightly powdery gray with a slight brownish cast, darker pure gray toward the outer margin and on the costa. The basal, antemedial, and postmedial lines are gray, double, and filled with the ground color. The basal and antemedial lines are faint, often only visible as a dark dot on the costa. The postmedial line has a weakly scalloped medial component and a smooth outer one; it is drawn sharply toward the base at the costa and divided into two straight transverse sections elsewhere, one lateral to the reniform spot and the other below the spot to the trailing margin. The postmedial line is pale and undulating, evident across the wing. The terminal line is faint. The fringe is concolorous with the dark terminal area. The orbicular and reniform spots are similar, dark with dark black-brown filling. The orbicular spot is small and round, rarely absent, and the reniform spot is bar-like or weakly kidney-shaped. No claviform spot is present. The hindwing is pale whitish gray with a darker gray margin, thin dark terminal line, and pale fringe. The head and thorax are gray, similar to the forewing color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of *Caradrina meralis* extends east to New England where it is rare an
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous plants based upon related species.
 
-##### Adults
+### Adults
 
 *Caradrina meralis* flies in the late summer and early fall, first appearing in mid-July. It is nocturnal and comes to lights.
 

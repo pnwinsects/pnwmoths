@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sideridis maryx* is a medium-sized noctuid moth (FW length 17 - 20 mm)that flies in forests with bear-berry (*Arctostaphylos uva-ursi*) in early summer. It has uniform, dark maroon forewings lacking almost any pattern. The forewings are darkest at the costal margin, in the cell, and along the veins. The transverse lines are represented by pale dots at the costa. Only the reniform spot is faintly visible as a darker gray mark with a few white spots in some specimens. The hindwing is pale yellowish-gray with smoky gray toward the margin and dark veins. The discal spot is barely evident. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species extends to the East Coast across southern Canada and t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is strongly suspected to be a specialist feeding on bearberry, also called kinnikinnick, (*Arctostaphylos uva-ursi*) in the Ericaceae based upon the habitat association.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in late spring and early summer. Our records span mid-May to mid-July, with the later records being from higher elevations than the early ones. It is nocturnal and comes to lights.
 

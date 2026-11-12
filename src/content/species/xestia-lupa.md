@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia lupa* is a medium-sized, relatively light-bodied (FW length 15 - 18 mm; smaller in females) grizzled gray and white noctuid that occurs in northern British Columbia in our region. Its forewing has light-filled lines and spots. The forewing ground color is salt-and-pepper medium gray due to a mixture of dark and light scales. The irregular lines are dark gray and double, with light whitish gray filling. The postmedial line is moderately strongly scalloped. The pale subterminal line is usually evident. It is preceded by smudged dark gray spots that are usually fused across adjacent veins at the costa, opposite the cell, and in the fold. The terminal line is a series of dark spots between the veins. The orbicular and reniform spots are similar, dark gray filled with light whitish gray and usually some central gray scales. The orbicular spot is round to oval, while the reniform spot is shaped like a sideways heart. These spots are usually connected by a black line across the posterior cell. The claviform spot is small or incomplete. The hindwing is pale whitish gray with faint dark discal spot, postmedial line, submarginal band, and terminal line between the veins. The fringe is pale gray. The head and thorax is hoary dark gray with a slightly lighter tip to the collar. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species occurs across subarctic North America from Alaska to Labrador as fa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is nocturnal and flies in July. It is attracted to lights in areas where it is sufficiently dark to blacklight, but it is a slow flier and can by netted by hand. Females have much smaller wings than the males and are presumed to be flightless (Lafontaine 1998).
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa punctigera* is a moderately large *Euxoa* (FW length 15–20 mm) that flies in dry forests in late summer and early fall. It has uniform, very dark brownish-gray forewings with thin powdery light peripheral lining of the spots. The forewing color is nearly uniform, lightly sprinkled with gray along the costa in some specimens. The basal, antemedial, and postmedial lines are dark gray to black and inconspicuous, except as paired black spots flanking gray on the costa and gray filling in the antemedial line in a minority of specimens. A dark gray spot on the costa marks the position of the subterminal line in most specimens, and this line is evident as pale yellow spots in a few individuals. The orbicular and reniform spots are outlined in black and scattered light yellow scales and filled with the ground color. The orbicular post is small, oval. The reniform spot is kidney-shaped. The black claviform spot is small. The hindwing is light gray in males, slightly darker in females, with darker gray marginal area, veins, discal spot, and terminal line. The hindwing fringe is two-toned gray. The head and thorax are uniform black-gray. A frontal tubercle is present. The male antenna is biserrate. *Euxoa punctigera* is a member of the subgenus *Euxoa*.
 
@@ -36,11 +36,11 @@ The range of *E. punctigera* extends south to Utah and Colorado in the Rocky Mou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies during the summer and early fall. The records from our region extend from early July through September, with most specimens from August. This species is nocturnal and comes to lights.
 

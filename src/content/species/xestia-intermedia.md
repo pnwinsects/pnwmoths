@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia intermedia* is an extremely rarely collected subarctic and alpine moth that has been found once in northern British Columbia in our region. It is uniform light blue-gray with thin black lines and spots. It is small to medium-sized (FW length 14 - 17 mm) with a rounded forewing shape. The color is even light blue-gray, with warm red tints in the reniform and claviform spots in some specimens. The antemedial line is irregular and thicker than the postmedial line which is deeply scalloped between the veins. The position of the subterminal line is indicated by a series of black wedge-shaped marks. The orbicular spot is small and round. The reniform is incomplete anteriorly and posteriorly. The claviform spot is small to medium-sized. The hindwing is light yellow-gray with a dark marginal band and pale fringe. The head and thorax match the forewing. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is found in eastern Siberia as well as in arctic and subarctic Nort
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are diurnal and probably visit flowers during the day. They fly from mid-June to late July across its entire range (Lafontaine 1998)
 

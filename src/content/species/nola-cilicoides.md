@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Nola cilicoides* is a very small (FW length 8 - 9 mm) white and brown-gray moth with rounded forewings that has been found in southeast British Columbia, Idaho, and eastern Washington in our region. The forewings are pure white with a patch of gray brown from the mid-wing to the subterminal line. Metallic black scales are present in the anterior part of this patch, fill the diffuse reniform spot, and form the postmedial line. The basal and antemedial lines are gray brown. The orbicular post is a small gray dot. The hindwing is white basally and gray brown distally, and has a white fringe. The palpi are moderately long. The head and thorax are white. The male antenna is filiform with long fasciculations that appears nearly bipectinate under magnification.
 
@@ -22,11 +22,11 @@ This species is more widely distributed in eastern North America where it occurs
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 *Nola cilicoides* flies during the summer. It has been collected from mid-June to early August in the Pacific Northwest. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa tronellus* is a pallid, small to medium-sized *Euxoa* (FW length 14—17 mm) that flies in dry interior steppe habitats in the fall. It has with scattered, dark scales and often dark gray in the reniform spot. The forewing is cream-colored with a salt-and-pepper sprinkling of dark gray scales that varies from light to strong, usually very light in males and darkest in females. The costa near the subterminal line and the terminal are are darkest, appearing even gray when heavily suffused. Only traces of the dark lines are present even in the darkest specimens. The position of the subterminal line is evident as the medial border of the terminal area if it is dark. Dark spots form the terminal line in some dark specimens. The orbicular and claviform spots are usually absent, a few specimens show a the orbicular spot as a dark dot. The reniform spot is a powdery gray lunule. The hindwing is pure white in both sexes. *Euxoa tronellus* is a member of the subgenus *Euxoa*.
 
@@ -22,11 +22,11 @@ This species is found in the northern Great Plains and throughout the Great Basi
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies in the fall, with records from the Pacific Northwest from September and early October. It is nocturnal and comes to lights.
 

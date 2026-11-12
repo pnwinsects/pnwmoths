@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis blakei* is a relatively small (FW length 10–14 mm) and pale diurnal *Apantesis* from the Great Plains that has been found once in southeastern Idaho as a larva. The forewing has broad transverse lines, with pale veins limited to the cubital vein and the anal vein near the wing base. The light orange hindwing is marked with black single medial spot, discal spot, and black medial and outer margin to which most of the marginal spots are fused. The thorax and abdomen are typical for the genus. The dorsal antennae are pale, widely pectinate in males and serrate in females.
 
@@ -22,7 +22,7 @@ This species is limited to southeastern Idaho in our region. It could potentiall
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae are polyphagous and feed on a number of grasses and forbs (Schmidt 2009).
 

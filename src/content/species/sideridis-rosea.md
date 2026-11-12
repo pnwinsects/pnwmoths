@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sideridis rosea* is a common, orange-brown, moderately sized moth (FW length 18 - 20 mm) that flies in a variety of habitats in our region during late spring and early summer. It has bright red-brown forewing margins, lines, and spots. The forewing is slightly powdery orange-brown. The most prominent markings are a dark red-brown median line, a similar continuous shade medial to the subterminal line, and the lighter red-brown terminal area. the basal, antemedial, and postmedial lines are red-brown, and single. The antemedial line is oriented obliquely to the wing and is drawn toward the base on the veins. The postmedial line is evenly scalloped and smoothly convex toward the outer margin. The subterminal line is pale, mostly evident as transition between darker and lighter shades of red-brown medial and lateral to it. The forewing spots are red-brown like the lines. The orbicular post is large and round with a small central ocellus. The reniform spot is moderately large and is kidney or weakly figure-eight shaped. The central portion is gray, darkest in the lower third of the spot. The claviform spot is fairly wide. The hindwing is pale white with a rusty hue toward the outer margin, red-brown veins, and a gray discal spot. The head and thorax are even dark red-brown. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ The range of this species extends east to the Atlantic where it is found from No
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist, feeding on many kinds of hardwoods.  Specific records include willows (*Salix* spp.) in the Salicaceae, currants (*Ribes* spp.) in the Grossulariaceae, cherries (*Prunus* spp.) in the Rosaceae, and buffalo berry (*Shepherdia* spp.) in the Elaeagnaceae.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies from late spring through early summer. Our records are from late April to mid-July. It is nocturnal and comes to lights.
 

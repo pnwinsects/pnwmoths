@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hyppa contrasta* is the brownest of three similar *Hyppa* species in our area with a male antenna that is intermediate in width compared to the others. It is a medium-sized moth (FW length 15–20 mm) that flies in low to mid-elevation forests during the summer. Its forewings are medium-gray anteriorly and darker gray and brown posteriorly. They have thick black basal and median dashes, and a black and white posterior postmedial line. The gray on the forewing is lightest basal to the antemedial line. The posterior part of the forewing is much darker gray proximal to the postmedial line, with slightly purplish dark red-brown on the mid-median area and tan and brown near the base. A few specimens have a dark median area to the costa. The subterminal area is light gray from M2 to the posterior margin except brown and black in the fold. The terminal area is dark gray or brown-gray with black on the veins, nearly black in the fold. Thick indistinct basal and median dashes are present, and the trailing margin is black and white basal to the antemedial line and black in the median area. The basal line is absent or a black dot on the costa. The antemedial line is dark gray, thick and indistinct, angled toward the outer margin and drawn sharply toward the base on the veins, very strongly on 1A+2A. The median line is a diffuse gray mark on the costa. The postmedial line is smoothly convex toward the outer margin, often concave lateral to the cell, pale and indistinct anterior to M3, strong with black medial and white lateral components on the posterior wing, usually widening to a white spot near the posterior margin. The subterminal line is absent anterior to M3, white posteriorly, with a sharp W-mark to the margin on veins M3 and CuA1. It is preceded by one or two black spike-like chevrons at the W-mark. The orbicular and reniform spots are variably outlined in gray to black, sometimes lacking an outline, filled with light gray. The orbicular spot is an elongate ellipse. The reniform is moderately large, kidney-shaped. A claviform spot is not evident separate from the black median bar. The hindwing is light yellowish gray, darker gray toward the margin, with faint discal spot, postmedial line, and veins. The hindwing fringe is white with a gray base. The head and thorax are light to medium-dark gray with a black transverse line across the mid-collar and black and dark brown lateral tegulae. The male antenna is moderately bipectinate.
 
@@ -24,11 +24,11 @@ This species is fairly widely distributed in North America. The range extends ea
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been reared from velvetleaf blueberry (*Vaccinium* sp.) in the Ericaceae (McCabe 1990). It is probably a generalist feeding on both hardwoods and herbaceous vegetation like related species.
 
-##### Adults
+### Adults
 
 This species is single brooded and the adults fly during the summer. Most specimens from our area have been collected during June and July. It is nocturnal and comes to lights.
 

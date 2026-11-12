@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis sandaraca* is a mottled, reddish gray-brown to orange-brown medium-sized moth (FW length 15–16 mm) that flies in the Cascade mountains and adjacent steppe in late summer and fall. It has a cream to orange-ochre hindwing with a dark postmedial line and black marginal band. The forewing color is darkest orange in the the mountains of Oregon and becomes lighter toward the north, especially in open steppe. It is mottled with gray, darkest in the median area and lateral subterminal area. The basal, antemedial, and postmedial lines are gray, double filled with a slightly lighter shade of the ground color. The slightly irregular antemedial line is slanted slightly toward the outer margin. The postmedial line is scalloped, focally excurved around the reniform spot and straight at a strong slant toward the base below the level of the cell. The dark median line is prominent in most specimens. The subterminal line is pale, similar to the filling of the other lines, moderately irregular in course and preceded by a gray shade that is as dark as the median line. The fringe is of the ground color. The orbicular and reniform spots are faintly outlined in gray, filled with pale ground color peripherally and darker gray centrally. The claviform spot is very faint, evident as a lighter spot in the medial fold. The hindwing is cream, ochre, or orange-tinted ochre with gray basal suffusion, an irregular gray median band that is incorporates the discal spot, and a well-defined even-width black marginal band. The hindwing fringe is tricolored, white with a striped orange and gray base. The head and thorax match the forewing color. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is found throughout much of California south of the Northwest. It a
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species, but it is suspected to feed on prostrate rock penstemons (*Penstemon* spp.) in the Scrophulariaceae based upon the habitat.
 
-##### Adults
+### Adults
 
 This species first appears in August and flies through September. It is nocturnal and comes to lights.
 

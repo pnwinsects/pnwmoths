@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spaelotis bicava* is the most commonly collected *Spaelotis* in most parts of the Pacific Northwest. It is a medium-sized moth (FW length 16–20 mm) with a streaky gray-brown forewing and dark gray hindwing. It is one of four of our five *Spaelotis* species that have an almost identical superficial appearance. The forewing is elongate and gray-brown in color, sometimes with a slight orange tint to the costa. A thin black basal dash can be short or extend to the antemedial line. The lines are slightly darker than the ground color and filled with lighter brown or gray-brown. The antemedial line is jagged, especially near the trailing margin. The postmedial line is also uneven. It is drawn abruptly drawn toward the base at the costa, is laterally convex from the superior cell to the fold, and then nearly straight to the trailing margin which it meets at a right angle. The pale subterminal line is variable, often absent or incomplete. The orbicular spot is black, oval, and touches the reniform spot in some specimens or is joined to it by a thin black line. It is filled with the ground color, slightly lighter brown, or light gray-brown. The reniform spot is usually incomplete, usually with a segment of the black medial portion present, and is filled with the ground color or slightly lighter brown. The hindwing is dark brown-gray with slightly darker veins and discal spot and a two-toned fringe, dark basally and white distally. The head and thorax match the forewing ground color. The male antenna is filiform.
 
@@ -22,7 +22,7 @@ This is the second most widespread member of the genus after *S. clandestina*. *
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm, and appears to be a generalist feeding on both hardwood shrubs and herbaceous vegetation.  During epidemic outbreaks, larvae are particularly abundant feeding on big sagebrush (*Artemisia tridentata*) in the Asteraceae.
 

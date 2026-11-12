@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa atristrigata* is a fall-flying, small to medium-sized *Euxoa* (FW length 14–16 mm) with light hindwings and streaky brown forewings with prominent black markings that include long, fused orbicular and reniform spots and black lines near the outer margins. The forewing ground color is even brown, slightly suffused with gray between the veins in the posterior median subterminal areas. The narrow terminal area is dark brown-gray. The cell is black, but the cell is nearly filled by the spots giving the appearance that the outlines of the spots are unusally thick. A black basal dash extends to the base of the claviform spot. The veins are dark. The transverse lines other than the subterminal lines are obsolete except at the costa. The subterminal line is evident as the jagged transition between the brown subterminal and gray terminal areas, the uneven nature of which is accentuated by very long black lines between the veins across the mid-forewing. Teeth of the subterminal area reach the outer margin opposite the cell and at the W-mark on the mid-forewing. The forewing spots are thick and black. The orbicular spot is very lone and is fused to the C-shaped reniform spots. These spots are filled with the ground color and a dark streak in the orbicular spot. The claviform is long and black, the length exaggerated by the black basal dash. The male hindwing and fringe are white with darker gray veins and terminal line; that of the female is brownish off-white with increased gray marginal suffusion, and a white fringe with a gray base. The head and thorax are brown with a black line across the mid-collar. A frontal tubercle is present. The male antenna is weakly bipectinate. *Euxoa atristrigata* is a member of the large subgenus *Euxoa*.
 
@@ -37,11 +37,11 @@ The range of *E. atristrigata* extends east to western North Dakota and northern
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.  The sensitivity to wildfires suggests that it may be a foodplant specialist feeding on semi-woody plants such as buckwheats (*Eriogonum* spp.) in the Polygonaceae.
 
-##### Adults
+### Adults
 
 Adults fly during late summer and fall, usually slightly earlier than some of the latest-flying steppe *Euxoa* species. It has been collected as early as mid-July, with most records in our region from late August to mid-September. It is nocturnal and comes to lights.
 

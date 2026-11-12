@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa oblongistigma* is a small *Euxoa* (FW 12–14 mm) that flies in steppe during late summer. It has streaky gray-brown forewings with a black cell, black basal dash that appears to continue to the mid-forewing, a black cell, bar-like pale-filled orbicular spot, and pale hindwing with a gray marginal band. The forewing ground color is light tan-gray, suffused with darker gray surrounding the cell and along the veins in the posterior median and subterminal areas. The apex, distal subterminal area opposite the cell, and long teeth of a W-mark on M3 and CuA1 are light gray. The costa is also smooth gray, whitish near the base, darkening in the subterminal area. The cell is filled with dark brown-gray. A thick black basal dash extends to the base of the claviform which appear to be fused into one longer mark. The cubital vein is light gray to the postmedial line, while the other veins are black. The transverse lines are inconspicuous. Faint gray spots mark the antemedial and postmedial lines on the costa. The antemedial line forms a short black mark on the mid-forewing at the base of the claviform spot. The postmedial line is a scalloped transition between the darker median area to the gray subterminal area near the end of the cell and is absent from the posterior forewing. The subterminal line is light gray thin or absent, slightly irregular with a moderate W-mark on the mid-wing. It is preceded by a dark gray shade on the costa and a series of long black wedges between the veins on the mid-wing. The terminal line is black. The fringe is gray with a tan base. The orbicular and reniform spots are outlined crisply in black and are filled nearly uniformly with light gray with slightly darker centers. The orbicular spot is bar-like, nearly horizontal, nearly solidly pale in most specimens. The reniform spot is boomerang or C-shaped, usually with a darker gray central lunule. The claviform spot is black, often solid, moderate-sized, narrow, appearing to be the continuation of the basal dash. The hindwing is light whitish gray with moderately well-defined gray marginal band on the outer third, with barely darker discal spot, veins, and terminal line. The hindwing fringe is white with a patchy light gray base. The head and antenna are gray-tan to brown, with a pale base and black line across the mid-collar. A frontal tubercle is present. The male antenna is biserrate. *Euxoa oblongistigma* is placed in the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The range of *E. oblongistigma* extends across southern Canada to Saskatchewan. 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults fly in late summer and early fall, generally later than *E. olivalis* in the same region and slightly earlier than most of the fall-flying steppe *Euxoa* species. It has been collected from late July until mid-September in the Pacific Northwest.
 

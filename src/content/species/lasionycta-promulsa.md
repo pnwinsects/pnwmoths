@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta promulsa* is a medium-sized, gray-brown noctuid (FW length 13 - 17 mm) with markings limited to a simple pattern of dark lines and spots. The forewing ground color of our populations are nearly uniform, powdery gray-brown, slightly darker in the median area due to a diffuse gray median line and medial to the subterminal line due to a darker shade. The antemedial line, postmedial line, and spots are similar darker gray. The lines are single. The antemedial line is faint and even, white the postmedial line is dentate with an S-shape typical for the genus. The orbicular spot is round or ovoid, filled with the ground color or slightly lighter gray scales and usually lacking an ocellus. The reniform spot is very faint. The claviform spot is absent. The dorsal hindwing is gray-brown with darker gray shading toward the outer margin, faint discal spot, and postmedial line. The fringe is two-toned, gray at the base and pale brownish white distally. The ventral hindwing is pale gray-brown with a small discal spot and faint marginal band limited to near the outer margin. The head and thorax are gray-brown. The eye is covered with fine hairs. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is found near the British Columbia border in southwestern Yukon Ter
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on alpine herbaceous vegetation.
 
-##### Adults
+### Adults
 
 *Lasionycta promulsa* is single-brooded and flies during the summer together with our other *Lasionycta* species. The collection records are from July and August. It is nocturnal and comes to lights.
 

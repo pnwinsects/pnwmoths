@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis baueri* is a seldom-collected, medium-sized *Abagrotis* (FW length 15–16 mm) that occurs in dry forests in the western part of our region. It has orange-brown—less commonly dark brown—forewings sprinkled with black scales and dark-filled orbicular and reniform spots. Most specimens of this species have a similar rich orange-brown color, but the degree and pattern of black suffusion varies considerably between individuals. Some are nearly even orange-brown while others are nearly black with the lighter ground color showing as filling of the lines and spot. The lines are dark gray, double, and filled with the ground color. The antemedial line is slightly irregular and is angled slightly toward the anal angle from the costa. The postmedial line is smoother, with weak scalloping of its medial component. It is nearly perpendicular to costa, with slight bend basad at the lower reniform spot. The light subterminal line is well defined, slightly irregular. A gray shade precedes it in light specimens, darkest near the costa. A series of gray spots between the veins forms the terminal line. The orbicular and reniform spots are pale with uniform dark gray-brown filling, even in light specimens. The orbicular spot is round or slightly oval. The reniform spot is medium sized, slightly figure eight shaped. The claviform spot is absent. The hindwing is medium brown gray with darker margin, discal spot, and veins. The fringe is two toned with gray base and whitish margin. The head and thorax match the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is limited to the West Coast of North America. It is found as far s
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 *Abagrotis baueri* is probably a foodplant specialist on Fagaceae based upon the habitat associations, although it must use other plants in the few areas where it occurs in the absence of oak. Oregon white oak (*Quercus garryana*) and golden chinquapin (*Castanopsis chrysophylla*) may be the primary larval foodplants.
 
-##### Adults
+### Adults
 
 Adults of this species have a long flight period from late June to early October. They are nocturnal and come to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa dargo* is a small, streaky gray *Euxoa* (FW length 11–13 mm) that flies in sage steppe during the fall. It has a gray-banded, white hindwing. Both sexes are similarly colored and patterned, but females are slightly smaller. The ground color is tan-gray with a slightly olive tint. The subterminal area is lighter gray, lightest in a wedge-like mark from the subapical subterminal area to the apex. The fold is ochre from the tip of the claviform spot to the medial subterminal area. A narrow strip of the anterior costa, the cell, and the terminal area other than the apex are slightly dark gray. The posterior costa and the cubital vein are silver gray to the reniform spot. The other veins are thin and black, but light gray borders vein 1A+2A distal to the antemedial line and veins M3 and CuA1 from their origin at the lower reniform spot to the outer margin where they form a small "W" mark. A dark gray smudge is present below the cubital vein at the base. Most of the lines are obscure, with absence of the basal and median lines. An excurved gray and ochre segment of the antemedial line is present on the mid-forewing at the base of the claviform spot. The postmedial line is gray and whitish gray on the costa, weakly scalloped dark gray followed by subtle ochre-tan elsewhere, transversely oriented lateral to the reniform spot and strongly angled toward the base below the spot. The subterminal line is pale ochre, slightly irregular and traversed by the light W-mark described above. It is preceded by a dark gray mark on the costa and several small black wedges between veins on the mid-wing. The terminal line is black, thin or a series of spots. The fringe is gray with a pale base. The orbicular and reniform spots are outlined in black lined with ochre and are filled with the dark ground color. The orbicular spot is small to moderate-sized, round to weakly oval, complete or open toward the costa. The reniform spot is kidney-shaped, its lower end obscured by the pale cubital vein. The black claviform spot is long and thin. The hindwing is whitish gray with an even light gray marginal band, with darker discal spot, veins, and terminal line. The hindwing fringe is white. The head and thorax are powdery olive-gray, often with a hoary light gray edge on the collar. A frontal tubercle is present. The male antenna is biserrate. This species is a member of the large subgenus *Euxoa*.
 
@@ -35,11 +35,11 @@ This species occurs across southern Canada to Manitoba. The southern limits of i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on herbaceous vegetation such as the Asteraceae.
 
-##### Adults
+### Adults
 
 The adults fly in the fall and have been collected in September in our region. They are nocturnal and come to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drepana bilineata* is a medium-sized, hook-tipped moth (FW length 17–20 mm) that flies in forests from late spring through summer. The forewings are light tan with uneven margins. The forewing shape is distinctive, with a sickle-shaped apex and unevenly scalloped outer margin. The color is dried-leaf-brown, darker toward the outer margin, with faint mottled striations and a black discal dot. The dark gray-brown antemedial and postmedial lines are straight and do not extend to the apex. The terminal line is dark brown, and the fringe is checkered brown and white. The discal spot is a round black dot. All other markings are nearly obsolete. The hindwing is much paler than the forewing with a faint gray postmedial line, black discal spot, and dark brown fringe. The head and thorax are slightly darker than the forewing. The antennae of both sexes are bipectinate, with longer branches in males.
 
@@ -8,7 +8,7 @@
 
 Members of the family Drepanidae resemble inchworm moths (Geometridae) in general form.
 
-##### Larvae
+### Larvae
 
 The larva is mottled brownish green with knobby dorsal scoli or tubercles. It is illustrated by Powell & Opler (2009).
 
@@ -28,11 +28,11 @@ This species occurs across boreal North America from coast to coast. In the eas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various alders (*Alnu*s spp.) and birches (*Betula* spp.) in the Betulaceae.
 
-##### Adults
+### Adults
 
 This moth has a long flight season from late spring until early fall. Collection dates suggest two broods in the Pacific Northwest with peak abundances in late spring and August.  It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea acera* has a forewing length of 2.0–2.5 cm and is the only large ash-gray species of *Apamea* in North America. The forewing usually has some yellow-brown or pink shading in the median area and slightly darker gray shading in the terminal area opposite the cell and at the anal angle which sometimes forms dark gray lines between the veins. The long black basal dash usually extends nearly to the antemedial line. A similar black line is present along the trailing margin at the base of the wing. The transverse lines are very faintly darker gray and are most evident as dark hatch marks on the costa. The claviform spot is black and the orbicular and reniform spots are slightly darker gray. The orbicular spot is a large oval and it and the reniform spot are often fused. The hindwing is slightly yellowish gray, with faintly darker gray marginal band, discal spot, and veins. The head and thorax are ash gray with light tan on the collar that is marked with a black transverse line across the upper third. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species has been collected in central Utah, eastern Nevada, and in the nort
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that specializes on short bunchgrasses (Poaceae) based upon the habitat.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected most commonly from late June to early August in our region. It is nocturnal and comes to lights.
 

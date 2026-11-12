@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa olivia* is a very common, fall-flying, small to medium-sized *Euxoa* (FW length 13–17 mm) that is sexually dimorphic and variable, usually with streaky warm brown males with a yellowish costa and grayer females that also come in a plain mottled form. Males typically have a pale ochre, tan, or orange-tan ground color. The mid-base and central median area are suffused with darker gray to gray-brown, sparing a pale streak through the fold. The distal cubital vein is usually white and the other veins are black. The cell is dark gray, brown-black, or black, and the costa is cream to ochre from the base to the postmedial line. The terminal area is dark gray. A diffuse black basal dash is present. Less common forms have a more uniform gray-tan forewing with a brown cell and slightly paler costa, or are more mottled tan with light gray along the costa and gray in the terminal area. Females are dimorphic. Roughly half are similar to the most common form of the male but are grayer, lacking warm brown, and have silver-white costas. The other form is powdery light brownish gray with slightly darker gray terminal area. The lines are dark gray, variable present, weak and largely obsolete in forms with a pale costa and complete in powdery gray females. Typical males have twin dark spots on the costa at the line origins, a laterally convex segment of the antemedial line at the base of the claviform spot, and a toothed postmedial line evident as the demarcation between the darker median area and the lighter subterminal area. In the lighter females, the basal and antemedial lines are thick on the costa and lighter gray elsewhere, filled with the ground color, slightly irregular and weakly angled toward the outer margin. The median line is a dark spot on the costa. The postmedial line is toothed, drawn toward the base on the costa, bent basad below the costa, and nearly straight toward the base at a 45°angle. The subterminal line is pale ochre, tan, or light gray depending on the color of the moth, irregular with a blunt "W"-mark on the mid-forewing. It is preceded by dark gray shading on the costa and posterior forewing and a series of long black chevrons between the veins on the mid-forewing. The terminal line is dark, broken at the veins. The fringe is variable, most often light gray to luteous gray with longitudinal stripes. The orbicular and reniform spots are outlined in outer gray to black and inner whitish gray to pale ochre. The orbicular spot is oval or an irregular elongate bar, sometimes entirely pale but usually with a darker gray center. The reniform spot is moderately large, kidney-shaped, filled similarly but with more dark gray or brown-gray centrally. The claviform spot is moderate-sized, narrow, thin gray to nearly solid black. The male hindwing and fringe are white, with a poorly demarcated thin band of dark gray near the outer margin, dark gray distal veins and terminal line, and a small weak discal spot. Females have a gray hindwing with a pale gray base, with more extensive dark veins, more prominent discal spot, and white fringe. The head and thorax are gray-tan. Specimens with a pale costa have similar color at the base of the collar, separated from the tan edge by a black transverse line. The male antenna is bipectinate and appears relatively thick for the genus, tapering over the distal third. *Euxoa olivia* is one of two Pacific Northwest members of the subgenus *Heteroeuxoa,* characterized by asymmetrical saccular extension with the right one long and stout with a fin-like extension near its tip.
 
@@ -26,11 +26,11 @@ The distribution of this species extends west across southern Canada to southern
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation is such families as the Rosaceae, Fabaceae, and Lamiaceae.  During epidemic outbreaks, it also feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 The adults fly in the fall, mostly during September to early October. It is one of the last *Euxoa* species to fly in most years.
 

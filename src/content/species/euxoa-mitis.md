@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa mitis* is a fall-flying, small to medium-sized *Euxoa* (FW length 14–16 mm) that flies in sage steppe. It has relatively smooth, gray-brown forewings with a slight orange tint, gray markings, and white hindwings which are powdery and darker in females. The forewing is relatively short. The ground color is relatively uniform, slightly grayer in females. The forewing is slightly powdery, although less than in many steppe *Euxoa* species. The costa near the subterminal line is gray, as is the cell in most specimens. The transverse lines and outlines of the spots are gray, slightly variable in darkness but less so than in many of the other steppe species. The basal and antemedial lines are double, darkest abutting the median area, filled with the ground color. The antemedial line is slightly irregular and slants toward the outer margin. The median line is absent or weak. The postmedial line has a dark inner component that is most strongly toothed on the mid-forewing and is bordered laterally by a lighter line; it is drawn basad on the costa, is nearly straight lateral to the reniform spot, and straight or slightly concave from below the cell at a 45° slant toward the base to the posterior margin. The subterminal line is yellow-tan, powdery, usually complete but sometimes broken into spots, slightly irregular and slightly scalloped. It is preceded by a dark gray spot on the costa and a weak gray shade on the mid-forewing. The terminal line is a series of dark spots. The fringe matches the terminal area. The orbicular and reniform spots are weakly outlined in gray, except where they abut the dark cell, are moderately large, and are evenly filled with the ground color or a slightly lighter shade thereof. The orbicular spot is oval and the reniform spot is broadly kidney-shaped. The claviform spot is absent or represented by a few gray scales at the tip. The hindwing is pure white with a spotted terminal line in males, uncommonly with slight marginal suffusion and a trace of the postmedial line; off-white with brown-gray suffusion and gray discal spot, postmedial line, and spotted terminal line in females. The hindwing fringe is pure white in both sexes. The head and thorax are evenly of the forewing color. A frontal tubercle is present. The male antenna is bipectinate. *Euxoa mitis* is a member of the large subgenus *Euxoa*.
 
@@ -34,11 +34,11 @@ The range of *Euxoa mitis* extends includes the western Great Plains and the Int
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 The adults of *E. mitis* fly in the fall and have been collected in September and early October in our region. They are nocturnal and come to lights.
 

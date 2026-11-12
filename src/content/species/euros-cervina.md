@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euros cervina* is a small moth (FW length 10 mm) that flies in wet meadows in southwestern Oregon during late summer. Its forewings have a geometric pattern of light and dark orange-brown. The forewing is short and rounded. The basal and subterminal areas are orange-tan posteriorly, slightly darker and grayer anteriorly. The median area and most of the terminal area are darker orange-brown, while the apex is the same color as the adjacent subterminal area. The dark terminal area is pointed toward the base opposite the cell and in the fold due to the irregular course of the ochre subterminal line. A dark excurved basal line is present. The antemedial and postmedial lines are white and black, the latter abutting the median area. The antemedial line is slightly irregular, focally drawn toward the apex on the costa and slightly angled away from the base near the posterior margin. The postmedial line is drawn toward the base on the costa, curves around the reniform spot touching both ends of the spot, and is curved below the spot to meet the posterior margin at a right angle. A dark median line is bent at the reniform spot, nearly parallel to the postmedial line elsewhere. The subterminal line is pale orange-tan, wide and jaggedly irregular. A black terminal line is present. The fringe is orange-brown, with weak lighter checkering. The orbicular and reniform spots are partially outlined in black, filled with pale orange-tan peripherally, and the ground color centrally. The orbicular spot is round to slightly oval, touching the antemedial line. The reniform spot is kidney-shaped with black medial border and only light outlined laterally. A tiny claviform spot is evident in some specimens. The hindwing is even medium tan-gray with a similar or browner fringe. The head and thorax are even orange-tan. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species also occurs in northern California at the type locality on Mt. Shas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The foodplant of *E. cervina* is unknown. It is likely to be a borer in the stems of grasses (Poaceae) or sedges (Cyperaceae).
 
-##### Adults
+### Adults
 
 The flight period of this species is late summer, usually during August. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Escaria clauda* is a small noctuid moth (FW length 11 - 13 mm) from Montana and eastern Idaho that has pale-streaked grayish-tan forewings. The forewing has a slightly pointed apex. The color is pale gray-tan to tan, with pale whitish or ochre streaks through the cell and in the fold. The anterior subterminal area and all but the apical portion of the terminal area are darker gray. The basal, antemedial, and postmedial lines are dark gray, double filled with white. The basal and antemedial lines are evident as spots on the costa but are variable elsewhere, sometimes nearly obsolete. The antemedial line is irregular and oriented perpendicular to the posterior margin when present. The median line is a gray spot on the costa. The postmedial line is irregular, drawn sharply toward the base on the costa, runs close to the reniform spot which it touches several times, and is angled slightly toward the base below the spot. The subterminal line is cream or white, mildly irregular with a strong offset below the apex and a moderately-strong W-mark to the margin on the mid-wing. The fringe is checkered dark gray and white. The orbicular spot is an oval pale smudge. The reniform spot is indistinct powdery gray, often with a few white spots along the medial end. The claviform spot is powdery black, thickest anteriorly, small, usually incomplete. The hindwing is dark gray-tan, gradually darker toward the outer margin, with a faint discal spot and thin dark gray terminal line at the base of the white fringe. The head and thorax are cream to powdery gray. A flat-topped frontal tubercle resembles a pig snout. The eye is covered with fine hairs. The male antenna is filiform with long fasciculations.
 
@@ -22,11 +22,11 @@ This moth if found on the western Great Plains as far north as southern Alberta.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 The flight season of *E. homogena* is late spring and early summer. It has been collected from May to July throughout its range. It is nocturnal and comes to lights.
 

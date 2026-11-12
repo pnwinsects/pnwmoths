@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spilosoma vestalis* is our largest *Spilosoma* species (FW length 19 - 26 mm). It has pure white wings marked with a few black dots at the transverse lines and discal spot position. These are most evident along the postmedial line of the forewing and in the submarginal region of the hindwing. The top of the head and thorax are white. The inferior head and anterior inferior thorax are dark gray, and the anterior portions of the foreleg tibia and femur are bright red. The abdomen is white with lines of lateral black dots. The antennae are bipectinate, broader in males, with white dorsal shaft and black pectinations.
 
 This species can be told from all other white moths in our region by its red legs.
 
-##### Larvae
+### Larvae
 
 Larva is black with long tufts of black hairs along the dorsum of the body and pale yellow-white hairs along the lateral line.  It is illustrated by Miller & Hammond (2009).
 
@@ -26,11 +26,11 @@ This species is found near the West Coast of North America. South of the Pacific
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on many kinds of vegetation, but appears to particularly favor hardwoods such as red alder (*Alnus rubra*) and Oregon white oak (*Quercus garryana*).
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in spring and early summer. Most Pacific Northwest records are from May and June. It is nocturnal and comes to lights. The adults do not feed.
 

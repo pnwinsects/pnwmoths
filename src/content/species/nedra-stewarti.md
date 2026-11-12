@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Nedra stewarti* is a small moth (FW length 13–15 mm) that flies in two parts of the Pacific Northwest during the spring and summer: a smaller darker population in western Oregon and Washington, and a larger paler on near the Idaho-Washington border and in southern Idaho. It has a streaked light gray and dark brown forewing with a black and white basal dash and a large white-rimmed reniform spot. The forewing ground color is blue gray, heavily shaded with dark brown and dark gray posterior to the basal line, on the anterior and central median area that often extends across the lower subterminal area posterior to the lower half of the reniform spot, and in the terminal area. Thin dark veins and thicker black streaks between the veins are present on the distal wing, strongest lateral to the cell. A long basal dash is white anteriorly and black posteriorly, with the white continuing a short distance into the median area. A short segment of the median line is evident near the posterior margin, and a similar gray shade is present across the costa at the postmedial line. The subterminal line is evident as the transition between the gray subterminal area and the dark terminal area. It extends to the mid-margin as a broad W-mark on M3 and CuA1. The terminal line is a series of dots. The fringe is strongly checkered white and brown. The orbicular spot is a small oval outlined in black and filled with white. The reniform spot is moderately large, broadly C-shaped with a larger posterior end and often a short lateral tooth on M3, pure white with a kidney-shaped red-brown spot off-center towards the anterior end. No claviform spot is evident. The hindwing is pale tan to dark gray, darker distal to the postmedial line, with gray discal spot, an even diffuse postmedial line (not conspicuous in western populations), and a white fringe. The head and thorax are blue-gray and gray-brown, with a black line across the distal collar and brown margins on the lateral tegulae. The male antenna is biserrate.
 
@@ -26,11 +26,11 @@ The range of this species includes northern California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on species of St. John's wort (*Hypericum* spp.) in the Hypericaceae.  The original native foodplant of this species was probably *Hypericum formosum* which grows in moist open habitats. It now uses the exotic *Hypericum perforatum* which grows in drier and more disturbed habitats.
 
-##### Adults
+### Adults
 
 The western populations of *N. stewarti* are found during April and May and again in July. The eastern population has been most commonly collected during the summer, with records from June through August with a significant peak during July. It is at least partially double-brooded as there are a few records from April and May. *Nedra stewarti* is nocturnal and comes to lights.
 

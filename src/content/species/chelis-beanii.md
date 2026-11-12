@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Chelis beanii* is a medium-sized (FW length 16–17 mm), reddish-brown moth from subalpine habitats in the northern Rocky Mountain region. The forewing ground color is smoky medium to dark rose. It is traversed by very wide darker rosy brown-gray lines, usually fused into a broad "V" in the center of the forewing and forming a continuous band or series of irregular patches near the outer margin. The hindwing is lighter clear to smoky rose pink, marked by darker rosy gray discal spot, median line, complete or patchy marginal band, and part of the fringe. The head and thorax are the same color as the forewing lines, and the abdomen is similar to the hindwing ground color. The bipectinate antennae are light rosy brown with darker gray pectinations.
 
@@ -22,11 +22,11 @@ This species has a relatively restricted range in the Rocky Mountains. It is mos
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available for this species regarding larval foodplants, but it probably feeds on general herbaceous vegetation like related species.
 
-##### Adults
+### Adults
 
 *Chelis beanii* flies from mid July until mid August. It is nocturnal and comes to lights.
 

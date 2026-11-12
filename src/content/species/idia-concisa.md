@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Idia "concisa"* is a small, gray *Idia* (FW length 9 - 13 mm) found in the northern portion of the Pacific Northwest. It has whitish gray hindwings. The forewing is medium gray, darker near the costa and distal margin. It is marked with irregular dark basal, antemedial, and postmedial lines, a diffused median line, and a light subterminal line preceded by a dark gray shade. The reniform spot lacks a dark outline but is evident as the warm light ochre to reddish brown filling. The hindwing is lighter whitish gray marked with several irregular darker gray lines and a thin dark discal spot.
 
@@ -24,11 +24,11 @@ This species occurs across boreal North America to the Atlantic Coast where it i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No specific information is presently available for this species, but it is probably a detritivore like related species.
 
-##### Adults
+### Adults
 
 Adults have been collected from mid June through the fall, but most records are from the summer months. The adults are nocturnal and come to lights.
 

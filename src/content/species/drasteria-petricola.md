@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria petricola* is a small *Drasteria* (FW length 12 - 14 mm) found in mountains and at high latitudes. The forewing is brown to gray-brown, darkest basal to the antemedial line and between the postmedial line and subterminal line and light in the median area. The outer edge of the antemedial line is smoothly outwardly convex. the brown median line is usually prominent. The subterminal line is also smooth, preceded by a dark line or series of ill-defined spots. The reniform and veins lateral to its inferior margin are pale whitish, often filling the entire are between the lateral reniform spot and the adjacent postmedial line. The hindwing is orange, occasionally very pale in northern specimens, with black markings. The cubital veins are black and are joined to the inferior discal spot. Dark shading along the medial edge of the wing is usually as dark as the postmedial line and marginal band.
 
@@ -22,11 +22,11 @@ This species is common and widely distributed at middle to high elevations in th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on sweet vetch (*Hedysarum* spp.) in the Fabaceae.
 
-##### Adults
+### Adults
 
 Adults are diurnal. They are on the wing in June and July.
 

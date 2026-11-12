@@ -14,7 +14,7 @@ inside the file repeats it. All 1,264 accounts on the site are written this way.
 ```markdown
 ## Identification
 
-##### Adults
+### Adults
 
 The American Dagger Moth (*Acronicta americana*) is a common species found throughout...
 ```

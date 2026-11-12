@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia bryanti* is a very small to small (FW length 9 - 11 mm), black-and-white, day-flying noctuid moth from alpine habitats in northern British Columbia in our region. It has predominantly white hindwings. The forewing ground color is dark gray with a hoary appearance due to scattered lighter scales. The pattern is comprised of the light gray zig-zag transverse lines, the terminal area, and the filling of the orbicular and reniform spots. The hindwing is white to light gray with dark gray dusting near the margin, thin dark discal spot, and veins and has a white fringe with light gray scales in the inner portion. The head and thorax are dark gray. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is more widespread in Alaska, Yukon Territory, and Northwest Territ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults of this species are diurnal. They nectar at flowers, including on saxifrage (*Saxifraga* sp.) and moss campion (*Silene acaulis*). Collection dates are late June through July across the entire range (Lafontaine 1998).
 

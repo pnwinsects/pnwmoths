@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia intermedia* is a large (FW length 21 - 23 mm) moth that flies in forests throughout most of our region during late spring to summer. It has a slightly streaky medium-dark gray forewing lacking all but traces of the lines, and a gray hindwing.  As in other members of the genus the forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The forewing is nearly uniform medium gray. The central interspaces are slightly lighter gray on the distal wing. A very thin black basal dash is inconspicuous, resembling the veins. A short anal dash is present below vein CuA2. The veins are thin and black. Traces of the gray strongly zigzag antemedial and postmedial lines are evident as oblique marks on the costa and near the posterior margin, usually in the fold. The terminal line is a series of dark spots on the margin, and a few longer wedges between the veins on the mid-wing. The fringe is slightly lighter gray than the ground color with very faint barring parallel to the margin. The spots and other lines are absent. The hindwing is light gray with a darker outer margin in males, nearly uniform darker gray in females, with dark gray thin discal spot, veins, and terminal line. The hindwing fringe is light whitish gray with a pale gray base. The head and base of the collar are medium-dark gray, with slightly lighter gray on the rest of the thorax. Faint barring is present on the collar and tegulae. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ Like many other forest moths, this species has a relatively narrow distribution 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on herbaceous Asteraceae such as wild lettuce (*Lactuca* spp.).
 
-##### Adults
+### Adults
 
 *Cucullia intermedia* flies in late spring and summer, usually from late April until mid-July - rarely later - in our region. It is nocturnal and comes to lights.
 

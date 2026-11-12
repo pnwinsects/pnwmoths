@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia perquiritata* is a powdery gray to black, medium-sized moth (FW length 17–23 mm) that flies in high-elevation conifer forests and along the Pacific Ocean. Its forewing has jagged, dark lines filled with whitish-gray and a cresent-shaped pale reniform spot. The forewing ground color is typically salt-and-pepper gray with a nearly equal mixture of black and white scales. The double black lines are very irregular. The postmedial line is deeply dentate. The terminal wing is dominated by a series of large black wedges that mark the position of the subterminal line between the veins, strongest at the costa, opposite the cell, and in the fold. The orbicular and reniform spots are similar, black with light whitish gray filling. The former is round while the latter is deeply indented laterally forming a sideways heart, crescent, or boomerang shape. The claviform spot is small. The hindwing is medium gray with slightly darker margin, discal spot, scalloped postmedial line, and terminal line. Its fringe is pale gray with slight dark gray checkering. The head and thorax are hoary dark gray with a dark tip to the collar. The male antenna is bead-like.
 
@@ -28,11 +28,11 @@ This species is found in subarctic and boreal zone forest across Canada and the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on true firs (*Abies* spp.) and spruces (*Picea* spp.) in the Pinaceae.  In the Pacific Northwest, the primary larval foodplants appear to be Engelmann spruce (*P. engelmannii*) in the Cascades and Rocky Mountains, and Sitka spruce (*P. sitchensis*) in coastal rainforests.
 
-##### Adults
+### Adults
 
 *Xestia perquiritata* flies in the summer, with Northwest records from mid-June through August. The coast population flies in early to mid-August. This species is nocturnal and comes to lights.
 

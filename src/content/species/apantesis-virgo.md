@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis virgo* is a relatively large (FW length 20–27 mm), white, black, and red moth that is restricted to the eastern parts of our region. The forewing is black with prominent off-white veins and postmedial and subterminal region transverse lines. The hindwing is bright orange-red with pale rimmed black spots medial to the discal spot in addition to in the marginal region. A patchy marginal band is also present. As in other *Apantesis* species the fringe is pale, the thorax appears longitudinaly streaked black and white, and the abdomen is lined red and black.  The male antenna is black, bipectinate.
 
@@ -22,11 +22,11 @@ This species is common and widespread in temperate eastern North America where i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on various herbaceous vegetation, particularly Asteraceae and Fabaceae.
 
-##### Adults
+### Adults
 
 This species has been collected in late spring and July in our region. According to Schmidt (2009) it usually peaks two to three weeks earlier than *A. parthenice*, but fresh specimens of these species have been collected together in the Peace River District, British Columbia. *Apantesis virgo* is nocturnal and comes to lights.
 

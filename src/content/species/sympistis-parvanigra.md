@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis parvanigra* is a small, dark gray moth (FW length 10 - 13 mm) that flies at middle to high elevations during the summer and early fall. It has white in the subterminal area and a light gray hindwing with a broad black marginal band. The forewing is slightly mottled dark gray, slightly lighter basal to the antemedial line and darker on the distal wing. The subterminal area is white to light whitish tan with a sprinkling of dark scales medially, fading to dark gray laterally. The antemedial line is black, irregular and oriented straight across the wing. The postmedial line is black medially and white laterally, sometimes with a partial gray outer component. It is weakly scalloped and is convex around the reniform spot, then nearly straight to the trailing margin below the spot at a variable angle. The subterminal line is pale tan, thin, irregular, and incomplete, usually strongest near the trailing margin. A series of black dots comprises the terminal line. The fringe is dark gray, sometimes slightly checkered with black. The hindwing ground color is pale gray to brownish white, suffused with gray toward the base, with a dark gray discal spot and wide black marginal band. The hindwing fringe is white with a dark gray base. The head and thorax are dark gray. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of this species might be limited to the Pacific Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species. It probably feeds on beardtongues (*Penstemon* spp.) in the Scrophulariaceae based on the preferences of related species.
 
-##### Adults
+### Adults
 
 The flight period of *S. parvanigra* is summer and early fall. It has been collected from early June until early September.  It is nocturnal and comes readily to light.
 

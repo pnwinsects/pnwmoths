@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria ochracea* is a large *Drasteria* species (FW length 20 -25 mm) with warm brown forewings and bright orange hindwings. The forewings are fairly uniform brown, slightly mottled by lighter brown by several of the lines. The forewing appears streaky because of darker on the veins and several black dashes between the veins near the apex. The reniform spot is black and dark brown and the anterior portion is joined to the costa. The hindwing is bright orange with black angular discal spot, postmedial line, and interrupted marginal band.
 
 This species can be identified by its streaky brown forewing and bright orange and black hindwing.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, gray and yellow with fine longitudinal lines.  It is illustrated by Miller & Hammond (2003) under the name of *Synedoida ochracea*.
 
@@ -26,11 +26,11 @@ This species is found in the American West from British Columbia and Montana sou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on elderberry (*Sambucus* spp.) in the Caprifoliaceae.
 
-##### Adults
+### Adults
 
 Adults are found from late spring through the summer months. Most Pacific Northwest records are from late April to early August. The adults are nocturnal and come to lights.
 

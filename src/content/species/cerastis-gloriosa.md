@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cerastis gloriosa* is a medium sized (FW length 16–17 mm), rarely collected, early spring-flying moth with prominent, white, fused orbicular and reniform spots set against a rich brown ground color with a slight pink cast. The basal, antemedial, and postmedial lines are black, filled with slightly lighter brown than the ground color. The former two lines are irregular in shape and the postmedial line is scalloped. The postmedial line is preceded by a series of black wedges anterior to the mid wing. The terminal area is slightly lighter than the ground color. The orbicular spot is oblong and fused to the reniform spot that is drawn toward it. Both spots are nearly white and usually filled with pale gray to light brown, appearing mostly white. The hindwing is pinkish gray with a lighter pink fringe. The head and collar are lighter brown than the rest of the thorax which matches the forewing color. The abdomen is gray, lighter pink tinged posteriorly. The male antenna is narrowly bipectinate, approximately 2x as wide as the central shaft.
 
@@ -24,11 +24,11 @@ The range of this species includes coastal California as far south as Monterey C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on hardwood shrubs based on related species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in early spring. Pacific Northwest records are from late March through April. It is nocturnal and males come readily to lights. Females are rarely collected.
 

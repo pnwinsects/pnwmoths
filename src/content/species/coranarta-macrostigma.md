@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Coranarta macrostigma* is a a small (FW length 10–11 mm), day-flying moth that flies in northern British Columbia during spring and early summer. It has black-banded yellow hindwings and dark and light gray forewings with a large white and gray-filled reniform spot. The forewing is charcoal gray with scattered lighter gray scales, darkest in the median area and lightest lateral to the postmedial line. The transverse lines are black and smooth in contour. The subterminal line is irregular with a W-mark on veins M3 and CuA1. The orbicular and reniform spots are black. The former is inconspicuous, but the reniform is very large with the posterior margin extending lateral to the postmedial line. It is filled with white and the central portion has extensive dark gray that is scalloped on the veins. The hindwing is bright yellow with a well-defined black marginal band. The hindwing fringe is white and weakly scalloped with dark gray. The head and body are black with a few white scales. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found in northern and extreme southeastern British Columbia.  P
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are strictly diurnal. They take nectar at flowers and have been observed at the flowers of bear berry (*Arctostaphylos uva-ursi*) by Gary Anweiler in Alberta and Andre Langois in southern Yukon Territory.  They are an effective bumblebee mimic.  This species is single-brooded and flies in spring and late summer.  The type series was collected during May and June.
 

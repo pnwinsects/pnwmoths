@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lithophane georgii* is our most widespread and commonly collected gray *Lithophane*. It is medium-size to large (FW length 19–22 mm) with lead-gray to silver-gray forewings with a pale base and large pale-filled figure-eight-shaped orbicular spot. The forewing margin is slightly scalloped. It is nearly uniform gray with prominent whitish gray on the anterior base and a slightly lighter costa. A thin black basal dash is present, and the veins are dark. The antemedial line is gray, double filled with the color of the adjacent wing, evident near the costa where it is strongly zig-zagged on the veins. The median line is variable, a small gray spot on the costa to a strong blackish gray line across the wing, bent 90° at the reniform spot. The postmedial line is absent except for a pale segement near the costa. The subterminal line is a pale smudge near the apex, but its position is marked by a series of gray to black chevrons that extend across most of the wing except at the margins. Faint triangular spots form the terminal line. The fringe is gray. The outlines of the orbicular and reniform spots are black. The orbicular spot and suborbicular spots are fused into a figure-eight shape and are filled with whitish gray, rarely the ground color. The reniform spot is moderately large, weakly kidney-shaped, strongest posteriorly and often incomplete on the lateral side, filled with the ground color or lighter gray, darker gray and occasionally with a few red-brown scales in the lower third. No claviform spot is present. The hindwing is medium-dark brownish gray with darker gray discal spot and veins. The hindwing fringe is white with a pale gray base. The head and thorax are gray with a thin black transverse line near the edge of the collar and black lateral tegulae. They appear sculpted with tufts and ridges. The abdomen has a slight pink tint. The male antenna is bead-like.
 
@@ -8,7 +8,7 @@ This species can usually be recognized by its blue-gray forewing with pale base 
 
 Two synonyms of *Lithophane georgii* Grote were described from the Pacific Northwest. *Xylina holocinerea* Smith was described from [British Columbia], Vancouver and *Xylina vertina* Smith was described from Oregon, Corvallis.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, green with a variable yellow to white lateral line.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is widely distributed in North America. The range extends east from
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 *Lithophane georgii* is a broad foodplant generalist feeding on hardwoods in the families Aceraceae, Betulaceae, Fagaceae, Rosaceae, Cornaceae, Oleaceae, and Salicaceae.  Larvae may also be partly carnivorous, feeding on insects and other caterpillars.
 
-##### Adults
+### Adults
 
 Adults of *L. georgii* eclose in the fall and overwinter. They have been collected from late August to late October and again from late February to late May. This species is nocturnal and come to lights and sugar baits.
 

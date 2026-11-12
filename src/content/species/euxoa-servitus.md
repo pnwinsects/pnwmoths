@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa servitus* is a small to medium-sized *Euxoa* (FW length 12–16 mm) that flies in forests in the northern and eastern parts of our area during the summer. It has a gray and tan thorax and a forewing with a smoky gray median area, a black cell, and a light blue-gray base, subterminal area, and filling of the spots. The forewing is relatively short and broad. The ground color is light gray, palest at the base of the costa followed by the posterior base, the subterminal area, and at the apex. The cell is black, as is a short but broad basal dash. The median area near the cell and postmedian lines is suffused with smoky gray, sparing the costa, posterior margin, and the fold near the tip of the claviform spot. The terminal area, except the apex, is dark gray. The cubital vein is light gray, and the veins in the subterminal area area dark gray. The basal line is dark spots on the costa and cubital vein. The antemedial is gray on the costa, is interrupted by the black cell, continuing below the cubital vein as undulating black and light gray lines angled toward the outer margin and bulging toward the outer margin below 1A+2A. The median line is a faint gray below the reniform spot. The postmedial line is dark gray, smooth, double with strong inner and faint outer components and filled with the pale gray color of the base of the costa, drawn sharply basad on the costa, smoothly curved around the reniform spot, and angled 45° toward the base below the level of the cell. The subterminal line is only evident as the transition between the blue-gray subterminal and darker terminal areas, undulating with medial extension to near the postmedial line opposite the cell and about half-way across the subterminal area in the fold. It is preceded by a dark spot on the costa and black wedges on the mid-wing that accentuate the toothed appearance of the inner terminal area where it extends medially across the subterminal area. The terminal line is dark, thin or series of spots. The fringe is gray. The orbicular and reniform spots are moderately large, outlined in black and filled with the light gray color of the base of the costa, with faintly darker centers in dark specimens. The orbicular spot is round or ovoid, open toward the costa. The reniform spot is kidney-shaped or an upright oval. The claviform spot is gray to solid black, small to moderate-sized. The hindwing is tan-gray with a slight brassy tint, darker gray toward the margin, with barely darker discal spot, veins, and terminal line. The hindwing fringe is white with a tan or two-toned gray and ochre base. The head and base of the collar are pale gray, with a thick black transverse line at the base of the brown or fawn-colored edge. The thorax is gray with fawn and black medial edges on the tegulae. A frontal tubercle is present. The male antenna is biserrate. *Euxoa servitus* is a member of the large subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species has a wide distribution in boreal North America as well as in the R
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults of *E. servitus* occur in summer to early fall. Records from the Pacific Northwest are from mid-July to early September. It is nocturnal and comes to lights.
 

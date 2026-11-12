@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Resapamea innota* is a medium-sized moth (FW length 14–17 mm) with two forms, one with red-brown forewings with pale reniform spot and the other with gray and light tan forewings with lighter spots and a more complex pattern. They fly together in wet meadows at low or middle elevations during the summer. The forewing has a relatively short wing. The more common red-brown forewing is usually nearly uniform red-brown with a slightly darker median area, sometimes with more contrasting dark red-brown in the anterior and mid-median area, terminal area, and veins. The tan form has a darker gray-brown median area and diffuse stripes in the terminal area with lighter gray veins. Other color forms exist but are less common, including uniform entirely dull gray or tan specimens. The basal and antemedial lines are usually absent; the antemedial line is sometimes evident as spots on the veins or as a diffuse gray line, slightly angled toward the outer margin and drawn inward on the veins. The median line is absent or faint, angled at the reniform spot. The postmedial line is toothed, often with dark lines at the tips of the teeth, smoothly curved around the end of the cell and nearly straight below the cell at an steep angle toward the base. The subterminal line is pale, faint, sinuous, sometimes preceded by a dark shade of the ground color. The orbicular and reniform spots are outlined in faint gray and filled with light ochre. The orbicular spot is a small circle. The reniform is kidney-shaped, sometimes with a dark central crescent of the ground color or a gray spot in the lower end. The claviform spot is usually absent, small and black or gray when present. The hindwing is even medium-dark gray with a variable absent to darker gray discal spot and light ochre to slightly orange fringe. The head and thorax match the forewing color, usually red-brown or gray-brown. The male antenna is beaded to weakly biserrate.
 
@@ -24,11 +24,11 @@ This species occurs in the American west. It has been taken in the Rocky Mountai
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it probably bores into the stems and roots of herbaceous vegetation based upon closely related species.
 
-##### Adults
+### Adults
 
 The flight season of *R. innota* is the summer from mid-June through July. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Aseptis fanatica* is a broad-winged, medium-sized to large moth (FW length 18–19 mm) that flies in southwestern Oregon and the Cascades during the summer. Its blackish-brown forewings are broadly triangular and each has a faint, pale, yellow subterminal line. It is nearly uniform dull brownish black. A few luteous spots are present along the costa, likely the remnants of the transverse lines. The dark postmedial line is barely evident in some specimens. The subterminal line is irregular and light ochre, powdery or limited to a few scales. The fringe is concolorous with tiny luteous spots in the base at the tips of the veins. The orbicular and reniform spots are weakly outlined in black, barely evident. The orbicular spot is round, filled with the ground color or slightly lighter gray in a few specimens. The reniform and claviform spots are barely evident. The hindwing has slightly concave segment posterior to M1, although less prominent than in many other *Aseptis* species. It is uniform dark gray-brown with a dark terminal line and a tan base of the fringe. The head and thorax are uniform brownish-black. The male antenna is bead-like.
 
@@ -35,11 +35,11 @@ This species is found along the West Coast. The range extends south to Baja Cali
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on madrone (*Arbutus menziesii*) and various species of manzanitas and bearberry (kinnikinick)  (*Arctostaphylos* spp.) in the Ericaceae.
 
-##### Adults
+### Adults
 
 The adults fly during the summer. It occurs as early as the beginning of June in the Sisikiyou Mountains, Oregon, several weeks prior to the emergence of *A. ethnica*.
 

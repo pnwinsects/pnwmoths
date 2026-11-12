@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Neoligia lancea* is a very small to small moth (FW length 9–12 mm) that flies in the dry interior of the Northwest during summer and fall. It has a mottled gray forewing with a black median dash, variable darker base and median area, and pale reniform spot. The ground color is mottled medium-dark gray, but many forms have differing darker gray areas. A faint red flush is present on the median area of some lighter specimens. In other specimens the median area is darker gray, and in many the entire wing is similarly dark to the base. The terminal area is also variable, often mottled darker gray with or without a triangular black spot near the anal angle. A black median dash is present. Some specimens have dark veins in the subterminal area. The basal and antemedial lines are gray, double, filled with the gray ground. The basal line is evident as paired spots on the costa. The antemedial line is slightly undulating and excurved with a slight bulge in the fold. The median line is gray, evident on the costa in lighter specimens. The postmedial line is gray, S-shaped with a tight loop around the end of the reniform spot and slightly concave toward the base below the spot. The subterminal line is light gray, diffuse, irregular in course, and preceded by a discontinuous gray shade. The fringe is lightly checkered medium and dark gray. The orbicular spot is ovoid, taller than wide, usually ill-defined except when filled with light gray. The reniform spot is moderate-sized, outlined by a double gray line and filled with light gray. The claviform spot is black, small, often absent. The hindwing is light gray with darker gray margin and a thin terminal line. The hindwing fringe is two-toned gray. The head and thorax are dark gray. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species has not been recorded from outside of the Pacific Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species.
 
-##### Adults
+### Adults
 
 The flight period of *N. lancea* is late spring to fall. It has been collected most commonly in late summer and early September in our area. It is nocturnal and comes to lights.
 

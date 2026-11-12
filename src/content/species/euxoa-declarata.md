@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa declarata* is a small to medium-sized *Euxoa* (FW length 14–18 mm) that flies in a variety of habitats east of the Cascade summit during summer and early fall. It has a dark purplish-gray forewing with black lines, spots, and cell, a pale yellow lining the reniform spot, and whitish hindwings with a dark marginal band. The forewing is nearly uniform very dark brown-gray with a purple tint, occasionally pale gray in specimens from desert environments. The costa in the subterminal area and the terminal area are slightly darker gray. Some pale gray specimens have a dark gray or slightly reddish flush distal to the reniform spot. The cell is black. The basal and antemedial lines are black, double with filling of the ground color or a barely lighter shade. The basal line is irregular, interrupted at the cell. The antemedial line is weakly zigzagged, nearly perpendicular to the posterior margin. The median line is dark gray and very faint. The postmedial line is single or double, weakly scalloped, drawn toward the base on the costa, weakly excurved near the reniform spot, and angled basad below the reniform spot. The subterminal line is very weak, absent except as the medial border of the gray terminal area or comprised of powdery pale yellow spots, slightly uneven, preceded by a dark shade on the costa and sometimes by a weak shade across the rest of the wing. The terminal line is black, thin or a series of spots between the veins. The fringe is concolorous with the terminal area. The orbicular and reniform spots are partially outlined by black, lined by thin light yellow, and filled with the ground color. The orbicular spot is usually oval, less often round, often open toward the costa or both anteriorly and posteriorly. The reniform spot is kidney-shaped, also often open at one or both ends. The claviform spot is black, moderate-sized. The hindwing is somewhat variable but usually nearly white in Pacific Northwest specimens, darker gray at the margin, with thin discal spot, veins, and terminal line, The hindwing fringe is white with an ochre and gray base. The head and thorax are the same color as the forewing, with a thin black transverse line across the mid-collar. A frontal tubercle is present. The male antenna is strongly biserrate.  *Euxoa declarata* is a member of the *declarata* species-group of the subgenus *Euxoa*.
 
@@ -37,11 +37,11 @@ This species has a wide distribution in North America, occurring from central Al
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 The adults fly in summer and fall. They have been collected from early July through September in our region. They are nocturnal and come to lights.
 

@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Nola minna* is one of our smallest members of the superfamily Noctuoidea (FW length 10–12 mm). It is light gray, with two characteristic blackish marks on the basal costa, and flies in forests during the spring. The forewing is ellipsoid with a pointed apex. The ground color is light powdery gray, darker gray near the outer margin. The costa is dark blackish brown at the base, and the anterior antemedial line is thickened into a small black spot. The antemedial, medial, and postmedial lines are indistinct powdery dark gray, while the subterminal line is whitish. The ordinary spots are obsolete. The hindwing is pale whitish gray, slightly darker near the margin. The palpi are fairly long. The head and thorax are light gray. The male antenna is filiform with long fasciculations that appear bipectinate under magnification.
 
 This small moth can be distinguished by its pale gray color and the two dark marks near the base of the forewing.
 
-##### Larvae
+### Larvae
 
 The larva has short scoli or tubercles with tufts of short hair and is mottled pink, gray, and brown. It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ The range extends south through western California to the Transverse and Peninsu
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many hardwood shrubs and trees in the families Betulaceae, Fagaceae, Salicaceae, and Rhamnaceae.  In western Oregon, it seems to favor *Ceanothus* species.
 
-##### Adults
+### Adults
 
 *Nola minna* flies in the spring in a single generation. Adults have been collected from mid-March to early June in our region. It is nocturnal and comes to lights.
 

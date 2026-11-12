@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mycterophora rubricans* is a common, mottled, orange-brown *Mycterophora* found in forests in western Oregon in our region. Like other members of the genus. it is small (FW length 12 mm) with broad wings, slender body, and wide bipectinate male antennae. The wing outer margins are slightly scalloped. The color and pattern of both wings is similar, dull light red-brown or orange-brown with darker slightly indistinct scalloped transverse lines. The costa is slightly darker than the rest of the wing near the apex and the terminal wings have a series of light patches between the veins. All of the forewing lines are angled laterally at their origin at the costa, then bent toward the posterior margin near the top of the cell. The orbicular spot is a small line, while the discal spots of both wings are very faint or absent. The palpi are long. The male antenna is broadly bipectinate while that of the female is simple.
 
@@ -22,11 +22,11 @@ This species appears to be restricted to the West Coast and is found in Californ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in the summer. This species is nocturnal and comes to light.
 

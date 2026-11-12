@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Annaphila decia* is a very small (FW length 9 - 10 mm) day-flying noctuid moth with a dark gray forewing and bright orange hindwing with black markings, including a sinuous antemedial line. The forewing is triangular. It is brownish black medial to the reniform spot and slightly lighter brown-gray distally. The antemedial and median lines are similar, straight, thick, and black. The postmedial line is indistinct hoary gray. It is is bilobed toward the outer margin near the reniform spot and nearly straight to the trailing margin caudal to the spot. The subterminal line is pale and thin, preceded by a black shade on the anterior two-thirds of the wing. A black terminal line is present at the base of the brown-black fringe. The orbicular spot is very inconspicuous, small, round, thinly outlined in black, and filled with a few pale gray scales. The reniform spot is kidney-shaped, similar in color to the adjacent pale postmedial line, and filled with dark gray. A claviform spot is absent. The hindwing ground color is bright orange, suffused with gray at the base and inner margin. A black irregular antemedial line is present. The discal spot is moderately large and triangular in shape. A sharply defined marginal band is present with an undulating inner margin. The fringe is dark gray with a slightly lighter edge. The head and thorax are hoary dark gray with numerous hair-like scales. The eyes are reduced in size. The male antenna is filiform, each segment ringed with black and white.
 
@@ -22,11 +22,11 @@ This species occurs widely in California as far south as the Transverse Ranges n
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but related species feed on *Phacelia* spp. in the Hydrophyllaceae.
 
-##### Adults
+### Adults
 
 Adults are diurnal and visit flowers during the day. They fly during the spring, slightly later in the year than *A. danistica* and *Annaphila arvalis*. Records from our region are from early April to late June, with most records from April and May.
 

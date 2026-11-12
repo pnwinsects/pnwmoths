@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Manduca quinquemaculata* is a very large sphinx moth (FW length 52–57 mm) with a complex pattern of wavy dark lines on a slightly brownish gray background on both fore-  and hindwings. The forewing is elongate with a pointed apex and concave posterior margin. It is powdery gray at the base and costal margin, and in the terminal area except at the apex. The remainder of the central area is streaked brown. The compound transverse lines are strongly streaked on the mid-wing; only the black lateral component of the subterminal line forms a somewhat straight edge. A pale gray line is present near the outer margin. The fringe is checkered brown and pale gray. The discal spot is small and is lost in the adjacent pattern. The much smaller hindwing is more contrastingly patterned. Most of it is warm brownish off-white with a pattern of multiple serrate black lines. The outer margin is even powdery gray, and the hindwing fringe is checkered black and white. The head and thorax are gray. Paired blue and black spots are present at the posterior thorax adjacent to black and white at the base of the abdomen. The dorsal abdomen has a series of black-rimmed yellow dots on both sides. A typical club-like antenna is present. The tongue is very long.
 
@@ -22,11 +22,11 @@ This species is most commonly found in dry habitats east of the Cascades, often 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various members of the *Solanaceae*, particularly cultivated tomatoes and potatoes in agricultural areas and gardens.  It may cause significant damage to local garden crops.
 
-##### Adults
+### Adults
 
 Adults are on the wing from early June through late fall. They are nocturnal and come to lights. They feed while hovering in front of flowers. The long tongue allows them to visit flowers with very long corollas.
 

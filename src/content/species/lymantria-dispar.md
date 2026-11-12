@@ -4,7 +4,7 @@
 
 Males of the Spongy Moth can be recognized by the combination of bipectinate antennae, gray-brown forewing with dark spots, and warm brown hindwing with darker veins. They are most similar in general appearance to males of tussock moths, especially *Orgyia* pseudotsugata and *Orgyia vetust*a, but are larger and lack a pale spot in the posterior subterminal area ("subanal spot") that is characteristic of the genus Orgyia.  Females of *L. dispar* are distinctive due to their large body size, cream color, and dark forewing markings.
 
-##### Larvae
+### Larvae
 
 The larva has lateral brown hair tufts combined with red and blue dorsal warts.  It is illustrated by Miller & Hammond (2003).
 
@@ -24,11 +24,11 @@ This species occurs across boreal Eurasia. It has become successfully establishe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a wide diversity of hardwood trees and shrubs as well as various conifers (*Pinaceae*).  They particularly favor feeding on oaks (*Quercus* spp.), but also use various other Fagaceae, Aceraceae, Salicaceae, and Rosaceae.  In the Pacific Northwest, they  have also fed on Douglas fir (*Pseudotsuga menziesii*). The young larvae disperse by ballooning, spinning silk thread that carries them on the wind.
 
-##### Adults
+### Adults
 
 This species has only one brood per year and overwinters as an egg. Females have wings but are flightless in the European race, while Asian females can fly.
 

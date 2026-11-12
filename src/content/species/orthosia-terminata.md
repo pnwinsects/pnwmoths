@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Orthosia terminata* is a rarely collected medium-sized (FW length 16 mm) mottled olive gray species that flies in southwestern Oregon in the spring. The forewing is slightly darker medial to the subterminal line and at the median line, and lightest in the terminal area. The strongly mottled pattern obscures the lines and spots, although the transverse lines are evident as dark spots along the costa and the postmedial line is marked by paired dots on the veins that are visible in most individuals. A series of dark spots between the veins marks the terminal line. The light outline of the reniform spot is evident in some specimens, both the orbicular spot is barely visible and the claviform spot is absent. The hindwing is medium olive gray with darker gray discal spot and veins. The fringe is light whitish gray. The head and thorax are mouse gray without tufts or ridges. The eye is covered with fine hairs. The male antenna is moderately bipectinate.
 
@@ -22,11 +22,11 @@ The range of *O. terminata* extends south through California to near the border 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it may feed on oaks (*Quercus* spp.) in the Fagaceae based upon the habitat.
 
-##### Adults
+### Adults
 
 This moth flies in the spring like most other species of *Orthosia* and should be sought from mid-March through April. It is nocturnal and comes to lights.
 

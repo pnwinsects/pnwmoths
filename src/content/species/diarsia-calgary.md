@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Diarsia calgary* occurs in the Rocky Mountains and south-central and northern British Columbia and closely resembles *Diarsia esurialis,* which is common in the western part of the Pacific Northwest. It is a small to medium-sized species (FW length 14 mm) with light yellow-brown forewings that are covered with gray scales producing a hoary light gray-brown appearance (Lafontaine 1998). The basal and antemedial lines are black, double at the costa. The antemedial line is zig-zagged across the forewing. The postemedial line is double with a dentate medial component, faint smooth lateral component, and paler filling. The tips of the "teeth" of the line are evident as a series of thin black lines on the lines lateral to the rest of the line. The subterminal line is pale and smooth, preceded by a tan shade at the costa. The terminal line is a series of lines between the veins. The fringe is light brown. The hindwing is pale yellow-gray with light gray markings comprised of a diffuse discal spot and wavy postmedial and submarginal bands. The head and collar are light tan, while the rest of the thorax is darker red-brown. The male antenna is bead-like with slightly constricted individual segments.
 
@@ -22,11 +22,11 @@ This species is predominantly distributed in the Rocky Mountain region. Most rec
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on a mixture of hardwoods and herbs based on related species.
 
-##### Adults
+### Adults
 
 This species is single brooded with adults flying in June and July across the entire range of the species (Lafontaine 1998). They are nocturnal and come to lights.
 

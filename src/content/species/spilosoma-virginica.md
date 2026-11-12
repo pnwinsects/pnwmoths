@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spilosoma virginica* is a medium-sized moth (FW 19 - 25 mm) with pure white wings marked with a few black dots. The forewing spots are usually limited to one near the inferolateral cell and one near the wing margin opposite the cell. The hindwing is more heavily spotted, usually a row in the marginal area in addition to a discal dot. The head and thorax are white, the anterior legs are yellow and black, and the other legs are black and white. The abdomen is characteristically white and yellow with several rows of black dots arranged in longitudinal rows. The antennae are bipectinate, wider in males than females, white dorsally, and black ventrally.
 
 *S. virginica* can be told from all other moths with white forewings and hindwings by the striped white, yellow, and black abdomen.
 
-##### Larvae
+### Larvae
 
 Larva is yellow and densely covered with yellow-orange and white hairs.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is widespread in temperate North America, occurring from coast to c
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a wide variety of herbaceous plants and hardwood shrubs.
 
-##### Adults
+### Adults
 
 This species can be found from late spring until early fall. It comes readily to light and is commonly found at porch lights.
 

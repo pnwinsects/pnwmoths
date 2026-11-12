@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis acheron* is a medium-sized moth (FW length 15 - 18 mm) that flies in mountain forests during the summer. It has hoary brown forewings with dark lines and spots - including an oval orbicular spot and strong dark and pale markings on the distal wing - and a dark brown-gray hindwing. The apex of the forewing is slightly elongate and the outer margin is smoothly convex. The ground color is strongly powdery to hoary olive brown, slightly variable in darkness. The distal wing is slightly darker gray from the lateral subterminal area to the outer margin. A dark line connects the spots in the cell in a few specimens. The basal, antemedial, median, and postmedial lines are black, with light ground color along the antemedial and postmedial lines outside the median area. The basal line is short and curved. The antemedial line is transverse across the wing, drawn sharply toward the base on the veins. The median line is diffuse, usually evident across the wing but darkest on the costa and below the cell. The posterior portion is near the postmedial line and slightly irregular. The postmedial line is strongly scalloped, bluntly excurved around the reniform spot and sometimes touching its bottom, then curved to meet the trailing margin at a right angle. The subterminal line is pale brown, irregular and broken into ill-defined pale spots between veins, preceded by long black wedge-shaped marks between the veins across the wing and sometimes followed by black spots in the terminal area. The terminal line is a black line or series of spots. The fringe is dark gray-brown. The orbicular and reniform spots are black on the outside with an inner line of pale brown and filling of the ground color or light brown. Both are strongest on the medial and lateral sides. The orbicular spot is oval and the reniform spot is wide, often incomplete at the anterior and posterior ends. The claviform spot is absent or partially evident at its apex. The hindwing is dark gray-brown, gradually darkening toward the outer margin. The veins, discal spot, and thin terminal line are darker gray. The fringe has a yellow base, thin gray median line, and a whitish tan edge. The head and thorax are the same color as the forewing, with darker transverse barring on the collar. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ The range of this species extends south through California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species. The suspected foodplant is penstemon (*Penstemon* spp.) in the Scrophulariaceae based on habitat and the preferences of related species.
 
-##### Adults
+### Adults
 
 The flight period of *S. acheron* is late summer and fall, beginning in late July in the Northwest. It is nocturnal and comes readily to lights.
 

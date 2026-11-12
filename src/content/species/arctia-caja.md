@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Arctia caja* is a large (FW length 27 - 32 mm), brightly colored, and boldly patterned tiger moth. The forewings are white with extensive dark gray brown lines and patches, appearing dark with crisscrossing white lines and spots. The hindwing is orange red with large round to slightly irregular black discal, basal, and submarginal spots containing metallic blue scales. The head and thorax match the dark forewing color with cream at the base of the collar and tegulae and red at the tip of the collar. The abdomen is slightly darker red than the hindwings with black bars on four or five of the segments. The bipectinate antennae are white dorsally. The eyes are normal size for a nocturnal moth, appearing hemispherical.
 
 This species is much larger than other tiger moths with similar scheme of dark and light forewings and red and black hindwings. However, it closely resembles the northerly *Arctia opulenta*, except in the fact that *Arctia caja* is larger and has larger eyes. Those of *A. opulenta* are reduced typical of day-flying species. The ranges of these species do not overlap.
 
-##### Larvae
+### Larvae
 
 Larva is densely covered with long hairs, orange at the head and along the lateral line, and black along the dorsum of the body.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is widely distributed across Canada, extending southward west of th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous plants such as vetches (*Vicia* spp.) in the Fabaceae and tansy ragwort (*Senecio jacobaea*) in the Asteraceae, but will also feed on low hardwood shrubs such as willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 *Arctia caja* is on the wing in mid to late summer. Most records are from mid July to the end of August. It is nocturnal and comes to lights.
 

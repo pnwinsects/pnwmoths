@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea cogitata* is a common, medium-sized moth (FW length 18–20 mm) that flies in forests and wetlands during the summer. It has dark red-brown forewings with light ochre filling of the reniform spot. The outer margin of the forewing is weakly scalloped. The forewing is even dark brick-red, slightly darker and grayer on the costa and near the outer margin. Some specimens have lighter orange-red or ochre distal to the reniform spot. The basal, antemedial, and postmedial lines are dark red-brown with slightly paler filling but are usually only evident on the costa where the filling is light gray. A faint dark median line parallels the postmedial line below the cell when evident. The subterminal line is powdery pale gray or ochre, irregular with a weak W-mark on M3 and CuA1. The fringe is concolorous. The orbicular spot is outline with dark red-brown and is faint. It is sometimes filled with a few pale scales. The reniform spot is kidney-shaped with slightly longer lower half, partially outline and filled with light to medium ochre scales and a thin gray central crescent. The claviform spot is dark red-brown, faint. The hindwing is tan-gray, darker gray toward the outer margin, with slightly darker gray discal spot and vein, and terminal line. The hindwing fringe is pale tan with a distinct pink tint. The head and thorax are dark red-brown. The male antenna is beaded.
 
@@ -22,11 +22,11 @@ This species is found in most of boreal and montane North America north of Mexic
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 The flight period of this moth is the summer. The flight season is fairly long, extending from early June to September, with a peak in July and early August. It is nocturnal and comes to lights.
 

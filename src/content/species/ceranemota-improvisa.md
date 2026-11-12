@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ceranemota improvisa* is a medium-sized *Ceranemota* (FW length 16 mm (n=2)) that flies west of the Cascade Range during late fall. Its forewings are banded greenish-gray and dark brown-gray. As in other species of this genus, the forewing has a slightly pointed apex and a convex, weakly scalloped outer margin. The ground color is medium gray with a slight green sheen, lightest throughout the median area and near the apex. The entire antemedial area and a band across the wing at the postmedial line are contrasting dark brown and charcoal, often with a brassy sheen. A short but thick basal dash is present. The antemedial and postmedial lines are compound, blackish gray surrounded by dark brown. The antemedial line is deeply undulating, drawn strongly toward the base in the fold, and the postmedial line is sinuous. The subterminal line is light gray, wavy, except black and sharply-defined near the apex. The terminal line is black. The fringe is gray with weak dark checkering. The orbicular spot is a black dot while the other spots are absent. The hindwing is medium brown gray with a faint gray discal spot and teraminal line. The hindwing fringe is lighter gray, sometimes with darker gray near the anterior margin. The collar is dark brown, and the tegulae are gray with black anterior and medial margins. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ This species is found in northern California to the south of our region. Most re
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on various hardwoods such as hawthorn (*Crataegus douglasii*) and various cherries (*Prunus* spp.) in the Rosaceae.
 
-##### Adults
+### Adults
 
 This species is single brooded and the adults fly in late fall from late September through November, with most records from October.  It is nocturnal and comes to light and sugar bait.
 

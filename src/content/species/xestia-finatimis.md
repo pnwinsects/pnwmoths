@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia finatimis* is a longitudinally streaked, light gray, medium-sized *Xestia* (FW length 14 - 19 mm) that flies in forests throughout the Pacific Northwest during the summer. It has areas of tan and reddish brown on the distal forewing. The forewings of both sexes are similar, light to medium gray with patches of light warm tan to reddish brown near the cell and on the distal forewing. Slightly darker patches of gray to red-brown are present in the terminal area opposite the cell and in the fold. The entire forewing is finely streaked due to dark veins and accentuation of the horizontal elements of the lines and spots. A thin black basal dash is present which appears long because it is fused with the anterior portion of the claviform spot. The transverse lines are obscure except at the costa where they form dark spots. The postmedial line is most evident as a series of long thin spots on the veins and as the slightly lighter filling between these spots. The gray median line is prominent across the wing, including in the reniform spot, in about half of all specimens. The hindwing is light brownish gray, darker gray toward the margin, with faintly darker discal spot and veins. The fringe is lighter and has a faint pink tint in some individuals. The head and thorax are similar to the forewing in color with horizontal barring across the distal collar and dark edges along the lateral tegulae. The male antenna is strongly biserrate.
 
@@ -26,11 +26,11 @@ This species is only found in California outside the Northwest. The range extend
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to feed on various hardwoods such as serviceberry (*Amelanchier* spp.) in the Rosaceae and alders (*Alnus* spp.) in the Betulaceae.
 
-##### Adults
+### Adults
 
 *Xestia finatimis* flies in summer and early fall, usually slightly earlier in the year than *X. infimatis*. Northwest records are from late July to mid-September. It is nocturnal and comes to lights.
 

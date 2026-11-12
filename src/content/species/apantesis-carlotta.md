@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis carlotta* is a medium-sized tiger moth (FW length 15 mm; *n* = 3) with relatively thick white forewing lines and reduced black hindwing markings that has been photographed once near Boise during August. The forewing is black with a simple pattern of broad creamy white veins and cross markings. Longitudinal white markings are adjacent to the costa, the cubital vein and branch CuA2, and the posterior margin. Transverse white marks are the end of the cell, strongly zigzagged subterminal line, and the fringe. The costal margin is black. The hindwing is pinkish red or orange-yellow, with black costa and relatively few marginal black patches. The head is creamy white. The thorax is creamy white dorsally, black ventrally. The collar is creamy white, occasionally with small paramedian black patches. The central dorsum and central tegulae are also black. The abdomen is black with the bright color of the hindwing dorsolaterally.
 
@@ -22,7 +22,7 @@ This is a widespread species in eastern and central North America, occurring on 
 
 ## Life History
 
-##### Adults
+### Adults
 
 The only record of this moth from our region is from mid-August. *Apantesis carlotta* is a nocturnal species that comes to light.
 

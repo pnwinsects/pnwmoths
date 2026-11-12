@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrotis vetusta* is a medium to large moth (FW length 16–20 mm) that flies in dry steppe and open pine forest habitats. It has a uniform, powdery light gray forewing and a pure white hindwing. The forewing is dull, light gray with a powdery appearance due to a sprinkling of dark scales. The terminal area is slightly darker in some individuals. The antemedial line is slightly darker gray and irregular in shape. The postmedial line is dentate with the lateral tips of the "teeth" darker gray than the rest of the line. The orbicular spot is a small gray dot, white the reniform spot is filled with sooty gray. It is usually poorly defined and varies between boomerang-shaped and kidney-shaped. The claviform spot is absent. The hindwing is pure white in both sexes. The head and thorax match the forewing ground color. The male antenna is biserrate with stout branched fasciculations.
 
@@ -24,11 +24,11 @@ This species is found from coast to coast in North America but is most widely di
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-burrowing cutworm that feeds on general herbaceous vegetation in such families as Fabaceae, Brassicaceae, Apiaceae, Chenopodiaceae, and Solanaceae.  It appears to prefer loose, sandy soils.
 
-##### Adults
+### Adults
 
 Adults have been collected from mid-July through the fall months but are most common in late August and September. This species is nocturnal and comes readily to lights.
 

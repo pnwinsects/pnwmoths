@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa ochrogaster* is a variable light yellow-brown, orange-brown, or red-brown medium-sized *Euxoa* (FW length 16–19 mm) that flies in variety of habitats throughout our region during the summer. It has several distinct forms that usually have pale ochre lining and dark gray filling of the reniform spot and dark gray terminal area. The forms can be divided into two basic types, one with a dark cell and light costa and one with more uniform color. The first form is warm light brown, lighter ochre-brown or orange-brown near the posterior margin, in the subterminal area, and at the apex. The costa is paler grayish ochre, lightest colored at the base, and the cubital vein is similarly pale to the reniform spot. The cell is filled with black, and there is a thick black basal dash. The terminal area is dark gray. The lines are relatively indistinct, usually evident as spots on the costa. In addition, the antemedial line is visible on the mid-forewing, the toothed postmedial line is evident as the transition between the darker median and lighter subterminal areas, and the sinuous subterminal line is light tan or ochre. The more solid forms are colored even red-brown, powdery gray-ochre, even orange-brown, or blackish brown with a red-tint. The transverse lines are more variably in this form, usually most prominent as double gray lines in the powdery gray-ochre form and relatively faint in the other colored forms. The terminal area is usually dark gray, and the pale subterminal line is evident. This line is often preceded by a dark gray spot on the costa, a gray to brown shade elsewhere, and occasionally by gray wedges on the mid-wing. The orbicular and reniform spots are partially outlined by dark gray outer and light ochre inner lines and are present in all forms. The orbicular spot is round or weakly oval, often lacks the outer dark line, but usually has central filling of the ground color or gray. The reniform spot is kidney-shaped, moderate-sized, and is more consistently filled with dark gray, darkest at the lower end. The claviform spot is black and prominent in the contrasty form with dark in the cell, but is absent or very weak in the evenly colored forms, The hindwing is pale gray-tan with darker gray on the outer third, veins, discal spot, and terminal line. The hindwing fringe is white with a striped ochre and gray base. The head and thorax match the forewing, red-brown, gray-ochre, orange-brown, or black-brown. A frontal tubercle is present. The male antenna is biserrate. *Euxoa ochrogaster* is placed in the large subgenus *Euxoa*.
 
@@ -28,11 +28,11 @@ This species has a Holarctic distribution and occurs across Eurasia to Scandinav
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation in such families as the Fabaceae, Asteraceae, Lamiaceae, and Brassicaceae.  During epidemic outbreaks, it may also cause major damage to grass crops (Poaceae).
 
-##### Adults
+### Adults
 
 Adults occur in late summer, most commonly from mid-July through August. They are nocturnal and come to lights.
 

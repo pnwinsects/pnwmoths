@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa bifasciata* is a very rare, medium-sized, pale gray moth (FW length 14–16 mm) with forewing markings limited to the black transverse lines. The forewing is relatively short and broad. It is nearly uniform tan-gray in color, slightly grayer in the terminal area, with a few scattered dark scales. The basal, antemedial, and postmedial lines are black. The inconspicuous basal line is short, positioned near the forewing base. The antemedial and postmedial lines are similar, toothed on the veins. The antemedial line is nearly perpendicular to the posterior margin. The median line is a dark mark on the costa. The postmedial line is bluntly curved around the reniform spot and oblique toward the base with a slightly concave segment below the spot. The subterminal line is pale gray or absent, slightly irregular. The terminal line is very faint. The fringe is gray with a thin ochre base. The orbicular and reniform spot are partially faintly outlined by thin gray line and are filled with light gray. The claviform spot is absent. The hindwing is tan-gray, slightly darker toward the margin, with dark veins. The hindwing fringe is white with an ochre and gray base. The head and thorax are tan-gray without dark markings. A frontal tubercle is present. The male antenna is biserrate. *Euxoa bifasciata* is a member of the subgenus *Euxoa*.
 
@@ -19,7 +19,7 @@ markings can vary significantly in some of the species, the shape of the
 sexes) are more constant. The habitat and flight period are also 
 important in helping to narrow the possibilities.
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -39,11 +39,11 @@ The range extends to Colorado, central Arizona, and southern California to the s
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil surface-feeding cutworm that feeds on herbaceous plants based upon related species.
 
-##### Adults
+### Adults
 
 Adults fly in mid-summer to late summer.
 

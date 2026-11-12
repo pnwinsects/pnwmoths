@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eurois* *nigra* is a large (FW length 22 - 26 mm), powdery, black moth that flies at middle to high elevations east of the Coast and Cascade Range crests during the summer with white markings and a gray hindwing with a silvery white margin. The forewing is slightly mottled powdery black and white, palest at the base and in the median area, and often showing warm ochre to orange patches. The transverse lines are black, double, with light gray filling. The basal and antemedial lines are most evident at the costa. The postmedial line is weakly scalloped, most evident in relatively pale specimens. The pale subterminal line is dentate and usually preceded by a black shade or series of black chevrons. The terminal line is a series of black triangles between the veins. A series of white dots are present at the ends of the veins at the base of the dark fringe. The hindwing is silvery medium gray, lightest at the margin, with diffuse dark gray discal spot, postmedial line, and wavy submarginal band. The hindwing fringe is silvery gray and is bordered by a thin dark gray terminal line. The head and thorax are dull charcoal gray with scattered white scales. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species has a more limited range than our two other *Eurois* species. It is
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on hardwoods based on related species.  Quaking aspen (*Populus tremuloides*) in the Salicaceae may be a favored foodplant based upon the habitat, although other hardwoods must also be used in the Cascades and Siskiyou Mountains where quaking aspen is rare or absent.
 
-##### Adults
+### Adults
 
 Adults fly in the summer, primarily in July and August in our region. They are nocturnal and come to lights.
 

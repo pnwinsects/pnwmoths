@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta leucocycla* is a small, day-flying moth (FW length 11 - 14 mm) that flies in the mountains of British Columbia in our region. It has gray to brown-gray forewings and banded, light yellow hindwings. The forewing is slightly mottled but otherwise nearly uniformly colored. The basal, antemedial, and postmedial lines are dark gray, double, and filled with a slightly lighter shade of the ground color. The antemedial line is moderately irregular. The postmedial line is serrate. A dark median line is usually evident. The subterminal line is indistinct, but its position is indicated by a row of dark chevrons between the veins medial to it. The orbicular spot is round and dark gray, filled with lighter gray and usually with a central dark ocellus. The reniform spot is dark, indistinct and filled with the ground color. The claviform spot is small. The hindwing is pale yellow marked with a chevron-shaped dark gray discal spot and sharply defined marginal band. The postmedial line is reduced to a series of spots on the veins. The hindwing fringe is white. The head and thorax are covered with a mixture of gray and white hair-like scales. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species has a Holarctic distribution. The Palaearctic populations occur fro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on herbaceous tundra vegetation such as *Dryas* spp. in the Rosaceae, *Saxifrag*a spp. in the Saxifragaceae, and dwarf arctic willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 This species is diurnal and visits flowers during the day. It is fond of the flowers of moss campion (*Silene acaulis*). The flight season is summer, with most records from our region from late June and July.
 

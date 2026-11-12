@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Datana californica* is a medium to large moth (FW length 19–25 mm) with smooth orange-brown forewings marked with three to four smoothly curved dark brown transverse lines.  The spots are usually obsolete, although about half of eastern specimens show dark brown orbicular and reniform spots. The forewing margin is slightly darker than the ground and are scalloped.  The hindwing is unmarked light yellow-brown.  The head and all but the lateral and posterior portions of the thorax are dark chestnut brown, sharply defined against adjacent lighter gray brown areas. The male antenna is serrate, while that of the female is simple.
 
@@ -26,11 +26,11 @@ This species is limited to western North America.  Outside of the Pacific North
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist on many hardwood trees and shrubs including the families Fagaceae, Betulaceae, and Rosaceae.
 
-##### Adults
+### Adults
 
 The adults are single brooded.  They are nocturnal and come to light.  Like other prominent moths they have vestigial mouth parts and do not feed. Pacific Northwest records span from late May to early August, with most records in late June and early July.
 

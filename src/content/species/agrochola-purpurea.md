@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrochola purpurea* is a common, fall-flying small to medium-sized moth (FW 14–17 mm) that flies on both sides of the Cascades during the fall. It has light to medium-dark orange-tan to reddish tan forewings with a gray spot in the lower reniform spot and a black mark on the costa near the apex. The forewing has a very weakly falcate apex. The ground color is variable as described above, often slightly darker along the trailing margin and less commonly suffused with gray diffusely or only in the subterminal area. The basal, antemedial, and postmedial lines area double, orange-brown, red-brown, or gray-brown and filled with the ground color, usually evident but not a dominant feature of the maculation but varying from faint to dark. The basal line is evident on the costa. The antemedial line is slightly angled toward the outer margin, focally convex toward the outer margin at each bend and more diffusely in the fold. The median line is orange-brown or gray, evident across the wing but varying from weak to very strong, extending through the anterior reniform spot and bent 90° at the lower end of the spot. The postmedial line is weakly scalloped, weakly and broadly excurved around the end of the reniform spot, perpendicular to the posterior margin below CuA2 and incurved at the margin. The subterminal line is pale, minimally irregular, preceded by a dark gray and black triangle or bar on the costa and a series of black spots between the veins elsewhere. The terminal line is a series of spots of a dark shade of the ground color. The fringe is orange-brown, usually slightly darker than the rest of the wing. The orbicular and reniform spots are orange-brown, moderately large. The orbicular spot is an angled oval, usually open anteriorly, filled with the ground color. The reniform spot is kidney-shaped or weakly hourglass-shaped and contains a diffuse dark gray spot in the lower third. The claviform spot is orange-brown, absent or weak, moderate in size when present. The hindwing including the fringe is pale pink-tan with a slight sheen, variable suffused with gray that is condensed into a submarginal band but spares the outer margin. The discal spot is gray and the terminal line is pink or gray, variable in strength. The head and thorax are uniformly of the ground color with a median crest on the anterior thorax. The base of the antenna is cream. The male antenna is weakly biserrate.
 
@@ -22,11 +22,11 @@ This moth occurs in California and in the Intermountain region outside of the Pa
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding on many kinds of herbaceous vegetation.  The larvae are particularly common on lupines (*Lupinus* spp.) in the Fabaceae.
 
-##### Adults
+### Adults
 
 This moth flies during the fall, most commonly from early September to mid-October. It is nocturnal and comes to lights. It also comes to sugar baits in eastern Washington.
 

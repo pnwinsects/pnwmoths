@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Mesogona subcuprea* is a moderate to large noctuid (FW length 18–21 mm) that flies in the western parts of our region during the fall. Its hindwings are shiny and copper-colored, and its broad forewings are uniform, dull, and golden-brown with scalloped margins, and often have a slight suffusion of gray scales that spares the veins. The basal, antemedial, and postmedial lines are similar, smooth, and comprised of continuous yellow-tan and gray interrupted components, with the gray portion of the antemedial and postmedial lines abutting the median area. The antemedial line is strongly angled toward the outer margin and is convex near the wing margins and concave on the mid-forewing. The postmedial line is nearly straight across the wing lateral to the reniform spot and is bent toward the base below the costa and on vein CuA1. The subterminal line is light, similar to the light component of the other lines, slightly irregular with a slight offset below the costa. It is preceded by gray wedges between the veins and a slightly larger triangular spot on the costa. The orbicular and reniform spots are similar, large and pale with slightly darker gray filling. The orbicular spot is a slanted oval. The reniform spot is kidney-shaped. The hindwing is copper-colored, sometimes with a faint gray discal spot and postmedial line but lacking significant gray suffusion. The head and thorax are uniformly of the forewing ground color. The male antennae is beadlike, nearly filiform. A rare form of this species has dark pink forewings (illustrated above).
 
@@ -24,11 +24,11 @@ This species is found throughout California to near the Mexico border west of th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on oaks (*Quercus* spp.) in the Fagaceae in Oregon.  In the Pacific Northwest, the primary larval foodplant is Oregon white oak (*Q. garryana*). The foodplant in Washington and British Columbia north of the range of oaks is unknown.
 
-##### Adults
+### Adults
 
 This species flies in the fall from late August through September. It is nocturnal and comes to lights. It has also been collected at bait consisting of fermenting fruit in Kittitas County, Washington.
 

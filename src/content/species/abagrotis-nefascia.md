@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis nefascia* is a distinctive, medium-sized species (FW length 14 - 16 mm) with bright orange-red to brick-red forewings marked by contrasting light blue-gray terminal area. The forewing is light orange toward the anterior margin and darker and grayer along the trailing margin and near the subterminal line. The transverse lines and spots are faint except where the lines meet the costa. The lines are slightly darker than the ground color and filled with slightly grayish scales. The orbicular and reniform spots are pale and are filled with the ground color or slightly darker. The claviform spot is absent. The hindwing is dark smoky gray with slightly darker gray discal spot and veins. The two-toned fringe is dark and light gray. The head and thorax are uniform, slightly lighter anteriorly in a few specimens, and match the forewing ground color. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is widely distributed in western North America but there are relati
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to feed on hardwoods such as serviceberry (*Amelanchier* spp.) in the Rosaceae and currents (*Ribes aureum*) in the Grossulariaceae.  It may also feed on bitterbrush (*Purshia tridentata*) in the Rosaceae based on the habitat.
 
-##### Adults
+### Adults
 
 This species has a long flight period and has been collected from mid-June through September in our region.
 

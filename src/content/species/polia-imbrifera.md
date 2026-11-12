@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Polia imbrifera* is a large (FW length 20 - 23 mm), dull, brownish-gray moth that is restricted to eastern British Columbia in our region. It has large, pale-filled forewing spots and a pale subterminal line usually preceded by two large triangular black spots. The wing is relatively short and broad with a scalloped outer margin. The color is powdery mottled brown gray with a slight olive cast, slightly lighter on the distal wing than elsewhere. The basal, antemedial, and postmedial lines are dark gray, double, and filled with slightly lighter than the ground color. The basal and antemedial lines are irregular, with the antemedial line oriented slightly oblique to the long axis of the wing. The postmedial line is evenly toothed on the veins, often with a series of dark spots on the veins lateral to the teeth. It is sharply drawn toward the base on the costa, gently curved toward the outer margin around the reniform spot, then nearly straight to the trailing margin. The subterminal line is pale, slightly yellowish, and preceded by a blackish shade that forms a spot on the costa and larger ill-defined triangles opposite the cell and in the fold (not prominent in the figured female specimen). The terminal line is a series of dark lunules that accentuate the scalloped margin. The fringe is the ground color. The orbicular and reniform spots are relatively large, outlined in thin black with a lighter inner line and filling of slightly lighter than the ground color. The orbicular spot is round, often with a small central ocellus. The reniform spot is weakly kidney or figure-eight shaped. The claviform spot is absent or a wide thin black loop. The hindwing is medium-dark brownish gray with darker gray postmedial line and submarginal shade, veins, weak discal spot, and distinct terminal line. The fringe is pale. The head and thorax are similar in color to the forewings, powdery, with a faint darker line near the tip of the collar and dark margins on the tegulae. A weak tuft is present on the anterior thorax. The eye is covered with fine hairs. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ The range of this species extends across boreal North America from the island of
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods, including the families Rosaceae, Betulaceae, and Salicaceae.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected in July in our region. They are nocturnal and come to lights.
 

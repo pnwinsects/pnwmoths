@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia suetus* is a small (FW length 11–13 mm), day-flying moth that flies in dry steppe and forests during spring and early summer. It has a rose-pink to gray-green forewing, a large reniform spot in a cream-colored median area, and a black hindwing with two white spots. The median area is cream with dusty blue-gray along the costa and trailing margin. The wing base proximal to the antemedial line and the subterminal area are variable, even dark rose pink to gray-green or a mixture of the two scale colors. The terminal area is lighter gray than the adjacent subterminal area and the fringe is similar anteriorly and lighter near the anal angle. The large ovoid reniform spot is the same color as the wing base and subterminal area. The lines are only evident as the interfaces between the different colors. The antemedial line is smoothly arced toward the outer margin, nearly forming a half-circle. The postmedial line is nearly straight lateral to the reniform spot, turns medially to touch the lower spot, and is straight across the posterior wing from the lower spot to the trailing margin. The subterminal line is smooth, weakly convex toward the outer margin. The ground color of the hindwing is nearly light cream, nearly white, reduced to two spots lateral and posterior to the black discal spot. The base, inner margin, and marginal band are black, broadly fused to the large quadrate discal spot. The hindwing fringe is white with a black base. The head and thorax are green-gray, sometimes with a slight rose tint. The eye is reduced in size. The male antenna is filiform.
 
@@ -26,11 +26,11 @@ This species is found throughout most of the western United States south of the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of *S. suetus* have been described by Hardwick (1996). The larva feeds on lupine (*Lupinus* ssp.) in the Fabaceae.
 
-##### Adults
+### Adults
 
 Adults are diurnal and visit flowers during the day. It flies predominantly during the spring, with records from late April to early July in our region.
 

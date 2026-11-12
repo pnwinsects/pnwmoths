@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Nedra hoeffleri* is a rarely collected, small moth (FW length 13 mm) that flies in the northern Rocky Mountain region during the summer. It has a streaked gray and blackish brown forewing with a white-rimmed reniform spot. The wing is short and stubby. The ground color is steel gray, heavily shaded with blackish brown on the posterior third, in the cell and adjoining central median area, and in the terminal area. Dark veins and black streaks between the veins are present on the distal wing. A long basal dash is white anteriorly and black posteriorly. A remnant of the median area forms a dark spot on the posterior margin. The subterminal line is evident as the transition between the gray subterminal area and the dark terminal area. It extends to the mid-margin as a broad W-mark on M3 and CuA1. The terminal line is a series of dots. The fringe is strongly checkered off-white and brown-black. The orbicular spot is a small pale oval. The reniform spot is moderately large, oval with short spike-like extension on M1 and M3, pure white with a kidney-shaped dark red-brown spot off-center towards the medial and anterior side. No claviform spot is evident. The hindwing is dark blackish gray, slightly paler brown-gray at the base, with a faint discal spot and pale gray-brown fringe. The head and thorax are dark gray-brown, with gray medial tegulae with dark brown along the wing bases. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ This species was described from Glacier National Park, Montana and has to our kn
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on *Hypericum* species in the Hypericaceae based upon related species.
 
-##### Adults
+### Adults
 
 The only specimen of this moth from our region was collected at blacklight during July.
 

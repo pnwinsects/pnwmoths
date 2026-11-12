@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea plutonia* is a very dark blackish brown medium-sized *Apamea* (FW length 16 - 17 mm) with the light outline of the reniform spot as the only prominent forewing marking. The forewing is dull slightly mottled blackish brown with indistinct darker lines and spots. A black line at the base of the trailing margin, a series of short black lines between the veins on the terminal wing, and a black spot in the subterminal area near the anal angle are evident in most specimens. Lighter brown filling of the double antemedial and postmedial line are evident in a few specimens. The orbicular spot is black, barely evident. The pale outline of the reniform spot is thickest laterally and forms the most prominent mark on the wing. The hindwings are medium gray with darker outer third, discal spot, and veins. The hindwing finge is two-toned gray, darker basally and lighter distally, with a slight red tint in a few specimens. The head and thorax are dark blackish brown with a black transverse band across the base of the collar. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends east across the boreal zone of North America t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 This species is single brooded with adults flying in the spring and early summer. Records in our region extend from early April to mid-July. It is nocturnal and comes to lights.
 

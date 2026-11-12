@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa subandera* is a rarely collected, small, brown *Euxoa* (FW length 12–15 mm) flies in dry habitats during the summer. Its forewing has fused orbicular and reniform spots and a pale costa. The forewing is gray-brown, slightly lighter gray along the posterior margin, at the apex, and in the distal subterminal area of some specimens. The costa is lighter gray or tan-gray, lightest near the base. The terminal area is dark gray. The cell and a thick basal dash are black. The veins are dark on the distal wing. The antemedial and postmedial lines are paired gray spots on the costa, absent elsewhere. The subterminal line is only evident as the uneven transition between the lighter subterminal and darker terminal areas, with a blunt pale W-mark along veins M3 and CuA1. The terminal line is dark. The fringe is gray. The orbicular and reniform spots are outlined in black and filled with light gray peripherally and the ground color centrally. The orbicular spot is very long, broadly fused to the kidney-shaped or D-shaped reniform spot. The claviform spot is black, weak. The hindwing is gray-brown in both sexes, with slightly darker discal spot, veins, and terminal line. The hindwing fringe is white with striped ochre and gray base. The head and thorax are gray-brown. The collar is finely striped gray, with a thick black transverse line. A frontal tubercle is present. The male antenna is weakly bipectinate. *Euxoa subandera* is a member of the large subgenus *Euxoa*.
 
@@ -22,11 +22,11 @@ The range of this species extends south through California, with additional reco
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies slightly earlier in the year than *E. hollemani*, beginning in late July and lasting to early September in our area. It is nocturnal and comes to lights.
 

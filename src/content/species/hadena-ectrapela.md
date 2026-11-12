@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hadena ectrapela* is the most common and widespread *Hadena* species in our region. It is a small to medium sized noctuid moth (FW length 13 - 15 mm) with medium to dark gray ground color and busy pattern of white and black lines and spots, dominated by an oval and slightly obliquely-oriented pale-filled orbicular spot and white subterminal line that forms a W-mark at the outer margin. The forewing is mottled gray or brownish gray with a light whitish patch in the central median area between the three spot. Light bluish gray is present in the subterminal area, almost always near the trailing margin and often opposite the cell. Similar blue-gray is often present in the terminal area, lightest at the apex and mid-wing at the W-mark. The wing is darkest preceding the subterminal line at the costal margin, usually condensed into a triangular black mark. A short black basal dash is present, often intermixed with broken lines of the basal line. The antemedial line is double with gray inner and black lateral components, slightly undulating with a broadly laterally convex portion from the cell to the fold. The median line is dark, usually evident except through the reniform spot. The postmedial line is double with black inner and gray outer parts and filled with light whitish gray on the posterior wing and the ground color anteriorly. The is lightly scalloped and excurved toward the margin around the reniform spot and oblique toward the base below the spot. The subterminal line is white, offset below the costa and then nearly straight except for a shallow W-mark on veins M3 and CuA1. The terminal line is a series of gray lines between the veins. The fringe is checkered white to medium gray and dark gray. The orbicular spot is thin and black in outline with a thicker inner white line and filling of light gray to ground color, moderately large and oval to slightly asymmetrically oval in shape. The reniform spot is similar but less prominent due to slightly darker filling and faint lower portion, kidney-shaped and touching the postmedial line. The claviform spot is black filled with the ground color, pointed at the apex, and variable in length from short to touching the postmedial line. The hindwing is medium-dark brownish gray with dark gray marginal band, discal spot, postmedial line, and a two-toned fringe that is gray at the base and white distally. The head and thorax are mottled gray-brown with thin transverse stripes on the collar and grizzled dark and light margins on the tegulae. The eye surface is hairy. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ This species is widespread in western North America. Outside of the Pacific Nort
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a foodplant specialist feeding on herbs of the pink family (Caryophyllaceae) such as *Silene* spp. based on closely related species.
 
-##### Adults
+### Adults
 
 *Hadena ectrapela* flies from late spring to summer depending on elevation. Records from our region span mid-May to late August, but most specimens are from early June to early August. This species is nocturnal and comes readily to light.
 

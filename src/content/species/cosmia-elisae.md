@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cosmia elisae* is a powdery pale gray, small to medium-sized moth (FW length 14–17 mm) that flies in coniferous forests east of the Coast and Cascade Mountain summits during late summer. It has black lines and a pale-filled, deeply indented reniform spot. The forewings are powdery medium gray with an even mixture of pale and dark scales, slightly darker in the subterminal area due to a broad gray shade at the subterminal line. The basal line is barely evident at the base of the wing. The antemedial line is thick, black, and slightly diffuse, slightly uneven, slanted 45° toward the outer margin or excurved. The dark gray to black postmedial line is thinner, weakly scalloped, broadly convex toward the outer margin and bent toward the posterior margin in the fold. A gray median line is barely evident in most specimens. The subterminal line is pale gray, uneven and diffuse, variable from faint to prominent. It is preceded by the aforementioned gray shade that is strongest on the costa. The orbicular and reniform spots are outlined in thin black and filled with whitish gray and a few darker central scales. The orbicular spot is round or weakly oval. The reniform spot is deeply indented on the lateral side producing a heart or boomerang shape. The claviform spot is small, dark gray to black. The hindwing is silvery light gray with darker gray in the submarginal area, with gray discal spot, veins, and terminal line. The hindwing fringe is white with a pale gray base. The head and thorax are powdery medium gray. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ The range of this species extends south from the Pacific Northwest and adjacent 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 *Cosmia elisae* is a foodplant specialist feeding on conifers (Pinaceae), predominantly Douglas fir (*Pseudotsuga menziesii*). A few records of larvae reared from white spruce (*Picea glauca*), western hemlock (*Tsuga heterophylla*), lodgepole pine (*Pinus contorta*), and balsam fir (*Abies balsamea*) are reported by Lafontaine and Troubridge (2003).
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies during the summer. Is has been collected most commonly during July and August in our region, with a few records from June and September. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea digitula* is a medium-sized clay-colored moth (FW length 16–19 mm) that flies in western Oregon and southwestern Oregon during the summer. Its forewings have rusty red-brown on the median area, a black basal dash, and large, pale-filled spots. The forewing margin is slightly scalloped. The color is clay - light tan-tinted gray - with variable red-brown suffusion that is most consistently present in the median area but can be more extensive on the base and in the subterminal area. The terminal area is similar to the rest of the wing, slightly grayer opposite the cell and in the fold. Fresh specimens have a slight greenish hue. A thick black basal dash is present. The lines are dark gray or black bordered by a pale shade of the ground color. The basal line is excurved. The antemedial line is waved, excurved, abutting the orbicular spot. The medial line is gray or red-brown, diffuse but usually evident. The postmedial line is weakly scalloped to toothed, touches the anterior and posterior reniform spot, is nearly straight lateral to the spot and weakly concave toward the base below the spot. The subterminal line is pale, weak or absent with a slight preceding gray or red-brown shade in some individuals. Black triangles between veins constitutes the terminal line. The fringe is slightly reddish gray. The orbicular and reniform spots are outlined in black, moderately large, and filled with the ground color. The former is round, often open anteriorly. The latter is moderately large, kidney-shaped. The claviform spot is black, small. The hindwing is pale tan-gray, gradually darker gray toward the margin, with gray discal spot, veins, faint postmedial line, and dark terminal line. The hindwing fringe is pale cream containing variable amounts of gray. The head and thorax are gray-tan to rusty. Dark tufts are present on several abdominal segments. The male antenna is beaded.
 
@@ -22,7 +22,7 @@ This moth is found along the West Coast of North America where it replaces *A. s
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is probably a climbing cutworm that feeds on many types of grasses (Poaceae) like the closely related *A. sordens*.
 

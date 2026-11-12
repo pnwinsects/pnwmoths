@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia verniloides* has the most limited range of the four similar species in the *Xestia infimatis* species-group and is only found in southwestern British Columbia and northwestern Washington. Like the other members of this species-group, it is medium-sized (FW length 16 - 19 mm). The forewing is light whitish gray to blue-gray without areas of warm colors, finely streaked due to thin dark veins and accentuation of the horizontal elements of the lines and spots. The terminal area is slightly darker opposite the cell and in the fold. The lines are obscure except at the costa and as a series of horizontal spots on the postmedial line marking the tips of the teeth. The orbicular spot is black, a long slightly oblique bar with lighter gray filling. The reniform spot is more obscure, often evident as the medial edge and darker gray filling, with the posteromedial margin drawn toward the wing base to overlap the lateral orbicular spot in some individuals. The hindwing is medium slightly brownish gray, darker on the distal wing, with a gray discal spot and whitish-gray fringe. The head and thorax match the forewing color with horizontal gray barring across the distal collar and dark edges on the tegulae. The male antenna is strongly biserrate.
 
@@ -26,11 +26,11 @@ This species does not occur outside our region.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on various hardwoods based on closely related species.
 
-##### Adults
+### Adults
 
 This species flies in August and is nocturnal.
 

@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hyphantria cunea*, the fall webworm, is a small to medium-sized (FW length 15 - 17 mm), nearly entirely white moth. Both fore- and hindwings are pure white, occasionally marked with one or two black spots along the postmedial line on the forewing and at the discal spot on the hindwing. The head, thorax, and abdomen are also white, but the femur and tibia of the foreleg are yellow and black. The bipectinate antennae are white dorsally with gray processes.
 
 This species can be differentiated from all other white moths by the combination of unmarked wings, white abdomen, and yellow forelegs. It is most similar to *Spilosoma congrua* and *S. virginica*.
 
-##### Larvae
+### Larvae
 
 Larva is black with red scoli or tubercles covered with tufts of long white hair, and is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is found throughout temperate portions of North America north of Me
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on a great variety of hardwood shrubs and trees, and is frequently a pest in fruit and nut orchards. The larvae are communal and live in a web at the tips of branches of their hostplant. These webs are more commonly observed than the adult.
 
-##### Adults
+### Adults
 
 *Hyphantria cunea* has been collected throughout summer but is most common in June and July. It is nocturnal and comes to light.
 

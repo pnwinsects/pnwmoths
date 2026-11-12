@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa biformata* is a moderately large *Euxoa* (FW length 18–20 mm) that flies along the east slope of the Cascades during late summer and fall. It has uniform, dark red-brown forewings marked with pale-lined orbicular and reniform spots and sexually dimorphic hindwings -- white with a gray marginal band in males, and darker gray in females. The forewing color is nearly uniform dark red-brown, slightly darker and grayer in the terminal area and in the adjoining distal subterminal area. The basal, antemedial, and postmedial lines are usually faint or absent except as double gray spots on the costa or as segments of the lighter filling. When strongly evident the antemedial line is double, gray, filled with a slightly paler and gray-tinted shade of the ground color, slightly irregular and angled weakly toward the outer margin. The median line is absent. The postmedial line is weakly toothed on the veins, drawn toward the base on the costa, smoothly excurved around the reniform spot, and straight or slightly concave at an oblique angle toward the base below the cell. The orbicular and reniform spots are weakly outlined in gray and peripherally lined with powdery pale yellow scales, filled with the ground color or a slightly darker and grayer shade thereof. The orbicular spot is small to moderate-sized, round. The reniform spot is kidney-shaped or boomerang-shaped, often filled with yellow across its mid-portion and darker gray in the lower end. The claviform spot is absent or evident as a few pale scales. The hindwing is pale whitish gray with a moderately well-demarcated marginal band on the outer third in males, with a similar pale base but more extensive gray in females. Dark gray veins, discal spot, and thin terminal line, and white fringe with a gray base are present in both sexes. The thorax matches the wing color, while the head is slightly more orange. The male antenna is weakly bipectinate with long fasciculations. *Euxoa biformata* is one of four species in the subgenus *Palaeoeuxoa*. This subgenus is characterized by the combination of spoon-shaped tips of the saccular extensions and harpes of equal or greater length in males.
 
@@ -33,11 +33,11 @@ The range of this species extends south in California to the Transverse Ranges i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The adults fly in late summer and fall, beginning in mid-July.
 

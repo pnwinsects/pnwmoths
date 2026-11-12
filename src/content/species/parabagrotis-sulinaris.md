@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Parabagrotis sulinaris* is the largest species in its genus (FW length 17 - 20 mm), and ranges from dull ochre to dark red-brown or orange brown with a light yellowish costa. Like the other members of *Parabagrotis,* it has an orbicular spot that is widely open toward the costa, often accentuated by black filling in the adjacent cell. The ground color is variable on a continuum from dull ochre to red-brown, including many shades of light reddish brown, uncommonly brighter orange-brown, and has a nearly unmarked light ochre to yellow-orange costa from the wing base to the postmedial line that is prominent in dark specimens but similar to the ground color in light ones. The subterminal line is preceded by a darker shade of the ground color and is often slightly streaked with dark along the veins. The terminal area is often slightly lighter than the rest of the wing. A black basal dash is variable in strength and usually ends at the antemedial line but appears to continue further laterally into the median area in specimens with a black claviform spot. The cell is black from the antemedial line to the reniform spot in most specimens, accentuating the pale spots, but is the ground color or weakly suffused with black in some specimens. The antemedial line is partially black, double, and filled with a slightly lighter shade of the ground. It is evident posterior to the light costa and is strongly obliqued across the forewing. The postmedial line is double and filled with a lighter shade of the ground, sometimes slightly gray, variable in strength, usually faint. The inner component is dentate and the teeth form a series of dark parallel marks lateral to the line in some individuals. The subterminal line is a series of pale spots or a pale line and is nearly straight or gently undulating. The orbicular spot is open toward the costa, semicircular or a more open "V." The reniform spot is faint with a thin dark outline and paler yellow inner line. Both spots are filled with a similar shade as the adjacent costa, occasionally grayer, lighter yellow in the orbicular spot than in the reniform spot. The claviform spot ranges from pale ochre, black and ochre, or black. The hindwing is medium gray with an ochre cast, slightly darker toward the margin with darker discal spot, veins, and a lighter gray two-toned fringe. The head and thorax are similar to the forewing ground except that the base of the collar matches the lighter costa and has a thin black stripe across its top. The male antenna is weakly beaded.
 
@@ -24,11 +24,11 @@ The range of this species is almost exclusively limited to the Pacific Northwest
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that appears to be a foodplant specialist feeding on grasses (Poaceae), and may favor the taller, coarser grasses
 
-##### Adults
+### Adults
 
 Adults have a long flight period and have been collected from early May to October in our region. They are nocturnal and come to lights.
 

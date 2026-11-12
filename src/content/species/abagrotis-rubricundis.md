@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis rubricundis* is a rare, medium-sized species (FW length 15 - 16 mm) that flies in southwestern Oregon during the late summer. It has red-brown to dull brick-red forewings marked by lighter cream-colored spots and with scattered gray scales, greatest in the terminal area. The double transverse lines are barely visible, except at the costa. A thin basal dash is visible in a few individuals. The tiny orbicular spot and ovoid reniform spot are filled with light yellowish scales and form the main elements of the forewing pattern. The claviform spot is absent. The hindwing is dark gray with barely evident discal spot and veins. The head and thorax match the forewings. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species is limited to northern and eastern portions of the Sie
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is suspected to be a foodplant specialist feeding on incense cedar (*Calocedrus decurrens*) in the Cupressaceae based on the habitat and closely related species.
 
-##### Adults
+### Adults
 
 Adults fly in late summer and early fall, with records at the end of August and early September. They are nocturnal and come to lights.
 

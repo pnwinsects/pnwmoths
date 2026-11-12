@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protogygia postera* flies the latest in the season of four streaky gray to brown *Protogygia* species with fused forewing orbicular and reniform spots. They are difficult to identify by appearance but can usually be sorted by combination of subtle features of the maculation, size, and flight period. *Protogygia postera* is relatively small (FW length 15 - 17 mm) and has a light gray brown dorsal forewing that is darkest in the margin and lacks dark transverse lines. It has a streaky look due to dark veins and lighter color near the veins. A few specimens have dark wedges between the veins near the margin, but these and a terminal line are usually lacking. A thin, black, basal dash is present. The light orbicular and reniform spots are filled with the ground color and surrounded by dark, especially toward the trailing margin. The orbilar spot is very long and weakly diamond-shaped, and the reniform spot is thin and arrowhead-shaped. The hindwings are nearly white in both sexes. The top of the head is gray-brown. The base of the thorax is light silver gray, separated from the gray-brown margin by a thin black transverse line. The rest of the thorax is gray-brown with gray margins to the tegulae. The male antenna is filiform with weak fasciculations.
 
@@ -24,11 +24,11 @@ This species reaches its northwestern limit in the Pacific Northwest. It is foun
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species flies during July and August, occasionally as late as September, later in the summer than the other similar *Protogygia* species in our region.
 

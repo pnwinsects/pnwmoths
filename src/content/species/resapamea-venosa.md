@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Resapamea venosa* is a medium-sized, light orange-brown moth (FW length 17 mm) that flies in western Oregon and Washington during the summer. It has a large, yellow, heart-shaped reniform spot and dark veins on the distal forewing. The forewing is suffused with slightly darker orange-brown to gray in the median area, darkest near the cubital vein, and on the costa in the subterminal area. The veins are usually dark gray to black beyond the postmedial line. The forewing lines are dark gray-brown, thin and well-defined with even spike-like teeth on the veins. The antemedial line is slightly excurved, drawn toward the base on the veins. A diffuse brown-gray median line extends across the wing with a bend below the cell. The postmedial line is drawn sharply toward the base on the costa, sometimes slightly concave from below the costa to M1 but otherwise evenly arched around the cell and angled toward the base below M3. The position of the undulating subterminal line is only evident due to a preceding orange-brown shade. The terminal line is thin, dark. The fringe is similar to the ground color, slightly grayer. The orbicular and reniform spots lack dark outlines and are evident as pale ochre filling. The orbicular spot is oval. The reniform spot is large, heart-shaped. The claviform spot is absent or a dark smudge. The hindwing is yellow-gray, suffused with gray that forms slightly darker discal spot, postmedial line, and submarginal band in some specimens. The hindwing fringe is dark ochre. The head and thorax are light orange-brown. The male antenna is weakly beaded.
 
@@ -24,11 +24,11 @@ The range of *R. venosa* extends south through western California to the vicinit
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it probably bores into the stems and roots of herbaceous plants based on closely related species.
 
-##### Adults
+### Adults
 
 The flight period of *R. venosa* is during the summer. Collection records from our region are from late June until mid-July. It is nocturnal and comes to lights.
 

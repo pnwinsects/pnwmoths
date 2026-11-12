@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria divergens* is a common, fairly large *Drasteria* (FW length 16–23 mm) with brown forewings and orange-yellow hindwings. The forewings are dark brown, lighter brown in the median area and light to dark brown or blue-gray in the terminal area. The transverse lines are double. The wavy antemedial line is filled with dark brown and is prominent, and the area between the postmedian line and subterminal line and the filling of the crescent-shaped reniform spot are similar. A prominent mark is produced by white along the lateral reniform spot and veins M3 and CuA1 from the inferior reniform spot to the laterally expanded postmedial line. The hindwing is orange-yellow, paler in populations from forested locales and deeper orange from steppe populations (see below). The hindwing markings are black. The reniform is elongate and is fused to the wavy postmedial line. The marginal band is bilobed, occasionally separated into two spots. The head and thorax match the forewing color. The antennae are ciliate in males and simple in females.
 
@@ -24,11 +24,11 @@ This species is widely distributed in the American West as far south as southern
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on elderberry (*Sambucus* spp.) in the Caprifoliaceae.
 
-##### Adults
+### Adults
 
 This species flies in late spring and summer. Pacific Northwest records are from late April through August, with most records in July. The moth is nocturnal and comes to light.
 

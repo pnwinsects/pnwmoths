@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia rivulosa* is a small moth (FW length 11 - 14 mm) that flies in the mountains of southern Oregon during late summer. It has alternating areas of gray and dark gray separated by smooth white lines. The median area is uniform powdery gray; the reniform spot is subtly darker gray. The wing base medial to the antemedial line and the subterminal area are powdery dark brown-gray.The terminal area is slightly lighter gray, but still darker than the median area. The antemedial, postmedial lines are gray, double with pure white filling. The antemedial line is smoothly arced toward the outer margin, apex just below the cell. The postmedial line is S-shaped, nearly straight across the wing from the costa to the level of the lower cell, then smoothly concave toward the wing base to the trailing margin. The subterminal line is pale gray, similar to the filling of the other lines, and smoothly curved parallel to the outer margin. The fringe is a mixture of light and dark scales or concolorous with the terminal area. The broad reniform spot is uniformly slightly darker than the median area. Other spots and lines are absent. The hindwing is dark brown-gray with faintly darker discal spot and marginal band. The hindwing fringe is light gray with a darker gray base. The head and thorax are even brown-gray, similar to the median area of the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species is eastern North America outside of the few Northwest 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae of this species feed on several species of ragweed (*Ambrosia* spp. in the Asteraceae) in Texas and Arizona.
 
-##### Adults
+### Adults
 
 The flight period of this species is late summer to early fall across its entire range. Hardwick (1996) states that most specimens are collected in August in the northern part of its range.
 

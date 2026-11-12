@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lycomorpha pholus* is an unmistakable day-flying orange and black medium-size erebid moth (FW length 13–15 mm) that occurs at the very eastern edge of the Pacific Northwest region during July. The entire moth is jet black with a slight sheen when fresh, except the basal third of the forewing, a smaller portion of the basal hindwing, and the thoracic tegulae are contrasting orange or reddish orange. The antennae are relatively thick and lack pectinations.
 
@@ -22,11 +22,11 @@ This moth is widespread in eastern and central North America from southern Canad
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva feeds on lichens like those of other species in the tribe Lithosiini.
 
-##### Adults
+### Adults
 
 Adults are diurnal and visit flowers. The flight period is summer, with the few PNW records from mid and late July.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa simulata* is a small to medium-sized, gray-tan *Euxoa* (FW length 14–17 mm) that flies at middle elevations during the summer. Its forewing usually has a warm yellow to orange cast, dark double lines and filling of the cell, light-filled spots, and a heart-shaped reniform spot. The forewing is relatively smooth with only a light sprinkling of darker scales. The costal subterminal area and terminal area other than the apex are darker gray, as is the filling of the cell. The basal and antemedial lines are dark gray to black and double, with components of similar strength, filled with the ground color, and slightly irregular. The antemedial line is nearly perpendicular to the posterior margin. The median line is dark gray, usually as dark as the other lines, narrow and irregular on the posterior forewing. The postmedial line is double with dark evenly toothed inner and faint, diffuse, and smooth outer components, drawn basad on the costa, laterally convex near the reniform spot, and angled slightly toward the base below the spot. The subterminal line is pale yellow-tan, slightly irregular with an offset below the apex and weak W-mark on M3 and CuA1. It is preceded by a dark gray shade that is strongest on the costa and mid-forewing, sometimes condensed into diffuse spots. The terminal is dark and either thin or a series of black spots. The fringe is concolorous with the terminal area. The orbicular and reniform spots are partially outlined in black, are moderately large, and are filled uniformly with light gray-tan. The orbicular spot is slightly oval, often open toward the costa and posterior margin. The reniform spot is heart-shaped with an asymmetric long lower end that extends to the postmedial line. The claviform spot is black, small or absent. The hindwing is brown-gray, with barely darker margin, veins, discal spot, and terminal line. The hindwing fringe is off-white with a darker base. The head and thorax match the forewing color, with a very weak black transverse line across the mid-collar. A frontal tubercle is present. The male antenna is biserrate. *Euxoa terrenus* is placed in the largest subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species is found predominantly west of the Rocky Mountains. The eastern lim
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies predominantly during the summer. Records from the Northwest extend from mid-June through mid-September. It is nocturnal and comes to lights.
 

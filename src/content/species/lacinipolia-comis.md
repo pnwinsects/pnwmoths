@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lacinipolia comis* is a small moth (FW length 12 - 14 mm) that flies in forests throughout the Pacific Northwest during the summer. It has a mottled, charcoal-gray forewing with a complex pattern of light greenish-gray or olive patches and spots, nearly always present in a light spot above the anal angle. The base medial to the antemedial line is lighter than the median area, especially in males. The median area is darkest charcoal gray. The subterminal area is lighter blue-gray, and the terminal area is mottled slightly darker gray. All of these areas are darker in females, which can be nearly entirely charcoal, except for lighter filling of the reniform spot and posterior subterminal area. The forewing is mottled, light yellow-green, light to dark olive, or rarely bright green, most prominently in the fold near the base and in the posterior subterminal area where it is associated with a light cream patch and bordered laterally by a black spot. A small black basal dash is present. Segments of the veins are black in the subterminal and terminal areas. The basal, antemedial, and postmedial lines are black and gray, darkest adjacent to the median area, filled with the ground color to pale gray, lightest near white in the posterior postmedial line. The antemedial line is smoothly convex with apex on the posterior third of the wing. The median line is dark gray, narrow and waved, evident in specimens with relatively light median areas. The postmedial line is slightly scalloped, drawn toward the base on the costa, nearly transverse across the anterior cell, and gently concave toward the base posterior to the cell to meet the trailing margin at a slight angle toward the base.  The subterminal line is pale light gray, uneven, preceded by a dark gray wedge at the costa. The fringe is weakly checkered blue-gray to dark gray, darkest at the dark spot above the anal angle. The orbicular and claviform spots are black, relatively inconspicuous. The orbicular spot is ovoid, filled with the ground color and a dark central ocellus. The claviform spot is small and thick. The reniform spot is kidney-shaped, bar-like, or weakly hourglass-shaped, filled with a white line peripherally and light to dark gray centrally and occasionally rusty brown. The hindwing is gray, slightly darker toward the outer margin, with a light gray fringe with a dark base. The head and thorax are dark gray with hoary light gray on the central tegulae. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is distributed near the West Coast of North America except in south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on various herbaceous plants in families such as the Asteraceae and Fabaceae.
 
-##### Adults
+### Adults
 
 The flight period of *L. comis* is summer. Most individuals are collected during July and August in our region, although a few occur as early as mid-June and others are found later in the fall. This species is nocturnal and comes to lights.
 

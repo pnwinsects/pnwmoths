@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa permixta* is an uncommon medium-sized *Euxoa* (FW length 14–17 mm) that flies in dry forests during the summer. It has a smooth light brown-gray forewing with thin black transverse lines, outlines of the spots, and a black line across the collar. The forewing is nearly even medium-dark gray-brown, minimally lighter in the terminal area and barely darker in the distal subterminal area. The basal, antemedial, and postmedial lines are black, double on the costa and single elsewhere, often faint or absent. When visible, the basal and antemedial lines are slightly irregular and oriented transveresely across the forewing. The medial line is absent. The postmedial line is weakly toothed, drawn sharply toward the base on the costa, angled toward the base and S-shaped elsewhere, slightly convex opposite the cell and concave below the reniform spot. The subterminal line is a barely evident transition in shade between the subterminal and terminal areas. A row of black spots comprises the terminal line. The orbicular and reniform spots are incompletly outlined by very thin black lines and are filled with the ground color. The orbicular spot is small, round or oval. The reniform spot is kidney-shaped. No trace of the claviform spot is evident. The hindwing is medium-dark tan-gray, slightly darker gray toward the margin, with slightly darker veins, discal spot, and terminal line. The fringe is white with a two toned ochre and gray base. The head and thorax match the forewing. A frontal tubercle is present. The male antenna is strongly biserrate with long fasciculations. *Euxoa permixta* is placed in the subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The range of this species extends south from our region to New Mexico, Utah, Nev
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 This species flies during the summer. Records from our region are from mid-June to early August. It is nocturnal and comes to lights.
 

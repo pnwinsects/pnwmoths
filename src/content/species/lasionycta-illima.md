@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta illima* is a small, day-flying species (FW length 12 - 13 mm) that flies in northern British Columbia in our region. It has a tan, blue-gray forewing and a pale yellow-white hindwing with a large, black discal spot and marginal line. The forewing is mottled blue-gray with warmer tan areas in the median area with gray lines and spots. The basal, antemedial, and postmedial lines are double, with filling of the ground color, but tend to be indistinct. The inner component of the postmedial line is serrate. The subterminal line is pale and indistinct, but its position is evident due to dark gray suffusion medial to it. The fringe is checkered with gray and black. The orbicular spot is round and filled with light gray and a dark central ocellus. The reniform spot is filled with the ground color and is inconspicuous. The small claviform is black. The dorsal hindwing is slightly yellowish-white with a large, black discal spot, thin scalloped postmedial line, and a broad, well-defined marginal band. The fringe is two-toned, gray basally and white distally, and weakly checkered. The ventral hindwing is yellowish-white with a thick black postmedial line, a large discal spot, and a gray marginal band. The head and thorax are covered with black and white hair-like scales. The eye is moderately reduced in size. The male antenna is weakly bipectinate.
 
@@ -22,11 +22,11 @@ The range of this species extends to central Alaska through southern Yukon Terri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in the summer during June and July. It is at least partially diurnal and has been collected during the day at Carcross, Yukon Territory by Andre Langois (personal communication, 2010).
 

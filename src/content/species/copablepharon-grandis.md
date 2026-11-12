@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon grandis* is a medium-sized moth (FW length 17 - 19 mm) with pale yellow forewings and white hindwings. The forewing postmedial line is marked by black dots on the veins in some specimens. The costa and fringe are identical to the ground color. The hindwing median line is also evident as black dots in some individuals, but there is no gray shading. The head and thorax are yellow, like the forewings, while the abdomen is light yellow-gray. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species has one of the widest distributions of any *Copablepharon* species.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is probably a burrowing cutworm that feeds on various herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in summer. The few Pacific Northwest records are from July. It is nocturnal and comes to lights.
 

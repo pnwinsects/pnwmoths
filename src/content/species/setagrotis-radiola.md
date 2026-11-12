@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Setagrotis radiola* is a distinctive, streaky, small to medium-sized noctuid moth (FW length 13 - 18 mm with larger males and smaller females) that is found in the dry interior of our region in late summer and fall. Its forewing has white-edged black veins against a gray-tan background. The streaking is further accentuated by a black basal dash, dark gray in the terminal area bordered by an irregular subterminal line, black wedges medial to the subterminal lines, a terminal line consisting of triangular spots, and dark gray in the cell. The transverse lines are absent except for gray spots at the costa. The orbicular spot is a small, pale dot. The reniform spot is a transverse pale line bordered by dark gray to black. The claviform spot is absent. The hindwing is white in males and light gray in females, with dark veins and thin terminal line. The hindwing fringe is two-toned, white with a light gray inner component. The head and most of the collar are light gray-tan; the tip of the collar is striped light gray and black. The thorax is gray-tan with dark gray and light gray stripes on the edges of the tegulae. The male antenna is biserrate.
 
@@ -22,11 +22,11 @@ The range of this species extends east to western North Dakota, western Nebraska
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but big sagebrush (*Artemisia tridentata*) in the Asteraceae is strongly suspected to be the larval foodplant based upon the close habitat association.
 
-##### Adults
+### Adults
 
 Adults fly in the fall and have been collected from late August to October in the Northwest. It is nocturnal and comes to lights.
 

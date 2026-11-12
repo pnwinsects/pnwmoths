@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Benjaminiola colorada* is a small to medium-sized moth (FW length 13–17 mm) that flies in desert wetlands during the fall. Its streaked, pale, tan forewing lacks other markings. The forewing apex is pointed, sometimes weakly hooked, and the outer margin is slightly scalloped posteriorly. The color is light tan with powdery light gray suffusion except in the cell, fold, and on the distal two-thirds of the trailing margin. The veins are pale whitish tan. A few specimens have black streaks between the distal veins on the mid-wing. The reniform spot is evident as a pale halo in some specimens, and a black dot is sometimes present at the posterior end of the cell. Other lines and spots are lacking. The hindwing is gray-tan off-white with a slight gray suffusion near the margin and a slightly lighter fringe. The head and thorax match the forewing color. The frons of the head is domed, about the size of the eye, with a slightly uneven surface. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ The range of this species encompasses the West Coast. It is found to southern Ca
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it probably bores into the stems of marsh grasses (Poaceae) and sedges (Cyperaceae) like related species.
 
-##### Adults
+### Adults
 
 This moth flies late in the season, predominantly in September with a few records from the end of August and beginning of October. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrotis vancouverensis* is one of the most common and variable noctuid species in the western portions of the Pacific Northwest, although it occurs further east in the mountains. It is a medium-sized moth (FW length 13–17 mm) with a red-brown, yellow-brown, gray-brown, or wood brown forewing with or without a long black mark comprised of the fused basal dash and claviform spot and black in the cell. Lighter-colored forms have a darker costa, usually dark reddish brown, and the terminal area is often darker gray-brown. The transverse lines are dark gray but usually inconspicuous. The antemedial line is irregular; when visible, it forms a long laterally directed loop at the trailing margin. The postmedial line is dentate, usually with the tips of the "teeth" slightly darker than the rest of the line. The subterminal line is usually a series of pale spots, often preceded by gray to black triangular spots. A black mark comprised of the fused basal dash and claviform spot is the most prominent mark on the forewing when present. The cell between the orbicular and reniform spots is black or of the ground color;  one or more black lines can also be present at the lateral border of the reniform spot in some individuals that also have black in the cell. The orbicular and reniform spots are black with slightly paler inner line and filling of the ground color. The orbicular spot is usually slightly oval. The reniform spot is moderate-sized, kidney-shaped. The hindwing is light to medium gray, slightly darker at the margin with a faint discal spot and nearly concolorous two-toned fringe. The head is rich orange-brown in all forms. However, the thorax is almost as variable as the forewing, either fairly uniform of the forewing ground color or variegated with pale-tipped collar and light areas on the central tegulae. The male antenna is bipectinate with stout fasciculations.
 
@@ -10,7 +10,7 @@ This variable species resembles several other *Agrotis species* with which it fl
 
 The type locality of *Agrotis vancouverensis* Grote is Vancouver Island. The following synonyms were also described from the Pacific Northwest: *Agrotis clodiana* Grote from Washington Territory, *Agrotis semiclarata* Grote from Washington Territory (by lectotype designation), *Agrotis agilis* Grote from Vancouver, and *Agrotis atha* Strecker from Seattle, Washington. Washed out forms of this species were called *Agrotis aeneipennis* Grote prior to the MONA revision (Lafontaine 2004). This name is now recognized as a synonym of *A. vancouverensis*.
 
-##### Larvae
+### Larvae
 
 Larva is smooth and pale gray with fine, black speckling.  It is illustrated by Lafontaine (2004).
 
@@ -30,11 +30,11 @@ This species is most commonly collected along the Pacific Coast from southwester
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-burrowing cutworm that feeds on herbaceous vegetation in such families as Rosaceae and Fabaceae.
 
-##### Adults
+### Adults
 
 This species has a long flight period with records from late April to early August in the Pacific Northwest. It is nocturnal and comes to lights.
 

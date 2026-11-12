@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis nanalis* is our smallest *Abagrotis* species (FW length 11 - 13 mm) and has a distinctive streaked pattern on a gray and tan forewing. It flies in sage steppe in late summer and fall. The forewing is grayish tan, lightest in the terminal area, with gray on the veins, near the trailing margin, preceding the subterminal line, and at the fringe. The transverse lines are faintly marked at the costa, and the lighter tan filling of the postmedial line is evident in most specimens. The spots are tan with gray filling, but are absent or barely evident in most individuals. The hindwing is light tan-gray with dark gray suffusion toward the margin, dark veins, and a light fringe. The head, collar, and tegulae are gray, while the central thorax is grayish tan.
 
@@ -22,11 +22,11 @@ The range of this species outside of our area extends east to the western portio
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on big sagebrush (*Artemisia tridentata*) in the Asteraceae.
 
-##### Adults
+### Adults
 
 Adults are on the wing in late summer. Most records from our region are from mid-August through September.
 

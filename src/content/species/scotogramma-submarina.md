@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Scotogramma submarina* is a rarely collected, small to
 medium-sized (FW length 14 -15 mm), powdery, light brownish-gray moth that occurs in southeastern Oregon in our region. Its
@@ -24,11 +24,11 @@ This species is found on the Great Plains and the Intermountain region. The rang
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 The adults of *S. submarina* are on the wing during the summer. They have been collected in July and August in our region. This species is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis ornata* is a very common, variably colored tiger moth found in late spring and early summer. It is medium-sized (FW length 16–20 mm). The forewing appears black, typically with a net-like pattern of extensive yellowish or rosy off-white transverse lines and thinner pale veins. The hindwing color is variable from yellow-orange, orange, to orange-red, rarely entirely black. The hindwing is heavily marked with black, including the basal wing, multiple spots, and an irregular marginal band. These are often fused to each other, especially near the wing margin.
 
@@ -8,7 +8,7 @@ This species demonstrates geographic variation in the Pacific Northwest. Moths f
 
 *Apantesis ornata* is unlikely to be confused with most other *Grammia* species because of its early flight season. It is most similar to the very rare *A. complicata* and *A. edwardsii*, which both have restricted ranges in the Pacific Northwest. Differences between these species and *A. ornata* are discussed under each of the other species.
 
-##### Larvae
+### Larvae
 
 Larva is covered with long black hairs dorsally and laterally, but has red hairs ventrally, and has a yellow-orange middorsal line.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This species occurs in western North America west of the Rocky Mountains. Outsid
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist that feeds on a wide variety of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 *Apantesis ornata* is single brooded and flies from late spring through July, earliest at lower elevations. Males are nocturnal and are common in light traps whereas females are never collected at light.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Idia aemula* is a common eastern species that is found rarely in the Pacific Northwest. It is small (FW length 10 - 14 mm) with nearly uniform, dull, medium-gray color. The forewings are traversed by thin, irregular, dark gray basal, antemedial, and postmedial lines, a more diffuse median line, and a pale subterminal line that is preceded by a dark shade. The reniform spot lacks dark outline but is prominent due to the warm ochre to orange-brown filling. The hindwing is similar to the forewing in ground color, with several wavy light and dark lines and a dark discal spot. The male antenna is biciliate while that of the female is simple.
 
@@ -22,11 +22,11 @@ This species has a broad distribution in North America. It is common and widespr
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is largely a detritivore feeding on dead leaves on the forest floor.
 
-##### Adults
+### Adults
 
 Adults are on the wing from early summer until fall. Pacific Northwest records are from mid June until mid September. It is nocturnal and comes to lights and sugar baits.
 

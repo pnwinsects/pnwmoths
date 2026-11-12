@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Parabagrotis formalis* is a medium-sized moth (FW length 15 - 17 mm) that is highly variable in both in pattern and color. Despite the variability, it can usually be recognized by the ochre-brown to tan-brown color, elongate orbicular spot that is open toward the costa, and heavy black bar at the top of the collar. The forewing ground color ranges from gray-ochre with a light gray or orange-brown costa, gray-brown to fawn, to dark gray-brown. The forewing is often mottled, especially the distal portion, but the the portions outside of the median area are not lighter due to a gray suffusion (as in *Parabagrotis exsertistigma*). The costa proximal to the end of the cell and the terminal area are usually lighter than the rest of the forewing. Most specimens have a short black basal dash. The cell is of the ground color or filled with black. The transverse lines are double with lighter filling, usually slightly darker than the ground color and inconspicuous but occasionally darker and contrasting. The lines are variable at the costa, usually faint or absent but occasionally evident as darker spots. The orbicular and reniform spots are variable, usually ochre with variable filling of the ground color or light to medium gray. The orbicular spot is widely splayed toward the costa such that the limbs form an obtuse angle with each other. The reniform spot is kidney or weakly figure-eight shaped. The claviform spot is variable, usually light ochre but often absent. The hindwing is brownish gray with darker margin and very faint discal spot and veins. The head and thorax usually match the forewing ground color, occasionally warmer orange-brown. The collar is striped with a light base and thick black "Groucho Marx" mustache across the top. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species also occurs throughout most of California south to the Los Angeles 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a climbing cutworm that feeds on grasses and herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 *Parabagrotis formalis* has a long flight season with records from our region from late April to the end of September. The phenogram is bimodal suggesting two broods, but it is also possible that the adults estivate through summer and re-emerge in late summer and fall. This species is nocturnal and comes to lights.
 

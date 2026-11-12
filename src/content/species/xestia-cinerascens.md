@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia cinerascens* is a fairly small *Xestia* (FW length 13 - 16 mm) with dull brown-gray forewings marked with darker spots and a shade across the distal forewing. The ground color is even, medium-dark brown-gray, with a slight red tint in some specimens. The transverse lines are thin and dark gray. The antemedial line is undulating, slightly obliqued away from the base at the posterior margin. The postmedial line is scalloped between the veins, drawn slightly toward the base at the costal margin and gently convex toward the outer margin elsewhere. The subterminal line is irregular, evident as the lateral margin of an even thickness dark shade which precedes it across the width of the forewing. The orbicular and reniform spots are similar, light with darker gray-brown filling. The claviform spot is absent. The fringe is similar to the wing in most specimens but distinctly reddish in some specimens with a similar flush across the wing. The hindwing is  dirty gray-brown, slightly darker toward the margin, with a similar color fringe and a barely evident discal spot. The head and thorax are similar to the ground color of the forewings. The male antenna is biserrate with long fasciculations.
 
@@ -24,11 +24,11 @@ This species has a fairly small range in the North American West. The only recor
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults fly predominantly in early fall, with most records from late August to mid-September. It is nocturnal and comes to lights.
 

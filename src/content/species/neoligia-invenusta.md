@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Neoligia invenusta* is a common small moth (FW length 10–11 mm) that flies in and near forests throughout the Northwest during the summer. It has a mottled, olive-gray or brownish gray forewing that is usually dark blackish-brown medial to the reniform spot. The entire wing is mottled. The ground color is medium-dark gray with a warm olive or brown tint. The wing basal to the reniform spot and posterior postmedial line is typically brown-black, sometimes with a slight reddish tint or nearly as light gray as the distal wing. The distal subterminal area is brown or dark gray, and terminal area are dark gray to black. Some specimens have an even nearly white subterminal area except on the costa, often with dark veins across it. A black median dash is usually present although often inconspicuous due to the adjacent dark wing color. The transverse lines are dark gray, double with filling of the ground color except lighter gray in the posterior postmedial line. When not obscured by the dark adjacent color the antemedial line is strongly arched toward the outer margin, apex at the fold. The basal and antemedial lines are gray, double, only clearly seen in specimens with lighter adjacent color, finely undulating and arched toward the lateral margin. The median line is dark gray or black, evident near the reniform spot. The postmedial line is lightly scalloped, faint around the reniform spot and darker and evenly concave toward the base below the spot. The subterminal line is gray or light tan, sinuous, focally drawn toward the base on M2 and in the fold. The fringe is dark gray, sometimes checkered with dark brown. The orbicular spot is round, usually filled with light gray, sometimes the dark adjacent color. The reniform spot is moderate-sized, outlined by a double gray line and filled with gray or whitish gray. The claviform spot is black, small. The hindwing is light to dark gray, darker toward the margin, with a dark thin terminal line. The hindwing fringe is two-toned gray. The head and thorax are dark gray to brown-black with a black transverse line across the distal collar and a brown patch on the posterior thorax. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range of this species extends south through California and the Intermountain
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species.
 
-##### Adults
+### Adults
 
 The flight season of *N. invenusta* is relatively long, beginning in mid-June and lasting until mid-September. It is nocturnal and comes to lights.
 

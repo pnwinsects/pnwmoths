@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Rivula propinqualis* is the only Pacific Northwest representative of the subfamily Rivulinae. It is a very small moth (FW length 9 - 10 mm) with pale yellow forewing that are slightly darker at the fringe. The most prominent mark is a dark patch surrounding the reniform spot and often extending to the adjacent costa. The reniform spot is only evident as two small black spots, one at each end. The thin, brown postmedial line is projected toward the apex and appears to form a long loop over the distal area of the forewing. The antemedial line is similar but usually only visible at the posterior margin. The hindwing is lighter, with traces of the postmedial line and a thin terminal line at the base of the fringe in dark specimens.
 
@@ -22,11 +22,11 @@ This species is also found in eastern North America where it occurs from souther
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species has been reported feeding on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults are found in mid to late summer. Our Pacific Northwest records are from July and August. It is nocturnal and comes to lights.
 

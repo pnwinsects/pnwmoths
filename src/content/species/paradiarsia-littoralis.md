@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Paradiarsia littoralis* is an ochre-brown to orange-brown, small to medium-sized moth (FW length 13 - 17 mm) that flies in wet forests in the northern and eastern parts of the Pacific Northwest. It has a bipectinate male antenna and a forewing with red-brown lines and spots and gray filling of the lower reniform spot. The forewing is smooth ochre to orange-brown with thin darker veins. The posterior margin, median shade, and area preceding the subterminal line are slightly darker orange-brown and a spot at the costa before the subterminal line is darker gray or red-brown. The transverse lines are orange-brown, single. The antemedial line is uneven while the postmedial line is smoothly convex toward the margin, sometimes slightly undulating near the reniform spot or slightly scalloped. The subterminal line is pale and slightly uneven. The spots are similar orange brown to gray. The orbicular spot is round to oval, filled with the ground color and a faint central ocellus. The reniform spot is filled with the ground color except the inferior portion which is gray. The claviform spot is faint or absent. The hindwing is dark gray with a contrasting ochre or red-brown fringe. The head and thorax match the forewing color. The male antenna is bipectinate.
 
@@ -22,11 +22,11 @@ This species occurs across the boreal North American Continent from eastern Alas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a broad generalist, and feeds on both hardwoods and herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults fly from late May to early August in our region and have a single generation per year. This species flies at night and comes to light. Females are much less commonly collected than males.
 

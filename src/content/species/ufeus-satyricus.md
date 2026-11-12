@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ufeus satyricus* is a smooth red-brown to brown moth that flies throughout our region in late fall and early spring. The medium-sized (FW length 16–18 mm) males have nearly unmarked forewings, and the larger females (FW length 18–21 mm) have black forewing lines and a streak through the cell. The ground color of both sexes is smooth medium-dark to dark red-brown, lightly glossy in fresh specimens. The transverse lines are faint, gray, more evident in females. Males are have a thin black basal dash and a similar black line across the terminal area between veins M1 and M2. Females are more extensively marked, with variable black in the cell and distal wing that can be limited to the cell, extend from the wing base to the reniform spot, from the end of the cell to the outer margin, or from the base to the outer margin. Additional black spots are present near the outer margin. The antemedial line is absent or gray, zigzagged on the veins. The postmedial line is darker gray than the other lines, toothed on the veins, broadly arched across the distal wing. The fringe is weakly checkered light brown and brown. The orbicular and reniform spots are evident due to surrounding black in females and are absent in males. The hindwing in males is smooth sooty gray, while that of the female is light brown-gray with darker discal spot and veins. The head and thorax match the wing in both sexes. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ The range of this species extends east to the Atlantic across boreal Canada. The
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae, including quaking aspen (*P. tremuloides*).
 
-##### Adults
+### Adults
 
 This species emerges from pupation during the fall and flies for several weeks prior to hibernating. It re-emerges in warm weather in early spring. It is likely that it overwinters prior to mating. This species flew at dusk during very cold fall weather in west-central British Columbia.
 

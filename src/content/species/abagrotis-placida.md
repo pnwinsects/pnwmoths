@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis placida* is small to medium-sized *Abagrotis* (FW length 14–16 mm) that occurs in forests throughout the Pacific Northwest. Its forewing has a wide range of colors, ranging from light to dark red-brown to gray-brown with a slight olive tint, and is marked with prominent lines and large spots. The forewing color is most often dark red-brown or olive gray-brown, but orange-brown and dark brown forms occur. The forewing is darkest median to the subterminal area and the terminal area is lighter and grayer than the rest of the forewing. The basal, antemedial, and postmedial lines are a dark shade of the ground color, double, and filled with similar light gray as the terminal area, less commonly slightly yellowish scales. All are usually evident in their entirety and are only slightly darker at the costa than elsewhere. The antemedial line is very smooth, nearly straight, and oriented obliquely from anteromedial to posterolateral across the forewing. The postmedial line is also very smooth, including the medial component which is only rarely scalloped. It is drawn toward the forewing base at the costa, is gently excurved toward the margin around the reniform spot, and then slightly obliqued toward the base through the fold. The median line is dark and is fairly prominent in almost all specimens. The subterminal line is slightly irregular, pale but fairly weak, evident mostly as the transition from dark to lighter gray. The orbicular and reniform spots are similar, light with filling that is slightly darker than the surrounding median area. The orbicular spot is fairly large, often round to broadly ovoid, and the reniform is weakly kidney or figure-eight shaped. The claviform spot is absent. The hindwing is medium dark brownish gray, becoming gradually darker gray to the margin, with a faint darker discal spot and two-toned gray and whitish fringe. The head and thorax match the forewing color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is widely distributed in boreal and montane forests in North Americ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on hardwoods based on related species.
 
-##### Adults
+### Adults
 
 Adults have been collected from early July through September in the Pacific Northwest but are most common in July and August, slightly earlier in the season than the peak flight periods of most other *Abagrotis* in our region. They are nocturnal and come to lights.
 

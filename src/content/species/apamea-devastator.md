@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea devastator* is a very common and nearly ubiquitous, medium-sized to large moth (FW length 17–21 mm) that flies throughout the summer. It has a dull brown forewing with a busy pattern of lines and spots that includes a light yellow subterminal line lacking a W-mark, with abutting strong black subterminal wedges. The forewing is fairly broad with a scalloped outer margin. The color is slightly medium-dark to dark mottled gray-brown or brown-gray, often slightly darker in the proximal and distal median area and almost alway in the distal subterminal area, especially on the costa. Some of the veins are powdery gray, especially near the anterior and posterior margins. A short black basal dash is usually present, and a similar mark is located near the posterior margin medial to the antemedial line. The basal and antemedial lines are gray and black, double filled with the ground color or a slightly lighter shade. The antemedial line is weakly excurved with slightly notches on the veins and a zigzag segment at the posterior margin. The median line is gray, diffuse, faint to dark. The postmedial line is scalloped and has variable strength of the two components, sometimes barely evident with the line evident as the paler filling, sometimes with black inner component and weaker absent to gray outer one. Dark and light spots are often present on the subterminal area veins near the tips of the teeth. The line is drawn toward the base on the costa, then smoothly curved around the reniform spot, and evenly angled toward the base past the spot. The subterminal line is light gray-brown or slightly yellow-tan, slightly irregular with an offset below the apex but lacking the typical W-mark on the mid-wing. Several strong black chevrons abut the line in the mid-subterminal area, and in some specimens the line is followed by a brown shade or brown lines between the veins. The terminal line is a series of black triangles that give the base of the fringe a serrated edge. The fringe is brown or dark gray with yellow-brown or brown lines across it at the ends of the veins. The moderately large orbicular and reniform spots are partially outlined in black on the outside with partial inner lining of light gray-tan to yellow-tan and central filling of the ground color. The orbicular spot is a tilted oval or quadrate shape. The reniform spot is kidney-shaped, sometimes elongated to the postmedial line at the posterior end. The claviform spot is black, relatively small. The hindwing is light grayish tan with a broad darker gray margin, discal spot, weak postmedial line, dark veins and thin terminal line. The hindwing fringe is white with a tan base. The head and thorax are medium-dark to dark gray-brown. Weak tufts are present on the posterior thorax and anterior abdominal segments. The male antenna is weakly biserrate or bead-like.
 
@@ -22,11 +22,11 @@ This species is found nearly throughout the Northwest as well as the rest of Bri
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on all types of grasses (Poaceae), but it appears to prefer courser grasses such as corn, wheat, barley, orchard grass, and reed canary grass.  During epidemic outbreaks, larvae will also feed on many types of herbaceous plants as well.
 
-##### Adults
+### Adults
 
 This species flies throughout the summer, first appearing in late May in our area and not becoming scarce until September. The flight peaks during July and August.
 

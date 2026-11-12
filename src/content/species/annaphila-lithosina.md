@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Annaphila
 lithosina* is
@@ -27,11 +27,11 @@ This species occurs in northern and western California outside of the Northwest.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larval foodplant is Spotted monkey flower (*Mimulus guttatus*, Scrophulariaceae).
 
-##### Adults
+### Adults
 
 The adults are on the wing during spring and early summer. The Oregon specimens were found during mid-May. This species is strictly diurnal with adults nectaring on such flowers as blue gilia (*Gilia capitata*) and snowbrush (*Ceanothus* spp.).
 

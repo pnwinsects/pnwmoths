@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Amphipoea lunata* is a small (FW length 12–13 mm), bright orange-brown moth that flies in southwestern Oregon during the summer. It has a bar-like white reniform spot and a gray oblique postmedial line below the cell. The orange-brown forewing color is even, subtly darkest in the median area. The distal median area is suffused lightly with gray in some specimens, and the terminal area is similar darker gray. An even darker gray spot is present on the costa before the subterminal line. The antemedial and postmedial lines are light gray. The antemedial line is arched from the lower cell to the posterior margin. The postmedial line is smoothly excurved around the end of the cell and then nearly straight at an oblique angle toward the base from near vein M2 to the trailing margin, gradually becoming wider on the lower wing. The subterminal line is pale on the costa and obsolete elsewhere, the position is evident due to a few ill-defined dark gray or black spots in the distal subterminal area. The terminal line and the distal veins in some specimens are dark, thin. The fringe is similar to the terminal area. The reniform spot is a white bar, slightly concave toward the base. The other spots are absent. The hindwing is pale orange tan with a dusting of darker orange-brown scales, a faint gray submarginal band in some specimens, and a thin dark terminal line at the base of the concolorous fringe. The head and thorax are orange-brown like the forewing. The male antenna is weakly biserrate.
 
@@ -22,11 +22,11 @@ The range of this moth extends south through most of California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it might bore into the roots of grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults of this moth fly during late spring and summer throughout its range. It has been collected during July in Oregon. It is nocturnal and comes to lights.
 

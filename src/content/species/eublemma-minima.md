@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Eublemma minima*, as the species name suggests, is one of our smallest species in the superfamily Noctuoidea (FW length 7 mm). The wing has a flange along the posterior margin, similar to those of some of our much larger species of prominent moths (family Notodontidae). The ground color of both wings is white. The forewing is suffused with medium dark brownish gray, heaviest in the median area and near the margin. The reniform spot is two small black dots, and there are additional black scales in the terminal area. The hindwing is peppered with darker scales, but the fringe is pure white. The head and thorax are white.
 
@@ -22,7 +22,7 @@ This species is widely distributed in the New World, occurring across the southe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on the flower buds of Asteraceae, particularly cudweed (*Gnaphalium*).
 

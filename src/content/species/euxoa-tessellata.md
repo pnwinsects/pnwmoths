@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa tessellata*, the Tessellate Dart Moth, also known as the Striped Cutworm, is a very common, small to medium-sized *Euxoa* (FW length 13–17 mm) that is found east of the Coast and Cascade Ranges and flies during the summer. It has a variable mottled blue-gray, blackish red-brown, or dark gray forewing with a slanted ovoid orbicular spot and broad reniform spot often lined with light ochre scales. The most common form in our region is mottled bluish or silvery gray, sometimes darker charcoal or brown-gray. Subtle yellow or red suffusion is sometimes present in the posterior median and subterminal areas. The terminal area is darker gray. Darker gray to black often fills the cell. A black dash is variably present, thickest in specimens with a black cell. Less common forms are more even medium to dark gray, or dark brown-gray. Dark brown forms with black in the cell are more common east of the Continental Divide. The basal and antemedial lines are dark gray or black, double filled with the ground color or slightly lighter gray. The basal line is evident on the costa and cubital vein. The antemedial line forms two diffuse spots on the costa and is irregular below the cubital vein, angled slightly toward the outer margin. The median line is gray, relatively faint. The postmedial line is gray, usually double with a darker weakly scalloped inner and faint even outer components, sometimes lacking the outer component, even in strength across the forewing, pulled toward the base on the costa, bent toward the base below the costa or bluntly excurved around the reniform spot and then angled strongly toward the base. The subterminal line is pale gray, often slightly yellow, thin, slightly irregular with an offset below the apex and a moderate "W" mark on the mid-forewing. It is preceded by a dark gray spot on the costa and a variable gray shade or series of small black wedges between the veins on the mid-wing. The terminal line is black, thin or a series of black triangles. The fringe is medium to dark gray, weakly barred. The orbicular and reniform spots are outlined partially in gray or black outer and variable light gray to ochre inner lines. The orbicular spot is variable in shape and size, typically an asymmetric oval or rhombus, sometimes circular, variably filled with pale gray or gray with an ocellus of the ground color. The reniform spot is broadly kidney-shaped, moderate-sized, lined with light gray, pale ochre, or light orange scales and filled with the ground color. The claviform spot is black, small. The hindwing is light gray, barely darker at the margin, with faint gray discal spot, veins, submarginal shade, and terminal line. The hindwing fringe is white with a gray base. The head and thorax are match the forewing color, often with a darker gray or brown base on the collar separated from the edge by a black transverse line. Males often have a bright orange or yellow patch at the attachment of the forewing. A frontal tubercle is present. The male antenna is biserrate. *Euxoa tessellata* is placed in the subgenus *Euxoa*.
 
@@ -26,11 +26,11 @@ This is one of the most widely distributed *Euxoa* species in North America. It 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This is a soil-surface feeding cutworm that feeds on general herbaceous vegetation in such families as Fabaceae, Brassicaceae, and Lamiaceae.  During epidemic outbreaks, it may also climb into fruit trees and cause considerable damage to orchards after devouring all herbaceous vegetation on the ground.
 
-##### Adults
+### Adults
 
 *Euxoa tessellata* flies during the summer, a fact that helps separate it from similar fall flying *Euxoa* species. Records in our region extend from early June to late August. It is nocturnal and comes to lights.
 

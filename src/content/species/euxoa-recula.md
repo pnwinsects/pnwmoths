@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa recula* is a common, small to medium-sized *Euxoa* (FW length 12–16 mm) that flies in sage steppe during the fall. It has a yellow forewing mottled with light to dark gray, and a white hindwing lightly suffused with gray in females. The ground color is light to medium-dark yellow or ochre, sometimes lightly suffused with burnt orange near the base and in the vicinity of the cell. Extensive light to heavy gray suffusion is present, darkest in the cell, on the costa in the subterminal area, and in the terminal area but also present at the base, distal to the reniform spot, between the cubital vein and CuA2, and along vein 1A+2A above the posterior margin. The costa and the cubital vein are similar yellow to silver-gray from the base to the reniform spot. The other veins are thin and dark, with light yellow or silvery gray alongside veins M3 and CuA1 from the medial subterminal area to the outer margin where they form a small "W" mark. A short basal dash is present. The basal line is gray, weak. An excurved black and yellow segment of the antemedial line is present on the mid-forewing at the base of the claviform spot, and a weaker segment of this line forms a lateral projection above the posterior margin in some specimens. No median line is present. The postmedial line is weak, evident as a curved transition from the dark median area to the yellow subterminal area distal to the cell and an angled series of dark gray to black spots below the reniform spot. The subterminal line is pale yellow, slightly irregular, offset below the apex and traversed by the light "W" mark, described above. It is preceded by a dark gray mark on the costa and several small gray wedges between veins on the posterior and mid-forewing. The terminal line is black, thin or a series of spots. The fringe is light yellow or gray with a yellow base. The orbicular and reniform spots are outlined in black, filled with the yellow ground color, rarely with darker gray-yellow central filling. The orbicular spot is small to moderate-sized, round or ovoid, open toward the costa. The reniform spot is kidney-shaped, obscured by the pale cubital vein at the lower end. The dark gray to black claviform spot is small to moderate-sized, thin. The hindwing and fringe are pure white in males; lightly suffused with light gray on the outer half in females. The hindwing fringe is white in both sexes. The head and thorax are a powdery mixture of yellow, tan, and dark gray. The collar has a light yellow base, a black transverse lines on the mid-portion, and fawn and dark gray edge. The edges of the tegulae are dark gray in dark specimens. A frontal tubercle is present. The male antenna is biserrate. *Euxoa recula* is placed in the subgenus *Euxoa*, the largest subgenus.
 
@@ -24,11 +24,11 @@ The range of this species extends south through Nevada and eastern California to
 
 ## Life History
 
-##### Larva
+### Larva
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation.  Outbreaks of this species have been observed on over-grazed rangelands infested by short, annual weedy mustards (Brassicaceae).  Larvae have also been found in cultivated crops of peppermint (Lamiaceae).
 
-##### Adults
+### Adults
 
 *Euxoa recula* flies in the late fall, usually in September to early October. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Metalectra bigallis* is fairly small (FW length 14 mm), mottled, dark brown moth with stubby rounded wings with lightly scalloped margins at the base of the fringe. Both forewings and hindwings have mottled, dark brown ground color with irregular poorly defined pale lines. The costa and filling of the reniform spot are darker sooty black on the forewing, and the large discal spot and surrounding wing base is similar blackish on the hindwing.
 
@@ -22,11 +22,11 @@ This is a western North American species that has been recorded from California 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species. Other members of the genus *Metalectra* feed predominantly on fungi.
 
-##### Adults
+### Adults
 
 This species has been collected from early June to mid October in the Pacific Northwest suggesting that it might have several broods. The adults are nocturnal and come to lights. The Yakima County, Washington specimens were collected at bait.
 

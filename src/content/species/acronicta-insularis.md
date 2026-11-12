@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Acronicta insularis* is a pale grayish tan, medium-sized moth (FW length 16 - 20 mm) that flies in wetlands in interior steppe throughout most of the collecting season. It has a white hindwing and a forewing with a longitudinally streaky pattern dominated by dark marks at the base and distal to the cell. The apex of the wing is slightly pointed. The streaked appearance is due to pale veins and pale streaks between the veins. The wing has slightly darker streaks at the apex, in the posterior cell, and trailing margin. A dark basal dash is separate from the cubital vein. A dash-like dark mark near the end of the cell is less distinct than the basal dash in most specimens. The spots and transverse lines are absent. The hindwing is usually white, rarely light gray with a pale fringe.
 
@@ -22,11 +22,11 @@ The range of *A. insularis* extends across the United States from Coast to Coast
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant generalist feeding on a wide variety of marsh vegetation such as cattails (*Typha* spp.) in the Typhaceae, sedges (*Carex* spp.) in the Cyperaceae, knotweed (*Polygonum* spp.) in the Polygonaceae, and willows (*Salix* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 The phenogram for *A. insularis* demonstrates a bimodal distribution with peaks in May and June and again in August suggesting that it is double-brooded in our area. This species is nocturnal and comes to lights.
 

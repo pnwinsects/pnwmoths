@@ -2,7 +2,7 @@
 
 
 
-##### Adults
+### Adults
 
 *Globia alameda* is a dark brown medium-sized moth (FW length 15 mm; females larger but not measured) that flies in wetlands in southeastern Oregon and southern Idaho during late summer. The forewing is uniform dark brown, sometimes with dark spots on the veins at the positions of the antemedial and postmedial lines but lacking all other markings. The hindwing is gray-tan suffused with darker gray toward the outer margin, with a gray fringe. The head and thorax match the forewing color. The abdomen is relatively long for the size of the wings. The male antenna is bead-like.
 
@@ -38,13 +38,13 @@ This species is found in California south of our region. It has been collected m
 
 
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it probably bores into the stems of bulrushes (*Scirpus* spp., Cyperaceae) and other wetland plants like related species.
 
 
 
-##### Adults
+### Adults
 
 The moths fly during late summer. They have been collected during late July and August in the Pacific Northwest, although they have been found from June to October elsewhere.
 

@@ -22,11 +22,11 @@ This species is restricted to Yukon Territory where it is known from fewer than 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larvae, like those of other *Apantesis* species, are likely to be general feeders on forbes. A larva of *A. yukona* was collected by L. Crabo in prairie habitat near Lac LaBerge on June 19, 1989. It pupated without feeding and hatched on July 14 the same year.
 
-##### Adults
+### Adults
 
 Adults are nocturnal. A male was collected in central Yukon at night by L. Crabo and M. Peterson in a malaise trap.
 

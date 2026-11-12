@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Homorthodes communis* is a common, small, orange to gray-tinted tan moth (FW length 10 - 13 mm) that is widely distributed in all but the most xeric habitats in our region and flies during the late summer. The forewing is short and appears to be bluntly rounded. The color is even slightly orange-tan, gray-tan east of the Cascades, with a slight gray cast in the distal subterminal area and the entire terminal area. The basal, antemedial, and postmedial lines are gray to dark gray, double with ground-color filling. The basal and antemedial lines are slightly irregular, oriented nearly perpendicular to the wing. The postmedial line is smoothly excurved with a long arc across the wing, toothed with the tips of the teeth accentuated to form a row of small dark gray spots. The median line is absent. The subterminal line is a light shade of the ground, smooth and nearly nearly parallel to the margin with slight bends near both margins. It is preceded by an even gray shade, sometimes separated into ill-defined spots between the veins. The terminal line is a series of gray spots. The fringe is concolorous with the rest of the wing. The orbicular spot is very faint gray, a perfect circle with similarly faint ocellus. The reniform spot is bar-like or weakly hourglass-shaped, also faint gray sometimes with a few white scales along the outline of the lower half, filled with the ground color and a dark gray spot in the lower third. The claviform spot is absent. The hindwing is gray-brown with a slight brassy sheen, gradually darker gray toward the margin, with gray discal spot and veins. The hindwing fringe is shiny gray-tan. The head and thorax match the forewing color without dark markings. The eye is covered with fine hairs. The male antenna is bead-like.
 
@@ -24,11 +24,11 @@ This species is found throughout the American West as far south as the southern 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on hardwoods, particularly alders (*Alnus* spp.) in the Betulaceae.
 
-##### Adults
+### Adults
 
 The adults have a fairly long flight period during the summer but are most common in August and early September. They are nocturnal and come to lights.
 

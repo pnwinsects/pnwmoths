@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Caradrina atrostriga* is a small, light tan-gray moth (FW length 12–14 mm) that flies in southern Idaho during late summer and fall. It has a black line through the cell medial to a "Z"-shaped reniform spot. The basal and median forewing is even tan-gray, becoming darker gray near the outer margin.  The transverse lines are indistinct except for the pale subterminal line. The fringe is concolorous with the terminal area. The orbicular spot is a long black dash, varying from faint to long and thick.  The reniform spot has a long basal extension from the lower end and a similar shorter extension lateral from the anterior aspect.  It is outlined in dark gray and filled with a dark shade of the ground color. The claviform spot is absent.  The hindwing is off-white with gray distal veins and ill-defined marginal band.  The hindwing fringe is mostly white, gray anteriorly.  The head and body are tan-gray.  The male antenna is filiform.
 
@@ -18,7 +18,7 @@ This moth flies in brush steppe and open juniper forest in our region, most comm
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of *C. atrostriga* are unknown.
 

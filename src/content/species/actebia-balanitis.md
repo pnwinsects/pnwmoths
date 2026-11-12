@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Actebia balanitis* is a fairly nondescript, brown-gray, medium-sized moth (FW length 16–19 mm). The forewing is somewhat elongated, although not as much as in *Actebia fennica*, and uniform medium dark dirty brown-gray with a slight sheen. The transverse lines are thin and black, usually double with slightly lighter filling; only the component nearest to the median area is evident in some specimens. The antemedial line is irregular, strongly zig-zagged, and oriented nearly transversely across the forewing, while the postmedial line is smoothly excurved with a strongly dentate medial portion and smoother outer portion. The median line is a dark shade, usually faint. The subterminal line is pale, often broken into a series of spots, preceded by a dark shade across the entire forewing. The orbicular and reniform spots are comprised of this outer black and inner luteous scales and are filled with the ground color. Both spots are usually similar to the lines in prominence. The orbicular spot is oval, usually complete, but sometimes open toward the costa, and sometimes has a dark central spot. The reniform spot is fairly large and is kidney-shaped. The claviform spot is absent. The hindwing is light gray with darker marginal shading and veins and a whitish-gray fringe. The head and thorax match the ground color of the wings. The head lacks a raised tubercle. The male antenna is filiform with short fasciculations.
 
@@ -24,11 +24,11 @@ This species is found in northwestern North America from northern Colorado, Nort
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on various herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 The adults are single-brooded and fly in summer and early fall. Pacific Northwest records are from late June to mid-September. It is nocturnal and comes to lights.
 

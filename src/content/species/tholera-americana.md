@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tholera americana* is a common small to medium-sized fall flying noctuid moth (FW length 13 - 17 mm) that flies in dry forests and steppe habitats during the fall. It has brown-gray forewings with white veins. The forewing color is slightly darker in the median area and in the lateral subterminal area abutting the postmedial line. The veins are white, extending into the fringe, although the portions in the subterminal area are black surrounded by pale scales. The antemedial and postmedial lines are black. The former is irregular, and the latter is drawn sharply toward the base at the costa and the rest is very weakly scalloped between the veins and oriented 45 degrees oblique across the wing. The pale subterminal line is smooth, parallel to the outer margin, and preceded by black wedge-shaped marks between the veins. A dark terminal line is present. The orbicular and reniform spots are black and filled with the ground color as well as darker gray centers. A long claviform spot is present the hindwing is pale whitish tan with a solid gray submarginal band and mottled outer margin, dark veins, a very faint discal spot, and postmedial line. The hindwing fringe is white with a light gray basal line. The head and central thorax are powdery brown-gray. The collar and tegulae are striped whitish gray, black, and tan. The eye is covered with fine hairs. The male antenna is strongly bipectinate, appearing feathery to the naked eye.
 
@@ -22,11 +22,11 @@ This species occurs in northern California and in the Great Plains outside of ou
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but all of the closely related species across Eurasia are specialists feeding on grasses (Poaceae).  Based upon the habitat, this species is probably a specialist feeding on native bunchgrasses.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in the fall. The records from our region are from late August and September. Adult moths have a vestigial probosis, and are one of the few noctuid moths that probably do not feed as adults. Males are nocturnal and come readily to lights; however, females are rarely collected in light traps.
 

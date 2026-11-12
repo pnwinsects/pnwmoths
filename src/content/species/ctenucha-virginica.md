@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ctenucha virginica* is a day-flying, predominantly eastern species which range extends to northeastern British Columbia. It is medium-sized (FW length 22 - 23 mm) with a striking orange head, black and metallic blue thorax, and metallic blue abdomen. The forewings are dark brownish gray with a slight sheen and white fringe. The hindwing is dull jet black with a mostly white fringe. The bipectinate antennae are black.
 
@@ -22,11 +22,11 @@ This species has a wide distribution in eastern North America from Labrador to P
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on grasses (Poaceae) and sedges (Cyperaceae).
 
-##### Adults
+### Adults
 
 The British Columbia specimens have been found in early July. It is predominantly diurnal but occasional specimens are found at lights. Covell (1984) states that it is double-brooded in the east.
 

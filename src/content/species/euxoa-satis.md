@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa satis* is a small to medium-sized *Euxoa* (FW length 13–17 mm) that flies from late spring through summer in a variety of forested habitats. It has a powdery, dark brown-black forewing with black markings that include an elliptical orbicular spot, often with pale, yellowish lining of the spots. The forewing color varies slightly from powdery charcoal gray to very dark brownish black, smooth or powdered with dark or pale scales. Uncommonly, there is a slight reddish or purple tint over the entire forewing. Some specimens with prominent yellow scales in the spots have yellow between the veins in the antemedial, subterminal, and terminal areas. The cell is often darker gray or black. The terminal area is usually not darker. The basal, antemedial lines, and subterminal lines are gray or black, double with strongest components abutting the median area, and filled with the ground color, (gray or powdery light yellow). The antemedial line is slightly irregular and angled slightly toward the outer margin. The median line is usually absent, occasionally faint. The postmedial line is evenly scalloped, drawn toward the base on the costa, narrowly excurved below the costa and then angled 45° toward the base to the posterior margin. The subterminal line is a pale shade of the ground color or yellowish, thin or broken into a series of spot, slightly irregular, preceded by a black shade on the costa and a black or dark brown shade or series of ill-defined black spots elsewhere. The terminal line is thin or a series of black spots. The orbicular and reniform spots are partially outlined in thin dark gray or black peripherally, are lined with pale gray or powdery light yellow, and are filled centrally with the ground color. The orbicular spot is moderately large, elliptical, often open toward the costa or both anteriorly and posteriorly, sometimes lacking a dark outline. The reniform spot is usually incomplete, strongest on the inner side or open anteriorly and posteriorly. A black claviform spot is present, lined with powdery yellow in specimens with strong similar filling of the other spots, and filled with the ground color. The hindwing is medium-dark brown-gray with darker gray margin, with dark veins, discal spot, and terminal line. The hindwing fringe is white with a gray base. The head and thorax match the forewing color with a thin to thick black line across the mid-collar. A frontal tubercle is present. The male antenna is biserrate. *Euxoa satis* is placed in the subgenus *Euxoa* and is a member of the *Euxoa* *infausta* species-group.
 
@@ -26,11 +26,11 @@ This species occurs in southwestern Alberta near to the Northwest. The range ext
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on general herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 Adults of *E. satis* are on the wing during the summer, usually from early June to late August. Most of the specimens found for this survey are from July to mid-August. They are nocturnal and come to lights.
 

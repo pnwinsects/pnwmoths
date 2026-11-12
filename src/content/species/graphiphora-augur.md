@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Graphiphora augur* is a dull, medium to dark gray-brown, medium-sized to large moth (FW length 19 - 22 mm) that flies in wet habitats during the summer. Its forewings have black spots and a postmedial line. The forewings are relatively broad and are smoothly colored, slightly darker near the outer margin, occasionally with a slight reddish tint. The basal and antemedial lines are absent or very faint gray. The postmedial line is dark gray, double with a strong dentate inner portion and a faint even outer part, and is filled with the ground color. The pale subterminal line is very faint or absent. The terminal line is absent or a faint series of spots between the veins. The orbicular spot is oval, and usually open toward the costa. The reniform spot is deeply indented laterally, thin except for the lateral indented portion which is the darkest forewing mark. The claviform spot is absent or very faint. The hindwing is medium gray-brown, slightly darker gray toward the margin, with faint darker gray discal spot and veins. The head and thorax match the forewing. The male antenna is weakly bead-like.
 
@@ -8,7 +8,7 @@ This species can usually be identified by its dull even dark brown color and lim
 
 The type locality of the synonym *Noctua inopinatus* Smith is Corfield, Vancouver [Island], [British Columbia].
 
-##### Larvae
+### Larvae
 
 The larva is smooth, pale gray with faint dorsal-lateral chevrons and a thin black lateral line.  It is illustrated by Lafontaine (1998).
 
@@ -28,11 +28,11 @@ This species has a Holarctic distribution. In North America it occurs across bor
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods including currants (*Ribes* spp.) in the Grossulariaceae, cherries (*Prunus* spp.), hawthorns (*Crataegus* spp.), *Rubus* spp., ocean-spray (*Holodiscus* spp.), and Indian-plum (*Osmaronia cerasiformis*) in the Rosaceae, birches (*Betula* spp.) in the Betulaceae, and willows (*Salix* spp.) in the Salicaceae.  It may have a preference for the Rosaceae.
 
-##### Adults
+### Adults
 
 Adults are on the wing during the summer, with most records from mid-June through August in our region. It is nocturnal and comes to lights.
 

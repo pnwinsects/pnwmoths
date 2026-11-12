@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Catocala meskei* is a large moth but a medium-sized underwing moth (FW length 32–35 mm) with two distinct forms. Both forms are powdery dull gray, lightest in the anterior medial area, particularly medial to the reniform spot. Form (or subspecies) *orion* is darker along the posterior wing, particularly in the fold. The basal, antemedial, postmedial, and subterminal lines are crisp and distinct, double, dark, with lighter filling. The antemedial line is strongly zig-zagged, slanted laterally from anterior to posterior. The postmedial line is bicuspid at the end of the cell, forms a hairpin loop to form the subreniform spot on the mid-wing, and has a horizontal dark black segment in the fold. The postmedial line is evenly zigzag across the wing, slightly excurved. The medial line is limited to a dark smudge at the anterior margin. The black terminal line is thin, black, slightly scalloped. The orbicular spot is poorly defined. The reniform spot is double, black, filled with the light gray of the adjacent medial area. The hindwing is relatively light, nearly salmon colored, with black typical black medial and marginal bands. The medial band ends without reaching the medial margin.
 
@@ -24,11 +24,11 @@ This species is found in a relatively narrow north-south distribution across cen
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva feeds on plants in the Salicaceae, particularly long-leaved willows (Salix spp.) (L. Gall, pers. comm.)
 
-##### Adults
+### Adults
 
 Adults of *C. meskei* fly during late summer and early fall. The only Pacific Northwest specimen was found in late August.
 

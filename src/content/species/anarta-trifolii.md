@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anarta trifolii*, the "nutmeg moth," is a very common dull, gray-tan, medium-sized moth (FW length 14 - 17 mm) that is found in a variety of habitats across the region. It has a variable forewing pattern that usually includes a large gray-filled reniform spot and pale subterminal line with a strong W-mark on the mid-forewing, and it has an off-white hindwing with a gray marginal band. The forewing color is light to medium gray-tan, slightly grayer on the costa and in the anterior subterminal area and darker gray in the terminal area except at the apex. The basal, antemedial, and postmedial lines are gray, double with filling of the ground color. These lines are relatively thin and faint, appearing mostly as mottling rather than lines. The basal line is zigzag near the wing base. The antemedial line is moderately irregular and is slightly slanted away from the base. The median line is faint gray, occasionally absent except on the costa. The postmedial line is weakly scalloped, drawn toward the base at the costa, rounded to square around the reniform spot and then slanted toward the base, touching the lower reniform spot. The subterminal line is pale yellow-brown to pale orange-brown, irregular near the costa, forming a strong W-mark on M3 and CuA1, and nearly straight elsewhere. It is preceded by a gray shade, sometimes with red-brown tints, from M1 to the trailing margin. The veins are often dark at the W-mark. The terminal line consists of dark gray spots between veins. The fringe is tan to gray, sometimes checkered with these colors. The orbicular and reniform spots are outlined in thin black. The orbicular spot is round, filled with the ground color to whitish gray and often with a gray central ocellus. The reniform spot is large, kidney-shaped, filled with the ground color and a dark blue-gray smudge centrally or inferiorly. The claviform spot is variable in size and strength, small to moderately large and thin with filling of the ground color to thicker black with dark gray filling. The hindwing is gray-tan off-white with a moderately well-defined marginal band that is interrupted by a band of the pale ground color near the anal angle. The faint discal spot and veins are dark gray. The fringe is lighter white than the ground, often with a gray-tan base. The head and thorax are powdery gray-tan with thin transverse lines on the collar and edges of the tegulae. The eye is covered with fine hairs. The male antenna is filiform. The frons is smooth. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is found in Eurasia as well as in North America. It is widespread i
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation, although it appears to prefer herbs in the family Chenopodiaceae.  However, it also heavily damages herbaceous crops in the families Asteraceae, Fabaceae, and Brassicaceae.  During epidemic outbreaks, larvae may even defoliate woody shrubs.
 
-##### Adults
+### Adults
 
 This species has a very light flight season and has been collected from spring to fall in our area suggesting the presence of multiple broods. It is most commonly collected during the summer in July and August.
 

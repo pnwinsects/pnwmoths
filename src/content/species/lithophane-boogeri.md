@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lithophane boogeri* is a streaky gray medium-sized moth (FW length 18–20 mm) that flies in association with western juniper (*Juniperus occidentalis*) in the dry interior of Oregon. The ground color is medium-dark gray, some specimens with slightly darker gray shading near the basal dash, in the median area, and in the terminal area opposite the cell and in the fold. A black basal dash is often present and a median dash or bar is a more constant mark. The transverse lines are jagged but obscure, blending with dark lines on the veins. A diffuse gray median line is evident in most specimens. Dark specimens have a terminal line consisting of ill-defined dark spots between the veins. The spots are faint. The orbicular spot is oblong and filled with the ground color. The reniform spot is figure-eight-shaped, mostly very faint and filled with the ground color, but the posterior part is pale-filled and drawn toward the base of the wing. The hindwing is medium brown-gray with a similar color fringe and darker gray smudgy discal spot and thin terminal line. The head and thorax are gray. The central thorax and edge of the collar are raised to form tufts. The male antenna is bead-like.
 
@@ -8,7 +8,7 @@ This species is a member of the *Lithophane lemmeri* species-group, all juniper 
 
 The type locality of *Lithophane boogeri* Troubridge is USA, Oregon, Deschutes County, Barr Rd., 6 mi N Tumalo. This species was named after Jim Troubridge's cat.
 
-##### Larvae
+### Larvae
 
 Larva is green with irregular mottled white subdorsal and lateral bands.  It is illustrated by Miller & Hammond (2003) under the name of *Lithophane longior*.
 
@@ -28,11 +28,11 @@ This species has only been collected in Oregon and Idaho but may occur in Califo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on western juniper (*Juniperus occidentalis* in the Cupressaceae).  It may also be partly carnivorous, feeding on insects and other caterpillars.
 
-##### Adults
+### Adults
 
 This species has been collected in the early spring during March and April in Oregon. Like other *Lithophane* species it emerges in the fall and passes the winter as an adult prior to emerging again in the spring. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrochola lota* is a medium-size recently-introduced Eurasian noctuid moth (FW length 15 mm) with dark red and pale ochre subterminal line on a uniform yellowish, reddish, or purplish gray forewing that flies in southwestern British Columbia and adjacent Washington during late fall. The forewing color is even, variably tinted yellowish, reddish, purplish, or lead gray, darker along the costa and outer margin and lighter in the terminal area. The most common colors in the Pacific Northwest is slightly purplish gray or lead gray, but reddish or yellow forms are known. The basal, antemedial and postmedial lines are nearly obsolete, evident only on the costa or as thin black lines on the veins. The medial line variable, absent to sooty gray. In contrast, the subterminal line is prominent, nearly straight, with dark red inner and ochre outer components. The terminal line is a series of sooty dots between veins. The fringe is sooty gray with thin ochre base. The orbicular and reniform spots outlines are thin gray, black, or dark red. Both spots are filled with the ground color, except black in the lower reniform spot. The orbicular spot is round or slightly ovoid. The reniform is an upright oval with straight medial and lateral sides. The hindwing is lustrous orange tan with gray veins and discal spot, and extensive gray shading between veins and near the distal margin. The head and thorax are uniform dark gray. The male antenna is filiform, densely ciliate ventrally.
 
@@ -22,11 +22,11 @@ This species is introduced to North America from Eurasia, most likely Europe. It
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva feeds on a variety of hardwood trees and shrubs, preferring willow (*Salix* spp. (Salicaceae)) and alder (*Alnus* spp. (Betulaceae)).
 
-##### Adults
+### Adults
 
 Adults of *A. lota* are one of the latest-flying noctuids. Fresh specimens are routinely observed in October and November.
 

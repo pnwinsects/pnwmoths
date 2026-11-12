@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Perigonica tertia* is a medium-sized (FW length 17 – 19 mm), orange-brown moth that flies in oak forests during the spring. It has an angulated forewing outer margin and wide bipectinate male antenna. The forewing is medium-dark orange-brown with variable dark mottling. The outer margin is pointed at the apex, on vein M3, and weakly on CuA2. The veins are slightly lighter on the distal wing in some specimens. The forewing lines are similar dark with slightly lighter filling than the ground color. The basal and antemedial lines are fairly inconspicuous, but the postmedial line is more prominent and is followed by a series of double dark spots on the veins in most dark specimens and some lighter individuals. The shape of the postmedial line is undulating lateral to the reniform spot and weakly concave toward the base posterior to the spot. The pale subterminal line is complete and is slightly irregular, often weakly zig-zag across the distal wing. The median line is usually absent, but is weakly evident as a gray to dark orange-brown line at the costa in some specimens. The terminal line is a series of gray spots between the veins. The fringe is orange-brown and gray. The orbicular and reniform spots are light. The circular orbicular spot is usually filled with the ground color, less often gray. The kidney-shaped reniform spot is more often filled with gray and less often with the ground. The claviform spot is absent. The hindwing is light whitish gray with dark gray suffusion on the outer third, dark gray small discal spot and thin terminal line, and a whitish to light orange fringe. The head and thorax are uniform colored similar to the forewing, without interspersed dark gray scales. The eye is covered with fine hairs. The male antenna is strongly bipectinate.
 
@@ -22,11 +22,11 @@ The range of *P. tertia* extends south to the Mexican border through California.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on deciduous oaks (*Quercus* spp.) in the Fagaceae.  In the Pacific Northwest, the primary larval foodplant in Oregon white oak (*Q. garryana*).
 
-##### Adults
+### Adults
 
 The adults are single brooded and fly during the spring. They have been collected during March, April, and May in our region. This species is nocturnal and comes to lights.
 

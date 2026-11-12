@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrotis longicornis* is a small to medium-sized moth (FW length 14 - 17 mm) that flies in sand habitats of southeastern Oregon during early summer. It has a warm orange-tan forewing marked with silver-gray and black, and a wide, bipectinate male antenna. The forewing is gray-orange with lighter silver-gray along the costa. The medial subterminal area is lighter gray-tan. The lines are dark gray, with silver gray filling on the side opposite the median area. The antemedial line is irregular with a prominent lateral loop near the trailing margin. The postmedial line is dentate, laterally convex near the cell and then oblique toward the base to the trailing margin. The pale subterminal line is preceded by ill-defined gray spots. The orbicular and reniform spots are black with pale filling. The orbicular spot is a small oval, entirely filled with silver gray. The orbicular spot is filled with similar gray medially and the ground color laterally. The claviform is small and black. The hindwing is light gray with a tan tint. The discal spot and veins are faintly darker and the fringe is lighter. The head and collar are uniform light tan-gray. The tegulae are lighter with dark gray and tan margins. The central thorax is light gray-brown. The male antenna is widely bipectinate, 7X as wide as the central shaft.
 
@@ -24,11 +24,11 @@ This species has been found in south-central and south-eastern Oregon in our reg
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are on the wing in late spring and early summer. Our Pacific Northwest records are from late May to mid-June.
 

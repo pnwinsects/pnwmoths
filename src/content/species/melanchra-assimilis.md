@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Melanchra assimilis* is a nearly black medium-sized noctuid moth (FW length 16 mm) with forewings dominated by a "squiggly" white spot at the anal angle. The forewing, including the filling of the spots and fringe, is even brownish-black. The antemedial and postmedial lines are thin, single, and black. The antemedial line is mildly irregular and oriented straight across the wing. The postmedial line is evenly scalloped between veins, convex toward the outer margin around the reniform spot and then straight to the the trailing margin. The postmedial line is a series of small yellow dots preceded by black wedge-shaped marks between the veins except at the trailing margin where it forms a white to light yellow V-shaped or serpentine mark. The forewing spots are similar to the lines, thin and black without pale scales. The orbicular spot is oval, the reniform spot is kidney-shaped, and the claviform is a broad loop. The hindwing is pale whitish gray with a dark gray marginal band, fairly large discal spot, and veins. Its fringe is two-toned gray with an inner gray line, lighter whitish near the anal angle. The head and thorax are even dark brownish black. The eye surface is covered with fine hairs. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is more widely distributed in eastern North America. The range exte
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a generalist. Covell (1984) lists a variety of ferns, forbs and broad-leaved woody shrubs and trees as foodplants.
 
-##### Adults
+### Adults
 
 Adults fly during the summer. The only Pacific Northwest records are from July, but it likely also flies earlier in June in our region.
 

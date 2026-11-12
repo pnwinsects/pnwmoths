@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa castanea* is a small to medium-sized *Euxoa* (FW length 14–17 mm) that flies in forests during the summer. It has dark, warm brown forewings, an ochre costal margin, and whitish-gray cubital vein and lining of the spots. The forewing is dark brown, slightly lighter warm wood-brown along the posterior wing and in the subterminal area and darker brown to black in and near the cell. The apex is gray in some specimens and the rest of the terminal area is dark gray. The costa is ochre yellow, fading before the postmedial line. A thick black basal dash appears to be fused to the base of the claviform in some specimens. The cubital vein is whitish gray to the reniform spot. The ordinary transverse lines are very weak. Most specimens show portions of the gray antemedial and postmedial lines. The antemedial line is present posterior to the cell, uneven and angled slightly toward the outer margin. The smooth or lightly scalloped postmedial line is evenly curved around the reniform spot and then nearly straight or slightly concave at a 45° angle toward the base. The subterminal line is light orange-tan to tan, powdery and often incomplete, slightly irregular with an offset below the apex and a weak W-mark on the mid-forewing. It is preceded by a grayshade at the costa and usually a series of small black wedges on the mid-wing. The terminal line is dark, thin. The fringe matches the terminal area. The orbicular and reniform spots are outlined in dark gray and are lined with light gray to ochre. The orbicular spot is oval, small to moderate in size, open anteriorly, usually with slightly or much darker center. The reniform spot is kidney-shaped, filled with darker than the orbicular spot. The claviform spot is black, small to moderate-sized, narrow, appearing fused to the basal dash in some specimens. The hindwing is medium-dark gray with darker outer half, discal spot, veins, and terminal line. The fringe is light gray with a darker base. The head and thorax are dark brown. The base of the collar matches the costa, silver-gray or ochre, bordered with a distinct black line. A frontal tubercle is present. The male antenna is widely biserrate. *Euxoa castanea* is a member of the subgenus *Euxoa*.
 
@@ -37,11 +37,11 @@ The range of this species is mostly to the east of the range of *Euxoa costata* 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species flies during the summer and has been collected in July and August in the Pacific Northwest. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea siskiyou* is a medium-sized to large moth (FW length of 18–21 mm) that flies in west-coast prairies and open forests during early summer. It usually has a dark brown forewing with a large, thin, light tan W-mark on the distal wing. The outer margin is usually slightly scalloped. The most common form has a slightly mottled dark brown or gray-brown forewing, slightly lighter yellow-brown distal to the reniform spot and at the apex. A thin black basal dash is present, and a similar black mark is present above the posterior margin near the base. A dark shade often extends across the median area in the fold. The terminal area is dark gray, broken into two patches by the subterminal area at the W-mark of the subterminal line. The basal, antemedial, and postmedial lines are darkbrown, double with filling of the ground color or lighter shade thereof. The lines are indistinct and partially absent except in the lightest individuals; however, a slanted black and light gray segment of the postmedial line in the fold is a prominent mark at the tip of the claviform spot. The tan subterminal line is incomplete, visible near the apex where it is offset, and prominently at the thin, even, and sharply-pointed W-mark on M3 and CuA1, forming a prominent mark in dark individuals. The dark-spotted terminal line is inconspicuous. The fringe is dark brown, often checkered with lighter brown. The orbicular and reniform spots are partially outlined in dark brown and light yellow-brown. The orbicular spot is elongate, oval or bar-like, filled centrally with a dark brown line. The reniform spot is hourglass-shaped, usually entirely filled with dark although only the lower part is dark in light specimens. The claviform spot is black to brown, usually reaching the postmedial line. A lighter form of this species occurs uncommonly with dark populations. It is light brown with more mottled pattern and more conspicuous lines and spots. The hindwing is medium-dark gray with darker gray veins, discal spot, and terminal line. The hindwing fringe is light tan. The head and thorax are brown with slightly darker brown near the edges of the collar and tegulae. The male antenna is beaded.
 
@@ -24,11 +24,11 @@ This species has a limited range on the West Coast of North America. The distrib
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on native bunchgrasses in the Poaceae based upon the habitat.
 
-##### Adults
+### Adults
 
 Adults fly from May to early July and have been collected most commonly during June in our area. They are nocturnal and come to lights..
 

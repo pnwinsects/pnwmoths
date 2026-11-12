@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa pallidimacula* is a medium-sized *Euxoa* (FW length 14–18 mm) that flies in dry steppe during the early summer. As the name suggests, it has a pale gray-tan forewing with a dark median line and pale filling of the orbicular and reniform spots. The ground color varies slightly from pallid to medium-dark gray-tan, lightly suffused with dark scales. The dominant dark mark is the gray median line, but the terminal and distal subterminal areas are also darker gray. The basal and antemedial lines are similar, dark gray, double with components of unequal strength filled with the ground color. The antemedial line has darker lateral and weaker medial components and is slightly irregular and angled slightly toward the outer margin. The median line is dark gray, prominent, moderately diffuse and moderately wide, slightly angled below the reniform spot where there is a focal concave defect in the medial edge. The postmedial line is dark, toothed on the veins, usually double with a light gray outer component, drawn basad on the costa, smoothly convex or laterally blunted around the reniform spot, and angled slightly toward the base below the level of the cell. The subterminal line is pale tan, slightly irregular with a moderate "W" mark on veins M3 and CuA1. It is preceded by a dark gray shade, strongest on and near the costa. The terminal line is dark gray, thin or a series of spots. The fringe is similar to the terminal area. The orbicular and reniform spots often lack dark outlines—the orbicular spot is partially lined with dark gray in a few specimens— and are filled with a pale gray-tan. The orbicular spot is oval, fairly small. The reniform spot is kidney-shaped, moderate-sized but fading into the adjacent median area laterally. No claviform spot is present. The hindwing is tan-gray with slightly darker gray margin, discal spot, and terminal line. The hindwing fringe is white with a tan base. The head and thorax match the forewing color and lack dark marks. A frontal tubercle is present. The male antenna is biserrate with long fasciculae. *Euxoa pallidimacula* is a member of the subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ This species is found in the Great Basin and on the Colorado Plateau to the sout
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 *Euxoa pallidimacula* flies in the late spring and early summer. Most of the records from our region are from late May and June. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa adumbrata* is an uncommon, medium-sized *Euxoa* (FW length 15–19 mm) that flies north of central Washington during the summer. It is sexually dimorphic, with red-brown males and dark brown-gray females with light yellow filled forewing spots. The forewings are relatively long and thin. Males are dull even red-brown with a dark gray spot on the costa in the distal subterminal area and entire terminal area. Females are entirely even brown-black, sometimes with a black basal dash and black in the cell. The markings are similar in the sexes despite the great difference in color. The transverse lines are inconspicuous. Portions of the basal and antemedial lines are evident in some specimens, partially double gray with light filling. The antemedial line is nearly perpendicular to the posterior margin, slightly irregular. The median line is absent. The postmedial line is weakly scalloped when present, with a pale tan or luteous outer component that is most evident in the dark females. The subterminal line is tan or luteous, broken into spots, slightly irregular with a slightly offset below the apex and very weak W-mark on the mid-wing. The fringe matches the color of the terminal area without a terminal line. The spots are outlined by very thin dark gray in males, lined with broader light ochre; only evident as the ochre in females. The orbicular spot is round or weakly oval, filled with gray. The reniform spot is moderately large, kidney-shaped, filled with ochre and gray at the anterior and posterior ends. The claviform spot is weak, absent, evident as a few black scales at the apex, or black. The hindwing is light gray with darker gray on the outer third in males, outer 1/2 in females, with darker discal spot, veins, and terminal line. The fringe is white with a gray base. The head and thorax are even and match the forewing in both sexes. The male antenna is weakly biserrate. *Euxoa adumbrata* is the rarer of two members of the subgenus *Chorizagrotis* in North America. This subgenus has several unique features, including the combination of short harpes and apically spoon-shaped saccular extensions in males and dorsoventrally flattened abdomen in females.
 
@@ -26,11 +26,11 @@ This species has a wide distribution in northern North America, occurring from A
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on general vegetation based on closely related species.
 
-##### Adults
+### Adults
 
 *Euxoa adumbrata* has been collected from late June through August in our region.
 

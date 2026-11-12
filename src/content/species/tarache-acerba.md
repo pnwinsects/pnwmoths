@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 This small (FW length XX mm) sexually dimorphic moth with XX males and dingy females with powder gray and white forewings and dark hindwings has been recorded from western Oregon, although we have no bona fide records in the Pacific Northwest Moths database. Males XX
 
@@ -20,9 +20,9 @@ This species occurs in central California, both along the coast near San Francis
 
 ## Life History
 
-##### Larvae
+### Larvae
 
-##### Adults
+### Adults
 
 ## Economic Importance
 

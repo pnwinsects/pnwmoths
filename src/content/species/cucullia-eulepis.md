@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia eulepis* is a medium-sized moth (FW length 14 - 16 mm) that flies east of the Cascades during the summer. It has a streaky, light gray forewing with a pointed apex and black lines from the base to the anal angle along the trailing margin. As in other members of the genus the forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The ground color of the forewing is light gray, slightly lighter on the central portion of the wing and darker along the costa, trailing margin, and a triangular area along the distal margin. The veins are dark gray. Thin dark streaks are present between several of the veins on the distal wing. A black line bordered anteriorly by light whitish gray is located in the fold on the distal half of the wing. A similar thickness dark gray to black line lacking adjacent pale scales extends from the base to the mid-wing on the trailing margin, curving slightly anterior at the expected position of the median line. The antemedial line is gray, evident only as an oblique line angled lateral from the costa to the mid-cell and in some specimens as a faint gray nearly horizontal line in the fold. The postmedial line is even less evident, usually a short gray and light gray mark on the anterior costa and occasionally a curved light gray line on the posterior wing. Other lines and spots are lacking completely. The fringe is light gray, weakly checkered at the base but not at the edge. The hindwing is light gray, darker toward the margin, with gray veins and thin terminal line. The hindwing fringe is white with a light gray base. The head and base of the collar are medium gray. The rest of the collar and thorax are slightly lighter gray, with dark transverse barring on the collar and along the medial tegulae. A dark gray tuft is present on the posterior thorax. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The range includes most of California, Nevada, and western Arizona south of our 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on desert herbaceous Asteraceae such as *Stephanomeria* spp.
 
-##### Adults
+### Adults
 
 *Cucullia eulepis* flies from late spring through the summer to early September, possibly with two broods peaking in late spring and late July. It is nocturnal and comes to lights.
 

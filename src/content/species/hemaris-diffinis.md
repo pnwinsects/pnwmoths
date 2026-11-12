@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hemaris diffinis* is a predominantly eastern and central North American clearwing sphinx moth that occurs in northeastern British Columbia. It is a small to medium-sized sphinx moth (FW length 12–17 mm) with black and red-brown edged transparent wings with dark veins. The forewing cell is undivided. The head is yellow with a black band across the frons. The thorax is golden-yellow with an olive tint, lighter ochre laterally. The abdomen is black and light yellow. The abdomen pattern is the differentiating feature between this moth and *Hemaris thetis* and is described in the next paragraph. The legs are black.
 
@@ -24,7 +24,7 @@ This species is widely distributed in the eastern and central portions of North 
 
 ## Life History
 
-##### Adults
+### Adults
 
 This moth flies during spring and early summer.  It is diurnal and seeks nectar at flowers, hovering over the flowers while eating.
 

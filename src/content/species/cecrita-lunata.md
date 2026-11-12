@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cecrita lunata* is a large (FW length 22–24 mm), powdery gray prominent moth that flies in southeastern Idaho during the summer. It has a thin, black reniform spot and very wide male antennae. The forewing is nearly uniform dusty gray, slightly lighter near the subterminal line. Some specimens, especially males, have patches of tan near the base of the forewing. An ill-defined black dash is present at the base. The dominant forewing markings are a thin curved black discal spot cross the end of the cell and a series of ill-defined dark gray wedges in the distal subterminal area near the faint pale subterminal line. The hindwing is pale whitish gray powdered with gray at the anterior and outer margins, a powdery postmedial line that is darkest on the posterior wing, and dark gray veins and thin terminal line. The hindwing fringe is light gray, darkest at the anterior margin and on the veins near the anal angle. The thorax is powdery gray, often with tan on the central and posterior aspect. The bipectinate male antennae are plume-like.
 
@@ -24,11 +24,11 @@ This species has only been found in the Wasatch Range of southeastern Idaho.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 Dyar (Insecutor inscitiae menstruus 13: 47–48) reports the foodplant as quaking aspen (*Populus tremuloides*).
 
-##### Adults
+### Adults
 
 The adults occur from mid-June to early August. They are nocturnal and come to light. As with other prominent moths they do not take nourishment as adults.
 

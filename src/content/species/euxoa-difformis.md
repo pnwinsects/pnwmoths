@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa difformis* is a variable, late-season, small to medium-sized *Euxoa* (FW length 11–17 mm) that flies in dry open habitats. It has gray-brown to orange-brown forewings with dark markings that include a round orbicular spot filled with light gray, and it has dirty off-white to yellow-gray hindwings with a scalloped postmedian line and gray submarginal band. Males tend to be larger than the females. The forewing is relatively short with a pointed apex, although small females often have rounded wings. The ground color varies considerably, most commonly a shade of gray-brown ranging from light to moderately dark and from predominantly gray to warmer tan or brown. A trend toward darker brown specimens from mesic habitats exists, and a distinctive populations from south-western Oregon are orange-brown. The wing is slightly powdery, and the median area and distal forewing are mottled with gray. The strength of the dark pattern is also variable, ranging from nearly absent to strong and dark. The basal and antemedial lines are dark gray, double with components of unequal strength filled with a slightly lighter shade of the ground color. The antemedial line slants toward the outer margin and its lateral component is darkest, bulging toward the outer margin between the veins. The median line is dark gray, absent to prominent, moderately diffuse, bent in the lower reniform spot. The postmedial line is double with a consistent dark inner component that is toothed on the veins and a smooth outer line that varies from prominent to absent; it is drawn basad on the costa, is smoothly convex on the anterior wing and nearly straight or slightly concave from the mid-cell to the posterior margin at a 45° slant. The subterminal line is pale gray-tan, powdery, usually complete but sometimes broken into spots, slightly irregular with a weak to moderate W-mark on veins M3 and CuA1. It is preceded by a powdery gray shade that is strongest on the costa. The terminal line is variable, absent, thin, or a series of dark spots that produce a scalloped appearance to the base of the fringe. The fringe is similar to the terminal area. The orbicular and reniform spots outlined in dark gray to black and are moderate-sized. The orbicular spot is round or oval, often open toward the costa and posterior margins, filled with the ground color or pale gray and often containing a weak ocellus. The reniform spot is kidney-shaped or weakly hourglass-shaped, often incomplete anteriorly and posteriorly, usually lined with a pale shade of the ground color and filled centrally with slightly darker gray, darkest at the lower end. The claviform spot is absent or represented by a few gray scales. The hindwing is pale tan or yellow-tan in males, with gray veins, discal spot, thin scalloped postmedial line, and a submarginal shade, and a thin terminal line; that of females is darker tan-gray with faint discal spot and postmedial line. The hindwing fringe is pure white. The head and thorax match the forewing color and lack dark marks. A frontal tubercle is present. The male antenna is bipectinate with asymmetric branches, longer anteriorly. *Euxoa difformis* is a member of the large subgenus *Euxoa*.
 
@@ -37,11 +37,11 @@ The range of this species extends east to Saskatchewan across southern Canada, a
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults are single-brooded and fly in the fall, beginning in late August in our region. They are nocturnal and come to lights.
 

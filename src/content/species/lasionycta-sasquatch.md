@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta sasquatch* resembles a large and dusky form of *Lasionycta poca*, which it replaces south of northern Washington. It is a medium-sized moth (FW length 14 - 16 mm) that flies in mid-elevation forest and subalpine parkland in the Cascade Range and mountains of western Oregon. It has dark, smoky gray to brown-gray forewings and light tan hindwings with a dark gray discal spot and marginal band. The forewing has dark lines and spots and patches of yellow to slightly greenish scales. The dark gray lines are double and filled with slightly lighter gray than the ground color. The postmedial line is dentate, sometimes with pale gray tips on the dentations. A dark median line is faintly evident.  The pale subterminal line is faint but its position is evident due to darker gray shading medial to it. The orbicular spot is round, filled with the ground color or slightly lighter gray and a dark central ocellus. The reniform spot is filled with the ground color and is relatively inconspicuous. The fringe is weakly checkered dark and light gray. The hindwing is light tan, suffused with gray scales. A large gray discal spot, thin sinuous to lightly scalloped postmedial line, and wide marginal band. The hindwing fringe is two toned, gray basally and white to light tan distally. The head and thorax are dark gray. The eyes are normal in size. The male antenna is weakly bipectinate.
 
@@ -24,11 +24,11 @@ This species has not been collected outside of the Pacific Northwest. It likely 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is single-brooded. The adults fly during July. It is nocturnal and comes to lights.
 

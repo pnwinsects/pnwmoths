@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa setonia* is a medium-sized *Euxoa* (FW length 15–18 mm) that occurs in forests and steppe habitats during the early summer. It has a suffused, tan forewing with a thick, black median line and pale filling of the orbicular and reniform spots. The ground color varies from light tan to slightly yellowish brown, typically heavily suffused with darker scales to produce a powdery appearance. The dominant dark mark is a thick median line but the terminal and distal subterminal areas are also darker gray. The basal and antemedial lines are similar, dark gray, and double with components of unequal strength filled with a slightly lighter shade of the ground color. The antemedial line is darkest adjacent to the median area, slightly irregular and slanted slightly toward the outer margin. The median line is dark gray to black, prominent, moderately diffuse and variable in width from narrow to very wide, slightly angled below the reniform spot where there is a slight defect in the medial edge. The postmedial line is dark, toothed on the veins, usually double with a light gray outer component, drawn basad on the costa, smoothly convex around the reniform spot, and angled slightly toward the base below the level of the cell. The subterminal line is pale tan, yellowish, or orange-tan, varying from absent to irregular with a moderate W-mark on veins M3 and CuA1. It is preceded by a dark gray shade, strongest on the costa. The terminal line is dark gray, thin or a series of spots. The fringe is similar to the terminal area. The orbicular and reniform spots lack outlines and are filled with a pale shade of the ground or slightly orange-tinted tan. The orbicular spot is oval, fairly small. The reniform spot is kidney-shaped and moderate-sized, but less conspicuous than the orbicular spot. No claviform spot is present. The hindwing is brown-gray with slightly darker gray margin, veins, discal spot, and terminal line. The hindwing fringe is white with a tan base. The head and thorax match the forewing color and lack dark marks. A frontal tubercle is present. The male antenna is biserrate with long fasciculae. *Euxoa setonia* is a member of the subgenus *Euxoa*.
 
@@ -26,11 +26,11 @@ The range of this species includes southern Alberta next to the Pacific Northwes
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 *Euxoa setonia* flies relatively early in the season, beginning as early as mid-May. It has been collected until early August in our region. It is nocturnal and comes to lights.
 

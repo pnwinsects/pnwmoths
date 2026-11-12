@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia lynda* is a small (FW length 12 - 13 mm) dull pink and yellow moth that flies in the deserts of south-central Oregon in late spring. The wing is even pink from the base to the position of the subterminal line and light yellowish olive in the terminal area and fringe. It lacks all lines and spots. The hindwing is medium gray, darker at the margin, with a pale yellow fringe. The head and anterior thorax are pink and the posterior thorax is olive-yellow. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ This species is a Northwest endemic.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species probably feeds on evening primroses like the closely related *Schinia felicitata* and *S. florida*. The foodplant of *S. felicitata* is *Oenothera deltoides* (Onagraceae).
 
-##### Adults
+### Adults
 
 The adults have a short flight period in late May. They are nocturnal and come to lights.
 

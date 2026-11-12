@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Dasychira* species are gray rounded-wing moths that can be identified by their bipectinate antennae and tufts of raised metallic scales on the dorsal posterior thorax and proximal abdominal segments. The males are smaller than the females. *Dasychira grisefacta* occurs in two distinctive subspecies in the Pacific Northwest. It is a medium-sized moth (FW length 17–20 mm in males; 21 mm in females).
 
@@ -10,7 +10,7 @@ The dark subspecies *Dasychira grisefacta ella* Bryk occurs along the Pacific Co
 
 The nominate subspecies can be confused with *Dasychira vagans* and *Dasychira plagiata*, although the latter species barely approaches our region in eastern British Columbia. The forewing of *D. g. grisefacta* tends to be more mottled than either of the other species and has less pale gray along the costa and inside and near the reniform spot. Its postmedial and terminal lines are thick and irregular, thinner and straighter in *D. vagans*. *Dasychira plagiata* has a distinct brown color that is lacking in *D. g. grisefacta*. Subspecies *D. grisefacta ella* is unlikely to be confused with other species.
 
-##### Larvae
+### Larvae
 
 Larva is densely covered with tufts of hair including gray lateral tufts and white dorsal tufts, with four very long gray tufts on the back and pairs of laterally projecting black tufts at the head and tail.  It is illustrated by Miller & Hammond (2003).
 
@@ -30,11 +30,11 @@ This species is found throughout forests of western North America as far east as
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on conifers (Pinaceae) including pines (*Pinus* spp.) and spruces (*Picea* spp.), but it particularly favors Douglas fir (*Pseudotsuga menziesii*), true firs (*Abies* spp.), and hemlocks (*Tsuga* spp.).
 
-##### Adults
+### Adults
 
 Adults fly from July to August and appears to have a single brood in the Pacific Northwest. Like other members of the subfamily Lymantriinae they do not feed as adults. They are nocturnal and come to lights.
 

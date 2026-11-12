@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa henrietta* is a vivid, rich reddish-brown, small to medium-sized *Euxoa* (FW length 13–16 mm) that flies in dry forests during early fall. It has variable markings, with or without an ochre costa and lighter basal and subterminal areas, and also with black markings that vary in strength. The median area of all forms is rich, dark brown with a red-orange tint. In the evenly colored form the forewing base and subterminal area are slightly lighter and the terminal area is slightly darker and grayer. In the contrasting form the posterior median area is slightly paler, and there is often a lighter orange-brown streak in the fold. This lighter color is present in the entire antemedial and subterminal areas, becoming even lighter and more yellow near the subterminal line. The costa is pale ochre at the base, darkening by the postmedial line. Specimens of either form have variable black markings consisting of a basal dash, filling of the cell, and thick antemedial and postmedial lines. The lines form paired dots on the costa. The antemedial line is moderately slanted toward the outer margin and is drawn toward the base on the veins. The median line is absent. The postmedial line is lightly scalloped, strongly pulled toward the base on the costa, smoothly arched around the reniform spot, and nearly straight at a 45° angle toward the base below the spot. The position of the subterminal line is evident as the transition to the dark terminal area, usually undulating and pulled toward the base across from the cell and in the fold, sometimes slightly irregular opposite the cell due to two dark wedges in the subterminal area. The terminal line is dark, thin or a series of small spots. The fringe is gray, sometimes with a tan base. The orbicular and reniform spots are outlined by outer black or gray and inner light ochre lines and are filled centrally by gray. The orbicular spot is a small to moderate oval, sometimes lacking the ochre lining. The reniform spot is kidney-shaped, often with a gray spot in the lower end. The claviform spot is small and black, often appearing as a black branch off the antemedial line. The hindwing is light gray with slightly darker margin, veins, discal spot, and terminal line. The hindwing fringe is white with a tan or light gray base. The head and thorax are red-brown. The base of the collar matches the base of the forewing, light ochre or red-brown, and is separated from the red-brown edge by a black line. The male antenna is biserrate. *Euxoa henrietta* is a member of the subgenus *Euxoa*.
 
@@ -24,11 +24,11 @@ The range of this species extends south through California west of the summit of
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 The adults are on the wing in late summer and early fall. Pacific Northwest records extend from early August to early October but are most common in late August and early September. This species is nocturnal and comes to lights.
 

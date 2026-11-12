@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Protolampra rufipectus* is a red-brown, suffused, clay-colored, medium-sized moth (FW length 14 - 18 mm) that is found in forests throughout much of the Pacific Northwest during the summer. It has a dark black-brown color and a forewing with a simple pattern of black lines and spots. The forewing is slightly bluish-gray with a slight sheen and is variably suffused with red-brown, especially in the median area and medial to to the subterminal line. The lines are single, red-brown or dark gray. The antemedial line is slightly irregular. The postmedial line is scalloped. The median line is variable, usually light or absent but occasionally dark. The subterminal line is also variable, usually slightly uneven but occasionally jagged, with a dark preceding red-brown shade that is darkest near the apex. The orbicular and reniform spots are red-brown and usually faint. The orbicular spot is round to slightly oblique, filled with the ground color, and usually medium-large in size. The lower reniform spot contains a gray spot in some specimens. The hindwing is light yellow-gray, darker gray near the margin, with similar dark gray discal spot and veins and light gray fringe. The head and collar are smooth velvety brown. The rest of the thorax matches the forewing, gray to reddish gray. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is widely distributed in western North America. It occurs from Alas
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is known to feed on spiraea (*Spiraea* spp.) in the Rosaceae, and probably feeds on other Rosaceae and hardwoods as well.
 
-##### Adults
+### Adults
 
 Adults fly in the summer. It has been collected from early July through September in our region, most commonly at the end of July and early August. It is nocturnal and comes to lights.
 

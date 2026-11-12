@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Diarsia rubifera* is a drab, red-brown *Diarsia* species that has a small black spot at the apex of the claviform spot that is lacking in other members of the genus. It is a small to medium-sized moth, like other *Diarsia* species (FW length 14 - 15 mm). The markings are usually relatively inconspicuous. The spots and transverse lines are usually evident as slightly paler filling. The orbicular and reniform spots are moderately large. The position of the end of the claviform spot is marked by a black dot. The hindwing is shiny medium gray with slightly darker margin, discal spot, and veins. Its fringe is pale with a slight reddish tint. The head and thorax match the forewing ground color, with a slightly darker base of the collar. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ This species is most widely distributed east of the Mississippi River where it o
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults fly in late summer. Lafontaine (1998) reports the flight period as mid-July to mid-August for the entire range of the species.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta perplexella* appears as a small version of *Lasionycta perplexa* (FW length of *L. perplexella* 14 - 16 mm) and with a narrower male antenna. It flies in subalpine forests. The forewing is slightly bluish gray with a busy pattern of lines and spots, slightly darker in the median area due to a diffuse dark gray median line. The basal, antemedial, and postmedial lines are darker gray, double, and filled with the ground color or slightly lighter gray. The antemedial line is zig-zagged on the veins. The postmedial line is dentate, sharply drawn toward the base at the costa and obliqued toward the base below the top of the cell with an offset toward the base at the level of the inferior reniform spot. The subterminal line is usually a series of pale spots that is preceded by black wedges between the veins. The orbicular spot is usually round or slightly oval and is filled with the ground color or slightly lighter gray and has a gray central ocellus. The reniform spot is filled with the ground color. The black claviform spot is usually small. The hindwing is medium-dark to dark brownish gray, gradually darker gray toward the margin, with darker gray discal spot and postmedial line and two-toned gray fringe. The head and thorax are powdery gray with weak light and dark gray lines on the edges of the collar and tegulae. The male antenna is biserrate with triangular individual segments.
 
@@ -24,11 +24,11 @@ The range of this species includes the Rocky Mountains of western Alberta as wel
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 The adults are on the wing during the summer, usually from late June to early August. They are nocturnal and come to lights.
 

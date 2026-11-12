@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Viridiseptis marina* is a small moth (FW length 13 mm; Span 31.9 ± 1.5 mm with range 29.5 – 35 mm (n=25)) that flies in southwestern Oregon during the summer. Its forewings are relatively short and have scalloped outer margins. They are strongly mottled with black and yellow scales, appearing mossy green, darkest at the posterior wing base, in the cell, and in the terminal area opposite the cell and lightest yellow-green in the posterior subterminal area, at the apex, and in the posterior terminal area. A diffuse dark bar spans the median area in the fold. The lines are black and yellow-green, incomplete and relatively obscure against the mottled ground. The posterior antemedial line is evident near the fold. The postmedial line is scalloped, usually evident on the costa and as an S-shaped dark line from the lower reniform to the posterior margin. The subterminal line is yellow-green to light gray-green, diffuse and irregular with a strong concave segment opposite the cell. A row of black spots comprises the terminal line. The fringe is mottled green and black.  The hindwing is dirty, light brownish-gray with a very weak diffuse gray discal spot and margin and a dark, thin terminal line. The fringe is concolorous with a median gray line. The head and thorax are mossy yellow-gray similar to the forewing. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species if found throughout California to the border with Mexico.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 The flight period of this moth is summer, usually June to August in California. Pacific Northwest specimens have been collected during July. It is nocturnal and comes to lights.
 

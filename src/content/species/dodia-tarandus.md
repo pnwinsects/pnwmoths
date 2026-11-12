@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Dodia tarandus* is a medium-sized tiger moth (FW length 14–17 mm) with translucent hoary light gray forewings with limited darker gray markings that flies in bogs and wet boreal forest just north of British Columbia during mid-summer. The forewing is relatively broad with a rounded apex. It is hoary light gray with translucent smoky gray costa, and banded appearance due to a complete transverse medial line and incomplete wavy postmedial and subterminal lines. The veins are dark except in the lightest gray parts of the forewing. The subterminal line is reduced to a light mark near the apex in some specimens. No spots are evident. The hindwing is translucent smoky gray with dark veins and lighter gray hairlike scales on the medial portion. The head and body are dark gray.
 
@@ -22,11 +22,11 @@ This species was originally described from central Canada but has been found sin
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of *D. tarandus* are unknown.
 
-##### Adults
+### Adults
 
 Adults are predominantly nocturnal, flying after midnight, but can be encountered during the day. They are most commonly on the wing during late June and early July.
 

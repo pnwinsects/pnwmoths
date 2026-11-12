@@ -24,11 +24,11 @@ This species is widespread in the West from the western Great Plains to the dry 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding the larval biology of this species, but it is probably a soil-surface feeding cutworm that feeds on short bunchgrasses (Poaceae) based upon the habitat.
 
-##### Adults
+### Adults
 
 The flight season of *A. spaldingi* is early for the genus, beginning in late April and peaking during May. A few stragglers have been collected as late as July. It is nocturnal and comes to lights.
 

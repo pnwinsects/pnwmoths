@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Homoglaea carbonaria* is a dull dark gray-brown medium-sized moth (FW length 18–20 mm) that flies east of the Cascades to southern British Columbia during late fall and early spring. It has black marks on the distal costa and light brown other markings. The forewing margin appears scalloped at the base of the fringe, but the edge of the fringe is usually even. It is dark brown, slightly darker with a faint gray tint on the costa and in the terminal area and lighter with a reddish tint near the trailing margin. Fresh fall specimens have a slight sheen, though never glossy, that fades to matte in overwintered ones. The transverse lines are slightly darker brown than the ground color, double with medium-dark gray-brown filling. The antemedial line is finely wavy, weakly slanted and excurved toward the outer margin. The median line is dark brown, fairly weak but evident posterior to the reniform spot. The postmedial line similar to the antemedial line, weakly curved around the reniform spot and then curved to run nearly perpendicular to the posterior margin. The subterminal line is pale similar to the filling of the other lines, slightly irregular with a slight offset below the apex. It is preceded by two black spots on the costa, and sometimes a few additional small diffuse black spots on the mid-wing. The terminal line consists of a brown line interrupted at the veins. The fringe is concolorous with the terminal area. The orbicular and reniform spots are pale, similar to the filling of the lines, and are filled with the ground color. The orbicular spot is round. The reniform spot is weakly kidney-shaped to hourglass-shaped, usually incomplete inferiorly. No claviform spot is evident. The hindwing including the fringe is light brown-gray with darker gray discal spot and veins. The head and thorax are even dark brown. The male antenna is biserrate with a cream base (scape) and proximal dorsum.
 
@@ -22,11 +22,11 @@ This species is more widely distributed in the West than its close relative *H. 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Salicaceae including willows (*Salix* spp.) and cottonwoods (*Populus* spp.).  Quaking aspen (*P. tremuloides*) appears to be the primary foodplant in the Steens Mountains of southeastern Oregon.
 
-##### Adults
+### Adults
 
 *Homoglaea carbonaria* is one of the "winter moths" of the tribe Xylenini. It emerges and flies briefly in the fall, overwinters as an adult, and flies again in the spring whenever temperatures permit. Most specimens have been collected during the spring during March and April. It is nocturnal and comes to lights.
 

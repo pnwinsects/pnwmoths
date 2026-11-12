@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Tyta luctuosa* is a distinctive, small (FW length 11 mm), dark brown and black noctuid moth that was introduced for biological control of bindweed in the 
 Willamette Valley and appears to be spreading to other Pacific Northwest
@@ -24,7 +24,7 @@ This species is native to the Old World where it occurs from central and souther
 
 ## Life History
 
-##### Adults
+### Adults
 
 The adults fly during the summer and have been collected during August in Oregon. They are nocturnal and come to lights.
 

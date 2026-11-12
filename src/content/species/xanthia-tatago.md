@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xanthia tatago* is a distinctive, small to medium-sized moth (FW length 13–15 mm) that flies west of the Cascades and in the eastern portion of our area during fall. It has a bright lemon-yellow forewing extensively marked with reddish-purple spots on the costa in the distal median and proximal subterminal areas. The forewing has a pointed and slightly falcate apex. The fringe is checkered yellow and purple. All of the transverse lines, including the median and subterminal lines, are comprised purplish spots. The orbicular spot is marked by two purplish spots. The large figure-eight shaped reniform spot is evident as the yellow filling surrounded by the dark median area, as a small purple in the upper portion and a larger and slightly darker spot in the lower. The claviform spot is absent. The hindwing is light yellow with faint reddish to gray discal spot and patchy postmedial line. The head and collar are orange-brown to purple-brown and the remainder of the thorax is yellow. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is widely distributed across boreal North America from Alaska to th
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on willows (*Salix* spp.) and cottonwoods (*Populus* spp.) in the Salicaceae.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in the fall. All Pacific Northwest records are from September. It is nocturnal and comes to lights.
 

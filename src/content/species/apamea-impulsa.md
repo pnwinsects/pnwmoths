@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apamea impulsa* is a medium-sized moth (FW length of 15–19 mm) that flies in forests in the northern part of the Pacific Northwest during the summer. It has dull, near-black forewings marked with black lines and spots. The outer margin of the forewing is scalloped. They are even brownish black in color, appearing black except that the lines are darker. A black basal dash is present and there is a similar black mark along the trailing margin proximal to the antemedial line. The fold distal to the claviform spot and the cell near the reniform spot are black in some specimens. The transverse lines are black, partially double with strong and weak components, filled with the ground color. The basal line is two spots on the costa. The antemedial line is excurved, apex at the base of the claviform spot. The median line is black, oblique toward the outer margin from the costa to below the reniform spot, then bent to run parallel to the postmedial line. The postmedial line is scalloped, drawn sharply toward the base on the costa, nearly straight lateral to the reniform spot, and gently curved from the lower cell to the posterior margin which it meets at a right angle. The subterminal line is a series of small yellow spots between veins, each abutted by a black wedge in the distal subterminal area. The fringe is concolorous without a terminal line at its base. The spots are outlined in black and filled with the ground color, except for scattered yellow scales in the peripheral reniform spot. The orbicular spot is moderately large, round or ovoid. The reniform spot is kidney-shaped. The claviform spot is small to nearly reaching the postmedial line. The hindwing is light gray in color with a much darker gray margin, discal spot, veins, and terminal line. The hindwing fringe is two-toned gray. The head and thorax are brownish black.
 
@@ -22,11 +22,11 @@ The western distribution of this moth also includes central and southwestern Alb
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on grasses (Poaceae).
 
-##### Adults
+### Adults
 
 Adults fly from early June through late August throughout its range. The few records encountered for this study are from late June and late July. *A. impulsa* is nocturnal and comes to lights.
 

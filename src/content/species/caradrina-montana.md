@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Caradrina montana* is a common widespread moth that is nearly ubiquitous in the Pacific Northwest, especially in drier habitats. It is a small (FW length 11–15 mm) pale gray moth with variable dark markings that usually includes a rusty shade near the subterminal line and white spots around the dark-filled reniform spot. The ground color is geographically variable, light powdery gray with a tan tint east of the Cascades and slightly darker pure gray west of the Cascades and in forested locales. The terminal area is darker gray, as is the distal costa. The lines are pale to dark gray, darkest in western and forest populations, and appear single or double with a weak second component. The antemedial line is irregular, especially near the trailing margin. The postmedial line is toothed, most strongly on the posterior half of the wing. It is sharply drawn toward the base at the costa, is parallel to the outer margin near the reniform spot, and slightly oblique to the trailing margin posterior to the spot. The subterminal line is pale and slightly yellow, slightly irregular, and is preceded by a rusty shade in the subterminal area. The terminal line is a series of gray to black spots between the veins. The fringe is gray, similar to the terminal area. The orbicular spot is small and round to slightly oval and filled with gray and rusty scales that "bleed" beyond the outline of the spot. The reniform spot is similar gray, usually with several white spots around the margin that are most strongest and most consistently present at the lower end. It is filled with gray, darkest at the lower end, and faint rusty brown. There is no claviform spot. The hindwing is white faintly shaded with light gray toward the margin, strongest in dark specimens and females. The veins are often darker gray, the discal spot is very faint, and the terminal line is a series of gray spots between veins. The fringe is white. The head and thorax are uniform, similar to the forewing ground but slightly lighter. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ Darker and light specimens of this species have previously been treated as diffe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The flight season of *C. montana* is long, extending from spring to late fall. The phenogram shows peaks in early June and late August suggesting the presence of two broods in our area. This species is nocturnal and comes to lights. It is commonly seen seeking nectar in the early evening at the flowers of rabbitbrush (*Ericameria nauseosa* (Asteraceae)) in the fall.
 

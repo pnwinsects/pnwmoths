@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria edwardsii* is a handsome and distinctive moth. It is medium-sized (FW length 18–20 mm). The forewing ground color is dusty brownish gray, with even dark brown in the median area, black in an area bordered by a bend in the postmedial line posterior to the reniform spot, and light gray in between the reniform spot and the postmedial line. The antemedial and postmedial lines are double and are most evident as the light yellow filling between the lines. The triangular reniform spot is light yellow filled with black. Three black spots are present between the veins basal to the subterminal line near the apex; the subterminal line is obsolete otherwise. The hindwing is orange to red-orange heavily marked with black fused discal spot, postmedial line, and marginal band.
 
@@ -22,11 +22,11 @@ This species is found on the West Coast of North America.
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 Adults have been collected from mid May to early August. It is a nocturnal species and comes to light.
 

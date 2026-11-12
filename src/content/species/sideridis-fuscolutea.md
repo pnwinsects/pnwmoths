@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sideridis fuscolutea* is a medium-sized noctuid moth (FW length 16 - 17 mm) that flies in steppe environments in spring and early summer. It has gray-brown forewings with a pattern dominated by a white-lined, boomerang-shaped reniform spot. The forewing color is lightest in the subterminal area and darkest gray in the terminal area. Dark gray is also present proximal to the subterminal line, interrupted by the ground color below the apex and along the veins M3 and CuA1 (simulating the usual W-mark typically formed by the subterminal line). The transverse lines are gray, double, and filled with the ground color, but indistinct, except at the costa. The pale, slightly yellowish-brown subterminal line is even, forming a very weak "W" mark toward the margin. The terminal line is series of dark spots between the veins. The fringe is weakly checkered with light and dark gray-brown. The outlines of the orbicular and reniform spots are thin and dark gray. The orbicular spot is oval and filled with light gray-brown peripherally and the ground color centrally. The moderately large reniform spot is lines with white, is asymmetrically boomerang shaped with a larger lower than upper portion, and is filled centrally with the ground color. The claviform spot is small and faint in most specimens. The hindwing is pale gray-brown, darker on the outer third, with darker discal spot and veins and a light whitish fringe. The head and thorax are gray brown with a gray band across the upper third of the collar and gray margins on the tegulae. The eye is covered with fine hairs. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ This species is found in the American West. The range outside of the Pacific Nor
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species is single-brooded and flies in the spring and early summer. Our records are from mid-April to early June. It is nocturnal and comes to lights.
 

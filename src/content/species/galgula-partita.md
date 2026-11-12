@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Galgula partita*, the Wedgling, is a small sexually dimorphic noctuid moth (FW length 10 - 12 mm) that flies in wet forests during the summer. It has pointed apical forewings that in males are yellow-brown to orange-brown with a dark brown patch on the costa in the median area, and in females are shiny dark maroon, with limited markings. The forewing markings are most evident in the lighter colored males. The dark patch on the costa is located between the orbicular and reniform spots, both of which are faint with thin dark brown outer and light yellowish inner components and filling of the ground color. The lines other than the postmedial line are barely visible. The postmedial line is comprised of a medial red-brown and an outer light yellow component. It is very smooth, nearly straight, and is strongly oblique across the with from anterolateral to posteromedial. The line is followed by dark dots on the veins. The very faint pale subterminal line is followed by a darker terminal area. The forewing color of the females is darkest from the postmedial line to the base; the dark patch on the costa is barely darker than the rest of the wing. The hindwing is light gray-brown in males, slightly darker gray toward the outer margin, with a two-toned gray fringe. That of females is dark blackish gray with a pale whitish fringe. The head and thorax color match the forewings in both sexes. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has a wide distribution in wet forests throughout North America as 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on wood-sorrels (*Oxalis* spp.) in the Oxalidaceae.
 
-##### Adults
+### Adults
 
 This species is known to fly throughout the year in southern portions of its range. In the Pacific Northwest it has been collected in the spring and fall. It is nocturnal and comes to lights.
 

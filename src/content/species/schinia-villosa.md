@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia villosa* is a very small, day-flying moth (FW length 8 - 10 mm) that occurs in the mountains of Washington and British Columbia during the summer. Its forewings are dark olive and dark cream in the central median area, and its hindwings are black with a few pale orange off-white patches surrounding the large discal spot. The wing base, costa in the median area, and subterminal area are dark olive with a slight brown tint. The posterior median area and terminal area are dark gray, sometimes slightly lighter olive than the other olive areas. The large oval or weakly figure-eight-shaped reniform spot is fused to the dark costa. The antemedial and postmedial lines are pale gray, smooth. The antemedial line is broadly excurved toward the outer margin with a slight notch toward the wing base in the cell. The postmedial line is weakly S-shaped, convex toward the outer margin near the end of the cell and concave toward the base on the posterior half of the wing. The subterminal line is pale gray, smoothly irregular, and nearly straight across the wing. The fringe is concolorous with the terminal area. The hindwing ground color is pale orange off-white, slightly paler than the light areas on the forewing. The base is heavily suffused with black to the large trapezoidal discal spot. The broad black marginal band is also fused to the posterior spot. The hindwing fringe is white with a dark gray to black base. The head and thorax are dark olive. The eye is reduced in size. The male antenna is filiform.
 
@@ -24,11 +24,11 @@ The Northwest distribution of this species is in the mountains of southern Briti
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on fleabanes (*Erigeron* spp.) in the Asteraceae, including *Erigeron peregrinus*.
 
-##### Adults
+### Adults
 
 Adults are strictly diurnal and visit flowers during the day. They fly during June, July, and August, usually beginning in late June.
 

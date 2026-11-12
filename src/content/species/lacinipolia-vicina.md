@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lacinipolia vicina* is a medium-sized, gray moth (FW length 14 - 16 mm) that flies in dry forests during the summer. Its forewing has a pattern of crisp lines and spots that include a long basal dash, a long pointed claviform spot, and a light yellow and black mark near the anal angle. Its hindwing is white with dark veins. The forewing is relatively long and has a pointed apex. It is mottled, medium-dark gray. The basal area is light whitish gray anterior to a black basal dash. A thin brown or red-brown area abuts the anterior claviform spot across the median area. The cell medial to the reniform spot is dark gray in some specimens. A patch of gray that is slightly lighter than the ground is present in the anterior subterminal area below the dark costa and at the apex in the terminal area. The rest of the terminal area is dark gray. The basal, antemedial, and postmedial lines are gray, partially double filled with the ground color or slightly paler gray. The basal line is curved, evident anterior to the basal dash. The antemedial line is faint, angled toward the outer margin and weakly excurved with apex at the base of the claviform spot when visible, usually most evident on the costa and at the fold. The median line is dark gray, angled from the costa to the medial reniform spot and absent on the posterior wing. The postmedial line is weakly scalloped, is nearly straight lateral to the reniform spot, then angled toward the base with a prominent pale-filled concave segment in the fold. The subterminal line is pale gray, except pale yellow in the fold, and moderately irregular with a weak W-mark to the outer margin on veins M3 and CuA2. It is preceded by a series of black lines or long wedges that are absent near the costa and longest on the mid-wing and in the fold. A dark gray to diffuse, black spot is present in the adjacent terminal area, extending into the fringe. The terminal line is black and thin. The fringe is dark gray with a light, weakly checkered base. The orbicular and reniform spots are outlined in black and gray, darkest along the medial and lateral orbicular spot and the medial and inferior reniform spot. The orbicular spot is ovoid, tilted toward the base anteriorly, filled with light gray peripherally and the ground color to light gray centrally. The reniform spot lacks a dark outline laterally, is asymmetrically kidney-shaped with a longer posterior end, and is filled like the orbicular spot. The claviform spot is black, long, and always spanning the median area, with straight edges and a pointed tip, filled with the ground color or black in a few specimens. The hindwing is pearly white in males, and pearly light gray in females, with a dark gray marginal band that is thin in males (though wider along the veins) and wider in females. The veins are black near the margin and white at the base. The discal spot and thin terminal line are dark gray, and the fringe is white with a light gray base in males; white with a dark gray base in females. The head and thorax are hoary medium to dark gray with a black transverse line on the distal collar and dark edges on the tegulae. The eyes are covered with fine hairs. The male antenna is biserrate.
 
@@ -24,11 +24,11 @@ The range of this species extends east to the Atlantic Coast. It is most common 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that feeds on various kinds of herbaceous vegetation, particularly in the families Asteraceae and Fabaceae.
 
-##### Adults
+### Adults
 
 Adults of *L. vicina* fly during the summer, most commonly during late June and July. Some specimens have been found as early as late May and as late as September. It is nocturnal and comes to lights.
 

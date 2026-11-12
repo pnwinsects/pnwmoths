@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Hemaris thysbe* is a large moth (FW length 20–24 mm) with clear wings with warm dark brown veins and borders. The forewing cell contains a row of scales that looks like a longitudinal vein. The head and thorax are variable yellowish olive to tan. The abdomen is similarly colored, with a two-segment wide dark warm chestnut brown band and distal tufting. The ventral abdomen is uniformly dark. The dorsal legs are red-brown. The black antenna is club-like.
 
@@ -22,11 +22,11 @@ This species is common and widely distributed in eastern North America, but is v
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on Caprifoliaceae such as honeysuckle (*Lonicera* spp.) and snowberry (*Symphoricarpos* spp.).
 
-##### Adults
+### Adults
 
 Adults are diurnal and appear to be bumblebee mimics.  They hover in front of flowers while nectaring.  The records from our area are from mid-May to late July.
 

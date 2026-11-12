@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa nomas* is a small, day-flying alpine *Euxoa* (FW length 11–13 mm) that is found in the mountains of British Columbia in our region. It has a gray forewing with darker gray median area, dark cell, and light spots. The ground color of the forewing is light gray, darker gray in the median area, except for a gray streak in the fold. The cubital vein is similar gray. Dark gray to black fills the cell in most specimens. The costa in the subterminal area and the terminal area are usually darker gray. The lines are black, bordered by slightly lighter gray. The basal line forms spots on the costa and on the mid-forewing. The basal line is slightly irregular and perpendicular to the wing, but often forms a loop toward the outer margin near the posterior margin. The median line is black, sometimes evident as an oblique line below the reniform spot. The postmedial line is very weakly scalloped, pulled sharply toward the base on the costa, bluntly curved around the reniform spot, and angled 45° toward the base below the cell. The subterminal line is pale gray, smooth. It is preceded by a dark gray spot on the costa and often a couple of dark wedges near M2. The terminal line is a series of black spots. The fringe is the same color as the terminal area. The orbicular and reniform spots are black with light gray filling. The orbicular spot is round, open toward the costa. The reniform spot is moderate-sized, kidney-shaped. The claviform spot is moderate-sized, narrow. The hindwing is whitish gray with an ill-defined dark marginal band, a faint spot and dark terminal line. The fringe is white with a gray base. The head and thorax are gray with a thick black line across the mid-collar. A frontal tubercle is present. The eyes are reduced, ellipsoid when viewed from an anterior perspective. The male antenna is weakly biserrate. *Euxoa nomas* is a member of the subgenus *Orosagrotis*. The members of this subgenus have a male vesica that bends toward the left at the origin and a female ductus seminalis that joins the right side of the corpus bursae, opposite of all other subgenera.
 
@@ -26,11 +26,11 @@ This species has a disjunct Holarctic distribution. The Palaearctic populations 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species. A larva of this species was found under rocks in fellfield tundra in the Richardson Mountains near the Yukon Territory-Northwest Territories border in early July by Lars Crabo. It pupated shortly thereafter and emerged after two weeks.
 
-##### Adults
+### Adults
 
 Adults are diurnal and probably visit flowers during the day. A mating pair of *E. nomas* was found on a gravel road through rocky tundra in the early evening at Gott Peak, British Columbia. This species has not been collected at light.
 

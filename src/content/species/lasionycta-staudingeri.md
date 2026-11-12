@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Lasionycta staudingeri* is a small (FW length 10–13 mm) diurnal alpine moth with mottled dark gray forewings with olive patches and a white hindwing with black bands that has been found in southern Yukon Territory near the British Columbia border. The forewing is dark gray, usually with scattered yellow scales producing an olive appearance, strongest in the basal and terminal areas, paler gray or light olive terminal area, and white- or pale-gray-filled lines and spots. The black markings are obscure against the dark background, but the double antemedial and postmedial lines are relatively well-defined due to their pale filling, as are the spots. The antemedial line is slightly irregular. The postmedial line is strongly toothed on the veins, excurved around the cell then oblique to the posterior margin. The irregular subterminal line is most evident as the interface between the darker subterminal and lighter terminal areas. The fringe is strongly checkered black and white. The orbicular spot is filled with white or pale gray, lacking a dark central spot ("ocellus"). The reniform spot is relatively small and is similarly filled with pale. The claviform spot is a black smudge. The hindwing ground color is white with dark suffusion, usually limited to the base but occasionally diffuse. A variable-thickness scalloped medial line, wide marginal band, and thin discal spot are black. The hindwing fringe is pure white. The head and thorax are dark gray. The eye is covered by fine hairs. The male antenna is bipectinate, greater than twice the width of the central shaft.
 
@@ -24,11 +24,11 @@ This is a circumpolar moth. It occurs north of the 60th parallel in North Americ
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva is described and illustrated by Lafontaine et al. (1986). It feeds on crowberry (*Empetrum nigrum* (Ericaceae)) but accepts other plants in captivity.
 
-##### Adults
+### Adults
 
 Adults are diurnal, flying from late June to mid-August depending on latitude, snow pack, and weather. The few specimens from southern Yukon were found during late June and early July.
 

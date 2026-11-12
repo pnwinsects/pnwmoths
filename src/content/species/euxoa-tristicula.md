@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa tristicula* is a large, pale gray *Euxoa* (FW length 16–19 mm) that comes in two forms, one with black markings on the collar and forewing and one that is plain without such marks. It flies in the eastern and southern portions of our region and in central British Columbia during late spring and summer. The ground color is pale grayish cream, usually with a warm tint but occasionally slightly bluish. The costa is slightly lighter and grayer. A dark gray shade is present medial to the subterminal line, darkest on the costa, contrasting with the light terminal area. The cell is variable, the ground color, slightly darker gray, or jet black. Specimens a very dark cell have a thick black basal dash the reaches the antemedial line. The transverse lines are very faint gray or are absent, double filled with the ground color. The antemedial line is usually visible on the mid-wing and on the costa. The median line is absent. The postmedial line is usually faint, dentate, smooth, bluntly curved around the reniform spot and slightly concave and angled toward the base below the cell. The subterminal line is pale gray, slightly irregular, faint. It is preceded by the aforementioned shade and sometimes a few dark short black wedges on the mid-forewing. The terminal line is a series of black spots. The fringe is concolorous with the terminal area. The claviform and reniform spots partially outlined in gray or black medially and laterally and both spots are filled with light gray similar to the costa. The orbicular spot is oval, exceeding the width of the cell anteriorly. The reniform spot is kidney-shaped, indistinct inferiorly where it exceeds the width of the cell. The claviform spot is absent or limited to a few black scales near the tip. The hindwing is pale tan off-white with slightly darker gray band on the outer third, darker gray veins, thin discal spot, and terminal line; the hindwing of females is similar with a slightly wider marginal band. The hindwing fringe is white with a light gray base. The head and thorax match the forewing ground color; specimens with black markings on the forewing have a thick black band across the mid-collar. The male antenna is bipectinate, tapering over the distal third. This species is placed in the subgenus *Pleonectopoda*. This subgenus is characterized by a subbasal twist or coil of the male vesica that is evident only when the vesica is inflated.
 
@@ -24,11 +24,11 @@ This species has a large distribution in North America and occurs in two disjunc
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on general herbaceous vegetation in such families as Fabaceae and Chenopodiaceae.
 
-##### Adults
+### Adults
 
 Adults have a long flight season and first appear in late spring, fairly early for a *Euxoa*. Records from our region are from late May to early August.
 

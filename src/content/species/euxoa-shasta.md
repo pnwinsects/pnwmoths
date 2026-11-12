@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa shasta* is a large *Euxoa* (FW length 19–22 mm) that flies along the east slope of the Cascades and in the Blue Mountains during late summer and fall. It has uniform, dark red-brown forewings marked with pale-lined orbicular and reniform spots with smoky gray hindwings with pale at the base. The forewing is nearly uniform red-brown, slightly darker and grayer in the terminal area and distal subterminal area. The veins are slightly darker on the distal half of the wing in many specimens. The basal, antemedial, and postmedial lines are usually faint or absent, evident as double gray spots on the costa and traces of the paler filling in most specimens. When evident the antemedial line is double and gray, filled with a slightly paler and gray-tinted shade of the ground color, weakly zigzagged on the veins and angled slightly toward the outer margin. The median line is absent below the costa. The postmedial line is weakly toothed on the veins, drawn toward the base on the costa, smoothly excurved around the reniform spot, and straight at an oblique angle toward the base below the cell. The subterminal line is thin pale gray or yellow, often partially absent, irregular. The terminal line is dark red-brown. The orbicular and reniform spots are weakly outlined in gray and peripherally lined with powdery pale yellow scales, filled with the ground color or a slightly darker and grayer shade thereof. The orbicular spot is small to moderate-sized, round or weakly oval. The reniform spot is kidney-shaped or boomerang-shaped, moderately large, often filled with yellow across its mid-portion and darker gray in the lower end. The claviform spot is absent or evident as a few pale scales. The hindwing is pale gray at the base, smoky gray along the veins and towards the margin, slightly darker in males than females. Dark gray veins, discal spot, and thin terminal line, and white fringe with a gray base are present in both sexes. The head and thorax match the wing color. The male antenna is weakly bipectinate with long fasciculations. *Euxoa shasta* is one of four species in the subgenus *Palaeoeuxoa*. This subgenus is characterized by the combination of spoon-shaped tips of the saccular extensions and harpes of equal or greater length in males.
 
@@ -28,11 +28,11 @@ The range of *E. shasta* includes the Cascade Range of northern California and a
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 *Euxoa shasta* has been collected from early July to mid-September in the Northwest. It is nocturnal and comes to lights.
 

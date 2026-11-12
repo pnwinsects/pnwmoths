@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Caenurgina annexa* is a small *Caenurgina* species (FW length 12 - 15 mm) found in high elevation meadows. It has broad triangular wings with blue gray to brown-gray ground color. The posterior antemedial, median, and postmedial lines are fused forming a looping marking that is filled with dark gray. A black wedge precedes the subterminal line near the apex. The orbicular spot is a black dot, and the large reniform is filled with the ground color and is open posteriorly. The hindwing is dull light yellow with dark brown-gray discal spot and thick postmedial line, submarginal band, and fringe. The basal portion is heavily suffused with gray in some individuals. The head and thorax are dark gray with a lighter gray tip to the collar. The male antenna is ciliate, and that of the female is simple.
 
@@ -22,11 +22,11 @@ This species occurs in the Cascade Mountains and in the Rocky Mountains as far n
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species, but it probably uses herbaceous legumes (Fabaceae) like other species of this genus.
 
-##### Adults
+### Adults
 
 Adults are strictly diurnal. They are on the wing in spring and summer, with Pacific Northwest records from late April until mid July.
 

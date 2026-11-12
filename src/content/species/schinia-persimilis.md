@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia persimilis* is a very small to small, day-flying moth (FW length 9 - 10 mm) that flies in the Rocky Mountains during the summer. It has gray-green, rose, and light cream-colored forewings and black hindwings with three cream spots near the discal spot. The pale areas on the forewing are reduced to spots medial, posterior, and lateral to the reniform spot and the medial cell in most specimens. The rest of the wing is uniform powdery gray-green, often with rose pink on the costa and in the antemedial and subterminal areas. The subterminal line is evident as a cream spot on the costa but is not traceable elsewhere. The large orbicular and reniform spots are the same green color and are broadly fused to the adjacent areas of the same color. The fringe is also concolorous. The hindwing appears black due to the black base, inner margin, and marginal band being fused with the large discal spot, with three slightly yellow off-white spots representing the residual ground color. The two larger ones are located lateral and posteromedial to the spot and a single small one is medial to the spot. The hindwing fringe is white with a gray base. The head and thorax are olive-green. The eye is reduced in size. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends from south-central Yukon Territory through the
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 *Schinia persimilis* is strictly diurnal and visits flowers. It flies in the summer, usually in late July and August. A single specimen from southern Yukon was collected in mid-June.
 

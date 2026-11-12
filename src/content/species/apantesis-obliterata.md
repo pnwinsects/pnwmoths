@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Apantesis obliterata* is a medium-sized tiger moth (FW length 16 mm) that is only found in eastern British Columbia in our region. The forewing appears black with off-white veins and transverse lines. The pale veins on the posterior wing do not reach the fringe. The transverse pale areas include a few bars near the costal wing margin in addition to the more prominent subterminal region zigzag marking. The dorsal hindwing is orange with large black discal and submarginal spots, the latter often fused to a broad marginal band. The base of the hindwing lacks black spots.
 
@@ -22,11 +22,11 @@ In our region *Apantesis obliterata* is only known from extreme southeastern Ida
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on general herbaceous vegetation like related species.
 
-##### Adults
+### Adults
 
 Adults are nocturnal and come to light. They fly in late summer and early fall.
 

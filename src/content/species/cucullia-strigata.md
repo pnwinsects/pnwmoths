@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Cucullia strigata* is a large moth (FW length 20 - 23 mm) that flies in the spring in steppe habitats and in the summer above timberline. It has streaky, pointed forewings that are marked with black lines on the distal wing. As in other members of the genus the forewing is long and thin with a convex distal costal margin and a pointed apex, and the patagiae can be raised into a pointed "hood" that is most apparent when the moth is resting and is variably present in preserved specimens. The ground color is variable, bluish brown-gray to blackish, usually slighter duller gray posterior to the cell basal to the postmedial line and lighter gray near the costa, on the distal wing, and in the fold in the median area. The veins are thin, black. Ill-defined brown-gray is present between the veins on the mid-wing near the outer margin. A thin black basal dash is present. Black lines are present on the distal wing, most prominent in the subterminal area below vein M2, at the margin below M3 and CuA1, and across both areas below CuA2. The antemedial and postmedial lines are diffuse dark gray. The antemedial line is strongly zig-zagged and is darkest and most irregular posterior to the cubital vein. The postmedial line is faint above the fold, and is sinuous and obliqued toward the base above the trailing margin. The fringe is slightly darker than the rest of the wing, usually weakly checkered with lighter gray at the base. The orbicular and reniform spots are usually absent, sometimes evident as light gray spots. The claviform spots and other lines are absent. The hindwing is light gray with darker gray outer margin and dark veins, discal spot, and terminal line in males, darker gray in females. The hindwing fringe is white with a tan and gray base. The head and thorax are blue-gray to brown-gray with barring on the collar and tegulae, a thin black line across the mid-collar, and dark brown-gray borders on the posterior collar and medial tegulae. The male antenna is biserrate.
 
@@ -28,11 +28,11 @@ This species is widely distributed in dry open grasslands at low elevations thro
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but gum weed (*Grindelia* spp.) in the Asteraceae is strongly suspected based upon the habitat.
 
-##### Adults
+### Adults
 
 Most populations of this species fly in the early spring, usually in March and April. High altitude populations occur later in the year, usually in July depending on elevation and snowpack. This species is nocturnal and comes to lights.
 

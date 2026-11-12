@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Smerinthus jamaicensis* is a large to very large hawkmoth (FW length 25–34 mm) that flies in northern Idaho and British Columbia during late spring and summer. The hindwing has a blue eyespot that is divided in two by black coloring. The forewing is mottled light and dark gray with a complex pattern of light and dark lines and dark brown markings. The most prominent dark markings are a black semicircle bordered medially by white on the outer margin at the apex, an oblique rectangular dark brown bar below the discal spot, and a small black-brown mark near the anal angle. The terminal are is smooth gray-brown. The antmedial line is pale gray bordered laterally by dark brown, strongly excurved with the aforementioned brown bar joined to it at the apex of the curve. The postmedial line is compound with a single whitish gray line and several darker components, undulating. The discal spots is dark brown, incomplete at each end, filled with the adjacent ground color. The hindwing is light to dark rosy pink. The large black eyespot containing two similar size blue marks, one anterior to the other. The head and lateral thorax are light gray with a smooth dark brown central thorax. The antenna is light gray-tan, club-like.
 
@@ -22,11 +22,11 @@ This species is widely distributed in north America although it is absent from m
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The larva feeds on a wide diversity of hardwood shrubs and trees, particularly in the families Salicaceae, Rosaceae, and Betulaceae.
 
-##### Adults
+### Adults
 
 The adults are single brooded and fly from late May to July.  Their mouthparts are small and they are not known to feed.  They are nocturnal and come to lights.
 

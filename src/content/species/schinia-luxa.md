@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia luxa* is a small (FW length 11 - 14 mm) flower moth that flies in arid deserts of southern Idaho. It has a pale yellow forewing marked with a few gray spots and a white hindwing. The forewing color is even, including the fringe. The lines and spots are similar gray. The lines are reduced to a few gray dots, typically strongest at the fold on the antemedial line, opposite the cell and in the fold on the postmedial line, and near the apex at the subterminal line. The terminal line is usually a complete row of spots between the veins. The orbicular spot is a small line, while the reniform spot is a sideways "V." The claviform spot is absent. The hindwing is pure white lacking all markings. The head and thorax are yellow. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species has been reported from southern Idaho in Hardwick (1996).
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 This species flies in late summer in most of its range. The flight period in the Northwest is unknown.
 

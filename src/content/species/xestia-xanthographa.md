@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Xestia xanthographa* is a medium-sized, red-brown noctuid moth (FW length 15–17 mm) that flies commonly in late summer and fall in the western Pacific Northwest and east to western Idaho near the Columbia River. It usually has ochre-filled orbicular and reniform spots and a light yellowish-gray hindwing. The forewing is fairly even brick-red, often with a gray cast to the median area and distal forewing. The basal, antemedial, and postmedial lines are gray and single, with dark spots or lines where the lines are sharply bent, especially at the tips of the teeth of the postmedial line. The antemedial line is somewhat irregular with several sharp bends, while the postmedial line is smoothly excurved with a nearly straight section near the reniform spot. The subterminal line is a row of pale ochre to gray spots, preceded by a slight gray shade that is darkest near the apex. The orbicular and reniform spots are light gray, evident mostly as pale ochre filling that varies from faint at the periphery of the spots to complete filling. Both spots are usually open anteriorly and posteriorly and the lower reniform spot contains a dark gray spot. The open anterior portion and this dot give the effect of a light hourglass-shaped spot. The claviform spot is very faint, usually only the anterior portion is visible as a light streak posterior to the orbicular spot. The male hindwing is pale yellow-gray with darker dirty gray discal spot, postmedial band that varies from absent to a series of dark lines on the veins, and an irregular marginal band that usually is interrupted by the light ground color near the margin; those of the females are darker gray. The head and thorax match the forewing ground color. The male antenna is bead-like to weakly biserrate.
 
@@ -26,11 +26,11 @@ This species is introduced from Eurasia, apparently several times to various par
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a climbing cutworm that prefers feeding on coarse exotic Eurasian grasses such as rye grasses (*Elymus* spp.) and orchard grass (*Dactylis glomerata*) in the Poaceae, but will also feed on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 Adults fly in late summer and fall and have been collected from late July to October. They are nocturnal and come readily to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Anarta fulgora* is a small gray moth (FW length 13 - 14 mm) that flies in sage steppe during late spring and early summer. It has a relatively ill-defined pattern, except for a thick black claviform spot and a pale subterminal line contrasting with adjacent blackish gray. The forewing ground color is slightly mottled medium-gray without brown tints, slightly darker along the trailing margin and blackish gray in the terminal area and medial to the subterminal line. A small faint basal dash is present. Most of the transverse lines are double gray, evident as spots on the costa but faint elsewhere. Usually short segments of the mid-antemedial line and the oblique postmedial line below the reniform spot are visible. The subterminal line is pale luteous white, offset toward the base below the costa, forming a strong W-mark to the outer margin on M3 and CuA1, and parallel to the outer margin elsewhere. It is preceded by series of dark gray wedges between the veins below the costa and near the W-mark, increasing in size near the mark. The orbicular and reniform spots are outlined in thin black. The orbicular spot is oval, often incomplete anteriorly, filled with light gray and a central eyespot. The reniform is kidney-shaped, filled with the ground color and a patch of purplish gray inferiorly. The claviform spot is thick and black, reaching over half the distance to the postmedial line, apically rounded. The hindwing is pale whitish gray at the base with dark gray veins, small discal spot, and marginal band that is thinner and lighter in males than in females. The head and thorax are similar gray to the forewing. The collar is tan with a black transverse line below the distal third and a light gray edge. The edges of the tegulae are slightly darker gray. The male antenna is bead-like. The surface of the eye is covered with fine hairs.
 
@@ -22,11 +22,11 @@ This species is found in western North America. The range outside of the Pacific
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on herbaceous vegetation based upon closely related species.
 
-##### Adults
+### Adults
 
 *Anarta fulgora* is single brooded and flies during the spring and early summer. It has been found from April to mid-June in our region. It is nocturnal and comes to lights.
 

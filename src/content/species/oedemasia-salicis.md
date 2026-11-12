@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Oedemasia salicis* is a small to medium-sized, prominent moth (FW length 14–16 mm.) that flies east of the Columbia Basin and in western Oregon during the summer. It has a mottled, light blue-gray and reddish-brown forewing. Males have a lighter colored and more mottled forewing than the females. The predominant pattern in both sexes is light gray on the anterior and distal area, with darker red-brown and black streaks at the base and posterior margin. The lines are barely evident, with vestiges on the costa and veins in most specimens. The most prominent marks are a thin black basal dash, punctate discal spot (lacking in some specimens), and one or two black streaks near the apex. Males have white hindwings with black at the anal angle. The female hindwing is dark gray. The thorax is brownish gray in males and browner in females, with weak posterior tufts. The male antenna is bipectinate with a long narrow distal portion, while that of the female is simple.
 
@@ -8,7 +8,7 @@ This species can be recognized by its streaky red-brown, light gray, and black f
 
 This species is transferred to the genus *Oedemasia* Packard in a recent check list of New World prominents (Becker 2014), having previously been referred to as *Schizura concinna* (J.E. Smith, 1797)
 
-##### Larvae
+### Larvae
 
 The larva has short, hairy scoli or tubercles, is orange with black and white lateral stripes, and has a red thoracic hump. It is illustrated by Miller Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is broadly distributed throughout much of eastern North America whe
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist hardwood feeder using a very wide diversity of trees and shrubs in the families Fagaceae, Betulaceae, Rosaceae, Aceraceae, Rhamnaceae, Ericaceae, and many others. The larvae are sometimes pests in fruit orchards.
 
-##### Adults
+### Adults
 
 Adults appear to be single brooded and are most commonly found in mid- to late summer. They are nocturnal and come to light, although perhaps not as strongly as most other night-flying moths. Like other prominent moths they do not feed as adults.
 

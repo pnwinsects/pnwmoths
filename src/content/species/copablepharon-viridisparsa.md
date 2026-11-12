@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon viridisparsa* is a distinctive, streaky gray-green moth with relatively long and pointed forewings. It is medium-sized (FW length 17 - 21 mm). The green color is produced by intermixed gray and yellow scales, not green pigment. The forewing margins are paler whitish to light yellow depending on the population, and the forewings are longitudinally streaked with yellow from base to the terminal area through the cell and fold region. The antemedial and postmedial lines are marked by a few black dots on the veins. The hindwings are light gray, with dark populations entirely gray and desert populations lighter whitish gray near the base with visible dark discal spot and veins. The fringe and median margin are white. The head and thorax are greenish like the forewings while the abdomen is pale gray. The male antenna is bead-like.
 
@@ -32,11 +32,11 @@ This species is widespread in Western North America outside the Pacific Northwes
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a burrowing cutworm that burrows through loose soils of volcanic ash or sand up to 2.5 cm. below the soil surface, and feeds on herbaceous vegetation such as weedy mustards (Brassicaceae).  Larvae emerge at night from the soil to feed on vegetation.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in summer. Subspecies *C. v. hopfingeri* flies in June and *C. v. gilvum* flies in July and August.  This species is nocturnal and comes to lights.
 

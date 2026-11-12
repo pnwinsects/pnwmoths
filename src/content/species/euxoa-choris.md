@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa choris* is a moderately large *Euxoa* (FW length 16–20 mm) that flies east of the mountains during summer. It has a dark, grayish-tan forewing with a thin, black, basal dash and black-rimmed orbicular and reniform spots. The forewing color is even, slightly darker and grayer on the costa in the subterminal area and in the terminal area and occasionally darker in the cell. A thin black basal dash is present, sometimes reduced to a black spot in individuals with reduced transverse lines. The dark veins are often visible distal to the postmedial line but the moth does not appear streaked. The lines are dark gray to black, varying from almost absent except as spots on the costa to prominent across the forewing. The basal and antemedial lines are partially double, filled with the ground color. The basal line is visible anterior to the basal dash and is interrupted in the cell. The antemedial line is slanted slightly toward the outer margin across the wing, is pulled toward the base on the veins, and often forms a prominent bulge toward the outer margin above the posterior margin. The median line is faint, only present in the darkest specimens. The postmedial line is strongly toothed on the veins, evenly curved lateral to the reniform spot and straight at a 45° angle toward the base below the level of the cell. The subterminal line is tan, usually obsolete but sometimes evident as a pale line in the distal gray shade. Small black triangles forms the terminal line. The fringe is gray-tan. The orbicular and reniform spots are partially outlined in black without a pale lining and are filled with the ground color. The orbicular spot is oval or a long diamond-shape, usually complete but sometimes open anteriorly, often tapering toward the reniform spot. The reniform spot is kidney-shaped, usually outlined in black medially and weak elsewhere, less prominent than the orbicular spot. The claviform spot is weak, a few gray scales near the apex in some specimens. The hindwing is pale grayish tan, weakly shaded with gray-tan toward the outer margin, with slightly darker veins, discal spot, and terminal line. The head and thorax match the forewing, with a thin black transverse line across the mid collar. A frontal tubercle is present. The male antenna is strongly biserrate with long fasciculae. *Euxoa choris* is a member of the large subgenus *Euxoa*.
 
@@ -34,11 +34,11 @@ The range of this species includes a large part of western North America. The no
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 *Euxoa choris* flies during the summer, with records in our area from mid-June through August. It is nocturnal and comes to lights.
 

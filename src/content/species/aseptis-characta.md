@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Aseptis characta* is a small, mottled gray moth (FW length 13–15 mm; Wingspan:
 32.0 ± 1.2 mm (n = 25; range 29.5 – 35 mm)) that flies in dry habitats during the summer. It has a busy pattern of lines and spots, including pale-rimmed orbicular and reniform spots and a large claviform spot, and a notch in the outer margin of the hindwing. The forewing is slightly pointed, mottled ash gray with variable tan or olive tint that is strongest in the distal median area. The wing base, subterminal area opposite the cell and in the fold, and the apex are lightest. Although variable, the costa and distal mid-portion of the subterminal area and the subapical part of the terminal area are often darker gray. A black basal dash is usually distinct, sometimes widened or forked distally. The basal and antemedial lines are gray, partially double and filled with slightly lighter gray than the adjacent wing. The antemedial line is often absent on the mid-wing, toothed on the veins and transverse in orientation when present. The median line is dark gray, diffuse, faint except on the costa. The postmedial line is toothed, usually with dark lines on the veins at the tips of the teeth, smoothly curved around the reniform spot and nearly perpendicular to the posterior margin or angled slightly toward the base below the spot. The subterminal line is pale gray or slightly yellow, moderately sinuous, variably preceded by a gray shade and/or indistinct gray wedges except opposite the cell. A series of black spots comprises the terminal line. The fringe is checkered gray. The orbicular and reniform spot outlines are black lined with whitish gray, filled centrally with the ground color. The orbicular spot is a slanted oval, sometimes fused to the reniform spot. The reniform spot is variable, faint to distinct, figure-eight or kidney-shaped. The claviform spot is large, spanning the median area, apically pointed. The hindwing is light gray with smoky darker veins that appear to radiate from the base, with dark discal spot and terminal line. The hindwing fringe is two-toned light gray. The head and thorax are gray with hoary dark edging on the collar and edges of the tegulae. The male antenna is beaded.
@@ -25,11 +25,11 @@ This species occurs from the western Great Plains to the Pacific Northwest and C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on big sagebrush (*Artemisia tridentata*) in the Asteraceae.
 
-##### Adults
+### Adults
 
 The flight period of this moth depends on altitude. It has been collected from mid-May to early July, earliest in low-elevation desert habitats and latest at higher elevations. Adults fly at night and come to lights.
 

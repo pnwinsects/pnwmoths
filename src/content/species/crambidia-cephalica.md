@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Crambidia cephalica* is a small white moth (FW length 11–15 mm) that flies in southeastern Idaho during late summer. It has a yellow head and its forewing is long and narrow. Its color is white with no trace of the ordinary lines or spots. The hindwing is broader, evenly yellow off-white. The top of the head is light yellow, while the thorax is white.
 
@@ -22,7 +22,7 @@ The distribution of this moth forms a band across the central and southern Unite
 
 ## Life History
 
-##### Adults
+### Adults
 
 This moth is usually on the wing during late summer. It has been collected from late July until late August in the Northwest.
 

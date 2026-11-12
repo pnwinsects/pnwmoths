@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ponometia nigra* is a very small nearly black moth (FW length 7 mm; Wingspan:
 16.1 ± 0.8 mm ( range 14.5 – 17.5 mm (N=13)) that is restricted to south-central Oregon in our region. It is one of
@@ -25,11 +25,11 @@ from Idaho, Wyoming, Utah, Arizona, Nevada, Oregon, and California based on the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it may feed on Malvaceae based on related species.
 
-##### Adults
+### Adults
 
 *Ponometia nigra* has been collected in the spring (April), during the summer (July and August), and in the fall (October) in California. The time of occurrence in the Pacific Northwest is not well known. This species is a day flier
 and comes to black light at night.

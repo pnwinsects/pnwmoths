@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Copablepharon canariana* is a bicolored, yellow and white, medium-sized moth (FW length 17 - 18 mm) found in the southern part of the Pacific Northwest. The forewing is nearly even light to rich canary yellow. The costa and outer half of the fringe are white. These characters are best examined under magnification, especially in pale or worn specimens. The hindwing is white, often shaded with gray in darker specimens, but mostly white in pale ones. The head and thorax match the forewings. The male antenna is bead-like. The tip of the uncus of the male genitalis is expanded to a teardrop shape, and the female ovipositor lobes are laterally flattened. These characters can be examined without dissection under moderate magnification.
 
@@ -22,11 +22,11 @@ This species range includes much of the Intermountain and Great Basin parts of t
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a burrowing cutworm that burrows through loose, moist sediments and feeds on herbaceous vegetation.
 
-##### Adults
+### Adults
 
 This species is single brooded with adults flying in July and August in our region. It is nocturnal and comes to lights.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria adumbrata* is a common, medium-sized *Drasteria* (FW length 15 - 19 mm) from forest habitats that has dark brown forewings and light orange and black hindwings. The forewing is gray-brown, darker brown filling the undulating antemedial line and between the postmedial and subterminal lines and lighter gray to brown in the medial and terminal areas. The median line is dark brown to red-brown, occasionally only evident at the costa. The area between the black reniform spot and the laterally projected and strongly toothed postmedial line is large and filled with the same light gray-brown as the medial area and lacking significant white scaling. The hindwing is orange without red tint. The black markings include a large discal spot that nearly touches the waved postmedial line and a bilobed marginal band. The head and thorax are gray-brown. The antennae are ciliate in males and simple in females.
 
@@ -22,11 +22,11 @@ This species has a large range in North America. Its range extends to the East C
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species.
 
-##### Adults
+### Adults
 
 Adults are found from late spring through the summer months. Most Pacific Northwest records are from late May to early August. This species is predominantly nocturnal and comes readily to lights.
 

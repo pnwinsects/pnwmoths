@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa manitobana* is a rarely collected, medium-sized, brown *Euxoa* (FW length 14–16 mm) that flies in grasslands and montane forests. It has pale-rimmed orbicular and reniform spots, an indistinct light tan fold, a toothed postmedial line, and light tan to silver-gray costa. The forewing is warm wood brown, occasionally gray-brown, darker brown in the cell, and gray near the outer margin. The subterminal area is mottled gray and tan, slightly streaked due to dark veins. The fold is pale tan or gray-tan distal to the claviform spot, usually blending slightly with the adjacent ground. The lighter-colored costa is gray or tan, interrupted by the origin of the transverse lines. The cubital vein is light gray in some specimens. The transverse lines are black, double, with lighter gray or tan filling. The basal line is usually filled with light gray and forms a black spot near the base of the cubital vein. The antemedial line is irregular, angled slightly toward the outer margin. No median line is present. The postmedial line is usually single, gray, occasionally with a weak even outer component, scalloped with long teeth on the veins, pulled basad and the costa, nearly perpendicular to the wing lateral to the reniform spot, and bent 45° toward the base on CuA1. The subterminal line is light gray or tan, often yellowish, undulating. It is preceded by a dark gray spot on the costa and a shade with several short black wedges from the lower cell to near the posterior margin. The orbicular and reniform spots are outlined in black, lined with silver gray, and filled with gray. The orbicular spot is a tilted oval, often open toward the costa. The reniform spot is kidney-shaped. The claviform is small to moderate-sized, black. The hindwing is pale tan-gray with smoky gray moderately well-defined marginal band, thin discal spot, veins, and terminal line. The hindwing fringe is white with a striped ochre and gray base. The head and most of the thorax match the ground color of the forewing, powdery gray-tan to warm brown. The base of the collar is pale in specimens with pale costa, separated from the darker edge by a thin black transverse line. A frontal tubercle is present. The male antenna is weakly biserrate. *Euxoa manitobana* is a member of the subgenus *Orosagrotis*.
 
@@ -24,11 +24,11 @@ This moth is predominantly distributed outside of the Pacific Northwest. It occu
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 This species is most commonly collected in July and August, including in areas near the Northwest. It is nocturnal and comes to lights.
 

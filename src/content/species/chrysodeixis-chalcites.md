@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Chrysodeixis chalcites* is an introduced agricultural pest that occurred in greenhouses in southwestern British Columbia in 2005 and 2006. It is a medium-sized moth (FW length 17 mm) with gray-brown and warm brown wing color and white stigma that has a large oval lateral spot. The forewing has a pointed apex, a dark-edged flange at the anal angle, and a toothed pattern in the fringe. The ground color is slightly mottled and slightly speckled gray-brown. The mid-base, most of the median area except the costa, the subterminal area near the anal angle, and the apical terminal area are warm golden-brown with a distinct sheen. The median area anterior to the stigma and the subterminal area opposite the cell are shaded darker brown. The stigma is often divided into two parts, a medial hook-shaped line and a large oval lateral spot. The lines are silver to light gray. The basal line is straight, present across the anterior two-thirds of the wing. The antemedial line is strongly oblique from the costal margin toward the outer margin, interrupted by the cell, and then strongly angled toward the base below the cell. It appears to be continuous with the proximal end of the stigma. The postmedial line is sinuous, oriented nearly straight across the forewing. The subterminal line is dark gray-brown but slightly diffuse, stronger and the anterior half of the forewing, irregularly scalloped and forming a "W" mark with the teeth below veins M2 and M3. The terminal line is pale on the anterior half of the wing and barely evident on the posterior part. The fringe is light gray with a scalloped median line, a small black dot on vein M2, and a dark apex. The orbicular and reniform spots and the median line are barely visible. The hindwing is brown-gray, gradually darker gray toward the margin, with dark gray veins and terminal line. The hindwing fringe is pale tan off-white with weak checkering. The head, collar, and median thorax are warm golden-brown, with strong tufting on the posterior thorax. The tegulae are gray-brown. Additional dorsal tufts are present on the anterior abdomen. The lateral abdomen of males bear additional pale buff tufts of very long scales, and black scales are present on the ventral distal portion. The male antenna is filiform.
 
@@ -24,7 +24,7 @@ This species is widespread in Africa and western Eurasia, appearing elsewhere in
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous plants.
 

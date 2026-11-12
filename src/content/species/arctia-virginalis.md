@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Arctia virginalis*, the Ranchmans Tiger Moth, is a large (FW length 26 - 31 mm), heavily spotted, black and orange, day-flying species. The forewing appears black with numerous light yellow spots. The hindwing is orange with broad irregular black bands, one proximal and one distal to the black discal spot, and a patchy marginal band. These are greatly expanded in some individuals, nearly completely covering the orange areas. The head is orange. The thorax is black with a posterior orange spot, and the tegulae and adjacent lateral collar are light yellow. The abdomen is orange with black spots, these being fused in heavily marked individuals. The black antennae are simple in males and females.
 
 This species is similar in size and general appearance to *Arctia parthenos*, but the forewing color of this species is brown rather than black.
 
-##### Larvae
+### Larvae
 
 The larva is covered with dense long hairs, orange at the head and tail, black in the central part of the body with very long white hairs.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species has a spotty distribution in the Pacific Northwest. It is uncommon 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation.
 
-##### Adults
+### Adults
 
 *Arctia virginalis* is diurnal. Males patrol rapidly and resemble butterflies on the wing. They occur during the summer, most commonly in June and July.
 

@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa trifasciata* is a moderately large *Euxoa* (FW length 16–19 mm) that flies at middle to high elevations in the Cascade Mountains during the summer. It has uniform, dull, dark orange-brown forewings with black basal, antemedial, and postmedial lines. The color is nearly even, only the costa abutting the medial subterminal line is darker. The basal, antemedial, and postmedial lines are similar, dark gray to black with strong components abutting the median area and weaker elsewhere, filled with the ground color. The basal and antemedial lines are slightly irregular, oriented nearly transverse to the forewing axis. The median line is gray, very faint or absent. The postmedial line is weakly scalloped, slightly drawn toward the base on the costa, weakly excurved around the reniform spot and slightly angled toward the base below the spot. The subterminal line is pale but weak, broken into spots on the anterior forewing and absent from the posteriorly. The terminal line is thin, dark. The fringe is concolorous. The orbicular spot is partially outlined in thin black, oval, filled with the ground color. The reniform spot is black with a thin inner lining of luteous scales, kidney-shaped, filled with the ground color. The claviform spot is black, small and narrow, weak. The hindwing is even dark brown-gray with slightly darker veins and discal spot. The head and thorax match the forewing color, with a faint thin dark line across the mid-collar in some specimens. This species is a member of the subgenus *Pleonectopoda* which is characterized by a twist near the base of the vesica of the male aedeagus.
 
@@ -26,11 +26,11 @@ The range extends south from the Pacific Northwest to the Cascade Mountains and 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 *Euxoa trifasciata* flies during the summer, with records in our region from early July to early August.
 

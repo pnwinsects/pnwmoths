@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Trichordestra lilacina* is medium-sized moth (FW length 15–18 mm) that comes in two distinct forms. The most common form in the Pacific Northwest lacks most contrasting light and dark marks and is light slightly bluish gray with a red-brown wash on the anterior half of the forewing. The terminal area is gray, as is the lower half of the reniform spot. The lines and spots are red-brown filled with the gray ground and have a typical course for the genus except that the pale subterminal line is nearly straight across most of the wing without a significant W on M3 and CuA1. The dark form is slightly variable in the extent of pale veins on the basal and median wing. It is brighter blue-gray on the posterior wing, in most of the subterminal area, and at the apex and dark brown-gray elsewhere with red-brown flushes in the cell. The costal, subterminal area, and the terminal area are dark gray. A thin, black dash is present, and a small patch of gray is present below the cubital vein in the median area. The radial, cubital, and anal veins and proximal CuA1 and CuA2 are pale, nearly white in strongly streaked specimens. The lines are gray and black, as are the outlines of the spots. The orbicular spot is fairly large, oval, slanted with the anterior aspect medial, usually with strong black outline on the median and lateral edges, and filled with pale gray peripherally and a gray central spot. The reniform spot is filled with red-brown and a dark gray spot in the inferior portion. The claviform spot is strong black, moderate-size and apically pointed. The hindwing of both forms is light yellow-tan with gray-brown toward the margin, darker gray in the darker form, with darker veins and discal spot. The hindwing fringe is yellowish off-white. The head and thorax match the forewing color with transverse barring that is darker in the darker form. The eye is covered with fine hairs. The male antenna is filiform.
 
@@ -8,7 +8,7 @@ The plain form of this species resembles *Apamea alia* because of its blue and 
 
 The populations of *T. lilacina* from Pacific Beaches tend to be heavily streaked with pale veins, while those from prairies in the western part of the Northwest tend to be the unmarked form.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, yellow-green with broad yellow subdorsal and lateral stripes.  It is illustrated by Miller & Hammond (2003).
 
@@ -28,11 +28,11 @@ This species is found across northern North America but is more common and wides
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species appears to be a very broad generalist feeding on many kinds of herbaceous vegetation such as asters (*Aster* spp.) in the Asteraceae, grasses (Poaceae), and various hardwoods such as alder (*Alnus* spp.) in the Betulaceae.
 
-##### Adults
+### Adults
 
 The summer flight period of *T. lilacina*. It has been collected from late spring to early fall, although the majority of records are from June and July. It is nocturnal and comes to lights.
 

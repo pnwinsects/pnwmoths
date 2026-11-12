@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Pyrrhia exprimens* is a medium-sized (FW length 14 - 17 mm), smooth, dark orange-brown moth that flies in forests throughout our region during the summer. Its forewing is divided into thirds by the smooth median and postmedial lines and its hindwing is light yellow-brown with a dark gray marginal band. The forewing is orange-tan with a reddish tint, usually lightest from the base to the median line. The pattern of dark on the median and distal wing is variable. Light specimens have dark brown shading that fades toward the outer margin lateral to the median and postmedial lines; in some specimens, the shade at the postmedial line is purplish gray. More often, the brown color is nearly even between these lines, producing a wide brown band, and in a few specimens dark brown extends from the median line to the fringe to produce a two-toned pattern (as illustrated). The lines and outlines of the spots are dark orange-brown. The antemedial line is uneven, zig-zag between veins. The median and postmedial lines are similar, smooth, dark, and angled. The median line has a laterally-directed "nipple" in the cell that touches the lower reniform spot. The postmedial line is drawn toward the base at the costa and is very gently curved elsewhere. The subterminal line is incomplete, scalloped toward the base between veins and sometimes broken into a series of chevrons. The terminal line is thin. The fringe is similar to the ground color. The orbicular spot is moderate in size, round, and filled with the adjacent ground color. The reniform spot is moderately large, asymmetrically kidney-shape, larger anteriorly. It is filled with the color of the adjacent with peripherally, slightly darker gray centrally. There is no claviform spot. The hindwing is light yellow-brown with a dark gray marginal band that usually is incomplete near the outer margin, large discal spot, and veins. The terminal line is red-brown. The hindwing fringe is pale yellow-brown to dark pink. The head and thorax are orange brown, usually slightly darker orange-brown posterior to the collar. The male antenna is bead-like.
 
@@ -22,11 +22,11 @@ This species is widely distributed in moist forests and mountain meadows through
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species feeds on herbaceous plants with a preference for certain Ranunculaceae.  These include columbines (*Aquilegia* spp.) and *Delphinium* spp. in the Rocky Mountains, and probably meadowrue (*Thalictrum* spp.) west of the Cascades based upon the habitat.
 
-##### Adults
+### Adults
 
 The flight season of *P. exprimens* extends from late May to early August. It is a nocturnal species that is attracted to lights.
 

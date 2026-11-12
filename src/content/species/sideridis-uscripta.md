@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sideridis u-scripta* is a distinctive medium-sized moth (FW length 15 - 19 mm) that flies in habitat with sandy or pumice soils in early summer. It has a dark, warm, brown forewing with a U-shaped or fishhook-shaped white mark at the inferior reniform spot. The forewing has a slightly pointed apex. The costa is gray-brown, and a darker brown streak along the cubital vein along the lower cell extends toward the wing margin between veins M2 and M3. The veins are darker than the ground color except at the outer margin where they are white, extending into the fringe. A series of short, black lines are present at the position of the subterminal line in a few specimens, but the other lines are absent. A peculiar white mark is formed by the lower third of the reniform spot, otherwise nearly invisible, and usually also by the adjacent cubital vein along the distal cell. The hindwing is medium dark brown-gray, slightly darker toward the margin, with dark veins and discal spot. The head and thorax are uniform dark brown. The eye is covered with fine hairs. The male antenna is weakly beaded.
 
@@ -22,11 +22,11 @@ This species is found in western North America. The range extends from the south
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species.
 
-##### Adults
+### Adults
 
 Adults are single brooded and fly in early summer, earlier at low elevations than in the mountains. Records from the Pacific Northwest and northern California range from mid-May to mid-August.
 

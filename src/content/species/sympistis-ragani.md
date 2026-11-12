@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Sympistis ragani* is the largest (FW length 14 - 16 mm) of six similar gray Pacific Northwest species in the *Sympistis atricollaris* species-group that have with a black H-shaped pattern of antemedial and postmedial lines that are connected by a line across the median area. The forewing is even slightly powdery gray, slightly darker brownish gray on the distal wing and fringe. Black lines are present between veins to the outer margin, thickest and longest between veins M1 and M2 from the end of the cell across the postmedial line. The line connecting the antemedial and postmedial lines across the median area in the fold continues a distance toward the base and the outer margin in many specimens, an uncommon feature in the species-group. The basal and antemedial, and postmedial lines are black, thickest on the costa. The basal line is short. The antemedial line is nearly straight acros the wing, slightly bent with apex lateral at the connecting line. The postmedial line is smoothly sinuous, the anterior segment originates from the lateral third of the costa, is strongly convex toward the outer margin around the distal cell to meet the transverse connecting line at mid-wing where it bends sharply to run perpendicular to the trailing margin parallel to the antemedial line. The median line, subterminal line, and all spots are absent. The male hindwing is pearly white with gray limited to the extreme margin; that of the female is light gray with a wider and darker margin. Those of both sexes have dark gray veins on the outer third, a dark thin terminal line, and a fringe that is gray anteriorly fading to white at the anal angle. The head and base of the collar are brownish black. The rest of the thorax, including the collar, is gray. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ The range of this species extends to the Mexico border through California west o
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on honeysuckle (*Lonicera* spp.) in the Caprifoliaceae.
 
-##### Adults
+### Adults
 
 This species flies during the summer and early fall. It has been collected in June and from late August to mid-September and might be double-brooded. The adults fly during the night and come to lights.
 

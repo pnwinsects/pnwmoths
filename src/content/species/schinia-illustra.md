@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Schinia illustra* is a small (FW length 12 mm), beautiful moth that flies in southern Idaho during late summer. It has a sunburst pattern of orange-brown on the distal forewing and a reniform spot of a thin pale line surrounded by dark burnt-orange. The forewing ground color is pale orange-yellow. The base, median line, and subterminal area are orange-brown with a diffuse longitudinally streaked pattern. The darker orange color is drawn toward the outer margin between the veins, most prominently on the wing margin where the dark of the subterminal area reaches to the outer margin on the mid-wing. The antmedial and postmedial lines are dark burnt orange to red-brown, ill-defined. The antemedial line is evident on the mid-wing as an ill-defined dark triangle, apex lateral below the cell. The postmedial line is jagged, dark from the level of the superior reniform spot to vein 1A+2A near the trailing margin. The median line is the same orange-brown as the base and subterminal area, wide, diffuse, and expended between the veins. The subterminal line is evident as a jagged transition between the darker subterminal area and the light terminal area near the apex. The terminal line is a series of dark orange-brown to gray spots between the veins. The fringe is checkered ground color and orange-brown. The reniform is a diffuse patch of the same dark color as the antemedial and postmedial lines surrounding an S-shaped or C-shaped white line. The other spots are absent. The hindwing is cream, with a diffuse orange-brown discal spot and weak patchy suffusion along the inner and outer margins. The hindwing fringe is cream to white. The head and thorax match the paler forewing color. The antenna is filiform.
 
@@ -22,11 +22,11 @@ The only known locality for this species in the Northwest is along the south slo
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 The early stages of this moth are unknown. A possible foodplant is rabbitbrush (*Ericameria nauseosa*, Asteraceae) based on habitat association and the color of the moth.
 
-##### Adults
+### Adults
 
 This species flies in late summer and has been collected in late August in our region.
 

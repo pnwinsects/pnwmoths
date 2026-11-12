@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa infausta* is a small to medium-sized *Euxoa* (FW length 14–16 mm) that flies from late spring through summer in a variety of dry habitats. It has a smooth to powdery tan-gray to gray-brown forewing with dark lines and spots, including an elliptical orbicular spot. It also has a dark hindwing and a black line across the collar. The forewing color appears gray with a brownish cast or vice versa, usually moderately dark. A slight reddish flush is sometimes present, but it never appears to be pink or red-brown. The ground is usually smooth, occasionally mottled with powdery dark scales with faintly darker veins in the subterminal area. The costa in the subterminal area and the terminal area are darker and grayer. The basal, antemedial lines, and subterminal lines are gray, double dots on the costa and unequal in strength elsewhere, filled with the ground color. The antemedial line has darker gray or black lateral and faint gray inner components, is variably pulled toward the base on the veins, and is angled slightly toward the outer margin. The median line is usually absent, occasionally faint. The postmedial line has a dark evenly scalloped medial component and a fainter outer one, either strong near the costa and fainter elsewhere or strong across the width of the wing, drawn toward the base on the costa, smoothly and widely arched around the reniform spot, sometimes touching the spot, and then angled 45° basad below the spot. A distinctive form of this species has complete antemedial and postmedial lines that are black abutting the median area and pale outside of the area. The subterminal line is a pale shade of the ground color or yellowish, thin or broken into a series of spot, slightly irregular, preceded by a dark shade that matches the terminal area and the fringe. A series of black lines comprises the terminal line. The orbicular and reniform spots are partially outlined in thin dark gray or black and are filled with the ground color or a slightly paler shade peripherally and the ground color centrally, rarely light gray peripherally in strongly mottled specimens. The orbicular spot is moderately large, elliptical, often open toward the costa or both anteriorly and posteriorly, sometimes lacking a dark outline. The reniform spot is usually incomplete, strongest on the inner side or open anteriorly and posteriorly, sometimes with a thin inner lining of pale tan scales. No claviform spot is evident. The hindwing is brown-gray with darker gray margin, with dark veins, discal spot, and terminal line. The hindwing fringe is white with a gray base. The head and thorax match the forewing color with a thin to thick black line across the mid-collar. A frontal tubercle is present. The male antenna is biserrate. *Euxoa bicollaris* is place in the subgenus *Euxoa* and is a member of the *Euxoa* *infausta* species-group.
 
@@ -28,11 +28,11 @@ The range of *E. infausta* extends east across southern Canada to Saskatchewan a
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a soil-surface feeding cutworm that feeds on various herbaceous vegetation including the families Fabaceae and Brassicaceae.
 
-##### Adults
+### Adults
 
 The adults of *E. infausta* have a very long flight period. They have been collected from early May to early September in our region.
 

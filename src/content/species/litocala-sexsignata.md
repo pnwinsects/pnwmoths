@@ -1,12 +1,12 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Litocala sexsignata* is an unmistakable day-flying moth with yellow-spotted black hindwings. It is medium-sized (FW length 15 -16 mm) with broad forewings. The forewings are dark blueish-gray with a complex pattern of thin black lines and whitish gray between the reniform spot and a large loop of the postmedial line and in the median area abutting the antemedial line. The hindwing is jet black with three different-sized yellow spots and white fringe with a short black segment near the most lateral yellow spot. The entire body is gray. The antennae are simple in both sexes.
 
 This species is unmistakable due to its yellow-spotted hindwing.
 
-##### Larvae
+### Larvae
 
 Larva is smooth, mottled brown with subdorsal scalloped dashes, and a ventral fringe of whisker-like hairs below the lateral line.  It is illustrated by Miller & Hammond (2003).
 
@@ -26,11 +26,11 @@ This species is found from Montana and Washington to Colorado, Utah, and norther
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a foodplant specialist feeding on various Fagaceae.  In the Pacific Northwest, it feeds on oaks (*Quercus* spp.) including both canyon live oak (*Q. chrysolepis*) and Oregon white oak (*Q. garryana*), and golden chinquapin (*Castanopsis chrysophylla*).
 
-##### Adults
+### Adults
 
 *Litocala sexsignata* is a diurnal moth found in early spring. Records in our region are from mid-March until early May. It sips moisture at puddles and has been found nectaring at willow catkins (*Salix* spp.) (John Davis, personal communication).
 

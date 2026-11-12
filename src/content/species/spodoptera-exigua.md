@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Spodoptera exigua*, the beet armyworm, is a small pale gray brown noctuid moth (FW length 11 - 16 mm) with a fairly nondescript pattern that includes a pale round obicular with a gray to orange central ocellus and translucent white hindwings with a dark veins and dark marginal band at the anterior outer margin. The forewing is relatively narrow and long. It is slightly mottled medium-dark gray-brown with a subtle pattern of double gray lines filled with the ground color. The subterminal and/or terminal areas are mottled slightly darker gray in some individuals. The median line is gray, thin and wavy. The irregular pale subterminal line is preceded by long gray wedges between the veins in some specimens, strongest in the mid-wing and usually absent from the costal and trailing margins. A series of gray dots between the veins forms the terminal line. The small oval or round orbicular spot is very thin and black but prominent due to pale whitish or slightly yellow filling and a gray or burnt orange central ocellus. The reniform spot is thin, black outer and light inner components, and is filled with the ground color. The claviform spot absent or thin and gray. The hindwing is slightly shiny and translucent pearly white with dark gray veins and a thin gray marginal band that is widest at the anterior outer margin. The hindwing fringe is white. The head and thorax are sandy gray-brown. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species was introduced into North America in the late 1800's and was first 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of herbaceous vegetation, and is a major agricultural pest species on many crops across the southern United States.
 
-##### Adults
+### Adults
 
 Adults occur most commonly in late summer and fall in our region. It is likely that it is unable to overwinter in our area. It is nocturnal and comes to lights.
 

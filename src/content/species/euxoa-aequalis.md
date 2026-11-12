@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa aequalis* is a dull, even gray-brown, medium-sized *Euxoa* (FW length 15–18 mm) that flies in forests east of the Cascade summit during late summer and fall. Its forewings have large spots outlined in thin, black lines, and its hindwings are pale and sexual dimorphic -- males have a dark discal spot and patchy submarginal band, and females have a white fringe. The forewing varies from somber gray-brown to having a slight orange-tint. It is nearly evenly colored, slightly darker on the costa, especially abutting the subterminal line. A few specimens also have a similar terminal area or slightly darker veins in the subterminal area. The lines are gray, diffuse and usually faint. The basal, antemedial, and postmedial lines form paired spots on the costa. The antemedial line is double with components of similar strength, filled with the ground color, often evident across the wing, slightly irregular and oriented perpendicular to the posterior margin. The median line is very faint or absent. The postmedial line is often very faint, with more distinct evenly scalloped inner and more faint, diffuse, and even outer components, smoothly arched around the reniform and nearly straight at a 45° angle to the wing below the spot. The subterminal line is pale, powdery, usually barely evident. Black spots form the terminal line at the base of the concolorous fringe. The orbicular and reniform spots are partially outlined by thin black lines, are moderately large, and are filled with the ground color or powdery barely lighter gray-brown. The orbicular spot is oval, often incomplete, sometimes lacking an outline. The reniform spot is broadly kidney-shaped, usually open at both ends, sometimes with a powdery luteous lining. The claviform spot is black, small. The male hindwing is gray-tan off-white, with a gray discal spot and diffuse powdery submarginal band that leaves a narrow rim of the ground color adjacent to the thin dark terminal line. That of females is darker brown-gray with darker margin and a diffuse discal spot. The hindwing fringe is white in both sexes. The head and thorax match the forewing color. A frontal tubercle is present. The male antenna is widely biserrate. *Euxoa aequalis* is a member of the large subgenus *Euxoa*.
 
@@ -37,11 +37,11 @@ This species has a large range in western North America, occurring from Manitoba
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on general herbaceous vegetation like closely related species.
 
-##### Adults
+### Adults
 
 Adults of *E. aequalis* fly in late summer and fall. The earliest records from our region are from mid-July but the species is most commonly found in late August and September. It is nocturnal and comes to lights.
 

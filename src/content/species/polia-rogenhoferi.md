@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Polia rogenhoferi* is the darkest of our *Polia* species. It is a large moth (FW length 22 - 24 mm) that flies in subalpine forests in southern British Columbia in our region. The forewing is relatively short and broad, and the outer margin is slightly scalloped. The ground is powdery dark gray-brown, slightly mottled and darkest in the median area due to a diffuse median. The basal, antemedial, and postmedial lines are dark gray, double, and filled with lighter scales. The light filling forms light gray spots on the costa in a few specimens but the lines are relatively faint against the dark background elsewhere. The antemedial line is irregular, zig-zag between the veins on the posterior wing. The postmedial line is evenly scalloped between the veins, sharply drawn toward the base on the costa and undulating obliquely across the wing parallel to the outer margin elsewhere. The subterminal line is pale and finely irregular. It is preceded by a variable dark gray to black shade or series of ill-defined and partially fused spots between the veins, strongest at the costa, across from the cell, and in the fold. A series of crisp black triangles forms the terminal line. The fringe is the same color as the adjacent terminal area with pale lines across it at the ends of the veins in a few specimens. The orbicular spot is black with a faint pale inner line, round or slightly oval, and filled centrally with the ground color or slightly paler scales. The reniform spot is large and kidney-shape, black, thickest at the lower end, with an inner pale line that is white inferiorly and laterally and similar to the filling of the orbicular spot elsewhere, and filled with the ground color centrally. The claviform spot is black, variable in strength and size from absent, small, to extending half-way to the postmedial line. The hindwing is dark gray-brown with darker gray toward the margin, often with sparing of the terminal wing near the anal angle, with gray diffuse discal spot and postmedial line and thin terminal line. The fringe is two-toned, similar to the adjacent wing at the base with a lighter margin. The head and thorax are similar to the wing in color, usually with dark transverse line and lighter edge to the collar and dark edges on the tegulae; a weak tuft of scales is present on the anterior thorax. The eye surface is covered with fine hairs. The male antenna is biserrate with triangular segments.
 
@@ -24,11 +24,11 @@ The range of this species extends to the Atlantic across Canada, with scattered 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but McCabe (1980) suspects that huckleberries (*Vaccinium* spp.) in the Ericaceae may be foodplants.
 
-##### Adults
+### Adults
 
 Adults fly during the summer and have been collected in July and August in our region. It is nocturnal and comes to lights.
 

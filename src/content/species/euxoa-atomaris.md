@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa atomaris* is a common, late summer and fall-flying, small to medium-sized *Euxoa* (FW length 13–16 mm) with a white hindwing and light tan-gray to blackish gray forewings that are darkest near the costa and outer margin, often with a coppery cast. The forewings are somewhat powdery. The color is relatively pale posterior to the costa from the medial subterminal area to the base, with a smooth transition from this lighter area to darker and grayer on the costa and distal forewing. Specimens from arid deserts tend to be pale and those from forests, especially west of the Cascades, are dark. The lines and spots are similar in prominence, relatively obscure. The dark elements of the pattern dominate in light-colored specimens, and the light filling is most prominent in dark ones. The basal line is obscure, evident only on the costa. The antemedial line is partially outlined in gray, absent except on the costa in some pale specimens, double, filled with a light shade of the ground color, slightly irregular and angled slightly toward the outer margin. The median line is gray, diffuse and faint, often absent except on the costa. The postmedial line is gray, weakly scalloped, sometimes with a fainter smooth outer component. It is drawn toward the base on the costa, bent near the costa and again at the level of the lower reniform spot, and nearly straight at a 45° angle toward the base below the spot. The subterminal line is tan, thin, powdery, and inconspicuous, slightly irregular. The costa preceding this line is slightly darker gray than the rest of the distal wing, and a few small black chevrons are present near it on the mid-wing in a few specimens. The terminal line is gray, thin or broken into spots. The fringe is similar to the terminal area or slightly lighter. The orbicular and reniform spots are similar, outlined in variable gray to black outer and pale tan inner components, often lacking part or all of the outer dark component, and filled with the ground color or light to dark gray. The orbicular spot is oval and the reniform spot is kidney-shaped. The claviform spot is black, weak to normal, thin, small to moderate-sized. The hindwing is white in males, marked with a dark terminal line and dark veins near the margin or more extensive in a few specimens. Females have gray hindwings with a dark gray shade on the outer half, dark veins and terminal line. The fringe is white with a gray base in dark specimens. The head and thorax are powdery and match the forewing color. The male antenna is biserrate with long fasciculations. *Euxoa atomeris* is a member of the subgenus *Pleonectopoda*. This subgenus is defined by a twist or coil of the male vesica near the base. Unlike *E. atomaris* most members of this subgenus prefer high latitudes or altitudes.
 
@@ -28,11 +28,11 @@ The range of this species includes much of the American West to the Great Plains
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on general herbaceous vegetation based upon related species.
 
-##### Adults
+### Adults
 
 The adults fly in late summer and fall in the dry interior of our region, usually from late August through September. The populations from west of the Cascades fly slightly earlier in the season. This species is nocturnal and comes to lights.
 

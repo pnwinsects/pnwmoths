@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Abagrotis orbis* is a broad-winged, medium-sized *Abagrotis* (FW length 16–18 mm) that is usually pale gray-brown with a narrow reniform spot with the lower half filled with black scales. The ground color varies from putty gray, light gray-brown, to light orange-brown and is sprinkled with black scales to produce a slightly powdery look. The terminal area is usually lighter slightly blue-gray, accentuated by the pale subterminal line and preceding even thin gray shade. The basal, antemedial, and postmedial lines are very faint except for dots at the costa, slightly darker than the ground color elsewhere, double, and filled with the ground color. The orbicular spot is pale, small, and round and is usually filled with the ground but occasionally darker scales. The reniform is similar but is more prominent due to filling of dark gray to black scales, often forming a black dot in the lower portion. The hindwing is dark brownish gray with a light two-toned fringe. The head and thorax are even and match the forewing in color. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species occurs throughout much of the American West as far north as souther
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods including such families as Rosaceae, Salicaceae, Aceraceae, and Vitaceae.  It may be a serious agricultural pest in fruit orchards.
 
-##### Adults
+### Adults
 
 Adults are found in the summer from mid-June to early September in our area. It is nocturnal and comes to lights.
 

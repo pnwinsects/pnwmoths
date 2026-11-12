@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Euxoa edictalis* is our earliest-flying *Euxoa* and is on the wing with some of the earliest moths in April. It is a medium-sized moth (FW length 15–17 mm) with a uniform hoary olive-tan ground color color and black transverse lines and spots. In some specimens, the cell between the spots is dark gray. The basal line is inconspicuous near the base. The antemedial line is slanted slightly toward the outer margin and is toothed strongly toward the base on the veins. The median line is faint and diffuse, often absent.  The postmedial line is strongly and evenly toothed. The subterminal line is pale, barely evident near the costa and absent elsewhere. The terminal line is a series of black spots. The fringe is slightly lighter than the terminal area. The orbicular and reniform spot are usually faintly and incompletely outlined by dark gray and filled with the ground color or a slightly lighter shade thereof. The orbicular spot is oval, sometimes nearly touching the reniform spot. The reniform spot is kidney-shaped. The claviform spot is inconspicuous, sometimes absent, narrow. The hindwing is light gray-tan at the base and slightly darker gray elsewhere, with a dark discal spot and a pale whitish fringe. The head and thorax match the forewing color. The male antenna is bipectinate and unusually wide for the genus.
 
@@ -8,7 +8,7 @@ This moth can usually be recognized by its uniform olive-gray color, simple patt
 
 This species is one of three members of the subgenus *Longivesica* in our region. They are characterized by a very long vesica of the male aedeagus and a long appendix bursae in the female.
 
-##### Larvae
+### Larvae
 
 The early stages are unknown.
 
@@ -28,11 +28,11 @@ The range of this species extends south through eastern California, including at
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it is probably a soil-surface feeding cutworm that feeds on herbaceous vegetation based on related species.
 
-##### Adults
+### Adults
 
 Adults fly very early in the year, mostly in April to early May. They are nocturnal and come to lights.
 

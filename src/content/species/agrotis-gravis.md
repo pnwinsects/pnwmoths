@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Agrotis gravis* is a distinctive, small to medium-sized (FW length 13 - 16 mm), light brown-gray to blackish-brown *Agrotis* that flies on Pacific Coast beaches in late spring and early summer. It has an oblique orbicular spot and a large reniform spot that is drawn toward the forewing base at the posterior end. The forewing ground color is variable, ranging from mottled, medium dark blue-gray, brown-gray, gray-brown, dull red-brown, or dark blackish-brown. Lighter colored specimens have a darker costa, often with a red-brown patch between the postmedial and subterminal lines, and dark gray to black margin. The transverse lines are black and double, but relatively indistinct except near the costa. The antemedial line is irregular and the postmedial line is dentate. The pale subterminal line is extended to the margin on veins M3 and CuA1, forming a pale "W" against the dark margin, and is preceded by black wedges in the middle of the forewing. The orbicular and reniform spots are black with an inner pale ochre or gray line and dark central filling. The orbicular spot is oval, occasionally fused to the reniform spot. The reniform spot is large and drawn toward the base along the cubital vein in most specimens. The light inner component of the medial part of the spot is the most conspicuous part. The claviform spot is black and moderately large. The hindwing is pale gray with a slight brownish tint basally and with a smoky gray submarginal to marginal band, discal spot, and veins, and a gray fringe in males; it is entirely darker gray in females. The ground color of the thorax matches the forewing. The collar is striped with transverse black lines and a light tip. The tegulae are light gray to brown with darker gray margins. The male antenna is weakly bipectinate.
 
@@ -22,11 +22,11 @@ The northern limits of this species is reached in our region. Further south it o
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a sand-burrowing cutworm that feeds on general herbaceous vegetation.
 
-##### Adults
+### Adults
 
 The species is single-brooded with a long flight period that lasts from early April to early July. It is nocturnal and comes to lights.
 

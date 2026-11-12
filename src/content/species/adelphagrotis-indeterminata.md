@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Adelphagrotis indeterminata* is a distinctive, small to medium-sized (FW length 14 - 16 mm) blackish gray-brown moth with a light orange reniform spot and a collar with a light brown base and thick black bar across the tip. The forewing is dark purplish gray with warmer brown in the posterior median area. A black basal dash is present. The transverse lines are black. The antemedial and postmedial lines of many individuals are markedly irregular across the posterior median area and are partially fused with each other and the black claviform spot to produce a series of transverse black marks. The subterminal line is a series of light yellow spots and is preceded by a dark mark at the costa. The orbicular spot is inconspicuous, evident mostly due to black filling of the cell from the antemedial line to the reniform spot that accentuates its ground color filling. The reniform spot is black, kidney-shaped, and very prominent due to filling with ochre and burnt orange. The hindwing is gray, darkest near the margin, with a dark discal spot and lighter gray two-toned fringe. The head and most of the thorax are even purplish gray. The base of the collar is whitish gray and the dorsal portion is a broad black band. The male antenna is beaded.
 
@@ -24,11 +24,11 @@ The range of this species extends south through California to just north of the 
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 This species is a generalist feeding on many kinds of hardwoods in such genera as *Salix* in the Salicaceae, *Holodiscus*, *Rubus*, and *Spiraea* in the Rosaceae, *Ceanothus* in the Rhamnaceae, and *Symphoricarpos* in the Caprifoliaceae.
 
-##### Adults
+### Adults
 
 This species has been collected from early July to early September in our region. It is nocturnal and comes to lights.
 

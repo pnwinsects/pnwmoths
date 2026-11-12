@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Ponometia binocula* is a small (FW length 11–12 mm) that is found in the eastern part of the Northwest and flies during the summer. It has pure white forewings marked with greenish gray on the outer half. The basal half of the forewing, most of the costa, and the apical fringe are pure white. A greenish gray spot is present at the costa at the position of the median line. The dominant forewing marking is a dark smooth band of greenish gray and slightly purplish gray that extends from between the expected positions of the median and postmedial lines at the trailing margin anteriorly to surround the reniform spot and then bends anterolaterally and thins slightly to the apex. A band of light purplish gray is present in the terminal area, and the base of the fringe is the same color. A thin dark terminal line is present. The reniform spot is perfectly round and has a pale outline and purplish gray filling. The other spots are absent. The hindwing is pale whitish gray with darker gray on the outer margin, thickest anteriorly. The hindwing fringe is white. The head and body are pure white. The male antenna is filiform.
 
@@ -22,11 +22,11 @@ This species is distributed in the central United States and adjacent south-cent
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants of this species, but it probably feeds on Asteraceae like closely related species.
 
-##### Adults
+### Adults
 
 *Ponometia binocula* flies during the summer and has been collected during July in and near the Northwest. It is nocturnal and comes to lights.
 

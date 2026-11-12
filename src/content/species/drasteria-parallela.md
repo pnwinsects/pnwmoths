@@ -1,6 +1,6 @@
 ## Identification
 
-##### Adults
+### Adults
 
 *Drasteria parallela* is a medium to large (FW length 17–20 mm), brown and pale orange *Drasteria* with a double median line that flies on high ridges in the Cascade Mountains during the summer. The forewing is dark brown with tan and gray mottling medial to the antemedial line and in the subterminal area, light tan in the medial area, and two-toned in the terminal area, pale to medium gray medially and blue-gray to brown-gray distally. The apex is darker gray to black. As in other members of the genus, the medial area distal to the reniform spot balloons toward the outer margin and is strongly toothed on the veins, contains a pale scales, and resembles a large reniform spot, whereas the true reniform spot is dark and inconspicuous. The basal, antemedial, and postmedial lines are similar, wide, black, double, with chestnut brown filling. The basal line is oblique toward the outer margin from its origin near the base, fading by mid-forewing. The antemedial line is complete, strongly laterally convex, and drawn sharply toward the base on the costa, mid-forewing, and posterior margin. Postmedial line complex near reniform to form above-mentioned false reniform spot, then nearly straight from bottom of true reniform spot to posterior margin. The median line is dark gray, double with parallel components of similar strength. Subterminal line double with dark brown to black inner and gray outer components, filled with tan, offset slightly near the costa and smooth with slight undulation elsewhere. It is preceded by a black line or series of black wedges between the veins. The terminal line is black. The orbicular and claviform spots are absent. The reniform spot is ovoid, black, less apparent than pale medial area lateral to it and instead giving the impression that it is the anterior continuation of the posterior portion of the subterminal line. Fringe dark gray brown with tan to brown base, weakly checkered in some specimens. Dorsal hindwing dull light orange with black discal spot, irregular postmedial line and marginal band. The discal spot is quadrate, separate from postmedial line, and surrounded by dark gray veins. The hindwing fringe similar orange to ground color, with variable gray basal suffusion. The head and thorax are brown. The antennae are ciliate in males and simple in females.
 
@@ -26,11 +26,11 @@ This species has a West Coast distribution. It occurs south to the northern Sier
 
 ## Life History
 
-##### Larvae
+### Larvae
 
 No information is presently available regarding larval foodplants for this species. Related species of *Drasteria* feed on buckwheats (*Eriogonum* spp., Polygonaceae).
 
-##### Adults
+### Adults
 
 *Drasteria parallela* flies during summer, with Pacific Northwest records from late June to early August. It is nocturnal and comes to lights.
 
