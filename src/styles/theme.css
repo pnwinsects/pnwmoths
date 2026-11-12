@@ -425,6 +425,26 @@ nav a:hover {
   padding-left: 1.5rem;
 }
 
+/* A taxon with no records in the selected state or district (#205, ADR 0059). Text is
+   greyed with Pico's muted colour, 5.4:1 on the white content area (WCAG 1.4.3); the
+   old opacity:0.35 left it near 2:1, and compounded when rows nested. Photos still fade,
+   since they carry no text. Screen readers get the same fact as hidden text on the heading. */
+.pnwm-tb-muted,
+.pnwm-tb-muted :is(h2, h3, h4, h5, h6, a) {
+  color: var(--pico-muted-color);
+}
+
+.pnwm-tb-muted img {
+  opacity: 0.35;
+}
+
+/* Empty until a filter is chosen; with no margin it then takes no space. Never
+   display:none, or screen readers may not announce it when it fills (see #200). */
+.pnwm-tb-summary {
+  margin: 0;
+  padding: 0 16px;
+}
+
 /* --- Leaflet zoom controls --- */
 /* Leaflet's +/- buttons are <a role="button">. Pico's classless rules for
    [role="button"] apply form-element padding to them, which pushes the glyph

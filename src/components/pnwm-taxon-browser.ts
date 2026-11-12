@@ -155,6 +155,28 @@ export function districtLabel(selectedState: string): string {
 }
 
 /**
+ * The selected place in words, as a visitor would say it: "Washington", "Adams County,
+ * Washington", "Capital Regional District, British Columbia". Empty when no state is chosen.
+ */
+export function placeName(selectedState: string, selectedDistrict: string): string {
+  if (!selectedState) return '';
+  const state = STATE_NAMES[selectedState] ?? selectedState;
+  return selectedDistrict ? `${selectedDistrict} ${districtLabel(selectedState)}, ${state}` : state;
+}
+
+/**
+ * The sentence announced when a filter changes (#205). Groups with no records in the place
+ * stay on the page, greyed out, because "Washington has no Lasiocampidae" is itself worth
+ * knowing (ADR 0059); this sentence says how much of the list matched, so a screen-reader
+ * user does not have to read every group to find out.
+ */
+export function filterSummary(matching: number, total: number, place: string): string {
+  if (!place) return '';
+  const n = (x: number): string => x.toLocaleString('en-US');
+  return `${n(matching)} of ${n(total)} species have records in ${place}. Groups with none are greyed out.`;
+}
+
+/**
  * Recursively collect all species slugs from any taxon tree node.
  * Handles family ({subfamilies:[]}), subfamily ({tribes:[]}), tribe ({genera:[]}),
  * genus ({species:[]}).
@@ -537,19 +559,35 @@ class PnwmTaxonBrowser extends LitElement {
     }
   }
 
-  // --- Muting helper ---
-  // D-06: opacity:0.35 on taxa with no records in selected state; never display:none
+  // --- Muting helpers ---
+  // A taxon with no records in the selected place stays on the page, greyed out, never
+  // display:none (D-06, ADR 0059). Its heading also carries hidden text saying so, because
+  // grey text tells a screen-reader user nothing (#205).
 
-  _mutedStyle(slugs: string[]): string {
+  _hasRecords(slugs: string[]): boolean {
     if (this._selectedDistrict) {
-      return taxonHasDistrict(slugs, this._districtMap, this._selectedState, this._selectedDistrict)
-        ? ''
-        : 'opacity:0.35';
+      return taxonHasDistrict(slugs, this._districtMap, this._selectedState, this._selectedDistrict);
     }
-    if (!this._selectedState) return '';
-    return taxonHasState(slugs, this._stateMap, this._selectedState)
-      ? ''
-      : 'opacity:0.35';
+    return taxonHasState(slugs, this._stateMap, this._selectedState);
+  }
+
+  /** The row's class list: its own class, plus pnwm-tb-muted when it has no records here. */
+  _rowClass(rowClass: string, slugs: string[]): string {
+    return this._hasRecords(slugs) ? rowClass : `${rowClass} pnwm-tb-muted`;
+  }
+
+  /** Hidden text appended to a muted row's heading button, read as part of its name. */
+  _noRecordsNote(slugs: string[]): TemplateResult | string {
+    if (this._hasRecords(slugs)) return '';
+    return html`<span class="sr-only">, no records in ${placeName(this._selectedState, this._selectedDistrict)}</span>`;
+  }
+
+  _summary(): string {
+    const place = placeName(this._selectedState, this._selectedDistrict);
+    if (!place) return '';
+    const all = this._families.flatMap(f => collectSlugs(f));
+    const matching = all.filter(slug => this._hasRecords([slug])).length;
+    return filterSummary(matching, all.length, place);
   }
 
   // --- Level renderers ---
@@ -602,9 +640,9 @@ class PnwmTaxonBrowser extends LitElement {
       type="button"
       aria-expanded="${expanded}"
       @click=${() => this._toggleGenus(key)}
-    >${genus.name}</button>`;
+    >${genus.name}${this._noRecordsNote(slugs)}</button>`;
     return html`
-      <div class="pnwm-tb-genus-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
+      <div class="${this._rowClass('pnwm-tb-genus-row', slugs)}" id="${taxonFragment(target)}">
         ${this._disclosureHeading(level, heading)}
         ${!expanded ? this._renderImageStrip(genus.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         ${expanded ? this._renderSpecies(genus.species, genus.name) : ''}
@@ -634,9 +672,9 @@ class PnwmTaxonBrowser extends LitElement {
       type="button"
       aria-expanded="${expanded}"
       @click=${() => this._toggleTribe(key)}
-    >${tribe.name}</button>`;
+    >${tribe.name}${this._noRecordsNote(slugs)}</button>`;
     return html`
-      <div class="pnwm-tb-tribe-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
+      <div class="${this._rowClass('pnwm-tb-tribe-row', slugs)}" id="${taxonFragment(target)}">
         ${this._disclosureHeading(level, heading)}
         ${!expanded ? this._renderImageStrip(tribe.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
@@ -664,9 +702,9 @@ class PnwmTaxonBrowser extends LitElement {
       type="button"
       aria-expanded="${expanded}"
       @click=${() => this._toggleSubfamily(key)}
-    >${subfam.name}</button>`;
+    >${subfam.name}${this._noRecordsNote(slugs)}</button>`;
     return html`
-      <div class="pnwm-tb-subfamily-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
+      <div class="${this._rowClass('pnwm-tb-subfamily-row', slugs)}" id="${taxonFragment(target)}">
         ${this._disclosureHeading(3, heading)}
         ${!expanded ? this._renderImageStrip(subfam.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
@@ -680,13 +718,13 @@ class PnwmTaxonBrowser extends LitElement {
     const slugs = collectSlugs(family);
     const target = { family: family.name };
     return html`
-      <div class="pnwm-tb-family-row" id="${taxonFragment(target)}" style="${this._mutedStyle(slugs)}">
+      <div class="${this._rowClass('pnwm-tb-family-row', slugs)}" id="${taxonFragment(target)}">
         <h2>
           <button
             type="button"
             aria-expanded="${expanded}"
             @click=${() => this._toggleFamily(family.name)}
-          >${family.name}</button>
+          >${family.name}${this._noRecordsNote(slugs)}</button>
         </h2>
         ${!expanded ? this._renderImageStrip(family.navImages, (slug) => this._expandToSpecies(slug)) : ''}
         <div ?hidden=${!expanded}>
@@ -757,6 +795,9 @@ class PnwmTaxonBrowser extends LitElement {
           </select>
         </div>
       </div>
+      ${/* Always in the page, even when empty: a live region inserted or un-hidden at the
+         moment its text changes is often not announced. */ ''}
+      <p class="pnwm-tb-summary" role="status">${this._summary()}</p>
       ${this._families.map(f => this._renderFamily(f))}`;
   }
 }

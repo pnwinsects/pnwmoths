@@ -607,6 +607,45 @@ export const CHECKS: Check[] = [
     },
   },
   {
+    // #205 (WCAG 1.3.1): a state filter used to fade non-matching groups and do nothing else,
+    // so a screen reader read every group as an equally good result. Greyed-out groups now
+    // carry hidden text in their heading's name, and a status line says how much matched.
+    name: 'browse: a state filter tells screen readers which groups have no records',
+    async run({ page, origin }) {
+      await page.goto(`${origin}/browse/`, { waitUntil: 'load' });
+      const state = page.locator('#pnwm-tb-state-filter');
+      await page.waitForFunction((el: HasAttributes) => el.getAttribute('disabled') === null, await state.elementHandle());
+      await state.selectOption('WA');
+
+      const summary = page.locator('.pnwm-tb-summary[role="status"]');
+      try {
+        await page.waitForFunction(
+          (el: HasTextContent) => /species have records in Washington/.test(el.textContent ?? ''),
+          await summary.elementHandle(),
+        );
+      } catch {
+        fail(`choosing Washington did not fill the status line; it reads ${JSON.stringify(await summary.innerText())}.`);
+      }
+
+      const muted = page.locator('.pnwm-tb-muted > :is(h2, h3, h4, h5, h6) > button');
+      const mutedCount = await muted.count();
+      if (mutedCount === 0) {
+        fail('choosing Washington greyed out no groups, so this check cannot tell whether they are announced.');
+      }
+      const unnamed: string[] = [];
+      for (let i = 0; i < mutedCount; i++) {
+        const text = (await muted.nth(i).textContent()) ?? '';
+        if (!text.includes('no records in Washington')) unnamed.push(text.trim());
+      }
+      if (unnamed.length > 0) {
+        fail(
+          `${unnamed.length} of ${mutedCount} greyed-out group(s) lack the hidden "no records in Washington" ` +
+            `text, e.g. ${JSON.stringify(unnamed.slice(0, 3))}.`,
+        );
+      }
+    },
+  },
+  {
     // WCAG 1.4.10 (Reflow): at 320 CSS pixels, the width of a phone and of a desktop browser at
     // 400% zoom, a page must not scroll sideways. Every page did, by 8px, because of a Pico margin
     // on the header nav, and Browse reached 474px once a state was chosen (#206). Neither shows
