@@ -106,10 +106,13 @@ replaced.
 
 **Ours was a number MPG gives another species (8).** *Schinia crotchii* 93-2084 → 93-2085; *Ponometia tortricina* 93-1316 → 93-1326; *Tetanolita palligera* 93-0516 → 93-0517; *Clostera multnoma* 93-0008 → 93-0008.1; *Virbia ferruginosa* 93-0298 → 93-0336.65; *Stiria rugifrons* 93-1668 → 93-1688; *Bruceia pulverina* 93-0212 → 93-0213; *Oedemasia salicis* 93-0103 → 93-0103.1.
 The report flags these as `number-of-another-species`, the check the curator asked for. Five are
-one digit from the right number, which reads as a typing error. Three follow a split, and the number
+one digit from the right number, which reads as a typing error. Two follow a split, and the number
 now goes with the name: *Clostera multnoma* held *C. brucei*'s number, and we hold both (C-009);
-*Oedemasia salicis* held *O. concinna*'s (C-011); *Virbia ferruginosa* held the number MPG now
-gives *V. fergusoni*, and nothing in this log says which of the two our records are.
+*Oedemasia salicis* held *O. concinna*'s (C-011). *Virbia ferruginosa* held 93-0298, which MPG's
+provisional 2016 list gave *V. fergusoni* (ferruginosa was 93-0306 there). That is not a split that
+reaches us: *V. fergusoni* (Zaspel, 2008) is a species of the southeastern United States, from
+Georgia and northern Florida to South Carolina, and our 106 records are from British Columbia,
+Alberta and Oregon. The number came from the legacy site's database when it was migrated in April 2026.
 
 **Ours was in no edition of MPG (2).** *Melanchra assimilis* 93-2876.1 → 93-2877; *Drasteria maculosa* 93-0907 → 93-0908.
 
