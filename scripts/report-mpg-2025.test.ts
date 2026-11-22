@@ -166,6 +166,19 @@ describe('findDifferences', () => {
     );
   });
 
+  it("counts a held species as held when MPG writes its genus in quotes", () => {
+    const rows = findDifferences({
+      species: [ours({ genus: 'Perizoma', species: 'alpha' })],
+      pNo2023BySlug: new Map([['perizoma-alpha', '91a1000']]),
+      mpg: [
+        mpgSpecies({ genus: '"Perizoma" (group 2)', species: 'alpha', pNo2025: '91a1000', pNo2023: '91a1000' }),
+        mpgSpecies({ genus: '"Perizoma" (group 2)', species: 'beta', pNo2025: '91a1000.1n', pNo2023: '91a1000' }),
+      ],
+      shown,
+    });
+    assert.deepEqual(rows.map((r) => r.note), ['we hold 1 of the 2']);
+  });
+
   it('prefers the exact name when the 2023 number has moved to another species', () => {
     const rows = findDifferences({
       species: [ours({ genus: 'Speranza', species: 'amboflava' })],

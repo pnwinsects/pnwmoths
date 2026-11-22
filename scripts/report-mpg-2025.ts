@@ -38,7 +38,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { stringify } from 'csv-stringify/sync';
 import { mpgKey, normalizeEpithet, normalizeGenus, slugOf } from './build-checklist-order.ts';
-import { loadWithheldFamilies } from '../src/_lib/withheld-families.ts';
+import { isWithheldOrUnclassified, loadWithheldFamilies } from '../src/_lib/withheld-families.ts';
 import { loadUnpublishedSpecies } from '../src/_lib/unpublished-species.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -237,7 +237,9 @@ export function findDifferences({ species, pNo2023BySlug, mpg, shown }: Inputs):
     // One old number now carried by several species: MPG split a species, and
     // we may hold the old concept under one name, or both halves.
     if (sharers.length > 1) {
-      const held = sharers.filter((s) => ourSlugs.has(slugOf(s)));
+      const held = sharers.filter((s) =>
+        ourSlugs.has(slugOf({ genus: normalizeGenus(s.genus), species: normalizeEpithet(s.species) })),
+      );
       add(
         'p-number-split',
         pNo2023BySlug.get(slug) ?? '',
@@ -261,7 +263,7 @@ export function loadInputs(): Inputs {
   const unpublished = loadUnpublishedSpecies();
   const shown = new Set(
     species
-      .filter((s) => s.family && !withheld.has(s.family) && !unpublished.has(slugOf(s)))
+      .filter((s) => !isWithheldOrUnclassified(s.family, withheld) && !unpublished.has(slugOf(s)))
       .map(slugOf),
   );
   return {
