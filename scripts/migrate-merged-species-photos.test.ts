@@ -15,6 +15,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import { FILE_COPIES, TILE_TREES, retargetMergedTileKey, storageUrl, redact } from './migrate-merged-species-photos.ts';
+import { photoPath } from '../src/_lib/photo-path.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -75,8 +76,10 @@ test('FILE_COPIES: every pair changes the key, keeps the historical binomial, no
 test('FILE_COPIES: every target is tracked in images.csv or image-derivatives.csv', () => {
   const images = parse(readFileSync(resolve(ROOT, 'data/images.csv')), {
     columns: true, skip_empty_lines: true, bom: true,
-  }) as Array<{ species_slug: string; filename: string }>;
-  const imageKeys = new Set(images.map(r => `${r.species_slug}/${r.filename}`));
+  }) as Array<{ species_slug: string; filename: string; cdn_folder: string }>;
+  // By storage path, not species: a photograph stays in its folder when its species is
+  // renamed (ADR 0054), as macaria-occiduaria's did when it left Speranza (#279).
+  const imageKeys = new Set(images.map(photoPath));
 
   const derivatives = parse(readFileSync(resolve(ROOT, 'data/image-derivatives.csv')), {
     columns: true, skip_empty_lines: true, bom: true,

@@ -281,13 +281,12 @@ describe('data/checklist-order.csv', () => {
   // groups by genus and anchors each block at its earliest species' position,
   // so interleaved rows here still render as unbroken blocks. Fragmentation
   // in this file is nonetheless worth noticing — it means our genus label
-  // disagrees with MPG's sequence somewhere — so the known cases are pinned:
-  // C-026 keeps bitactata/decorata in Speranza while colata/lorquinaria/
-  // plumosata returned to Macaria, and MPG (which places them all in Macaria)
-  // sequences the two sets interleaved. C-042 puts MPG's "Perizoma" (Group 1)
-  // custodiata under plain Perizoma beside the two Group 2 species, and MPG
-  // sequences the groups about 180 rows apart. A new genus appearing here
-  // deserves the same scrutiny before it is added.
+  // disagrees with MPG's sequence somewhere — so the known case is pinned:
+  // C-042 puts MPG's "Perizoma" (Group 1) custodiata under plain Perizoma beside
+  // the two Group 2 species, and MPG sequences the groups about 180 rows apart.
+  // (Macaria and Speranza were split here too, until the #279 genus moves put
+  // each species in MPG's genus.) A new genus appearing here deserves the same
+  // scrutiny before it is added.
   it('fragments only the genera the curation log explains', () => {
     const spans = new Map<string, number[]>();
     ordered.forEach((row, rank) => {
@@ -300,7 +299,7 @@ describe('data/checklist-order.csv', () => {
       .filter(([, ranks]) => (ranks.at(-1) ?? 0) - (ranks[0] ?? 0) !== ranks.length - 1)
       .map(([genus]) => genus)
       .sort();
-    assert.deepEqual(fragmented, ['macaria', 'perizoma', 'speranza']);
+    assert.deepEqual(fragmented, ['perizoma']);
   });
 
   it('puts families in the standard Pohl sequence', () => {

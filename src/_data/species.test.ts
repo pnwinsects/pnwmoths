@@ -104,20 +104,21 @@ test('species: genus_slug is the lowercased, space-hyphenated genus for a full f
 });
 
 test('species: genus_slug resolves for a species with no subfamily or tribe', async () => {
-  // No currently-published row has a null subfamily (see species.csv: rows with a blank
-  // subfamily are all deny-listed / unpublished morphospecies), so this exercises the
-  // genus_slug transform directly against a raw CSV row with that hierarchy shape rather
-  // than through getSpecies()'s publish gate.
+  // This exercises the genus_slug transform directly against a raw CSV row with that
+  // hierarchy shape, rather than through getSpecies()'s publish gate.
   const allRows = parse(
     readFileSync(resolve(ROOT, 'data/species.csv')),
     { columns: true, skip_empty_lines: true },
   ) as Array<{ genus: string; species: string; family: string; subfamily: string; tribe: string }>;
-  const row = allRows.find(r => r.genus === 'Macrochilo' && r.species === 'bivittata');
-  assert.ok(row, 'Macrochilo bivittata should exist in species.csv');
+  // MPG places Tyta in no named subfamily ("[Noctuidae – group 1 unplaced to subfamily]"),
+  // so since #279 it has neither. Macrochilo bivittata played this part until #279 gave
+  // it MPG's Herminiinae.
+  const row = allRows.find(r => r.genus === 'Tyta' && r.species === 'luctuosa');
+  assert.ok(row, 'Tyta luctuosa should exist in species.csv');
   assert.equal(row.subfamily, '');
   assert.equal(row.tribe, '');
   const genusSlug = row.genus.toLowerCase().replace(/ /g, '-');
-  assert.equal(genusSlug, 'macrochilo');
+  assert.equal(genusSlug, 'tyta');
 });
 
 test('species: genus_slug resolves for a species with a subfamily but no tribe', async () => {

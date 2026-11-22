@@ -517,6 +517,46 @@ describe('findBadCdnFolders', () => {
   });
 });
 
+describe('a relation that may be empty', () => {
+  const tmp = resolve(ROOT, '.tmp-integrity-empty');
+  after(() => rmSync(tmp, { recursive: true, force: true }));
+  const write = (text: string): Relation => {
+    mkdirSync(tmp, { recursive: true });
+    writeFileSync(join(tmp, 'x.csv'), text);
+    return relation({ path: join(tmp, 'x.csv'), column: 'species_slug', mayBeEmpty: true });
+  };
+
+  it('passes the gate with a header and no rows', () => {
+    const rel = write('species_slug,mpg_binomial,source\n');
+    const refs = readReferences(rel, ROOT);
+    assert.deepEqual(refs, []);
+    const report = findViolations(SPECIES, new Map([[rel.name, refs]]), [], [rel]);
+    assert.deepEqual(report.violations, []);
+  });
+
+  // The renamed-column case the `empty` check exists for must still fail.
+  it('still refuses a file whose header lost the column', () => {
+    const rel = write('slug,mpg_binomial,source\naaa-one,Aaa one,x\n');
+    assert.throws(() => readReferences(rel, ROOT), /has no "species_slug" column/);
+  });
+
+  it('reads the header as the parser does: a quoted name passes, a padded one does not', () => {
+    assert.deepEqual(readReferences(write('"species_slug",mpg_binomial,source\n'), ROOT), []);
+    assert.throws(() => readReferences(write(' species_slug,mpg_binomial,source\n'), ROOT), /has no "species_slug" column/);
+  });
+
+  it('refuses rows whose slug cells are all blank', () => {
+    const rel = write('species_slug,mpg_binomial,source\n,Aaa one,x\n');
+    assert.throws(() => readReferences(rel, ROOT), /has rows but no "species_slug" values/);
+  });
+
+  it('is still empty, and fails, without the option', () => {
+    const rel = { ...write('species_slug\n'), mayBeEmpty: false };
+    const report = findViolations(SPECIES, new Map([[rel.name, readReferences(rel, ROOT)]]), [], [rel]);
+    assert.deepEqual(report.violations.map((v) => v.kind), ['empty']);
+  });
+});
+
 describe('the CLI', () => {
   const tmp = resolve(ROOT, '.tmp-integrity-cli');
   const SCRIPT = resolve(ROOT, 'scripts/check-referential-integrity.ts');
@@ -649,7 +689,7 @@ describe('the real tree', () => {
     // A global floor is too slack to be useful: dropping any one relation but
     // images.csv still leaves >10,000 references. Per-relation is the real guard,
     // and the `empty` violation enforces the same thing at build time.
-    const empty = RELATIONS.filter((r) => (readReferences(r, ROOT) ?? []).length === 0).map((r) => r.name);
+    const empty = RELATIONS.filter((r) => !r.mayBeEmpty && (readReferences(r, ROOT) ?? []).length === 0).map((r) => r.name);
     assert.deepEqual(empty, [], 'a relation reading zero references is checking nothing');
   });
 

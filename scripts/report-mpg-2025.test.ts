@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   applyNumbers,
+  applyPlacements,
   authorityKey,
   findDifferences,
   formatAuthority,
@@ -260,5 +261,90 @@ describe('number-of-another-species when our number agrees with MPG', () => {
       ],
     );
     assert.deepEqual(rows.map((r) => [r.field, r.mpg]), [['number-of-another-species', 'Clostera multnoma (2025: 93-0008.1)']]);
+  });
+});
+
+describe('applyPlacements', () => {
+  const header = 'id,genus,species,family,subfamily,tribe\n';
+  const tribe = (name: string) => row({ rank: '4.0 tribe', NAME: name });
+  const inputs = (species: SpeciesRow[], mpgRows: Mpg2025Row[]) => ({ species, mpgRows, crosswalk: new Map<string, string>(), shown: new Set<string>() });
+
+  it('moves a whole genus, provisional names included, when MPG places it in one tribe', () => {
+    const csv = header + '1,Sphinx,drupiferarum,Sphingidae,Sphinginae,\n2,Sphinx,sp,Sphingidae,Sphinginae,\n';
+    const { text, changed } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Sphinx', species: 'drupiferarum', family: 'Sphingidae', subfamily: 'Sphinginae' }), ours({ genus: 'Sphinx', species: 'sp', family: 'Sphingidae', subfamily: 'Sphinginae' })],
+      [tribe('Sphingini'), valid('Sphinx', 'drupiferarum', { Family: 'Sphingidae', Subfamily: 'Sphinginae' })],
+    ));
+    assert.equal(text, csv.replace(/Sphinginae,\n/g, 'Sphinginae,Sphingini\n'));
+    assert.deepEqual(changed.map((c) => [c.genus, c.field, c.to, c.species]), [['Sphinx', 'tribe', 'Sphingini', 2]]);
+  });
+
+  // The build requires one placement per genus (ADR 0056).
+  it('leaves alone a genus that MPG places in two tribes', () => {
+    const csv = header + '1,Aaa,one,F,S,\n2,Aaa,two,F,S,\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'F', subfamily: 'S' }), ours({ genus: 'Aaa', species: 'two', family: 'F', subfamily: 'S' })],
+      [tribe('Xini'), valid('Aaa', 'one', { Family: 'F', Subfamily: 'S' }), tribe('Yini'), valid('Aaa', 'two', { Family: 'F', Subfamily: 'S' })],
+    ));
+    assert.equal(text, csv);
+    assert.match(refused[0]?.reason ?? '', /Xini, Yini/);
+  });
+
+  it('leaves alone a genus the curator ruled on', () => {
+    const csv = header + '1,Perizoma,curvilinea,Geometridae,Larentiinae,Euphyiini\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Perizoma', species: 'curvilinea', family: 'Geometridae', subfamily: 'Larentiinae', tribe: 'Euphyiini' })],
+      [tribe('[Larentiinae – unplaced to tribe]'), valid('"Perizoma" (group 2)', 'curvilinea', { Family: 'Geometridae', Subfamily: 'Larentiinae' })],
+    ));
+    assert.equal(text, csv);
+    assert.deepEqual(refused.map((r) => r.reason), ['ruled C-043']);
+  });
+  it('takes no placement from a species matched only through a synonym', () => {
+    const csv = header + '1,Oldgenus,one,F,S,\n';
+    const { text, changed } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Oldgenus', species: 'one', family: 'F', subfamily: 'S' })],
+      [tribe('Newini'), valid('Newgenus', 'one', { Family: 'F', Subfamily: 'S', 'original genus': 'Oldgenus' })],
+    ));
+    assert.equal(text, csv);
+    assert.deepEqual(changed, []);
+  });
+
+  it('lists a genus MPG splits even where ours agrees with one half', () => {
+    const csv = header + '1,Aaa,one,F,S,Xini\n2,Aaa,two,F,S,Xini\n';
+    const { refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'F', subfamily: 'S', tribe: 'Xini' }), ours({ genus: 'Aaa', species: 'two', family: 'F', subfamily: 'S', tribe: 'Xini' })],
+      [tribe('Xini'), valid('Aaa', 'one', { Family: 'F', Subfamily: 'S' }), tribe('Yini'), valid('Aaa', 'two', { Family: 'F', Subfamily: 'S' })],
+    ));
+    assert.deepEqual(refused.map((r) => [r.genus, r.field]), [['Aaa', 'tribe']]);
+  });
+
+  it('lists a family change rather than writing it', () => {
+    const csv = header + '1,Aaa,one,Noctuidae,S,\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'Noctuidae', subfamily: 'S' })],
+      [valid('Aaa', 'one', { Family: 'Erebidae', Subfamily: 'S' })],
+    ));
+    assert.equal(text, csv);
+    assert.match(refused[0]?.reason ?? '', /family change is made by hand/);
+  });
+
+  // Writing MPG's subfamily and tribe under our old family would pair levels from two families.
+  it('leaves the subfamily and tribe alone when the family change is refused', () => {
+    const csv = header + '1,Aaa,one,Noctuidae,Noctuinae,Xini\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'Noctuidae', subfamily: 'Noctuinae', tribe: 'Xini' })],
+      [tribe('Yini'), valid('Aaa', 'one', { Family: 'Erebidae', Subfamily: 'Erebinae' })],
+    ));
+    assert.equal(text, csv);
+    assert.deepEqual(refused.map((r) => r.field), ['family', 'subfamily', 'tribe']);
+  });
+
+  it('still writes the tribe when the family and subfamily already agree', () => {
+    const csv = header + '1,Aaa,one,F,S,\n';
+    const { changed } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'F', subfamily: 'S' })],
+      [tribe('Xini'), valid('Aaa', 'one', { Family: 'F', Subfamily: 'S' })],
+    ));
+    assert.deepEqual(changed.map((c) => c.field), ['tribe']);
   });
 });

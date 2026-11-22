@@ -24,7 +24,7 @@
 //   scripts/check-photo-determinations.ts  the species' entries in KNOWN_COLLISIONS
 //
 // then regenerates the committed files derived from the above (checklist order, the Identify
-// matrix and the hidden-images report), and fails — before writing anything — if any file that should be free of
+// matrix, the hidden-images report and the MPG difference report), and fails — before writing anything — if any file that should be free of
 // the old slug still holds it.
 //
 // WHAT IT LEAVES ALONE
@@ -259,8 +259,9 @@ export class Workspace {
 const REGENERATED = new Set(['key-matrix.json']);
 
 /**
- * Files whose slugs name where an object IS or what a script once saw, not what a species
- * is called. They keep the old slug on purpose, and the check at the end does not look in them.
+ * Files the check at the end does not look in. Most name where an object IS or what a script
+ * once saw, not what a species is called, and keep the old slug on purpose. Two are reports
+ * that regenerate() rewrites after the check, so the old slug is gone from them by the end.
  */
 const KEEPS_OLD_SLUG = new Set([
   'data/image-derivatives.csv',
@@ -268,6 +269,10 @@ const KEEPS_OLD_SLUG = new Set([
   'data/cdn-inventory-report.csv',
   'data/cdn-duplicates-report.csv',
   'data/hidden-images-report.csv',
+  // Rewritten by regenerate() after the check: the MPG difference report, and the curator's
+  // key worksheet, which build-key.ts writes.
+  'data/mpg-2025-differences.csv',
+  'data/key-unsupported-answers.csv',
   'data/coord-fill-report.csv',
   'data/legacy-rejoin-report.csv',
   'data/inat-sync-report.csv',
@@ -279,7 +284,9 @@ const KEEPS_OLD_SLUG = new Set([
 const EXEMPT_COLUMNS: Record<string, readonly string[]> = {
   'data/images.csv': ['cdn_folder'],
   'data/species-photos-manifest.csv': ['cdn_folder'],
-  'data/species-redirects.csv': ['old_slug'],
+  // `reason` is prose about why the redirect was made ("merged into speranza-occiduaria"),
+  // and stays as it was written.
+  'data/species-redirects.csv': ['old_slug', 'reason'],
 };
 
 /** The slug columns of files that hold slugs but are not in RELATIONS. */
@@ -716,11 +723,11 @@ function printPlan(plan: RenamePlan, dryRun: boolean): void {
 
 /**
  * Regenerate the committed files derived from the ones the rename edits: checklist order, the
- * Identify matrix, and the hidden-images report. The CDN inventory report is not among them: it
+ * Identify matrix, the hidden-images report, and the MPG difference report. The CDN inventory report is not among them: it
  * lists the storage zone, which needs the Bunny password, and it is advisory.
  */
 function regenerate(root: string): void {
-  for (const script of ['scripts/build-checklist-order.ts', 'scripts/build-key.ts', 'scripts/emit-hidden-images.ts']) {
+  for (const script of ['scripts/build-checklist-order.ts', 'scripts/build-key.ts', 'scripts/emit-hidden-images.ts', 'scripts/report-mpg-2025.ts']) {
     console.log(`${TAG} running ${script}`);
     execFileSync(process.execPath, [script], { cwd: root, stdio: 'inherit' });
   }

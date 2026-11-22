@@ -114,7 +114,7 @@ test('filterToEmittedTargets: suppresses gated targets, keeps live and unknown o
 });
 
 test('real data: the #265 Geometridae merge redirects stay in the CSV but emit no stub while the family is withheld', async () => {
-  // speranza-occiduaria and macaria-signaria are display-gated by the #48 embargo, so a
+  // macaria-occiduaria (speranza-occiduaria until #279) and macaria-signaria are display-gated by the #48 embargo, so a
   // stub pointing at them is a built-in 404 (the blocking link check catches it). The
   // rows must survive in the CSV — the retirement is a fact, and the stubs appear
   // automatically when the embargo lifts.
@@ -138,7 +138,7 @@ test('real data: the #265 Geometridae merge redirects stay in the CSV but emit n
   const slugToFamily = new Map(
     speciesRows.map(r => [normalizeSlug(`${r.genus ?? ''}-${r.species ?? ''}`), r.family ?? ''] as const)
   );
-  assert.equal(slugToFamily.get('speranza-occiduaria'), 'Geometridae', 'family lookup sanity check');
+  assert.equal(slugToFamily.get('macaria-occiduaria'), 'Geometridae', 'family lookup sanity check');
 
   const gatedButEmitted = getSpeciesRedirects().filter(r => {
     const family = slugToFamily.get(r.newSlug);
