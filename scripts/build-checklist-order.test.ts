@@ -130,8 +130,8 @@ describe('matchSpecies', () => {
     assert.deepEqual(hit, { index: 0, via: 'mona' });
   });
 
-  // Synonymy cells name the ORIGINAL combination, so the genus there is
-  // usually not the current one — the match has to be on the pair as written.
+  // A synonym row names the genus the synonym was described in, which is
+  // usually not the current one, so the match has to be on the pair as written.
   it('matches an original combination named in the synonymy', () => {
     const hit = matchSpecies(speciesRow({ genus: 'Syneda', species: 'nubicola' }), index, noCrosswalk);
     assert.deepEqual(hit, { index: 3, via: 'synonymy' });

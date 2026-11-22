@@ -13,10 +13,11 @@
 //   species added since needed a curator decision. MPG covers all of North
 //   America, so a new PNW species arrives with a position already assigned.
 //
-// One sort key is enough. Restricted to the species we hold, every one of our
-// genera occupies a single unbroken block of MPG rows (asserted by the tests),
-// so ordering species by MPG row reproduces family, subfamily, tribe, and genus
-// order for free. That is why this emits one file, not the four a rank-by-rank
+// One sort key is enough. Restricted to the species we hold, nearly every one
+// of our genera occupies a single unbroken block of MPG rows, so ordering
+// species by MPG row reproduces family, subfamily, tribe, and genus order for
+// free. The tests pin the few genera that are split, each explained by a
+// curation-log ruling, and src/_data/checklist.ts still shows each as one block. That is why this emits one file, not the four a rank-by-rank
 // encoding would need.
 //
 // **Row order is the data.** There is deliberately no ordinal column — an

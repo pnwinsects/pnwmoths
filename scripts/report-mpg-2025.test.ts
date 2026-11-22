@@ -80,6 +80,11 @@ describe('checklist numbers', () => {
     assert.equal(withoutStatusLetter('93-2497.1n'), '93-2497.1n');
   });
 
+  it('reads a spreadsheet float as the short decimal it stands for', () => {
+    assert.equal(numberKey('932249.59999999998'), numberKey('93-2249.6'));
+    assert.equal(numberKey('300015.53000000003'), '300015.53');
+  });
+
   it('treats the hyphen and trailing zeros as formatting', () => {
     assert.equal(numberKey('85-0003'), numberKey('850003'));
     assert.equal(numberKey('93-2924.50'), numberKey('932924.5'));
@@ -160,10 +165,10 @@ describe('findDifferences', () => {
     assert.deepEqual(rows.map((r) => [r.field, r.ours, r.mpg, r.note]), [['number', '93-0170', '93-0172', 'MPG renumbered it']]);
   });
 
-  it('leaves a MONA number alone', () => {
+  it('leaves a MONA number alone, even where MPG has a P-number', () => {
     const rows = differences(
       [ours({ genus: 'Macaria', species: 'signaria', noc_id: 'MONA 6344' })],
-      [valid('Macaria', 'signaria', { 'P-No. 2025': '91a0690' })],
+      [valid('Macaria', 'signaria', { 'P-No. 2025': '93-0690' })],
     );
     assert.deepEqual(rows, []);
   });
@@ -186,7 +191,24 @@ describe('findDifferences', () => {
       rows.map((r) => [r.field, r.mpg]),
       [
         ['number', '93-0008.1'],
-        ['number-of-another-species', 'Clostera brucei 93-0008'],
+        ['number-of-another-species', 'Clostera brucei (2025: 93-0008)'],
+      ],
+    );
+  });
+
+  it('flags our old number when MPG has since given it to another species', () => {
+    const rows = differences(
+      [ours({ genus: 'Acronicta', species: 'mansueta', noc_id: '93-1434.2' })],
+      [
+        valid('Acronicta', 'mansueta', { 'P-No. 2025': '93-1427.4', 'CDN P-No. 2018': '931434.2' }),
+        valid('Acronicta', 'clarescens', { 'P-No. 2025': '93-1434.2' }),
+      ],
+    );
+    assert.deepEqual(
+      rows.map((r) => [r.field, r.note.split(';')[0]]),
+      [
+        ['number', 'MPG renumbered it'],
+        ['number-of-another-species', 'another species carries our number in some edition of MPG'],
       ],
     );
   });
@@ -207,6 +229,13 @@ describe('applyNumbers', () => {
     ]);
     assert.equal(text, csv.replace('93-0008,', '93-0008.1,'));
     assert.equal(applied.length, 1);
+  });
+
+  it('skips a species matched through a synonym or subspecies', () => {
+    const { applied } = applyNumbers(csv, [
+      { ...base, matched_via: 'synonymy', species_slug: 'clostera-multnoma', field: 'number', ours: '93-0008', mpg: '93-0008.1', ruling: '' },
+    ]);
+    assert.deepEqual(applied, []);
   });
 
   it('skips a ruled row, and a row whose number has changed since the report', () => {

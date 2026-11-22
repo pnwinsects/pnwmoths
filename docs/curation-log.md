@@ -92,7 +92,7 @@ the curator's own words · **Status** Applied (58 numbers in `data/species.csv`,
 
 C-046 later made the same rule general. Applied by `npm run report:mpg-2025 -- --apply-numbers`,
 which writes MPG's `P-No. 2025` into `noc_id` where ours is a P-number (or blank) and differs. Our
-501 MONA numbers are a different series and were not touched. MPG's status letter after a number
+521 MONA numbers (501 written with "MONA", 20 without) are a different series and were not touched. MPG's status letter after a number
 (E for a species excluded from the fauna, X for an extinct one) is left off, so *Euproctis similis*
 keeps 93-0172 and *Apantesis edwardsii* 93-0274.
 
@@ -105,7 +105,10 @@ replaced.
 **Ours was blank (5).** *Clostera apicalis* 93-0009; *Pheosia californica* 93-0012.1; *Euxoa scandens* 93-3329; *Euxoa aurantiaca* 93-3389; *Calosaturnia mendocino* 89-0064.
 
 **Ours was a number MPG gives another species (8).** *Schinia crotchii* 93-2084 → 93-2085; *Ponometia tortricina* 93-1316 → 93-1326; *Tetanolita palligera* 93-0516 → 93-0517; *Clostera multnoma* 93-0008 → 93-0008.1; *Virbia ferruginosa* 93-0298 → 93-0336.65; *Stiria rugifrons* 93-1668 → 93-1688; *Bruceia pulverina* 93-0212 → 93-0213; *Oedemasia salicis* 93-0103 → 93-0103.1.
-The report flags these as `number-of-another-species`, the check the curator asked for. Five are
+The report flagged these as `number-of-another-species`, the check the curator asked for, and two
+more among the renumbered: *Acronicta mansueta*'s old number 93-1434.2 is now *A. clarescens*'s,
+and *Chytonix palliatricula*'s old 93-2249.5 is now *Hemibryomima chryselectra*'s. Both follow MPG
+renumbering a genus, and we hold neither of the other two species. Of the eight above, five are
 one digit from the right number, which reads as a typing error. Two follow a split, and the number
 now goes with the name: *Clostera multnoma* held *C. brucei*'s number, and we hold both (C-009);
 *Oedemasia salicis* held *O. concinna*'s (C-011). *Virbia ferruginosa* held 93-0298, which MPG's

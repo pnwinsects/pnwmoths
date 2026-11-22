@@ -30,6 +30,9 @@
 // numbers (E for a species excluded from the fauna, X for an extinct one); the
 // letter is status, not number, and is left off.
 //
+// The `number` and `number-of-another-species` rows disappear once the
+// numbers are applied; curation-log entry C-047 keeps the list of what changed.
+//
 // Run: npm run report:mpg-2025
 //      npm run report:mpg-2025 -- --apply-numbers   # also writes the numbers into data/species.csv
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -158,13 +161,14 @@ export const withoutStatusLetter = (pNo: string): string => pNo.trim().replace(/
 /**
  * A number reduced to what identifies it: no hyphen, no status letter, no
  * trailing zeros after a decimal point (`93-2924.50` and `932924.5` are one
- * number).
+ * number), and no binary floating-point digits the spreadsheet saved in place
+ * of a short decimal (`932249.59999999998` is `932249.6`).
  */
-export const numberKey = (pNo: string): string =>
-  withoutStatusLetter(pNo)
-    .replace(/-/g, '')
-    .replace(/(\.\d*?)0+(n?)$/, '$1$2')
-    .replace(/\.(n?)$/, '$1');
+export const numberKey = (pNo: string): string => {
+  const plain = withoutStatusLetter(pNo).replace(/-/g, '');
+  const rounded = /^\d+\.\d{7,}$/.test(plain) ? String(Number(Number(plain).toFixed(6))) : plain;
+  return rounded.replace(/(\.\d*?)0+(n?)$/, '$1$2').replace(/\.(n?)$/, '$1');
+};
 
 /** A checklist number of the P-number series: two digits, a hyphen, a number. */
 export const isPNumber = (value: string): boolean => /^\d\d-\d/.test(value.trim());
@@ -270,7 +274,8 @@ export function findDifferences({ species, mpgRows, crosswalk, shown }: Inputs):
     const theirs = withoutStatusLetter(match.pNo2025);
     const comparable = isPNumber(nocId) || (nocId === '' && isPNumber(theirs));
     if (comparable && theirs && nocId !== theirs) {
-      // Was ours this species' own number in an earlier edition, or another species' number?
+      // Was ours this species' own number in an earlier edition, and does
+      // another species carry it in any edition?
       const others = (carriers.get(numberKey(nocId)) ?? []).filter((i) => i !== hit.index);
       const own = match.numbers.includes(numberKey(nocId));
       const note =
@@ -283,13 +288,13 @@ export function findDifferences({ species, mpgRows, crosswalk, shown }: Inputs):
               : 'ours is in no edition of MPG';
       add('number', nocId, theirs, note);
       // The curator's concern on #290: a number we hold may belong to another
-      // species now, after a split, or may always have.
-      if (!own && others.length > 0) {
+      // species, after a split or a renumbering, even when it was once ours.
+      if (others.length > 0) {
         add(
           'number-of-another-species',
           nocId,
-          others.map((i) => `${mpg[i]?.genus} ${mpg[i]?.species} ${mpg[i]?.pNo2025}`).join('; '),
-          'check that the species on our page is the one the name says',
+          others.map((i) => `${mpg[i]?.genus} ${mpg[i]?.species} (2025: ${mpg[i]?.pNo2025})`).join('; '),
+          'another species carries our number in some edition of MPG; check that the species on our page is the one the name says',
         );
       }
     }
@@ -299,11 +304,16 @@ export function findDifferences({ species, mpgRows, crosswalk, shown }: Inputs):
 
 /**
  * Writes MPG's number into `noc_id` for each `number` row with no ruling.
- * Returns the edited species.csv text and the rows it applied.
+ * Only a species matched by its own name (exact, or a gender ending) takes a
+ * number: one matched through a synonym or subspecies (*Catocala cleopatra*,
+ * which MPG holds under *C. faustina*) would take the number of a species we
+ * may also hold. Returns the edited species.csv text and the rows it applied.
  */
 export function applyNumbers(speciesText: string, differences: DifferenceRow[]): { text: string; applied: DifferenceRow[] } {
   const bySlug = new Map(
-    differences.filter((d) => d.field === 'number' && !d.ruling).map((d) => [d.species_slug, d]),
+    differences
+      .filter((d) => d.field === 'number' && !d.ruling && (d.matched_via === 'exact' || d.matched_via === 'gender'))
+      .map((d) => [d.species_slug, d]),
   );
   const applied: DifferenceRow[] = [];
   const { text } = editCsv(speciesText, 'data/species.csv', (record) => {
