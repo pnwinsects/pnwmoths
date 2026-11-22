@@ -53,21 +53,53 @@ export interface Layout {
   output: string;
   /** Zero-based index of the header row; rows above it are a title, not data. */
   headerRow: number;
-  /** The first header cell, which is how the layout is recognised. */
-  firstHeader: string;
+  /**
+   * The whole header row, in order. A workbook is recognised only when its
+   * header matches exactly, so an inserted, renamed or reordered column is
+   * refused instead of written over a committed file under the old names.
+   */
+  header: readonly string[];
 }
 
 export const LAYOUTS: Layout[] = [
-  { output: 'data/mpg-taxa.csv', headerRow: 0, firstHeader: 'P No' },
-  { output: 'data/mpg-taxa-2025.csv', headerRow: 1, firstHeader: 'SORT 2025' },
+  {
+    output: 'data/mpg-taxa.csv',
+    headerRow: 0,
+    header: [
+      'P No', 'New P No', 'MONA', 'Genus_Species', 'Author with Year', 'Common Name',
+      'Superfamily', 'Family', 'Subfamily', 'Tribe', 'Subtribe', 'Genus', 'Species',
+      'MPG URL', 'Taxonomic Note', 'Synonymy', 'P No 2016',
+    ],
+  },
+  {
+    output: 'data/mpg-taxa-2025.csv',
+    headerRow: 1,
+    header: [
+      'SORT 2025', 'status', 'rank', 'Family', 'Subfamily', 'P-No. 2025', 'P-No. 2023',
+      'Valid Genus', 'valid species', 'ssp letter', 'valid ssp', 'NAME', 'semicolon', 'brackets',
+      'author', 'date', 'original genus', 'descriptor(s)', 'origin', 'P-No. 2023 (sort)',
+      'CDN P-No. 2018', 'P3 No. 2016', 'MONA 1983', 'ID INFO', 'NOTE', 'post-2023 edit notes',
+      'post-2023 edit log date, editor', 'P-No change history',
+    ],
+  },
 ];
+
+/** The header cells, without blank cells at the end (the 2025 workbook has one). */
+const headerOf = (row: string[] | undefined): string[] => {
+  const cells = [...(row ?? [])];
+  while (cells.length > 0 && cells[cells.length - 1] === '') cells.pop();
+  return cells;
+};
 
 /** Which known layout these worksheet rows are in, or an error naming what was found. */
 export function detectLayout(rows: string[][]): Layout {
-  const layout = LAYOUTS.find((candidate) => rows[candidate.headerRow]?.[0] === candidate.firstHeader);
+  const layout = LAYOUTS.find((candidate) => {
+    const header = headerOf(rows[candidate.headerRow]);
+    return header.length === candidate.header.length && header.every((cell, i) => cell === candidate.header[i]);
+  });
   if (!layout) {
-    const seen = rows.slice(0, 2).map((row) => JSON.stringify(row[0] ?? '')).join(', ');
-    throw new Error(`unrecognised MPG workbook: the first cells of its first two rows are ${seen}`);
+    const seen = rows.slice(0, 2).map((row) => JSON.stringify(headerOf(row))).join(' / ');
+    throw new Error(`unrecognised MPG workbook: its first two rows are ${seen}`);
   }
   return layout;
 }

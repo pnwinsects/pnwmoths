@@ -8,6 +8,7 @@ import {
   columnIndex,
   decodeEntities,
   detectLayout,
+  LAYOUTS,
   parseSharedStrings,
   parseSheet,
   toTable,
@@ -136,12 +137,15 @@ describe('data/mpg-taxa.csv', () => {
 });
 
 describe('detectLayout and toTable', () => {
-  it('recognises the 2023 workbook by its first header cell', () => {
-    assert.equal(detectLayout([['P No', 'MONA']]).output, 'data/mpg-taxa.csv');
+  const header2023 = LAYOUTS[0]?.header ?? [];
+  const header2025 = LAYOUTS[1]?.header ?? [];
+
+  it('recognises the 2023 workbook by its header row', () => {
+    assert.equal(detectLayout([[...header2023]]).output, 'data/mpg-taxa.csv');
   });
 
-  it('recognises the 2025 workbook by the header under its title line', () => {
-    const rows = [['Pohl & Nanz 2023 NA Checklist plus corrections…', ''], ['SORT 2025', 'status']];
+  it('recognises the 2025 workbook by the header under its title line, ignoring a blank last cell', () => {
+    const rows = [['Pohl & Nanz 2023 NA Checklist plus corrections…'], [...header2025, '']];
     assert.equal(detectLayout(rows).output, 'data/mpg-taxa-2025.csv');
   });
 
@@ -150,22 +154,26 @@ describe('detectLayout and toTable', () => {
     assert.throws(() => detectLayout([['Genus', 'Species']]), /unrecognised MPG workbook/);
   });
 
+  it('refuses a known first cell followed by a changed header', () => {
+    const renamed = [...header2025];
+    renamed[2] = 'Rank';
+    assert.throws(() => detectLayout([['title'], renamed]), /unrecognised MPG workbook/);
+    assert.throws(() => detectLayout([['title'], [...header2025, 'extra']]), /unrecognised MPG workbook/);
+  });
+
   it('drops the title line, a trailing column blank in every row, and blank rows at the end', () => {
-    const rows = [
-      ['title', '', ''],
-      ['SORT 2025', 'status', ''],
-      ['5', 'P&N23', ''],
-      ['', '', ''],
-    ];
-    assert.deepEqual(toTable(rows, detectLayout(rows)), [
-      ['SORT 2025', 'status'],
-      ['5', 'P&N23'],
-    ]);
+    // parseSheet pads every row to the widest, so the fixture does too.
+    const pad = (row: string[]): string[] => [...row, ...Array<string>(header2025.length + 1 - row.length).fill('')];
+    const rows = [pad(['title']), pad([...header2025]), pad(['5', 'P&N23']), pad([])];
+    const table = toTable(rows, detectLayout(rows));
+    assert.equal(table.length, 2);
+    assert.deepEqual(table[0], [...header2025]);
+    assert.equal(table[1]?.length, header2025.length);
   });
 
   it('keeps a blank-headed column that holds a value', () => {
-    const rows = [['P No', ''], ['010001', 'x']];
-    assert.deepEqual(toTable(rows, detectLayout(rows)), rows);
+    const rows = [[...header2023, ''], ['010001', ...Array<string>(header2023.length - 1).fill(''), 'x']];
+    assert.equal(toTable(rows, detectLayout(rows))[0]?.length, header2023.length + 1);
   });
 });
 
