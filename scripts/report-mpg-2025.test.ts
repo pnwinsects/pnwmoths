@@ -1,36 +1,45 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  applyNumbers,
   authorityKey,
   findDifferences,
   formatAuthority,
-  pNumberKey,
+  numberKey,
   readSpecies,
+  withoutStatusLetter,
   type Mpg2025Row,
-  type Mpg2025Species,
   type SpeciesRow,
 } from './report-mpg-2025.ts';
 
 const row = (fields: Partial<Mpg2025Row>): Mpg2025Row => ({
-  'SORT 2025': '',
   status: 'P&N23',
   rank: '',
   Family: '',
   Subfamily: '',
   'P-No. 2025': '',
   'P-No. 2023': '',
+  'CDN P-No. 2018': '',
+  'P3 No. 2016': '',
+  'MONA 1983': '',
   'Valid Genus': '',
   'valid species': '',
   NAME: '',
+  'original genus': '',
   brackets: '',
   author: '',
   date: '',
   ...fields,
 });
 
+/** A valid species row. */
+const valid = (genus: string, species: string, fields: Partial<Mpg2025Row> = {}): Mpg2025Row =>
+  row({ rank: '8.0 valsp', 'Valid Genus': genus, 'valid species': species, NAME: species, ...fields });
+
 const ours = (fields: Partial<SpeciesRow>): SpeciesRow => ({
   genus: '',
   species: '',
+  noc_id: '',
   authority: '',
   family: '',
   subfamily: '',
@@ -38,19 +47,8 @@ const ours = (fields: Partial<SpeciesRow>): SpeciesRow => ({
   ...fields,
 });
 
-const mpgSpecies = (fields: Partial<Mpg2025Species>): Mpg2025Species => ({
-  genus: '',
-  species: '',
-  status: 'P&N23',
-  family: '',
-  subfamily: '',
-  tribe: '',
-  tribePlaceholder: '',
-  pNo2025: '',
-  pNo2023: '',
-  authority: '',
-  ...fields,
-});
+const differences = (species: SpeciesRow[], mpgRows: Mpg2025Row[], shown = new Set<string>()) =>
+  findDifferences({ species, mpgRows, crosswalk: new Map(), shown });
 
 describe('formatAuthority', () => {
   it('writes brackets only where MPG marks them', () => {
@@ -74,10 +72,23 @@ describe('authorityKey', () => {
   });
 });
 
-describe('pNumberKey', () => {
-  it('treats the hyphen as formatting', () => {
-    assert.equal(pNumberKey('85-0003'), pNumberKey('850003'));
-    assert.notEqual(pNumberKey('91a0700.11n'), pNumberKey('91a0704'));
+describe('checklist numbers', () => {
+  it('leaves off the status letter but keeps the n of a number added in 2025', () => {
+    assert.equal(withoutStatusLetter('93-0172E'), '93-0172');
+    assert.equal(withoutStatusLetter('93-0274X'), '93-0274');
+    assert.equal(withoutStatusLetter('21a0019.1En'), '21a0019.1n');
+    assert.equal(withoutStatusLetter('93-2497.1n'), '93-2497.1n');
+  });
+
+  it('reads a spreadsheet float as the short decimal it stands for', () => {
+    assert.equal(numberKey('932249.59999999998'), numberKey('93-2249.6'));
+    assert.equal(numberKey('300015.53000000003'), '300015.53');
+  });
+
+  it('treats the hyphen and trailing zeros as formatting', () => {
+    assert.equal(numberKey('85-0003'), numberKey('850003'));
+    assert.equal(numberKey('93-2924.50'), numberKey('932924.5'));
+    assert.notEqual(numberKey('91a0700.11n'), numberKey('91a0704'));
   });
 });
 
@@ -87,10 +98,10 @@ describe('readSpecies', () => {
       row({ rank: '3.0 subfam', NAME: 'Ennominae' }),
       row({ rank: '4.0 tribe', NAME: 'Macariini' }),
       row({ rank: '6.0 genus', NAME: 'Speranza' }),
-      row({ rank: '8.0 valsp', 'Valid Genus': 'Speranza', 'valid species': 'brunneata', Subfamily: 'Ennominae' }),
+      valid('Speranza', 'brunneata', { Subfamily: 'Ennominae' }),
       row({ rank: '8.5 spsyn', 'Valid Genus': 'Speranza', 'valid species': 'brunneata', NAME: 'coreame' }),
       row({ rank: '3.0 subfam', NAME: 'Larentiinae' }),
-      row({ rank: '8.0 valsp', 'Valid Genus': 'Hydria', 'valid species': 'prunivorata' }),
+      valid('Hydria', 'prunivorata'),
     ]);
     assert.deepEqual(
       species.map((s) => [s.genus, s.species, s.tribe]),
@@ -101,107 +112,153 @@ describe('readSpecies', () => {
     );
   });
 
-  it('reads a bracketed placeholder as no tribe, and keeps its text', () => {
+  it('reads a bracketed placeholder as blank, and keeps its text', () => {
     const [species] = readSpecies([
       row({ rank: '4.0 tribe', NAME: '[Larentiinae – unnamed tribe 1]' }),
-      row({ rank: '8.0 valsp', 'Valid Genus': 'Lampropteryx', 'valid species': 'suffumata' }),
+      valid('Tyta', 'luctuosa', { Subfamily: '[Noctuidae – group 1 unplaced to subfamily]' }),
     ]);
     assert.equal(species?.tribe, '');
     assert.equal(species?.tribePlaceholder, '[Larentiinae – unnamed tribe 1]');
+    assert.equal(species?.subfamily, '');
+    assert.equal(species?.subfamilyPlaceholder, '[Noctuidae – group 1 unplaced to subfamily]');
   });
 });
 
 describe('findDifferences', () => {
-  const shown = new Set<string>();
-
   it('reports nothing for a species that agrees in every field', () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Habrosyne', species: 'scripta', family: 'Drepanidae', authority: '(Gosse, 1840)' })],
-      pNo2023BySlug: new Map([['habrosyne-scripta', '850003']]),
-      mpg: [mpgSpecies({ genus: 'Habrosyne', species: 'scripta', family: 'Drepanidae', authority: '(Gosse, 1840)', pNo2025: '85-0003', pNo2023: '850003' })],
-      shown,
-    });
+    const rows = differences(
+      [ours({ genus: 'Habrosyne', species: 'scripta', family: 'Drepanidae', authority: '(Gosse, 1840)', noc_id: '85-0003' })],
+      [valid('Habrosyne', 'scripta', { Family: 'Drepanidae', brackets: '(', author: 'Gosse', date: '1840', 'P-No. 2025': '85-0003' })],
+    );
     assert.deepEqual(rows, []);
   });
 
-  it('finds a moved species by its 2023 number and reports the new genus', () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Speranza', species: 'boreata' })],
-      pNo2023BySlug: new Map([['speranza-boreata', '91a0710']]),
-      mpg: [mpgSpecies({ genus: 'Macaria', species: 'boreata', pNo2025: '91a0710', pNo2023: '91a0710' })],
-      shown,
-    });
+  it('finds a moved species through its original genus and reports the new genus', () => {
+    const rows = differences(
+      [ours({ genus: 'Protoperigea', species: 'umbricata' })],
+      [valid('Caradrina', 'umbricata', { 'original genus': 'Protoperigea' })],
+    );
     assert.deepEqual(
       rows.map((r) => [r.matched_via, r.field, r.ours, r.mpg]),
-      [['p-no-2023', 'genus', 'Speranza', 'Macaria']],
+      [['synonymy', 'genus', 'Protoperigea', 'Caradrina']],
     );
   });
 
   it("does not report MPG's quotes or group label as a genus difference", () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Perizoma', species: 'curvilinea' })],
-      pNo2023BySlug: new Map(),
-      mpg: [mpgSpecies({ genus: '"Perizoma" (group 2)', species: 'curvilinea' })],
-      shown,
-    });
+    const rows = differences([ours({ genus: 'Perizoma', species: 'curvilinea' })], [valid('"Perizoma" (group 2)', 'curvilinea')]);
     assert.deepEqual(rows, []);
   });
 
-  it('reports a renumbering, and an old number that now sits on two species', () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Speranza', species: 'brunneata' })],
-      pNo2023BySlug: new Map([['speranza-brunneata', '91a0704']]),
-      mpg: [
-        mpgSpecies({ genus: 'Speranza', species: 'brunneata', pNo2025: '91a0700.11n', pNo2023: '91a0704' }),
-        mpgSpecies({ genus: 'Speranza', species: 'amboflava', pNo2025: '91a0700.15n', pNo2023: '91a0704' }),
-      ],
-      shown,
-    });
-    assert.deepEqual(
-      rows.map((r) => [r.field, r.mpg, r.note]),
+  it('records the curation-log ruling on a difference the curator kept', () => {
+    const rows = differences(
+      [ours({ genus: 'Perizoma', species: 'costiguttata', tribe: 'Euphyiini' })],
+      [row({ rank: '4.0 tribe', NAME: '[Larentiinae – unplaced to tribe]' }), valid('"Perizoma" (group 2)', 'costiguttata')],
+    );
+    assert.deepEqual(rows.map((r) => [r.field, r.ruling]), [['tribe', 'C-043']]);
+  });
+
+  it('reports a renumbering, without the status letter', () => {
+    const rows = differences(
+      [ours({ genus: 'Euproctis', species: 'similis', noc_id: '93-0170' })],
+      [valid('Euproctis', 'similis', { 'P-No. 2025': '93-0172E', 'P3 No. 2016': '930170' })],
+    );
+    assert.deepEqual(rows.map((r) => [r.field, r.ours, r.mpg, r.note]), [['number', '93-0170', '93-0172', 'MPG renumbered it']]);
+  });
+
+  it('leaves a MONA number alone, even where MPG has a P-number', () => {
+    const rows = differences(
+      [ours({ genus: 'Macaria', species: 'signaria', noc_id: 'MONA 6344' })],
+      [valid('Macaria', 'signaria', { 'P-No. 2025': '93-0690' })],
+    );
+    assert.deepEqual(rows, []);
+  });
+
+  it('fills a blank number with a P-number', () => {
+    const rows = differences([ours({ genus: 'Clostera', species: 'apicalis' })], [valid('Clostera', 'apicalis', { 'P-No. 2025': '93-0009' })]);
+    assert.deepEqual(rows.map((r) => [r.field, r.mpg, r.note]), [['number', '93-0009', 'ours is blank']]);
+  });
+
+  // The curator's concern on #290: a number can pass to another species when MPG splits one.
+  it('flags a number we hold that MPG gives another species', () => {
+    const rows = differences(
+      [ours({ genus: 'Clostera', species: 'multnoma', noc_id: '93-0008' })],
       [
-        ['p-number', '91a0700.11n', 'ours is the 2023 number in data/checklist-order.csv'],
-        ['p-number-split', 'Speranza brunneata 91a0700.11n; Speranza amboflava 91a0700.15n', 'we hold 1 of the 2'],
+        valid('Clostera', 'brucei', { 'P-No. 2025': '93-0008', 'P-No. 2023': '930008' }),
+        valid('Clostera', 'multnoma', { 'P-No. 2025': '93-0008.1' }),
+      ],
+    );
+    assert.deepEqual(
+      rows.map((r) => [r.field, r.mpg]),
+      [
+        ['number', '93-0008.1'],
+        ['number-of-another-species', 'Clostera brucei (2025: 93-0008)'],
       ],
     );
   });
 
-  it("counts a held species as held when MPG writes its genus in quotes", () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Perizoma', species: 'alpha' })],
-      pNo2023BySlug: new Map([['perizoma-alpha', '91a1000']]),
-      mpg: [
-        mpgSpecies({ genus: '"Perizoma" (group 2)', species: 'alpha', pNo2025: '91a1000', pNo2023: '91a1000' }),
-        mpgSpecies({ genus: '"Perizoma" (group 2)', species: 'beta', pNo2025: '91a1000.1n', pNo2023: '91a1000' }),
+  it('flags our old number when MPG has since given it to another species', () => {
+    const rows = differences(
+      [ours({ genus: 'Acronicta', species: 'mansueta', noc_id: '93-1434.2' })],
+      [
+        valid('Acronicta', 'mansueta', { 'P-No. 2025': '93-1427.4', 'CDN P-No. 2018': '931434.2' }),
+        valid('Acronicta', 'clarescens', { 'P-No. 2025': '93-1434.2' }),
       ],
-      shown,
-    });
-    assert.deepEqual(rows.map((r) => r.note), ['we hold 1 of the 2']);
-  });
-
-  it('prefers the exact name when the 2023 number has moved to another species', () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Speranza', species: 'amboflava' })],
-      pNo2023BySlug: new Map([['speranza-amboflava', '91a0704']]),
-      mpg: [
-        mpgSpecies({ genus: 'Speranza', species: 'brunneata', pNo2023: '91a0704' }),
-        mpgSpecies({ genus: 'Speranza', species: 'amboflava', pNo2023: '' }),
+    );
+    assert.deepEqual(
+      rows.map((r) => [r.field, r.note.split(';')[0]]),
+      [
+        ['number', 'MPG renumbered it'],
+        ['number-of-another-species', 'another species carries our number in some edition of MPG'],
       ],
-      shown,
-    });
-    assert.deepEqual(new Set(rows.map((r) => r.mpg_name)), new Set(['Speranza amboflava']));
+    );
   });
 
   it('reports a provisional name as unmatched, and whether the site shows it', () => {
-    const rows = findDifferences({
-      species: [ours({ genus: 'Plataea', species: 'n sp' })],
-      pNo2023BySlug: new Map(),
-      mpg: [],
-      shown: new Set(['plataea-n-sp']),
-    });
-    assert.deepEqual(
-      rows.map((r) => [r.species_slug, r.shown, r.field]),
-      [['plataea-n-sp', 'yes', 'unmatched']],
+    const rows = differences([ours({ genus: 'Plataea', species: 'n sp' })], [], new Set(['plataea-n-sp']));
+    assert.deepEqual(rows.map((r) => [r.species_slug, r.shown, r.field]), [['plataea-n-sp', 'yes', 'unmatched']]);
+  });
+});
+
+describe('applyNumbers', () => {
+  const csv = 'id,genus,species,noc_id,authority\n1,Clostera,multnoma,93-0008,"(Dyar, 1892)"\n2,Habrosyne,scripta,85-0003,"(Gosse, 1840)"\n';
+  const base = { shown: 'yes', matched_via: 'exact', mpg_name: '', mpg_status: '', note: '' } as const;
+
+  it('writes the numbers, and touches no other cell', () => {
+    const { text, applied } = applyNumbers(csv, [
+      { ...base, species_slug: 'clostera-multnoma', field: 'number', ours: '93-0008', mpg: '93-0008.1', ruling: '' },
+    ]);
+    assert.equal(text, csv.replace('93-0008,', '93-0008.1,'));
+    assert.equal(applied.length, 1);
+  });
+
+  it('skips a species matched through a synonym or subspecies', () => {
+    const { applied } = applyNumbers(csv, [
+      { ...base, matched_via: 'synonymy', species_slug: 'clostera-multnoma', field: 'number', ours: '93-0008', mpg: '93-0008.1', ruling: '' },
+    ]);
+    assert.deepEqual(applied, []);
+  });
+
+  it('skips a ruled row, and a row whose number has changed since the report', () => {
+    const { text, applied } = applyNumbers(csv, [
+      { ...base, species_slug: 'clostera-multnoma', field: 'number', ours: '93-0008', mpg: '93-0008.1', ruling: 'C-000' },
+      { ...base, species_slug: 'habrosyne-scripta', field: 'number', ours: '85-0002', mpg: '85-0004', ruling: '' },
+    ]);
+    assert.equal(text, csv);
+    assert.deepEqual(applied, []);
+  });
+});
+
+describe('number-of-another-species when our number agrees with MPG', () => {
+  // After a split the species that keeps the old number agrees with MPG, and
+  // the other half may still carry that number in an earlier edition.
+  it('still flags the number', () => {
+    const rows = differences(
+      [ours({ genus: 'Clostera', species: 'brucei', noc_id: '93-0008' })],
+      [
+        valid('Clostera', 'brucei', { 'P-No. 2025': '93-0008' }),
+        valid('Clostera', 'multnoma', { 'P-No. 2025': '93-0008.1', 'P3 No. 2016': '930008' }),
+      ],
     );
+    assert.deepEqual(rows.map((r) => [r.field, r.mpg]), [['number-of-another-species', 'Clostera multnoma (2025: 93-0008.1)']]);
   });
 });

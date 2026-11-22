@@ -13,16 +13,18 @@
 //   species added since needed a curator decision. MPG covers all of North
 //   America, so a new PNW species arrives with a position already assigned.
 //
-// One sort key is enough. Restricted to the species we hold, every one of our
-// genera occupies a single unbroken block of MPG rows (asserted by the tests),
-// so ordering species by MPG row reproduces family, subfamily, tribe, and genus
-// order for free. That is why this emits one file, not the four a rank-by-rank
+// One sort key is enough. Restricted to the species we hold, nearly every one
+// of our genera occupies a single unbroken block of MPG rows, so ordering
+// species by MPG row reproduces family, subfamily, tribe, and genus order for
+// free. The tests pin the few genera that are split, each explained by a
+// curation-log ruling, and src/_data/checklist.ts still shows each as one block. That is why this emits one file, not the four a rank-by-rank
 // encoding would need.
 //
 // **Row order is the data.** There is deliberately no ordinal column — an
 // integer would have to be renumbered downstream of every insertion. `mpg_p_no`
 // is provenance, not the sort key: MPG renumbers between releases, so it exists
-// to diff a future release against this one, not to re-sort by.
+// to diff a future release against this one, not to re-sort by. It is MPG's
+// 2025 number (`P-No. 2025`), read from data/mpg-taxa-2025.csv (ADR 0061).
 //
 // Matching runs in tiers, most literal first, and each tier is either
 // mechanical or an explicit committed decision — nothing is guessed:
@@ -31,8 +33,9 @@
 //   gender       Latin gender-ending variant (californicum / californica)
 //   mona         our `noc_id` as a MONA number (not the `93-` Poole numbers,
 //                which MPG's MONA column does not carry)
-//   synonymy     the full original combination appears in MPG's Synonymy cell
-//                and names exactly one MPG row
+//   synonymy     another name MPG gives the species (a species or subspecies
+//                synonym, its original genus, a synonym of its genus) names
+//                exactly one valid species; see buildMpgIndex
 //   crosswalk    data/mpg-crosswalk.csv — a curator decision, with its source
 //
 // Anything still unmatched falls to the end of its genus, alphabetically, and
@@ -51,13 +54,19 @@ import { normalizeSlug } from '../src/_lib/unpublished-species.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
+/**
+ * The columns of data/mpg-taxa-2025.csv this builder reads. Every row of the
+ * workbook is here: higher taxa, genus synonyms, species, species synonyms and
+ * subspecies, told apart by `rank` ("8.0 valsp", "8.5 spsyn", "6.5 gensyn"...).
+ */
 export interface MpgRow {
-  'P No': string;
-  MONA: string;
-  Genus: string;
-  Species: string;
-  Family: string;
-  Synonymy: string;
+  rank: string;
+  'P-No. 2025': string;
+  'MONA 1983': string;
+  'Valid Genus': string;
+  'valid species': string;
+  NAME: string;
+  'original genus': string;
 }
 
 export interface SpeciesRow {
@@ -150,29 +159,69 @@ export interface MpgIndex {
   byBinomial: Map<string, number>;
   byMona: Map<string, number>;
   bySynonym: Map<string, number[]>;
+  /** The valid species, in MPG sequence; an index into this array is the sort key. */
   rows: MpgRow[];
 }
 
-/** All lookups resolve to a row *index*, which is MPG sequence — the sort key. */
-export function buildMpgIndex(rows: MpgRow[]): MpgIndex {
+/** A valid species row (8.0), or a biological species with an unavailable name (8.1). */
+export const isValidSpecies = (row: Pick<MpgRow, 'rank'>): boolean => /^8\.[01]\b/.test(row.rank.trim());
+
+/**
+ * All lookups resolve to an index into the valid species, which is MPG
+ * sequence: the sort key.
+ *
+ * The synonymy tier collects every other name MPG gives for a valid species,
+ * because a species we hold under an older name can sit under any of them:
+ *
+ *   - a species synonym (8.5), as `Valid Genus` + NAME and as `original genus` + NAME
+ *   - a subspecies or subspecies synonym (9.x), the same way; C-025 keeps
+ *     *Catocala cleopatra*, which MPG holds as a subspecies of *C. faustina*
+ *   - the valid species' own epithet in its `original genus` (*Protoperigea*
+ *     *umbricata*, described in *Protoperigea*, now *Caradrina*)
+ *   - the valid species' epithet under each genus synonym (6.5) of its genus
+ *
+ * A name that leads to more than one valid species is ambiguous and is not used.
+ */
+export function buildMpgIndex(allRows: MpgRow[]): MpgIndex {
+  const rows = allRows.filter(isValidSpecies);
   const byBinomial = new Map<string, number>();
   const byMona = new Map<string, number>();
   const bySynonym = new Map<string, number[]>();
   rows.forEach((row, index) => {
-    // First row wins: MPG lists a name once, and a later duplicate would be the
-    // subspecies or homonym, never the species we want.
-    const binomial = mpgKey(row.Genus, row.Species);
+    // First row wins: MPG lists a valid species once, and a later duplicate
+    // would be a homonym, never the species we want.
+    const binomial = mpgKey(row['Valid Genus'], row['valid species']);
     if (!byBinomial.has(binomial)) byBinomial.set(binomial, index);
-    const mona = row.MONA.replace(/^0+/, '');
-    if (mona && !byMona.has(mona)) byMona.set(mona, index);
-    // Synonymy cells list original combinations ("Syneda nubicola Behr, 1870"),
-    // so the genus there is usually NOT the current one. Collect every
-    // binomial mentioned; a name naming two rows is ambiguous and unusable.
-    for (const match of (row.Synonymy ?? '').matchAll(/\b([A-Z][a-z]+)\s+([a-z][a-z-]+)\b/g)) {
-      const key = `${match[1]}-${match[2]}`.toLowerCase();
-      const seen = bySynonym.get(key);
-      if (!seen) bySynonym.set(key, [index]);
-      else if (!seen.includes(index)) seen.push(index);
+    const mona = row['MONA 1983'].trim().replace(/^0+/, '');
+    // "[NEW]" marks a species described after MONA; only numbers are keys.
+    if (/^\d+(\.\d+)?$/.test(mona) && !byMona.has(mona)) byMona.set(mona, index);
+  });
+
+  const addSynonym = (genus: string, epithet: string, index: number): void => {
+    if (!genus.trim() || !epithet.trim()) return;
+    const key = mpgKey(genus, epithet);
+    const seen = bySynonym.get(key);
+    if (!seen) bySynonym.set(key, [index]);
+    else if (!seen.includes(index)) seen.push(index);
+  };
+  const genusSynonyms = new Map<string, string[]>();
+  for (const row of allRows) {
+    const rank = row.rank.trim();
+    if (rank.startsWith('6.5')) {
+      const valid = normalizeGenus(row['Valid Genus']);
+      genusSynonyms.set(valid, [...(genusSynonyms.get(valid) ?? []), row.NAME.trim()]);
+      continue;
+    }
+    if (!/^(8\.5|9\.)/.test(rank)) continue;
+    const index = byBinomial.get(mpgKey(row['Valid Genus'], row['valid species']));
+    if (index === undefined) continue;
+    addSynonym(row['Valid Genus'], row.NAME, index);
+    addSynonym(row['original genus'], row.NAME, index);
+  }
+  rows.forEach((row, index) => {
+    addSynonym(row['original genus'], row['valid species'], index);
+    for (const synonym of genusSynonyms.get(normalizeGenus(row['Valid Genus'])) ?? []) {
+      addSynonym(synonym, row['valid species'], index);
     }
   });
   return { byBinomial, byMona, bySynonym, rows };
@@ -278,7 +327,7 @@ export function orderSpecies(
     if (!entry) continue;
     ordered.push({
       species_slug: entry.slug,
-      mpg_p_no: index.rows[entry.mpgIndex]?.['P No'] ?? '',
+      mpg_p_no: index.rows[entry.mpgIndex]?.['P-No. 2025'] ?? '',
       matched_via: entry.via,
     });
     // Last placed species of this genus: flush its unmatched siblings here.
@@ -321,7 +370,7 @@ export function loadInputs(root: string = ROOT): {
   species: SpeciesRow[];
   crosswalk: Map<string, string>;
 } {
-  const mpg: MpgRow[] = parse(readFileSync(resolve(root, 'data/mpg-taxa.csv')), {
+  const mpg: MpgRow[] = parse(readFileSync(resolve(root, 'data/mpg-taxa-2025.csv')), {
     columns: true,
     skip_empty_lines: true,
   });

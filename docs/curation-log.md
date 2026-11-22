@@ -73,13 +73,65 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-047 · 2026-09-13 · Checklist numbers follow MPG where it has renumbered a species, and an old number that has passed to another species is flagged
+
+**Source** [#290 comment](https://github.com/pnwinsects/pnwmoths/issues/290#issuecomment-5655333160)
+and [the comment after it](https://github.com/pnwinsects/pnwmoths/issues/290#issuecomment-5655400850),
+the curator's own words · **Status** Applied (58 numbers in `data/species.csv`, #290) · **Refined by** C-046
+
+> Yes - where MPG has renumbered a genus (or species), we should follow their numbering. An updated
+> list can be found here: […] In that list, the column "P-No. 2025" has updates that include
+> addition of the hyphen, such that 933571 becomes 93-3571.
+
+> One thing to think about for this is that renumbering sometimes reflects a taxonomic change (e.g.
+> a species is split into two species and one of the daughter species retains the original number).
+> In such cases, it's important to be sure that the correct number is used for our taxa - we may
+> have one or both of the daughter species in the region. Not sure how to deal with this other than
+> to have a query that flags when an old number has been divided into multiple numbers on the MPG
+> list.
+
+C-046 later made the same rule general. Applied by `npm run report:mpg-2025 -- --apply-numbers`,
+which writes MPG's `P-No. 2025` into `noc_id` where ours is a P-number (or blank) and differs. Our
+521 MONA numbers (501 written with "MONA", 20 without) are a different series and were not touched. MPG's status letter after a number
+(E for a species excluded from the fauna, X for an extinct one) is left off, so *Euproctis similis*
+keeps 93-0172 and *Apantesis edwardsii* 93-0274.
+
+Why it matters: these overwrite values entered by hand, which the additive-only rule for data
+normally forbids. The ruling is what permits it, so every change is listed here, with the number it
+replaced.
+
+**MPG renumbered it (43).** *Paraseptis adnixa* 93-2648.1 → 93-2648.5; *Annaphila depicta* 93-1751 → 93-1639.9; *Acronicta innotata* 93-1428 → 93-1434.7; *Acronicta funeralis* 93-1438 → 93-1419.71; *Acronicta radcliffei* 93-1430 → 93-1441.1; *Annaphila decia* 93-1753 → 93-1640.2; *Pseudobryomima muscosa* 93-2730 → 93-2249.62; *Annaphila macfarlandi* 93-1752 → 93-1640.1; *Annaphila mera* 93-1736 → 93-1638.3; *Pseudanarta crocea* 93-2736 → 93-2967.55; *Annaphila casta* 93-1750 → 93-1639.8; *Properigea albimacula* 93-2719 → 93-2249.41; *Acronicta fragilis* 93-1458 → 93-1427.1; *Acronicta strigulata* 93-1447 → 93-1434.4; *Admetovis oxymorus* 93-2924.50 → 93-2924.5; *Papaipema insulidens* 93-2480 → 93-2497.1n; *Annaphila danistica* 93-1734 → 93-1638.1; *Acronicta hasta* 93-1445 → 93-1441.2; *Pseudanarta flava* 93-2737 → 93-2967.56; *Papaipema limata* 93-2495 → 93-2487.1n; *Papaipema sauzalitae* 93-2485 → 93-2500.1n; *Acronicta insularis* 93-1493 → 93-1477.2; *Pseudanarta caeca* 93-2735 → 93-2967.54; *Acronicta lanceolaria* 93-1488 → 93-1491.4; *Annaphila diva* 93-1754 → 93-1640.3; *Acronicta mansueta* 93-1434.2 → 93-1427.4; *Caradrina montana* 93-2260 → 93-2264.1; *Pseudanarta singula* 93-2738 → 93-2967.57; *Viridiseptis marina* 93-2749.1 → 93-2749.5; *Acopa perpallida* 93-1627 → 93-2204.52; *Acronicta marmorata* 93-1473 → 93-1419.78; *Chytonix palliatricula* 93-2249.5 → 93-2249.11; *Annaphila arvalis* 93-1738 → 93-1638.5; *Galgula partita* 93-2249 → 93-2224.5; *Tyta luctuosa* 93-1503 → 93-1733.1; *Properigea niveirena* 93-2727 → 93-2249.49; *Annaphila lithosina* 93-1748 → 93-1639.6; *Anarta inconcinna* 93-2832 → 93-2832.1; *Papaipema harrisii* 93-2483 → 93-2502.1n; *Annaphila miona* 93-1749 → 93-1639.7; *Annaphila divinula* 93-1747 → 93-1639.5; *Papaipema unimoda* 93-2465 → 93-2465.1n; *Cecrita lunata* 93-0085 → 93-0087.15.
+
+**Ours was blank (5).** *Clostera apicalis* 93-0009; *Pheosia californica* 93-0012.1; *Euxoa scandens* 93-3329; *Euxoa aurantiaca* 93-3389; *Calosaturnia mendocino* 89-0064.
+
+**Ours was a number MPG gives another species (8).** *Schinia crotchii* 93-2084 → 93-2085; *Ponometia tortricina* 93-1316 → 93-1326; *Tetanolita palligera* 93-0516 → 93-0517; *Clostera multnoma* 93-0008 → 93-0008.1; *Virbia ferruginosa* 93-0298 → 93-0336.65; *Stiria rugifrons* 93-1668 → 93-1688; *Bruceia pulverina* 93-0212 → 93-0213; *Oedemasia salicis* 93-0103 → 93-0103.1.
+The report flagged these as `number-of-another-species`, the check the curator asked for, and two
+more among the renumbered: *Acronicta mansueta*'s old number 93-1434.2 is now *A. clarescens*'s,
+and *Chytonix palliatricula*'s old 93-2249.5 is now *Hemibryomima chryselectra*'s. Both follow MPG
+renumbering a genus, and we hold neither of the other two species. Of the eight above, five are
+one digit from the right number, which reads as a typing error. Two follow a split, and the number
+now goes with the name: *Clostera multnoma* held *C. brucei*'s number, and we hold both (C-009);
+*Oedemasia salicis* held *O. concinna*'s (C-011). *Virbia ferruginosa* held 93-0298, which MPG's
+provisional 2016 list gave *V. fergusoni* (ferruginosa was 93-0306 there). That is not a split that
+reaches us: *V. fergusoni* (Zaspel, 2008) is a species of the southeastern United States, from
+Georgia and northern Florida to South Carolina, and our 106 records are from British Columbia,
+Alberta and Oregon. The number came from the legacy site's database when it was migrated in April 2026.
+
+**Ours was in no edition of MPG (2).** *Melanchra assimilis* 93-2876.1 → 93-2877; *Drasteria maculosa* 93-0907 → 93-0908.
+
+**What changed** — `noc_id` in `data/species.csv`; `data/checklist-order.csv` now carries the 2025
+numbers too.
+
+---
+
 ## C-046 · 2026-10-16 · MPG's 2025 update is the default authority for species names, checklist numbers, and genus, subfamily and tribe placement
 
 **Source** [#418 comment](https://github.com/pnwinsects/pnwmoths/issues/418#issuecomment-6226558073),
 the curator's own words, answering the question in the [#418 issue body](https://github.com/pnwinsects/pnwmoths/issues/418)
 · **Status** Applied (the 2025 list committed as `data/mpg-taxa-2025.csv`, and the differences
-reported — [ADR 0061](adr/0061-mpg-2025-list-kept-beside-2023.md)); Pending (checklist order and
-`noc_id` from the 2025 list — #290; the genus moves and placements — #279) · **Refines** C-026, C-039
+reported — [ADR 0061](adr/0061-mpg-2025-list-kept-beside-2023.md)); Applied (checklist order and
+`noc_id` from the 2025 list — #290, C-047); Pending (the genus moves and placements — #279) ·
+**Refines** C-026, C-039, C-047
 
 The question was "Should MPG's 2025 update be the site's default authority for species names,
 checklist numbers, and genus, subfamily and tribe placement?" His answer:
@@ -1233,10 +1285,11 @@ The 2 km ceiling is a curator standard, not a technical limit — worth knowing 
 **Status** Applied (checklist order and the Checklist page —
 [ADR 0030](adr/0030-checklist-order-from-mpg.md), [ADR 0031](adr/0031-checklist-page.md)); **Partly
 applied** (the *Speranza* → *Macaria* question — C-026 ruled five species per-name, the other 22
-genus disagreements stay open on [#279](https://github.com/pnwinsects/pnwmoths/issues/279));
+genus disagreements are decided by C-046, which follows MPG's 2025 list, and are pending on
+[#279](https://github.com/pnwinsects/pnwmoths/issues/279));
 **Applied** (the *Holoarctia* question — C-031 ruled a rename to *Chelis*, not a deletion,
 [#278](https://github.com/pnwinsects/pnwmoths/issues/278)) ·
-**Refines** C-003 · **Refined by** C-026, C-031
+**Refines** C-003 · **Refined by** C-026, C-031, C-046
 
 > The geometrid genera Macaria and Speranza have been used inconsistently over the years. […]
 > Speranza is no longer in use for N American species and anything we have under Speranza should be
