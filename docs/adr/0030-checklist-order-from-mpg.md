@@ -1,6 +1,6 @@
 # 0030. Checklist order comes from the MPG taxon list
 
-**Status:** Accepted
+**Status:** Accepted · **Refined by** [0061](0061-mpg-2025-list-kept-beside-2023.md): the curator has since made MPG's 2025 update the default authority for names and placements (C-046), reversing the last rejected alternative below
 
 Supersedes the legacy-CMS nested-set extraction, described in
 [data-provenance](../reference/data-provenance.md#reference-mysql-database-original-cms-data), as of PR #221 /

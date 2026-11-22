@@ -73,6 +73,45 @@ what made C-020 possible to reconstruct.
 
 ---
 
+## C-046 · 2026-10-16 · MPG's 2025 update is the default authority for species names, checklist numbers, and genus, subfamily and tribe placement
+
+**Source** [#418 comment](https://github.com/pnwinsects/pnwmoths/issues/418#issuecomment-6226558073),
+the curator's own words, answering the question in the [#418 issue body](https://github.com/pnwinsects/pnwmoths/issues/418)
+· **Status** Applied (the 2025 list committed as `data/mpg-taxa-2025.csv`, and the differences
+reported — [ADR 0061](adr/0061-mpg-2025-list-kept-beside-2023.md)); Pending (checklist order and
+`noc_id` from the 2025 list — #290; the genus moves and placements — #279) · **Refines** C-026, C-039
+
+The question was "Should MPG's 2025 update be the site's default authority for species names,
+checklist numbers, and genus, subfamily and tribe placement?" His answer:
+
+> 1: yes
+
+As the question defined it, "yes" means that wherever MPG's 2025 list and the catalogue differ, we
+change ours to match MPG without asking him species by species. He still rules on any exception, and
+each exception is written in this log so the next MPG update does not undo it. When MPG publishes a
+later update, we compare it with ours and bring him only the differences that could affect a
+decision.
+
+Why it matters: his earlier rulings already assumed it, one group at a time — follow MPG for the
+*Macaria*/*Speranza* group (#279), follow MPG's numbering where it has renumbered a genus (#290),
+take MPG's spelling for six species (C-039). This makes it the rule, so the 2025 differences can be
+applied in batches instead of each becoming a question.
+
+The exceptions already on record still stand, and the report lists them as differences because it
+does not read this log: a genus moves as a whole or not at all (the *Protorthodes* case, C-017);
+ours keeps the name *Catocala cleopatra* where MPG has *C. faustina* (C-025); and *Perizoma* stays in
+Euphyiini (C-043). The other exception the question named, *Macaria marmorata*, no longer arises: it
+was merged into *M. signaria* (C-017).
+The ruling names names, numbers and placements, not authorities; the report lists differing
+authorities too, but replacing ours with MPG's is not decided; that question is #465.
+
+**What changed** — `data/mpg-taxa-2025.csv` (the workbook rendered by
+`scripts/convert-mpg-xlsx.ts`) and `data/mpg-2025-differences.csv` (written by
+`npm run report:mpg-2025`, listed at `/curation/`). No species, name or placement on the site has
+changed yet.
+
+---
+
 ## C-045 · 2026-10-22 · The key drops the old place and month answers that no record supports, except those the curator marks as right
 
 **Source** [#397 comment](https://github.com/pnwinsects/pnwmoths/issues/397#issuecomment-6352161503),
