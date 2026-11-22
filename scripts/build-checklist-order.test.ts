@@ -20,8 +20,10 @@ import {
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
+/** A valid species row of the 2025 list, unless `rank` says otherwise. */
 const mpgRow = (over: Partial<MpgRow>): MpgRow => ({
-  'P No': '000000', MONA: '', Genus: 'Genus', Species: 'species', Family: 'Noctuidae', Synonymy: '',
+  rank: '8.0 valsp', 'P-No. 2025': '00-0000', 'MONA 1983': '', 'Valid Genus': 'Genus',
+  'valid species': 'species', NAME: '', 'original genus': '',
   ...over,
 });
 const speciesRow = (over: Partial<SpeciesRow>): SpeciesRow => ({
@@ -90,12 +92,17 @@ describe('genderVariants', () => {
 
 describe('matchSpecies', () => {
   const rows = [
-    mpgRow({ 'P No': '000001', Genus: 'Macaria', Species: 'signaria', MONA: '6344' }),
-    mpgRow({ 'P No': '000002', Genus: '"Oligia"', Species: 'obtusa', MONA: '9418' }),
-    mpgRow({ 'P No': '000003', Genus: 'Idia', Species: 'concisa of authors' }),
-    mpgRow({ 'P No': '000004', Genus: 'Drasteria', Species: 'maculosa', Synonymy: 'Syneda nubicola Behr, 1870' }),
-    mpgRow({ 'P No': '000005', Genus: 'Trichopolia', Species: 'rufula' }),
-    mpgRow({ 'P No': '000006', Genus: 'Eupithecia', Species: 'nevadata' }),
+    mpgRow({ 'P-No. 2025': '91-0001', 'Valid Genus': 'Macaria', 'valid species': 'signaria', 'MONA 1983': '6344' }),
+    mpgRow({ 'P-No. 2025': '93-0002', 'Valid Genus': '"Oligia"', 'valid species': 'obtusa', 'MONA 1983': '9418' }),
+    mpgRow({ 'P-No. 2025': '93-0003', 'Valid Genus': 'Idia', 'valid species': 'concisa of authors' }),
+    mpgRow({ 'P-No. 2025': '93-0004', 'Valid Genus': 'Drasteria', 'valid species': 'maculosa' }),
+    mpgRow({ rank: '8.5 spsyn', 'Valid Genus': 'Drasteria', 'valid species': 'maculosa', NAME: 'nubicola', 'original genus': 'Syneda' }),
+    mpgRow({ 'P-No. 2025': '93-0005', 'Valid Genus': 'Trichopolia', 'valid species': 'rufula' }),
+    mpgRow({ 'P-No. 2025': '91-0006', 'Valid Genus': 'Eupithecia', 'valid species': 'nevadata', 'MONA 1983': '[NEW]' }),
+    mpgRow({ 'P-No. 2025': '93-0007', 'Valid Genus': 'Caradrina', 'valid species': 'umbricata', 'original genus': 'Protoperigea' }),
+    mpgRow({ 'P-No. 2025': '93-0008', 'Valid Genus': 'Catocala', 'valid species': 'faustina' }),
+    mpgRow({ rank: '9.0 valssp', 'Valid Genus': 'Catocala', 'valid species': 'faustina', NAME: 'cleopatra' }),
+    mpgRow({ rank: '6.5 gensyn', 'Valid Genus': 'Macaria', NAME: 'Semiothisa' }),
   ];
   const index = buildMpgIndex(rows);
   const noCrosswalk = new Map<string, string>();
@@ -130,6 +137,45 @@ describe('matchSpecies', () => {
     assert.deepEqual(hit, { index: 3, via: 'synonymy' });
   });
 
+  it('matches a species synonym row by the genus it was described in', () => {
+    assert.deepEqual(
+      matchSpecies(speciesRow({ genus: 'Drasteria', species: 'nubicola' }), index, noCrosswalk),
+      { index: 3, via: 'synonymy' },
+    );
+  });
+
+  it('matches a valid species under its original genus', () => {
+    const hit = matchSpecies(speciesRow({ genus: 'Protoperigea', species: 'umbricata' }), index, noCrosswalk);
+    assert.deepEqual(hit, { index: 6, via: 'synonymy' });
+  });
+
+  // C-025 keeps the name Catocala cleopatra, which MPG holds as a subspecies of C. faustina.
+  it('matches a subspecies name to its species', () => {
+    const hit = matchSpecies(speciesRow({ genus: 'Catocala', species: 'cleopatra' }), index, noCrosswalk);
+    assert.deepEqual(hit, { index: 7, via: 'synonymy' });
+  });
+
+  it('matches a species under a synonym of its genus', () => {
+    const hit = matchSpecies(speciesRow({ genus: 'Semiothisa', species: 'signaria' }), index, noCrosswalk);
+    assert.deepEqual(hit, { index: 0, via: 'synonymy' });
+  });
+
+  it('does not use a synonym that names two valid species', () => {
+    const ambiguous = buildMpgIndex([
+      mpgRow({ 'Valid Genus': 'Aaa', 'valid species': 'one', 'original genus': 'Old' }),
+      mpgRow({ 'Valid Genus': 'Bbb', 'valid species': 'one', 'original genus': 'Old' }),
+    ]);
+    assert.equal(matchSpecies(speciesRow({ genus: 'Old', species: 'one' }), ambiguous, noCrosswalk), null);
+  });
+
+  it('never keys MPG\'s "[NEW]" MONA placeholder', () => {
+    assert.equal(index.byMona.has('[NEW]'), false);
+  });
+
+  it('indexes only valid species, so a synonym row takes no position', () => {
+    assert.equal(index.rows.length, 8);
+  });
+
   it('uses the crosswalk only after every mechanical tier has failed', () => {
     const crosswalk = new Map([['protorthodes-rufula', 'Trichopolia rufula']]);
     const hit = matchSpecies(speciesRow({ genus: 'Protorthodes', species: 'rufula' }), index, crosswalk);
@@ -151,9 +197,9 @@ describe('matchSpecies', () => {
 
 describe('orderSpecies', () => {
   const rows = [
-    mpgRow({ 'P No': '000001', Genus: 'Aaa', Species: 'one' }),
-    mpgRow({ 'P No': '000002', Genus: 'Aaa', Species: 'two' }),
-    mpgRow({ 'P No': '000003', Genus: 'Bbb', Species: 'one' }),
+    mpgRow({ 'P-No. 2025': '93-0001', 'Valid Genus': 'Aaa', 'valid species': 'one' }),
+    mpgRow({ 'P-No. 2025': '93-0002', 'Valid Genus': 'Aaa', 'valid species': 'two' }),
+    mpgRow({ 'P-No. 2025': '93-0003', 'Valid Genus': 'Bbb', 'valid species': 'one' }),
   ];
   const index = buildMpgIndex(rows);
   const noCrosswalk = new Map<string, string>();
@@ -168,7 +214,7 @@ describe('orderSpecies', () => {
       index, noCrosswalk,
     );
     assert.deepEqual(result.ordered.map((r) => r.species_slug), ['aaa-one', 'aaa-two', 'bbb-one']);
-    assert.deepEqual(result.ordered.map((r) => r.mpg_p_no), ['000001', '000002', '000003']);
+    assert.deepEqual(result.ordered.map((r) => r.mpg_p_no), ['93-0001', '93-0002', '93-0003']);
   });
 
   // An unmatched species has a known genus but no known position inside it,
@@ -204,7 +250,7 @@ describe('orderSpecies', () => {
   });
 
   it('breaks ties deterministically when two species share an MPG row', () => {
-    const shared = buildMpgIndex([mpgRow({ 'P No': '000001', Genus: 'Aaa', Species: 'one', MONA: '10' })]);
+    const shared = buildMpgIndex([mpgRow({ 'P-No. 2025': '93-0001', 'Valid Genus': 'Aaa', 'valid species': 'one', 'MONA 1983': '10' })]);
     const result = orderSpecies(
       [
         speciesRow({ genus: 'Zzz', species: 'later', noc_id: '10' }),
@@ -276,17 +322,14 @@ describe('data/checklist-order.csv', () => {
     }
   });
 
-  // Compared as STRINGS, deliberately. `P No` is an alphanumeric hierarchical code —
-  // `09a0001`, `16a0082X`, `300007.85n` — so Number() is NaN for two thirds of MPG's
-  // rows, and a numeric comparator would leave `regressions` empty no matter what the
-  // file said. The character-set pin below is what keeps lexicographic ordering
-  // meaningful: a future MPG release that introduced a separator would change the
-  // sort silently, and this fails instead.
-  it('never regresses in MPG sequence across the placed rows', () => {
+  // P-numbers do not sort in MPG's sequence (91a1174 comes before 91a1156 in the
+  // 2025 list), so the check is against the position of each number in the list.
+  it('follows MPG sequence across the placed rows', () => {
+    const position = new Map(buildMpgIndex(mpg).rows.map((row, i) => [row['P-No. 2025'], i]));
     const placed = ordered.filter((r) => r.matched_via !== 'unplaced').map((r) => r.mpg_p_no);
     assert.ok(placed.length > 1000, `only ${placed.length} placed rows — the check below would be vacuous`);
-    assert.deepEqual(placed.filter((p) => !/^[0-9a-zA-Z.]+$/.test(p)), [], 'P No outside the known character set');
-    const regressions = placed.filter((p, i) => i > 0 && p < (placed[i - 1] ?? ''));
+    assert.deepEqual(placed.filter((p) => !position.has(p)), [], 'a P-number the 2025 list does not hold');
+    const regressions = placed.filter((p, i) => i > 0 && (position.get(p) ?? 0) < (position.get(placed[i - 1] ?? '') ?? 0));
     assert.deepEqual(regressions, []);
   });
 

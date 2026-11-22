@@ -1,6 +1,6 @@
 # 0061. MPG's 2025 list is committed beside the 2023 list, and a report lists where the catalogue differs from it
 
-**Status:** Accepted (2026-11-22)
+**Status:** Accepted (2026-11-22); decisions 1 and 4 superseded by [0062](0062-checklist-order-reads-mpg-2025.md)
 Refines [0030](0030-checklist-order-from-mpg.md), whose rejection of "adopt MPG's genus, subfamily and tribe wholesale" the curator has since reversed ([C-046](../curation-log.md))
 
 ## Context

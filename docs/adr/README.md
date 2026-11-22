@@ -38,7 +38,7 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0027](0027-no-link-check-cache.md) | The link check keeps no result cache — it still checks every link, but only its 35 external URLs were ever cacheable (internal links are `file://`, CDN images are excluded and manifest-checked) | Accepted |
 | [0028](0028-link-rot-reporting.md) | Broken external links reported to one self-closing GitHub issue, listed only after two consecutive weekly failures | Accepted |
 | [0029](0029-removing-a-species.md) | Removing a species deletes its row and every record outright — not a move to the deny-list, and no tombstone redirect | Accepted |
-| [0030](0030-checklist-order-from-mpg.md) | Checklist order comes from the MPG taxon list, superseding the legacy-CMS nested-set extraction | Accepted; refined by 0061 |
+| [0030](0030-checklist-order-from-mpg.md) | Checklist order comes from the MPG taxon list, superseding the legacy-CMS nested-set extraction | Accepted; refined by 0061 and 0062 |
 | [0031](0031-checklist-page.md) | The Checklist is its own server-rendered page, not a mode of Browse; its list is excluded from the search index | Accepted |
 | [0032](0032-curation-log.md) | Curatorial decisions get their own append-only log (`docs/curation-log.md`), separate from ADRs | Accepted |
 | [0033](0033-referential-integrity-gate.md) | Every species reference is declared in one table and checked before the build; known orphans held in a self-expiring ratchet | Accepted |
@@ -69,4 +69,5 @@ product is and who it's for, see [PRODUCT.md](../../PRODUCT.md).
 | [0058](0058-analytics-download-never-blocks-a-deploy.md) | A production build downloads only new or changed analytics files, keeps cached copies when Bunny fails, and opens (or closes) a tracking issue instead of failing the deploy | Accepted |
 | [0059](0059-browse-filter-state-is-announced.md) | Browse groups with no records in the chosen place stay visible, greyed with readable contrast, carry hidden "no records in …" text, and a status line says how many species matched | Accepted |
 | [0060](0060-storage-replicated-to-new-york.md) | The storage zone is replicated from Los Angeles to New York, after an LA storage failure took the site down on 2026-11-16; a replication region cannot be removed | Accepted |
-| [0061](0061-mpg-2025-list-kept-beside-2023.md) | MPG's 2025 list is committed beside the 2023 list, and an advisory report lists where the catalogue differs from it, now that the curator has made MPG the default authority (C-046) | Accepted |
+| [0061](0061-mpg-2025-list-kept-beside-2023.md) | MPG's 2025 list is committed beside the 2023 list, and an advisory report lists where the catalogue differs from it, now that the curator has made MPG the default authority (C-046) | Accepted; decisions 1 and 4 superseded by 0062 |
+| [0062](0062-checklist-order-reads-mpg-2025.md) | Checklist order and checklist numbers come from MPG's 2025 list, the 2023 list stays for its MONA numbers and common names, and the difference report uses the checklist's matcher | Accepted |
