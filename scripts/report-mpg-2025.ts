@@ -274,8 +274,7 @@ export function findDifferences({ species, mpgRows, crosswalk, shown }: Inputs):
     const theirs = withoutStatusLetter(match.pNo2025);
     const comparable = isPNumber(nocId) || (nocId === '' && isPNumber(theirs));
     if (comparable && theirs && nocId !== theirs) {
-      // Was ours this species' own number in an earlier edition, and does
-      // another species carry it in any edition?
+      // Was ours this species' own number in an earlier edition, or another species'?
       const others = (carriers.get(numberKey(nocId)) ?? []).filter((i) => i !== hit.index);
       const own = match.numbers.includes(numberKey(nocId));
       const note =
@@ -287,8 +286,14 @@ export function findDifferences({ species, mpgRows, crosswalk, shown }: Inputs):
               ? 'ours is not a number MPG has given this species'
               : 'ours is in no edition of MPG';
       add('number', nocId, theirs, note);
-      // The curator's concern on #290: a number we hold may belong to another
-      // species, after a split or a renumbering, even when it was once ours.
+    }
+    // The curator's concern on #290: a number we hold may belong to another
+    // species, after a split or a renumbering. It is checked whether or not our
+    // number matches MPG's, because after a split the species that keeps the old
+    // number agrees with MPG while the other half may still carry that number in
+    // an earlier edition.
+    if (isPNumber(nocId)) {
+      const others = (carriers.get(numberKey(nocId)) ?? []).filter((i) => i !== hit.index);
       if (others.length > 0) {
         add(
           'number-of-another-species',

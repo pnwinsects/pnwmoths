@@ -247,3 +247,18 @@ describe('applyNumbers', () => {
     assert.deepEqual(applied, []);
   });
 });
+
+describe('number-of-another-species when our number agrees with MPG', () => {
+  // After a split the species that keeps the old number agrees with MPG, and
+  // the other half may still carry that number in an earlier edition.
+  it('still flags the number', () => {
+    const rows = differences(
+      [ours({ genus: 'Clostera', species: 'brucei', noc_id: '93-0008' })],
+      [
+        valid('Clostera', 'brucei', { 'P-No. 2025': '93-0008' }),
+        valid('Clostera', 'multnoma', { 'P-No. 2025': '93-0008.1', 'P3 No. 2016': '930008' }),
+      ],
+    );
+    assert.deepEqual(rows.map((r) => [r.field, r.mpg]), [['number-of-another-species', 'Clostera multnoma (2025: 93-0008.1)']]);
+  });
+});
