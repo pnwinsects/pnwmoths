@@ -680,7 +680,7 @@ lithophane-amanda,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,20
 feltia-jaculifera,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2001,9,8,A. V. Z. Brower,OSAC,,US:41003,679
 caenurgina-erechtea,specimen,49.5,-117.28,BC,Central Kootenay,Nelson,1774,1981,7,3,Jon Shepard,JHS,,CA:5903,680
 peridroma-saucia,specimen,44.637,-123.106,OR,Linn,Albany,213,1941,8,,S. C. Jones,OSAC,,US:41043,681
-drepana-bilineata,specimen,49.283,-124.116,BC,Nanaimo,"Nanoose, CDN",0,1995,8,2,Jon H. Shepard,RBCM,Shepard notes,CA:5921,682
+falcaria-bilineata,specimen,49.283,-124.116,BC,Nanaimo,"Nanoose, CDN",0,1995,8,2,Jon H. Shepard,RBCM,Shepard notes,CA:5921,682
 apamea-amputatrix,specimen,48.68,-122.48,WA,Whatcom,"Chuckanut Mt., W slope",750,1995,5,24,L. G. Crabo,WSU,,US:53073,683
 lophocampa-maculata,specimen,42.639,-118.762,OR,Harney,Blitzen Crossing,5070,1980,7,18,Ray Albright,OSAC,,US:41025,684
 apamea-scoparia,specimen,46.733,-116.999,ID,Latah,Moscow,2597,1959,7,2,R. B. Hawkes,WFBM,,US:16057,685
@@ -924,7 +924,7 @@ alastria-chico,specimen,46.92,-122.85,WA,Thurston,"Plumb, Rocky Prairie TNC",260
 euxoa-difformis,specimen,43.921,-122.812,OR,Lane,"Eugene, 12mSE",644,1966,9,5,Kenneth Goeden,OSAC,,US:41039,923
 agrotis-vancouverensis,specimen,44.15,-121.33,OR,Deschutes,"Tumalo-Bend, nr.",3182,1995,6,28,,OSAC,,US:41017,924
 melanchra-adjuncta,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse Pt.,3841,1997,7,23,L. G. Crabo,LGCC,,US:53047,925
-protoperigea-anotha,specimen,47.5,-119.92,WA,Douglas,Douglas Cr.,1600,2000,7,27,J. & S. Shepard,JHS,,US:53017,926
+caradrina-anotha,specimen,47.5,-119.92,WA,Douglas,Douglas Cr.,1600,2000,7,27,J. & S. Shepard,JHS,,US:53017,926
 caradrina-montana,specimen,46.943,-116.649,ID,Latah,Laird Park,2680,1966,7,10,C. J. Horning,WFBM,,US:16057,927
 anagrapha-falcifera,specimen,46.094,-117.846,WA,Columbia,Dayton,5000,1963,8,3,R. E. Miller,WFBM,,US:53013,928
 orgyia-pseudotsugata,specimen,46.733,-116.999,ID,Latah,Moscow,2560,,,,M. M. Furniss,WFBM,"em. ex. aspen; July , 1983",US:16057,929
@@ -1547,7 +1547,7 @@ bleptina-caradrinalis,specimen,48.646,-122.976,WA,San Juan,"Turtleback Mt., SW s
 cerastis-enigmatica,specimen,48.59,-120.6,WA,Okanogan,Hwy 20 1 mi. N Silver Star Cr.,4566,1994,5,7,L. & A. Crabo,LGCC,,US:53047,1546
 annaphila-arvalis,specimen,46.09,-117.85,WA,Columbia,Dayton,2500,1965,3,7,R. E. Miller,JHS,,US:53013,1547
 raphia-frater,specimen,53.363,-113.002,AB,,"Ministik L., nr.",2500,1999,6,4,B. C. Schmidt,UASM,Schmidt File,,1548
-protoperigea-posticata,specimen,42.18,-119.95,OR,Lake,"Deep Cr., W Adell",4600,2001,9,21,Crabo/Troubridge,WSU,,US:41037,1549
+caradrina-posticata,specimen,42.18,-119.95,OR,Lake,"Deep Cr., W Adell",4600,2001,9,21,Crabo/Troubridge,WSU,,US:41037,1549
 abagrotis-duanca,specimen,43.683,-119.448,OR,Harney,"Burns, 9mNW; Skull Cr. Rd.",5060,2010,7,13,USDA,OSAC,,US:41025,1550
 trichoplusia-ni,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1980,8,20,D. W. Knight,JHS,,CA:5903,1551
 aseptis-ethnica,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,6234,1997,9,2,L. G. Crabo,WSU,,US:53077,1552
@@ -1752,7 +1752,7 @@ hyles-gallii,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1985,6,21,D
 panthea-virginarius,specimen,48.595,-123.18,WA,San Juan,"Henry Is., isthmus",4,2007,7,4,L. G. Crabo,LGCC,,US:53055,1751
 lacinipolia-cuneata,specimen,47.102,-122.473,WA,Pierce,"McChord AFB, 2 km W of Spanaway",341,2010,7,10,D. Grosboll,WSU,,US:53053,1752
 melipotis-jucunda,specimen,46.665,-119.353,WA,Franklin,Wahluke Wild. Area,190,2002,4,25,Strenge/Zack,WSU,,US:53021,1753
-drepana-bilineata,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,8,15,,OSAC,,US:41019,1754
+falcaria-bilineata,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,8,15,,OSAC,,US:41019,1754
 sympistis-zetterstedtii,specimen,48.95,-119.92,WA,Okanogan,"Horseshoe Mt., south peak",7600,1981,7,28,J. P. Pelham,JHS,,US:53047,1755
 egira-simplex,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1989,5,7,J. H. Shepard,LGCC,,CA:5903,1756
 pseudanarta-crocea,specimen,46.523,-119.353,WA,Benton,"Columbia R., W sand dunes",495,1996,9,18,R. S. Zack,WSU,R. S. Zack id,US:53005,1757
@@ -1822,7 +1822,7 @@ pyrrharctia-isabella,specimen,44.771,-122.564,OR,Marion,"Santiam R., L. N. Fk.",
 anagrapha-falcifera,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,1998,6,16,D. Strenge,DLSC,,US:53005,1821
 cucullia-dorsalis,specimen,45.99,-120.66,WA,Klickitat,Simcoe Butte,3288,2000,7,7,L. & E. Crabo,LGCC,,US:53039,1822
 gluphisia-severa,specimen,49.12,-116.16,BC,Central Kootenay,Goatfell,2600,1990,5,12,D. W. Knight,JHS,,CA:5903,1823
-drepana-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1934,7,20,O. Huelleman,WFBM,,US:16079,1824
+falcaria-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1934,7,20,O. Huelleman,WFBM,,US:16079,1824
 properigea-niveirena,specimen,48.65,-122.83,WA,San Juan,"Mt. Constitution, SW slope; Moran SP",813,1996,7,20,L. G. Crabo,LGCC,,US:53055,1825
 lasionycta-fergusoni,specimen,51.7,-116.49,AB,,"Bow Pass, Peyto L. L. O.",7209,1994,7,25,Crabo/Troubridge,LGCC,,,1826
 euxoa-misturata,specimen,44.15,-121.33,OR,Deschutes,"Tumalo-Bend, nr.",3182,1995,8,29,,OSAC,,US:41017,1827
@@ -2089,7 +2089,7 @@ sutyna-privata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,
 melipotis-jucunda,specimen,46.813,-116.92,ID,Latah,"Moscow, 6mNE",3360,2002,7,14,M. R. Stage,WFBM,,US:16057,2088
 hemileuca-eglanterina,specimen,48.534,-123.016,WA,San Juan,Friday Harbor,91,,,,C. Johansen,WSU,"em.; August 18, 1947",US:53055,2089
 apantesis-ornata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1950,7,4,O. Huelleman,WFBM,,US:16079,2090
-drepana-bilineata,specimen,45.641,-121.933,OR,Multnomah,Eagle Cr.,79,1971,8,9,Brown/Goeden,ODAC,,US:41051,2091
+falcaria-bilineata,specimen,45.641,-121.933,OR,Multnomah,Eagle Cr.,79,1971,8,9,Brown/Goeden,ODAC,,US:41051,2091
 acronicta-lupini,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,7,18,L. G. Crabo,LGCC,,US:53077,2092
 euthyatira-pudens,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1980,5,18,J. Shepard,JHS,,CA:5903,2093
 homorthodes-communis,specimen,47.149,-124.187,WA,Grays Harbor,"Copalis Beach, 3 mi. N",191,2010,7,28,G. & A. Peters,GPC,,US:53027,2094
@@ -2455,7 +2455,7 @@ euxoa-ochrogaster,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1981,8,
 apamea-zeta,specimen,50.36,-122.14,BC,Thompson-Nicola,"Blowdown Pass; Duffy L., nr.",7000,1993,8,5,Crabo/Troubridge,WSU,,CA:5933,2454
 agrotis-ipsilon,specimen,47.05,-124.09,WA,Grays Harbor,North Bay bog; Grays Harbor,19,1991,9,17,L. G. Crabo,LGCC,,US:53027,2455
 leucoma-salicis,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1961,7,3,R. E. Stecker,WFBM,,US:16057,2456
-drepana-bilineata,specimen,48.052,-122.177,WA,Snohomish,Marysville,21,1958,7,18,A. Robertson,WWUC,,US:53061,2457
+falcaria-bilineata,specimen,48.052,-122.177,WA,Snohomish,Marysville,21,1958,7,18,A. Robertson,WWUC,,US:53061,2457
 melipotis-jucunda,specimen,48.76,-122.488,WA,Whatcom,Bellingham,74,1975,5,25,A. Bailey,WWUC,,US:53073,2458
 lithophane-amanda,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1898,4,20,,WSU,,US:53075,2459
 caradrina-montana,specimen,45.9,-120.68,WA,Klickitat,Munson Prairie,2573,1988,5,21,L. G. Crabo,LGCC,,US:53039,2460
@@ -2520,7 +2520,7 @@ malacosoma-disstria,specimen,44.513,-123.234,OR,Benton,Kiger Is.,226,1960,7,,C. 
 gluphisia-septentrionis,specimen,46.733,-116.999,ID,Latah,Moscow,2560,2000,7,8,R. S. Zack,WSU,,US:16057,2519
 orthodes-noverca,specimen,47.696,-119.616,WA,Douglas,Jameson Lake Resort,1817,2005,5,2,DL Strenge,DLSC,,US:53017,2520
 sphinx-vashti,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1994,6,9,J. C. Miller,OSAC,,US:41039,2521
-protoperigea-posticata,specimen,44.54,-117.714,OR,Baker,Dark Cyn.,3601,2001,8,22,L. G. Crabo,LGCC,,US:41001,2522
+caradrina-posticata,specimen,44.54,-117.714,OR,Baker,Dark Cyn.,3601,2001,8,22,L. G. Crabo,LGCC,,US:41001,2522
 euthyatira-lorata,specimen,42.439,-123.328,OR,Josephine,Grants Pass,941,1966,4,1,Kenneth Goeden,ODAC,,US:41033,2523
 euxoa-aberrans,specimen,47.99,-120.39,WA,Chelan,Junior Point,2010,1989,8,4,Crabo/Coughlin,OSAC,,US:53007,2524
 euxoa-basalis,specimen,46.324,-117.971,WA,Columbia,Dayton,1680,1963,8,30,R. E. Miller,LGCC,,US:53013,2525
@@ -2709,7 +2709,7 @@ copablepharon-fuscum,specimen,48.38,-122.66,WA,Island,"Deception Pass SP, South 
 apantesis-nevadensis,specimen,46.725,-120.817,WA,Yakima,Oak Cr.,1722,1990,9,7,L. G. Crabo,WSU,,US:53077,2708
 furcula-scolopendrina,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,1985,8,4,"S. G. Jewett, Jr.",OSAC,,US:41005,2709
 anaplectoides-prasina,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1969,6,21,"S. Jewett, Jr.",OSAC,,US:41007,2710
-drepana-bilineata,specimen,49.283,-124.116,BC,Nanaimo,"Nanoose, CDN",0,1995,5,24,Jon H. Shepard,RBCM,Shepard notes,CA:5921,2711
+falcaria-bilineata,specimen,49.283,-124.116,BC,Nanaimo,"Nanoose, CDN",0,1995,5,24,Jon H. Shepard,RBCM,Shepard notes,CA:5921,2711
 homoglaea-carbonaria,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1956,3,28,R. E. Miller,WFBM,,US:53013,2712
 apamea-devastator,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1987,8,13,J. Shepard,WFBM,,CA:5903,2713
 lithophane-dilatocula,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1972,3,16,R. E. Miller,JHS,,US:53013,2714
@@ -2720,7 +2720,7 @@ caenurgina-annexa,specimen,47.217,-120.583,WA,Kittitas,Colockum Rd.,3000,1963,6,
 enargia-fausta,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse Pt.,3841,1999,8,3,L. G. Crabo,LGCC,,US:53047,2719
 cucullia-antipoda,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,1999,6,2,D. Strenge,DLSC,,US:53005,2720
 acronicta-insita,specimen,45.866,-123.594,OR,Clatsop,Elsie,400,1990,6,29,E. L. Griepentrog,OSAC,,US:41007,2721
-drepana-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1986,5,19,J. C. Miller,OSAC,,US:41039,2722
+falcaria-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1986,5,19,J. C. Miller,OSAC,,US:41039,2722
 leucania-dia,specimen,47.16,-120.61,WA,Kittitas,Reecer Cr. @ Johnson Cyn.,2834,1990,5,26,L. G. Crabo,LGCC,,US:53037,2723
 euxoa-furtivus,specimen,42.056,-119.743,OR,Lake,Coleman Rim,6260,1999,6,30,D. N. Ross,OSAC,,US:41037,2724
 autographa-californica,specimen,47.1,-122.433,WA,Pierce,Spanaway,380,1930,8,8,,WSU,,US:53053,2725
@@ -3112,7 +3112,7 @@ ceranemota-fasciata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1979
 xylotype-arcadia,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1988,10,7,D. W. Knight,JHS,"Dyar, 1904",CA:5903,3111
 schizura-ipomaeae,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,6,27,J. Shepard,WSU,,CA:5903,3112
 euxoa-tessellata,specimen,46.85,-120.48,WA,Kittitas,Umtanum Cr. Mouth,1718,1988,8,14,L. G. Crabo,LGCC,,US:53037,3113
-drepana-bilineata,specimen,49.317,-123.066,BC,Greater Vancouver,North Vancouver,333,1962,6,18,A. G. Guppy,CSG,Shepard notes,CA:5915,3114
+falcaria-bilineata,specimen,49.317,-123.066,BC,Greater Vancouver,North Vancouver,333,1962,6,18,A. G. Guppy,CSG,Shepard notes,CA:5915,3114
 cisseps-fulvicollis,specimen,44.39,-122.49,OR,Linn,Cascadia,900,1957,8,12,E. J. D[ornfeld].,OSAC,,US:41043,3115
 amphipyra-tragopoginis,specimen,46.065,-118.352,WA,Walla Walla,Walla Walla,1000,1949,7,2,W. C. Cook,WFBM,,US:53071,3116
 apantesis-ornata,specimen,43.785,-116.942,ID,Canyon,Parma,2224,1955,6,,A. J. Walz,WFBM,,US:16027,3117
@@ -3179,7 +3179,7 @@ syngrapha-alias,specimen,47.176,-116.551,ID,Benewah,Peterson Point,3680,,,,K. C.
 stretchia-muricina,specimen,45.985,-120.653,WA,Klickitat,Satus Pass,4000,2000,4,20,,WSU,,US:53039,3178
 orthosia-praeses,specimen,47.149,-124.187,WA,Grays Harbor,"Copalis Beach, 3 mi. N",191,2010,2,6,G. & A. Peters,GPC,,US:53027,3179
 habrosyne-scripta,specimen,51.4,-116.483,BC,Columbia-Shuswap,Field,4083,,7,6,F. H. Wolley-Dod,CNC,Shepard notes,CA:5939,3180
-protoperigea-posticata,specimen,45.468,-116.554,ID,Idaho,Sheep Cr.,1640,1997,9,21,M. Hanks,WFBM,,US:16049,3181
+caradrina-posticata,specimen,45.468,-116.554,ID,Idaho,Sheep Cr.,1640,1997,9,21,M. Hanks,WFBM,,US:16049,3181
 apamea-spaldingi,specimen,46.523,-119.353,WA,Benton,"Columbia R., W sand dunes",495,1996,4,26,R. S. Zack,WSU,R. S. Zack id,US:53005,3182
 apamea-indocilis,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,6,16,Don Frechin,WSU,,US:53035,3183
 rhyacia-clemens,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2005,7,14,Crabo/Coughlin,LGCC,,US:53037,3184
@@ -3224,7 +3224,7 @@ euxoa-comosa,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,
 euthyatira-semicircularis,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,7,2,J. & S. Shepard,JHS,,CA:5903,3223
 paonias-excaecata,specimen,45.453,-121.131,OR,Wasco,Dufur,1342,1962,7,12,Kenneth Goeden,ODAC,,US:41065,3224
 helotropha-reniformis,specimen,47.687,-117.011,ID,Kootenai,"Pleasant View,nr.",2170,1958,7,1,C. S. Crawford,WSU,,US:16055,3225
-drepana-bilineata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1989,,,Hettie Miller,HM,Shepard notes,CA:5933,3226
+falcaria-bilineata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1989,,,Hettie Miller,HM,Shepard notes,CA:5933,3226
 gnophaela-vermiculata,specimen,43.334,-114.545,ID,Camas,Willow Cr.,4884,,,,M. W. Hanks,WFBM,"Fairfield, 18mNW",US:16025,3227
 sympistis-acheron,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,9,2,L. G. Crabo,LGCC,,US:53077,3228
 brachylomia-populi,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1988,9,1,D. W. Knight,JHS,,CA:5903,3229
@@ -3331,7 +3331,7 @@ apantesis-williamsii,specimen,43.7,-113.033,ID,Butte,"Howe, 6mS",5000,1982,7,22,
 hypena-decorata,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1962,4,14,R. E. Miller,WFBM,,US:53013,3330
 hyphantria-cunea,specimen,46.509,-116.55,ID,Nez Perce,Lenore,1000,1961,6,15,R. E. Stecker,WFBM,,US:16069,3331
 neoligia-tonsa,specimen,42.005,-118.59,OR,Harney,"Denio, 2mNE",4174,2001,7,20,Troubridge/Crabo/Laf.,LGCC,,US:41025,3332
-protoperigea-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1964,8,8,R. E. Miller,JHS,,US:16047,3333
+caradrina-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1964,8,8,R. E. Miller,JHS,,US:16047,3333
 rhizagrotis-cloanthoides,specimen,43.247,-116.673,ID,Owyhee,"Nampa, 23mS",3901,2002,6,26,Todd Adams,WSU,,US:16073,3334
 marathyssa-inficita,specimen,45.468,-116.554,ID,Idaho,Sheep Cr.,1311,1990,5,11,F. W. Merickel,WFBM,,US:16049,3335
 egira-curialis,specimen,46.716,-116.988,ID,Latah,Moscow,2590,2003,4,8,R. S. Zack,WSU,,US:16057,3336
@@ -3704,12 +3704,12 @@ aplectoides-condita,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1993,6,30,
 orthosia-hibisci,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1954,4,20,E. M. Irons,WFBM,,US:16057,3703
 paonias-excaecata,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1944,6,16,E. J. Dornfeld,OSAC,,US:41003,3704
 phyllodesma-americana,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1901,5,6,,OSAC,,US:53075,3705
-protoperigea-anotha,specimen,52.77,-118.03,AB,,"Marmot Mt. Rd., Portal Cr.",4228,1994,7,28,Crabo/Troubridge,LGCC,,,3706
+caradrina-anotha,specimen,52.77,-118.03,AB,,"Marmot Mt. Rd., Portal Cr.",4228,1994,7,28,Crabo/Troubridge,LGCC,,,3706
 sympistis-lacticollis,specimen,44.517,-117.918,OR,Baker,Pine Cr.,4082,2001,8,22,L. G. Crabo,LGCC,,US:41001,3707
 xestia-c-nigrum,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1998,10,12,A. V. Z. Brower,OSAC,,US:41003,3708
 euthyatira-semicircularis,specimen,42.098,-123.412,OR,Josephine,Oregon Caves,3688,1958,7,2,R. & A. Albright,OSAC,,US:41033,3709
 acronicta-impleta,specimen,53.363,-113.002,AB,,"Ministik L., nr.",2500,1997,6,3,B. C. Schmidt,UASM,Schmidt File,,3710
-protoperigea-umbricata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2001,8,21,L. G. Crabo,LGCC,,US:41045,3711
+caradrina-umbricata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2001,8,21,L. G. Crabo,LGCC,,US:41045,3711
 trichoplusia-ni,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1986,9,3,D. W. Knight,JHS,,CA:5903,3712
 euxoa-infausta,specimen,46.95,-120.09,WA,Kittitas,Schnebly Coulee,1740,1990,7,3,L. G. Crabo,LGCC,,US:53037,3713
 lacanobia-subjuncta,specimen,47.6,-120.49,WA,Chelan,Derby Cyn.,2744,2004,6,21,L. & E. Crabo,LGCC,,US:53007,3714
@@ -3731,7 +3731,7 @@ autographa-corusca,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1959,8,26,Don F
 homorthodes-discreta,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1994,9,13,L. G. Crabo,LGCC,,US:53017,3730
 malacosoma-californica,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,6,21,R. S. Zack,WSU,,US:53075,3731
 schinia-acutilinea,specimen,46.4597,-119.7208,WA,Benton,"Snively Canyon, lower springs",1326,1999,9,16,D. L. Strenge,DLSC,,US:53005,3732
-drepana-bilineata,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,1976,8,30,"S. Jewett, Jr.",OSAC,Firwood Rd.,US:41005,3733
+falcaria-bilineata,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,1976,8,30,"S. Jewett, Jr.",OSAC,Firwood Rd.,US:41005,3733
 pseudothyatira-cymatophoroides,specimen,45.436,-123.14,OR,Washington,Gaston,198,1964,7,28,Kenneth Goeden,ODAC,,US:41067,3734
 ponometia-semiflava,specimen,45.622,-116.468,ID,Idaho,Pittsburg Landing,1476,1992,6,23,F. W. Merickel,WFBM,,US:16049,3735
 rhizagrotis-albalis,specimen,46.9,-119.94,WA,Grant,"Wanapum Dam, 1.5 mi. NNE",1054,1990,6,2,L. G. Crabo,LGCC,,US:53025,3736
@@ -4667,7 +4667,7 @@ apamea-atriclava,specimen,48.69,-122.49,WA,Whatcom,Chuckanut Bay,328,1993,6,13,L
 apamea-antennata,specimen,47.681,-117.282,WA,Spokane,Millwood,1980,1957,6,9,C. S. Crawford,WSU,,US:53063,4666
 autographa-californica,specimen,45.279,-117.215,OR,Wallowa,Wallowa Lake State Park,4474,2010,6,9,D. Strenge,DLSC,,US:41063,4667
 sympistis-augustus,specimen,46.78,-118.53,WA,Adams,"Washtucna, nr. @ sanddunes",1424,1991,9,29,L. G. Crabo,LGCC,,US:53001,4668
-drepana-bilineata,specimen,44.52,-117.19,OR,Baker,Fox Cr.,3000,1991,5,23,Jon H. Shepard,JHS,,US:41001,4669
+falcaria-bilineata,specimen,44.52,-117.19,OR,Baker,Fox Cr.,3000,1991,5,23,Jon H. Shepard,JHS,,US:41001,4669
 euxoa-misturata,specimen,48,-119.62,WA,Okanogan,Bridgeport S. P.,1047,1996,9,13,L. G. Crabo,LGCC,,US:53047,4670
 orgyia-pseudotsugata,specimen,46.7,-116.999,ID,Latah,"Moscow, 2mS",2698,1992,8,4,F. W. Merickel,WFBM,,US:16057,4671
 lacinipolia-renigera,specimen,50.2,-114.44,AB,,Hailstone Butte,6676,1994,7,23,Crabo/Troubridge,LGCC,,,4672
@@ -4793,7 +4793,7 @@ agrotis-vancouverensis,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW; F
 leucoma-salicis,specimen,47.424,-120.309,WA,Chelan,Wenatchee,780,1940,6,14,,WSU,,US:53007,4792
 bellura-obliqua,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,2006,7,2,J. & S. Shepard,JHS,,CA:5903,4793
 xestia-oblata,specimen,48.742,-121.055,WA,Whatcom,S. Ross L.,1924,2007,8,15,L. G. Crabo,LGCC,,US:53073,4794
-protoperigea-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1965,8,28,R. E. Miller,JHS,,US:16047,4795
+caradrina-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1965,8,28,R. E. Miller,JHS,,US:16047,4795
 apamea-devastator,specimen,48.052,-122.177,WA,Snohomish,Marysville,21,1959,8,19,A.D. Robertson,WWUC,,US:53061,4796
 phyllodesma-americana,specimen,47.76,-120.66,WA,Chelan,Plain,1800,1986,5,17,Jon H. Shepard,JHS,,US:53007,4797
 malacosoma-disstria,specimen,48.76,-122.488,WA,Whatcom,Bellingham,74,1959,7,31,A.D. Robertson,WWUC,,US:53073,4798
@@ -5088,7 +5088,7 @@ euxoa-aequalis,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,199
 lithophane-petulca,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1987,9,25,Jon Shepard,JHS,,CA:5903,5087
 abagrotis-glenni,specimen,42.826,-118.939,OR,Harney,"Frenchglen, P Hill",4865,1997,9,26,Crabo/Troubridge,LGCC,,US:41025,5088
 acronicta-marmorata,specimen,44.565,-123.262,OR,Benton,Corvallis,229,1945,5,12,Marge Johnson,WWUC,,US:41003,5089
-drepana-bilineata,specimen,44.771,-122.564,OR,Marion,"Mill City, 5mW",650,1971,8,13,C. W. Nelson,OSAC,,US:41047,5090
+falcaria-bilineata,specimen,44.771,-122.564,OR,Marion,"Mill City, 5mW",650,1971,8,13,C. W. Nelson,OSAC,,US:41047,5090
 euxoa-auxiliaris,specimen,48.74,-120.69,WA,Okanogan,Slate Pk.,6175,1988,8,7,L. G. Crabo,LGCC,,US:53047,5091
 abagrotis-variata,specimen,42.327,-122.874,OR,Jackson,Medford,1383,1970,7,25,ODA,OSAC,,US:41029,5092
 xestia-finatimis,specimen,45.117,-117.7,OR,Union,OSU Hall Cr. Ranch,3800,1996,8,20,,OSAC,,US:41061,5093
@@ -5617,7 +5617,7 @@ abagrotis-brunneipennis,specimen,48.742,-121.055,WA,Whatcom,S. Ross L.,1924,2007
 furcula-cinereoides,specimen,44.518,-117.862,OR,Baker,Cornet Cr.,4194,2007,6,15,L. G. Crabo,LGCC,,US:41001,5616
 drasteria-howlandii,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,,,,R. E. Miller,JHS,,US:53013,5617
 behrensia-conchiformis,specimen,48.592,-123.03,WA,San Juan,Yellow Island TNC,10,1996,4,11,TNC of WA,LGCC,,US:53055,5618
-drepana-bilineata,specimen,47.72,-122.55,WA,Kitsap,Bloedel Reserve,100,1994,5,10,R. L. Crawford,JHS,,US:53035,5619
+falcaria-bilineata,specimen,47.72,-122.55,WA,Kitsap,Bloedel Reserve,100,1994,5,10,R. L. Crawford,JHS,,US:53035,5619
 raphia-frater,specimen,49.1,-113.95,AB,,"Crandall CG, Waterton NP",4532,2005,7,11,G. G. Anweiler,UASM,Schmidt File,,5620
 malacosoma-californica,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1987,8,1,D. W. Knight,JHS,,CA:5903,5621
 agrotis-gravis,specimen,47.03,-124.16,WA,Grays Harbor,Ocean City S. P.,21,1998,4,17,L. G. Crabo,LGCC,,US:53027,5622
@@ -6273,13 +6273,13 @@ amphipyra-pyramidoides,specimen,45.683,-121.75,OR,Hood River,"Hood River, 10mW",
 homorthodes-fractura,specimen,48.19,-121.63,WA,Snohomish,"Squire Cr., N boundry Boulder R. Wilderness",2442,1990,7,21,L. G. Crabo,LGCC,,US:53061,6272
 sideridis-rosea,specimen,47.424,-120.309,WA,Chelan,Wenatchee,780,1940,6,9,,WSU,"det. J. F. G. Clarke, 1941",US:53007,6273
 hypoprepia-miniata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,8,15,J. & S. Shepard,JHS,,CA:5903,6274
-protoperigea-umbricata,specimen,42.776,-114.703,ID,Gooding,Wendell,3500,1964,9,9,R. E. Miller,WFBM,,US:16047,6275
+caradrina-umbricata,specimen,42.776,-114.703,ID,Gooding,Wendell,3500,1964,9,9,R. E. Miller,WFBM,,US:16047,6275
 euxoa-infausta,specimen,42.467,-123.333,OR,Josephine,"Grants Pass, 4mN",1133,1965,6,2,K. J. Goeden,OSAC,,US:41033,6276
 agrotis-ipsilon,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1925,9,10,B. G. Thompson,OSAC,,US:41003,6277
 panthea-virginarius,specimen,49.55,-115.62,BC,East Kootenay,"Fort Steele, 7kmS",2687,1990,7,16,Jon Shepard,JHS,,CA:5901,6278
 hyalophora-gloveri,specimen,47.814,-112.181,MT,Teton,Choteau,3816,,,,,WSU,"em.; June 8, 1968",US:30099,6279
 euxoa-scotogrammoides,specimen,48.005,-119.627,WA,Okanogan,Bridgeport S. P.,1113,1996,6,15,L. G. Crabo,LGCC,,US:53047,6280
-protoperigea-umbricata,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1961,10,5,R. E. Miller,WFBM,,US:53013,6281
+caradrina-umbricata,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1961,10,5,R. E. Miller,WFBM,,US:53013,6281
 nadata-gibbosa,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,7,17,Don Frechin,WSU,,US:53035,6282
 agrotis-vancouverensis,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1898,5,18,,OSAC,,US:41003,6283
 caradrina-montana,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1970,6,1,W. F. Barr,WFBM,,US:16057,6284
@@ -6840,7 +6840,7 @@ sphinx-perelegans,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1977,6,
 apamea-alia,specimen,42.599,-114.759,ID,Twin Falls,Buhl,3500,1961,6,24,R. E. Miller,WFBM,,US:16083,6839
 euxoa-satis,specimen,47.664,-119.62,WA,Douglas,"Jameson L., SW end",1879,2006,6,21,L. G. Crabo,LGCC,,US:53017,6840
 sympistis-major,specimen,47.61,-120.52,WA,Chelan,Derby Cyn.,2597,2004,6,21,L. & E. Crabo,LGCC,,US:53007,6841
-drepana-bilineata,specimen,51.65,-120.03,BC,Thompson-Nicola,Clearwater,1495,1987,7,20,H. Miller,JHS,,CA:5933,6842
+falcaria-bilineata,specimen,51.65,-120.03,BC,Thompson-Nicola,Clearwater,1495,1987,7,20,H. Miller,JHS,,CA:5933,6842
 gluphisia-septentrionis,specimen,47.9,-121.39,WA,Snohomish,Troublesome Cr.,2117,1991,6,28,L. G. Crabo,LGCC,,US:53061,6843
 lithophane-innominata,specimen,47.186,-122.292,WA,Pierce,Puyallup,40,2000,3,30,A. Antonelli,WSU,Clarke list,US:53053,6844
 apantesis-nevadensis,specimen,44.655,-120.252,OR,Wheeler,"Bridge Cr., Painted Hills unit",1600,2003,10,2,USNPS,OSAC,,US:41069,6845
@@ -6909,7 +6909,7 @@ alypia-ridingsii,specimen,47.11,-120.35,WA,Kittitas,"Colockum Pass Rd., ridge W"
 estigmene-acrea,specimen,49.08,-116.5,BC,Central Kootenay,Riverview Rd.,2000,,,,D. W. Knight,JHS,"larva feed lamb quarters and rose, pup Aug. 31, 1980; February 27, 1981",CA:5903,6908
 cucullia-antipoda,specimen,46.601,-119.546,WA,Benton,"Gable Mtn., SW bas @ alkaline pond",405,1997,8,12,R. S. Zack,WSU,L. Crabo id,US:53005,6909
 stretchia-muricina,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1989,5,7,J. H. Shepard,LGCC,,CA:5903,6910
-drepana-bilineata,specimen,49.233,-122.85,BC,Greater Vancouver,Fraser Mills,28,,,,,?,"Blackmore, 1927",CA:5915,6911
+falcaria-bilineata,specimen,49.233,-122.85,BC,Greater Vancouver,Fraser Mills,28,,,,,?,"Blackmore, 1927",CA:5915,6911
 hemileuca-nuttalli,specimen,43.5,-118.5,OR,Harney,Alvord Desert,4006,1979,,,,OSAC,uniformis/nuttalli,US:41025,6912
 litholomia-napaea,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1895,5,4,C. V. Piper,WSU,,US:53075,6913
 caenurgina-erechtea,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1959,7,24,R. B. Hawkes,WFBM,,US:16057,6914
@@ -7003,7 +7003,7 @@ euxoa-pluralis,specimen,48.005,-119.627,WA,Okanogan,Bridgeport S. P.,1113,1996,6
 anarta-trifolii,specimen,43.868,-117.454,OR,Malheur,"Vale, 13 mi. SW",2652,2006,9,25,L. G. Crabo,LGCC,,US:41045,7002
 lophocampa-maculata,specimen,45.867,-123.583,OR,Clatsop,"Elsie, 2mE",400,1967,7,18,,OSAC,,US:41007,7003
 euxoa-terrenus,specimen,47.5511,-120.767,WA,Chelan,Eightmile CG on Icicle Cr.,1888,2001,7,31,D. L. Strenge,DLSC,,US:53007,7004
-drepana-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1977,8,15,D. Voegtlin,OSAC,,US:41039,7005
+falcaria-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1977,8,15,D. Voegtlin,OSAC,,US:41039,7005
 coloradia-pandora,specimen,42.724,-114.519,ID,Jerome,Jerome,3763,2003,6,28,Lou Dersch,WFBM,,US:16053,7006
 feralia-comstocki,specimen,48.76,-122.488,WA,Whatcom,Bellingham,74,1965,4,20,C.V. Randall,WWUC,,US:53073,7007
 acronicta-grisea,specimen,51.303,-117.519,BC,Columbia-Shuswap,"Glacier NP, Glacier NP Compound at Rogers Pass",4312,2005,8,2,,BIO,Schmidt File,CA:5939,7008
@@ -7074,7 +7074,7 @@ gluphisia-septentrionis,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2
 noctua-pronuba,specimen,43.557,-120.074,OR,Lake,Glass Butte,6384,2009,8,19,,OSAC,,US:41037,7073
 zotheca-tranquilla,specimen,47.506,-115.998,ID,Shoshone,Osburn,2529,1952,7,9,O. Huelleman,WFBM,,US:16079,7074
 abagrotis-glenni,specimen,44.15,-121.33,OR,Deschutes,"Tumalo-Bend, nr.",3182,1995,8,29,,OSAC,,US:41017,7075
-protoperigea-umbricata,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1955,10,3,R. E. Miller,WFBM,,US:53013,7076
+caradrina-umbricata,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1955,10,3,R. E. Miller,WFBM,,US:53013,7076
 panthea-virginarius,specimen,46.872,-122.912,WA,Thurston,"Tenino, 3mW",290,1997,5,10,E. LaGasa,WSU,,US:53067,7077
 malacosoma-californica,specimen,44.518,-117.862,OR,Baker,Cornet Cr.,4000,2007,6,15,L. G. Crabo,Sight,,US:41001,7078
 nadata-gibbosa,specimen,45.524,-122.675,OR,Multnomah,Portland,50,1949,6,25,,OSAC,,US:41051,7079
@@ -7283,7 +7283,7 @@ hemileuca-eglanterina,specimen,43.217,-121.783,OR,Klamath,Chemult,4763,1948,7,10
 xestia-smithii,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1988,8,16,E. L. Griepentrog,OSAC,,US:41007,7282
 diarsia-rosaria,specimen,46.41,-124.05,WA,Pacific,WDFW Butterfly Shores,19,1997,7,11,L. & E. Crabo,LGCC,,US:53049,7283
 euxoa-tessellata,specimen,42.058,-120.174,OR,Lake,Deep Cr.,4475,1973,7,8,"S. Jewett, Jr.",OSAC,,US:41037,7284
-protoperigea-anotha,specimen,46.406,-119.605,WA,Benton,"Rattlesnake Ridge, spring",2979,1995,7,31,R. S. Zack,WSU,L. Crabo id,US:53005,7285
+caradrina-anotha,specimen,46.406,-119.605,WA,Benton,"Rattlesnake Ridge, spring",2979,1995,7,31,R. S. Zack,WSU,L. Crabo id,US:53005,7285
 cycnia-oregonensis,specimen,48.1,-120.05,WA,Okanogan,Black Cyn.,2037,1988,6,16,L. G. Crabo,LGCC,,US:53047,7286
 hemileuca-eglanterina,specimen,45.55,-118.127,OR,Umatilla,"Pole Spg., Kamela/Tollgate Rd.",5597,1967,7,2,,OSAC,shastaensis,US:41059,7287
 lithophane-pertorrida,specimen,48.691,-116.316,ID,Boundary,Bonners Ferry,1896,1955,4,9,,WFBM,,US:16021,7288
@@ -7534,7 +7534,7 @@ trichocerapoda-strigata,specimen,46.677,-119.445,WA,Franklin,White Bluffs Ferry,
 hyles-lineata,specimen,46.507,-119.698,WA,Benton,Rattlesnake Spr.,679,1995,8,9,R. S. Zack,WSU,R. S. Zack id,US:53005,7533
 spilosoma-vestalis,specimen,46.501,-120.464,WA,Yakima,Parker Heights,875,1997,5,14,P. J. Landolt,WSU,,US:53077,7534
 datana-californica,specimen,44.965,-116.845,OR,Baker,Oxbow Dam,1804,1959,6,18,"S. G. Jewett, Jr.",OSAC,,US:41001,7535
-protoperigea-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,7,18,L. G. Crabo,LGCC,,US:53077,7536
+caradrina-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,7,18,L. G. Crabo,LGCC,,US:53077,7536
 apantesis-ornata,specimen,44.771,-122.564,OR,Marion,"Mill City, 5mW",650,1961,7,2,C. W. Nelson,OSAC,,US:41047,7537
 pseudanarta-crocea,specimen,46.523,-119.353,WA,Benton,"Columbia R., W sand dunes",495,1997,9,3,R. S. Zack,WSU,R. S. Zack id,US:53005,7538
 apantesis-ornata,specimen,44.6,-124.06,OR,Lincoln,South Beach S. P.,19,1991,7,31,L. G. Crabo,LGCC,,US:41041,7539
@@ -7595,7 +7595,7 @@ sympistis-aterrima,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,1996,9,9,L. & 
 homoglaea-dives,specimen,46.03,-117.77,WA,Columbia,Table Rock,6200,1967,9,28,R. E. Miller,JHS,,US:53013,7594
 spilosoma-vagans,specimen,48.181,-116.908,ID,Bonner,P[riest]. R[iver].,2077,1937,5,12,C. W. Herr,OSAC,red,US:16017,7595
 lophocampa-maculata,specimen,48.07,-123.92,WA,Clallam,Lake Crescent SP,575,1990,8,1,J. & S. Shepard,JHS,,US:53009,7596
-drepana-bilineata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,5,20,Don Frechin,WSU,,US:53035,7597
+falcaria-bilineata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,5,20,Don Frechin,WSU,,US:53035,7597
 annaphila-decia,specimen,46.315,-117.659,WA,Columbia,Tucannon R.,2214,1956,4,18,R. E. Miller,WFBM,,US:53013,7598
 xestia-c-nigrum,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1988,9,23,E. L. Griepentrog,OSAC,,US:41007,7599
 agrochola-purpurea,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1999,9,22,L. G. Crabo,LGCC,,US:53017,7600
@@ -7675,7 +7675,7 @@ euxoa-aequalis,specimen,44.54,-117.714,OR,Baker,Dark Cyn.,3601,2001,8,22,L. G. C
 feralia-deceptiva,specimen,48.7,-122.49,WA,Whatcom,"Chuckanut Drive, N end",116,1994,4,1,L. G. Crabo,LGCC,,US:53073,7674
 mesogona-olivata,specimen,48.04,-120.05,WA,Okanogan,"Black Cyn, E. Wody Cr.",7087,1992,9,17,L. G. Crabo,WSU,,US:53047,7675
 acronicta-insita,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1948,7,9,O. Huelleman,WFBM,,US:16079,7676
-protoperigea-umbricata,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,2003,8,24,L. G. Crabo,LGCC,,US:41039,7677
+caradrina-umbricata,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,2003,8,24,L. G. Crabo,LGCC,,US:41039,7677
 aseptis-binotata,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1999,6,12,L. & E. Crabo,LGCC,,US:53017,7678
 paonias-excaecata,specimen,47.61,-122.6,WA,Kitsap,Illahee,60,,,,Don Frechin,JHS,,US:53035,7679
 drasteria-adumbrata,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1955,5,28,R. E. Miller,WFBM,,US:53013,7680
@@ -8558,7 +8558,7 @@ tolype-distincta,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1959,9,21,Don Fre
 egira-rubrica,specimen,47.12,-120.47,WA,Kittitas,Naneum Cr.,2559,1988,3,19,L. G. Crabo,LGCC,,US:53037,8557
 euthyatira-lorata,specimen,45.597,-122.993,OR,Washington,North Plains,207,1959,4,10,Ken Goeden,ODAC,,US:41067,8558
 euclidia-ardita,specimen,47.876,-120.196,WA,Chelan,First Cr.,1102,1934,6,27,Andy Anderson,WSU,,US:53007,8559
-drepana-bilineata,specimen,44.615,-123.316,OR,Benton,"Corvallis, 5mNW - Oak Cr. Gate",500,,,,N. McFarland,OSAC,"em. ex. Betula; July , 1962",US:41003,8560
+falcaria-bilineata,specimen,44.615,-123.316,OR,Benton,"Corvallis, 5mNW - Oak Cr. Gate",500,,,,N. McFarland,OSAC,"em. ex. Betula; July , 1962",US:41003,8560
 dasychira-grisefacta,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1954,8,22,F. F. Hasbrouck,OSAC,,US:41003,8561
 orthosia-transparens,specimen,47.05,-124.09,WA,Grays Harbor,North Bay bog; Grays Harbor,19,1991,3,13,L. G. Crabo,LGCC,,US:53027,8562
 arctia-parthenos,specimen,50.5,-119.83,BC,Thompson-Nicola,Monte L.,2426,1988,6,19,Jon H. Shepard,JHS,,CA:5933,8563
@@ -8993,7 +8993,7 @@ malacosoma-disstria,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1958,7,1,K.
 lacinipolia-strigicollis,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1956,7,26,R. E. Miller,WFBM,,US:53013,8992
 spilosoma-virginica,specimen,46.674,-119.37,WA,Franklin,Wahluke Wildlife Area,750,2002,8,9,R. S. Zack,WSU,,US:53021,8993
 fishia-discors,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,2002,9,23,L. G. Crabo,LGCC,,US:53017,8994
-protoperigea-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1962,9,8,R. E. Miller,JHS,,US:16047,8995
+caradrina-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1962,9,8,R. E. Miller,JHS,,US:16047,8995
 catocala-semirelicta,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1919,8,2,O. Huelleman,WFBM,,US:16079,8996
 parabagrotis-formalis,specimen,46.4597,-119.7208,WA,Benton,"Snively Canyon, lower springs",1326,1999,9,30,D. L. Strenge,DLSC,,US:53005,8997
 apamea-maxima,specimen,48.368,-124.625,WA,Clallam,Neah Bay,7,1961,8,16,R. E. Miller,WFBM,,US:53009,8998
@@ -9091,7 +9091,7 @@ aseptis-characta,specimen,43.417,-113.517,ID,Butte,Craters of the Moon NM,5702,1
 drasteria-hastingsii,specimen,48,-119.62,WA,Okanogan,"Bridgeport SP, W",1100,1996,7,12,L. G. Crabo,WSU,,US:53047,9090
 parabagrotis-formalis,specimen,48.005,-119.627,WA,Okanogan,Bridgeport S. P.,1113,1996,6,15,L. G. Crabo,LGCC,,US:53047,9091
 euclidia-ardita,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,6,6,Don Frechin,WSU,,US:53035,9092
-drepana-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1994,8,2,"D. N., Ross",OSAC,,US:41039,9093
+falcaria-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1994,8,2,"D. N., Ross",OSAC,,US:41039,9093
 ceranemota-improvisa,specimen,45.867,-123.583,OR,Clatsop,"Elsie, 2mE",400,1966,10,28,,OSAC,,US:41007,9094
 orgyia-pseudotsugata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2001,9,23,A. V. Z. Brower,OSAC,,US:41003,9095
 pseudohermonassa-tenuicula,specimen,52.77,-118.03,AB,,"Marmot Mt. Rd., Portal Cr.",4228,1994,7,28,Crabo/Troubridge,LGCC,,,9096
@@ -9270,7 +9270,7 @@ apamea-sordens,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,6,29,Don Frech
 pseudanarta-crocea,specimen,46.9,-119.94,WA,Grant,"Wanapum Dam, 1.5mNNE",738,1990,9,22,L. G. Crabo,WSU,,US:53025,9269
 acronicta-mansueta,specimen,50.844,-111.154,AB,,"Jenner, Red Deer R., 3kmeast Jenner Bridge",2037,2005,6,14,Anweiler/Schmidt,UASM,Schmidt File,CA:4804,9270
 spilosoma-vestalis,specimen,46.049,-118.387,WA,Walla Walla,College Place,790,1959,5,17,Don Rice,WSU,,US:53071,9271
-drepana-bilineata,specimen,48.528,-121.45,WA,Skagit,Marblemount,323,1942,,,,WWUC,,US:53057,9272
+falcaria-bilineata,specimen,48.528,-121.45,WA,Skagit,Marblemount,323,1942,,,,WWUC,,US:53057,9272
 helotropha-reniformis,specimen,47.474,-115.927,ID,Shoshone,Wallace,3000,1933,8,26,O. Huelleman,WFBM,,US:16079,9273
 acronicta-insita,specimen,47.606,-122.332,WA,King,Seattle,177,,,,D. Rhodes,WSU,"em. ex. Alnus rubra; May 10, 1977",US:53033,9274
 sphinx-vashti,specimen,48.547,-118.231,WA,Ferry,Bangs Mt.,3012,2010,7,9,J. & S. Shepard,JHS,,US:53019,9275
@@ -9457,7 +9457,7 @@ arctia-virginalis,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,19
 parabagrotis-formalis,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1999,6,12,L. & E. Crabo,LGCC,,US:53017,9456
 trichoplusia-ni,specimen,46.251,-119.901,WA,Yakima,Grandview,800,1958,5,21,C. S. Crawford,WSU,,US:53077,9457
 spilosoma-vagans,specimen,46.451,-117.205,WA,Whitman,Steptoe Cyn.,793,1985,5,18,R. S. Zack,WSU,tan,US:53075,9458
-protoperigea-anotha,specimen,48.6,-120.44,WA,Okanogan,Early Winters CG,2200,1988,7,30,J. & S. Shepard,JHS,,US:53047,9459
+caradrina-anotha,specimen,48.6,-120.44,WA,Okanogan,Early Winters CG,2200,1988,7,30,J. & S. Shepard,JHS,,US:53047,9459
 parabagrotis-exsertistigma,specimen,48.68,-117.432,WA,Pend Oreille,"Tiger, 1.4mW",2506,1997,5,14,L. G. Crabo,LGCC,,US:53051,9460
 schinia-meadi,specimen,46.351,-118.908,WA,Franklin,Juniper Dunes,748,2001,7,16,L. G. Crabo,LGCC,,US:53021,9461
 euxoa-tessellata,specimen,48.654,-120.506,WA,Okanogan,Mazama; Lost R.,2403,2005,7,13,Crabo/Coughlin,LGCC,,US:53047,9462
@@ -9603,11 +9603,11 @@ acronicta-mansueta,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse
 lacinipolia-olivacea,specimen,42.28,-120.19,OR,Lake,Bull Prairie,6503,1991,7,28,L. G. Crabo,LGCC,,US:41037,9602
 euxoa-satis,specimen,48.84,-121.68,WA,Whatcom,Artist's Point,4765,1994,8,11,L. G. Crabo,LGCC,,US:53073,9603
 lithophane-ponderosa,specimen,46.492,-120.95,WA,Yakima,"Tampico, 4mSW",2740,2007,5,7,P. J. Landolt,WSU,,US:53077,9604
-protoperigea-anotha,specimen,45.89,-121.72,WA,Skamania,"South Prairie, 2mS; Big Lava Bed",3364,1999,7,24,L. G. Crabo,LGCC,,US:53059,9605
+caradrina-anotha,specimen,45.89,-121.72,WA,Skamania,"South Prairie, 2mS; Big Lava Bed",3364,1999,7,24,L. G. Crabo,LGCC,,US:53059,9605
 leucania-farcta,specimen,47.648,-117.091,WA,Spokane,Liberty Lake,2049,1957,6,20,C. S. Crawford,WSU,,US:53063,9606
 caenurgina-erechtea,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,8,13,J. & S. Shepard,WSU,,CA:5903,9607
 parabagrotis-sulinaris,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW; Firwood Rd.",400,1973,9,4,"S. Jewett, Jr.",OSAC,,US:41005,9608
-drepana-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,6,13,D. W. Knight,JHS,,CA:5903,9609
+falcaria-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,6,13,D. W. Knight,JHS,,CA:5903,9609
 spilosoma-pteridis,specimen,45.597,-122.993,OR,Washington,North Plains,199,1958,5,25,Kenneth Goeden,ODAC,red lateral thorax,US:41067,9610
 pyrrharctia-isabella,specimen,49.05,-116.47,BC,Central Kootenay,Lister,2200,,,,D. W. Knight,JHS,"larva found in beehive Mar. 19, pup Apr. 1 & em.; April 20, 1991",CA:5903,9611
 agrotis-vancouverensis,specimen,43.39,-123.313,OR,Douglas,Sutherlin,513,1973,5,11,"S. Jewett, Jr.",OSAC,,US:41019,9612
@@ -9720,7 +9720,7 @@ adelphagrotis-stellaris,specimen,45.107,-123.983,OR,Tillamook,Neskowin,4,1966,7,
 syngrapha-octoscripta,specimen,52.77,-118.03,AB,,"Marmot Mt. Rd., Portal Cr.",4228,1994,7,28,Crabo/Troubridge,LGCC,,,9719
 parabagrotis-sulinaris,specimen,48.49,-122.69,WA,Skagit,"Anacortes, Washington Park",5,1997,6,7,L. G. Crabo,LGCC,,US:53057,9720
 hyppa-brunneicrista,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,6,24,J. & S. Shepard,WSU,,CA:5903,9721
-drepana-bilineata,specimen,50.7,-119.217,BC,Columbia-Shuswap,South Canoe,1622,,9,1,,UBC,"Buckell, 1947",CA:5939,9722
+falcaria-bilineata,specimen,50.7,-119.217,BC,Columbia-Shuswap,South Canoe,1622,,9,1,,UBC,"Buckell, 1947",CA:5939,9722
 pseudothyatira-cymatophoroides,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1996,7,10,J. C. Miller,OSAC,,US:41039,9723
 euxoa-dargo,specimen,44.501,-117.762,OR,Baker,Bridgeport,3542,2001,9,19,Crabo/Troubridge,LGCC,,US:41001,9724
 xestia-c-nigrum,specimen,45.144,-122.855,OR,Marion,Woodburn,187,1939,9,2,C. W. Herr,OSAC,,US:41047,9725
@@ -10560,7 +10560,7 @@ condica-mersa,specimen,43.417,-113.517,ID,Butte,Craters of the Moon NM,6000,1964
 nephelodes-minians,specimen,48.052,-122.177,WA,Snohomish,Marysville,21,1958,8,28,A.D. Robertson,WWUC,,US:53061,10559
 anagrapha-falcifera,specimen,46.601,-119.546,WA,Benton,"Gable Mtn., SW bas @ alkaline pond",405,1997,10,1,R. S. Zack,WSU,R. S. Zack id,US:53005,10560
 trichopolia-curtica,specimen,47.16,-120.61,WA,Kittitas,Reecer Cr. @ Johnson Cyn.,2834,1990,9,1,L. G. Crabo,LGCC,,US:53037,10561
-protoperigea-posticata,specimen,43.868,-117.454,OR,Malheur,"Vale, 13 mi. SW",2652,2001,9,22,Crabo/Troubridge,LGCC,,US:41045,10562
+caradrina-posticata,specimen,43.868,-117.454,OR,Malheur,"Vale, 13 mi. SW",2652,2001,9,22,Crabo/Troubridge,LGCC,,US:41045,10562
 hyles-lineata,specimen,47.343,-120.094,WA,Chelan,Rock Island,574,1940,5,8,,WSU,,US:53007,10563
 scotogramma-yakima,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,1998,9,24,D. Strenge,DLSC,,US:53005,10564
 agrotis-vancouverensis,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1999,5,26,A. V. Z. Brower,OSAC,,US:41003,10565
@@ -11210,7 +11210,7 @@ leucania-oregona,specimen,48.46,-122.62,WA,Skagit,"Sugarloaf, S slope; Anacortes
 epidemas-obscurus,specimen,48,-119.62,WA,Okanogan,"Bridgeport SP, W",1100,1996,9,13,L. G. Crabo,WSU,,US:53047,11209
 acronicta-strigulata,specimen,47.9,-118.495,WA,Ferry,L. Roosevelt; S of Jim Mt.,2075,2004,6,24,E. & L. Crabo,LGCC,,US:53019,11210
 ceranemota-tearlei,specimen,42.51,-118.9,OR,Harney,Threemile Cyn. Mouth,4680,1997,9,26,Crabo/Troubridge,LGCC,,US:41025,11211
-drepana-bilineata,specimen,47.36,-122.07,WA,King,Cranmar Cr.,425,1994,4,28,R. L. Crawford,JHS,,US:53033,11212
+falcaria-bilineata,specimen,47.36,-122.07,WA,King,Cranmar Cr.,425,1994,4,28,R. L. Crawford,JHS,,US:53033,11212
 euxoa-terrenus,specimen,47.19,-120.28,WA,Kittitas,Colockum Pass,5257,1987,7,11,L. G. Crabo,LGCC,,US:53037,11213
 spilosoma-virginica,specimen,46.665,-119.359,WA,Franklin,Wahluke Wildlife area,735,2002,8,9,R. S. Zack,WSU,,US:53021,11214
 spilosoma-vestalis,specimen,44.3,-120.833,OR,Crook,Prineville,2860,1985,6,15,R. & A. Albright,OSAC,,US:41013,11215
@@ -11274,7 +11274,7 @@ lithophane-innominata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,240
 habrosyne-scripta,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1962,7,17,Don Frechin,WSU,,US:53035,11273
 raphia-frater,specimen,50.844,-111.154,AB,,"Jenner, Red Deer R., 3kmeast Jenner Bridge",2037,2005,6,14,Anweiler/Schmidt,UASM,Schmidt File,CA:4804,11274
 hypena-humuli,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1975,7,29,J. Shepard,JHS,,CA:5903,11275
-protoperigea-anotha,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse Pt.,3841,1997,7,23,L. G. Crabo,LGCC,,US:53047,11276
+caradrina-anotha,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse Pt.,3841,1997,7,23,L. G. Crabo,LGCC,,US:53047,11276
 apamea-centralis,specimen,46.172,-117.534,WA,Garfield,Sunset Point,5742,2005,7,11,Crabo/Coughlin,LGCC,,US:53023,11277
 cucullia-mcdunnoughi,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3546,1999,7,11,L. G. Crabo,LGCC,no date on label,CA:5933,11278
 gluphisia-severa,specimen,48.924,-122.077,WA,Whatcom,Maple Falls,644,1999,4,17,D. Knutson,WWUC,,US:53073,11279
@@ -11512,7 +11512,7 @@ nola-minna,specimen,47.149,-124.187,WA,Grays Harbor,"Copalis Beach, 3 mi. N",191
 lacinipolia-strigicollis,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,2001,8,21,D. Strenge,DLSC,,US:53005,11511
 hemileuca-eglanterina,specimen,44.615,-123.316,OR,Benton,McDonald Forest,1399,1960,7,20,E. J. D[ornfeld],OSAC,,US:41003,11512
 peridroma-saucia,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1995,6,13,D. N. Ross,OSAC,,US:41039,11513
-drepana-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1996,8,20,J. C. Miller,OSAC,,US:41039,11514
+falcaria-bilineata,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1996,8,20,J. C. Miller,OSAC,,US:41039,11514
 schinia-acutilinea,specimen,46.602,-120.505,WA,Yakima,Yakima,1188,,,,C. V. Piper,WSU,,US:53077,11515
 pyrrharctia-isabella,specimen,47.5,-119.92,WA,Douglas,Douglas Cr.,1600,2000,5,1,J. & S. Shepard,JHS,,US:53017,11516
 noctua-pronuba,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2003,8,3,A. V. Z. Brower,OSAC,,US:41003,11517
@@ -11894,7 +11894,7 @@ hyppa-indistincta,specimen,48.85,-121.68,WA,Whatcom,Heather Meadows,4400,1994,7,
 hyles-lineata,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1984,8,18,W. J. Turner,WSU,,US:53075,11893
 euxoa-aurulenta,specimen,45.84,-119.289,OR,Umatilla,Hermiston,457,1961,5,22,Kenneth Goeden,OSAC,,US:41059,11894
 paonias-myops,specimen,44.677,-121.719,OR,Jefferson,"Mt. Jefferson, nr.",5327,1993,6,9,,OSAC,,US:41031,11895
-protoperigea-posticata,specimen,43.868,-117.454,OR,Malheur,"Vale, 13 mi. SW",2652,2007,9,12,L. G. Crabo,LGCC,,US:41045,11896
+caradrina-posticata,specimen,43.868,-117.454,OR,Malheur,"Vale, 13 mi. SW",2652,2007,9,12,L. G. Crabo,LGCC,,US:41045,11896
 leucania-farcta,specimen,45.89,-121.72,WA,Skamania,"South Prairie, 2mS; Big Lava Bed",3000,1999,7,19,L. G. Crabo,WSU,,US:53059,11897
 xestia-xanthographa,specimen,48.052,-122.177,WA,Snohomish,Marysville,21,1958,8,26,A.D. Robertson,WWUC,,US:53061,11898
 drepana-arcuata,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1998,8,11,A. V. Z. Brower,OSAC,,US:41003,11899
@@ -11908,7 +11908,7 @@ xestia-xanthographa,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1989,8,19,E. L
 apantesis-ornata,specimen,43.785,-116.942,ID,Canyon,Parma,2224,1954,8,24,A. J. Walz,WFBM,,US:16027,11907
 autographa-californica,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,2001,7,29,D. L. Strenge,DLSC,,US:53005,11908
 fishia-discors,specimen,46.725,-120.817,WA,Yakima,Oak Cr.,1722,1990,9,7,L. G. Crabo,WSU,,US:53077,11909
-drepana-bilineata,specimen,52.9,-122.333,BC,Cariboo,Schiste Cr.,2899,1994,6,7,C. S. Guppy,CSG,Shepard notes,CA:5941,11910
+falcaria-bilineata,specimen,52.9,-122.333,BC,Cariboo,Schiste Cr.,2899,1994,6,7,C. S. Guppy,CSG,Shepard notes,CA:5941,11910
 agnorisma-bugrai,specimen,45.267,-118.567,OR,Union,Meadow Cr.,4382,1996,8,20,USFS,OSAC,,US:41061,11911
 hypena-humuli,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1981,10,25,D. W. Knight,JHS,,CA:5903,11912
 hemaris-thetis,specimen,42.37,-111.56,ID,Bear Lake,Emigration Creek CG,7200,1993,7,14,J. & S. Shepard,JHS,senta,US:16007,11913
@@ -12364,7 +12364,7 @@ euxoa-furtivus,specimen,46.86,-120.57,WA,Kittitas,Umtanum Cr.; Old Durr Rd.,2661
 acronicta-grisea,specimen,51.96,-122.28,BC,Cariboo,Moon Rd.,1601,1996,7,24,A. I. Fischer,JHS,,CA:5941,12363
 aseptis-ethnica,specimen,42.08,-122.72,OR,Jackson,Mt. Ashland; W of summit,7005,1995,8,3,Crabo/Troubridge,WSU,,US:41029,12364
 nadata-gibbosa,specimen,47.606,-122.332,WA,King,Seattle,177,,,,O. B. Johnson,WSU,"Clarke, 1929; Shepard notes",US:53033,12365
-protoperigea-anotha,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1998,8,3,J. & S. Shepard,JHS,,CA:5903,12366
+caradrina-anotha,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1998,8,3,J. & S. Shepard,JHS,,CA:5903,12366
 xylena-cineritia,specimen,47.16,-120.61,WA,Kittitas,Reecer Cr. @ Johnson Cyn.,2834,1991,9,19,L. G. Crabo,LGCC,,US:53037,12367
 idia-americalis,specimen,46.6,-124.05,WA,Pacific,Leadbetter Point;North Beach Penn.,33,1999,8,12,L. G. Crabo,WSU,,US:53049,12368
 mniotype-ducta,specimen,50.408,-121.644,BC,Thompson-Nicola,"Saluwissin Rd., Fraser Cyn.",2595,2000,8,2,L. & A. Crabo,LGCC,,CA:5933,12369
@@ -12941,7 +12941,7 @@ pseudothyatira-cymatophoroides,specimen,49.1,-122.65,BC,Greater Vancouver,"Langl
 phlogophora-periculosa,specimen,48.368,-124.625,WA,Clallam,Neah Bay,7,1963,8,22,R. E. Miller,WFBM,,US:53009,12940
 spilosoma-virginica,specimen,45.498,-122.43,OR,Multnomah,Gresham,323,1944,6,5,J. & H. O.,OSAC,,US:41051,12941
 polia-nugatis,specimen,46.677,-119.445,WA,Franklin,White Bluffs Ferry,400,2002,9,13,R. S. Zack,WSU,,US:53021,12942
-protoperigea-umbricata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2003,8,29,L. G. Crabo,LGCC,,US:41045,12943
+caradrina-umbricata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2003,8,29,L. G. Crabo,LGCC,,US:41045,12943
 scotogramma-yakima,specimen,43.868,-117.454,OR,Malheur,"Vale, 13 mi. SW",2652,2007,9,12,L. G. Crabo,LGCC,,US:41045,12944
 syngrapha-angulidens,specimen,50.36,-122.14,BC,Thompson-Nicola,Blowdown Pass,6872,2005,8,6,L. G. Crabo,LGCC,,CA:5933,12945
 acronicta-vulpina,specimen,54.444,-124.251,BC,Bulkley-Nechako,Fort St. James,2301,1952,,,FIS,CNC,Schmidt File,CA:5951,12946
@@ -13121,7 +13121,7 @@ arctia-caja,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1957,8,1,E. J. D[or
 antheraea-polyphemus,specimen,47.687,-117.011,ID,Kootenai,"Pleasant View,nr.",2200,1959,6,14,C. S. Crawford,WSU,,US:16055,13120
 paraseptis-adnixa,specimen,46.872,-122.912,WA,Thurston,"Tenino, 3mNW",290,1997,7,13,E. LaGasa,WSU,,US:53067,13121
 apamea-amputatrix,specimen,42.29,-120.14,OR,Lake,"Drakes Peak, nr.",8000,1995,8,2,Troubridge/Crabo,WSU,,US:41037,13122
-protoperigea-posticata,specimen,44.54,-117.66,OR,Baker,Burnt R. Cyn.,3200,2001,9,19,L. G. Crabo,WSU,,US:41001,13123
+caradrina-posticata,specimen,44.54,-117.66,OR,Baker,Burnt R. Cyn.,3200,2001,9,19,L. G. Crabo,WSU,,US:41001,13123
 lacinipolia-patalis,specimen,47.31,-122.9,WA,Mason,"Little Hoquiam, 2mE; Grapeview Loop Rd.",82,1990,5,25,L. G. Crabo,WSU,,US:53045,13124
 phyllodesma-americana,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,1994,6,9,D. N. Ross,OSAC,,US:41039,13125
 spaelotis-havilae,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1976,7,31,Victor McHenry,OSAC,,US:41031,13126
@@ -13293,7 +13293,7 @@ lacinipolia-pensilis,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1956,8,1,R
 polia-purpurissata,specimen,47.449,-113.598,MT,Missoula,Holland L.,4000,2005,7,28,P. J. Landolt,WSU,,US:30063,13292
 euplexia-benesimilis,specimen,44.809,-124.062,OR,Lincoln,Depoe Bay,58,1959,9,15,R. E. Miller,WFBM,,US:41041,13293
 pyrrharctia-isabella,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,7,31,Don Frechin,WSU,,US:53035,13294
-drepana-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,5,26,J. & S. Shepard,WSU,,CA:5903,13295
+falcaria-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,5,26,J. & S. Shepard,WSU,,CA:5903,13295
 lacinipolia-patalis,specimen,48.49,-122.69,WA,Skagit,"Anacortes, Washington Park",5,1997,6,7,L. G. Crabo,LGCC,,US:53057,13296
 orthosia-hibisci,specimen,48.65,-122.83,WA,San Juan,"Mt. Constitution, SW slope; Moran SP",1500,1997,5,11,L. G. Crabo,WSU,,US:53055,13297
 apamea-spaldingi,specimen,46.9,-119.94,WA,Grant,"Wanapum Dam, 1.5mNNE",738,1992,4,26,L. G. Crabo,WSU,,US:53025,13298
@@ -13905,7 +13905,7 @@ hydraecia-medialis,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,9,2,L
 abagrotis-vittifrons,specimen,47.08,-121.08,WA,Kittitas,Quartz Mt.,5827,1990,7,14,L. G. Crabo,LGCC,,US:53037,13904
 furcula-cinereoides,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1961,6,16,Phyllis Strecker,WFBM,,US:16057,13905
 orthodes-noverca,specimen,48.69,-122.49,WA,Whatcom,Chuckanut Bay,328,1994,6,7,L. G. Crabo,LGCC,,US:53073,13906
-drepana-bilineata,specimen,49.28,-124.12,BC,Nanaimo,Nanoose CDN,0,1995,8,2,Jon H. Shepard,JHS,,CA:5921,13907
+falcaria-bilineata,specimen,49.28,-124.12,BC,Nanaimo,Nanoose CDN,0,1995,8,2,Jon H. Shepard,JHS,,CA:5921,13907
 bleptina-caradrinalis,specimen,49.28,-124.12,BC,Nanaimo,Nanoose CDN,0,1995,,,Jon H. Shepard,JHS,,CA:5921,13908
 euxoa-terrenus,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,7,18,D. N. Ross,OSAC,,US:41039,13909
 parabagrotis-insularis,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,1998,5,31,D. L. Strenge,DLSC,,US:53005,13910
@@ -14253,7 +14253,7 @@ abagrotis-duanca,specimen,44.582,-117.465,OR,Baker,Durkee,2649,1967,7,13,Kenneth
 drasteria-edwardsii,specimen,45.468,-116.554,ID,Idaho,Sheep Cr.,1640,1990,6,7,F. W. Merickel,WFBM,,US:16049,14252
 proserpinus-lucidus,specimen,47.4,-116.917,ID,Kootenai,Worley,2666,1933,3,27,R. D. Shenefelt,WSU,,US:16055,14253
 autographa-californica,specimen,48.5,-123.34,BC,Capital,Mount Douglas,107,1995,4,24,Jon H. Shepard,JHS,,CA:5917,14254
-drepana-bilineata,specimen,47.61,-122.6,WA,Kitsap,Illahee,60,1960,6,6,Don Frechin,JHS,,US:53035,14255
+falcaria-bilineata,specimen,47.61,-122.6,WA,Kitsap,Illahee,60,1960,6,6,Don Frechin,JHS,,US:53035,14255
 lophocampa-maculata,specimen,47.39,-121.46,WA,King,I90 @ Asahel Curtis R. S.,2610,1989,7,18,L. G. Crabo,LGCC,,US:53033,14256
 leucania-commoides,specimen,46.674,-119.37,WA,Franklin,Wahluke Wildlife area,726,2002,8,9,R. S. Zack,WSU,det. L. G. Crabo,US:53021,14257
 orgyia-cana,specimen,43.943,-115.947,ID,Boise,Placerville,4324,,,,M. M. Furniss,WFBM,"em ex Purshia tridentata; June 7, 1968",US:16015,14258
@@ -15333,7 +15333,7 @@ acronicta-impressa,specimen,53.566,-113.822,AB,,Wagner Natural Area,2195,1999,5,
 acronicta-strigulata,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1965,6,23,R. E. Miller,JHS,,US:53013,15332
 apamea-cogitata,specimen,47.84,-122.8,WA,Jefferson,Tarboo Bay; 3 mi. ENE Quilcene,7,1990,8,25,L. G. Crabo,WSU,,US:53031,15333
 hemileuca-eglanterina,specimen,44.537,-121.603,OR,Jefferson,Green Ridge,4800,1986,7,11,H. E. Rice,OSAC,1 = denutataq,US:41031,15334
-drepana-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1988,6,26,J. Shepard,RBCM,Shepard notes,CA:5903,15335
+falcaria-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1988,6,26,J. Shepard,RBCM,Shepard notes,CA:5903,15335
 euthyatira-semicircularis,specimen,46.78,-120.949,WA,Yakima,Little Rattlesnake Cr.,2254,2002,7,10,P. J. Landolt,WSU,,US:53077,15336
 tesagrotis-atrifrons,specimen,47.69,-120.44,WA,Chelan,"Chumstick Mtn., 0.5mSW saddle",5085,1989,8,5,Crabo/Coughlin,LGCC,,US:53007,15337
 nycteola-cinereana,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1920,8,28,O. Huelleman,WFBM,,US:16079,15338
@@ -15386,7 +15386,7 @@ lasionycta-poca,specimen,50.76,-122.16,BC,Squamish-Lillooet,Mission Ridge,6643,1
 euxoa-intermontana,specimen,43.814,-120.603,OR,Deschutes,"Brothers, nr",4638,2007,8,9,Erica Ersch,OSAC,,US:41017,15385
 idia-americalis,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,6,26,J. & S. Shepard,JHS,,CA:5903,15386
 hadena-capsularis,specimen,47.687,-117.011,ID,Kootenai,Pleasant View,2200,1958,6,14,C. S. Crawford,WSU,,US:16055,15387
-protoperigea-umbricata,specimen,44.517,-117.918,OR,Baker,Pine Cr.,4082,2001,8,22,L. G. Crabo,LGCC,,US:41001,15388
+caradrina-umbricata,specimen,44.517,-117.918,OR,Baker,Pine Cr.,4082,2001,8,22,L. G. Crabo,LGCC,,US:41001,15388
 melipotis-jucunda,specimen,47.687,-117.011,ID,Kootenai,"Pleasant View,nr.",2170,1958,7,10,C. S. Crawford,WSU,,US:16055,15389
 drasteria-howlandii,specimen,43.774,-117.736,OR,Malheur,Namorf,2690,2001,8,21,L. G. Crabo,WSU,,US:41045,15390
 euxoa-satis,specimen,45.595,-121.179,OR,Wasco,The Dalles,253,1968,6,18,Goeden/Smith,OSAC,,US:41065,15391
@@ -15918,7 +15918,7 @@ sympistis-columbia,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2007,7,1
 lasionycta-perplexa,specimen,46.775,-120.991,WA,Yakima,Little Rattlesnake Cr.,2982,2002,7,10,P. J. Landolt,WSU,,US:53077,15917
 parabagrotis-cupidissima,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2000,9,5,A. V. Z. Brower,OSAC,,US:41003,15918
 helicoverpa-zea,specimen,46.251,-119.901,WA,Yakima,Grandview,800,1958,6,19,C. S. Crawford,WSU,,US:53077,15919
-drepana-bilineata,specimen,48.45,-119.08,WA,Okanogan,Moses Mdws.,3445,1988,6,14,L. G. Crabo,LGCC,,US:53047,15920
+falcaria-bilineata,specimen,48.45,-119.08,WA,Okanogan,Moses Mdws.,3445,1988,6,14,L. G. Crabo,LGCC,,US:53047,15920
 xestia-finatimis,specimen,42.442,-123.729,OR,Josephine,Chrome Ridge,3779,2003,8,25,L. G. Crabo,LGCC,,US:41033,15921
 lophocampa-maculata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,6,27,Don Frechin,WSU,,US:53035,15922
 leucania-farcta,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1954,7,26,H. C. Manis,WFBM,,US:16057,15923
@@ -15956,7 +15956,7 @@ lithophane-innominata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2
 rhyacia-clemens,specimen,45.265,-117.22,OR,Wallowa,Joseph Trail S Lk Wallowa St Pk,4924,2007,6,7,D. Strenge,DLSC,,US:41063,15955
 pseudothyatira-cymatophoroides,specimen,50.7,-119.217,BC,Columbia-Shuswap,South Canoe,1622,,7,9,W. R. Buckell,UBC,"Buckell, 1947",CA:5939,15956
 anagrapha-falcifera,specimen,51.667,-114.133,AB,,Didsbury,3391,1988,6,16,,WSU,,,15957
-drepana-bilineata,specimen,50.7,-119.217,BC,Columbia-Shuswap,South Canoe,1622,,5,5,,UBC,"Buckell, 1947",CA:5939,15958
+falcaria-bilineata,specimen,50.7,-119.217,BC,Columbia-Shuswap,South Canoe,1622,,5,5,,UBC,"Buckell, 1947",CA:5939,15958
 lithomoia-germana,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse Pt.,3841,1999,9,7,L. & E. Crabo,LGCC,,US:53047,15959
 triocnemis-saporis,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1966,7,12,R. E. Miller,JHS,,US:16047,15960
 fishia-discors,specimen,46.86,-120.57,WA,Kittitas,Umtanum Cr.; Old Durr Rd.,2661,2000,9,26,L. G. Crabo,LGCC,,US:53037,15961
@@ -16320,7 +16320,7 @@ lophocampa-maculata,specimen,45.267,-118.567,OR,Union,Meadow Cr.,4382,1992,6,2,D
 egira-dolosa,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,5,7,J. & S. Shepard,WSU,,CA:5903,16319
 apamea-antennata,specimen,44.518,-117.862,OR,Baker,Cornet Cr.,4194,2003,6,30,L. & E. Crabo,LGCC,,US:41001,16320
 abagrotis-variata,specimen,47.606,-122.331,WA,King,Seattle,50,1941,8,3,,OSAC,,US:53033,16321
-protoperigea-posticata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2007,9,12,L. G. Crabo,LGCC,,US:41045,16322
+caradrina-posticata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2007,9,12,L. G. Crabo,LGCC,,US:41045,16322
 dasychira-grisefacta,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,1977,8,8,"S. G. Jewett, Jr.",OSAC,,US:41005,16323
 parabagrotis-sulinaris,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2000,6,18,A. V. Z. Brower,OSAC,,US:41003,16324
 euthyatira-semicircularis,specimen,49.583,-119.666,BC,Okanagan-Similkameen,Summerland,1974,1936,5,28,A. N. Gartrell,CNC,Shepard notes,CA:5907,16325
@@ -16365,7 +16365,7 @@ abagrotis-vittifrons,specimen,46.87,-121.51,WA,Yakima,Chinook Pass,5949,1990,8,1
 anarta-oregonica,specimen,46.87,-121.51,WA,Yakima,Chinook Pass,5577,1990,8,14,L. & A. Crabo,WSU,corrected latitude,US:53077,16364
 idia-aemula,specimen,43.284,-111.216,ID,Bonneville,Bear Cr. nr. Palisades Res,5600,2004,7,17,F. W. & J. W. Merickel,WFBM,,US:16019,16365
 parabagrotis-exsertistigma,specimen,47.05,-121.57,WA,Pierce,White R. at the Dalles,2288,1992,7,26,L. G. Crabo,LGCC,,US:53053,16366
-protoperigea-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,2003,7,27,L. & E. Crabo,LGCC,,US:53077,16367
+caradrina-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,2003,7,27,L. & E. Crabo,LGCC,,US:53077,16367
 oligia-divesta,specimen,48.64,-120.51,WA,Okanogan,"Harts Pass, 2.1mSE",3373,1999,8,4,L. G. Crabo,WSU,,US:53047,16368
 sphinx-vashti,specimen,48.735,-121.037,WA,Whatcom,Ruby Arm; Ross L.,1750,2007,8,13,L. G. Crabo,Sight,,US:53073,16369
 hyles-lineata,specimen,45.456,-123.844,OR,Tillamook,Tillamook,26,1934,8,10,,OSAC,,US:41057,16370
@@ -16639,7 +16639,7 @@ lacinipolia-patalis,specimen,48.433,-122.383,WA,Skagit,[Skagit Ex. Sta.],23,1968
 lacinipolia-olivacea,specimen,47.16,-120.61,WA,Kittitas,Reecer Cr. @ Johnson Cyn.,2834,1991,7,20,L. G. Crabo,LGCC,,US:53037,16638
 aseptis-binotata,specimen,42.07,-122.65,OR,Jackson,Siskiyou Pass Rd to Mt. Ashland ski area,5300,1995,8,3,Crabo/Troubridge,WSU,,US:41029,16639
 anarta-mutata,specimen,48.27,-117.57,WA,Stevens,Chewelah Mtn.,4500,2004,6,22,L. & E. Crabo,WSU,,US:53065,16640
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,6,26,J. Shepard,JHS,,CA:5903,16641
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,6,26,J. Shepard,JHS,,CA:5903,16641
 parabagrotis-cupidissima,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2001,10,3,A. V. Z. Brower,OSAC,,US:41003,16642
 eupsilia-tristigmata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1922,9,10,O. Huelleman,WFBM,,US:16079,16643
 parabagrotis-exsertistigma,specimen,44.69,-118.026,OR,Baker,"Philips Lake, Union Creek CG",4120,2004,7,5,DL Strenge,DLSC,,US:41001,16644
@@ -16663,7 +16663,7 @@ pheosidea-elegans,specimen,48.051,-119.902,WA,Okanogan,Pateros,776,1952,7,13,A. 
 syngrapha-celsa,specimen,46.12,-117.33,WA,Asotin,"Anatone, 11 mi. W",5062,2000,7,8,L. & E. Crabo,LGCC,,US:53003,16662
 xestia-smithii,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1987,8,20,E. L. Griepentrog,OSAC,,US:41007,16663
 schinia-acutilinea,specimen,42.599,-114.759,ID,Twin Falls,Buhl,3500,1957,8,15,R. E. Miller,WFBM,,US:16083,16664
-drepana-bilineata,specimen,49.5,-115.766,BC,East Kootenay,Cranbrook,3113,1992,7,25,Lloyd Janz,WDN,Shepard notes,CA:5901,16665
+falcaria-bilineata,specimen,49.5,-115.766,BC,East Kootenay,Cranbrook,3113,1992,7,25,Lloyd Janz,WDN,Shepard notes,CA:5901,16665
 syngrapha-orophila,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1981,7,28,D. W. Knight,JHS,,CA:5903,16666
 egira-simplex,specimen,46.716,-116.988,ID,Latah,Moscow,2590,1998,4,21,R. S. Zack,WSU,,US:16057,16667
 euxoa-satis,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1898,7,24,,OSAC,,US:41003,16668
@@ -17016,7 +17016,7 @@ eupsilia-tristigmata,specimen,47.778,-122.33,WA,Snohomish,L. Ballinger,287,,,,L.
 abagrotis-variata,specimen,44.425,-121.833,OR,Jefferson,Santiam Pass,4877,1995,7,31,,OSAC,,US:41031,17015
 hemileuca-eglanterina,specimen,47.321,-115.763,ID,Shoshone,"Avery, 4mN",2884,1969,7,19,C. J. Horning,WFBM,,US:16079,17016
 acronicta-fragilis,specimen,52.46,-112.88,AB,,"Rochon Sands PP, 16kmN of Erskine",2566,2006,6,7,C. D. Bird,CDBC,Schmidt File,,17017
-protoperigea-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1964,10,14,R. E. Miller,JHS,,US:16047,17018
+caradrina-umbricata,specimen,42.78,-114.7,ID,Gooding,Wendell,3435,1964,10,14,R. E. Miller,JHS,,US:16047,17018
 ochropleura-implecta,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1990,7,14,E. L. Griepentrog,OSAC,,US:41007,17019
 raphia-frater,specimen,42.306,-113.368,ID,Cassia,Malta,4525,1954,7,18,T. B. O'Connell,WFBM,subspecies: pallula,US:16031,17020
 caradrina-morpheus,specimen,47.153,-122.489,WA,Pierce,McChord AFB,280,1996,7,14,TNC of WA,WSU,,US:53053,17021
@@ -17075,7 +17075,7 @@ pseudothyatira-cymatophoroides,specimen,45.35,-122.683,OR,Clackamas,"Oregon City
 spilosoma-vagans,specimen,45.267,-118.567,OR,Union,Meadow Cr.,4382,1993,5,25,D. G. Grimble,OSAC,tan,US:41061,17074
 acronicta-grisea,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1983,5,13,D. W. Knight,JHS,,CA:5903,17075
 euthyatira-semicircularis,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,6,28,Don Frechin,WSU,,US:53035,17076
-drepana-bilineata,literature,48.637,-123.572,BC,Cowichan Valley,Mill Bay,492,,,,J. R. Jones,?,"Jones, 1951",CA:5919,17077
+falcaria-bilineata,literature,48.637,-123.572,BC,Cowichan Valley,Mill Bay,492,,,,J. R. Jones,?,"Jones, 1951",CA:5919,17077
 drasteria-adumbrata,specimen,47.13,-120.744,WA,Kittitas,Swauk Cr.; site 1,1790,2008,6,23,P. J. Landolt,WSU,,US:53037,17078
 manduca-quinquemaculatus,specimen,44.633,-121.129,OR,Jefferson,Madras,2240,1979,8,31,G. L. Parsons,OSAC,,US:41031,17079
 hypena-californica,specimen,45.461,-123.967,OR,Tillamook,Oceanside,5,1951,7,14,M. T. James,WSU,,US:41057,17080
@@ -17539,7 +17539,7 @@ platypolia-loda,specimen,46.094,-117.846,WA,Columbia,N. Fork Touchet R.,5000,196
 aseptis-fumosa,specimen,46.523,-119.353,WA,Benton,"Columbia R., W sand dunes",495,1996,6,7,R. S. Zack,WSU,L. Crabo id,US:53005,17538
 sympistis-coprocolor,specimen,48,-119.62,WA,Okanogan,"Bridgeport SP, W",1047,1995,5,29,L. & A. Crabo,LGCC,paratype,US:53047,17539
 apantesis-williamsii,specimen,43.284,-111.216,ID,Bonneville,Bear Cr. Nr. Palisades Res,5600,2004,7,17,F. W. & J. W. Merickel,WFBM,,US:16019,17540
-drepana-bilineata,specimen,44.908,-122.886,OR,Marion,Macleay BLT,390,,,,R. L. Westcott,ODAC,"em. ex. birch; February 25, 1997",US:41047,17541
+falcaria-bilineata,specimen,44.908,-122.886,OR,Marion,Macleay BLT,390,,,,R. L. Westcott,ODAC,"em. ex. birch; February 25, 1997",US:41047,17541
 leptarctia-californiae,specimen,42.068,-123.702,OR,Josephine,"O'brien, nr.",1400,1976,4,21,"S. G. Jewett, Jr.",OSAC,,US:41033,17542
 idia-americalis,specimen,42.32,-123.77,OR,Josephine,Illinois R. Rd.; 1 mi. NNW NFD087,1200,1996,9,8,L. G. Crabo,WSU,,US:41033,17543
 homorthodes-furfurata,specimen,46.575,-120.95,WA,Yakima,"Nasty Cr.; Tampico, 6mNW",3236,2000,6,30,P. J. Landolt,WSU,,US:53077,17544
@@ -17734,7 +17734,7 @@ feltia-jaculifera,specimen,49.694,-112.842,AB,,Lethbridge,2968,1946,8,22,G. A. H
 lithophane-dilatocula,specimen,45.72,-121.34,WA,Klickitat,Major Cr.,553,1994,4,9,L. G. Crabo,LGCC,,US:53039,17733
 anathix-puta,specimen,47.142,-120.739,WA,Kittitas,Swauk Cr.; site 3,1857,2008,9,5,P. J. Landolt,WSU,,US:53037,17734
 cosmia-elisae,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3546,2002,7,12,L. & E. Crabo,LGCC,,CA:5933,17735
-drepana-bilineata,specimen,49.28,-124.12,BC,Nanaimo,Nanoose CDN,0,1995,5,25,Jon H. Shepard,JHS,,CA:5921,17736
+falcaria-bilineata,specimen,49.28,-124.12,BC,Nanaimo,Nanoose CDN,0,1995,5,25,Jon H. Shepard,JHS,,CA:5921,17736
 euxoa-divergens,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2007,7,16,L. G. Crabo,LGCC,,US:53037,17737
 idia-americalis,specimen,48.648,-119.464,WA,Okanogan,"Tonasket, 4mS",900,1962,7,1,J. E. Halfhill,WFBM,,US:53047,17738
 stretchia-plusiaeformis,specimen,44.37,-121.13,OR,Deschutes,Smith Rocks S. P.,2887,1992,3,10,L. & A. Crabo,LGCC,,US:41017,17739
@@ -18026,7 +18026,7 @@ resapamea-innota,specimen,42.776,-114.703,ID,Gooding,Wendell,3433,1966,7,12,R. E
 dargida-procinctus,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1963,7,5,Don Frechin,WSU,,US:53035,18025
 lacinipolia-olivacea,specimen,48.66,-119.84,WA,Okanogan,Salmon Meadows,4503,1996,7,13,L. & E. Crabo,LGCC,,US:53047,18026
 apantesis-nevadensis,specimen,46.211,-119.136,WA,Benton,Kennewick,400,1956,,,J. Shepard,OSAC,,US:53005,18027
-drepana-bilineata,specimen,49.1,-122.65,BC,Greater Vancouver,"Langley, 5kmE",36,1990,6,24,J. Troubridge,CNC,Shepard notes,CA:5915,18028
+falcaria-bilineata,specimen,49.1,-122.65,BC,Greater Vancouver,"Langley, 5kmE",36,1990,6,24,J. Troubridge,CNC,Shepard notes,CA:5915,18028
 sympistis-semicollaris,specimen,45.89,-121.72,WA,Skamania,"South Prairie, 2mS; Big Lava Bed",3364,1999,7,24,L. G. Crabo,LGCC,,US:53059,18029
 apamea-maxima,specimen,48.68,-122.48,WA,Whatcom,"Chuckanut Mt., W slope",958,1995,6,24,L. G. Crabo,LGCC,,US:53073,18030
 lacinipolia-olivacea,specimen,43.681,-114.363,ID,Blaine,Ketchum,5845,1961,7,22,R. E. Stecker,WFBM,,US:16013,18031
@@ -18230,7 +18230,7 @@ gluphisia-severa,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,198
 melanchra-adjuncta,specimen,47.31,-122.9,WA,Mason,"Little Hoquiam, 2mE; Grapeview Loop Rd.",204,1990,5,25,L. G. Crabo,LGCC,,US:53045,18229
 hydraecia-medialis,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,6234,1997,9,2,L. G. Crabo,WSU,,US:53077,18230
 apamea-antennata,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1959,7,2,R. B. Hawkes,WFBM,,US:16057,18231
-drepana-bilineata,specimen,49.917,-116.916,BC,Central Kootenay,Kaslo,2017,,,,,?,"Blackmore, 1927",CA:5903,18232
+falcaria-bilineata,specimen,49.917,-116.916,BC,Central Kootenay,Kaslo,2017,,,,,?,"Blackmore, 1927",CA:5903,18232
 eupsilia-tristigmata,specimen,46.73,-117.18,WA,Whitman,Pullman,2400,1964,3,30,Jon H. Shepard,JHS,,US:53075,18233
 bleptina-caradrinalis,specimen,46.857,-122.852,WA,Thurston,Tenino,290,1966,7,27,Don Frechin,WSU,,US:53067,18234
 euxoa-cinereopallidus,specimen,44.612,-117.469,OR,Baker,Durkee,2961,2001,9,19,Crabo/Troubridge,LGCC,,US:41001,18235
@@ -19075,7 +19075,7 @@ gluphisia-septentrionis,specimen,45.117,-117.7,OR,Union,OSU Hall Cr. Ranch,3800,
 nephelodes-minians,specimen,48.052,-122.177,WA,Snohomish,Marysville,21,1958,8,20,,WWUC,robertson handwriting,US:53061,19074
 catocala-unijuga,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1987,9,24,J. Shepard,JHS,,CA:5903,19075
 caenurgina-erechtea,specimen,49.5,-117.28,BC,Central Kootenay,Nelson,1774,1966,8,10,J. Shepard,JHS,,CA:5903,19076
-drepana-bilineata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2000,5,23,A. V. Z. Brower,OSAC,,US:41003,19077
+falcaria-bilineata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2000,5,23,A. V. Z. Brower,OSAC,,US:41003,19077
 androloma-maccullochii,specimen,48.95,-119.43,WA,Okanogan,"Oroville, T40N R27E",919,1973,5,27,J. P. Pelham,LGCC,,US:53047,19078
 anarta-trifolii,specimen,42.306,-113.368,ID,Cassia,Malta,4525,1954,6,13,W. F. Barr,WFBM,,US:16031,19079
 lasionycta-subfuscula,specimen,50.36,-122.14,BC,Thompson-Nicola,Blowdown Pass,6872,2005,8,6,L. G. Crabo,LGCC,,CA:5933,19080
@@ -19182,7 +19182,7 @@ acronicta-fragilis,specimen,52.552,-113.64,AB,,"J.J. Collett Natural Area, 11kmN
 spilosoma-vagans,specimen,48.515,-118.739,WA,Ferry,10 Mile CG,1800,2010,6,22,J. & S. Shepard,JHS,tan,US:53019,19181
 pyrrharctia-isabella,specimen,48.76,-122.488,WA,Whatcom,Bellingham,74,1981,5,,P.D. Hotlen,WWUC,,US:53073,19182
 pseudothyatira-cymatophoroides,specimen,45.3,-122.972,OR,Yamhill,Newberg,179,1964,7,28,Kenneth Goeden,OSAC,,US:41071,19183
-protoperigea-anotha,specimen,47.56,-120.78,WA,Chelan,Bridge Cr. CG,2070,1990,7,29,J. & S. Shepard,JHS,,US:53007,19184
+caradrina-anotha,specimen,47.56,-120.78,WA,Chelan,Bridge Cr. CG,2070,1990,7,29,J. & S. Shepard,JHS,,US:53007,19184
 acronicta-hasta,specimen,51.375,-113.05,AB,,"Red Deer R., 50NE of Gleichen",2785,1905,6,6,F. H. Wolley-Dod,CNC,Schmidt File,,19185
 euxoa-ustulata,specimen,46.103,-117.103,WA,Asotin,"Anatone, 10 mi. W",3750,2001,7,17,L. G. Crabo,LGCC,,US:53003,19186
 egira-crucialis,specimen,46.813,-116.923,ID,Latah,"Moscow, 6mNE",3360,1998,4,25,M. Stage,WFBM,,US:16057,19187
@@ -19490,7 +19490,7 @@ eremobina-claudens,specimen,44.54,-124.07,OR,Lincoln,Lost Cr.,94,1993,8,3,L. G. 
 oligia-tusa,specimen,48.75,-123.4,BC,Capital,"Fulford Harbor, 2.2 mi. SE",0,1998,7,18,L. G. Crabo,LGCC,,CA:5917,19489
 tarache-major,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1918,7,10,O. Huelleman,WFBM,ID needs verifying,US:16079,19490
 apamea-spaldingi,specimen,47.343,-120.094,WA,Chelan,Rock Island,615,1940,5,26,,WSU,,US:53007,19491
-drepana-bilineata,specimen,48.48,-123.55,BC,Capital,Goldstream PP,172,1995,5,27,Jon H. Shepard,JHS,,CA:5917,19492
+falcaria-bilineata,specimen,48.48,-123.55,BC,Capital,Goldstream PP,172,1995,5,27,Jon H. Shepard,JHS,,CA:5917,19492
 hyles-lineata,specimen,43.477,-121.685,OR,Klamath,Gilchrist,4494,1952,8,12,,OSAC,,US:41035,19493
 apamea-longula,specimen,46.602,-120.505,WA,Yakima,Yakima,1188,1970,8,20,E. J. Newcomer,WSU,,US:53077,19494
 egira-rubrica,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1951,5,18,W. F. Barr,WFBM,,US:16057,19495
@@ -20024,7 +20024,7 @@ arctia-parthenos,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,199
 proserpinus-clarkiae,specimen,44.406,-122.067,OR,Linn,Lost Prairie,3342,1964,6,28,E. J. D[ornfeld].,OSAC,,US:41043,20023
 lacinipolia-pensilis,specimen,47.12,-120.36,WA,Kittitas,S. Colockum Rd.,3281,1987,8,29,L. G. Crabo,WSU,,US:53037,20024
 orthosia-hibisci,specimen,47.681,-117.282,WA,Spokane,Millwood,1980,1957,6,2,C. S. Crawford,WSU,,US:53063,20025
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,5,7,J. Shepard,JHS,,CA:5903,20026
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,5,7,J. Shepard,JHS,,CA:5903,20026
 bleptina-caradrinalis,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,6,30,D. W. Knight,JHS,,CA:5903,20027
 adelphagrotis-indeterminata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2001,8,30,A. V. Z. Brower,OSAC,,US:41003,20028
 sympistis-apep,specimen,47.642,-120.145,WA,Douglas,Pine Cyn.,2747,2002,9,23,L. G. Crabo,LGCC,,US:53017,20029
@@ -20607,7 +20607,7 @@ spilosoma-vagans,specimen,48.45,-119.08,WA,Okanogan,Moses Mdws.,3415,1988,6,14,L
 euxoa-vallus,specimen,50.36,-122.14,BC,Thompson-Nicola,Blowdown Pass,6872,2006,7,26,L. G. Crabo,LGCC,,CA:5933,20606
 pleromelloida-cinerea,specimen,49.5,-117.28,BC,Central Kootenay,Nelson,1774,1966,9,2,J. Shepard,JHS,,CA:5903,20607
 clemensia-umbrata,specimen,44.615,-123.316,OR,Benton,Oak Cr. Gate,500,1962,7,26,N. McFarland,OSAC,,US:41003,20608
-drepana-bilineata,specimen,51.283,-116.95,BC,East Kootenay,Golden,2589,2007,6,28,W. D. Nicholson,WDN,Shepard notes,CA:5901,20609
+falcaria-bilineata,specimen,51.283,-116.95,BC,East Kootenay,Golden,2589,2007,6,28,W. D. Nicholson,WDN,Shepard notes,CA:5901,20609
 abagrotis-glenni,specimen,44.065,-119.412,OR,Grant,John Day Fossil Bed NM; Sheep Cr. Unit,4000,2003,9,22,USNPS,OSAC,,US:41023,20610
 euxoa-furtivus,specimen,43.683,-119.448,OR,Harney,"Burns, 9mNW; Skull Cr. Rd.",5060,2010,7,13,USDA,OSAC,,US:41025,20611
 autographa-ampla,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,7,15,J. & S. Shepard,JHS,,CA:5903,20612
@@ -21045,7 +21045,7 @@ drasteria-howlandii,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1790,
 apamea-alia,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,6,14,Don Frechin,WSU,,US:53035,21044
 diarsia-esurialis,specimen,48.721,-122.035,WA,Whatcom,Dailey Prairie,3184,1995,7,8,L. G. Crabo,LGCC,,US:53073,21045
 spilosoma-virginica,specimen,49.28,-124.12,BC,Nanaimo,Nanoose CDN,0,1995,5,24,Jon H. Shepard,JHS,,CA:5921,21046
-drepana-bilineata,specimen,45.436,-123.14,OR,Washington,Gaston,198,1964,8,10,Kenneth Goeden,ODAC,,US:41067,21047
+falcaria-bilineata,specimen,45.436,-123.14,OR,Washington,Gaston,198,1964,8,10,Kenneth Goeden,ODAC,,US:41067,21047
 acronicta-mansueta,specimen,50.844,-111.154,AB,,"Red Deer R., 3kmE Jenner Bridge",2037,2004,6,3,G. G. Anweiler,UASM,Schmidt File,CA:4804,21048
 euplexia-benesimilis,specimen,43.66,-124.2,OR,Douglas,Umpqua LH SP,100,2000,6,26,J. & S. Shepard,JHS,,US:41019,21049
 catocala-faustina,specimen,48.051,-119.902,WA,Okanogan,Pateros,776,1933,8,14,Andrew Anderson,WSU,,US:53047,21050
@@ -21081,7 +21081,7 @@ androloma-maccullochii,specimen,46.324,-117.971,WA,Columbia,Dayton,1600,1958,5,1
 tolype-distincta,specimen,43.838,-123.239,OR,Lane,"Northward, nr. Lorane",681,1995,9,20,,OSAC,,US:41039,21080
 zale-minerea,specimen,48.32,-123.54,BC,Capital,Rocky Point CDN,0,1995,4,29,Jon H. Shepard,JHS,,CA:5917,21081
 xestia-plebeia,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1998,9,14,A. V. Z. Brower,OSAC,,US:41003,21082
-drepana-bilineata,specimen,44.633,-123.267,OR,Benton,"Corvallis, 4mi N",459,2007,8,1,J. C. Miller,OSAC,,US:41003,21083
+falcaria-bilineata,specimen,44.633,-123.267,OR,Benton,"Corvallis, 4mi N",459,2007,8,1,J. C. Miller,OSAC,,US:41003,21083
 euxoa-scotogrammoides,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1999,6,12,L. & E. Crabo,LGCC,,US:53017,21084
 euxoa-pluralis,specimen,43,-119.995,OR,Lake,Alkali L.,4343,2001,7,19,Crabo/Lafontaine,LGCC,,US:41037,21085
 sympistis-dunbari,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,2003,8,24,L. G. Crabo,LGCC,,US:41039,21086
@@ -21208,7 +21208,7 @@ euxoa-declarata,specimen,47.12,-120.36,WA,Kittitas,S. Colockum Rd.,3404,1987,8,2
 bleptina-caradrinalis,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1985,6,12,D. W. Knight,JHS,,CA:5903,21207
 drepana-arcuata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,6,26,J. Shepard,JHS,,CA:5903,21208
 anarta-hamata,specimen,48,-119.62,WA,Okanogan,"Bridgeport SP, W",1047,1997,5,13,L. G. Crabo,LGCC,,US:53047,21209
-drepana-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1981,5,6,D. W. Knight,JHS,,CA:5903,21210
+falcaria-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1981,5,6,D. W. Knight,JHS,,CA:5903,21210
 phyllodesma-americana,specimen,44.775,-117.834,OR,Baker,Baker,3448,1959,5,20,"S. G. Jewett, Jr.",OSAC,,US:41001,21211
 papaipema-insulidens,specimen,42.599,-114.759,ID,Twin Falls,Buhl,3770,1960,8,23,R. E. Miller,WFBM,,US:16083,21212
 hypena-californica,specimen,46.943,-116.649,ID,Latah,Laird Park,2680,1962,5,14,W. F. Barr,WFBM,,US:16057,21213
@@ -21435,7 +21435,7 @@ hydraecia-obliqua,specimen,47.18,-124.19,WA,Grays Harbor,Roosevelt Beach Access 
 leucania-farcta,specimen,48.69,-122.49,WA,Whatcom,Chuckanut Bay,115,1993,7,12,L. G. Crabo,WSU,,US:53073,21434
 admetovis-similaris,specimen,47.424,-120.309,WA,Chelan,Wenatchee,780,1940,5,27,,WSU,,US:53007,21435
 caradrina-montana,specimen,43.785,-116.942,ID,Canyon,Parma,2224,1951,6,23,A. J. Walz,WFBM,,US:16027,21436
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,6,1,J. & S. Shepard,JHS,,CA:5903,21437
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,6,1,J. & S. Shepard,JHS,,CA:5903,21437
 melanchra-picta,specimen,46.602,-120.505,WA,Yakima,Yakima,1188,1932,8,8,A. R. Rolfs,WSU,,US:53077,21438
 apamea-occidens,specimen,47.9,-118.495,WA,Ferry,L. Roosevelt; S of Jim Mt.,2075,2004,6,24,E. & L. Crabo,LGCC,,US:53019,21439
 abagrotis-apposita,specimen,48.71,-118.59,WA,Ferry,Herron Cr. Rd.,4092,1998,7,16,L. & A. Crabo,LGCC,,US:53019,21440
@@ -21604,7 +21604,7 @@ spilosoma-virginica,specimen,46.065,-118.352,WA,Walla Walla,Walla Walla,1000,196
 trichopolia-curtica,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1954,8,23,W. F. Barr,WFBM,,US:16057,21603
 tolype-distincta,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,8,19,J. & S. Shepard,WSU,,CA:5903,21604
 spodoptera-praefica,specimen,47.91,-118.31,WA,Lincoln,Fort Spokane,1312,1986,6,30,J. & S. Shepard,JHS,,US:53043,21605
-drepana-bilineata,specimen,48.579,-118.238,WA,Ferry,Canyon Cr. CG,2182,2013,5,7,J. & S. Shepard,JHS,,US:53019,21606
+falcaria-bilineata,specimen,48.579,-118.238,WA,Ferry,Canyon Cr. CG,2182,2013,5,7,J. & S. Shepard,JHS,,US:53019,21606
 sympistis-lacticollis,specimen,47.66,-119.62,WA,Douglas,"Jameson L., S end",1967,1999,9,22,L. & E. Crabo,WSU,,US:53017,21607
 spilosoma-virginica,specimen,48.83,-122.57,WA,Whatcom,Tennant L. Tr.; Hovander Park,24,1993,6,3,L. G. Crabo,LGCC,,US:53073,21608
 enargia-fausta,specimen,53.94,-119.18,AB,,"Mt. Hamell, S slope",4000,1994,7,27,Crabo/Troubridge,WSU,,,21609
@@ -21651,7 +21651,7 @@ dasychira-vagans,specimen,44.908,-122.886,OR,Marion,Macleay BLT,390,1971,9,15,R.
 hyalophora-euryalus,specimen,45.01,-123.88,OR,Lincoln,Rose Lodge,180,1958,5,5,Ray Albright,OSAC,,US:41041,21650
 acronicta-insita,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW; Bosky Dell Lane",400,1988,5,31,"S. Jewett, Jr.",OSAC,,US:41005,21651
 anaplectoides-pressus,specimen,47.5,-121.63,WA,King,"North Bend, 7.5 mi E; Middle Fk. Snoqualmie R.",834,1988,7,19,L. G. Crabo,LGCC,,US:53033,21652
-drepana-bilineata,specimen,48.617,-123.617,BC,Cowichan Valley,"Shawnigan L., 3mS",857,1960,8,,D. F. Hardwick,CNC,Shepard notes,CA:5919,21653
+falcaria-bilineata,specimen,48.617,-123.617,BC,Cowichan Valley,"Shawnigan L., 3mS",857,1960,8,,D. F. Hardwick,CNC,Shepard notes,CA:5919,21653
 apamea-alia,specimen,50.36,-122.14,BC,Thompson-Nicola,"Blowdown Pass; Duffy L., nr.",7000,1993,8,20,Crabo/Troubridge,WSU,,CA:5933,21654
 caenurgina-erechtea,specimen,44.309,-117.22,OR,Baker,Farwell Bend State Park,2111,2005,7,26,DL Strenge,DLSC,,US:41001,21655
 drasteria-hudsonica,specimen,48.64,-120.46,WA,Okanogan,Harts Pass Rd. @ Deadhorse Pt.,3841,1999,8,4,L. G. Crabo,LGCC,,US:53047,21656
@@ -21973,7 +21973,7 @@ gluphisia-severa,specimen,45.505,-122.797,OR,Washington,Cedar Hills,640,1968,4,1
 phyllodesma-americana,specimen,47.45,-121.667,WA,King,"North Bend, 7.5mE; Middle Fork Snoqualmie R.",984,1988,5,11,Lars Crabo,WSU,,US:53033,21972
 pronoctua-peabodyae,specimen,48.259,-117.617,WA,Stevens,Horseshoe L 0.7mi SSE,3176,2004,9,9,L. G. Crabo,LGCC,,US:53065,21973
 aseptis-fumosa,specimen,46.523,-119.353,WA,Benton,"Columbia R., W sand dunes",495,1996,6,28,R. S. Zack,WSU,L. Crabo id,US:53005,21974
-drepana-bilineata,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1989,6,1,,OSAC,,US:41007,21975
+falcaria-bilineata,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1989,6,1,,OSAC,,US:41007,21975
 drasteria-howlandii,specimen,46.392,-119.585,WA,Benton,radio telescope,3008,1995,9,1,R. S. Zack,WSU,R. S. Zack id,US:53005,21976
 sympistis-greyi,specimen,47.9,-118.495,WA,Ferry,L. Roosevelt; S of Jim Mt.,2075,2004,6,24,E. & L. Crabo,LGCC,,US:53019,21977
 schinia-meadi,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1954,7,8,H. C. Manis,WFBM,,US:16057,21978
@@ -22179,7 +22179,7 @@ apamea-scoparia,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,2003,7,27,L. 
 cycnia-oregonensis,specimen,47.5,-119.92,WA,Douglas,Douglas Cr.,1600,2000,6,6,J. & S. Shepard,JHS,,US:53017,22178
 leptarctia-californiae,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1983,5,30,D. W. Knight,JHS,,CA:5903,22179
 egira-dolosa,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1973,5,15,J. Shepard,WFBM,,CA:5903,22180
-drepana-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1919,5,2,O. Huelleman,WFBM,,US:16079,22181
+falcaria-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1919,5,2,O. Huelleman,WFBM,,US:16079,22181
 gnophaela-vermiculata,specimen,47.642,-116.798,ID,Kootenai,Kid Island Bay,2129,1987,,,Eric Cardwell,WFBM,,US:16055,22182
 raphia-frater,specimen,52.46,-112.88,AB,,"Rochon Sands PP, 16kmN of Erskine",2566,2005,6,14,C. D. Bird,CDBC,Schmidt File,,22183
 paraseptis-adnixa,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1963,9,13,Don Frechin,WSU,,US:53035,22184
@@ -22330,7 +22330,7 @@ euxoa-septentrionalis,specimen,45.52,-123.109,OR,Washington,Forest Grove,211,192
 trichoplusia-ni,specimen,48.22,-119.64,WA,Okanogan,"Soap L., S end",1260,1993,7,25,L. & A. Crabo,LGCC,,US:53047,22329
 euxoa-olivia,specimen,46.78,-118.53,WA,Adams,"Washtucna, nr. @ sanddunes",1424,1997,9,4,L. G. Crabo,LGCC,,US:53001,22330
 protolampra-rufipectus,specimen,47.61,-120.52,WA,Chelan,Derby Cyn.,2597,2002,8,22,L. G. Crabo,LGCC,,US:53007,22331
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1987,6,4,J. Shepard,JHS,,CA:5903,22332
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1987,6,4,J. Shepard,JHS,,CA:5903,22332
 dasychira-grisefacta,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,1979,8,1,"S. G. Jewett, Jr.",OSAC,,US:41005,22333
 leucoma-salicis,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1944,6,28,B. G. Thompson,OSAC,,US:41003,22334
 egira-rubrica,specimen,47.186,-122.292,WA,Pierce,Puyallup,40,2004,4,6,A. Antonelli,WSU,,US:53053,22335
@@ -22585,7 +22585,7 @@ xestia-c-nigrum,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1968,8,10,E. L. Gr
 tolype-distincta,specimen,47.61,-122.6,WA,Kitsap,Illahee,60,1959,10,5,Don Frechin,JHS,,US:53035,22584
 leucania-dia,specimen,48.08,-119.73,WA,Douglas,"Bridgeport Bar, W end",784,1995,5,30,L. & A. Crabo,LGCC,,US:53017,22585
 raphia-frater,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1980,7,3,J. Shepard,JHS,,CA:5903,22586
-drepana-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1990,5,27,J. Shepard,RBCM,Shepard notes,CA:5903,22587
+falcaria-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1990,5,27,J. Shepard,RBCM,Shepard notes,CA:5903,22587
 drasteria-adumbrata,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1898,8,12,,WSU,,US:53075,22588
 caradrina-montana,specimen,46.73,-117.18,WA,Whitman,Pullman,2400,2002,6,3,J. & S. Shepard,JHS,,US:53075,22589
 bellura-obliqua,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,5,22,J. & S. Shepard,WSU,,CA:5903,22590
@@ -22598,7 +22598,7 @@ acronicta-fragilis,specimen,53.55,-113.47,AB,,Edmonton,2034,1921,6,20,D. Mackie,
 lophocampa-maculata,specimen,47.606,-122.332,WA,King,Seattle,177,1937,6,5,A. D. Dison,OSAC,,US:53033,22597
 parabagrotis-sulinaris,specimen,46.029,-118.013,WA,Walla Walla,SE Blacksnake Ridge,4508,2001,7,18,L. G. Crabo,LGCC,,US:53071,22598
 habrosyne-scripta,specimen,51.767,-120.9,BC,Cariboo,Canim L.,2618,1938,6,9,J. K. Jacob,CNC,Shepard notes,CA:5941,22599
-protoperigea-posticata,specimen,48.051,-119.902,WA,Okanogan,Pateros,776,1937,9,10,Andrew Anderson,WSU,,US:53047,22600
+caradrina-posticata,specimen,48.051,-119.902,WA,Okanogan,Pateros,776,1937,9,10,Andrew Anderson,WSU,,US:53047,22600
 litholomia-napaea,specimen,47.54,-120.74,WA,Chelan,Icicle Cr. Cyn.,2060,1989,4,14,L. G. Crabo,LGCC,,US:53007,22601
 copablepharon-viridisparsa,specimen,47.073,-121.078,WA,Kittitas,Quartz Mtn.,6232,1998,7,28,K. Romain,DAR,from report; det. Lars Carbo,US:53037,22602
 panthea-virginarius,specimen,48.65,-122.83,WA,San Juan,"Mt. Constitution, SW slope; Moran SP",1500,1997,6,9,L. G. Crabo,WSU,,US:53055,22603
@@ -22904,7 +22904,7 @@ lacinipolia-stricta,specimen,46.813,-116.923,ID,Latah,"Moscow, 6mNE",3360,1996,9
 acerra-normalis,specimen,47.642,-120.145,WA,Douglas,Pine Cyn.,2600,2006,4,28,L. G. Crabo,WSU,,US:53017,22903
 catocala-irene,specimen,46.5065,-119.7016,WA,Benton,Rattlesnake Springs Field Lab,695,1998,8,23,D. Strenge,DLSC,,US:53005,22904
 admetovis-oxymorus,specimen,46.103,-117.271,WA,Asotin,Anatone Butte vic.,4656,2005,7,11,Crabo/Coughlin,LGCC,,US:53003,22905
-drepana-bilineata,specimen,44.615,-123.316,OR,Benton,"Corvallis, 5mNW - Oak Cr. Gate",500,1962,8,24,N. McFarland,OSAC,,US:41003,22906
+falcaria-bilineata,specimen,44.615,-123.316,OR,Benton,"Corvallis, 5mNW - Oak Cr. Gate",500,1962,8,24,N. McFarland,OSAC,,US:41003,22906
 eurois-astricta,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5563,2002,8,19,L. G. Crabo,LGCC,,US:53051,22907
 apantesis-ornata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1954,7,11,O. Huelleman,WFBM,,US:16079,22908
 eurois-occulta,specimen,44.699,-119.793,OR,Wheeler,Wolf Cr.,4029,1995,8,8,,OSAC,,US:41069,22909
@@ -23050,7 +23050,7 @@ abagrotis-vittifrons,specimen,42.61,-118.383,OR,Harney,T34S R35E s.10NE,4000,197
 cucullia-pulla,specimen,46.9,-119.94,WA,Grant,"Wanapum Dam, 1.5 mi. NNE",1054,1992,3,21,L. G. Crabo,LGCC,,US:53025,23049
 apantesis-ornata,specimen,45.134,-118.931,OR,Umatilla,Ukiah,3353,1992,6,2,D. G. Grimble,OSAC,,US:41059,23050
 apantesis-nevadensis,specimen,46.674,-119.37,WA,Grant,Saddle Mts. NWL Refuge,726,2002,8,9,R. S. Zack,WSU,,US:53025,23051
-drepana-bilineata,specimen,49.52,-114.65,BC,East Kootenay,"Michael Cr., 2mS Corbin",5703,1990,7,17,J. & S. Shepard,JHS,,CA:5901,23052
+falcaria-bilineata,specimen,49.52,-114.65,BC,East Kootenay,"Michael Cr., 2mS Corbin",5703,1990,7,17,J. & S. Shepard,JHS,,CA:5901,23052
 helicoverpa-zea,specimen,42.72,-114.52,ID,Jerome,Jerome,3763,1955,5,7,R. E. Miller,JHS,,US:16053,23053
 fishia-yosemitae,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,2002,9,23,L. G. Crabo,LGCC,,US:53017,23054
 dasychira-vagans,specimen,44.052,-123.086,OR,Lane,Eugene,428,1964,7,30,Kenneth Goeden,ODAC,,US:41039,23055
@@ -23205,7 +23205,7 @@ catocala-semirelicta,specimen,42.162,-118.608,OR,Harney,Little Cottonwood Cr.,43
 hemaris-thetis,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1976,6,9,J. Shepard,JHS,,CA:5903,23204
 habrosyne-scripta,specimen,42.11,-124.19,OR,Curry,Loeb SP,65,1992,5,19,J. & S. Shepard,JHS,,US:41015,23205
 hypena-palparia,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1984,8,1,J. Shepard,JHS,,CA:5903,23206
-drepana-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1906,6,9,G. W. Taylor,CNC,"Blackmore, 1927",CA:5921,23207
+falcaria-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1906,6,9,G. W. Taylor,CNC,"Blackmore, 1927",CA:5921,23207
 homorthodes-communis,specimen,47.695,-122.27,WA,King,Thornton Cr.,100,1967,8,29,Don Frechin,WSU,,US:53033,23208
 autographa-californica,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1983,7,5,M. M. Furniss,WFBM,,US:16057,23209
 drasteria-howlandii,specimen,46.5768,-119.3628,WA,Benton,"Hanford Townsite, south",372,1997,4,26,D. Strenge,DLSC,,US:53005,23210
@@ -23341,7 +23341,7 @@ trichoplusia-ni,specimen,46.584,-117.217,WA,Whitman,Kramer Prairie; 3 mi. NW Col
 xestia-xanthographa,specimen,45.524,-122.675,OR,Multnomah,Portland,50,1953,9,19,"S. Jewett, Jr.",OSAC,,US:41051,23340
 abagrotis-baueri,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,2003,8,24,L. G. Crabo,LGCC,,US:41039,23341
 euxoa-divergens,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1980,7,4,Victor McHenry,OSAC,,US:41031,23342
-protoperigea-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1989,7,29,Crabo/Pelham,LGCC,,US:53077,23343
+caradrina-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1989,7,29,Crabo/Pelham,LGCC,,US:53077,23343
 gluphisia-severa,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,2013,5,2,J. & S. Shepard,JHS,,CA:5903,23344
 acerra-normalis,specimen,47.13,-120.744,WA,Kittitas,Swauk Cr.; site 1,1790,2009,4,21,P. J. Landolt,WSU,,US:53037,23345
 gluphisia-severa,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1990,4,13,J. Shepard,JHS,"Shepard notes, not in coll.",CA:5903,23346
@@ -25053,7 +25053,7 @@ lacinipolia-comis,specimen,48.27,-117.57,WA,Stevens,Chewelah Mtn.,4817,2002,8,18
 apamea-plutonia,specimen,48.421,-122.333,WA,Skagit,Light Trap,60,1969,6,17,V. Pedersen,WSU,,US:53057,25052
 spilosoma-pteridis,specimen,45.706,-121.52,OR,Hood River,"Hood River, 3mW",400,1973,6,12,,OSAC,tan thorax,US:41027,25053
 euxoa-permixta,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2007,6,14,L. G. Crabo,LGCC,,US:41045,25054
-drepana-bilineata,specimen,45.592,-122.057,OR,Multnomah,Ainsworth SP,213,2001,5,25,G. R. Lindberg,GRL,Shepard notes,US:41051,25055
+falcaria-bilineata,specimen,45.592,-122.057,OR,Multnomah,Ainsworth SP,213,2001,5,25,G. R. Lindberg,GRL,Shepard notes,US:41051,25055
 orthosia-praeses,specimen,45.72,-121.48,WA,Klickitat,White Salmon,328,1990,4,4,L. G. Crabo,WSU,corrected latitude,US:53039,25056
 datana-californica,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,7,13,J. Thompson,WSU,,US:53075,25057
 syngrapha-viridisigma,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3546,2005,8,5,L. G. Crabo,LGCC,prob 8/4/05,CA:5933,25058
@@ -25195,7 +25195,7 @@ properigea-albimacula,specimen,47.5511,-120.767,WA,Chelan,Eightmile CG on Icicle
 gluphisia-severa,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1979,5,24,G. L. Parsons,OSAC,,US:41003,25194
 dargida-procinctus,specimen,46.85,-120.48,WA,Kittitas,Umtanum Cr. Mouth,1718,1989,7,28,L. G. Crabo,LGCC,label coord wrong,US:53037,25195
 phyllodesma-americana,specimen,43.335,-124.375,OR,Coos,Sunset Beach SP,0,1992,5,17,J. & S. Shepard,JHS,,US:41011,25196
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,6,6,J. Shepard,JHS,,CA:5903,25197
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1988,6,6,J. Shepard,JHS,,CA:5903,25197
 litholomia-napaea,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1949,10,8,G. S. Batchelor,WSU,,US:53075,25198
 euxoa-cinereopallidus,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,2002,9,23,L. G. Crabo,LGCC,,US:53017,25199
 drepana-arcuata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1983,5,28,D. W. Knight,JHS,,CA:5903,25200
@@ -25803,7 +25803,7 @@ phyllodesma-americana,specimen,48.654,-120.506,WA,Okanogan,Mazama; Lost R.,2380,
 agrotis-venerabilis,specimen,43.683,-119.448,OR,Harney,"Burns, 9mNW; Skull Cr. Rd.",5060,2010,8,13,USDA,OSAC,,US:41025,25802
 alypia-langtoni,specimen,46.733,-116.999,ID,Latah,Moscow,2560,,,,J. M. Aldrich,WFBM,,US:16057,25803
 apamea-vultuosa,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1962,6,17,Don Frechin,WSU,,US:53035,25804
-drepana-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1915,5,10,O. Huelleman,WFBM,,US:16079,25805
+falcaria-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1915,5,10,O. Huelleman,WFBM,,US:16079,25805
 euxoa-mimallonis,specimen,47.61,-120.52,WA,Chelan,Derby Cyn.,2597,2002,8,22,L. G. Crabo,LGCC,,US:53007,25806
 xestia-xanthographa,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1990,9,10,E. L. Griepentrog,OSAC,,US:41007,25807
 leucoma-salicis,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1944,6,29,B. G. Thompson,OSAC,,US:41003,25808
@@ -26116,7 +26116,7 @@ abagrotis-scopeops,specimen,46.12,-117.33,WA,Asotin,"Anatone, 11 mi. W",5062,200
 sunira-verberata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1979,10,2,D. W. Knight,JHS,,CA:5903,26115
 dargida-procinctus,specimen,47.697,-117.211,WA,Spokane,Trentwood,2028,1957,6,23,C. S. Crawford,WSU,,US:53063,26116
 malacosoma-californica,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5860,2007,7,17,L. G. Crabo,Sight,,US:53051,26117
-protoperigea-posticata,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3546,2005,8,5,L. G. Crabo,LGCC,prob 8/4/05,CA:5933,26118
+caradrina-posticata,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3546,2005,8,5,L. G. Crabo,LGCC,prob 8/4/05,CA:5933,26118
 euxoa-catenula,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1994,9,13,L. G. Crabo,LGCC,,US:53017,26119
 sphinx-vashti,specimen,42.404,-121.436,OR,Klamath,Bly Mt.,5000,1968,5,31,C. M. Nelson,OSAC,,US:41035,26120
 hyles-lineata,specimen,46.602,-120.505,WA,Yakima,Yakima,1188,1984,9,7,F. P. Dean,WSU,,US:53077,26121
@@ -26215,7 +26215,7 @@ syngrapha-angulidens,specimen,49.12,-116.16,BC,Central Kootenay,Goatfell,2600,19
 apamea-sordens,specimen,47.648,-117.091,WA,Spokane,Liberty Lake,2049,1957,5,20,C. S. Crawford,WSU,,US:53063,26214
 xestia-c-nigrum,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1979,5,31,G. L. Parsons,OSAC,,US:41003,26215
 orthosia-pulchella,specimen,47.29,-121.23,WA,Kittitas,"Lake Ketchess, SW end",2461,1988,5,13,L. G. Crabo,WSU,,US:53037,26216
-protoperigea-umbricata,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1965,9,8,R. E. Miller,JHS,,US:53013,26217
+caradrina-umbricata,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1965,9,8,R. E. Miller,JHS,,US:53013,26217
 mniotype-tenera,specimen,44.52,-116.05,ID,Valley,Cascade,5000,1967,7,1,R. E. Miller,JHS,,US:16085,26218
 catocala-californica,specimen,48.051,-119.902,WA,Okanogan,Pateros,776,1937,9,18,Andrew Anderson,WSU,,US:53047,26219
 malacosoma-disstria,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1957,7,14,E. J. Dornfeld,OSAC,,US:41003,26220
@@ -27273,7 +27273,7 @@ behrensia-conchiformis,specimen,46.417,-117.017,ID,Nez Perce,Lewiston,745,1959,5
 polia-nugatis,specimen,42.73,-118.64,OR,Harney,"Fish L., N side",7415,1991,7,27,L. G. Crabo,WSU,,US:41025,27272
 euxoa-altens,specimen,44.425,-121.833,OR,Jefferson,Santiam Pass,4877,1995,6,26,,OSAC,,US:41031,27273
 gluphisia-septentrionis,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1998,6,11,R. S. Zack,WSU,,US:16057,27274
-drepana-bilineata,specimen,50.7,-119.266,BC,Columbia-Shuswap,Salmon Arm,1433,1979,6,16,J. D. Lafontaine,CNC,Shepard notes,CA:5939,27275
+falcaria-bilineata,specimen,50.7,-119.266,BC,Columbia-Shuswap,Salmon Arm,1433,1979,6,16,J. D. Lafontaine,CNC,Shepard notes,CA:5939,27275
 protoschinia-nuchalis,specimen,46.65,-117.81,WA,Whitman,Central Ferry,643,1990,6,30,J. & S. Shepard,JHS,,US:53075,27276
 spilosoma-virginica,specimen,46.703,-119.621,WA,Grant,3 mile spillway gate,499,2002,7,5,D. L. Strenge et al.,WSU,,US:53025,27277
 habrosyne-scripta,specimen,49.917,-116.916,BC,Central Kootenay,Kaslo,2017,1903,7,15,,USNM,"Dyar, 1904",CA:5903,27278
@@ -27346,7 +27346,7 @@ pyrrharctia-isabella,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1961,6,10,Don
 malacosoma-disstria,specimen,47.927,-117.589,WA,Stevens,"Deer L., nr. Chewelah",2478,1972,8,1,M. T. James,WSU,,US:53065,27345
 habrosyne-scripta,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1956,7,12,R. E. Miller,WFBM,,US:53013,27346
 parabagrotis-sulinaris,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1987,9,4,E. L. Griepentrog,OSAC,,US:41007,27347
-protoperigea-posticata,specimen,43,-119.995,OR,Lake,Alkali L.,4343,2007,9,11,L. G. Crabo,LGCC,,US:41037,27348
+caradrina-posticata,specimen,43,-119.995,OR,Lake,Alkali L.,4343,2007,9,11,L. G. Crabo,LGCC,,US:41037,27348
 euxoa-lewisi,specimen,46.151,-121.446,WA,Yakima,Bird Cr. Mdws.,6230,1960,8,13,"S. Jewett, Jr.",OSAC,,US:53077,27349
 euxoa-cana,specimen,42.3,-115.967,ID,Owyhee,"Grasmere, 6mSW",5837,1969,8,24,D. F. Hardwick,LGCC,paratype,US:16073,27350
 acronicta-strigulata,specimen,48.907,-118.141,WA,Stevens,Pierre L. CG,2650,2010,7,7,J. & S. Shepard,JHS,,US:53065,27351
@@ -27524,7 +27524,7 @@ abagrotis-placida,specimen,48.73,-121.03,WA,Whatcom,S. Ross L.,1607,2004,8,16,L.
 spaelotis-bicava,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2005,7,14,Crabo/Coughlin,LGCC,,US:53037,27523
 nedra-stewarti,specimen,46.584,-117.217,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,7,23,J. Thompson,WSU,female dark hind wing,US:53075,27524
 trichordestra-liquida,specimen,47.648,-117.091,WA,Spokane,Liberty Lake,2049,1957,6,8,C. S. Crawford,WSU,,US:53063,27525
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1994,7,7,Jon Shepard,JHS,,CA:5903,27526
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1994,7,7,Jon Shepard,JHS,,CA:5903,27526
 euxoa-macleani,specimen,48.733,-120.673,WA,Whatcom,Slate Pk.,6928,1998,7,29,Jackson/Hazen/Poltras,LGCC,,US:53073,27527
 schinia-meadi,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1960,6,14,R. E. Miller,JHS,,US:53013,27528
 acronicta-innotata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1981,8,3,D. W. Knight,JHS,,CA:5903,27529
@@ -27630,7 +27630,7 @@ leucania-dia,specimen,48.269,-121.943,WA,Snohomish,"Oso, 0.5mW",183,2005,5,6,L. 
 brachylomia-rectifascia,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,1996,9,9,L. & E. Crabo,LGCC,,US:41039,27629
 euxoa-setonia,specimen,46.172,-117.534,WA,Garfield,Sunset Point,5742,2005,7,11,Crabo/Coughlin,LGCC,,US:53023,27630
 lophocampa-argentata,specimen,45.524,-122.675,OR,Multnomah,Portland,50,,,,,OSAC,"em. ex. Psuedostuga taxifolia; July 9, 1967",US:41051,27631
-drepana-bilineata,specimen,52.9,-122.333,BC,Cariboo,Schiste Cr.,2899,1994,5,20,C. S. Guppy,CSG,Shepard notes,CA:5941,27632
+falcaria-bilineata,specimen,52.9,-122.333,BC,Cariboo,Schiste Cr.,2899,1994,5,20,C. S. Guppy,CSG,Shepard notes,CA:5941,27632
 andropolia-theodori,specimen,47.07,-121.07,WA,Kittitas,Manastash Ridge,6234,1990,7,14,L. & A. Crabo,WSU,,US:53037,27633
 condica-discistriga,specimen,42.599,-114.759,ID,Twin Falls,Buhl,3500,1956,7,20,R. E. Miller,WFBM,,US:16083,27634
 malacosoma-californica,specimen,48.83,-122.57,WA,Whatcom,Tennant L. Tr.; Hovander Park,20,1994,6,29,L. G. Crabo,LGCC,,US:53073,27635
@@ -27709,7 +27709,7 @@ hadena-variolata,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Co
 hyles-gallii,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1944,6,7,O. Huelleman,WFBM,,US:16079,27708
 euxoa-pluralis,specimen,44.15,-121.33,OR,Deschutes,"Tumalo-Bend, nr.",3182,1995,7,13,,OSAC,,US:41017,27709
 euxoa-divergens,specimen,44.637,-124.052,OR,Lincoln,Newport,177,1968,7,8,Brown/Goeden,OSAC,,US:41041,27710
-protoperigea-anotha,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1989,8,4,J. Shepard,JHS,,CA:5903,27711
+caradrina-anotha,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1989,8,4,J. Shepard,JHS,,CA:5903,27711
 euxoa-auripennis,specimen,46.26,-117.55,WA,Garfield,Alder C. G./Grouse Flat,5005,2000,8,31,L. G. Crabo,LGCC,,US:53023,27712
 spilosoma-virginica,specimen,45.446,-122.638,OR,Clackamas,Milwaukie,300,1982,9,23,,OSAC,,US:41005,27713
 eurois-astricta,specimen,46.915,-121.386,WA,Yakima,Lodgepole Campground,3536,2002,8,16,D. Strenge,DLSC,,US:53077,27714
@@ -27777,7 +27777,7 @@ tholera-americana,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,19
 panthea-virginarius,specimen,51.96,-122.28,BC,Cariboo,Moon Rd.,1950,1997,6,20,A. I. Fischer,JHS,,CA:5941,27776
 syngrapha-celsa,specimen,48.541,-117.152,WA,Pend Oreille,North Baldy,5745,2012,8,1,J. & S. Shepard,JHS,,US:53051,27777
 agrochola-purpurea,specimen,46.09,-117.85,WA,Columbia,Dayton,3500,1961,9,4,R. E. Miller,JHS,,US:53013,27778
-drepana-bilineata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2001,8,18,A. V. Z. Brower,OSAC,,US:41003,27779
+falcaria-bilineata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2001,8,18,A. V. Z. Brower,OSAC,,US:41003,27779
 euxoa-divergens,specimen,44.55,-117.666,OR,Baker,Burnt R. Cyn.,3179,2007,6,15,L. G. Crabo,LGCC,,US:41001,27780
 euxoa-simona,specimen,48.73,-120.66,WA,Whatcom,Harts Pass,6953,1987,7,25,L. G. Crabo,LGCC,,US:53073,27781
 dichagyris-variabilis,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2001,8,21,L. G. Crabo,LGCC,,US:41045,27782
@@ -28222,7 +28222,7 @@ caenurgina-erechtea,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1959,7,31,,WFB
 ufeus-hulstii,specimen,48.84,-121.68,WA,Whatcom,Artists's Point,4665,1996,8,9,L. G. Crabo,LGCC,Lge and smooth,US:53073,28221
 autographa-ampla,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,7,6,J. & S. Shepard,JHS,,CA:5903,28222
 schinia-honesta,specimen,46.588,-121.187,WA,Yakima,Short & Dirty ridge,5587,1962,7,14,[E.J.Newcomer],WFBM,,US:53077,28223
-drepana-bilineata,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5860,2007,7,17,L. G. Crabo,LGCC,,US:53051,28224
+falcaria-bilineata,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5860,2007,7,17,L. G. Crabo,LGCC,,US:53051,28224
 polia-nugatis,specimen,47.12,-120.36,WA,Kittitas,S. Colockum Rd.,3404,1987,8,29,L. G. Crabo,LGCC,,US:53037,28225
 autographa-corusca,specimen,48.37,-124.63,WA,Clallam,Neah Bay,7,1963,8,22,R. E. Miller,JHS,,US:53009,28226
 drasteria-divergens,specimen,47.07,-121.07,WA,Kittitas,Quartz Mtn.,6234,1990,7,14,L. & A. Crabo,WSU,,US:53037,28227
@@ -28432,7 +28432,7 @@ cucullia-intermedia,specimen,42.45,-118.86,OR,Harney,"Sixmile L., 1.5mS",4600,19
 trichoplusia-ni,specimen,46.251,-119.901,WA,Yakima,Grandview,800,1958,6,8,C. S. Crawford,WSU,,US:53077,28431
 gluphisia-septentrionis,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1937,6,10,I. M. Newell,WSU,,US:53075,28432
 acronicta-fragilis,specimen,52.31,-113.92,AB,,Red Deer,3112,1993,6,3,G. G. Anweiler,UASM,Schmidt File,,28433
-drepana-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,7,30,D. W. Knight,JHS,,CA:5903,28434
+falcaria-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,7,30,D. W. Knight,JHS,,CA:5903,28434
 nadata-gibbosa,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1957,6,8,R. E. Miller,WFBM,,US:53013,28435
 spilosoma-vagans,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,6,13,,OSAC,bland red,US:41019,28436
 nedra-stewarti,specimen,46.92,-122.85,WA,Thurston,"Plumb, TNC; 4.2 mi.N Tenino",260,1995,5,19,L. G. Crabo,LGCC,formerly Nedra dora,US:53067,28437
@@ -28685,7 +28685,7 @@ rhizagrotis-albalis,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Cro
 lygephila-victoria,specimen,45.813,-120.53,WA,Klickitat,Badger Gulch,1160,2000,7,18,J. & S. Shepard,JHS,,US:53039,28684
 euxoa-perexcellens,specimen,42.407,-124.422,OR,Curry,Gold Beach,45,1966,9,8,Kenneth Goeden,OSAC,,US:41015,28685
 catocala-relicta,specimen,46.475,-117.603,WA,Garfield,[Pomeroy],1857,1948,10,3,E. Rerswig,WSU,,US:53023,28686
-drepana-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2728,1917,6,10,O. Huelleman,WFBM,,US:16079,28687
+falcaria-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2728,1917,6,10,O. Huelleman,WFBM,,US:16079,28687
 raphia-frater,specimen,42.17,-118.54,OR,Harney,"Trout Cr., 1st. Xing",4100,1992,6,2,J. & S. Shepard,JHS,,US:41025,28688
 caradrina-camina,specimen,47.5,-119.92,WA,Douglas,Douglas Cr.,1600,2000,9,28,D. A. Rolfs,JHS,,US:53017,28689
 lithophane-innominata,specimen,48.69,-122.49,WA,Whatcom,Chuckanut Bay,328,1995,3,28,L. G. Crabo,LGCC,,US:53073,28690
@@ -28956,7 +28956,7 @@ drasteria-divergens,specimen,47.733,-118.314,WA,Lincoln,"Hawk Cr., E on plateau"
 melipotis-jucunda,specimen,46.602,-120.505,WA,Yakima,Yakima,1188,1970,8,1,E. J. Newcomer,WSU,,US:53077,28955
 heliothodes-diminutiva,specimen,46.42,-117.73,WA,Columbia,Hartsock,2000,1964,7,3,R. E. Miller,JHS,,US:53013,28956
 paonias-excaecata,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2000,9,29,A. V. Z. Brower,OSAC,,US:41003,28957
-drepana-bilineata,specimen,49.183,-119.549,BC,Okanagan-Similkameen,Oliver,991,1953,6,5,D. F. Hardwick,CNC,Shepard notes,CA:5907,28958
+falcaria-bilineata,specimen,49.183,-119.549,BC,Okanagan-Similkameen,Oliver,991,1953,6,5,D. F. Hardwick,CNC,Shepard notes,CA:5907,28958
 malacosoma-californica,specimen,47.474,-115.927,ID,Shoshone,Wallace,2728,1918,7,10,O. Huelleman,WFBM,det. F. W. Stehr,US:16079,28959
 arctia-parthenos,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,6,22,J. & S. Shepard,WSU,,CA:5903,28960
 zale-lunata,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,1969,7,4,R. W. Dawson,WSU,,US:53075,28961
@@ -29707,7 +29707,7 @@ spilosoma-vestalis,specimen,43.167,-123.917,OR,Coos,"Coquille, 15mE",838,1965,7,
 xestia-c-nigrum,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW; Firwood Rd.",400,1977,9,28,"S. Jewett, Jr.",OSAC,,US:41005,29706
 euxoa-satis,specimen,42.233,-120.167,OR,Lake,"Lakeview, 10mE",6053,1965,8,25,Kenneth Goeden,OSAC,,US:41037,29707
 hyalophora-euryalus,specimen,48.21,-119.7,WA,Okanogan,"Monse, 4 mi. NNW",900,1997,5,13,L. G. Crabo,Sight,,US:53047,29708
-drepana-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2728,1916,6,3,O. Huelleman,WFBM,,US:16079,29709
+falcaria-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2728,1916,6,3,O. Huelleman,WFBM,,US:16079,29709
 cucullia-antipoda,specimen,42.45,-118.86,OR,Harney,Sixmile L.; Catlow Valley,4600,1994,6,4,Troubridge/Crabo,WSU,,US:41025,29710
 anagrapha-falcifera,specimen,46.52,-119.348,WA,Benton,"Columbia R., W sand dunes",482,1995,6,29,R. S. Zack,WSU,R. S. Zack id,US:53005,29711
 abagrotis-reedi,specimen,42.442,-123.729,OR,Josephine,Chrome Ridge,3779,2003,8,25,L. G. Crabo,LGCC,,US:41033,29712
@@ -30219,7 +30219,7 @@ condica-discistriga,specimen,46.065,-118.352,WA,Walla Walla,Walla Walla,1000,195
 perigonica-angulata,specimen,42.233,-123.661,OR,Josephine,Eight Dollar Mt. Rd.,1423,2005,5,10,L. G. Crabo,LGCC,,US:41033,30218
 melipotis-jucunda,specimen,46.5228,-119.3532,WA,Benton,"Hanford Dunes, north Energy NW power plant",496,2002,7,5,D. Strenge,DLSC,,US:53005,30219
 hadena-siskiyou,specimen,42.233,-123.661,OR,Josephine,Eight Dollar Mt. Rd.,1423,2005,5,10,L. G. Crabo,LGCC,,US:41033,30220
-drepana-bilineata,specimen,49.05,-123.883,BC,Nanaimo,"Nanaimo, 7mS",136,1960,8,11,D. F. Hardwick,CNC,Shepard notes,CA:5921,30221
+falcaria-bilineata,specimen,49.05,-123.883,BC,Nanaimo,"Nanaimo, 7mS",136,1960,8,11,D. F. Hardwick,CNC,Shepard notes,CA:5921,30221
 graphiphora-augur,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1999,7,9,A. V. Z. Brower,OSAC,,US:41003,30222
 lophocampa-maculata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1959,7,26,Don Frechin,WSU,,US:53035,30223
 apamea-inficita,specimen,48.84,-121.68,WA,Whatcom,Artist's Point,4765,1994,8,11,L. G. Crabo,LGCC,,US:53073,30224
@@ -30689,7 +30689,7 @@ abagrotis-apposita,specimen,45.117,-117.7,OR,Union,OSU Hall Cr. Ranch,3800,1997,
 autographa-mappa,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1950,7,15,O. Huelleman,WFBM,,US:16079,30688
 mamestra-configurata,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,2001,6,3,D. Strenge,DLSC,,US:53005,30689
 euxoa-perexcellens,specimen,44.425,-121.833,OR,Jefferson,Santiam Pass,4877,1995,9,19,,OSAC,,US:41031,30690
-drepana-bilineata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,5,20,Don Frechin,WSU,,US:53035,30691
+falcaria-bilineata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,5,20,Don Frechin,WSU,,US:53035,30691
 catocala-californica,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1943,9,9,O. Huelleman,WFBM,,US:16079,30692
 schizura-ipomaeae,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1957,6,24,R. E. Miller,WFBM,,US:53013,30693
 xylena-cineritia,specimen,46.839,-117.025,ID,Latah,Viola,2624,1959,9,25,Fred Proshold,WFBM,,US:16057,30694
@@ -30705,7 +30705,7 @@ dasychira-grisefacta,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1967,7,1,E. L
 zale-lunata,specimen,48.666,-122.484,WA,Whatcom,Chuckanut Bay,192,1941,7,,,WWUC,,US:53073,30704
 pheosidea-elegans,specimen,52.13,-122.15,BC,Cariboo,Williams Lake,1884,1996,7,11,A. I. Fischer,JHS,,CA:5941,30705
 schinia-meadi,specimen,46.534,-119.364,WA,Benton,"Columbia R., W sand dunes",505,1997,5,22,R. S. Zack,WSU,R. S. Zack id,US:53005,30706
-drepana-bilineata,specimen,45.391,-122.611,OR,Clackamas,Jennings Lodge,80,1934,8,12,"S. Jewett, Jr.",OSAC,,US:41005,30707
+falcaria-bilineata,specimen,45.391,-122.611,OR,Clackamas,Jennings Lodge,80,1934,8,12,"S. Jewett, Jr.",OSAC,,US:41005,30707
 datana-californica,specimen,47.186,-122.292,WA,Pierce,Puyallup,40,1928,6,25,W. W. Baker,WSU,"Clarke, 1929; Shepard notes",US:53053,30708
 euxoa-munis,specimen,45.117,-117.7,OR,Union,OSU Hall Cr. Ranch,3800,1997,8,30,,OSAC,,US:41061,30709
 apantesis-ornata,specimen,46.73,-120.82,WA,Yakima,Oak Cr.,1800,1988,5,15,Jon H. Shepard,JHS,,US:53077,30710
@@ -31271,7 +31271,7 @@ euxoa-brevipennis,specimen,48.033,-119.667,WA,Okanogan,"Bridgeport, 1mNE",900,19
 sphinx-vashti,specimen,43.682,-119.37,OR,Harney,Bald Butte,5755,1981,6,28,M. M. Furniss,WFBM,Ochochoo NF,US:41025,31270
 caenurgina-caerulea,specimen,47.45,-122.91,WA,Mason,"Belfair, 4mW; Elfendahl Pass Rd.",343,1988,5,6,L. G. Crabo,LGCC,,US:53045,31271
 apantesis-ornata,specimen,44.74,-116.81,ID,Washington,East Brownlee Cr.,4200,2009,6,28,Jon H. Shepard,JHS,,US:16087,31272
-drepana-bilineata,specimen,49.333,-117.682,BC,Central Kootenay,Robson,1435,1939,4,19,H. R. Foxlee,UBC,"Foxlee, 1945",CA:5903,31273
+falcaria-bilineata,specimen,49.333,-117.682,BC,Central Kootenay,Robson,1435,1939,4,19,H. R. Foxlee,UBC,"Foxlee, 1945",CA:5903,31273
 agrotis-vancouverensis,specimen,44.841,-122.871,OR,Marion,Aumsville,366,1968,7,2,Kenneth Goeden,OSAC,,US:41047,31274
 habrosyne-scripta,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1960,7,31,Don Frechin,WSU,,US:53035,31275
 papestra-brenda,specimen,48.59,-120.51,WA,Okanogan,Klipchuck C. G.,3073,1995,5,7,L. G. Crabo,LGCC,Papestra difficult,US:53047,31276
@@ -31570,7 +31570,7 @@ chelis-brucei,specimen,48.74,-120.69,WA,Okanogan,Slate Pk.,6175,1988,7,7,L. G. C
 leucania-commoides,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,7,23,J. Thompson,WSU,,US:53075,31569
 autographa-corusca,specimen,48.378,-124.613,WA,Clallam,Neah Bay,7,1960,8,29,R. E. Miller,WFBM,,US:53009,31570
 lygephila-victoria,specimen,44.971,-115.731,ID,Valley,Krassel RS,3980,1962,8,12,M. M. Furniss,WFBM,,US:16085,31571
-protoperigea-anotha,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5563,2007,7,17,L. G. Crabo,LGCC,,US:53051,31572
+caradrina-anotha,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5563,2007,7,17,L. G. Crabo,LGCC,,US:53051,31572
 malacosoma-californica,specimen,46.207,-119.768,WA,Benton,Prosser; Irrigation Exper. Sta.,665,1956,7,13,,WSU,,US:53005,31573
 mesogona-olivata,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1958,9,8,R. E. Miller,JHS,,US:53013,31574
 lophocampa-maculata,specimen,44.46,-121.64,OR,Jefferson,Camp Sherman,3000,1987,7,6,H. E. Rice,JHS,,US:41031,31575
@@ -32264,7 +32264,7 @@ admetovis-similaris,specimen,46.72,-120.81,WA,Yakima,Oak Cr.,1800,1988,5,15,Jon 
 raphia-frater,specimen,50.758,-113.127,AB,,"Arrowwood, 3kmNE of, East Arrowwood Coulee",2929,2007,6,1,C. D. Bird,CDBC,Schmidt File; subspecies: pallula,,32263
 syngrapha-viridisigma,specimen,47.64,-122.828,WA,Kitsap,Seabeck,23,1961,8,19,R. E. Miller,WFBM,as A. selecta on Miller cards,US:53035,32264
 proserpinus-lucidus,specimen,46.737,-116.769,ID,Latah,Troy,2400,1968,5,27,Jim Goze,WFBM,,US:16057,32265
-protoperigea-anotha,specimen,53.94,-119.18,AB,,"Mt. Hamell, S slope",3489,1994,7,27,Crabo/Troubridge,LGCC,,,32266
+caradrina-anotha,specimen,53.94,-119.18,AB,,"Mt. Hamell, S slope",3489,1994,7,27,Crabo/Troubridge,LGCC,,,32266
 notodonta-pacifica,specimen,48.067,-122.788,WA,Jefferson,Fort Townsend SP,50,1971,6,14,,WSU,,US:53031,32267
 hyles-lineata,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,6,29,J. Thompson,WSU,,US:53075,32268
 euxoa-plagigera,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5563,2002,8,19,L. G. Crabo,LGCC,,US:53051,32269
@@ -32459,7 +32459,7 @@ hypena-palparia,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,19
 orthosia-segregata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2395,1990,5,10,J. H. Shepard,WSU,,CA:5903,32458
 drasteria-divergens,specimen,47.9,-118.495,WA,Ferry,"Jim Mtn., 1.5mS",2075,2005,7,6,L. & E. Crabo,LGCC,socia,US:53019,32459
 hemaris-thetis,specimen,48.79,-123.63,BC,Cowichan Valley,Mount Tzuhalem,964,1995,5,28,Jon H. Shepard,JHS,,CA:5919,32460
-drepana-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1987,5,24,D. W. Knight,JHS,,CA:5903,32461
+falcaria-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1987,5,24,D. W. Knight,JHS,,CA:5903,32461
 parabagrotis-sulinaris,specimen,48.16,-122.65,WA,Island,Keystone Spit/Ft. Casey SP,0,1997,6,14,L. G. Crabo,LGCC,,US:53029,32462
 melipotis-jucunda,specimen,46.702,-119.605,WA,Grant,Saddle Mts. NWL Refuge,486,2002,7,5,R. S. Zack,WSU,,US:53025,32463
 hyalophora-euryalus,specimen,48,-119.62,WA,Okanogan,"Bridgeport SP, W",1100,1997,5,13,L. G. Crabo,LGCC,,US:53047,32464
@@ -32697,7 +32697,7 @@ catocala-junctura,specimen,48.051,-119.902,WA,Okanogan,Pateros,776,1959,7,28,And
 mamestra-configurata,specimen,46.674,-119.37,WA,Franklin,Wahluke Wildlife area,726,2002,8,9,R. S. Zack,WSU,BL light site,US:53021,32696
 acronicta-cyanescens,specimen,42.74,-118.64,OR,Harney,Fish L.,7400,1988,7,19,J. & S. Shepard,JHS,,US:41025,32697
 trichopolia-curtica,specimen,46.207,-119.768,WA,Benton,Prosser; Irrigation Exper. Sta.,665,1956,9,14,,WSU,,US:53005,32698
-protoperigea-posticata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2003,8,29,L. G. Crabo,LGCC,,US:41045,32699
+caradrina-posticata,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2003,8,29,L. G. Crabo,LGCC,,US:41045,32699
 andropolia-theodori,specimen,44.22,-122.24,OR,Lane,"Blue & Lookout Crs., nr.",2067,1991,9,11,L. G. Crabo,WSU,,US:41039,32700
 drasteria-perplexa,specimen,48.005,-119.627,WA,Okanogan,Bridgeport S. P.,1113,2006,6,22,L. G. Crabo,LGCC,,US:53047,32701
 euplexia-benesimilis,specimen,48.65,-122.76,WA,San Juan,Orcas Island; Doe Bay 0.8mNE,460,1996,7,19,L. & E. Crabo,WSU,,US:53055,32702
@@ -32842,7 +32842,7 @@ abagrotis-hermina,specimen,42.776,-114.703,ID,Gooding,Wendell,3433,1963,8,16,R. 
 hemaris-thetis,specimen,44.41,-122.07,OR,Linn,Lost Prairie,3342,1983,7,1,H. E. Rice,JHS,,US:41043,32841
 sphinx-drupiferarum,specimen,47.5,-119.92,WA,Douglas,Douglas Cr.,1600,2000,6,2,J. & S. Shepard,JHS,,US:53017,32842
 caradrina-meralis,specimen,47.963,-118.391,WA,Ferry,Sixmile Cr.,1824,1999,8,6,L. G. Crabo,LGCC,,US:53019,32843
-protoperigea-posticata,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,9,23,R. S. Zack,WSU,,US:53075,32844
+caradrina-posticata,specimen,46.584,-117.214,WA,Whitman,Kramer Prairie; 3 mi. NW Colton,2846,2004,9,23,R. S. Zack,WSU,,US:53075,32844
 apamea-cuculliformis,specimen,48.69,-122.49,WA,Whatcom,Chuckanut Bay,115,1993,6,24,L. G. Crabo,WSU,,US:53073,32845
 hypena-californica,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1963,3,21,R. E. Stecker,WFBM,,US:16057,32846
 nephelodes-minians,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1955,9,18,R. E. Miller,WFBM,,US:53013,32847
@@ -32860,7 +32860,7 @@ spilosoma-vestalis,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1984,6
 nadata-gibbosa,specimen,44.74,-116.81,ID,Washington,East Brownlee Cr.,4200,2009,6,28,Jon H. Shepard,JHS,,US:16087,32859
 pachysphinx-occidentalis,specimen,44.633,-121.129,OR,Jefferson,Madras,2240,1979,7,25,G. L. Parsons,OSAC,darker phenotype,US:41031,32860
 proxenus-miranda,specimen,47.05,-124.09,WA,Grays Harbor,North Bay bog; Grays Harbor,16,1997,7,10,L. G. Crabo,WSU,,US:53027,32861
-protoperigea-anotha,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2007,7,16,L. G. Crabo,LGCC,,US:53037,32862
+caradrina-anotha,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2007,7,16,L. G. Crabo,LGCC,,US:53037,32862
 lacanobia-subjuncta,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,6,29,J. & S. Shepard,WSU,,CA:5903,32863
 euthyatira-lorata,specimen,45.72,-121.48,WA,Klickitat,White Salmon,328,1990,4,4,L. G. Crabo,LGCC,,US:53039,32864
 acronicta-insularis,specimen,46.251,-119.901,WA,Yakima,Grandview,800,1958,5,15,C. S. Crawford,WSU,,US:53077,32865
@@ -33445,7 +33445,7 @@ idia-americalis,specimen,42.32,-123.77,OR,Josephine,Illinois R. Rd.; 1 mi. NNW N
 protogygia-postera,specimen,42.013,-118.594,OR,Harney,T41S R35E s.15,4174,1979,7,30,Smith/Cobb,OSAC,,US:41025,33444
 drepana-arcuata,specimen,47.3,-122.12,WA,King,Neilson L.,404,1994,4,16,R. L. Crawford,Burke,as Holm L.,US:53033,33445
 proserpinus-lucidus,specimen,42.327,-122.874,OR,Jackson,Medford,1383,1934,2,17,,OSAC,,US:41029,33446
-drepana-bilineata,specimen,49.5,-117.28,BC,Central Kootenay,Nelson,1774,1966,8,9,J. Shepard,JHS,,CA:5903,33447
+falcaria-bilineata,specimen,49.5,-117.28,BC,Central Kootenay,Nelson,1774,1966,8,9,J. Shepard,JHS,,CA:5903,33447
 neoligia-invenusta,specimen,47.881,-118.359,WA,Ferry,Ninemile-Hellgate Rd.; opp. Mouth Spokane R.,1297,1999,8,7,L. & E. Crabo,LGCC,,US:53019,33448
 pyrrharctia-isabella,specimen,43.785,-116.942,ID,Canyon,Parms,2224,1928,8,1,,WFBM,,US:16027,33449
 cucullia-antipoda,specimen,48,-119.62,WA,Okanogan,"Bridgeport SP, W",1100,1996,6,15,L. G. Crabo,WSU,,US:53047,33450
@@ -33615,7 +33615,7 @@ apamea-amputatrix,specimen,46.704,-119.615,WA,Grant,Saddle Mts. NWL Refuge,493,2
 acronicta-strigulata,specimen,46.4597,-119.7208,WA,Benton,"Snively Canyon, lower springs",1326,1999,7,15,D. Strenge,DLSC,,US:53005,33614
 cerastis-enigmatica,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,6,8,D. N. Ross,OSAC,,US:41039,33615
 euxoa-infausta,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,2500,2000,7,31,,OSAC,,US:41039,33616
-drepana-bilineata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1962,6,26,Don Frechin,WSU,,US:53035,33617
+falcaria-bilineata,specimen,47.613,-122.596,WA,Kitsap,Illahee,60,1962,6,26,Don Frechin,WSU,,US:53035,33617
 dasychira-vagans,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1999,6,23,A. V. Z. Brower,OSAC,,US:41003,33618
 notodonta-pacifica,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1961,6,17,Phyllis Strecker,WFBM,,US:16057,33619
 euxoa-rufula,specimen,51.77,-116.56,AB,,"E bank Mistaya R., bogs",5784,1994,7,25,Crabo/Troubridge,LGCC,,,33620
@@ -33630,7 +33630,7 @@ euxoa-infausta,specimen,47.62,-120.45,WA,Chelan,"Chumstick Mtn., 2mS",4033,2003,
 euxoa-brevipennis,specimen,42.45,-118.86,OR,Harney,"Skull Cr., 3.8 mi. N",4776,1997,9,26,Crabo/Troubridge,LGCC,,US:41025,33629
 caradrina-morpheus,specimen,48.69,-122.49,WA,Whatcom,Chuckanut Bay,328,1993,6,13,L. G. Crabo,LGCC,,US:53073,33630
 xestia-xanthographa,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1987,9,1,E. L. Griepentrog,OSAC,,US:41007,33631
-drepana-bilineata,specimen,44.615,-123.316,OR,Benton,"Corvallis, 5mNW - Oak Cr. Gate",500,1962,8,28,N. McFarland,OSAC,,US:41003,33632
+falcaria-bilineata,specimen,44.615,-123.316,OR,Benton,"Corvallis, 5mNW - Oak Cr. Gate",500,1962,8,28,N. McFarland,OSAC,,US:41003,33632
 abagrotis-placida,specimen,48.668,-117.48,WA,Pend Oreille,Tiger Mdws.,3241,1998,7,17,L. & A. Crabo,LGCC,,US:53051,33633
 euxoa-simulata,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,9,2,L. G. Crabo,LGCC,,US:53077,33634
 agrochola-pulchella,specimen,48.68,-122.48,WA,Whatcom,"Chuckanut Mt., W slope",958,1995,8,19,L. G. Crabo,LGCC,,US:53073,33635
@@ -33659,7 +33659,7 @@ euxoa-rockburnei,specimen,42.162,-118.608,OR,Harney,Little Cottonwood Cr.,4371,2
 spilosoma-vestalis,specimen,42.327,-122.874,OR,Jackson,Medford,1380,1965,6,10,Kenneth Goeden,ODAC,,US:41029,33658
 spilosoma-vestalis,specimen,45.3,-122.774,OR,Clackamas,Wilsonville,149,1964,6,10,Kenneth Goeden,ODAC,,US:41005,33659
 euxoa-olivalis,specimen,47.664,-119.62,WA,Douglas,"Jameson L., SW end",1879,2006,6,21,L. G. Crabo,LGCC,,US:53017,33660
-protoperigea-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,9,2,L. G. Crabo,LGCC,,US:53077,33661
+caradrina-anotha,specimen,46.79,-121.09,WA,Yakima,Bethel Ridge,3554,1997,9,2,L. G. Crabo,LGCC,,US:53077,33661
 idia-suffusalis,photograph,47.7,-116.79,ID,Kootenai,Coeur d' Alene,2235,2013,7,,Erin K. L.,photo,photo ID Lars Crabo,US:16055,33662
 euxoa-rufula,specimen,47.08,-121.08,WA,Kittitas,Quartz Mt.,5827,1989,9,13,L. G. Crabo,LGCC,,US:53037,33663
 syngrapha-orophila,specimen,50.76,-122.16,BC,Squamish-Lillooet,Mission Ridge,6643,1994,7,15,Crabo/Troubridge,LGCC,,CA:5931,33664
@@ -33976,7 +33976,7 @@ drasteria-sabulosa,specimen,44.74,-116.81,ID,Washington,East Brownlee Cr.,4200,2
 spodoptera-praefica,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1959,8,5,R. E. Miller,JHS,,US:53013,33975
 lacinipolia-patalis,specimen,48.72,-122.49,WA,Whatcom,"Sehome Hill, S slope",180,1994,5,16,L. G. Crabo,WSU,,US:53073,33976
 sphinx-sequoiae,specimen,44.37,-121.13,OR,Deschutes,Smith Rock SP,2840,1993,6,11,L. G. Crabo,WSU,,US:41017,33977
-drepana-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1991,7,10,J. Shepard,RBCM,Shepard notes,CA:5903,33978
+falcaria-bilineata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2837,1991,7,10,J. Shepard,RBCM,Shepard notes,CA:5903,33978
 apantesis-nevadensis,specimen,47.648,-117.091,WA,Spokane,Liberty Lake,2049,1957,8,12,C. S. Crawford,WSU,,US:53063,33979
 drasteria-sabulosa,specimen,45.9,-120.68,WA,Klickitat,Munson Prairie,2461,1996,7,16,L. & E. Crabo,WSU,,US:53039,33980
 heliothis-phloxiphaga,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1955,6,6,R. E. Miller,WFBM,,US:53013,33981
@@ -34037,7 +34037,7 @@ tolype-distincta,specimen,44.771,-122.564,OR,Marion,"Mill City, 5mW",650,1969,8,
 autographa-californica,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,9,16,J. & S. Shepard,WSU,,CA:5903,34036
 pronoctua-typica,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3546,2002,7,12,L. & E. Crabo,LGCC,,CA:5933,34037
 euxoa-satis,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1967,1999,6,12,L. & E. Crabo,LGCC,,US:53017,34038
-drepana-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1906,9,10,G. W. Taylor,CNC,"Blackmore, 1927",CA:5921,34039
+falcaria-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1906,9,10,G. W. Taylor,CNC,"Blackmore, 1927",CA:5921,34039
 schinia-oleagina,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2001,8,21,L. G. Crabo,LGCC,,US:41045,34040
 lygephila-victoria,specimen,46.32,-117.97,WA,Columbia,Dayton,1620,1963,7,19,R. E. Miller,JHS,,US:53013,34041
 annaphila-arvalis,specimen,46.238,-117.896,WA,Columbia,Dayton,2200,1962,3,14,R. E. Miller,WSU,,US:53013,34042
@@ -34548,7 +34548,7 @@ pleromelloida-conserta,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1961,4,15,W
 setagrotis-pallidicollis,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5563,2002,8,19,L. G. Crabo,LGCC,,US:53051,34547
 heliothis-phloxiphaga,specimen,46.5074,-119.6981,WA,Benton,Rattlesnake Springs Crossing,675,2001,7,29,D. L. Strenge,DLSC,,US:53005,34548
 catocala-semirelicta,specimen,44.517,-117.918,OR,Baker,Pine Cr.,4082,2001,8,22,L. G. Crabo,LGCC,,US:41001,34549
-hypercompe-permaculata,specimen,49,-115.05,BC,East Kootenay,"Roosville, 3mN",2901,1991,7,6,J. & S. Shepard,JHS,,CA:5901,34550
+hypsocompe-permaculata,specimen,49,-115.05,BC,East Kootenay,"Roosville, 3mN",2901,1991,7,6,J. & S. Shepard,JHS,,CA:5901,34550
 trichordestra-liquida,specimen,48.65,-122.83,WA,San Juan,"Mt. Constitution, SW slope; Moran SP",813,1997,6,9,L. G. Crabo,LGCC,,US:53055,34551
 panthea-virginarius,specimen,47.581,-116.69,ID,Kootenai,Cour d' Alene Mt.,4240,,,,K. C. Volker,WFBM,"em. ex A. grandis; March 8, 1978",US:16055,34552
 melipotis-jucunda,specimen,43.284,-111.216,ID,Bonneville,Bear Cr. nr. Palisades Res,5600,2004,7,17,F. W. & J. W. Merickel,WFBM,,US:16019,34553
@@ -34830,7 +34830,7 @@ sympistis-columbia,specimen,44.21,-122.1,OR,Lane,Frissel Pt.,4803,1996,9,9,L. & 
 epidemas-obscurus,specimen,46.4597,-119.7208,WA,Benton,"Snively Canyon, lower springs",1326,1999,9,30,D. Strenge,DLSC,,US:53005,34829
 eupsilia-tristigmata,specimen,46.492,-120.95,WA,Yakima,"Tampico, 6.5mSW",2740,2004,4,13,P. J. Landolt,WSU,,US:53077,34830
 hemileuca-eglanterina,specimen,44.567,-121.25,OR,Jefferson,"Culver, 5mN",2584,1991,8,1,H. E. Rice,OSAC,denutata,US:41031,34831
-protoperigea-anotha,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1996,7,20,J. & S. Shepard,JHS,,CA:5903,34832
+caradrina-anotha,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,1996,7,20,J. & S. Shepard,JHS,,CA:5903,34832
 hemaris-thetis,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,5,19,D. W. Knight,JHS,,CA:5903,34833
 spilosoma-vagans,specimen,42.264,-112.765,ID,Oneida,Twin Springs,5164,1972,6,6,T. L. Whitworth,EMUS,,US:16071,34834
 sideridis-fuscolutea,specimen,46.521,-119.35,WA,Benton,Handford Dunes,495,1996,4,26,R. S. Zack,WSU,,US:53005,34835
@@ -35181,7 +35181,7 @@ phryganidia-californica,specimen,44.22,-122.23,OR,Lane,H. J. Andrews Exp. For.,1
 raphia-frater,specimen,53.302,-113.334,AB,,"Edmonton, Whitemud Ck",2409,1997,6,10,B. C. Schmidt,CNC,Schmidt File,,35180
 euxoa-terrenus,specimen,44.677,-121.719,OR,Jefferson,"Mt. Jefferson, nr.",5327,1994,7,12,,OSAC,,US:41031,35181
 sympistis-major,specimen,48.86,-117.08,WA,Pend Oreille,Salmo L. O.,5563,2007,7,17,L. G. Crabo,LGCC,,US:53051,35182
-drepana-bilineata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2005,7,25,J. Davis,,https://bugguide.net/node/view/42747; photo ID by L. Crabo,US:53059,35183
+falcaria-bilineata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2005,7,25,J. Davis,,https://bugguide.net/node/view/42747; photo ID by L. Crabo,US:53059,35183
 drasteria-hudsonica,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1989,6,6,D. W. Knight,JHS,,CA:5903,35184
 pyrrharctia-isabella,specimen,47.681,-117.282,WA,Spokane,Millwood,1980,1957,6,7,C. S. Crawford,WSU,,US:53063,35185
 caenurgina-erechtea,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1952,8,23,H. C. Manis,WFBM,,US:16057,35186
@@ -35403,7 +35403,7 @@ copablepharon-absidum,specimen,46.98,-119.45,WA,Grant,"Potholes Res., W; sanddun
 paonias-excaecata,specimen,48.551,-118.232,WA,Ferry,Bangs Mt.,3411,2010,7,9,J. & S. Shepard,JHS,,US:53019,35402
 hypena-californica,specimen,48.65,-122.83,WA,San Juan,"Mt. Constitution, SW slope; Moran SP",813,1996,7,20,L. G. Crabo,LGCC,modestoides - pale and blotchy,US:53055,35403
 euxoa-setonia,specimen,42.525,-118.38,OR,Harney,Alvord Well #4,4032,1979,6,19,Lightfoot/Cobb,OSAC,,US:41025,35404
-drepana-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1917,5,26,O. Huelleman,WFBM,,US:16079,35405
+falcaria-bilineata,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1917,5,26,O. Huelleman,WFBM,,US:16079,35405
 hada-sutrina,specimen,48.26,-117.56,WA,Stevens,Chewelah Mt.,4594,2004,6,22,L. & E. Crabo,LGCC,,US:53065,35406
 sphinx-vashti,specimen,46.839,-117.025,ID,Latah,Viola,2624,1961,6,7,Dorthy Gibbs,WSU,,US:16057,35407
 egira-curialis,specimen,46.207,-119.768,WA,Benton,Prosser; Irrigation Exper. Sta.,665,1997,4,17,P. J. Landolt,WSU,,US:53005,35408
@@ -35686,7 +35686,7 @@ xestia-oblata,specimen,50.76,-122.16,BC,Squamish-Lillooet,Mission Ridge,6643,199
 xylena-cineritia,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1971,4,20,W. F. Barr,WFBM,,US:16057,35685
 acronicta-insita,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1956,6,27,E. J. D[ornfeld].,OSAC,,US:41003,35686
 raphia-frater,specimen,48.134,-120.004,WA,Okanogan,"Methow R., NE Methow",1138,2013,6,17,J. & S. Shepard,JHS,,US:53047,35687
-drepana-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,8,27,J. & S. Shepard,JHS,,CA:5903,35688
+falcaria-bilineata,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,8,27,J. & S. Shepard,JHS,,CA:5903,35688
 leptarctia-californiae,specimen,48.07,-120.019,WA,Okanogan,Black Canyon,1240,1936,5,10,A. Anderson,WSU,,US:53047,35689
 hyalophora-euryalus,specimen,48.88,-123.53,BC,Capital,"St. Mary L., Saltspring Is.",216,1995,5,8,Jon H. Shepard,JHS,,CA:5917,35690
 euxoa-obeliscoides,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1977,8,16,Victor McHenry,OSAC,,US:41031,35691
@@ -36601,9 +36601,9 @@ peridroma-saucia,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW; Firwood
 proxenus-miranda,specimen,45.622,-116.468,ID,Idaho,Pittsburg Landing,1476,1992,6,23,F. W. Merickel,WFBM,,US:16049,36600
 euxoa-infausta,specimen,46.12,-117.33,WA,Asotin,"Anatone, 11 mi. W",5062,2000,7,8,L. & E. Crabo,LGCC,,US:53003,36601
 orthosia-hibisci,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,5,1,J. & S. Shepard,WSU,,CA:5903,36602
-drepana-bilineata,specimen,44.17,-123.579,OR,Lane,"Triangle Lake, nr.",692,1997,6,6,,OSAC,,US:41039,36603
+falcaria-bilineata,specimen,44.17,-123.579,OR,Lane,"Triangle Lake, nr.",692,1997,6,6,,OSAC,,US:41039,36603
 xestia-xanthographa,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1987,9,9,E. L. Griepentrog,OSAC,,US:41007,36604
-hypercompe-permaculata,specimen,51.835,-113.011,AB,,"Tolman Bridge, e. side",2329,2003,7,24,A. V. Z. Brower,OSAC,,,36605
+hypsocompe-permaculata,specimen,51.835,-113.011,AB,,"Tolman Bridge, e. side",2329,2003,7,24,A. V. Z. Brower,OSAC,,,36605
 euxoa-atristrigata,specimen,44.764,-121.265,OR,Jefferson,Warm Springs,1533,1953,9,9,"S. Jewett, Jr.",OSAC,,US:41031,36606
 agrochola-purpurea,specimen,47.26,-121.07,WA,Kittitas,SE Cle Elum L,2227,1987,9,27,L. G. Crabo,LGCC,,US:53037,36607
 eupsilia-tristigmata,specimen,46.731,-117.179,WA,Whitman,Pullman,2360,1891,4,27,C. V. Piper,WSU,,US:53075,36608
@@ -36751,7 +36751,7 @@ leucania-anteroclara,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1954,7,5,H. C
 arctia-virginalis,specimen,47.474,-115.927,ID,Shoshone,Wallace,2744,1919,6,8,O. Huelleman,WFBM,,US:16079,36750
 euxoa-bochus,specimen,43.774,-117.736,OR,Malheur,Namorf,2637,2001,8,21,L. G. Crabo,LGCC,,US:41045,36751
 hyles-gallii,specimen,46.731,-117.179,WA,Whitman,Pullman,2400,,,,,WSU,"em.; May 31, 1943",US:53075,36752
-drepana-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,6,8,D. W. Knight,JHS,,CA:5903,36753
+falcaria-bilineata,specimen,49.1,-116.45,BC,Central Kootenay,Erickson,2650,1982,6,8,D. W. Knight,JHS,,CA:5903,36753
 caradrina-camina,specimen,44.517,-117.918,OR,Baker,Pine Cr.,4082,2001,8,22,L. G. Crabo,LGCC,,US:41001,36754
 psammopolia-arietis,specimen,46.6,-124.05,WA,Pacific,Leadbetter Point;North Beach Penn.,20,1999,8,12,L. G. Crabo,LGCC,,US:53049,36755
 nycteola-cinereana,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,5,2,J. & S. Shepard,WSU,,CA:5903,36756
@@ -36825,7 +36825,7 @@ sphinx-vashti,specimen,45.117,-117.7,OR,Union,OSU Hall Cr. Ranch,3800,1996,6,21,
 clemensia-umbrata,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW",400,1988,7,31,"S. G. Jewett, Jr.",OSAC,,US:41005,36824
 xylomoia-indirecta,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1953,8,5,W. F. Barr,WFBM,,US:16057,36825
 catocala-unijuga,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1990,9,5,J. B. Johnson,WFBM,,US:16057,36826
-hypercompe-permaculata,specimen,49.7,-112.816,AB,,Lethbridge,2984,1945,7,,G. A. Hobbs,OSAC,,,36827
+hypsocompe-permaculata,specimen,49.7,-112.816,AB,,Lethbridge,2984,1945,7,,G. A. Hobbs,OSAC,,,36827
 pleromelloida-cinerea,specimen,46.733,-116.999,ID,Latah,Moscow,2560,,,,M. M. Furniss,WFBM,"em. Ex. Amelanchier alnifolia; September 16, 1981",US:16057,36828
 hypena-humuli,specimen,49.53,-117.42,BC,Central Kootenay,Sproule Cr.,2400,2006,5,22,J. & S. Shepard,JHS,,CA:5903,36829
 acronicta-grisea,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1998,6,10,J. & S. Shepard,WSU,,CA:5903,36830
@@ -37877,7 +37877,7 @@ heliocheilus-paradoxus,specimen,43.417,-113.517,ID,Butte,Craters of the Moon NM,
 euthyatira-lorata,specimen,47.356,-122.067,WA,King,Cranmar Cr.,455,1992,4,23,R. L. Crawford,Burke,Shepard notes,US:53033,37876
 epidemas-obscurus,specimen,46.733,-116.999,ID,Latah,Moscow,2560,1930,10,3,Paul Rice,WFBM,,US:16057,37877
 papestra-invalida,specimen,47.6,-120.49,WA,Chelan,Derby Cyn.,2744,2004,6,21,L. & E. Crabo,LGCC,Papestra difficult,US:53007,37878
-protoperigea-umbricata,specimen,46.695,-121.111,WA,Yakima,Soup Cr.: Bethel Ridge,3772,2001,8,20,L. G. Crabo,LGCC,,US:53077,37879
+caradrina-umbricata,specimen,46.695,-121.111,WA,Yakima,Soup Cr.: Bethel Ridge,3772,2001,8,20,L. G. Crabo,LGCC,,US:53077,37879
 apamea-amputatrix,specimen,47.074,-121.061,WA,Kittitas,Quartz Mt.,5324,2005,7,14,Crabo/Coughlin,LGCC,,US:53037,37880
 caenurgina-erechtea,specimen,46.602,-120.505,WA,Yakima,Yakima,1188,1953,7,27,B. P. Lanchester,WSU,,US:53077,37881
 arctia-virginalis,specimen,46.857,-122.852,WA,Thurston,Tenino Prairie,290,,,,D. Frechin,WSU,"em.; June 13, 1960",US:53067,37882
@@ -38709,7 +38709,7 @@ raphia-frater,specimen,48.72,-120.668,WA,Okanogan,Harts Pass,6198,1968,7,5,C. W.
 raphia-frater,specimen,46.731,-120.7,WA,Yakima,Naches,1473,1939,7,10,L. R. S.,OSAC,subspecies: pallula,US:53077,38708
 acronicta-insita,specimen,44.593,-123.404,OR,Benton,Blakesley Cr.,984,2000,6,29,A. V. Z. Brower,OSAC,,US:41003,38709
 acronicta-insita,specimen,44.565,-123.261,OR,Benton,Corvallis,225,1979,6,24,G. L. Parsons,OSAC,,US:41003,38710
-protoperigea-posticata,specimen,45.899,-120.713,WA,Klickitat,"Hwy. 97, 1.8kmS Jenkins Cr. Rd.",2480,2014,9,3,J. & S. Shepard,JHS,,US:53039,38711
+caradrina-posticata,specimen,45.899,-120.713,WA,Klickitat,"Hwy. 97, 1.8kmS Jenkins Cr. Rd.",2480,2014,9,3,J. & S. Shepard,JHS,,US:53039,38711
 acronicta-insita,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1998,7,15,A. V. Z. Brower,OSAC,,US:41003,38712
 acronicta-insita,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1999,6,29,A. V. Z. Brower,OSAC,,US:41003,38713
 acronicta-insita,specimen,44.583,-123.417,OR,Benton,Woods Cr.,328,1999,7,10,A. V. Z. Brower,OSAC,,US:41003,38714
@@ -47136,27 +47136,27 @@ galgula-partita,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,19
 galgula-partita,specimen,43.838,-123.239,OR,Lane,"Lorane, nr.",681,1995,8,10,,OSAC,,US:41039,47135
 galgula-partita,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1994,8,18,,OSAC,,US:41043,47136
 galgula-partita,specimen,45.3,-122.972,OR,Yamhill,Newberg,176,1964,7,6,Kenneth Goeden,OSAC,,US:41071,47137
-protoperigea-anotha,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,8,1,D. N. Ross,OSAC,,US:41039,47138
-protoperigea-anotha,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,8,2,D. N. Ross,OSAC,,US:41039,47139
-protoperigea-anotha,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,8,29,D. N. Ross,OSAC,,US:41039,47140
-protoperigea-anotha,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1993,8,4,,OSAC,,US:41043,47141
-protoperigea-anotha,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1994,8,18,,OSAC,,US:41043,47142
-protoperigea-anotha,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1995,7,31,,OSAC,,US:41043,47143
-protoperigea-posticata,specimen,44.065,-119.412,OR,Grant,John Day Fossil Bed NM; Sheep Rock Unit,4000,2003,9,18,USNPS,OSAC,,US:41023,47144
-protoperigea-posticata,specimen,44.065,-119.412,OR,Grant,John Day Fossil Bed NM; Sheep Rock Unit,4000,2003,9,23,USNPS,OSAC,,US:41023,47145
-protoperigea-posticata,specimen,43.557,-120.074,OR,Lake,Glass Butte,6384,2009,8,19,,OSAC,,US:41037,47146
-protoperigea-posticata,specimen,45.395,-118.724,OR,Umatilla,Pearson Cr.,2507,1992,9,23,USFS,OSAC,Starkey Exp. For. 4B,US:41059,47147
-protoperigea-umbricata,specimen,44.582,-117.465,OR,Baker,Durkee,2650,1940,8,28,Motley/Post,OSAC,,US:41001,47148
-protoperigea-umbricata,specimen,44.617,-123.317,OR,Benton,"Corvallis, NW; NW 60th St.",400,1994,8,22,N. H. Anderson,OSAC,,US:41003,47149
-protoperigea-umbricata,specimen,44.15,-121.33,OR,Deschutes,"Tumalo-Bend, nr.",3182,1995,8,18,,OSAC,,US:41017,47150
-protoperigea-umbricata,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,8,14,,OSAC,,US:41019,47151
-protoperigea-umbricata,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,8,15,,OSAC,,US:41019,47152
-protoperigea-umbricata,specimen,43.683,-119.448,OR,Harney,"Burns, 9mNW; Skull Cr. Rd.",5060,2010,8,13,USDA,OSAC,,US:41025,47153
-protoperigea-umbricata,specimen,43.542,-119.504,OR,Harney,Riley,4225,1928,7,20,B. G. Thompson,OSAC,       ,US:41025,47154
-protoperigea-umbricata,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1981,8,17,V. & M. McHenry,OSAC,,US:41031,47155
-protoperigea-umbricata,specimen,43.921,-122.812,OR,Lane,"Eugene, 12mSE",640,1969,9,16,Goeden/Tinker,OSAC,,US:41039,47156
-protoperigea-umbricata,specimen,43.833,-117.376,OR,Malheur,"Vale, 12mSW",2570,1970,10,2,K. J. Goeden,OSAC,,US:41045,47157
-protoperigea-umbricata,specimen,44.771,-122.564,OR,Marion,"Mill City, 5mW",650,1969,8,27,C. W. Nelson,OSAC,,US:41047,47158
+caradrina-anotha,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,8,1,D. N. Ross,OSAC,,US:41039,47138
+caradrina-anotha,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,8,2,D. N. Ross,OSAC,,US:41039,47139
+caradrina-anotha,specimen,44.217,-122.233,OR,Lane,H. J. Andrews Exp. For.,1500,1994,8,29,D. N. Ross,OSAC,,US:41039,47140
+caradrina-anotha,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1993,8,4,,OSAC,,US:41043,47141
+caradrina-anotha,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1994,8,18,,OSAC,,US:41043,47142
+caradrina-anotha,specimen,44.402,-121.85,OR,Linn,Santiam Pass,4800,1995,7,31,,OSAC,,US:41043,47143
+caradrina-posticata,specimen,44.065,-119.412,OR,Grant,John Day Fossil Bed NM; Sheep Rock Unit,4000,2003,9,18,USNPS,OSAC,,US:41023,47144
+caradrina-posticata,specimen,44.065,-119.412,OR,Grant,John Day Fossil Bed NM; Sheep Rock Unit,4000,2003,9,23,USNPS,OSAC,,US:41023,47145
+caradrina-posticata,specimen,43.557,-120.074,OR,Lake,Glass Butte,6384,2009,8,19,,OSAC,,US:41037,47146
+caradrina-posticata,specimen,45.395,-118.724,OR,Umatilla,Pearson Cr.,2507,1992,9,23,USFS,OSAC,Starkey Exp. For. 4B,US:41059,47147
+caradrina-umbricata,specimen,44.582,-117.465,OR,Baker,Durkee,2650,1940,8,28,Motley/Post,OSAC,,US:41001,47148
+caradrina-umbricata,specimen,44.617,-123.317,OR,Benton,"Corvallis, NW; NW 60th St.",400,1994,8,22,N. H. Anderson,OSAC,,US:41003,47149
+caradrina-umbricata,specimen,44.15,-121.33,OR,Deschutes,"Tumalo-Bend, nr.",3182,1995,8,18,,OSAC,,US:41017,47150
+caradrina-umbricata,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,8,14,,OSAC,,US:41019,47151
+caradrina-umbricata,specimen,43.306,-122.958,OR,Douglas,"Honey Cr., nr. Glide",1000,1996,8,15,,OSAC,,US:41019,47152
+caradrina-umbricata,specimen,43.683,-119.448,OR,Harney,"Burns, 9mNW; Skull Cr. Rd.",5060,2010,8,13,USDA,OSAC,,US:41025,47153
+caradrina-umbricata,specimen,43.542,-119.504,OR,Harney,Riley,4225,1928,7,20,B. G. Thompson,OSAC,       ,US:41025,47154
+caradrina-umbricata,specimen,44.461,-121.64,OR,Jefferson,Camp Sherman,3000,1981,8,17,V. & M. McHenry,OSAC,,US:41031,47155
+caradrina-umbricata,specimen,43.921,-122.812,OR,Lane,"Eugene, 12mSE",640,1969,9,16,Goeden/Tinker,OSAC,,US:41039,47156
+caradrina-umbricata,specimen,43.833,-117.376,OR,Malheur,"Vale, 12mSW",2570,1970,10,2,K. J. Goeden,OSAC,,US:41045,47157
+caradrina-umbricata,specimen,44.771,-122.564,OR,Marion,"Mill City, 5mW",650,1969,8,27,C. W. Nelson,OSAC,,US:41047,47158
 caradrina-morpheus,specimen,45.35,-122.683,OR,Clackamas,"Oregon City, 4mW; Firwood Rd.",400,1972,7,4,"S. Jewett, Jr.",OSAC,,US:41005,47159
 caradrina-morpheus,specimen,46.133,-123.783,OR,Clatsop,"Astoria, 5mSE",15,1967,7,1,Brown/Goeden,OSAC,,US:41007,47160
 caradrina-morpheus,specimen,45.866,-123.594,OR,Clatsop,Elsie,430,1969,7,2,E. L. Griepentrog,OSAC,,US:41007,47161
@@ -52625,12 +52625,12 @@ spilosoma-vagans,specimen,46.933,-111.91,MT,Lewis & Clark,Wood Siding Gulch,5000
 estigmene-acrea,specimen,47.933,-110.8,MT,Chouteau,"Loma, 12mW",2900,1996,8,5,C. E. Harp,CEH,SS-98,US:30015,52624
 estigmene-acrea,specimen,46.933,-111.91,MT,Lewis & Clark,Wood Siding Gulch,5000,1996,6,3,C. & C. Harp,CEH,SS-96,US:30049,52625
 estigmene-acrea,specimen,43.73,-111.457,ID,Madison,Canyon Cr @ FR #328,6400,1998,7,18,C. E. Harp,CEH,SS-98,US:16065,52626
-hypercompe-permaculata,specimen,43.73,-111.457,ID,Madison,Canyon Cr @ FR #328,6400,1998,7,18,C. E. Harp,CEH,SS-98,US:16065,52627
-hypercompe-permaculata,specimen,45.92,-111.6,MT,Broadwater,I-90 @ Hwy. 287,4750,1996,8,24,C. & C. Harp,CEH,SS-96,US:30007,52628
-hypercompe-permaculata,specimen,47.483,-111.325,MT,Cascade,"Great Falls, Fox Farm Addition",3500,1996,7,17,C. & C. Harp,CEH,SS-96,US:30013,52629
-hypercompe-permaculata,specimen,47.29,-110.479,MT,Judith Basin,Lone Tree Cr.,4230,1996,5,7,C. & C. Harp,CEH,SS-96,US:30045,52630
-hypercompe-permaculata,specimen,46.933,-111.91,MT,Lewis & Clark,"Holter L., nr.",4400,1995,8,12,Chuck Harp,CEH,,US:30049,52631
-hypercompe-permaculata,specimen,46.933,-111.91,MT,Lewis & Clark,Wood Siding Gulch,5000,1996,6,3,C. & C. Harp,CEH,SS-96,US:30049,52632
+hypsocompe-permaculata,specimen,43.73,-111.457,ID,Madison,Canyon Cr @ FR #328,6400,1998,7,18,C. E. Harp,CEH,SS-98,US:16065,52627
+hypsocompe-permaculata,specimen,45.92,-111.6,MT,Broadwater,I-90 @ Hwy. 287,4750,1996,8,24,C. & C. Harp,CEH,SS-96,US:30007,52628
+hypsocompe-permaculata,specimen,47.483,-111.325,MT,Cascade,"Great Falls, Fox Farm Addition",3500,1996,7,17,C. & C. Harp,CEH,SS-96,US:30013,52629
+hypsocompe-permaculata,specimen,47.29,-110.479,MT,Judith Basin,Lone Tree Cr.,4230,1996,5,7,C. & C. Harp,CEH,SS-96,US:30045,52630
+hypsocompe-permaculata,specimen,46.933,-111.91,MT,Lewis & Clark,"Holter L., nr.",4400,1995,8,12,Chuck Harp,CEH,,US:30049,52631
+hypsocompe-permaculata,specimen,46.933,-111.91,MT,Lewis & Clark,Wood Siding Gulch,5000,1996,6,3,C. & C. Harp,CEH,SS-96,US:30049,52632
 pyrrharctia-isabella,specimen,46.933,-111.91,MT,Lewis & Clark,Holter L.,3884,1996,6,3,C. & C. Harp,CEH,SS-96,US:30049,52633
 pyrrharctia-isabella,specimen,46.95,-112.125,MT,Lewis & Clark,"Wolf Creek, 5mSSW",5000,1996,7,6,C. & C. Harp,CEH,SS-96,US:30049,52634
 gnophaela-vermiculata,specimen,48.95,-113.5,MT,Carbon,"Babb, 8mNW H.17",5416,1993,6,17,C. & C. Harp,CEH,SS,US:30009,52635
@@ -53148,7 +53148,7 @@ spilosoma-vagans,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1
 spilosoma-vagans,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,1985,5,5,J. Shepard,RBCM,,CA:5903,53147
 spilosoma-vagans,specimen,45.663,-110.56,MT,Park,Livingston,4501,1970,7,7,R. H. Carcasson,RBCM,,US:30067,53148
 estigmene-acrea,specimen,42.535,-112.081,ID,Bannock,Smith Cyn. Rd.,5900,2003,6,26,R. C. Mower,RBCM,,US:16005,53149
-hypercompe-permaculata,specimen,49.5,-115.766,BC,East Kootenay,Cranbrook,3113,1989,8,28,L. J. Janz,RBCM,,CA:5901,53150
+hypsocompe-permaculata,specimen,49.5,-115.766,BC,East Kootenay,Cranbrook,3113,1989,8,28,L. J. Janz,RBCM,,CA:5901,53150
 gnophaela-latipennis,specimen,44.537,-121.603,OR,Jefferson,Green Ridge,4800,1986,7,11,H. E. Rice,RBCM,,US:41031,53151
 gnophaela-latipennis,specimen,44.537,-121.603,OR,Jefferson,Green Ridge,4800,1988,7,23,H. E. Rice,RBCM,,US:41031,53152
 lophocampa-maculata,specimen,49.066,-121.967,BC,Fraser Valley,Cultus L.,197,1990,7,7,Jon Shepard,RBCM,,CA:5909,53153
@@ -53193,9 +53193,9 @@ spilosoma-vagans,specimen,42.295,-119.824,OR,Lake,"Warner R., 4 m N H. 140",4400
 estigmene-acrea,specimen,43.629,-111.661,ID,Madison,Kelly Canyon,5033,1996,8,11,C. A. Miles,RCM,,US:16065,53192
 estigmene-acrea,specimen,43.6,-111.433,ID,Madison,Middle Fork Smith R.@ H.199,5982,2000,6,22,R. C. Mower,RCM,SS,US:16065,53193
 hyphantria-cunea,specimen,42.535,-112.081,ID,Bannock,Smith Cyn. Rd.,5900,2003,6,26,R. C. Mower,RCM,,US:16005,53194
-hypercompe-permaculata,specimen,46.632,-114.078,MT,Ravalli,Florence,3259,1998,7,17,R. C. Mower,RCM,,US:30081,53195
-hypercompe-permaculata,specimen,46.611,-114.09,MT,Ravalli,Sweeney Cr. Loop,3200,1998,7,17,R. C. Mower,RCM,,US:30081,53196
-hypercompe-permaculata,specimen,46.021,-110.133,MT,Sweet Grass,"Big Timber Cyn., 3.8mS Half Moon Cmgd.",5500,1998,7,20,R. C. Mower,RCM,,US:30097,53197
+hypsocompe-permaculata,specimen,46.632,-114.078,MT,Ravalli,Florence,3259,1998,7,17,R. C. Mower,RCM,,US:30081,53195
+hypsocompe-permaculata,specimen,46.611,-114.09,MT,Ravalli,Sweeney Cr. Loop,3200,1998,7,17,R. C. Mower,RCM,,US:30081,53196
+hypsocompe-permaculata,specimen,46.021,-110.133,MT,Sweet Grass,"Big Timber Cyn., 3.8mS Half Moon Cmgd.",5500,1998,7,20,R. C. Mower,RCM,,US:30097,53197
 pyrrharctia-isabella,specimen,46.767,-113.933,MT,Missoula,Miller Cr.,4112,1998,7,18,R. C. Mower,RCM,,US:30063,53198
 pyrrharctia-isabella,specimen,46.632,-114.078,MT,Ravalli,Florence,3259,1998,7,17,R. C. Mower,RCM,,US:30081,53199
 leptarctia-californiae,specimen,43.629,-111.661,ID,Madison,Kelly Canyon,5033,1979,5,2,C. A. Miles,RCM,,US:16065,53200
@@ -53301,7 +53301,7 @@ dodia-albertae,specimen,53.674,-118.184,AB,,"Hinton, 50kmNW",4866,2000,7,21,Dunn
 spilosoma-vagans,specimen,44.849,-116.898,OR,Baker,Brownlee,2264,1999,6,12,J. Troubridge,UASM,"P. & O., 2009",US:41001,53300
 spilosoma-vagans,specimen,42.233,-123.233,OR,Josephine,Eight Dollar Mt. Rd.,2240,1999,6,15,J. Troubridge,UASM,"P. & O., 2009",US:41033,53301
 estigmene-acrea,specimen,44.849,-116.898,OR,Baker,Brownlee,2264,1999,6,12,J. Troubridge,UASM,"P. & O., 2009",US:41001,53302
-hypercompe-permaculata,specimen,49.082,-111.615,AB,,Writing-on-stone ,2977,2000,6,28,J. Troubridge,UASM,"P. & O., 2009",,53303
+hypsocompe-permaculata,specimen,49.082,-111.615,AB,,Writing-on-stone ,2977,2000,6,28,J. Troubridge,UASM,"P. & O., 2009",,53303
 pyrrharctia-isabella,specimen,49.1,-122.65,BC,Greater Vancouver,Langley,36,1997,5,25,J. Troubridge,UASM,"P. & O., 2009",CA:5915,53304
 hypoprepia-miniata,specimen,50.55,-119.15,BC,North Okanagan,Enderby,1479,1920,8,14,J. Wynne,UBC,,CA:5937,53305
 hypoprepia-miniata,specimen,50.55,-119.15,BC,North Okanagan,Enderby,1479,1920,8,22,W. Downes,UBC,,CA:5937,53306
@@ -53977,11 +53977,11 @@ hyphantria-cunea,specimen,49.533,-115.617,BC,East Kootenay,Rampart Reststop,2700
 hyphantria-cunea,specimen,49.533,-115.617,BC,East Kootenay,Rampart Reststop,2700,2002,7,5,W. D. Nicholson,WDN,,CA:5901,53976
 hyphantria-cunea,specimen,49.533,-115.617,BC,East Kootenay,Rampart Reststop,2700,2003,6,7,W. D. Nicholson,WDN,,CA:5901,53977
 hyphantria-cunea,specimen,49.533,-115.617,BC,East Kootenay,Rampart Reststop,2700,2006,7,1,W. D. Nicholson,WDN,,CA:5901,53978
-hypercompe-permaculata,specimen,50.167,-115.85,BC,East Kootenay,Columbia L. Reststop,3000,2000,7,28,W. D. Nicholson,WDN,,CA:5901,53979
-hypercompe-permaculata,specimen,50.167,-115.85,BC,East Kootenay,Columbia L. Reststop,3000,2002,6,27,W. D. Nicholson,WDN,,CA:5901,53980
-hypercompe-permaculata,specimen,50.333,-115.833,BC,East Kootenay,Fairmont,2800,2001,6,25,W. D. Nicholson,WDN,,CA:5901,53981
-hypercompe-permaculata,specimen,50.333,-115.833,BC,East Kootenay,Fairmont,2800,2006,8,28,W. D. Nicholson,WDN,,CA:5901,53982
-hypercompe-permaculata,specimen,49.533,-115.617,BC,East Kootenay,Rampart Reststop,2700,2006,6,30,W. D. Nicholson,WDN,,CA:5901,53983
+hypsocompe-permaculata,specimen,50.167,-115.85,BC,East Kootenay,Columbia L. Reststop,3000,2000,7,28,W. D. Nicholson,WDN,,CA:5901,53979
+hypsocompe-permaculata,specimen,50.167,-115.85,BC,East Kootenay,Columbia L. Reststop,3000,2002,6,27,W. D. Nicholson,WDN,,CA:5901,53980
+hypsocompe-permaculata,specimen,50.333,-115.833,BC,East Kootenay,Fairmont,2800,2001,6,25,W. D. Nicholson,WDN,,CA:5901,53981
+hypsocompe-permaculata,specimen,50.333,-115.833,BC,East Kootenay,Fairmont,2800,2006,8,28,W. D. Nicholson,WDN,,CA:5901,53982
+hypsocompe-permaculata,specimen,49.533,-115.617,BC,East Kootenay,Rampart Reststop,2700,2006,6,30,W. D. Nicholson,WDN,,CA:5901,53983
 phragmatobia-fuliginosa,specimen,50.95,-116.533,BC,Columbia-Shuswap,Nine Bay Lake,3233,2005,5,11,Dave Lewis,WDN,Identity confirmed by LGC 8/5/2016,CA:5939,53984
 phragmatobia-assimilans,specimen,49.383,-115.367,BC,East Kootenay,Wapiti L.,2700,2000,5,18,W. D. Nicholson,WDN,,CA:5901,53985
 pyrrharctia-isabella,specimen,49.5,-115.766,BC,East Kootenay,Cranbrook,3113,1998,7,4,Lloyd Janz,WDN,,CA:5901,53986
@@ -54224,7 +54224,7 @@ habrosyne-scripta,specimen,48.784,-122.114,WA,Whatcom,"Nooksack R., middle fork"
 pseudothyatira-cymatophoroides,specimen,48.741,-122.474,WA,Whatcom,"Bellingham, N Slope Sehome Hill",242,2008,7,13,M.A. Peterson,MAP,,US:53073,54223
 pseudothyatira-cymatophoroides,specimen,43.842,-122.678,OR,Lane,Goodman Crk. Rd.,1115,2009,7,15,M.A. Peterson,MAP,,US:41039,54224
 drepana-arcuata,specimen,48.119,-120.212,WA,Okanogan,Gold Crk.,4117,2007,6,27,"M.A. Peterson, C.K. Yoon, E.M & E.M. Peterson-Yoon",MAP,,US:53047,54225
-drepana-bilineata,specimen,48.801,-122.164,WA,Whatcom,Van Zandt Dike,1900,2008,8,7,M.A. Peterson,MAP,,US:53073,54226
+falcaria-bilineata,specimen,48.801,-122.164,WA,Whatcom,Van Zandt Dike,1900,2008,8,7,M.A. Peterson,MAP,,US:53073,54226
 phyllodesma-americana,specimen,47.27,-120.197,WA,Chelan,Colockum Crk.,624,2012,5,5,M.A. Peterson,MAP,,US:53007,54227
 phyllodesma-americana,specimen,48.119,-120.212,WA,Okanogan,Gold Crk.,1255,2007,6,27,"M.A. Peterson, C.K. Yoon, E.M & E.M. Peterson-Yoon",MAP,,US:53047,54228
 phyllodesma-americana,specimen,48.95,-121.932,WA,Whatcom,Canyon Crk. & USFS Rd. 31,655,2005,5,21,M.A. Peterson,MAP,,US:53073,54229
@@ -54349,15 +54349,15 @@ cryphia-cuerva,specimen,47.664,-119.63,WA,Douglas,"Jameson L, SW end",1791,2010,
 spodoptera-praefica,specimen,42.005,-113.119,ID,Cassia,"Big Pine Mts, Formation Cyn",5774,2011,8,25,L. G. Crabo,LGCC,,US:16031,54348
 spodoptera-praefica,specimen,42.184,-111.641,ID,Franklin,"Wasatch Mts, FR407",6988,2011,8,26,L. G. Crabo,LGCC,,US:16041,54349
 spodoptera-praefica,specimen,42.139,-111.624,ID,Franklin,"Willow Flat CG, Wasatch Mts",6102,2011,8,26,L. G. Crabo,LGCC,,US:16041,54350
-protoperigea-posticata,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3000,1999,6,19,J. Troubridge,MustelinColl,,CA:5933,54351
-protoperigea-posticata,specimen,42.005,-113.119,ID,Cassia,"Big Pine Mts, Formation Cyn",5774,2011,8,25,L. G. Crabo,LGCC,,US:16031,54352
-protoperigea-posticata,specimen,43.888,-117.362,OR,Malheur,"Sand Hollow, 9 mi. SW Vale ",2500,1997,9,15,Crabo/Troubridge,MustelinColl,,US:41045,54353
-protoperigea-posticata,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1790,1999,9,22,L. G. Crabo,MustelinColl,,US:53017,54354
-protoperigea-posticata,specimen,47.58,-119.34,WA,Grant,Meadow Cr.; Sun Lakes SP,1200,1995,9,8,L. & E. Crabo,MustelinColl,,US:53025,54355
-protoperigea-posticata,specimen,48,-119.62,WA,Okanogan,Bridgeport S. P.,1100,1996,9,13,L. G. Crabo,MustelinColl,,US:53047,54356
-protoperigea-umbricata,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3000,2005,8,5,L. G. Crabo,LGCC,,CA:5933,54357
-protoperigea-umbricata,specimen,45.7,-121.02,WA,Klickitat,Dalles Mtn. Rd. @ O'Brien Rd; summit,2297,1989,8,25,L. G. Crabo,MustelinColl,,US:53039,54358
-protoperigea-calientensis,specimen,42.9,-118.9,OR,Harney,"Frenchglen, 5 mi N",4300,1961,9,13,D. F. Hardwick,CNC,,US:41025,54359
+caradrina-posticata,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3000,1999,6,19,J. Troubridge,MustelinColl,,CA:5933,54351
+caradrina-posticata,specimen,42.005,-113.119,ID,Cassia,"Big Pine Mts, Formation Cyn",5774,2011,8,25,L. G. Crabo,LGCC,,US:16031,54352
+caradrina-posticata,specimen,43.888,-117.362,OR,Malheur,"Sand Hollow, 9 mi. SW Vale ",2500,1997,9,15,Crabo/Troubridge,MustelinColl,,US:41045,54353
+caradrina-posticata,specimen,47.66,-119.62,WA,Douglas,"Jameson L., SW end",1790,1999,9,22,L. G. Crabo,MustelinColl,,US:53017,54354
+caradrina-posticata,specimen,47.58,-119.34,WA,Grant,Meadow Cr.; Sun Lakes SP,1200,1995,9,8,L. & E. Crabo,MustelinColl,,US:53025,54355
+caradrina-posticata,specimen,48,-119.62,WA,Okanogan,Bridgeport S. P.,1100,1996,9,13,L. G. Crabo,MustelinColl,,US:53047,54356
+caradrina-umbricata,specimen,50.53,-121.71,BC,Thompson-Nicola,Kirby Flat Rd.,3000,2005,8,5,L. G. Crabo,LGCC,,CA:5933,54357
+caradrina-umbricata,specimen,45.7,-121.02,WA,Klickitat,Dalles Mtn. Rd. @ O'Brien Rd; summit,2297,1989,8,25,L. G. Crabo,MustelinColl,,US:53039,54358
+caradrina-calientensis,specimen,42.9,-118.9,OR,Harney,"Frenchglen, 5 mi N",4300,1961,9,13,D. F. Hardwick,CNC,,US:41025,54359
 caradrina-meralis,specimen,42.005,-113.119,ID,Cassia,"Big Pine Mts, Formation Cyn",5774,2011,8,25,L. G. Crabo,LGCC,,US:16031,54360
 caradrina-meralis,specimen,42.139,-111.624,ID,Franklin,"Willow Flat CG, Wasatch Mts",6102,2011,8,26,L. G. Crabo,LGCC,,US:16041,54361
 caradrina-meralis,specimen,47.664,-119.63,WA,Douglas,"Jameson L, SW end",1791,2010,9,3,L. G. Crabo,LGCC,,US:53017,54362
@@ -54756,7 +54756,7 @@ tolype-distincta,specimen,48.491,-121.6085,WA,Skagit,Rockport State Park,600,200
 diarsia-esurialis,literature,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,,"M.R. Fisher, M.S. Thesis, Western Washington University, 2010",US:53073,54755
 panthea-virginarius,literature,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,,"M.R. Fisher, M.S. Thesis, Western Washington University, 2010",US:53073,54756
 polia-nimbosa,literature,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,,"M.R. Fisher, M.S. Thesis, Western Washington University, 2010",US:53073,54757
-drepana-bilineata,specimen,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,WWUC,,US:53073,54758
+falcaria-bilineata,specimen,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,WWUC,,US:53073,54758
 euthyatira-semicircularis,specimen,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,WWUC,,US:53073,54759
 lophocampa-maculata,literature,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,,"M.R. Fisher, M.S. Thesis, Western Washington University, 2010",US:53073,54760
 nadata-gibbosa,specimen,48.7322,-122.365,WA,Whatcom,L Louise,708,2009,6,21,M.R. Fisher,WWUC,"M.R. Fisher, M.S. Thesis, Western Washington University, 2010",US:53073,54761
@@ -55616,7 +55616,7 @@ drasteria-hudsonica,literature,51.73,-124.2,BC,Cariboo,Choelquoit Lake (near Tat
 drasteria-sabulosa,photograph,49.66,-119.62,BC,Okanagan-Similkameen,"Naramata, Okanagan Valley",1837,2009,5,22,L. or R. Avis,L. Avis photo,"Photographer: R. or L. Avis; Species ID: MPG, EF",CA:5907,55615
 drasteria-hudsonica,photograph,49.06,-113.93,AB,,Waterton National Park,5643,2008,6,21,L. or R. Avis,L. Avis photo,"Photographer: R. or L. Avis; Species ID: L. Avis, EF",,55616
 drepana-arcuata,photograph,49.29,-124.79,BC,Alberni-Clayoquot,Port Alberni,328,2007,8,24,L. or R. Avis,L. Avis photo,Photographer: R. or L. Avis; Species ID:,CA:5923,55617
-drepana-bilineata,photograph,50.09,-123,BC,Squamish-Lillooet,Whistler,645,2010,7,25,L. or R. Avis,L. Avis photo,Photographer: R. or L. Avis; Species ID: L. Avis,CA:5931,55618
+falcaria-bilineata,photograph,50.09,-123,BC,Squamish-Lillooet,Whistler,645,2010,7,25,L. or R. Avis,L. Avis photo,Photographer: R. or L. Avis; Species ID: L. Avis,CA:5931,55618
 drepana-arcuata,literature,49.29,-124.79,BC,Alberni-Clayoquot,Port Alberni,328,2009,5,24,L. or R. Avis,L. Avis photo/BOLD,"Photographer: R. or L. Avis; Species ID: L. Avis, BOLD",CA:5923,55619
 dryotype-opina,literature,49.29,-124.79,BC,Alberni-Clayoquot,Port Alberni,328,2010,9,18,L. or R. Avis,L. Avis photo/BOLD,Photographer: R. or L. Avis; Species ID: BOLD,CA:5923,55620
 egira-hiemalis,literature,49.29,-124.79,BC,Alberni-Clayoquot,Port Alberni,328,2011,3,25,L. or R. Avis,L. Avis photo/BOLD,"Photographer: R. or L. Avis; Species ID: L. Avis, BOLD",CA:5923,55621
@@ -56097,9 +56097,9 @@ euthyatira-semicircularis,specimen,48.907,-118.141,WA,Stevens,Pierre L. CG,2650,
 euthyatira-semicircularis,specimen,48.72,-117.343,WA,Pend Oreille,Dry Cyn. Rd. 1933,2874,2012,6,22,J. & S. Shepard,JHS,,US:53051,56096
 drepana-arcuata,specimen,49.533,-117.417,BC,Central Kootenay,Sproule Cr.,2400,2011,7,21,J. & S. Shepard,JHS,,CA:5903,56097
 drepana-arcuata,specimen,49.039,-117.619,BC,Kootenay Boundary,"Fort Shepherd, nr.",1354,2012,5,28,J. & S. Shepard,JHS,,CA:5905,56098
-drepana-bilineata,specimen,48.579,-118.238,WA,Ferry,Canyon Cr. CG,2182,2011,8,3,J. & S. Shepard,JHS,,US:53019,56099
-drepana-bilineata,specimen,48.579,-118.238,WA,Ferry,Canyon Cr. CG,2182,2012,6,19,J. & S. Shepard,JHS,,US:53019,56100
-drepana-bilineata,specimen,48.959,-117.834,WA,Stevens,Sheep Cr. Rec. Site,1949,2011,7,29,J. & S. Shepard,JHS,,US:53065,56101
+falcaria-bilineata,specimen,48.579,-118.238,WA,Ferry,Canyon Cr. CG,2182,2011,8,3,J. & S. Shepard,JHS,,US:53019,56099
+falcaria-bilineata,specimen,48.579,-118.238,WA,Ferry,Canyon Cr. CG,2182,2012,6,19,J. & S. Shepard,JHS,,US:53019,56100
+falcaria-bilineata,specimen,48.959,-117.834,WA,Stevens,Sheep Cr. Rec. Site,1949,2011,7,29,J. & S. Shepard,JHS,,US:53065,56101
 callizzia-amorata,specimen,45.6,-122.053,OR,Multnomah,Ainsworth SP,30,2012,5,18,J. & S. Shepard,JHS,,US:41051,56102
 callizzia-amorata,specimen,48.515,-118.739,WA,Ferry,10 Mile CG,1800,2011,7,30,J. & S. Shepard,JHS,,US:53019,56103
 callizzia-amorata,specimen,48.933,-118.61,WA,Ferry,Alkali Cr.,3100,2011,7,31,J. & S. Shepard,JHS,,US:53019,56104
@@ -56387,7 +56387,7 @@ schinia-acutilinea,specimen,46.379,-119.519,WA,Benton,"Rattlesnake Mountain, Eas
 schinia-acutilinea,specimen,46.336,-119.277,WA,Benton,"Fields near RTL, North Richland",405,1997,8,25,D. L. Strenge,DLSC,det. DLS,US:53005,56386
 schinia-walsinghami,specimen,46.507,-119.698,WA,Benton,Rattlesnake Springs Crossing,680,2001,9,7,D. L. Strenge,DLSC,det. Crabo,US:53005,56387
 spodoptera-praefica,specimen,46.081,-117.17,WA,Asotin,Fields Spring State Park,4062,1997,8,2,D. L. Strenge,DLSC,?,US:53003,56388
-protoperigea-anotha,specimen,47.55,-120.768,WA,Chelan,"Eightmile Campground, Icicle Creek Valley",1850,2001,6,28,D. L. Strenge,DLSC,det. Crabo,US:53007,56389
+caradrina-anotha,specimen,47.55,-120.768,WA,Chelan,"Eightmile Campground, Icicle Creek Valley",1850,2001,6,28,D. L. Strenge,DLSC,det. Crabo,US:53007,56389
 caradrina-camina,specimen,46.46,-119.721,WA,Benton,"Snively Canyon, lower springs",1260,1999,8,23,D. L. Strenge,DLSC,det. Crabo,US:53005,56390
 caradrina-camina,specimen,46.46,-119.721,WA,Benton,"Snively Canyon, lower springs",1260,1999,9,16,D. L. Strenge,DLSC,det. Crabo,US:53005,56391
 caradrina-montana,specimen,46.266,-119.293,WA,Benton,"241 Wright Ave, Richland WA",420,1993,5,30,D. L. Strenge,DLSC,det. Crabo,US:53005,56392
@@ -56857,7 +56857,7 @@ spilosoma-vagans,specimen,44.564,-115.679,ID,Valley,"Stollle Meadows, S end",549
 spilosoma-virginica,specimen,44.564,-115.679,ID,Valley,"Stollle Meadows, S end",5498,2012,7,15,Crabo/Morrell,LGCC,,US:16085,56856
 hyphantria-cunea,specimen,42.139,-111.624,ID,Franklin,"Willow Flat CG, Wasatch Mts",6102,2012,7,13,L. G. Crabo,LGCC,,US:16041,56857
 hyphantria-cunea,specimen,42.184,-111.641,ID,Franklin,"Wasatch Mts, FR407",6988,2012,7,13,L. G. Crabo,LGCC,,US:16041,56858
-hypercompe-permaculata,specimen,42.139,-111.624,ID,Franklin,"Willow Flat CG, Wasatch Mts",6102,2012,7,13,L. G. Crabo,LGCC,,US:16041,56859
+hypsocompe-permaculata,specimen,42.139,-111.624,ID,Franklin,"Willow Flat CG, Wasatch Mts",6102,2012,7,13,L. G. Crabo,LGCC,,US:16041,56859
 arachnis-citra,specimen,42.184,-111.641,ID,Franklin,"Wasatch Mts, FR407",6988,2012,7,13,L. G. Crabo,LGCC,,US:16041,56860
 lophocampa-maculata,specimen,42.139,-111.624,ID,Franklin,"Willow Flat CG, Wasatch Mts",6102,2012,7,13,L. G. Crabo,LGCC,,US:16041,56861
 lophocampa-maculata,specimen,42.184,-111.641,ID,Franklin,"Wasatch Mts, FR407",6988,2012,7,13,L. G. Crabo,LGCC,,US:16041,56862
@@ -58643,8 +58643,8 @@ drepana-arcuata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2007,7,3,D. 
 drepana-arcuata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2008,8,10,D. Anderson,,https://www.flickr.com/photos/ujelang/2755941044/in/set-72157594288639530/,US:53011,58642
 drepana-arcuata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2008,5,19,D. Anderson,,https://www.flickr.com/photos/ujelang/2509953491/in/set-72157594288639530/,US:53011,58643
 drepana-arcuata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2009,5,29,D. Anderson,,https://www.flickr.com/photos/ujelang/3606651493/in/set-72157594288639530/,US:53011,58644
-drepana-bilineata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2007,8,20,D. Anderson,,https://www.flickr.com/photos/ujelang/1186686052/in/set-72157594288639530/,US:53011,58645
-drepana-bilineata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2007,8,7,D. Anderson,,https://www.flickr.com/photos/ujelang/1045227530/in/set-72157594288639530/,US:53011,58646
+falcaria-bilineata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2007,8,20,D. Anderson,,https://www.flickr.com/photos/ujelang/1186686052/in/set-72157594288639530/,US:53011,58645
+falcaria-bilineata,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2007,8,7,D. Anderson,,https://www.flickr.com/photos/ujelang/1045227530/in/set-72157594288639530/,US:53011,58646
 zale-lunata,photograph,45.478,-122.568,OR,Multnomah,"Portland, Lents",219,2012,4,15,D. Anderson,,https://www.flickr.com/photos/ujelang/6936041876/in/set-72157594288639530/,US:41051,58647
 zale-minerea,photograph,45.964,-122.421,WA,Clark,Lake Merwin,853,2007,5,14,D. Anderson,,https://www.flickr.com/photos/ujelang/500062058/in/set-72157594288639530/,US:53011,58648
 lacanobia-subjuncta,photograph,45.478,-122.568,OR,Multnomah,"Portland, Lents",219,2009,7,19,D. Anderson,,https://www.flickr.com/photos/ujelang/3745319926/in/set-72157594288639530/,US:41051,58649
@@ -59172,7 +59172,7 @@ spodoptera-praefica,photograph,45.72,-121.328,WA,Klickitat,Lyle-Balch Cemetery,5
 spodoptera-praefica,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2007,8,9,J. Davis,,https://bugguide.net/node/view/140395; photo ID by L. Crabo,US:53059,59171
 spodoptera-praefica,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2007,8,29,J. Davis,,https://www.flickr.com/photos/johns_pics/2181137794/in/set-72157602806066836/; photo ID by L. Crabo,US:53059,59172
 spodoptera-praefica,photograph,45.193,-118.05,OR,Union,"LaGrande, Ladd Canyon Rd, MP1",3500,2007,8,11,J. Davis,,https://bugguide.net/node/view/140446; photo ID by L. Crabo,US:41061,59173
-protoperigea-anotha,photograph,46.135,-121.727,WA,Skamania,Steamboat Mt trailhead,4800,2007,7,26,J. Davis,,https://bugguide.net/node/view/137944; photo ID by L. Crabo,US:53059,59174
+caradrina-anotha,photograph,46.135,-121.727,WA,Skamania,Steamboat Mt trailhead,4800,2007,7,26,J. Davis,,https://bugguide.net/node/view/137944; photo ID by L. Crabo,US:53059,59174
 caradrina-meralis,photograph,45.72,-121.328,WA,Klickitat,Lyle-Balch Cemetery,580,2006,9,1,J. Davis,,https://bugguide.net/node/view/76601; photo ID by L. Crabo,US:53039,59175
 caradrina-meralis,photograph,45.716,-121.35,WA,Klickitat,"Major Cr Rd, Hanson Cr",400,2007,8,16,J. Davis,,https://bugguide.net/node/view/141239; photo ID by L. Crabo,US:53039,59176
 caradrina-meralis,photograph,45.675,-121.937,WA,Skamania,"Blue Lake, gravel pit",500,2009,8,17,J. Davis,,https://bugguide.net/node/view/345823; photo ID by L. Crabo,US:53059,59177
@@ -59889,7 +59889,7 @@ drepana-arcuata,photograph,45.897,-121.86,WA,Skamania,Black Creek,2400,2007,8,14
 drepana-arcuata,photograph,46.009,-121.901,WA,Skamania,McClellan Mdws SnoPark,2900,2006,7,21,J. Davis,,https://www.flickr.com/photos/johns_pics/225308312/in/set-1468652/; photo ID by L. Crabo,US:53059,59888
 drepana-arcuata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2005,5,26,J. Davis,,https://bugguide.net/node/view/42203; photo ID by L. Crabo,US:53059,59889
 drepana-arcuata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2007,7,31,J. Davis,,https://www.flickr.com/photos/johns_pics/2038073660/in/set-1468652/; photo ID by L. Crabo,US:53059,59890
-drepana-bilineata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2006,7,24,J. Davis,,https://bugguide.net/node/view/69729; photo ID by L. Crabo,US:53059,59891
+falcaria-bilineata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2006,7,24,J. Davis,,https://bugguide.net/node/view/69729; photo ID by L. Crabo,US:53059,59891
 callizzia-amorata,photograph,45.637,-121.92,OR,Hood River,Eagle Creek Trailhead,127,2008,7,15,J. Davis,,https://bugguide.net/node/view/223218; photo ID by L. Crabo,US:41027,59892
 callizzia-amorata,photograph,45.617,-122.117,WA,Skamania,Smith-Cripe Rd turnaround,900,2007,8,21,J. Davis,,https://www.flickr.com/photos/johns_pics/2151641513/in/set-1469785/; photo ID by L. Crabo,US:53059,59893
 callizzia-amorata,photograph,45.702,-121.889,WA,Skamania,Stevenson,400,2012,6,25,J. Davis,,https://www.flickr.com/photos/johns_pics/7504750884/in/set-1469785/; photo ID by L. Crabo,US:53059,59894
@@ -70062,11 +70062,11 @@ galgula-partita,specimen,45.3,-122.774,OR,Clackamas,Wilsonville,154,1962,8,23,Ke
 galgula-partita,specimen,44.052,-123.086,OR,Lane,Eugene,419,1963,8,15,Kenneth Goeden,ODAC,,US:41039,70061
 galgula-partita,specimen,43.921,-122.812,OR,Lane,"Eugene, 12mSE",640,1966,4,22,Kenneth Goeden,ODAC,,US:41039,70062
 galgula-partita,specimen,44.637,-124.052,OR,Lincoln,Newport,177,1962,6,28,Kenneth Goeden,ODAC,,US:41041,70063
-protoperigea-posticata,specimen,42.974,-117.054,OR,Malheur,Jordan Valley,4385,1964,10,1,Kenneth Goeden,ODAC,,US:41045,70064
-protoperigea-umbricata,specimen,44.582,-117.465,OR,Baker,Durkee,2650,1966,9,15,Kenneth Goeden,ODAC,,US:41001,70065
-protoperigea-umbricata,specimen,44.273,-121.174,OR,Deschutes,Redmond,3004,1967,8,25,Kenneth Goeden,ODAC,,US:41017,70066
-protoperigea-umbricata,specimen,44.539,-118.588,OR,Grant,"Prairie City, 8mNE",5192,1964,8,14,Kenneth Goeden,ODAC,,US:41023,70067
-protoperigea-umbricata,specimen,42.313,-122.967,OR,Jackson,"Jacksonville, 1.5mN",1565,1970,9,24,R. L. Westcott,ODAC,,US:41029,70068
+caradrina-posticata,specimen,42.974,-117.054,OR,Malheur,Jordan Valley,4385,1964,10,1,Kenneth Goeden,ODAC,,US:41045,70064
+caradrina-umbricata,specimen,44.582,-117.465,OR,Baker,Durkee,2650,1966,9,15,Kenneth Goeden,ODAC,,US:41001,70065
+caradrina-umbricata,specimen,44.273,-121.174,OR,Deschutes,Redmond,3004,1967,8,25,Kenneth Goeden,ODAC,,US:41017,70066
+caradrina-umbricata,specimen,44.539,-118.588,OR,Grant,"Prairie City, 8mNE",5192,1964,8,14,Kenneth Goeden,ODAC,,US:41023,70067
+caradrina-umbricata,specimen,42.313,-122.967,OR,Jackson,"Jacksonville, 1.5mN",1565,1970,9,24,R. L. Westcott,ODAC,,US:41029,70068
 caradrina-morpheus,specimen,46.202,-123.962,OR,Clatsop,Fort Stevens,26,1969,6,15,K. J. Goeden,ODAC,,US:41007,70069
 caradrina-morpheus,specimen,46.202,-123.962,OR,Clatsop,Fort Stevens,26,1970,6,25,K. J. Goeden,ODAC,,US:41007,70070
 caradrina-morpheus,specimen,45.864,-122.805,OR,Columbia,Saint Helens,73,1969,6,28,Goeden/Walrod,ODAC,,US:41009,70071
@@ -74778,25 +74778,25 @@ drepana-arcuata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1988
 drepana-arcuata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1989,5,29,Hettie Miller,RBCM,,CA:5933,74777
 drepana-arcuata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1989,7,30,Hettie Miller,RBCM,,CA:5933,74778
 drepana-arcuata,specimen,49.344,-123.254,BC,Greater Vancouver,Caulfeild,367,1918,5,24,,RBCM,,CA:5915,74779
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1956,5,8,G. A. Hardy,RBCM,,CA:5917,74780
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1957,5,4,G. A. Hardy,RBCM,,CA:5917,74781
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1960,6,17,G. A. Hardy,RBCM,,CA:5917,74782
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1960,8,17,G. A. Hardy,RBCM,,CA:5917,74783
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,5,10,G. A. Hardy,RBCM,,CA:5917,74784
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,6,4,G. A. Hardy,RBCM,,CA:5917,74785
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,6,7,G. A. Hardy,RBCM,,CA:5917,74786
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,6,23,G. A. Hardy,RBCM,,CA:5917,74787
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,8,14,G. A. Hardy,RBCM,,CA:5917,74788
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,6,7,G. A. Hardy,RBCM,,CA:5917,74789
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,6,9,G. A. Hardy,RBCM,,CA:5917,74790
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,6,20,G. A. Hardy,RBCM,,CA:5917,74791
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,8,30,G. A. Hardy,RBCM,,CA:5917,74792
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1963,5,29,G. A. Hardy,RBCM,,CA:5917,74793
-drepana-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1963,6,22,G. A. Hardy,RBCM,,CA:5917,74794
-drepana-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1950,6,17,Richard Guppy,RBCM,,CA:5921,74795
-drepana-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1961,5,25,Richard Guppy,RBCM,,CA:5921,74796
-drepana-bilineata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1987,6,7,Hettie Miller,RBCM,,CA:5933,74797
-drepana-bilineata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1989,5,29,Hettie Miller,RBCM,,CA:5933,74798
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1956,5,8,G. A. Hardy,RBCM,,CA:5917,74780
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1957,5,4,G. A. Hardy,RBCM,,CA:5917,74781
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1960,6,17,G. A. Hardy,RBCM,,CA:5917,74782
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1960,8,17,G. A. Hardy,RBCM,,CA:5917,74783
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,5,10,G. A. Hardy,RBCM,,CA:5917,74784
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,6,4,G. A. Hardy,RBCM,,CA:5917,74785
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,6,7,G. A. Hardy,RBCM,,CA:5917,74786
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,6,23,G. A. Hardy,RBCM,,CA:5917,74787
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1961,8,14,G. A. Hardy,RBCM,,CA:5917,74788
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,6,7,G. A. Hardy,RBCM,,CA:5917,74789
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,6,9,G. A. Hardy,RBCM,,CA:5917,74790
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,6,20,G. A. Hardy,RBCM,,CA:5917,74791
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1962,8,30,G. A. Hardy,RBCM,,CA:5917,74792
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1963,5,29,G. A. Hardy,RBCM,,CA:5917,74793
+falcaria-bilineata,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1963,6,22,G. A. Hardy,RBCM,,CA:5917,74794
+falcaria-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1950,6,17,Richard Guppy,RBCM,,CA:5921,74795
+falcaria-bilineata,specimen,49.2,-124.033,BC,Nanaimo,Wellington,254,1961,5,25,Richard Guppy,RBCM,,CA:5921,74796
+falcaria-bilineata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1987,6,7,Hettie Miller,RBCM,,CA:5933,74797
+falcaria-bilineata,specimen,51.649,-120.033,BC,Thompson-Nicola,Clearwater,1511,1989,5,29,Hettie Miller,RBCM,,CA:5933,74798
 tolype-distincta,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1959,9,5,G. A. Hardy,RBCM,,CA:5917,74799
 tolype-distincta,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1959,9,10,G. A. Hardy,RBCM,,CA:5917,74800
 tolype-distincta,specimen,48.501,-123.393,BC,Capital,Royal Oak,171,1959,9,23,G. A. Hardy,RBCM,,CA:5917,74801
@@ -76530,8 +76530,8 @@ cryphia-cuerva,specimen,48.735,-121.037,WA,Whatcom,Ruby Arm; Ross L.,1750,2009,8
 cryphia-cuerva,specimen,48.735,-121.037,WA,Whatcom,Ruby Arm; Ross L.,1750,2010,8,16,L. G. Crabo,LGCC,,US:53073,76529
 spodoptera-praefica,specimen,42.32,-111.13,ID,Bear Lake,Wood Cyn,6594,2012,9,10,L. G. Crabo,LGCC,,US:16007,76530
 spodoptera-praefica,specimen,46.985,-119.443,WA,Grant,Potholes,1122,2010,9,2,L. G. Crabo,LGCC,,US:53025,76531
-protoperigea-anotha,specimen,50.36,-122.14,BC,Thompson-Nicola,Blowdown Pass,7100,2010,8,1,L. G. Crabo,LGCC,,CA:5933,76532
-protoperigea-posticata,specimen,42.02,-113.115,ID,Cassia,"Black Pine Mts, Formation Cyn",6312,2012,9,9,L. G. Crabo,LGCC,,US:16031,76533
+caradrina-anotha,specimen,50.36,-122.14,BC,Thompson-Nicola,Blowdown Pass,7100,2010,8,1,L. G. Crabo,LGCC,,CA:5933,76532
+caradrina-posticata,specimen,42.02,-113.115,ID,Cassia,"Black Pine Mts, Formation Cyn",6312,2012,9,9,L. G. Crabo,LGCC,,US:16031,76533
 caradrina-morpheus,specimen,51.33,-121.421,BC,Thompson-Nicola,"70 Mile House, 3.4 km NNW",3570,2010,7,9,Crabo/Morrell,LGCC,,CA:5933,76534
 caradrina-morpheus,specimen,48.773,-122.357,WA,Whatcom,1 mi. N Agate Bay of L. Whatcom,500,2010,6,26,L. Crabo & M. Hart,LGCC,,US:53073,76535
 caradrina-meralis,specimen,42.332,-111.229,ID,Bear Lake,Montpelier Cyn,6250,2012,9,10,L. G. Crabo,LGCC,,US:16007,76536
@@ -77688,8 +77688,8 @@ spodoptera-exigua,specimen,50.667,-120.316,BC,Thompson-Nicola,Kamloops,1336,,,,D
 spodoptera-exigua,specimen,49.083,-123.083,BC,,Ladner,0,,,,,?,"Arnott, 1960; det. Hardwick; Shepard notes ",CA:5915,77687
 spodoptera-exigua,specimen,50.867,-121.833,BC,,Pavilion,2459,,,,,?,"Arnott, 1960; det. Hardwick; Shepard notes ",CA:5931,77688
 spodoptera-praefica,specimen,45.608,-118.799,OR,Umatilla,"McKay Res., N",1260,1991,8,11,Vern Covlin,VC,Shepard notes  ,US:41059,77689
-protoperigea-anotha,specimen,50.7,-122.283,BC,Squamish-Lillooet,Seton L.,1163,1926,7,5,J. McDunnough,CNC,"McDunnough, 1927; Shepard notes;  ",CA:5931,77690
-protoperigea-anotha,specimen,50.7,-122.283,BC,Squamish-Lillooet,Seton L.,1163,1926,7,12,J. McDunnough,CNC,"McDunnough, 1927; Shepard notes;  ",CA:5931,77691
+caradrina-anotha,specimen,50.7,-122.283,BC,Squamish-Lillooet,Seton L.,1163,1926,7,5,J. McDunnough,CNC,"McDunnough, 1927; Shepard notes;  ",CA:5931,77690
+caradrina-anotha,specimen,50.7,-122.283,BC,Squamish-Lillooet,Seton L.,1163,1926,7,12,J. McDunnough,CNC,"McDunnough, 1927; Shepard notes;  ",CA:5931,77691
 caradrina-morpheus,specimen,50.667,-120.316,BC,Thompson-Nicola,Kamloops,1336,,,,D. A. Arnott,?,"Arnott, 1960; det. Hardwick; Shepard notes ",CA:5933,77692
 caradrina-meralis,specimen,50.7,-122.283,BC,Squamish-Lillooet,Seton L.,1163,1926,7,2,J. McDunnough,CNC,"McDunnough, 1927; Shepard notes;  ",CA:5931,77693
 caradrina-meralis,specimen,50.7,-122.283,BC,Squamish-Lillooet,Seton L.,1163,1926,7,13,J. McDunnough,CNC,"McDunnough, 1927; Shepard notes;  ",CA:5931,77694
@@ -77849,7 +77849,7 @@ caradrina-meralis,specimen,45.428,-113.835,ID,Lemhi,,6315,2013,8,9,L Crabo/M Pet
 caradrina-meralis,specimen,44.363,-113.244,ID,Lemhi,,7923,2013,8,10,L Crabo/M Peterson,LGCC,,US:16059,77848
 caradrina-montana,specimen,44.363,-113.244,ID,Lemhi,,7923,2013,8,10,L Crabo/M Peterson,LGCC,,US:16059,77849
 caradrina-montana,specimen,50.76,-122.16,BC,,,5800,2010,7,10,Crabo/Morrell,LGCC,,CA:5931,77850
-protoperigea-anotha,specimen,45.428,-113.835,ID,Lemhi,,6315,2013,8,9,L Crabo/M Peterson,LGCC,,US:16059,77851
+caradrina-anotha,specimen,45.428,-113.835,ID,Lemhi,,6315,2013,8,9,L Crabo/M Peterson,LGCC,,US:16059,77851
 trichopolia-curtica,specimen,44.363,-113.244,ID,Lemhi,,7923,2013,8,10,L Crabo/M Peterson,LGCC,,US:16059,77852
 proxenus-mindara,specimen,46.985,-119.443,WA,Grant,,1122,2013,8,8,L. Crabo/M. Peterson,LGCC,,US:53025,77853
 homorthodes-discreta,specimen,45.391,-113.964,ID,Lemhi,,3805,2013,8,9,L Crabo/M Peterson,LGCC,,US:16059,77854
@@ -78258,7 +78258,7 @@ parabagrotis-formalis,specimen,44.363,-113.244,ID,Lemhi,,7923,2013,8,10,L Crabo/
 anaplectoides-prasina,specimen,45.485,-118.107,OR,Union,,5784,2013,8,11,L. Crabo/M. Peterson,LGCC,,US:41061,78257
 euxoa-rockburnei,specimen,50.76,-122.16,BC,,,5800,2010,7,10,Crabo/Morrell,LGCC,,CA:5931,78258
 spodoptera-praefica,specimen,45.485,-118.107,OR,Union,,5784,2013,8,11,L. Crabo/M. Peterson,LGCC,,US:41061,78259
-protoperigea-anotha,specimen,44.343,-113.266,ID,Lemhi,,9291,2013,8,10,L. Crabo/M. Peterson,LGCC,,US:16059,78260
+caradrina-anotha,specimen,44.343,-113.266,ID,Lemhi,,9291,2013,8,10,L. Crabo/M. Peterson,LGCC,,US:16059,78260
 sympistis-albifasciata,specimen,44.363,-113.244,ID,Lemhi,,7923,2013,8,10,L Crabo/M Peterson,LGCC,,US:16059,78261
 deilephila-elpenor,specimen,49.001,-122.737,WA,Whatcom,,82,2013,7,19,J. Bonner,Stephen Young coll,,US:53073,78262
 sphinx-vashti,specimen,50.76,-122.16,BC,,,5800,2010,7,10,Crabo/Morrell,LGCC,,CA:5931,78263
@@ -78305,8 +78305,8 @@ orthodes-obscura,specimen,49.533,-115.617,BC,Cranbrook,Rampart Reststop,2700,200
 mythimna-oxygala,specimen,50.134,-116.038,BC,East Kootenay,Engstrom's Pond,1136,2013,8,10,W. Dean Nicholson,WDN,,CA:5901,78304
 pseudohermonassa-tenuicula,specimen,50.134,-116.038,BC,East Kootenay,Engstrom's Pond,1136,2013,8,10,W. Dean Nicholson,WDN,,CA:5901,78305
 pseudothyatira-cymatophoroides,photograph,54.98,-121.055,BC,Peace River,Tumbler Ridge - Murray River,2520,2013,8,2,R. or L. Avis photo,,Avis ID,CA:5955,78306
-drepana-bilineata,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,5,6,R. or L. Avis photo,,Avis ID,CA:5923,78307
-drepana-bilineata,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,6,1,R. or L. Avis photo,,Avis ID,CA:5923,78308
+falcaria-bilineata,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,5,6,R. or L. Avis photo,,Avis ID,CA:5923,78307
+falcaria-bilineata,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,6,1,R. or L. Avis photo,,Avis ID,CA:5923,78308
 hyles-gallii,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,7,7,R. or L. Avis photo,,Avis ID,CA:5923,78309
 hyles-lineata,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,4,4,R. or L. Avis photo,,Avis ID,CA:5923,78310
 hyles-lineata,photograph,49.295,-124.779,BC,Alberni-Clayoquot,Port Alberni,330,2013,4,20,R. or L. Avis photo,,Avis ID,CA:5923,78311
@@ -78579,7 +78579,7 @@ malacosoma-californica,specimen,48.0177,-123.5916,WA,Clallam,"Olympic NP, Elwha 
 malacosoma-californica,specimen,48.0191,-123.5917,WA,Clallam,"Olympic NP, Elwha Ranger station",379,2012,9,2,DL Strenge,ONP,Strenge ID; OLYM   39387,US:53009,78578
 malacosoma-californica,specimen,48.072,-123.5817,WA,Clallam,Lake Aldwell nr Boat Ramp,200,2012,7,9,DL Strenge,WSU,Crabo ID; OLYM   39212,US:53009,78579
 antheraea-polyphemus,specimen,48.0177,-123.5916,WA,Clallam,"Olympic NP, Elwha Ranger station",379,2012,7,9,DL Strenge,WSU,Strenge ID; OLYM   39322,US:53009,78580
-drepana-bilineata,specimen,48.0733,-123.5791,WA,Clallam,"Aldwell L, bar nr boat ramp",203,2013,6,12,D. L. Strenge,WSU,DL Strenge,US:53009,78581
+falcaria-bilineata,specimen,48.0733,-123.5791,WA,Clallam,"Aldwell L, bar nr boat ramp",203,2013,6,12,D. L. Strenge,WSU,DL Strenge,US:53009,78581
 tolype-distincta,specimen,48.0177,-123.5916,WA,Clallam,"Elwha R, Ranger Stn",381,2013,9,12,D. L. Strenge,WSU,det P Hammond,US:53009,78582
 phyllodesma-americana,specimen,48.0177,-123.5916,WA,Clallam,"Elwha R, Ranger Stn",381,2013,6,11,D. L. Strenge,WSU,det D L Strenge,US:53009,78583
 phyllodesma-americana,specimen,48.0733,-123.5791,WA,Clallam,"Aldwell L, bar nr boat ramp",203,2013,6,10,D. L. Strenge,WSU,det Crabo,US:53009,78584
@@ -78815,7 +78815,7 @@ abagrotis-forbesi,specimen,43.7,-113.033,ID,Butte,"Howe, 6 mi S",5000,1982,7,22,
 abagrotis-forbesi,specimen,43.7,-113.033,ID,Butte,"Howe, 6 mi S",5000,1981,7,1,M. Stafford,WFBM,,US:16023,78814
 abagrotis-cupida,specimen,46.324,-117.971,WA,Columbia,Dayton,1620,1964,7,12,R. E. Miller,WFBM,,US:53013,78815
 euthyatira-lorata,photograph,42.72,-123.38,OR,Josephine,"Glendale, 3 mi ESE",1991,2014,4,,E. Woodward,,photo,US:41033,78816
-epirrita-pulchraria,photograph,48.036,-123.428,WA,Clallam,"Olympic NP, Heart O'The Hills CG",545,2013,12,1,V. Lucas,,photo,US:53009,78817
+malacodea-pulchraria,photograph,48.036,-123.428,WA,Clallam,"Olympic NP, Heart O'The Hills CG",545,2013,12,1,V. Lucas,,photo,US:53009,78817
 hemileuca-eglanterina,specimen,48.46,-122.97,WA,San Juan,"San Juan Is, S tip",5,1985,6,21,J. Pearson,UWBM,,US:53055,78818
 sphinx-vashti,photograph,42.72,-123.38,OR,Josephine,"Glendale, 3 mi ESE",1991,2014,4,30,E. Woodward,,https://bugguide.net/node/view/915164,US:41033,78819
 pachysphinx-occidentalis,specimen,46.88,-117.36,WA,Whitman,"Colfax, nr",620,1993,,,?,UWBM,,US:53075,78820
@@ -81443,8 +81443,8 @@ hypena-palparia,specimen,48.675,-121.261,WA,Whatcom,"Newhalem,  State Highway Fa
 hypena-palparia,specimen,48.675,-121.261,WA,Whatcom,"Newhalem,  State Highway Facility",500,2014,7,21,D. Strenge,WSU,det. Paul Hammond,US:53073,81442
 malacosoma-californica,specimen,48.675,-121.261,WA,Whatcom,"Newhalem,  State Highway Facility",500,2014,7,20,D. Strenge,WSU,det. Paul Hammond,US:53073,81443
 malacosoma-californica,specimen,48.675,-121.261,WA,Whatcom,"Newhalem,  State Highway Facility",500,2014,7,21,D. Strenge,WSU,det. Paul Hammond,US:53073,81444
-drepana-bilineata,specimen,48.6664,-121.2662,WA,Whatcom,"Newhalem, NCNP visitors center",560,2014,7,21,D. Droppers/D. Strenge,WSU,det. D. Strenge,US:53073,81445
-drepana-bilineata,specimen,48.675,-121.261,WA,Whatcom,"Newhalem,  State Highway Facility",500,2014,7,20,D. Strenge,WSU,det. D. Strenge,US:53073,81446
+falcaria-bilineata,specimen,48.6664,-121.2662,WA,Whatcom,"Newhalem, NCNP visitors center",560,2014,7,21,D. Droppers/D. Strenge,WSU,det. D. Strenge,US:53073,81445
+falcaria-bilineata,specimen,48.675,-121.261,WA,Whatcom,"Newhalem,  State Highway Facility",500,2014,7,20,D. Strenge,WSU,det. D. Strenge,US:53073,81446
 coranarta-luteola,specimen,50.136,-116.026,BC,East Kootenay,"Canal Flats, Engstrom's Pond",1136,2014,6,1,,WDN,,CA:5901,81447
 apantesis-virguncula,specimen,49.682,-115.775,BC,East Kootenay,"Kimberly, Cherry Creek",866,2014,6,28,,WDN,,CA:5901,81448
 lacinipolia-lorea,specimen,49.682,-115.775,BC,East Kootenay,"Kimberly, Cherry Creek",866,2014,6,28,,WDN,,CA:5901,81449
@@ -82227,7 +82227,7 @@ photedes-defecta,specimen,51.535,-120.9517,BC,Cariboo,"Sheridan L., NW side",,20
 eremobina-claudens,specimen,49.117,-116.163,BC,Central Kootenay,Goatfell,2600,1993,9,11,D. W. Knight,JHS,,CA:5903,82226
 dichagyris-variabilis,photograph,47.971,-123.503,WA,Clallam,"ONP, rd to Hurricane Hill",,2014,9,7,V. Lucas,,L.G. Crabo det,US:53009,82227
 eosphoropteryx-thyatyroides,photograph,45.645,-122.6929,WA,Clark,"Vancouver, Fruit Valley neighborhood",,2016,6,28,J. Johnson,,,US:53011,82228
-epirrita-pulchraria,specimen,46.643,-121.378,WA,Yakima,"Pacific Coast Tr, White Pass",,2011,10,20,J. Vargo,J. Vargo coll,hand netted,US:53077,82229
+malacodea-pulchraria,specimen,46.643,-121.378,WA,Yakima,"Pacific Coast Tr, White Pass",,2011,10,20,J. Vargo,J. Vargo coll,hand netted,US:53077,82229
 eudeilinia-herminiata,specimen,49.8137,-120.9429,BC,Thompson-Nicola,Coldwater River nr. Larson Hill,3018,2015,5,20,D. Holden,DHC,,CA:5933,82230
 gluphisia-septentrionis,specimen,42.5239,-111.263,ID,Bear Lake,Georgetown Cyn,,2016,7,4,Crabo/Morrell,LGCC,,US:16007,82231
 lacinipolia-olivacea,specimen,51.33,-121.421,BC,Thompson-Nicola,"70 Mile House, 3.4 km W",,2010,7,31,L. G. Crabo,LGCC,,CA:5933,82232
@@ -82251,16 +82251,16 @@ drepana-arcuata,specimen,49.356128,-121.573983,BC,Fraser Valley,"nr. Hope, Hunte
 drepana-arcuata,specimen,49.244162,-122.778125,BC,Greater Vancouver,Port Coquitlam backyard,279,2002,8,13,Dave G. Holden,DGH,MV; DH-000041,CA:5915,82250
 drepana-arcuata,specimen,49.244162,-122.778125,BC,Greater Vancouver,Port Coquitlam backyard,279,2013,6,4,Dave G. Holden,DGH,MV; DH-000042,CA:5915,82251
 drepana-arcuata,specimen,49.782993,-115.724965,BC,East Kootenay,Wasa Lake,2585,2015,7,12,Dave G. Holden,DGH,UV; DH-000046,CA:5901,82252
-drepana-bilineata,specimen,50.954237,-124.867235,BC,Strathcona,Camp Homathco,75,2006,8,20,Dave G. Holden,DGH,MV/UV; DH-000049,CA:5924,82253
-drepana-bilineata,specimen,50.954237,-124.867235,BC,Strathcona,Camp Homathco,75,2006,8,21,Dave G. Holden,DGH,MV/UV; DH-000050,CA:5924,82254
-drepana-bilineata,specimen,50.954237,-124.867235,BC,Strathcona,Camp Homathco,75,2006,8,24,Dave G. Holden,DGH,"MV/UV; DH-000051, DH-000052",CA:5924,82255
-drepana-bilineata,specimen,49.138438,-122.290068,BC,Fraser Valley,Mission,210,2009,5,22,Dave G. Holden,DGH,MV/UV; DH-000057,CA:5909,82256
-drepana-bilineata,specimen,49.594218,-119.571499,BC,Okanagan-Similkameen,Naramata,1824,2010,8,1,Dave G. Holden,DGH,MV/UV; DH-000058,CA:5907,82257
-drepana-bilineata,specimen,49.314776,-122.665712,BC,Greater Vancouver,Pitt Meadows wma,16,2013,8,7,Dave G. Holden,DGH,MV/UV; DH-000056,CA:5915,82258
-drepana-bilineata,specimen,49.244162,-122.778125,BC,Greater Vancouver,Port Coquitlam backyard,279,2005,7,21,Dave G. Holden,DGH,MV; DH-000053,CA:5915,82259
-drepana-bilineata,specimen,51.534868,-120.946823,BC,Cariboo,Sheridan Lake Cabin,3668,2013,7,4,Dave G. Holden,DGH,MV/UV; DH-000054,CA:5941,82260
-drepana-bilineata,specimen,51.534868,-120.946823,BC,Cariboo,Sheridan Lake Cabin,3668,2014,7,2,Dave G. Holden,DGH,MV/UV; DH-000055,CA:5941,82261
-drepana-bilineata,specimen,49.277679,-122.55387,BC,Greater Vancouver,"UBC Research Forest, Maple Ridge",850,2006,5,28,Dave G. Holden,DGH,visual; DH-000059,CA:5915,82262
+falcaria-bilineata,specimen,50.954237,-124.867235,BC,Strathcona,Camp Homathco,75,2006,8,20,Dave G. Holden,DGH,MV/UV; DH-000049,CA:5924,82253
+falcaria-bilineata,specimen,50.954237,-124.867235,BC,Strathcona,Camp Homathco,75,2006,8,21,Dave G. Holden,DGH,MV/UV; DH-000050,CA:5924,82254
+falcaria-bilineata,specimen,50.954237,-124.867235,BC,Strathcona,Camp Homathco,75,2006,8,24,Dave G. Holden,DGH,"MV/UV; DH-000051, DH-000052",CA:5924,82255
+falcaria-bilineata,specimen,49.138438,-122.290068,BC,Fraser Valley,Mission,210,2009,5,22,Dave G. Holden,DGH,MV/UV; DH-000057,CA:5909,82256
+falcaria-bilineata,specimen,49.594218,-119.571499,BC,Okanagan-Similkameen,Naramata,1824,2010,8,1,Dave G. Holden,DGH,MV/UV; DH-000058,CA:5907,82257
+falcaria-bilineata,specimen,49.314776,-122.665712,BC,Greater Vancouver,Pitt Meadows wma,16,2013,8,7,Dave G. Holden,DGH,MV/UV; DH-000056,CA:5915,82258
+falcaria-bilineata,specimen,49.244162,-122.778125,BC,Greater Vancouver,Port Coquitlam backyard,279,2005,7,21,Dave G. Holden,DGH,MV; DH-000053,CA:5915,82259
+falcaria-bilineata,specimen,51.534868,-120.946823,BC,Cariboo,Sheridan Lake Cabin,3668,2013,7,4,Dave G. Holden,DGH,MV/UV; DH-000054,CA:5941,82260
+falcaria-bilineata,specimen,51.534868,-120.946823,BC,Cariboo,Sheridan Lake Cabin,3668,2014,7,2,Dave G. Holden,DGH,MV/UV; DH-000055,CA:5941,82261
+falcaria-bilineata,specimen,49.277679,-122.55387,BC,Greater Vancouver,"UBC Research Forest, Maple Ridge",850,2006,5,28,Dave G. Holden,DGH,visual; DH-000059,CA:5915,82262
 eudeilinia-herminiata,specimen,49.813677,-120.942912,BC,Thompson-Nicola,"Larson Hill, Coquihalla",3018,2015,5,30,Dave G. Holden,DGH,visual; DH-000060,CA:5933,82263
 eudeilinia-herminiata,specimen,49.813677,-120.942912,BC,Thompson-Nicola,"Larson Hill, Coquihalla",3018,2015,5,30,Dave G. Holden,LGCC,visual; ,CA:5933,82264
 euthyatira-pudens,specimen,49.196318,-122.542976,BC,Greater Vancouver,Maple Ridge,151,2006,5,25,Sue Grant,DGH,house light; DH-000003,CA:5915,82265
@@ -83055,7 +83055,7 @@ condica-discistriga,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, W
 condica-mersa,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,6,26,L. G. Crabo,LGCC,,US:16059,83054
 cryphia-cuerva,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,9,15,L. G. Crabo,LGCC,,US:16059,83055
 spodoptera-praefica,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,6,26,L. G. Crabo,LGCC,,US:16059,83056
-protoperigea-posticata,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,9,15,L. G. Crabo,LGCC,,US:16059,83057
+caradrina-posticata,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,9,15,L. G. Crabo,LGCC,,US:16059,83057
 caradrina-meralis,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,9,15,L. G. Crabo,LGCC,,US:16059,83058
 caradrina-camina,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,9,15,L. G. Crabo,LGCC,,US:16059,83059
 caradrina-montana,specimen,45.391,-113.964,ID,Lemhi,"North Fork, 2.0 mi ESE, Wagonhammer RS",3806,2020,6,26,L. G. Crabo,LGCC,,US:16059,83060
@@ -83171,7 +83171,7 @@ helicoverpa-zea,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2
 heliothis-phloxiphaga,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83170
 schinia-acutilinea,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83171
 cryphia-cuerva,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83172
-protoperigea-posticata,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83173
+caradrina-posticata,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83173
 caradrina-meralis,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83174
 caradrina-camina,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83175
 caradrina-montana,specimen,42.806,-116.24,ID,Owyhee,"Grand View, 23 km SSW",3691,2020,9,17,L. G. Crabo,LGCC,,US:16073,83176
@@ -83234,7 +83234,7 @@ autographa-californica,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Tr
 sympistis-satanella,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83233
 sympistis-iricolor,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83234
 sympistis-sesmu,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83235
-protoperigea-posticata,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83236
+caradrina-posticata,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83236
 caradrina-camina,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83237
 caradrina-montana,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83238
 apamea-burgessi,specimen,42.842,-116.118,ID,Owyhee,Oolite Interpretive Trail,3074,2020,9,17,L. G. Crabo,LGCC,,US:16073,83239
@@ -83384,7 +83384,7 @@ abagrotis-apposita,specimen,44.558,-115.682,ID,Valley,"Stolle Meadows, S end",55
 abagrotis-discoidalis,specimen,44.558,-115.682,ID,Valley,"Stolle Meadows, S end",5528,2020,8,18,LG Crabo/CA Coughlin,LGCC,,US:16085,83383
 abagrotis-placida,specimen,44.558,-115.682,ID,Valley,"Stolle Meadows, S end",5528,2020,8,18,LG Crabo/CA Coughlin,LGCC,,US:16085,83384
 abagrotis-forbesi,specimen,44.558,-115.682,ID,Valley,"Stolle Meadows, S end",5528,2020,8,18,LG Crabo/CA Coughlin,LGCC,,US:16085,83385
-drepana-bilineata,specimen,48.3345,-113.9494,MT,Flathead,NE Hungry Horse Res,3609,2018,7,14,LG Crabo/C Coughlin,LGCC,,US:30029,83386
+falcaria-bilineata,specimen,48.3345,-113.9494,MT,Flathead,NE Hungry Horse Res,3609,2018,7,14,LG Crabo/C Coughlin,LGCC,,US:30029,83386
 nadata-gibbosa,specimen,48.3345,-113.9494,MT,Flathead,NE Hungry Horse Res,3609,2018,7,14,LG Crabo/C Coughlin,LGCC,,US:30029,83387
 dasychira-grisefacta,specimen,48.3345,-113.9494,MT,Flathead,NE Hungry Horse Res,3609,2018,7,14,LG Crabo/C Coughlin,LGCC,,US:30029,83388
 lophocampa-maculata,specimen,48.3345,-113.9494,MT,Flathead,NE Hungry Horse Res,3609,2018,7,14,LG Crabo/C Coughlin,LGCC,,US:30029,83389
@@ -83497,7 +83497,7 @@ heliothis-phloxiphaga,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW"
 schinia-acutilinea,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83496
 cryphia-cuerva,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83497
 spodoptera-praefica,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83498
-protoperigea-posticata,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83499
+caradrina-posticata,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83499
 caradrina-camina,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83500
 caradrina-montana,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83501
 apamea-burgessi,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2749,2020,9,18,L. G. Crabo,LGCC,,US:41045,83502
@@ -83600,7 +83600,7 @@ xestia-c-nigrum,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2018,5,9
 parabagrotis-formalis,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2018,5,9,L. G. Crabo,LGCC,,US:41045,83599
 abagrotis-forbesi,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2018,5,9,L. G. Crabo,LGCC,,US:41045,83600
 autographa-californica,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2020,10,5,L. Crabo & C. Coughlin,LGCC,,US:41045,83601
-protoperigea-posticata,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2020,10,5,L. Crabo & C. Coughlin,LGCC,,US:41045,83602
+caradrina-posticata,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2020,10,5,L. Crabo & C. Coughlin,LGCC,,US:41045,83602
 caradrina-meralis,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2020,10,5,L. Crabo & C. Coughlin,LGCC,,US:41045,83603
 caradrina-montana,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2020,10,5,L. Crabo & C. Coughlin,LGCC,,US:41045,83604
 apamea-burgessi,specimen,43.453,-117.12,OR,Malheur,Succor Creek SP,2838,2020,10,5,L. Crabo & C. Coughlin,LGCC,,US:41045,83605
@@ -84967,7 +84967,7 @@ protolampra-rufipectus,specimen,51.596,-122.304,BC,Cariboo,Fraser R opposite Cam
 protolampra-rufipectus,specimen,51.33,-121.421,BC,Thompson-Nicola,"70 Mile House, 3.4 km NNW",3570,2022,7,29,LG Crabo/T Keskey,LGCC,,CA:5933,84966
 protolampra-rufipectus,specimen,45.428,-113.835,ID,Lemhi,4th of July Cr,6315,2020,7,12,LG Crabo/CA Coughlin,LGCC,,US:16059,84967
 protolampra-rufipectus,specimen,47.341,-120.591,WA,Chelan,"Blewett Pass, 1 km NW",4255,2021,7,14,LG Crabo/CA Coughlina,LGCC,,US:53007,84968
-protoperigea-anotha,specimen,45.428,-113.835,ID,Lemhi,4th of July Cr,6315,2020,7,12,LG Crabo/CA Coughlin,LGCC,,US:16059,84969
+caradrina-anotha,specimen,45.428,-113.835,ID,Lemhi,4th of July Cr,6315,2020,7,12,LG Crabo/CA Coughlin,LGCC,,US:16059,84969
 trichopolia-alfkenii,specimen,42.156,-122.619,OR,Jackson,Emigrant Lake CG,2378,2022,7,20,LG Crabo/CA Coughlin,LGCC,,US:41029,84970
 trichopolia-curtica,specimen,48.735,-121.037,WA,Whatcom,"Ross L., Ruby Arm",1750,2022,8,15,L. G. Crabo,LGCC,,US:53073,84971
 trichopolia-rufula,specimen,44.113,-123.053,OR,Lane,"Eugene, Armitage Park",383,2022,7,21,LG Crabo/CA Coughlin,LGCC,,US:41039,84972
@@ -88812,7 +88812,7 @@ sideridis-uscripta,specimen,44.001,-111.78,ID,Fremont,"St. Anthony dunes, Red Rd
 ulolonche-orbiculata,specimen,44.001,-111.78,ID,Fremont,"St. Anthony dunes, Red Rd",4975,2024,6,6,L. G. Crabo,LGCC,,US:16043,88811
 sideridis-uscripta,specimen,44.057,-111.754,ID,Fremont,"St. Anthony dunes, White Sands Rd",5173,2024,6,6,L. G. Crabo,LGCC,,US:16043,88812
 ulolonche-orbiculata,specimen,44.057,-111.754,ID,Fremont,"St. Anthony dunes, White Sands Rd",5173,2024,6,6,L. G. Crabo,LGCC,,US:16043,88813
-hypercompe-permaculata,specimen,46.6218,-113.5942,MT,Granite,Brewster Cr Rd @ Golden Gulch,4240,2024,6,7,LG Crabo,LGCC,,US:30039,88814
+hypsocompe-permaculata,specimen,46.6218,-113.5942,MT,Granite,Brewster Cr Rd @ Golden Gulch,4240,2024,6,7,LG Crabo,LGCC,,US:30039,88814
 malacosoma-californica,specimen,43.9253,-117.6579,OR,Malheur,"Harper, 8.8 km NNW",2750,2024,6,3,L. G. Crabo,LGCC,,US:41045,88815
 malacosoma-californica,specimen,48.649,-122.581,WA,Whatcom,Eliza Island,30,2024,7,14,L Crabo/C Coughlin,LGCC,,US:53073,88816
 parabagrotis-sulinaris,specimen,48.649,-122.581,WA,Whatcom,Eliza Island,30,2024,7,14,L Crabo/C Coughlin,LGCC,,US:53073,88817
@@ -91665,7 +91665,7 @@ leucania-insueta,specimen,56.333,-120.25,BC,Peace River,"Goodlow, 4.3 mi. W; bog
 papestra-brenda,specimen,51.82,-125.02,BC,Cariboo,Perkins Pk.,6415,2005,8,5,L. G. Crabo,LGCC,Papestra difficult,CA:5941,91663
 euxoa-divergens,specimen,51.82,-125.02,BC,Cariboo,Perkins Pk.,6415,2005,8,5,L. G. Crabo,LGCC,,CA:5941,91664
 pseudothyatira-cymatophoroides,specimen,55.2,-129.083,BC,Kitimat-Stikine,New Aiyansh,231,1940,,,H. & L. Hughan,JHS,,CA:5949,91665
-drepana-bilineata,specimen,56.283,-120.95,BC,Peace River,Charlie Lake,2342,1997,7,5,Jon H. Shepard,RBCM,Shepard notes,CA:5955,91666
+falcaria-bilineata,specimen,56.283,-120.95,BC,Peace River,Charlie Lake,2342,1997,7,5,Jon H. Shepard,RBCM,Shepard notes,CA:5955,91666
 melanchra-assimilis,specimen,56.124,-120.042,BC,Peace River,"Clayhurst bridge, N",1270,1999,7,11,Crabo/Troubridge,LGCC,,CA:5955,91667
 panthea-virginarius,specimen,48.83,-125.13,BC,Alberni-Clayoquot,Bamfield,76,1995,5,20,James Jones,JHS,,CA:5923,91668
 clostera-apicalis,specimen,56.83,-120.84,BC,Peace River,"Sunset Prarie Rd.,; 3.65 mi. N. H. 97",2205,1989,6,2,L. G. Crabo,LGCC,,CA:5955,91669
@@ -94209,8 +94209,8 @@ spilosoma-vagans,specimen,45.214,-108.554,MT,Carbon,Sage Cr. CG,6800,1997,7,7,C.
 estigmene-acrea,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,5,C. E. Harp,CEH,SS-97,US:30095,94192
 estigmene-acrea,specimen,45.76,-109.79,MT,Sweet Grass,"Greycliff, 4mE-Mkr 381 I-90",4500,1998,7,5,Chuck Harp,CEH,,US:30097,94193
 estigmene-acrea,specimen,45.783,-108.501,MT,Yellowstone,"Billings, W - Broadwater Ave. ",3100,1998,6,7,Chuck Harp,CEH,,US:30111,94194
-hypercompe-permaculata,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96,US:30009,94195
-hypercompe-permaculata,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,5,C. E. Harp,CEH,SS-98,US:30095,94196
+hypsocompe-permaculata,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96,US:30009,94195
+hypsocompe-permaculata,specimen,45.6,-109.04,MT,Stillwater,"Park City, 7mW I-90",3750,1998,7,5,C. E. Harp,CEH,SS-98,US:30095,94196
 pyrrharctia-isabella,specimen,45.44,-109.215,MT,Carbon,Cooney Res. SP,4267,1997,5,31,C. E. Harp,CEH,SS-97,US:30009,94197
 lophocampa-maculata,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96,US:30009,94198
 cycnia-oregonensis,specimen,45.208,-108.558,MT,Carbon,"Sage Cr. @ SR144, Prior Ms",5500,1996,6,16,C. & C. Harp,CEH,SS-96,US:30009,94199

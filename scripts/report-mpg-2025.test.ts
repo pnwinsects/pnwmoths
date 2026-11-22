@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   applyNumbers,
+  applyPlacements,
   authorityKey,
   findDifferences,
   formatAuthority,
@@ -260,5 +261,42 @@ describe('number-of-another-species when our number agrees with MPG', () => {
       ],
     );
     assert.deepEqual(rows.map((r) => [r.field, r.mpg]), [['number-of-another-species', 'Clostera multnoma (2025: 93-0008.1)']]);
+  });
+});
+
+describe('applyPlacements', () => {
+  const header = 'id,genus,species,family,subfamily,tribe\n';
+  const tribe = (name: string) => row({ rank: '4.0 tribe', NAME: name });
+  const inputs = (species: SpeciesRow[], mpgRows: Mpg2025Row[]) => ({ species, mpgRows, crosswalk: new Map<string, string>(), shown: new Set<string>() });
+
+  it('moves a whole genus, provisional names included, when MPG places it in one tribe', () => {
+    const csv = header + '1,Sphinx,drupiferarum,Sphingidae,Sphinginae,\n2,Sphinx,sp,Sphingidae,Sphinginae,\n';
+    const { text, changed } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Sphinx', species: 'drupiferarum', family: 'Sphingidae', subfamily: 'Sphinginae' }), ours({ genus: 'Sphinx', species: 'sp', family: 'Sphingidae', subfamily: 'Sphinginae' })],
+      [tribe('Sphingini'), valid('Sphinx', 'drupiferarum', { Family: 'Sphingidae', Subfamily: 'Sphinginae' })],
+    ));
+    assert.equal(text, csv.replace(/Sphinginae,\n/g, 'Sphinginae,Sphingini\n'));
+    assert.deepEqual(changed.map((c) => [c.genus, c.field, c.to, c.species]), [['Sphinx', 'tribe', 'Sphingini', 2]]);
+  });
+
+  // The build requires one placement per genus (ADR 0056).
+  it('leaves alone a genus that MPG places in two tribes', () => {
+    const csv = header + '1,Aaa,one,F,S,\n2,Aaa,two,F,S,\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'F', subfamily: 'S' }), ours({ genus: 'Aaa', species: 'two', family: 'F', subfamily: 'S' })],
+      [tribe('Xini'), valid('Aaa', 'one', { Family: 'F', Subfamily: 'S' }), tribe('Yini'), valid('Aaa', 'two', { Family: 'F', Subfamily: 'S' })],
+    ));
+    assert.equal(text, csv);
+    assert.match(refused[0]?.reason ?? '', /Xini, Yini/);
+  });
+
+  it('leaves alone a genus the curator ruled on', () => {
+    const csv = header + '1,Perizoma,curvilinea,Geometridae,Larentiinae,Euphyiini\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Perizoma', species: 'curvilinea', family: 'Geometridae', subfamily: 'Larentiinae', tribe: 'Euphyiini' })],
+      [tribe('[Larentiinae – unplaced to tribe]'), valid('"Perizoma" (group 2)', 'curvilinea', { Family: 'Geometridae', Subfamily: 'Larentiinae' })],
+    ));
+    assert.equal(text, csv);
+    assert.deepEqual(refused.map((r) => r.reason), ['ruled C-043']);
   });
 });

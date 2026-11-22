@@ -43,7 +43,7 @@ The reason is saved in `data/species-redirects.csv` beside the redirect from the
 
 It changes the slug in every data file that holds one, moves the species' account to the new file
 name under `src/content/species/`, adds the redirect and a synonym row for the old name, and
-regenerates the checklist order, the Identify data and the hidden-images report. It stops before
+regenerates the checklist order, the Identify data, the hidden-images report and the MPG difference report. It stops before
 writing anything if the old slug would still appear somewhere afterwards, and it tells you where.
 
 It is safe to run twice. The second run says the new species already exists and does nothing. If a

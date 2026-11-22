@@ -108,6 +108,12 @@ export interface Relation {
   readonly cardinality: 'unique' | 'repeated';
   /** What the relation is for, printed with any violation so the fix is obvious. */
   readonly note: string;
+  /**
+   * A CSV that is legitimately empty at times. No references is accepted, but
+   * readReferences still throws when the header does not name `column`, which is
+   * the renamed-column or BOM case the `empty` check exists for.
+   */
+  readonly mayBeEmpty?: boolean;
 }
 
 /**
@@ -200,6 +206,8 @@ export const RELATIONS: readonly Relation[] = [
     column: 'species_slug',
     cardinality: 'unique',
     note: 'hand-authored MPG matches for names the mechanical tiers missed',
+    // Empty whenever every species matches MPG by name, as after the #279 genus moves.
+    mayBeEmpty: true,
   },
   {
     name: 'species.csv:similar_species',
@@ -303,6 +311,12 @@ export function readReferences(relation: Relation, root = '.'): Reference[] | nu
         throw new Error(`[check-referential-integrity] relation "${relation.name}" is a CSV kind with no column`);
       }
       const refs: Reference[] = [];
+      if (relation.mayBeEmpty) {
+        const header = (readFileSync(full, 'utf8').replace(/^\uFEFF/, '').split(/\r?\n/)[0] ?? '').split(',');
+        if (!header.map((cell) => cell.trim()).includes(column)) {
+          throw new Error(`[check-referential-integrity] ${relation.path} has no "${column}" column`);
+        }
+      }
       for (const { record, info } of parseCsv(relation.path, full)) {
         const cell = record[column];
         if (cell === undefined || cell.trim() === '') continue;
@@ -516,7 +530,9 @@ export function findViolations(
     if (refs.length === 0) {
       // A declared source that yields nothing is the gate's own worst failure: it
       // reports success having checked nothing. Renamed column, truncated file, BOM.
-      record({ relation: relation.name, kind: 'empty', slug: '', count: 0 });
+      // A relation that may be empty is let through here; readReferences has
+      // already refused one whose header lost the column.
+      if (!relation.mayBeEmpty) record({ relation: relation.name, kind: 'empty', slug: '', count: 0 });
       continue;
     }
 

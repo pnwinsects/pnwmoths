@@ -34,7 +34,8 @@
 // numbers are applied; curation-log entry C-047 keeps the list of what changed.
 //
 // Run: npm run report:mpg-2025
-//      npm run report:mpg-2025 -- --apply-numbers   # also writes the numbers into data/species.csv
+//      npm run report:mpg-2025 -- --apply-numbers      # also writes the numbers into data/species.csv
+//      npm run report:mpg-2025 -- --apply-placements   # also writes family, subfamily and tribe, a genus at a time
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -330,6 +331,70 @@ export function applyNumbers(speciesText: string, differences: DifferenceRow[]):
   return { text, applied };
 }
 
+export type PlacementField = 'family' | 'subfamily' | 'tribe';
+const PLACEMENT_FIELDS: readonly PlacementField[] = ['family', 'subfamily', 'tribe'];
+
+export interface PlacementResult {
+  text: string;
+  /** One entry per genus and field changed: what it was (per species, joined) and what it now is. */
+  changed: Array<{ genus: string; field: PlacementField; from: string; to: string; species: number }>;
+  /** Genera left alone, and why. */
+  refused: Array<{ genus: string; field: PlacementField; reason: string }>;
+}
+
+/**
+ * Writes MPG's family, subfamily and tribe into data/species.csv, a whole genus
+ * at a time, because the build requires every species of a genus to share one
+ * placement (ADR 0056). A genus is changed only when every species of ours that
+ * MPG holds is in the same MPG placement; a genus MPG itself splits is refused
+ * and listed, as is one with a ruling on any of its species (C-041, C-043).
+ * Species of the genus MPG does not hold (provisional names) take the genus's
+ * placement too.
+ */
+export function applyPlacements(speciesText: string, inputs: Inputs): PlacementResult {
+  const index = buildMpgIndex(inputs.mpgRows);
+  const mpg = readSpecies(inputs.mpgRows);
+  const byGenus = new Map<string, SpeciesRow[]>();
+  for (const row of inputs.species) byGenus.set(row.genus, [...(byGenus.get(row.genus) ?? []), row]);
+
+  const target = new Map<string, Partial<Record<PlacementField, string>>>();
+  const result: PlacementResult = { text: speciesText, changed: [], refused: [] };
+  for (const [genus, members] of byGenus) {
+    for (const field of PLACEMENT_FIELDS) {
+      const ruling = members.map((m) => rulingFor(field, slugOf(m), genus)).find((r) => r !== '');
+      const values = new Set<string>();
+      for (const member of members) {
+        const hit = matchSpecies({ ...member }, index, inputs.crosswalk);
+        const entry = hit ? mpg[hit.index] : undefined;
+        if (entry) values.add(entry[field]);
+      }
+      if (values.size === 0) continue;
+      const [value = ''] = values;
+      const current = new Set(members.map((m) => m[field]));
+      if (current.size === 1 && current.has(value)) continue;
+      if (ruling) {
+        result.refused.push({ genus, field, reason: `ruled ${ruling}` });
+        continue;
+      }
+      if (values.size > 1) {
+        result.refused.push({ genus, field, reason: `MPG places its species in ${[...values].map((v) => v || '(none)').join(', ')}` });
+        continue;
+      }
+      target.set(genus, { ...target.get(genus), [field]: value });
+      result.changed.push({ genus, field, from: [...current].map((v) => v || '(blank)').join(' / '), to: value || '(blank)', species: members.length });
+    }
+  }
+  result.text = editCsv(speciesText, 'data/species.csv', (record) => {
+    const fields = target.get(record.genus ?? '');
+    if (!fields) return;
+    for (const field of PLACEMENT_FIELDS) {
+      const value = fields[field];
+      if (value !== undefined) record[field] = value;
+    }
+  }).text;
+  return result;
+}
+
 function readCsv<T>(path: string): T[] {
   return parse(readFileSync(resolve(ROOT, path)), { columns: true, skip_empty_lines: true }) as T[];
 }
@@ -355,6 +420,14 @@ function main(): void {
     writeFileSync(speciesPath, text);
     console.log(`[report-mpg-2025] wrote ${applied.length} checklist numbers into data/species.csv`);
     for (const row of applied) console.log(`  ${row.species_slug.padEnd(36)} ${(row.ours || '(blank)').padEnd(12)} -> ${row.mpg}  ${row.note}`);
+  }
+  if (process.argv.includes('--apply-placements')) {
+    const speciesPath = resolve(ROOT, 'data/species.csv');
+    const { text, changed, refused } = applyPlacements(readFileSync(speciesPath, 'utf8'), loadInputs());
+    writeFileSync(speciesPath, text);
+    console.log(`[report-mpg-2025] changed ${changed.length} genus placements in data/species.csv`);
+    for (const c of changed) console.log(`  ${c.genus.padEnd(20)} ${c.field.padEnd(10)} ${c.from} -> ${c.to} (${c.species} species)`);
+    for (const r of refused) console.log(`  left alone: ${r.genus} ${r.field} (${r.reason})`);
   }
   const inputs = loadInputs();
   const rows = findDifferences(inputs);

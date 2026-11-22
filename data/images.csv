@@ -1214,10 +1214,10 @@ drepana-arcuata,Drepana arcuata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,do
 drepana-arcuata,Drepana arcuata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,Discovery Park,WA,47.66,-122.41,164,1990,5,5,L. G. Crabo,,
 drepana-arcuata,Drepana arcuata-C-D.jpg,Merrill A. Peterson,5,CC BY-NC-SA 4.0,dorsal,C,S. Ross L.,WA,48.742,-121.055,1900,2007,8,15,L. G. Crabo,,
 drepana-arcuata,Drepana arcuata-C-V.jpg,Merrill A. Peterson,6,CC BY-NC-SA 4.0,ventral,C,S. Ross L.,WA,48.742,-121.055,1900,2007,8,15,L. G. Crabo,,
-drepana-bilineata,Drepana bilineata-A-V.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,ventral,A,S. Ross L.,WA,48.742,-121.055,1900,2007,8,15,L. G. Crabo,,
-drepana-bilineata,Drepana bilineata-B-D.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,dorsal,B,"Enfield, NW Cold Stream Pond",ME,45.28,-68.56,370,1986,4,30,LG Crabo,,
-drepana-bilineata,Drepana bilineata-B-V.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,ventral,B,"Enfield, NW Cold Stream Pond",ME,45.28,-68.56,370,1986,4,30,LG Crabo,,
-drepana-bilineata,Drepana bilineata-A-D.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
+falcaria-bilineata,Drepana bilineata-A-V.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,ventral,A,S. Ross L.,WA,48.742,-121.055,1900,2007,8,15,L. G. Crabo,,drepana-bilineata
+falcaria-bilineata,Drepana bilineata-B-D.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,dorsal,B,"Enfield, NW Cold Stream Pond",ME,45.28,-68.56,370,1986,4,30,LG Crabo,,drepana-bilineata
+falcaria-bilineata,Drepana bilineata-B-V.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,ventral,B,"Enfield, NW Cold Stream Pond",ME,45.28,-68.56,370,1986,4,30,LG Crabo,,drepana-bilineata
+falcaria-bilineata,Drepana bilineata-A-D.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,drepana-bilineata
 drepanulatrix-carnearia,Drepanulatrix carnearia-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 drepanulatrix-carnearia,Drepanulatrix carnearia-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
 drepanulatrix-foeminaria,Drepanulatrix foeminaria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
@@ -1294,12 +1294,12 @@ enargia-infumata,Enargia infumata-C-D.jpg,Merrill A. Peterson,7,CC BY-NC-SA 4.0,
 enargia-infumata,Enargia infumata-C-V.jpg,Merrill A. Peterson,8,CC BY-NC-SA 4.0,ventral,C,,,,,,,,,,,
 ennomos-alniaria,Ennomos alniaria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 ennomos-alniaria,Ennomos alniaria-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-enypia-packardata,Enypia packardata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-enypia-packardata,Enypia packardata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-enypia-venata,Enypia venata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-enypia-venata,Enypia venata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-enypia-venata,Enypia venata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-enypia-venata,Enypia venata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
+sabulodes-packardata,Enypia packardata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,enypia-packardata
+sabulodes-packardata,Enypia packardata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,enypia-packardata
+sabulodes-venata,Enypia venata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,enypia-venata
+sabulodes-venata,Enypia venata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,enypia-venata
+sabulodes-venata,Enypia venata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,enypia-venata
+sabulodes-venata,Enypia venata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,enypia-venata
 eosphoropteryx-thyatyroides,Eosphoropteryx thyatyroides-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Chuckanut Bay,WA,48.69,-122.49,328,1993,7,16,L. G. Crabo,,
 eosphoropteryx-thyatyroides,Eosphoropteryx thyatyroides-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Chuckanut Bay,WA,48.69,-122.49,328,1993,7,16,L. G. Crabo,,
 epelis-truncataria,Epelis truncataria - A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,,,,,,,,,,,,,
@@ -1850,8 +1850,8 @@ feralia-februalis,Feralia februalis-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.
 feralia-februalis,Feralia februalis-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Texter Gulch,OR,42.11,-123,2734,1993,3,26,L. G. Crabo,,
 feralia-jocosa,Feralia jocosa-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Sproule Cr.,BC,49.533,-117.417,2837,1990,4,13,J. H. Shepard,,
 feralia-jocosa,Feralia jocosa-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Sproule Cr.,BC,49.533,-117.417,2837,1990,4,13,J. H. Shepard,,
-fernaldella-fimetaria,Fernaldella fimeteria - A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,,,,,,,,,,,,,
-fernaldella-fimetaria,Fernaldella fimeteria - A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,,,,,,,,,,,,,
+narraga-fimetaria,Fernaldella fimeteria - A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,,,,,,,,,,,,,fernaldella-fimetaria
+narraga-fimetaria,Fernaldella fimeteria - A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,,,,,,,,,,,,,fernaldella-fimetaria
 fishia-connecta,Fishia connecta-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,"Adel, Deep Cr.",OR,42.18,-119.91,4700,2001,9,21,Crabo/Troubridge,,
 fishia-connecta,Fishia connecta-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,"Adel, Deep Cr.",OR,42.18,-119.91,4700,2001,9,21,Crabo/Troubridge,,
 fishia-connecta,Fishia connecta-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,SE L. Abert,OR,42.53,-120.231,4345,2001,9,21,Crabo/Troubridge,,
@@ -2054,8 +2054,8 @@ hydraecia-obliqua,Hydraecia obliqua-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.
 hydraecia-obliqua,Hydraecia obliqua-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,S Fork McKenzie R.; rd. to Cougar Res.,OR,44.15,-122.25,1233,1991,9,14,L. & A. Crabo,,
 hydraecia-perobliqua,Hydraecia perobliqua-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Potholes,WA,46.989,-119.425,1104,2002,8,30,L. G. Crabo,,
 hydraecia-perobliqua,Hydraecia perobliqua-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Potholes,WA,46.989,-119.425,1104,2002,8,30,L. G. Crabo,,
-hydria-undulata,Hydria undulata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-hydria-undulata,Hydria undulata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
+rheumaptera-undulata,Hydria undulata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,hydria-undulata
+rheumaptera-undulata,Hydria undulata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,hydria-undulata
 hydriomena-furcata,Hydriomena furcata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 hydriomena-furcata,Hydriomena furcata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
 hydriomena-perfracta,Hydriomena perfracta-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
@@ -2106,8 +2106,8 @@ hypenodes-fractilinea,Hypenodes fractilinea-A-D.jpg,Merrill A. Peterson,1,CC BY-
 hypenodes-fractilinea,Hypenodes fractilinea-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Pt. Coquitlam,BC,49.24417,-122.778,236,2007,7,16,D. Holden,,
 hypenodes-sombrus,Hypenodes sobria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Sheridan Lake,BC,51.53493,-120.9467,3668,2012,8,4,D.G. Holden,,
 hypenodes-sombrus,Hypenodes sobria-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Sheridan Lake,BC,51.53493,-120.9467,3668,2012,8,4,D.G. Holden,,
-hypercompe-permaculata,Hypercompe permaculata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Hwy 41 at S Saskatchewan R crossing. Badlands,AB,50.731,-110.076,2100,1999,7,13,L Crabo & J Troubridge.,,
-hypercompe-permaculata,Hypercompe permaculata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Hwy 41 at S Saskatchewan R crossing. Badlands,AB,50.731,-110.076,2100,1999,7,13,L Crabo & J Troubridge.,,
+hypsocompe-permaculata,Hypercompe permaculata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Hwy 41 at S Saskatchewan R crossing. Badlands,AB,50.731,-110.076,2100,1999,7,13,L Crabo & J Troubridge.,,hypercompe-permaculata
+hypsocompe-permaculata,Hypercompe permaculata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Hwy 41 at S Saskatchewan R crossing. Badlands,AB,50.731,-110.076,2100,1999,7,13,L Crabo & J Troubridge.,,hypercompe-permaculata
 hyphantria-cunea,Hyphantria cunea-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Burnt R. Cyn.,OR,44.55,-117.666,3179,2007,6,15,L. G. Crabo,,
 hyphantria-cunea,Hyphantria cunea-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Burnt R. Cyn.,OR,44.55,-117.666,3179,2007,6,15,L. G. Crabo,,
 hypocoena-basistriga,Hypocoena basistriga-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Lloydminster,SK,53.28,-110.01,2117,1948,9,10,PF Bruggemann,,
@@ -3071,18 +3071,18 @@ protolampra-brunneicollis,Protolampra brunneicollis-A-D.jpg,Merrill A. Peterson,
 protolampra-brunneicollis,Protolampra brunneicollis-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Stittsville,ON,45.2005,-75.98,430,2003,6,28,J Troubridge,,
 protolampra-rufipectus,Protolampra rufipectus-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Ninemile-Hellgate Rd.; opp. Mouth Spokane R.,WA,47.881,-118.359,1297,1999,8,7,L. & E. Crabo,,
 protolampra-rufipectus,Protolampra rufipectus-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Ninemile-Hellgate Rd.; opp. Mouth Spokane R.,WA,47.881,-118.359,1297,1999,8,7,L. & E. Crabo,,
-protoperigea-anotha,Protoperigea anotha-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Salmo Mtn,WA,48.9,-117.09,5860,2007,7,17,LG Crabo,,
-protoperigea-anotha,Protoperigea anotha-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Salmo Mtn,WA,48.9,-117.09,5860,2007,7,17,LG Crabo,,
-protoperigea-calientensis,Protoperigea calientensis-A-D.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-protoperigea-calientensis,Protoperigea calientensis-A-V.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-protoperigea-calientensis,Protoperigea calientensis-B-D.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-protoperigea-calientensis,Protoperigea calientensis-B-V.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-protoperigea-posticata,Protoperigea posticata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-protoperigea-posticata,Protoperigea posticata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-protoperigea-posticata,Protoperigea posticata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-protoperigea-posticata,Protoperigea posticata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-protoperigea-umbricata,Protoperigea umbricata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Burnt R. Cyn.,OR,44.54,-117.66,4194,2001,8,22,L. G. Crabo,,
-protoperigea-umbricata,Protoperigea umbricata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Burnt R. Cyn.,OR,44.54,-117.66,4194,2001,8,22,L. G. Crabo,,
+caradrina-anotha,Protoperigea anotha-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Salmo Mtn,WA,48.9,-117.09,5860,2007,7,17,LG Crabo,,protoperigea-anotha
+caradrina-anotha,Protoperigea anotha-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Salmo Mtn,WA,48.9,-117.09,5860,2007,7,17,LG Crabo,,protoperigea-anotha
+caradrina-calientensis,Protoperigea calientensis-A-D.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,protoperigea-calientensis
+caradrina-calientensis,Protoperigea calientensis-A-V.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,protoperigea-calientensis
+caradrina-calientensis,Protoperigea calientensis-B-D.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,protoperigea-calientensis
+caradrina-calientensis,Protoperigea calientensis-B-V.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,protoperigea-calientensis
+caradrina-posticata,Protoperigea posticata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,protoperigea-posticata
+caradrina-posticata,Protoperigea posticata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,protoperigea-posticata
+caradrina-posticata,Protoperigea posticata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,protoperigea-posticata
+caradrina-posticata,Protoperigea posticata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,protoperigea-posticata
+caradrina-umbricata,Protoperigea umbricata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Burnt R. Cyn.,OR,44.54,-117.66,4194,2001,8,22,L. G. Crabo,,protoperigea-umbricata
+caradrina-umbricata,Protoperigea umbricata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Burnt R. Cyn.,OR,44.54,-117.66,4194,2001,8,22,L. G. Crabo,,protoperigea-umbricata
 trichopolia-alfkenii,Protorthodes alfkenii-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Namorf,OR,43.774,-117.736,2637,2001,8,21,L. G. Crabo,,
 trichopolia-alfkenii,Protorthodes alfkenii-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,Namorf,OR,43.774,-117.736,2637,2001,8,21,L. G. Crabo,,
 trichopolia-curtica,Protorthodes curtica-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,Namorf,OR,43.774,-117.736,2637,2003,8,29,L. G. Crabo,,
@@ -3402,10 +3402,10 @@ speranza-bitactata,Speranza bitactata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 
 speranza-bitactata,Speranza bitactata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
 speranza-bitactata,Speranza bitactata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
 speranza-bitactata,Speranza bitactata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-speranza-boreata,Speranza boreata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-boreata,Speranza boreata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-boreata,Speranza boreata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-speranza-boreata,Speranza boreata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
+macaria-boreata,Speranza boreata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-boreata
+macaria-boreata,Speranza boreata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-boreata
+macaria-boreata,Speranza boreata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,speranza-boreata
+macaria-boreata,Speranza boreata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,speranza-boreata
 speranza-brunneata,Speranza brunneata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 speranza-brunneata,Speranza brunneata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
 macaria-colata,Speranza colata-D-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,D,,,,,,,,,,,
@@ -3416,36 +3416,36 @@ speranza-decorata,Speranza decorata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.
 speranza-decorata,Speranza decorata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
 speranza-decorata,Speranza decorata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
 speranza-decorata,Speranza decorata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-speranza-exauspicata,Speranza exhauspicata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-exauspicata,Speranza exhauspicata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-exauspicata,Speranza exhauspicata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-speranza-exauspicata,Speranza exhauspicata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-speranza-guenearia,Speranza guenearia-A-V.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-guenearia,Speranza guenearia-D.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,,,,,,,,,,,,,
-speranza-helena,Speranza helena-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-helena,Speranza helena-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-helena,Speranza helena-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-speranza-helena,Speranza helena-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
+macaria-exauspicata,Speranza exhauspicata-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-exauspicata
+macaria-exauspicata,Speranza exhauspicata-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-exauspicata
+macaria-exauspicata,Speranza exhauspicata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,speranza-exauspicata
+macaria-exauspicata,Speranza exhauspicata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,speranza-exauspicata
+macaria-guenearia,Speranza guenearia-A-V.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-guenearia
+macaria-guenearia,Speranza guenearia-D.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,,,,,,,,,,,,,speranza-guenearia
+macaria-helena,Speranza helena-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-helena
+macaria-helena,Speranza helena-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-helena
+macaria-helena,Speranza helena-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,speranza-helena
+macaria-helena,Speranza helena-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,speranza-helena
 speranza-loricaria,Speranza loricaria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 speranza-loricaria,Speranza loricaria-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
 macaria-lorquinaria,Speranza lorguinaria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
 macaria-lorquinaria,Speranza lorguinaria-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-occiduaria,Speranza occiduaria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-occiduaria,Speranza occiduaria-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-occiduaria,Speranza andersoni-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-speranza-occiduaria,Speranza andersoni-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
+macaria-occiduaria,Speranza occiduaria-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-occiduaria
+macaria-occiduaria,Speranza occiduaria-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-occiduaria
+macaria-occiduaria,Speranza andersoni-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,speranza-occiduaria
+macaria-occiduaria,Speranza andersoni-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,speranza-occiduaria
 macaria-plumosata,Speranza plumosata-D-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,D,,,,,,,,,,,
 macaria-plumosata,Speranza plumosata-D-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,D,,,,,,,,,,,
 macaria-plumosata,Speranza plumosata-B-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
 macaria-plumosata,Speranza plumosata-B-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-speranza-quadrilinearia,Itame quadrilinearia-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-quadrilinearia,Itame quadrilinearia-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-quadrilinearia,Speranza quadrilinearia-A-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-quadrilinearia,Speranza quadrilinearia-A-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
-speranza-quadrilinearia,Speranza quadrilinearia-B-D.jpg,Merrill A. Peterson,5,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,
-speranza-quadrilinearia,Speranza quadrilinearia-B-V.jpg,Merrill A. Peterson,6,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,
-speranza-simplex,Speranza simplex-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,
-speranza-simplex,Speranza simplex-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,
+macaria-quadrilinearia,Itame quadrilinearia-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-quadrilinearia
+macaria-quadrilinearia,Itame quadrilinearia-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-quadrilinearia
+macaria-quadrilinearia,Speranza quadrilinearia-A-D.jpg,Merrill A. Peterson,3,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-quadrilinearia
+macaria-quadrilinearia,Speranza quadrilinearia-A-V.jpg,Merrill A. Peterson,4,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-quadrilinearia
+macaria-quadrilinearia,Speranza quadrilinearia-B-D.jpg,Merrill A. Peterson,5,CC BY-NC-SA 4.0,dorsal,B,,,,,,,,,,,speranza-quadrilinearia
+macaria-quadrilinearia,Speranza quadrilinearia-B-V.jpg,Merrill A. Peterson,6,CC BY-NC-SA 4.0,ventral,B,,,,,,,,,,,speranza-quadrilinearia
+macaria-simplex,Speranza simplex-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,,,,,,,,,,,speranza-simplex
+macaria-simplex,Speranza simplex-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,,,,,,,,,,,speranza-simplex
 sphinx-chersis,Sphinx chersis-A-D.jpg,Merrill A. Peterson,1,CC BY-NC-SA 4.0,dorsal,A,1.8mi N of Enfield NW of Cold Stream Pond,ME,45.28,-68.56,370,1985,7,19,LG Crabo,,
 sphinx-chersis,Sphinx chersis-A-V.jpg,Merrill A. Peterson,2,CC BY-NC-SA 4.0,ventral,A,1.8mi N of Enfield NW of Cold Stream Pond,ME,45.28,-68.56,370,1985,7,19,LG Crabo,,
 sphinx-dollii,Sphinx dollii-A-D.jpg,"Canadian National Collection (Jocelyn Gill, photographer)",1,CC BY-NC-SA 4.0,dorsal,A,"Madera Cyn, Santa Rita Mts",AZ,31.7,-110.9,,1947,7,21,JA Comstock & LM Martin,,

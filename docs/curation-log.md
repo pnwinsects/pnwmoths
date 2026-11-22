@@ -130,7 +130,8 @@ numbers too.
 the curator's own words, answering the question in the [#418 issue body](https://github.com/pnwinsects/pnwmoths/issues/418)
 · **Status** Applied (the 2025 list committed as `data/mpg-taxa-2025.csv`, and the differences
 reported — [ADR 0061](adr/0061-mpg-2025-list-kept-beside-2023.md)); Applied (checklist order and
-`noc_id` from the 2025 list — #290, C-047); Pending (the genus moves and placements — #279) ·
+`noc_id` from the 2025 list — #290, C-047); Applied (18 genus moves, 75 genus placements, and the
+seven species C-041 held — #279; *Perizoma* (C-043) and *Lampropteryx* (C-041) keep their tribes) ·
 **Refines** C-026, C-039, C-047
 
 The question was "Should MPG's 2025 update be the site's default authority for species names,
@@ -325,8 +326,8 @@ Nothing becomes public: the family is still withheld (C-001). The key template g
 
 **Source** [#413 issue body](https://github.com/pnwinsects/pnwmoths/issues/413), the curator's own
 words · **Status** Applied (332 species added; blank tribe, authority and MONA cells filled;
-the three rows held for his call, by C-042); Pending (7 held rows, and 18 rows that sit under
-another genus on the site — tracked on #279 and #418) · **Refined by** C-042
+the three rows held for his call, by C-042); Applied (the 7 held rows, and the 18 that sat under
+another genus on the site, by C-046 — #279) · **Refined by** C-042, C-046
 
 > The attached file has our current working list of PNW Geometridae. Many of these species are not
 > yet in the site database and so they aren't showing up in things like the template for scoring the

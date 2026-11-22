@@ -5494,6 +5494,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "caradrina-anotha": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/protoperigea-anotha/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/protoperigea-anotha/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "caradrina-camina": {
     "high_res_available": true,
     "specimens": [
@@ -5550,6 +5567,50 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/caradrina-morpheus/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "caradrina-posticata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/protoperigea-posticata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/protoperigea-posticata/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/protoperigea-posticata/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/protoperigea-posticata/B-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "caradrina-umbricata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/protoperigea-umbricata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/protoperigea-umbricata/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -8441,48 +8502,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "drepana-bilineata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/drepana-bilineata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/drepana-bilineata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/drepana-bilineata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/drepana-bilineata/B-V"
-      },
-      {
-        "specimen_id": "WWUC0000000001",
-        "view": "D",
-        "tiles_path": "species-tiles/drepana-bilineata/WWUC0000000001-D"
-      },
-      {
-        "specimen_id": "WWUC0000000002",
-        "view": "D",
-        "tiles_path": "species-tiles/drepana-bilineata/WWUC0000000002-D"
-      },
-      {
-        "specimen_id": "WWUC0000003475",
-        "view": "D",
-        "tiles_path": "species-tiles/drepana-bilineata/WWUC0000003475-D"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "drepanulatrix-carnearia": {
     "high_res_available": true,
     "specimens": [
@@ -9097,110 +9116,6 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/ennomos-alniaria/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "enypia-packardata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-packardata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-packardata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-packardata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-packardata/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-packardata/C-D"
-      },
-      {
-        "specimen_id": "C",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-packardata/C-V"
-      },
-      {
-        "specimen_id": "D",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-packardata/D-D"
-      },
-      {
-        "specimen_id": "D",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-packardata/D-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "enypia-venata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-venata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-venata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-venata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-venata/B-V"
-      },
-      {
-        "specimen_id": "C",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-venata/C-D"
-      },
-      {
-        "specimen_id": "C",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-venata/C-V"
-      },
-      {
-        "specimen_id": "D",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-venata/D-D"
-      },
-      {
-        "specimen_id": "D",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-venata/D-V"
-      },
-      {
-        "specimen_id": "E",
-        "view": "D",
-        "tiles_path": "species-tiles/enypia-venata/E-D"
-      },
-      {
-        "specimen_id": "E",
-        "view": "V",
-        "tiles_path": "species-tiles/enypia-venata/E-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -13055,6 +12970,48 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "falcaria-bilineata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/drepana-bilineata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/drepana-bilineata/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/drepana-bilineata/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/drepana-bilineata/B-V"
+      },
+      {
+        "specimen_id": "WWUC0000000001",
+        "view": "D",
+        "tiles_path": "species-tiles/drepana-bilineata/WWUC0000000001-D"
+      },
+      {
+        "specimen_id": "WWUC0000000002",
+        "view": "D",
+        "tiles_path": "species-tiles/drepana-bilineata/WWUC0000000002-D"
+      },
+      {
+        "specimen_id": "WWUC0000003475",
+        "view": "D",
+        "tiles_path": "species-tiles/drepana-bilineata/WWUC0000003475-D"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "feltia-herilis": {
     "high_res_available": true,
     "specimens": [
@@ -14630,23 +14587,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "hydria-undulata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/hydria-undulata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/hydria-undulata/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "hydriomena-edenata": {
     "high_res_available": true,
     "specimens": [
@@ -15058,23 +14998,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "hypercompe-permaculata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/hypercompe-permaculata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/hypercompe-permaculata/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "hyphantria-cunea": {
     "high_res_available": true,
     "specimens": [
@@ -15243,6 +15166,23 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/hyppa-indistincta/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "hypsocompe-permaculata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/hypercompe-permaculata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/hypercompe-permaculata/A-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -17453,6 +17393,18 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "macaria-guenearia": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-guenearia/A-D"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "macaria-lorquinaria": {
     "high_res_available": true,
     "specimens": [
@@ -17475,6 +17427,23 @@
         "specimen_id": "C",
         "view": "V",
         "tiles_path": "species-tiles/macaria-lorquinaria/C-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "macaria-occiduaria": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/speranza-occiduaria/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/speranza-occiduaria/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -22023,67 +21992,6 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
-  "protoperigea-anotha": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protoperigea-anotha/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protoperigea-anotha/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protoperigea-posticata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protoperigea-posticata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protoperigea-posticata/A-V"
-      },
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/protoperigea-posticata/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/protoperigea-posticata/B-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "protoperigea-umbricata": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/protoperigea-umbricata/A-D"
-      },
-      {
-        "specimen_id": "A",
-        "view": "V",
-        "tiles_path": "species-tiles/protoperigea-umbricata/A-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
   "proxenus-mendosa": {
     "high_res_available": true,
     "specimens": [
@@ -22694,6 +22602,23 @@
     "photographer": "Merrill Peterson",
     "license": "CC BY-NC"
   },
+  "rheumaptera-undulata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/hydria-undulata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/hydria-undulata/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
   "rhizagrotis-albalis": {
     "high_res_available": true,
     "specimens": [
@@ -22808,6 +22733,110 @@
         "specimen_id": "A",
         "view": "V",
         "tiles_path": "species-tiles/rivula-propinqualis/A-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "sabulodes-packardata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-packardata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-packardata/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-packardata/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-packardata/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-packardata/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-packardata/C-V"
+      },
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-packardata/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-packardata/D-V"
+      }
+    ],
+    "photographer": "Merrill Peterson",
+    "license": "CC BY-NC"
+  },
+  "sabulodes-venata": {
+    "high_res_available": true,
+    "specimens": [
+      {
+        "specimen_id": "A",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-venata/A-D"
+      },
+      {
+        "specimen_id": "A",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-venata/A-V"
+      },
+      {
+        "specimen_id": "B",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-venata/B-D"
+      },
+      {
+        "specimen_id": "B",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-venata/B-V"
+      },
+      {
+        "specimen_id": "C",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-venata/C-D"
+      },
+      {
+        "specimen_id": "C",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-venata/C-V"
+      },
+      {
+        "specimen_id": "D",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-venata/D-D"
+      },
+      {
+        "specimen_id": "D",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-venata/D-V"
+      },
+      {
+        "specimen_id": "E",
+        "view": "D",
+        "tiles_path": "species-tiles/enypia-venata/E-D"
+      },
+      {
+        "specimen_id": "E",
+        "view": "V",
+        "tiles_path": "species-tiles/enypia-venata/E-V"
       }
     ],
     "photographer": "Merrill Peterson",
@@ -24148,35 +24177,6 @@
         "specimen_id": "D",
         "view": "V",
         "tiles_path": "species-tiles/speranza-decorata/D-V"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "speranza-guenearia": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "A",
-        "view": "D",
-        "tiles_path": "species-tiles/speranza-guenearia/A-D"
-      }
-    ],
-    "photographer": "Merrill Peterson",
-    "license": "CC BY-NC"
-  },
-  "speranza-occiduaria": {
-    "high_res_available": true,
-    "specimens": [
-      {
-        "specimen_id": "B",
-        "view": "D",
-        "tiles_path": "species-tiles/speranza-occiduaria/B-D"
-      },
-      {
-        "specimen_id": "B",
-        "view": "V",
-        "tiles_path": "species-tiles/speranza-occiduaria/B-V"
       }
     ],
     "photographer": "Merrill Peterson",
