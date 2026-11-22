@@ -362,6 +362,13 @@ export function applyPlacements(speciesText: string, inputs: Inputs): PlacementR
   const target = new Map<string, Partial<Record<PlacementField, string>>>();
   const result: PlacementResult = { text: speciesText, changed: [], refused: [] };
   for (const [genus, members] of byGenus) {
+    // A refused family or subfamily also stops the levels under it, so a genus is
+    // never left with a subfamily or tribe from a family it is not in.
+    let blockedBy: PlacementField | undefined;
+    const refuse = (field: PlacementField, reason: string): void => {
+      result.refused.push({ genus, field, reason });
+      if (field !== 'tribe') blockedBy ??= field;
+    };
     for (const field of PLACEMENT_FIELDS) {
       const ruling = members.map((m) => rulingFor(field, slugOf(m), genus)).find((r) => r !== '');
       // Only a species matched by its own name speaks for the genus: one matched
@@ -378,18 +385,22 @@ export function applyPlacements(speciesText: string, inputs: Inputs): PlacementR
       // Agreement counts only when MPG has one placement for the genus; a genus MPG
       // splits is listed even where ours matches one half.
       if (values.size === 1 && current.size === 1 && current.has(value)) continue;
+      if (blockedBy) {
+        refuse(field, `its ${blockedBy} was left alone, so this is too`);
+        continue;
+      }
       if (ruling) {
-        result.refused.push({ genus, field, reason: `ruled ${ruling}` });
+        refuse(field, `ruled ${ruling}`);
         continue;
       }
       if (values.size > 1) {
-        result.refused.push({ genus, field, reason: `MPG places its species in ${[...values].map((v) => v || '(none)').join(', ')}` });
+        refuse(field, `MPG places its species in ${[...values].map((v) => v || '(none)').join(', ')}`);
         continue;
       }
       // A family decides whether the species is withheld (data/withheld-families.csv),
       // so moving a genus between families is a change to make by hand.
       if (field === 'family') {
-        result.refused.push({ genus, field, reason: `MPG has it in ${value}; a family change is made by hand` });
+        refuse(field, `MPG has it in ${value}; a family change is made by hand`);
         continue;
       }
       target.set(genus, { ...target.get(genus), [field]: value });

@@ -327,4 +327,24 @@ describe('applyPlacements', () => {
     assert.equal(text, csv);
     assert.match(refused[0]?.reason ?? '', /family change is made by hand/);
   });
+
+  // Writing MPG's subfamily and tribe under our old family would pair levels from two families.
+  it('leaves the subfamily and tribe alone when the family change is refused', () => {
+    const csv = header + '1,Aaa,one,Noctuidae,Noctuinae,Xini\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'Noctuidae', subfamily: 'Noctuinae', tribe: 'Xini' })],
+      [tribe('Yini'), valid('Aaa', 'one', { Family: 'Erebidae', Subfamily: 'Erebinae' })],
+    ));
+    assert.equal(text, csv);
+    assert.deepEqual(refused.map((r) => r.field), ['family', 'subfamily', 'tribe']);
+  });
+
+  it('still writes the tribe when the family and subfamily already agree', () => {
+    const csv = header + '1,Aaa,one,F,S,\n';
+    const { changed } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'F', subfamily: 'S' })],
+      [tribe('Xini'), valid('Aaa', 'one', { Family: 'F', Subfamily: 'S' })],
+    ));
+    assert.deepEqual(changed.map((c) => c.field), ['tribe']);
+  });
 });
