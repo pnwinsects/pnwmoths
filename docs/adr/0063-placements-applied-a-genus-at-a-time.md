@@ -13,16 +13,16 @@ Once the genus moves made every species a name match, `data/mpg-crosswalk.csv` h
 
 ## Decision
 
-1. **`npm run report:mpg-2025 -- --apply-placements` writes MPG's family, subfamily and tribe a whole genus at a time.** A genus is changed only when every species of ours that MPG holds is in the same MPG placement. The genus's other species, the ones MPG does not hold, take that placement too.
+1. **`npm run report:mpg-2025 -- --apply-placements` writes MPG's subfamily and tribe a whole genus at a time.** A genus is changed only when every species of ours that MPG holds under the same name is in the same MPG placement; a species matched only by MONA number or a synonym does not count, because MPG may hold it in another genus. The genus's other species, the ones MPG does not hold, take that placement too. A change of family is listed and not written, because family decides whether a species is withheld (`data/withheld-families.csv`).
 2. **A genus is left alone, and listed, when MPG itself splits it, or when the curator has ruled on one of its species** (`RULINGS` in `scripts/report-mpg-2025.ts`: *Perizoma* by C-043, *Lampropteryx* by C-041).
 3. **MPG's bracketed placeholders count as no name.** "[Ennominae – unplaced to tribe]" becomes a blank tribe, and "[Noctuidae – group 1 unplaced to subfamily]" a blank subfamily (*Tyta luctuosa*).
 4. **A relation can be declared `mayBeEmpty`.** No references is then accepted, but the file must still have the column in its header, so the renamed-column case still fails. Only `mpg-crosswalk.csv` is declared this way: it is empty whenever every species matches MPG by name, and rows come back when a new species does not.
 
 ## Consequences
 
-- **75 genus placements changed** on #279. Most fill a tribe that was blank, such as *Sphinx* (Sphingini). Some move a genus to another subfamily, such as *Annaphila* from Amphipyrinae to Stiriinae, and six genera lose a tribe that MPG does not give them (*Axenus*, *Condica*, *Neogrotella*, *Properigea*, *Pseudobryomima*, *Tristyla*). *Tyta* loses its subfamily.
+- **75 subfamily and tribe changes, across 65 genera,** were made on #279; no family changed. Most fill a tribe that was blank, such as *Sphinx* (Sphingini). Some move a genus to another subfamily, such as *Annaphila* from Amphipyrinae to Stiriinae, and six genera lose a tribe that MPG does not give them (*Axenus*, *Condica*, *Neogrotella*, *Properigea*, *Pseudobryomima*, *Tristyla*). *Tyta* loses its subfamily.
 - **Subfamily and tribe have no URLs.** Only anchors within `/browse/` and `/checklist/` change.
-- **The report now holds only the authorities** (#465), the differences the curator kept, and the provisional names.
+- **The report now holds only the authorities** (#465), the differences the curator kept, and the 22 species MPG does not hold: 21 provisional names and *Idaea seriata* (C-042).
 
 ## Alternatives rejected
 

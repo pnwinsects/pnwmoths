@@ -259,8 +259,9 @@ export class Workspace {
 const REGENERATED = new Set(['key-matrix.json']);
 
 /**
- * Files whose slugs name where an object IS or what a script once saw, not what a species
- * is called. They keep the old slug on purpose, and the check at the end does not look in them.
+ * Files the check at the end does not look in. Most name where an object IS or what a script
+ * once saw, not what a species is called, and keep the old slug on purpose. Two are reports
+ * that regenerate() rewrites after the check, so the old slug is gone from them by the end.
  */
 const KEEPS_OLD_SLUG = new Set([
   'data/image-derivatives.csv',
@@ -268,8 +269,8 @@ const KEEPS_OLD_SLUG = new Set([
   'data/cdn-inventory-report.csv',
   'data/cdn-duplicates-report.csv',
   'data/hidden-images-report.csv',
-  // Regenerated after the rename (see regenerate), so the old slug is gone by the time it is read:
-  // the MPG difference report, and the curator's key worksheet, which build-key.ts writes.
+  // Rewritten by regenerate() after the check: the MPG difference report, and the curator's
+  // key worksheet, which build-key.ts writes.
   'data/mpg-2025-differences.csv',
   'data/key-unsupported-answers.csv',
   'data/coord-fill-report.csv',

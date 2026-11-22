@@ -109,9 +109,10 @@ export interface Relation {
   /** What the relation is for, printed with any violation so the fix is obvious. */
   readonly note: string;
   /**
-   * A CSV that is legitimately empty at times. No references is accepted, but
-   * readReferences still throws when the header does not name `column`, which is
-   * the renamed-column or BOM case the `empty` check exists for.
+   * A CSV that is legitimately empty at times. A header and no rows is accepted,
+   * but readReferences still throws when the header does not name `column`, or
+   * when there are rows and none has a value in it: the renamed-column, BOM and
+   * shifted-column cases the `empty` check exists for.
    */
   readonly mayBeEmpty?: boolean;
 }
@@ -312,9 +313,16 @@ export function readReferences(relation: Relation, root = '.'): Reference[] | nu
       }
       const refs: Reference[] = [];
       if (relation.mayBeEmpty) {
-        const header = (readFileSync(full, 'utf8').replace(/^\uFEFF/, '').split(/\r?\n/)[0] ?? '').split(',');
-        if (!header.map((cell) => cell.trim()).includes(column)) {
+        // The header as the records parser reads it (same BOM, quote and spacing rules),
+        // so a name that would read as undefined below is refused here.
+        const [header = []] = parse(readFileSync(full), { bom: true, to_line: 1 }) as string[][];
+        if (!header.includes(column)) {
           throw new Error(`[check-referential-integrity] ${relation.path} has no "${column}" column`);
+        }
+        // Rows whose slug cell is blank are the shifted-column case, not an empty file.
+        const rows = parseCsv(relation.path, full);
+        if (rows.length > 0 && rows.every(({ record }) => (record[column] ?? '').trim() === '')) {
+          throw new Error(`[check-referential-integrity] ${relation.path} has rows but no "${column}" values`);
         }
       }
       for (const { record, info } of parseCsv(relation.path, full)) {

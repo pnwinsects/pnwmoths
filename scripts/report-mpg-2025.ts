@@ -349,7 +349,9 @@ export interface PlacementResult {
  * MPG holds is in the same MPG placement; a genus MPG itself splits is refused
  * and listed, as is one with a ruling on any of its species (C-041, C-043).
  * Species of the genus MPG does not hold (provisional names) take the genus's
- * placement too.
+ * placement too. Only species matched by their own name count, and a family
+ * change is listed rather than written, because family decides whether a species
+ * is withheld.
  */
 export function applyPlacements(speciesText: string, inputs: Inputs): PlacementResult {
   const index = buildMpgIndex(inputs.mpgRows);
@@ -362,22 +364,32 @@ export function applyPlacements(speciesText: string, inputs: Inputs): PlacementR
   for (const [genus, members] of byGenus) {
     for (const field of PLACEMENT_FIELDS) {
       const ruling = members.map((m) => rulingFor(field, slugOf(m), genus)).find((r) => r !== '');
+      // Only a species matched by its own name speaks for the genus: one matched
+      // by MONA number or a synonym may be MPG's species in another genus.
       const values = new Set<string>();
       for (const member of members) {
         const hit = matchSpecies({ ...member }, index, inputs.crosswalk);
-        const entry = hit ? mpg[hit.index] : undefined;
+        const entry = hit && (hit.via === 'exact' || hit.via === 'gender') ? mpg[hit.index] : undefined;
         if (entry) values.add(entry[field]);
       }
       if (values.size === 0) continue;
-      const [value = ''] = values;
       const current = new Set(members.map((m) => m[field]));
-      if (current.size === 1 && current.has(value)) continue;
+      const [value = ''] = values;
+      // Agreement counts only when MPG has one placement for the genus; a genus MPG
+      // splits is listed even where ours matches one half.
+      if (values.size === 1 && current.size === 1 && current.has(value)) continue;
       if (ruling) {
         result.refused.push({ genus, field, reason: `ruled ${ruling}` });
         continue;
       }
       if (values.size > 1) {
         result.refused.push({ genus, field, reason: `MPG places its species in ${[...values].map((v) => v || '(none)').join(', ')}` });
+        continue;
+      }
+      // A family decides whether the species is withheld (data/withheld-families.csv),
+      // so moving a genus between families is a change to make by hand.
+      if (field === 'family') {
+        result.refused.push({ genus, field, reason: `MPG has it in ${value}; a family change is made by hand` });
         continue;
       }
       target.set(genus, { ...target.get(genus), [field]: value });

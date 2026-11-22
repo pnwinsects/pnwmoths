@@ -447,7 +447,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 1825,Polia,propodea,,93-2870,"McCabe, 1980",Noctuidae,polia-rogenhoferi|polia-imbrifera|eurois-occulta|andropolia-contacta|lasionycta-taigata,Noctuinae,,Hadenini
 1826,Acronicta,quadrata,,93-1441,"Grote, 1874",Noctuidae,acronicta-hasta,Acronictinae,,
 1827,Scotogramma,orida,,93-2857,"(Smith, 1903)",Noctuidae,scotogramma-yakima|scotogramma-ptilodonta,Noctuinae,,Hadenini
-1828,Caradrina,umbricata,,93-2252,"Mustelin, 2006",Noctuidae,caradrina-posticata,Noctuinae,,Caradrinini
+1828,Caradrina,umbricata,,93-2252,"(Mustelin, 2006)",Noctuidae,caradrina-posticata,Noctuinae,,Caradrinini
 1830,Syngrapha,rectangula,Salt-and-Pepper Looper Moth,93-1227,"(W. Kirby, 1837)",Noctuidae,syngrapha-alias,Plusiinae,,Plusiini
 1831,Euxoa,campestris,,93-3379,"(Grote, 1875)",Noctuidae,euxoa-rockburnei|euxoa-infracta|euxoa-declarata,Noctuinae,,Noctuini
 1832,Sympistis,parvanigra,,93-1808,"(Blackmore, 1923)",Noctuidae,copanarta-sexpunctata|sympistis-tenuifascia|sympistis-aterrima|stylopoda-groteana,Oncocnemidinae,,
@@ -1206,7 +1206,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 2770,Sympistis,sokar,,93-1917,"Troubridge, 2008",Noctuidae,sympistis-youngi|sympistis-extremis,Oncocnemidinae,,
 2774,Fishia,nigrescens,,93-2693.1,"Hammond & Crabo, 2013",Noctuidae,platypolia-loda|fishia-yosemitae|fishia-connecta,Noctuinae,,Xylenini
 2776,Smerinthus,ophthalmica,,MONA 7822.1,"Boisduval, 1855",Sphingidae,smerinthus-cerisyi|smerinthus-jamaicensis,Smerinthinae,,Smerinthini
-2777,Caradrina,calientensis,,93-2255,"Mustelin, 2006",Noctuidae,caradrina-posticata,Noctuinae,,Caradrinini
+2777,Caradrina,calientensis,,93-2255,"(Mustelin, 2006)",Noctuidae,caradrina-posticata,Noctuinae,,Caradrinini
 2780,Euxoa,absona,,93-3368,"Lafontaine, 1987",Noctuidae,euxoa-xasta|euxoa-silens|euxoa-idahoensis,Noctuinae,,Noctuini
 2781,Orgyia,vetusta,Western Tussock Moth,93-0161,"Boisduval, 1852",Erebidae,orgyia-cana|orgyia-pseudotsugata,Lymantriinae,,Orgyiini
 2813,Euxoa,xasta,,93-3403,"Barnes & McDunnough, 1910",Noctuidae,euxoa-silens|euxoa-absona,Noctuinae,,Noctuini
@@ -1296,7 +1296,7 @@ id,genus,species,common_name,noc_id,authority,family,similar_species,subfamily,e
 3244,Gabriola,dyari,,MONA 6781,"Taylor, 1904",Geometridae,,Ennominae,,Nacophorini
 3246,Campaea,perlata,,MONA 6796,"(Guenée, 1858)",Geometridae,,Ennominae,,Campaeini
 3248,Ennomos,alniaria,,MONA 6797.1,"(Linnaeus, 1758 )",Geometridae,,Ennominae,,Ennomini
-3250,Sabulodes,packardata,,7007,"Taylor, 1906",Geometridae,,Ennominae,,Ennomini
+3250,Sabulodes,packardata,,7007,"(Taylor, 1906)",Geometridae,,Ennominae,,Ennomini
 3253,Sabulodes,venata,,7005,"(Grote, 1883)",Geometridae,,Ennominae,,Ennomini
 3260,Tetracis,pallidata,,6960.1,"Ferris, 2009",Geometridae,,Ennominae,,Ennomini
 3262,Tetracis,formosa,,6958,"(Hulst, 1896) ",Geometridae,,Ennominae,,Ennomini

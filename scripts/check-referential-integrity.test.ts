@@ -540,6 +540,16 @@ describe('a relation that may be empty', () => {
     assert.throws(() => readReferences(rel, ROOT), /has no "species_slug" column/);
   });
 
+  it('reads the header as the parser does: a quoted name passes, a padded one does not', () => {
+    assert.deepEqual(readReferences(write('"species_slug",mpg_binomial,source\n'), ROOT), []);
+    assert.throws(() => readReferences(write(' species_slug,mpg_binomial,source\n'), ROOT), /has no "species_slug" column/);
+  });
+
+  it('refuses rows whose slug cells are all blank', () => {
+    const rel = write('species_slug,mpg_binomial,source\n,Aaa one,x\n');
+    assert.throws(() => readReferences(rel, ROOT), /has rows but no "species_slug" values/);
+  });
+
   it('is still empty, and fails, without the option', () => {
     const rel = { ...write('species_slug\n'), mayBeEmpty: false };
     const report = findViolations(SPECIES, new Map([[rel.name, readReferences(rel, ROOT)]]), [], [rel]);

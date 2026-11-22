@@ -299,4 +299,32 @@ describe('applyPlacements', () => {
     assert.equal(text, csv);
     assert.deepEqual(refused.map((r) => r.reason), ['ruled C-043']);
   });
+  it('takes no placement from a species matched only through a synonym', () => {
+    const csv = header + '1,Oldgenus,one,F,S,\n';
+    const { text, changed } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Oldgenus', species: 'one', family: 'F', subfamily: 'S' })],
+      [tribe('Newini'), valid('Newgenus', 'one', { Family: 'F', Subfamily: 'S', 'original genus': 'Oldgenus' })],
+    ));
+    assert.equal(text, csv);
+    assert.deepEqual(changed, []);
+  });
+
+  it('lists a genus MPG splits even where ours agrees with one half', () => {
+    const csv = header + '1,Aaa,one,F,S,Xini\n2,Aaa,two,F,S,Xini\n';
+    const { refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'F', subfamily: 'S', tribe: 'Xini' }), ours({ genus: 'Aaa', species: 'two', family: 'F', subfamily: 'S', tribe: 'Xini' })],
+      [tribe('Xini'), valid('Aaa', 'one', { Family: 'F', Subfamily: 'S' }), tribe('Yini'), valid('Aaa', 'two', { Family: 'F', Subfamily: 'S' })],
+    ));
+    assert.deepEqual(refused.map((r) => [r.genus, r.field]), [['Aaa', 'tribe']]);
+  });
+
+  it('lists a family change rather than writing it', () => {
+    const csv = header + '1,Aaa,one,Noctuidae,S,\n';
+    const { text, refused } = applyPlacements(csv, inputs(
+      [ours({ genus: 'Aaa', species: 'one', family: 'Noctuidae', subfamily: 'S' })],
+      [valid('Aaa', 'one', { Family: 'Erebidae', Subfamily: 'S' })],
+    ));
+    assert.equal(text, csv);
+    assert.match(refused[0]?.reason ?? '', /family change is made by hand/);
+  });
 });
