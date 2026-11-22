@@ -103,7 +103,7 @@ ours keeps the name *Catocala cleopatra* where MPG has *C. faustina* (C-025); an
 Euphyiini (C-043). The other exception the question named, *Macaria marmorata*, no longer arises: it
 was merged into *M. signaria* (C-017).
 The ruling names names, numbers and placements, not authorities; the report lists differing
-authorities too, but replacing ours with MPG's is not decided.
+authorities too, but replacing ours with MPG's is not decided; that question is #465.
 
 **What changed** — `data/mpg-taxa-2025.csv` (the workbook rendered by
 `scripts/convert-mpg-xlsx.ts`) and `data/mpg-2025-differences.csv` (written by

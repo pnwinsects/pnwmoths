@@ -22,7 +22,7 @@ The copy we held, `data/mpg-taxa.csv`, is the March 2024 download of the 2023 ch
 ## Consequences
 
 - **The report includes rulings already made.** *Catocala cleopatra*, which MPG calls *C. faustina* (C-025), and *Perizoma* in Euphyiini (C-043) appear as differences, because the report knows MPG and the catalogue but not the curation log. An exception to C-046 still has to be checked against the log before it is applied. A list that the report reads, so these stop appearing, is for the change that applies the differences.
-- **Authorities are reported but not covered by the ruling.** C-046 names names, numbers and placements. The 176 authority rows are listed because many are typing errors in ours ("Geter" for Geyer, "(Grote. 1879)"), but whether MPG's authority replaces ours is not yet decided.
+- **Authorities are reported but not covered by the ruling.** C-046 names names, numbers and placements. The 176 authority rows are listed because many are typing errors in ours ("Geter" for Geyer, "(Grote. 1879)"), but whether MPG's authority replaces ours is not yet decided ([#465](https://github.com/pnwinsects/pnwmoths/issues/465)).
 - **The repository holds two copies of MPG's list** (4.3 MB and 5.3 MB) until checklist order moves to the 2025 file.
 - **Re-running after a later MPG update** is the same two commands: convert the workbook, then run the report. A later update with a third layout will fail the converter on purpose.
 
