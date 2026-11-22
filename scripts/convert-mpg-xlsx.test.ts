@@ -7,8 +7,10 @@ import { parse } from 'csv-parse/sync';
 import {
   columnIndex,
   decodeEntities,
+  detectLayout,
   parseSharedStrings,
   parseSheet,
+  toTable,
 } from './convert-mpg-xlsx.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -130,5 +132,66 @@ describe('data/mpg-taxa.csv', () => {
   it('never lost the Genus/Species split that the join depends on', () => {
     const missing = rows.filter((row) => !row.Genus || !row.Species);
     assert.deepEqual(missing.map((r) => r['P No']), []);
+  });
+});
+
+describe('detectLayout and toTable', () => {
+  it('recognises the 2023 workbook by its first header cell', () => {
+    assert.equal(detectLayout([['P No', 'MONA']]).output, 'data/mpg-taxa.csv');
+  });
+
+  it('recognises the 2025 workbook by the header under its title line', () => {
+    const rows = [['Pohl & Nanz 2023 NA Checklist plus corrections…', ''], ['SORT 2025', 'status']];
+    assert.equal(detectLayout(rows).output, 'data/mpg-taxa-2025.csv');
+  });
+
+  // A third layout written over one of these files would shift every column silently.
+  it('refuses a workbook it does not recognise', () => {
+    assert.throws(() => detectLayout([['Genus', 'Species']]), /unrecognised MPG workbook/);
+  });
+
+  it('drops the title line, a trailing column blank in every row, and blank rows at the end', () => {
+    const rows = [
+      ['title', '', ''],
+      ['SORT 2025', 'status', ''],
+      ['5', 'P&N23', ''],
+      ['', '', ''],
+    ];
+    assert.deepEqual(toTable(rows, detectLayout(rows)), [
+      ['SORT 2025', 'status'],
+      ['5', 'P&N23'],
+    ]);
+  });
+
+  it('keeps a blank-headed column that holds a value', () => {
+    const rows = [['P No', ''], ['010001', 'x']];
+    assert.deepEqual(toTable(rows, detectLayout(rows)), rows);
+  });
+});
+
+describe('data/mpg-taxa-2025.csv', () => {
+  const rows: Record<string, string>[] = parse(readFileSync(resolve(ROOT, 'data/mpg-taxa-2025.csv')), {
+    columns: true,
+    skip_empty_lines: true,
+  });
+
+  it('carries the 28 named columns of the 2025 workbook', () => {
+    assert.deepEqual(Object.keys(rows[0] ?? {}), [
+      'SORT 2025', 'status', 'rank', 'Family', 'Subfamily', 'P-No. 2025', 'P-No. 2023',
+      'Valid Genus', 'valid species', 'ssp letter', 'valid ssp', 'NAME', 'semicolon', 'brackets',
+      'author', 'date', 'original genus', 'descriptor(s)', 'origin', 'P-No. 2023 (sort)',
+      'CDN P-No. 2018', 'P3 No. 2016', 'MONA 1983', 'ID INFO', 'NOTE', 'post-2023 edit notes',
+      'post-2023 edit log date, editor', 'P-No change history',
+    ]);
+  });
+
+  it('holds the whole list, synonyms and higher taxa included', () => {
+    assert.equal(rows.length, 37118);
+  });
+
+  // report-mpg-2025.ts reads tribe from the order of the rows, so the order must survive.
+  it('is in MPG sequence: SORT 2025 ascends', () => {
+    const outOfOrder = rows.filter((row, i) => i > 0 && Number(row['SORT 2025']) <= Number(rows[i - 1]?.['SORT 2025']));
+    assert.deepEqual(outOfOrder.map((r) => r['SORT 2025']), []);
   });
 });

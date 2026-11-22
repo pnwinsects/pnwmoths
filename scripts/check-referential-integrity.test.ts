@@ -698,6 +698,8 @@ const UNDECLARED_BY_DESIGN: Record<string, string> = {
     'run report pairing an orphan CDN object with its live twin — the orphan side is a slug that no longer exists',
   'data/hidden-images-report.csv':
     'run report on images.csv rows that reach no page — every slug in it is already checked as images.csv',
+  'data/mpg-2025-differences.csv':
+    'run report written from species.csv, so its slugs are right when written; a rename makes it stale until the next `npm run report:mpg-2025`, which should not fail the build',
   'data/plates.json': 'its `slug` is a plate slug, not a species slug',
 };
 

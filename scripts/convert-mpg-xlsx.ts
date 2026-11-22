@@ -1,7 +1,16 @@
 // scripts/convert-mpg-xlsx.ts
-// Maintainer-run conversion: renders the Moths Photographers Group taxon
-// workbook (MPG-Taxa_<YYYYMMDD>.xlsx) to data/mpg-taxa.csv, the committed
-// source for checklist order.
+// Maintainer-run conversion: renders a Moths Photographers Group taxon
+// workbook to a committed CSV in data/. Two workbooks are known, and they are
+// different spreadsheets, not two copies of one (#418):
+//
+//   MPG-Taxa_20240311.xlsx — the 2023 checklist, 17 columns, header on the
+//     first row -> data/mpg-taxa.csv, the source for checklist order today.
+//   Pohl_&_Nanz_2026_APPEND1x-NA_checklist_2025_update.xlsx — the 2025
+//     update, 28 columns under a one-line title -> data/mpg-taxa-2025.csv.
+//
+// The converter recognises which one it was given by its header row and
+// refuses a workbook it does not recognise, because a third layout would
+// otherwise be written over one of these files with its columns shifted.
 //
 // Why a converter instead of committing the workbook:
 //
@@ -12,7 +21,7 @@
 //   receipt, keeps the derivation reproducible and lets the next release be
 //   diffed against this one line by line. See ADR 0030.
 //
-// All 17 columns are carried through verbatim, including the ones no code
+// Every column is carried through verbatim, including the ones no code
 // reads (Author with Year, Common Name, Taxonomic Note, MPG URL). Dropping
 // them would save ~2 MB but make the committed file a lossy rendering of a
 // source we do not otherwise keep — and the next curator question is exactly
@@ -21,7 +30,15 @@
 // Only the subset of SpreadsheetML this workbook actually uses is handled:
 // one worksheet, shared strings, inline numbers. It is not a general reader.
 //
-// Run: node scripts/convert-mpg-xlsx.ts ~/Downloads/MPG-Taxa_20240311.xlsx
+// Three things are dropped, and only these: the 2025 workbook's title line
+// above its header (recorded in data/README.md instead, because a CSV has one
+// header row), a trailing column that has neither a header nor a value in any
+// row, and blank rows at the end, where a styled but empty row was saved.
+// Cell values are not rewritten: SORT 2025 keeps the binary floating-point
+// digits the workbook stores (`24394.080000000002`), since it is read as row
+// order, never as a number.
+//
+// Run: node scripts/convert-mpg-xlsx.ts ~/Downloads/<workbook>.xlsx
 import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
@@ -29,7 +46,46 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { stringify } from 'csv-stringify/sync';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const OUTPUT = resolve(ROOT, 'data/mpg-taxa.csv');
+
+/** A workbook layout this converter knows, and the file it is rendered to. */
+export interface Layout {
+  /** Repo-relative output path. */
+  output: string;
+  /** Zero-based index of the header row; rows above it are a title, not data. */
+  headerRow: number;
+  /** The first header cell, which is how the layout is recognised. */
+  firstHeader: string;
+}
+
+export const LAYOUTS: Layout[] = [
+  { output: 'data/mpg-taxa.csv', headerRow: 0, firstHeader: 'P No' },
+  { output: 'data/mpg-taxa-2025.csv', headerRow: 1, firstHeader: 'SORT 2025' },
+];
+
+/** Which known layout these worksheet rows are in, or an error naming what was found. */
+export function detectLayout(rows: string[][]): Layout {
+  const layout = LAYOUTS.find((candidate) => rows[candidate.headerRow]?.[0] === candidate.firstHeader);
+  if (!layout) {
+    const seen = rows.slice(0, 2).map((row) => JSON.stringify(row[0] ?? '')).join(', ');
+    throw new Error(`unrecognised MPG workbook: the first cells of its first two rows are ${seen}`);
+  }
+  return layout;
+}
+
+/**
+ * The rows from the header down, without blank rows at the end and without a
+ * trailing column that is blank in every row including the header. A
+ * blank-headed column that holds any value is kept, because dropping it would
+ * lose data.
+ */
+export function toTable(rows: string[][], layout: Layout): string[][] {
+  const table = rows.slice(layout.headerRow).map((row) => [...row]);
+  while (table.length > 1 && (table[table.length - 1] ?? []).every((cell) => cell === '')) table.pop();
+  const width = table[0]?.length ?? 0;
+  let keep = width;
+  while (keep > 0 && table.every((row) => (row[keep - 1] ?? '') === '')) keep--;
+  return table.map((row) => row.slice(0, keep));
+}
 
 /**
  * XML entity decoding, `&amp;` last so `&amp;lt;` survives as the literal
@@ -127,12 +183,14 @@ export function convertWorkbook(archive: string): string[][] {
 function main(): void {
   const archive = process.argv[2];
   if (!archive) {
-    console.error('usage: node scripts/convert-mpg-xlsx.ts <MPG-Taxa_YYYYMMDD.xlsx>');
+    console.error('usage: node scripts/convert-mpg-xlsx.ts <MPG workbook .xlsx>');
     process.exit(1);
   }
-  const rows = convertWorkbook(archive);
-  writeFileSync(OUTPUT, stringify(rows));
-  console.log(`[convert-mpg-xlsx] ${rows.length - 1} data rows, ${rows[0]?.length ?? 0} columns -> data/mpg-taxa.csv`);
+  const sheet = convertWorkbook(archive);
+  const layout = detectLayout(sheet);
+  const rows = toTable(sheet, layout);
+  writeFileSync(resolve(ROOT, layout.output), stringify(rows));
+  console.log(`[convert-mpg-xlsx] ${rows.length - 1} data rows, ${rows[0]?.length ?? 0} columns -> ${layout.output}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

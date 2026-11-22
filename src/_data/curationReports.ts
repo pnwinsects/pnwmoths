@@ -225,6 +225,20 @@ const reports: CurationReport[] = [
     ],
   },
   {
+    id: 'mpg-2025-differences',
+    title: 'MPG 2025: where the catalogue differs from MPG’s 2025 checklist',
+    audience: 'engineering',
+    question: 'Where do our species names, checklist numbers and placements differ from MPG’s 2025 update, which the curator has made the default authority?',
+    body: 'One row per difference between a species in <code>data/species.csv</code> and its row in MPG’s 2025 list. Filter by <code>field</code>: <code>genus</code> and <code>epithet</code> are renames, <code>family</code>, <code>subfamily</code> and <code>tribe</code> are placements, <code>p-number</code> is a renumbering, and <code>p-number-split</code> is an old number MPG now gives to more than one species. The curator ruled (C-046) that these are changed to match MPG without asking him one by one, except where the curation log records an exception, so check the log before applying a row: <em>Catocala cleopatra</em> (C-025) and <em>Perizoma</em> in Euphyiini (C-043) are two that appear here. <code>authority</code> rows are listed but not covered by the ruling. <code>unmatched</code> rows are mostly provisional names, which MPG will never hold. <code>shown</code> says whether the site publishes the species today.',
+    regenerated: 'Manually: <code>npm run report:mpg-2025</code>, after any change to <code>data/species.csv</code> or a new MPG workbook. No build required.',
+    files: [fromRepo('data/mpg-2025-differences.csv')],
+    see: [
+      { label: 'ADR 0061 — the 2025 list beside the 2023 list', url: 'docs/adr/0061-mpg-2025-list-kept-beside-2023.md' },
+      { label: 'Curation log C-046', url: 'docs/curation-log.md' },
+      { label: 'Issue #418', url: 'https://github.com/pnwinsects/pnwmoths/issues/418' },
+    ],
+  },
+  {
     id: 'records-district-audit',
     title: 'District audit: stated county against derived district',
     audience: 'engineering',

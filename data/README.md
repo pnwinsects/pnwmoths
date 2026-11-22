@@ -136,7 +136,9 @@ erDiagram
 | `species-links.csv` | ~2 400 | Per-species external links (BugGuide, Moth Photographers Group, Butterflies and Moths of North America). Long format: one row per link (`species_slug,site,url`); a species may have several. Extracted from the legacy reference MySQL DB by [`scripts/extract-reference-links.ts`](../scripts/extract-reference-links.ts) (`npm run links:materialize`). |
 | `plates.json` | ~50 | Reference plate metadata (legacy moth-guide plates). Width/height used for CDN image sizing. |
 | `checklist-order.csv` | 1 424 | Generated. Every species in checklist (phylogenetic) order; **row order is the data**, one row per species in `species.csv`. Columns `species_slug,mpg_p_no,matched_via`. Written by [`scripts/build-checklist-order.ts`](../scripts/build-checklist-order.ts). See [Checklist order](#checklist-order) below and [ADR 0030](../docs/adr/0030-checklist-order-from-mpg.md). |
-| `mpg-taxa.csv` | 13 245 | The Moths Photographers Group North American taxon list, the source of checklist order. All 17 columns of `MPG-Taxa_20240311.xlsx`, rendered once by [`scripts/convert-mpg-xlsx.ts`](../scripts/convert-mpg-xlsx.ts). Not hand-edited — replace it wholesale when MPG ships a new workbook. |
+| `mpg-taxa.csv` | 13 245 | The Moths Photographers Group North American taxon list as of the 2023 checklist, the source of checklist order. All 17 columns of `MPG-Taxa_20240311.xlsx`, rendered once by [`scripts/convert-mpg-xlsx.ts`](../scripts/convert-mpg-xlsx.ts). Not hand-edited — replace it wholesale when MPG ships a new workbook. |
+| `mpg-taxa-2025.csv` | 37 118 | MPG's 2025 update of the checklist, the default authority for names, numbers and placement since C-046. The 28 named columns of `Pohl_&_Nanz_2026_APPEND1x-NA_checklist_2025_update.xlsx` (MPG, last modified 2026-07-21), rendered by the same converter. The workbook's title line, "Pohl & Nanz 2023 NA Checklist plus corrections and additions to end of 2025:", is not carried, because a CSV has one header row. Unlike the 2023 list it holds synonyms, subspecies and higher taxa as rows (`rank`), and has no tribe column: a species' tribe is the `4.0 tribe` row above it. Not hand-edited. See [ADR 0061](../docs/adr/0061-mpg-2025-list-kept-beside-2023.md). |
+| `mpg-2025-differences.csv` | ~400 | Generated, advisory. One row per difference between a species and its row in `mpg-taxa-2025.csv`, written by `npm run report:mpg-2025` ([`scripts/report-mpg-2025.ts`](../scripts/report-mpg-2025.ts)) and listed at `/curation/`. Nothing reads it back. |
 | `mpg-crosswalk.csv` | ~5 | **Curator-owned.** One row per species that no mechanical tier can match to an MPG row, mapping it to a binomial with the decision's `source` (issue comment, reasoning). Deliberately small: every row here is a judgement call someone made and can be held to. |
 | `key-scores.csv` | 1 228 | **Curator-owned.** The identification key: one row per species (`binomial`), one column per character-state (Lucid's `Category:[Subcategory:]Question:State` label), `1` or blank for unscored. Column position is `char_id`, which `key-character-images.csv` binds to, so columns are never reordered. Read by [`scripts/build-key.ts`](../scripts/build-key.ts); new species arrive through `key-template.csv` and `npm run key:merge`. See [ADR 0048](../docs/adr/0048-key-scores-one-row-per-species.md) and [_instructions/ADDING_SPECIES_TO_KEY.md](../_instructions/ADDING_SPECIES_TO_KEY.md). |
 | `key-template.csv` | ~170 | **Generated, not hand-edited.** `key-scores.csv`'s header plus a blank row for every species we hold that the key does not score: published first, then withheld, in checklist order. Written by `npm run build:key`, listed on `/curation/`. |
@@ -211,9 +213,12 @@ Anything it cannot place falls to the end of its genus, alphabetically, and is *
 To refresh after MPG ships a new workbook:
 
 ```bash
-node scripts/convert-mpg-xlsx.ts ~/Downloads/MPG-Taxa_YYYYMMDD.xlsx
+node scripts/convert-mpg-xlsx.ts ~/Downloads/<workbook>.xlsx   # picks the output file from the header row
 node scripts/build-checklist-order.ts     # DRY_RUN=1 to see the report without writing
+npm run report:mpg-2025                   # where the catalogue differs from the 2025 list
 ```
+
+Checklist order still reads the 2023 list, `mpg-taxa.csv`; moving it to `mpg-taxa-2025.csv` is tracked on #290. MPG's server does not send its intermediate certificate, so `curl` refuses the download; fetch the intermediate named in the server certificate (`openssl s_client`, then the "CA Issuers" URL) and pass it with `--cacert`, rather than turning verification off.
 
 ## Slug convention
 
